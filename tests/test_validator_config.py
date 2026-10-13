@@ -1,14 +1,17 @@
 #!/usr/bin/env python3
 """Keep remote validator commands pinned to each endpoint's local configuration.
 
-All drivers and files are synthetic. --legacy-sender is a pre-fix feature-branch
-binary which still transmits helper settings; --old-peer is unmodified Unison.
+All drivers and files are synthetic. --legacy-sender is a pre-v1 feature-branch
+binary; requested warn/require must fail v0/v1 negotiation in both directions.
+Validation off remains compatible. --old-peer is unmodified Unison.
 """
 import argparse
+import contextlib
 import hashlib
 import os
 from pathlib import Path
 import subprocess
+import shutil
 import tempfile
 
 
@@ -59,6 +62,7 @@ class Session:
         for path in (self.left, self.right, self.client_state, self.server_state):
             path.mkdir(parents=True)
         self.launcher = root / 'loopback.py'
+        self.sequence = 0
         self.server_options([])
 
     def server_options(self, options):
@@ -83,6 +87,12 @@ class Session:
         result = subprocess.run(command, env=dict(os.environ, UNISON=str(self.client_state)),
                                 capture_output=True, text=True, timeout=60)
         log = result.stdout + result.stderr
+        self.sequence += 1
+        (self.root / f'run-{self.sequence:02d}.log').write_text(log)
+        import json
+        (self.root / f'run-{self.sequence:02d}.command.json').write_text(json.dumps({
+            'argv': command, 'endpoint_state': str(self.client_state),
+            'exit_code': result.returncode, 'expected_success': success}, indent=2) + '\n')
         assert (result.returncode == 0) == success, log
         return log
 
@@ -149,9 +159,32 @@ def old_peer(root, current, old):
     sender = driver(root, 'old-peer-sender')
     (session.left / 'image.dng').write_bytes(b'old peer must reject requested validation')
     log = session.sync(sender, success=False)
-    assert 'dng-validation-v0 support on both replicas' in log, log
+    assert 'dng-validation-v1 support on both replicas' in log, log
     assert not (session.right / 'image.dng').exists() and call_count(sender) == 0
     print('Unmodified peer: requested validation rejected before commit.')
+
+
+def incompatible_validation(root, current, legacy):
+    for direction, client, server in (('v1-to-v0', current, legacy),
+                                      ('v0-to-v1', legacy, current)):
+        for policy in ('require', 'warn'):
+            session = Session(root / (direction + '-' + policy), client, server)
+            sender = driver(session.root, direction + '-' + policy + '-sender')
+            receiver = driver(session.root, direction + '-' + policy + '-receiver')
+            session.receiver_profile(receiver)
+            source, destination = session.left / 'image.dng', session.right / 'image.dng'
+            original = b'synthetic capability refusal fixture\n' * 128
+            source.write_bytes(original)
+            log = session.sync(sender, policy=policy, success=False)
+            assert ('dng-validation-v1 support on both replicas' in log or
+                    'dng-validation-v0 support on both replicas' in log), log
+            assert not destination.exists(), 'incompatible validation published a receive'
+            assert source.read_bytes() == original
+            assert call_count(sender) == call_count(receiver) == 0
+            session.sync(sender, policy='off')
+            assert destination.read_bytes() == original
+            assert call_count(sender) == call_count(receiver) == 0
+            print(direction + ': ' + policy + ' refused before publication/helper; off compatible.')
 
 
 def main():
@@ -159,13 +192,19 @@ def main():
     parser.add_argument('--unison', type=Path, required=True)
     parser.add_argument('--legacy-sender', type=Path)
     parser.add_argument('--old-peer', type=Path)
+    parser.add_argument('--keep-work', action='store_true')
     args = parser.parse_args()
     current = str(args.unison.resolve())
-    with tempfile.TemporaryDirectory(prefix='unison-validator-config-') as temp:
+    with contextlib.ExitStack() as cleanup:
+        temp = tempfile.mkdtemp(prefix='unison-validator-config-', dir='/private/tmp')
+        if not args.keep_work:
+            cleanup.callback(shutil.rmtree, temp)
+        else:
+            print('Retained configuration artifacts: ' + temp, flush=True)
         root = Path(temp)
         exercise(root / 'current', current, current, 'current sender')
         if args.legacy_sender:
-            exercise(root / 'legacy', str(args.legacy_sender.resolve()), current, 'legacy wire sender')
+            incompatible_validation(root / 'legacy', current, str(args.legacy_sender.resolve()))
         if args.old_peer:
             old_peer(root / 'old', current, str(args.old_peer.resolve()))
 

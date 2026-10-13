@@ -1,0 +1,5 @@
+include FormatRecognition.S
+(** Bounded IFD0 DNGVersion-tag recognition for classic TIFF and BigTIFF, in
+    either byte order. It does not require XMP, a supported DNG version, known
+    private fields or transfer eligibility. Checked undecidable TIFF structures
+    are indeterminate; I/O, stability and cancellation errors propagate. *)

@@ -40,7 +40,102 @@ let finish pool budget =
   Lwt_unix.run (W.shutdown pool);
   check (H.usage budget = (0, 0)) "leaked CPU permits";
   check ((W.usage pool).pending = 0 && (W.usage pool).running = 0) "worker not settled"
+let identify_tests () =
+  let owner = Domain.self () in
+  let module Matched = struct
+    let format = "test.identify/matched"
+    let identify file =
+      check (Domain.self () <> owner) "recognizer executed on owner";
+      check (SemanticFile.read file 0L 4="SYN1") "wrong probe bytes";
+      FormatRecognition.Recognized
+  end in
+  let module Unmatched = struct
+    let format = "test.identify/unmatched"
+    let identify _ = FormatRecognition.Not_matched
+  end in
+  let module Unknown = struct
+    let format = "test.identify/unknown"
+    let identify _ = FormatRecognition.Indeterminate "checked unsupported structure"
+  end in
+  let module Error = struct
+    let format = "test.identify/error"
+    let identify _ = raise (Unix.Unix_error (Unix.EIO,"private recognizer read",""))
+  end in
+  let matched=FormatRecognition.trusted (module Matched)
+  and unmatched=FormatRecognition.trusted (module Unmatched)
+  and unknown=FormatRecognition.trusted (module Unknown)
+  and error=FormatRecognition.trusted (module Error)
+  and dng=FormatRecognition.trusted ~suffixes:[".dng"] (module DngRecognition) in
+  let expected = let input=open_in "identify-probe.sha256" in
+    let value=input_line input in close_in input;value in
+  let identify pool cancellation recognizers path =
+    let file=fd path in
+    try_bind (fun () -> W.identify pool cancellation ~recognizers file)
+      (fun result -> ignore(Unix.LargeFile.fstat file);Unix.close file;return result)
+      (fun error -> Unix.close file;fail error) in
+  let selected formats = function
+    | Some result ->
+      check (result.W.formats=formats) "wrong selected formats";
+      (match result.W.fingerprint with
+       | Some fingerprint ->
+         check (SemanticHash.hex fingerprint.W.digest=expected) "conditional fingerprint differs from hashlib";
+         check (fingerprint.W.stats=result.W.stats) "fingerprint/recognition identity differs"
+       | None -> failwith "selected recognition lacks fingerprint")
+    | None -> failwith "recognition unexpectedly cancelled" in
+  let control name f = test name (fun () ->
+    let before=Array.length(Sys.readdir "/dev/fd") in
+    let b=budget 2 in let pool=W.create ~workers:2 ~max_pending:4 ~budget:b in
+    f pool b;finish pool b;
+    check (Array.length(Sys.readdir "/dev/fd")=before) "Identify lifecycle leaked FD") in
+  control "Identify off-owner content match hashes the same identity" (fun pool _ ->
+    selected [Matched.format] (Lwt_unix.run(identify pool (H.cancellation()) [matched,false] "identify-probe.bin")));
+  control "Identify filename claim and indeterminate verdict require validation" (fun pool _ ->
+    selected [Unmatched.format;Unknown.format]
+      (Lwt_unix.run(identify pool (H.cancellation()) [unmatched,true;unknown,false] "identify-probe.bin")));
+  control "Identify unmatched result does not hash or disturb caller position" (fun pool _ ->
+    let file=fd "identify-probe.bin" in
+    ignore(Unix.LargeFile.lseek file 17L Unix.SEEK_SET);
+    let result=Lwt_unix.run(W.identify pool (H.cancellation()) ~recognizers:[unmatched,false] file) in
+    check (match result with Some r -> r.W.formats=[] && r.W.fingerprint=None | None -> false)
+      "unmatched selected or hashed";
+    check (Unix.LargeFile.lseek file 0L Unix.SEEK_CUR=17L) "unmatched branch performed full hashing";
+    Unix.close file);
+  control "Identify DNG content recognition ignores the filename and XMP eligibility" (fun pool _ ->
+    let result=Lwt_unix.run(identify pool (H.cancellation()) [dng,false] "recognition-only.bin") in
+    check (match result with Some r -> r.W.formats=[DngRecognition.format] && r.W.fingerprint<>None
+      | None -> false) "content DNG was not selected";
+    check (not(FormatRecognition.matches_filename dng "recognition-only.bin")) "fixture unexpectedly claimed filename";
+    let file=fd "recognition-only.bin" in
+    let proof=SemanticFile.with_fd file (SemanticDelta.inspect(module DngExtended)) in
+    Unix.close file;
+    check (match proof with Error _ -> true | Ok _ -> false) "fixture unexpectedly eligible for XMP transfer");
+  control "Identify operational and nonregular errors never become no match" (fun pool _ ->
+    check (expect_failed(fun () -> identify pool (H.cancellation()) [error,false] "identify-probe.bin")) "EIO became unmatched";
+    let r,w=Unix.pipe() in
+    check (expect_failed(fun () -> W.identify pool (H.cancellation()) ~recognizers:[unmatched,false] r)) "pipe became unmatched";
+    Unix.close r;Unix.close w;
+    check (expect_failed(fun () -> W.identify pool (H.cancellation()) ~recognizers:[unmatched,false] r)) "closed FD became unmatched";
+    selected [Matched.format] (Lwt_unix.run(identify pool (H.cancellation()) [matched,false] "identify-probe.bin")));
+  control "Identify cancellation and shared CPU waiting settle without admission leaks" (fun pool b ->
+    let release=Lwt.wait() in
+    let held=H.with_cpu_permits b ~weight:2 (H.cancellation()) (fun () -> release) in
+    let cancellation=H.cancellation() in
+    let waiting=identify pool cancellation [matched,false] "identify-probe.bin" in
+    check (H.usage b=(2,0) && (W.usage pool).running=0) "Identify bypassed shared CPU reservation";
+    H.cancel cancellation;
+    check (Lwt_unix.run waiting=None) "cancelled Identify became a result";
+    Lwt_unix.run(Lwt.wakeup release ();held >>= fun _ -> return());
+    check (H.usage b=(0,0) && (W.usage pool).pending=0) "Identify cancellation leaked accounting";
+    selected [Matched.format] (Lwt_unix.run(identify pool (H.cancellation()) [matched,false] "identify-probe.bin")));
+  control "Identify duplicate and oversized capture rejected before FD dispatch" (fun pool _ ->
+    let rejects f=try ignore(f());false with Invalid_argument _ -> true in
+    let file=fd "identify-probe.bin" in
+    check (rejects(fun () -> W.identify pool (H.cancellation()) ~recognizers:[matched,false;matched,false] file)) "duplicate accepted";
+    check (rejects(fun () -> W.identify pool (H.cancellation()) ~recognizers:(List.init 17(fun _ -> matched,false)) file)) "capture ceiling ignored";
+    check ((W.usage pool).pending=0) "invalid captures dispatched";Unix.close file)
 let () =
+  identify_tests ();
+  if Array.exists ((=) "--identify-only") Sys.argv then exit 0;
   let expected = write_fixture () in
   test "36 actual domains, immutable digest parity and bounded concurrency" (fun () ->
     let b = budget 36 in

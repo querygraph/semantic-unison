@@ -225,6 +225,23 @@ let () =
     let inspect _ = return {expected with identity = "candidate-v2"} in
     check (rejected (validate ~policy:V.Warn ~inspect "valid"))
       "warn permitted pre-validation mutation");
+  List.iter (fun (name,expected,inspect,cancel) ->
+    test ("warn rejects pre-helper candidate inspection " ^ name) (fun () ->
+      let t=supervisor() and cancellation=H.cancellation() in
+      if cancel then H.cancel cancellation;
+      let executions=ref 0 in
+      let execute run=incr executions;run() in
+      let result=Lwt_unix.run(V.validate_with_execution ~execute t cancellation
+        ~policy:V.Warn ~tool:(Some(tool "valid")) ~inspect
+        ~candidate:"/synthetic/candidate.dng" ~expected) in
+      check (match result with V.Rejected(_,None) -> true | _ -> false)
+        "warn inspection failure was relaxed or spawned a helper";
+      check (!executions=0) "candidate inspection failure entered helper execution";
+      finish t))
+    ["EIO",expected,(fun _ -> fail(Unix.Unix_error(Unix.EIO,"private candidate inspection",""))),false;
+     "malformed snapshot",expected,(fun _ -> return {expected with V.sha256="bad"}),false;
+     "invalid expected",{expected with V.size=(-1L)},(fun _ -> failwith "invalid expected inspected"),false;
+     "cancelled inspection",expected,(fun _ -> fail(Failure "private inspection cancelled")),true];
   test "strict parser rejects extra fields and oversized receipt" (fun () ->
     let r = match validate "valid" with V.Passed r -> r | _ -> failwith "valid failed" in
     let bad text = match V.parse_report text with Error _ -> true | _ -> false in

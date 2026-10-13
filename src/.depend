@@ -22,46 +22,42 @@ bytearray.cmi : \
     ubase/umarshal.cmi
 candidateValidation.cmo : \
     ubase/util.cmi \
-    ubase/trace.cmi \
     semanticWorkers.cmi \
     semanticRuntime.cmi \
     semanticHash.cmi \
     semanticFile.cmi \
     props.cmi \
-    ubase/prefs.cmi \
     path.cmi \
     osx.cmi \
     name.cmi \
     lwt/lwt_util.cmi \
     lwt/lwt.cmi \
-    helperSupervisor.cmi \
     fspath.cmi \
     fs.cmi \
+    formatRecognition.cmi \
     fileinfo.cmi \
-    features.cmi \
-    dngValidation.cmi \
+    candidateValidators.cmi \
+    candidateValidator.cmi \
     abort.cmi \
     candidateValidation.cmi
 candidateValidation.cmx : \
     ubase/util.cmx \
-    ubase/trace.cmx \
     semanticWorkers.cmx \
     semanticRuntime.cmx \
     semanticHash.cmx \
     semanticFile.cmx \
     props.cmx \
-    ubase/prefs.cmx \
     path.cmx \
     osx.cmx \
     name.cmx \
     lwt/lwt_util.cmx \
     lwt/lwt.cmx \
-    helperSupervisor.cmx \
     fspath.cmx \
     fs.cmx \
+    formatRecognition.cmx \
     fileinfo.cmx \
-    features.cmx \
-    dngValidation.cmx \
+    candidateValidators.cmx \
+    candidateValidator.cmx \
     abort.cmx \
     candidateValidation.cmi
 candidateValidation.cmi : \
@@ -69,6 +65,32 @@ candidateValidation.cmi : \
     path.cmi \
     lwt/lwt.cmi \
     fspath.cmi
+candidateValidator.cmo : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatRecognition.cmi \
+    candidateValidator.cmi
+candidateValidator.cmx : \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    formatRecognition.cmx \
+    candidateValidator.cmi
+candidateValidator.cmi : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatRecognition.cmi
+candidateValidators.cmo : \
+    formatRecognition.cmi \
+    dngCandidateValidation.cmi \
+    candidateValidator.cmi \
+    candidateValidators.cmi
+candidateValidators.cmx : \
+    formatRecognition.cmx \
+    dngCandidateValidation.cmx \
+    candidateValidator.cmx \
+    candidateValidators.cmi
+candidateValidators.cmi : \
+    candidateValidator.cmi
 case.cmo : \
     uutil.cmi \
     ubase/util.cmi \
@@ -245,6 +267,34 @@ copyRange.cmo : \
 copyRange.cmx : \
     copyRange.cmi
 copyRange.cmi :
+dngCandidateValidation.cmo : \
+    ubase/util.cmi \
+    ubase/trace.cmi \
+    ubase/prefs.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatRecognition.cmi \
+    features.cmi \
+    dngValidation.cmi \
+    dngRecognition.cmi \
+    candidateValidator.cmi \
+    abort.cmi \
+    dngCandidateValidation.cmi
+dngCandidateValidation.cmx : \
+    ubase/util.cmx \
+    ubase/trace.cmx \
+    ubase/prefs.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    formatRecognition.cmx \
+    features.cmx \
+    dngValidation.cmx \
+    dngRecognition.cmx \
+    candidateValidator.cmx \
+    abort.cmx \
+    dngCandidateValidation.cmi
+dngCandidateValidation.cmi : \
+    candidateValidator.cmi
 dngExtended.cmo : \
     dngSemantic.cmi \
     dngExtended.cmi
@@ -253,6 +303,16 @@ dngExtended.cmx : \
     dngExtended.cmi
 dngExtended.cmi : \
     formatExtension.cmi
+dngRecognition.cmo : \
+    semanticFile.cmi \
+    formatRecognition.cmi \
+    dngRecognition.cmi
+dngRecognition.cmx : \
+    semanticFile.cmx \
+    formatRecognition.cmx \
+    dngRecognition.cmi
+dngRecognition.cmi : \
+    formatRecognition.cmi
 dngSemantic.cmo : \
     xmpObservation.cmi \
     semanticFile.cmi \
@@ -455,6 +515,14 @@ formatExtension.cmx : \
     semanticFile.cmx \
     formatExtension.cmi
 formatExtension.cmi : \
+    semanticFile.cmi
+formatRecognition.cmo : \
+    semanticFile.cmi \
+    formatRecognition.cmi
+formatRecognition.cmx : \
+    semanticFile.cmx \
+    formatRecognition.cmi
+formatRecognition.cmi : \
     semanticFile.cmi
 fpcache.cmo : \
     uutil.cmi \
@@ -1325,6 +1393,7 @@ semanticWorkers.cmo : \
     lwt/lwt.cmi \
     ioAdmission.cmi \
     helperSupervisor.cmi \
+    formatRecognition.cmi \
     formatExtension.cmi \
     dngSemantic.cmi \
     semanticWorkers.cmi
@@ -1335,6 +1404,7 @@ semanticWorkers.cmx : \
     lwt/lwt.cmx \
     ioAdmission.cmx \
     helperSupervisor.cmx \
+    formatRecognition.cmx \
     formatExtension.cmx \
     dngSemantic.cmx \
     semanticWorkers.cmi
@@ -1343,6 +1413,7 @@ semanticWorkers.cmi : \
     lwt/lwt.cmi \
     ioAdmission.cmi \
     helperSupervisor.cmi \
+    formatRecognition.cmi \
     formatExtension.cmi
 sortri.cmo : \
     ubase/util.cmi \

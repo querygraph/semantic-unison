@@ -22,8 +22,11 @@ Copy passes the local reservation explicitly into semantic materializers.
 `SemanticAdmission.with_borrow` loans one workspace without another transaction
 debit or an upgrade wait. Parallel inspectors operate inside that workspace's
 upfront envelope. Validation borrows the same envelope and processes a bound
-tree serially, including an explicit legacy directory handoff. Unbound validation
-keeps its separate per-file admission. Overlapping, revoked and oversized loans
+tree serially, including an explicit legacy directory handoff. Content
+recognition, its conditional full hash and sequential selected validator
+callbacks retain one 1 MiB / nine-descriptor loan. The recognition input closes
+before helper execution; execution alone borrows the filesystem gate. Unbound
+validation keeps its separate per-file admission. Overlapping, revoked and oversized loans
 fail before dispatch; they cannot silently create another gate waiter.
 
 Sources use their independent eight-credit reservation through proof/response

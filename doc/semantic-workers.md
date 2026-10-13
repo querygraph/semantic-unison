@@ -1,7 +1,7 @@
 # Typed semantic workers
 
-`SemanticWorkers` runs SHA-256 hashing, DNG proof inspection, and verified DNG
-delta application on bounded OCaml domains. The
+`SemanticWorkers` runs SHA-256 hashing, trusted content recognition, DNG proof
+inspection, and verified DNG delta application on bounded OCaml domains. The
 public API, helper scheduler, Lwt promises, cancellation monitoring, archives,
 RPC, and completion callbacks stay on Unison's event-loop owner. A worker
 receives owned descriptors, a typed operation with an immutable plan where
@@ -105,6 +105,15 @@ reason. Its successful proof contains complete-file and protected-complement
 hashes plus bounded editable metadata, and is immutable across the worker
 boundary. Parser reads and full-file hashing use the same cancellation checks.
 
+`identify` receives at most sixteen unique immutable recognition handles and
+owner-captured filename claims. It returns selected format IDs and stable stats;
+selected files also receive a full fingerprint on the same held input.
+Unmatched files skip full hashing but still undergo stability checks. Claims,
+positive matches and indeterminate results select validation; operational or
+stability errors propagate. Owner policy/callbacks never cross the worker
+boundary. The caller closes its input before helper execution while retaining
+the resource loan. See [candidate validators](candidate-validators.md).
+
 `apply` borrows both a basis descriptor and an output descriptor. Output
 must be an exclusively owned staging file containing the exact basis bytes.
 The worker checks both proofs before writing, rejects the same inode, patches
@@ -161,3 +170,9 @@ private outputs. Each job opens its own basis description, preserving separate
 positions; immutable v1 handles are selected on the owner. Exact target hashes,
 logical metadata writes, unchanged basis and settled CPU/worker usage are
 checked. This is correctness evidence using small synthetic files.
+
+The validation-companion checkpoint reruns seven focused identification groups
+with two workers per compiler using `--identify-only`. These cover pure callback
+execution, claims/uncertainty, matched and unmatched hashing, operational errors,
+cancellation, registration bounds and resource settlement. The larger historical
+domain tests above are prior qualification, not a new scaling measurement.

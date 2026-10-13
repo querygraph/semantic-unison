@@ -1,0 +1,181 @@
+{
+  "schema": "unison.validation-companion-independent-review/1",
+  "accepted_utc": "2026-10-13 23:53:30 UTC",
+  "status": "ACCEPTED_SELECTED_SOURCE_RETAINED_ARTIFACT_AND_DOCUMENT_SCOPE",
+  "reviewer": "/root/scratch_review",
+  "parent_commit": "939b4d827062439d1b5f27002ac929b19789f1cf",
+  "aggregate": {
+    "path": "tests/qualification/validation-companion-integration-20261013.json",
+    "sha256": "bd4b56f41253439940b7079cf88e81166b4ba965835237cb0b73d3131c967095"
+  },
+  "authorship": {
+    "production_and_document_author": "/root",
+    "recognition_configuration_fifo_test_author": "/root/scratch_controls",
+    "identify_helper_inspection_fault_and_retained_regression_index_author": "/root/scratch_integration",
+    "reviewer_authored_changed_production_or_tests_in_this_slice": false,
+    "historical_helper_supervisor_authorship": "Reviewer authored portions of unchanged HelperSupervisor and earlier helper-ownership controls. This review does not claim fresh blanket independent source qualification of that historical implementation; current changed production and tests were authored by other agents.",
+    "reviewer_executed_tests_builds_native_helpers_or_sdk": false
+  },
+  "source_review": {
+    "status": "accepted",
+    "scope": "New FormatRecognition, DngRecognition, CandidateValidator, DngCandidateValidation and CandidateValidators modules/interfaces; changed CandidateValidation, SemanticWorkers, DngValidation and Make graph; relevant existing runtime/helper/file/publication boundaries.",
+    "findings_closed": [
+      "Identify is admitted through the existing I/O-input match; Identified is handled in successful submit responses.",
+      "Candidate pre-inspection/path/expected-snapshot failures are rejected regardless of Warn; tool availability and driver findings retain the explicit policy distinction."
+    ],
+    "observations": [
+      "Only immutable recognizer handles and destination suffix-claim booleans enter workers; registries, preferences, validation callbacks and helper execution stay on the owner.",
+      "IFD0 recognition is bounded, handles classic/BigTIFF and byte order, does not depend on XMP transfer eligibility, and sends checked uncertainty to validation. Operational failures never become Not_matched.",
+      "Unique format registration prevents duplicate DNG callbacks across transfer profiles. Requested dng-validation-v1 support is enforced in feature negotiation and receiver selection; v0 is not an alias.",
+      "Recognition and conditional full hashing use one held worker input with stability checks. The owner's identity descriptor closes before helper invocation; selected callbacks run serially inside one retained loan.",
+      "Current descendant claims preserve the destination leaf suffix; no parent/path rule API is claimed. Private tree manifests remain retained through settled consumers."
+    ],
+    "correction_source_sha256": {
+      "src/semanticWorkers.ml": "8f936c1eed2148d88818068fff44a628b33919b2d6750eba522ca4de8a3878b6",
+      "src/dngValidation.ml": "1b7d6425ce91c081193b3d88a9636e2d33d720491261aa2119e11afe4ee79f4d",
+      "src/dngValidation.mli": "8fee59b13ad689f5bdd41cba770e08c6ba7bb558a28686e71f8564ac804a82a0"
+    }
+  },
+  "portions": {
+    "build_evidence": {
+      "receipt": "/private/tmp/unison-validation-companion-root-builds/EVIDENCE.json",
+      "sha256": "d2b5f823958395788311a1ed29d5edf5715bc288807589f5f5864b46fe220e29",
+      "status": "accepted",
+      "hash_comparisons": 1668,
+      "unique_canonical_paths": 1664,
+      "source_inputs_each": 328,
+      "source_sets": 5,
+      "metadata_pins": 28,
+      "builds": 4,
+      "selftests": 4,
+      "make_argv_job_count_qualified": false,
+      "reviewer_reruns": false
+    },
+    "identify_helper_and_inspection_fault": {
+      "receipt": "tests/validation_inspection_fault/qualification-20261013.json",
+      "sha256": "c403de5fadb8a5827b7243aa60275934185998f56a2cdbdc962542ab7f4dc498",
+      "status": "accepted",
+      "hash_comparisons": 3702,
+      "unique_canonical_paths": 2402,
+      "reconstruction_source_capture_node_byte_comparisons": 88,
+      "workspace_and_make_inputs": 328,
+      "unit_inventory_entries": 306,
+      "identify_groups_each": 7,
+      "helper_groups_each": 37,
+      "new_strict_warn_controls_each": 4,
+      "cli_cases_each": 2,
+      "commands_both": 36,
+      "reviewer_authored_production_and_tests_this_slice": false,
+      "historical_helper_authorship": true,
+      "reviewer_reruns": false,
+      "scope": "Candidate-EIO one-file private ML insertion; typed format23 old content full fingerprint preserved, receiver node/raw containers may change; failed prior trials excluded; no global allocator/RSS or Adobe/Photo qualification."
+    },
+    "root_receiving_and_publication_regressions": {
+      "receipt": "/private/tmp/unison-validation-companion-root-regressions.json",
+      "sha256": "d3c59a8b0f7996d7a492bbfa5152dc2b799f3a12c8c008fa7ba584e71b0fc7b6",
+      "status": "accepted",
+      "hash_comparisons": 4072,
+      "unique_canonical_paths": 4008,
+      "record_source_reconstruction_comparisons": 34,
+      "complete_inventory_entries": 3680,
+      "each_compiler": {
+        "old_suite_files": 449,
+        "old_suite_directories": 107,
+        "files_suite_files": 875,
+        "files_suite_directories": 407,
+        "files_suite_symlinks": 2,
+        "old_cases": 21,
+        "files_cases": 79
+      },
+      "private_build_commands": 48,
+      "private_source_subset": 324,
+      "package_inputs": 328,
+      "per_cli_exact_argv_status_qualified": false,
+      "reviewer_reruns": false
+    },
+    "recognition_receiving_configuration_fifo": {
+      "receipt": "tests/validation_recognition/qualification-20261013.json",
+      "sha256": "54762f3862ee9156584679d896264e62d3acd4542852a3a3d7372748ebfc7a7c",
+      "status": "accepted",
+      "hash_comparisons": 2122,
+      "unique_canonical_paths": 1853,
+      "record_source_reconstruction_comparisons": 20,
+      "complete_final_inventory_entries": 1944,
+      "each_compiler": {
+        "receiving_cases": 28,
+        "recorded_completed_cli_commands_including_historical_negative": 84,
+        "cli_exits": {
+          "0": 57,
+          "2": 26,
+          "3": 1
+        },
+        "separately_source_derived_interrupted_producer_runs": 2,
+        "configuration_groups": 5,
+        "configuration_cli_commands": 16,
+        "fifo_positive_cases": 5,
+        "designated_private_old_open_timeouts": 5,
+        "fifo_compile_and_run_commands": 22,
+        "historical_v0_actual_unvalidated_publication_controls": 1
+      },
+      "verified": [
+        "All final manifests are complete against retained directories; all listed regular artifacts, sources, compiled inputs, binaries, commands and logs match hashes.",
+        "Both exact private FIFO source variants and fixture concatenations reconstruct from current production/test bytes.",
+        "TOY0 companion source equals the retained compiled source; dispatch is registration-only, with Adobe off and transfer profiles disabled.",
+        "Old-v0 binary produces actual unvalidated renamed-content publication, while current compatibility controls refuse warn/require in both directions and preserve off compatibility."
+      ],
+      "historical_trials": "Failed/debug trial manifest hashes and scope are checked; these trials are excluded from completed qualification. Individual historical failed-trial artifact bodies are not claimed as a new complete audit.",
+      "limits": "Synthetic drivers qualify dispatch/publication, not Adobe validity or pixels. Interrupted producer arguments are source-derived and separate from completed CLI records. No cross-replica atomicity, whole-process allocation or throughput claim."
+    },
+    "final_aggregate": {
+      "status": "accepted",
+      "hash_comparisons": 1699,
+      "unique_canonical_paths": 1695,
+      "record_binding_comparisons": 8,
+      "production_inputs_each": 328,
+      "workspace_and_make_dune_source_sets": 5,
+      "test_input_pins": 16,
+      "document_pins": 9,
+      "root_outer_suite_commands": 4,
+      "root_reported_terminal_zero_suites": 4,
+      "historical_inner_cli_argv_and_numeric_exits_qualified": false,
+      "indexed_workspace_and_both_make_depend_sha256": "5efd16c9f8c2c3edb5e9704ba4e48c42ece4de9a6bb5af62383caf8ceaa681af",
+      "workspace_and_cached_diff_check": "passed, including staged new files"
+    }
+  },
+  "recorded_comparison_totals": {
+    "hash_comparisons": 13263,
+    "source_capture_node_byte_record_reconstructions": 150,
+    "complete_final_inventory_entries": 5930,
+    "scope": "Totals sum comparisons across portions, with repeated source/artifact checks. They are not unique-file counts; per-portion canonical-path counts remain separate."
+  },
+  "documentation": {
+    "status": "accepted",
+    "sha256": {
+      "SOL.md": "3c120d96e8f6eafd728483a0d4167d09a70f0d03fc8aa997bab4a090246d14d4",
+      "doc/candidate-validators.md": "b4cee0bff7be9d77fcfe75c303eeb414af46d624a2da4222b30ecb9c78d36471",
+      "doc/format-extensions.md": "8b9a9effdfba0c25494b0675c6f6754ec86cbfef3574faaf04349132e757e8b9",
+      "doc/implementation-status.md": "d15afb430a4aaa55560851c26f33f62f860630011e7f7cfe3c2c1051af1b2b23",
+      "doc/resource-admission.md": "aeec2fbff685ee1633965ac677534e2cf0518a08d1708183993276d99396998d",
+      "doc/semantic-workers.md": "b83a43884b949ea069ad760486069c6f9757aee4955e392fdee747a982c2e791",
+      "doc/semantic-sync.md": "1b62b7669939bc1cf01f11f625fdd6f78c10805021c0655d1548676b74712f4f",
+      "tests/README.md": "95ef6c9379a318cc6baf40a443416a0414d78c9b936e98238e11ebdad3180b68",
+      "tests/helpers/README.md": "ece69649bbb02b1c253b38490a929ffc32f869814201e4a373930239338203c0"
+    },
+    "observations": [
+      "Current capability, filename/content/uncertainty selection, strict candidate fence and policy distinction agree with production.",
+      "Resource credits remain selected estimates; parser/tree/pool/transport/SDK/global limits are not promoted to a whole-process FD/RSS guarantee.",
+      "Historical DNG v1/resource checkpoints are labeled historical. Current receiving/publication results are synthetic and distinct from real SDK/camera, native preview or performance qualification.",
+      "Linked current receipts and local documentation resolve; the separate acceptance supersedes sealed pending-audit wording without changing those records."
+    ]
+  },
+  "remaining_limits": [
+    "No reviewer test/build/native/helper replay, SDK/Adobe/Photo/catalog/cache/payload/volume operation or preview publisher.",
+    "Real-camera/SDK receiving coverage, modern/private semantic grammars, full-sync throughput and physical APFS sharing/write savings remain unqualified.",
+    "Trusted compiled recognizer/validator contracts and Domain.spawn remain manually audited, not compiler-proved isolation or a sandbox.",
+    "Selected loans do not establish complete-process FD/RSS, persistent allocator recovery, external-child memory or machine-wide CPU ceilings.",
+    "Fault archive evidence binds named format-23 full content fingerprint nonadvancement; receiver node fields and raw archive containers may change.",
+    "Historical 21/79 inner CLI argv/numeric exits and overwritten intermediate states are unavailable; root outer commands/terminal observations, retained source constructors and pass evidence are attributed.",
+    "Original Make top-level argv/job count is explicitly unclaimed. Standard library/runtime provenance is not a complete toolchain manifest.",
+    "No crash/power-loss durability, adversarial namespace elimination, ZFS/ReFS runtime, JPEG implementation, Lightroom Validate equivalence or OxCaml-specific speedup is established."
+  ]
+}

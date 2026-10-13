@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Exercise real typed domain workers with the production shared CPU budget."""
 import argparse
+import hashlib
 from pathlib import Path
 import shutil
 import subprocess
@@ -9,6 +10,7 @@ import tempfile
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
+parser.add_argument("--identify-only",action="store_true")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
 sources = [
@@ -19,6 +21,8 @@ sources = [
     "src/ioAdmission.mli", "src/ioAdmission.ml",
     "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
     "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
+    "src/formatRecognition.mli", "src/formatRecognition.ml",
+    "src/dngRecognition.mli", "src/dngRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
@@ -51,6 +55,9 @@ with tempfile.TemporaryDirectory(prefix="unison-workers-") as tmp:
     target = bytearray(dng)
     target[1024:1024 + len(packet)] = b"<x>two</x>      "
     (build / "target.dng").write_bytes(target)
+    recognition_only=bytearray(dng)
+    struct.pack_into("<H",recognition_only,34,65000)
+    (build/"recognition-only.bin").write_bytes(recognition_only)
     # BigTIFF with an independently big-endian classic CR profile. These
     # synthetic bytes qualify structural proofs, not SDK-valid image pixels.
     extended = bytearray(2 * 1024 * 1024)
@@ -69,10 +76,14 @@ with tempfile.TemporaryDirectory(prefix="unison-workers-") as tmp:
     (build / "extended-base.dng").write_bytes(extended)
     extended[1024:1024 + len(packet)] = b"<x>two</x>      "
     (build / "extended-target.dng").write_bytes(extended)
+    probe=b"SYN1"+bytes((i*71+19)%256 for i in range(262144-4))
+    (build/"identify-probe.bin").write_bytes(probe)
+    (build/"identify-probe.sha256").write_text(hashlib.sha256(probe).hexdigest()+"\n")
     with (build / "large.dng").open("wb") as out:
         out.write(dng)
         out.truncate(1073741824)
     with (build / "large-stage.dng").open("wb") as out:
         out.write(dng)
         out.truncate(1073741824)
-    subprocess.run([str(build / "worker-test")], cwd=build, check=True, timeout=120)
+    subprocess.run([str(build / "worker-test")]+(["--identify-only"] if args.identify_only else []),
+                   cwd=build, check=True, timeout=120)

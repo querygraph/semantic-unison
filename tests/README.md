@@ -1,9 +1,18 @@
 # Semantic extension qualification
 
+[Receiving recognition controls](validation_recognition/README.md) cover renamed
+DNGs, semantic-ineligible fallback, receiving paths, recursive trees and a
+registered synthetic companion. [Inspection-fault controls](validation_inspection_fault/README.md)
+qualify strict warn rejection and decoded named archive fingerprints. The current
+[integration receipt](qualification/validation-companion-integration-20261013.json)
+binds both compiler builds, focused workers/helpers, compatibility/FIFO checks
+and receiving/publication regressions; separate independent acceptance records
+artifact review. These checks use Adobe-free synthetic helpers.
+
 [Extended DNG v1 controls](dng_profile_v1/README.md) qualify BigTIFF, embedded
 camera profiles, exact byte proofs and malformed/alias bounds. The
 [routing controls](dng_profile_v1_remote.md) cover negotiated preferences,
-frozen v0 peers and mixed stock/OxCaml receives. Current combined evidence is
+frozen v0 peers and mixed stock/OxCaml receives. Historical combined evidence is
 [dng-profile-v1-integration-20261013.json](qualification/dng-profile-v1-integration-20261013.json),
 with a separate independent acceptance receipt. Large sparse-file cases are
 inspector-only; no Adobe, rendering or photographic-corpus parity is claimed.
@@ -53,10 +62,15 @@ python3 tests/test_semantic_reports.py /absolute/build/src/unison /optional/old/
 python3 tests/test_validation_sync.py /absolute/build/src/unison
 python3 tests/validation_paths/run.py --unison /absolute/build/src/unison \
   --volume-jobs 1 --receipt /private/tmp/validation-paths.json
+python3 tests/validation_recognition/run.py --unison /absolute/build/src/unison \
+  --build /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt --keep-work \
+  --receipt /private/tmp/validation-recognition.json
+python3 tests/validation_inspection_fault/run.py --build /absolute/build \
+  --ocamlopt /absolute/compiler/bin/ocamlopt --report /private/tmp/inspection-fault.json
 python3 tests/io_admission/runtime_run.py --build /absolute/build \
   --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_validator_config.py --unison /absolute/build/src/unison \
-  --legacy-sender /optional/pre-fix-feature-branch/unison \
+  --legacy-sender /optional/pre-v1-validation/unison \
   --old-peer /optional/unmodified/unison
 OCAMLOPT=/absolute/compiler/bin/ocamlopt python3 tests/test_endpoint_prefs.py /absolute/build
 OCAMLOPT=/absolute/compiler/bin/ocamlopt python3 tests/test_local_clone.py /absolute/build
@@ -74,8 +88,10 @@ python3 tests/test_positional_sync.py /absolute/build --ocamlopt /absolute/compi
 
 Omit optional binary arguments when unavailable. Validator configuration tests
 give the two endpoints separate configuration directories and distinct driver
-paths, pins and build IDs. The legacy sender still transmits helper settings,
-exercising the receiver's incoming-value protection. The preference tests also
+paths, pins and build IDs. The legacy sender is an actual suffix-only
+validation-v0 binary: requested warn/require must refuse it in either direction,
+while off remains compatible. Current/current runs exercise incoming-value
+protection. The preference tests also
 cover aliases, malformed incoming values and local profile/CLI precedence.
 The generic-format
 suite injects one trusted synthetic registration into a private test binary

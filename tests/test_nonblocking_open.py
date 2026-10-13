@@ -8,10 +8,14 @@ open/proof/worker/resource code is unchanged. No production test API is added.
 """
 from pathlib import Path
 import argparse
+import contextlib
+import json
 import os
 import re
 import subprocess
+import shutil
 import tempfile
+import time
 
 
 def main():
@@ -19,6 +23,7 @@ def main():
     parser.add_argument("build", type=Path)
     parser.add_argument("--negative-control", action="store_true",
                         help="also remove O_NONBLOCK in private ML copies and require FIFO timeouts")
+    parser.add_argument("--keep-work", action="store_true")
     args = parser.parse_args()
     repository = Path(__file__).resolve().parent.parent
     build = args.build.resolve() / "src"
@@ -32,14 +37,39 @@ def main():
 
     modules = objects("OCAMLOBJS")
     modules = modules[:modules.index("semanticSync.cmx")]
-    modules.append("dngValidation.cmx")
+    modules += ["candidateValidator.cmx", "dngValidation.cmx",
+                "dngCandidateValidation.cmx", "candidateValidators.cmx"]
     includes = [build, build / "lwt", build / "ubase", build / "system",
                 build / "system/generic", build / "lwt/generic"]
     flags = [flag for path in includes for flag in ["-I", str(path)]]
     flags += ["-I", "+unix", "-I", "+str"]
     compiler = os.environ.get("OCAMLOPT", "ocamlopt")
-    with tempfile.TemporaryDirectory(prefix="unison-nonblocking-open-", dir="/private/tmp") as tmp:
+    with contextlib.ExitStack() as cleanup:
+        tmp = tempfile.mkdtemp(prefix="unison-nonblocking-open-", dir="/private/tmp")
+        if not args.keep_work:
+            cleanup.callback(shutil.rmtree, tmp)
+        else:
+            print("Retained nonblocking artifacts: " + tmp, flush=True)
         workspace = Path(tmp)
+        def run_command(command, **options):
+            record = {"argv": command, "cwd": str(options.get("cwd", Path.cwd())),
+                      "timeout": options.get("timeout"),
+                      "endpoint_state": options.get("env", {}).get("UNISON")}
+            started = time.monotonic()
+            try:
+                result = subprocess.run(command, **options)
+                record["exit_code"] = result.returncode
+                return result
+            except subprocess.CalledProcessError as error:
+                record["exit_code"] = error.returncode
+                raise
+            except subprocess.TimeoutExpired:
+                record["timed_out"] = True
+                raise
+            finally:
+                record["elapsed_seconds"] = time.monotonic() - started
+                with (workspace / "actual-commands.jsonl").open("a") as output:
+                    output.write(json.dumps(record, sort_keys=True) + "\n")
         for negative in ([False, True] if args.negative_control else [False]):
             work = workspace / ("baseline" if negative else "current")
             work.mkdir()
@@ -61,27 +91,27 @@ def main():
             (work / "semanticSyncForTest.mli").write_text((repository / "src/semanticSync.mli").read_text())
             (work / "candidateValidationForTest.mli").write_text(
                 (repository / "src/candidateValidation.mli").read_text() + "\n"
-                "val snapshot : SemanticWorkers.t -> HelperSupervisor.cancellation -> string -> DngValidation.snapshot Lwt.t\n"
-                "val validate_file : reservation:SemanticAdmission.reservation option -> selected:DngValidation.policy -> Fspath.t -> unit Lwt.t\n")
+                "val snapshot : SemanticWorkers.t -> HelperSupervisor.cancellation -> string -> CandidateValidator.snapshot Lwt.t\n"
+                "val validate_file : reservation:SemanticAdmission.reservation option -> validators:CandidateValidator.selected list -> destination:string -> Fspath.t -> unit Lwt.t\n")
             for name in sources:
                 interface = work / (name + ".mli")
                 if interface.exists():
-                    subprocess.run([compiler] + flags + ["-c", interface.name], cwd=work, check=True)
-                subprocess.run([compiler] + flags + ["-c", name + ".ml"], cwd=work, check=True)
+                    run_command([compiler] + flags + ["-c", interface.name], cwd=work, check=True)
+                run_command([compiler] + flags + ["-c", name + ".ml"], cwd=work, check=True)
             fixture = (repository / "tests/semantic/test.ml").read_text().split("let () =", 1)[0]
             (work / "openTest.ml").write_text(fixture + (repository / "tests/nonblocking_open.ml").read_text())
             command = [compiler] + flags + ["unix.cmxa", "str.cmxa"]
             command += [str(build / obj) for obj in modules]
             command += [name + ".cmx" for name in sources] + ["openTest.ml"]
             command += [str(build / obj) for obj in objects("COBJS")]
-            subprocess.run(command + ["-o", "open-test"], cwd=work, check=True)
+            run_command(command + ["-o", "open-test"], cwd=work, check=True)
             for case in ("sync", "async", "plan", "candidate", "tool"):
                 fixtures = work / case
                 fixtures.mkdir()
                 state = fixtures / "state"
                 state.mkdir()
                 try:
-                    subprocess.run([str(work / "open-test"), case], cwd=fixtures,
+                    run_command([str(work / "open-test"), case], cwd=fixtures,
                                    env=dict(os.environ, UNISON=str(state)), check=True,
                                    timeout=2 if negative else 20)
                 except subprocess.TimeoutExpired:

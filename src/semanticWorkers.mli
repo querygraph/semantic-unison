@@ -8,6 +8,8 @@ type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
 type observation = { inspection : inspection;
   meaning : (FormatExtension.observation, string) result option }
+type identification = { formats : string list; fingerprint : fingerprint option;
+                        stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
@@ -33,6 +35,15 @@ val inspect : t -> HelperSupervisor.cancellation -> extension:FormatExtension.ha
   Unix.file_descr -> inspection option Lwt.t
 (** Same ownership rules as [digest]. The owner selects the trusted extension;
     the worker invokes only that immutable handle, never the registry. *)
+val identify : t -> HelperSupervisor.cancellation ->
+  recognizers:(FormatRecognition.handle * bool) list ->
+  Unix.file_descr -> identification option Lwt.t
+(** At most sixteen unique, immutable validation recognizers and owner-computed
+    destination filename claims. Claims, matches and indeterminate recognition
+    select validation. A selected file is fully hashed on the same held file;
+    an unmatched file is not hashed. Both outcomes require stable reads.
+    Operational failure/cancellation never means no match. Same ownership,
+    filesystem/domain/CPU admission and settlement rules as [digest]. *)
 val observe : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
   Unix.file_descr -> observation option Lwt.t
 (** Read-only inspection plus optional extension interpretation of the complete

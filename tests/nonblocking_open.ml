@@ -13,7 +13,7 @@ let () =
   let directory = Fspath.canonize (Some (Sys.getcwd ())) in
   let absolute name = Fspath.concat directory (Path.fromString name) in
   let string_path name = Fspath.toString (absolute name) in
-  Prefs.loadStrings ["semanticdng = true";"semanticworkers = 2"];
+  Prefs.loadStrings ["semanticdng = true";"semanticworkers = 2";"adobevalidate = require"];
   Features.setEnabled (Features.all ());
   write "basis" (fixture ());
   write "source" (fixture ~xmp:"<x>two</x>      " ());
@@ -56,14 +56,16 @@ let () =
           require (SemanticDelta.binds_request ~nonce:(String.make 32 'f') ~base:(proof "basis") decoded)
             "source-planning follow-up returned wrong bytes" end
   | "candidate" -> reject (fun () -> ignore (Lwt_unix.run
-      (CandidateValidationForTest.validate_file ~reservation:None ~selected:DngValidation.Require (absolute "fifo"))));
+      (CandidateValidationForTest.validate_file ~reservation:None
+        ~validators:(CandidateValidators.selected ()) ~destination:"fifo.dng" (absolute "fifo"))));
       usage (); require (descriptors ()=before) "candidate hashing leaked fd";
       ignore (Lwt_unix.run (inspect "source"))
   | "tool" ->
       Prefs.loadStrings ["adobevalidator = " ^ string_path "fifo";
         "adobevalidatorhash = " ^ String.make 64 'a';"adobevalidatorbuild = fifo-test-1"];
       reject (fun () -> ignore (Lwt_unix.run
-        (CandidateValidationForTest.validate_file ~reservation:None ~selected:DngValidation.Require (absolute "source"))));
+        (CandidateValidationForTest.validate_file ~reservation:None
+          ~validators:(CandidateValidators.selected ()) ~destination:"source.dng" (absolute "source"))));
       usage (); require (descriptors ()=before) "tool pin hashing leaked fd";
       ignore (Lwt_unix.run (inspect "source"))
   | _ -> failwith "unknown FIFO open case"

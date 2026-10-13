@@ -4,6 +4,39 @@
 
 ## Live implementation handoff
 
+* Receiving-validation continuation (2026-10-13): core now accepts separately
+  registered `CandidateValidator.S` companions and dispatches immutable content
+  recognizers through typed workers. The single DNG companion covers v0/v1
+  transfer profiles and ordinary fallback, independently of semantic enablement
+  or eligibility. Bounded classic/BigTIFF IFD0 recognition selects renamed DNGs,
+  no-XMP/private/future-version claims and checked uncertainty; `.dng` remains a
+  forced claim. Unmatched files avoid full hashing. Operational errors and
+  candidate pre-inspection failures reject even under warn. Recognition, initial
+  full hashing and sequential callbacks retain one 1 MiB / nine-FD loan;
+  descriptor ownership closes before helper execution. See
+  [candidate-validators.md](doc/candidate-validators.md).
+* Validation compatibility is now `dng-validation-v1`, with no v0 alias.
+  Both warn and require refuse old suffix-only peers before transfer; off keeps
+  ordinary compatibility. Receiver selection repeats the capability guard and
+  captures endpoint-local tool settings. Adding another compiled companion
+  requires registration, not a receiving-core dispatch edit; an isolated TOY0
+  companion qualifies this path without installing a production format.
+* Validation checkpoint: stock OCaml 5.5.1 and installed OxCaml 5.2.0+ox Make
+  and clean Dune builds/selftests match 328 production/package/INSTALL inputs.
+  Each compiler passes 28 new actual receiving cases, seven focused Identify
+  groups, 37 helper groups, two local/remote warn pre-inspection EIO cases,
+  endpoint configuration/old-v0 refusal controls and nonblocking FIFO controls.
+  The unchanged 21 receiving-validation and 79 Files publication regressions
+  also pass each compiler. Actual v0 binaries reproduce the renamed-DNG bypass;
+  the new feature rejects that peer contract. Fault receipts decode actual
+  format-23 named archive nodes and preserve old full content fingerprints;
+  raw archive/container or receiver-node equality is not claimed. The
+  [integration receipt](tests/qualification/validation-companion-integration-20261013.json)
+  binds source/build/test artifacts; its separate independent review records
+  acceptance. Tests use synthetic files and Adobe-free helpers, with no new
+  Adobe, Photo, preview-generator or native Lightroom operation. Real SDK/camera
+  receiving coverage, complete resource limits and throughput remain open.
+
 * Latest Photo coordination (2026-10-13): private v3 metadata staging is complete
   against 905,928 Lux images / 895,491 current still keys. The
   [alignment receipt](../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json),
@@ -912,7 +945,7 @@ Use an explicit argv allowlist and one absolute staging-file argument, with no s
 
 Record candidate SHA-256, tool SHA-256/build, argv/adapter version, algorithm/tag, source snapshot identity, structured structural/decode/digest statuses, exit/signal and capped diagnostics. Validation receipts are invalid after candidate mutation. No reuse across tools/profiles/flags or merely matching raw digest. Byte-transfer verification remains mandatory even when Adobe validation succeeds. Do not claim Lightroom UI Validate parity; this option directly invokes an independently qualified Adobe SDK validator.
 
-The implemented feature is `dng-validation-v0`; negotiate support and the requested policy before propagation. The receiver chooses its own explicitly configured local executable; a remote peer cannot supply a command path to execute. Require must fail clearly on an old/unqualified receiving peer or missing tool instead of silently transferring without validation. A non-APFS or non-SDE transfer can still satisfy validation. For merge results both receiving sides must honor their required validation policy before committing their own candidates; existing non-atomic two-replica recovery semantics still apply.
+The implemented feature is `dng-validation-v1`; negotiate support and the requested policy before propagation and recheck at receiver companion selection. Version zero advertised suffix-only selection; it cannot promise content recognition and is not an alias. Both warn and require fail clearly on an old/unqualified peer before transfer. The receiver chooses its own explicitly configured local executable; a remote peer cannot supply a command path to execute. Require rejects a missing tool. Operational candidate-inspection failures and candidate changes reject even under warn. A non-APFS or non-SDE transfer can still satisfy validation. For merge results both receiving sides must honor their validation policy before committing their own candidates; existing non-atomic two-replica recovery semantics still apply.
 
 All validator invocations use the OxCaml supervisor and shared CPU/memory/I/O budget described below. ExifTool and other helpers use the same scheduling path. A supported current Adobe SDK/tool license may constrain distribution; make this an optional locally configured dependency and review the exact SDK license before bundling code/binaries. SDK absence must not disable ordinary Unison or the exact DNG extension when validation is off.
 

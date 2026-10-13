@@ -56,9 +56,12 @@ reserved file from its own Unison configuration directory, and never takes its
 driver path, pin, build ID, thread count or timeout from the remote peer.
 The requested policy is shared; missing local driver configuration rejects
 under `require`. Validation is independent of semantic transfer
-and runs on received `.dng` files, including ordinary copies and files inside
-a received directory. `off` is the default; `warn` permits validation findings
-with a warning. Candidate mutation and cancellation reject even in warn mode.
+and runs on content-recognized DNGs and `.dng` filename claims, including
+renamed files, ordinary copies and descendants of received directories.
+`dng-validation-v1` is required for either warn or require; suffix-only older
+peers are refused before transfer. See [candidate validators](candidate-validators.md).
+`off` is the default; `warn` permits validation findings with a warning.
+Candidate inspection failures, mutation and cancellation reject even in warn mode.
 Unchanged files and rename-only moves are outside this received-file scope.
 The qualified driver currently uses one CPU thread per file; multiple files
 run concurrently under the shared budget. This invokes the SDK directly and

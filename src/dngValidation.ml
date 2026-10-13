@@ -94,6 +94,7 @@ let same_snapshot a b =
 let check_snapshot s =
   if not (sha256 s.sha256) || s.size < 0L || s.identity = "" then
     failwith "invalid inspected snapshot"
+exception Candidate_inspection_failed of string
 
 let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : tool option) ~inspect ~candidate ~expected =
   match policy with
@@ -106,16 +107,24 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
       | Require -> Rejected (message, !process)
       | Off -> assert false) in
     let validation = catch (fun () ->
+      (try
+        if Filename.is_relative candidate || String.contains candidate '\000' then
+          failwith "candidate must be an absolute NUL-free path";
+        check_snapshot expected
+       with exn -> raise (Candidate_inspection_failed (Printexc.to_string exn)));
       let tool = match tool with Some tool -> tool
         | None -> failwith "DNG validation requested but no qualified SDK driver configured" in
-      if Filename.is_relative candidate || String.contains candidate '\000' then
-        failwith "candidate must be an absolute NUL-free path";
       if not (sha256 tool.executable_sha256) || not (build_id tool.build_id) then
         failwith "invalid configured SDK driver pin/build ID";
-      check_snapshot expected;
-      inspect candidate >>= fun before ->
-      check_snapshot before;
-      if not (same_snapshot before expected) then raise Candidate_changed;
+      catch (fun () ->
+        inspect candidate >>= fun before ->
+        check_snapshot before;
+        if not (same_snapshot before expected) then raise Candidate_changed;
+        return before)
+        (function
+          | Candidate_changed as exn -> fail exn
+          | exn -> fail (Candidate_inspection_failed (Printexc.to_string exn)))
+      >>= fun before ->
       inspect tool.executable >>= fun tool_before ->
       check_snapshot tool_before;
       if tool_before.sha256 <> tool.executable_sha256 then failwith "SDK driver content pin mismatch";
@@ -154,6 +163,8 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
                        build_id = tool.build_id; report; process = child }))
       (function
         | Candidate_changed -> return (Rejected ("candidate changed before validation", !process))
+        | Candidate_inspection_failed message ->
+            return (Rejected ("candidate inspection failed: " ^ message, !process))
         | exn -> reject (Printexc.to_string exn)) in
     validation >>= fun verdict ->
     (* Warn relaxes validator findings, never the immutable-candidate fence or

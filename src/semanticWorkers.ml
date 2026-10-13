@@ -5,14 +5,18 @@ type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
 type observation = { inspection : inspection;
   meaning : (FormatExtension.observation, string) result option }
+type identification = { formats : string list; fingerprint : fingerprint option;
+                        stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
   | Observed of observation
+  | Identified of identification
   | Applied of SemanticDelta.application | Cancelled | Error of string
 type operation = Digest | Inspect of FormatExtension.handle
   | Observe of FormatExtension.handle
+  | Identify of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
              operation : operation }
@@ -72,6 +76,22 @@ let execute job =
     let result = SemanticFile.with_fd ~check_cancel job.fd (fun file ->
       match job.operation with
       | Digest -> Hashed {digest = SemanticFile.digest file; stats}
+      | Identify recognizers ->
+        let formats = List.filter_map (fun (recognizer,claimed) ->
+          check_cancel ();
+          let selected = claimed || match FormatRecognition.identify recognizer file with
+            | FormatRecognition.Not_matched -> false
+            | FormatRecognition.Recognized | FormatRecognition.Indeterminate _ -> true in
+          if selected then Some (FormatRecognition.format recognizer) else None)
+          recognizers in
+        check_cancel ();
+        SemanticFile.check file;
+        let fingerprint = match formats with
+          | [] -> None
+          | _ -> Some {digest=SemanticFile.digest file;stats} in
+        check_cancel ();
+        SemanticFile.check file;
+        Identified {formats;fingerprint;stats}
       | Inspect extension ->
         Inspected {proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
@@ -282,7 +302,7 @@ let submit t cancellation fd requested_operation =
           end) >>= function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Observed _ | Applied _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Applied _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result) in
     let admitted_execution () = match t.io with
@@ -290,7 +310,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           IoAdmission.with_devices io admission_cancel ~devices execute >>= function
           | None -> return None
@@ -329,6 +349,17 @@ let inspect t cancellation ~extension fd =
   | None -> return None
   | Some (Inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected inspection response")
+
+let identify t cancellation ~recognizers fd =
+  if List.length recognizers > FormatRecognition.max_recognizers then
+    invalid_arg "candidate recognition limit";
+  let ids = List.map (fun (handle,_) -> FormatRecognition.format handle) recognizers in
+  if List.length (List.sort_uniq String.compare ids) <> List.length ids then
+    invalid_arg "duplicate candidate recognition format";
+  submit t cancellation fd (Identify recognizers) >>= function
+  | None -> return None
+  | Some (Identified result) -> return (Some result)
+  | Some _ -> fail (Failed "unexpected identification response")
 
 let observe t cancellation ~extension fd =
   submit t cancellation fd (Observe extension) >>= function

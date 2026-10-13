@@ -1,57 +1,27 @@
 open Lwt
-let category = `Advanced `General
-let policy_pref = Prefs.createString "adobevalidate" "off" ~local:true ~category
-  "validate received DNG files (off, warn, require)"
-  "Run a qualified Adobe SDK validation driver on each received DNG before \
-   committing it. Require blocks failed or unavailable validation; warn \
-   explicitly permits it with a warning. Independent of semanticdng."
-let validator = Prefs.makeEndpointLocal (Prefs.createString "adobevalidator" "" ~local:true ~category
-  "absolute Adobe SDK validation driver path"
-  "Absolute path to the qualified structured Adobe SDK validation driver. \
-   The stock dng_validate command alone does not implement this protocol.")
-let tool_hash = Prefs.makeEndpointLocal (Prefs.createString "adobevalidatorhash" "" ~local:true ~category
-  "SHA-256 pin for the Adobe validation driver"
-  "Lowercase full executable SHA-256 for the qualified validation driver.")
-let build_id = Prefs.makeEndpointLocal (Prefs.createString "adobevalidatorbuild" "" ~local:true ~category
-  "qualified Adobe validation driver build identifier"
-  "Expected exact build identifier in the driver's structured receipt.")
-let tool_threads = Prefs.makeEndpointLocal (Prefs.createInt "adobevalidatorthreads" 1 ~local:true ~category
-  "CPU threads reserved for each Adobe SDK driver"
-  "Thread count passed to the qualified SDK driver and reserved from the \
-   shared CPU budget. It must describe actual driver parallelism.")
-let timeout = Prefs.makeEndpointLocal (Prefs.createInt "adobevalidatetimeout" 300 ~local:true ~category
-  "maximum seconds for each Adobe SDK validation"
-  "Execution timeout after CPU admission. A timed-out driver is terminated \
-   and reaped before require rejects the candidate.")
-let policy () = match Prefs.read policy_pref with
-  | "off" -> DngValidation.Off | "warn" -> DngValidation.Warn
-  | "require" -> DngValidation.Require
-  | _ -> raise (Util.Fatal "adobevalidate must be off, warn, or require")
-let enabled () = policy () <> DngValidation.Off
-let _feature = Features.register "dng-validation-v0" (Some (fun _ enabled ->
-  if policy () <> DngValidation.Off && not enabled then
-    Some "Requested Adobe validation requires dng-validation-v0 support on both replicas"
-  else None))
-let snapshot pool cancellation path =
+let enabled () = match CandidateValidators.selected () with [] -> false | _ -> true
+let with_descriptor path operation =
   let owned = ref true in
   let close fd = if !owned then begin owned := false;
     try Unix.close fd with Unix.Unix_error _ -> () end in
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  try Lwt.try_bind (fun () -> SemanticWorkers.digest pool cancellation fd)
+  try Lwt.try_bind (fun () -> operation fd)
     (fun result -> close fd;
-      let result = match result with None -> raise (Util.Transient "Validation hashing cancelled")
-        | Some result -> result in
-      let sha256 = SemanticHash.hex result.SemanticWorkers.digest in
-      let st = result.SemanticWorkers.stats in
-      return { DngValidation.sha256; size = st.Unix.LargeFile.st_size;
-        identity = Printf.sprintf "%d:%d:%Ld:%.17g:%.17g:%d:%d"
-          st.Unix.LargeFile.st_dev st.Unix.LargeFile.st_ino st.Unix.LargeFile.st_size
-          st.Unix.LargeFile.st_mtime st.Unix.LargeFile.st_ctime
-          st.Unix.LargeFile.st_perm st.Unix.LargeFile.st_nlink })
+      return result)
     (fun e -> close fd; fail e)
   with e -> close fd; raise e
-let is_dng path =
-  Filename.check_suffix (String.lowercase_ascii (Path.toString path)) ".dng"
+let snapshot_of_fingerprint (result:SemanticWorkers.fingerprint) =
+  let sha256 = SemanticHash.hex result.SemanticWorkers.digest in
+  let st = result.SemanticWorkers.stats in
+  { CandidateValidator.sha256; size = st.Unix.LargeFile.st_size;
+    identity = Printf.sprintf "%d:%d:%Ld:%.17g:%.17g:%d:%d"
+      st.Unix.LargeFile.st_dev st.Unix.LargeFile.st_ino st.Unix.LargeFile.st_size
+      st.Unix.LargeFile.st_mtime st.Unix.LargeFile.st_ctime
+      st.Unix.LargeFile.st_perm st.Unix.LargeFile.st_nlink }
+let snapshot pool cancellation path =
+  with_descriptor path (SemanticWorkers.digest pool cancellation) >>= function
+  | None -> fail (Util.Transient "Validation hashing cancelled")
+  | Some result -> return (snapshot_of_fingerprint result)
 type tree_entry = {
   path : Path.local;
   stats : Unix.LargeFile.stats;
@@ -107,44 +77,46 @@ let verify_tree before after =
     | _ -> false in
   if not (same before after) then
     raise (Util.Transient "Validation candidate tree changed during validation")
-let validate_file ~reservation ~selected path =
+let validate_file ~reservation ~validators ~destination path =
   Abort.checkAll ();
   let runtime = SemanticRuntime.get () in
   let supervisor = runtime.SemanticRuntime.supervisor
   and budget = runtime.SemanticRuntime.cpu_budget
   and pool = runtime.SemanticRuntime.pool in
-  let weight = Prefs.read tool_threads in
-  if weight < 1 || weight > budget then
-    raise (Util.Fatal "adobevalidatorthreads must be between one and the CPU budget");
-  if Prefs.read timeout <= 0 then raise (Util.Fatal "adobevalidatetimeout must be positive");
-  let tool = if Prefs.read validator = "" then None else Some {
-    DngValidation.executable = Prefs.read validator;
-    executable_sha256 = Prefs.read tool_hash; build_id = Prefs.read build_id;
-    arguments = [||]; environment = [|"LANG=C";"LC_ALL=C";"PATH=/usr/bin:/bin"|];
-    cpu_weight = weight;
-    limits = {HelperSupervisor.timeout = float_of_int (Prefs.read timeout);
-      terminate_grace = 2.; stdout_bytes = 16384; stderr_bytes = 262144} } in
   let candidate = Fspath.toString path in
+  let recognizers = List.map (fun (validator:CandidateValidator.selected) ->
+    validator.recognition,
+    FormatRecognition.matches_filename validator.recognition destination) validators in
   SemanticRuntime.with_cancellation (fun cancellation ->
     SemanticRuntime.with_admission ?reservation cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
-    let inspect path = snapshot pool cancellation path in
-    inspect candidate >>= fun expected ->
-    DngValidation.validate_with_execution
-      ~execute:(SemanticRuntime.with_io_file cancellation candidate)
-      supervisor cancellation ~policy:selected ~tool
-      ~inspect ~candidate ~expected))
-  >>= fun result ->
-  Abort.checkAll ();
-  match result with
-  | DngValidation.Skipped | DngValidation.Passed _ -> return ()
-  | DngValidation.Warning (reason,_) ->
-      Trace.log (Printf.sprintf "Adobe DNG validation warning for %s: %s\n" candidate reason);
-      return ()
-  | DngValidation.Rejected (reason,_) ->
-      fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %s: %s" candidate reason))
+      (* Recognition and the initial full digest use the same held input. Close
+         that owner before helper execution; every phase retains this one loan. *)
+      with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)
+      >>= function
+      | None -> fail (Util.Transient "Validation recognition cancelled")
+      | Some {SemanticWorkers.formats=[];fingerprint=None;_} -> return ()
+      | Some {SemanticWorkers.formats;fingerprint=Some fingerprint;_} when formats <> [] ->
+          let selected = List.filter (fun (validator:CandidateValidator.selected) ->
+            List.mem (FormatRecognition.format validator.recognition) formats) validators in
+          if List.length selected <> List.length formats then
+            fail (Util.Transient "Unexpected validation recognition selection")
+          else
+          let context = {
+            CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;
+            expected=snapshot_of_fingerprint fingerprint;
+            inspect=snapshot pool cancellation;
+            execute=SemanticRuntime.with_io_file cancellation candidate;
+          } in
+          let rec invoke = function
+            | [] -> Abort.checkAll (); return ()
+            | (validator:CandidateValidator.selected)::rest ->
+                Abort.checkAll ();
+                validator.validate context >>= fun () -> invoke rest in
+          invoke selected
+      | Some _ -> fail (Util.Transient "Inconsistent validation recognition fingerprint")))
 let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =
-  let selected = policy () in
-  if selected = DngValidation.Off then return () else
+  let validators = CandidateValidators.selected () in
+  if validators = [] then return () else
   let before = Util.convertUnixErrorsToTransient "recording validation candidate tree"
     (fun () -> tree_snapshot directory candidate) in
   (* A staged directory is committed as a unit. A fixed number of owner-loop
@@ -152,8 +124,8 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
      budget. Await every active consumer on failure before allowing cleanup. *)
   let remaining = ref (List.filter_map (fun entry ->
     let destination = if entry.path = candidate then destination else entry.path in
-    if entry.stats.Unix.LargeFile.st_kind = Unix.S_REG && is_dng destination then
-      Some (Fspath.concat directory entry.path)
+    if entry.stats.Unix.LargeFile.st_kind = Unix.S_REG then
+      Some (Fspath.concat directory entry.path,Path.toString destination)
     else None) before) and failure = ref None in
   let next () = match !remaining with
     | [] -> None
@@ -162,7 +134,7 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
     if !failure <> None then return () else
     Lwt.catch (fun () -> match next () with
       | None -> return ()
-      | Some path -> validate_file ~reservation ~selected path >>= consume)
+      | Some (path,destination) -> validate_file ~reservation ~validators ~destination path >>= consume)
       (fun error -> if !failure = None then failure := Some error; return ()) in
   (* A retained publication envelope loans one workspace at a time. Legacy
      directory handoff uses the same serial loan rather than nested admission. *)

@@ -26,7 +26,7 @@ Add this registration alongside the built-in DNG registration in
 `semanticFormats.ml`, and include the new source module in the build. Enable
 it with `semanticprofile = <versioned profile ID>`. No transfer or worker
 dispatch changes are needed. `semanticdng = true` remains a shorthand for
-the DNG profile. An unavailable peer capability uses ordinary transfer.
+both built-in DNG profiles. An unavailable peer capability uses ordinary transfer.
 
 The optional `max_payload` declaration bounds total editable bytes per proof.
 It defaults to the 16 MiB core ceiling; DNG declares 1 MiB. The core rejects a
@@ -63,8 +63,18 @@ compiled module, including compatibility wrappers; it does not prove that the
 module follows this contract. Review each extension and its dependencies for
 domain safety and conservative classification before registering it.
 
-The production format is currently the conservative DNG XMP profile. Worker
+The production profiles are the conservative DNG XMP v0/v1 profiles. Worker
 tests register a second synthetic format and run it through the same generic
 inspection, planning, and application path, including a mismatched-profile
 no-write test. That fixture establishes generic dispatch; it does not provide
 a JPEG implementation or validate additional real formats.
+
+Receiving validation is a separate companion interface, not an inspector
+eligibility result. Register `CandidateValidator.S` modules in
+`CandidateValidators` during startup; core supplies the finalized candidate,
+stable snapshot and shared worker/helper scheduling context. A pure
+`FormatRecognition.S` handle recognizes content or records uncertainty, while
+selection and validation execute on the owner. One DNG companion covers both
+transfer profiles, including semantic-ineligible fallback and renamed DNGs.
+See [candidate validators](candidate-validators.md) for the contract and
+`dng-validation-v1` compatibility boundary.

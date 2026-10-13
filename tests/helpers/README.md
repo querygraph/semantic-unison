@@ -51,6 +51,13 @@ valid or missing, and zero errors. Tool and candidate are inspected before and
 after invocation. Local tool configuration and deployment must be trusted;
 content pins do not sandbox the executable or eliminate hostile path races.
 
+Candidate pre-inspection failures, invalid expected snapshots and candidate
+identity/content changes always reject, including under warn. Tool availability
+and validation findings retain the explicit warn/require policy distinction.
+The current companion checkpoint adds four focused pre-inspection controls;
+its [actual receiving fault suite](../validation_inspection_fault/README.md)
+qualifies local/remote rejection before any helper invocation.
+
 Scheduling uses one owner-loop budget shared by child processes and future
 domain jobs. A driver's CPU weight includes all its native threads. Qualified
 single-thread SDK drivers can run one per available CPU permit; multithreaded

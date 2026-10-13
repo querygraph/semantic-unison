@@ -68,7 +68,8 @@ val validate :
     or any SDK error count (including exit-zero errors). Missing optional raw
     digest tags are reported separately and are not themselves corruption.
     Warn returns validation findings as warnings; the caller decides presentation.
-    Candidate/tool mutation, a failed post-inspection, and cancellation always
+    Candidate input/pre-inspection errors, candidate/tool mutation, a failed
+    post-inspection, and cancellation always
     reject, even under Warn. The caller must still fence changes at commit.
     Receipts are tied to this exact candidate and qualified tool, never merely
     to a DNG semantic fingerprint. No cache is maintained by this module. *)
