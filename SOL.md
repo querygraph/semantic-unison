@@ -4,6 +4,29 @@
 
 ## Live implementation handoff
 
+* Latest Photo coordination (2026-10-13): the owning session completed a private
+  read-only Lux Main/native-cache alignment at 21:29:43 UTC: 905,928 images,
+  895,491 distinct current still keys, and cache snapshots containing 1,453
+  Pyramids, 4,299 levels and 1,451 image mappings. Its 1,338 registered-current
+  identity candidates, 146,540 legacy current-header keys, 8,726 modern
+  metadata-gap keys and 987 held headers are classification evidence, not
+  qualified native recognition or monitor coverage. See
+  [the alignment receipt](../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
+  and [registration contract](../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json).
+  The owner reports four-worker Ten metadata revalidation in progress and
+  1,092 newly discovered native keys absent from the historical inventory;
+  final revalidation and bounded held-header diagnostics remain pending.
+  Registration gaps, alias-only gaps, conflicts, stale edits and build gaps
+  stay separate; retained-byte reuse does not require a new-renderer benchmark
+  or Quasar split qualification to classify and stage it. The older 761,466-key
+  capacity model is not a forecast for this new current-key census.
+  No live Main/cache writes, Adobe invocations, payload hashes or copies were
+  performed in the alignment receipt. Desktop remains unavailable and the
+  native registration/oracle window unreleased. Original Photo renderer and
+  publisher ownership persists; no competing publisher or full run begins.
+  Cleanup review protects the exact-version Atlas/Bumer archives formerly
+  under delete; preserve them in placement/migration manifests and budgets.
+
 * Extended DNG continuation (2026-10-13): separately negotiated
   `org.firstpair.dng-xmp/1` / `dng-xmp-v1` adds BigTIFF and bounded embedded
   CR camera-profile graphs in both byte orders. Each CR blob keeps its own

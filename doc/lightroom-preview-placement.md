@@ -53,6 +53,29 @@ under the shared eighteen-credit ceiling. Source preparation does not qualify
 private Adobe initialization/rendering signatures, a generator, pixels,
 registration or publication. Current inputs must be recaptured after repairs.
 
+The latest [private mass alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
+at 21:29:43 UTC records 905,928 images / 895,491 distinct current still keys,
+with 1,338 registered-identity candidates, 146,540 legacy current-header keys,
+8,726 modern metadata-gap keys and 987 held headers. These are candidate
+classes, not native current decode, durable registration or monitor adequacy.
+The owner reports four-worker Ten metadata revalidation still running and
+1,092 newly discovered native keys outside the historical inventory. Keep that
+pending update separate from completed snapshot counts. No competing publisher
+or native invocation is introduced; the desktop remains unavailable and the
+registration/oracle window unreleased.
+
+The [registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
+separates retained-byte reuse, alias-only mapping gaps, absent registration,
+partial/conflicting rows, missing payload levels, stale edits and render gaps.
+Classification and staging of existing Ten bytes need neither a new-renderer
+benchmark nor qualified Quasar split behavior; publication and native recognition
+retain their own gates. Preserve each alias orientation, stale fallback and
+before-image. Do not replay an absent-metadata touch over existing levels to
+repair a mapping, or relabel old-edit bytes with a current digest.
+The earlier 761,466-key capacity model must be reconciled with these classes
+and actual required levels before a new Quasar forecast. Protected exact-version
+Atlas/Bumer archives remain retained objects in placement and migration budgets.
+
 ## Requested arrangement and observed storage
 
 Keep the existing regular-cache namespace, lower pyramid levels and native

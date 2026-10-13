@@ -93,7 +93,57 @@ mount-loss fallback is not runtime-qualified. Treat Quasar as required for those
 registered pyramids until the root qualifies native absent-target behavior.
 Physical separability does not promise independent native loading.
 
-## Current Photo repair and finite source packet
+## Current mass alignment and registration gaps
+
+The Photo owner completed a private read-only current Main/native-cache
+[alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
+at 2026-10-13 21:29:43 UTC. The snapshot contains 905,928 images and 895,491
+distinct current still UUID/digest keys. Native cache tables contain 1,453
+Pyramid rows, 4,299 PyramidLevel rows and 1,451 ImageCacheEntry rows.
+Classification counts are distinct keys unless stated otherwise:
+
+| Snapshot classification | Keys | Interpretation |
+| --- | ---: | --- |
+| Registered current identity candidate | 1,338 | Rows/association candidates; decode, freshness and monitor adequacy remain separate |
+| Legacy current-header alignment candidate | 146,540 | Header-current reuse candidates, not qualified registration |
+| Modern metadata-gap candidate | 8,726 | Current filename candidates needing payload/header and exact metadata-gap qualification |
+| Current header held | 987 | Preserve failed/opaque-header cases for bounded reason-specific diagnostics |
+| Other digest only | 485,222 | Retain old-edit/fallback evidence; never relabel it current |
+| No retained UUID files | 252,678 | Standalone build candidates; root-thumbnail availability is a separate state |
+| Video poster digest unqualified | 10,067 | Excluded from the current still-key total |
+
+The owner reports full Ten metadata revalidation underway with four workers,
+including 1,092 new native keys absent from the historical inventory. That
+report is in-flight work, not a completed replacement inventory. The alignment
+receipt records zero live Main/cache writes, native requests, payload hashes,
+payload copies or media-payload bytes read. This Unison update reads the two
+receipt/contract files only; it does not repeat their database or volume work.
+The desktop remains unavailable and the external finite native window remains
+unreleased. The original Photo renderer/publisher retains responsibility.
+
+Adopt the [eligibility/registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
+as a planning distinction. Keep current rows with correct associations,
+alias-only mapping gaps, wholly absent metadata, partial/conflicting metadata,
+missing payload levels, held headers, stale digests and new-build requirements
+separate. Preserve before-images for every alias and native fallback.
+The prepared one-control native touch is limited to wholly absent metadata;
+an alias-only gap needs separately qualified narrow mapping behavior. A native
+quality change can delete levels, so replaying the touch over existing rows
+is not a generic repair. Unknown/zero sizes remain unqualified.
+
+Retained-byte Ten reuse can be classified and staged without a standalone
+renderer fidelity benchmark or the Quasar split lifecycle. Native registration
+still needs the coordinated one-control callback, native heartbeat durability,
+exact readback/current decode, independent preserved bytes and restart proof.
+An independent offline publisher additionally needs native reopen/load of a
+private cache produced by that writer. Same-connection rows and root pixels
+do not prove committed registration or monitor coverage.
+
+The cleanup owner now protects exact-version Atlas/Bumer archives previously
+listed under delete. Include them as retained objects in placement/migration
+manifests and capacity accounting; no bulk deletion is part of this planning.
+
+## Earlier Photo repair and finite source packet
 
 The [Photo-root repair receipt](../../photo/catalog-repair-progress-20261013.json)
 at 2026-10-13 15:47:03 UTC reports Lux reopened in stable Classic PID 2844,
@@ -317,6 +367,11 @@ topology or clone receipt may be inherited solely from its reused mount name.
 | --- | ---: | ---: | --- |
 | Capture since August 2024 gap, 134,582 keys | 1.837200 TB | 0.828267 TB | Within both current planning budgets |
 | Full backlog, 761,466 keys | 9.100375 TB | 4.410985 TB | Quasar allowance exceeds budget by 1.900314 TB |
+
+These cohort counts and byte estimates are the earlier sampled capacity model.
+The later 895,491-key current still census is not itself a rendition backlog;
+reconcile current reuse, registration, build and level/geometry cohorts before
+updating a Quasar forecast. Do not rescale this table by total key count alone.
 
 Full-backlog Quasar mean 4.009232 TB and summed per-photo P95 6.006848 TB fit
 the new budget. The conservative envelope plus staging does not. Estimates

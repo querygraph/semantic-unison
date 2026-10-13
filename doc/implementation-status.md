@@ -113,7 +113,24 @@ Make/Dune builds and 303 matching Dune production inputs; its ordinary/local/
 remote evidence remains historical to that source.
 
 
-Latest Photo-root coordination at 15:47:03 UTC reports stable Classic PID 2844
+Latest Photo-root coordination includes a private read-only full current
+[alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
+at 21:29:43 UTC: 905,928 images / 895,491 distinct current still keys; 1,453
+Pyramid, 4,299 level and 1,451 mapping rows. The 1,338 registered identity
+candidates, 146,540 legacy current-header keys, 8,726 modern metadata-gap keys
+and 987 held headers are not native recognition or monitor coverage. The owner
+reports four-worker Ten metadata revalidation ongoing, with 1,092 newly found
+native keys outside the historical inventory. The
+[eligibility/registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
+keeps reuse, mapping/registration gaps, conflicts, stale edits and builds
+separate. This receipt records zero live Main/cache writes, Adobe/native
+requests, payload hashes or copies; no competing renderer/publisher starts.
+Desktop remains unavailable and the native window unreleased. Exact-version
+Atlas/Bumer archives formerly under delete are now protected retained data for
+placement/migration planning. Older monitor capacity estimates require cohort
+reconciliation rather than extrapolation from the new total key count.
+
+Earlier Photo-root coordination at 15:47:03 UTC reports stable Classic PID 2844
 with Lux reopened and desktop locked at 15:29:55 UTC / 08:29:55 PDT. Receiver
 generation-2 acceptance and Accessibility persist; old PID10536/start/Main-FD /
 startup/transport bindings are historical. Date1540 filesystem repair is

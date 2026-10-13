@@ -161,6 +161,16 @@ supports cloning; its separate native lifecycle gates remain.
 
 ### 3. Inventory all Ten data and plan a reversible evacuation
 
+The Photo cleanup owner now protects exact-version Atlas/Bumer archives that
+were formerly listed under delete. Treat them as retained source objects,
+including their exact versions, in the manifest and destination budget. A
+historical delete/quarantine label is not permission to bulk-delete them.
+The newer [preview alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
+is metadata classification; it is not a complete evacuation manifest, verified
+payload copy or free-space credit. Its 895,491 current still keys are not an
+updated monitor-generation backlog. Reconcile actual reuse/build/level cohorts
+before revising the older Quasar forecast.
+
 Produce an exhaustive source manifest with root-relative names and object
 types, byte lengths, exact content hashes, forks/attributes, ACLs, flags,
 required times, hard-link groups and symlink text. Do not follow arbitrary
