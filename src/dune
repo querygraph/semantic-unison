@@ -15,18 +15,28 @@
         -no-strict-sequence)
  (foreign_stubs
   (language c)
-  (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs))
+  (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs fileObservation_stubs stagePublication_stubs helperSupervisor_stubs semanticHash_stubs))
  (c_library_flags -lutil)
  (libraries compat str unix lwt_lib bigarray))
 
 (include_subdirs unqualified)
+
+; Test registers Uicommon.testFunction during initialization. Force only this
+; archive into the CLI; global -linkall would also link Windows-only modules.
+(library
+ (name unison_selftest)
+ (wrapped false)
+ (modules test)
+ (flags :standard -w -27-32)
+ (library_flags -linkall)
+ (libraries unison_lib))
 
 (executable
  (name linktext)
  (public_name unison)
  (package unison) ; Dummy: we don't use packages
  (modules linktext)
- (libraries unison_lib))
+ (libraries unison_lib unison_selftest))
 
 (executable
  (name linkgtk3)

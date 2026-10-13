@@ -1,0 +1,25 @@
+(** Owner-loop admission for retained semantic resources, separate from CPU
+    permits. Payload credits estimate retained proof/encoding buffers; they
+    are not a process RSS cap. Descriptor credits cover owned/worker duplicates,
+    not unrelated legacy transfers or an external helper's descriptors. *)
+type t
+type role = Source | Consumer
+type cost = { payload_bytes : int; descriptors : int }
+type usage = {
+  transactions : int; pending : int; payload_bytes : int; descriptors : int;
+  peak_transactions : int; peak_payload_bytes : int; peak_descriptors : int;
+}
+exception Failed of string
+val create : source_headroom:cost option -> max_transactions:int -> max_payload_bytes:int ->
+  max_descriptors:int -> max_pending:int -> t
+val usage : t -> usage
+val with_lease : t -> HelperSupervisor.cancellation -> role:role -> cost:cost ->
+  (unit -> 'a Lwt.t) -> 'a option Lwt.t
+(** FIFO within each role, with a bounded combined pending queue. Consumers
+    leave one transaction and [source_headroom] credits available to a source.
+    Sources have admission priority so peer-dependent consumers cannot block
+    the source needed for bidirectional progress. None means cancellation before [f]
+    starts. Queued cancellation removes the ticket synchronously. An admitted
+    lease stays reserved until [f] settles, including failure and cancellation;
+    [f] must stop/settle every operation borrowing its resources. Never nest
+    leases from the same gate. All calls belong to the legacy owner loop. *)

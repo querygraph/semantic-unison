@@ -72,6 +72,46 @@ let clone_path f1 f2 = System.clone_path (path f1) (path f2)
 let clone_file = System.clone_file
 let copy_file = System.copy_file
 
+type clone_stage_decline =
+  | Platform_unavailable
+  | Non_regular_source
+  | Source_flags
+  | Cross_device
+  | Operation_unsupported
+
+type clone_stage_result =
+  | Shared_stage of (Unix.file_descr * Unix.file_descr)
+  | Declined_stage of clone_stage_decline
+
+external clone_stage_status_raw : string -> string -> clone_stage_result =
+  "unison_clone_stage_status"
+
+let clone_stage_status source destination =
+  clone_stage_status_raw (path source) (path destination)
+
+type clone_stage_handles_result =
+  | Shared_stage_handles of (Unix.file_descr * Unix.file_descr * Unix.file_descr)
+  | Declined_stage_handles of clone_stage_decline
+
+external clone_stage_handles_raw : string -> string -> clone_stage_handles_result =
+  "unison_clone_stage_handles"
+
+let clone_stage_handles source destination =
+  clone_stage_handles_raw (path source) (path destination)
+
+let clone_stage_decline_reason = function
+  | Platform_unavailable -> "clone-stage API unavailable on this platform"
+  | Non_regular_source -> "clone-stage basis is not a regular file"
+  | Source_flags -> "clone-stage source flags require ordinary copying"
+  | Cross_device -> "clone-stage source and destination are on different devices"
+  | Operation_unsupported -> "clone-stage operation unsupported for this file pair"
+
+external clone_stage_raw : string -> string ->
+  (Unix.file_descr * Unix.file_descr) option = "unison_clone_stage"
+
+let clone_stage source destination =
+  clone_stage_raw (path source) (path destination)
+
 (****)
 
 exception XattrNotSupported = System.XattrNotSupported

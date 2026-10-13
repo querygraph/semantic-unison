@@ -26,7 +26,7 @@ let allNames = ref []
 
 let all () = !allNames
 
-let mem = List.mem
+let mem name names = List.mem name names
 
 let empty = []
 

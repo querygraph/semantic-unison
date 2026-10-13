@@ -18,7 +18,7 @@ install: [
   ["cmd" "/c" "copy" "src\\unison*.exe" "%{prefix}%\\bin"] {os = "win32"}
 ]
 depends: [
-  "ocaml" {>= "4.08"}
+  "ocaml" {>= "5.0"}
 ]
 depopts: [
   "host-system-msvc" (* To silence the linter: needed for host-system-msvc:installed *)

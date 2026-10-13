@@ -1,0 +1,688 @@
+# Sol implementation handoff: clone-aware Unison, DNG semantics, and OxCaml
+
+**Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
+
+## Live implementation handoff
+
+* Working branch: `feat/semantic-dng-oxcaml`, based on upstream `8772d26a2eb77cfd0cb6da81807e81f24f51044c`. Original local `master` at `375ea3ad` is preserved. Changes remain uncommitted and undeployed. No production photographs were changed.
+* Current goal tracker: `active`, verified again during the user's status
+  request on 2026-10-13. The user resumed the goal after the earlier unexplained
+  `blocked` observation at 12:32:21 UTC; root and the participating agents had
+  reported no goal-state mutation. Implementation continues with the final
+  live-file binding slice below. The external preview oracle window remains
+  unreleased independently of this goal's active state.
+* Implemented: stock/OxCaml compatibility fixes; general APFS private basis/staging clones and same-offset receiver write skipping; bounded DNG parser and complete SHA-256 preservation proof; experimental SDE/0/SDR/0 codecs; negotiated remote and local semantic transfer with ordinary fallback; typed domain workers sharing a CPU budget with external helpers; optional precommit Adobe validation. This is a working first implementation, not completion of all milestones below.
+* Ownership at the switch: the Astra agents completed the pure extension/workers, APFS/local/remote integration, and helper/Adobe driver work. Root continues integration and documentation under Sol. Sol completed the cached-hash comparison, endpoint-local validator settings, production resource admission, physical-core automatic worker budget and resource-boundary review, including fixes/regressions for connection teardown.
+* Native standard OCaml 5.5.1 and OxCaml 5.2.0+ox builds/selftests pass. A stock→Ox→stock archive smoke test passed. Use `python3 tests/build_snapshot.py --compiler-prefix /absolute/compiler/bin --selftest` to build current uncommitted source in isolation; shared-tree ignored artifacts are not evidence. See `doc/oxcaml.md` for compiler constraints.
+* Semantic kernel suites pass both compilers: hashlib differential SHA vectors, TIFF byte orders, exact materialization, stale/same-inode rejection, opaque trailers, alias/cycle/duplicate/unknown/private structures, request binding, truncation/corruption and 2,000 randomized inputs. Parser eligibility is intentionally narrow; unsupported files use ordinary transfer.
+* APFS native descriptor/property suites and remote rsync suites pass, covering shifted matches, shrink/grow, hardlinks, clone policies, interruption/retry, xattrs/resource forks/ACL clearing, and read-only source descriptors. ACL removal and staging chmod now operate on a held descriptor. A same-UID hostile namespace is not a sandboxed threat model. See `tests/CLONE.md`.
+* Direct local tests exercise the cross-volume producer without mounting a volume. Production local copying now prefers a direct source clone and otherwise uses asynchronous source/basis proof and materialization jobs. Its 32 MiB fixture checks concurrent proofs, owner-loop responsiveness, exact output and cancellation/error cleanup. This does not establish a measured real cross-volume speedup.
+* Remote SDE works in both directions; opaque/layout changes and unmodified v2.53.5 peers fall back. `semanticPlanV0` has per-command request/reply limits before body allocation and bounded fields. Retained proof plus fresh nonce binds responses. Shared legacy RPC headers remain outside those limits. Normative current wire format: `doc/semantic-delta-v0.md`.
+* Typed workers passed 36-domain/72-hash and proof/materialization tests on both compilers, including shared permits, cancellation, mutation and descriptor lifetime. `SemanticRuntime` owns the singleton per-process budget. Legacy Lwt/RPC/archive state stays on its owner. The Domain.spawn boundary is manually audited and retains OxCaml safety alerts; it is not compiler-proved portable. This branch requires OCaml 5/OxCaml, and all-core correctness tests are not throughput claims.
+* `Files.renameLocal` validates private receiving candidates before destination checks, rename and archive changes. A newly received directory uses bounded parallel consumers under the same CPU budget. Validation covers `.dng` files independently of semantic eligibility. Finalized data/resource forks are checked against the expected archive where available. Rename-only moves and unchanged/property-only files are outside received-content validation; no validator is given a live moved inode.
+* Helper/validation suites pass 32 synthetic cases on both compilers. Connection teardown now synchronously kills/reaps helpers without another owner-loop tick; worker cancellation reaches its Atomic flag immediately. Cleanup resources use stable physical identity, avoiding mutable structural hash keys. The actual Adobe SDK 1.7.1 build 2724 driver passes 14 controls, including lossless JPEG and JPEG XL DNG decoding, old/new/both/missing raw digests, malformed XMP and corruption failures that return exit zero. See `tools/adobe-validator/README.md`. The pinned local build is `/private/tmp/unison-adobe-driver-build`; read its manifest for the pin. SDK source is external and no Lightroom UI parity is claimed. The initial driver reserves one CPU thread per file; audited JXL total-thread semantics also give one. Multiple files share the available core budget.
+* Pre-Sol-fix combined native snapshots pass builds/selftests: OxCaml `unison-build-excxxg1_` and stock `unison-build-7pouvz0t` under the host temporary directory. Actual Adobe receive-gate tests pass on that Ox binary: new file, remote XMP patch, four corruption rejections retaining the destination, recovery, and a 36-file directory. Command: `python3 tests/test_adobe_sync.py --unison /absolute/build/src/unison --sdk-build /private/tmp/unison-adobe-driver-build`. Stock and Ox synthetic precommit suites pass; that Ox snapshot also covers cleanup failure and quarantine. Full clone/local/remote/old-peer/framing/generic-format suites passed the preceding `unison-build-njghu6yj`. The newer endpoint/admission changes require combined requalification. See `tests/README.md` for commands.
+* Generic production dispatch is complete: `SemanticFormats.register` selects trusted immutable handles by `semanticprofile` and negotiated capability; the DNG shorthand remains. A registration-only second synthetic format passes local and both remote directions. No format-specific branch is needed in the worker/transfer machinery. `tools/semantic-inspect` provides read-only JSON classification, extents, hashes, payload size and fallback reasons; tests pass both compilers.
+* Validation now snapshots the entire private candidate tree before any helper and checks it after all helpers settle, including hidden/temp names, types, symlink targets, stat identity and configured properties/resource forks. Mutation rejects under require and warn. Rejected staging is moved to a fresh quarantine name before deletion, so failed cleanup cannot poison normal resume. Tests cover hidden injection, late sibling chmod, symlink replacement, old live destination preservation, slow-helper settlement, and an immutable injected child surviving quarantine while a clean retry succeeds. This is an integrity fence for trusted local helpers, not a hostile same-UID sandbox or atomic filesystem transaction.
+* Dune 3.22.2 text builds/selftests also pass stock and Ox. Fixed a pre-existing Dune omission by linking only the selftest initializer archive into the text executable; GUI configuration is unchanged and unbuilt. `src/.depend` has been regenerated. Practical usage is in `doc/semantic-sync.md`.
+* Endpoint-local validation configuration is implemented: `Prefs.makeEndpointLocal` omits outgoing settings and ignores incoming values before decoding, including aliases. Each endpoint loads optional `endpoint.prf`; only validator executable, pin, build ID, thread count and timeout are allowed there. Sync policy remains transmitted. Stock `unison-build-t2dsic9a` and Ox `unison-build-gi6oltc3` pass builds/selftests and new preference/configuration regressions, including distinct tools on the two hosts, malformed/legacy incoming settings, reverse direction, missing/pin-mismatch rejection and old-peer feature rejection. Existing stock validation tests also pass. The real SDK integration test now gives the receiver its own configuration directory.
+* Admission is implemented: three fixed two-transaction regions became one owner-loop resource gate, separate from CPU permits. Profile payload declarations (DNG 1 MiB) are enforced before packet copying; estimated payload/descriptor credits are reserved before opening/cloning. Source leases cover RPC response marshaling and output consumption. Consumers leave one worst-profile source reservation available for bidirectional progress; per-request response allocation uses the selected profile bound. All 11 deterministic admission tests pass stock/Ox, including cancellation reentrancy and source headroom. Eight local candidates exceed the old proof-concurrency limit; 24 independent remote SDE transfers split between both directions pass under both 26 MiB/24-FD and 17 MiB/16-FD budgets, with exact results and clean retries. Mixed actual domains/weighted helpers share their CPU budget correctly.
+* Resource review found and fixed connection-lifetime leaks: queued replies and outstanding RPC consumers now fail on teardown, and output failure never appends a second reply. Generic Lwt closes detach and settle registered I/O before descriptor reuse, and write-readiness completion removes the correct queue entry. Ten isolated close/reuse tests pass both compilers; the original implementation fails the first regression. RPC tests use actual blocked pipes and queued replies, check released scopes and dynamic allocation bounds, and pass both compilers. Socket-server cleanup drains replies waiting for a half-duplex token and sweeps resources even if a close continuation raises. The persistent-server regression passes stock/Ox: withhold the write token until two 1 MiB source replies hold all 17 MiB/16-FD capacity and a third waits, disconnect, reconnect to the same server PID, then complete three exact replies with zero remaining credits. Removing only the server output-stop call reproduces the retained-credit leak in a private negative-control build.
+* Previous combined Make checkpoint: stock `unison-build-tvjy_dzv` and Ox `unison-build-mv26_zvm` pass native builds/selftests. Ox is refreshed through the final socket-server cleanup fix and passes local/eight-candidate, generic-format, remote/bidirectional/old-peer, general APFS clone, RPC scopes/limits, endpoint preferences, distinct validator configuration, synthetic validation/tree/quarantine, and actual Adobe SDK receive-gate suites. The actual SDK test covers new files, XMP patches, four corruption rejections preserving the destination, recovery and 36 received files. Stock covers admission/kernel/workers/mixed helpers, local/multicandidate, bidirectional remote, helper validation and RPC scopes. The corresponding Dune 3.22.2 builds/selftests pass both compilers; logs and exact source manifest are in host-temp `unison-dune-final-spg_sa2g`. The persistent-server regression also passes both compilers, with a negative control reproducing the fixed leak. Current-source qualification after reporting and sparse writes is recorded below.
+* Cached SHA benchmark artifacts are in `bench/semantic/`: stock/Ox throughput at 36 workers was 5694.2/5679.3 MiB/s, about 15.8× the one-worker result, with no demonstrated OxCaml-specific gain. A separate 18-versus-36 comparison measured 4709.8/4617.5 MiB/s at 18 and 5175.9/5103.4 at 36 (about 10% higher). Both runs used one cached 64 MiB synthetic file, 72 jobs per batch, one warmup and five measured repetitions. Results vary with ordinary host activity; CPU/wall counts logical CPU equivalents, not physical cores. This is neither a sync/APFS nor an Adobe throughput benchmark. After the user highlighted 18 physical/36 logical CPUs, automatic macOS sizing now selects physical cores (18 here), with explicit `semanticworkers = 36` available. Runtime debug output reports detected counts and effective limits. The separately measured Adobe validation-core comparison is recorded below.
+* Next work: bind final live publication to the logical root, followed target and finalized candidate, then address per-volume/resource constraints in `doc/implementation-status.md`. Intermediate ordinary receiver stage-to-temp publication is implemented and qualified below. Native held-object observation and borrowed leases are implemented and independently tested. Nonblocking-open and typed range-copy hardening are qualified earlier in this handoff. The concrete filesystem plan is `doc/filesystem-capabilities-plan.md`. Preserve passing semantic-report, sparse-write, endpoint/admission/teardown regressions. Other remaining work includes broader DNG coverage, independent diff-standard vectors, optional semantic conflict reconciliation, production transfer/crash measurements, platform/GUI qualification and the remaining acceptance matrix. JPEG is a planned second profile, not implemented support.
+* New user requirement, 2026-10-13: support separable Lightroom preview placement in the architecture. Monitor-target renditions for the 5120×2880 display belong on Quasar; other sizes and cache databases remain on Ten. The catalog/renderer Codex owns native registration and rendering qualification. Its handoff is `LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json`; design references are under `~/src/photo/preview-generator/`. The contracts are in `doc/component-placement-v0.md` and `doc/lightroom-preview-placement.md`: logical component identity, local placement, filesystem capabilities and recoverable multi-volume publication are independent of same-file SDE/0. Modern per-level JPEGs and legacy packed `.lrprev` are distinguished, as are native 5120-long-edge, monitor-fit and original 1:1 geometry. Publication/group runtime remains unimplemented and native link/rewrite/registration qualification belongs to the catalog session.
+* Current storage update: Quasar is now 8 TB APFS, UUID `E31B795D-FA19-4938-97E2-B6ED56A7C78F`; read-only diskutil/statvfs verification at 2026-10-13 10:05:17 UTC gives 7.200061 TB after an illustrative 10% total-capacity reserve. Ten remains Journaled HFS+, UUID `F807D30D-753C-3975-A919-AB63DECC389A`, budget 8.336401 TB under that model. The prior 6 TB HFS+ Quasar identity, 5.399 TB budget, earlier RAID/member mapping and combined evacuation estimates are historical. Do not repeat formatting or inherit old capability/binding generations from the mount name. The change happened outside this thread; no formatting, data movement, catalog edit or application stop occurred here. Optional Ten migration remains separate, with a complete manifest and fresh topology/capacity gates in `doc/preview-storage-migration.md`.
+* Sparse metadata writes are qualified: fixed-layout materialization skips identical absolute 4 KiB comparison windows, clips writes to editable extents, combines adjacent changed windows and returns actual logical-write/syscall counters. No SDE wire change or weaker verification. Sparse/first/last/disjoint/adjacent/unchanged/full/multiple-region cases pass stock/Ox, including 262,150-byte packets where an interior one-byte edit writes 4,096 bytes. These are logical writes, not physical APFS allocations. Immutable worker and owner reports expose the counters; existing unit-returning APIs remain compatible. Current Ox local/multicandidate, remote/bidirectional/old-peer and actual Adobe receive-gate suites pass again.
+* Generic lazy UI observations are implemented: bounded negotiated SIR/0 summaries expose current-replica hashes, classifications, fallback reasons and escaped/truncated metadata samples. Explicit Diff/details inspect enabled profiles without default tree hashing; formatters consume a one-shot observation without RPC/hash work and recheck at most two local path stamps. Filename suffix hints are advisory and do not filter transfer eligibility or prevent renamed DNG recognition. Archive/conflict decisions remain exact-byte based, with no base-history or rendering-equivalence claim. Both compilers pass report/codec tests (including 2,000 malformed inputs), 14 real CLI scenarios each, old-peer fallback, one-shot/stale/row/symlink/disconnect details tests, and a second generic format's local/remote annotations. Fresh native snapshots `unison-build-_t1yqi9z` and `unison-build-k553ql8w` build/selftest; all 291 production source files match the refreshed Ox build. Fresh Dune builds/selftests also pass stock `unison-dune-stock-vq2b5snf` and Ox `unison-dune-ox-by4p3dlz`, with production inputs matching the live tree. The normative observation protocol is `doc/semantic-report-v0.md`.
+* A further lifecycle review reproduced two late-completion bugs and fixed them: worker observer exceptions now settle all detached siblings and rearm the persistent pump before surfacing the error; old disconnected RPC requests suppress only their expected terminal failure after their work settles. New worker tests pass both compilers and RPC tests preserve unrelated failures. Independent private negative controls reproduce both former failures; fixed harnesses complete new jobs, shutdown, and a later-session request without leaked credits.
+* Actual SDK validation-core benchmark is complete: deterministic 6000×4000, 16-bit CFA fixtures are qualified through the pinned driver: uncompressed 45.8 MiB, lossless JPEG 37.2 MiB and JPEG XL 36.5 MiB. Positive and corrupted-digest controls pass; fixture-only rebuilding preserves the validator executable/pin/manifest. `bench/adobe/` exercises production validation, hash workers, weighted helper permits and resource admission. Five 72-file measured batches per parallel configuration gave 18→36-worker medians of 16.46→16.97 files/s uncompressed (+3.1%), 13.56→15.22 JPEG (+12.3%) and 5.39→5.98 JXL (+10.9%). The single 72-file serial controls were 1.25/1.08/0.43 files/s. Total CPU per batch increased 69–79% at 36; 18 remains the balanced default and 36 an explicit throughput option. All 42 batches and 2,811 measured/warmup receipts passed with zero final credits. Raw receipts, source/fixture/compiler/SDK hashes, topology and declared uncontrolled user background work are in `bench/adobe/results/macos-x86_64-18-vs-36.json`; interpretation is in `bench/adobe/README.md`. Team builds were idle, and sources matched at measurement completion before subsequent hardening. This is cached synthetic validation-core evidence, not full-sync, physical-storage, Lightroom UI or OxCaml-specific performance. No catalog/photos are read or changed.
+* Post-benchmark native hardening: clone-stage OCaml result blocks are allocated before acquiring native resources, removing the success-path OOM allocation exposure by inspection; allocation fault injection remains unqualified. Source/private-file opens are nonblocking before regular-file checks, and private basis/output checks require separate singly linked regular inodes before permission changes. Stock/Ox native FIFO, immutable-basis, exclusive-output, ACL/xattr/resource-fork and flagged-file fixtures pass in `/private/tmp/unison-clone-hardening-stock-s313ti8y` and `/private/tmp/unison-clone-hardening-ox-ga0t1eey`. The old native source reproduces a FIFO-open timeout in `/private/tmp/unison-clone-fifo-negative-jnnysix2`. Corresponding ML owner opens are nonblocking; all five FIFO paths (sync/async source, source planner, validator candidate and executable pin) reject promptly with clean resources and usable exact follow-up on stock/Ox. Private old-open controls reproduce all five timeouts on both compilers. Trusted staging-directory assumptions still apply; these checks do not defeat an arbitrary same-UID namespace adversary. `doc/foreign-boundary-audit.md` records the manual audit and unresolved OS/ABI/fault limits.
+* Filesystem outcome slice delivered: `CopyRange` now carries exact completed prefixes, copied/unreported success, compatibility-unsupported status and operational failure. `Copy.copyFileRange` uses it, permits exact suffix fallback only for classified unsupported acceleration, and propagates EIO/ENOSPC/permissions/EBADF. Zero/invalid progress fails; notification/cancellation errors are outside native classification and cannot trigger fallback. Eleven injected-step cases pass stock/Ox. Legacy EINVAL/ESPIPE/ENOTSOCK compatibility remains explicit; native range adapters still need precise results to narrow these conventions. The strict APFS and constrained planner additions below close further parts of `doc/filesystem-capabilities-plan.md`; mounted-generation observations and production planner integration remain open.
+* Current combined qualification after those fixes: Make snapshots stock `unison-build-zkko4cdm` and Ox `unison-build-6pkjg_pp` build/selftest; 207 `src` ML/MLI/C/H inputs match the Ox snapshot and dependencies are refreshed. Ordinary clone-transfer integration passes both compilers, including shift/duplicate/grow/shrink/no-op/off/flags/interruption. Ox additionally passes local producer/semantic/multicandidate/cancellation/generic format, remote/bidirectional/old-peer SDE and actual Adobe receive-gate suites. Fresh Dune 3.22.2 text builds/selftests pass both compilers in host-temp `unison-dune-copyrange-final-i8pdgv4z/{stock,ox}`; verification and source manifests are retained. No production source changed after these snapshots.
+
+* Explicit Astra preview coordination received and integrated, 2026-10-13: `doc/preview-design-integration.md` records the reviewed four-stage architecture, exact dependency bundle/renderer/publication interface proposals, modern native format, lifecycle/recovery gates and current capacity. The new local `/root/preview_generators` integration-review task acknowledged the handoff; the existing photo-session `/root/preview_implementation` remains implementation owner. A direct queue to its unloaded sub-agent was rejected by the app server, so the complete review/findings were queued successfully through the Lightroom takeover parent for forwarding (receipt `PREVIEW-REVIEW-FORWARD-20261013.json`, exact message `.txt`). No faithful standalone current-edits backend is qualified: the inspected DNG SDK render path does not consume the complete CRS/mask/AI contract, and Camera Raw host interfaces still need independent initialization/ABI/ownership/threading and matched pre-JPEG proof. Both standalone Rust/OxCaml engines may share a qualified backend/codec, count native threads within 18 CPU credits and benchmark matched 1/6/18 compute-only/end-to-end before a full run. Policy B's 134,582-key newer gap allowances 1.837200 TB Quasar + 0.828267 TB Ten fit the planning budgets; full 761,466-key Quasar allowance 9.100375 TB still exceeds 7.200061 despite mean 4.009232 TB. Native allocation evidence remains required. The takeover session owns Lux adoption and finite oracles; current oracle readiness is recorded in the correction below. No Adobe invocations, Photo payload reads/heavy benchmarks, production Main/cache/volume writes or application stops are performed by this integration. The stale serialized `getServerHandle()` wording was corrected; the later owner receipt qualifies existing-server entry/callback transport while current-content and publication gates remain.
+
+* Oracle evidence correction confirmed, 2026-10-13: installed Classic 15.6 per-level Preview objects carry digest but no UUID; never require or synthesize `level.uuid`. Bind whole-pyramid UUID/digest to current Main, retain expected dimensions from matching native PyramidLevel rows before decode, then compare actual decoded dimensions and level digest afterward. Orientation comes from the captured current Main/native ImageCacheEntry mapping, not an invented PyramidLevel orientation column. Positive registered `fileSize` must equal stable actual disk bytes; mismatch fails evidence and absent/zero/unknown stays unqualified. Native stale fallback is `lastCacheEntryForImage(imageId)`, subject to the same current binding. Source review is `~/src/photo/NATIVE-DIRECT-PREVIEW-INDEPENDENT-REVIEW-20261013.md`; the owned integration/placement docs incorporate its post-native deadline and candidate-versus-durable evidence distinctions. This changes the oracle contract, not Quasar/Ten placement. The takeover owner now reports Lux accepted/adopted and open in stable 15.6. The subsequent owner receipt verifies helper access and transport; the finite native registration/load/restart window remains owner-controlled and closed. Preparation/adoption receipts authorize no full preview-generator run. Our preview integration task acknowledged this correction.
+
+* Latest takeover status, 2026-10-13: the user/root confirms Quasar APFS 8 TB/new UUID and existing Policy B capacity evidence. The full 761,466-key mean (4.009232 TB) and summed per-photo P95 (6.006848 TB) fit the 7.200061 TB planning budget; the conservative 9.100375 TB allowance does not. Representative native output/allocation batches remain required before a full run. Stable Classic 15.6 Lux is running, all seven performance phases pass on autostart and Cloud UI reports Synced/Pause Syncing. Existing PreviewServer entry/callback transport is separately qualified; standalone rendering, native registration/load/restart and split availability remain unqualified, with finite oracles controlled by the takeover root. Ten retains its 9.18 TB cache on HFS+; cross-volume recovery and native symlink lifecycle gates remain. This Unison task makes no independent live-cache changes.
+* Portable filesystem generalization implemented: `CloneRange` streams aligned head/interior/tail operations, separates native-whole/composed-whole/range support, checks fresh injected owner/backend/source/destination identities and generations before every operation and completion, and validates exact contiguous progress. Only known-prefix unsupported sharing can copy the remaining suffix; operational errors, indeterminate mutation, stale bindings and malformed claims stop. Independent stock/Ox tests pass 48 named cases including 960 geometry combinations, immutable-basis reconstruction, write-count/sentinel checks and bounded cancellation of a huge request. These trusted endpoint-local records and injected observations are not native remount detection, a capability cache or a production range sink. No new ZFS/ReFS runtime qualification is claimed.
+* Strict APFS stage result implemented: `Fs.clone_stage_status` and the legacy option ABI share one native transaction. Production Copy and local/remote semantic consumers use explicit shared-stage or scoped platform/source-kind/source-flags/cross-device/unsupported results; operational errors preserve their native phase and never become declines. Nonregular bases fail promptly. Both compilers pass direct native ABI/scope/phase/exclusivity/FD tests. Combined Make builds/selftests and synthetic ordinary/local/remote/old-peer/actual Adobe receive-gate checks pass; final source qualification is being refreshed after the resource-cleanup review. Owned-name cleanup is best effort and crash/fault recovery remains unqualified.
+* Native pending-signal cleanup hardened: dispatch pending callbacks before native ownership, enter a no-pending blocking section and free all path/attribute buffers before reacquiring the runtime. An independent private counter/injected-Sys.Break test passes stock/Ox: corrected declined-stage path owns zero buffers, while an old-release negative control leaks exactly three; source and descriptor counts remain unchanged. Pinned Ox uses `Sys.with_async_exns` for the fixture's asynchronous Break catch. This qualifies that C buffer window, not arbitrary successful-result asynchronous ownership, OS deadlines or crash cleanup.
+* Build metadata corrected: this fork's domain workers require OCaml 5, so both opam packages and INSTALL now declare 5.0 instead of upstream's stale 4.08 floor. The pending-action/no-pending C APIs are also unavailable at 4.08. Qualified text compilers remain stock 5.5.1 and pinned Ox5.2; the floor is not evidence of builds on every newer version or GUI/platform qualification. Old compiled peers retain negotiated fallback.
+* Final combined build checkpoint for this slice: Make stock `unison-build-dcdkibew` and Ox `unison-build-dcmedl_v` build/selftest with 214 ML/MLI/C/H/parser/build/package/INSTALL inputs matching the live tree; root `.depend` refreshed from the Ox snapshot. Dune3.22.2 stock/Ox builds/selftests pass in `unison-dune-clonerange-final-ug5mj0pq`, with all 298 broader production/package/INSTALL inputs matching frozen and post-build manifests. Ordinary transfers pass both compilers. Ox local producer/semantic/multicandidate/cancellation/generic dispatch, remote/bidirectional/old-peer transfer, actual Adobe receive gate, 14 SIR CLI/old-peer cases and all five FIFO paths pass on these final binaries. Source remained frozen through qualification. Evidence and source/test hashes are in `tests/qualification/filesystem-20261013.json`; no benchmark claim comes from these runs.
+* Descriptor adoption guards qualified: Copy channel creation/registration, sync ownership-closure initialization, async transaction/candidate creation/registration, source FD retention and remote source/report holders protect synchronous failures before workers borrow. Retained failed registry entries are marked empty/closed before best-effort removal, preventing recycled-FD closure. Independent private fault tests pass 40 current cases per compiler, while 36 old-handoff controls per compiler reproduce prior descriptor leaks. They check real FD/stage cleanup, original exceptions/source preservation, reused sentinel survival, exact follow-up and settled credits. Explicit synchronous Out_of_memory injection is not actual heap exhaustion; arbitrary asynchronous ownership remains unqualified. Rsync uses the tested common adoption helper; its subsequent Some-ref rollback is source-reviewed/normal-integration-tested without separate fault injection.
+* Native binding design review is now implemented by the observer/lease slice below: one fixed-buffer held-FD observer (`fstat`, `fstatfs`, separately validated volume-UUID attributes) plus an abstract transaction-local owner lease. Volume attributes must not be combined with file identity attributes: current XNU can substitute the mount's root vnode for volume queries. Native file/volume identity is distinct from owner generation; public UUID/fsid/inode/write-count fields do not prove a mount incarnation. Fresh held-directory/path/stage checks and parent-relative publication remain separate precommit work. Synthetic replacement/dup2/invalidation/error/buffer tests are qualified; no capability cache or Photo mount operations. See `doc/filesystem-capabilities-plan.md` for limits and the next slice.
+* Newer native readiness receipt read during continuation: `~/src/photo/preview-unison-coordination-20261013/RECEIVER-AND-ORACLE-READINESS.json`, 2026-10-13 10:45:07 UTC, reports helper access verified, all seven performance phases passed and existing `activePreviewServer().previewServer.server` entry/callback proof. This supersedes the earlier helper/transport-under-qualification status, not the remaining native-content gates. The external oracle window remains explicitly closed (desktop relocked/root sequence owns access), and heavy Photo benchmarks and production publication remain unauthorized. Three converted legacy controls preserve 18 JPEGs exactly but lack terminal native metadata; reviewed one-control registration source has not been invoked and load/cold recognition is pending. Standalone current-edits rendering remains unqualified. Unison performs no independent native/cache mutation.
+
+* The latest native preview correction is authoritative for placement: read
+  `~/src/photo/preview-registration-findings-20261013/FINDINGS.json`. Native conversion
+  preserved all 18 JPEG sections from three controls, but all three remain
+  unregistered; terminal rows are absent for six inspected keys. Existing transport
+  is qualified, while prepared one-control `touchPyramid` registration is unexecuted
+  and requires actual preserved current UUID/digest/header plus absent Pyramid,
+  levels and mappings. The live store owns its persistent native Auto savepoint;
+  never author commit/rollback/flush. Preserved JPEGs may use external AgHg AdobeRGB
+  without embedded ICC, so bind actual profile provenance/dependencies. Critically,
+  installed-loader source checks highest registered file existence/mtime for smaller
+  level requests: missing Quasar may block Ten lower levels. Treat it as required
+  for affected pyramids until root-owned native mount-loss fallback qualification;
+  do not promise lower-tier independence. Split layout, offline publisher and journal
+  remain; desktop unlock/oracle window and full-run gates remain. Photo-parent
+  forwarding and original preview-task acknowledgment were recorded for the earlier
+  handoff (10:45:49 UTC); the newer forwarding status is below. No native/cache/volume
+  mutation was performed here.
+
+* Latest coordination constraint: preview work here remains interface/review
+  only. The ORIGINAL photo-session renderer/publisher task has ACKNOWLEDGED the
+  exact corrected oracle contract, read the independent review and audited the
+  pinned direct-probe source. Canonical acknowledgment/source pins are in
+  `~/src/photo/preview-unison-coordination-20261013/ORACLE-CONTRACT-CORRECTION-ACKNOWLEDGED.json`.
+  This supersedes the earlier pending-correction acknowledgment status and does
+  not release the oracle window. The readiness receipt binds completed
+  Smart/core acceptance (both exit0, no skips/failures; acceptance SHA256
+  `9d2be438ea619913ace0ddb1da7626d736a8a504a6a19597d5b22768fb4a526e`),
+  active Morrobay generation2, PID10536/start, Lux MainFD and owner identity,
+  Helper Accessibility ALREADY GRANTED AND VERIFIED, all seven startup phases
+  and the first full automatic renewal passed. No grant is pending.
+  EXTERNAL ORACLE WINDOW NOT RELEASED: desktop relocked/root sequence pending.
+  Await explicit root-issued finite-window release; no heavy Photo benchmark,
+  external Adobe invocation or production publisher starts here. The native
+  one-control registration source passed25 independent transport/registration
+  tests but is uninvoked; recognition and cold restart remain unresolved. Stable
+  Classic15.6/Lux/PID10536 remains the owner-reported current process. ABI
+  investigation stays source-only under the original photo implementation
+  owner; no full generator run.
+
+* Native filesystem continuation: `FileObservation` now collects full-width
+  device/inode/filesystem/volume identities, size/link/flag constraints and
+  nanosecond timestamps from held macOS descriptors, validates separately
+  requested fixed-size volume UUID attributes, and rechecks file facts. Native
+  errors retain phase; missing/zero UUID is explicit absence. It owns no FDs or
+  native allocation and changes no offsets. `CloneLease` provides an abstract
+  endpoint owner epoch, fresh paired observation fences and a borrowed-FD bridge
+  to `CloneRange`; source stamp changes stop while destination write timestamps
+  are permitted. Independent 11 native/parser and 21 native/injected lease cases
+  pass stock 5.5.1/Ox 5.2. No immutable-byte, true mount-incarnation or pathname
+  publication guarantee follows from these observations.
+* Production receiver-rsync integration now pre-establishes private output EOF,
+  enrolls the immutable basis/output, rechecks bindings per packet and at EOF,
+  and executes shifted matches through `CloneLease`/`CloneRange`. APFS advertises
+  no native range-share capability; bounded copying retains exact unsupported
+  acceleration fallback inside the copy adapter. Partial/errors become
+  indeterminate and fail without retry. Flushed actual FD positions detect quiet
+  fallback EOF; channel positions are reconciled after native copying. Static
+  lease cleanup invalidates before channel cleanup on connection teardown.
+  Initial missing UUID discards the private stage and uses ordinary auto copying;
+  mid/final loss is terminal. Source-clone, local producer and SDE paths retain
+  their previous mechanisms; native leases are currently integrated into the
+  ordinary receiver-rsync path only.
+* New Make snapshots stock `unison-build-v2izyqvq` and Ox `unison-build-tpvddl2b`
+  build/selftest. Fresh Dune3.22.2 snapshots `unison-dune-observer-final-3wkxzfq0`
+  build/selftest on both with 303 matching production/package/INSTALL inputs.
+  Ordinary clone sync passes both; Ox local producer/semantic/multicandidate,
+  cancellation, remote/bidirectional and old-peer fallback pass. The adoption
+  harness's old-control regex now preserves new helpers; all 40 current and 36
+  old-handoff controls pass per compiler. Focused actual bound-range adapter
+  tests pass 9 groups/27 scenarios on both compilers, covering exact shifted
+  offsets, short progress, unsupported suffix copying, quiet EOF, operational
+  failures, invalid progress, both endpoint bindings and channel mismatches. A
+  stock negative control detects removed channel-position reconciliation. Root
+  verified all 303 production inputs against both Make snapshots and Dune, and
+  refreshed `.depend` from the qualified Ox snapshot. Evidence is pinned in
+  `tests/qualification/filesystem-observer-20261013.json`. No external Adobe invocation or Photo
+  payload/catalog/cache/volume work is part of this continuation.
+* Preview source-only review found a current ImageCacheEntry orientation
+  comparison gap and forwarded it to the existing photo parent for the ORIGINAL
+  owner (message `01a13521-01df-7dd0-98de-8393b0af6c79`). The gap is now CLOSED
+  IN SOURCE by that original owner and independently accepted. The canonical
+  ACK was subsequently updated at 12:14:41 UTC, binding the source correction
+  binding fresh raw POST_DECODE ImageCacheEntry imageId/current UUID/current
+  digest before comparing native-effective orientation with captured Main and
+  decoded pixels. Raw values and native nil/false-to-AB defaults remain explicit;
+  a stale pre-load row does not block a valid current post-load mapping. Source
+  SHA256 is `82c88b6612818c2f62fc22b42b840273ceaca1208813d8da7a755f7a771d8556`.
+  The owner reports 48 mock/source cases, an independent rerun of all 23 mapping
+  cases and unarmed syntax preparation. Root source acceptance is
+  `~/src/photo/preview-orientation-source-review-20261013/ROOT-ACCEPTANCE.json`;
+  `mappingCorrectionNativeVerified` remains false. See
+  `doc/preview-oracle-source-audit-20261013.md` for the original finding and
+  follow-up. Accessibility is already granted/verified; desktop was last
+  observed locked, not rechecked by this source review. The finite external
+  window remains unreleased, with no new operational hold or release inferred.
+  Native preview work stays source/interface-only under the existing owner.
+
+* Intermediate publication slice is implemented and qualified. Additive
+  `Fs.clone_stage_handles` retains the actual creation parent with basis/output,
+  preserving both existing two-FD ABIs; 20 native cases pass both compilers.
+  `StagePublication` owns a rooted finalizable native context, held directories
+  and a CLOEXEC stage witness. Fresh directory/name bindings precede exclusive
+  stage-to-normal-temp rename; native ownership switches before post-rename
+  exception delivery. Identity-bound cleanup uses the captured parent and
+  witness, including after channel adoption fails. Directory identity ignores
+  mutable size/link/timestamp facts; separate/followed parents, search-only
+  permissions, sibling changes and foreign sentinels are qualified. Single-link
+  admission prevents modifying an aliased stage; cleanup removes only our name.
+  All 58 native publication/classifier cases pass stock/Ox. Four extra steady
+  owned descriptors remain a resource constraint for future scheduling work.
+* Root receiver integration passes 86 production-caller cases per compiler:
+  actual rsync compression/decompression through EOF, creation-parent rebinding,
+  adoption/channel/registration/Some-ref failures, post-rename/pre-disarm errors,
+  collisions, foreign sentinels and reference-FD reuse. Missing/unsupported
+  identity can decline only during preparation before stage creation; auto uses
+  ordinary copying and require fails. Operational/malformed/stale and every
+  later-phase error remain terminal. Ordinary reference inputs now open
+  nonblocking, require regular files and protect descriptor/channel handoffs,
+  so early optimization decline cannot expose a FIFO-open hang. A stock private
+  negative control detects removed caller publication cleanup.
+* Fresh Make snapshots stock `unison-build-eiyawftj` and Ox
+  `unison-build-e0r79j3i` build/selftest. Dune 3.22.2 stock/Ox builds/selftests
+  pass in `unison-dune-publication-final-evu31q2x`, with all 306 production inputs
+  matching. Ordinary clone sync, 9-group/27-scenario bound-range tests and
+  40-current/36-old adoption controls pass both; Ox local/semantic/multicandidate,
+  cancellation and remote/bidirectional/old-peer suites pass. Production caller
+  logs are retained in `/private/tmp/unison-copy-publication-rrq0dcep` (stock)
+  and `/private/tmp/unison-copy-publication-4zzia424` (Ox). Source/test hashes and
+  scope are in `tests/qualification/filesystem-publication-20261013.json`.
+  This qualifies the intermediate stage-to-temp boundary. Logical-root/followed
+  target binding, final live `Files.renameLocal`, initial old-temp pathname
+  cleanup and native scratch pathname reservation remain separate work.
+  No new SDK invocation, preview operation, Photo/cache/volume work or benchmark.
+
+* Next final-live source review is recorded in `doc/filesystem-capabilities-plan.md`.
+  Enroll logical root/follow/effective workdir bindings at endpoint-local target
+  setup, carry only a negotiated opaque nonce remotely, and attach the finalized
+  candidate witness after forks/properties/paranoid verification. Validation
+  must retain a proof across helpers; accepted target identity and root mapping
+  must survive backups and the final rename. Preserve ordinary replacement,
+  conflict retargeting, directory transactions and AppleDouble behavior. A first
+  regular-file guard cannot qualify those other transactions automatically.
+  Post-publish failure must suppress archive advancement and reconcile without
+  deleting live output. This is source review for subsequent implementation,
+  not a completed gate or new native-preview authorization.
+
+## JPEG extension design note
+
+JPEG is a good second profile: application marker segments can carry Exif, XMP, IPTC and ICC data separately from the compressed scans and decoding tables. Adobe XMP uses identified APP1 segments, with a separate chunked Extended XMP representation; ICC profiles use identified APP2 segments. Marker number alone is not enough to classify contents. Exif includes TIFF offsets and possibly a thumbnail. Orientation, colour interpretation/profiles, gain maps, and editing instructions affect presentation, so unchanged compressed samples do not mean unchanged rendering.
+
+Start a future `jpeg-xmp-fixed/0` profile with one ordinary, bounded XMP APP1 packet at the same offset and size in both files. Preserve and hash every other byte, including marker framing, tables, scans, unknown APP segments, and trailing data. Decline Extended XMP, duplicate/ambiguous packets, malformed marker streams, and layouts not covered by the parser until implemented deliberately. A JPEG parser must handle entropy-byte stuffing, restart markers, multiple/progressive scans, and post-scan markers; it cannot find metadata by searching arbitrary compressed bytes for marker-looking sequences. MPF/MPO offsets, auxiliary images, gain maps and JUMBF/C2PA content require explicit treatment before structural edits or claims about authenticity/rendering equivalence.
+
+For same-size metadata edits, APFS can retain shared image blocks while private staging changes metadata. When metadata grows and shifts the image stream, the compressed image may still be reusable without recompression, but APFS whole-file cloning cannot generally preserve sharing at arbitrary shifted byte offsets. SDE/0's same-offset WRITE profile must fall back; a future relocation-capable envelope can reduce network traffic without promising proportional local physical-write savings. Exact target reconstruction and all-complement proof remain mandatory.
+
+Sources: [Adobe XMP storage specification](https://github.com/adobe/XMP-Toolkit-SDK/blob/main/docs/XMPSpecificationPart3.pdf), [CIPA Exif standards](https://www.cipa.jp/e/std/std-sec.html), [ICC specification, annex B.4](https://www.color.org/specification/ICC1v43_2010-12.pdf). This is a proposed profile, not shipped JPEG support.
+
+## Objective and architectural decision
+
+Extend Unison in two independent directions: a filesystem capability layer for efficient copies/updates of clonable files, and versioned, format-aware change classification and transfer planning. Improve APFS behavior for **ordinary files as well as DNG**, reusing upstream cloning code and preserving extension points for ZFS and ReFS. Implement DNG as the first semantic extension: distinguish embedded XMP edits from changes to the rest of the TIFF/DNG container; when proved safe, clone the destination locally and patch only the changed metadata ranges. Add a directly invokable **Adobe validation option for each received DNG**, including files transferred through ordinary fallback. Preserve exact-byte convergence, existing synchronization/conflict behavior, filesystem properties, and source/destination change detection. Port the application core to a pinned OxCaml compiler; route all helper invocations through a bounded OxCaml supervisor that can use all available CPU cores while accounting for SDK internal parallelism.
+
+The user also requested research into existing systems, a diff standard if needed, and examination of Lightroom validation and the recreated Lightroom fingerprint work. Existing standards already solve binary deltas and other systems already support semantic merging. **Newer upstream Unison also already contains reflink/range-copy work absent from this local checkout. Reuse it before creating a competing filesystem layer.** Propose **Semantic Delta Envelope, SDE/0, an experimental interoperability profile**, rather than claiming to invent binary diff or semantic synchronization. Reuse Unison's existing rsync transfer when the extension cannot prove eligibility. VCDIFF is an existing option for future portable patch payloads.
+
+The first DNG profile is deliberately narrow and useful: one embedded XMP packet at the same offset and length in source and destination, with every byte outside that packet proved identical. This avoids TIFF serialization and permits metadata writes on a cloned destination. Growing, relocated, ambiguous, unsupported, or structurally changed files use ordinary exact-byte transfer. Later milestones expand eligibility and add conservative semantic reconciliation. Completing only a parser, only a wrapper around dng-compare, or only a compiler switch does not complete the full goal.
+
+The architecture also separates **logical components from physical placement**. A Lightroom asset can reference several independently identified preview renditions, with monitor-target payloads on Quasar and other levels/catalog-cache metadata on Ten. Volume paths, references and capacity policy are endpoint-local deployment decisions, while UUID, current develop digest, rendition dimensions/orientation and content identities describe the component. A group spanning volumes needs publication/recovery semantics of its own; a single-file SDE/0 plan or an atomic rename on one filesystem does not supply them. The other catalog Codex qualifies native preview rows, renderer provenance and link rewrite behavior. Monitor-fit bounds of 5120×2880 do not mean every JPEG is exactly that size or that it is Lightroom's original-resolution 1:1 image. Filename long-edge values alone cannot prove current-content identity.
+
+**Three different identities must remain separate:**
+
+1. `byte_identity`: identity of the entire data fork, plus Unison's separate resource-fork/properties machinery. SDE requires whole-file SHA-256 in addition to Unison's historical fullfingerprint; the general clone optimization with legacy peers retains stock fullfingerprint guarantees. Exact reconstruction remains the convergence contract.
+2. `preserved_identity`: strong, offset-bound hashes covering *all* bytes outside explicitly editable regions. This authorizes preserving destination bytes while replacing metadata.
+3. `semantic_identity`: profile-specific identities for raw samples, rendering instructions, descriptive metadata, and opaque/container content. These explain changes and can support explicitly enabled reconciliation; they never stand in for byte identity.
+
+Changing XMP can change the rendered photograph. DNG is not simply immutable pixels plus harmless descriptive XML. A raw-image digest alone does not prove that camera profiles, opcodes, previews, embedded originals, maker data, TIFF structure, unknown tags, or unreferenced trailing bytes can be discarded.
+
+## Inspected baselines and reproducibility
+
+| Item | Observed baseline |
+| --- | --- |
+| Unison checkout | `/Users/alexy/src/unison`, upstream commit `375ea3ad2cace8584c508ef463332066d85e1d4e`; clean before this document |
+| Newer upstream checked during final review | master `8772d26a2eb77cfd0cb6da81807e81f24f51044c`; release v2.53.8 (2025-11-05) explicitly added reflinking; this is separate from the local build baseline |
+| dng-compare inspected runtime checkout | `/Users/alexy/dng-compare`, commit `67a7ee397caf80ee98de8da8a31c76e3263e895f`; clean; original source analysis refers to this checkout; preserved in place |
+| dng-compare canonical public checkout | `/Users/alexy/src/dng-compare`, commit `cab85e42ab5f5f6b463a201273ce8ee2dc27c85d`; clean; newly cloned through SSH; use for future source improvements |
+| Lightroom research checkout | `/Users/alexy/src/lightroom`, firstpair/lightroom commit `a0256087009d7c58f7df8643c977f4d0918215bf` |
+| Host | Intel/x86_64 macOS 15.7.9, build 24G830; measured 18 physical / 36 logical CPUs |
+| Existing OxCaml | `/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt`, reports `5.2.0+ox`, Flambda 2, runtime5, multidomain, stack allocation; `tsan=false` |
+| Toolchain separation | Default `ocamlc` reports 5.5.1; use explicit `opam exec --switch=5.2.0+ox -- ...`, never infer compiler from PATH |
+| Build | Make is the upstream packaging path; `dune-project` declares Dune 2.3; Dune exists in the OxCaml switch even though absent from default PATH |
+
+Read the applicable `AGENTS.md` files again at implementation start in case instructions have changed. None were found in the inspected checkout/ancestry during design. Recheck Git state before editing; preserve unrelated user work. Use disposable fixtures and isolated build outputs. Do not run mutation experiments on Bumer or personal photo libraries.
+
+The new canonical dng-compare public checkout has its own `AGENTS.md`, read during finalization. It requires `uv` for Python, verification of its pinned Rust toolchain/edition, explicit stock-OCaml versus OxCaml claims, disposable synthetic tests, preservation of failed receipts/source-stability gates, and exclusion of private inventories/reports/binaries/credentials from Git. Its publication rules apply only when publication is actually requested. Re-read these instructions before changing that repository. The public and home-runtime Git histories are distinct/disjoint; do not blindly merge or rebase one onto the other. Keep home runtime files and private data intact.
+
+Both the canonical dng-compare and normal Lightroom checkout now use their `git@github.com:firstpair/...` SSH origins. SSH authentication and read access were verified from a fresh interactive shell after the user's separate setup request; the home dng-compare checkout also received its SSH remote without source-file changes. No credentials or private-key material belong in this handoff or either repository. Future source improvements should target the canonical `~/src` checkouts.
+
+## What the existing code establishes
+
+### Unison integration seams
+
+References below are to the pinned Unison baseline; line numbers will move during implementation.
+
+| Concern | Concrete seam and consequence |
+| --- | --- |
+| Full file fingerprint | `src/fingerprint.ml:22,37`: `Fingerprint.t` is a string; `Digest.channel` hashes whole bytes. Do not replace it with a DNG raw digest. |
+| Archive shape | `src/update.ml:46,61`: archive format 23 and `ArchiveFile (Props.t, Os.fullfingerprint, Fileinfo.stamp, Osx.ressStamp)`. `archive251`/converters are compatibility contracts. |
+| Scan/change detection | `src/update.ml:1693` `checkContentsChange`; `src/fpcache.ml:283`; `src/os.ml:262` `safeFingerprint`. Existing fast checking is based on filesystem observations; a format plugin cannot silently strengthen their meaning. |
+| Common update representation | `src/common.ml:104`: `ContentsSame` / `ContentsUpdated`. Keep these byte-level statuses unchanged in the first release; carry semantic annotations separately. |
+| Conflict reconciliation | `src/recon.ml:711`: equal full fingerprints can converge; otherwise two changed files conflict or enter the configured merge path. Add semantic policy here only after classification and base handling are implemented. |
+| Remote data transfer | `src/copy.ml:697` `transferFileContents`; `:802` `reallyTransferFile`; `:1057` `transferFileLocal`. Attempt semantic planning before allocating/opening the ordinary data-fork output. |
+| Local-local transfer | `src/copy.ml:460` `localFile`, and `:1182` `file`: **local-local sync bypasses the remote transfer routine**. It needs the same semantic plan/materialization path. A patch only in `transferFileLocal` misses this use case. |
+| Final verification | `src/copy.ml:245` `paranoidCheck`, `:40` source-change check, `:1182` common completion handling. Retain these and add SHA-256 validation for SDE plans. |
+| Forks and properties | `src/copy.ml:776` resource fork/props finalization, `:366` `setFileinfo`; `src/osx.ml`, `src/props.ml`, `src/fileinfo.ml`. Cloning is not a replacement for applying source properties and clearing stale destination state. |
+| Commit and archive | `src/files.ml:407` `renameLocal`: destination recheck, normal rename/stashing, archive update last. `:757` completes destination then source archive. Reuse this lifecycle. |
+| Destination recheck | `src/update.ml:3146` `checkNoUpdates` forces a non-fast scan. Do not remove this read because APFS cloning succeeded. |
+| Current race limitation | `src/files.ml:395` explicitly documents the check-to-rename race. Atomic pathname replacement is not compare-and-swap against an uncooperative editor. |
+| Feature negotiation | `src/features.mli:33`, `src/negotiate.ml:70`, `src/remote.ml:345,786`: negotiate named capabilities; RPC v1 uses Umarshal, while v0 has legacy compiler-sensitive conversions. |
+| Existing transfer optimization | `src/transfer.ml:317` rsync; `src/copy.ml:541` enabled by default. It reduces wire bytes but reconstructs a temporary output by writing its contents. |
+| Existing extension-like facilities | `src/files.ml:975` and `doc/unison-manual.tex:1594` external merge with archived base; `src/copy.ml:878` external copy program. These are useful prior art, not a semantic identity/materialization contract. |
+| Build wiring | `src/Makefile.OCaml:224` explicit OCaml module order, `:259` C objects; `src/dune` foreign stubs and local `lwt_lib`. Update both build descriptions. |
+| Tests | `src/test.ml`, root `Makefile:26`: existing selftest is `./src/unison -ui text -selftest`. Add isolated fixture/unit targets as necessary without making tests traverse real roots. |
+
+**Current-upstream correction:** the table describes the 2024 local baseline, not all Unison versions. Upstream v2.53.8 release notes explicitly introduce reflinking. A pinned source audit at master `8772d26a2eb77cfd0cb6da81807e81f24f51044c` found:
+
+* `src/transfer.ml:471` already exposes `rsyncDecompress ?copyFn`; `src/copy.ml:784` supplies the range-copy callback, and `src/transfer.ml:363` uses power-of-two blocks.
+* `src/fs.ml:71` exposes clone/copy adapters. `src/copy.ml:390` has partial-range fallback, `:418` tries descriptor cloning, and local copies at `:460` try path cloning.
+* `src/copy_stubs.c:71` already calls Apple `clonefile`; `:136` supports Linux `FICLONE`; `:186` uses Linux range-copy/sendfile paths; `:219` supports FreeBSD range copy; `:354` implements Windows `FSCTL_DUPLICATE_EXTENTS_TO_FILE` with cluster/sparse/EOF handling. Apple range copying falls through to unsupported at `:452`.
+
+Therefore **APFS whole-file clone and ReFS range cloning already exist upstream**. The specific additional APFS optimization is to seed output from a receiver-basis whole clone and retain same-offset unchanged regions during rsync, plus semantic DNG planning. Reuse/backport `Fs.clone_path`, `Fs.clone_file`, `Fs.copy_file`, their native stubs and the receiver callback. Do not claim general reflink-aware Unison or its Windows backend is new work. Existing boolean clone results suppress errors and broad range-copy fallback catches Unix errors; enriching result/error observability needs an explicit compatibility review. These are source findings, not runtime qualification of those backends. Pinned clone used for audit: `/private/tmp/unison-upstream-clone-audit`.
+
+M0 must compare both versions and choose a reviewed implementation base. Prefer an isolated implementation branch based on the pinned newer upstream if compatibility and local project constraints permit; otherwise backport the smallest relevant upstream commits with attribution. Preserve the original checkout and user work, and re-pin all integration references after selecting the base. The verified build results below apply only to `375ea3ad`, not newer upstream. Re-run build/compatibility tests after adopting upstream code.
+
+### dng-compare reuse and limits
+
+Use its fixture knowledge, raw-block extraction ideas, report schemas, tool supervision, and strong byte-verification workflow. Preserve provenance and versioning. Inspect its licenses before copying code; otherwise reimplement from the documented behavior and public specifications.
+
+The source findings below were established against home-runtime commit `67a7ee3`. A final comparison against canonical public commit `cab85e4` found the other referenced core sources byte-identical, with four reviewed differences: `portable_metadata.py` adds output-root separation checks, bounded batch size and phase locking; `preserve_apo.py` adds output containment, locking, positive rate validation and a legacy-ledger option; `rust-scanner/src/main.rs` retains the inspected TIFF/raw/XMP logic but returns failure when work is incomplete/unverified; and `Makefile` adopts `uv`, locked Cargo dependencies and standard OCaml by default. Historical `-oxcaml` output names do not prove that the public default build uses OxCaml. These safer workflow wrappers do not make selected metadata reports a complete preservation proof. Recheck line numbers against the selected public commit before editing.
+
+The inspected Rust comparator traverses next-IFD/SubIFD links and selects raw/encoding/XMP fields. It does not establish preservation of the complete EXIF/GPS/private graph or all container bytes. Its equality result is useful evidence about selected content, not permission to overwrite everything else. Disposable synthetic tests during design changed an opaque trailer: the comparator still reported raw equality, auxiliary equality, zero exposed embedded/layout changes, and, in the stronger case, equal length, while full bytes differed. Keep the same-length `opaque-A` versus `opaque-B` case as a regression fixture.
+
+`dng-metadata.rs` is an ExifTool reporting pipeline, not a TIFF/XMP serializer. Its report-oriented cache/resume and field handling are unsuitable as an authoritative synchronization cache without redesign: row-count-only batch reuse can go stale; duplicate field identities can be collapsed; process exit status and input stability require stronger validation. The Python path has stronger source/version stamps but still exposes selected metadata rather than all bytes.
+
+The existing `metadata_extract_oxcaml.ml` is an OxCaml-built process supervisor using `Unix.create_process` and `Unix.select`; it is not evidence of a domain-safe shared-memory engine. `byte_verify_oxcaml.ml` wraps xdelta3 and checks reconstructed SHA-256. Reuse these lessons rather than introducing a second binary-delta algorithm.
+
+Historical local reports contain substantial raw-equal/metadata-different populations. They motivate benchmarking but do not establish safe patch eligibility or a live speedup: selected-field equality and an absence of reported layout differences are incomplete preservation proofs.
+
+### Lightroom validation and fingerprint research
+
+The public firstpair/lightroom repository distinguishes native original-file matching, Adobe DNG raw digests, and full-file SHA-256 (`docs/firstpair-lightroom-repair.md:402–440`). It documents fingerprint recipes and oracle requirements; the recreated engines are not included in that public checkout. Additional local worker sources were located under `/Users/alexy/lrc-fingerprint-worker-20261005/crate/src/` and `/Users/alexy/lrc-fingerprint-proof-worker-20261005/crate/src/`.
+
+Treat these as separate validation/identity layers. Lightroom's DNG validation and SDK validation can detect particular consistency or raw-content problems; a successful result does not prove that metadata, opaque bytes, previews, or the entire file match another replica. A stored `RawImageDigest`/`NewRawImageDigest` tag is an assertion inside an editable file until recomputed against the appropriate data. Adobe DNG 1.7.1 specifies different algorithms for these tags; do not interchange them or equate either with Lightroom's native original matcher.
+
+Use the recreated workers as differential oracles only for the formats, metadata strata, and algorithms their tests actually cover. Preserve exact byte-order, sample-width, layout, opcode/profile, compression, and algorithm-version distinctions. The production SDE eligibility proof must remain independently correct even when a Lightroom-style digest is unavailable, unsupported, or wrong. Detailed verified Lightroom findings and validation references are recorded in the addendum below.
+
+## Extension contract
+
+### Core owns safety, extension owns interpretation
+
+Start with a statically registered OCaml module interface and the built-in DNG implementation. This is an actual extension point: independent format modules can register a profile, probe, inspect, classify, and propose a plan without editing Unison's fingerprint/reconciliation machinery. Compile-time registration avoids distributing native compiler-specific plugins over a synchronization connection. A versioned local helper protocol may be added later; it must implement the same limited contract.
+
+Conceptual interface; translate this into normal compiling types, not these exact names if dependency ordering requires a split:
+
+```ocaml
+module type FORMAT_EXTENSION = sig
+  val profile : Profile.t  (* id, schema version, policy version, limits *)
+  val probe : Readonly_file.t -> [ `Unsupported | `Candidate ]
+  val inspect : Readonly_file.t -> (Manifest.t, Unsupported.t) result
+  val classify : base:Manifest.t option -> Manifest.t -> Change.t
+  val plan_exact : base:Manifest.t -> target:Manifest.t -> Plan_proposal.t option
+  val reconcile : base:Metadata.t option -> left:Metadata.t -> right:Metadata.t
+    -> Policy.t -> [ `Conflict of Reason.t | `Use_left | `Use_right
+                  | `Merged of Metadata.t ]
+end
+```
+
+`Readonly_file.t` is an opaque core-managed handle with checked bounded reads and a stability token, not a path the plugin can reinterpret. The core opens regular files, bounds arithmetic and allocations, hashes actual bytes, validates all extents, enforces resource limits, negotiates capabilities, owns output creation, performs writes, verifies results, applies properties, and commits. The plugin returns data, never a shell command, destination path, arbitrary write handle, or authority to mutate a live file.
+
+A compiled plugin is trusted local code, not a security sandbox. Treat remote manifests/plans and file contents as untrusted input. If local out-of-process helpers are later supported, choose an explicit local executable by configuration, use bounded framed messages, pass read-only descriptors where supported, enforce timeouts, and validate their output identically. Never auto-install a plugin, fetch code by profile ID, or execute a command supplied by the peer.
+
+Suggested classifications:
+
+* `Exact_same` (full byte identity).
+* `Xmp_packet_changed` with sublabels `descriptive`, `rendering`, `mixed`, or `unknown` when a supported secure parser can justify them.
+* `Image_payload_changed` (sample/encoded payload distinction explicit).
+* `Container_or_opaque_changed` (including layout, unknown content, embedded original, preview).
+* `Unsupported` / `Invalid` / `Unstable`, with bounded diagnostics and deterministic fallback policy.
+
+Labels are explanatory, not equivalence declarations. Unknown namespaces, camera-specific data, and rendering settings are significant by default. No mtime-based last-writer-wins rule, ignored metadata list, or XMP normalization is silently enabled.
+
+### Candidate selection and limits
+
+Select candidates by user-configured path rule and magic/DNG version inspection; an extension alone is insufficient. Proposed preferences: `semantic = dng` (off by default until qualified), `semanticpolicy = exact` (default), `clone = auto|off|require` (general filesystem policy, auto after qualification), `workers = auto|N`, `semanticreport = true|false`. Final naming should follow upstream conventions. `require` means fail that optimized attempt clearly when cloning is unavailable; it must not silently mutate the destination in place. The general `clone` policy applies even when semantic plugins are disabled. Production `workers=auto` targets the machine's available CPU budget; one-worker execution remains the reference/testing mode.
+
+Implemented v0 limits are documented in `doc/dng-profile-v0.md` and `doc/semantic-delta-v0.md`: checked signed-64-bit file arithmetic; 256 visited plus queued IFDs; 16,384 total entries; 65,536 image extents per field; 131,072 protected extents; one DNG XMP packet up to 1 MiB. The generic envelope allows up to 64 regions, at most 1 MiB each and 16 MiB total payload. These supersede the larger initial design estimates. A valid larger file can fall back. Do not allocate from an unchecked TIFF count or XML entity expansion. No network/entity resolution; v0 can transfer opaque XMP bytes without interpreting XML.
+
+## General filesystem capability layer: APFS now, ZFS/ReFS later
+
+This is an independent Unison improvement, not a facility available only to semantic plugins. The DNG planner, existing rsync decompressor, local file-copy path, and moved-file reuse can all use the same staged-output backend. A filesystem can support cheap whole-file clone without arbitrary range clone; model these separately. Neither shared-block ancestry nor a filesystem's name establishes that two files contain equal bytes.
+
+### Adapter contract
+
+Extend the selected upstream filesystem-copy abstraction with `Fsclone`/`Clone_sink` responsibilities below the semantic layer; use existing upstream names when they already provide these contracts. Capabilities are checked against open files, directory handles, actual volumes and operation parameters, not a string test for `APFS`, `ZFS`, or `ReFS`. Describe:
+
+* Native whole-file clone, composed whole-file clone, and range clone as separate optional capabilities.
+* Destination creation/absence requirements, same-volume/cross-dataset restrictions, range alignment, maximum range length, EOF-extension prerequisites, overlap limits, sparse/integrity/encryption compatibility, and attribute side effects.
+* Results `Shared`, `Copied`, `Unsupported`, or an actual retryable/fatal error, including any completed prefix. A successful copy API call alone must not increment a shared-block counter.
+* Capability cache scope (mounted volume plus generation) and per-file checks. Runtime operation results are authoritative; unsupported/cross-device permits fallback, while ENOSPC/EIO/permissions/concurrent mutation are handled as errors.
+
+Only the staging file is mutable. Core owns an explicit `basis_role = Source | Receiver_previous_version` and a stability proof. A held descriptor pins an inode but **does not freeze its bytes**. Prefer a private receiver-basis snapshot clone: compute rsync signatures from that stable basis, create the output clone from the same basis, and use the immutable basis for all later source-range reads. This costs another cheap clone but avoids generating signatures from one state and applying blocks from another. If private snapshots cannot be obtained, retain the existing guarded transfer semantics and full output verification; do not assume descriptor ownership implies immutability. Cloned read-only modes, ACLs or flags may obstruct staging writes: apply only the necessary temporary writable treatment to the private staging inode, then restore intended source properties. Never relax the live basis/destination's permissions or flags to make cloning work.
+
+APFS backend: prefer `fclonefileat` from a held regular-file descriptor into an exclusive name in a pinned destination parent directory, subject to OS availability checks. `CLONE_NOFOLLOW` does not by itself reject symlinks; open/validate a regular source safely. Public APFS `clonefile` provides whole-file cloning, not a general changed-block map or arbitrary range-clone API. Use exact error reporting rather than a best-effort copy API that silently converts a clone to a full copy.
+
+### Generic rsync materialization
+
+In the local baseline, `src/transfer.ml:466–512` writes every literal and reads/writes every matched block. New upstream already provides a block-copy callback and fallback; extend/reuse it rather than duplicating it. The required sink contract has a logical output cursor and operations `literal`, `copy_from_basis`, and `finish`. Keep a sequential reference sink. Add any missing whole-file-clone/inherited-range behavior for verified receiver-basis clones:
+
+1. For a matched block, the original basis offset is `block_number * block_size`. Skip data I/O only when that offset equals the current output cursor, the complete range is inside inherited valid length, and the output clone still contains the inherited bytes there. Advance the cursor and logical progress even though no data is written.
+2. For a shifted match, copy from the **immutable basis descriptor**, or use a supported range-clone operation into the staging file. Never skip a shifted block and never read the evolving output as the basis. Insertions, deletions and duplicate block matches make this distinction essential.
+3. Write literal bytes at the cursor normally. Coalesce adjacent compatible operations. Do not mix buffered `out_channel` output with uncoordinated descriptor `pwrite`/seek/range-clone operations.
+4. At EOF, require exactly the declared target length and truncate/extend to that length safely. Hash the entire staged target and perform existing fingerprint verification. A shorter target must not retain the old suffix.
+
+Local-baseline rsync block lengths are not filesystem-aligned; newer upstream's power-of-two sizing improves opportunities but does not prove alignment for every backend. A range-clone backend must split aligned interiors from copied head/tail regions when valid, or decline range cloning when source/destination alignment residues differ. Do not assume rsync block size equals APFS/ZFS/ReFS block size. Monotonic output construction is an invariant of the skip optimization; if a future sink allows out-of-order writes, it must track overwritten inherited intervals explicitly.
+
+The initial same-offset skip optimization needs **no new peer wire protocol** because existing rsync tokens already identify basis block positions. It works with an unmodified source peer when all receiver-local basis checks hold, retaining stock Unison's fullfingerprint verification guarantees. A legacy peer does not supply whole-file SHA-256; do not pretend the receiver can independently check a source SHA-256 it never received. A negotiated general-transfer strong-hash feature can add that assurance later; if a configured policy requires it, use a qualified negotiated path or decline optimization. SDE always requires its separately negotiated SHA-256 identities. Its negotiation is needed for planning/classification, not because cloning itself needs semantic metadata.
+
+### Local copies and recovery
+
+For a local same-volume source-to-destination copy, cloning the **source** directly to staging can avoid the copy even for new files. Verify the staged source clone and source stability, then apply normal properties/commit. This is distinct from a receiver-basis clone used for rsync tokens. A source clone must never be interpreted as a receiver-basis clone. Consider moved-file reuse through this layer as well.
+
+For local cross-volume updates, clone the receiver's old file on its own volume and use a local rsync/planned-delta producer or a bounded comparison producer feeding the same sink. The current local-local `copyContents` always copies, so generic network-sink changes alone are insufficient. Choose/reuse the delta producer after measuring its extra reads; do not implement a second unbounded diff engine.
+
+Give cloned staging a distinct output-open mode: the existing `src/copy.ml:326` creation path uses `O_EXCL` and a fallback `O_TRUNC`; neither is the correct way to reopen a newly created clone. Likewise, `localFileContents` removes ordinary stale temporary files. Separate these paths explicitly. Initially exclude `DATA_APPEND`/partial-prefix resume from clone optimization and rebuild transaction-owned staging after interruption. Any later resume format must bind exact basis identity, target identity/length, backend mode and completed ranges. A stale clone is not a trustworthy transferred prefix.
+
+Preserve Unison's property/fork, backup/stash, verification and archive behavior for every backend. Copy-on-write sharing is an allocation technique, not an independent backup against underlying device failure or a substitute for end-to-end integrity checks.
+
+### Future adapters, research constraints
+
+**OpenZFS:** block cloning depends on implementation/version, enabled pool features/tunables, compatible records/encryption, and the OS operation used. Query/attempt the real operation; `copy_file_range` can copy rather than share. Pin and qualify Linux/FreeBSD backends independently. Feature enablement is not authorization to assume every ZFS file supports reflink; dirty-data handling can also affect latency. Native macOS OpenZFS needs its own investigation.
+
+**ReFS:** reuse and audit the already present upstream `FSCTL_DUPLICATE_EXTENTS_TO_FILE` implementation. Ranges require alignment, compatible integrity/sparse state, the same volume, pre-established destination EOF, and bounded lengths; same-file overlap is restricted. A composed whole-file clone needs chunking and an exact copied tail when required. Extent cloning does not automatically reproduce all streams, ACLs or attributes. Qualify the Windows filesystem backend independently of native Windows OxCaml availability.
+
+Preserve existing upstream backend functionality during refactoring, and make unsupported extensions report that honestly. Do not claim additional ZFS/ReFS qualification merely because an interface or inherited implementation exists. Acceptance now includes a fake aligned range backend to test chunking, tails, incompatible residues, partial errors and fallback; new platform claims require actual platform tests.
+
+## DNG profile and exact-byte algorithm
+
+### Parser profile `org.firstpair.dng-xmp/0`
+
+Support a documented subset of classic TIFF/DNG first, both byte orders, including inline and out-of-line typed values and explicit known IFD links. Prove the tag 700 packet range and the structural bounds needed to exclude overlap/aliasing. Recognize DNG by the appropriate version tags, not just `.dng`. Reject cycles, impossible counts, out-of-file extents, ambiguous duplicate XMP tags, XMP aliasing structural or known non-XMP extents, unsupported layouts, and integer overflow. BigTIFF and additional unusual DNG versions/layouts are fallback until separately qualified.
+
+Preserve unknown tags and all gaps/trailers exactly. Unknown/private structures are never rewritten. If an opaque structure makes the proposed editable region's ownership ambiguous, decline the fast path. Ordinary exact-byte transfer remains possible; an invalid parser input must never authorize a semantic patch. Parsing validity is not a claim to implement all of Adobe's DNG validation.
+
+For v0, require matching total length and an unambiguous same-offset, same-length XMP packet on both sides. Require every byte in `[0, file_length)` outside this packet to match. This includes TIFF headers/IFD entries, raw payload, previews, original raw, maker data, unknown tags, unused gaps, and trailing bytes. XMP count and offset changes therefore fall back in v0. The envelope carries the complete packet; the implemented materializer compares absolute 4 KiB windows, clips them to the packet boundary, skips identical windows and coalesces adjacent changed windows. It verifies the exact target afterward and reports actual logical bytes written and write attempts. This reduces application writes without promising a particular physical APFS allocation size.
+
+Define the preservation proof without canonical TIFF serialization:
+
+```text
+packet = [xmp_offset, xmp_offset + xmp_length)
+preserved_extents = complement(packet, [0, file_length))
+preserved_identity = SHA256("SDE/0-preserved\0" || u64(file_length) ||
+  u64(region_count) || ordered_regions(u64(offset), u64(length)) ||
+  ordered_complement(u64(offset), u64(length), actual_extent_bytes))
+```
+
+The normative transcript is in `doc/semantic-delta-v0.md`; profile identity is bound separately in the plan. Use big-endian u64 fields and include empty complementary intervals. Hash every extent; do not compare a lossy metadata report. The source and destination independently compute this identity from their actual opened files. They also compute SHA-256 of their complete data forks. This is O(file size) read work. It can be fused with other hashing passes later; do not pretend a cached raw digest eliminates it.
+
+### Transfer transaction
+
+1. **Select:** both peers advertise the exact profile/schema; policy permits it; source and destination are regular files; destination exists. New files and unsupported peers use existing transfer.
+2. **Stabilize inputs:** core opens source and receiver base, records device/inode/size/mtime/ctime and relevant fork/property state, and uses those same handles during inspection/hashing. Recheck after reads. An APFS clone can provide a stable receiver-base snapshot; it must be bound to the base identity actually negotiated. A source clone/snapshot is an optional supported optimization, not an assumption on remote/non-APFS filesystems.
+3. **Describe base:** receiver sends a bounded manifest containing base size/SHA-256, XMP range and digest, preserved identity, profile version, and transaction nonce. No filenames from this message are used to create output paths.
+4. **Plan at source:** source validates compatible layout and preserved identity, emits target size/SHA-256, exact replacement packet bytes and checksums, and binds them to the receiver's base identity/nonce. A missing proof is a normal fallback, not an ignored mismatch.
+5. **Materialize privately:** core makes a fresh temporary destination in the final destination directory/volume. On APFS, clone the receiver's validated base using a supported clone API. Clone destination must not exist. Open the new inode read/write without truncation and patch only authorized ranges with short-write/EINTR-safe `pwrite` loops. Never open the live destination with write intent. No `O_TRUNC` after cloning.
+6. **Verify staged data:** check full target data-fork SHA-256 and size against the source proposal, recompute the preserved proof/validate parser invariants, and verify base preconditions against the base actually cloned. Hash/checksum mismatches are errors; fallback must not conceal corruption.
+7. **Finalize filesystem state and verify complete file:** apply the ordinary source permissions, ownership policy, ACLs, xattrs, Finder info, resource forks and timestamps according to Unison preferences. Explicitly account for inherited cloned attrs and an old resource fork that should be empty. Do not treat a cloned destination xattr as a source property. Then run existing `paranoidCheck` over the completed data/resource forks and the normal property checks; recheck source stability and its Unison scan fingerprint. No unverified fork mutation follows this step. A changed source aborts/retries the item.
+8. **Validate and commit:** invoke the configured Adobe validator through the common receiving-candidate hook described below. After successful required validation, flush the staged file as required by the chosen durability policy, perform the existing destination `checkNoUpdates`, and enter the normal `Files.renameLocal`/stashing/archive lifecycle. Recheck pathname-to-inode identity immediately before replacement. Archive updates happen only after successful commit. Mark uncertain entries for rescan after interruption.
+9. **Recover:** a temporary file is uncommitted until verified and renamed. An interrupted patch must not be treated as an ordinary valid resumable prefix. Delete/rebuild only transaction-owned staging files, or reuse one only after complete target verification. Keep partial SDE state in a separate transaction namespace so the existing prefix resumer cannot misinterpret it.
+
+Errors such as unsupported clone/EXDEV can select ordinary transfer before any live mutation. ENOSPC, I/O errors, instability, or failed verification leave the live target and its archive unchanged and report a failed item; avoid an endless full-copy retry when disk space is exhausted. All file descriptors, registrations, and temporary files need cancellation/connection-close cleanup.
+
+On filesystems without cloning, use normal Unison transfer by default. Copying the entire base and then applying a small patch can reduce wire traffic but does not reduce local writes, and may be worse than existing rsync. Such a backend requires separate measured justification.
+
+### APFS guarantees and limits
+
+APFS clone-on-write shares backing extents until a clone is modified. Same-volume clone eligibility must be tested at the destination, regardless of source volume or whether transfer is local or remote. Never assume a volume called Bumer is APFS. Cloning can fail, and writes to a successful clone can still fail for lack of space.
+
+The application can promise that it issues writes only to chosen logical ranges on the clone. It cannot promise a particular physical block size, one disk write per XML edit, zero allocation, or a speed multiplier. APFS allocation, filesystem metadata, caches, compression, and storage firmware affect actual work. Reuse source/destination proofs and verification reads only when correctness is demonstrated, not simply to improve benchmark numbers.
+
+A design-time disposable APFS probe confirmed: a clone has a different inode, a byte patch leaves its source unchanged, and atomic rename makes the new pathname visible while an existing open descriptor and hardlink still expose the old inode. This is expected snapshot/rename behavior. Implementation tests now qualify multiply linked destinations with Unison's existing replace-by-rename behavior: the selected pathname receives the verified new inode, and other aliases keep the old bytes. The fast path permits this case; it does not preserve hardlink relationships across the replacement.
+
+Atomic rename protects readers from seeing a partially patched file. It does not make the preceding verification and replacement atomic with respect to a third-party writer. Keep the existing race checks, minimize the interval, and document that stronger guarantees need cooperative locking or a stable filesystem/application snapshot. Advisory locks alone do not solve uncooperative edits. Do not claim ACID or power-loss durability from rename alone; exercise fsync/parent-directory handling and macOS `F_FULLFSYNC` policy separately if that stronger durability is offered.
+
+## Direct Adobe validation option
+
+This is required product functionality, not merely an offline test oracle. Add a receiving-candidate validation hook owned by core and supplied by the DNG extension. It must run for every selected DNG about to be committed: metadata patch, APFS clone, stock rsync/full-copy fallback, new file, moved-file reuse, resumed completed staging, external-copy result, and generated merge result. Each receiving replica validates its own finalized candidate. Place the hook after data/resource forks and source-selected metadata are complete and before rename/archive, at a shared lifecycle point so optimized-path failure cannot bypass validation. `adobevalidate` is independent of whether semantic transfer is enabled or the DNG qualifies for an SDE profile; disabling optimization must not disable requested validation.
+
+Proposed preferences: `adobevalidate = off|warn|require` (off until user selects it; recommend require for requested validation), `adobevalidator = /absolute/local/path`, plus pinned tool/build identity, adapter version, timeout, bounded diagnostic output, memory limit and scheduling configuration. Optional `adobevalidatescope = received|all-scanned` defaults to received; all-scanned explicitly checks otherwise unchanged DNGs too. Validate unchanged files through a private snapshot/staged copy or a qualified read-only-descriptor SDK driver. Never pass a live unchanged file to an arbitrary pathname-based helper relying on a post-hash to detect mutation; detection would not undo it. `warn` is a visible user-selected permissive policy, never an implicit fallback from require.
+
+Support a qualified build of Adobe SDK `dng_validate` or a small SDK-backed validation driver. Official SDK information observed during design identifies DNG SDK 1.7.1 build 2724. Historical Adobe-authored `dng_validate.cpp` parses a DNG, reads stage-1 data, verifies its raw digest and constructs later image stages by default. **Qualify the exact current binary and its output/exit behavior before defining success.** Inspected Adobe-authored SDK source shows a raw digest mismatch can call `ReportError`, which prints diagnostics without throwing, and the CLI can still exit zero. Thus exit zero or “Validation complete” is not sufficient. Require a pinned build with validation/reporting enabled, validate negative controls, and either capture structured error counters in an SDK driver or use a strictly qualified diagnostic parser. Ambiguous/unknown/truncated diagnostics cannot become pass.
+
+Use an explicit argv allowlist and one absolute staging-file argument, with no shell. Exclude output/conversion modes such as `-dng`, `-tif`, or stage-image output options. Open inputs read-only in a custom driver; record and check candidate size/identity and full SHA-256 before/after validation so a misconfigured helper cannot silently mutate an approved candidate. Bounded logs must never be mistaken for an unambiguous pass when truncated. Timeout, signal, crash, unknown result format, unavailable binary, unsupported requested algorithm, invalid structure or confirmed digest mismatch blocks commit under require. Missing an optional embedded digest is reported separately; it does not itself make a valid DNG corrupt. Define any stricter “digest must exist” policy separately.
+
+Record candidate SHA-256, tool SHA-256/build, argv/adapter version, algorithm/tag, source snapshot identity, structured structural/decode/digest statuses, exit/signal and capped diagnostics. Validation receipts are invalid after candidate mutation. No reuse across tools/profiles/flags or merely matching raw digest. Byte-transfer verification remains mandatory even when Adobe validation succeeds. Do not claim Lightroom UI Validate parity; this option directly invokes an independently qualified Adobe SDK validator.
+
+The implemented feature is `dng-validation-v0`; negotiate support and the requested policy before propagation. The receiver chooses its own explicitly configured local executable; a remote peer cannot supply a command path to execute. Require must fail clearly on an old/unqualified receiving peer or missing tool instead of silently transferring without validation. A non-APFS or non-SDE transfer can still satisfy validation. For merge results both receiving sides must honor their required validation policy before committing their own candidates; existing non-atomic two-replica recovery semantics still apply.
+
+All validator invocations use the OxCaml supervisor and shared CPU/memory/I/O budget described below. ExifTool and other helpers use the same scheduling path. A supported current Adobe SDK/tool license may constrain distribution; make this an optional locally configured dependency and review the exact SDK license before bundling code/binaries. SDK absence must not disable ordinary Unison or the exact DNG extension when validation is off.
+
+## Semantic reconciliation beyond transfer optimization
+
+The extension must eventually influence how changes are *described and reconciled*, not only how bytes travel. Do this without making the initial archive unsafe.
+
+**First release:** an XMP-only edit is still a byte change, displayed as “DNG XMP changed” with its eligible patch size. One-side edits propagate exactly. Both-side edits retain existing conflicts unless the full bytes match. An image-changing edit can never disappear because selected metadata or a raw digest happens to match.
+
+**Later opt-in `xmp-three-way` policy:** store a lossless base XMP packet and profile-specific parsed representation after successful common synchronization, bound to the archive generation, full file identity, preserved identity, policy version, and parser version. Treat this as an optional base cache: if absent, stale, untrusted, or incompatible, refuse auto-merge and show a conflict. Do not infer a base from whichever replica was scanned first. Two-way comparison is insufficient for deletion detection and genuine concurrent edits.
+
+Use expanded RDF names, preserve qualifiers and unknown constructs, and define treatment of RDF Bag/Seq/Alt, language alternatives, absent versus empty values, numeric spellings and arrays before enabling each field. XML canonicalization alone is not XMP/RDF semantic equality. Unknown namespaces remain opaque conflict units. Conservatively group related rendering properties into one conflict unit. The initial auto-merge allowlist should be very small and justified by fixtures; it must never merge conflicting crop/orientation/develop parameters merely because XML property names differ.
+
+Three-way rules: one side changed from base -> take it; both made the same supported semantic change -> converge; disjoint independently mergeable fields -> compose only under explicit policy; deletion versus update or competing rendering/unknown changes -> conflict. Filesystem property conflicts retain existing rules. An XMP-only edit on one side and a non-XMP/image change on the other is a conflict by default: transplanting develop settings onto different pixels can be wrong.
+
+Generate **one deterministic exact target artifact**, validate it, then send those same bytes to both sides through normal guarded commits. Verify/stash both old versions as the existing merge lifecycle requires. The result cannot be “equivalent but indefinitely different” files with unchanged byte fingerprints. Partial two-replica merge failure follows Unison's recovery semantics and must be tested; there is no distributed atomic transaction.
+
+True non-byte convergence (different full files declared synchronized) would require per-replica byte identities plus a common semantic base, new archive/reconciliation invariants, explicit capability/policy negotiation, and downgrade protection. It is not required for useful semantic extensions and is **out of scope for the first implementation**. Do not smuggle it into `Fingerprint.equal`, `ContentsSame`, or `RawImageDigest` handling. If later requested, design it as a separate archive-format feature with migration/rollback tests.
+
+### Growing XMP and layout-changing files
+
+Milestone 1 does not invent unused padding. Only bytes actually owned by a parsed, validated packet are writable. A later `dng-xmp/1` can allow changed count/offset cells, a grown packet in proved reusable space, or append-and-repoint, provided every changed structural field is explicitly accounted for and all unchanged bytes retain exact source layout. The target is still the source's exact byte sequence; do not append an equivalent packet in a different place and pretend it is the source.
+
+For arbitrary reserialization, raw payload may move and cheap clone patching may be impossible. Plan exact COPY/ADD ranges with an existing delta engine or use stock rsync. A semantic match can help locate reusable content, but every target byte still needs provenance and final verification. Bounds checks, alias analysis, opaque-byte preservation, and exact target tests gate each broader profile.
+
+## SDE/0 experimental format and protocol draft
+
+### Prior art and reason for an envelope
+
+| Existing mechanism | What it supplies | Remaining need here |
+| --- | --- | --- |
+| Unison/rsync, including newer upstream reflink hooks | Proven byte-oriented matched-block transfer and existing range-copy optimization | DNG semantic profiles and any missing APFS whole-clone/preserve-range staging |
+| RFC 3284 VCDIFF / xdelta | Standard binary delta representation | Versioned semantic profile, preservation obligations, policy and commit contract |
+| Git attributes/diff/merge drivers | Path-selected interpretation and three-way merge | Synchronization/archive integration; textconv is display-only and one-way |
+| SQLite Session | Row-aware changesets and conflict handling | Arbitrary externally edited TIFF containers and opaque-byte preservation |
+| Automerge | Semantic document history/sync for its data model | Existing Lightroom/DNG files are not Automerge documents |
+| RFC 6902 / RFC 5261 | JSON/XML structural patch operations | DNG byte layout, RDF semantics, exact reconstruction, stale-base and filesystem handling |
+| Syncthing BEP | Block-based file synchronization | Format-specific semantics and local clone patch materialization |
+
+The survey did not identify a drop-in public contract covering this complete combination. That is a scoped research finding, not proof of novelty or an assertion that no other system can do semantic sync. Name the specification experimental, publish conformance fixtures, and invite review before calling it a standard.
+
+### Required envelope
+
+Implement the normative schema in `doc/semantic-delta-v0.md`, with byte-level examples and rejection cases. The following is the design shape, not a finalized wire encoding:
+
+```text
+format: "SDE"
+version: 0
+profile: "org.firstpair.dng-xmp/0"
+policy: "exact"
+hash: "sha256"
+nonce: bounded per-transaction identifier
+base:   { length: u64, whole_digest: bytes32 }
+target: { length: u64, whole_digest: bytes32 }
+preserved: { ordered_extents, offset_bound_digest: bytes32 }
+classification: "xmp-packet-changed"  # informative; no authority by itself
+operations:
+  WRITE { offset: u64, length: u64, old_digest: bytes32,
+          new_digest: bytes32, payload: bytes[length] }
+```
+
+V0 is same-length, non-overlapping WRITE operations over a clone of the named base; the ordered complement is implicitly retained at the same offsets. No inserts, truncates, file paths, symlinks, executable commands, external URLs, or recursive patch chains. All file bytes are covered exactly once by WRITE ranges or preserved ranges. Receiver validates that every WRITE lies within the profile-authorized XMP region. Sort order is normative; reject duplicate/overlapping operations, impossible lengths and unknown mandatory fields/profile versions. Specify zero-length cases, hash domain encoding and maximum message/packet/operation sizes. Chunk large payload transport into bounded frames; do not allocate from peer-supplied totals.
+
+The implemented format has one canonical fixed binary encoding with checked big-endian integers, specified in `doc/semantic-delta-v0.md`; v0 has no optional fields or TLV extensions. Unison carries this same SDE/0 string and SDR/0 request in a distinct bounded RPC. Per-command body limits are enforced before allocation, and inner strings have independent limits. The current envelope is retained in bounded memory rather than streamed incrementally. Do not introduce a second representation or canonical JSON hash without a separately specified version and conformance tests.
+
+Hashes protect integrity and bind a plan to its base; they do not authenticate an untrusted peer. Rely on Unison's configured trusted connection/security model, and validate all lengths/ranges even from authenticated peers. Keep the existing legacy fullfingerprint for archive compatibility; SDE adds SHA-256 rather than silently changing MD5-based historical archive identities.
+
+Register features such as `semantic-delta-v0` and `dng-xmp-v0` with `arcFormatChange=false`. Exchange profile/policy versions explicitly. Only invoke new RPC commands when both endpoints advertise support and the negotiated RPC encoding is qualified; RPC v0 peers fall back. Avoid changing existing command payloads and `convV0` types. New RPCs should have distinct names and bounded decoders. APFS availability is a destination-local capability, not a requirement that both peers run macOS.
+
+No first-release archive format bump is necessary: exact target bytes preserve existing archive invariants. Optional classification caches are disposable and keyed by full identity plus parser/schema version, never just path, mtime, row count, or raw digest. Any future authoritative semantic archive change must declare `arcFormatChange=true`, audit archive naming/loading/hash logic, preserve or intentionally migrate historical formats, and prohibit silent downgrade.
+
+## OxCaml port and bounded parallelism
+
+### Port the core first, optimize demonstrated hot paths second
+
+The current code is OCaml; a useful OxCaml rewrite means compiling and qualifying the complete CLI/core with OxCaml, then refactoring performance-critical code to use its capabilities. It does not require mechanically rewriting every unchanged module. Retain the original synchronization algorithm and protocol invariants. Maintain a sequential reference backend for parity tests and an ordinary OCaml build where feasible. **Historical baseline:** the unmodified checkout failed under the installed OxCaml at the `Safelist.mem` modality mismatch. Compatibility fixes and the complete current CLI now build and pass selftests with both compilers; see the live evidence and `doc/oxcaml.md`. This supersedes the design-time blocker, without claiming compiler-proved domain safety or a compiler-only speedup.
+
+Start with the already installed `5.2.0+ox` switch. Record compiler configuration and package lock/snapshot in the benchmark artifact. Upstream OxCaml currently reports an OCaml 5.4 base, while installation documentation still describes `5.2.0+ox`. Current upstream support emphasizes x86-64/arm64 Linux and arm64 macOS; x86 macOS “may still work.” The local Intel toolchain works as an installed compiler, but a fresh upstream upgrade needs separate qualification. No native Windows OxCaml guarantee is made.
+
+Build all OCaml artifacts, C stubs, and linked dependencies with the selected compiler in separate output directories. Do not reuse `.cmi`, `.cmx`, or prebuilt runtime-dependent objects from another switch. Qualify CLI/core first; GTK/native macOS GUI, filesystem monitors, and Windows compatibility builds need their own matrix. Do not replace vendored Lwt merely because `oxcaml-lwt` is installed.
+
+### Ownership model
+
+Keep Unison's existing Lwt event loop as the sole owner of mutable synchronization state: promises/waiters, RPC registries/message IDs/receivers, archive tables, feature/preferences state, progress callbacks, cancellation registration, and final commits. The vendored Lwt is not proven domain-safe (`src/lwt/lwt.ml:11–31`, `src/lwt/generic/lwt_unix_impl.ml:25,61`). Remote registries (`src/remote.ml:721,916,1025`) and archive caches (`src/update.ml:675,729,742`) also require single-owner access.
+
+Workers receive immutable job descriptions and independently owned read-only descriptors/buffers. Initial parallel jobs: DNG inspection, range hashing, whole-file strong hashing, and pure plan construction. Use `pread` or independent descriptors, not shared seek positions. Return immutable results through an audited bounded completion queue plus a wakeup descriptor; the event-loop owner drains it and calls `Lwt.wakeup`. A worker must never directly mutate an archive or call into legacy Lwt/RPC/UI code.
+
+The user explicitly requests efficient helper invocation and use of all cores. **Production defaults to `semanticworkers = 0` (automatic), using the physical-core count on macOS and the available logical count as a portable fallback**; an explicit positive value overrides the budget. This host reports 18 physical and 36 logical CPUs via `sysctl -n hw.physicalcpu hw.logicalcpu`; do not hardcode either count. The 18-versus-36 cached-hash comparison found about 10% more throughput at 36, supporting 18 as a balanced default with 36 available for throughput experiments. Adobe decoding needs its own benchmark. One-worker mode is the sequential reference/test control. Expose detected and effective capacity. Route every Adobe, ExifTool or other helper invocation through a bounded OxCaml supervisor. Spawn/reap/cancel processes asynchronously, drain stdout/stderr concurrently into bounded buffers, and return immutable completion records to the owner loop. Do not allocate a blocked OCaml domain just to wait for each child. Domain CPU tasks and external-process CPU reservations draw from one global budget. Transaction payload/descriptor credits are implemented estimates; per-volume I/O, actual RSS and external child memory caps remain separate work.
+
+Account for nested parallelism: a single-threaded helper reserves one CPU permit; an explicitly configured K-thread SDK worker reserves K; a whole-machine native worker can reserve the whole budget. Do not launch one internally all-core validator per core. Prefer a qualified SDK driver with an explicit thread cap or documented control; if the stock executable's inner parallelism is unknown, characterize it or run one budget-reserving process until it is known. Measurements determine whether multiple single-thread SDK jobs or fewer multi-thread jobs achieve better throughput. Expose effective process/domain/native-thread counts and scheduling stalls. Using all cores means making CPU capacity available under this accounting, not forcing every core busy while storage or dependency constraints make that wasteful.
+
+The Adobe-authored SDK implementation inspected during design has `dng_host::PerformAreaTaskThreads` returning 1 and `dng_area_task::Perform` using one thread; the host documentation identifies overriding area-task dispatch as the multiprocessing extension point. A task's `MaxThreads` capacity does not mean the stock CLI creates those threads, and no `--threads` CLI switch was established. Do not invent that option or assume the existence of `NewRawImageDigest` implies actual parallel execution. Multiple qualified single-thread jobs use many cores across files. To use many cores for one large DNG where SDK stages support it, implement and test the explicit-thread-count SDK host wrapper, including task lifecycle, cancellation and transitive codec behavior; reserve that count from the same OxCaml budget. Record SDK version/build flags and actual observed threads. The AOSP copies inspected establish source mechanics only; some Android builds disable XMP/JXL and are not proposed as the user's full Adobe validator.
+
+Benchmark 1/2/4/8 and auto, including mixed hashing/ExifTool/Adobe workloads. Bound jobs, open descriptors, memory, in-flight manifest bytes, and I/O per volume separately. An HDD may become slower with parallel reads even when CPU utilization rises. Cancellation uses explicit tokens and process-group cleanup; discard late results by transaction generation, close owned descriptors, and never allow an obsolete result to authorize a commit.
+
+Use OxCaml portable/contended annotations and the pinned parallel library APIs after proving sequential parity. Unboxed offset/length records, local allocation for short-lived parse structures, and vectorized/checksum loops are candidate optimizations, not assumptions. Read/parse/hash fusion can save passes but must produce byte-for-byte identical digests and maintain stable-handle checks. Do not parallelize ordinary incremental SHA-256 by concatenating chunk hashes; whole SHA-256 and a separately specified tree hash are different algorithms.
+
+Audit every C function executed by workers for GC roots, globals, ownership, bounds, exception paths, runtime release/reacquisition, and platform ABI behavior. Copy/root buffers before releasing the runtime as required; never access OCaml heap values while the runtime is released. Existing OCaml 5 compatibility macros do not establish domain safety. The installed compiler reports TSAN disabled; do not claim a race-sanitizer result without a separately supported instrumented build.
+
+## Implementation map and milestones
+
+Suggested responsibility split; first reuse newer upstream's existing range-copy modules/hooks, then adjust names/order to avoid duplicate APIs and dependency cycles. Keep policy/IO/format concerns separate.
+
+| New or changed file | Responsibility |
+| --- | --- |
+| `src/fsclone.{ml,mli}`, `src/fsclone_stubs.c` | Filesystem capability adapter, APFS whole-file clone now; precise future range-clone contract |
+| `src/clone_sink.{ml,mli}`, `src/transfer.ml` | Generic reference/clone output sinks, cursor tracking, same-offset skip, shifted-range copy, exact EOF |
+| `src/semantic_types.{ml,mli}` | Immutable profile, extent, identity, classification, proposal and limits types; no RPC/archive dependencies |
+| `src/semantic_registry.{ml,mli}` | Registration, path selection, profile/version compatibility |
+| `src/dng.{ml,mli}` | Bounded TIFF/DNG parser and XMP-region discovery |
+| `src/dng_semantics.{ml,mli}` | DNG profile; complete preservation partition; later XMP semantic rules |
+| `src/semantic_hash.{ml,mli}` | SHA-256/extent proof API using a maintained audited implementation; checked streaming reads |
+| `src/semantic_delta.{ml,mli}` | SDE validation, exact plan generation, encodings/conformance |
+| `src/semantic_io.{ml,mli}` | Stable handles, temporary staging, patching, cleanup, verification |
+| `src/semantic_io` using `Fsclone` | Reuse general clone/positional-I/O layer; do not duplicate an APFS implementation inside DNG |
+| `src/semantic_remote.{ml,mli}` | New negotiated RPCs, bounded manifests/payload streams |
+| `src/semantic_workers.{ml,mli}` | Sequential and OxCaml worker backends; owner-thread completions |
+| `src/file_validator.{ml,mli}`, `src/adobe_validate.{ml,mli}` | Shared post-materialization/precommit hook; qualified Adobe SDK/CLI adapter and receipts |
+| `src/helper_supervisor.{ml,mli}` | Bounded helper launch/output/cancel lifecycle and global CPU permits including SDK inner threads |
+| `src/copy.ml` | Shared local/remote optimization hook, standard fallback and finalization |
+| `src/files.ml` | Keep guarded commit; narrowly add transaction revalidation hooks if required |
+| `src/update.ml`, `src/recon.ml`, UI modules | Optional classification annotations; later explicit semantic reconcile integration |
+| `src/Makefile.OCaml`, `src/dune`, build docs | Both build systems, pinned OxCaml/sequential targets, platform guards |
+| `doc/semantic-delta-v0.md` | Normative experimental protocol, profiles, security and conformance |
+| `tests/semantic/`, `bench/semantic/` | Synthetic/public fixtures, adversarial/failure tests, reproducible measurements |
+
+**M0 — Upstream reuse, baseline and qualification.** Inspect pinned current-upstream reflink/range-copy work, decide and document rebase versus minimal backport in an isolated implementation branch, and re-pin integration references. Build/run tests for the selected base with stock OCaml and pinned OxCaml. Record compiler/platform/build settings, binary versions, expected pre-existing failures, and baseline sync behavior. Import or generate legally distributable tiny fixtures; do not commit personal photographs or private report paths/content. Acceptance: no duplicated upstream clone engine; reproducible commands and clean separation of build outputs; cross-binary baseline archive/wire smoke test.
+
+**M1 — Pure semantic kernel and draft spec.** Implement bounded parser, complete preservation partition, SHA-256 identities, registry interface, sequential planner and standalone SDE decoder/validator. No live-file writes. Add a developer inspection/dry-run command that reports classification, eligibility/reason, planned logical bytes and verification cost. Acceptance: adversarial fixtures rejected safely; opaque-trailer counterexample detected; deterministic manifests; exact SDE vectors round-trip in the canonical encoding, standalone and inside bounded RPC framing; a second trivial test extension exercises registration without special-casing DNG in core.
+
+**M2 — Local APFS exact patch path.** Clone receiver to staging, apply fixed-range XMP patch, verify, and reuse normal property/commit lifecycle. Cover the local-local bypass explicitly. Acceptance: whole output matches source byte-for-byte; original target unchanged on injected failure; logical bytes written are limited to planned ranges; clone unavailable/disabled behavior correct; all existing selftests pass. Instrument syscall-level logical writes; do not infer physical amplification from file size.
+
+**M2-G — General APFS-aware Unison (required user scope; implement before M2).** Reuse/extend the filesystem adapter and generic clone sink, source-to-staging local clone, receiver-basis rsync same-offset skip, shifted-match copying, and a local cross-volume producer using the same sink. DNG must consume this filesystem layer. Acceptance: ordinary binary/text files benefit without a DNG plugin; inserted/deleted prefixes and duplicate blocks remain exact; target shrink/growth is correct; baseline peers still work; clone-off matches stock output; resource-fork/properties and cancellation remain correct. Add the fake constrained range adapter to test the richer ZFS/ReFS capability contract; preserve existing upstream backends without claiming new runtime qualification for them.
+
+**M3 — Remote negotiation and fallback.** Add negotiated profile/RPC transport; reuse exactly the local materializer. Acceptance: modified/modified, modified/upstream, upstream/modified, local-local and SSH-local combinations; unsupported/old peers use baseline behavior; malformed envelopes cannot escape roots or allocate unbounded memory; disconnect/restart/cancel leaves valid archives and recoverable staging. Remote source and APFS receiver should benefit even when source filesystem cannot clone.
+
+**M4-V — Direct Adobe validation and helper scheduling (required).** Qualify a pinned Adobe SDK validator/driver, add the receiving-candidate hook and `off|warn|require` policy, negotiate required receiver enforcement, and route all helpers through the shared bounded OxCaml supervisor with explicit native-thread budgeting. Acceptance: every receiving path including new/full-fallback/resumed/reused/merged DNG invokes the option; require rejects a corrupt-digest fixture even if the tool exits zero; absent optional digest differs from invalid/mismatch; crashes/timeouts/mutations/truncated diagnostics fail safely; cancellation reaps children; mixed CPU/helper jobs can use the available core budget without unbounded nested threads. Qualify multi-file single-thread throughput and the explicitly capped SDK area-task wrapper for one-large-file scaling where supported. Validation off leaves baseline behavior usable without Adobe installed. This milestone can proceed alongside M2/M3 and must not be reduced to fixture-only validation.
+
+**M4 — Change reporting and broader DNG coverage.** Expose trustworthy semantic labels and fallback reasons, maintain independent Lightroom/Adobe oracle fixtures, and add layout-changing profile versions only with exact-byte proofs. Acceptance: XMP growth/relocation either produces exact source bytes or uses ordinary transfer; image/rendering/opaque changes are never mislabeled safe; supported corpus strata pass byte checks and configured validation.
+
+**M5 — Conservative opt-in semantic reconciliation.** Add optional base metadata capture and a narrowly specified three-way XMP policy. Reuse existing merge staging/commit behavior, preserving originals and producing one exact result. Acceptance: same/disjoint/conflicting/deletion/rendering/unknown namespace cases, stale/missing base, partial two-replica failure, policy mismatch, deterministic serialization, and rollback/downgrade behavior. Default remains exact, conflict-preserving sync.
+
+**M6 — OxCaml data-path rewrite and qualification.** Run full CLI/core on pinned OxCaml, introduce bounded workers and selected measured representation improvements, audit C stubs, and document platform/GUI status. Acceptance: sequential/parallel results identical, mixed compiler archive/wire tests pass, cancellation and randomized scheduling stress pass, descriptor/RSS limits hold, complete benchmark report distinguishes read/write/network/CPU effects. A compiler-only rebuild is an intermediate milestone, not proof of performance improvement or parallel safety.
+
+Deliver generic APFS-aware transfer and a usable exact DNG extension after M2-G/M3 even while M4–M6 continue. Keep each milestone reviewable and runnable. Do not mix an unbounded whole-codebase rewrite with the first correctness-critical transfer change.
+
+## Required acceptance matrix
+
+1. **Exactness:** same-offset/same-count packet edits, packet unchanged, multiple edits, first/last packet byte, zero/edge sizes; final file SHA-256 and byte comparison equal source. Preserve all complement bytes and the source-selected fork/property state.
+2. **Coverage:** both TIFF byte orders; inline/out-of-line values; multiple IFDs/SubIFDs; EXIF/GPS/private tags; tiles/strips; previews; embedded originals; opcode/profile/rendering changes; unknown tags and opaque trailers. Unsupported cases must fall back deterministically.
+3. **Malformed input:** cycles, aliasing, duplicate packet ambiguity, huge counts, overflow, truncation, invalid offsets/types, XML bombs if parsing XML; bounded time/memory and no writes to live target. Fuzz parser and SDE decoder with sanitizer-qualified C helpers where available.
+4. **Integrity:** stale stored DNG raw digest, same raw digest/different metadata, same decoded pixels/different encoding, altered opaque bytes, wrong target/base hashes, corrupt payload, overlap/range escape. Never commit on digest failure.
+5. **Concurrent modification:** source changes during inspection/transfer; receiver changes before clone/during verification/before rename; pathname replaced with symlink; inode replacement; mtime restored with changed bytes; cache made stale; canceled worker returns late. Explain the remaining uncooperative-writer check/rename race rather than writing a test that claims to eliminate it.
+6. **Failure/recovery:** inject errors after clone, mid-pwrite, before/after verification, property setting, flush, rename, and archive update; ENOSPC; permission denied; connection drop; abort; process kill. Each live path is old or a verified new file, never a partial packet; archives are either committed or trigger correct recovery/rescan. Existing rename/stash failure semantics remain accounted for.
+7. **Filesystem behavior:** APFS same/different volumes, no clone support, read-only files, sparse/compressed files if supported, destination hardlinks, open readers, symlinks, case/Unicode path handling, nonempty-to-empty resource forks, xattrs/ACL removal, permissions/timestamps, stashing/backups. No silent inherited-clone property leakage.
+8. **Compatibility:** archive round-trip before/after extension use; extension disabled; old peer/new peer both directions; RPC v0 fallback; compiler switch; platform guard builds; existing profiles, ignore rules, merges and cancellation. First-release archives must remain readable by baseline Unison.
+9. **Parallelism:** sequential vs 1/2/4/8 worker parity, randomized task completion/cancellation, one busy volume, independent volumes, bounded memory/descriptors/queues, no legacy global-state access from workers. Run relevant race instrumentation only where actually supported.
+10. **Semantic merge:** same edit on both sides, disjoint allowlisted descriptive fields, same field divergent edits, delete/update, Bag/Seq/Alt/qualifiers, rendering cross-field conflicts, unknown namespaces, image change plus XMP change, missing/stale base, and deterministic one-artifact convergence.
+11. **Generic cloned transfer:** non-DNG same-size local edit; inserted/deleted prefix; duplicate blocks matched at a different offset; all-literal and all-matched streams; shorter/longer target; STRING→skip→range-copy→STRING transitions; same-volume source clone versus receiver-basis clone; immutable-basis lifetime; partial-resume exclusion; capability cache invalidation; range-alignment/tail and partial-operation errors. Second synchronization must be a true no-op.
+12. **Adobe invocation and CPU accounting:** off/warn/require on every receiving path; old receiver; binary absent/changed; valid/missing/mismatched digest; unsupported/raw decode failure; warning versus error text; truncated output; timeout/crash/signal; mutated candidate; all-scanned no-op scope; child cancellation/zombies; multiple internally parallel SDK processes; mixed ExifTool/hash/Adobe workload; worker auto fills available CPU budget without oversubscription and respects memory/volume limits. Independent source review, synthetic tests, real-corpus validation and native-oracle qualification remain separately reported.
+
+## Benchmark plan and honest performance claims
+
+Use generated fixtures and a consented/copy-only representative corpus. Record baseline hashes before each run and verify output after every run. Publish toolchain commit, hardware, OS/filesystem/volume topology, file-size/packet-size distribution, compressibility, cache state, source/destination location, limits and exact commands. Store machine-readable measurements plus a short interpretation, including unsuccessful optimizations.
+
+Compare: the pinned local original; selected newer upstream with its existing reflink/range-copy behavior; minimally compatibility-fixed selected upstream compiled with pinned OxCaml (record actual fixes); generic APFS improvements with semantic plugins disabled; new sequential DNG extension with cloning off/on; new OxCaml extension with 1/2/4/8 workers. This separates already available upstream improvements, compiler gains, algorithm changes, general clone materialization, DNG semantics and concurrency. Include same-volume and cross-volume local sync, remote sync over a documented link, non-APFS receiver fallback, cold/warm caches, and HDD/SSD where available. Do not silently compare a cold baseline with a warm optimized run.
+
+Workloads: no changes; fixed-size XMP edit in 32/128/512 MiB and multi-GiB files; larger/growing XMP; metadata plus preview/raw/opaque change; full content change; thousands of small files; malformed/unsupported files; new files; concurrent editor; mostly eligible mixed corpus. Use at least five measured repetitions after declared warmups, report median and tail distribution, and retain raw samples. For small sample counts report quantiles cautiously.
+
+Measure wall time, CPU time, peak RSS, peak descriptors/queue depth, bytes read at application level, logical write bytes, transmitted bytes, clone success/fallback counts/reasons, hash/parse/verify/commit stage timings, and filesystem/storage write telemetry where obtainable. APFS physical allocation/shared-extent accounting is not equivalent to logical file size or proof of physical write count. State measurement limitations.
+
+Expected hypothesis, not a promise: eligible APFS updates substantially reduce destination logical writes and transfer bytes; full validation still reads large files, so wall time may remain bounded by hashing/storage bandwidth. The initial implementation can be worthwhile even without a large elapsed-time speedup. A faster profile that skips verification needs a separately stated trust model and is not enabled by default. Do not set a speedup target that encourages weakening preservation checks.
+
+## Defaults, open questions, and handoff checklist
+
+Proceed with these defaults unless actual fixtures invalidate them: exact convergence; general clone adapter independent of semantics; fixed-range XMP profile first; SHA-256 plus existing archive fingerprints; statically registered extensions; no raw decoding needed for transfer eligibility; APFS clone auto with ordinary fallback; no auto-merge until an explicit policy is selected; production auto CPU budgeting with a sequential reference; no production-photo mutation; existing archive format retained. Adobe validation is a directly invokable optional precommit step and may decode raw data when selected. Reuse upstream ZFS-related OS primitives/ReFS backend and add constrained mock tests; claim new platform qualification only after testing it.
+
+Open questions are implementation investigations, not reasons to block basic work: measured fraction of fixed-layout XMP changes; appropriate SHA-256 library and license/build burden; exact macOS clone API/FD binding supported by target deployment; intended durability tier; useful XMP merge allowlist; broader TIFF/BigTIFF coverage; pinned OxCaml package availability on other machines; native GUI dependencies. Resolve them with fixtures, small experiments and documented choices. Only ask the user when the answer changes desired behavior or authorizes real-data deployment.
+
+At Sol session start:
+
+* Read this file, recheck instructions/Git status, and preserve the pinned design baseline.
+* Continue the implementation stage under the user's original goal authorization. The design/handoff subgoal is complete; inspect session goal state before creating or updating tracking so a completed design goal is not confused with finished implementation.
+* Continue from the live implementation handoff above; do not restart completed M0–M3 work. Read current code and test evidence before choosing the next milestone.
+* Keep a concise milestone log with evidence, discovered constraints and remaining work.
+* Run existing selftests and the relevant new tests after each material change; avoid gratuitous repeated full runs.
+* Finish with code, draft spec, fixtures, reproducible benchmarks and clear compatibility/platform limits. Do not claim APFS physical block savings or semantic correctness from raw-image digest equality.
+
+## Primary sources
+
+Sources checked during design; local source findings are pinned above. Verify moving toolchain documentation again before upgrading dependencies.
+
+* [Adobe DNG 1.7.1 specification](https://helpx.adobe.com/content/dam/help/en/camera-raw/digital-negative/jcr_content/root/content/flex/items/position/position-par/download_section_733958301/download-1/DNG_Spec_1_7_1_0.pdf): TIFF/DNG tags and raw digest definitions, including RawImageDigest/NewRawImageDigest.
+* [Adobe XMP specifications](https://developer.adobe.com/xmp/docs/xmp-specifications/): data model, XML serialization, storage and reconciliation specifications.
+* [Adobe DNG SDK](https://www.adobe.com/support/downloads/dng/dng_sdk.html): optional validator/SDK distribution and version information; qualify a pinned actual tool build and its license.
+* Adobe-authored SDK source mirrors: [validator](https://android.googlesource.com/platform/external/dng_sdk/+/6b5cf2a88ebd2b099e56d0d4717e962772ff9067/source/dng_validate.cpp), [host](https://android.googlesource.com/platform/external/dng_sdk/+/68764928faa1d15f76bbf8f03c6e630c570a4354/source/dng_host.cpp), [area-task dispatch](https://android.googlesource.com/platform/external/dng_sdk/+/refs/heads/android14-prebuilt-test/source/dng_area_task.cpp), [error reporting](https://android.googlesource.com/platform/external/dng_sdk/+/refs/heads/android14-prebuilt-test/source/dng_exceptions.cpp), and [raw digest validation](https://android.googlesource.com/platform/external/dng_sdk/+/refs/heads/android12-qpr1-release/source/dng_negative.cpp). These establish specific source behavior; qualify the actual installed current SDK build separately.
+* [Apple About APFS](https://developer.apple.com/documentation/foundation/about-apple-file-system), [clonefile manpage](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/man/man2/clonefile.2), [copyfile manpage](https://github.com/apple-oss-distributions/copyfile/blob/main/copyfile.3), [rename](https://raw.githubusercontent.com/apple-oss-distributions/xnu/main/bsd/man/man2/rename.2), and [fsync](https://raw.githubusercontent.com/apple-oss-distributions/xnu/main/bsd/man/man2/fsync.2): clone, metadata, replacement and durability behavior. Local SDK `sys/clonefile.h:33–51` was also inspected.
+* [OpenZFS block cloning](https://openzfs.github.io/openzfs-docs/Basic%20Concepts/Data%20Storage/Block%20Cloning.html), [OpenZFS 2.3 tunables](https://openzfs.github.io/openzfs-docs/man/v2.3/4/zfs.4.html#zfs_bclone_enabled), and [pool features](https://openzfs.github.io/openzfs-docs/man/v2.3/7/zpool-features.7.html): version/operation-specific restrictions and enablement.
+* [Microsoft ReFS block cloning](https://learn.microsoft.com/en-us/windows/win32/fileio/block-cloning) and [FSCTL_DUPLICATE_EXTENTS_TO_FILE](https://learn.microsoft.com/en-us/windows/win32/api/winioctl/ni-winioctl-fsctl_duplicate_extents_to_file): range API and platform restrictions.
+* [ExifTool options](https://exiftool.org/exiftool_pod2.html): temporary rewrite/overwrite behavior; “in place” does not establish sparse range writes.
+* [rsync technical report](https://rsync.samba.org/tech_report/): matched byte-block reconstruction.
+* [Unison v2.53.8 release](https://github.com/bcpierce00/unison/releases/tag/v2.53.8), [pinned newer transfer.ml](https://github.com/bcpierce00/unison/blob/8772d26a2eb77cfd0cb6da81807e81f24f51044c/src/transfer.ml), and [pinned newer copy.ml](https://github.com/bcpierce00/unison/blob/8772d26a2eb77cfd0cb6da81807e81f24f51044c/src/copy.ml): existing reflink/range-copy work that must be assessed before implementation.
+* [Pinned upstream native copy backends](https://github.com/bcpierce00/unison/blob/8772d26a2eb77cfd0cb6da81807e81f24f51044c/src/copy_stubs.c) and [Fs adapters](https://github.com/bcpierce00/unison/blob/8772d26a2eb77cfd0cb6da81807e81f24f51044c/src/fs.ml): existing APFS/Linux/FreeBSD/ReFS implementations, distinct from the local 2024 baseline.
+* [RFC 3284 VCDIFF](https://www.rfc-editor.org/info/rfc3284/) and [xdelta](https://github.com/jmacd/xdelta): existing generic binary delta format/implementation.
+* [Git attributes](https://git-scm.com/docs/gitattributes/): custom diff/merge drivers and one-way textconv limits.
+* [SQLite Session introduction](https://www.sqlite.org/sessionintro.html): structured changesets and conflicts.
+* [Automerge concepts](https://automerge.org/docs/reference/concepts/): semantic document/history synchronization.
+* [Syncthing BEP](https://docs.syncthing.net/specs/bep-v1.html): block-based synchronization protocol.
+* [RFC 6902 JSON Patch](https://www.rfc-editor.org/info/rfc6902/) and [RFC 5261 XML Patch](https://www.rfc-editor.org/info/rfc5261/): structured patch prior art.
+* [OxCaml](https://oxcaml.org/), [installation](https://oxcaml.org/get-oxcaml/), [upstream README](https://github.com/oxcaml/oxcaml/blob/main/README.md), and [parallelism tutorial](https://oxcaml.org/documentation/tutorials/intro-to-parallelism-part-1/): compatibility, platform and concurrency constraints.
+* [OCaml C interface manual](https://ocaml.org/manual/5.4/intfc.html): runtime/heap constraints for foreign calls; check corresponding pinned-version behavior during implementation.
+
+## Design-review addendum
+
+**Verified build baseline and OxCaml blocker.** Unchanged stock source built successfully with OCaml 5.5.1 using `make -C src tui -j4 TOOL_PREFIX=/usr/local/bin/` in `/private/tmp/unison-ocaml-baseline-19wiagcy`. Its `UNISON=/private/tmp/unison-ocaml-baseline-test-state ./src/unison -ui text -selftest` passed with exit 0 and `Success :-)`; user archives were not used. Logs: `/private/tmp/unison-ocaml-baseline-build.log` and `/private/tmp/unison-ocaml-baseline-selftest.log`.
+
+An independent source copy in `/private/tmp/unison-oxcaml-design-39j0mce6` failed under `make -C src tui -j4 TOOL_PREFIX=/Users/alexy/.opam/5.2.0+ox/bin/` at `ubase/safelist.ml:164` against `safelist.mli:23`. Inferred `mem : 'a @ local -> 'a list @ local -> bool` did not match the declared `'a -> 'a list -> bool`. The preceding C stubs built. Log: `/private/tmp/unison-oxcaml-design-build.log`. No implementation fix or OxCaml Unison selftest was performed as part of this design probe. This is source-compatibility work for M0, not a missing compiler-installation issue.
+
+**Recreated Lightroom engines: source evidence, not execution qualification.** `lrc-fingerprint-worker-20261005/crate/src/native.rs:8–38` constructs a version-specific native matcher wrapper from a recomputed raw digest, model, rational crop fields and opcode suffix. `pixel_digest.rs:22–26,55–110` supports bounded classic TIFF, unsigned single-plane CFA/LinearRaw and specific bit depths/compressions; `:381–423` implements the ordered 256×256 tile digest path. `:124–129` deliberately removes linearization from its decode path. `opcodes.rs:215–228` has an explicitly installed-Lightroom-15.6-specific suffix route. These are not a universal original matcher or render identity.
+
+The separate proof worker's `proof.rs:7–60,87–138` binds decode context and ordered framed raw payload bytes, with descriptor-state rechecks. `:213` requires a prior successful full decode; it does not independently validate JPEG entropy. `core.rs:189–190` explicitly leaves receipt/journal/binary seal authentication and exact assignment checks to the caller. Its later context/payload gates support **reuse of a prior raw decode result**, not equality of all DNG contents. Linearization values, camera profiles, XMP and opaque data still need preservation/semantic identities. No real photos were run through these workers during this source review.
+
+Expose optional diagnostics as separate structured channels: structural `{valid, invalid, unsupported, not_checked}`, raw decode `{success, failure, unsupported, not_checked}`, embedded digest per algorithm `{valid, mismatch, missing, unsupported, not_checked}`. Record stored/computed values, algorithm/tag, engine revision, supported-stratum ID and source snapshot identity. Only report `mismatch` after a supported successful recomputation; absence of an optional digest is not invalid DNG. Keep native matcher `{candidate, oracle_qualified}` with exact Lightroom version separate. The inspected implementation of a NewRawImageDigest-style algorithm is not automatically a RawImageDigest validator. The Lightroom UI Validate command's exact implementation was **not verified**; promise independently specified DNG checks, not Lightroom UI parity.
+
+**APFS and parser probes.** Disposable APFS clone/write/rename checks confirmed inode separation, an unchanged source after a cloned byte edit, a copied test xattr, and expected old-inode behavior for hardlinks/open readers. Synthetic opaque-trailer fixtures confirmed selected-content equality can conceal same-length byte differences. These were small correctness probes, not throughput or crash-durability benchmarks. Do not extrapolate them to physical write amplification.
+
+**Useful local reuse anchors.** `compare_dng.py:347–397` binds cache results to paths/stamps/version; its decoded equality remains intentionally distinct from bytes. `rust-scanner/src/main.rs:29–127` is a parser seed with known graph/duplicate/overlap gaps, not a validator. `rust-scanner/src/bin/dng-metadata.rs:76–80,195–202` compacts long values and resumes by row count, so cannot serve as lossless payload/write authority. `preserve_apo.py:54–102` and `rust-scanner/src/bin/byte-verify.rs:4–27` demonstrate the reusable reconstruction-plus-SHA-256 contract. Audit licenses and the exact current source before reuse.
+
+**Historical design-only boundary (superseded).** The original design handoff changed only `SOL.md`. The user subsequently authorized Astra to start implementation, and switched to Sol after the tested first implementation was working. The live section at the beginning of this file is authoritative for implemented code, evidence and remaining work; this addendum preserves the original research findings, not the current implementation status.

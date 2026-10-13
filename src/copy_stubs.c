@@ -35,7 +35,9 @@
 
 
 #include <caml/memory.h>
+#include <caml/alloc.h>
 #include <caml/threads.h>
+#include <caml/signals.h>
 #include <caml/unixsupport.h>
 #include <caml/version.h>
 
@@ -458,3 +460,262 @@ CAMLprim value unison_copy_file(value in_fd, value out_fd, value in_offs, value 
 
 
 #endif /* defined(__linux__) || defined(__FreeBSD__) || defined (__sun) || defined(_WIN32) */
+
+/* Receiver-local, data-only cloned staging. Keep the basis separate from the
+ * evolving output, so shifted rsync references never read overwritten bytes.
+ * The private basis is unlinked before returning and lives only through its fd.
+ * Unlike clone_path, operational errors are not silently treated as unsupported.
+ */
+#if defined(__APPLE__) && defined(MAC_OS_X_VERSION_10_12)
+#include <fcntl.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <sys/stat.h>
+#include <sys/xattr.h>
+#include <sys/acl.h>
+#include <unistd.h>
+
+static int unsn_same_basis(const struct stat *a, const struct stat *b)
+{
+  return a->st_dev == b->st_dev && a->st_ino == b->st_ino &&
+    a->st_size == b->st_size &&
+    a->st_mtimespec.tv_sec == b->st_mtimespec.tv_sec &&
+    a->st_mtimespec.tv_nsec == b->st_mtimespec.tv_nsec &&
+    a->st_ctimespec.tv_sec == b->st_ctimespec.tv_sec &&
+    a->st_ctimespec.tv_nsec == b->st_ctimespec.tv_nsec;
+}
+
+/* Keep these immediate constructors in sync with Fs.clone_stage_decline. */
+enum unsn_stage_decline {
+  UNSN_STAGE_PLATFORM = 0, UNSN_STAGE_NONREGULAR, UNSN_STAGE_FLAGS,
+  UNSN_STAGE_CROSS_DEVICE, UNSN_STAGE_UNSUPPORTED
+};
+
+static value unsn_clone_stage_impl(value source, value destination, int strict,
+                                  int keep_parent)
+{
+  CAMLparam2(source, destination);
+  CAMLlocal3(pair, result, declined);
+  if (__builtin_available(macOS 10.12, *)) {} else {
+    if (!strict) CAMLreturn(Val_int(0));
+    declined = caml_alloc(1, 1);
+    Store_field(declined, 0, Val_int(UNSN_STAGE_PLATFORM));
+    CAMLreturn(declined);
+  }
+  /* Allocate every result block before acquiring native resources. An OCaml
+   * allocation failure must not abandon a stage or descriptors on success. */
+  pair = caml_alloc_tuple(keep_parent ? 3 : 2);
+  Store_field(pair, 0, Val_int(-1)); Store_field(pair, 1, Val_int(-1));
+  if (keep_parent) Store_field(pair, 2, Val_int(-1));
+  result = caml_alloc(1, 0); Store_field(result, 0, pair);
+  if (strict) {
+    declined = caml_alloc(1, 1);
+    Store_field(declined, 0, Val_int(UNSN_STAGE_PLATFORM));
+  }
+  /* Pending handlers may raise. Dispatch before owning native resources,
+   * then defer newly arriving handlers until the blocking section is over. */
+  caml_process_pending_actions();
+  char *src = strdup(String_val(source)), *dst = strdup(String_val(destination));
+  char *scratch = NULL, *attrs = NULL;
+  int input = -1, basis = -1, output = -1, parent = -1, reserve = -1, stage_read = -1;
+  int error = 0, unsupported = 0, decline_reason = UNSN_STAGE_UNSUPPORTED;
+  int created = 0, scratch_exists = 0;
+  const char *phase = "clone_stage: path allocation";
+  struct stat before, after, named, basis_identity, stage_identity, output_identity;
+  acl_t acl = NULL;
+  if (src == NULL || dst == NULL) { error = ENOMEM; goto done; }
+  char *slash = strrchr(dst, '/');
+  const char *name = slash ? slash + 1 : dst;
+  phase = "clone_stage: destination name";
+  if (*name == '\0') { error = EINVAL; goto done; }
+  phase = "clone_stage: scratch allocation";
+  scratch = malloc(strlen(dst) + sizeof(".basis.XXXXXX.unison.tmp"));
+  if (!scratch) { error = ENOMEM; goto done; }
+  sprintf(scratch, "%s.basis.XXXXXX.unison.tmp", dst);
+
+  caml_enter_blocking_section_no_pending();
+  /* A replaced FIFO must not block before the regular-file check. O_NONBLOCK
+   * has no data-I/O effect on the regular files accepted by this operation. */
+  phase = "clone_stage: source open";
+  input = open(src, O_RDONLY | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
+  if (input < 0) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: source stat";
+  if (fstat(input, &before)) { error = errno; goto unlocked_done; }
+  /* Compressed data relies on platform xattrs. Flagged files may also make
+   * private clones undeletable. Keep the ordinary copy path for these cases. */
+  if (!S_ISREG(before.st_mode)) {
+    decline_reason = UNSN_STAGE_NONREGULAR;
+    unsupported = 1; goto unlocked_done;
+  }
+  if (before.st_flags != 0) {
+    decline_reason = UNSN_STAGE_FLAGS;
+    unsupported = 1; goto unlocked_done;
+  }
+  if (slash) *slash = '\0';
+  phase = "clone_stage: destination parent";
+  parent = open(slash ? (*dst ? dst : "/") : ".", O_RDONLY | O_DIRECTORY | O_CLOEXEC);
+  if (slash) *slash = '/';
+  if (parent < 0) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: basis reservation";
+  reserve = mkstemps(scratch, strlen(".unison.tmp"));
+  if (reserve < 0) { error = errno; goto unlocked_done; }
+  scratch_exists = 1;
+  close(reserve); reserve = -1;
+  phase = "clone_stage: reservation removal";
+  if (unlink(scratch)) { error = errno; goto unlocked_done; }
+  scratch_exists = 0;
+  const char *scratch_name = strrchr(scratch, '/');
+  scratch_name = scratch_name ? scratch_name + 1 : scratch;
+  phase = "clone_stage: basis clone";
+  if (fclonefileat(input, parent, scratch_name, CLONE_NOOWNERCOPY)) {
+    error = errno;
+    if (error == ENOTSUP || error == EXDEV || error == ENOSYS) {
+      decline_reason = error == EXDEV ? UNSN_STAGE_CROSS_DEVICE :
+        error == ENOSYS ? UNSN_STAGE_PLATFORM : UNSN_STAGE_UNSUPPORTED;
+      unsupported = 1; error = 0;
+    }
+    goto unlocked_done;
+  }
+  scratch_exists = 1;
+  phase = "clone_stage: basis open";
+  basis = openat(parent, scratch_name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
+  if (basis < 0) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: basis identity";
+  if (fstat(basis, &basis_identity)) { error = errno; goto unlocked_done; }
+  if (!S_ISREG(basis_identity.st_mode) || basis_identity.st_nlink != 1 ||
+      basis_identity.st_dev != before.st_dev || basis_identity.st_ino == before.st_ino) {
+    error = EBUSY; goto unlocked_done;
+  }
+  phase = "clone_stage: source stability";
+  if (fstat(input, &after) || lstat(src, &named)) {
+    error = errno; goto unlocked_done;
+  }
+  if (!unsn_same_basis(&before, &after) || !unsn_same_basis(&before, &named)) {
+    error = EBUSY; goto unlocked_done;
+  }
+  phase = "clone_stage: output clone";
+  if (fclonefileat(basis, parent, name, CLONE_NOOWNERCOPY)) {
+    error = errno; goto unlocked_done;
+  }
+  created = 1;
+  /* Change permissions only on the inode we actually opened. A pathname
+   * chmod could follow a replaced staging name to a live unrelated file. */
+  phase = "clone_stage: output read open";
+  stage_read = openat(parent, name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
+  if (stage_read < 0) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: output identity";
+  if (fstat(stage_read, &stage_identity)) { error = errno; goto unlocked_done; }
+  if (!S_ISREG(stage_identity.st_mode) || stage_identity.st_nlink != 1 ||
+      stage_identity.st_dev != basis_identity.st_dev ||
+      stage_identity.st_ino == basis_identity.st_ino ||
+      stage_identity.st_ino == before.st_ino) {
+    error = EBUSY; goto unlocked_done;
+  }
+  phase = "clone_stage: ACL allocation";
+  acl = acl_init(0);
+  if (!acl) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: ACL clearing";
+  if (acl_set_fd_np(stage_read, acl, ACL_TYPE_EXTENDED)) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: writable mode";
+  if (fchmod(stage_read, 0600)) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: output write open";
+  output = openat(parent, name, O_RDWR | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
+  if (output < 0) { error = errno; goto unlocked_done; }
+  phase = "clone_stage: output reopen identity";
+  if (fstat(output, &output_identity)) { error = errno; goto unlocked_done; }
+  if (stage_identity.st_dev != output_identity.st_dev ||
+      stage_identity.st_ino != output_identity.st_ino || output_identity.st_nlink != 1) {
+    error = EBUSY; goto unlocked_done;
+  }
+  close(stage_read); stage_read = -1;
+  /* Match a fresh data-fork temporary file: old resource forks, Finder info,
+   * arbitrary xattrs and inherited ACLs must not leak into the result when
+   * their synchronization preferences are disabled or the source lacks them. */
+  phase = "clone_stage: attribute listing";
+  ssize_t count = flistxattr(output, NULL, 0, 0);
+  if (count < 0) { error = errno; goto unlocked_done; }
+  if (count > 0) {
+    phase = "clone_stage: attribute allocation";
+    attrs = malloc((size_t)count);
+    if (!attrs) { error = ENOMEM; goto unlocked_done; }
+    phase = "clone_stage: attribute read";
+    ssize_t actual = flistxattr(output, attrs, (size_t)count, 0);
+    if (actual < 0) { error = errno; goto unlocked_done; }
+    phase = "clone_stage: attribute clearing";
+    for (ssize_t pos = 0; pos < actual; pos += strlen(attrs + pos) + 1)
+      if (fremovexattr(output, attrs + pos, 0)) { error = errno; goto unlocked_done; }
+  }
+  phase = "clone_stage: basis unlink";
+  if (unlinkat(parent, scratch_name, 0)) { error = errno; goto unlocked_done; }
+  scratch_exists = 0;
+
+unlocked_done:
+  if (input >= 0) close(input);
+  if (stage_read >= 0) close(stage_read);
+  if (reserve >= 0) close(reserve);
+  if (error || unsupported) {
+    if (basis >= 0) { close(basis); basis = -1; }
+    if (output >= 0) { close(output); output = -1; }
+    if (created) unlinkat(parent, name, 0);
+  }
+  if (scratch_exists) {
+    const char *n = strrchr(scratch, '/');
+    unlinkat(parent, n ? n + 1 : scratch, 0);
+  }
+  /* Only the additive handles ABI transfers the actual creation directory.
+   * Legacy success, every decline and every error still close it here. */
+  if (parent >= 0 && (!keep_parent || error || unsupported)) close(parent);
+  if (acl) acl_free(acl);
+  free(attrs); free(scratch); free(src); free(dst);
+  caml_acquire_runtime_system();
+  goto report;
+done:
+  free(attrs); free(scratch); free(src); free(dst);
+report:
+  if (error) caml_unix_error(error, strict ? phase : "clone_stage", destination);
+  if (unsupported) {
+    if (!strict) CAMLreturn(Val_int(0));
+    Store_field(declined, 0, Val_int(decline_reason));
+    CAMLreturn(declined);
+  }
+  Store_field(pair, 0, Val_int(basis)); Store_field(pair, 1, Val_int(output));
+  if (keep_parent) Store_field(pair, 2, Val_int(parent));
+  CAMLreturn(result);
+}
+
+CAMLprim value unison_clone_stage(value source, value destination)
+{
+  return unsn_clone_stage_impl(source, destination, 0, 0);
+}
+
+CAMLprim value unison_clone_stage_status(value source, value destination)
+{
+  return unsn_clone_stage_impl(source, destination, 1, 0);
+}
+
+CAMLprim value unison_clone_stage_handles(value source, value destination)
+{
+  return unsn_clone_stage_impl(source, destination, 1, 1);
+}
+#else
+CAMLprim value unison_clone_stage(value source, value destination)
+{
+  CAMLparam2(source, destination);
+  CAMLreturn(Val_int(0));
+}
+
+CAMLprim value unison_clone_stage_status(value source, value destination)
+{
+  CAMLparam2(source, destination);
+  CAMLlocal1(result);
+  result = caml_alloc(1, 1);
+  Store_field(result, 0, Val_int(0)); /* Fs.Platform_unavailable */
+  CAMLreturn(result);
+}
+
+CAMLprim value unison_clone_stage_handles(value source, value destination)
+{
+  /* The strict decline constructors have identical layouts in both ABIs. */
+  return unison_clone_stage_status(source, destination);
+}
+#endif

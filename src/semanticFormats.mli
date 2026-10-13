@@ -1,0 +1,9 @@
+val register : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
+  (module FormatExtension.S) -> unit
+(** Owner-side startup registration for a trusted compiled profile and its
+    independently negotiated wire capability. Call before feature negotiation.
+    Adding a format requires registration, not transfer/worker dispatch edits. *)
+val local_enabled : unit -> FormatExtension.handle list
+val peer_enabled : unit -> FormatExtension.handle list
+val resolve_peer : string -> FormatExtension.handle option
+(** Explicitly selected profiles whose capabilities were negotiated. *)

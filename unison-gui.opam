@@ -18,7 +18,7 @@ install: [
   ["cmd" "/c" "copy" "src\\unison-gui.exe" "%{prefix}%\\bin"] {os = "win32"}
 ]
 depends: [
-  "ocaml" {>= "4.08"}
+  "ocaml" {>= "5.0"}
   "lablgtk3" {>= "3.1.0"}
   "ocamlfind"
 ]

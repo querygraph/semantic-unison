@@ -388,6 +388,53 @@ let performRename fspathTo localPathTo (workingDirFrom, pathFrom)
 let renameLocal
       (fspathTo,
        ((localPathTo, workingDir, pathFrom, pathTo), (ui, archOpt, notDefault))) =
+  (if not (CandidateValidation.enabled ()) then Lwt.return () else
+   Lwt.catch
+    (fun () ->
+      CandidateValidation.before_commit ~directory:workingDir ~candidate:pathFrom
+        ~destination:pathTo >>= fun () ->
+      (* Rebind finalized staging, including resource forks, to the transfer's
+         expected archive. Keep pseudo-fingerprint behavior compatible with
+         the earlier source check. *)
+      (match archOpt with
+       | None -> ()
+       | Some archive -> Update.iterFiles workingDir pathFrom archive
+           (fun directory path expected ->
+             if not (Os.isPseudoFingerprint expected) then begin
+               let actual = Os.fingerprint directory path `FILE in
+               if not (Os.fullfingerprintEqual actual expected) then
+                 raise (Util.Transient "Validation candidate differs from transferred source")
+             end));
+      Lwt.return ())
+    (fun error ->
+      (* A rejected candidate is not a resumable prefix. In particular, hidden
+         helper-created children must not become trusted on the next attempt.
+         All validators have settled before before_commit reports failure.
+         Quarantine first so an interrupted/failed deletion cannot become a
+         resumable candidate. Only private copy/merge staging is discarded;
+         the destination and its archive have not yet been changed. *)
+      let discard () =
+        let rejected = Os.tempPath ~fresh:true workingDir
+          (Path.addSuffixToFinalName pathFrom "-validation-rejected") in
+        let paths =
+          match Os.rename "quarantining rejected validation candidate"
+                  workingDir pathFrom workingDir rejected with
+          | () -> [rejected]
+          | exception _ -> [pathFrom; rejected] in
+        let failures = ref [] in
+        List.iter (fun path ->
+          try Os.delete workingDir path with cleanup_error ->
+            failures := (Fspath.toPrintString (Fspath.concat workingDir path) ^ ": " ^
+                         Printexc.to_string cleanup_error) :: !failures) paths;
+        if !failures <> [] then
+          raise (Util.Transient (String.concat "; " (List.rev !failures))) in
+      match discard () with
+      | () -> Lwt.fail error
+      | exception cleanup_error ->
+        Lwt.fail (Util.Transient
+          (Printf.sprintf "Validation failed (%s); could not discard private staging (%s)"
+            (Printexc.to_string error) (Printexc.to_string cleanup_error)))))
+  >>= fun () ->
   let copyInfo = prepareCopy workingDir pathTo notDefault in
   (* Make sure the target is unchanged, then do the rename.
      (Note that there is an unavoidable race condition here...) *)
@@ -397,6 +444,7 @@ let renameLocal
   let pathTo = match finishCopy copyInfo with
   | Some conflictPath -> conflictPath
   | None -> pathTo in
+  Abort.checkAll ();
   performRename fspathTo localPathTo (workingDir, pathFrom) (workingDir, pathTo) prevArch;
   begin match archOpt with
     Some archTo -> Stasher.stashCurrentVersion fspathTo localPathTo None;

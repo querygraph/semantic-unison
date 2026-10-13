@@ -36,7 +36,7 @@ with those systems, and not in the unison issue tracker.)
 #### Build prerequisites
 
 - A C99 compiler (e.g. gcc, clang)
-- A recent version of OCaml compiler (version 4.08 at minimum)
+- A recent version of OCaml compiler (version 5.0 at minimum for this fork)
   -- see https://ocaml.org/.
 - make (any of GNU, BSD, Solaris variants works)
 - Basic POSIX tools (e.g., echo, install, rm, sh, sed, touch)
@@ -168,7 +168,7 @@ OPAM). Cygwin is not required to run the produced executables. You need to
 have the following prerequisites:
 
 - MinGW gcc and MinGW binutils (Cygwin package example mingw64-x86_64-gcc-core)
-- A recent version of OCaml compiler (version 4.08 at minimum) which itself is
+- A recent version of OCaml compiler (version 5.0 at minimum for this fork) which itself is
   built with MinGW gcc (it is possible to find pre-compiled binaries); do not
   use the Cygwin OCaml package as that is not compiled with MinGW. If using
   OPAM, be sure to include the system-mingw OPAM package when installing the
@@ -212,7 +212,7 @@ NMAKE. You need to have the following prerequisites:
 - Microsoft Visual C++ (MSVC). A complete Visual Studio installation is not
   required, having Build Tools installed is sufficient. The build tools,
   including NMAKE, must be found in PATH.
-- A recent version of OCaml compiler (version 4.08 at minimum) which itself
+- A recent version of OCaml compiler (version 5.0 at minimum for this fork) which itself
   is built with MSVC. If using OPAM, be sure to include the system-msvc OPAM
   package when installing the OCaml compiler.
 

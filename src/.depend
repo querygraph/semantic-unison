@@ -20,6 +20,54 @@ bytearray.cmx : \
     bytearray.cmi
 bytearray.cmi : \
     ubase/umarshal.cmi
+candidateValidation.cmo : \
+    ubase/util.cmi \
+    ubase/trace.cmi \
+    semanticWorkers.cmi \
+    semanticRuntime.cmi \
+    semanticHash.cmi \
+    semanticFile.cmi \
+    props.cmi \
+    ubase/prefs.cmi \
+    path.cmi \
+    osx.cmi \
+    name.cmi \
+    lwt/lwt_util.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    fspath.cmi \
+    fs.cmi \
+    fileinfo.cmi \
+    features.cmi \
+    dngValidation.cmi \
+    abort.cmi \
+    candidateValidation.cmi
+candidateValidation.cmx : \
+    ubase/util.cmx \
+    ubase/trace.cmx \
+    semanticWorkers.cmx \
+    semanticRuntime.cmx \
+    semanticHash.cmx \
+    semanticFile.cmx \
+    props.cmx \
+    ubase/prefs.cmx \
+    path.cmx \
+    osx.cmx \
+    name.cmx \
+    lwt/lwt_util.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    fspath.cmx \
+    fs.cmx \
+    fileinfo.cmx \
+    features.cmx \
+    dngValidation.cmx \
+    abort.cmx \
+    candidateValidation.cmi
+candidateValidation.cmi : \
+    path.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi
 case.cmo : \
     uutil.cmi \
     ubase/util.cmi \
@@ -39,6 +87,22 @@ checksum.cmo : \
 checksum.cmx : \
     checksum.cmi
 checksum.cmi :
+cloneLease.cmo : \
+    fileObservation.cmi \
+    cloneRange.cmi \
+    cloneLease.cmi
+cloneLease.cmx : \
+    fileObservation.cmx \
+    cloneRange.cmx \
+    cloneLease.cmi
+cloneLease.cmi : \
+    fileObservation.cmi \
+    cloneRange.cmi
+cloneRange.cmo : \
+    cloneRange.cmi
+cloneRange.cmx : \
+    cloneRange.cmi
+cloneRange.cmi :
 clroot.cmo : \
     ubase/util.cmi \
     ubase/rx.cmi \
@@ -98,6 +162,9 @@ copy.cmo : \
     ubase/umarshal.cmi \
     transfer.cmi \
     ubase/trace.cmi \
+    stagePublication.cmi \
+    semanticSync.cmi \
+    semanticRemote.cmi \
     ubase/safelist.cmi \
     remote.cmi \
     props.cmi \
@@ -114,8 +181,11 @@ copy.cmo : \
     fingerprint.cmi \
     fileinfo.cmi \
     external.cmi \
+    copyRange.cmi \
     common.cmi \
     clroot.cmi \
+    cloneRange.cmi \
+    cloneLease.cmi \
     bytearray.cmi \
     abort.cmi \
     copy.cmi
@@ -127,6 +197,9 @@ copy.cmx : \
     ubase/umarshal.cmx \
     transfer.cmx \
     ubase/trace.cmx \
+    stagePublication.cmx \
+    semanticSync.cmx \
+    semanticRemote.cmx \
     ubase/safelist.cmx \
     remote.cmx \
     props.cmx \
@@ -143,8 +216,11 @@ copy.cmx : \
     fingerprint.cmx \
     fileinfo.cmx \
     external.cmx \
+    copyRange.cmx \
     common.cmx \
     clroot.cmx \
+    cloneRange.cmx \
+    cloneLease.cmx \
     bytearray.cmx \
     abort.cmx \
     copy.cmi
@@ -158,6 +234,32 @@ copy.cmi : \
     fspath.cmi \
     fileinfo.cmi \
     common.cmi
+copyRange.cmo : \
+    copyRange.cmi
+copyRange.cmx : \
+    copyRange.cmi
+copyRange.cmi :
+dngSemantic.cmo : \
+    semanticFile.cmi \
+    formatExtension.cmi \
+    dngSemantic.cmi
+dngSemantic.cmx : \
+    semanticFile.cmx \
+    formatExtension.cmx \
+    dngSemantic.cmi
+dngSemantic.cmi : \
+    formatExtension.cmi
+dngValidation.cmo : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    dngValidation.cmi
+dngValidation.cmx : \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    dngValidation.cmi
+dngValidation.cmi : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi
 external.cmo : \
     ubase/util.cmi \
     terminal.cmi \
@@ -187,6 +289,11 @@ features.cmx : \
     ubase/util.cmx \
     features.cmi
 features.cmi :
+fileObservation.cmo : \
+    fileObservation.cmi
+fileObservation.cmx : \
+    fileObservation.cmi
+fileObservation.cmi :
 fileinfo.cmo : \
     ubase/util.cmi \
     ubase/umarshal.cmi \
@@ -247,6 +354,7 @@ files.cmo : \
     external.cmi \
     copy.cmi \
     common.cmi \
+    candidateValidation.cmi \
     abort.cmi \
     files.cmi
 files.cmx : \
@@ -278,6 +386,7 @@ files.cmx : \
     external.cmx \
     copy.cmx \
     common.cmx \
+    candidateValidation.cmx \
     abort.cmx \
     files.cmi
 files.cmi : \
@@ -313,6 +422,14 @@ fingerprint.cmi : \
     ubase/umarshal.cmi \
     path.cmi \
     fspath.cmi
+formatExtension.cmo : \
+    semanticFile.cmi \
+    formatExtension.cmi
+formatExtension.cmx : \
+    semanticFile.cmx \
+    formatExtension.cmi
+formatExtension.cmi : \
+    semanticFile.cmi
 fpcache.cmo : \
     uutil.cmi \
     ubase/util.cmi \
@@ -545,6 +662,16 @@ globals.cmi : \
     lwt/lwt.cmi \
     common.cmi \
     clroot.cmi
+helperSupervisor.cmo : \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi
+helperSupervisor.cmx : \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmi
+helperSupervisor.cmi : \
+    lwt/lwt.cmi
 linkgtk3.cmo : \
     uigtk3.cmi \
     main.cmo
@@ -955,6 +1082,214 @@ remote.cmi : \
     common.cmi \
     clroot.cmi \
     bytearray.cmi
+semanticAdmission.cmo : \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    semanticAdmission.cmi
+semanticAdmission.cmx : \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    semanticAdmission.cmi
+semanticAdmission.cmi : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi
+semanticDelta.cmo : \
+    semanticHash.cmi \
+    semanticFile.cmi \
+    formatExtension.cmi \
+    semanticDelta.cmi
+semanticDelta.cmx : \
+    semanticHash.cmx \
+    semanticFile.cmx \
+    formatExtension.cmx \
+    semanticDelta.cmi
+semanticDelta.cmi : \
+    semanticFile.cmi \
+    formatExtension.cmi
+semanticFile.cmo : \
+    semanticHash.cmi \
+    semanticFile.cmi
+semanticFile.cmx : \
+    semanticHash.cmx \
+    semanticFile.cmi
+semanticFile.cmi :
+semanticFormats.cmo : \
+    ubase/util.cmi \
+    ubase/prefs.cmi \
+    formatExtension.cmi \
+    features.cmi \
+    dngSemantic.cmi \
+    semanticFormats.cmi
+semanticFormats.cmx : \
+    ubase/util.cmx \
+    ubase/prefs.cmx \
+    formatExtension.cmx \
+    features.cmx \
+    dngSemantic.cmx \
+    semanticFormats.cmi
+semanticFormats.cmi : \
+    formatExtension.cmi
+semanticHash.cmo : \
+    semanticHash.cmi
+semanticHash.cmx : \
+    semanticHash.cmi
+semanticHash.cmi :
+semanticRemote.cmo : \
+    ubase/util.cmi \
+    ubase/umarshal.cmi \
+    ubase/trace.cmi \
+    semanticWorkers.cmi \
+    semanticRuntime.cmi \
+    semanticReport.cmi \
+    semanticFormats.cmi \
+    semanticFile.cmi \
+    semanticDelta.cmi \
+    semanticAdmission.cmi \
+    remote.cmi \
+    path.cmi \
+    os.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi \
+    fs.cmi \
+    formatExtension.cmi \
+    features.cmi \
+    common.cmi \
+    semanticRemote.cmi
+semanticRemote.cmx : \
+    ubase/util.cmx \
+    ubase/umarshal.cmx \
+    ubase/trace.cmx \
+    semanticWorkers.cmx \
+    semanticRuntime.cmx \
+    semanticReport.cmx \
+    semanticFormats.cmx \
+    semanticFile.cmx \
+    semanticDelta.cmx \
+    semanticAdmission.cmx \
+    remote.cmx \
+    path.cmx \
+    os.cmx \
+    lwt/lwt.cmx \
+    fspath.cmx \
+    fs.cmx \
+    formatExtension.cmx \
+    features.cmx \
+    common.cmx \
+    semanticRemote.cmi
+semanticRemote.cmi : \
+    semanticReport.cmi \
+    remote.cmi \
+    path.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi \
+    formatExtension.cmi \
+    common.cmi
+semanticReport.cmo : \
+    semanticHash.cmi \
+    semanticDelta.cmi \
+    formatExtension.cmi \
+    semanticReport.cmi
+semanticReport.cmx : \
+    semanticHash.cmx \
+    semanticDelta.cmx \
+    formatExtension.cmx \
+    semanticReport.cmi
+semanticReport.cmi : \
+    semanticDelta.cmi
+semanticRuntime.cmo : \
+    ubase/util.cmi \
+    ubase/trace.cmi \
+    semanticWorkers.cmi \
+    semanticFormats.cmi \
+    semanticAdmission.cmi \
+    remote.cmi \
+    ubase/prefs.cmi \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatExtension.cmi \
+    abort.cmi \
+    semanticRuntime.cmi
+semanticRuntime.cmx : \
+    ubase/util.cmx \
+    ubase/trace.cmx \
+    semanticWorkers.cmx \
+    semanticFormats.cmx \
+    semanticAdmission.cmx \
+    remote.cmx \
+    ubase/prefs.cmx \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    formatExtension.cmx \
+    abort.cmx \
+    semanticRuntime.cmi
+semanticRuntime.cmi : \
+    semanticWorkers.cmi \
+    semanticAdmission.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi
+semanticSync.cmo : \
+    ubase/util.cmi \
+    ubase/trace.cmi \
+    semanticWorkers.cmi \
+    semanticRuntime.cmi \
+    semanticFormats.cmi \
+    semanticFile.cmi \
+    semanticDelta.cmi \
+    remote.cmi \
+    path.cmi \
+    os.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi \
+    fs.cmi \
+    formatExtension.cmi \
+    semanticSync.cmi
+semanticSync.cmx : \
+    ubase/util.cmx \
+    ubase/trace.cmx \
+    semanticWorkers.cmx \
+    semanticRuntime.cmx \
+    semanticFormats.cmx \
+    semanticFile.cmx \
+    semanticDelta.cmx \
+    remote.cmx \
+    path.cmx \
+    os.cmx \
+    lwt/lwt.cmx \
+    fspath.cmx \
+    fs.cmx \
+    formatExtension.cmx \
+    semanticSync.cmi
+semanticSync.cmi : \
+    path.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi
+semanticWorkers.cmo : \
+    semanticFile.cmi \
+    semanticDelta.cmi \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatExtension.cmi \
+    dngSemantic.cmi \
+    semanticWorkers.cmi
+semanticWorkers.cmx : \
+    semanticFile.cmx \
+    semanticDelta.cmx \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    formatExtension.cmx \
+    dngSemantic.cmx \
+    semanticWorkers.cmi
+semanticWorkers.cmi : \
+    semanticDelta.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    formatExtension.cmi
 sortri.cmo : \
     ubase/util.cmi \
     ubase/safelist.cmi \
@@ -973,6 +1308,11 @@ sortri.cmx : \
     sortri.cmi
 sortri.cmi : \
     common.cmi
+stagePublication.cmo : \
+    stagePublication.cmi
+stagePublication.cmx : \
+    stagePublication.cmi
+stagePublication.cmi :
 stasher.cmo : \
     xferhint.cmi \
     ubase/util.cmi \
@@ -1222,8 +1562,6 @@ ubase/prefs.cmx : \
 ubase/prefs.cmi : \
     ubase/util.cmi \
     ubase/umarshal.cmi
-ubase/projectInfo.cmo :
-ubase/projectInfo.cmx :
 ubase/proplist.cmo : \
     ubase/util.cmi \
     ubase/umarshal.cmi \
@@ -1281,13 +1619,11 @@ ubase/util.cmo : \
     unicode.cmi \
     system.cmi \
     ubase/safelist.cmi \
-    ubase/projectInfo.cmo \
     ubase/util.cmi
 ubase/util.cmx : \
     unicode.cmx \
     system.cmx \
     ubase/safelist.cmx \
-    ubase/projectInfo.cmx \
     ubase/util.cmi
 ubase/util.cmi :
 ui.cmi :
@@ -1301,6 +1637,9 @@ uicommon.cmo : \
     ubase/trace.cmi \
     system.cmi \
     stasher.cmi \
+    semanticReport.cmi \
+    semanticRemote.cmi \
+    semanticFormats.cmi \
     ubase/safelist.cmi \
     remote.cmi \
     recon.cmi \
@@ -1316,6 +1655,8 @@ uicommon.cmo : \
     globals.cmi \
     fswatch.cmi \
     fspath.cmi \
+    fs.cmi \
+    formatExtension.cmi \
     files.cmi \
     fileinfo.cmi \
     features.cmi \
@@ -1334,6 +1675,9 @@ uicommon.cmx : \
     ubase/trace.cmx \
     system.cmx \
     stasher.cmx \
+    semanticReport.cmx \
+    semanticRemote.cmx \
+    semanticFormats.cmx \
     ubase/safelist.cmx \
     remote.cmx \
     recon.cmx \
@@ -1349,6 +1693,8 @@ uicommon.cmx : \
     globals.cmx \
     fswatch.cmx \
     fspath.cmx \
+    fs.cmx \
+    formatExtension.cmx \
     files.cmx \
     fileinfo.cmx \
     features.cmx \
@@ -1616,13 +1962,11 @@ uutil.cmo : \
     ubase/util.cmi \
     ubase/umarshal.cmi \
     ubase/trace.cmi \
-    ubase/projectInfo.cmo \
     uutil.cmi
 uutil.cmx : \
     ubase/util.cmx \
     ubase/umarshal.cmx \
     ubase/trace.cmx \
-    ubase/projectInfo.cmx \
     uutil.cmi
 uutil.cmi : \
     ubase/umarshal.cmi

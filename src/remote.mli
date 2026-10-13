@@ -106,6 +106,21 @@ val registerServerCmd :
  -> 'a Umarshal.t -> 'b Umarshal.t
  -> (connection -> 'a -> 'b Lwt.t)
  -> connection -> 'a -> 'b Lwt.t
+val registerBoundedServerCmd :
+  ?withScope:(connection -> 'a -> (unit -> unit Lwt.t) -> unit Lwt.t) ->
+  ?maxResultForArgs:('a -> int) ->
+  string -> maxArgs:int -> maxResult:int -> 'a Umarshal.t -> 'b Umarshal.t ->
+  (connection -> 'a -> 'b Lwt.t) -> connection -> 'a -> 'b Lwt.t
+(** Additive RPC registration with request and normal-result body frame limits,
+    including marshaling tags/headers, checked before outer buffer allocation.
+    [maxResultForArgs] can narrow the normal-result limit for each request;
+    its result must be nonnegative and is capped at [maxResult].
+    [withScope] must invoke and await its callback exactly once. It wraps the
+    server computation, response marshaling and consumption by the output
+    queue, allowing retained-resource leases to cover the entire reply lifetime.
+    A scope failure before the callback can produce an exception reply; failures
+    after dispatch starts never produce an additional reply.
+    Does not change or bound the shared legacy RPC message-header schema. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

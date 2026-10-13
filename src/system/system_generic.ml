@@ -26,7 +26,7 @@ let fspathToDebugString f = String.escaped f
 (****)
 
 let getenv = Sys.getenv
-let putenv = Unix.putenv
+let putenv name value = Unix.putenv name value
 let argv () = Sys.argv
 
 (****)
@@ -36,14 +36,16 @@ type dir_handle = { readdir : unit -> string; closedir : unit -> unit }
 let stat = Unix.LargeFile.stat
 let lstat = Unix.LargeFile.lstat
 let rmdir = Unix.rmdir
-let mkdir = Unix.mkdir
+let mkdir path mode = Unix.mkdir path mode
 let unlink = Unix.unlink
-let rename = Unix.rename
+let rename source target = Unix.rename source target
 let open_in_gen = open_in_gen
 let open_out_gen = open_out_gen
-let chmod = Unix.chmod
-let chown = Unix.chown
-let utimes = Unix.utimes
+(* Keep the exported curried interface portable across stdlibs with
+   additional argument modes (including OxCaml's local path arguments). *)
+let chmod path mode = Unix.chmod path mode
+let chown path uid gid = Unix.chown path uid gid
+let utimes path atime mtime = Unix.utimes path atime mtime
 let link s d = Unix.link s d
 let openfile = Unix.openfile
 let opendir f =
@@ -74,7 +76,8 @@ external copy_file : Unix.file_descr -> Unix.file_descr -> int64
 
 (****)
 
-let create_process = Unix.create_process
+let create_process prog args stdin stdout stderr =
+  Unix.create_process prog args stdin stdout stderr
 let open_process_in = Unix.open_process_in
 let open_process_args_in = Unix.open_process_args_in
 let open_process_out = Unix.open_process_out
