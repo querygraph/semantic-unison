@@ -23,11 +23,14 @@ def main():
         harness = work / "clone-stage-status"
 
         def run(mode, source, output, *, skip=False):
+            before = set(work.iterdir())
             result = subprocess.run([str(harness), mode, str(source), str(output)], timeout=10)
             if skip and result.returncode == 77:
+                assert set(work.iterdir()) == before, "decline left an owned name"
                 return False
             result.check_returncode()
-            assert not list(work.glob("*.basis.*")), "owned basis path remained"
+            expected = before | {output} if mode == "shared" else before
+            assert set(work.iterdir()) == expected, "native staging left an unexpected name"
             return True
 
         source = work / "source"

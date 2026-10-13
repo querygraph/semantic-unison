@@ -41,12 +41,17 @@ def main():
                    "-sshcmd", str(loopback), "-servercmd", binary,
                    "-batch", "-auto", "-fastcheck", "false",
                    "-times", "-debug", "copy", "-clone", "auto"]
+        def check_inventory():
+            for directory in (left, right):
+                actual = {path.name for path in directory.iterdir()}
+                assert actual == {"ordinary.bin"}, (str(directory), actual)
         def sync(expect_clone=False):
             result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=90)
             if result.returncode:
                 raise AssertionError(result.stdout + result.stderr)
             if expect_clone and "Using immutable receiver clone basis" not in result.stderr + result.stdout:
                 raise AssertionError("clone path not exercised\n" + result.stdout + result.stderr)
+            check_inventory()
             return result.stdout + result.stderr
         rng = random.Random(98231)
         original = rng.randbytes(2 * 1024 * 1024)
@@ -68,7 +73,6 @@ def main():
                 counts = re.findall(r"Receiver clone preserved (\d+) logical bytes", log)
                 assert counts and int(counts[-1]) > len(data) // 2, log
             assert (right / "ordinary.bin").read_bytes() == data, label
-            assert not list(right.glob("*clone*.unison.tmp")), label
             print(label + ": exact bytes and cleaned staging")
         previous = (right / "ordinary.bin").stat().st_ino
         sync()
@@ -100,6 +104,7 @@ def main():
         assert failed.returncode != 0
         assert "cannot clone this basis" in failed.stdout + failed.stderr
         assert (right / "ordinary.bin").read_bytes() == original
+        check_inventory()
         command[-1] = "auto"
         log = sync()
         assert "Using immutable receiver clone basis" not in log
@@ -132,7 +137,6 @@ def main():
         command += ["-ignorelocks"]
         sync(expect_clone=True)
         assert (right / "ordinary.bin").read_bytes() == target
-        assert not list(right.glob("*clone*.unison.tmp"))
         print("interruption: destination untouched, retry rebuilt clone exactly")
 
 

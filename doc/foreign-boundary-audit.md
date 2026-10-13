@@ -159,39 +159,45 @@ must supply valid filesystem paths.
 3. **Stage-name ownership has a namespace assumption.** Metadata clearing
    checks the regular FD it opened, but does not establish that it is the inode
    originally created by cloning. A same-UID writer replacing the private
-   stage with a regular file/hardlink could redirect metadata changes; error
-   cleanup also unlinks by name. The current source checks single-link regular
+   stage with a regular file/hardlink could redirect metadata changes before
+   first admission. The current source checks single-link regular
    basis/stage inodes, distinct source/basis/output identities and matching
    devices before metadata clearing, then rechecks writable output identity
    and link count. These defend against a hardlinked replacement, but cannot
-   prove safety against arbitrary
-   moved regular files or parent-directory replacement. Trusted staging
+   prove object birth after replacement by a moved regular file. The scratch
+   follow-on now checks each current name through the retained parent and cleans
+   only names matching still-held admitted witnesses. Parent pathname rebinding
+   no longer redirects reservation or cleanup. Trusted staging
    directories and cooperative namespace ownership remain required; this is
    not a same-UID sandbox.
 4. **Cancellation and memory remain limited.** Native clone/metadata syscalls
    have no in-call cancellation hook or hard deadline. The xattr list uses
-   native allocation outside the payload estimate. The brief mkstemps reserve
-   FD is not created with CLOEXEC; current ownership prevents concurrent
-   helper spawning on this blocked owner, but future concurrent spawn paths
-   would need review. Cleanup close/unlink failures are not an independently
-   fault-qualified recovery protocol.
+   native allocation outside the payload estimate. The reservation FD now uses
+   `O_CLOEXEC` at exclusive relative creation and stays held through removal.
+   Direct close/unlink failure controls qualify cooperative cleanup and explicit
+   preserved-artifact outcomes; they do not establish crash recovery or a
+   complete-lifetime descriptor/memory budget.
 5. **Failed-clone creation tracking follows Apple's documented contract.**
    Apple's [clonefile manual](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/man/man2/clonefile.2)
    describes clonefile, clonefileat and fclonefileat as atomic: creation either
-   succeeds for all new objects or creates none. This supports setting the
-   created-entry flags only after success. The public
+   succeeds for all new objects or creates none. The engine never removes a
+   destination after a failed clone; successful creation still needs an
+   admitted held witness before authorizing later name cleanup. The public
    [VFS implementation](https://github.com/apple-oss-distributions/xnu/blob/main/bsd/vfs/vfs_syscalls.c)
    checks existing destinations and cross-mount pairs before VNOP_CLONEFILE,
    then delegates creation to that filesystem operation; it contains no
    independent unlink rollback for a failing VNOP. This source review does not
    establish APFS fault behavior or power-loss recovery. Do not blindly unlink
    after a failed clone: an EEXIST destination belongs to someone else.
-6. **Post-success cleanup is best effort.** Error paths close descriptors and
-   attempt to unlink owned output/basis names, but ignore cleanup close/unlink
-   failures. The original operational error is preserved; a failed cleanup can
-   leave a temporary artifact and is not separately represented by the API.
-   The basis-unlink step itself is checked and fails the operation. Cleanup
-   fault injection, orphan recovery and crash durability remain open.
+6. **Cleanup retains the first operational failure.** Error paths remove only
+   names matching held admitted witnesses before closing those witnesses.
+   A close/unlink failure without an earlier error becomes an operational
+   failure, including after a scoped decline. With an earlier error, its errno /
+   phase survives; a second cleanup failure is not separately represented.
+   Direct fault controls now qualify replaced names, repeated errors and
+   recycled-FD survival. A failed first admission or repeated cleanup failure
+   can leave an artifact, and a last legacy parent-close error can leave linked
+   output. Orphan recovery and crash durability remain open.
 7. **The C pending-handler buffer window has a specific fix.** OCaml 5.2's
    [blocking-section entry](https://github.com/ocaml/ocaml/blob/5.2/runtime/signals.c)
    can dispatch a raising pending signal handler. The pinned OxCaml source has
@@ -245,10 +251,20 @@ passes 20 native cases on both compilers: all three descriptor identities/modes,
 parent replacement during and after native cloning, held-parent lookup/cleanup,
 source properties, repeated resource cleanup and both old ABIs. Its preallocation
 source-order check is not allocator-exhaustion qualification. These tests do not
-qualify real OOM, live FIFO replacement, hostile stage-name mutation or crash
-durability. Existing native scratch reservation still uses pathname mkstemps/
-unlink; returning the creation parent does not make the entire clone engine
-an at-relative namespace transaction.
+qualify real OOM, hostile stage-name mutation or crash durability. The later
+[native scratch slice](native-scratch-next.md) replaces pathname reservation
+with bounded exclusive `openat` and held-witness `unlinkat`. All three ABIs now
+keep reservation and clone namespace operations under the retained parent.
+Both compilers pass 182 direct APFS cases / 1,984 assertions, including actual
+recycled-FD close errors and two designated source regressions through every
+ABI. Cleanup precedes witness close; slots clear before one close attempt and
+the first operational failure survives cleanup. First clone-to-open admission
+intervals and cooperative comparison/unlink remain explicit limits. Repeated
+failures or late legacy parent close may leave artifacts. Existing stale-temp
+pathname cleanup can later act on those names; they are not durable quarantine.
+The pending-signal fixture remains at zero owned buffers versus three in the
+old-release control. Current Make/Dune builds and synthetic caller reruns are
+pinned in the [scratch integration receipt](../tests/qualification/native-scratch-integration-20261013.json).
 
 ## Held-descriptor observation and borrowed lease
 
@@ -381,8 +397,10 @@ No SDK, Photo, performance or other-platform evidence was added.
 
 This primitive retains cooperative namespace assumptions: lookup followed by
 rename/unlink is not an atomic identity compare-and-swap. Initial old-temp path
-cleanup, native scratch pathname reservation, final `Files.renameLocal` binding,
-mount-incarnation discovery, capability caching and crash durability remain open.
+cleanup, mount-incarnation discovery, capability caching and crash durability
+remain open. Later retained-producer qualification closes regular-file final
+`Files.renameLocal` binding, and the scratch slice closes pathname reservation;
+neither changes these cooperative namespace or lifecycle limits.
 The controlled signal test does not qualify arbitrary asynchronous delivery
 between successful clone return and ML ownership capture, actual OOM or every
 concurrent caller schedule.

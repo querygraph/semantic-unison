@@ -4,6 +4,42 @@
 
 ## Live implementation handoff
 
+* Native scratch continuation (2026-10-13): the common three-ABI clone engine
+  now creates its blank reservation through the retained destination parent,
+  using bounded exclusive `openat`, rather than an absolute-path `mkstemps`.
+  Its fixed `.unison.basis-<32hex>.unison.tmp` basename follows Unison's normal
+  temporary-file convention and supports full-length destination leaves.
+  Reservation, basis and admitted output removal require a still-held witness
+  and matching no-follow device/inode lookup. Cleanup precedes witness close;
+  descriptor slots clear before a single close attempt. Primary operational
+  errors survive cleanup, and close failures cannot become permissive declines.
+  The three result layouts, source checks and scoped clone declines are unchanged.
+* Current scratch qualification: both compilers pass 182 real APFS cases /
+  1,984 assertions, including parent-path rebinding, bounded collisions,
+  replaced/missing names, error cleanup and actual recycled-FD close sentinels.
+  Both private regressions fail the designated checks through all three ABIs.
+  Independent read-only review verified 137 file hashes and 1,776 retained
+  artifact entries. Fresh Make stock `unison-build-18qqtcuk` and Ox
+  `unison-build-ksmidizw`, plus Dune 3.22.2 in
+  `unison-dune-scratch-drdljmjz`, pass builds/selftests with all 315
+  production/package/INSTALL inputs matching. Current strict/handles/signal,
+  86 Copy-publication, 40 adoption/36 old-handoff controls, bound-range,
+  local/remote/bidirectional SDE and old-peer regressions pass both compilers.
+  Evidence: `tests/clone_scratch/qualification-20261013.json` and
+  `tests/qualification/native-scratch-integration-20261013.json`. The full
+  actual `Files` caller also passes all 79 cases per compiler with no exclusions;
+  its receipt is `tests/qualification/native-scratch-final-files-20261013.json`.
+* Scratch scope: clone syscalls return no created FD, so opening/admitting
+  their result still has a first-admission interval. Failed first admission,
+  repeated witness/removal errors and a late parent-close failure can preserve
+  artifacts. Replaced leaves are preserved; check/unlink is a cooperative fence,
+  not atomic hostile namespace protection. These artifacts are not durable
+  quarantine: existing pathname-based old-temp cleanup remains separate and
+  may later remove matching stale temporary files. Initial old-temp cleanup,
+  mount-lifecycle invalidation, complete-lifetime resource limits, physical
+  storage effects and crash recovery remain open. Design and limits are in
+  [native-scratch-next.md](doc/native-scratch-next.md).
+
 * Filesystem execution continuation (2026-10-13): production `IoAdmission`
   is shared by OxCaml domain jobs and supervised validator execution. Endpoint-
   local `semanticvolumejobs = 0` preserves the configured CPU ceiling; a positive
@@ -15,7 +51,7 @@
   hashes run outside the actual-child lease. Active worker/child settlement and
   cancellation release their credits exactly once. Generic library constructors
   retain compatibility; the production runtime supplies the shared gate.
-* Current qualification: Make stock `unison-build-9jpxa20z` and Ox
+* Filesystem-execution checkpoint qualification: Make stock `unison-build-9jpxa20z` and Ox
   `unison-build-6x7ciag6`, plus Dune 3.22.2 in
   `unison-dune-io-final-g3zdqdrg`, pass builds/selftests with 315 matching
   production/package/INSTALL inputs. Both compilers pass 19 actual worker groups,
@@ -62,14 +98,6 @@
   returned bytes; call counters include attempts/retries. Do not describe these
   receipts as syscall-level `pwrite` telemetry. The planned native positional
   write path and its foreign-boundary/platform qualification remain separate.
-* Next filesystem slice is prepared in [native-scratch-next.md](doc/native-scratch-next.md):
-  the common three-ABI clone engine still reserves/unlinks its blank scratch via
-  an absolute pathname after retaining a parent FD. The reviewed plan replaces
-  that operation with bounded random-basename exclusive `openat`, a retained
-  reservation witness and identity-bound `unlinkat`, while preserving result
-  layouts, scoped declines and operational phases. Direct native replacement /
-  collision / failure controls and old-path/identity-removal regressions are
-  specified. This is source-only preparation, not implemented or qualified yet.
 * Resource scope remains explicit: device keys are ephemeral per-process
   accounting, not mount incarnations, physical disks or cross-process budgets.
   The integer key representation is qualified on this 64-bit macOS host.
@@ -227,7 +255,7 @@
 * Resource review found and fixed connection-lifetime leaks: queued replies and outstanding RPC consumers now fail on teardown, and output failure never appends a second reply. Generic Lwt closes detach and settle registered I/O before descriptor reuse, and write-readiness completion removes the correct queue entry. Ten isolated close/reuse tests pass both compilers; the original implementation fails the first regression. RPC tests use actual blocked pipes and queued replies, check released scopes and dynamic allocation bounds, and pass both compilers. Socket-server cleanup drains replies waiting for a half-duplex token and sweeps resources even if a close continuation raises. The persistent-server regression passes stock/Ox: withhold the write token until two 1 MiB source replies hold all 17 MiB/16-FD capacity and a third waits, disconnect, reconnect to the same server PID, then complete three exact replies with zero remaining credits. Removing only the server output-stop call reproduces the retained-credit leak in a private negative-control build.
 * Previous combined Make checkpoint: stock `unison-build-tvjy_dzv` and Ox `unison-build-mv26_zvm` pass native builds/selftests. Ox is refreshed through the final socket-server cleanup fix and passes local/eight-candidate, generic-format, remote/bidirectional/old-peer, general APFS clone, RPC scopes/limits, endpoint preferences, distinct validator configuration, synthetic validation/tree/quarantine, and actual Adobe SDK receive-gate suites. The actual SDK test covers new files, XMP patches, four corruption rejections preserving the destination, recovery and 36 received files. Stock covers admission/kernel/workers/mixed helpers, local/multicandidate, bidirectional remote, helper validation and RPC scopes. The corresponding Dune 3.22.2 builds/selftests pass both compilers; logs and exact source manifest are in host-temp `unison-dune-final-spg_sa2g`. The persistent-server regression also passes both compilers, with a negative control reproducing the fixed leak. Current-source qualification after reporting and sparse writes is recorded below.
 * Cached SHA benchmark artifacts are in `bench/semantic/`: stock/Ox throughput at 36 workers was 5694.2/5679.3 MiB/s, about 15.8× the one-worker result, with no demonstrated OxCaml-specific gain. A separate 18-versus-36 comparison measured 4709.8/4617.5 MiB/s at 18 and 5175.9/5103.4 at 36 (about 10% higher). Both runs used one cached 64 MiB synthetic file, 72 jobs per batch, one warmup and five measured repetitions. Results vary with ordinary host activity; CPU/wall counts logical CPU equivalents, not physical cores. This is neither a sync/APFS nor an Adobe throughput benchmark. After the user highlighted 18 physical/36 logical CPUs, automatic macOS sizing now selects physical cores (18 here), with explicit `semanticworkers = 36` available. Runtime debug output reports detected counts and effective limits. The separately measured Adobe validation-core comparison is recorded below.
-* Next work: bind final live publication to the logical root, followed target and finalized candidate, then address per-volume/resource constraints in `doc/implementation-status.md`. Intermediate ordinary receiver stage-to-temp publication is implemented and qualified below. Native held-object observation and borrowed leases are implemented and independently tested. Nonblocking-open and typed range-copy hardening are qualified earlier in this handoff. The concrete filesystem plan is `doc/filesystem-capabilities-plan.md`. Preserve passing semantic-report, sparse-write, endpoint/admission/teardown regressions. Other remaining work includes broader DNG coverage, independent diff-standard vectors, optional semantic conflict reconciliation, production transfer/crash measurements, platform/GUI qualification and the remaining acceptance matrix. JPEG is a planned second profile, not implemented support.
+* Earlier next-work plan, superseded by the newer checkpoints above: regular-file final live publication now binds the logical root, followed target and retained finalized producer; independent SDE/SDR vectors and per-filesystem execution admission are also qualified. Intermediate publication, held-object observation, borrowed leases, nonblocking opens and typed range-copy hardening retain their receipts. Keep passing reporting, sparse-write, endpoint/admission and teardown regressions. Remaining work includes complete-lifetime FD/memory bounds, initial old-temp cleanup, lifecycle/native range contracts, broader DNG coverage, optional semantic reconciliation, representative production transfer/crash measurements, platform/GUI qualification and the remaining acceptance matrix in `doc/implementation-status.md`. JPEG remains a planned second profile.
 * New user requirement, 2026-10-13: support separable Lightroom preview placement in the architecture. Monitor-target renditions for the 5120×2880 display belong on Quasar; other sizes and cache databases remain on Ten. The catalog/renderer Codex owns native registration and rendering qualification. Its handoff is `LIGHTROOM-MONITOR-PREVIEW-HANDOFF-20261013.json`; design references are under `~/src/photo/preview-generator/`. The contracts are in `doc/component-placement-v0.md` and `doc/lightroom-preview-placement.md`: logical component identity, local placement, filesystem capabilities and recoverable multi-volume publication are independent of same-file SDE/0. Modern per-level JPEGs and legacy packed `.lrprev` are distinguished, as are native 5120-long-edge, monitor-fit and original 1:1 geometry. Publication/group runtime remains unimplemented and native link/rewrite/registration qualification belongs to the catalog session.
 * Current storage update: Quasar is now 8 TB APFS, UUID `E31B795D-FA19-4938-97E2-B6ED56A7C78F`; read-only diskutil/statvfs verification at 2026-10-13 10:05:17 UTC gives 7.200061 TB after an illustrative 10% total-capacity reserve. Ten remains Journaled HFS+, UUID `F807D30D-753C-3975-A919-AB63DECC389A`, budget 8.336401 TB under that model. The prior 6 TB HFS+ Quasar identity, 5.399 TB budget, earlier RAID/member mapping and combined evacuation estimates are historical. Do not repeat formatting or inherit old capability/binding generations from the mount name. The change happened outside this thread; no formatting, data movement, catalog edit or application stop occurred here. Optional Ten migration remains separate, with a complete manifest and fresh topology/capacity gates in `doc/preview-storage-migration.md`.
 * Sparse metadata writes are qualified: fixed-layout materialization skips identical absolute 4 KiB comparison windows, clips writes to editable extents, combines adjacent changed windows and returns actual logical-write/syscall counters. No SDE wire change or weaker verification. Sparse/first/last/disjoint/adjacent/unchanged/full/multiple-region cases pass stock/Ox, including 262,150-byte packets where an interior one-byte edit writes 4,096 bytes. These are logical writes, not physical APFS allocations. Immutable worker and owner reports expose the counters; existing unit-returning APIs remain compatible. Current Ox local/multicandidate, remote/bidirectional/old-peer and actual Adobe receive-gate suites pass again.
@@ -382,9 +410,10 @@
   logs are retained in `/private/tmp/unison-copy-publication-rrq0dcep` (stock)
   and `/private/tmp/unison-copy-publication-4zzia424` (Ox). Source/test hashes and
   scope are in `tests/qualification/filesystem-publication-20261013.json`.
-  This qualifies the intermediate stage-to-temp boundary. Logical-root/followed
-  target binding, final live `Files.renameLocal`, initial old-temp pathname
-  cleanup and native scratch pathname reservation remain separate work.
+  This historical receipt qualifies the intermediate stage-to-temp boundary.
+  Later checkpoints above qualify regular-file logical-root/followed-target
+  binding, final live `Files.renameLocal` and descriptor-relative native scratch.
+  Initial old-temp pathname cleanup remains separate work.
   No new SDK invocation, preview operation, Photo/cache/volume work or benchmark.
 
 * Historical final-live implementation plan (superseded for the qualified regular-file scope above) following the source review in `doc/filesystem-capabilities-plan.md`.

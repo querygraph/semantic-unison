@@ -231,10 +231,11 @@ def main():
                                 "signals.ml", "-o", "signals"],
                                cwd=build, env=environment, check=True)
                 destination = work / (mode + "-stage")
+                before_names = set(work.iterdir())
                 subprocess.run([str(build / "signals"), mode, str(source), str(destination)],
                                cwd=build, env=environment, check=True, timeout=10)
                 assert not destination.exists(), "declined operation left a stage"
-                assert not list(work.glob("*.basis.*")), "declined operation left a basis"
+                assert set(work.iterdir()) == before_names, "declined operation left an owned name"
                 after = source.stat()
                 for attribute in ("st_dev", "st_ino", "st_mode", "st_uid", "st_gid",
                                   "st_size", "st_flags", "st_mtime_ns", "st_ctime_ns"):

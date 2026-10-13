@@ -491,6 +491,83 @@ enum unsn_stage_decline {
   UNSN_STAGE_CROSS_DEVICE, UNSN_STAGE_UNSUPPORTED
 };
 
+enum {
+  UNSN_STAGE_RANDOM_BYTES = 16,
+  UNSN_STAGE_RESERVATION_ATTEMPTS = 128,
+  UNSN_STAGE_SCRATCH_SIZE = sizeof(".unison.basis-") - 1 +
+    2 * UNSN_STAGE_RANDOM_BYTES + sizeof(".unison.tmp")
+};
+
+/* A held descriptor is the cleanup witness. Missing cleanup names are harmless;
+ * descriptor failures and different current objects are never hidden. This is
+ * a cooperative namespace fence, not an atomic compare-and-unlink primitive. */
+static int unsn_stage_match_owned(int parent, const char *name, int witness,
+                                int missing_ok, int single_link)
+{
+  struct stat before, named, after;
+  if (fstat(witness, &before)) return -1;
+  if (!S_ISREG(before.st_mode) || (single_link && before.st_nlink != 1)) {
+    errno = EBUSY; return -1;
+  }
+  if (fstatat(parent, name, &named, AT_SYMLINK_NOFOLLOW)) {
+    if (missing_ok && errno == ENOENT) return 1;
+    return -1;
+  }
+  if (fstat(witness, &after)) return -1;
+  if (!S_ISREG(named.st_mode) || !S_ISREG(after.st_mode) ||
+      before.st_dev != after.st_dev || before.st_ino != after.st_ino ||
+      named.st_dev != before.st_dev || named.st_ino != before.st_ino ||
+      (single_link && (named.st_nlink != 1 || after.st_nlink != 1))) {
+    errno = EBUSY; return -1;
+  }
+  return 0;
+}
+
+static int unsn_stage_remove_owned(int parent, const char *name, int witness,
+                                 int missing_ok)
+{
+  int matched = unsn_stage_match_owned(parent, name, witness, missing_ok, 0);
+  if (matched < 0) return -1;
+  if (matched > 0) return 0;
+  if (unlinkat(parent, name, 0)) {
+    if (missing_ok && errno == ENOENT) return 0;
+    return -1;
+  }
+  return 0;
+}
+
+/* Clear before one close attempt. A failed close must never authorize retrying
+ * a number that another operation may have reused. Return the native errno. */
+static int unsn_stage_close(int *slot)
+{
+  int fd = *slot;
+  *slot = -1;
+  if (fd >= 0 && close(fd)) return errno;
+  return 0;
+}
+
+static int unsn_stage_reserve(int parent, char *name)
+{
+  static const char prefix[] = ".unison.basis-", suffix[] = ".unison.tmp";
+  static const char hex[] = "0123456789abcdef";
+  unsigned char random[UNSN_STAGE_RANDOM_BYTES];
+  for (int attempt = 0; attempt < UNSN_STAGE_RESERVATION_ATTEMPTS; attempt++) {
+    arc4random_buf(random, sizeof(random));
+    memcpy(name, prefix, sizeof(prefix) - 1);
+    for (int i = 0; i < UNSN_STAGE_RANDOM_BYTES; i++) {
+      name[sizeof(prefix) - 1 + 2 * i] = hex[random[i] >> 4];
+      name[sizeof(prefix) + 2 * i] = hex[random[i] & 15];
+    }
+    memcpy(name + sizeof(prefix) - 1 + 2 * UNSN_STAGE_RANDOM_BYTES,
+           suffix, sizeof(suffix));
+    int fd = openat(parent, name, O_WRONLY | O_CREAT | O_EXCL | O_NOFOLLOW |
+                    O_CLOEXEC | O_NONBLOCK, 0600);
+    if (fd >= 0) return fd;
+    if (errno != EEXIST) return -1;
+  }
+  errno = EEXIST; return -1;
+}
+
 static value unsn_clone_stage_impl(value source, value destination, int strict,
                                   int keep_parent)
 {
@@ -519,7 +596,7 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
   char *scratch = NULL, *attrs = NULL;
   int input = -1, basis = -1, output = -1, parent = -1, reserve = -1, stage_read = -1;
   int error = 0, unsupported = 0, decline_reason = UNSN_STAGE_UNSUPPORTED;
-  int created = 0, scratch_exists = 0;
+  int reservation_owned = 0, basis_owned = 0, output_owned = 0, output_admitted = 0;
   const char *phase = "clone_stage: path allocation";
   struct stat before, after, named, basis_identity, stage_identity, output_identity;
   acl_t acl = NULL;
@@ -529,9 +606,8 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
   phase = "clone_stage: destination name";
   if (*name == '\0') { error = EINVAL; goto done; }
   phase = "clone_stage: scratch allocation";
-  scratch = malloc(strlen(dst) + sizeof(".basis.XXXXXX.unison.tmp"));
+  scratch = malloc(UNSN_STAGE_SCRATCH_SIZE);
   if (!scratch) { error = ENOMEM; goto done; }
-  sprintf(scratch, "%s.basis.XXXXXX.unison.tmp", dst);
 
   caml_enter_blocking_section_no_pending();
   /* A replaced FIFO must not block before the regular-file check. O_NONBLOCK
@@ -557,17 +633,19 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
   if (slash) *slash = '/';
   if (parent < 0) { error = errno; goto unlocked_done; }
   phase = "clone_stage: basis reservation";
-  reserve = mkstemps(scratch, strlen(".unison.tmp"));
+  reserve = unsn_stage_reserve(parent, scratch);
   if (reserve < 0) { error = errno; goto unlocked_done; }
-  scratch_exists = 1;
-  close(reserve); reserve = -1;
+  reservation_owned = 1;
   phase = "clone_stage: reservation removal";
-  if (unlink(scratch)) { error = errno; goto unlocked_done; }
-  scratch_exists = 0;
-  const char *scratch_name = strrchr(scratch, '/');
-  scratch_name = scratch_name ? scratch_name + 1 : scratch;
+  if (unsn_stage_remove_owned(parent, scratch, reserve, 0)) {
+    error = errno; goto unlocked_done;
+  }
+  reservation_owned = 0;
+  phase = "clone_stage: reservation close";
+  error = unsn_stage_close(&reserve);
+  if (error) goto unlocked_done;
   phase = "clone_stage: basis clone";
-  if (fclonefileat(input, parent, scratch_name, CLONE_NOOWNERCOPY)) {
+  if (fclonefileat(input, parent, scratch, CLONE_NOOWNERCOPY)) {
     error = errno;
     if (error == ENOTSUP || error == EXDEV || error == ENOSYS) {
       decline_reason = error == EXDEV ? UNSN_STAGE_CROSS_DEVICE :
@@ -576,9 +654,8 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
     }
     goto unlocked_done;
   }
-  scratch_exists = 1;
   phase = "clone_stage: basis open";
-  basis = openat(parent, scratch_name, O_RDONLY | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
+  basis = openat(parent, scratch, O_RDONLY | O_NOFOLLOW | O_CLOEXEC | O_NONBLOCK);
   if (basis < 0) { error = errno; goto unlocked_done; }
   phase = "clone_stage: basis identity";
   if (fstat(basis, &basis_identity)) { error = errno; goto unlocked_done; }
@@ -586,6 +663,10 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
       basis_identity.st_dev != before.st_dev || basis_identity.st_ino == before.st_ino) {
     error = EBUSY; goto unlocked_done;
   }
+  if (unsn_stage_match_owned(parent, scratch, basis, 0, 1)) {
+    error = errno; goto unlocked_done;
+  }
+  basis_owned = 1;
   phase = "clone_stage: source stability";
   if (fstat(input, &after) || lstat(src, &named)) {
     error = errno; goto unlocked_done;
@@ -597,7 +678,6 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
   if (fclonefileat(basis, parent, name, CLONE_NOOWNERCOPY)) {
     error = errno; goto unlocked_done;
   }
-  created = 1;
   /* Change permissions only on the inode we actually opened. A pathname
    * chmod could follow a replaced staging name to a live unrelated file. */
   phase = "clone_stage: output read open";
@@ -611,6 +691,10 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
       stage_identity.st_ino == before.st_ino) {
     error = EBUSY; goto unlocked_done;
   }
+  if (unsn_stage_match_owned(parent, name, stage_read, 0, 1)) {
+    error = errno; goto unlocked_done;
+  }
+  output_owned = 1;
   phase = "clone_stage: ACL allocation";
   acl = acl_init(0);
   if (!acl) { error = errno; goto unlocked_done; }
@@ -627,7 +711,13 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
       stage_identity.st_ino != output_identity.st_ino || output_identity.st_nlink != 1) {
     error = EBUSY; goto unlocked_done;
   }
-  close(stage_read); stage_read = -1;
+  if (unsn_stage_match_owned(parent, name, output, 0, 1)) {
+    error = errno; goto unlocked_done;
+  }
+  output_admitted = 1;
+  phase = "clone_stage: output read close";
+  error = unsn_stage_close(&stage_read);
+  if (error) goto unlocked_done;
   /* Match a fresh data-fork temporary file: old resource forks, Finder info,
    * arbitrary xattrs and inherited ACLs must not leak into the result when
    * their synchronization preferences are disabled or the source lacks them. */
@@ -646,26 +736,69 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
       if (fremovexattr(output, attrs + pos, 0)) { error = errno; goto unlocked_done; }
   }
   phase = "clone_stage: basis unlink";
-  if (unlinkat(parent, scratch_name, 0)) { error = errno; goto unlocked_done; }
-  scratch_exists = 0;
+  if (unsn_stage_remove_owned(parent, scratch, basis, 0)) {
+    error = errno; goto unlocked_done;
+  }
+  basis_owned = 0;
 
 unlocked_done:
-  if (input >= 0) close(input);
-  if (stage_read >= 0) close(stage_read);
-  if (reserve >= 0) close(reserve);
-  if (error || unsupported) {
-    if (basis >= 0) { close(basis); basis = -1; }
-    if (output >= 0) { close(output); output = -1; }
-    if (created) unlinkat(parent, name, 0);
+  /* Settle non-witness resources first, then remove only admitted names before
+   * closing their witnesses. Pure declines cannot hide cleanup failures. */
+  {
+    int close_error = unsn_stage_close(&input);
+    if (close_error && !error) {
+      error = close_error; phase = "clone_stage: source close";
+    }
   }
-  if (scratch_exists) {
-    const char *n = strrchr(scratch, '/');
-    unlinkat(parent, n ? n + 1 : scratch, 0);
+  if (acl) {
+    if (acl_free(acl) && !error) {
+      error = errno; phase = "clone_stage: ACL cleanup";
+    }
+    acl = NULL;
+  }
+  if (error || unsupported) {
+    if (output_owned) {
+      int witness = output_admitted ? output : stage_read;
+      if (unsn_stage_remove_owned(parent, name, witness, 1)) {
+        if (!error) { error = errno; phase = "clone_stage: output cleanup"; }
+      } else output_owned = 0;
+    }
+  }
+  if (reservation_owned) {
+    if (unsn_stage_remove_owned(parent, scratch, reserve, 1)) {
+      if (!error) { error = errno; phase = "clone_stage: reservation cleanup"; }
+    } else reservation_owned = 0;
+  }
+  if (basis_owned) {
+    if (unsn_stage_remove_owned(parent, scratch, basis, 1)) {
+      if (!error) { error = errno; phase = "clone_stage: basis cleanup"; }
+    } else basis_owned = 0;
+  }
+  {
+    int close_error = unsn_stage_close(&stage_read);
+    if (close_error && !error) {
+      error = close_error; phase = "clone_stage: output read close";
+    }
+    close_error = unsn_stage_close(&reserve);
+    if (close_error && !error) {
+      error = close_error; phase = "clone_stage: reservation close";
+    }
+  }
+  if (error || unsupported) {
+    unsn_stage_close(&basis);
+    unsn_stage_close(&output);
   }
   /* Only the additive handles ABI transfers the actual creation directory.
    * Legacy success, every decline and every error still close it here. */
-  if (parent >= 0 && (!keep_parent || error || unsupported)) close(parent);
-  if (acl) acl_free(acl);
+  if (parent >= 0 && (!keep_parent || error || unsupported)) {
+    int close_error = unsn_stage_close(&parent);
+    if (close_error && !error) {
+      error = close_error; phase = "clone_stage: destination parent close";
+      /* The last directory close has lost name authority. Preserve a linked
+       * output rather than attempting an absolute-path cleanup. */
+      unsn_stage_close(&basis); unsn_stage_close(&output);
+    }
+  }
   free(attrs); free(scratch); free(src); free(dst);
   caml_acquire_runtime_system();
   goto report;

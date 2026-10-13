@@ -1,20 +1,42 @@
 # Implementation status and remaining acceptance work
 
-Reviewed and updated on 2026-10-13 against the `feat/semantic-dng-oxcaml`
-implementation checkpoint `2a05c4bf3ffffe4380ad7743c490992b2179f332`, based on
-`8772d26a2eb77cfd0cb6da81807e81f24f51044c` and pushed to the user-requested
-`querygraph/unison` fork. The retained-producer follow-on adds native/endpoint-local guards, actual output
-handoff across ordinary/APFS/semantic producers, held-parent resume admission,
-frozen actual-fingerprint receipts and source/validation/publication fences.
-Fresh Make and Dune 3.22.2 builds/selftests pass stock/Ox; all 311 production,
-package and INSTALL inputs match. Native 170, registry 105 and actual semantic
-worker 32 controls pass per compiler. The 79 actual CLI cases per compiler
-include the formerly open same-byte replacement regression, all resume
-placements, native forks and semantic producers, with no exclusions. Both
-stock caller negative controls detect their intended failures. Independent
-review's unregister-allocation cleanup gap is fixed and qualified. Current
-source/test/binary/log evidence is pinned in the
-[retained-producer receipt](../tests/qualification/retained-producer-publication-20261013.json).
+Reviewed and updated on 2026-10-13 on `feat/semantic-dng-oxcaml`, for the
+user-requested `querygraph/unison` fork. The native scratch follow-on replaces
+absolute reservation/removal with bounded exclusive creation through the held
+parent. Reservation, basis and admitted output cleanup now retain identity
+witnesses; close slots clear before one attempt and first operational errors
+survive cleanup. All three native ABIs and ML interfaces remain unchanged.
+Both compilers pass 182 direct APFS cases / 1,984 assertions and two designated
+private regressions through every ABI. Independent read-only review checked
+137 file hashes and 1,776 retained artifact entries. Fresh Make stock
+`unison-build-18qqtcuk` / Ox `unison-build-ksmidizw` and Dune 3.22.2
+`unison-dune-scratch-drdljmjz` pass builds/selftests with 315 matching
+production/package/INSTALL inputs. Current native status/handles/signal,
+86 Copy publication, 40 adoption / 36 old-handoff controls, bound-range,
+local/remote/bidirectional SDE and old-peer regressions pass both compilers.
+The complete actual `Files` caller also passes 79 cases per compiler with no
+exclusions. Evidence is in the [direct scratch receipt](../tests/clone_scratch/qualification-20261013.json),
+[integration receipt](../tests/qualification/native-scratch-integration-20261013.json)
+and [full Files receipt](../tests/qualification/native-scratch-final-files-20261013.json).
+No Adobe, Photo or preview operation occurred.
+
+The [scratch implementation record](native-scratch-next.md) keeps explicit
+limits: clone-to-first-open admission cannot prove object birth, check/unlink
+uses cooperative namespace assumptions, and some failures preserve artifacts.
+Those artifacts are not durable quarantine; existing stale-temp pathname
+cleanup can later act on their names. Initial old-temp cleanup, mount lifecycle,
+complete-lifetime resource admission and crash recovery remain open.
+
+The earlier retained-producer checkpoint follows
+`2a05c4bf3ffffe4380ad7743c490992b2179f332`, based on
+`8772d26a2eb77cfd0cb6da81807e81f24f51044c`. It added native/endpoint-local guards,
+actual output handoff across ordinary/APFS/semantic producers, held-parent
+resume admission, frozen actual-fingerprint receipts and source/validation /
+publication fences. At that checkpoint stock/Ox Make and Dune builds/selftests
+matched 311 inputs; native 170, registry 105 and semantic worker 32 controls
+passed per compiler, along with 79 actual CLI caller cases and both stock
+caller negative controls. Its exact source/test/binary/log evidence remains in
+the [retained-producer receipt](../tests/qualification/retained-producer-publication-20261013.json).
 Earlier receipts retain their exact historical scope and hashes.
 The implementation goal remains unfinished. This is an evidence audit of
 [SOL.md](../SOL.md), production sources and executable test definitions, not a
@@ -50,7 +72,8 @@ zero preserves the configured CPU ceiling and a positive value independently
 bounds each filesystem device. Source/output keys are acquired atomically
 before domain slots and CPU permits, with conflict fairness and disjoint-device
 progress. No lease spans nested pre/post hashing, RPC waits or a transaction.
-Fresh Make stock `unison-build-9jpxa20z` / Ox `unison-build-6x7ciag6` and Dune
+At the filesystem-execution checkpoint, Make stock `unison-build-9jpxa20z` /
+Ox `unison-build-6x7ciag6` and Dune
 3.22.2 build/selftests match 315 production/package/INSTALL inputs. Nineteen
 actual worker groups, 33 helper groups, 20 gate groups / 243 assertions and
 six linked-runtime scenarios / 107 assertions pass per compiler. Fairness and
@@ -61,12 +84,12 @@ resumption, hint-copy reuse, external copies, configured merges, second-receiver
 partial commit/recovery, timeout/cancellation and measured serial helper overlap.
 These are Adobe-free core invocation/publication tests; real SDK parity remains
 separate. [The combined receipt](../tests/qualification/io-execution-20261013.json)
-pins current scope and artifacts. Per-process I/O accounting is neither a
+pins that checkpoint's scope and artifacts. Per-process I/O accounting is neither a
 physical-disk scheduler nor a memory/global-descriptor cap. Eight transfer
 credits undercount some currently bound publication paths; those descriptors
 need complete-lifetime admission rather than a larger estimate.
 
-The next semantic slice adds optional extension-defined field observations and
+The semantic observation checkpoint adds optional extension-defined field observations and
 separately negotiated [SIR/1](semantic-observation-v1.md), interpreting complete
 packets in workers only on explicit report requests. DNG reports namespace-
 bound XMP property encodings with potential categories; exact-byte transfer,
@@ -74,15 +97,15 @@ archives and conflict decisions remain unchanged. Fifteen report groups,
 eleven actual CLI cases per compiler, second-format local/remote observations,
 968 focused XMP checks and 1,029 independent XML mutations per compiler pass.
 Independent SDE/SDR conformance now passes 127 commands / 2,033 assertions per
-compiler. Current Make/Dune builds/selftests match all 313 production inputs;
+compiler. At that checkpoint Make/Dune builds/selftests match all 313 production inputs;
 [the observation receipt](../tests/qualification/semantic-observation-20261013.json)
-pins current evidence. Capped SDK area-task host source also compiles against
+pins that evidence. Capped SDK area-task host source also compiles against
 actual SDK headers and passes 789 Adobe-free scheduler assertions/sanitizers,
 but remains a separately gated experimental artifact. No Adobe code ran;
 actual multithread SDK parity, cancellation, resident threads/RSS and performance
 remain unqualified and current callers retain the threads1 reference.
 
-The new publication slice implements actual creation-parent handles and the
+The intermediate-publication checkpoint implements actual creation-parent handles and the
 ordinary receiver's exclusive held-parent stage-to-normal-temp transition.
 Native handles pass 20 cases and StagePublication passes 58 cases on stock
 OCaml 5.5.1 and OxCaml 5.2.0+ox, including the exact preparation-decline classifier.
@@ -119,7 +142,7 @@ default does not mean removed from the plan.
 | Request | Status and concrete evidence | Remaining work or limit |
 | --- | --- | --- |
 | Process DNG metadata separately from the binary payload, updating metadata when possible. | **Implemented and verified for the fixed-layout v0 profile.** [DngSemantic](../src/dngSemantic.ml) finds an owned XMP extent; [SemanticDelta](../src/semanticDelta.ml) proves every complementary byte and the complete source/target SHA-256. [SemanticSync](../src/semanticSync.ml) and [SemanticRemote](../src/semanticRemote.ml) materialize private candidates. Kernel, local and remote tests compare exact results. Materialization skips matching absolute 4 KiB comparison windows, clips writes to editable regions, and reports actual logical write bytes and syscall attempts. | One out-of-line BYTE tag 700, unchanged offset/length and total size, at most 1 MiB. Unknown/private graphs, BigTIFF and layout changes decline safely. The wire payload still carries complete packets. The window policy is not minimal byte-run patching or evidence of physical APFS write savings. No raw digest is used as whole-file equality. |
-| Make ordinary Unison transfers APFS-aware, with future ZFS/ReFS generalization. | **Working APFS optimization, portable range contract, held-FD receiver and intermediate publication integration.** [Copy](../src/copy.ml) reuses upstream hooks, private receiver-basis clones, same-offset skips, shifted immutable-basis reads and a bounded local producer. Strict [Fs.clone_stage_status](../src/fs.ml) preserves scoped declines/operational phases. [CopyRange](../src/copyRange.ml) passes 11 outcome tests; [CloneRange](../src/cloneRange.ml) passes 48 named constrained tests including 960 geometry combinations. [FileObservation](../src/fileObservation.mli) and [CloneLease](../src/cloneLease.mli) add native macOS facts and borrowed owner-epoch leases, passing 11/21 cases on stock/Ox. Ordinary receiver shifted matches use fresh observations, a 10 MiB maximum and `range = None`. Additive `Fs.clone_stage_handles` and [StagePublication](../src/stagePublication.mli) retain creation parent/witness and exclusively publish the normal temp; native suites pass 20/58 cases on both compilers. | Regular-file final `Files.renameLocal` and logical-root/follow-target binding are now qualified by 79 caller cases per compiler. Additional-name families, initial old-temp pathname cleanup and native scratch reservation remain open. No true mount-incarnation detection or capability cache. Production Copy publication/reference tests pass 86 cases per compiler, with a stock cleanup-removal negative control; current ordinary/bound-range/adoption and Ox local/remote reruns pass. Bound local/SDE materializers now hand over their actual output descriptors; declared legacy paths remain. Focused actual Copy-adapter tests pass 9 groups/27 scenarios on stock/Ox, with a stock negative control. Existing `clone_path`/`clone_file` still return booleans; successful `copy_file`/`Copied` does not attest sharing. Strict native range status, ZFS/ReFS runtime qualification, actual cross-volume performance and fault/crash recovery remain open. |
+| Make ordinary Unison transfers APFS-aware, with future ZFS/ReFS generalization. | **Working APFS optimization, portable range contract, held-FD receiver and intermediate publication integration.** [Copy](../src/copy.ml) reuses upstream hooks, private receiver-basis clones, same-offset skips, shifted immutable-basis reads and a bounded local producer. Strict [Fs.clone_stage_status](../src/fs.ml) preserves scoped declines/operational phases. [CopyRange](../src/copyRange.ml) passes 11 outcome tests; [CloneRange](../src/cloneRange.ml) passes 48 named constrained tests including 960 geometry combinations. [FileObservation](../src/fileObservation.mli) and [CloneLease](../src/cloneLease.mli) add native macOS facts and borrowed owner-epoch leases, passing 11/21 cases on stock/Ox. Ordinary receiver shifted matches use fresh observations, a 10 MiB maximum and `range = None`. Additive `Fs.clone_stage_handles` and [StagePublication](../src/stagePublication.mli) retain creation parent/witness and exclusively publish the normal temp; native suites pass 20/58 cases on both compilers. | Regular-file final `Files.renameLocal` and logical-root/follow-target binding are now qualified by 79 caller cases per compiler. Native scratch reservation/removal is now descriptor-relative, with 182 direct APFS cases / 1,984 assertions per compiler. Additional-name families and initial old-temp pathname cleanup remain open; first-admission gaps and cooperative namespace fencing remain explicit. No true mount-incarnation detection or capability cache. Production Copy publication/reference tests pass 86 cases per compiler, with a stock cleanup-removal negative control; current ordinary/bound-range/adoption and Ox local/remote reruns pass. Bound local/SDE materializers now hand over their actual output descriptors; declared legacy paths remain. Focused actual Copy-adapter tests pass 9 groups/27 scenarios on stock/Ox, with a stock negative control. Existing `clone_path`/`clone_file` still return booleans; successful `copy_file`/`Copied` does not attest sharing. Strict native range status, ZFS/ReFS runtime qualification, actual cross-volume performance and fault/crash recovery remain open. |
 | Accept extensions that declare change semantics beyond binary difference. | **Generic exact-transfer mechanism and lazy CLI reporting verified; richer semantics partial.** [FormatExtension.S](../src/formatExtension.mli) declares a profile and inspector; registration adds a capability, payload ceiling and advisory suffix hints. [SemanticReport](../src/semanticReport.ml), [SemanticRemote](../src/semanticRemote.ml) and [Uicommon](../src/uicommon.ml) show current-pair classification, preservation hashes and bounded metadata previews on explicit diff/details. A second registration-only synthetic format exercises unchanged local/remote/worker dispatch and the same report path in [test_generic_format.py](../tests/test_generic_format.py). | The interface describes editable ranges; core classification is `Exact_bytes`, `Editable_metadata`, `Other_bytes`. Immutable handles now have a bounded optional field-observation hook, used by DNG namespace-aware XMP and a synthetic workflow format through SIR/1. Reconciliation hooks and authoritative scan/base labels remain absent. Reports are lazy, disposable observations of the current pair, without an archived base or authoritative scan-wide labels. Exact-byte conflict decisions remain unchanged. |
 | Investigate existing systems and propose/implement a diff standard if needed. | **Research and experimental proposal delivered.** SOL records upstream Unison, rsync, VCDIFF, Git drivers, SQLite Session, Automerge and structured patch prior art. [SDE/0](semantic-delta-v0.md) specifies one canonical exact-byte envelope and SDR/0 request; [SIR/0](semantic-report-v0.md) separately describes bounded observations. Negotiated production RPCs implement both. | These are experimental interoperability proposals, not adopted standards or proof of novelty. Independent Python encoders/transcripts and fixed LE/BE DNG plus multi-region golden bytes now qualify 83 vectors, 1,836 truncations and exact materialization on both compilers (127 commands / 2,033 assertions each). External ecosystem adoption and representative-corpus interoperability remain separate. |
 | Study `~/src/dng-compare` and the recreated Lightroom fingerprinting work. | **Source research completed and recorded.** SOL pins both canonical repositories, documents the opaque-trailer counterexample and distinguishes stored Adobe digest, recomputed raw identity, Lightroom original matcher, preserved bytes and whole-file identity. Both canonical SSH origins and pinned commits were reconfirmed during this audit. | There is no production invocation of the recreated Lightroom workers, no new source change in either supporting repository, and no independently qualified Lightroom UI oracle. Using them as differential oracles requires version/stratum-specific fixtures. The firstparty source review is evidence of distinctions, not execution parity. |
@@ -140,7 +163,7 @@ default does not mean removed from the plan.
 | --- | --- | --- |
 | M0: baseline/upstream/toolchains | **Substantially complete on this host.** Pinned newer upstream reused; isolated stock/Ox Make and Dune text builds/selftests; historical stock→Ox→stock local archive smoke test; unmodified v2.53.5 fallback tests. | Dedicated stock↔Ox remote session and an archived reproducible test for the compiler/archive smoke sequence would strengthen the record. Other platforms and GUIs have separate qualification. |
 | M1: pure kernel/spec | **Core implemented and verified.** Checked parser/reader, full/complement hashes, generic registry, exact plans, canonical SDE/SDR, inspector and bounded SIR/0 observations. Kernel/report tests include adversarial fixtures and randomized short inputs. | Independent full wire/transcript vectors and broader structured fuzzing are missing. Inspector reports payload/envelope sizes and full-read cost qualitatively, not instrumented verification read counts. |
-| M2-G: general APFS transfer | **Main APFS paths, constrained planner and narrow native receiver integration verified; acceptance incomplete.** Stable basis/stage, source-clone preference, inherited skips, shifted copying, exact EOF and separate interrupted stages remain. Strict APFS results distinguish scoped declines from phased failures. The fake adapter qualifies alignment/tails/maxima/progress and injected generations. Native held-FD observation/borrowed leases now bind ordinary receiver shifted matches to actual descriptors, owner epochs and fresh checks before operations/completion; destination write timestamps are permitted. Intermediate stage-to-normal-temp publication now retains the actual creation parent and witness, performs exclusive held-parent rename, and cleans only its identity-bound leaf. Native handle/publication suites and current Make/Dune builds pass both compilers. | Actual Copy publication fault qualification and current integration receipts are complete; next are final live-commit/logical-root binding and lifecycle invalidation without treating UUID/fsid as a mount-incarnation proof. Initial old-temp cleanup and scratch reservation still use pathnames. Native sharing/results and other sink/composed-materialization paths remain open. Legacy range EINVAL/ESPIPE/ENOTSOCK still preserve compatibility and need precise backend status; whole-clone boolean wrappers hide errors. No capability cache, new ZFS/ReFS runtime or crash qualification. |
+| M2-G: general APFS transfer | **Main APFS paths, constrained planner and narrow native receiver integration verified; acceptance incomplete.** Stable basis/stage, source-clone preference, inherited skips, shifted copying, exact EOF and separate interrupted stages remain. Strict APFS results distinguish scoped declines from phased failures. The fake adapter qualifies alignment/tails/maxima/progress and injected generations. Native held-FD observation/borrowed leases now bind ordinary receiver shifted matches to actual descriptors, owner epochs and fresh checks before operations/completion; destination write timestamps are permitted. Intermediate stage-to-normal-temp publication now retains the actual creation parent and witness, performs exclusive held-parent rename, and cleans only its identity-bound leaf. Native handle/publication suites and current Make/Dune builds pass both compilers. | Actual Copy publication fault qualification, regular-file final live-commit/logical-root binding and current scratch integration are qualified. Native scratch reservation/removal is descriptor-relative; initial old-temp cleanup remains pathname-based. Lifecycle invalidation still requires separate evidence without treating UUID/fsid as a mount-incarnation proof. Native sharing/results and other sink/composed-materialization paths remain open. Legacy range EINVAL/ESPIPE/ENOTSOCK still preserve compatibility and need precise backend status; whole-clone boolean wrappers hide errors. No capability cache, new ZFS/ReFS runtime or crash qualification. |
 | M2: local DNG path | **Implemented and verified for v0.** Exact output, private original preservation, stale/aliased basis rejection, async cancellation and clone policy paths have fixtures. Sparse application counts bytes returned by writes and syscall attempts. Both TIFF byte orders, unchanged/first/last/disjoint/adjacent/full changes, clipped window boundaries, coalescing and synthetic multi-region application are tested. | Counters measure logical writes, not physical storage effects. Controlled failures at write/verification/property/commit boundaries remain incomplete; clone allocation ordering is manually hardened without OOM fault injection. Exhaustive packet-size and platform boundary matrices are not established. |
 | M3: negotiation/fallback | **Implemented and substantially verified.** Both directions, old peers, local-local source-clone bypass, loopback SSH, command/body bounds, reply binding, saturated bidirectional budgets and persistent socket reconnect are tested. RPC scopes retain resources through queued output, settle queued/blocked replies on close, and await active borrowers. Delayed results from a closed session do not escape into the next owner session. | A real heterogeneous source/receiver filesystem setup, explicit RPC-v0 behavior and mixed-compiler wire cases lack dedicated evidence. Current loopback peers share the host/filesystem. These lifecycle fixtures do not replace systematic fault or scheduling stress. |
 | M4-V: Adobe option/helpers | **Usable functionality verified; milestone incomplete.** Real SDK controls and receive-gate integration complement synthetic policy, mutation, timeout, process-tree and cancellation tests. Endpoint-local tool configuration is protected against legacy incoming values. Cached 24 MP SDK validation-core scaling is measured at 1/18/36 with five parallel repetitions. | Actual SDK/corpus reruns of the now-qualified synthetic receiving-path matrix, per-algorithm diagnostic detail, representative corpus/full-sync performance and actual SDK qualification of the source-implemented capped multi-thread area-task host remain open. Driver reports an aggregate raw-digest result; durable per-file receipts and stored/computed per-tag digest reporting are not implemented. |
@@ -233,14 +256,13 @@ default does not mean removed from the plan.
 2. **Finish filesystem publication and native range contracts.** Typed outcomes,
    strict APFS stage results, the constrained fake backend, native held-FD
    observations, borrowed-lease receiver integration and exclusive held-parent
-   intermediate publication are delivered. Complete the current production Copy
-   publication fault/integration receipt, then bind the original logical-root/
-   follow-target resolution and final `Files.renameLocal` commit after property
-   finalization. Address initial old-temp cleanup and native scratch reservation,
-   and add explicit lifecycle invalidation. The source-only
-   [native scratch plan](native-scratch-next.md) now specifies the next direct
-   descriptor-relative reservation/removal slice and its native fault matrix.
-   Keep leases uncached
+   intermediate publication are delivered. Production Copy faults, retained
+   actual producers and regular-file final `Files.renameLocal` / logical-root /
+   follow-target binding are qualified. Native scratch creation/removal now uses
+   the retained parent and identity witnesses; its direct and actual caller
+   evidence is in the [implementation record](native-scratch-next.md). Address
+   initial old-temp cleanup, additional-name families, first-admission limits
+   and explicit lifecycle invalidation. Keep leases uncached
    until invalidation is qualified. Refine inherited native range status/effect
    reporting before adding authoritative sharing adapters; retain exact fallback
    and property semantics. ZFS/ReFS readiness is broader than the tested APFS

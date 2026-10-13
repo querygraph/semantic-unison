@@ -1,8 +1,8 @@
 # Filesystem capabilities: implementation and qualification plan
 
-Status: **ordinary APFS receiver range copying and intermediate stage-to-temp
-publication use held descriptors; final live-file publication, native range
-sharing and lifecycle discovery remain open**,
+Status: **ordinary APFS receiver range copying, intermediate publication,
+regular-file final publication and native scratch reservation/cleanup use held
+descriptors; native range sharing and lifecycle discovery remain open**,
 2026-10-13.
 This maps [SOL.md's M2-G contract](../SOL.md) onto the current code. It preserves
 the working APFS path and ordinary upstream acceleration while preparing a
@@ -59,6 +59,21 @@ publication/reference tests pass 86 cases per compiler, with a stock private
 cleanup-removal negative control. Ordinary clone, bound-range and adoption
 reruns pass both; Ox local/semantic/remote/bidirectional/old-peer suites pass. No SDK, Photo or performance qualification was added.
 
+The later [retained-producer checkpoint](../tests/qualification/retained-producer-publication-20261013.json)
+qualifies regular-file final live publication and logical-root/follow-target
+binding, retaining actual output descriptors through finalization, validation
+and commit. The [native scratch implementation](native-scratch-next.md) replaces
+absolute reservation/removal with bounded exclusive `openat` and held-witness
+`unlinkat` through the retained parent. It passes 182 direct APFS cases /
+1,984 assertions per compiler, plus current Make/Dune builds and synthetic
+ordinary/semantic/remote/old-peer integration. The full final `Files` caller
+passes 79 cases per compiler against this source. Initial old-temp pathname
+cleanup, additional-name families, first-admission intervals, cooperative
+comparison/namespace assumptions and crash recovery remain explicit limits.
+Current receipts are [direct](../tests/clone_scratch/qualification-20261013.json),
+[integration](../tests/qualification/native-scratch-integration-20261013.json) and
+[final caller](../tests/qualification/native-scratch-final-files-20261013.json).
+
 ## First implementation slice
 
 The first slice adds explicit **range-copy outcomes and fallback reasons**
@@ -82,12 +97,12 @@ trying an expensive alternate copy that conceals the original failure.
 | --- | --- | --- |
 | [Fs](../src/fs.ml), [interface](../src/fs.mli) | Reexports upstream boolean `clone_path`/`clone_file` and byte-count `copy_file`; retains optional descriptor-pair `clone_stage` and strict `clone_stage_status`, plus additive strict `clone_stage_handles` returning basis/output/actual-creation-parent FDs. | Strict native/caller tests pass here; cross-volume, unavailable-platform and fault qualification remain. Keep compatibility wrappers. |
 | [System interface](../src/system/system_intf.ml) | Whole-file clone calls explicitly promise not to raise; range copy advances destination position on success. | Add strict entry points rather than silently changing the old interface's exception contract. Migrate production callers deliberately. |
-| [APFS stage stub](../src/copy_stubs.c) | Opens a regular, unflagged source without following its final symlink; pins destination parent; clones an unlinked immutable basis, then a writable stage; checks source identity/stability; clears inherited stage ACL/xattrs/resource fork. Strict status work preserves this transaction and the old ABI. | The new three-FD ABI retains the actual creation parent on success; both older two-FD ABIs are unchanged. Twenty native cases pass stock/Ox. Initial scratch reservation and old-temp cleanup still use pathnames; final live commit is separate. |
+| [APFS stage stub](../src/copy_stubs.c) | Opens a regular, unflagged source without following its final symlink; pins destination parent; clones an unlinked immutable basis, then a writable stage; checks source identity/stability; clears inherited stage ACL/xattrs/resource fork. Strict status work preserves this transaction and the old ABI. | The new three-FD ABI retains the actual creation parent on success; both older two-FD ABIs are unchanged. Twenty handle cases and 182 scratch cases / 1,984 assertions pass stock/Ox. Scratch reservation/removal is descriptor-relative; initial old-temp cleanup remains pathname-based. Regular-file final live commit is separately qualified. |
 | [Copy range loop](../src/copy.ml), [CopyRange](../src/copyRange.mli) | Typed exact-prefix outcomes now restrict fallback to the legacy unsupported set; zero/invalid progress and operational errors fail. Native-step errors are separate from notification/cancellation exceptions. | Full transfer suites pass. Narrow ambiguous compatibility errnos through strict backend status and qualify native partial failures. |
 | [Upstream C adapters](../src/copy_stubs.c) | macOS path cloning and Linux `FICLONE` return booleans; Linux/FreeBSD/Solaris range APIs may copy; Windows invokes extent duplication. | Retain supported mechanisms; add precise native status/errno capture and per-backend effect reporting. A successful generic copy is not evidence of sharing. |
 | Receiver/local/SDE consumers | Strict stage results remain shared. Ordinary receiver rsync shifted matches now use `copyClonedRange` on the immutable basis through `CloneLease`/`CloneRange`; same-offset inherited skips remain separate. Exact output length, fingerprints/SDE hashes and ordinary finalization remain in place. | Focused actual-adapter fault qualification passes 9 groups/27 scenarios on stock/Ox. Local producer and SDE paths retain their existing materializers; no claim that every sink uses the planner. |
 | [CloneRange](../src/cloneRange.mli), [implementation](../src/cloneRange.ml) | Pure range executor separates native-whole/composed-whole/range support, checks fresh bindings, plans aligned bounded operations, and accounts authoritative adapter prefixes. It now has an ordinary receiver caller. | Constrained fake adapters pass stock/Ox. Actual native sharing adapters and their effect/error results remain unqualified. |
-| [FileObservation](../src/fileObservation.mli), [CloneLease](../src/cloneLease.mli) | Fresh macOS held-FD facts and borrowed-descriptor leases connect native identities to owner generations. Production leases invalidate on connection cleanup/release. No cache is used. | No true mount-incarnation detector, lifecycle event discovery or immutable-content proof. The separate publication owner below guards the intermediate rename; logical-root/final-live-commit binding remains open. Non-macOS observation raises ENOSYS. |
+| [FileObservation](../src/fileObservation.mli), [CloneLease](../src/cloneLease.mli) | Fresh macOS held-FD facts and borrowed-descriptor leases connect native identities to owner generations. Production leases invalidate on connection cleanup/release. No cache is used. | No true mount-incarnation detector, lifecycle event discovery or immutable-content proof. The separate publication owners guard intermediate rename and regular-file logical-root/final-live-commit binding; broader additional-name transactions remain open. Non-macOS observation raises ENOSYS. |
 | [StagePublication](../src/stagePublication.mli) | Finalizable native owner pins the effective working directory, distinct name parents and retained stage witness; checks fresh bindings; exclusively renames to an absent normal temp; performs identity-bound cleanup. | Fifty-eight native cases pass stock/Ox. Actual Copy publication/reference qualification passes 86 cases per compiler with a stock cleanup-removal negative control. This is cooperative intermediate publication, with four extra steady owned FDs, not the final `Files.renameLocal` or original logical-root/follow-target guard. |
 
 Existing [APFS fixtures](../tests/CLONE.md) verify exclusive staging, live-source
@@ -324,10 +339,11 @@ reuse. A stock negative control detects removed caller cleanup. Ordinary clone,
 bound-range and adoption reruns pass both; Ox local/semantic/remote suites pass.
 
 This closes the intermediate stage-to-normal-temp binding implementation gap.
-The original logical replica root/follow-target resolution and final live-file
-`Files.renameLocal` publication still need their own guard after source-selected
-properties and candidate verification. Initial old-temp path cleanup and native
-scratch pathname reservation also remain separate work. Fresh lookup followed
+Later retained-producer qualification guards original logical replica root /
+follow-target resolution and regular-file final `Files.renameLocal` publication
+after source-selected properties and candidate verification. Native scratch
+reservation/removal is now descriptor-relative. Initial old-temp path cleanup
+and additional-name transactions remain separate work. Fresh lookup followed
 by rename/unlink is cooperative, not an atomic inode compare-and-swap against
 hostile namespace mutation. No mount-incarnation, crash-durability or universal
 asynchronous-handoff guarantee follows from this change.
@@ -532,10 +548,10 @@ equality. No new durability or physical-write claim follows from these APIs.
 | Slice | Implementation boundary | Acceptance before the next slice |
 | --- | --- | --- |
 | 1. Outcomes and error visibility | Range-loop types, receipts and injectable steps are implemented; strict native APFS stage results also exist. Existing wrappers are retained. | Eleven isolated tests pass stock/Ox: unsupported-before-write fallback; EIO/ENOSPC/permissions/EBADF fail; short/zero/invalid progress; exact suffix fallback; callbacks and cancellation. Ordinary/local/remote transfer integration passes. Strict native range classification remains open. |
-| 2. APFS reasons and generation | Strict two-clone stage results, native `FileObservation` and abstract borrowed `CloneLease` owner epochs are implemented. No capability cache. | Direct stage fixtures, 11 observation and 21 lease cases pass stock/Ox, including real held-file changes and controlled invalidation. Actual remount/reformat/lifecycle discovery, final live-commit binding and cleanup/crash recovery remain open; intermediate held-parent publication is the separate slice below. |
+| 2. APFS reasons and generation | Strict two-clone stage results, native `FileObservation` and abstract borrowed `CloneLease` owner epochs are implemented. No capability cache. | Direct stage fixtures, 11 observation and 21 lease cases pass stock/Ox, including real held-file changes and controlled invalidation. Actual remount/reformat/lifecycle discovery and crash recovery remain open; intermediate and regular-file final publication are separately qualified. |
 | 3. Pure planner and fake adapter | `CloneRange` implements streaming bounded `Copy`/`Share` operations and independent fresh binding observations. A separately authored fake adapter keeps immutable source/evolving stage bytes and independently checks operation constraints. | Passed: 48 named tests and 960 geometry combinations on stock/Ox, byte-for-byte sequential parity, exact write envelope/counts, immutable source, typed failure/generation/cancellation boundaries and bounded-space execution. This closes only the portable synthetic gate. |
 | 4. Shared sink integration | Ordinary APFS receiver rsync shifted ranges now use the borrowed lease/planner with 10 MiB copying and no range-sharing capability. Same-offset skips and current local/SDE stage consumption are preserved. | Ordinary transfer tests pass both compilers; Ox local/remote/old-peer suites pass. Focused actual-adapter tests pass 9 groups/27 scenarios on stock/Ox, with a stock position-reconciliation negative control. Other sink/composed-materialization integration remains future work; no wire/archive change or native sharing claim. |
-| 5. Intermediate publication | Native three-FD creation-parent handles and `StagePublication` are integrated into ordinary receiver EOF publication, with exact auto-decline scope and identity-bound cleanup. | Twenty handle cases and 58 publication cases pass both compilers; fresh Make/Dune builds/selftests pass. Actual Copy publication/reference tests pass 86 cases per compiler; ordinary clone/bound-range/adoption reruns pass both and Ox local/remote suites pass. Final live commit/logical-root binding, initial pathname cleanup, scratch reservation and crash recovery remain open. |
+| 5. Intermediate publication | Native three-FD creation-parent handles and `StagePublication` are integrated into ordinary receiver EOF publication, with exact auto-decline scope and identity-bound cleanup. | Twenty handle cases and 58 publication cases pass both compilers; fresh Make/Dune builds/selftests pass. Actual Copy publication/reference tests pass 86 cases per compiler; ordinary clone/bound-range/adoption reruns pass both and Ox local/remote suites pass. Later retained-producer/final caller qualification closes regular-file live commit/logical-root binding, and direct native controls close pathname scratch reservation. Initial old-temp pathname cleanup, broader transactions and crash recovery remain open. |
 | 6. Platform qualification | Audit/refactor inherited Linux/FreeBSD/Solaris/Windows native paths against the contract, retaining fallback support. Add real platform-specific adapters only with evidence. | Actual filesystem/version tests, ABI/foreign-call audit and physical-sharing evidence where claimed. Fake tests alone never close this gate. |
 
 The fake adapter must test behavior, not simply mirror the planner's formulas:

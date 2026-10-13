@@ -1,0 +1,90 @@
+{
+  "schema": "unison-native-scratch-independent-review/0",
+  "recorded_utc": "2026-10-13T18:56:37.871375+00:00",
+  "reviewer": "/root/scratch_review",
+  "accepted_utc": "2026-10-13T18:54:41Z",
+  "status": "ACCEPTED: frozen source, direct qualification, refreshed integration, full Files callers and current documentation",
+  "review_mode": "Independent read-only source and retained artifact/log audit. Reviewer made no edits and executed no native/Adobe/Photo tests.",
+  "production_copy_stubs_sha256": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+  "qualification_receipts": {
+    "tests/clone_scratch/qualification-20261013.json": "be4c121dac61c1e39932301c1b25ab6ae55a094436744e10f683b217bd1b7d60",
+    "tests/qualification/native-scratch-integration-20261013.json": "bbd1fedd3f612244f87e4fd324dd486f0327e25dfedc4b9d82b2a9cdcfae242a",
+    "tests/qualification/native-scratch-final-files-20261013.json": "ba542c9c40b83603183b6225e5ff751bc2a9365203acd800f909c94de8688f5f"
+  },
+  "reviewed_documentation_sha256": {
+    "SOL.md": "12fae5af01c8bcc61126ce0aa91e597edc423dc54bf13aa36d4987363316f9ce",
+    "doc/native-scratch-next.md": "dc95e495beba2173c253328d1ce303f2e628f6b5505b81283e7bba71c7ac1df5",
+    "doc/implementation-status.md": "d8029d2fb64cb44a6fa698cdb3fdf5cbcacce91f71a42acb181ee3c2b9d7983b",
+    "doc/foreign-boundary-audit.md": "458f6a1189a87489b8dcd676b4e26675d85350bcd52dc26dd4422915912fc68b",
+    "doc/filesystem-capabilities-plan.md": "a7d092c8ca7a9a24920ff982158f0a8790ba6a934bd6451905cfbafd9ee22853",
+    "tests/README.md": "4a90619e0496b1cabaf7daed4367cf2b766a5deec2a4edb5cedf6224aa049d6d"
+  },
+  "audit": {
+    "direct": {
+      "file_hash_comparisons": 137,
+      "reconstructed_native_artifact_entries": 1776,
+      "cases_each_compiler": 182,
+      "assertions_each_compiler": 1984,
+      "compilers": [
+        "OCaml5.5.1",
+        "OxCaml5.2.0+ox"
+      ],
+      "negative_controls": "Both mutations reconstructed byte-for-byte from frozen production C. Each fails its designated assertion through all three ABIs on both compilers.",
+      "source_review": "58-byte allocation/indexes, 128-attempt bound, exclusive retained-parent creation, admitted ownership/cleanup, first error and clear-before-close ordering, ABI and released-runtime ownership accepted."
+    },
+    "integration": {
+      "file_hash_comparisons": 1647,
+      "production_inputs": 315,
+      "production_locations": [
+        "workspace",
+        "stockMake",
+        "OxMake",
+        "stockDune",
+        "OxDune"
+      ],
+      "production_manifest_comparisons": 1575,
+      "test_pins": 19,
+      "current_logs": 21,
+      "builds_and_selftests": "Terminal zero on compiler-matched stock/Ox Make and Dune; source inputs and binary/runner/compiler/log/verification pins match.",
+      "recorded_tests": "Native status/handles/legacy/signal, Copy publication and stock cleanup negative, adoption and old-handoff negatives, bound ranges, local/ordinary remote/source-clone/bidirectional SDE/old-peer outcomes agree with terminal records and logs.",
+      "refreshed_callers": "Four strengthened ordinary/semantic remote runs pass. Both roots now have complete expected inventories at settled boundaries. The remaining clone glob only chooses SIGKILL timing."
+    },
+    "full_files": {
+      "file_hash_comparisons": 1700,
+      "cases_each_compiler": 79,
+      "excluded_cases": 0,
+      "compile_link_commands_each_compiler": 24,
+      "retained_top_level_artifacts_each_compiler": 68,
+      "retained_per_case_direct_artifacts_each_compiler": 297,
+      "outcomes": "Both complete case lists equal retained logs/verification; neither filtering nor negative selection. Compile/link uses matched compiler and current snapshot copy_stubs.o. All315 production inputs match and all365 retained artifact pins per compiler match."
+    },
+    "combined_file_hash_comparisons": 3484,
+    "count_scope": "Comparison counts include repeated pins and locations; these are not unique-file totals.",
+    "supplemental_staged_dependency_comparisons": 9,
+    "supplemental_scope": "Read-only staged/current checks for C, three receipts and two caller tests, plus workspace/bothMake generated dependency equality; separate from3484."
+  },
+  "resolved_findings": [
+    "Ordinary/semantic caller cleanup glob assertions could miss the new basename. Exact expected inventories now cover both roots; affected full suites rerun on both current compilers, including old peers and24 bidirectional keys.",
+    "Documentation now distinguishes singly linked basis/output admission from reservation removal, which permits later extra aliases.",
+    "Historical next-work/final-publication/scratch statements are updated or marked superseded; remaining scope is explicitly unfinished."
+  ],
+  "retained_pre_inventory_integration": {
+    "path": "/private/tmp/unison-native-scratch-integration-pre-inventory-20261013.json",
+    "sha256": "ea4a29be6115b3897788ba0d48595e24d83c424e650f3f6319da0d2902993de5",
+    "meaning": "Resolves the supplemental full Files historical predecessor pin; refreshed integration has a separate current hash."
+  },
+  "generated_depend": {
+    "path": "src/.depend",
+    "sha256": "75a5edfc58129bc63a1aa1a55e762a27d0bb9c2f9212ec43cb2bba5235fe67d0",
+    "root_check": "Byte-identical to both fresh Make snapshots; excluded from the315-input production manifest."
+  },
+  "limits": [
+    "The legacy integration compile_link field starts with a literal compiler placeholder; it is a template, not exact executable argv. The matched compiler/snapshot/source/object/binary context is separately pinned.",
+    "Exclusive clone to first open/admission does not prove object birth. Failed first admission and repeated witness/removal errors can preserve artifacts; a late two-FD parent-close failure can preserve linked output.",
+    "Witness lookup followed by unlink is cooperative fencing, not atomic hostile namespace compare-and-unlink. Existing old-temp pathname cleanup may later remove matching stale artifacts; no durable quarantine claim.",
+    "No crash/remount recovery, arbitrary asynchronous-success ownership, real OOM, syscall deadline, physical write/sharing telemetry, speedup or other-platform qualification.",
+    "Complete-lifetime descriptor/memory admission, native positional writes, lifecycle/capability caching, broader DNG/Adobe runtime/corpus/performance and Photo-owned preview qualification remain open.",
+    "All reported native/CLI tests used disposable synthetic files and finite Adobe-free test validators. No Adobe/Lightroom/Photo/catalog/cache/volume/preview invocation or production payload access occurred; external oracle window remains unreleased."
+  ],
+  "goal_status": "active; full implementation objective remains unfinished"
+}

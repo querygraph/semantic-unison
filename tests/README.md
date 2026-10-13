@@ -18,6 +18,7 @@ python3 tests/clone_range/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/file_observation/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_lease/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_handles/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/clone_scratch/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/stage_publication/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_clone_stage_status.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_clone_stage_signals.py --ocamlopt /absolute/compiler/bin/ocamlopt
@@ -61,6 +62,16 @@ suite injects one trusted synthetic registration into a private test binary
 and exercises the unchanged transfer machinery. Compiler arguments must match
 the snapshot being linked. APFS tests require a filesystem supporting cloning;
 see [CLONE.md](CLONE.md) for native property tests and platform limits.
+
+The [native scratch suite](clone_scratch/README.md) tests the actual three
+clone-stage ABIs in private C-only fault wrappers. It requires disposable APFS
+storage and checks descriptor-relative reservation, bounded collisions,
+identity-bound cleanup, replaced names and recycled-FD close errors. Its two
+private source regressions must fail designated assertions through every ABI.
+The [direct receipt](clone_scratch/qualification-20261013.json) and
+[integration receipt](qualification/native-scratch-integration-20261013.json)
+pin the current source and compiler-matched evidence. Preserved failure
+artifacts are recorded; existing stale-temp pathname cleanup remains separate.
 
 The report suites check [bounded SIR/0 descriptions](../doc/semantic-report-v0.md)
 and escaped metadata byte previews, then request real CLI diff/details on local

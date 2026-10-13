@@ -47,8 +47,9 @@ def exercise(client, server, semantic):
             assert result.returncode == 0, log
             used = "Remote semantic clone wrote" in log
             assert used == expect, log
-            assert not list(right.glob("*sde*.unison.tmp"))
-            assert not list(left.glob("*sde*.unison.tmp"))
+            for directory in (left, right):
+                actual = {path.name for path in directory.iterdir()}
+                assert actual == {"image.dng"}, (str(directory), actual)
             return log
         a = left / "image.dng"; b = right / "image.dng"
         a.write_bytes(fixture()); sync()
@@ -84,6 +85,9 @@ def exercise_local_source_clone(binary):
         def sync():
             result = subprocess.run(command, env=env, capture_output=True, text=True, timeout=90)
             assert result.returncode == 0, result.stdout + result.stderr
+            for directory in (left, right):
+                actual = {path.name for path in directory.iterdir()}
+                assert actual == {"image.dng"}, (str(directory), actual)
             return result.stdout + result.stderr
         source.write_bytes(fixture()); sync()
         source.write_bytes(fixture(b"two")); source.chmod(0o400)
@@ -124,9 +128,8 @@ def exercise_bidirectional_admission(binary):
             if expect_runtime:
                 assert "2 CPU permits, 2 domains, 3 transaction slots" in log, log
             for directory in (left, right):
-                leftovers = [path.name for path in directory.iterdir()
-                             if path.name not in names]
-                assert not leftovers, leftovers
+                actual = {path.name for path in directory.iterdir()}
+                assert actual == set(names), (str(directory), actual)
             return log
         names = [f"image-{i:02d}.dng" for i in range(24)]
         for i, name in enumerate(names):
