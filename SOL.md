@@ -27,17 +27,29 @@
   stay separate; retained-byte reuse does not require a new-renderer benchmark
   or Quasar split qualification to classify and stage it. The older 761,466-key
   full-monitor / 134,582 late-gap capacity models remain historical. The owner
-  reports all 44,281 bounded modern/native marker/SOF checks passed and the
-  147,460 legacy highest-section pass still active. These checks do not prove
-  entropy/native decode or current native crop/monitor fit. The next native branch remains the original
+  reports all 44,281 modern/native marker/SOF checks complete, matching filename
+  long edges and all 4,299 native dimensions/positive sizes, with 1,597,728
+  marker bytes read and no entropy decode. Its existing 147,460 legacy
+  highest-section pass, PID 56590, remains active at roughly 100,000 checks
+  without reported holds/mismatches; the owner retains this pass without replay.
+  These checks do not prove native decode or current crop/monitor fit.
+  The next native branch remains the original
   uninvoked image 10031592 registration/load/restart control. Desktop access
   remains unavailable; the user reports current helper owner undispatched and
   native window unreleased. Shared eighteen-credit ceiling and Quasar/Ten
-  placement persist. The ORIGINAL renderer/publisher owner acknowledged the
-  handoff pins after the relay through Photo parent. It reports C/Rust/OxCaml
-  project-interface ABI proof passing with the accepted header unchanged,
-  without renderer fidelity or private Adobe ABI qualification. Relay/owner
-  acknowledgment evidence is local PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. No production writes,
+  placement persist. The ORIGINAL renderer/publisher owner's
+  [durable acknowledgment](../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+  pins the mass handoff, v3 receipts, modern geometry and compiled interface
+  proof. The [ABI assessment](../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
+  and completion hashes were verified from JSON receipts: eight C/Rust structs,
+  56 fields / 172 metrics and 15 synthetic signatures agree on this x86_64 LP64
+  target; genuine OxCaml 5.2.0+ox allocating C-stub transport passes. Carry full
+  uint64 in Int64 bit containers with explicit unsigned handling, signed status
+  in Int32, with field bounds and checked size/offset conversion before I/O or
+  allocation; never assume OCaml-record/C-struct layout equality. This is synthetic
+  project-interface proof, not a private Adobe ABI, renderer/runtime/fidelity
+  qualification or benchmark. Local relay history remains in
+  PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. No production writes,
   payload hashes/copies, competing publisher or full-run admission occurred.
   Cleanup review protects the exact-version Atlas/Bumer archives formerly
   under delete; preserve them in placement/migration manifests and budgets.
@@ -351,8 +363,9 @@
   with lease lifetime through encoding/validation, child settlement and result
   release. Initial capability is one in-flight call per host; native threading
   and 1/6/18 configurations remain unqualified. The header was accepted as an
-  uncompiled project interface; the owner now reports compiler-only C/Rust/
-  OxCaml project ABI proof passing, not a qualified private Adobe ABI.
+  uncompiled project interface; the later pinned ABI assessment records actual
+  C/Rust layout/signature witnesses and synthetic OxCaml C-stub transport,
+  not a qualified private Adobe ABI or host/backend runtime.
   Private initialization/rendering
   signatures remain noncallable. This packet authorizes no generator build,
   benchmark, native invocation, production publication or full run. Details are

@@ -7,9 +7,10 @@ Status: **review integrated; renderer/publisher/runtime qualification pending**,
 [modern storage design](../../photo/preview-generator/MODERN-STORAGE-DESIGN.md)
 and [renderer feasibility findings](../../photo/preview-generator/common/RENDERER-FEASIBILITY.md).
 The preview workspace contains design, source-interface and receipt files.
-The finite packet was accepted as uncompiled source. The original owner now
-reports compiler-only C/Rust/OxCaml project-interface ABI checks passing;
-no standalone generator, private Adobe ABI or renderer fidelity is qualified.
+The finite packet was accepted as uncompiled source. Later pinned C/Rust
+layout/signature witnesses and genuine OxCaml C-stub transport qualify the
+synthetic project interface on this host. No standalone generator, private
+Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
@@ -144,16 +145,24 @@ header metadata reads are preserved explicitly. This Unison integration reads
 receipt/contract files only, not databases, preview payloads or live volumes.
 The handoff was sent to the existing Photo parent for the ORIGINAL
 preview_implementation owner. That owner then acknowledged and verified the
-handoff pins in its completed task turn; acknowledgment is distinct from
-native admission. Local relay/acknowledgment evidence is
+handoff pins in its completed task turn. Its
+[durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+now binds the exact mass HANDOFF, actual v3 COMPLETE/SUMMARY, modern geometry
+and compiled interface receipts. Acknowledgment remains distinct from native
+admission. Local relay history remains in
 PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. The user reports desktop access
 unavailable, the current helper owner undispatched and the external finite
 native window unreleased. Original renderer/publisher ownership is unchanged.
 
-The owner now reports all 44,281 modern/native bounded marker/SOF checks passed
-(39,982 modern candidate files plus 4,299 native targets), with the 147,460
-legacy highest-section pass still active. These are owner-reported results;
-this integration opened no geometry receipt or preview bytes. Marker geometry
+The owner reports all 44,281 modern/native bounded marker/SOF checks complete
+(39,982 modern candidate files plus 4,299 native targets): all filename long
+edges and all 4,299 native width/height/positive bytes match, using 1,597,728
+marker bytes without entropy decode. Its existing four-worker 147,460 legacy
+highest-section pass remains live, PID 56590, roughly 100,000 complete without
+reported holds/mismatches; ownership retains that running pass without replay.
+The durable owner receipt pins modern completion. This integration checked
+the acknowledgment and interface JSON only, not geometry artifacts or preview
+bytes, and performed no worker probe. Marker geometry
 is distinct from entropy/native decode and qualified current native crop/
 monitor geometry. The original reviewed uninvoked image 10031592
 registration/load/restart control remains the next native branch. These stages
@@ -237,15 +246,54 @@ receipt without rewriting its pins. Adopt its project interface requirements:
 The [project header](../../photo/preview-generator/oracle-source-v1/include/preview_backend_v0.h)
 and [interface contract](../../photo/preview-generator/oracle-source-v1/INTERFACE-CONTRACT.md)
 were accepted as uncompiled declarations and do not supply private Adobe
-signatures. The original owner subsequently reports compiler-only C/Rust/
-OxCaml project-interface ABI proof passing with the accepted header unchanged.
-This integration records that acknowledgment without executing its checks
-or opening its ABI artifacts; private Adobe signatures remain noncallable.
+signatures. The subsequently pinned project-interface qualification below
+uses the same accepted header. This integration verified assessment/completion
+receipt bytes, not the compiled artifacts or test execution; private Adobe
+signatures remain noncallable.
 Private initialization/rendering prototypes remain unqualified and noncallable.
 Source acceptance established no generator build, pixel equivalence, benchmark,
 native invocation, Main/cache access, publication or full-run release. It adds
 no operational permission flow or broader hold: existing coordinated admission
 and ownership remain in force.
+
+## Compiled project-interface qualification
+
+The independently produced
+[assessment](../../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
+has SHA-256 52ea2ac1c22d68a8f6917845d01067af3690b61aa44ec11392757437e67ae8b3;
+its [completion manifest](../../photo/preview-generator/abi-layout-qualification-20261013T223153Z/COMPLETE.json)
+has SHA-256 89054915c458af61eeb39daa1c0d1888a070c8e49e8b9438191c100de6cb5bbb.
+Both JSON hashes and the durable owner acknowledgment bindings were checked
+without opening the listed binaries, witness sources or logs, or running tests.
+Their declared accepted-header pin agrees at
+47314395530b3a53220cc80247f91859720f8c82dfa4689f58c6f3480cdecb58.
+This compares receipt pins, not independently reopened current-header bytes.
+
+The witnesses agree for eight C/Rust structs, 56 fields and 172 size/alignment/
+offset metrics, plus 15 typed function-pointer signatures and synthetic
+C-to-Rust-to-C calls, on x86_64-apple-darwin little-endian LP64. Genuine installed
+OxCaml 5.2.0+ox allocating C stubs pass 12 signed-status and six uint64 bit-pattern
+round trips. Adopt these binding requirements:
+
+- Rust uses repr(C), exact signed i32 status, extern C callbacks and nullable
+  Option function pointers. Opaque marker types remain pointer-only.
+- OxCaml's ordinary int is 63-bit. Carry every full-width uint64 as Int64 bits
+  with explicit unsigned operations; use Int32 for signed status, including
+  negative extremes. This transport proof does not equate OCaml-record and
+  C-struct layouts or qualify every ownership/exception path.
+- Apply field-specific unsigned bounds and checked int/size_t/off_t conversion
+  before using values as offsets, lengths, memory credits or allocation sizes.
+  Full-width transport preserves bits; valid operational ranges remain narrower.
+- Preserve natural padding. Packed structs and serializing sizeof(struct)
+  memory are outside the portable component/wire contract.
+
+The finite compile/run witnesses report no Adobe loading, media/Main/cache
+access, renderer/publisher implementation, generator benchmark or full run.
+They establish target-specific synthetic layout/signature transport, not
+production backend negotiation, pointer lifetimes, panic/exception discipline,
+shutdown/cancellation or enforcement of resource budgets. The original owner
+accepts this bounded proof; renderer fidelity, native registration/load/restart
+and the coordinated native window retain their separate qualification gates.
 
 ## Architecture adopted before implementation
 

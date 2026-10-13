@@ -129,14 +129,25 @@ separate. Preserve all 55 mapped native deletion markers and their owner-reporte
 native queue exclusion; RootPixels/face/motion metadata adds no ordinary coverage.
 Known standalone gaps of 485,185 other-digest and 252,676 no-file keys are not a
 definitive regeneration count; 39 empty digests remain unknown. The existing
-owner reports all 44,281 modern/native marker/SOF checks passed, the 147,460
-legacy highest-section pass still active and compiler-only C/Rust/OxCaml project
-ABI proof passing with the accepted header unchanged. These are owner-reported
-results, not a new Unison run or private Adobe renderer qualification. Its
+owner reports all 44,281 modern/native marker/SOF checks complete with all
+native dimensions/positive sizes matching, reading 1,597,728 marker bytes
+without entropy decode. Its existing four-worker 147,460 legacy pass remains
+live as PID 56590, roughly 100,000 complete without reported holds/mismatches;
+the owner retains that pass without replay. The pinned
+[ABI assessment](../../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
+records eight C/Rust structs, 56 fields / 172 metrics, 15 synthetic typed
+signatures and genuine OxCaml 5.2.0+ox C-stub transport. Full uint64 uses Int64
+bit containers with unsigned handling; signed status uses Int32. Assessment/
+completion hashes were checked from JSON, without a new Unison test run or
+compiled-artifact access. This qualifies no production host/backend runtime
+or private Adobe renderer. Its
 original uninvoked image 10031592 native registration/load/restart control remains.
 Receipt/document staging records zero production writes, native requests,
 payload hashes or copies. The handoff was sent via Photo parent and acknowledged
-by the original renderer/publisher owner; acceptance is not native admission.
+by the original renderer/publisher owner. Its
+[durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+binds the exact mass/v3 and compiled-interface pins; acceptance is not native
+admission.
 The user reports desktop access unavailable, current helper owner undispatched
 and native window unreleased; shared eighteen-credit limit and split placement
 persist. Exact-version
@@ -156,8 +167,8 @@ The [accepted finite source packet](../../photo/preview-generator/oracle-source-
 bounds recursive photographic inputs to eight and logical states to sixteen,
 with synchronous typed ownership and a sole backend atomic CPU/memory lease
 under a global eighteen-credit ceiling through result release. It was accepted
-as uncompiled, uninvoked source preparation; the later owner-reported project
-ABI checks qualify no private Adobe signatures. Those remain noncallable and
+as uncompiled, uninvoked source preparation; the later pinned synthetic project
+ABI transport qualifies no private Adobe signatures. Those remain noncallable and
 current source/settings/dependencies require post-repair recapture. No preview
 build, benchmark, production publisher or full run is qualified by this update.
 

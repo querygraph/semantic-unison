@@ -52,9 +52,14 @@ The [integration findings](preview-design-integration.md) adopt synchronous
 ownership, exactly-once result release and a sole backend reservation authority
 under the shared eighteen-credit ceiling. Source preparation does not qualify
 private Adobe initialization/rendering signatures, a generator, pixels,
-registration or publication. The owner now reports compiler-only C/Rust/
-OxCaml project-interface ABI proof passing with the accepted header unchanged;
-this does not qualify private Adobe prototypes or rendering. Current inputs
+registration or publication. The pinned
+[ABI assessment](../../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
+records eight C/Rust structs, 56 fields / 172 metrics, 15 synthetic typed
+signatures and genuine OxCaml 5.2.0+ox C-stub transport with the accepted header
+unchanged. Full uint64 uses Int64 bit containers with explicit unsigned handling;
+signed status uses Int32. The [interface qualification](preview-design-integration.md)
+scopes this synthetic proof to the observed target, with no private Adobe
+prototypes, host/backend runtime or renderer qualification. Current inputs
 must be recaptured after repairs.
 
 The latest [private v3 staging](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
@@ -72,14 +77,20 @@ queue exclusion; they do not add a blanket unregistered-candidate hold. RootPixe
 metadata, 48,046 face crops and 3,411 motion thumbnails add no ordinary monitor
 or 1:1 coverage. Known standalone gaps of 485,185 other-digest / 252,676 no-file
 keys and 39 unknown empty digests do not define a regeneration/capacity cohort.
-The original owner reports all 44,281 modern/native marker/SOF checks passed,
-with the 147,460 legacy highest-section pass still active. These reports prove
+The original owner reports all 44,281 modern/native marker/SOF checks complete,
+including native width/height/positive bytes across 4,299 targets, with 1,597,728
+marker bytes and no entropy decode. Its existing four-worker 147,460 legacy
+highest-section pass remains active as PID 56590, roughly 100,000 complete with
+no reported holds/mismatches; the owner retains it without restarting/replaying.
+These reports prove
 no entropy/native decode or current native crop/monitor fit. Its original
 uninvoked image 10031592 remains the next registration/load/restart control.
 The user reports desktop access unavailable, current helper owner undispatched
 and native window unreleased; no full generator or unqualified offline publisher
 is admitted. The handoff was relayed via Photo parent and acknowledged by the
-original owner; that acceptance does not release native admission.
+original owner. The [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+pins the exact mass/v3, modern geometry and compiled-interface receipts;
+that acceptance does not release native admission.
 
 The [registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
 separates retained-byte reuse, alias-only mapping gaps, absent registration,
