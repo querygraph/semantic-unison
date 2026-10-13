@@ -14,9 +14,15 @@ The takeover owner reports Lux adopted/accepted and open in stable Classic
 15.6. **Helper Accessibility is already granted and verified**, all seven startup
 phases and the first full automatic renewal passed, and actual existing
 PreviewServer transport is qualified. Receiver acceptance is complete on active
-Morrobay generation 2, with current PID 10536/start/Lux Main descriptor and owner
+Morrobay generation 2, with historical PID 10536/start/Lux Main descriptor and owner
 verified in the [canonical readiness receipt](/Users/alexy/src/photo/preview-unison-coordination-20261013/RECEIVER-AND-ORACLE-READINESS.json).
-The desktop was last observed locked and the external finite oracle window is unreleased.
+The newer [Photo-root repair receipt](../../photo/catalog-repair-progress-20261013.json)
+at 15:47:03 UTC reports Lux reopened in stable Classic PID 2844 and the desktop
+locked at 15:29:55 UTC / 08:29:55 PDT. Startup/menu continuation waits for unlock;
+Date1540 catalog identity reconciliation and migration continuation remain
+pending. Earlier process/transport/startup bindings are historical and require
+fresh root-owned capture for this process. Receiver acceptance and verified
+Accessibility persist. The external finite oracle window remains unreleased.
 Registration/native recognition, standalone
 rendering and split availability remain unqualified. Preparation/adoption
 receipts authorize no full preview-generator run.
@@ -37,6 +43,15 @@ mapping guard and independent acceptance: 48 mock/source cases, an independent
 verification false. It proves no
 current cache, committed persistence or cold-restart result. This coordination
 did not recheck the desktop or invoke Lightroom.
+
+The independently accepted [finite source packet](../../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
+provides an uncompiled typed project interface, bounded to eight recursive
+photographic inputs and sixteen logical states including negatives/pilots.
+The [integration findings](preview-design-integration.md) adopt synchronous
+ownership, exactly-once result release and a sole backend reservation authority
+under the shared eighteen-credit ceiling. Source preparation does not qualify
+private Adobe initialization/rendering signatures, a generator, pixels,
+registration or publication. Current inputs must be recaptured after repairs.
 
 ## Requested arrangement and observed storage
 

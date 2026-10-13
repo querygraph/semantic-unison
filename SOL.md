@@ -4,6 +4,41 @@
 
 ## Live implementation handoff
 
+* Latest Photo coordination (2026-10-13, repair receipt 15:47:03 UTC): owner
+  reopened Lux in stable Classic PID 2844; desktop locked at 15:29:55 UTC /
+  08:29:55 PDT. Startup/menu continuation awaits unlock. Receiver generation-2
+  acceptance and verified Accessibility persist; the earlier PID 10536/start /
+  Lux Main-FD/transport/startup observations are historical, not fresh PID 2844
+  bindings. External finite oracle window remains unreleased and the original
+  Photo `preview_implementation` task retains renderer/publisher ownership.
+  Root will coordinate actual readiness after catalog repairs.
+* Photo completed catalog-only JPG removal (8,050 images, 25 folders, one root,
+  zero physical operations), two exact 1524 relocations/old-branch removal,
+  April–June 2016 grouping and 34 inventoried same-volume quarantines.
+  Date1540 filesystem repair completed 74 renames, 70 date patches and two
+  movie-XMP repairs, reusing 74 rollback clones; preserved-identity catalog
+  reconciliation remains pending. Migration1348 preflight closed before any
+  move on 1,372 observed filename/import-source shadow rows; its exact typed
+  deletion V3 successor is sealed and independently source-reviewed. These
+  are Photo-root operations reported in `~/src/photo/catalog-repair-progress-20261013.json`,
+  not operations performed by Unison.
+* [The accepted finite source packet](../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
+  (15:32:27 UTC, SHA-256 `f00803009328ef1ce67b4f3e635ef79527d512f6066845475cd5bf73d59a1f92`)
+  bounds the complete recursive photographic dependency graph to eight distinct
+  inputs and all logical states, including negative/pilot variants, to sixteen.
+  Four groups/six states are historical seeds; current source/settings/dependency
+  identities must be recaptured after repairs. Adopt synchronous typed host /
+  backend ownership and exactly-once result release. Backend alone reserves
+  one atomic CPU/memory lease; scheduler bids do not reserve twice. All engine,
+  backend, codec and helper threads/processes share the global 18-credit ceiling,
+  with lease lifetime through encoding/validation, child settlement and result
+  release. Initial capability is one in-flight call per host; native threading
+  and 1/6/18 configurations remain unqualified. The header is an uncompiled
+  project interface, not a qualified Adobe ABI. Private initialization/rendering
+  signatures remain noncallable. This packet authorizes no generator build,
+  benchmark, native invocation, production publication or full run. Details are
+  incorporated into `doc/preview-design-integration.md`.
+
 * Retained-producer follow-on is implemented and qualified (2026-10-13).
   `Copy.fileBound` and separately negotiated `target-binding-producer-v0` /
   `transferFileBoundV0` retain actual output descriptors through data, forks,
@@ -81,7 +116,7 @@
 
 * Oracle evidence correction confirmed, 2026-10-13: installed Classic 15.6 per-level Preview objects carry digest but no UUID; never require or synthesize `level.uuid`. Bind whole-pyramid UUID/digest to current Main, retain expected dimensions from matching native PyramidLevel rows before decode, then compare actual decoded dimensions and level digest afterward. Orientation comes from the captured current Main/native ImageCacheEntry mapping, not an invented PyramidLevel orientation column. Positive registered `fileSize` must equal stable actual disk bytes; mismatch fails evidence and absent/zero/unknown stays unqualified. Native stale fallback is `lastCacheEntryForImage(imageId)`, subject to the same current binding. Source review is `~/src/photo/NATIVE-DIRECT-PREVIEW-INDEPENDENT-REVIEW-20261013.md`; the owned integration/placement docs incorporate its post-native deadline and candidate-versus-durable evidence distinctions. This changes the oracle contract, not Quasar/Ten placement. The takeover owner now reports Lux accepted/adopted and open in stable 15.6. The subsequent owner receipt verifies helper access and transport; the finite native registration/load/restart window remains owner-controlled and closed. Preparation/adoption receipts authorize no full preview-generator run. Our preview integration task acknowledged this correction.
 
-* Latest takeover status, 2026-10-13: the user/root confirms Quasar APFS 8 TB/new UUID and existing Policy B capacity evidence. The full 761,466-key mean (4.009232 TB) and summed per-photo P95 (6.006848 TB) fit the 7.200061 TB planning budget; the conservative 9.100375 TB allowance does not. Representative native output/allocation batches remain required before a full run. Stable Classic 15.6 Lux is running, all seven performance phases pass on autostart and Cloud UI reports Synced/Pause Syncing. Existing PreviewServer entry/callback transport is separately qualified; standalone rendering, native registration/load/restart and split availability remain unqualified, with finite oracles controlled by the takeover root. Ten retains its 9.18 TB cache on HFS+; cross-volume recovery and native symlink lifecycle gates remain. This Unison task makes no independent live-cache changes.
+* Earlier takeover status before the current Photo repair update, 2026-10-13: the user/root confirms Quasar APFS 8 TB/new UUID and existing Policy B capacity evidence. The full 761,466-key mean (4.009232 TB) and summed per-photo P95 (6.006848 TB) fit the 7.200061 TB planning budget; the conservative 9.100375 TB allowance does not. Representative native output/allocation batches remain required before a full run. Stable Classic 15.6 Lux is running, all seven performance phases pass on autostart and Cloud UI reports Synced/Pause Syncing. Existing PreviewServer entry/callback transport is separately qualified; standalone rendering, native registration/load/restart and split availability remain unqualified, with finite oracles controlled by the takeover root. Ten retains its 9.18 TB cache on HFS+; cross-volume recovery and native symlink lifecycle gates remain. This Unison task makes no independent live-cache changes.
 * Portable filesystem generalization implemented: `CloneRange` streams aligned head/interior/tail operations, separates native-whole/composed-whole/range support, checks fresh injected owner/backend/source/destination identities and generations before every operation and completion, and validates exact contiguous progress. Only known-prefix unsupported sharing can copy the remaining suffix; operational errors, indeterminate mutation, stale bindings and malformed claims stop. Independent stock/Ox tests pass 48 named cases including 960 geometry combinations, immutable-basis reconstruction, write-count/sentinel checks and bounded cancellation of a huge request. These trusted endpoint-local records and injected observations are not native remount detection, a capability cache or a production range sink. No new ZFS/ReFS runtime qualification is claimed.
 * Strict APFS stage result implemented: `Fs.clone_stage_status` and the legacy option ABI share one native transaction. Production Copy and local/remote semantic consumers use explicit shared-stage or scoped platform/source-kind/source-flags/cross-device/unsupported results; operational errors preserve their native phase and never become declines. Nonregular bases fail promptly. Both compilers pass direct native ABI/scope/phase/exclusivity/FD tests. Combined Make builds/selftests and synthetic ordinary/local/remote/old-peer/actual Adobe receive-gate checks pass; final source qualification is being refreshed after the resource-cleanup review. Owned-name cleanup is best effort and crash/fault recovery remains unqualified.
 * Native pending-signal cleanup hardened: dispatch pending callbacks before native ownership, enter a no-pending blocking section and free all path/attribute buffers before reacquiring the runtime. An independent private counter/injected-Sys.Break test passes stock/Ox: corrected declined-stage path owns zero buffers, while an old-release negative control leaks exactly three; source and descriptor counts remain unchanged. Pinned Ox uses `Sys.with_async_exns` for the fixture's asynchronous Break catch. This qualifies that C buffer window, not arbitrary successful-result asynchronous ownership, OS deadlines or crash cleanup.
@@ -109,7 +144,7 @@
   handoff (10:45:49 UTC); the newer forwarding status is below. No native/cache/volume
   mutation was performed here.
 
-* Latest coordination constraint: preview work here remains interface/review
+* Historical oracle-contract coordination: preview work here remains interface/review
   only. The ORIGINAL photo-session renderer/publisher task has ACKNOWLEDGED the
   exact corrected oracle contract, read the independent review and audited the
   pinned direct-probe source. Canonical acknowledgment/source pins are in
@@ -118,7 +153,7 @@
   not release the oracle window. The readiness receipt binds completed
   Smart/core acceptance (both exit0, no skips/failures; acceptance SHA256
   `9d2be438ea619913ace0ddb1da7626d736a8a504a6a19597d5b22768fb4a526e`),
-  active Morrobay generation2, PID10536/start, Lux MainFD and owner identity,
+  active Morrobay generation2, historical PID10536/start, Lux MainFD and owner identity,
   Helper Accessibility ALREADY GRANTED AND VERIFIED, all seven startup phases
   and the first full automatic renewal passed. No grant is pending.
   EXTERNAL ORACLE WINDOW NOT RELEASED: desktop relocked/root sequence pending.
@@ -126,7 +161,8 @@
   external Adobe invocation or production publisher starts here. The native
   one-control registration source passed25 independent transport/registration
   tests but is uninvoked; recognition and cold restart remain unresolved. Stable
-  Classic15.6/Lux/PID10536 remains the owner-reported current process. ABI
+  Classic15.6/Lux/PID10536 was the process bound by that earlier receipt;
+  the latest Photo repair receipt reports PID2844. ABI
   investigation stays source-only under the original photo implementation
   owner; no full generator run.
 

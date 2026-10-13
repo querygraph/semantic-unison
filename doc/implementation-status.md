@@ -26,6 +26,23 @@ retain their original source hashes and scope. The held-FD predecessor recorded
 Make/Dune builds and 303 matching Dune production inputs; its ordinary/local/
 remote evidence remains historical to that source.
 
+
+Latest Photo-root coordination at 15:47:03 UTC reports stable Classic PID 2844
+with Lux reopened and desktop locked at 15:29:55 UTC / 08:29:55 PDT. Receiver
+generation-2 acceptance and Accessibility persist; old PID10536/start/Main-FD /
+startup/transport bindings are historical. Date1540 filesystem repair is
+complete but catalog identity reconciliation remains pending; migration1348
+preflight closed before any move on 1,372 observed filename-shadow rows, with
+an exact source-reviewed V3 successor. Original Photo implementation ownership
+and the unreleased external oracle window remain unchanged.
+The [accepted finite source packet](../../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
+bounds recursive photographic inputs to eight and logical states to sixteen,
+with synchronous typed ownership and a sole backend atomic CPU/memory lease
+under a global eighteen-credit ceiling through result release. It is uncompiled,
+uninvoked source preparation; private Adobe signatures are noncallable and
+current source/settings/dependencies require post-repair recapture. No preview
+build, benchmark, production publisher or full run is qualified by this update.
+
 The new publication slice implements actual creation-parent handles and the
 ordinary receiver's exclusive held-parent stage-to-normal-temp transition.
 Native handles pass 20 cases and StagePublication passes 58 cases on stock

@@ -6,8 +6,9 @@ Status: **review integrated; renderer/publisher/runtime qualification pending**,
 [Astra review](../../photo/preview-generator/ASTRA-MONITOR-REVIEW.md),
 [modern storage design](../../photo/preview-generator/MODERN-STORAGE-DESIGN.md)
 and [renderer feasibility findings](../../photo/preview-generator/common/RENDERER-FEASIBILITY.md).
-The preview workspace currently contains design/receipt files, without a
-generator implementation or qualified standalone renderer.
+The preview workspace contains design, source-interface and receipt files.
+The accepted finite packet remains uncompiled; no standalone generator or
+renderer is qualified.
 
 ## Ownership and sequencing
 
@@ -58,14 +59,15 @@ of the remaining oracle gate without the owner confirming the current window.
 phases and the first full automatic renewal passed. The desktop was last
 observed locked; the external finite oracle window remains unreleased. Receiver
 acceptance is complete on active Morrobay generation 2; the owner reports stable
-Classic 15.6 PID 10536 with the actual Lux Main descriptor verified. ABI
+Classic 15.6 PID 10536 with the actual Lux Main descriptor verified in the
+earlier 10:45:07 UTC receipt. These process bindings are historical. ABI
 investigation continues source-only under the original photo implementation
 owner, with no full generator run.
 
 The readiness receipt binds completed native Smart/core receiver acceptance
 (both exit 0, zero skips/failures) to acceptance SHA-256
 `9d2be438ea619913ace0ddb1da7626d736a8a504a6a19597d5b22768fb4a526e`,
-active Morrobay generation 2, current Classic PID 10536/start time, actual Lux
+active Morrobay generation 2, then-current Classic PID 10536/start time, actual Lux
 Main descriptor and owner identity. It also records the first full automatic
 renewal. These are owner-reported observations recorded in the receipt; this
 interface review does not repeat native access. Current preview work here is
@@ -73,7 +75,7 @@ interface review does not repeat native access. Current preview work here is
 the root must explicitly release a finite scope. No heavy Photo benchmarks,
 external Adobe invocations or production publication begin from these receipts.
 
-The latest takeover update confirms that all seven native performance phases
+The earlier takeover update recorded that all seven native performance phases
 pass on autostart and Cloud UI reports Synced/Pause Syncing. This is reported
 native runtime/adoption evidence. The newer readiness receipt separately reports
 actual existing PreviewServer entry/callback proof. Three legacy controls were
@@ -90,6 +92,67 @@ Quasar may therefore block Ten lower levels. This is a source-based inference;
 mount-loss fallback is not runtime-qualified. Treat Quasar as required for those
 registered pyramids until the root qualifies native absent-target behavior.
 Physical separability does not promise independent native loading.
+
+## Current Photo repair and finite source packet
+
+The [Photo-root repair receipt](../../photo/catalog-repair-progress-20261013.json)
+at 2026-10-13 15:47:03 UTC reports Lux reopened in stable Classic PID 2844,
+with the desktop locked since 15:29:55 UTC / 08:29:55 PDT. Startup/menu
+continuation waits for unlock. The earlier receiver generation-2 acceptance
+and verified Accessibility persist; the old PID/start/Main-FD/startup/transport
+observations do not establish fresh bindings for this process. Root will
+coordinate current ownership and a finite oracle window after catalog repairs.
+The external window remains unreleased, and the original Photo
+`preview_implementation` owner retains renderer and publisher responsibility.
+
+Photo completed catalog-only JPG removal (8,050 images, 25 folders, one root,
+zero physical operations), two 1524 relocations/old-branch removal, April–June
+2016 grouping and 34 same-volume quarantines inventoried in Photo/delete.md.
+Date1540 filesystem repair completed 74 renames, 70 date patches and two movie
+XMP repairs using 74 existing rollback clones; catalog identity reconciliation
+remains pending. Migration1348 preflight closed before moves on 1,372 observed
+import-source/filename shadow rows; exact typed-deletion V3 is source-qualified.
+These operations belong to Photo root. This interface update reads source and
+receipts only; it neither repeats those operations nor creates another publisher.
+
+The original implementation owner produced an independently accepted
+[finite packet](../../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
+at 15:32:27 UTC (SHA-256
+`f00803009328ef1ce67b4f3e635ef79527d512f6066845475cd5bf73d59a1f92`).
+Its [independent review](../../photo/preview-generator/oracle-source-v1/INDEPENDENT-SOURCE-REVIEW-FINAL.json)
+accepts source preparation only. All five accepted source-file pins were
+verified during this integration. Its references to the earlier Unison
+integration document remain a point-in-time review; this update preserves that
+receipt without rewriting its pins. Adopt its project interface requirements:
+
+- Bound the entire recursive dependency graph to at most eight distinct
+  photographic objects, including derived/original-instance/container variants.
+  Bound logical states to sixteen including negative and Converter-pilot states;
+  repeated renditions/levels reuse state identity. These are finite-packet limits,
+  not proposed production backlog or general component-group limits.
+- Four source groups and six logical states are historical seeds. Recapture
+  current source, settings, aliases and dependencies coherently after repairs;
+  earlier catalogs, paths and digests do not establish current readiness.
+- Calls are synchronous. Request data is borrowed until return and copied if
+  retained. Service callbacks/context remain valid through successful shutdown.
+  Results own pixels/diagnostics until exactly one `release_result`; shutdown
+  holds while results are outstanding. Initial capability permits one in-flight
+  call per host.
+- Backend alone acquires one atomic CPU/memory lease; scheduler submits a bid
+  without a duplicate reservation. Continue that lease through encoder/validation
+  work and retained result buffers until release, after all children stop/reap.
+  The global eighteen-credit ceiling covers all engines, backend/codec/helper
+  threads and processes. Native thread limits and 1/6/18 configurations still
+  require runtime qualification.
+
+The [project header](../../photo/preview-generator/oracle-source-v1/include/preview_backend_v0.h)
+and [interface contract](../../photo/preview-generator/oracle-source-v1/INTERFACE-CONTRACT.md)
+are uncompiled declarations and do not supply private Adobe signatures.
+Private initialization/rendering prototypes remain unqualified and noncallable.
+Source acceptance established no generator build, pixel equivalence, benchmark,
+native invocation, Main/cache access, publication or full-run release. It adds
+no operational permission flow or broader hold: existing coordinated admission
+and ownership remain in force.
 
 ## Architecture adopted before implementation
 
@@ -152,12 +215,17 @@ pre-JPEG pixels in matched geometry/color space, including mask regions and
 edges. General export remains a separate oracle. Report held cases in coverage
 and benchmark denominators.
 
-Each run has an 18-credit CPU budget covering engine work, renderer and codec
-threads. A six-thread backend reserves six credits, allowing at most three
-such jobs subject to memory/I/O. Reservations last until work stops or child
-termination/reap completes. Budget source-resolution RAW and intermediates,
-not only final JPEG dimensions. Separate executables sharing a qualified
-renderer do not represent two independently implemented Adobe develop engines.
+The accepted source contract requires one global 18-credit ceiling across
+engine work, renderer, codec and helper threads/processes. Backend is the sole
+atomic CPU/memory reservation authority; scheduling bids do not acquire a
+second lease. The reservation lasts through rendering, encoding/validation,
+child termination/reap and final result-buffer release. Budget source-resolution
+RAW and intermediates as well as resident output. Initial one-call-per-host
+capability does not qualify eighteen simultaneous renders. Existing Unison
+permits are per process; a future integration must establish the shared
+cross-process reservation contract before launching parallel engines.
+Separate executables sharing a qualified renderer do not represent two
+independently implemented Adobe develop engines.
 
 ## Native publication and oracle corrections
 
