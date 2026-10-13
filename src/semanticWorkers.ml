@@ -24,6 +24,7 @@ type shared = {
 }
 type t = {
   shared : shared; domains : unit Domain.t list; budget : H.t;
+  io : IoAdmission.t option;
   max_pending : int; reader : Lwt_unix.file_descr;
   replies : (int, response Lwt.t) Hashtbl.t;
   mutable next_id : int; mutable pending : int; mutable slots : int;
@@ -148,7 +149,7 @@ let rec pump t scratch =
    | Some error -> Lwt.ignore_result
        (Lwt_unix.yield () >>= fun () -> Lwt.fail error));
   next
-let create ~workers ~max_pending ~budget =
+let create_internal ~io ~workers ~max_pending ~budget =
   if workers <= 0 || max_pending <= 0 then invalid_arg "SemanticWorkers.create: positive limits required";
   let read_fd, write_fd = Unix.pipe ~cloexec:true () in
   Unix.set_nonblock read_fd;
@@ -165,12 +166,16 @@ let create ~workers ~max_pending ~budget =
     close_noerr read_fd; close_noerr write_fd; raise exn
   end;
   let reader = Lwt_unix.of_unix_file_descr read_fd in
-  let t = { shared; domains = !domains; budget; max_pending; reader;
+  let t = { shared; domains = !domains; budget; io; max_pending; reader;
     replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
     admission = []; closing = false; joined = false;
     shutdown_result = None; pump_done = Lwt.wait () } in
   Lwt.ignore_result (pump t (Bytes.create 4096));
   t
+let create ~workers ~max_pending ~budget =
+  create_internal ~io:None ~workers ~max_pending ~budget
+let create_with_io ~io ~workers ~max_pending ~budget =
+  create_internal ~io:(Some io) ~workers ~max_pending ~budget
 let usage t =
   let running, peak_running = locked t.shared (fun () -> t.shared.running, t.shared.peak) in
   {workers = List.length t.domains; pending = t.pending; running; peak_running}
@@ -185,7 +190,6 @@ let submit t cancellation fd requested_operation =
   | owned, operation ->
     let id = t.next_id in
     t.next_id <- t.next_id + 1; t.pending <- t.pending + 1;
-    t.admission <- t.admission @ [id];
     let cancelled = Atomic.make false and admission_cancel = H.cancellation () in
     let stop () = Atomic.set cancelled true; H.cancel admission_cancel in
     let unregister_cancel = H.on_cancel cancellation stop in
@@ -210,8 +214,11 @@ let submit t cancellation fd requested_operation =
       if not !transferred then (close_noerr owned; close_operation operation);
       t.pending <- t.pending - 1;
       if t.closing && t.pending = 0 then notify t.shared in
-    try_bind
-      (fun () -> wait_slot () >>= fun admitted ->
+    let execute () =
+        (* A blocked filesystem must not occupy a domain slot or the slot FIFO.
+           Register here, only after the atomic I/O reservation is admitted. *)
+        t.admission <- t.admission @ [id];
+        wait_slot () >>= fun admitted ->
         if not admitted then return None
         else H.with_cpu_permits t.budget ~weight:1 admission_cancel (fun () ->
           if t.closing || Atomic.get cancelled then return Cancelled
@@ -228,9 +235,22 @@ let submit t cancellation fd requested_operation =
         | Some (Error reason) -> fail (Failed reason)
         | Some ((Hashed _ | Inspected _ | Observed _ | Applied _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
-          else return (Some result))
+          else return (Some result) in
+    let admitted_execution () = match t.io with
+      | None -> execute ()
+      | Some io ->
+          let descriptors = match operation with
+            | Apply (_, _, output) -> [owned;output]
+            | Digest | Inspect _ | Observe _ -> [owned] in
+          let devices = IoAdmission.devices_of_fds descriptors in
+          IoAdmission.with_devices io admission_cancel ~devices execute >>= function
+          | None -> return None
+          | Some result -> return result in
+    try_bind admitted_execution
       (fun result -> finish (); return result)
-      (fun exn -> finish (); fail exn)
+      (fun exn -> finish (); match exn with
+        | IoAdmission.Failed reason -> fail (Failed reason)
+        | _ -> fail exn)
 
 let digest t cancellation fd =
   submit t cancellation fd Digest >>= function

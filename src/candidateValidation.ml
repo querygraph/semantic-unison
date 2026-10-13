@@ -123,10 +123,12 @@ let validate_file ~selected path =
       terminate_grace = 2.; stdout_bytes = 16384; stderr_bytes = 262144} } in
   let candidate = Fspath.toString path in
   SemanticRuntime.with_cancellation (fun cancellation ->
-    SemanticRuntime.with_admission cancellation ~payload_bytes:1048576 ~descriptors:8 (fun () ->
+    SemanticRuntime.with_admission cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
     let inspect path = snapshot pool cancellation path in
     inspect candidate >>= fun expected ->
-    DngValidation.validate supervisor cancellation ~policy:selected ~tool
+    DngValidation.validate_with_execution
+      ~execute:(SemanticRuntime.with_io_file cancellation candidate)
+      supervisor cancellation ~policy:selected ~tool
       ~inspect ~candidate ~expected))
   >>= fun result ->
   Abort.checkAll ();

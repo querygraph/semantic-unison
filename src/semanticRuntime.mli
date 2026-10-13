@@ -4,10 +4,17 @@ type t = {
   pool : SemanticWorkers.t;
   cpu_budget : int;
   admission : SemanticAdmission.t;
+  io : IoAdmission.t;
 }
 val get : unit -> t
 val with_cancellation : (HelperSupervisor.cancellation -> 'a Lwt.t) -> 'a Lwt.t
 (** Cancel on global abort/connection cleanup, unregister on completion. *)
+val with_io_file : HelperSupervisor.cancellation -> string ->
+  (unit -> 'a Lwt.t) -> 'a Lwt.t
+(** Reserve the opened candidate's filesystem around independent execution.
+    Keep its nonblocking read descriptor until the callback settles. Never
+    nest this with worker inspection or another lease from the same I/O gate.
+    It is cooperative scheduling, not a pathname or physical-disk guarantee. *)
 val with_admission : ?role:SemanticAdmission.role -> HelperSupervisor.cancellation -> payload_bytes:int ->
   descriptors:int -> (unit -> 'a Lwt.t) -> 'a Lwt.t
 (** Reserve estimated retained resources before opening/allocating. Cancellation

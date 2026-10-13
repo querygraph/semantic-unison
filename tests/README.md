@@ -11,6 +11,7 @@ python3 tests/report/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/workers/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/helpers/run_tests.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/admission/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/io_admission/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/lwt_close/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/copy_range/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_range/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
@@ -30,6 +31,10 @@ python3 tests/test_clone_sync.py /absolute/build/src/unison
 python3 tests/test_semantic_remote.py /absolute/build/src/unison /optional/old/unison
 python3 tests/test_semantic_reports.py /absolute/build/src/unison /optional/old/unison
 python3 tests/test_validation_sync.py /absolute/build/src/unison
+python3 tests/validation_paths/run.py --unison /absolute/build/src/unison \
+  --volume-jobs 1 --receipt /private/tmp/validation-paths.json
+python3 tests/io_admission/runtime_run.py --build /absolute/build \
+  --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_validator_config.py --unison /absolute/build/src/unison \
   --legacy-sender /optional/pre-fix-feature-branch/unison \
   --old-peer /optional/unmodified/unison

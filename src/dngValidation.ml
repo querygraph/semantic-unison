@@ -95,7 +95,7 @@ let check_snapshot s =
   if not (sha256 s.sha256) || s.size < 0L || s.identity = "" then
     failwith "invalid inspected snapshot"
 
-let validate supervisor cancellation ~policy ~(tool : tool option) ~inspect ~candidate ~expected =
+let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : tool option) ~inspect ~candidate ~expected =
   match policy with
   | Off -> return Skipped
   | Warn | Require ->
@@ -126,9 +126,9 @@ let validate supervisor cancellation ~policy ~(tool : tool option) ~inspect ~can
         "--expected-size"; Int64.to_string expected.size;
         "--threads"; string_of_int tool.cpu_weight;
         "--"; candidate |] in
-      HelperSupervisor.run supervisor ~weight:tool.cpu_weight cancellation
+      execute (fun () -> HelperSupervisor.run supervisor ~weight:tool.cpu_weight cancellation
         ~limits:tool.limits ~executable:tool.executable ~arguments
-        ~environment:tool.environment >>= fun child ->
+        ~environment:tool.environment) >>= fun child ->
       process := Some child;
       (match child.HelperSupervisor.outcome with
        | HelperSupervisor.Completed -> ()
@@ -175,3 +175,7 @@ let validate supervisor cancellation ~policy ~(tool : tool option) ~inspect ~can
            return ()) >>= fun () ->
       return verdict)
       (fun exn -> return (Rejected (Printexc.to_string exn, !process)))
+
+let validate supervisor cancellation ~policy ~tool ~inspect ~candidate ~expected =
+  validate_with_execution ~execute:(fun run -> run ()) supervisor cancellation
+    ~policy ~tool ~inspect ~candidate ~expected

@@ -57,17 +57,77 @@ let () =
     check (expect_failed (fun () -> hash pool (H.cancellation ()) "sample")) "closed pool accepted job");
   test "shared CPU reservation prevents dispatch and queued cancellation releases fd" (fun () ->
     let b = budget 1 in
-    let pool = W.create ~workers:2 ~max_pending:2 ~budget:b in
+    let io = IoAdmission.create ~per_device:1 ~max_pending:4 in
+    let pool = W.create_with_io ~io ~workers:2 ~max_pending:2 ~budget:b in
     let release = Lwt.wait () in
     let held = H.with_cpu_permits b ~weight:1 (H.cancellation ()) (fun () -> release) in
     let c = H.cancellation () in
     let job = hash pool c "sample" in
     let checked = Lwt_unix.sleep 0.03 >>= fun () ->
-      check ((W.usage pool).running = 0 && H.usage b = (1, 0)) "ignored shared CPU budget";
+      check ((W.usage pool).running = 0 && H.usage b = (1, 0) &&
+        (IoAdmission.usage io).active_jobs=1) "ignored shared CPU budget or I/O lease";
       H.cancel c; job >>= fun result ->
-      check (result = None) "queued cancellation returned result";
+      check (result = None && (IoAdmission.usage io).active_jobs=0)
+        "queued CPU cancellation returned result or retained I/O lease";
       Lwt.wakeup release (); held >>= fun _ -> return () in
     Lwt_unix.run checked;
+    finish pool b);
+  test "filesystem waiters occupy no CPU or domain slots; disjoint errors and shutdown settle" (fun () ->
+    let b = budget 2 in
+    let io = IoAdmission.create ~per_device:1 ~max_pending:16 in
+    let file = fd "sample" in
+    let devices = IoAdmission.devices_of_fds [file] in
+    let release = Lwt.wait () in
+    let held = IoAdmission.with_devices io (H.cancellation ()) ~devices (fun () -> release) in
+    let pool = W.create_with_io ~io ~workers:2 ~max_pending:8 ~budget:b in
+    let cancellations = List.init 6 (fun _ -> H.cancellation ()) in
+    let jobs = List.map (fun c -> hash pool c "sample") cancellations in
+    Lwt_unix.run (Lwt_unix.sleep 0.03);
+    check (H.usage b=(0,0) && (W.usage pool).running=0 &&
+      (IoAdmission.usage io).pending=6) "filesystem wait consumed execution resources";
+    (* A native pipe is a separate device group on this qualified host. Its
+       rejection must reach an actual worker despite older blocked file jobs.
+       This proves scheduling independence, not two-storage-device throughput. *)
+    let r,w = Unix.pipe ~cloexec:true () in
+    check (IoAdmission.devices_of_fds [r] <> devices) "pipe device does not distinguish groups";
+    check (expect_failed (fun () -> W.digest pool (H.cancellation ()) r))
+      "blocked file jobs prevented disjoint native worker rejection";
+    Unix.close r; Unix.close w;
+    Lwt_unix.run (W.shutdown pool);
+    List.iter (fun result -> check (result=None) "shutdown lost queued I/O cancellation")
+      (Lwt_unix.run (await jobs));
+    check ((IoAdmission.usage io).pending=0 && (IoAdmission.usage io).active_jobs=1)
+      "shutdown cancelled unrelated I/O lease or leaked queued jobs";
+    Lwt.wakeup release ();
+    ignore (Lwt_unix.run held); Unix.close file;
+    check ((IoAdmission.usage io).active_jobs=0 && (IoAdmission.usage io).devices=[])
+      "filesystem ledger did not settle";
+    finish pool b);
+  test "actual hash and same-filesystem apply share one execution credit" (fun () ->
+    let b = budget 4 in let io = IoAdmission.create ~per_device:1 ~max_pending:16 in
+    let pool = W.create_with_io ~io ~workers:4 ~max_pending:16 ~budget:b in
+    let jobs = List.init 8 (fun _ -> hash pool (H.cancellation ()) "sample") in
+    List.iter (function Some result -> check (result.W.digest=expected) "I/O gated hash mismatch"
+      | _ -> failwith "I/O gated hash cancelled") (Lwt_unix.run (await jobs));
+    check ((W.usage pool).peak_running=1 && (IoAdmission.usage io).peak_per_device=1)
+      "same-filesystem jobs exceeded their execution limit";
+    let basis = fd "fixture.dng" and target = fd "target.dng" in
+    let proof file = match SemanticFile.with_fd file
+      (SemanticDelta.inspect (module DngSemantic)) with Ok p -> p | Error e -> failwith e in
+    let plan = match SemanticDelta.plan ~nonce:(String.make 32 'i')
+      ~base:(proof basis) ~target:(proof target) with Ok p -> p | Error e -> failwith e in
+    let output = Unix.openfile "io-stage.dng" [Unix.O_RDWR;Unix.O_CREAT;Unix.O_EXCL] 0o600 in
+    let original = SemanticFile.with_fd basis (fun f -> SemanticFile.read f 0L 8192) in
+    ignore (Unix.write_substring output original 0 (String.length original));
+    check (Lwt_unix.run (W.apply_dng pool (H.cancellation ()) plan ~basis ~output)=Some ())
+      "deduplicated source/output reservation could not materialize";
+    check (SemanticFile.with_fd output SemanticFile.digest =
+      SemanticFile.with_fd target SemanticFile.digest) "I/O gated target differs";
+    check (SemanticFile.with_fd basis (fun f -> SemanticFile.read f 0L 8192)=original)
+      "I/O gated apply changed its basis";
+    Unix.close basis; Unix.close target; Unix.close output;
+    check ((IoAdmission.usage io).active_jobs=0 && (IoAdmission.usage io).pending=0 &&
+      (IoAdmission.usage io).devices=[]) "worker completion retained I/O credits";
     finish pool b);
   test "throwing observer settles sibling completions and leaves pool usable" (fun () ->
     let b = budget 4 in let pool = W.create ~workers:4 ~max_pending:16 ~budget:b in
@@ -136,7 +196,8 @@ let () =
     check (result = None && H.usage b = (0,0)) "DNG inspection cancellation failed";
     finish pool b);
   test "cancellation reaches active worker without an owner-loop tick" (fun () ->
-    let b = budget 1 in let pool = W.create ~workers:1 ~max_pending:2 ~budget:b in
+    let b = budget 1 in let io = IoAdmission.create ~per_device:1 ~max_pending:4 in
+    let pool = W.create_with_io ~io ~workers:1 ~max_pending:2 ~budget:b in
     let c = H.cancellation () in
     let job = inspect pool c "large.dng" in
     let rec started () = if (W.usage pool).running > 0 then return ()
@@ -146,8 +207,11 @@ let () =
     (* Intentionally stop the owner loop: cancellation must already be atomic. *)
     Unix.sleepf 0.1;
     check ((W.usage pool).running = 0) "worker waited for owner cancellation timer";
-    check (H.usage b = (1,0)) "budget released before owner consumed completion";
+    check (H.usage b = (1,0) && (IoAdmission.usage io).active_jobs=1)
+      "CPU/I/O budget released before owner consumed completion";
     check (Lwt_unix.run job = None) "direct cancellation lost";
+    check ((IoAdmission.usage io).active_jobs=0 && (IoAdmission.usage io).devices=[])
+      "active cancellation retained I/O credits";
     finish pool b);
   test "typed DNG apply reconstructs exact target and rejects live inode" (fun () ->
     let b = budget 2 in let pool = W.create ~workers:2 ~max_pending:4 ~budget:b in
@@ -228,7 +292,8 @@ let () =
       "declared-limit failure changed output";
     Unix.close file; Unix.close output; finish pool b);
   test "typed DNG apply cancellation waits for worker descriptor cleanup" (fun () ->
-    let b = budget 1 in let pool = W.create ~workers:1 ~max_pending:2 ~budget:b in
+    let b = budget 1 in let io = IoAdmission.create ~per_device:1 ~max_pending:4 in
+    let pool = W.create_with_io ~io ~workers:1 ~max_pending:2 ~budget:b in
     let base = match Lwt_unix.run (inspect pool (H.cancellation ()) "large.dng") with
       | Some {W.proof = Ok p; _} -> p | _ -> failwith "missing large proof" in
     let plan = match SemanticDelta.plan ~nonce:(String.make 32 'n') ~base ~target:base with
@@ -239,7 +304,8 @@ let () =
     let job = W.apply_dng pool c plan ~basis ~output in
     check (Lwt_unix.run (Lwt_unix.sleep 0.02 >>= fun () -> H.cancel c; job) = None)
       "apply cancellation lost";
-    check (H.usage b = (0,0) && (W.usage pool).running = 0) "apply returned before cleanup";
+    check (H.usage b = (0,0) && (W.usage pool).running = 0 &&
+      (IoAdmission.usage io).active_jobs=0) "apply returned before CPU/I/O cleanup";
     Unix.close basis; Unix.close output; finish pool b);
   test "pending queue limit rejects without consuming descriptor or budget" (fun () ->
     let b = budget 1 in
@@ -285,14 +351,19 @@ let () =
     check ((Unix.LargeFile.fstat original).Unix.LargeFile.st_size = 1073741825L) "closed caller fd";
     Unix.close original; finish pool b);
   test "shutdown cancels active and waiting jobs without cancelling other budget users" (fun () ->
-    let b = budget 1 in let pool = W.create ~workers:2 ~max_pending:3 ~budget:b in
+    let b = budget 1 in let io = IoAdmission.create ~per_device:1 ~max_pending:4 in
+    let pool = W.create_with_io ~io ~workers:2 ~max_pending:3 ~budget:b in
     let a = hash pool (H.cancellation ()) "large" in
+    let rec started () = if (W.usage pool).running > 0 then return ()
+      else Lwt_unix.sleep 0.001 >>= started in
+    Lwt_unix.run (started ());
     let caller_c = H.cancellation () in
     let waiting = hash pool caller_c "sample" in
     Lwt_unix.run (W.shutdown pool);
     check (Lwt_unix.run a = None && Lwt_unix.run waiting = None) "shutdown retained results";
     check (not (H.is_cancelled caller_c)) "shutdown modified caller cancellation";
-    check (H.usage b = (0, 0)) "shutdown leaked CPU budget");
+    check (H.usage b = (0, 0) && (IoAdmission.usage io).active_jobs=0 &&
+      (IoAdmission.usage io).pending=0) "shutdown leaked CPU/I/O budget");
   test "repeated pool lifecycle leaves descriptor count stable" (fun () ->
     let descriptors () = Array.length (Sys.readdir "/dev/fd") in
     let before = descriptors () in

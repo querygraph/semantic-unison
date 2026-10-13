@@ -1,6 +1,6 @@
 open Lwt
 type t = {supervisor:HelperSupervisor.t;pool:SemanticWorkers.t;cpu_budget:int;
-          admission:SemanticAdmission.t}
+          admission:SemanticAdmission.t;io:IoAdmission.t}
 let workers = Prefs.createInt "semanticworkers" 0 ~local:true
   ~category:(`Advanced `General)
   "CPU budget for semantic work (0 means physical cores where detected)"
@@ -23,6 +23,13 @@ let descriptor_budget = Prefs.createInt "semanticdescriptorbudget" 512 ~local:tr
   "reserved descriptor credits for semantic transactions"
   "Admission credits for semantic descriptors and worker duplicates, separate \
    from unrelated legacy transfers and external helper descriptor use."
+let io_budget = Prefs.makeEndpointLocal (Prefs.createInt "semanticvolumejobs" 0 ~local:true
+  ~category:(`Advanced `General)
+  "maximum executing semantic jobs per filesystem (0 means CPU budget)"
+  "Limit concurrent hash, metadata and validator execution on each endpoint-local \
+   filesystem device. Source and output reservations are atomic. Waiting jobs \
+   consume no CPU permits. Device groups do not identify physical disks, and \
+   this setting does not limit unrelated ordinary transfers or external programs.")
 let runtime = ref None
 let debug = Trace.debug "semantic"
 let get () =
@@ -31,6 +38,10 @@ let get () =
     | n when n > 0 -> n
     | _ -> raise (Util.Fatal "semanticworkers must be zero or positive") in
   let count = min n (SemanticWorkers.recommended_workers ()) in
+  let io_jobs = match Prefs.read io_budget with
+    | 0 -> n
+    | value when value > 0 -> value
+    | _ -> raise (Util.Fatal "semanticvolumejobs must be zero or positive") in
   let max_payload = List.fold_left (fun n handle -> max n (FormatExtension.payload_limit handle))
     0 (SemanticFormats.local_enabled ()) in
   let source_headroom = if max_payload = 0 then None else
@@ -48,20 +59,21 @@ let get () =
                    descriptors < 16 ->
       raise (Util.Fatal "Semantic resource budgets must fit one consumer and one reserved source transaction")
   | _ -> () end;
-  let config = n,inflight,mib,descriptors,max_payload in
+  let config = n,inflight,mib,descriptors,max_payload,io_jobs in
   match !runtime with
   | Some (t,existing) when existing = config -> t
   | Some _ -> raise (Util.Fatal "Restart Unison to change its semantic resource budgets")
   | None ->
     let supervisor = HelperSupervisor.create ~cpu_permits:n ~max_children:n ~max_pending:4096 in
-    let pool = SemanticWorkers.create ~workers:count ~max_pending:4096 ~budget:supervisor in
+    let io = IoAdmission.create ~per_device:io_jobs ~max_pending:4096 in
+    let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
     let admission = SemanticAdmission.create ~source_headroom ~max_transactions:inflight
       ~max_payload_bytes:(mib * 1048576) ~max_descriptors:descriptors ~max_pending:4096 in
     debug (fun () -> Util.msg
-      "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits\n"
+      "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits, %d jobs per filesystem\n"
       (HelperSupervisor.available_physical_cpus ()) (HelperSupervisor.available_cpus ())
-      n count inflight mib descriptors);
-    let t = {supervisor;pool;cpu_budget=n;admission} in runtime := Some (t,config); t
+      n count inflight mib descriptors io_jobs);
+    let t = {supervisor;pool;cpu_budget=n;admission;io} in runtime := Some (t,config); t
 let cancellations = Remote.resourceWithConnCleanup
   HelperSupervisor.cancel HelperSupervisor.cancel_and_cleanup
 let with_cancellation f =
@@ -84,6 +96,33 @@ let with_admission ?(role=SemanticAdmission.Consumer) cancellation ~payload_byte
     (function
       | SemanticAdmission.Failed reason -> fail (Util.Transient reason)
       | e -> fail e)
+let with_io_file cancellation path f =
+  (* This descriptor groups cooperative endpoint-private candidates for
+     scheduling. It does not pin the pathname subsequently opened by a helper
+     or replace candidate-content/publication fences. *)
+  let owned = ref true in
+  let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+  try
+    let close () = if !owned then begin
+      owned := false;
+      try Unix.close fd with Unix.Unix_error _ -> () end in
+    Lwt.try_bind (fun () ->
+      if (Unix.LargeFile.fstat fd).Unix.LargeFile.st_kind <> Unix.S_REG then
+        raise (Unix.Unix_error (Unix.EINVAL,"filesystem I/O candidate",path));
+      let devices = IoAdmission.devices_of_fds [fd] in
+      IoAdmission.with_devices (get ()).io cancellation ~devices f >>= function
+      | Some result -> return result
+      | None -> fail (Util.Transient "Filesystem I/O admission cancelled"))
+      (fun result -> close (); return result)
+      (fun e -> close (); match e with
+        | IoAdmission.Failed reason -> fail (Util.Transient reason)
+        | _ -> fail e)
+  with e ->
+    (* Guard the first closure/continuation allocations after opening too.
+       Clear ownership before close so an outer failure cannot close a reused FD. *)
+    if !owned then begin owned := false;
+      try Unix.close fd with Unix.Unix_error _ -> () end;
+    raise e
 let with_transaction ?(role=SemanticAdmission.Consumer) ~max_payload f =
   if max_payload <= 0 || max_payload > FormatExtension.max_payload then
     invalid_arg "SemanticRuntime.with_transaction: invalid declared payload limit";

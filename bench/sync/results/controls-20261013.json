@@ -1,0 +1,62 @@
+{
+  "utc": "2026-10-13T18:12:09.581466+00:00",
+  "status": "source independently accepted; bounded synthetic functional qualification complete; broad performance qualification incomplete",
+  "source_sha256": {
+    "ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "measure.py": "d14d51c18e0f59180f3eeef8534eaf517ed6821a40d54697673309b8fc1ae9ff",
+    "run.py": "7fc75cd53a738256ef24ed1390c9a0fe99abaf8b48b0a6f74d2412935526c706",
+    "check.py": "5f64df8d2a54e35d60ecff04fb68737522773334f0cca9661c844e80c92c5a50",
+    "proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580"
+  },
+  "readme_sha256": "4d2bf11a8971b88b8eba709753882777eb7c62ab268860141a27617d92de095d",
+  "native_cli_receipt": "bench/sync/results/qualification-20261013.json",
+  "native_cli_receipt_sha256": "2b163fd7f4fc18856b46a64d083e38179c6ae4abc9465b36401ec0867b2e7569",
+  "final_native_cli_rows": 13,
+  "current_binary_package_inputs_each": {
+    "stock": 315,
+    "ox": 315
+  },
+  "small_control_command": [
+    "python3",
+    "bench/sync/check.py"
+  ],
+  "small_control_result": "exit0; fixture complement, output cap/deadline, both reader creation failures, eight mixed/preserved-only mode rejections, exact echo protocol/header counts, native exit19, output-pump/deadline/client-timeout/abrupt-supervisor-exit cleanup controls",
+  "failure_controls": {
+    "path": "bench/sync/results/failure-controls-20261013.json",
+    "sha256": "3a2217e0c5eb5d355c558824c56ed65295fff3b5ca424dcc67b47fa3847ff8d4",
+    "records": 4,
+    "exact_native_pid_absent": 4,
+    "supervisor_reaped": 4,
+    "native_owner_wait4_attested": 3,
+    "catastrophic_exit_native_owner_reap_attested": false
+  },
+  "independent_review": {
+    "agent": "/root/validation_paths",
+    "source": "accepted current seven Python hashes, independent check.py exit0; final native receipt review pending",
+    "failure_control_receipt": "bench/sync/results/independent-failure-controls-20261013.json",
+    "failure_control_sha256": "fbb9adb4b55657c5fef5440e42ed8db75b2b612541fd89c18e3b4525b94a6873",
+    "command_session_terminal_exit0": 84535
+  },
+  "current_native_cli_result": "13 rows and39invocations pass exact full hashes/byte equality, unchanged old hardlink basis, inode-stable no-op, clean staging, explicit native-owner and supervisor wait4 reap",
+  "semantic_counter_meaning": "semantic_logical_write_bytes increments successful returned Unix.write_substring bytes; semantic_write_attempts includes EINTR retry attempts; implementation lseek/write, not pwrite",
+  "runtime_scope": "Synthetic private temporary paths only; no actual Adobe, Lightroom, preview generator, Photo payload/catalog/cache or photographic-volume access.",
+  "limits": [
+    "application read bytes",
+    "internal hash/parse/verify/commit times",
+    "aggregate process-tree peak RSS",
+    "descriptor/queue peaks",
+    "physical storage writes",
+    "range/extent sharing",
+    "cross-volume or non-APFS behavior",
+    "cold cache",
+    "real SSH/network behavior",
+    "Adobe validation or photographic rendering"
+  ],
+  "historical_receipts": {
+    "normal_cli": "bench/sync/results/qualification-20261013-before-cleanup-review.json",
+    "controls": "bench/sync/results/controls-20261013-before-cleanup-review.json",
+    "scope": "preserved exact historical source pins/normal rows, with legacy incorrect pwrite labels; not evidence of exception/timeout cleanup"
+  }
+}

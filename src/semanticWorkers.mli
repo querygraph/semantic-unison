@@ -12,6 +12,12 @@ type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
 val create : workers:int -> max_pending:int -> budget:HelperSupervisor.t -> t
+val create_with_io : io:IoAdmission.t -> workers:int -> max_pending:int ->
+  budget:HelperSupervisor.t -> t
+(** Share an owner-loop filesystem execution gate with helpers. Reserve source
+    and output devices atomically before a domain slot and CPU permit. The
+    lease lasts through active worker completion and worker duplicate closure;
+    waiting I/O jobs consume neither domain slots nor CPU credits. *)
 val usage : t -> usage
 val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprint option Lwt.t
 (** Borrows the caller's regular descriptor until the promise settles. Its

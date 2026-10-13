@@ -97,6 +97,11 @@ elapsed-time savings.
 Production admission also limits concurrent transactions, estimated retained
 payload buffers and descriptors. See [worker limits](semantic-workers.md) for
 `semanticmaxinflight`, `semanticpayloadbudget` and `semanticdescriptorbudget`.
+`semanticvolumejobs` independently bounds concurrent domain/validator execution
+per endpoint filesystem device. Zero uses that endpoint's CPU budget; a
+positive value overrides it. Configure this endpoint-local setting in each
+host's `endpoint.prf`. It does not identify physical disks or cap ordinary
+copies, child memory or total process descriptors.
 `-debug semantic` reports detected CPU counts and the effective runtime limits.
 
 Build and test references:

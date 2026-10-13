@@ -4,6 +4,83 @@
 
 ## Live implementation handoff
 
+* Filesystem execution continuation (2026-10-13): production `IoAdmission`
+  is shared by OxCaml domain jobs and supervised validator execution. Endpoint-
+  local `semanticvolumejobs = 0` preserves the configured CPU ceiling; a positive
+  value bounds each filesystem device independently. Fresh held-FD device keys
+  are deduplicated and atomically admitted for source/output before domain slots
+  and CPU permits. Earlier overlapping requests retain fairness; disjoint keys
+  may progress. I/O waiters consume no execution slots or CPU permits. No I/O
+  lease spans RPC waits or the whole validation/transaction: helper pre/post
+  hashes run outside the actual-child lease. Active worker/child settlement and
+  cancellation release their credits exactly once. Generic library constructors
+  retain compatibility; the production runtime supplies the shared gate.
+* Current qualification: Make stock `unison-build-9jpxa20z` and Ox
+  `unison-build-6x7ciag6`, plus Dune 3.22.2 in
+  `unison-dune-io-final-g3zdqdrg`, pass builds/selftests with 315 matching
+  production/package/INSTALL inputs. Both compilers pass 19 actual worker groups,
+  33 helper groups, 20 gate groups / 243 assertions and six linked-runtime
+  scenarios / 107 assertions. Fairness and post-open ownership negative controls
+  detect their intended regressions. Runtime tests exercise the real preference's
+  wire omission, malformed incoming-value protection, endpoint file/CLI precedence,
+  default CPU-based ceiling, negative rejection, active/queued cancellation,
+  prompt FIFO/directory rejection and held-FD cleanup. Source review closed the
+  first ownership-closure allocation gap. Current ordinary cloning on both,
+  Ox remote/bidirectional/old-peer SDE and stock local/remote/SIR0 observations
+  pass. Combined evidence is `tests/qualification/io-execution-20261013.json`.
+* Receiving-path acceptance is now qualified with Adobe-free helpers: 21 actual
+  CLI cases per compiler at one filesystem execution credit on both endpoints
+  cover completed/partial stage resumption, local hint reuse, external copies,
+  configured generated merges, first/second receiver failures, exact retries,
+  child timeout/reaping, client-receiver SIGINT and observed serial directory
+  helper overlap. A second merge receiver's failure can leave the first committed;
+  retry remains a merge conflict, recaptures current inputs and revalidates both
+  fresh results. No distributed atomic-merge claim. Pin/argv/full-candidate receipt
+  checks and helper mutation fences remain enforced. Evidence is
+  `tests/validation_paths/qualification-20261013.json`; actual SDK/corpus reruns
+  remain separate and the external oracle window is still unreleased.
+* Bounded actual sync measurements now qualify 13 rows / 39 CLI invocations
+  using the current 315-input stock/Ox snapshots plus preserved original 2.53.5.
+  `bench/sync/` compares ordinary receiver copying, receiver APFS clones and DNG
+  semantic clones through an owned loopback transport; independent exact bytes /
+  hashes, unchanged hardlinked old bases, inode-stable no-ops, empty staging and
+  native/server/client settlement pass. For two 2 MiB files, ordinary output
+  model is 4 MiB, receiver non-inherited model 16 KiB, and completed semantic
+  logical writes 6 KiB / two write attempts. Whole-protocol traffic was 34,080 /
+  34,081 / about 30,300 bytes respectively. Returned write bytes are measured;
+  generic output is modeled, and neither attests physical writes/sharing.
+  One warm sample with startup/bridge overhead supports no elapsed/worker/Ox
+  gain. Forced capture/pump/deadline/client-timeout/crashed-supervisor controls
+  now qualify guarded cleanup; catastrophic supervisor loss records native PID
+  absence without inventing native-owner reap proof. CPU budgets remain per
+  endpoint, not one machine-wide cap for both same-host processes. Raw receipts
+  and exact source provenance are in `bench/sync/results/`; the broader SOL
+  performance matrix, physical storage, aggregate RSS and SDK work remain open.
+* Current range materialization uses exclusive borrowed output descriptors with
+  `Unix.LargeFile.lseek` and short-write/EINTR-safe `Unix.write_substring`, rather
+  than a native `pwrite` syscall. Logical-byte counters accumulate successful
+  returned bytes; call counters include attempts/retries. Do not describe these
+  receipts as syscall-level `pwrite` telemetry. The planned native positional
+  write path and its foreign-boundary/platform qualification remain separate.
+* Next filesystem slice is prepared in [native-scratch-next.md](doc/native-scratch-next.md):
+  the common three-ABI clone engine still reserves/unlinks its blank scratch via
+  an absolute pathname after retaining a parent FD. The reviewed plan replaces
+  that operation with bounded random-basename exclusive `openat`, a retained
+  reservation witness and identity-bound `unlinkat`, while preserving result
+  layouts, scoped declines and operational phases. Direct native replacement /
+  collision / failure controls and old-path/identity-removal regressions are
+  specified. This is source-only preparation, not implemented or qualified yet.
+* Resource scope remains explicit: device keys are ephemeral per-process
+  accounting, not mount incarnations, physical disks or cross-process budgets.
+  The integer key representation is qualified on this 64-bit macOS host.
+  Ordinary copy system calls, native SDK allocations and unrelated programs are
+  outside this gate. Eight transfer descriptor credits undercount some bound
+  semantic publication paths (nine semantic FDs plus four/five final-publication
+  handles and transient probes); nine validation credits add its helper grouping
+  FD but are still estimates. Complete-lifetime descriptor admission, memory
+  policy and measured real storage limits remain required. No Photo payload,
+  catalog/cache/volume access, Adobe invocation or preview publisher occurred.
+
 * Semantic observation continuation (2026-10-13): immutable format handles now
   optionally declare bounded field observations with versioned schemas and
   descriptive/rendering/identity/workflow/opaque categories. Explicit report

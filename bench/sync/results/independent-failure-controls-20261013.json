@@ -1,0 +1,342 @@
+[
+  {
+    "control": "output-pump",
+    "native_pid": 59431,
+    "exact_native_pid_absent": true,
+    "native_owner_reap_attested": true,
+    "supervisor_reaped": true,
+    "outcome": {
+      "command": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import json,os,socket,struct,time\ns=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)\ns.connect(os.environ['UNISON_SYNC_BENCH_SOCKET'])\nh=json.dumps([os.environ['UNISON_SYNC_BENCH_BINARY'],'-server']).encode()\ns.sendall(struct.pack('>I',len(h))+h)\nwhile s.recv(65536):pass\n"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.607984761998523,
+      "timed_out": false,
+      "resources": {
+        "wait4_user_seconds": 0.033604999999999996,
+        "wait4_system_seconds": 0.010027999999999999,
+        "wait4_maxrss_native_units": 10661888,
+        "minor_faults": 4279,
+        "major_faults": 0,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "client_cleanup": {
+        "pid": 59430,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "capture_bytes": {
+        "stdout": 0,
+        "stderr": 0
+      },
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "",
+      "native_client_lifetime_seconds": 0.3487576339975931,
+      "supervisor_cleanup": {
+        "pid": 59428,
+        "returncode": 70,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "supervisor_output": "",
+      "supervisor_capture_bytes": 0,
+      "supervisor_capture_truncated": false,
+      "proxy": {
+        "schema": "unison-loopback-protocol-count/1",
+        "server_command": [
+          "/private/tmp/unison-sync-controls-8xtrkbno/hang.py",
+          "-server"
+        ],
+        "server_pid": 59431,
+        "server_returncode": -9,
+        "server_cleanup": {
+          "pid": 59431,
+          "returncode": -9,
+          "reaped": true,
+          "cancel_reason": "RuntimeError('injected output pump failure')",
+          "hard_kill_required": true
+        },
+        "fault": "RuntimeError('injected output pump failure')",
+        "forwarded_protocol_bytes": {
+          "client_to_server_bytes": 0,
+          "server_to_client_bytes": 0
+        },
+        "server_wall_seconds": 0.5387967249989742,
+        "server_resources": {
+          "wait4_user_seconds": 0.027635,
+          "wait4_system_seconds": 0.01116,
+          "wait4_maxrss_native_units": 10137600,
+          "minor_faults": 4429,
+          "major_faults": 1,
+          "block_input_operations": 0,
+          "block_output_operations": 0
+        },
+        "pump_errors": [],
+        "cancellation_signals": [],
+        "input_pump_joined": true,
+        "launcher_control_header_bytes_excluded": 69
+      },
+      "fault": "loopback native/supervisor outcome is unqualified"
+    }
+  },
+  {
+    "control": "deadline",
+    "native_pid": 59436,
+    "exact_native_pid_absent": true,
+    "native_owner_reap_attested": true,
+    "supervisor_reaped": true,
+    "outcome": {
+      "command": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import json,os,socket,struct,time\ns=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)\ns.connect(os.environ['UNISON_SYNC_BENCH_SOCKET'])\nh=json.dumps([os.environ['UNISON_SYNC_BENCH_BINARY'],'-server']).encode()\ns.sendall(struct.pack('>I',len(h))+h)\nwhile s.recv(65536):pass\n"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.7928589349976392,
+      "timed_out": false,
+      "resources": {
+        "wait4_user_seconds": 0.033517,
+        "wait4_system_seconds": 0.009977,
+        "wait4_maxrss_native_units": 10874880,
+        "minor_faults": 4337,
+        "major_faults": 0,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "client_cleanup": {
+        "pid": 59435,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "capture_bytes": {
+        "stdout": 0,
+        "stderr": 0
+      },
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "",
+      "native_client_lifetime_seconds": 0.5202931640014867,
+      "supervisor_cleanup": {
+        "pid": 59434,
+        "returncode": 70,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "supervisor_output": "",
+      "supervisor_capture_bytes": 0,
+      "supervisor_capture_truncated": false,
+      "proxy": {
+        "schema": "unison-loopback-protocol-count/1",
+        "server_command": [
+          "/private/tmp/unison-sync-controls-8xtrkbno/hang.py",
+          "-server"
+        ],
+        "server_pid": 59436,
+        "server_returncode": -9,
+        "server_cleanup": {
+          "pid": 59436,
+          "returncode": -9,
+          "reaped": true,
+          "cancel_reason": "TimeoutError('native server deadline')",
+          "hard_kill_required": true
+        },
+        "fault": "TimeoutError('native server deadline')",
+        "forwarded_protocol_bytes": {
+          "client_to_server_bytes": 0,
+          "server_to_client_bytes": 5
+        },
+        "server_wall_seconds": 0.7174423289980041,
+        "server_resources": {
+          "wait4_user_seconds": 0.026237999999999997,
+          "wait4_system_seconds": 0.009805,
+          "wait4_maxrss_native_units": 10305536,
+          "minor_faults": 4468,
+          "major_faults": 1,
+          "block_input_operations": 0,
+          "block_output_operations": 0
+        },
+        "pump_errors": [],
+        "cancellation_signals": [],
+        "input_pump_joined": true,
+        "launcher_control_header_bytes_excluded": 69
+      },
+      "fault": "loopback native/supervisor outcome is unqualified"
+    }
+  },
+  {
+    "control": "client-timeout",
+    "native_pid": 59441,
+    "exact_native_pid_absent": true,
+    "native_owner_reap_attested": true,
+    "supervisor_reaped": true,
+    "outcome": {
+      "command": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import json,os,socket,struct,time\ns=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)\ns.connect(os.environ['UNISON_SYNC_BENCH_SOCKET'])\nh=json.dumps([os.environ['UNISON_SYNC_BENCH_BINARY'],'-server']).encode()\ns.sendall(struct.pack('>I',len(h))+h)\nwhile s.recv(65536):pass\n"
+      ],
+      "returncode": -15,
+      "wall_seconds": 0.4539578990006703,
+      "timed_out": true,
+      "resources": {
+        "wait4_user_seconds": 0.029436999999999998,
+        "wait4_system_seconds": 0.010152999999999999,
+        "wait4_maxrss_native_units": 10768384,
+        "minor_faults": 4332,
+        "major_faults": 0,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "client_cleanup": {
+        "pid": 59440,
+        "returncode": -15,
+        "reaped": true,
+        "cancel_reason": "native client deadline",
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "capture_bytes": {
+        "stdout": 0,
+        "stderr": 0
+      },
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "",
+      "native_client_lifetime_seconds": 0.16961698199884268,
+      "supervisor_cleanup": {
+        "pid": 59439,
+        "returncode": 70,
+        "reaped": true,
+        "cancel_reason": "native client failed, timed out or exceeded captured output limit",
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "supervisor_output": "",
+      "supervisor_capture_bytes": 0,
+      "supervisor_capture_truncated": false,
+      "proxy": {
+        "schema": "unison-loopback-protocol-count/1",
+        "server_command": [
+          "/private/tmp/unison-sync-controls-8xtrkbno/hang.py",
+          "-server"
+        ],
+        "server_pid": 59441,
+        "server_returncode": -9,
+        "server_cleanup": {
+          "pid": 59441,
+          "returncode": -9,
+          "reaped": true,
+          "cancel_reason": "RuntimeError('supervisor cancellation signal [15]')",
+          "hard_kill_required": true
+        },
+        "fault": "RuntimeError('supervisor cancellation signal [15]')",
+        "forwarded_protocol_bytes": {
+          "client_to_server_bytes": 0,
+          "server_to_client_bytes": 5
+        },
+        "server_wall_seconds": 0.3769739649942494,
+        "server_resources": {
+          "wait4_user_seconds": 0.026208,
+          "wait4_system_seconds": 0.009855,
+          "wait4_maxrss_native_units": 10117120,
+          "minor_faults": 4448,
+          "major_faults": 1,
+          "block_input_operations": 0,
+          "block_output_operations": 0
+        },
+        "pump_errors": [],
+        "cancellation_signals": [
+          15
+        ],
+        "input_pump_joined": true,
+        "launcher_control_header_bytes_excluded": 69
+      },
+      "fault": "native client failed, timed out or exceeded captured output limit"
+    }
+  },
+  {
+    "control": "supervisor-exit",
+    "native_pid": 59446,
+    "exact_native_pid_absent": true,
+    "native_owner_reap_attested": false,
+    "supervisor_reaped": true,
+    "outcome": {
+      "command": [
+        "/usr/local/opt/python@3.14/bin/python3.14",
+        "-c",
+        "import json,os,socket,struct,time\ns=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)\ns.connect(os.environ['UNISON_SYNC_BENCH_SOCKET'])\nh=json.dumps([os.environ['UNISON_SYNC_BENCH_BINARY'],'-server']).encode()\ns.sendall(struct.pack('>I',len(h))+h)\nwhile s.recv(65536):pass\n"
+      ],
+      "returncode": 0,
+      "wall_seconds": 0.11743449299683562,
+      "timed_out": false,
+      "resources": {
+        "wait4_user_seconds": 0.032979999999999995,
+        "wait4_system_seconds": 0.009842,
+        "wait4_maxrss_native_units": 10653696,
+        "minor_faults": 4304,
+        "major_faults": 0,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "client_cleanup": {
+        "pid": 59445,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "only_owned_leader_zombie_darwin",
+        "group_cleanup_before_leader_reap": true
+      },
+      "capture_bytes": {
+        "stdout": 0,
+        "stderr": 0
+      },
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "",
+      "native_client_lifetime_seconds": 0.057591532000515144,
+      "supervisor_cleanup": {
+        "pid": 59444,
+        "returncode": 73,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "observation_error": null,
+        "group_cleanup_result": "signal_sent",
+        "group_cleanup_before_leader_reap": true
+      },
+      "supervisor_output": "",
+      "supervisor_capture_bytes": 0,
+      "supervisor_capture_truncated": false,
+      "proxy": null,
+      "fault": "loopback native/supervisor outcome is unqualified"
+    }
+  }
+]

@@ -33,15 +33,18 @@ running operation holds one shared CPU permit until it has stopped and closed
 its descriptors, including cancellation. The scheduler can reserve additional
 weighted permits for a helper's internal threads.
 
-`SemanticAdmission` separately limits complete production transactions before
-they open descriptors or clone a candidate. `semanticmaxinflight = 0` selects
+`SemanticAdmission` separately limits admitted semantic transactions before
+their semantic operations open descriptors or clone a candidate. Publication
+and target-binding handles can already exist outside that reservation.
+`semanticmaxinflight = 0` selects
 the worker count plus one reserved source slot when a semantic profile is
 enabled. `semanticpayloadbudget` defaults to 512 MiB of estimated retained
 buffer credits; `semanticdescriptorbudget` defaults to 512 descriptor credits.
 A transfer reserves eight times the largest enabled profile's declared payload
 limit plus 256 KiB, and eight descriptors. DNG declares a 1 MiB payload limit;
 the core enforces it before copying packet contents. A validation operation
-reserves 1 MiB and eight descriptor credits. CPU permits are acquired by nested
+reserves 1 MiB and nine descriptor credits, including the held descriptor used
+to group helper I/O. CPU permits are acquired by nested
 workers/helpers, so a transaction never holds a CPU permit while waiting for
 its own workers to obtain one.
 
@@ -53,8 +56,38 @@ the selected profile's payload ceiling. Cancellation removes queued requests;
 active leases remain until their operations settle. Connection teardown fails
 queued output and outstanding replies, and closes pending I/O before descriptor
 reuse. These credits bound admitted work, not process RSS, parser allocations,
-directory manifest size, external SDK memory, per-volume I/O or unrelated
-legacy transfers. Those constraints still need separate implementation.
+directory manifest size, external SDK memory or unrelated legacy transfers.
+Eight transfer descriptor credits now undercount some bound publication paths;
+they are not a global descriptor ceiling. A bound local semantic worker can
+retain nine semantic descriptors plus four/five separately retained final
+publication handles and transient native probes. Actual descriptor admission
+across the complete publication lifetime remains unfinished.
+
+`IoAdmission` supplies a separate execution gate shared by production domain
+jobs and validator helpers. `semanticvolumejobs = 0` defaults each filesystem
+ceiling to the configured CPU budget; a positive value selects a smaller or
+larger ceiling. The option is endpoint-local and can be set in `endpoint.prf`
+independently on each host. The default preserves previous CPU concurrency;
+no optimal storage limit is inferred from core count.
+
+Fresh held-descriptor `fstat().st_dev` values group jobs on each endpoint.
+Source and output keys are deduplicated and acquired atomically. One apply
+on the same filesystem consumes one credit; a two-filesystem operation consumes
+one on each. Earlier blocked requests retain priority for overlapping devices,
+while unrelated devices can proceed. Jobs waiting for I/O hold neither domain
+slots nor CPU credits. Worker leases settle after completion and duplicate
+closure. Helper leases cover only the supervised child execution through
+stop/reap/output closure; its pre/post hashing runs outside that lease.
+No I/O lease spans RPC waits or the whole semantic transaction.
+
+These keys are short-lived accounting groups, with no persistent capability
+cache, mount-incarnation identity or physical-disk claim. Multiple APFS volumes
+can share underlying storage. The integer key is qualified on this 64-bit
+macOS host, where native `dev_t` fits; other platforms require corresponding
+representation/runtime checks. Ordinary copy/clone system calls, SDK internal
+allocations, untrusted helper pathname changes and unrelated programs are not
+controlled by this gate. Real multi-storage throughput and memory bounds remain
+separate acceptance work.
 
 `digest` borrows the caller's descriptor until its promise settles and owns a
 close-on-exec duplicate. The caller must not operate on that descriptor

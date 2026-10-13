@@ -1,0 +1,120 @@
+{
+  "schema": "unison-io-admission-combined-qualification/0",
+  "date": "2026-10-13",
+  "scope": "Standalone owner-loop filesystem IO scheduling and Adobe-free CPU permit interop; synthetic native FD fixtures only. No physical-volume performance, memory/descriptor ceiling, SDK/Lightroom/Photo work or integration claim.",
+  "results": {
+    "groups_per_compiler": 20,
+    "assertions_per_compiler": 243,
+    "conflicting_bypass_negative_control_detected_both_compilers": true
+  },
+  "source_sha256": {
+    "src/ioAdmission.ml": "021ec08b97ed3005034b67bb716913f16431bca724ac2b2a0562237a345081b2",
+    "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+    "tests/io_admission/test.ml": "1e2822572f44f62b7803a0a21bdcb0a6a3d936c957f4c282c193fcf6e3bcc705",
+    "tests/io_admission/run.py": "7765b9062ba09c569d6e70e5b39c122c61998aab168d169e32a75b8b86d8117f",
+    "tests/io_admission/README.md": "ba0f3c66f3d2a2fb500cdbbd7f5d16fbd72773c2d469aa8188c17c746ddfb2b7"
+  },
+  "runs": [
+    {
+      "schema": "unison-io-admission-qualification/0",
+      "scope": "Owner-loop scheduling, native held-FD device accounting and Adobe-free CPU interop; no physical storage benchmark or SDK/Photo invocation.",
+      "ocamlopt": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+      "compiler_version": "5.5.1",
+      "build_directory": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-d9cp5usp",
+      "source_sha256": {
+        "src/lwt/lwt.mli": "52c93b0e596f0697bf1d86aacdb8d6f2607a5b3c829094c947c2ef77430b0453",
+        "src/lwt/lwt.ml": "b93acb9018913645209a26e2563ac40be76275d72245ecf4f933c255909e4c11",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+        "src/helperSupervisor.mli": "a79d0fefdc3a34445337b73a93ca64cce3cd3c8c589fa23617bbf391f85080be",
+        "src/helperSupervisor.ml": "d13911bbcd5b12b2c2abe3a34a0b0a450366f2a387701b808452e830ee0ac78a",
+        "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "src/ioAdmission.ml": "021ec08b97ed3005034b67bb716913f16431bca724ac2b2a0562237a345081b2",
+        "tests/io_admission/test.ml": "1e2822572f44f62b7803a0a21bdcb0a6a3d936c957f4c282c193fcf6e3bcc705",
+        "tests/io_admission/run.py": "7765b9062ba09c569d6e70e5b39c122c61998aab168d169e32a75b8b86d8117f"
+      },
+      "runs": [
+        {
+          "label": "current",
+          "exit_code": 0,
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-d9cp5usp/io-admission-current",
+          "binary_sha256": "dcd78f1bc22766163ef1c724815472eacb884aa98e4268e2cf5695bd49e0b56d",
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-d9cp5usp/current.log",
+          "log_sha256": "862caf04ba2caba18b2a6a28d7638e3e5fd3dfbdcb9940d61ede1c72cc95beb0",
+          "output": "PASS positive limits and one/two distinct device bounds\nPASS duplicates use one credit and active keys are sorted\nPASS per-device limit is independent of disjoint job concurrency\nPASS multi-device acquisition reserves atomically and avoids ABBA\nPASS blocked multi-device request bars conflicting bypass but permits disjoint work\nPASS queued disjoint requests bypass after release without conflicting leapfrog\nPASS queued cancellation removes synchronously and defers sibling starts\nPASS release followed by fresh request during cleanup remains deferred\nPASS group cancellation releases no queued sibling inline\nPASS active cancellation retains lease until callback settlement\nPASS already-cancelled request never consumes credits\nPASS synchronous asynchronous and immediate callbacks release exactly once\nPASS callback cancellation reentrancy and subsequent exact admission\nPASS bounded pending queue does not bound independent active devices\nPASS throwing cancelled observer does not strand admissible sibling\nPASS admission observer error preserves siblings and rearmed dispatch\nPASS native descriptor keys use fresh fstat and leave descriptors untouched\nPASS signed ephemeral keys have no invented UUID identity restrictions\nPASS idle ledger does not retain distinct device history\nPASS CPU waiting retains IO lease and releases on cancellation settlement\nAll owner-loop I/O admission tests passed (20 groups, 243 assertions).\n"
+        },
+        {
+          "label": "conflict-fifo-removed",
+          "exit_code": 2,
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-d9cp5usp/io-admission-conflict-fifo-removed",
+          "binary_sha256": "2e865a9f2937eed72267de6fc07f8f5075eba9295378d409f8fc6cc31286bc21",
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-d9cp5usp/conflict-fifo-removed.log",
+          "log_sha256": "083e3c704a9e03c00671d292f737de91d023062b5e51f4f23fbe6e9afeadf5c1",
+          "output": "PASS positive limits and one/two distinct device bounds\nPASS duplicates use one credit and active keys are sorted\nPASS per-device limit is independent of disjoint job concurrency\nPASS multi-device acquisition reserves atomically and avoids ABBA\nFatal error: exception Failure(\"conflicting request bypassed older multi-device waiter\")\n",
+          "expected_rejection": true,
+          "mutation": "Remove older conflicting-request barrier from immediate admission only."
+        }
+      ],
+      "passed": true,
+      "current_sources_still_match": true
+    },
+    {
+      "schema": "unison-io-admission-qualification/0",
+      "scope": "Owner-loop scheduling, native held-FD device accounting and Adobe-free CPU interop; no physical storage benchmark or SDK/Photo invocation.",
+      "ocamlopt": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+      "compiler_version": "5.2.0+ox",
+      "build_directory": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-j09f04u0",
+      "source_sha256": {
+        "src/lwt/lwt.mli": "52c93b0e596f0697bf1d86aacdb8d6f2607a5b3c829094c947c2ef77430b0453",
+        "src/lwt/lwt.ml": "b93acb9018913645209a26e2563ac40be76275d72245ecf4f933c255909e4c11",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+        "src/helperSupervisor.mli": "a79d0fefdc3a34445337b73a93ca64cce3cd3c8c589fa23617bbf391f85080be",
+        "src/helperSupervisor.ml": "d13911bbcd5b12b2c2abe3a34a0b0a450366f2a387701b808452e830ee0ac78a",
+        "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "src/ioAdmission.ml": "021ec08b97ed3005034b67bb716913f16431bca724ac2b2a0562237a345081b2",
+        "tests/io_admission/test.ml": "1e2822572f44f62b7803a0a21bdcb0a6a3d936c957f4c282c193fcf6e3bcc705",
+        "tests/io_admission/run.py": "7765b9062ba09c569d6e70e5b39c122c61998aab168d169e32a75b8b86d8117f"
+      },
+      "runs": [
+        {
+          "label": "current",
+          "exit_code": 0,
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-j09f04u0/io-admission-current",
+          "binary_sha256": "52cf8ce520e5024efe9adc68ca5f3c87ad776584369d6bd1b37f789399ebcefe",
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-j09f04u0/current.log",
+          "log_sha256": "862caf04ba2caba18b2a6a28d7638e3e5fd3dfbdcb9940d61ede1c72cc95beb0",
+          "output": "PASS positive limits and one/two distinct device bounds\nPASS duplicates use one credit and active keys are sorted\nPASS per-device limit is independent of disjoint job concurrency\nPASS multi-device acquisition reserves atomically and avoids ABBA\nPASS blocked multi-device request bars conflicting bypass but permits disjoint work\nPASS queued disjoint requests bypass after release without conflicting leapfrog\nPASS queued cancellation removes synchronously and defers sibling starts\nPASS release followed by fresh request during cleanup remains deferred\nPASS group cancellation releases no queued sibling inline\nPASS active cancellation retains lease until callback settlement\nPASS already-cancelled request never consumes credits\nPASS synchronous asynchronous and immediate callbacks release exactly once\nPASS callback cancellation reentrancy and subsequent exact admission\nPASS bounded pending queue does not bound independent active devices\nPASS throwing cancelled observer does not strand admissible sibling\nPASS admission observer error preserves siblings and rearmed dispatch\nPASS native descriptor keys use fresh fstat and leave descriptors untouched\nPASS signed ephemeral keys have no invented UUID identity restrictions\nPASS idle ledger does not retain distinct device history\nPASS CPU waiting retains IO lease and releases on cancellation settlement\nAll owner-loop I/O admission tests passed (20 groups, 243 assertions).\n"
+        },
+        {
+          "label": "conflict-fifo-removed",
+          "exit_code": 2,
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-j09f04u0/io-admission-conflict-fifo-removed",
+          "binary_sha256": "876c48282ca86e1e4397f9ded475e7328d83fc5a0d4709ca838dde31cc56baee",
+          "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-admission-j09f04u0/conflict-fifo-removed.log",
+          "log_sha256": "083e3c704a9e03c00671d292f737de91d023062b5e51f4f23fbe6e9afeadf5c1",
+          "output": "PASS positive limits and one/two distinct device bounds\nPASS duplicates use one credit and active keys are sorted\nPASS per-device limit is independent of disjoint job concurrency\nPASS multi-device acquisition reserves atomically and avoids ABBA\nFatal error: exception Failure(\"conflicting request bypassed older multi-device waiter\")\n",
+          "expected_rejection": true,
+          "mutation": "Remove older conflicting-request barrier from immediate admission only."
+        }
+      ],
+      "passed": true,
+      "current_sources_still_match": true
+    }
+  ],
+  "documentation_history": [
+    {
+      "source": "tests/io_admission/README.md",
+      "sha256": "d25d535f8bd55f71daa1bf4d9391d2b23d7fe8106da7f7139af701a9a41378af",
+      "reason": "Standalone qualification preceded adding actual runtime instructions; executable sources are unchanged."
+    }
+  ]
+}

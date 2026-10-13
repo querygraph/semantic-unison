@@ -72,3 +72,14 @@ val validate :
     reject, even under Warn. The caller must still fence changes at commit.
     Receipts are tied to this exact candidate and qualified tool, never merely
     to a DNG semantic fingerprint. No cache is maintained by this module. *)
+
+val validate_with_execution :
+  execute:((unit -> HelperSupervisor.result Lwt.t) -> HelperSupervisor.result Lwt.t) ->
+  HelperSupervisor.t -> HelperSupervisor.cancellation ->
+  policy:policy -> tool:tool option ->
+  inspect:(string -> snapshot Lwt.t) ->
+  candidate:string -> expected:snapshot -> result Lwt.t
+(** [validate] with an endpoint-owned wrapper around only the actual supervised
+    helper execution. Pre/post digest inspections run outside this wrapper, so
+    a shared I/O lease cannot deadlock nested worker admission. The wrapper
+    must await helper settlement on every path before releasing its resources. *)

@@ -688,6 +688,19 @@ helperSupervisor.cmx : \
     helperSupervisor.cmi
 helperSupervisor.cmi : \
     lwt/lwt.cmi
+ioAdmission.cmo : \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi \
+    ioAdmission.cmi
+ioAdmission.cmx : \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    helperSupervisor.cmx \
+    ioAdmission.cmi
+ioAdmission.cmi : \
+    lwt/lwt.cmi \
+    helperSupervisor.cmi
 linkgtk3.cmo : \
     uigtk3.cmi \
     main.cmo
@@ -1227,6 +1240,7 @@ semanticRuntime.cmo : \
     ubase/prefs.cmi \
     lwt/lwt_unix.cmi \
     lwt/lwt.cmi \
+    ioAdmission.cmi \
     helperSupervisor.cmi \
     formatExtension.cmi \
     abort.cmi \
@@ -1241,6 +1255,7 @@ semanticRuntime.cmx : \
     ubase/prefs.cmx \
     lwt/lwt_unix.cmx \
     lwt/lwt.cmx \
+    ioAdmission.cmx \
     helperSupervisor.cmx \
     formatExtension.cmx \
     abort.cmx \
@@ -1249,6 +1264,7 @@ semanticRuntime.cmi : \
     semanticWorkers.cmi \
     semanticAdmission.cmi \
     lwt/lwt.cmi \
+    ioAdmission.cmi \
     helperSupervisor.cmi
 semanticSync.cmo : \
     ubase/util.cmi \
@@ -1293,6 +1309,7 @@ semanticWorkers.cmo : \
     semanticDelta.cmi \
     lwt/lwt_unix.cmi \
     lwt/lwt.cmi \
+    ioAdmission.cmi \
     helperSupervisor.cmi \
     formatExtension.cmi \
     dngSemantic.cmi \
@@ -1302,6 +1319,7 @@ semanticWorkers.cmx : \
     semanticDelta.cmx \
     lwt/lwt_unix.cmx \
     lwt/lwt.cmx \
+    ioAdmission.cmx \
     helperSupervisor.cmx \
     formatExtension.cmx \
     dngSemantic.cmx \
@@ -1309,6 +1327,7 @@ semanticWorkers.cmx : \
 semanticWorkers.cmi : \
     semanticDelta.cmi \
     lwt/lwt.cmi \
+    ioAdmission.cmi \
     helperSupervisor.cmi \
     formatExtension.cmi
 sortri.cmo : \
