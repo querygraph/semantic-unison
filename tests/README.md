@@ -158,6 +158,27 @@ python3 tests/test_adobe_sync.py --unison /absolute/build/src/unison \
   --sdk-build /absolute/adobe-validator-build
 ```
 
+The final publication suites separately test native descriptor ownership,
+endpoint-local ticket phases, actual semantic workers, and the production
+Files/CLI caller. Build a fresh compiler-matched snapshot first for the two
+integration runners; use disposable fixtures and an installed old peer.
+
+```sh
+python3 tests/final_publication/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/target_binding/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/test_semantic_handoff.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/test_final_publication.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt \
+  --old-peer /absolute/old/unison --keep-work
+```
+
+Native producer tests distinguish newly supplied output descriptors from
+admitted resume files. Neither native identity nor a ticket authenticates
+bytes: actual final fingerprints and the ordinary source check remain
+required. These checks guard cooperative namespace changes, with explicit
+legacy handling for transactions involving additional names. They do not
+qualify hostile lookup/rename races, general first-admission cleanup or a
+descriptor-relative resource-fork creator.
+
 Each suite verifies a different boundary: semantic preservation and envelope
 bounds; domain ownership and cancellation; helper admission and teardown;
 transaction resource budgets; pending I/O settlement and descriptor reuse; file

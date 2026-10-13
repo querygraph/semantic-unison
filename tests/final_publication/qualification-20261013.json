@@ -1,0 +1,79 @@
+{
+  "utc": "2026-10-13T14:38:41.991252+00:00",
+  "status": "PASS_NATIVE_COOPERATIVE_CORE_CALLER_INTEGRATION_AND_INDEPENDENT_REVIEW_PENDING",
+  "cases_per_compiler": 99,
+  "source_pins": {
+    "src/finalPublication.ml": "c0d7b2e582276b670cca89eb694f468df080ab316380bea1c406bb2423deec8c",
+    "src/finalPublication.mli": "9212ca7d47977f82a4435ad12f5513e6cafecc1193f0956c30f2d2e74d9bf8b5",
+    "src/finalPublication_stubs.c": "099978fd5b7eba4d402f7ce16807ce0d2ec4e68d519b76134f0cb49d8e430828",
+    "tests/final_publication/fixture.c": "06fbceb68ca338536ec5eacc683b7744155ebf662e0955671dff0178e192a8c8",
+    "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+    "tests/final_publication/run.py": "e236a993678bc8a8fad698bcd33b65b494d53c9e4e497afd2e0a06b34b12c6aa"
+  },
+  "positive": {
+    "stock": {
+      "log": "/private/tmp/final-publication-stock-final.log",
+      "log_sha256": "ce84507a54ac288fac29aff4ae2c7c8968fafb6c5019aa8fbac04c76153774a7",
+      "retained_build": "/private/tmp/unison-final-publication-8blfheba",
+      "compiler_version": "5.5.1",
+      "binary_sha256": "48ae9d8a389fd70fb685c2c2077c396073a2990c5e603a3d45d7cbddae640622",
+      "compiled_test_sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+      "exit": 0
+    },
+    "ox": {
+      "log": "/private/tmp/final-publication-ox-final.log",
+      "log_sha256": "978bb86854c50d9ef956df7938eb1b4a0f0c43cea9e483d582ed3849dd1a4289",
+      "retained_build": "/private/tmp/unison-final-publication-703ykcvk",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "802c117006b8587f90a31100c971a6a4ac480b639c44779df2f1ef8c6251592e",
+      "compiled_test_sha256": "f4b922a1ce9060bf434ce1738193793b980e1998d0ca2e8025f9184a85e2a47f",
+      "exit": 0
+    }
+  },
+  "negative_control": {
+    "stock": {
+      "log": "/private/tmp/final-publication-stock-negative-final.log",
+      "log_sha256": "eb8fdbfdb03f67d4298afbf90125aaf59d761fca93e5278471f356565a497251",
+      "retained_build": "/private/tmp/unison-final-publication-afh0kmk7",
+      "compiler_version": "5.5.1",
+      "binary_sha256": "38e4edaebe947dd8fbd2f59b5e2ff86cb24360157e661840686d35ad597cf4da",
+      "compiled_test_sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+      "exit": 0,
+      "control": "remove only pre-rename candidate fullstat baseline check in private C copy",
+      "assertion": "must detect live publication of mutated candidate, not merely an eventual native error",
+      "control_native_sha256": "56a3c94152b6041889e62b6d8c41285a531117fba9fba89f30796bb92b8e62eb"
+    },
+    "ox": {
+      "log": "/private/tmp/final-publication-ox-negative-final.log",
+      "log_sha256": "bd185bcf23573cf4820c72008781285770df661624cbaab8531f286781d4b336",
+      "retained_build": "/private/tmp/unison-final-publication-txv8q4tj",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "00eb9df482d171c5b843d2b0c583cbe61ff657767f8aec22f03ba28146df878a",
+      "compiled_test_sha256": "f4b922a1ce9060bf434ce1738193793b980e1998d0ca2e8025f9184a85e2a47f",
+      "exit": 0,
+      "control": "remove only pre-rename candidate fullstat baseline check in private C copy",
+      "assertion": "must detect live publication of mutated candidate, not merely an eventual native error",
+      "control_native_sha256": "56a3c94152b6041889e62b6d8c41285a531117fba9fba89f30796bb92b8e62eb"
+    }
+  },
+  "limits": [
+    "Native cooperative core only; Files/RPC/session/validation/archive integration not qualified by this receipt.",
+    "No atomic namespace inode compare-and-swap, mount-incarnation guarantee, crash durability, or physical APFS write-amplification measurement.",
+    "Actual AppleDouble sidecars select separate legacy handling. Missing sidecar on lookup error is never inferred.",
+    "Real UF_IMMUTABLE forbids both rename and unlink; explicit failure retains original candidate without clearing flags.",
+    "Quarantine normal-name isolation is qualified only when native rename succeeds; injected unlink EPERM proves isolated quarantine retention.",
+    "No source photos, Photo/native Adobe invocations or production changes."
+  ],
+  "non_apple_branch_smoke": {
+    "retained_build": "/private/tmp/unison-final-publication-nonapple-dfx1o1x9",
+    "log": "/private/tmp/unison-final-publication-nonapple-dfx1o1x9/compile-and-smoke.log",
+    "log_sha256": "4d4bba8b9e12e9dc1206521241446611efa4b1cf64715f53ca1550331879af05",
+    "native_sha256": "099978fd5b7eba4d402f7ce16807ce0d2ec4e68d519b76134f0cb49d8e430828",
+    "result": 0,
+    "scope": "Darwin-host compilation with -U__APPLE__, availability=false and platform ENOSYS smoke only; not an actual Linux/Windows qualification."
+  },
+  "static_hygiene": {
+    "owned_files_trailing_whitespace": "PASS",
+    "python_launcher_ast": "PASS"
+  }
+}

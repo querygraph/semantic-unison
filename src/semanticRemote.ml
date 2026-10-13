@@ -139,6 +139,83 @@ let register_candidate path basis output =
     (try candidates.release_noerr candidate with _ -> ());
     raise error
 
+(* The name owner is independent of the worker descriptor lease. Connection
+   cleanup defers its identity-bound unlink until borrowed work has settled. *)
+type publication = { context : StagePublication.t;
+  mutable candidate : candidate option; mutable closing : bool;
+  mutable closed : bool }
+let close_publication publication =
+  publication.closing <- true;
+  (match publication.candidate with
+   | Some candidate -> candidate.files.closing <- true
+   | None -> ());
+  let busy = match publication.candidate with
+    | Some candidate -> candidate.files.busy | None -> false in
+  if not busy && not publication.closed then begin
+    publication.closed <- true;
+    StagePublication.abort_and_close publication.context
+  end
+let close_publication_noerr publication =
+  try close_publication publication with _ -> ()
+let publications = Remote.resourceWithConnCleanup
+  close_publication close_publication_noerr
+let release_publication_noerr publication =
+  try publications.release_noerr publication with _ -> close_publication_noerr publication
+let release_candidate_noerr candidate =
+  try candidates.release_noerr candidate with _ ->
+    (try cleanup_noerr candidate with _ -> ())
+let register_publication context =
+  let publication =
+    try {context;candidate=None;closing=false;closed=false}
+    with error -> StagePublication.close_noerr context; raise error in
+  try publications.register publication with error ->
+    release_publication_noerr publication; raise error
+let register_bound_candidate path basis output =
+  let candidate =
+    try {basis;output;files=hold [basis;output];path;owned=false}
+    with error -> close_fd_noerr basis; close_fd_noerr output; raise error in
+  try candidates.register candidate with error ->
+    close_unborrowed_files candidate.files;
+    release_candidate_noerr candidate;
+    raise error
+let create_bound_candidate ~basis ~directory ~staging stage path =
+  if not (StagePublication.available ()) then None else
+  let context =
+    try
+      let context = StagePublication.prepare ~working_dir:(Fspath.toString directory)
+        ~stage:(Path.toString stage) ~temporary:(Path.toString staging) in
+      (try Some context with error -> StagePublication.close_noerr context; raise error)
+    with error when StagePublication.preparation_unavailable error -> None in
+  match context with
+  | None -> None
+  | Some context ->
+      let publication = register_publication context in
+      try
+        if publication.closing then
+          raise (Util.Transient "Semantic publication interrupted");
+        match Fs.clone_stage_handles basis path with
+        | Fs.Declined_stage_handles Fs.Non_regular_source ->
+            raise (Util.Transient "Semantic clone basis is no longer a regular file")
+        | Fs.Declined_stage_handles _ ->
+            publications.release publication; None
+        | Fs.Shared_stage_handles (basis,output,parent) ->
+            (try StagePublication.adopt context ~parent ~stage:output
+             with error -> close_fd_noerr basis; close_fd_noerr output; raise error);
+            let candidate = register_bound_candidate path basis output in
+            (try
+               publication.candidate <- Some candidate;
+               Some (candidate,publication)
+             with error -> release_candidate_noerr candidate; raise error)
+      with error -> release_publication_noerr publication; raise error
+let borrowed_with_publication publication candidate f =
+  Lwt.try_bind (fun () -> borrowed candidate.files f)
+    (fun result ->
+      (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
+      Lwt.return result)
+    (fun error ->
+      (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
+      Lwt.fail error)
+
 let nonce () =
   (* The only current clone-stage backend is macOS. Use OS randomness for
      transaction correlation; this nonce is not peer authentication. *)
@@ -154,26 +231,49 @@ let nonce () =
   | () -> Unix.close fd; Bytes.to_string b
   | exception e -> Unix.close fd; raise e
 
-let try_transfer ~connection ~source ~basis ~directory ~staging ~expected_size =
+let try_transfer_internal ?producer ~connection ~source ~basis ~directory ~staging ~expected_size () =
   if not (supported connection) then return false else
   let extensions = SemanticFormats.peer_enabled () in
   let max_payload = List.fold_left (fun n handle -> max n (FormatExtension.payload_limit handle))
     0 extensions in
+  let callback_started = ref false in
   SemanticRuntime.with_transaction ~max_payload (fun cancellation ->
     Util.convertUnixErrorsToTransient "creating semantic staging" (fun () ->
-      let candidate_path = Fspath.concat directory
-        (Os.tempPath ~fresh:true directory (Path.addSuffixToFinalName staging "-sde")) in
-      match Fs.clone_stage_status basis candidate_path with
-      | Fs.Declined_stage Fs.Non_regular_source ->
-          raise (Util.Transient "Semantic clone basis is no longer a regular file")
-      | Fs.Declined_stage _ -> return false
-      | Fs.Shared_stage (basis,output) ->
-        let candidate = register_candidate candidate_path basis output in
+      let stage = Os.tempPath ~fresh:true directory (Path.addSuffixToFinalName staging "-sde") in
+      let candidate_path = Fspath.concat directory stage in
+      let created = match producer with
+        | Some _ ->
+            (match create_bound_candidate ~basis ~directory ~staging stage candidate_path with
+             | None -> None
+             | Some (candidate,publication) ->
+                 (try Some (candidate,Some publication)
+                  with error -> release_publication_noerr publication;
+                    release_candidate_noerr candidate; raise error))
+        | None ->
+            match Fs.clone_stage_status basis candidate_path with
+            | Fs.Declined_stage Fs.Non_regular_source ->
+                raise (Util.Transient "Semantic clone basis is no longer a regular file")
+            | Fs.Declined_stage _ -> None
+            | Fs.Shared_stage (basis,output) ->
+                let candidate = register_candidate candidate_path basis output in
+                (try Some (candidate,None)
+                 with error -> release_candidate_noerr candidate; raise error) in
+      match created with
+      | None -> return false
+      | Some (candidate,publication) ->
+        try
+        let basis = candidate.basis and output = candidate.output in
+        let release () =
+          (match publication with Some owner -> publications.release owner | None -> ());
+          candidates.release candidate in
+        let release_noerr () =
+          (match publication with Some owner -> release_publication_noerr owner | None -> ());
+          release_candidate_noerr candidate in
         catch (fun () ->
           let rec select = function
             | [] -> return None
             | extension :: rest ->
-          borrowed candidate.files (fun () -> SemanticWorkers.inspect
+          borrowed_with_publication publication candidate (fun () -> SemanticWorkers.inspect
             (SemanticRuntime.get ()).pool cancellation ~extension basis) >>= fun result ->
           let base = match result with
             | Some result when result.SemanticWorkers.stats.Unix.LargeFile.st_size <> expected_size ->
@@ -183,38 +283,57 @@ let try_transfer ~connection ~source ~basis ~directory ~staging ~expected_size =
           select extensions >>= function
           | None ->
             debug (fun () -> Util.msg "Remote semantic fallback: no negotiated profile proves eligibility\n");
-            candidates.release candidate; return false
+            release (); return false
           | Some (extension,base) ->
             let nonce = nonce () in
             let request = SemanticDelta.encode_request ~nonce base in
             request_plan connection (Fspath.toString source,request) >>= function
             | None ->
               debug (fun () -> Util.msg "Remote semantic fallback: source proof differs\n");
-              candidates.release candidate; return false
+              release (); return false
             | Some response ->
               let plan = match SemanticDelta.decode ~max_payload:(FormatExtension.payload_limit extension) response with
                 | Ok plan when SemanticDelta.binds_request ~nonce ~base plan -> plan
                 | Ok _ -> raise (Util.Transient "Semantic response does not match receiver request")
                 | Error reason -> raise (Util.Transient ("Invalid semantic response: " ^ reason)) in
-              borrowed candidate.files (fun () -> SemanticWorkers.apply_report
+              borrowed_with_publication publication candidate (fun () -> SemanticWorkers.apply_report
                 (SemanticRuntime.get ()).pool cancellation ~extension plan ~basis ~output) >>= fun applied ->
               let applied = match applied with Some report -> report | None ->
                 raise (Util.Transient "Semantic materialization cancelled") in
-              close candidate;
-              Fs.rename candidate.path (Fspath.concat directory staging);
-              candidate.owned <- false;
-              candidates.release candidate;
+              (match publication,producer with
+               | Some owner,Some producer ->
+                   StagePublication.publish owner.context;
+                   callback_started := true;
+                   producer output;
+                   if candidate.files.closing || owner.closing then
+                     raise (Util.Transient "Semantic publication interrupted");
+                   StagePublication.disarm owner.context
+               | None,None ->
+                   close candidate;
+                   Fs.rename candidate.path (Fspath.concat directory staging);
+                   candidate.owned <- false
+               | _ -> assert false);
+              release ();
               debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
                 applied.SemanticDelta.logical_bytes_written applied.write_calls
                 (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
               return true)
-          (fun e -> candidates.release_noerr candidate;
-            match e with
+          (fun e -> release_noerr ();
+            if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Semantic worker: " ^ reason))
             | SemanticFile.Invalid reason -> fail (Util.Transient ("Semantic verification: " ^ reason))
             | Unix.Unix_error _ ->
               Util.convertUnixErrorsToTransient "semantic transfer" (fun () -> raise e)
-            | _ -> fail e)))
+            | _ -> fail e)
+        with error ->
+          (match publication with Some owner -> release_publication_noerr owner | None -> ());
+          release_candidate_noerr candidate;
+          raise error))
+
+let try_transfer ~connection ~source ~basis ~directory ~staging ~expected_size =
+  try_transfer_internal ~connection ~source ~basis ~directory ~staging ~expected_size ()
+let try_transfer_with_producer ~producer ~connection ~source ~basis ~directory ~staging ~expected_size =
+  try_transfer_internal ~producer ~connection ~source ~basis ~directory ~staging ~expected_size ()
 
 (* Advisory current-file observations use their own negotiated command. They
    carry no transfer/commit authority, and never download the complete file. *)

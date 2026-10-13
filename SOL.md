@@ -4,8 +4,43 @@
 
 ## Live implementation handoff
 
+* Retained-producer follow-on is implemented and qualified (2026-10-13).
+  `Copy.fileBound` and separately negotiated `target-binding-producer-v0` /
+  `transferFileBoundV0` retain actual output descriptors through data, forks,
+  properties, final hashing, source checking, validation and live publication.
+  APFS/semantic stages hand over their still-open output before relinquishing
+  creator ownership. Existing remote resumes are admitted through the held
+  parent before full/prefix hashing; append writers must match before chmod or
+  writes. Invalid prefixes restart through the same admitted inode. Commit
+  reuses the frozen witness and its actual fingerprint without named reattachment.
+  Receiver ticket ownership is local even when its source transport is remote.
+* Current qualification: native 170, registry 105, semantic worker handoff 32
+  cases per compiler; actual CLI caller 79 per compiler with no exclusions.
+  The original identical-byte/new-inode replacement regression now rejects
+  the replacement while preserving the foreign candidate, old live object and
+  archives, then completes an exact retry. Twelve resume cases and three actual
+  semantic producers cover all placements. Both stock caller negative controls
+  detect the intended resolution/live-cleanup failures; native and registry
+  negative controls pass both compilers. Independent review found and closed
+  an unregister-allocation cleanup gap; worker deferral and reused-FD safety
+  are included in the 32-case suite.
+* Fresh Make snapshots stock `unison-build-bsb4op45` and Ox
+  `unison-build-vs8_6edo` pass builds/selftests. Dune 3.22.2 builds/selftests
+  pass both in `unison-dune-retained-producer-qcyowr6e`. All 311 production /
+  package / INSTALL inputs match current source and both build systems.
+  [The retained-producer receipt](tests/qualification/retained-producer-publication-20261013.json)
+  pins current source, tests, binaries, logs and caller evidence. Current Ox
+  remote SDE / 24-file bidirectional / old-peer reruns pass. Generic APFS and
+  synthetic validation receipts retain their preceding source scope; no new
+  Adobe SDK or preview invocation, production data change or performance claim.
+* Remaining ownership limits: direct exclusive creation can preserve an unproven
+  temp leaf if first adoption fails; initial old-temp pathname cleanup and a
+  descriptor-relative resource-fork / AppleDouble creator remain separate
+  contracts. Additional-name families retain explicit legacy behavior.
+  Cooperative held-parent checks do not prove hostile inode compare-and-swap,
+  mount incarnation, crash durability or global/per-volume adaptive admission.
 * Working branch: `feat/semantic-dng-oxcaml`, based on upstream `8772d26a2eb77cfd0cb6da81807e81f24f51044c`. Original local `master` at `375ea3ad` is preserved. The user-authorized implementation checkpoint is committed as `2a05c4bf3ffffe4380ad7743c490992b2179f332` and pushed to [querygraph/unison](https://github.com/querygraph/unison/tree/feat/semantic-dng-oxcaml), verified through SSH and the GitHub branch API. The fork was created because it did not yet exist; `fork` uses SSH and this branch tracks it. Deployment has not been performed. No production photographs were changed.
-* Publication scope: the checkpoint contains the tested implementation, owned design/handoff, tests, benchmark receipts and scoped qualification manifests. All 306 production inputs and 14 pinned qualification test files in the staged checkpoint match the publication receipt. External coordination receipts remain local. New `FinalPublication` source/tests are follow-on uncommitted work, not wired into the committed build or covered by that checkpoint. Native implementation/testing is in progress; endpoint ticket/RPC integration and actual final-caller qualification remain next.
+* Publication scope: the checkpoint contains the tested implementation, owned design/handoff, tests, benchmark receipts and scoped qualification manifests. All 306 production inputs and 14 pinned qualification test files in the staged checkpoint match the publication receipt. External coordination receipts remain local. The retained-producer follow-on adds `FinalPublication`/`TargetBinding`, Copy/Files and semantic stage handoffs, build wiring and independent native/registry/worker/caller controls. Its current qualification is recorded above. The earlier pre-producer draft and its reproduced gap retain their historical source pins; they are superseded by this qualified follow-on for the regular-file scope.
 * Current goal tracker: `active`, verified again during the user's status
   request on 2026-10-13. The user resumed the goal after the earlier unexplained
   `blocked` observation at 12:32:21 UTC; root and the participating agents had
@@ -190,7 +225,7 @@
   cleanup and native scratch pathname reservation remain separate work.
   No new SDK invocation, preview operation, Photo/cache/volume work or benchmark.
 
-* Next final-live source review is recorded in `doc/filesystem-capabilities-plan.md`.
+* Historical final-live implementation plan (superseded for the qualified regular-file scope above) following the source review in `doc/filesystem-capabilities-plan.md`.
   Enroll logical root/follow/effective workdir bindings at endpoint-local target
   setup, carry only a negotiated opaque nonce remotely, and attach the finalized
   candidate witness after forks/properties/paranoid verification. Validation
@@ -201,6 +236,57 @@
   Post-publish failure must suppress archive advancement and reconcile without
   deleting live output. This is source review for subsequent implementation,
   not a completed gate or new native-preview authorization.
+
+* Historical pre-producer final-live draft: `FinalPublication` pins the logical-root/effective
+  directories and candidate/target parents, freezes the singly linked regular
+  candidate and accepted live object, publishes through held parents and checks
+  live readback before archive advancement. Native state becomes Published
+  before post-rename errors; cleanup never unlinks published live output.
+  Default macOS native forks remain supported when both AppleDouble names are
+  proved absent; actual sidecars, move-first directories and conflict retargets
+  retain explicit legacy handling. Quarantine precedes rejection deletion when
+  the OS permits rename; truly immutable rename failure remains explicit.
+  Native tests pass 99 cases and a mutated-publication negative control per
+  compiler; source/log pins are in `tests/final_publication/qualification-20261013.json`.
+* `TargetBinding` implements negotiated additive setup/rename commands with
+  connection/session/root/path/policy-bound, single-use 256-bit tickets. Its
+  128-slot registry reserves before native opens and defers borrowed cleanup
+  until helpers settle. Fifty focused cases and premature-close negative
+  controls pass both compilers. Files holds separate 64-transaction requester
+  admission before setup through commit: streaming's ordinary 1000-thread limit
+  otherwise permits too many retained directory proofs. These proof descriptors
+  are outside `semanticdescriptorbudget`; adaptive/global FD integration remains
+  required. Legacy RPC schemas and archive format remain unchanged.
+* Combined pre-producer checkpoint: stock `unison-build-xyp54mfd` and Ox
+  `unison-build-b0ky8p03` build/selftest, with all 311 production inputs matching
+  at that source freeze. Subsequent producer-retention changes are unqualified
+  by those binaries. Ordinary clone suites pass both. Current Ox synthetic
+  validation and remote/bidirectional/old-peer suites pass. The actual Files
+  caller harness passes 62 cases per compiler with two identity controls
+  explicitly excluded, separately reproduced as the open producer gap. No new SDK or Photo invocation.
+* The predecessor caller audit found the producer-handoff gap now closed by the qualified continuation above. Every current
+  materializer closes its data output before final properties/paranoid checking;
+  the draft reopens the completed candidate at rename entry. Bound commits now
+  recheck expected archive fingerprints even with Adobe validation off, but
+  identical-byte replacement before attachment can still be adopted. Existing
+  Fileinfo inode stamps retain only 30 bits and may be disabled; they cannot
+  substitute for an original full-width producer witness. Retain the actual
+  producer descriptor/creation parent, permit planned writes/properties, freeze
+  after finalization, and bind paranoid/source verification and rename to that
+  same object. Additive bound-copy plumbing must cover all receiving paths.
+  The actual caller control reproduced identical-byte replacement being published
+  with archive advancement (inodes 304353566 to 304353567); retained evidence is
+  `/private/tmp/unison-final-caller-85p9_y0_/case-1/`. Scoped receipts are
+  `tests/qualification/final-publication-{draft,caller}-20261013.json`.
+  The caller harness is `tests/test_final_publication.py`; its later command-
+  bookkeeping syntax typo was corrected and AST parsing passes, without
+  relabeling earlier evidence or claiming a rerun. Caller negative controls
+  were not run. Keep this slice unqualified and uncommitted until its
+  remaining controls pass. Native and registry owners are now implementing
+  mutable producer-FD adoption and producer/finalized/commit phases under
+  `doc/finalized-candidate-handoff-plan.md`; Copy/Files integration follows.
+  Late unwitnessed AppleDouble siblings must be preserved/reported, not blindly
+  deleted as owned candidate data. The implementation goal remains active.
 
 ## JPEG extension design note
 

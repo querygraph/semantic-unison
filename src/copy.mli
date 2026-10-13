@@ -15,6 +15,17 @@ val file :
  -> Uutil.File.t        (* file's index in UI (for progress bars) *)
  -> Fileinfo.basic Lwt.t (* information regarding the transferred file *)
 
+val fileBound : token:string -> local_path:Path.local ->
+    Common.root -> Path.local -> Common.root -> Fspath.t -> Path.local -> Path.local
+ -> [`Update of (Uutil.Filesize.t * Uutil.Filesize.t) | `Copy]
+ -> Props.t -> Os.fullfingerprint -> Fileinfo.stamp option -> Osx.ressStamp
+ -> Uutil.File.t -> (Fileinfo.basic * TargetBinding.completion) Lwt.t
+(** Additive producer-ticket variant. Retain the actual receiving output
+    descriptor through planned changes, final hashing and source checking.
+    Only explicit backend handoff returns [Legacy_backend]; identity errors
+    remain terminal. [local_path] is the translated destination in its logical
+    root, rather than the temporary basename. *)
+
 val localFile :
     Fspath.t             (* fspath of source *)
  -> Path.local           (* path of source *)

@@ -1,0 +1,165 @@
+{
+  "utc": "2026-10-13T16:03:07.970384+00:00",
+  "status": "PASS_NATIVE_RETAINED_PRODUCER_CALLER_INTEGRATION_AND_INDEPENDENT_REVIEW_PENDING",
+  "cases_per_compiler": 170,
+  "original_regression_cases": 99,
+  "producer_resume_handoff_cases": 71,
+  "predecessors": [
+    {
+      "path": "tests/final_publication/qualification-20261013.json",
+      "sha256": "a0cee0f054281fbbea816a4593e50073a9fad0e4a4890ab007466860f6bc8fb4"
+    },
+    {
+      "path": "tests/final_publication/qualification-producer-checkpoints-20261013.json",
+      "sha256": "b996c459d974235b94ffb7f35dd1941c13cc9bd3ba682b285a6e90a7ec4795b6"
+    }
+  ],
+  "source_pins": {
+    "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+    "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+    "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+    "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+    "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+    "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+  },
+  "positive": {
+    "stock": {
+      "log": "/private/tmp/final-publication-producer-handoff-stock-final.log",
+      "log_sha256": "96cb2d5affb41b733af8529e4032e6bfe3e4e0cdf670ef9606999af7c1cd5f1c",
+      "build": "/private/tmp/unison-final-publication-wcmd5m0v",
+      "compiler": "5.5.1",
+      "binary_sha256": "d37815c37ca3f85e7f1ae9a66eb3b70ab50ff5ef6c47a28a05b4b4ef5a8501c1",
+      "source_pins": {
+        "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+        "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+        "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+        "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+        "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+        "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+      },
+      "compiled_test_sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+      "compiled_producer_test_sha256": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea",
+      "result": 0
+    },
+    "ox": {
+      "log": "/private/tmp/final-publication-producer-handoff-ox-final.log",
+      "log_sha256": "6f665e3f27de625afdf195e106ab088e1156b806f6032a0afc28c5d8d368d5c7",
+      "build": "/private/tmp/unison-final-publication-k5p8timc",
+      "compiler": "5.2.0+ox",
+      "binary_sha256": "0382c745a4e7c011be599becbf4e011ab4ebab273327fffee07feec631cea10d",
+      "source_pins": {
+        "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+        "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+        "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+        "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+        "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+        "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+      },
+      "compiled_test_sha256": "f4b922a1ce9060bf434ce1738193793b980e1998d0ca2e8025f9184a85e2a47f",
+      "compiled_producer_test_sha256": "59b8da14076391cf5172e1f77ccf10e4ea3951ed178bc1db6106bc0f41ff5975",
+      "result": 0
+    }
+  },
+  "negative_controls": {
+    "stock": {
+      "frozen": {
+        "log": "/private/tmp/final-publication-producer-handoff-stock-frozen-negative.log",
+        "log_sha256": "fffa3a7ac89888898840cb995b4d7d550b9b1554ba197ce94bb53b6f4d0fc035",
+        "build": "/private/tmp/unison-final-publication-ui3am9c1",
+        "compiler": "5.5.1",
+        "binary_sha256": "b6c6a8a854f810e1fa5fa534e913eb9472f051312279f38f0b6feb8c83c6580f",
+        "source_pins": {
+          "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+          "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+          "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+          "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+          "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+          "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        },
+        "compiled_test_sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+        "compiled_producer_test_sha256": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea",
+        "result": 0,
+        "private_control_native_sha256": "8aebdc3291f1465eeb6a4cf9d17bdb49bf1d73e121855c6bd5059cb2fe4f9c15",
+        "control": "remove frozen pre-rename fullstat baseline"
+      },
+      "origin": {
+        "log": "/private/tmp/final-publication-producer-handoff-stock-origin-negative.log",
+        "log_sha256": "f4752d6cfe3864c630af72c4b755a072d60e8cb7b2a77273ec6158704d2657a8",
+        "build": "/private/tmp/unison-final-publication-3mjn4z1w",
+        "compiler": "5.5.1",
+        "binary_sha256": "903dffbeab294c1c9ea5d0f4ad3014e04ee5e2d60bc2aaa62e5db3abd451ebad",
+        "source_pins": {
+          "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+          "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+          "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+          "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+          "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+          "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        },
+        "compiled_test_sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+        "compiled_producer_test_sha256": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea",
+        "result": 0,
+        "private_control_native_sha256": "7bfdf99d32cfa660af12ce997900e19b8fa4709bbc90f21e77d605f47f88dffd",
+        "control": "reopen normal name instead of duplicating actual producer output descriptor"
+      }
+    },
+    "ox": {
+      "frozen": {
+        "log": "/private/tmp/final-publication-producer-handoff-ox-frozen-negative.log",
+        "log_sha256": "a6339c55971417fdda0d19e173738abd9b0bd1caa48b07b2c6cf733582ad44b6",
+        "build": "/private/tmp/unison-final-publication-cftghnlp",
+        "compiler": "5.2.0+ox",
+        "binary_sha256": "db3060f182f50d6fd0a88d5e994a13b4c2666aac8885342328d5fb3bda8dfc6b",
+        "source_pins": {
+          "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+          "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+          "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+          "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+          "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+          "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        },
+        "compiled_test_sha256": "f4b922a1ce9060bf434ce1738193793b980e1998d0ca2e8025f9184a85e2a47f",
+        "compiled_producer_test_sha256": "59b8da14076391cf5172e1f77ccf10e4ea3951ed178bc1db6106bc0f41ff5975",
+        "result": 0,
+        "private_control_native_sha256": "8aebdc3291f1465eeb6a4cf9d17bdb49bf1d73e121855c6bd5059cb2fe4f9c15",
+        "control": "remove frozen pre-rename fullstat baseline"
+      },
+      "origin": {
+        "log": "/private/tmp/final-publication-producer-handoff-ox-origin-negative.log",
+        "log_sha256": "ec4a18cbde4f3b072ba10115bfa47fa28d5686d6687a4e11f818c1c44121f161",
+        "build": "/private/tmp/unison-final-publication-pthql5kj",
+        "compiler": "5.2.0+ox",
+        "binary_sha256": "1029995c540cb2b444fb4fb4406f92c2ced713fefcfa9f24d878bebe06b7148a",
+        "source_pins": {
+          "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+          "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+          "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+          "tests/final_publication/fixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+          "tests/final_publication/test.ml": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80",
+          "tests/final_publication/producerTest.ml": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        },
+        "compiled_test_sha256": "f4b922a1ce9060bf434ce1738193793b980e1998d0ca2e8025f9184a85e2a47f",
+        "compiled_producer_test_sha256": "59b8da14076391cf5172e1f77ccf10e4ea3951ed178bc1db6106bc0f41ff5975",
+        "result": 0,
+        "private_control_native_sha256": "7bfdf99d32cfa660af12ce997900e19b8fa4709bbc90f21e77d605f47f88dffd",
+        "control": "reopen normal name instead of duplicating actual producer output descriptor"
+      }
+    }
+  },
+  "limits": [
+    "Native-only cooperative origin, namespace, mutable/frozen/publication ownership contract. Copy/Files receiving-backend integration and source-check-window coverage require separate authoritative caller evidence.",
+    "Producer_descriptor admits the supplied actual output object. Admitted_resume admits an existing regular private-name object before hashing; native origin/finalized flags alone certify neither bytes nor source fingerprint.",
+    "Failed first admission closes proof handles without owning or deleting an unproven leaf. Materializer creator-parent cleanup is a separate contract; there is no blind pathname retry.",
+    "Planned AppleDouble appearance can hand off during PRODUCING after current identity/binding checks. Frozen mutation or operational/stale failure cannot select legacy fallback.",
+    "Fresh lookup plus rename/unlink is not an atomic inode CAS against hostile writers, a mount-incarnation proof, or crash durability.",
+    "Actual immutable files can forbid both quarantine rename and unlink; explicit errors retain the original candidate without clearing flags.",
+    "No Photo, SDK, production data/cache, heavy benchmarks or shared checkout builds.",
+    "Generic direct exclusive creation has no retained actual creator-parent cleanup proof at first-admission failure; the unproven normal-temp leaf can remain and must not be blindly deleted.",
+    "Native resource-fork and AppleDouble creation still use the ordinary pathname creator in Copy/Osx before the later producer FD/family checks. This is within the cooperative check/open interval, not descriptor-relative fork creation or proof of no foreign fork/header effects under a syscall-level namespace race."
+  ],
+  "launcher_current_sha256": "598ea58c6863f7771eb5fa62c0b2558a1271d60b04e03c3937b7314b8c95a40c",
+  "static_hygiene": {
+    "owned_source_trailing_whitespace": "PASS",
+    "python_launcher_ast": "PASS"
+  }
+}

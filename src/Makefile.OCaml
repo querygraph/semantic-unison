@@ -69,7 +69,7 @@ OCAMLOBJS = \
           lwt/$(SYSTEM)/lwt_unix_impl.cmo lwt/lwt_unix.cmo \
           \
           features.cmo uutil.cmo case.cmo pred.cmo terminal.cmo \
-          fileutil.cmo name.cmo path.cmo fspath.cmo fileObservation.cmo fs.cmo fingerprint.cmo \
+          fileutil.cmo name.cmo path.cmo fspath.cmo fileObservation.cmo stagePublication.cmo fs.cmo fingerprint.cmo \
           abort.cmo osx.cmo fswatch.cmo propsdata.cmo \
           props.cmo fileinfo.cmo os.cmo lock.cmo clroot.cmo common.cmo \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
@@ -77,8 +77,8 @@ OCAMLOBJS = \
           semanticHash.cmo semanticFile.cmo formatExtension.cmo \
           dngSemantic.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticWorkers.cmo semanticFormats.cmo semanticRuntime.cmo semanticSync.cmo semanticRemote.cmo \
-          dngValidation.cmo candidateValidation.cmo \
-          fpcache.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo stagePublication.cmo copy.cmo stasher.cmo \
+          dngValidation.cmo candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
+          fpcache.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
           files.cmo sortri.cmo recon.cmo transport.cmo \
           strings.cmo uicommon.cmo uitext.cmo test.cmo \
           main.cmo
@@ -91,7 +91,7 @@ OCAMLINCLUDES = -I +unix -I +str
 # C objects for both bytecode and native versions
 COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \
         hash_compat$(OBJ_EXT) props_xattr$(OBJ_EXT) props_acl$(OBJ_EXT) \
-        copy_stubs$(OBJ_EXT) fileObservation_stubs$(OBJ_EXT) stagePublication_stubs$(OBJ_EXT) helperSupervisor_stubs$(OBJ_EXT) \
+        copy_stubs$(OBJ_EXT) fileObservation_stubs$(OBJ_EXT) stagePublication_stubs$(OBJ_EXT) finalPublication_stubs$(OBJ_EXT) helperSupervisor_stubs$(OBJ_EXT) \
         semanticHash_stubs$(OBJ_EXT) $(WINCOBJS)
 
 ####################################################################

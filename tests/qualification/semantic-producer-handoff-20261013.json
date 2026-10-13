@@ -1,0 +1,97 @@
+{
+  "status": "PASS_SCOPED",
+  "date": "2026-10-13",
+  "scope": "Disposable macOS native staging/final mutable adoption and actual shared semantic workers. Remote source planner, envelope and materializer are delivered in process; separate actual loopback CLI qualification supplies transport coverage. No Adobe, Photo, catalog, preview, external volume or crash durability claim.",
+  "runner": {
+    "path": "tests/test_semantic_handoff.py",
+    "sha256": "32ee53835c635094c3692b7fe3151c2d325a892b6376a11cac51aff163b152d3"
+  },
+  "production_sha256": {
+    "src/semanticSync.ml": "e8e2b14042ea9b8785f08a987c37929978d5067485ab1c32210c44a8120a27b3",
+    "src/semanticSync.mli": "d049873efc0f0cba9e89d236a4922ffc54037b230f859a49506637a44be21650",
+    "src/semanticRemote.ml": "9ac842bd53b3ed2c577418a947146c0e759854bc74c2eab4d504ff78747bce72",
+    "src/semanticRemote.mli": "91fed3820f84a3581a207d4ed0ac5228a675b7f14910fde974de245c5a57f503",
+    "src/finalPublication.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+    "src/finalPublication.mli": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+    "src/finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+    "src/stagePublication.ml": "29136e71712e16b149ccae43798a71cc406b1ce9d20f2c2a272ba7203eb0f53e",
+    "src/stagePublication.mli": "22fd045a7398b1c00b4cfadad1e56b2d18eacfeaa614a033f18f1fe8b678c86c",
+    "src/stagePublication_stubs.c": "f292e14692347583ae42a5ca4ee3bf0181f9f00446feccabbdbe927b31610474"
+  },
+  "cases_per_compiler": 32,
+  "checks": [
+    "Output descriptor remains open through captured-parent promotion and synchronous producer callback; retained final owner survives semantic raw FD close.",
+    "Failure, Unix EIO and Out_of_memory callbacks preserve original exception and terminate; native owner preserves foreign replacement/rebound-parent sentinels.",
+    "Adoption, transaction/candidate allocation and registration handoff failures settle owned descriptors and names.",
+    "Unavailable initial identity preparation and ineligible opaque profile decline safely before producer callback.",
+    "Connection teardown waits for borrowed worker settlement before closing descriptors and removing its captured stage.",
+    "Unregister Out_of_memory cannot skip publication/raw-FD cleanup, preserves original callback error and defers borrowed work; later retained registry teardown leaves a forcibly reused descriptor untouched.",
+    "Global semantic admission and helper CPU permits return to zero; source/basis bytes remain unchanged and fixture descriptor counts balance."
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "version": "5.5.1",
+      "ocamlopt": "/usr/local/bin/ocamlopt",
+      "work": "/private/tmp/unison-semantic-handoff-417nj1ou",
+      "session": 85175,
+      "exit_code": 0,
+      "dependency_snapshot": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bv97kk7u",
+      "snapshot_scope": "Matched compiler dependency objects and checked unchanged StagePublication/SemanticWorkers/SemanticDelta/Fs interfaces; fresh semantic/native source copies compiled privately. The dependency snapshot predates only the semantic release cleanup fix.",
+      "command": [
+        "python3",
+        "tests/test_semantic_handoff.py",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bv97kk7u",
+        "--ocamlopt",
+        "/usr/local/bin/ocamlopt",
+        "--keep-work"
+      ],
+      "artifact_sha256": {
+        "runner.py": "32ee53835c635094c3692b7fe3151c2d325a892b6376a11cac51aff163b152d3",
+        "semanticSyncForHandoff.ml": "33bd43b9c93b6644e9b0a8bc170e2807ee565c3e52524fec9c4b1ce155b543ba",
+        "semanticRemoteForHandoff.ml": "a0d2064afe1e837635d15299805ad2e71faf9291535d2c45e6fde06293b4535d",
+        "finalPublicationForHandoff.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+        "finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+        "stagePublication_stubs.c": "f292e14692347583ae42a5ca4ee3bf0181f9f00446feccabbdbe927b31610474",
+        "finalFixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+        "stageFixture.c": "c66a1e750ca578664a6783d6f9673d146a9ec28d1be4c9424d4514ca7434da32",
+        "handoffTest.ml": "5bf56d4c6a7fc4ba82e4c5d9041cf0dfce3c8b2d94d8f8f60d556ab7315ce86c",
+        "semantic-handoff-test": "b936be907f823ff18656c0d77b9e6c0b81ac3e84ec11190fb589b33ae58b9bfb",
+        "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test.log": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+      }
+    },
+    {
+      "compiler": "ox",
+      "version": "5.2.0+ox",
+      "ocamlopt": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "work": "/private/tmp/unison-semantic-handoff-_f6uwipc",
+      "session": 1899,
+      "exit_code": 0,
+      "dependency_snapshot": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-l7bmzvaa",
+      "snapshot_scope": "Matched compiler dependency objects and checked unchanged StagePublication/SemanticWorkers/SemanticDelta/Fs interfaces; fresh semantic/native source copies compiled privately. The dependency snapshot predates only the semantic release cleanup fix.",
+      "command": [
+        "python3",
+        "tests/test_semantic_handoff.py",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-l7bmzvaa",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "--keep-work"
+      ],
+      "artifact_sha256": {
+        "runner.py": "32ee53835c635094c3692b7fe3151c2d325a892b6376a11cac51aff163b152d3",
+        "semanticSyncForHandoff.ml": "33bd43b9c93b6644e9b0a8bc170e2807ee565c3e52524fec9c4b1ce155b543ba",
+        "semanticRemoteForHandoff.ml": "a0d2064afe1e837635d15299805ad2e71faf9291535d2c45e6fde06293b4535d",
+        "finalPublicationForHandoff.ml": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+        "finalPublication_stubs.c": "0ec93d78d3c94a8e1dc613f84f47577f2f93f689a76ee6657cb52cbd9088b238",
+        "stagePublication_stubs.c": "f292e14692347583ae42a5ca4ee3bf0181f9f00446feccabbdbe927b31610474",
+        "finalFixture.c": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9",
+        "stageFixture.c": "c66a1e750ca578664a6783d6f9673d146a9ec28d1be4c9424d4514ca7434da32",
+        "handoffTest.ml": "5bf56d4c6a7fc4ba82e4c5d9041cf0dfce3c8b2d94d8f8f60d556ab7315ce86c",
+        "semantic-handoff-test": "49a0b8c04597e72872bb750dd7f4b47a9f20e322173f8e617a3dfccc81e29697",
+        "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "test.log": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+      }
+    }
+  ]
+}

@@ -162,6 +162,7 @@ copy.cmo : \
     ubase/umarshal.cmi \
     transfer.cmi \
     ubase/trace.cmi \
+    targetBinding.cmi \
     stagePublication.cmi \
     semanticSync.cmi \
     semanticRemote.cmi \
@@ -179,6 +180,7 @@ copy.cmo : \
     fs.cmi \
     fpcache.cmi \
     fingerprint.cmi \
+    finalPublication.cmi \
     fileinfo.cmi \
     external.cmi \
     copyRange.cmi \
@@ -197,6 +199,7 @@ copy.cmx : \
     ubase/umarshal.cmx \
     transfer.cmx \
     ubase/trace.cmx \
+    targetBinding.cmx \
     stagePublication.cmx \
     semanticSync.cmx \
     semanticRemote.cmx \
@@ -214,6 +217,7 @@ copy.cmx : \
     fs.cmx \
     fpcache.cmx \
     fingerprint.cmx \
+    finalPublication.cmx \
     fileinfo.cmx \
     external.cmx \
     copyRange.cmx \
@@ -226,6 +230,7 @@ copy.cmx : \
     copy.cmi
 copy.cmi : \
     uutil.cmi \
+    targetBinding.cmi \
     props.cmi \
     path.cmi \
     osx.cmi \
@@ -332,6 +337,7 @@ files.cmo : \
     update.cmi \
     ubase/umarshal.cmi \
     ubase/trace.cmi \
+    targetBinding.cmi \
     system.cmi \
     stasher.cmi \
     ubase/safelist.cmi \
@@ -350,6 +356,7 @@ files.cmo : \
     fspath.cmi \
     fs.cmi \
     fingerprint.cmi \
+    finalPublication.cmi \
     fileinfo.cmi \
     external.cmi \
     copy.cmi \
@@ -364,6 +371,7 @@ files.cmx : \
     update.cmx \
     ubase/umarshal.cmx \
     ubase/trace.cmx \
+    targetBinding.cmx \
     system.cmx \
     stasher.cmx \
     ubase/safelist.cmx \
@@ -382,6 +390,7 @@ files.cmx : \
     fspath.cmx \
     fs.cmx \
     fingerprint.cmx \
+    finalPublication.cmx \
     fileinfo.cmx \
     external.cmx \
     copy.cmx \
@@ -401,6 +410,11 @@ fileutil.cmo : \
 fileutil.cmx : \
     fileutil.cmi
 fileutil.cmi :
+finalPublication.cmo : \
+    finalPublication.cmi
+finalPublication.cmx : \
+    finalPublication.cmi
+finalPublication.cmi :
 fingerprint.cmo : \
     uutil.cmi \
     ubase/util.cmi \
@@ -1140,6 +1154,7 @@ semanticRemote.cmo : \
     ubase/util.cmi \
     ubase/umarshal.cmi \
     ubase/trace.cmi \
+    stagePublication.cmi \
     semanticWorkers.cmi \
     semanticRuntime.cmi \
     semanticReport.cmi \
@@ -1161,6 +1176,7 @@ semanticRemote.cmx : \
     ubase/util.cmx \
     ubase/umarshal.cmx \
     ubase/trace.cmx \
+    stagePublication.cmx \
     semanticWorkers.cmx \
     semanticRuntime.cmx \
     semanticReport.cmx \
@@ -1234,6 +1250,7 @@ semanticRuntime.cmi : \
 semanticSync.cmo : \
     ubase/util.cmi \
     ubase/trace.cmi \
+    stagePublication.cmi \
     semanticWorkers.cmi \
     semanticRuntime.cmi \
     semanticFormats.cmi \
@@ -1250,6 +1267,7 @@ semanticSync.cmo : \
 semanticSync.cmx : \
     ubase/util.cmx \
     ubase/trace.cmx \
+    stagePublication.cmx \
     semanticWorkers.cmx \
     semanticRuntime.cmx \
     semanticFormats.cmx \
@@ -1400,6 +1418,43 @@ system/win/system_impl.cmo : \
     system/system_win.cmo
 system/win/system_impl.cmx : \
     system/system_win.cmx
+targetBinding.cmo : \
+    ubase/util.cmi \
+    remote.cmi \
+    ubase/prefs.cmi \
+    path.cmi \
+    osx.cmi \
+    os.cmi \
+    name.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi \
+    finalPublication.cmi \
+    fileinfo.cmi \
+    features.cmi \
+    case.cmi \
+    targetBinding.cmi
+targetBinding.cmx : \
+    ubase/util.cmx \
+    remote.cmx \
+    ubase/prefs.cmx \
+    path.cmx \
+    osx.cmx \
+    os.cmx \
+    name.cmx \
+    lwt/lwt.cmx \
+    fspath.cmx \
+    finalPublication.cmx \
+    fileinfo.cmx \
+    features.cmx \
+    case.cmx \
+    targetBinding.cmi
+targetBinding.cmi : \
+    remote.cmi \
+    path.cmi \
+    os.cmi \
+    lwt/lwt.cmi \
+    fspath.cmi \
+    finalPublication.cmi
 terminal.cmo : \
     ubase/util.cmi \
     system.cmi \

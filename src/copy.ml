@@ -214,9 +214,76 @@ let mtransferStatus = Umarshal.(sum3
    that we can check in checkForChangesToSource when we've
    calculated the current source fingerprint.
  *)
-let paranoidCheck fspathTo pathTo realPathTo desc fp ress =
+type producer = {
+  binding : TargetBinding.t;
+  mutable adopted : bool;
+  mutable frozen : bool;
+  mutable legacy : bool;
+}
+
+let checkProducer = function
+  | None -> ()
+  | Some producer when producer.legacy -> ()
+  | Some producer ->
+      TargetBinding.recheck_resolution producer.binding;
+      if producer.adopted then
+        let context = TargetBinding.native producer.binding in
+        if producer.frozen then FinalPublication.check_candidate context
+        else FinalPublication.check_producer context
+
+let adoptProducer producer descriptor =
+  match producer with
+  | None -> ()
+  | Some producer when producer.legacy -> ()
+  | Some producer ->
+      checkProducer (Some producer);
+      let context = TargetBinding.native producer.binding in
+      if producer.adopted then
+        FinalPublication.check_producer_fd context ~candidate:descriptor
+      else begin
+        FinalPublication.adopt_mutable context ~candidate:descriptor;
+        producer.adopted <- true
+      end;
+      checkProducer (Some producer)
+
+let handoffProducer producer =
+  match producer with
+  | None -> ()
+  | Some producer when producer.legacy -> ()
+  | Some producer ->
+      checkProducer (Some producer);
+      TargetBinding.legacy_handoff producer.binding;
+      producer.legacy <- true
+
+let freezeProducer producer =
+  match producer with
+  | None -> ()
+  | Some producer when producer.legacy -> ()
+  | Some producer ->
+      checkProducer (Some producer);
+      if not producer.adopted then
+        raise (Util.Transient "Receiving producer did not retain its output file");
+      let context = TargetBinding.native producer.binding in
+      if not (FinalPublication.auxiliary_absent context) then
+        (* Planned resource finalization can create an AppleDouble family.
+           That family keeps its existing complete rename behavior. *)
+        handoffProducer (Some producer)
+      else begin
+        FinalPublication.freeze_producer context;
+        producer.frozen <- true;
+        checkProducer (Some producer)
+      end
+
+let paranoidCheck ?producer fspathTo pathTo realPathTo desc fp ress =
+  freezeProducer producer;
+  checkProducer producer;
   let info = Fileinfo.getBasic false fspathTo pathTo in
   let fp' = Os.fingerprint fspathTo pathTo info.Fileinfo.typ in
+  checkProducer producer;
+  (match producer with
+   | Some producer when not producer.legacy ->
+       TargetBinding.record_fingerprint producer.binding fp'
+   | _ -> ());
   if Os.isPseudoFingerprint fp then begin
     Lwt.return (TransferNeedsDoubleCheckAgainstCurrentSource (info,fp'))
   end else if fp' <> fp then begin
@@ -339,6 +406,47 @@ let openFileOut fspath path kind len =
 let closeFileOut = outFdResource.release
 
 let closeFileOutNoErr = outFdResource.release_noerr
+
+let openProducerOutput producer fspath path kind len =
+  match producer with
+  | None | Some { legacy = true; _ } -> openFileOut fspath path kind len
+  | Some state ->
+      checkProducer producer;
+      let output = match kind with
+        | `RESS -> openFileOut fspath path kind len
+        | `DATA | `DATA_APPEND _ ->
+            let perm = if Prefs.read Props.dontChmod then Props.perms Props.fileDefault else 0o600 in
+            let flags = [Unix.O_WRONLY; Unix.O_CLOEXEC; Unix.O_NONBLOCK] in
+            let flags = match kind with
+              | `DATA -> Unix.O_CREAT :: Unix.O_EXCL :: flags
+              | _ -> flags in
+            let descriptor = Fs.openfile (Fspath.concat fspath path) flags perm in
+            let output =
+              try
+                adoptProducer producer descriptor;
+                Unix.out_channel_of_descr descriptor
+              with error -> (try Unix.close descriptor with _ -> ()); raise error in
+            (try outFdResource.register output with error ->
+               close_out_noerr output; raise error) in
+      try
+        (match kind with
+         | `RESS ->
+             checkProducer producer;
+             if not (FinalPublication.auxiliary_absent (TargetBinding.native state.binding)) then
+               handoffProducer producer
+             else adoptProducer producer (Unix.descr_of_out_channel output)
+         | `DATA -> ()
+         | `DATA_APPEND offset ->
+             if not (Prefs.read Props.dontChmod) then
+               Unix.fchmod (Unix.descr_of_out_channel output) 0o600;
+             if offset = Uutil.Filesize.zero then
+               Unix.LargeFile.ftruncate (Unix.descr_of_out_channel output) 0L;
+             LargeFile.seek_out output (Uutil.Filesize.toInt64 offset));
+        checkProducer producer;
+        output
+      with error ->
+        (try closeFileOutNoErr output with _ -> close_out_noerr output);
+        raise error
 
 (* Before channels are handed to the normal lifecycle, allocation/registration
    failures must still settle both native clone descriptors. Error cleanup may
@@ -598,10 +706,51 @@ let copyFile inCh outCh kind len fallback notify =
     | `DATA_APPEND offs -> tryCopyFileRange src dst offs len fallback notify
     | `RESS -> fallback ()
 
-let copyByPath fspathFrom pathFrom fspathTo pathTo =
-  receiverCloneEnabled () && Fs.clone_path
-    (Fspath.concat fspathFrom pathFrom)
-    (Fspath.concat fspathTo pathTo)
+let copyBoundClone producer basisPath directory candidate suffix write =
+  checkProducer producer;
+  let stage = Os.tempPath ~fresh:true directory
+    (Path.addSuffixToFinalName candidate suffix) in
+  match prepareClonePublication directory stage candidate with
+  | None -> false
+  | Some prepared ->
+      let publication = registerClonePublication prepared in
+      try
+        match Fs.clone_stage_handles basisPath (Fspath.concat directory stage) with
+        | Fs.Declined_stage_handles Fs.Non_regular_source ->
+            raise (Util.Transient "Clone producer basis is no longer a regular file")
+        | Fs.Declined_stage_handles _ ->
+            closeClonePublicationNoErr publication; false
+        | Fs.Shared_stage_handles (basisFd, outputFd, parent) ->
+            (try StagePublication.adopt publication ~parent ~stage:outputFd
+             with error ->
+               closeCloneFdNoErr basisFd; closeCloneFdNoErr outputFd; raise error);
+            (* cloneChannels consumes both descriptors even on a failed
+               handoff. From here cleanup uses channel objects, never their
+               recycled original descriptor integers. *)
+            let basis, output = cloneChannels basisFd outputFd in
+            (try
+               write basis output;
+               flush output;
+               StagePublication.publish publication;
+               adoptProducer producer outputFd;
+               StagePublication.disarm publication;
+               closeFileIn basis; closeFileOut output;
+               closeClonePublicationNoErr publication;
+               true
+             with error ->
+               closeClonePublicationNoErr publication;
+               closeCloneInputNoErr basis; closeCloneOutputNoErr output;
+               raise error)
+      with error -> closeClonePublicationNoErr publication; raise error
+
+let copyByPath ?producer fspathFrom pathFrom fspathTo pathTo =
+  if not (receiverCloneEnabled ()) then false else
+  match producer with
+  | None | Some { legacy = true; _ } ->
+      Fs.clone_path (Fspath.concat fspathFrom pathFrom) (Fspath.concat fspathTo pathTo)
+  | Some _ ->
+      copyBoundClone producer (Fspath.concat fspathFrom pathFrom)
+        fspathTo pathTo "-source-clone" (fun _ _ -> ())
 
 (* The fds opened in this function normally shouldn't be tracked for extra
    cleanup at connection close because this is sequential non-Lwt code. Yet,
@@ -609,16 +758,16 @@ let copyByPath fspathFrom pathFrom fspathTo pathTo =
    code. For this reason only, it is better to include the fds in this
    function in the fd cleanup scheme (done automatically by [openFile*] and
    [closeFile*] functions). *)
-let copyContents fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
+let copyContents ?producer fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
   let use_id f = match ido with Some id -> f id | None -> () in
-  if fileKind = `DATA && copyByPath fspathFrom pathFrom fspathTo pathTo then
+  if fileKind = `DATA && copyByPath ?producer fspathFrom pathFrom fspathTo pathTo then
     use_id (fun id -> Uutil.showProgress id fileLength "l")
   else
   (* Open fds only if copying by path did not work *)
   let inFd = openFileIn fspathFrom pathFrom fileKind in
   protect
     (fun () ->
-       let outFd = openFileOut fspathTo pathTo fileKind fileLength in
+       let outFd = openProducerOutput producer fspathTo pathTo fileKind fileLength in
        protect
          (fun () ->
             let showProgress l =
@@ -630,6 +779,8 @@ let copyContents fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
             let fallback () = Uutil.readWriteBounded inFd outFd fileLength
               (fun l -> showProgress (Uutil.Filesize.ofInt l)) in
             copyFile inFd outFd fileKind fileLength fallback showProgress;
+            flush outFd;
+            checkProducer producer;
             closeFileIn inFd;
             closeFileOut outFd;
 (* ignore (Sys.command ("ls -l " ^ (Fspath.toString (Fspath.concat fspathTo pathTo)))) *)
@@ -640,7 +791,7 @@ let copyContents fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
 (* A bounded local producer for cross-volume updates. Unlike remote rsync this
    must read both streams, but avoids rewriting identical inherited intervals.
    Snapshot reads stay separate from writes even when the source is shifted. *)
-let copyLocalCloned source basisPath fspathTo pathTo fileLength ido =
+let copyLocalClonedLegacy source basisPath fspathTo pathTo fileLength ido =
   let clonedPath = Os.tempPath ~fresh:false fspathTo
     (Path.addSuffixToFinalName pathTo "-local-clone") in
   removeOldTempFile fspathTo clonedPath;
@@ -700,7 +851,42 @@ let copyLocalCloned source basisPath fspathTo pathTo fileLength ido =
         unlinkCloneNoErr cloneFullPath;
         raise e
 
-let localFileContents ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido =
+let copyLocalCloned ?producer source basisPath fspathTo pathTo fileLength ido =
+  match producer with
+  | None | Some { legacy = true; _ } ->
+      copyLocalClonedLegacy source basisPath fspathTo pathTo fileLength ido
+  | Some _ ->
+      let copied = copyBoundClone producer basisPath fspathTo pathTo "-local-clone"
+        (fun basis output ->
+          let input = openFileIn (Fspath.canonize (Some (Fspath.toString source))) Path.empty `DATA in
+          protect (fun () ->
+            let incoming = Bytes.create 131072 and previous = Bytes.create 131072 in
+            let read channel buffer length =
+              let rec loop offset = if offset = length then offset else
+                let count = Stdlib.input channel buffer offset (length - offset) in
+                if count = 0 then offset else loop (offset + count) in loop 0 in
+            let remaining = ref (Uutil.Filesize.toInt64 fileLength) in
+            while !remaining > 0L do
+              Abort.checkAll ();
+              let count = Int64.to_int (min !remaining 131072L) in
+              if read input incoming count <> count then raise End_of_file;
+              if read basis previous count = count &&
+                 Bytes.sub incoming 0 count = Bytes.sub previous 0 count then
+                LargeFile.seek_out output (Int64.add (LargeFile.pos_out output) (Int64.of_int count))
+              else Stdlib.output output incoming 0 count;
+              remaining := Int64.sub !remaining (Int64.of_int count);
+              (match ido with None -> () | Some id ->
+                Uutil.showProgress id (Uutil.Filesize.ofInt count) "l")
+            done;
+            flush output;
+            Unix.LargeFile.ftruncate (Unix.descr_of_out_channel output) (Uutil.Filesize.toInt64 fileLength);
+            closeFileIn input)
+            (fun () -> closeFileInNoErr input)) in
+      if not copied && Prefs.read clonePolicy = "require" then
+        raise (Util.Transient "Receiver filesystem cannot create a bound clone producer");
+      copied
+
+let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido =
   Util.convertUnixErrorsToTransient
     "copying locally"
     (fun () ->
@@ -708,62 +894,78 @@ let localFileContents ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength
         Util.msg "Copy.localFile %s / %s to %s / %s\n"
           (Fspath.toDebugString fspathFrom) (Path.toString pathFrom)
           (Fspath.toDebugString fspathTo) (Path.toString pathTo));
+      checkProducer producer;
       removeOldTempFile fspathTo pathTo;
+      checkProducer producer;
       let cloned = match basis with
         | Some previous when receiverCloneEnabled () ->
             (* Prefer cloning the actual source when it is on this volume. *)
-            let completed = copyByPath fspathFrom pathFrom fspathTo pathTo in
+            let completed = copyByPath ?producer fspathFrom pathFrom fspathTo pathTo in
             if completed then begin
               (match ido with None -> () | Some id ->
                 Uutil.showProgress id (Props.length desc) "l");
               true
             end else if Prefs.read Props.dontChmod then false else
-              copyLocalCloned (Fspath.concat fspathFrom pathFrom)
+              copyLocalCloned ?producer (Fspath.concat fspathFrom pathFrom)
                 (Fspath.concat fspathTo previous) fspathTo pathTo (Props.length desc) ido
         | _ -> false in
-      if not cloned then copyContents
+      if not cloned then copyContents ?producer
         fspathFrom pathFrom fspathTo pathTo `DATA (Props.length desc) ido;
       if ressLength > Uutil.Filesize.zero then
-        copyContents
+        copyContents ?producer
           fspathFrom pathFrom fspathTo pathTo `RESS ressLength ido)
 
-let localFile
+let localFileWithProducer ?producer
      fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido =
   Util.convertUnixErrorsToTransient "copying locally" (fun () ->
     let basis = match update with `Copy -> None | `Update _ -> Some realPathTo in
-    localFileContents ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido;
+    localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido;
+    checkProducer producer;
     let (_, desc) = propsWithExtDataLocal fspathFrom (`Local pathFrom) desc in
-    setFileinfo fspathTo pathTo realPathTo update desc)
+    checkProducer producer;
+    setFileinfo fspathTo pathTo realPathTo update desc;
+    checkProducer producer)
+
+let localFile fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido =
+  localFileWithProducer fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido
 
 (* The main local-local path may suspend for typed semantic workers. Auxiliary
    localFile callers (recursive copies, moved-file reuse, merge work) retain
    the synchronous ordinary copier and never run semantic proofs on the owner. *)
-let localFileAsync
+let localFileAsync ?producer
      fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido =
   let ordinary () =
-    localFile fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido;
+    localFileWithProducer ?producer fspathFrom pathFrom fspathTo pathTo realPathTo update desc ressLength ido;
     Lwt.return () in
   match update with
   | `Update _ when receiverCloneEnabled () && not (Prefs.read Props.dontChmod) &&
                    SemanticSync.is_enabled () ->
     Util.convertUnixErrorsToTransient "copying locally" (fun () ->
+      checkProducer producer;
       removeOldTempFile fspathTo pathTo;
+      checkProducer producer;
       let copied =
-        if copyByPath fspathFrom pathFrom fspathTo pathTo then begin
+        if copyByPath ?producer fspathFrom pathFrom fspathTo pathTo then begin
           debug (fun () -> Util.msg "Local source clone completed before semantic planning\n");
           Lwt.return true
         end
-        else SemanticSync.try_local_async ~source:(Fspath.concat fspathFrom pathFrom)
-          ~basis:(Fspath.concat fspathTo realPathTo) ~directory:fspathTo ~staging:pathTo in
+        else let transfer = match producer with
+          | None | Some { legacy = true; _ } -> SemanticSync.try_local_async
+          | Some _ -> SemanticSync.try_local_async_with_producer ~producer:(adoptProducer producer) in
+          transfer ~source:(Fspath.concat fspathFrom pathFrom)
+            ~basis:(Fspath.concat fspathTo realPathTo) ~directory:fspathTo ~staging:pathTo in
       copied >>= fun copied ->
       if not copied then ordinary () else
       Util.convertUnixErrorsToTransient "finishing local copy" (fun () ->
         (match ido with None -> () | Some id ->
           Uutil.showProgress id (Props.length desc) "l");
         if ressLength > Uutil.Filesize.zero then
-          copyContents fspathFrom pathFrom fspathTo pathTo `RESS ressLength ido;
+          copyContents ?producer fspathFrom pathFrom fspathTo pathTo `RESS ressLength ido;
+        checkProducer producer;
         let (_, desc) = propsWithExtDataLocal fspathFrom (`Local pathFrom) desc in
+        checkProducer producer;
         setFileinfo fspathTo pathTo realPathTo update desc;
+        checkProducer producer;
         Lwt.return ()))
   | _ -> ordinary ()
 
@@ -833,6 +1035,41 @@ let tryCopyMovedFile connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
                 (Path.toString candidatePath) s);
             Xferhint.deleteEntry hintHandle;
             Lwt.return None)
+
+(* Qualify a reuse hint before creating the bound output. A stale hint can be
+   skipped then; after actual production starts, failures must retain their
+   identity error rather than retry against a different candidate object. *)
+let tryCopyMovedFileBound producer connFrom fspathFrom pathFrom fspathTo pathTo
+      realPathTo update desc fp ress id =
+  if not (Prefs.read Xferhint.xferbycopying) then Lwt.return None else
+  match Xferhint.lookup fp with
+  | None -> Lwt.return None
+  | Some (candidateFspath, candidatePath, hintHandle) ->
+      let qualified =
+        try
+          let info = Fileinfo.getBasic true candidateFspath candidatePath in
+          info.Fileinfo.typ = `FILE &&
+          Props.length info.Fileinfo.desc = Props.length desc &&
+          Os.fingerprint candidateFspath candidatePath info.Fileinfo.typ = fp
+        with Util.Transient _ | Unix.Unix_error _ -> false in
+      if not qualified then begin
+        Xferhint.deleteEntry hintHandle;
+        Lwt.return None
+      end else begin
+        checkProducer producer;
+        localFileContents ?producer candidateFspath candidatePath fspathTo pathTo
+          desc (Osx.ressLength ress) (Some id);
+        propsWithExtData connFrom fspathFrom pathFrom desc >>= fun desc ->
+        checkProducer producer;
+        setFileinfo fspathTo pathTo realPathTo update desc;
+        checkProducer producer;
+        paranoidCheck ?producer fspathTo pathTo realPathTo desc fp ress
+          >>= fun status ->
+        let msg = Printf.sprintf "Shortcut: copied %s/%s from local file %s/%s\n"
+          (Fspath.toPrintString fspathTo) (Path.toString realPathTo)
+          (Fspath.toPrintString candidateFspath) (Path.toString candidatePath) in
+        Lwt.return (Some (status, msg))
+      end
 
 (****)
 
@@ -961,13 +1198,13 @@ let close_all_no_error infd outfd =
   end
 
 (* Lazy creation of the destination file *)
-let destinationFd fspath path kind len outfd id =
+let destinationFd ?producer fspath path kind len outfd id =
   match !outfd with
     None    ->
       (* We abort the file transfer on error if it has not
          already started *)
       if kind <> `RESS then Abort.check id;
-      let fd = openFileOut fspath path kind len in
+      let fd = openProducerOutput producer fspath path kind len in
       showPrefixProgress id kind;
       outfd := Some fd;
       fd
@@ -1010,7 +1247,7 @@ let rsyncThrottle useRsync srcFileSize destFileSize f =
   let l = Transfer.Rsync.memoryFootprint srcFileSize destFileSize in
   Lwt_util.run_in_region !rsyncReg l f
 
-let transferFileContents
+let transferFileContents ?producer
       connFrom fspathFrom pathFrom fspathTo pathTo realPathTo update
       fileKind srcFileSize id =
   (* We delay the opening of the files so that there are not too many
@@ -1148,8 +1385,9 @@ let transferFileContents
               fun ti ->
               let ifd = referenceFd fspathTo realPathTo fileKind infd in
               let fd =
-                destinationFd
+                destinationFd ?producer
                   fspathTo pathTo fileKind srcFileSize outfd id in
+              checkProducer producer;
               (match !clonedLease with Some lease -> checkCloneLease lease | None -> ());
               let eof =
                 Transfer.Rsync.rsyncDecompress blockSize ifd fd showProgress ti
@@ -1188,6 +1426,7 @@ let transferFileContents
                       | Some publication -> publication
                       | None -> raise (Util.Transient "Clone publication ownership is unavailable") in
                     StagePublication.publish publication;
+                    adoptProducer producer (Unix.descr_of_out_channel fd);
                     StagePublication.disarm publication;
                     releaseLease ();
                     releasePublication ();
@@ -1202,8 +1441,10 @@ let transferFileContents
          (* Simple generic decompressor *)
          fun ti ->
          let fd =
-           destinationFd fspathTo pathTo fileKind srcFileSize outfd id in
+           destinationFd ?producer fspathTo pathTo fileKind srcFileSize outfd id in
+         checkProducer producer;
          let eof = Transfer.receive fd showProgress ti in
+         checkProducer producer;
          if eof then close_all infd outfd)
     in
     let file_id = Remote.newMsgId () in
@@ -1228,7 +1469,7 @@ let transferFileContents
 
 (****)
 
-let transferResourceForkAndSetFileinfo
+let transferResourceForkAndSetFileinfo ?producer
       connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
       update desc fp ress id =
   (* Resource fork *)
@@ -1238,28 +1479,36 @@ let transferResourceForkAndSetFileinfo
   begin if ressLength > Uutil.Filesize.zero then begin
     debug (fun() -> Util.msg "starting resource fork transfer for %s\n"
       (Path.toString pathTo));
-    transferFileContents
+    transferFileContents ?producer
       connFrom fspathFrom pathFrom fspathTo pathTo realPathTo update
       `RESS ressLength id
   end else
     Lwt.return ()
   end >>= fun () ->
+  checkProducer producer;
   propsWithExtData connFrom fspathFrom pathFrom desc >>= fun desc ->
+  checkProducer producer;
   setFileinfo fspathTo pathTo realPathTo update desc;
+  checkProducer producer;
   debug (fun() -> Util.msg "Resource fork transferred for %s; doing last paranoid check\n"
     (Path.toString realPathTo));
-  paranoidCheck fspathTo pathTo realPathTo desc fp ress
+  paranoidCheck ?producer fspathTo pathTo realPathTo desc fp ress
 
-let reallyTransferFile
+let reallyTransferFile ?producer
       connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
       update desc fp ress id tempInfo =
   debug (fun() -> Util.msg "reallyTransferFile(%s,%s) -> (%s,%s,%s,%s)\n"
       (Fspath.toDebugString fspathFrom) (Path.toString pathFrom)
       (Fspath.toDebugString fspathTo) (Path.toString pathTo)
       (Path.toString realPathTo) (Props.toString desc));
+  checkProducer producer;
+  let retained = match producer with Some p -> p.adopted && not p.legacy | None -> false in
   let semantic = match update with
-    | `Update _ when receiverCloneEnabled () && not (Prefs.read Props.dontChmod) ->
-        SemanticRemote.try_transfer ~connection:connFrom
+    | `Update _ when not retained && receiverCloneEnabled () && not (Prefs.read Props.dontChmod) ->
+        let transfer = match producer with
+          | None | Some { legacy = true; _ } -> SemanticRemote.try_transfer
+          | Some _ -> SemanticRemote.try_transfer_with_producer ~producer:(adoptProducer producer) in
+        transfer ~connection:connFrom
           ~source:(Fspath.concat fspathFrom pathFrom)
           ~basis:(Fspath.concat fspathTo realPathTo) ~directory:fspathTo ~staging:pathTo
           ~expected_size:(Uutil.Filesize.toInt64 (Props.length desc))
@@ -1271,9 +1520,11 @@ let reallyTransferFile
   end else
   validFilePrefix connFrom fspathFrom pathFrom fspathTo pathTo tempInfo desc
     >>= fun prefixLen ->
+  checkProducer producer;
   begin match prefixLen with
-    None ->
+    None when not retained ->
       removeOldTempFile fspathTo pathTo
+  | None -> ()
   | Some len ->
       debug
         (fun() ->
@@ -1281,11 +1532,13 @@ let reallyTransferFile
              (Uutil.Filesize.toString len) (Path.toString pathFrom))
   end;
   (* Data fork *)
-  transferFileContents
+  transferFileContents ?producer
     connFrom fspathFrom pathFrom fspathTo pathTo realPathTo update
-    (match prefixLen with None -> `DATA | Some l -> `DATA_APPEND l)
+    (match prefixLen with
+     | None when retained -> `DATA_APPEND Uutil.Filesize.zero
+     | None -> `DATA | Some l -> `DATA_APPEND l)
     (Props.length desc) id) >>= fun () ->
-  transferResourceForkAndSetFileinfo
+  transferResourceForkAndSetFileinfo ?producer
     connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
     update desc fp ress id
 
@@ -1507,11 +1760,23 @@ let transferFileUsingExternalCopyprog
 
 (****)
 
-let transferFileLocal connFrom
+let transferFileLocalWithProducer ?producer connFrom
       ((fspathFrom, pathFrom, fspathTo, pathTo, realPathTo),
        (update, desc, fp, ress, id)) =
+  checkProducer producer;
+  (match producer with
+   | Some state when not state.legacy ->
+       let info = Fileinfo.getBasic false fspathTo pathTo in
+       if info.Fileinfo.typ = `FILE then begin
+         FinalPublication.adopt_resume (TargetBinding.native state.binding);
+         state.adopted <- true;
+         checkProducer producer
+       end else if info.Fileinfo.typ <> `ABSENT then
+         handoffProducer producer
+   | _ -> ());
   let (tempInfo, isTransferred) =
     fileIsTransferred fspathTo pathTo desc fp ress in
+  checkProducer producer;
   if isTransferred then begin
     (* File is already fully transferred (from some interrupted
        previous transfer).  So just make sure permissions are right. *)
@@ -1522,29 +1787,48 @@ let transferFileLocal connFrom
     let len = Uutil.Filesize.add (Props.length desc) (Osx.ressLength ress) in
     Uutil.showProgress id len "alr";
     propsWithExtData connFrom fspathFrom pathFrom desc >>= fun desc ->
+    checkProducer producer;
     setFileinfo fspathTo pathTo realPathTo update desc;
+    checkProducer producer;
+    let status = match producer with
+      | None | Some { legacy = true; _ } -> Lwt.return (TransferSucceeded tempInfo)
+      | Some _ -> paranoidCheck ?producer fspathTo pathTo realPathTo desc fp ress in
+    status >>= fun status ->
     Xferhint.insertEntry fspathTo pathTo fp;
-    Lwt.return (`DONE (TransferSucceeded tempInfo, Some msg))
+    Lwt.return (`DONE (status, Some msg))
   end else
     registerFileTransfer pathTo fp
       (fun () ->
-         tryCopyMovedFile connFrom fspathFrom pathFrom
-           fspathTo pathTo realPathTo update desc fp ress id >>= function
-         | Some (info, msg) ->
+         checkProducer producer;
+         let reuse = match producer with
+           | Some state when state.adopted && not state.legacy -> Lwt.return None
+           | Some { legacy = false; _ } ->
+               tryCopyMovedFileBound producer connFrom fspathFrom pathFrom
+                 fspathTo pathTo realPathTo update desc fp ress id
+           | _ -> tryCopyMovedFile connFrom fspathFrom pathFrom
+               fspathTo pathTo realPathTo update desc fp ress id
+               >>= fun result -> Lwt.return (match result with
+                 | None -> None | Some (info, msg) -> Some (TransferSucceeded info, msg)) in
+         reuse >>= function
+         | Some (status, msg) ->
              (* Transfer was performed by copying *)
              Xferhint.insertEntry fspathTo pathTo fp;
-             Lwt.return (`DONE (TransferSucceeded info, Some msg))
+             Lwt.return (`DONE (status, Some msg))
          | None ->
              debug (fun() -> Util.msg "tryCopyMovedFile didn't work, so now we actually transfer\n");
-             if shouldUseExternalCopyprog update desc then
+             if shouldUseExternalCopyprog update desc then begin
+               handoffProducer producer;
                Lwt.return (`EXTERNAL (prepareExternalTransfer fspathTo pathTo))
+             end
              else begin
-               reallyTransferFile
+               reallyTransferFile ?producer
                  connFrom fspathFrom pathFrom fspathTo pathTo realPathTo
                  update desc fp ress id tempInfo >>= fun status ->
                Xferhint.insertEntry fspathTo pathTo fp;
                Lwt.return (`DONE (status, None))
              end)
+
+let transferFileLocal connFrom args = transferFileLocalWithProducer connFrom args
 
 let mtransferFile = Umarshal.(sum2 (prod2 mtransferStatus (option string) id id) bool
                                 (function
@@ -1557,6 +1841,37 @@ let mtransferFile = Umarshal.(sum2 (prod2 mtransferStatus (option string) id id)
 let transferFileOnRoot =
   Remote.registerRootCmdWithConnection "transferFile"
     mfinishExternalTransfer mtransferFile transferFileLocal
+
+let withProducer connection root localPath workingDir candidate target token f =
+  Lwt.catch
+    (fun () -> TargetBinding.with_producer ?connection ~token ~logical_root:root
+      ~local_path:localPath ~working_dir:workingDir ~candidate ~target
+      (fun binding ->
+        let producer = { binding; adopted = false; frozen = false; legacy = false } in
+        checkProducer (Some producer);
+        if not (FinalPublication.auxiliary_absent (TargetBinding.native binding)) ||
+           Fileinfo.getType false workingDir target = `DIRECTORY then
+          handoffProducer (Some producer);
+        f producer))
+    (function
+      | Unix.Unix_error (error, phase, path) ->
+          Lwt.fail (Util.Transient (Printf.sprintf
+            "Receiving producer (%s, %s): %s" phase path (Unix.error_message error)))
+      | error -> Lwt.fail error)
+
+(* A distinct command carries the bounded token. The original transferFile
+   schema stays unchanged for older peers and legacy materializers. *)
+let transferBoundLocal connection connFrom
+      (root, localPath, token, (((_, _, workingDir, candidate, target), _) as args)) =
+  withProducer connection root localPath workingDir candidate target token
+    (fun producer -> transferFileLocalWithProducer ~producer connFrom args)
+    >>= fun (result, completion) ->
+  Lwt.return (result, completion = TargetBinding.Guarded_producer)
+
+let transferBoundOnHost = Remote.registerServerCmd "transferFileBoundV0"
+  Umarshal.(prod4 Fspath.m Path.mlocal (bounded_string 64) mfinishExternalTransfer id id)
+  Umarshal.(prod2 mtransferFile bool id id)
+  (fun connection args -> transferBoundLocal (Some connection) connection args)
 
 (* We limit the size of the output buffers to about 512 KB
    (we cannot go above the limit below plus 64) *)
@@ -1608,10 +1923,56 @@ let transferFile
     let bufSz = bufferSize (max (Props.length desc) (Osx.ressLength ress)) in
     Lwt_util.run_in_region !transferFileReg bufSz f
 
+let transferFileBound ~token ~local_path
+      rootFrom pathFrom rootTo fspathTo pathTo realPathTo update desc fp ress id =
+  let f () =
+    Abort.check id;
+    let args = (snd rootTo, local_path, token,
+      ((snd rootFrom, pathFrom, fspathTo, pathTo, realPathTo),
+       (update, desc, fp, ress, id))) in
+    let request = match fst rootTo with
+      | Common.Local -> transferBoundLocal None (Remote.connectionOfRoot rootFrom) args
+      | Common.Remote _ -> transferBoundOnHost (Remote.connectionOfRoot rootTo) args in
+    request >>= fun (result, guarded) ->
+    let completion = if guarded then TargetBinding.Guarded_producer else TargetBinding.Legacy_backend in
+    match result with
+    | `DONE (status, message) ->
+        (match message with
+         | None -> ()
+         | Some message ->
+             if fst rootTo <> Common.Local then
+               Uutil.showProgress id (Uutil.Filesize.add (Props.length desc) (Osx.ressLength ress)) "rem";
+             Trace.log message);
+        Lwt.return (status, completion)
+    | `EXTERNAL useExistingTarget ->
+        if guarded then
+          Lwt.fail (Util.Transient "External producer did not relinquish descriptor ownership")
+        else transferFileUsingExternalCopyprog
+          rootFrom pathFrom rootTo fspathTo pathTo realPathTo update desc fp ress id useExistingTarget
+          >>= fun status -> Lwt.return (status, completion) in
+  if Prefs.read Remote.streamingActivated then f () else
+  let bufSz = bufferSize (max (Props.length desc) (Osx.ressLength ress)) in
+  Lwt_util.run_in_region !transferFileReg bufSz f
+
 (****)
 
-let file rootFrom pathFrom rootTo fspathTo pathTo realPathTo
-         update desc fp stamp ress id =
+let finishFileTransfer ~guarded rootFrom pathFrom rootTo pathTo realPathTo desc fp stamp ress status =
+  match status with
+    TransferSucceeded info ->
+      checkForChangesToSource rootFrom pathFrom desc fp stamp ress None false
+        >>= fun () -> Lwt.return info
+  | TransferNeedsDoubleCheckAgainstCurrentSource (info, newfp) ->
+      checkForChangesToSource rootFrom pathFrom desc fp stamp ress (Some newfp) false
+        >>= fun () -> Lwt.return info
+  | TransferFailed reason ->
+      checkForChangesToSource rootFrom pathFrom desc fp stamp ress None true
+        >>= fun () ->
+      if guarded then
+        Lwt.fail (Util.Transient (Printf.sprintf "Receiving producer failed for %s: %s"
+          (Path.toString realPathTo) reason))
+      else saveTempFileOnRoot rootTo (pathTo, realPathTo, reason) >>= fun () -> assert false
+
+let file rootFrom pathFrom rootTo fspathTo pathTo realPathTo update desc fp stamp ress id =
   debug (fun() -> Util.msg "copyRegFile(%s,%s) -> (%s,%s,%s,%s,%s)\n"
       (Common.root2string rootFrom) (Path.toString pathFrom)
       (Common.root2string rootTo) (Path.toString realPathTo)
@@ -1630,30 +1991,25 @@ let file rootFrom pathFrom rootTo fspathTo pathTo realPathTo
         update desc fp ress id
   end >>= fun status ->
   Trace.showTimer timer;
-  match status with
-    TransferSucceeded info ->
-      checkForChangesToSource rootFrom pathFrom desc fp stamp ress None false
-        >>= fun () ->
-      Lwt.return info
-  | TransferNeedsDoubleCheckAgainstCurrentSource (info,newfp) ->
-      debug (fun() -> Util.msg
-               "Archive data for %s is a pseudo-fingerprint: double-checking...\n"
-               (Path.toString realPathTo));
+  finishFileTransfer ~guarded:false rootFrom pathFrom rootTo pathTo realPathTo desc fp stamp ress status
 
-      checkForChangesToSource rootFrom pathFrom
-                              desc fp stamp ress (Some newfp) false
-        >>= (fun () ->
-      Lwt.return info)
-  | TransferFailed reason ->
-      debug (fun() -> Util.msg "TRANSFER FAILED (%s) for %s (real path: %s)\n"
-        reason (Path.toString pathTo) (Path.toString realPathTo));
-      (* Maybe we failed because the source file was modified.
-         We check this before reporting a failure *)
-      checkForChangesToSource rootFrom pathFrom desc fp stamp ress None true
-        >>= fun () ->
-      (* This function never returns (it is supposed to fail) *)
-      saveTempFileOnRoot rootTo (pathTo, realPathTo, reason) >>= fun () ->
-      assert false
+let fileBound ~token ~local_path rootFrom pathFrom rootTo fspathTo pathTo realPathTo
+      update desc fp stamp ress id =
+  let timer = Trace.startTimer "Transmitting bound file" in
+  let transfer = match rootFrom, rootTo with
+    | (Common.Local, fspathFrom), (Common.Local, root) ->
+        withProducer None root local_path fspathTo pathTo realPathTo token
+          (fun producer ->
+            localFileAsync ~producer fspathFrom pathFrom fspathTo pathTo realPathTo
+              update desc (Osx.ressLength ress) (Some id) >>= fun () ->
+            paranoidCheck ~producer fspathTo pathTo realPathTo desc fp ress)
+    | _ -> transferFileBound ~token ~local_path rootFrom pathFrom rootTo
+        fspathTo pathTo realPathTo update desc fp ress id in
+  transfer >>= fun (status, completion) ->
+  Trace.showTimer timer;
+  finishFileTransfer ~guarded:(completion = TargetBinding.Guarded_producer)
+    rootFrom pathFrom rootTo pathTo realPathTo desc fp stamp ress status
+    >>= fun info -> Lwt.return (info, completion)
 
 (****)
 
