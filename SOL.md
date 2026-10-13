@@ -4,6 +4,44 @@
 
 ## Live implementation handoff
 
+* Extended DNG continuation (2026-10-13): separately negotiated
+  `org.firstpair.dng-xmp/1` / `dng-xmp-v1` adds BigTIFF and bounded embedded
+  CR camera-profile graphs in both byte orders. Each CR blob keeps its own
+  classic layout, endian and relative header base. Headers, tables and values
+  are protected against XMP aliasing; unsigned64, count/product/base arithmetic
+  is checked before conversion or reads. Camera tags/types have a discrete
+  baseline policy; modern/private graphs remain explicit fallback. The single
+  fixed out-of-line XMP packet and complete complement/target proofs remain.
+  v0 keeps its accepted subset and canonical goldens; malformed diagnostic
+  strings can differ after earlier relative-offset rejection. See
+  [dng-profile-v1.md](doc/dng-profile-v1.md).
+* v1 preference propagation preserves BOOL/STRING_LIST CLI types, local values
+  and legacy wire bytes. The client expands `semanticdng` into known IDs,
+  filters the final common capabilities, and explicitly sends the shorthand
+  bool as false to clear stale receiver state. Legacy incoming bool decoding
+  remains. Explicit v1-only selection falls back ordinarily at a v0-only peer;
+  the alias/mixed selection can use v0. The supported CLI has at most one
+  remote root; two-remote attempts are expected rejection controls, while
+  linked preference tests exercise intersection/reuse state separately.
+* v1 qualification: final Make stock `unison-build-zf3o8io7`, Ox
+  `unison-build-85enmyly`, and clean Dune `unison-dng-v1-clean-dune-kidej9gv`
+  pass builds/selftests with all 318 production/package/INSTALL inputs
+  matching workspace and four snapshots; generated Make dependencies match
+  separately. Both compilers pass 1,091 direct cases / 5,534 assertions and
+  three designated private regressions, including four real sparse >4 GiB
+  inspector/read cases (no large-file hash/transfer claim). Routing passes
+  21 actual sync scenarios, 162 preference checks and four mixed-compiler v1
+  receive updates per compiler; opaque/layout fallback and no-op inodes pass.
+  All 79 Files publication / 21 synthetic receiving-validation cases,
+  20 worker groups (18 v1 domains, 36 inspections and 18 exact applications),
+  14 CLI report cases and existing remote/minimum-budget/old-peer checks pass
+  both. Unchanged v0 conformance passes 127 commands / 2,033 assertions each.
+  Direct/routing/combined receipts and separate independent acceptance are
+  under `tests/dng_profile_v1/` and `tests/qualification/`. SDK sources were
+  read/pinned only. Representative DNG/camera/Adobe/Lightroom corpus, numerical
+  profile validity, modern profile graph support, storage/performance and
+  full resource limits remain open; no Photo or Adobe invocation occurred.
+
 * Retained-resource continuation (2026-10-13): production target setup now
   acquires a caller-owned Consumer reservation before native proof preparation.
   The registry retains it through Ready/Producing/Finalized/Committing, including
@@ -16,10 +54,10 @@
   least two transaction slots, 32 descriptor credits and its consumer/source
   buffer allowance (17 MiB fits). Ordinary proof admission stays independent
   of worker-pool initialization. Design: [resource-admission.md](doc/resource-admission.md).
-* Current resource qualification: Make stock `unison-build-yrkxtl7v` and Ox
+* Resource checkpoint qualification at `ebcfec6`: Make stock `unison-build-yrkxtl7v` and Ox
   `unison-build-h42l15o6`, plus clean Dune `unison-resource-clean-dune-d2fvgsa1`,
   pass builds/selftests with 316 production/package/INSTALL inputs matching
-  workspace and all four snapshots. Generated dependencies match both Make
+  the workspace at that freeze and all four snapshots. Generated dependencies match both Make
   outputs separately. Both compilers pass 26 admission groups / 16 finite-fault
   groups with four private negatives, 106 unchanged registry groups with two
   negatives, 20 early-FD groups / 110 assertions with three leak negatives,
@@ -843,7 +881,7 @@ True non-byte convergence (different full files declared synchronized) would req
 
 ### Growing XMP and layout-changing files
 
-Milestone 1 does not invent unused padding. Only bytes actually owned by a parsed, validated packet are writable. A later `dng-xmp/1` can allow changed count/offset cells, a grown packet in proved reusable space, or append-and-repoint, provided every changed structural field is explicitly accounted for and all unchanged bytes retain exact source layout. The target is still the source's exact byte sequence; do not append an equivalent packet in a different place and pretend it is the source.
+Milestone 1 does not invent unused padding. Only bytes actually owned by a parsed, validated packet are writable. A later, separately assigned profile version can allow changed count/offset cells, a grown packet in proved reusable space, or append-and-repoint, provided every changed structural field is explicitly accounted for and all unchanged bytes retain exact source layout. The target is still the source's exact byte sequence; do not append an equivalent packet in a different place and pretend it is the source.
 
 For arbitrary reserialization, raw payload may move and cheap clone patching may be impossible. Plan exact COPY/ADD ranges with an existing delta engine or use stock rsync. A semantic match can help locate reusable content, but every target byte still needs provenance and final verification. Bounds checks, alias analysis, opaque-byte preservation, and exact target tests gate each broader profile.
 

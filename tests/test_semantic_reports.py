@@ -74,7 +74,7 @@ def exercise(binary, peer, name, original, changed_left, changed_right,
             assert "ORDINARY_EXTERNAL_DIFF" in log, log
         else:
             assert log.count("Semantic observation of the current replicas' data forks") >= 2, log
-            assert "Profile: " + (profile or "org.firstpair.dng-xmp/0") in log, log
+            assert "Profile: " + (profile or "org.firstpair.dng-xmp/1") in log, log
             assert "without an archived base" in log, log
         if classification:
             assert classification in log, log

@@ -15,7 +15,7 @@ parser.add_argument("--skip-conformance", action="store_true",
                     help="run only the original kernel/inspection fixtures")
 args = parser.parse_args()
 root = pathlib.Path(__file__).resolve().parents[2]
-modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "semanticDelta"]
+modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "dngExtended", "semanticDelta"]
 with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
     build = pathlib.Path(tmp)
     for name in modules:
@@ -61,6 +61,26 @@ with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
             assert report["metadata_payload_bytes"] == 16 and report["patch_eligible"]
             assert report["target"]["sha256"] == hashlib.sha256(contents).hexdigest()
     print("Read-only inspection: exact/metadata/opaque/growth/unsupported reports passed.")
+    # An independent BigTIFF byte fixture exercises the explicit developer
+    # profile without changing its backward-compatible default v0 selection.
+    big_header = (b"II" + struct.pack("<HHHQ", 43, 8, 0, 16) + struct.pack("<Q", 2) +
+                  struct.pack("<HHQQ", 700, 1, 16, 72) +
+                  struct.pack("<HHQ", 50706, 1, 4) + b"\x01\x04\0\0\0\0\0\0" +
+                  struct.pack("<Q", 0))
+    big_original = big_header + b"metadata packet!" + b"opaque payload bytes"
+    before.write_bytes(big_original)
+    after.write_bytes(big_original.replace(b"packet!", b"PACKET!"))
+    for profile, classification in (("org.firstpair.dng-xmp/0", "unavailable"),
+                                    ("org.firstpair.dng-xmp/1", "editable_metadata")):
+        report = json.loads(subprocess.check_output(
+            [str(build / "semantic-inspect"), "--profile", profile,
+             "--base", str(before), str(after)]))
+        assert report["classification"] == classification, report
+        if classification == "editable_metadata":
+            assert report["target"]["profile"] == profile and report["metadata_payload_bytes"] == 16
+            assert report["target"]["sha256"] == hashlib.sha256(after.read_bytes()).hexdigest()
+        assert before.read_bytes() == big_original
+    print("Read-only inspection: explicit v1 BigTIFF and unchanged v0 fallback passed.")
 if not args.skip_conformance:
     import sys
     subprocess.run([sys.executable, str(root / "tests/semantic/conformance/run.py"),

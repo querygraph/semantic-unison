@@ -1,0 +1,674 @@
+{
+  "schema": "org.firstpair.unison.dng-profile-v1-routing-qualification/0",
+  "date": "2026-10-13",
+  "status": "runtime passed; outgoing production source independently accepted; final artifact audit pending",
+  "sources": {
+    "src/ubase/prefs.ml": {
+      "path": "/Users/alexy/src/unison/src/ubase/prefs.ml",
+      "sha256": "b8b6bf2dabd5e794a8ed9a0ddb428da45ff3e57207fdb67689ae02de334168ae"
+    },
+    "src/ubase/prefs.mli": {
+      "path": "/Users/alexy/src/unison/src/ubase/prefs.mli",
+      "sha256": "22b5480ab6220a1e31952b374de7814ee605d5db9deb65f095506d7757dc4bcf"
+    },
+    "src/semanticFormats.ml": {
+      "path": "/Users/alexy/src/unison/src/semanticFormats.ml",
+      "sha256": "65edabffd33be611d593e35d4fa6641940cfacaf26f870f4ec91696edacea78d"
+    },
+    "src/dngExtended.ml": {
+      "path": "/Users/alexy/src/unison/src/dngExtended.ml",
+      "sha256": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a"
+    },
+    "src/dngExtended.mli": {
+      "path": "/Users/alexy/src/unison/src/dngExtended.mli",
+      "sha256": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a"
+    },
+    "src/dngSemantic.ml": {
+      "path": "/Users/alexy/src/unison/src/dngSemantic.ml",
+      "sha256": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8"
+    },
+    "src/dngSemantic.mli": {
+      "path": "/Users/alexy/src/unison/src/dngSemantic.mli",
+      "sha256": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d"
+    },
+    "src/Makefile.OCaml": {
+      "path": "/Users/alexy/src/unison/src/Makefile.OCaml",
+      "sha256": "c19ea8a6f7f6e40696374124ed56ba05140a09780ab65280e92e0071b0d2961f"
+    },
+    "tests/dng_profile_v1_remote.py": {
+      "path": "/Users/alexy/src/unison/tests/dng_profile_v1_remote.py",
+      "sha256": "7528d275e3f8d315dfc36dbd96df959ae2fb1815f27cdcfc897eed110a5a7e47"
+    },
+    "tests/dng_profile_v1_preferences.ml": {
+      "path": "/Users/alexy/src/unison/tests/dng_profile_v1_preferences.ml",
+      "sha256": "2654620ff82dcf99461d3457772a2179a393bc34d32840fd80dc91d9820cba8a"
+    },
+    "tests/dng_profile_v1_remote.md": {
+      "path": "/Users/alexy/src/unison/tests/dng_profile_v1_remote.md",
+      "sha256": "78487f6ba7d5fd357501a439dac28b7b89a9db48227c3883ca2a237def1873aa"
+    },
+    "tests/test_positional_sync.py": {
+      "path": "/Users/alexy/src/unison/tests/test_positional_sync.py",
+      "sha256": "36f5bff06bad5d4819ffcd608a9c4351227a1ec3e9a096171c6eb98b6856f58f"
+    },
+    "bench/sync/ownership.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    "bench/sync/measure.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "sha256": "d14d51c18e0f59180f3eeef8534eaf517ed6821a40d54697673309b8fc1ae9ff"
+    }
+  },
+  "runs": [
+    {
+      "compiler": "stock",
+      "terminal_exit": 0,
+      "receipt": {
+        "path": "/private/tmp/unison-dng-v1-routing-qualified-bgnxPF/stock.json",
+        "sha256": "9c3a9a09e096a2dd4c87d194c56bef526deb56d61e1e9078b64109b8c608b8e4"
+      },
+      "terminal_log": {
+        "path": "/private/tmp/unison-dng-v1-routing-qualified-bgnxPF/stock.log",
+        "sha256": "9e73001fb6f51cc77395dbefd5d8b57c9a22a2c513976b7ae031597adb393e9b"
+      },
+      "work": "/private/tmp/unison-dng-v1-routing-whpc4ecg",
+      "current_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-zf3o8io7",
+      "frozen_v0_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yrkxtl7v",
+      "matched_native_compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+      "counterpart": {
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-85enmyly/src/unison",
+        "sha256": "b19cc28b85bda93437f7e4bc24ec634dfb1446e284d1708d21719bd3517a8bd7",
+        "version": "unison version 2.54.0 (ocaml 5.2.0+ox)"
+      },
+      "counts": {
+        "meaningful_case_records": 23,
+        "actual_sync_scenarios": 21,
+        "actual_sync_invocations": 126,
+        "preference_checks": 162,
+        "actual_semantic_updates": 30,
+        "v1_semantic_updates": 22,
+        "v0_semantic_updates": 8,
+        "mixed_compiler_scenarios": 2,
+        "mixed_compiler_v1_receive_directions": 4,
+        "expected_usage_rejections": 2,
+        "total_commands": 132
+      },
+      "cases": [
+        {
+          "name": "actual preference wire boundary",
+          "result": "DNG v1 preference boundary: 162 checks; legacy wire, stale alias clearing, final intersection, local retention and typo rejection."
+        },
+        {
+          "name": "new-alias-classic-le",
+          "variant": "classic-le",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "new-alias-classic-le-cr",
+          "variant": "classic-le-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "new-alias-classic-be",
+          "variant": "classic-be",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "73ae49d10074f05e47bb7f417f1f8d75a7f02556d4c9c15355738d5a1b993274"
+        },
+        {
+          "name": "new-alias-classic-be-cr",
+          "variant": "classic-be-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "bd93252230d9a4f5112dce021dd73685d9851b579efaa29b75a72b7eb1c0a4b3"
+        },
+        {
+          "name": "new-alias-big-le",
+          "variant": "big-le",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "1acff5e9413e4ec8001d61a4b2693293e48ef44dd9569bb897871cbacc0ee17a"
+        },
+        {
+          "name": "new-alias-big-le-cr",
+          "variant": "big-le-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "new-alias-big-be",
+          "variant": "big-be",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "7c89c989b499f21cac8b4ab9592e4e9129d43273db2acd7f49da7c39ba0177f9"
+        },
+        {
+          "name": "new-alias-big-be-cr",
+          "variant": "big-be-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "de22c09bcad4f5674ccbfbed868a5edfd1860bc0b9ea808ce3b6c2cc2b3686cc"
+        },
+        {
+          "name": "new-explicit-v1",
+          "variant": "big-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "new-explicit-v0-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "new-explicit-v0-big",
+          "variant": "big",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "1acff5e9413e4ec8001d61a4b2693293e48ef44dd9569bb897871cbacc0ee17a"
+        },
+        {
+          "name": "new-explicit-v0-cr",
+          "variant": "cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "old-server-alias-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-alias-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-server-mixed-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-mixed-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-server-v1-only-classic",
+          "variant": "classic",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-v1-only-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-client-new-server",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "mixed-compiler-classic-cr",
+          "variant": "classic-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "mixed-compiler-big-cr",
+          "variant": "big-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "unknown explicit profile rejected before transfer"
+        }
+      ],
+      "expected_usage_rejections": [
+        {
+          "name": "two-remote-new-first",
+          "diagnostic": "cannot synchronize more than one remote root",
+          "source_bytes_and_inode_preserved": true,
+          "target_empty": true,
+          "limits": "expected public CLI rejection before negotiation; no two-remote transfer proof"
+        },
+        {
+          "name": "two-remote-old-first",
+          "diagnostic": "cannot synchronize more than one remote root",
+          "source_bytes_and_inode_preserved": true,
+          "target_empty": true,
+          "limits": "expected public CLI rejection before negotiation; no two-remote transfer proof"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "terminal_exit": 0,
+      "receipt": {
+        "path": "/private/tmp/unison-dng-v1-routing-qualified-bgnxPF/ox.json",
+        "sha256": "b4819612720c795fb693c3f30c8a8b3b980df94d70ea32fa799b1b29354f176e"
+      },
+      "terminal_log": {
+        "path": "/private/tmp/unison-dng-v1-routing-qualified-bgnxPF/ox.log",
+        "sha256": "d09ffe854d36ac91559d05f858c9a24d19d0438466f07cd2829e86f0f4fcfd68"
+      },
+      "work": "/private/tmp/unison-dng-v1-routing-rovw_l2y",
+      "current_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-85enmyly",
+      "frozen_v0_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-h42l15o6",
+      "matched_native_compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+      "counterpart": {
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-zf3o8io7/src/unison",
+        "sha256": "bc0deec08b03097644b530dc655b0d0565369499084a46a70b87705156f91652",
+        "version": "unison version 2.54.0 (ocaml 5.5.1)"
+      },
+      "counts": {
+        "meaningful_case_records": 23,
+        "actual_sync_scenarios": 21,
+        "actual_sync_invocations": 126,
+        "preference_checks": 162,
+        "actual_semantic_updates": 30,
+        "v1_semantic_updates": 22,
+        "v0_semantic_updates": 8,
+        "mixed_compiler_scenarios": 2,
+        "mixed_compiler_v1_receive_directions": 4,
+        "expected_usage_rejections": 2,
+        "total_commands": 132
+      },
+      "cases": [
+        {
+          "name": "actual preference wire boundary",
+          "result": "DNG v1 preference boundary: 162 checks; legacy wire, stale alias clearing, final intersection, local retention and typo rejection."
+        },
+        {
+          "name": "new-alias-classic-le",
+          "variant": "classic-le",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "new-alias-classic-le-cr",
+          "variant": "classic-le-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "new-alias-classic-be",
+          "variant": "classic-be",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "73ae49d10074f05e47bb7f417f1f8d75a7f02556d4c9c15355738d5a1b993274"
+        },
+        {
+          "name": "new-alias-classic-be-cr",
+          "variant": "classic-be-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "bd93252230d9a4f5112dce021dd73685d9851b579efaa29b75a72b7eb1c0a4b3"
+        },
+        {
+          "name": "new-alias-big-le",
+          "variant": "big-le",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "1acff5e9413e4ec8001d61a4b2693293e48ef44dd9569bb897871cbacc0ee17a"
+        },
+        {
+          "name": "new-alias-big-le-cr",
+          "variant": "big-le-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "new-alias-big-be",
+          "variant": "big-be",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "7c89c989b499f21cac8b4ab9592e4e9129d43273db2acd7f49da7c39ba0177f9"
+        },
+        {
+          "name": "new-alias-big-be-cr",
+          "variant": "big-be-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "de22c09bcad4f5674ccbfbed868a5edfd1860bc0b9ea808ce3b6c2cc2b3686cc"
+        },
+        {
+          "name": "new-explicit-v1",
+          "variant": "big-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "new-explicit-v0-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "new-explicit-v0-big",
+          "variant": "big",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "1acff5e9413e4ec8001d61a4b2693293e48ef44dd9569bb897871cbacc0ee17a"
+        },
+        {
+          "name": "new-explicit-v0-cr",
+          "variant": "cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "old-server-alias-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-alias-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-server-mixed-classic",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-mixed-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-server-v1-only-classic",
+          "variant": "classic",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "old-server-v1-only-big-cr",
+          "variant": "big-cr",
+          "expected_profile": null,
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "old-client-new-server",
+          "variant": "classic",
+          "expected_profile": "org.firstpair.dng-xmp/0",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "f904f8943664de68c06200410591d3b204addf31ba6961f6cf5e46ea83e5245c"
+        },
+        {
+          "name": "mixed-compiler-classic-cr",
+          "variant": "classic-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "807833304c936ea6d72a811bc7b0d6d933dd19f0db474748e732fa9af59315f1"
+        },
+        {
+          "name": "mixed-compiler-big-cr",
+          "variant": "big-cr",
+          "expected_profile": "org.firstpair.dng-xmp/1",
+          "both_directions_exact": true,
+          "opaque_and_layout_fallback": true,
+          "exact_directory_inventories": true,
+          "noop_inodes_stable": true,
+          "fixture_sha256": "2c57e3794ab9d8ea6fdbfcbac519102803beff43d96c056b990cd7f418497c88"
+        },
+        {
+          "name": "unknown explicit profile rejected before transfer"
+        }
+      ],
+      "expected_usage_rejections": [
+        {
+          "name": "two-remote-new-first",
+          "diagnostic": "cannot synchronize more than one remote root",
+          "source_bytes_and_inode_preserved": true,
+          "target_empty": true,
+          "limits": "expected public CLI rejection before negotiation; no two-remote transfer proof"
+        },
+        {
+          "name": "two-remote-old-first",
+          "diagnostic": "cannot synchronize more than one remote root",
+          "source_bytes_and_inode_preserved": true,
+          "target_empty": true,
+          "limits": "expected public CLI rejection before negotiation; no two-remote transfer proof"
+        }
+      ]
+    }
+  ],
+  "retained_prior_failed_trials": [
+    {
+      "reason": "Runner configuration maxinflight=1 rejected by existing consumer/source minimum; corrected to 2 without production changes.",
+      "receipts": [
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-pair-jyBzSE/stock.json",
+          "sha256": "b438bf4dde556da3111f822db9d30484399b2cdfc2a0b8583565b86b23715403"
+        },
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-pair-jyBzSE/ox.json",
+          "sha256": "6933f4917a5e899f2f9dcf438c3fccb029486336e4ede5c4dffa8b8593f3a495"
+        }
+      ],
+      "terminal_logs": [
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-pair-jyBzSE/stock.log",
+          "sha256": "dae32caf611d31a73f8f8a2a5bbed9d0ae0d1bf9a38c2867fe1f0097f3c0dab3"
+        },
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-pair-jyBzSE/ox.log",
+          "sha256": "c4d074546855da56fc5ef2ea715884e39e3a175c0b3029687687087696e96638"
+        }
+      ],
+      "exact_prior_source_mapping": {
+        "path": "/private/tmp/unison-dng-v1-routing-pair-jyBzSE/retained-sources.json",
+        "sha256": "f6a09dcef087ba8afaba42a5b45d8da304230aefe3b88cc8ae9cea8615e07982"
+      }
+    },
+    {
+      "reason": "19 one-remote scenarios and 90 wire checks passed before the unsupported two-remote topology was rejected. Corrected scope preserves CLI rejection and covers feature orders in actual wire controls; no production bypass.",
+      "receipts": [
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-final-RIhwul/stock.json",
+          "sha256": "f03ea4179e860e4a2725541195f99d15ae6b8cf92186c266ad339fd6d824ea49"
+        },
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-final-RIhwul/ox.json",
+          "sha256": "7d984b2b8112d0d951fe679b32a9f8c8c769cb25e37422d8b23acd7e3eabe3fd"
+        }
+      ],
+      "terminal_logs": [
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-final-RIhwul/stock.log",
+          "sha256": "4e159778fdf58c553fd60e0a5291e562f11f175b823acf2941ff218b77921db7"
+        },
+        {
+          "path": "/private/tmp/unison-dng-v1-routing-final-RIhwul/ox.log",
+          "sha256": "b70919c8356a6273963ce451397556fc937d58dc27f679aa8b6a556261a17441"
+        }
+      ],
+      "exact_prior_source_mapping": {
+        "path": "/private/tmp/unison-dng-v1-routing-final-RIhwul/retained-sources.json",
+        "sha256": "0a73d8415679ef6087e633859e8b4672db216d4494aa815783ace1517c26c4c5"
+      }
+    }
+  ],
+  "scope": [
+    "Both compiler-matched current endpoints and corresponding frozen v0 feature forks, including new and old clients and both receive directions.",
+    "Independent classic/BigTIFF LE/BE and opposite-endian classic CR camera-profile synthetic fixtures; exact per-file bytes and complete directory inventories.",
+    "Explicit v0 remains classic-only, alias chooses v1 when common, mixed explicit versions negotiate v0 with old forks, v1-only uses exact ordinary fallback.",
+    "Real Prefs/Features boundary retains BOOL/STRING_LIST types and default encoding, sends explicit false to clear stale alias, filters IDs to final common capabilities, preserves local choices and rejects unknown local IDs.",
+    "Stock/Ox mixed peer CR and BigTIFF+CR updates, exact profile logs/bytes, ordinary opaque/layout fallback and stable no-op inodes.",
+    "Both two-remote CLI root orders are expected rejection controls; no two-remote transfer or negotiation proof."
+  ],
+  "limits": [
+    "Synthetic finite fixtures do not establish complete DNG validity, Adobe validation or pixel/rendering equivalence.",
+    "One worker per endpoint, two consumer/source slots; no all-core, RSS, physical I/O or sharing-speed measurement.",
+    "Raw archives are not decoded or qualified by this runner.",
+    "Process groups remain owned until group signaling then leader wait4; platform syscall settlement semantics still apply.",
+    "The two historical failed trials remain unchanged and retained; their exact prior runner and wire sources are retained separately."
+  ]
+}

@@ -310,12 +310,13 @@ let create name ~category ?(cli_only=false) ?(local=false) ?send default ?(depre
     (fun cell -> Uarg.String (fun s -> set cell (intern (read cell) s)))
     m
 
-let createBool name ~category ?(cli_only=false) ?(local=false) ?send default ?(deprecated=false) doc fulldoc =
+let createBool name ~category ?(cli_only=false) ?(local=false) ?send
+    ?(send_value=Umarshal.id) default ?(deprecated=false) doc fulldoc =
   let doc = if default then doc ^ " (default true)" else doc in
   createPrefInternal name `BOOL category cli_only local send default deprecated doc fulldoc
     (fun v -> [if v then "true" else "false"])
     (fun cell -> Uarg.Bool (fun b -> set cell b))
-    Umarshal.bool
+    Umarshal.(sum1 bool send_value id)
 
 let createInt name ~category ?(cli_only=false) ?(local=false) ?send default ?(deprecated=false) doc fulldoc =
   createPrefInternal name `INT category cli_only local send default deprecated doc fulldoc
@@ -329,11 +330,12 @@ let createString name ~category ?(cli_only=false) ?(local=false) ?send default ?
     (fun cell -> Uarg.String (fun s -> set cell s))
     Umarshal.string
 
-let createStringList name ~category ?(cli_only=false) ?(local=false) ?send ?(deprecated=false) doc fulldoc =
+let createStringList name ~category ?(cli_only=false) ?(local=false) ?send
+    ?(send_value=Umarshal.id) ?(deprecated=false) doc fulldoc =
   createPrefInternal name `STRING_LIST category cli_only local send [] deprecated doc fulldoc
     (fun v -> v)
     (fun cell -> Uarg.String (fun s -> set cell (s:: read cell)))
-    Umarshal.(list string)
+    Umarshal.(sum1 (list string) send_value id)
 
 let createBoolWithDefault name ~category ?(cli_only=false) ?(local=false) ?send ?(deprecated=false) doc fulldoc =
   createPrefInternal name `BOOLDEF category cli_only local send `Default deprecated doc fulldoc

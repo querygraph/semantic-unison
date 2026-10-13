@@ -1,5 +1,8 @@
 # DNG XMP packet profile v0
 
+This profile retains its original subset. The separately negotiated
+[v1 profile](dng-profile-v1.md) adds BigTIFF and embedded camera-profile graphs.
+
 `org.firstpair.dng-xmp/0` locates a bounded, out-of-line TIFF tag 700 packet.
 An eligible update changes only its addressed bytes, with identical file
 length, packet offset/length and every byte outside the packet. The core

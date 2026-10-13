@@ -245,6 +245,14 @@ copyRange.cmo : \
 copyRange.cmx : \
     copyRange.cmi
 copyRange.cmi :
+dngExtended.cmo : \
+    dngSemantic.cmi \
+    dngExtended.cmi
+dngExtended.cmx : \
+    dngSemantic.cmx \
+    dngExtended.cmi
+dngExtended.cmi : \
+    formatExtension.cmi
 dngSemantic.cmo : \
     xmpObservation.cmi \
     semanticFile.cmi \
@@ -256,6 +264,7 @@ dngSemantic.cmx : \
     formatExtension.cmx \
     dngSemantic.cmi
 dngSemantic.cmi : \
+    semanticFile.cmi \
     formatExtension.cmi
 dngValidation.cmo : \
     lwt/lwt.cmi \
@@ -1151,6 +1160,7 @@ semanticFormats.cmo : \
     formatExtension.cmi \
     features.cmi \
     dngSemantic.cmi \
+    dngExtended.cmi \
     semanticFormats.cmi
 semanticFormats.cmx : \
     ubase/util.cmx \
@@ -1158,6 +1168,7 @@ semanticFormats.cmx : \
     formatExtension.cmx \
     features.cmx \
     dngSemantic.cmx \
+    dngExtended.cmx \
     semanticFormats.cmi
 semanticFormats.cmi : \
     formatExtension.cmi

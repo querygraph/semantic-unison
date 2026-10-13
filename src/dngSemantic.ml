@@ -1,10 +1,24 @@
-(* Conservative classic TIFF/DNG XMP locator. This is not a DNG validator
+(* Bounded TIFF/DNG XMP locators. This is not a DNG validator
    or raw-image fingerprint. All bytes outside the returned extent are
    independently covered by the semantic transfer core's preservation proof. *)
 let profile = "org.firstpair.dng-xmp/0"
 exception Unsupported of string
 let reject s = raise (Unsupported s)
-type directory_kind = Image | Exif | Gps | Interop
+type directory_kind = Image | Exif | Gps | Interop | CameraProfile
+
+type tiff_layout = {
+  big : bool; count_width : int; entry_size : int; number_width : int;
+  inline_width : int; value_at : int;
+}
+let classic = {big=false;count_width=2;entry_size=12;number_width=4;
+  inline_width=4;value_at=8}
+let bigtiff = {big=true;count_width=8;entry_size=20;number_width=8;
+  inline_width=8;value_at=12}
+type directory = {
+  kind : directory_kind; little : bool; layout : tiff_layout;
+  base : int64; offset : int64;
+}
+type pending = Directory of directory | CameraHeader of int64
 
 (* Values in this deliberately finite profile either live wholly in their
    TIFF value extent or use one of the graph/image-offset rules below.
@@ -47,81 +61,150 @@ let child_kind kind tag = match kind, tag with
   | Exif, 40965 -> Some Interop
   | _ -> None
 
+(* Camera-profile fields are self-contained values, never generic image or
+   private pointer fields. The CR container has its own classic TIFF layout. *)
+let camera_profile_tag = function
+  | 50708 | 50721 | 50722 | 50725 | 50726 | 50778 | 50779 | 50932
+  | 50936 | 50937 | 50938 | 50939 | 50940 | 50941 | 50942 | 50964
+  | 50965 | 50981 | 50982 | 51107 | 51108 | 51109 | 51110 -> true
+  | _ -> false
+
+let camera_profile_type tag typ = match tag with
+  | 50708 -> typ = 2
+  | 50932 | 50936 | 50942 -> typ = 1 || typ = 2
+  | 50778 | 50779 -> typ = 3
+  | 50721 | 50722 | 50725 | 50726 | 50964 | 50965 -> typ = 10
+  (* The specification calls this RATIONAL; the SDK writes SRATIONAL.
+     Both are self-contained eight-byte rational values. *)
+  | 51109 -> typ = 5 || typ = 10
+  | 50937 | 50941 | 50981 | 51107 | 51108 | 51110 -> typ = 4
+  | 50938 | 50939 | 50940 | 50982 -> typ = 11
+  | _ -> false
+
 let allowed_tag kind tag = match kind with
   | Image -> image_value_tag tag || exif_value_tag tag ||
       List.mem tag [273;279;324;325;513;514;700;330;34665;34853]
   | Exif -> exif_value_tag tag || tag = 40965
   | Gps -> tag >= 0 && tag <= 31
   | Interop -> List.mem tag [1;2;4096;4097;4098]
+  | CameraProfile -> camera_profile_tag tag
 
-let inspect file =
+let inspect_with_policy ~extended file =
  try
   let size = SemanticFile.size file in
-  let header = SemanticFile.read file 0L 8 in
-  let little = match String.sub header 0 2 with
+  let byte_order header = match String.sub header 0 2 with
     | "II" -> true | "MM" -> false | _ -> reject "not TIFF" in
-  let number s pos n =
+  let number little s pos n =
     let v = ref 0L in
     for j = 0 to n-1 do
       let i = if little then n-1-j else j in
       v := Int64.logor (Int64.shift_left !v 8) (Int64.of_int (Char.code s.[pos+i]))
-    done; !v in
-  if number header 2 2 <> 42L then reject "unsupported TIFF version (including BigTIFF)";
+    done;
+    (* File positions and sizes use signed int64 throughout the exact core.
+       Reject unsigned 64-bit encodings outside that domain before arithmetic. *)
+    if !v < 0L then reject "unsigned TIFF integer exceeds signed int64";
+    !v in
+  let header = SemanticFile.read file 0L 8 in
+  let little = byte_order header in
+  let layout,header_size,primary = match number little header 2 2 with
+    | 42L -> classic,8,number little header 4 4
+    | 43L when extended ->
+        if number little header 4 2 <> 8L || number little header 6 2 <> 0L then
+          reject "invalid BigTIFF header";
+        let header = SemanticFile.read file 0L 16 in
+        bigtiff,16,number little header 8 8
+    | _ -> reject "unsupported TIFF version (including BigTIFF)" in
   let extent offset length =
     if offset < 0L || length < 0L || offset > size || length > Int64.sub size offset then
       reject "TIFF extent outside file";
     (offset, Int64.add offset length) in
-  let protected = ref [extent 0L 8L] and extent_count = ref 1 in
+  let relative base offset =
+    if base < 0L || base > size || offset < 0L || offset > Int64.sub size base then
+      reject "TIFF relative offset outside file";
+    Int64.add base offset in
+  let protected = ref [extent 0L (Int64.of_int header_size)] and extent_count = ref 1 in
   let protect offset length =
     incr extent_count;
     if !extent_count > 131072 then reject "protected extent limit";
     protected := extent offset length :: !protected in
   let seen = Hashtbl.create 32 and queue = Queue.create () in
-  let enqueue kind offset = if offset <> 0L then begin
-    (* Bound pending work as well as visited nodes. Checking only at dequeue
-       allows a small pointer table to enqueue millions of offsets first. *)
-    if Queue.length queue + Hashtbl.length seen >= 256 then reject "IFD work limit";
-    Queue.add (kind, offset) queue
+  let queue_room () =
+    (* Camera headers and directories share the same visited/pending ceiling. *)
+    if Queue.length queue + Hashtbl.length seen >= 256 then reject "IFD work limit" in
+  let enqueue kind little layout base offset = if offset <> 0L then begin
+    queue_room ();
+    let offset = relative base offset in
+    Queue.add (Directory {kind;little;layout;base;offset}) queue
   end in
-  let primary = number header 4 4 in
-  enqueue Image primary;
-  let entries = ref 0 and xmp = ref None and dng = ref false in
-  while not (Queue.is_empty queue) do
-    let kind, offset = Queue.take queue in
+  let enqueue_camera offset =
+    if offset = 0L then reject "zero camera profile offset";
+    queue_room ();
+    ignore (extent offset 8L);
+    Queue.add (CameraHeader offset) queue in
+  let visit offset =
     if Hashtbl.mem seen offset then reject "repeated or cyclic IFD";
     if Hashtbl.length seen >= 256 then reject "IFD limit";
-    Hashtbl.add seen offset ();
-    let count = Int64.to_int (number (SemanticFile.read file offset 2) 0 2) in
+    Hashtbl.add seen offset () in
+  enqueue Image little layout 0L primary;
+  let entries = ref 0 and xmp = ref None and dng = ref false in
+  while not (Queue.is_empty queue) do
+    match Queue.take queue with
+    | CameraHeader base ->
+        visit base;
+        protect base 8L;
+        let header = SemanticFile.read file base 8 in
+        let little = byte_order header in
+        if number little header 2 2 <> 0x4352L then reject "invalid camera profile header";
+        let offset = number little header 4 4 in
+        if offset < 8L then reject "invalid camera profile IFD offset";
+        enqueue CameraProfile little classic base offset
+    | Directory context ->
+    let {kind;little;layout;base;offset} = context in
+    let number = number little in
+    visit offset;
+    let count64 = number (SemanticFile.read file offset layout.count_width) 0 layout.count_width in
+    if count64 > Int64.of_int (16384 - !entries) then reject "TIFF entry limit";
+    let count = Int64.to_int count64 in
+    if kind = CameraProfile && count = 0 then reject "empty camera profile IFD";
     entries := !entries + count;
-    if !entries > 16384 then reject "TIFF entry limit";
-    let length = 2 + 12*count + 4 in
+    let length = layout.count_width + layout.entry_size*count + layout.number_width in
     protect offset (Int64.of_int length);
     let directory = SemanticFile.read file offset length in
     let tags = Hashtbl.create count in
     for i = 0 to count-1 do
-      let at = 2+12*i in
+      let at = layout.count_width+layout.entry_size*i in
       let tag = Int64.to_int (number directory at 2) in
       let typ = Int64.to_int (number directory (at+2) 2) in
-      let n = number directory (at+4) 4 in
+      let n = number directory (at+4) layout.number_width in
       if Hashtbl.mem tags tag then reject "duplicate TIFF tag";
-      if not (allowed_tag kind tag) then
+      let profile_pointer = extended && kind = Image && tag = 50933 in
+      if not (allowed_tag kind tag || profile_pointer) then
         reject (Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag);
       let child = child_kind kind tag in
-      if typ = 13 && child = None then reject "IFD type on non-pointer field";
+      if (typ = 13 || (extended && typ = 18)) && child = None then
+        reject "IFD type on non-pointer field";
+      if kind = CameraProfile && not (camera_profile_type tag typ) then
+        reject "unsupported camera profile field type";
       let width = match typ with
         | 1 | 2 | 6 | 7 -> 1 | 3 | 8 -> 2 | 4 | 9 | 11 | 13 -> 4
-        | 5 | 10 | 12 -> 8 | _ -> reject "unsupported TIFF field type" in
+        | 5 | 10 | 12 -> 8
+        | 16 | 17 | 18 when layout.big -> 8
+        | _ -> reject "unsupported TIFF field type" in
+      if n > Int64.div Int64.max_int (Int64.of_int width) then
+        reject "TIFF field size overflow";
       let bytes = Int64.mul n (Int64.of_int width) in
-      let value_offset = if bytes <= 4L then Int64.add offset (Int64.of_int (at+8))
-        else number directory (at+8) 4 in
+      let value_offset = if bytes <= Int64.of_int layout.inline_width then
+          Int64.add offset (Int64.of_int (at+layout.value_at))
+        else relative base (number directory (at+layout.value_at) layout.number_width) in
       ignore (extent value_offset bytes);
       Hashtbl.add tags tag (typ,n,value_offset);
       if tag = 700 then begin
         if !xmp <> None then reject "multiple XMP packets";
-        if typ <> 1 || n <= 4L || n > Int64.of_int FormatExtension.max_region then
+        if typ <> 1 || n <= Int64.of_int layout.inline_width ||
+           n > Int64.of_int FormatExtension.max_region then
           reject "unsupported XMP type or packet size";
         xmp := Some {FormatExtension.offset = value_offset; length = Int64.to_int n}
-      end else if bytes > 4L then protect value_offset bytes;
+      end else if bytes > Int64.of_int layout.inline_width then protect value_offset bytes;
       if tag = 50706 then begin
         if typ <> 1 || n <> 4L then reject "invalid DNGVersion";
         let version = SemanticFile.read file value_offset 4 in
@@ -132,17 +215,34 @@ let inspect file =
       begin match child with
       | None -> ()
       | Some child_kind ->
-        if typ <> 4 && typ <> 13 then reject "invalid IFD pointer type";
+        let pointer_width = match typ with
+          | 4 | 13 -> 4 | 16 | 18 when layout.big -> 8
+          | _ -> reject "invalid IFD pointer type" in
         if tag <> 330 && n <> 1L then reject "invalid singleton IFD pointer count";
         if n > 256L then reject "IFD pointer limit";
-        let pointers = SemanticFile.read file value_offset (4 * Int64.to_int n) in
-        for j = 0 to Int64.to_int n - 1 do enqueue child_kind (number pointers (4*j) 4) done
+        let pointers = SemanticFile.read file value_offset (pointer_width * Int64.to_int n) in
+        for j = 0 to Int64.to_int n - 1 do
+          enqueue child_kind little layout base (number pointers (pointer_width*j) pointer_width)
+        done
+      end;
+      if profile_pointer then begin
+        if offset <> primary then reject "camera profile list outside primary IFD";
+        let pointer_width = match typ with
+          | 4 -> 4 | 16 when layout.big -> 8
+          | _ -> reject "invalid camera profile pointer type" in
+        if n = 0L || n > 256L then reject "camera profile pointer limit";
+        let pointers = SemanticFile.read file value_offset (pointer_width * Int64.to_int n) in
+        for j = 0 to Int64.to_int n - 1 do
+          enqueue_camera (number pointers (pointer_width*j) pointer_width)
+        done
       end
     done;
     let values tag =
       let typ,n,off = Hashtbl.find tags tag in
       if n > 65536L then reject "image extent limit";
-      let width = match typ with 3 -> 2 | 4 -> 4 | _ -> reject "invalid image extent type" in
+      let width = match typ with
+        | 3 -> 2 | 4 -> 4 | 16 when layout.big -> 8
+        | _ -> reject "invalid image extent type" in
       let data = SemanticFile.read file off (Int64.to_int n * width) in
       (n, fun i -> number data (Int64.to_int i * width) width)
     in
@@ -153,9 +253,11 @@ let inspect file =
         let n,get_o = values offsets and m,get_l = values lengths in
         if n <> m then reject "mismatched image extents";
         let i = ref 0L in
-        while !i < n do protect (get_o !i) (get_l !i); i := Int64.succ !i done
+        while !i < n do protect (relative base (get_o !i)) (get_l !i); i := Int64.succ !i done
       end) [273,279;324,325;513,514];
-    enqueue kind (number directory (2+12*count) 4)
+    let next = number directory (layout.count_width+layout.entry_size*count) layout.number_width in
+    if kind = CameraProfile && next <> 0L then reject "unsupported camera profile IFD chain";
+    enqueue kind little layout base next
   done;
   if not !dng then reject "missing DNGVersion";
   let region = match !xmp with None -> reject "no embedded XMP" | Some r -> r in
@@ -165,6 +267,9 @@ let inspect file =
   SemanticFile.check file;
   Ok {FormatExtension.regions = [region]}
  with Unsupported s | SemanticFile.Invalid s -> Error s
+
+let inspect file = inspect_with_policy ~extended:false file
+let inspect_extended file = inspect_with_policy ~extended:true file
 
 let observer : FormatExtension.observer = {
   schema = "dng-xmp-property-encoding-v0";

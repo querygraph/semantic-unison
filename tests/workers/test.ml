@@ -55,6 +55,59 @@ let () =
     finish pool b;
     Lwt_unix.run (W.shutdown pool);
     check (expect_failed (fun () -> hash pool (H.cancellation ()) "sample")) "closed pool accepted job");
+  test "18 domains keep extended BigTIFF/CR proofs and exact materialization independent" (fun () ->
+    let extension = FormatExtension.trusted ~observer:DngExtended.observer (module DngExtended) in
+    let b = budget 18 in let pool = W.create ~workers:18 ~max_pending:36 ~budget:b in
+    let inspect path =
+      let file = fd path in
+      try_bind (fun () -> W.inspect pool (H.cancellation ()) ~extension file)
+        (fun result -> Unix.close file; return result)
+        (fun error -> Unix.close file; fail error) in
+    let sequential path =
+      let file = fd path in
+      let result = SemanticFile.with_fd file (SemanticDelta.inspect (module DngExtended)) in
+      Unix.close file; match result with Ok proof -> proof | Error why -> failwith why in
+    let base = sequential "extended-base.dng" and target = sequential "extended-target.dng" in
+    let results = Lwt_unix.run (await (List.init 36 (fun i ->
+      inspect (if i mod 2=0 then "extended-base.dng" else "extended-target.dng")))) in
+    List.iteri (fun i -> function
+      | Some result -> (match result.W.proof with
+          | Ok proof -> check (SemanticDelta.describe proof =
+              SemanticDelta.describe (if i mod 2=0 then base else target))
+              "extended worker proof differs from sequential bytes/layout"
+          | Error why -> failwith why)
+      | None -> failwith "extended inspection cancelled") results;
+    let plan = match SemanticDelta.plan ~nonce:(String.make 32 'e') ~base ~target with
+      | Ok plan -> plan | Error why -> failwith why in
+    let contents file = SemanticFile.read file 0L 1048576 ^
+      SemanticFile.read file 1048576L 1048576 in
+    let basis = fd "extended-base.dng" in
+    let original = SemanticFile.with_fd basis contents in
+    Unix.close basis;
+    let jobs = List.init 18 (fun i ->
+      let path = Printf.sprintf "extended-stage-%d.dng" i in
+      let channel = open_out_bin path in output_string channel original; close_out channel;
+      let basis = fd "extended-base.dng" in
+      let output = Unix.openfile path [Unix.O_RDWR;Unix.O_CLOEXEC] 0 in
+      try_bind (fun () -> W.apply_report pool (H.cancellation ()) ~extension plan ~basis ~output)
+        (fun result ->
+          let digest = SemanticFile.with_fd output SemanticFile.digest in
+          Unix.close basis; Unix.close output;
+          return (result,digest))
+        (fun error -> Unix.close basis; Unix.close output; fail error)) in
+    List.iter (function
+      | Some report,digest ->
+          check (report.SemanticDelta.logical_bytes_written=String.length "<x>two</x>      " &&
+            report.write_calls=1 && digest=(SemanticDelta.describe target).digest)
+            "extended worker output/report differs from target"
+      | None,_ -> failwith "extended materialization cancelled") (Lwt_unix.run (await jobs));
+    let file = fd "extended-base.dng" in
+    check (SemanticFile.with_fd file contents=original)
+      "extended workers changed their shared basis";
+    Unix.close file;
+    check ((W.usage pool).workers=18 && (W.usage pool).peak_running>1 &&
+      (W.usage pool).peak_running<=18) "extended jobs did not use bounded domain concurrency";
+    finish pool b);
   test "shared CPU reservation prevents dispatch and queued cancellation releases fd" (fun () ->
     let b = budget 1 in
     let io = IoAdmission.create ~per_device:1 ~max_pending:4 in

@@ -1,9 +1,17 @@
 # Semantic extension qualification
 
+[Extended DNG v1 controls](dng_profile_v1/README.md) qualify BigTIFF, embedded
+camera profiles, exact byte proofs and malformed/alias bounds. The
+[routing controls](dng_profile_v1_remote.md) cover negotiated preferences,
+frozen v0 peers and mixed stock/OxCaml receives. Current combined evidence is
+[dng-profile-v1-integration-20261013.json](qualification/dng-profile-v1-integration-20261013.json),
+with a separate independent acceptance receipt. Large sparse-file cases are
+inspector-only; no Adobe, rendering or photographic-corpus parity is claimed.
+
 Retained publication admission is qualified by [native lifecycle controls](resource_lifetime/README.md),
 [early descriptor ownership](fd_ownership/README.md), [helper ownership](helper_ownership/README.md),
 [finite admission faults](admission_faults/README.md) and [nonce ownership](nonce_ownership/README.md).
-These controls use synthetic inputs and private snapshots. Current aggregate
+These controls use synthetic inputs and private snapshots. Historical resource
 build/CLI evidence is [resource-lifetime-integration-20261013.json](qualification/resource-lifetime-integration-20261013.json);
 its independent acceptance is recorded separately. The descriptor envelope covers
 selected lifetimes; complete process FD/RSS, native transient peaks, ingress and
@@ -16,6 +24,7 @@ Build each compiler in its own snapshot:
 ```sh
 python3 tests/build_snapshot.py --compiler-prefix /absolute/compiler/bin --selftest
 python3 tests/semantic/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/dng_profile_v1/run.py --ocamlopt /absolute/compiler/bin/ocamlopt --keep-work
 python3 tests/report/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/workers/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/helpers/run_tests.py --ocamlopt /absolute/compiler/bin/ocamlopt

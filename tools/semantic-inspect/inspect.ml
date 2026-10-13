@@ -56,6 +56,7 @@ let compare base target = match base,target with
           ~nonce:(String.make 32 '\000') base))]
 let main () =
   FormatExtension.register ~observer:DngSemantic.observer (module DngSemantic);
+  FormatExtension.register ~observer:DngExtended.observer (module DngExtended);
   let selected = ref DngSemantic.profile and base = ref None and target = ref None in
   Arg.parse ["--profile",Arg.Set_string selected,"ID Compiled format profile";
              "--base",Arg.String (fun p -> base := Some p),"FILE Compare against a basis"]

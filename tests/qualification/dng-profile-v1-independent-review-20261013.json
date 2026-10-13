@@ -1,0 +1,234 @@
+{
+  "schema": "org.firstpair.unison.dng-profile-v1-independent-review/1",
+  "accepted_utc": "2026-10-13T22:28:42Z",
+  "status": "accepted for the selected DNG v1 checkpoint; the larger user goal remains unfinished",
+  "reviewer": "/root/scratch_review",
+  "provenance": {
+    "production_and_documentation_owner": "/root",
+    "registration_preference_and_routing_owner": "/root/scratch_integration",
+    "direct_fixture_and_SDK_source_notes_owner": "/root/scratch_controls",
+    "independence": "The reviewer authored no production implementation, qualification fixture, test runner or documentation in this DNG v1 slice. This file records the review.",
+    "review_actions": "Read-only production/source/spec research, SHA-256 comparisons, retained-source and pure string-mutation reconstruction, bounded sparse reads, log/record/final synthetic byte review, then writing this separate receipt.",
+    "excluded_actions": "No native executable, test suite, compiler/build, Adobe SDK/tool, Lightroom, Photo data/catalog/cache/volume, preview generator, production publication or benchmark was invoked by this reviewer.",
+    "historical_checkpoint": "ebcfec685aa9731ebc5d290b8897180630d71151",
+    "source_corrections_resolved": [
+      "Outgoing shorthand is explicitly encoded false, clearing stale receiver alias state while preserving local values.",
+      "Default-identity outgoing BOOL/STRING_LIST transforms preserve existing preference types, parsers, printers, decoding and wire representations.",
+      "Camera matrix fixtures use SRATIONAL, matching the admitted CR grammar.",
+      "Worker byte oracles use two bounded 1 MiB reads, respecting SemanticFile.read's public limit.",
+      "Only explicit large sparse paths use bounded artifact samples; native binaries are fully pinned.",
+      "The widened CR grammar negative is scoped to prohibited nonzero field admission, not validity or traversal of an actual private graph.",
+      "Unsupported two-remote CLI topologies are recorded as rejection controls, with feature-order/reuse coverage confined to the linked preference boundary.",
+      "The former future dng-xmp/1 relocation proposal now refers to an unassigned later version."
+    ],
+    "historical_authorship": "The reviewer authored HelperSupervisor and its finite ownership fixtures in the earlier resource slice. Those unchanged sources had sibling independent acceptance recorded by the historical resource review. This checkpoint does not re-claim independent source authorship review of that historical helper."
+  },
+  "production_source_review": {
+    "status": "accepted by independent source inspection before qualification",
+    "hashes": {
+      "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+      "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+      "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+      "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+      "src/Makefile.OCaml": "c19ea8a6f7f6e40696374124ed56ba05140a09780ab65280e92e0071b0d2961f",
+      "src/semanticFormats.ml": "65edabffd33be611d593e35d4fa6641940cfacaf26f870f4ec91696edacea78d",
+      "src/ubase/prefs.ml": "b8b6bf2dabd5e794a8ed9a0ddb428da45ff3e57207fdb67689ae02de334168ae",
+      "src/ubase/prefs.mli": "22b5480ab6220a1e31952b374de7814ee605d5db9deb65f095506d7757dc4bcf"
+    },
+    "conclusions": [
+      "The separately negotiated /1 profile extends the unchanged /0 accepted subset through a shared bounded locator; its observer and SDE/SDR framing are unchanged.",
+      "BigTIFF counts, unsigned file positions and count products are checked before conversion/read; base-relative additions are bounded by the held file's size.",
+      "CR headers and directories use independent endian, classic width and header-relative bases, with the same shared 256-node pending/visited ceiling.",
+      "Headers, directories, pointer lists, image extents and admitted non-XMP out-of-line values are protected against the proposed fixed XMP region.",
+      "CR finite tag/type ownership is qualified structurally; numeric calibration/LUT validity and rendering equivalence are not inferred.",
+      "Known local profile IDs are validated before filtering through final common capabilities; aliases do not mutate the client's local bool/list.",
+      "An old modified v0 peer receives only understood IDs; v1-only selection does not silently enable v0.",
+      "v0 malformed-input diagnostic strings may differ after earlier offset rejection; byte-identical error messages are not claimed."
+    ]
+  },
+  "direct_review": {
+    "status": "accepted",
+    "reviewer": "scratch_review",
+    "accepted_utc": "2026-10-13T21:56:59Z",
+    "receipt": "tests/dng_profile_v1/qualification-20261013.json",
+    "receipt_sha256": "bcfb3648ec7a2453def1d3871899a97560f9933b459b2ab1ea41c0cd9e38670f",
+    "hash_comparisons": 3512,
+    "unique_hashed_paths": 2830,
+    "byte_source_record_comparisons": 208,
+    "complete_inventory_entries": 2832,
+    "per_compiler": {
+      "sources": 24,
+      "cases": 1091,
+      "assertions": 5534,
+      "inspections": 29,
+      "wire_apply": 29,
+      "opaque": 846,
+      "rejections": 183,
+      "sparse": 4,
+      "private_negatives": 3
+    },
+    "limitations": [
+      "Synthetic containers do not establish DNG validity, decoded pixel identity or rendering equivalence.",
+      "Eight retained sparse files across compilers checked only known extents/samples/size/allocation; no large-file proof/materialization, whole-file digest or performance claim.",
+      "Read-only recorded evidence audit; no native test/build/SDK/Photo invocation."
+    ],
+    "qualified_execution_receipt_sha256": "2a1d7a4e188f7f2b78f3d153f569ecc6e202b8e256b8f19481a5315d9a632513"
+  },
+  "routing_review": {
+    "status": "accepted",
+    "reviewer": "scratch_review",
+    "accepted_utc": "2026-10-13 22:10:08 UTC",
+    "receipt": "tests/qualification/dng-profile-v1-routing-20261013.json",
+    "receipt_sha256": "dc7012b69644fd8366c53deaac10340887b1279a0cf48e0cc944d6b1c56deb8e",
+    "hash_comparisons": 662,
+    "unique_hashed_paths": 634,
+    "byte_source_record_comparisons": 442,
+    "commands_reviewed": 264,
+    "per_compiler": {
+      "actual_one_remote_scenarios": 21,
+      "wire_checks": 162,
+      "commands": 132,
+      "v1_receives": 22,
+      "v0_receives": 8,
+      "mixed_scenarios": 2,
+      "mixed_v1_receive_directions": 4,
+      "expected_two_remote_cli_rejections": 2
+    },
+    "limitations": [
+      "CLI accepts at most one remote root; two-remote tests establish rejection only.",
+      "Historical inode and cleanup assertions are recorded in-execution evidence; no crash-durability or every-descendant-reap claim.",
+      "No typed archive parsing or archive-authority proof.",
+      "Read-only retained artifact/source review; no test/build/native/SDK/Photo invocation."
+    ]
+  },
+  "aggregate_review": {
+    "status": "accepted recorded aggregate evidence",
+    "receipt_sha256": "b668504a4c51020d2d60363e13539b5da62e294d1b4179a823b25c7e94639c48",
+    "hash_comparisons": 2157,
+    "unique_hashed_paths": 1756,
+    "byte_source_record_comparisons": 18,
+    "production_inputs": 318,
+    "snapshot_count": 4,
+    "test_pins": 13,
+    "log_pins": 22,
+    "component_receipts": 2,
+    "observed_retained_records": {
+      "/private/tmp/unison-final-caller-agi1r0bp/build-receipt.json": "05230777ec091a95b112cfd83533df248a2fdc2eb4f435aa17efbd48b192ca32",
+      "/private/tmp/unison-final-caller-agi1r0bp/build-commands.json": "ba38b13fcf662509004a10b02f2a4f0e44e02c9b954d0135b54982f7fb0f590d",
+      "/private/tmp/unison-final-caller-agi1r0bp/production-source-manifest.json": "bf4a39db2dc2b69ac5b751f51c6aca55a3f19f6e387e5962a8617cf555c31840",
+      "/private/tmp/unison-final-caller-uftcjyff/build-receipt.json": "2d11cf929e4598fce16d86bb7217a05258d0aa5d5d5c11ba1384a5293fdb01f0",
+      "/private/tmp/unison-final-caller-uftcjyff/build-commands.json": "6464c11e28a9dface6b94ea92d7dffbb7b0a9a32504225921d639a2fa82c23ea",
+      "/private/tmp/unison-final-caller-uftcjyff/production-source-manifest.json": "bf4a39db2dc2b69ac5b751f51c6aca55a3f19f6e387e5962a8617cf555c31840"
+    },
+    "limits": [
+      "Removed standalone kernel/worker/report/remote temporary outputs reviewed through pinned sources and terminal logs, not retained binary inspection.",
+      "Retained Files instrumented ML source reconstructed using pure parsed string functions only; no runner/test/native/build/SDK/Photo invocation.",
+      "Current component source and recorded execution acceptance is bounded by their explicit scope; no whole-process/resource/storage/rendering or crash-durability claim."
+    ],
+    "receipt": "tests/qualification/dng-profile-v1-integration-20261013.json",
+    "audit_record": "/private/tmp/unison-dng-v1-independent-nzlq35li/aggregate-audit.json",
+    "accepted_utc": "2026-10-13T22:21:12Z",
+    "recorded_results_per_compiler": {
+      "make_build_and_selftest": 0,
+      "dune_build_and_selftest": 0,
+      "v0_conformance_commands": 127,
+      "v0_conformance_assertions": 2033,
+      "worker_groups": 20,
+      "v1_worker_domains": 18,
+      "v1_worker_inspect_jobs": 36,
+      "v1_worker_materialization_jobs": 18,
+      "files_cases": 79,
+      "receiving_validation_cases": 21,
+      "cli_report_cases": 14,
+      "legacy_bidirectional_keys": 24
+    },
+    "retained_evidence_scope": "Current immutable production builds, component artifacts and retained v0 conformance/Files/validation receipts were inspected. Some standalone kernel/worker/report/legacy-remote outputs were removed by their runners; their source, commands and terminal logs establish only the recorded execution scope.",
+    "manifest_limit": "The 318-input comparisons establish source-byte consistency with the four frozen builds. They are not a fresh correctness/safety audit of every unchanged legacy source or a rerun of the build/test suites.",
+    "qualified_execution_receipt_sha256": "de022c04f2c6f8f9efe63f217f978943d391ef66954ec54ee9be70992a971ca7"
+  },
+  "documentation_review": {
+    "status": "accepted",
+    "final_sha256": {
+      "SOL.md": "feac89975782181e2d8817efad51f0d133db3a0e9258630a3487530e53b892fb",
+      "doc/dng-profile-v0.md": "8257154e0c8ee7d3e3ac2701f829315ad45b4d95c7894a2560ced11390188201",
+      "doc/dng-profile-v1.md": "b268a13ab6c7667d9928b749795c1eff60df18f543bcf8d739653fbbd10b1a4e",
+      "doc/implementation-status.md": "ef6c0be8e0edbeb515c0f452c5eb3e3427ccf146fa990a7f41b8f160f901035e",
+      "doc/semantic-workers.md": "3e0b32b4511c734c87976603add5dfcbb58485e7daf4766d2eae1c68a00ceeee",
+      "tests/README.md": "10bfdedeee95896ab8482927b53c85cf482bb67e9c5e214f02ccda4dc2354efe",
+      "tests/dng_profile_v1/README.md": "f812b12ee7a8f6548fe1086fbc0c6ef5ef28a74e34cbd3ec2fb7ea63b904a445",
+      "tests/dng_profile_v1/SDK-SOURCE-NOTES.md": "8c0ec0df64d902684d9d1cb73aaa6cb1d15aff3338617f1fd8cac28a8cbb082e",
+      "tests/dng_profile_v1_remote.md": "78487f6ba7d5fd357501a439dac28b7b89a9db48227c3883ca2a237def1873aa",
+      "tools/semantic-inspect/README.md": "9c5f1b329bf5aa97e459a800f66d9d51b045536839ff2441919774190f35c520"
+    },
+    "conclusions": [
+      "Live handoff and status claims match the current separately versioned parser and frozen receipts.",
+      "The resource checkpoint's 316-input/19-worker counts are explicitly historical at ebcfec6; current builds have 318 inputs and 20 worker groups.",
+      "Fixed-layout /1 support is distinguished from future XMP relocation and modern/private profile grammars.",
+      "Mixed-compiler DNG v1 cases are distinguished from broader unqualified mixed-compiler/RPC/platform matrices.",
+      "Sparse tests are inspector/read-only; developer full inspection still hashes the whole file.",
+      "Photo/Adobe corpus, numerical validity, rendered pixels, storage savings, hard resource limits and deployment remain open.",
+      "Read-only inspection does not imply unchanged atime; the developer README claims unchanged file contents."
+    ]
+  },
+  "comparison_counts": {
+    "direct_hash_comparisons": 3512,
+    "routing_hash_comparisons": 662,
+    "aggregate_hash_comparisons": 2157,
+    "combined_hash_comparisons": 6331,
+    "direct_byte_source_record_comparisons": 208,
+    "routing_byte_source_record_comparisons": 442,
+    "aggregate_byte_source_record_comparisons": 18,
+    "combined_byte_source_record_comparisons": 668,
+    "direct_complete_manifest_entries": 2832,
+    "documentation_pins": 10,
+    "meaning": "Counts are successful comparisons in the recorded audit scripts, not unique files. The sums reuse the completed component audits; initial/manual source reads, failed reviewer-script assertions and separate final document stability checks are not added to these counters. Publication-only amendment hash/byte/AST checks are separately described and are not added to these base execution-audit counters."
+  },
+  "supersedes_pending_review_text": [
+    "tests/dng_profile_v1/qualification-20261013.json",
+    "tests/qualification/dng-profile-v1-routing-20261013.json",
+    "tests/qualification/dng-profile-v1-integration-20261013.json"
+  ],
+  "limitations": [
+    "Synthetic containers and finite source/byte controls do not establish complete DNG/Adobe validity, numerical camera-profile correctness, decoded samples or current-edit rendering equivalence.",
+    "Modern/private tag grammars, representative camera/Lightroom corpus qualification and layout-changing XMP updates remain future work.",
+    "The eight retained sparse files across direct compiler runs were checked only through recorded small extents/samples, logical size and allocation; no full sparse-file digest, proof or transfer was performed.",
+    "Only one remote root is supported by the current CLI. Two-remote tests establish rejection, and linked feature-order tests are boundary/reuse evidence.",
+    "Routing inode, process ownership and no-op histories are recorded in-execution assertions; this review does not claim crash durability, every-descendant reaping or typed archive authority.",
+    "Exact complement/target hashes and logical write counters do not measure physical APFS sharing/writes or end-to-end performance; ZFS/ReFS/new-platform runtime qualification is unchanged.",
+    "Whole-process FD/RSS bounds, native transient peaks, parser/ingress/child allocations, persistent allocator failure, broader post-dispatch recovery and compiler-proved safe scheduling remain open.",
+    "No production photos, catalog/cache, live volumes or deployment were operated on in this slice."
+  ],
+  "publication_only_review": {
+    "status": "accepted source/receipt amendment; no tests or builds rerun",
+    "accepted_utc": "2026-10-13T22:28:42Z",
+    "original_execution_acceptance_utc": "2026-10-13T22:21:12Z",
+    "prior_independent_review": {
+      "path": "/private/tmp/unison-dng-v1-independent-nzlq35li/independent-review-original-404f47f0.json",
+      "sha256": "404f47f057f48e333253b82052c2a1a937474c38eab1259165968985e74ff9c3"
+    },
+    "normalization": {
+      "path": "tests/dng_profile_v1/fixtures.py",
+      "qualified_source_sha256": "9beea7e0fda0102a1710f2857bf04898ced43486301da5ba140708eb7e82854b",
+      "published_package_source_sha256": "7eafe2c25b47a8526f7b159ff0f5dfd7f12a689a99a5de1700ec6c98f11f0df3",
+      "qualified_bytes": 27267,
+      "published_package_bytes": 27266,
+      "transform": "Remove exactly one surplus final LF byte. Remaining bytes equal the qualified source prefix; Python AST is identical.",
+      "tests_rerun": false,
+      "previous_sealed_direct_receipt": {
+        "path": "/private/tmp/unison-dng-profile-v1-direct-qualified-2a1d7a4e.json",
+        "sha256": "2a1d7a4e188f7f2b78f3d153f569ecc6e202b8e256b8f19481a5315d9a632513"
+      },
+      "scope": "Publication-only whitespace normalization; no behavioral edit or rerun. All existing compiler execution/source/log/artifact pins and result counters remain unchanged and bind the original qualified source. Nested source-match flags remain qualification-time observations; the explicit new package SHA is the sole current source difference."
+    },
+    "checks": [
+      "Both retained executed fixture copies remain pinned to the qualified 27,267-byte source.",
+      "The published 27,266-byte fixture equals the qualified bytes with exactly one final LF removed.",
+      "Python AST dumps, including location attributes, are identical for both executed fixture copies and published bytes.",
+      "The direct successor adds only publication_normalization; every original record, executed source/hash, compiler/log/artifact pin and result counter is unchanged.",
+      "The aggregate successor changes only its direct component receipt hash and adds publication_only_amendment; production/build/source/log/test/result records are identical.",
+      "The previous sealed direct, aggregate and independent receipts remain resolvable at their exact qualified hashes.",
+      "All ten document pins remain unchanged."
+    ],
+    "evidence_boundary": "The existing component audit counters and result claims describe the original executed artifact/source bytes. The newline-normalized package is independently source-reviewed as behaviorally equivalent; its new byte hash is not represented as a freshly executed test/build input. This amendment reuses the accepted retained-artifact audits without rerunning or broadening them."
+  }
+}

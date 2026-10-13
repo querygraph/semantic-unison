@@ -7,7 +7,7 @@ python3 tools/semantic-inspect/run.py \
   --base /path/before.dng /path/after.dng
 ```
 
-It builds in a temporary directory and prints one JSON object. No files, roots,
+It builds in a temporary directory and prints one JSON object. No file contents, roots,
 archives or preferences are changed. Omit `--base` to inspect one file. A supported
 file report includes full and complement SHA-256 identities and editable extents.
 The comparison reports `exact_bytes`, `editable_metadata` or `other_bytes`,
@@ -21,10 +21,15 @@ not avoid hashing costs or predict APFS physical writes. The report is an
 observation of separately stable reads, not a future commit authorization.
 This tool neither decodes raw samples nor invokes Adobe validation.
 
-The standalone registration currently contains the DNG implementation. Its
+The standalone registration contains both compiled DNG profile versions. Its
 inspection, classification and planning use the same generic semantic kernel
 as Unison; adding another compiled profile requires adding its registration
 and source to this small standalone build as well as to the application.
+
+The developer tool retains `org.firstpair.dng-xmp/0` as its default. Select
+`--profile org.firstpair.dng-xmp/1` for BigTIFF and the bounded embedded
+camera-profile graph. Both versions require full-file hashing; see the
+[v1 contract](../../doc/dng-profile-v1.md).
 
 The diagnostic JSON schema is now `unison-semantic-inspect/1`. Supported DNG
 observations add a versioned interpretation schema and bounded expanded XMP

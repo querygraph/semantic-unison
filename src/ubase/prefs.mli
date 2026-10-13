@@ -50,6 +50,11 @@ val createBool :
      -> ?cli_only:bool      (* only a command line option, not in a profile *)
      -> ?local:bool             (* whether it is local to the client *)
      -> ?send:(unit->bool)  (* whether preference should be sent to server *)
+     -> ?send_value:(bool->bool)
+                            (* pure outgoing-only value transformation;
+                               defaults to identity. Keeps BOOL CLI parsing,
+                               local values/printing and incoming decoding;
+                               the default wire encoding is unchanged. *)
      -> bool                (* initial value *)
      -> ?deprecated:bool    (* preference is deprecated (default false) *)
      -> string              (* documentation string *)
@@ -86,6 +91,11 @@ val createStringList :
      -> ?cli_only:bool      (* only a command line option, not in a profile *)
      -> ?local:bool             (* whether it is local to the client *)
      -> ?send:(unit->bool)  (* whether preference should be sent to server *)
+     -> ?send_value:(string list->string list)
+                            (* pure outgoing-only value transformation;
+                               defaults to identity. Keeps STRING_LIST CLI
+                               parsing, local values/printing and incoming
+                               decoding; default wire encoding is unchanged. *)
      -> ?deprecated:bool    (* preference is deprecated (default false) *)
      -> string              (* documentation string *)
      -> string              (* full (tex) documentation string *)

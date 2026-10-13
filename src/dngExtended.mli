@@ -1,0 +1,3 @@
+include FormatExtension.S
+val observer : FormatExtension.observer
+(** The advisory XMP observer is shared with the classic v0 profile. *)

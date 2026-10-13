@@ -22,6 +22,7 @@ sources = [
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
+    "src/dngExtended.mli", "src/dngExtended.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
     "src/semanticWorkers.mli", "src/semanticWorkers.ml",
     "tests/workers/test.ml",
@@ -50,6 +51,24 @@ with tempfile.TemporaryDirectory(prefix="unison-workers-") as tmp:
     target = bytearray(dng)
     target[1024:1024 + len(packet)] = b"<x>two</x>      "
     (build / "target.dng").write_bytes(target)
+    # BigTIFF with an independently big-endian classic CR profile. These
+    # synthetic bytes qualify structural proofs, not SDK-valid image pixels.
+    extended = bytearray(2 * 1024 * 1024)
+    struct.pack_into("<2sHHHQ", extended, 0, b"II", 43, 8, 0, 16)
+    entries = [(273, 16, 1, 4096), (279, 16, 1, 1024),
+               (700, 1, len(packet), 1024), (50706, 1, 4, 1025),
+               (50933, 16, 1, 2048)]
+    struct.pack_into("<Q", extended, 16, len(entries))
+    for i, entry in enumerate(entries):
+        struct.pack_into("<HHQQ", extended, 24 + i * 20, *entry)
+    struct.pack_into(">2sHIH", extended, 2048, b"MM", 0x4352, 8, 1)
+    struct.pack_into(">HHII", extended, 2058, 50936, 2, 16, 64)
+    extended[2112:2128] = b"profile value!  "
+    extended[1024:1024 + len(packet)] = packet
+    extended[4096:5120] = b"R" * 1024
+    (build / "extended-base.dng").write_bytes(extended)
+    extended[1024:1024 + len(packet)] = b"<x>two</x>      "
+    (build / "extended-target.dng").write_bytes(extended)
     with (build / "large.dng").open("wb") as out:
         out.write(dng)
         out.truncate(1073741824)

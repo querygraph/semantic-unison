@@ -154,3 +154,10 @@ stubs are linked as in production. This is correctness evidence, not a
 throughput benchmark or a qualification of unrelated legacy C stubs for
 concurrent execution. The separate [cached SHA benchmark](../bench/semantic/README.md)
 records measured scaling, including 18 versus 36 workers.
+
+The extended DNG regression also creates 18 domains, compares 36 concurrent
+BigTIFF/CR inspections with sequential proofs and materializes 18 independent
+private outputs. Each job opens its own basis description, preserving separate
+positions; immutable v1 handles are selected on the owner. Exact target hashes,
+logical metadata writes, unchanged basis and settled CPU/worker usage are
+checked. This is correctness evidence using small synthetic files.
