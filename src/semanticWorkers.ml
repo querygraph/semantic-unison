@@ -3,12 +3,16 @@ module H = HelperSupervisor
 type fingerprint = { digest : string; stats : Unix.LargeFile.stats }
 type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
+type observation = { inspection : inspection;
+  meaning : (FormatExtension.observation, string) result option }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
+  | Observed of observation
   | Applied of SemanticDelta.application | Cancelled | Error of string
 type operation = Digest | Inspect of FormatExtension.handle
+  | Observe of FormatExtension.handle
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
              operation : operation }
@@ -67,6 +71,16 @@ let execute job =
       | Inspect extension ->
         Inspected {proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
+      | Observe extension ->
+        let proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
+          (FormatExtension.implementation extension) file in
+        check_cancel ();
+        let meaning = match proof with
+          | Error _ -> None
+          | Ok proof -> SemanticDelta.observe ~extension proof in
+        check_cancel ();
+        SemanticFile.check file;
+        Observed {inspection={proof;stats};meaning}
       | Apply (extension, plan, output) ->
         let report = SemanticDelta.apply_report_with_extension ~check_cancel
           ~max_payload:(FormatExtension.payload_limit extension) (FormatExtension.implementation extension)
@@ -212,7 +226,7 @@ let submit t cancellation fd requested_operation =
           end) >>= function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Applied _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Applied _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result))
       (fun result -> finish (); return result)
@@ -229,6 +243,12 @@ let inspect t cancellation ~extension fd =
   | None -> return None
   | Some (Inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected inspection response")
+
+let observe t cancellation ~extension fd =
+  submit t cancellation fd (Observe extension) >>= function
+  | None -> return None
+  | Some (Observed result) -> return (Some result)
+  | Some _ -> fail (Failed "unexpected observation response")
 
 let apply_report t cancellation ~extension plan ~basis ~output =
   submit t cancellation basis (Apply (extension, plan, output)) >>= function

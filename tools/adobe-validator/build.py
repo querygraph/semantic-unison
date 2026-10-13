@@ -19,6 +19,8 @@ parser.add_argument("--build-dir", type=Path, required=True)
 parser.add_argument("--jobs", type=int, default=min(12, os.cpu_count() or 1))
 parser.add_argument("--fixture-only", action="store_true",
                     help="rebuild test fixture writer using existing SDK libraries; preserve validator and manifest")
+parser.add_argument("--experimental-area-task-host", action="store_true",
+                    help="build a separately named UNQUALIFIED capped area-task adapter; never replaces the qualified v1 driver")
 args = parser.parse_args()
 sdk = args.sdk_root.resolve()
 build = args.build_dir.resolve()
@@ -27,6 +29,8 @@ if sys.platform != "darwin":
     parser.error("this qualified build currently supports macOS only")
 if args.jobs < 1:
     parser.error("--jobs must be positive")
+if args.fixture_only and args.experimental_area_task_host:
+    parser.error("--fixture-only cannot select an experimental validator build")
 if "1.7.1 2724" not in (sdk / "DNG_ReadMe.txt").read_text():
     parser.error("requires reviewed Adobe SDK 1.7.1 build 2724")
 if not (sdk / "LICENSE.txt").is_file():
@@ -98,13 +102,19 @@ xmp_sources = sources(xmp / "XMPCore/build/CMake64_libcpp_Static/XMPCore64.xcode
                       "XMPCoreStaticRelease")
 jobs = [(p, dng_flags) for p in dng_sources] + [(p, xmp_flags) for p in xmp_sources]
 if not args.fixture_only:
-    jobs.append((here / "driver.cpp", dng_flags))
+    driver_flags = dng_flags + (["-DUNISON_EXPERIMENTAL_AREA_TASK_HOST=1"]
+                               if args.experimental_area_task_host else [])
+    jobs.append((here / "driver.cpp", driver_flags))
 
 def compile_one(job):
     source, flags = job
     signature = hashlib.sha256((str(source) + repr(common + flags)).encode()).hexdigest()[:16]
     obj = build / (source.stem + "-" + signature + ".o")
-    if obj.exists() and obj.stat().st_mtime >= source.stat().st_mtime:
+    # Adapter headers affect the driver even when driver.cpp itself is unchanged.
+    dependencies = [source]
+    if source == here / "driver.cpp":
+        dependencies += [here / "area_scheduler.h", here / "area_task_host.h"]
+    if obj.exists() and obj.stat().st_mtime >= max(p.stat().st_mtime for p in dependencies):
         return obj
     cxx = source.suffix != ".c"
     options = list(common) + list(flags)
@@ -123,7 +133,8 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
 libraries = [jxl / p for p in ["lib/libjxl.a", "lib/libjxl_cms.a", "lib/libjxl_threads.a",
     "third_party/highway/libhwy.a", "third_party/brotli/libbrotlienc.a",
     "third_party/brotli/libbrotlidec.a", "third_party/brotli/libbrotlicommon.a"]]
-binary = build / "unison-adobe-validator"
+binary = build / ("unison-adobe-validator-area-unqualified" if args.experimental_area_task_host
+                  else "unison-adobe-validator")
 link_flags = [*libraries, "-lz", "-framework", "CoreFoundation", "-framework", "CoreServices",
               "-framework", "Security"]
 if not args.fixture_only:
@@ -138,10 +149,20 @@ if args.fixture_only:
     print("Fixture writer rebuilt; qualified driver and manifest unchanged.")
     raise SystemExit(0)
 digest = hashlib.sha256(binary.read_bytes()).hexdigest()
+experimental = args.experimental_area_task_host
 manifest = {"sdk": "Adobe DNG SDK 1.7.1 build 2724", "sdk_root": str(sdk),
             "sdk_license": str(sdk / "LICENSE.txt"), "executable": str(binary),
-            "executable_sha256": digest, "build_id": "unison-sdk171-2724-v1-single",
+            "executable_sha256": digest, "build_id": ("unison-sdk171-2724-v2-area-unqualified"
+                if experimental else "unison-sdk171-2724-v1-single"),
             "source_sha256": hashlib.sha256((here / "driver.cpp").read_bytes()).hexdigest(),
-            "qualification": "not yet tested; run qualify.py", "threads": 1}
-(build / "build-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
+            "adapter_headers_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in (here / "area_scheduler.h", here / "area_task_host.h")},
+            "qualification": ("SOURCE ONLY: Adobe runtime and multithread mode unqualified"
+                if experimental else "not yet tested; run qualify.py"),
+            "threads": {"minimum": 1, "maximum": 128, "includes_caller": True}
+                if experimental else 1,
+            "protocol": "--unison-dng-validation-area-source-v0"
+                if experimental else "--unison-dng-validation-v1"}
+(build / ("build-manifest-area-unqualified.json" if experimental else "build-manifest.json"))\
+    .write_text(json.dumps(manifest, indent=2) + "\n")
 print(json.dumps(manifest, indent=2))

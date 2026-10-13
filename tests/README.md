@@ -186,3 +186,15 @@ cloning and normal Unison lifecycle; negotiated peer compatibility; and
 precommit validation. Correctness tests do not establish throughput, physical
 write amplification, crash durability, Lightroom UI parity or full DNG corpus
 coverage. Current evidence and remaining work are recorded in [SOL.md](../SOL.md).
+
+The semantic runner now includes independent SDE/SDR conformance by default:
+`tests/semantic/conformance/` contains pinned binary goldens, an independent
+Python codec/transcript, boundary recipes and production rejection/materialization
+controls. `--skip-conformance` is available for a focused original-kernel run.
+`tests/xmp_observation/` independently qualifies the advisory XML subset and
+encoding/context transcript. `tests/report/` covers SIR/0 and SIR/1 bounds and
+comparison scope. `tests/test_semantic_meaning.py` exercises actual local/remote
+worker/CLI paths with synthetic DNGs and a preceding SIR/0 binary.
+`tests/area_scheduler/` runs an Adobe-free C++ scheduler and compiles the two
+SDK adapter modes only to unlinked objects; this source receipt is not actual
+SDK runtime qualification.

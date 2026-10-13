@@ -11,17 +11,27 @@ let quote s =
   Buffer.add_char b '"'; Buffer.contents b
 let object_ fields = "{" ^ String.concat "," (List.map (fun (k,v) -> quote k ^ ":" ^ v) fields) ^ "}"
 let array xs = "[" ^ String.concat "," xs ^ "]"
-let report path = function
+let category = function
+  | FormatExtension.Descriptive -> "descriptive" | Rendering -> "rendering"
+  | Identity -> "identity" | Workflow -> "workflow" | Opaque -> "opaque"
+let meanings extension proof = match SemanticDelta.observe ~extension proof with
+  | None -> []
+  | Some (Error why) -> ["interpretation_unavailable",quote why]
+  | Some (Ok value) -> ["interpretation_schema",quote value.FormatExtension.schema;
+      "properties",array (List.map (fun (p:FormatExtension.property) -> object_
+        ["name",quote p.name;"category",quote (category p.category);
+         "encoding_context_sha256",quote (SemanticHash.hex p.digest)]) value.properties)]
+let report extension path = function
   | Error reason -> object_ ["path",quote path; "status",quote "unsupported";
                              "reason",quote reason]
   | Ok proof ->
     let d = SemanticDelta.describe proof in
-    object_ ["path",quote path; "status",quote "supported";
+    object_ (["path",quote path; "status",quote "supported";
       "profile",quote d.profile; "size",Int64.to_string d.size;
       "sha256",quote (SemanticHash.hex d.digest);
       "preserved_sha256",quote (SemanticHash.hex d.preserved_digest);
       "editable_regions",array (List.map (fun (r:FormatExtension.region) ->
-        object_ ["offset",Int64.to_string r.offset; "length",string_of_int r.length]) d.regions)]
+        object_ ["offset",Int64.to_string r.offset; "length",string_of_int r.length]) d.regions)] @ meanings extension proof)
 let inspect extension path =
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
   Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
@@ -45,7 +55,7 @@ let compare base target = match base,target with
         "request_bytes",string_of_int (String.length (SemanticDelta.encode_request
           ~nonce:(String.make 32 '\000') base))]
 let main () =
-  FormatExtension.register (module DngSemantic);
+  FormatExtension.register ~observer:DngSemantic.observer (module DngSemantic);
   let selected = ref DngSemantic.profile and base = ref None and target = ref None in
   Arg.parse ["--profile",Arg.Set_string selected,"ID Compiled format profile";
              "--base",Arg.String (fun p -> base := Some p),"FILE Compare against a basis"]
@@ -53,13 +63,14 @@ let main () =
       | Some _ -> raise (Arg.Bad "exactly one target file is required"))
     "semantic-inspect [--profile ID] [--base FILE] TARGET";
   let path = match !target with Some p -> p | None -> failwith "a target file is required" in
-  let extension = match FormatExtension.find !selected with Some e -> e
+  let handle = match FormatExtension.resolve !selected with Some e -> e
     | None -> failwith ("unknown compiled profile: " ^ !selected) in
+  let extension = FormatExtension.implementation handle in
   let target = inspect extension path in
-  let fields = ["schema",quote "unison-semantic-inspect/0"; "target",report path target] in
+  let fields = ["schema",quote "unison-semantic-inspect/1"; "target",report handle path target] in
   let fields = match !base with None -> fields | Some path ->
     let base = inspect extension path in
-    fields @ ["basis",report path base] @ compare base target in
+    fields @ ["basis",report handle path base] @ compare base target in
   print_endline (object_ (fields @ ["verification",quote
     "Supported inputs were fully read and SHA-256 hashed. This is a read-only observation, not a commit authorization or Adobe validation."]))
 let () = try main () with error ->

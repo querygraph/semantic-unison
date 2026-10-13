@@ -7,4 +7,10 @@ module Toy = struct
     then Error "not a toy fixture"
     else Ok {FormatExtension.regions=[{offset=4L;length=4}]}
 end
-let () = SemanticFormats.register ~max_payload:FormatExtension.max_region (module Toy)
+let observer : FormatExtension.observer = {
+  schema="org.unison.toy-properties/0";
+  observe=(function [packet] -> Ok [{FormatExtension.name="toy:workflow-state";
+    category=FormatExtension.Workflow;digest=SemanticHash.string packet}]
+    | _ -> Error "expected one toy packet")
+}
+let () = SemanticFormats.register ~max_payload:FormatExtension.max_region ~observer (module Toy)

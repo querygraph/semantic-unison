@@ -31,6 +31,11 @@ val decode_request : string -> (string * proof, string) result
 (** Canonical SDR/0 description containing nonce, full/complement hashes and
     bounded metadata region hashes, without metadata contents. A decoded
     proof is only a peer claim; use it as the base input to [plan]. *)
+val observe : extension:FormatExtension.handle -> proof ->
+  (FormatExtension.observation, string) result option
+(** Worker-local optional advisory interpretation of the retained full editable
+    packet bytes. Never call on an SDR peer claim or use it as transfer authority.
+    SDE/0, SDR/0, preservation hashing and exact-byte classification are unchanged. *)
 val binds_request : nonce:string -> base:proof -> t -> bool
 (** Match a response against the receiver's retained local proof and nonce
     before applying anything. *)

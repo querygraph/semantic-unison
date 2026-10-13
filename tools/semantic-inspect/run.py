@@ -12,7 +12,7 @@ args, forwarded = parser.parse_known_args()
 if forwarded[:1] == ["--"]:
     forwarded = forwarded[1:]
 root = Path(__file__).resolve().parents[2]
-modules = ["semanticHash", "semanticFile", "formatExtension", "dngSemantic", "semanticDelta"]
+modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "semanticDelta"]
 with tempfile.TemporaryDirectory(prefix="unison-semantic-inspect-") as temporary:
     build = Path(temporary)
     for name in modules:

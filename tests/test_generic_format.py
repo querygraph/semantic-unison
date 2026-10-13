@@ -70,7 +70,9 @@ def main():
             report_test(binary,binary,"opaque.bin",original,
                         b"TOY0bbbb" + b"X" * 2000000,b"TOY0cccc" + b"X" * 2000000,
                         classification="Classification: editable metadata differs; all bytes outside those regions match.",
-                        remote=remote,profile="org.unison.test-fixed/0")
+                        remote=remote,profile="org.unison.test-fixed/0",
+                        expected_meaning=("Extension interpretation: org.unison.toy-properties/0",
+                                          "workflow metadata: toy:workflow-state encoding/context changed"))
         print("registered second format: generic local/remote CLI diff/details without dispatch branches")
 
 

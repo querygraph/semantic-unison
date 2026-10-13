@@ -81,6 +81,75 @@ hardware-concurrency helpers exist in libjxl but are not called by this SDK
 decode path. The JPEG and embedded XMP paths do not create worker threads.
 Changing the host or codec runner requires repeating this budget audit.
 
+The repository also contains an **unqualified, source-only** capped area-task
+host. It does not change the default build or enable additional threads in
+Unison. An explicit `build.py --experimental-area-task-host` selection produces
+`unison-adobe-validator-area-unqualified`, a separate
+`build-manifest-area-unqualified.json`, and build ID
+`unison-sdk171-2724-v2-area-unqualified`. Use a fresh build directory for this
+variant. Its entrypoint is
+`--unison-dng-validation-area-source-v0`, which the production v1 caller never
+sends. Installing or pinning this artifact therefore cannot silently enable a
+multithread validator. This variant has not been linked or run in the source
+qualification below, and it must not replace an endpoint's qualified driver.
+
+The adapter overrides the SDK's actual `PerformAreaTask` and
+`PerformAreaTaskThreads` interfaces. It accepts an explicit total allowance of
+1..128 threads, including the caller. An explicit one-thread host delegates to
+the SDK's original execution path. For a parallel area task, its strip plan
+honors `MaxThreads`, `MinTaskArea` and `UnitCell`; the SDK's `ProcessOnThread`
+continues to apply repeating-tile boundaries, tile iteration and maximum tile
+size. `Start` receives the actual partition count. Every created worker joins
+before `Finish`, which receives the same count. A completed `Start` gets one
+`Finish` even after processing or thread-creation failure; a failing `Start`
+retains the SDK's own partial-construction cleanup convention. The first task
+error survives a secondary finalization error.
+
+Area-worker, startup and finalization scopes report one thread to nested area
+tasks and codecs. This matters because SDK tiled reads can decode JPEG XL from
+inside an area worker. Returning the full allowance there would multiply both
+sets of workers. Top-level JPEG XL decoding receives the requested total
+allowance; the bundled runner includes its caller and creates at most allowance
+minus one workers. Area threads are created per synchronous task and joined,
+so an idle persistent area pool cannot overlap a subsequent top-level codec
+runner. The endpoint must reserve the entire requested allowance in Unison's
+shared CPU-credit budget before invocation; this source adapter does not acquire
+credits from the parent process itself.
+
+Worker failures request cooperative cancellation of the other workers. The
+shared abort wrapper checks this request at SDK sniff points and forwards an
+existing sniffer's cancellation checks, serializing delegates which do not
+declare `ThreadSafe`. Tile-progress notifications are serialized. Cancellation
+does not interrupt arbitrary SDK work between sniff points, and runtime timeout
+and subprocess settlement remain the caller's responsibility. The current
+validator uses no custom sniffer or progress reporter. The wrapper does not
+claim to forward protected nested sniffer task/progress notifications; a future
+host exposing those notifications needs a separately qualified adapter contract.
+
+Only the generic scheduler, which contains no Adobe or codec code, has been
+executed. Its controls cover 1/6/18/36/128 allowances, disjoint rectangle
+coverage, task constraints, signed-coordinate bounds, caller accounting,
+nested allowances, startup/worker-launch/processing/finalization failures,
+cooperative cancellation and joining before cleanup. AddressSanitizer and
+UndefinedBehaviorSanitizer pass, and deliberately removing the nesting cap
+fails the controls. Compile-only checks against the actual separately obtained
+SDK headers verify both driver modes without linking or loading the SDK:
+
+```
+python3 tests/area_scheduler/run.py \
+  --sdk-root /absolute/path/dng_sdk_1_7_1 \
+  --dependency-build-dir /absolute/path/existing-adobe-validator-build
+```
+
+This command never executes the SDK driver, fixture writer, codec or Lightroom,
+and writes its artifacts and source-pinned receipt to a private temporary
+directory. See [the scheduler source review](AREA-TASK-SOURCE-REVIEW.md).
+Real SDK output equivalence, tile-layout/codec coverage, allocator/task safety,
+actual thread counts, cancellation and performance still require a coordinated
+finite invocation window. Successful source controls are not a production
+capability advertisement. A later versioned caller capability and endpoint
+qualification must be added explicitly after those runtime checks.
+
 The driver independently hashes the entire candidate before and after decoding,
 parses SDK structural metadata and embedded XMP, decodes the original stage-1 raw
 image (not an enhanced-image substitute), reads associated masks, and checks

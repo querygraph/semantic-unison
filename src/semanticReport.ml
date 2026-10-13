@@ -1,14 +1,15 @@
 type supported = {
   description : SemanticDelta.description;
   samples : SemanticDelta.sample list;
+  meaning : (FormatExtension.observation, string) result option;
 }
 type observation = Supported of supported | Unsupported of string * string |
                    Unavailable of string * string
 type classification = Exact_bytes | Metadata_only | Other_bytes | Unknown
 let max_size = 32768
 let reason value = if String.length value <= 1024 then value else String.sub value 0 1024
-let from_proof proof = Supported {description=SemanticDelta.describe proof;
-  samples=SemanticDelta.samples proof}
+let from_proof ?meaning proof = Supported {description=SemanticDelta.describe proof;
+  samples=SemanticDelta.samples proof;meaning}
 let profile = function Supported value -> value.description.SemanticDelta.profile
   | Unsupported (profile,_) | Unavailable (profile,_) -> profile
 let same_layout left right =
@@ -108,12 +109,83 @@ let decode ~nonce ~profile ~max_payload encoded =
               | _ -> raise (Bad "invalid report sample flag") in
             {SemanticDelta.region={FormatExtension.offset;length};digest;prefix;truncated}) in
           Supported {description={SemanticDelta.profile;size;digest;preserved_digest;
-            regions=List.map (fun (sample:SemanticDelta.sample) -> sample.region) samples};samples}
+            regions=List.map (fun (sample:SemanticDelta.sample) -> sample.region) samples};samples;meaning=None}
       | _ -> raise (Bad "unknown report observation") in
     if !position<>String.length encoded then raise (Bad "trailing report bytes");
     validate ~max_payload result;
     Ok result
   with Bad why -> Error why
+let max_observation_size = 131072
+let observation_magic = "SIR\000\000\000\000\001"
+let category_code = function
+  | FormatExtension.Descriptive -> "\000" | Rendering -> "\001"
+  | Identity -> "\002" | Workflow -> "\003" | Opaque -> "\004"
+let encode_observation ~nonce observation =
+  let base = encode ~nonce observation in
+  let buffer = Buffer.create (String.length base + 1024) in
+  let put value = Buffer.add_string buffer value in
+  let small n = put (u64 (Int64.of_int n)) in
+  let string value = small (String.length value); put value in
+  put observation_magic; string base;
+  (match observation with
+   | Supported {meaning=Some (Error why);_} ->
+       if String.length why > 1024 then invalid_arg "semantic observation reason limit";
+       put "\001"; string why
+   | Supported {meaning=Some (Ok meaning);_} ->
+       (match FormatExtension.validate_observation meaning with
+        | Error why -> invalid_arg why | Ok () -> ());
+       put "\002"; string meaning.schema; small (List.length meaning.properties);
+       List.iter (fun (property:FormatExtension.property) ->
+         string property.name; put (category_code property.category); put property.digest) meaning.properties
+   | _ -> put "\000");
+  let encoded = Buffer.contents buffer in
+  if String.length encoded > max_observation_size then invalid_arg "semantic observation size";
+  encoded
+let decode_observation ~nonce ~profile ~max_payload encoded =
+  try
+    if String.length encoded > max_observation_size then raise (Bad "observation too large");
+    let position = ref 0 in
+    let take n =
+      if n < 0 || n > String.length encoded - !position then raise (Bad "truncated observation");
+      let value = String.sub encoded !position n in position := !position+n; value in
+    let small limit =
+      let value = ref 0L in
+      String.iter (fun c -> value := Int64.logor (Int64.shift_left !value 8) (Int64.of_int (Char.code c))) (take 8);
+      if !value < 0L || !value > Int64.of_int limit then raise (Bad "observation field limit");
+      Int64.to_int !value in
+    let string limit = take (small limit) in
+    if take 8 <> observation_magic then raise (Bad "unknown observation version");
+    let base = match decode ~nonce ~profile ~max_payload (string max_size) with
+      | Error why -> raise (Bad why) | Ok base -> base in
+    let meaning = match take 1 with
+      | "\000" -> None
+      | "\001" -> Some (Error (string 1024))
+      | "\002" ->
+          let schema = string 128 in
+          let properties = List.init (small 128) (fun _ ->
+            let name = string 512 in
+            let category = match take 1 with
+              | "\000" -> FormatExtension.Descriptive | "\001" -> Rendering
+              | "\002" -> Identity | "\003" -> Workflow | "\004" -> Opaque
+              | _ -> raise (Bad "unknown property category") in
+            let digest = take 32 in
+            {FormatExtension.name;category;digest}) in
+          let value = {FormatExtension.schema;properties} in
+          (match FormatExtension.validate_observation value with
+           | Error why -> raise (Bad why) | Ok () -> ());
+          Some (Ok value)
+      | _ -> raise (Bad "unknown observation status") in
+    if !position <> String.length encoded then raise (Bad "trailing observation bytes");
+    (match base,meaning with
+     | Supported supported,_ -> Ok (Supported {supported with meaning})
+     | _,None -> Ok base
+     | _ -> raise (Bad "properties require a supported byte observation"))
+  with Bad why -> Error why
+let category_name = function
+  | FormatExtension.Descriptive -> "descriptive metadata"
+  | Rendering -> "rendering metadata" | Identity -> "identity metadata"
+  | Workflow -> "workflow metadata" | Opaque -> "unclassified metadata"
+
 let escaped value =
   let buffer = Buffer.create (String.length value) in
   String.iter (fun c -> match c with
@@ -133,6 +205,38 @@ let render ~left_label ~right_label left right =
     | Metadata_only -> "Classification: editable metadata differs; all bytes outside those regions match."
     | Other_bytes -> "Classification: other bytes or the editable-region layout differ."
     | Unknown -> "Classification: unavailable; the two files cannot be equated by this observation.");
+  add "This compares the observed current files, without an archived base. Metadata can affect presentation; no rendering equivalence or conflict resolution is inferred.";
+  (match left,right with
+   | Supported {meaning=Some (Ok a);_},Supported {meaning=Some (Ok b);_} when a.schema=b.schema ->
+       add ("Extension interpretation: " ^ escaped a.schema);
+       add "Property categories are advisory. Encoding/context equality is not XML/RDF value equality or rendering equivalence.";
+       let changes = ref 0 in
+       let add_change property action =
+         incr changes;
+         if !changes <= 32 then
+           add ("  " ^ category_name property.FormatExtension.category ^ ": " ^
+             escaped property.name ^ " encoding/context " ^ action) in
+       let rec compare left right = match left,right with
+         | [],[] -> ()
+         | property::rest,[] -> add_change property "removed"; compare rest []
+         | [],property::rest -> add_change property "added"; compare [] rest
+         | (a:FormatExtension.property)::ar,(b:FormatExtension.property)::br ->
+             let order = String.compare a.name b.name in
+             if order < 0 then (add_change a "removed"; compare ar right)
+             else if order > 0 then (add_change b "added"; compare left br)
+             else begin
+               if a.category <> b.category then add_change {b with category=FormatExtension.Opaque} "category differs"
+               else if a.digest <> b.digest then add_change b "changed";
+               compare ar br
+             end in
+       compare a.properties b.properties;
+       if !changes = 0 then add "  No declared property encodings differ; packet bytes may still differ."
+       else if !changes > 32 then add (Printf.sprintf "  [%d additional property changes omitted]" (!changes-32))
+   | Supported {meaning=Some (Error why);_},_ -> add ("Extension interpretation unavailable: " ^ display_reason why)
+   | _,Supported {meaning=Some (Error why);_} -> add ("Extension interpretation unavailable: " ^ display_reason why)
+   | Supported {meaning=Some (Ok _);_},Supported {meaning=Some (Ok _);_} ->
+       add "Extension interpretation unavailable: observation schema versions differ."
+   | _ -> ());
   let describe label = function
     | Unsupported (_,why) -> add (escaped label ^ ": unsupported: " ^ escaped why)
     | Unavailable (_,why) -> add (escaped label ^ ": unavailable: " ^ escaped why)
@@ -145,6 +249,5 @@ let render ~left_label ~right_label left right =
             sample.region.offset sample.region.length (SemanticHash.hex sample.digest));
           add ("  Escaped byte preview" ^ (if sample.truncated then " (truncated)" else "") ^ ": " ^ escaped sample.prefix)) value.samples in
   describe left_label left; describe right_label right;
-  add "This compares the observed current files, without an archived base. Metadata can affect presentation; no rendering equivalence or conflict resolution is inferred.";
   let result=String.concat "\n" (List.rev !lines) ^ "\n" in
   if String.length result<=65536 then result else String.sub result 0 65480 ^ "\n[display truncated]\n"

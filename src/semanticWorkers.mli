@@ -6,6 +6,8 @@ type t
 type fingerprint = { digest : string; stats : Unix.LargeFile.stats }
 type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
+type observation = { inspection : inspection;
+  meaning : (FormatExtension.observation, string) result option }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
@@ -25,6 +27,12 @@ val inspect : t -> HelperSupervisor.cancellation -> extension:FormatExtension.ha
   Unix.file_descr -> inspection option Lwt.t
 (** Same ownership rules as [digest]. The owner selects the trusted extension;
     the worker invokes only that immutable handle, never the registry. *)
+val observe : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
+  Unix.file_descr -> observation option Lwt.t
+(** Read-only inspection plus optional extension interpretation of the complete
+    retained editable packets, under the same ownership/budget/stability rules.
+    Only explicit report requests use this operation; ordinary transfers do not
+    parse metadata semantics or pay that extra cost. *)
 val apply : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
   SemanticDelta.t -> basis:Unix.file_descr -> output:Unix.file_descr -> unit option Lwt.t
 (** Generic verified materialization. Rejects an extension/profile mismatch

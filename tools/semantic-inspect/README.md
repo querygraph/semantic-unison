@@ -25,3 +25,11 @@ The standalone registration currently contains the DNG implementation. Its
 inspection, classification and planning use the same generic semantic kernel
 as Unison; adding another compiled profile requires adding its registration
 and source to this small standalone build as well as to the application.
+
+The diagnostic JSON schema is now `unison-semantic-inspect/1`. Supported DNG
+observations add a versioned interpretation schema and bounded expanded XMP
+property names, potential categories and encoding/context SHA-256 values.
+Unsupported XMP interpretation carries a reason while retaining the whole-file
+and preservation proof. These fields are advisory; they are not RDF value
+canonicalization, rendered-pixel identity or merge authority. See
+[the observation contract](../../doc/semantic-observation-v1.md).

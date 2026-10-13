@@ -1,0 +1,32 @@
+{
+  "utc": "2026-10-13T16:56:13.717095+00:00",
+  "status": "ACCEPTED_SOURCE_ONLY_EXPERIMENTAL_SCOPE",
+  "qualification_receipt": {
+    "path": "tests/area_scheduler/qualification-20261013.json",
+    "sha256": "cd0b33591b0762f3a321880775c06e3e47b29f71d9d7ffdf0f646d562315997c"
+  },
+  "reviewer": "independent remaining_goal_audit agent",
+  "verified": {
+    "repository_source_pins": 9,
+    "sdk_source_pins": 11,
+    "retained_artifact_pins": 13,
+    "adobe_free_assertions": 789,
+    "normal_and_sanitizers": true,
+    "nested_thread_negative_control_detected": true
+  },
+  "accepted_source_contract": [
+    "Accurate current SDK PerformAreaTask/Threads override, MaxThreads/profitability/unit-cell count and retained SDK ProcessOnThread tile iteration.",
+    "Start uses actual selected count; worker indices bounded; all threads join before one matching Finish; primary exception preserved.",
+    "Synchronous allocator/sniffer/progress lifetimes under current validator defaults; custom sniffer notifications remain unsupported.",
+    "Nested area/codec CPU cap1; original one-thread reference delegation remains unchanged.",
+    "Experimental artifact/build ID/argv protocol separate and current production v1 caller rejected before SDK initialization."
+  ],
+  "runtime_qualification": false,
+  "sdk_execution_or_linking": false,
+  "photo_or_payload_access": false,
+  "limits": [
+    "SDK JXL can retain idle codec OS threads while area work begins. Credits bound runnable CPU work, not resident OS thread count or memory. Actual peaks remain unqualified.",
+    "Busy concurrent-entry guard applies only to experimental multithread path; exact SDK one-thread reference path bypasses it.",
+    "Real SDK task/tile/pixel parity, allocator/index behavior, codec interaction, cancellation, memory and performance still require coordinated qualification."
+  ]
+}

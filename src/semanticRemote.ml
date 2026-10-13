@@ -338,12 +338,14 @@ let try_transfer_with_producer ~producer ~connection ~source ~basis ~directory ~
 (* Advisory current-file observations use their own negotiated command. They
    carry no transfer/commit authority, and never download the complete file. *)
 let inspection_transport = Features.register "semantic-inspect-v0" ~arcFormatChange:false None
+let meaning_transport = Features.register "semantic-inspect-v1" ~arcFormatChange:false None
 type inspection = {
   observation : SemanticReport.observation;
   local_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
 }
 let inspection_supported connection =
   Remote.connectionVersion connection >= 1 && Features.enabled inspection_transport
+let meaning_supported connection = inspection_supported connection && Features.enabled meaning_transport
 let report_failure profile reason =
   {observation=SemanticReport.Unavailable (profile,SemanticReport.reason reason);local_snapshot=None}
 let same_report_stats a b =
@@ -354,42 +356,45 @@ let capture_report profile f = Lwt.catch f (function
   | Unix.Unix_error (error,operation,_) ->
       return (report_failure profile (operation ^ ": " ^ Unix.error_message error))
   | error -> fail error)
-let inspect_file cancellation extension path =
+let inspect_file ?(meaning=false) cancellation extension path =
   let profile = FormatExtension.profile extension in
   capture_report profile (fun () ->
     let fd = Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
     let files = register_held_fd fd in
-    Lwt.try_bind (fun () -> borrowed files (fun () -> SemanticWorkers.inspect
-      (SemanticRuntime.get ()).pool cancellation ~extension fd))
+    Lwt.try_bind (fun () -> borrowed files (fun () ->
+      let pool = (SemanticRuntime.get ()).pool in
+      if meaning then SemanticWorkers.observe pool cancellation ~extension fd else begin
+      SemanticWorkers.inspect pool cancellation ~extension fd >>= fun result ->
+      return (Option.map (fun inspection -> {SemanticWorkers.inspection;meaning=None}) result) end))
       (fun result ->
         let observed = try match result with
         | None -> report_failure profile "Semantic inspection cancelled"
-        | Some result when not (same_report_stats result.SemanticWorkers.stats (Fs.stat path)) ->
+        | Some result when not (same_report_stats result.SemanticWorkers.inspection.stats (Fs.stat path)) ->
             report_failure profile "File changed or was replaced during semantic inspection"
         | Some result ->
-          let observation = match result.SemanticWorkers.proof with
-            | Ok proof -> SemanticReport.from_proof proof
+          let observation = match result.SemanticWorkers.inspection.proof with
+            | Ok proof -> SemanticReport.from_proof ?meaning:result.SemanticWorkers.meaning proof
             | Error why -> SemanticReport.Unsupported (profile,SemanticReport.reason why) in
-          {observation;local_snapshot=Some (path,result.SemanticWorkers.stats)}
+          {observation;local_snapshot=Some (path,result.SemanticWorkers.inspection.stats)}
         with error -> held_files.release_noerr files; raise error in
         held_files.release files; return observed)
       (fun error -> held_files.release_noerr files; fail error))
 let inspection_args = Umarshal.(prod3 (bounded_string max_path)
   (bounded_string 128) (bounded_string 32) id id)
 let inspection_result = Umarshal.bounded_string SemanticReport.max_size
-let inspect_source connection (path,profile,nonce) =
+let inspect_source ~meaning connection (path,profile,nonce) =
   if String.length nonce<>32 || profile="" || String.contains profile '\000' ||
      Filename.is_relative path || String.contains path '\000' then
     fail (Util.Transient "Invalid semantic inspection request")
   else
-    let finish observation = return (SemanticReport.encode ~nonce observation) in
-    if not (inspection_supported connection) then
+    let finish observation = return ((if meaning then SemanticReport.encode_observation else SemanticReport.encode) ~nonce observation) in
+    if not ((if meaning then meaning_supported else inspection_supported) connection) then
       finish (SemanticReport.Unavailable (profile,"Semantic inspection was not negotiated"))
     else match SemanticFormats.resolve_peer profile with
     | None -> finish (SemanticReport.Unsupported (profile,"Profile is not enabled or negotiated"))
     | Some extension ->
         SemanticRuntime.with_cancellation (fun cancellation ->
-          inspect_file cancellation extension (Fspath.canonize (Some path))) >>= fun result ->
+          inspect_file ~meaning cancellation extension (Fspath.canonize (Some path))) >>= fun result ->
         finish result.observation
 let inspection_scope connection (_,profile,_) f =
   if not (inspection_supported connection) then f () else
@@ -399,21 +404,27 @@ let inspection_scope connection (_,profile,_) f =
       ~max_payload:(FormatExtension.payload_limit extension) (fun _ -> f ())
 let inspect_peer = Remote.registerBoundedServerCmd "semanticInspectV0"
   ~withScope:inspection_scope ~maxArgs:(max_path + 128 + 32 + 1024)
-  ~maxResult:(SemanticReport.max_size + 1024) inspection_args inspection_result inspect_source
+  ~maxResult:(SemanticReport.max_size + 1024) inspection_args inspection_result (inspect_source ~meaning:false)
+let inspect_meaning_peer = Remote.registerBoundedServerCmd "semanticInspectV1"
+  ~withScope:inspection_scope ~maxArgs:(max_path + 128 + 32 + 1024)
+  ~maxResult:(SemanticReport.max_observation_size + 1024) inspection_args
+  (Umarshal.bounded_string SemanticReport.max_observation_size) (inspect_source ~meaning:true)
 let observe ~root ~path ~extension =
   let profile=FormatExtension.profile extension in
   match fst root with
   | Common.Local ->
       SemanticRuntime.with_transaction ~role:SemanticAdmission.Source
         ~max_payload:(FormatExtension.payload_limit extension)
-        (fun cancellation -> inspect_file cancellation extension path)
+        (fun cancellation -> inspect_file ~meaning:true cancellation extension path)
   | Common.Remote _ ->
       let connection=Remote.connectionOfRoot root in
       if not (inspection_supported connection) then
         return (report_failure profile "Peer does not support negotiated semantic inspection")
       else capture_report profile (fun () ->
         let nonce=nonce () in
-        inspect_peer connection (Fspath.toString path,profile,nonce) >>= fun encoded ->
-        match SemanticReport.decode ~nonce ~profile ~max_payload:(FormatExtension.payload_limit extension) encoded with
+        let request,decode = if meaning_supported connection then inspect_meaning_peer,SemanticReport.decode_observation
+          else inspect_peer,SemanticReport.decode in
+        request connection (Fspath.toString path,profile,nonce) >>= fun encoded ->
+        match decode ~nonce ~profile ~max_payload:(FormatExtension.payload_limit extension) encoded with
         | Error why -> fail (Util.Transient ("Invalid semantic inspection reply: " ^ why))
         | Ok observation -> return {observation;local_snapshot=None})

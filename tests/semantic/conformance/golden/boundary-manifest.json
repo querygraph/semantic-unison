@@ -1,0 +1,761 @@
+{
+  "format": "independent-sde-sdr-boundaries-v1",
+  "generation": "deterministic vectors.py recipes; no production calls",
+  "maximum_structural_wire_bytes": {
+    "sde": 16782624,
+    "sdr": 3328
+  },
+  "declared_outer_caps_bytes": {
+    "sde": 16842752,
+    "sdr": 8192
+  },
+  "cases": [
+    {
+      "name": "multi",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "multi",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "dng-le",
+      "wire": "sde",
+      "bytes": 279,
+      "sha256": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "dng-le",
+      "wire": "sdr",
+      "bytes": 199,
+      "sha256": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "dng-be",
+      "wire": "sde",
+      "bytes": 279,
+      "sha256": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "dng-be",
+      "wire": "sdr",
+      "bytes": 199,
+      "sha256": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "unknown-version",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "9016656e5897e154b44c20b2e9fd772e9729ddb3138f50eeaffd1235cab3e101",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "unknown-magic",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "60cc66cc2b393641c7d5aceb55515752b70aae0409536020638c6506ba9b1a9f",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-zero",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "8af43b8cf9e9ba2ba147f7719fd613a9b5ce51fbe2b8896a4f7ea5044995ca1f",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-over-limit",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "5b508581d848ed6bbe964756bc4cd8e86cc2e18095fca7ee67ade7e5c48e21d2",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-u64-overflow",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "b2febfad59f6ff2e6d8c17f3878065394e5ba3e1cf26097d7997bbb8145b2f7f",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "size-u64-overflow",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "c097fb0ff648e1bc5b2a78dcf1f2c881b320c8ab4c3f4b9495d26cba6a48fc1c",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-zero",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "6b7309b581b229d8ce749fd5fd2a4d3218b9cd708cee7bce79a075572a24865a",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-over-limit",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "0f7cc10f2646c8c32b7d0f7190dd34dcbae4a932cb198603a228a8cff9216a81",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-u64-overflow",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "373b517a750060681dd050d47ac8f96186dda32e4aaae0c8f5117f92ddae7246",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "zero-file-with-operation",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "b65b8b23e555d02475abbf0cefa18129a9869d18875dd96c0dbb2168dd64d2b3",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "offset-u64-overflow",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "e8cfe6a8898bd348f84341cf114cd5e23d2cb27bf90c0b938199940ab177380d",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "offset-past-eof",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "660fd4befec6674e231dfc856bf5589f1638f197ee612bfea73b0e11789a474e",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-zero",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "37f6585c79cc746b405924946b1dc24da537fbe44c8cfc9ef5c8e3b6c4a877b1",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-over-limit",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "c35f48104f2f44013a6568343dd0ab8b16e527e56a6c683be1352d5b981e62a6",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-u64-overflow",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "cf5668f46584df88de5820929607ec197a4df01ef906d3d3469555cafa6ef15b",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "extent-past-eof",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "45b2eb2459472b632811733870d102b7f91ad698e66f422fd9a8ae628162d4ba",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "overlapping-operation",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "a6e7fa5795db8f20d67fcf89b4c0edc6e5a75c059a7d482c1e3e37803be40082",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "out-of-order-operation",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "94153eed5d0298ada9c068f344cbcea0fec49c39170e5f5872a7dfcf75826b38",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "trailing-byte",
+      "wire": "sde",
+      "bytes": 528,
+      "sha256": "e39140a9e1313307dd7b5cda71c431c801b842e65091d466cee4cd39be216df2",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "missing-nonce-byte",
+      "wire": "sde",
+      "bytes": 526,
+      "sha256": "bc3ec52b4b9b47b0e031291ff81d1506df88347cd5ce1dc475b925ac019d1ccb",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "unknown-version",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "785a172085ffe0c135afe66a070518088a12360498c3db4713f033e06a06460a",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "unknown-magic",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "94ffcd96c7b96e5211e85cee33b44b209a4b2b516b88b2566af8e33515b0d566",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-zero",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "29ee195eaf6b84b346580fc89eef879184a50ee14cc2acd73af9c12cbaba6494",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-over-limit",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "a0ac551cd25feb2adfec46661093a2271b42a3c38d810bdb156dbdc446c79f21",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-u64-overflow",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "086f03abae2559fd3b7695832708f53bc638d5c871080be714af669cef3bd725",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "size-u64-overflow",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "8a1116b43f5d4c434f53e69f0051c3bbf67dc04c1a06b2b5d44af5d4979830d1",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-zero",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "318c539c22cafb51843bb94d58980ada30988a09db01353fe186c6e26f491d01",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-over-limit",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "908ed1f8f6e624a76f811b1f7e872cb81ef4fa9719635167ddf1cd85aaeddcba",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "count-u64-overflow",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "6716f1625c3af75646953bde7782582a1a774d065c8eb26a83d36de80f3823f1",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "zero-file-with-operation",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "c82d3e7ca02afc92961b9a0e6d011327ff60529654ccb707f62bd780905b7224",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "offset-u64-overflow",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "3b7d68f7da4edd7a513bdfe46f1ab341f8f1b952bd328d157843cee5305bbeac",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "offset-past-eof",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "bd966738ee6f66d756ab05f57063ed9057724bb1373eb236057d8c0fbb902a7b",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-zero",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "1ad6b6e9112e17e79600461ce9b4f9feb60b6f9db02c05a2e2ea0d7d1176f8b8",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-over-limit",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "1290414d23b3323aca462bbd95ee12b8454d1d9acd419a42467d5af65019bd68",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "length-u64-overflow",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "13b5f896b15aec818db902530b92a1d9a5f85b7739ced6de303b254ecda3ddbf",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "extent-past-eof",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "c185711ea1823fbb470130d14d9552b4cc2eb877f128a91244eec3813b6567ef",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "overlapping-operation",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "67dfc833a35e19ef8c2dc0399f865f3ea704ed846b1a756a0671c433e2159298",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "out-of-order-operation",
+      "wire": "sdr",
+      "bytes": 353,
+      "sha256": "65b123818e40a6c3ba7cd98913e8f4e9807efa60d9fd5e0e87ded78a64617574",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "trailing-byte",
+      "wire": "sdr",
+      "bytes": 354,
+      "sha256": "5681f2d88d35c829abf4388e3abb06ffffc22ee82fd6319631c0dc68437855f8",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "missing-nonce-byte",
+      "wire": "sdr",
+      "bytes": 352,
+      "sha256": "24da9ab4b512858e53e35f2c756ea917e58c5092f3debcac9369e86847ec15be",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "replacement-hash-mismatch",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "442a68787378d58eb11278288002a9dcf5fb5008a94183e4e6f23bc7dfb53926",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "replacement-hash-field-mismatch",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "7ddce8b1620f7b866c4f68396e3eb70367e50459a4cc93f05b8bf6eacf54e0af",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "nonce-zero",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "d393f66d3fd540e035cdcb7af8a8af6e1e085310b0cf088424a9d5015a71e612",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "unknown-profile",
+      "wire": "sde",
+      "bytes": 520,
+      "sha256": "449193eacff695cc81b616c058fe6840347b6b3d183eb7a1020d9c4e6b062d39",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-length-one",
+      "wire": "sde",
+      "bytes": 495,
+      "sha256": "bf8c4582a8808be158df052bcbf208a7695de2e1ac69e543f6bd5e8d35ba74c2",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "profile-length-128",
+      "wire": "sde",
+      "bytes": 622,
+      "sha256": "e194d55a9d7b59107cef97980e025f04ade8e905f93b599fefdcc665453ba14a",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "wrong-whole-base-proof",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "c8da187d8955574fdafff91e6163b499ed5e250603f708a8e75835531fa7009c",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "wrong-preservation-proof",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "4561408edd997c9abe1a2720ac622c79dd1e9c20e3db662293a971c5809eef04",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "wrong-old-range-proof",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "b36c980c6cef5d6455096fc31f247e2485ab287c2d1e83af75ce8309fdd3e49e",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "wrong-target-digest",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "6eeaf253469579ddba7740d7a790c53896cea0400ae6ce0bfc4f674f10de9ee0",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "incomplete-local-region-list",
+      "wire": "sde",
+      "bytes": 442,
+      "sha256": "8cafa53d606728d865e2d57a67ae49b8f8e4c90e0694445cebceaf4be36d8b3d",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "single-byte-at-signed-int64-eof",
+      "wire": "sde",
+      "bytes": 251,
+      "sha256": "953ecdc0583ddd6832075da8b7fd1cbff3ef56dc40772a9dd602da9ad2d2b4e0",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "single-byte-at-signed-int64-eof",
+      "wire": "sdr",
+      "bytes": 186,
+      "sha256": "a2f7b7f366681b3a590857f7de9aa19fda4169bbf77d26bc6b2b828c7802c9e5",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "extent-end-signed-int64-overflow",
+      "wire": "sde",
+      "bytes": 251,
+      "sha256": "fec5ff95edb6cbca13976aa0cd0063917dd7f814d309c56a38e8b98bbcc18f8a",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "extent-end-signed-int64-overflow",
+      "wire": "sdr",
+      "bytes": 186,
+      "sha256": "b241100aea70bff24caed5f5029cf56476b139c3bfceda3fb8faf1f7c05bd415",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1",
+      "wire": "sde",
+      "bytes": 251,
+      "sha256": "8c080234549736013348659ecfd12371243697462153258cb8e5229809820f27",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1",
+      "wire": "sdr",
+      "bytes": 186,
+      "sha256": "85674238adefdcb3fdf245c742485a9e2ee83f91ddd7326ad23bc9c2bb3a8efd",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1048575",
+      "wire": "sde",
+      "bytes": 1048825,
+      "sha256": "ed4528d2188d4aa2314cdffa914b9f93981a50fcd2121f0a4c4953eddb96f6ac",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1048575",
+      "wire": "sdr",
+      "bytes": 186,
+      "sha256": "643a1de889e3b565d1f2ae8057fb4d0c002ec589800d3d5b5421017c0a7a1efd",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1048576",
+      "wire": "sde",
+      "bytes": 1048826,
+      "sha256": "4e93e540c5cb3e4aaa5eece4badc2f4bfce4b25090e9f559a11ea1b0af7c9505",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "region-bytes-1048576",
+      "wire": "sdr",
+      "bytes": 186,
+      "sha256": "3c4f919e856accab3f2e6cf53a48d4579e579885f07ccb8fb5f05ccebcd02088",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "maximum-valid-wire-shape",
+      "wire": "sde",
+      "bytes": 16782624,
+      "sha256": "9fce832290efbb4c4f135c7c95163cbe2958be4ab0c7d39dd3b14cb7d4d48a15",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "maximum-valid-wire-shape",
+      "wire": "sdr",
+      "bytes": 3328,
+      "sha256": "9504cb335bf65b44b868e48f02d3aa4dc6d7f79dc9a994b9cc1f0ee51233c648",
+      "max_payload": 16777216,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-payload-exact",
+      "wire": "sde",
+      "bytes": 266,
+      "sha256": "1496536f6d47cfd4dc62cfe43e097610468f504b0615721814b67cfcbabd337b",
+      "max_payload": 16,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-payload-plus-one",
+      "wire": "sde",
+      "bytes": 267,
+      "sha256": "59d494a5e1b663c7b6fd98d7803d0c6972a782514007cd63396f828d5f26592f",
+      "max_payload": 16,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-DNG-payload-exact",
+      "wire": "sde",
+      "bytes": 1048839,
+      "sha256": "37d6ecdb71d4cffb7a231b18f84ff91ab64b14cc33c07221e4192e9874c5f96c",
+      "max_payload": 1048576,
+      "structurally_accepted": true,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-DNG-payload-plus-one",
+      "wire": "sde",
+      "bytes": 1048920,
+      "sha256": "e617b7b9258cccd557dd336ac433361ad4567247c048749ff8d30c350ecf0062",
+      "max_payload": 1048576,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-payload-zero",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+      "max_payload": 0,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "declared-payload-over-core",
+      "wire": "sde",
+      "bytes": 527,
+      "sha256": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+      "max_payload": 16777217,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "aggregate-payload-plus-one",
+      "wire": "sde",
+      "bytes": 16778747,
+      "sha256": "c694682d339f2f0210a08c96a99243d58c1c8a469e09f3056f538951876cf5e9",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "aggregate-payload-plus-one",
+      "wire": "sdr",
+      "bytes": 954,
+      "sha256": "76cde836d298ee96594482bab8db9ed9e68729e83c30c37da5e766736b8be732",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "envelope-cap-minus-one",
+      "wire": "sde",
+      "bytes": 16842751,
+      "sha256": "68217631f36504e0a648295306554ba633a3d09b7c4b4bc76fed6dde92ea5e8a",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "envelope-cap-exact",
+      "wire": "sde",
+      "bytes": 16842752,
+      "sha256": "e4cbb6eb89ef900b1e0fb10e800417d5a4defad43cef0a2e587c61fa955c0fbd",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "envelope-cap-plus-one",
+      "wire": "sde",
+      "bytes": 16842753,
+      "sha256": "633eb9ba8902f91237ea2355d5ca1559940b0cd6160d3a6eadab71faa97343b9",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": "envelope too large"
+    },
+    {
+      "name": "request-cap-minus-one",
+      "wire": "sdr",
+      "bytes": 8191,
+      "sha256": "ded7e73bae26db73b29a51bca3cd2d1d6906107d889775f610f0ce63c2089365",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "request-cap-exact",
+      "wire": "sdr",
+      "bytes": 8192,
+      "sha256": "9f1dcbc35c350d6027f98be0f5c8b43b42ca52b7604459c0c42be3aa88913d47",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": null
+    },
+    {
+      "name": "request-cap-plus-one",
+      "wire": "sdr",
+      "bytes": 8193,
+      "sha256": "b1fb0079828ab653919011a9f8cfdd3704387eb08e1dc971155b33c03e0da1ef",
+      "max_payload": 16777216,
+      "structurally_accepted": false,
+      "expected_outer_cap_error": "request too large"
+    }
+  ]
+}

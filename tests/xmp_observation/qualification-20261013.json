@@ -1,0 +1,391 @@
+{
+  "observed_at_utc": "2026-10-13T16:56:34.965120+00:00",
+  "scope": "Production XmpObservation and SemanticHash only; isolated compiler-matched builds with synthetic in-memory UTF-8 XML packets. No Adobe, Photo, catalog, cache, image payload, or source photo access.",
+  "production_sha256": {
+    "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+    "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580"
+  },
+  "per_compiler_checks": 968,
+  "per_compiler_independent_xml_mutations": 1029,
+  "negative_controls_per_compiler": [
+    "namespace",
+    "subtree",
+    "duplicate"
+  ],
+  "review_corrections": [
+    "Missing rdf:about is anonymous and never equated with explicit rdf:about=\"\"; multiple anonymous or mixed anonymous/identified descriptions reject.",
+    "Description XML-namespace structural attributes, including xml:base/id/lang/space, reject; rdf:ID/nodeID reject."
+  ],
+  "claims": [
+    "Each accepted property has a bounded expanded name, advisory category, and raw 32-byte context/encoding SHA-256.",
+    "Independent Python hashlib vectors verify the documented versioned transcript.",
+    "No mutation admitted by the bounded reader was malformed under independent ElementTree XML parsing."
+  ],
+  "limitations": [
+    "No RDF/value canonicalization or Adobe rendering equivalence.",
+    "Structural fields such as rdf:about and toolkit/packet attributes are not emitted; this is not a complete packet fingerprint.",
+    "Full Unison integration and current production-source build qualification are separate root-owned evidence."
+  ],
+  "results": [
+    {
+      "kind": "positive",
+      "origin": "/private/tmp/unison-xmp-observation-stock-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:54:42.475378+00:00",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "version": "5.5.1",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+        "compile_command": [
+          "/usr/local/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": null,
+        "exit_code": 0,
+        "stdout": "PASS: 968 bounded XMP observation checks\n",
+        "stderr": "",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": {
+          "cases": 1029,
+          "admitted": 119,
+          "xml_malformed": 797
+        },
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-namespace-stock-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:12.392514+00:00",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "version": "5.5.1",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "acc7aa05a26186fe8ded6c568184fd681245a8b427a37ae85f880732b9ca29f3",
+        "compile_command": [
+          "/usr/local/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "namespace",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: attribute digest matches independent Python transcript\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-subtree-stock-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:12.119776+00:00",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "version": "5.5.1",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "431983e853ac2f946c8dddbef834f74051137669f46bd0fd04c6b9d7a4f836d2",
+        "compile_command": [
+          "/usr/local/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "subtree",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: entire element digest matches independent Python transcript\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-duplicate-stock-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:12.650782+00:00",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "version": "5.5.1",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "85d70793feed769cef9548ea45287390ddf0efd94f30cc45d5fe431270ace826",
+        "compile_command": [
+          "/usr/local/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "duplicate",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: duplicate child expanded property\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "positive",
+      "origin": "/private/tmp/unison-xmp-observation-ox-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:14.280759+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "version": "5.2.0+ox",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+        "compile_command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": null,
+        "exit_code": 0,
+        "stdout": "PASS: 968 bounded XMP observation checks\n",
+        "stderr": "",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": {
+          "cases": 1029,
+          "admitted": 119,
+          "xml_malformed": 797
+        },
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-namespace-ox-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:13.961428+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "version": "5.2.0+ox",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "acc7aa05a26186fe8ded6c568184fd681245a8b427a37ae85f880732b9ca29f3",
+        "compile_command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "namespace",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: attribute digest matches independent Python transcript\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-subtree-ox-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:13.462636+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "version": "5.2.0+ox",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "431983e853ac2f946c8dddbef834f74051137669f46bd0fd04c6b9d7a4f836d2",
+        "compile_command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "subtree",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: entire element digest matches independent Python transcript\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    },
+    {
+      "kind": "rejected_private_mutation",
+      "origin": "/private/tmp/unison-xmp-observation-negative-duplicate-ox-20261013.json",
+      "result": {
+        "observed_at_utc": "2026-10-13T16:55:13.715171+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "version": "5.2.0+ox",
+        "source_sha256": {
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "tests/xmp_observation/test.ml": "301cc142f7a467b93cf97336c32d550753430cc95469dac9a8fe2b4a0613e3d4",
+          "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+          "tests/xmp_observation/run.py": "80caf099f443a179535aa83de4c3ee5823b906c92715f25343aea9bf576002f3"
+        },
+        "tested_xmp_sha256": "85d70793feed769cef9548ea45287390ddf0efd94f30cc45d5fe431270ace826",
+        "compile_command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "semanticHash_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "expected.ml",
+          "test.ml",
+          "-o",
+          "xmp-test"
+        ],
+        "negative_control": "duplicate",
+        "exit_code": 1,
+        "stdout": "",
+        "stderr": "FAIL: duplicate child expanded property\n",
+        "independent_python_digest_vectors": {
+          "attribute": "d359da2f54bfbe4011c2c04ed8e160910e5149f845c5ce18d8f5af81e1488dcd",
+          "element": "ab2f59a137241ffd8d51b359e458da966ec94ecff723882f556ebd6929c484b1",
+          "nested": "40493feb9090051e765cfa37f4d71063b99c56ae251b306935c3b907b926ce97",
+          "self_closing": "50c5c220458e2b70bc57a50f350ff276a2a4f7ca188e007fbb6749ef7b3b7d54"
+        },
+        "independent_elementtree_xml_mutations": null,
+        "scope": "Synthetic in-memory XMP packets only; no Adobe, Photo, file payload, or production cache access."
+      }
+    }
+  ]
+}

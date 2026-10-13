@@ -114,3 +114,14 @@ Reduced logical writes and transfer payloads do not establish physical APFS
 write savings or elapsed-time speedups. Verification and optional raw decoding
 still read file contents. Performance, broader platform coverage, semantic
 reconciliation and production corpus qualification remain separate work.
+
+Explicit diff/details now includes extension-defined property observations when
+both peers support `semantic-inspect-v1`. DNG reports separate potentially
+rendering-related Camera Raw property encodings from known descriptive, identity
+and workflow metadata; unknown fields stay unclassified. Parsing uses the full
+retained XMP packet in the worker, rather than treating a truncated preview as
+a complete packet. Unsupported XML produces an interpretation reason while
+ordinary exact transfer continues. Old peers retain the SIR/0 byte report.
+Property encodings and namespace contexts are compared without RDF/value
+canonicalization, rendered-pixel equality or automatic conflict resolution.
+See [SIR/1](semantic-observation-v1.md) for bounds and versioning.

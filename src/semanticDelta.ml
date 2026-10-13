@@ -25,6 +25,12 @@ let samples ?(max_region_bytes=4096) ?(max_total_bytes=8192) (p:proof) =
     remaining := !remaining - n;
     {region=i.region;digest=i.digest;prefix=String.sub i.contents 0 n;
      truncated=n < i.region.length}) p.items
+let observe ~extension (p:proof) =
+  if p.name <> FormatExtension.profile extension then
+    invalid_arg "SemanticDelta.observe: profile mismatch";
+  if List.exists (fun (i:item) -> String.length i.contents <> i.region.length) p.items then
+    Some (Error "full editable packets are unavailable in a peer proof")
+  else FormatExtension.observe extension (List.map (fun (i:item) -> i.contents) p.items)
 let target_digest t = t.target_digest
 let target_size t = t.size
 let payload_size t = List.fold_left (fun n p -> n + String.length p.data) 0 t.patches

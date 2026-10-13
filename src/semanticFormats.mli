@@ -1,4 +1,5 @@
 val register : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
+  ?observer:FormatExtension.observer ->
   (module FormatExtension.S) -> unit
 (** Owner-side startup registration for a trusted compiled profile and its
     independently negotiated wire capability. Call before feature negotiation.

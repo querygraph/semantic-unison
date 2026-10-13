@@ -165,3 +165,21 @@ let inspect file =
   SemanticFile.check file;
   Ok {FormatExtension.regions = [region]}
  with Unsupported s | SemanticFile.Invalid s -> Error s
+
+let observer : FormatExtension.observer = {
+  schema = "dng-xmp-property-encoding-v0";
+  observe = (function
+    | [packet] ->
+        (match XmpObservation.observe packet with
+         | Error why -> Error why
+         | Ok observation ->
+             Ok (List.map (fun (property:XmpObservation.property) ->
+               let category = match property.category with
+                 | XmpObservation.Descriptive -> FormatExtension.Descriptive
+                 | XmpObservation.Rendering -> FormatExtension.Rendering
+                 | XmpObservation.Identity -> FormatExtension.Identity
+                 | XmpObservation.Workflow -> FormatExtension.Workflow
+                 | XmpObservation.Opaque -> FormatExtension.Opaque in
+               {FormatExtension.name=property.name;category;digest=property.digest}) observation.properties))
+    | _ -> Error "DNG observation requires exactly one XMP packet")
+}

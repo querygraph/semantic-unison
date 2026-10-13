@@ -4,6 +4,55 @@
 
 ## Live implementation handoff
 
+* Semantic observation continuation (2026-10-13): immutable format handles now
+  optionally declare bounded field observations with versioned schemas and
+  descriptive/rendering/identity/workflow/opaque categories. Explicit report
+  requests interpret complete retained packets in OxCaml workers; ordinary
+  transfers keep their existing inspection path and cost. DNG's bounded
+  namespace-aware XMP subset hashes exact attribute/subtree encodings plus
+  namespace context. It reports potential property meaning without RDF value
+  canonicalization, rendered-pixel identity, archived-base inference or merge
+  authority. Camera Raw nested masks/AI are included in their property's full
+  subtree. Unknown/unsupported structures remain explicit. `semantic-inspect-v1`
+  adds bounded SIR/1 properties while SIR/0/SDE/0/SDR/0 bytes and exact archive /
+  conflict decisions remain unchanged; previous SIR/0 peers still report bytes.
+  The diagnostic inspector JSON is version `unison-semantic-inspect/1`.
+* Current observation qualification: 968 focused XMP checks and 1,029 independent
+  XML mutations per compiler, all 797 malformed mutations rejected, three
+  parser negative controls per compiler; 15 report codec/bounds/display groups;
+  eleven actual local/remote CLI cases per compiler including a previous SIR/0
+  peer; a second registration-only format declares workflow fields through
+  unchanged dispatch and passes both directions. Independent review closed
+  anonymous-subject conflation, unsupported Description XML qualifiers and
+  truncation of the advisory explanation. Fresh Make stock `unison-build-hjv53vmp`
+  and Ox `unison-build-9ukegu58` plus Dune 3.22.2 stock/Ox build/selftest pass.
+  All 313 production/package/INSTALL inputs match. Current remote SDE /
+  24-file bidirectional / upstream old-peer and legacy CLI report reruns pass.
+  Scope, source/test/binary/log pins are in
+  `tests/qualification/semantic-observation-20261013.json`; the normative contract
+  is `doc/semantic-observation-v1.md`.
+* Independent SDE/SDR conformance now has exact checked-in LE/BE DNG and multi-
+  region base/target/request/envelope goldens, independent Python preservation
+  transcript and codec, 83 pinned wire/boundary vectors and private nonce /
+  preservation-domain negative controls. Both compilers pass 127 commands /
+  2,033 assertions, including 1,836 strict-prefix rejections and exact
+  materialization. `tests/semantic/conformance/qualification-20261013.json`
+  preserves the preceding source receipt; no wire-schema change occurred.
+* Explicitly capped SDK area-task host source is implemented under a separate
+  experimental artifact/build ID/argv protocol, unavailable to current Unison
+  callers. Default v1/threads1 still delegates the known SDK reference path.
+  Both modes compile against actual SDK 1.7.1/2724 headers without linking or
+  executing Adobe code. The Adobe-free scheduler passes 789 assertions,
+  ASan/UBSan and a nesting-cap negative control; independent source review
+  accepts capped geometry/Start/index/join/Finish and lifetime ordering.
+  Nested area/codec work reserves one runnable CPU thread; native JXL may retain
+  idle OS threads, so resident threads/memory remain unqualified. Custom sniffer
+  notifications and one-thread reference concurrent-entry behavior retain
+  explicit limits. Real SDK parity, codecs, cancellation, thread/RSS peaks and
+  performance must be qualified before versioned caller support enables this
+  mode. Receipts are under `tests/area_scheduler/`; no SDK/preview invocation,
+  Photo payload/catalog/cache access or benchmark was performed in this slice.
+
 * Latest Photo coordination (2026-10-13, repair receipt 15:47:03 UTC): owner
   reopened Lux in stable Classic PID 2844; desktop locked at 15:29:55 UTC /
   08:29:55 PDT. Startup/menu continuation awaits unlock. Receiver generation-2

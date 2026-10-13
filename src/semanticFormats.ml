@@ -1,8 +1,8 @@
 (* Policy, registry mutation and feature negotiation belong to the owner.
    Workers receive only the selected immutable extension handle. *)
 let known = ref []
-let register ?capability ?max_payload ?suffixes extension =
-  FormatExtension.register ?capability ?max_payload ?suffixes extension;
+let register ?capability ?max_payload ?suffixes ?observer extension =
+  FormatExtension.register ?capability ?max_payload ?suffixes ?observer extension;
   let module E = (val extension : FormatExtension.S) in
   let handle = match FormatExtension.resolve E.profile with Some h -> h | None -> assert false in
   let capability = FormatExtension.capability handle in
@@ -12,7 +12,7 @@ let register ?capability ?max_payload ?suffixes extension =
   known := !known @ [handle,feature]
 
 let () = register ~capability:"dng-xmp-v0" ~max_payload:FormatExtension.max_region
-  ~suffixes:[".dng"] (module DngSemantic)
+  ~suffixes:[".dng"] ~observer:DngSemantic.observer (module DngSemantic)
 
 let dng_enabled = Prefs.createBool "semanticdng" false ~local:true
   ~category:(`Advanced `General)

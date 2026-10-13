@@ -29,7 +29,8 @@ def fixture(value=b"one", opaque=65):
 
 
 def exercise(binary, peer, name, original, changed_left, changed_right,
-             classification=None, external=False, remote=False, unavailable=False, profile=None):
+             classification=None, external=False, remote=False, unavailable=False, profile=None,
+             expected_meaning=()):
     with tempfile.TemporaryDirectory(prefix="unison-semantic-ui-", dir="/private/tmp") as tmp:
         root = Path(tmp)
         left, right, state = (root / p for p in ("left", "right", "state"))
@@ -64,6 +65,8 @@ def exercise(binary, peer, name, original, changed_left, changed_right,
         action = subprocess.run(command, input="d\nx\nq\n", env=env,
                                 capture_output=True, text=True, timeout=90)
         log = action.stdout + action.stderr
+        for expected in expected_meaning:
+            assert expected in log, log
         assert action.returncode == 3, log  # normal explicit quit
         assert log.count("<-?->") >= 3, log  # inspection does not resolve the conflict
         assert marker.exists() == external, log

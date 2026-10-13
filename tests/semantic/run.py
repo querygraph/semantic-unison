@@ -11,9 +11,11 @@ import tempfile
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
+parser.add_argument("--skip-conformance", action="store_true",
+                    help="run only the original kernel/inspection fixtures")
 args = parser.parse_args()
 root = pathlib.Path(__file__).resolve().parents[2]
-modules = ["semanticHash", "semanticFile", "formatExtension", "dngSemantic", "semanticDelta"]
+modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "semanticDelta"]
 with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
     build = pathlib.Path(tmp)
     for name in modules:
@@ -56,3 +58,7 @@ with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
             assert report["metadata_payload_bytes"] == 16 and report["patch_eligible"]
             assert report["target"]["sha256"] == hashlib.sha256(contents).hexdigest()
     print("Read-only inspection: exact/metadata/opaque/growth/unsupported reports passed.")
+if not args.skip_conformance:
+    import sys
+    subprocess.run([sys.executable, str(root / "tests/semantic/conformance/run.py"),
+                    "--ocamlopt", args.ocamlopt], check=True)

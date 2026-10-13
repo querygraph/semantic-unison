@@ -11,6 +11,9 @@
 #include "dng_tag_codes.h"
 #include "dng_tag_values.h"
 #include "dng_xmp_sdk.h"
+#if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+#include "area_task_host.h"
+#endif
 #include <CommonCrypto/CommonDigest.h>
 #include <atomic>
 #include <cstdio>
@@ -57,10 +60,33 @@ public:
     return parsed;
   }
 };
-class ValidationHost final : public dng_host {
+#if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+using ValidationHostBase = UnisonAreaTaskHost;
+static constexpr const char *driver_build = "unison-sdk171-2724-v2-area-unqualified";
+#else
+using ValidationHostBase = dng_host;
+static constexpr const char *driver_build = "unison-sdk171-2724-v1-single";
+#endif
+class ValidationHost final : public ValidationHostBase {
 public:
+#if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+  explicit ValidationHost(uint32 threads) : ValidationHostBase(threads) {}
+#else
+  explicit ValidationHost(uint32) {}
+#endif
   dng_shared *Make_dng_shared() override { return new TrackingShared; }
 };
+
+static uint32 requested_threads(const char *value) {
+  uint32 result = 0;
+  if (!value[0] || value[0] == '0') return 0;
+  for (const char *p = value; *p; ++p) {
+    if (*p < '0' || *p > '9') return 0;
+    result = result * 10 + uint32(*p - '0');
+    if (result > 128) return 0;
+  }
+  return result;
+}
 
 struct FileHash { std::string hex; uint64_t size; };
 static FileHash hash_file(const char *path) {
@@ -99,11 +125,21 @@ static FileHash hash_file(const char *path) {
 
 int main(int argc, char **argv) {
   // Fixed protocol argv, no output/render/write options and no shell.
-  if (argc != 10 || strcmp(argv[1], "--unison-dng-validation-v1") ||
+  uint32 threads = argc == 10 ? requested_threads(argv[7]) : 0;
+#if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+  // This separate protocol is intentionally unavailable to the production
+  // v1 caller. Compilation and synthetic scheduler tests are not SDK runtime
+  // qualification, even if a user installs and pins this executable.
+  const char *protocol = "--unison-dng-validation-area-source-v0";
+#else
+  const char *protocol = "--unison-dng-validation-v1";
+  if (threads != 1) threads = 0;
+#endif
+  if (argc != 10 || strcmp(argv[1], protocol) ||
       strcmp(argv[2], "--expected-sha256") || strcmp(argv[4], "--expected-size") ||
-      strcmp(argv[6], "--threads") || strcmp(argv[7], "1") ||
+      strcmp(argv[6], "--threads") || !threads ||
       strcmp(argv[8], "--") || argv[9][0] != '/') {
-    fprintf(stderr, "Expected protocol v1 arguments; this qualified driver requires --threads 1.\n");
+    fprintf(stderr, "Expected %s arguments and the build's explicit thread allowance.\n", protocol);
     return 64;
   }
   const char *path = argv[9];
@@ -122,7 +158,7 @@ int main(int argc, char **argv) {
     gVerbose = false;
     dng_xmp_sdk::InitializeSDK();
     SXMPMeta::SetDefaultErrorCallback(xmp_error, nullptr, 10000);
-    ValidationHost host;
+    ValidationHost host(threads);
     host.SetIgnoreEnhanced(true); // Validate original raw, never an enhanced substitute.
     dng_file_stream stream(path);
     dng_info info;
@@ -181,9 +217,9 @@ int main(int argc, char **argv) {
   }
   if (file.hex.empty()) { fclose(receipt); return 65; }
   fprintf(receipt, "UNISON-DNG-VALIDATION 1\ncandidate-sha256 %s\ncandidate-size %llu\n"
-    "driver-build unison-sdk171-2724-v1-single\nstructure %s\ndecode %s\nraw-digest %s\n"
+    "driver-build %s\nstructure %s\ndecode %s\nraw-digest %s\n"
     "errors %u\nwarnings %u\nEND\n", file.hex.c_str(),
-    static_cast<unsigned long long>(file.size), structure, decode, raw,
+    static_cast<unsigned long long>(file.size), driver_build, structure, decode, raw,
     errors.load(), warnings.load());
   const bool write_failed = fclose(receipt) != 0;
   // Findings are deliberately reported in the protocol even with exit zero.
