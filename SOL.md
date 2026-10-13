@@ -4,7 +4,8 @@
 
 ## Live implementation handoff
 
-* Working branch: `feat/semantic-dng-oxcaml`, based on upstream `8772d26a2eb77cfd0cb6da81807e81f24f51044c`. Original local `master` at `375ea3ad` is preserved. Changes remain uncommitted and undeployed. No production photographs were changed.
+* Working branch: `feat/semantic-dng-oxcaml`, based on upstream `8772d26a2eb77cfd0cb6da81807e81f24f51044c`. Original local `master` at `375ea3ad` is preserved. The user-authorized implementation checkpoint is committed as `2a05c4bf3ffffe4380ad7743c490992b2179f332` and pushed to [querygraph/unison](https://github.com/querygraph/unison/tree/feat/semantic-dng-oxcaml), verified through SSH and the GitHub branch API. The fork was created because it did not yet exist; `fork` uses SSH and this branch tracks it. Deployment has not been performed. No production photographs were changed.
+* Publication scope: the checkpoint contains the tested implementation, owned design/handoff, tests, benchmark receipts and scoped qualification manifests. All 306 production inputs and 14 pinned qualification test files in the staged checkpoint match the publication receipt. External coordination receipts remain local. New `FinalPublication` source/tests are follow-on uncommitted work, not wired into the committed build or covered by that checkpoint. Native implementation/testing is in progress; endpoint ticket/RPC integration and actual final-caller qualification remain next.
 * Current goal tracker: `active`, verified again during the user's status
   request on 2026-10-13. The user resumed the goal after the earlier unexplained
   `blocked` observation at 12:32:21 UTC; root and the participating agents had
