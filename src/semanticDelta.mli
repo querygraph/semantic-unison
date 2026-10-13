@@ -54,7 +54,8 @@ val apply_with_extension : ?check_cancel:(unit -> unit) -> ?max_payload:int ->
 val apply_report_with_extension : ?check_cancel:(unit -> unit) -> ?max_payload:int ->
   (module FormatExtension.S) -> t -> basis:SemanticFile.t -> output:Unix.file_descr -> application
 (** Same verified materialization, with actual returned write-byte counts and
-    write syscall attempts (including EINTR retries). Only changed absolute
+    write primitive attempts (including EINTR retries). POSIX uses bounded native
+    pwrite; the Windows backend retains seek/write. Only changed absolute
     4 KiB comparison windows are written, clipped to editable regions; adjacent
     windows are combined and each write is at most 64 KiB. Counts describe
     logical writes, not physical allocations, durability or elapsed speedup.

@@ -1,0 +1,2945 @@
+{
+  "schema": "unison-positional-write-qualified/1",
+  "observed_utc": "2026-10-13T19:28:45.106208+00:00",
+  "terminal": "passed",
+  "sources": {
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+    "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+    "src/semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+    "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+    "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+    "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+    "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+    "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+    "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+    "tests/positional_write/fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+    "tests/positional_write/test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+    "tests/positional_write/run.py": "0c7fae0abb359daa6ade1c543c1ba0824a9ddc6ddce12b16a2bf22ea62a3a1d0",
+    "tests/positional_write/README.md": "cf48d4410a10778a19b03585df7d038ea27fb1e181233e8db7f3e66204e14229"
+  },
+  "direct_qualification": [
+    {
+      "schema": "unison-positional-write-direct-qualification/1",
+      "compiler": "/usr/local/bin/ocamlopt",
+      "compiler_version": "5.5.1",
+      "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+      "compiler_config": "version: 5.5.1\nstandard_library_default: /usr/local/lib/ocaml\nstandard_library_relative: \nstandard_library: /usr/local/lib/ocaml\nccomp_type: cc\nc_compiler: clang\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: clang -O2 -fno-strict-aliasing -fwrapv   -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: clang -O2 -fno-strict-aliasing -fwrapv   -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -lzstd    -lpthread\nnative_c_libraries:    -lpthread\ncompression_c_libraries: -lzstd\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: amd64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: clang -c -Wno-trigraphs\nasm_cfi_supported: true\nasm_size_type_directives: false\nwith_frame_pointers: false\nwith_nonexecstack_note: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: x86_64-apple-darwin24.6.0\ntarget: x86_64-apple-darwin24.6.0\nbytecode_runtime_id: a100\nnative_runtime_id: a100\nflambda: false\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nalign_double: false\nalign_int64: false\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nwith_codegen_invariants: true\nexec_magic_number: Caml1999X037\ncmi_magic_number: Caml1999I037\ncmo_magic_number: Caml1999O037\ncma_magic_number: Caml1999A037\ncmx_magic_number: Caml1999Y037\ncmxa_magic_number: Caml1999Z037\nast_impl_magic_number: Caml1999M037\nast_intf_magic_number: Caml1999N037\ncmxs_magic_number: Caml1999D037\ncmt_magic_number: Caml1999T037\nlinear_magic_number: Caml1999L037\n",
+      "platform": "darwin",
+      "native_compiler": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "native_compiler_sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769",
+      "native_compiler_version": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: x86_64-apple-darwin24.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "build_environment": {
+        "SDKROOT": null,
+        "MACOSX_DEPLOYMENT_TARGET": null,
+        "CC": null,
+        "CFLAGS": null
+      },
+      "sources": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+        "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+        "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+        "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+        "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "tests/positional_write/fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+        "tests/positional_write/test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+        "tests/positional_write/run.py": "0c7fae0abb359daa6ade1c543c1ba0824a9ddc6ddce12b16a2bf22ea62a3a1d0",
+        "tests/positional_write/README.md": "cf48d4410a10778a19b03585df7d038ea27fb1e181233e8db7f3e66204e14229"
+      },
+      "artifacts": "/private/tmp/unison-positional-write-qgzn3iau",
+      "runs": [
+        {
+          "mode": "fixed",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.12819450499955565,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18996457399771316,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.03831044300022768,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14182853099919157,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04379760599840665,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14808724600152345,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.024440387001959607,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.08878547700442141,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02647422900190577,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.20976050099852728,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3737736670009326,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/fixed/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/fixed/files-all",
+                "all"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.37650015899998834,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/fixed/all.run.log",
+              "log_sha256": "4a74c0de2f37799c2d2d99f2d7ea04907994bfb957be70650d4c965f98e07040",
+              "cases": 59,
+              "assertions": 1070,
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/fixed/all.inventory.json",
+              "native_artifact_manifest_sha256": "30e3740a73e86a03ddfaeb888d692bf8a5c7a366bbffa9234dd1b4ff00a51f7a"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "c1f959b83ddbfea6bdb2254ae8e59e6fea3992f6a00d7ae7d8d653f2af563ad0",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/fixed/positional-test",
+          "binary_sha256": "882aad0a34f2f39305aa3f8c22a4c982970d879d99fda99a86a07d39f0bc9bcd"
+        },
+        {
+          "mode": "forward-bad-progress",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14263658299751114,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1425310199992964,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.026605095001286827,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14517661900026724,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.023124877996451687,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14383548299520044,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.024905569000111427,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13784522299829405,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.03818169899750501,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18090534799557645,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.4158943019938306,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/files-ml-overcount",
+                "ml-overcount"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3064582649967633,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/ml-overcount.run.log",
+              "log_sha256": "30f6f337d131bb79d9c0bf15ce27af827a4bab67753e6f931774f4f52294d3e9",
+              "cases": 1,
+              "assertions": 16,
+              "scope": "unchanged production ML guard; private native count validation bypassed to inject impossible progress",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/ml-overcount.inventory.json",
+              "native_artifact_manifest_sha256": "8e191e7255777232399b7a82964487ecb4b31f100ef91a3048abc223997f19e2"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/files-ml-negative",
+                "ml-negative"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.025652778000221588,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/ml-negative.run.log",
+              "log_sha256": "5b8c7d89c112e332b69120dede36cec83bf13d407e0eb196452c832671eea2d7",
+              "cases": 1,
+              "assertions": 16,
+              "scope": "unchanged production ML guard; private native count validation bypassed to inject impossible progress",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/ml-negative.inventory.json",
+              "native_artifact_manifest_sha256": "813bd41a4b7a99d3773e9b80b8be6a6349a1070390f16ca27a6271ce270592cb"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "7a0f109fb9ddbfa65fbfb3f07bef574a0f8339fc3fae3f8f48e2485b66451864",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "7117357b4c64465d23ac9dfc72ffa92a60d6774d76c8d827bb6471ae7ef6f673",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/forward-bad-progress/positional-test",
+          "binary_sha256": "af585755b9b827bae5809ba8a98873d32e6638972b901af7ee0c5da6877ea95e"
+        },
+        {
+          "mode": "forced-ml-backend",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14823251900088508,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1984063280033297,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02557622900349088,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13343467300001066,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02732019299583044,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14301382299890975,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02264309299789602,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1297976200003177,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04401355799927842,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.20001030399726005,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.4183252739967429,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/files-fallback-interior-and-bounds",
+                "fallback-interior-and-bounds"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3028082010059734,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-interior-and-bounds.run.log",
+              "log_sha256": "6d66ad8ee17fdcb0c4fb4d8ebcf0edc6c79e08c56462d0b531f703acd2fbb0d7",
+              "cases": 1,
+              "assertions": 13,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-interior-and-bounds.inventory.json",
+              "native_artifact_manifest_sha256": "ab37647d646f0efceaa45a5c252ae36c7e2473d5ffc47b2aeac91cb61c3f86f7"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/files-fallback-materialize",
+                "fallback-materialize"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.023636936995899305,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-materialize.run.log",
+              "log_sha256": "d6dd108fe39edbf08f5ef336847a8c0d2e703ae7fba84100a331512e92f0658b",
+              "cases": 1,
+              "assertions": 8,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-materialize.inventory.json",
+              "native_artifact_manifest_sha256": "9f445a07c9fa5276da4275f5ad572a8d30fc45e802e6375cf2a624524106be12"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/files-fallback-unchanged",
+                "fallback-unchanged"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.025427793996641412,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-unchanged.run.log",
+              "log_sha256": "2092d0c165035793a7422a5e3f3725b2683dc352ea377593f8c4906d4e6bba58",
+              "cases": 1,
+              "assertions": 8,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/fallback-unchanged.inventory.json",
+              "native_artifact_manifest_sha256": "cdb4b2effdb9bc9ec2d2b727eaab0336778e47f6250f528c00f8366cc41e5291"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "ac491a2e872e94735efd658947b94df5666058aee8ddb35583ec6bc1a5168caa",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "b403ea8f55de6d7b104f97b867f5f9affda1df2dbe7a888e270706028ee3f5e5",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/forced-ml-backend/positional-test",
+          "binary_sha256": "7559e0fda3cedc6659e47acbc132e7ca29bf1ac44e66135b1c9a31711cc3cc40"
+        },
+        {
+          "mode": "seek-write",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13807110400375677,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14493766899977345,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/fixture.c.compile.log",
+              "log_sha256": "ee492350e58e9ad688bfdd9049c8490936dd216a239df2b34979afba23ec1dbc"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.023566502997709904,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1340447749971645,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.025163943006191403,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13859030800085748,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04189884600054938,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1388312280032551,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.041114427003776655,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1398047629991197,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3711596759967506,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/seek-write/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/seek-write/files-direct-offset",
+                "direct-offset"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/seek-write",
+              "exit_code": 2,
+              "elapsed_seconds": 0.3108315360004781,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/direct-offset.run.log",
+              "log_sha256": "2245a8996472edf4988f838294e700d925ae236513fbe9f2632da596981ac3fd",
+              "detected_assertion": "positional write changed caller offset",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/direct-offset.inventory.json",
+              "native_artifact_manifest_sha256": "567a250b2bf0356166cc76439a2e4c8eade72b8cb50721f90b6b101a51103755"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "6a50e86eb8ff27322f06a0556147918eff6804b2597ef284e0c4e0d6fbdd2b1f",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "667d5e343c2a29be52e90efaaf5ba26ca9f3292f7ea3ba8c9823e9d33a6bc6de",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/seek-write/positional-test",
+          "binary_sha256": "f51717325e4572f75321fa09ca656629327e5cf3c3a7c1d4e6a770bc80028792"
+        },
+        {
+          "mode": "missing-append-guard",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.15194404700014275,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18713643700175453,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.025921308995748404,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.146115240000654,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02504729199426947,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13523935400007758,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02389041899732547,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14320430299994769,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.05169915300211869,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1876614110005903,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.40265251899836585,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/files-append-rejected",
+                "append-rejected"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.26213552999979584,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/append-rejected.run.log",
+              "log_sha256": "6aac0e0609e0945f6e019b5733cf5e428b01839c12e41ba68d78ec0cc1066f14",
+              "detected_assertion": "append writer was admitted",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/append-rejected.inventory.json",
+              "native_artifact_manifest_sha256": "8b7414518c5ae1df5a0bdb7226491c76065ae663f6677ffc857a2cfcbdbb59ac"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/files-loop-unchanged-append-rejected",
+                "loop-unchanged-append-rejected"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.027207913997699507,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/loop-unchanged-append-rejected.run.log",
+              "log_sha256": "f78bdd63da0f7b4ba254279bd717567b65b97d49842892ffb4bf45238f01ef52",
+              "detected_assertion": "expected Invalid argument at semantic writer flags",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/loop-unchanged-append-rejected.inventory.json",
+              "native_artifact_manifest_sha256": "d2e2c28b56e1bf445ba57c6bba53c804b1fccb7c54055ae4e63340180c8da123"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "ac7b951739624706cf008d830ffd16abed416b2a4b2a35d9b61e0d88d5b2958a",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "0ba8e38ac109ba2ecc7eccbcb38c54be181136e44b0049729919dfb0f349188e",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/missing-append-guard/positional-test",
+          "binary_sha256": "4c0cbc85f197bfa4c5aa4ce169cfe2f0b94b6be677638303c39b34bd6c9698be"
+        },
+        {
+          "mode": "heap-pointer",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13008101000013994,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18583734099956928,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.02478400299878558,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1453658300015377,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04497957300191047,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13640512400161242,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.023404056002618745,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14015650600049412,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04166217500460334,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.19054299599520164,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.4917602870045812,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/positional-test",
+                "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/files-snapshot-copy",
+                "snapshot-copy"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer",
+              "exit_code": 2,
+              "elapsed_seconds": 0.30183898600080283,
+              "log": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/snapshot-copy.run.log",
+              "log_sha256": "feb34c931f638521087a2525d29a66d7f507fabf07cbae8fd77b7724c355ab16",
+              "detected_assertion": "released write used borrowed heap pointer",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/snapshot-copy.inventory.json",
+              "native_artifact_manifest_sha256": "95cbf04836ac8a0b284e7a3d841a1f63ef30a2925ba35330f9587ee1bf053467"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "0b8a471c0e9f5136b10818b6dff93d81b89ee892d572b31216611efde7a84250",
+            "formatExtension.cmx": "3789ed4250ea6adbf284532b3785e4a9568ae3d9924e3fbd3bf2b4f6d5706ae1",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "a23307092c6f900767fc7baf9326ca602ab055b4874ab5298e5ff69e340d0dec",
+            "semanticDelta.cmx": "904a3ecc37f07c42e7c2ef5678fcf2eed45144cd7c66727ae5edf33421886b2d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "0736587ece11e346de9df1450d7781627f43eaf9834bba3d8fe8a9ea18478b87",
+            "semanticFile.cmx": "652525bfc06511c6de95acb3c2d0fd4d3a64e1b64e36742cffc821eb4306cc3a",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "4dbae0cceacb8c4571fa8a6c97757d573c1e8ee61e229f31e2b638ad6c620ed6",
+            "semanticFile_stubs.c": "37c1acc5d61a1b441190ce59c6b12b54a53f990b8ed1d7304cbc38971edc1f5c",
+            "semanticHash.cmx": "9ad6c781d30e7634fb3bcdbe57e61030a052e16a6fe1b1b6db8bcb7436b02533",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "29701a47bc00078adb32403e9339a757a4fbc5ba1220d0157f4f3d039f345e12",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "244ae0650ea9a0630e10f77c3781cb19bc0be6093a1eab18e4745ef3820bc8d0",
+            "test.cmx": "78a07c3330568e4d2ba5e370f512fc0cff0c6126e617ecd1e5784710afb19841",
+            "test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+            "test.o": "e4bd64948c4fda863aadb7c85dc8c6e0b0fb6a352d3555d5ce21adec226c9561"
+          },
+          "binary": "/private/tmp/unison-positional-write-qgzn3iau/heap-pointer/positional-test",
+          "binary_sha256": "bae846a33666fc8df9639d5634a99f23ab59327845d18d6010854f2212cd10ed"
+        }
+      ],
+      "source_guards": "bounded native stack copy before runtime release; no OCaml heap/runtime use in released body",
+      "counter_scope": "fcntl/fstat through new native admission stub only; excludes existing ML/Unix proof queries",
+      "scope": "synthetic disposable files only; no Photo, Adobe, Lightroom, catalog/cache/publisher or production volume access",
+      "terminal": "passed",
+      "external_receipt": {
+        "path": "/private/tmp/unison-positional-stock-final-qualification.json",
+        "sha256": "a1e82d45e7ed04f49f8dbb12e130e68aade4e742c5c14c3762016c6892477246"
+      }
+    },
+    {
+      "schema": "unison-positional-write-direct-qualification/1",
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "compiler_version": "5.2.0+ox",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "compiler_config": "version: 5.2.0+ox\nstandard_library_default: /Users/alexy/.opam/5.2.0+ox/lib/ocaml\nstandard_library: /Users/alexy/.opam/5.2.0+ox/lib/ocaml\nccomp_type: cc\nc_compiler: gcc\nocamlc_cflags:  -O2 -fno-strict-aliasing -fwrapv  \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cflags:  -O2 -fno-strict-aliasing -fwrapv  \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: gcc  -O2 -fno-strict-aliasing -fwrapv    -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: gcc  -O2 -fno-strict-aliasing -fwrapv    -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries:    -pthread\nnative_c_libraries:    -pthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: amd64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: gcc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\nwith_address_sanitizer: false\nwith_cpp_mangling: false\nname_mangling_scheme: flat\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: x86_64-apple-darwin24.6.0\ntarget: x86_64-apple-darwin24.6.0\nflambda: false\nflambda2: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nparameterised_modules: true\nexec_magic_number: Caml1999X578\ncmi_magic_number: Caml1999I578\ncmo_magic_number: Caml1999O578\ncma_magic_number: Caml1999A578\ncmx_magic_number: Caml1999Y578\ncmxa_magic_number: Caml1999Z578\nast_impl_magic_number: Caml1999M578\nast_intf_magic_number: Caml1999N578\ncmxs_magic_number: Caml1999D578\ncmt_magic_number: Caml1999T578\ncms_magic_number: Caml1999S578\ncmj_magic_number: Caml1999J578\ncmja_magic_number: Caml1999K578\nlinear_magic_number: Caml1999L578\nflambda_backend: true\nprobes: false\nstack_allocation: true\nruntime5: true\nno_stack_checks: false\nmultidomain: true\npoll_insertion: true\nox: true\noxcaml_dwarf: false\nobjcopy: \n",
+      "platform": "darwin",
+      "native_compiler": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "native_compiler_sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769",
+      "native_compiler_version": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: x86_64-apple-darwin24.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "build_environment": {
+        "SDKROOT": null,
+        "MACOSX_DEPLOYMENT_TARGET": null,
+        "CC": null,
+        "CFLAGS": null
+      },
+      "sources": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+        "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+        "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+        "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+        "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "tests/positional_write/fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+        "tests/positional_write/test.ml": "d27d6a0660f19da98ecba5e7af65a05b0606c21e06752441db86f9063cba143b",
+        "tests/positional_write/run.py": "0c7fae0abb359daa6ade1c543c1ba0824a9ddc6ddce12b16a2bf22ea62a3a1d0",
+        "tests/positional_write/README.md": "cf48d4410a10778a19b03585df7d038ea27fb1e181233e8db7f3e66204e14229"
+      },
+      "artifacts": "/private/tmp/unison-positional-write-2hbdaock",
+      "runs": [
+        {
+          "mode": "fixed",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14040555599785876,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.19986743800109252,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04510323800059268,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.25888744400435826,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04686406799737597,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.26125969699933194,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.047855390002951026,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.25752497000212315,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.045645349004189484,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3544380839957739,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.9213832249952247,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/fixed/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/fixed/files-all",
+                "all"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.41038242500508204,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/fixed/all.run.log",
+              "log_sha256": "4a74c0de2f37799c2d2d99f2d7ea04907994bfb957be70650d4c965f98e07040",
+              "cases": 59,
+              "assertions": 1070,
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/fixed/all.inventory.json",
+              "native_artifact_manifest_sha256": "dd458a41f618e7a56b51cea2c723bfeb5fca7a005411ff545d123c341731dbe4"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "36d252d14c2165a3029b3def1ad2655512aa94b1454b1ab275dc3463b9558e6d",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/fixed/positional-test",
+          "binary_sha256": "2db216452a04bd52269376c0bd36f8cf40cd34d79058d5c020c130194053e3a4"
+        },
+        {
+          "mode": "forward-bad-progress",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1566198689979501,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.21243067900650203,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.0517052379946108,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.24293932599539403,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04893834199901903,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1992633219997515,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04855816599592799,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.25016204900020966,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04952248400513781,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.37662886700127274,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.8999436389931361,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/files-ml-overcount",
+                "ml-overcount"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3055616510027903,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/ml-overcount.run.log",
+              "log_sha256": "30f6f337d131bb79d9c0bf15ce27af827a4bab67753e6f931774f4f52294d3e9",
+              "cases": 1,
+              "assertions": 16,
+              "scope": "unchanged production ML guard; private native count validation bypassed to inject impossible progress",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/ml-overcount.inventory.json",
+              "native_artifact_manifest_sha256": "c6243ef7fdddbd9262889d2d49681601c1b61c8174e5099d8209ba95a73432da"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/files-ml-negative",
+                "ml-negative"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress",
+              "exit_code": 0,
+              "elapsed_seconds": 0.026390021994302515,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/ml-negative.run.log",
+              "log_sha256": "5b8c7d89c112e332b69120dede36cec83bf13d407e0eb196452c832671eea2d7",
+              "cases": 1,
+              "assertions": 16,
+              "scope": "unchanged production ML guard; private native count validation bypassed to inject impossible progress",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/ml-negative.inventory.json",
+              "native_artifact_manifest_sha256": "524270ec4b647c7db70147ec464572f149dffa3164c0bcf9a9646b126de49a4d"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "e734b3b31302f25b26224e43deb3194876fdfc7545a6ddb9f0f1057a86aaa469",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "7117357b4c64465d23ac9dfc72ffa92a60d6774d76c8d827bb6471ae7ef6f673",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/forward-bad-progress/positional-test",
+          "binary_sha256": "04377a79b3648582efb3b4590443a629671bf0701ed7566c792808a4a38b6d0f"
+        },
+        {
+          "mode": "forced-ml-backend",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14590832900285022,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1923825229969225,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04748336900229333,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2664668619981967,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.08192902700102422,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.20625516300060553,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.05221170200093184,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2498247920011636,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04502633400261402,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3789601370008313,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.9085476539985393,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/files-fallback-interior-and-bounds",
+                "fallback-interior-and-bounds"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.4932116939962725,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-interior-and-bounds.run.log",
+              "log_sha256": "6d66ad8ee17fdcb0c4fb4d8ebcf0edc6c79e08c56462d0b531f703acd2fbb0d7",
+              "cases": 1,
+              "assertions": 13,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-interior-and-bounds.inventory.json",
+              "native_artifact_manifest_sha256": "f46741c4cb18b25861f480778bddd5fe583c402e95abe9587e69f9929afc0b43"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/files-fallback-materialize",
+                "fallback-materialize"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.023897181999927852,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-materialize.run.log",
+              "log_sha256": "d6dd108fe39edbf08f5ef336847a8c0d2e703ae7fba84100a331512e92f0658b",
+              "cases": 1,
+              "assertions": 8,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-materialize.inventory.json",
+              "native_artifact_manifest_sha256": "80f086007a51bf37b1c9579876377cf64c486ac732844b856ac28bca804e0904"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/files-fallback-unchanged",
+                "fallback-unchanged"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend",
+              "exit_code": 0,
+              "elapsed_seconds": 0.026840737999009434,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-unchanged.run.log",
+              "log_sha256": "2092d0c165035793a7422a5e3f3725b2683dc352ea377593f8c4906d4e6bba58",
+              "cases": 1,
+              "assertions": 8,
+              "scope": "production ML seek/write branch on POSIX host through privately forced false native preparation; not Windows ABI/runtime qualification",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/fallback-unchanged.inventory.json",
+              "native_artifact_manifest_sha256": "b911d87537ae3a94bab9b2ba74c79f0a157bdaa90b47fc9499b8c81c7241247f"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "209bc837b40bd40cce8b56070bc126088c1624b3224e0f295d22d0aa3f0284f1",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "b403ea8f55de6d7b104f97b867f5f9affda1df2dbe7a888e270706028ee3f5e5",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/forced-ml-backend/positional-test",
+          "binary_sha256": "37d73178fc9fc30555c978d0666bed4e3eb4e4422ccea41caa10eb33de1bc8bb"
+        },
+        {
+          "mode": "seek-write",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14334455599600915,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.19665164400066715,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/fixture.c.compile.log",
+              "log_sha256": "ee492350e58e9ad688bfdd9049c8490936dd216a239df2b34979afba23ec1dbc"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04647130499506602,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2507886309977039,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.041619025003456045,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.305804839998018,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04087401399738155,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2556946219992824,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.05003311399923405,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.37181419199623633,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 0,
+              "elapsed_seconds": 0.8465072920007515,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/seek-write/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/seek-write/files-direct-offset",
+                "direct-offset"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/seek-write",
+              "exit_code": 2,
+              "elapsed_seconds": 0.3076538140012417,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/seek-write/direct-offset.run.log",
+              "log_sha256": "2245a8996472edf4988f838294e700d925ae236513fbe9f2632da596981ac3fd",
+              "detected_assertion": "positional write changed caller offset",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/seek-write/direct-offset.inventory.json",
+              "native_artifact_manifest_sha256": "09600423ee974538b1129fdb432d6a787d24b4a8c12e83d3daec2d0e5a3f5fd4"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "e98802453bb3515cca1a5164592d761133561030cbdaa9b439f6e00b7009f6dd",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "667d5e343c2a29be52e90efaaf5ba26ca9f3292f7ea3ba8c9823e9d33a6bc6de",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/seek-write/positional-test",
+          "binary_sha256": "9f099ee01d2473840fd2a9ec329f25411a999929ea80095e13d07f2911947351"
+        },
+        {
+          "mode": "missing-append-guard",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1425408540017088,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2043993949992,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04394462300115265,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.24947235400031786,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.05040448900399497,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1977476270039915,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04614910899545066,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.20865525000408525,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04616997999983141,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.35411155900510494,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.8243776380040799,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/files-append-rejected",
+                "append-rejected"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.3075753689990961,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/append-rejected.run.log",
+              "log_sha256": "6aac0e0609e0945f6e019b5733cf5e428b01839c12e41ba68d78ec0cc1066f14",
+              "detected_assertion": "append writer was admitted",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/append-rejected.inventory.json",
+              "native_artifact_manifest_sha256": "c2b107751d1b0b6c84e083d82a8a4e1f36733b4dccd6dcdbefcf7a4ccb95c21d"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/files-loop-unchanged-append-rejected",
+                "loop-unchanged-append-rejected"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.027180402001249604,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/loop-unchanged-append-rejected.run.log",
+              "log_sha256": "f78bdd63da0f7b4ba254279bd717567b65b97d49842892ffb4bf45238f01ef52",
+              "detected_assertion": "expected Invalid argument at semantic writer flags",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/loop-unchanged-append-rejected.inventory.json",
+              "native_artifact_manifest_sha256": "2302084bf260993404d2005423d8d53be63e27d2c0ccdf7f7250822716bea5ad"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "494df2aa523431474ce313dc4209f7d52caeac70df022493c32000f319e475c7",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "0ba8e38ac109ba2ecc7eccbcb38c54be181136e44b0049729919dfb0f349188e",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/missing-append-guard/positional-test",
+          "binary_sha256": "79fa9625ec323a67442584f85321bacccc98f7fa3b14060297d4259376842f5f"
+        },
+        {
+          "mode": "heap-pointer",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "semanticHash_stubs.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1504842349968385,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticHash_stubs.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1966190809980617,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.05325714599894127,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticHash.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticHash.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2550687300026766,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticHash.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04651450600067619,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticFile.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticFile.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18954517599922838,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticFile.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.047439160000067204,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/formatExtension.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "formatExtension.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.2521546289935941,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/formatExtension.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.mli"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04856989599647932,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticDelta.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "semanticDelta.ml"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3512679580016993,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/semanticDelta.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.o",
+                "fixture.o",
+                "semanticHash.cmx",
+                "semanticFile.cmx",
+                "formatExtension.cmx",
+                "semanticDelta.cmx",
+                "test.ml",
+                "-o",
+                "positional-test"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 0,
+              "elapsed_seconds": 0.8662942200026009,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/positional-test",
+                "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/files-snapshot-copy",
+                "snapshot-copy"
+              ],
+              "cwd": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer",
+              "exit_code": 2,
+              "elapsed_seconds": 0.27058103300078074,
+              "log": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/snapshot-copy.run.log",
+              "log_sha256": "feb34c931f638521087a2525d29a66d7f507fabf07cbae8fd77b7724c355ab16",
+              "detected_assertion": "released write used borrowed heap pointer",
+              "native_artifact_manifest": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/snapshot-copy.inventory.json",
+              "native_artifact_manifest_sha256": "d4ba574c8e80ecc364cc436bf693e817616987a4636fa6825fd83dc29ef194a2"
+            }
+          ],
+          "build_files": {
+            "fixture.c": "f3e0fc2a3957994a964c5762ae0fcf082d8cf6b362eb2df69ee261b203cfdc3f",
+            "fixture.o": "552eb89a3cd74b95e69ea86384cf56742e400645ee5f82477f2c820e7a06ed84",
+            "formatExtension.cmx": "d9ccd5879162580b51b9bf2fe5f0a7fbd5245e9c18cae5e26784dc47aec3c0d6",
+            "formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+            "formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+            "formatExtension.o": "9fb45728ba725bcf510f22913c67ebddb7883c5646a22a979dafaae6f4876094",
+            "semanticDelta.cmx": "9236a36ecba4a8b16463d5aac36df27430fa5a9a21c8721c6678a7df864c7e8d",
+            "semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+            "semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+            "semanticDelta.o": "2c7b800278ed2d5c2b14beee6c62e20f7cdc0c9d68246f768b79f022f1a7e8aa",
+            "semanticFile.cmx": "62362fcdecfe74e0c625d580870bbe150e85bc9865408a8dedfc4d35b024b046",
+            "semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticFile.o": "88765024dc3e9b9315001117f666daacf888381c769e9a68c5230f6d0f95c5c1",
+            "semanticFile_stubs.c": "37c1acc5d61a1b441190ce59c6b12b54a53f990b8ed1d7304cbc38971edc1f5c",
+            "semanticHash.cmx": "833997325d3999e192d2b728f6f1e39089469e1ad8050837d8e7511991a1a1be",
+            "semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticHash.o": "132a806fe0550d4c601956c4376346bd4eea6063826f25af683a73033009ab1e",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "semanticHash_stubs.o": "efd74c6650670f38532c4dd81234552ad30fd123032ed8f4c04eb5abfb152067",
+            "test.cmx": "1c2c83a4673d6b179f4ecc70273379dd7d4d6c71f88ad16840a15757e92cfaf0",
+            "test.ml": "68524d759ebaad024ebb12f98b2e1b50daccb5eee89bf1096506065c7501c03f",
+            "test.o": "cec90aa60ed1e14cfd8efee8c926035a660394b8afa163acae13d339c6315f0d"
+          },
+          "binary": "/private/tmp/unison-positional-write-2hbdaock/heap-pointer/positional-test",
+          "binary_sha256": "fb1752ceecd4b850eb6bcad2045ddeb778b77b11d053932bcf7dfb4639d9b23e"
+        }
+      ],
+      "source_guards": "bounded native stack copy before runtime release; no OCaml heap/runtime use in released body",
+      "counter_scope": "fcntl/fstat through new native admission stub only; excludes existing ML/Unix proof queries",
+      "scope": "synthetic disposable files only; no Photo, Adobe, Lightroom, catalog/cache/publisher or production volume access",
+      "terminal": "passed",
+      "external_receipt": {
+        "path": "/private/tmp/unison-positional-ox-final-qualification.json",
+        "sha256": "cbabd5c034172ef1833c71c0a30e3ce889e9d5be4c98cd72dcdde99301f00b87"
+      }
+    }
+  ],
+  "outcomes": {
+    "per_compiler": {
+      "native_cases": 59,
+      "native_assertions": 1070,
+      "private_ML_invalid_progress_controls": 2,
+      "private_ML_invalid_progress_assertions": 32,
+      "private_forced_ML_backend_cases": 3,
+      "private_forced_ML_backend_assertions": 29,
+      "total_positive_cases": 64,
+      "total_positive_assertions": 1131
+    },
+    "compilers": [
+      "5.5.1",
+      "5.2.0+ox"
+    ],
+    "negative_controls": {
+      "seek_write": {
+        "exit": 2,
+        "detected_assertion": "positional write changed caller offset"
+      },
+      "missing_prepare_append_guard": {
+        "exit": 2,
+        "direct_detected_assertion": "append writer was admitted",
+        "unchanged_apply_detected_assertion": "expected Invalid argument at semantic writer flags"
+      },
+      "heap_pointer": {
+        "exit": 2,
+        "detected_assertion": "released write used borrowed heap pointer",
+        "safety": "pointer address comparison rejects before dereference or libc write"
+      }
+    },
+    "source_and_basis": "Immutable input, exact materialized target or actual failed/cancelled prefix, caller-held descriptors and original basis data/inode preserved",
+    "offset_scope": "Each actual POSIX pwrite preserves shared position, including deliberate duplicate-FD perturbation; whole-file proof reads/readback do not preserve position",
+    "query_scope": "Exactly one fcntl/fstat native admission for production apply; no queries through the new stub per write. Existing ML/Unix proof queries are outside wrapper counters",
+    "sparse_offset": "Actual4bytewrite at2147483771 with exact 64bit EOF, HEAD prefix and zero-gap/TAIL endpoint; bounded samples recorded, no whole2GB hash",
+    "pending_signal": "Exactly one Sys.Break injected after native copying; one bounded pwrite settles before deferred handler, caller offset/data/FD stay valid",
+    "artificial_protocol_controls": "Private C count guard bypass forwards impossible positive/negative progress to unchanged production ML, which rejects after one attempt; shipped C rejects as EIO",
+    "fallback_scope": "Privately forced false native preparation exercises actual ML seek/write backend interior/bounds/position, full materialization and unchanged plan; no Windows ABI/runtime claim",
+    "production_target": "Nonuniform binary target packet excludes old A byte; full/short/EINTR/shareddup/fallback/partial-prefix cases check actual source-slice advancement and every comparison window changes"
+  },
+  "limitations": [
+    "Borrowed writer requires live FD, stable flags and exclusive private output access; no FD-reuse, concurrent-close, concurrentF_SETFL or hostile ownership proof",
+    "Direct materializer has no publisher; unrelated live-name sentinel preservation is not qualification of full receive/publication failure path",
+    "Source/native query counters exclude separate ML/Unix proof queries; no machinewide/performance/physicalallocation/crashdurability/native-I/Odeadline claim",
+    "Native POSIX runtime qualification is macOS; existing Windows seek/write path only exercised via private false-backend variant on this host",
+    "No SDK/Lightroom/Photo data/catalog/cache/productionvolume operations or preview benchmarks"
+  ],
+  "prior_receipt": {
+    "path": "/private/tmp/unison-positional-qualification-before-nonuniform.json",
+    "sha256": "9fdcd19017a65c382d958a01f433a40dbb62e264eec7d0bed564057279559ff4",
+    "scope": "Earlier uniform production target and broader POSIX runner guard; preserved historical evidence, superseded by current final fixtures"
+  }
+}

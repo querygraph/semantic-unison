@@ -4,6 +4,49 @@
 
 ## Live implementation handoff
 
+* Positional-write continuation (2026-10-13): `SemanticFile.writer` is an abstract
+  borrow of an admitted private output; it allocates no descriptor. POSIX
+  admission rejects read-only/append mode, nonregular and multiply linked files
+  once per writer, including unchanged plans. Each later attempt checks slice /
+  int64/native-offset bounds, copies at most 64 KiB into native stack storage and
+  issues one `pwrite` while the runtime is released without pending dispatch.
+  ML computes absolute offsets from successful progress, checks cancellation,
+  retries EINTR at that offset and rejects zero/invalid progress. Operational
+  failures do not choose another backend. Existing FD ownership, stable flags
+  and exclusive output access remain required; no extra ownership lease is
+  invented. Windows retains its legacy seek/write backend with kind/link checks.
+* Fresh positional-write builds: stock Make `unison-build-n18n0eou`, Ox Make
+  `unison-build-yft6dgn_` and Dune 3.22.2 `unison-dune-positional-yj9ms_5y` pass
+  builds/selftests with all 316 production/package/INSTALL inputs matching the
+  workspace and both compiler snapshots. Kernels, 127 independent conformance
+  commands / 2,033 assertions, 19 worker / 15 report groups, actual local/remote /
+  24-key bidirectional/old-peer SDE and all 79 full `Files` cases pass both
+  compilers. Dedicated direct controls also pass 59 native/application cases /
+  1,070 assertions plus two artificial invalid-progress and three forced legacy-
+  backend controls, for 64 positive cases / 1,131 assertions per compiler.
+  Three private source regressions detect seek/write position changes, removed
+  append admission and a released heap pointer. Independent read-only review
+  checked 492 hashes and 238 retained native artifact entries. Evidence is
+  `tests/positional_write/qualification-20261013.json`. Actual local/remote
+  receivers pass four partial-write cases across both compilers: a real 64 KiB
+  prefix followed by EIO preserves old live bytes/inode, discards staging and
+  retries exactly; the next no-op preserves the successful inode. Archive
+  checks are raw fingerprint-byte observations, not decoded node authority.
+  Eight finite cleanup controls pass. The owner retains the client PID through
+  group cleanup before reaping and settles both captures, preserving primary
+  errors. Independent artifact review accepts all 316 inputs across five source
+  locations and 4,841 integration hash comparisons. Integration evidence is
+  `tests/qualification/positional-write-integration-20261013.json`; its initial
+  audit-pending status is superseded by the separate acceptance receipt
+  `tests/positional_write/independent-review-20261013.json`.
+* Position scope: each native write preserves its shared FD position; proof
+  reads and final hashing can still change that position during the complete
+  materializer. Logical bytes count returned successful writes, and attempts
+  include EINTR. Neither attests physical writes/sharing, crash durability or
+  elapsed speedup. A borrow requires no concurrent FD close or status-flag
+  change. Complete-lifetime FD/memory limits and platform/runtime qualification
+  remain open; the new native buffer is a bounded per-call stack cost.
+
 * Native scratch continuation (2026-10-13): the common three-ABI clone engine
   now creates its blank reservation through the retained destination parent,
   using bounded exclusive `openat`, rather than an absolute-path `mkstemps`.
@@ -14,7 +57,7 @@
   descriptor slots clear before a single close attempt. Primary operational
   errors survive cleanup, and close failures cannot become permissive declines.
   The three result layouts, source checks and scoped clone declines are unchanged.
-* Current scratch qualification: both compilers pass 182 real APFS cases /
+* Scratch checkpoint qualification: both compilers pass 182 real APFS cases /
   1,984 assertions, including parent-path rebinding, bounded collisions,
   replaced/missing names, error cleanup and actual recycled-FD close sentinels.
   Both private regressions fail the designated checks through all three ABIs.
@@ -92,12 +135,13 @@
   endpoint, not one machine-wide cap for both same-host processes. Raw receipts
   and exact source provenance are in `bench/sync/results/`; the broader SOL
   performance matrix, physical storage, aggregate RSS and SDK work remain open.
-* Current range materialization uses exclusive borrowed output descriptors with
+* Historical sync benchmark materialization uses exclusive borrowed output descriptors with
   `Unix.LargeFile.lseek` and short-write/EINTR-safe `Unix.write_substring`, rather
   than a native `pwrite` syscall. Logical-byte counters accumulate successful
   returned bytes; call counters include attempts/retries. Do not describe these
-  receipts as syscall-level `pwrite` telemetry. The planned native positional
-  write path and its foreign-boundary/platform qualification remain separate.
+  receipts as syscall-level `pwrite` telemetry. The newer POSIX positional-write
+  implementation above has separate source and qualification evidence; it does
+  not reinterpret or replace those historical elapsed measurements.
 * Resource scope remains explicit: device keys are ephemeral per-process
   accounting, not mount incarnations, physical disks or cross-process budgets.
   The integer key representation is qualified on this 64-bit macOS host.

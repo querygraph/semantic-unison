@@ -18,7 +18,7 @@ sources = [
     "src/semanticAdmission.mli", "src/semanticAdmission.ml",
     "src/ioAdmission.mli", "src/ioAdmission.ml",
     "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
-    "src/semanticFile.mli", "src/semanticFile.ml",
+    "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",

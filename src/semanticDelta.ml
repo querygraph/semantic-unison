@@ -210,6 +210,7 @@ let apply_report_with_extension ?(check_cancel = fun () -> ()) ?max_payload
   let verified_basis = checked basis in
   let basis_stat = Unix.LargeFile.fstat output in
   if basis_stat.Unix.LargeFile.st_nlink <> 1 then invalid "staging file has multiple links";
+  let writer = SemanticFile.prepare_writer ~check_cancel output in
   ignore (SemanticFile.with_fd ~check_cancel output checked);
   let comparison_window = 4096 in
   let logical_bytes_written = ref 0 and write_calls = ref 0 in
@@ -218,17 +219,18 @@ let apply_report_with_extension ?(check_cancel = fun () -> ()) ?max_payload
     let length = String.length p.data in
     let write start stop =
       if start < stop then begin
-        ignore (Unix.LargeFile.lseek output
-          (Int64.add p.region.offset (Int64.of_int start)) Unix.SEEK_SET);
         let rec loop off = if off < stop then begin
           check_cancel ();
+          let count = min 65536 (stop-off) in
+          let position = Int64.add p.region.offset (Int64.of_int off) in
           let rec retry () =
             check_cancel ();
             incr write_calls;
-            try Unix.write_substring output p.data off (min 65536 (stop-off))
+            try SemanticFile.write_at writer p.data off count position
             with Unix.Unix_error (Unix.EINTR,_,_) -> retry () in
           let n = retry () in
           if n = 0 then invalid "metadata write made no progress";
+          if n < 0 || n > count then invalid "metadata write returned invalid progress";
           logical_bytes_written := !logical_bytes_written + n;
           loop (off+n)
         end in loop start

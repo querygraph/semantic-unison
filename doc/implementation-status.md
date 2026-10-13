@@ -1,7 +1,42 @@
 # Implementation status and remaining acceptance work
 
+The positional-write follow-on now supplies an abstract borrowed output writer
+and one bounded native POSIX `pwrite` per attempt. Admission rejects append /
+read-only mode and nonregular/multiply linked outputs before writes, including
+unchanged plans; subsequent calls rely on stable FD lifetime/flags and exclusive
+output access. ML owns absolute short-write/EINTR/cancellation loops. Windows
+retains seek/write with kind/link checks. The [foreign-boundary audit](foreign-boundary-audit.md)
+records stack-copy/runtime roots, offset/slice bounds and the explicit contract.
+
+Fresh stock/Ox Make `unison-build-n18n0eou` / `unison-build-yft6dgn_` and Dune
+`unison-dune-positional-yj9ms_5y` build/selftest with 316 matching production /
+package/INSTALL inputs. Kernels, independent 127-command / 2,033-assertion
+conformance, 19 worker / 15 report groups, local/remote/bidirectional/old-peer
+semantic callers and all 79 actual final-publication cases per compiler pass.
+Direct fault/buffer controls pass 59 native/application cases / 1,070 assertions,
+plus two artificial invalid-progress and three forced legacy-backend controls,
+for 64 positive cases / 1,131 assertions per compiler. Three private regressions
+fail their designated checks. Independent read-only review checked 492 hashes /
+238 retained native artifact entries; [the direct receipt](../tests/positional_write/qualification-20261013.json)
+preserves exact scope and sources. Four actual local/remote partial-write cases
+across both compilers prove a real 64 KiB prefix followed by EIO preserves old
+live bytes/inode, discards staging, retries exactly and leaves the next no-op
+inode stable. Raw archive fingerprint-byte observations support those runs;
+they do not decode archive headers or bind nodes. Eight finite process-cleanup
+controls pass. Group ownership retains the leader PID until cleanup before
+actual leader reap; capture settlement preserves the primary error. Independent
+read-only integration audit checked 4,841 hash comparisons, including all 316
+inputs across workspace/two Make/two Dune snapshots. [The integration receipt](../tests/qualification/positional-write-integration-20261013.json)
+retains its original audit-pending status; [the separate acceptance receipt](../tests/positional_write/independent-review-20261013.json)
+closes that audit. Entire materialization still
+moves positions through proof/hash reads; only native write attempts preserve
+the shared position. Physical writes/sharing, elapsed speedup, crash recovery,
+resource lifetime limits and actual other-platform behavior remain unqualified
+by this change. The older sync benchmark retains its seek/write source pins
+and measurements. No Adobe or Photo operation was performed.
+
 Reviewed and updated on 2026-10-13 on `feat/semantic-dng-oxcaml`, for the
-user-requested `querygraph/unison` fork. The native scratch follow-on replaces
+user-requested `querygraph/unison` fork. The preceding native scratch follow-on replaces
 absolute reservation/removal with bounded exclusive creation through the held
 parent. Reservation, basis and admitted output cleanup now retain identity
 witnesses; close slots clear before one attempt and first operational errors

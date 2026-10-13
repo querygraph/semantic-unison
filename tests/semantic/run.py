@@ -22,19 +22,22 @@ with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
         for suffix in (".ml", ".mli"):
             shutil.copyfile(root / "src" / (name + suffix), build / (name + suffix))
     shutil.copyfile(root / "tests/semantic/test.ml", build / "test.ml")
-    shutil.copyfile(root / "src/semanticHash_stubs.c", build / "semanticHash_stubs.c")
+    for name in ("semanticHash_stubs.c", "semanticFile_stubs.c"):
+        shutil.copyfile(root / "src" / name, build / name)
     # Exercise SHA-256 padding boundaries and multi-buffer reads against hashlib.
     for length in (0, 1, 55, 56, 63, 64, 65, 119, 120, 127, 128, 65535, 65536, 65537, 1048576):
         data = bytes((i * 113 + 29) % 256 for i in range(length))
         (build / f"vector-{length}").write_bytes(data)
         (build / f"vector-{length}.sha256").write_text(hashlib.sha256(data).hexdigest())
-    command = [args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c"]
+    command = [args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c",
+               "semanticFile_stubs.c"]
     for name in modules:
         command += [name + ".mli", name + ".ml"]
     subprocess.run(command + ["test.ml", "-o", "semantic-test"], cwd=build, check=True)
     subprocess.run([str(build / "semantic-test")], cwd=build, check=True)
     shutil.copyfile(root / "tools/semantic-inspect/inspect.ml", build / "inspect.ml")
-    subprocess.run([args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.o"] +
+    subprocess.run([args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.o",
+                    "semanticFile_stubs.o"] +
                    [name + ".cmx" for name in modules] + ["inspect.ml", "-o", "semantic-inspect"],
                    cwd=build, check=True)
     header = (b"II" + struct.pack("<HIH", 42, 8, 2) +

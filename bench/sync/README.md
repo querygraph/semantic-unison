@@ -116,9 +116,14 @@ operations are not byte counts or physical APFS write telemetry.
 
 Successful semantic updates supply production `SemanticDelta` returned logical
 write-byte counts and attempted write-call counts, plus complete packet payload
-sizes. The implementation uses `Unix.LargeFile.lseek` and `Unix.write_substring`;
-bytes increment after a successful returned write, while attempts include
-EINTR retries. It does not report a `pwrite` syscall. The generic
+sizes. The recorded 2026-10-13 benchmark snapshot uses `Unix.LargeFile.lseek`
+and `Unix.write_substring`; its receipts describe that historical path. The
+later positional-write implementation uses an admitted borrowed writer and
+native POSIX `pwrite` for each bounded chunk; Windows retains seek/write.
+Bytes increment after a successful returned write, while primitive attempts
+include EINTR retries. The benchmark fields remain application counters rather
+than independently observed syscall or physical-write telemetry. This change
+does not rerun or reinterpret the historical elapsed measurements. The generic
 receiver supplies the exact same-offset inherited-byte count. Its reported
 non-inherited logical output is a model, `complete_size - inherited_bytes`,
 not syscall-level accounting. Ordinary full output uses the complete output

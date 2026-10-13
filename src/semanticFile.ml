@@ -1,4 +1,33 @@
 exception Invalid of string
+type writer = { output : Unix.file_descr; positional : bool }
+external prepare_writer_raw : Unix.file_descr -> bool = "unison_semantic_prepare_writer"
+external pwrite_raw : Unix.file_descr -> string -> int -> int -> int64 -> int
+  = "unison_semantic_pwrite"
+let prepare_writer ?(check_cancel = fun () -> ()) output =
+  let rec prepare () =
+    check_cancel ();
+    try prepare_writer_raw output
+    with Unix.Unix_error (Unix.EINTR,_,_) -> prepare () in
+  let positional = prepare () in
+  if not positional then begin
+    let stat = Unix.LargeFile.fstat output in
+    if stat.Unix.LargeFile.st_kind <> Unix.S_REG || stat.Unix.LargeFile.st_size < 0L then
+      raise (Invalid "not a regular staging file");
+    if stat.Unix.LargeFile.st_nlink <> 1 then
+      raise (Invalid "staging file has multiple links")
+  end;
+  {output;positional}
+let write_at writer data start length position =
+  if writer.positional then pwrite_raw writer.output data start length position
+  else begin
+    if start < 0 || length < 0 || length > 65536 ||
+       start > String.length data || length > String.length data - start then
+      invalid_arg "SemanticFile.write_at slice";
+    if position < 0L || position > Int64.sub Int64.max_int (Int64.of_int length) then
+      invalid_arg "SemanticFile.write_at offset";
+    ignore (Unix.LargeFile.lseek writer.output position Unix.SEEK_SET);
+    Unix.write_substring writer.output data start length
+  end
 type t = { channel : in_channel; initial : Unix.LargeFile.stats;
            check_cancel : unit -> unit }
 let size t = t.initial.Unix.LargeFile.st_size

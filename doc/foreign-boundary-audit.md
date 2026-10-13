@@ -1,7 +1,7 @@
 # Manual audit of new foreign boundaries
 
 Reviewed on 2026-10-13 against the uncommitted `feat/semantic-dng-oxcaml` tree.
-This covers the new SHA-256 and helper supervisor primitives,
+This covers the new SHA-256, positional-write and helper supervisor primitives,
 `unison_clone_stage`/`unison_clone_stage_status`/`unison_clone_stage_handles`,
 `unison_file_observation` and the `unison_stage_publication_*` primitives, their
 ML declarations, and
@@ -40,6 +40,60 @@ Evidence: native/reference parity and externally generated SHA vectors in
 mutation checks and repeated lifecycle/descriptor tests in
 [worker tests](../tests/workers/test.ml). These do not constitute a race
 sanitizer run; the pinned compiler reports TSAN unavailable.
+
+## Positional semantic output
+
+[SemanticFile](../src/semanticFile.mli) exposes an abstract borrowed `writer`.
+`prepare_writer` admits a private singly linked regular output; it owns no FD.
+The existing caller keeps that FD live, its status flags stable and output
+access exclusive until retirement. Workers retain their duplicate through job
+settlement; synchronous callers retain their existing ownership. Preparing an
+unchanged plan still checks admission. An allocation failure creating the ML
+record cannot leak a new native resource.
+
+The private [native primitives](../src/semanticFile_stubs.c) have these boundaries:
+
+| Primitive | Roots, runtime and buffers | Effects and error contract |
+| --- | --- | --- |
+| `unison_semantic_prepare_writer` | FD rooted. Pending actions dispatch before interpreting the borrow. POSIX releases through no-pending entry for `F_GETFL` and `fstat`; only stack/native values are used. No FD is allocated or consumed. | Rejects read-only/append flags, nonregular/negative-size/multiply linked outputs. Returns an immediate backend boolean or saved Unix error after acquisition. ML retries EINTR with cancellation checks. Windows returns false without interpreting its descriptor as a POSIX integer; ML preserves kind/link checks and legacy seek/write. |
+| `unison_semantic_pwrite` | All five arguments rooted. Checks signed slice/subtraction bounds, 64 KiB cap, nonnegative int64 span and native `off_t` round trips before effects. Copies into 64 KiB stack storage while held, then no-pending release. No OCaml heap pointer, allocation or callback is used while released. | One `pwrite`, no C retry. Saves errno before reacquisition, rejects impossible returned progress and returns an immediate byte count or Unix error. Owns no FD and does no pathname/property/flush/rename work. Private Windows invocation raises ENOSYS; the selected ML fallback never invokes it. |
+
+POSIX admission is once per writer, rather than an extra flags/stat query for
+every chunk. `SemanticDelta` also keeps its earlier output-link stat, for three
+fixed queries on that path. It computes each attempt's absolute offset from
+successful progress; EINTR retries that offset and short writes advance it.
+Zero/invalid progress terminates. Cancellation is checked before each attempt.
+Operational failures do not switch backends or authorize publication. Actual
+live-file commit and archive ownership remain with the existing caller.
+
+Rejecting append flags bounds the Linux `pwrite` append behavior documented in
+the [Linux man-pages API reference](https://man7.org/linux/man-pages/man2/pwrite.2.html).
+The borrowed lifetime requires no concurrent close or `F_SETFL` on the shared
+open-file description; an abstract ML type does not enforce that contract
+against another process or unsafe caller. There is no new FD identity lease or
+hostile flag-change protection.
+
+Each native write preserves the shared position. Entire materialization still
+uses seek/read on duplicates for proof and final hashing, which can move it.
+Application bytes count successful returned writes; attempts include EINTR.
+These counters do not attest physical allocation/writes, durability or speed.
+An asynchronous exception after a completed native effect can leave an
+unreported private effect. Stack storage is bounded per active call, but is not
+an aggregate RSS limit. Native I/O has no in-call cancellation or hard deadline;
+Windows/native other-platform runtime qualification remains separate.
+
+Evidence: [direct qualification](../tests/positional_write/qualification-20261013.json)
+passes 59 native/application cases plus five explicitly artificial/backend
+controls, 64 positive cases / 1,131 assertions per compiler; three designated
+source regressions detect the intended defects. The [integration receipt](../tests/qualification/positional-write-integration-20261013.json)
+binds fresh 316-input Make/Dune builds/selftests, kernel/conformance/workers,
+actual local/remote/old-peer transfers and all 79 final-publication cases per
+compiler. Four actual partial-write sync cases and eight finite owner-cleanup
+controls pass. Partial private bytes and intermediate failure states are
+asserted during execution; later retained artifacts do not reconstruct every
+discarded byte. Archive observations remain raw fingerprint-byte evidence.
+The [independent acceptance](../tests/positional_write/independent-review-20261013.json)
+records read-only source/artifact/log review, not independent test execution.
 
 ## Helper supervisor primitives
 

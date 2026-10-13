@@ -19,6 +19,7 @@ python3 tests/file_observation/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_lease/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_handles/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/clone_scratch/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
+python3 tests/positional_write/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/stage_publication/run.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_clone_stage_status.py --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_clone_stage_signals.py --ocamlopt /absolute/compiler/bin/ocamlopt
@@ -50,6 +51,7 @@ OCAMLOPT=/absolute/compiler/bin/ocamlopt python3 tests/test_clone_adoption.py /a
 python3 tests/test_clone_bound_range.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt
 python3 tests/test_clone_bound_range.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt --negative-control
 python3 tests/test_clone_publication.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt --keep-work
+python3 tests/test_positional_sync.py /absolute/build --ocamlopt /absolute/compiler/bin/ocamlopt --keep-work
 ```
 
 Omit optional binary arguments when unavailable. Validator configuration tests
@@ -72,6 +74,17 @@ The [direct receipt](clone_scratch/qualification-20261013.json) and
 [integration receipt](qualification/native-scratch-integration-20261013.json)
 pin the current source and compiler-matched evidence. Preserved failure
 artifacts are recorded; existing stale-temp pathname cleanup remains separate.
+
+The [positional-write suite](positional_write/README.md) exercises the actual
+borrowed-writer admission and bounded native syscall, including short writes,
+EINTR, errors, absolute offsets, shared-position disturbance, stack-copy/runtime
+boundaries and designated source regressions. Its forced legacy-backend controls
+exercise ML compatibility on this host without claiming a Windows ABI test.
+The actual sync runner injects one private native partial-write failure through
+local and remote receiving paths, then checks live files and raw archive
+fingerprint-byte observations,
+discarded staging, exact retry and inode-stable no-op behavior. Compiler arguments
+must match the frozen snapshot; no public fault hook or Adobe invocation is used.
 
 The report suites check [bounded SIR/0 descriptions](../doc/semantic-report-v0.md)
 and escaped metadata byte previews, then request real CLI diff/details on local

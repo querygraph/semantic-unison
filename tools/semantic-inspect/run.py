@@ -18,9 +18,11 @@ with tempfile.TemporaryDirectory(prefix="unison-semantic-inspect-") as temporary
     for name in modules:
         for suffix in (".ml", ".mli"):
             shutil.copyfile(root / "src" / (name + suffix), build / (name + suffix))
-    shutil.copyfile(root / "src/semanticHash_stubs.c", build / "semanticHash_stubs.c")
+    for name in ("semanticHash_stubs.c", "semanticFile_stubs.c"):
+        shutil.copyfile(root / "src" / name, build / name)
     shutil.copyfile(root / "tools/semantic-inspect/inspect.ml", build / "inspect.ml")
-    command = [args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c"]
+    command = [args.ocamlopt, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c",
+               "semanticFile_stubs.c"]
     for name in modules:
         command += [name + ".mli", name + ".ml"]
     subprocess.run(command + ["inspect.ml", "-o", "semantic-inspect"], cwd=build, check=True)

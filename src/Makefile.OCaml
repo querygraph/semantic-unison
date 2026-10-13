@@ -92,7 +92,7 @@ OCAMLINCLUDES = -I +unix -I +str
 COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \
         hash_compat$(OBJ_EXT) props_xattr$(OBJ_EXT) props_acl$(OBJ_EXT) \
         copy_stubs$(OBJ_EXT) fileObservation_stubs$(OBJ_EXT) stagePublication_stubs$(OBJ_EXT) finalPublication_stubs$(OBJ_EXT) helperSupervisor_stubs$(OBJ_EXT) \
-        semanticHash_stubs$(OBJ_EXT) $(WINCOBJS)
+        semanticHash_stubs$(OBJ_EXT) semanticFile_stubs$(OBJ_EXT) $(WINCOBJS)
 
 ####################################################################
 ### User Interface setup
