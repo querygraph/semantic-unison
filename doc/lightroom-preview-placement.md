@@ -33,8 +33,9 @@ No heavy Photo benchmarks, external Adobe invocations or production publisher
 start from readiness receipts alone.
 The original photo implementation owner [acknowledged the exact corrected
 oracle contract](/Users/alexy/src/photo/preview-unison-coordination-20261013/ORACLE-CONTRACT-CORRECTION-ACKNOWLEDGED.json),
-including its pinned independent review/direct-probe source. ABI investigation
-remains source-only with that owner; acknowledgment is not a finite-window release.
+including its pinned independent review/direct-probe source. Private Adobe ABI
+investigation remains source-only with that owner; project-interface compile
+checks are separate, and acknowledgment is not a finite-window release.
 The [source audit](preview-oracle-source-audit-20261013.md) preserves the earlier
 logged-only ImageCacheEntry orientation gap and records its source correction.
 The 2026-10-13 12:14:41 UTC acknowledgment pins the corrected raw post-decode
@@ -45,24 +46,40 @@ current cache, committed persistence or cold-restart result. This coordination
 did not recheck the desktop or invoke Lightroom.
 
 The independently accepted [finite source packet](../../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
-provides an uncompiled typed project interface, bounded to eight recursive
+was accepted as an uncompiled typed project interface, bounded to eight recursive
 photographic inputs and sixteen logical states including negatives/pilots.
 The [integration findings](preview-design-integration.md) adopt synchronous
 ownership, exactly-once result release and a sole backend reservation authority
 under the shared eighteen-credit ceiling. Source preparation does not qualify
 private Adobe initialization/rendering signatures, a generator, pixels,
-registration or publication. Current inputs must be recaptured after repairs.
+registration or publication. The owner now reports compiler-only C/Rust/
+OxCaml project-interface ABI proof passing with the accepted header unchanged;
+this does not qualify private Adobe prototypes or rendering. Current inputs
+must be recaptured after repairs.
 
-The latest [private mass alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
-at 21:29:43 UTC records 905,928 images / 895,491 distinct current still keys,
-with 1,338 registered-identity candidates, 146,540 legacy current-header keys,
-8,726 modern metadata-gap keys and 987 held headers. These are candidate
-classes, not native current decode, durable registration or monitor adequacy.
-The owner reports four-worker Ten metadata revalidation still running and
-1,092 newly discovered native keys outside the historical inventory. Keep that
-pending update separate from completed snapshot counts. No competing publisher
-or native invocation is introduced; the desktop remains unavailable and the
-registration/oracle window unreleased.
+The latest [private v3 staging](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
+at 22:03:07 UTC and [handoff](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json)
+complete metadata alignment against 905,928 images / 895,491 current still
+keys. The full stat refresh covers 966,181 files / 9,178,878,944,015 bytes;
+156,253 registration-candidate keys represent 156,255 images, split into
+146,476 explicit-root legacy, 984 old-format identity-bound and 8,793 modern
+filename-only keys. All 987 former header holds are metadata-resolved.
+All 4,299 registered sizes match actual positive bytes; 1,338 current-native
+keys have exact captured associations/orientations. Decode, source freshness,
+committed native recognition, restart and monitor geometry remain unqualified.
+Preserve all 55 still-mapped deletion markers with the owner-reported installed
+queue exclusion; they do not add a blanket unregistered-candidate hold. RootPixels
+metadata, 48,046 face crops and 3,411 motion thumbnails add no ordinary monitor
+or 1:1 coverage. Known standalone gaps of 485,185 other-digest / 252,676 no-file
+keys and 39 unknown empty digests do not define a regeneration/capacity cohort.
+The original owner reports all 44,281 modern/native marker/SOF checks passed,
+with the 147,460 legacy highest-section pass still active. These reports prove
+no entropy/native decode or current native crop/monitor fit. Its original
+uninvoked image 10031592 remains the next registration/load/restart control.
+The user reports desktop access unavailable, current helper owner undispatched
+and native window unreleased; no full generator or unqualified offline publisher
+is admitted. The handoff was relayed via Photo parent and acknowledged by the
+original owner; that acceptance does not release native admission.
 
 The [registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
 separates retained-byte reuse, alias-only mapping gaps, absent registration,

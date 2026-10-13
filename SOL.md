@@ -4,26 +4,41 @@
 
 ## Live implementation handoff
 
-* Latest Photo coordination (2026-10-13): the owning session completed a private
-  read-only Lux Main/native-cache alignment at 21:29:43 UTC: 905,928 images,
-  895,491 distinct current still keys, and cache snapshots containing 1,453
-  Pyramids, 4,299 levels and 1,451 image mappings. Its 1,338 registered-current
-  identity candidates, 146,540 legacy current-header keys, 8,726 modern
-  metadata-gap keys and 987 held headers are classification evidence, not
-  qualified native recognition or monitor coverage. See
-  [the alignment receipt](../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
-  and [registration contract](../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json).
-  The owner reports four-worker Ten metadata revalidation in progress and
-  1,092 newly discovered native keys absent from the historical inventory;
-  final revalidation and bounded held-header diagnostics remain pending.
+* Latest Photo coordination (2026-10-13): private v3 metadata staging is complete
+  against 905,928 Lux images / 895,491 current still keys. The
+  [alignment receipt](../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json),
+  [summary](../photo/mass-preview-alignment-current-20261013-v3/SUMMARY.json)
+  and [owner handoff](../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json)
+  replace v2 pending-revalidation counts: 966,181 regular files, 9,178,878,944,015
+  bytes; 961,208 unchanged full identities, 4,822 new paths, 151 changed
+  identities and 344 previously observed files absent. Candidate roster is
+  156,253 keys / 156,255 images: 146,476 explicit-root legacy, 984 old-format
+  identity-bound and 8,793 modern filename-only keys. All 987 former header
+  holds are metadata-resolved, including three fresh strict-header cases.
+  All 4,299 registered target sizes are positive/matching; 1,338 current-native
+  keys have captured exact associations/orientations. Native decode, source
+  freshness, committed recognition, restart and monitor adequacy remain separate.
+  Preserve all 55 mapped native deletion markers; the owner reports native
+  queue exclusion and no added unregistered-candidate hold. RootPixels metadata,
+  48,046 face crops and 3,411 motion thumbnails contribute no ordinary monitor
+  coverage. Known standalone gaps are 485,185 other-digest and 252,676 no-file
+  keys; 39 empty digests remain unknown, not a regeneration count.
   Registration gaps, alias-only gaps, conflicts, stale edits and build gaps
   stay separate; retained-byte reuse does not require a new-renderer benchmark
   or Quasar split qualification to classify and stage it. The older 761,466-key
-  capacity model is not a forecast for this new current-key census.
-  No live Main/cache writes, Adobe invocations, payload hashes or copies were
-  performed in the alignment receipt. Desktop remains unavailable and the
-  native registration/oracle window unreleased. Original Photo renderer and
-  publisher ownership persists; no competing publisher or full run begins.
+  full-monitor / 134,582 late-gap capacity models remain historical. The owner
+  reports all 44,281 bounded modern/native marker/SOF checks passed and the
+  147,460 legacy highest-section pass still active. These checks do not prove
+  entropy/native decode or current native crop/monitor fit. The next native branch remains the original
+  uninvoked image 10031592 registration/load/restart control. Desktop access
+  remains unavailable; the user reports current helper owner undispatched and
+  native window unreleased. Shared eighteen-credit ceiling and Quasar/Ten
+  placement persist. The ORIGINAL renderer/publisher owner acknowledged the
+  handoff pins after the relay through Photo parent. It reports C/Rust/OxCaml
+  project-interface ABI proof passing with the accepted header unchanged,
+  without renderer fidelity or private Adobe ABI qualification. Relay/owner
+  acknowledgment evidence is local PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. No production writes,
+  payload hashes/copies, competing publisher or full-run admission occurred.
   Cleanup review protects the exact-version Atlas/Bumer archives formerly
   under delete; preserve them in placement/migration manifests and budgets.
 
@@ -335,8 +350,10 @@
   backend, codec and helper threads/processes share the global 18-credit ceiling,
   with lease lifetime through encoding/validation, child settlement and result
   release. Initial capability is one in-flight call per host; native threading
-  and 1/6/18 configurations remain unqualified. The header is an uncompiled
-  project interface, not a qualified Adobe ABI. Private initialization/rendering
+  and 1/6/18 configurations remain unqualified. The header was accepted as an
+  uncompiled project interface; the owner now reports compiler-only C/Rust/
+  OxCaml project ABI proof passing, not a qualified private Adobe ABI.
+  Private initialization/rendering
   signatures remain noncallable. This packet authorizes no generator build,
   benchmark, native invocation, production publication or full run. Details are
   incorporated into `doc/preview-design-integration.md`.

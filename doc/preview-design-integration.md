@@ -7,8 +7,9 @@ Status: **review integrated; renderer/publisher/runtime qualification pending**,
 [modern storage design](../../photo/preview-generator/MODERN-STORAGE-DESIGN.md)
 and [renderer feasibility findings](../../photo/preview-generator/common/RENDERER-FEASIBILITY.md).
 The preview workspace contains design, source-interface and receipt files.
-The accepted finite packet remains uncompiled; no standalone generator or
-renderer is qualified.
+The finite packet was accepted as uncompiled source. The original owner now
+reports compiler-only C/Rust/OxCaml project-interface ABI checks passing;
+no standalone generator, private Adobe ABI or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
@@ -95,31 +96,69 @@ Physical separability does not promise independent native loading.
 
 ## Current mass alignment and registration gaps
 
-The Photo owner completed a private read-only current Main/native-cache
-[alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
-at 2026-10-13 21:29:43 UTC. The snapshot contains 905,928 images and 895,491
-distinct current still UUID/digest keys. Native cache tables contain 1,453
-Pyramid rows, 4,299 PyramidLevel rows and 1,451 ImageCacheEntry rows.
-Classification counts are distinct keys unless stated otherwise:
+The Photo owner completed private current-catalog metadata staging in the
+[v3 alignment](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
+at 2026-10-13 22:03:07 UTC. Its
+[summary](../../photo/mass-preview-alignment-current-20261013-v3/SUMMARY.json)
+and [owner handoff](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json)
+bind 905,928 catalog images, 895,860 still images and 895,491 current still
+UUID/digest keys. Private staging retains candidate files/headers/sections,
+all image aliases, captured native rows/tombstones and separate RootPixels,
+face and motion metadata. Registration candidates total 156,253 keys /
+156,255 images; table entries below count keys:
 
 | Snapshot classification | Keys | Interpretation |
 | --- | ---: | --- |
-| Registered current identity candidate | 1,338 | Rows/association candidates; decode, freshness and monitor adequacy remain separate |
-| Legacy current-header alignment candidate | 146,540 | Header-current reuse candidates, not qualified registration |
-| Modern metadata-gap candidate | 8,726 | Current filename candidates needing payload/header and exact metadata-gap qualification |
-| Current header held | 987 | Preserve failed/opaque-header cases for bounded reason-specific diagnostics |
-| Other digest only | 485,222 | Retain old-edit/fallback evidence; never relabel it current |
-| No retained UUID files | 252,678 | Standalone build candidates; root-thumbnail availability is a separate state |
-| Video poster digest unqualified | 10,067 | Excluded from the current still-key total |
+| Current native rows, associations and positive sizes match | 1,338 | Physical/metadata evidence; decode, freshness, restart and monitor adequacy remain separate |
+| Explicit-root legacy registration candidate | 146,476 | Header/section declarations, not qualified native registration |
+| Old-format identity-bound registration candidate | 984 | Embedded local/global image IDs, root UUID and latest settings bind to captured current Main |
+| Modern filename-only registration candidate | 8,793 | Requires marker/header and branch-specific qualification |
+| Known key with only other-digest retained files | 485,185 | Retain old-edit/fallback evidence; never relabel it current |
+| Known key without retained nonzero UUID files | 252,676 | Exact standalone-file gap, not a definitive regeneration requirement |
+| Empty digest unknown key | 39 | Keep unknown; manufacture neither digest nor rendering backlog |
 
-The owner reports full Ten metadata revalidation underway with four workers,
-including 1,092 new native keys absent from the historical inventory. That
-report is in-flight work, not a completed replacement inventory. The alignment
-receipt records zero live Main/cache writes, native requests, payload hashes,
-payload copies or media-payload bytes read. This Unison update reads the two
-receipt/contract files only; it does not repeat their database or volume work.
-The desktop remains unavailable and the external finite native window remains
-unreleased. The original Photo renderer/publisher retains responsibility.
+The full filesystem stat refresh is complete: 966,181 regular files totaling
+9,178,878,944,015 bytes; 961,208 old full identities unchanged, 4,822 new paths,
+151 changed identities and 344 prior files absent. The owner reports all
+65,536 enumerated directories stable. Retain changed-identity provenance;
+enumeration stability does not establish an atomic live-cache snapshot or
+payload freshness. All 4,299 registered targets have positive fileSize equal
+actual bytes. All 987 earlier header holds are metadata-resolved: 984 older
+embedded identity cases plus three fresh-identity strict-header cases.
+This supersedes v2 pending refresh/held counts, not native recognition limits.
+
+Preserve all 55 deletion markers and native image mappings. The Photo owner
+reports that the installed deletion-list loader excludes these mapped markers;
+they add no blanket hold
+to the unregistered candidate roster. RootPixels retains 229,050 separate
+metadata rows; the owner reports 57,775 exact-current keys supplying profile/
+crop observations. Its pixels are not ordinary monitor coverage. The 48,046
+face crops and 3,411 motion thumbnails belong to separate digest namespaces
+and add zero ordinary still-monitor or 1:1 coverage. Header/filename size bands
+and timestamp comparisons remain declarations/observations, not decoded crop,
+orientation, source freshness or native monitor acceptance.
+
+The packet records zero production registration, Main/cache writes, native
+requests, payload hashes or copies. It performed no entropy decode; finite
+header metadata reads are preserved explicitly. This Unison integration reads
+receipt/contract files only, not databases, preview payloads or live volumes.
+The handoff was sent to the existing Photo parent for the ORIGINAL
+preview_implementation owner. That owner then acknowledged and verified the
+handoff pins in its completed task turn; acknowledgment is distinct from
+native admission. Local relay/acknowledgment evidence is
+PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. The user reports desktop access
+unavailable, the current helper owner undispatched and the external finite
+native window unreleased. Original renderer/publisher ownership is unchanged.
+
+The owner now reports all 44,281 modern/native bounded marker/SOF checks passed
+(39,982 modern candidate files plus 4,299 native targets), with the 147,460
+legacy highest-section pass still active. These are owner-reported results;
+this integration opened no geometry receipt or preview bytes. Marker geometry
+is distinct from entropy/native decode and qualified current native crop/
+monitor geometry. The original reviewed uninvoked image 10031592
+registration/load/restart control remains the next native branch. These stages
+admit no full generator run or unqualified offline publisher. The shared
+eighteen-credit ceiling and Quasar/Ten placement remain unchanged.
 
 Adopt the [eligibility/registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
 as a planning distinction. Keep current rows with correct associations,
@@ -197,7 +236,11 @@ receipt without rewriting its pins. Adopt its project interface requirements:
 
 The [project header](../../photo/preview-generator/oracle-source-v1/include/preview_backend_v0.h)
 and [interface contract](../../photo/preview-generator/oracle-source-v1/INTERFACE-CONTRACT.md)
-are uncompiled declarations and do not supply private Adobe signatures.
+were accepted as uncompiled declarations and do not supply private Adobe
+signatures. The original owner subsequently reports compiler-only C/Rust/
+OxCaml project-interface ABI proof passing with the accepted header unchanged.
+This integration records that acknowledgment without executing its checks
+or opening its ABI artifacts; private Adobe signatures remain noncallable.
 Private initialization/rendering prototypes remain unqualified and noncallable.
 Source acceptance established no generator build, pixel equivalence, benchmark,
 native invocation, Main/cache access, publication or full-run release. It adds

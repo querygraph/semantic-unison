@@ -113,19 +113,33 @@ Make/Dune builds and 303 matching Dune production inputs; its ordinary/local/
 remote evidence remains historical to that source.
 
 
-Latest Photo-root coordination includes a private read-only full current
-[alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
-at 21:29:43 UTC: 905,928 images / 895,491 distinct current still keys; 1,453
-Pyramid, 4,299 level and 1,451 mapping rows. The 1,338 registered identity
-candidates, 146,540 legacy current-header keys, 8,726 modern metadata-gap keys
-and 987 held headers are not native recognition or monitor coverage. The owner
-reports four-worker Ten metadata revalidation ongoing, with 1,092 newly found
-native keys outside the historical inventory. The
+Latest Photo-root coordination includes completed private
+[v3 metadata staging](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
+and [handoff](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json)
+against 905,928 images / 895,491 current still keys: stat refresh covers 966,181
+files / 9,178,878,944,015 bytes; 156,253 candidate keys / 156,255 images comprise
+146,476 explicit-root legacy, 984 old-format identity-bound and 8,793 modern
+filename-only keys. All 987 former header holds are resolved for metadata;
+1,338 current-native associations/orientations and all 4,299 positive matching
+registered level sizes remain distinct from native decode, freshness, durable
+registration, restart and monitor coverage. The
 [eligibility/registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
 keeps reuse, mapping/registration gaps, conflicts, stale edits and builds
-separate. This receipt records zero live Main/cache writes, Adobe/native
-requests, payload hashes or copies; no competing renderer/publisher starts.
-Desktop remains unavailable and the native window unreleased. Exact-version
+separate. Preserve all 55 mapped native deletion markers and their owner-reported
+native queue exclusion; RootPixels/face/motion metadata adds no ordinary coverage.
+Known standalone gaps of 485,185 other-digest and 252,676 no-file keys are not a
+definitive regeneration count; 39 empty digests remain unknown. The existing
+owner reports all 44,281 modern/native marker/SOF checks passed, the 147,460
+legacy highest-section pass still active and compiler-only C/Rust/OxCaml project
+ABI proof passing with the accepted header unchanged. These are owner-reported
+results, not a new Unison run or private Adobe renderer qualification. Its
+original uninvoked image 10031592 native registration/load/restart control remains.
+Receipt/document staging records zero production writes, native requests,
+payload hashes or copies. The handoff was sent via Photo parent and acknowledged
+by the original renderer/publisher owner; acceptance is not native admission.
+The user reports desktop access unavailable, current helper owner undispatched
+and native window unreleased; shared eighteen-credit limit and split placement
+persist. Exact-version
 Atlas/Bumer archives formerly under delete are now protected retained data for
 placement/migration planning. Older monitor capacity estimates require cohort
 reconciliation rather than extrapolation from the new total key count.
@@ -141,8 +155,9 @@ and the unreleased external oracle window remain unchanged.
 The [accepted finite source packet](../../photo/preview-generator/oracle-source-v1/SOURCE-READY-FINAL.json)
 bounds recursive photographic inputs to eight and logical states to sixteen,
 with synchronous typed ownership and a sole backend atomic CPU/memory lease
-under a global eighteen-credit ceiling through result release. It is uncompiled,
-uninvoked source preparation; private Adobe signatures are noncallable and
+under a global eighteen-credit ceiling through result release. It was accepted
+as uncompiled, uninvoked source preparation; the later owner-reported project
+ABI checks qualify no private Adobe signatures. Those remain noncallable and
 current source/settings/dependencies require post-repair recapture. No preview
 build, benchmark, production publisher or full run is qualified by this update.
 

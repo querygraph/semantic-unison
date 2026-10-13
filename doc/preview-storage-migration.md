@@ -165,11 +165,16 @@ The Photo cleanup owner now protects exact-version Atlas/Bumer archives that
 were formerly listed under delete. Treat them as retained source objects,
 including their exact versions, in the manifest and destination budget. A
 historical delete/quarantine label is not permission to bulk-delete them.
-The newer [preview alignment](../../photo/mass-preview-alignment-20261013-v2/COMPLETE.json)
-is metadata classification; it is not a complete evacuation manifest, verified
-payload copy or free-space credit. Its 895,491 current still keys are not an
-updated monitor-generation backlog. Reconcile actual reuse/build/level cohorts
-before revising the older Quasar forecast.
+The newer [v3 alignment](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
+has a completed stat refresh of 966,181 regular files / 9,178,878,944,015 bytes,
+with 151 changed-identity flags and 344 previously observed files absent.
+It supplies metadata classification, not a complete evacuation manifest,
+verified payload copy or free-space credit. Its 156,253 registration-candidate
+keys and known standalone-file gaps do not define monitor regeneration or
+Quasar allocation. Preserve aliases, old edits, the 55 mapped native deletion
+markers and separate RootPixels/face/motion metadata; these are not discardable
+capacity or ordinary monitor coverage. Reconcile actual reuse/build/level
+cohorts before revising historical 761,466-full / 134,582-late monitor forecasts.
 
 Produce an exhaustive source manifest with root-relative names and object
 types, byte lengths, exact content hashes, forks/attributes, ACLs, flags,
