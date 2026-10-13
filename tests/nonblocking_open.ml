@@ -56,14 +56,14 @@ let () =
           require (SemanticDelta.binds_request ~nonce:(String.make 32 'f') ~base:(proof "basis") decoded)
             "source-planning follow-up returned wrong bytes" end
   | "candidate" -> reject (fun () -> ignore (Lwt_unix.run
-      (CandidateValidationForTest.validate_file ~selected:DngValidation.Require (absolute "fifo"))));
+      (CandidateValidationForTest.validate_file ~reservation:None ~selected:DngValidation.Require (absolute "fifo"))));
       usage (); require (descriptors ()=before) "candidate hashing leaked fd";
       ignore (Lwt_unix.run (inspect "source"))
   | "tool" ->
       Prefs.loadStrings ["adobevalidator = " ^ string_path "fifo";
         "adobevalidatorhash = " ^ String.make 64 'a';"adobevalidatorbuild = fifo-test-1"];
       reject (fun () -> ignore (Lwt_unix.run
-        (CandidateValidationForTest.validate_file ~selected:DngValidation.Require (absolute "source"))));
+        (CandidateValidationForTest.validate_file ~reservation:None ~selected:DngValidation.Require (absolute "source"))));
       usage (); require (descriptors ()=before) "tool pin hashing leaked fd";
       ignore (Lwt_unix.run (inspect "source"))
   | _ -> failwith "unknown FIFO open case"

@@ -25,3 +25,10 @@ val observe : root:Common.root -> path:Fspath.t -> extension:FormatExtension.han
     returns bounded digest/sample information. Older peers return unavailable.
     Source leases cover queued replies; no archives or destinations are changed.
     local_snapshot allows immediate owner-side stale-display checks without RPC. *)
+
+val try_transfer_reserved : reservation:SemanticAdmission.reservation ->
+  producer:(Unix.file_descr -> unit) option -> connection:Remote.connection ->
+  source:Fspath.t -> basis:Fspath.t -> directory:Fspath.t -> staging:Path.local ->
+  expected_size:int64 -> bool Lwt.t
+(** Borrow the receiver's retained envelope. Source RPCs keep their independent
+    source admission and headroom; None producer covers explicit legacy handoff. *)

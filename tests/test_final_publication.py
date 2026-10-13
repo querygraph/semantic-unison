@@ -176,9 +176,9 @@ module FinalCallerFault = struct
 end
 module CandidateValidation = struct
   include CandidateValidation
-  let before_commit ~directory ~candidate ~destination =
+  let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =
     FinalCallerFault.hit "validation-before";
-    Lwt.bind (CandidateValidation.before_commit ~directory ~candidate ~destination)
+    Lwt.bind (CandidateValidation.before_commit_with_reservation ~reservation ~directory ~candidate ~destination)
       (fun result -> FinalCallerFault.hit "validation-after"; Lwt.return result)
 end
 module Update = struct
@@ -329,6 +329,10 @@ module SemanticSync = struct
     SemanticSync.try_local_async_with_producer
       ~producer:(fun descriptor->ProducerCallerFault.fd "local-semantic-output" descriptor;producer descriptor)
       ~source ~basis ~directory ~staging
+  let try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging=
+    let producer=Option.map (fun producer descriptor->
+      ProducerCallerFault.fd "local-semantic-output" descriptor;producer descriptor) producer in
+    SemanticSync.try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging
 end
 module SemanticRemote = struct
   include SemanticRemote
@@ -336,6 +340,10 @@ module SemanticRemote = struct
     SemanticRemote.try_transfer_with_producer
       ~producer:(fun descriptor->ProducerCallerFault.fd "remote-semantic-output" descriptor;producer descriptor)
       ~connection ~source ~basis ~directory ~staging ~expected_size
+  let try_transfer_reserved ~reservation ~producer ~connection ~source ~basis ~directory ~staging ~expected_size=
+    let producer=Option.map (fun producer descriptor->
+      ProducerCallerFault.fd "remote-semantic-output" descriptor;producer descriptor) producer in
+    SemanticRemote.try_transfer_reserved ~reservation ~producer ~connection ~source ~basis ~directory ~staging ~expected_size
 end
 '''
 

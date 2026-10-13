@@ -12,7 +12,7 @@ val producer_supported : unit -> bool
 (** Both producer and base ticket protocols were negotiated. Independent of
     this endpoint's native filesystem implementation. *)
 
-val prepare : ?connection:Remote.connection -> ?require_producer:bool -> logical_root:Fspath.t ->
+val prepare : ?reservation:SemanticAdmission.reservation -> ?connection:Remote.connection -> ?require_producer:bool -> logical_root:Fspath.t ->
   local_path:Path.local -> working_dir:Fspath.t -> candidate:Path.local ->
   target:Path.local -> normalize:bool -> check_apple_double:bool -> unit ->
   string option
@@ -25,6 +25,19 @@ val prepare : ?connection:Remote.connection -> ?require_producer:bool -> logical
     is attached yet. [require_producer] defaults to false for the existing
     named-attachment protocol; true requires one producer operation before
     commit. The caller gates the additive protocol with [producer_supported]. *)
+
+val prepare_admitted : ?connection:Remote.connection -> ?require_producer:bool ->
+  logical_root:Fspath.t -> local_path:Path.local -> working_dir:Fspath.t ->
+  candidate:Path.local -> target:Path.local -> normalize:bool ->
+  check_apple_double:bool -> unit -> string option Lwt.t
+(** Production preparation: acquire a durable consumer envelope before native
+    preparation and retain it across Ready/Finalized through commit or abort.
+    Recover settled orphan tickets before waiting. Legacy handoff retains the
+    work envelope until its borrowed callback settles. [prepare] is the low-level
+    synchronous primitive; production must use this admitted entry point. *)
+val reservation : t -> SemanticAdmission.reservation option
+(** Local resource owner for explicitly borrowing the selected work envelope.
+    Never serialized, implicitly inherited or used to nest a second gate wait. *)
 
 val with_producer : ?connection:Remote.connection -> token:string ->
   logical_root:Fspath.t -> local_path:Path.local -> working_dir:Fspath.t ->

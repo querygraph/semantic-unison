@@ -216,14 +216,14 @@ let with_publication_borrowed publication transaction f =
       (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
       Lwt.fail error)
 
-let try_local_async_internal ?producer ~source ~basis ~directory ~staging () =
+let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~staging () =
   let open Lwt in
   let extensions = SemanticFormats.local_enabled () in
   if extensions = [] then return false else
   let max_payload = List.fold_left (fun n handle -> max n (FormatExtension.payload_limit handle))
     0 extensions in
   let callback_started = ref false in
-  SemanticRuntime.with_transaction ~max_payload (fun cancellation ->
+  SemanticRuntime.with_transaction ?reservation ~max_payload (fun cancellation ->
     Util.convertUnixErrorsToTransient "creating local semantic staging" (fun () ->
       let candidate = Os.tempPath ~fresh:true directory
         (Path.addSuffixToFinalName staging "-semantic-clone") in
@@ -321,3 +321,6 @@ let try_local_async ~source ~basis ~directory ~staging =
   try_local_async_internal ~source ~basis ~directory ~staging ()
 let try_local_async_with_producer ~producer ~source ~basis ~directory ~staging =
   try_local_async_internal ~producer ~source ~basis ~directory ~staging ()
+
+let try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging =
+  try_local_async_internal ~reservation ?producer ~source ~basis ~directory ~staging ()

@@ -47,11 +47,34 @@ let with_fd ?(check_cancel = fun () -> ()) fd f =
   let initial = Unix.LargeFile.fstat fd in
   if initial.Unix.LargeFile.st_kind <> Unix.S_REG || initial.Unix.LargeFile.st_size < 0L then
     raise (Invalid "not a regular file");
-  let channel = Unix.in_channel_of_descr (Unix.dup ~cloexec:true fd) in
-  let t = {channel;initial;check_cancel} in
-  match f t with
-  | result -> (try check t; close_in channel; result with e -> close_in_noerr channel; raise e)
-  | exception e -> close_in_noerr channel; raise e
+  (* Prepare ownership bookkeeping before acquiring the duplicate. A channel
+     or record allocation failure must not leave its descriptor untracked. *)
+  let descriptor = ref fd and owns_descriptor = ref false
+  and owned_channel = ref None in
+  let close () = match !owned_channel with
+    | Some channel ->
+        owned_channel := None;
+        close_in channel
+    | None when !owns_descriptor ->
+        owns_descriptor := false;
+        Unix.close !descriptor
+    | None -> () in
+  let close_noerr () = try close () with _ -> () in
+  descriptor := Unix.dup ~cloexec:true fd;
+  owns_descriptor := true;
+  try
+    let channel = Unix.in_channel_of_descr !descriptor in
+    owns_descriptor := false;
+    (* Installing [Some channel] can itself allocate. Until that succeeds,
+       close the new channel locally rather than retrying its raw FD. *)
+    (try owned_channel := Some channel
+     with error -> (try close_in_noerr channel with _ -> ()); raise error);
+    let t = {channel;initial;check_cancel} in
+    let result = f t in
+    check t;
+    close ();
+    result
+  with error -> close_noerr (); raise error
 let bounds t offset length =
   if offset < 0L || length < 0L || offset > size t || length > Int64.sub (size t) offset then
     raise (Invalid "extent outside file")

@@ -36,7 +36,10 @@ type t = {
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
 let close_operation = function Apply (_, _, fd) -> close_noerr fd | _ -> ()
 let duplicate_operation = function
-  | Apply (extension, plan, fd) -> Apply (extension, plan, Unix.dup ~cloexec:true fd)
+  | Apply (extension, plan, fd) ->
+      let owned = Unix.dup ~cloexec:true fd in
+      (try Apply (extension, plan, owned)
+       with error -> close_noerr owned; raise error)
   | operation -> operation
 let locked shared f =
   Mutex.lock shared.mutex;
@@ -151,27 +154,54 @@ let rec pump t scratch =
   next
 let create_internal ~io ~workers ~max_pending ~budget =
   if workers <= 0 || max_pending <= 0 then invalid_arg "SemanticWorkers.create: positive limits required";
+  let owned_read = ref Unix.stdin and owned_write = ref Unix.stdout
+  and has_read = ref false and has_write = ref false
+  and reader_owner = ref None and shared_owner = ref None
+  and domains = ref [] in
+  let stop shared =
+    locked shared (fun () -> shared.stopping <- true; Condition.broadcast shared.ready) in
+  let cleanup () =
+    (match !shared_owner with Some shared -> (try stop shared with _ -> ()) | None -> ());
+    List.iter (fun domain -> try Domain.join domain with _ -> ()) !domains;
+    domains := [];
+    if !has_read then begin
+      has_read := false;
+      (try match !reader_owner with
+       | Some reader -> Lwt_unix.close reader
+       | None -> Unix.close !owned_read
+       with _ -> ())
+    end;
+    if !has_write then begin
+      has_write := false; (try Unix.close !owned_write with _ -> ())
+    end in
   let read_fd, write_fd = Unix.pipe ~cloexec:true () in
-  Unix.set_nonblock read_fd;
-  Unix.set_nonblock write_fd;
-  let shared = { mutex = Mutex.create (); ready = Condition.create ();
-    jobs = Queue.create (); completions = Queue.create (); notify = write_fd;
-    stopping = false; running = 0; peak = 0 } in
-  let domains = ref [] in
-  begin try
-    for _ = 1 to workers do domains := Domain.spawn (worker shared) :: !domains done
-  with exn ->
-    locked shared (fun () -> shared.stopping <- true; Condition.broadcast shared.ready);
-    List.iter Domain.join !domains;
-    close_noerr read_fd; close_noerr write_fd; raise exn
-  end;
-  let reader = Lwt_unix.of_unix_file_descr read_fd in
-  let t = { shared; domains = !domains; budget; io; max_pending; reader;
-    replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
-    admission = []; closing = false; joined = false;
-    shutdown_result = None; pump_done = Lwt.wait () } in
-  Lwt.ignore_result (pump t (Bytes.create 4096));
-  t
+  owned_read := read_fd; has_read := true;
+  owned_write := write_fd; has_write := true;
+  try
+    Unix.set_nonblock read_fd;
+    Unix.set_nonblock write_fd;
+    let shared = { mutex = Mutex.create (); ready = Condition.create ();
+      jobs = Queue.create (); completions = Queue.create (); notify = write_fd;
+      stopping = false; running = 0; peak = 0 } in
+    shared_owner := Some shared;
+    for _ = 1 to workers do
+      let domain = Domain.spawn (worker shared) in
+      (* Linking the returned domain can allocate too. Stop and join this
+         still-local handle before the outer guard joins earlier domains. *)
+      (try domains := domain :: !domains
+       with error -> (try stop shared with _ -> ());
+         (try Domain.join domain with _ -> ()); raise error)
+    done;
+    let reader = Lwt_unix.of_unix_file_descr read_fd in
+    reader_owner := Some reader;
+    let t = { shared; domains = !domains; budget; io; max_pending; reader;
+      replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
+      admission = []; closing = false; joined = false;
+      shutdown_result = None; pump_done = Lwt.wait () } in
+    Lwt.ignore_result (pump t (Bytes.create 4096));
+    has_read := false; has_write := false;
+    t
+  with error -> cleanup (); raise error
 let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
@@ -183,23 +213,33 @@ let usage t =
 let submit t cancellation fd requested_operation =
   if t.closing then fail (Failed "digest pool is closed")
   else if t.pending >= t.max_pending then fail (Failed "digest queue is full")
-  else match (let owned = Unix.dup ~cloexec:true fd in
-    try owned, duplicate_operation requested_operation with exn -> close_noerr owned; raise exn) with
-  | exception Unix.Unix_error (err, operation, _) ->
-    fail (Failed (operation ^ ": " ^ Unix.error_message err))
-  | owned, operation ->
+  else
+    (* Allocate the guard and controller bookkeeping before acquiring either
+       duplicate. Continuation/listener setup is part of this ownership phase. *)
+    let owned = ref fd and operation = ref requested_operation
+    and owns_input = ref false and owns_operation = ref false
+    and pending_registered = ref false in
     let id = t.next_id in
-    t.next_id <- t.next_id + 1; t.pending <- t.pending + 1;
+    t.next_id <- t.next_id + 1;
     let cancelled = Atomic.make false and admission_cancel = H.cancellation () in
     let stop () = Atomic.set cancelled true; H.cancel admission_cancel in
-    let unregister_cancel = H.on_cancel cancellation stop in
+    let unregister_cancel = ref (fun () -> ()) in
     let finished = ref false and transferred = ref false and has_slot = ref false in
+    let cleanup_error = ref None in
+    let cleanup_owned () =
+      if not !transferred then begin
+        if !owns_input then begin
+          owns_input := false; (try close_noerr !owned with _ -> ())
+        end;
+        if !owns_operation then begin
+          owns_operation := false; (try close_operation !operation with _ -> ())
+        end
+      end in
     let rec monitor () =
       if !finished then return ()
       else if t.closing || H.is_cancelled cancellation then begin
         stop (); return ()
       end else Lwt_unix.sleep 0.01 >>= monitor in
-    Lwt.ignore_result (monitor ());
     let remove_admission () = t.admission <- List.filter ((<>) id) t.admission in
     let rec wait_slot () =
       if Atomic.get cancelled || t.closing then return false
@@ -208,12 +248,21 @@ let submit t cancellation fd requested_operation =
         remove_admission (); t.slots <- t.slots + 1; has_slot := true; return true
       end else Lwt_unix.sleep 0.01 >>= wait_slot in
     let finish () =
-      unregister_cancel ();
-      finished := true; remove_admission ();
-      if !has_slot then t.slots <- t.slots - 1;
-      if not !transferred then (close_noerr owned; close_operation operation);
-      t.pending <- t.pending - 1;
-      if t.closing && t.pending = 0 then notify t.shared in
+      if not !finished then begin
+        finished := true;
+        let attempt f = try f () with error ->
+          if !cleanup_error = None then cleanup_error := Some error in
+        attempt (fun () -> !unregister_cancel ());
+        attempt remove_admission;
+        if !has_slot then begin has_slot := false; t.slots <- t.slots - 1 end;
+        if not !transferred then Hashtbl.remove t.replies id;
+        attempt cleanup_owned;
+        if !pending_registered then begin
+          pending_registered := false; t.pending <- t.pending - 1
+        end;
+        if t.closing && t.pending = 0 then attempt (fun () -> notify t.shared);
+        match !cleanup_error with None -> () | Some error -> raise error
+      end in
     let execute () =
         (* A blocked filesystem must not occupy a domain slot or the slot FIFO.
            Register here, only after the atomic I/O reservation is admitted. *)
@@ -226,7 +275,7 @@ let submit t cancellation fd requested_operation =
             let reply = Lwt.wait () in
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
-              Queue.add {id; fd = owned; cancelled; operation} t.shared.jobs;
+              Queue.add {id; fd = !owned; cancelled; operation = !operation} t.shared.jobs;
               transferred := true;
               Condition.signal t.shared.ready);
             reply
@@ -239,18 +288,35 @@ let submit t cancellation fd requested_operation =
     let admitted_execution () = match t.io with
       | None -> execute ()
       | Some io ->
-          let descriptors = match operation with
-            | Apply (_, _, output) -> [owned;output]
-            | Digest | Inspect _ | Observe _ -> [owned] in
+          let descriptors = match !operation with
+            | Apply (_, _, output) -> [!owned;output]
+            | Digest | Inspect _ | Observe _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           IoAdmission.with_devices io admission_cancel ~devices execute >>= function
           | None -> return None
           | Some result -> return result in
-    try_bind admitted_execution
-      (fun result -> finish (); return result)
-      (fun exn -> finish (); match exn with
-        | IoAdmission.Failed reason -> fail (Failed reason)
-        | _ -> fail exn)
+    try
+      owned := Unix.dup ~cloexec:true fd; owns_input := true;
+      operation := duplicate_operation requested_operation; owns_operation := true;
+      t.pending <- t.pending + 1; pending_registered := true;
+      unregister_cancel := H.on_cancel cancellation stop;
+      Lwt.ignore_result (monitor ());
+      try_bind admitted_execution
+        (fun result -> finish (); return result)
+        (fun exn ->
+          (try finish () with _ -> ());
+          match exn with
+          | IoAdmission.Failed reason -> fail (Failed reason)
+          | _ -> fail exn)
+    with error ->
+      (* Before queue transfer the controller owns both descriptors. Afterwards
+         only the worker closes them; this guard makes no universal guarantee
+         about allocation failure in an already-dispatched promise chain. *)
+      (try finish () with _ -> ());
+      match error with
+      | Unix.Unix_error (err, operation, _) ->
+          fail (Failed (operation ^ ": " ^ Unix.error_message err))
+      | _ -> raise error
 
 let digest t cancellation fd =
   submit t cancellation fd Digest >>= function

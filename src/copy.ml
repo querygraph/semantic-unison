@@ -950,8 +950,13 @@ let localFileAsync ?producer
           Lwt.return true
         end
         else let transfer = match producer with
-          | None | Some { legacy = true; _ } -> SemanticSync.try_local_async
-          | Some _ -> SemanticSync.try_local_async_with_producer ~producer:(adoptProducer producer) in
+          | None -> SemanticSync.try_local_async
+          | Some state ->
+              match TargetBinding.reservation state.binding with
+              | Some reservation -> SemanticSync.try_local_async_reserved ~reservation
+                  ~producer:(if state.legacy then None else Some (adoptProducer producer))
+              | None -> if state.legacy then SemanticSync.try_local_async
+                  else SemanticSync.try_local_async_with_producer ~producer:(adoptProducer producer) in
           transfer ~source:(Fspath.concat fspathFrom pathFrom)
             ~basis:(Fspath.concat fspathTo realPathTo) ~directory:fspathTo ~staging:pathTo in
       copied >>= fun copied ->
@@ -1506,8 +1511,13 @@ let reallyTransferFile ?producer
   let semantic = match update with
     | `Update _ when not retained && receiverCloneEnabled () && not (Prefs.read Props.dontChmod) ->
         let transfer = match producer with
-          | None | Some { legacy = true; _ } -> SemanticRemote.try_transfer
-          | Some _ -> SemanticRemote.try_transfer_with_producer ~producer:(adoptProducer producer) in
+          | None -> SemanticRemote.try_transfer
+          | Some state ->
+              match TargetBinding.reservation state.binding with
+              | Some reservation -> SemanticRemote.try_transfer_reserved ~reservation
+                  ~producer:(if state.legacy then None else Some (adoptProducer producer))
+              | None -> if state.legacy then SemanticRemote.try_transfer
+                  else SemanticRemote.try_transfer_with_producer ~producer:(adoptProducer producer) in
         transfer ~connection:connFrom
           ~source:(Fspath.concat fspathFrom pathFrom)
           ~basis:(Fspath.concat fspathTo realPathTo) ~directory:fspathTo ~staging:pathTo

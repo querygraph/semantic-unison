@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Test the production TargetBinding registry in an isolated endpoint harness."""
 import argparse
+from contextlib import nullcontext
 import hashlib
 import os
 from pathlib import Path
@@ -17,6 +18,8 @@ from stubs import MODULES
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ocamlopt', default='ocamlopt')
+    parser.add_argument('--keep-work', action='store_true',
+                        help='retain private sources, objects and binary')
     controls = parser.add_mutually_exclusive_group()
     controls.add_argument('--negative-control', action='store_true')
     controls.add_argument('--negative-handoff-control', action='store_true')
@@ -28,17 +31,25 @@ def main():
     environment = os.environ.copy()
     for variable in ('OCAMLLIB', 'OCAMLPATH', 'CAML_LD_LIBRARY_PATH', 'OCAMLRUNPARAM'):
         environment.pop(variable, None)
-    with tempfile.TemporaryDirectory(prefix='unison-target-binding-', dir='/private/tmp') as tmp:
+    directory = (nullcontext(tempfile.mkdtemp(prefix='unison-target-binding-', dir='/private/tmp'))
+                 if args.keep_work else
+                 tempfile.TemporaryDirectory(prefix='unison-target-binding-', dir='/private/tmp'))
+    with directory as tmp:
         work = Path(tmp)
+        print('work', work, flush=True)
         for name in ('src/targetBinding.ml', 'src/targetBinding.mli',
                      'src/lwt/lwt.ml', 'src/lwt/lwt.mli',
-                     'tests/target_binding/test.ml', 'tests/target_binding/stubs.py'):
+                     'tests/target_binding/test.ml', 'tests/target_binding/stubs.py',
+                     'tests/target_binding/run.py'):
             data = (root / name).read_bytes()
             print('source', name, hashlib.sha256(data).hexdigest(), flush=True)
             if name.endswith(('.ml', '.mli')):
                 (work / Path(name).name).write_bytes(data)
         for module, source in MODULES.items():
             (work / (module + '.ml')).write_text(source)
+            print('seam', module, hashlib.sha256(source.encode()).hexdigest(), flush=True)
+        print('scope: synchronous unreserved registry controls; resource seams do not qualify admission',
+              flush=True)
         # Keep the real bundled promise implementation. Private one-shot fault
         # hooks exercise its actual continuation-allocation handoff boundary.
         lwt = (work / 'lwt.ml').read_text()
@@ -92,7 +103,8 @@ let quarantine''', source, count=1, flags=re.S)
             print('negative-handoff targetBinding.ml',
                   hashlib.sha256(source.encode()).hexdigest(), flush=True)
         modules = ['util', 'features', 'prefs', 'osx', 'case', 'name', 'path',
-                   'fspath', 'fileinfo', 'remote', 'os', 'finalPublication', 'lwt', 'targetBinding']
+                   'fspath', 'fileinfo', 'remote', 'os', 'finalPublication', 'lwt',
+                   'helperSupervisor', 'semanticAdmission', 'semanticRuntime', 'targetBinding']
         for module in modules:
             interface = work / (module + '.mli')
             if interface.exists():

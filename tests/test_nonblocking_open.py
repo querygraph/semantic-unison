@@ -62,7 +62,7 @@ def main():
             (work / "candidateValidationForTest.mli").write_text(
                 (repository / "src/candidateValidation.mli").read_text() + "\n"
                 "val snapshot : SemanticWorkers.t -> HelperSupervisor.cancellation -> string -> DngValidation.snapshot Lwt.t\n"
-                "val validate_file : selected:DngValidation.policy -> Fspath.t -> unit Lwt.t\n")
+                "val validate_file : reservation:SemanticAdmission.reservation option -> selected:DngValidation.policy -> Fspath.t -> unit Lwt.t\n")
             for name in sources:
                 interface = work / (name + ".mli")
                 if interface.exists():

@@ -3,6 +3,7 @@
     are not a process RSS cap. Descriptor credits cover owned/worker duplicates,
     not unrelated legacy transfers or an external helper's descriptors. *)
 type t
+type reservation
 type role = Source | Consumer
 type cost = { payload_bytes : int; descriptors : int }
 type usage = {
@@ -13,6 +14,25 @@ exception Failed of string
 val create : source_headroom:cost option -> max_transactions:int -> max_payload_bytes:int ->
   max_descriptors:int -> max_pending:int -> t
 val usage : t -> usage
+val make_reservation : t -> role:role -> cost:cost -> reservation
+(** Allocate the caller's single-use owner before any admission debit. This
+    does not acquire credits. The caller must retire it on every failed handoff. *)
+val acquire : reservation -> HelperSupervisor.cancellation -> bool Lwt.t
+(** Acquire the preallocated owner. False means cancelled before admission.
+    Queued cancellation removes its request synchronously. *)
+val reservation_cost : reservation -> cost
+val reservation_role : reservation -> role
+val is_held : reservation -> bool
+val retire : reservation -> unit
+(** Idempotent revocation. Credits remain held until an active workspace settles.
+    Close all owner-native resources before retiring the reservation. *)
+val with_borrow : reservation -> cost:cost -> (unit -> 'a Lwt.t) -> 'a Lwt.t
+(** Borrow one serialized workspace inside the retained envelope. Does not
+    acquire another transaction, debit again or wait for an upgrade. Rejects
+    overlapping, revoked or oversized work before dispatch. The callback must
+    settle every operation using its resources. Exceptional waiter-allocation
+    recovery polls the existing computation; persistent allocation failure is
+    outside the recoverability guarantee. Owner-loop calls only. *)
 val with_lease : t -> HelperSupervisor.cancellation -> role:role -> cost:cost ->
   (unit -> 'a Lwt.t) -> 'a option Lwt.t
 (** FIFO within each role, with a bounded combined pending queue. Consumers

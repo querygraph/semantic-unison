@@ -456,7 +456,9 @@ let renameLocalWithBinding ?binding
     (fun () ->
       ignore (checkActualFingerprint ());
       (if CandidateValidation.enabled () then
-         CandidateValidation.before_commit ~directory:workingDir ~candidate:pathFrom
+         CandidateValidation.before_commit_with_reservation
+           ~reservation:(Option.bind binding TargetBinding.reservation)
+           ~directory:workingDir ~candidate:pathFrom
            ~destination:pathTo
        else Lwt.return ()) >>= fun () ->
       let actual = checkActualFingerprint () in
@@ -690,9 +692,9 @@ let normalizeTargetPath normalize path =
 let prepareTargetBinding connection root normalize wantBinding
       (workingDir, realPath, candidate, localPath) =
   if not wantBinding || not (TargetBinding.supported ()) ||
-     Fileinfo.getType true root Path.empty <> `DIRECTORY then None else
+     Fileinfo.getType true root Path.empty <> `DIRECTORY then Lwt.return None else
   Util.convertUnixErrorsToTransient "preparing final publication binding"
-    (fun () -> TargetBinding.prepare ?connection ~logical_root:root
+    (fun () -> TargetBinding.prepare_admitted ?connection ~logical_root:root
       ~require_producer:(TargetBinding.producer_supported ())
       ~local_path:localPath ~working_dir:workingDir ~candidate
       ~target:(normalizeTargetPath normalize realPath) ~normalize
@@ -709,13 +711,13 @@ let returnBoundSetup connection root paths token =
 
 let setupBoundLocal connection (root, (path, normalize, wantBinding)) =
   setupTargetPathsLocal (root, path) >>= fun paths ->
-  let token = prepareTargetBinding connection root normalize wantBinding paths in
+  prepareTargetBinding connection root normalize wantBinding paths >>= fun token ->
   returnBoundSetup connection root paths token
 
 let setupBoundWithParentsLocal connection
       (root, ((path, props), normalize, wantBinding)) =
   setupTargetPathsAndCreateParentDirectoryLocal (root, (path, props)) >>= fun paths ->
-  let token = prepareTargetBinding connection root normalize wantBinding paths in
+  prepareTargetBinding connection root normalize wantBinding paths >>= fun token ->
   returnBoundSetup connection root paths token
 
 let msetupBoundResult = Umarshal.(prod2 msetupTargetPaths

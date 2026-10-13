@@ -219,25 +219,27 @@ let borrowed_with_publication publication candidate f =
 let nonce () =
   (* The only current clone-stage backend is macOS. Use OS randomness for
      transaction correlation; this nonce is not peer authentication. *)
-  let fd = Unix.openfile "/dev/urandom" [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
   let b = Bytes.create 32 in
-  let rec read off = if off < 32 then
-    let rec retry () = try Unix.read fd b off (32-off) with
-      Unix.Unix_error (Unix.EINTR,_,_) -> retry () in
-    let n = retry () in
+  let owned = ref true in
+  let close fd = if !owned then begin owned := false; Unix.close fd end in
+  let rec read fd off = if off < 32 then
+    let n = try Unix.read fd b off (32-off) with
+      Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
     if n = 0 then raise (Util.Transient "Cannot obtain semantic transaction nonce")
-    else read (off+n) in
-  match read 0 with
-  | () -> Unix.close fd; Bytes.to_string b
-  | exception e -> Unix.close fd; raise e
+    else read fd (if n < 0 then off else off+n) in
+  (* Buffers, ownership state and callbacks precede the native open. Clear the
+     slot before close, so a failed close cannot close a reused number later. *)
+  let fd = Unix.openfile "/dev/urandom" [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
+  try read fd 0; close fd; Bytes.to_string b
+  with error -> (try close fd with _ -> ()); raise error
 
-let try_transfer_internal ?producer ~connection ~source ~basis ~directory ~staging ~expected_size () =
+let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~directory ~staging ~expected_size () =
   if not (supported connection) then return false else
   let extensions = SemanticFormats.peer_enabled () in
   let max_payload = List.fold_left (fun n handle -> max n (FormatExtension.payload_limit handle))
     0 extensions in
   let callback_started = ref false in
-  SemanticRuntime.with_transaction ~max_payload (fun cancellation ->
+  SemanticRuntime.with_transaction ?reservation ~max_payload (fun cancellation ->
     Util.convertUnixErrorsToTransient "creating semantic staging" (fun () ->
       let stage = Os.tempPath ~fresh:true directory (Path.addSuffixToFinalName staging "-sde") in
       let candidate_path = Fspath.concat directory stage in
@@ -428,3 +430,6 @@ let observe ~root ~path ~extension =
         match decode ~nonce ~profile ~max_payload:(FormatExtension.payload_limit extension) encoded with
         | Error why -> fail (Util.Transient ("Invalid semantic inspection reply: " ^ why))
         | Ok observation -> return {observation;local_snapshot=None})
+
+let try_transfer_reserved ~reservation ~producer ~connection ~source ~basis ~directory ~staging ~expected_size =
+  try_transfer_internal ~reservation ?producer ~connection ~source ~basis ~directory ~staging ~expected_size ()

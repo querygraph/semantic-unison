@@ -65,6 +65,7 @@ candidateValidation.cmx : \
     abort.cmx \
     candidateValidation.cmi
 candidateValidation.cmi : \
+    semanticAdmission.cmi \
     path.cmi \
     lwt/lwt.cmi \
     fspath.cmi
@@ -1211,6 +1212,7 @@ semanticRemote.cmx : \
     semanticRemote.cmi
 semanticRemote.cmi : \
     semanticReport.cmi \
+    semanticAdmission.cmi \
     remote.cmi \
     path.cmi \
     lwt/lwt.cmi \
@@ -1301,6 +1303,7 @@ semanticSync.cmx : \
     formatExtension.cmx \
     semanticSync.cmi
 semanticSync.cmi : \
+    semanticAdmission.cmi \
     path.cmi \
     lwt/lwt.cmi \
     fspath.cmi
@@ -1442,6 +1445,8 @@ system/win/system_impl.cmx : \
     system/system_win.cmx
 targetBinding.cmo : \
     ubase/util.cmi \
+    semanticRuntime.cmi \
+    semanticAdmission.cmi \
     remote.cmi \
     ubase/prefs.cmi \
     path.cmi \
@@ -1449,6 +1454,7 @@ targetBinding.cmo : \
     os.cmi \
     name.cmi \
     lwt/lwt.cmi \
+    helperSupervisor.cmi \
     fspath.cmi \
     finalPublication.cmi \
     fileinfo.cmi \
@@ -1457,6 +1463,8 @@ targetBinding.cmo : \
     targetBinding.cmi
 targetBinding.cmx : \
     ubase/util.cmx \
+    semanticRuntime.cmx \
+    semanticAdmission.cmx \
     remote.cmx \
     ubase/prefs.cmx \
     path.cmx \
@@ -1464,6 +1472,7 @@ targetBinding.cmx : \
     os.cmx \
     name.cmx \
     lwt/lwt.cmx \
+    helperSupervisor.cmx \
     fspath.cmx \
     finalPublication.cmx \
     fileinfo.cmx \
@@ -1471,6 +1480,7 @@ targetBinding.cmx : \
     case.cmx \
     targetBinding.cmi
 targetBinding.cmi : \
+    semanticAdmission.cmi \
     remote.cmi \
     path.cmi \
     os.cmi \

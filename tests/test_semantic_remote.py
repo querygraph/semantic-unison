@@ -136,11 +136,11 @@ def exercise_bidirectional_admission(binary):
             # Distinct preserved bytes prevent ordinary fingerprint reuse from
             # satisfying every transfer with just one semantic result per side.
             (left / name).write_bytes(fixture(opaque=65 + i))
-        sync(26, 24)
+        sync(26, 56)
         # Sorted paths alternate transfer direction, placing both directions in
         # the same 24-transfer dispatch window. Every stage has the same layout.
-        for payload_mib, descriptors, even, odd in ((26, 24, b"two", b"six"),
-                                                    (17, 16, b"new", b"ten")):
+        for payload_mib, descriptors, even, odd in ((26, 56, b"two", b"six"),
+                                                    (17, 32, b"new", b"ten")):
             expected = {}
             for i, name in enumerate(names):
                 contents = fixture(even if i % 2 == 0 else odd, opaque=65 + i)

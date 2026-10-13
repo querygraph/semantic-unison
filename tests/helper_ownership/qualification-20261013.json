@@ -1,0 +1,201 @@
+{
+  "schema": "unison-helper-ownership-qualification-v1",
+  "utc": "2026-10-13T20:52:16.194232+00:00",
+  "status": "passed; independent source acceptance recorded separately by parent",
+  "production_sha256": "2b513a7fd213c6cce3f902b59c5a74fff22aa63534c85ebe366adb8aaeb5111a",
+  "positive_cases_per_compiler": 36,
+  "positive_assertions_per_compiler": 211,
+  "negative_variants_per_compiler": 4,
+  "runs": {
+    "stock": {
+      "positive": {
+        "receipt": "/private/tmp/unison-helper-ownership-q_e16eqs/verification.json",
+        "receipt_sha256": "4a71d48715cdced5e0fc3d305c88c6ffa4dbff19ecf8a35224e0a371cd23013e",
+        "test_exit": 0,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "private_source_sha256": "a60dbc0c7e7dcd6f62b199c80e6c87d2a80f2bb9fe3d8ec28ddf61580628275c",
+        "cases": 36,
+        "assertions": 211
+      },
+      "missing-guard": {
+        "receipt": "/private/tmp/unison-helper-ownership-xx6a71gv/verification.json",
+        "receipt_sha256": "7c26010d432ba502159ba94d352868c855b8cd1ea44e069d6abe7ecc08664510",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "private_source_sha256": "c4248fd250db218c47eba9967e7e369573d13229696534091f1d84557e97b8ce",
+        "designated_failure": "DESIGNATED child was not actually reaped before return"
+      },
+      "missing-outer-guard": {
+        "receipt": "/private/tmp/unison-helper-ownership-3f7cgwuz/verification.json",
+        "receipt_sha256": "6f9307cbfbd925d6382c64788cce7063b109a7b80c387a0aaf530910b0b81924",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "private_source_sha256": "13dee80640e5d660af8dbb9e619cb2d577f78ca61a0e50a84aeccc737cb3922e",
+        "designated_failure": "DESIGNATED child was not actually reaped before return"
+      },
+      "early-release": {
+        "receipt": "/private/tmp/unison-helper-ownership-1fq3qaj3/verification.json",
+        "receipt_sha256": "8f1326748b278560cc1c71ea9fdd97ae28ab9ac35c22f0c14ee2c8d089c411de",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "private_source_sha256": "1c486abbb9716c407dd3c66c562df97531a6ea7f10f8d07108ef210e81239854",
+        "designated_failure": "DESIGNATED permits released before owned child wait"
+      },
+      "early-cpu-release": {
+        "receipt": "/private/tmp/unison-helper-ownership-5m6bx4wo/verification.json",
+        "receipt_sha256": "1e7ffe983ad17f025254f47bff6cd5bd3a71fe825b09da798cefe46bd8fb98a1",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "private_source_sha256": "6eb66b67369359aedc8d73de163985140a6303d648b2933bb1f5862eef198507",
+        "designated_failure": "DESIGNATED CPU borrower released before settlement"
+      }
+    },
+    "ox": {
+      "positive": {
+        "receipt": "/private/tmp/unison-helper-ownership-l9u1fmpe/verification.json",
+        "receipt_sha256": "e9d6bfb18d4204493ea1d53fcebdd9c5653f7e668a9cc0ae5940c6153fcf676e",
+        "test_exit": 0,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "private_source_sha256": "a60dbc0c7e7dcd6f62b199c80e6c87d2a80f2bb9fe3d8ec28ddf61580628275c",
+        "cases": 36,
+        "assertions": 211
+      },
+      "missing-guard": {
+        "receipt": "/private/tmp/unison-helper-ownership-bbmfys06/verification.json",
+        "receipt_sha256": "b7a86fc5b30c3391622698be78a34799c07a8a620bc7eed44029dc485b9f5c4f",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "private_source_sha256": "c4248fd250db218c47eba9967e7e369573d13229696534091f1d84557e97b8ce",
+        "designated_failure": "DESIGNATED child was not actually reaped before return"
+      },
+      "missing-outer-guard": {
+        "receipt": "/private/tmp/unison-helper-ownership-82a4ybzq/verification.json",
+        "receipt_sha256": "4c6596543554f51b5c927d8827e89df8b50141e31c8f0fb444fa2307ec64c729",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "private_source_sha256": "13dee80640e5d660af8dbb9e619cb2d577f78ca61a0e50a84aeccc737cb3922e",
+        "designated_failure": "DESIGNATED child was not actually reaped before return"
+      },
+      "early-release": {
+        "receipt": "/private/tmp/unison-helper-ownership-gw6u_4_x/verification.json",
+        "receipt_sha256": "b586e38fd83998fea909e48ddbf3166bb619f9802882210a9173b15f93d339a9",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "private_source_sha256": "1c486abbb9716c407dd3c66c562df97531a6ea7f10f8d07108ef210e81239854",
+        "designated_failure": "DESIGNATED permits released before owned child wait"
+      },
+      "early-cpu-release": {
+        "receipt": "/private/tmp/unison-helper-ownership-m1oq6ve4/verification.json",
+        "receipt_sha256": "741b99d7c01099c6405037da45bcd557d764cd3ee3d8b8423a9741f3bf16741c",
+        "test_exit": 2,
+        "accepted": true,
+        "source_pins": 15,
+        "retained_artifact_pins": 46,
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "private_source_sha256": "6eb66b67369359aedc8d73de163985140a6303d648b2933bb1f5862eef198507",
+        "designated_failure": "DESIGNATED CPU borrower released before settlement"
+      }
+    }
+  },
+  "existing_helper_suite": [
+    {
+      "backend": "stock",
+      "command": [
+        "python3",
+        "tests/helpers/run_tests.py",
+        "--ocamlopt",
+        "/usr/local/bin/ocamlopt"
+      ],
+      "exit": 0,
+      "groups": 33,
+      "log": "/private/tmp/unison-helper-ownership-existing-stock-2b513a7.log",
+      "log_sha256": "eb8e2b0fccfec53d62f44698f189b19d12ed7f8e028e74619055eb122765577a",
+      "artifact_limit": "Existing runner deletes its isolated build directory; logs and frozen source-state pins are retained, not its binaries."
+    },
+    {
+      "backend": "ox",
+      "command": [
+        "python3",
+        "tests/helpers/run_tests.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt"
+      ],
+      "exit": 0,
+      "groups": 33,
+      "log": "/private/tmp/unison-helper-ownership-existing-ox-2b513a7.log",
+      "log_sha256": "57bb13ac14284bdcb0813fffdf7e5bb17b7c37465e2a2704ccf76c6e5749a3d8",
+      "artifact_limit": "Existing runner deletes its isolated build directory; logs and frozen source-state pins are retained, not its binaries."
+    }
+  ],
+  "existing_frozen_source_state": {
+    "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+    "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+    "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+    "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+    "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+    "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+    "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+    "src/helperSupervisor.mli": "a79d0fefdc3a34445337b73a93ca64cce3cd3c8c589fa23617bbf391f85080be",
+    "src/helperSupervisor.ml": "2b513a7fd213c6cce3f902b59c5a74fff22aa63534c85ebe366adb8aaeb5111a",
+    "src/dngValidation.mli": "4a15c2b6575b417f188db2ac617db1c65070673696ef23e44e3eb22891af6bc9",
+    "src/dngValidation.ml": "657e9e858e897950b026a23b768dd26d1510e48f5893579a08c51c3c5bc4735a",
+    "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+    "tests/helpers/synthetic_helper.ml": "f7ef270ffb008f1837d1aa9846a63e4f5952b71479d78b3ddc898d3804a758be",
+    "tests/helpers/helper_tests.ml": "cc8d2a9604bd8e1ae407e721a26b6ad7f8703bbce4f1ed77dd457a3a8b9f619e",
+    "tests/helpers/exit_guard.ml": "ecc11cc9bc079e082c322335717259123adcf299946c9428c5aa9fae4fc31143",
+    "tests/helpers/run_tests.py": "5f7bedff8ec49235acfc2d07d542dd223aee52f58ab4cf1350469a9c29cb75f7"
+  },
+  "producer_hash_comparisons": 630,
+  "comparisons_are_unique_files": false,
+  "source_review_acknowledgments": [
+    "scratch_controls accepted 2b513a7f source read-only in selected finite ownership scope",
+    "scratch_integration accepted 2b513a7f source read-only in selected finite one-shot acquisition scope"
+  ],
+  "limits": [
+    "No Adobe, Photo, Lightroom or production native calls; isolated finite synthetic children only.",
+    "Descriptor inventory covers descriptor numbers 0 through 255 in this isolated low-descriptor macOS fixture.",
+    "Source-directed one-shot allocator faults do not establish actual exhausted-heap recovery or universal asynchronous exception safety.",
+    "Native successful child waits plus ECHILD are checked; PID absence is not reap evidence.",
+    "Repeated allocation failure may retain CPU/child credits and registry ownership while returning an error before a borrower settles; this is not an unconditional caller-awaits-settlement guarantee.",
+    "Unexpected OS refusal, uninterruptible reaping, external competing reapers and escaping helper descendants have no hard settlement deadline.",
+    "CPU ownership/counters do not impose a whole-process descriptor or RSS cap.",
+    "Private early-release regression removes owner_settled admission guard and inserts early teardown release to restore the historical premature-credit defect."
+  ]
+}

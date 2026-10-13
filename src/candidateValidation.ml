@@ -33,10 +33,12 @@ let _feature = Features.register "dng-validation-v0" (Some (fun _ enabled ->
     Some "Requested Adobe validation requires dng-validation-v0 support on both replicas"
   else None))
 let snapshot pool cancellation path =
+  let owned = ref true in
+  let close fd = if !owned then begin owned := false;
+    try Unix.close fd with Unix.Unix_error _ -> () end in
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  let close () = try Unix.close fd with Unix.Unix_error _ -> () in
-  Lwt.try_bind (fun () -> SemanticWorkers.digest pool cancellation fd)
-    (fun result -> close ();
+  try Lwt.try_bind (fun () -> SemanticWorkers.digest pool cancellation fd)
+    (fun result -> close fd;
       let result = match result with None -> raise (Util.Transient "Validation hashing cancelled")
         | Some result -> result in
       let sha256 = SemanticHash.hex result.SemanticWorkers.digest in
@@ -46,7 +48,8 @@ let snapshot pool cancellation path =
           st.Unix.LargeFile.st_dev st.Unix.LargeFile.st_ino st.Unix.LargeFile.st_size
           st.Unix.LargeFile.st_mtime st.Unix.LargeFile.st_ctime
           st.Unix.LargeFile.st_perm st.Unix.LargeFile.st_nlink })
-    (fun e -> close (); fail e)
+    (fun e -> close fd; fail e)
+  with e -> close fd; raise e
 let is_dng path =
   Filename.check_suffix (String.lowercase_ascii (Path.toString path)) ".dng"
 type tree_entry = {
@@ -104,7 +107,7 @@ let verify_tree before after =
     | _ -> false in
   if not (same before after) then
     raise (Util.Transient "Validation candidate tree changed during validation")
-let validate_file ~selected path =
+let validate_file ~reservation ~selected path =
   Abort.checkAll ();
   let runtime = SemanticRuntime.get () in
   let supervisor = runtime.SemanticRuntime.supervisor
@@ -123,7 +126,7 @@ let validate_file ~selected path =
       terminate_grace = 2.; stdout_bytes = 16384; stderr_bytes = 262144} } in
   let candidate = Fspath.toString path in
   SemanticRuntime.with_cancellation (fun cancellation ->
-    SemanticRuntime.with_admission cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
+    SemanticRuntime.with_admission ?reservation cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
     let inspect path = snapshot pool cancellation path in
     inspect candidate >>= fun expected ->
     DngValidation.validate_with_execution
@@ -139,7 +142,7 @@ let validate_file ~selected path =
       return ()
   | DngValidation.Rejected (reason,_) ->
       fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %s: %s" candidate reason))
-let before_commit ~directory ~candidate ~destination =
+let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =
   let selected = policy () in
   if selected = DngValidation.Off then return () else
   let before = Util.convertUnixErrorsToTransient "recording validation candidate tree"
@@ -159,9 +162,12 @@ let before_commit ~directory ~candidate ~destination =
     if !failure <> None then return () else
     Lwt.catch (fun () -> match next () with
       | None -> return ()
-      | Some path -> validate_file ~selected path >>= consume)
+      | Some path -> validate_file ~reservation ~selected path >>= consume)
       (fun error -> if !failure = None then failure := Some error; return ()) in
-  let count = min 256 (SemanticRuntime.get ()).SemanticRuntime.cpu_budget in
+  (* A retained publication envelope loans one workspace at a time. Legacy
+     directory handoff uses the same serial loan rather than nested admission. *)
+  let count = match reservation with Some _ -> 1
+    | None -> min 256 (SemanticRuntime.get ()).SemanticRuntime.cpu_budget in
   Lwt.catch (fun () ->
     Lwt_util.iter (fun _ -> consume ()) (List.init count (fun i -> i)) >>= fun () ->
     match !failure with
@@ -171,3 +177,6 @@ let before_commit ~directory ~candidate ~destination =
       | Unix.Unix_error _ | SemanticFile.Invalid _ | SemanticWorkers.Failed _ ->
         fail (Util.Transient ("Inspecting validation candidate: " ^ Printexc.to_string e))
       | _ -> fail e)
+
+let before_commit ~directory ~candidate ~destination =
+  before_commit_with_reservation ~reservation:None ~directory ~candidate ~destination

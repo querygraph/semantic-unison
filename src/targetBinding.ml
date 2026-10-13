@@ -28,6 +28,7 @@ type t = {
   mutable recover_settlement : (unit -> unit) option;
   mutable callback_pending : bool;
   mutable actual_fingerprint : Os.fullfingerprint option;
+  reservation : SemanticAdmission.reservation option;
 }
 
 (* The endpoint's cooperative Lwt controller owns this registry. A fixed array
@@ -51,6 +52,9 @@ let remove t =
   | Some present when present == t -> slots.(t.slot) <- None
   | _ -> ()
 
+let retire_reservation t = match t.reservation with
+  | None -> () | Some reservation -> SemanticAdmission.retire reservation
+
 let close t =
   if t.phase <> Closed then begin
     t.phase <- Closed;
@@ -60,11 +64,14 @@ let close t =
     (* Unregister first. Even a native cleanup exception cannot strand a slot;
        FinalPublication closes all its own descriptors before reporting it. *)
     remove t;
-    match t.context with
-    | None -> ()
-    | Some context ->
-        if t.handed_off then FinalPublication.release context
-        else FinalPublication.abort_and_close context
+    try
+      (match t.context with
+       | None -> ()
+       | Some context ->
+           if t.handed_off then FinalPublication.release context
+           else FinalPublication.abort_and_close context);
+      retire_reservation t
+    with error -> (try retire_reservation t with _ -> ()); raise error
   end
 
 let close_noerr t = try close t with _ -> ()
@@ -120,6 +127,7 @@ let finalized t = match t.context with
   | None -> false
   | Some context -> FinalPublication.producer_finalized context
 let fingerprint t = t.actual_fingerprint
+let reservation t = t.reservation
 
 let record_fingerprint t fingerprint =
   check_open t;
@@ -216,8 +224,16 @@ let rec unique_nonce () =
 
 exception Preparation_unavailable
 
-let prepare ?connection ?(require_producer=false) ~logical_root ~local_path ~working_dir ~candidate
+let prepare_internal ~on_ready ?reservation ?connection ?(require_producer=false) ~logical_root ~local_path ~working_dir ~candidate
     ~target ~normalize ~check_apple_double () =
+  (match reservation with
+   | Some reservation when not (SemanticAdmission.is_held reservation) ->
+       fail "preparation requires an admitted resource owner"
+   | Some reservation when SemanticAdmission.reservation_role reservation <> SemanticAdmission.Consumer ||
+       (SemanticAdmission.reservation_cost reservation).SemanticAdmission.descriptors < 24 ||
+       (SemanticAdmission.reservation_cost reservation).SemanticAdmission.payload_bytes < 1048576 ->
+       fail "preparation requires a complete consumer publication envelope"
+   | _ -> ());
   if not (FinalPublication.available ()) then None else
   match Fileinfo.getType true logical_root Path.empty with
   | `FILE -> None  (* Supported ordinary file-root synchronization stays legacy. *)
@@ -229,7 +245,7 @@ let prepare ?connection ?(require_producer=false) ~logical_root ~local_path ~wor
                 check_apple_double; require_producer; token = ""; context = None;
                 phase = Preparing; closing_requested = false; handed_off = false;
                 recover_settlement = None; callback_pending = false;
-                actual_fingerprint = None } in
+                actual_fingerprint = None; reservation } in
       slots.(slot) <- Some t;
       begin try
         t.token <- unique_nonce ();
@@ -259,12 +275,56 @@ let prepare ?connection ?(require_producer=false) ~logical_root ~local_path ~wor
           ~target:(Path.toString (normalize_target normalize fresh_target));
         if closing t then fail "session closed during resolution verification";
         t.phase <- Ready;
+        on_ready t;
         Some t.token
       with error ->
         close_noerr t;
         match error with Preparation_unavailable -> None | _ -> raise error
       end
   | `ABSENT | `SYMLINK -> fail "logical root is missing or is not a resolved directory"
+
+let prepare ?reservation ?connection ?require_producer ~logical_root ~local_path
+    ~working_dir ~candidate ~target ~normalize ~check_apple_double () =
+  prepare_internal ~on_ready:(fun _ -> ()) ?reservation ?connection ?require_producer
+    ~logical_root ~local_path ~working_dir ~candidate ~target ~normalize ~check_apple_double ()
+
+let prepare_admitted ?connection ?(require_producer=false) ~logical_root ~local_path
+    ~working_dir ~candidate ~target ~normalize ~check_apple_double () =
+  if not (FinalPublication.available ()) then Lwt.return None else begin
+  (* Recovery must happen before waiting for credits. A settled orphan can own
+     the last consumer envelope; waiting first would prevent its slot recovery. *)
+  Array.iter (function None -> () | Some t -> recover_settlement t) slots;
+  let reservation = SemanticRuntime.make_publication_reservation () in
+  let prepared = ref None in
+  let remember t = prepared := Some t in
+  let retire_error error =
+    (* A cancellation wrapper's success-continuation allocation can fail after
+       native preparation succeeded, synchronously or after a queued grant.
+       Retire that recorded native owner before freeing its resource envelope. *)
+    (match !prepared with
+     | Some t -> prepared := None; close_noerr t
+     | None -> (try SemanticAdmission.retire reservation with _ -> ()));
+    Lwt.fail error in
+  let prepare_now () =
+    let token = prepare_internal ~on_ready:remember ~reservation ?connection ~require_producer ~logical_root
+      ~local_path ~working_dir ~candidate ~target ~normalize ~check_apple_double () in
+    match token with
+    | None -> SemanticAdmission.retire reservation; Lwt.return None
+    | Some token ->
+        (* The registry owns the envelope now, including the producer-return
+           gap. A failed result allocation closes the native owner first. *)
+        try Lwt.return (Some token) with error -> retire_error error in
+  let acquire_and_prepare () = SemanticRuntime.with_cancellation (fun cancellation ->
+    try Lwt.try_bind (fun () -> SemanticAdmission.acquire reservation cancellation)
+      (fun admitted ->
+        if not admitted || HelperSupervisor.is_cancelled cancellation then
+          (SemanticAdmission.retire reservation;
+           Lwt.fail (Util.Transient "Target resource admission cancelled"))
+        else prepare_now ()) retire_error
+    with error -> retire_error error) in
+  try Lwt.try_bind acquire_and_prepare Lwt.return retire_error
+  with error -> retire_error error
+  end
 
 let verify_owner t connection logical_root =
   if not (same_connection t.connection connection) ||

@@ -1,5 +1,19 @@
 # Implementation status and remaining acceptance work
 
+Current retained-resource checkpoint: target proofs acquire admission before
+native prepare and remain charged through producer return, validation and commit.
+Explicit loans replace nested Consumer waits. Selected descriptor allowances,
+CPU/child ownership and early FD handoffs have finite fault controls; resource
+credits remain estimates rather than a complete process FD/RSS policy. Both
+stock/Ox Make and clean Dune builds/selftests pass with 316 matching production
+inputs, plus all 79 publication / 21 synthetic receiving-validation cases per
+compiler. Scope, qualification and remaining limits are current in
+[SOL.md](../SOL.md), [resource-admission.md](resource-admission.md) and
+[the combined receipt](../tests/qualification/resource-lifetime-integration-20261013.json).
+No new Adobe/Lightroom or photographic-data invocation occurred.
+
+The following positional-write checkpoint remains earlier independent evidence.
+
 The positional-write follow-on now supplies an abstract borrowed output writer
 and one bounded native POSIX `pwrite` per attempt. Admission rejects append /
 read-only mode and nonregular/multiply linked outputs before writes, including
@@ -120,9 +134,10 @@ partial commit/recovery, timeout/cancellation and measured serial helper overlap
 These are Adobe-free core invocation/publication tests; real SDK parity remains
 separate. [The combined receipt](../tests/qualification/io-execution-20261013.json)
 pins that checkpoint's scope and artifacts. Per-process I/O accounting is neither a
-physical-disk scheduler nor a memory/global-descriptor cap. Eight transfer
-credits undercount some currently bound publication paths; those descriptors
-need complete-lifetime admission rather than a larger estimate.
+physical-disk scheduler nor a memory/global-descriptor cap. At that checkpoint,
+eight transfer credits undercounted bound publication paths and ended too early.
+The current retained-resource checkpoint closes that selected lifetime gap;
+native transient census and a complete process resource policy remain open.
 
 The semantic observation checkpoint adds optional extension-defined field observations and
 separately negotiated [SIR/1](semantic-observation-v1.md), interpreting complete

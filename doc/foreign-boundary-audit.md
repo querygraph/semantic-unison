@@ -1,5 +1,16 @@
 # Manual audit of new foreign boundaries
 
+Current owner-loop addition: durable reservations start before native target
+preparation and survive producer return. Explicit semantic/validation loans
+retain that envelope through settlement; native close precedes retirement.
+`Lwt.wakeup_from` publishes a preallocated completed state before observer dispatch,
+avoiding a result-constructor allocation at the debit/reply handoff. Early reader,
+worker, nonce, helper/CPU acquisition and PID ownership guards have separate finite
+controls. See [resource-admission.md](resource-admission.md) and the component
+receipts linked by [SOL.md](../SOL.md). This adds selected lifetime admission;
+it does not establish a complete native/heap/process resource cap or universal
+allocation-failure recovery. Existing native positional-write contracts remain.
+
 Reviewed on 2026-10-13 against the uncommitted `feat/semantic-dng-oxcaml` tree.
 This covers the new SHA-256, positional-write and helper supervisor primitives,
 `unison_clone_stage`/`unison_clone_stage_status`/`unison_clone_stage_handles`,

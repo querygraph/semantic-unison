@@ -2,7 +2,10 @@
 
 These do not implement a registry. FinalPublication owns real close-on-exec
 descriptors and exposes fault/call observations; native namespace correctness
-is qualified by tests/final_publication separately.
+is qualified by tests/final_publication separately. The SemanticAdmission,
+SemanticRuntime and HelperSupervisor seams are no-op compilation dependencies.
+These historical controls use synchronous prepare without a reservation, so
+they provide no admission, budget or resource-lifetime qualification.
 """
 
 MODULES = {
@@ -89,6 +92,24 @@ let disconnect () = List.iter (fun handler -> handler ()) !handlers
 type fullfingerprint = Actual of string | Pseudo of string
 let isPseudoFingerprint = function Pseudo _ -> true | Actual _ -> false
 let fullfingerprintEqual left right = left = right
+''',
+    'helperSupervisor': r'''
+type cancellation = unit
+let is_cancelled () = false
+''',
+    'semanticAdmission': r'''
+type reservation = unit
+type role = Source | Consumer
+type cost = { payload_bytes : int; descriptors : int }
+let reservation_role () = Consumer
+let reservation_cost () = {payload_bytes=1048576; descriptors=24}
+let is_held () = true
+let retire () = ()
+let acquire () (_ : HelperSupervisor.cancellation) = Lwt.return true
+''',
+    'semanticRuntime': r'''
+let make_publication_reservation () : SemanticAdmission.reservation = ()
+let with_cancellation callback = callback ()
 ''',
     'finalPublication': r'''
 type t = {

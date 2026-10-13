@@ -18,3 +18,10 @@ val try_local_async_with_producer : producer:(Unix.file_descr -> unit) ->
     to [producer] before relinquishing staging ownership and closing the
     transaction. Callback failures are terminal and retain their original
     exception. Unsupported initial preparation/layout may return false. *)
+
+val try_local_async_reserved : reservation:SemanticAdmission.reservation ->
+  producer:(Unix.file_descr -> unit) option -> source:Fspath.t -> basis:Fspath.t ->
+  directory:Fspath.t -> staging:Path.local -> bool Lwt.t
+(** Borrow the caller's retained publication envelope before clone/worker opens.
+    None producer preserves an explicitly handed-off legacy materializer while
+    retaining its work admission. No nested resource gate acquisition. *)

@@ -4,6 +4,49 @@
 
 ## Live implementation handoff
 
+* Retained-resource continuation (2026-10-13): production target setup now
+  acquires a caller-owned Consumer reservation before native proof preparation.
+  The registry retains it through Ready/Producing/Finalized/Committing, including
+  the five-descriptor gap after producer return. Close native ownership before
+  retirement. Explicit Copy/SDE and serialized validation loans use the same
+  envelope, including legacy work handoff; no nested Consumer admission wait.
+  Sources retain separate service headroom through reply marshal/output. The
+  selected consumer envelope is 24 descriptor credits and max(1 MiB,
+  8 * enabled payload limit + 256 KiB); Source uses eight credits. DNG needs at
+  least two transaction slots, 32 descriptor credits and its consumer/source
+  buffer allowance (17 MiB fits). Ordinary proof admission stays independent
+  of worker-pool initialization. Design: [resource-admission.md](doc/resource-admission.md).
+* Current resource qualification: Make stock `unison-build-yrkxtl7v` and Ox
+  `unison-build-h42l15o6`, plus clean Dune `unison-resource-clean-dune-d2fvgsa1`,
+  pass builds/selftests with 316 production/package/INSTALL inputs matching
+  workspace and all four snapshots. Generated dependencies match both Make
+  outputs separately. Both compilers pass 26 admission groups / 16 finite-fault
+  groups with four private negatives, 106 unchanged registry groups with two
+  negatives, 20 early-FD groups / 110 assertions with three leak negatives,
+  36 helper groups / 211 assertions with four negatives, 19 worker and 33 helper
+  regressions, and 13 exact-function nonce groups with two negatives. Native
+  actual-publication census passes eight groups / 58 assertions and four
+  designated rejections per compiler, including immediate/queued token-handoff
+  failure after native preparation. All 79 Files publication and 21 synthetic
+  validation receive cases, 24-key bidirectional/old-peer SDE, five nonblocking
+  paths and six I/O-runtime scenarios / 107 assertions also pass both. Component
+  receipts are under `tests/{admission_faults,fd_ownership,helper_ownership,
+  nonce_ownership,resource_lifetime}/`; the combined receipt is
+  `tests/qualification/resource-lifetime-integration-20261013.json`. A separate
+  independent review records artifact/source acceptance; final aggregate review
+  supersedes its initial pending portions.
+* Resource limits remain open: 24 is a conservative selected-path envelope,
+  not an exact native peak or complete process FD/RSS policy. Phase-boundary
+  census does not sample hidden native transients. Pool/transport/legacy
+  baselines and OS descriptor limits, raw/decoded RPC ingress, XML expansion,
+  manifests, native/child allocations and broader post-dispatch recovery need
+  further work. An allocation failure in an outer Files waiter can abandon an
+  indexed Ready owner whose credits stay held until session teardown. Persistent
+  allocator exhaustion, arbitrary post-worker-queue failures and uncertain OS
+  close/reap settlement remain unqualified. No physical-write/performance claim,
+  SDK/Lightroom invocation, Photo access or preview publication occurred. The
+  external finite oracle window remains unreleased independently of this work.
+
 * Positional-write continuation (2026-10-13): `SemanticFile.writer` is an abstract
   borrow of an admitted private output; it allocates no descriptor. POSIX
   admission rejects read-only/append mode, nonregular and multiply linked files
@@ -146,11 +189,11 @@
   accounting, not mount incarnations, physical disks or cross-process budgets.
   The integer key representation is qualified on this 64-bit macOS host.
   Ordinary copy system calls, native SDK allocations and unrelated programs are
-  outside this gate. Eight transfer descriptor credits undercount some bound
-  semantic publication paths (nine semantic FDs plus four/five final-publication
-  handles and transient probes); nine validation credits add its helper grouping
-  FD but are still estimates. Complete-lifetime descriptor admission, memory
-  policy and measured real storage limits remain required. No Photo payload,
+  outside this gate. Historical eight-credit transfer admission undercounted bound semantic
+  publication paths and omitted retained target proofs. The retained 24-credit
+  implementation above supersedes that callback-only lifetime; nine validation
+  credits now describe a workspace loan within its bound envelope. Complete
+  process/memory policy and measured real storage limits remain required. No Photo payload,
   catalog/cache/volume access, Adobe invocation or preview publisher occurred.
 
 * Semantic observation continuation (2026-10-13): immutable format handles now

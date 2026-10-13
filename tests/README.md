@@ -1,5 +1,14 @@
 # Semantic extension qualification
 
+Retained publication admission is qualified by [native lifecycle controls](resource_lifetime/README.md),
+[early descriptor ownership](fd_ownership/README.md), [helper ownership](helper_ownership/README.md),
+[finite admission faults](admission_faults/README.md) and [nonce ownership](nonce_ownership/README.md).
+These controls use synthetic inputs and private snapshots. Current aggregate
+build/CLI evidence is [resource-lifetime-integration-20261013.json](qualification/resource-lifetime-integration-20261013.json);
+its independent acceptance is recorded separately. The descriptor envelope covers
+selected lifetimes; complete process FD/RSS, native transient peaks, ingress and
+SDK memory remain open.
+
 Tests create synthetic files in disposable directories. They do not inspect
 personal photographs, modify production profiles or require a real SSH server.
 Build each compiler in its own snapshot:

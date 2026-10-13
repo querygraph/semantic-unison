@@ -33,35 +33,34 @@ running operation holds one shared CPU permit until it has stopped and closed
 its descriptors, including cancellation. The scheduler can reserve additional
 weighted permits for a helper's internal threads.
 
-`SemanticAdmission` separately limits admitted semantic transactions before
-their semantic operations open descriptors or clone a candidate. Publication
-and target-binding handles can already exist outside that reservation.
-`semanticmaxinflight = 0` selects
-the worker count plus one reserved source slot when a semantic profile is
-enabled. `semanticpayloadbudget` defaults to 512 MiB of estimated retained
-buffer credits; `semanticdescriptorbudget` defaults to 512 descriptor credits.
-A transfer reserves eight times the largest enabled profile's declared payload
-limit plus 256 KiB, and eight descriptors. DNG declares a 1 MiB payload limit;
-the core enforces it before copying packet contents. A validation operation
-reserves 1 MiB and nine descriptor credits, including the held descriptor used
-to group helper I/O. CPU permits are acquired by nested
-workers/helpers, so a transaction never holds a CPU permit while waiting for
-its own workers to obtain one.
+`SemanticAdmission` reserves a durable Consumer envelope before native target
+preparation. `TargetBinding` keeps it through producer return, source checking,
+validation and commit/abort. Local/remote semantic work and bound validation
+borrow that envelope explicitly; validation uses one serialized workspace instead
+of trying to acquire another Consumer slot. Ordinary target admission does not
+initialize worker domains. Legacy proof handoff retains its work credits until
+the current borrowed callback settles.
 
-Consumers preserve one worst-profile source reservation. Sources have a
-separate FIFO and admission priority, allowing both endpoints to serve requests
-while their receivers wait for the peer. Source leases cover response encoding,
-marshaling and queued output consumption. Per-request RPC body limits also use
-the selected profile's payload ceiling. Cancellation removes queued requests;
-active leases remain until their operations settle. Connection teardown fails
-queued output and outstanding replies, and closes pending I/O before descriptor
-reuse. These credits bound admitted work, not process RSS, parser allocations,
-directory manifest size, external SDK memory or unrelated legacy transfers.
-Eight transfer descriptor credits now undercount some bound publication paths;
-they are not a global descriptor ceiling. A bound local semantic worker can
-retain nine semantic descriptors plus four/five separately retained final
-publication handles and transient native probes. Actual descriptor admission
-across the complete publication lifetime remains unfinished.
+`semanticmaxinflight = 0` selects the worker count plus one reserved Source slot
+when a semantic profile is enabled. `semanticpayloadbudget` defaults to 512 MiB
+of estimated buffer credits; `semanticdescriptorbudget` defaults to 512 credits.
+Consumers reserve 24 descriptor credits and max(1 MiB, eight times the largest
+enabled profile payload limit plus 256 KiB). Sources reserve eight descriptors
+and their profile's buffer estimate through response marshaling/output settlement.
+DNG declares and enforces a 1 MiB editable-payload limit. The minimum supported
+DNG combination is two transaction slots and 32 descriptor credits; 17 MiB covers
+its consumer plus reserved Source buffer costs. Bound validation borrows 1 MiB /
+nine workspace credits within its already paid envelope. Unbound validation
+reserves those independently. Worker/helper execution still acquires CPU permits
+separately; no transaction waits for its own workers while holding CPU permits.
+
+Source FIFO/priority and declared headroom preserve bidirectional service.
+Queued cancellation revokes eligibility immediately, and active borrowing retains
+credits until settlement. These are selected-path reservations, not a process
+FD/RSS ceiling. Native transient peaks, complete legacy families, transport/pool
+baselines, incoming decoded arguments, parser expansion, directory manifests and
+external SDK memory require further policy and measurement. The architecture and
+explicit remaining limits are in [resource-admission.md](resource-admission.md).
 
 `IoAdmission` supplies a separate execution gate shared by production domain
 jobs and validator helpers. `semanticvolumejobs = 0` defaults each filesystem
