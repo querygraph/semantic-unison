@@ -2440,3 +2440,24 @@ not benchmarks; pixel/OS-thread/cancellation/quota-exhaustion/representative-cam
 production receiving qualification remain open. Qualifiedv1 is not replaced.
 No Photo/Lightroom/Main/cache/source-photo mutation or preview capability claim.
 300s covers the supervised aggregate, not pre-supervision wrapper pin validation.
+
+
+### Root-accepted host result and current compact-container merges — 2026-10-14
+
+[Root adoption](tests/qualification/sdk-host-matrix-v1-root-adoption-20261014.json)
+verifies sealed acceptance fa34655d, its actual return/parent/independent-audit
+pins, and released shared reservation. Admission100faf00 is consumed. Actual
+functional callback/covered-allocation proof does not qualify OS threads, pixels,
+cancellation, RSS, scaling, production or preview reuse. No new SDK invocation.
+
+The quota-backed current stock/Ox Make binaries each passed all15 existing
+SDK-generated-container compact-base merge cases: uncompressed/JPEG/JXL ×
+disjoint/conflicting/protected-change/missing-base/partial-recovery. Both actual
+runner tools terminated0; exact expected target hashes agree across compilers,
+all current production source/binary pins rechecked before/after. Retained source
+containers preserve full hashes/identities. Compact records are5155bytes for
+4543byte XMP regions; validators are mocks. This closes the post-quota container
+regression gap, not actual merged-output SDK/decode qualification.
+[Sealed reports/terminal/source evidence](tests/sdk_container_receive/quota-merge-qualification.json).
+No compilers, SDK, Photo/Lightroom/Main/cache or source photos were invoked or
+modified. Full M4-V/M5/M6 and representative performance remain open.

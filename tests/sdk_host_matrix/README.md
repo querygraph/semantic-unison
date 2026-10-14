@@ -60,12 +60,15 @@ warning counts, against that codec's reference. Different warning counts need
 review rather than an automatic equivalence claim. Deterministic tests exercise
 all twelve argv/positive-receipt combinations and malformed receipts and plans.
 
-Even a future pass proves validation-result equivalence only. This protocol does
-not expose decoded pixels, actual OS-thread counts or thread cancellation
-behavior. Experimental stderr observes area callbacks and covered allocator
-peak/live bytes, whose actual SDK runtime behavior remains unqualified. These
-remain separate required
-gates before production integration or a scaling claim. One sample per setting
-is not a throughput benchmark. The memory allowance bounds covered host backing
-allocations, not process RSS. No existing consumed SDK admission authorizes this
-matrix, and the preparer does not create or extend a native window.
+The actual twelve-call matrix passed and Root independently accepted its sealed
+return and genuine closure. See [Root adoption](../qualification/sdk-host-matrix-v1-root-adoption-20261014.json)
+and [raw return](../qualification/sdk-host-matrix-v1-actual-return-20261014.json).
+All three generated codecs matched reference validation outcomes at experimental
+1/6/18 allowances; callback tasks joined and covered allocations retired.
+
+This proves validation-result/callback/covered-allocation behavior for those
+inputs. It does not expose decoded pixels or independently measure OS threads,
+thread cancellation, RSS or all heaps. Those remain separate gates before
+production integration or a scaling claim. One fixed-order sample per setting
+is not a throughput benchmark. The actual admission is consumed; preparation
+and accepted results do not authorize another SDK invocation.

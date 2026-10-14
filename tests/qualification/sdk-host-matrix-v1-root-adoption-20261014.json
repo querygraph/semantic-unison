@@ -1,0 +1,45 @@
+{
+  "schema": "unison-sdk-host-matrix-root-adoption/1",
+  "utc": "2026-10-14T21:39:30.661167+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ROOT-SEALED-RETURN-ACCEPTANCE-20261014.json",
+    "bytes": 1496,
+    "sha256": "fa34655d98a70ffb135fa3321a8933c0972ff4333ca189ca9e057e90ea6da1b3"
+  },
+  "verified": {
+    "utc": "2026-10-14T21:34:41.346466+00:00",
+    "state": "ACCEPT_ACTUAL_FINITE_FUNCTIONAL_MATRIX_PASSED_GENUINELY_CLOSED",
+    "actualReturn": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-actual-return-20261014.json",
+      "bytes": 32446,
+      "sha256": "b81e64017e5535ce2941c496e38179070bc9f24ae36bc0d2dd10d07abfe60348"
+    },
+    "parentTerminal": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-parent-terminal-20261014.json",
+      "bytes": 1493,
+      "sha256": "56b4da85f3f50a0943c6938c0442d5f00f600a6c3572fa6be3e18371b7e29c59"
+    },
+    "verifiedUniqueArtifactPins": 46,
+    "verifiedSyntheticInputPins": 3,
+    "verifiedToolPins": 2,
+    "verifiedCurrentSourcePins": 10,
+    "earlierIndependentCallAndTelemetryAudit": {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ROOT-AGGREGATE-AUDIT-20261014.json",
+      "bytes": 11348,
+      "sha256": "3ad408f8748c405f377d3f1dee5d3b85ce9fdd8119d3cb24c6a68d960f7fbc37"
+    },
+    "actualSDKCalls": 12,
+    "referenceVsExperimentalCodecOutcomesEqual": true,
+    "actualWallSeconds": 11.523550753016025,
+    "sharedReservationReleased": true,
+    "admissionConsumedNoReplay": true,
+    "limits": [
+      "Functional validation-result/callback/covered allocator proof only.",
+      "Callback frames not OS threads; covered bytes not RSS.",
+      "No pixel equality, scaling, cancellation, production or current-digest preview reuse qualification."
+    ],
+    "PhotoPayloadReads": 0,
+    "newSDKExecutions": 0
+  },
+  "scope": "Independent Root acceptance of exact finite functional/callback/covered-allocation result and actual owner/aggregate closure. Admission consumed, shared reservation released. No new SDK runtime permission or production qualification."
+}
