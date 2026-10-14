@@ -12,6 +12,7 @@ import os
 from pathlib import Path
 import subprocess
 import sys
+from object_cache import compile_object
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--sdk-root", type=Path, required=True)
@@ -113,12 +114,6 @@ def compile_one(job):
     source, flags = job
     signature = hashlib.sha256((str(source) + repr(common + flags)).encode()).hexdigest()[:16]
     obj = build / (source.stem + "-" + signature + ".o")
-    # Adapter headers affect the driver even when driver.cpp itself is unchanged.
-    dependencies = [source]
-    if source == here / "driver.cpp":
-        dependencies += [here / p for p in ("area_scheduler.h", "area_task_host.h", "memory_budget.h", "memory_allocator.h")]
-    if obj.exists() and obj.stat().st_mtime >= max(p.stat().st_mtime for p in dependencies):
-        return obj
     cxx = source.suffix != ".c"
     options = list(common) + list(flags)
     if cxx:
@@ -127,8 +122,8 @@ def compile_one(job):
         # Keep SDK implementation/notices untouched. Other SDK units still call
         # ReportError/Warning, which our driver counts and forwards to these.
         options += ["-DReportError=UnisonSdkReportError", "-DReportWarning=UnisonSdkReportWarning"]
-    run(["clang++" if cxx else "clang", *options, "-c", source, "-o", obj])
-    return obj
+    result, _ = compile_object("clang++" if cxx else "clang", options, source, obj, run)
+    return result
 
 print(f"Compiling {len(jobs)} SDK/driver units with {args.jobs} build workers...", flush=True)
 with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
@@ -159,6 +154,8 @@ manifest = {"sdk": "Adobe DNG SDK 1.7.1 build 2724", "sdk_root": str(sdk),
             "source_sha256": hashlib.sha256((here / "driver.cpp").read_bytes()).hexdigest(),
             "adapter_headers_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in (here / name for name in ("area_scheduler.h", "area_task_host.h", "memory_budget.h", "memory_allocator.h"))},
+            "object_cache": {"implementation_sha256": hashlib.sha256((here / "object_cache.py").read_bytes()).hexdigest(),
+                             "scope": "compiler/source/transitive-header/flag/environment/object content checks; not SDK runtime qualification"},
             "qualification": ("SOURCE ONLY: Adobe runtime and multithread mode unqualified"
                 if experimental else "not yet tested; run qualify.py"),
             "threads": {"minimum": 1, "maximum": 128, "includes_caller": True}

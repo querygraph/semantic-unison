@@ -3,6 +3,21 @@ Unison runs it through `HelperSupervisor` and accepts its versioned receipt via
 `DngValidation`. It is separate from the stock `dng_validate` CLI and from
 Lightroom's proprietary Validate UI.
 
+Native object reuse now checks compiler, options, selected compiler environment,
+source/transitive-header contents and object contents. Clang dependency rules
+include system headers and support escaped spaces/dollar signs. Build inputs
+are checked around compilation; observed changes reject the object. This is
+not an atomic source snapshot against an uncooperative writer. Keep the SDK and
+adapter inputs stable during a build. Missing/corrupt cache receipts rebuild;
+old timestamp-only objects are not silently accepted. JPEG XL still uses its
+separate CMake dependency machinery, and every driver link remains explicit.
+Cache checks do not qualify an SDK binary or change the production v1 protocol.
+
+Run the Adobe-free cache controls with
+`python3 tests/native_object_cache/run.py`. They compile tiny original C files
+without executing them and include the actual builder function plus its previous
+stale-cache counterexample. No SDK link/load/runtime test is performed.
+
 Obtain the [official Adobe SDK](https://www.adobe.com/go/dng_sdk) and read its
 `LICENSE.txt`. Keep the unpacked SDK outside this repository. This directory
 contains original adapter/build/test code, and does not vendor Adobe sources.

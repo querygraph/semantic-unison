@@ -4,6 +4,20 @@
 
 ## Live implementation handoff
 
+* SDK object-cache correction (2026-10-14): builder object reuse now checks
+  compiler/options/environment, compiler-discovered source/transitive/system
+  header contents and object contents rather than modification times. Inputs
+  changed during compilation reject the output; an interrupted/corrupt receipt
+  cannot validate a partial object. Thirteen actual clang controls on owned
+  original C pass, including restored timestamps, escaped dependency paths,
+  changed flags, corrupt object/receipt, missing dependency file and retry.
+  The actual current builder recompiles a changed transitive header while its
+  exact previous function retains the stale object. This is build-component
+  proof only: no SDK linking, initialization, validation or photo access occurred.
+  JPEG XL CMake caching, SDK runtime and uncooperative-writer atomicity are not
+  upgraded by this result.
+  [Evidence](tests/native_object_cache/qualification.json).
+
 * Local build/run separation (2026-10-14): `tests/build_snapshot.py` now supports
   Make or Dune and saves source/compiler/binary pins plus actual build/self-test
   exits in its retained snapshot. [Local commands](doc/local-build-and-tests.md)
