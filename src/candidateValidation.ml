@@ -83,12 +83,17 @@ let validate_file ~reservation ~validators ~destination path =
   let supervisor = runtime.SemanticRuntime.supervisor
   and budget = runtime.SemanticRuntime.cpu_budget
   and pool = runtime.SemanticRuntime.pool in
+  let requirements = CandidateValidators.maximum_resources validators in
+  if BackendResources.cpu_lanes requirements > budget then
+    raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
+  let payload_bytes,descriptors = BackendResources.add_cost requirements
+    ~bytes:1048576 ~descriptors:9 in
   let candidate = Fspath.toString path in
   let recognizers = List.map (fun (validator:CandidateValidator.selected) ->
     validator.recognition,
     FormatRecognition.matches_filename validator.recognition destination) validators in
   SemanticRuntime.with_cancellation (fun cancellation ->
-    SemanticRuntime.with_admission ?reservation cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
+    SemanticRuntime.with_admission ?reservation cancellation ~payload_bytes ~descriptors (fun () ->
       (* Recognition and the initial full digest use the same held input. Close
          that owner before helper execution; every phase retains this one loan. *)
       BorrowedWork.bind
@@ -103,7 +108,7 @@ let validate_file ~reservation ~validators ~destination path =
           else
           let context = {
             CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;
-            expected=snapshot_of_fingerprint fingerprint;
+            expected=snapshot_of_fingerprint fingerprint;resources=requirements;
             inspect=snapshot pool cancellation;
             execute=SemanticRuntime.with_io_file cancellation candidate;
           } in
@@ -111,7 +116,7 @@ let validate_file ~reservation ~validators ~destination path =
             | [] -> Abort.checkAll (); return ()
             | (validator:CandidateValidator.selected)::rest ->
                 Abort.checkAll ();
-                BorrowedWork.bind (fun () -> validator.validate context) (fun () -> invoke rest) in
+                BorrowedWork.bind (fun () -> validator.validate {context with resources=validator.resources}) (fun () -> invoke rest) in
           invoke selected
       | Some _ -> fail (Util.Transient "Inconsistent validation recognition fingerprint"))))
 let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =

@@ -64,13 +64,15 @@ def main():
     compiler = Path(shutil.which(args.ocamlopt) or args.ocamlopt).resolve()
     makefile = (build / "Makefile.OCaml").read_text()
     all_modules = objects(makefile, "OCAMLOBJS")
-    modules = all_modules[:all_modules.index("dngCandidateValidation.cmx") + 1]
+    # Runtime now follows the validator registry in the real link graph.
+    modules = all_modules[:max(all_modules.index("dngCandidateValidation.cmx"),
+                              all_modules.index("semanticRuntime.cmx")) + 1]
     native = objects(makefile, "COBJS")
     graph = list(dict.fromkeys(
-        [str(Path(module).with_suffix(ext)) for module in modules for ext in (".ml", ".mli")
+        [str(Path(module).with_suffix(ext)) for module in modules for ext in (".ml", ".mli", ".ox.mli.in")
          if (build / Path(module).with_suffix(ext)).exists()] +
         [str(Path(obj).with_suffix(".c")) for obj in native] +
-        ["Makefile.OCaml", "ubase/util.mli", "ubase/trace.mli"]))
+        ["Makefile.OCaml", "semantic_mode_filter.ml", "ubase/util.mli", "ubase/trace.mli"]))
     for name in modules + native + [str(Path(m).with_suffix(".cmi")) for m in modules]:
         if not (build / name).is_file():
             raise RuntimeError("complete compiler-matched native graph required: " + name)
@@ -196,11 +198,15 @@ def main():
             # every native dependent through the actual DNG companion.
             for obj in modules[modules.index("semanticWorkers.cmx"):]:
                 stem = Path(obj).with_suffix("")
+                mode_flags = []
+                if stem.name in ("semanticWorkers", "semanticFormats"):
+                    mode_flags = ["-pp", str(build / "semantic_mode_filter") + " " +
+                                  receipt["compiler"]["version"]]
                 interface = stem.with_suffix(".mli")
                 if (directory / interface).exists():
-                    command([compiler, *flags, "-c", interface], directory, "compile-" + str(interface).replace("/", "-"))
+                    command([compiler, *flags, *mode_flags, "-c", interface], directory, "compile-" + str(interface).replace("/", "-"))
                 source = stem.with_suffix(".ml")
-                command([compiler, *flags, "-c", source], directory, "compile-" + str(source).replace("/", "-"))
+                command([compiler, *flags, *mode_flags, "-c", source], directory, "compile-" + str(source).replace("/", "-"))
             binary = directory / "warning-test"
             command([compiler, *flags, "unix.cmxa", "str.cmxa", "probe.cmx", *modules,
                 "validationWarningTest.ml", *native, "-o", binary], directory, "link")

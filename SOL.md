@@ -4,6 +4,25 @@
 
 ## Live implementation handoff
 
+* M4-V generic backend resource admission (2026-10-14): trusted validators now
+  declare immutable CPU, covered/uncovered byte and descriptor requirements.
+  Regular-file publication reserves the componentwise maximum sequential
+  backend workspace in its existing envelope before staging. Validation borrows
+  it without a second debit; direct validation admits its complete cost.
+  Each backend receives its own exact declaration. First enabled selection pins
+  a declaration through disable/re-enable; changes require process restart.
+  Stock/Ox Make and Dune builds/selftests pass, as do 13 declaration/borrow
+  controls, three actual compiled-plugin receiving cases per compiler and all
+  21 existing receiving-path cases and 11 warning/cancellation controls per
+  compiler. The warning harness now follows actual reordered dependencies and
+  uses the production OxCaml selector rather than recompiling stock interfaces.
+  [Contract](doc/backend-resource-interop-v0.md),
+  [qualification](tests/backend_resources/qualification.json).
+  These are accounting declarations, not SDK/RSS enforcement. Production Adobe
+  v1 is unchanged. Full staged-directory admission, actual experimental SDK
+  runtime/codec/nested-CPU parity and whole-process memory remain open; full
+  M4-V/M6 is not complete. No Adobe/Photo/native preview work was invoked.
+
 * M4-V pluggable backend memory source (2026-10-14): generic native Budget
   owns a shared covered-allocation quota independent of Adobe. Injected adapter
   copies share capacity. Adobe's allocator adapts Allocate/Malloc/Free, charging
@@ -18,8 +37,9 @@
   [Generic contract](doc/backend-resource-interop-v0.md),
   [evidence](tests/sdk_memory/qualification.json). This bounds covered requested
   backing allocations, not RSS/whole SDK heaps: memory_data/XMP/ordinary heaps/
-  stacks remain outside. Core worst-case backend memory-plan reservations and
-  actual SDK runtime/codec parity are still pending; full M4-V/M6 stays open.
+  stacks remain outside. Core worst-case backend memory-plan reservations are
+  integrated as above; actual SDK runtime/codec parity remains pending and full
+  M4-V/M6 stays open.
   No Adobe invocation, Photo read, renderer or preview ownership change.
 
 * M6 child resource limits (2026-10-14): opt-in endpoint-local

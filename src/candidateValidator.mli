@@ -7,6 +7,7 @@ type context = {
   cpu_budget : int;
   candidate : string;
   expected : snapshot;
+  resources : BackendResources.t;
   inspect : string -> snapshot Lwt.t;
   execute : (unit -> HelperSupervisor.result Lwt.t) -> HelperSupervisor.result Lwt.t;
 }
@@ -26,7 +27,12 @@ type handle
 type selected = {
   recognition : FormatRecognition.handle;
   validate : context -> unit Lwt.t;
+  resources : BackendResources.t;
 }
-val trusted : (module S) -> handle
+(** Optional immutable owner policy. Capture on first enabled selection; a
+    changed declaration requires process restart, before staging/validation.
+    Default none preserves existing companions. Requirements are accounting
+    declarations; backend qualification/enforcement is a separate contract. *)
+val trusted : ?resources:(unit -> BackendResources.t) -> (module S) -> handle
 val recognition : handle -> FormatRecognition.handle
 val select : handle -> selected option

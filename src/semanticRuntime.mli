@@ -28,7 +28,8 @@ val make_publication_reservation : unit -> SemanticAdmission.reservation
 (** Allocate the caller's durable consumer owner, without debit or initializing
     the worker pool. Acquire before target preparation; close native ownership
     before retirement. Envelope: 24 descriptor credits and max(1 MiB,
-    8 * enabled payload limit + 256 KiB). This is selected-path accounting,
+    8 * enabled payload limit + 256 KiB), plus the maximum selected sequential
+    backend memory/parent-descriptor declaration. This is selected-path accounting,
     not whole-process FD/RSS or external-child admission. *)
 val admission_usage : unit -> SemanticAdmission.usage
 (** Owner-loop diagnostics without starting worker domains. *)

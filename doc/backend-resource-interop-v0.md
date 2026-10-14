@@ -12,8 +12,8 @@ checks independently of transfer optimization. Both use the shared owner-loop
 worker/helper CPU and I/O supervisor. Their metadata work already uses bounded
 payload/descriptor admission. The native `unison_memory::Budget` component now
 provides a backend-independent quota, with the Adobe allocator as one injected
-adapter. Core scheduling of backend memory declarations is the next integration
-step; it is not implemented by merely adding this C++ component.
+adapter. The owner-side validator registry now accepts immutable backend
+declarations, and the core includes them in publication/validation admission.
 
 Each backend must declare a versioned immutable resource plan before candidate
 creation: maximum runnable CPU lanes (including caller and nested codec work),
@@ -26,12 +26,36 @@ Each endpoint chooses its own compiled adapter, qualified executable and setting
 
 Core must reserve the complete worst-case selected plan with the publication
 transaction before opening/cloning staging. Refining recognition may release
-unused capacity; increasing a plan requires a fresh reservation/transaction.
+unused capacity; changing a selected declaration currently requires restarting
+Unison. Its first enabled selection pins the plan for the process lifetime,
+including across disable/re-enable. This prevents a backend from growing into
+space already reserved for retained metadata.
 Do not hold a metadata consumer lease and then queue for additional memory from
 the same gate: multiple staged candidates could deadlock while each waits for
 capacity held by the others. Preserve source headroom for bidirectional progress.
 CPU/I/O leases cover active work, with one budget for workers and native helpers;
 no second allocator/scheduler may invent an independent CPU/memory allowance.
+
+`CandidateValidators.register ~resources` supplies a trusted owner-side provider
+of `BackendResources.t`. The sequential validators share one workspace, so the
+core reserves the componentwise maximum CPU, memory and descriptor declaration,
+adding memory/descriptors to the existing publication envelope. It rejects a
+CPU declaration larger than the shared budget. Each invoked backend receives
+its own declaration in `CandidateValidator.context.resources`; the aggregate
+does not claim aggregate enforcement. Validation borrows the retained envelope
+without another debit or a queued upgrade. Standalone validation acquires the
+complete validation cost before recognition or helper execution. Existing
+companions default to no additional declaration. This is static trusted-code
+registration, not runtime loading of peer-supplied plugins.
+
+The regular-file publication path reserves before staging. Existing staged
+directory paths admit validation work, but this does not establish that their
+entire tree was reserved before creation or bound their manifests. CPU
+declarations do not force an arbitrary library to honor nested thread limits;
+the adapter must enforce and qualify that behavior using the shared supervisor.
+Memory estimates, covered allocation quotas and OS process limits remain
+separate. Production Adobe v1 does not gain experimental quota enforcement from
+this registration API.
 
 An in-process backend receives an injected quota owner and implements allocation
 and release callbacks for its library. Copies of `Budget` share one state and
@@ -75,6 +99,9 @@ virtual block deletion, caller/host lifetime separation, C callback failure,
 18-lane pressure and malloc-failure rollback are tested without Adobe linkage.
 Real SDK1.7.1 header compilation checks single/area/memory/area-memory modes.
 [Source qualification](../tests/sdk_memory/qualification.json) keeps these scopes
-separate. Actual SDK memory/codec parity, core memory-plan scheduling and full
-M4-V/M6 remain open. Photo Root continues owning preview generators, Lightroom
+separate. [Core admission qualification](../tests/backend_resources/qualification.json)
+records compiled synthetic-backend registration, no-double-debit admission,
+pre-staging rejection, immutable declarations and overflow/borrow controls on
+stock and OxCaml. Actual SDK memory/codec parity, whole-process memory,
+complete directory admission and full M4-V/M6 remain open. Photo Root continues owning preview generators, Lightroom
 oracles and publisher recovery; this work starts no competing native operation.

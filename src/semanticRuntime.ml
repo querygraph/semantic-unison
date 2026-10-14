@@ -15,9 +15,10 @@ let max_inflight = Prefs.createInt "semanticmaxinflight" 0 ~local:true
    CPU permits remain independent; payload and descriptor credits may lower concurrency."
 let payload_budget = Prefs.createInt "semanticpayloadbudget" 512 ~local:true
   ~category:(`Advanced `General)
-  "estimated retained semantic payload budget in MiB"
-  "Admission credits for proof and encoding buffers. This estimate is not \
-   a process RSS cap and excludes external SDK memory and directory manifests."
+  "estimated retained semantic/backend memory budget in MiB"
+  "Admission credits for proof/encoding buffers and registered backend memory \
+   declarations. This is not a process RSS cap; undeclared SDK heaps and directory \
+   manifests remain outside this estimate."
 let descriptor_budget = Prefs.createInt "semanticdescriptorbudget" 512 ~local:true
   ~category:(`Advanced `General)
   "reserved descriptor credits for semantic transactions"
@@ -169,8 +170,13 @@ let with_io_file cancellation path f =
       try Unix.close fd with Unix.Unix_error _ -> () end;
     raise e
 let publication_cost max_payload =
-  {SemanticAdmission.payload_bytes=max 1048576 (8 * max_payload + 262144);
-   descriptors=24}
+  let plan = CandidateValidators.maximum_resources (CandidateValidators.selected ()) in
+  let _,budget = helper_supervisor () in
+  if BackendResources.cpu_lanes plan > budget then
+    raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
+  let payload_bytes,descriptors = BackendResources.add_cost plan
+    ~bytes:(max 1048576 (8 * max_payload + 262144)) ~descriptors:24 in
+  {SemanticAdmission.payload_bytes;descriptors}
 let make_publication_reservation () =
   let _,_,_,_,_,max_payload,_,_ = settings () in
   SemanticAdmission.make_reservation (resource_gate ()) ~role:SemanticAdmission.Consumer

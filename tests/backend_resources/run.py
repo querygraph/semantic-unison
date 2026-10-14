@@ -1,0 +1,51 @@
+#!/usr/bin/env python3
+"""Actual core resource declarations via a compiled non-Adobe backend."""
+import argparse,pathlib,subprocess,tempfile,importlib.util,hashlib,json,os,re
+p=argparse.ArgumentParser();p.add_argument('--build',type=pathlib.Path,required=True);p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
+r=pathlib.Path(__file__).resolve().parents[2];src=a.build.resolve()/'src';w=pathlib.Path(tempfile.mkdtemp(prefix='unison-backend-resources-')).resolve();commands=[];cases=[]
+spec=importlib.util.spec_from_file_location('receive',r/'tests/validation_paths/run.py');v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
+H=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
+def objects(name):
+ text=(src/'Makefile.OCaml').read_text();m=re.search(r'^'+name+r' = (.*?)(?=\n\n)',text,re.M|re.S);assert m
+ return m.group(1).replace('\\\n',' ').replace('$(SYSTEM)','generic').replace('$(WINOBJS)','').replace('$(WINCOBJS)','').replace('$(OBJ_EXT)','.o').replace('.cmo','.cmx').split()
+def run(args,label):
+ x=subprocess.run(list(map(str,args)),cwd=w,capture_output=True,text=True,timeout=120);log=w/(label+'.log');log.write_text(x.stdout+x.stderr);commands.append(dict(args=list(map(str,args)),exit=x.returncode,log=str(log),sha256=H(log)));assert x.returncode==0,x.stdout+x.stderr
+j=dict(schema='unison-backend-resource-admission/1',work=str(w),commands=commands,cases=cases)
+try:
+ (w/'genericValidator.ml').write_bytes((r/'tests/backend_resources/plugin.ml').read_bytes())
+ inc=[w,src,src/'ubase',src/'lwt',src/'lwt/generic',src/'system',src/'system/generic'];flags=[str(v) for x in inc for v in ['-I',x]]+['-I','+unix','-I','+str']
+ run([a.compiler,*flags,'-c','genericValidator.ml'],'plugin-compile')
+ mods=objects('OCAMLOBJS');objs=[]
+ for m in mods:
+  if m=='main.cmx':objs.append(w/'genericValidator.cmx')
+  objs.append(src/m)
+ binary=w/'unison';run([a.compiler,*flags,'unix.cmxa','str.cmxa',*objs,src/'linktext.cmx',*[src/n for n in objects('COBJS')],'-o',binary],'plugin-link')
+ (w/'controls.ml').write_bytes((r/'tests/backend_resources/controls.ml').read_bytes())
+ run([a.compiler,*flags,'-c','controls.ml'],'controls-compile')
+ control=w/'controls';run([a.compiler,*flags,'unix.cmxa','str.cmxa',*[src/m for m in mods if m!='main.cmx'],w/'controls.cmx',*[src/n for n in objects('COBJS')],'-o',control],'controls-link')
+ run([control],'resource-controls')
+ for name,memory,lanes,succeeds in [('fits',4,1,True),('memory-too-large',32,1,False),('cpu-too-large',4,3,False)]:
+  s=v.Session(w/name,str(binary));serverlog=s.root/'server.tsv';clientlog=s.root/'client.tsv'
+  cfg=dict(s.config('server'),testvalidatorlog=str(serverlog),testbackendmemory=str(memory),testbackendlanes=str(lanes));(s.server_state/'endpoint.prf').write_text(''.join(f'{k} = {x}\n' for k,x in cfg.items()))
+  data=b'TOY0 independent backend memory declaration fixture';(s.left/'image.toy').write_bytes(data)
+  options=('-testvalidatorlog',str(clientlog),'-testbackendmemory',str(memory),'-testbackendlanes',str(lanes),'-semanticpayloadbudget','32','-semanticdescriptorbudget','64','-semanticvolumejobs','1')
+  log=s.sync(policy='off',options=options,success=succeeds)
+  if succeeds:
+   assert (s.right/'image.toy').read_bytes()==data
+   rows=[line.split('\t') for line in serverlog.read_text().splitlines()];assert len(rows)==1
+   record=rows[0];assert list(map(int,record[4:7]))==[4*1048576,1,2]
+   # No semantic format is enabled here: publication uses its 1 MiB floor
+   # plus the backend's 4 MiB declaration, retained through validation.
+   assert int(record[7])==5*1048576 and int(record[8])==26,record
+   cases.append(dict(name=name,status='passed',backendBytes=4*1048576,envelopeBytes=int(record[7]),envelopeDescriptors=int(record[8]),doubleDebit=False))
+  else:
+   assert not (s.right/'image.toy').exists() and not serverlog.exists()
+   assert not list(s.right.glob('.unison*')),'rejected plan created staging'
+   assert 'resource budget' in log if memory==32 else 'CPU declaration' in log
+   cases.append(dict(name=name,status='passed',rejectedBeforeStage=True))
+  assert not s.calls('client') and not s.calls('server');print('PASS',name,flush=True)
+ for f in ['backendResources.ml','backendResources.mli','candidateValidator.ml','candidateValidator.mli','candidateValidators.ml','candidateValidators.mli','candidateValidation.ml','semanticRuntime.ml','semanticRuntime.mli']:
+  assert H(src/f)==H(r/'src'/f),('source drift',f)
+ j.update(status='passed',binarySha256=H(binary),sourcePins={f:H(r/f) for f in ['tests/backend_resources/plugin.ml','tests/backend_resources/controls.ml','tests/backend_resources/run.py','tests/validation_paths/run.py']},compiledSourcePins={str(x):H(src/x) for x in mods if (src/x).is_file()},scope='Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.')
+finally:
+ j.setdefault('status','failed');a.receipt.write_text(json.dumps(j,indent=2)+'\n');(w/'RESULT.json').write_text(json.dumps(j,indent=2)+'\n')
