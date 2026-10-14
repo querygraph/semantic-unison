@@ -1,0 +1,52 @@
+{
+  "schema": "unison-photo-big-selection-adoption/1",
+  "utc": "2026-10-14T08:37:54.264644+00:00",
+  "state": "ORIGINAL_OWNER_SEALED_SAVED_METADATA_SELECTION_ACKNOWLEDGED",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/big-control-selection-v1/ORIGINAL-OWNER-SELECTION-ACK.json",
+      "bytes": 2400,
+      "sha256": "7b8f19dcd8ae6bc61ff2f4af611c5a26446cff15b8205687854695394f005adf"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/big-control-selection-v1/BIG-CONTROL-SELECTION.json",
+      "bytes": 77173,
+      "sha256": "5e605e761350b552c5eed5c6a32c3c93625d088f9444c69ece2c171bdefdccc6"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/big-control-selection-v1/REVIEW-RECEIPT.json",
+      "bytes": 1561,
+      "sha256": "5cbff3aa1b869c43e12ac1b0543a92d343d8bc83788573dac431e808da185b3c"
+    }
+  ],
+  "imageId": 86582588,
+  "rootFileId": 86582590,
+  "uuid": "5CEF3706-E96B-4DBB-83A5-965DFB4BE71C",
+  "settingsId": 86582602,
+  "digest": "288e8496c12fb4f21b95c6a3568761aa",
+  "orientation": "AB",
+  "highest": {
+    "width": 5976,
+    "height": 3992,
+    "bytes": 7842663
+  },
+  "ladderBytes": 10071969,
+  "physicalDisplayFit": {
+    "width": 4311.342685,
+    "height": 2880,
+    "ceilWidth": 4312
+  },
+  "scope": "Saved metadata/header/SOF selection only; not native decode, current owner binding or Quasar qualification",
+  "nativeRelease": false,
+  "productionRelease": false,
+  "fullRunRelease": false,
+  "owner": "Photo Root and original preview implementation",
+  "ordering": "Small 2272 mechanism first; BIG separately admitted after recipe/lifecycle",
+  "limits": {
+    "sources": 8,
+    "logicalStates": 16,
+    "aggregateCpuCredits": 18
+  },
+  "preserve": "Actual native5976 filename/geometry and digest; no synthesized5120 or digest relabel",
+  "normativeInterfaceVersion": "1.0.2"
+}
