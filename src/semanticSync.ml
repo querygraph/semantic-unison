@@ -321,10 +321,71 @@ let try_local_async_with_producer ~producer ~source ~basis ~directory ~staging =
 let try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging =
   try_local_async_internal ~reservation ?producer ~source ~basis ~directory ~staging ()
 
+(* Capture a compact base before an archive may refer to these exact bytes.
+   A later lookup still requires the agreeing previous-common fingerprint. *)
+let capture_common_base_async ~root ~path ~source =
+  let open Lwt in
+  if not (SemanticMergeCache.enabled ()) then return () else
+  let usage = SemanticRuntime.admission_usage () in
+  if usage.SemanticAdmission.transactions<>0 || usage.SemanticAdmission.pending<>0 then return () else
+  SemanticRuntime.with_transaction ~role:SemanticAdmission.Source ~max_payload:FormatExtension.max_region (fun cancellation ->
+    let owned = ref true in
+    let fd = Fs.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+    try
+    let close () = if !owned then (owned := false; close_fd_noerr fd) in
+    BorrowedWork.try_bind (fun () ->
+      let before = Unix.LargeFile.fstat fd in
+      let stable () =
+        let matches after = before.Unix.LargeFile.st_kind=Unix.S_REG &&
+          after.Unix.LargeFile.st_kind=Unix.S_REG && before.st_dev=after.st_dev &&
+          before.st_ino=after.st_ino && before.st_size=after.st_size &&
+          before.st_mtime=after.st_mtime && before.st_ctime=after.st_ctime in
+        matches (Unix.LargeFile.fstat fd) && matches (Fs.lstat source) in
+      let info = Fileinfo.get false source Path.empty in
+      if info.Fileinfo.typ<>`FILE || Osx.ressLength info.osX.Osx.ressInfo<>Uutil.Filesize.zero ||
+         not (stable ()) then raise (Util.Transient "DNG cache capture requires a stable regular data file");
+      let runtime = SemanticRuntime.get () in
+      let fingerprint () =
+        if HelperSupervisor.is_cancelled cancellation then raise (Util.Transient "DNG base capture cancelled");
+        let fingerprint=Os.data_only_fingerprint (Fingerprint.file_descriptor fd) in
+        if not (stable ()) then raise (Util.Transient "DNG base changed during fingerprinting");
+        return fingerprint in
+      BorrowedWork.bind (fun () -> IoAdmission.with_devices runtime.io cancellation
+        ~devices:(IoAdmission.devices_of_fds [fd]) (fun () ->
+          HelperSupervisor.with_cpu_permits runtime.supervisor ~weight:1 cancellation fingerprint))
+        (function
+         | Some (Some fingerprint) ->
+           let rec inspect = function
+             | [] -> return ()
+             | name::rest -> match FormatExtension.resolve name with
+               | None -> inspect rest
+               | Some extension -> BorrowedWork.bind
+                 (fun () -> SemanticWorkers.inspect runtime.pool cancellation ~extension fd)
+                 (function
+                  | Some {SemanticWorkers.proof=Ok proof;_} ->
+                    if not (stable ()) then raise (Util.Transient "DNG base changed during capture");
+                    let final_info=Fileinfo.get false source Path.empty in
+                    if Osx.ressLength final_info.Fileinfo.osX.Osx.ressInfo<>Uutil.Filesize.zero then
+                      raise (Util.Transient "DNG base resource fork changed");
+                    BorrowedWork.bind (fun () -> HelperSupervisor.with_cpu_permits
+                      runtime.supervisor ~weight:1 cancellation (fun () ->
+                        SemanticMergeCache.store ~root ~path ~fingerprint proof;return ()))
+                      (function Some () -> return () | None ->
+                        raise (Util.Transient "DNG base persistence cancelled"))
+                  | Some {SemanticWorkers.proof=Error _;_} -> inspect rest
+                  | None -> raise (Util.Transient "DNG base capture cancelled")) in
+           inspect [DngExtended.profile;DngSemantic.profile]
+         | _ -> raise (Util.Transient "DNG base capture admission cancelled")))
+      (fun () -> close ();return ())
+      (fun error -> close ();fail error)
+    with error ->
+      if !owned then (owned := false;close_fd_noerr fd);
+      raise error)
+
 (* This entry point is deliberately separate from transfer optimization. The
    merge owner provides a private saved base and the previous archive's exact
    fingerprint, not a peer's SDR claim or whichever replica was scanned first. *)
-let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
+let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~output =
   let open Lwt in
   let fail reason = raise (Util.Transient ("DNG scalar merge: " ^ reason)) in
   if Os.isPseudoFingerprint base_fingerprint then fail "the saved base has only a pseudo-fingerprint";
@@ -344,17 +405,27 @@ let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
       a.st_dev = b.st_dev && a.st_ino = b.st_ino && a.st_size = b.st_size &&
       a.st_mtime = b.st_mtime && a.st_ctime = b.st_ctime in
     BorrowedWork.try_bind (fun () ->
-      let base_fd = open_fd base [Unix.O_RDONLY] in
+      let runtime = SemanticRuntime.get () in
+      BorrowedWork.bind (fun () -> HelperSupervisor.with_cpu_permits
+        runtime.supervisor ~weight:1 cancellation (fun () -> return (match cache with
+          | None -> None
+          | Some (root,path) -> SemanticMergeCache.load ~root ~path ~fingerprint:base_fingerprint)))
+        (fun admitted ->
+      let cached = match admitted with Some cached -> cached | None -> fail "cache lookup cancelled" in
+      let base_fd = match cached with None -> Some (open_fd base [Unix.O_RDONLY]) | Some _ -> None in
       let left_fd = open_fd left [Unix.O_RDONLY] in
       let right_fd = open_fd right [Unix.O_RDONLY] in
       let output_fd = open_fd output [Unix.O_RDWR] in
-      let before = Unix.LargeFile.fstat base_fd in
-      if not (same before (Fs.stat base)) then fail "saved base name changed";
+      let before = Option.map Unix.LargeFile.fstat base_fd in
+      let base_stable () = match before,base_fd with
+        | Some before,Some fd -> same before (Unix.LargeFile.fstat fd) && same before (Fs.stat base)
+        | None,None -> true | _ -> false in
+      if not (base_stable ()) then fail "saved base name changed";
       List.iter (fun path ->
         let info = Fileinfo.get true path Path.empty in
         if info.Fileinfo.typ <> `FILE ||
            Osx.ressLength info.Fileinfo.osX.Osx.ressInfo <> Uutil.Filesize.zero then
-          fail "regular files without resource forks are required") [base;left;right;output];
+          fail "regular files without resource forks are required") ((if cached=None then [base] else []) @ [left;right;output]);
       let runtime = SemanticRuntime.get () in
       let verify_base () =
         if HelperSupervisor.is_cancelled cancellation then fail "archive verification cancelled";
@@ -362,8 +433,7 @@ let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
           (Fileinfo.get true base Path.empty) None in
         if not (Os.fullfingerprintEqual fingerprint base_fingerprint) then
           fail "saved base does not match the previous sync archive";
-        if not (same before (Unix.LargeFile.fstat base_fd) && same before (Fs.stat base)) then
-          fail "saved base changed during archive verification";
+        if not (base_stable ()) then fail "saved base changed during archive verification";
         if HelperSupervisor.is_cancelled cancellation then fail "archive verification cancelled";
         return () in
       let pool = runtime.pool in
@@ -371,7 +441,12 @@ let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
         | [] -> fail ("no compatible fixed-region profile: " ^ String.concat "; " (List.rev reasons))
         | extension :: rest ->
           BorrowedWork.bind (fun () -> BorrowedWork.all
-            [(fun () -> SemanticWorkers.inspect pool cancellation ~extension base_fd);
+            [(fun () -> match cached,base_fd with
+               | Some proof,_ when SemanticDelta.proof_profile proof=FormatExtension.profile extension ->
+                   return (Some {SemanticWorkers.proof=Ok proof;stats=Unix.LargeFile.fstat left_fd})
+               | Some _,_ -> return (Some {SemanticWorkers.proof=Error "cached profile differs";stats=Unix.LargeFile.fstat left_fd})
+               | None,Some fd -> SemanticWorkers.inspect pool cancellation ~extension fd
+               | _ -> fail "base unavailable");
              (fun () -> SemanticWorkers.inspect pool cancellation ~extension left_fd);
              (fun () -> SemanticWorkers.inspect pool cancellation ~extension right_fd)]) (function
           | [Some b;Some l;Some r] ->
@@ -383,7 +458,7 @@ let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
                | Some merged -> match merged.merge_plan with
                  | Error reason -> select (reason :: reasons) rest
                  | Ok plan ->
-                   if not (same before (Unix.LargeFile.fstat base_fd) && same before (Fs.stat base)) then
+                   if not (base_stable ()) then
                      fail "saved base changed before materialization";
                    BorrowedWork.bind (fun () -> SemanticWorkers.apply_report pool cancellation
                      ~extension plan ~basis:left_fd ~output:output_fd) (function
@@ -393,12 +468,19 @@ let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
           | _ -> fail "inspection cancelled") in
       (* Release the base I/O/CPU lease before any worker acquires its own.
          Holding it through inspection would deadlock a one-job filesystem. *)
-      BorrowedWork.bind (fun () -> IoAdmission.with_devices runtime.io cancellation
-        ~devices:(IoAdmission.devices_of_fds [base_fd]) (fun () ->
-          HelperSupervisor.with_cpu_permits runtime.supervisor ~weight:1 cancellation verify_base))
+      BorrowedWork.bind (fun () -> match base_fd with
+        | None -> return (Some (Some ()))
+        | Some fd -> IoAdmission.with_devices runtime.io cancellation
+          ~devices:(IoAdmission.devices_of_fds [fd]) (fun () ->
+            HelperSupervisor.with_cpu_permits runtime.supervisor ~weight:1 cancellation verify_base))
         (function Some (Some ()) -> select [] extensions
-         | _ -> fail "archive verification admission cancelled"))
+         | _ -> fail "archive verification admission cancelled")))
       (fun report -> close (); return report)
       (fun error -> close (); match error with
        | SemanticWorkers.Failed reason -> Lwt.fail (Util.Transient ("DNG scalar merge: " ^ reason))
        | _ -> Lwt.fail error))
+
+let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
+  merge_local_async_internal ~cache:None ~base_fingerprint ~base ~left ~right ~output
+let merge_local_async_with_cache ~cache ~base_fingerprint ~base ~left ~right ~output =
+  merge_local_async_internal ~cache:(Some cache) ~base_fingerprint ~base ~left ~right ~output

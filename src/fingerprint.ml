@@ -45,6 +45,18 @@ let file fspath path =
          raise e
     )
 
+(* Borrow one held data descriptor, restoring its shared cursor. The owner
+   must exclude concurrent descriptor use and verify file stability separately. *)
+let file_descriptor fd =
+  let position = Unix.LargeFile.lseek fd 0L Unix.SEEK_CUR in
+  let duplicate = Unix.dup ~cloexec:true fd in
+  let channel = try Unix.in_channel_of_descr duplicate with error ->
+    Unix.close duplicate;raise error in
+  Fun.protect ~finally:(fun () -> close_in_noerr channel;
+    ignore (Unix.LargeFile.lseek fd position Unix.SEEK_SET)) (fun () ->
+    LargeFile.seek_in channel 0L;
+    Digest.MD5.channel channel (-1))
+
 let maxLength = Uutil.Filesize.ofInt max_int
 let subfile path offset len =
   if len > maxLength then

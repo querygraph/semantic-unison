@@ -26,6 +26,10 @@ val try_local_async_reserved : reservation:SemanticAdmission.reservation ->
     None producer preserves an explicitly handed-off legacy materializer while
     retaining its work admission. No nested resource gate acquisition. *)
 
+val capture_common_base_async : root:Fspath.t -> path:Path.local -> source:Fspath.t -> unit Lwt.t
+(** Optional private packet capture; independently fingerprints and inspects a
+    stable source under shared resource/CPU/worker admission. The later archive,
+    not this capture, authorizes that exact fingerprint as common merge base. *)
 val merge_local_async : base_fingerprint:Os.fullfingerprint -> base:Fspath.t ->
   left:Fspath.t -> right:Fspath.t -> output:Fspath.t ->
   SemanticDelta.application Lwt.t
@@ -38,3 +42,9 @@ val merge_local_async : base_fingerprint:Os.fullfingerprint -> base:Fspath.t ->
     any descriptor; admission/cancellation use the existing runtime. The caller
     owns output deletion on failure, original preservation, validation and
     ordinary two-replica commit/recovery. No archive format change or rename. *)
+
+val merge_local_async_with_cache : cache:(Fspath.t * Path.local) ->
+  base_fingerprint:Os.fullfingerprint -> base:Fspath.t -> left:Fspath.t ->
+  right:Fspath.t -> output:Fspath.t -> SemanticDelta.application Lwt.t
+(** Resolve a private compact base under the agreeing previous archive binding;
+    a miss retains verified saved-file fallback. No current replica is a base. *)

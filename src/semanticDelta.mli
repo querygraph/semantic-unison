@@ -36,6 +36,16 @@ val observe : extension:FormatExtension.handle -> proof ->
 (** Worker-local optional advisory interpretation of the retained full editable
     packet bytes. Never call on an SDR peer claim or use it as transfer authority.
     SDE/0, SDR/0, preservation hashing and exact-byte classification are unchanged. *)
+val max_base_cache_size : int
+val encode_base_cache : proof -> string
+val decode_base_cache : string -> (proof, string) result
+(** Bounded canonical lossless single-XMP DNG base record; includes full and
+    preserved hashes, exact geometry, packet, canonical parsed scalar spans/value and shell hashes, policy/parser
+    versions and checksum.
+    Only the owner may use this after verifying trusted local storage and common
+    previous-archive binding. Parsing/checksum do not authenticate a base, and
+    a decoded record is never independent merge or transfer authority. Unknown
+    versions/profiles, incomplete peer proofs and incompatible packets reject. *)
 val binds_request : nonce:string -> base:proof -> t -> bool
 (** Match a response against the receiver's retained local proof and nonce
     before applying anything. *)

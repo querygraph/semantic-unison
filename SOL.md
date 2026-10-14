@@ -2052,3 +2052,24 @@ This proves actual public SDK v1 functional/lifecycle behavior with the containe
 Root independently accepted the same completed pilot and its actual owner closure; SDK coordination hold is released. [Pinned receiver adoption](tests/qualification/sdk-pilot-v2-root-closure-adoption-20261014.json) binds Root closure SHA 4ac67c8cae8903aaf7cc074b940c03b73d600f7666d0024831ac50c4ec3fbb67. No replay or new SDK slot is authorized. Photo Root/original preview ownership remains unchanged; broader receive-corpus/parallelism/resource gates remain open.
 
 Root final return acceptance also verifies all six pinned artifacts and embedded actual SDK result; [receiver adoption](tests/qualification/sdk-pilot-v2-root-return-adoption-20261014.json) records SHA c11b656b51ed6082855f17ff03a669ef91b59828a1153b156c9b392058672cdc. Existing functional/aggregate/owner closure scope is unchanged. BIG preview live-source filename/provenance repair belongs to Photo Root; SDK qualification is not preview fidelity and authorizes no new SDK window.
+
+## Compact persistent common metadata bases implemented
+
+Optional endpoint-local `semanticmergebasecache` now retains lossless DNG XMP,
+full/protected SHA-256 identities, geometry and canonical parsed scalar spans,
+value/shell hashes with explicit profile/policy/parser versions. Stasher captures
+stable common-version candidates on shared worker/resource/CPU admission. New
+held-descriptor legacy MD5 preserves its cursor and binds the archive fingerprint
+to the exact descriptor inspected; no independent pathname hash is substituted.
+Only the agreeing non-pseudo previous-common archive plus local root/path selects
+a cache object. No current replica or decoded peer claim is inferred as a base.
+
+Private UID/mode/name/held-file/size/link/checksum checks and no-replace publication
+protect local storage. Shards bound scans; records retain earlier generations for
+partial-commit recovery. Busy capture skips instead of recursively waiting on a
+retained publication lease. Cache misses/staleness/unsupported input retain verified
+full-backup fallback, otherwise preserve the conflict. Default stays off, no archive
+or wire change, Windows cache disabled. General backups/original preservation retain
+existing preferences; this packet cache contains no old image payload.
+
+[Usage/format/limits](doc/dng-compact-merge-base.md), [qualification](tests/semantic_base_cache/qualification.json): stock5.2.0/Ox5.2.0+ox Make+Dune+selftests pass; each compiler passes12 cache-only CLI cases (8804-byte record for65536-byte fixture),13 independent SDB controls,8 actual-object held-MD5/cursor/replacement/FD checks,21 receiving-path regressions; prior full-backup13-case merge regression remains passing at its scoped source snapshot. Wrong-generation and checksum-valid wrong-policy records refuse; partial second-receiver rejection recovers deterministically. All data is original synthetic and validators are mocks; zero SDK/Adobe/Photo calls. Broad M4-V/M5/M6/corpus/growth/complete resource and performance qualification remain open. This advances the original metadata-base requirement without claiming overall completion.

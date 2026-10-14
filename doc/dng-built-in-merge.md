@@ -10,6 +10,8 @@ merge = Name *.dng -> unison:dng-xmp-scalars/0
 The exact command identifier selects the built-in policy instead of launching a
 shell command. Other `merge` commands retain their existing behavior. This is
 independent of `semanticdng` transfer optimization and defaults to disabled.
+Compact metadata bases are an alternative to full saved merge bases; see
+[compact capture](dng-compact-merge-base.md) before choosing backup retention.
 Both current replicas must otherwise qualify for Unison's ordinary file-merge
 path; filesystem property selection and user/batch acceptance remain unchanged.
 
@@ -25,8 +27,9 @@ No base is inferred from either changed replica. Missing, stale or pseudo bases
 fail the merge and preserve both live inputs.
 
 Saved bases are full files through the existing optional backup mechanism,
-possibly cloned by the ordinary local-copy implementation. This does not yet
-provide a metadata-only persistent base cache. No archive serialization change
+possibly cloned by the ordinary local-copy implementation. The opt-in [compact base cache](dng-compact-merge-base.md) can retain just the
+lossless packet and protected/content identities instead; full saved files remain
+a verified fallback. No archive serialization change
 is required. Raw saved packets are freshly parsed with the selected built-in
 profile, parser and explicit scalar policy versions; stored parsed results are
 never reused across policy changes.
@@ -69,5 +72,5 @@ stock/OxCaml loopback replicas with synthetic DNG-shaped containers, exact byte
 convergence, both receiver gates, stale/missing bases and partial-commit recovery.
 These containers qualify the sync/merge contract, not Adobe decoding or real
 photographic rendering. No source photos, Lightroom caches or preview publisher
-are accessed. General XMP structures, relocated/grown packets, metadata-only base
-cache and broader M5/M6 qualification remain separate work.
+are accessed. General XMP structures, relocated/grown packets, broader M5/M6 qualification remain separate work. Compact-cache evidence has its
+own [scope](dng-compact-merge-base.md).

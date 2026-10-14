@@ -225,6 +225,79 @@ let decode_request s =
   Ok (nonce, {name;size;full;preserved;items})
  with Bad message -> Error message
 
+(* Lossless local base cache. This is not a network proof or archive authority.
+   The owner must bind trusted private storage to the previous common archive. *)
+let base_cache_magic = "SDB\000\000\000\000\001"
+let base_cache_policy = XmpMerge.policy ^ ";parser=1"
+let max_base_cache_size = 1048576 + max_request_size + 256
+let base_cache_view packet =
+  match XmpObservation.scalar_view packet with
+  | Error reason -> invalid_arg ("semantic base cache: " ^ reason)
+  | Ok view ->
+    let encoded = SemanticHash.string view.XmpObservation.shell ^
+      u64 (Int64.of_int (List.length view.scalars)) ^
+      String.concat "" (List.map (fun (scalar:XmpObservation.scalar) ->
+        u64 (Int64.of_int (String.length scalar.scalar_name)) ^ scalar.scalar_name ^
+        SemanticHash.string scalar.value ^ u64 (Int64.of_int scalar.first) ^
+        u64 (Int64.of_int scalar.last)) view.scalars) in
+    if String.length encoded>4096 then invalid_arg "semantic base cache parsed view limit";
+    encoded
+let encode_base_cache (base:proof) =
+  let invalid reason = invalid_arg ("semantic base cache: " ^ reason) in
+  if not (List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1"])
+  then invalid "unsupported profile";
+  let packet = match base.items with
+    | [item] when String.length item.contents = item.region.length &&
+                  item.region.length <= 1048576 &&
+                  SemanticHash.string item.contents = item.digest -> item.contents
+    | _ -> invalid "full single metadata packet required" in
+  let parsed = base_cache_view packet in
+  let request = encode_request ~nonce:(String.make 32 '\000') base in
+  let payload = base_cache_magic ^ u64 (Int64.of_int (String.length base_cache_policy)) ^
+    base_cache_policy ^ u64 (Int64.of_int (String.length request)) ^ request ^
+    u64 (Int64.of_int (String.length packet)) ^ packet ^
+    u64 (Int64.of_int (String.length parsed)) ^ parsed in
+  let encoded = payload ^ SemanticHash.string payload in
+  if String.length encoded > max_base_cache_size then invalid "record limit";
+  encoded
+
+let decode_base_cache encoded =
+  try
+    let length = String.length encoded in
+    if length > max_base_cache_size || length < 64 then raise (Bad "base cache size");
+    let stop = length - 32 and at = ref 0 in
+    let take count =
+      if count < 0 || count > stop - !at then raise (Bad "truncated base cache");
+      let result = String.sub encoded !at count in at := !at + count; result in
+    let small maximum =
+      let value = ref 0L in
+      String.iter (fun c -> value := Int64.logor (Int64.shift_left !value 8)
+        (Int64.of_int (Char.code c))) (take 8);
+      if !value < 0L || !value > Int64.of_int maximum then raise (Bad "base cache limit");
+      Int64.to_int !value in
+    if SemanticHash.string (String.sub encoded 0 stop) <> String.sub encoded stop 32
+    then raise (Bad "base cache checksum");
+    if take 8 <> base_cache_magic then raise (Bad "unknown base cache version");
+    let policy = take (small 128) in
+    if policy <> base_cache_policy then raise (Bad "base cache policy/parser mismatch");
+    let request = take (small max_request_size) in
+    let nonce, claim = match decode_request request with
+      | Ok result -> result | Error reason -> raise (Bad reason) in
+    if nonce <> String.make 32 '\000' then raise (Bad "base cache nonce");
+    let packet = take (small 1048576) in
+    let parsed = take (small 4096) in
+    if parsed <> base_cache_view packet then raise (Bad "base cache parsed view mismatch");
+    if !at <> stop then raise (Bad "trailing base cache bytes");
+    let base = match claim.items with
+      | [item] when String.length packet = item.region.length &&
+                    SemanticHash.string packet = item.digest ->
+          {claim with items=[{item with contents=packet}]}
+      | _ -> raise (Bad "base cache packet mismatch") in
+    (* Re-encode validates supported profile and parser plus canonical form. *)
+    if encode_base_cache base <> encoded then raise (Bad "noncanonical base cache");
+    Ok base
+  with Bad reason | Invalid_argument reason -> Error reason
+
 let binds_request ~nonce ~(base:proof) t =
   t.nonce = nonce && t.profile = base.name && t.size = base.size &&
   t.base_digest = base.full && t.preserved = base.preserved &&

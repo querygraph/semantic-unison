@@ -1494,11 +1494,11 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
             | NoUpdates, Updates (_, PrevFile (_, fp, _, _))
             | Updates (_, PrevFile (_, fp, _, _)), NoUpdates -> fp
             | _ -> raise (Util.Transient "DNG scalar merge requires a common previous archive") in
-          if arch = None then
+          if arch = None && not (SemanticMergeCache.enabled ()) then
             raise (Util.Transient "DNG scalar merge requires a saved common version; enable backupcurrent before synchronization");
           copy [(working1,new1)];
-          let report = Lwt_unix.run (SemanticSync.merge_local_async
-            ~base_fingerprint
+          let report = Lwt_unix.run (SemanticSync.merge_local_async_with_cache
+            ~cache:(fspath1,localPath1) ~base_fingerprint
             ~base:(Fspath.concat workingDirForMerge workingarch)
             ~left:(Fspath.concat workingDirForMerge working1)
             ~right:(Fspath.concat workingDirForMerge working2)

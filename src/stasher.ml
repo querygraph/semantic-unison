@@ -439,7 +439,7 @@ let backup fspath path (finalDisposition : [`AndRemove | `ByCopying]) arch =
 (*------------------------------------------------------------------------------------*)
 
 let rec stashCurrentVersion fspath path sourcePathOpt =
-  if shouldBackupCurrent path then
+  if shouldBackupCurrent path || SemanticMergeCache.enabled () then
     Util.convertUnixErrorsToTransient "stashCurrentVersion" (fun () ->
       let sourcePath = match sourcePathOpt with None -> path | Some p -> p in
       debug (fun () -> Util.msg "stashCurrentVersion of %s (drawn from %s) in %s\n"
@@ -457,13 +457,23 @@ let rec stashCurrentVersion fspath path sourcePathOpt =
                          stashCurrentVersion fspath (Path.child path n) None)
                      (Os.childrenOf fspath path))
       | `SYMLINK ->
-          begin match backupPath fspath path with
+          if shouldBackupCurrent path then begin match backupPath fspath path with
           | None -> ()
           | Some (stashFspath,stashPath) ->
               Os.symlink stashFspath stashPath (Os.readLink fspath sourcePath)
           end
       |	`FILE ->
-          begin match backupPath fspath path with
+          if SemanticMergeCache.enabled () &&
+             Globals.mergeCmdForPath (Path.makeGlobal path)="unison:dng-xmp-scalars/0" then begin
+            (* Best effort, never stall ordinary sync or guess a missing base. *)
+            try Lwt_unix.run (SemanticSync.capture_common_base_async ~root:fspath ~path
+              ~source:(Fspath.concat fspath sourcePath)) with
+            | Util.Transient reason | SemanticWorkers.Failed reason | Invalid_argument reason ->
+                debug (fun () -> Util.msg "DNG base capture declined: %s\n" reason)
+            | Unix.Unix_error (error,operation,_) ->
+                debug (fun () -> Util.msg "DNG base capture declined: %s: %s\n" operation (Unix.error_message error))
+          end;
+          if shouldBackupCurrent path then begin match backupPath fspath path with
           | None -> ()
           | Some (stashFspath, stashPath) ->
               Copy.localFile
