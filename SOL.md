@@ -4,6 +4,19 @@
 
 ## Live implementation handoff
 
+* M5 scalar packet kernel (2026-10-14): explicit policy
+  org.firstpair.xmp-scalars-three-way/0 captures lossless Rating/Label attribute
+  spans through the bounded parser. Exact non-allowlisted shell bytes must match;
+  scalar one-sided/equal/disjoint edits converge deterministically, while
+  competing values, deletion/addition, namespace/unknown/rendering/structural
+  changes decline. Output is capped at1MiB. Stock runs25 controls; Ox executes
+  all25 in four checked domains. Existing968 observer and1029 independent XML
+  mutation checks pass per compiler. [Policy](doc/xmp-three-way-policy-v0.md),
+  [pins](tests/xmp_merge/qualification.json). This kernel does not yet enable
+  file merges: trusted archive-base capture, container capacity/materialization,
+  two-replica staging/validation and failure recovery remain M5 work. No photos
+  or Adobe/Lightroom are accessed.
+
 * Checked full-sync performance (2026-10-14): stock/Ox actual CLI binaries bind
   all349 frozen inputs. The warm same-host matrix passes72 rows/576 exact file
   updates with old hardlinks, no-op inode stability and native/process/fixture

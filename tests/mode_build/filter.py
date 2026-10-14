@@ -2,7 +2,7 @@
 import argparse,pathlib,subprocess,tempfile,shutil,hashlib,json
 p=argparse.ArgumentParser();p.add_argument('--filter',type=pathlib.Path,required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
 r=pathlib.Path(__file__).resolve().parents[2];w=pathlib.Path(tempfile.mkdtemp(prefix='unison-mode-filter-controls-',dir='/private/tmp'));cases=[]
-modules=['semanticHash','semanticFile','semanticMailbox','formatRecognition','dngRecognition','formatExtension','xmpObservation','dngSemantic','dngExtended','jpegSemantic','semanticDelta','semanticWorkers','semanticFormats']
+modules=['semanticHash','semanticFile','semanticMailbox','formatRecognition','dngRecognition','formatExtension','xmpObservation','xmpMerge','dngSemantic','dngExtended','jpegSemantic','semanticDelta','semanticWorkers','semanticFormats']
 for n in modules:
  for suffix in (['.ml','.mli'] if n=='semanticWorkers' else ['.ml','.mli','.ox.mli.in']):shutil.copyfile(r/'src'/(n+suffix),w/(n+suffix))
 def run(name,version,path,expected=None,reject=False):

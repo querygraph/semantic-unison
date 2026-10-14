@@ -76,7 +76,7 @@ OCAMLOBJS = \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
           borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
           semanticHash.cmo semanticFile.cmo formatExtension.cmo formatRecognition.cmo \
-          xmpObservation.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
+          xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo semanticRuntime.cmo supervisedExternal.cmo semanticSync.cmo semanticRemote.cmo \
           candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
@@ -311,6 +311,15 @@ semanticFormats.cmo: semanticFormats.ml semanticFormats.cmi semantic_mode_filter
 
 semanticFormats.cmx: semanticFormats.ml semanticFormats.cmi semantic_mode_filter$(EXEC_EXT)
 	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFormats.ml
+
+xmpMerge.cmi: xmpMerge.mli xmpMerge.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.mli
+
+xmpMerge.cmo: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.ml
+
+xmpMerge.cmx: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.ml
 
 .mli.cmi:
 	@echo "$(CAMLC): $< ---> $@"

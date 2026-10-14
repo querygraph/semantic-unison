@@ -57,3 +57,15 @@ val observe : string -> (observation, string) result
     [xmpmeta] toolkit attributes are structural and are not emitted as
     properties.  This observation is consequently neither a complete packet
     fingerprint nor an Adobe rendering/dependency interpretation. *)
+
+(** Lossless scalar view for the explicitly versioned reconciliation policy.
+    Only xmp:Rating and xmp:Label Description attributes are supported edits.
+    All other bytes remain in [shell], including subjects/namespaces, qualifiers,
+    unknown properties, rendering data and packet padding. Attribute XML entity
+    and whitespace normalization determines [value]; [encoded] retains exact
+    bytes. Rating must normalize to -1 or0..5; Label is at most256 UTF-8 bytes,
+    with at most4096 encoded bytes. Element forms are unsupported. *)
+type scalar = { scalar_name : string; first : int; last : int;
+                value : string; encoded : string }
+type scalar_view = { scalars : scalar list; shell : string }
+val scalar_view : string -> (scalar_view, string) result

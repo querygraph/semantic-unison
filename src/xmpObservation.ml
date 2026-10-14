@@ -569,3 +569,44 @@ let observe input =
     let r, root = read_document input in
     Ok (collect r (rdf_root r root))
   with Parse_error reason -> Error reason
+
+(* Policy data is deliberately separate from advisory property categories:
+   Descriptive alone does not grant authority to merge. *)
+type scalar = { scalar_name : string; first : int; last : int;
+                value : string; encoded : string }
+type scalar_view = { scalars : scalar list; shell : string }
+let scalar_view input =
+  try
+    let r,root=read_document input in
+    let rdf=rdf_root r root in
+    ignore(collect r rdf);
+    let selected=ref [] in
+    let allowed uri local = uri=xmp_uri && (local="Rating" || local="Label") in
+    List.iter(fun description ->
+      List.iter(fun attribute ->
+        if allowed attribute.attribute_uri attribute.attribute_local then begin
+          let first=attribute.value_first and last=attribute.value_last in
+          if last-first>4096 then fail "scalar encoding limit";
+          let value=decode_attribute input first last in
+          if attribute.attribute_local="Rating" then begin
+            if not(List.mem value ["-1";"0";"1";"2";"3";"4";"5"])
+            then fail "unsupported scalar rating"
+          end else if String.length value>256 then fail "scalar label limit";
+          selected:={scalar_name=attribute.attribute_name;first;last;value;
+            encoded=String.sub input first (last-first)} :: !selected
+        end) description.element_attributes;
+      List.iter(fun property ->
+        if allowed property.element_uri property.element_local then
+          fail "scalar element form unsupported") (structural_children r description))
+      (structural_children r rdf);
+    let scalars=List.sort(fun a b -> compare a.first b.first) !selected in
+    let shell=Buffer.create(String.length input) in
+    let at=ref 0 in
+    List.iter(fun scalar ->
+      Buffer.add_substring shell input !at (scalar.first- !at);
+      (* NUL is forbidden in validated XML, so this marker cannot collide
+         with a literal packet byte or a property boundary. *)
+      Buffer.add_char shell '\000';at:=scalar.last) scalars;
+    Buffer.add_substring shell input !at (String.length input- !at);
+    Ok {scalars;shell=Buffer.contents shell}
+  with Parse_error reason -> Error reason
