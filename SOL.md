@@ -2500,3 +2500,16 @@ rejects before acquisition and seven pure admission controls pass.
 Request is UNADMITTED; no past release reused. Original Photo owner retains all
 preview scheduling/rendering/publishing. Actual merged-output SDK qualification,
 production/camera/resource/performance and full goal remain open.
+
+
+### User and extension guide implementation alignment — 2026-10-14
+
+Source audit of SemanticFormats registration/selection found stale entry-guide
+claims: v0-only DNG shorthand, JPEG unsupported, no scalar merge and no Adobe
+throughput comparison. Updated [user guide](doc/semantic-sync.md) and
+[extension contract](doc/format-extensions.md) to match actual v1/v0 preference,
+separate JPEG opt-in, default exact/conflict behavior, separate narrow scalar
+merge/common-base policy, and the scoped historical1/18/36 cached validation
+measurements. No new runtime/performance claim or product behavior change.
+The pending merged-output executor/request/sourcepins remain unchanged and
+UNADMITTED. No SDK/Photo/Lightroom/compiler/benchmark invocation.

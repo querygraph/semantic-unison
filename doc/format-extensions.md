@@ -10,9 +10,10 @@ optimization and use normal exact copying.
 An extension does not override the expected target bytes. Plans bind the
 profile, basis, preserved complement, metadata extents, and exact target hash.
 Application rejects a mismatched profile before writing and verifies the
-completed private candidate. This is format-aware transfer classification;
-semantic conflict merging, concurrent metadata reconciliation, and treating
-different byte encodings as synchronized are not implemented.
+completed private candidate. This is format-aware transfer classification. Extension inspection itself does
+not merge conflicts or treat different byte encodings as synchronized. A separate
+opt-in [DNG scalar merge policy](dng-built-in-merge.md) uses a verified common
+base and the normal candidate validation/publication lifecycle.
 
 Register locally compiled modules on the owner before feature negotiation:
 
@@ -63,11 +64,13 @@ compiled module, including compatibility wrappers; it does not prove that the
 module follows this contract. Review each extension and its dependencies for
 domain safety and conservative classification before registering it.
 
-The production profiles are the conservative DNG XMP v0/v1 profiles. Worker
-tests register a second synthetic format and run it through the same generic
-inspection, planning, and application path, including a mismatched-profile
-no-write test. That fixture establishes generic dispatch; it does not provide
-a JPEG implementation or validate additional real formats.
+The built-in profiles are conservative DNG XMP v0/v1 and
+[JPEG standard XMP v0](jpeg-semantic-profile.md). Each requires explicit opt-in;
+DNG shorthand selects only DNG. JPEG uses the same generic inspection, planning,
+application, negotiation and receiving pipeline. Worker tests also register a
+synthetic format and include a mismatched-profile no-write test. Real profile
+qualification is recorded separately; generic dispatch alone does not validate
+a new format or make its parser safe.
 
 Receiving validation is a separate companion interface, not an inspector
 eligibility result. Register `CandidateValidator.S` modules in

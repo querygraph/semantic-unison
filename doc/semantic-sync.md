@@ -11,19 +11,23 @@ An example Unison profile enables the DNG extension:
 root = /absolute/first/root
 root = /absolute/second/root
 clone = auto
-semanticprofile = org.firstpair.dng-xmp/0
+semanticdng = true
 semanticworkers = 0
 ```
 
-`semanticdng = true` is an equivalent shorthand for this profile.
+`semanticdng = true` enables both built-in DNG XMP profiles, preferring the
+extended `/1` profile when negotiated. To select one version only, use
+`semanticprofile = org.firstpair.dng-xmp/1` or `/0` explicitly.
 `semanticworkers = 0` selects physical cores on macOS, falling back to available
 logical CPUs on other platforms or if topology is unavailable. A positive
 integer sets a per-process budget shared by semantic workers and validators.
 On the tested 18-core/36-thread Mac, automatic mode uses 18; set
 `semanticworkers = 36` to try all logical CPUs. Cached hashing was about 10%
 faster with 36 in the [recorded comparison](../bench/semantic/README.md), while
-Adobe throughput has not yet been compared. Thread counts inside a validator
-consume the same budget.
+the [cached synthetic Adobe comparison](../bench/adobe/README.md) also measured
+1/18/36-worker validation throughput. Neither comparison establishes a general
+photographic-corpus or full-sync speedup. Production validation uses one thread
+per file; concurrent files consume the shared budget.
 Profiles are trusted, compiled extensions, selected by exact versioned ID.
 Neither extension code nor helper commands are accepted from a peer.
 
@@ -36,17 +40,27 @@ acceleration may still share blocks. `require` fails an eligible receiver
 update when the required clone is unavailable; it is not a universal guarantee
 that no ordinary copy occurs. Other platforms retain existing transfer paths.
 
-The DNG profile accepts a conservative classic TIFF subset with one bounded
-embedded XMP packet. It requires the packet to keep its offset and length and
+The DNG profiles accept conservative TIFF subsets with one bounded embedded
+XMP packet. [Profile v0](dng-profile-v0.md) covers classic TIFF;
+[profile v1](dng-profile-v1.md) also covers bounded BigTIFF and embedded camera
+profile structures in either byte order. It requires the packet to keep its offset and length and
 every other byte to match. It hashes all preserved bytes and verifies the
 complete staged target before using the normal property, fingerprint, rename
 and archive lifecycle. Raw-image digests cannot replace those checks. XMP
 changes may affect rendering even when raw samples stay identical.
 
 Changed packet layout, opaque/private structures, unsupported DNG variants,
-and older peers use ordinary exact-byte transfer. The extension does not
-currently merge conflicting metadata or treat differently encoded files as
-equal. JPEG is a proposed second profile and is not yet supported.
+and older peers use ordinary exact-byte transfer. Default synchronization preserves conflicts and requires exact bytes. Optional
+[scalar reconciliation](dng-built-in-merge.md) can merge narrowly defined DNG
+XMP fields using a verified common base; unsupported/growing/rendering changes
+remain conflicts. [Compact common bases](dng-compact-merge-base.md) are separately
+opt-in and do not replace backups.
+
+The implemented [JPEG XMP profile](jpeg-semantic-profile.md) is enabled separately
+with `semanticprofile = org.firstpair.jpeg-xmp/0`. It uses the same exact transfer
+and clone pipeline, protects EXIF/ICC/entropy and other nonpacket bytes, and
+follows ordinary fallback for unsupported layouts. DNG shorthand does not enable
+JPEG; DNG validation does not validate JPEG.
 
 To enable validation, build and qualify the [Adobe SDK driver](../tools/adobe-validator/README.md),
 then configure `adobevalidate = require` and its executable, SHA-256 pin and
@@ -120,8 +134,8 @@ Build and test references:
 
 Reduced logical writes and transfer payloads do not establish physical APFS
 write savings or elapsed-time speedups. Verification and optional raw decoding
-still read file contents. Performance, broader platform coverage, semantic
-reconciliation and production corpus qualification remain separate work.
+still read file contents. Representative performance, broader platform coverage, broader reconciliation
+policies and production corpus qualification remain separate work.
 
 Explicit diff/details now includes extension-defined property observations when
 both peers support `semantic-inspect-v1`. DNG reports separate potentially
