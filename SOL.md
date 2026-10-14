@@ -2075,3 +2075,11 @@ existing preferences; this packet cache contains no old image payload.
 [Usage/format/limits](doc/dng-compact-merge-base.md), [qualification](tests/semantic_base_cache/qualification.json): stock5.2.0/Ox5.2.0+ox Make+Dune+selftests pass; each compiler passes12 cache-only CLI cases (8804-byte record for65536-byte fixture),13 independent SDB controls,8 actual-object held-MD5/cursor/replacement/FD checks,21 receiving-path regressions; prior full-backup13-case merge regression remains passing at its scoped source snapshot. Wrong-generation and checksum-valid wrong-policy records refuse; partial second-receiver rejection recovers deterministically. All data is original synthetic and validators are mocks; zero SDK/Adobe/Photo calls. Broad M4-V/M5/M6/corpus/growth/complete resource and performance qualification remain open. This advances the original metadata-base requirement without claiming overall completion.
 
 Photo Root scoped namespace-import milestone [received and pinned](doc/photo-namespace-import-scoped-adoption-20261014.json): standalone host/import outside Classic succeeded and closed, zero RAW/render calls; independent no-rerun addendum distinguishes actual native success from original parser FAILED_CLOSED on the exact memory-manager stdout trailer. Duplicate ObjC-class warnings remain unresolved rendering risk. No new Unison/SDK/native slot, rendering capability, replay or ownership change is inferred; normative preview contract1.0.2 stays unchanged.
+
+Compact-base private storage qualification now links actual unchanged Make cache
+objects on stock5.2.0/Ox5.2.0+ox: each passes16 finite controls,256 valid loads,
+repeated malformed/untrusted/missing/directory rejection with unchanged FD counts,
+nonreplacement/path binding and4096-entry capacity refusal without temp residue.
+Existing records remain usable at capacity. [Evidence](tests/semantic_base_cache/storage-qualification.json).
+No Adobe/Photo invocation or implementation behavior change. Concurrent mutation,
+allocation failures, crash durability, global quota and full M4-V/M5/M6 remain open.

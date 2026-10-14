@@ -20,3 +20,15 @@ actual Safe.spawn domain. The descriptor probe links the actual native objects
 and verifies eight MD5 compatibility, cursor, path replacement and FD controls.
 These are deterministic functional tests, not fuzzing or SDK qualification.
 All retained private workspaces/logs are reported in the receipts.
+
+Private storage checks link the compiler-matched Make objects directly:
+
+```sh
+python3 tests/semantic_base_cache/storage.py --compiler /absolute/ocamlopt \
+  --build /absolute/current/Make/snapshot --report /private/tmp/cache-storage.json
+```
+
+These sixteen finite controls cover repeated descriptor settlement, trust checks,
+nonreplacement, path binding and shard capacity. They use disposable files and
+do not invoke Adobe. See [sealed evidence](storage-qualification.json). They do
+not establish crash durability, concurrent-mutator or allocation-fault behavior.

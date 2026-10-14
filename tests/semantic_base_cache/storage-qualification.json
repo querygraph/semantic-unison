@@ -1,0 +1,91 @@
+{
+  "schema": "unison-compact-base-storage-qualification/1",
+  "utc": "2026-10-14T19:51:11.068353+00:00",
+  "status": "passed",
+  "source_pins": {
+    "src/semanticMergeCache.ml": {
+      "bytes": 5701,
+      "sha256": "05735a8deb04bf266006ffd60e0a986dad0617f738875ea25b4d8905af1c5e1a"
+    },
+    "src/semanticMergeCache.mli": {
+      "bytes": 544,
+      "sha256": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+    },
+    "tests/semantic_base_cache/storage.ml": {
+      "bytes": 4734,
+      "sha256": "2f62bf3f78fe90eb959bf0ecc88638f4417332aa7fcb04dc30362abcca67404d"
+    },
+    "tests/semantic_base_cache/storage.py": {
+      "bytes": 3735,
+      "sha256": "cf501940c807c3e87c44dfbaaea1a13350f1d8e45b620c28f8acc0c86ecc9f0b"
+    }
+  },
+  "evidence": {
+    "stock": {
+      "receipt_path": "/private/tmp/unison-cache-storage-stock.json",
+      "pin": {
+        "bytes": 563,
+        "sha256": "eb8a6fe80ad9576baabc5a6087b52998fab98c79bdc35c62be0de53fe837ca57"
+      },
+      "receipt": {
+        "workspace": "/private/tmp/unison-cache-storage-sdqsm8j9",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-53yfll_5",
+        "cases": 16,
+        "compiler_version": "5.2.0",
+        "probe_source_sha256": "2f62bf3f78fe90eb959bf0ecc88638f4417332aa7fcb04dc30362abcca67404d",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "05735a8deb04bf266006ffd60e0a986dad0617f738875ea25b4d8905af1c5e1a",
+        "binary_sha256": "30a6f5657adb0f747ac3d8567a93628d455536cf3a81ca4d86e16a10eab1d18a"
+      },
+      "compile_log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "test_log": {
+        "bytes": 170,
+        "sha256": "58a820e75abd6f00f7dbc0e60a7a9f9abd1a6161b87e32301a7609cf427dfc9a"
+      }
+    },
+    "ox": {
+      "receipt_path": "/private/tmp/unison-cache-storage-ox.json",
+      "pin": {
+        "bytes": 566,
+        "sha256": "d0c2008818485dc249eedca6c68f0dc898c878b9246ec3c3435bc539450c02a8"
+      },
+      "receipt": {
+        "workspace": "/private/tmp/unison-cache-storage-ndcb2qcp",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9dxwkfh6",
+        "cases": 16,
+        "compiler_version": "5.2.0+ox",
+        "probe_source_sha256": "2f62bf3f78fe90eb959bf0ecc88638f4417332aa7fcb04dc30362abcca67404d",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "05735a8deb04bf266006ffd60e0a986dad0617f738875ea25b4d8905af1c5e1a",
+        "binary_sha256": "00b3cb955495653b31e5015fd2aebd2027244974c1f5f374143f0a6d97044b5d"
+      },
+      "compile_log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "test_log": {
+        "bytes": 170,
+        "sha256": "58a820e75abd6f00f7dbc0e60a7a9f9abd1a6161b87e32301a7609cf427dfc9a"
+      }
+    }
+  },
+  "controls": [
+    "256 valid loads with unchanged FD count",
+    "idempotent publication",
+    "32 repetitions each: bad checksum, truncated, oversized, permissive, hardlink, symlink, missing, directory",
+    "conflicting existing record is preserved",
+    "private directory and shard permissions",
+    "logical path binding",
+    "4096-entry shard rejects new publication without temporary residue",
+    "existing base usable even at capacity"
+  ],
+  "limits": [
+    "Original DNG-shaped data only; no Adobe or Photo calls",
+    "No concurrent-mutator, allocation-fault, crash/fsync-survival or global storage-quota guarantee",
+    "Native objects from pinned prior Make snapshots; cache ML/interface bytes match current source",
+    "Does not complete full M4-V/M5/M6 or performance qualification"
+  ]
+}
