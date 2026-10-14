@@ -14,11 +14,15 @@
 #if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
 #include "area_task_host.h"
 #endif
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+#include "memory_allocator.h"
+#endif
 #include <CommonCrypto/CommonDigest.h>
 #include <atomic>
 #include <cstdio>
 #include <cstring>
 #include <memory>
+#include <limits>
 #include <stdexcept>
 #include <string>
 #include <sys/stat.h>
@@ -62,14 +66,29 @@ public:
 };
 #if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
 using ValidationHostBase = UnisonAreaTaskHost;
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+static constexpr const char *driver_build = "unison-sdk171-2724-v3-area-memory-unqualified";
+#else
 static constexpr const char *driver_build = "unison-sdk171-2724-v2-area-unqualified";
+#endif
 #else
 using ValidationHostBase = dng_host;
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+static constexpr const char *driver_build = "unison-sdk171-2724-v3-memory-unqualified";
+#else
 static constexpr const char *driver_build = "unison-sdk171-2724-v1-single";
+#endif
 #endif
 class ValidationHost final : public ValidationHostBase {
 public:
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+  ValidationHost(uint32 threads,dng_memory_allocator *allocator)
 #if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+    : ValidationHostBase(threads,allocator) {}
+#else
+    : ValidationHostBase(allocator) { (void) threads; }
+#endif
+#elif defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
   explicit ValidationHost(uint32 threads) : ValidationHostBase(threads) {}
 #else
   explicit ValidationHost(uint32) {}
@@ -123,26 +142,54 @@ static FileHash hash_file(const char *path) {
   return {hex, size};
 }
 
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+static size_t requested_memory(const char *text) {
+  size_t value=0;
+  if(!*text || *text=='0')return 0;
+  for(const char *p=text;*p;p++) {
+    if(*p<'0'||*p>'9' || value>(std::numeric_limits<size_t>::max()-size_t(*p-'0'))/10)return 0;
+    value=value*10+size_t(*p-'0');
+  }
+  return value;
+}
+#endif
 int main(int argc, char **argv) {
   // Fixed protocol argv, no output/render/write options and no shell.
-  uint32 threads = argc == 10 ? requested_threads(argv[7]) : 0;
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+  constexpr int argument_count=12,path_index=11;
+  const size_t memory_limit=argc==argument_count?requested_memory(argv[9]):0;
+#else
+  constexpr int argument_count=10,path_index=9;
+#endif
+  uint32 threads = argc == argument_count ? requested_threads(argv[7]) : 0;
 #if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
   // This separate protocol is intentionally unavailable to the production
   // v1 caller. Compilation and synthetic scheduler tests are not SDK runtime
   // qualification, even if a user installs and pins this executable.
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+  const char *protocol = "--unison-dng-validation-area-memory-source-v0";
+#else
   const char *protocol = "--unison-dng-validation-area-source-v0";
+#endif
+#else
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+  const char *protocol = "--unison-dng-validation-memory-source-v0";
 #else
   const char *protocol = "--unison-dng-validation-v1";
+#endif
   if (threads != 1) threads = 0;
 #endif
-  if (argc != 10 || strcmp(argv[1], protocol) ||
+  if (argc != argument_count || strcmp(argv[1], protocol) ||
       strcmp(argv[2], "--expected-sha256") || strcmp(argv[4], "--expected-size") ||
       strcmp(argv[6], "--threads") || !threads ||
-      strcmp(argv[8], "--") || argv[9][0] != '/') {
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+      strcmp(argv[8], "--host-memory-bytes") || !memory_limit ||
+#endif
+      strcmp(argv[path_index-1], "--") || argv[path_index][0] != '/') {
     fprintf(stderr, "Expected %s arguments and the build's explicit thread allowance.\n", protocol);
     return 64;
   }
-  const char *path = argv[9];
+  const char *path = argv[path_index];
   FileHash file{"", 0};
   const char *structure = "invalid", *decode = "not_checked", *raw = "not_checked";
   int receipt_fd = dup(STDOUT_FILENO);
@@ -158,7 +205,14 @@ int main(int argc, char **argv) {
     gVerbose = false;
     dng_xmp_sdk::InitializeSDK();
     SXMPMeta::SetDefaultErrorCallback(xmp_error, nullptr, 10000);
+#if defined(UNISON_EXPERIMENTAL_MEMORY_BUDGET)
+    // Allocator is declared before the host/negative and outlives all joined
+    // area/codec calls and returned SDK buffers within this synchronous scope.
+    UnisonMemoryAllocator allocator(memory_limit);
+    ValidationHost host(threads,&allocator);
+#else
     ValidationHost host(threads);
+#endif
     host.SetIgnoreEnhanced(true); // Validate original raw, never an enhanced substitute.
     dng_file_stream stream(path);
     dng_info info;

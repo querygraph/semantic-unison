@@ -21,6 +21,8 @@ parser.add_argument("--fixture-only", action="store_true",
                     help="rebuild test fixture writer using existing SDK libraries; preserve validator and manifest")
 parser.add_argument("--experimental-area-task-host", action="store_true",
                     help="build a separately named UNQUALIFIED capped area-task adapter; never replaces the qualified v1 driver")
+parser.add_argument("--experimental-memory-budget", action="store_true",
+                    help="build a separately named UNQUALIFIED host-allocation budget adapter")
 args = parser.parse_args()
 sdk = args.sdk_root.resolve()
 build = args.build_dir.resolve()
@@ -29,7 +31,7 @@ if sys.platform != "darwin":
     parser.error("this qualified build currently supports macOS only")
 if args.jobs < 1:
     parser.error("--jobs must be positive")
-if args.fixture_only and args.experimental_area_task_host:
+if args.fixture_only and (args.experimental_area_task_host or args.experimental_memory_budget):
     parser.error("--fixture-only cannot select an experimental validator build")
 if "1.7.1 2724" not in (sdk / "DNG_ReadMe.txt").read_text():
     parser.error("requires reviewed Adobe SDK 1.7.1 build 2724")
@@ -104,6 +106,7 @@ jobs = [(p, dng_flags) for p in dng_sources] + [(p, xmp_flags) for p in xmp_sour
 if not args.fixture_only:
     driver_flags = dng_flags + (["-DUNISON_EXPERIMENTAL_AREA_TASK_HOST=1"]
                                if args.experimental_area_task_host else [])
+    if args.experimental_memory_budget: driver_flags += ["-DUNISON_EXPERIMENTAL_MEMORY_BUDGET=1"]
     jobs.append((here / "driver.cpp", driver_flags))
 
 def compile_one(job):
@@ -113,7 +116,7 @@ def compile_one(job):
     # Adapter headers affect the driver even when driver.cpp itself is unchanged.
     dependencies = [source]
     if source == here / "driver.cpp":
-        dependencies += [here / "area_scheduler.h", here / "area_task_host.h"]
+        dependencies += [here / p for p in ("area_scheduler.h", "area_task_host.h", "memory_budget.h", "memory_allocator.h")]
     if obj.exists() and obj.stat().st_mtime >= max(p.stat().st_mtime for p in dependencies):
         return obj
     cxx = source.suffix != ".c"
@@ -133,8 +136,8 @@ with concurrent.futures.ThreadPoolExecutor(max_workers=args.jobs) as pool:
 libraries = [jxl / p for p in ["lib/libjxl.a", "lib/libjxl_cms.a", "lib/libjxl_threads.a",
     "third_party/highway/libhwy.a", "third_party/brotli/libbrotlienc.a",
     "third_party/brotli/libbrotlidec.a", "third_party/brotli/libbrotlicommon.a"]]
-binary = build / ("unison-adobe-validator-area-unqualified" if args.experimental_area_task_host
-                  else "unison-adobe-validator")
+mode = ("area-memory" if args.experimental_area_task_host else "memory") if args.experimental_memory_budget else ("area" if args.experimental_area_task_host else "single")
+binary = build / ("unison-adobe-validator" if mode == "single" else "unison-adobe-validator-" + mode + "-unqualified")
 link_flags = [*libraries, "-lz", "-framework", "CoreFoundation", "-framework", "CoreServices",
               "-framework", "Security"]
 if not args.fixture_only:
@@ -149,20 +152,19 @@ if args.fixture_only:
     print("Fixture writer rebuilt; qualified driver and manifest unchanged.")
     raise SystemExit(0)
 digest = hashlib.sha256(binary.read_bytes()).hexdigest()
-experimental = args.experimental_area_task_host
+experimental = mode != "single"
 manifest = {"sdk": "Adobe DNG SDK 1.7.1 build 2724", "sdk_root": str(sdk),
             "sdk_license": str(sdk / "LICENSE.txt"), "executable": str(binary),
-            "executable_sha256": digest, "build_id": ("unison-sdk171-2724-v2-area-unqualified"
-                if experimental else "unison-sdk171-2724-v1-single"),
+            "executable_sha256": digest, "build_id": {"single":"unison-sdk171-2724-v1-single", "area":"unison-sdk171-2724-v2-area-unqualified", "memory":"unison-sdk171-2724-v3-memory-unqualified", "area-memory":"unison-sdk171-2724-v3-area-memory-unqualified"}[mode],
             "source_sha256": hashlib.sha256((here / "driver.cpp").read_bytes()).hexdigest(),
             "adapter_headers_sha256": {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
-                for p in (here / "area_scheduler.h", here / "area_task_host.h")},
+                for p in (here / name for name in ("area_scheduler.h", "area_task_host.h", "memory_budget.h", "memory_allocator.h"))},
             "qualification": ("SOURCE ONLY: Adobe runtime and multithread mode unqualified"
                 if experimental else "not yet tested; run qualify.py"),
             "threads": {"minimum": 1, "maximum": 128, "includes_caller": True}
-                if experimental else 1,
-            "protocol": "--unison-dng-validation-area-source-v0"
-                if experimental else "--unison-dng-validation-v1"}
-(build / ("build-manifest-area-unqualified.json" if experimental else "build-manifest.json"))\
+                if args.experimental_area_task_host else 1,
+            "protocol": {"single":"--unison-dng-validation-v1", "area":"--unison-dng-validation-area-source-v0", "memory":"--unison-dng-validation-memory-source-v0", "area-memory":"--unison-dng-validation-area-memory-source-v0"}[mode],
+            "host_allocation_budget": "explicit --host-memory-bytes; not RSS/full-process memory" if args.experimental_memory_budget else None}
+(build / ("build-manifest-" + mode + "-unqualified.json" if experimental else "build-manifest.json"))\
     .write_text(json.dumps(manifest, indent=2) + "\n")
 print(json.dumps(manifest, indent=2))

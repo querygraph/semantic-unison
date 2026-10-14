@@ -4,6 +4,24 @@
 
 ## Live implementation handoff
 
+* M4-V pluggable backend memory source (2026-10-14): generic native Budget
+  owns a shared covered-allocation quota independent of Adobe. Injected adapter
+  copies share capacity. Adobe's allocator adapts Allocate/Malloc/Free, charging
+  wrapper/header and SDK physical padding, preserving alignment/overflow and
+  returning null through codec C callbacks. Buffers retain state; failed
+  construction/malloc retires credits. Three normal/AVX/sanitized runs each pass
+  39 controls/50000 concurrent attempts, including held18-lane pressure and
+  two adapters sharing one pool; private capacity-negative and1000 malloc-failure
+  rollbacks pass. Actual SDK1.7.1 headers compile allfour driver modes without
+  linking/initializing Adobe. Separate source-only memory/area-memory argv,
+  build IDs/artifacts/manifests remain unavailable to production v1.
+  [Generic contract](doc/backend-resource-interop-v0.md),
+  [evidence](tests/sdk_memory/qualification.json). This bounds covered requested
+  backing allocations, not RSS/whole SDK heaps: memory_data/XMP/ordinary heaps/
+  stacks remain outside. Core worst-case backend memory-plan reservations and
+  actual SDK runtime/codec parity are still pending; full M4-V/M6 stays open.
+  No Adobe invocation, Photo read, renderer or preview ownership change.
+
 * M6 child resource limits (2026-10-14): opt-in endpoint-local
   `helperdescriptors` and pinned native `helperlimiter` now apply hard per-process
   limits to supervised copy/merge/diff and selected DNG validators. The fresh

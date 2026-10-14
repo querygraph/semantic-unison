@@ -48,8 +48,8 @@ class UnisonAreaTaskHost : public dng_host {
     }
   };
 public:
-  explicit UnisonAreaTaskHost(uint32 requested_threads)
-    : requested_threads_(unison_area::available_threads(requested_threads)) {}
+  explicit UnisonAreaTaskHost(uint32 requested_threads, dng_memory_allocator *allocator = nullptr)
+    : dng_host(allocator), requested_threads_(unison_area::available_threads(requested_threads)) {}
 
   uint32 PerformAreaTaskThreads() override {
     // Includes caller; prevents area-workers × nested-JXL-workers expansion.

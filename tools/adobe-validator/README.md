@@ -182,3 +182,25 @@ Primary implementation evidence in the separately obtained SDK:
 - `dng_sdk/source/dng_jxl.cpp`: explicit resizable decoder runner thread cap.
 - `libjxl/libjxl/lib/threads/resizable_parallel_runner.cc`: total-thread semantics.
 - `xmp/toolkit/source/XMP_LibUtils.hpp`: recoverable-error behavior and callbacks.
+
+An additional source-only host allocation adapter uses the SDK-independent
+`memory_budget.h` quota and `memory_allocator.h` SDK callbacks. Multiple adapters
+can share an injected quota rather than multiplying capacity. The quota accounts
+requested backing storage, headers, block objects and SDK physical padding.
+`Allocate` uses SDK memory-full/overflow behavior; codec `Malloc`/`Free` callbacks
+never unwind C++ exceptions through C. Buffers retain accounting state through
+release, and the synchronous driver owns the allocator through joined tasks.
+
+`--experimental-memory-budget` selects separately named unqualified memory or
+area-memory artifacts/manifests. Their argv protocols require explicit
+`--host-memory-bytes` and differ from the production v1 protocol. Current Unison
+cannot enable them as production v1. The known qualified v1 executable is not
+rebuilt by source-only checks. Actual SDK/codec parity and runtime resource/thread
+measurements remain required before a versioned caller enables these modes.
+
+Coverage is limited to the host allocator and its SDK JPEG XL bridge. Direct
+`dng_memory_data`, XMP/ordinary heaps, thread stacks and allocator caches remain
+outside this pool, so it is not a full process/RSS cap. The
+[pluggable resource contract](../../doc/backend-resource-interop-v0.md) records
+shared core-admission integration and remaining coverage. The
+[source tests](../../tests/sdk_memory/README.md) run no Adobe or photograph.
