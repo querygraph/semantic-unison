@@ -196,7 +196,74 @@ let scheduling_stress () =
     verify (Array.length(Sys.readdir "/dev/fd")=before) "stress descriptor leak") seeds;
   Printf.printf "PASS seeded scheduling stress seeds=%d jobs=%d completed=%d cancelled=%d checks=%d\n%!"
     (List.length seeds) (!completed + !cancelled) !completed !cancelled !checks
+let apply_scheduling_stress () =
+  let seeds=[1;17;103;4099;65537;20261014] in
+  let checks=ref 0 and completed=ref 0 and cancelled=ref 0 and late=ref 0 in
+  let verify value why=incr checks;check value why in
+  let bytes path =
+    let ch=open_in_bin path in
+    let value=really_input_string ch (in_channel_length ch) in close_in ch;value in
+  let original=bytes "extended-base.dng" and target_bytes=bytes "extended-target.dng" in
+  let proof path =
+    let file=fd path in
+    let result=SemanticFile.with_fd file (SemanticDelta.inspect (module DngExtended)) in
+    Unix.close file;match result with Ok p -> p | Error e -> failwith e in
+  let base=proof "extended-base.dng" and target=proof "extended-target.dng" in
+  let plan=match SemanticDelta.plan ~nonce:(String.make 32 's') ~base ~target with
+    | Ok p -> p | Error e -> failwith e in
+  let extension=FormatExtension.trusted (module DngExtended) in
+  List.iter (fun seed ->
+    let rng=Random.State.make [|seed|] in
+    let before=Array.length(Sys.readdir "/dev/fd") in
+    let cpu=1+Random.State.int rng 4 in
+    let b=budget cpu in
+    let pool=W.create ~workers:4 ~max_pending:32 ~budget:b in
+    for round=1 to 4 do
+      let jobs=List.init 16 (fun i ->
+        let path=Printf.sprintf "stress-stage-%d-%d-%d.dng" seed round i in
+        let ch=open_out_bin path in output_string ch original;close_out ch;
+        let basis=fd "extended-base.dng" in
+        let output=Unix.openfile path [Unix.O_RDWR;Unix.O_CLOEXEC] 0 in
+        let c=H.cancellation () in
+        let cancellation_delay=if i mod 2=0 then Some ([|0.;0.0001;0.001;0.005|].(Random.State.int rng 4)) else None in
+        let job=try_bind
+          (fun () -> W.apply_report pool c ~extension plan ~basis ~output)
+          (fun result ->
+            (* Caller descriptors must still be owned when worker settles. *)
+            verify ((Unix.LargeFile.fstat basis).Unix.LargeFile.st_size=Int64.of_int(String.length original)) "apply closed basis";
+            verify ((Unix.LargeFile.fstat output).Unix.LargeFile.st_size=Int64.of_int(String.length original)) "apply closed output";
+            Unix.close basis;Unix.close output;
+            (match result with None -> incr cancelled | Some report ->
+              incr completed;
+              verify (bytes path=target_bytes) "completed apply not exact target bytes";
+              verify (report.SemanticDelta.logical_bytes_written=String.length "<x>two</x>      " && report.write_calls=1)
+                "apply write report changed");
+            (* Cancelled output is never reused or published. *)
+            Unix.unlink path;return result)
+          (fun error -> Unix.close basis;Unix.close output;fail error) in
+        let timer=match cancellation_delay with None -> return () | Some delay ->
+          Lwt_unix.sleep delay >>= fun () -> H.cancel c;return () in
+        job,timer,cancellation_delay) in
+      let results=Lwt_unix.run(await(List.map (fun (job,_,_) -> job) jobs)) in
+      ignore(Lwt_unix.run(await(List.map (fun (_,timer,_) -> timer) jobs)));
+      List.iter2 (fun (_,_,delay) result -> match delay,result with
+        | None,None -> failwith "uncancelled apply lost result"
+        | Some _,Some _ -> incr late
+        | _ -> ()) jobs results;
+      verify (bytes "extended-base.dng"=original) "shared basis mutated";
+      verify (bytes "extended-target.dng"=target_bytes) "target oracle mutated";
+      verify (H.usage b=(0,0) && (W.usage pool).pending=0 && (W.usage pool).running=0)
+        "apply round resources not settled";
+      verify ((W.usage pool).peak_running<=cpu) "apply exceeded shared CPU budget";
+      Printf.printf "APPLY-STRESS seed=%d round=%d cpu=%d\n%!" seed round cpu
+    done;
+    finish pool b;
+    verify (Array.length(Sys.readdir "/dev/fd")=before) "apply lifecycle descriptor leak") seeds;
+  verify (!cancelled>0) "no cancellation exercised";
+  Printf.printf "PASS seeded apply stress seeds=6 jobs=%d completed=%d cancelled=%d late_cancel=%d checks=%d\n%!"
+    (!completed+ !cancelled) !completed !cancelled !late !checks
 let () =
+  if Array.exists ((=) "--apply-stress-only") Sys.argv then (apply_scheduling_stress ();exit 0);
   if Array.exists ((=) "--stress-only") Sys.argv then (scheduling_stress ();exit 0);
   identify_tests ();
   if Array.exists ((=) "--identify-only") Sys.argv then exit 0;

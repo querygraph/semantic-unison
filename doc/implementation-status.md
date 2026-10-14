@@ -522,3 +522,5 @@ qualification depends on those platforms; the required portable capability
 contract and fake-backend tests do not.
 
 Seeded mixed worker scheduling now has [retained stock/OxCaml evidence](../tests/workers/seeded-stress-qualification.json): six seeds,3840 jobs and8046 checks per compiler, with queued cancellation under fully held CPU budgets1..4, sequential hash/inspection parity and settled permits/queues/descriptors. Seven identify controls also pass per compiler. This finite root-owned fixture does not close M6 compiler-safe-boundary, randomized active apply/RPC/native-helper stress, race instrumentation or performance/resource acceptance.
+
+Seeded private-stage apply now has [stock/OxCaml qualification](../tests/workers/seeded-apply-stress-qualification.json):384 jobs/1255 checks per compiler,192 exact target-byte completions and192 cancellations with stage discard. Basis inputs, write counts, CPU/queue settlement and descriptor parity pass. Timer races do not prove cancellation inside a native write; RPC/publication stress, compiler-safe boundary and full M6 performance/resource gates remain open.

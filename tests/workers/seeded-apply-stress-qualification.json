@@ -1,0 +1,154 @@
+{
+  "schema": "unison-seeded-apply-stress/1",
+  "utc": "2026-10-14T08:45:15.478444+00:00",
+  "state": "PASSED_ROOT_OWNED_QUALIFICATION",
+  "participants": [
+    {
+      "compiler": "stock",
+      "receipt": {
+        "schema": "unison-worker-scheduling/1",
+        "utc": "2026-10-14T08:44:12.438853+00:00",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "compiler_version": "5.5.1",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-0vgf7vb7",
+        "retained": true,
+        "stress_only": false,
+        "apply_stress_only": true,
+        "exit": 0,
+        "source_pins": {
+          "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+          "src/helperSupervisor.mli": "394e56bbeb05878c9ea6bf9764142cd905ef35d47fa1c10df8fa651e12b6a697",
+          "src/helperSupervisor.ml": "4ba0d5d882e12af0e264eeb14cdc255a67bb9a40d7cd72d1a488fb0476dfd66b",
+          "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+          "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+          "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+          "src/formatRecognition.mli": "ae27554ae1ff050baa5b0fb08ca4e4f6ad442c2227a2bcdecc2dd0b61a41579d",
+          "src/formatRecognition.ml": "73e0321f6f001d235ac744a16cd4a9f768f59ef2e60f2669c802560ef81af5ff",
+          "src/dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "src/dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+          "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+          "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+          "src/semanticWorkers.mli": "ddfc89922750f6ced14ace32edac1cb1b20d5284467d4c6e0d5e3313abb80dc3",
+          "src/semanticWorkers.ml": "3a77dbe913826dd8e7c3160363970bd744083cd355800a6c1798bbb6669de8cb",
+          "tests/workers/test.ml": "b6aff2e993fe332ec0c9b74e0984db028fd2051a30a264eb5235b2cf12948c9e",
+          "tests/workers/run.py": "249ac946d48996191a4ef931b2f428be5d660649b6654fa51b912cd38322ff88"
+        },
+        "binary_sha256": "745634560a9237da6eb9ac0572c60160403f7030cabafc9a204c8b9e5aeb8040",
+        "log_sha256": "fc8a22b8205f7a3a3fb5695987fdad07c6bfa6a0ed726c714e4b7d134decdda0",
+        "summary": [
+          "PASS seeded apply stress seeds=6 jobs=384 completed=192 cancelled=192 late_cancel=0 checks=1255"
+        ]
+      },
+      "receiptPin": {
+        "path": "/private/tmp/unison-worker-apply-stress-stock.json",
+        "sha256": "a99a1f93b5b111a3e7d9f0ec0a5dd90948eac9ba4909cdbaf072ff8b8c14d91d"
+      },
+      "retainedFailedFixture": {
+        "path": "/private/tmp/unison-worker-apply-stress-stock-trial1.json",
+        "sha256": "abed919bb8f5ed1fe333d427d1cc522fcef5c0e87167bc172da9c0f5789bb293"
+      }
+    },
+    {
+      "compiler": "ox",
+      "receipt": {
+        "schema": "unison-worker-scheduling/1",
+        "utc": "2026-10-14T08:44:16.147094+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "compiler_version": "5.2.0+ox",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-kccv09tu",
+        "retained": true,
+        "stress_only": false,
+        "apply_stress_only": true,
+        "exit": 0,
+        "source_pins": {
+          "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+          "src/helperSupervisor.mli": "394e56bbeb05878c9ea6bf9764142cd905ef35d47fa1c10df8fa651e12b6a697",
+          "src/helperSupervisor.ml": "4ba0d5d882e12af0e264eeb14cdc255a67bb9a40d7cd72d1a488fb0476dfd66b",
+          "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+          "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+          "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+          "src/formatRecognition.mli": "ae27554ae1ff050baa5b0fb08ca4e4f6ad442c2227a2bcdecc2dd0b61a41579d",
+          "src/formatRecognition.ml": "73e0321f6f001d235ac744a16cd4a9f768f59ef2e60f2669c802560ef81af5ff",
+          "src/dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "src/dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+          "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+          "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+          "src/semanticWorkers.mli": "ddfc89922750f6ced14ace32edac1cb1b20d5284467d4c6e0d5e3313abb80dc3",
+          "src/semanticWorkers.ml": "3a77dbe913826dd8e7c3160363970bd744083cd355800a6c1798bbb6669de8cb",
+          "tests/workers/test.ml": "b6aff2e993fe332ec0c9b74e0984db028fd2051a30a264eb5235b2cf12948c9e",
+          "tests/workers/run.py": "249ac946d48996191a4ef931b2f428be5d660649b6654fa51b912cd38322ff88"
+        },
+        "binary_sha256": "8d9dd06775d3269ff7ed9bf7cd447cf4fa72abc25fc82f1cade8a2adab821d22",
+        "log_sha256": "fc8a22b8205f7a3a3fb5695987fdad07c6bfa6a0ed726c714e4b7d134decdda0",
+        "summary": [
+          "PASS seeded apply stress seeds=6 jobs=384 completed=192 cancelled=192 late_cancel=0 checks=1255"
+        ]
+      },
+      "receiptPin": {
+        "path": "/private/tmp/unison-worker-apply-stress-ox.json",
+        "sha256": "5fec7052d87290c417909ce5638a964409a1059913f4d9ddbbddd16f8cdc9adf"
+      },
+      "retainedFailedFixture": {
+        "path": "/private/tmp/unison-worker-apply-stress-ox-trial1.json",
+        "sha256": "d4ee41ea201c871fe76677f159cad6b4584a63e2db115dbc268df090204c0814"
+      }
+    }
+  ],
+  "productionChanges": 0,
+  "scope": "Seeded concurrent private-stage DNG apply, timer cancellation races, exact full-byte comparison, source invariance and permit/descriptor settlement",
+  "limitations": [
+    "No proof cancellation occurred inside a specific native write",
+    "No compiler-proved domain boundary or independent algorithm oracle",
+    "No RPC/publication/Adobe/Photo operations",
+    "No measured throughput or full M6 resource qualification"
+  ],
+  "goalComplete": false
+}

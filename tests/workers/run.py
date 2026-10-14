@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
 parser.add_argument("--identify-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
+parser.add_argument("--apply-stress-only",action="store_true")
 parser.add_argument("--keep-work",action="store_true")
 parser.add_argument("--receipt",type=Path)
 args = parser.parse_args()
@@ -97,13 +98,14 @@ with workspace as tmp:
     command=[str(build / "worker-test")]
     if args.identify_only: command.append("--identify-only")
     if args.stress_only: command.append("--stress-only")
+    if args.apply_stress_only: command.append("--apply-stress-only")
     result=subprocess.run(command,cwd=build,text=True,capture_output=True,timeout=120)
     (build/"test.log").write_text(result.stdout+result.stderr)
     print(result.stdout,end="")
     print(result.stderr,end="")
     receipt=dict(schema="unison-worker-scheduling/1",utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                  compiler=args.ocamlopt,compiler_version=subprocess.check_output([args.ocamlopt,"-version"],text=True).strip(),
-                 workspace=str(build),retained=args.keep_work,stress_only=args.stress_only,exit=result.returncode,
+                 workspace=str(build),retained=args.keep_work,stress_only=args.stress_only,apply_stress_only=args.apply_stress_only,exit=result.returncode,
                  source_pins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+["tests/workers/run.py"]},
                  binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),
