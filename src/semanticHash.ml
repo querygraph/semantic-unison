@@ -1,14 +1,72 @@
 (* SHA-256, FIPS 180-4. Portable reference implementation; each worker owns
    its context. This deliberately does not change Unison archive digests. *)
-let constants = [|
-  0x428a2f98l;0x71374491l;0xb5c0fbcfl;0xe9b5dba5l;0x3956c25bl;0x59f111f1l;0x923f82a4l;0xab1c5ed5l;
-  0xd807aa98l;0x12835b01l;0x243185bel;0x550c7dc3l;0x72be5d74l;0x80deb1fel;0x9bdc06a7l;0xc19bf174l;
-  0xe49b69c1l;0xefbe4786l;0x0fc19dc6l;0x240ca1ccl;0x2de92c6fl;0x4a7484aal;0x5cb0a9dcl;0x76f988dal;
-  0x983e5152l;0xa831c66dl;0xb00327c8l;0xbf597fc7l;0xc6e00bf3l;0xd5a79147l;0x06ca6351l;0x14292967l;
-  0x27b70a85l;0x2e1b2138l;0x4d2c6dfcl;0x53380d13l;0x650a7354l;0x766a0abbl;0x81c2c92el;0x92722c85l;
-  0xa2bfe8a1l;0xa81a664bl;0xc24b8b70l;0xc76c51a3l;0xd192e819l;0xd6990624l;0xf40e3585l;0x106aa070l;
-  0x19a4c116l;0x1e376c08l;0x2748774cl;0x34b0bcb5l;0x391c0cb3l;0x4ed8aa4al;0x5b9cca4fl;0x682e6ff3l;
-  0x748f82eel;0x78a5636fl;0x84c87814l;0x8cc70208l;0x90befffal;0xa4506cebl;0xbef9a3f7l;0xc67178f2l |]
+(* Immutable round lookup: no cross-domain mutable table capture. *)
+let round_constant = function
+  | 0 -> 0x428a2f98l
+  | 1 -> 0x71374491l
+  | 2 -> 0xb5c0fbcfl
+  | 3 -> 0xe9b5dba5l
+  | 4 -> 0x3956c25bl
+  | 5 -> 0x59f111f1l
+  | 6 -> 0x923f82a4l
+  | 7 -> 0xab1c5ed5l
+  | 8 -> 0xd807aa98l
+  | 9 -> 0x12835b01l
+  | 10 -> 0x243185bel
+  | 11 -> 0x550c7dc3l
+  | 12 -> 0x72be5d74l
+  | 13 -> 0x80deb1fel
+  | 14 -> 0x9bdc06a7l
+  | 15 -> 0xc19bf174l
+  | 16 -> 0xe49b69c1l
+  | 17 -> 0xefbe4786l
+  | 18 -> 0x0fc19dc6l
+  | 19 -> 0x240ca1ccl
+  | 20 -> 0x2de92c6fl
+  | 21 -> 0x4a7484aal
+  | 22 -> 0x5cb0a9dcl
+  | 23 -> 0x76f988dal
+  | 24 -> 0x983e5152l
+  | 25 -> 0xa831c66dl
+  | 26 -> 0xb00327c8l
+  | 27 -> 0xbf597fc7l
+  | 28 -> 0xc6e00bf3l
+  | 29 -> 0xd5a79147l
+  | 30 -> 0x06ca6351l
+  | 31 -> 0x14292967l
+  | 32 -> 0x27b70a85l
+  | 33 -> 0x2e1b2138l
+  | 34 -> 0x4d2c6dfcl
+  | 35 -> 0x53380d13l
+  | 36 -> 0x650a7354l
+  | 37 -> 0x766a0abbl
+  | 38 -> 0x81c2c92el
+  | 39 -> 0x92722c85l
+  | 40 -> 0xa2bfe8a1l
+  | 41 -> 0xa81a664bl
+  | 42 -> 0xc24b8b70l
+  | 43 -> 0xc76c51a3l
+  | 44 -> 0xd192e819l
+  | 45 -> 0xd6990624l
+  | 46 -> 0xf40e3585l
+  | 47 -> 0x106aa070l
+  | 48 -> 0x19a4c116l
+  | 49 -> 0x1e376c08l
+  | 50 -> 0x2748774cl
+  | 51 -> 0x34b0bcb5l
+  | 52 -> 0x391c0cb3l
+  | 53 -> 0x4ed8aa4al
+  | 54 -> 0x5b9cca4fl
+  | 55 -> 0x682e6ff3l
+  | 56 -> 0x748f82eel
+  | 57 -> 0x78a5636fl
+  | 58 -> 0x84c87814l
+  | 59 -> 0x8cc70208l
+  | 60 -> 0x90befffal
+  | 61 -> 0xa4506cebl
+  | 62 -> 0xbef9a3f7l
+  | 63 -> 0xc67178f2l
+  | _ -> invalid_arg "SHA-256 round index"
 
 type reference = { h : int32 array; block : bytes; w : int32 array;
            mutable used : int; mutable length : int64; mutable done_ : bool }
@@ -41,7 +99,7 @@ let compress t =
   for i = 0 to 63 do
     let ch = Int32.logand !e !f ^^ Int32.logand (Int32.lognot !e) !g in
     let maj = Int32.logand !a !b ^^ Int32.logand !a !c ^^ Int32.logand !b !c in
-    let x = !h ++ big1 !e ++ ch ++ constants.(i) ++ w.(i) in
+    let x = !h ++ big1 !e ++ ch ++ round_constant i ++ w.(i) in
     let y = big0 !a ++ maj in
     h := !g; g := !f; f := !e; e := !d ++ x;
     d := !c; c := !b; b := !a; a := x ++ y
@@ -83,9 +141,9 @@ let finish t =
 let string s = let t = create () in feed t (Bytes.of_string s) 0 (String.length s); finish t
 (* The reference implementation above remains independently testable. *)
 let reference_string = string
-external native_init : unit -> bytes option = "unison_semantic_sha256_init"
-external native_feed : bytes -> bytes -> int -> int -> unit = "unison_semantic_sha256_feed"
-external native_finish : bytes -> string = "unison_semantic_sha256_finish"
+external native_init : unit -> bytes option (* ox-portable-ffi *) = "unison_semantic_sha256_init"
+external native_feed : bytes -> bytes -> int -> int -> unit (* ox-portable-ffi *) = "unison_semantic_sha256_feed"
+external native_finish : bytes -> string (* ox-portable-ffi *) = "unison_semantic_sha256_finish"
 type t = Reference of reference | Native of { state:bytes; mutable finalized:bool; mutable length:int64 }
 let create () = match native_init () with
   | None -> Reference (create ())

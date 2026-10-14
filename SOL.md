@@ -4,6 +4,16 @@
 
 ## Live implementation handoff
 
+* Checked hash component (2026-10-14): fallback round constants use an
+  immutable lookup. A checked OxCaml interface and three explicitly audited
+  native portability contracts pass native and forced-reference hashlib controls
+  in four actual domains; shared contexts/bytes captures reject. [Scope](doc/checked-semantic-hash.md),
+  [pins](tests/checked_hash/qualification.json). Current stock/Ox Make+Dune CLI,
+  selftests and semantic kernel regressions pass. Cached-string9-sample CPU
+  reference ratios new/old0.995 stock/1.006 Ox do not establish a speedup.
+  Production checked-interface selection and full worker portability remain open;
+  no Adobe/Photo invocation or full M6 completion is claimed.
+
 * Runtime mailbox integration (2026-10-14): worker jobs and completions now
   use bounded atomic SemanticMailbox queues with max_pending admission covering
   outstanding receipts. Actual paused-owner pressure proves queued completion

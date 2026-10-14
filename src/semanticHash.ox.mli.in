@@ -1,0 +1,11 @@
+@@ portable
+(* SHA-256 for semantic transfer proofs; independent of archive fingerprints. *)
+type t
+val create : unit -> t
+val feed : t -> bytes -> int -> int -> unit
+val finish : t -> string
+(** Raw 32-byte digest; finalizes the context. *)
+val string : string -> string
+val reference_string : string -> string
+(** Portable reference, for platform-backend differential tests. *)
+val hex : string -> string
