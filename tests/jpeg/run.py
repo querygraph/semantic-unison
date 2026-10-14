@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Independent JPEG marker fixtures and exact-output preservation checks."""
 import argparse, hashlib, json, pathlib, shutil, struct, subprocess, tempfile
-p=argparse.ArgumentParser();p.add_argument('--ocamlopt',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--ocamlopt',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);p.add_argument('--old-kernel');a=p.parse_args()
 root=pathlib.Path(__file__).resolve().parents[2];work=pathlib.Path(tempfile.mkdtemp(prefix='unison-jpeg-'))
 modules=['semanticHash','semanticFile','formatExtension','xmpObservation','dngSemantic','dngExtended','jpegSemantic','semanticDelta']
 sources=['src/'+m+s for m in modules for s in ('.mli','.ml')]+['src/semanticHash_stubs.c','src/semanticFile_stubs.c','tests/jpeg/test.ml']
@@ -30,6 +30,7 @@ offset=2+len(exif)+len(icc)+4+len(sig)
 inspection('standard',base,True,offset,len(packet))
 inspection('fill',base[:2]+b'\xff'*3+base[2:],True,offset+3,len(packet))
 inspection('progressive',base.replace(frame,frame[:1]+b'\xc2'+frame[2:]),True,offset,len(packet))
+inspection('cumulative-fill-boundary',b'\xff\xd8'+b'\xff'*4096+b'\xe0\x00\x02'+b'\xff'*4091+b'\xe0\x00\x02'+base[2:],True,offset+8193,len(packet))
 inspection('maximum-packet',b'\xff\xd8'+segment(0xe1,sig+b'p'*65504)+frame+scan+entropy,True,35,65504)
 for n in range(len(head)):
  inspection('truncated-'+str(n),base[:n],False)
@@ -46,8 +47,14 @@ for name,data in [
  ('out-of-bounds',b'\xff\xd8\xff\xe1\xff\xff'+base[2:]),
  ('standalone-restart',b'\xff\xd8\xff\xd0'+base[2:]),
  ('fill-limit',b'\xff\xd8'+b'\xff'*4097+base[3:]),
+ ('cumulative-fill-one-over',b'\xff\xd8'+b'\xff'*4096+b'\xe0\x00\x02'+b'\xff'*4092+b'\xe0\x00\x02'+base[2:]),
+ ('cumulative-fill-limit',b'\xff\xd8'+(b'\xff'*3000+b'\xe0\x00\x02')*3+base[2:]),
  ('marker-limit',b'\xff\xd8'+segment(0xfe,b'')*4097+base[2:]),
  ('header-limit',b'\xff\xd8'+segment(0xfe,b'c'*65533)*257+base[2:])]:inspection(name,data,False)
+negative=None
+if a.old_kernel:
+ old=pathlib.Path(a.old_kernel);out=subprocess.check_output([str(old),'inspect',str(work/'cumulative-fill-limit.jpg')],text=True).strip();assert out.startswith('REGION'),out
+ negative=dict(binary=str(old),binarySha256=hashlib.sha256(old.read_bytes()).hexdigest(),oldResult=out,newResult=[c['result'] for c in checks if c['name']=='cumulative-fill-limit'][0])
 basepath=work/'basis.jpg';targetpath=work/'target.jpg';stage=work/'stage.jpg'
 for name,target,applied in [
  ('metadata',base.replace(b'one',b'two'),True),('unchanged',base,True),
@@ -64,5 +71,5 @@ for name,target,applied in [
  if name=='metadata':assert out==f'APPLIED {len(packet)} 1',out
  if name=='unchanged':assert out=='APPLIED 0 0',out
  checks.append(dict(name=name,result=out,exactBytes=True))
-r=dict(schema='unison-jpeg-profile/1',status='passed',compiler=a.ocamlopt,compilerVersion=subprocess.check_output([a.ocamlopt,'-version'],text=True).strip(),workspace=str(work),sourcePins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+['tests/jpeg/run.py']},binarySha256=hashlib.sha256((work/'jpeg-test').read_bytes()).hexdigest(),checks=checks)
+r=dict(schema='unison-jpeg-profile/1',status='passed',compiler=a.ocamlopt,compilerVersion=subprocess.check_output([a.ocamlopt,'-version'],text=True).strip(),workspace=str(work),sourcePins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+['tests/jpeg/run.py']},binarySha256=hashlib.sha256((work/'jpeg-test').read_bytes()).hexdigest(),checks=checks,previousKernelNegative=negative)
 a.receipt.write_text(json.dumps(r,indent=2)+'\n');print('PASS JPEG',len(checks),'cases; retained',work)

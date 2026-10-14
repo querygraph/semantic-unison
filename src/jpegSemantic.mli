@@ -1,4 +1,4 @@
-(** Bounded standard JPEG APP1 XMP locator. One nonempty standard packet before
+(** Bounded standard JPEG APP1 XMP locator. At most8192 cumulative marker prefix/fill bytes. One nonempty standard packet before
     the first scan, one supported frame and a bounded marker header are required.
     Extended/duplicate packets and unsupported framing fall back to ordinary
     transfer. Entropy, subsequent scans, EXIF, ICC, opaque APP data and trailers

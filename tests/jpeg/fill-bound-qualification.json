@@ -1,0 +1,1634 @@
+{
+  "schema": "unison-jpeg-cumulative-fill-bound/1",
+  "utc": "2026-10-14T08:59:08.470128+00:00",
+  "state": "PASSED_ROOT_OWNED_QUALIFICATION",
+  "baseCommit": "c94475d",
+  "participants": [
+    {
+      "compiler": "stock",
+      "receipt": {
+        "path": "/private/tmp/unison-jpeg-fill-stock.json",
+        "bytes": 27320,
+        "sha256": "9c9eb5cbdc0f704b6df69391977ae5103b4009c371e6f6ad45e4be904fd83c02"
+      },
+      "evidence": {
+        "schema": "unison-jpeg-profile/1",
+        "status": "passed",
+        "compiler": "/usr/local/bin/ocamlopt",
+        "compilerVersion": "5.5.1",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-jpeg-b6m05rxy",
+        "sourcePins": {
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+          "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+          "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+          "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+          "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+          "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+          "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "tests/jpeg/test.ml": "329c59c47ff16cc80f30de6cc01c18e6d2ca7f83a4d4c2d620ebe41c8c39ae80",
+          "tests/jpeg/run.py": "f3c633a76be53fae3b96d7f284614a476b397bf0e38adeed8cea8d138151f4b2"
+        },
+        "binarySha256": "61f21e5c6d2d22bf080ff554c495899892afc24eb301c537e181f3ef20949c7b",
+        "checks": [
+          {
+            "name": "standard",
+            "result": "REGION 73 16",
+            "sha256": "82e98cccfeb9a5eae88794035a03beb185bace384a0785ec82c6a517b976cf59"
+          },
+          {
+            "name": "fill",
+            "result": "REGION 76 16",
+            "sha256": "bfebdbc7a293d74a165ce5eb10127581e07aeafa3f5379b9755a1f7f230adc01"
+          },
+          {
+            "name": "progressive",
+            "result": "REGION 73 16",
+            "sha256": "e7dd19bdf2ec3e4d8032bb415a5ee2b9d6f08e39a5d43dc656d414ec2e7ca838"
+          },
+          {
+            "name": "cumulative-fill-boundary",
+            "result": "REGION 8266 16",
+            "sha256": "62d2a85dc6da3cfc5afbbeac79933a49c57ba6191b970fc39ced63f7f76eef1d"
+          },
+          {
+            "name": "maximum-packet",
+            "result": "REGION 35 65504",
+            "sha256": "5b3a4e9c8b5f25baab14ed016569583f9fa605c4f4bfb567b58b8d47ba851bb5"
+          },
+          {
+            "name": "truncated-0",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "truncated-1",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+          },
+          {
+            "name": "truncated-2",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "71563ad80061407ede9c6f316836284bd3710a520c5a792b5eda1cb703690815"
+          },
+          {
+            "name": "truncated-3",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "6e568e1f67fba258184c78181539e5e8fdee447e49bb706fc0ea34fbf12336a5"
+          },
+          {
+            "name": "truncated-4",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "f57139da457f21f5b0048400ddfb9e5b051fd393b43f6e371ad5a0e9987bf80e"
+          },
+          {
+            "name": "truncated-5",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "72c11fdc9e02126bace71f221d8f6c46ed730d6660e07a34165dddd9e7d326a6"
+          },
+          {
+            "name": "truncated-6",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7d1e7ecbe0cd9357e4bd814987e9b81dfc1598634126690b0ccb39d30b3e157d"
+          },
+          {
+            "name": "truncated-7",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c880f28acdd98da15891c50a062a54e839ab1e04542a88e11a5d5d0af27317c7"
+          },
+          {
+            "name": "truncated-8",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9a53f9347aae5b21e05bdfd565e9060d33d37655c4dc4a1856df36330af14c0d"
+          },
+          {
+            "name": "truncated-9",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "442524c67de8398c098944bed7b211c7a8710352a849f62fa480e10e1dfe4d55"
+          },
+          {
+            "name": "truncated-10",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "92e5d6cf593a36de196c2b06b45aa3610cfdf82524fa2b659022198cc5042e7b"
+          },
+          {
+            "name": "truncated-11",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ed7ac47df28b1ca6822e15a2f3d6743b8cf7d967f50f10b9f2b6af833baf61cd"
+          },
+          {
+            "name": "truncated-12",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "cdb835b481a4d4728a0215e3645b4f29f160fe086b1df1bff6f95fb5c72b2470"
+          },
+          {
+            "name": "truncated-13",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7c98b3dbba5b82f095ba85bdbc16ea7cc2f2a7296912b0751be9cc53be8e1ed0"
+          },
+          {
+            "name": "truncated-14",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "613ea9b1df2c86b9d3f156745b5f93e5e783132258ab680a661e0f8932a7a484"
+          },
+          {
+            "name": "truncated-15",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f8ef7d4ae55179e9ec3385fb0963a5044f7464f991712f5e73d42ee724e6d946"
+          },
+          {
+            "name": "truncated-16",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "0cda207b4097c97b6024c186b204652941295483cf424f12987c658c2ba1eb38"
+          },
+          {
+            "name": "truncated-17",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2ac397350d4421a766a14b1dcc7da050bbbf8743155a3eec54801fed532ec475"
+          },
+          {
+            "name": "truncated-18",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "81f8fed0c288bd770f804555949f3f86654093d27c251f6fa264ba46bde27c1f"
+          },
+          {
+            "name": "truncated-19",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "e70631681b66dafa9f4b5d800128d4fa08132e1f0af9cdfbd97521e5bbdbeeef"
+          },
+          {
+            "name": "truncated-20",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "51c42ebb94b0dfcc612fbb5eead083c8c33881862f2cce4ac2379d69f83c5371"
+          },
+          {
+            "name": "truncated-21",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "21473d147e7874ef0167199f0bd32a8f1bf6b72404897451913522de2c38fe0b"
+          },
+          {
+            "name": "truncated-22",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "91f221969c30f4b7ee815dc6a7c94c219879a79848750a66255aa2b998302d47"
+          },
+          {
+            "name": "truncated-23",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c69313ccf8b75aec1f14d090d98ec008d1bee1281226e0a3cb2319ab7ee5d07f"
+          },
+          {
+            "name": "truncated-24",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "88be95731fcd86cbd01d869d79b4a7a24b40d43f2f06a1b06a740a9d10efde3f"
+          },
+          {
+            "name": "truncated-25",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d21be647f24194afacd1888ad10e6d02e35b8b21eca1e308de22bff9d39f7e17"
+          },
+          {
+            "name": "truncated-26",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ef5e447c28af494345529841b49ad10b78fafbe5a3afef338af35e49b80b19e0"
+          },
+          {
+            "name": "truncated-27",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "6c53d7d0865fb43438e36e152056d78a77a4f15a404e98a4b6333761a9bba582"
+          },
+          {
+            "name": "truncated-28",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "693dacf48055128ea0e8fd78b69786aca351fcdc6dd23aebc11c5926256872c9"
+          },
+          {
+            "name": "truncated-29",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "495ad84a9435c532914bc8bc749af48b6c7d0601e40872104a05bf1ae94791f6"
+          },
+          {
+            "name": "truncated-30",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "0bc0f662635f940e3b7ae8530d0362a1945baeb721143439976ce87fde000553"
+          },
+          {
+            "name": "truncated-31",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ca803f71d464ad96cee0dceafe556d47932fd0798d279c9ad38ca792d21769c5"
+          },
+          {
+            "name": "truncated-32",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "659fae88ed7b122eeca787cb746729a478ab412fc16c67bc376a503ed5e73da9"
+          },
+          {
+            "name": "truncated-33",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8f7d305a7c09002228cce8bc763a771fa2a12a50992d84ecc4645eeb5ae63f4c"
+          },
+          {
+            "name": "truncated-34",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "102759cee383266d7a34aa8e86d000482e7e7855bb1c5d2301adac2671a52a4d"
+          },
+          {
+            "name": "truncated-35",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ad1d2faf05d19d2becb37ed303a2b9ead06ef300599b7dd7f35dba7afd7b8d7c"
+          },
+          {
+            "name": "truncated-36",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4c58c238743a5a337f8353e59f7fc657661d689db2449e613b217cd55470c4c0"
+          },
+          {
+            "name": "truncated-37",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "64912aa5663b3a2b4c9ed80fede2bce40bc642f4c2eb79c904e557352c37853a"
+          },
+          {
+            "name": "truncated-38",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "aa804263f6f110aab7e635bd7b05eec6e419e6de3188ad4ff5dd330fdd9d27f1"
+          },
+          {
+            "name": "truncated-39",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8f3c86d50e1ea57592e749bc17e7e3dfd2ac4e817adea442db2af13c89a4aa50"
+          },
+          {
+            "name": "truncated-40",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "10a4635993a0dc5c8b6167b3deffc3c774d5155a55920ef60fa1439a50d1ad88"
+          },
+          {
+            "name": "truncated-41",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "2db38ee24f08a146297552f79c3ad137f3bdd2470a6867b373ab58a63bfb0747"
+          },
+          {
+            "name": "truncated-42",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "9f4068a9281b1a6ed71d38394f5ba9625fec7b8183263220b83d0b733986a887"
+          },
+          {
+            "name": "truncated-43",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "3cefb981782ee9986ceb3d2f00e11b84e116d6b5b595177f70feeb5fcefdeda3"
+          },
+          {
+            "name": "truncated-44",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a60377275b4ff23a293217ccbfe0971afaefb51f5dd95b1c36c1e61fe88e5db9"
+          },
+          {
+            "name": "truncated-45",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "681af4e9d78893910a49a860326df55ffc5f8a536c94320ecd42e23d64d683bf"
+          },
+          {
+            "name": "truncated-46",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f9b4defe6da335c37b5f73bedf6c956c85418173ef93740b3820d23b5d7c2856"
+          },
+          {
+            "name": "truncated-47",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b4c9840b0a7f233b2e7778795faaef9caf898161c432adea1a7fb65cb0bdd7a9"
+          },
+          {
+            "name": "truncated-48",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e3f854100e0009039fa9b5d56786946584bb73e648837c418b69ddffe292214b"
+          },
+          {
+            "name": "truncated-49",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "bd5751c721fe5082067c2bc039f36c991aa65e557d2eeb05f07c09a777791a7d"
+          },
+          {
+            "name": "truncated-50",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8e17fbfeeba258374a82f9cbfb7f2597c11ca76062ef592b6a8e7b68175f9dca"
+          },
+          {
+            "name": "truncated-51",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2db67ee1ce0614eb6857ce4342dedc6d04ebfb960f04ba276c3bfb51120f69eb"
+          },
+          {
+            "name": "truncated-52",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "dfc60f0556893d0c5a04a9eb35ae4c25fa860ce0604b68482a62af6d6b5b679b"
+          },
+          {
+            "name": "truncated-53",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4b7361c935518688d3d759ea88f428a679766764fe17e0c756577a46a08dec10"
+          },
+          {
+            "name": "truncated-54",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "5706bd2b0d3ba36d6fe3eab0e1e6f2cdc5d2c00ea1be2ea7416cc5eb6a4148e2"
+          },
+          {
+            "name": "truncated-55",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b1983fa726b577fd529ef60efec08490bf7bf990a6b0f9a6641e5e243c9b9e1f"
+          },
+          {
+            "name": "truncated-56",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ffce1e01e82587233ad222f0b0387743ee70c58da2e4a03dcdce95ee9ccb8eb5"
+          },
+          {
+            "name": "truncated-57",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d2b2b0093cb8d72851cf19b489b7180c329f502641023916be6ec124dccdcdc4"
+          },
+          {
+            "name": "truncated-58",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "db5937a43fe9d1e4f44759b4126b6fba6967f8e014d0cd17343e50c334d08e9c"
+          },
+          {
+            "name": "truncated-59",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "688476e553fda1f698180c292412cc00c00b33236c2ed37d36412b6c5eb39e41"
+          },
+          {
+            "name": "truncated-60",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b48819af86a209c4e8476ca6bfc6781243c1763401c3e7d6d5887824cc6667bb"
+          },
+          {
+            "name": "truncated-61",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b13af82a24c90a6d127fd5d3857bdb6e43854c548ea4aa34090427def8c8790a"
+          },
+          {
+            "name": "truncated-62",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "746b5404bffc1db237fc1cf05c49853f0c7173e8744194728ed40ad12e2a6d76"
+          },
+          {
+            "name": "truncated-63",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a3cb5d32cfb73891ffd613e80871fd054b802b91b59b96f9b2dcde7224053187"
+          },
+          {
+            "name": "truncated-64",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a9fcff641031fc93efb01bee0e719cc40115bba8329c3e3daa49d8ad4f4f91c3"
+          },
+          {
+            "name": "truncated-65",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c2b500e194fe076ee09e9168b2b740374ab0588de92f306ca9853c4afeb16cfd"
+          },
+          {
+            "name": "truncated-66",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "6385c6e49b6c6096004501104c82bf44a691da220ec5554fa76b04d815daaa6c"
+          },
+          {
+            "name": "truncated-67",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fdee21a6063d660aa61f55a710c1897d9c53d168ad39d8d33285cc5d7ac27a8b"
+          },
+          {
+            "name": "truncated-68",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "514302452c4d9add28f365d5aa1bc5f7843ce699e21a7d593fc0025752422690"
+          },
+          {
+            "name": "truncated-69",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7e2a9465c22fc43dd80fc9da186bcbaf2dc81869ddc1c8d5c9f89bd8e47bcc7a"
+          },
+          {
+            "name": "truncated-70",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "808e87210f9b893ee105ac730cefc65b9dad0e974915032e0f7ecd6bb37e263c"
+          },
+          {
+            "name": "truncated-71",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d54e7362b4308cf61005025f9b2d818a2a0db215a148540e27ef07f44b607c47"
+          },
+          {
+            "name": "truncated-72",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fa8f754596c1bf84d53540caa84ed05ee57cf4c9cf44ab9798518e3660c158fa"
+          },
+          {
+            "name": "truncated-73",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4c75296f785935fa209da3ce7d3cd76e74ea6d58f0ad7a451a95066e555a794d"
+          },
+          {
+            "name": "truncated-74",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9483e9ae489410d395babc0753c8a2ba219b98b33787bc0134f27e33e69d9451"
+          },
+          {
+            "name": "truncated-75",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fc121c103e3f8d483578d791fd5b094f3a6158f8378a97778473fe782370bea9"
+          },
+          {
+            "name": "truncated-76",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fb4393dd0b7d09ec6f15fc214f7b50d0a4e154cba195ff2b1abfda783686dc4c"
+          },
+          {
+            "name": "truncated-77",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e6a4979bb3ee4295e78f831c11bbbcb5d694a6eb5114f6717aee2ae9fa637bbc"
+          },
+          {
+            "name": "truncated-78",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a3730f0a758f61188f965ba7d2feb9e42950c1924581b54ed7dc16322d8cafc1"
+          },
+          {
+            "name": "truncated-79",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "72b3cf7ee3579ccda82dff87fa58bedccd64b701b1c7357d155f4709e06de489"
+          },
+          {
+            "name": "truncated-80",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1583e6da188ae86e9bf2ac28d8ad1ffe7724072eb84324d441b887040816e90c"
+          },
+          {
+            "name": "truncated-81",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a23a4eacf4da0c6112299d5968767aad6982e98bab2128e429d0e0006ae57fe4"
+          },
+          {
+            "name": "truncated-82",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d3add96dbcc5a6f92b1f0fdb36a07d9bba7e6870cb8454611d1a4a77a1e06ef3"
+          },
+          {
+            "name": "truncated-83",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1da0b057d44be958a7d9af6916e5f9fec88cc4c103302c4de0b24542b7484864"
+          },
+          {
+            "name": "truncated-84",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8ed3a3073552a022e5bbddc60f4b35b84381179476b4f0d0ba06860ef52ffbbf"
+          },
+          {
+            "name": "truncated-85",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2c0b7740ead92efc2225d887ad881b977ac5e87b86a6cc2f0acb5017787111fe"
+          },
+          {
+            "name": "truncated-86",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8b31f44fa135a5060f831fdf24a4231a01663da5ecc352b0c2b24fe22d44b1ff"
+          },
+          {
+            "name": "truncated-87",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d4bf7ae6fb4d87d8b4122ddb272439917adb8f153f68a21c41033f9c309adfe0"
+          },
+          {
+            "name": "truncated-88",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "46ca41766a634268be76f4a17ebfbe53782c73caf342e8d187e514a6f24db9cb"
+          },
+          {
+            "name": "truncated-89",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "c242468bda22c5066bd844069c6f178041025530df0f4b3697760ec94d261cd6"
+          },
+          {
+            "name": "truncated-90",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "5e07e15bbda49cf5a45f1cb96fb797befe491a89d5f5ee869f29c11f51c9ec50"
+          },
+          {
+            "name": "truncated-91",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "630905864c63ef05fc821901db755435f5b393ae17664a4fc65d28b948228eac"
+          },
+          {
+            "name": "truncated-92",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "67ea168a08ad82660f92b533d4da47818b3ebdef58926578749562c6e8213669"
+          },
+          {
+            "name": "truncated-93",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ef2bfd8999eb4b3be03f8333ce5c129fbe53db50843f5f84c49d0452564e5ea4"
+          },
+          {
+            "name": "truncated-94",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1f7e94a54e7bcf6dc9f8a15dbdae50ca78799c743dbfbad82db423d7e186bb84"
+          },
+          {
+            "name": "truncated-95",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "61d8d935e31e11f23057ecd0d068a6aa1c7318bb4e031311b8bce041888c5587"
+          },
+          {
+            "name": "truncated-96",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "07950223932d51a8938fd97fbce2238785525ef34bf4cbd0cb41dfd065bb992b"
+          },
+          {
+            "name": "truncated-97",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e73722397bdbff2947bdea39738f2c029715cc14c65c1cd2fc9c04238a941c9c"
+          },
+          {
+            "name": "truncated-98",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c4f18fedd0fe5c79803dce91ef18633921f328950bf5e6c9840bedf2669bb1c5"
+          },
+          {
+            "name": "truncated-99",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "990c4a3fe6c31eefdcf0b3729be2d360aaede3e8a0e502220bdeb52b24433ce3"
+          },
+          {
+            "name": "truncated-100",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "63738fd5c7945ad7513ee2586f2b2137bdf99188a926a879c4c3bfbee23c764d"
+          },
+          {
+            "name": "truncated-101",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "401fe605139c2ba8134fe4793fff193fb61ce654c805a944c612aecf8a4405b0"
+          },
+          {
+            "name": "truncated-102",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "0853acf342106b4bbe1e9997a189a6c64008d48a486a5c660072baf284b9ff07"
+          },
+          {
+            "name": "truncated-103",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "b9961b3089446a931bb51e0a67b309e65ed17b9301c373834324704ce063c886"
+          },
+          {
+            "name": "truncated-104",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "eaa030e075ae0cf329894e61867c50ad4bb2c571ff92c4501298e7c866e8e764"
+          },
+          {
+            "name": "truncated-105",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "b801e56051480e6696a11f502ebff33ec53948ce80d744755487c2cb8411ebdd"
+          },
+          {
+            "name": "truncated-106",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d5c074d7dbd06a371546e155dfe6d792594882c6b4e0cf4edb8ad64c5ba3b4db"
+          },
+          {
+            "name": "truncated-107",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "27d5ef86c70e0d062a979e979c27de5ae26ff97bdbeb3e364b7700110c636d58"
+          },
+          {
+            "name": "truncated-108",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9571945294c813888bf7486a81e2b2fa4a914cf2d61b5c62f5a1a49fc8928cfa"
+          },
+          {
+            "name": "truncated-109",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "abc2a16116c1240af676ed715c8437908be7b7811c106e3859888f58bb853658"
+          },
+          {
+            "name": "truncated-110",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "884c9f9ef01614d1de6f0253bf1ff6e0915010d55c666b1b7f7e45d3b305b7fd"
+          },
+          {
+            "name": "truncated-111",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f89196085549a15911ef7839675e742bc8bd863ba7a858ba69316b6c0308a2f3"
+          },
+          {
+            "name": "missing-xmp",
+            "result": "REJECT no standard JPEG XMP packet",
+            "sha256": "04b2a562feccd3840f75c66e3a64cb00b71a03b15ca32565ec1e9db0bdc2238d"
+          },
+          {
+            "name": "empty-xmp",
+            "result": "REJECT empty JPEG XMP packet",
+            "sha256": "6c9a4e5d900bc63fb53494bea0b9e898771b1e4743b140d6cca00cf870379d34"
+          },
+          {
+            "name": "duplicate-xmp",
+            "result": "REJECT multiple standard JPEG XMP packets",
+            "sha256": "368ab2cbaaf515ebf22fc676205455d04bb9082e7204042b4c02ca223d82e295"
+          },
+          {
+            "name": "extended-xmp",
+            "result": "REJECT extended JPEG XMP unsupported",
+            "sha256": "289796e3fe71ead7dedd6c8f97318b9fed81f79e51c0b0c0fdc653332c6e664d"
+          },
+          {
+            "name": "no-frame",
+            "result": "REJECT JPEG scan without frame",
+            "sha256": "76b64c6a83070ffc6eec602c5f0abc9bf3f3d79da88ac703c54b2d532e000192"
+          },
+          {
+            "name": "duplicate-frame",
+            "result": "REJECT multiple JPEG frames",
+            "sha256": "f066f84b48608740bb2e3df7efbf720451ba9d75b24847a7f0c8600705a8e628"
+          },
+          {
+            "name": "bad-frame-count",
+            "result": "REJECT unsupported JPEG frame geometry",
+            "sha256": "8ab5e1ab888d359d2ff74c08e6e2ed89b433be43f37ad7e7f31ac4b79fcebbb0"
+          },
+          {
+            "name": "zero-height",
+            "result": "REJECT unsupported JPEG frame geometry",
+            "sha256": "e541666d36b8e692b83ccd379c3b4196ab921259d851937804145e61e2be25d3"
+          },
+          {
+            "name": "scan-count",
+            "result": "REJECT unsupported JPEG scan header",
+            "sha256": "378dc73fc0851b37fd5fa399afac10d9b8bcbb10dd7a089db87ac57bde63f67a"
+          },
+          {
+            "name": "short-length",
+            "result": "REJECT invalid JPEG segment length",
+            "sha256": "dcd8ee6b812f036721bdf89951751d0638e0a9013c9e3ac1bc96f15cf83b43c5"
+          },
+          {
+            "name": "out-of-bounds",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "df0530a9b6b3a0bae70f3ba015b6a10624abf1f1a9cb7d457915098599b46eb1"
+          },
+          {
+            "name": "standalone-restart",
+            "result": "REJECT unsupported JPEG marker",
+            "sha256": "ccacdfda0b236515890532fbc0acef8308022cf8be79c1efafffbd14b54e0d3b"
+          },
+          {
+            "name": "fill-limit",
+            "result": "REJECT JPEG fill limit",
+            "sha256": "5cd40f13ae089f03545a853250b95b1174101431cd1d508af65f52e1e4f13ac3"
+          },
+          {
+            "name": "cumulative-fill-one-over",
+            "result": "REJECT JPEG cumulative fill limit",
+            "sha256": "dd465706288a04f15889139d798c36eb87bc7f65a962af84dcd55f0392e85606"
+          },
+          {
+            "name": "cumulative-fill-limit",
+            "result": "REJECT JPEG cumulative fill limit",
+            "sha256": "5309d44815adce125da289da5c1a173718f2f260acd0a695b7d43b65222a994d"
+          },
+          {
+            "name": "marker-limit",
+            "result": "REJECT JPEG header limit",
+            "sha256": "19cd6807cd0d776f487ddae8cd2310101968b07c87913f1a37ea5f679c703226"
+          },
+          {
+            "name": "header-limit",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "110efdd5cf966f1181829f9da9b1c669acea75e29ce268b8eebfcef5d3c8955c"
+          },
+          {
+            "name": "metadata",
+            "result": "APPLIED 16 1",
+            "exactBytes": true
+          },
+          {
+            "name": "unchanged",
+            "result": "APPLIED 0 0",
+            "exactBytes": true
+          },
+          {
+            "name": "entropy",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "exif",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "icc",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "trailer",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "growth",
+            "result": "FALLBACK profile, size or layout changed",
+            "exactBytes": true
+          },
+          {
+            "name": "relocation",
+            "result": "FALLBACK profile, size or layout changed",
+            "exactBytes": true
+          }
+        ],
+        "previousKernelNegative": {
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-jpeg-yvdaoz35/jpeg-test",
+          "binarySha256": "6c4481dfbdb94d736fd38cdd713c270595c893b64378b2590f2ba73c5c94633c",
+          "oldResult": "REGION 9082 16",
+          "newResult": "REJECT JPEG cumulative fill limit"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4mr3pbqw",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4mr3pbqw/src/unison",
+          "bytes": 5459992,
+          "sha256": "375445c4d23b8b544b0937ae1d4dba6a24164cf650bd18f61a29dc1e59b8d313"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4mr3pbqw/build.log",
+          "bytes": 63712,
+          "sha256": "ea7ea19b5b2df5c88afdcc7587de33a46bd6f97cbadb8c5bb1c283e460195d18"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4mr3pbqw/selftest.log",
+          "bytes": 683,
+          "sha256": "563a4f97f34dfebddab8aefcab8ed16d2484d385a0f0265fcfc673a6e91f8ad8"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      }
+    },
+    {
+      "compiler": "ox",
+      "receipt": {
+        "path": "/private/tmp/unison-jpeg-fill-ox.json",
+        "bytes": 27340,
+        "sha256": "48985c0c1227315edbe26febdaffc0ba5c51f742a21cfb10975a7c21043d8bd5"
+      },
+      "evidence": {
+        "schema": "unison-jpeg-profile/1",
+        "status": "passed",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "compilerVersion": "5.2.0+ox",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-jpeg-l7vl0via",
+        "sourcePins": {
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+          "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+          "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+          "src/formatExtension.mli": "84e9a8a969d42f34ed4d15496f94fdb50f5e6c3cef9d8a89b9efbd75f9315b0f",
+          "src/formatExtension.ml": "fd7565fd00f8e688c391bf917e45a3164b5b2e8a6a657700171e283a285ceb95",
+          "src/xmpObservation.mli": "0e19fc95ca38e40c6cf5e85109c2d7f844b5d851f84ec271b01acab776f40580",
+          "src/xmpObservation.ml": "fe89ce2e6c321b426649ec58abf65a9ff91f801298d627e81750abd0d59ced2e",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+          "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+          "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+          "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "tests/jpeg/test.ml": "329c59c47ff16cc80f30de6cc01c18e6d2ca7f83a4d4c2d620ebe41c8c39ae80",
+          "tests/jpeg/run.py": "f3c633a76be53fae3b96d7f284614a476b397bf0e38adeed8cea8d138151f4b2"
+        },
+        "binarySha256": "4b58572d3344252a97ea71cd0b98d549bc6f6a96a6393c9b5a27daea260333c3",
+        "checks": [
+          {
+            "name": "standard",
+            "result": "REGION 73 16",
+            "sha256": "82e98cccfeb9a5eae88794035a03beb185bace384a0785ec82c6a517b976cf59"
+          },
+          {
+            "name": "fill",
+            "result": "REGION 76 16",
+            "sha256": "bfebdbc7a293d74a165ce5eb10127581e07aeafa3f5379b9755a1f7f230adc01"
+          },
+          {
+            "name": "progressive",
+            "result": "REGION 73 16",
+            "sha256": "e7dd19bdf2ec3e4d8032bb415a5ee2b9d6f08e39a5d43dc656d414ec2e7ca838"
+          },
+          {
+            "name": "cumulative-fill-boundary",
+            "result": "REGION 8266 16",
+            "sha256": "62d2a85dc6da3cfc5afbbeac79933a49c57ba6191b970fc39ced63f7f76eef1d"
+          },
+          {
+            "name": "maximum-packet",
+            "result": "REGION 35 65504",
+            "sha256": "5b3a4e9c8b5f25baab14ed016569583f9fa605c4f4bfb567b58b8d47ba851bb5"
+          },
+          {
+            "name": "truncated-0",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "truncated-1",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "a8100ae6aa1940d0b663bb31cd466142ebbdbd5187131b92d93818987832eb89"
+          },
+          {
+            "name": "truncated-2",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "71563ad80061407ede9c6f316836284bd3710a520c5a792b5eda1cb703690815"
+          },
+          {
+            "name": "truncated-3",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "6e568e1f67fba258184c78181539e5e8fdee447e49bb706fc0ea34fbf12336a5"
+          },
+          {
+            "name": "truncated-4",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "f57139da457f21f5b0048400ddfb9e5b051fd393b43f6e371ad5a0e9987bf80e"
+          },
+          {
+            "name": "truncated-5",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "72c11fdc9e02126bace71f221d8f6c46ed730d6660e07a34165dddd9e7d326a6"
+          },
+          {
+            "name": "truncated-6",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7d1e7ecbe0cd9357e4bd814987e9b81dfc1598634126690b0ccb39d30b3e157d"
+          },
+          {
+            "name": "truncated-7",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c880f28acdd98da15891c50a062a54e839ab1e04542a88e11a5d5d0af27317c7"
+          },
+          {
+            "name": "truncated-8",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9a53f9347aae5b21e05bdfd565e9060d33d37655c4dc4a1856df36330af14c0d"
+          },
+          {
+            "name": "truncated-9",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "442524c67de8398c098944bed7b211c7a8710352a849f62fa480e10e1dfe4d55"
+          },
+          {
+            "name": "truncated-10",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "92e5d6cf593a36de196c2b06b45aa3610cfdf82524fa2b659022198cc5042e7b"
+          },
+          {
+            "name": "truncated-11",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ed7ac47df28b1ca6822e15a2f3d6743b8cf7d967f50f10b9f2b6af833baf61cd"
+          },
+          {
+            "name": "truncated-12",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "cdb835b481a4d4728a0215e3645b4f29f160fe086b1df1bff6f95fb5c72b2470"
+          },
+          {
+            "name": "truncated-13",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7c98b3dbba5b82f095ba85bdbc16ea7cc2f2a7296912b0751be9cc53be8e1ed0"
+          },
+          {
+            "name": "truncated-14",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "613ea9b1df2c86b9d3f156745b5f93e5e783132258ab680a661e0f8932a7a484"
+          },
+          {
+            "name": "truncated-15",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f8ef7d4ae55179e9ec3385fb0963a5044f7464f991712f5e73d42ee724e6d946"
+          },
+          {
+            "name": "truncated-16",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "0cda207b4097c97b6024c186b204652941295483cf424f12987c658c2ba1eb38"
+          },
+          {
+            "name": "truncated-17",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2ac397350d4421a766a14b1dcc7da050bbbf8743155a3eec54801fed532ec475"
+          },
+          {
+            "name": "truncated-18",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "81f8fed0c288bd770f804555949f3f86654093d27c251f6fa264ba46bde27c1f"
+          },
+          {
+            "name": "truncated-19",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "e70631681b66dafa9f4b5d800128d4fa08132e1f0af9cdfbd97521e5bbdbeeef"
+          },
+          {
+            "name": "truncated-20",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "51c42ebb94b0dfcc612fbb5eead083c8c33881862f2cce4ac2379d69f83c5371"
+          },
+          {
+            "name": "truncated-21",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "21473d147e7874ef0167199f0bd32a8f1bf6b72404897451913522de2c38fe0b"
+          },
+          {
+            "name": "truncated-22",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "91f221969c30f4b7ee815dc6a7c94c219879a79848750a66255aa2b998302d47"
+          },
+          {
+            "name": "truncated-23",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c69313ccf8b75aec1f14d090d98ec008d1bee1281226e0a3cb2319ab7ee5d07f"
+          },
+          {
+            "name": "truncated-24",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "88be95731fcd86cbd01d869d79b4a7a24b40d43f2f06a1b06a740a9d10efde3f"
+          },
+          {
+            "name": "truncated-25",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d21be647f24194afacd1888ad10e6d02e35b8b21eca1e308de22bff9d39f7e17"
+          },
+          {
+            "name": "truncated-26",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ef5e447c28af494345529841b49ad10b78fafbe5a3afef338af35e49b80b19e0"
+          },
+          {
+            "name": "truncated-27",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "6c53d7d0865fb43438e36e152056d78a77a4f15a404e98a4b6333761a9bba582"
+          },
+          {
+            "name": "truncated-28",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "693dacf48055128ea0e8fd78b69786aca351fcdc6dd23aebc11c5926256872c9"
+          },
+          {
+            "name": "truncated-29",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "495ad84a9435c532914bc8bc749af48b6c7d0601e40872104a05bf1ae94791f6"
+          },
+          {
+            "name": "truncated-30",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "0bc0f662635f940e3b7ae8530d0362a1945baeb721143439976ce87fde000553"
+          },
+          {
+            "name": "truncated-31",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ca803f71d464ad96cee0dceafe556d47932fd0798d279c9ad38ca792d21769c5"
+          },
+          {
+            "name": "truncated-32",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "659fae88ed7b122eeca787cb746729a478ab412fc16c67bc376a503ed5e73da9"
+          },
+          {
+            "name": "truncated-33",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8f7d305a7c09002228cce8bc763a771fa2a12a50992d84ecc4645eeb5ae63f4c"
+          },
+          {
+            "name": "truncated-34",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "102759cee383266d7a34aa8e86d000482e7e7855bb1c5d2301adac2671a52a4d"
+          },
+          {
+            "name": "truncated-35",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ad1d2faf05d19d2becb37ed303a2b9ead06ef300599b7dd7f35dba7afd7b8d7c"
+          },
+          {
+            "name": "truncated-36",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4c58c238743a5a337f8353e59f7fc657661d689db2449e613b217cd55470c4c0"
+          },
+          {
+            "name": "truncated-37",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "64912aa5663b3a2b4c9ed80fede2bce40bc642f4c2eb79c904e557352c37853a"
+          },
+          {
+            "name": "truncated-38",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "aa804263f6f110aab7e635bd7b05eec6e419e6de3188ad4ff5dd330fdd9d27f1"
+          },
+          {
+            "name": "truncated-39",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8f3c86d50e1ea57592e749bc17e7e3dfd2ac4e817adea442db2af13c89a4aa50"
+          },
+          {
+            "name": "truncated-40",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "10a4635993a0dc5c8b6167b3deffc3c774d5155a55920ef60fa1439a50d1ad88"
+          },
+          {
+            "name": "truncated-41",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "2db38ee24f08a146297552f79c3ad137f3bdd2470a6867b373ab58a63bfb0747"
+          },
+          {
+            "name": "truncated-42",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "9f4068a9281b1a6ed71d38394f5ba9625fec7b8183263220b83d0b733986a887"
+          },
+          {
+            "name": "truncated-43",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "3cefb981782ee9986ceb3d2f00e11b84e116d6b5b595177f70feeb5fcefdeda3"
+          },
+          {
+            "name": "truncated-44",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a60377275b4ff23a293217ccbfe0971afaefb51f5dd95b1c36c1e61fe88e5db9"
+          },
+          {
+            "name": "truncated-45",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "681af4e9d78893910a49a860326df55ffc5f8a536c94320ecd42e23d64d683bf"
+          },
+          {
+            "name": "truncated-46",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f9b4defe6da335c37b5f73bedf6c956c85418173ef93740b3820d23b5d7c2856"
+          },
+          {
+            "name": "truncated-47",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b4c9840b0a7f233b2e7778795faaef9caf898161c432adea1a7fb65cb0bdd7a9"
+          },
+          {
+            "name": "truncated-48",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e3f854100e0009039fa9b5d56786946584bb73e648837c418b69ddffe292214b"
+          },
+          {
+            "name": "truncated-49",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "bd5751c721fe5082067c2bc039f36c991aa65e557d2eeb05f07c09a777791a7d"
+          },
+          {
+            "name": "truncated-50",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8e17fbfeeba258374a82f9cbfb7f2597c11ca76062ef592b6a8e7b68175f9dca"
+          },
+          {
+            "name": "truncated-51",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2db67ee1ce0614eb6857ce4342dedc6d04ebfb960f04ba276c3bfb51120f69eb"
+          },
+          {
+            "name": "truncated-52",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "dfc60f0556893d0c5a04a9eb35ae4c25fa860ce0604b68482a62af6d6b5b679b"
+          },
+          {
+            "name": "truncated-53",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4b7361c935518688d3d759ea88f428a679766764fe17e0c756577a46a08dec10"
+          },
+          {
+            "name": "truncated-54",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "5706bd2b0d3ba36d6fe3eab0e1e6f2cdc5d2c00ea1be2ea7416cc5eb6a4148e2"
+          },
+          {
+            "name": "truncated-55",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b1983fa726b577fd529ef60efec08490bf7bf990a6b0f9a6641e5e243c9b9e1f"
+          },
+          {
+            "name": "truncated-56",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ffce1e01e82587233ad222f0b0387743ee70c58da2e4a03dcdce95ee9ccb8eb5"
+          },
+          {
+            "name": "truncated-57",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d2b2b0093cb8d72851cf19b489b7180c329f502641023916be6ec124dccdcdc4"
+          },
+          {
+            "name": "truncated-58",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "db5937a43fe9d1e4f44759b4126b6fba6967f8e014d0cd17343e50c334d08e9c"
+          },
+          {
+            "name": "truncated-59",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "688476e553fda1f698180c292412cc00c00b33236c2ed37d36412b6c5eb39e41"
+          },
+          {
+            "name": "truncated-60",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b48819af86a209c4e8476ca6bfc6781243c1763401c3e7d6d5887824cc6667bb"
+          },
+          {
+            "name": "truncated-61",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "b13af82a24c90a6d127fd5d3857bdb6e43854c548ea4aa34090427def8c8790a"
+          },
+          {
+            "name": "truncated-62",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "746b5404bffc1db237fc1cf05c49853f0c7173e8744194728ed40ad12e2a6d76"
+          },
+          {
+            "name": "truncated-63",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a3cb5d32cfb73891ffd613e80871fd054b802b91b59b96f9b2dcde7224053187"
+          },
+          {
+            "name": "truncated-64",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a9fcff641031fc93efb01bee0e719cc40115bba8329c3e3daa49d8ad4f4f91c3"
+          },
+          {
+            "name": "truncated-65",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c2b500e194fe076ee09e9168b2b740374ab0588de92f306ca9853c4afeb16cfd"
+          },
+          {
+            "name": "truncated-66",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "6385c6e49b6c6096004501104c82bf44a691da220ec5554fa76b04d815daaa6c"
+          },
+          {
+            "name": "truncated-67",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fdee21a6063d660aa61f55a710c1897d9c53d168ad39d8d33285cc5d7ac27a8b"
+          },
+          {
+            "name": "truncated-68",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "514302452c4d9add28f365d5aa1bc5f7843ce699e21a7d593fc0025752422690"
+          },
+          {
+            "name": "truncated-69",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "7e2a9465c22fc43dd80fc9da186bcbaf2dc81869ddc1c8d5c9f89bd8e47bcc7a"
+          },
+          {
+            "name": "truncated-70",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "808e87210f9b893ee105ac730cefc65b9dad0e974915032e0f7ecd6bb37e263c"
+          },
+          {
+            "name": "truncated-71",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d54e7362b4308cf61005025f9b2d818a2a0db215a148540e27ef07f44b607c47"
+          },
+          {
+            "name": "truncated-72",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fa8f754596c1bf84d53540caa84ed05ee57cf4c9cf44ab9798518e3660c158fa"
+          },
+          {
+            "name": "truncated-73",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "4c75296f785935fa209da3ce7d3cd76e74ea6d58f0ad7a451a95066e555a794d"
+          },
+          {
+            "name": "truncated-74",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9483e9ae489410d395babc0753c8a2ba219b98b33787bc0134f27e33e69d9451"
+          },
+          {
+            "name": "truncated-75",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fc121c103e3f8d483578d791fd5b094f3a6158f8378a97778473fe782370bea9"
+          },
+          {
+            "name": "truncated-76",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "fb4393dd0b7d09ec6f15fc214f7b50d0a4e154cba195ff2b1abfda783686dc4c"
+          },
+          {
+            "name": "truncated-77",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e6a4979bb3ee4295e78f831c11bbbcb5d694a6eb5114f6717aee2ae9fa637bbc"
+          },
+          {
+            "name": "truncated-78",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a3730f0a758f61188f965ba7d2feb9e42950c1924581b54ed7dc16322d8cafc1"
+          },
+          {
+            "name": "truncated-79",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "72b3cf7ee3579ccda82dff87fa58bedccd64b701b1c7357d155f4709e06de489"
+          },
+          {
+            "name": "truncated-80",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1583e6da188ae86e9bf2ac28d8ad1ffe7724072eb84324d441b887040816e90c"
+          },
+          {
+            "name": "truncated-81",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "a23a4eacf4da0c6112299d5968767aad6982e98bab2128e429d0e0006ae57fe4"
+          },
+          {
+            "name": "truncated-82",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d3add96dbcc5a6f92b1f0fdb36a07d9bba7e6870cb8454611d1a4a77a1e06ef3"
+          },
+          {
+            "name": "truncated-83",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1da0b057d44be958a7d9af6916e5f9fec88cc4c103302c4de0b24542b7484864"
+          },
+          {
+            "name": "truncated-84",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8ed3a3073552a022e5bbddc60f4b35b84381179476b4f0d0ba06860ef52ffbbf"
+          },
+          {
+            "name": "truncated-85",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "2c0b7740ead92efc2225d887ad881b977ac5e87b86a6cc2f0acb5017787111fe"
+          },
+          {
+            "name": "truncated-86",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "8b31f44fa135a5060f831fdf24a4231a01663da5ecc352b0c2b24fe22d44b1ff"
+          },
+          {
+            "name": "truncated-87",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d4bf7ae6fb4d87d8b4122ddb272439917adb8f153f68a21c41033f9c309adfe0"
+          },
+          {
+            "name": "truncated-88",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "46ca41766a634268be76f4a17ebfbe53782c73caf342e8d187e514a6f24db9cb"
+          },
+          {
+            "name": "truncated-89",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "c242468bda22c5066bd844069c6f178041025530df0f4b3697760ec94d261cd6"
+          },
+          {
+            "name": "truncated-90",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "5e07e15bbda49cf5a45f1cb96fb797befe491a89d5f5ee869f29c11f51c9ec50"
+          },
+          {
+            "name": "truncated-91",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "630905864c63ef05fc821901db755435f5b393ae17664a4fc65d28b948228eac"
+          },
+          {
+            "name": "truncated-92",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "67ea168a08ad82660f92b533d4da47818b3ebdef58926578749562c6e8213669"
+          },
+          {
+            "name": "truncated-93",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "ef2bfd8999eb4b3be03f8333ce5c129fbe53db50843f5f84c49d0452564e5ea4"
+          },
+          {
+            "name": "truncated-94",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "1f7e94a54e7bcf6dc9f8a15dbdae50ca78799c743dbfbad82db423d7e186bb84"
+          },
+          {
+            "name": "truncated-95",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "61d8d935e31e11f23057ecd0d068a6aa1c7318bb4e031311b8bce041888c5587"
+          },
+          {
+            "name": "truncated-96",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "07950223932d51a8938fd97fbce2238785525ef34bf4cbd0cb41dfd065bb992b"
+          },
+          {
+            "name": "truncated-97",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "e73722397bdbff2947bdea39738f2c029715cc14c65c1cd2fc9c04238a941c9c"
+          },
+          {
+            "name": "truncated-98",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "c4f18fedd0fe5c79803dce91ef18633921f328950bf5e6c9840bedf2669bb1c5"
+          },
+          {
+            "name": "truncated-99",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "990c4a3fe6c31eefdcf0b3729be2d360aaede3e8a0e502220bdeb52b24433ce3"
+          },
+          {
+            "name": "truncated-100",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "63738fd5c7945ad7513ee2586f2b2137bdf99188a926a879c4c3bfbee23c764d"
+          },
+          {
+            "name": "truncated-101",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "401fe605139c2ba8134fe4793fff193fb61ce654c805a944c612aecf8a4405b0"
+          },
+          {
+            "name": "truncated-102",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "0853acf342106b4bbe1e9997a189a6c64008d48a486a5c660072baf284b9ff07"
+          },
+          {
+            "name": "truncated-103",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "b9961b3089446a931bb51e0a67b309e65ed17b9301c373834324704ce063c886"
+          },
+          {
+            "name": "truncated-104",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "eaa030e075ae0cf329894e61867c50ad4bb2c571ff92c4501298e7c866e8e764"
+          },
+          {
+            "name": "truncated-105",
+            "result": "REJECT truncated JPEG header",
+            "sha256": "b801e56051480e6696a11f502ebff33ec53948ce80d744755487c2cb8411ebdd"
+          },
+          {
+            "name": "truncated-106",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "d5c074d7dbd06a371546e155dfe6d792594882c6b4e0cf4edb8ad64c5ba3b4db"
+          },
+          {
+            "name": "truncated-107",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "27d5ef86c70e0d062a979e979c27de5ae26ff97bdbeb3e364b7700110c636d58"
+          },
+          {
+            "name": "truncated-108",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "9571945294c813888bf7486a81e2b2fa4a914cf2d61b5c62f5a1a49fc8928cfa"
+          },
+          {
+            "name": "truncated-109",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "abc2a16116c1240af676ed715c8437908be7b7811c106e3859888f58bb853658"
+          },
+          {
+            "name": "truncated-110",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "884c9f9ef01614d1de6f0253bf1ff6e0915010d55c666b1b7f7e45d3b305b7fd"
+          },
+          {
+            "name": "truncated-111",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "f89196085549a15911ef7839675e742bc8bd863ba7a858ba69316b6c0308a2f3"
+          },
+          {
+            "name": "missing-xmp",
+            "result": "REJECT no standard JPEG XMP packet",
+            "sha256": "04b2a562feccd3840f75c66e3a64cb00b71a03b15ca32565ec1e9db0bdc2238d"
+          },
+          {
+            "name": "empty-xmp",
+            "result": "REJECT empty JPEG XMP packet",
+            "sha256": "6c9a4e5d900bc63fb53494bea0b9e898771b1e4743b140d6cca00cf870379d34"
+          },
+          {
+            "name": "duplicate-xmp",
+            "result": "REJECT multiple standard JPEG XMP packets",
+            "sha256": "368ab2cbaaf515ebf22fc676205455d04bb9082e7204042b4c02ca223d82e295"
+          },
+          {
+            "name": "extended-xmp",
+            "result": "REJECT extended JPEG XMP unsupported",
+            "sha256": "289796e3fe71ead7dedd6c8f97318b9fed81f79e51c0b0c0fdc653332c6e664d"
+          },
+          {
+            "name": "no-frame",
+            "result": "REJECT JPEG scan without frame",
+            "sha256": "76b64c6a83070ffc6eec602c5f0abc9bf3f3d79da88ac703c54b2d532e000192"
+          },
+          {
+            "name": "duplicate-frame",
+            "result": "REJECT multiple JPEG frames",
+            "sha256": "f066f84b48608740bb2e3df7efbf720451ba9d75b24847a7f0c8600705a8e628"
+          },
+          {
+            "name": "bad-frame-count",
+            "result": "REJECT unsupported JPEG frame geometry",
+            "sha256": "8ab5e1ab888d359d2ff74c08e6e2ed89b433be43f37ad7e7f31ac4b79fcebbb0"
+          },
+          {
+            "name": "zero-height",
+            "result": "REJECT unsupported JPEG frame geometry",
+            "sha256": "e541666d36b8e692b83ccd379c3b4196ab921259d851937804145e61e2be25d3"
+          },
+          {
+            "name": "scan-count",
+            "result": "REJECT unsupported JPEG scan header",
+            "sha256": "378dc73fc0851b37fd5fa399afac10d9b8bcbb10dd7a089db87ac57bde63f67a"
+          },
+          {
+            "name": "short-length",
+            "result": "REJECT invalid JPEG segment length",
+            "sha256": "dcd8ee6b812f036721bdf89951751d0638e0a9013c9e3ac1bc96f15cf83b43c5"
+          },
+          {
+            "name": "out-of-bounds",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "df0530a9b6b3a0bae70f3ba015b6a10624abf1f1a9cb7d457915098599b46eb1"
+          },
+          {
+            "name": "standalone-restart",
+            "result": "REJECT unsupported JPEG marker",
+            "sha256": "ccacdfda0b236515890532fbc0acef8308022cf8be79c1efafffbd14b54e0d3b"
+          },
+          {
+            "name": "fill-limit",
+            "result": "REJECT JPEG fill limit",
+            "sha256": "5cd40f13ae089f03545a853250b95b1174101431cd1d508af65f52e1e4f13ac3"
+          },
+          {
+            "name": "cumulative-fill-one-over",
+            "result": "REJECT JPEG cumulative fill limit",
+            "sha256": "dd465706288a04f15889139d798c36eb87bc7f65a962af84dcd55f0392e85606"
+          },
+          {
+            "name": "cumulative-fill-limit",
+            "result": "REJECT JPEG cumulative fill limit",
+            "sha256": "5309d44815adce125da289da5c1a173718f2f260acd0a695b7d43b65222a994d"
+          },
+          {
+            "name": "marker-limit",
+            "result": "REJECT JPEG header limit",
+            "sha256": "19cd6807cd0d776f487ddae8cd2310101968b07c87913f1a37ea5f679c703226"
+          },
+          {
+            "name": "header-limit",
+            "result": "REJECT JPEG segment/header bounds",
+            "sha256": "110efdd5cf966f1181829f9da9b1c669acea75e29ce268b8eebfcef5d3c8955c"
+          },
+          {
+            "name": "metadata",
+            "result": "APPLIED 16 1",
+            "exactBytes": true
+          },
+          {
+            "name": "unchanged",
+            "result": "APPLIED 0 0",
+            "exactBytes": true
+          },
+          {
+            "name": "entropy",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "exif",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "icc",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "trailer",
+            "result": "FALLBACK bytes outside editable regions changed",
+            "exactBytes": true
+          },
+          {
+            "name": "growth",
+            "result": "FALLBACK profile, size or layout changed",
+            "exactBytes": true
+          },
+          {
+            "name": "relocation",
+            "result": "FALLBACK profile, size or layout changed",
+            "exactBytes": true
+          }
+        ],
+        "previousKernelNegative": {
+          "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-jpeg-x3gzivfl/jpeg-test",
+          "binarySha256": "0d288888903137d8847d548f0031e2b4fe0b1901e61a4b495ddf1ea11ea0396d",
+          "oldResult": "REGION 9082 16",
+          "newResult": "REJECT JPEG cumulative fill limit"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-21y9xa3a",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-21y9xa3a/src/unison",
+          "bytes": 7365544,
+          "sha256": "4b277e22ea7744b30b4330af8a188b462e15e2d96918031e9f2d7caac36ea868"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-21y9xa3a/build.log",
+          "bytes": 75104,
+          "sha256": "421e94025bad1c418e5a3b0bfc34710e031ef188626a6fbf9523263df3cc0653"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-21y9xa3a/selftest.log",
+          "bytes": 686,
+          "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      }
+    }
+  ],
+  "actualMixedCompilerSync": {
+    "pin": {
+      "path": "/private/tmp/unison-jpeg-fill-sync.json",
+      "bytes": 2052,
+      "sha256": "7152db00c56c216e2f0d23bb6302b1c8cb6cd24f7199c00ebe1656de429d5a2e"
+    },
+    "receipt": {
+      "schema": "unison-jpeg-sync/1",
+      "status": "passed",
+      "workspace": "/private/tmp/unison-jpeg-sync-nriadkke",
+      "client": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-21y9xa3a/src/unison",
+        "sha256": "4b277e22ea7744b30b4330af8a188b462e15e2d96918031e9f2d7caac36ea868"
+      },
+      "server": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4mr3pbqw/src/unison",
+        "sha256": "375445c4d23b8b544b0937ae1d4dba6a24164cf650bd18f61a29dc1e59b8d313"
+      },
+      "legacy": false,
+      "disabled": false,
+      "checks": [
+        {
+          "name": "initial",
+          "semanticUsed": false,
+          "logSha256": "0ec0cf2a64581c9da12170bef7f5b2742e7dadde6502502626e996ef907d341f",
+          "targetSha256": "bb6c60cea3234ca921755cea4b4f5c488808371799e42ec1260f2cee65e9fb34"
+        },
+        {
+          "name": "remote-metadata",
+          "semanticUsed": true,
+          "logSha256": "634e9aeacdc32cef06e57f76358391e713abc2a56c946a666c01668196cec44f",
+          "targetSha256": "24fef4920110a112c5061144758a51a75674eaf1a0791ed8d8f7c3f90aa54037"
+        },
+        {
+          "name": "local-metadata",
+          "semanticUsed": true,
+          "logSha256": "a966c216b84f4cfe0cd2314c75696210506e9baf90327fe8f574701889df242d",
+          "targetSha256": "532a3d61d63a8ade0c90e8c92c134f19371b28a38529caa0af477c9641128d60"
+        },
+        {
+          "name": "opaque-fallback",
+          "semanticUsed": false,
+          "logSha256": "b08af5d876252898c5413402fa396fe7500bdfe94cc678f7e404e44b359c0728",
+          "targetSha256": "63e501f94258043df55b4764f808501189fdf37e7018004d03b08950566da638"
+        },
+        {
+          "name": "growth-fallback",
+          "semanticUsed": false,
+          "logSha256": "d1f026d389ab0d0c83e155fcd094cd6591a1dfadcf52ce9b633c2603c6af106d",
+          "targetSha256": "4c173c442d04e37b01fd79326ab2f2cac33a39ca78b01328b386242c791fbf77"
+        },
+        {
+          "name": "noop",
+          "semanticUsed": false,
+          "logSha256": "7086b76d1ece2cdac541f171066fb2b8af265f073ac65d9c62477be76b52136f",
+          "targetSha256": "4c173c442d04e37b01fd79326ab2f2cac33a39ca78b01328b386242c791fbf77"
+        }
+      ]
+    }
+  },
+  "sourcePins": {
+    "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+    "src/jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+    "tests/jpeg/run.py": "f3c633a76be53fae3b96d7f284614a476b397bf0e38adeed8cea8d138151f4b2"
+  },
+  "independentAgentReview": false,
+  "scope": "Cumulative locator prefix/fill read bound8192; exact/one-over boundaries; previous genuine kernels accept over-budget fixture;142 kernel cases per compiler and six actual mixed CLI cases",
+  "limits": [
+    "Bounded locator work, not wall-time/RSS/total hashing proof",
+    "Prior full Dune/corpus/codec controls are historical, not repeated for this slice",
+    "No Adobe/Lightroom/Photo invocation or production publisher",
+    "Broader M4-V/M5/M6 remains unfinished"
+  ],
+  "goalComplete": false
+}

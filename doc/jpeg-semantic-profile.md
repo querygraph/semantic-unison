@@ -19,7 +19,7 @@ The locator uses the standard null-terminated APP1 signature documented in
 Segment lengths include their two-byte length field. The signature and framing
 remain protected; only the exact packet extent is editable, including padding.
 The maximum packet is65504 bytes; headers are bounded to16MiB/4096 markers and
-4096 fill bytes per marker. One supported pre-scan frame and bounded scan
+4096 fill bytes per marker, with8192 cumulative marker prefix/fill bytes. One supported pre-scan frame and bounded scan
 header are required. Extended XMP before the first scan, duplicate/empty main
 packets, unsupported markers and malformed/truncated framing decline this
 profile. Declining eligibility selects ordinary exact transfer.
@@ -51,3 +51,5 @@ raster after exact reconstruction. Source/binary/receipt pins are retained in
 [the qualification record](../tests/jpeg/qualification.json). This root-owned
 record is not representative JPEG corpus, Adobe/Lightroom, GUI, other-platform,
 new extended-XMP or measured throughput qualification.
+
+The cumulative fill bound closes a multiplicative small-read workload: per-marker limits alone allowed thousands of individually bounded fill runs. The new shared counter caps total prefix/fill reads; exact8192 and8193 boundary controls and genuine prior-binary acceptance are pinned in [the follow-up qualification](../tests/jpeg/fill-bound-qualification.json). Initial qualification remains immutable historical evidence.

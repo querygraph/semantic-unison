@@ -14,7 +14,7 @@ let inspect file =
       SemanticFile.read file at count in
     if read 0L 2 <> "\255\216" then reject "not JPEG SOI";
     let position = ref 2L and markers = ref 0 and packet = ref None
-    and frame = ref false and finished = ref false in
+    and frame = ref false and finished = ref false and total_fills = ref 0 in
     let byte at = Char.code (read at 1).[0] in
     let be16 s = Char.code s.[0] * 256 + Char.code s.[1] in
     let starts at count prefix = count >= String.length prefix &&
@@ -26,7 +26,8 @@ let inspect file =
       if byte !position <> 255 then reject "invalid JPEG marker prefix";
       let fills = ref 0 in
       while byte !position = 255 do
-        incr fills;
+        incr fills; incr total_fills;
+        if !total_fills > 8192 then reject "JPEG cumulative fill limit";
         if !fills > 4096 then reject "JPEG fill limit";
         position := Int64.succ !position
       done;

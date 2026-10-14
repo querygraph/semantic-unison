@@ -26,3 +26,5 @@ The source has no production Photo inputs, external native cache or publisher
 calls. Retained local artifacts are pinned by qualification.json. Root performed
 the source/evidence audit; no independent-agent implementation approval is
 claimed. Future broader JPEG policies require separately versioned profiles.
+
+Cumulative fill follow-up: `run.py` accepts `--old-kernel PATH` to show the prior parser accepts a three-marker9000-fill workload while the new parser declines it. New positive8192 cumulative prefix/fill and negative8193 controls pin the precise bound; all142 cases run on both compilers. This bounds locator read calls, not whole-file hashing, wall time, RSS or arbitrary helper CPU use.
