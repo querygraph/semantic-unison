@@ -1,0 +1,21 @@
+diff --git a/GNUmakefile b/GNUmakefile
+index 68227b9..600621f 100644
+--- a/GNUmakefile
++++ b/GNUmakefile
+@@ -334,5 +334 @@ endif
+-ifeq "$(SYS)" "Darwin"
+-	SHMAT_OK=0
+-	override CFLAGS += -DUSEMMAP=1
+-	LDFLAGS += -Wno-deprecated-declarations
+-endif
++# Private OCaml compatibility probe: retain detected SysV support.
+diff --git a/include/config.h b/include/config.h
+index 6afdce9..c868194 100644
+--- a/include/config.h
++++ b/include/config.h
+@@ -49 +49 @@
+-  #define USEMMAP 1
++  /* Private OCaml probe: use SysV instead of mmap. */
+@@ -65 +65 @@
+-#define DEFAULT_SHMEM_SIZE (8 * 1024 * 1024)
++#define DEFAULT_SHMEM_SIZE 65536

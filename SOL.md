@@ -4,6 +4,20 @@
 
 ## Live implementation handoff
 
+* Parser test execution handoff (2026-10-14): a read-only synthetic AFL target
+  and separate `--build-only` mode are available in
+  [the test handoff](tests/semantic/fuzz/README.md). Stock instrumentation emits
+  actual coverage; the five-second SDE preparation probe completed 907 executions
+  and found 13 new corpus entries/123 edges, with no saved crashes/hangs. This
+  preliminary result does not close malformed-input acceptance. OxCaml's
+  compiler-selected target builds; no OxCaml campaign is claimed. Native C
+  sanitizers, failure-oracle controls, sustained campaigns and the full profile
+  matrix remain open. macOS settings are unchanged. Further automated campaigns
+  were deferred after reported service access interruptions; the user requested
+  a build/run separation to execute tests locally. The independent deterministic
+  codec suite passes 127 cases/2,033 assertions on each installed compiler.
+  No Adobe/Photo operations or production source changes in this checkpoint.
+
 * Nested-backend workspace sizing (2026-10-14): admitted directory parallelism
   now divides the shared CPU budget by the largest selected backend's caller-
   inclusive lane declaration. For 18 cores this plans 18 one-lane, six three-
