@@ -17,3 +17,8 @@ val add_cost : t -> bytes:int -> descriptors:int -> int * int
 (** Checked addition of backend requirements to existing workspace credits. *)
 
 val equal : t -> t -> bool
+val parallel_workspaces : t -> cpu_budget:int -> int
+(** Maximum complete backend invocations within the shared CPU budget, including
+    the caller in each declaration. Resource-free legacy companions use one lane.
+    Reject nonpositive budgets or declarations exceeding the budget. This sizes
+    retained workspaces; active execution still uses the shared supervisor. *)

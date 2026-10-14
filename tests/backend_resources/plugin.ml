@@ -41,6 +41,15 @@ module Validator = struct
          with error -> close_out_noerr output; raise error);
         if selected_mode = "reject" then
           fail (Util.Transient "synthetic registered validator rejected private candidate")
+        else if selected_mode = "hold-cpu" then
+          HelperSupervisor.with_cpu_permits context.supervisor
+            ~weight:(BackendResources.cpu_lanes context.resources) context.cancellation
+            (fun () ->
+              let held,_ = HelperSupervisor.usage context.supervisor in
+              if held <> BackendResources.cpu_lanes context.resources then
+                fail (Util.Transient "synthetic nested backend did not hold its declared CPU lanes")
+              else Lwt_unix.sleep 0.02) >>= (function
+              | Some () -> return () | None -> fail (Util.Transient "synthetic nested backend cancelled"))
         else return ())
 end
 let () = CandidateValidators.register ~resources (module Validator)

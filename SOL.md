@@ -4,6 +4,20 @@
 
 ## Live implementation handoff
 
+* Nested-backend workspace sizing (2026-10-14): admitted directory parallelism
+  now divides the shared CPU budget by the largest selected backend's caller-
+  inclusive lane declaration. For 18 cores this plans 18 one-lane, six three-
+  lane or one 18-lane invocation; SDK runtime thread compliance remains separate.
+  Stock/Ox each pass 17 declaration/resource controls and five compiled-backend
+  receiving cases. A two-lane backend holds both permits using a single 7 MiB
+  envelope under an 8 MiB cap. The exact previous CandidateValidation requests
+  12 MiB and fails the designated oracle. Legacy and nested same-process
+  success/rejection/cancellation/retry all settle their ledgers with unchanged
+  originals. Make/Dune+selftests and the tree receiving matrix pass per compiler.
+  [Successor pins](tests/validation_tree_limits/nested-workspaces-qualification.json).
+  This is synthetic admission/permit proof, not actual SDK performance, thread
+  compliance or full M4-V/M6 completion. No Adobe/Photo invocation.
+
 * Estimated directory memory admission (2026-10-14): opt-in endpoint-local
   `validationtreememory` reserves two retained-manifest estimates and parallel
   per-file workspaces before enumeration. A local gate partitions held credits;

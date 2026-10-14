@@ -2,6 +2,7 @@ open Lwt
 let mode = ref "pass"
 let active = ref 0
 let peak = ref 0
+let nested = Array.length Sys.argv > 1 && Sys.argv.(1)="nested"
 module Recognition = struct
   let format = "test/tree-settlement-v0"
   let identify file = if SemanticFile.size file >= 4L && SemanticFile.read file 0L 4="TOY0"
@@ -12,7 +13,8 @@ module Validator = struct
   let select () =
     let selected = !mode in
     Some (fun (context:CandidateValidator.context) ->
-      HelperSupervisor.with_cpu_permits context.supervisor ~weight:1 context.cancellation (fun () ->
+      HelperSupervisor.with_cpu_permits context.supervisor ~weight:(if nested then 2 else 1) context.cancellation (fun () ->
+        assert (not nested || fst (HelperSupervisor.usage context.supervisor)=2);
         incr active; peak := max !peak !active;
         if selected="cancel" then Abort.all ();
         Lwt.try_bind (fun () -> Lwt_unix.sleep 0.05)
@@ -21,7 +23,10 @@ module Validator = struct
           (fun error -> decr active; fail error)) >>= function
       | Some () -> return () | None -> fail (Util.Transient "private tree cancelled"))
 end
-let () = CandidateValidators.register (module Validator)
+let resources () = if not nested then BackendResources.none else
+  BackendResources.make ~backend:"test/nested-tree-v0" ~cpu_lanes:2 ~covered_bytes:0
+    ~uncovered_estimate:4194304 ~descriptor_credits:2 ~coverage:BackendResources.Accounting_only
+let () = CandidateValidators.register ~resources (module Validator)
 let write path data = let c=open_out_bin path in output_string c data;close_out c
 let read path = let c=open_in_bin path in let s=really_input_string c (in_channel_length c) in close_in c;s
 let main () =
@@ -37,9 +42,13 @@ let main () =
   let runtime=SemanticRuntime.get () in
   List.iter (fun selected ->
     Abort.reset ();mode:=selected;peak:=0;
+    let diagnostic = ref "" in
     let succeeded = try Lwt_unix.run (CandidateValidation.before_commit ~directory
       ~candidate ~destination:(Path.fromString "destination"));true
-      with Util.Transient _ -> false in
+      with Util.Transient reason -> diagnostic := reason;false in
+    if nested && selected="pass" && not succeeded &&
+      !diagnostic="semantic reservation exceeds the configured resource budget" then
+      failwith "DESIGNATED nested CPU backend workspace overreserved";
     assert (succeeded=(selected="pass"));
     Abort.reset ();
     let a=SemanticRuntime.admission_usage () and i=IoAdmission.usage runtime.io
@@ -47,7 +56,7 @@ let main () =
     assert (a.transactions=0 && a.pending=0 && a.payload_bytes=0 && a.descriptors=0);
     assert (w.pending=0 && w.running=0 && i.active_jobs=0 && i.pending=0);
     assert (HelperSupervisor.usage runtime.supervisor=(0,0) && !active=0);
-    if selected="pass" then assert (!peak=2);
+    if selected="pass" then assert (!peak=(if nested then 1 else 2));
     List.iter (fun path -> assert (read path=data)) files;
     Printf.printf "PASS tree %s: credits/CPU/IO settled, peak=%d, originals exact\n%!" selected !peak)
     ["pass";"reject";"cancel";"pass"];

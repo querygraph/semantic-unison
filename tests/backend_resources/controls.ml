@@ -94,4 +94,12 @@ let () =
      with Util.Fatal _ -> ());
     Prefs.loadStrings ["validationtreememory = 1"];
     assert (ValidationTreePolicy.memory_bytes ()=1048576));
+  check "nested CPU declarations size complete workspaces" (fun () ->
+    List.iter (fun (lanes,expected) -> assert
+      (BackendResources.parallel_workspaces (plan ~cpu:lanes ()) ~cpu_budget:18=expected))
+      [1,18;3,6;6,3;18,1];
+    assert (BackendResources.parallel_workspaces BackendResources.none ~cpu_budget:18=18);
+    assert (BackendResources.parallel_workspaces (plan ~cpu:6 ()) ~cpu_budget:17=2);
+    invalid (fun () -> BackendResources.parallel_workspaces (plan ~cpu:3 ()) ~cpu_budget:2);
+    invalid (fun () -> BackendResources.parallel_workspaces BackendResources.none ~cpu_budget:0));
   Printf.printf "PASSED %d resource controls\n%!" !passed

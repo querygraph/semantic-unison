@@ -181,16 +181,17 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
   if validators = [] then return () else
   let manifests = ValidationTreePolicy.memory_bytes () in
   let _,cpu_budget = SemanticRuntime.helper_supervisor () in
+  let resources = CandidateValidators.maximum_resources validators in
+  if BackendResources.cpu_lanes resources > cpu_budget then
+    raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
   let count = match reservation with Some _ -> 1
     | None ->
         if manifests <> 0 && (Fs.lstat (Fspath.concat directory candidate)).Unix.LargeFile.st_kind <> Unix.S_DIR
-        then 1 else min 256 cpu_budget in
+        then 1 else min 256 (if manifests=0 then cpu_budget else
+          BackendResources.parallel_workspaces resources ~cpu_budget) in
   if manifests = 0 then
     validate_tree ~count ~reservation ~validators ~directory ~candidate ~destination ()
   else begin
-    let resources = CandidateValidators.maximum_resources validators in
-    if BackendResources.cpu_lanes resources > cpu_budget then
-      raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
     let per_bytes,per_descriptors = BackendResources.add_cost resources ~bytes:1048576 ~descriptors:9 in
     let scale value = if value > max_int / count then
         raise (Util.Fatal "Validation tree workspace accounting overflow") else value * count in

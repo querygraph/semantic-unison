@@ -33,3 +33,7 @@ let maximum plans = List.fold_left (fun total plan ->
 let add_cost t ~bytes ~descriptors = sum bytes t.bytes,sum descriptors t.descriptors
 
 let equal a b = a = b
+let parallel_workspaces t ~cpu_budget =
+  if cpu_budget < 1 || t.cpu > cpu_budget then
+    invalid_arg "backend CPU declaration exceeds the shared budget";
+  cpu_budget / max 1 t.cpu

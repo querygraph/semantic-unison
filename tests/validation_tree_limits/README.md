@@ -15,6 +15,10 @@ one global transaction; oversized whole plans and retained estimates reject
 before helpers. A separately linked actual-object probe exercises success,
 rejection, cancellation and fresh retry in the same process, with zero residual
 resource/CPU/I/O ledgers and unchanged private originals.
+The nested variant declares two lanes, actually holds both shared CPU permits
+and uses one workspace. The exact preceding CandidateValidation participant
+requests two workspaces and fails the same fixture's designated budget oracle.
+All other prefix objects are current; this is not a complete prior executable.
 
 The actual CandidateValidation implementation is separately linked with private
 read/close observations. Cancellation after three real native reads closes the

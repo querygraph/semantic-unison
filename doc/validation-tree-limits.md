@@ -28,7 +28,9 @@ discards private staging. Live destinations and source inputs remain untouched.
 `validationtreememory` is an opt-in retained-manifest estimate in MiB; zero
 preserves legacy unadmitted manifest accounting. A positive value reserves two
 snapshots plus a fixed number of file-validation workspaces before enumeration.
-Unbound directories use up to the shared CPU budget; regular files and existing
+Unbound directories divide the shared CPU budget by the largest selected
+backend's caller-inclusive CPU-lane declaration (legacy resource-free backends
+use one lane). Regular files and existing
 bound publication envelopes use one workspace. Each file workspace includes
 the largest selected sequential backend declaration. A local admission gate
 partitions the held credits, so child validation never queues for another
@@ -48,6 +50,9 @@ enablement or budget growth from consuming retained metadata capacity.
 An unbound directory reserves `2 * manifest + N * (1 MiB + backend bytes)` and
 `15 + N * (9 + backend descriptors)`, with N up to the configured CPU budget.
 The parent is one global transaction; the child gate partitions its N workspaces.
+N is `floor(CPU budget / max(1, backend CPU lanes))`, so an 18-core budget gives
+18 one-lane, six three-lane or one 18-lane backend invocation. Actual native
+thread compliance remains the backend's separately qualified responsibility.
 If this complete plan cannot fit, admission rejects before enumeration. For
 18 workspaces and no added backend declaration, a 64 MiB manifest budget needs
 146 MiB and 177 descriptor credits. Source service headroom remains protected.
@@ -74,3 +79,11 @@ adds actual single-global-transaction partition tests, two concurrent synthetic
 helpers, oversized reservations and retained estimates, declaration pinning,
 and same-process success/rejection/cancellation/retry with settled ledgers.
 The original structural receipt remains historical.
+
+The [nested-workspace successor](../tests/validation_tree_limits/nested-workspaces-qualification.json)
+proves a two-lane backend holds both shared permits with one workspace: its
+7 MiB envelope fits an 8 MiB budget. The exact preceding CandidateValidation
+implementation requests 12 MiB and fails the designated overreservation oracle.
+Both legacy and nested fixtures settle success/rejection/cancellation/retry in
+the same process. These are synthetic permit/admission proofs, not actual SDK
+threading or CPU-utilization measurements.

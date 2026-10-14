@@ -59,7 +59,10 @@ directory paths admit validation work, but this does not establish that their
 entire tree was reserved before creation. With positive `validationtreememory`,
 both retained-manifest estimates and parallel file workspaces are reserved
 before enumeration; a local gate partitions held credits rather than nesting
-global acquisition. Initial property reading/serialization is not allocator-
+global acquisition. Parallel workspace count divides the CPU budget by the
+largest selected backend's caller-inclusive CPU-lane declaration. This avoids
+reserving one large SDK workspace per core when the SDK uses several cores per
+invocation; execution continues using the same weighted supervisor. Initial property reading/serialization is not allocator-
 enforced. See the [directory contract](validation-tree-limits.md). CPU
 declarations do not force an arbitrary library to honor nested thread limits;
 the adapter must enforce and qualify that behavior using the shared supervisor.

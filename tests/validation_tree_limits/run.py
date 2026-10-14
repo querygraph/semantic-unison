@@ -39,6 +39,18 @@ let () =
  sb=settled/'probe';command([a.compiler,*sf,'unix.cmxa','str.cmxa',*[src/m for m in before],src/'candidateValidation.cmx',settled/'settlement.ml',*[src/n for n in objects('COBJS')],'-o',sb],settled,'settlement-link')
  (settled/'state').mkdir();output=command([sb],settled,'settlement',env_extra={'UNISON':str(settled/'state')});assert output.count('PASS tree ')==4
  j['settlement']=dict(binarySha256=H(sb),scenarios=['pass','reject','cancel','fresh-pass'],sourceSha256=H(settled/'settlement.ml'));print('PASS tree settlement/retry',flush=True)
+ nested=w/'nested-settlement';nested.mkdir();(nested/'state').mkdir()
+ output=command([sb,'nested'],nested,'nested-settlement',env_extra={'UNISON':str(nested/'state')});assert output.count('PASS tree ')==4
+ j['nestedSettlement']=dict(binarySha256=H(sb),scenarios=['pass','reject','cancel','fresh-pass'],cpuLanes=2,cpuBudget=2,workspaces=1,peakPermits=2);print('PASS nested tree settlement/retry',flush=True)
+ previous=w/'previous-workspaces';previous.mkdir();(previous/'state').mkdir()
+ old=subprocess.check_output(['git','show','5dac6ac:src/candidateValidation.ml'],cwd=r)
+ (previous/'candidateValidation.ml').write_bytes(old);(previous/'candidateValidation.mli').write_bytes((src/'candidateValidation.mli').read_bytes());(previous/'settlement.ml').write_bytes((r/'tests/validation_tree_limits/settlement.ml').read_bytes())
+ pf=['-I',str(previous),*sf]
+ for suffix in ['mli','ml']:command([a.compiler,*pf,'-c',previous/('candidateValidation.'+suffix)],previous,'previous-compile-'+suffix)
+ pb=previous/'probe';command([a.compiler,*pf,'unix.cmxa','str.cmxa',*[src/m for m in before],previous/'candidateValidation.cmx',previous/'settlement.ml',*[src/n for n in objects('COBJS')],'-o',pb],previous,'previous-link')
+ output=command([pb,'nested'],previous,'previous-workspaces',2,env_extra={'UNISON':str(previous/'state')});assert 'DESIGNATED nested CPU backend workspace overreserved' in output
+ j['previousWorkspaceNegative']=dict(parent='5dac6ac',participantSha256=hashlib.sha256(old).hexdigest(),binarySha256=H(pb),expectedExit=2,scope='Exact previous CandidateValidation only, other prefix objects current; same nested-backend fixture exceeds the budget before work.')
+ print('PASS previous workspace overreservation negative',flush=True)
  for mode in ['positive','removed-check']:
   d=w/mode;d.mkdir();data=observed
   if mode=='removed-check':
