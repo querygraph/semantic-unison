@@ -4,6 +4,17 @@
 
 ## Live implementation handoff
 
+* Local build/run separation (2026-10-14): `tests/build_snapshot.py` now supports
+  Make or Dune and saves source/compiler/binary pins plus actual build/self-test
+  exits in its retained snapshot. [Local commands](doc/local-build-and-tests.md)
+  collect CLI, deterministic codec, sanitizer and separately chosen benchmark
+  entry points. The current full directory receiving matrix passes stock/Ox,
+  including missing-stage rejection and all ten CLI tree cases. No new fuzz,
+  Adobe, native preview or performance campaign is implied.
+  Fresh Make/Dune CLI builds+selftests pass on stock and OxCaml;
+  [build/matrix evidence](tests/qualification/local-build-handoff-20261014.json)
+  preserves the actual sources/outcomes and metadata-only builder revision.
+
 * Native-helper sanitizer build handoff (2026-10-14): independent deterministic
   codec tests support `--sanitize address,undefined --build-only`. Both actual
   compilers build complete test executables; native object symbol readback
