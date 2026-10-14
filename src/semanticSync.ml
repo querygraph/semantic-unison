@@ -483,12 +483,12 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
       (fun report -> close (); return report)
       (fun error -> close (); match error with
        | SemanticWorkers.Failed reason -> Lwt.fail (Util.Transient ("DNG scalar merge: " ^ reason))
-       | _ ->
-           (* Descriptor/resource settlement precedes classification. Ordinary
-              filesystem races must remain per-file failures, while cancellation,
-              programming errors and allocation failures keep their identity. *)
-           try Util.convertUnixErrorsToTransient "DNG scalar merge" (fun () -> raise error)
-           with error -> Lwt.fail error))
+       | (Unix.Unix_error _ | Sys_error _ | Sys_blocked_io) ->
+           (* The shared utility also converts Not_found/End_of_file. Invoke it
+              only for OS failures, after descriptor/resource settlement. *)
+           (try Util.convertUnixErrorsToTransient "DNG scalar merge" (fun () -> raise error)
+            with error -> Lwt.fail error)
+       | _ -> Lwt.fail error))
 
 let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
   merge_local_async_internal ~cache:None ~base_fingerprint ~base ~left ~right ~output

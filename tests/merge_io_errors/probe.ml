@@ -12,14 +12,7 @@ let () =
   let file name = Fspath.concat root (Path.fromString name) in
   let fingerprint = Os.data_only_fingerprint (Fingerprint.file root (Path.fromString "base")) in
   let baseline = fd_count () in
-  let failures = ref 0 in
-  List.iter (fun (name,base,left,right,output) ->
-    let result = try
-      ignore (Lwt_unix.run (SemanticSync.merge_local_async ~base_fingerprint:fingerprint
-        ~base:(file base) ~left:(file left) ~right:(file right) ~output:(file output)));
-      "unexpected success"
-    with Util.Transient message -> "transient: " ^ message
-       | error -> Printexc.to_string error in
+  let settled name =
     let a = SemanticAdmission.usage runtime.admission in
     let w = SemanticWorkers.usage runtime.pool in
     let io = IoAdmission.usage runtime.io in
@@ -29,6 +22,16 @@ let () =
     check (w.pending=0 && w.running=0 && io.active_jobs=0 && io.pending=0)
       (name ^ ": worker/I/O not settled");
     check (HelperSupervisor.usage runtime.supervisor = (0,0)) (name ^ ": CPU not settled");
+    () in
+  let failures = ref 0 in
+  List.iter (fun (name,base,left,right,output) ->
+    let result = try
+      ignore (Lwt_unix.run (SemanticSync.merge_local_async ~base_fingerprint:fingerprint
+        ~base:(file base) ~left:(file left) ~right:(file right) ~output:(file output)));
+      "unexpected success"
+    with Util.Transient message -> "transient: " ^ message
+       | error -> Printexc.to_string error in
+    settled name;
     if not (String.starts_with ~prefix:"transient: " result) then incr failures;
     Printf.printf "%s %s: %s\n%!" (if String.starts_with ~prefix:"transient: " result then "PASS" else "FAIL") name result)
     ["missing-base","absent","left","right","output";
@@ -37,5 +40,29 @@ let () =
      "missing-output","base","left","right","absent";
      "base-parent-not-directory","base/child","left","right","output";
      "output-is-directory","base","left","right","directory"];
+  if Sys.getenv_opt "UNISON_PRIVATE_MERGE_FAULT_PROBE" = Some "1" then
+    List.iter (fun name ->
+      Unix.putenv "UNISON_PRIVATE_MERGE_EXCEPTION" name;
+      let accepted = try
+        ignore (Lwt_unix.run (SemanticSync.merge_local_async ~base_fingerprint:fingerprint
+          ~base:(file "base") ~left:(file "left") ~right:(file "right") ~output:(file "output")));
+        false
+      with
+      | Not_found -> name="not-found"
+      | End_of_file -> name="end-of-file"
+      | Out_of_memory -> name="out-of-memory"
+      | Sys.Break -> name="break"
+      | Failure message -> name="failure" && message="private merge failure"
+      | Invalid_argument message -> name="invalid-argument" && message="private merge argument"
+      | Util.Fatal message -> name="fatal" && message="private merge fatal"
+      | Util.Transient message ->
+          (name="transient" && message="private existing transient") ||
+          List.mem name ["unix";"sys-error";"blocked-io"]
+      | _ -> false in
+      settled name;
+      if not accepted then incr failures;
+      Printf.printf "%s exception %s\n%!" (if accepted then "PASS" else "FAIL") name)
+      ["not-found";"end-of-file";"out-of-memory";"break";"failure";
+       "invalid-argument";"fatal";"transient";"unix";"sys-error";"blocked-io"];
   Lwt_unix.run (SemanticWorkers.shutdown runtime.pool);
   if !failures <> 0 then exit 2

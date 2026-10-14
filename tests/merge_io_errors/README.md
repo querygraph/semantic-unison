@@ -26,3 +26,17 @@ errors, and is not a passing current-source qualification. A successful harness
 exit means its explicitly expected probe exit was observed; inspect `probe_exit`
 and `expected_exit` in the receipt. No SDK, photos, catalogs or production files
 are opened, and no sanitizer/fuzz campaign runs.
+
+
+The extended probe also compiles an explicitly private copy of SemanticSync
+with eleven deterministic exception raises after four acquired descriptors.
+It checks OS-error conversion versus preservation of Not_found, End_of_file,
+Out_of_memory, Sys.Break, Failure, Invalid_argument, Fatal and existing Transient.
+No production fault hook or actual memory exhaustion is introduced.
+`--expected-fault-exit 2` selects a historical negative for this private probe;
+the normal object probe and private probe exits are recorded separately.
+Current positive runs require both probe exits to be zero. Historical negative
+runs may select a nonzero expected exit explicitly; their receipts retain that
+distinction and do not qualify current source. See
+[exception classification evidence](exception-qualification.json) for the current
+compiler-matched results and prior-implementation negative.

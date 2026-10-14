@@ -2559,3 +2559,49 @@ CLI binaries also rerun allten archive downgrade/recovery stages successfully.
 no SDK/Photo/Lightroom/production archives/source photos involved. Pending native
 merged-output request/executor/frozen artifact pins unchanged and UNADMITTED.
 Actual SDK merged outputs and broader M4-V/M5/M6 acceptance stay open.
+
+
+### Source audit correction: restrict merge error conversion — verification pending
+
+Inspection of the full inherited Util.convertUnixErrorsToTransient found that
+it also converts Not_found and End_of_file. The preceding implementation's claim
+that all programming exceptions retain identity was too broad. Source successor
+now matches only Unix.Unix_error, Sys_error and Sys_blocked_io before calling the
+utility; unrelated exceptions use unchanged Lwt.fail after cleanup.
+
+Prepared an extended private module probe raising eleven explicit exceptions
+after four descriptors are acquired, alongside six actual filesystem errors.
+It checks exception constructors and FD/CPU/transaction/worker/I/O settlement;
+no production injection hook or physical OOM. Python parses and unique private
+injection anchor validates, but NO compiler/runtime verification yet. Requested
+one compiler credit through queue01a13c6c-f0cb-7bc1-9268-08a53d816a0b to respect
+Root's first standalone-render priority. Source changes remain uncommitted until
+verified. Previous 95dbad8 receipts retain their original scope; its broad
+programming-exception identity claim is explicitly corrected here.
+
+Root source review of the three merged-output SDK calls is ACCEPTED with runtime
+DEFERRED for that preview priority. All request/evidence/current executor pins
+verified unchanged; [adoption](tests/sdk_container_receive/merged-root-source-adoption.json).
+No native admission/credit/SDK run/replay inferred, no compiler/Photo/Lightroom
+operation in this continuation. Goal active, not complete or a verified wait.
+
+
+### Exception-classification correction verified — 2026-10-14
+
+After the user reported Root's failed standalone-render closure and explicit
+18credit release, resumed serial one-job source builds (no SDK/native slot).
+Current stock/Ox Make+selftests pass. Both actual production probes pass six
+filesystem failures; private actual-interface module copies pass eleven explicit
+exception cases after four descriptors acquired: three OS errors convert to
+Transient, and Not_found/End_of_file/OOM/Break/Failure/Invalid_argument/Fatal/
+preexistingTransient retain constructors/payloads. FD counts, transaction/payload/
+descriptor/CPU/worker/I/O ledgers settle and sentinels remain unchanged.
+Previous95dbad8 implementation passes OS checks but fails precisely Not_found and
+End_of_file in the new private negative (expectedprobeexit2). Original earlier
+broad converter-identity claim is corrected, not silently reused as proof.
+[Sealed current and negative evidence](tests/merge_io_errors/exception-qualification.json).
+All build/probe parents genuinely closed0, no compiler reservation remains;
+explicit raises are not physical OOM/EIO or asynchronous signal-delivery proof.
+Merged-output SDK review accepted but runtime remains DEFERRED/UNADMITTED;
+source/request/frozen candidate pins unchanged. No Adobe/Photo/Lightroom call or
+completed-slot replay. Full goal remains active.
