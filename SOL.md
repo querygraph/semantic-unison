@@ -4,6 +4,25 @@
 
 ## Live implementation handoff
 
+* Private cache prerequisite source review (2026-10-14): the
+  [review](doc/preview-private-cache-constructor-review-20261014.json) accepts
+  the inspected existing-server-thread `PreviewCache.makeForPath` mechanism
+  for one EMPTY owned Ten root, conditional on fresh Root admission. No
+  constructor is invoked or runtime pass inferred. Require four NEW observer
+  removals, deletionTask nil, all five FileStore empty/zero conditions, exact
+  private paths/distinct objects, one normal close and independent closed
+  schema13/schema1 readback. Construction creates stores before its returned
+  cache table; partial construction has no observed rollback. Close is
+  sequential and may skip later stores on failure. These outcomes retain
+  Root's coordinator/lease and unresolved recovery ownership. Empty auxiliary
+  state does not qualify the populated RootPixels recipe. Preserve the sealed
+  recipe gate; the same-process isolated route needs a separate mapping from
+  app-close/open to CLOSED private-family publication and fresh private cache
+  admission. Later private native reuse differs from Library/UI recognition
+  and app restart. Source citation corrections are recorded separately.
+  Original renderer/publisher ownership and native-window authority remain
+  with Photo Root; all Unison work here is source/interface review.
+
 * Quasar priority (user, 2026-10-14): Photo Root has received the request to
   finish native recognition of the independently authored Ten-only recipe and
   then admit the bounded split-storage matrix. The current pointer at
