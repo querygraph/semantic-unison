@@ -4,6 +4,22 @@
 
 ## Live implementation handoff
 
+* Photo Root's BIG candidate notice (2026-10-14, saved metadata only):
+  image `86582588`, root `86582590`, settings `86582602`, UUID
+  `5CEF3706-E96B-4DBB-83A5-965DFB4BE71C`, digest
+  `288e8496c12fb4f21b95c6a3568761aa`, orientation AB. Reported native FINAL
+  AdobeRGB nonproxy crop is **5976×3992**, ladder 320/747/1494/2988/5976,
+  highest 7,842,663 bytes and ladder 10,071,969 bytes. Monitor-fit planning
+  is approximately 4311.42×2880, beyond the next lower 2988×1996 level.
+  Preserve the actual native highest name/geometry; no registered 5120 level
+  was found. The original Photo owner is sealing its metadata receipt.
+  Fresh owning Main/current identity/native rows/physical bytes/decode
+  geometry remain native-slot prerequisites. This is not Unison's independent
+  qualification or authorization to move files. The small 2272 control stays
+  first; BIG needs a separately admitted Root storage slot after recipe and
+  lifecycle gates, within eight sources/sixteen states/eighteen credits.
+  Preview design and execution remain owned by Photo Root.
+
 * DNG warning delivery follow-on (2026-10-14): permitted findings now use the
   user-interface warning channel after an owner-loop yield, preventing a
   nested remote/UI wait from holding the hash completion pump. Abort/context
