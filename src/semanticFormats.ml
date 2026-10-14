@@ -15,7 +15,9 @@ let () =
   register ~capability:"dng-xmp-v1" ~max_payload:FormatExtension.max_region
     ~suffixes:[".dng"] ~observer:DngExtended.observer (module DngExtended);
   register ~capability:"dng-xmp-v0" ~max_payload:FormatExtension.max_region
-    ~suffixes:[".dng"] ~observer:DngSemantic.observer (module DngSemantic)
+    ~suffixes:[".dng"] ~observer:DngSemantic.observer (module DngSemantic);
+  register ~capability:"jpeg-xmp-v0" ~max_payload:65504
+    ~suffixes:[".jpg";".jpeg"] (module JpegSemantic)
 
 let validate_selected profiles =
   List.iter (fun profile ->
