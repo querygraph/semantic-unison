@@ -6,7 +6,10 @@ same implementation builds on stock OCaml5.5.1 and OxCaml5.2.0+ox. An explicit
 that unchanged implementation and used with Domain.Safe.spawn in the tests.
 The stock interface remains ordinary OCaml syntax. The checked interface is
 currently selected by the qualification runner, not the production build.
-The existing SemanticWorkers pool is not yet switched to this component.
+SemanticWorkers now uses the component for both jobs and completions, with its
+existing mutex/condition counters and manually audited execution boundary.
+The production build still selects the stock-compatible interface; the checked
+worker execution/interface migration is not complete.
 
 An immutable snapshot contains front/back lists, count and closed state. Push,
 pop and close linearize at a successful CAS; every state update constructs a
@@ -46,3 +49,9 @@ selected extension/native execution interfaces and replace the domain-visible
 queue/counter state while preserving the sole Lwt owner, shared CPU permits,
 notification settlement and legacy stock compatibility. No Photo/Adobe/native
 preview work was performed.
+
+## Runtime pool integration
+
+Both runtime mailboxes have capacity max_pending (1..65536; configured runtime4096). Outstanding completion receipts remain part of pending admission, so a completed worker cannot release capacity/CPU ownership before owner dispatch. Job ownership transfers only after Added. Failed handoff leaves controller-owned duplicates/reply registration for existing cleanup guards. Full/Closed on an internal completion push violates the pending-count invariant and is terminal, never a dropped-success receipt. Producers and condition waiters retain the same mutex protocol, preventing a signal between empty observation and sleeping. Constructor failure closes the jobs mailbox before joining; normal shutdown waits pending0, closes jobs, joins domains, closes completions and settles notification pipes.
+
+[Runtime qualification](../tests/workers/mailbox-integration-qualification.json) includes seeded hash/inspection and apply races,39 post-dispatch settlement cases,21 FD acquisition/handoff cases with117 assertions,21 actual receiving paths and14 supervised helper controls per compiler. A paused-owner pressure test observes an actual completed result still queued with its CPU/transaction ownership, rejects another submission, then proves exact delivery, mailbox closure and descriptor settlement. Actual DNG/old-peer and mixed JPEG receiving controls pass. Current Safe.spawn substitution still rejects; queue integration alone has not made selected extension/FFI execution portable. Persistent allocation failures/foreign faults, fairness, full RSS/FD ceilings and performance qualification remain outside this finite evidence.

@@ -14,6 +14,9 @@ type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
 val create : workers:int -> max_pending:int -> budget:HelperSupervisor.t -> t
+(** Positive workers; max_pending must be1..65536. Runtime uses4096. Both job
+    and completion mailboxes reserve that many messages; admission includes
+    outstanding completions, preventing independent unbounded queues. *)
 val create_with_io : io:IoAdmission.t -> workers:int -> max_pending:int ->
   budget:HelperSupervisor.t -> t
 (** Share an owner-loop filesystem execution gate with helpers. Reserve source

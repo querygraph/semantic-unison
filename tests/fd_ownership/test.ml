@@ -90,7 +90,7 @@ let () =
           check ((SemanticWorkers.usage pool).pending = 0 && HelperSupervisor.usage budget = (0,0)) "submit controller ownership escaped";
           check ((Unix.fstat fd).Unix.st_size = 8192 && (Unix.fstat output).Unix.st_size = 8192) "submit closed borrowed caller FD";
           check (!(Fault.hits) = 1) "submit fault seam not invoked")))))
-    ["submit-operation";"submit-listener";"submit-monitor";"submit-admission";"submit-close-recycle"];
+    ["submit-operation";"submit-listener";"submit-monitor";"submit-admission";"submit-mailbox";"submit-close-recycle"];
   run "normal-pool-file-worker" (fun () ->
     Fault.reset "";
     let budget = HelperSupervisor.create ~cpu_permits:2 ~max_children:2 ~max_pending:8 in

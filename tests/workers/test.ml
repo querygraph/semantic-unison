@@ -134,6 +134,13 @@ let identify_tests () =
     check (rejects(fun () -> W.identify pool (H.cancellation()) ~recognizers:(List.init 17(fun _ -> matched,false)) file)) "capture ceiling ignored";
     check ((W.usage pool).pending=0) "invalid captures dispatched";Unix.close file)
 let scheduling_stress () =
+  let before=Array.length(Sys.readdir "/dev/fd") in
+  List.iter (fun max_pending ->
+    let b=budget 1 in
+    check (try ignore(W.create ~workers:1 ~max_pending ~budget:b);false
+      with Invalid_argument _ -> true) "worker mailbox bound not enforced";
+    check (H.usage b=(0,0)) "invalid worker capacity acquired permits") [0;-1;65537;max_int];
+  check(Array.length(Sys.readdir "/dev/fd")=before) "invalid worker capacity opened descriptors";
   let seeds = [1;17;103;4099;65537;20261014] in
   let checks = ref 0 and completed = ref 0 and cancelled = ref 0 in
   let verify value reason = incr checks; check value reason in

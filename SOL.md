@@ -4,6 +4,17 @@
 
 ## Live implementation handoff
 
+* Runtime mailbox integration (2026-10-14): worker jobs and completions now
+  use bounded atomic SemanticMailbox queues with max_pending admission covering
+  outstanding receipts. Actual paused-owner pressure proves queued completion
+  retains CPU/transaction ownership, rejects overflow and settles/closes cleanly.
+  Stock/Ox each pass3840 hash/inspection jobs,384 apply jobs,39 waiter-settlement
+  scenarios,21 FD controls/117 assertions plus three adapted historical guard
+  negatives,21 actual receive cases and14 shared-helper controls. Fresh Make and
+  Dune CLI/selftests and DNG/JPEG receiving regressions pass. [Evidence](tests/workers/mailbox-integration-qualification.json).
+  The production checked-interface/extension/FFI/counter migration remains open;
+  current Safe.spawn substitution still rejects. No Photo/Adobe invocation.
+
 * POSIX external command supervision (2026-10-14): external copy, merge and
   diff now use `SupervisedExternal` and the exact shared SDK/domain CPU owner.
   Helper-only initialization starts no worker domains; later runtime startup

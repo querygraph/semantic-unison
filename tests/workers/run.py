@@ -36,7 +36,7 @@ sources = [
     "src/dngSemantic.mli", "src/dngSemantic.ml",
     "src/dngExtended.mli", "src/dngExtended.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
-    "src/semanticWorkers.mli", "src/semanticWorkers.ml",
+    "src/semanticMailbox.mli", "src/semanticMailbox.ml", "src/semanticWorkers.mli", "src/semanticWorkers.ml",
     "tests/workers/test.ml",
 ]
 workspace = (contextlib.nullcontext(tempfile.mkdtemp(prefix="unison-workers-"))

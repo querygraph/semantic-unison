@@ -1,5 +1,6 @@
 open Lwt
 module H = HelperSupervisor
+module Mailbox = SemanticMailbox
 type fingerprint = { digest : string; stats : Unix.LargeFile.stats }
 type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
@@ -22,7 +23,7 @@ type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
              operation : operation }
 type shared = {
   mutex : Mutex.t; ready : Condition.t;
-  jobs : job Queue.t; completions : (int * response) Queue.t;
+  jobs : job Mailbox.t; completions : (int * response) Mailbox.t;
   notify : Unix.file_descr;
   mutable stopping : bool; mutable running : int; mutable peak : int;
 }
@@ -66,7 +67,8 @@ let unchanged a b =
 
 (* The worker side below sees only [shared] and [job], never the owner record.
    Domain.spawn is the stock-compatible, manually audited boundary: shared
-   queues/counters use the mutex, cancellation uses Atomic, hashing/channel
+   queues use immutable atomic mailbox state; condition/counters use the mutex,
+   cancellation uses Atomic, hashing/channel
    state is private. This does not claim compiler-proved portability. *)
 let execute job =
   let check_cancel () = if Atomic.get job.cancelled then raise Cancelled_job in
@@ -120,15 +122,17 @@ let execute job =
   | _ -> Error "unexpected digest worker failure"
 let rec worker shared () =
   let next = locked shared (fun () ->
-    while Queue.is_empty shared.jobs && not shared.stopping do
-      Condition.wait shared.ready shared.mutex
-    done;
-    if Queue.is_empty shared.jobs then None else begin
-      let job = Queue.take shared.jobs in
-      shared.running <- shared.running + 1;
-      shared.peak <- max shared.peak shared.running;
-      Some job
-    end) in
+    let rec take () = match Mailbox.pop shared.jobs with
+      | Mailbox.Item job ->
+          shared.running <- shared.running + 1;
+          shared.peak <- max shared.peak shared.running;
+          Some job
+      | Mailbox.Empty when not shared.stopping ->
+          (* Producers hold this same mutex while publishing/signalling, so
+             waiting after an empty snapshot cannot lose their wakeup. *)
+          Condition.wait shared.ready shared.mutex; take ()
+      | Mailbox.Empty | Mailbox.Drained -> None in
+    take ()) in
   match next with
   | None -> ()
   | Some job ->
@@ -137,15 +141,18 @@ let rec worker shared () =
     close_operation job.operation;
     locked shared (fun () ->
       shared.running <- shared.running - 1;
-      Queue.add (job.id, result) shared.completions);
+      match Mailbox.push shared.completions (job.id, result) with
+      | Mailbox.Added -> ()
+      | Mailbox.Full | Mailbox.Closed -> failwith "worker completion mailbox invariant");
     notify shared;
     worker shared ()
 
 let recommended_workers () = max 1 (Domain.recommended_domain_count ())
 let take_completions shared = locked shared (fun () ->
   let rec drain acc =
-    if Queue.is_empty shared.completions then List.rev acc
-    else drain (Queue.take shared.completions :: acc)
+    match Mailbox.pop shared.completions with
+    | Mailbox.Item result -> drain (result :: acc)
+    | Mailbox.Empty | Mailbox.Drained -> List.rev acc
   in drain [])
 let dispatch t =
   let first_error = ref None in
@@ -173,13 +180,14 @@ let rec pump t scratch =
        (Lwt_unix.yield () >>= fun () -> Lwt.fail error));
   next
 let create_internal ~io ~workers ~max_pending ~budget =
-  if workers <= 0 || max_pending <= 0 then invalid_arg "SemanticWorkers.create: positive limits required";
+  if workers <= 0 || max_pending <= 0 || max_pending > 65536 then
+    invalid_arg "SemanticWorkers.create: positive workers and1..65536 pending jobs required";
   let owned_read = ref Unix.stdin and owned_write = ref Unix.stdout
   and has_read = ref false and has_write = ref false
   and reader_owner = ref None and shared_owner = ref None
   and domains = ref [] in
   let stop shared =
-    locked shared (fun () -> shared.stopping <- true; Condition.broadcast shared.ready) in
+    locked shared (fun () -> shared.stopping <- true; Mailbox.close shared.jobs; Condition.broadcast shared.ready) in
   let cleanup () =
     (match !shared_owner with Some shared -> (try stop shared with _ -> ()) | None -> ());
     List.iter (fun domain -> try Domain.join domain with _ -> ()) !domains;
@@ -201,7 +209,8 @@ let create_internal ~io ~workers ~max_pending ~budget =
     Unix.set_nonblock read_fd;
     Unix.set_nonblock write_fd;
     let shared = { mutex = Mutex.create (); ready = Condition.create ();
-      jobs = Queue.create (); completions = Queue.create (); notify = write_fd;
+      jobs = Mailbox.create ~capacity:max_pending;
+      completions = Mailbox.create ~capacity:max_pending; notify = write_fd;
       stopping = false; running = 0; peak = 0 } in
     shared_owner := Some shared;
     for _ = 1 to workers do
@@ -296,8 +305,9 @@ let submit t cancellation fd requested_operation =
             let reply = Lwt.wait () in
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
-              Queue.add {id; fd = !owned; cancelled; operation = !operation} t.shared.jobs;
-              transferred := true;
+              (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation} with
+               | Mailbox.Added -> transferred := true
+               | Mailbox.Full | Mailbox.Closed -> raise (Failed "worker job mailbox invariant"));
               Condition.signal t.shared.ready);
             reply
           end)) (function
@@ -399,9 +409,10 @@ let shutdown t = match t.shutdown_result with
     let rec finish () =
       if t.pending <> 0 then Lwt_unix.sleep 0.01 >>= finish
       else begin
-        locked t.shared (fun () -> t.shared.stopping <- true; Condition.broadcast t.shared.ready);
+        locked t.shared (fun () -> t.shared.stopping <- true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
         List.iter Domain.join t.domains;
         t.joined <- true;
+        Mailbox.close t.shared.completions;
         notify t.shared;
         t.pump_done >>= fun () -> close_noerr t.shared.notify; return ()
       end in

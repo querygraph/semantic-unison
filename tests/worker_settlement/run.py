@@ -25,7 +25,7 @@ SOURCES = [
     'src/formatExtension.mli', 'src/formatExtension.ml',
     'src/xmpObservation.mli', 'src/xmpObservation.ml',
     'src/dngSemantic.mli', 'src/dngSemantic.ml', 'src/semanticDelta.mli', 'src/semanticDelta.ml',
-    'src/semanticWorkers.mli', 'src/semanticWorkers.ml', 'tests/resource_lifetime/census.c',
+    'src/semanticMailbox.mli', 'src/semanticMailbox.ml', 'src/semanticWorkers.mli', 'src/semanticWorkers.ml', 'tests/resource_lifetime/census.c',
     'tests/worker_settlement/test.ml', 'tests/worker_settlement/run.py', 'tests/worker_settlement/README.md',
 ]
 PHASES = ('raw-reply', 'cpu-result-map', 'io-callback', 'io-result-map', 'submit-outer', 'identify-map')

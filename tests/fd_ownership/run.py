@@ -22,7 +22,7 @@ SOURCES=[
  "src/formatRecognition.mli","src/formatRecognition.ml",
  "src/formatExtension.mli","src/formatExtension.ml","src/xmpObservation.mli","src/xmpObservation.ml",
  "src/dngSemantic.mli","src/dngSemantic.ml","src/semanticDelta.mli","src/semanticDelta.ml",
- "tests/fd_ownership/fault.ml","src/semanticWorkers.mli","src/semanticWorkers.ml",
+ "tests/fd_ownership/fault.ml","src/semanticMailbox.mli", "src/semanticMailbox.ml", "src/semanticWorkers.mli","src/semanticWorkers.ml",
  "tests/fd_ownership/fixture.c","tests/fd_ownership/test.ml","tests/fd_ownership/run.py"]
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
 def once(s,a,b):
@@ -38,6 +38,8 @@ def instrument_file(source):
   source=once(source,"owned_channel := Some channel",'(Fault.hit "semantic-channel-register"; owned_channel := Some channel)')
  return once(source,"let t = {channel;initial;check_cancel} in",'Fault.hit "semantic-record"; let t = {channel;initial;check_cancel} in')
 def instrument_workers(source):
+ if "(match Mailbox.push t.shared.jobs" in source:
+  source=once(source,"(match Mailbox.push t.shared.jobs",'(Fault.hit "submit-mailbox"; match Mailbox.push t.shared.jobs')
  source=source.replace("Unix.close","Fault.close_fd")
  source=once(source,"Unix.set_nonblock read_fd;",'Fault.set_nonblock "pool-read-flags" read_fd;')
  source=once(source,"Unix.set_nonblock write_fd;",'Fault.set_nonblock "pool-write-flags" write_fd;')
@@ -67,7 +69,7 @@ def main():
  original={name:(ROOT/name).read_bytes() for name in SOURCES}
  old={name:subprocess.check_output(["git","show",OLD_GUARD_COMMIT+":"+name],cwd=ROOT).decode() for name in ("src/semanticFile.ml","src/semanticWorkers.ml")}
  work=Path(tempfile.mkdtemp(prefix="unison-early-fd-",dir="/private/tmp"));print("Retained",work,flush=True)
- receipt={"schema":"unison-early-fd-qualification/1","compiler":compiler,"compiler_version":subprocess.check_output([compiler,"-version"],text=True).strip(),"compiler_sha256":sha(Path(compiler)),"sources":{n:hashlib.sha256(d).hexdigest() for n,d in original.items()},"old_guard_commit":OLD_GUARD_COMMIT,"old_sources":{n:hashlib.sha256(d.encode()).hexdigest() for n,d in old.items()},"artifacts":str(work),"runs":[]}
+ receipt={"schema":"unison-early-fd-qualification/1","compiler":compiler,"compiler_version":subprocess.check_output([compiler,"-version"],text=True).strip(),"compiler_sha256":sha(Path(compiler)),"sources":{n:hashlib.sha256(d).hexdigest() for n,d in original.items()},"old_guard_commit":OLD_GUARD_COMMIT,"old_sources":{n:hashlib.sha256(d.encode()).hexdigest() for n,d in old.items()},"artifacts":str(work),"negative_representation_adapter":"Historical guard sections only: Queue allocation/enqueue adapted to current mailbox shared-record ABI; no acquisition/listener ownership guards changed", "runs":[]}
  for mode in (["fixed"] if a.fixed_only else ["fixed","old-file-channel","old-pool-pipe","old-submit-listener"]):
   build=work/mode;build.mkdir()
   for name,data in original.items():
@@ -77,7 +79,13 @@ def main():
    x,y,_=section(f,"let with_fd ","let bounds ");_,_,previous=section(old["src/semanticFile.ml"],"let with_fd ","let bounds ");f=f[:x]+previous+f[y:]
   if mode in ("old-pool-pipe","old-submit-listener"):
    start,end=("let create_internal ","let create ~workers") if mode=="old-pool-pipe" else ("let submit ","let digest t ")
-   x,y,_=section(w,start,end);_,_,previous=section(old["src/semanticWorkers.ml"],start,end);w=w[:x]+previous+w[y:]
+   x,y,_=section(w,start,end);_,_,previous=section(old["src/semanticWorkers.ml"],start,end);# Historical acquisition guards remain unchanged; adapt only the
+   # queue representation needed by today's shared record/worker ABI.
+   if mode=="old-pool-pipe":
+    previous=previous.replace("jobs = Queue.create (); completions = Queue.create ();", "jobs = SemanticMailbox.create ~capacity:max_pending; completions = SemanticMailbox.create ~capacity:max_pending;")
+   else:
+    previous=previous.replace("Queue.add {id; fd = owned; cancelled; operation} t.shared.jobs;", "(match SemanticMailbox.push t.shared.jobs {id; fd = owned; cancelled; operation} with Added -> () | _ -> failwith \"historical queue adapter invariant\");")
+   w=w[:x]+previous+w[y:]
   (build/"semanticFile.ml").write_text(instrument_file(f));(build/"semanticWorkers.ml").write_text(instrument_workers(w))
   fault=(build/"fault.ml").read_text();fault += '\nlet channel fd = hit "semantic-channel"; Unix.in_channel_of_descr fd\n';(build/"fault.ml").write_text(fault)
   order=[name for name in SOURCES if name.endswith((".c",".ml",".mli")) and Path(name).name!="test.ml"]

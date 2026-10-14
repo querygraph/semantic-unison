@@ -20,8 +20,9 @@ state and all queues drained. Two OxCaml negative controls reject access to a
 shared reference or bytes payload. These descriptor values are not opened,
 read, written or closed by the test; no kernel ownership proof is claimed.
 
-The retained qualification is component-only; production workers do not yet
-use this mailbox or its checked interface. CAS retry scheduling is not a worker
+The retained qualification is component-only; production workers now use the mailbox implementation with their ordinary
+interface; full worker execution is not yet checked. The initial component
+receipt retains its historical not-integrated status unchanged. CAS retry scheduling is not a worker
 notification strategy, machine-wide resource bound, or performance benchmark.
 Initial compiler inference failures and earlier positive runs are retained in
 private work trees; final receipts pin the exact current sources/interfaces.

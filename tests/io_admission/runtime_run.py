@@ -41,7 +41,7 @@ def main():
     modules = modules[:modules.index("semanticRuntime.cmx") + 1]
     native = objects("COBJS")
     pins = ["src/ioAdmission.ml", "src/ioAdmission.mli", "src/semanticRuntime.ml",
-            "src/semanticRuntime.mli", "src/semanticWorkers.ml", "src/semanticWorkers.mli",
+            "src/semanticRuntime.mli", "src/semanticWorkers.ml", "src/semanticMailbox.mli", "src/semanticMailbox.ml", "src/semanticWorkers.mli",
             "src/ubase/prefs.ml", "src/ubase/prefs.mli", "src/semanticFormats.ml",
             "tests/io_admission/runtime.ml", "tests/io_admission/runtime_run.py"]
     for source in pins:
