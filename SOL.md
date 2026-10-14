@@ -4,6 +4,24 @@
 
 ## Live implementation handoff
 
+* Real cross-volume filesystem checkpoint (2026-10-14): stock/Ox each pass six
+  local CLI rows across a privately created HFS+ image and internal APFS roots:
+  ordinary clone-auto/off and semantic DNG-auto in both directions. Exact bytes,
+  old-hardlink preservation and no-op receiver inode/bytes pass all 12 rows.
+  APFS ordinary receivers inherit 1,966,080/2,097,152 logical bytes; DNG-shaped
+  edits select semantic materialization. HFS+ receiving declines cloning and
+  completes ordinary exact fallback. The guarded local producer now emits its
+  actual inherited-byte counter, previously available only on the legacy path.
+  Unicode path handling passes; this is not broad case/property qualification.
+  The owned image is detached and independently absent before completion.
+  Both logical volumes share backing storage: no physical-device throughput,
+  sharing, crash or mount-incarnation proof is claimed. No Photo/Adobe access.
+  Fresh Make/Dune builds+selftests pass on stock/Ox. Independent retained-log
+  readback records 3,072 logical semantic bytes/one write attempt from an
+  8,192-byte packet, without physical-write or allocation proof.
+  [Test and scope](tests/cross_volume/README.md),
+  [evidence](tests/cross_volume/qualification.json).
+
 * Native benchmark preparation correction (2026-10-14): Adobe-core benchmark
   dependencies now include the checked mailbox. OxCaml requires compiler-matched
   actual Make core objects, verified against snapshot/compiler/binary/source

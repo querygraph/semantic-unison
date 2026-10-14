@@ -999,6 +999,7 @@ let copyLocalCloned ?producer source basisPath fspathTo pathTo fileLength ido =
   | None | Some { legacy = true; _ } ->
       copyLocalClonedLegacy source basisPath fspathTo pathTo fileLength ido
   | Some _ ->
+      let skipped = ref 0L in
       let copied = copyBoundClone producer basisPath fspathTo pathTo "-local-clone"
         (fun basis output ->
           let input = openFileIn (Fspath.canonize (Some (Fspath.toString source))) Path.empty `DATA in
@@ -1014,8 +1015,10 @@ let copyLocalCloned ?producer source basisPath fspathTo pathTo fileLength ido =
               let count = Int64.to_int (min !remaining 131072L) in
               if read input incoming count <> count then raise End_of_file;
               if read basis previous count = count &&
-                 Bytes.sub incoming 0 count = Bytes.sub previous 0 count then
-                LargeFile.seek_out output (Int64.add (LargeFile.pos_out output) (Int64.of_int count))
+                 Bytes.sub incoming 0 count = Bytes.sub previous 0 count then begin
+                LargeFile.seek_out output (Int64.add (LargeFile.pos_out output) (Int64.of_int count));
+                skipped := Int64.add !skipped (Int64.of_int count)
+              end
               else Stdlib.output output incoming 0 count;
               remaining := Int64.sub !remaining (Int64.of_int count);
               (match ido with None -> () | Some id ->
@@ -1027,6 +1030,8 @@ let copyLocalCloned ?producer source basisPath fspathTo pathTo fileLength ido =
             (fun () -> closeFileInNoErr input)) in
       if not copied && Prefs.read clonePolicy = "require" then
         raise (Util.Transient "Receiver filesystem cannot create a bound clone producer");
+      if copied then debug (fun () ->
+        Util.msg "Local receiver clone preserved %Ld logical bytes\n" !skipped);
       copied
 
 let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc ressLength ido =
