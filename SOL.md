@@ -4,11 +4,33 @@
 
 ## Live implementation handoff
 
-* Private cache prerequisite source review (2026-10-14): the
+* Empty native private-cache lifecycle actually passed and closed
+  (2026-10-14): the **05:32:25 UTC** current pointer supersedes delayed
+  source-only notices. Root's sealed return packet `0dadea0f` records three
+  callbacks, one construction/normal close and zero preview loads/rendering.
+  Our [outcome audit](doc/preview-empty-cache-constructor-outcome-20261014.json)
+  verifies eleven proof and ten source/review pins, four NEW observer removals,
+  all five FileStore empty states, nil deletion task, exact distinct private
+  objects/paths, native Auto release, post-close private-family descriptor
+  absence, separate closed schema13/schema1 zero-row readback and genuine
+  helper/menu/admission/lease closure. Production references/paths and owning
+  Main observations match. Preference scalars were copied once; the runtime
+  production guard proves preference-table identity, not separately observed
+  equality of every scalar afterward. This qualifies the successful EMPTY
+  private native mechanism. It does not qualify partial-failure recovery,
+  populated RootPixels, authored recipe recognition, cold private preview
+  reuse, Library/UI, Quasar, renderer or full run. Next: independently publish
+  the preserved-control Ten recipe while its private family is closed, read
+  back committed rows before fresh private opening, then separately admit
+  highest/lower/current-map/private-path native recognition. No replay of the
+  completed constructor or previous native controls follows from old messages.
+
+* Earlier private cache prerequisite source review (2026-10-14): the
   [review](doc/preview-private-cache-constructor-review-20261014.json) accepts
   the inspected existing-server-thread `PreviewCache.makeForPath` mechanism
-  for one EMPTY owned Ten root, conditional on fresh Root admission. No
-  constructor is invoked or runtime pass inferred. Require four NEW observer
+  for one EMPTY owned Ten root, conditional on fresh Root admission. At that
+  source checkpoint no constructor had run; the later actual outcome above
+  supplies separate runtime proof. Require four NEW observer
   removals, deletionTask nil, all five FileStore empty/zero conditions, exact
   private paths/distinct objects, one normal close and independent closed
   schema13/schema1 readback. Construction creates stores before its returned
@@ -23,9 +45,9 @@
   Original renderer/publisher ownership and native-window authority remain
   with Photo Root; all Unison work here is source/interface review.
 
-* Quasar priority (user, 2026-10-14): Photo Root has received the request to
+* Quasar priority and earlier planning (user, 2026-10-14): Photo Root received the request to
   finish native recognition of the independently authored Ten-only recipe and
-  then admit the bounded split-storage matrix. The current pointer at
+  then admit the bounded split-storage matrix. The earlier pointer at
   **05:03:29 UTC** says the original owner is preparing an executable and
   independent review for an **empty private Ten-only cache constructor/close**
   prerequisite; no new native or production-publisher window is released.

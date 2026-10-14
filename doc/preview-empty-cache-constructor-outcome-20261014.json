@@ -1,0 +1,293 @@
+{
+  "schema": "unison-preview-empty-constructor-outcome/1",
+  "dateUTC": "2026-10-14",
+  "decision": "ACCEPT_ACTUAL_EMPTY_PRIVATE_CACHE_LIFECYCLE_PASSED_AND_CLOSED",
+  "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+  "reportedClassicPID": 40020,
+  "reportedStart": "Tue Oct 13 19:47:43 2026",
+  "privateRoot": "/Volumes/Ten/Lightroom-Preview-Oracle-Private/empty-private-cache-764b2555a119461bb7a43a8c54cf3089/empty-cache",
+  "returnPacket": {
+    "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-CONSTRUCTOR-RETURN-PACKET.json",
+    "bytes": 4371,
+    "sha256": "0dadea0f06a3b5fe6215f88e4722323545ddfaed0755bd22813cad407a316572"
+  },
+  "checkedProofs": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-GENUINE-CLOSURE.json",
+      "bytes": 1420,
+      "sha256": "51ba13ed9ffc63f2a0dc18ca17965b7bb2de68f75db0082e328bb4908a53debd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-SLOT-CLOSED.json",
+      "bytes": 213,
+      "sha256": "f441b399740e0a196ef5aab62ad6fcff3037d1baea83458e8edc7c0df2d646a4"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-PRIVATE-FAMILY-FD-CLOSURE.json",
+      "bytes": 403,
+      "sha256": "c56699b57406afaddeb8e8800ff6037392c4996cb983ce18e9fa4355fbed17e0"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-INDEPENDENT-PRIVATE-READER.json",
+      "bytes": 7045,
+      "sha256": "199d0b0d165929c2b2b0b5618f5123671216e88dc0c5cbca0928fca612becafe"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-POST-CLOSURE-DESKTOP-LEASE.json",
+      "bytes": 363,
+      "sha256": "6ed6506b4887562b031e9228330e2e6cf82275e221e8b3f6f094e9ae2764a0cb"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/UI.txt",
+      "bytes": 1098,
+      "sha256": "29d2f7de92876d7aee26ae9a55063e0e8641fd518bdd2fc0cc0c86f2fdfdb5ba"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/CONSTRUCTOR.txt",
+      "bytes": 3771,
+      "sha256": "36c8a5be193c72a3acddde7fe84d80b33a85390c8d75122046327969eec784a9"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/MAIN-BEFORE.txt",
+      "bytes": 394,
+      "sha256": "5deaa3ac2c3dab1543b048cea3c61d5e8b9ab12195b5fd9726a5081c8b7daa83"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/MAIN-AFTER.txt",
+      "bytes": 394,
+      "sha256": "5deaa3ac2c3dab1543b048cea3c61d5e8b9ab12195b5fd9726a5081c8b7daa83"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/PREPARATION.json",
+      "bytes": 3120,
+      "sha256": "7b108e690fb84a943f96bc2ccff94f866c7d9c909b125a694a441fe8f02d8e7f"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/ROOT-EMPTY-CACHE-RELEASE.json",
+      "bytes": 2822,
+      "sha256": "fd7ff66605da27762f31d787119de6cd890fa8d8be5e90d06a7a0d706ae71fae"
+    }
+  ],
+  "checkedSourceAndReviewPins": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/prepare.py",
+      "bytes": 3784,
+      "sha256": "8f3ae6076b1e4defaaa64e4409913165af2eb7276940af85fc5304f33176f6e2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/MAIN.lua.in",
+      "bytes": 2589,
+      "sha256": "9b161ecc3ad73bb27ceb8dfb5bb804c1c35b320799b5e284eb5b548a78f7847e"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/UI.lua.in",
+      "bytes": 6837,
+      "sha256": "4dbe1f525c1effbde483048c14c5cbdd56edd2fd12fe2e8146a9c5bbed8fc388"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/WORKER.lua.in",
+      "bytes": 7614,
+      "sha256": "6c90b22f32fb9f07d10239e4497cb6c3624e0795ff64b31a041de8de98d12c9d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/FirstPair) Observe retained previews directly.lua",
+      "bytes": 17946,
+      "sha256": "8866ecf5c90380f432cf0d31fc7e2c5a725f603dade5dadfd4f761f75c567d3f"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/runtimes/ctor-330018adc414494e99ad73aa4487bb0b/Dispatch-PrivateConstructorMenuOnly.applescript",
+      "bytes": 4761,
+      "sha256": "acd1205e5a592d6719eb296f0f9d08e9d04e2288871db6d1478cc84d935d9472"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/INDEPENDENT-ROOT-CONSTRUCTOR-DRIVER-REVIEW.json",
+      "bytes": 5488,
+      "sha256": "6324f2b29e77769f4b385b6e3da750bd47ae74d5376b3bcbb506b09982d159a7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/private-cache-constructor-v1/INDEPENDENT-CONSTRUCTOR-SOURCE-REVIEW.json",
+      "bytes": 8683,
+      "sha256": "59589579f225568b4e073ad4de1a507c1a760246fd7b01dcd42b4969c1685e11"
+    },
+    {
+      "path": "/Users/alexy/src/photo/root_private_cache_constructor_coordinator_20261014.py",
+      "bytes": 14615,
+      "sha256": "380ef7761d335ae5615ae411a1a7e154820124c29507a61ec4e1d0f394fc28df"
+    },
+    {
+      "path": "/Users/alexy/src/photo/root_read_closed_empty_preview_cache_20261014.py",
+      "bytes": 1889,
+      "sha256": "f5c418ce3b9dce6bdd2e8fe7ff73b7eb1fa3b914aecaf87bdd087e764fb0cdc2"
+    }
+  ],
+  "proofPinCount": 11,
+  "sourceAndReviewPinCount": 10,
+  "sourceGate": {
+    "path": "doc/preview-private-cache-constructor-review-20261014.json",
+    "bytes": 11148,
+    "sha256": "4d44073e5f2ba903e9dfba8a148f47228fd01a7188910f5e597ff13b9871fa2e"
+  },
+  "sealedRecipeGate": {
+    "path": "doc/preview-offline-registration-test-plan.md",
+    "bytes": 7009,
+    "sha256": "3646aa7809ba86cc85db95143a8509f72b265b1015dc86ebe2bb857dab5af40f"
+  },
+  "verifiedObservations": {
+    "actualCallbacks": 3,
+    "actualHandleClosures": 3,
+    "actualConstructionCalls": 1,
+    "actualNormalCloseCalls": 1,
+    "previewLoadsDecodeSaveRendererCalls": 0,
+    "distinctPrivateObserverRemovals": 4,
+    "privateDeletionTask": null,
+    "allFiveFileStoreEmptyStatesBeforeAfter": "Source assertions reached qualified result; rawlog directly records two zero counters",
+    "privateNativeAutoBeforeClose": [
+      true,
+      true
+    ],
+    "privateNativeAutoAfterClose": [
+      null,
+      null
+    ],
+    "productionReferencesAndPathsUnchanged": true,
+    "independentlyCapturedScalarPreferences": [
+      {
+        "time": "813648493.21145",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "smallRenderSize",
+        "type": "number",
+        "value": "420",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21155",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "previewRenderSize",
+        "type": "number",
+        "value": "1680",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.2116",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "discardFinalAfter",
+        "type": "number",
+        "value": "2592000",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21165",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "purgePreference",
+        "type": "string",
+        "value": "AutomaticPreviewDiscard_selected",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.2117",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "limitCacheSizePrefValMB",
+        "type": "number",
+        "value": "191000",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21174",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "jpegQuality",
+        "type": "number",
+        "value": "0.9",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21179",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "previewFidelity",
+        "type": "nil",
+        "value": "<nil>",
+        "explicitNil": "true"
+      },
+      {
+        "time": "813648493.21183",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "isPreviewCachePossiblyCorrupt",
+        "type": "nil",
+        "value": "<nil>",
+        "explicitNil": "true"
+      },
+      {
+        "time": "813648493.21191",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "allowGPUForPreviews",
+        "type": "boolean",
+        "value": "true",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21196",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "useGPUInLibrary",
+        "type": "boolean",
+        "value": "true",
+        "explicitNil": "false"
+      },
+      {
+        "time": "813648493.21201",
+        "nonce": "empty-private-cache-764b2555a119461bb7a43a8c54cf3089",
+        "name": "gpuConcurrencyLimit",
+        "type": "number",
+        "value": "3",
+        "explicitNil": "false"
+      }
+    ],
+    "MainBeforeAfterByteEqual": true,
+    "MainTotalChangesObserved": 132662,
+    "allActualCallbacksWithinDeadline": true,
+    "privateNativeSchemas": [
+      13,
+      1
+    ],
+    "targetTablesEmpty": [
+      "Pyramid",
+      "PyramidLevel",
+      "ImageCacheEntry",
+      "RootPixels"
+    ],
+    "privateFamilyFdAndMappingsCheck": "Post-normal-close lsof intersection has return1,empty stdout/stderr for every existing family name",
+    "independentClosedReaderCompleted": true,
+    "helperAndMenuRestored": true,
+    "admissionWithdrawnAndCanonicalLeaseReleased": true,
+    "laterLeaseProbeAvailableReleased": true,
+    "coordinatorReportedExit": 0
+  },
+  "reportingPrecision": [
+    {
+      "issue": "Return summary productionCacheObjectsPathsPreferencesUnchanged could imply scalar before/after equality",
+      "qualifiedMeaning": "Worker compares production object/store/database/write-queue/preference-table identities and paths. Eleven scalar values were captured/copied once; it does not take a second scalar snapshot. Private copy eliminates direct preference-table aliasing. No broader scalar-equality claim is accepted."
+    },
+    {
+      "issue": "Main unchanged",
+      "qualifiedMeaning": "Two current owning-Main observations are byte-identical, with matching six-field control and scoped connection total_changes. No all-process/all-connection mutation proof is inferred."
+    },
+    {
+      "issue": "Normal closure",
+      "qualifiedMeaning": "Successful normal native API close, post-close empty/nil assertions, private-family descriptor observation and independent reader; no arbitrary partial-constructor recovery, native worker join, power-loss or cancellation proof."
+    }
+  ],
+  "independentReview": "Separate read-only reviewer verified the same11proof and10source/review pins, raw execution and coordinator/reader semantics; its lifetime source review predates this actual packet. No duplicate native invocation.",
+  "nextAcceptanceGate": "Independently author preserved six-level control recipe while admitted private family is closed/exclusive; separately capture committed rows before fresh private constructor/open; native highest+lower load/decode/current raw mappings/private-path identity and closure. Preserve populated genuine RootPixels template. Scope private-cache reuse separately from apprestart/LibraryUI; then separately admit Quasar matrix.",
+  "doesNotQualify": [
+    "Populated RootPixels recipe or authored registration recognition",
+    "Fresh private cold-instance preview reuse or application restart",
+    "Production Library/UI preview recognition",
+    "Quasar placement/write/trim/missing-target behavior",
+    "5120 monitor coverage, renderer fidelity/full run, pixel RGB equality or power-loss durability"
+  ],
+  "UnisonExecution": {
+    "metadataRawlogSourceReadsOnly": true,
+    "nativeInvocations": 0,
+    "databaseOrPhotoPayloadOpens": 0,
+    "fixtureCreations": 0,
+    "productionMutations": 0
+  }
+}
