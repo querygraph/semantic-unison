@@ -2296,3 +2296,22 @@ resource/cancellation/scaling qualification and full M4-V/M5/M6 remain open. Pri
 experimental linked artifact and comparison plans are preserved historical proof,
 but source binding is now stale; Root notified by queue01a13c31-306e-7e72-8c90-f6d929256476.
 A successor link/plan and fresh separate admission are required before runtime.
+
+
+### Experimental telemetry consumer gate — 2026-10-14
+
+The finite host-matrix executor now requires and retains each experimental
+call's bounded versioned stderr area/allocator observations. It refuses missing,
+duplicate, malformed or overflowing records, covered quota denials/unexercised or
+unsettled allocation accounting, live callbacks, incomplete Start/Finish lifecycle
+and partitions larger than the requested allowance. One-thread reference delegation
+is explicit. Nested callback frames are not incorrectly treated as OS threads.
+
+Pure controls passed three valid observations and62 malformed/inconsistent denials,
+plus the earlier twelve protocol positives/132 denials and seven matrix denials.
+Actual fake-tool runs passed twelve calls and independently failed/closed on warning
+divergence, bad raw digest, missing telemetry, live allocations and active callbacks;
+noncanonical commands and replay still refuse. [Evidence](tests/sdk_host_matrix/telemetry-qualification.json).
+Zero SDK/Adobe/Photo/Lightroom/sanitizer execution. Actual SDK telemetry/codec/
+allocator behavior, OS-thread/pixel/cancellation/scaling qualifications, source-bound
+linked successor and fresh admitted plan remain required. Full goal remains open.

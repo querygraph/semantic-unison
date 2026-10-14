@@ -91,6 +91,55 @@ def receipt(text, case):
     return {key: fields[key] for key in ('structure', 'decode', 'raw-digest', 'errors', 'warnings')}
 
 
+def telemetry(text, case, memory_bytes):
+    """Check bounded experimental records among unrelated SDK diagnostics.
+
+    These are declared observations from a pinned trusted tool. They do not
+    independently measure RSS, OS threads, pixels or escaping descendants.
+    """
+    require(case['backend'] == 'experimental', 'telemetry requires experimental host')
+    schemas = {'UNISON-HOST-AREA': {'tasks', 'started', 'finish', 'calls', 'active',
+                                  'peak', 'max-partition', 'reference'},
+               'UNISON-HOST-MEMORY': {'limit', 'used', 'peak', 'live', 'denied'}}
+    records = {}
+    for line in text.splitlines():
+        # A malformed reserved-prefix record must not disappear as generic SDK
+        # noise, including tabs, unavailable reports and unsupported versions.
+        prefix = next((name for name in schemas if line.startswith(name)), None)
+        if prefix is None:
+            continue
+        require(len(line) <= 512 and prefix not in records, 'duplicate/oversized telemetry')
+        parts = line.split(' ')
+        require(parts[:2] == [prefix, '1'] and len(parts) == len(schemas[prefix]) + 2,
+                'telemetry framing/version')
+        fields = {}
+        for part in parts[2:]:
+            pair = part.split('=')
+            require(len(pair) == 2, 'telemetry field framing')
+            key, value = pair
+            require(key in schemas[prefix] and key not in fields and 1 <= len(value) <= 20
+                    and value.isascii() and value.isdecimal(), 'telemetry key/value')
+            fields[key] = int(value)
+            require(fields[key] <= 2**64 - 1, 'telemetry integer overflow')
+        records[prefix] = fields
+    require(set(records) == set(schemas), 'missing host telemetry')
+    area, memory = records['UNISON-HOST-AREA'], records['UNISON-HOST-MEMORY']
+    require(memory['limit'] == memory_bytes and memory['used'] == memory['live'] == 0
+            and 0 < memory['peak'] <= memory_bytes and memory['denied'] == 0,
+            'allocator not exercised/settled within allowance')
+    require(area['active'] == 0, 'callbacks remain active')
+    if case['threads_including_caller'] == 1:
+        require(area['reference'] > 0 and all(area[key] == 0 for key in schemas['UNISON-HOST-AREA']
+                                            if key != 'reference'), 'reference delegation accounting')
+    else:
+        require(area['reference'] == 0 and area['tasks'] > 0
+                and area['tasks'] == area['started'] == area['finish']
+                and area['calls'] >= area['tasks'] and 0 < area['peak'] <= area['calls']
+                and 0 < area['max-partition'] <= case['threads_including_caller'],
+                'area task lifecycle/partition accounting')
+    return {'area_callback_frames': area, 'covered_allocator_bytes': memory}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--reference-manifest', type=pathlib.Path, required=True)

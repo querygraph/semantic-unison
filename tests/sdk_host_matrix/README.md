@@ -42,6 +42,18 @@ noncanonical argv refusal before acquisition, consumed-workspace refusal, and
 genuine aggregate closure on both normal and failed runs. These deterministic
 controls are not fuzzing, SDK execution or real thread/memory qualification.
 
+The current executor also requires exactly one bounded version-1 area and memory
+stderr record for each experimental call. It rejects malformed/duplicate/missing
+records, unexercised or unsettled covered allocation accounting, quota denials,
+live callback frames, incomplete task lifecycle, and oversized partitions. A
+one-thread call must report explicit reference delegation; higher allowances
+must report joined custom tasks. It retains parsed observations alongside raw
+diagnostics. Callback peak is not capped at the requested thread count because
+nested callback frames can share a thread; the declared partition is capped.
+These checks consume the pinned tool's observations, not independent OS metrics.
+Additional fake-tool cases prove missing telemetry/live allocations/active
+callbacks cannot produce a success packet even when stdout validation succeeds.
+
 `receipt` checks exact framing, input/build identity, valid structure, successful
 decode, valid raw digest and zero errors. Compare its returned fields, including
 warning counts, against that codec's reference. Different warning counts need
@@ -49,8 +61,10 @@ review rather than an automatic equivalence claim. Deterministic tests exercise
 all twelve argv/positive-receipt combinations and malformed receipts and plans.
 
 Even a future pass proves validation-result equivalence only. This protocol does
-not expose decoded pixels, actual area-task/thread counts, allocator peak/live
-statistics or thread cancellation behavior. Those remain separate required
+not expose decoded pixels, actual OS-thread counts or thread cancellation
+behavior. Experimental stderr observes area callbacks and covered allocator
+peak/live bytes, whose actual SDK runtime behavior remains unqualified. These
+remain separate required
 gates before production integration or a scaling claim. One sample per setting
 is not a throughput benchmark. The memory allowance bounds covered host backing
 allocations, not process RSS. No existing consumed SDK admission authorizes this

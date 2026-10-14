@@ -97,10 +97,13 @@ def main():
             if case['backend'] == 'reference':
                 references[case['codec']] = value
             plan.require(value == references[case['codec']], 'reference result differs')
+            observations = (plan.telemetry(result['stderr'], case, packet['host_memory_bytes'])
+                            if case['backend'] == 'experimental' else None)
             plan.require(plan.sha(tool['executable']) == tool['sha256']
                          and plan.sha(fixture['path']) == fixture['sha256'], 'post-call pin changed')
             results.append({'index': index, 'codec': case['codec'], 'backend': case['backend'],
-                            'requested_threads': case['threads_including_caller'], 'receipt': value})
+                            'requested_threads': case['threads_including_caller'], 'receipt': value,
+                            'observations': observations})
         write(work / 'RESULT.json', {'mode': args.mode, 'results': results,
                                      'calls': len(results), 'runtime_scaling_qualified': False})
 

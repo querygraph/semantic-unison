@@ -1,0 +1,56 @@
+{
+  "schema": "unison-sdk-host-telemetry-consumer-qualification/1",
+  "utc": "2026-10-14T20:56:52.857010+00:00",
+  "scope": "deterministic pure records and original fake tool processes only; zero SDK/Photo/Lightroom",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 9295,
+      "sha256": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/run.py",
+      "bytes": 6079,
+      "sha256": "26d25da362e02aaaf2890dc50eeea19f4086cd1782b32f0a8adca6a4db23c97a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/test.py",
+      "bytes": 5089,
+      "sha256": "7ba27b56af5cceda5c3f75fc56b565bd1fe95c9a8cde4b1816d8321f28c6c2d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/executor_test.py",
+      "bytes": 4535,
+      "sha256": "ea1ab34a067d56f81d75cb3852797a401e178b10cd07d48d130bf1a44dfd147a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/README.md",
+      "bytes": 4493,
+      "sha256": "4dd7fd2d4b1236540aa8709b63221f56fa1e2f5ae7f0d58c215dcc7cb7a81cd9"
+    }
+  ],
+  "pure_controls": {
+    "path": "/private/tmp/unison-sdk-host-plan-ubdtm836/RESULT.json",
+    "bytes": 368,
+    "sha256": "c05a58d6dd276ced3aea5518779f3356b864e1e62fa1db9381f003e8c996435e"
+  },
+  "actual_mock_controls": {
+    "path": "/private/tmp/unison-host-matrix-mock-ivfsj1tv/RESULT.json",
+    "bytes": 942,
+    "sha256": "8525061cb4db17766b19899aa3170c0404bc5873291d3d08c0cb2666d3188b31"
+  },
+  "admission_controls": {
+    "path": "/private/tmp/unison-host-admission-3vf8grv9/RESULT.json",
+    "bytes": 192,
+    "sha256": "5afa2538e314d27ac5df04d3c44e12b6deb0f8ecae1c51d9ed6e49551c8c7197"
+  },
+  "owner_terminal": {
+    "session": 97327,
+    "chunk": "e7689d",
+    "exit": 0,
+    "running_session": false
+  },
+  "actual_sdk_runtime_qualified": false,
+  "runtime_scaling_qualified": false,
+  "source_bound_plans_require_successors": true
+}

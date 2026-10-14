@@ -10,7 +10,8 @@ import plan
 
 work = pathlib.Path(tempfile.mkdtemp(prefix='unison-host-matrix-mock-', dir='/private/tmp'))
 records = []
-for scenario in ('pass', 'different-warning', 'bad-digest', 'noncanonical-command'):
+for scenario in ('pass', 'different-warning', 'bad-digest', 'missing-telemetry',
+                 'live-allocations', 'active-callback', 'noncanonical-command'):
     case = work / scenario
     case.mkdir()
     tools = []
@@ -25,6 +26,12 @@ raw='valid'
 if SCENARIO == 'different-warning' and '--host-memory-bytes' in a: warning='5'
 if SCENARIO == 'bad-digest' and '--host-memory-bytes' in a: raw='mismatch'
 print('UNISON-DNG-VALIDATION 1\\ncandidate-sha256 '+a[2]+'\\ncandidate-size '+a[4]+'\\ndriver-build '+BUILD+'\\nstructure valid\\ndecode success\\nraw-digest '+raw+'\\nerrors 0\\nwarnings '+warning+'\\nEND')
+if '--host-memory-bytes' in a and SCENARIO != 'missing-telemetry':
+ n=int(a[6]);live=1 if SCENARIO=='live-allocations' else 0
+ area='tasks=0 started=0 finish=0 calls=0 active=0 peak=0 max-partition=0 reference=1' if n==1 else 'tasks=1 started=1 finish=1 calls='+str(n)+' active=0 peak='+str(n)+' max-partition='+str(n)+' reference=0'
+ if SCENARIO=='active-callback': area=area.replace('active=0','active=1')
+ print('UNISON-HOST-AREA 1 '+area,file=sys.stderr)
+ print('UNISON-HOST-MEMORY 1 limit='+a[8]+' used='+str(live)+' peak=4096 live='+str(live)+' denied=0',file=sys.stderr)
 '''.replace('SCENARIO', repr(scenario)).replace('BUILD', repr(build)))
         tool.chmod(0o700)
         tools.append({'executable': str(tool), 'sha256': plan.sha(tool), 'build_id': build})
