@@ -109,12 +109,17 @@ let request_dispatch t =
       t.scheduled <- false; dispatch t; return ())
   end
 
-let release t devices =
+let release_owned t devices mark_released =
   let ledger = updated_ledger t.devices devices (-1) in
+  (* The ledger is prepared before changing ownership; the owner is retired
+     before deferred-dispatch setup can throw after the accounting debit. *)
+  mark_released ();
   t.devices <- ledger;
   t.active_jobs <- t.active_jobs - 1;
   assert (t.active_jobs >= 0);
   request_dispatch t
+
+let release t devices = release_owned t devices (fun () -> ())
 
 let acquire t cancellation devices =
   if HelperSupervisor.is_cancelled cancellation then return false
@@ -147,8 +152,9 @@ let with_devices t cancellation ~devices f =
     (release t devices; return None)
   else
     let released = ref false in
+    let mark_released () = released := true in
     let release_once () =
-      if not !released then begin release t devices; released := true end in
-    try_bind f
+      if not !released then release_owned t devices mark_released in
+    BorrowedWork.try_bind f
       (fun result -> release_once (); return (Some result))
       (fun error -> release_once (); fail error)

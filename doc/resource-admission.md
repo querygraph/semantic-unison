@@ -60,8 +60,19 @@ returning a token. An immediate or asynchronous failure of the surrounding
 cancellation/result wrapper closes that owner before retiring its reservation.
 Worker/channel/pool initialization and helper spawn have separate early ownership
 guards; their retained qualification artifacts specify their exact tested fault
-boundaries. Persistent allocator exhaustion and arbitrary failures after worker
-queue transfer remain outside those recoverability claims.
+boundaries. The returned-work continuation adds `BorrowedWork.try_bind` to CPU,
+filesystem, worker submit and response-mapping ownership layers. It preserves
+the first observer-installation error while draining the actual sleeping
+borrower before cleanup. A second failed observer installation uses owner-loop
+polling; no nested event-loop run is needed. Both compilers pass 39 focused
+actual-domain cases with retained workspace, slot, CPU, filesystem and live-FD
+oracles, including cancellation and queued work; a private parent participant fails
+the designated early-retirement oracle. The [settlement contract](returned-work-settlement.md)
+and [integration receipt](../tests/qualification/worker-settlement-integration-20261013.json)
+record exact execution and separate independent acceptance.
+Persistent allocator exhaustion, callback-time
+legacy promise connections, pre-return admission failures and independent work
+which throws before returning its promise remain outside this contract.
 
 The following remain required before describing this as complete resource control:
 

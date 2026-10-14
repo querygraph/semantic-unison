@@ -140,6 +140,19 @@ descriptors. Repeating shutdown returns the same completion promise.
 Cancellation also synchronously sets the worker's atomic flag through the
 helper token listener; it does not depend on a future owner-loop timer tick.
 The owner releases CPU permits only after consuming the worker's completion.
+Returned-work ownership layers and their response maps now use
+`BorrowedWork.try_bind`: an observer-installation failure preserves the first
+error and waits for the actual returned promise before retiring CPU, filesystem,
+slot or workspace ownership. One recovery observer is attempted, then the owner
+polls through cooperative timers without adding another waiter to the borrower.
+Cancellation remains armed during this drain. Both compilers pass 39 focused
+actual-domain cases across six captured guard boundaries, including underlying
+success/failure/cancellation, queued CPU/I/O and finite timer-setup failures.
+Private parent participants reproduce premature ownership retirement. The
+[contract](returned-work-settlement.md) and [integration receipt](../tests/qualification/worker-settlement-integration-20261013.json)
+retain selected execution and separate independent acceptance; this is not a
+universal OOM, delayed promise-connection or
+pre-return dispatch guarantee.
 An exception from a completion observer cannot discard sibling completions or
 stop the persistent notification pump: all detached replies settle, the next
 read is armed, and the first unhandled error is surfaced on an owner yield.

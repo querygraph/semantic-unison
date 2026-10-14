@@ -153,7 +153,6 @@ let with_cpu_permits t ~weight c f =
   let abort_pending = ref (fun () -> ()) in
   let borrowed = ref false and awaited = ref (wait ()) in
   let unregister = ref (fun () -> ()) in
-  let first_error = ref Out_of_memory in
   let retired = return () and cancelled = return None in
   let release_once () =
     if !owns_reservation then begin
@@ -172,7 +171,6 @@ let with_cpu_permits t ~weight c f =
     end in
   let success value = release_once (); return (Some value) in
   let failure error = release_once (); fail error in
-  let failed_after_settlement _ = release_once (); fail !first_error in
   let start () =
     let promise = f () in
     awaited := promise;
@@ -180,12 +178,7 @@ let with_cpu_permits t ~weight c f =
     promise in
   let activate admitted =
     if not admitted then ((try !unregister () with _ -> ()); cancelled)
-    else
-      try try_bind start success failure with error ->
-        first_error := error;
-        if not !borrowed then (release_once (); raise error) else
-        try try_bind (fun () -> !awaited) failed_after_settlement failed_after_settlement
-        with _ -> recover (); raise error in
+    else BorrowedWork.try_bind start success failure in
   let on_admitted () = owns_reservation := true in
   let acquire_owned () = acquire t ~weight ~child:false ~on_admitted ~abort_pending c in
   let acquisition_failed error =

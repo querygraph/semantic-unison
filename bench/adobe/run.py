@@ -19,11 +19,13 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES = [
     'src/lwt/lwt.mli', 'src/lwt/lwt.ml', 'src/lwt/pqueue.mli', 'src/lwt/pqueue.ml',
     'src/lwt/generic/lwt_unix_impl.ml', 'src/lwt/lwt_unix.mli', 'src/lwt/lwt_unix.ml',
+    'src/borrowedWork.mli', 'src/borrowedWork.ml',
     'src/helperSupervisor_stubs.c', 'src/helperSupervisor.mli', 'src/helperSupervisor.ml',
     'src/semanticAdmission.mli', 'src/semanticAdmission.ml',
     'src/ioAdmission.mli', 'src/ioAdmission.ml',
     'src/semanticHash_stubs.c', 'src/semanticHash.mli', 'src/semanticHash.ml',
     'src/semanticFile_stubs.c', 'src/semanticFile.mli', 'src/semanticFile.ml',
+    'src/formatRecognition.mli', 'src/formatRecognition.ml',
     'src/formatExtension.mli', 'src/formatExtension.ml',
     'src/xmpObservation.mli', 'src/xmpObservation.ml',
     'src/dngSemantic.mli', 'src/dngSemantic.ml', 'src/semanticDelta.mli', 'src/semanticDelta.ml',

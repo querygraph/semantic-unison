@@ -1,0 +1,1818 @@
+{
+  "cases_each_compiler": {
+    "actual_parent_designated_negative": 1,
+    "fixed_total": 39,
+    "ordinary_success_error_cancel": 3,
+    "six_phases_times_initial_cpu_or_io_wait": 12,
+    "six_phases_with_two_finite_poll_timer_failures": 6,
+    "six_watcher_phases_times_three_underlying_worker_outcomes": 18
+  },
+  "date": "2026-10-13",
+  "fixture_failures": [],
+  "invariants": [
+    "actual Atomic-paused domain entered while owner ticker progresses",
+    "kernel FD census observes input and SemanticFile channel duplicates still open",
+    "workspace retirement retains transaction/payload/descriptor credits while borrowed work is sleeping",
+    "CPU permit and IO lease stay charged until actual worker completion",
+    "pending and private domain-slot counts do not retire early",
+    "next resource consumer and same-device callback remain blocked until settlement",
+    "cancel does not release active duplicates or ledgers early",
+    "two distinct preallocated waiter failures preserve the first exception across later success/error/cancellation",
+    "callback-independent polling survives two finite timer setup failures",
+    "exact follow-up digest and shutdown preserve borrowed source and close all owned descriptors/settle ledgers"
+  ],
+  "limits": [
+    "Only own 8192-byte temporary synthetic files and bounded one-domain processes; no Photo/Adobe/Lightroom access or benchmarks.",
+    "Finite controlled failures prove selected observer/timer setup boundaries, not persistent OOM, full process RSS/FD policy, arbitrary asynchronous exceptions or compiler-proved domain safety.",
+    "Current and parent Ox builds retain existing unsafe Domain.spawn alerts; this receipt does not remove their manual ownership contract.",
+    "Callbacks which independently dispatch work and throw before returning its actual promise, asynchronous later callback connection failures and uninterruptible work remain outside this guarantee.",
+    "This component receipt does not replace root full Make/Dune/CLI integration and pre-existing regression qualification."
+  ],
+  "parent_source_freeze": {
+    "bytes": 32798,
+    "path": "/private/tmp/unison-worker-settlement-build-records/SOURCE-FREEZE.json",
+    "sha256": "5de8705129d393282d9cd0000c8bd9b87a4e0cbbc15831671aefee38fa593fb6"
+  },
+  "private_instrumentation": {
+    "faults": "legacy Lwt.add_waiter watches physical promise identity through Obj.repr; no promise state mutation",
+    "mapping_watchers": "capture the actual promise returned by each production thunk, without injecting before work returns",
+    "parent_negative": "actual parent HelperSupervisor, IoAdmission and SemanticWorkers implementations; same raw-reply two-waiter fault and independent kernelFD/admission oracle",
+    "poll_timer": "private copied BorrowedWork shadows Lwt_unix.sleep; failures armed only after both targeted waiter errors",
+    "slot_observer": "private owner-only getter for actual t.slots"
+  },
+  "retained_artifact_pins_verified": 772,
+  "runs": {
+    "ox": {
+      "bytes": 176184,
+      "case_executions": [
+        {
+          "designated_negative_detected": true,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/parent/settlement-test",
+              "raw-reply",
+              "success",
+              "immediate",
+              "0",
+              "negative"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/parent/case-0",
+            "exit": 2,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/parent/case-0/test.log",
+            "log_sha256": "ea21c627f6149f5703872d754834ce92b50004a434d5bb5c92c7e9505a5c2098"
+          },
+          "initial_wait": "immediate",
+          "mode": "parent",
+          "operation": "success",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "normal",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-0",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-0/test.log",
+            "log_sha256": "a35dcb3a180e38386f5f17f028e307e85a50d7c1026156bcdc51951fd032dfea"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "normal",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-1",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-1/test.log",
+            "log_sha256": "077429f8d2371558e211df49cb2798d579f11b2cb123123e5a6cbf16b6fc74b2"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "normal",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-2",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-2/test.log",
+            "log_sha256": "a1488ac9c649fe3bd90ecb1dd89528365afb55faef8b63db07b50355d918ee35"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-3",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-3/test.log",
+            "log_sha256": "1fe10b591533ffddc911dc1805819b48d19aae82d6eb5c0d4f3706cc3b86fdb1"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-4",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-4/test.log",
+            "log_sha256": "958c40953d4d3f3028b9415c30c00229960f976402eccaeef26813a5160ec00b"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-5",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-5/test.log",
+            "log_sha256": "a69aa53be8b885faa2c17956d099f6e9165a1cee9218c3020af806e35c3b82f7"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-6",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-6/test.log",
+            "log_sha256": "7c9a4b7c9a53216564d040fdbaac16ef436d41cff4a06157c32a44c76d9c857d"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-7",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-7/test.log",
+            "log_sha256": "6cdbced9671b81a6cdcf01a32801398443e962a5f6a69546707565ad3c1b5792"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-8",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-8/test.log",
+            "log_sha256": "497bdcef18ea7e21401cd4a20116eadd9d8506724ffc35705c6c9c4382bbb57e"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-9",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-9/test.log",
+            "log_sha256": "fc6ef4802221cb9e9f3d8fca576cc9a3f3089b659165520b8347eece47617599"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-10",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-10/test.log",
+            "log_sha256": "77513328a29ccf481a0b19e66ba7f4d079aea4edc9862911135738df87c41c2c"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-11",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-11/test.log",
+            "log_sha256": "f7f0358807ad7b7b5d9960c58c8a2dc914af682dc32e94eca54f56d166981398"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-12",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-12/test.log",
+            "log_sha256": "f0906833d5ab30d3941851ea6f8ed2340d7a02770360eb4fa1d098638bdb66f8"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-13",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-13/test.log",
+            "log_sha256": "7736cd24538fef8bd45e2a946e7548a6b8650ead0dd183f8bb6ead02ceac3ef0"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-14",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-14/test.log",
+            "log_sha256": "789b7319fe1c5d2b135718911db3caaa8b64990297a870dde58cd1c2df9a82fe"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-15",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-15/test.log",
+            "log_sha256": "7d54d26726f0a946dc016b38c843fcf32d779f8b10d376de1e1414df43949bb1"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-16",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-16/test.log",
+            "log_sha256": "14a3b3cb28d2e3229256bf40bf2e3c022e1dd0163f7f688fc57662c69fa139ef"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-17",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-17/test.log",
+            "log_sha256": "46a78058d1e6da8faefedb2bc4edf4ff2c0fe8cd30a19702cc754b7374a76e25"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-18",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-18/test.log",
+            "log_sha256": "68fab145af9079a24c9637cf923a9a51bd81f9ceb5fa181696c9adc3ab5721bc"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-19",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-19/test.log",
+            "log_sha256": "c0ea771f7e4371a326c3708e5517edab543e63bf3108fe14a265c188b28400d2"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-20",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-20/test.log",
+            "log_sha256": "ce0c192fefd92ba09e3946f492568631ce455a8e5101fc69607fb3587d49bd1c"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-21",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-21/test.log",
+            "log_sha256": "8ea16cf8528e947fd89b500085c8bb69dae8a44fe184c47408db993ba09fbc47"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-22",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-22/test.log",
+            "log_sha256": "6ae53aa27b1f120af1c47f4f8171afbc8dcc62bc6e71dce5634093c361a2247e"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-23",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-23/test.log",
+            "log_sha256": "87c15d0db7f6edd45bd011f5cd4e4569d2d54f6d29c387b7234d5476405c09a3"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-24",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-24/test.log",
+            "log_sha256": "ceaf2f0cd9ef3accc8968d604901cd291b6e5c529171b37b4a62114b59051c1e"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-25",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-25/test.log",
+            "log_sha256": "a42a16da8fc02dd7b2f5130d547d5bbdf82425c9adfbcc6bf496b282068663d9"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-26",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-26/test.log",
+            "log_sha256": "c21009a55cf796d644792368f3456d4b6c8ef00a9e25442f4685af59bb443524"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-27",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-27/test.log",
+            "log_sha256": "2559b760a7b386ecae6cf133645965db35d36bab5686c80a58300d7a96d818c8"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-28",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-28/test.log",
+            "log_sha256": "9959ab14c621b52fc376833b9038fe6de55bde69bc2543463998d5d5944f913b"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-29",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-29/test.log",
+            "log_sha256": "c4174fefd73d37506e579c0031b0d7e3d7baca71cfaac59124011a268889193c"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-30",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-30/test.log",
+            "log_sha256": "2aa71bfc5e1f057174695b0bdc81faeda55c786ef1921df4f442474e4ebe6636"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-31",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-31/test.log",
+            "log_sha256": "1e220825ba547432c6d1eb6f1ebf9440977c917969f805a0bdb18bace80ad350"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-32",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-32/test.log",
+            "log_sha256": "2fe86413adec8bd9a5989e352e246df7b60a449e111d63782951619320331453"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-33",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-33/test.log",
+            "log_sha256": "e96e8a06cbd2e0aeefb59602c8ec33b827cffed17a5622f8332b91cc3638e813"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-34",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-34/test.log",
+            "log_sha256": "d25c0a5173360c2181915e61ac5bf7300ed2a29604beebbd40af54f83755996f"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-35",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-35/test.log",
+            "log_sha256": "22759b750f6a09cd6811edac9d561b74576228cba46a756864fd466357cb8901"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-36",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-36/test.log",
+            "log_sha256": "0ad7fd7a85824a7b64953675d205689245cf8d0b8b2c372eb193358a5f238359"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-37",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-37/test.log",
+            "log_sha256": "fd5e8714d6d64576139ed5520242a932020f166a17e1395e8f8e0c3ff70e3647"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-kl020l5t/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-38",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-kl020l5t/fixed/case-38/test.log",
+            "log_sha256": "4c1db566ecb0dc626f103a9a6a19907977ac4e9fadd7fc75428b0299fec1064f"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 2
+        }
+      ],
+      "command_logs_verified": 115,
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "current_source_pins_verified": 39,
+      "fixed_cases": 39,
+      "parent_designated_negative": {
+        "designated_negative_detected": true,
+        "execution": {
+          "argv": [
+            "/private/tmp/unison-worker-settlement-kl020l5t/parent/settlement-test",
+            "raw-reply",
+            "success",
+            "immediate",
+            "0",
+            "negative"
+          ],
+          "cwd": "/private/tmp/unison-worker-settlement-kl020l5t/parent/case-0",
+          "exit": 2,
+          "log": "/private/tmp/unison-worker-settlement-kl020l5t/parent/case-0/test.log",
+          "log_sha256": "ea21c627f6149f5703872d754834ce92b50004a434d5bb5c92c7e9505a5c2098"
+        },
+        "initial_wait": "immediate",
+        "mode": "parent",
+        "operation": "success",
+        "phase": "raw-reply",
+        "timer_faults": 0
+      },
+      "path": "/private/tmp/unison-worker-settlement-ox.json",
+      "retained_artifact_pins_verified": 386,
+      "sha256": "525b5b2c223cc49026299d7607555670f3524fd9813b983686ac04025821956f",
+      "work": "/private/tmp/unison-worker-settlement-kl020l5t"
+    },
+    "stock": {
+      "bytes": 176290,
+      "case_executions": [
+        {
+          "designated_negative_detected": true,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/parent/settlement-test",
+              "raw-reply",
+              "success",
+              "immediate",
+              "0",
+              "negative"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/parent/case-0",
+            "exit": 2,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/parent/case-0/test.log",
+            "log_sha256": "ea21c627f6149f5703872d754834ce92b50004a434d5bb5c92c7e9505a5c2098"
+          },
+          "initial_wait": "immediate",
+          "mode": "parent",
+          "operation": "success",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "normal",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-0",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-0/test.log",
+            "log_sha256": "a35dcb3a180e38386f5f17f028e307e85a50d7c1026156bcdc51951fd032dfea"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "normal",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-1",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-1/test.log",
+            "log_sha256": "077429f8d2371558e211df49cb2798d579f11b2cb123123e5a6cbf16b6fc74b2"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "normal",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-2",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-2/test.log",
+            "log_sha256": "a1488ac9c649fe3bd90ecb1dd89528365afb55faef8b63db07b50355d918ee35"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "normal",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-3",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-3/test.log",
+            "log_sha256": "1fe10b591533ffddc911dc1805819b48d19aae82d6eb5c0d4f3706cc3b86fdb1"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-4",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-4/test.log",
+            "log_sha256": "958c40953d4d3f3028b9415c30c00229960f976402eccaeef26813a5160ec00b"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-5",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-5/test.log",
+            "log_sha256": "a69aa53be8b885faa2c17956d099f6e9165a1cee9218c3020af806e35c3b82f7"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-6",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-6/test.log",
+            "log_sha256": "7c9a4b7c9a53216564d040fdbaac16ef436d41cff4a06157c32a44c76d9c857d"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-7",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-7/test.log",
+            "log_sha256": "6cdbced9671b81a6cdcf01a32801398443e962a5f6a69546707565ad3c1b5792"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-8",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-8/test.log",
+            "log_sha256": "497bdcef18ea7e21401cd4a20116eadd9d8506724ffc35705c6c9c4382bbb57e"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-9",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-9/test.log",
+            "log_sha256": "fc6ef4802221cb9e9f3d8fca576cc9a3f3089b659165520b8347eece47617599"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-10",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-10/test.log",
+            "log_sha256": "77513328a29ccf481a0b19e66ba7f4d079aea4edc9862911135738df87c41c2c"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-11",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-11/test.log",
+            "log_sha256": "f7f0358807ad7b7b5d9960c58c8a2dc914af682dc32e94eca54f56d166981398"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-12",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-12/test.log",
+            "log_sha256": "f0906833d5ab30d3941851ea6f8ed2340d7a02770360eb4fa1d098638bdb66f8"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-13",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-13/test.log",
+            "log_sha256": "7736cd24538fef8bd45e2a946e7548a6b8650ead0dd183f8bb6ead02ceac3ef0"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-14",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-14/test.log",
+            "log_sha256": "789b7319fe1c5d2b135718911db3caaa8b64990297a870dde58cd1c2df9a82fe"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-15",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-15/test.log",
+            "log_sha256": "7d54d26726f0a946dc016b38c843fcf32d779f8b10d376de1e1414df43949bb1"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-16",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-16/test.log",
+            "log_sha256": "14a3b3cb28d2e3229256bf40bf2e3c022e1dd0163f7f688fc57662c69fa139ef"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-17",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-17/test.log",
+            "log_sha256": "46a78058d1e6da8faefedb2bc4edf4ff2c0fe8cd30a19702cc754b7374a76e25"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "success",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-18",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-18/test.log",
+            "log_sha256": "68fab145af9079a24c9637cf923a9a51bd81f9ceb5fa181696c9adc3ab5721bc"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "success",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "error",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-19",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-19/test.log",
+            "log_sha256": "c0ea771f7e4371a326c3708e5517edab543e63bf3108fe14a265c188b28400d2"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "error",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "immediate",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-20",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-20/test.log",
+            "log_sha256": "ce0c192fefd92ba09e3946f492568631ce455a8e5101fc69607fb3587d49bd1c"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-21",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-21/test.log",
+            "log_sha256": "8ea16cf8528e947fd89b500085c8bb69dae8a44fe184c47408db993ba09fbc47"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-22",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-22/test.log",
+            "log_sha256": "6ae53aa27b1f120af1c47f4f8171afbc8dcc62bc6e71dce5634093c361a2247e"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-23",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-23/test.log",
+            "log_sha256": "87c15d0db7f6edd45bd011f5cd4e4569d2d54f6d29c387b7234d5476405c09a3"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-24",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-24/test.log",
+            "log_sha256": "ceaf2f0cd9ef3accc8968d604901cd291b6e5c529171b37b4a62114b59051c1e"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-25",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-25/test.log",
+            "log_sha256": "a42a16da8fc02dd7b2f5130d547d5bbdf82425c9adfbcc6bf496b282068663d9"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-26",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-26/test.log",
+            "log_sha256": "c21009a55cf796d644792368f3456d4b6c8ef00a9e25442f4685af59bb443524"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-27",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-27/test.log",
+            "log_sha256": "2559b760a7b386ecae6cf133645965db35d36bab5686c80a58300d7a96d818c8"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-28",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-28/test.log",
+            "log_sha256": "9959ab14c621b52fc376833b9038fe6de55bde69bc2543463998d5d5944f913b"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-29",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-29/test.log",
+            "log_sha256": "c4174fefd73d37506e579c0031b0d7e3d7baca71cfaac59124011a268889193c"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-30",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-30/test.log",
+            "log_sha256": "2aa71bfc5e1f057174695b0bdc81faeda55c786ef1921df4f442474e4ebe6636"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "cpu",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-31",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-31/test.log",
+            "log_sha256": "1e220825ba547432c6d1eb6f1ebf9440977c917969f805a0bdb18bace80ad350"
+          },
+          "initial_wait": "cpu",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "io",
+              "0"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-32",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-32/test.log",
+            "log_sha256": "2fe86413adec8bd9a5989e352e246df7b60a449e111d63782951619320331453"
+          },
+          "initial_wait": "io",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 0
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "raw-reply",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-33",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-33/test.log",
+            "log_sha256": "e96e8a06cbd2e0aeefb59602c8ec33b827cffed17a5622f8332b91cc3638e813"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "raw-reply",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "cpu-result-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-34",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-34/test.log",
+            "log_sha256": "d25c0a5173360c2181915e61ac5bf7300ed2a29604beebbd40af54f83755996f"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "cpu-result-map",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-callback",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-35",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-35/test.log",
+            "log_sha256": "22759b750f6a09cd6811edac9d561b74576228cba46a756864fd466357cb8901"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-callback",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "io-result-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-36",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-36/test.log",
+            "log_sha256": "0ad7fd7a85824a7b64953675d205689245cf8d0b8b2c372eb193358a5f238359"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "io-result-map",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "submit-outer",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-37",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-37/test.log",
+            "log_sha256": "fd5e8714d6d64576139ed5520242a932020f166a17e1395e8f8e0c3ff70e3647"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "submit-outer",
+          "timer_faults": 2
+        },
+        {
+          "designated_negative_detected": false,
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/settlement-test",
+              "identify-map",
+              "cancel",
+              "immediate",
+              "2"
+            ],
+            "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-38",
+            "exit": 0,
+            "log": "/private/tmp/unison-worker-settlement-ygznjxl6/fixed/case-38/test.log",
+            "log_sha256": "4c1db566ecb0dc626f103a9a6a19907977ac4e9fadd7fc75428b0299fec1064f"
+          },
+          "initial_wait": "immediate",
+          "mode": "fixed",
+          "operation": "cancel",
+          "phase": "identify-map",
+          "timer_faults": 2
+        }
+      ],
+      "command_logs_verified": 115,
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "current_source_pins_verified": 39,
+      "fixed_cases": 39,
+      "parent_designated_negative": {
+        "designated_negative_detected": true,
+        "execution": {
+          "argv": [
+            "/private/tmp/unison-worker-settlement-ygznjxl6/parent/settlement-test",
+            "raw-reply",
+            "success",
+            "immediate",
+            "0",
+            "negative"
+          ],
+          "cwd": "/private/tmp/unison-worker-settlement-ygznjxl6/parent/case-0",
+          "exit": 2,
+          "log": "/private/tmp/unison-worker-settlement-ygznjxl6/parent/case-0/test.log",
+          "log_sha256": "ea21c627f6149f5703872d754834ce92b50004a434d5bb5c92c7e9505a5c2098"
+        },
+        "initial_wait": "immediate",
+        "mode": "parent",
+        "operation": "success",
+        "phase": "raw-reply",
+        "timer_faults": 0
+      },
+      "path": "/private/tmp/unison-worker-settlement-stock.json",
+      "retained_artifact_pins_verified": 386,
+      "sha256": "716318c6d28f75799a069d3160c6b3b5520edea8d3c6faadac4ec46a3ea6b010",
+      "work": "/private/tmp/unison-worker-settlement-ygznjxl6"
+    }
+  },
+  "schema": 1,
+  "scope": "Finite post-return observer-installation and polling timer setup failures across actual one-domain Identify jobs and owner resource/CPU/device/slot lifetime.",
+  "source_parent": "9fbfc00ccd03ac6fddd9e04abefc15f1381a72b7",
+  "status": "component-qualified",
+  "tested_private_watchers": [
+    "actual raw worker reply",
+    "CPU result map returned work",
+    "IO callback returned work",
+    "IO result map returned work",
+    "submission returned work",
+    "public Identify response returned work"
+  ]
+}

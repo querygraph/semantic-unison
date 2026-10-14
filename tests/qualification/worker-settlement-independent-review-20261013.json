@@ -1,0 +1,289 @@
+{
+  "accepted_utc": "2026-10-14T01:28:02.586517+00:00",
+  "aggregate": {
+    "bytes": 59552,
+    "path": "tests/qualification/worker-settlement-integration-20261013.json",
+    "sha256": "48d6700a80a2be40daef9fec4a72b7e8a8414e6eea687a4d8cae6b339aee6e48"
+  },
+  "authorship": {
+    "native_range_audit": "Nine isolated runner dependency/fault-seam updates, maintained helper/FD qualification and read-only retained-root indexing.",
+    "range_test_audit": "Focused new actual-domain fixture, private parent negative and 39-case qualification per compiler.",
+    "root": "Production BorrowedWork/core guard/ledger changes, documents, four builds/selftests, root regressions and combined receipt.",
+    "strict_range_review": "Independent draft source, focused/component artifacts and final aggregate/doc review; no production/test authoring or reruns."
+  },
+  "build_review": {
+    "builds": 4,
+    "compiler_config_executable_build_log_selftest_log_binary_pins_verified": true,
+    "compiler_versions": [
+      "5.5.1",
+      "5.2.0+ox"
+    ],
+    "does_not_prove_safe_domain_boundary_other_platforms_or_performance": true,
+    "existing_OxCaml_unsafe_domain_alerts_retained": true,
+    "generated_dependencies": {
+      "bytes": 42912,
+      "path": "src/.depend",
+      "sha256": "9f3bd86b99a55c089247b2bc976d556e83c8fc5b4c259665375b644f3721e2c5"
+    },
+    "generated_dependencies_match_workspace_and_both_Make": true,
+    "production_inputs": 331,
+    "receipt": {
+      "bytes": 7290,
+      "path": "/private/tmp/unison-worker-settlement-build-records/BUILDS.json",
+      "sha256": "e829f7a0947b16b1d1819c33f8f7a4bfe4dbf12ea72a5622e7ca397591a34743"
+    },
+    "selftests": 4,
+    "source_freeze": {
+      "bytes": 32798,
+      "path": "/private/tmp/unison-worker-settlement-build-records/SOURCE-FREEZE.json",
+      "sha256": "5de8705129d393282d9cd0000c8bd9b87a4e0cbbc15831671aefee38fa593fb6"
+    },
+    "source_hash_comparisons": 1655,
+    "source_sets": 5,
+    "source_sets_compared": [
+      "current workspace",
+      "stock Make",
+      "OxCaml Make",
+      "stock clean Dune",
+      "OxCaml clean Dune"
+    ],
+    "status": "accepted"
+  },
+  "document_review": {
+    "inputs": {
+      "SOL.md": {
+        "bytes": 178103,
+        "path": "SOL.md",
+        "sha256": "e7009e67c5899bcaee1d71bc19e9b266d39fdf77e3372d4101de4aeed4548807"
+      },
+      "doc/implementation-status.md": {
+        "bytes": 62303,
+        "path": "doc/implementation-status.md",
+        "sha256": "9960a424be5286e36a4c0e9be500995535e4ae8dc1e179407d2bd8c4e5276fa2"
+      },
+      "doc/resource-admission.md": {
+        "bytes": 6262,
+        "path": "doc/resource-admission.md",
+        "sha256": "a975a547b25f34f884c8fd19c595496b67fb09abbc65003d57ca7174a9676f4a"
+      },
+      "doc/returned-work-settlement.md": {
+        "bytes": 4837,
+        "path": "doc/returned-work-settlement.md",
+        "sha256": "37f155af8740e7de7aeb9cf89019fa877f56808236ded43da26eeced1735b002"
+      },
+      "doc/semantic-workers.md": {
+        "bytes": 12488,
+        "path": "doc/semantic-workers.md",
+        "sha256": "822c8cf21f683582c6f51a24c801d06913aa38e3d6c7b2f189c58d0d9bfd32f8"
+      },
+      "tests/README.md": {
+        "bytes": 18830,
+        "path": "tests/README.md",
+        "sha256": "c0437191c036a6a8e96cee05f4d937b83218f950f4cd93b77a087217bd463b76"
+      },
+      "tests/worker_settlement/README.md": {
+        "bytes": 2124,
+        "path": "tests/worker_settlement/README.md",
+        "sha256": "d4bfee2e81957efe7e17072a529804670a3edacfd7fca4517086bdce49cb5cf4"
+      }
+    },
+    "observations": [
+      "Seven current documents distinguish selected returned-work settlement from broad allocator/connection/pre-return failures and complete resource control.",
+      "Six captured core boundaries and their underlying actual promises are named; private parent participant proof is correctly distinguished from an entire historical application run.",
+      "Exact finite timer-control boundary, owner-loop requirement, manual Domain.spawn contract, process memory/resource and uninterruptible-work limits remain explicit.",
+      "Real-camera/SDK/corpus, storage/sharing/performance, Photo oracle/window/publisher and goal completion remain separate. No new benchmark or Adobe invocation is claimed."
+    ],
+    "status": "accepted",
+    "test_inputs_verified": 26
+  },
+  "focused_actual_domain_review": {
+    "actual_parent": {
+      "bodies_compared_to_git_show": true,
+      "commit": "9fbfc00ccd03ac6fddd9e04abefc15f1381a72b7",
+      "entire_parent_application_or_CLI_not_claimed": true,
+      "participant_source_bodies": [
+        "src/helperSupervisor.ml",
+        "src/ioAdmission.ml",
+        "src/semanticWorkers.ml"
+      ]
+    },
+    "compile_run_command_and_log_records_verified": 230,
+    "coverage": "Three no-fault success/error/cancel controls;6phases\u00d73underlying outcomes;6phases\u00d72initial CPU/I/O waits;6phases with2finite polling sleep-construction errors.",
+    "each_compiler": {
+      "actual_parent_participant_negative": 1,
+      "assertions": 637,
+      "fixed_cases": 39
+    },
+    "exact_private_source_reconstruction": true,
+    "fixture_failures": 0,
+    "oracles": [
+      "Private add_waiter fault checks physical identity of the actual returned promise and raises distinct preallocated first/second errors before waiter-list mutation; no promise state is altered.",
+      "Actual one-domain Identify callback pauses on an Atomic barrier. Kernel FD census independently sees both worker input/channel duplicates while domain running/entered markers confirm live work.",
+      "After workspace retirement and cancellation, CPU/device/pending/slot/workspace ledgers remain charged and caller promise sleeps. A next consumer and same-device callback remain blocked.",
+      "Owner timers progress while the domain is paused; all selected fault/timer counters match the expected case. Source contents/identity and caller FD survive.",
+      "The first exception is compared to the actual preallocated Primary_waiter value; secondary faults and worker failures/cancellation cannot replace it.",
+      "After actual callback exit, follow-up digest is exact, queued consumers proceed, shutdown closes descriptors and every selected ledger returns to zero.",
+      "Actual private parent participants fail only the designated active-worker-FD/admission oracle while physical domain borrowing is still present."
+    ],
+    "receipt": {
+      "bytes": 68663,
+      "path": "tests/worker_settlement/qualification-20261013.json",
+      "sha256": "d2b4f2cbe049c4f6bf2c7dd73539c38cc61e7efd6e19c2dd84452cd914fb46c5"
+    },
+    "retained_artifact_pins_verified": 772,
+    "scope_limits": "Timers are faulted before sleep creation, not a complete timer/waiter/OS/allocator matrix. Physical one-domain/resource proof is selected synthetic evidence, not a process RSS/FD ceiling or compiler-checked portability.",
+    "six_phases": [
+      "raw worker reply",
+      "CPU-result mapping",
+      "I/O callback",
+      "I/O-result mapping",
+      "outer submit",
+      "public Identify response mapping"
+    ],
+    "status": "accepted"
+  },
+  "limits": [
+    "Finite post-return observer-installation failure scope; private preallocated errors do not qualify general allocator exhaustion or arbitrary asynchronous exceptions.",
+    "Two finite polling controls fail before sleep creation; not a complete timer/waiter/OS failure matrix.",
+    "Independent work which dispatches then throws before returning its actual promise, delayed legacy Lwt.connect failures and pre-return admission/dispatcher setup are separate hazards; existing unarmed I/O scheduled-latch hazard remains open.",
+    "Owner loop must continue; persistent allocation refusal and uninterruptible work have no responsiveness/settlement deadline.",
+    "No compiler-checked portable domain boundary, process FD/RSS policy, native SDK/child memory, storage/sharing or performance qualification.",
+    "Existing worker/helper scratch is deleted and I/O positive private objects are overwritten by its negative; record only retained binaries/logs, pre-copy source hashes and actual outer commands without inventing missing inner states.",
+    "Existing Files/validation qualification is synthetic cooperative scope; real camera/SDK/corpus and crash/power-loss behavior remain separate.",
+    "No Adobe/Lightroom/Photo invocation or preview build/benchmark/publication/admission; original Photo owner/window unchanged.",
+    "Prior source/document/artifact receipts remain immutable historical evidence; this receipt binds current inputs independently.",
+    "Only changed core six-boundary ownership/mapping scope is accepted; untouched higher runtime/report wrappers listed above are explicitly next work.",
+    "Reviewer ran no tests/builds/native helpers/Adobe/ExifTool/Lightroom/Photo/catalog/cache/volume/preview operations and released no oracle window."
+  ],
+  "maintained_ownership_review": {
+    "CPU_negative": "Calls actual HelperSupervisor.release_once before the normal settlement drain and must fail DESIGNATED CPU borrower released before settlement. Inner exit2 is expected; accepting outer runner exits0.",
+    "dependency_updates": "Unchanged fixture assertions/native guards remain; nine maintained runner source lists/link graphs gain BorrowedWork and required FormatRecognition inputs. Benchmark drivers were source-maintained only.",
+    "each_compiler": {
+      "FD_assertions": 110,
+      "FD_cases": 20,
+      "early_CPU_retirement_negative": 1,
+      "helper_assertions": 211,
+      "helper_groups": 36
+    },
+    "outer_runs": 6,
+    "outer_terminal_zero": 6,
+    "phase26_seam": "Private BorrowedWork Lwt.try_bind wrapper calls the real invoke first, so awaited/returned already record the actual promise before phase26 observer failure.",
+    "receipt": {
+      "bytes": 165001,
+      "path": "/private/tmp/unison-worker-settlement-build-records/runner-regressions.json",
+      "sha256": "e1fb659844e4281a23a560ac21cafa48e0b4cefd61416a616242d334b456dbe7"
+    },
+    "retained_private_artifact_hash_checks": 358,
+    "status": "accepted",
+    "unchanged_historical_negative_suite_not_rerun_or_promoted": true
+  },
+  "next_work": [
+    {
+      "file": "src/semanticRuntime.ml",
+      "finding": "Untouched with_io_file maps IoAdmission.with_devices with ordinary >>= inside its outer try_bind. Mapping observer installation failure after inner work starts can hide its sleeping promise and allow enclosing path/borrower cleanup. This checkpoint does not qualify that broader pipeline.",
+      "line": 140,
+      "priority": "next continuation before whole-clone API",
+      "source_sha256": "9fc82014304813fe938d8e370ddeb3d2ddaf9a1236936c12494647790127f1fb"
+    },
+    {
+      "file": "src/semanticRemote.ml",
+      "finding": "Untouched report-only inspection mapping uses ordinary >>= after SemanticWorkers.inspect starts. A returned worker promise can be hidden by a failed wrapper; migrate/qualify the enclosing ownership and mapping layers separately.",
+      "line": 369,
+      "priority": "next continuation before whole-clone API",
+      "source_sha256": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be"
+    },
+    {
+      "finding": "I/O pre-return admission, unarmed scheduled latch after dispatcher setup error, delayed legacy Lwt.connect faults and persistent allocation refusal remain distinct unqualified hazards."
+    }
+  ],
+  "parent_commit": "9fbfc00ccd03ac6fddd9e04abefc15f1381a72b7",
+  "publication_review": {
+    "does_not_prove_commit_push_or_whole_goal_completion": true,
+    "frozen_prior_and_component_receipts_unchanged": true,
+    "index_unstaged_when_observed": true,
+    "reviewed_before_staging": true,
+    "seven_external_coordination_files_remain_outside_slice": true,
+    "tracked_whitespace_check_passed": true
+  },
+  "reviewer": "/root/strict_range_review",
+  "reviewer_method": {
+    "changed_production_tests_and_documents_authored": false,
+    "method": "Read-only source/retained byte hashes, full inventory sets/types/modes/inodes/symlink targets, exact pure-string private-source reconstruction, git-show parent source comparison, command/log/provenance and document review. Only this separate acceptance artifact was written.",
+    "tests_builds_native_or_helpers_rerun": false
+  },
+  "root_regression_review": {
+    "each_compiler": {
+      "Files_publication_CLI_cases": 79,
+      "I_O_assertions": 243,
+      "I_O_groups": 20,
+      "designated_fairness_negative": 1,
+      "full_worker_groups": 27,
+      "helper_groups": 37,
+      "receiving_validation_CLI_cases": 21
+    },
+    "exact_source_reconstructions": [
+      "Current complete Files source plus frozen fault/archive wrappers",
+      "Current complete Copy source plus frozen producer wrappers",
+      "Copy.mli byte-identical; Files.mli adds only private dump declaration",
+      "UITtext differs only by private archive dump after four commit checkpoints",
+      "Native finalPublication_stubs.c and fixture.c byte-identical",
+      "Retained I/O negative source changes only the unique immediate-conflict fairness predicate"
+    ],
+    "full_retained_inventory": {
+      "coverage": "Complete retained Files/validation/I/O inventories on both compilers; path sets, bytes/SHA256/size, type, inode/mode and symlink targets matched the sealed index.",
+      "directories": 1028,
+      "regular_file_bytes": 268866057,
+      "regular_files": 2736,
+      "symlinks": 4
+    },
+    "index": {
+      "bytes": 1674089,
+      "path": "/private/tmp/unison-worker-settlement-root-regressions.json",
+      "sha256": "9deb4965f1072599b704534c2500d70386293c7f6b23e91e8db13ec3186d549e"
+    },
+    "outer_commands": {
+      "bytes": 8418,
+      "path": "/private/tmp/unison-worker-settlement-build-records/ROOT-REGRESSIONS.json",
+      "sha256": "9ff3dd8ec4d6b3b44fe1bd0edfd3d7999734b1520093e395b7299482acd5de70"
+    },
+    "private_Files_source_manifest_inputs_each": 327,
+    "private_Files_subset_matches331_package_manifest": true,
+    "provenance_limits": [
+      "Root worker/helper runners delete compile/test scratch. Exact outer commands, current pinned runner/source and recorded complete logs support selected outcomes; no missing test binary/inner scratch is invented.",
+      "I/O runner preserves current/negative executable and log pins, but overwrites positive compile objects/source when building its negative. The index does not claim those overwritten positive objects are retained.",
+      "Files/validation runners do not separately persist every inner CLI argv/numeric exit, and may overwrite intermediate phases. Current source/assertions, retained current artifacts and root-recorded outer exits are scoped evidence, not reconstructed missing history.",
+      "Assembler and reviewer performed no build/test/native replay. Retained acceptance is not fresh independent execution or wholesale source requalification of unchanged subsystems."
+    ],
+    "retained_File_validation_log_files_read": 618,
+    "retained_private_Files_compile_link_commands": 48,
+    "root_outer_terminal_zero": 10,
+    "status": "accepted"
+  },
+  "schema": "unison.returned-worker-settlement-independent-review/1",
+  "source_review": {
+    "findings_closed": [
+      "The old two-failed-waiter CPU branch no longer exposes failure while its recorded actual borrower sleeps.",
+      "Both nested CPU/I/O response mappings, outer submit and public worker result mappings use the settlement guard; a failed intermediate wrapper cannot hide the selected live borrower.",
+      "Polling uses separate correctly typed preallocated unit-success and exn-failure callbacks; the initial mutually recursive callback type mismatch was fixed before builds.",
+      "I/O release prepares its ledger before publishing the preallocated retirement mark; later deferred-dispatch setup failure cannot debit that reservation a second time."
+    ],
+    "observations": [
+      "Guard refs, error storage and invoke/recovery/poll/timer callbacks are constructed before work invocation. Returned actual promise recording is allocation-free.",
+      "The original observer-installation error survives one reattachment attempt and finite polling sleep-construction errors, regardless of subsequent worker success/error/cancellation.",
+      "Polling is cooperative through10ms owner-loop timers, without nested Lwt_unix.run or another waiter on the borrower. Ordinary completion uses no extra poll timer.",
+      "Selected physical worker FD, pending/slot, CPU, device and enclosing retained-workspace ownership remain armed until actual worker cleanup and returned-promise settlement.",
+      "Cancellation listeners and worker Atomic cancellation remain live during drain. Worker closes its duplicates before queuing the response; only the owner handles Lwt/results and retirement.",
+      "The new internal module has no production test hook. Make ordering and isolated unit/benchmark runner copy/link dependencies include it; current missing FormatRecognition runner dependencies are maintained without benchmark invocation."
+    ],
+    "source_sha256": {
+      "src/Makefile.OCaml": "c10fd67c3766077b2a60c973f91179bb60532373b542b324d39e55eb4dbe1251",
+      "src/borrowedWork.ml": "3969cd0b673235d09febd34ce50affdfeb366fb823d19ce1774e9c069fe00346",
+      "src/borrowedWork.mli": "9e2edc45332cbc83f69915b1a425cbd0648300a17ddb99e12fb7a902f840e645",
+      "src/helperSupervisor.ml": "281d8e3d82e1a8543fa1a5b260a75a6ad913e24d05c4443cc9e5ec319d63ce93",
+      "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+      "src/semanticWorkers.ml": "3a77dbe913826dd8e7c3160363970bd744083cd355800a6c1798bbb6669de8cb"
+    },
+    "status": "accepted"
+  },
+  "status": "ACCEPTED_SELECTED_RETURNED_WORK_SOURCE_RETAINED_ARTIFACT_AND_DOCUMENT_SCOPE"
+}

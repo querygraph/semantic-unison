@@ -24,6 +24,7 @@ work = Path(tempfile.mkdtemp(prefix='unison-helper-ownership-', dir='/private/tm
 print('work', work, flush=True)
 inputs = ['src/lwt/lwt.mli', 'src/lwt/lwt.ml', 'src/lwt/pqueue.mli', 'src/lwt/pqueue.ml',
           'src/lwt/generic/lwt_unix_impl.ml', 'src/lwt/lwt_unix.mli', 'src/lwt/lwt_unix.ml',
+          'src/borrowedWork.mli', 'src/borrowedWork.ml',
           'src/helperSupervisor.mli', 'src/helperSupervisor.ml', 'src/helperSupervisor_stubs.c',
           'tests/helper_ownership/fixture.c', 'tests/helper_ownership/fixture.ml',
           'tests/helper_ownership/test.ml', 'tests/helper_ownership/run.py',
@@ -92,8 +93,22 @@ insert('try try_bind acquire_owned activate acquisition_failed',
        'try (if !Fixture.selected = 33 || !Fixture.selected = 34 then (let pending = acquire_owned () in Fixture.hit !Fixture.selected; try_bind (fun () -> pending) activate acquisition_failed) else try_bind acquire_owned activate acquisition_failed)', count=2)
 insert('let borrowed = ref false and awaited = ref (wait ()) in',
        'let borrowed = (Fixture.hit 27; ref false) and awaited = ref (wait ()) in')
-insert('try try_bind start success failure with error ->',
-       'try Fixture.hit 28; (if !Fixture.selected = 26 then (let pending = start () in Fixture.hit 26; try_bind (fun () -> pending) success failure) else try_bind start success failure) with error ->')
+insert('else BorrowedWork.try_bind start success failure',
+       'else (Fixture.hit 28; BorrowedWork.try_bind start success failure)')
+# Raise at the returned-promise observer installation boundary. BorrowedWork's
+# real invoke has already recorded awaited/returned when this private wrapper
+# receives the promise. Raising inside invoke itself would be converted into a
+# work failure by vendored Lwt.apply and would test a different boundary.
+borrowed_prefix = '''module RealLwt = Lwt
+module Lwt = struct
+  include RealLwt
+  let try_bind invoke success failure =
+    let pending = invoke () in
+    Fixture.hit 26;
+    RealLwt.try_bind (fun () -> pending) success failure
+end
+'''
+borrowed = borrowed_prefix + (work / 'borrowedWork.ml').read_text()
 if args.negative == 'missing-guard':
     insert('''(try teardown () with _ ->
          (* A later status/cleanup allocation must not hide the first error.
@@ -118,8 +133,18 @@ elif args.negative == 'missing-outer-guard':
     release_once (); raise exn''',
            'with exn -> (try !abort_pending () with _ -> ()); release_once (); raise exn')
 elif args.negative == 'early-cpu-release':
-    insert('first_error := error;', 'first_error := error; release_once ();')
+    # Retire the actual CPU reservation at the observer error, then retain the
+    # ordinary drain. The sleeping borrower observes premature retirement and
+    # the existing designated assertion distinguishes this ownership fault.
+    with (work / 'fixture.ml').open('a') as stream:
+        stream.write('\nlet before_borrowed_failure = ref (fun () -> ())\n')
+    insert('else (Fixture.hit 28; BorrowedWork.try_bind start success failure)',
+           'else (Fixture.hit 28; Fixture.before_borrowed_failure := release_once; BorrowedWork.try_bind start success failure)')
+    assert borrowed.count('first_error := error;') == 1
+    borrowed = borrowed.replace('first_error := error;',
+                                'first_error := error; !Fixture.before_borrowed_failure ();')
 (work / 'helperSupervisor.ml').write_text(mutated)
+(work / 'borrowedWork.ml').write_text(borrowed)
 (work / 'child.ml').write_text('let () = ignore (Unix.select [] [] [] (float_of_string Sys.argv.(1)))\n')
 commands = []
 environment = dict(os.environ, PATH=str(compiler.parent) + os.pathsep + os.environ.get('PATH',''))
@@ -137,12 +162,14 @@ def run(command, log):
         raise subprocess.CalledProcessError(result.returncode, command)
 with (work / 'build.log').open('w') as log:
     for name in ('lwt.mli','lwt.ml','pqueue.mli','pqueue.ml','lwt_unix_impl.ml','lwt_unix.mli',
-                 'lwt_unix.ml','fixture.c','fixture.ml','helperSupervisor.mli','helperSupervisor.ml'):
+                 'lwt_unix.ml','fixture.c','fixture.ml','borrowedWork.mli','borrowedWork.ml',
+                 'helperSupervisor.mli','helperSupervisor.ml'):
         run([str(compiler), '-I', '+unix', '-c', name] +
             (['-o', 'owner_stubs.o'] if name == 'fixture.c' else []), log)
     run([str(compiler), '-I','+unix','unix.cmxa','child.ml','-o','child'], log)
     run([str(compiler), '-I','+unix','unix.cmxa','lwt.cmx','pqueue.cmx','lwt_unix_impl.cmx',
-         'lwt_unix.cmx','owner_stubs.o','fixture.cmx','helperSupervisor.cmx','test.ml','-o','test'], log)
+         'lwt_unix.cmx','owner_stubs.o','fixture.cmx','borrowedWork.cmx',
+         'helperSupervisor.cmx','test.ml','-o','test'], log)
 command = [str(work / 'test'), str(work / 'child')]
 if args.negative:
     command.append('18' if args.negative == 'missing-outer-guard' else '26' if args.negative == 'early-cpu-release' else '5')
@@ -161,6 +188,11 @@ receipt = dict(utc=datetime.datetime.now(datetime.timezone.utc).isoformat(), wor
                compiler_config_sha256=sha(work/'compiler-config.txt'),
                native_compiler=native_compiler, native_compiler_sha256=sha(native_compiler),
                sources=pins, private_source_sha256=sha(work/'helperSupervisor.ml'),
+               private_borrowed_work_sha256=sha(work/'borrowedWork.ml'),
+               private_fixture_sha256=sha(work/'fixture.ml'),
+               cpu_observer_fault_seam='Private BorrowedWork Lwt.try_bind wrapper invokes the real recording closure, then hits phase26 before installing the observer; phase28 is before BorrowedWork/start.',
+               early_cpu_release_negative=('Actual HelperSupervisor release_once called from private BorrowedWork observer-error handling before the normal settlement drain.'
+                                           if args.negative == 'early-cpu-release' else None),
                commands=commands, negative=args.negative, test_exit=result.returncode, accepted=accepted,
                artifacts={str(p):sha(p) for p in sorted(work.iterdir()) if p.is_file()},
                limits=['Synthetic finite child only; no Adobe/Photo.',

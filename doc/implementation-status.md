@@ -1,5 +1,21 @@
 # Implementation status and remaining acceptance work
 
+The returned-work continuation adds a shared `BorrowedWork` settlement guard
+at CPU, filesystem, worker submit and response-mapping boundaries. The prior
+CPU guard could return failure after two failed waiter installations while a
+returned worker promise still slept, allowing enclosing reservations to retire.
+The new source preserves the first error and drains that promise before cleanup,
+using one observer retry then owner-loop polling. I/O release marks ownership
+at ledger publication, before dispatch setup can throw after debit. Focused
+actual-domain cases pass all 39 selected controls per compiler, with a private
+parent-participant early-retirement negative. Stock/OxCaml Make and clean Dune
+builds/selftests match 331 inputs. Complete worker/helper/I/O, ownership and
+receiving/publication regressions pass both compilers. The [contract](returned-work-settlement.md)
+and [integration receipt](../tests/qualification/worker-settlement-integration-20261013.json)
+bind this scope with separate independent acceptance.
+Persistent OOM, delayed legacy connection failures, pre-return admission and
+independently dispatched work thrown before promise return remain unqualified.
+
 The current strict-range checkpoint adds `Fs.copy_file_status`, migrating
 production `Copy.copyFileRange` to typed backend/phase/prefix/error/effect/scope
 results while keeping legacy APIs unchanged. Operational or indeterminate

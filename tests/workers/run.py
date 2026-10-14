@@ -16,6 +16,7 @@ root = Path(__file__).resolve().parents[2]
 sources = [
     "src/lwt/lwt.mli", "src/lwt/lwt.ml", "src/lwt/pqueue.mli", "src/lwt/pqueue.ml",
     "src/lwt/generic/lwt_unix_impl.ml", "src/lwt/lwt_unix.mli", "src/lwt/lwt_unix.ml",
+    "src/borrowedWork.mli", "src/borrowedWork.ml",
     "src/helperSupervisor_stubs.c", "src/helperSupervisor.mli", "src/helperSupervisor.ml",
     "src/semanticAdmission.mli", "src/semanticAdmission.ml",
     "src/ioAdmission.mli", "src/ioAdmission.ml",

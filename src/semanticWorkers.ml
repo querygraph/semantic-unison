@@ -289,7 +289,8 @@ let submit t cancellation fd requested_operation =
         t.admission <- t.admission @ [id];
         wait_slot () >>= fun admitted ->
         if not admitted then return None
-        else H.with_cpu_permits t.budget ~weight:1 admission_cancel (fun () ->
+        else BorrowedWork.try_bind (fun () ->
+          H.with_cpu_permits t.budget ~weight:1 admission_cancel (fun () ->
           if t.closing || Atomic.get cancelled then return Cancelled
           else begin
             let reply = Lwt.wait () in
@@ -299,12 +300,12 @@ let submit t cancellation fd requested_operation =
               transferred := true;
               Condition.signal t.shared.ready);
             reply
-          end) >>= function
+          end)) (function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
         | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Applied _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
-          else return (Some result) in
+          else return (Some result)) fail in
     let admitted_execution () = match t.io with
       | None -> execute ()
       | Some io ->
@@ -312,16 +313,18 @@ let submit t cancellation fd requested_operation =
             | Apply (_, _, output) -> [!owned;output]
             | Digest | Inspect _ | Observe _ | Identify _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
-          IoAdmission.with_devices io admission_cancel ~devices execute >>= function
+          BorrowedWork.try_bind
+            (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
+            (function
           | None -> return None
-          | Some result -> return result in
+          | Some result -> return result) fail in
     try
       owned := Unix.dup ~cloexec:true fd; owns_input := true;
       operation := duplicate_operation requested_operation; owns_operation := true;
       t.pending <- t.pending + 1; pending_registered := true;
       unregister_cancel := H.on_cancel cancellation stop;
       Lwt.ignore_result (monitor ());
-      try_bind admitted_execution
+      BorrowedWork.try_bind admitted_execution
         (fun result -> finish (); return result)
         (fun exn ->
           (try finish () with _ -> ());
@@ -330,8 +333,10 @@ let submit t cancellation fd requested_operation =
           | _ -> fail exn)
     with error ->
       (* Before queue transfer the controller owns both descriptors. Afterwards
-         only the worker closes them; this guard makes no universal guarantee
-         about allocation failure in an already-dispatched promise chain. *)
+         only the worker closes them. Returned sleeping work is guarded at each
+         mapping/ownership layer; persistent allocation failures and callbacks
+         which dispatch independently before throwing remain outside that
+         finite observer-installation guarantee. *)
       (try finish () with _ -> ());
       match error with
       | Unix.Unix_error (err, operation, _) ->
@@ -339,16 +344,16 @@ let submit t cancellation fd requested_operation =
       | _ -> raise error
 
 let digest t cancellation fd =
-  submit t cancellation fd Digest >>= function
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd Digest) (function
   | None -> return None
   | Some (Hashed result) -> return (Some result)
-  | Some _ -> fail (Failed "unexpected digest response")
+  | Some _ -> fail (Failed "unexpected digest response")) fail
 
 let inspect t cancellation ~extension fd =
-  submit t cancellation fd (Inspect extension) >>= function
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Inspect extension)) (function
   | None -> return None
   | Some (Inspected result) -> return (Some result)
-  | Some _ -> fail (Failed "unexpected inspection response")
+  | Some _ -> fail (Failed "unexpected inspection response")) fail
 
 let identify t cancellation ~recognizers fd =
   if List.length recognizers > FormatRecognition.max_recognizers then
@@ -356,27 +361,29 @@ let identify t cancellation ~recognizers fd =
   let ids = List.map (fun (handle,_) -> FormatRecognition.format handle) recognizers in
   if List.length (List.sort_uniq String.compare ids) <> List.length ids then
     invalid_arg "duplicate candidate recognition format";
-  submit t cancellation fd (Identify recognizers) >>= function
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Identify recognizers)) (function
   | None -> return None
   | Some (Identified result) -> return (Some result)
-  | Some _ -> fail (Failed "unexpected identification response")
+  | Some _ -> fail (Failed "unexpected identification response")) fail
 
 let observe t cancellation ~extension fd =
-  submit t cancellation fd (Observe extension) >>= function
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Observe extension)) (function
   | None -> return None
   | Some (Observed result) -> return (Some result)
-  | Some _ -> fail (Failed "unexpected observation response")
+  | Some _ -> fail (Failed "unexpected observation response")) fail
 
 let apply_report t cancellation ~extension plan ~basis ~output =
-  submit t cancellation basis (Apply (extension, plan, output)) >>= function
+  BorrowedWork.try_bind
+    (fun () -> submit t cancellation basis (Apply (extension, plan, output))) (function
   | None -> return None
   | Some (Applied report) -> return (Some report)
-  | Some _ -> fail (Failed "unexpected materialization response")
+  | Some _ -> fail (Failed "unexpected materialization response")) fail
 
 let apply t cancellation ~extension plan ~basis ~output =
-  apply_report t cancellation ~extension plan ~basis ~output >>= function
+  BorrowedWork.try_bind
+    (fun () -> apply_report t cancellation ~extension plan ~basis ~output) (function
   | None -> return None
-  | Some _ -> return (Some ())
+  | Some _ -> return (Some ())) fail
 
 let inspect_dng t cancellation fd =
   inspect t cancellation ~extension:(FormatExtension.trusted ~max_payload:FormatExtension.max_region (module DngSemantic)) fd

@@ -12,6 +12,16 @@ abort.cmx : \
     abort.cmi
 abort.cmi : \
     uutil.cmi
+borrowedWork.cmo : \
+    lwt/lwt_unix.cmi \
+    lwt/lwt.cmi \
+    borrowedWork.cmi
+borrowedWork.cmx : \
+    lwt/lwt_unix.cmx \
+    lwt/lwt.cmx \
+    borrowedWork.cmi
+borrowedWork.cmi : \
+    lwt/lwt.cmi
 bytearray.cmo : \
     ubase/umarshal.cmi \
     bytearray.cmi
@@ -759,10 +769,12 @@ globals.cmi : \
 helperSupervisor.cmo : \
     lwt/lwt_unix.cmi \
     lwt/lwt.cmi \
+    borrowedWork.cmi \
     helperSupervisor.cmi
 helperSupervisor.cmx : \
     lwt/lwt_unix.cmx \
     lwt/lwt.cmx \
+    borrowedWork.cmx \
     helperSupervisor.cmi
 helperSupervisor.cmi : \
     lwt/lwt.cmi
@@ -770,11 +782,13 @@ ioAdmission.cmo : \
     lwt/lwt_unix.cmi \
     lwt/lwt.cmi \
     helperSupervisor.cmi \
+    borrowedWork.cmi \
     ioAdmission.cmi
 ioAdmission.cmx : \
     lwt/lwt_unix.cmx \
     lwt/lwt.cmx \
     helperSupervisor.cmx \
+    borrowedWork.cmx \
     ioAdmission.cmi
 ioAdmission.cmi : \
     lwt/lwt.cmi \
@@ -1396,6 +1410,7 @@ semanticWorkers.cmo : \
     formatRecognition.cmi \
     formatExtension.cmi \
     dngSemantic.cmi \
+    borrowedWork.cmi \
     semanticWorkers.cmi
 semanticWorkers.cmx : \
     semanticFile.cmx \
@@ -1407,6 +1422,7 @@ semanticWorkers.cmx : \
     formatRecognition.cmx \
     formatExtension.cmx \
     dngSemantic.cmx \
+    borrowedWork.cmx \
     semanticWorkers.cmi
 semanticWorkers.cmi : \
     semanticDelta.cmi \

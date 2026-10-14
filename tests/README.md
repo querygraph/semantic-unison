@@ -1,5 +1,13 @@
 # Semantic extension qualification
 
+[Returned-work controls](worker_settlement/README.md) check actual domain/FD,
+CPU, filesystem, slot and resource-workspace ownership through finite observer
+setup failures. Both compilers pass 39 cases and reject private parent controls
+with an independent live-FD/admission oracle. See the [contract](../doc/returned-work-settlement.md)
+and [component receipt](worker_settlement/qualification-20261013.json). The
+[integration receipt](qualification/worker-settlement-integration-20261013.json)
+adds compiler builds, selected regressions and separate independent acceptance.
+
 [Strict native range controls](native_copy_range/README.md) qualify typed
 declines/failures, the actual macOS ABI and complete production Copy callers,
 including bounded suffix/cursor behavior and three private negative controls.

@@ -4,6 +4,26 @@
 
 ## Live implementation handoff
 
+* Returned-worker settlement continuation (2026-10-13): source now uses
+  `BorrowedWork.try_bind` at CPU, I/O, submit and response-mapping boundaries.
+  Two observer-installation failures previously could report failure while a
+  dispatched domain still held descriptors, retiring its surrounding workspace
+  and filesystem credits. The guard preserves the first error and drains the
+  actual returned promise before cleanup, with one observer retry followed by
+  owner-loop polling. I/O ownership retires at ledger publication. Each compiler
+  passes 39 actual-domain cases across six captured guard boundaries, underlying
+  success/failure/cancellation, queued CPU/I/O and finite polling-timer failures.
+  Private parent `9fbfc00` participant binaries reproduce early retirement under
+  an independent live-worker/FD/admission oracle. Make and clean Dune builds /
+  selftests match 331 inputs on stock/OxCaml. Both compilers also pass 27 worker,
+  37 helper, 20 I/O, 36 helper-ownership, 20 descriptor-ownership, 21 receiving
+  and 79 publication controls, with designated CPU/fairness negatives. The
+  [contract](doc/returned-work-settlement.md) and [integration receipt](tests/qualification/worker-settlement-integration-20261013.json)
+  retain the frozen source and execution evidence; independent acceptance is
+  recorded separately. Persistent OOM, delayed legacy promise connections, pre-return
+  admission/dispatch failures and independent work thrown before a promise is
+  returned remain separate. The whole-clone boolean API gap is still open.
+
 * Strict native-range continuation (2026-10-13): production range copying now
   uses additive `Fs.copy_file_status` / `CopyRange.run_native`, retaining legacy
   ABI/source and its compatibility loop. Explicit backend/phase/prefix/error/

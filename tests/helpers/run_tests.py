@@ -15,6 +15,7 @@ sources = [
     "src/lwt/pqueue.mli", "src/lwt/pqueue.ml",
     "src/lwt/generic/lwt_unix_impl.ml",
     "src/lwt/lwt_unix.mli", "src/lwt/lwt_unix.ml",
+    "src/borrowedWork.mli", "src/borrowedWork.ml",
     "src/helperSupervisor.mli", "src/helperSupervisor.ml",
     "src/dngValidation.mli", "src/dngValidation.ml",
     "src/helperSupervisor_stubs.c",
@@ -33,8 +34,10 @@ with tempfile.TemporaryDirectory(prefix="unison-helper-tests-") as temp:
     run(args.ocamlopt, "-I", "+unix", "unix.cmxa", "synthetic_helper.ml", "-o", "synthetic_helper")
     run(args.ocamlopt, "-I", "+unix", "unix.cmxa", "lwt.cmx", "pqueue.cmx",
         "lwt_unix_impl.cmx", "lwt_unix.cmx", "helperSupervisor_stubs.o",
+        "borrowedWork.cmx",
         "helperSupervisor.cmx", "exit_guard.ml", "-o", "exit_guard")
     run(args.ocamlopt, "-I", "+unix", "unix.cmxa", "lwt.cmx", "pqueue.cmx",
         "lwt_unix_impl.cmx", "lwt_unix.cmx", "helperSupervisor_stubs.o",
+        "borrowedWork.cmx",
         "helperSupervisor.cmx", "dngValidation.cmx", "helper_tests.ml", "-o", "helper_tests")
     run(str(build / "helper_tests"), str(build / "synthetic_helper"))
