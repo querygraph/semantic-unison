@@ -2369,3 +2369,17 @@ Historical Root review a17aaa3c accepts ONLY90b27d2 source/lifecycle, not newer
 telemetry/current tree; [narrow adoption](tests/sdk_host_matrix/historical-root-review-adoption.json)
 records that boundary. Current source/plan needs fresh review/admission before
 SDK execution. Photo Root/original preview ownership and v1.0.2 remain unchanged.
+
+
+### Fresh capped-host finite request prepared — 2026-10-14
+
+Current plan v3 passes native-mode pin/canonical-input validation without executing
+a child. Prepared [exact immutable request](tests/qualification/sdk-host-matrix-request-v1-20261014.json):
+12 sequential SDK calls/3 existing generated inputs/12 logical states,18 declared
+CPU credits/300s aggregate,1GiB covered backing allowance, fresh absent workspace.
+All source/mock/header/link/parent-terminal pins and exact command are included.
+This requests current-source review and future scheduling; it grants NO runtime
+release and does not reuse either consumed SDK admission or the four-credit build
+allocation. Root retains native scheduling/preview ownership and may prioritize
+its forensic work. Actual OS-thread/pixel/cancellation/scaling/RSS and full goal
+qualification remain separate. No SDK/Photo/Lightroom invocation in preparation.
