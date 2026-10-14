@@ -4,6 +4,16 @@
 
 ## Live implementation handoff
 
+* Missing-stage admission correction (2026-10-14): the opt-in manifest-memory
+  precheck converts an initial Unix `lstat` failure to `Util.Transient`, matching
+  later tree inspection. The actual compiled participant passes absent-stage
+  rejection before admission plus same-process success/rejection/cancellation/
+  retry on stock/Ox, for both one-lane and two-lane backends. No helper runs and
+  no credits remain held for the absent candidate.
+  [Focused evidence](tests/validation_tree_limits/missing-staging-qualification.json).
+  Fresh full Make CLI builds and self-tests pass on both compilers; the receipt
+  pins each resulting binary and self-test log. Broader acceptance remains open.
+
 * Parser test execution handoff (2026-10-14): a read-only synthetic AFL target
   and separate `--build-only` mode are available in
   [the test handoff](tests/semantic/fuzz/README.md). Stock instrumentation emits

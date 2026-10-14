@@ -1,0 +1,36 @@
+{
+  "scope": "Current CandidateValidation against pinned existing full-core prefix; missing staging and same-process pass/reject/cancel/retry. Initial test-directory reuse failure retained, corrected with fresh directories.",
+  "results": [
+    {
+      "compiler": "stock",
+      "workspace": "/private/tmp/unison-missing-staging-uw9euuct/stock",
+      "binary_sha256": "a75a1e40f9f95a698be1606c8e97fa4dcf38765435a972c392c62e3254f3fef1",
+      "legacy_and_nested_passed": true
+    },
+    {
+      "compiler": "ox",
+      "workspace": "/private/tmp/unison-missing-staging-uw9euuct/ox",
+      "binary_sha256": "e4a22c5d8d015c66337c53d3a9281502d652e2bc9a5a9bf8a5dc15efe5d44364",
+      "legacy_and_nested_passed": true
+    }
+  ],
+  "sources": {
+    "src/candidateValidation.ml": "17e03fd5b1d95ac2946b07649065ea7f26d4b5cda55f760ae92184214447eb5c",
+    "tests/validation_tree_limits/settlement.ml": "fe40db51fa58e22bf56455210c5d0302fe51ad9f71886fbdb809d088d2f599f6",
+    "tests/validation_tree_limits/run.py": "0419b3c31198301d8c4a05778f6c8a1262573375469525ae489d962489685e60"
+  },
+  "full_builds": {
+    "stock": {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uy3g53vr",
+      "binary_sha256": "44485c30febd6d0b6e179cc8844347c1367f047d36326437756a2199481d4f58",
+      "selftest_sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205",
+      "selftest_success": true
+    },
+    "ox": {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-nfolp37j",
+      "binary_sha256": "c9b70780f9798ea0dcb08c877687dbac54039012f59212d8c9e49919b1fca5ed",
+      "selftest_sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2",
+      "selftest_success": true
+    }
+  }
+}

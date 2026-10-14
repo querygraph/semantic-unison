@@ -44,7 +44,7 @@ let () =
  j['nestedSettlement']=dict(binarySha256=H(sb),scenarios=['pass','reject','cancel','fresh-pass'],cpuLanes=2,cpuBudget=2,workspaces=1,peakPermits=2);print('PASS nested tree settlement/retry',flush=True)
  previous=w/'previous-workspaces';previous.mkdir();(previous/'state').mkdir()
  old=subprocess.check_output(['git','show','5dac6ac:src/candidateValidation.ml'],cwd=r)
- (previous/'candidateValidation.ml').write_bytes(old);(previous/'candidateValidation.mli').write_bytes((src/'candidateValidation.mli').read_bytes());(previous/'settlement.ml').write_bytes((r/'tests/validation_tree_limits/settlement.ml').read_bytes())
+ (previous/'candidateValidation.ml').write_bytes(old);(previous/'candidateValidation.mli').write_bytes((src/'candidateValidation.mli').read_bytes());(previous/'settlement.ml').write_bytes(subprocess.check_output(['git','show','737db2d:tests/validation_tree_limits/settlement.ml'],cwd=r))
  pf=['-I',str(previous),*sf]
  for suffix in ['mli','ml']:command([a.compiler,*pf,'-c',previous/('candidateValidation.'+suffix)],previous,'previous-compile-'+suffix)
  pb=previous/'probe';command([a.compiler,*pf,'unix.cmxa','str.cmxa',*[src/m for m in before],previous/'candidateValidation.cmx',previous/'settlement.ml',*[src/n for n in objects('COBJS')],'-o',pb],previous,'previous-link')

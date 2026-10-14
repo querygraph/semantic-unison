@@ -40,6 +40,16 @@ let main () =
   List.iter (fun path -> write path data) files;
   let directory=Fspath.canonize (Some cwd) and candidate=Path.fromString "album" in
   let runtime=SemanticRuntime.get () in
+  let missing = Path.fromString "absent-staging" in
+  (try
+    Lwt_unix.run (CandidateValidation.before_commit ~directory ~candidate:missing
+      ~destination:(Path.fromString "destination"));
+    failwith "DESIGNATED absent staging unexpectedly validated"
+  with Util.Transient _ -> ());
+  let usage = SemanticRuntime.admission_usage () in
+  assert (usage.transactions=0 && usage.pending=0 && usage.payload_bytes=0 && usage.descriptors=0);
+  assert (HelperSupervisor.usage runtime.supervisor=(0,0) && !active=0);
+  print_endline "PASS missing staging: transient failure before admission";
   List.iter (fun selected ->
     Abort.reset ();mode:=selected;peak:=0;
     let diagnostic = ref "" in
