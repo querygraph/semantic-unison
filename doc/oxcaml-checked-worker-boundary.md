@@ -1,7 +1,11 @@
 # Compiler-checked worker boundary: installed-toolchain findings
 
-The production worker pool is built and tested on stock OCaml5.5.1 and pinned
-OxCaml5.2.0+ox, but remains a manually audited boundary. Its ordinary
+The historical probe below predates the completed
+[production checked boundary](checked-semantic-worker.md). The current OxCaml
+build uses Safe.spawn, checked extension handles and atomic counter state.
+
+At the time of that probe, the production worker pool was built and tested on stock OCaml5.5.1 and pinned
+OxCaml5.2.0+ox, but remained a manually audited boundary. Its ordinary
 `Domain.spawn` call produces `unsafe_multidomain` and `do_not_spawn_domains`
 alerts. Runtime tests of exact results/cancellation/settlement do not establish
 compiler-enforced portability.
@@ -57,4 +61,9 @@ archive tests, followed by measured throughput/RSS/resource evidence. Full
 worker portability and the wider M6 milestone remain open. No Photo/Adobe or
 native preview work is part of this investigation.
 
-The subsequent atomic mailbox component is now integrated into runtime jobs/completions, retaining the condition/counter mutex. Make and Dune now select the checked File/Hash/Mailbox exports for OxCaml. The current production closure still fails the direct Safe.spawn probe. Selected extension execution and domain-visible counters remain ahead; see [production component selection](production-oxcaml-mode-selection.md) and [runtime mailbox evidence](../tests/workers/mailbox-integration-qualification.json).
+The later atomic mailbox and File/Hash contracts are now joined by checked
+extension/recognition/observation/delta interfaces and atomic counters. The
+actual complete worker closure compiles with Safe.spawn. The former worker
+still rejects against those new interfaces because its running field is mutable;
+this isolates the counter migration rather than weakening capture checks.
+See [current qualification](checked-semantic-worker.md). Full M6 remains open.

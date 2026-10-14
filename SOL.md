@@ -4,6 +4,17 @@
 
 ## Live implementation handoff
 
+* Checked production worker integration (2026-10-14): OxCaml now compiles the
+  actual worker closure with Safe.spawn. Immutable extension/recognition handles,
+  XMP observations and worker-safe delta operations have portable/contended
+  contracts; registry and owner state remain nonportable. Stopping/running/peak
+  fields are atomic, retaining the condition/mutex protocol. Stock behavior and
+  the single shared CPU/helper pool remain intact. [Scope](doc/checked-semantic-worker.md),
+  [evidence](tests/checked_worker/qualification.json). Actual compiled-object
+  worker tests, checked negative captures and fresh Make/Dune CLI selftests
+  qualify this boundary. Full native/resource/performance M6, M4-V and M5 remain
+  open; Photo Root retains preview ownership and no Adobe/Photo invocation occurs.
+
 * Production component mode selection (2026-10-14): Make and Dune now compile
   SemanticFile/Hash/Mailbox against their checked interfaces on OxCaml and select
   the five audited native contracts. Actual compiled exports link and execute
@@ -12,7 +23,8 @@
   rejection controls and receiving regressions. Existing Make configuration
   upgrade preserves all320 compiled objects. [Scope](doc/production-oxcaml-mode-selection.md),
   [evidence](tests/mode_build/qualification.json). Full worker extension/counter
-  portability, resource bounds and M6 remain open; no Photo/Adobe invocation.
+  portability is superseded by the checked-worker integration above; resource
+  bounds and full M6 remain open; no Photo/Adobe invocation.
 
 * Checked file component (2026-10-14): portable File/Hash interfaces and two
   audited native file contracts compile and run in four actual checked OxCaml
@@ -20,8 +32,8 @@
   positional write/cursor/bounds/flags and full output/descriptor settlement pass;
   shared reader/writer/chunk captures reject. [Scope](doc/checked-semantic-file.md),
   [pins](tests/checked_file/qualification.json). Make+Dune CLI/selftests pass.
-  File algorithms are unchanged; production extension/counter
-  integration and full M6 remain open. Kernel borrowing/native ownership are
+  File algorithms are unchanged; the newer worker integration closes the
+  extension/counter compiler gate, while full M6 remains open. Kernel borrowing/native ownership are
   manual contracts, not mode proof; no Photo/Adobe operations.
 
 * Checked hash component (2026-10-14): fallback round constants use an
@@ -31,7 +43,8 @@
   [pins](tests/checked_hash/qualification.json). Current stock/Ox Make+Dune CLI,
   selftests and semantic kernel regressions pass. Cached-string9-sample CPU
   reference ratios new/old0.995 stock/1.006 Ox do not establish a speedup.
-  Production checked-interface selection is now implemented below; full worker portability remains open;
+  Production checked-interface selection and worker portability are now
+  integrated; full native/resource/performance M6 remains open;
   no Adobe/Photo invocation or full M6 completion is claimed.
 
 * Runtime mailbox integration (2026-10-14): worker jobs and completions now
@@ -42,8 +55,9 @@
   scenarios,21 FD controls/117 assertions plus three adapted historical guard
   negatives,21 actual receive cases and14 shared-helper controls. Fresh Make and
   Dune CLI/selftests and DNG/JPEG receiving regressions pass. [Evidence](tests/workers/mailbox-integration-qualification.json).
-  The full production extension/FFI/counter migration remains open;
-  current Safe.spawn substitution still rejects. No Photo/Adobe invocation.
+  At that mailbox-only stage Safe.spawn substitution still rejected. The newer
+  extension/counter slice now compiles the actual closure; native/resource/
+  performance M6 remains open. No Photo/Adobe invocation.
 
 * POSIX external command supervision (2026-10-14): external copy, merge and
   diff now use `SupervisedExternal` and the exact shared SDK/domain CPU owner.
@@ -1693,3 +1707,22 @@ SemanticMailbox now provides bounded atomic FIFO/close/drain operations with sto
 ## Photo Root scoped Quasar evidence received
 
 Five sealed pins verified and [receiver receipt](doc/photo-quasar-small-timestamp-adoption.json) recorded. One preserved small Quasar highest2272x1704/Ten lower1136x852 control passed four actual native loads/decodes and independent readback, closed; exact Pyramid canonical-link timestamp813657716 binds, not target date813578156. Normative v1.0.2 is unchanged. Production strict placement, restart, BIG, renderer, rewrite/trim/missing/recovery and full run remain unqualified. Latest owner report places ordinary quit in a locked AgDialogs modal with coordinator59489 holding the lease and Classic40020 still alive; this session performed no fresh process audit or native work and infers no release. Photo Root/original preview owner retain execution.
+
+## Checked production worker integration
+
+The actual OxCaml worker closure now compiles with Safe.spawn, checked
+portable/contended extension and recognition handles, XMP/delta interfaces and
+atomic stopping/running/peak state. Owner registry/Lwt/admission/archive state
+stays outside it. The mutex/condition protocol and single shared CPU/helper pool
+are retained. Stock/Ox each pass28 full actual-object runtime cases (largest
+pools18 workers),48 parallel metadata observations,3840 scheduling jobs/8046
+checks,384 apply jobs/1255 checks,39 instrumented waiter-settlement cases,21
+FD acquisition cases/117 assertions plus three historical guard negatives,14
+helper cases/84 checks and21 receiving paths. Six compiler negatives reject bad
+captures and the former mutable-counter worker. Both Make/Dune CLI builds and
+selftests pass; checked Dune DNG and mixed JPEG receiving pass. All349 final
+Make inputs match the frozen sources. [Current scope](doc/checked-semantic-worker.md),
+[pins](tests/checked_worker/qualification.json). No native-contract compiler
+proof, complete resource ceilings, performance speedup, GUI/platform or full
+M6/M4-V/M5 completion is claimed. No Adobe/Photo invocation; preview ownership
+remains with Photo Root.

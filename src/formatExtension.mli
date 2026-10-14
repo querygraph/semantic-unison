@@ -4,8 +4,8 @@ type change = Exact_bytes | Editable_metadata | Other_bytes
 type category = Descriptive | Rendering | Identity | Workflow | Opaque
 type property = { name : string; category : category; digest : string }
 type observation = { schema : string; properties : property list }
-type observer = { schema : string; observe : string list -> (property list, string) result }
-module type S = sig
+type observer = { schema : string; observe : string list -> (property list, string) result (* ox-portable-field *) }
+module type S = sig (* ox-portable-signature *)
   val profile : string
   val inspect : SemanticFile.t -> (manifest, string) result
 end
@@ -15,8 +15,9 @@ val trusted : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
 (** Construct an immutable handle for locally trusted compiled code. Call on
     the owner thread. The extension must use only worker-local state, bounded
     reads, and the supplied SemanticFile; no registries, legacy globals,
-    subprocesses, or callbacks into the owner. This is an audited contract,
-    not a plugin sandbox or compiler-enforced portable-code proof. *)
+    subprocesses, or callbacks into the owner. Stock builds rely on this audit; OxCaml requires portable callback
+    captures through the checked signature. Bounds, native ownership and
+    algorithm behavior remain audited contracts, not a plugin sandbox. *)
 val profile : handle -> string
 val capability : handle -> string
 (** Feature-negotiation identifier; defaults to semantic-profile:<profile>.

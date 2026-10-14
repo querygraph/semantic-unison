@@ -9,7 +9,7 @@ the checked interface for OxCaml; see [production selection](production-oxcaml-m
 SemanticWorkers now uses the component for both jobs and completions, with its
 existing mutex/condition counters and manually audited execution boundary.
 Stock builds retain the stock-compatible interface. The complete checked
-worker execution/interface migration remains open.
+worker execution/interface migration is now qualified by the later integration.
 
 An immutable snapshot contains front/back lists, count and closed state. Push,
 pop and close linearize at a successful CAS; every state update constructs a
@@ -54,4 +54,9 @@ preview work was performed.
 
 Both runtime mailboxes have capacity max_pending (1..65536; configured runtime4096). Outstanding completion receipts remain part of pending admission, so a completed worker cannot release capacity/CPU ownership before owner dispatch. Job ownership transfers only after Added. Failed handoff leaves controller-owned duplicates/reply registration for existing cleanup guards. Full/Closed on an internal completion push violates the pending-count invariant and is terminal, never a dropped-success receipt. Producers and condition waiters retain the same mutex protocol, preventing a signal between empty observation and sleeping. Constructor failure closes the jobs mailbox before joining; normal shutdown waits pending0, closes jobs, joins domains, closes completions and settles notification pipes.
 
-[Runtime qualification](../tests/workers/mailbox-integration-qualification.json) includes seeded hash/inspection and apply races,39 post-dispatch settlement cases,21 FD acquisition/handoff cases with117 assertions,21 actual receiving paths and14 supervised helper controls per compiler. A paused-owner pressure test observes an actual completed result still queued with its CPU/transaction ownership, rejects another submission, then proves exact delivery, mailbox closure and descriptor settlement. Actual DNG/old-peer and mixed JPEG receiving controls pass. Current Safe.spawn substitution still rejects; queue integration alone has not made selected extension/FFI execution portable. Persistent allocation failures/foreign faults, fairness, full RSS/FD ceilings and performance qualification remain outside this finite evidence.
+[Runtime qualification](../tests/workers/mailbox-integration-qualification.json) includes seeded hash/inspection and apply races,39 post-dispatch settlement cases,21 FD acquisition/handoff cases with117 assertions,21 actual receiving paths and14 supervised helper controls per compiler. A paused-owner pressure test observes an actual completed result still queued with its CPU/transaction ownership, rejects another submission, then proves exact delivery, mailbox closure and descriptor settlement. Actual DNG/old-peer and mixed JPEG receiving controls pass. At that mailbox-only stage Safe.spawn substitution still rejected; the subsequent checked extension/counter integration resolves that compiler gate. Persistent allocation failures/foreign faults, fairness, full RSS/FD ceilings and performance qualification remain outside this finite evidence.
+
+The subsequent [production worker integration](checked-semantic-worker.md)
+now compiles the complete worker closure with Safe.spawn on OxCaml, including
+checked extension execution and atomic counters. Earlier component receipts
+remain historical; full native/resource/performance M6 requirements stay open.

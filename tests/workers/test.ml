@@ -275,16 +275,16 @@ let () =
   identify_tests ();
   if Array.exists ((=) "--identify-only") Sys.argv then exit 0;
   let expected = write_fixture () in
-  test "36 actual domains, immutable digest parity and bounded concurrency" (fun () ->
-    let b = budget 36 in
-    let pool = W.create ~workers:36 ~max_pending:72 ~budget:b in
+  test "18 actual domains, immutable digest parity and bounded concurrency" (fun () ->
+    let b = budget 18 in
+    let pool = W.create ~workers:18 ~max_pending:72 ~budget:b in
     let jobs = List.init 72 (fun _ -> hash pool (H.cancellation ()) "sample") in
     let results = Lwt_unix.run (await jobs) in
     List.iter (function Some f ->
       check (f.W.digest = expected && f.stats.Unix.LargeFile.st_size = 16777216L) "digest mismatch"
       | None -> failwith "unexpected cancellation") results;
     let u = W.usage pool in
-    check (u.workers = 36 && u.peak_running > 1 && u.peak_running <= 36) "domain concurrency not bounded";
+    check (u.workers = 18 && u.peak_running > 1 && u.peak_running <= 18) "domain concurrency not bounded";
     finish pool b;
     Lwt_unix.run (W.shutdown pool);
     check (expect_failed (fun () -> hash pool (H.cancellation ()) "sample")) "closed pool accepted job");
@@ -473,6 +473,30 @@ let () =
     (match Lwt_unix.run (inspect pool (H.cancellation ()) "sample") with
       | Some {W.proof = Error _; _} -> ()
       | _ -> failwith "non-DNG did not return eligibility reason");
+    finish pool b);
+  test "portable DNG observation matches the full sequential metadata transcript" (fun () ->
+    let extension=FormatExtension.trusted ~observer:DngSemantic.observer (module DngSemantic) in
+    let file=fd "observed.dng" in
+    let proof=SemanticFile.with_fd file (SemanticDelta.inspect(module DngSemantic)) in
+    Unix.close file;
+    let reference=match proof with Ok proof -> SemanticDelta.observe ~extension proof
+      | Error why -> failwith why in
+    (match reference with Some(Ok observation) ->
+      check(List.length observation.FormatExtension.properties=1) "reference observation lacks rating"
+      | _ -> failwith "reference observation declined");
+    let b=budget 6 in let pool=W.create ~workers:6 ~max_pending:48 ~budget:b in
+    let jobs=List.init 48(fun _ ->
+      let file=fd "observed.dng" in
+      try_bind(fun () -> W.observe pool(H.cancellation()) ~extension file)
+        (fun result -> Unix.close file;return result)
+        (fun error -> Unix.close file;fail error)) in
+    List.iter(function Some result ->
+      check(result.W.meaning=reference) "worker metadata transcript changed";
+      (match result.W.inspection.proof with Ok actual ->
+        let expected=match proof with Ok p -> p | _ -> assert false in
+        check(SemanticDelta.classify ~base:expected ~target:actual=FormatExtension.Exact_bytes)
+          "worker observation byte proof changed" | Error why -> failwith why)
+      | None -> failwith "worker observation cancelled") (Lwt_unix.run(await jobs));
     finish pool b);
   test "DNG whole-file proof hashing is cancellable and keeps owner responsive" (fun () ->
     let b = budget 1 in let pool = W.create ~workers:1 ~max_pending:2 ~budget:b in

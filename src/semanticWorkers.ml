@@ -25,7 +25,7 @@ type shared = {
   mutex : Mutex.t; ready : Condition.t;
   jobs : job Mailbox.t; completions : (int * response) Mailbox.t;
   notify : Unix.file_descr;
-  mutable stopping : bool; mutable running : int; mutable peak : int;
+  stopping : bool Atomic.t; running : int Atomic.t; peak : int Atomic.t;
 }
 type t = {
   shared : shared; domains : unit Domain.t list; budget : H.t;
@@ -66,10 +66,9 @@ let unchanged a b =
   a.Unix.LargeFile.st_ctime = b.Unix.LargeFile.st_ctime
 
 (* The worker side below sees only [shared] and [job], never the owner record.
-   Domain.spawn is the stock-compatible, manually audited boundary: shared
-   queues use immutable atomic mailbox state; condition/counters use the mutex,
-   cancellation uses Atomic, hashing/channel
-   state is private. This does not claim compiler-proved portability. *)
+   Queues use immutable atomic mailbox state; condition/counter transitions
+   use the mutex. Cancellation uses Atomic; hashing/channel state is private. OxCaml selects Safe.spawn and checked extension contracts;
+   stock retains Domain.spawn. Native contracts/FD ownership stay manual. *)
 let execute job =
   let check_cancel () = if Atomic.get job.cancelled then raise Cancelled_job in
   try
@@ -124,10 +123,11 @@ let rec worker shared () =
   let next = locked shared (fun () ->
     let rec take () = match Mailbox.pop shared.jobs with
       | Mailbox.Item job ->
-          shared.running <- shared.running + 1;
-          shared.peak <- max shared.peak shared.running;
+          let running = Atomic.get shared.running + 1 in
+          Atomic.set shared.running running;
+          Atomic.set shared.peak (max (Atomic.get shared.peak) running);
           Some job
-      | Mailbox.Empty when not shared.stopping ->
+      | Mailbox.Empty when not (Atomic.get shared.stopping) ->
           (* Producers hold this same mutex while publishing/signalling, so
              waiting after an empty snapshot cannot lose their wakeup. *)
           Condition.wait shared.ready shared.mutex; take ()
@@ -140,7 +140,7 @@ let rec worker shared () =
     close_noerr job.fd;
     close_operation job.operation;
     locked shared (fun () ->
-      shared.running <- shared.running - 1;
+      Atomic.set shared.running (Atomic.get shared.running - 1);
       match Mailbox.push shared.completions (job.id, result) with
       | Mailbox.Added -> ()
       | Mailbox.Full | Mailbox.Closed -> failwith "worker completion mailbox invariant");
@@ -187,7 +187,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
   and reader_owner = ref None and shared_owner = ref None
   and domains = ref [] in
   let stop shared =
-    locked shared (fun () -> shared.stopping <- true; Mailbox.close shared.jobs; Condition.broadcast shared.ready) in
+    locked shared (fun () -> Atomic.set shared.stopping true; Mailbox.close shared.jobs; Condition.broadcast shared.ready) in
   let cleanup () =
     (match !shared_owner with Some shared -> (try stop shared with _ -> ()) | None -> ());
     List.iter (fun domain -> try Domain.join domain with _ -> ()) !domains;
@@ -211,10 +211,10 @@ let create_internal ~io ~workers ~max_pending ~budget =
     let shared = { mutex = Mutex.create (); ready = Condition.create ();
       jobs = Mailbox.create ~capacity:max_pending;
       completions = Mailbox.create ~capacity:max_pending; notify = write_fd;
-      stopping = false; running = 0; peak = 0 } in
+      stopping = Atomic.make false; running = Atomic.make 0; peak = Atomic.make 0 } in
     shared_owner := Some shared;
     for _ = 1 to workers do
-      let domain = Domain.spawn (worker shared) in
+      let domain = Domain.spawn (* ox-safe-worker-spawn *) (fun () -> worker shared ()) in
       (* Linking the returned domain can allocate too. Stop and join this
          still-local handle before the outer guard joins earlier domains. *)
       (try domains := domain :: !domains
@@ -236,7 +236,7 @@ let create ~workers ~max_pending ~budget =
 let create_with_io ~io ~workers ~max_pending ~budget =
   create_internal ~io:(Some io) ~workers ~max_pending ~budget
 let usage t =
-  let running, peak_running = locked t.shared (fun () -> t.shared.running, t.shared.peak) in
+  let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
   {workers = List.length t.domains; pending = t.pending; running; peak_running}
 
 let submit t cancellation fd requested_operation =
@@ -409,7 +409,7 @@ let shutdown t = match t.shutdown_result with
     let rec finish () =
       if t.pending <> 0 then Lwt_unix.sleep 0.01 >>= finish
       else begin
-        locked t.shared (fun () -> t.shared.stopping <- true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
+        locked t.shared (fun () -> Atomic.set t.shared.stopping true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
         List.iter Domain.join t.domains;
         t.joined <- true;
         Mailbox.close t.shared.completions;

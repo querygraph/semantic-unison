@@ -18,3 +18,13 @@ The first new fixture compilation used an operator absent from Unison's bundled 
 Use `--apply-stress-only --keep-work --receipt /tmp/apply-stress.json` with either compiler. Six seeds each schedule four batches of16 independent BigTIFF/CR DNG stages under four domains and shared CPU budgets1..4. Half the jobs receive randomly selected cancellation timers at0,0.1,1 or5ms after submission. Completed artifacts require exact full-byte equality to the target and a16-byte/one-call metadata write report. Cancelled stages are discarded without publication. Each completion verifies caller descriptors remain owned; each batch verifies unchanged basis/target bytes, zero pending/running/reserved resources and bounded peak execution; each pool shutdown checks descriptor parity.
 
 Both retained compiler runs observed384 jobs:192 exact completions and192 cancellations,1255 checks. This races cancellation with submission and worker execution but does not attest cancellation during a particular native write or guarantee all four timing classes reached active execution. No application result is published. The first fixture expectation accidentally used15 rather than the actual16-byte XMP packet length; both failed runs are retained, and the expectation now derives the packet length. No production correction was needed. Earlier seeded hash/inspection receipts retain their earlier immutable source snapshots.
+
+For the checked production boundary, add `--build SNAPSHOT/src`. The runner
+verifies matching production source inputs and links the snapshot's actual
+compiler-matched CMIs, CMXs and native objects without interface substitution.
+The full suite uses at most18 worker credits and includes48 observations whose
+complete metadata transcripts and byte proofs must match sequential results.
+The [current qualification](../checked_worker/qualification.json) combines these
+actual-object tests with compiler negative captures. Plain isolated runs above
+remain runtime scheduling controls; their ordinary interfaces do not establish
+compiler portability.

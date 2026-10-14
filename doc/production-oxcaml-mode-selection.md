@@ -3,12 +3,14 @@
 Make and Dune now compile SemanticHash, SemanticFile and SemanticMailbox against
 their qualified checked interfaces when the configured compiler version contains
 `+ox`. Stock OCaml receives the original source bytes and ordinary interfaces.
-This advances component integration; the complete SemanticWorkers closure still
-uses manually audited Domain.spawn. Extension execution and domain-visible
-counters must be migrated before claiming a fully checked worker boundary.
+The subsequent extension/counter integration now compiles the complete
+SemanticWorkers closure through Safe.spawn; see
+[the current boundary](checked-semantic-worker.md). Native contracts and wider
+resource/performance qualification remain separate.
 
-The build-only `semantic_mode_filter` accepts exactly those six implementation
-and interface filenames. Checked interfaces must equal the ordinary interface
+The build-only `semantic_mode_filter` accepts only the qualified component filenames, now including
+extension/recognition, built-in inspectors, observations, delta execution, the
+worker and its owner registration wrapper. Checked interfaces must equal the ordinary interface
 plus their exact qualified annotations, including the mailbox payload mode.
 Hash and File implementations require exactly three and two native contract
 markers respectively. Unexpected modules, changed templates, marker counts or
@@ -41,3 +43,8 @@ per compiler. The pinned receipt distinguishes these exact build identities.
 This is no proof of renderer fidelity, Adobe validation, resource ceilings,
 throughput improvement or complete M6. Qualification used private synthetic
 files and invoked no Adobe/Lightroom or production photo/cache operation.
+
+The subsequent [production worker integration](checked-semantic-worker.md)
+now compiles the complete worker closure with Safe.spawn on OxCaml, including
+checked extension execution and atomic counters. Earlier component receipts
+remain historical; full native/resource/performance M6 requirements stay open.

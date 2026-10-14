@@ -44,7 +44,8 @@ def instrument_workers(source):
  source=once(source,"Unix.set_nonblock read_fd;",'Fault.set_nonblock "pool-read-flags" read_fd;')
  source=once(source,"Unix.set_nonblock write_fd;",'Fault.set_nonblock "pool-write-flags" write_fd;')
  source=once(source,"let shared = { mutex = Mutex.create ();",'Fault.hit "pool-shared"; let shared = { mutex = Mutex.create ();')
- source=once(source,"Domain.spawn (worker shared)",'Domain.spawn (fun () -> Fault.adjust 1; Fun.protect ~finally:(fun () -> Fault.adjust (-1)) (fun () -> worker shared ()))')
+ spawn="Domain.spawn (* ox-safe-worker-spawn *) (fun () -> worker shared ())" if "(* ox-safe-worker-spawn *)" in source else "Domain.spawn (worker shared)"
+ source=once(source,spawn,'Domain.spawn (fun () -> Fault.adjust 1; Fun.protect ~finally:(fun () -> Fault.adjust (-1)) (fun () -> worker shared ()))')
  if "domains := domain :: !domains" in source:
   source=once(source,"domains := domain :: !domains",'(Fault.hit "pool-domain-link"; domains := domain :: !domains)')
  source=once(source,"let reader = Lwt_unix.of_unix_file_descr read_fd in",'Fault.hit "pool-reader"; let reader = Lwt_unix.of_unix_file_descr read_fd in')
@@ -69,7 +70,7 @@ def main():
  original={name:(ROOT/name).read_bytes() for name in SOURCES}
  old={name:subprocess.check_output(["git","show",OLD_GUARD_COMMIT+":"+name],cwd=ROOT).decode() for name in ("src/semanticFile.ml","src/semanticWorkers.ml")}
  work=Path(tempfile.mkdtemp(prefix="unison-early-fd-",dir="/private/tmp"));print("Retained",work,flush=True)
- receipt={"schema":"unison-early-fd-qualification/1","compiler":compiler,"compiler_version":subprocess.check_output([compiler,"-version"],text=True).strip(),"compiler_sha256":sha(Path(compiler)),"sources":{n:hashlib.sha256(d).hexdigest() for n,d in original.items()},"old_guard_commit":OLD_GUARD_COMMIT,"old_sources":{n:hashlib.sha256(d.encode()).hexdigest() for n,d in old.items()},"artifacts":str(work),"negative_representation_adapter":"Historical guard sections only: Queue allocation/enqueue adapted to current mailbox shared-record ABI; no acquisition/listener ownership guards changed", "runs":[]}
+ receipt={"schema":"unison-early-fd-qualification/1","compiler":compiler,"compiler_version":subprocess.check_output([compiler,"-version"],text=True).strip(),"compiler_sha256":sha(Path(compiler)),"sources":{n:hashlib.sha256(d).hexdigest() for n,d in original.items()},"old_guard_commit":OLD_GUARD_COMMIT,"old_sources":{n:hashlib.sha256(d.encode()).hexdigest() for n,d in old.items()},"artifacts":str(work),"negative_representation_adapter":"Historical guard sections only: Queue allocation/enqueue and stop/counter representation adapted to current mailbox/atomic shared-record ABI; no acquisition/listener ownership guards changed", "runs":[]}
  for mode in (["fixed"] if a.fixed_only else ["fixed","old-file-channel","old-pool-pipe","old-submit-listener"]):
   build=work/mode;build.mkdir()
   for name,data in original.items():
@@ -82,6 +83,7 @@ def main():
    x,y,_=section(w,start,end);_,_,previous=section(old["src/semanticWorkers.ml"],start,end);# Historical acquisition guards remain unchanged; adapt only the
    # queue representation needed by today's shared record/worker ABI.
    if mode=="old-pool-pipe":
+    previous=previous.replace("shared.stopping <- true", "Atomic.set shared.stopping true").replace("stopping = false; running = 0; peak = 0", "stopping = Atomic.make false; running = Atomic.make 0; peak = Atomic.make 0")
     previous=previous.replace("jobs = Queue.create (); completions = Queue.create ();", "jobs = SemanticMailbox.create ~capacity:max_pending; completions = SemanticMailbox.create ~capacity:max_pending;")
    else:
     previous=previous.replace("Queue.add {id; fd = owned; cancelled; operation} t.shared.jobs;", "(match SemanticMailbox.push t.shared.jobs {id; fd = owned; cancelled; operation} with Added -> () | _ -> failwith \"historical queue adapter invariant\");")

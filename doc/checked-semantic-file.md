@@ -7,7 +7,8 @@ The matching interface template exports portable functions while retaining
 nonportable opaque reader/writer contexts. Production Make/Dune now select this
 interface and the two exact native contracts for OxCaml; stock source remains
 unchanged. See [production selection](production-oxcaml-mode-selection.md).
-The complete worker execution migration remains open.
+The subsequent checked worker integration completes the OCaml execution
+boundary; native/resource/performance requirements remain open.
 
 Actual OxCaml Safe.spawn tests create private readers/writers inside four domains.
 They verify exact bounded reads and iteration, independently generated hashlib
@@ -55,3 +56,8 @@ validation policy changed. Current Make/Dune CLI+selftests pass both compilers.
 Root owns this component audit; it does not qualify the complete worker boundary,
 other-platform runtime, full RSS/FD/performance guarantees or Lightroom/Adobe
 operations.
+
+The subsequent [production worker integration](checked-semantic-worker.md)
+now compiles the complete worker closure with Safe.spawn on OxCaml, including
+checked extension execution and atomic counters. Earlier component receipts
+remain historical; full native/resource/performance M6 requirements stay open.

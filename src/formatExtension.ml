@@ -4,14 +4,14 @@ type change = Exact_bytes | Editable_metadata | Other_bytes
 type category = Descriptive | Rendering | Identity | Workflow | Opaque
 type property = { name : string; category : category; digest : string }
 type observation = { schema : string; properties : property list }
-type observer = { schema : string; observe : string list -> (property list, string) result }
-module type S = sig
+type observer = { schema : string; observe : string list -> (property list, string) result (* ox-portable-field *) }
+module type S = sig (* ox-portable-signature *)
   val profile : string
   val inspect : SemanticFile.t -> (manifest, string) result
 end
 let max_region = 1048576
 let max_payload = 16 * 1048576
-type handle = { name : string; capability : string; extension : (module S);
+type handle = { name : string; capability : string; extension : (module S) (* ox-portable-field *);
                 payload_limit : int; suffixes : string list; observer : observer option }
 let valid_id limit value = value <> "" && String.length value <= limit && not (String.contains value '\000')
 let trusted ?capability ?(max_payload=max_payload) ?(suffixes=[]) ?observer

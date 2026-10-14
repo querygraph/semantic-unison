@@ -1,9 +1,9 @@
 type verdict = Not_matched | Recognized | Indeterminate of string
-module type S = sig
+module type S = sig (* ox-portable-signature *)
   val format : string
   val identify : SemanticFile.t -> verdict
 end
-type handle = { format : string; suffixes : string list; recognizer : (module S) }
+type handle = { format : string; suffixes : string list; recognizer : (module S) (* ox-portable-field *) }
 let max_recognizers = 16
 let trusted ?(suffixes=[]) ((module R : S) as recognizer) =
   if R.format = "" || String.length R.format > 128 || String.contains R.format '\000'

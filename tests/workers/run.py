@@ -13,6 +13,7 @@ import tempfile
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
+parser.add_argument("--build",type=Path,help="Use actual compiled production objects from this snapshot src directory")
 parser.add_argument("--identify-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
 parser.add_argument("--apply-stress-only",action="store_true")
@@ -45,9 +46,23 @@ with workspace as tmp:
     build = Path(tmp)
     for source in sources:
         shutil.copyfile(root / source, build / Path(source).name)
-    for source in sources[:-1]:
-        subprocess.run([args.ocamlopt, "-I", "+unix", "-c", Path(source).name],
-                       cwd=build, check=True)
+    linked_pins = {}
+    if args.build:
+        for source in sources[:-1]:
+            # --build names the actual src directory; retain compiler-matched
+            # object/interface artifacts without rewriting checked signatures.
+            actual=args.build / source.removeprefix("src/")
+            if source.endswith((".ml", ".mli", ".c")):
+                assert actual.read_bytes()==(root/source).read_bytes(),source
+            extensions = (".cmi", ".cmx", ".o") if source.endswith(".ml") else ((".cmi",) if source.endswith(".mli") else (".o",))
+            for extension in extensions:
+                artifact=actual.with_suffix(extension)
+                shutil.copyfile(artifact,build/artifact.name)
+                linked_pins[str(artifact)]=hashlib.sha256(artifact.read_bytes()).hexdigest()
+    else:
+        for source in sources[:-1]:
+            subprocess.run([args.ocamlopt, "-I", "+unix", "-c", Path(source).name],
+                           cwd=build, check=True)
     objects = [Path(s).stem + (".o" if s.endswith(".c") else ".cmx")
                for s in sources[:-1] if s.endswith((".ml", ".c"))]
     subprocess.run([args.ocamlopt, "-I", "+unix", "unix.cmxa", *objects,
@@ -62,6 +77,13 @@ with workspace as tmp:
     dng[4096:5120] = b"R" * 1024
     (build / "fixture.dng").write_bytes(dng)
     (build / "stage.dng").write_bytes(dng)
+    observed=bytearray(dng)
+    observation_packet=(b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" '
+            b'xmlns:xmp="http://ns.adobe.com/xap/1.0/"><rdf:Description '
+            b'xmp:Rating="3"/></rdf:RDF>')
+    struct.pack_into("<I",observed,38,len(observation_packet))
+    observed[1024:1024+len(observation_packet)]=observation_packet
+    (build/"observed.dng").write_bytes(observed)
     target = bytearray(dng)
     target[1024:1024 + len(packet)] = b"<x>two</x>      "
     (build / "target.dng").write_bytes(target)
@@ -105,7 +127,7 @@ with workspace as tmp:
     print(result.stderr,end="")
     receipt=dict(schema="unison-worker-scheduling/1",utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                  compiler=args.ocamlopt,compiler_version=subprocess.check_output([args.ocamlopt,"-version"],text=True).strip(),
-                 workspace=str(build),retained=args.keep_work,stress_only=args.stress_only,apply_stress_only=args.apply_stress_only,exit=result.returncode,
+                 workspace=str(build),retained=args.keep_work,actual_production_build=str(args.build) if args.build else None,linked_object_pins=linked_pins,stress_only=args.stress_only,apply_stress_only=args.apply_stress_only,exit=result.returncode,
                  source_pins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+["tests/workers/run.py"]},
                  binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),

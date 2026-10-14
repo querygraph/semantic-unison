@@ -12,8 +12,8 @@ mark the only native declaration contracts. The qualification runner selects
 that template and turns those exact markers into OxCaml portability annotations.
 Stock source treats them as comments. Normal Make/Dune builds now select the
 checked interface and exact native markers for OxCaml; see
-[production selection](production-oxcaml-mode-selection.md). The complete
-worker execution migration remains open. The template is not a suppressed error
+[production selection](production-oxcaml-mode-selection.md). The subsequent checked worker integration completes the OCaml
+execution boundary; native/resource/performance requirements remain open. The template is not a suppressed error
 or unsafe cast; all exported OCaml functions type-check against it. Portability
 of foreign calls remains an explicitly reviewed C contract, not compiler proof
 about their implementation.
@@ -55,3 +55,8 @@ The production source, current Make/Dune CLI+selftests and semantic kernel
 regressions are verified separately. Root owns this component review; no new
 independent-agent implementation approval, full checked worker boundary,
 other-platform runtime or Adobe/Photo/Lightroom qualification is inferred.
+
+The subsequent [production worker integration](checked-semantic-worker.md)
+now compiles the complete worker closure with Safe.spawn on OxCaml, including
+checked extension execution and atomic counters. Earlier component receipts
+remain historical; full native/resource/performance M6 requirements stay open.
