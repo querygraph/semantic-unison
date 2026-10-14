@@ -2461,3 +2461,22 @@ regression gap, not actual merged-output SDK/decode qualification.
 [Sealed reports/terminal/source evidence](tests/sdk_container_receive/quota-merge-qualification.json).
 No compilers, SDK, Photo/Lightroom/Main/cache or source photos were invoked or
 modified. Full M4-V/M5/M6 and representative performance remain open.
+
+
+### Immutable merged-output SDK preparation — 2026-10-14
+
+Implemented [preparer](tests/sdk_container_receive/prepare_merged.py) binding the
+current quota merge evidence, both compiler binaries/all production source pins,
+15case rosters and all12 replica outputs. Original generated containers retain
+full hashes; every changed result must match expected target size/hash and all
+bytes outside its fixed XMP packet. Three identical cross-compiler candidates
+were frozen read-only under a fresh private directory, with qualified v1 tool
+and exact proposed single-thread argv. No SDK process invoked or old admission
+reused. Fifteen deterministic controls reject protected changes/invalid extents/
+stale evidence/incomplete compiler proof; actual repeated preparation rejects
+its existing directory and leaves all artifacts unchanged.
+[Sealed evidence](tests/sdk_container_receive/merged-preparation-qualification.json).
+A separately reviewed contained executor and fresh Root slot remain necessary;
+this is preparation, not actual merged-output Adobe qualification or a new
+runtime request. Source photographs, Photo/Lightroom and production validation
+configuration are unchanged. Full goal stays open.

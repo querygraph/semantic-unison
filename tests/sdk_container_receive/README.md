@@ -53,3 +53,28 @@ These changed bases and outputs are **not** SDK-validated; original-container
 SDK positives do not extend to them. Validators remain mocks, and originals
 retain complete file identity and SHA-256. This checks current merge/cache
 compatibility, not general packet growth or Adobe rendering/current-edit reuse.
+
+
+To freeze existing qualified merge results for a future native check:
+
+```sh
+python3 tests/sdk_container_receive/prepare_merged.py \
+  --qualification tests/sdk_container_receive/quota-merge-qualification.json \
+  --reference-manifest /absolute/qualified-v1/build-manifest.json \
+  --output-dir /private/tmp/new-merged-output-preparation
+python3 tests/sdk_container_receive/prepare_merged_test.py
+```
+
+Preparation verifies current production source/binary pins and all15 cases per
+compiler, then checks all12 retained replica outputs against exact target hashes
+and original bytes outside XMP. It freezes three identical stock/Ox results in a
+fresh private directory, with read-only candidates and a pinned PREPARED.json.
+Existing output directories are refused, including partial preparations. Changed
+source/evidence/output bytes require fresh qualification, not relabeling.
+
+[Preparation evidence](merged-preparation-qualification.json) records the actual
+snapshot, deterministic controls and unchanged-directory refusal. Proposed three
+single-thread SDK commands are data only. No SDK executor or native admission is
+granted by preparation; future execution needs a separately reviewed contained
+runner and fresh Root slot. The originals' SDK positives do not validate these
+merged snapshots, which remain unqualified until that check actually runs.
