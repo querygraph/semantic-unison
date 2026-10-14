@@ -2247,3 +2247,26 @@ and prove aggregate and parent closure. The existing result protocol cannot prov
 pixel equality, actual thread use or allocator peaks, so even validation-result
 equivalence will not close those separate gates or establish scaling. Both earlier
 SDK admissions remain consumed. Full M4-V/M5/M6 remain open.
+
+
+### Finite capped-host executor — source/mock gate, 2026-10-14
+
+Added `tests/sdk_host_matrix/run.py`: exact canonical twelve-call reconstruction,
+source/tool/input pins, fresh separate host-matrix admission and deadline, exclusive
+consumed workspace, sequential calls inside the existing 300-second aggregate,
+raw diagnostics retained, positive bound receipts and per-codec reference parity
+(including warnings), pre/post input/executable hashes, and separate aggregate
+closure versus parent terminal evidence. No production endpoint changes.
+
+Original fake Python validators passed twelve calls; warning divergence and a
+zero-exit raw-digest mismatch each stopped after two calls, with genuine closed/
+reaped/others-absent aggregate proof. Noncanonical argv refused before workspace
+creation; completed workspace replay refused. Pure admission controls accept one
+current exact request and reject five stale/wrong-state/pin/command/limit forms.
+[Evidence](tests/sdk_host_matrix/executor-qualification.json). Prepared successor
+plan v2 binds the new executor and containment sources. It grants no native slot.
+
+Zero SDK/Adobe/Photo/Lightroom calls. Actual SDK execution, task/thread accounting,
+pixel equivalence, allocator metrics/cancellation, representative performance and
+full M4-V/M5/M6 remain open. Fresh Root coordination is required before any real
+comparison; both completed earlier admissions stay consumed.

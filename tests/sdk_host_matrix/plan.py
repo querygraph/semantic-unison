@@ -8,6 +8,10 @@ import pathlib
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 CODECS = ('uncompressed', 'jpeg', 'jxl')
 EXPERIMENTAL = 'unison-sdk171-2724-v3-area-memory-unqualified'
+LIMITS = {'calls': 12, 'inputs': 3, 'logical_states': 12,
+          'sequential_calls': True, 'CPU_credits': 18, 'aggregate_seconds': 300}
+SOURCES = ('tests/sdk_host_matrix/plan.py', 'tests/sdk_host_matrix/run.py',
+           'bench/adobe/phase.py', 'bench/sync/ownership.py', 'bench/sync/measure.py')
 
 
 def require(condition, message):
@@ -106,13 +110,13 @@ def main():
                          'sha256': sha(path), 'size': path.stat().st_size})
     plan = {'schema': 'unison-sdk-host-matrix-plan/1', 'native_release': False,
             'source_sha256': sha(__file__), 'tools': [reference, experimental],
-            'limits': {'calls': 12, 'inputs': 3, 'logical_states': 12,
-                       'sequential_calls': True, 'CPU_credits': 18, 'aggregate_seconds': 300},
+            'source_pins': {name: sha(ROOT / name) for name in SOURCES},
+            'host_memory_bytes': args.host_memory_bytes, 'limits': LIMITS,
             'cases': matrix(reference, experimental, fixtures, args.host_memory_bytes),
             'limits_of_proof': ['validation-result equivalence only', 'no decoded pixel equality',
                                 'no actual task/thread count proof', 'not a throughput benchmark',
                                 'host backing allocations only, not process RSS'],
-            'execution': 'Not implemented here. Fresh Root admission and owned aggregate runner required.'}
+            'execution': 'run.py requires fresh Root admission; preparation grants no native release.'}
     with args.output.open('x') as output:
         json.dump(plan, output, indent=2)
         output.write('\n')
