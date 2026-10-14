@@ -1,15 +1,19 @@
 #!/usr/bin/env python3
 """Test production Copy.copyClonedRange from a compiler-matched private Make build.
 
-Only the Fs.copy_file call is hooked in a private copy of the complete source.
+Only the Fs.copy_file_status call is hooked in a private copy of the complete source.
 The native lease, channels, fallback and range function are production code.
 Positive step results model ordinary native copying; no block sharing is claimed.
+The legacy copy_file primitive is poisoned in the private Fs namespace so an
+accidental production routing regression cannot silently pass.
 """
 import argparse
 import hashlib
+import json
 import os
 from pathlib import Path
 import re
+import shutil
 import subprocess
 import tempfile
 
@@ -51,9 +55,15 @@ CAMLprim value bound_copy_native(value source, value destination, value offset, 
 '''
 
 HOOK = r'''
+module LegacyRangePoison = struct let calls = ref 0 end
+module Fs = struct
+  include Fs
+  let copy_file _ _ _ _ =
+    incr LegacyRangePoison.calls;failwith "legacy copy_file route reached"
+end
 module BoundNativeTest = struct
   let calls = ref []
-  let hook = ref Fs.copy_file
+  let hook = ref Fs.copy_file_status
   let step source destination offset length =
     let output_position=Unix.LargeFile.lseek destination 0L Unix.SEEK_CUR in
     calls := (offset,length,output_position)::!calls;
@@ -66,7 +76,10 @@ module Copy = CopyForTest
 module N = Copy.BoundNativeTest
 module L = CloneLease
 module F = FileObservation
-external native : Unix.file_descr -> Unix.file_descr -> int64 -> int -> int = "bound_copy_native"
+external native_bytes : Unix.file_descr -> Unix.file_descr -> int64 -> int -> int = "bound_copy_native"
+let native_progress n = (0,n,1,3,None,1,0,0L)
+let native s d off n = native_progress (native_bytes s d off n)
+let unavailable () = (1,0,0,0,None,0,1,0L)
 let check yes why=if not yes then failwith why
 let count=ref 0 and serial=ref 0
 let test name body=(try body() with e->Printf.eprintf "FAIL %s\n%!" name;raise e);incr count;Printf.printf "PASS %s\n%!" name
@@ -144,7 +157,7 @@ let ()=
     List.iter(fun prefix->fixture directory(fun owner s d _ input output _ _ _ so doff length _ inspect calls invoke->
       let lease=enroll owner s d in
       N.hook:=(fun s d off _->if prefix>0 && List.length !N.calls=1 then native s d off prefix
-        else raise(Unix.Unix_error(Unix.ENOSYS,"injected native","fixture")));
+        else unavailable());
       invoke lease;inspect length;
       check(List.length(calls())=(if prefix=0 then 1 else 2)) "Unsupported was retried instead of exact fallback";
       check(LargeFile.pos_in input=Int64.of_int(so+length) && LargeFile.pos_out output=Int64.of_int(doff+length))
@@ -153,7 +166,7 @@ let ()=
     fixture directory(fun owner s d writer _ _ _ _ _ so _ _ _ inspect calls invoke->
       let lease=enroll owner s d in
       N.hook:=(fun _ _ _ _->Unix.LargeFile.ftruncate writer(Int64.of_int(so+3));
-        raise(Unix.Unix_error(Unix.ENOSYS,"injected native","fixture")));
+        unavailable());
       failure transient(fun()->invoke lease);inspect 3;
       check(List.length(calls())=1) "quiet EOF caused retry or successful full-copy claim"));
   test "EIO/ENOSPC before or after short prefix preserve errno/context and never fallback"(fun()->
@@ -165,7 +178,7 @@ let ()=
       check(List.length(calls())=(if prefix=0 then 1 else 2)) "operational failure retried as fallback")) [0;3]) [Unix.EIO;Unix.ENOSPC]);
   test "zero/negative/oversized native progress and unadvanced fd never report full copy"(fun()->
     List.iter(fun result->fixture directory(fun owner s d _ _ _ _ _ _ _ _ length _ inspect calls invoke->
-      let lease=enroll owner s d in N.hook:=(fun _ _ _ _->if result=99 then length else result);
+      let lease=enroll owner s d in N.hook:=(fun _ _ _ _->native_progress (if result=99 then length else result));
       failure transient(fun()->invoke lease);inspect 0;
       check(List.length(calls())=1) "invalid progress was retried")) [0;-1;25;99]);
   test "missing identity, stale bounds and revoked epoch prevent all native effects"(fun()->
@@ -201,6 +214,60 @@ let ()=
       Fun.protect ~finally:(fun()->close_out_noerr other)(fun()->
         failure transient(fun()->Copy.copyClonedRange lease input other(Int64.of_int so)(Int64.of_int length));
         inspect 0;check(calls()=[]) "different output channel fd reached native step")));
+  test "strict known in-call decline copies only its exact suffix"(fun()->
+    fixture directory(fun owner s d _ input output _ _ _ so doff length _ inspect calls invoke->
+      let lease=enroll owner s d in
+      N.hook:=(fun s d off _->ignore(native_bytes s d off 3);(1,3,1,3,Some Unix.EOPNOTSUPP,1,3,95L));
+      invoke lease;inspect length;
+      check(List.length(calls())=1) "known decline was probed again";
+      check(LargeFile.pos_in input=Int64.of_int(so+length) &&
+            LargeFile.pos_out output=Int64.of_int(doff+length)) "in-call prefix fallback skipped/repeated bytes"));
+  test "strict errno-looking returned errors cannot authorize suffix copying"(fun()->
+    List.iter(fun errno->List.iter(fun prefix->fixture directory(fun owner s d _ _ _ _ _ _ _ _ _ _ inspect calls invoke->
+      let lease=enroll owner s d in
+      N.hook:=(fun s d off _->if prefix>0 then ignore(native_bytes s d off prefix);
+        (2,prefix,1,3,Some errno,(if prefix=0 then 0 else 1),0,22L));
+      failure(function Unix.Unix_error(actual,"copy_file_status",context)->
+        actual=errno && String.length context>0|_->false)(fun()->invoke lease);
+      inspect prefix;check(List.length(calls())=1) "operational result caused native retry/fallback")) [0;3])
+      [Unix.EINVAL;Unix.ESPIPE;Unix.ENOTSOCK;Unix.EBADF;Unix.EIO;Unix.ENOSPC;
+       Unix.EUNKNOWNERR(-50);Unix.EUNKNOWNERR(-1)]);
+  test "strict indeterminate decline leaves its unknown extra byte without fallback"(fun()->
+    fixture directory(fun owner s d _ _ _ _ _ _ _ _ _ _ inspect calls invoke->
+      let lease=enroll owner s d in
+      N.hook:=(fun s d off _->ignore(native_bytes s d off 4);
+        (1,3,1,3,Some Unix.EOPNOTSUPP,2,3,95L));
+      failure(function Unix.Unix_error(Unix.EOPNOTSUPP,"copy_file_status",_)->true|_->false)(fun()->invoke lease);
+      inspect 4;check(List.length(calls())=1) "indeterminate effects led to new work"));
+  test "strict malformed raw statuses fail before fallback"(fun()->
+    List.iter(fun raw->fixture directory(fun owner s d _ _ _ _ _ _ _ _ _ _ inspect calls invoke->
+      let lease=enroll owner s d in N.hook:=(fun _ _ _ _->raw);
+      failure transient(fun()->invoke lease);inspect 0;
+      check(List.length(calls())=1) "malformed raw receipt retried"))
+      [(9,0,1,3,None,0,0,0L);(1,0,1,3,Some Unix.EINVAL,0,3,22L);
+       (0,3,1,3,None,0,0,0L);(0,3,1,3,None,2,0,0L)]);
+  test "production copyFile bounds declined suffix despite extra source bytes"(fun()->
+    List.iter(fun prefix->fixture directory(fun _ _ _ _ input output _ dp _ so doff length _ inspect calls _->
+      let fallback_lengths=ref [] in
+      N.hook:=(fun s d off _->if prefix>0 && List.length !N.calls=1 then native s d off prefix
+        else unavailable());
+      Copy.copyFile input output (`DATA_APPEND(Uutil.Filesize.ofInt so))
+        (Uutil.Filesize.ofInt length)
+        (fun remaining->fallback_lengths:=Uutil.Filesize.toInt64 remaining::!fallback_lengths;
+          Uutil.readWriteBounded input output remaining(fun _->())) (fun _->());
+      let cursors_correct=LargeFile.pos_out output=Int64.of_int(doff+length) &&
+        Unix.LargeFile.lseek (Unix.descr_of_out_channel output) 0L Unix.SEEK_CUR=Int64.of_int(doff+length) in
+      inspect length;
+      check cursors_correct "copyFile returned with stale cached or native destination cursor";
+      check(!fallback_lengths=[Int64.of_int(length-prefix)] && List.length(calls())=(if prefix=0 then 1 else 2))
+        "production copyFile requested its original length after a prefix";
+      check(LargeFile.pos_in input=Int64.of_int(so+length) &&
+            LargeFile.pos_out output=Int64.of_int(doff+length)) "copyFile cursor reconciliation failed";
+      output_string output "!";flush output;
+      let chained=bytes dp in
+      check(chained.[doff+length]='!' && chained.[doff+length+1]='#')
+        "a following literal overwrote the completed suffix")) [0;3]);
+  check(!(Copy.LegacyRangePoison.calls)=0) "production used the legacy native range API";
   Gc.full_major();check(fds()=initial) "bound caller fixture leaked descriptors";
   Printf.printf "Copy.copyClonedRange: %d production-caller cases passed; no physical-sharing claim\n%!" !count
 '''
@@ -220,21 +287,35 @@ def main():
     parser.add_argument('build', type=Path, help='compiler-matched isolated Make snapshot')
     parser.add_argument('--ocamlopt', required=True)
     parser.add_argument('--negative-control', action='store_true', help='prove missing channel reconciliation fails the suite')
+    parser.add_argument('--negative-suffix-control', action='store_true', help='prove original-length suffix copying fails independent sentinels')
+    parser.add_argument('--keep-work', action='store_true')
+    parser.add_argument('--receipt', type=Path)
     args = parser.parse_args()
     root = Path(__file__).resolve().parents[1]
     build = args.build.resolve() / 'src'
-    for name in ['copy.ml', 'copyRange.ml', 'cloneRange.ml', 'cloneLease.ml', 'fileObservation.ml', 'fileObservation_stubs.c', 'uutil.ml']:
+    source_pins = {}
+    for name in ['copy.ml', 'copyRange.ml', 'copyRange.mli', 'nativeCopyRange_stubs.c', 'fs.ml',
+                 'cloneRange.ml', 'cloneLease.ml', 'fileObservation.ml', 'fileObservation_stubs.c', 'uutil.ml']:
         data = (root / 'src' / name).read_bytes()
         assert (build / name).read_bytes() == data, name + ' differs from current frozen source; refresh the Make snapshot'
-        print('source', name, hashlib.sha256(data).hexdigest(), flush=True)
+        source_pins['src/' + name] = hashlib.sha256(data).hexdigest()
+        print('source', name, source_pins['src/' + name], flush=True)
+    source_pins['tests/test_clone_bound_range.py'] = hashlib.sha256(Path(__file__).read_bytes()).hexdigest()
     source = (root / 'src/copy.ml').read_text()
-    needle = 'Fs.copy_file src dst source_offset length'
+    needle = 'Fs.copy_file_status src dst source_offset length'
     assert source.count(needle) == 1, 'native seam no longer unambiguous'
     instrumented = HOOK + source.replace(needle, 'BoundNativeTest.step src dst source_offset length')
     if args.negative_control:
         repair = 'LargeFile.seek_out output ending;'
         assert instrumented.count(repair) == 1
         instrumented = instrumented.replace(repair, '(); (* negative control: cached offset not reconciled *)')
+    if args.negative_suffix_control:
+        if args.negative_control:
+            parser.error('choose only one private negative control')
+        repair = ('fallback (Filesize.ofInt64\n'
+                  '          (Int64.sub (Filesize.toInt64 len) (Filesize.toInt64 copied)))')
+        assert instrumented.count(repair) == 1, 'bounded suffix seam no longer unique'
+        instrumented = instrumented.replace(repair, 'fallback len (* negative control: original length repeats prefix *)')
     makefile = (build / 'Makefile.OCaml').read_text()
     modules = objects(makefile, 'OCAMLOBJS')
     modules = modules[:modules.index('copy.cmx')]
@@ -243,38 +324,72 @@ def main():
     environment = os.environ.copy()
     for variable in ('OCAMLLIB', 'OCAMLPATH', 'CAML_LD_LIBRARY_PATH', 'OCAMLRUNPARAM'):
         environment.pop(variable, None)
-    with tempfile.TemporaryDirectory(prefix='unison-bound-copy-', dir='/private/tmp') as tmp:
-        work = Path(tmp)
+    work = Path(tempfile.mkdtemp(prefix='unison-bound-copy-', dir='/private/tmp'))
+    records = []
+    receipt = {'schema': 1, 'work': str(work), 'retained': args.keep_work,
+               'production_build': str(build.parent), 'source_pins': source_pins,
+               'commands': records, 'success': False, 'physical_sharing': False,
+               'private_instrumentation': ['replace only Fs.copy_file_status call with BoundNativeTest.step',
+                                           'poison legacy copy_file in private Fs namespace'],
+               'Photo_or_Adobe_access': False}
+
+    def run(command, name, *, allow_failure=False, timeout=90):
+        result = subprocess.run(command, cwd=work, env=environment, text=True,
+                                capture_output=True, timeout=timeout)
+        log = work / (name + '.log')
+        log.write_text(result.stdout + result.stderr)
+        records.append({'command': command, 'cwd': str(work), 'exit': result.returncode,
+                        'log': str(log), 'log_sha256': hashlib.sha256(log.read_bytes()).hexdigest()})
+        print(result.stdout, end='', flush=True)
+        print(result.stderr, end='', flush=True)
+        if not allow_failure:
+            result.check_returncode()
+        return result
+
+    try:
         (work / 'copyForTest.ml').write_text(instrumented)
         (work / 'boundTest.ml').write_text(HARNESS)
         (work / 'nativeStep.c').write_text(NATIVE)
         state = work / 'state'
         state.mkdir()
         environment['UNISON'] = str(state)
-        print('Compiler', subprocess.check_output([args.ocamlopt, '-version'], env=environment, text=True).strip(), flush=True)
-        with (work / 'build.log').open('w+') as log:
-            try:
-                for name in ['nativeStep.c', 'copyForTest.ml']:
-                    subprocess.run([args.ocamlopt, *flags, '-c', name], cwd=work, env=environment,
-                                   stdout=log, stderr=log, check=True)
-                subprocess.run([args.ocamlopt, *flags, 'unix.cmxa', 'str.cmxa',
-                                *[str(build / name) for name in modules], 'copyForTest.cmx', 'boundTest.ml',
-                                *[str(build / name) for name in objects(makefile, 'COBJS')],
-                                'nativeStep.o', '-o', 'bound-copy-test'], cwd=work, env=environment,
-                               stdout=log, stderr=log, check=True)
-            except subprocess.CalledProcessError:
-                log.seek(0)
-                print(log.read())
-                raise
-        result = subprocess.run([str(work / 'bound-copy-test'), str(work)], cwd=work,
-                                env=environment, text=True, capture_output=True, timeout=90)
-        print(result.stdout, end='')
-        print(result.stderr, end='')
+        compiler = Path(shutil.which(args.ocamlopt) or args.ocamlopt).resolve()
+        receipt['compiler'] = {'path': str(compiler),
+                               'sha256': hashlib.sha256(compiler.read_bytes()).hexdigest(),
+                               'version': run([args.ocamlopt, '-version'], 'compiler-version').stdout.strip()}
+        for name in ['nativeStep.c', 'copyForTest.ml']:
+            run([args.ocamlopt, *flags, '-c', name], 'compile-' + name)
+        linked = [build / name for name in modules] + [build / name for name in objects(makefile, 'COBJS')]
+        receipt['linked_objects'] = {str(path): hashlib.sha256(path.read_bytes()).hexdigest() for path in linked}
+        run([args.ocamlopt, *flags, 'unix.cmxa', 'str.cmxa',
+             *[str(build / name) for name in modules], 'copyForTest.cmx', 'boundTest.ml',
+             *[str(build / name) for name in objects(makefile, 'COBJS')],
+             'nativeStep.o', '-o', 'bound-copy-test'], 'link')
+        result = run([str(work / 'bound-copy-test'), str(work)], 'test',
+                     allow_failure=(args.negative_control or args.negative_suffix_control))
         if args.negative_control:
             assert result.returncode != 0 and 'cached offset disagrees' in result.stderr, 'negative control did not detect missing reconciliation'
             print('PASS negative control: removing channel reconciliation is detected')
+            receipt['negative_control'] = {'kind': 'channel-reconciliation', 'detected': True}
+        elif args.negative_suffix_control:
+            assert result.returncode != 0 and 'range bytes or immediate outer sentinels differ' in result.stderr, 'negative control did not detect original-length suffix overcopy'
+            print('PASS negative control: original-length suffix copying is detected')
+            receipt['negative_control'] = {'kind': 'original-length-suffix', 'detected': True}
         else:
             result.check_returncode()
+            receipt['named_groups'] = sum(line.startswith('PASS ') for line in result.stdout.splitlines())
+        receipt['success'] = True
+    finally:
+        receipt['artifacts'] = {str(path.relative_to(work)): {'path': str(path), 'bytes': path.stat().st_size,
+                                  'sha256': hashlib.sha256(path.read_bytes()).hexdigest()}
+                                for path in sorted(work.rglob('*')) if path.is_file()}
+        target = args.receipt.resolve() if args.receipt else work / 'receipt.json'
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_text(json.dumps(receipt, indent=2, sort_keys=True) + '\n')
+        print('Receipt', target, flush=True)
+        print('Artifacts', work, '(retained)' if args.keep_work else '(removed after receipt)', flush=True)
+        if not args.keep_work:
+            shutil.rmtree(work)
 
 
 if __name__ == '__main__':

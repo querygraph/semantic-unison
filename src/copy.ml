@@ -601,18 +601,22 @@ let readPropsExtDataG root path desc =
 
 let copyFileRange src dst src_offs len fallback notify =
   let open Uutil in
-  match CopyRange.run ~max_chunk:10_485_760 (* 10 MiB; periodic progress *)
+  match CopyRange.run_native ~check_cancel:Abort.checkAll
+    ~max_chunk:10_485_760 (* 10 MiB; periodic progress *)
     ~source_offset:(Filesize.toInt64 src_offs) ~length:(Filesize.toInt64 len)
-    ~step:(fun ~source_offset ~length -> Fs.copy_file src dst source_offset length)
+    ~step:(fun ~source_offset ~length ->
+      CopyRange.decode_native (Fs.copy_file_status src dst source_offset length))
     ~notify:(fun n -> notify (Filesize.ofInt n)) () with
   | CopyRange.Copied _ -> ()
-  | CopyRange.Unsupported (progress, error) ->
+  | CopyRange.Native_unsupported (progress,scope,context) ->
       debug (fun () -> Util.msg
-        "Falling back to regular copy: copyFileRange failed [%s]%s\n"
-        (Unix.error_message error.errno)
+        "Falling back to regular copy: native range declined (%s): %s%s\n"
+        (CopyRange.scope_name scope) (CopyRange.describe_native context)
         (if progress.completed = 0L then "" else
           " (copied " ^ Int64.to_string progress.completed ^ ")"));
       fallback (Filesize.ofInt64 progress.completed)
+  | CopyRange.Unsupported _ ->
+      raise (Util.Transient "Legacy unsupported result reached strict range copying")
   | CopyRange.Failed (_, CopyRange.System_error error) ->
       raise (Unix.Unix_error (error.errno, error.operation, error.argument))
   | CopyRange.Failed (progress, CopyRange.No_progress) ->
@@ -623,6 +627,14 @@ let copyFileRange src dst src_offs len fallback notify =
       raise (Util.Transient (Printf.sprintf
         "Accelerated copy returned an invalid count (%d for %d requested bytes)"
         returned requested))
+  | CopyRange.Failed (_, CopyRange.Native_error context) ->
+      (match context.CopyRange.errno with
+       | Some errno -> raise (Unix.Unix_error (errno,"copy_file_status",
+           CopyRange.describe_native context))
+       | None -> raise (Util.Transient ("Unsafe native range result: " ^
+           CopyRange.describe_native context)))
+  | CopyRange.Failed (_, CopyRange.Invalid_native_result reason) ->
+      raise (Util.Transient ("Invalid native range result: " ^ reason))
 
 let copyClonedRange lease input output source_offset length =
   let destination_offset = LargeFile.pos_out output in
@@ -692,19 +704,23 @@ let copyFile inCh outCh kind len fallback notify =
            accordingly. To not break fallback, the seek position of input fd
            must be updated by the same amount. *)
         let open Uutil in
-        if copied <> Filesize.zero then begin
-          let pos =
-            Int64.add (Filesize.toInt64 src_offs) (Filesize.toInt64 copied) in
-          LargeFile.seek_in inCh pos
-        end;
-        fallback ()
+        let pos =
+          Int64.add (Filesize.toInt64 src_offs) (Filesize.toInt64 copied) in
+        LargeFile.seek_in inCh pos;
+        (* Native progress advances the FD, not the channel's cached position.
+           Reconcile before bounded suffix writes; never request len again. *)
+        LargeFile.seek_out outCh (Unix.LargeFile.lseek dst 0L Unix.SEEK_CUR);
+        fallback (Filesize.ofInt64
+          (Int64.sub (Filesize.toInt64 len) (Filesize.toInt64 copied)))
       in
-      copyFileRange src dst src_offs len fallback' notify
+      copyFileRange src dst src_offs len fallback' notify;
+      flush outCh;
+      LargeFile.seek_out outCh (Unix.LargeFile.lseek dst 0L Unix.SEEK_CUR)
     in
     match kind with
     | `DATA -> tryCopyFileRange src dst Uutil.Filesize.zero len fallback notify
     | `DATA_APPEND offs -> tryCopyFileRange src dst offs len fallback notify
-    | `RESS -> fallback ()
+    | `RESS -> fallback len
 
 let copyBoundClone producer basisPath directory candidate suffix write =
   checkProducer producer;
@@ -776,7 +792,7 @@ let copyContents ?producer fspathFrom pathFrom fspathTo pathTo fileKind fileLeng
                    if fileKind <> `RESS then Abort.checkAll ();
                    Uutil.showProgress id l "l")
             in
-            let fallback () = Uutil.readWriteBounded inFd outFd fileLength
+            let fallback remaining = Uutil.readWriteBounded inFd outFd remaining
               (fun l -> showProgress (Uutil.Filesize.ofInt l)) in
             copyFile inFd outFd fileKind fileLength fallback showProgress;
             flush outFd;

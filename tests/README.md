@@ -1,5 +1,12 @@
 # Semantic extension qualification
 
+[Strict native range controls](native_copy_range/README.md) qualify typed
+declines/failures, the actual macOS ABI and complete production Copy callers,
+including bounded suffix/cursor behavior and three private negative controls.
+The [integration receipt](qualification/native-copy-range-integration-20261013.json)
+binds compiler builds, synthetic CLI regressions and independent review.
+Other-platform source implementations are not native runtime qualification.
+
 [Receiving recognition controls](validation_recognition/README.md) cover renamed
 DNGs, semantic-ineligible fallback, receiving paths, recursive trees and a
 registered synthetic companion. [Inspection-fault controls](validation_inspection_fault/README.md)

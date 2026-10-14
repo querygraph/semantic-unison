@@ -51,6 +51,12 @@ val clone_file : Unix.file_descr -> Unix.file_descr -> bool
 (* [copy_file] updates destination file seek position if and only if
    writing succeeded, returning the number of bytes written. *)
 val copy_file : Unix.file_descr -> Unix.file_descr -> int64 -> int -> int
+(* Additive strict range protocol: status, prefix, backend, phase, mapped error,
+   mutation, decline scope, original native error code. Borrows both descriptors;
+   only a known no-effect/known-prefix decline permits caller suffix fallback.
+   Successful generic copying does not attest shared blocks. *)
+val copy_file_status : Unix.file_descr -> Unix.file_descr -> int64 -> int ->
+  (int * int * int * int * Unix.error option * int * int * int64)
 
 (****)
 

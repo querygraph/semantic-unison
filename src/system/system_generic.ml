@@ -73,6 +73,8 @@ external clone_file : Unix.file_descr -> Unix.file_descr -> bool =
   "unison_clone_file"
 external copy_file : Unix.file_descr -> Unix.file_descr -> int64
   -> int -> int = "unison_copy_file"
+external copy_file_status : Unix.file_descr -> Unix.file_descr -> int64 -> int ->
+  (int * int * int * int * Unix.error option * int * int * int64) = "unison_copy_file_status"
 
 (****)
 

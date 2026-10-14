@@ -4,6 +4,29 @@
 
 ## Live implementation handoff
 
+* Strict native-range continuation (2026-10-13): production range copying now
+  uses additive `Fs.copy_file_status` / `CopyRange.run_native`, retaining legacy
+  ABI/source and its compatibility loop. Explicit backend/phase/prefix/error/
+  effect/scope results replace ambiguous errno fallback. Operational failures,
+  indeterminate effects and contradictory fields stop; only verified scoped
+  declines permit bounded suffix copying. Linux no longer hides EBADF behind
+  sendfile; Solaris partial errors retain both prefix and failure. The Windows
+  source path requests exact aligned extents without an extra cluster and
+  settles IOCTLs with one transient event; other-platform runtime qualification
+  remains open. Ordinary local fallback now copies only remaining bytes and
+  reconciles buffered/native channel positions. See [native-copy-range.md](doc/native-copy-range.md).
+* Native-range qualification: stock/Ox Make and clean Dune builds/selftests
+  match 329 production/package/INSTALL inputs. Both compilers pass sixteen typed
+  groups, thirteen actual macOS ABI groups, fourteen complete production-caller
+  groups and three designated private negatives each. The existing eleven
+  legacy range groups pass unchanged. Ordinary clone, receiving validation and
+  Files publication regressions are bound in the [integration receipt](tests/qualification/native-copy-range-integration-20261013.json)
+  with separate independent acceptance. macOS still provides no native range
+  sharing through this API; whole-file basis/stage reuse remains. Linux/BSD/
+  Solaris/ReFS execution, Windows append-wrapper and event-close behavior,
+  measured physical sharing/performance, complete resource limits and crash
+  qualification remain open. No Adobe/Photo or preview invocation occurred.
+
 * Receiving-validation continuation (2026-10-13): core now accepts separately
   registered `CandidateValidator.S` companions and dispatches immutable content
   recognizers through typed workers. The single DNG companion covers v0/v1

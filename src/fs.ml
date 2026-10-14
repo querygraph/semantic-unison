@@ -71,6 +71,7 @@ let file_exists f =
 let clone_path f1 f2 = System.clone_path (path f1) (path f2)
 let clone_file = System.clone_file
 let copy_file = System.copy_file
+let copy_file_status = System.copy_file_status
 
 type clone_stage_decline =
   | Platform_unavailable

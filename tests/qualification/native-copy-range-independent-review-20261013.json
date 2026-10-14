@@ -1,0 +1,227 @@
+{
+  "accepted_utc": "2026-10-14T00:45:43.913656+00:00",
+  "aggregate": {
+    "bytes": 56562,
+    "path": "tests/qualification/native-copy-range-integration-20261013.json",
+    "sha256": "bb797de78a12925080f8c70120d68e35511ab7a41a89aae94141a5f4ce790ad7"
+  },
+  "authorship": {
+    "changed_production_and_documents": "/root",
+    "native_C_and_neutral_root_regression_index": "/root/native_range_audit",
+    "new_typed_native_and_complete_caller_fixtures_and_execution": "/root/range_test_audit",
+    "reviewer_authored_changed_production_tests_or_documents": false,
+    "reviewer_executed_builds_tests_native_calls_or_helpers": false,
+    "reviewer_method": "Read-only source, retained byte/hash/identity checks, pure string reconstruction of private instrumentation, command/log/result and document review. Only this separate acceptance receipt was written."
+  },
+  "build_artifact_review": {
+    "Dune_and_OxCaml_warnings_alerts_retained": true,
+    "actual_make_logs_include_new_native_C_compile_and_link": true,
+    "builds": 4,
+    "compiler_binary_config_build_log_selftest_log_and_executable_pins_verified": true,
+    "compiler_versions": [
+      "5.5.1",
+      "5.2.0+ox"
+    ],
+    "generated_depend_matches_workspace_and_both_Make": true,
+    "production_inputs": 329,
+    "selftests": 4,
+    "source_and_artifact_consistency_does_not_prove_compiler_checked_worker_safety_or_other_platform_builds": true,
+    "source_freeze": {
+      "bytes": 33857,
+      "path": "/private/tmp/unison-strict-range-build-records/SOURCE-FREEZE.json",
+      "sha256": "833655ce65a5898154f5dfac05d5daf635d8a09c65f53b7ae7c410ca27a2ed41"
+    },
+    "source_hash_comparisons": 1645,
+    "source_sets": [
+      "current workspace",
+      "stock Make",
+      "OxCaml Make",
+      "stock clean Dune",
+      "OxCaml clean Dune"
+    ],
+    "status": "accepted"
+  },
+  "document_review": {
+    "documents": {
+      "SOL.md": {
+        "bytes": 176546,
+        "path": "/Users/alexy/src/unison/SOL.md",
+        "sha256": "6eda76b688639da5a4295032780f6b85b95b8ad8ac705ecce97cbb9e45ea860e"
+      },
+      "doc/filesystem-capabilities-plan.md": {
+        "bytes": 45808,
+        "path": "/Users/alexy/src/unison/doc/filesystem-capabilities-plan.md",
+        "sha256": "91666f8c94e8c5f92f953b4ad5776473c880ab11140d1c7e3253b3292eee0afd"
+      },
+      "doc/implementation-status.md": {
+        "bytes": 61118,
+        "path": "/Users/alexy/src/unison/doc/implementation-status.md",
+        "sha256": "413a2986fe318e1c63f2fe90eea9a77b0b47483e62e949fcf5a1695579ec2e3b"
+      },
+      "doc/native-copy-range.md": {
+        "bytes": 5854,
+        "path": "/Users/alexy/src/unison/doc/native-copy-range.md",
+        "sha256": "ca3ccbedcd59b1efc4816a187c97f6d9627ccdf65262235ca69c46aac806ad2c"
+      },
+      "tests/README.md": {
+        "bytes": 18254,
+        "path": "/Users/alexy/src/unison/tests/README.md",
+        "sha256": "2cd7a8f540304667cac249f8e84ad9c644a654ef5df5fae40cb5243898981838"
+      },
+      "tests/native_copy_range/README.md": {
+        "bytes": 2544,
+        "path": "/Users/alexy/src/unison/tests/native_copy_range/README.md",
+        "sha256": "7067bba36f3e8e2dec63b6f5a6e14722b46d6f03fff5bf3f757309ac3ba463fa"
+      }
+    },
+    "observations": [
+      "SOL live handoff and current status describe the strict path and preserve legacy compatibility evidence as historical.",
+      "The new native contract explains bounded suffix and buffered cursor behavior, no-effect/known-prefix decline versus indeterminate failure, descriptor borrowing and unchanged source checks.",
+      "Platform source implementation is separated from native runtime qualification. Successful generic copies never attest physical block sharing.",
+      "Windows pending settlement, append wrapper semantics, close-failure cleanup, waits and total handle/resource limits remain unqualified.",
+      "Goal limitations include representative corpus/SDK/full-sync performance, lifecycle/crash/durability and preview/native window ownership; no source-only evidence is promoted to deployment or goal completion."
+    ],
+    "status": "accepted"
+  },
+  "limits": [
+    "New actual native qualification is macOS preflight/decline/error behavior; typed/caller positive-copy helpers are synthetic and do not attest range sharing.",
+    "Linux/FreeBSD/Solaris/Windows source branches have no new native runtime qualification. Windows wrapper append semantics, event-close failure cleanup guarantees and OS wait bounds remain unqualified.",
+    "Successful generic copying leaves physical sharing unreported; no APFS allocation savings, new ZFS/ReFS runtime or capability/mount-incarnation cache proven.",
+    "Descriptor/heap/RSS accounting and crash/power-loss durability remain incomplete; Windows introduces one transient private IOCTL event, not a qualified total process-handle ceiling.",
+    "Existing clone/legacyunit runners remove scratch; retained logs/source/outer commands support their selected outcomes, with no invented retained binaries or per-inner-CLI argv/status/overwritten phase states.",
+    "Existing Files/validation suites use private synthetic artifacts and cooperative namespace assumptions; full source/camera/SDK/full-sync performance qualification remains open.",
+    "No new Adobe/ExifTool/Lightroom/Photo/catalog/cache/volume operation, preview renderer/publisher, benchmark or full generator run.",
+    "Earlier qualification receipts and document pins remain immutable evidence of their respective commits; this receipt binds current code and documents separately.",
+    "The reviewer did not execute Adobe/ExifTool/Lightroom/native preview helpers, inspect Photo payload/catalog/cache/production volumes, run benchmarks or release a native oracle window.",
+    "Runtime qualification on Linux/FreeBSD/Solaris/Windows, actual filesystem sharing/performance, append-wrapper matrices, native OS wait deadlines and event-close failure cleanup need separate native evidence."
+  ],
+  "new_component_artifact_review": {
+    "actual_native_scope": "Real macOS descriptor/argument/EOF/access/append/alias/nonregular checks, platform/no-effect results, zero request and unchanged legacy Unix_error ABI. Other backend IDs and positive copy steps are synthetic; no range sharing or foreign-platform execution is established.",
+    "each_compiler": {
+      "actual_macOS_native_ABI_groups": 13,
+      "complete_private_production_Copy_caller_groups": 14,
+      "specific_private_negative_controls": 3,
+      "strict_typed_groups": 16
+    },
+    "final_run_receipts": 8,
+    "historical_fixture_failure": "Stock5.5 rejected effect as a fixture variable. Retained old/new source difference is only effect-to-performed; production pins are unchanged. Superseded earlier successful fixture/oracle-order trials are labeled historical.",
+    "historical_receipts": 4,
+    "linked_Make_object_pin_checks": 588,
+    "negative_controls": [
+      "Removing only the private indeterminate-decline guard fails independent per-byte write counts with unauthorized or repeated suffix write.",
+      "Replacing only the private remaining-length expression with original len fails independent surrounding byte sentinels for a source with extra bytes.",
+      "Removing only the private cloned-output channel reconciliation fails the cached/native cursor assertion."
+    ],
+    "private_source_reconstruction": "All final positive and negative copied sources match the exact declared native-call seam/legacy poison and unique private mutations. Typed negative changes only the indeterminate-decline guard. No production hooks were added.",
+    "production_suffix_case": "Both no-effect and short-prefix decline use a source containing37extra bytes. Exact suffix length and bytes/sentinels are checked; cached and native output positions are captured before the fixture flush, then a following literal must append after the requested interval.",
+    "receipt": {
+      "bytes": 13069,
+      "path": "/Users/alexy/src/unison/tests/native_copy_range/qualification-20261013.json",
+      "sha256": "e8c0b99e2eaecb00e101ccf6b9229772c204594eb69b6c0376885f1a30567ada"
+    },
+    "retained_artifact_pins_verified": 228,
+    "status": "accepted"
+  },
+  "parent_commit": "bd943e1653b099b9ca3ccc21e4cae70a1837f39e",
+  "publication_review": {
+    "aggregate_component_and_prior_receipts_unchanged": true,
+    "diff_whitespace_check_passed": true,
+    "review_is_not_commit_push_or_goal_completion_evidence": true,
+    "reviewed_before_staging": true,
+    "seven_external_coordination_files_remain_outside_this_slice": true,
+    "tracked_index_was_unstaged": true
+  },
+  "reviewer": "/root/strict_range_review",
+  "root_regression_artifact_review": {
+    "each_compiler": {
+      "Files_publication_CLI_cases": 79,
+      "legacy_CopyRange_groups": 11,
+      "ordinary_clone_CLI_log_scenarios": 12,
+      "receiving_validation_CLI_cases": 21
+    },
+    "each_compiler_private_Files_source_manifest_inputs": 325,
+    "exact_outer_commands": {
+      "bytes": 6862,
+      "path": "/private/tmp/unison-strict-range-build-records/ROOT-OUTER-COMMANDS.json",
+      "sha256": "641fbdd00e895567b2efbb356b7656ed8d4916ac1c304360bfc3ad5f30625e2c"
+    },
+    "exact_private_source_reconstruction": [
+      "Files.ml matches the current complete production source plus the frozen fault/archive wrapper transformations.",
+      "Copy.ml matches the current complete production source plus the frozen producer telemetry/source-clone-decline wrapper transformations.",
+      "Copy.mli is byte-identical; Files.mli adds only the private archive dump declaration.",
+      "Native finalPublication_stubs.c and fixture.c copies are byte-identical to their pinned sources.",
+      "UITtext source differs only by adding the private archive dump after four actual commit checkpoints."
+    ],
+    "exact_root_observed_terminal_zero_outer_suites": 8,
+    "full_retained_inventories_verified": {
+      "checks": "Complete path sets, file bytes/SHA256/size, type, mode/inode and symlink targets matched the sealed index.",
+      "directories": 1028,
+      "files": 2648,
+      "regular_file_bytes": 259588136,
+      "symlinks": 4
+    },
+    "private_compiler_link_commands": 48,
+    "provenance_limits": [
+      "Root recorded exact outer argv/cwd/combined log and observed terminal0. Existing Files/validation runners do not persist every inner CLI argv/numeric status; overwritten phases/states are not reconstructed.",
+      "Existing clone and legacy-unit runners remove temporary work. Their retained logs, exact root outer command and current unchanged harness support the selected outcomes; no retained test binary/inner scratch or per-inner command record is invented.",
+      "The neutral index author and this reviewer performed no test/native/build replay. This is artifact/provenance acceptance of root-executed regressions, not fresh independent test execution or complete requalification of unchanged subsystems."
+    ],
+    "receipt": {
+      "bytes": 1322030,
+      "path": "/private/tmp/unison-strict-range-root-regressions.json",
+      "sha256": "a36425a54e41d74887de9746bb7259239f4c9da9d681721fce4459de83beb1b3"
+    },
+    "retained_CLI_phase_log_files_read_and_verified": 458,
+    "source_subset_matches_full_329_package_manifest": true,
+    "status": "accepted"
+  },
+  "schema": "unison.strict-native-range-independent-review/1",
+  "source_review": {
+    "findings_closed": [
+      "Known-tag Native_declined results cannot turn EIO/EINVAL or inconsistent backend/phase/error combinations into suffix fallback. Both decode_native and direct typed run_native paths check decline consistency.",
+      "Copy.copyFile now passes requested-completed to the bounded fallback rather than requesting the original length after a reported prefix.",
+      "Buffered suffix output is flushed before the post-copy FD lseek/channel reconciliation. Computing that position before flush would otherwise rewind the cursor.",
+      "Windows source settles each reported pending IOCTL using its private manual-reset event before stack buffers/OVERLAPPED escape; the event close and original native error are accounted separately."
+    ],
+    "observations": [
+      "Only explicit consistent scoped declines with no effect or a known reported prefix permit copying the suffix. Operational exceptions, malformed counts/statuses, native failures and indeterminate declines never acquire legacy errno fallback semantics.",
+      "Reported prefixes are bounded and counted once. Callback/cancellation exceptions stay outside native-error classification and propagate.",
+      "The additive native ABI preserves all eight scalar fields. C enum/ML tag mappings agree; negative or unknown raw tags/error representations reject before fallback.",
+      "Rooted OCaml parameters are retained; scalar/descriptor/handle values are copied before the no-pending runtime release. Native errno/GetLastError is saved before cursor checks/runtime reacquisition. No OCaml heap access occurs during release.",
+      "POSIX argument/access/alias/nonregular/append preflight is conservative. macOS returns an explicit platform/no-effect decline for a valid regular-file request.",
+      "Linux sendfile is attempted only after verified no-effect supported decline. Solaris partial-error count remains a terminal failure with a reported prefix.",
+      "Windows source uses the documented synchronous NtQueryObject basic layout/signature, exact returned-size check, original NTSTATUS bits and separately mapped Unix error; extent requests are exactly aligned lengths, not rounded up.",
+      "Borrowed descriptors/HANDLEs must remain valid/exclusive through settlement. An open descriptor does not make its content immutable. Existing source checks/leases/fingerprints/publication remain necessary.",
+      "Legacy copy_stubs.c, external copy_file and compatibility CopyRange.run remain available. Production range copying uses the new strict entry."
+    ],
+    "scope": [
+      "src/copyRange.ml",
+      "src/copyRange.mli",
+      "src/copy.ml",
+      "src/copy.mli",
+      "src/nativeCopyRange_stubs.c",
+      "src/system/system_generic.ml",
+      "src/system/system_intf.ml",
+      "src/fs.ml",
+      "src/fs.mli",
+      "src/Makefile.OCaml",
+      "src/dune"
+    ],
+    "source_sha256": {
+      "src/Makefile.OCaml": "0a961e66d6639349e14314f94949e2152e12d9cba8b0e0365db1f3f3e32a59c1",
+      "src/copy.ml": "f7c384e51aa228bd81bd99adbd4c8708656946563469d4b8d3ef87b5d676ccaa",
+      "src/copy.mli": "41ec7ba3eaa3b0e168ad31f071d863b02be1b45a4fc09423cfe01c944738bf4e",
+      "src/copyRange.ml": "c1d35a665012a72eadbcbf27806bef74812a88be5c32325778d1a8c86eb8101c",
+      "src/copyRange.mli": "87dd5fa1a526d6f6512cdc5098c5fa56bd5fd6ecc0f0c4eeec8cd0a0485a4ccb",
+      "src/copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+      "src/dune": "79d121e9749dbb243fe27a5312d3848f5ea80fa01c268b9e0e53dc4f8450db1c",
+      "src/fs.ml": "e8e4d320ae22dbd3c0a97a2f6a531a3d1b8f1e3ee2fd4ef0fb218db02eaf2551",
+      "src/fs.mli": "5ab6513cb1a379d632849935f223c4facd57b2ddc002349aca6f27ecf68523c7",
+      "src/nativeCopyRange_stubs.c": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902",
+      "src/system/system_generic.ml": "5ee699b65f9a577261bf0862998131f3b4e9de5fdd6b7eacf82295909acec00c",
+      "src/system/system_intf.ml": "2be51690fb1037b7f4940d7cf05c750af45ce33370322c8bfdfbb3b6a258faf9"
+    },
+    "status": "accepted"
+  },
+  "status": "ACCEPTED_SELECTED_SOURCE_RETAINED_EXECUTION_ARTIFACT_AND_DOCUMENT_SCOPE"
+}
