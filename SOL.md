@@ -2218,3 +2218,10 @@ refusal controls and static inspection pass. [Commands](tools/adobe-validator/RE
 This source-only build closed before the separately admitted receiving pilot.
 Actual capped-host/allocator qualification still needs a fresh Root slot; no
 reuse of the receiving or older SDK admissions. Full M4-V/M5/M6 stay open.
+
+Root independently verified and accepted the actual receiving pilot, its ten
+SDK calls/six mixed receives/bad-digest refusal and actual parent terminal exit0.
+[Receiver adoption](tests/qualification/sdk-receive-pilot-v1-root-adoption-20261014.json)
+records exact Root/independent-audit/return/terminal pins. Preview coordination
+hold is released; slot consumed, no replay/new SDK permission. Qualification
+stays generated-container functional/lifecycle with contained test C backend.
