@@ -1,0 +1,7 @@
+# Invoke from the repository root. Values are read from the environment by
+# Python, never expanded into recipe shell source.
+.PHONY: help stock-make ox-make stock-dune ox-dune cache-storage cache-ownership cache-cli host-interface host-executor
+help:
+	python3 tests/manual.py help
+stock-make ox-make stock-dune ox-dune cache-storage cache-ownership cache-cli host-interface host-executor:
+	python3 tests/manual.py $@

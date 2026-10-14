@@ -2383,3 +2383,24 @@ release and does not reuse either consumed SDK admission or the four-credit buil
 allocation. Root retains native scheduling/preview ownership and may prioritize
 its forensic work. Actual OS-thread/pixel/cancellation/scaling/RSS and full goal
 qualification remain separate. No SDK/Photo/Lightroom invocation in preparation.
+
+
+### User-run Make entry points and current status — 2026-10-14
+
+Added a separate `tests/Makefile`/`tests/manual.py` for the requested manual test
+workflow, leaving upstream Make targets unchanged. `help` lists stock/Ox Make/Dune
+build+selftest, compiler-matched cache storage/ownership/CLI and pure/fake-host
+checks. Prefixes/paths/jobs are read as environment values and passed as argv;
+DRY_RUN=1 executes no target and creates no receipt directory. Build/cache receipts
+use fresh private output; existing runner process ownership is retained via exec.
+No target automatically starts SDK, Photo/Lightroom, fuzzing or sanitizer work.
+
+Actual Make dry-run smoke checks bind the stock compiler and real cache build
+receipt, and `make -f tests/Makefile host-interface` executes the existing pure
+protocol checks successfully. [Evidence](tests/qualification/manual-entrypoints-check-20261014.json).
+[Current status/user commands](doc/implementation-status.md) now records actual
+received-SDK, quota-cache and linked-but-unexecuted host checkpoints, corrects the
+stale planned-merge/unlinked-host descriptions, and marks old worker rollout text
+historical. Preview runtime ownership remains with Photo Root per the scope
+agreement. Pending host-matrix request and all of its source pins are unchanged;
+no admission exists and no SDK invocation occurred. Full goal remains open.
