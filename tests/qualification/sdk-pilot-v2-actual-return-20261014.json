@@ -1,0 +1,714 @@
+{
+  "utc": "2026-10-14T18:41:58.748856+00:00",
+  "state": "ACTUAL_SDK_PILOT_PASS_AND_CLOSED",
+  "admission_sha256": "5d487d084384fd288fbe4fb3a30b695bb06bee752fe776dd88c9a33da3918e58",
+  "request_sha256": "70e007934df278a65a6ce701a8195237d4fe674a758fd07db87d1b8d4277cdee",
+  "tool_session": 4905,
+  "tool_session_terminal_exit": 0,
+  "wrapper": {
+    "pid": 53126,
+    "returncode": 0,
+    "reaped": true,
+    "cancel_reason": null,
+    "hard_kill_required": false,
+    "observation_error": null,
+    "group_cleanup_result": "only_owned_leader_zombie_darwin",
+    "group_cleanup_before_leader_reap": true
+  },
+  "aggregate": {
+    "pid": 53366,
+    "seconds": 300,
+    "closed": true,
+    "scope": "finite contained pilot only",
+    "timed_out": false,
+    "reaped": true,
+    "returncode": 0,
+    "group_members_before_leader_reap": [
+      {
+        "pid": 53366,
+        "stat": "Z"
+      }
+    ],
+    "other_members_absent": true,
+    "wall_seconds": 37.65831034901203,
+    "child_user_seconds": 35.860307,
+    "child_system_seconds": 1.456916,
+    "within_wall_limit": true
+  },
+  "actual_SDK_calls": 13,
+  "call_count_proof": "10 direct SDK commands in native lifecycle plus3 actual core batches each returning1 independently bound SDK receipt",
+  "breakdown": {
+    "seed_validation": 1,
+    "writers": 3,
+    "positive_validation": 3,
+    "negative_validation": 3,
+    "pilot_validation": 3
+  },
+  "generated_inputs": 7,
+  "active_native_executables_after_closure": [],
+  "aggregate_unresolved_marker": false,
+  "native_unresolved_marker": false,
+  "pins": {
+    "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.json": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.json",
+      "bytes": 45104,
+      "sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1"
+    },
+    "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/AGGREGATE-CLOSED.json": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/AGGREGATE-CLOSED.json",
+      "bytes": 420,
+      "sha256": "183a883c58a87860a8c668f5d7e8250e69ad33aac79483aed96a7f7f53d52156"
+    },
+    "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/WRAPPER-CLOSED.json": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/WRAPPER-CLOSED.json",
+      "bytes": 246,
+      "sha256": "6db9549dc60e17efa7ee130004c2909bbc2b0688386c267861a2be778c1d0bf5"
+    },
+    "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/START.json": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/START.json",
+      "bytes": 1311,
+      "sha256": "08cef7ea79003b994fcdccb7a03968cd4acc417de815bf99f3240600de34d5ba"
+    },
+    "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/wrapper.log": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/wrapper.log",
+      "bytes": 654,
+      "sha256": "a46cdd66104ee630719c04a046b7d7716a10834a95e8ed7d762e23c1c77993ec"
+    },
+    "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/dispatch.py": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/dispatch.py",
+      "bytes": 2661,
+      "sha256": "7fc8b6af1fac0948a69e82c07b5607d15938622086552ee025ddceb9518ce808"
+    }
+  },
+  "result": {
+    "schema": "unison-adobe-validation-core-v1",
+    "complete": true,
+    "mode": "pilot",
+    "created_utc": "2026-10-14T18:39:14.535051+00:00",
+    "runner_sha256": "517af3e2334ea93038e13a0d3f548ed3130b38eec248130b31d5137e2f18b90a",
+    "fixture_generator_sha256": "68fee929357d8f8dd61388383d24f4fd9da3f41188351c46df8b8bc853a95a3b",
+    "phase_supervisor_sha256": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497",
+    "deadline_sha256": "899a5cd43d11d207657ce4c7cb0cf8e783a918d92fcd0fa325c847080e9d61fd",
+    "host": {
+      "system": "Darwin",
+      "release": "24.6.0",
+      "machine": "x86_64",
+      "logical_cpus": 36,
+      "hw.physicalcpu": 18,
+      "hw.memsize": 137438953472
+    },
+    "scope": "Cached synthetic CFA files; production shared validation/hash/helper/resource core, not full synchronization or Lightroom.",
+    "background_activity": "Ordinary system activity uncontrolled; no cache flush or CPU affinity.",
+    "compiler": {
+      "version": "5.2.0+ox",
+      "executable_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "flags": [
+        "-I",
+        "+unix"
+      ]
+    },
+    "driver": {
+      "sdk": "Adobe DNG SDK 1.7.1 build 2724",
+      "executable_sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+      "build_id": "unison-sdk171-2724-v1-single",
+      "source_sha256": "15d505f4fedb931e14f0e5654fd5c3858cec7e03324dce66a79acd37fefdc957",
+      "threads": 1,
+      "qualification": "passed synthetic CFA uncompressed/lossless JPEG/JXL and XMP controls; see qualification.json"
+    },
+    "source_sha256": {
+      "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+      "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+      "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+      "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+      "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+      "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+      "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+      "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+      "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+      "src/helperSupervisor_stubs.c": "d8d947f632e846afebae7aa3f30b0133be771e57564421684c5fd9552b107fb6",
+      "src/helperSupervisor.mli": "d92a68a533c1938dda676acfe54213ff88241e8e84443d25dc8b4f46e1e9a1d5",
+      "src/helperSupervisor.ml": "d4472ef855ad1ebda749cf934537ec5300dc7231488c587f6082416a601d0b98",
+      "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+      "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+      "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+      "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+      "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+      "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+      "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+      "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+      "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+      "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+      "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+      "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+      "src/formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+      "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+      "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+      "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+      "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+      "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+      "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+      "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+      "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+      "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+      "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+      "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+      "src/semanticWorkers.mli": "b458429384c808f7877e3b32153ef4c9a4e1435aa3323e6c35de53a5a71ce285",
+      "src/semanticWorkers.ml": "cb7bb2fd87cf9d59ae5e2f55fd135f20e3cc42974f60c9515cbe916a9026ba18",
+      "src/dngValidation.mli": "cd4d0660783e3d446817381b539bc3110c8c4fa5ca49ab8cd9351e36549efa30",
+      "src/dngValidation.ml": "8d6f9b21e0e77178ff711fae94de4aab16d4867524ce7bc85be979b80da99715",
+      "bench/adobe/clock_stubs.c": "e9bb0cf393496b54cd52f8f9d6ff571579f69d8c073dfa52c648f8441d62a8f2",
+      "bench/adobe/validation_bench.ml": "67e82eedf55c7da17243bda34874e3691a9088497802706568adca2092683678"
+    },
+    "clock": {
+      "wall": "CLOCK_MONOTONIC",
+      "parent_cpu": "CLOCK_PROCESS_CPUTIME_ID",
+      "child_cpu": "getrusage RUSAGE_CHILDREN after reap"
+    },
+    "parameters": {
+      "workers": [
+        1
+      ],
+      "jobs": 72,
+      "repetitions": 5,
+      "control_repetitions": 1,
+      "warmups": 1,
+      "one_worker_warmup_jobs": 1,
+      "peak_sampling_seconds": 0.001,
+      "cpu_credit_budget": 1
+    },
+    "samples": [
+      {
+        "wall_seconds": 0.80229,
+        "parent_cpu_seconds": 0.421667,
+        "child_cpu_seconds": 0.381937,
+        "correct_receipts": 1,
+        "pool_domains": 1,
+        "peak_admitted_children": 1,
+        "peak_cpu_permits": 1,
+        "peak_hash_workers": 1,
+        "peak_transactions": 1,
+        "final_cpu_permits": 0,
+        "final_children": 0,
+        "receipts": [
+          {
+            "job": 0,
+            "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.094 sec\n",
+            "warnings": 4,
+            "supervisor_elapsed_seconds": 0.391647
+          }
+        ],
+        "codec": "uncompressed",
+        "cpu_permits": 1,
+        "jobs": 1,
+        "phase": "pilot",
+        "repetition": 1,
+        "total_cpu_seconds": 0.803604,
+        "logical_cpu_equivalents": 1.001637811763826,
+        "validations_per_second": 1.2464320881476774,
+        "raw_megapixels_per_second": 29.914370115544255
+      },
+      {
+        "wall_seconds": 0.934599,
+        "parent_cpu_seconds": 0.352103,
+        "child_cpu_seconds": 0.587056,
+        "correct_receipts": 1,
+        "pool_domains": 1,
+        "peak_admitted_children": 1,
+        "peak_cpu_permits": 1,
+        "peak_hash_workers": 1,
+        "peak_transactions": 1,
+        "final_cpu_permits": 0,
+        "final_children": 0,
+        "receipts": [
+          {
+            "job": 0,
+            "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\n",
+            "warnings": 4,
+            "supervisor_elapsed_seconds": 0.594947
+          }
+        ],
+        "codec": "jpeg",
+        "cpu_permits": 1,
+        "jobs": 1,
+        "phase": "pilot",
+        "repetition": 1,
+        "total_cpu_seconds": 0.9391590000000001,
+        "logical_cpu_equivalents": 1.0048790978804816,
+        "validations_per_second": 1.0699776053687198,
+        "raw_megapixels_per_second": 25.67946252884927
+      },
+      {
+        "wall_seconds": 2.375048,
+        "parent_cpu_seconds": 0.365518,
+        "child_cpu_seconds": 2.028851,
+        "correct_receipts": 1,
+        "pool_domains": 1,
+        "peak_admitted_children": 1,
+        "peak_cpu_permits": 1,
+        "peak_hash_workers": 1,
+        "peak_transactions": 1,
+        "final_cpu_permits": 0,
+        "final_children": 0,
+        "receipts": [
+          {
+            "job": 0,
+            "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.060 sec\n",
+            "warnings": 4,
+            "supervisor_elapsed_seconds": 2.038247
+          }
+        ],
+        "codec": "jxl",
+        "cpu_permits": 1,
+        "jobs": 1,
+        "phase": "pilot",
+        "repetition": 1,
+        "total_cpu_seconds": 2.394369,
+        "logical_cpu_equivalents": 1.008134993482237,
+        "validations_per_second": 0.42104412205563846,
+        "raw_megapixels_per_second": 10.105058929335323
+      }
+    ],
+    "summary": [],
+    "build": {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8",
+      "retained": true,
+      "production_snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d",
+      "linked_object_sha256": {
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt.cmi": "d3ee9338dc845c60306928f4655a09ddcad20d541d3548302013cd2707bb8583",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt.cmx": "88cfa56813c4ec85103a796f91811d55cf0e7f3aa60b4c735b929174cd78dba0",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt.o": "63527178fc25a1073f517208dbc6576ba83806a4af05825ef0f52d2ffe20dfa7",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/pqueue.cmi": "035aed304b796cffcf04f43dc0655c1514b2b65e4ec99c5689ffa0b648eceb31",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/pqueue.cmx": "130554731db8151df62ad1c66370fb919def5ee6b56780ca6ff98840fb90255e",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/pqueue.o": "d07f76d05345038f8b5957e045e9d712594c35ae1b6f7a5693dc3bb045158ab9",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/generic/lwt_unix_impl.cmi": "2d6527c5638809713ddf77285ca65fd57ea2b7c7d5d6d8e1eab8321e7da1a4dd",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/generic/lwt_unix_impl.cmx": "affc8873f1e086ba2d7ecd45553c3259b36bc6fa78c2ddfe5ecd9790aa7885f3",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/generic/lwt_unix_impl.o": "78b0a5906a8220699d672e943352c3fbc17261a3c4e12c47cec7435a322ec59a",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt_unix.cmi": "1727b54a32d90899d44d574db20fff8f4f789b3bf1f5728591dea81c83c6809e",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt_unix.cmx": "fe3a7ae8f6e43df43cc0aed7e9e0c27bb08ab375af947e970e541a93864ce984",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/lwt/lwt_unix.o": "4bf77f7eee92af7aec6140d1c6fbc7de3c46be5b666d59e313c5baa8dfb7682e",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/borrowedWork.cmi": "032046d0a19dca687a96b6250c8b7da699691282f1c7eaca3a84c842649bcc76",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/borrowedWork.cmx": "39ed806173c58a6707c9a12f89a6a192d44cb094f61232d1bd06a9831747a542",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/borrowedWork.o": "10c6fd8bd3275ee091547703e289029b1d6e4a85bcbfc43aeb64583ee912649d",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/helperSupervisor.cmi": "920aa15cd17c2d67a15a1ed00852a96b48a446369c2fe6f38efab7f05ac1023c",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/helperSupervisor.cmx": "b578c81e16934c05012ede9015de4815cc8ca7962b2854849108d67ffde954d8",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/helperSupervisor.o": "2a8a16a0c0d1c4f979a29aea670f0a6647f20c31e0bf0087b8b01c091bb4d7d0",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticAdmission.cmi": "2cc3985364343770ba0c39b8d6b25334ac0f46c52c4453a16ef57d8bcea36a40",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticAdmission.cmx": "902329a3f92150f8f18c6a3fee7b1fdcfef1317bc269411bab7a95aec718a930",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticAdmission.o": "8e314383588a98bff29b63c6095e79d0a132db18fc18e5b11ec646a5acd4e682",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/ioAdmission.cmi": "e5fd57db2e4ba343f2e11aca0073a84b64921d633a4383e8219a375123cc6e1f",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/ioAdmission.cmx": "ac08210c4c6f3df76326326a2e241b7951b097820ac2696d3a99d7fb0c6b2d77",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/ioAdmission.o": "444e7f39c28d4092fb33eeb170cb25963a253cfe9cb45e505eb840534c867556",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticMailbox.cmi": "bec12d604a5844cb78fe97849cc41737c769679465b3c5b64d45241d77bed6ab",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticMailbox.cmx": "904e67679b6ccd7b50511a6394f8992cc1b15bedbda085fd5683c2408b96bd7a",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticMailbox.o": "52710ff39aa819c4412a6e89ecb3b184358b00a2b31826fe1e7cac592ff8c2a5",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticHash_stubs.o": "96c634e3454952f15e606de3a695e7a627b8a886e0cc4c4133ac59e136514e8e",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticHash.cmi": "7573e261c4fa49c7fe3cc6c368afba88433640838847398b25a96b1866416f1a",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticHash.cmx": "0128e04e4954b8ab153fae5074466489a8774dc140100eff944dcd6f442910b0",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticHash.o": "0c7d801aff4587e6ac03398dfd5576ad6b6c9895ce64705388db49793ac129f5",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticFile_stubs.o": "71035e5e285710431131ebc980dd156b844a356a67abd4107f1e7394159b3220",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticFile.cmi": "a3bba4d56d40970e8e58e32966560da53d089c19295ca0cfd03b72d8d63930e5",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticFile.cmx": "7b2cb5c73894f49b1a54a4832886ed2e958b936dad8d3d868372d9a713969349",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticFile.o": "8207ea16f5e8a66744313b3dc995ed03c40fa85b8af73d46fcfaadd4125dc4e3",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatRecognition.cmi": "a80fe6d9b0f7e0a03304a00e41ad982a7e8906f9038679f404e2f415955670be",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatRecognition.cmx": "414caa664f6919ad288de43a708290b36d5caecc893b1e0dea9a56cac46400ad",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatRecognition.o": "94295528871df0acf2b83291962adbacd9aef15cbb026dd07fa860c9a64b07a5",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatExtension.cmi": "2ec703e34fdb19a633d12b50bbe465cf190cf89cc284b54476462201b41d05cb",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatExtension.cmx": "73d19832febcd6848f6d1bdd0b73225a1f3a16a8705bcbb8b14bdfa024ef1dae",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/formatExtension.o": "01f7625a6c7d17142db3ab37966431621b4315891ae933995fec14211717bc4d",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpObservation.cmi": "f59a2c0be258735eed5ba8bdc1ba50ba3e897d4db6c3241fb4b37fa6a64b8a92",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpObservation.cmx": "8ac0dbc2db928ed0bc58941cea24610b325326ea0ecf99e8c4b2a4732666a8a1",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpObservation.o": "1dad1dd68760cb4fe0f077ad82030660f04ad003e99d3ad3c3c54498e247489c",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpMerge.cmi": "12d3b1aff057acbad00e9dfec996ec2ff975babf4e8115bf03a425b5944ae1e2",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpMerge.cmx": "0a9dfde727cf7c6030a877846a7b80c718e37ac6c8dd02b6dea048df38125eab",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/xmpMerge.o": "97fb8f446fa7ca72454244218eac843fddfb12ad0ab6daf81b3cfbab557704b2",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngSemantic.cmi": "e318e943ef2a52daf7261df1283ee27e8bfd0d1cb4c60b7bd6f5320928109fb9",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngSemantic.cmx": "10b7a4f67000b4f736ae8dcab10709e7f5aa45c1d29326bbcfbbfa060ce3968e",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngSemantic.o": "8d5bf67766993359bb92dafb3ad033b8164da4137b648173eb26ec854e67a3e5",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticDelta.cmi": "e58f8133a247140f31cb9483f9e478e135fd13d97bd8b80271180ac23d4a8196",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticDelta.cmx": "c95aa9e07554f5372747c8cbde985cd15a2a2a8710b6f467916b6e8d2e1ef841",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticDelta.o": "95c93eaa7074fff97e592bd66fd6823165459d23fb249b463f99d05aab072794",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticWorkers.cmi": "f0ca16aa5cee61492e7ef36c0e0bce5b0aafe66300f755c87cd6077b62e4fbae",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticWorkers.cmx": "3609c7056080ca153f13edcecbfadb76512a9a17a8f6d46cd60a76fe0c30fefb",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/semanticWorkers.o": "b596544a3b08bad198dbe184a1ab175d1bbb07c87337617fa1b6823f2af92247",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngValidation.cmi": "8a68e56ed5eede81c981ffb97faaa0d564edbda18cc1ff0083d0f269912ee923",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngValidation.cmx": "13298641f9c0087e94ce07c52305754df78f8e9816767fe472891d8684e5ead1",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/src/dngValidation.o": "80eac6a11f4180027fded22bb3284383f0690b21c6ea56a85688daa94bdb7eaf"
+      },
+      "binary_sha256": "0ec6471d837b2921f66ce8954b848c7da6f5f614099abfb64c7f57fe765ac20b",
+      "production_receipt_sha256": "901cac085fe7dc78c42bdd6f675a5f721fbda1a46f487a59bec7d96b295b6446",
+      "build_log_sha256": "7d100cc71505b6792cac485d83c9bb000fb5272ba4e30d404267e61bf1e28298",
+      "complete": true,
+      "native_calls_during_build": false,
+      "helper_isolation": "aggregate-pilot-group"
+    },
+    "coordination": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.release",
+      "deadline_seconds": 600.0,
+      "passed": true,
+      "scope": "caller-owned CPU coordination; not Lightroom/native-owner admission"
+    },
+    "fixtures": {
+      "specification": {
+        "width": 6000,
+        "height": 4000,
+        "raw_bytes": 48000000,
+        "raw_md5": "84d9ed8f7ea1fb31ad044efbf7417fe9",
+        "seed": 1831565813,
+        "pattern": "16-bit RGGB CFA; horizontal/vertical gradients, color biases, fixed LCG uniform noise"
+      },
+      "source_sha256": "57855c14cb744079086b1d524b287edcc24a6f36c87171c1d29c44530b0f9ae1",
+      "source_control": {
+        "receipt": {
+          "candidate-sha256": "57855c14cb744079086b1d524b287edcc24a6f36c87171c1d29c44530b0f9ae1",
+          "candidate-size": "48000630",
+          "driver-build": "unison-sdk171-2724-v1-single",
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        },
+        "exit": 0,
+        "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindRawImageDigest time: 0.075 sec\n",
+        "qualification_wall_seconds": 0.3862714659771882
+      },
+      "writer_sha256": "444bac810514383d28eeeefefd810b6026af5bf45c12200bf8041201f5fb9d1e",
+      "fixtures": [
+        {
+          "codec": "uncompressed",
+          "filename": "uncompressed.dng",
+          "size_bytes": 48005534,
+          "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+          "compression": 1,
+          "positive": {
+            "receipt": {
+              "candidate-sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+              "candidate-size": "48005534",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\n",
+            "qualification_wall_seconds": 0.38040104100946337
+          },
+          "negative": {
+            "receipt": {
+              "candidate-sha256": "cfdc8f1a73f7169aa8733a5d88f6dd2bdaff9c2e775d52dfb94c916f48aff03f",
+              "candidate-size": "48005534",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "mismatch",
+              "errors": "1",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\n*** Error: NewRawImageDigest does not match raw image ***\n",
+            "qualification_wall_seconds": 0.38134568399982527
+          }
+        },
+        {
+          "codec": "jpeg",
+          "filename": "jpeg.dng",
+          "size_bytes": 39016722,
+          "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+          "compression": 7,
+          "positive": {
+            "receipt": {
+              "candidate-sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+              "candidate-size": "39016722",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.091 sec\n",
+            "qualification_wall_seconds": 0.5962597869802266
+          },
+          "negative": {
+            "receipt": {
+              "candidate-sha256": "a44c7f30f287bf0b1747e792cf9d838c6cd0a400e77fe87a4b146351d4ae94cf",
+              "candidate-size": "39016722",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "mismatch",
+              "errors": "1",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.094 sec\n*** Error: NewRawImageDigest does not match raw image ***\n",
+            "qualification_wall_seconds": 0.6077179630228784
+          }
+        },
+        {
+          "codec": "jxl",
+          "filename": "jxl.dng",
+          "size_bytes": 38237658,
+          "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+          "compression": 52546,
+          "positive": {
+            "receipt": {
+              "candidate-sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+              "candidate-size": "38237658",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.059 sec\n",
+            "qualification_wall_seconds": 2.0076184990175534
+          },
+          "negative": {
+            "receipt": {
+              "candidate-sha256": "68cf950e881369744dc1ce5c6f921bb9cd693e773729d5600dc7f1f41ed9337a",
+              "candidate-size": "38237658",
+              "driver-build": "unison-sdk171-2724-v1-single",
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "mismatch",
+              "errors": "1",
+              "warnings": "4"
+            },
+            "exit": 0,
+            "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.060 sec\n*** Error: NewRawImageDigest does not match Lossy Compressed image ***\n",
+            "qualification_wall_seconds": 2.0181130609998945
+          }
+        }
+      ]
+    },
+    "measurement_started_utc": "2026-10-14T18:40:24.017039+00:00",
+    "native_lifecycle": {
+      "closed": true,
+      "calls": [
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53412,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 57855c14cb744079086b1d524b287edcc24a6f36c87171c1d29c44530b0f9ae1\ncandidate-size 48000630\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindRawImageDigest time: 0.075 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53418,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindRawImageDigest time: 0.074 sec\nFindNewRawImageDigest time: 0.092 sec\nWrite raw image time: 0.028 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53419,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53420,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 cfdc8f1a73f7169aa8733a5d88f6dd2bdaff9c2e775d52dfb94c916f48aff03f\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest mismatch\nerrors 1\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\n*** Error: NewRawImageDigest does not match raw image ***\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53421,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindRawImageDigest time: 0.075 sec\nFindNewRawImageDigest time: 0.094 sec\nWrite raw image time: 0.349 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53422,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.091 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53430,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 a44c7f30f287bf0b1747e792cf9d838c6cd0a400e77fe87a4b146351d4ae94cf\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest mismatch\nerrors 1\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.094 sec\n*** Error: NewRawImageDigest does not match raw image ***\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53431,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindRawImageDigest time: 0.074 sec\nFindNewRawImageDigest time: 0.091 sec\nInterleave2D: 0.052 sec\nJXL encode 6000 by 4000 pixels, distance = 0.00, effort = 7, size = 38231620: 12.177 sec\nFindRawLossyCompressedImageDigest: 0.058 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53516,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.059 sec\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53541,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 68cf950e881369744dc1ce5c6f921bb9cd693e773729d5600dc7f1f41ed9337a\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest mismatch\nerrors 1\nwarnings 4\nEND\n",
+          "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.060 sec\n*** Error: NewRawImageDigest does not match Lossy Compressed image ***\n"
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53560,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "{\"wall_seconds\":0.802290000,\"parent_cpu_seconds\":0.421667000,\"child_cpu_seconds\":0.381937000,\"correct_receipts\":1,\"pool_domains\":1,\"peak_admitted_children\":1,\"peak_cpu_permits\":1,\"peak_hash_workers\":1,\"peak_transactions\":1,\"final_cpu_permits\":0,\"final_children\":0,\"receipts\":[{\"job\":0,\"stdout\":\"UNISON-DNG-VALIDATION 1\\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\\ncandidate-size 48005534\\ndriver-build unison-sdk171-2724-v1-single\\nstructure valid\\ndecode success\\nraw-digest valid\\nerrors 0\\nwarnings 4\\nEND\\n\",\"stderr\":\"*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\\nFindNewRawImageDigest time: 0.094 sec\\n\",\"warnings\":4,\"supervisor_elapsed_seconds\":0.391647000}]}\n",
+          "stderr": ""
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53562,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "{\"wall_seconds\":0.934599000,\"parent_cpu_seconds\":0.352103000,\"child_cpu_seconds\":0.587056000,\"correct_receipts\":1,\"pool_domains\":1,\"peak_admitted_children\":1,\"peak_cpu_permits\":1,\"peak_hash_workers\":1,\"peak_transactions\":1,\"final_cpu_permits\":0,\"final_children\":0,\"receipts\":[{\"job\":0,\"stdout\":\"UNISON-DNG-VALIDATION 1\\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\\ncandidate-size 39016722\\ndriver-build unison-sdk171-2724-v1-single\\nstructure valid\\ndecode success\\nraw-digest valid\\nerrors 0\\nwarnings 4\\nEND\\n\",\"stderr\":\"*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\\nFindNewRawImageDigest time: 0.092 sec\\n\",\"warnings\":4,\"supervisor_elapsed_seconds\":0.594947000}]}\n",
+          "stderr": ""
+        },
+        {
+          "returncode": 0,
+          "timed_out": false,
+          "client_cleanup": {
+            "pid": 53564,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false
+          },
+          "capture_truncated": false,
+          "stdout": "{\"wall_seconds\":2.375048000,\"parent_cpu_seconds\":0.365518000,\"child_cpu_seconds\":2.028851000,\"correct_receipts\":1,\"pool_domains\":1,\"peak_admitted_children\":1,\"peak_cpu_permits\":1,\"peak_hash_workers\":1,\"peak_transactions\":1,\"final_cpu_permits\":0,\"final_children\":0,\"receipts\":[{\"job\":0,\"stdout\":\"UNISON-DNG-VALIDATION 1\\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\\ncandidate-size 38237658\\ndriver-build unison-sdk171-2724-v1-single\\nstructure valid\\ndecode success\\nraw-digest valid\\nerrors 0\\nwarnings 4\\nEND\\n\",\"stderr\":\"*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\\nInterleave2D: 0.060 sec\\n\",\"warnings\":4,\"supervisor_elapsed_seconds\":2.038247000}]}\n",
+          "stderr": ""
+        }
+      ],
+      "remaining_seconds": 262.4012798909971
+    },
+    "aggregate_lifecycle": {
+      "pid": 53366,
+      "seconds": 300,
+      "closed": true,
+      "scope": "finite contained pilot only",
+      "timed_out": false,
+      "reaped": true,
+      "returncode": 0,
+      "group_members_before_leader_reap": [
+        {
+          "pid": 53366,
+          "stat": "Z"
+        }
+      ],
+      "other_members_absent": true,
+      "wall_seconds": 37.65831034901203,
+      "child_user_seconds": 35.860307,
+      "child_system_seconds": 1.456916,
+      "within_wall_limit": true
+    }
+  },
+  "scope": "Actual existing public SDK v1 against original24MP CFA uncompressed/JPEG/JXL, current checked ML core and contained C pilot backend; functional/lifecycle only",
+  "not_proved": [
+    "full receive-path/corpus qualification",
+    "single-large-file SDK area-task parallelism",
+    "production C-backend timing",
+    "Lightroom/preview rendering, placement, cache or Main",
+    "full M4-V/M5/M6 completion"
+  ],
+  "Lightroom_calls": 0,
+  "Photo_payload_reads": 0,
+  "automatic_retries": 0
+}
