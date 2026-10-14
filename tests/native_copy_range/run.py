@@ -22,7 +22,7 @@ def main():
     parser.add_argument('--keep-work', action='store_true')
     parser.add_argument('--receipt', type=Path)
     parser.add_argument('--negative-control', action='store_true',
-                        help='remove only the private strict mutation guard and require byte-oracle failure')
+                        help='check private mutation and typed-context guard negative controls')
     parser.add_argument('--skip-native', action='store_true', help='run only portable synthetic result tests')
     args = parser.parse_args()
     compiler = shutil.which(args.ocamlopt)
@@ -71,7 +71,7 @@ def main():
         receipt['compiler'] = {'path': compiler, 'sha256': sha(Path(compiler)),
                                'version': run([compiler, '-version'], work, 'compiler-version').stdout.strip(),
                                'library': run([compiler, '-where'], work, 'compiler-library').stdout.strip()}
-        for mode in ('unit', 'negative') if args.negative_control else ('unit',):
+        for mode in ('unit', 'negative', 'context-negative') if args.negative_control else ('unit',):
             directory = work / mode
             directory.mkdir()
             for name in ('copyRange.ml', 'copyRange.mli'):
@@ -89,16 +89,31 @@ def main():
                     'source': str(directory / 'copyRange.ml'),
                     'source_sha256': sha(directory / 'copyRange.ml'),
                     'expected_failure': 'unauthorized or repeated suffix write'}
+            if mode == 'context-negative':
+                source = (directory / 'copyRange.ml').read_text()
+                first = source.index('          else if context.native_code < 0L then')
+                last = source.index('          else if context.mutation = No_effect',first)
+                source = source[:first]+source[last:]
+                (directory / 'copyRange.ml').write_text(source)
+                receipt['context_negative_control'] = {
+                    'only_production_edit': 'remove direct typed context guards in private CopyRange.ml',
+                    'source': str(directory / 'copyRange.ml'),
+                    'source_sha256': sha(directory / 'copyRange.ml'),
+                    'expected_failure': 'contradictory typed context authorized progress/fallback'}
             for name in ('copyRange.mli', 'copyRange.ml'):
                 run([compiler, '-I', '+unix', '-c', name], directory, 'compile-' + name)
             run([compiler, '-I', '+unix', 'unix.cmxa', 'copyRange.cmx', 'test.ml', '-o', 'typed-test'],
                 directory, 'link')
             result = run([str(directory / 'typed-test')], directory, 'test',
-                         allow_failure=(mode == 'negative'), timeout=30)
+                         allow_failure=(mode != 'unit'), timeout=30)
             if mode == 'negative':
                 if result.returncode == 0 or 'unauthorized or repeated suffix write' not in result.stderr:
                     raise RuntimeError('private mutation-guard negative control did not fail the independent byte oracle')
                 receipt['negative_control']['detected'] = True
+            elif mode == 'context-negative':
+                if result.returncode == 0 or 'contradictory typed context authorized progress/fallback' not in result.stderr:
+                    raise RuntimeError('private context negative failed to detect invalid progress')
+                receipt['context_negative_control']['detected'] = True
             else:
                 receipt['typed_named_groups'] = sum(line.startswith('PASS ') for line in result.stdout.splitlines())
         if args.skip_native or sys.platform != 'darwin':

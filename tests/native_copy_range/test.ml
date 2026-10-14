@@ -218,6 +218,24 @@ let () =
       check (!notified=0) "operational decline notified")
       [native_error Unix.EINVAL;native_error Unix.EIO;native_error Unix.ENOSYS;
        { (decline_context C.Filesystem_unsupported) with C.phase=C.Descriptors }]);
+  test "direct typed contexts cannot hide operational errors or account invalid prefixes" (fun () ->
+    let bad = [
+      C.Native_progress (2,context ~errno:(Some Unix.EIO) ());
+      C.Native_progress (2,context ~native_code:5L ());
+      C.Native_progress (2,context ~native_code:(-1L) ());
+      C.Native_failed (2,context ());
+      C.Native_failed (2,context ~errno:(Some Unix.EIO) ~native_code:(-1L) ());
+      C.Native_declined (2,C.Cross_device,
+        { (decline_context ~mutation:C.Known_prefix C.Cross_device) with C.native_code= -1L })] in
+    List.iter (fun invalid -> List.iter (fun prior ->
+      let calls=ref 0 and notices=ref [] in
+      let step ~source_offset:_ ~length:_ = incr calls;
+        if prior>0 && !calls=1 then success prior else invalid in
+      (match run ~notify:(fun n -> notices:=n::!notices) step with
+       | C.Failed (p,C.Invalid_native_result _) -> prefix p (Int64.of_int prior) 17L
+       | _ -> failwith "contradictory typed context authorized progress/fallback");
+      check (!calls=(if prior=0 then 1 else 2)) "invalid context retried";
+      check (!notices=(if prior=0 then [] else [prior])) "invalid context prefix notified") [0;3]) bad);
   test "raw count/effect contradictions fail in the strict loop" (fun () ->
     List.iter (fun raw ->
       let notified=ref 0 in

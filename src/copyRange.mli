@@ -82,6 +82,9 @@ val run_native :
     thrown Unix errors, malformed results and native failures are terminal even
     when their errno occurs in the legacy unsupported set. A reported prefix
     on a terminal native error remains counted; the candidate must be discarded.
+    Direct typed adapters obey the raw decoder's context invariants too:
+    negative native codes, successful results carrying errors, and failed
+    results without errno stop before accounting or notification of that call.
     Callback/cancellation exceptions propagate. [run] retains the old ABI's
     compatibility classification and is not used by the migrated production
     caller. *)

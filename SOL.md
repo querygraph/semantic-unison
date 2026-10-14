@@ -2139,3 +2139,20 @@ follow-up capture/load. An intentionally unguarded private negative actually
 leaks one descriptor and is detected. No real memory exhaustion, fuzzing or
 production fault hooks. Universal allocation/native close/crash behavior and
 complete M4-V/M5/M6 remain unqualified. Zero Adobe/SDK/Photo/Lightroom calls.
+
+## General range adapter context parity corrected
+
+The strict range loop now applies raw-decoder error invariants to direct typed
+adapters too. Negative native codes, success carrying errno/native error data,
+and failure lacking errno stop before accounting/notifying that call's prefix.
+Earlier valid prefixes remain exact; contradictory results never authorize
+suffix fallback or a successful receipt. This closes a typed-adapter bypass
+while retaining valid native and legacy behavior.
+
+[Qualification](tests/native_copy_range/typed-context-qualification.json): stock/Ox
+each pass17 typed groups,13 actual macOS C preflight/unavailable groups and14
+production receiver-range caller groups. Six bad typed contexts at zero/positive
+prior progress refuse; separate private context/mutation negatives are detected.
+Both Make/Dune builds+selftests pass. No native ZFS/ReFS/other-platform runtime,
+range-sharing/performance, full resource or full-goal claim; zero Adobe/Photo/SDK
+calls. M4-V/M5/M6 remain open.

@@ -174,6 +174,13 @@ let run_native ?(check_cancel = fun () -> ()) ~max_chunk ~source_offset ~length
             | Native_progress (n,c) | Native_declined (n,_,c) | Native_failed (n,c) -> n,c in
           if returned < 0 || returned > requested then
             Failed (progress,Invalid_progress {returned;requested})
+          else if context.native_code < 0L then
+            Failed (progress,Invalid_native_result "negative native range error code")
+          else if (match result with Native_progress _ ->
+            context.errno <> None || context.native_code <> 0L | _ -> false) then
+            Failed (progress,Invalid_native_result "successful native range result carries an error")
+          else if (match result with Native_failed _ -> context.errno = None | _ -> false) then
+            Failed (progress,Invalid_native_result "failed native range result lacks an error")
           else if context.mutation = No_effect && returned <> 0 then
             Failed (progress,Invalid_native_result "no-effect result reports copied bytes")
           else if (match result with Native_progress _ -> context.mutation = Indeterminate | _ -> false) then

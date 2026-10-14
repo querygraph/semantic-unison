@@ -14,6 +14,10 @@ cancellation boundaries. Independent bytes and per-byte write counts check
 exact suffix fallback. One indeterminate adapter writes an unreported extra
 byte; it must stop without suffix copying. The private negative control removes
 only the strict indeterminate-decline guard and must fail that byte oracle.
+A second private control removes the direct typed-context checks; it must fail
+when a typed success carries errno/native error data. Direct typed contexts
+must obey the raw decoder's error invariants, retaining only earlier valid
+prefixes and notifying no bytes for a contradictory result.
 
 On macOS the runner also compiles the actual native C implementation and the
 legacy C primitive. It derives both external declarations from the pinned
