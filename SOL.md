@@ -2605,3 +2605,36 @@ explicit raises are not physical OOM/EIO or asynchronous signal-delivery proof.
 Merged-output SDK review accepted but runtime remains DEFERRED/UNADMITTED;
 source/request/frozen candidate pins unchanged. No Adobe/Photo/Lightroom call or
 completed-slot replay. Full goal remains active.
+
+
+### Primary-reader telemetry WIP and compiler closure — 2026-10-14
+
+Uncommitted work adds opt-in SemanticFile logical-read accounting and immutable
+worker-completion reports to an owner-only observer, enabled in the CLI with
+-debug semantic-reads. Counters cover the primary input reader only; nested
+readers (including output verification), legacy/validator reads, partial/failed/
+cancelled readers, prefetch, syscalls and physical disk activity are excluded.
+Counts saturate with an explicit flag and never authorize publication.
+Default jobs allocate/update no read counters. Observer executes after reply
+settlement; a captured observer preserves a report when its reply callback
+changes future observation. Observer errors retain sibling/pool settlement.
+
+Initial reader/worker tests passed for stock/Ox, including48queued hashes in a
+four-domain pool with3CPUpermits, exact counts, owner identity, observer failure
+and reentrant disable. Stock final CLI SDE control passed exact bytes, old basis,
+no-op and6291684primary-reader logical bytes for its2MiBfixture. Final stock/Ox
+Make+selftests both pass. Latest added invalid-read/stability-failure checks and
+final Ox CLI telemetry remain UNRUN; no completed telemetry qualification or
+production speedup is claimed, and feature code remains uncommitted.
+
+Root requested compiler closure before its next exclusive18render. Actual
+stock35884/5f0696, Ox22482/bc233f, label-fix stock47112/3f2d2e and finalOx17796/
+6bca0b all terminal0/no sessions. [Sealed owner receipts](tests/qualification/read-stats-build-owner-closure-20261014.json),
+queue ACK01a13cd8-8abf-7a62-844f-956c62c9edf8. No compiler/probe/SDK successor
+will dispatch until Root releases that window. This is a coordination hold,
+not a live process wait on this session.
+
+Fresh merged SDK admissione29f00cd expired UNSTARTED per Root; never executed
+here, no SDK outputs, no replay. Separate future admission required. Photo
+standalone-render failure remains unqualified; no native/render success inferred.
+Goal remains active with the pending qualification work above.

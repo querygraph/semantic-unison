@@ -1,0 +1,76 @@
+{
+  "schema": "unison-read-stats-build-owner-closure/1",
+  "utc": "2026-10-14T23:56:26.607601+00:00",
+  "builds": [
+    {
+      "name": "stock",
+      "tool_handle": 35884,
+      "actual_terminal_chunk": "5f0696",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "build_receipt": {
+        "path": "/private/tmp/unison-read-stats-stock-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "2780919ef8ec7e9db79d4206f34695030aa9c0f9269dd42bad7f012f025152b7"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-wojmnaty/src/unison",
+        "bytes": 5635536,
+        "sha256": "10ae1379987f171a9effc705490abf92ba9e27aec97a9e1fe8b0e57adfd44e0e"
+      }
+    },
+    {
+      "name": "ox",
+      "tool_handle": 22482,
+      "actual_terminal_chunk": "bc233f",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "build_receipt": {
+        "path": "/private/tmp/unison-read-stats-ox-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "bede46c240d5697d232afd534f6cbcae039effec3d7c010548eb540e3e0d22f7"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-04dej8eg/src/unison",
+        "bytes": 7563712,
+        "sha256": "2b2e9a4322d849f1af9dcbf61dd6901f03ffca007dce1b5a091c5ecdc9ca83a1"
+      }
+    },
+    {
+      "name": "stock-final",
+      "tool_handle": 47112,
+      "actual_terminal_chunk": "3f2d2e",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "build_receipt": {
+        "path": "/private/tmp/unison-read-stats-stock-final-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "94075ed124638e16960697e8856b63489d96c9160c95dfd1c8fff57794108628"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/unison",
+        "bytes": 5635536,
+        "sha256": "45be7995f564632853f4f6a97a83ddf40c327b3904b9ea05484e40c26144a72f"
+      }
+    },
+    {
+      "name": "ox-final",
+      "tool_handle": 17796,
+      "actual_terminal_chunk": "6bca0b",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "build_receipt": {
+        "path": "/private/tmp/unison-read-stats-ox-final-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "f00d9041b63546037166e62b4c8369bc473d2c19af264587f8f0994d215aa179"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/unison",
+        "bytes": 7563712,
+        "sha256": "c368af31389f5f4334bd912fe4ecd9401c974de941953ae74a01b16db56ab8ad"
+      }
+    }
+  ],
+  "scope": "Actual tool terminal receipts; no process-absence inference. No compiler or SDK successor will be dispatched during Root exclusive render hold.",
+  "sdk_admission": "e29f00cd expired unstarted; never dispatched"
+}
