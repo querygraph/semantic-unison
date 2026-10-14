@@ -7,6 +7,8 @@ external prepare_raw : string -> string -> string -> string -> bool -> t
 external auxiliary_absent : t -> bool = "unison_final_publication_auxiliary_absent"
 external recheck_resolution_raw : t -> string -> string -> unit
   = "unison_final_publication_resolution"
+external clear_obsolete_raw : t -> string -> string -> unit
+  = "unison_final_publication_clear_obsolete"
 external attach : t -> unit = "unison_final_publication_attach"
 external adopt_mutable_raw : t -> Unix.file_descr -> unit
   = "unison_final_publication_adopt_mutable"
@@ -59,6 +61,11 @@ let recheck_resolution t ~working_dir ~target =
   if not (valid_absolute working_dir) || not (valid_relative target) then
     invalid_arg "FinalPublication.recheck_resolution: invalid path";
   recheck_resolution_raw t working_dir target
+
+let clear_obsolete t ~working_dir ~path =
+  if not (valid_absolute working_dir) || not (valid_relative path) then
+    invalid_arg "FinalPublication.clear_obsolete: invalid path";
+  clear_obsolete_raw t working_dir path
 
 let close_noerr t = try abort_and_close t with _ -> ()
 

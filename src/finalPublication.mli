@@ -35,6 +35,24 @@ val recheck_resolution : t -> working_dir:string -> target:string -> unit
     basename. Directory size, link count and timestamps are allowed to change
     as siblings are created. No target-file observation is required yet. *)
 
+val clear_obsolete : t -> working_dir:string -> path:string -> unit
+(** From the prepared state only, remove an obsolete singly linked regular staging leaf
+    through the already held candidate parent. The supplied working directory
+    and leaf parent must resolve to those admitted directories. The leaf may
+    be the normal candidate or a core-generated scratch sibling, never the
+    live target. Absence is a no-op. Capture a full no-follow stat witness and
+    recheck the stable stat/name and directory bindings before unlink. No
+    payload descriptor is opened, so mode-000 leaves can be removed without
+    read permission or chmod. This snapshot does not pin the leaf inode.
+    Refuse directories, symlinks, other kinds and enabled AppleDouble entries;
+    do not recurse, chmod, delete sidecars or fall back to pathname removal.
+    Close all transient descriptors before exception delivery, preserving the
+    first operational error. Close errors after unlink remain errors.
+    This does not adopt the old leaf or change producer state. The caller owns
+    admission and authorizes the obsolete scratch name. Lookup/unlink fencing
+    is cooperative, not an atomic compare-and-unlink against hostile writers.
+    No mount-incarnation, durability or cleanup of a legacy family is proved. *)
+
 val attach : t -> unit
 (** Open the candidate through its held parent without following its final
     component. Admit only a regular, singly linked file after fresh binding and

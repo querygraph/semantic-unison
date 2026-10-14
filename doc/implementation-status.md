@@ -7,6 +7,21 @@ Lightroom qualification and Ten/Quasar publishing. Preview work does not block
 independent core implementation here; historical Photo notices below do not
 release a native window.
 
+Guarded obsolete regular staging cleanup now uses prepared native parent
+bindings and full no-follow stat observations, including physical live-target
+alias checks. It does not open/read/chmod the old payload. Unexpected kinds,
+links and auxiliary families are preserved and rejected. The
+[contract](obsolete-staging-cleanup.md) and [qualification](../tests/obsolete_cleanup/qualification.json)
+record root-owned source review and compiler-matched native/caller controls.
+Each compiler passes 22 native cases / 83 assertions and a pathname negative,
+two actual Copy positives plus a wrong-parent negative, and the complete
+79-case Files/CLI matrix including old peers. Make/Dune builds and selftests
+pass on the final source; the live-alias guard is a recorded incremental build
+follow-on. The earlier permission-open prototype and earlier snapshots remain
+distinct evidence.
+Legacy/unbound, directory and auxiliary-family cleanup remain open; this does
+not supply atomic namespace compare-and-swap, inode pinning or durability.
+
 The warning-delivery checkpoint routes permitted DNG validation findings
 through the UI warning channel after an owner-loop yield, with cancellation
 checked before and after delivery. The candidate workspace remains retained
@@ -165,8 +180,9 @@ No Adobe, Photo or preview operation occurred.
 The [scratch implementation record](native-scratch-next.md) keeps explicit
 limits: clone-to-first-open admission cannot prove object birth, check/unlink
 uses cooperative namespace assumptions, and some failures preserve artifacts.
-Those artifacts are not durable quarantine; existing stale-temp pathname
-cleanup can later act on their names. Initial old-temp cleanup, mount lifecycle,
+Those artifacts are not durable quarantine. Prepared regular-file producers
+now use held-parent obsolete-leaf cleanup; legacy/unbound stale-temp pathname
+cleanup remains. Directory/auxiliary-family cleanup, mount lifecycle,
 complete-lifetime resource admission and crash recovery remain open.
 
 The earlier retained-producer checkpoint follows

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "review_type": "root_owned_source_and_evidence_audit",
+  "independent_agent_review": false,
+  "decision": "qualified_for_cooperative_guarded_regular_staging_leaves_on_tested_macOS",
+  "source_invariants": [
+    "Prepared state required; owned/resumed/frozen candidates cannot be cleared",
+    "Admitted logical/working/parent bindings are checked before lookup and before effect",
+    "Supplied path must resolve to held candidate parent; live target spelling and physical inode aliases are refused",
+    "Only singly linked regular leaves; unexpected kinds, links and enabled sidecars are preserved without fallback",
+    "Full stat snapshots exclude atime; no payload open/read/chmod; mode000 positive tested",
+    "Transient directory ownership clears before close and before runtime reacquisition; operational errors remain errors including post-unlink close failure",
+    "Copy explicitly forwards producer to normal and receiver-clone scratch cleanup; unbound/handed-off paths stay legacy"
+  ],
+  "limitations": [
+    "Stat witness does not pin leaf inode or defeat hostile inode ABA",
+    "Cooperative lookup/unlink is not atomic namespace CAS",
+    "Legacy/directory/auxiliary-family cleanup, first admission, mount incarnation, other-platform runtime, resource ceilings and crash durability remain open",
+    "No new independent-agent review, Adobe/Photo/native UI or performance qualification"
+  ]
+}

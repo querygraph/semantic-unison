@@ -310,6 +310,12 @@ module Fs = struct
       ProducerCallerFault.log ["source-clone-declined"];
       Declined_stage_handles Cross_device
     end else Fs.clone_stage_handles source stage
+  let clone_stage_handles_sized ~expected_length source stage=
+    if ProducerCallerFault.env "UNISON_FINAL_TEST_SEMANTIC"="local" &&
+       Fspath.toString source=ProducerCallerFault.env "UNISON_FINAL_TEST_INCOMING" then begin
+      ProducerCallerFault.log ["source-clone-declined"];
+      Declined_stage_handles Cross_device
+    end else Fs.clone_stage_handles_sized ~expected_length source stage
 end
 module FinalPublication = struct
   include FinalPublication
@@ -349,7 +355,7 @@ end
 
 
 def instrument_copy(source):
-    declaration='let openProducerOutput producer fspath path kind len =\n'
+    declaration='let openProducerOutput ?clone_owned producer fspath path kind len =\n'
     source=replace_once(source,declaration,declaration+
         '  ProducerCallerFault.log ["producer-writer";Fspath.toString fspath;Path.toString path;'+
         '(match kind with `DATA->"create"|`RESS->"resource"|`DATA_APPEND n->"append:" ^ Int64.to_string (Uutil.Filesize.toInt64 n))];\n')

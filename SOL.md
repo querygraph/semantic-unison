@@ -4,6 +4,29 @@
 
 ## Live implementation handoff
 
+* Guarded obsolete staging cleanup (2026-10-14): normal producer staging and
+  receiver-clone scratch cleanup now use the prepared native parent binding,
+  rather than `Os.exists` followed by recursive pathname removal. The new
+  local operation captures/rechecks full no-follow stat facts, rejects live
+  target aliases by physical identity, and unlinks only an authorized singly
+  linked regular leaf through the held parent. It opens/reads/chmods no old
+  payload, preserving mode-000 cleanup. A metadata-open prototype failed that
+  permission case and is retained separately. Producer-owned/resumed objects
+  remain descriptor-bound; unexpected kinds/links/sidecars are preserved,
+  without operational fallback. See the [contract](doc/obsolete-staging-cleanup.md)
+  and [qualification](tests/obsolete_cleanup/qualification.json). Native
+  controls, real Copy/CLI controls, publication compatibility and build checks
+  retain exact compiler/source scope: **22 cases / 83 assertions plus one
+  native negative**, **two actual Copy/CLI positives plus one wrong-parent
+  negative**, and **79 actual Files/CLI cases including both old-peer
+  directions per compiler**. Stock/Ox Make and Dune builds/selftests pass;
+  final alias fencing is a recorded incremental follow-on to clean snapshots.
+  All 330 frozen production inputs match both final Make trees. This is root-owned review, not a new
+  independent-agent acceptance. Cooperative stat/name fencing is not inode
+  pinning or atomic compare-and-unlink. Legacy/unbound cleanup, directory and
+  auxiliary families, other-platform runtime, complete resource limits and
+  M4-V/M5/M6 remain open. Preview finalization stays with Photo Root.
+
 * Photo Root's BIG candidate notice (2026-10-14, saved metadata only):
   image `86582588`, root `86582590`, settings `86582602`, UUID
   `5CEF3706-E96B-4DBB-83A5-965DFB4BE71C`, digest

@@ -324,8 +324,14 @@ let saveTempFileOnRoot =
 
 (****)
 
-let removeOldTempFile fspathTo pathTo =
-  if Os.exists fspathTo pathTo then begin
+let removeOldTempFile ?producer fspathTo pathTo =
+  match producer with
+  | Some state when not state.legacy ->
+      checkProducer producer;
+      FinalPublication.clear_obsolete (TargetBinding.native state.binding)
+        ~working_dir:(Fspath.toString fspathTo) ~path:(Path.toString pathTo);
+      checkProducer producer
+  | _ -> if Os.exists fspathTo pathTo then begin
     debug (fun() -> Util.msg "Removing old %s / %s\n"
            (Fspath.toDebugString fspathTo) (Path.toString pathTo));
     Os.delete fspathTo pathTo
@@ -1032,7 +1038,7 @@ let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc 
           (Fspath.toDebugString fspathFrom) (Path.toString pathFrom)
           (Fspath.toDebugString fspathTo) (Path.toString pathTo));
       checkProducer producer;
-      removeOldTempFile fspathTo pathTo;
+      removeOldTempFile ?producer fspathTo pathTo;
       checkProducer producer;
       let cloned = match basis with
         | Some previous when receiverCloneEnabled () ->
@@ -1081,7 +1087,7 @@ let localFileAsync ?producer
                    SemanticSync.is_enabled () ->
     Util.convertUnixErrorsToTransient "copying locally" (fun () ->
       checkProducer producer;
-      removeOldTempFile fspathTo pathTo;
+      removeOldTempFile ?producer fspathTo pathTo;
       checkProducer producer;
       let copied () =
         if copyByPath ?producer
@@ -1458,7 +1464,7 @@ let transferFileContents ?producer
                       end else begin
                         let p = Os.tempPath ~fresh:false fspathTo
                           (Path.addSuffixToFinalName realPathTo "-clone") in
-                        removeOldTempFile fspathTo p;
+                        removeOldTempFile ?producer fspathTo p;
                         match prepareClonePublication fspathTo p pathTo with
                         | None -> ()
                         | Some prepared ->
@@ -1674,7 +1680,7 @@ let reallyTransferFile ?producer
   checkProducer producer;
   begin match prefixLen with
     None when not retained ->
-      removeOldTempFile fspathTo pathTo
+      removeOldTempFile ?producer fspathTo pathTo
   | None -> ()
   | Some len ->
       debug

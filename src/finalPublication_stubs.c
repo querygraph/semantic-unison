@@ -515,6 +515,125 @@ resolution_unlocked:
   raise_error(error);
   CAMLreturn(Val_unit);
 }
+static int obsolete_not_live(struct final_context *context, const struct stat *obsolete)
+{
+  struct stat live;
+  if (fstatat(context->target_parent_fd, context->target_name, &live, AT_SYMLINK_NOFOLLOW) == -1)
+    return errno == ENOENT ? 0 : errno;
+  /* Case-insensitive and normalization aliases can have different spellings
+     but name the live entry. Never rely on basename strcmp alone. */
+  return obsolete->st_dev == live.st_dev && obsolete->st_ino == live.st_ino ? EINVAL : 0;
+}
+
+CAMLprim value unison_final_publication_clear_obsolete(value handle, value working, value path)
+{
+  CAMLparam3(handle, working, path);
+  struct final_context *context = *(struct final_context **)Data_custom_val(handle);
+  struct publication_error error = { 0, NULL };
+  char *working_copy = strdup(String_val(working)), *path_copy = strdup(String_val(path));
+  char *auxiliary = NULL;
+  const char *parent, *name;
+  struct stat baseline, named, after;
+  int fresh = -1, number;
+  if (!working_copy || !path_copy) {
+    free(working_copy); free(path_copy); caml_raise_out_of_memory();
+  }
+  split_relative(path_copy, &parent, &name);
+  auxiliary = malloc(strlen(name) + 3);
+  if (!auxiliary) {
+    free(working_copy); free(path_copy); caml_raise_out_of_memory();
+  }
+  strcpy(auxiliary, "._"); strcat(auxiliary, name);
+  /* All strings are copied before release. Every transient directory slot is
+     closed before acquire; no obsolete payload descriptor is needed. */
+  caml_enter_blocking_section_no_pending();
+  if (!enter_context(context, &error, "final_publication.obsolete.lock")) goto obsolete_unlocked;
+  if (context->phase != PREPARED) {
+    record_error(&error, EINVAL, "final_publication.obsolete.state"); goto obsolete;
+  }
+  check_bindings(context, &error);
+  if (error.number != 0) goto obsolete;
+  fresh = open(working_copy, directory_open_flags());
+  if (fresh < 0) {
+    record_error(&error, errno, "final_publication.obsolete.working_directory"); goto obsolete;
+  }
+  number = observe_expected_directory(fresh, &context->working_identity);
+  if (number != 0) {
+    record_error(&error, number, "final_publication.obsolete.working_identity"); goto obsolete;
+  }
+  number = probe_path(fresh, parent, &context->candidate_parent_identity);
+  if (number != 0) {
+    record_error(&error, number, "final_publication.obsolete.parent_identity"); goto obsolete;
+  }
+  if (same_directory(&context->candidate_parent_identity, &context->target_parent_identity) &&
+      strcmp(name, context->target_name) == 0) {
+    record_error(&error, EINVAL, "final_publication.obsolete.live_target"); goto obsolete;
+  }
+  check_auxiliary(context, &error);
+  if (error.number != 0) goto obsolete;
+  if (context->check_apple_double) {
+    if (fstatat(context->candidate_parent_fd, auxiliary, &named, AT_SYMLINK_NOFOLLOW) == 0) {
+      record_error(&error, EOPNOTSUPP, "final_publication.obsolete.auxiliary_present"); goto obsolete;
+    }
+    if (errno != ENOENT) {
+      record_error(&error, errno, "final_publication.obsolete.auxiliary_lookup"); goto obsolete;
+    }
+  }
+  if (fstatat(context->candidate_parent_fd, name, &baseline, AT_SYMLINK_NOFOLLOW) == -1) {
+    if (errno != ENOENT) record_error(&error, errno, "final_publication.obsolete.lookup");
+    goto obsolete;
+  }
+  if (!S_ISREG(baseline.st_mode)) {
+    record_error(&error, EOPNOTSUPP, "final_publication.obsolete.kind"); goto obsolete;
+  }
+  if (baseline.st_nlink != 1) {
+    record_error(&error, EBUSY, "final_publication.obsolete.links"); goto obsolete;
+  }
+  number = obsolete_not_live(context, &baseline);
+  if (number != 0) {
+    record_error(&error, number, "final_publication.obsolete.target_guard"); goto obsolete;
+  }
+  /* Unlink permission belongs to the held parent, not the leaf's read mask.
+     Do not open/chmod the old payload. The complete no-follow stat snapshot
+     fences cooperative replacement/change; it is not an inode-pinning FD or
+     an atomic compare-and-unlink against hostile namespace writers. */
+  check_bindings(context, &error);
+  if (error.number != 0) goto obsolete;
+  check_auxiliary(context, &error);
+  if (error.number != 0) goto obsolete;
+  if (context->check_apple_double) {
+    if (fstatat(context->candidate_parent_fd, auxiliary, &named, AT_SYMLINK_NOFOLLOW) == 0) {
+      record_error(&error, EOPNOTSUPP, "final_publication.obsolete.auxiliary_changed"); goto obsolete;
+    }
+    if (errno != ENOENT) {
+      record_error(&error, errno, "final_publication.obsolete.auxiliary_recheck"); goto obsolete;
+    }
+  }
+  if (fstatat(context->candidate_parent_fd, name, &named, AT_SYMLINK_NOFOLLOW) == -1) {
+    record_error(&error, errno, "final_publication.obsolete.name"); goto obsolete;
+  }
+  if (fstatat(context->candidate_parent_fd, name, &after, AT_SYMLINK_NOFOLLOW) == -1) {
+    record_error(&error, errno, "final_publication.obsolete.recheck"); goto obsolete;
+  }
+  if (!S_ISREG(named.st_mode) || !same_file(&baseline, &named) || !same_file(&baseline, &after)) {
+    record_error(&error, EBUSY, "final_publication.obsolete.replaced"); goto obsolete;
+  }
+  number = obsolete_not_live(context, &after);
+  if (number != 0) {
+    record_error(&error, number, "final_publication.obsolete.target_recheck"); goto obsolete;
+  }
+  if (unlinkat(context->candidate_parent_fd, name, 0) == -1)
+    record_error(&error, errno, "final_publication.obsolete.unlink");
+obsolete:
+  close_slot(&fresh, &error, "final_publication.obsolete.close_working");
+  pthread_mutex_unlock(&context->mutex);
+obsolete_unlocked:
+  free(auxiliary); free(path_copy); free(working_copy);
+  caml_acquire_runtime_system();
+  raise_error(error);
+  CAMLreturn(Val_unit);
+}
+
 static void adopt_producer(struct final_context *context, int borrowed, int resume,
                            struct publication_error *error)
 {
@@ -999,6 +1118,8 @@ UNISON_FINAL_UNAVAILABLE(unison_final_publication_auxiliary_absent, (value handl
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_resolution,
   (value handle, value work, value target), CAMLparam3(handle, work, target))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_attach, (value handle), CAMLparam1(handle))
+UNISON_FINAL_UNAVAILABLE(unison_final_publication_clear_obsolete,
+  (value handle, value working, value path), CAMLparam3(handle, working, path))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_adopt_mutable, (value handle, value candidate), CAMLparam2(handle, candidate))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_adopt_resume, (value handle), CAMLparam1(handle))
 UNISON_FINAL_UNAVAILABLE(unison_final_publication_producer_origin, (value handle), CAMLparam1(handle))
