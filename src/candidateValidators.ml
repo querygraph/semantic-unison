@@ -11,7 +11,7 @@ let register ?resources validator =
        FormatRecognition.format (CandidateValidator.recognition h) = id) !known then
     invalid_arg "duplicate or excessive candidate validator";
   known := !known @ [handle]
-let () = register (module DngCandidateValidation)
+let () = register ~resources:DngCandidateValidation.resources (module DngCandidateValidation)
 let selected () =
   frozen := true;
   List.filter_map CandidateValidator.select !known

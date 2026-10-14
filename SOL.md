@@ -4,6 +4,22 @@
 
 ## Live implementation handoff
 
+* DNG backend admission integration (2026-10-14): the actual companion registers
+  its caller-inclusive `adobevalidatorthreads` and optional endpoint-local
+  `adobevalidatorworkspace` MiB estimate with the generic resource planner.
+  Positive workspace or multi-lane declarations are pinned for the process;
+  default one-lane/zero-estimate behavior preserves legacy policy toggles.
+  Stock/Ox each pass eight real loopback cases, including before-stage oversized
+  memory/CPU rejection, invalid declarations, off behavior and a two-lane
+  directory helper under the 8 MiB budget. All fixture originals remain unchanged.
+  This is core accounting with synthetic protocol helpers, not SDK thread/RSS
+  compliance. Production v1 still requires one thread; experimental protocols
+  remain unavailable. Fresh Make/Dune builds+selftests and all 21 existing
+  receiving regressions pass on both compilers. Warn does not bypass an
+  oversized resource declaration.
+  [Contract](doc/backend-resource-interop-v0.md),
+  [qualification](tests/dng_backend_resources/qualification.json).
+
 * SDK object-cache correction (2026-10-14): builder object reuse now checks
   compiler/options/environment, compiler-discovered source/transitive/system
   header contents and object contents rather than modification times. Inputs

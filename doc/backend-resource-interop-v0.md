@@ -70,6 +70,18 @@ Memory estimates, covered allocation quotas and OS process limits remain
 separate. Production Adobe v1 does not gain experimental quota enforcement from
 this registration API.
 
+The DNG companion now supplies its endpoint-local `adobevalidatorthreads`
+declaration to this API. When threads exceed one or `adobevalidatorworkspace`
+is positive, the declaration is resource-bearing and therefore immutable while
+Unison runs. The workspace preference is a conservative per-invocation native
+estimate in MiB, default zero; it is admitted alongside publication/validation
+credits. It does not enforce SDK allocation or RSS. Default one-thread/zero-
+estimate operation retains legacy resource-free policy toggles. Invalid or
+oversized declarations reject before staging/validation. Validation off does
+not activate the backend. A declaration does not make the bundled v1 driver
+internally parallel: v1 still accepts only `--threads 1`; experimental SDK host
+protocols remain separately unqualified and unavailable to this caller.
+
 An in-process backend receives an injected quota owner and implements allocation
 and release callbacks for its library. Copies of `Budget` share one state and
 capacity; multiple adapter instances can use the same owner. Every allocation

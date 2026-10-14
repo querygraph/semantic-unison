@@ -20,6 +20,12 @@ let tool_threads = Prefs.makeEndpointLocal (Prefs.createInt "adobevalidatorthrea
   "CPU threads reserved for each Adobe SDK driver"
   "Thread count passed to the qualified SDK driver and reserved from the \
    shared CPU budget. It must describe actual driver parallelism.")
+let workspace = Prefs.makeEndpointLocal (Prefs.createInt "adobevalidatorworkspace" 0 ~local:true ~category
+  "estimated native workspace MiB per Adobe validation"
+  "Optional conservative per-invocation native workspace estimate, admitted \
+   before receiving staging/validation. Zero preserves legacy accounting. \
+   This reserves credits, not SDK allocations or process RSS. Changes to a \
+   resource-bearing backend declaration require restarting Unison.")
 let timeout = Prefs.makeEndpointLocal (Prefs.createInt "adobevalidatetimeout" 300 ~local:true ~category
   "maximum seconds for each Adobe SDK validation"
   "Execution timeout after CPU admission. A timed-out driver is terminated \
@@ -28,6 +34,17 @@ let policy () = match Prefs.read policy_pref with
   | "off" -> DngValidation.Off | "warn" -> DngValidation.Warn
   | "require" -> DngValidation.Require
   | _ -> raise (Util.Fatal "adobevalidate must be off, warn, or require")
+let resources () =
+  if policy () = DngValidation.Off then BackendResources.none else
+  let lanes = Prefs.read tool_threads and mib = Prefs.read workspace in
+  if lanes < 1 || lanes > 128 then
+    raise (Util.Fatal "adobevalidatorthreads must be between one and 128");
+  if mib < 0 || mib > max_int / 1048576 then
+    raise (Util.Fatal "adobevalidatorworkspace must be nonnegative and fit accounting");
+  if lanes = 1 && mib = 0 then BackendResources.none else
+  BackendResources.make ~backend:"org.firstpair.adobe-validator/1" ~cpu_lanes:lanes
+    ~covered_bytes:0 ~uncovered_estimate:(mib * 1048576) ~descriptor_credits:0
+    ~coverage:BackendResources.Accounting_only
 let feature = Features.register "dng-validation-v1" ~arcFormatChange:false
   (Some (fun _ enabled ->
     if policy () <> DngValidation.Off && not enabled then
