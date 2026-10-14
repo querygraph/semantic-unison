@@ -71,6 +71,15 @@ require an explicitly different allowance and coordination. No fresh runtime
 measurement or internally parallel SDK-host qualification follows from these
 build changes. The production driver in this benchmark still uses one thread.
 
+Validation batches now cancel peers at the first observed per-job failure,
+drain every submitted participant, and close the checked worker pool before
+reporting failure. SIGTERM/SIGINT set an atomic cancellation flag; the owner
+loop performs helper cancellation/reaping. `--batch-deadline` cancels active
+batch work before cleanup. This does not yet impose a single deadline on SDK
+fixture generation plus all batches, or qualify abrupt SIGKILL recovery.
+The draft finite pilot request was withdrawn pending that complete supervision
+contract; do not treat its queued request as native admission.
+
 Sources are snapshotted and compiled in a temporary directory with the chosen
 native compiler's default flags. Each batch is a fresh process; pool creation
 and shutdown are outside timing. All jobs read the same cached fixture through

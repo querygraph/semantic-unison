@@ -1,0 +1,136 @@
+{
+  "scope": "Current checked benchmark core with owned synthetic Python helpers; no SDK",
+  "compilers": {
+    "stock": {
+      "workspace": "/private/tmp/unison-bench-settlement-05gd9uaf",
+      "scope": "Actual current core benchmark with synthetic helper processes; no SDK",
+      "target_sha256": "26995717fb31122c9383bd9ccdbda534050df81582bce3d7f25fdb243fb68bc4",
+      "cases": [
+        {
+          "case": "0-pass",
+          "exit": 0,
+          "seconds": 0.9435340669879224,
+          "helper_pids": [
+            41705,
+            41704
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "1-reject-peer",
+          "exit": 2,
+          "seconds": 2.1894755590183195,
+          "helper_pids": [
+            41709,
+            41710
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "2-hang",
+          "exit": 2,
+          "seconds": 2.3305671460111625,
+          "helper_pids": [
+            41722,
+            41723
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "3-hang-signal",
+          "exit": 2,
+          "seconds": 2.1850801380060147,
+          "helper_pids": [
+            41728,
+            41729
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "4-pass",
+          "exit": 0,
+          "seconds": 0.16542733000824228,
+          "helper_pids": [
+            41741,
+            41742
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        }
+      ],
+      "test_sha256": "e314cb261091a09548685911742f240096adae115ab1de75972f25d4a2ff02d3"
+    },
+    "ox": {
+      "workspace": "/private/tmp/unison-bench-settlement-6x6xxuax",
+      "scope": "Actual current core benchmark with synthetic helper processes; no SDK",
+      "target_sha256": "3fcb1d611bb5088ad40abd8cbdd0517558758e597b99dd383edc80f00b372be6",
+      "cases": [
+        {
+          "case": "0-pass",
+          "exit": 0,
+          "seconds": 1.1450572030153126,
+          "helper_pids": [
+            41707,
+            41706
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "1-reject-peer",
+          "exit": 2,
+          "seconds": 2.2067168700159527,
+          "helper_pids": [
+            41713,
+            41712
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "2-hang",
+          "exit": 2,
+          "seconds": 2.336187314009294,
+          "helper_pids": [
+            41725,
+            41726
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "3-hang-signal",
+          "exit": 2,
+          "seconds": 2.1762747220054734,
+          "helper_pids": [
+            41738,
+            41739
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "4-pass",
+          "exit": 0,
+          "seconds": 0.15687905697268434,
+          "helper_pids": [
+            41744,
+            41745
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        }
+      ],
+      "test_sha256": "e314cb261091a09548685911742f240096adae115ab1de75972f25d4a2ff02d3"
+    }
+  },
+  "sources": {
+    "bench/adobe/run.py": "8c4fd88252196414349d1aa848dd1589bab12b25481f25ea0dd0d6ae24a36143",
+    "bench/adobe/validation_bench.ml": "71090f72390c4fd12522d24c3f4a0b4635fd05bba8e6cb765259fc81c3b6aeb3",
+    "tests/adobe_bench_settlement/run.py": "e314cb261091a09548685911742f240096adae115ab1de75972f25d4a2ff02d3"
+  }
+}

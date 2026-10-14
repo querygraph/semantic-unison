@@ -55,6 +55,8 @@ def main():
     parser.add_argument('--start-file', type=Path, help='wait after compilation for a local measurement coordination file')
     parser.add_argument('--coordination-timeout', type=float, default=600,
                         help='maximum seconds waiting before any SDK fixture or validation invocation')
+    parser.add_argument('--batch-deadline', type=float, default=300,
+                        help='active validation batch cancellation deadline; cleanup follows before return')
     parser.add_argument('--background-note', default='Ordinary system activity uncontrolled; no cache flush or CPU affinity.')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
@@ -69,6 +71,8 @@ def main():
         parser.error('all counts must be positive')
     if not 0 < args.coordination_timeout <= 3600:
         parser.error('coordination timeout must be positive and at most 3600 seconds')
+    if not 0 < args.batch_deadline <= 3600:
+        parser.error('batch deadline must be positive and at most 3600 seconds')
     compiler = shutil.which(args.ocamlopt)
     if compiler is None:
         parser.error('native compiler unavailable')
@@ -200,8 +204,9 @@ def main():
             print(f'Start {phase} {repetition}: {fixture["codec"]} permits={worker} jobs={jobs}', flush=True)
             command = [str(work / 'validation-bench'), str(fixtures_dir / fixture['filename']), fixture['sha256'],
                        str(fixture['size_bytes']), str(driver), manifest['executable_sha256'],
-                       manifest['build_id'], str(worker), str(jobs)]
-            output = subprocess.check_output(command, cwd=work, env=environment, text=True, timeout=1200)
+                       manifest['build_id'], str(worker), str(jobs), str(args.batch_deadline)]
+            output = subprocess.check_output(command, cwd=work, env=environment, text=True,
+                                             timeout=args.batch_deadline+30)
             sample = json.loads(output)
             assert sample['correct_receipts'] == jobs and sample['final_cpu_permits'] == sample['final_children'] == 0
             sample.update(codec=fixture['codec'], cpu_permits=worker, jobs=jobs, phase=phase, repetition=repetition)

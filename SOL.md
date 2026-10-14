@@ -4,6 +4,22 @@
 
 ## Live implementation handoff
 
+* Benchmark failure settlement (2026-10-14): each validation job now records
+  its first observed error and cancels peers immediately, rather than waiting
+  for an aggregate's ordered observation. BorrowedWork drains all submitted
+  promises before closing descriptors/pool and reporting the first error.
+  SIGTERM/SIGINT only set an atomic flag; the owner timer cancels helpers and
+  an active batch deadline triggers the same settlement. Synthetic helpers
+  exercise rejection beside a TERM-ignoring peer, deadline, signal and fresh
+  success; no SDK was invoked. Draft SDK pilot coordination was withdrawn:
+  fresh-fixture work is 13 SDK calls, and the whole fixture-plus-batch deadline
+  remains to be implemented. No queue acceptance or earlier preview release
+  authorizes native work. Photo ownership remains unchanged.
+  Stock/Ox actual-object builds each pass five synthetic cases with all helper
+  PIDs absent after return and unchanged inputs.
+  [Settlement evidence](tests/adobe_bench_settlement/qualification.json),
+  [withdrawal](tests/qualification/sdk-pilot-request-withdrawn-20261014.json).
+
 * Real cross-volume filesystem checkpoint (2026-10-14): stock/Ox each pass six
   local CLI rows across a privately created HFS+ image and internal APFS roots:
   ordinary clone-auto/off and semantic DNG-auto in both directions. Exact bytes,

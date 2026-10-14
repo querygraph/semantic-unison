@@ -20,17 +20,18 @@ let quote value =
     | c -> Buffer.add_char buffer c) value;
   Buffer.add_char buffer '"'; Buffer.contents buffer
 
-let rec await = function
-  | [] -> return []
-  | job :: jobs -> job >>= fun result -> await jobs >>= fun rest -> return (result :: rest)
-
 let () =
-  if Array.length Sys.argv <> 9 then
-    failwith "candidate sha256 bytes driver driver-sha256 build-id CPU-budget jobs";
+  if Array.length Sys.argv <> 9 && Array.length Sys.argv <> 10 then
+    failwith "candidate sha256 bytes driver driver-sha256 build-id CPU-budget jobs [deadline-seconds]";
   let candidate = Sys.argv.(1) and candidate_hash = Sys.argv.(2)
   and candidate_size = Int64.of_string Sys.argv.(3) and executable = Sys.argv.(4)
   and executable_hash = Sys.argv.(5) and build_id = Sys.argv.(6)
   and permits = int_of_string Sys.argv.(7) and count = int_of_string Sys.argv.(8) in
+  let seconds = if Array.length Sys.argv = 10 then float_of_string Sys.argv.(9) else 300. in
+  if permits < 1 || permits > 128 || count < 1 || count > 4096 then
+    invalid_arg "benchmark CPU/job counts exceed bounds";
+  if not (Float.is_finite seconds) || seconds <= 0. || seconds > 3600. then
+    invalid_arg "benchmark deadline must be finite, positive and at most 3600 seconds";
   let domains = min permits (W.recommended_workers ()) in
   let budget = H.create ~cpu_permits:permits ~max_children:permits ~max_pending:4096 in
   let pool = W.create ~workers:domains ~max_pending:4096 ~budget in
@@ -41,7 +42,7 @@ let () =
   let cancellation = H.cancellation () in
   let inspect path =
     let fd = Unix.openfile path [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
-    try_bind (fun () -> W.digest pool cancellation fd)
+    BorrowedWork.try_bind (fun () -> W.digest pool cancellation fd)
       (fun result ->
         Unix.close fd;
         match result with
@@ -73,27 +74,46 @@ let () =
         | V.Rejected (reason, _) | V.Warning (reason, _) -> failwith reason
         | _ -> failwith "benchmark requires a valid raw digest receipt")
     >>= function Some result -> return result | None -> failwith "benchmark admission cancelled" in
+  let signal_cancelled = Atomic.make false in
+  let handler = Sys.Signal_handle (fun _ -> Atomic.set signal_cancelled true) in
+  let previous_term = Sys.signal Sys.sigterm handler
+  and previous_int = Sys.signal Sys.sigint handler in
+  let deadline = wall () +. seconds in
   let watching = ref true and peak_children = ref 0 and peak_cpu = ref 0 in
   let rec watch () =
+    if Atomic.get signal_cancelled || wall () >= deadline then H.cancel cancellation;
     let cpu, children = H.usage budget in
     peak_children := max !peak_children children; peak_cpu := max !peak_cpu cpu;
     if !watching then Lwt_unix.sleep 0.001 >>= watch else return () in
   let start_parent = parent_cpu () and start_children = children_cpu () and start_wall = wall () in
   let watcher = watch () in
-  let jobs = List.init count validate in
-  let results = Lwt_unix.run (await jobs) in
+  let first_error = ref None in
+  let remember error =
+    (match !first_error with None -> first_error := Some error | Some _ -> ());
+    H.cancel cancellation in
+  let outcome = try Ok (Lwt_unix.run
+    (BorrowedWork.all ~on_error:remember
+       (List.init count (fun index () ->
+         BorrowedWork.catch (fun () -> validate index)
+           (fun error -> remember error; fail error))))) with error -> Error error in
   let elapsed_wall = wall () -. start_wall and elapsed_parent = parent_cpu () -. start_parent
   and elapsed_children = children_cpu () -. start_children in
   watching := false;
   Lwt_unix.run watcher;
   let workers = W.usage pool and resources = A.usage admission in
   Lwt_unix.run (W.shutdown pool);
+  Sys.set_signal Sys.sigterm previous_term;
+  Sys.set_signal Sys.sigint previous_int;
   let cpu, children = H.usage budget in
-  if List.length results <> count || cpu <> 0 || children <> 0 ||
+  if cpu <> 0 || children <> 0 ||
      workers.W.pending <> 0 || workers.W.running <> 0 ||
      resources.A.transactions <> 0 || resources.A.pending <> 0 ||
      resources.A.payload_bytes <> 0 || resources.A.descriptors <> 0 ||
      !peak_cpu > permits || !peak_children > permits then failwith "benchmark resources leaked";
+  let results = match !first_error,outcome with
+    | Some error,_ -> raise error | None,Error error -> raise error
+    | None,Ok results -> results in
+  if List.length results <> count then failwith "benchmark result count differs";
   let receipts = List.map (fun (index, receipt) ->
     let report = receipt.V.report and process = receipt.V.process in
     if report.V.candidate_sha256 <> candidate_hash || report.V.candidate_size <> candidate_size ||
