@@ -74,3 +74,14 @@ These containers qualify the sync/merge contract, not Adobe decoding or real
 photographic rendering. No source photos, Lightroom caches or preview publisher
 are accessed. General XMP structures, relocated/grown packets, broader M5/M6 qualification remain separate work. Compact-cache evidence has its
 own [scope](dng-compact-merge-base.md).
+
+
+Filesystem failures at the asynchronous merge boundary are reported as
+recoverable per-file errors after owned descriptors and transaction resources
+settle. Missing common bases remain an explicit refusal; other missing paths,
+non-directory parents and directory outputs do not become uncaught Unix errors.
+The [direct production-object controls](../tests/merge_io_errors/README.md) check
+six acquisition failures and unchanged sentinels. This is error classification,
+not authorization to retry with a guessed base or publish an incomplete result.
+Cancellation, programming errors and allocation exceptions keep their original
+identity through the existing Unix-error conversion utility.

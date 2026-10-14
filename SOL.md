@@ -2537,3 +2537,25 @@ Pending merged-output SDK request/executor/frozen artifact pins are unchanged,
 with historical producing-source scope; it remains UNADMITTED. No SDK/Photo/
 Lightroom/source-photo invocation; both build and regression parents closed0.
 Full goal/platform/resource/performance acceptance remains open.
+
+
+### Recoverable merge filesystem errors with resource settlement — 2026-10-14
+
+A direct actual-object probe reproduced raw Unix errors for missingleft/right/
+output, ENOTDIR base parent and EISDIR output, despite settled resources. The
+post-cleanup error boundary now uses existing Util.convertUnixErrorsToTransient:
+normal filesystem errors become recoverable per-file failures, while unrelated
+exceptions retain identity. Dedicated missing-common-base guidance remains.
+No write/publication/common-base selection changes.
+
+Current stock/Ox Make+selftests pass (one compiler job, builds serial). Both
+actual production-object probes pass six filesystem failures, assert unchanged
+sentinel hashes, baseline FD count and zero transaction/payload/descriptor/CPU/
+worker/I/O ledgers after each. Previous-source negative reproduces five raw
+errors (probeexit2), while already-fixed missing-base is transient. Both final
+CLI binaries also rerun allten archive downgrade/recovery stages successfully.
+[Sealed source/object/build/terminal evidence](tests/merge_io_errors/qualification.json),
+[manual scope](tests/merge_io_errors/README.md). All owned parents closed0;
+no SDK/Photo/Lightroom/production archives/source photos involved. Pending native
+merged-output request/executor/frozen artifact pins unchanged and UNADMITTED.
+Actual SDK merged outputs and broader M4-V/M5/M6 acceptance stay open.

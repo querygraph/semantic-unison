@@ -1,0 +1,933 @@
+{
+  "schema": "unison-merge-io-error-qualification/1",
+  "utc": "2026-10-14T21:57:52.006336+00:00",
+  "scope": "Current compiler-matched production merge objects: six deterministic filesystem acquisition errors with settled resources and unchanged sentinels; current stock/Ox Make+selftests and ten archive roundtrip stages each.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticSync.ml",
+      "bytes": 28070,
+      "sha256": "834e37e7f658500550fa2a45381cd233b30cc39784d7b064ad459c5ab3ab98de"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/ubase/util.ml",
+      "bytes": 18931,
+      "sha256": "f906fed02263d5f42c0eca00b147394895a814f4c3a9309ee1b0d21f5874538f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/merge_io_errors/probe.ml",
+      "bytes": 2330,
+      "sha256": "1849202989276fbefcc5cca849a7b31067e4b4dd46551dee7ba4db3ef433838c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/merge_io_errors/run.py",
+      "bytes": 3687,
+      "sha256": "66b957b6296190b6bcacac93d842c3290738fa57482474b5ffe025a198f1b9fa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/merge_io_errors/README.md",
+      "bytes": 1555,
+      "sha256": "54a2062cdbb93c247be6aeca7e90ede8d013b745ce5aee684fd8b318b61947d0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/archive_downgrade/run.py",
+      "bytes": 6885,
+      "sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "build": {
+        "path": "/private/tmp/unison-merge-io-stock-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "3a40867d3defd1a625b2c0d3b72f22c96990fa07bd7320ef48816d25f5689907"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/unison",
+        "bytes": 5633672,
+        "sha256": "6ea879dbf12369fdcdaafa2c6cda64c572156425dce7c29b5d99e7acd0fa98d6"
+      },
+      "direct_report": {
+        "path": "/private/tmp/unison-merge-io-stock-20261014.json",
+        "bytes": 12936,
+        "sha256": "9caa780fc30879354ce9eac66b652ae0395c5c8d86de747a907207275efca09d"
+      },
+      "direct_actual": {
+        "schema": "unison-merge-io-errors/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg",
+        "source_pins": {
+          "tests/merge_io_errors/probe.ml": "1849202989276fbefcc5cca849a7b31067e4b4dd46551dee7ba4db3ef433838c",
+          "tests/merge_io_errors/run.py": "66b957b6296190b6bcacac93d842c3290738fa57482474b5ffe025a198f1b9fa"
+        },
+        "production_merge_sha256": "834e37e7f658500550fa2a45381cd233b30cc39784d7b064ad459c5ab3ab98de",
+        "build_receipt_sha256": "3a40867d3defd1a625b2c0d3b72f22c96990fa07bd7320ef48816d25f5689907",
+        "build_receipt": "/private/tmp/unison-merge-io-stock-build-20261014.json",
+        "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "compile_command": [
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/system",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/system/generic",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/generic",
+          "-I",
+          "+unix",
+          "-I",
+          "+str",
+          "unix.cmxa",
+          "str.cmxa",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/pty.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/bytearray_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/hash_compat.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/props_xattr.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/props_acl.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/osxsupport.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/copy_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/nativeCopyRange_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/wholeFileClone_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fileObservation_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/stagePublication_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/finalPublication_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticHash_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticFile_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/helperSupervisor_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/umarshal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/rx.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/unicode_tables.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/unicode.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/bytearray.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/system/system_generic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/system/generic/system_impl.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/system.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/projectInfo.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/myMap.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/safelist.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/util.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/uarg.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/prefs.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/trace.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ubase/proplist.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/pqueue.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/lwt.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/lwt_util.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/generic/lwt_unix_impl.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lwt/lwt_unix.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/features.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/uutil.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/case.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/pred.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/terminal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fileutil.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/name.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/path.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fspath.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fileObservation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/stagePublication.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/wholeFileClone.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fs.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fingerprint.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/abort.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/osx.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fswatch.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/propsdata.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/props.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fileinfo.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/os.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/lock.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/clroot.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/common.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/tree.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/checksum.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/transfer.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/xferhint.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/borrowedWork.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/remote.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/external.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/negotiate.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/globals.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/fswatchold.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticHash.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticFile.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/formatExtension.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/formatRecognition.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/xmpObservation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/xmpMerge.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/dngSemantic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/dngExtended.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/jpegSemantic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/dngRecognition.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticDelta.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticReport.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/helperSupervisor.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticAdmission.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticMailbox.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/ioAdmission.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticWorkers.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticFormats.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/backendResources.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/helperLimiter.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/candidateValidator.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/dngValidation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/dngCandidateValidation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/candidateValidators.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/validationTreeBudget.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/validationTreePolicy.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticRuntime.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/supervisedExternal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticMergeCache.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/semanticSync.cmx",
+          "probe.ml",
+          "-o",
+          "probe"
+        ],
+        "compile_exit": 0,
+        "probe_exit": 0,
+        "expected_exit": 0,
+        "stdout": "PASS missing-base: transient: DNG scalar merge: no saved common base is available; synchronize a common version with compact capture or backupcurrent enabled before merging\nPASS missing-left: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg/absent)]\nPASS missing-right: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg/absent)]\nPASS missing-output: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg/absent)]\nPASS base-parent-not-directory: transient: Error in DNG scalar merge:\nNot a directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg/base/child)]\nPASS output-is-directory: transient: Error in DNG scalar merge:\nIs a directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-jvnl_rbg/directory)]\n",
+        "stderr": "",
+        "probe_sha256": "d59a62e126e3f6b20db7634450c3be0aab2e518031c22f19f7d726e1c8f3f96c",
+        "probe_log_sha256": "84077e4aefd6c95f5199bd8f474da4e3bedd9a95d5f87eab8f80bf6ef601ec50",
+        "scope": "Actual compiler-matched production merge objects; six controlled filesystem acquisition failures with settled FD/transaction/CPU/I/O/worker ledgers; no SDK or photos."
+      },
+      "archive_report": {
+        "path": "/private/tmp/unison-archive-io-stock-20261014.json",
+        "bytes": 8478,
+        "sha256": "5392d3f5df58ec6f1c7385573bb5bb4d4af4ff77456ba9fedaf9828a2587ed7e"
+      },
+      "archive_actual": {
+        "schema": "unison-archive-downgrade/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb",
+        "build_receipt": "/private/tmp/unison-merge-io-stock-build-20261014.json",
+        "build_receipt_sha256": "3a40867d3defd1a625b2c0d3b72f22c96990fa07bd7320ef48816d25f5689907",
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hmu4ecwj/src/unison",
+        "binary_sha256": "6ea879dbf12369fdcdaafa2c6cda64c572156425dce7c29b5d99e7acd0fa98d6",
+        "baseline": "/usr/local/bin/unison",
+        "baseline_sha256": "007ee901f33089827afc3721cdee0b15e82d64124225a8e66630bfad7b4d7454",
+        "stages": [
+          {
+            "name": "seed",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "ffff7c3fd58ec5d6e51cc795f4c502a85c3d521c700f2d96ad761ced802c706a"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "e5bf26128d240f163fdb8e5a1190f81ed356497bd4ae48c4b5824ecf0e4d5587"
+              }
+            },
+            "output_sha256": "746748984d4ed46357c596f048e4f9f1a7585e88b163a52ecc4965f2d83d59bb",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-01.log"
+          },
+          {
+            "name": "current-merge-before-downgrade",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "d5d4f606df12b67d0c7615176efb2cfb92b4eba19c56cdc373e93ba9fcd8608f"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "3241d1abb5d7123182ba2ec872e9d1363dd8c261cbf3b86ddaf7bd09cf22bce3"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-02.log"
+          },
+          {
+            "name": "baseline-noop",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/baseline-noop.log",
+            "archive_before": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "d5d4f606df12b67d0c7615176efb2cfb92b4eba19c56cdc373e93ba9fcd8608f"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "3241d1abb5d7123182ba2ec872e9d1363dd8c261cbf3b86ddaf7bd09cf22bce3"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "7f14b4bf882442d3e585d3e38e574e2a8e0273194ee03574c8aa20434cdbc944"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "f4f8ab6c07dcd5fc0446f22eb09811976322c6e1df29dd7f8fe399cf6bd84f6a"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de"
+          },
+          {
+            "name": "baseline-update",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/baseline-update.log",
+            "archive_before": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "7f14b4bf882442d3e585d3e38e574e2a8e0273194ee03574c8aa20434cdbc944"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "f4f8ab6c07dcd5fc0446f22eb09811976322c6e1df29dd7f8fe399cf6bd84f6a"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "1538d47284a87c06971e8c79c513b1a5ffe905798d886d09ea3801ba6a0ef98e"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "ae847770c545830a7e1b4970d5aa89c359eef89a2f048e7590f0b9bc994ca03c"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95"
+          },
+          {
+            "name": "current-reopen",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "5facc6654ae026a0b22801c8fb2d1114d4613c36b49e8d5afc2bcc7451a9670e"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "ccd08cb7b6e15d1dbca3b143e14471811b83ede6c94d4fcdebc5e2d167d53df2"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-03.log"
+          },
+          {
+            "name": "missing-baseline-era-base-refused",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-04.log",
+            "both_edits_preserved": true
+          },
+          {
+            "name": "restore-known-common-fixture",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "3621d395080859120e64f7f9c01b1bf411ba425326eef6402b7edfef8fa95e08"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "50eda6ddcfe7a16134b2f035f04efcea46a80a74a7499c2604692ea112e3560e"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-05.log"
+          },
+          {
+            "name": "current-captured-common-update",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "923612e7c1ab7272ba34f81408eff64c3cbb06da937d4ac8abccdbf83cd3f37a"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "3666edabbb4b47e3c51fbd923d6f1dd4d7d9f91d227454e8e0c2155119f81c7b"
+              }
+            },
+            "output_sha256": "d9ddcc2a497e91690a5f7d3d01b02b70a96ca6a1a9ae1ee17e2dee20651c817d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-06.log"
+          },
+          {
+            "name": "current-merge-after-baseline",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "9108ae3286b40cfacb3a73d61f4f93504225279e1290a02b9444206a895ddb22"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "a51e3376d1873fb7ba312954e843c9a56b0463c44ea2facc31b54ab41e283279"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-07.log"
+          },
+          {
+            "name": "current-final-noop",
+            "archive_inventory": {
+              "client": {
+                "arab02bdb2085c25d0f5af658224dd8667": "07e293fc871c64fe0a425554df7684c7ccc4d958db282d3061fa91cc959687ba"
+              },
+              "server": {
+                "arc2ced03088e736971c9237fd64a77c2a": "8d524553080d2346b8e77f874f01a3e741ac47fc576503687c78a81f0c9ad056"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-jaa8p9pb/roundtrip/run-08.log"
+          }
+        ],
+        "complete": true,
+        "scope": "Private synthetic current scalar merge/compact bases -> baseline archive load/update -> current merge. No SDK, photos, catalog or production archives.",
+        "runner_sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+      },
+      "build_terminal": {
+        "handle": 66314,
+        "chunk": "02f4cb",
+        "exit": 0
+      },
+      "probe_terminal": {
+        "handle": null,
+        "chunk": "7005d8",
+        "exit": 0
+      },
+      "archive_terminal": {
+        "handle": 91383,
+        "chunk": "cc5d19",
+        "exit": 0
+      }
+    },
+    {
+      "compiler": "ox",
+      "build": {
+        "path": "/private/tmp/unison-merge-io-ox-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "2ab4d5b71e063303500cd5a2c236ec5e70900b2bdf1db523ad90ea1698269bda"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/unison",
+        "bytes": 7557128,
+        "sha256": "648177d79db6dd52784bcfa3728e5bc1e844475befca0c2f8590d96ba5ae2004"
+      },
+      "direct_report": {
+        "path": "/private/tmp/unison-merge-io-ox-20261014.json",
+        "bytes": 12935,
+        "sha256": "1e903769a050ea3a4a96782f2a89cad9851d431e7223e793c1f3ea5356edcec3"
+      },
+      "direct_actual": {
+        "schema": "unison-merge-io-errors/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl",
+        "source_pins": {
+          "tests/merge_io_errors/probe.ml": "1849202989276fbefcc5cca849a7b31067e4b4dd46551dee7ba4db3ef433838c",
+          "tests/merge_io_errors/run.py": "66b957b6296190b6bcacac93d842c3290738fa57482474b5ffe025a198f1b9fa"
+        },
+        "production_merge_sha256": "834e37e7f658500550fa2a45381cd233b30cc39784d7b064ad459c5ab3ab98de",
+        "build_receipt_sha256": "2ab4d5b71e063303500cd5a2c236ec5e70900b2bdf1db523ad90ea1698269bda",
+        "build_receipt": "/private/tmp/unison-merge-io-ox-build-20261014.json",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "compile_command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/system",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/system/generic",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt",
+          "-I",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/generic",
+          "-I",
+          "+unix",
+          "-I",
+          "+str",
+          "unix.cmxa",
+          "str.cmxa",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/pty.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/bytearray_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/hash_compat.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/props_xattr.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/props_acl.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/osxsupport.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/copy_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/nativeCopyRange_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/wholeFileClone_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fileObservation_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/stagePublication_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/finalPublication_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticHash_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticFile_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/helperSupervisor_stubs.o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/umarshal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/rx.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/unicode_tables.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/unicode.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/bytearray.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/system/system_generic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/system/generic/system_impl.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/system.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/projectInfo.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/myMap.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/safelist.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/util.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/uarg.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/prefs.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/trace.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ubase/proplist.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/pqueue.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/lwt.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/lwt_util.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/generic/lwt_unix_impl.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lwt/lwt_unix.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/features.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/uutil.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/case.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/pred.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/terminal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fileutil.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/name.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/path.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fspath.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fileObservation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/stagePublication.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/wholeFileClone.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fs.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fingerprint.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/abort.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/osx.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fswatch.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/propsdata.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/props.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fileinfo.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/os.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/lock.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/clroot.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/common.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/tree.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/checksum.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/transfer.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/xferhint.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/borrowedWork.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/remote.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/external.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/negotiate.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/globals.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/fswatchold.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticHash.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticFile.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/formatExtension.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/formatRecognition.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/xmpObservation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/xmpMerge.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/dngSemantic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/dngExtended.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/jpegSemantic.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/dngRecognition.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticDelta.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticReport.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/helperSupervisor.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticAdmission.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticMailbox.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/ioAdmission.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticWorkers.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticFormats.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/backendResources.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/helperLimiter.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/candidateValidator.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/dngValidation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/dngCandidateValidation.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/candidateValidators.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/validationTreeBudget.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/validationTreePolicy.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticRuntime.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/supervisedExternal.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticMergeCache.cmx",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/semanticSync.cmx",
+          "probe.ml",
+          "-o",
+          "probe"
+        ],
+        "compile_exit": 0,
+        "probe_exit": 0,
+        "expected_exit": 0,
+        "stdout": "PASS missing-base: transient: DNG scalar merge: no saved common base is available; synchronize a common version with compact capture or backupcurrent enabled before merging\nPASS missing-left: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl/absent)]\nPASS missing-right: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl/absent)]\nPASS missing-output: transient: Error in DNG scalar merge:\nNo such file or directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl/absent)]\nPASS base-parent-not-directory: transient: Error in DNG scalar merge:\nNot a directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl/base/child)]\nPASS output-is-directory: transient: Error in DNG scalar merge:\nIs a directory [open(/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-bef2kxyl/directory)]\n",
+        "stderr": "",
+        "probe_sha256": "d6aec073716100f12a0f873dd3ce6db428feeac7e16cd3564cc9b62b6c79c7d6",
+        "probe_log_sha256": "d0b4d37fee1832a42019c95d2a6995c1b43e1d0a9fe47cee7bb8848f5e86c9fe",
+        "scope": "Actual compiler-matched production merge objects; six controlled filesystem acquisition failures with settled FD/transaction/CPU/I/O/worker ledgers; no SDK or photos."
+      },
+      "archive_report": {
+        "path": "/private/tmp/unison-archive-io-ox-20261014.json",
+        "bytes": 8475,
+        "sha256": "19000c660cade9283753c732726f2e5c08f889b806d3aeedee9dbd7447ef0924"
+      },
+      "archive_actual": {
+        "schema": "unison-archive-downgrade/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx",
+        "build_receipt": "/private/tmp/unison-merge-io-ox-build-20261014.json",
+        "build_receipt_sha256": "2ab4d5b71e063303500cd5a2c236ec5e70900b2bdf1db523ad90ea1698269bda",
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pqsyteky/src/unison",
+        "binary_sha256": "648177d79db6dd52784bcfa3728e5bc1e844475befca0c2f8590d96ba5ae2004",
+        "baseline": "/usr/local/bin/unison",
+        "baseline_sha256": "007ee901f33089827afc3721cdee0b15e82d64124225a8e66630bfad7b4d7454",
+        "stages": [
+          {
+            "name": "seed",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "0ba9afb6196eaadebdb64ea1f12f9fa98ad8ef565a4719a90e85e4ac8a9f1688"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "90ad8317380f5004ac07db4af8ac221d0d53dde8e4cbfaf86126f1548dc0c917"
+              }
+            },
+            "output_sha256": "746748984d4ed46357c596f048e4f9f1a7585e88b163a52ecc4965f2d83d59bb",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-01.log"
+          },
+          {
+            "name": "current-merge-before-downgrade",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "598c65927ce2dbbfafd6be423fc58b05168b4fbddc1f58a35c8d275de48cb8fe"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "3541176dfdb0e788a7b5b4d91a549064d925bc76e4ea78d6ac3fdc3c5ac936f8"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-02.log"
+          },
+          {
+            "name": "baseline-noop",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/baseline-noop.log",
+            "archive_before": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "598c65927ce2dbbfafd6be423fc58b05168b4fbddc1f58a35c8d275de48cb8fe"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "3541176dfdb0e788a7b5b4d91a549064d925bc76e4ea78d6ac3fdc3c5ac936f8"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "1995af00d652cb462de9f4c1e2a5b9f6b161ac772d00da797df3aa9437e7ed24"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "e2890028d8e6eb74791f52da94ceaf4b9ee2f4c6cd4a21090c0b7a133973d3b1"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de"
+          },
+          {
+            "name": "baseline-update",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/baseline-update.log",
+            "archive_before": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "1995af00d652cb462de9f4c1e2a5b9f6b161ac772d00da797df3aa9437e7ed24"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "e2890028d8e6eb74791f52da94ceaf4b9ee2f4c6cd4a21090c0b7a133973d3b1"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "4d9b407090097d117811d9959ec4cbcb4c2044ca8f0b8e29f65da9587ad0d9b6"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "baab11ebb6cf2d66a9dcfa0543119d96abaa6d87f6b2d9812543dbb9c21e7f01"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95"
+          },
+          {
+            "name": "current-reopen",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "dbb4c929118ffb4cc94f393244f11d272ef43d5c6daf36e8db3a63a513cd0dd4"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "c2422ffa98c92f21a61278b92caca5d0f97f220a0d5e191f58a028bc5465715a"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-03.log"
+          },
+          {
+            "name": "missing-baseline-era-base-refused",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-04.log",
+            "both_edits_preserved": true
+          },
+          {
+            "name": "restore-known-common-fixture",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "c920e6b0f2023c9c658bb479b2ce857723667abe4fba0cdfca3a8fee3d24186b"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "5b5d0bf9d25677a4bc0b22a4c2ff09d1c86ccbc988fee070ee7f88bf036f46be"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-05.log"
+          },
+          {
+            "name": "current-captured-common-update",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "20a2df181942349b7c39d4d16389b50f3ccb65a996ac6a5bb6f80c3c103a2f2a"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "898ba2988068f002cce5ae2ea6a8cea07512cb686a60b93e4d925e2579c72b2d"
+              }
+            },
+            "output_sha256": "d9ddcc2a497e91690a5f7d3d01b02b70a96ca6a1a9ae1ee17e2dee20651c817d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-06.log"
+          },
+          {
+            "name": "current-merge-after-baseline",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "5d0c404c846a5f3434b23a61d70376db36f5342bf2bd2e702f0aefad0f4d335b"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "e8477a55c0e366e8ee909925014fb063f0d426447d505b725ff325f4da4cd89e"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-07.log"
+          },
+          {
+            "name": "current-final-noop",
+            "archive_inventory": {
+              "client": {
+                "ar526177b05ceb969034813d4510167402": "c78f6c27dc4cbc787e58f5960df509e716877e9a690eac14a0614c1c2f596428"
+              },
+              "server": {
+                "ar027bd1784f8089286f1cc65a3abc40b1": "bbbabff81056891f2af2a652ecc6c59613f30b4cfa9e9f7fba00522ee30f6421"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-4k4mxtrx/roundtrip/run-08.log"
+          }
+        ],
+        "complete": true,
+        "scope": "Private synthetic current scalar merge/compact bases -> baseline archive load/update -> current merge. No SDK, photos, catalog or production archives.",
+        "runner_sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+      },
+      "build_terminal": {
+        "handle": 26760,
+        "chunk": "d81dd3",
+        "exit": 0
+      },
+      "probe_terminal": {
+        "handle": 16664,
+        "chunk": "c87c32",
+        "exit": 0
+      },
+      "archive_terminal": {
+        "handle": 84049,
+        "chunk": "dbe926",
+        "exit": 0
+      }
+    }
+  ],
+  "negative": {
+    "pin": {
+      "path": "/private/tmp/unison-merge-io-negative-stock-20261014.json",
+      "bytes": 12823,
+      "sha256": "c55ccd219d4e54550f4cd31a3119f425bc93944bbe7ad462008c92658bed0149"
+    },
+    "actual": {
+      "schema": "unison-merge-io-errors/1",
+      "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk",
+      "source_pins": {
+        "tests/merge_io_errors/probe.ml": "1849202989276fbefcc5cca849a7b31067e4b4dd46551dee7ba4db3ef433838c",
+        "tests/merge_io_errors/run.py": "66b957b6296190b6bcacac93d842c3290738fa57482474b5ffe025a198f1b9fa"
+      },
+      "production_merge_sha256": "ebaf8ef9210a1e0fea3ca7cb36b400b37292278a706ec7d525c17ceedc942fa3",
+      "build_receipt_sha256": "1cc043624a27138048a016fe3521bc6393c30219c4f13a557f814308efa81992",
+      "build_receipt": "/private/tmp/unison-missing-merge-base-stock-build-20261014.json",
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+      "compile_command": [
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/system",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/system/generic",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt",
+        "-I",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/generic",
+        "-I",
+        "+unix",
+        "-I",
+        "+str",
+        "unix.cmxa",
+        "str.cmxa",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/pty.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/bytearray_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/hash_compat.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/props_xattr.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/props_acl.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/osxsupport.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/copy_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/nativeCopyRange_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/wholeFileClone_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fileObservation_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/stagePublication_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/finalPublication_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticHash_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticFile_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/helperSupervisor_stubs.o",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/umarshal.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/rx.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/unicode_tables.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/unicode.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/bytearray.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/system/system_generic.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/system/generic/system_impl.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/system.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/projectInfo.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/myMap.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/safelist.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/util.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/uarg.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/prefs.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/trace.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ubase/proplist.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/pqueue.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/lwt.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/lwt_util.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/generic/lwt_unix_impl.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lwt/lwt_unix.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/features.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/uutil.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/case.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/pred.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/terminal.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fileutil.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/name.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/path.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fspath.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fileObservation.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/stagePublication.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/wholeFileClone.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fs.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fingerprint.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/abort.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/osx.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fswatch.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/propsdata.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/props.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fileinfo.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/os.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/lock.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/clroot.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/common.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/tree.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/checksum.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/transfer.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/xferhint.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/borrowedWork.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/remote.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/external.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/negotiate.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/globals.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/fswatchold.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticHash.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticFile.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/formatExtension.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/formatRecognition.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/xmpObservation.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/xmpMerge.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/dngSemantic.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/dngExtended.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/jpegSemantic.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/dngRecognition.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticDelta.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticReport.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/helperSupervisor.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticAdmission.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticMailbox.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/ioAdmission.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticWorkers.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticFormats.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/backendResources.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/helperLimiter.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/candidateValidator.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/dngValidation.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/dngCandidateValidation.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/candidateValidators.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/validationTreeBudget.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/validationTreePolicy.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticRuntime.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/supervisedExternal.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticMergeCache.cmx",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/semanticSync.cmx",
+        "probe.ml",
+        "-o",
+        "probe"
+      ],
+      "compile_exit": 0,
+      "probe_exit": 2,
+      "expected_exit": 2,
+      "stdout": "PASS missing-base: transient: DNG scalar merge: no saved common base is available; synchronize a common version with compact capture or backupcurrent enabled before merging\nFAIL missing-left: Unix.Unix_error(Unix.ENOENT, \"open\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk/absent\")\nFAIL missing-right: Unix.Unix_error(Unix.ENOENT, \"open\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk/absent\")\nFAIL missing-output: Unix.Unix_error(Unix.ENOENT, \"open\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk/absent\")\nFAIL base-parent-not-directory: Unix.Unix_error(Unix.ENOTDIR, \"open\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk/base/child\")\nFAIL output-is-directory: Unix.Unix_error(Unix.EISDIR, \"open\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merge-io-errors-ycpqn2zk/directory\")\n",
+      "stderr": "",
+      "probe_sha256": "6797a4abbf5ee919d0171c3cc5d164bd8d9e71c418af05a5a7b85a4ac081c439",
+      "probe_log_sha256": "d6a987f0c3dd5c48f9cfd5fcc524501c3d1bf109e5ab42a1b03973650d33e329",
+      "scope": "Actual compiler-matched production merge objects; six controlled filesystem acquisition failures with settled FD/transaction/CPU/I/O/worker ledgers; no SDK or photos."
+    },
+    "owner_chunk": "d37bd1",
+    "harness_exit": 0,
+    "expected_probe_exit": 2
+  },
+  "sdk_executions": 0,
+  "limits": [
+    "No actual EIO/ENOSPC injection, mount/crash/camera/SDK qualification.",
+    "Non-Unix exception identity follows inspected existing converter source; not a new injected cancellation/OOM runtime proof.",
+    "No general whole-process resource ceiling; only scoped ledgers and descriptor conservation."
+  ]
+}

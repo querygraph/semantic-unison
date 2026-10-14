@@ -1,0 +1,38 @@
+#!/usr/bin/env python3
+"""Link compiler-matched production merge objects; deterministic filesystem errors."""
+import argparse,json,hashlib,os,shutil,subprocess,tempfile
+from pathlib import Path
+p=argparse.ArgumentParser(description=__doc__)
+p.add_argument('--build-receipt',type=Path,required=True)
+p.add_argument('--report',type=Path,required=True)
+p.add_argument('--expected-exit',type=int,default=0,choices=(0,2))
+a=p.parse_args();root=Path(__file__).resolve().parents[2]
+def sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()
+b=json.loads(a.build_receipt.read_text());build=Path(b['workspace'])
+assert b['complete'] and b['build_exit']==b['selftest_exit']==0
+assert sha(b['compiler'])==b['compiler_sha256'] and sha(b['binary'])==b['binary_sha256']
+# Negative controls deliberately use an older pinned snapshot; do not label it
+# current. Positive tests require all production sources to match the checkout.
+if a.expected_exit==0:
+ for name,digest in b['source_sha256'].items():
+  if name.startswith('src/'):assert sha(root/name)==digest,name
+work=Path(tempfile.mkdtemp(prefix='unison-merge-io-errors-')).resolve()
+shutil.copyfile(root/'tests/merge_io_errors/probe.ml',work/'probe.ml')
+objects=(build/'src/Makefile.OCaml').read_text().split('OCAMLOBJS =',1)[1].split('\n\n',1)[0].replace('\\','').split()
+objects=[name.replace('$(SYSTEM)','generic') for name in objects if name!='$(WINOBJS)']
+objects=objects[:objects.index('semanticSync.cmo')+1]
+paths=[str(build/'src'/name.replace('.cmo','.cmx')) for name in objects]
+flags=[v for name in ['src','src/ubase','src/system','src/system/generic','src/lwt','src/lwt/generic'] for v in ['-I',str(build/name)]]
+stubs=['pty.o','bytearray_stubs.o','hash_compat.o','props_xattr.o','props_acl.o','osxsupport.o','copy_stubs.o','nativeCopyRange_stubs.o','wholeFileClone_stubs.o','fileObservation_stubs.o','stagePublication_stubs.o','finalPublication_stubs.o','semanticHash_stubs.o','semanticFile_stubs.o','helperSupervisor_stubs.o']
+command=[b['compiler'],*flags,'-I','+unix','-I','+str','unix.cmxa','str.cmxa',*[str(build/'src'/s) for s in stubs],*paths,'probe.ml','-o','probe']
+c=subprocess.run(command,cwd=work,capture_output=True,text=True,timeout=60)
+(work/'compile.log').write_text(c.stdout+c.stderr);assert c.returncode==0,c.stderr
+for name in ('base','left','right','output'):(work/name).write_bytes(b'original private synthetic data')
+(work/'directory').mkdir();(work/'state').mkdir(mode=0o700)
+before={name:sha(work/name) for name in ('base','left','right','output')}
+x=subprocess.run([str(work/'probe')],cwd=work,env=dict(os.environ,UNISON=str(work/'state')),capture_output=True,text=True,timeout=30)
+(work/'test.log').write_text(x.stdout+x.stderr)
+assert before=={name:sha(work/name) for name in before}
+assert x.returncode==a.expected_exit,(x.returncode,x.stdout,x.stderr)
+result={'schema':'unison-merge-io-errors/1','workspace':str(work),'source_pins':{name:sha(root/name) for name in ['tests/merge_io_errors/probe.ml','tests/merge_io_errors/run.py']},'production_merge_sha256':sha(build/'src/semanticSync.ml'),'build_receipt_sha256':sha(a.build_receipt),'build_receipt':str(a.build_receipt),'compiler':b['compiler'],'compile_command':command,'compile_exit':c.returncode,'probe_exit':x.returncode,'expected_exit':a.expected_exit,'stdout':x.stdout,'stderr':x.stderr,'probe_sha256':sha(work/'probe'),'probe_log_sha256':sha(work/'test.log'),'scope':'Actual compiler-matched production merge objects; six controlled filesystem acquisition failures with settled FD/transaction/CPU/I/O/worker ledgers; no SDK or photos.'}
+a.report.write_text(json.dumps(result,indent=2)+'\n');print(x.stdout,end='');print('Report:',a.report)
