@@ -1,0 +1,50 @@
+{
+  "schema": "unison-sdk-host-matrix-preparation-qualification/1",
+  "utc": "2026-10-14T20:49:07.532363+00:00",
+  "scope": "source/plan and deterministic receipt checks only; no SDK/native execution",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 6178,
+      "sha256": "e916d64472bf56569f1436d5d173a35bf7f7531ced7e65a0f95a05e8521b11e5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/test.py",
+      "bytes": 2985,
+      "sha256": "3e19b448d9178d803101c88d6da0aede64a2957dfdb40fc1f85d971c593435f1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/README.md",
+      "bytes": 2301,
+      "sha256": "1a44b7b0359bade5af4fd186a7bef90ae08ea73b24e9f0c750368d60a087bd09"
+    }
+  ],
+  "test": {
+    "path": "/private/tmp/unison-sdk-host-plan-1wx_w5ao/RESULT.json",
+    "bytes": 313,
+    "sha256": "5ae2f2ae3b0f66e050fe49a1e2ac911fecfc7ee64015d946baa1fc200e77d6cd"
+  },
+  "prepared_plan": {
+    "path": "/private/tmp/unison-sdk-host-comparison-plan-20261014-v1.json",
+    "bytes": 13025,
+    "sha256": "5f9054d34433e7a94fdb0d966e69ccd32987316811303adc5f594bacba37421c"
+  },
+  "test_terminal": {
+    "tool_chunk": "7b9775",
+    "exit_code": 0
+  },
+  "prepare_terminal": {
+    "tool_chunk": "88531e",
+    "exit_code": 0
+  },
+  "native_release": false,
+  "runtime_qualified": false,
+  "remaining": [
+    "fresh admitted aggregate executor and parent closure",
+    "actual capped-host SDK runtime equivalence",
+    "actual task/thread accounting",
+    "decoded reference parity",
+    "allocator peak/live and cancellation qualification",
+    "representative 1/6/18 performance"
+  ]
+}

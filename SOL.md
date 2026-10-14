@@ -2225,3 +2225,25 @@ SDK calls/six mixed receives/bad-digest refusal and actual parent terminal exit0
 records exact Root/independent-audit/return/terminal pins. Preview coordination
 hold is released; slot consumed, no replay/new SDK permission. Qualification
 stays generated-container functional/lifecycle with contained test C backend.
+
+
+### Capped SDK host comparison preparation — 2026-10-14
+
+Prepared a source-only twelve-call matrix: each accepted generated uncompressed,
+JPEG and JPEG XL original gets one reference call and experimental host calls
+requesting 1/6/18 total threads including the caller. The preparer verifies linked
+executables, experimental driver/header content and original input hashes, writes
+an exclusive plan, and has no native execution mode. Its strict receipt checker
+binds candidate SHA/size/build and valid structure/decode/raw digest/zero errors;
+warning counts remain part of reference comparison. Twelve positive receipts,
+132 malformed receipt denials and seven invalid matrix denials pass.
+[Source/evidence](tests/sdk_host_matrix/qualification.json),
+[usage and remaining gates](tests/sdk_host_matrix/README.md).
+
+No SDK/Adobe/Photo/Lightroom process was invoked. This is preparation, not runtime
+qualification or a fresh native request. A future executor must revalidate pins,
+bind a fresh Root slot, run calls sequentially within 18 reserved credits/300s,
+and prove aggregate and parent closure. The existing result protocol cannot prove
+pixel equality, actual thread use or allocator peaks, so even validation-result
+equivalence will not close those separate gates or establish scaling. Both earlier
+SDK admissions remain consumed. Full M4-V/M5/M6 remain open.
