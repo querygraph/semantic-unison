@@ -4,6 +4,24 @@
 
 ## Live implementation handoff
 
+* Exact next finite publisher test: [Ten-only offline registration](doc/preview-offline-registration-test-plan.md)
+  reuses control `10031592` and six preserved JPEGs in a Root-qualified private
+  native catalog/cache fixture. Target metadata must be absent before the
+  independent closed-cache writer; committed rows and bytes must be observed
+  before native reopening can repair them. Fresh fixture owner admission then
+  verifies highest **2272×1704 / 646453 bytes** and the accepted lower request
+  **640×640**, expecting **1136×852 / 251034 bytes** while rows stay current.
+  One actual absent or populated RootPixels template is enough for this case,
+  not for all auxiliary states. Native fixture/root selection is an open
+  prerequisite: existing helpers bind the active processor's stores. No
+  production deletion, registration replay, legacy conversion or rendering
+  substitutes for authored metadata. Passing establishes that finite recipe's
+  native compatibility, before separately admitted recovery/Quasar tests.
+  The 04:13:54 UTC current pointer confirms both earlier native passes and the
+  original publisher task running; its dated desktop observation is locked,
+  with no new native/production publisher release. The older Root PLAN text
+  listing highest recognition as next has been flagged through the queue.
+
 * Coordination rule: read Photo's mutable
   [current-state pointer](PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json) first.
   Its dated result pointers and specific qualification fields take precedence
