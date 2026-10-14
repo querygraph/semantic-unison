@@ -121,12 +121,11 @@ let retain_source_fd transaction fd =
 let with_borrowed transaction f =
   if transaction.abandoned then Lwt.fail (Util.Transient "Local semantic transfer interrupted")
   else begin
-    transaction.busy <- true;
     let finish () =
       transaction.busy <- false;
       if transaction.abandoned then
         (try close_transaction transaction with Unix.Unix_error _ -> ()) in
-    Lwt.try_bind f
+    BorrowedWork.try_bind (fun () -> transaction.busy <- true; f ())
       (fun result -> finish ();
         if transaction.abandoned then Lwt.fail (Util.Transient "Local semantic transfer interrupted")
         else Lwt.return result)
@@ -208,7 +207,7 @@ let create_bound_transaction ~basis ~directory ~staging candidate path =
              with error -> release_transaction_noerr transaction; raise error)
       with error -> release_publication_noerr publication; raise error
 let with_publication_borrowed publication transaction f =
-  Lwt.try_bind (fun () -> with_borrowed transaction f)
+  BorrowedWork.try_bind (fun () -> with_borrowed transaction f)
     (fun result ->
       (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
       Lwt.return result)
@@ -255,36 +254,33 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
         let release_noerr () =
           (match publication with Some owner -> release_publication_noerr owner | None -> ());
           release_transaction_noerr transaction in
-        catch (fun () ->
+        BorrowedWork.catch (fun () ->
           let source_fd = Fs.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
           retain_source_fd transaction source_fd;
           let pool = (SemanticRuntime.get ()).pool in
           let rec select = function
             | [] -> return None
             | extension :: rest ->
-          with_publication_borrowed publication transaction (fun () ->
+          BorrowedWork.bind (fun () -> with_publication_borrowed publication transaction (fun () ->
             (* Settle both jobs, including failures, before releasing borrowed
                descriptors. An early failure never closes a sibling's fd. *)
-            let settle f = Lwt.try_bind f
-              (fun x -> return (Ok x)) (fun e -> return (Error e)) in
-            let base = settle (fun () -> SemanticWorkers.inspect pool cancellation ~extension basis_fd)
-            and target = settle (fun () -> SemanticWorkers.inspect pool cancellation ~extension source_fd) in
-            base >>= fun base -> target >>= fun target ->
-            match base,target with
-            | Ok (Some base),Ok (Some target) -> return (base.proof,target.proof)
-            | Error e,_ | _,Error e -> fail e
-            | _ -> fail (Util.Transient "Local semantic inspection cancelled")) >>= fun (base,target) ->
+            BorrowedWork.bind (fun () -> BorrowedWork.all
+              [(fun () -> SemanticWorkers.inspect pool cancellation ~extension basis_fd);
+               (fun () -> SemanticWorkers.inspect pool cancellation ~extension source_fd)]) (function
+              | [Some base; Some target] -> return (base.proof,target.proof)
+              | _ -> fail (Util.Transient "Local semantic inspection cancelled")))) (fun (base,target) ->
           let plan = match base,target with
             | Ok base,Ok target -> SemanticDelta.plan ~nonce:(String.make 32 '\000') ~base ~target
             | Error reason,_ | _,Error reason -> Error reason in
-          match plan with Error _ -> select rest | Ok plan -> return (Some (extension,plan)) in
-          select extensions >>= function
+          match plan with Error _ -> select rest | Ok plan -> return (Some (extension,plan))) in
+          BorrowedWork.bind (fun () -> select extensions) (function
           | None ->
             debug (fun () -> Util.msg "Local semantic fallback: no enabled profile proves eligibility\n");
             release (); return false
           | Some (extension,plan) ->
-            with_publication_borrowed publication transaction (fun () -> SemanticWorkers.apply_report pool cancellation ~extension plan
-              ~basis:basis_fd ~output:output_fd) >>= fun applied ->
+            BorrowedWork.bind
+              (fun () -> with_publication_borrowed publication transaction (fun () -> SemanticWorkers.apply_report pool cancellation ~extension plan
+                ~basis:basis_fd ~output:output_fd)) (fun applied ->
             let report = match applied with Some report -> report | None ->
               raise (Util.Transient "Local semantic materialization cancelled") in
             (match publication,producer with
@@ -305,7 +301,7 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
               "Local semantic workers wrote %d metadata bytes in %d writes from %d payload bytes (%s)\n"
               report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
               (SemanticDelta.payload_size plan) (SemanticDelta.profile plan));
-            return true)
+            return true)))
           (fun e -> release_noerr ();
             if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Local semantic worker: " ^ reason))

@@ -451,16 +451,17 @@ let renameLocalWithBinding ?binding
         Some actual
     | _ -> None in
   checkCandidate ();
-  (if not (CandidateValidation.enabled ()) && publication = None then Lwt.return () else
-   Lwt.catch
+  BorrowedWork.bind (fun () ->
+   if not (CandidateValidation.enabled ()) && publication = None then Lwt.return () else
+   BorrowedWork.catch
     (fun () ->
       ignore (checkActualFingerprint ());
-      (if CandidateValidation.enabled () then
+      BorrowedWork.bind (fun () -> if CandidateValidation.enabled () then
          CandidateValidation.before_commit_with_reservation
            ~reservation:(Option.bind binding TargetBinding.reservation)
            ~directory:workingDir ~candidate:pathFrom
            ~destination:pathTo
-       else Lwt.return ()) >>= fun () ->
+       else Lwt.return ()) (fun () ->
       let actual = checkActualFingerprint () in
       (* Rebind finalized staging, including resource forks, to the transfer's
          expected archive. Keep pseudo-fingerprint behavior compatible with
@@ -478,7 +479,7 @@ let renameLocalWithBinding ?binding
                if not (Os.fullfingerprintEqual actual expected) then
                  raise (Util.Transient "Validation candidate differs from transferred source")
              end));
-      Lwt.return ())
+      Lwt.return ()))
     (fun error ->
       (* A rejected candidate is not a resumable prefix. In particular, hidden
          helper-created children must not become trusted on the next attempt.
@@ -514,7 +515,7 @@ let renameLocalWithBinding ?binding
         Lwt.fail (Util.Transient
           (Printf.sprintf "Validation failed (%s); could not discard private staging (%s)"
             (Printexc.to_string error) (Printexc.to_string cleanup_error)))))
-  >>= fun () ->
+  (fun () ->
   checkCandidate ();
   let copyInfo = prepareCopy workingDir pathTo notDefault in
   (* Make sure the target is unchanged, then do the rename.
@@ -557,7 +558,7 @@ let renameLocalWithBinding ?binding
                    Update.replaceArchiveLocal fspathTo localPathTo archTo
   | None        -> ()
   end;
-  Lwt.return ()
+  Lwt.return ())
 
 let renameLocal args = renameLocalWithBinding args
 
@@ -571,7 +572,7 @@ let renameOnHost =
 
 let renameBoundLocal connection (root, token, args) =
   let ((localPath, workingDir, candidate, target), _) = args in
-  Lwt.catch
+  BorrowedWork.catch
     (fun () -> TargetBinding.with_binding ?connection ~token ~logical_root:root
       ~local_path:localPath ~working_dir:workingDir ~candidate ~target
       (fun binding -> renameLocalWithBinding ~binding (root, args)))
@@ -602,10 +603,12 @@ let releaseTargetBinding root = function
       | Remote _ -> releaseBoundOnHost (Remote.connectionOfRoot root) (snd root, token)
 
 let withTargetBinding root token f =
-  Lwt.try_bind f
-    (fun result -> releaseTargetBinding root token >>= fun () -> Lwt.return result)
-    (fun error -> Lwt.catch (fun () -> releaseTargetBinding root token)
-                    (fun _ -> Lwt.return ()) >>= fun () -> Lwt.fail error)
+  BorrowedWork.try_bind f
+    (fun result -> BorrowedWork.bind (fun () -> releaseTargetBinding root token)
+      (fun () -> Lwt.return result))
+    (fun error -> BorrowedWork.bind
+      (fun () -> BorrowedWork.catch (fun () -> releaseTargetBinding root token)
+        (fun _ -> Lwt.return ())) (fun () -> Lwt.fail error))
 
 let rename ?token root localPath workingDir pathOld pathNew ui archOpt notDefault =
   debug (fun() ->

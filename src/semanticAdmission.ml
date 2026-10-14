@@ -202,33 +202,20 @@ let with_borrow r ~(cost:cost) f =
           cost.payload_bytes > r.cost.payload_bytes || cost.descriptors > r.cost.descriptors then
     fail (Failed "semantic workspace exceeds its retained reservation")
   else begin
-    let returned = ref false and awaited = ref (Lwt.wait ()) in
     let success value = finish_borrow r; return value in
     let failure error = (try finish_borrow r with _ -> ()); fail error in
-    (* The one-shot exceptional waiter-allocation path must not release under
-       a running callback. Polling needs no waiter on that callback. Persistent
-       allocation failure is outside the recoverability guarantee. *)
-    let rec settle_then_fail error () =
-      match Lwt.poll !awaited with
-      | None -> Lwt_unix.sleep 0.01 >>= settle_then_fail error
-      | Some _ -> failure error
-      | exception _ -> failure error in
     let invoke () =
-      let promise = f () in
-      awaited := promise; returned := true; promise in
-    r.borrowing <- true;
-    try Lwt.try_bind invoke success failure
-    with error ->
-      if !returned then settle_then_fail error () else failure error
+      r.borrowing <- true; f () in
+    BorrowedWork.try_bind invoke success failure
   end
 let with_lease t cancellation ~role ~cost f =
   let r = make_reservation t ~role ~cost in
   let cleanup error = (try retire r with _ -> ()); fail error in
-  try Lwt.try_bind (fun () -> acquire r cancellation)
+  try BorrowedWork.try_bind (fun () -> acquire r cancellation)
     (fun admitted ->
       if not admitted || HelperSupervisor.is_cancelled cancellation then
         (retire r; return None)
-      else Lwt.try_bind (fun () -> with_borrow r ~cost f)
+      else BorrowedWork.try_bind (fun () -> with_borrow r ~cost f)
         (fun result -> retire r; return (Some result)) cleanup)
     cleanup
   with error -> cleanup error

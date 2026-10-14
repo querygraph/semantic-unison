@@ -444,8 +444,8 @@ let observe_semantic_pair ri =
   | None,_ | _,[] -> return None
   | Some (path1,_,path2,_),extensions ->
       let root1,root2=Globals.roots () in
-      Update.translatePath root1 path1 >>= fun local1 ->
-      Update.translatePath root2 path2 >>= fun local2 ->
+      BorrowedWork.bind (fun () -> Update.translatePath root1 path1) (fun local1 ->
+      BorrowedWork.bind (fun () -> Update.translatePath root2 path2) (fun local2 ->
       let absolute1=Fspath.concat (snd root1) local1 and absolute2=Fspath.concat (snd root2) local2 in
       let left_label,right_label=roots2niceStrings 12 (root1,root2) in
       let rec select best = function
@@ -453,14 +453,10 @@ let observe_semantic_pair ri =
         | extension::rest ->
           (* Await both inspections even on failure. Each owns its descriptors
              and reservation until its own operation has stopped. *)
-          let settle f = Lwt.try_bind f (fun value -> return (Result.Ok value))
-            (fun error -> return (Result.Error error)) in
-          let left=settle (fun () -> SemanticRemote.observe ~root:root1 ~path:absolute1 ~extension)
-          and right=settle (fun () -> SemanticRemote.observe ~root:root2 ~path:absolute2 ~extension) in
-          left >>= fun left -> right >>= fun right ->
-          match left,right with
-          | Result.Error error,_ | _,Result.Error error -> fail error
-          | Result.Ok left,Result.Ok right ->
+          BorrowedWork.bind (fun () -> BorrowedWork.all
+            [(fun () -> SemanticRemote.observe ~root:root1 ~path:absolute1 ~extension);
+             (fun () -> SemanticRemote.observe ~root:root2 ~path:absolute2 ~extension)]) (function
+          | [left;right] ->
             let supported = function SemanticReport.Supported _ -> true | _ -> false in
             let both=supported left.SemanticRemote.observation && supported right.SemanticRemote.observation in
             let hinted=FormatExtension.matches_filename extension (Path.toString path1) ||
@@ -470,7 +466,8 @@ let observe_semantic_pair ri =
             let observation = if handled then Some {item=ri;roots=(root1,root2);snapshots;
               text=SemanticReport.render ~left_label ~right_label left.observation right.observation} else None in
             if both then return observation else select (match best with Some _ -> best | None -> observation) rest
-      in select None extensions
+          | _ -> assert false)
+      in select None extensions))
 let inspectDetails ri =
   semantic_detail:=None;
   try semantic_detail:=Lwt_unix.run (observe_semantic_pair ri)

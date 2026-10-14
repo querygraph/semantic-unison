@@ -1,0 +1,47 @@
+{
+  "schema": "unison-preview-oracle-coordination/1",
+  "state": "REQUEST_QUEUED_TO_PHOTO_PARENT_NATIVE_RESULT_PENDING",
+  "receivedUtc": "2026-10-14T02:04:51Z",
+  "window": {
+    "path": "/Users/alexy/src/photo/native-access-restored-59cae9953316406886d124d25ebe9be7/FINITE-ORACLE-WINDOW.json",
+    "bytes": 1985,
+    "sha256": "fe84dacb6f1d1df114c5bd28c2c01158f139a531945bf04349cf5a9d6e972874",
+    "releasedUtc": "2026-10-14T02:00:40.601894+00:00",
+    "owner": "/root/preview_implementation",
+    "catalogPID": 2844,
+    "maximumPhysicalPhotoSources": 8,
+    "maximumLogicalStates": 16,
+    "maximumCPUCredits": 18
+  },
+  "access": {
+    "path": "/Users/alexy/src/photo/native-access-restored-59cae9953316406886d124d25ebe9be7/COMPLETE.json",
+    "bytes": 2742,
+    "sha256": "a1a76cf84aa3a283562b2b0f0adba1befc44cb017010572aa6873cf1fe945fe8"
+  },
+  "clearance": {
+    "path": "/Users/alexy/src/photo/native-access-restored-59cae9953316406886d124d25ebe9be7/ROOT-CLEARANCE.json",
+    "bytes": 4502,
+    "sha256": "8dfa928b2281c9c860783e3d5c5458a838100ba80e68b6b0a8a31a69d19c4542"
+  },
+  "queue": {
+    "utc": "2026-10-14T02:04:51Z",
+    "parentThreadId": "01a13369-8b68-7aa1-be91-cba984ba269b",
+    "prompt": "Follow-up to our queued request; do not start a duplicate test. Read and accepted FINITE-ORACLE-WINDOW.json SHA fe84dacb6f1d1df114c5bd28c2c01158f139a531945bf04349cf5a9d6e972874: original preview owner only, <=8 sources/<=16 states/18 credits. Awaited artifact: tested control10031592 registration→load packet with fresh current Main UUID/digest; raw ImageCacheEntry BEFORE_LOAD/POST_LOAD/POST_DECODE, final current binding and native-effective orientation; native row level digest, decoded dimensions and positive fileSize matching stable bytes; stale fallback/deadline outcomes; candidate vs committed recognition; independent file evidence. Return exact result/log/source paths+SHA, actual outcomes and closure. Cold restart requires separate Root-coordinated admission; no extra Quasar/mount-loss test in this slot. Unison remains interface/source review, no Adobe/cache/native work or preview output. Please relay this exact request to original owner.",
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a13369-8b68-7aa1-be91-cba984ba269b\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "unisonScope": "Interface/source review only; original Photo renderer/publisher remains owner.",
+  "unisonNativeOperations": 0,
+  "unisonPreviewFilesGenerated": 0,
+  "nativeTestResultAccepted": false,
+  "closureReceived": false,
+  "coldRestartRequiresSeparateRootAdmission": true,
+  "quasarMountLossOutsideWindow": true
+}

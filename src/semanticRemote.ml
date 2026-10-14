@@ -48,9 +48,8 @@ let register_held_fd fd =
     raise error
 let borrowed files f =
   if files.closing then fail (Util.Transient "Semantic transfer interrupted") else begin
-    files.busy <- true;
     let finish () = files.busy <- false; if files.closing then close_files_noerr files in
-    Lwt.try_bind f
+    BorrowedWork.try_bind (fun () -> files.busy <- true; f ())
       (fun result -> finish ();
         if files.closing then fail (Util.Transient "Semantic transfer interrupted")
         else return result)
@@ -74,7 +73,7 @@ let make_plan connection (source, request) =
       let fd = Fs.openfile (Fspath.canonize (Some source))
         [Unix.O_RDONLY; Unix.O_CLOEXEC; Unix.O_NONBLOCK] 0 in
       let files = register_held_fd fd in
-      Lwt.try_bind
+      BorrowedWork.try_bind
         (fun () -> SemanticRuntime.with_cancellation (fun cancellation ->
           borrowed files (fun () -> SemanticWorkers.inspect
             (SemanticRuntime.get ()).pool cancellation ~extension fd)))
@@ -208,7 +207,7 @@ let create_bound_candidate ~basis ~directory ~staging stage path =
              with error -> release_candidate_noerr candidate; raise error)
       with error -> release_publication_noerr publication; raise error
 let borrowed_with_publication publication candidate f =
-  Lwt.try_bind (fun () -> borrowed candidate.files f)
+  BorrowedWork.try_bind (fun () -> borrowed candidate.files f)
     (fun result ->
       (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
       Lwt.return result)
@@ -271,25 +270,27 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
         let release_noerr () =
           (match publication with Some owner -> release_publication_noerr owner | None -> ());
           release_candidate_noerr candidate in
-        catch (fun () ->
+        BorrowedWork.catch (fun () ->
           let rec select = function
             | [] -> return None
             | extension :: rest ->
-          borrowed_with_publication publication candidate (fun () -> SemanticWorkers.inspect
-            (SemanticRuntime.get ()).pool cancellation ~extension basis) >>= fun result ->
+          BorrowedWork.bind
+            (fun () -> borrowed_with_publication publication candidate (fun () -> SemanticWorkers.inspect
+              (SemanticRuntime.get ()).pool cancellation ~extension basis)) (fun result ->
           let base = match result with
             | Some result when result.SemanticWorkers.stats.Unix.LargeFile.st_size <> expected_size ->
                 Error "target length changed"
             | _ -> inspected result in
-          match base with Error _ -> select rest | Ok base -> return (Some (extension,base)) in
-          select extensions >>= function
+          match base with Error _ -> select rest | Ok base -> return (Some (extension,base))) in
+          BorrowedWork.bind (fun () -> select extensions) (function
           | None ->
             debug (fun () -> Util.msg "Remote semantic fallback: no negotiated profile proves eligibility\n");
             release (); return false
           | Some (extension,base) ->
             let nonce = nonce () in
             let request = SemanticDelta.encode_request ~nonce base in
-            request_plan connection (Fspath.toString source,request) >>= function
+            BorrowedWork.bind
+              (fun () -> request_plan connection (Fspath.toString source,request)) (function
             | None ->
               debug (fun () -> Util.msg "Remote semantic fallback: source proof differs\n");
               release (); return false
@@ -298,8 +299,9 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
                 | Ok plan when SemanticDelta.binds_request ~nonce ~base plan -> plan
                 | Ok _ -> raise (Util.Transient "Semantic response does not match receiver request")
                 | Error reason -> raise (Util.Transient ("Invalid semantic response: " ^ reason)) in
-              borrowed_with_publication publication candidate (fun () -> SemanticWorkers.apply_report
-                (SemanticRuntime.get ()).pool cancellation ~extension plan ~basis ~output) >>= fun applied ->
+              BorrowedWork.bind
+                (fun () -> borrowed_with_publication publication candidate (fun () -> SemanticWorkers.apply_report
+                  (SemanticRuntime.get ()).pool cancellation ~extension plan ~basis ~output)) (fun applied ->
               let applied = match applied with Some report -> report | None ->
                 raise (Util.Transient "Semantic materialization cancelled") in
               (match publication,producer with
@@ -319,7 +321,7 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
               debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
                 applied.SemanticDelta.logical_bytes_written applied.write_calls
                 (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
-              return true)
+              return true))))
           (fun e -> release_noerr ();
             if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Semantic worker: " ^ reason))
@@ -353,7 +355,7 @@ let report_failure profile reason =
 let same_report_stats a b =
   a.Unix.LargeFile.st_dev=b.Unix.LargeFile.st_dev && a.st_ino=b.st_ino &&
   a.st_kind=b.st_kind && a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime
-let capture_report profile f = Lwt.catch f (function
+let capture_report profile f = BorrowedWork.catch f (function
   | SemanticWorkers.Failed why | Util.Transient why -> return (report_failure profile why)
   | Unix.Unix_error (error,operation,_) ->
       return (report_failure profile (operation ^ ": " ^ Unix.error_message error))
@@ -363,11 +365,11 @@ let inspect_file ?(meaning=false) cancellation extension path =
   capture_report profile (fun () ->
     let fd = Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
     let files = register_held_fd fd in
-    Lwt.try_bind (fun () -> borrowed files (fun () ->
+    BorrowedWork.try_bind (fun () -> borrowed files (fun () ->
       let pool = (SemanticRuntime.get ()).pool in
       if meaning then SemanticWorkers.observe pool cancellation ~extension fd else begin
-      SemanticWorkers.inspect pool cancellation ~extension fd >>= fun result ->
-      return (Option.map (fun inspection -> {SemanticWorkers.inspection;meaning=None}) result) end))
+      BorrowedWork.bind (fun () -> SemanticWorkers.inspect pool cancellation ~extension fd)
+        (fun result -> return (Option.map (fun inspection -> {SemanticWorkers.inspection;meaning=None}) result)) end))
       (fun result ->
         let observed = try match result with
         | None -> report_failure profile "Semantic inspection cancelled"
@@ -395,9 +397,9 @@ let inspect_source ~meaning connection (path,profile,nonce) =
     else match SemanticFormats.resolve_peer profile with
     | None -> finish (SemanticReport.Unsupported (profile,"Profile is not enabled or negotiated"))
     | Some extension ->
-        SemanticRuntime.with_cancellation (fun cancellation ->
-          inspect_file ~meaning cancellation extension (Fspath.canonize (Some path))) >>= fun result ->
-        finish result.observation
+        BorrowedWork.bind (fun () -> SemanticRuntime.with_cancellation (fun cancellation ->
+          inspect_file ~meaning cancellation extension (Fspath.canonize (Some path))))
+          (fun result -> finish result.observation)
 let inspection_scope connection (_,profile,_) f =
   if not (inspection_supported connection) then f () else
   match SemanticFormats.resolve_peer profile with
@@ -426,10 +428,10 @@ let observe ~root ~path ~extension =
         let nonce=nonce () in
         let request,decode = if meaning_supported connection then inspect_meaning_peer,SemanticReport.decode_observation
           else inspect_peer,SemanticReport.decode in
-        request connection (Fspath.toString path,profile,nonce) >>= fun encoded ->
+        BorrowedWork.bind (fun () -> request connection (Fspath.toString path,profile,nonce)) (fun encoded ->
         match decode ~nonce ~profile ~max_payload:(FormatExtension.payload_limit extension) encoded with
         | Error why -> fail (Util.Transient ("Invalid semantic inspection reply: " ^ why))
-        | Ok observation -> return {observation;local_snapshot=None})
+        | Ok observation -> return {observation;local_snapshot=None}))
 
 let try_transfer_reserved ~reservation ~producer ~connection ~source ~basis ~directory ~staging ~expected_size =
   try_transfer_internal ~reservation ?producer ~connection ~source ~basis ~directory ~staging ~expected_size ()

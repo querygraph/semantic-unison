@@ -4,7 +4,84 @@
 
 ## Live implementation handoff
 
-* Returned-worker settlement continuation (2026-10-13): source now uses
+* Current Photo status (verified 2026-10-14 02:18 UTC): the finite native
+  window is suspended after actual desktop relock. The
+  [suspension/closure pins](doc/preview-finite-oracle-suspension-20261013.json)
+  record all five helper attempts terminal/restored, three registration
+  attempts returning `WAIT_FOR_MAIN_CATALOG`, and zero native registration
+  entry or UI/Main/cache mutation. Coordinator PID 18036 retains the canonical
+  Photo lease with zero active native CPU credits. The six-file independent
+  byte/full-decode verifier passed; native recognition remains unproved.
+  The exact requested mapping/load/decode packet remains pending. Root must
+  revalidate actual unlock and renew original-owner admission; earlier release
+  is no current readiness proof. Unison preview integration remains interface
+  review with no concurrent Adobe/cache work. Isolated Unison qualification
+  using synthetic files can proceed independently of this suspended slot.
+
+* Receiving/report settlement checkpoint (2026-10-13): source
+  extends guarded returned-work settlement through Runtime admission/I/O,
+  companion recognition/validation, candidate fences, directory consumers,
+  report loans and the selected Copy/Files/TargetBinding publication owners.
+  `BorrowedWork.all` records every launched promise before later launches and
+  joins; finite launch/observer failures drain all launched participants,
+  preserve the first observed error and stop directory consumers via the
+  preallocated error hook. DNG post-execution fences now use an independent
+  execution-start flag, so a lost child receipt cannot bypass candidate/tool
+  rechecks under warn. RPC output guards reach the actual write/fill/flush
+  promises and suppress a second reply after output starts. Stock OCaml 5.5.1
+  and OxCaml 5.2.0+ox Make and clean Dune builds/selftests match 331 inputs
+  across five source sets (1,655 comparisons). Each compiler passes 98 new
+  focused controls: 28 real-child/aggregate cases (422 explicit assertions),
+  three actual Files/directory receiving cases and 67 Runtime/report/loan/RPC
+  controls. Fourteen designated negatives per compiler have distinct exact
+  parent-participant, full-parent, legacy-iterator and private-group provenance.
+  Receiving rejections preserve original live bytes/inodes and typed archived
+  fingerprints, then exact retry succeeds. Output failure retains an exact
+  packet prefix without appending another reply. Both compilers also pass
+  all twelve existing suites: workers/helpers/I/O, receiving/publication,
+  semantic remote/meaning/reports, details/bounds/reconnect and producer handoff.
+  Component receipts preserve eight fixture-only trials and explain the removed
+  blocking child-ready CLI case; no owner-loop pumping substitutes for dispatch.
+  See the [contract](doc/returned-work-settlement.md),
+  [Runtime/report component](tests/runtime_settlement/qualification-20261013.json),
+  [validation/receiving component](tests/validation_settlement/qualification-20261013.json)
+  and [integration](tests/qualification/validation-report-settlement-integration-20261013.json).
+  Production source stayed frozen through all executions.
+  [Independent execution acceptance](tests/qualification/validation-report-settlement-independent-review-20261013.json)
+  is recorded separately before publication. Legacy transfer
+  internals, External/region schedulers, recursive Files orchestration,
+  input/handshake scheduling, watchdog timers, TargetBinding preparation and
+  delayed `Lwt.connect` retain separate limits. This is functional/resource
+  ownership qualification with synthetic files, not real Adobe/camera-corpus,
+  Lightroom recognition, Quasar placement, throughput or complete FD/RSS proof.
+  The whole-clone boolean API gap remains next core work. Earlier checkpoint
+  receipts below retain their own frozen source and do not qualify this source.
+
+* Earlier native-preview release (2026-10-13, verified 2026-10-14
+  02:04 UTC): Lightroom access is restored and the formal Photo Root
+  [finite-window release](../photo/native-access-restored-59cae9953316406886d124d25ebe9be7/FINITE-ORACLE-WINDOW.json)
+  binds current PID 2844 and the original `/root/preview_implementation` owner.
+  Its SHA-256 is `fe84dacb6f1d1df114c5bd28c2c01158f139a531945bf04349cf5a9d6e972874`.
+  Maximum eight sources / sixteen logical states share eighteen CPU credits.
+  The owner starts preserved control `10031592`; independent file verification
+  is underway. The release supersedes the earlier access/clearance receipts'
+  unreleased state for this specific owner-controlled slot. Unison has no parallel
+  Adobe/cache operation or preview output. Our exact evidence request was
+  queued to Photo parent thread `01a13369-8b68-7aa1-be91-cba984ba269b` for
+  forwarding: current parent UUID/digest, raw mapping before/after load,
+  native-effective orientation, level digest/decoded geometry, positive
+  size/stable bytes, current-versus-stale fallback, commit visibility and
+  independent file identity. Direct queue input to the child was rejected
+  by the app server; the parent queue accepted delivery. Await the owner's
+  completion/closure packet and source pins. The follow-up exact request and
+  accepted queue delivery are preserved in the
+  [coordination receipt](doc/preview-finite-oracle-request-20261013.json).
+  Cold restart is separately
+  coordinated; Quasar mount-loss qualification is outside this slot.
+  Queue delivery and formal release are not a successful native test receipt,
+  renderer proof, full-run authorization or Unison-owned window.
+
+* Earlier returned-worker settlement checkpoint `2059949` (2026-10-13): source uses
   `BorrowedWork.try_bind` at CPU, I/O, submit and response-mapping boundaries.
   Two observer-installation failures previously could report failure while a
   dispatched domain still held descriptors, retiring its surrounding workspace

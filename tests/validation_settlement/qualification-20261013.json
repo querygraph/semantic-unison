@@ -1,0 +1,300 @@
+{
+  "schema": 1,
+  "production_freeze": {
+    "path": "/private/tmp/unison-validation-report-settlement-build-records/SOURCE-FREEZE.json",
+    "bytes": 33051,
+    "sha256": "e0743748f5e2475f83cf848dfdbdc29e64c46b4c2f96bd2199ece50c3e3fa376"
+  },
+  "production_inputs": 331,
+  "parent": "2059949975ae95e64df74a3056d7211101aa42b6",
+  "qualified_scope": [
+    "finite actual synthetic supervised helper settlement and CPU/I/O/workspace retention",
+    "actual Files receiving and unbound directory aggregate settlement with real paused Identify domains",
+    "original live bytes/inode and typed archived byte fingerprints preserved through rejection; absent directory node preserved; exact retry"
+  ],
+  "Photo_Adobe_cache_preview_UI_generator_access": false,
+  "performance_claim": false,
+  "per_compiler": {
+    "stock": {
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "standalone": {
+        "receipt": {
+          "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-settlement.json",
+          "bytes": 179316,
+          "sha256": "3b1ee3ae402fccfcf9819ab2fda528964f56936cb1979446075a11be69cab28c"
+        },
+        "work": "/private/tmp/unison-validation-settlement-2iyu2oph",
+        "fixed_cases": 28,
+        "assertions": 422,
+        "designated_parent_internal_exit2": 4,
+        "recorded_commands": 81,
+        "recorded_artifacts": 427
+      },
+      "receiving": {
+        "receipt": {
+          "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving.json",
+          "bytes": 620964,
+          "sha256": "b0736527f4276381bf71d824c1b455f8a831c4cd16394c2ac94a5924920d1631"
+        },
+        "work": "/private/tmp/unison-validation-receiving-settlement-t46o6sad",
+        "fixed_cases": 3,
+        "parent_cases": 2,
+        "recorded_commands": 58,
+        "recorded_artifacts": 2213,
+        "raw_archive_container_identity_observation": [
+          true,
+          true,
+          true
+        ],
+        "supplemental_runner_pin": {
+          "path": "/private/tmp/unison-validation-receiving-settlement-t46o6sad/supplemental-frozen-fixtures/receive.py",
+          "bytes": 23679,
+          "sha256": "2de5e29cd92d742088484da09552f6deab1b2f5b13c5ac2eb7884a60290316f9"
+        }
+      }
+    },
+    "ox": {
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "standalone": {
+        "receipt": {
+          "path": "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-settlement.json",
+          "bytes": 178960,
+          "sha256": "0a22bf98a49e71eea960e78d8659535bb5fdf269cebd7f5cdaccbf4a6d8fef05"
+        },
+        "work": "/private/tmp/unison-validation-settlement-ug0f8iwp",
+        "fixed_cases": 28,
+        "assertions": 422,
+        "designated_parent_internal_exit2": 4,
+        "recorded_commands": 81,
+        "recorded_artifacts": 426
+      },
+      "receiving": {
+        "receipt": {
+          "path": "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-receiving.json",
+          "bytes": 621191,
+          "sha256": "96c37726ffbf671937eecce354d605cdc5a7044be1e601016e80d1b5e7d78a8c"
+        },
+        "work": "/private/tmp/unison-validation-receiving-settlement-ujlltui1",
+        "fixed_cases": 3,
+        "parent_cases": 2,
+        "recorded_commands": 58,
+        "recorded_artifacts": 2213,
+        "raw_archive_container_identity_observation": [
+          true,
+          true,
+          true
+        ],
+        "supplemental_runner_pin": {
+          "path": "/private/tmp/unison-validation-receiving-settlement-ujlltui1/supplemental-frozen-fixtures/receive.py",
+          "bytes": 23679,
+          "sha256": "2de5e29cd92d742088484da09552f6deab1b2f5b13c5ac2eb7884a60290316f9"
+        }
+      }
+    }
+  },
+  "failure_trials": [
+    {
+      "receipt": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving-trial1.json",
+        "bytes": 192422,
+        "sha256": "a3fd3a246f69aab43ce3427b8de7285beeda98cf52322738f86e91a5711d4121"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving-trial1.log",
+        "bytes": 12018,
+        "sha256": "869811815d7d17e74faf781cfa8d403a38fad02d745a2ea26672c600d011c1ce"
+      },
+      "work": "/private/tmp/unison-validation-receiving-settlement-am_aualm",
+      "observed_outer_exit": 1,
+      "scope": "fixture decoder local-open functor shadowing; no test case ran",
+      "qualified_cases": 0,
+      "recovered_runner": {
+        "path": "/private/tmp/unison-validation-receiving-settlement-am_aualm/supplemental-frozen-fixtures/receive.py",
+        "bytes": 23747,
+        "sha256": "fb85280ce375e974e30e133ff0faf97cf3c6971945e3d92c92dca9b6b98fb8db"
+      },
+      "recovery": "Reverse documented fixture-only edits; recovered bytes SHA equals original recorded trial pin."
+    },
+    {
+      "receipt": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving-trial2.json",
+        "bytes": 249141,
+        "sha256": "a7ffd0d14c7279f736ac29f9e43e2c3b92de839c4a3af4451745217e2f409c44"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving-trial2.log",
+        "bytes": 2405,
+        "sha256": "c0403bef433680a58a4f3d03fd356c90363f09ba847a5730aabec1159a4d6747"
+      },
+      "work": "/private/tmp/unison-validation-receiving-settlement-v7n4k8pd",
+      "observed_outer_exit": 1,
+      "scope": "queued I/O guard returned before child dispatch; readiness barrier prevented dispatch, removed CLI child case",
+      "qualified_cases": 0,
+      "recovered_runner": {
+        "path": "/private/tmp/unison-validation-receiving-settlement-v7n4k8pd/supplemental-frozen-fixtures/receive.py",
+        "bytes": 23847,
+        "sha256": "62b23d0fd4359736135199c85356e95784e187e2e2b79326d4542278d336a845"
+      },
+      "recovery": "Reverse documented fixture-only edits; recovered bytes SHA equals original recorded trial pin."
+    }
+  ],
+  "post_run_checks": [
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-t46o6sad/fixed-0-files-validation/fault.log",
+      "bytes": 3353,
+      "sha256": "40cd09cc50905cee33a27e86639fe63896203c0ef5bdc236824b80fe8d205a48"
+    },
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-t46o6sad/fixed-1-directory-join/fault.log",
+      "bytes": 3371,
+      "sha256": "ba8f2b6a768241cb129cb51c7f959ff615a5bbc206d5d91cc0af9f89c1d4c2c4"
+    },
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-t46o6sad/fixed-2-directory-launch/fault.log",
+      "bytes": 3375,
+      "sha256": "ab8d70ce3ad282016677bd31a87eb6f0297c27eb52e9bf70cb141f0226126a2e"
+    },
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-ujlltui1/fixed-0-files-validation/fault.log",
+      "bytes": 3359,
+      "sha256": "1ed3b8974840666f8b9de43539d288e2ade502ea7e1cc8bb8828a07b90ea8a9c"
+    },
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-ujlltui1/fixed-1-directory-join/fault.log",
+      "bytes": 3377,
+      "sha256": "78ce398036c3fa9d09bed796d34cc0b0095639f9951e3d001bdeda4b355cc5ac"
+    },
+    {
+      "check": "first setup error retained in actual receiving CLI",
+      "path": "/private/tmp/unison-validation-receiving-settlement-ujlltui1/fixed-2-directory-launch/fault.log",
+      "bytes": 3381,
+      "sha256": "2f00a4d560410a634ab7738d203ef07a12665caaf56c485b17896a5edb1bd4f8"
+    }
+  ],
+  "outer_commands": [
+    {
+      "argv": [
+        "python3",
+        "tests/validation_settlement/run.py",
+        "--ocamlopt",
+        "/usr/local/bin/ocamlopt",
+        "--keep-work",
+        "--receipt",
+        "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-settlement.json"
+      ],
+      "cwd": "/Users/alexy/src/unison",
+      "argv_source": "Exact actual agent tool invocation; root command output observed terminal exit0.",
+      "observed_outer_exit": 0,
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-settlement.log",
+        "bytes": 3406,
+        "sha256": "d00e729f44b5ddd63c8fe4b5c6356b4037329723c7d0bc16b6113499356475ca"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "tests/validation_settlement/receive.py",
+        "--build",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-48pnjlm3",
+        "--parent-build",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-jdgzugey",
+        "--ocamlopt",
+        "/usr/local/bin/ocamlopt",
+        "--receipt",
+        "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving.json"
+      ],
+      "cwd": "/Users/alexy/src/unison",
+      "argv_source": "Exact actual agent tool invocation; root command output observed terminal exit0.",
+      "observed_outer_exit": 0,
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/stock-validation-receiving.log",
+        "bytes": 182,
+        "sha256": "16dcd9fc61935e7f4b0412644ef11ff5e413fb72b70e506d886389879ee28fcc"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "tests/validation_settlement/run.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "--keep-work",
+        "--receipt",
+        "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-settlement.json"
+      ],
+      "cwd": "/Users/alexy/src/unison",
+      "argv_source": "Exact actual agent tool invocation; root command output observed terminal exit0.",
+      "observed_outer_exit": 0,
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-settlement.log",
+        "bytes": 3406,
+        "sha256": "fd9fe584040b1b0f2888c510aaddab3a64020b132e53c90a721e881301754ba7"
+      }
+    },
+    {
+      "argv": [
+        "python3",
+        "tests/validation_settlement/receive.py",
+        "--build",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hypv9cte",
+        "--parent-build",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-n6enhshk",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "--receipt",
+        "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-receiving.json"
+      ],
+      "cwd": "/Users/alexy/src/unison",
+      "argv_source": "Exact actual agent tool invocation; root command output observed terminal exit0.",
+      "observed_outer_exit": 0,
+      "log": {
+        "path": "/private/tmp/unison-validation-report-settlement-build-records/ox-validation-receiving.log",
+        "bytes": 179,
+        "sha256": "bd22c060e07e58af5d58842cfe8dcfb6f87c21d1d30c1df1b2101d6cc176f7fa"
+      }
+    }
+  ],
+  "limitations": [
+    "Synthetic structured validation receipts do not establish Adobe SDK/DNG rendering or pixel fidelity.",
+    "Standalone original native PIDs are runtime-asserted before ECHILD; follow-up reuse overwrites gate ready markers, so earlier numeric PIDs are not reconstructed from final markers.",
+    "Actual Files controls qualify paused Identify domains/owned FD identities; they do not claim a helper was active there.",
+    "Generic private execute-watch preparation remains unexercised in the final receiving case list.",
+    "Persistent allocation failure, interrupted owner loops, asynchronous callback connection failure, other platforms and deadlines remain outside finite injected fault qualification.",
+    "Native Lightroom recognition/cold restart, Quasar/Ten placement publication and current-edit rendering are not qualified by this component."
+  ],
+  "verified_declared_artifacts": 5279,
+  "totals": {
+    "fixed_cases": 62,
+    "designated_parent_cases": 12,
+    "standalone_assertions": 844
+  },
+  "fixture_source_pins": {
+    "tests/validation_settlement/group.ml": "a6a9194d930338535a419e26d1af700f74770920fb5d5b4a61ff7efc45b77688",
+    "tests/validation_settlement/archive_node.ml": "ff07966bc8e46d2cbc62be810e13f9dcf3e013881edd48bdb4bf05844e95c94f",
+    "tests/validation_settlement/run.py": "c2a485eb598b11c049b53348a8572d52289133dd550e4fceedc87c3150746879",
+    "tests/validation_settlement/receive.py": "2de5e29cd92d742088484da09552f6deab1b2f5b13c5ac2eb7884a60290316f9",
+    "tests/validation_settlement/fault.ml": "19be38c6e01ff62d7954c5aa62e92b6ac244f16f6aa9695a1f6dc93ff000f3ef",
+    "tests/validation_settlement/receive_fault.ml": "d9815fddf8e397c29a92771ff4b68cc5af56f5a38a08cf6616f586a12998dc31",
+    "tests/validation_settlement/README.md": "ec6b8ccfc2daa22d85fdcc4c56ab2f7ea032cc2efaa6a8bac0f51d518d731efe",
+    "tests/validation_settlement/receive_files.ml": "cdd4040de4a4d7aca31837ccb7241b2bb2ff4ca0504f77655614bdf0f3b3982d",
+    "tests/validation_settlement/helper.py": "1dc654a9825e7958670bd219f20a21fbeb281ed9f18d36c275a68792f5b5cb68",
+    "tests/validation_settlement/fixture.c": "bbd4270e1d5690ede473ce7a4d3cffa7501590d2811334f3954d742646fe2e31",
+    "tests/validation_settlement/test.ml": "38564674856651253c4c1c93da54be3642ad7e10c2f88d6f4b89608ed58ff89e",
+    "tests/validation_settlement/receive_helper.py": "e278bd884439857def0b740aeafc76293c9fca7373a74d97f77af7f2d7d45999",
+    "tests/validation_settlement/receive_worker.ml": "9a0b35560427f447cde4eeaec60d9d2928ab2d3f6417834d138547f85ff17d7a"
+  }
+}

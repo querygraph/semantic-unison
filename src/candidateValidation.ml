@@ -5,7 +5,7 @@ let with_descriptor path operation =
   let close fd = if !owned then begin owned := false;
     try Unix.close fd with Unix.Unix_error _ -> () end in
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  try Lwt.try_bind (fun () -> operation fd)
+  try BorrowedWork.try_bind (fun () -> operation fd)
     (fun result -> close fd;
       return result)
     (fun e -> close fd; fail e)
@@ -19,9 +19,9 @@ let snapshot_of_fingerprint (result:SemanticWorkers.fingerprint) =
       st.Unix.LargeFile.st_mtime st.Unix.LargeFile.st_ctime
       st.Unix.LargeFile.st_perm st.Unix.LargeFile.st_nlink }
 let snapshot pool cancellation path =
-  with_descriptor path (SemanticWorkers.digest pool cancellation) >>= function
+  BorrowedWork.bind (fun () -> with_descriptor path (SemanticWorkers.digest pool cancellation)) (function
   | None -> fail (Util.Transient "Validation hashing cancelled")
-  | Some result -> return (snapshot_of_fingerprint result)
+  | Some result -> return (snapshot_of_fingerprint result))
 type tree_entry = {
   path : Path.local;
   stats : Unix.LargeFile.stats;
@@ -91,8 +91,8 @@ let validate_file ~reservation ~validators ~destination path =
     SemanticRuntime.with_admission ?reservation cancellation ~payload_bytes:1048576 ~descriptors:9 (fun () ->
       (* Recognition and the initial full digest use the same held input. Close
          that owner before helper execution; every phase retains this one loan. *)
-      with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)
-      >>= function
+      BorrowedWork.bind
+        (fun () -> with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)) (function
       | None -> fail (Util.Transient "Validation recognition cancelled")
       | Some {SemanticWorkers.formats=[];fingerprint=None;_} -> return ()
       | Some {SemanticWorkers.formats;fingerprint=Some fingerprint;_} when formats <> [] ->
@@ -111,9 +111,9 @@ let validate_file ~reservation ~validators ~destination path =
             | [] -> Abort.checkAll (); return ()
             | (validator:CandidateValidator.selected)::rest ->
                 Abort.checkAll ();
-                validator.validate context >>= fun () -> invoke rest in
+                BorrowedWork.bind (fun () -> validator.validate context) (fun () -> invoke rest) in
           invoke selected
-      | Some _ -> fail (Util.Transient "Inconsistent validation recognition fingerprint")))
+      | Some _ -> fail (Util.Transient "Inconsistent validation recognition fingerprint"))))
 let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =
   let validators = CandidateValidators.selected () in
   if validators = [] then return () else
@@ -126,25 +126,27 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
     let destination = if entry.path = candidate then destination else entry.path in
     if entry.stats.Unix.LargeFile.st_kind = Unix.S_REG then
       Some (Fspath.concat directory entry.path,Path.toString destination)
-    else None) before) and failure = ref None in
+    else None) before) and failed = ref false and failure = ref Out_of_memory in
+  let remember error = if not !failed then begin failed := true; failure := error end in
   let next () = match !remaining with
     | [] -> None
     | path :: rest -> remaining := rest; Some path in
   let rec consume () =
-    if !failure <> None then return () else
-    Lwt.catch (fun () -> match next () with
+    if !failed then return () else
+    BorrowedWork.catch (fun () -> match next () with
       | None -> return ()
-      | Some (path,destination) -> validate_file ~reservation ~validators ~destination path >>= consume)
-      (fun error -> if !failure = None then failure := Some error; return ()) in
+      | Some (path,destination) -> BorrowedWork.bind
+          (fun () -> validate_file ~reservation ~validators ~destination path) (fun () -> consume ()))
+      (fun error -> remember error; return ()) in
   (* A retained publication envelope loans one workspace at a time. Legacy
      directory handoff uses the same serial loan rather than nested admission. *)
   let count = match reservation with Some _ -> 1
     | None -> min 256 (SemanticRuntime.get ()).SemanticRuntime.cpu_budget in
-  Lwt.catch (fun () ->
-    Lwt_util.iter (fun _ -> consume ()) (List.init count (fun i -> i)) >>= fun () ->
-    match !failure with
-    | None -> verify_tree before (tree_snapshot directory candidate); return ()
-    | Some error -> fail error)
+  BorrowedWork.catch (fun () ->
+    BorrowedWork.bind
+      (fun () -> BorrowedWork.all ~on_error:remember (List.init count (fun _ -> consume)))
+      (fun _ -> if !failed then fail !failure
+        else (verify_tree before (tree_snapshot directory candidate); return ())))
     (fun e -> match e with
       | Unix.Unix_error _ | SemanticFile.Invalid _ | SemanticWorkers.Failed _ ->
         fail (Util.Transient ("Inspecting validation candidate: " ^ Printexc.to_string e))

@@ -1,0 +1,248 @@
+{
+  "Photo_coordination": {
+    "mirrored_status": {
+      "bytes": 1493,
+      "path": "/Users/alexy/src/unison/doc/preview-finite-oracle-suspension-20261013.json",
+      "sha256": "7adc5134517e4ad4f13ccb50816f580b60f12dde49f53e73727d5073e56f187a"
+    },
+    "native_readiness_or_registration_inferred": false,
+    "renderer_publisher_or_Quasar_Ten_qualification_inferred": false,
+    "status": "Original Photo owner retains its lease; mirrored finite-window suspension records closed/restored helpers and zero native entry. This Unison checkpoint performs isolated synthetic qualification only."
+  },
+  "accepted_source_contract": [
+    "BorrowedWork guards are constructed before invoking a borrower, record its actual returned promise without allocation, retry one observer and then cooperatively poll through finite timer setup failures before invoking cleanup.",
+    "Thunk-based bind/catch protect intermediate returned-work mappings. Tracked all prepares its ledger and callbacks before launch, records every returned participant before the next launch, drains all recorded participants after launch/join failure, never retries a thunk and preserves the first observed error rather than asserting chronological completion order.",
+    "Runtime cancellation/admission/I/O and retained admission borrows/leases use guarded mappings; grouped descriptors and resource loans survive actual worker execution.",
+    "DNG inspect/execute/result mappings and post-execution fences are guarded. execution_started records attempted invocation inside the actual execute thunk independently of process-result capture; a lost receipt cannot bypass candidate/tool integrity rejection under Warn.",
+    "Candidate descriptor owners, recognition, sequential validators and bounded directory consumers retain their actual work. Files validation quarantine/publication, TargetBinding borrow/recovery and selected Copy/semantic producer mappings wait for returned work before owner cleanup.",
+    "Report FD holders and local/remote semantic owners retain active borrowers. Concurrent report/local-inspector pairs use tracked group settlement.",
+    "RPC server marshalling, command/scope/reply mappings and output action/write/fill/flush paths are guarded. reply_started is marked immediately before dump after reply construction; failure after output begins does not append a second exception packet. No request, action or write is replayed."
+  ],
+  "artifact_and_source_provenance": {
+    "Runtime_exact_private_source_reconstructions": 846,
+    "Runtime_final_and_six_historical_trial_artifact_pins_verified": 10572,
+    "Runtime_final_linked_input_object_pins_verified": 172,
+    "Runtime_final_source_hash_comparisons": 832,
+    "documentation_only_delta": "Runtime README was updated after passing final executions; the component binds both qualified and final README hashes. Production and fixture code/fault inputs remain frozen.",
+    "mismatches": [],
+    "receiving_decoder_link_object_pin_checks": 380,
+    "receiving_exact_parent_tracked_production_pin_checks": 456,
+    "receiving_exact_private_source_reconstructions": 1220,
+    "receiving_final_retained_artifact_pins_verified": 4426,
+    "receiving_original_source_pin_checks": 1220,
+    "receiving_supplemental_original_runner_recovery": "Recovered runner bytes for both final receipts and both failed trials match their original recorded runner pins. Private modifications reconstruct exactly from original snapshot bytes and the reviewed fixture prefixes.",
+    "receiving_two_historical_trial_artifact_pins_verified_separately": 1984,
+    "root_component_declared_artifact_total": 15851,
+    "standalone_exact_parent_production_pin_checks": 42,
+    "standalone_final_retained_artifact_pins_verified": 853,
+    "standalone_frozen_input_pin_checks": 56,
+    "standalone_private_source_and_group_reconstructions": 112,
+    "total_declared_artifact_checks_including_the_two_receiving_trials": 17835
+  },
+  "builds_receipt": {
+    "bytes": 7514,
+    "path": "/private/tmp/unison-validation-report-settlement-build-records/BUILDS.json",
+    "sha256": "c866429411f9d79c2def9deb5bf0b031a6e8da994bb3061af386a44b646cef22"
+  },
+  "closure": "This separate immutable acceptance closes the independently reviewed integration event. The integration remains in its original pending-review state; neither receipt contains a circular hash of the other.",
+  "components": [
+    {
+      "bytes": 21719,
+      "path": "/Users/alexy/src/unison/tests/runtime_settlement/qualification-20261013.json",
+      "sha256": "f26e00808dc8a5c038218978eddec5e8d371cd16ba58cff37bd75a7a9d2005fc"
+    },
+    {
+      "bytes": 14189,
+      "path": "/Users/alexy/src/unison/tests/validation_settlement/qualification-20261013.json",
+      "sha256": "1db6b454317609cccd8cc26761c953f1e30a9a9568df494a4101a102ed753aa0"
+    }
+  ],
+  "document_pins": {
+    "SOL.md": {
+      "bytes": 183708,
+      "path": "/Users/alexy/src/unison/SOL.md",
+      "sha256": "593958d9e97c7d0c6c6b7b6ee4d7d21a243ff02135314d278c375b308ec0a1e7"
+    },
+    "doc/lightroom-preview-placement.md": {
+      "bytes": 32088,
+      "path": "/Users/alexy/src/unison/doc/lightroom-preview-placement.md",
+      "sha256": "0c910e822b089a396deedb1f7ff31c17bcc6d92fb35231da27a3c8225a46b760"
+    },
+    "doc/preview-design-integration.md": {
+      "bytes": 38053,
+      "path": "/Users/alexy/src/unison/doc/preview-design-integration.md",
+      "sha256": "95d1332692c99ee2f86fa254483638b51f81577d8b430d633e711ad8fd22aa53"
+    },
+    "doc/preview-finite-oracle-request-20261013.json": {
+      "bytes": 2696,
+      "path": "/Users/alexy/src/unison/doc/preview-finite-oracle-request-20261013.json",
+      "sha256": "f7fb3385f99a838548e504db5d79aa9c239bf95ec5f91b0582a664759831594b"
+    },
+    "doc/preview-finite-oracle-suspension-20261013.json": {
+      "bytes": 1493,
+      "path": "/Users/alexy/src/unison/doc/preview-finite-oracle-suspension-20261013.json",
+      "sha256": "7adc5134517e4ad4f13ccb50816f580b60f12dde49f53e73727d5073e56f187a"
+    },
+    "doc/returned-work-settlement.md": {
+      "bytes": 9032,
+      "path": "/Users/alexy/src/unison/doc/returned-work-settlement.md",
+      "sha256": "60a654867aee2f5dc686b1befcc59181dfd68ffd55090376ff262b7b84f24f10"
+    },
+    "tests/runtime_settlement/README.md": {
+      "bytes": 4821,
+      "path": "/Users/alexy/src/unison/tests/runtime_settlement/README.md",
+      "sha256": "12ad39ee767a97d3771a6e1148f0f0f59220f0e3cd5e3c981ae42c0bd9cbbc6d"
+    },
+    "tests/validation_settlement/README.md": {
+      "bytes": 5370,
+      "path": "/Users/alexy/src/unison/tests/validation_settlement/README.md",
+      "sha256": "ec6b8ccfc2daa22d85fdcc4c56ab2f7ea032cc2efaa6a8bac0f51d518d731efe"
+    }
+  },
+  "existing_regression_acceptance": {
+    "all_outer_terminal_exits": 0,
+    "exact_outer_argv_cwd_terminal_exit_log_and_script_records": 24,
+    "other_suite_names": [
+      "semantic-remote",
+      "semantic-meaning",
+      "semantic-reports",
+      "report-details",
+      "remote-bounds",
+      "socket-reconnect"
+    ],
+    "per_compiler_positive_groups": {
+      "Files_publication": 79,
+      "helpers": 37,
+      "io": 20,
+      "receiving": 21,
+      "semantic_producer_handoff": 32,
+      "workers": 27
+    },
+    "scope": "Verified recorded outer commands, current script/log pins and successful group markers. Existing runner removal/overwritten phase semantics are retained; this review does not infer missing inner argv, exits or scratch inventories. IO fairness failure is a designated negative, not a positive test failure."
+  },
+  "focused_execution_audit_per_compiler": {
+    "Runtime_report_loan_pair_and_RPC": {
+      "designated_negatives": {
+        "exact_four_parent_owner_participants_with_current_support": 6,
+        "separate_private_untracked_group_mutation": 2
+      },
+      "explicit_assertions": 652,
+      "fixed_controls": 67,
+      "recorded_commands": 412
+    },
+    "actual_Files_and_directory_receiving": {
+      "expected_rejection_CLI_exit": 3,
+      "fixed_controls": 3,
+      "fixed_quarantine_with_actual_running_workers": 0,
+      "full_parent_designated_negatives": 2,
+      "normal_exact_retry_after_rejection": 3,
+      "parent_quarantine_with_actual_running_workers": [
+        1,
+        3
+      ],
+      "recorded_commands": 58
+    },
+    "designated_negatives_total": 14,
+    "fixed_controls": 98,
+    "negative_provenance": "The six owner mixtures and three extracted-iterator controls are not full parent binaries. Two receiving controls rebuild complete compiler-matched parent tracked production inputs. Two group controls are explicitly private mutations.",
+    "positive_qualification_meaning": "Positive controls passed their intended ownership/integrity oracle. Receiving fault controls intentionally reject with CLI exit3 before a later exact retry succeeds.",
+    "standalone_validation_and_helper_groups": {
+      "designated_negatives": {
+        "exact_extracted_parent_legacy_iterator": 3,
+        "exact_parent_validation_inputs": 1
+      },
+      "explicit_assertions": 422,
+      "first_participant_settles_while_sibling_remains_alive": true,
+      "first_sleeps_second_launch_throws": true,
+      "fixed_controls": 28,
+      "recorded_commands": 81
+    }
+  },
+  "independent_runtime_oracles": [
+    "Actual Atomics-paused one/two-domain callbacks, kernel FD census, private slot counts and independent CPU/device/pending/workspace ledgers remain live while the result is sleeping. Closing, cancellation and retirement cannot admit the next consumer/device callback prematurely; exact digest reuse and shutdown settle all owners.",
+    "Actual supervised synthetic child spawn PIDs are recorded through the unchanged production spawn primitive. WNOHANG confirms a live/unreaped child before the ownership oracle; later ECHILD confirms reaping before validation/group completion. Off launches no child. Late candidate/tool mutation rejects even after observer failure leaves no captured child result.",
+    "The actual scoped registered bounded RPC uses makeConnection/socketpair and real server argument unmarshalling/processRequest/output queues. A small send buffer keeps the actual large output action sleeping after the report worker settles; Source admission remains live until that action stops. Normal/scope output decodes exact id/header/body with no extra bytes.",
+    "RPC output failures emitted 512000 bytes, an exact prefix of the 524356-byte expected packet, before failing with the first observer error after action settlement. There is no appended exception, replay or forced final flush. A suppressed final copied buffer tail is permitted.",
+    "Actual receiving faults pause Identify inside the production worker with its real duplicated FD. Atomic-published dev/inode/size markers bind private candidates and post-gate native fstat; Files action traces separately require no active marker or running worker before quarantine/publication. Fixed rejection preserves live destination bytes/inode, typed original archive fingerprints and absent directory archive node, followed by an exact normal retry.",
+    "All six fixed receiving observations also report unchanged raw archive-container bytes; typed node/fingerprint identity remains the normative preservation evidence rather than assuming containers must always serialize identically."
+  ],
+  "integration": {
+    "bytes": 70644,
+    "path": "/Users/alexy/src/unison/tests/qualification/validation-report-settlement-integration-20261013.json",
+    "sha256": "6340e384ecdbb1ed90a073079921ecbca442fd778a67ade43c30111aec05ab84"
+  },
+  "parent": "2059949975ae95e64df74a3056d7211101aa42b6",
+  "preserved_fixture_failures": {
+    "earlier_interim_validation_component_is_superseded": true,
+    "failed_trials_not_counted_as_final_controls": true,
+    "receiving_corrections": [
+      "Archive decoder local-open functor shadowing; no qualified case ran.",
+      "Removed full-CLI child-ready barrier because an execute wrapper can return queued I/O before child dispatch; blocking its observer prevented dispatch. No owner-loop pumping replaced it."
+    ],
+    "receiving_trials": 2,
+    "runtime_corrections": [
+      "Generated ProjectInfo source versus stale ignored workspace preflight comparison.",
+      "Test-only unmatched RPC parentheses.",
+      "Test-only tuple/list punctuation.",
+      "Test-only land operator spacing.",
+      "Fixture Test module collision with copied production test.mli.",
+      "Second group observer assertion moved after its actual installation; the final full suites reran."
+    ],
+    "runtime_trials": 6
+  },
+  "production_source_and_build_audit": {
+    "Dune_version": "3.22.2",
+    "all_four_selftests_terminal_success": true,
+    "build_compiler_config_binary_log_and_generated_dependency_pins_checked": 22,
+    "compiler_versions": [
+      "5.5.1",
+      "5.2.0+ox"
+    ],
+    "current_index_source_fixture_and_existing_script_pin_checks": 362,
+    "frozen_inputs": 331,
+    "generated_Make_dependencies_sha256": "fa8a49e96440669f32bd2cd09261a6bab12d7ad1ec94eeb2065d69fd8797926b",
+    "mismatches": [],
+    "raw_source_snapshot_also_matches_freeze": true,
+    "stock_and_OxCaml_Make_and_Dune_builds": 4,
+    "workspace_and_four_build_snapshot_hash_comparisons": 1655,
+    "workspace_fixture_and_existing_script_pin_checks": 31
+  },
+  "publication_assessment": "Accepted as a bounded implementation checkpoint on the authorized querygraph/unison fork after parent verifies this receipt and index. The overall Unison/DNG/OxCaml/preview goal remains incomplete.",
+  "remaining_limits_and_next_work": [
+    "Selected finite observer/launch failures after actual promise return only; not persistent exhausted-heap recovery, arbitrary asynchronous exceptions, delayed legacy Lwt.connect failure or independent work dispatched before a throwing callback returns its promise. Cleanup callback transformations retain their API semantics.",
+    "The owner loop must continue running. Uninterruptible work has no settlement deadline; no complete process FD/RSS/child-memory bound or transient peak is established.",
+    "Pre-return admission/dispatcher setup and the existing I/O unarmed scheduled-latch hazard require separate qualification. Runtime watchdog timers and TargetBinding preparation still retain ordinary maps.",
+    "Inherited transfer internals, External/region schedulers, general recursive Files orchestration, input/handshake/client parsing and full UI report grouping are not qualified by these focused controls. Selected source guards do not establish whole-pipeline settlement.",
+    "The worker cancellation token intentionally differs from Runtime inherited tokens in cleanup controls; these prove retention during cleanup, not automatic cancellation propagation to the independent worker.",
+    "The preallocated 512KiB fixture RPC answer lies outside the tiny declared profile cost estimate. The socket control proves temporal Source/action ownership, not a memory/RSS cap, peer delivery or detached-tail completion/durability.",
+    "Actual Files receiving controls prove active Identify domain/FD ownership; they do not prove a helper was active there. Generic execute-watch preparation is unexercised in final CLI receiving cases. Standalone child/reaping controls are separate; earlier numeric PIDs are not reconstructed from overwritten final ready markers.",
+    "OxCaml retains Domain.spawn safety alerts and the manually audited boundary. No compiler-proven portable scheduler, native-other-platform runtime or new ZFS/ReFS execution qualification is implied.",
+    "Real Adobe/camera-corpus receiving fidelity, Lightroom native load/decode/cold restart, faithful current-edit masks/AI rendering and Quasar/Ten placement/mount-loss publication remain independently owned pending work.",
+    "The APFS whole-clone boolean API still hides operational distinctions and remains next core work. No physical sharing/write savings, throughput improvement, storage topology or full benchmark acceptance follows from this checkpoint."
+  ],
+  "review_method": {
+    "performed": [
+      "Read production changes, contracts, fixture sources, retained command records, compile/link logs, runtime logs and receipt scopes.",
+      "Compared actual file bytes and SHA-256 pins, including staged index blobs and source snapshots.",
+      "Reconstructed private source transformations entirely in memory from the retained frozen inputs and exact parent Git source.",
+      "Checked independently observed worker FD/ledger, child PID/reaping, socket action and receiving/archive oracles against the designated negative conditions."
+    ],
+    "production_or_frozen_receipts_modified": false,
+    "sole_review_write": "/Users/alexy/src/unison/tests/qualification/validation-report-settlement-independent-review-20261013.json",
+    "test_build_native_or_Photo_operations_rerun": false
+  },
+  "reviewer": "/root/strict_range_review",
+  "root_existing_regressions_receipt": {
+    "bytes": 19925,
+    "path": "/private/tmp/unison-validation-report-settlement-build-records/ROOT-REGRESSIONS.json",
+    "sha256": "2da455c0f3b7e065dcdefebfcc9fce936f20bf1b73f5968c0d8c0f71090c2a5e"
+  },
+  "schema": "unison-validation-report-settlement-independent-review/1",
+  "source_freeze": {
+    "bytes": 33051,
+    "path": "/private/tmp/unison-validation-report-settlement-build-records/SOURCE-FREEZE.json",
+    "sha256": "e0743748f5e2475f83cf848dfdbdc29e64c46b4c2f96bd2199ece50c3e3fa376"
+  },
+  "state": "ACCEPTED_FOR_THE_SELECTED_FINITE_RETURNED_WORK_SCOPE",
+  "utc": "2026-10-14T02:59:10.145738+00:00"
+}

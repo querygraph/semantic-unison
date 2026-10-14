@@ -14,6 +14,30 @@ Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
+Current status, verified 2026-10-14 02:18 UTC: the native slot is
+[suspended with all helpers closed](preview-finite-oracle-suspension-20261013.json)
+after desktop relock. All three registration attempts returned
+`WAIT_FOR_MAIN_CATALOG`; no registration entered native code or changed
+UI/Main/cache state. The six-file independent byte/full-decode control passed
+without native recognition proof. Original-owner coordinator PID 18036 keeps
+the Photo lease, native CPU credits are zero, and mapping/load/decode evidence
+remains pending. Actual unlock revalidation and renewed Root admission are
+required before native continuation. Unison starts no Adobe/cache work.
+
+Earlier release, verified 2026-10-14 02:04 UTC: Photo Root's
+[formal finite-window release](../../photo/native-access-restored-59cae9953316406886d124d25ebe9be7/FINITE-ORACLE-WINDOW.json)
+binds restored current access, Classic PID 2844 and the original preview owner
+for one native control `10031592` registration-to-load slot, bounded to eight
+sources / sixteen logical states and eighteen shared CPU credits.
+That owner has started independent file verification. This supersedes the
+historical locked/unreleased status below for this specific serialized slot.
+Unison's [exact evidence request](preview-finite-oracle-request-20261013.json)
+was accepted by the Photo parent Codex queue for
+forwarding after the app server rejected direct input to its child. Await
+the owner's completion/closure packet; no successful native result is inferred.
+Cold restart remains separately coordinated, and Quasar mount-loss testing
+is outside this slot. Unison starts no concurrent Adobe/cache operation.
+
 The existing Lightroom takeover session owns receiver acceptance, finite
 native oracles and the preview implementation/publisher. Unison's
 `/root/preview_generators` task has received and acknowledged the reviewed

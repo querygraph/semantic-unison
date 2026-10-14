@@ -101,12 +101,13 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
   | Off -> return Skipped
   | Warn | Require ->
     let process = ref None in
+    let execution_started = ref false in
     let inspected_tool = ref None in
     let reject message = return (match policy with
       | Warn -> Warning (message, !process)
       | Require -> Rejected (message, !process)
       | Off -> assert false) in
-    let validation = catch (fun () ->
+    let validation () = BorrowedWork.catch (fun () ->
       (try
         if Filename.is_relative candidate || String.contains candidate '\000' then
           failwith "candidate must be an absolute NUL-free path";
@@ -116,16 +117,15 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
         | None -> failwith "DNG validation requested but no qualified SDK driver configured" in
       if not (sha256 tool.executable_sha256) || not (build_id tool.build_id) then
         failwith "invalid configured SDK driver pin/build ID";
-      catch (fun () ->
-        inspect candidate >>= fun before ->
+      BorrowedWork.bind (fun () -> BorrowedWork.catch (fun () ->
+        BorrowedWork.bind (fun () -> inspect candidate) (fun before ->
         check_snapshot before;
         if not (same_snapshot before expected) then raise Candidate_changed;
-        return before)
+        return before))
         (function
           | Candidate_changed as exn -> fail exn
-          | exn -> fail (Candidate_inspection_failed (Printexc.to_string exn)))
-      >>= fun before ->
-      inspect tool.executable >>= fun tool_before ->
+          | exn -> fail (Candidate_inspection_failed (Printexc.to_string exn)))) (fun before ->
+      BorrowedWork.bind (fun () -> inspect tool.executable) (fun tool_before ->
       check_snapshot tool_before;
       if tool_before.sha256 <> tool.executable_sha256 then failwith "SDK driver content pin mismatch";
       inspected_tool := Some (tool.executable, tool_before);
@@ -135,9 +135,11 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
         "--expected-size"; Int64.to_string expected.size;
         "--threads"; string_of_int tool.cpu_weight;
         "--"; candidate |] in
-      execute (fun () -> HelperSupervisor.run supervisor ~weight:tool.cpu_weight cancellation
-        ~limits:tool.limits ~executable:tool.executable ~arguments
-        ~environment:tool.environment) >>= fun child ->
+      BorrowedWork.bind (fun () -> execute (fun () ->
+        execution_started := true;
+        HelperSupervisor.run supervisor ~weight:tool.cpu_weight cancellation
+          ~limits:tool.limits ~executable:tool.executable ~arguments
+          ~environment:tool.environment)) (fun child ->
       process := Some child;
       (match child.HelperSupervisor.outcome with
        | HelperSupervisor.Completed -> ()
@@ -160,32 +162,31 @@ let validate_with_execution ~execute supervisor cancellation ~policy ~(tool : to
        | Mismatch -> failwith "DNG raw digest mismatch"
        | Unsupported | Not_checked -> failwith "DNG raw digest verification unsupported or not completed");
       return (Passed { candidate = before; executable_sha256 = tool.executable_sha256;
-                       build_id = tool.build_id; report; process = child }))
+                       build_id = tool.build_id; report; process = child })))))
       (function
         | Candidate_changed -> return (Rejected ("candidate changed before validation", !process))
         | Candidate_inspection_failed message ->
             return (Rejected ("candidate inspection failed: " ^ message, !process))
         | exn -> reject (Printexc.to_string exn)) in
-    validation >>= fun verdict ->
+    BorrowedWork.bind validation (fun verdict ->
     (* Warn relaxes validator findings, never the immutable-candidate fence or
        the user's cancellation. Check even malformed/nonzero helper results. *)
     if HelperSupervisor.is_cancelled cancellation then
       return (Rejected ("DNG validation cancelled", !process))
-    else if !process = None then return verdict
-    else catch (fun () ->
-      inspect candidate >>= fun after ->
+    else if not !execution_started then return verdict
+    else BorrowedWork.catch (fun () ->
+      BorrowedWork.bind (fun () -> inspect candidate) (fun after ->
       check_snapshot after;
       if not (same_snapshot expected after) then
         failwith "candidate changed during validation";
-      (match !inspected_tool with
+      BorrowedWork.bind (fun () -> match !inspected_tool with
        | None -> fail (Failure "SDK driver identity unavailable")
-       | Some (path, before) -> inspect path >>= fun after ->
+       | Some (path, before) -> BorrowedWork.bind (fun () -> inspect path) (fun after ->
            check_snapshot after;
            if not (same_snapshot before after) then
              failwith "SDK driver changed during validation";
-           return ()) >>= fun () ->
-      return verdict)
-      (fun exn -> return (Rejected (Printexc.to_string exn, !process)))
+           return ())) (fun () -> return verdict)))
+      (fun exn -> return (Rejected (Printexc.to_string exn, !process))))
 
 let validate supervisor cancellation ~policy ~tool ~inspect ~candidate ~expected =
   validate_with_execution ~execute:(fun run -> run ()) supervisor cancellation

@@ -96,18 +96,23 @@ let get () =
 let cancellations = Remote.resourceWithConnCleanup
   HelperSupervisor.cancel HelperSupervisor.cancel_and_cleanup
 let with_cancellation f =
-  let cancellation = cancellations.register (HelperSupervisor.cancellation ()) in
   let finished = ref false in
+  let cancellation = cancellations.register (HelperSupervisor.cancellation ()) in
+  try
   let rec watch_abort () =
     if !finished then return () else if Abort.isAll () then
       (HelperSupervisor.cancel cancellation; return ())
     else Lwt_unix.sleep 0.05 >>= watch_abort in
-  Lwt.ignore_result (watch_abort ());
-  Lwt.try_bind (fun () -> f cancellation)
-    (fun result -> finished := true; cancellations.release cancellation; return result)
-    (fun e -> finished := true; cancellations.release_noerr cancellation; fail e)
+  let success result = finished := true; cancellations.release cancellation; return result in
+  let failure e = finished := true; cancellations.release_noerr cancellation; fail e in
+  let invoke () = Lwt.ignore_result (watch_abort ()); f cancellation in
+  BorrowedWork.try_bind invoke success failure
+  with error ->
+    finished := true;
+    cancellations.release_noerr cancellation;
+    raise error
 let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation ~payload_bytes ~descriptors f =
-  Lwt.catch (fun () ->
+  BorrowedWork.catch (fun () ->
     let cost = {SemanticAdmission.payload_bytes;descriptors} in
     match reservation with
     | Some reservation ->
@@ -117,9 +122,10 @@ let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation 
         if HelperSupervisor.is_cancelled cancellation then
           fail (Util.Transient "Semantic resource admission cancelled")
         else SemanticAdmission.with_borrow reservation ~cost f
-    | None -> SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost f >>= function
+    | None -> BorrowedWork.bind
+      (fun () -> SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost f) (function
       | Some result -> return result
-      | None -> fail (Util.Transient "Semantic resource admission cancelled"))
+      | None -> fail (Util.Transient "Semantic resource admission cancelled")))
     (function
       | SemanticAdmission.Failed reason -> fail (Util.Transient reason)
       | e -> fail e)
@@ -133,13 +139,14 @@ let with_io_file cancellation path f =
     let close () = if !owned then begin
       owned := false;
       try Unix.close fd with Unix.Unix_error _ -> () end in
-    Lwt.try_bind (fun () ->
+    BorrowedWork.try_bind (fun () ->
       if (Unix.LargeFile.fstat fd).Unix.LargeFile.st_kind <> Unix.S_REG then
         raise (Unix.Unix_error (Unix.EINVAL,"filesystem I/O candidate",path));
       let devices = IoAdmission.devices_of_fds [fd] in
-      IoAdmission.with_devices (get ()).io cancellation ~devices f >>= function
+      BorrowedWork.bind
+        (fun () -> IoAdmission.with_devices (get ()).io cancellation ~devices f) (function
       | Some result -> return result
-      | None -> fail (Util.Transient "Filesystem I/O admission cancelled"))
+      | None -> fail (Util.Transient "Filesystem I/O admission cancelled")))
       (fun result -> close (); return result)
       (fun e -> close (); match e with
         | IoAdmission.Failed reason -> fail (Util.Transient reason)

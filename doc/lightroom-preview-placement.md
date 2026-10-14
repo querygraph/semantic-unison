@@ -10,6 +10,27 @@ defines the synchronization/placement boundary; it does not launch Lightroom,
 edit Main/cache databases or write preview payloads to either volume.
 The [integration findings](preview-design-integration.md) record the reviewed
 renderer/dependency contracts, forwarding and current filesystem/capacity update.
+Current coordination, verified 2026-10-14 02:18 UTC: the native window is
+[suspended; all five helpers closed/restored](preview-finite-oracle-suspension-20261013.json)
+after desktop relock. Three registration attempts returned
+`WAIT_FOR_MAIN_CATALOG`, without native registration or UI/Main/cache mutation.
+The six-file byte/full-decode result is independent-file proof only. Original
+coordinator PID 18036 retains the Photo lease with zero native CPU credits;
+the requested native mapping/load/decode packet remains pending. Root must
+revalidate actual unlock and renew owner admission. No Adobe/cache work
+starts in Unison.
+
+Earlier release, verified 2026-10-14 02:04 UTC: the
+[formal Photo Root release](../../photo/native-access-restored-59cae9953316406886d124d25ebe9be7/FINITE-ORACLE-WINDOW.json)
+binds restored access, PID 2844 and the original Photo preview owner to a finite
+control `10031592` registration-to-load slot, bounded to eight sources / sixteen
+logical states and eighteen shared CPU credits. That owner retains
+the serialized slot; Unison's [evidence request](preview-finite-oracle-request-20261013.json)
+is queued through Photo Root.
+Completion, native recognition and closure are pending. This supersedes earlier
+locked/unreleased status below for that slot; cold restart and Quasar mount-loss
+qualification remain separate. No parallel Adobe/cache work starts here.
+
 The takeover owner reports Lux adopted/accepted and open in stable Classic
 15.6. **Helper Accessibility is already granted and verified**, all seven startup
 phases and the first full automatic renewal passed, and actual existing

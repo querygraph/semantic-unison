@@ -13,3 +13,14 @@
     connection failures and uninterruptible work have no settlement deadline. *)
 val try_bind :
   (unit -> 'a Lwt.t) -> ('a -> 'b Lwt.t) -> (exn -> 'b Lwt.t) -> 'b Lwt.t
+
+val bind : (unit -> 'a Lwt.t) -> ('a -> 'b Lwt.t) -> 'b Lwt.t
+val catch : (unit -> 'a Lwt.t) -> (exn -> 'a Lwt.t) -> 'a Lwt.t
+
+val all : ?on_error:(exn -> unit) -> (unit -> 'a Lwt.t) list -> 'a list Lwt.t
+(** Start the supplied thunks concurrently and retain every returned promise
+    before allocating another observer. Launch/observer failure drains all
+    recorded participants before reporting the first observed error. The optional
+    owner-loop callback can stop a caller's consumers from starting more work;
+    it must be nonblocking and non-raising. Unreturned independently dispatched
+    work and persistent/delayed-connection failure have the limits above. *)

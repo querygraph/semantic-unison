@@ -57,11 +57,11 @@ let select () =
       if weight < 1 || weight > context.cpu_budget then
         raise (Util.Fatal "adobevalidatorthreads must be between one and the CPU budget");
       if seconds <= 0 then raise (Util.Fatal "adobevalidatetimeout must be positive");
-      let inspect path = context.inspect path >>= fun snapshot -> return (convert snapshot) in
-      DngValidation.validate_with_execution ~execute:context.execute
+      let inspect path = BorrowedWork.bind (fun () -> context.inspect path)
+        (fun snapshot -> return (convert snapshot)) in
+      BorrowedWork.bind (fun () -> DngValidation.validate_with_execution ~execute:context.execute
         context.supervisor context.cancellation ~policy:selected ~tool ~inspect
-        ~candidate:context.candidate ~expected:(convert context.expected)
-      >>= fun result ->
+        ~candidate:context.candidate ~expected:(convert context.expected)) (fun result ->
       Abort.checkAll ();
       match result with
       | DngValidation.Skipped | DngValidation.Passed _ -> return ()
@@ -71,5 +71,5 @@ let select () =
           return ()
       | DngValidation.Rejected (reason,_) ->
           fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %s: %s"
-            context.candidate reason)))
+            context.candidate reason))))
   end

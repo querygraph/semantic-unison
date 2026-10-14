@@ -367,7 +367,7 @@ let quarantine t =
 
 let borrow ~producing ~on_success ?connection ~token ~logical_root ~local_path
     ~working_dir ~candidate ~target f =
-  Lwt.try_bind
+  BorrowedWork.try_bind
     (fun () ->
       if not (valid_token token) then fail "invalid ticket syntax";
       let t = match find token with
@@ -402,7 +402,7 @@ let borrow ~producing ~on_success ?connection ~token ~logical_root ~local_path
          let recovered _ = close_noerr t; Lwt.return () in
          let recovery () =
            if !callback_returned && busy t then begin
-             ignore (Lwt.try_bind (fun () -> !awaited) recovered recovered);
+             ignore (BorrowedWork.try_bind (fun () -> !awaited) recovered recovered);
              t.recover_settlement <- None
            end in
          t.recover_settlement <- Some recovery;
@@ -428,7 +428,7 @@ let borrow ~producing ~on_success ?connection ~token ~logical_root ~local_path
            t.callback_pending <- true;
            promise in
          try
-           let result = Lwt.try_bind computation settle_success settle_failure in
+           let result = BorrowedWork.try_bind computation settle_success settle_failure in
            t.recover_settlement <- None;
            result
          with error ->
