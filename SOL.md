@@ -2121,3 +2121,21 @@ layouts and real XMP packet wrappers. Base/merged edits themselves use MOCK
 validation and are not SDK-qualified. Zero new SDK/Adobe/Photo/Lightroom calls,
 no admission replay. Growth/general structures, actual SDK receive corpus, full
 resource/performance qualification and complete M4-V/M5/M6 remain open.
+
+## Compact-cache acquisition ownership hardened
+
+Owner-only cache reads and bounded directory scans now install lexical exception
+protection without allocating cleanup callbacks after acquisition. Temporary
+records use precomputed exclusive names/flags and raw descriptors, avoiding
+post-open channel/tuple setup; bounded partial writes retry EINTR, fsync and
+no-replace linking retain exact format. Failed protected bodies close/remove
+owned resources; a failed close is not retried on a potentially reused number.
+
+[Qualification](tests/semantic_base_cache/ownership-qualification.json): stock/Ox
+Make+Dune+selftests pass; each compiler passes16 actual storage controls,12
+cache-only CLI regressions, and three private acquired-resource exception cases
+(read/directory/temp) with descriptor conservation, no temp residue and fresh
+follow-up capture/load. An intentionally unguarded private negative actually
+leaks one descriptor and is detected. No real memory exhaustion, fuzzing or
+production fault hooks. Universal allocation/native close/crash behavior and
+complete M4-V/M5/M6 remain unqualified. Zero Adobe/SDK/Photo/Lightroom calls.

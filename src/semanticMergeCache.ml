@@ -36,7 +36,9 @@ let read filename =
      before.st_size < 72 || before.st_size > SemanticDelta.max_base_cache_size+72 then
     fail "untrusted or oversized record";
   let fd = Unix.openfile filename [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
+  (* Exception patterns install protection before evaluating the body. Unlike
+     allocating Fun.protect callbacks here, no setup allocation follows open. *)
+  match
     if not (same before (Unix.fstat fd)) then fail "record name changed";
     let bytes = Bytes.create before.st_size in
     let rec fill position = if position < Bytes.length bytes then
@@ -45,7 +47,10 @@ let read filename =
     fill 0;
     if not (same before (Unix.fstat fd) && same before (Unix.lstat filename)) then
       fail "record changed during read";
-    Bytes.to_string bytes)
+    Bytes.to_string bytes
+  with
+  | value -> Unix.close fd; value
+  | exception error -> Unix.close fd; raise error
 let body identity proof =
   let payload = "SBC\000\000\000\000\000" ^ identity ^ SemanticDelta.encode_base_cache proof in
   payload ^ SemanticHash.string payload
@@ -71,25 +76,51 @@ let store ~root ~path ~fingerprint proof =
       (* Bounded scan; refuse new entries when full. Retain earlier bases for
          partial-commit recovery instead of silently evicting their authority. *)
       let handle=Unix.opendir dir in
-      Fun.protect ~finally:(fun () -> Unix.closedir handle) (fun () ->
+      (match
         let rec count total =
           if total>=4096 then fail "entry capacity reached";
           match Unix.readdir handle with
           | "." | ".." -> count total
           | _ -> count (total+1)
-          | exception End_of_file -> () in count 0);
-      let temporary,channel=Filename.open_temp_file ~temp_dir:dir ~mode:[Open_binary]
-        ".base-" ".tmp" in
-      Fun.protect ~finally:(fun () -> close_out_noerr channel;
-        try Unix.unlink temporary with Unix.Unix_error (Unix.ENOENT,_,_) -> ()) (fun () ->
-        Unix.fchmod (Unix.descr_of_out_channel channel) 0o600;
-        output_string channel encoded;flush channel;
-        Unix.fsync (Unix.descr_of_out_channel channel);close_out channel;
+          | exception End_of_file -> () in count 0
+       with
+       | () -> Unix.closedir handle
+       | exception error -> Unix.closedir handle; raise error);
+      (* Prepare names, flags and close state before acquiring the descriptor.
+         O_EXCL makes a collision a decline, never authority to remove a peer's
+         file. Random names are collision avoidance inside an owned directory,
+         not a security token. Avoid open_temp_file's post-open channel/tuple
+         allocations by using a raw descriptor and a protected partial-write loop. *)
+      let temporary=Filename.concat dir (Printf.sprintf ".base-%d-%08x-%08x.tmp"
+        (Unix.getpid ()) (Random.bits ()) (Random.bits ())) in
+      let flags=[Unix.O_WRONLY;Unix.O_CREAT;Unix.O_EXCL;Unix.O_CLOEXEC;Unix.O_NONBLOCK] in
+      let closed=ref false in
+      let fd=Unix.openfile temporary flags 0o600 in
+      match
+        Unix.fchmod fd 0o600;
+        let rec write position =
+          if position < String.length encoded then begin
+            let count = try Unix.write_substring fd encoded position
+              (min 65536 (String.length encoded-position))
+              with Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
+            if count=0 then fail "zero-length record write";
+            write (if count<0 then position else position+count)
+          end in
+        write 0;
+        Unix.fsync fd;
+        (* Never retry a failed close on a possibly reused descriptor number. *)
+        closed:=true; Unix.close fd;
         (* No replacement: a concurrent capture may only publish equal bytes. *)
         (try Unix.link temporary filename with
          | Unix.Unix_error (Unix.EEXIST,_,_) ->
              if read filename<>encoded then fail "concurrent base differs");
-        Unix.unlink temporary)
+        Unix.unlink temporary
+      with
+      | () -> ()
+      | exception error ->
+          if not !closed then (closed:=true; try Unix.close fd with _ -> ());
+          (try Unix.unlink temporary with Unix.Unix_error (Unix.ENOENT,_,_) -> ());
+          raise error
   end
 let load ~root ~path ~fingerprint =
   if not (enabled ()) then None else
