@@ -4,6 +4,17 @@
 
 ## Live implementation handoff
 
+* Checked worker cached-path measurement (2026-10-14): actual production objects
+  from77234c5 run serially at1/6/18 workers with matched CommonCrypto backends.
+  Median throughput stock363.4/1985.8/4782.5MiB/s and
+  Ox365.5/2039.1/4941.1MiB/s;18/1 scaling13.16x/13.52x. Ranges overlap, so no
+  Ox-specific speedup is established. All864 hashlib-checked results and24
+  batches settle descriptors/CPU. RSS and sampled FD peaks are measured;
+  independent native/external RSS control agrees exactly. [Scope](bench/semantic/README.md),
+  [pins](bench/semantic/results/checked-worker-qualification-20261014.json).
+  Cached hashing is not full sync, SDK or pure-compute performance. Hard global
+  ceilings and full M6 remain open; no Photo/Adobe work.
+
 * Checked production worker integration (2026-10-14): OxCaml now compiles the
   actual worker closure with Safe.spawn. Immutable extension/recognition handles,
   XMP observations and worker-safe delta operations have portable/contended

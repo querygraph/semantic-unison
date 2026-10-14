@@ -12,27 +12,30 @@ Run from the repository root, substituting your compiler locations:
 python3 bench/semantic/run.py \
   --compiler stock=/path/to/stock/bin/ocamlopt \
   --compiler ox=/path/to/oxcaml/bin/ocamlopt \
-  --output bench/semantic/results/macos-x86_64.json
+  --output /tmp/sha-current.json
 ```
 
 `--build-only` checks isolated compilation without measuring. Defaults are a
-64 MiB fixture, 72 independent digest jobs per batch, worker counts 1/2/4/8/36,
+64 MiB fixture, 72 independent digest jobs per batch, worker counts 1/6/18,
 one warmup per configuration and five measured repetitions. `--file-mib 32`
 selects the smaller fixture. Run while other builds and CPU-heavy jobs are idle.
 
-Sources are snapshotted once and compiled in a temporary directory with each
-compiler's default native optimization settings. There are no shared-checkout
+Without --build, sources are snapshotted once and compiled in a temporary
+directory with each compiler's default native optimization settings. With
+--build LABEL=SNAPSHOT/src, actual matching production CMIs/CMXs/native objects
+are linked without replacing checked interfaces; their hashes are recorded. There are no shared-checkout
 build products. The synthetic fixture repeats the 64 KiB block whose byte `i`
 is `(i * 71 + 19) & 255`; Python's `hashlib.sha256` independently computes its
 expected digest. Every job opens the same fixture separately, so descriptors
 have independent offsets. At most one fixture exists, and temporary build/data
-files are deleted at completion. The OS cache is warmed by generation and the
+files are deleted at completion unless --keep-work retains them. The OS cache is warmed by generation and the
 warmup passes; no cache flush, pinning, or disk-throughput claim is made.
 
 Each batch uses a fresh pool with exactly as many shared CPU permits as workers.
 Pool construction is outside the timed interval. Timing includes opening and
 submitting jobs, queue admission, file reads and stability checks, hashing,
-worker notifications, and owner-loop completion. Digest-result checking and
+worker notifications, and owner-loop completion. The current instrumented version also samples
+descriptor counts after opening each input. Digest-result checking and
 pool shutdown occur after timing. Each sample must return all correct digests,
 leave no pending/running jobs, and release every CPU permit. Peak active workers
 comes from the production pool's mutex-protected counter; it counts executing
@@ -49,10 +52,15 @@ interleaving compiler configurations and reversing the configuration order on
 alternate measured rounds. Each batch starts a new process, so its peak counter
 and runtime state cannot include an earlier warmup.
 
+The current version reports process-lifetime getrusage peak RSS in bytes
+(including pool startup/shutdown) and descriptor counts sampled at input opens.
+The sampled peak can miss short-lived descriptors and is not a hard FD ceiling.
+Every batch must return to its original descriptor count after shutdown.
+
 The JSON records every sample (including discarded warmups), compiler versions
 and executable hashes, input/source hashes, parameters, clock/backend details,
-digest counts, concurrency peaks, and median/min/max summaries. It omits user
-names and absolute source/compiler paths. Optional machine properties can be
+digest counts, concurrency peaks, and median/min/max summaries. Legacy reports omit user names and absolute paths; actual-object builds and
+retained workspaces include exact local artifact paths for verification. Optional machine properties can be
 null when the sandbox denies `sysctl`. Cross-version compiler differences,
 thermal state, OS scheduling and memory bandwidth can affect these results;
 five repetitions describe this run rather than establishing universal speedups.
@@ -121,3 +129,38 @@ The ranges describe the observed run, without establishing a universal gain
 or a full-sync/SDK setting. The runtime's automatic CPU budget selects physical
 cores on macOS, yielding 18 on this host; `semanticworkers = 36` selects the
 explicit throughput option. Other platforms retain the logical-count fallback.
+
+## Checked production build, 2026-10-14
+
+The [current raw run](results/checked-worker-20261014.json) links the production
+objects qualified at77234c5; OxCaml actually uses Safe.spawn and checked extension
+interfaces. Stock5.5.1 and Ox5.2.0+ox share CommonCrypto. One32MiB private fixture,
+36 jobs/batch, one warmup and three measured repetitions per configuration run
+serially at1/6/18 workers. No Unison build or test ran concurrently; other sessions and ordinary host
+activity were not controlled. This is cached hash-path scaling, not full sync or
+SDK performance, pure compute throughput, or an OxCaml-specific speedup claim.
+
+| Workers | Stock median MiB/s | OxCaml median MiB/s | Stock / Ox median peak RSS MiB |
+| ---: | ---: | ---: | ---: |
+| 1 | 363.4 | 365.5 | 8.2 / 14.2 |
+| 6 | 1985.8 | 2039.1 | 9.3 / 10.0 |
+| 18 | 4782.5 | 4941.1 | 10.4 / 12.1 |
+
+Eighteen-worker scaling relative to one is13.16x stock and13.52x Ox. At18,
+median CPU/wall is16.54/16.57 logical CPU equivalents; every batch reaches its
+configured active-job peak. Compiler throughput ranges overlap. All864 hashes
+(including216 warmup hashes) match hashlib; all24 batches release CPU permits
+and return to their baseline three descriptors. Observed FD peaks are77/82/94
+at1/6/18 in either compiler. These include36 opened caller descriptors and
+queued worker duplicates, so FD use depends on outstanding jobs as well as
+active workers. They do not establish a universal memory/FD bound.
+
+The [qualification](results/checked-worker-qualification-20261014.json) verifies
+all sample and object identities and an independent /usr/bin/time -l RSS control:
+both native getrusage and the external final measurement report10498048 bytes
+for that separate six-worker Ox batch. That control is outside the timed matrix.
+Reproduce using the normal command plus --build stock=STOCK_SNAPSHOT/src and
+--build ox=OX_SNAPSHOT/src, `--workers 1,6,18 --file-mib 32 --jobs 36`,
+`--repetitions 3 --keep-work`.
+Native/resource ceilings and broader end-to-end M6 qualification remain open;
+no Adobe, Lightroom or source-photo operation occurred.

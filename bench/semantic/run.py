@@ -26,6 +26,7 @@ SOURCES = [
     "src/xmpObservation.mli", "src/xmpObservation.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
+    "src/semanticMailbox.mli", "src/semanticMailbox.ml",
     "src/semanticWorkers.mli", "src/semanticWorkers.ml",
     "bench/semantic/clock_stubs.c", "bench/semantic/hash_bench.ml",
 ]
@@ -34,7 +35,9 @@ SOURCES = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--compiler", action="append", required=True, metavar="LABEL=OCAMLOPT")
-    parser.add_argument("--workers", default="1,2,4,8,36")
+    parser.add_argument("--workers", default="1,6,18")
+    parser.add_argument("--build",action="append",default=[],metavar="LABEL=SNAPSHOT_SRC",help="Link actual compiler-matched production objects")
+    parser.add_argument("--keep-work",action="store_true")
     parser.add_argument("--file-mib", type=int, choices=(32, 64), default=64)
     parser.add_argument("--jobs", type=int, default=72)
     parser.add_argument("--repetitions", type=int, default=5)
@@ -54,6 +57,11 @@ def main():
         if resolved is None:
             parser.error("compiler executable unavailable")
         compilers[label] = str(Path(resolved).absolute())
+    builds={}
+    for item in args.build:
+        label,path=item.split("=",1)
+        if label not in compilers or label in builds:parser.error("build labels must match unique compiler labels")
+        builds[label]=Path(path).resolve()
     env = os.environ.copy()
     for name in ("OCAMLLIB", "OCAMLPATH", "CAML_LD_LIBRARY_PATH", "OCAMLRUNPARAM"):
         env.pop(name, None)
@@ -77,8 +85,11 @@ def main():
         for key in ("hw.physicalcpu", "hw.memsize"):
             query = subprocess.run(["sysctl", "-n", key], text=True, capture_output=True)
             result["host"][key] = int(query.stdout) if query.returncode == 0 else None
-    with tempfile.TemporaryDirectory(prefix="unison-sha-bench-") as temporary:
+    temporary_workspace = (tempfile.mkdtemp(prefix="unison-sha-bench-") if args.keep_work else None)
+    import contextlib
+    with (contextlib.nullcontext(temporary_workspace) if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-sha-bench-")) as temporary:
         tmp = Path(temporary)
+        result["retained_workspace"]=str(tmp) if args.keep_work else None
         binaries = {}
         for label, compiler in compilers.items():
             build = tmp / label
@@ -90,7 +101,20 @@ def main():
                 "executable_sha256": hashlib.sha256(Path(compiler).read_bytes()).hexdigest(),
             }
             with (build / "build.log").open("w+") as log:
-                commands = [[compiler, "-I", "+unix", "-c", Path(name).name] for name in SOURCES[:-1]]
+                result["compilers"][label]["actual_production_build"]=str(builds[label]) if label in builds else None
+                linked={}
+                if label in builds:
+                    for name in SOURCES[:-2]:
+                        actual=builds[label]/name.removeprefix("src/")
+                        if actual.read_bytes()!=source_bytes[name]:raise RuntimeError("production source mismatch: "+name)
+                        extensions=(".cmi",".cmx",".o") if name.endswith(".ml") else ((".cmi",) if name.endswith(".mli") else (".o",))
+                        for ext in extensions:
+                            artifact=actual.with_suffix(ext);shutil.copyfile(artifact,build/artifact.name)
+                            linked[str(artifact)]=hashlib.sha256(artifact.read_bytes()).hexdigest()
+                    commands=[[compiler,"-I","+unix","-c","clock_stubs.c"]]
+                else:
+                    commands = [[compiler, "-I", "+unix", "-c", Path(name).name] for name in SOURCES[:-1]]
+                result["compilers"][label]["linked_object_sha256"]=linked
                 objects = [Path(name).stem + (".o" if name.endswith(".c") else ".cmx")
                            for name in SOURCES[:-1] if name.endswith((".ml", ".c"))]
                 commands.append([compiler, "-I", "+unix", "unix.cmxa", *objects,
@@ -103,6 +127,8 @@ def main():
                     print(log.read())
                     raise
             binaries[label] = build / "hash-bench"
+            result["compilers"][label]["benchmark_binary_sha256"]=hashlib.sha256(binaries[label].read_bytes()).hexdigest()
+            result["compilers"][label]["build_log_sha256"]=hashlib.sha256((build/"build.log").read_bytes()).hexdigest()
             print(f"Built {label} ({result['compilers'][label]['version']})", flush=True)
         if args.build_only:
             print("Build-only check passed; no benchmark measurements taken.")
@@ -141,7 +167,7 @@ def main():
             samples = [s for s in result["samples"] if s["compiler"] == label and
                        s["workers"] == n and s["phase"] == "measured"]
             summary = {"compiler": label, "workers": n}
-            for key in ("wall_seconds", "process_cpu_seconds", "throughput_mib_per_second", "effective_cpu_cores"):
+            for key in ("wall_seconds", "process_cpu_seconds", "throughput_mib_per_second", "effective_cpu_cores", "process_lifetime_peak_rss_bytes", "observed_fd_count_peak"):
                 values = [s[key] for s in samples]
                 summary[key] = {"median": statistics.median(values), "min": min(values), "max": max(values)}
             summary["all_digests_correct"] = all(s["correct_digests"] == args.jobs for s in samples)
