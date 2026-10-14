@@ -520,3 +520,5 @@ future features. Non-byte convergence is explicitly outside the first
 implementation and would require a new archive design. New native ZFS/ReFS
 qualification depends on those platforms; the required portable capability
 contract and fake-backend tests do not.
+
+Seeded mixed worker scheduling now has [retained stock/OxCaml evidence](../tests/workers/seeded-stress-qualification.json): six seeds,3840 jobs and8046 checks per compiler, with queued cancellation under fully held CPU budgets1..4, sequential hash/inspection parity and settled permits/queues/descriptors. Seven identify controls also pass per compiler. This finite root-owned fixture does not close M6 compiler-safe-boundary, randomized active apply/RPC/native-helper stress, race instrumentation or performance/resource acceptance.

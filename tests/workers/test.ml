@@ -133,7 +133,71 @@ let identify_tests () =
     check (rejects(fun () -> W.identify pool (H.cancellation()) ~recognizers:[matched,false;matched,false] file)) "duplicate accepted";
     check (rejects(fun () -> W.identify pool (H.cancellation()) ~recognizers:(List.init 17(fun _ -> matched,false)) file)) "capture ceiling ignored";
     check ((W.usage pool).pending=0) "invalid captures dispatched";Unix.close file)
+let scheduling_stress () =
+  let seeds = [1;17;103;4099;65537;20261014] in
+  let checks = ref 0 and completed = ref 0 and cancelled = ref 0 in
+  let verify value reason = incr checks; check value reason in
+  let sequential path =
+    let file=fd path in
+    let result=SemanticFile.with_fd file (fun f ->
+      SemanticFile.digest f, SemanticDelta.inspect (module DngExtended) f) in
+    Unix.close file; result in
+  let baselines=List.map (fun path -> path,sequential path)
+    ["fixture.dng";"extended-base.dng";"extended-target.dng"] in
+  let extension=FormatExtension.trusted (module DngExtended) in
+  List.iter (fun seed ->
+    let rng=Random.State.make [|seed|] in
+    let before=Array.length(Sys.readdir "/dev/fd") in
+    let cpu=1+Random.State.int rng 4 in
+    let b=budget cpu in
+    let pool=W.create ~workers:4 ~max_pending:64 ~budget:b in
+    for round=1 to 20 do
+      let release=Lwt.wait () in
+      let held=H.with_cpu_permits b ~weight:cpu (H.cancellation ())
+        (fun () -> release) in
+      let jobs=List.init 32 (fun _ ->
+        let path,(digest,proof)=List.nth baselines (Random.State.int rng 3) in
+        let c=H.cancellation () in
+        let result=if Random.State.bool rng then
+          hash pool c path >>= fun result ->
+          return (Option.map (fun f ->
+            verify (f.W.digest=digest) "stress hash differs from sequential") result)
+        else
+          let file=fd path in
+          try_bind (fun () -> W.inspect pool c ~extension file)
+            (fun result -> Unix.close file;
+              (match result with None -> () | Some actual ->
+                verify (match proof,actual.W.proof with
+                  | Ok expected,Ok got -> SemanticDelta.describe expected=SemanticDelta.describe got
+                  | _ -> false) "stress proof differs from sequential");
+              return (Option.map (fun _ -> ()) result))
+            (fun error -> Unix.close file;fail error) in
+        c,result,Random.State.int rng 4=0) in
+      verify (H.usage b=(cpu,0) && (W.usage pool).running=0)
+        "stress worker bypassed held CPU budget";
+      let shuffled=List.sort (fun (a,_) (b,_) -> compare a b)
+        (List.map (fun job -> Random.State.bits rng,job) jobs) in
+      List.iter (fun (_, (c,_,cancel)) -> if cancel then H.cancel c) shuffled;
+      (* Await queued cancellations while every CPU credit remains held. *)
+      List.iter (fun (_,job,cancel) -> if cancel then
+        verify (Lwt_unix.run job=None) "queued cancellation returned data") jobs;
+      Lwt.wakeup release ();
+      Lwt_unix.run (held >>= fun _ -> return ());
+      let results=Lwt_unix.run (await (List.map (fun (_,job,_) -> job) jobs)) in
+      List.iter2 (fun (_,_,cancel) result ->
+        verify ((result=None)=cancel) "stress result/cancellation mismatch";
+        if cancel then incr cancelled else incr completed) jobs results;
+      verify (H.usage b=(0,0) && (W.usage pool).pending=0 && (W.usage pool).running=0)
+        "stress round failed settlement";
+      verify ((W.usage pool).peak_running<=cpu) "stress exceeded CPU admission";
+      if round mod 5=0 then Printf.printf "STRESS seed=%d round=%d cpu=%d\n%!" seed round cpu
+    done;
+    finish pool b;
+    verify (Array.length(Sys.readdir "/dev/fd")=before) "stress descriptor leak") seeds;
+  Printf.printf "PASS seeded scheduling stress seeds=%d jobs=%d completed=%d cancelled=%d checks=%d\n%!"
+    (List.length seeds) (!completed + !cancelled) !completed !cancelled !checks
 let () =
+  if Array.exists ((=) "--stress-only") Sys.argv then (scheduling_stress ();exit 0);
   identify_tests ();
   if Array.exists ((=) "--identify-only") Sys.argv then exit 0;
   let expected = write_fixture () in

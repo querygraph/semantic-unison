@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Exercise real typed domain workers with the production shared CPU budget."""
 import argparse
+import contextlib
+import json
+import datetime
 import hashlib
 from pathlib import Path
 import shutil
@@ -11,6 +14,9 @@ import tempfile
 parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
 parser.add_argument("--identify-only",action="store_true")
+parser.add_argument("--stress-only",action="store_true")
+parser.add_argument("--keep-work",action="store_true")
+parser.add_argument("--receipt",type=Path)
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
 sources = [
@@ -32,7 +38,9 @@ sources = [
     "src/semanticWorkers.mli", "src/semanticWorkers.ml",
     "tests/workers/test.ml",
 ]
-with tempfile.TemporaryDirectory(prefix="unison-workers-") as tmp:
+workspace = (contextlib.nullcontext(tempfile.mkdtemp(prefix="unison-workers-"))
+             if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-workers-"))
+with workspace as tmp:
     build = Path(tmp)
     for source in sources:
         shutil.copyfile(root / source, build / Path(source).name)
@@ -86,5 +94,20 @@ with tempfile.TemporaryDirectory(prefix="unison-workers-") as tmp:
     with (build / "large-stage.dng").open("wb") as out:
         out.write(dng)
         out.truncate(1073741824)
-    subprocess.run([str(build / "worker-test")]+(["--identify-only"] if args.identify_only else []),
-                   cwd=build, check=True, timeout=120)
+    command=[str(build / "worker-test")]
+    if args.identify_only: command.append("--identify-only")
+    if args.stress_only: command.append("--stress-only")
+    result=subprocess.run(command,cwd=build,text=True,capture_output=True,timeout=120)
+    (build/"test.log").write_text(result.stdout+result.stderr)
+    print(result.stdout,end="")
+    print(result.stderr,end="")
+    receipt=dict(schema="unison-worker-scheduling/1",utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
+                 compiler=args.ocamlopt,compiler_version=subprocess.check_output([args.ocamlopt,"-version"],text=True).strip(),
+                 workspace=str(build),retained=args.keep_work,stress_only=args.stress_only,exit=result.returncode,
+                 source_pins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+["tests/workers/run.py"]},
+                 binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
+                 log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),
+                 summary=[line for line in result.stdout.splitlines() if line.startswith("PASS seeded")])
+    (build/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
+    if args.receipt: args.receipt.write_text(json.dumps(receipt,indent=2)+"\n")
+    result.check_returncode()
