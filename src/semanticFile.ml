@@ -1,7 +1,7 @@
 exception Invalid of string
 type writer = { output : Unix.file_descr; positional : bool }
-external prepare_writer_raw : Unix.file_descr -> bool = "unison_semantic_prepare_writer"
-external pwrite_raw : Unix.file_descr -> string -> int -> int -> int64 -> int
+external prepare_writer_raw : Unix.file_descr -> bool (* ox-portable-ffi *) = "unison_semantic_prepare_writer"
+external pwrite_raw : Unix.file_descr -> string -> int -> int -> int64 -> int (* ox-portable-ffi *)
   = "unison_semantic_pwrite"
 let prepare_writer ?(check_cancel = fun () -> ()) output =
   let rec prepare () =

@@ -1,0 +1,294 @@
+{
+  "schema": "unison-checked-semantic-file-qualification/1",
+  "utc": "2026-10-14T09:59:47.904428+00:00",
+  "state": "CHECKED_FILE_COMPONENT_PASSED_FULL_WORKER_PORTABILITY_OPEN",
+  "baseCommit": "cafb12b",
+  "participants": [
+    {
+      "label": "stock",
+      "component": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-file-stock.json",
+          "bytes": 3208,
+          "sha256": "1a9d0178dd75b6b68b87b8aab0bbd66d517552130cf34db94d03a1d55fbadcb4"
+        },
+        "receipt": {
+          "schema": "unison-checked-file/1",
+          "status": "passed",
+          "workspace": "/private/tmp/unison-checked-file-a3wwa7hc",
+          "compiler": {
+            "path": "/usr/local/bin/ocamlopt",
+            "version": "5.5.1",
+            "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1"
+          },
+          "modeChecked": false,
+          "sourcePins": {
+            "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+            "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+            "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "src/semanticFile.ox.mli.in": "2dfdba40d0c65ee44d6590883a57c3ea2987eb13ab1dcc0136d4d37f558bbe37",
+            "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "tests/checked_file/test.ml": "204466c198cbfdfe5955f9ec805127837a886c901a8245e2813ed13d7edcab1e",
+            "tests/checked_file/run.py": "91c9783fbe62aabc99e575262f76ad2396e42205f568990ed49aae43bd7b7b94"
+          },
+          "actualCompiledInputs": {
+            "semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+            "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "test.ml": "afae662d81ceb3c0f357ffb90d89f280d4e869b9476f066cae4763fa6dbf1e06"
+          },
+          "commands": [
+            {
+              "name": "compile",
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.c",
+                "semanticFile_stubs.c",
+                "semanticHash.mli",
+                "semanticHash.ml",
+                "semanticFile.mli",
+                "semanticFile.ml",
+                "test.ml",
+                "-o",
+                "test"
+              ],
+              "exit": 0,
+              "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "name": "runtime",
+              "argv": [
+                "/private/tmp/unison-checked-file-a3wwa7hc/test"
+              ],
+              "exit": 0,
+              "logSha256": "694aedf11d4d1c7f6c2b83063e5fce3ba67fab7bb6ba8105d43b1978132e5668"
+            }
+          ],
+          "binarySha256": "798c744948e13b1452cf255cadb1aa0b1d49442937030831f71817dc06a23dce",
+          "outputHashes": {
+            "0": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "1": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "2": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "3": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a"
+          },
+          "sourcePhotosAccessed": false,
+          "productionModeInterfaceSelected": false
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uf6fz6iu",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uf6fz6iu/src/unison",
+          "bytes": 5465680,
+          "sha256": "beae6718c2c4ca42d553786ff8ded6abf7976d2b0a2fed9f9cb9d7b3284693fc"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uf6fz6iu/build.log",
+          "bytes": 64314,
+          "sha256": "b5963855e0aaf5370afd4d1d050a874a4a423dc6ccc95b30cf7b5e029e102fcd"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-uf6fz6iu/selftest.log",
+          "bytes": 683,
+          "sha256": "563a4f97f34dfebddab8aefcab8ed16d2484d385a0f0265fcfc673a6e91f8ad8"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-checked-file-dune-stock.json",
+        "bytes": 34346,
+        "sha256": "cb7fcecdb59c4e55a031514a6ea823f904844470a5e713f1584819e8ab61093d"
+      }
+    },
+    {
+      "label": "ox",
+      "component": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-file-ox.json",
+          "bytes": 4342,
+          "sha256": "168590cf627cc56c1603628eebf97c73945ce6d03258f2e600420646c5959adb"
+        },
+        "receipt": {
+          "schema": "unison-checked-file/1",
+          "status": "passed",
+          "workspace": "/private/tmp/unison-checked-file-5swny4td",
+          "compiler": {
+            "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "version": "5.2.0+ox",
+            "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+          },
+          "modeChecked": true,
+          "sourcePins": {
+            "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+            "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+            "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+            "src/semanticFile.ox.mli.in": "2dfdba40d0c65ee44d6590883a57c3ea2987eb13ab1dcc0136d4d37f558bbe37",
+            "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "tests/checked_file/test.ml": "204466c198cbfdfe5955f9ec805127837a886c901a8245e2813ed13d7edcab1e",
+            "tests/checked_file/run.py": "91c9783fbe62aabc99e575262f76ad2396e42205f568990ed49aae43bd7b7b94"
+          },
+          "actualCompiledInputs": {
+            "writer.ml": "c891dc2dc1f30f802866c720189525464d0a8c6981c7e73fcb1765110ff5ec28",
+            "semanticFile.mli": "2dfdba40d0c65ee44d6590883a57c3ea2987eb13ab1dcc0136d4d37f558bbe37",
+            "reader.ml": "1ccdedf4ce6283acc12604bb8e4ec800399e05f1552fc44347c7db2555545fca",
+            "semanticHash.mli": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+            "semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+            "semanticFile.ml": "42d2aa16eee81ad650917b9956a66a0de921153e4402aacf871159e102bf516e",
+            "semanticHash.ml": "b1ac061e218e78f5e9b1f75a98cef29a6101e0999969b3d183a24c9659b3d433",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "chunk.ml": "362beba4957aff855829a4ca147ee144d23f62cb4cc4104ec9770defcc2efa32",
+            "test.ml": "204466c198cbfdfe5955f9ec805127837a886c901a8245e2813ed13d7edcab1e"
+          },
+          "commands": [
+            {
+              "name": "compile",
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "semanticHash_stubs.c",
+                "semanticFile_stubs.c",
+                "semanticHash.mli",
+                "semanticHash.ml",
+                "semanticFile.mli",
+                "semanticFile.ml",
+                "test.ml",
+                "-o",
+                "test"
+              ],
+              "exit": 0,
+              "logSha256": "82718c7e72ad5668f186c4d460ee86059ee2171a0fadf9a457956cb5c6a180bf"
+            },
+            {
+              "name": "runtime",
+              "argv": [
+                "/private/tmp/unison-checked-file-5swny4td/test"
+              ],
+              "exit": 0,
+              "logSha256": "694aedf11d4d1c7f6c2b83063e5fce3ba67fab7bb6ba8105d43b1978132e5668"
+            },
+            {
+              "name": "reader",
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "reader.ml"
+              ],
+              "exit": 2,
+              "logSha256": "5829c2a38e6cbfdb77149c96bfdd2a3a8b1fc7a12ca60b1c985222b1226c7070"
+            },
+            {
+              "name": "writer",
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "writer.ml"
+              ],
+              "exit": 2,
+              "logSha256": "d96c2d650c37394af23a558e5ac99e2ff478ba084f074c49bd77a24431d559f6"
+            },
+            {
+              "name": "chunk",
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-c",
+                "chunk.ml"
+              ],
+              "exit": 2,
+              "logSha256": "1ff17b4faba8eb1871b89d22e58fbeaa1623880fcbe685a02476b9073165ba2b"
+            }
+          ],
+          "binarySha256": "34117af02813f7c0e5f798b006da19c9cc11a549d6576c2b84c0187d32ac60b5",
+          "outputHashes": {
+            "0": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "1": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "2": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a",
+            "3": "96262564c9e92f8609569df1fadeb588a6e0da2c33212bb0787b0d5d06eec93a"
+          },
+          "sourcePhotosAccessed": false,
+          "productionModeInterfaceSelected": false
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_im1sat5",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_im1sat5/src/unison",
+          "bytes": 7372560,
+          "sha256": "566e8101c972b1c96ff7739cfb789accfc115002b1d246447a22d96c06d87a36"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_im1sat5/build.log",
+          "bytes": 75774,
+          "sha256": "c6543d79a323e2068ff965bdb8d23c9e3ca511fa1759c40ce41e1dca50fcfcb7"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-_im1sat5/selftest.log",
+          "bytes": 686,
+          "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-checked-file-dune-ox.json",
+        "bytes": 34354,
+        "sha256": "9170412bc3a5b93ec37679df6c1bf4f096e37d9873571b7356b44d596a5d28db"
+      }
+    }
+  ],
+  "sourcePins": {
+    "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+    "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+    "src/semanticFile.ox.mli.in": "2dfdba40d0c65ee44d6590883a57c3ea2987eb13ab1dcc0136d4d37f558bbe37",
+    "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+    "tests/checked_file/run.py": "91c9783fbe62aabc99e575262f76ad2396e42205f568990ed49aae43bd7b7b94",
+    "tests/checked_file/test.ml": "204466c198cbfdfe5955f9ec805127837a886c901a8245e2813ed13d7edcab1e"
+  },
+  "foreignContract": {
+    "rootOwnedAudit": true,
+    "compilerProvesNativeOwnership": false,
+    "scope": "Two reviewed native declarations; rooted arguments, native scalars/stack input while released, pending actions before borrow interpretation, no stored global pointer/application callback registration",
+    "source": {
+      "path": "src/semanticFile_stubs.c",
+      "bytes": 4065,
+      "sha256": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70"
+    }
+  },
+  "exploratoryCompilerProof": {
+    "path": "/private/tmp/unison-checked-file-probe-ttgp2vus/compile.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "productionAlgorithmChanged": false,
+  "productionModeInterfaceSelected": false,
+  "rootOwnedReview": true,
+  "independentAgentReview": false,
+  "limits": [
+    "Descriptor ownership/exclusivity, same-domain borrowed lifetime and external mutation remain caller contracts",
+    "Runtime pending actions at entry are not a no-reentrancy guarantee",
+    "Production checked worker/extension/counter integration remains unfinished",
+    "POSIX macOS native tests only; no Windows runtime/RSS/globalFD/performance qualification",
+    "No Adobe/Photo/Lightroom or native preview operations"
+  ],
+  "goalComplete": false
+}

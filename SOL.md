@@ -4,6 +4,16 @@
 
 ## Live implementation handoff
 
+* Checked file component (2026-10-14): portable File/Hash interfaces and two
+  audited native file contracts compile and run in four actual checked OxCaml
+  domains, with stock runtime parity. Exact read/iteration/hash/cancellation,
+  positional write/cursor/bounds/flags and full output/descriptor settlement pass;
+  shared reader/writer/chunk captures reject. [Scope](doc/checked-semantic-file.md),
+  [pins](tests/checked_file/qualification.json). Make+Dune CLI/selftests pass.
+  File algorithms are unchanged; production mode-interface/extension/counter
+  integration and full M6 remain open. Kernel borrowing/native ownership are
+  manual contracts, not mode proof; no Photo/Adobe operations.
+
 * Checked hash component (2026-10-14): fallback round constants use an
   immutable lookup. A checked OxCaml interface and three explicitly audited
   native portability contracts pass native and forced-reference hashlib controls
