@@ -15,7 +15,7 @@ def checked(x):
 for n in ['semanticWorkers.mli','semanticWorkers.ml']:
  x=subprocess.run([a.compiler,'-I','+unix','-c',n],cwd=w,capture_output=True,text=True);logs.append(x.stdout+x.stderr);checked(x)
 # Dependency order from the production-shaped standalone worker runner.
-mods=['lwt','pqueue','lwt_unix_impl','lwt_unix','borrowedWork','helperSupervisor','semanticAdmission','ioAdmission','semanticHash','semanticFile','formatRecognition','dngRecognition','formatExtension','xmpObservation','dngSemantic','dngExtended','semanticDelta','semanticMailbox','semanticWorkers']
+mods=['lwt','pqueue','lwt_unix_impl','lwt_unix','borrowedWork','helperSupervisor','semanticAdmission','ioAdmission','semanticHash','semanticFile','formatRecognition','dngRecognition','formatExtension','xmpObservation','xmpMerge','dngSemantic','dngExtended','semanticDelta','semanticMailbox','semanticWorkers']
 shutil.copyfile(r/'tests/workers/mailbox_pressure.ml',w/'mailbox_pressure.ml')
 cmd=[a.compiler,'-I','+unix','unix.cmxa',*[m+'.cmx' for m in mods],'helperSupervisor_stubs.o','semanticHash_stubs.o','semanticFile_stubs.o','mailbox_pressure.ml','-o','pressure']
 x=subprocess.run(cmd,cwd=w,capture_output=True,text=True);logs.append(x.stdout+x.stderr);checked(x);(w/'input.bin').write_bytes(b'p'*4194304)

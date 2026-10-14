@@ -15,7 +15,7 @@ parser.add_argument("--skip-conformance", action="store_true",
                     help="run only the original kernel/inspection fixtures")
 args = parser.parse_args()
 root = pathlib.Path(__file__).resolve().parents[2]
-modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "dngExtended", "semanticDelta"]
+modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge", "dngSemantic", "dngExtended", "semanticDelta"]
 with tempfile.TemporaryDirectory(prefix="unison-semantic-") as tmp:
     build = pathlib.Path(tmp)
     for name in modules:

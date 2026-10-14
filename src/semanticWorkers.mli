@@ -8,6 +8,8 @@ type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
 type observation = { inspection : inspection;
   meaning : (FormatExtension.observation, string) result option }
+type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
+                        stats : Unix.LargeFile.stats }
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -72,3 +74,13 @@ val apply_dng : t -> HelperSupervisor.cancellation -> SemanticDelta.t ->
     owned regular stage containing the exact basis bytes. Verifies basis and
     output before patching, then verifies the target digest. Never commits or
     changes filesystem properties. Discard output on cancellation or failure. *)
+
+val reconcile_xmp : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
+  nonce:string -> base:SemanticDelta.proof -> left:SemanticDelta.proof ->
+  right:SemanticDelta.proof -> Unix.file_descr -> reconciliation option Lwt.t
+(** Build a deterministic exact XMP target plan in the shared domain/CPU pool.
+    Owner supplies immutable inspected proofs and an archive-qualified common
+    base; this does not choose or cache that base. Only one live left descriptor
+    is borrowed. No output writes or commits occur. Cancellation, descriptor
+    settlement and CPU ownership follow [inspect]; conflicting metadata returns
+    an explicit Error in [merge_plan], never an automatic fallback merge. *)

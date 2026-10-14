@@ -23,7 +23,7 @@ SOURCES = [
     "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
     "src/formatRecognition.mli", "src/formatRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
-    "src/xmpObservation.mli", "src/xmpObservation.ml",
+    "src/xmpObservation.mli", "src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
     "src/semanticMailbox.mli", "src/semanticMailbox.ml",

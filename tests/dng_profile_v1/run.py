@@ -22,7 +22,7 @@ from reference import Region, inspect, plan, encode_request, encode_envelope
 from fixtures import (Layout, PROFILE, PRIMARY, XMP, XMP_LENGTH, SIZE,
                       valid_fixtures, invalid_fixtures)
 
-MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation",
+MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge",
            "dngSemantic", "dngExtended", "semanticDelta")
 INPUTS = tuple("src/" + name + suffix for name in MODULES for suffix in (".mli", ".ml")) + (
     "src/semanticHash_stubs.c", "src/semanticFile_stubs.c",

@@ -498,6 +498,27 @@ let () =
           "worker observation byte proof changed" | Error why -> failwith why)
       | None -> failwith "worker observation cancelled") (Lwt_unix.run(await jobs));
     finish pool b);
+  test "typed reconciliation plans are deterministic, bounded and cancellable" (fun () ->
+    let extension=FormatExtension.trusted(module DngSemantic) in
+    let proof path=let file=fd path in
+      let result=SemanticFile.with_fd file(SemanticDelta.inspect(module DngSemantic)) in
+      Unix.close file;match result with Ok p -> p | Error why -> failwith why in
+    let base=proof "merge-base.dng" and left=proof "merge-left.dng" and right=proof "merge-right.dng" in
+    let expected=SemanticDelta.describe(proof "merge-target.dng") in
+    let b=budget 6 in let pool=W.create ~workers:6 ~max_pending:48 ~budget:b in
+    let submit c=let file=fd "merge-left.dng" in
+      try_bind(fun () -> W.reconcile_xmp pool c ~extension ~nonce:(String.make 32 'r') ~base ~left ~right file)
+        (fun result -> Unix.close file;return result)
+        (fun error -> Unix.close file;fail error) in
+    let jobs=List.init 48(fun _ -> submit(H.cancellation())) in
+    List.iter(function Some result -> (match result.W.merge_plan with
+      | Ok plan -> check(SemanticDelta.target_digest plan=expected.SemanticDelta.digest)"worker merge target differs"
+      | Error why -> failwith why) | None -> failwith "merge unexpectedly cancelled") (Lwt_unix.run(await jobs));
+    let held=H.cancellation() in
+    let reservation=H.with_cpu_permits b ~weight:6 held(fun ()->Lwt_unix.sleep 30.) in
+    let cancel=H.cancellation() in let waiting=submit cancel in
+    H.cancel cancel;check(Lwt_unix.run waiting=None)"queued reconciliation did not cancel";
+    H.cancel held;ignore(Lwt_unix.run reservation);finish pool b);
   test "DNG whole-file proof hashing is cancellable and keeps owner responsive" (fun () ->
     let b = budget 1 in let pool = W.create ~workers:1 ~max_pending:2 ~budget:b in
     let c = H.cancellation () in

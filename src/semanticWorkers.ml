@@ -6,6 +6,8 @@ type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
 type observation = { inspection : inspection;
   meaning : (FormatExtension.observation, string) result option }
+type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
+                        stats : Unix.LargeFile.stats }
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -14,8 +16,10 @@ exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
   | Observed of observation
   | Identified of identification
+  | Reconciled of reconciliation
   | Applied of SemanticDelta.application | Cancelled | Error of string
 type operation = Digest | Inspect of FormatExtension.handle
+  | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
   | Identify of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
@@ -106,6 +110,10 @@ let execute job =
         check_cancel ();
         SemanticFile.check file;
         Observed {inspection={proof;stats};meaning}
+      | Reconcile(extension,nonce,base,left,right) ->
+        Reconciled {merge_plan=SemanticDelta.reconcile_xmp
+          ~max_payload:(FormatExtension.payload_limit extension)
+          (FormatExtension.implementation extension) ~nonce ~base ~left ~right file;stats}
       | Apply (extension, plan, output) ->
         let report = SemanticDelta.apply_report_with_extension ~check_cancel
           ~max_payload:(FormatExtension.payload_limit extension) (FormatExtension.implementation extension)
@@ -313,7 +321,7 @@ let submit t cancellation fd requested_operation =
           end)) (function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Applied _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Reconciled _ | Applied _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result)) fail in
     let admitted_execution () = match t.io with
@@ -321,7 +329,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -364,6 +372,13 @@ let inspect t cancellation ~extension fd =
   | None -> return None
   | Some (Inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected inspection response")) fail
+
+let reconcile_xmp t cancellation ~extension ~nonce ~base ~left ~right fd =
+  BorrowedWork.try_bind
+    (fun () -> submit t cancellation fd (Reconcile(extension,nonce,base,left,right))) (function
+    | None -> return None
+    | Some(Reconciled result) -> return(Some result)
+    | Some _ -> fail(Failed "unexpected reconciliation response")) fail
 
 let identify t cancellation ~recognizers fd =
   if List.length recognizers > FormatRecognition.max_recognizers then

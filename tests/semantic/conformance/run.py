@@ -19,7 +19,7 @@ from reference import (MAX_PAYLOAD, Proof, Region, binds, decode_envelope,
                        golden_values, inspect, plan, Invalid)
 from vectors import case_manifest, sha, verify_goldens, wire_cases
 
-MODULES = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "dngSemantic", "semanticDelta"]
+MODULES = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge", "dngSemantic", "semanticDelta"]
 
 
 def main():

@@ -61,3 +61,16 @@ val apply_report_with_extension : ?check_cancel:(unit -> unit) -> ?max_payload:i
     windows are combined and each write is at most 64 KiB. Counts describe
     logical writes, not physical allocations, durability or elapsed speedup.
     Unchanged metadata performs no data writes. *)
+
+val reconcile_xmp : ?max_payload:int -> (module FormatExtension.S) @ portable contended ->
+  nonce:string -> base:proof -> left:proof -> right:proof -> SemanticFile.t ->
+  (t, string) result
+(** Build one deterministic exact target plan against the live left descriptor.
+    The owner must supply a trusted archive-bound common base; this function
+    does not establish archive generation or authority. Require matching DNG
+    profile/layout/size/protected identities and full single XMP packets from
+    all three inspections. Refuse peer-only proofs, conflicts and packet growth.
+    Reinspect the live left file, compute target SHA-256 from its protected bytes
+    plus merged metadata, and check stability. No output is opened or modified.
+    Materialize the returned plan through ordinary verified private staging;
+    validate and use the existing two-replica merge/commit lifecycle. *)

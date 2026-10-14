@@ -14,7 +14,7 @@ import tempfile
 import time
 
 ROOT = Path(__file__).resolve().parents[2]
-MODULES = ("semanticHash", "semanticFile", "formatExtension", "semanticDelta")
+MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge", "semanticDelta")
 INPUTS = tuple("src/" + name + suffix for name in MODULES for suffix in (".mli", ".ml")) + (
     "src/semanticHash_stubs.c", "src/semanticFile_stubs.c",
     "tests/positional_write/fixture.c", "tests/positional_write/test.ml",

@@ -84,6 +84,44 @@ let plan ~nonce ~(base:proof) ~(target:proof) =
     patches = List.map2 (fun (a:item) (b:item) ->
       {region=a.region; old_digest=a.digest; data=b.contents}) base.items target.items }
 
+(* An explicit locally retained common base is required. This constructs an
+   exact target plan; archive-generation authority and publication stay with
+   the owner. Peer request proofs have no full packet bytes and are rejected. *)
+let reconcile_xmp ?max_payload extension ~nonce ~(base:proof) ~(left:proof)
+    ~(right:proof) file =
+  let fail reason=Error reason in
+  if String.length nonce<>32 then fail "nonce must be32 bytes"
+  else if not(List.mem base.name ["org.firstpair.dng-xmp/0";"org.firstpair.dng-xmp/1"])
+  then fail "unsupported XMP reconciliation profile"
+  else if not(same_layout base left && same_layout base right) then
+    fail "reconciliation profile, size or layout changed"
+  else if base.preserved<>left.preserved || base.preserved<>right.preserved then
+    fail "reconciliation protected bytes changed"
+  else match base.items,left.items,right.items with
+  | [b],[l],[r] when String.length b.contents=b.region.length &&
+      String.length l.contents=l.region.length && String.length r.contents=r.region.length ->
+      (match XmpMerge.merge ~base:b.contents ~left:l.contents ~right:r.contents with
+       | Error _ as error -> error
+       | Ok packet when String.length packet<>l.region.length ->
+           fail "merged packet does not fit the fixed metadata region"
+       | Ok packet ->
+           (match inspect ?max_payload extension file with
+            | Error _ as error -> error
+            | Ok current when describe current<>describe left ->
+                fail "live reconciliation basis changed"
+            | Ok _ ->
+                let hash=SemanticHash.create () in
+                let feed start length=SemanticFile.iter file start length
+                  (fun bytes n -> SemanticHash.feed hash bytes 0 n) in
+                feed 0L l.region.offset;feed_string hash packet;
+                let last=Int64.add l.region.offset(Int64.of_int l.region.length) in
+                feed last (Int64.sub left.size last);
+                SemanticFile.check file;
+                let target={left with full=SemanticHash.finish hash;
+                  items=[{region=l.region;contents=packet;digest=SemanticHash.string packet}]} in
+                plan ~nonce ~base:left ~target))
+  | _ -> fail "full single XMP packets required for reconciliation"
+
 (* Bounded, canonical external encoding. Integers are unsigned big endian;
    file offsets are restricted to the positive signed-int64 range. *)
 let magic = "SDE\000\000\000\000\000"

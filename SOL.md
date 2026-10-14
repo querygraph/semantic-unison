@@ -4,6 +4,18 @@
 
 ## Live implementation handoff
 
+* M5 fixed-region DNG materialization (2026-10-14): trusted full-packet proofs
+  now construct an exact three-way target and SDE plan after live-left
+  revalidation. OxCaml workers dispatch this operation with existing borrowed-FD,
+  cancellation and shared-credit ownership. Native private clone staging preserves
+  all payload bytes; independent expected output matches. Stock/Ox direct controls,
+  29-case actual-object workers, 127-command/2033-assertion conformance and
+  JPEG/DNG/positional-write/21 receiving controls pass. Four Make/Dune CLI
+  builds/selftests pass. [Scope](doc/dng-three-way-materialization.md),
+  [evidence](tests/dng_reconcile/qualification.json). Automatic merging remains
+  disabled: trusted archive-base capture, two-replica commit/recovery and full M5
+  remain open. No Photo or Adobe work.
+
 * M5 scalar packet kernel (2026-10-14): explicit policy
   org.firstpair.xmp-scalars-three-way/0 captures lossless Rating/Label attribute
   spans through the bounded parser. Exact non-allowlisted shell bytes must match;
@@ -13,7 +25,7 @@
   all25 in four checked domains. Existing968 observer and1029 independent XML
   mutation checks pass per compiler. [Policy](doc/xmp-three-way-policy-v0.md),
   [pins](tests/xmp_merge/qualification.json). This kernel does not yet enable
-  file merges: trusted archive-base capture, container capacity/materialization,
+  file merges: trusted archive-base capture, generalized container growth,
   two-replica staging/validation and failure recovery remain M5 work. No photos
   or Adobe/Lightroom are accessed.
 

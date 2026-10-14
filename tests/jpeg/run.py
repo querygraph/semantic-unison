@@ -3,7 +3,7 @@
 import argparse, hashlib, json, pathlib, shutil, struct, subprocess, tempfile
 p=argparse.ArgumentParser();p.add_argument('--ocamlopt',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);p.add_argument('--old-kernel');a=p.parse_args()
 root=pathlib.Path(__file__).resolve().parents[2];work=pathlib.Path(tempfile.mkdtemp(prefix='unison-jpeg-'))
-modules=['semanticHash','semanticFile','formatExtension','xmpObservation','dngSemantic','dngExtended','jpegSemantic','semanticDelta']
+modules=['semanticHash','semanticFile','formatExtension','xmpObservation','xmpMerge','dngSemantic','dngExtended','jpegSemantic','semanticDelta']
 sources=['src/'+m+s for m in modules for s in ('.mli','.ml')]+['src/semanticHash_stubs.c','src/semanticFile_stubs.c','tests/jpeg/test.ml']
 for s in sources: shutil.copyfile(root/s,work/pathlib.Path(s).name)
 cmd=[a.ocamlopt,'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']

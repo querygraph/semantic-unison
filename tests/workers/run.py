@@ -33,7 +33,7 @@ sources = [
     "src/formatRecognition.mli", "src/formatRecognition.ml",
     "src/dngRecognition.mli", "src/dngRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
-    "src/xmpObservation.mli", "src/xmpObservation.ml",
+    "src/xmpObservation.mli", "src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
     "src/dngExtended.mli", "src/dngExtended.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
@@ -84,6 +84,10 @@ with workspace as tmp:
     struct.pack_into("<I",observed,38,len(observation_packet))
     observed[1024:1024+len(observation_packet)]=observation_packet
     (build/"observed.dng").write_bytes(observed)
+    for name,rating,label in [("merge-base.dng","1","Blue"),("merge-left.dng","2","Blue"),("merge-right.dng","1","Gold"),("merge-target.dng","2","Gold")]:
+        merge_packet=(f'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:xmp="http://ns.adobe.com/xap/1.0/"><rdf:Description rdf:about="" xmp:Rating="{rating}" xmp:Label="{label}"/></rdf:RDF>').encode()
+        data=bytearray(dng);struct.pack_into("<I",data,38,1024)
+        data[1024:2048]=merge_packet+b" "*(1024-len(merge_packet));(build/name).write_bytes(data)
     target = bytearray(dng)
     target[1024:1024 + len(packet)] = b"<x>two</x>      "
     (build / "target.dng").write_bytes(target)

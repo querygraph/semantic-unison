@@ -20,7 +20,7 @@ SOURCES=[
  "src/semanticHash_stubs.c","src/semanticHash.mli","src/semanticHash.ml",
  "src/semanticFile_stubs.c","src/semanticFile.mli","src/semanticFile.ml",
  "src/formatRecognition.mli","src/formatRecognition.ml",
- "src/formatExtension.mli","src/formatExtension.ml","src/xmpObservation.mli","src/xmpObservation.ml",
+ "src/formatExtension.mli","src/formatExtension.ml","src/xmpObservation.mli","src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
  "src/dngSemantic.mli","src/dngSemantic.ml","src/semanticDelta.mli","src/semanticDelta.ml",
  "tests/fd_ownership/fault.ml","src/semanticMailbox.mli", "src/semanticMailbox.ml", "src/semanticWorkers.mli","src/semanticWorkers.ml",
  "tests/fd_ownership/fixture.c","tests/fd_ownership/test.ml","tests/fd_ownership/run.py"]
