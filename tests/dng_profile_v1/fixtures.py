@@ -147,7 +147,7 @@ def field(tag, typ, data, address=None, mutable=False):
 
 
 def make_fixture(*, big, little, camera_orders=(), graph=True, pointer_type=None,
-                 extent_type=None, profile_type=None, version=7, full_profile=False):
+                 extent_type=None, profile_type=None, version=7, full_profile=False, modern_scalars=False):
     """A layout fixture with arbitrary opaque payloads, not a valid photograph."""
     layout = Layout(big, little)
     producer = Producer(layout)
@@ -175,6 +175,11 @@ def make_fixture(*, big, little, camera_orders=(), graph=True, pointer_type=None
             field(51009, 7, bytes(range(32, 64)), 6656, mutable=True),
             field(51022, 7, bytes(range(64, 96)), 6912, mutable=True),
             field(34675, 7, b"opaque-profile-not-pixel-valid" * 2, 7168, mutable=True)]
+    if modern_scalars:
+        main.extend([field(52547, 3, layout.integer(2, 2), mutable=True),
+                     field(52553, 11, struct.pack(layout.order + "f", 0.0), mutable=True),
+                     field(52554, 4, layout.integer(7, 4), mutable=True),
+                     field(52555, 4, layout.integer(4, 4), mutable=True)])
     if big:
         main.append(field(255, 17, layout.integer((1 << 64) - 1, 8)))
         main.append(field(257, 16, layout.integer(5120, 8), mutable=True))
@@ -245,9 +250,11 @@ def make_fixture(*, big, little, camera_orders=(), graph=True, pointer_type=None
     name += "-cr" + "".join("L" if order else "B" for order in camera_orders)
     if full_profile:
         name += "-full-profile"
+    if modern_scalars:
+        name += "-modern-scalars"
     result = Fixture(name, bytes(producer.data), layout, producer.entries,
                      producer.directories, producer.protected, producer.mutable,
-                     not big and not camera_orders)
+                     not big and not camera_orders and not modern_scalars)
     # Check the producer's own placement invariant, without parsing output.
     for extent in result.protected:
         start, stop = extent["offset"], extent["offset"] + extent["length"]
@@ -260,6 +267,7 @@ def valid_fixtures():
     for big in (False, True):
         for little in (True, False):
             yield make_fixture(big=big, little=little)
+            yield make_fixture(big=big, little=little, modern_scalars=True)
             for camera_little in (True, False):
                 yield make_fixture(big=big, little=little, camera_orders=(camera_little,))
             yield make_fixture(big=big, little=little, camera_orders=(True, False))
@@ -324,6 +332,14 @@ def work_fixture(children):
 
 def invalid_fixtures():
     """Mutation recipes with an independently known structural defect."""
+    for big in (False, True):
+        for little in (True, False):
+            fixture = make_fixture(big=big, little=little, modern_scalars=True)
+            for tag in (52547, 52553, 52554, 52555):
+                for component, value in (("type", 13), ("type", 7), ("count", 0), ("count", 2)):
+                    at, payload = fixture.field("main", tag, component, value)
+                    name, data = fixture.changed(fixture.name + f"-{tag}-{component}-{value}", at, payload)
+                    yield name, data, "invalid extended DNG scalar type or count"
     for little in (True, False):
         fixture = make_fixture(big=True, little=little, camera_orders=(not little,))
         prefix = "big-le" if little else "big-be"

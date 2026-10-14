@@ -2083,3 +2083,25 @@ nonreplacement/path binding and4096-entry capacity refusal without temp residue.
 Existing records remain usable at capacity. [Evidence](tests/semantic_base_cache/storage-qualification.json).
 No Adobe/Photo invocation or implementation behavior change. Concurrent mutation,
 allocation failures, crash durability, global quota and full M4-V/M5/M6 remain open.
+
+## SDK-produced JPEG XL container eligibility corrected
+
+Actual receiving of retained SDK-generated originals exposed /1 refusing four
+DNG1.7 scalar tags in JPEG XL; preceding stock/Ox logs prove safe generic-clone
+fallback. /1 now admits only Image-IFD ColumnInterleaveFactor SHORT/LONG1,
+JXLDistance FLOAT1, JXLEffort LONG1 and JXLDecodeSpeed LONG1. Unknown tags and
+malformed scalar shapes refuse; /0, exact complement proof and wire stay unchanged.
+Scalar values remain protected bytes, not interpreted pixels or image validity.
+[Source rationale](tests/sdk_container_receive/MODERN-SCALAR-NOTES.md).
+
+[Sealed qualification](tests/sdk_container_receive/qualification.json): current
+stock/Ox Make+Dune+selftests pass; each parser suite passes1253 cases/6288
+assertions (including64 malformed scalar shapes and endian/classic/BigTIFF
+controls); each actual Make CLI passes12 receiving cases over original
+uncompressed/losslessJPEG/JPEGXL containers. All three now actually use SDE
+with4543-byte packets. Clone-disabled exact transfer, protected-byte fallback,
+mock receiver rejection, preserved old hardlinks, source identity/hash and
+no-op inode/helper counts pass. Retained original fixtures were SDK-positive
+in the consumed pilot; modified outputs are NOT SDK-qualified. Zero new SDK,
+Adobe, Photo or Lightroom calls; no reused native admission. Camera corpus,
+actual SDK receive/decode, resource ceilings and full M4-V/M5/M6 stay open.
