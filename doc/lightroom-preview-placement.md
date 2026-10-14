@@ -10,7 +10,18 @@ defines the synchronization/placement boundary; it does not launch Lightroom,
 edit Main/cache databases or write preview payloads to either volume.
 The [integration findings](preview-design-integration.md) record the reviewed
 renderer/dependency contracts, forwarding and current filesystem/capacity update.
-Current coordination, verified 2026-10-14 02:18 UTC: the native window is
+Latest coordination, received 2026-10-14 03:03 UTC: the
+[Root renewal at 02:14:39 UTC](preview-finite-oracle-resumption-20261013.json)
+supersedes the earlier suspension after actual unlock at 02:13:58 UTC. The
+same original owner/coordinator PID 18036 / tool 37295 retains the Photo lease;
+Classic PID 2844 / launch is unchanged. Prior denied requests were unsubmitted,
+with no native replay. Registration/load/decode results and closure remain
+pending. This delayed admission receipt does not recheck current desktop,
+application, CPU or temporary keep-awake state. Cold restart is separately
+coordinated, with no full run or Quasar fault test added. Unison starts no
+Adobe/cache work; split placement remains unqualified.
+
+Earlier suspension, sealed 02:12 UTC and read 02:18 UTC: the native window was
 [suspended; all five helpers closed/restored](preview-finite-oracle-suspension-20261013.json)
 after desktop relock. Three registration attempts returned
 `WAIT_FOR_MAIN_CATALOG`, without native registration or UI/Main/cache mutation.

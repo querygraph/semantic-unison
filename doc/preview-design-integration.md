@@ -14,7 +14,19 @@ Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
-Current status, verified 2026-10-14 02:18 UTC: the native slot is
+Latest coordination, received 2026-10-14 03:03 UTC: the
+[Root renewal at 02:14:39 UTC](preview-finite-oracle-resumption-20261013.json)
+supersedes the earlier suspension at 02:12 UTC after actual unlock at
+02:13:58 UTC. Original preview owner, coordinator PID 18036 / tool session
+37295 and canonical Photo lease are unchanged; Classic PID 2844 has the same
+launch. Prior denied requests were positively unsubmitted, with no replay.
+Registration was uninvoked at admission; its exact native mapping/load/decode
+outcome and closure remain pending. This delayed receipt is not a new check
+of current desktop/application/CPU or temporary keep-awake state. Cold restart
+requires separate Root admission; no full run or Quasar fault test is added.
+Unison acknowledges through the parent queue and starts no Adobe/cache work.
+
+Earlier suspension, sealed 02:12 UTC and read 02:18 UTC: the native slot was
 [suspended with all helpers closed](preview-finite-oracle-suspension-20261013.json)
 after desktop relock. All three registration attempts returned
 `WAIT_FOR_MAIN_CATALOG`; no registration entered native code or changed

@@ -4,19 +4,35 @@
 
 ## Live implementation handoff
 
-* Current Photo status (verified 2026-10-14 02:18 UTC): the finite native
-  window is suspended after actual desktop relock. The
+* Latest Photo coordination (received 2026-10-14 03:03 UTC): the
+  [Root renewal at 02:14:39 UTC](doc/preview-finite-oracle-resumption-20261013.json)
+  supersedes the earlier suspension at 02:12 UTC. Actual unlock was observed
+  at 02:13:58 UTC; original `/root/preview_implementation` retains the same
+  coordinator PID 18036 / tool session 37295 and canonical Photo lease.
+  Classic PID 2844 / 08:27:50 launch is unchanged. Startup/native/date
+  requests were closed at admission; prior denied requests were unsubmitted,
+  with no native replay. The finite scope remains the existing one-control
+  registration plus exact raw mapping/load/decode proof. Cold restart needs
+  separately renewed owner admission; no full run or Quasar fault test is added.
+  This delayed receipt does not recheck current desktop/application/CPU state
+  or temporary keep-awake PID 19859. Native outcomes/closure remain pending.
+  Queue acknowledgment asks for tested result pins, not another job. Unison
+  preview work remains interface/review; next whole-clone status work here is
+  a source-only audit. The tested core checkpoint `aa53e3a` is pushed.
+
+* Earlier Photo suspension (sealed 2026-10-14 02:12 UTC, read 02:18 UTC):
+  the finite native window suspended after actual desktop relock. The
   [suspension/closure pins](doc/preview-finite-oracle-suspension-20261013.json)
   record all five helper attempts terminal/restored, three registration
   attempts returning `WAIT_FOR_MAIN_CATALOG`, and zero native registration
   entry or UI/Main/cache mutation. Coordinator PID 18036 retains the canonical
   Photo lease with zero active native CPU credits. The six-file independent
   byte/full-decode verifier passed; native recognition remains unproved.
-  The exact requested mapping/load/decode packet remains pending. Root must
-  revalidate actual unlock and renew original-owner admission; earlier release
-  is no current readiness proof. Unison preview integration remains interface
-  review with no concurrent Adobe/cache work. Isolated Unison qualification
-  using synthetic files can proceed independently of this suspended slot.
+  At that receipt, the exact mapping/load/decode packet remained pending and
+  Root required actual unlock revalidation and renewed owner admission. The
+  later renewal above supersedes that admission state. Neither receipt proves
+  native recognition. Unison's completed isolated synthetic qualification is
+  separate from the preview slot and has no Adobe/cache invocation.
 
 * Receiving/report settlement checkpoint (2026-10-13): source
   extends guarded returned-work settlement through Runtime admission/I/O,

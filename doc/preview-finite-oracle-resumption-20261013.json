@@ -1,0 +1,51 @@
+{
+  "schema": "unison-preview-oracle-coordination/1",
+  "state": "SAME_FINITE_NATIVE_WINDOW_RENEWED_RESULT_PENDING",
+  "receivedUtc": "2026-10-14T03:03:28Z",
+  "ownerAdmissionUtc": "2026-10-14T02:14:39.479633+00:00",
+  "renewal": {
+    "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/ROOT-WINDOW-RESUMED-20261014T0214Z.json",
+    "bytes": 3430,
+    "sha256": "a16418511546f700f13de8afacf3012e24c1ec36909fb28bb56df06ed01ecab5"
+  },
+  "owner": "/root/preview_implementation",
+  "coordinatorPID": 18036,
+  "toolSession": 37295,
+  "coordinatorReusedNotRestarted": true,
+  "canonicalPhotoLeaseRetainedByOwner": true,
+  "classicPID": 2844,
+  "classicStartTime": "Tue Oct 13 08:27:50 2026",
+  "rootOtherNativeDispatchHeldAtAdmission": true,
+  "nativeScopeUnchanged": true,
+  "priorDeniedRequestsUnsubmittedNoReplay": true,
+  "registrationNotInvokedAtAdmission": true,
+  "nativeRecognitionResultAccepted": false,
+  "nativeClosureReceived": false,
+  "rawBeforeLoadPostLoadPostDecodeRequired": true,
+  "coldRestartRequiresSeparateRootAdmission": true,
+  "fullGeneratorRunAuthorized": false,
+  "quasarFaultTestAdded": false,
+  "keepAwake": {
+    "pid": 19859,
+    "temporaryMaximumMinutes": 30,
+    "reportedAtAdmissionOnly": true,
+    "recheckedAtReceiptTime": false
+  },
+  "statusTimeLimit": "Renewal supersedes suspension at 02:12 UTC; received at 03:03 UTC. This read does not establish fresh application/desktop/CPU/keep-awake state or completed native results.",
+  "queue": {
+    "receivedUtc": "2026-10-14T03:03:28Z",
+    "parentThreadId": "01a13369-8b68-7aa1-be91-cba984ba269b",
+    "accepted": true,
+    "result": {
+      "content": [
+        {
+          "type": "text",
+          "text": "{\"threadId\":\"01a13369-8b68-7aa1-be91-cba984ba269b\"}"
+        }
+      ],
+      "isError": false
+    }
+  },
+  "unisonScope": "Preview interface/review only. No Adobe, live cache, Photo payload, native UI or competing publisher operations.",
+  "unisonSourceCheckpoint": "aa53e3a499ce8fc1da70360edad894bcbf165112"
+}
