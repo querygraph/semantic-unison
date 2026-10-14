@@ -4,6 +4,30 @@
 
 ## Live implementation handoff
 
+* User priority: validate previews before catalog repairs. The next exact
+  [queued request](doc/preview-post-restart-highest-request-20261013.json)
+  reuses original Photo owner's control `10031592` in the restarted process:
+  `HIGHEST_REGISTERED`, width `full`, absent height/scale, and explicit unique
+  row selection for **2272×1704**. Both LOAD/RELOAD must decode that highest
+  object and rebind fresh Main, raw mapping, level rows, positive sizes and
+  preserved header/profile fields. Capture current raw mapping before the
+  first LOAD to claim mapping survived restart; repaired post-load mappings
+  qualify less. Quiet success has five callbacks/two loads, while reviewed
+  busy/drain branches permit twenty-one callbacks/ten loads; fresh Root
+  admission must cover actual source bounds and retain outstanding work beyond
+  deadline expiry. No registration replay or additional
+  restart is requested. Fresh owner/lease/nonce/deadline admission is required;
+  the previously held preparation stays closed. The owner's later metadata
+  reports a separately released pure-read readiness ping, which authorizes no
+  preview/render/writer work and proves no actual preview result. Source-only
+  final highest review pins 39 cases; older `VALIDATION.json` records an
+  intermediate 36-case revision. Queue delivery is accepted; actual highest/
+  post-restart outcome remains pending. Original renderer/publisher ownership
+  stays with Photo; Unison makes no Adobe/cache/media invocation. Quasar,
+  monitor/1:1 and renderer fidelity retain separate gates. Core whole-clone
+  implementation remains available after this priority review.
+
+
 * Latest native-preview evidence (reviewed 2026-10-14): the original Photo
   owner completed control `10031592` with one native registration and two
   native LOAD/RELOAD passes before restart. Each selected and decoded

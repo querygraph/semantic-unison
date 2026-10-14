@@ -14,6 +14,24 @@ Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
+User-priority next test: [post-restart highest request](preview-post-restart-highest-request-20261013.json)
+was queued to the Photo parent for its original implementation owner. Reuse
+control `10031592` without registration replay; request `full` with absent
+height/scale and explicitly select/decode the fresh highest **2272×1704** row
+on both LOAD/RELOAD. Require current Main/raw mapping/native level identity,
+actual geometry, positive sizes, preserved Pyramid header/profile, separate
+commit visibility and actual closure. Fresh admission/nonce/lease/deadline
+replace the previously held preparation. No additional restart is requested.
+Raw current mapping before the first LOAD is needed for an original-mapping
+restart-survival claim; post-load repair proves less. Quiet success is five
+callbacks/two loads; reviewed busy/drain branches permit twenty-one callbacks/
+ten loads, which fresh Root admission must cover. Deadlines do not cancel native
+calls or permit early resource/lease retirement.
+A separately released pure-read readiness ping authorizes no preview operation;
+source39cases and queue delivery remain distinct from native result. Unison
+retains source/interface review; split storage/monitor/rendering/full run remain
+unqualified. Earlier owner observations below retain their timestamped scope.
+
 Latest tested evidence, reviewed 2026-10-14: original Photo owner completed
 one native registration and two LOAD/RELOAD passes for control `10031592` in
 Classic PID 2844 before restart. Both selected and decoded **1136×852**.
