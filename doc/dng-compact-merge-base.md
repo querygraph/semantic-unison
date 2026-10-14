@@ -33,6 +33,11 @@ checks the stored parsed representation. Normal scalar reconciliation still
 checks both replicas' protected bytes/layout, reinspects the live left file and
 materializes one exact result through the existing merge/validation/copyBack
 lifecycle. Partial second-receiver failure retains the original base for retry.
+If an older Unison updates the common version without compact capture and no
+full backup exists, its new archive fingerprint cannot select an older cached
+base. A later conflicting merge is refused with a recoverable missing-base
+diagnostic, preserving both edits. Re-enable capture before synchronizing the
+next common version; reopening unchanged files alone does not create that base.
 
 Records live in the endpoint's Unison state directory under
 `semantic-merge-bases-v1`, sharded by the first three hex digits of the binding

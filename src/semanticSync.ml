@@ -412,7 +412,12 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
           | Some (root,path) -> SemanticMergeCache.load ~root ~path ~fingerprint:base_fingerprint)))
         (fun admitted ->
       let cached = match admitted with Some cached -> cached | None -> fail "cache lookup cancelled" in
-      let base_fd = match cached with None -> Some (open_fd base [Unix.O_RDONLY]) | Some _ -> None in
+      let base_fd = match cached with
+        | None ->
+            (try Some (open_fd base [Unix.O_RDONLY]) with
+             | Unix.Unix_error (Unix.ENOENT,_,_) ->
+                 fail "no saved common base is available; synchronize a common version with compact capture or backupcurrent enabled before merging")
+        | Some _ -> None in
       let left_fd = open_fd left [Unix.O_RDONLY] in
       let right_fd = open_fd right [Unix.O_RDONLY] in
       let output_fd = open_fd output [Unix.O_RDWR] in

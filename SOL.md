@@ -2513,3 +2513,27 @@ merge/common-base policy, and the scoped historical1/18/36 cached validation
 measurements. No new runtime/performance claim or product behavior change.
 The pending merged-output executor/request/sourcepins remain unchanged and
 UNADMITTED. No SDK/Photo/Lightroom/compiler/benchmark invocation.
+
+
+### Missing-common-base error and archive downgrade round trip — 2026-10-14
+
+Fresh current→unmodified2.53.5→current archive regression found an actual bug:
+a baseline-era update has no new compact base, and falling back to nonexistent
+saved `.unison.mergearch` raised uncaught ENOENT. Narrow production fix catches
+only missing saved-base ENOENT and raises recoverable Util.Transient with guidance
+to capture a common version before merging. Both edits stay intact; no guessed
+base, automatic cache reset or synchronization semantics change.
+
+Stock5.2/Ox5.2+ox fresh Make+selftests pass with one compiler job at a time. Each
+passes ten actual private loopback stages: current merge, old no-op/update,
+current reopen, recoverable missing-base refusal, explicit known common restore
+and new current common update/capture, subsequent disjoint merge and finalno-op.
+Archive/state/root identities persist; no archives deleted/rebuilt by test.
+Old no-op preserves receiver inode/bytes and archive names; ordinary bookkeeping
+may rewrite archive hashes. Original previous-binary uncaught-error negative is
+retained. [Runner/receipt](tests/archive_downgrade/qualification.json),
+[scope/manual command](tests/archive_downgrade/README.md).
+Pending merged-output SDK request/executor/frozen artifact pins are unchanged,
+with historical producing-source scope; it remains UNADMITTED. No SDK/Photo/
+Lightroom/source-photo invocation; both build and regression parents closed0.
+Full goal/platform/resource/performance acceptance remains open.
