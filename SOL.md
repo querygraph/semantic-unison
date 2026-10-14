@@ -2315,3 +2315,34 @@ noncanonical commands and replay still refuse. [Evidence](tests/sdk_host_matrix/
 Zero SDK/Adobe/Photo/Lightroom/sanitizer execution. Actual SDK telemetry/codec/
 allocator behavior, OS-thread/pixel/cancellation/scaling qualifications, source-bound
 linked successor and fresh admitted plan remain required. Full goal remains open.
+
+
+### Compact-base global capture quota — 2026-10-14
+
+Implemented cooperative process-wide monotonic charged-payload/reservation caps
+for new captures in `semantic-merge-bases-v1`. Defaults:1024MiB/1048576 reservations;
+endpoint-local `semanticmergecachemaxmib` supports1..65536MiB and
+`semanticmergecachemaxentries` supports1..16777216. Same-state cooperating owners
+must agree on settings and calls stay on the sole archive/Lwt owner. A validated
+private79-byte `.quota-v1` ledger uses nonblocking POSIX locking; charge+fsync
+precedes record creation. Interrupted/failed capture keeps its charge, never
+reclaims allowance or evicts recovery authority. Existing identical bases are
+not recharged. Invalid/lost ledgers refuse new captures over retained records;
+busy/exhausted capture is best effort and leaves ordinary sync usable.
+
+Existing v0 bases remain trusted read-only fallback, preserving previous-common
+recovery and format/policy checks; no legacy data is rewritten/deleted. Quotas
+bound new managed payload/reservations, not filesystem block/metadata overhead,
+old v0 data or RSS. Snapshot rollback, hostile same-UID changes, fsync-violating
+storage and actual crash/power-loss durability remain outside this contract.
+[Format/options/limits](doc/dng-compact-merge-base.md).
+
+[Sealed qualification](tests/semantic_base_cache/quota-qualification.json):
+stock5.2.0/Ox5.2.0+ox Make+Dune builds/selftests passed with exact current production
+cache source bindings. Each compiler passed28 storage/quota controls (including
+real separate-process lock refusal/clean reap, counter range/overflow/trust, lost
+ledger and legacy recovery); six private acquired-resource exceptions plus an
+actual unguarded FD-leak negative; and12 CLI compact-base merge/recovery cases.
+Only deterministic original fixtures/mock validators were used. Zero Adobe/SDK/
+Photo/Lightroom invocation or source-photo mutation. Full M4-V/M5/M6/native SDK
+parallelism/performance/platform/resource qualification remains open.

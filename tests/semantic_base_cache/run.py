@@ -20,7 +20,7 @@ def session(name):
  s=v.Session(work/name,a.unison);(s.left/'image.dng').write_bytes(base)
  s.sync(policy='off',options=options)
  assert (s.right/'image.dng').read_bytes()==base
- records=[f for f in (s.client_state/'semantic-merge-bases-v0').rglob('*') if f.is_file() and len(f.name)==64]
+ records=[f for f in (s.client_state/'semantic-merge-bases-v1').rglob('*') if f.is_file() and len(f.name)==64]
  assert records, 'no common metadata base captured'
  assert all(f.stat().st_size<16384 and f.stat().st_mode&0o777==0o600 for f in records)
  assert not (s.client_state/'backup').exists()
@@ -46,7 +46,7 @@ for name in ['converge','missing','damaged','permissive','symlink','stale-other-
  if name=='wrong-generation':
   common=fixture('3');(s.left/'image.dng').write_bytes(common);(s.right/'image.dng').write_bytes(common)
   s.sync(policy='off',options=options)
-  fresh=[f for f in (s.client_state/'semantic-merge-bases-v0').rglob('*') if f.is_file() and len(f.name)==64 and f not in records]
+  fresh=[f for f in (s.client_state/'semantic-merge-bases-v1').rglob('*') if f.is_file() and len(f.name)==64 and f not in records]
   assert fresh,'new common generation not captured'
   for f in fresh:f.write_bytes(records[0].read_bytes())
   (s.left/'image.dng').write_bytes(fixture('4'));(s.right/'image.dng').write_bytes(fixture('3','Gold'))

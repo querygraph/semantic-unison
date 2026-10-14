@@ -13,12 +13,15 @@ let () =
     | Ok proof->proof | Error reason->failwith reason)) in
   let store ()=SemanticMergeCache.store ~root ~path ~fingerprint proof in
   store();
-  let directory=Util.fileInUnisonDir "semantic-merge-bases-v0" in
-  let shard=Filename.concat directory (Sys.readdir directory).(0) in
+  let directory=Util.fileInUnisonDir "semantic-merge-bases-v1" in
+  let names=Array.of_list(List.filter(fun n -> n<>".quota-v1")(Array.to_list(Sys.readdir directory))) in
+  let shard=Filename.concat directory names.(0) in
   let record=Filename.concat shard (Sys.readdir shard).(0) in
   let baseline=fd_count() in
   List.iter(fun point->
     if point<>"read" && Sys.file_exists record then Unix.unlink record;
+    if point="quota-root" || point="quota-shard" then
+      Unix.truncate (Filename.concat directory ".quota-v1") 0;
     Unix.putenv "UNISON_PRIVATE_CACHE_FAULT" point;
     check((try (if point="read" then ignore(SemanticMergeCache.load ~root ~path ~fingerprint) else store());false
       with Out_of_memory->true)) (point^" fault was not reached");
@@ -28,4 +31,5 @@ let () =
       (point^" acquisition fault left temporary record");
     store();check(Option.is_some(SemanticMergeCache.load ~root ~path ~fingerprint))
       (point^" fault prevented fresh capture/load");
-    print_endline("PASS "^point^" acquired-resource exception settlement")) ["read";"directory";"temporary"]
+    print_endline("PASS "^point^" acquired-resource exception settlement"))
+    ["read";"directory";"quota";"quota-root";"quota-shard";"temporary"]

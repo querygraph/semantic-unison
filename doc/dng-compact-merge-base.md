@@ -35,7 +35,7 @@ materializes one exact result through the existing merge/validation/copyBack
 lifecycle. Partial second-receiver failure retains the original base for retry.
 
 Records live in the endpoint's Unison state directory under
-`semantic-merge-bases-v0`, sharded by the first three hex digits of the binding
+`semantic-merge-bases-v1`, sharded by the first three hex digits of the binding
 key. Directory/shard ownership and mode 0700, regular-file ownership/mode 0600,
 single-link status, size, held/name stability and checksums are required.
 Record lookup does not trust symlinks or peer-supplied records. This is trusted
@@ -44,8 +44,38 @@ can rewrite that user's private state. Publication writes/fsyncs an owned
 exclusive temporary, then links without replacing an existing base. A crash
 leaving a second link or a missing entry produces a cache miss; no crash/fsync
 survival guarantee follows. Each shard's scan is bounded to 4096 entries; full
-shards decline new capture without evicting recovery bases. This is not a
-cross-process hard disk quota.
+shards decline new capture without evicting recovery bases.
+
+New captures also reserve charged payload bytes and one entry in the owned
+`.quota-v1` ledger before creating a record. The default ceilings are 1024 MiB
+and 1,048,576 reservations. Endpoint-local `semanticmergecachemaxmib` accepts
+1..65536 MiB and `semanticmergecachemaxentries` accepts 1..16777216 reservations.
+Cooperating processes sharing a state directory must use the same settings.
+Calls remain on the sole Lwt/archive owner; POSIX locks serialize processes,
+not concurrent threads within one process. This module is not a worker task.
+An exclusive nonblocking POSIX file lock serializes reservations across processes;
+a busy owner declines capture instead of blocking Unison's Lwt owner. A new
+counter is written and fsynced before record creation. Reservations are never
+returned, including failed or interrupted captures: overcount can stop capture,
+but does not evict a recovery base. Existing identical records do not charge twice.
+This deliberately bounds new managed payload and reservation count, not filesystem
+metadata, physical block allocation, legacy data, process RSS or hostile same-UID
+writers. Snapshot rollback and storage that violates fsync ordering are outside
+this cooperative accounting contract.
+
+The 79-byte ledger is `SBQ1 `, a zero-padded 20-digit decimal reservation count,
+one space, a zero-padded 20-digit charged-byte count, newline, then SHA-256 of
+those first 47 bytes. Corruption, invalid permissions/link/type, counter overflow,
+capacity exhaustion and ambiguous initialization refuse new capture. A missing
+ledger initializes only over an empty managed tree (empty private hex shards are
+allowed); surviving records or temporaries prevent automatic counter reset.
+No scanner deletes records or reconstructs a guessed allowance.
+
+Older `semantic-merge-bases-v0` records remain a read-only fallback with the same
+previous-common binding and trust checks. New code never writes or charges that
+legacy tree, so it does not promise a size bound on already retained v0 data.
+Neither tree is automatically removed. Lowering a ceiling below its monotonic
+charge stops new capture while leaving existing bases readable.
 
 Capture is best effort and skips a busy global resource gate to avoid recursively
 waiting on a retained publication lease. Unsupported input, capacity/storage
@@ -60,7 +90,8 @@ remain broader M6 work.
 
 The option defaults off and is endpoint-local. No cache or archive data is sent
 as a new wire feature and the archive format is unchanged. Remove this preference
-and the reserved built-in merge command before downgrading to a baseline binary;
+and any `semanticmergecachemaxmib`/`semanticmergecachemaxentries` settings,
+plus the reserved built-in merge command, before downgrading to a baseline binary;
 its archives/backups remain readable and the cache can remain unused. The cache
 implementation is disabled on Windows and qualified here on macOS only.
 

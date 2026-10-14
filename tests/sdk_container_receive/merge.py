@@ -47,7 +47,7 @@ for fixture in sdk['fixtures']['fixtures']:
   s=v.Session(work/(fixture['codec']+'-'+mode),str(binary))
   (s.left/'image.dng').write_bytes(base);s.sync(policy='off',options=options)
   assert (s.right/'image.dng').read_bytes()==base
-  records=[f for f in (s.client_state/'semantic-merge-bases-v0').rglob('*') if f.is_file() and len(f.name)==64]
+  records=[f for f in (s.client_state/'semantic-merge-bases-v1').rglob('*') if f.is_file() and len(f.name)==64]
   assert records and not (s.client_state/'backup').exists()
   assert all(f.stat().st_size<16384 and b'org.firstpair.dng-xmp/1' in f.read_bytes() for f in records)
   rhs=variant(rating=b'3') if mode=='competing' else variant(label=b'Gold',opaque=mode=='protected-change')

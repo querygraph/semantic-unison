@@ -21,6 +21,9 @@ stubs=['pty.o','bytearray_stubs.o','hash_compat.o','props_xattr.o','props_acl.o'
 source=(root/'src/semanticMergeCache.ml').read_text()
 for point,anchor in [('read','  match\n    if not (same before'),
                      ('directory','      (match\n        let rec count total ='),
+                     ('quota','  match\n    (match before with None -> Unix.fchmod'),
+                     ('quota-root','      (match\n        let rec loop count ='),
+                     ('quota-shard','  match\n    let rec loop () ='),
                      ('temporary','      match\n        Unix.fchmod fd')]:
  assert source.count(anchor)==1,point
  first,rest=anchor.split('\n',1)
@@ -64,4 +67,4 @@ x=subprocess.run([str(negative/'probe')],cwd=negative,env=dict(os.environ,UNISON
 (negative/'test.log').write_text(x.stdout+x.stderr)
 assert x.returncode!=0 and 'read acquisition fault leaked descriptor' in x.stderr,x.stdout+x.stderr
 print('PASS unguarded private negative detected one acquired-descriptor leak',flush=True)
-a.report.write_text(json.dumps({'workspace':str(work),'build':str(a.build),'cases':3,'negative_control':{'exit':x.returncode,'expected':'read acquisition fault leaked descriptor','source_sha256':hashlib.sha256((negative/'semanticMergeCache.ml').read_bytes()).hexdigest(),'test_log_sha256':hashlib.sha256((negative/'test.log').read_bytes()).hexdigest()},'compiler_version':subprocess.check_output([a.compiler,'-version'],text=True).strip(),'private_fault_source_sha256':hashlib.sha256((work/'semanticMergeCache.ml').read_bytes()).hexdigest(),'probe_source_sha256':hashlib.sha256((root/'tests/semantic_base_cache/ownership.ml').read_bytes()).hexdigest(),'scope':'actual production interface/dependency objects plus privately injected cache body; three deterministic acquired-resource exceptions; no actual memory exhaustion/SDK', 'source_sha256':hashlib.sha256((root/'src/semanticMergeCache.ml').read_bytes()).hexdigest(),'binary_sha256':hashlib.sha256((work/'probe').read_bytes()).hexdigest()},indent=2)+'\n')
+a.report.write_text(json.dumps({'workspace':str(work),'build':str(a.build),'cases':6,'negative_control':{'exit':x.returncode,'expected':'read acquisition fault leaked descriptor','source_sha256':hashlib.sha256((negative/'semanticMergeCache.ml').read_bytes()).hexdigest(),'test_log_sha256':hashlib.sha256((negative/'test.log').read_bytes()).hexdigest()},'compiler_version':subprocess.check_output([a.compiler,'-version'],text=True).strip(),'private_fault_source_sha256':hashlib.sha256((work/'semanticMergeCache.ml').read_bytes()).hexdigest(),'probe_source_sha256':hashlib.sha256((root/'tests/semantic_base_cache/ownership.ml').read_bytes()).hexdigest(),'scope':'actual production interface/dependency objects plus privately injected cache body; six deterministic acquired-resource exceptions; no actual memory exhaustion/SDK', 'source_sha256':hashlib.sha256((root/'src/semanticMergeCache.ml').read_bytes()).hexdigest(),'binary_sha256':hashlib.sha256((work/'probe').read_bytes()).hexdigest()},indent=2)+'\n')

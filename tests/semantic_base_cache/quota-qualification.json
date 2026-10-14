@@ -1,0 +1,422 @@
+{
+  "schema": "unison-compact-base-quota-qualification/1",
+  "utc": "2026-10-14T21:08:13.676263+00:00",
+  "scope": "cooperative owner-only v1 charged payload/reservation ceilings; existing v0 read-only fallback; no physical-block/RSS/legacy/quota-under-snapshot-rollback claim",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticMergeCache.ml",
+      "bytes": 13805,
+      "sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticMergeCache.mli",
+      "bytes": 544,
+      "sha256": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/dng-compact-merge-base.md",
+      "bytes": 7617,
+      "sha256": "b68dad40b1599c1e3f630bd9f3c96a647c2d875027014622ce25818662c46081"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/storage.ml",
+      "bytes": 9150,
+      "sha256": "1420f9f5d65f4133bb4c94c70f11313eb54e982034839d15680a817e24b77ed7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/storage.py",
+      "bytes": 3772,
+      "sha256": "1554350b336cb456e0c67fc40be0ab12489619b4e47638894615811f79c6d961"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/ownership.ml",
+      "bytes": 2238,
+      "sha256": "a2fea0107a492177068baacd8755def0866f3283bd69517c74c13960fd4346b8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/ownership.py",
+      "bytes": 7202,
+      "sha256": "76e16640dc46a40923edc12a59f6ee293b9bd9494b55b0499e8af97d3bcc0b3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/run.py",
+      "bytes": 5085,
+      "sha256": "f4cb9d12baa0cd566b8afd1368dfd287bad870e039752e98564e3a75a0e6357f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/semantic_base_cache/README.md",
+      "bytes": 3342,
+      "sha256": "fcc32dcb57fe2df41e47bf95c83508c47788688a4b1a2ad6dac081956b6198a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/merge.py",
+      "bytes": 6302,
+      "sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a"
+    }
+  ],
+  "builds": {
+    "stock-make": {
+      "pin": {
+        "path": "/private/tmp/unison-cache-quota-stock-make.json",
+        "bytes": 42595,
+        "sha256": "cb1cdda2e3ac5a4126a13bbf374b5376459afa053c9ed792a07844b8d8b6f8a0"
+      },
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+      "version": "5.2.0",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4o1hnl2z",
+      "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4o1hnl2z/src/unison",
+      "binary_sha256": "f20283243c0a0413fe9eea3056f7e1221e2bf33a7625b92fc98d0b40bc151cd7",
+      "source_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-make": {
+      "pin": {
+        "path": "/private/tmp/unison-cache-quota-ox-make.json",
+        "bytes": 42601,
+        "sha256": "50f846fe586f8415ac7c1d36996283a3801a648d3127dc0230fcf744626f9506"
+      },
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "version": "5.2.0+ox",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mzldcm0_",
+      "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mzldcm0_/src/unison",
+      "binary_sha256": "7ee3ce7b4c5ced060fe15b8bb5aecff19a317a85f2b7cf1c8b0d6ccda582bdce",
+      "source_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "stock-dune": {
+      "pin": {
+        "path": "/private/tmp/unison-cache-quota-stock-dune.json",
+        "bytes": 42401,
+        "sha256": "bdf95e57e186168221a3f699c03ab6e6ce1b2843474bd6f5f176232f15cf6c46"
+      },
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+      "version": "5.2.0",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ojonawz9",
+      "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ojonawz9/_build/default/src/linktext.exe",
+      "binary_sha256": "e697b82f4866c8b0a5ec699bae701f5b13b3d544044c30a57560aea67e186c39",
+      "source_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-dune": {
+      "pin": {
+        "path": "/private/tmp/unison-cache-quota-ox-dune.json",
+        "bytes": 42405,
+        "sha256": "abd49d080956907fcd7e6ff1077c7aac55982be0e81796274da0511bbfe1fd12"
+      },
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "version": "5.2.0+ox",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yt7c_4t1",
+      "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yt7c_4t1/_build/default/src/linktext.exe",
+      "binary_sha256": "84fc118e2bcb78ea6eb0d90926c8bb6f53cf354d27a261df1224812f3947e913",
+      "source_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    }
+  },
+  "focused": {
+    "stock": {
+      "storage-v2": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-stock-storage-v2.json",
+          "bytes": 608,
+          "sha256": "154675171a7961a086d0cb0d85b881b7d668f18238c08e7ae9e355809f927be4"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-cache-storage-7vu8hn_f",
+          "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4o1hnl2z",
+          "cases": 28,
+          "baseline_cases": 16,
+          "quota_cases": 12,
+          "compiler_version": "5.2.0",
+          "probe_source_sha256": "1420f9f5d65f4133bb4c94c70f11313eb54e982034839d15680a817e24b77ed7",
+          "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+          "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+          "binary_sha256": "8411ebc02377d6ca66e836ce6e114991ba42be93ddd1c31b38fe8bb00082829d"
+        }
+      },
+      "ownership": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-stock-ownership.json",
+          "bytes": 1024,
+          "sha256": "dd9ee311641781ad0769ca13e2293bfe746318574b14d4a5dd85c7205569420c"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-cache-ownership-ged8llkm",
+          "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4o1hnl2z",
+          "cases": 6,
+          "negative_control": {
+            "exit": 2,
+            "expected": "read acquisition fault leaked descriptor",
+            "source_sha256": "429f28fb73e5c729d332222bbe8aad183befb886363f2e519bf4b65c20714fdb",
+            "test_log_sha256": "2fd0346d04406254b46035a1e22f28d598235d487c17a492e847d86ebb185ad6"
+          },
+          "compiler_version": "5.2.0",
+          "private_fault_source_sha256": "70bbdc6a0684fd0a9e23d407ed0b1850ef4c07905e5a3f238745946d4a7a6b58",
+          "probe_source_sha256": "a2fea0107a492177068baacd8755def0866f3283bd69517c74c13960fd4346b8",
+          "scope": "actual production interface/dependency objects plus privately injected cache body; six deterministic acquired-resource exceptions; no actual memory exhaustion/SDK",
+          "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+          "binary_sha256": "f08c77105803ad42532c66b50b9e51f7352385486d5a09bd9547b72fd5d61b37"
+        }
+      },
+      "cli": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-stock-cli.json",
+          "bytes": 3505,
+          "sha256": "febea49377efa0c9745075b348614dd17f8478adcbe93510fe58da2df60fa232"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-compact-base-jh__xrmh",
+          "cases": [
+            {
+              "case": "converge",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/converge/client-state/semantic-merge-bases-v1/785/785a4125ba5fd8d2ed2f4fade56ebcddf327758c80dbd1b6a481c13703779289"
+              ]
+            },
+            {
+              "case": "missing",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/missing/client-state/semantic-merge-bases-v1/01e/01ec6fb1d9ca17351af82175363590cbb1ea86f2ea1d31fdccf29552dfd48d42"
+              ]
+            },
+            {
+              "case": "damaged",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/damaged/client-state/semantic-merge-bases-v1/bc2/bc2af29ae92ea361216524e39791f86f57e140577f38c9824b61c77096fb3fc7"
+              ]
+            },
+            {
+              "case": "permissive",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/permissive/client-state/semantic-merge-bases-v1/4b0/4b0a07250e9a3304321ae556e2c1c3dcb7c966cb003c01f6b6f83fd91736d3b5"
+              ]
+            },
+            {
+              "case": "symlink",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/symlink/client-state/semantic-merge-bases-v1/477/477679568c217bc77f7eb7a1d2ae2dc3a1fda905b95f72916c75c9989566ae61"
+              ]
+            },
+            {
+              "case": "stale-other-path",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/stale-other-path/client-state/semantic-merge-bases-v1/d32/d323b5de4a22ebe80a429ee651ffd69db654e1e4eff6e276e3b1439078fee5ff"
+              ]
+            },
+            {
+              "case": "disabled",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/disabled/client-state/semantic-merge-bases-v1/531/53155586b0ade9d90f69daad89bec4f09cf10f76f1ac0d12651d276074f423c1"
+              ]
+            },
+            {
+              "case": "image-edit",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/image-edit/client-state/semantic-merge-bases-v1/9d2/9d2395746ff9ea2472f39d74ff41c259284678ef7a20cb9327fbcf9d332f4254"
+              ]
+            },
+            {
+              "case": "competing",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/competing/client-state/semantic-merge-bases-v1/56a/56a5ce3046e5fe9f6abf00af2848d487ca6a1d04f315d360d841a13b4b025c42"
+              ]
+            },
+            {
+              "case": "wrong-generation",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/wrong-generation/client-state/semantic-merge-bases-v1/a66/a665a2da34cdccbbfb70612820af3c5e8d59ac9d5aa6f52dc2d32364488bc708"
+              ]
+            },
+            {
+              "case": "wrong-policy",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/wrong-policy/client-state/semantic-merge-bases-v1/944/9447caf4d79d3efee03cb6dd4ad921ef1ee411a3743444349ae19ef6d68b1d58"
+              ]
+            },
+            {
+              "case": "second-receiver-fail",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-jh__xrmh/second-receiver-fail/client-state/semantic-merge-bases-v1/65a/65a08048a67fe187628db1607ccbfdd4576510a0f0f34e8ac18d856bcd8cbad4"
+              ]
+            }
+          ],
+          "binary_sha256": "f20283243c0a0413fe9eea3056f7e1221e2bf33a7625b92fc98d0b40bc151cd7",
+          "scope": "actual CLI/loopback, original DNG-shaped bytes/mock validation only; no SDK"
+        }
+      }
+    },
+    "ox": {
+      "storage": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-ox-storage.json",
+          "bytes": 611,
+          "sha256": "fd221d3c083fb765ce3a685763b60e0f7b749a7edbf362cb9367d885af04e644"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-cache-storage-j_032eex",
+          "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mzldcm0_",
+          "cases": 28,
+          "baseline_cases": 16,
+          "quota_cases": 12,
+          "compiler_version": "5.2.0+ox",
+          "probe_source_sha256": "1420f9f5d65f4133bb4c94c70f11313eb54e982034839d15680a817e24b77ed7",
+          "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+          "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+          "binary_sha256": "327e16c7e8ba6a925a922b06a0c0c2c1f922f56ce7ca5f9fe1e56f237fb6e199"
+        }
+      },
+      "ownership": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-ox-ownership.json",
+          "bytes": 1027,
+          "sha256": "1902c15b3d0582613deac7a5532941f3002f573297fc7405d94241fa9dd8b280"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-cache-ownership-xelrhh8z",
+          "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mzldcm0_",
+          "cases": 6,
+          "negative_control": {
+            "exit": 2,
+            "expected": "read acquisition fault leaked descriptor",
+            "source_sha256": "429f28fb73e5c729d332222bbe8aad183befb886363f2e519bf4b65c20714fdb",
+            "test_log_sha256": "2fd0346d04406254b46035a1e22f28d598235d487c17a492e847d86ebb185ad6"
+          },
+          "compiler_version": "5.2.0+ox",
+          "private_fault_source_sha256": "70bbdc6a0684fd0a9e23d407ed0b1850ef4c07905e5a3f238745946d4a7a6b58",
+          "probe_source_sha256": "a2fea0107a492177068baacd8755def0866f3283bd69517c74c13960fd4346b8",
+          "scope": "actual production interface/dependency objects plus privately injected cache body; six deterministic acquired-resource exceptions; no actual memory exhaustion/SDK",
+          "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+          "binary_sha256": "d033d580d362497e12a36f34724b933475e22866783a85b3da90b129e870203e"
+        }
+      },
+      "cli": {
+        "pin": {
+          "path": "/private/tmp/unison-cache-quota-ox-cli.json",
+          "bytes": 3505,
+          "sha256": "e7c0909c24dfde277b253ec52e67c711ceee57f69e08f894f486e25489c0e453"
+        },
+        "observed": {
+          "workspace": "/private/tmp/unison-compact-base-2_b5mwko",
+          "cases": [
+            {
+              "case": "converge",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/converge/client-state/semantic-merge-bases-v1/49f/49fe875dbe44218bc95aefe562158684c081d517a4dc347df21522607c3bad35"
+              ]
+            },
+            {
+              "case": "missing",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/missing/client-state/semantic-merge-bases-v1/5d0/5d00ff5064ef2e5c004503106eb736c4d3a356ba9c3624200e14351c3f6152bc"
+              ]
+            },
+            {
+              "case": "damaged",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/damaged/client-state/semantic-merge-bases-v1/fc3/fc323392703d46b5ea9093ce3dad664062f5dcd65e6626538ed7f93b5880adf2"
+              ]
+            },
+            {
+              "case": "permissive",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/permissive/client-state/semantic-merge-bases-v1/8d5/8d5fae902213a7827d58e13b6f1b4515a8efa28c5847c00f2e4d309176e506a0"
+              ]
+            },
+            {
+              "case": "symlink",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/symlink/client-state/semantic-merge-bases-v1/c26/c2642fc46fa0850e5afb61c6e3cfb69e04f3fec0bb6c2296ddea520bf2f12540"
+              ]
+            },
+            {
+              "case": "stale-other-path",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/stale-other-path/client-state/semantic-merge-bases-v1/397/397a9f68615741a07f92b45448d3644d425e359bb929d10ce7b428a8298312aa"
+              ]
+            },
+            {
+              "case": "disabled",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/disabled/client-state/semantic-merge-bases-v1/f60/f60710281bea60adfecabf3b2a5a23a34aa4b749749002e8bc91d3ef4d6d22bc"
+              ]
+            },
+            {
+              "case": "image-edit",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/image-edit/client-state/semantic-merge-bases-v1/86f/86fce07cb6ece94daeacd15cbac8d455bce655d3e8af3cc3165871a72070b8c1"
+              ]
+            },
+            {
+              "case": "competing",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/competing/client-state/semantic-merge-bases-v1/c54/c54c13a7828bbb398ee88c3f7d6f97818c2d5acf9d34b6df1b367d66667ae0e2"
+              ]
+            },
+            {
+              "case": "wrong-generation",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/wrong-generation/client-state/semantic-merge-bases-v1/0d6/0d67ec55382a3c44e6ea0f31e5e9b35c38799395c7580533b04c13ebd4844e60"
+              ]
+            },
+            {
+              "case": "wrong-policy",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/wrong-policy/client-state/semantic-merge-bases-v1/830/83034764fe69b24482dc46db0657ff081f5185399ac1cb0d36413943d7f6fdf5"
+              ]
+            },
+            {
+              "case": "second-receiver-fail",
+              "status": "passed",
+              "cache_records": [
+                "/private/tmp/unison-compact-base-2_b5mwko/second-receiver-fail/client-state/semantic-merge-bases-v1/b5c/b5c9873a2b1ab824591bad1389b6f0558da969b2d2363f7f92a4b52f344bf4f8"
+              ]
+            }
+          ],
+          "binary_sha256": "7ee3ce7b4c5ced060fe15b8bb5aecff19a317a85f2b7cf1c8b0d6ccda582bdce",
+          "scope": "actual CLI/loopback, original DNG-shaped bytes/mock validation only; no SDK"
+        }
+      }
+    }
+  },
+  "native_sdk_calls": 0,
+  "photo_work": false,
+  "goal_complete": false,
+  "terminal_chunks": {
+    "stockMake": "814307",
+    "oxMake": "049b19",
+    "stockDune": "e8de67",
+    "oxDune": "1cdb43",
+    "stockStorage": "a7b766",
+    "oxStorage": "2026e0",
+    "stockOwnership": "26e195",
+    "oxOwnership": "e2e4bc",
+    "stockCLI": "5f89d3",
+    "oxCLI": "4a4f6e"
+  }
+}

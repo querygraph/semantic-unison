@@ -6,10 +6,22 @@ let preference = Prefs.createBool "semanticmergebasecache" false ~local:true
   "Opt-in local private metadata bases bound to the previous common archive. \
    Does not replace original preservation or enable merging without a merge rule."
 let enabled () = Prefs.read preference && Sys.os_type <> "Win32"
+let max_mib = Prefs.makeEndpointLocal (Prefs.createInt "semanticmergecachemaxmib" 1024
+  ~local:true ~category:(`Advanced `Syncprocess)
+  "maximum charged compact merge-base payload in MiB"
+  "Endpoint-local monotonic capture reservations, 1..65536 MiB. Existing \
+   recovery bases are never evicted; abandoned reservations can exhaust capacity.")
+let max_entries = Prefs.makeEndpointLocal (Prefs.createInt "semanticmergecachemaxentries" 1048576
+  ~local:true ~category:(`Advanced `Syncprocess)
+  "maximum compact merge-base capture reservations"
+  "Endpoint-local monotonic reservation count, 1..16777216. Cooperating \
+   processes sharing one state directory must use the same quota settings.")
 let fail reason = raise (Util.Transient ("DNG metadata base cache: " ^ reason))
-let directory () =
-  let path = Util.fileInUnisonDir "semantic-merge-bases-v0" in
-  (try Unix.mkdir path 0o700 with Unix.Unix_error (Unix.EEXIST,_,_) -> ());
+let directory ?(legacy=false) () =
+  let path = Util.fileInUnisonDir
+    (if legacy then "semantic-merge-bases-v0" else "semantic-merge-bases-v1") in
+  if not legacy then
+    (try Unix.mkdir path 0o700 with Unix.Unix_error (Unix.EEXIST,_,_) -> ());
   let stat = Unix.lstat path in
   if stat.Unix.st_kind <> Unix.S_DIR || stat.st_uid <> Unix.getuid () ||
      stat.st_perm land 0o777 <> 0o700 then fail "private owned directory required";
@@ -29,6 +41,114 @@ let key ~root ~path ~fingerprint =
     Printf.sprintf "%d:" (String.length value) ^ value) fields))
 let same a b = a.Unix.st_dev=b.Unix.st_dev && a.st_ino=b.st_ino &&
   a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime
+(* Cooperative process owners reserve payload bytes before creating a record.
+   Charges are monotonic: failed/interrupted captures can waste capacity, never
+   make it available twice. This is not a bound on filesystem metadata or RSS. *)
+let quota_limits () =
+  let mib=Prefs.read max_mib and entries=Prefs.read max_entries in
+  if mib<1 || mib>65536 || entries<1 || entries>16777216 then fail "invalid quota settings";
+  Int64.mul (Int64.of_int mib) 1048576L,Int64.of_int entries
+let quota_encode entries bytes =
+  let payload=Printf.sprintf "SBQ1 %020Ld %020Ld\n" entries bytes in
+  payload ^ SemanticHash.string payload
+let quota_decode encoded =
+  if String.length encoded<>79 then fail "quota ledger framing";
+  let payload=String.sub encoded 0 47 in
+  if SemanticHash.string payload<>String.sub encoded 47 32 ||
+     String.sub payload 0 5<>"SBQ1 " || payload.[25]<>' ' || payload.[46]<>'\n' then
+    fail "quota ledger checksum/format";
+  let number offset =
+    let text=String.sub payload offset 20 in
+    String.iter (fun c -> if c<'0' || c>'9' then fail "quota counter syntax") text;
+    try Int64.of_string text with Failure _ -> fail "quota counter overflow" in
+  let entries=number 5 and bytes=number 26 in
+  if entries<0L || entries>16777216L || bytes<0L || bytes>68719476736L then
+    fail "quota counter range";
+  entries,bytes
+let empty_directory path =
+  let handle=Unix.opendir path in
+  match
+    let rec loop () = match Unix.readdir handle with
+    | "." | ".." -> loop ()
+    | _ -> false
+    | exception End_of_file -> true in loop ()
+  with
+  | value -> Unix.closedir handle; value
+  | exception error -> Unix.closedir handle; raise error
+let reserve dir size =
+  let quota_bytes,quota_entries=quota_limits () in
+  let filename=Filename.concat dir ".quota-v1" in
+  let before = try Some (Unix.lstat filename)
+    with Unix.Unix_error (Unix.ENOENT,_,_) -> None in
+  let trusted stat = stat.Unix.st_kind=Unix.S_REG && stat.st_uid=Unix.getuid () &&
+    stat.st_perm land 0o777=0o600 && stat.st_nlink=1 && (stat.st_size=0 || stat.st_size=79) in
+  (match before with Some stat when not(trusted stat) -> fail "untrusted quota ledger" | _ -> ());
+  let flags = match before with
+    | None -> [Unix.O_RDWR;Unix.O_CREAT;Unix.O_EXCL;Unix.O_CLOEXEC;Unix.O_NONBLOCK]
+    | Some _ -> [Unix.O_RDWR;Unix.O_CLOEXEC;Unix.O_NONBLOCK] in
+  let closed=ref false in
+  let fd=Unix.openfile filename flags 0o600 in
+  match
+    (match before with None -> Unix.fchmod fd 0o600 | Some _ -> ());
+    let stat=Unix.fstat fd in
+    if not(trusted stat) || not(same stat (Unix.lstat filename)) ||
+       (match before with Some old -> not(same old stat) | None -> false) then
+      fail "quota ledger changed";
+    (* Never block the sole Lwt/archive owner behind another process. The caller
+       treats a busy capture as best effort, exactly like other cache misses. *)
+    Unix.lockf fd Unix.F_TLOCK 0;
+    let stat=Unix.fstat fd in
+    if not(same stat (Unix.lstat filename)) then fail "quota name changed";
+    let entries,used = if stat.st_size=0 then begin
+      (* A lost ledger never grants new capacity over surviving records. Only
+         an empty managed tree can initialize; ambiguous state fails closed. *)
+      let handle=Unix.opendir dir in
+      (match
+        let rec loop count =
+          if count>4096 then fail "quota initialization scan capacity";
+          match Unix.readdir handle with
+          | "." | ".." | ".quota-v1" -> loop count
+          | name ->
+              if String.length name<>3 ||
+                 not(String.for_all (fun c -> (c>='0' && c<='9') || (c>='a' && c<='f')) name) then
+                fail "unknown managed cache entry";
+              let path=Filename.concat dir name in
+              let s=Unix.lstat path in
+              if s.st_kind<>Unix.S_DIR || s.st_uid<>Unix.getuid () ||
+                 s.st_perm land 0o777<>0o700 || not(empty_directory path) then
+                fail "missing ledger with retained records";
+              loop (count+1)
+          | exception End_of_file -> () in loop 0
+       with
+       | () -> Unix.closedir handle
+       | exception error -> Unix.closedir handle; raise error);
+      0L,0L
+    end else begin
+      let data=Bytes.create 79 in
+      let rec fill offset = if offset<79 then
+        let count=try Unix.read fd data offset (79-offset)
+          with Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
+        if count=0 then fail "truncated quota ledger"
+        else fill (if count<0 then offset else offset+count) in
+      fill 0;quota_decode(Bytes.to_string data)
+    end in
+    let bytes=Int64.of_int size in
+    if entries>=quota_entries || bytes>Int64.sub quota_bytes used then
+      fail "global payload/entry reservation capacity reached";
+    let encoded=quota_encode (Int64.succ entries) (Int64.add used bytes) in
+    ignore(Unix.lseek fd 0 Unix.SEEK_SET);
+    let rec write offset = if offset<String.length encoded then
+      let count=try Unix.write_substring fd encoded offset (String.length encoded-offset)
+        with Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
+      if count=0 then fail "zero-length quota write"
+      else write (if count<0 then offset else offset+count) in
+    write 0;Unix.fsync fd;
+    closed:=true;Unix.close fd
+  with
+  | () -> ()
+  | exception error ->
+      if not !closed then (closed:=true;try Unix.close fd with _ -> ());
+      raise error
 let read filename =
   let before = Unix.lstat filename in
   if before.Unix.st_kind <> Unix.S_REG || before.st_uid <> Unix.getuid () ||
@@ -66,7 +186,8 @@ let unpack identity encoded =
 let store ~root ~path ~fingerprint proof =
   if enabled () then begin
     let identity=key ~root ~path ~fingerprint in
-    let dir=shard (directory ()) identity in
+    let owner=directory () in
+    let dir=shard owner identity in
     let filename=Filename.concat dir (SemanticHash.hex identity) in
     let encoded=body identity proof in
     let present = try Some (read filename) with Unix.Unix_error (Unix.ENOENT,_,_) -> None in
@@ -86,6 +207,7 @@ let store ~root ~path ~fingerprint proof =
        with
        | () -> Unix.closedir handle
        | exception error -> Unix.closedir handle; raise error);
+      reserve owner (String.length encoded);
       (* Prepare names, flags and close state before acquiring the descriptor.
          O_EXCL makes a collision a decline, never authority to remove a peer's
          file. Random names are collision avoidance inside an owned directory,
@@ -126,6 +248,15 @@ let load ~root ~path ~fingerprint =
   if not (enabled ()) then None else
   try
     let identity=key ~root ~path ~fingerprint in
-    let filename=Filename.concat (shard (directory ()) identity) (SemanticHash.hex identity) in
-    Some (unpack identity (read filename))
+    let lookup legacy =
+      let dir=directory ~legacy () in
+      let part=if legacy then Filename.concat dir (String.sub (SemanticHash.hex identity) 0 3)
+        else shard dir identity in
+      let stat=Unix.lstat part in
+      if stat.st_kind<>Unix.S_DIR || stat.st_uid<>Unix.getuid () ||
+         stat.st_perm land 0o777<>0o700 then fail "untrusted lookup shard";
+      unpack identity (read(Filename.concat part (SemanticHash.hex identity))) in
+    let value = try Some(lookup false)
+      with Util.Transient _ | Unix.Unix_error _ | Invalid_argument _ -> None in
+    (match value with Some _ -> value | None -> Some(lookup true))
   with Util.Transient _ | Unix.Unix_error _ | Invalid_argument _ -> None
