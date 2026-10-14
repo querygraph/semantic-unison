@@ -2346,3 +2346,26 @@ actual unguarded FD-leak negative; and12 CLI compact-base merge/recovery cases.
 Only deterministic original fixtures/mock validators were used. Zero Adobe/SDK/
 Photo/Lightroom invocation or source-photo mutation. Full M4-V/M5/M6/native SDK
 parallelism/performance/platform/resource qualification remains open.
+
+
+### Observed experimental successor linked — 2026-10-14
+
+Root allocated exactly four compiler credits, source/link only (releasefdc9e0f9).
+Actual wrapper18172/builder18173/tool40529 started with4jobs and genuinely exited0
+(terminalchunk33c87d); all builder subprocesses were synchronously awaited.
+No SDK validator/fixture-writer output was executed. A new private observed-host
+artifact links the current callback/allocator observations; static inspection
+passes.227object/input pairs and every unique recorded dependency were rehashed.
+Qualified v1 executable AND manifest match their prior receiving-preparation pins.
+[Actual parent terminal](tests/qualification/sdk-host-observed-link-parent-terminal-20261014.json),
+[artifact/source/static evidence](tests/sdk_host_matrix/observed-link-qualification.json).
+
+Fresh comparison plan v3 binds this successor, current executor/containment sources
+and three accepted codec originals. It is UNADMITTED: no new native capability,
+SDK runtime, replay, scaling/pixel/cancellation/OS-thread/RSS proof or full goal
+completion follows. Root got actualSTART and terminal closure by parent queue,
+allowing closure of the four-credit compiler work before its exclusive native slot.
+Historical Root review a17aaa3c accepts ONLY90b27d2 source/lifecycle, not newer
+telemetry/current tree; [narrow adoption](tests/sdk_host_matrix/historical-root-review-adoption.json)
+records that boundary. Current source/plan needs fresh review/admission before
+SDK execution. Photo Root/original preview ownership and v1.0.2 remain unchanged.

@@ -1,0 +1,50 @@
+{
+  "schema": "unison-source-link-parent-terminal/1",
+  "utc": "2026-10-14T21:12:30.126943+00:00",
+  "wrapper_pid": 18172,
+  "builder_pid": 18173,
+  "tool_session": 40529,
+  "actual_terminal_chunk": "33c87d",
+  "actual_tool_exit_code": 0,
+  "running_session_returned": false,
+  "start": {
+    "path": "/private/tmp/unison-area-memory-observed-build-START-20261014.json",
+    "bytes": 1035,
+    "sha256": "936f88e35d2245fda4567c9a618598ae19ea91279ad077b5a37656d284af973e"
+  },
+  "release": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SOURCE-LINK-FOUR-CREDITS-20261014.json",
+    "bytes": 901,
+    "sha256": "fdc9e0f95d35365645358e23f38b6377bc57669923e7d6c51dbd29ac9e1c0f0c"
+  },
+  "supplementary_parent_absence": {
+    "command": [
+      "/bin/ps",
+      "-p",
+      "18172,18173",
+      "-o",
+      "pid=,comm="
+    ],
+    "exit": 1,
+    "stdout": "",
+    "scope": "corroboration, not basis for terminal exit"
+  },
+  "manifest": {
+    "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/build-manifest-area-memory-unqualified.json",
+    "bytes": 1513,
+    "sha256": "dea453cd55f23972c0411866ff791f99024c65f71113e35a4b47b8a5ef06c991"
+  },
+  "binary": {
+    "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/unison-adobe-validator-area-memory-unqualified",
+    "bytes": 9056800,
+    "sha256": "12df79747c16a87618d69a6ef16e24351e082be80dc1debed4234798d1f10278"
+  },
+  "qualified_v1_unchanged": {
+    "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+    "bytes": 9017656,
+    "sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a"
+  },
+  "SDK_outputs_executed": 0,
+  "runtime_release": false,
+  "compiler_allocation_work_closed": true
+}

@@ -1,0 +1,2794 @@
+{
+  "schema": "unison-experimental-observed-host-link-only/1",
+  "utc": "2026-10-14T21:13:21.231375+00:00",
+  "scope": "source/link/static inspection only; no SDK output invocation",
+  "release": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SOURCE-LINK-FOUR-CREDITS-20261014.json",
+    "bytes": 901,
+    "sha256": "fdc9e0f95d35365645358e23f38b6377bc57669923e7d6c51dbd29ac9e1c0f0c"
+  },
+  "owner_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-observed-link-parent-terminal-20261014.json",
+    "bytes": 1732,
+    "sha256": "f8911ed8b839eb9ed0dfda0f21ffd7737a9a6d0a8c1b52fb84b908697efc3baf"
+  },
+  "manifest": {
+    "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/build-manifest-area-memory-unqualified.json",
+    "bytes": 1513,
+    "sha256": "dea453cd55f23972c0411866ff791f99024c65f71113e35a4b47b8a5ef06c991"
+  },
+  "executable": {
+    "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/unison-adobe-validator-area-memory-unqualified",
+    "bytes": 9056800,
+    "sha256": "12df79747c16a87618d69a6ef16e24351e082be80dc1debed4234798d1f10278"
+  },
+  "static_observation": {
+    "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/link-only-inspection-ksby9yb5/RESULT.json",
+    "bytes": 1250,
+    "sha256": "c646ccdfdf089ea36a28c2779dddced1674eead0cac7ad5513fef79fd8d2fe09"
+  },
+  "source_pins": {
+    "driver.cpp": "0c4fdeba27197836fa95b129ad3e75098eef6d5af1d4614a3787e9f7f10f9925",
+    "area_scheduler.h": "87fbed2108ecd48de7e32f20e124840dc872ec28bf8dc4dfc1c5b3737b837902",
+    "area_task_host.h": "12ca3b66aa2a90e3ff62da48ce6008d2f8299ae3c286a24198cbb33c5b7afd34",
+    "memory_budget.h": "dd5f7ef98280551a081bc2c4cfed0b89b8f874c53b2612a5f10f9687cce7eea0",
+    "memory_allocator.h": "1ee30e9b5b262bf9c3fd2751e1fa143c22a0f11130217339f4b48fbc1bd47cb2",
+    "build.py": "3572e86ca5bcfb3c6ec005594c4e7c6afd9f677bc6858b046588e9d0889a1f00",
+    "experimental_build.py": "429e6ee2d9efc0204dc6f2a9eed57aaedea0adb109522688449d6b77c82babf9",
+    "object_cache.py": "e9f12ed825d02f80185b4664cc1ce77eccb6d8835045b6d83663b00796afd656"
+  },
+  "objects": [
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ArrayNodeImpl-daadef38413a8dd5.o",
+        "bytes": 130752,
+        "sha256": "69ccc4cc6323534274f5a6e99b5314f4cc67683714958558df233cb0946641cc"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ArrayNodeImpl-daadef38413a8dd5.inputs.json",
+        "bytes": 142965,
+        "sha256": "cfd7e2dc1f553c01a1a071980cee8b8abee1a97d367a2295fca6c89623b4047a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/AutoSharedLock-27496064026a00f0.o",
+        "bytes": 4800,
+        "sha256": "77ce50c36f0e6c0fdb7f54bafd577f4a8607418a6ad53b1f5dad5e35835845b1"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/AutoSharedLock-27496064026a00f0.inputs.json",
+        "bytes": 137814,
+        "sha256": "fc39709a7bc97ee3915961a1339dc151089b839aa2812ff8a360349cd55552c8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ClientDOMParserWrapperImpl-28fd07093b78d54d.o",
+        "bytes": 42872,
+        "sha256": "6d55e58bb4a3b52ea9d4fa2def216c113795a044f3e596628cbb0e14be6e7d3b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ClientDOMParserWrapperImpl-28fd07093b78d54d.inputs.json",
+        "bytes": 143288,
+        "sha256": "256a6883647b6eaa8b245150bea16eaccb4cba5769f90a0c5de771a530a10e3d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ClientDOMSerializerWrapperImpl-173ef137c03e2fcf.o",
+        "bytes": 40720,
+        "sha256": "d15a04d8e1ea9fcb914525710d14ef49899510de9998ad27267fb6ac83c773c1"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ClientDOMSerializerWrapperImpl-173ef137c03e2fcf.inputs.json",
+        "bytes": 142450,
+        "sha256": "4edc618bbbe133c80b59c0c2172d0567cccaa76ec9ce7f206d832350d65c653c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CompositeNodeImpl-1b3faa26d66a7139.o",
+        "bytes": 67976,
+        "sha256": "7fc9c543731b20e3a2b8b00e463b41db75e3ad438a520b5731cdd91735527587"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CompositeNodeImpl-1b3faa26d66a7139.inputs.json",
+        "bytes": 143025,
+        "sha256": "5ecb251b6054d00f1d81258fc090193e4d749c0d033d78fdc28a1d6930b3ee38"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ConfigurableImpl-8c3ad1dda25fa79a.o",
+        "bytes": 84160,
+        "sha256": "fc25d3a719d09c10027b9c491d4bf1e505148c2dce0235b0d6e8de895227202a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ConfigurableImpl-8c3ad1dda25fa79a.inputs.json",
+        "bytes": 139033,
+        "sha256": "5c1d004c84fec0f908a2990c4c895e7c7a0a16e8d690bd86d74e893ed248bae3"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ConfigurationManagerImpl-3d45729625d2c4ca.o",
+        "bytes": 13552,
+        "sha256": "2211e7e7c1fddb2497a80ce6dbc70c8f3ead9e3e6070c835e54612ffb3130fb0"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ConfigurationManagerImpl-3d45729625d2c4ca.inputs.json",
+        "bytes": 139454,
+        "sha256": "4c1aaf5440a2ffe439976267f8f0af7130e1b5b6991c8995c58739f6db81261e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CoreConfigurationManagerImpl-e924014fdfbb28d4.o",
+        "bytes": 34008,
+        "sha256": "b3725c0933820b25f43ac67dcea976e5f5542379d39b84e8708d183c9b9d1383"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CoreConfigurationManagerImpl-e924014fdfbb28d4.inputs.json",
+        "bytes": 140705,
+        "sha256": "2129fbb42b873db14e74f83004798bc0272c4f4031bf33d6e3bd2359a58d8e81"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CoreObjectFactoryImpl-888ecee38e3e5c43.o",
+        "bytes": 640,
+        "sha256": "37900ec1cef63e25bdbea1a67fd0c41d58d719895db7ce521551d27b0dd802cc"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/CoreObjectFactoryImpl-888ecee38e3e5c43.inputs.json",
+        "bytes": 148357,
+        "sha256": "70db8db3ff34b212df51c1e777d487aa26a2ec3124bc487732563d9d94791272"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMImplementationRegistryImpl-01051fb5caabc1a1.o",
+        "bytes": 42296,
+        "sha256": "604d8778a77e9defa6b343a63004dd47b03e140081979aa6072196e6ccb2ecf5"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMImplementationRegistryImpl-01051fb5caabc1a1.inputs.json",
+        "bytes": 144515,
+        "sha256": "a44a007f7e09c1b8a46934b4120f2311146b96e3309aa16d47fd5d081a3af1ab"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMParserImpl-c729b779c4739fb5.o",
+        "bytes": 59240,
+        "sha256": "8cee98378605ca40fa1602c5913763a5dc6826f971b59cf8158ec7e068bf9130"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMParserImpl-c729b779c4739fb5.inputs.json",
+        "bytes": 145297,
+        "sha256": "3c2101f7344cb4c4534854619249d2e6fbc447fbe1e31152179a8ddfd23a3f29"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMSerializerImpl-58e40fb6dcb5f210.o",
+        "bytes": 38688,
+        "sha256": "1bb1f873c9da129d20985cfb49f687a3607f7514bb5b5398885738b64fc1d49d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DOMSerializerImpl-58e40fb6dcb5f210.inputs.json",
+        "bytes": 141618,
+        "sha256": "06d935c1750369dc6612a5327f9cfecf3c580efbe40b1d259f467235d9e77ad8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DefaultErrorNotifierImpl-2b9b34de24b419b6.o",
+        "bytes": 3088,
+        "sha256": "da40f217d3a7e09bc9349e75eff235e56a2e223a048aeb8adfcbd37c9ded9494"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/DefaultErrorNotifierImpl-2b9b34de24b419b6.inputs.json",
+        "bytes": 137008,
+        "sha256": "e9b37f0814e83ed8a2cffacefc522988bbc2a242247e14fda8c62254020b6539"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ErrorImpl-cb63c47f99ab7ee0.o",
+        "bytes": 56304,
+        "sha256": "3cd32ce429d7323bfa26ddb3588b07ed567ad15bd1d4c80d9d370bba07073cba"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ErrorImpl-cb63c47f99ab7ee0.inputs.json",
+        "bytes": 142286,
+        "sha256": "0186a2f8a22b987b3e1aab8d1ff702129a836ef66f989d43570e33f91086bfa3"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ErrorNotifierWrapperImpl-dd4f88e2ea27897c.o",
+        "bytes": 4296,
+        "sha256": "5cf4644f6c24d5edf35e484441ca6eb4336f0315d5aee2d43f17b0a5ba64ab00"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ErrorNotifierWrapperImpl-dd4f88e2ea27897c.inputs.json",
+        "bytes": 137878,
+        "sha256": "0706d86dc2e8f34af6b73028180b20eeedd969fe78b7666ce10cc93d65075cf4"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ExpatAdapter-7eb4b0273c357f0c.o",
+        "bytes": 15712,
+        "sha256": "c19eec7575e4d2b3bff6318ece84ffb5bce6737094f1b9a2ece2ca35dd360a97"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ExpatAdapter-7eb4b0273c357f0c.inputs.json",
+        "bytes": 137403,
+        "sha256": "e3b7a928836f3d9d18e5efbf7c2111b90bea57641d5397eef2f5c07478d7d065"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IArrayNode-01243c9f3534c2b2.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IArrayNode-01243c9f3534c2b2.inputs.json",
+        "bytes": 137030,
+        "sha256": "db0adfbd2dc5471569b18ddbeb378dcd48760888bd850c458f482017b1d39aed"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IArrayNode_I-281c12dd56fbc39a.o",
+        "bytes": 62440,
+        "sha256": "c1e54d935c693594c1640e4591b2d27ebd63b4ec95bf0f8f78f7ce994e2fedb4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IArrayNode_I-281c12dd56fbc39a.inputs.json",
+        "bytes": 139567,
+        "sha256": "e19896e3c2c4061b4a17539e9e9b1be7140b67c67a3a222eb6c0d10e5c36b560"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IClientDOMParser-b220267e01c3dbe5.o",
+        "bytes": 5736,
+        "sha256": "2f8842cac6fac877d3f738e617022687aecd5d731770cd177dd6d1a65c65a3aa"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IClientDOMParser-b220267e01c3dbe5.inputs.json",
+        "bytes": 137604,
+        "sha256": "695c166f9db3cd0e0e6da21a7c17660d7bcdfc064fd57994a16781fc87a8036a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IClientDOMSerializer-6fbbb14548583dcc.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IClientDOMSerializer-6fbbb14548583dcc.inputs.json",
+        "bytes": 137818,
+        "sha256": "afef8fb2cd030c484d82c33b05c342ccf4478aee888cfb81e64039163785e919"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICompositeNode-0c6f8182198b8b33.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICompositeNode-0c6f8182198b8b33.inputs.json",
+        "bytes": 136868,
+        "sha256": "f8a3294cf737e5acaf5b59c4f388a1d0445881d024f60bb420df3c6ed0868b0a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICompositeNode_I-ddf902690e3082b3.o",
+        "bytes": 47520,
+        "sha256": "a0d12ee30b496931c9b6c0c2f716a0fe8e12b0d239cce13667ba4a3cbf6c614f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICompositeNode_I-ddf902690e3082b3.inputs.json",
+        "bytes": 139594,
+        "sha256": "bba428c010abbcca88ed63c4d57fd43e27f037322f9f0957db76833d7c9c786e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurable-d358e579d6ab6462.o",
+        "bytes": 21968,
+        "sha256": "a5705592c6e06de8e38bac27bb6955a06979df0b6be51a8ba9246c7227fa56eb"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurable-d358e579d6ab6462.inputs.json",
+        "bytes": 137010,
+        "sha256": "ebfd2736f2dc5ad490bbd265e73b6480973a6109a1d11d9cde8f42e92155f214"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurable_I-23b1c05a085d6e87.o",
+        "bytes": 19232,
+        "sha256": "5978fd865c7ef4a45bcbb75dd2eb9f5c7df410981a0d2269793ae20ee59b2b65"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurable_I-23b1c05a085d6e87.inputs.json",
+        "bytes": 138359,
+        "sha256": "4e63fb7e0f4de664e3190bf5e963740a88d15fee882ea1430241cdee1a4296c6"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurationManager-44135ff7cbd81c9c.o",
+        "bytes": 17184,
+        "sha256": "5b3bc19110873e4600c6f9c6454a5b471bc62a2994704664f8695bfdea4463e8"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurationManager-44135ff7cbd81c9c.inputs.json",
+        "bytes": 137035,
+        "sha256": "2f2d68f761ac5da688ae9e94d631b5b50b7b621183c71440b6627993dd542cef"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurationManager_I-108c0dc309993ec0.o",
+        "bytes": 19344,
+        "sha256": "6371d76ffaa69fff61bbfb8afe7fecef0e209972e4658899846144184006d7c8"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IConfigurationManager_I-108c0dc309993ec0.inputs.json",
+        "bytes": 138063,
+        "sha256": "91bfc51f1d404fbd2858e18749d497d28af9234c0fd19c5fe4d2297abe09ffdf"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreConfigurationManager-04c123796f578b67.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreConfigurationManager-04c123796f578b67.inputs.json",
+        "bytes": 136745,
+        "sha256": "0c8382902035dd83d6193e7e1cf6e244a8a9571a683db2c9f62403e0eb94375a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreConfigurationManager_I-99900933e22d5b76.o",
+        "bytes": 19552,
+        "sha256": "ccfc3e290ddd76c9ae0360fc2afa4ba543edca7957c63d9923f79c153b10cc34"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreConfigurationManager_I-99900933e22d5b76.inputs.json",
+        "bytes": 138963,
+        "sha256": "ef8f51fc33f51f9a3a798d64e369e17028a2815c8d009d0c39d7087fe9f7f07c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreObjectFactory-5871b60bf0801a73.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreObjectFactory-5871b60bf0801a73.inputs.json",
+        "bytes": 136505,
+        "sha256": "ee00a081982571ad4b1bd068a93c420c24c84a4a9c0801ee8e60bbbefad95864"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreObjectFactory_I-a7f9e448ebac91ed.o",
+        "bytes": 9320,
+        "sha256": "b67d4a8267fefe0e11cd003bbeca0bf6f2b77c6661f2f14ec138871e00ae668a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ICoreObjectFactory_I-a7f9e448ebac91ed.inputs.json",
+        "bytes": 138736,
+        "sha256": "c4eae74eb92e1124f46dea1343a96398ab16853a6991eb62130cb34d21f38903"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMImplementationRegistry-a0b9a9551ca91b5a.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMImplementationRegistry-a0b9a9551ca91b5a.inputs.json",
+        "bytes": 136559,
+        "sha256": "9c8450b1c043097eb717b076959cac925484b265c8e38ef05b4733021c87a624"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMImplementationRegistry_I-9a03242cd71dc6bd.o",
+        "bytes": 23360,
+        "sha256": "e66eb27a698fa6250f753535dbc70597f8695882a2965b0c199b5ade48974f8a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMImplementationRegistry_I-9a03242cd71dc6bd.inputs.json",
+        "bytes": 141598,
+        "sha256": "1380abc9124b950149e747bcd325261ad786fbc549ea443313cc4a980af18373"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMParser-33d40fe85fa57a20.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMParser-33d40fe85fa57a20.inputs.json",
+        "bytes": 136677,
+        "sha256": "edfaee29448f31a30c117cb21e3830bc5f4196eec1be674fc82585415827be1e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMParser_I-fcddce6407d566ba.o",
+        "bytes": 26392,
+        "sha256": "128dd76566ebebb526c2340e33cc59ca41917fde5f9e6061214f618955be5e9f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMParser_I-fcddce6407d566ba.inputs.json",
+        "bytes": 141718,
+        "sha256": "b06304e7cf9f05019222dbcb12e00d5670de02f75b36759ca73acdfb98ca0b99"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMSerializer-e1d77f3ab417ca17.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMSerializer-e1d77f3ab417ca17.inputs.json",
+        "bytes": 136697,
+        "sha256": "ec5ea2c09bcf1619a1d32d1f307105265b923b65b25a1c1a2be6bc1212b2d634"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMSerializer_I-5a8fc0750bdbe17c.o",
+        "bytes": 24544,
+        "sha256": "68933ac82b53aa569653ef89bb71eb9d9974145ef150449927788fed84411d73"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IDOMSerializer_I-5a8fc0750bdbe17c.inputs.json",
+        "bytes": 140137,
+        "sha256": "832b3189e960a406148a188097af8a850e78719bae940f20edb48721f627b401"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IError-98d6bc1068d855a7.o",
+        "bytes": 18848,
+        "sha256": "91363ac50431a17891da3e054296804ca6e03292ce4bc2c2922aec579609e37b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IError-98d6bc1068d855a7.inputs.json",
+        "bytes": 137149,
+        "sha256": "521fad6d0184a8ec0d70fd30b652c3276dcb675be702309458e322b54fac2c3b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IErrorNotifier-10cca1ca7af05a73.o",
+        "bytes": 2648,
+        "sha256": "e0dd00f158c2e14e5e1a58796fce6d267865e3b71152d288a26bb204f299166b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IErrorNotifier-10cca1ca7af05a73.inputs.json",
+        "bytes": 136315,
+        "sha256": "1d9c117810689ec4ece3b8f39fe1549d30c343e32fa9fb05795e24d33ce99c7e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IErrorNotifier_I-f5087be82e7f0c23.o",
+        "bytes": 1272,
+        "sha256": "19317ffadda98a8bd846045e416438b4441b50628c071cd46abf3ce9f7f56ca4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IErrorNotifier_I-f5087be82e7f0c23.inputs.json",
+        "bytes": 136405,
+        "sha256": "b8f09b8d5caa525a22bf1edbcafeb17f0fc232672941dd9009fbc0d535165c30"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IError_I-bbc9ea8ec8f10151.o",
+        "bytes": 28848,
+        "sha256": "8e119851eae78e3f917c4d154d78b47e4b95c2389db656cc3d1e434cb256670e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IError_I-bbc9ea8ec8f10151.inputs.json",
+        "bytes": 137983,
+        "sha256": "3aef4af751e2cbdf1852e9ce3e17e51fe16b50c69c4f0ccddfc7bfdb6db0c9a4"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMemoryAllocator_I-11b3875718ac3827.o",
+        "bytes": 2112,
+        "sha256": "4926b29b8c4a0f952c8fdc9bd3558dbbd9c3a927df2ccea3b4fe975286336c60"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMemoryAllocator_I-11b3875718ac3827.inputs.json",
+        "bytes": 136616,
+        "sha256": "c83d5bfc498f36e00ee3ba32ec9ad4faef6c942071bb4f734f66c26e7f831c03"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadata-f84add74e5e71001.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadata-f84add74e5e71001.inputs.json",
+        "bytes": 137207,
+        "sha256": "216d019ac7a7221a77a89ab18fafaf3f9f760ea79626df32c4478a7f93211e20"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadataConverterUtils-be2cc325fbd2653f.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadataConverterUtils-be2cc325fbd2653f.inputs.json",
+        "bytes": 138048,
+        "sha256": "41aea3fd809892f3af44b49d10ceb96dac62ee5e3c84cf7211354d3ff04aea5f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadataConverterUtils_I-b7ce55aab7206893.o",
+        "bytes": 12024,
+        "sha256": "8c299ad62e6c03af6f6d0f7490e58ae9c8bb6d02e405b670fa4f5a0575c86bc5"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadataConverterUtils_I-b7ce55aab7206893.inputs.json",
+        "bytes": 142527,
+        "sha256": "255e2bc57fed85b33562181b2eeb113621f5e34ad8888765616179a0ce3ef7a8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadata_I-73b237c99085a941.o",
+        "bytes": 72328,
+        "sha256": "9b0c18898f2fe845e8b44e3a36f7c0022f6af74317d21b6a1c3e412ea63dec0f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IMetadata_I-73b237c99085a941.inputs.json",
+        "bytes": 140784,
+        "sha256": "51b6a22665dd2efd1b059b8bad7d66840d3a5123e19fc094434c3ba1b0dc48ae"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INameSpacePrefixMap-bc58561722f3eb3b.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INameSpacePrefixMap-bc58561722f3eb3b.inputs.json",
+        "bytes": 137090,
+        "sha256": "e39021caf4da3732a43de6ce903bb0e1fe0b3eeabc4042299e6294ae35bc72ff"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INameSpacePrefixMap_I-cb2ce0aeab699e1f.o",
+        "bytes": 24752,
+        "sha256": "ff120a49384216ff2595443259a9af71316bc94d1f1ba843780ee9de68a849e7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INameSpacePrefixMap_I-cb2ce0aeab699e1f.inputs.json",
+        "bytes": 139118,
+        "sha256": "6ae1ea7153d84173a9a60bed5cd2d0a7efd6b935f2c3db15909e9c1f6c27ef43"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INode-c424f461b12ecdcb.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INode-c424f461b12ecdcb.inputs.json",
+        "bytes": 136650,
+        "sha256": "ff995d2296bb0a93f35a574e1346944d4690799ee8b21cf782a0f1303c2de42b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INodeIterator-65ab41b4e60b6acc.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INodeIterator-65ab41b4e60b6acc.inputs.json",
+        "bytes": 136863,
+        "sha256": "f12638ef111846d463b6492384635e83413335681ba9998889444866fce3a97f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INodeIterator_I-83df208e10ece73d.o",
+        "bytes": 21032,
+        "sha256": "7bec4869e2ddf86b31a4fdf9ce95f010c4341e808c0df05f62753c9cd405ad62"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INodeIterator_I-83df208e10ece73d.inputs.json",
+        "bytes": 139927,
+        "sha256": "a3dfd0873bfa5694a31e8e695e2409660ac95e7ffd616d2e3bb1c9d603b75090"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INode_I-ae0f87a0d73cac09.o",
+        "bytes": 56544,
+        "sha256": "7acd49a88ff19e3bf7e5e6c4139bc1c9b515594c9ebd50892054e91952084fa9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/INode_I-ae0f87a0d73cac09.inputs.json",
+        "bytes": 140286,
+        "sha256": "dc86634fb374df9f45113a4fd592698e442a8be67960f66110b9436eb1aacc9e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPath-8edecff3fcc15274.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPath-8edecff3fcc15274.inputs.json",
+        "bytes": 136454,
+        "sha256": "024d1e8068f1294cf632a69ff214d9d4834213541cdd9ed190a46f0d968025e2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPathSegment-3e0d6a32d29e7ac8.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPathSegment-3e0d6a32d29e7ac8.inputs.json",
+        "bytes": 136489,
+        "sha256": "bca624d7859b21e19d43bb63d6a34dc1f0d4640c0bf6fc7ea85348d3b6451725"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPathSegment_I-97543cdcfef69956.o",
+        "bytes": 16880,
+        "sha256": "bea7597a974be1fd7ac7273b8a11a9cf1892a788f48434d5990f6394e27c72b7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPathSegment_I-97543cdcfef69956.inputs.json",
+        "bytes": 138697,
+        "sha256": "689efb5576e6cb006863b7e77b3a90034b2e72ac798921b7264ec32cf941ca22"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPath_I-874d4c6297b657c2.o",
+        "bytes": 23344,
+        "sha256": "70f6511962bf37bae11e1c63b47efe9b18684004661bb89b6f1eaf9db8f6ba5c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IPath_I-874d4c6297b657c2.inputs.json",
+        "bytes": 139218,
+        "sha256": "5fe7d83fbdbb231658ef9249c2339ddebeeb2ccbceef03f3c946c28c9b2d811e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ISimpleNode-6ac5f451e540044d.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ISimpleNode-6ac5f451e540044d.inputs.json",
+        "bytes": 136853,
+        "sha256": "bdf72200ed12092e297f768d3f09ad64d299e8069b930c48897523ec9fdd29cf"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ISimpleNode_I-15678de7e59b5159.o",
+        "bytes": 41520,
+        "sha256": "5fac5ca990f21b414b17e81079295fe7cb24079aaaa6e178deade24c3b8cd983"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ISimpleNode_I-15678de7e59b5159.inputs.json",
+        "bytes": 139403,
+        "sha256": "745f6799379ffb5c6f31aa2bcd27322decdc8482cd936d809928a84e4eb016aa"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IStructureNode-9496f3e1a12d8c82.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IStructureNode-9496f3e1a12d8c82.inputs.json",
+        "bytes": 137050,
+        "sha256": "51c6984a78d0b7b32c8d79ad77704e9747013aea38f1de76ab6b8d68a43957c6"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IStructureNode_I-a9e57730fa560e29.o",
+        "bytes": 60544,
+        "sha256": "5f556916c35cfcb4b5b4b827db3cdd09edc3f96c0339684fcd155119ffc40e62"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IStructureNode_I-a9e57730fa560e29.inputs.json",
+        "bytes": 139591,
+        "sha256": "ef9f1459617c533b6521ce10cfe72cc121978a128f340fe57e7156aa865b1923"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8String-3e41b5e10f02e9b6.o",
+        "bytes": 27696,
+        "sha256": "14247d8686dbcdf6734c130c0fee2af0cb654285c8a8c1b1e68146c18b2a0a1d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8String-3e41b5e10f02e9b6.inputs.json",
+        "bytes": 137169,
+        "sha256": "aae23fccb31293ece43ecdca5a7cef9e6403d98375821ab53798c4377c8d6419"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8StringComparator-9029d649ea6e4eab.o",
+        "bytes": 880,
+        "sha256": "0a5b4d94f825d10a47bc9f5d5a9d7cade264e226c93e3566f97d8e05c55771bf"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8StringComparator-9029d649ea6e4eab.inputs.json",
+        "bytes": 136641,
+        "sha256": "ce106220e91c931d81a864be715c4155cb57d759906de22da82cd4a97b973555"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8String_I-f10acff21ec54e26.o",
+        "bytes": 42920,
+        "sha256": "2e4adf55b63e1e2eda02ce103e219ed356bd5ce86250e41e0e6fd22b40b4aec6"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/IUTF8String_I-f10acff21ec54e26.inputs.json",
+        "bytes": 138351,
+        "sha256": "d2a13cf6d598248c5506798e45f535248f27ddb3c3c12fb940685471659ee284"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MD5-0ed9ea73bea7b1cd.o",
+        "bytes": 4920,
+        "sha256": "954e7bfac9333dcc1398616f5dc229e1f13499d0d1ffda3df1f79ab1034373e4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MD5-0ed9ea73bea7b1cd.inputs.json",
+        "bytes": 135763,
+        "sha256": "709804ca0e3c64ee7fcd32f549274886cd0aaea1b358fc830aaa17ce75fa172a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MemoryAllocatorWrapperImpl-4e810cdcf74df6d8.o",
+        "bytes": 4048,
+        "sha256": "f2bad86178b68cd6168ed07ad334a90cd14e5a075c0fb0a152eed1bbd577d501"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MemoryAllocatorWrapperImpl-4e810cdcf74df6d8.inputs.json",
+        "bytes": 136143,
+        "sha256": "f9ee5c592ce51f13f97ac796bf585186ea5efda1cd6c0fbc9eb6a2fb888bba21"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MemoryManagedObject-ef4115ff26ee2689.o",
+        "bytes": 3208,
+        "sha256": "21294ee6b3b5161d81e335b0d88c6659de057418c32685ce65a0eff95f6fc01f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MemoryManagedObject-ef4115ff26ee2689.inputs.json",
+        "bytes": 136613,
+        "sha256": "561bfd903538a914d92060847439a4ea269a319d1786998c3f7e84990d35469a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MetadataConverterUtilsImpl-74198c21a7c13e8a.o",
+        "bytes": 41472,
+        "sha256": "cdd5220162e429e5cb3edcae4f827fda2009395043c20aecd6b51579aac96c01"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MetadataConverterUtilsImpl-74198c21a7c13e8a.inputs.json",
+        "bytes": 149166,
+        "sha256": "65ed0aff9ba809ee60d5562cfeb0a1ac4f38bb8ecd06b3201529067b4e7f25c2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MetadataImpl-c6eef0a71602e84b.o",
+        "bytes": 168472,
+        "sha256": "1ff2ea378df9caca6b927cd7a6a3a38f16546ae43aa1067c7a334729381a5f0e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/MetadataImpl-c6eef0a71602e84b.inputs.json",
+        "bytes": 148238,
+        "sha256": "03b589c8c1815c1cce191561f062164069b11fa2a17db3e7ac114773d7296927"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/NameSpacePrefixMapImpl-5caccd62707ac924.o",
+        "bytes": 55584,
+        "sha256": "2fe76e82a79444327e96723c1197de0dc978faf13c02ebee38aafd5b1196b3bc"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/NameSpacePrefixMapImpl-5caccd62707ac924.inputs.json",
+        "bytes": 142144,
+        "sha256": "5be786ab4d75625c596b9f16d837ec7b7ba6a95855bbcb70fb54ecc372f4a107"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/NodeImpl-74260bf586e5bedd.o",
+        "bytes": 63040,
+        "sha256": "c854ea3c1f9720e9a29aef8b4f6f3822277ccdd99ae9c2b0bf0d59a0595d0d99"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/NodeImpl-74260bf586e5bedd.inputs.json",
+        "bytes": 143093,
+        "sha256": "00f071ac952ccde49167b4c383dcf17787334d471452d838a173c520fa9b263d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ParseRDF-d2630b1bb84004a6.o",
+        "bytes": 29520,
+        "sha256": "08dbd04988e9583cad3106958fe9edf484210d87de0ea3d27e3bdcb78b19a14a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ParseRDF-d2630b1bb84004a6.inputs.json",
+        "bytes": 137026,
+        "sha256": "51f8c5c74c8d1af2950c2014b7febdc3ae607579215f267d462b17f1d7af791a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/PathImpl-7824e8f48695aeb8.o",
+        "bytes": 39528,
+        "sha256": "848dde7d2156e9d62d846c0b5c76108f81382b6c0c3f7ecfd1cc8340c3702289"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/PathImpl-7824e8f48695aeb8.inputs.json",
+        "bytes": 144050,
+        "sha256": "8ded21d293ec219c80f677e8b336f4f50ca55cc0b813bf501e1cf04d6e85304f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/PathSegmentImpl-baadd0046737dfa9.o",
+        "bytes": 34296,
+        "sha256": "4d1990d4bba928503fbfb214dba149a8a3a11c89407a42ad694d5802aaaaaffd"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/PathSegmentImpl-baadd0046737dfa9.inputs.json",
+        "bytes": 140414,
+        "sha256": "99af40b1ffb920ccd6806b43b414727826bbc99aab7eba311f403735b83112d1"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/RDFDOMParserImpl-47f2359abb4714b9.o",
+        "bytes": 38112,
+        "sha256": "b26de5c76ec7ab9168fd2ebe2b178c657dc912ec5cfb2b64126eb2d2046f9d82"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/RDFDOMParserImpl-47f2359abb4714b9.inputs.json",
+        "bytes": 147139,
+        "sha256": "e41b955bd84f386b7fc8c1c35e44457c74351841cc078fbb1232cc10f42d98f2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/RDFDOMSerializerImpl-820bb6c9eac22bda.o",
+        "bytes": 37968,
+        "sha256": "2fc62f04f3075a88b12e9ea1ae74eb7df32cb57b3bcdeb1e425b8f813cbc38f5"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/RDFDOMSerializerImpl-820bb6c9eac22bda.inputs.json",
+        "bytes": 150653,
+        "sha256": "11d1d08cff408eae50fe1a296085589708761156f47581a1ea61c10a64fa1b12"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SharedMutexImpl-71a7e8498f82bb58.o",
+        "bytes": 13984,
+        "sha256": "c33fba9dda85d43197e8506cf0cd9c6d65cb348a54166ce8eca5eb6d03dc631a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SharedMutexImpl-71a7e8498f82bb58.inputs.json",
+        "bytes": 139027,
+        "sha256": "a5bfd7eb89f219b82f4ab5d358d7bbb89ac3f5cf4101202105b435384fe72287"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SharedObjectImpl-3170a08e5bd834df.o",
+        "bytes": 4632,
+        "sha256": "47111c3e1a91714502351fa439c450f8601073dfb97a20870b0a075a82634615"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SharedObjectImpl-3170a08e5bd834df.inputs.json",
+        "bytes": 136903,
+        "sha256": "5c8101aad5d86b8b652f3723316fbedbef1665362897107c3773543545f5d5d4"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SimpleNodeImpl-0d3f5ccdd1f0b6bf.o",
+        "bytes": 69432,
+        "sha256": "129d0dbd8b62aaa45ad7c3b8fc3a137fcf74198346f22b9153f3fdb207ad4717"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/SimpleNodeImpl-0d3f5ccdd1f0b6bf.inputs.json",
+        "bytes": 142242,
+        "sha256": "598e73dd9e451d1c839766dda607438a0d050d273e154d05d581e25cb90d529f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/StructureNodeImpl-d83b8d1f361255f1.o",
+        "bytes": 137488,
+        "sha256": "c137691eba8e7a55a3b98f23f8c8125efa947d9652f8e90b7256672bac335f07"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/StructureNodeImpl-d83b8d1f361255f1.inputs.json",
+        "bytes": 142993,
+        "sha256": "81cd50a35dfd4bfa9fb46d9596d88e65fd16f3a0c86716829a740edf5d1ac386"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ThreadSafeImpl-9e133f2fc4b3c50d.o",
+        "bytes": 6688,
+        "sha256": "f1ef0e4da3c3c3013754fffa76d93066a5c8d016ddc4c634209a4cc7558779c9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ThreadSafeImpl-9e133f2fc4b3c50d.inputs.json",
+        "bytes": 138195,
+        "sha256": "be8c6a4e9b9c604f933b3907ce5782e6b71a9cb4782d029332094b314524c855"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/UTF8StringImpl-9d8c7a27bf0637a9.o",
+        "bytes": 48728,
+        "sha256": "0002bea228b5594df22875ceabaee240fca958131bc24c6eca7adc4ae5354b45"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/UTF8StringImpl-9d8c7a27bf0637a9.inputs.json",
+        "bytes": 142153,
+        "sha256": "6949f081d28e8a7af2d9694434d2677e074bcc01eb8db5348fc25898b5feabf3"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/UnicodeConversions-952f911aa546dfd4.o",
+        "bytes": 22736,
+        "sha256": "9dcd8537b4ae736010e9e4ebf356b5f8485f5b95cd51696ecf4abe625d7f22ed"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/UnicodeConversions-952f911aa546dfd4.inputs.json",
+        "bytes": 135313,
+        "sha256": "830984332b793e8e4e10053e2e2794b373f2193973c5c6c7f09b3736b6911631"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPDocOps-a647f44aedb972d6.o",
+        "bytes": 14400,
+        "sha256": "03eee80d7d3bc5d303541bae43562cd51630ce73a13856d55678df4473a66954"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPDocOps-a647f44aedb972d6.inputs.json",
+        "bytes": 137532,
+        "sha256": "125717be2aa4bc9941407391a4ff90d6c8dfa620648dab87f10172834d3d4bf9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPIterator-784b137801e0d584.o",
+        "bytes": 5696,
+        "sha256": "5cb54153d7ee08327036c29c1adbea62909d4309dd8a4c9dc89efbfeef7be3e4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPIterator-784b137801e0d584.inputs.json",
+        "bytes": 137224,
+        "sha256": "c6c4afff2926c14b757bd01b419df659ac4091f3179be392fe9a7b975040605a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPMeta-a0bbb3e9670960d7.o",
+        "bytes": 50816,
+        "sha256": "21ab5b5c06d71126c3efb7b59575ef08b79f03d8592cd37a9933ffe331a941dd"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPMeta-a0bbb3e9670960d7.inputs.json",
+        "bytes": 137201,
+        "sha256": "081121912fec2039bfb827a8679107b2dea014a358e43d522fb592993b7aa649"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPUtils-18b2827a7734af9e.o",
+        "bytes": 32232,
+        "sha256": "fb8a2117f803f40817eab97fcb437a87b4d1dc61065eea2930b6f3de7e71a4ef"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/WXMPUtils-18b2827a7734af9e.inputs.json",
+        "bytes": 137371,
+        "sha256": "4376f2b7472122eebacf568568733b9ee1253b3cd0cd69bd42c9a11c5533e720"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XML_Node-b05d1efbc957d1c8.o",
+        "bytes": 19888,
+        "sha256": "b36ae209290193ab4c43aaae2d7db20d974b8149f4d8e32207ec2c6fc653153d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XML_Node-b05d1efbc957d1c8.inputs.json",
+        "bytes": 135737,
+        "sha256": "a1dd9f6553da78ffc9b6c6be7f0f5fbab117dfef16a165e27a1cedbadcbe2219"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPCommon-0c1cf6a54ed93c27.o",
+        "bytes": 968,
+        "sha256": "f8c4fedb4f4cd776f7c44ed5f42d63c2432f2e84b3a3ed604f1d43d9d9352026"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPCommon-0c1cf6a54ed93c27.inputs.json",
+        "bytes": 136553,
+        "sha256": "a9861e0f0586fabd022fafd63d1e8323af88eb94f06d62730fa0734378da3f1d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPCore_Impl-931b6e595a291517.o",
+        "bytes": 39712,
+        "sha256": "e1a91605a7c08d2e8a99dd14c8cb22e34a75f27984c414a4671fa7669a34a0a9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPCore_Impl-931b6e595a291517.inputs.json",
+        "bytes": 137370,
+        "sha256": "68f62944608549ab358a4bb63b098eb1af8a34c7112f22fda590e86dea6b87ec"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-6b2ad114eac0f989.o",
+        "bytes": 31816,
+        "sha256": "b4785821037b899042418d33e9fcf9e421638bcface9d2bd0eba01a68872e971"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-6b2ad114eac0f989.inputs.json",
+        "bytes": 138188,
+        "sha256": "74b77ae8d501d4161b001e0785adc02ccace0773784e393b7da1676658c680cc"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-Utils-39c279b38ee2bca4.o",
+        "bytes": 12712,
+        "sha256": "1b306a103fcd2c237d52972ea1888e44f37cd73fd571ae79b4ba0065653a9269"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-Utils-39c279b38ee2bca4.inputs.json",
+        "bytes": 158640,
+        "sha256": "6e01f945eaeefb045d3da4d16ca49234f1142a7b53087cf4044efb85ae2c1bb3"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-Utils2-e04f021754d36f33.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps-Utils2-e04f021754d36f33.inputs.json",
+        "bytes": 137885,
+        "sha256": "463d768e96ffe1f1b61b9dfcdf6c1451bfa7a6524313dd2eb3b32284a354fa8c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps2-83c1ceff4c2e9f5b.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPDocOps2-83c1ceff4c2e9f5b.inputs.json",
+        "bytes": 2219,
+        "sha256": "ff55af2d95a723e577dad370e3c277d6a439845f136726a871877e82269da94c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPIterator-cae5b21f1635b6af.o",
+        "bytes": 18920,
+        "sha256": "bc6bae0376e197771d50b606b9245dac76c6f03bc34a3787292afe134f9e2442"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPIterator-cae5b21f1635b6af.inputs.json",
+        "bytes": 137045,
+        "sha256": "a8fca30d1b70d8b57b07e00e28ddcec26b1cf80d4edeb4eae0e7b5d11ac10529"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPIterator2-eb38711a87fcabf6.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPIterator2-eb38711a87fcabf6.inputs.json",
+        "bytes": 136570,
+        "sha256": "312ea4ff9bff30b1bc873ae36a197e5ec415821723246e2e92ce1e81e5a12bfe"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-6c14c6ba55c55369.o",
+        "bytes": 58992,
+        "sha256": "1b186b63a4a880c57e0d92f448ea005b544602986a9c8102dca03d5048267265"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-6c14c6ba55c55369.inputs.json",
+        "bytes": 138336,
+        "sha256": "ed3bb1e5bc5b6590e5a6719167e40ef0ced859c02a6d47e9c103870ee63243bd"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-GetSet-31e947d3df38f4dd.o",
+        "bytes": 73488,
+        "sha256": "119f6adce875e180bbb9eedcf6203d13d896e93e46f5d7e994c8aa9ad17fd27c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-GetSet-31e947d3df38f4dd.inputs.json",
+        "bytes": 138519,
+        "sha256": "637de95db2dd6b5378e66fb2a9702989609826a5ac413e7f0871c176c15e8b2f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-Parse-74889543c88e33f4.o",
+        "bytes": 27488,
+        "sha256": "7210f5d1755a095f03f60b792b4a6947cfd451cebc9f7db1c7eca8ce8874165b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-Parse-74889543c88e33f4.inputs.json",
+        "bytes": 138479,
+        "sha256": "e5e19f08efa59fb77faa2b9c1a8c08fc087f99c2628b1bf59c26b1a7fa71652c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-Serialize-4f60646f42e291a5.o",
+        "bytes": 27496,
+        "sha256": "516df3cb69e9af5268dab64cc74e80eb72590119b358d569f223263ef6780b23"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta-Serialize-4f60646f42e291a5.inputs.json",
+        "bytes": 137723,
+        "sha256": "af546ab3a200ebe268d89671eb616a364d8f39dcf467955174b02f7c8312666e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta2-GetSet-3e89a63759d80ac7.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPMeta2-GetSet-3e89a63759d80ac7.inputs.json",
+        "bytes": 135156,
+        "sha256": "a7292c657293b7f1055fb7cc9dbdc0a9c9f247f5c292fd505498b46dbfd1e23b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils-FileInfo-1401e046e2533afb.o",
+        "bytes": 49968,
+        "sha256": "318759a41081be1c1f935518d4cb42817657c5cb0134b9c049febd52d39937ce"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils-FileInfo-1401e046e2533afb.inputs.json",
+        "bytes": 137403,
+        "sha256": "220e4811bcf66574eb9e2fd3ca802e18191b380e10c36cc2606067231da0448c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils-fcfd0bd765f44f36.o",
+        "bytes": 39080,
+        "sha256": "6a9db6a53081bbfe8e2bd28f226fd39655942db61d527519ed93dfd836f5a7dd"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils-fcfd0bd765f44f36.inputs.json",
+        "bytes": 137367,
+        "sha256": "14cdfc120cbcb95082303a6628ca7e1afa8fff38d589a37217dc48e830a22435"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils2-b4797186671f9887.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMPUtils2-b4797186671f9887.inputs.json",
+        "bytes": 136558,
+        "sha256": "461e7d2eb8f6fdc67c88f610e8dfac6ce60cc83ed75ac535a4d777cdeaa95217"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMP_LibUtils-84d071fa868e793e.o",
+        "bytes": 31376,
+        "sha256": "3d6d3e8baf3c090b618ecd4a2f01582c0b394dbf5903ad142daec7b4138f0ce9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/XMP_LibUtils-84d071fa868e793e.inputs.json",
+        "bytes": 135917,
+        "sha256": "6847afee218fba0cbedfe92e8101b8abbc55076cc7b1ccdc77809b319b202b86"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ZUIDSysDep-6dfb3584cb2ecaab.o",
+        "bytes": 2592,
+        "sha256": "11dabd7cdadd01ff50f06cafa791f9b4190cde2949941eb2b1c49fcd729ac6ec"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ZUIDSysDep-6dfb3584cb2ecaab.inputs.json",
+        "bytes": 219351,
+        "sha256": "1d94ec66056b48892e4328144d21930db1f19bbcda22ea48041e2c756f5c4c92"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ZUIDUUID-580d06f0affc38ba.o",
+        "bytes": 2576,
+        "sha256": "dc93c4e9e8c39bed414e3d840fe22b378138017d1a1104543c2ec27f2f0f849d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/ZUIDUUID-580d06f0affc38ba.inputs.json",
+        "bytes": 136125,
+        "sha256": "867f4d2822571a4c45f8f7731236ada0655baa17c4b054ed22850e15d93f3ef7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_1d_function-09d4dd5c0fe545df.o",
+        "bytes": 13168,
+        "sha256": "d0ad565df47a6efed4deac425e5ef57866a85e98c4362364fb4f1f25ac0dfb5a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_1d_function-09d4dd5c0fe545df.inputs.json",
+        "bytes": 137300,
+        "sha256": "2efe1254d76e357b01c38235fa07913d7673fd8ad9f9da47919ea2712a3aa23a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_1d_table-caeee28791754276.o",
+        "bytes": 5048,
+        "sha256": "bea25212b5dc7f55f025f85aa189e23deb93c864c83cc340d8b92cc68570afc7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_1d_table-caeee28791754276.inputs.json",
+        "bytes": 137141,
+        "sha256": "b037a31245b2b344be20dc677668116d64ba8971236e986daa2e89d18c3d29a2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_abort_sniffer-6a715a1d1410e419.o",
+        "bytes": 10160,
+        "sha256": "a7d55881990908575f3b85b94deb90b9dfa1f83131cc8fc5804fe760ae428c0c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_abort_sniffer-6a715a1d1410e419.inputs.json",
+        "bytes": 137013,
+        "sha256": "440a41b0ff1b049b1e324c1ed7d6423fe764679a806a6ab7e24d6a35681240f7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_area_task-f089b0d0cc10e89c.o",
+        "bytes": 22624,
+        "sha256": "dd8bce09b35f8269fa2dab4c768d2992132c2abfddf6061a44ea02c40c95d1d8"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_area_task-f089b0d0cc10e89c.inputs.json",
+        "bytes": 138486,
+        "sha256": "71902920a190444a2e3c7cc45e83e23a38b600ac172fe35ebe2d1552fa114db2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bad_pixels-c45f6637a6ab1439.o",
+        "bytes": 44680,
+        "sha256": "c4213eb468df98956e198ca564302a4043753781630f138fa78e82d0f4970b92"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bad_pixels-c45f6637a6ab1439.inputs.json",
+        "bytes": 142418,
+        "sha256": "896a73c0563a415367f175aebf1e51240e4579ec14df47bf74d612b4ab7ccc43"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_big_table-e7684ff476e5c42a.o",
+        "bytes": 179712,
+        "sha256": "11d4a1f7e1874adb3a74cc2b49b794a54d228862b0f37c8c5f80950b5cfa188e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_big_table-e7684ff476e5c42a.inputs.json",
+        "bytes": 145463,
+        "sha256": "d30b67e2ce5b6db6a70d9e1361d0b5bea5f289528d45206230974145bdefac12"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bmff-2e28510e6ab04e97.o",
+        "bytes": 20584,
+        "sha256": "1e1dbf30edd3421aa963d124c9629b3712f5e5b9654e19621427ae0848582d93"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bmff-2e28510e6ab04e97.inputs.json",
+        "bytes": 140123,
+        "sha256": "ae8a4ef4eea65a352e8859fbd38ce78cf866359905c2f49e910dd9c29abc293c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bottlenecks-718550ccf9da9267.o",
+        "bytes": 4304,
+        "sha256": "9994c38ec1b703a8e94a044a98f17bfcd85d48caa2a489957bb50c576f6b9bbc"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_bottlenecks-718550ccf9da9267.inputs.json",
+        "bytes": 131387,
+        "sha256": "6ed53f514bad97f361e0824335bcc11fb0becb127eb5ea043a9966dd155b666f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_camera_profile-3ffd76cf0dc153ef.o",
+        "bytes": 57056,
+        "sha256": "426f7262d444c92750df066c888da3f83e139c0835c9cc996b78b8fb687785d2"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_camera_profile-3ffd76cf0dc153ef.inputs.json",
+        "bytes": 143924,
+        "sha256": "8e510a0833100deeaba0e536923c8e09479c061998c552884ee5bd9920228cf2"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_color_space-29be34c06590e73c.o",
+        "bytes": 59904,
+        "sha256": "73effbf9e94394fafbe48631d5b6c6c30b2cf7777b31b9b7b43abbd888ab35e6"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_color_space-29be34c06590e73c.inputs.json",
+        "bytes": 138048,
+        "sha256": "d3289d871a5cf13ea08442173d4ad97206a1c5238eaae930eee714b437778d8f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_color_spec-ee8aca6749c7de37.o",
+        "bytes": 16992,
+        "sha256": "f999cdbd51a5aa5b6ccf7283b91c87a8c70096cba0c0641a44bcd3e54528cd96"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_color_spec-ee8aca6749c7de37.inputs.json",
+        "bytes": 142120,
+        "sha256": "80d0ffed2ea6fb3bfe877a77c4e77c7dff4c1069e10a9f21fef4ca71ebf76180"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_date_time-b2fd5bd245fefb3c.o",
+        "bytes": 16520,
+        "sha256": "e0569d7ab76d86e2b75e32ee3be56bf7b9eec1e92d83d706c6153e7064abc98b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_date_time-b2fd5bd245fefb3c.inputs.json",
+        "bytes": 221121,
+        "sha256": "b865a0c9973e3ee197f884add832f66058132dda54dc552cfc40f4f75ae62d01"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_exceptions-23e9e33bf5d1b112.o",
+        "bytes": 4960,
+        "sha256": "174b1bcc09ce77a6ade90c8d7cf0b49fa097a956a5fae4a1765b647d974cd833"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_exceptions-23e9e33bf5d1b112.inputs.json",
+        "bytes": 115787,
+        "sha256": "4b8151ed8f42416122b12381431ad440fccd3401d8e8f998535e7431c67c5acf"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_exif-c514edc9dd9ecf1e.o",
+        "bytes": 56680,
+        "sha256": "e06e4a38133aacf19cae257ed5bd318041a4df248bf2b80160c32d513ef07f9a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_exif-c514edc9dd9ecf1e.inputs.json",
+        "bytes": 138465,
+        "sha256": "44081b534444505d7c8178305a46324442ba6980232b0c23af11dbd30d5f36a7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_file_stream-4b411bce48382c75.o",
+        "bytes": 5392,
+        "sha256": "230fd3c4ccb43bd6e5bcffab24458a1a906854abe04f45c505d9a6eb52b723f7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_file_stream-4b411bce48382c75.inputs.json",
+        "bytes": 137149,
+        "sha256": "f7c42f0e5db2ba290d8ca7351d4f9db72d750a62a4deb26c5df3797cee89b487"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_filter_task-2e01ed087102580d.o",
+        "bytes": 6224,
+        "sha256": "1bba91f9b0bcb671700304c806d155ee1bade054171ab6ee57d3d16c87ad4cca"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_filter_task-2e01ed087102580d.inputs.json",
+        "bytes": 138348,
+        "sha256": "ef1d56603bea245cc75ae88dddda614c6e9e807d89eb26ba41f6e6eacf278f8d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_fingerprint-2797d362544f9a50.o",
+        "bytes": 13728,
+        "sha256": "a8bd81a949e410dd60d66af880709192132193674dfd7cb0e51f30ac1257b41d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_fingerprint-2797d362544f9a50.inputs.json",
+        "bytes": 137300,
+        "sha256": "109681cf70eda9584567c5a025b0539b2cbdadb3467070c26de2da9397914662"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_gain_map-47f26764b4eae3a4.o",
+        "bytes": 30792,
+        "sha256": "70c6144f6e910c500c018e2b0ecb82d85e5b40fbbfbfd7b40a1e92cc27a43759"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_gain_map-47f26764b4eae3a4.inputs.json",
+        "bytes": 142259,
+        "sha256": "f42b1c4bf77b5a122f3f147b2ff2732c143676edee0c3ae700d30fb3315b9164"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_globals-aa762e1d621955b9.o",
+        "bytes": 864,
+        "sha256": "8f59d28126954f27dba8024633e07eb6dc58e55d94662e833d7508f4aa30be0b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_globals-aa762e1d621955b9.inputs.json",
+        "bytes": 40229,
+        "sha256": "3aa765b95ff42578a87348c16f7eab5189b994f13c82a6feb69d0acbca7c65fe"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_host-f2d4de670c76e6fe.o",
+        "bytes": 15112,
+        "sha256": "16acc733d0db967d8e35558e3bcc4fc7eca9b6c785cc942f3498cdf4763f01e0"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_host-f2d4de670c76e6fe.inputs.json",
+        "bytes": 144034,
+        "sha256": "e520699c91fbaffa0cc009612e7c247786fc561cb6766022355644ee316781d6"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_hue_sat_map-5e50628e20d61b9c.o",
+        "bytes": 17824,
+        "sha256": "a37197abdd1a99fdecbd80003bba462d5991d8cc31634014a824502f475cfe8c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_hue_sat_map-5e50628e20d61b9c.inputs.json",
+        "bytes": 138201,
+        "sha256": "f2c9e735eb3c70962fd099fdfbe96115837db32c0e4d8b8bb34b4718755eb77d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_ifd-390e465bedad8a6d.o",
+        "bytes": 78432,
+        "sha256": "2557d297144909c2a062b004903aa8788a72adb6e375a9e6d8e0631f69bc59e4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_ifd-390e465bedad8a6d.inputs.json",
+        "bytes": 143133,
+        "sha256": "519d8d418de793b6c015f99e5592b79fefafc16fc0f16375295475ffb60210b8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_image-1a58a11e71d3cec8.o",
+        "bytes": 28312,
+        "sha256": "ada2696f7b665521ce4b47e3f13e68bb5208dae5f4def829b41c8c79d6442e94"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_image-1a58a11e71d3cec8.inputs.json",
+        "bytes": 138023,
+        "sha256": "9ae250932413098ca02f690fcd683569cb06f61a1e4826d65270983f76884dd8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_image_writer-254ce9590e16d6b6.o",
+        "bytes": 251320,
+        "sha256": "0937985bd7b30bd17ad127ee53b3f955241d6b45d99495fe75df3a23c35b0923"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_image_writer-254ce9590e16d6b6.inputs.json",
+        "bytes": 147084,
+        "sha256": "f10e6dcf9dfce56ebc0a1abbc4513187c45f2ee21b4fe96a9825c16b76a01c98"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_info-619207065e34b90c.o",
+        "bytes": 38680,
+        "sha256": "a383a514ab3ab668db3903306b7e798496680ea983bce856d985a429b690ac86"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_info-619207065e34b90c.inputs.json",
+        "bytes": 142974,
+        "sha256": "ccd0a60c50bec416e49fdef851e7117deddbe4af1bb3c879c90eb8f6439721c9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_iptc-1adf523d6333247d.o",
+        "bytes": 17360,
+        "sha256": "ba75b88526066453692e1985a4f55370f310125375a5db857874c81eaccfc3c0"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_iptc-1adf523d6333247d.inputs.json",
+        "bytes": 137721,
+        "sha256": "e979357ac821000ad1015dca7e9fe9eec2b63445e8cafa46dd4a216429ca1a7a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jpeg_image-a4642f54aac80e9a.o",
+        "bytes": 36840,
+        "sha256": "8dbbaf09c18e3acf770064fdbfb8eaaa20e4919cac0146c5346c6a8a419415f9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jpeg_image-a4642f54aac80e9a.inputs.json",
+        "bytes": 143659,
+        "sha256": "051f90fb0cccbeb3e2ebb5cf68bb66e3da25d04648d5ec52f69b7ffbd38ddff9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jpeg_memory_source-4a9d4d471cccc45d.o",
+        "bytes": 1648,
+        "sha256": "844c1bae1b4e8edb4f0fd0252c82cc26ad3f0087e432bf5feb340eac5f25a81e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jpeg_memory_source-4a9d4d471cccc45d.inputs.json",
+        "bytes": 116740,
+        "sha256": "d6b1726372687790c5430175a39f575235b0d4313268d186edbd98455a718154"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jxl-b130a4b0851fe3ed.o",
+        "bytes": 66640,
+        "sha256": "348fc25443871369bdeadb291b9ed3d4f555ad8e778581e98f15db984cc3bdd2"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_jxl-b130a4b0851fe3ed.inputs.json",
+        "bytes": 146504,
+        "sha256": "9b113dcf08cd1dfceceedb4b79e62820d59fefeabadf11d158590b2387d8a246"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_lens_correction-d3e358518ce2b377.o",
+        "bytes": 68576,
+        "sha256": "248d7cc520d5e467c27db328d412d8b3298fff05251ff9df9d59979b858d6d3c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_lens_correction-d3e358518ce2b377.inputs.json",
+        "bytes": 143503,
+        "sha256": "1d15aed3c466d802225f97e60fa2f1e8232c6fce14bb493b07cf4395824fe705"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_linearization_info-5221dddc8c85daba.o",
+        "bytes": 24560,
+        "sha256": "3c93e81c476fb4feadc5d07361ef04cc7cf7a6c161d3cbc88c53633c10512548"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_linearization_info-5221dddc8c85daba.inputs.json",
+        "bytes": 142884,
+        "sha256": "8602957df55a6953956f55dc000bb361cfa49269065a5fee94d6a29af9d67383"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_local_string-5f5373d6a37d16a8.o",
+        "bytes": 10616,
+        "sha256": "858c081e06ab9f66cd7b19cb9f9f1408e91b440f8e07d5f063d1441eabc17d20"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_local_string-5f5373d6a37d16a8.inputs.json",
+        "bytes": 136563,
+        "sha256": "e9f33a25e7de1493d5ddab01b057746850adbbdc572cfd7384693d11f6a7963e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_lossless_jpeg-7601a2b62a9e96ad.o",
+        "bytes": 109392,
+        "sha256": "799d7e2da3798b34fcf34cf2277f65f58761c6a2ec84091eb17905bd043d9ad3"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_lossless_jpeg-7601a2b62a9e96ad.inputs.json",
+        "bytes": 138077,
+        "sha256": "818aa5d6faee957d98b4e691fdac9be99a134b12040aaa92f33d0dc5842f6144"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_matrix-0a09c918beb7a549.o",
+        "bytes": 36712,
+        "sha256": "faadfbad82390e27ac7a53d6bf82c95c44f830f9092e06d5b61325a9d7bcc4e2"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_matrix-0a09c918beb7a549.inputs.json",
+        "bytes": 137578,
+        "sha256": "068265b93fa5b3a748d4dd6a0ef6d24b12c2c26b9f4fa339b1319cbf1895170f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_memory-2260d849526a0d88.o",
+        "bytes": 8544,
+        "sha256": "7781fa13fa65c61b2f990e9347d40a85ef50bcac59441b0f957455f5b5bd69ae"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_memory-2260d849526a0d88.inputs.json",
+        "bytes": 131665,
+        "sha256": "cc0cac1ee5b68fd8f8fc105d97ff6a3ccbe14094a7c9cd990aa237c7f8337fd9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_memory_stream-8537ae99ccb2bd10.o",
+        "bytes": 6568,
+        "sha256": "28ae377d28ccfc3d810b2b6558312ae0d15268adc892abb87416266c4427c59c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_memory_stream-8537ae99ccb2bd10.inputs.json",
+        "bytes": 137311,
+        "sha256": "ba51b3964bcf4fc1f27786a14cec68e98ba8ef5e9b72e146e2bac29f8e642cdb"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_misc_opcodes-ca711800aca720b6.o",
+        "bytes": 41576,
+        "sha256": "c98cd3631bbe8d01ee6b143a145a8e9a107d98d2eaefad5af52c6d68577bd977"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_misc_opcodes-ca711800aca720b6.inputs.json",
+        "bytes": 142278,
+        "sha256": "8fa08c4343838e32df2ce1350f9ddb5eccaadbf90d2fdb13fbf6692397c18b46"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_mosaic_info-672e40e38f907efc.o",
+        "bytes": 34472,
+        "sha256": "90c0894a1246c141cc1a676cc6b7fc8dbe3af407a540144aa111f84acc7848d6"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_mosaic_info-672e40e38f907efc.inputs.json",
+        "bytes": 143160,
+        "sha256": "b3366b534ca6437762346ab656dcb577417425367dcfcc2cfb0df395f713869a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_mutex-d1be5efd080c38cf.o",
+        "bytes": 8768,
+        "sha256": "61547fd6f2901882a77515ae13fd65be5f6b0f27e94729f191ab36030eb0c540"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_mutex-d1be5efd080c38cf.inputs.json",
+        "bytes": 136981,
+        "sha256": "16dce4c83551e73be2fd17c51f45315b9fc59b73606058ea70ab80786175176e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_negative-9b6bb3eda07c8d1e.o",
+        "bytes": 206056,
+        "sha256": "5f0068c630553ec434899979cb681abffdf0b2d84ae50c3485e3bc89612eb843"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_negative-9b6bb3eda07c8d1e.inputs.json",
+        "bytes": 145401,
+        "sha256": "2019805841f227a4829914a6d48e65802bc872845e49095d3f5b2294b0c6aaf9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_opcode_list-16a234a358c13f7f.o",
+        "bytes": 8944,
+        "sha256": "a959a43c119ceb2587c5b6b5fb307f54074b2282699b33255362ab1b160dceb9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_opcode_list-16a234a358c13f7f.inputs.json",
+        "bytes": 142123,
+        "sha256": "78966afaa5247f1fedc0a0fc04c2a946e6804c13063d965225fff62b6b149cfa"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_opcodes-8767a1c8c6e1bc33.o",
+        "bytes": 16984,
+        "sha256": "eefc41d44608eff903a13c2af0c21fb4475888706b08c17d626f08cad2c0c794"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_opcodes-8767a1c8c6e1bc33.inputs.json",
+        "bytes": 142559,
+        "sha256": "291fb69cff86f5957fae95a0364a3bbb919baa74e3c747a3f821bba8688cf533"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_orientation-120dde20eee6abc5.o",
+        "bytes": 4392,
+        "sha256": "86c68214b8a84243959fd4bd5c7db59425130ec1aec7712a3f44b55aaf2f5bb3"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_orientation-120dde20eee6abc5.inputs.json",
+        "bytes": 131231,
+        "sha256": "bbe6bb67c3daa75b216fdc18a56cddd0c94db1a707e56d8a8a1469cb40f611ba"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_parse_utils-ae421ddf630191ed.o",
+        "bytes": 70968,
+        "sha256": "48b8af54aff8a6d44356154c068635e440474fe6eae2788bea243867fcc88199"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_parse_utils-ae421ddf630191ed.inputs.json",
+        "bytes": 142712,
+        "sha256": "79e493a6b486d33b05e92aaf7dbc66122f795acf4d87370c54b5f64768bfe740"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_pixel_buffer-51868a4871836ae1.o",
+        "bytes": 24232,
+        "sha256": "3b59e04632243b94abfa5a20ed293c9aaca600857dd4762438401f1a53847d12"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_pixel_buffer-51868a4871836ae1.inputs.json",
+        "bytes": 137604,
+        "sha256": "5405b4bec85eecdf12b2ff8eb24df3f6fb59d2971b6bd03e5ce8993534861aa9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_point-98c186a708d8d1fb.o",
+        "bytes": 208,
+        "sha256": "38e3bb0f9bc7b2b7edd96687c9d0e4a40e00bf1e4d4f1623b15f5daed2285300"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_point-98c186a708d8d1fb.inputs.json",
+        "bytes": 136674,
+        "sha256": "be039de7a430c99e19759db6a655fce1ba58557ccbb50f6a3d0bbce5b3c658f5"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_preview-54c8f36a2cbee0c5.o",
+        "bytes": 51992,
+        "sha256": "e31d2c09e1adf2c61b51700a2313fffe028c6bc7b70796c6a6b7afc3c4f10ec7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_preview-54c8f36a2cbee0c5.inputs.json",
+        "bytes": 142697,
+        "sha256": "a48436a10bbbdabf10c5217b795b21083558c3dc03136f29f2f7169d8aba2683"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_pthread-4a77976d1034006e.o",
+        "bytes": 776,
+        "sha256": "760a8d3dbcac33c7493aa91540c4e386ecb788d771eb11ad1d2e657f87234610"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_pthread-4a77976d1034006e.inputs.json",
+        "bytes": 132443,
+        "sha256": "e7789c1e540a9a7fe50e5697b99eb2a2571566b7a4b89b7e2388a44f43375fe4"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_rational-68488bc13a14d276.o",
+        "bytes": 3712,
+        "sha256": "e280457e8b95d5f908b22661d1d2fcc28f690de9c4ca810b354f70293c73f274"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_rational-68488bc13a14d276.inputs.json",
+        "bytes": 136689,
+        "sha256": "b46256056184faa8107aefb217ec85cdebc1bf289d6a0eca77725e8d7fb84035"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_read_image-13c65d08ad0018ad.o",
+        "bytes": 71048,
+        "sha256": "c5ab61c55d28da1b19650605330e8006fa676eafe81397b11af36500c261ab39"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_read_image-13c65d08ad0018ad.inputs.json",
+        "bytes": 145437,
+        "sha256": "2a7334936fcd1f1cebfda82f0bcb9b490709fa1b7be3714cf6745f9f1623c549"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_rect-25667caf19a8f2c7.o",
+        "bytes": 3168,
+        "sha256": "7c14a48d4980feae0495e917d9e87209ba77a65a20ab07afdd1507a4931d0749"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_rect-25667caf19a8f2c7.inputs.json",
+        "bytes": 136815,
+        "sha256": "30a2ef56cf067f9607c21efc821907a282d4967ae8d4af37bb8a1fb655202cea"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_ref_counted_block-18848871a9740339.o",
+        "bytes": 4360,
+        "sha256": "aa5e3f6dc8e49579589613997c5d3650b331e0730dd5a2806ed456941270b2fe"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_ref_counted_block-18848871a9740339.inputs.json",
+        "bytes": 118940,
+        "sha256": "c7d02fa1496084cf7e21fa15add7f7f27e011017e42f279cab8967420ec937ec"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_reference-e8d421eea33159e1.o",
+        "bytes": 50336,
+        "sha256": "18287d64c2d4eb3aaf1d4bf89dd1767aed1ff991fc81113153d83240001961bf"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_reference-e8d421eea33159e1.inputs.json",
+        "bytes": 139987,
+        "sha256": "b97a255076030f052e031bdef4f298bbe5598a7ce8f25884fdefaa43be5ac2ee"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_render-e91aecd7f9b1ae79.o",
+        "bytes": 53120,
+        "sha256": "68a54316ef1c615679fab79148fb66c3800781d4a655e3e2e2366e96855b1424"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_render-e91aecd7f9b1ae79.inputs.json",
+        "bytes": 143450,
+        "sha256": "1bf0e6b88ced1f311afd423ff54ed9636db4551ea95eb388864b5ac9052108c0"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_resample-bb9cdf6543441c06.o",
+        "bytes": 20992,
+        "sha256": "dba67a6ab24f7486b8caca4ea7d7d924e88ef60c48bc679a932e2b4a0a0cc84c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_resample-bb9cdf6543441c06.inputs.json",
+        "bytes": 138479,
+        "sha256": "41d9acdb79971d8714123bc4b4a84734021cd6b4aba4a998d4fbeeeff2f55e37"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_safe_arithmetic-6075ac82721fcdbe.o",
+        "bytes": 9808,
+        "sha256": "daf5f91251c7973b27b353fc921ce513cb97dd651932305f467c8a1b53033b54"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_safe_arithmetic-6075ac82721fcdbe.inputs.json",
+        "bytes": 115723,
+        "sha256": "c8246dd35e8ea0f651e9c1589fef4a027f70955eb4fa07e792f4ee808cc6eff5"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_shared-26071bba91671a34.o",
+        "bytes": 70840,
+        "sha256": "2c5165d4f7f1b2e038faafb8d83e90d03b1fd2766b4deda4240ac35041392e30"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_shared-26071bba91671a34.inputs.json",
+        "bytes": 142852,
+        "sha256": "c12236cf136dd9ae7b8cdcb444cc996c5862a5423e51a7310a322dd51eace661"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_simple_image-b28728841301514c.o",
+        "bytes": 8304,
+        "sha256": "699173b1f1a994e554895edf502493c3959b0a7b1b9d66e57d64024aac1c698f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_simple_image-b28728841301514c.inputs.json",
+        "bytes": 138350,
+        "sha256": "332f18f47b2a8207c2df6e94109d42b0613367967637ef52b5ab3b08fcc3baa7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_spline-a31a84b677898d84.o",
+        "bytes": 10360,
+        "sha256": "192dc27df10cc44141ffdffdc2d598f1d35da2cf0c4b82c99e248de20c63da12"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_spline-a31a84b677898d84.inputs.json",
+        "bytes": 131963,
+        "sha256": "5a5b65da72e2347120a2bb2956eae7900eb4932bde701825888ed2953802ade6"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_stream-0ed478d2fc441781.o",
+        "bytes": 26536,
+        "sha256": "74f370311389ef5223aef75e0fd59741337fa1f9397ec42888a6d7a8d315bd01"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_stream-0ed478d2fc441781.inputs.json",
+        "bytes": 138175,
+        "sha256": "e1449c429391e9bc6c69cf9129c67d0d08c51410e84ca18b1fb8075ee96b1274"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_string-6b5314951398b1b8.o",
+        "bytes": 40792,
+        "sha256": "2acb193bdcefd6fe0b9840db34efc41ee547192a313fc9b2b4d94f95ac37488b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_string-6b5314951398b1b8.inputs.json",
+        "bytes": 221114,
+        "sha256": "0a212fad59b734b28af249461053f99f0c9030ed6b24063c9715e516273235d3"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_string_list-f619255a377d716e.o",
+        "bytes": 7472,
+        "sha256": "b5ee537ec1a5adcea5b46561d336be6b412569e9b3387330e5328566f2903c6c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_string_list-f619255a377d716e.inputs.json",
+        "bytes": 136558,
+        "sha256": "ff83d850b6cbaf15408b1129d78ffcbe55c61fc27dbc7f1cb69f1ed015db3843"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tag_types-9edb987e2d746c16.o",
+        "bytes": 856,
+        "sha256": "2ade19f57c5c8640003c286fa31258474364d971a4dad53064b9690e77943a46"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tag_types-9edb987e2d746c16.inputs.json",
+        "bytes": 40089,
+        "sha256": "0549a95223fe70f47a9bc31d892ca597548468032f382c2a58b8aac36377eb34"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_temperature-45471203a797aa93.o",
+        "bytes": 15488,
+        "sha256": "c783b5f1bc404317db1b0f6d8f1b96ca1d3857f6155517ae997c3ebd3612161f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_temperature-45471203a797aa93.inputs.json",
+        "bytes": 137002,
+        "sha256": "3ac8b3436f0cff893a1c606ef6ad92c8a38a106c1fa3924aa233ad38c404c736"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tile_iterator-15bdf94a7578ce71.o",
+        "bytes": 10056,
+        "sha256": "6cb393b9e9db6bf5fb0c2b48e0ae527e5fb7bc43c61782d72e3c01825dfae11c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tile_iterator-15bdf94a7578ce71.inputs.json",
+        "bytes": 137605,
+        "sha256": "47540f2590382bf58e41f828b11ede7c55b8d822bde63017f54467a26a523f40"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tone_curve-0d406a929c356373.o",
+        "bytes": 5472,
+        "sha256": "188d7f9dd050e7548b4e5670d8e06b95f596bcd5bc22a4d31e9451615b483693"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_tone_curve-0d406a929c356373.inputs.json",
+        "bytes": 137295,
+        "sha256": "4cd71a7d9380adc3e66f0c1fb4faa3c9d2b4f81cfcabab638115e4dc9414d43b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_update_meta-6cfdade168e6ab71.o",
+        "bytes": 83152,
+        "sha256": "ade1f002d6c011690385f01135ec41ef85ec3ddb7d2bc512f78015028f86188a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_update_meta-6cfdade168e6ab71.inputs.json",
+        "bytes": 143014,
+        "sha256": "46883f3d34829265d4d21696eee7436117ff7f1036a10cd1ba3a3cbf065a2b7d"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_utils-feb47c3d1926db42.o",
+        "bytes": 33928,
+        "sha256": "b022ff0df290f1617053e0408aee9e5773dfd68cb14bd3877f40428f361d5e8d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_utils-feb47c3d1926db42.inputs.json",
+        "bytes": 223989,
+        "sha256": "e2d5fc6726348f9d5f31899114d5eff77c9eb00c216d7a67fe312613b12014ba"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xmp-711f5c5d23032917.o",
+        "bytes": 69320,
+        "sha256": "8b292e279d67ac34b348d0a01b0535357d71c9d7adde54d7d57958e9c9203a0b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xmp-711f5c5d23032917.inputs.json",
+        "bytes": 142976,
+        "sha256": "b326ae1db28ddbbc3a75a7dddb9ded37729d84ecd5ea4540e4a3d049c89173f9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xmp_sdk-36c89007ff991abe.o",
+        "bytes": 134504,
+        "sha256": "dd2b35858930e85a7aa8a4edd65d49fbe29b8b70d029bb0d1ab06ff68ee3cb89"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xmp_sdk-36c89007ff991abe.inputs.json",
+        "bytes": 141400,
+        "sha256": "df2934f97d829954fe9aa98ad15382c11d52d3d25c7479269191203a5d1750bc"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xy_coord-6487dfafaf6ce3b4.o",
+        "bytes": 28432,
+        "sha256": "849361311e8416d9e94f820a5b9a3e0020043a2ee2ec8ddf2ee122b86b86f5df"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/dng_xy_coord-6487dfafaf6ce3b4.inputs.json",
+        "bytes": 138482,
+        "sha256": "cc35ee51fc4006984405fc42d0b17573bfaa5984f44553a6073ce9176073de0f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/driver-bfa5f6b82336127b.o",
+        "bytes": 151352,
+        "sha256": "9b75242389993ec67735c06ace2880eda7a684e4aea78aaed7778a5d97760d47"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/driver-bfa5f6b82336127b.inputs.json",
+        "bytes": 152928,
+        "sha256": "b98471ac93f63b7ce5bac085e67e1ee3068a119e106f6d367c7162c582edd04b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/fixture_writer-74da7cb9994c37e1.o",
+        "bytes": 4752,
+        "sha256": "bdfff9c19ad779709491b87c0125b410c54cab1001a62a7c2caa7bc18e7702e1"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/fixture_writer-74da7cb9994c37e1.inputs.json",
+        "bytes": 143273,
+        "sha256": "44b32fc93b0cbb13b961db031fc322f027116fbab6fb2062c3c7201e117ff2ee"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jaricom-a641100ee3997b9f.o",
+        "bytes": 1336,
+        "sha256": "3bb19500ad3a14cf421189502fe20f6445328c51c205575a1110c41007bc4dcf"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jaricom-a641100ee3997b9f.inputs.json",
+        "bytes": 19247,
+        "sha256": "6c9e3d80a99406470faebe4a4ba1550f9521d72c62cb80743dfcf54e8d15df4f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcapimin-f5be0d9a6577dbda.o",
+        "bytes": 3200,
+        "sha256": "df46d4ee5833f0e7a87b0e2cef3411c14681b6ea35547c362f79a1ad6cbf096c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcapimin-f5be0d9a6577dbda.inputs.json",
+        "bytes": 19251,
+        "sha256": "6684bf3d093ccee4f4b4d20cf5ea3751de02ea5aed1a7e402af9dfe74222e867"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcapistd-6c63b7157a57c692.o",
+        "bytes": 1512,
+        "sha256": "6e477f7af44c56c0710e264679608aa03af4100c324ee685fef7fbdc8e5d820e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcapistd-6c63b7157a57c692.inputs.json",
+        "bytes": 19251,
+        "sha256": "6d178810f4cdc594b8c7ca6f5f12a81002359d1a0a76eaa68b97f723a5040329"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcarith-d5cbd60474121597.o",
+        "bytes": 8896,
+        "sha256": "65261dfa20b5a079ffbdca8edeb55a6cf8e766e950913712e37450d8d1b788d7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcarith-d5cbd60474121597.inputs.json",
+        "bytes": 19247,
+        "sha256": "c0ce335f786d8f6bfbadbd7fbb25b0581350eaf1ed2d35e901fe6e715083cbf9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jccoefct-0efe47dd2ac8f036.o",
+        "bytes": 5016,
+        "sha256": "e94a71a53195f31a85f64ef00d608e65075f531905fd14cd62dfde97fe304c68"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jccoefct-0efe47dd2ac8f036.inputs.json",
+        "bytes": 19251,
+        "sha256": "8f2fb093a1d1a5774eaff25bad0e631b919874ce8168d56bba7d88e9d7bacd9c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jccolor-fca0b76acaa968e9.o",
+        "bytes": 7496,
+        "sha256": "ff11692a75a139feafc846f67d97ee28024d826bb8bfe2cfbe78e09581dc44ec"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jccolor-fca0b76acaa968e9.inputs.json",
+        "bytes": 19247,
+        "sha256": "c99bb2b18cb9a2afba3e335f04975d8b328549f1e5647856b5615a09812dec93"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcdctmgr-49014f8efe0e3203.o",
+        "bytes": 6664,
+        "sha256": "579244698a59d4382d5097aa72ddacaef30c1a00f416a214522690f93b0965a9"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcdctmgr-49014f8efe0e3203.inputs.json",
+        "bytes": 19385,
+        "sha256": "231a06fbac3438dccdb970d2f126261a8120a6864458dedd89bee2a505fa2e22"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jchuff-11cdea465b15e66b.o",
+        "bytes": 14536,
+        "sha256": "6b4e118bf1d6456b93ea7592a6a38c35e1b4e5e2ecda803b56b9f9ecf21d8c7a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jchuff-11cdea465b15e66b.inputs.json",
+        "bytes": 19243,
+        "sha256": "420f534abc0ff3f0e88355469cb993be45b1f580b49530ac5e6357e687ba2fa1"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcinit-dda23dcbe012b701.o",
+        "bytes": 3008,
+        "sha256": "65e685e678c2e5cb60c119902f7538326badbf77fb1b5c5a29647542c1be4865"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcinit-dda23dcbe012b701.inputs.json",
+        "bytes": 19243,
+        "sha256": "36dec4c80c13e974f0bcf28ea8e6d4f7740dcf5c0c5cd6b7f4d97c190a727d72"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmainct-4f1090c793020ab0.o",
+        "bytes": 1416,
+        "sha256": "9c403f1b08232228182d9b4f3bdd0cb9b612f826835d9167c3a0b8203cb1f10b"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmainct-4f1090c793020ab0.inputs.json",
+        "bytes": 19251,
+        "sha256": "93824a56cf2aa009774635795759c57c85d638bd81a205c6377c20d06ced4bfe"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmarker-df0d8ae3b40d50c4.o",
+        "bytes": 11392,
+        "sha256": "0472910ec1201ec2df7bb9f00cd8da4b84932ff1ab5651c77d0a8e6eb8eb685a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmarker-df0d8ae3b40d50c4.inputs.json",
+        "bytes": 19251,
+        "sha256": "f4985df390313fce089542ae63755f1bc9e5052a1b1b92967e1223538e98298e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmaster-d36026ad144d6b13.o",
+        "bytes": 7248,
+        "sha256": "ff94fffe7586a334312d570181fd883580c440ed9cda71f91b5a4db3e4fc09fc"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcmaster-d36026ad144d6b13.inputs.json",
+        "bytes": 19251,
+        "sha256": "8ff875de74ee1c8ecb3f3ba55caff6a69df25f2e673b910acf660436d74469ea"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcomapi-1196e36ed435818b.o",
+        "bytes": 1152,
+        "sha256": "820bd4b255efd58a881c007e946c5287960d6e1fc39cb3a9e1255249c75d14af"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcomapi-1196e36ed435818b.inputs.json",
+        "bytes": 19247,
+        "sha256": "68aa3c436c8230bbb23149c1300b9dda535746da26be6e6bd2d2c15ff6b47e90"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcparam-336a650a73b7c63c.o",
+        "bytes": 10960,
+        "sha256": "5b335d6624b855cad163e574a906f3b3f6a7a10b80b9bd97150c879657407352"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcparam-336a650a73b7c63c.inputs.json",
+        "bytes": 19247,
+        "sha256": "c9b6715bee5079b2dab2b7dae508b79aee83df7af17c6b64a4dd7b72b34f244c"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcprepct-110df2b1b15639f1.o",
+        "bytes": 3704,
+        "sha256": "e1d43bfb4957d2e70740daebcdc2bbda19215e8476cf81181d27785580b25b3d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcprepct-110df2b1b15639f1.inputs.json",
+        "bytes": 19251,
+        "sha256": "ecc940f74526d90d278dc9c4b4bf660c738ff2eedb33d1f912fdebee86ef0698"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcsample-7aad05c7f448fa45.o",
+        "bytes": 8136,
+        "sha256": "ef5b1e8eeb28249e55c8db1918f534b1bf2dd63efbd05101b28e43ef631b862f"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jcsample-7aad05c7f448fa45.inputs.json",
+        "bytes": 19251,
+        "sha256": "3d803277919d4bdf451e245c568b432861868102fedfdb562f26e2946081c50b"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jctrans-d8f3683b9dc056d5.o",
+        "bytes": 4504,
+        "sha256": "a34a524a205db3434cbc06a52fbeaaa1da0fd12d2afee2ad4e0ba5ccafb31ce7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jctrans-d8f3683b9dc056d5.inputs.json",
+        "bytes": 19247,
+        "sha256": "be5e8fa6949ca4ddf3640bcd359582a9e99befe22f32d757e70106b8f7b3fc44"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdapimin-4ad1ea4774459f3a.o",
+        "bytes": 3368,
+        "sha256": "36a82a4c1a77033bdfcdf3b544e72982c575be4f7b7665958194ffa9d55889df"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdapimin-4ad1ea4774459f3a.inputs.json",
+        "bytes": 19251,
+        "sha256": "bbfe588f78219b18f6b2b7b13ecdfad283b6fc827b7a088789e97a1ab76dd13f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdapistd-464fb4a4ed382c44.o",
+        "bytes": 2432,
+        "sha256": "e21abdae2aedfa0ed23f9682822ac2dff12cee5aac1a3502f6f32f17a2d062c8"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdapistd-464fb4a4ed382c44.inputs.json",
+        "bytes": 19251,
+        "sha256": "6bf62edde3fac64f5ded02c9afbdd030fe5959aca4099bc887f71918d6d5af56"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdarith-3178b01c3346e017.o",
+        "bytes": 10552,
+        "sha256": "406252868dc006b6982b10af16d4d5fb0247f937bae89c1d3fb370545318659a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdarith-3178b01c3346e017.inputs.json",
+        "bytes": 19247,
+        "sha256": "aa1fe07c601baa743219455d1ee068ea6af782c9cb4a53bd136a530702b46b4e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdatadst-aef6ff8a9d757b59.o",
+        "bytes": 2552,
+        "sha256": "262e086a1a9cab9e41a7d8cbbef17cc22b532b90f7793dea03907a0548266733"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdatadst-aef6ff8a9d757b59.inputs.json",
+        "bytes": 19114,
+        "sha256": "9c267e949fe62a5a95ecf667cad5fbd5dfd28ac1d62fa2f44908fe4c9d4e73e8"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdatasrc-6eb16512d1c18649.o",
+        "bytes": 2384,
+        "sha256": "12c1a2c6ab3884ceebf95db7bf0d9261108a28b12c72210c0d8e84109abbec6e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdatasrc-6eb16512d1c18649.inputs.json",
+        "bytes": 19114,
+        "sha256": "c7053157e5d1b2bbaed0f5ac6f84c4f28825ab65641117ac99579bdcfe424e7e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdcoefct-fab14b5ea1cfb403.o",
+        "bytes": 7600,
+        "sha256": "0886868d742695411161a3c8c1bab0c64faf0f9aeabffd8c50d9e167e905cb3e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdcoefct-fab14b5ea1cfb403.inputs.json",
+        "bytes": 19251,
+        "sha256": "3c9df422d308405681e682f4c889c698b1b40aa96bf8d842349ae5372128f5bf"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdcolor-07e0b83a4d7a07ac.o",
+        "bytes": 8032,
+        "sha256": "57e7d1ed36b8aa31ecbaeeba5a9a88f4cf07f97de0fefca8e1b1fc9ae1503460"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdcolor-07e0b83a4d7a07ac.inputs.json",
+        "bytes": 19247,
+        "sha256": "68873c3adc2622aa04ea4d8bebc8b2069079d960d080422e600e38008f57dc83"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jddctmgr-d9cd2bf1c699e73f.o",
+        "bytes": 5504,
+        "sha256": "dbfca17d65bcc5e07a1d1c7a4429f39f7bb51ba624aea7e93f73d82747932e2c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jddctmgr-d9cd2bf1c699e73f.inputs.json",
+        "bytes": 19385,
+        "sha256": "40af7c5f6e49e5471020e7f7db53ef0aef36d99f67141020c8a9c86f910ca469"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdhuff-8ea1460765355451.o",
+        "bytes": 14368,
+        "sha256": "2176f61174684dc5d71afdca9c6b72a89b2751863e1ae40ff24fd1bc6656b366"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdhuff-8ea1460765355451.inputs.json",
+        "bytes": 19243,
+        "sha256": "24055cac45aabc015af99daedbad709e40d96310e1ddc06107d408c361ec5745"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdinput-693666293cd185e8.o",
+        "bytes": 7168,
+        "sha256": "e8264143cf71f87b81914b7e8da6190413cbad1a00ce85673c220077f7b777da"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdinput-693666293cd185e8.inputs.json",
+        "bytes": 19247,
+        "sha256": "40939e09e4f2b5881f8164cb4bb37089e592f57e8973ca62c6569f91159ead71"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmainct-908ed112a843cf18.o",
+        "bytes": 4520,
+        "sha256": "6e928b8d27edda377e2fd697e9243d57cbe743750f1553154265f9f15b81c23e"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmainct-908ed112a843cf18.inputs.json",
+        "bytes": 19251,
+        "sha256": "1abf7cc4957ab832d890ced1f1a392e9911ee0bee9731bf6f4285c337a4c9aa7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmarker-7772a1a92d4ef879.o",
+        "bytes": 16760,
+        "sha256": "af8783e76566253f774050c83061f498982b5bc46906e4fdc1c17d832a25eba6"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmarker-7772a1a92d4ef879.inputs.json",
+        "bytes": 19251,
+        "sha256": "a3a3bc51ebd9e3762df032581e946788a2727a1ed625795ac9109baf2558847f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmaster-70f16b8f7dd6cc3c.o",
+        "bytes": 4984,
+        "sha256": "b523af4d214f1f02fd1056556ebbea0876bd269f9dceab85a6aa27c078fdd1ce"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmaster-70f16b8f7dd6cc3c.inputs.json",
+        "bytes": 19251,
+        "sha256": "974c80068bdc766faa2d46c7893b667053943bcc580402d9b6df69f61bf0c800"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmerge-f6d14485a771dd6e.o",
+        "bytes": 3200,
+        "sha256": "63dfd5440603232a9c1fefad5b53ae79bd1b9a472cc640d08d6b0952ea803671"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdmerge-f6d14485a771dd6e.inputs.json",
+        "bytes": 19247,
+        "sha256": "d7317097c3240c55e62bd81ad594a7620ea45ab18cbc08bd6fff54785784a2ec"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdpostct-21e95c3011a147fc.o",
+        "bytes": 2144,
+        "sha256": "81951a65212f7288fb2897173a4b15d1fd9368d8f41dfc5319848128665a537d"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdpostct-21e95c3011a147fc.inputs.json",
+        "bytes": 19251,
+        "sha256": "f9e8b7e1253dd4215860619833ef6e78193056290e1809f52ea3970edca51735"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdsample-c176644b91595137.o",
+        "bytes": 3656,
+        "sha256": "aec2ad30fc4a4e0c4113a90ccffdba492cfef78b7e0b79b3852ef2925ad0b1a1"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdsample-c176644b91595137.inputs.json",
+        "bytes": 19251,
+        "sha256": "4f67f3a3bf9e8cb708d4398e2a2c8132cd229eec03d263872e19acd9ec68ae04"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdtrans-2234327d5e43a7fd.o",
+        "bytes": 1272,
+        "sha256": "0972388d8d31a4bc0a0c6578fb984e270864fbe8ea3735909920e766e259c325"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jdtrans-2234327d5e43a7fd.inputs.json",
+        "bytes": 19247,
+        "sha256": "3348b839ef1fff629e047baa89a7255ec245da0623dc022a42661ac812996534"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jerror-04b90f501b3171ae.o",
+        "bytes": 9056,
+        "sha256": "1ab35e20f327c3e099b41b4a355a9ee79fda2b057e86a0b8599b28a85ea79ce6"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jerror-04b90f501b3171ae.inputs.json",
+        "bytes": 19244,
+        "sha256": "e69804e77d1525e05c15f7e77efe5da7da5e41e74cc4a08a42be74dcf1f9b118"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctflt-6a8556f939e9d5bb.o",
+        "bytes": 1904,
+        "sha256": "e8e1ca8efa2eee635207c7961f93120e2953d9f1c9162a91f3cd75a6d79b6f06"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctflt-6a8556f939e9d5bb.inputs.json",
+        "bytes": 19385,
+        "sha256": "0986cd230314a450b16924b04b5ed162a0f1f2bbd4a2f5b2dd05dede33752af9"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctfst-7097604fa7d7914b.o",
+        "bytes": 1840,
+        "sha256": "89e841d1a89c2dd95f4d1414e1c25c0b5d9c04c319cab7bd8b319485cf5cd17a"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctfst-7097604fa7d7914b.inputs.json",
+        "bytes": 19385,
+        "sha256": "ae279aad09114f2b9a09cdc4dad40c7d9a1f8adfe0e75edd3eef0fc812657d5a"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctint-d625deb4fd94ff01.o",
+        "bytes": 47160,
+        "sha256": "eaa8b0d7133a2adb00934124a673a48f11a8aadf8c07fccb7064ec62d491c218"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jfdctint-d625deb4fd94ff01.inputs.json",
+        "bytes": 19385,
+        "sha256": "7e340ac457e08184df85e9f34766b0b30b9d8d6a2c221eede81a4e3e50a064d4"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctflt-693f34002092c287.o",
+        "bytes": 2152,
+        "sha256": "cfd700c9fd85c3634e383be4b75203803c90cbb09066bf06efe1ac4372752c15"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctflt-693f34002092c287.inputs.json",
+        "bytes": 19385,
+        "sha256": "50fba765414025babc1eb47ef47a323f0f887b23551843ad43aaa411c2cc100e"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctfst-fb4fb626f36be2f9.o",
+        "bytes": 1936,
+        "sha256": "3bc2a9a056dcd9205fd0a78f8f8f9b16aaaad024d2382fa6283e8daa7847c651"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctfst-fb4fb626f36be2f9.inputs.json",
+        "bytes": 19385,
+        "sha256": "a64e8cd6faa5cac68e96564d087f352f7270e4853ce3a43e70d960e343d96db0"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctint-c12343b3219f5b45.o",
+        "bytes": 38472,
+        "sha256": "24bc17f556b16ece4ea4ee7e3784acb818ed0e217ee8c5243ca36dcc0f1bb738"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jidctint-c12343b3219f5b45.inputs.json",
+        "bytes": 19385,
+        "sha256": "655c04a819a3de1cb324489bec31b4a70b2b92698c867c078cbe2bce5865ab89"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jmemmgr-2336675a3394332d.o",
+        "bytes": 8008,
+        "sha256": "afc80d3b4a53ba592c66a2366819c91652bb0ba5e6b65dc4d509e2272a49ef86"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jmemmgr-2336675a3394332d.inputs.json",
+        "bytes": 19384,
+        "sha256": "89e952a031d1acbc9924f593d695bb6d6854ee30afe5d2dbc151a12d7dcf3f0f"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jmemnobs-cbda0d2d1a39c76d.o",
+        "bytes": 1624,
+        "sha256": "42dbf99046718e710c483a50c1c55d242a160a2277580dced3743ccfc665631c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jmemnobs-cbda0d2d1a39c76d.inputs.json",
+        "bytes": 19388,
+        "sha256": "c35489af3b4dd26adaa92f9b35cfd0e166f4a71f99a7d81dfcdde782f841e782"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jquant1-1ae23867b4e13a58.o",
+        "bytes": 6824,
+        "sha256": "2e49b13a78012167f1614908b41f0bfa719b305bbcf23fa0fe2179e509f5f4ab"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jquant1-1ae23867b4e13a58.inputs.json",
+        "bytes": 19247,
+        "sha256": "cc2e78cdd9d3cd938b007849b9e5182c974b19aae77de0efd83d8e6d0c55a8c7"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jquant2-c2e4d45b82eb3a1e.o",
+        "bytes": 11448,
+        "sha256": "6e7bc75ae2bb0a453695d5d6f180752fa7342da79801b6f9b0005e4424b3b3b0"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jquant2-c2e4d45b82eb3a1e.inputs.json",
+        "bytes": 19247,
+        "sha256": "65408b5e80f7f1e8a675af1893600cd81dfb45af98f1d306867d857731684622"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jutils-4d09875fec6b3b40.o",
+        "bytes": 2952,
+        "sha256": "9e1012df1e92b1e3c3ccc946b22e9ed3fd1863b4cc03bec0b8eb5ae3dcf77ad7"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/jutils-4d09875fec6b3b40.inputs.json",
+        "bytes": 19243,
+        "sha256": "4073ededa2831efce9e784a760fe19c090ac995291392cd7368ddb7b8e4f1913"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmlparse-41f345c345d2c925.o",
+        "bytes": 69096,
+        "sha256": "2b013d0ca165a9bc616c474dc69daa08f36a875baae6f5fdacd501c276e06b62"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmlparse-41f345c345d2c925.inputs.json",
+        "bytes": 30403,
+        "sha256": "a8f00230f906c94d9c25cbffb818c8fa3f57eb8b55c15ed14a10be581df99548"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmlrole-36d8d0000b299de7.o",
+        "bytes": 13568,
+        "sha256": "fdff61965d31c7a9c94a352a6b5d02728e9bb4186aa7a84c2c46a37a509747a4"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmlrole-36d8d0000b299de7.inputs.json",
+        "bytes": 4631,
+        "sha256": "dd6f21e68360a58ceb995b5660ddf2a52a529efcd56680b5a06c9b97dcb784a5"
+      }
+    },
+    {
+      "object": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmltok-4e53e86a406ca960.o",
+        "bytes": 85672,
+        "sha256": "0941104c9adaadfcfabc25f2994aa468b34c610ac2f91677c0f4c5d3c065fc7c"
+      },
+      "inputs": {
+        "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/xmltok-4e53e86a406ca960.inputs.json",
+        "bytes": 12174,
+        "sha256": "dc4841570873a16791aa4863f9251b9bbfeba0efedc9841a4e9ba0fdb48b4f1b"
+      }
+    }
+  ],
+  "verified_unique_dependencies": 1745,
+  "qualified_v1_preserved": {
+    "manifest": {
+      "path": "/private/tmp/unison-adobe-driver-build/build-manifest.json",
+      "bytes": 619,
+      "sha256": "ede0fb503aee112506b8b98b3516df4c5c8b004afc23d73f3bdf7699ea9df87b"
+    },
+    "executable": {
+      "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+      "bytes": 9017656,
+      "sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a"
+    },
+    "matches_preexisting_receive_preparation": true
+  },
+  "fresh_unadmitted_plan": {
+    "path": "/private/tmp/unison-sdk-host-comparison-plan-20261014-v3.json",
+    "bytes": 13624,
+    "sha256": "811c62cbedfebc08f52330946ca4b23edc218a0a0b2977905d1866b7e7cce1ee"
+  },
+  "SDK_outputs_executed": 0,
+  "runtime_qualified": false,
+  "runtime_release": false,
+  "compiler_work_terminal": true,
+  "remaining": [
+    "fresh current source/lifecycle review and separate native admission",
+    "actual SDK validation-result/callback/allocator parity",
+    "independent OS thread/pixel/cancellation/scaling qualification"
+  ]
+}

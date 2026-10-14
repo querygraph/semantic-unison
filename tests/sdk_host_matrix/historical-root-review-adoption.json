@@ -1,0 +1,13 @@
+{
+  "schema": "unison-historical-host-review-adoption/1",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/unison-sdk-host-matrix-source-review-20261014/ROOT-REVIEW.json",
+    "bytes": 2969,
+    "sha256": "a17aaa3c4947b6ae101906548e1d3fafb9b0aa33aa6e75d330943d7955025bd1"
+  },
+  "accepted_commit": "90b27d2",
+  "scope": "ACCEPT_PINNED_90B27D2_SOURCE_LIFECYCLE_INTERFACE_ONLY",
+  "current_worktree_qualified": false,
+  "native_release": false,
+  "superseding_source_requires_fresh_review": true
+}
