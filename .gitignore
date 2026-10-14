@@ -62,3 +62,7 @@ Makefile*.cfg
 _build
 .merlin
 *.install
+
+# Build-only semantic interface selector
+/src/semantic_mode_filter
+/src/semantic_mode_filter.exe

@@ -4,9 +4,10 @@ The checked SemanticFile interface compiles against the unchanged file-operation
 logic and the checked hash dependency. Two explicit markers on native writer
 admission/pwrite declarations select portable foreign contracts in qualification.
 The matching interface template exports portable functions while retaining
-nonportable opaque reader/writer contexts. Production Make/Dune still select the
-ordinary interface and treat markers as comments; full worker mode selection
-and execution migration remain open.
+nonportable opaque reader/writer contexts. Production Make/Dune now select this
+interface and the two exact native contracts for OxCaml; stock source remains
+unchanged. See [production selection](production-oxcaml-mode-selection.md).
+The complete worker execution migration remains open.
 
 Actual OxCaml Safe.spawn tests create private readers/writers inside four domains.
 They verify exact bounded reads and iteration, independently generated hashlib

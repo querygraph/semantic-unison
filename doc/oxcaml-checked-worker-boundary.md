@@ -57,4 +57,4 @@ archive tests, followed by measured throughput/RSS/resource evidence. Full
 worker portability and the wider M6 milestone remain open. No Photo/Adobe or
 native preview work is part of this investigation.
 
-The subsequent atomic mailbox component is now integrated into runtime jobs/completions, retaining the condition/counter mutex and ordinary exports. The current production closure still fails the direct Safe.spawn probe. Selected extension/native execution, domain-visible counters and production checked-interface selection remain ahead; see [runtime mailbox evidence](../tests/workers/mailbox-integration-qualification.json).
+The subsequent atomic mailbox component is now integrated into runtime jobs/completions, retaining the condition/counter mutex. Make and Dune now select the checked File/Hash/Mailbox exports for OxCaml. The current production closure still fails the direct Safe.spawn probe. Selected extension execution and domain-visible counters remain ahead; see [production component selection](production-oxcaml-mode-selection.md) and [runtime mailbox evidence](../tests/workers/mailbox-integration-qualification.json).

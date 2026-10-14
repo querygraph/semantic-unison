@@ -10,9 +10,10 @@ The checked interface template declares exported hash functions portable;
 opaque mutable contexts remain domain-local. Three `ox-portable-ffi` comments
 mark the only native declaration contracts. The qualification runner selects
 that template and turns those exact markers into OxCaml portability annotations.
-Stock source treats them as comments. Normal Make/Dune builds currently retain
-the ordinary interface: production checked-interface selection and the complete
-worker execution migration remain open. The template is not a suppressed error
+Stock source treats them as comments. Normal Make/Dune builds now select the
+checked interface and exact native markers for OxCaml; see
+[production selection](production-oxcaml-mode-selection.md). The complete
+worker execution migration remains open. The template is not a suppressed error
 or unsafe cast; all exported OCaml functions type-check against it. Portability
 of foreign calls remains an explicitly reviewed C contract, not compiler proof
 about their implementation.

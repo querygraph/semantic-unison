@@ -4,13 +4,23 @@
 
 ## Live implementation handoff
 
+* Production component mode selection (2026-10-14): Make and Dune now compile
+  SemanticFile/Hash/Mailbox against their checked interfaces on OxCaml and select
+  the five audited native contracts. Actual compiled exports link and execute
+  with Safe.spawn; mutable mailbox payload capture rejects. Stock source remains
+  byte-identical. Four fresh CLI builds/selftests pass, along with selector
+  rejection controls and receiving regressions. Existing Make configuration
+  upgrade preserves all320 compiled objects. [Scope](doc/production-oxcaml-mode-selection.md),
+  [evidence](tests/mode_build/qualification.json). Full worker extension/counter
+  portability, resource bounds and M6 remain open; no Photo/Adobe invocation.
+
 * Checked file component (2026-10-14): portable File/Hash interfaces and two
   audited native file contracts compile and run in four actual checked OxCaml
   domains, with stock runtime parity. Exact read/iteration/hash/cancellation,
   positional write/cursor/bounds/flags and full output/descriptor settlement pass;
   shared reader/writer/chunk captures reject. [Scope](doc/checked-semantic-file.md),
   [pins](tests/checked_file/qualification.json). Make+Dune CLI/selftests pass.
-  File algorithms are unchanged; production mode-interface/extension/counter
+  File algorithms are unchanged; production extension/counter
   integration and full M6 remain open. Kernel borrowing/native ownership are
   manual contracts, not mode proof; no Photo/Adobe operations.
 
@@ -21,7 +31,7 @@
   [pins](tests/checked_hash/qualification.json). Current stock/Ox Make+Dune CLI,
   selftests and semantic kernel regressions pass. Cached-string9-sample CPU
   reference ratios new/old0.995 stock/1.006 Ox do not establish a speedup.
-  Production checked-interface selection and full worker portability remain open;
+  Production checked-interface selection is now implemented below; full worker portability remains open;
   no Adobe/Photo invocation or full M6 completion is claimed.
 
 * Runtime mailbox integration (2026-10-14): worker jobs and completions now
@@ -32,7 +42,7 @@
   scenarios,21 FD controls/117 assertions plus three adapted historical guard
   negatives,21 actual receive cases and14 shared-helper controls. Fresh Make and
   Dune CLI/selftests and DNG/JPEG receiving regressions pass. [Evidence](tests/workers/mailbox-integration-qualification.json).
-  The production checked-interface/extension/FFI/counter migration remains open;
+  The full production extension/FFI/counter migration remains open;
   current Safe.spawn substitution still rejects. No Photo/Adobe invocation.
 
 * POSIX external command supervision (2026-10-14): external copy, merge and

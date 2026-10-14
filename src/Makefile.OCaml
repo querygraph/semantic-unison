@@ -44,6 +44,7 @@ ubase/projectInfo.ml: Makefile.ProjectInfo
 	ocaml make_tools.ml projectinfo NAME="$(NAME)" VERSION="$(VERSION)" MAJORVERSION="$(MAJORVERSION)" > $@
 
 clean::
+	-$(RM) semantic_mode_filter semantic_mode_filter.exe
 	cd ubase && $(RM) projectInfo.ml
 
 ####################################################################
@@ -196,6 +197,30 @@ CAMLCFLAGS_X = $(CAMLCFLAGS) $(CAMLCFLAGS_FSM_X)
 
 .SUFFIXES:
 .SUFFIXES: .mli .cmi .ml .cmo .cmx .c .o .obj
+
+# Explicit rules are portable across make implementations. The selector uses
+# the configured compiler's complete version, not the ambient OCaml interpreter.
+semantic_mode_filter$(EXEC_EXT): semantic_mode_filter.ml
+	$(OCAMLC) -o $@ semantic_mode_filter.ml
+
+semanticHash.cmi: semanticHash.mli semanticHash.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.mli
+semanticHash.cmo: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
+semanticHash.cmx: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
+semanticFile.cmi: semanticFile.mli semanticFile.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.mli
+semanticFile.cmo: semanticFile.ml semanticFile.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.ml
+semanticFile.cmx: semanticFile.ml semanticFile.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.ml
+semanticMailbox.cmi: semanticMailbox.mli semanticMailbox.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.mli
+semanticMailbox.cmo: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
+semanticMailbox.cmx: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
 
 .mli.cmi:
 	@echo "$(CAMLC): $< ---> $@"

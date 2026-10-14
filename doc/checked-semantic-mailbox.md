@@ -4,12 +4,12 @@
 same implementation builds on stock OCaml5.5.1 and OxCaml5.2.0+ox. An explicit
 [OxCaml interface template](../src/semanticMailbox.ox.mli.in) was compiled against
 that unchanged implementation and used with Domain.Safe.spawn in the tests.
-The stock interface remains ordinary OCaml syntax. The checked interface is
-currently selected by the qualification runner, not the production build.
+The stock interface remains ordinary OCaml syntax. Make and Dune now select
+the checked interface for OxCaml; see [production selection](production-oxcaml-mode-selection.md).
 SemanticWorkers now uses the component for both jobs and completions, with its
 existing mutex/condition counters and manually audited execution boundary.
-The production build still selects the stock-compatible interface; the checked
-worker execution/interface migration is not complete.
+Stock builds retain the stock-compatible interface. The complete checked
+worker execution/interface migration remains open.
 
 An immutable snapshot contains front/back lists, count and closed state. Push,
 pop and close linearize at a successful CAS; every state update constructs a

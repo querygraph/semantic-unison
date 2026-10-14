@@ -28,7 +28,7 @@ default: all
 	@ocaml make_tools.ml conf2 ASSUME_DMAKE=true > Makefile2.cfg
 
 # Executed only by GNU Make and NMAKE
-Makefile.cfg: _mk.cfg
+Makefile.cfg: _mk.cfg make_tools.ml
 	@ocaml make_tools.ml conf > Makefile.cfg
 	@ocaml make_tools.ml conf2 MAKE="$(MAKE)" > Makefile2.cfg
 _mk.cfg: ;
