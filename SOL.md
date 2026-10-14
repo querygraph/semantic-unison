@@ -4,6 +4,20 @@
 
 ## Live implementation handoff
 
+* Native benchmark preparation correction (2026-10-14): Adobe-core benchmark
+  dependencies now include the checked mailbox. OxCaml requires compiler-matched
+  actual Make core objects, verified against snapshot/compiler/binary/source
+  pins; build-only retains the executable/log and a separate build result.
+  Stock and Ox builds pass without SDK linking, fixture generation, validation
+  or benchmark execution. Default worker budgets are 1/6/18 under an explicit
+  18-credit allowance. The coordination wait now precedes *all* SDK fixture and
+  validation calls, with a deadline. An absent-marker actual wrapper control
+  times out before fixtures; missing/mismatched production builds and oversized
+  CPU budgets reject. A marker is caller CPU coordination, not Photo/Lightroom
+  admission. SDK runtime/thread/resource/performance qualification remains open.
+  [Instructions](bench/adobe/README.md),
+  [build/control pins](bench/adobe/results/current-core-build-handoff-20261014.json).
+
 * DNG backend admission integration (2026-10-14): the actual companion registers
   its caller-inclusive `adobevalidatorthreads` and optional endpoint-local
   `adobevalidatorworkspace` MiB estimate with the generic resource planner.

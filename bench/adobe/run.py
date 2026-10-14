@@ -23,6 +23,7 @@ SOURCES = [
     'src/helperSupervisor_stubs.c', 'src/helperSupervisor.mli', 'src/helperSupervisor.ml',
     'src/semanticAdmission.mli', 'src/semanticAdmission.ml',
     'src/ioAdmission.mli', 'src/ioAdmission.ml',
+    'src/semanticMailbox.mli', 'src/semanticMailbox.ml',
     'src/semanticHash_stubs.c', 'src/semanticHash.mli', 'src/semanticHash.ml',
     'src/semanticFile_stubs.c', 'src/semanticFile.mli', 'src/semanticFile.ml',
     'src/formatRecognition.mli', 'src/formatRecognition.ml',
@@ -39,24 +40,49 @@ def main():
     parser.add_argument('--sdk-build', type=Path, required=True)
     parser.add_argument('--ocamlopt', default='ocamlopt')
     parser.add_argument('--fixtures-dir', type=Path)
-    parser.add_argument('--workers', default='1,18,36')
+    parser.add_argument('--workers', default='1,6,18')
+    parser.add_argument('--cpu-credit-budget', type=int, default=18,
+                        help='maximum configured shared CPU permits; coordinate this allowance before execution')
     parser.add_argument('--jobs', type=int, default=72)
     parser.add_argument('--repetitions', type=int, default=5)
     parser.add_argument('--control-repetitions', type=int, default=1)
     parser.add_argument('--warmups', type=int, default=1)
     parser.add_argument('--build-only', action='store_true')
+    parser.add_argument('--production-build', type=Path,
+                        help='full Make snapshot whose compiler-matched core objects will be linked')
+    parser.add_argument('--keep-work', action='store_true', help='retain frozen sources, executable and build log')
     parser.add_argument('--pilot', action='store_true', help='one validation per codec at one CPU permit')
     parser.add_argument('--start-file', type=Path, help='wait after compilation for a local measurement coordination file')
+    parser.add_argument('--coordination-timeout', type=float, default=600,
+                        help='maximum seconds waiting before any SDK fixture or validation invocation')
     parser.add_argument('--background-note', default='Ordinary system activity uncontrolled; no cache flush or CPU affinity.')
     parser.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
-    workers = [int(value) for value in args.workers.split(',')]
+    try:
+        workers = [int(value) for value in args.workers.split(',')]
+    except ValueError:
+        parser.error('workers must be comma-separated integers')
+    if (not 1 <= args.cpu_credit_budget <= 128 or len(set(workers)) != len(workers)
+            or any(value < 1 or value > args.cpu_credit_budget for value in workers)):
+        parser.error('unique worker budgets must fit the configured CPU credit allowance')
     if not workers or min(workers + [args.jobs, args.repetitions, args.control_repetitions, args.warmups]) < 1:
         parser.error('all counts must be positive')
+    if not 0 < args.coordination_timeout <= 3600:
+        parser.error('coordination timeout must be positive and at most 3600 seconds')
     compiler = shutil.which(args.ocamlopt)
     if compiler is None:
         parser.error('native compiler unavailable')
     compiler = str(Path(compiler).absolute())
+    version = subprocess.check_output([compiler, '-version'], text=True).strip()
+    production = args.production_build.resolve() if args.production_build else None
+    if '+ox' in version and production is None:
+        parser.error('OxCaml benchmark requires --production-build from the qualified checked CLI build')
+    if production is not None:
+        receipt = json.loads((production / 'build-receipt.json').read_text())
+        if (receipt['build_system'] != 'make' or receipt['build_exit'] != 0
+                or receipt['compiler_sha256'] != sha256(Path(compiler))
+                or receipt['binary_sha256'] != sha256(production/'src/unison')):
+            parser.error('production snapshot/compiler/binary pins do not match')
     sdk = args.sdk_build.resolve()
     manifest = json.loads((sdk / 'build-manifest.json').read_text())
     driver = sdk / 'unison-adobe-validator'
@@ -70,6 +96,8 @@ def main():
         'schema': 'unison-adobe-validation-core-v1', 'complete': False,
         'mode': 'pilot' if args.pilot else 'throughput',
         'created_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
+        'runner_sha256': sha256(Path(__file__).resolve()),
+        'fixture_generator_sha256': sha256(Path(__file__).with_name('fixtures.py')),
         'host': dict(system=platform.system(), release=platform.release(), machine=platform.machine(), logical_cpus=os.cpu_count()),
         'scope': 'Cached synthetic CFA files; production shared validation/hash/helper/resource core, not full synchronization or Lightroom.',
         'background_activity': args.background_note,
@@ -92,15 +120,35 @@ def main():
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(result, indent=2) + '\n')
 
-    with tempfile.TemporaryDirectory(prefix='unison-adobe-bench-') as temporary:
+    import contextlib
+    retain = args.keep_work or args.build_only
+    temporary_workspace = tempfile.mkdtemp(prefix='unison-adobe-bench-') if retain else None
+    with (contextlib.nullcontext(temporary_workspace) if retain else
+          tempfile.TemporaryDirectory(prefix='unison-adobe-bench-')) as temporary:
         work = Path(temporary)
+        result['build'] = {'workspace': str(work), 'retained': retain,
+                           'production_snapshot': str(production) if production else None,
+                           'production_receipt_sha256': sha256(production/'build-receipt.json') if production else None,
+                           'complete': False, 'native_calls_during_build': False}
+        result['parameters']['cpu_credit_budget'] = args.cpu_credit_budget
+        save()
         for name, data in source_bytes.items():
             (work / Path(name).name).write_bytes(data)
         with (work / 'build.log').open('w+') as log:
             try:
+                linked = {}
                 for name in SOURCES[:-1]:
-                    subprocess.run([compiler, '-I', '+unix', '-c', Path(name).name],
-                                   cwd=work, env=environment, stdout=log, stderr=log, check=True)
+                    if production is not None and name.startswith('src/'):
+                        actual = production/name
+                        assert actual.read_bytes() == source_bytes[name], 'production source mismatch: '+name
+                        extensions = ('.cmi', '.cmx', '.o') if name.endswith('.ml') else (('.cmi',) if name.endswith('.mli') else ('.o',))
+                        for suffix in extensions:
+                            artifact = actual.with_suffix(suffix)
+                            shutil.copyfile(artifact, work/artifact.name)
+                            linked[str(artifact)] = sha256(artifact)
+                    else:
+                        subprocess.run([compiler, '-I', '+unix', '-c', Path(name).name],
+                                       cwd=work, env=environment, stdout=log, stderr=log, check=True)
                 objects = [Path(name).stem + ('.o' if name.endswith('.c') else '.cmx')
                            for name in SOURCES[:-1] if name.endswith(('.ml', '.c'))]
                 subprocess.run([compiler, '-I', '+unix', 'unix.cmxa', *objects,
@@ -109,8 +157,30 @@ def main():
             except subprocess.CalledProcessError:
                 log.seek(0); print(log.read()); raise
         print('Built validation core with OCaml ' + result['compiler']['version'], flush=True)
+        result['build'] = {'workspace': str(work), 'retained': retain,
+                           'production_snapshot': str(production) if production else None,
+                           'linked_object_sha256': linked, 'binary_sha256': sha256(work/'validation-bench'),
+                           'production_receipt_sha256': sha256(production/'build-receipt.json') if production else None,
+                           'build_log_sha256': sha256(work/'build.log'), 'complete': True,
+                           'native_calls_during_build': False}
+        save()
         if args.build_only:
+            print('Built executable:', work/'validation-bench')
             print('Build-only check passed; no validation measurements taken.'); return
+        if args.start_file:
+            result['coordination'] = {'path': str(args.start_file), 'deadline_seconds': args.coordination_timeout,
+                                      'passed': False, 'scope': 'caller-owned CPU coordination; not Lightroom/native-owner admission'}
+            save()
+            print('Benchmark built; waiting before all SDK fixture/validation calls.', flush=True)
+            deadline = time.monotonic() + args.coordination_timeout
+            while not args.start_file.is_file():
+                if time.monotonic() >= deadline:
+                    result['coordination']['timed_out'] = True
+                    save()
+                    raise TimeoutError('SDK benchmark coordination deadline expired before native work')
+                time.sleep(min(0.2, max(0., deadline-time.monotonic())))
+            result['coordination']['passed'] = True
+            save()
         fixtures_dir = args.fixtures_dir.resolve() if args.fixtures_dir else work / 'fixtures'
         if (fixtures_dir / 'fixtures.json').is_file():
             fixtures = json.loads((fixtures_dir / 'fixtures.json').read_text())
@@ -123,10 +193,6 @@ def main():
         result['fixtures'] = fixtures
         configurations = [(fixture, worker) for fixture in fixtures['fixtures'] for worker in workers]
         save()
-        if args.start_file:
-            print('Benchmark prepared; waiting for local measurement coordination.', flush=True)
-            while not args.start_file.is_file():
-                time.sleep(0.2)
         result['measurement_started_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
 
         def batch(fixture, worker, jobs, phase, repetition):

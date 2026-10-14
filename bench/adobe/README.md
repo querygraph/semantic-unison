@@ -47,10 +47,29 @@ compilation, or `--pilot` for one validation of each codec before a full run:
 ```sh
 python3 bench/adobe/run.py --sdk-build /absolute/adobe-validator-build \
   --ocamlopt /absolute/compiler/bin/ocamlopt \
+  --production-build /absolute/compiler-matched-make-snapshot \
   --fixtures-dir /absolute/temporary/synthetic-dng-fixtures \
-  --workers 1,18,36 --jobs 72 --repetitions 5 --control-repetitions 1 \
+  --workers 1,6,18 --cpu-credit-budget 18 --jobs 72 --repetitions 5 --control-repetitions 1 \
   --output bench/adobe/results/macos-x86_64-18-vs-36.json
 ```
+
+Current OxCaml builds require `--production-build`, created by
+`tests/build_snapshot.py` with Make and the same compiler. The runner checks
+compiler/binary/source pins and links the actual checked core objects, including
+the mailbox, rather than compiling unchecked stock interfaces. Stock can use
+the same artifact route. `--build-only` retains its sources/executable/log and
+saves a build receipt without executing the benchmark, fixture writer or SDK.
+Build completion remains separate from measurement completion.
+
+Coordinate native execution with Photo Root before a runtime pilot or benchmark.
+`--start-file /fresh/caller-owned/path --coordination-timeout 600` waits after
+compilation and before *all* SDK fixture generation and validation calls; an
+absent marker expires without native work. This file coordinates CPU use and
+does not establish Lightroom/native-owner admission or authorize preview work.
+The default configured allowance is 18 credits; larger historical comparisons
+require an explicitly different allowance and coordination. No fresh runtime
+measurement or internally parallel SDK-host qualification follows from these
+build changes. The production driver in this benchmark still uses one thread.
 
 Sources are snapshotted and compiled in a temporary directory with the chosen
 native compiler's default flags. Each batch is a fresh process; pool creation
