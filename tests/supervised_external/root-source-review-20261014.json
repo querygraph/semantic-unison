@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "review_type": "root_owned_source_and_retained_evidence_audit",
+  "independent_agent_review": false,
+  "decision": "qualified_POSIX_per_file_helper_routing_and_lifecycle_on_tested_macOS",
+  "invariants": [
+    "All production Copy/Files external call sites route through SupervisedExternal; Windows delegation is explicit legacy",
+    "Helper-only startup creates the shared CPU owner without domains; get reuses the exact object",
+    "Original argv0 and literal boundaries preserved; shell commands remain /bin/sh -c with inherited environment",
+    "HelperSupervisor optional argv0 validates before admission; default SDK invocation name unchanged",
+    "Thread/deadline/output preferences are endpoint-local; weighted helpers share domain CPU permits",
+    "Cancellation and operational failure return only after supervisor settlement; copy rejects nonzero before finishExternalTransfer",
+    "Generic nonzero exit returned for merge/diff policy; signalled jobs reject"
+  ],
+  "limits": [
+    "Root-owned evidence; no new independent-agent acceptance",
+    "Windows legacy path, arbitrary nested-thread enforcement, child memory/global FD ceilings, escaped descendants and uninterruptible kernel waits remain open",
+    "No actual Adobe SDK/corpus, native GUI, preview renderer or measured throughput qualification",
+    "Failed copy staging may remain resumable; no rollback of helper writes or cross-replica atomicity"
+  ]
+}

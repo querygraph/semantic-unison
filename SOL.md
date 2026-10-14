@@ -4,6 +4,25 @@
 
 ## Live implementation handoff
 
+* POSIX external command supervision (2026-10-14): external copy, merge and
+  diff now use `SupervisedExternal` and the exact shared SDK/domain CPU owner.
+  Helper-only initialization starts no worker domains; later runtime startup
+  reuses that supervisor. Endpoint-local thread weight/deadline/per-stream
+  capture limits are documented in the
+  [contract](doc/supervised-external-commands.md). Original argv[0], argument
+  boundaries, shell command text and inherited environment are retained.
+  Cancellation/signals/timeout/output overflow settle before failure. Copy
+  now rejects nonzero exit before publication; a genuine previous-binary
+  negative published a fully written candidate after exit 7. Failed temporaries
+  remain subject to ordinary exact resume policy, not a rollback guarantee.
+  The [qualification](tests/supervised_external/qualification.json) records
+  fourteen real helper cases / 84 checks, four actual copy controls plus a
+  previous-binary negative, existing receiving/ownership/settlement and
+  publication checks on stock/OxCaml. No Adobe/Photo/native UI/benchmark was
+  invoked. This is root-owned evidence. Declared weights do not restrict
+  arbitrary inner parallelism; Windows stays explicitly legacy/unsupervised.
+  Hard child memory/global FD ceilings and broader M4-V/M5/M6 remain open.
+
 * Guarded obsolete staging cleanup (2026-10-14): normal producer staging and
   receiver-clone scratch cleanup now use the prepared native parent binding,
   rather than `Os.exists` followed by recursive pathname removal. The new

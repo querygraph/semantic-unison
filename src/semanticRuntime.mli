@@ -7,6 +7,10 @@ type t = {
   io : IoAdmission.t;
 }
 val get : unit -> t
+val helper_supervisor : unit -> HelperSupervisor.t * int
+(** Shared helper/domain CPU owner and its configured budget. Does not start
+    worker domains or initialize semantic transaction/I/O admission. Later
+    [get] reuses this exact supervisor. Changing its CPU count needs restart. *)
 val with_cancellation : (HelperSupervisor.cancellation -> 'a Lwt.t) -> 'a Lwt.t
 (** Cancel on global abort/connection cleanup, unregister on completion. *)
 val with_io_file : HelperSupervisor.cancellation -> string ->

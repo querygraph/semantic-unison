@@ -7,6 +7,17 @@ Lightroom qualification and Ten/Quasar publishing. Preview work does not block
 independent core implementation here; historical Photo notices below do not
 release a native window.
 
+POSIX external copy, merge and diff now share the SDK/domain helper supervisor.
+Helper-only startup leaves domains/resource admission lazy. Original argv[0]
+and argument/environment boundaries are retained; connection/global abort,
+signals, deadlines and output overflow settle before failure. External copy
+rejects nonzero exit before publication, including a fully written candidate.
+See the [contract](supervised-external-commands.md) and
+[qualification](../tests/supervised_external/qualification.json). Root-owned
+real-helper/copy and existing lifecycle/receiving/publication checks qualify
+this route. Windows, arbitrary internal-thread enforcement, hard child memory
+and global descriptor limits remain open.
+
 Guarded obsolete regular staging cleanup now uses prepared native parent
 bindings and full no-follow stat observations, including physical live-target
 alias checks. It does not open/read/chmod the old payload. Unexpected kinds,
@@ -408,7 +419,8 @@ default does not mean removed from the plan.
 - `SemanticAdmission` is a bounded transaction-credit system. Its 8× payload
   estimate plus fixed overhead is not an RSS cap. It excludes parser working
   sets, received-directory manifests, unrelated legacy transfers and external
-  SDK allocations. `HelperSupervisor` limits CPU reservations, child count,
+  SDK allocations. POSIX copy/merge/diff now share `HelperSupervisor` with SDK
+  and domain work; it limits CPU reservations, child count,
   queue length, elapsed execution and captured output; it has no child memory
   ceiling. `IoAdmission` now bounds domain/helper execution by ephemeral filesystem device keys, with independent endpoint-local limits. It does not cap ordinary transfer I/O, identify physical devices, or create a cross-process global budget.
 - `Fs.clone_stage_status` distinguishes scoped macOS declines from phased

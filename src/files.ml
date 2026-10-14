@@ -1220,7 +1220,7 @@ let rec diff root1 path1 ui1 root2 path2 ui2 showDiff id =
         Util.replacesubstrings (Prefs.read diffCmd)
           ["CURRENT1", Fspath.quotes fspath1;
            "CURRENT2", Fspath.quotes fspath2] in
-    let _, diffResult = Lwt_unix.run (External.runExternalProgram cmd) in
+    let _, diffResult = Lwt_unix.run (SupervisedExternal.runExternalProgram cmd) in
     if diffResult <> "" then
       showDiff cmd diffResult
   in
@@ -1498,7 +1498,7 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
       Trace.log (Printf.sprintf "Merge command: %s\n" cmd);
 
       let returnValue, mergeResultLog =
-        Lwt_unix.run (External.runExternalProgram cmd) in
+        Lwt_unix.run (SupervisedExternal.runExternalProgram cmd) in
 
       Trace.log (Printf.sprintf "Merge result (%s):\n%s\n"
                    (showStatus returnValue) mergeResultLog);

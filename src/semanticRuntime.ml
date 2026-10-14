@@ -32,12 +32,23 @@ let io_budget = Prefs.makeEndpointLocal (Prefs.createInt "semanticvolumejobs" 0 
    this setting does not limit unrelated ordinary transfers or external programs.")
 let runtime = ref None
 let resource_runtime = ref None
+let supervisor_runtime = ref None
 let debug = Trace.debug "semantic"
-let settings () =
-  let n = match Prefs.read workers with
+let configured_cpus () = match Prefs.read workers with
     | 0 -> HelperSupervisor.available_physical_cpus ()
     | n when n > 0 -> n
-    | _ -> raise (Util.Fatal "semanticworkers must be zero or positive") in
+    | _ -> raise (Util.Fatal "semanticworkers must be zero or positive")
+let helper_supervisor () =
+  let n = configured_cpus () in
+  let supervisor = match !supervisor_runtime with
+    | Some (supervisor,existing) when existing = n -> supervisor
+    | Some _ -> raise (Util.Fatal "Restart Unison to change its shared CPU budget")
+    | None ->
+        let supervisor = HelperSupervisor.create ~cpu_permits:n ~max_children:n ~max_pending:4096 in
+        supervisor_runtime := Some (supervisor,n); supervisor in
+  supervisor,n
+let settings () =
+  let n = configured_cpus () in
   let count = min n (SemanticWorkers.recommended_workers ()) in
   let io_jobs = match Prefs.read io_budget with
     | 0 -> n
@@ -85,7 +96,7 @@ let get () =
   | Some (t,existing) when existing = config -> t
   | Some _ -> raise (Util.Fatal "Restart Unison to change its semantic resource budgets")
   | None ->
-    let supervisor = HelperSupervisor.create ~cpu_permits:n ~max_children:n ~max_pending:4096 in
+    let supervisor,_ = helper_supervisor () in
     let io = IoAdmission.create ~per_device:io_jobs ~max_pending:4096 in
     let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
     debug (fun () -> Util.msg

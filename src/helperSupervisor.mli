@@ -74,10 +74,12 @@ type result = {
 }
 
 val run :
-  t -> weight:int -> cancellation -> limits:limits ->
+  ?argv0:string -> t -> weight:int -> cancellation -> limits:limits ->
   executable:string -> arguments:string array -> environment:string array ->
   result Lwt.t
-(** [arguments] excludes argv[0]. The executable must be absolute. There is no
+(** [arguments] excludes argv[0]. The optional [argv0] preserves a generic
+    program's caller-supplied invocation name; it defaults to [executable].
+    The executable must be absolute. There is no
     shell, stdin is /dev/null, and output pipes are drained together with bounded
     work per owner-loop turn. Exceeding either output cap terminates the group.
     Timeout measures execution after admission, not time in the admission queue.

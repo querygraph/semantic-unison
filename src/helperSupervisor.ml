@@ -260,7 +260,7 @@ let drain scratch stream =
   in
   loop 65536
 
-let execute c ~release ~owner_cleanup ~owner_settled limits executable arguments environment =
+let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
   let started = if Sys.win32 then 0. else monotonic_now () in
   let empty outcome =
     { outcome; status = None; stdout = ""; stderr = "";
@@ -275,7 +275,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable arguments
     let owns_descriptor = Array.make 4 false in
     let out = capture Unix.stdin limits.stdout_bytes
     and err = capture Unix.stdin limits.stderr_bytes in
-    let argv = Array.append [|executable|] arguments in
+    let argv = Array.append [|argv0|] arguments in
     let owned_pid = ref (-1) in
     let scratch = Bytes.create 16384 in
     let outcome = ref Completed in
@@ -432,7 +432,9 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable arguments
          if !owned_pid >= 0 then raise exn);
       raise exn
 
-let run t ~weight c ~limits ~executable ~arguments ~environment =
+let run ?argv0 t ~weight c ~limits ~executable ~arguments ~environment =
+  let argv0 = match argv0 with None -> executable | Some name -> name in
+  if contains_nul argv0 then invalid_arg "HelperSupervisor: NUL in argv[0]";
   validate ~limits ~executable ~arguments ~environment;
   let owns_reservation = ref false in
   let abort_pending = ref (fun () -> ()) in
@@ -445,7 +447,7 @@ let run t ~weight c ~limits ~executable ~arguments ~environment =
       release t ~weight ~child:true
     end in
   let execute_owned () =
-    execute c ~release:release_once ~owner_cleanup ~owner_settled limits executable arguments environment in
+    execute c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
   let failed exn =
     (try !owner_cleanup () with _ -> ());
     release_once (); fail exn in

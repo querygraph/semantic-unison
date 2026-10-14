@@ -1903,8 +1903,11 @@ let transferFileUsingExternalCopyprog
   let args = Str.split (Str.regexp "[ \t]+") progWithArgs in
   let prog = match args with [] -> assert false | h :: _ -> h in
   BorrowedWork.bind (fun () -> Lwt_util.run_in_region !copyprogReg 1
-    (fun () -> External.runExternalProgramArgs prog
-                 (Array.of_list (args @ [fromSpec; toSpec])))) (fun (_, log) ->
+    (fun () -> SupervisedExternal.runExternalProgramArgs prog
+                 (Array.of_list (args @ [fromSpec; toSpec])))) (fun (status, log) ->
+  if status <> Unix.WEXITED 0 then
+    raise (Util.Transient (Printf.sprintf "External copy program failed (%s):\n%s"
+      (Util.process_status_to_string status) log));
   debug (fun() ->
            let l = Util.trimWhitespace log in
            Util.msg "transferFileUsingExternalCopyprog %s: returned...\n%s%s"
