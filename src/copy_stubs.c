@@ -49,6 +49,7 @@
 
 
 #include <errno.h>
+#include <stdint.h>
 
 
 /* ----------------------------------------------- */
@@ -569,10 +570,15 @@ static int unsn_stage_reserve(int parent, char *name)
 }
 
 static value unsn_clone_stage_impl(value source, value destination, int strict,
-                                  int keep_parent)
+                                  int keep_parent, int sized, int64_t expected)
 {
   CAMLparam2(source, destination);
   CAMLlocal3(pair, result, declined);
+  /* The additive sized API admits the captured source EOF before creating
+   * either stage. Existing unsized/boolean APIs keep their original contract. */
+  if (sized && (expected < 0 || (int64_t)(off_t)expected != expected))
+    caml_unix_error(expected < 0 ? EINVAL : EOVERFLOW,
+                    "clone_stage: expected length", destination);
   if (__builtin_available(macOS 10.12, *)) {} else {
     if (!strict) CAMLreturn(Val_int(0));
     declined = caml_alloc(1, 1);
@@ -623,6 +629,10 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
     decline_reason = UNSN_STAGE_NONREGULAR;
     unsupported = 1; goto unlocked_done;
   }
+  if (sized && before.st_size != (off_t)expected) {
+    error = EBUSY; phase = "clone_stage: expected source EOF";
+    goto unlocked_done;
+  }
   if (before.st_flags != 0) {
     decline_reason = UNSN_STAGE_FLAGS;
     unsupported = 1; goto unlocked_done;
@@ -667,6 +677,10 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
     error = errno; goto unlocked_done;
   }
   basis_owned = 1;
+  if (sized && basis_identity.st_size != (off_t)expected) {
+    error = EBUSY; phase = "clone_stage: expected basis EOF";
+    goto unlocked_done;
+  }
   phase = "clone_stage: source stability";
   if (fstat(input, &after) || lstat(src, &named)) {
     error = errno; goto unlocked_done;
@@ -711,6 +725,10 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
       stage_identity.st_ino != output_identity.st_ino || output_identity.st_nlink != 1) {
     error = EBUSY; goto unlocked_done;
   }
+  if (sized && output_identity.st_size != (off_t)expected) {
+    error = EBUSY; phase = "clone_stage: expected output EOF";
+    goto unlocked_done;
+  }
   if (unsn_stage_match_owned(parent, name, output, 0, 1)) {
     error = errno; goto unlocked_done;
   }
@@ -734,6 +752,35 @@ static value unsn_clone_stage_impl(value source, value destination, int strict,
     phase = "clone_stage: attribute clearing";
     for (ssize_t pos = 0; pos < actual; pos += strlen(attrs + pos) + 1)
       if (fremovexattr(output, attrs + pos, 0)) { error = errno; goto unlocked_done; }
+  }
+  if (sized) {
+    struct stat source_final, source_named, basis_final, output_final;
+    phase = "clone_stage: final source EOF/stability";
+    if (fstat(input, &source_final) || lstat(src, &source_named)) {
+      error = errno; goto unlocked_done;
+    }
+    if (!unsn_same_basis(&before, &source_final) ||
+        !unsn_same_basis(&before, &source_named) ||
+        source_final.st_size != (off_t)expected) {
+      error = EBUSY; goto unlocked_done;
+    }
+    phase = "clone_stage: final basis EOF/stability";
+    if (fstat(basis, &basis_final)) { error = errno; goto unlocked_done; }
+    if (!unsn_same_basis(&basis_identity, &basis_final) ||
+        basis_final.st_size != (off_t)expected) {
+      error = EBUSY; goto unlocked_done;
+    }
+    phase = "clone_stage: final output EOF/identity";
+    if (fstat(output, &output_final)) { error = errno; goto unlocked_done; }
+    if (!S_ISREG(output_final.st_mode) || output_final.st_nlink != 1 ||
+        output_final.st_dev != output_identity.st_dev ||
+        output_final.st_ino != output_identity.st_ino ||
+        output_final.st_size != (off_t)expected) {
+      error = EBUSY; goto unlocked_done;
+    }
+    if (unsn_stage_match_owned(parent, name, output, 0, 1)) {
+      error = errno; goto unlocked_done;
+    }
   }
   phase = "clone_stage: basis unlink";
   if (unsn_stage_remove_owned(parent, scratch, basis, 0)) {
@@ -818,17 +865,25 @@ report:
 
 CAMLprim value unison_clone_stage(value source, value destination)
 {
-  return unsn_clone_stage_impl(source, destination, 0, 0);
+  return unsn_clone_stage_impl(source, destination, 0, 0, 0, 0);
 }
 
 CAMLprim value unison_clone_stage_status(value source, value destination)
 {
-  return unsn_clone_stage_impl(source, destination, 1, 0);
+  return unsn_clone_stage_impl(source, destination, 1, 0, 0, 0);
 }
 
 CAMLprim value unison_clone_stage_handles(value source, value destination)
 {
-  return unsn_clone_stage_impl(source, destination, 1, 1);
+  return unsn_clone_stage_impl(source, destination, 1, 1, 0, 0);
+}
+
+CAMLprim value unison_clone_stage_sized_handles(value source, value destination,
+                                               value expected_length)
+{
+  CAMLparam3(source, destination, expected_length);
+  int64_t expected = Int64_val(expected_length);
+  CAMLreturn(unsn_clone_stage_impl(source, destination, 1, 1, 1, expected));
 }
 #else
 CAMLprim value unison_clone_stage(value source, value destination)
@@ -850,5 +905,14 @@ CAMLprim value unison_clone_stage_handles(value source, value destination)
 {
   /* The strict decline constructors have identical layouts in both ABIs. */
   return unison_clone_stage_status(source, destination);
+}
+
+CAMLprim value unison_clone_stage_sized_handles(value source, value destination,
+                                               value expected_length)
+{
+  CAMLparam3(source, destination, expected_length);
+  if (Int64_val(expected_length) < 0)
+    caml_unix_error(EINVAL, "clone_stage: expected length", destination);
+  CAMLreturn(unison_clone_stage_status(source, destination));
 }
 #endif

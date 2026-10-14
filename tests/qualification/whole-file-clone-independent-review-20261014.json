@@ -1,0 +1,505 @@
+{
+  "Ox_async_policy": {
+    "declaration_lines": "399\u2013423: Sys.with_async_exns controls Break/Stack_overflow delivery; no such private context added",
+    "failed_throwing_signal_ox_trials": "Ox1/Ox2 retained with uncaught Fault.Primary after two completed settlement groups; not production synchronous guard failures",
+    "final_claim": "Real signal delivery timing and ordinary synchronous native-error settlement only; arbitrary Ox asynchronous-exception interception remains unqualified",
+    "local_sys_mli": {
+      "bytes": 17852,
+      "path": "/Users/alexy/.opam/5.2.0+ox/.opam-switch/sources/oxcaml-compiler.5.2.0minus39/stdlib/sys.mli",
+      "sha256": "e833784246ef703b1052bec6aa91e37aa14233b874566d03512f9a961a77e03c"
+    },
+    "source": {
+      "bytes": 25972,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/runtime-source-evidence/ox-5.2.0minus39-signals.c",
+      "sha256": "a5510c3db198dcb08a882aebea3d389d896998cd94ba42354b36e81a12f789ff"
+    },
+    "source_lines": "272\u2013298: non-Sys.Break callback exceptions fatal; legal async raises use separate delivery context"
+  },
+  "accepted": true,
+  "accepted_oracles": [
+    "Complete independent destination bytes, exact EOF, cached/native output positions, immediate following literal and untouched input buffered/native state; simulated FD sharing is labelled synthetic.",
+    "Actual private macOS APFS fclonefileat named creation with held source and creation parent/output witnesses; xattr/resource-fork/permission sentinels, source-follow policy and zero-source ordinary creation.",
+    "Actual native-completion signal observer sees created bytes and four retained C/facade FDs before raw receipt allocation; subsequent private synchronous C Primary proves discoverable carrier cleanup through that ordinary error.",
+    "Direct private C wrapper queues real SIGUSR1 then immediately invokes unchanged production no-pending close_slot; nonraising signal observer sees source FD closed. Registered Primary is raised synchronously after dispatch, then actual facade abort/FD census proves cleanup.",
+    "Legacy close negative atomically disarms its private slot then uses actual linked caml_unix_close; real nonraising signal observer catches source FD live during that callback. Later synchronous Primary is deliberate; this final control does not claim a leaked FD after the nonraising callback.",
+    "Actual source-close integer reuse stays open through later cleanup; name/parent replacement preserves foreign bytes with held-parent cleanup; followed source-name retargeting with equal alternate bytes is rejected by source binding.",
+    "Injected post-creation/pre-admission open error honestly retains unqualified residue without deleting an unproved name; injected backup error cleans an admitted name.",
+    "Nodump regular source has precise named Source_constraints decline and macOS FD platform decline followed by actual Copy ordinary DATA success.",
+    "Current callers poison legacy Boolean primitives. Three exact-parent Copy-only controls plus two selected-predicate/close controls fail their independent designated oracles."
+  ],
+  "build_evidence": {
+    "bytes": 277214,
+    "path": "/private/tmp/unison-whole-file-clone-build-records/ox-build.json",
+    "sha256": "4297b4d61e583439387c124412c6ff4c039b06833382e95468478cb06853783d"
+  },
+  "census_source": {
+    "path": "/Users/alexy/src/unison/tests/resource_lifetime/census.c",
+    "sha256": "ed0beb6ae4bd35fcab96220beb07f0e12ec9584d7ef7e28dfad5f67689581283"
+  },
+  "current_readme": {
+    "bytes": 5250,
+    "path": "/Users/alexy/src/unison/tests/whole_file_clone/README.md",
+    "sha256": "3689cb193dc35020566a5c3f43bd748e0720f12bf6d56f2637225881bb68c00e"
+  },
+  "final_receipts": [
+    {
+      "artifacts": 202,
+      "commands": 34,
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "designated_negative_cases": 5,
+      "executed_cases": [
+        {
+          "expected_failure": null,
+          "groups": 15,
+          "name": "unit",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 17,
+          "name": "native",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 9,
+          "name": "named-settlement",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 12,
+          "name": "caller",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 7,
+          "name": "path-caller",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": "DESIGNATED whole clone left cached/native output cursor before EOF",
+          "groups": 0,
+          "name": "parent-cursor",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED whole clone accepted wrong expected EOF",
+          "groups": 0,
+          "name": "parent-length",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED failed clone authorized ordinary fallback after unknown effects",
+          "groups": 0,
+          "name": "parent-error",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED indeterminate decline authorized fallback or erased extra effect",
+          "groups": 0,
+          "name": "negative-decline-effects",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED pending exception escaped after disarming a live source FD",
+          "groups": 2,
+          "name": "negative-old-close",
+          "observed_exit": 2
+        }
+      ],
+      "fixed_assertions": 536,
+      "fixed_groups": 60,
+      "historical_fixture_readme": {
+        "bytes": 1328,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mx9yxzl2/tests/whole_file_clone/README.md",
+        "sha256": "dbc067da61b3a35650b21110d61aecdf7816c9cc9909bb82cce558efbdc4fd07"
+      },
+      "private_source_reconstructions": 10,
+      "production_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mx9yxzl2",
+      "receipt": {
+        "bytes": 244695,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial9.json",
+        "sha256": "5746e80708298f03efa7d5af6626cbfceae99811f9063d9012d789db98c27151"
+      },
+      "summary_lines": [
+        "Whole typed result: 15 groups/108 assertions",
+        "Whole native macOS: 17 groups/116 assertions; private APFS only",
+        "Whole named settlement: 9 groups/87 assertions; actual APFS creation",
+        "Whole Copy caller: 12 groups, 177 assertions; synthetic sharing only",
+        "Whole Copy named source: 7 groups/48 assertions; actual APFS + owned synthetic compatibility"
+      ],
+      "verification_errors": [],
+      "work": "/private/tmp/unison-whole-clone-f0z65onw"
+    },
+    {
+      "artifacts": 202,
+      "commands": 34,
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "designated_negative_cases": 5,
+      "executed_cases": [
+        {
+          "expected_failure": null,
+          "groups": 15,
+          "name": "unit",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 17,
+          "name": "native",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 9,
+          "name": "named-settlement",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 12,
+          "name": "caller",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": null,
+          "groups": 7,
+          "name": "path-caller",
+          "observed_exit": 0
+        },
+        {
+          "expected_failure": "DESIGNATED whole clone left cached/native output cursor before EOF",
+          "groups": 0,
+          "name": "parent-cursor",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED whole clone accepted wrong expected EOF",
+          "groups": 0,
+          "name": "parent-length",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED failed clone authorized ordinary fallback after unknown effects",
+          "groups": 0,
+          "name": "parent-error",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED indeterminate decline authorized fallback or erased extra effect",
+          "groups": 0,
+          "name": "negative-decline-effects",
+          "observed_exit": 2
+        },
+        {
+          "expected_failure": "DESIGNATED pending exception escaped after disarming a live source FD",
+          "groups": 2,
+          "name": "negative-old-close",
+          "observed_exit": 2
+        }
+      ],
+      "fixed_assertions": 536,
+      "fixed_groups": 60,
+      "historical_fixture_readme": {
+        "bytes": 1328,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-53o2li1m/tests/whole_file_clone/README.md",
+        "sha256": "dbc067da61b3a35650b21110d61aecdf7816c9cc9909bb82cce558efbdc4fd07"
+      },
+      "private_source_reconstructions": 10,
+      "production_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-53o2li1m",
+      "receipt": {
+        "bytes": 245153,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial3.json",
+        "sha256": "b4f232c17a01b4e256b748da3a0f911367a59cfa4fddee62b74354c58006a42e"
+      },
+      "summary_lines": [
+        "Whole typed result: 15 groups/108 assertions",
+        "Whole native macOS: 17 groups/116 assertions; private APFS only",
+        "Whole named settlement: 9 groups/87 assertions; actual APFS creation",
+        "Whole Copy caller: 12 groups, 177 assertions; synthetic sharing only",
+        "Whole Copy named source: 7 groups/48 assertions; actual APFS + owned synthetic compatibility"
+      ],
+      "verification_errors": [],
+      "work": "/private/tmp/unison-whole-clone-qvsldkr7"
+    }
+  ],
+  "independence": {
+    "ML/Fs/Copy source review": "independent of their authors",
+    "fixture_oracles_runner_private_transform_and_receipt_review": "independent of fixture author",
+    "native_wholeFileClone_stubs_and_sized_copy_stubs": "authored by this reviewer; source self-review, independently reviewed separately by strict_range_review"
+  },
+  "legacy_boolean_body_comparison": {
+    "baseline": "git HEAD:src/copy_stubs.c",
+    "byte_identical": true,
+    "combined_sha256": "0f17e420d40631bc496b596e641bd27ac03abbbdc2f56478ef15aca60077a94c",
+    "definitions": 5
+  },
+  "limitations": [
+    "No native Linux FICLONE/ZFS/Windows/ReFS/BSD runtime qualification follows from macOS and simulated FD results.",
+    "No physical-allocation measurement, all-core speed claim or benchmark.",
+    "Native creation followed by first witness admission remains cooperative; no hostile namespace or mount-incarnation proof.",
+    "Identity/EOF/stat stamps are change detectors; final strong byte/property/Files publication verification remains required.",
+    "Sized clone-stage preserves existing handles ABI and its documented interruption/handoff limits; no general old-API ownership proof.",
+    "Selected property sentinels do not qualify all inherited ACL/uid/gid/native flag profiles.",
+    "No crash/restart recovery or postfailed-OSclose definitive cleanup guarantee.",
+    "No Photo/media/Adobe/cache/catalog/production mount/preview generator operations."
+  ],
+  "matched_final_fixture_code": true,
+  "old_Ox_regressions": {
+    "bytes": 3382,
+    "path": "/private/tmp/unison-whole-file-clone-build-records/ox-regressions.json",
+    "sha256": "54c9d85637e44137f72e7faa379024a7eb9fe06c83ce028eb9493946e05a2661"
+  },
+  "prior_trials": [
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 238,
+        "path": "/private/tmp/unison-whole-clone-yadpw0oi/004-compile-fault.ml.log",
+        "sha256": "d53f0005e43f943d1b0bf1118860c3f6827899d28071331f198a79a0f432067c"
+      },
+      "receipt": {
+        "bytes": 63413,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests.json",
+        "sha256": "5d0eb6a47b283ddcc694b8151074c7ba21b5ef34640ef8d82c2a5aebc6143276"
+      },
+      "recorded_case_names": [],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 167,
+        "path": "/private/tmp/unison-whole-clone-mowo080z/008-link-unit.log",
+        "sha256": "b78c34db4935b4c50b666d7927251cc8b91b96c73b6a5f4e714c787b567ba7ac"
+      },
+      "receipt": {
+        "bytes": 74781,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial2.json",
+        "sha256": "fd325679b5a35b6ea6ed285dd4a234f9925bd262adcf8bd25365f4623c72c58f"
+      },
+      "recorded_case_names": [],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 1472,
+        "path": "/private/tmp/unison-whole-clone-jzd5ohiv/014-compile-copyForTest.ml.log",
+        "sha256": "6cc43c1eb3be8e08bb5fac1250472def91fcb328ecb444792d7cd5636b659d88"
+      },
+      "receipt": {
+        "bytes": 119247,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial3.json",
+        "sha256": "ba7a77b019c95ea842c69c99e59d842276f32646cf496978ba0fa4110435d159"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement"
+      ],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 506,
+        "path": "/private/tmp/unison-whole-clone-4u56xqc9/016-caller.log",
+        "sha256": "c2a3953d74e55fc91edde15a39f5ecaf2293c0233d9b017795d5b4f4801382d8"
+      },
+      "receipt": {
+        "bytes": 140871,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial4.json",
+        "sha256": "57b1dde81bdee7ca2e748a107f156e1ab8af38740c2f0be966ad92f63a03a969"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement"
+      ],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 338,
+        "path": "/private/tmp/unison-whole-clone-yl9qv4t3/017-link-path-caller-test.log",
+        "sha256": "875107a6696948f64b6f76ed4b8fedbb35c4ac66488c6f4783310e930b66fc99"
+      },
+      "receipt": {
+        "bytes": 160761,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial5.json",
+        "sha256": "3122e4a24beca06e7c931c0759fbad7b62f42117d8d9e372ce412f6f70a40af5"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement",
+        "caller"
+      ],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 328,
+        "path": "/private/tmp/unison-whole-clone-iur6pi_k/033-negative-old-close.log",
+        "sha256": "791ae9bdaa5cc7a1c69bf05a08d777e90259535e62d8afb1917a68d0e35f5033"
+      },
+      "receipt": {
+        "bytes": 244504,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial6.json",
+        "sha256": "a9ee4ee06cfc4db135b906280a2a762e8369d4b3d0c413cb400a85b1cb8fb946"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement",
+        "caller",
+        "path-caller",
+        "parent-cursor",
+        "parent-length",
+        "parent-error",
+        "negative-decline-effects"
+      ],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 332,
+        "path": "/private/tmp/unison-whole-clone-_peenxzu/033-negative-old-close.log",
+        "sha256": "798a42c148a85d2d48b105f62efdf7021247f8155f3bb5052adc18d207e782f1"
+      },
+      "receipt": {
+        "bytes": 244695,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial7.json",
+        "sha256": "e9a3a22d580a4e8ec095d1dd399bfcef419997b80f569117725d6543045db468"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement",
+        "caller",
+        "path-caller",
+        "parent-cursor",
+        "parent-length",
+        "parent-error",
+        "negative-decline-effects",
+        "negative-old-close"
+      ],
+      "success": true
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 332,
+        "path": "/private/tmp/unison-whole-clone-cqtxihcq/033-negative-old-close.log",
+        "sha256": "798a42c148a85d2d48b105f62efdf7021247f8155f3bb5052adc18d207e782f1"
+      },
+      "receipt": {
+        "bytes": 244695,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial8.json",
+        "sha256": "408c20217f62bbbbd303baa41f813856bb07e84515276f2528b5bda0d747d8b6"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native",
+        "named-settlement",
+        "caller",
+        "path-caller",
+        "parent-cursor",
+        "parent-length",
+        "parent-error",
+        "negative-decline-effects",
+        "negative-old-close"
+      ],
+      "success": true
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 197,
+        "path": "/private/tmp/unison-whole-clone-qot59l9y/013-named-settlement.log",
+        "sha256": "8e58153dc4a1314dd2613768dc06d32a8b46f2f5c4d9553888c2a1af78998709"
+      },
+      "receipt": {
+        "bytes": 118186,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests.json",
+        "sha256": "e96e72102d54a37b45e9d982acf90172c32909d1fbb75f677bc010233188f3f8"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native"
+      ],
+      "success": false
+    },
+    {
+      "classification": "predecessor fixture trial, not counted in final matched qualification",
+      "last_command_exit": 2,
+      "last_command_log": {
+        "bytes": 197,
+        "path": "/private/tmp/unison-whole-clone-ed56w3o6/013-named-settlement.log",
+        "sha256": "8e58153dc4a1314dd2613768dc06d32a8b46f2f5c4d9553888c2a1af78998709"
+      },
+      "receipt": {
+        "bytes": 118186,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial2.json",
+        "sha256": "14d21a15c487298cb5b3ece91150b732cb3d5d51ec8c701168f38d194fa16394"
+      },
+      "recorded_case_names": [
+        "unit",
+        "native"
+      ],
+      "success": false
+    }
+  ],
+  "production_freeze": {
+    "bytes": 32931,
+    "path": "/private/tmp/unison-whole-file-clone-build-records/SOURCE-FREEZE.json",
+    "sha256": "892293aa81162cdde8fae17afb7209750ffb7fd6c66c6cdb166ed7b9f1860173"
+  },
+  "production_inputs": 332,
+  "readme_note": "README was updated after runs; each original recorded README pin is verified against retained matched Make snapshot. It is not a compiler/runtime input. Nine fixture code files remain byte-identical to both final receipts.",
+  "reviewer": "root/native_range_audit",
+  "runtime_source_evidence": {
+    "bytes": 3873,
+    "path": "/private/tmp/unison-whole-file-clone-build-records/runtime-source-evidence/EVIDENCE.json",
+    "sha256": "6e2a8f8ed00ec39b513b13dbb959205e03b1b76957fe718982528179d731d797"
+  },
+  "schema": "unison-whole-file-clone-independent-review/1",
+  "scope": "Matched final stock9/Ox3 whole-clone fixture evidence and selected close/source/parent/byte ownership oracles. Source/receipt review only; no qualification rerun by reviewer.",
+  "total_designated_negatives": 10,
+  "total_fixed_assertions": 1072,
+  "total_fixed_groups": 120,
+  "verification_errors": [],
+  "verified_counts": {
+    "artifact_pins": 404,
+    "command_input_pins": 226,
+    "command_log_pins": 68,
+    "fixture_code_pins": 18,
+    "linked_object_pins": 202,
+    "production_source_checks": 1328,
+    "reconstructed_fixture_and_census_source_checks": 24,
+    "reconstructed_private_source_checks": 20
+  }
+}

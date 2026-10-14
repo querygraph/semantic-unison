@@ -76,6 +76,29 @@ external copy_file : Unix.file_descr -> Unix.file_descr -> int64
 external copy_file_status : Unix.file_descr -> Unix.file_descr -> int64 -> int ->
   (int * int * int * int * Unix.error option * int * int * int64) = "unison_copy_file_status"
 
+type whole_clone_owner
+external clone_file_status_raw : Unix.file_descr -> Unix.file_descr -> int64 ->
+  (int * int64 * int * int * Unix.error option * int * int * int64) =
+  "unison_clone_file_status"
+external whole_clone_named_available : unit -> bool =
+  "unison_whole_clone_named_available" [@@noalloc]
+external whole_clone_prepare_named : string -> whole_clone_owner =
+  "unison_whole_clone_prepare_named"
+external whole_clone_run_named : Unix.file_descr -> Unix.file_descr -> int64 ->
+  whole_clone_owner ->
+  (int * int64 * int * int * Unix.error option * int * int * int64) =
+  "unison_whole_clone_run_named"
+external whole_clone_peek_named_output : whole_clone_owner -> Unix.file_descr =
+  "unison_whole_clone_peek_named_output"
+external whole_clone_transfer_named_output : whole_clone_owner -> Unix.file_descr ref ->
+  bool ref -> unit = "unison_whole_clone_transfer_named_output"
+external whole_clone_abort_named : whole_clone_owner -> Unix.file_descr ->
+  (Unix.error option * int64 * int) = "unison_whole_clone_abort_named"
+external whole_clone_finish_named : whole_clone_owner -> (Unix.error option * int64 * int) =
+  "unison_whole_clone_finish_named"
+external whole_clone_close_slot : Unix.file_descr ref -> bool ref -> unit =
+  "unison_whole_clone_close_slot"
+
 (****)
 
 let create_process prog args stdin stdout stderr =

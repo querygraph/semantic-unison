@@ -4,6 +4,23 @@
 
 ## Live implementation handoff
 
+* Quasar priority (user, 2026-10-14): Photo Root has received the request to
+  finish native recognition of the independently authored Ten-only recipe and
+  then admit the bounded split-storage matrix. The current pointer at
+  **05:03:29 UTC** says the original owner is preparing an executable and
+  independent review for an **empty private Ten-only cache constructor/close**
+  prerequisite; no new native or production-publisher window is released.
+  Private recipe source/recovery is ready, with eleven recovery cases and
+  eleven invalid holds; this remains separate from native use. The small
+  2272×1704 control can prove storage mechanics. A representative current
+  large-source/crop key must separately exercise a justified monitor-scale
+  native ladder level, rather than claiming that small control proves 5120
+  coverage. Native fixture/lifecycle qualification determines readiness;
+  there is no evidence-based wall-clock ETA yet. Parent coordination works
+  through `codex queue`; the stale local MCP HTTP endpoint at port 51114 has
+  no listener and is unnecessary for this restored route. No process restart,
+  native replay or transport/security alteration repaired that route.
+
 * Exact next finite publisher test: [Ten-only offline registration](doc/preview-offline-registration-test-plan.md)
   reuses control `10031592` and six preserved JPEGs in a Root-qualified private
   native catalog/cache fixture. Target metadata must be absent before the
@@ -117,16 +134,44 @@
   publisher ownership stays with `/root/preview_implementation`; Unison reviews
   metadata through the parent queue and launches no competing native work.
 
-* Whole-file clone continuation: the [strict-result proposal](doc/whole-file-clone-status-proposal.md)
-  and [independent caller/test plan](doc/whole-file-clone-status-test-plan.md)
-  close the source-design pass for the remaining boolean clone branches.
-  Additive results must validate captured source EOF, preserve source cursors,
-  reconcile the output cursor, propagate operational errors and permit fallback
-  only after a verified untouched decline. Named creation retains separate
-  parent/output ownership and caller-approved source resolution. Empty-file
-  behavior and native clone metadata differ from a data-only stage. These are
-  source plans; production implementation and execution remain next core work.
-  Tested core checkpoint `aa53e3a` is pushed.
+* Whole-file clone implementation is qualified for the bounded core scope
+  (2026-10-14):
+  `WholeFileClone` validates separate typed Int64 receipts; ordinary `Copy`
+  uses strict named/FD APIs instead of the unchanged compatibility booleans.
+  Named macOS creation retains a custom native ownership carrier, follows the
+  selected regular DATA source, checks fresh source binding and publishes an
+  owned intermediate through `StagePublication`. Captured EOF reaches all
+  source-copy branches; the sized data-only stage is separate from unsized
+  receiver-basis reconstruction. FD cloning preserves source read-ahead and
+  reconciles output before progress or later literals. Exclusive/adopted
+  provenance gates cloning; compatibility O_TRUNC opening cannot supply it.
+  Initial matched stock/Ox Make/selftests passed as retained pre-close-fix
+  trials. Source review then found Unix.close could dispatch pending work
+  before the OS close after an ML owner flag was cleared. A native slot close
+  now disarms and closes once without intervening pending dispatch; its saved
+  error is raised only after settlement. Final **332-source** refreeze passes
+  Make/selftest and clean Dune/selftest on stock **5.5.1** and Ox **5.2.0+ox**.
+  Both compilers pass **60 fixed groups / 536 assertions**, five designated
+  negative controls and seven existing clone regressions each. Normal native
+  controls use the unchanged compiled C object; edited native code is restricted
+  to explicit fault controls. Actual nodump-source fallback, source/basis EOF
+  distinction, output continuation, exclusive/O_TRUNC provenance, source-name
+  retargeting, parent/name replacement and cleanup ownership are covered.
+  The uniform signal fixture observes real nonraising signal delivery, then
+  raises an ordinary synchronous C fault. Ox rejects arbitrary Fault.Primary
+  signal exceptions; retained fatal fixture trials qualify that policy, not
+  general asynchronous exception handling. No private Sys.with_async_exns guard
+  was added. [Component evidence](tests/whole_file_clone/qualification.json)
+  and [integration evidence](tests/qualification/whole-file-clone-integration-20261014.json)
+  preserve successful and failed trials, source/object/binary/log pins and
+  limits; the [independent fixture/receipt review](tests/qualification/whole-file-clone-independent-review-20261014.json)
+  accepts both final packages and preserves the earlier signal-policy failures.
+  Native Linux/Windows/BSD execution, physical allocation, performance,
+  hostile namespace races, arbitrary open-return interruption and existing
+  three-handle stage ABI limits remain unqualified. No Photo/Adobe operation
+  was part of these core tests. The [proposal](doc/whole-file-clone-status-proposal.md) and
+  [test plan](doc/whole-file-clone-status-test-plan.md) remain historical design
+  artifacts. Previously tested core checkpoint `aa53e3a` is pushed.
 
 * Earlier Photo renewal (received 03:03 UTC): the
   [Root renewal at 02:14:39 UTC](doc/preview-finite-oracle-resumption-20261013.json)

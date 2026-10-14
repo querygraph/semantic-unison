@@ -1,0 +1,296 @@
+{
+  "Photo_or_Adobe_access": false,
+  "benchmarks": false,
+  "fixed_per_compiler": {
+    "assertions": 536,
+    "components": [
+      {
+        "assertions": 108,
+        "groups": 15,
+        "name": "typed"
+      },
+      {
+        "assertions": 116,
+        "groups": 17,
+        "name": "unchanged_mac_native"
+      },
+      {
+        "assertions": 87,
+        "groups": 9,
+        "name": "named_owner_faults"
+      },
+      {
+        "assertions": 177,
+        "groups": 12,
+        "name": "full_Copy_FD_caller"
+      },
+      {
+        "assertions": 48,
+        "groups": 7,
+        "name": "full_Copy_named_caller"
+      }
+    ],
+    "groups": 60
+  },
+  "fixture_current_pins": {
+    "README.md": {
+      "bytes": 5250,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/README.md",
+      "sha256": "3689cb193dc35020566a5c3f43bd748e0720f12bf6d56f2637225881bb68c00e"
+    },
+    "caller.ml": {
+      "bytes": 12225,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/caller.ml",
+      "sha256": "043e4fe54963f99151aa7b985ca56eb55111e33a9aeb2f1871bd4ff47b9f44d4"
+    },
+    "fault.ml": {
+      "bytes": 1996,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/fault.ml",
+      "sha256": "9621ff49fd516b22386cdbb20a896850876642cf171e5b04b16e0d76e33b4f27"
+    },
+    "native.ml": {
+      "bytes": 13093,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/native.ml",
+      "sha256": "5dcbc681a3aef25bb69345e893fdded0a20bf4a86a2331c423396c9ee0ea6f4b"
+    },
+    "native_fixture_stubs.c": {
+      "bytes": 5747,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/native_fixture_stubs.c",
+      "sha256": "0a92e2f333cb8ce0727ce3553776323181a3dc15f1cee02b0d9eeb581b8fc7e9"
+    },
+    "pathCaller.ml": {
+      "bytes": 6870,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/pathCaller.ml",
+      "sha256": "761c06f04ba13982036967d8127d8c1088095f23f66007f5940eafcb733f1143"
+    },
+    "run.py": {
+      "bytes": 18044,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/run.py",
+      "sha256": "9254e04ffa52c06c1ee90b6cd2623346f759ef1eeaac48fa70e6b647c3e71aea"
+    },
+    "settlement.ml": {
+      "bytes": 10062,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/settlement.ml",
+      "sha256": "bbb2a0c2a960e9864b3775770a254dc792a138f2126dc9a36a816fe2a8c214d8"
+    },
+    "unit.ml": {
+      "bytes": 6394,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/unit.ml",
+      "sha256": "c51d23e40904f22f09e158b8dab444e99156b8050068486b6525abd6ae2b2f6e"
+    },
+    "wholeCommon.ml": {
+      "bytes": 2897,
+      "path": "/Users/alexy/src/unison/tests/whole_file_clone/wholeCommon.ml",
+      "sha256": "0fad814f0519f9c2ae6ebcd172f3322a1113218046eb7b117f33ae4fb8c0b584"
+    }
+  },
+  "limits": [
+    "No measured physical-sharing/allocation telemetry or performance benchmark",
+    "No native Linux, ZFS, ReFS or Windows execution claim",
+    "Native source/namespace observations remain cooperative, not hostile first-admission or atomic compare-and-unlink proof",
+    "Pre-admission output-open failure honestly leaves unqualified private created residue until fixture-owned removal",
+    "No crash recovery or arbitrary System.openfile pre-return exception proof",
+    "No arbitrary Ox asynchronous exception catching; real signal event plus synchronous fault only in uniform final controls",
+    "No Photo, Adobe, cache/catalog, production namespace, volume mount or payload operations"
+  ],
+  "native_object_routing": "unit uses production WholeFileClone object; normal native/channel/path link unchanged production wholeFileClone_stubs.o; only explicit named fault cases link retained privately edited C object",
+  "negative_controls": {
+    "exact_parent_Copy_source": {
+      "commit": "330d04829c43f6a19f6d5af1a95cf3ea24d24635",
+      "oracles": [
+        "complete output native/cached cursor and following literal",
+        "destination expected EOF",
+        "no ordinary fallback after unknown extra write"
+      ],
+      "scope": "exact parent Copy caller with current support/native objects; not a full parent binary",
+      "sha256": "b1586879651ca20538e4eb1cf00394021e9db089a980abae0987757142f2e42f"
+    },
+    "private_old_close_operation": "clear owner and call actual linked caml_unix_close; real returning signal callback sees the disarmed descriptor live before OSclose",
+    "private_single_predicate_decline_mutation": "remove only no-effect guard; independent byte/extra-write and work-count oracle fails"
+  },
+  "negative_per_compiler": 5,
+  "physical_sharing_measured": false,
+  "production_freeze": {
+    "bytes": 32931,
+    "path": "/private/tmp/unison-whole-file-clone-build-records/SOURCE-FREEZE.json",
+    "sha256": "892293aa81162cdde8fae17afb7209750ffb7fd6c66c6cdb166ed7b9f1860173"
+  },
+  "production_input_count": 332,
+  "retained_trial_explanations": {
+    "ox1_ox2": "installed Ox runtime fatally rejects signal-handler Fault.Primary; corrected uniform returning signal handler plus ordinary C raise",
+    "stock1": "fixture FD-option refs lacked concrete type annotation",
+    "stock2": "effect test identifier is reserved in OCaml5.5",
+    "stock3": "fixture legacy boolean hook ref lacked concrete FD argument types",
+    "stock4": "fixture fallback progress callback was ignored while progress oracle expected total length",
+    "stock5": "fixture path compatibility control missing a closing parenthesis",
+    "stock6": "old-close negative actually saw live FD; generic primary assertion masked the designated independent message",
+    "stock7_stock8": "successful preliminary stock-only throwing-signal versions; retained separately from uniform final fixture",
+    "stock9_ox3": "final identical test code and production freeze; all fixed cases and controls accepted"
+  },
+  "schema": "unison-whole-file-clone-component/1",
+  "signal_contract": {
+    "actual_fatal_trials": [
+      {
+        "bytes": 118186,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests.json",
+        "sha256": "e96e72102d54a37b45e9d982acf90172c32909d1fbb75f677bc010233188f3f8"
+      },
+      {
+        "bytes": 118186,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial2.json",
+        "sha256": "14d21a15c487298cb5b3ece91150b732cb3d5d51ec8c701168f38d194fa16394"
+      }
+    ],
+    "legacy_API_alerts": "unsafe_multidomain alerts retained; no multi-domain signal/Callback type proof",
+    "observed_stderr": "Fatal error: exception Fault.Primary",
+    "ox_runtime_source": {
+      "bytes": 25972,
+      "path": "/Users/alexy/.opam/5.2.0+ox/.opam-switch/sources/oxcaml-compiler.5.2.0minus39/runtime/signals.c",
+      "sha256": "a5510c3db198dcb08a882aebea3d389d896998cd94ba42354b36e81a12f789ff"
+    },
+    "source_lines": "check_async_exn 272-298; asynchronous exception contexts described by installed stdlib/sys.mli",
+    "stock_earlier_throwing_handler_success": [
+      {
+        "bytes": 244695,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial7.json",
+        "sha256": "e9a3a22d580a4e8ec095d1dd399bfcef419997b80f569117725d6543045db468"
+      },
+      {
+        "bytes": 244695,
+        "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial8.json",
+        "sha256": "408c20217f62bbbbd303baa41f813856bb07e84515276f2528b5bda0d747d8b6"
+      }
+    ],
+    "uniform_final": "real signal ownership observation in returning handler followed immediately by synchronous registered Primary from private C; not arbitrary async exception catching"
+  },
+  "state": "QUALIFIED_SCOPED_CORE_AND_OWN_APFS_FIXTURES",
+  "successful_receipts": {
+    "ox": {
+      "bytes": 245153,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial3.json",
+      "sha256": "b4f232c17a01b4e256b748da3a0f911367a59cfa4fddee62b74354c58006a42e"
+    },
+    "stock": {
+      "bytes": 244695,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial9.json",
+      "sha256": "5746e80708298f03efa7d5af6626cbfceae99811f9063d9012d789db98c27151"
+    }
+  },
+  "trial_history": [
+    {
+      "bytes": 63413,
+      "checked_artifacts": 24,
+      "commands": 5,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests.json",
+      "sha256": "5d0eb6a47b283ddcc694b8151074c7ba21b5ef34640ef8d82c2a5aebc6143276",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-yadpw0oi"
+    },
+    {
+      "bytes": 74781,
+      "checked_artifacts": 46,
+      "commands": 9,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial2.json",
+      "sha256": "fd325679b5a35b6ea6ed285dd4a234f9925bd262adcf8bd25365f4623c72c58f",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-mowo080z"
+    },
+    {
+      "bytes": 119247,
+      "checked_artifacts": 89,
+      "commands": 15,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial3.json",
+      "sha256": "ba7a77b019c95ea842c69c99e59d842276f32646cf496978ba0fa4110435d159",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-jzd5ohiv"
+    },
+    {
+      "bytes": 140871,
+      "checked_artifacts": 111,
+      "commands": 17,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial4.json",
+      "sha256": "57b1dde81bdee7ca2e748a107f156e1ab8af38740c2f0be966ad92f63a03a969",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-4u56xqc9"
+    },
+    {
+      "bytes": 160761,
+      "checked_artifacts": 125,
+      "commands": 18,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial5.json",
+      "sha256": "3122e4a24beca06e7c931c0759fbad7b62f42117d8d9e372ce412f6f70a40af5",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-yl9qv4t3"
+    },
+    {
+      "bytes": 244504,
+      "checked_artifacts": 202,
+      "commands": 34,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial6.json",
+      "sha256": "a9ee4ee06cfc4db135b906280a2a762e8369d4b3d0c413cb400a85b1cb8fb946",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-iur6pi_k"
+    },
+    {
+      "bytes": 244695,
+      "checked_artifacts": 202,
+      "commands": 34,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial7.json",
+      "sha256": "e9a3a22d580a4e8ec095d1dd399bfcef419997b80f569117725d6543045db468",
+      "success": true,
+      "work": "/private/tmp/unison-whole-clone-_peenxzu"
+    },
+    {
+      "bytes": 244695,
+      "checked_artifacts": 202,
+      "commands": 34,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial8.json",
+      "sha256": "408c20217f62bbbbd303baa41f813856bb07e84515276f2528b5bda0d747d8b6",
+      "success": true,
+      "work": "/private/tmp/unison-whole-clone-cqtxihcq"
+    },
+    {
+      "bytes": 244695,
+      "checked_artifacts": 202,
+      "commands": 34,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial9.json",
+      "sha256": "5746e80708298f03efa7d5af6626cbfceae99811f9063d9012d789db98c27151",
+      "success": true,
+      "work": "/private/tmp/unison-whole-clone-f0z65onw"
+    },
+    {
+      "bytes": 118186,
+      "checked_artifacts": 90,
+      "commands": 14,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests.json",
+      "sha256": "e96e72102d54a37b45e9d982acf90172c32909d1fbb75f677bc010233188f3f8",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-qot59l9y"
+    },
+    {
+      "bytes": 118186,
+      "checked_artifacts": 90,
+      "commands": 14,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial2.json",
+      "sha256": "14d21a15c487298cb5b3ece91150b732cb3d5d51ec8c701168f38d194fa16394",
+      "success": false,
+      "work": "/private/tmp/unison-whole-clone-ed56w3o6"
+    },
+    {
+      "bytes": 245153,
+      "checked_artifacts": 202,
+      "commands": 34,
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial3.json",
+      "sha256": "b4f232c17a01b4e256b748da3a0f911367a59cfa4fddee62b74354c58006a42e",
+      "success": true,
+      "work": "/private/tmp/unison-whole-clone-qvsldkr7"
+    }
+  ],
+  "utc": "2026-10-14T05:18:12.988713+00:00",
+  "verified_retention": {
+    "all_artifact_bytes_log_and_per_command_input_pins_rechecked": true,
+    "artifact_pins": 1585,
+    "commands": 262,
+    "receipts": 12
+  }
+}

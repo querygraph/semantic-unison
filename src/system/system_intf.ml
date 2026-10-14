@@ -96,6 +96,27 @@ module type Full = sig
 
 include Core with type fspath = string
 
+(* Internal additive whole-clone ABI. The named owner keeps created output
+ * discoverable across native result allocation and pending exception delivery;
+ * source and actual parent descriptors are always borrowed. *)
+type whole_clone_owner
+val clone_file_status_raw : Unix.file_descr -> Unix.file_descr -> int64 ->
+  (int * int64 * int * int * Unix.error option * int * int * int64)
+val whole_clone_named_available : unit -> bool
+val whole_clone_prepare_named : string -> whole_clone_owner
+val whole_clone_run_named : Unix.file_descr -> Unix.file_descr -> int64 ->
+  whole_clone_owner ->
+  (int * int64 * int * int * Unix.error option * int * int * int64)
+val whole_clone_peek_named_output : whole_clone_owner -> Unix.file_descr
+val whole_clone_transfer_named_output : whole_clone_owner -> Unix.file_descr ref ->
+  bool ref -> unit
+val whole_clone_abort_named : whole_clone_owner -> Unix.file_descr ->
+  (Unix.error option * int64 * int)
+val whole_clone_finish_named : whole_clone_owner -> (Unix.error option * int64 * int)
+val whole_clone_close_slot : Unix.file_descr ref -> bool ref -> unit
+(* Valid POSIX owner slots are disarmed before one no-pending native close.
+ * Error delivery follows settlement; never retry a possibly reused FD. *)
+
 val extendedPath : string -> fspath
 
 val putenv : string -> string -> unit

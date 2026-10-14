@@ -367,7 +367,10 @@ let closeFileIn = inFdResource.release
 
 let closeFileInNoErr = inFdResource.release_noerr
 
-let openFileOut' fspath path kind len =
+let openFileOut' ?clone_owned fspath path kind len =
+  let mark_exclusive exclusive =
+    match clone_owned with None -> () | Some owned -> owned := exclusive in
+  mark_exclusive false;
   match kind with
     `DATA ->
       let fullpath = Fspath.concat fspath path in
@@ -375,12 +378,16 @@ let openFileOut' fspath path kind len =
       let perm = if Prefs.read Props.dontChmod then Props.perms Props.fileDefault else 0o600 in
       begin match Sys.win32 with
       | true ->
-          Fs.open_out_gen
-            [Open_wronly; Open_creat; Open_excl; Open_binary] perm fullpath
+          let output = Fs.open_out_gen
+            [Open_wronly; Open_creat; Open_excl; Open_binary] perm fullpath in
+          mark_exclusive true;
+          output
       | false ->
           let fd =
             try
-              Fs.openfile fullpath (Unix.O_EXCL :: flags) perm
+              let descriptor = Fs.openfile fullpath (Unix.O_EXCL :: flags) perm in
+              mark_exclusive true;
+              descriptor
             with
               Unix.Unix_error
                 ((Unix.EOPNOTSUPP | Unix.EUNKNOWNERR 524), _, _) ->
@@ -388,7 +395,8 @@ let openFileOut' fspath path kind len =
                  Solaris and Linux report different errors. *)
                 Fs.openfile fullpath (Unix.O_TRUNC :: flags) perm
           in
-          Unix.out_channel_of_descr fd
+          (try Unix.out_channel_of_descr fd with error ->
+             (try Unix.close fd with _ -> ()); raise error)
       end
   | `DATA_APPEND len ->
       let fullpath = Fspath.concat fspath path in
@@ -400,16 +408,20 @@ let openFileOut' fspath path kind len =
   | `RESS ->
       Osx.openRessOut fspath path len
 
-let openFileOut fspath path kind len =
-  outFdResource.register (openFileOut' fspath path kind len)
+let openFileOut ?clone_owned fspath path kind len =
+  let output = openFileOut' ?clone_owned fspath path kind len in
+  try outFdResource.register output with error ->
+    close_out_noerr output; raise error
 
 let closeFileOut = outFdResource.release
 
 let closeFileOutNoErr = outFdResource.release_noerr
 
-let openProducerOutput producer fspath path kind len =
+let openProducerOutput ?clone_owned producer fspath path kind len =
+  (match clone_owned with None -> () | Some owned -> owned := false);
   match producer with
-  | None | Some { legacy = true; _ } -> openFileOut fspath path kind len
+  | None | Some { legacy = true; _ } ->
+      openFileOut ?clone_owned fspath path kind len
   | Some state ->
       checkProducer producer;
       let output = match kind with
@@ -443,6 +455,9 @@ let openProducerOutput producer fspath path kind len =
                Unix.LargeFile.ftruncate (Unix.descr_of_out_channel output) 0L;
              LargeFile.seek_out output (Uutil.Filesize.toInt64 offset));
         checkProducer producer;
+        (match kind, clone_owned with
+         | `DATA, Some owned -> owned := true
+         | _ -> ());
         output
       with error ->
         (try closeFileOutNoErr output with _ -> close_out_noerr output);
@@ -687,15 +702,38 @@ let copyClonedRange lease input output source_offset length =
         raise (Util.Transient "Clone basis or stage binding changed") | _ -> raise error)
   | CloneRange.Stopped _ -> raise (Util.Transient "Clone range binding or progress is invalid")
 
-let copyFile inCh outCh kind len fallback notify =
+let copyFile ?(clone_owned=false) inCh outCh kind len fallback notify =
+  (* Whole-source acceleration needs provenance from exclusive creation or
+     producer adoption. Empty/singly-linked observations alone are not proof
+     of ownership, and buffered channel offsets are distinct from FD offsets. *)
+  let may_clone = kind = `DATA && clone_owned && receiverCloneEnabled () in
+  let at_source_start = may_clone && LargeFile.pos_in inCh = 0L
+  and at_output_start = may_clone && LargeFile.pos_out outCh = 0L in
   (* Flush the buffered output channel just in case since we're going to
      manipulate the channel's underlying fd directly. *)
   flush outCh;
   let src = Unix.descr_of_in_channel inCh
   and dst = Unix.descr_of_out_channel outCh in
-  if kind = `DATA && receiverCloneEnabled () && Fs.clone_file src dst then
-    notify len
-  else
+  let whole_complete =
+    if not (at_source_start && at_output_start) then false else
+    let output_info = Unix.LargeFile.fstat dst in
+    if output_info.Unix.LargeFile.st_size <> 0L ||
+       Unix.LargeFile.lseek dst 0L Unix.SEEK_CUR <> 0L then false else
+    let expected_length = Uutil.Filesize.toInt64 len in
+    match WholeFileClone.validate_result ~expected_length
+      (Fs.clone_file_status ~expected_length src dst) with
+    | WholeFileClone.Native_shared _ | WholeFileClone.No_work _ ->
+        (* The strict native API preserves both FD cursors. Only the output
+           channel is advanced; preserve source read-ahead and its next byte. *)
+        LargeFile.seek_out outCh expected_length;
+        if LargeFile.pos_out outCh <> expected_length ||
+           Unix.LargeFile.lseek dst 0L Unix.SEEK_CUR <> expected_length then
+          raise (Util.Transient "Whole-file clone output cursor is inconsistent");
+        notify len;
+        true
+    | WholeFileClone.Declined _ -> false
+    | WholeFileClone.Failed receipt -> WholeFileClone.raise_failed receipt in
+  if whole_complete then () else
     let tryCopyFileRange src dst src_offs len fallback notify =
       let fallback' copied =
         (* Fallback to read-write loop expects that seek positions in input
@@ -722,7 +760,7 @@ let copyFile inCh outCh kind len fallback notify =
     | `DATA_APPEND offs -> tryCopyFileRange src dst offs len fallback notify
     | `RESS -> fallback len
 
-let copyBoundClone producer basisPath directory candidate suffix write =
+let copyBoundClone ?expected_length producer basisPath directory candidate suffix write =
   checkProducer producer;
   let stage = Os.tempPath ~fresh:true directory
     (Path.addSuffixToFinalName candidate suffix) in
@@ -731,7 +769,11 @@ let copyBoundClone producer basisPath directory candidate suffix write =
   | Some prepared ->
       let publication = registerClonePublication prepared in
       try
-        match Fs.clone_stage_handles basisPath (Fspath.concat directory stage) with
+        let cloned = match expected_length with
+          | None -> Fs.clone_stage_handles basisPath (Fspath.concat directory stage)
+          | Some expected_length -> Fs.clone_stage_handles_sized ~expected_length
+              basisPath (Fspath.concat directory stage) in
+        match cloned with
         | Fs.Declined_stage_handles Fs.Non_regular_source ->
             raise (Util.Transient "Clone producer basis is no longer a regular file")
         | Fs.Declined_stage_handles _ ->
@@ -745,8 +787,19 @@ let copyBoundClone producer basisPath directory candidate suffix write =
                recycled original descriptor integers. *)
             let basis, output = cloneChannels basisFd outputFd in
             (try
+               let check_source_length () = match expected_length with
+                 | None -> ()
+                 | Some expected_length ->
+                     let basis_size =
+                       (Unix.LargeFile.fstat (Unix.descr_of_in_channel basis)).Unix.LargeFile.st_size
+                     and output_size =
+                       (Unix.LargeFile.fstat (Unix.descr_of_out_channel output)).Unix.LargeFile.st_size in
+                     if basis_size <> expected_length || output_size <> expected_length then
+                       raise (Util.Transient "Source clone length changed before publication") in
+               check_source_length ();
                write basis output;
                flush output;
+               check_source_length ();
                StagePublication.publish publication;
                adoptProducer producer outputFd;
                StagePublication.disarm publication;
@@ -759,14 +812,77 @@ let copyBoundClone producer basisPath directory candidate suffix write =
                raise error)
       with error -> closeClonePublicationNoErr publication; raise error
 
-let copyByPath ?producer fspathFrom pathFrom fspathTo pathTo =
+let copyNamedSource ~expected_length producer source directory candidate =
+  if not (StagePublication.available ()) then false else
+  let stage = Os.tempPath ~fresh:true directory
+    (Path.addSuffixToFinalName candidate "-whole-source-clone") in
+  match prepareClonePublication directory stage candidate with
+  | None -> false
+  | Some prepared ->
+      let publication = registerClonePublication prepared in
+      (* Allocate owner slots before native creation. The readonly witness is
+         consumed only here; publication retains a separate cleanup witness. *)
+      let output_fd = ref Unix.stdin and output_owned = ref false in
+      let close_output () =
+        System.whole_clone_close_slot output_fd output_owned in
+      let close_output_noerr () = try close_output () with _ -> () in
+      try
+        match Fs.clone_path_status ~expected_length source
+          (Fspath.concat directory stage) with
+        | Fs.Declined_path (scope, receipt) ->
+            ignore (WholeFileClone.validate_result ~expected_length
+              (WholeFileClone.Declined (scope, receipt)));
+            clonePublicationResource.release publication;
+            false
+        | Fs.Created_path (receipt, output, parent) ->
+            output_fd := output; output_owned := true;
+            (* adopt consumes parent on both success and failure, and borrows
+               output until its own identity-bound settlement completes. *)
+            StagePublication.adopt publication ~parent ~stage:output;
+            (* Settle descriptor/name ownership before validating any typed
+               receipt supplied by the facade. Malformed success is terminal. *)
+            ignore (WholeFileClone.validate_result ~expected_length
+              (WholeFileClone.Native_shared receipt));
+            if (Unix.LargeFile.fstat output).Unix.LargeFile.st_size <> expected_length then
+              raise (Util.Transient "Whole-source clone length changed before publication");
+            StagePublication.publish publication;
+            adoptProducer producer output;
+            StagePublication.disarm publication;
+            close_output ();
+            clonePublicationResource.release publication;
+            true
+      with error ->
+        let cleanup_error =
+          try clonePublicationResource.release publication; None
+          with cleanup -> Some cleanup in
+        close_output_noerr ();
+        match cleanup_error with
+        | None -> raise error
+        | Some cleanup ->
+            raise (Util.Transient (Printf.sprintf
+              "Whole-source clone failed: %s; owned publication cleanup failed: %s"
+              (Printexc.to_string error) (Printexc.to_string cleanup)))
+
+let copyByPath ?producer ~expected_length fspathFrom pathFrom fspathTo pathTo =
   if not (receiverCloneEnabled ()) then false else
-  match producer with
-  | None | Some { legacy = true; _ } ->
-      Fs.clone_path (Fspath.concat fspathFrom pathFrom) (Fspath.concat fspathTo pathTo)
-  | Some _ ->
-      copyBoundClone producer (Fspath.concat fspathFrom pathFrom)
-        fspathTo pathTo "-source-clone" (fun _ _ -> ())
+  try
+    match producer with
+    | None | Some { legacy = true; _ } ->
+        copyNamedSource ~expected_length producer (Fspath.concat fspathFrom pathFrom)
+          fspathTo pathTo
+    | Some _ ->
+        copyBoundClone ~expected_length producer (Fspath.concat fspathFrom pathFrom)
+          fspathTo pathTo "-source-clone" (fun _ _ -> ())
+  with Fs.Clone_path_cleanup_failed failure ->
+    let residue = match failure.Fs.residual with
+      | Fs.Absent -> "absent"
+      | Fs.Removed_owned_entry -> "removed owned entry"
+      | Fs.Unqualified_entry_may_remain -> "unqualified entry may remain" in
+    raise (Util.Transient (Printf.sprintf
+      "Whole-source clone failed: %s; native cleanup: %s; residue: %s"
+      (Printexc.to_string failure.Fs.primary)
+      (match failure.Fs.cleanup_error with None -> "no secondary error"
+       | Some cleanup -> Printexc.to_string cleanup) residue))
 
 (* The fds opened in this function normally shouldn't be tracked for extra
    cleanup at connection close because this is sequential non-Lwt code. Yet,
@@ -776,14 +892,18 @@ let copyByPath ?producer fspathFrom pathFrom fspathTo pathTo =
    [closeFile*] functions). *)
 let copyContents ?producer fspathFrom pathFrom fspathTo pathTo fileKind fileLength ido =
   let use_id f = match ido with Some id -> f id | None -> () in
-  if fileKind = `DATA && copyByPath ?producer fspathFrom pathFrom fspathTo pathTo then
+  if fileKind = `DATA && copyByPath ?producer
+    ~expected_length:(Uutil.Filesize.toInt64 fileLength)
+    fspathFrom pathFrom fspathTo pathTo then
     use_id (fun id -> Uutil.showProgress id fileLength "l")
   else
   (* Open fds only if copying by path did not work *)
   let inFd = openFileIn fspathFrom pathFrom fileKind in
   protect
     (fun () ->
-       let outFd = openProducerOutput producer fspathTo pathTo fileKind fileLength in
+       let clone_owned = ref false in
+       let outFd = openProducerOutput ~clone_owned producer
+         fspathTo pathTo fileKind fileLength in
        protect
          (fun () ->
             let showProgress l =
@@ -794,7 +914,8 @@ let copyContents ?producer fspathFrom pathFrom fspathTo pathTo fileKind fileLeng
             in
             let fallback remaining = Uutil.readWriteBounded inFd outFd remaining
               (fun l -> showProgress (Uutil.Filesize.ofInt l)) in
-            copyFile inFd outFd fileKind fileLength fallback showProgress;
+            copyFile ~clone_owned:!clone_owned inFd outFd fileKind
+              fileLength fallback showProgress;
             flush outFd;
             checkProducer producer;
             closeFileIn inFd;
@@ -916,7 +1037,9 @@ let localFileContents ?producer ?basis fspathFrom pathFrom fspathTo pathTo desc 
       let cloned = match basis with
         | Some previous when receiverCloneEnabled () ->
             (* Prefer cloning the actual source when it is on this volume. *)
-            let completed = copyByPath ?producer fspathFrom pathFrom fspathTo pathTo in
+            let completed = copyByPath ?producer
+              ~expected_length:(Uutil.Filesize.toInt64 (Props.length desc))
+              fspathFrom pathFrom fspathTo pathTo in
             if completed then begin
               (match ido with None -> () | Some id ->
                 Uutil.showProgress id (Props.length desc) "l");
@@ -961,7 +1084,9 @@ let localFileAsync ?producer
       removeOldTempFile fspathTo pathTo;
       checkProducer producer;
       let copied () =
-        if copyByPath ?producer fspathFrom pathFrom fspathTo pathTo then begin
+        if copyByPath ?producer
+          ~expected_length:(Uutil.Filesize.toInt64 (Props.length desc))
+          fspathFrom pathFrom fspathTo pathTo then begin
           debug (fun () -> Util.msg "Local source clone completed before semantic planning\n");
           Lwt.return true
         end

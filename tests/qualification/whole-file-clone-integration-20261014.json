@@ -1,0 +1,122 @@
+{
+  "schema": "unison-whole-file-clone-integration/1",
+  "utc": "2026-10-14",
+  "sourceParent": "330d04829c43f6a19f6d5af1a95cf3ea24d24635",
+  "productionSourceCount": 332,
+  "sourceFreeze": {
+    "path": "/private/tmp/unison-whole-file-clone-build-records/SOURCE-FREEZE.json",
+    "bytes": 32931,
+    "sha256": "892293aa81162cdde8fae17afb7209750ffb7fd6c66c6cdb166ed7b9f1860173"
+  },
+  "result": "QUALIFIED_FOR_BOUNDED_PRIVATE_MACOS_AND_SYNTHETIC_CORE_SCOPE",
+  "implemented": [
+    "Additive strict whole-clone Int64 result validation and separate scoped declines",
+    "Ordinary Copy named/FD branches migrated; legacy boolean C bodies unchanged",
+    "Captured source EOF reaches three source-copy callers and sized stage; unsized receiver basis preserves differing EOF",
+    "Exclusive/adopted provenance gates FD clone; source buffered/native cursor preserved; output reconciled before progress/later literal",
+    "Native macOS held-source/actual-parent carrier and identity-bound owned intermediate publication",
+    "Fresh followed-source path identity checks and primary/cleanup/residue diagnostics",
+    "One pending-safe native owner-slot close, saved errors after exactly one OS close",
+    "Absent macOS FD backend permits ordinary flagged-source fallback"
+  ],
+  "builds": {
+    "makeAndSelftest": [
+      "stock OCaml5.5.1",
+      "OxCaml5.2.0+ox"
+    ],
+    "cleanDuneAndSelftest": [
+      "stock OCaml5.5.1",
+      "OxCaml5.2.0+ox"
+    ],
+    "matchingInputsPerTree": 332,
+    "generatedDependencyFile": "src/.depend excluded from immutable pins and separately recorded in builds"
+  },
+  "tests": {
+    "fixedGroupsPerCompiler": 60,
+    "fixedAssertionsPerCompiler": 536,
+    "designatedNegativesPerCompiler": 5,
+    "exactParentCopyNegativesPerCompiler": 3,
+    "singlePredicateAndOldCloseNegativesPerCompiler": 2,
+    "oldRegressionRuns": 14,
+    "normalNativeObject": "Actual unchanged final Make snapshot wholeFileClone_stubs.o",
+    "injectedNativeObject": "Only named-settlement fault controls use private edited native object",
+    "signalScope": "Uniform final fixtures observe actual nonraising signal delivery and then raise ordinary synchronous C Primary; no arbitrary Ox async exception catching claim"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/SOURCE-FREEZE.json",
+      "bytes": 32931,
+      "sha256": "892293aa81162cdde8fae17afb7209750ffb7fd6c66c6cdb166ed7b9f1860173"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-build.json",
+      "bytes": 1701,
+      "sha256": "e2aadae4235a947d283e1f921e696d954c44d0783e78d9417ab74d162f964873"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-build.json",
+      "bytes": 277214,
+      "sha256": "4297b4d61e583439387c124412c6ff4c039b06833382e95468478cb06853783d"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/dune-builds.json",
+      "bytes": 76412,
+      "sha256": "55527a3ff9c3810a4e1f706276a14d1bb58b8d377d795061e350ad2d6f89077f"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/source-review.json",
+      "bytes": 16263,
+      "sha256": "2a15eba629483b33477718224d571454ada90030535ce02ee62bb0ebe329c4af"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-tests-trial9.json",
+      "bytes": 244695,
+      "sha256": "5746e80708298f03efa7d5af6626cbfceae99811f9063d9012d789db98c27151"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-tests-trial3.json",
+      "bytes": 245153,
+      "sha256": "b4f232c17a01b4e256b748da3a0f911367a59cfa4fddee62b74354c58006a42e"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-regressions.json",
+      "bytes": 3341,
+      "sha256": "6983336a4ead10394dfe6ea1843ea8c91100b0bb40aba3d93cb812333ace51cb"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-regressions.json",
+      "bytes": 3382,
+      "sha256": "54c9d85637e44137f72e7faa379024a7eb9fe06c83ce028eb9493946e05a2661"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/stock-build-pre-close-fix.json",
+      "bytes": 1748,
+      "sha256": "019a1b7033ad2f6624069be5a366f7408a2b1ab8ae87dd0cfb79bcd1e8dbcab2"
+    },
+    {
+      "path": "/private/tmp/unison-whole-file-clone-build-records/ox-build-trial1.json",
+      "bytes": 292943,
+      "sha256": "f1107df1523462fc0f01fc714270a1bc0fd1fb886a8bfa25f3626ab92ad56ddb"
+    }
+  ],
+  "limits": [
+    "No Photo/Adobe/catalog/cache/payload operations by this qualification",
+    "Native Linux FICLONE and Windows/BSD source paths are not runtime-qualified",
+    "Native success attests operation contract; no physical allocation/performance or filesystem-wide capability claim",
+    "Cooperative first-name admission and namespace checks are not hostile atomic compare-and-unlink or mount incarnation proof",
+    "Existing sized/unsized stage ABI and arbitrary System.openfile pre-return exception limitations remain explicit",
+    "Ox fatal asynchronous Fault.Primary signal trials are preserved; no Sys.with_async_exns guard added",
+    "Preview native recognition/publisher/Quasar/renderer tests remain original Photo owner work, separate from core cloning"
+  ],
+  "componentQualification": {
+    "path": "tests/whole_file_clone/qualification.json",
+    "sha256": "cbc40461f6c25ff041c6f903cf847d087396f589909f0b2fac24f7b02fad9d51"
+  },
+  "rootFinalReceiptArtifactChecks": 698,
+  "independentReview": {
+    "path": "tests/qualification/whole-file-clone-independent-review-20261014.json",
+    "bytes": 21225,
+    "sha256": "51d41fd4ceff2f4af4f7f82d66efb93a2e02c8474a8cd85ad9cc01349fd9355d",
+    "authorship": "Native adapter author self-reviewed own C; independent review covers fixture/Fs/Copy and receipt oracles"
+  }
+}
