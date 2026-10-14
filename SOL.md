@@ -2156,3 +2156,28 @@ prior progress refuse; separate private context/mutation negatives are detected.
 Both Make/Dune builds+selftests pass. No native ZFS/ReFS/other-platform runtime,
 range-sharing/performance, full resource or full-goal claim; zero Adobe/Photo/SDK
 calls. M4-V/M5/M6 remain open.
+
+## Finite actual SDK receiving successor prepared
+
+[New request](tests/qualification/sdk-receive-pilot-request-v1-20261014.json) is
+NOT ADMITTED. Two compiler-matched production ML CLIs are relinked privately
+with only the existing contained test helper C backend. Original generated
+SDK v2 inputs are copied/pinned; no SDK linking/loading/invocation ran. Fresh
+Root request/READY/source/tool/CLI/input/command/deadline checks and exclusive
+owned START are required; old/expired/consumed admissions refuse. Native tool
+pins remain expected pins rather than being reselected from a changed file.
+
+[Source/mock qualification](tests/sdk_receive_pilot/qualification.json): six
+actual mixed-compiler SDE receives plus bad-digest publication refusal and three
+original controls produce exactly10 MOCK entries, seven input states and16
+logical states; aggregate genuinely closed/reaped/othersabsent in22.645s and
+parent tool45265 exited0. Guard rejects wrong group/tool/input/eleventh call
+even under optimized Python; pure admission controls pass one valid +9 denials.
+The helper's restricted Python environment is handled explicitly. Entry markers
+alone never prove execution/success; supervisor return is not parent exit proof.
+
+Proposed native reservation is8 host credits (one semantic permit per endpoint
+plus conservative legacy hashing/orchestration headroom),10 calls/7inputs/16states/
+300s. Production-C timing, actual native receiving, broad corpus/area-task scaling
+and full M4-V/M5/M6 remain open. Photo Root retains preview/native ownership;
+consumed SDK v2 admission is not reused. No fresh native release is inferred.

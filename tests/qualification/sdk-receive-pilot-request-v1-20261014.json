@@ -1,0 +1,147 @@
+{
+  "schema": "unison-finite-sdk-receive-request/1",
+  "state": "SOURCE_MOCK_QUALIFIED_REQUEST_NOT_ADMITTED",
+  "prepared": {
+    "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/READY.json",
+    "sha256": "8be53ca4a0fc1b90e0ab10d8f116b22c6356a071ad8812a70c62cff458f2604a"
+  },
+  "qualification": {
+    "path": "/Users/alexy/src/unison/tests/sdk_receive_pilot/qualification.json",
+    "bytes": 8693,
+    "sha256": "a2d492eaee9cf72d44dfab7cdd82d79b14b0d4de89571ad91005b5af47d9a0b5"
+  },
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/tests/sdk_receive_pilot/run.py",
+    "--stock-build",
+    "/private/tmp/unison-native-context-stock-make.json",
+    "--ox-build",
+    "/private/tmp/unison-native-context-ox-make.json",
+    "--sdk-result",
+    "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.json",
+    "--fixtures",
+    "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures",
+    "--driver-manifest",
+    "/private/tmp/unison-adobe-driver-build/build-manifest.json",
+    "--workspace",
+    "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2",
+    "--mode",
+    "native",
+    "--request",
+    "/Users/alexy/src/unison/tests/qualification/sdk-receive-pilot-request-v1-20261014.json",
+    "--admission",
+    "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ADMISSION-20261014.json"
+  ],
+  "limits": {
+    "SDK_calls_maximum": 10,
+    "generated_inputs_maximum": 7,
+    "logical_states_maximum": 16,
+    "active_CPU_credits": 8,
+    "aggregate_native_wall_seconds": 300
+  },
+  "breakdown": {
+    "SDK_calls": {
+      "original_direct_positives": 3,
+      "mixed_compiler_semantic_receives": 6,
+      "bad_digest_receive_rejection": 1
+    },
+    "logical_states": {
+      "direct_originals": 3,
+      "baseline_syncs_no_SDK": 6,
+      "edited_receives": 6,
+      "negative_update": 1
+    },
+    "admitted_semantic_permits_per_endpoint": 1,
+    "CPU_headroom": "reserve 8 for two endpoint pipelines, legacy owner hashing and orchestration; no hard total CPU proof"
+  },
+  "source_pins": {
+    "tests/sdk_receive_pilot/admission_test.py": {
+      "bytes": 2617,
+      "sha256": "dab20609ae34761c96aa73a25745fba72784c9ba5467cabd9f8a14dfe62ecfa5"
+    },
+    "tests/sdk_receive_pilot/guard.py": {
+      "bytes": 2118,
+      "sha256": "fc29c18472258c4dd557f96a8fc7dce021c19692b79635a823df4af030f30575"
+    },
+    "tests/sdk_receive_pilot/guard_test.py": {
+      "bytes": 2248,
+      "sha256": "1209985d31f161c2869b18076f03f967d08a6925a9587c53869d41a0bdea0551"
+    },
+    "tests/sdk_receive_pilot/run.py": {
+      "bytes": 14933,
+      "sha256": "05ff0ab8beafc15c6586f6ec931a93b2d3c77f72bc3f909d76dd5ee354d856db"
+    }
+  },
+  "interpreter": {
+    "path": "/usr/local/opt/python@3.14/bin/python3.14",
+    "bytes": 13592,
+    "sha256": "b08b055365df6dcd3fff0b805b688428f0f6a01839303f22c0716780155c480d"
+  },
+  "driver": {
+    "path": "/private/tmp/unison-adobe-driver-build/build-manifest.json",
+    "sha256": "ede0fb503aee112506b8b98b3516df4c5c8b004afc23d73f3bdf7699ea9df87b",
+    "executable": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+    "executable_sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+    "build_id": "unison-sdk171-2724-v1-single"
+  },
+  "builds": {
+    "stock": {
+      "binary": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/stock/unison",
+      "sha256": "2f96efe532b8981b0a28dec2aa6b9ef35189ece87b493a867071acdce45e87a5",
+      "helper_backend": "test-only inherited aggregate group; production ML objects unchanged"
+    },
+    "ox": {
+      "binary": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/ox/unison",
+      "sha256": "b10925e63456e314469c8cef6aea31e007f1182eebc672ee3154008e74e3e3e3",
+      "helper_backend": "test-only inherited aggregate group; production ML objects unchanged"
+    }
+  },
+  "inputs": [
+    {
+      "codec": "uncompressed",
+      "original": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-original.dng",
+      "edited": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-edited.dng",
+      "original_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+      "edited_sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+      "xmp_bytes": 4543
+    },
+    {
+      "codec": "jpeg",
+      "original": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-original.dng",
+      "edited": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-edited.dng",
+      "original_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+      "edited_sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+      "xmp_bytes": 4543
+    },
+    {
+      "codec": "jxl",
+      "original": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-original.dng",
+      "edited": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-edited.dng",
+      "original_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+      "edited_sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+      "xmp_bytes": 4543
+    }
+  ],
+  "negative": {
+    "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/bad-raw-digest.dng",
+    "sha256": "93065fd3d4414b889a6f1a956cf38478b4f70ec3e8f4e92651536b24a1614813"
+  },
+  "fresh_admission_required": {
+    "state": "ROOT_ADMITTED_FINITE_UNISON_RECEIVE_PILOT_V1",
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ADMISSION-20261014.json",
+    "request": "Root must fill exact request path/SHA256",
+    "command": "exact command above",
+    "limits": "exact limits above",
+    "startDeadlineUnix": "fresh Root-selected finite dispatch deadline"
+  },
+  "release_requires": [
+    "actual aggregate CLOSED/reaped/other-members-absent/within-wall",
+    "actual parent tool terminal exit receipt, separate from SUPERVISOR-RETURN",
+    "bound actual result and ten claimed entries with SDK return proofs",
+    "no unresolved ownership marker"
+  ],
+  "scope": "public qualified SDK v1 functional receiving only; no benchmark/production C timing/Lightroom/Photo/cache/Main/renderer/fullrun",
+  "no_native_window_reused": true,
+  "no_automatic_retry": true,
+  "original_preview_owner_retained": true
+}
