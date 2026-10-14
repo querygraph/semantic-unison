@@ -2270,3 +2270,29 @@ Zero SDK/Adobe/Photo/Lightroom calls. Actual SDK execution, task/thread accounti
 pixel equivalence, allocator metrics/cancellation, representative performance and
 full M4-V/M5/M6 remain open. Fresh Root coordination is required before any real
 comparison; both completed earlier admissions stay consumed.
+
+
+### Capped-host callback/allocator observations — source qualified, 2026-10-14
+
+Experimental area host now records task attempts, successful Start calls, Finish
+attempts, callback invocations/active/peak frames and largest partition, plus
+explicit one-thread reference delegations. Borrowed observations live only through
+synchronous joined tasks; callback frames retire on exceptions as well as success.
+Experimental driver emits bounded stderr activity before host teardown, and
+covered allocator limit/used/peak/live/denied after host/buffer teardown while its
+allocator is still alive. Observation failure cannot terminate exception unwinding.
+Production v1 protocol/default endpoint behavior remains unchanged.
+
+Original scheduler passed789 assertions; simultaneous1/6/18 callback waves and
+start/process/launch/finish failure observations passed. Four SDK driver modes
+(single/area/memory/combined) compiled to unlinked objects. Added `--plain-only`
+to the source runner: no sanitizer build/execution. [Pinned evidence](tests/area_scheduler/activity-qualification-20261014.json).
+No SDK/Adobe/Photo/Lightroom runtime, source-photo access or benchmark.
+
+These are callback frames (nested frames may share one thread), not OS-thread or
+whole-process CPU accounting; codec threads remain outside the counters. Covered
+allocation bytes are not RSS/all heaps. Real telemetry, pixel/thread equivalence,
+resource/cancellation/scaling qualification and full M4-V/M5/M6 remain open. Prior
+experimental linked artifact and comparison plans are preserved historical proof,
+but source binding is now stale; Root notified by queue01a13c31-306e-7e72-8c90-f6d929256476.
+A successor link/plan and fresh separate admission are required before runtime.

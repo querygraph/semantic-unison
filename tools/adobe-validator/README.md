@@ -131,6 +131,21 @@ runner. The endpoint must reserve the entire requested allowance in Unison's
 shared CPU-credit budget before invocation; this source adapter does not acquire
 credits from the parent process itself.
 
+Experimental source builds now emit bounded stderr observations after synchronous
+SDK work. `UNISON-HOST-AREA 1` reports task attempts, successful starts, Finish
+attempts, callback invocations/current/peak frames, maximum partition count and
+one-thread reference delegation count. Active frames settle before Finish;
+nested frames may share an OS thread, and these counters exclude the codec's own
+threads. They cannot certify a whole-process CPU ceiling or parallel speedup.
+`UNISON-HOST-MEMORY 1` reports allocator limit/used/peak/live/denied after host and
+decoded buffers have been destroyed, before allocator teardown. It counts covered
+backing allocations including bookkeeping, not RSS or all SDK heaps. A failed
+usage observation emits `UNISON-HOST-MEMORY unavailable` rather than terminating
+exception unwinding. These observations are source/compile qualified only; no
+actual SDK telemetry is claimed. The production v1 stdout protocol is unchanged.
+Previously linked experimental binaries and plans retain their historical pins;
+source changes require a newly bound artifact/plan before fresh native admission.
+
 Worker failures request cooperative cancellation of the other workers. The
 shared abort wrapper checks this request at SDK sniff points and forwards an
 existing sniffer's cancellation checks, serializing delegates which do not

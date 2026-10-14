@@ -14,6 +14,8 @@
 class UnisonAreaTaskHost : public dng_host {
   const uint32 requested_threads_;
   std::atomic_flag busy_ = ATOMIC_FLAG_INIT;
+  unison_area::Activity activity_;
+  std::atomic<uint64_t> reference_tasks_{0};
 
   class CooperativeSniffer final : public dng_abort_sniffer {
     unison_area::Control &control_;
@@ -48,6 +50,8 @@ class UnisonAreaTaskHost : public dng_host {
     }
   };
 public:
+  unison_area::ActivitySnapshot Activity() const noexcept { return activity_.snapshot(); }
+  uint64_t ReferenceTasks() const noexcept { return reference_tasks_.load(); }
   explicit UnisonAreaTaskHost(uint32 requested_threads, dng_memory_allocator *allocator = nullptr)
     : dng_host(allocator), requested_threads_(unison_area::available_threads(requested_threads)) {}
 
@@ -59,6 +63,7 @@ public:
                        dng_area_task_progress *progress = nullptr) override {
     // Preserve the exact SDK reference path for an explicit one-thread host.
     if (requested_threads_ == 1) {
+      ++reference_tasks_;
       dng_host::PerformAreaTask(task, area, progress);
       return;
     }
@@ -89,7 +94,8 @@ public:
         task.ProcessOnThread(index, dng_rect(part.top, part.left, part.bottom, part.right),
           tile, sniffer.get(), progress ? &serial_progress : nullptr);
       },
-      [&](uint32 count) { task.Finish(count); }
+      [&](uint32 count) { task.Finish(count); },
+      &activity_
     });
   }
 };

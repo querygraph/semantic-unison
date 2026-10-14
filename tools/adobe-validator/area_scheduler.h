@@ -79,10 +79,38 @@ public:
   void stop() noexcept { stopped_.store(true, std::memory_order_release); }
 };
 
+// These are callback-frame observations, not OS thread or whole-process CPU
+// accounting. Nested callbacks can share one thread. A snapshot is coherent
+// only after the synchronous owner has joined all of its work.
+struct ActivitySnapshot {
+  uint64_t tasks, start_successes, finish_calls, process_calls;
+  uint64_t active_callbacks, peak_callbacks, max_partition;
+};
+class Activity {
+  std::atomic<uint64_t> tasks_{0}, starts_{0}, finishes_{0}, calls_{0};
+  std::atomic<uint64_t> active_{0}, peak_{0}, partition_{0};
+  static void maximum(std::atomic<uint64_t> &target, uint64_t value) noexcept {
+    auto prior = target.load(std::memory_order_relaxed);
+    while (prior < value && !target.compare_exchange_weak(prior, value,
+            std::memory_order_relaxed, std::memory_order_relaxed)) {}
+  }
+public:
+  void task(uint64_t parts) noexcept { ++tasks_; maximum(partition_, parts); }
+  void started() noexcept { ++starts_; }
+  void finishing() noexcept { ++finishes_; }
+  void enter() noexcept { ++calls_; maximum(peak_, active_.fetch_add(1) + 1); }
+  void leave() noexcept { --active_; }
+  ActivitySnapshot snapshot() const noexcept {
+    return {tasks_.load(), starts_.load(), finishes_.load(), calls_.load(),
+            active_.load(), peak_.load(), partition_.load()};
+  }
+};
+
 struct Callbacks {
   std::function<void(uint32_t, Control &)> start;
   std::function<void(uint32_t, Rect, Control &)> process;
   std::function<void(uint32_t)> finish;
+  Activity *activity = nullptr; // borrowed through the synchronous join only
 };
 using Launcher = std::function<std::thread(std::function<void()>)>;
 
@@ -110,10 +138,19 @@ inline void run(const std::vector<Rect> &parts, const Callbacks &task,
   };
   const uint32_t count = uint32_t(parts.size());
   ExecutionScope caller_scope;
+  if (task.activity) task.activity->task(count);
   task.start(count, control);
+  if (task.activity) task.activity->started();
   auto process = [&](uint32_t index) {
     ExecutionScope scope;
     if (control.stopped()) return;
+    struct ObservedCallback {
+      Activity *activity;
+      explicit ObservedCallback(Activity *value) : activity(value) {
+        if (activity) activity->enter();
+      }
+      ~ObservedCallback() { if (activity) activity->leave(); }
+    } observed(task.activity);
     try { task.process(index, parts[index], control); }
     catch (...) { fail(); }
   };
@@ -125,6 +162,7 @@ inline void run(const std::vector<Rect> &parts, const Callbacks &task,
   // std::thread objects are exclusively owned here and always joined by their
   // creating caller, never from their own worker. No task borrow survives run.
   for (auto &worker : workers) worker.join();
+  if (task.activity) task.activity->finishing();
   try { task.finish(count); } catch (...) { fail(); }
   if (first_error) std::rethrow_exception(first_error);
 }

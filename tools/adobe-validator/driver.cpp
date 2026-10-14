@@ -209,9 +209,38 @@ int main(int argc, char **argv) {
     // Allocator is declared before the host/negative and outlives all joined
     // area/codec calls and returned SDK buffers within this synchronous scope.
     UnisonMemoryAllocator allocator(memory_limit);
+    // Declared before host: report after host and all SDK buffers are destroyed,
+    // while the allocator's shared accounting state remains available.
+    struct MemoryReport {
+      const UnisonMemoryAllocator &allocator;
+      ~MemoryReport() {
+        try {
+          const auto u = allocator.usage();
+          fprintf(stderr, "UNISON-HOST-MEMORY 1 limit=%zu used=%zu peak=%zu live=%zu denied=%zu\n",
+                  u.limit, u.used, u.peak, u.live, u.denied);
+        } catch (...) {
+          // Observational diagnostics must not terminate exception unwinding.
+          fprintf(stderr, "UNISON-HOST-MEMORY unavailable\n");
+        }
+      }
+    } memory_report{allocator};
     ValidationHost host(threads,&allocator);
 #else
     ValidationHost host(threads);
+#endif
+#if defined(UNISON_EXPERIMENTAL_AREA_TASK_HOST)
+    // Declared after host: report joined scheduler state before host teardown.
+    struct AreaReport {
+      const ValidationHost &host;
+      ~AreaReport() {
+        const auto a = host.Activity();
+        fprintf(stderr, "UNISON-HOST-AREA 1 tasks=%llu started=%llu finish=%llu calls=%llu active=%llu peak=%llu max-partition=%llu reference=%llu\n",
+                (unsigned long long)a.tasks, (unsigned long long)a.start_successes,
+                (unsigned long long)a.finish_calls, (unsigned long long)a.process_calls,
+                (unsigned long long)a.active_callbacks, (unsigned long long)a.peak_callbacks,
+                (unsigned long long)a.max_partition, (unsigned long long)host.ReferenceTasks());
+      }
+    } area_report{host};
 #endif
     host.SetIgnoreEnhanced(true); // Validate original raw, never an enhanced substitute.
     dng_file_stream stream(path);

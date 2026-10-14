@@ -16,6 +16,8 @@ parser.add_argument("--sdk-root", type=Path)
 parser.add_argument("--dependency-build-dir", type=Path,
                     help="existing build's generated JXL headers, read only")
 parser.add_argument("--output-dir", type=Path)
+parser.add_argument("--plain-only", action="store_true",
+                    help="deterministic ordinary binaries only; skip sanitizer build/execution")
 args = parser.parse_args()
 repo = Path(__file__).resolve().parents[2]
 adapter = repo / "tools/adobe-validator"
@@ -42,6 +44,7 @@ def run(command, name, expected=0):
 sources = [adapter / p for p in ("driver.cpp", "build.py", "area_scheduler.h", "area_task_host.h")]
 sources += [adapter / p for p in ("README.md", "AREA-TASK-SOURCE-REVIEW.md")]
 sources += [Path(__file__).resolve(), Path(__file__).with_name("test.cpp")]
+sources += [Path(__file__).with_name("activity.cpp")]
 sources += [Path(__file__).with_name("README.md")]
 try:
     # Parse build instructions without executing their SDK build operations.
@@ -50,11 +53,15 @@ try:
     synthetic = out / "synthetic-area-scheduler"
     run([*common, "-O2", Path(__file__).with_name("test.cpp"), "-o", synthetic], "synthetic-compile")
     result = run([synthetic], "synthetic-run")
+    activity = out / "synthetic-area-activity"
+    run([*common, "-O2", Path(__file__).with_name("activity.cpp"), "-o", activity], "activity-compile")
+    run([activity], "activity-run")
     # A separate sanitizer executable still contains only original Unison code.
-    sanitized = out / "synthetic-area-scheduler-sanitized"
-    run([*common, "-O1", "-g", "-fsanitize=address,undefined", "-fno-omit-frame-pointer",
-         Path(__file__).with_name("test.cpp"), "-o", sanitized], "synthetic-sanitizer-compile")
-    run([sanitized], "synthetic-sanitizer-run")
+    if not args.plain_only:
+        sanitized = out / "synthetic-area-scheduler-sanitized"
+        run([*common, "-O1", "-g", "-fsanitize=address,undefined", "-fno-omit-frame-pointer",
+             Path(__file__).with_name("test.cpp"), "-o", sanitized], "synthetic-sanitizer-compile")
+        run([sanitized], "synthetic-sanitizer-run")
     negative = out / "negative-include"
     negative.mkdir(exist_ok=True)
     original = (adapter / "area_scheduler.h").read_text()
@@ -87,8 +94,10 @@ try:
                  "-DqMacOS=1", "-DqWinOS=0", "-DqDNGUseStdInt=1", "-DMacintosh=1",
                  "-std=c++17", "-funsigned-char", "-fno-common", "-Wall", "-Wextra"]
         flags += [part for p in includes for part in ("-I", str(p))]
-        for mode in ("single", "area-unqualified"):
-            extra = ["-DUNISON_EXPERIMENTAL_AREA_TASK_HOST=1"] if mode != "single" else []
+        for mode in ("single", "area-unqualified", "memory-unqualified", "area-memory-unqualified"):
+            extra = ["-DUNISON_EXPERIMENTAL_AREA_TASK_HOST=1"] if "area" in mode else []
+            if "memory" in mode:
+                extra += ["-DUNISON_EXPERIMENTAL_MEMORY_BUDGET=1"]
             run(["clang++", *flags, *extra, "-c", adapter / "driver.cpp",
                  "-o", out / ("driver-" + mode + ".o")], "sdk-headers-compile-" + mode)
         for name in ("dng_host.h", "dng_host.cpp", "dng_area_task.h", "dng_area_task.cpp",
@@ -101,6 +110,7 @@ try:
     manifest = {"status": "passed source compilation and Adobe-free synthetic controls",
                 "scope": "source-only; no SDK loading/linking/execution, codec execution, Photo access or benchmarks",
                 "sdk_runtime_qualified": False, "multithread_production_enabled": False,
+                "sanitizer_run": not args.plain_only,
                 "platform": platform.platform(), "output_directory": str(out),
                 "source_sha256": {str(p.relative_to(repo)): sha(p) for p in sources},
                 "sdk_inputs_sha256": sdk_inputs, "records": records,
