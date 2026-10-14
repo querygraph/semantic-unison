@@ -11,13 +11,14 @@ from measure import run
 
 
 class NativeDeadline:
-    def __init__(self, workspace, seconds=300, max_calls=None):
-        if not 10 < seconds <= 300:
+    def __init__(self, workspace, seconds=300, max_calls=None, contained=False):
+        if seconds is not None and not 10 < seconds <= 300:
             raise ValueError('native slot must allow cleanup and be at most 300 seconds')
-        self.end = time.monotonic() + seconds
+        self.end = time.monotonic() + seconds if seconds is not None else float("inf")
         self.marker = Path(workspace) / 'NATIVE-OWNERSHIP-UNRESOLVED.json'
         self.calls = []
         self.max_calls = max_calls
+        self.contained = contained
         self.marker.write_text(json.dumps({'state': 'OWNED', 'seconds': seconds}))
 
     def remaining(self):
@@ -36,7 +37,11 @@ class NativeDeadline:
         environment = dict(os.environ if env is None else env)
         if settlement:
             environment['UNISON_BENCH_SETTLEMENT'] = str(settlement)
-        receipt = run(command, environment, min(timeout, self.remaining()), cleanup_grace=4)
+        if self.contained:
+            from phase import invoke_contained
+            receipt = invoke_contained(command, environment, min(timeout, self.remaining()))
+        else:
+            receipt = run(command, environment, min(timeout, self.remaining()), cleanup_grace=4)
         self.calls.append(receipt)
         self.marker.write_text(json.dumps({'state': 'OWNED', 'calls': self.calls}, indent=2))
         if settlement:
@@ -59,4 +64,5 @@ class NativeDeadline:
         if time.monotonic() > self.end:
             raise TimeoutError('native phase exceeded aggregate wall limit')
         self.marker.unlink()
-        return {'closed': True, 'calls': self.calls, 'remaining_seconds': self.end-time.monotonic()}
+        return {'closed': True, 'calls': self.calls,
+                'remaining_seconds': None if self.end == float('inf') else self.end-time.monotonic()}

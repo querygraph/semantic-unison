@@ -155,3 +155,30 @@ the run. The batch ranges show the resulting variation. These cached synthetic
 results support 18 as a balanced budget and 36 as an explicit throughput option
 on this host; they do not establish a universal uplift or photo-library
 performance. No automatic defaults were changed by this benchmark.
+
+## Finite pilot lifecycle
+
+`--pilot` uses one aggregate **300-second native phase**, including original
+fixture generation, hashing, all ten fixture SDK calls and three pilot
+validations. Compilation and coordination waiting precede that phase. It starts
+cancellation eight seconds before the limit to allow child cleanup; an overrun
+cannot be accepted even if later cleanup succeeds. Fresh generation totals
+**13 SDK invocations**, at most seven generated inputs, one active helper.
+
+The pilot links the checked production ML objects but compiles the helper C
+backend with `UNISON_BENCH_CONTAINED_HELPERS`. This benchmark-only backend
+preserves the outer group and signals individual helper PIDs. The outer owner
+holds its leader PID until all other group members disappear, including after
+abrupt Python failure. The normal Unison/throughput backend keeps its original
+separate helper groups. Therefore the finite pilot is a functional/lifecycle
+qualification, not an exact production-backend timing benchmark.
+
+`AGGREGATE-CLOSED.json` records actual exit, reap, group observation and elapsed
+time. An ambiguous group or failed observation leaves
+`AGGREGATE-OWNERSHIP-UNRESOLVED.json` and fails; a timeout alone is never closure.
+A failed phase can have a genuine closed receipt without successful validation.
+Workspaces are retained. This trusted SDK route does not promise containment of
+programs deliberately escaping process groups or surviving SIGKILL of the outer
+supervisor. See [synthetic lifecycle controls](../../tests/adobe_native_deadline/README.md).
+Photo Root must release a new finite SDK slot; source/mock evidence provides no
+Adobe/Lightroom release and no preview, production or full benchmark permission.

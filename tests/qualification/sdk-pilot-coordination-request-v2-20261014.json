@@ -1,0 +1,146 @@
+{
+  "utc": "2026-10-14T18:30:26.464339+00:00",
+  "state": "REVIEW_REQUEST_ONLY_NO_NATIVE_RELEASE",
+  "supersedes_withdrawn_request_sha256": "3b6b51db500fdc717d0725b176cf8a3cb804f00531f245b6e96f34f3e1014dc8",
+  "root_review": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-PILOT-COORDINATION-REVIEW-20261014.json",
+    "bytes": 1902,
+    "sha256": "c9ebf150d69764ded93cc26a784100c7a083a264b867380d2d5e6e5f6ecc3d50"
+  },
+  "scope": "Existing qualified public DNG SDK v1 synthetic pilot with current checked ML core; functional and lifecycle gate, not production timing/receive-corpus completion",
+  "limits": {
+    "SDK_calls_maximum": 13,
+    "breakdown": {
+      "seed_validation": 1,
+      "fixture_writers": 3,
+      "positive_validation": 3,
+      "negative_validation": 3,
+      "pilot_validation": 3
+    },
+    "generated_inputs_maximum": 7,
+    "logical_states_maximum": 16,
+    "active_CPU_credits": 1,
+    "aggregate_native_wall_seconds": 300,
+    "Lightroom_calls": 0,
+    "Photo_payload_reads": 0,
+    "full_benchmark": false,
+    "production_writes": false
+  },
+  "lifecycle": {
+    "outer_owner": "bench/adobe/phase.py supervise",
+    "timer_scope": "all Python fixture generation/hashing, SDK writers/validators and three core pilot batches; build/coordination wait precede native phase",
+    "cancel_margin_seconds": 8,
+    "grace_seconds_maximum": 4,
+    "group_empty_observation_before_reserved_leader_reap": true,
+    "unresolved_observation": "retain AGGREGATE-OWNERSHIP-UNRESOLVED.json; no success or release inferred",
+    "closed_receipt": "AGGREGATE-CLOSED.json",
+    "helper_backend": "benchmark-only compile-time contained group; production keeps separate groups",
+    "success": "all actual validations correct plus actual closed group, reap and within-wall receipt",
+    "failure": "may be genuinely closed without valid results; no timeout-only closure",
+    "unsupported": "deliberate tool group/session escape, killing ownership supervisor, kernel stalls"
+  },
+  "artifacts": {
+    "bench/adobe/phase.py": {
+      "bytes": 8110,
+      "sha256": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497"
+    },
+    "bench/adobe/deadline.py": {
+      "bytes": 3386,
+      "sha256": "899a5cd43d11d207657ce4c7cb0cf8e783a918d92fcd0fa325c847080e9d61fd"
+    },
+    "bench/adobe/run.py": {
+      "bytes": 18075,
+      "sha256": "517af3e2334ea93038e13a0d3f548ed3130b38eec248130b31d5137e2f18b90a"
+    },
+    "bench/adobe/fixtures.py": {
+      "bytes": 8942,
+      "sha256": "68fee929357d8f8dd61388383d24f4fd9da3f41188351c46df8b8bc853a95a3b"
+    },
+    "bench/adobe/validation_bench.ml": {
+      "bytes": 8088,
+      "sha256": "67e82eedf55c7da17243bda34874e3691a9088497802706568adca2092683678"
+    },
+    "bench/adobe/README.md": {
+      "bytes": 11012,
+      "sha256": "bdd1f3aeaed2778c4c06928c7843cbd0486978be33c8920251390719494826a4"
+    },
+    "bench/sync/ownership.py": {
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    "bench/sync/measure.py": {
+      "bytes": 3407,
+      "sha256": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    },
+    "src/helperSupervisor.ml": {
+      "bytes": 20807,
+      "sha256": "d4472ef855ad1ebda749cf934537ec5300dc7231488c587f6082416a601d0b98"
+    },
+    "src/helperSupervisor_stubs.c": {
+      "bytes": 5766,
+      "sha256": "d8d947f632e846afebae7aa3f30b0133be771e57564421684c5fd9552b107fb6"
+    },
+    "tests/adobe_native_deadline/phase_test.py": {
+      "bytes": 3790,
+      "sha256": "dfd28218948d72ecf0d007b8c997b0ed85dd953f7f97c38f32f271ec09572ce3"
+    },
+    "tests/adobe_native_deadline/core_phase.py": {
+      "bytes": 3597,
+      "sha256": "e40a0ca963f71f4259ae46c1347597820288dd21c59e6239797bfd9ce31309df"
+    },
+    "tests/adobe_native_deadline/mock_pilot.py": {
+      "bytes": 3738,
+      "sha256": "ff913b967028aaaa97454b90239085bea2fdf03e8f4e04526e22e996f4d4ba2b"
+    },
+    "tests/adobe_native_deadline/README.md": {
+      "bytes": 2102,
+      "sha256": "271b1da07892629fd9f075b6cfaef1f8f0986166ae09ab8ccffca8bc39a224f6"
+    },
+    "tests/adobe_native_deadline/qualification.json": {
+      "bytes": 280153,
+      "sha256": "6011c20e7b5303288dca01e8c05b9098b3efba5ae1e427c20c71e87531d3fd5a"
+    }
+  },
+  "native_artifacts": {
+    "/private/tmp/unison-adobe-driver-build/build-manifest.json": {
+      "bytes": 619,
+      "sha256": "ede0fb503aee112506b8b98b3516df4c5c8b004afc23d73f3bdf7699ea9df87b"
+    },
+    "/private/tmp/unison-adobe-driver-build/unison-adobe-validator": {
+      "bytes": 9017656,
+      "sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a"
+    },
+    "/private/tmp/unison-adobe-driver-build/fixture-writer": {
+      "bytes": 9010624,
+      "sha256": "444bac810514383d28eeeefefd810b6026af5bf45c12200bf8041201f5fb9d1e"
+    }
+  },
+  "production_build_receipt": {
+    "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d/build-receipt.json",
+    "bytes": 41839,
+    "sha256": "901cac085fe7dc78c42bdd6f675a5f721fbda1a46f487a59bec7d96b295b6446"
+  },
+  "command": [
+    "python3",
+    "/Users/alexy/src/unison/bench/adobe/run.py",
+    "--sdk-build",
+    "/private/tmp/unison-adobe-driver-build",
+    "--ocamlopt",
+    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+    "--production-build",
+    "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-7evbwm9d",
+    "--pilot",
+    "--workers",
+    "1",
+    "--cpu-credit-budget",
+    "1",
+    "--start-file",
+    "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.release",
+    "--coordination-timeout",
+    "600",
+    "--keep-work",
+    "--output",
+    "/private/tmp/unison-sdk-pilot-v2-7f7389ffe25b4354a0bafc3bdbbca9eb.json"
+  ],
+  "dispatch_prerequisites": "Root fresh separate SDK admission/current shared CPU allowance; validate all pins immediately before dispatch; no prior/native preview release reuse. Unique start path must be absent before Root releases it. No fixture reuse requested. Root and original preview owner retain all Lightroom/preview ownership."
+}

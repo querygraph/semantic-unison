@@ -7,6 +7,7 @@ external spawn_group :
   string -> string array -> string array -> Unix.file_descr -> Unix.file_descr -> int
   = "unsn_helper_spawn_group"
 external exited_unreaped : int -> bool = "unsn_helper_exited_unreaped"
+external signal_target : int -> int = "unsn_helper_signal_target"
 
 type cleanup = { mutable active : bool; dispose : unit -> unit }
 type listener = { mutable listening : bool; notify : unit -> unit }
@@ -225,7 +226,7 @@ let validate ~limits ~executable ~arguments ~environment =
 
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
 let signal_group pid signal =
-  try Unix.kill (-pid) signal with Unix.Unix_error (Unix.ESRCH, _, _) -> ()
+  try Unix.kill (signal_target pid) signal with Unix.Unix_error (Unix.ESRCH, _, _) -> ()
 
 type capture = {
   mutable fd : Unix.file_descr;

@@ -42,3 +42,11 @@ budgets: under the shared 18-credit allowance, use at most eight per endpoint.
 Ordinary owner/transport work is outside that accounting. Coordinate a quiet
 measurement window; synthetic warm-cache timings do not establish cold-storage,
 network or Adobe performance.
+
+For the finite SDK pilot's **synthetic lifecycle tests**, run:
+
+```sh
+python3 tests/adobe_native_deadline/phase_test.py --report /private/tmp/phase-result.json
+```
+
+This uses original Python processes only. [Additional actual-core/mock commands](../tests/adobe_native_deadline/README.md) use a qualified Make snapshot and its compiler; they invoke no SDK. Real SDK pilot invocation remains a separate coordinated Root slot, with the pinned v2 request and 300-second aggregate supervisor. A synthetic success provides no Adobe/Lightroom release.

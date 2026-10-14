@@ -67,6 +67,17 @@ CAMLprim value unsn_helper_monotonic_now(value unit)
 #endif
 }
 
+/* The finite pilot is linked separately with this compile-time containment
+ * backend. Production always owns one group per helper. No environment switch. */
+CAMLprim value unsn_helper_signal_target(value vpid)
+{
+#ifdef UNISON_BENCH_CONTAINED_HELPERS
+  return vpid;
+#else
+  return Val_long(-Long_val(vpid));
+#endif
+}
+
 CAMLprim value unsn_helper_exited_unreaped(value vpid)
 {
   CAMLparam1(vpid);
@@ -155,7 +166,11 @@ CAMLprim value unsn_helper_spawn_group(value executable, value arguments,
 #endif
   error = posix_spawnattr_setflags(&attributes, flags);
   if (error) goto finish;
+  #ifdef UNISON_BENCH_CONTAINED_HELPERS
+  error = posix_spawnattr_setpgroup(&attributes, getpgrp());
+#else
   error = posix_spawnattr_setpgroup(&attributes, 0);
+#endif
   if (error) goto finish;
   error = posix_spawn(&pid, String_val(executable), &actions, &attributes, argv, envp);
 finish:

@@ -103,6 +103,8 @@ def main():
         'created_utc': datetime.datetime.now(datetime.timezone.utc).isoformat(),
         'runner_sha256': sha256(Path(__file__).resolve()),
         'fixture_generator_sha256': sha256(Path(__file__).with_name('fixtures.py')),
+        'phase_supervisor_sha256': sha256(Path(__file__).with_name('phase.py')),
+        'deadline_sha256': sha256(Path(__file__).with_name('deadline.py')),
         'host': dict(system=platform.system(), release=platform.release(), machine=platform.machine(), logical_cpus=os.cpu_count()),
         'scope': 'Cached synthetic CFA files; production shared validation/hash/helper/resource core, not full synchronization or Lightroom.',
         'background_activity': args.background_note,
@@ -134,7 +136,8 @@ def main():
         result['build'] = {'workspace': str(work), 'retained': retain,
                            'production_snapshot': str(production) if production else None,
                            'production_receipt_sha256': sha256(production/'build-receipt.json') if production else None,
-                           'complete': False, 'native_calls_during_build': False}
+                           'complete': False, 'native_calls_during_build': False,
+                           'helper_isolation': 'aggregate-pilot-group' if args.pilot else 'per-helper-group'}
         result['parameters']['cpu_credit_budget'] = args.cpu_credit_budget
         save()
         for name, data in source_bytes.items():
@@ -143,7 +146,7 @@ def main():
             try:
                 linked = {}
                 for name in SOURCES[:-1]:
-                    if production is not None and name.startswith('src/'):
+                    if production is not None and name.startswith('src/') and not (args.pilot and name == 'src/helperSupervisor_stubs.c'):
                         actual = production/name
                         assert actual.read_bytes() == source_bytes[name], 'production source mismatch: '+name
                         extensions = ('.cmi', '.cmx', '.o') if name.endswith('.ml') else (('.cmi',) if name.endswith('.mli') else ('.o',))
@@ -152,7 +155,8 @@ def main():
                             shutil.copyfile(artifact, work/artifact.name)
                             linked[str(artifact)] = sha256(artifact)
                     else:
-                        subprocess.run([compiler, '-I', '+unix', '-c', Path(name).name],
+                        flags = ['-ccopt', '-DUNISON_BENCH_CONTAINED_HELPERS'] if args.pilot and name == 'src/helperSupervisor_stubs.c' else []
+                        subprocess.run([compiler, '-I', '+unix', *flags, '-c', Path(name).name],
                                        cwd=work, env=environment, stdout=log, stderr=log, check=True)
                 objects = [Path(name).stem + ('.o' if name.endswith('.c') else '.cmx')
                            for name in SOURCES[:-1] if name.endswith(('.ml', '.c'))]
@@ -167,7 +171,8 @@ def main():
                            'linked_object_sha256': linked, 'binary_sha256': sha256(work/'validation-bench'),
                            'production_receipt_sha256': sha256(production/'build-receipt.json') if production else None,
                            'build_log_sha256': sha256(work/'build.log'), 'complete': True,
-                           'native_calls_during_build': False}
+                           'native_calls_during_build': False,
+                           'helper_isolation': 'aggregate-pilot-group' if args.pilot else 'per-helper-group'}
         save()
         if args.build_only:
             print('Built executable:', work/'validation-bench')
@@ -186,70 +191,81 @@ def main():
                 time.sleep(min(0.2, max(0., deadline-time.monotonic())))
             result['coordination']['passed'] = True
             save()
-        native_owner = NativeDeadline(work, 300, max_calls=13 if args.pilot else None)
-        fixtures_dir = args.fixtures_dir.resolve() if args.fixtures_dir else work / 'fixtures'
-        if (fixtures_dir / 'fixtures.json').is_file():
-            fixtures = json.loads((fixtures_dir / 'fixtures.json').read_text())
-        else:
-            fixtures = generate(sdk, fixtures_dir, invoke=native_owner.invoke)
-        for fixture in fixtures['fixtures']:
-            path = fixtures_dir / fixture['filename']
-            assert path.stat().st_size == fixture['size_bytes'] and sha256(path) == fixture['sha256']
-            assert fixture['positive']['receipt']['driver-build'] == manifest['build_id']
-        result['fixtures'] = fixtures
-        configurations = [(fixture, worker) for fixture in fixtures['fixtures'] for worker in workers]
-        save()
-        result['measurement_started_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
-
-        def batch(fixture, worker, jobs, phase, repetition):
-            assert sha256(driver) == manifest['executable_sha256'], 'driver changed'
-            print(f'Start {phase} {repetition}: {fixture["codec"]} permits={worker} jobs={jobs}', flush=True)
-            command = [str(work / 'validation-bench'), str(fixtures_dir / fixture['filename']), fixture['sha256'],
-                       str(fixture['size_bytes']), str(driver), manifest['executable_sha256'],
-                       manifest['build_id'], str(worker), str(jobs), str(args.batch_deadline)]
-            settlement = work / ('settlement-' + str(len(native_owner.calls)) + '.json')
-            child = native_owner.invoke(command, env=environment, timeout=args.batch_deadline,
-                                        settlement=settlement)
-            child.check_returncode()
-            sample = json.loads(child.stdout)
-            assert sample['correct_receipts'] == jobs and sample['final_cpu_permits'] == sample['final_children'] == 0
-            sample.update(codec=fixture['codec'], cpu_permits=worker, jobs=jobs, phase=phase, repetition=repetition)
-            sample['total_cpu_seconds'] = sample['parent_cpu_seconds'] + sample['child_cpu_seconds']
-            sample['logical_cpu_equivalents'] = sample['total_cpu_seconds'] / sample['wall_seconds']
-            sample['validations_per_second'] = jobs / sample['wall_seconds']
-            sample['raw_megapixels_per_second'] = fixtures['specification']['width'] * fixtures['specification']['height'] / 1e6 * jobs / sample['wall_seconds']
-            result['samples'].append(sample); save()
-            print(f'{phase} {repetition}: {fixture["codec"]} permits={worker} '
-                  f'{sample["wall_seconds"]:.2f}s {sample["validations_per_second"]:.2f} files/s '
-                  f'CPU/wall={sample["logical_cpu_equivalents"]:.2f} children<={sample["peak_admitted_children"]}', flush=True)
-
-        if args.pilot:
+        def native_phase():
+            native_owner = NativeDeadline(work, 300 if args.pilot else None, max_calls=13 if args.pilot else None, contained=args.pilot)
+            fixtures_dir = args.fixtures_dir.resolve() if args.fixtures_dir else work / 'fixtures'
+            if (fixtures_dir / 'fixtures.json').is_file():
+                fixtures = json.loads((fixtures_dir / 'fixtures.json').read_text())
+            else:
+                fixtures = generate(sdk, fixtures_dir, invoke=native_owner.invoke)
             for fixture in fixtures['fixtures']:
-                batch(fixture, 1, 1, 'pilot', 1)
-        else:
-            for repetition in range(1, args.warmups + 1):
+                path = fixtures_dir / fixture['filename']
+                assert path.stat().st_size == fixture['size_bytes'] and sha256(path) == fixture['sha256']
+                assert fixture['positive']['receipt']['driver-build'] == manifest['build_id']
+            result['fixtures'] = fixtures
+            configurations = [(fixture, worker) for fixture in fixtures['fixtures'] for worker in workers]
+            save()
+            result['measurement_started_utc'] = datetime.datetime.now(datetime.timezone.utc).isoformat()
+
+            def batch(fixture, worker, jobs, phase, repetition):
+                assert sha256(driver) == manifest['executable_sha256'], 'driver changed'
+                print(f'Start {phase} {repetition}: {fixture["codec"]} permits={worker} jobs={jobs}', flush=True)
+                command = [str(work / 'validation-bench'), str(fixtures_dir / fixture['filename']), fixture['sha256'],
+                           str(fixture['size_bytes']), str(driver), manifest['executable_sha256'],
+                           manifest['build_id'], str(worker), str(jobs), str(args.batch_deadline)]
+                settlement = work / ('settlement-' + str(len(native_owner.calls)) + '.json')
+                child = native_owner.invoke(command, env=environment, timeout=args.batch_deadline,
+                                            settlement=settlement)
+                child.check_returncode()
+                sample = json.loads(child.stdout)
+                assert sample['correct_receipts'] == jobs and sample['final_cpu_permits'] == sample['final_children'] == 0
+                sample.update(codec=fixture['codec'], cpu_permits=worker, jobs=jobs, phase=phase, repetition=repetition)
+                sample['total_cpu_seconds'] = sample['parent_cpu_seconds'] + sample['child_cpu_seconds']
+                sample['logical_cpu_equivalents'] = sample['total_cpu_seconds'] / sample['wall_seconds']
+                sample['validations_per_second'] = jobs / sample['wall_seconds']
+                sample['raw_megapixels_per_second'] = fixtures['specification']['width'] * fixtures['specification']['height'] / 1e6 * jobs / sample['wall_seconds']
+                result['samples'].append(sample); save()
+                print(f'{phase} {repetition}: {fixture["codec"]} permits={worker} '
+                      f'{sample["wall_seconds"]:.2f}s {sample["validations_per_second"]:.2f} files/s '
+                      f'CPU/wall={sample["logical_cpu_equivalents"]:.2f} children<={sample["peak_admitted_children"]}', flush=True)
+
+            if args.pilot:
+                for fixture in fixtures['fixtures']:
+                    batch(fixture, 1, 1, 'pilot', 1)
+            else:
+                for repetition in range(1, args.warmups + 1):
+                    for fixture, worker in configurations:
+                        batch(fixture, worker, 1 if worker == 1 else args.jobs, 'warmup', repetition)
+                for repetition in range(1, max(args.repetitions, args.control_repetitions) + 1):
+                    order = configurations if repetition % 2 else list(reversed(configurations))
+                    for fixture, worker in order:
+                        maximum = args.control_repetitions if worker == 1 else args.repetitions
+                        if repetition <= maximum:
+                            batch(fixture, worker, args.jobs, 'measured', repetition)
                 for fixture, worker in configurations:
-                    batch(fixture, worker, 1 if worker == 1 else args.jobs, 'warmup', repetition)
-            for repetition in range(1, max(args.repetitions, args.control_repetitions) + 1):
-                order = configurations if repetition % 2 else list(reversed(configurations))
-                for fixture, worker in order:
-                    maximum = args.control_repetitions if worker == 1 else args.repetitions
-                    if repetition <= maximum:
-                        batch(fixture, worker, args.jobs, 'measured', repetition)
-            for fixture, worker in configurations:
-                samples = [sample for sample in result['samples'] if sample['codec'] == fixture['codec'] and
-                           sample['cpu_permits'] == worker and sample['phase'] == 'measured']
-                summary = dict(codec=fixture['codec'], cpu_permits=worker, measured_samples=len(samples))
-                for key in ('wall_seconds', 'parent_cpu_seconds', 'child_cpu_seconds', 'total_cpu_seconds',
-                            'logical_cpu_equivalents', 'validations_per_second', 'raw_megapixels_per_second',
-                            'peak_admitted_children'):
-                    values = [sample[key] for sample in samples]
-                    summary[key] = dict(median=statistics.median(values), min=min(values), max=max(values))
-                summary['all_receipts_correct'] = all(sample['correct_receipts'] == args.jobs for sample in samples)
-                result['summary'].append(summary)
-        assert sha256(driver) == manifest['executable_sha256']
-        result['native_lifecycle'] = native_owner.close()
-        result['complete'] = True; save()
+                    samples = [sample for sample in result['samples'] if sample['codec'] == fixture['codec'] and
+                               sample['cpu_permits'] == worker and sample['phase'] == 'measured']
+                    summary = dict(codec=fixture['codec'], cpu_permits=worker, measured_samples=len(samples))
+                    for key in ('wall_seconds', 'parent_cpu_seconds', 'child_cpu_seconds', 'total_cpu_seconds',
+                                'logical_cpu_equivalents', 'validations_per_second', 'raw_megapixels_per_second',
+                                'peak_admitted_children'):
+                        values = [sample[key] for sample in samples]
+                        summary[key] = dict(median=statistics.median(values), min=min(values), max=max(values))
+                    summary['all_receipts_correct'] = all(sample['correct_receipts'] == args.jobs for sample in samples)
+                    result['summary'].append(summary)
+            assert sha256(driver) == manifest['executable_sha256']
+            result['native_lifecycle'] = native_owner.close()
+            result['complete'] = not args.pilot; save()
+        if args.pilot:
+            from phase import supervise
+            closure = supervise(native_phase, work, seconds=300)
+            result = json.loads(args.output.read_text())
+            result['aggregate_lifecycle'] = closure
+            result['complete'] = True
+            save()
+        else:
+            native_phase()
+
 
 
 if __name__ == '__main__':
