@@ -4,21 +4,46 @@
 
 ## Live implementation handoff
 
-* Latest Photo coordination (received 2026-10-14 03:03 UTC): the
+* Latest native-preview evidence (reviewed 2026-10-14): the original Photo
+  owner completed control `10031592` with one native registration and two
+  native LOAD/RELOAD passes before restart. Each selected and decoded
+  **1136×852**, with fresh current identity/orientation at all six raw
+  BEFORE_LOAD/POST_LOAD/POST_DECODE observations. Six registered levels have
+  positive exact disk sizes; a separate read-only connection observed committed
+  rows and the current mapping. Seven retained files were independently unchanged
+  and six preserved JPEG sections passed independent full decode. The highest
+  **2272×1704** level has registration/independent-codec proof only, not native
+  selected-decode proof. See the [outcome](doc/preview-finite-oracle-outcome-20261013.json)
+  and [independent metadata review](doc/preview-native-one-control-independent-review-20261013.json).
+  Eight owned callbacks returned, helpers restored, coordinator exited normally
+  and the canonical lease was released; this does not assert global Lightroom
+  quiescence. After Root's restart, the cold/highest test stopped before native
+  entry when the desktop relocked. The latest owner observation at 03:30 UTC
+  reports Classic PID 40020, no pending request and no headless ping release.
+  Cold/highest recognition, monitor/1:1, Quasar split/mount-loss, faithful
+  rendering and production publication remain unqualified. Original renderer/
+  publisher ownership stays with `/root/preview_implementation`; Unison reviews
+  metadata through the parent queue and launches no competing native work.
+
+* Whole-file clone continuation: the [strict-result proposal](doc/whole-file-clone-status-proposal.md)
+  and [independent caller/test plan](doc/whole-file-clone-status-test-plan.md)
+  close the source-design pass for the remaining boolean clone branches.
+  Additive results must validate captured source EOF, preserve source cursors,
+  reconcile the output cursor, propagate operational errors and permit fallback
+  only after a verified untouched decline. Named creation retains separate
+  parent/output ownership and caller-approved source resolution. Empty-file
+  behavior and native clone metadata differ from a data-only stage. These are
+  source plans; production implementation and execution remain next core work.
+  Tested core checkpoint `aa53e3a` is pushed.
+
+* Earlier Photo renewal (received 03:03 UTC): the
   [Root renewal at 02:14:39 UTC](doc/preview-finite-oracle-resumption-20261013.json)
-  supersedes the earlier suspension at 02:12 UTC. Actual unlock was observed
-  at 02:13:58 UTC; original `/root/preview_implementation` retains the same
-  coordinator PID 18036 / tool session 37295 and canonical Photo lease.
-  Classic PID 2844 / 08:27:50 launch is unchanged. Startup/native/date
-  requests were closed at admission; prior denied requests were unsubmitted,
-  with no native replay. The finite scope remains the existing one-control
-  registration plus exact raw mapping/load/decode proof. Cold restart needs
-  separately renewed owner admission; no full run or Quasar fault test is added.
-  This delayed receipt does not recheck current desktop/application/CPU state
-  or temporary keep-awake PID 19859. Native outcomes/closure remain pending.
-  Queue acknowledgment asks for tested result pins, not another job. Unison
-  preview work remains interface/review; next whole-clone status work here is
-  a source-only audit. The tested core checkpoint `aa53e3a` is pushed.
+  reopened the original owner's finite slot after unlock at 02:13:58 UTC,
+  using the same coordinator PID 18036 / tool session 37295 and Classic PID
+  2844. Prior denied requests were unsubmitted, with no replay. This delayed
+  admission receipt proved no outcome or current readiness. The completed
+  outcome and closure above now supersede its pending state; cold/highest
+  continuation remains separately coordinated.
 
 * Earlier Photo suspension (sealed 2026-10-14 02:12 UTC, read 02:18 UTC):
   the finite native window suspended after actual desktop relock. The

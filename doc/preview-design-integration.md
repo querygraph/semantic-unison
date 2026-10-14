@@ -14,17 +14,30 @@ Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
-Latest coordination, received 2026-10-14 03:03 UTC: the
-[Root renewal at 02:14:39 UTC](preview-finite-oracle-resumption-20261013.json)
-supersedes the earlier suspension at 02:12 UTC after actual unlock at
-02:13:58 UTC. Original preview owner, coordinator PID 18036 / tool session
-37295 and canonical Photo lease are unchanged; Classic PID 2844 has the same
-launch. Prior denied requests were positively unsubmitted, with no replay.
-Registration was uninvoked at admission; its exact native mapping/load/decode
-outcome and closure remain pending. This delayed receipt is not a new check
-of current desktop/application/CPU or temporary keep-awake state. Cold restart
-requires separate Root admission; no full run or Quasar fault test is added.
-Unison acknowledges through the parent queue and starts no Adobe/cache work.
+Latest tested evidence, reviewed 2026-10-14: original Photo owner completed
+one native registration and two LOAD/RELOAD passes for control `10031592` in
+Classic PID 2844 before restart. Both selected and decoded **1136×852**.
+All six fresh raw mapping stages bind current identity and direct stored/native
+orientation AB to captured Main; six registered rows have positive exact sizes.
+A separate read-only reader proves committed visibility. The owner also reports
+six exact preserved JPEGs independently decoded and seven file identities/hashes
+unchanged. The registered **2272×1704** highest level lacks native selected-decode
+proof. The [outcome receipt](preview-finite-oracle-outcome-20261013.json) and
+[independent review](preview-native-one-control-independent-review-20261013.json)
+keep those scopes distinct. Eight owned callbacks closed, helpers restored and
+the coordinator exited normally with the canonical lease released; this is
+finite-request closure, not global Lightroom quiescence.
+
+Root subsequently restarted Classic. The cold/highest test was held before
+native entry after desktop relock; latest owner metadata at 03:30 UTC reports
+PID 40020, no pending native/UI request and no headless ping release. Cold/highest
+recognition, monitor/1:1 coverage, Quasar split/mount-loss, standalone fidelity
+and offline publication remain unqualified. Unison acknowledges via the Photo
+parent queue, retaining the original renderer/publisher owner and interface/
+review scope. Earlier admissions and source-only statuses below are historical;
+only this narrowly tested control supersedes their pending native result.
+
+Earlier renewal, received 03:03 UTC: the [02:14:39 Root admission](preview-finite-oracle-resumption-20261013.json) reopened the original finite slot. Its then-pending outcome is superseded by the tested packet above.
 
 Earlier suspension, sealed 02:12 UTC and read 02:18 UTC: the native slot was
 [suspended with all helpers closed](preview-finite-oracle-suspension-20261013.json)
