@@ -4,6 +4,17 @@
 
 ## Live implementation handoff
 
+* User-confirmed scope (2026-10-14): Photo Root and the original
+  `/root/preview_implementation` own final preview design, generators,
+  Lightroom qualification, Ten/Quasar placement and publisher recovery.
+  Coordinate through the Photo parent `codex queue` route and consume the
+  resulting versioned interface/evidence here. Unison implementation remains
+  focused on semantic format extensions, DNG receiving validation, general
+  clone-aware filesystem support and OxCaml workers. Preview integration does
+  not block independent core work. Existing finite native-window and
+  production-publication admission boundaries remain unchanged; this scope
+  agreement releases no native call, publisher or full generator run.
+
 * Empty native private-cache lifecycle actually passed and closed
   (2026-10-14): the **05:32:25 UTC** current pointer supersedes delayed
   source-only notices. Root's sealed return packet `0dadea0f` records three
