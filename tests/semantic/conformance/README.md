@@ -31,6 +31,22 @@ python3 tests/semantic/conformance/run.py --ocamlopt /usr/local/bin/ocamlopt
 python3 tests/semantic/conformance/run.py --ocamlopt /Users/alexy/.opam/5.2.0+ox/bin/ocamlopt
 ```
 
+To build native-helper sanitizer tests separately from execution:
+
+```sh
+python3 tests/semantic/conformance/run.py \
+  --ocamlopt "$HOME/.opam/5.2.0+ox/bin/ocamlopt" \
+  --sanitize address,undefined --build-only
+```
+
+Run the exact `conformance-test COMMANDS.tsv` command printed by the build.
+Alternatively omit `--build-only` to build and run in one command. Stock uses
+`$HOME/.opam/default/bin/ocamlopt`. These instrument the C hashing and file-I/O
+helpers with ASan/UBSan and disable sanitizer recovery. The OCaml code/runtime
+remains unsanitized. Build success is not a sanitizer runtime pass; negative
+detector controls and sustained/native concurrency qualification remain separate.
+Fixtures are independently generated disposable bytes, never source photos.
+
 Each run preserves its compiler-local snapshot, build/test logs and receipt in
 `/private/tmp/unison-sde-conformance-*`. `--report /path/receipt.json` chooses
 where to save the receipt. Production sources are copied before compilation;

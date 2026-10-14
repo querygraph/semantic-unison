@@ -26,6 +26,10 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--ocamlopt", default="ocamlopt")
     parser.add_argument("--report", type=Path)
+    parser.add_argument("--build-only", action="store_true",
+                        help="compile and generate immutable synthetic commands without running the test")
+    parser.add_argument("--sanitize", choices=("address", "undefined", "address,undefined"),
+                        help="instrument native C helpers; OCaml/runtime code remains unsanitized")
     parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation"),
                         help="privately corrupt nonce binding or preservation hashing and require detection")
     args = parser.parse_args()
@@ -170,6 +174,10 @@ def main():
     with (work / "build.log").open("w") as log:
         command = [compiler, "-I", "+unix", "unix.cmxa", "semanticHash_stubs.c",
                    "semanticFile_stubs.c"]
+        if args.sanitize:
+            flag = "-fsanitize=" + args.sanitize
+            command += ["-ccopt", flag, "-ccopt", "-fno-omit-frame-pointer",
+                        "-ccopt", "-fno-sanitize-recover=all", "-cclib", flag]
         for name in MODULES:
             command += [name + ".mli", name + ".ml"]
         result = subprocess.run(command + [str(fixture_root / "test.ml"), "-o", str(work / "conformance-test")],
@@ -177,6 +185,18 @@ def main():
     if result.returncode:
         print((work / "build.log").read_text())
         raise SystemExit(result.returncode)
+    if args.build_only:
+        print("Built test:", work / "conformance-test", flush=True)
+        print("Run:", work / "conformance-test", manifest, flush=True)
+        receipt = {"build_only": True, "private_snapshot": str(work),
+                   "compiler": compiler, "compiler_version": compiler_version,
+                   "sanitize_native_helpers": args.sanitize,
+                   "source_sha256": sources, "compiled_source_sha256": compiled_sources,
+                   "test_binary_sha256": sha((work / "conformance-test").read_bytes()),
+                   "commands_sha256": sha(manifest.read_bytes()), "test_executed": False}
+        if args.report:
+            args.report.write_text(json.dumps(receipt, indent=2) + "\n")
+        return
     result = subprocess.run([str(work / "conformance-test"), str(manifest)], cwd=work,
                             env=environment, capture_output=True, text=True, timeout=90)
     (work / "test.log").write_text(result.stdout + result.stderr)
@@ -195,6 +215,7 @@ def main():
         "created_utc": datetime.now(timezone.utc).isoformat(),
         "scope": "production semantic kernel codecs/proofs in a compiler-matched private snapshot; synthetic bytes only",
         "compiler": compiler, "compiler_version": compiler_version,
+        "sanitize_native_helpers": args.sanitize,
         "compiler_binary_sha256": sha(Path(compiler).read_bytes()),
         "private_snapshot": str(work), "build_exit": 0, "test_exit": result.returncode,
         "negative_control": args.negative_control,

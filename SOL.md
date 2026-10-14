@@ -4,6 +4,15 @@
 
 ## Live implementation handoff
 
+* Native-helper sanitizer build handoff (2026-10-14): independent deterministic
+  codec tests support `--sanitize address,undefined --build-only`. Both actual
+  compilers build complete test executables; native object symbol readback
+  verifies ASan/UBSan instrumentation and executable linkage resolves to the
+  installed clang sanitizer runtime. Recovery is disabled. No sanitizer test
+  executable was run in this checkpoint; runtime/negative-control qualification
+  stays open. OCaml/runtime code remains unsanitized.
+  [Run instructions](tests/semantic/conformance/README.md).
+
 * Missing-stage admission correction (2026-10-14): the opt-in manifest-memory
   precheck converts an initial Unix `lstat` failure to `Util.Transient`, matching
   later tree inspection. The actual compiled participant passes absent-stage
