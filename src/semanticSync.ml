@@ -320,3 +320,85 @@ let try_local_async_with_producer ~producer ~source ~basis ~directory ~staging =
 
 let try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging =
   try_local_async_internal ~reservation ?producer ~source ~basis ~directory ~staging ()
+
+(* This entry point is deliberately separate from transfer optimization. The
+   merge owner provides a private saved base and the previous archive's exact
+   fingerprint, not a peer's SDR claim or whichever replica was scanned first. *)
+let merge_local_async ~base_fingerprint ~base ~left ~right ~output =
+  let open Lwt in
+  let fail reason = raise (Util.Transient ("DNG scalar merge: " ^ reason)) in
+  if Os.isPseudoFingerprint base_fingerprint then fail "the saved base has only a pseudo-fingerprint";
+  let extensions = List.filter_map FormatExtension.resolve
+    [DngExtended.profile; DngSemantic.profile] in
+  SemanticRuntime.with_transaction ~max_payload:FormatExtension.max_region (fun cancellation ->
+    let owned = ref [] in
+    let close () =
+      let fds = !owned in owned := [];
+      List.iter close_fd_noerr fds in
+    let open_fd path flags =
+      let fd = Fs.openfile path (Unix.O_CLOEXEC :: Unix.O_NONBLOCK :: flags) 0 in
+      (try owned := fd :: !owned with error -> close_fd_noerr fd; raise error);
+      fd in
+    let same a b =
+      a.Unix.LargeFile.st_kind = Unix.S_REG && b.Unix.LargeFile.st_kind = Unix.S_REG &&
+      a.st_dev = b.st_dev && a.st_ino = b.st_ino && a.st_size = b.st_size &&
+      a.st_mtime = b.st_mtime && a.st_ctime = b.st_ctime in
+    BorrowedWork.try_bind (fun () ->
+      let base_fd = open_fd base [Unix.O_RDONLY] in
+      let left_fd = open_fd left [Unix.O_RDONLY] in
+      let right_fd = open_fd right [Unix.O_RDONLY] in
+      let output_fd = open_fd output [Unix.O_RDWR] in
+      let before = Unix.LargeFile.fstat base_fd in
+      if not (same before (Fs.stat base)) then fail "saved base name changed";
+      List.iter (fun path ->
+        let info = Fileinfo.get true path Path.empty in
+        if info.Fileinfo.typ <> `FILE ||
+           Osx.ressLength info.Fileinfo.osX.Osx.ressInfo <> Uutil.Filesize.zero then
+          fail "regular files without resource forks are required") [base;left;right;output];
+      let runtime = SemanticRuntime.get () in
+      let verify_base () =
+        if HelperSupervisor.is_cancelled cancellation then fail "archive verification cancelled";
+        let _, fingerprint = Os.safeFingerprint base Path.empty
+          (Fileinfo.get true base Path.empty) None in
+        if not (Os.fullfingerprintEqual fingerprint base_fingerprint) then
+          fail "saved base does not match the previous sync archive";
+        if not (same before (Unix.LargeFile.fstat base_fd) && same before (Fs.stat base)) then
+          fail "saved base changed during archive verification";
+        if HelperSupervisor.is_cancelled cancellation then fail "archive verification cancelled";
+        return () in
+      let pool = runtime.pool in
+      let rec select reasons = function
+        | [] -> fail ("no compatible fixed-region profile: " ^ String.concat "; " (List.rev reasons))
+        | extension :: rest ->
+          BorrowedWork.bind (fun () -> BorrowedWork.all
+            [(fun () -> SemanticWorkers.inspect pool cancellation ~extension base_fd);
+             (fun () -> SemanticWorkers.inspect pool cancellation ~extension left_fd);
+             (fun () -> SemanticWorkers.inspect pool cancellation ~extension right_fd)]) (function
+          | [Some b;Some l;Some r] ->
+            (match b.proof,l.proof,r.proof with
+             | Ok b,Ok l,Ok r ->
+               BorrowedWork.bind (fun () -> SemanticWorkers.reconcile_xmp pool cancellation
+                 ~extension ~nonce:(String.make 32 '\000') ~base:b ~left:l ~right:r left_fd) (function
+               | None -> fail "reconciliation cancelled"
+               | Some merged -> match merged.merge_plan with
+                 | Error reason -> select (reason :: reasons) rest
+                 | Ok plan ->
+                   if not (same before (Unix.LargeFile.fstat base_fd) && same before (Fs.stat base)) then
+                     fail "saved base changed before materialization";
+                   BorrowedWork.bind (fun () -> SemanticWorkers.apply_report pool cancellation
+                     ~extension plan ~basis:left_fd ~output:output_fd) (function
+                   | None -> fail "materialization cancelled"
+                   | Some report -> return report))
+             | Error reason,_,_ | _,Error reason,_ | _,_,Error reason -> select (reason :: reasons) rest)
+          | _ -> fail "inspection cancelled") in
+      (* Release the base I/O/CPU lease before any worker acquires its own.
+         Holding it through inspection would deadlock a one-job filesystem. *)
+      BorrowedWork.bind (fun () -> IoAdmission.with_devices runtime.io cancellation
+        ~devices:(IoAdmission.devices_of_fds [base_fd]) (fun () ->
+          HelperSupervisor.with_cpu_permits runtime.supervisor ~weight:1 cancellation verify_base))
+        (function Some (Some ()) -> select [] extensions
+         | _ -> fail "archive verification admission cancelled"))
+      (fun report -> close (); return report)
+      (fun error -> close (); match error with
+       | SemanticWorkers.Failed reason -> Lwt.fail (Util.Transient ("DNG scalar merge: " ^ reason))
+       | _ -> Lwt.fail error))

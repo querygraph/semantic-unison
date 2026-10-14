@@ -1486,6 +1486,27 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
       let fp1 = Os.fingerprint workingDirForMerge working1 info1 in
       let info2 = Fileinfo.getType false workingDirForMerge working2 in
       let fp2 = Os.fingerprint workingDirForMerge working2 info2 in
+      let returnValue, mergeResultLog =
+        if Globals.mergeCmdForPath path1 = "unison:dng-xmp-scalars/0" then begin
+          let base_fingerprint = match ui1,ui2 with
+            | Updates (_, PrevFile (_, fp, _, _)),
+              Updates (_, PrevFile (_, fp2, _, _)) when Os.fullfingerprintEqual fp fp2 -> fp
+            | NoUpdates, Updates (_, PrevFile (_, fp, _, _))
+            | Updates (_, PrevFile (_, fp, _, _)), NoUpdates -> fp
+            | _ -> raise (Util.Transient "DNG scalar merge requires a common previous archive") in
+          if arch = None then
+            raise (Util.Transient "DNG scalar merge requires a saved common version; enable backupcurrent before synchronization");
+          copy [(working1,new1)];
+          let report = Lwt_unix.run (SemanticSync.merge_local_async
+            ~base_fingerprint
+            ~base:(Fspath.concat workingDirForMerge workingarch)
+            ~left:(Fspath.concat workingDirForMerge working1)
+            ~right:(Fspath.concat workingDirForMerge working2)
+            ~output:(Fspath.concat workingDirForMerge new1)) in
+          Unix.WEXITED 0, Printf.sprintf
+            "Built-in DNG scalar merge verified one exact result (%d metadata bytes, %d writes).\n"
+            report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
+        end else begin
       let cmd = formatMergeCmd
           path1
           (Fspath.quotes (Fspath.concat workingDirForMerge working1))
@@ -1497,8 +1518,9 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
           (if Prefs.read Globals.batch then "batch" else "") in
       Trace.log (Printf.sprintf "Merge command: %s\n" cmd);
 
-      let returnValue, mergeResultLog =
-        Lwt_unix.run (SupervisedExternal.runExternalProgram cmd) in
+      Lwt_unix.run (SupervisedExternal.runExternalProgram cmd)
+
+        end in
 
       Trace.log (Printf.sprintf "Merge result (%s):\n%s\n"
                    (showStatus returnValue) mergeResultLog);

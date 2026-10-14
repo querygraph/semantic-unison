@@ -4,6 +4,23 @@
 
 ## Live implementation handoff
 
+* M5 opt-in built-in merge integration (2026-10-14): the explicit existing
+  rule `merge = Name *.dng -> unison:dng-xmp-scalars/0` now selects the scalar
+  policy. `backupcurrent` captures the common full version through Stasher;
+  current previous-archive fingerprints bind the copied base independently
+  before checked worker inspection/materialization. One exact artifact uses
+  normal merge copyBack and both receiving validation gates. Actual stock/Ox
+  loopback tests cover disjoint/swapped convergence, competing/deleted/unknown/
+  image changes, resource forks, missing/stale base, disabled/mismatched policy
+  and first/second
+  receiver rejection. Second-receiver failure preserves its old bytes after
+  first commit; fresh retry proves exact convergence with both gates.
+  Make/Dune build+selftests and existing21 receiving-path regressions pass.
+  [Usage/scope](doc/dng-built-in-merge.md), [pins](tests/dng_merge/qualification.json).
+  Default remains disabled. Saved bases are full optional backups, not yet a
+  metadata-only cache; general structures/growth and broader M5 remain open.
+  No Adobe/Photo invocation or preview ownership change.
+
 * M5 fixed-region DNG materialization (2026-10-14): trusted full-packet proofs
   now construct an exact three-way target and SDE plan after live-left
   revalidation. OxCaml workers dispatch this operation with existing borrowed-FD,
@@ -13,8 +30,8 @@
   JPEG/DNG/positional-write/21 receiving controls pass. Four Make/Dune CLI
   builds/selftests pass. [Scope](doc/dng-three-way-materialization.md),
   [evidence](tests/dng_reconcile/qualification.json). Automatic merging remains
-  disabled: trusted archive-base capture, two-replica commit/recovery and full M5
-  remain open. No Photo or Adobe work.
+  disabled in that materialization-only slice; the successor integration above
+  adds explicit policy selection and archive-bound commit/recovery. Full M5 stays open. No Photo or Adobe work.
 
 * M5 scalar packet kernel (2026-10-14): explicit policy
   org.firstpair.xmp-scalars-three-way/0 captures lossless Rating/Label attribute

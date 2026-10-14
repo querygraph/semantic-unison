@@ -25,3 +25,16 @@ val try_local_async_reserved : reservation:SemanticAdmission.reservation ->
 (** Borrow the caller's retained publication envelope before clone/worker opens.
     None producer preserves an explicitly handed-off legacy materializer while
     retaining its work admission. No nested resource gate acquisition. *)
+
+val merge_local_async : base_fingerprint:Os.fullfingerprint -> base:Fspath.t ->
+  left:Fspath.t -> right:Fspath.t -> output:Fspath.t ->
+  SemanticDelta.application Lwt.t
+(** Explicit built-in scalar merge, independent of transfer optimization prefs.
+    All paths are private merge-owner files; output must already contain left's
+    exact bytes. Verify a non-pseudo previous-archive fingerprint against the
+    held saved-base identity, then inspect/reconcile/materialize on the shared
+    workers. Resource forks, missing bases, incompatible profiles and conflicts
+    fail without fallback to a guessed base. Borrowed jobs settle before closing
+    any descriptor; admission/cancellation use the existing runtime. The caller
+    owns output deletion on failure, original preservation, validation and
+    ordinary two-replica commit/recovery. No archive format change or rename. *)

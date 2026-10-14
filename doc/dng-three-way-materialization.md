@@ -42,3 +42,8 @@ a new qualification of Unison's already-tested clone wrapper. Runtime worker
 tests add48 parallel plans and queued cancellation under held CPU credits;
 SDE conformance checks retain independent codec/byte semantics. No photographic
 input, Lightroom, Adobe invocation or production file merge occurred.
+
+The opt-in [built-in merge](dng-built-in-merge.md) now supplies the previous-archive
+authority through a verified saved full version and reuses normal two-replica
+commit/recovery. The kernel qualification below remains scoped to private target
+construction; it does not by itself prove that integration.
