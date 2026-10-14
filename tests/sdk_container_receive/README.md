@@ -78,3 +78,23 @@ single-thread SDK commands are data only. No SDK executor or native admission is
 granted by preparation; future execution needs a separately reviewed contained
 runner and fresh Root slot. The originals' SDK positives do not validate these
 merged snapshots, which remain unqualified until that check actually runs.
+
+
+`validate_merged.py` supplies the separately contained executor. Mock mode refuses
+production identities; native mode requires the exact fresh Root admission state
+`ROOT_ADMITTED_FINITE_UNISON_MERGED_OUTPUT_V1`, prepared file pin, command, limits,
+source hashes and a current start deadline. It checks canonical three-codec argv,
+input/tool/source pins, exact SDK receipt binding, valid decode/raw digest, zero
+errors and the original four-warning count. Raw ENTRY/CALL files survive failure.
+The aggregate is300s with60s child bounds; pre-supervision pin validation is outside
+that aggregate. Parent tool terminal exit is a separate owner deliverable.
+
+```sh
+python3 tests/sdk_container_receive/validate_merged_test.py
+```
+
+This runs only original fake tools, tests normal closure and failed-receipt/exit
+closure, refuses consumed workspaces and noncanonical argv before another call,
+and checks seven pure admission cases. [Source qualification](merged-executor-qualification.json)
+and [finite review request](../qualification/sdk-merged-output-request-v1-20261014.json)
+are not runtime permission. No old slot may be reused.

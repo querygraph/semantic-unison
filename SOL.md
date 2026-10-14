@@ -2480,3 +2480,23 @@ A separately reviewed contained executor and fresh Root slot remain necessary;
 this is preparation, not actual merged-output Adobe qualification or a new
 runtime request. Source photographs, Photo/Lightroom and production validation
 configuration are unchanged. Full goal stays open.
+
+
+### Finite merged-output executor ready for review — 2026-10-14
+
+Added [contained executor](tests/sdk_container_receive/validate_merged.py) for the
+three frozen outputs: qualified single-thread v1 only, exact canonical argv and
+source/tool/candidate pins, raw ENTRY/CALL capture, exact candidate/build SDK
+receipt, valid structure/decode/rawdigest/zeroerrors and four original warnings.
+Fresh distinct Root state binds prepared/command/limits/sourcepins/deadline.
+One exclusive workspace, three sequential calls,60s perchild/300s aggregate,
+postchecks and actual group closure; wrapper tool terminal remains separate.
+No SDK invocation: current native pin validation is pure. Mock positives and four
+failed receipt/exit paths genuinely closed/reaped/othermembersabsent, consumed
+workspace refuses replay, mock refuses production identity, canonical argv
+rejects before acquisition and seven pure admission controls pass.
+[Sealed source/mock gate](tests/sdk_container_receive/merged-executor-qualification.json),
+[exact finite review request](tests/qualification/sdk-merged-output-request-v1-20261014.json).
+Request is UNADMITTED; no past release reused. Original Photo owner retains all
+preview scheduling/rendering/publishing. Actual merged-output SDK qualification,
+production/camera/resource/performance and full goal remain open.
