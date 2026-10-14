@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Actual core resource declarations via a compiled non-Adobe backend."""
 import argparse,pathlib,subprocess,tempfile,importlib.util,hashlib,json,os,re
-p=argparse.ArgumentParser();p.add_argument('--build',type=pathlib.Path,required=True);p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
+p=argparse.ArgumentParser();p.add_argument('--build',type=pathlib.Path,required=True);p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);p.add_argument('--activation-negative',action='store_true');a=p.parse_args()
 r=pathlib.Path(__file__).resolve().parents[2];src=a.build.resolve()/'src';w=pathlib.Path(tempfile.mkdtemp(prefix='unison-backend-resources-')).resolve();commands=[];cases=[]
 spec=importlib.util.spec_from_file_location('receive',r/'tests/validation_paths/run.py');v=importlib.util.module_from_spec(spec);spec.loader.exec_module(v)
 H=lambda p:hashlib.sha256(pathlib.Path(p).read_bytes()).hexdigest()
@@ -24,6 +24,24 @@ try:
  run([a.compiler,*flags,'-c','controls.ml'],'controls-compile')
  control=w/'controls';run([a.compiler,*flags,'unix.cmxa','str.cmxa',*[src/m for m in mods if m!='main.cmx'],w/'controls.cmx',*[src/n for n in objects('COBJS')],'-o',control],'controls-link')
  run([control],'resource-controls')
+ if a.activation_negative:
+  negative=w/'negative';negative.mkdir()
+  (negative/'candidateValidator.mli').write_bytes((src/'candidateValidator.mli').read_bytes())
+  old=subprocess.check_output(['git','show','4717a6c:src/candidateValidator.ml'],cwd=r)
+  (negative/'candidateValidator.ml').write_bytes(old)
+  (negative/'activation_negative.ml').write_bytes((r/'tests/backend_resources/activation_negative.ml').read_bytes())
+  nf=['-I',str(negative),*flags]
+  for suffix in ['mli','ml']:run([a.compiler,*nf,'-c',negative/('candidateValidator.'+suffix)],'negative-validator-'+suffix)
+  run([a.compiler,*nf,'-c',negative/'activation_negative.ml'],'negative-oracle-compile')
+  before=mods[:mods.index('candidateValidator.cmx')]
+  (w/'activation_positive.ml').write_bytes((r/'tests/backend_resources/activation_negative.ml').read_bytes())
+  run([a.compiler,*flags,'-c',w/'activation_positive.ml'],'positive-oracle-compile')
+  pb=w/'activation-positive';run([a.compiler,*flags,'unix.cmxa','str.cmxa',*[src/m for m in before],src/'candidateValidator.cmx',w/'activation_positive.cmx',*[src/n for n in objects('COBJS')],'-o',pb],'positive-oracle-link')
+  run([pb],'positive-activation-oracle')
+  nb=negative/'activation';run([a.compiler,*nf,'unix.cmxa','str.cmxa',*[src/m for m in before],negative/'candidateValidator.cmx',negative/'activation_negative.cmx',*[src/n for n in objects('COBJS')],'-o',nb],'negative-link')
+  x=subprocess.run([nb],cwd=negative,capture_output=True,text=True,timeout=30);log=negative/'result.log';log.write_text(x.stdout+x.stderr)
+  assert x.returncode==2 and 'DESIGNATED late resource backend accepted without reserved workspace' in log.read_text()
+  j['activationNegative']=dict(parent='4717a6c',participantSha256=hashlib.sha256(old).hexdigest(),binarySha256=H(nb),exit=x.returncode,log=str(log),logSha256=H(log),scope='Exact previous CandidateValidator implementation only, other prefix objects current; independently rejected by late-activation oracle.')
  for name,memory,lanes,succeeds in [('fits',4,1,True),('memory-too-large',32,1,False),('cpu-too-large',4,3,False)]:
   s=v.Session(w/name,str(binary));serverlog=s.root/'server.tsv';clientlog=s.root/'client.tsv'
   cfg=dict(s.config('server'),testvalidatorlog=str(serverlog),testbackendmemory=str(memory),testbackendlanes=str(lanes));(s.server_state/'endpoint.prf').write_text(''.join(f'{k} = {x}\n' for k,x in cfg.items()))
@@ -46,6 +64,6 @@ try:
   assert not s.calls('client') and not s.calls('server');print('PASS',name,flush=True)
  for f in ['backendResources.ml','backendResources.mli','candidateValidator.ml','candidateValidator.mli','candidateValidators.ml','candidateValidators.mli','candidateValidation.ml','semanticRuntime.ml','semanticRuntime.mli']:
   assert H(src/f)==H(r/'src'/f),('source drift',f)
- j.update(status='passed',binarySha256=H(binary),sourcePins={f:H(r/f) for f in ['tests/backend_resources/plugin.ml','tests/backend_resources/controls.ml','tests/backend_resources/run.py','tests/validation_paths/run.py']},compiledSourcePins={str(x):H(src/x) for x in mods if (src/x).is_file()},scope='Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.')
+ j.update(status='passed',binarySha256=H(binary),sourcePins={f:H(r/f) for f in ['tests/backend_resources/plugin.ml','tests/backend_resources/controls.ml','tests/backend_resources/activation_negative.ml','tests/backend_resources/run.py','tests/validation_paths/run.py']},compiledSourcePins={str(x):H(src/x) for x in mods if (src/x).is_file()},scope='Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.')
 finally:
  j.setdefault('status','failed');a.receipt.write_text(json.dumps(j,indent=2)+'\n');(w/'RESULT.json').write_text(json.dumps(j,indent=2)+'\n')

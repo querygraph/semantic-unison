@@ -4,6 +4,19 @@
 
 ## Live implementation handoff
 
+* Backend activation admission correction (2026-10-14): declarations alone did
+  not prevent a previously disabled resource-bearing validator from becoming
+  active after staging, potentially borrowing space reserved for retained
+  metadata. Its enabled/disabled participation is now pinned along with its
+  resource plan; transitions require process restart. Legacy resource-free
+  validators retain policy toggles. Stock/Ox each pass 15 actual-object controls
+  and the compiled-backend cases; Make/Dune builds+selftests and all 21 receiving
+  regressions pass per compiler. The exact previous implementation fails the
+  independent late-activation oracle; the new implementation rejects it.
+  [Successor qualification](tests/backend_resources/participation-qualification.json)
+  preserves the first admission receipt as historical evidence. No Adobe or
+  Photo invocation, SDK/RSS enforcement or full M4-V/M6 completion is claimed.
+
 * M4-V generic backend resource admission (2026-10-14): trusted validators now
   declare immutable CPU, covered/uncovered byte and descriptor requirements.
   Regular-file publication reserves the componentwise maximum sequential

@@ -39,18 +39,33 @@ let () =
       BackendResources.coverage p=BackendResources.Accounting_only));
   check "credit addition overflow" (fun () -> invalid (fun () ->
     BackendResources.add_cost (plan ~uncovered:1 ()) ~bytes:max_int ~descriptors:0));
-  check "resource declarations frozen across disable/re-enable" (fun () ->
+  check "resource declarations and participation frozen" (fun () ->
     let current = ref (plan ~uncovered:1024 ()) in
     let h = CandidateValidator.trusted ~resources:(fun () -> !current) (module Validator) in
     assert (Option.is_some (CandidateValidator.select h));
     assert (Option.is_some (CandidateValidator.select h));
     Validator.enabled := false; current := plan ~uncovered:2048 ();
-    assert (CandidateValidator.select h=None);
+    (try ignore (CandidateValidator.select h); failwith "accepted disabling resource backend"
+     with Util.Fatal _ -> ());
     Validator.enabled := true;
     (try ignore (CandidateValidator.select h); failwith "accepted changed plan"
      with Util.Fatal _ -> ());
     current := plan ~uncovered:1024 ();
     assert (Option.is_some (CandidateValidator.select h)));
+  check "late resource activation rejected" (fun () ->
+    Validator.enabled := false;
+    let h = CandidateValidator.trusted ~resources:(fun () -> plan ~uncovered:1024 ()) (module Validator) in
+    assert (CandidateValidator.select h=None);
+    Validator.enabled := true;
+    (try ignore (CandidateValidator.select h); failwith "accepted late backend activation"
+     with Util.Fatal _ -> ()));
+  check "legacy resource-free participation remains configurable" (fun () ->
+    Validator.enabled := false;
+    let h = CandidateValidator.trusted (module Validator) in
+    assert (CandidateValidator.select h=None);
+    Validator.enabled := true; assert (Option.is_some (CandidateValidator.select h));
+    Validator.enabled := false; assert (CandidateValidator.select h=None);
+    Validator.enabled := true; assert (Option.is_some (CandidateValidator.select h)));
   check "held envelope rejects upgrades without callback or debit" (fun () ->
     let gate = SemanticAdmission.create ~source_headroom:None ~max_transactions:1
       ~max_payload_bytes:8192 ~max_descriptors:8 ~max_pending:4 in

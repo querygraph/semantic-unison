@@ -31,6 +31,11 @@ type selected = {
 }
 (** Optional immutable owner policy. Capture on first enabled selection; a
     changed declaration requires process restart, before staging/validation.
+    Resource-bearing enabled/disabled participation is also pinned: enabling
+    after an initially disabled selection or disabling an enabled resource-
+    bearing backend requires restart. Otherwise a later validator could borrow
+    metadata capacity without its own declared workspace having been reserved.
+    Legacy companions declaring [BackendResources.none] retain policy toggles.
     Default none preserves existing companions. Requirements are accounting
     declarations; backend qualification/enforcement is a separate contract. *)
 val trusted : ?resources:(unit -> BackendResources.t) -> (module S) -> handle

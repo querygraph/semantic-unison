@@ -27,9 +27,15 @@ Each endpoint chooses its own compiled adapter, qualified executable and setting
 Core must reserve the complete worst-case selected plan with the publication
 transaction before opening/cloning staging. Refining recognition may release
 unused capacity; changing a selected declaration currently requires restarting
-Unison. Its first enabled selection pins the plan for the process lifetime,
-including across disable/re-enable. This prevents a backend from growing into
+Unison. Its first enabled selection pins the plan for the process lifetime.
+This prevents a backend from growing into
 space already reserved for retained metadata.
+Resource-bearing enabled/disabled participation is now pinned as well. A
+backend disabled at first selection cannot later become resource-bearing, and
+an enabled resource-bearing backend cannot be disabled in the same process.
+Otherwise re-enabling could add unreserved workspace to an already-staged
+candidate whose metadata envelope happens to be large enough numerically.
+Companions using `BackendResources.none` retain their existing policy toggles.
 Do not hold a metadata consumer lease and then queue for additional memory from
 the same gate: multiple staged candidates could deadlock while each waits for
 capacity held by the others. Preserve source headroom for bidirectional progress.
@@ -102,6 +108,8 @@ Real SDK1.7.1 header compilation checks single/area/memory/area-memory modes.
 separate. [Core admission qualification](../tests/backend_resources/qualification.json)
 records compiled synthetic-backend registration, no-double-debit admission,
 pre-staging rejection, immutable declarations and overflow/borrow controls on
-stock and OxCaml. Actual SDK memory/codec parity, whole-process memory,
+stock and OxCaml. The [participation successor](../tests/backend_resources/participation-qualification.json)
+adds pinned activation and a genuine previous-implementation negative control;
+the original receipt remains historical. Actual SDK memory/codec parity, whole-process memory,
 complete directory admission and full M4-V/M6 remain open. Photo Root continues owning preview generators, Lightroom
 oracles and publisher recovery; this work starts no competing native operation.
