@@ -1,5 +1,38 @@
 # Implementation status and remaining acceptance work
 
+Current scope: this session implements Unison semantic extensions, receiving
+validation, clone-aware filesystems and OxCaml workers. Photo Root and the
+original preview implementation own final preview design, generators,
+Lightroom qualification and Ten/Quasar publishing. Preview work does not block
+independent core implementation here; historical Photo notices below do not
+release a native window.
+
+The warning-delivery checkpoint routes permitted DNG validation findings
+through the UI warning channel after an owner-loop yield, with cancellation
+checked before and after delivery. The candidate workspace remains retained
+while the current helper and inspections have settled. Both compilers pass
+eleven actual-companion controls / 105 assertions, two designated negatives
+and three complete client/server receiving controls with logging disabled.
+Four verbatim OCaml macOS routing cases and six Foundation-only filter cases
+plus two parent negatives pass per compiler. Mac batch delivery uses a
+transient status field; GUI paint/persistent visibility remain unqualified.
+Fresh stock/Ox Make and Dune builds/selftests match the frozen source; full
+macOS bridge/controller compiler checks pass. The [qualification](../tests/validation_warning/qualification.json)
+and its independent acceptance distinguish actual core execution from source
+and mocked UI checks. No Adobe or Photo operation occurred.
+
+The strict whole-file clone checkpoint at `e87507f` already migrates production
+Copy away from legacy clone booleans, binds captured source EOF and output
+cursors, and retains named-clone ownership across native result handoff.
+Both compilers pass 60 groups / 536 assertions and five negatives, with matching
+Make/Dune builds/selftests and fourteen existing regression runs. Its
+[integration receipt](../tests/qualification/whole-file-clone-integration-20261014.json)
+and independent review preserve that source/evidence. Initial old-temp cleanup,
+additional-name publication families, hard helper memory/resource limits and
+broader filesystem/runtime qualification remain open.
+
+The following returned-work checkpoint is historical evidence.
+
 The returned-work continuation adds a shared `BorrowedWork` settlement guard
 at CPU, filesystem, worker submit and response-mapping boundaries. The prior
 CPU guard could return failure after two failed waiter installations while a
@@ -158,7 +191,7 @@ Make/Dune builds and 303 matching Dune production inputs; its ordinary/local/
 remote evidence remains historical to that source.
 
 
-Latest Photo-root coordination includes completed private
+Historical Photo-root coordination includes completed private
 [v3 metadata staging](../../photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json)
 and [handoff](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/HANDOFF.json)
 against 905,928 images / 895,491 current still keys: stat refresh covers 966,181
@@ -308,7 +341,7 @@ default does not mean removed from the plan.
 | Request | Status and concrete evidence | Remaining work or limit |
 | --- | --- | --- |
 | Process DNG metadata separately from the binary payload, updating metadata when possible. | **Implemented and verified for fixed-layout v0 and v1 profiles.** [DngSemantic](../src/dngSemantic.ml) finds an owned XMP extent; [SemanticDelta](../src/semanticDelta.ml) proves every complementary byte and the complete source/target SHA-256. [SemanticSync](../src/semanticSync.ml) and [SemanticRemote](../src/semanticRemote.ml) materialize private candidates. Kernel, local and remote tests compare exact results. Materialization skips matching absolute 4 KiB comparison windows, clips writes to editable regions, and reports actual logical write bytes and syscall attempts. | One out-of-line BYTE tag 700, unchanged offset/length and total size, at most 1 MiB. v1 additionally protects BigTIFF and baseline CR camera-profile graphs. Unknown/private/modern graphs and layout changes decline safely. The wire payload still carries complete packets. The window policy is not minimal byte-run patching or evidence of physical APFS write savings. No raw digest is used as whole-file equality. |
-| Make ordinary Unison transfers APFS-aware, with future ZFS/ReFS generalization. | **Working APFS optimization, portable range contract, held-FD receiver and intermediate publication integration.** [Copy](../src/copy.ml) reuses upstream hooks, private receiver-basis clones, same-offset skips, shifted immutable-basis reads and a bounded local producer. Strict [Fs.clone_stage_status](../src/fs.ml) preserves scoped declines/operational phases. [CopyRange](../src/copyRange.ml) retains 11 legacy outcome groups and adds strict results with 16 typed / 13 actual macOS / 14 complete caller groups; [CloneRange](../src/cloneRange.ml) passes 48 named constrained tests including 960 geometry combinations. [FileObservation](../src/fileObservation.mli) and [CloneLease](../src/cloneLease.mli) add native macOS facts and borrowed owner-epoch leases, passing 11/21 cases on stock/Ox. Ordinary receiver shifted matches use fresh observations, a 10 MiB maximum and `range = None`. Additive `Fs.clone_stage_handles` and [StagePublication](../src/stagePublication.mli) retain creation parent/witness and exclusively publish the normal temp; native suites pass 20/58 cases on both compilers. | Regular-file final `Files.renameLocal` and logical-root/follow-target binding are now qualified by 79 caller cases per compiler. Native scratch reservation/removal is now descriptor-relative, with 182 direct APFS cases / 1,984 assertions per compiler. Additional-name families and initial old-temp pathname cleanup remain open; first-admission gaps and cooperative namespace fencing remain explicit. No true mount-incarnation detection or capability cache. Production Copy publication/reference tests pass 86 cases per compiler, with a stock cleanup-removal negative control; current ordinary/bound-range/adoption and Ox local/remote reruns pass. Bound local/SDE materializers now hand over their actual output descriptors; declared legacy paths remain. Focused actual Copy-adapter tests pass 9 groups/27 scenarios on stock/Ox, with a stock negative control. Existing `clone_path`/`clone_file` still return booleans; successful `copy_file`/`Copied` does not attest sharing. Strict native range status is implemented and qualified on the available macOS no-effect/caller paths; other-platform status/runtime, ZFS/ReFS sharing, actual cross-volume performance and fault/crash recovery remain open. |
+| Make ordinary Unison transfers APFS-aware, with future ZFS/ReFS generalization. | **Working APFS optimization, portable range contract, held-FD receiver and intermediate publication integration.** [Copy](../src/copy.ml) reuses upstream hooks, private receiver-basis clones, same-offset skips, shifted immutable-basis reads and a bounded local producer. Strict [Fs.clone_stage_status](../src/fs.ml) preserves scoped declines/operational phases. [CopyRange](../src/copyRange.ml) retains 11 legacy outcome groups and adds strict results with 16 typed / 13 actual macOS / 14 complete caller groups; [CloneRange](../src/cloneRange.ml) passes 48 named constrained tests including 960 geometry combinations. [FileObservation](../src/fileObservation.mli) and [CloneLease](../src/cloneLease.mli) add native macOS facts and borrowed owner-epoch leases, passing 11/21 cases on stock/Ox. Ordinary receiver shifted matches use fresh observations, a 10 MiB maximum and `range = None`. Additive `Fs.clone_stage_handles` and [StagePublication](../src/stagePublication.mli) retain creation parent/witness and exclusively publish the normal temp; native suites pass 20/58 cases on both compilers. | Regular-file final `Files.renameLocal` and logical-root/follow-target binding are now qualified by 79 caller cases per compiler. Native scratch reservation/removal is now descriptor-relative, with 182 direct APFS cases / 1,984 assertions per compiler. Additional-name families and initial old-temp pathname cleanup remain open; first-admission gaps and cooperative namespace fencing remain explicit. No true mount-incarnation detection or capability cache. Production Copy publication/reference tests pass 86 cases per compiler, with a stock cleanup-removal negative control; current ordinary/bound-range/adoption and Ox local/remote reruns pass. Bound local/SDE materializers now hand over their actual output descriptors; declared legacy paths remain. Focused actual Copy-adapter tests pass 9 groups/27 scenarios on stock/Ox, with a stock negative control. Legacy compatibility `clone_path`/`clone_file` still return booleans, while production Copy now consumes strict whole-file results and captured EOF/cursor checks; successful generic copying does not attest sharing. Strict native range status is implemented and qualified on the available macOS no-effect/caller paths; other-platform status/runtime, ZFS/ReFS sharing, actual cross-volume performance and fault/crash recovery remain open. |
 | Accept extensions that declare change semantics beyond binary difference. | **Generic exact-transfer mechanism and lazy CLI reporting verified; richer semantics partial.** [FormatExtension.S](../src/formatExtension.mli) declares a profile and inspector; registration adds a capability, payload ceiling and advisory suffix hints. [SemanticReport](../src/semanticReport.ml), [SemanticRemote](../src/semanticRemote.ml) and [Uicommon](../src/uicommon.ml) show current-pair classification, preservation hashes and bounded metadata previews on explicit diff/details. A second registration-only synthetic format exercises unchanged local/remote/worker dispatch and the same report path in [test_generic_format.py](../tests/test_generic_format.py). | The transfer interface describes editable ranges; core classification is `Exact_bytes`, `Editable_metadata`, `Other_bytes`. Separately registered owner-side validation companions receive typed worker recognition and the shared finalized-candidate context; a synthetic companion qualifies registration without core edits. Immutable handles now have a bounded optional field-observation hook, used by DNG namespace-aware XMP and a synthetic workflow format through SIR/1. Reconciliation hooks and authoritative scan/base labels remain absent. Reports are lazy, disposable observations of the current pair, without an archived base or authoritative scan-wide labels. Exact-byte conflict decisions remain unchanged. |
 | Investigate existing systems and propose/implement a diff standard if needed. | **Research and experimental proposal delivered.** SOL records upstream Unison, rsync, VCDIFF, Git drivers, SQLite Session, Automerge and structured patch prior art. [SDE/0](semantic-delta-v0.md) specifies one canonical exact-byte envelope and SDR/0 request; [SIR/0](semantic-report-v0.md) separately describes bounded observations. Negotiated production RPCs implement both. | These are experimental interoperability proposals, not adopted standards or proof of novelty. Independent Python encoders/transcripts and fixed LE/BE DNG plus multi-region golden bytes now qualify 83 vectors, 1,836 truncations and exact materialization on both compilers (127 commands / 2,033 assertions each). External ecosystem adoption and representative-corpus interoperability remain separate. |
 | Study `~/src/dng-compare` and the recreated Lightroom fingerprinting work. | **Source research completed and recorded.** SOL pins both canonical repositories, documents the opaque-trailer counterexample and distinguishes stored Adobe digest, recomputed raw identity, Lightroom original matcher, preserved bytes and whole-file identity. Both canonical SSH origins and pinned commits were reconfirmed during this audit. | There is no production invocation of the recreated Lightroom workers, no new source change in either supporting repository, and no independently qualified Lightroom UI oracle. Using them as differential oracles requires version/stratum-specific fixtures. The firstparty source review is evidence of distinctions, not execution parity. |
@@ -364,8 +397,8 @@ default does not mean removed from the plan.
   ceiling. `IoAdmission` now bounds domain/helper execution by ephemeral filesystem device keys, with independent endpoint-local limits. It does not cap ordinary transfer I/O, identify physical devices, or create a cross-process global budget.
 - `Fs.clone_stage_status` distinguishes scoped macOS declines from phased
   operational errors and keeps staging private. The legacy option ABI remains.
-  The surrounding upstream interfaces still
-  suppress clone errors into booleans. `CopyRange` now preserves known
+  Legacy upstream compatibility interfaces still return booleans; current
+  production Copy uses strict whole-file receipts instead. `CopyRange` preserves known
   completed prefixes and distinguishes compatibility declines from operational
   failure; EBADF/EIO/ENOSPC/permission errors and callback/cancellation
   exceptions cannot authorize fallback. Ambiguous legacy native classifications,
@@ -379,7 +412,10 @@ default does not mean removed from the plan.
   FDs per active ordinary receiver clone (effective root, actual stage parent,
   temporary parent and witness); transient preparation/clone descriptors are
   additional. Finalizable ownership and close ordering are implemented, but no
-  new global descriptor admission budget follows from that per-context count. Bound local semantic work can hold nine semantic descriptors plus four/five final-publication descriptors and transient probes; the historical eight transfer credits are estimates, not that complete lifetime.
+  new global descriptor admission budget follows from that per-context count.
+  Current bound publication reserves 24 selected descriptor credits, replacing
+  the historical eight-credit estimate. This remains an estimate, with no
+  process-wide FD/RSS ceiling or complete legacy/native lifetime qualification.
 - The measured artifacts under `bench/semantic` contain cached SHA timing,
   CPU/wall, correct result counts and worker peaks. Production application now
   counts logical write bytes and write-call attempts, with exact sparse-write

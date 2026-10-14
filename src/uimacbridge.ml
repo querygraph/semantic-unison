@@ -99,7 +99,10 @@ let setWarnPrinter() =
           Lwt_unix.run (Update.unlockArchives ());
           exit Uicommon.fatalExit
         end
-      end)
+      end else
+        (* Batch avoids acknowledgement, but a disabled log must not hide a
+           warning. Use the existing nonblocking status display. *)
+        displayStatus ("Warning: " ^ s))
 
 let doInOtherThread f =
   Thread.create

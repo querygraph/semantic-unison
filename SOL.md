@@ -4,6 +4,26 @@
 
 ## Live implementation handoff
 
+* DNG warning delivery follow-on (2026-10-14): permitted findings now use the
+  user-interface warning channel after an owner-loop yield, preventing a
+  nested remote/UI wait from holding the hash completion pump. Abort/context
+  cancellation checks bracket delivery, while candidate ownership stays
+  retained. Stock and OxCaml each pass eleven actual-companion cases / 105
+  assertions, two designated negatives and three complete client/server
+  receive controls with logging disabled. Exact staged bytes are independently
+  bound by the synthetic helper; `warn` emits one warning and publishes,
+  `require` rejects, and `off` invokes no helper. Four verbatim macOS OCaml
+  route cases and six Foundation-only filter cases plus two parent negatives
+  pass per compiler. Mac batch warnings use the transient status field and
+  bypass the `reconitems` filter; persistent/painted GUI visibility remains
+  unqualified. Fresh Make/Dune builds/selftests and full macOS source compiler
+  checks pass both compilers. See the
+  [qualification](tests/validation_warning/qualification.json) and separate
+  independent review. No Adobe/Photo/native UI invocation or performance
+  claim follows. Hard SDK memory limits, unsupervised external copy/merge
+  helpers, initial old-temp cleanup and complete resource lifetimes remain
+  substantive core work; broader M4-V/M5/M6 acceptance stays open.
+
 * User-confirmed scope (2026-10-14): Photo Root and the original
   `/root/preview_implementation` own final preview design, generators,
   Lightroom qualification, Ten/Quasar placement and publisher recovery.

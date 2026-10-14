@@ -66,9 +66,20 @@ let select () =
       match result with
       | DngValidation.Skipped | DngValidation.Passed _ -> return ()
       | DngValidation.Warning (reason,_) ->
-          Trace.log (Printf.sprintf "Adobe DNG validation warning for %s: %s\n"
-            context.candidate reason);
-          return ()
+          (* A worker completion can reach this callback synchronously. Let
+             its notification pump rearm before the warning printer, which
+             may run the owner loop to forward a remote warning or await UI
+             acknowledgement. Logging alone is invisible in some UIs. *)
+          BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () ->
+            let check_cancel () =
+              Abort.checkAll ();
+              if HelperSupervisor.is_cancelled context.cancellation then
+                raise (Util.Transient "DNG validation cancelled") in
+            check_cancel ();
+            Util.warn (Printf.sprintf "Adobe DNG validation warning for %s: %s"
+              context.candidate reason);
+            check_cancel ();
+            return ())
       | DngValidation.Rejected (reason,_) ->
           fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %s: %s"
             context.candidate reason))))

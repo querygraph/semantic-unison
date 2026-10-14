@@ -79,6 +79,27 @@ validation findings retain the explicit policy distinction. Require success
 still needs a qualified tool receipt and stable before/after full hashes;
 the companion does not claim Lightroom UI Validate parity.
 
+Permitted findings under `warn` use `Util.warn`, the user-interface warning
+channel, including the existing remote forwarding command. Delivery first
+yields on the owner so a hash worker's completion pump can rearm before a
+printer enters a nested event loop. Abort and context cancellation are checked
+before and after delivery. The candidate workspace and publication ownership
+remain retained; helper execution, its I/O lease and that file's inspection
+workers have already settled. Other independent candidates may still be active.
+Printer/forwarding failures reject rather than silently authorizing publication.
+
+The macOS batch printer also sends warnings to the existing nonblocking status
+display when logging is disabled. A `Warning: ` prefix bypasses the normal
+`reconitems` status filter. This is a transient status route: later updates can
+overwrite it. Source/mock controls and full bridge/controller compiler checks
+do not prove GUI paint, persistent visibility or native interactive behavior.
+
+The [warning qualification](../tests/validation_warning/qualification.json)
+adds eleven actual-companion controls and three complete client/server
+receiving controls per compiler, with logging disabled, real hash workers and
+synthetic supervised helpers. It preserves parent log-only and missing-yield
+negative controls. No Adobe SDK or native UI was invoked for this slice.
+
 Current qualification uses synthetic candidates and Adobe-free drivers on
 stock OCaml and OxCaml. See the [integration receipt](../tests/qualification/validation-companion-integration-20261013.json)
 and its separate independent review. Real-camera/SDK receiving-path coverage,

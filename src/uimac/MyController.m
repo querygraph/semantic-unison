@@ -955,7 +955,8 @@ CAMLprim value displayStatus(value s)
 
 - (void)statusTextSet:(NSString *)s {
     /* filter out strings with # reconitems, and empty strings */
-    if (!NSEqualRanges([s rangeOfString:@"reconitems"],
+    if (![s hasPrefix:@"Warning: "] &&
+        !NSEqualRanges([s rangeOfString:@"reconitems"],
          NSMakeRange(NSNotFound,0))) return;
     [statusText setStringValue:s];
 }
