@@ -1,6 +1,6 @@
 # Implementation status and remaining acceptance work
 
-Current receiving-validation checkpoint adds registered owner-side companions
+The receiving-validation checkpoint at `941b99f` adds registered owner-side companions
 and typed worker content recognition, independent of semantic eligibility.
 Renamed/no-XMP/private DNGs now receive requested validation; filename claims
 and checked uncertainty also select it. Candidate inspection errors reject even
@@ -143,13 +143,20 @@ registration, restart and monitor coverage. The
 keeps reuse, mapping/registration gaps, conflicts, stale edits and builds
 separate. Preserve all 55 mapped native deletion markers and their owner-reported
 native queue exclusion; RootPixels/face/motion metadata adds no ordinary coverage.
-Known standalone gaps of 485,185 other-digest and 252,676 no-file keys are not a
-definitive regeneration count; 39 empty digests remain unknown. The existing
-owner reports all 44,281 modern/native marker/SOF checks complete with all
-native dimensions/positive sizes matching, reading 1,597,728 marker bytes
-without entropy decode. Its existing four-worker 147,460 legacy pass remains
-live as PID 56590, roughly 100,000 complete without reported holds/mismatches;
-the owner retains that pass without replay. The pinned
+Known standalone gaps of 485,185 other-digest and 252,676 no-file keys total
+737,861 known exact-current gaps, not a definitive regeneration count; 39 empty
+digests remain unknown and all 156,253 candidate sets are production-admitted=false.
+The [final geometry packet](../../photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json)
+and [publication](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json)
+complete all requested inspections with readers closed: 191,741 files/sections
+(39,982 modern + 4,299 native + 147,460 legacy highest), 6,308,224 returned
+marker/SOF bytes, zero framing holds, dimension mismatches or identity drift.
+No entropy/pixel decode, payload hashes/copies, registration or native invocation
+occurred. Stored crop/proxy/quality and provisional 5120x2880 axis fit remain
+planning evidence, not current edits, native selection, monitor or 1:1 acceptance.
+Returned-byte counters do not measure physical disk read amplification.
+Missing-container historical context and excluded modern alternatives remain
+separate. The pinned
 [ABI assessment](../../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
 records eight C/Rust structs, 56 fields / 172 metrics, 15 synthetic typed
 signatures and genuine OxCaml 5.2.0+ox C-stub transport. Full uint64 uses Int64
@@ -163,7 +170,10 @@ payload hashes or copies. The handoff was sent via Photo parent and acknowledged
 by the original renderer/publisher owner. Its
 [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
 binds the exact mass/v3 and compiled-interface pins; acceptance is not native
-admission.
+admission. The final geometry handoff was sent to the ORIGINAL owner for
+source/interface ACK, which remains pending. No fresh receiver admission or
+native-window readiness is inferred; the stat-only unchanged database-family
+observation cannot supply publication admission.
 The user reports desktop access unavailable, current helper owner undispatched
 and native window unreleased; shared eighteen-credit limit and split placement
 persist. Exact-version

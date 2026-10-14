@@ -113,7 +113,7 @@ face and motion metadata. Registration candidates total 156,253 keys /
 | Current native rows, associations and positive sizes match | 1,338 | Physical/metadata evidence; decode, freshness, restart and monitor adequacy remain separate |
 | Explicit-root legacy registration candidate | 146,476 | Header/section declarations, not qualified native registration |
 | Old-format identity-bound registration candidate | 984 | Embedded local/global image IDs, root UUID and latest settings bind to captured current Main |
-| Modern filename-only registration candidate | 8,793 | Requires marker/header and branch-specific qualification |
+| Modern filename-only registration candidate | 8,793 | Bounded SOF/filename agreement checked for the requested file cohort; profile/current-content/native branch qualification remains |
 | Known key with only other-digest retained files | 485,185 | Retain old-edit/fallback evidence; never relabel it current |
 | Known key without retained nonzero UUID files | 252,676 | Exact standalone-file gap, not a definitive regeneration requirement |
 | Empty digest unknown key | 39 | Keep unknown; manufacture neither digest nor rendering backlog |
@@ -139,6 +139,11 @@ and add zero ordinary still-monitor or 1:1 coverage. Header/filename size bands
 and timestamp comparisons remain declarations/observations, not decoded crop,
 orientation, source freshness or native monitor acceptance.
 
+The two known standalone-file gap classes total 737,861 keys. This is not a
+proved regeneration requirement; other-digest files remain retained evidence
+and the 39 empty-digest unknowns stay separate. The user reports every one of
+the 156,253 candidate sets remains production-admitted=false.
+
 The packet records zero production registration, Main/cache writes, native
 requests, payload hashes or copies. It performed no entropy decode; finite
 header metadata reads are preserved explicitly. This Unison integration reads
@@ -154,17 +159,52 @@ PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. The user reports desktop access
 unavailable, the current helper owner undispatched and the external finite
 native window unreleased. Original renderer/publisher ownership is unchanged.
 
-The owner reports all 44,281 modern/native bounded marker/SOF checks complete
-(39,982 modern candidate files plus 4,299 native targets): all filename long
-edges and all 4,299 native width/height/positive bytes match, using 1,597,728
-marker bytes without entropy decode. Its existing four-worker 147,460 legacy
-highest-section pass remains live, PID 56590, roughly 100,000 complete without
-reported holds/mismatches; ownership retains that running pass without replay.
-The durable owner receipt pins modern completion. This integration checked
-the acknowledgment and interface JSON only, not geometry artifacts or preview
-bytes, and performed no worker probe. Marker geometry
-is distinct from entropy/native decode and qualified current native crop/
-monitor geometry. The original reviewed uninvoked image 10031592
+The final [geometry return packet](../../photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json)
+has verified SHA-256
+`cf29ca2d407a9c67f286a92e686ce06cf052e0322ee92852b0ad0bdacdd00437`.
+Its [publication receipt](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json)
+closes all requested passes and all readers. The completed cohort is 39,982
+modern candidate files, 4,299 native targets and 147,460 highest legacy sections,
+totaling 191,741 files/sections. Returned marker/SOF bytes total 6,308,224:
+1,597,728 modern/native plus 4,710,496 legacy. Framing holds, dimension
+mismatches and observed identity changes are zero. Native dimensions/positive
+file sizes match for all 4,299 targets. No payload hashes, copies, entropy/pixel
+decode, native requests, production writes or registration occurred.
+Returned-byte counters do not measure physical disk read amplification.
+This integration reads receipt/contract text only, performs no worker probe,
+and does not restart the completed passes or access preview payloads.
+
+The [findings](../../photo/mass-preview-jpeg-geometry-planning-20261013-v1/FINDINGS.txt)
+preserve these conditional planning distinctions:
+
+| Highest legacy declaration | Count | Qualification limit |
+| --- | ---: | --- |
+| Equals stored container crop | 135,881 | Stored declaration, not current crop or original-detail 1:1 acceptance |
+| Fits within stored container crop | 11,579 | None exceeds its stored crop; native current crop remains unqualified |
+| Explicitly proxy-derived | 1,080 | Matching dimensions do not establish original-detail coverage |
+| Fits provisional 5120x2880 under both axis orders | 142,029 | Stored crop/no-upsampling calculation only; 139,426 explicitly nonproxy |
+| Fits only the swapped-axis assumption | 226 | Actual orientation/viewport remains unqualified |
+| Fits neither axis assumption | 5,205 | Planning classification, not a native regeneration decision |
+
+Of the equal-crop group, 133,527 explicitly have fromProxy=false and 133,181
+of those also carry quality=final; unknown flags and stored quality strings
+remain intact. No declaration establishes decoded integrity, source/edit
+freshness, actual crop/orientation/viewport, native selected level, monitor
+acceptance or 1:1 recognition. All 67 now-missing legacy-container historical
+records remain absent-file context, not present or newly qualified pixels.
+The 1,469 modern alternatives beside qualified legacy containers were outside
+the inspected filename-only cohort. Unknown modern embedded profiles and
+separate root/historical descriptors stay unknown/separate. The final stat-only
+unchanged database-family observation opened no Main/cache database and cannot
+supply fresh native publication admission.
+
+The earlier [ABI/owner publication](../../photo/preview-abi-owner-publication-bcdc5d3dede14316b237eab2eb43402a/COMPLETE.json)
+continues to bind the accepted synthetic C/Rust/OxCaml proof and original
+owner ACK. The user reports the final geometry packet sent to that ORIGINAL
+`preview_implementation` owner for source/interface ACK; the new ACK remains
+pending. These states release neither a native oracle window nor receiver or
+publisher admission. The user cannot unlock currently; no native readiness is
+inferred from completion. The original reviewed uninvoked image 10031592
 registration/load/restart control remains the next native branch. These stages
 admit no full generator run or unqualified offline publisher. The shared
 eighteen-credit ceiling and Quasar/Ten placement remain unchanged.

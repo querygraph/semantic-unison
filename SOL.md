@@ -21,7 +21,7 @@
   captures endpoint-local tool settings. Adding another compiled companion
   requires registration, not a receiving-core dispatch edit; an isolated TOY0
   companion qualifies this path without installing a production format.
-* Validation checkpoint: stock OCaml 5.5.1 and installed OxCaml 5.2.0+ox Make
+* Validation checkpoint at `941b99f`: stock OCaml 5.5.1 and installed OxCaml 5.2.0+ox Make
   and clean Dune builds/selftests match 328 production/package/INSTALL inputs.
   Each compiler passes 28 new actual receiving cases, seven focused Identify
   groups, 37 helper groups, two local/remote warn pre-inspection EIO cases,
@@ -55,17 +55,27 @@
   queue exclusion and no added unregistered-candidate hold. RootPixels metadata,
   48,046 face crops and 3,411 motion thumbnails contribute no ordinary monitor
   coverage. Known standalone gaps are 485,185 other-digest and 252,676 no-file
-  keys; 39 empty digests remain unknown, not a regeneration count.
+  keys: 737,861 known keys lack exact-current retained standalone files;
+  39 empty digests remain unknown. This is not a proved regeneration count.
+  All 156,253 candidate sets remain production-admitted=false.
   Registration gaps, alias-only gaps, conflicts, stale edits and build gaps
   stay separate; retained-byte reuse does not require a new-renderer benchmark
   or Quasar split qualification to classify and stage it. The older 761,466-key
-  full-monitor / 134,582 late-gap capacity models remain historical. The owner
-  reports all 44,281 modern/native marker/SOF checks complete, matching filename
-  long edges and all 4,299 native dimensions/positive sizes, with 1,597,728
-  marker bytes read and no entropy decode. Its existing 147,460 legacy
-  highest-section pass, PID 56590, remains active at roughly 100,000 checks
-  without reported holds/mismatches; the owner retains this pass without replay.
-  These checks do not prove native decode or current crop/monitor fit.
+  full-monitor / 134,582 late-gap capacity models remain historical. The final
+  [geometry packet](../photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json)
+  (SHA-256 `cf29ca2d407a9c67f286a92e686ce06cf052e0322ee92852b0ad0bdacdd00437`)
+  and [publication](../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json)
+  close all requested passes: 39,982 modern files, 4,299 native targets and
+  147,460 highest legacy sections, totaling 191,741 files/sections and
+  6,308,224 returned marker/SOF bytes. All readers closed; zero framing holds,
+  dimension mismatches or observed identity drift. Returned bytes do not measure
+  physical disk amplification. No payload hashes/copies, pixel decode,
+  registration or native invocation occurred. Stored-crop/proxy/quality and
+  provisional 5120x2880 fit remain conditional planning, not current edits,
+  actual crop/orientation, decoded integrity, native level selection or 1:1 proof.
+  Preserve the 67 missing-container historical records as absent-file context;
+  1,469 modern alternatives beside qualified legacy containers were outside the
+  inspected modern cohort. See [integration](doc/preview-design-integration.md).
   The next native branch remains the original
   uninvoked image 10031592 registration/load/restart control. Desktop access
   remains unavailable; the user reports current helper owner undispatched and
@@ -81,7 +91,10 @@
   in Int32, with field bounds and checked size/offset conversion before I/O or
   allocation; never assume OCaml-record/C-struct layout equality. This is synthetic
   project-interface proof, not a private Adobe ABI, renderer/runtime/fidelity
-  qualification or benchmark. Local relay history remains in
+  qualification or benchmark. The user reports the final geometry handoff sent
+  to that same ORIGINAL owner with source/interface ACK requested; new ACK is
+  pending and the older acceptance supplies no native-window release or fresh
+  receiver/publication admission. Local relay history remains in
   PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. No production writes,
   payload hashes/copies, competing publisher or full-run admission occurred.
   Cleanup review protects the exact-version Atlas/Bumer archives formerly

@@ -76,21 +76,33 @@ Preserve all 55 still-mapped deletion markers with the owner-reported installed
 queue exclusion; they do not add a blanket unregistered-candidate hold. RootPixels
 metadata, 48,046 face crops and 3,411 motion thumbnails add no ordinary monitor
 or 1:1 coverage. Known standalone gaps of 485,185 other-digest / 252,676 no-file
-keys and 39 unknown empty digests do not define a regeneration/capacity cohort.
-The original owner reports all 44,281 modern/native marker/SOF checks complete,
-including native width/height/positive bytes across 4,299 targets, with 1,597,728
-marker bytes and no entropy decode. Its existing four-worker 147,460 legacy
-highest-section pass remains active as PID 56590, roughly 100,000 complete with
-no reported holds/mismatches; the owner retains it without restarting/replaying.
-These reports prove
-no entropy/native decode or current native crop/monitor fit. Its original
+keys total 737,861 known exact-current standalone-file gaps; with 39 unknown
+empty digests, they do not define a regeneration/capacity cohort. Every
+registration candidate remains production-admitted=false.
+The final [geometry packet](../../photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json)
+and [publication](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json)
+complete all requested passes with all readers closed: 39,982 modern files,
+4,299 native targets and 147,460 highest legacy sections, totaling 191,741
+files/sections and 6,308,224 returned marker/SOF bytes. Framing holds, dimension
+mismatches and observed identity changes are zero. Return-byte counters measure
+neither physical read amplification nor decoded pixels. Stored crop, proxy and
+quality plus provisional 5120x2880 axis fit remain conditional planning; they
+prove no current crop/orientation, edit freshness, decoded integrity, native
+chosen level, monitor acceptance or original-detail 1:1 coverage. Preserve all
+67 missing-container historical records separately; the 1,469 modern
+alternatives beside qualified legacy containers were outside the inspected
+modern cohort. Its original
 uninvoked image 10031592 remains the next registration/load/restart control.
 The user reports desktop access unavailable, current helper owner undispatched
 and native window unreleased; no full generator or unqualified offline publisher
 is admitted. The handoff was relayed via Photo parent and acknowledged by the
 original owner. The [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
 pins the exact mass/v3, modern geometry and compiled-interface receipts;
-that acceptance does not release native admission.
+that acceptance does not release native admission. The user reports the final
+geometry packet sent to this same ORIGINAL owner for source/interface ACK;
+that new ACK remains pending. No native window or fresh receiver/publication
+admission is inferred from geometry completion or the stat-only unchanged
+database-family observation.
 
 The [registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)
 separates retained-byte reuse, alias-only mapping gaps, absent registration,
