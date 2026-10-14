@@ -98,9 +98,11 @@ and native window unreleased; no full generator or unqualified offline publisher
 is admitted. The handoff was relayed via Photo parent and acknowledged by the
 original owner. The [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
 pins the exact mass/v3, modern geometry and compiled-interface receipts;
-that acceptance does not release native admission. The user reports the final
-geometry packet sent to this same ORIGINAL owner for source/interface ACK;
-that new ACK remains pending. No native window or fresh receiver/publication
+that acceptance does not release native admission. The same ORIGINAL owner
+has [durably acknowledged the final closed geometry](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+as source/interface evidence and retains renderer/publisher ownership. Its
+seventeen verified artifact pins supply no native/runtime/publication/full-run
+admission; the finite native window remains UNRELEASED. No fresh receiver/publication
 admission is inferred from geometry completion or the stat-only unchanged
 database-family observation.
 

@@ -200,11 +200,20 @@ supply fresh native publication admission.
 
 The earlier [ABI/owner publication](../../photo/preview-abi-owner-publication-bcdc5d3dede14316b237eab2eb43402a/COMPLETE.json)
 continues to bind the accepted synthetic C/Rust/OxCaml proof and original
-owner ACK. The user reports the final geometry packet sent to that ORIGINAL
-`preview_implementation` owner for source/interface ACK; the new ACK remains
-pending. These states release neither a native oracle window nor receiver or
-publisher admission. The user cannot unlock currently; no native readiness is
-inferred from completion. The original reviewed uninvoked image 10031592
+owner ACK. The ORIGINAL `preview_implementation` owner has now
+[durably acknowledged final closed geometry](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json):
+6,728 bytes, SHA-256
+`f66ed2f48cdc1d29793a17a195a09b571c8569d1669e7e12b38fe6bf10e46f5e`.
+Its seventeen verified artifact pins bind canonical v3 alignment, all return
+packet receipts, COMPLETE/CLOSED, accepted compiled ABI/header and final
+goal/progress publication. This closes source/interface acceptance with the
+original renderer/publisher ownership retained. This ACK performs no Adobe/native
+invocation, payload access, generator build or benchmark; renderer fidelity and
+offline publication remain unqualified. The finite native window remains UNRELEASED; native
+registration/recognition, renderer runtime, offline publisher and full-run
+admissions remain false. No fresh receiver/publisher admission or oracle
+readiness is inferred. The user cannot unlock currently. The original reviewed
+uninvoked image 10031592
 registration/load/restart control remains the next native branch. These stages
 admit no full generator run or unqualified offline publisher. The shared
 eighteen-credit ceiling and Quasar/Ten placement remain unchanged.

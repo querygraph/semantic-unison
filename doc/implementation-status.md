@@ -170,8 +170,11 @@ payload hashes or copies. The handoff was sent via Photo parent and acknowledged
 by the original renderer/publisher owner. Its
 [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
 binds the exact mass/v3 and compiled-interface pins; acceptance is not native
-admission. The final geometry handoff was sent to the ORIGINAL owner for
-source/interface ACK, which remains pending. No fresh receiver admission or
+admission. The ORIGINAL owner has [durably acknowledged the final closed
+geometry](../../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
+as source/interface evidence only, retaining renderer/publisher ownership and
+seventeen verified artifact pins. The finite native window remains UNRELEASED;
+all native/runtime/publication/full-run admissions remain false. No fresh receiver admission or
 native-window readiness is inferred; the stat-only unchanged database-family
 observation cannot supply publication admission.
 The user reports desktop access unavailable, current helper owner undispatched

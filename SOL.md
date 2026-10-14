@@ -91,10 +91,14 @@
   in Int32, with field bounds and checked size/offset conversion before I/O or
   allocation; never assume OCaml-record/C-struct layout equality. This is synthetic
   project-interface proof, not a private Adobe ABI, renderer/runtime/fidelity
-  qualification or benchmark. The user reports the final geometry handoff sent
-  to that same ORIGINAL owner with source/interface ACK requested; new ACK is
-  pending and the older acceptance supplies no native-window release or fresh
-  receiver/publication admission. Local relay history remains in
+  qualification or benchmark. That same ORIGINAL owner has now
+  [durably acknowledged the final closed geometry](../photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json),
+  6,728 bytes, SHA-256
+  `f66ed2f48cdc1d29793a17a195a09b571c8569d1669e7e12b38fe6bf10e46f5e`.
+  Its seventeen verified artifact pins bind source/interface acceptance only;
+  renderer/publisher ownership is retained. The finite native window remains
+  UNRELEASED, with no fresh receiver/publication admission or oracle readiness.
+  Local relay history remains in
   PREVIEW-MASS-ALIGNMENT-FORWARD-20261013.json. No production writes,
   payload hashes/copies, competing publisher or full-run admission occurred.
   Cleanup review protects the exact-version Atlas/Bumer archives formerly
