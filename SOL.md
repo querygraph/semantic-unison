@@ -2404,3 +2404,39 @@ stale planned-merge/unlinked-host descriptions, and marks old worker rollout tex
 historical. Preview runtime ownership remains with Photo Root per the scope
 agreement. Pending host-matrix request and all of its source pins are unchanged;
 no admission exists and no SDK invocation occurred. Full goal remains open.
+
+
+### Actual capped-host SDK matrix passed/closed — 2026-10-14
+
+Root current-source reviewa5084a78 was verified, then fresh explicit runtime
+admission100faf00 was discovered at the exact requested path and verified against
+request7f3260c5, plan811c62cb, all current source/review pins, absent unique workspace,
+zero other allocated credits and live start deadline. No old slot/review/build
+allocation was reused. Wrapper25464/tool93165 executed the exact command once;
+actual group25466 START1792013401.4599848 preceded its deadline1792013601.401626.
+Root received actual START and retained its preview/compiler hold for closure.
+
+All12 actual SDK calls passed: each generated24MP uncompressed/JPEG/JXL original
+was validated by qualified reference1 and observed experimental1/6/18 hosts. Every
+raw SDK receipt bound exact SHA/size/build, valid structure/decode/raw digest,
+zero errors and the same4 existing CFA-padding warnings. Experimental1 delegated
+to the reference area path;6/18 observed joined tasks and partition caps, with
+peak18 callback frames in each18case. Covered allocation used/live/denied ended0;
+JXL18 peaked507634690bytes under1GiB allowance. This is not RSS/OS-thread proof.
+
+Actual tool terminalchunk0ea119 exit0/no session, not inferred fromps. Aggregate
+closed/reaped/others-absent/exit0 in11.523550753016025s within300s; unresolved marker
+absent. Exactly12 ENTRY/CALL pairs and all protocol/telemetry observations were
+independently rebound, all input/tool/source postpins match.
+[Sealed raw/parsed return](tests/qualification/sdk-host-matrix-v1-actual-return-20261014.json),
+[actual parent terminal](tests/qualification/sdk-host-matrix-v1-parent-terminal-20261014.json),
+[narrow source-review adoption](tests/sdk_host_matrix/current-root-source-review-adoption.json).
+Root got exact return/terminal pins by queue01a13c55-8f4d-7ee1-8ff1-d3ba0eddcadd;
+independent Root runtime acceptance/hold release is not inferred here.
+
+The admission is consumed; no retry/new SDK window. Actual callback/covered-
+allocator functional parity advances M4-V/M6, but fixed-order single samples are
+not benchmarks; pixel/OS-thread/cancellation/quota-exhaustion/representative-camera/
+production receiving qualification remain open. Qualifiedv1 is not replaced.
+No Photo/Lightroom/Main/cache/source-photo mutation or preview capability claim.
+300s covers the supervised aggregate, not pre-supervision wrapper pin validation.
