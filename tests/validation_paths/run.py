@@ -16,9 +16,11 @@ import tempfile
 import time
 
 ADMISSION_OPTIONS = []
+HELPER_CONFIG = {}
+SERVER_HELPER_DESCRIPTORS = None
 
 DRIVER = r'''#!/usr/bin/python3
-import hashlib,json,os,pathlib,sys,time
+import hashlib,json,os,pathlib,sys,time,resource
 here=pathlib.Path(__file__)
 control=json.loads(here.with_suffix('.control.json').read_text())
 args=sys.argv[1:]
@@ -41,7 +43,7 @@ st=candidate.stat()
 record=dict(candidate=str(candidate),destination=str(destination),sha256=digest,
     size=len(data),device=st.st_dev,inode=st.st_ino,argv=args,pid=os.getpid(),
     destination_sha256=None if before is None else hashlib.sha256(before).hexdigest(),
-    mode=control['mode'],endpoint=control['endpoint'])
+    mode=control['mode'],endpoint=control['endpoint'],nofile_hard=resource.getrlimit(resource.RLIMIT_NOFILE)[1])
 fd=os.open(str(here.with_suffix('.calls.jsonl')),os.O_WRONLY|os.O_CREAT|os.O_APPEND,0o600)
 try:
     encoded=(json.dumps(record,sort_keys=True)+'\n').encode()
@@ -73,7 +75,7 @@ print('END')
 '''
 
 COPY = r'''#!/usr/bin/python3
-import hashlib,json,os,pathlib,sys,time
+import hashlib,json,os,pathlib,sys,time,resource
 here=pathlib.Path(__file__)
 control=json.loads(here.with_suffix('.control.json').read_text())
 assert len(sys.argv)==3,sys.argv
@@ -91,7 +93,7 @@ with destination.open('wb') as stream:
 st=destination.stat()
 record=dict(source=str(source),destination=str(destination),size=len(data),
     sha256=hashlib.sha256(data).hexdigest(),inode=st.st_ino,device=st.st_dev,
-    pid=os.getpid(),interrupt=control['interrupt'])
+    pid=os.getpid(),interrupt=control['interrupt'],nofile_hard=resource.getrlimit(resource.RLIMIT_NOFILE)[1])
 fd=os.open(str(here.with_suffix('.calls.jsonl')),os.O_WRONLY|os.O_CREAT|os.O_APPEND,0o600)
 try:
     encoded=(json.dumps(record,sort_keys=True)+'\n').encode()
@@ -102,7 +104,7 @@ if control['interrupt']!='no':
 '''
 
 MERGE = r'''#!/usr/bin/python3
-import hashlib,json,pathlib,sys
+import hashlib,json,pathlib,sys,resource
 here=pathlib.Path(__file__)
 assert len(sys.argv)==4
 inputs=[pathlib.Path(p).read_bytes() for p in sys.argv[1:3]]
@@ -110,7 +112,7 @@ result=here.with_suffix('.result').read_bytes()
 pathlib.Path(sys.argv[3]).write_bytes(result)
 with here.with_suffix('.calls.jsonl').open('a') as log:
     log.write(json.dumps(dict(inputs=[hashlib.sha256(p).hexdigest() for p in inputs],
-        result=hashlib.sha256(result).hexdigest(),output=sys.argv[3]),sort_keys=True)+'\n')
+        result=hashlib.sha256(result).hexdigest(),output=sys.argv[3],nofile_hard=resource.getrlimit(resource.RLIMIT_NOFILE)[1]),sort_keys=True)+'\n')
 '''
 
 
@@ -161,9 +163,12 @@ class Session:
 
     def config(self, endpoint):
         driver = self.drivers[endpoint]
+        helper_config = dict(HELPER_CONFIG)
+        if endpoint == 'server' and SERVER_HELPER_DESCRIPTORS is not None:
+            helper_config['helperdescriptors'] = str(SERVER_HELPER_DESCRIPTORS)
         return {'adobevalidator': str(driver), 'adobevalidatorhash': sha(driver.read_bytes()),
                 'adobevalidatorbuild': 'validation-path-' + endpoint + '-v1',
-                'adobevalidatorthreads': '1', 'adobevalidatetimeout': '30'}
+                'adobevalidatorthreads': '1', 'adobevalidatetimeout': '30', **helper_config}
 
     def control(self, name, *, client='pass', server='pass'):
         for endpoint, mode in (('client', client), ('server', server)):
@@ -252,6 +257,9 @@ class Session:
 
 
 def verify_call(call, data, *, previous=None, endpoint='server'):
+    if HELPER_CONFIG:
+        limit = SERVER_HELPER_DESCRIPTORS if endpoint == 'server' and SERVER_HELPER_DESCRIPTORS is not None else int(HELPER_CONFIG['helperdescriptors'])
+        assert 3 <= call['nofile_hard'] <= limit, call
     assert_equal(call['sha256'], sha(data), 'candidate exact transferred/merged bytes')
     assert_equal(call['size'], len(data), 'candidate complete data length')
     assert_equal(call['destination_sha256'], None if previous is None else sha(previous),
@@ -611,7 +619,21 @@ def main():
     parser.add_argument('--receipt', type=Path)
     parser.add_argument('--volume-jobs', type=int,
                         help='request semanticvolumejobs (new admission integration; 1 detects nested waits)')
+    parser.add_argument('--helper-limiter', type=Path)
+    parser.add_argument('--helper-descriptors', type=int, default=64)
+    parser.add_argument('--server-helper-descriptors', type=int)
     args = parser.parse_args()
+    global SERVER_HELPER_DESCRIPTORS
+    if args.server_helper_descriptors is not None:
+        if not args.helper_limiter or args.server_helper_descriptors < 3:
+            parser.error('--server-helper-descriptors requires limiter and at least3')
+        SERVER_HELPER_DESCRIPTORS = args.server_helper_descriptors
+    if args.helper_limiter:
+        if args.helper_descriptors < 3:
+            parser.error('--helper-descriptors must be at least3')
+        limiter = args.helper_limiter.resolve()
+        HELPER_CONFIG.update(helperlimiter=str(limiter),helperlimiterhash=sha(limiter.read_bytes()),
+                            helperdescriptors=str(args.helper_descriptors))
     if args.volume_jobs is not None:
         if args.volume_jobs < 0:
             parser.error('--volume-jobs must be nonnegative')
@@ -622,7 +644,7 @@ def main():
     receipt = {'scope': 'Adobe-free actual Unison receive-gate integration; synthetic bytes only',
                'binary': binary, 'binary_sha256': sha(Path(binary).read_bytes()),
                'test_sha256': sha(Path(__file__).read_bytes()), 'work': str(root), 'cases': results,
-               'admission_options': ADMISSION_OPTIONS,
+               'admission_options': ADMISSION_OPTIONS, 'helper_limits': HELPER_CONFIG, 'server_helper_descriptors': SERVER_HELPER_DESCRIPTORS,
                'limitations': ['Synthetic receive-gate behavior, not Adobe format/decode correctness.',
                    'Reused file is a retained exact donor; rename-only moves remain outside received scope.',
                    'Merges use an existing configured external merge command, not an XMP semantic merge.',
@@ -665,6 +687,15 @@ def main():
         value = directory_admission(root / label, binary)
         results.append({'name': label, 'status': 'passed', **value})
         print('PASS', label, flush=True)
+        if HELPER_CONFIG:
+            observed = []
+            for path in root.rglob('*.calls.jsonl'):
+                for call in records(path):
+                    if 'nofile_hard' in call:
+                        assert 3 <= call['nofile_hard'] <= args.helper_descriptors,call
+                        observed.append(call['nofile_hard'])
+            assert len(observed) >= 30, 'bounded helper receipts absent'
+            receipt['observed_helper_hard_limits'] = observed
         receipt['status'] = 'passed'
         print(f'{len(results)} actual receive-path cases passed; no Adobe/Lightroom invocation. Work: {root}')
     finally:

@@ -77,7 +77,7 @@ OCAMLOBJS = \
           borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
           semanticHash.cmo semanticFile.cmo formatExtension.cmo formatRecognition.cmo \
           xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
-          semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo semanticRuntime.cmo supervisedExternal.cmo semanticSync.cmo semanticRemote.cmo \
+          semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo semanticRuntime.cmo helperLimiter.cmo supervisedExternal.cmo semanticSync.cmo semanticRemote.cmo \
           candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
           fpcache.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \

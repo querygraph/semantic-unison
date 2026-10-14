@@ -43,6 +43,7 @@ let select () =
        Recheck at selection as well as during ordinary client negotiation. *)
     if not (Features.enabled feature) then
       raise (Util.Fatal "Requested Adobe validation requires dng-validation-v1 support on both replicas");
+    let process_limits = HelperLimiter.selected () in
     let weight = Prefs.read tool_threads and seconds = Prefs.read timeout in
     let executable = Prefs.read validator and executable_sha256 = Prefs.read tool_hash
     and build_id = Prefs.read build_id in
@@ -59,9 +60,17 @@ let select () =
       if seconds <= 0 then raise (Util.Fatal "adobevalidatetimeout must be positive");
       let inspect path = BorrowedWork.bind (fun () -> context.inspect path)
         (fun snapshot -> return (convert snapshot)) in
-      BorrowedWork.bind (fun () -> DngValidation.validate_with_execution ~execute:context.execute
-        context.supervisor context.cancellation ~policy:selected ~tool ~inspect
-        ~candidate:context.candidate ~expected:(convert context.expected)) (fun result ->
+      let inspect_limiter path = BorrowedWork.bind (fun () -> context.inspect path)
+        (fun snapshot -> return (snapshot.CandidateValidator.sha256,snapshot.size,snapshot.identity)) in
+      let check_cancel () =
+        Abort.checkAll ();
+        if HelperSupervisor.is_cancelled context.cancellation then
+          raise (Util.Transient "Helper limiter validation cancelled") in
+      BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
+        ~inspect:inspect_limiter ~check_cancel (fun process_limits ->
+          DngValidation.validate_with_execution ?process_limits ~execute:context.execute
+            context.supervisor context.cancellation ~policy:selected ~tool ~inspect
+            ~candidate:context.candidate ~expected:(convert context.expected))) (fun result ->
       Abort.checkAll ();
       match result with
       | DngValidation.Skipped | DngValidation.Passed _ -> return ()

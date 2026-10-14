@@ -73,8 +73,20 @@ type result = {
   elapsed : float;
 }
 
+type process_limits = {
+  launcher : string;
+  descriptors : int;
+  address_space_bytes : int64;
+}
+(** Trusted separately compiled local resource launcher. Zero disables a limit;
+    at least one must be nonzero. Descriptor limits include stdin/out/err and
+    must be at least three. Lower both soft and hard limits before target exec;
+    inherited hard limits may be stricter. OS rejection fails before target
+    execution. Address-space support/enforcement is platform-specific and is
+    not qualified on macOS. No RSS, group-wide memory/FD or sandbox claim. *)
+
 val run :
-  ?argv0:string -> t -> weight:int -> cancellation -> limits:limits ->
+  ?argv0:string -> ?process_limits:process_limits -> t -> weight:int -> cancellation -> limits:limits ->
   executable:string -> arguments:string array -> environment:string array ->
   result Lwt.t
 (** [arguments] excludes argv[0]. The optional [argv0] preserves a generic
@@ -85,4 +97,6 @@ val run :
     Timeout measures execution after admission, not time in the admission queue.
     Completion is returned only after reaping the direct child. Descendants that
     deliberately escape the process group are outside this contract; this is
-    not a sandbox or a memory-limit implementation. *)
+    not a sandbox. An optional trusted launcher applies process limits in its own
+    new process, preserving target argv/environment, PID and supervisor group.
+    Launcher trust/pinning belongs to the owner caller. *)

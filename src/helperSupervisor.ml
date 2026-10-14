@@ -432,10 +432,23 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
          if !owned_pid >= 0 then raise exn);
       raise exn
 
-let run ?argv0 t ~weight c ~limits ~executable ~arguments ~environment =
+type process_limits = { launcher : string; descriptors : int; address_space_bytes : int64 }
+let run ?argv0 ?process_limits t ~weight c ~limits ~executable ~arguments ~environment =
   let argv0 = match argv0 with None -> executable | Some name -> name in
   if contains_nul argv0 then invalid_arg "HelperSupervisor: NUL in argv[0]";
   validate ~limits ~executable ~arguments ~environment;
+  let executable,argv0,arguments = match process_limits with
+    | None -> executable,argv0,arguments
+    | Some policy ->
+      if Filename.is_relative policy.launcher || contains_nul policy.launcher ||
+         policy.descriptors < 0 || (policy.descriptors > 0 && policy.descriptors < 3) ||
+         policy.address_space_bytes < 0L ||
+         (policy.descriptors = 0 && policy.address_space_bytes = 0L) then
+        invalid_arg "HelperSupervisor: invalid child process limits";
+      let wrapped = Array.concat [[|"--unison-helper-limits-v1";
+        string_of_int policy.descriptors;Int64.to_string policy.address_space_bytes;
+        "--";executable;argv0|];arguments] in
+      policy.launcher,policy.launcher,wrapped in
   let owns_reservation = ref false in
   let abort_pending = ref (fun () -> ()) in
   let owner_cleanup = ref (fun () -> ()) and owner_settled = ref (fun () -> true) in

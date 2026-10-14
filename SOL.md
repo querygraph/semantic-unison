@@ -4,6 +4,22 @@
 
 ## Live implementation handoff
 
+* M6 child resource limits (2026-10-14): opt-in endpoint-local
+  `helperdescriptors` and pinned native `helperlimiter` now apply hard per-process
+  limits to supervised copy/merge/diff and selected DNG validators. The fresh
+  native launcher closes inherited extra FDs, lowers soft+hard limits and execs
+  the original literal argv/environment in the same PID/group; parent limits
+  remain unchanged. Shared worker SHA/identity checks surround settled execution
+  and reject pin mutation even under warn. Stock/Ox native controls and all21
+  receiving paths prove actual hard caps; independent endpoint64/32 settings
+  persist. First closefrom compile failed and is retained; bounded Darwin own-FD
+  enumeration is the tested successor. [Usage](tools/helper-limits/README.md),
+  [evidence](tests/helper_limits/qualification.json). macOS rejects the tested
+  RLIMIT_AS request before target exec; RSS/address-space enforcement remains
+  unqualified. Windows requested limits reject; default zero retains baseline.
+  Aggregate descendant/parent FD and memory bounds, actual capped SDK scaling
+  and full M6/M4-V remain open. No Adobe/Photo/preview invocation.
+
 * M5 opt-in built-in merge integration (2026-10-14): the explicit existing
   rule `merge = Name *.dng -> unison:dng-xmp-scalars/0` now selects the scalar
   policy. `backupcurrent` captures the common full version through Stasher;

@@ -75,6 +75,7 @@ val validate :
     to a DNG semantic fingerprint. No cache is maintained by this module. *)
 
 val validate_with_execution :
+  ?process_limits:HelperSupervisor.process_limits ->
   execute:((unit -> HelperSupervisor.result Lwt.t) -> HelperSupervisor.result Lwt.t) ->
   HelperSupervisor.t -> HelperSupervisor.cancellation ->
   policy:policy -> tool:tool option ->

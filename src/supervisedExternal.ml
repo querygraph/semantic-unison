@@ -22,7 +22,25 @@ let format_result status stdout stderr =
    else stdout ^ "\n\nError Output:" ^ stderr) ^
   (if status = Unix.WEXITED 0 then "" else "\n\n" ^ Util.process_status_to_string status)
 
+let inspect_limiter cancellation path =
+  let owned = ref true in
+  let close fd = if !owned then begin owned := false; Unix.close fd end in
+  let close_noerr fd = try close fd with Unix.Unix_error _ -> () in
+  let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_NONBLOCK;Unix.O_CLOEXEC] 0 in
+  try BorrowedWork.try_bind (fun () -> SemanticWorkers.digest
+    (SemanticRuntime.get ()).pool cancellation fd)
+    (fun result -> close fd; match result with
+     | None -> fail (Util.Transient "Helper limiter hashing cancelled")
+     | Some result ->
+       let st = result.SemanticWorkers.stats in
+       return (SemanticHash.hex result.digest,st.Unix.LargeFile.st_size,
+         Printf.sprintf "%d:%d:%Ld:%.17g:%.17g:%d:%d" st.st_dev st.st_ino
+           st.st_size st.st_mtime st.st_ctime st.st_perm st.st_nlink))
+    (fun error -> close_noerr fd; fail error)
+  with error -> close_noerr fd; raise error
+
 let execute ~executable ~argv0 ~arguments =
+  let process_limits = HelperLimiter.selected () in
   let supervisor, cpu_budget = SemanticRuntime.helper_supervisor () in
   let weight = Prefs.read threads and seconds = Prefs.read timeout and mib = Prefs.read output in
   if weight <= 0 || weight > cpu_budget then
@@ -36,8 +54,14 @@ let execute ~executable ~argv0 ~arguments =
   SemanticRuntime.with_cancellation (fun cancellation ->
     BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () ->
     Abort.checkAll ();
-    BorrowedWork.bind (fun () -> HelperSupervisor.run ~argv0 supervisor
-      ~weight cancellation ~limits ~executable ~arguments ~environment) (fun result ->
+    let check_cancel () =
+      Abort.checkAll ();
+      if HelperSupervisor.is_cancelled cancellation then
+        raise (Util.Transient "External helper limiter cancelled") in
+    BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
+      ~inspect:(inspect_limiter cancellation) ~check_cancel (fun process_limits ->
+        HelperSupervisor.run ~argv0 ?process_limits supervisor
+          ~weight cancellation ~limits ~executable ~arguments ~environment)) (fun result ->
     Abort.checkAll ();
     if HelperSupervisor.is_cancelled cancellation then
       fail (Util.Transient "External helper cancelled")
@@ -56,11 +80,11 @@ let execute ~executable ~argv0 ~arguments =
         fail (Util.Transient ("External helper " ^ reason ^ ": " ^ executable)))))
 
 let runExternalProgram command =
-  if Sys.win32 then External.runExternalProgram command
+  if Sys.win32 then (ignore (HelperLimiter.selected ()); External.runExternalProgram command)
   else execute ~executable:"/bin/sh" ~argv0:"/bin/sh" ~arguments:[|"-c";command|]
 
 let runExternalProgramArgs command argv =
-  if Sys.win32 then External.runExternalProgramArgs command argv
+  if Sys.win32 then (ignore (HelperLimiter.selected ()); External.runExternalProgramArgs command argv)
   else if Array.length argv = 0 then invalid_arg "SupervisedExternal: empty argv"
   else
     let executable = try External.resolve_program command with Not_found ->
