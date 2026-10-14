@@ -14,6 +14,36 @@ Adobe ABI, host/backend runtime or renderer fidelity is qualified.
 
 ## Ownership and sequencing
 
+Post-restart highest recognition is now independently accepted for control
+`10031592`: both native passes decoded **2272×1704** at level 6 / 646453 bytes,
+with twelve current LEVEL bindings (`final`/`AdobeRGB`/`AB`), six fresh direct-AB
+mapping stages, matching pre/post committed values and seven retained-file
+identity/hash arrays. Five owned callbacks, helper restoration, admission
+withdrawal and canonical lease closure are sealed. See the
+[highest outcome](preview-native-highest-outcome-20261013.json) and
+[independent review](preview-native-highest-independent-review-20261013.json).
+This proves observed current registration/mapping availability across restart;
+it does not prove an uninterrupted physical row history, monitor/color fidelity,
+independent rendering or Quasar placement. The old request remains immutable.
+
+The next gate is the original owner's independently authored **Ten-only closed-
+cache metadata/recovery recipe**, using preserved native JPEGs and fresh Root
+exclusion/before-images/alias/tombstone/RootPixels guards plus native reopen/
+readback. The successful native `touchPyramid` control does not qualify that
+publisher. Subsequent [split-storage states](preview-split-storage-test-plan.md)
+remain source-only and separately admitted. Root drives all native/storage
+slots; Unison launches no competing operation. Earlier pending statuses below
+are history of requests/receipts, superseded only within this tested control.
+
+Photo Root drives the sequence and retains the original renderer/publisher.
+The [remaining-gates review](preview-validation-gates-20261013.md) adds returned
+LEVEL quality/profile/orientation acceptance in both highest passes, independent
+of logged Pyramid metadata and unproved pixel color fidelity. The
+[split-storage matrix](preview-split-storage-test-plan.md) is a source-only
+follow-on after successful highest recognition and qualified offline publication/
+recovery admission. The completed native slot remains closed; no competing
+Unison native/cache operation or storage test is started here.
+
 User-priority next test: [post-restart highest request](preview-post-restart-highest-request-20261013.json)
 was queued to the Photo parent for its original implementation owner. Reuse
 control `10031592` without registration replay; request `full` with absent
@@ -276,13 +306,14 @@ packet receipts, COMPLETE/CLOSED, accepted compiled ABI/header and final
 goal/progress publication. This closes source/interface acceptance with the
 original renderer/publisher ownership retained. This ACK performs no Adobe/native
 invocation, payload access, generator build or benchmark; renderer fidelity and
-offline publication remain unqualified. The finite native window remains UNRELEASED; native
-registration/recognition, renderer runtime, offline publisher and full-run
-admissions remain false. No fresh receiver/publisher admission or oracle
-readiness is inferred. The user cannot unlock currently. The original reviewed
-uninvoked image 10031592
-registration/load/restart control remains the next native branch. These stages
-admit no full generator run or unqualified offline publisher. The shared
+offline publication remain unqualified. At that geometry-acknowledgment
+snapshot, native access was unreleased and control `10031592` was uninvoked.
+The later [one-control native outcome](preview-finite-oracle-outcome-20261013.json)
+now qualifies registration, committed visibility and selected1136×852 reuse
+before restart. The completed finite slot is closed. Its next
+[post-restart highest request](preview-post-restart-highest-request-20261013.json)
+requires fresh Root admission; source/geometry acknowledgment supplies no
+current access, renderer, independent publisher or full-run release. The shared
 eighteen-credit ceiling and Quasar/Ten placement remain unchanged.
 
 Adopt the [eligibility/registration contract](../../photo/preview-mass-alignment-source-review-20261013/ELIGIBILITY-AND-REGISTRATION-CONTRACT.json)

@@ -10,6 +10,36 @@ defines the synchronization/placement boundary; it does not launch Lightroom,
 edit Main/cache databases or write preview payloads to either volume.
 The [integration findings](preview-design-integration.md) record the reviewed
 renderer/dependency contracts, forwarding and current filesystem/capacity update.
+Post-restart highest recognition is now independently accepted for control
+`10031592`: both native passes decoded **2272×1704** at level 6 / 646453 bytes,
+with twelve current LEVEL bindings (`final`/`AdobeRGB`/`AB`), six fresh direct-AB
+mapping stages, matching pre/post committed values and seven retained-file
+identity/hash arrays. Five owned callbacks, helper restoration, admission
+withdrawal and canonical lease closure are sealed. See the
+[highest outcome](preview-native-highest-outcome-20261013.json) and
+[independent review](preview-native-highest-independent-review-20261013.json).
+This proves observed current registration/mapping availability across restart;
+it does not prove an uninterrupted physical row history, monitor/color fidelity,
+independent rendering or Quasar placement. The old request remains immutable.
+
+The next gate is the original owner's independently authored **Ten-only closed-
+cache metadata/recovery recipe**, using preserved native JPEGs and fresh Root
+exclusion/before-images/alias/tombstone/RootPixels guards plus native reopen/
+readback. The successful native `touchPyramid` control does not qualify that
+publisher. Subsequent [split-storage states](preview-split-storage-test-plan.md)
+remain source-only and separately admitted. Root drives all native/storage
+slots; Unison launches no competing operation. Earlier pending statuses below
+are history of requests/receipts, superseded only within this tested control.
+
+Photo Root drives the sequence and retains the original renderer/publisher.
+The [remaining-gates review](preview-validation-gates-20261013.md) adds returned
+LEVEL quality/profile/orientation acceptance in both highest passes, independent
+of logged Pyramid metadata and unproved pixel color fidelity. The
+[split-storage matrix](preview-split-storage-test-plan.md) is a source-only
+follow-on after successful highest recognition and qualified offline publication/
+recovery admission. The completed native slot remains closed; no competing
+Unison native/cache operation or storage test is started here.
+
 User-priority next test: [post-restart highest request](preview-post-restart-highest-request-20261013.json)
 was queued to the Photo parent for its original implementation owner. Reuse
 control `10031592` without registration replay; request `full` with absent
@@ -155,11 +185,14 @@ prove no current crop/orientation, edit freshness, decoded integrity, native
 chosen level, monitor acceptance or original-detail 1:1 coverage. Preserve all
 67 missing-container historical records separately; the 1,469 modern
 alternatives beside qualified legacy containers were outside the inspected
-modern cohort. Its original
-uninvoked image 10031592 remains the next registration/load/restart control.
-The user reports desktop access unavailable, current helper owner undispatched
-and native window unreleased; no full generator or unqualified offline publisher
-is admitted. The handoff was relayed via Photo parent and acknowledged by the
+modern cohort. At that alignment snapshot, image `10031592` was an
+uninvoked registration control and desktop/native access was unavailable.
+The later [one-control outcome](preview-finite-oracle-outcome-20261013.json)
+proves native registration, committed visibility and selected-tier reuse before
+restart. The [highest request](preview-post-restart-highest-request-20261013.json)
+now requires fresh original-owner post-restart admission; alignment receipts
+alone admit no full generator or offline publisher. The handoff was relayed
+via Photo parent and acknowledged by the
 original owner. The [durable acknowledgment](../../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
 pins the exact mass/v3, modern geometry and compiled-interface receipts;
 that acceptance does not release native admission. The same ORIGINAL owner
@@ -389,16 +422,19 @@ distinct from the future standalone publisher's own transactions while Classic
 is normally closed. Our integration never repairs this state or flushes unrelated
 native work.
 
-The root's prepared one-control `touchPyramid` registration source is unexecuted.
-It requires the actual preserved current root UUID, develop digest, header and
-orientation, exact section bytes, and freshly absent Pyramid, all matching level
-rows and target image mapping with no tasks. Existing metadata must hold the control:
-`touchPyramid` can delete registered level files on a quality change. This narrow
-oracle is not an upsert recipe or authorization for bulk registration. Native
-owner readback still needs independently observed persistence, real load and a
-normal restart before recognition is claimed.
-Its independent source review passed 25 transport/registration tests with zero
-real Lightroom invocations; actual registration remains unobserved.
+The Root's one-control `touchPyramid` oracle has now executed once for
+`10031592`: six levels registered, separate read-only commit visibility and two
+selected1136×852 native decodes passed before restart. The
+[outcome and closure](preview-finite-oracle-outcome-20261013.json) carry the exact
+scope; the [highest outcome](preview-native-highest-outcome-20261013.json)
+separately proves highest recognition after restart. Its original source
+preparation required current UUID/digest/header/orientation, exact preserved
+sections, freshly absent Pyramid/levels/mapping and no tasks. Those were
+one-shot registration guards, not a recipe to repeat against existing metadata.
+`touchPyramid` can delete registered level files on a quality change; this
+control does not qualify upsert, bulk or independent offline publication.
+The earlier 25-case transport/registration review was source-only; native
+execution is qualified separately by the later pinned one-control packet.
 
 `AgBlob.writeToFile` is native code. A successful symlink read does not establish
 whether same-key native saves follow the link, replace it with a Ten regular

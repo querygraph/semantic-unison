@@ -4,7 +4,43 @@
 
 ## Live implementation handoff
 
-* User priority: validate previews before catalog repairs. The next exact
+* Post-restart highest gate accepted (2026-10-14): original Photo owner ran
+  control `10031592` in Classic PID 40020 with a fresh admitted nonce. Both
+  LOAD/RELOAD explicitly selected and decoded **2272×1704**, level 6,
+  **646453 bytes**, with actual `full`/absent-height/absent-scale policy.
+  Twelve returned LEVEL records match current rows/digest and
+  `final`/`AdobeRGB`/`AB`; six raw mapping stages are current/direct stored AB,
+  including before the first authored load. Separate pre/post read-only rows
+  and seven retained file identity/hash arrays match. This proves observed
+  registration/mapping availability across restart, not uninterrupted physical
+  row history under autonomous startup/background work. Zero registration
+  replay; five owned callbacks closed, helper/menu restored, nonce withdrawn
+  and kernel lease availability observed. The
+  [outcome](doc/preview-native-highest-outcome-20261013.json) and
+  [independent review](doc/preview-native-highest-independent-review-20261013.json)
+  preserve 51 declared / 46 unique source/log/JSON/module pin checks and actual
+  raw-record acceptance. Earlier sealed requests/receipts stay unchanged.
+  Next gate: original owner qualifies an independently authored Ten-only
+  closed-cache metadata/recovery recipe from preserved native JPEGs, then
+  native reopen/load/readback. Native `touchPyramid` success does not qualify
+  that offline publisher. Root retains all native/storage ownership and
+  catalog-writer deferral; Unison makes no competing invocation. Quasar split,
+  large-crop monitor/1:1, pixel color fidelity, standalone rendering, power-loss
+  durability and full-run admission remain unqualified.
+
+
+* Photo Root drives native and storage validation; the original preview owner
+  retains rendering/publication. The [remaining-gates review](doc/preview-validation-gates-20261013.md)
+  adds returned LEVEL quality/profile/orientation checks on both highest loads
+  because source logs them without gating all fields. It preserves the sealed
+  exact highest request and adds no competing job. The later
+  [split-storage matrix](doc/preview-split-storage-test-plan.md) is source-only
+  and requires successful highest recognition plus Root's qualified offline
+  publisher/recovery admission. Native rewrite/trim/unavailable-target/restart
+  behavior is distinct from symlink reading. Prior native slot stays closed;
+  no preview readiness or renderer fidelity is inferred from a pure-read ping.
+
+* Earlier highest request under the preview-validation priority: the exact
   [queued request](doc/preview-post-restart-highest-request-20261013.json)
   reuses original Photo owner's control `10031592` in the restarted process:
   `HIGHEST_REGISTERED`, width `full`, absent height/scale, and explicit unique
@@ -21,14 +57,14 @@
   reports a separately released pure-read readiness ping, which authorizes no
   preview/render/writer work and proves no actual preview result. Source-only
   final highest review pins 39 cases; older `VALIDATION.json` records an
-  intermediate 36-case revision. Queue delivery is accepted; actual highest/
-  post-restart outcome remains pending. Original renderer/publisher ownership
+  intermediate 36-case revision. Queue delivery was accepted; its pending
+  event is now closed by the post-restart outcome above. Original ownership
   stays with Photo; Unison makes no Adobe/cache/media invocation. Quasar,
   monitor/1:1 and renderer fidelity retain separate gates. Core whole-clone
   implementation remains available after this priority review.
 
 
-* Latest native-preview evidence (reviewed 2026-10-14): the original Photo
+* Earlier pre-restart native-preview baseline (reviewed 2026-10-14): the original Photo
   owner completed control `10031592` with one native registration and two
   native LOAD/RELOAD passes before restart. Each selected and decoded
   **1136×852**, with fresh current identity/orientation at all six raw
@@ -261,11 +297,13 @@
   Preserve the 67 missing-container historical records as absent-file context;
   1,469 modern alternatives beside qualified legacy containers were outside the
   inspected modern cohort. See [integration](doc/preview-design-integration.md).
-  The next native branch remains the original
-  uninvoked image 10031592 registration/load/restart control. Desktop access
-  remains unavailable; the user reports current helper owner undispatched and
-  native window unreleased. Shared eighteen-credit ceiling and Quasar/Ten
-  placement persist. The ORIGINAL renderer/publisher owner's
+  At that geometry snapshot, control `10031592` was uninvoked and desktop/
+  native access was unavailable. The later one-control outcome at the top of
+  this handoff proves committed registration and selected-tier native reuse;
+  its slot is closed. Highest/post-restart loading now needs fresh Root
+  admission under the published request, with original owner retained.
+  Shared eighteen-credit ceiling and Quasar/Ten placement persist. The
+  ORIGINAL renderer/publisher owner's
   [durable acknowledgment](../photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json)
   pins the mass handoff, v3 receipts, modern geometry and compiled interface
   proof. The [ABI assessment](../photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json)
