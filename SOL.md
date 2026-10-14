@@ -4,6 +4,21 @@
 
 ## Live implementation handoff
 
+* Receiving directory manifest controls (2026-10-14): opt-in endpoint-local
+  `validationtreeentries` and `validationtreepathbytes` now cap discovered
+  entries and cumulative relative path bytes before name buffering/Path
+  construction. Zero retains existing unlimited behavior. Every directory read
+  checks cancellation and closes its handle on failure. Stock/Ox each pass
+  eight arithmetic/boundary checks, seven actual CLI cases (including require/
+  warn rejection before helpers, endpoint isolation and hidden helper mutation)
+  and a native-read cancellation/close probe; Make/Dune builds+selftests and all
+  21 existing receiving cases pass on both compilers. Removing only the checkpoint
+  reproduces its failure. [Contract](doc/validation-tree-limits.md),
+  [qualification](tests/validation_tree_limits/qualification.json).
+  Structural counts do not bound properties, SDK heaps or RSS. Manifest memory
+  reservation and complete directory pre-creation admission remain open; this
+  does not complete M6. Source photos/Adobe/Lightroom are untouched.
+
 * Backend activation admission correction (2026-10-14): declarations alone did
   not prevent a previously disabled resource-bearing validator from becoming
   active after staging, potentially borrowing space reserved for retained

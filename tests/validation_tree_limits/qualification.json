@@ -1,0 +1,798 @@
+{
+  "schema": "unison-validation-tree-structural-limits/1",
+  "status": "passed",
+  "parent": "ca90df83c3a5a31dc69387dfdf63fe509007653a",
+  "sources": {
+    "src/validationTreeBudget.ml": "1c42a2a5bc14c8c6e1f1eb681ccf36ac49c86416513c1793f61c4d6924d481d7",
+    "src/validationTreeBudget.mli": "2067cd37061822b6a85faf07192157e3ec3d27ff9131b19d2fdb0e3117bc4d74",
+    "src/candidateValidation.ml": "138d2c2c3d91865bf2cdfa199190aedbace2c0e40cdba16f94d48bbd92522808",
+    "src/Makefile.OCaml": "2be300167d00f17307e81e86f852b79692fa3fa1c9564b7d516a0fff6f01a25e",
+    "tests/validation_tree_limits/run.py": "ff01d587ae3905e8f79da51898d14a33392c2269b84c0b81cda11edf6d439fe1",
+    "tests/validation_tree_limits/test.ml": "17e370070e64e76bc59b7702a54b8a927e55adfeca888dc5c0605d35e3538071",
+    "tests/validation_tree_limits/README.md": "855cb9d8ce3fc5accc3fadacdf0d4710e6bc87174f582c594ab47a63460ce5aa",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+  },
+  "builds": [
+    {
+      "tool": "Make",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-v2j5rhee",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "74e514b22736f29d4f5222720d965918cc0bee319c3485f1c2ade84848a18fd1",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-v2j5rhee/build.log",
+        "sha256": "49345e482ca2928776b509569de96d157eee7fcea82e743c9c36e0fff4df5212"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-v2j5rhee/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Make",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gug61i8e",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "92a9875a1cfaf8c6ccbb58941414fac493fa036fd2aa0375737f02b7a2f9dec2",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gug61i8e/build.log",
+        "sha256": "174a8bc8982f56502e770c1e3a5b4f8cc3ef5acdcd838daf2709067adacb0196"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gug61i8e/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-stock-2aq62vsv",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "96cdcfc45de94bf9114f7af453d3b5f576a2fd579bcdd3def8e58ada4f5ce355",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-stock-2aq62vsv/build.log",
+        "sha256": "78983ff4f0758b211a0e15c6c683a7e1ccd7fa7a5b6db8c9b22761a8b48c60e0"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-stock-2aq62vsv/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-ox-kvai2xly",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "058ce569579512a564404ac8c6f8575ed0aa53a4a45d8133da780715a25e0170",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-ox-kvai2xly/build.log",
+        "sha256": "f4261dec26a9f1036beb6dc32f2716859278f525bcb959ce9c00ebdebe5bba68"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-tree-dune-ox-kvai2xly/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    }
+  ],
+  "receipts": {
+    "limits-stock": {
+      "path": "/private/tmp/unison-validation-tree-stock.json",
+      "sha256": "92fab6b1b8af7d20e7bb07100e7c1e00a4a281673d9909e99370af7720f64ed4",
+      "receipt": {
+        "schema": "unison-validation-tree-structure/1",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru",
+        "cases": [
+          {
+            "name": "exact-entries",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true
+          },
+          {
+            "name": "entries-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "entries-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "path-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "path-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "negative-config",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "post-helper-hidden-entry",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          }
+        ],
+        "commands": [
+          {
+            "name": "actual-object-kernel",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/kernel.log",
+            "sha256": "c9926e85194403fa721a9b5ed2668eaa08d94acb508164b1274b94492706fc85"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/positive/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/positive/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/positive/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/positive/enumeration.log",
+            "sha256": "a27e94234b13226e2546126c48602d4a0a0300c2bf03cd0190358c4264f7e60c"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/removed-check/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/removed-check/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/removed-check/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/removed-check/enumeration.log",
+            "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+          }
+        ],
+        "limits": [
+          "Entry/path accounting is not heap/RSS or full directory resource admission. Properties, symlink target bytes and SDK heaps are outside these structural limits."
+        ],
+        "PhotoOrAdobeAccess": false,
+        "enumeration": {
+          "positive": {
+            "binarySha256": "50ce1d5164f80b4436e1d984d384dee2a5d3ebeaaa1493c51670bc6e17c55c18",
+            "privateParticipantSha256": "17cc42ec810212df44b36b12b593cb8c3ab191068192d774cbe8941209f6bad3",
+            "expectedExit": 0
+          },
+          "removed-check": {
+            "binarySha256": "238ddc41c80f84a848e05b8c77d5c181f64ffb599af87d7650ce95b60962d9ad",
+            "privateParticipantSha256": "94eae505c3d57934ba748e81f5c35ce8d015862cf168b7093333ed70b3f12b43",
+            "expectedExit": 2
+          }
+        },
+        "status": "passed",
+        "binarySha256": "74e514b22736f29d4f5222720d965918cc0bee319c3485f1c2ade84848a18fd1",
+        "sources": {
+          "src/validationTreeBudget.ml": "1c42a2a5bc14c8c6e1f1eb681ccf36ac49c86416513c1793f61c4d6924d481d7",
+          "src/validationTreeBudget.mli": "2067cd37061822b6a85faf07192157e3ec3d27ff9131b19d2fdb0e3117bc4d74",
+          "src/candidateValidation.ml": "138d2c2c3d91865bf2cdfa199190aedbace2c0e40cdba16f94d48bbd92522808",
+          "src/Makefile.OCaml": "2be300167d00f17307e81e86f852b79692fa3fa1c9564b7d516a0fff6f01a25e",
+          "tests/validation_tree_limits/test.ml": "17e370070e64e76bc59b7702a54b8a927e55adfeca888dc5c0605d35e3538071",
+          "tests/validation_tree_limits/run.py": "ff01d587ae3905e8f79da51898d14a33392c2269b84c0b81cda11edf6d439fe1",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "compiledObjectPins": {
+          "validationTreeBudget.cmx": "07310685b482c1e530e7fcd69ea35925dc9476b3dbbc49d038f95fc597094887",
+          "validationTreeBudget.cmi": "4ac1cc7ee475cb60856077b90ea63b6ec9e14fb941b5792167e46b59e778079c",
+          "candidateValidation.cmx": "efea33d4bad5183d1227fd77e79fd58e14d28f54d5053532b98f3f1515a3fa9b"
+        },
+        "scope": "Actual loopback CLI receiving tree entry/path caps and helper-mutation failure on private synthetic inputs. No native Adobe/Lightroom operation."
+      },
+      "cliLogPins": {
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/negative-config/run-01.log": "3d3a2d6e6c0a17e52761b5f8c052cc18235d97a9a813bd63b5fe4a9dd0c34ad1",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/path-require/run-01.log": "2b0f1c274ffb4e4908f7d712155eb4d169c5a206179b3d205559db9408e2b2c3",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/exact-entries/run-01.log": "15e006024d28e7b8e009edcdb37e049a3dc444ea9d3d525ef98668d35793bbd2",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/post-helper-hidden-entry/run-01.log": "5043854617be7ac96ee13431bcb44b071fa4cdeb4752bc8161aa3e3725496436",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/entries-warn/run-01.log": "4395632de84b2033cb96bcf1030a50278dd0f762ad4e565dfa584ec021d39570",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/path-warn/run-01.log": "1706908876302b49e45e350ae647b9939bffce082f48550ec5c12d222b8cd9c4",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-v7vuuiru/entries-require/run-01.log": "3914e12d4a6f9c91f02bd9bbda41766b683e619bd675ffbee7600fd56366d7ea"
+      }
+    },
+    "receiving-stock": {
+      "path": "/private/tmp/unison-tree-receiving-stock.json",
+      "sha256": "30169a22479787377e65e644d02df1112b834752239670bd798d7ed7c634f9dd",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306082760,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306082919,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306083104,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306083260,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1142841200053226,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1164476340054534,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.07947078500001226,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.08343241699913051,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ],
+        "work": "/private/tmp/unison-validation-paths-y37bejow"
+      }
+    },
+    "limits-ox": {
+      "path": "/private/tmp/unison-validation-tree-ox.json",
+      "sha256": "793e0e17a824172ad0237560ea9fc34c61181932464e2d8f004b51346fd40414",
+      "receipt": {
+        "schema": "unison-validation-tree-structure/1",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc",
+        "cases": [
+          {
+            "name": "exact-entries",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true
+          },
+          {
+            "name": "entries-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "entries-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "path-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "path-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "negative-config",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          },
+          {
+            "name": "post-helper-hidden-entry",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true
+          }
+        ],
+        "commands": [
+          {
+            "name": "actual-object-kernel",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/kernel.log",
+            "sha256": "c9926e85194403fa721a9b5ed2668eaa08d94acb508164b1274b94492706fc85"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/positive/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/positive/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/positive/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/positive/enumeration.log",
+            "sha256": "a27e94234b13226e2546126c48602d4a0a0300c2bf03cd0190358c4264f7e60c"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/removed-check/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/removed-check/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/removed-check/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/removed-check/enumeration.log",
+            "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+          }
+        ],
+        "limits": [
+          "Entry/path accounting is not heap/RSS or full directory resource admission. Properties, symlink target bytes and SDK heaps are outside these structural limits."
+        ],
+        "PhotoOrAdobeAccess": false,
+        "enumeration": {
+          "positive": {
+            "binarySha256": "96903df744aa7e73a53c8b8028b7cde120a2649141e6c1262458442d7229d518",
+            "privateParticipantSha256": "17cc42ec810212df44b36b12b593cb8c3ab191068192d774cbe8941209f6bad3",
+            "expectedExit": 0
+          },
+          "removed-check": {
+            "binarySha256": "71d04caee9353df75e626e9f5cc7d478b60c76c844c80b03f4dc345ad1130ea6",
+            "privateParticipantSha256": "94eae505c3d57934ba748e81f5c35ce8d015862cf168b7093333ed70b3f12b43",
+            "expectedExit": 2
+          }
+        },
+        "status": "passed",
+        "binarySha256": "92a9875a1cfaf8c6ccbb58941414fac493fa036fd2aa0375737f02b7a2f9dec2",
+        "sources": {
+          "src/validationTreeBudget.ml": "1c42a2a5bc14c8c6e1f1eb681ccf36ac49c86416513c1793f61c4d6924d481d7",
+          "src/validationTreeBudget.mli": "2067cd37061822b6a85faf07192157e3ec3d27ff9131b19d2fdb0e3117bc4d74",
+          "src/candidateValidation.ml": "138d2c2c3d91865bf2cdfa199190aedbace2c0e40cdba16f94d48bbd92522808",
+          "src/Makefile.OCaml": "2be300167d00f17307e81e86f852b79692fa3fa1c9564b7d516a0fff6f01a25e",
+          "tests/validation_tree_limits/test.ml": "17e370070e64e76bc59b7702a54b8a927e55adfeca888dc5c0605d35e3538071",
+          "tests/validation_tree_limits/run.py": "ff01d587ae3905e8f79da51898d14a33392c2269b84c0b81cda11edf6d439fe1",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "compiledObjectPins": {
+          "validationTreeBudget.cmx": "04412b54ead6e739f0373a4f649b91754115ee83614ce720812b45dc9f3ca6f7",
+          "validationTreeBudget.cmi": "77ad3c5bffdf14671a614757364d851907a31f1dec135132de601297e64d3476",
+          "candidateValidation.cmx": "0128bf320725bd1fe472501255148d755296f938a55d7b6df66ef0129e505cea"
+        },
+        "scope": "Actual loopback CLI receiving tree entry/path caps and helper-mutation failure on private synthetic inputs. No native Adobe/Lightroom operation."
+      },
+      "cliLogPins": {
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/negative-config/run-01.log": "f08a653ba6329d5db4354e606a0be46d559fbc9aaf801da8a1a1bd8257cea28d",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/path-require/run-01.log": "29ece90ccf19788e9468a57cd6f76b6b42ad3871e39c36ecb9a63ac039b21522",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/exact-entries/run-01.log": "990ac270fad8887e0d18bbbdf04ca73fd7db15906c20111c2da9b74fe0b8e7c1",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/post-helper-hidden-entry/run-01.log": "692968e20bd1683b4ab107ff0dc943e54630e48ca67c0096c3dcc1e7c6d9facb",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/entries-warn/run-01.log": "27c0008c8daa92f09d3650c84d60804f03e1423f8a8c36db6034d61497c519aa",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/path-warn/run-01.log": "b3937efd72692ce0afc02493a4fe8d498df65d0756ded4b5f8e71ad78d20fef0",
+        "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-mz9_20gc/entries-require/run-01.log": "bebba41ddf1dbeb2f72e7d90607611820123e38040dbd23c24f417182b9b58f9"
+      }
+    },
+    "receiving-ox": {
+      "path": "/private/tmp/unison-tree-receiving-ox.json",
+      "sha256": "f38eb0d449017085ecdb152e54e601a4bf6cc2f70e138fe912e183bf5edc32aa",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306082764,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306082921,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306083106,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306083262,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1197493829968153,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1103544509969652,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.07515188500110526,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.07968443400750402,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ],
+        "work": "/private/tmp/unison-validation-paths-clh3oij7"
+      }
+    }
+  },
+  "summary": {
+    "boundaryChecksPerCompiler": 8,
+    "actualReceivingCasesPerCompiler": 7,
+    "cancellationProbeAndDesignatedNegativePerCompiler": 2,
+    "receivingRegressionsPerCompiler": 21,
+    "buildsAndSelftests": 4
+  },
+  "limits": [
+    "Opt-in entry/path structure bounds, not heap/RSS or complete directory memory admission. Defaults zero preserve legacy behavior.",
+    "Properties, symlink targets, backing allocator overhead, archives and SDK heaps are not counted.",
+    "Cancellation probes instrument only actual directory read/close observations and a removed-check negative. No blocking syscall interruption/deadline guarantee.",
+    "No Adobe runtime, Lightroom, source Photo payload or preview publication operation was performed."
+  ]
+}

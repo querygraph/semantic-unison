@@ -1,4 +1,22 @@
 open Lwt
+let tree_entries = Prefs.makeEndpointLocal (Prefs.createInt "validationtreeentries" 0
+  ~local:true ~category:(`Advanced `General) "maximum entries per validation tree snapshot"
+  "Zero retains unlimited legacy enumeration. A positive endpoint-local limit \
+   bounds discovered entries, including hidden files, before name buffering. \
+   This is a structural limit, not a heap/RSS bound.")
+let tree_path_bytes = Prefs.makeEndpointLocal (Prefs.createInt "validationtreepathbytes" 0
+  ~local:true ~category:(`Advanced `General) "maximum path bytes per validation tree snapshot"
+  "Zero retains unlimited legacy enumeration. A positive endpoint-local limit \
+   bounds cumulative UTF-8 relative path bytes before name buffering. Properties, \
+   symlink targets and native/SDK allocation are not counted as path bytes.")
+let tree_budget () =
+  let max_entries = Prefs.read tree_entries and max_path_bytes = Prefs.read tree_path_bytes in
+  if max_entries < 0 || max_path_bytes < 0 then
+    raise (Util.Fatal "Validation tree limits must be nonnegative");
+  ValidationTreeBudget.create ~max_entries ~max_path_bytes
+let reserve_entry budget ~prefix_bytes ~name_bytes =
+  try ValidationTreeBudget.reserve budget ~prefix_bytes ~name_bytes
+  with ValidationTreeBudget.Exceeded reason -> raise (Util.Transient reason)
 let enabled () = match CandidateValidators.selected () with [] -> false | _ -> true
 let with_descriptor path operation =
   let owned = ref true in
@@ -30,16 +48,22 @@ type tree_entry = {
   resource : Osx.ressStamp option;
 }
 let stable_stats stats = {stats with Unix.LargeFile.st_atime = 0.}
-let all_children path =
+let all_children budget ~prefix_bytes path =
   let directory = Fs.opendir path in
-  let rec read acc = match directory.Fs.readdir () with
+  let rec read acc =
+    Abort.checkAll ();
+    match directory.Fs.readdir () with
     | "." | ".." -> read acc
-    | name -> read (name :: acc)
+    | name ->
+        reserve_entry budget ~prefix_bytes ~name_bytes:(String.length name);
+        read (name :: acc)
     | exception End_of_file -> List.sort String.compare acc in
   match read [] with
   | names -> directory.Fs.closedir (); names
   | exception e -> (try directory.Fs.closedir () with _ -> ()); raise e
 let tree_snapshot directory candidate =
+  let budget = tree_budget () in
+  reserve_entry budget ~prefix_bytes:0 ~name_bytes:(String.length (Path.toString candidate));
   (* Inspect every entry, including hidden, AppleDouble and Unison temporary
      names. Never follow a symlink or apply Os.childrenOf's filtering/deletion.
      This O(entries) metadata manifest is retained until all helpers settle. *)
@@ -57,8 +81,9 @@ let tree_snapshot directory candidate =
           Some info.Fileinfo.desc, Some (Fileinfo.ressStamp info)
         | _ -> None,None in
       let pending = if stats.Unix.LargeFile.st_kind = Unix.S_DIR then
+        let prefix_bytes = String.length (Path.toString path) + 1 in
         List.fold_left (fun rest name -> Path.child path (Name.fromString name) :: rest)
-          rest (all_children absolute)
+          rest (all_children budget ~prefix_bytes absolute)
         else rest in
       if stable_stats (Fs.lstat absolute) <> stats then
         raise (Util.Transient "Validation candidate changed while recording its tree");

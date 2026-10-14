@@ -79,7 +79,7 @@ OCAMLOBJS = \
           xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           semanticRuntime.cmo supervisedExternal.cmo semanticSync.cmo semanticRemote.cmo \
-          candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
+          validationTreeBudget.cmo candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
           fpcache.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
           files.cmo sortri.cmo recon.cmo transport.cmo \
           strings.cmo uicommon.cmo uitext.cmo test.cmo \

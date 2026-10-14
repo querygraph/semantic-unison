@@ -7,6 +7,12 @@ Lightroom qualification and Ten/Quasar publishing. Preview work does not block
 independent core implementation here; historical Photo notices below do not
 release a native window.
 
+Receiving tree enumeration now has opt-in endpoint-local entry/path-byte caps
+and a cancellation checkpoint before each native read. They count hidden and
+pending children before name buffering and reject publication on limit failure.
+[Contract/evidence](validation-tree-limits.md) keep these structural controls
+distinct from still-open global manifest memory and directory-creation admission.
+
 The current resource-admission successor pins resource-bearing backend
 participation as well as declarations, preventing late enablement from borrowing
 metadata-only staging capacity. Resource-free legacy policy toggles remain
