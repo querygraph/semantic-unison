@@ -24,7 +24,7 @@ from ownership import OwnedGroup
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 MODES = ("ordinary", "receiver-clone", "semantic", "source-clone")
-WORKER_CHOICES = (1, 2, 4, 8, 18, 36)
+WORKER_CHOICES = (1, 2, 4, 6, 8, 18, 36)
 SDE = re.compile(
     r"Remote semantic clone wrote (\d+) logical metadata bytes in (\d+) write calls "
     r"\((\d+) payload bytes; (\d+)-byte comparison windows; ([^)]+)\)")
@@ -59,7 +59,7 @@ def binary_info(path):
     result["snapshot_source_manifest"] = None
     if path.parent.name == "src" and (snapshot / "src/Makefile").is_file():
         inputs = [item for item in (snapshot / "src").rglob("*")
-                  if item.is_file() and item.suffix in (".ml", ".mli", ".c", ".h")]
+                  if item.is_file() and (item.suffix in (".ml", ".mli", ".c", ".h") or item.name.endswith(".ox.mli.in"))]
         inputs += [snapshot / relative for relative in
                    ("src/Makefile", "src/Makefile.OCaml", "dune-project", "INSTALL.md")
                    if (snapshot / relative).is_file()]
@@ -85,6 +85,16 @@ def binary_info(path):
                 result["qualified_snapshot"] = {"receipt": str(known), "receipt_sha256": sha256(known),
                     "production_inputs_verified": len(proof["source_manifest"]),
                     "source_manifest": proof["source_manifest"]}
+        current = ROOT / "tests/checked_worker/qualification.json"
+        if current.is_file():
+            proof=json.loads(current.read_text())
+            if any(record["binarySha256"]==result["sha256"] for record in proof.get("makeBuilds",{}).values()):
+                manifest=proof["frozenFinalMakeInputs"]
+                for name,digest in manifest.items():
+                    assert sha256(snapshot/name)==digest,"checked build source changed"
+                result["qualified_snapshot"]={"receipt":str(current),"receipt_sha256":sha256(current),
+                    "production_inputs_verified":len(manifest),"source_manifest":manifest,
+                    "scope":"actual checked worker build; native/resource/performance limits remain separate"}
     return result
 
 
@@ -206,6 +216,8 @@ def main():
     parser.add_argument("--compiler", action="append", default=[], metavar="LABEL=OCAMLOPT")
     parser.add_argument("--modes", default="ordinary,receiver-clone,semantic")
     parser.add_argument("--workers", default="1")
+    parser.add_argument("--loopback-cpu-credits",type=int,
+                        help="Bound the sum of configured semantic/helper CPU budgets across same-host endpoints; not an OS CPU cap")
     parser.add_argument("--file-mib", type=int, default=32)
     parser.add_argument("--files", type=int, default=2)
     parser.add_argument("--packet-bytes", type=int, default=8192)
@@ -233,9 +245,14 @@ def main():
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2]
     if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
-        parser.error("workers must be unique values from 1,2,4,8,18,36")
+        parser.error("workers must be unique values from 1,2,4,6,8,18,36")
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
         parser.error("invalid/duplicate mode")
+    endpoint_count=2 if any(mode!="source-clone" for mode in modes) else 1
+    if args.loopback_cpu_credits is not None:
+        if references:parser.error("reference CPU budgets cannot be qualified by the loopback credit bound")
+        if args.loopback_cpu_credits<=0 or endpoint_count*max(workers)>args.loopback_cpu_credits:
+            parser.error("sum of configured endpoint CPU credits exceeds loopback budget")
     if not (1 <= args.file_mib <= 512 and 1 <= args.files <= 256 and
             256 <= args.packet_bytes <= 1048576 and args.warmups >= 0 and
             1 <= args.repetitions <= 50 and args.timeout > 0):
@@ -268,7 +285,9 @@ def main():
               "parameters": {"modes": modes, "workers": workers, "file_mib": args.file_mib,
                     "files": args.files, "packet_bytes": args.packet_bytes,
                     "warmups": args.warmups, "repetitions": args.repetitions,
-                    "timeout_seconds": args.timeout, "background_note": args.background_note},
+                    "timeout_seconds": args.timeout, "background_note": args.background_note,
+                    "loopback_cpu_credit_bound":args.loopback_cpu_credits,
+                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers)},
               "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
               "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
               "rss_units": "bytes on Darwin; KiB on Linux; native OS units elsewhere",
@@ -286,6 +305,12 @@ def main():
         return
     with tempfile.TemporaryDirectory(prefix="unison-sync-bench-", dir="/private/tmp") as temporary:
         work = Path(temporary)
+        capacity=os.statvfs(work)
+        available=capacity.f_bavail*capacity.f_frsize
+        required=4*size*args.files+64*1048576
+        result["fixture_capacity"]={"available_bytes_before_run":available,
+            "required_bytes":required,"model":"four full corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
+        if available<required:raise RuntimeError("insufficient private fixture capacity")
         for name in ("proxy.py", "measure.py", "launcher.py", "ownership.py"):
             shutil.copy2(HERE / name, work / name)
         (work / "launcher.py").chmod(0o700)
@@ -394,11 +419,17 @@ def main():
                         sample["noop_preserved_receiver_inode"] = True
                         sample["staging_cleaned"] = True
                         if "fixture_compressibility_probe" not in result:
-                            probe = (directory / "left" / fixtures[0]["name"]).read_bytes()[:1048576]
+                            with (directory / "left" / fixtures[0]["name"]).open("rb") as stream:
+                                probe=stream.read(1048576)
                             result["fixture_compressibility_probe"] = {
                                 "bytes": len(probe), "zlib_level": 6,
                                 "compressed_bytes": len(zlib.compress(probe, 6)),
                                 "scope": "first MiB of first fixture only; generation mostly seeded pseudorandom bytes"}
+                        cleanup_start=time.monotonic()
+                        shutil.rmtree(directory)
+                        sample["fixture_cleanup_seconds"]=time.monotonic()-cleanup_start
+                        sample["private_fixture_removed"]=not directory.exists()
+                        assert sample["private_fixture_removed"]
                         save(args.output, result)
                         print(f"{phase} {repetition} {label}/{mode} workers={worker}: "
                               f"{measured['wall_seconds']:.3f}s, exact result/basis/no-op", flush=True)

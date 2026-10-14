@@ -4,6 +4,19 @@
 
 ## Live implementation handoff
 
+* Checked full-sync performance (2026-10-14): stock/Ox actual CLI binaries bind
+  all349 frozen inputs. The warm same-host matrix passes72 rows/576 exact file
+  updates with old hardlinks, no-op inode stability and native/process/fixture
+  cleanup. Eight32MiB files, per-endpoint budgets1/6 (max12 combined credits),
+  one warmup and five measured repeats compare ordinary/receiver-clone/semantic.
+  Ox median seconds at6:4.121/4.150/4.788; semantic1 is9.269. Semantic writes
+  24KiB/eight attempts per256MiB row; generic non-inherited model64KiB. This
+  reduces logical writes but does not outperform ordinary warm-cache transfer.
+  [Results/scope](bench/sync/README.md), [audit](bench/sync/results/checked-worker-performance-audit-20261014.json).
+  Harness rejects over-budget/low-capacity setups and removes each accepted
+  corpus before the next. Physical writes, internal stages, global ceilings,
+  real links and remaining SDK/M5/M6 gates stay open; no Adobe/Photo invocation.
+
 * Checked worker cached-path measurement (2026-10-14): actual production objects
   from77234c5 run serially at1/6/18 workers with matched CommonCrypto backends.
   Median throughput stock363.4/1985.8/4782.5MiB/s and

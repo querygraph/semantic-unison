@@ -17,7 +17,7 @@ python3 bench/sync/run.py \
   --compiler stock=/path/to/stock/ocamlopt \
   --compiler ox=/path/to/ox/ocamlopt \
   --reference original=/absolute/original-snapshot/src/unison \
-  --workers 1,2,4,8,18,36 --file-mib 32 --files 8 \
+  --workers 1,6 --loopback-cpu-credits 18 --file-mib 32 --files 8 \
   --output /absolute/path/results.json
 ```
 
@@ -41,13 +41,17 @@ them accurately. An original 2.53.5 binary is not the selected newer upstream
 
 The runner configures the same worker budget on both processes. CPU credits
 apply per endpoint, so a same-host pair can consume two budgets; this is not
-a machine-wide CPU cap. Transfer concurrency is `max(2, worker_budget)`. Ordinary
+a machine-wide CPU cap. --loopback-cpu-credits checks the sum of configured
+semantic/helper budgets before any fixture or sync starts. The current18-credit
+run uses1/6 per endpoint (maximum12 combined). Local source-clone-only rows use
+one endpoint budget. Unqualified reference budgets are rejected when this bound
+is selected; ordinary owner/proxy/OS CPU work is outside the credit accounting. Transfer concurrency is `max(2, worker_budget)`. Ordinary
 transfers do not use semantic domains, so their worker label describes the
 configured preference and transfer concurrency, not observed domain use.
-The runner supports 1/2/4/8/18/36; it does not run a broad matrix in qualification
+The runner supports 1/2/4/6/8/18/36; it does not run a broad matrix in qualification
 mode. Multi-gigabyte inputs, mixed/unsupported/growing packets, real SSH links,
 cross-volume roots and non-APFS receivers remain separate benchmark work.
-Defaults use one worker budget and two 32 MiB files; the full six-budget
+Defaults use one worker budget and two 32 MiB files; a larger multi-budget
 matrix in the example is an explicit choice.
 
 Each row creates fresh roots and archive state, seeds the receiver through the
@@ -79,6 +83,12 @@ an incomplete receipt; failed or partially qualified rows are not evidence of
 optimization. Main and supervisor output streams are both drained continuously
 with bounded retained buffers; truncation rejects a row. No unbounded supervisor
 disk log is produced.
+Each accepted row removes its own private files after exact byte/basis/no-op
+checks and native process closure. Cleanup is outside update timing and recorded
+separately. Thus prior rows do not accumulate corpus storage during a matrix.
+A fresh capacity admission requires four full corpus extents plus64MiB of
+headroom, covering source/old receiver/new output/staging conservatively; it is
+not APFS physical-allocation proof. The compression probe reads only1MiB.
 Temporary roots and private state are removed on exit. Commands, logs and
 their synthetic paths are retained in the JSON.
 
@@ -190,3 +200,45 @@ and do not isolate payload traffic. The elapsed update receipts ranged roughly
 and startup/bridge costs. One sample per configuration supports neither an
 elapsed-time speedup nor an OxCaml-specific gain. It does not establish
 18-versus-36 behavior or complete the SOL benchmark matrix.
+
+## Checked worker successor, 2026-10-14
+
+The [finite successor qualification](results/checked-worker-qualification-20261014.json)
+passes12 exact sync rows on the stock/Ox executables qualified at77234c5.
+Both binaries independently bind the349 frozen production inputs, including
+mode-interface templates. Fixture/capture/ownership controls pass; explicit
+loopback over-budget and low-capacity controls reject before any fixture/sync.
+The owned low-capacity temporary is removed and its output stays incomplete.
+
+The larger current performance matrix uses eight32MiB synthetic files, worker
+budgets1/6 per endpoint, one warmup and five measured repetitions. It compares
+ordinary, receiver-basis cloning and semantic DNG updates. All72 rows are now complete and accepted, including12 warmups and60 measured
+rows. All576 file updates reconstruct exact bytes, retain old hardlink hashes,
+preserve no-op receiver inodes and close processes before removing fixtures. This exercises real checked production CLI transfer,
+not cached hashing alone, but remains warm same-host transport with synthetic
+payloads and no Adobe/Photo invocation. Internal read/stage timing, aggregate
+RSS, hard global caps, real links and representative photographic workloads
+remain separate M6 gates.
+
+The [raw performance matrix](results/checked-worker-performance-20261014.json)
+and [independent receipt audit](results/checked-worker-performance-audit-20261014.json)
+report median update seconds (five measured repeats):
+
+| Mode | Stock,1 worker | Stock,6 workers | Ox,1 worker | Ox,6 workers |
+| --- | ---: | ---: | ---: | ---: |
+| Ordinary | 5.773 | 4.688 | 5.004 | 4.121 |
+| Receiver clone | 5.667 | 4.600 | 4.994 | 4.150 |
+| Semantic DNG | 9.839 | 5.266 | 9.269 | 4.788 |
+
+Semantic writes are24576 logical bytes/eight write attempts per256MiB row,
+with65536 editable payload bytes. Generic cloning reports65536 non-inherited
+logical output bytes; ordinary transfer models the full268435456-byte output.
+These counters have different evidentiary scope and none measures physical
+writes. Semantic six/one-worker elapsed scaling is1.87x stock and1.94x Ox;
+semantic verification is still slower than ordinary transfer in this warm-cache
+same-host run. Avoid presenting logical write reduction as elapsed acceleration.
+Stock/Ox are different compiler versions; no universal compiler gain or cold
+storage/network behavior follows. Warmups remain visible, including the slow
+23.314-second first stock semantic single-worker row; it is excluded only by
+the predeclared warmup policy. The remaining memory/read/stage/real-network
+and native SDK qualifications are open.
