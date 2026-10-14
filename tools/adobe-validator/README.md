@@ -96,7 +96,7 @@ hardware-concurrency helpers exist in libjxl but are not called by this SDK
 decode path. The JPEG and embedded XMP paths do not create worker threads.
 Changing the host or codec runner requires repeating this budget audit.
 
-The repository also contains an **unqualified, source-only** capped area-task
+The repository also contains an **unqualified** capped area-task
 host. It does not change the default build or enable additional threads in
 Unison. An explicit `build.py --experimental-area-task-host` selection produces
 `unison-adobe-validator-area-unqualified`, a separate
@@ -219,3 +219,24 @@ outside this pool, so it is not a full process/RSS cap. The
 [pluggable resource contract](../../doc/backend-resource-interop-v0.md) records
 shared core-admission integration and remaining coverage. The
 [source tests](../../tests/sdk_memory/README.md) run no Adobe or photograph.
+
+The combined experimental area/memory variant now has an actual SDK build/link
+and static-symbol observation on Intel macOS; [sealed evidence](../../tests/sdk_memory/link-only-qualification.json).
+Neither the experimental validator nor its fixture writer was executed. This
+does not supersede runtime gates above or qualify any production endpoint.
+The qualified v1 binary is unchanged.
+
+A build-only Make handoff (run from the repository root):
+
+```sh
+SDK_ROOT=/absolute/dng_sdk_1_7_1 BUILD_DIR=/absolute/new-private-build JOBS=4 \
+  make -f tools/adobe-validator/Makefile experimental-link
+```
+
+This target compiles/links the separately named combined variant and performs
+static inspection only. It refuses a qualified v1 directory, an unowned existing
+directory, or a busy owned build; subsequent builds may reuse their matching
+owned directory. No SDK output is invoked. For an already linked unqualified
+artifact, use `python3 tools/adobe-validator/experimental_build.py --build-dir
+/absolute/private-build --inspect-only`. Inspecting does not grant a runtime
+slot. Pure filesystem refusal checks: `python3 tests/adobe_build_only/run.py`.

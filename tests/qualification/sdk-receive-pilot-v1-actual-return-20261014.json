@@ -1,0 +1,465 @@
+{
+  "schema": "unison-sdk-receive-v1-actual-return/1",
+  "utc": "2026-10-14T20:41:38.245067+00:00",
+  "state": "PASSED_AND_CLOSED",
+  "admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ADMISSION-20261014.json",
+    "bytes": 2346,
+    "sha256": "4313662fd51f89b54e8fb322d984f76dbbe3869113022e693f1fb3d6bc491de0"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-receive-pilot-request-v1-20261014.json",
+    "sha256": "92167fd29958225d8d4c2d8b2b91427c6b3af26b491dda93e23a8f7aa4ace3be"
+  },
+  "prepared": {
+    "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/READY.json",
+    "bytes": 45372,
+    "sha256": "8be53ca4a0fc1b90e0ab10d8f116b22c6356a071ad8812a70c62cff458f2604a"
+  },
+  "source_review": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ROOT-REVIEW-20261014.json",
+    "bytes": 2510,
+    "sha256": "62abb8e70a43b342bbbc43def97b0d94c96bab8dd763e56a0460f99fc73aaf16"
+  },
+  "source_pins": {
+    "tests/sdk_receive_pilot/run.py": "05ff0ab8beafc15c6586f6ec931a93b2d3c77f72bc3f909d76dd5ee354d856db",
+    "tests/sdk_receive_pilot/guard.py": "fc29c18472258c4dd557f96a8fc7dce021c19692b79635a823df4af030f30575",
+    "bench/adobe/phase.py": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+  },
+  "parent_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-receive-pilot-v1-parent-terminal-20261014.json",
+    "bytes": 1581,
+    "sha256": "d24f6c98c090e8b90ccb000606210839990aecec895b093bf1b507c8529b69ca",
+    "receipt": {
+      "schema": "unison-sdk-receive-v1-parent-terminal/1",
+      "utc": "2026-10-14T20:41:37.175989+00:00",
+      "admission": {
+        "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ADMISSION-20261014.json",
+        "bytes": 2346,
+        "sha256": "4313662fd51f89b54e8fb322d984f76dbbe3869113022e693f1fb3d6bc491de0"
+      },
+      "workspace": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2",
+      "wrapper_pid": 7661,
+      "aggregate_pid": 7662,
+      "actual_terminal_tool": {
+        "session_id": 84567,
+        "chunk_id": "0b554c",
+        "exit_code": 0,
+        "running_session_returned": false,
+        "stdout": "native phase closed: /private/tmp/unison-receive-pilot-native-prepared-20261014-v2\n",
+        "scope": "actual terminal write_stdin result, not psabsence or SUPERVISOR-RETURN inference"
+      },
+      "aggregate": {
+        "pid": 7662,
+        "seconds": 300,
+        "closed": true,
+        "scope": "finite contained pilot only",
+        "timed_out": false,
+        "reaped": true,
+        "returncode": 0,
+        "group_members_before_leader_reap": [
+          {
+            "pid": 7662,
+            "stat": "Z"
+          }
+        ],
+        "other_members_absent": true,
+        "wall_seconds": 31.661103293998167,
+        "child_user_seconds": 26.364766,
+        "child_system_seconds": 3.364144,
+        "within_wall_limit": true
+      },
+      "unresolved_marker_absent": true,
+      "subsequent_parent_aggregate_ps": {
+        "pids": [
+          7661,
+          7662
+        ],
+        "exit_code": 1,
+        "stdout": "",
+        "scope": "independent absence observation after actual terminal return; not the exit proof"
+      },
+      "slot_consumed": true,
+      "automatic_retry": false
+    }
+  },
+  "result": {
+    "mode": "NATIVE",
+    "cases": [
+      {
+        "codec": "uncompressed",
+        "direction": "stock-ox",
+        "status": "passed"
+      },
+      {
+        "codec": "uncompressed",
+        "direction": "ox-stock",
+        "status": "passed"
+      },
+      {
+        "codec": "jpeg",
+        "direction": "stock-ox",
+        "status": "passed"
+      },
+      {
+        "codec": "jpeg",
+        "direction": "ox-stock",
+        "status": "passed"
+      },
+      {
+        "codec": "jxl",
+        "direction": "stock-ox",
+        "status": "passed"
+      },
+      {
+        "codec": "jxl",
+        "direction": "ox-stock",
+        "status": "passed"
+      }
+    ],
+    "actual_tool_entries": [
+      {
+        "pid": 7663,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-original.dng",
+        "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+        "size": 48005534,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7671,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-original.dng",
+        "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+        "size": 39016722,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7673,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-original.dng",
+        "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+        "size": 38237658,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7735,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-stock-ox/right/.unison.image.dng.d037d51ef60a92b24e97eccc614977c4.unison.tmp",
+        "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+        "size": 48005534,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7751,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-stock-ox/right/.unison.image.dng.d037d51ef60a92b24e97eccc614977c4.unison.tmp",
+        "sha256": "93065fd3d4414b889a6f1a956cf38478b4f70ec3e8f4e92651536b24a1614813",
+        "size": 48005534,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7763,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-ox-stock/right/.unison.image.dng.72050deeec448ba4e89203e3d86f2508.unison.tmp",
+        "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+        "size": 48005534,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7776,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-stock-ox/right/.unison.image.dng.4f545d7d9094dc621243451f196c5055.unison.tmp",
+        "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+        "size": 39016722,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7820,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-ox-stock/right/.unison.image.dng.a7eb9c48524940a4ae77be21cda6fe0c.unison.tmp",
+        "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+        "size": 39016722,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7840,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-stock-ox/right/.unison.image.dng.f988a9f951f9badc95efb989a76cfae5.unison.tmp",
+        "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+        "size": 38237658,
+        "mode": "NATIVE"
+      },
+      {
+        "pid": 7861,
+        "pgid": 7662,
+        "candidate": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-ox-stock/right/.unison.image.dng.08dc6a3e79d920969a046897cee32ffc.unison.tmp",
+        "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+        "size": 38237658,
+        "mode": "NATIVE"
+      }
+    ],
+    "sdk_calls": 10
+  },
+  "received_outputs": [
+    {
+      "codec": "uncompressed",
+      "direction": "stock-ox",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-stock-ox/right/image.dng",
+      "bytes": 48005534,
+      "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    },
+    {
+      "codec": "uncompressed",
+      "direction": "ox-stock",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-ox-stock/right/image.dng",
+      "bytes": 48005534,
+      "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    },
+    {
+      "codec": "jpeg",
+      "direction": "stock-ox",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-stock-ox/right/image.dng",
+      "bytes": 39016722,
+      "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    },
+    {
+      "codec": "jpeg",
+      "direction": "ox-stock",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-ox-stock/right/image.dng",
+      "bytes": 39016722,
+      "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    },
+    {
+      "codec": "jxl",
+      "direction": "stock-ox",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-stock-ox/right/image.dng",
+      "bytes": 38237658,
+      "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    },
+    {
+      "codec": "jxl",
+      "direction": "ox-stock",
+      "target": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-ox-stock/right/image.dng",
+      "bytes": 38237658,
+      "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+      "core_receive_exit": 0,
+      "precommit_policy": "require",
+      "core_driver_build_id": "unison-sdk171-2724-v1-single",
+      "scope": "Unison accepted bound real SDK receipt; complete raw driver stdout inside receiving helpers is not separately retained"
+    }
+  ],
+  "negative": {
+    "core_exit": 2,
+    "sdk_validation_errors_observed": true,
+    "live_target_preserved": true,
+    "raw_digest_mismatch_line_not_separately_captured": true
+  },
+  "original_positive_receipts": {
+    "uncompressed": {
+      "returncode": 0,
+      "timed_out": false,
+      "client_cleanup": {
+        "pid": 7663,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false
+      },
+      "capture_truncated": false,
+      "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.090 sec\n"
+    },
+    "jpeg": {
+      "returncode": 0,
+      "timed_out": false,
+      "client_cleanup": {
+        "pid": 7671,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false
+      },
+      "capture_truncated": false,
+      "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.093 sec\n"
+    },
+    "jxl": {
+      "returncode": 0,
+      "timed_out": false,
+      "client_cleanup": {
+        "pid": 7673,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false
+      },
+      "capture_truncated": false,
+      "stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.059 sec\n"
+    }
+  },
+  "artifact_pins": {
+    "AGGREGATE-CLOSED.json": {
+      "bytes": 419,
+      "sha256": "028816c5b866eae21c9745456aaeada4945e1294e2c6b5ee57f66b653da321b4"
+    },
+    "READY.json": {
+      "bytes": 45372,
+      "sha256": "8be53ca4a0fc1b90e0ab10d8f116b22c6356a071ad8812a70c62cff458f2604a"
+    },
+    "RESULT.json": {
+      "bytes": 3983,
+      "sha256": "fe7d235717ddbb1f9696104a90a7f9430c0da00662dcf67dfe40832eadedf77d"
+    },
+    "START.json": {
+      "bytes": 130,
+      "sha256": "1ed93ef17204033eb62ff8b803092eb3d9ba48879c4c6d016fef147e54abeca3"
+    },
+    "SUPERVISOR-RETURN.json": {
+      "bytes": 591,
+      "sha256": "96cc89490a2e8a3c4fd452056fc914e959406149ecc944057fa8e03df0048ce2"
+    },
+    "WRAPPER-START.json": {
+      "bytes": 119,
+      "sha256": "63d94a38a4ec3ef9d33b90862dcdbebae0f4d4ca43f936f095d2a5bb82239a27"
+    },
+    "calls/01.json": {
+      "bytes": 245,
+      "sha256": "4b15d850746929595b379cb7b3387786bf6648207630477b4e15593df99d1b57"
+    },
+    "calls/02.json": {
+      "bytes": 237,
+      "sha256": "476c9b7a2cbb8259eeeda44d790cfc9369e5b015732debd32e66c9ce6565b86d"
+    },
+    "calls/03.json": {
+      "bytes": 236,
+      "sha256": "18206627019d6ab04eed45845850016542b98229db7166ddf56a639ccfc66c6f"
+    },
+    "calls/04.json": {
+      "bytes": 309,
+      "sha256": "a28c255d5c7bfa9de5fa4060089066ef10f8dd38b2a8ade5442fa1f6e2ca9dd3"
+    },
+    "calls/05.json": {
+      "bytes": 309,
+      "sha256": "91aa6c33fd9cf41160ac6006d74dbcebe271c0485ab865edb3321457a651e39d"
+    },
+    "calls/06.json": {
+      "bytes": 309,
+      "sha256": "8d4817de16178f79f84a9d901eb92417954b8328c75c4cdd13e93409eeab3b47"
+    },
+    "calls/07.json": {
+      "bytes": 301,
+      "sha256": "87338d8e4e1f72ea1d6068002cbad89ee779feeecd29d4cadffd8b40963ce054"
+    },
+    "calls/08.json": {
+      "bytes": 301,
+      "sha256": "038e00aca8a34c028ec4b3cf7da8de7201a4d30648a97fbbe3edd2e02bfc0641"
+    },
+    "calls/09.json": {
+      "bytes": 300,
+      "sha256": "76f6695491b703f1d442dd7c5524f70bea85dccfb005edcf2fdbc48921ddac7b"
+    },
+    "calls/10.json": {
+      "bytes": 300,
+      "sha256": "286f85fe78ce38ff2c949a7cff4be3951a553a3ba342a25307d50a8c210f4b2b"
+    },
+    "guard.json": {
+      "bytes": 904,
+      "sha256": "79bd8ed0ce5578cc804c9c2f0d3c25a0ca0ab8be7505ff32ecdcf167be22d493"
+    },
+    "jpeg-original-receipt.json": {
+      "bytes": 937,
+      "sha256": "13f66e1c1fa55db4e3785efa34aec21f290706b4026417c6d65040e34befedbd"
+    },
+    "jpeg-ox-stock/baseline.json": {
+      "bytes": 2772,
+      "sha256": "2439f714da4f74b8e3f470880e284e70d3585846dd556abd98caaf14f63add72"
+    },
+    "jpeg-ox-stock/receive.json": {
+      "bytes": 2177,
+      "sha256": "f4d9e750a5f2b8b0dde2a4ec21ab34bd58d4e707db10597fed5f6c9f1094905d"
+    },
+    "jpeg-stock-ox/baseline.json": {
+      "bytes": 2760,
+      "sha256": "0f7ba62990fbf654bd4b556634545463a6e35d52f075d2b34e5739d0904b0892"
+    },
+    "jpeg-stock-ox/receive.json": {
+      "bytes": 2165,
+      "sha256": "aaf8e9822d9ec562a06c8c2455cdec666cc13843efa6f862ae47d802176d85e3"
+    },
+    "jxl-original-receipt.json": {
+      "bytes": 923,
+      "sha256": "867f46ef6595a71a73173aa0d47829797f83f824dc6afbfdcd7667532353022b"
+    },
+    "jxl-ox-stock/baseline.json": {
+      "bytes": 2764,
+      "sha256": "60287972e56dfd2c08b6bbfe1d2092778754abd68f3d6b1febe9d0659d89ca01"
+    },
+    "jxl-ox-stock/receive.json": {
+      "bytes": 2172,
+      "sha256": "6ac5b8cc223dd929a6cb3ba968a3b2a41b54217d46fa6722a314b6185ac7aaec"
+    },
+    "jxl-stock-ox/baseline.json": {
+      "bytes": 2752,
+      "sha256": "bf3ce0a263fc524b17f8772fbf5bbf7f2d6aba5e2dc5d9abb3de5665c7e90834"
+    },
+    "jxl-stock-ox/receive.json": {
+      "bytes": 2160,
+      "sha256": "a1773abb6523a2c58ee70ee4219b306b7637554c13a989ee7edee0db6352443e"
+    },
+    "uncompressed-original-receipt.json": {
+      "bytes": 937,
+      "sha256": "7f8138645b325d8658e84a05fd02314a487eefe0cc2ea2c2410bd5eb07817c77"
+    },
+    "uncompressed-ox-stock/baseline.json": {
+      "bytes": 2836,
+      "sha256": "92ae63c69e1e2e368716ce8c50394bd2913be164395b9d83c14495439ccd9fdd"
+    },
+    "uncompressed-ox-stock/receive.json": {
+      "bytes": 2226,
+      "sha256": "422d77efc92fe2c22900f291865979b4876988b1c0881705ac08552914eb1562"
+    },
+    "uncompressed-stock-ox/baseline.json": {
+      "bytes": 2824,
+      "sha256": "2502748b45631dcd15f4960cadb9d4b18fb7ac144b5acf766858a833e5a8b112"
+    },
+    "uncompressed-stock-ox/receive.json": {
+      "bytes": 2214,
+      "sha256": "c91246d6246bb88a0647ca99c5d994e71b5dc7f95de329bfa548b19eff5b6b3b"
+    },
+    "uncompressed-stock-ox/rejected.json": {
+      "bytes": 2615,
+      "sha256": "ecb83940313c8d9d7c46a39121cca33216807aed6227c6c25544018073632464"
+    }
+  },
+  "limits": [
+    "Functional receiving using test-only contained C backend plus unchanged production ML; not production C timing",
+    "Real SDK validation acceptance on six edited received DNGs; no renderer/pixel-fidelity/preview inference",
+    "Original controls retain direct raw-digest-valid receipts; edited helper raw stdout is not independently recorded",
+    "One bad NewRawImageDigest update rejected; not every receiving path/camera corpus/layout or merge/native parallel host qualified",
+    "No SDK slot replay/new release; full M4-V/M5/M6 remain open"
+  ]
+}

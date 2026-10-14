@@ -1,0 +1,52 @@
+{
+  "schema": "unison-sdk-receive-v1-parent-terminal/1",
+  "utc": "2026-10-14T20:41:37.175989+00:00",
+  "admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ADMISSION-20261014.json",
+    "bytes": 2346,
+    "sha256": "4313662fd51f89b54e8fb322d984f76dbbe3869113022e693f1fb3d6bc491de0"
+  },
+  "workspace": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2",
+  "wrapper_pid": 7661,
+  "aggregate_pid": 7662,
+  "actual_terminal_tool": {
+    "session_id": 84567,
+    "chunk_id": "0b554c",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "stdout": "native phase closed: /private/tmp/unison-receive-pilot-native-prepared-20261014-v2\n",
+    "scope": "actual terminal write_stdin result, not psabsence or SUPERVISOR-RETURN inference"
+  },
+  "aggregate": {
+    "pid": 7662,
+    "seconds": 300,
+    "closed": true,
+    "scope": "finite contained pilot only",
+    "timed_out": false,
+    "reaped": true,
+    "returncode": 0,
+    "group_members_before_leader_reap": [
+      {
+        "pid": 7662,
+        "stat": "Z"
+      }
+    ],
+    "other_members_absent": true,
+    "wall_seconds": 31.661103293998167,
+    "child_user_seconds": 26.364766,
+    "child_system_seconds": 3.364144,
+    "within_wall_limit": true
+  },
+  "unresolved_marker_absent": true,
+  "subsequent_parent_aggregate_ps": {
+    "pids": [
+      7661,
+      7662
+    ],
+    "exit_code": 1,
+    "stdout": "",
+    "scope": "independent absence observation after actual terminal return; not the exit proof"
+  },
+  "slot_consumed": true,
+  "automatic_retry": false
+}

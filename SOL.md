@@ -2181,3 +2181,40 @@ plus conservative legacy hashing/orchestration headroom),10 calls/7inputs/16stat
 300s. Production-C timing, actual native receiving, broad corpus/area-task scaling
 and full M4-V/M5/M6 remain open. Photo Root retains preview/native ownership;
 consumed SDK v2 admission is not reused. No fresh native release is inferred.
+
+## Actual SDK receiving pilot passed and parent closed
+
+Fresh Root admission SHA4313662fd51f89b54e8fb322d984f76dbbe3869113022e693f1fb3d6bc491de0
+authorized the exact new receive command. Pins/absent start state/no competing
+SDK were checked immediately. Wrapper7661/tool84567 reached genuine terminal
+exit0; aggregate7662 closed/reaped/othersabsent/within300s at31.661s. Exactly10
+real SDK calls completed:3 direct original raw-digest-valid controls,6 mixed
+stock/Ox semantic receives over uncompressed/JPEG/JXL with real require-gates,
+and1 bad NewRawImageDigest update refused with destination intact. All output
+hashes/group/count/multiplicity checks passed; unresolved marker absent.
+
+[Sealed actual return](tests/qualification/sdk-receive-pilot-v1-actual-return-20261014.json),
+[parent terminal evidence](tests/qualification/sdk-receive-pilot-v1-parent-terminal-20261014.json)
+were queued to Root. Edited helper raw stdout is not separately retained; claims
+are real SDK precommit acceptance plus exact output, not independently captured
+raw-digest lines for every edited helper. This is contained test-C functional
+receiving/lifecycle, not production-C timing, full receive/camera corpus, native
+merge validation, rendering or full M4-V/M5/M6 completion. Slot fully consumed;
+no retry or additional native scope. Photo Root retains preview ownership.
+
+## Experimental area/memory SDK adapter linked, never executed
+
+The combined separately named v3 area/memory host now builds/links against actual
+SDK1.7.1:226 driver/SDK units plus fixture object,227 content-verified objects.
+Static Mach-O x86_64 inspection finds actual area/allocator symbols; output is
+9056672B SHA370a61af813f49bf88a96846efc55a4b57decb9f517a3563eb635e29ddb95795.
+Actual builder tool24141 exited0. Qualified v1 driver retains ca49a32b... pin.
+Neither new validator nor fixture writer was invoked; no runtime/thread/speed/
+coverage or production capability inferred. [Evidence](tests/sdk_memory/link-only-qualification.json).
+
+A dedicated build-only Make target now preserves the root Makefile's portability
+and refuses qualified/unowned/busy output directories. Three independent local
+refusal controls and static inspection pass. [Commands](tools/adobe-validator/README.md).
+This source-only build closed before the separately admitted receiving pilot.
+Actual capped-host/allocator qualification still needs a fresh Root slot; no
+reuse of the receiving or older SDK admissions. Full M4-V/M5/M6 stay open.
