@@ -4,6 +4,20 @@
 
 ## Live implementation handoff
 
+* Coordination rule: read Photo's mutable
+  [current-state pointer](PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json) first.
+  Its dated result pointers and specific qualification fields take precedence
+  over delayed messages about earlier attempts. The 2026-10-14 04:07:50 UTC
+  pointer confirms the post-restart highest pass and closed slot; Photo's
+  independent review `90a8ab70` and Root acceptance `76b49782` agree with our
+  sealed review below. Mixed historical fields do not establish current
+  desktop, process or window readiness. Keep highest/monitor qualification
+  separate; a 03:18 desktop observation is historical. Fresh Root admission
+  still governs every new native/storage slot. No repeated registration or
+  test follows from a delayed status message. The next gate remains the
+  original owner's closed-cache metadata/recovery recipe, with the existing
+  split-storage matrix separately admitted after that recipe is qualified.
+
 * Post-restart highest gate accepted (2026-10-14): original Photo owner ran
   control `10031592` in Classic PID 40020 with a fresh admitted nonce. Both
   LOAD/RELOAD explicitly selected and decoded **2272×1704**, level 6,
