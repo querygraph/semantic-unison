@@ -52,7 +52,7 @@ class CapturedStream:
                 "text": b"".join(self.chunks).decode("utf-8", "replace")}
 
 
-def run(command, environment, timeout, max_output=4 * 1048576):
+def run(command, environment, timeout, max_output=4 * 1048576, cleanup_grace=2):
     start = time.monotonic()
     child = OwnedGroup(command, env=environment, stdin=subprocess.DEVNULL,
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
@@ -67,7 +67,7 @@ def run(command, environment, timeout, max_output=4 * 1048576):
         fault = error
     finally:
         settled, usage = child.finish(cancel_reason="capture wait interrupted" if fault else
-                                      "native client deadline" if timed_out else None)
+                                      "native client deadline" if timed_out else None, grace=cleanup_grace)
         output = stdout.finish() if stdout else {"bytes": 0, "truncated": False, "text": ""}
         errors = stderr.finish() if stderr else {"bytes": 0, "truncated": False, "text": ""}
         if stdout is None:

@@ -109,12 +109,12 @@ def tags(path):
     return endian, result
 
 
-def receipt(driver, build_id, path, expected_pass):
+def receipt(driver, build_id, path, expected_pass, invoke=subprocess.run):
     pin = sha256(path)
     command = [str(driver), '--unison-dng-validation-v1', '--expected-sha256', pin,
                '--expected-size', str(path.stat().st_size), '--threads', '1', '--', str(path.resolve())]
     start = time.monotonic()
-    child = subprocess.run(command, capture_output=True, text=True, timeout=300)
+    child = invoke(command, capture_output=True, text=True, timeout=300)
     elapsed = time.monotonic() - start
     lines = child.stdout.splitlines()
     assert len(lines) == 10 and lines[0] == 'UNISON-DNG-VALIDATION 1' and lines[-1] == 'END', child.stderr
@@ -130,7 +130,7 @@ def receipt(driver, build_id, path, expected_pass):
                 qualification_wall_seconds=elapsed)
 
 
-def generate(build, output, width=6000, height=4000):
+def generate(build, output, width=6000, height=4000, invoke=subprocess.run):
     build, output = build.resolve(), output.resolve()
     output.mkdir(parents=True, exist_ok=True)
     manifest = json.loads((build / 'build-manifest.json').read_text())
@@ -139,24 +139,24 @@ def generate(build, output, width=6000, height=4000):
     assert manifest['qualification'].startswith('passed '), 'driver must already be qualified'
     source = output / 'seed.dng'
     specification = seed_dng(source, width, height)
-    source_control = receipt(driver, manifest['build_id'], source, True)
+    source_control = receipt(driver, manifest['build_id'], source, True, invoke)
     fixtures = []
     for codec, compression in [('uncompressed', 1), ('jpeg', 7), ('jxl', 52546)]:
         target = output / (codec + '.dng')
-        child = subprocess.run([str(writer), codec, str(source), str(target)],
+        child = invoke([str(writer), codec, str(source), str(target)],
                                capture_output=True, text=True, timeout=600)
         assert child.returncode == 0, (codec, child.stdout, child.stderr)
         endian, entries = tags(target)
         actual = next(value & 65535 for tag, kind, count, value in entries if tag == 259)
         assert actual == compression, (codec, actual)
-        positive = receipt(driver, manifest['build_id'], target, True)
+        positive = receipt(driver, manifest['build_id'], target, True, invoke)
         damaged = output / (codec + '-bad-digest.dng')
         damaged.write_bytes(target.read_bytes())
         offset = next(value for tag, kind, count, value in entries if tag in (50972, 51111) and kind == 1 and count == 16)
         with damaged.open('r+b') as changed:
             changed.seek(offset); byte = changed.read(1); changed.seek(offset)
             changed.write(bytes([byte[0] ^ 1]))
-        negative = receipt(driver, manifest['build_id'], damaged, False)
+        negative = receipt(driver, manifest['build_id'], damaged, False, invoke)
         damaged.unlink()
         fixtures.append(dict(codec=codec, filename=target.name, size_bytes=target.stat().st_size,
                              sha256=sha256(target), compression=actual, positive=positive, negative=negative))

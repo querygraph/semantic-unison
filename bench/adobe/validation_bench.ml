@@ -110,6 +110,13 @@ let () =
      resources.A.transactions <> 0 || resources.A.pending <> 0 ||
      resources.A.payload_bytes <> 0 || resources.A.descriptors <> 0 ||
      !peak_cpu > permits || !peak_children > permits then failwith "benchmark resources leaked";
+  (* Only emitted after helper reaping and resource settlement, including failures. *)
+  (match Sys.getenv_opt "UNISON_BENCH_SETTLEMENT" with
+   | None -> ()
+   | Some path ->
+       let channel = open_out_gen [Open_wronly; Open_creat; Open_excl] 0o600 path in
+       Printf.fprintf channel "{\"pid\":%d,\"final_children\":0,\"final_cpu_permits\":0,\"settled\":true}\n" (Unix.getpid ());
+       close_out channel);
   let results = match !first_error,outcome with
     | Some error,_ -> raise error | None,Error error -> raise error
     | None,Ok results -> results in

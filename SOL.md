@@ -2028,3 +2028,7 @@ Make inputs match the frozen sources. [Current scope](doc/checked-semantic-worke
 proof, complete resource ceilings, performance speedup, GUI/platform or full
 M6/M4-V/M5 completion is claimed. No Adobe/Photo invocation; preview ownership
 remains with Photo Root.
+
+## SDK pilot aggregate lifecycle checkpoint
+
+Photo Root review accepted as DEFER: fresh generation plus pilot requires13 SDK calls (seed1/writers3/positive3/negative3/pilot3). Original request stays withdrawn. Native phase call ownership and remaining-budget propagation implemented, retained unresolved marker on ambiguous helper closure, actual core emits exclusive settlement proof only after all helpers/resources drain. Stock/Ox build-only and five synthetic helper cases each pass; four Python original process controls pass. No SDK invoked. Whole Python wrapper/fixture/hash lifetime and abrupt-wrapper failure remain unqualified: no successor native-admission request yet. [Checkpoint](tests/qualification/sdk-pilot-aggregate-checkpoint-20261014.json).

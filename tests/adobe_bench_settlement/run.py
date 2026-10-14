@@ -53,7 +53,9 @@ for mode, signalled, expected_success in [('pass', False, True), ('reject-peer',
     command = [str(a.target.resolve()), str(candidate), digest(candidate), str(candidate.stat().st_size),
                str(helper), digest(helper), 'synthetic-bench-v1', '2', '2', '0.3' if mode=='hang' and not signalled else '10']
     start = time.monotonic()
-    child = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    settlement = work/(name+".settled.json")
+    environment = dict(os.environ, UNISON_BENCH_SETTLEMENT=str(settlement))
+    child = subprocess.Popen(command, env=environment, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     if signalled:
         deadline = time.monotonic()+5
         while (not helper.with_suffix('.calls').exists() or
@@ -66,6 +68,7 @@ for mode, signalled, expected_success in [('pass', False, True), ('reject-peer',
     (work/(name+'.log')).write_bytes(stdout+b'\n'+stderr)
     assert (child.returncode==0)==expected_success, stderr.decode(errors='replace')
     elapsed = time.monotonic()-start
+    assert json.loads(settlement.read_text()) == {"pid": child.pid, "final_children": 0, "final_cpu_permits": 0, "settled": True}
     assert elapsed<6, ('helper backstop used instead of cancellation', elapsed)
     pids = [int(value) for value in helper.with_suffix('.calls').read_text().splitlines()]
     assert len(pids)==2

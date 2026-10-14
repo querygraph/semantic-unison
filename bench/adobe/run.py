@@ -14,6 +14,7 @@ import tempfile
 import time
 
 from fixtures import generate, sha256
+from deadline import NativeDeadline
 
 ROOT = Path(__file__).resolve().parents[2]
 SOURCES = [
@@ -125,7 +126,7 @@ def main():
         args.output.write_text(json.dumps(result, indent=2) + '\n')
 
     import contextlib
-    retain = args.keep_work or args.build_only
+    retain = True  # Keep unresolved native ownership evidence on every failure.
     temporary_workspace = tempfile.mkdtemp(prefix='unison-adobe-bench-') if retain else None
     with (contextlib.nullcontext(temporary_workspace) if retain else
           tempfile.TemporaryDirectory(prefix='unison-adobe-bench-')) as temporary:
@@ -185,11 +186,12 @@ def main():
                 time.sleep(min(0.2, max(0., deadline-time.monotonic())))
             result['coordination']['passed'] = True
             save()
+        native_owner = NativeDeadline(work, 300, max_calls=13 if args.pilot else None)
         fixtures_dir = args.fixtures_dir.resolve() if args.fixtures_dir else work / 'fixtures'
         if (fixtures_dir / 'fixtures.json').is_file():
             fixtures = json.loads((fixtures_dir / 'fixtures.json').read_text())
         else:
-            fixtures = generate(sdk, fixtures_dir)
+            fixtures = generate(sdk, fixtures_dir, invoke=native_owner.invoke)
         for fixture in fixtures['fixtures']:
             path = fixtures_dir / fixture['filename']
             assert path.stat().st_size == fixture['size_bytes'] and sha256(path) == fixture['sha256']
@@ -205,9 +207,11 @@ def main():
             command = [str(work / 'validation-bench'), str(fixtures_dir / fixture['filename']), fixture['sha256'],
                        str(fixture['size_bytes']), str(driver), manifest['executable_sha256'],
                        manifest['build_id'], str(worker), str(jobs), str(args.batch_deadline)]
-            output = subprocess.check_output(command, cwd=work, env=environment, text=True,
-                                             timeout=args.batch_deadline+30)
-            sample = json.loads(output)
+            settlement = work / ('settlement-' + str(len(native_owner.calls)) + '.json')
+            child = native_owner.invoke(command, env=environment, timeout=args.batch_deadline,
+                                        settlement=settlement)
+            child.check_returncode()
+            sample = json.loads(child.stdout)
             assert sample['correct_receipts'] == jobs and sample['final_cpu_permits'] == sample['final_children'] == 0
             sample.update(codec=fixture['codec'], cpu_permits=worker, jobs=jobs, phase=phase, repetition=repetition)
             sample['total_cpu_seconds'] = sample['parent_cpu_seconds'] + sample['child_cpu_seconds']
@@ -244,6 +248,7 @@ def main():
                 summary['all_receipts_correct'] = all(sample['correct_receipts'] == args.jobs for sample in samples)
                 result['summary'].append(summary)
         assert sha256(driver) == manifest['executable_sha256']
+        result['native_lifecycle'] = native_owner.close()
         result['complete'] = True; save()
 
 
