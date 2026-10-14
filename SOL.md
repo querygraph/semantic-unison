@@ -2105,3 +2105,19 @@ no-op inode/helper counts pass. Retained original fixtures were SDK-positive
 in the consumed pilot; modified outputs are NOT SDK-qualified. Zero new SDK,
 Adobe, Photo or Lightroom calls; no reused native admission. Camera corpus,
 actual SDK receive/decode, resource ceilings and full M4-V/M5/M6 stay open.
+
+## Compact-base merges qualified on retained generated codec containers
+
+Current stock/Ox Make CLIs each pass15 actual two-replica cases across retained
+uncompressed/losslessJPEG/JPEGXL originals, adding Rating/Label only within
+existing fixed XMP padding on disposable copies. Cache-only disjoint merge,
+competing scalar/protected-byte/missing-base refusal, partial second-receiver
+rejection with fresh retry and successful no-ops all pass. Every recorded base
+uses /1; original fixture identities/hashes remain unchanged, and neither
+endpoint has a full backup directory. [Evidence](tests/sdk_container_receive/merge-qualification.json).
+
+This extends M5 beyond small hand-built TIFF fixtures to SDK-produced container
+layouts and real XMP packet wrappers. Base/merged edits themselves use MOCK
+validation and are not SDK-qualified. Zero new SDK/Adobe/Photo/Lightroom calls,
+no admission replay. Growth/general structures, actual SDK receive corpus, full
+resource/performance qualification and complete M4-V/M5/M6 remain open.

@@ -30,3 +30,26 @@ The original fixture SDK receipts do **not** validate the modified outputs. Thes
 checks do not prove camera-corpus coverage, current Adobe acceptance, raw decode,
 physical shared-block counts, power-loss durability or performance improvement.
 A new coordinated SDK slot is needed for native output validation.
+
+Compact common-base merging has a separate command with the same inputs:
+
+```sh
+python3 tests/sdk_container_receive/merge.py \
+  --build-receipt /absolute/qualified-make-build.json \
+  --sdk-result /absolute/completed-sdk-pilot-result.json \
+  --fixtures /absolute/pilot-workspace/fixtures \
+  --report /private/tmp/sdk-container-merge.json
+```
+
+It inserts Rating/Label attributes into disposable copies, consuming existing
+XMP padding and preserving every byte outside the fixed packet. For each codec,
+five cases check cache-only disjoint convergence, competing-scalar refusal,
+protected-byte refusal, missing common-base refusal, and a second-receiver
+rejection followed by fresh convergence. No `backupcurrent` is configured.
+Cache objects must use profile `/1` and remain below 16 KiB for these approximately
+38–48 MB containers. Successful no-ops must invoke neither validator again.
+
+These changed bases and outputs are **not** SDK-validated; original-container
+SDK positives do not extend to them. Validators remain mocks, and originals
+retain complete file identity and SHA-256. This checks current merge/cache
+compatibility, not general packet growth or Adobe rendering/current-edit reuse.
