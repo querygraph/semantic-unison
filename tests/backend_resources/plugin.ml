@@ -32,10 +32,10 @@ module Validator = struct
         fail (Util.Transient "synthetic validator initial snapshot differs")
       else
         let usage = SemanticRuntime.admission_usage () in
-        let line = Printf.sprintf "%s\t%s\t%Ld\t%s\t%d\t%d\t%d\t%d\t%d\n" context.candidate
+        let line = Printf.sprintf "%s\t%s\t%Ld\t%s\t%d\t%d\t%d\t%d\t%d\t%d\n" context.candidate
           context.expected.sha256 context.expected.size selected_mode
           (BackendResources.bytes context.resources) (BackendResources.cpu_lanes context.resources)
-          (BackendResources.descriptors context.resources) usage.payload_bytes usage.descriptors in
+          (BackendResources.descriptors context.resources) usage.payload_bytes usage.descriptors usage.transactions in
         let output = open_out_gen [Open_wronly;Open_append;Open_creat;Open_binary] 0o600 path in
         (try output_string output line; close_out output
          with error -> close_out_noerr output; raise error);

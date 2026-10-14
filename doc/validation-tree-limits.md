@@ -6,6 +6,7 @@ validation manifest:
 ```text
 validationtreeentries = 100000
 validationtreepathbytes = 16777216
+validationtreememory = 64
 ```
 
 Each defaults to zero, preserving unlimited legacy enumeration. Negative values
@@ -24,12 +25,39 @@ if the initial snapshot fails. If a helper adds a hidden entry that exceeds the
 limit in the final snapshot, ordinary failure handling rejects publication and
 discards private staging. Live destinations and source inputs remain untouched.
 
-These are structural limits, not heap/RSS limits or complete directory memory
-admission. Properties, symlink target strings, allocator overhead, source-side
-archives and SDK heaps are not path bytes. The manifest still occupies memory
-until its validators settle; two manifests may coexist during final comparison.
-Global manifest resource reservations and pre-creation directory admission
-remain separate work. Existing shared CPU/I/O/helper admission remains in force.
+`validationtreememory` is an opt-in retained-manifest estimate in MiB; zero
+preserves legacy unadmitted manifest accounting. A positive value reserves two
+snapshots plus a fixed number of file-validation workspaces before enumeration.
+Unbound directories use up to the shared CPU budget; regular files and existing
+bound publication envelopes use one workspace. Each file workspace includes
+the largest selected sequential backend declaration. A local admission gate
+partitions the held credits, so child validation never queues for another
+global lease. Shared weighted CPU and filesystem execution admission still
+apply. Every active child settles before the parent releases, including on
+rejection and cancellation.
+
+The estimate charges 1,024 bytes per discovered entry, eight times relative path
+bytes, and eight times serialized property/symlink target bytes. Charges reject
+before retaining an over-budget entry. Each before/after snapshot is capped
+separately, and both are reserved because they may coexist during comparison.
+Regular-file publication adds both estimates to its existing envelope, even
+when validators are currently off. The first observation pins the memory
+declaration; changing it requires process restart. This prevents later policy
+enablement or budget growth from consuming retained metadata capacity.
+
+An unbound directory reserves `2 * manifest + N * (1 MiB + backend bytes)` and
+`15 + N * (9 + backend descriptors)`, with N up to the configured CPU budget.
+The parent is one global transaction; the child gate partitions its N workspaces.
+If this complete plan cannot fit, admission rejects before enumeration. For
+18 workspaces and no added backend declaration, a 64 MiB manifest budget needs
+146 MiB and 177 descriptor credits. Source service headroom remains protected.
+
+These remain estimates, not allocator-enforced heap/RSS limits. Initial property
+reading/serialization, cache/allocator overhead, source-side archives and SDK
+heaps are outside the estimate guarantee. Entry/path caps are independent;
+property and symlink bytes are not path bytes. Directory staging was already
+created before unbound validation admission; complete pre-creation directory
+admission remains separate work.
 These limit settings and implementation code are not accepted from a peer; the receiving
 endpoint's local preferences are authoritative.
 
@@ -40,3 +68,9 @@ the per-read cancellation check and fails the same designated oracle. The
 probe does not establish interruptible filesystem syscalls or a wall-clock
 cancellation deadline. All fixtures are private synthetic data; no Photo,
 Adobe runtime or Lightroom operation is involved.
+
+The [memory-admission successor](../tests/validation_tree_limits/memory-qualification.json)
+adds actual single-global-transaction partition tests, two concurrent synthetic
+helpers, oversized reservations and retained estimates, declaration pinning,
+and same-process success/rejection/cancellation/retry with settled ledgers.
+The original structural receipt remains historical.

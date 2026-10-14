@@ -176,7 +176,10 @@ let publication_cost max_payload =
     raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
   let payload_bytes,descriptors = BackendResources.add_cost plan
     ~bytes:(max 1048576 (8 * max_payload + 262144)) ~descriptors:24 in
-  {SemanticAdmission.payload_bytes;descriptors}
+  let manifests = 2 * ValidationTreePolicy.memory_bytes () in
+  if payload_bytes > max_int - manifests then
+    raise (Util.Fatal "Validation publication memory accounting overflow");
+  {SemanticAdmission.payload_bytes=payload_bytes+manifests;descriptors}
 let make_publication_reservation () =
   let _,_,_,_,_,max_payload,_,_ = settings () in
   SemanticAdmission.make_reservation (resource_gate ()) ~role:SemanticAdmission.Consumer

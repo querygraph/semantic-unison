@@ -8,9 +8,13 @@ loopback receiving publication. No Adobe or Photo work is invoked.
 The fitting backend declares 4 MiB and two descriptors. With no semantic format
 enabled, validation observes the retained 5 MiB/26-descriptor publication
 envelope, proving no second debit. Over-budget memory and CPU declarations
-reject before staging or callback execution. Fifteen actual-object controls
+reject before staging or callback execution. Sixteen actual-object controls
 cover declaration validation, maxima, arithmetic overflow, immutable selection
 and oversized memory/descriptor borrowing without dispatch or additional debit.
+Manifest budget growth also requires restart. The directory case sets the
+global gate to one transaction and observes a single 12 MiB/37-descriptor parent
+for two file workspaces, each with a 4 MiB backend declaration, and two 1 MiB
+manifests. All six files complete without a second global debit or nested wait.
 Resource-bearing participation is pinned; legacy resource-free participation
 can still change. `--activation-negative` also compiles the exact previous
 CandidateValidator implementation against the current prefix graph and proves
@@ -23,3 +27,5 @@ records current source/binaries, the designated previous-participant failure,
 both build systems and receiving regressions. These tests qualify accounting admission, not native SDK
 memory enforcement, whole-process RSS or runtime thread compliance. Lightroom
 preview identity and storage publishing remain separately owned and qualified.
+The [directory-memory successor](../validation_tree_limits/memory-qualification.json)
+pins this integration; earlier receipts retain their historical source scope.

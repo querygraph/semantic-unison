@@ -62,7 +62,20 @@ try:
    assert 'resource budget' in log if memory==32 else 'CPU declaration' in log
    cases.append(dict(name=name,status='passed',rejectedBeforeStage=True))
   assert not s.calls('client') and not s.calls('server');print('PASS',name,flush=True)
- for f in ['backendResources.ml','backendResources.mli','candidateValidator.ml','candidateValidator.mli','candidateValidators.ml','candidateValidators.mli','candidateValidation.ml','semanticRuntime.ml','semanticRuntime.mli']:
+ s=v.Session(w/'manifest-partition',str(binary));logpath=s.root/'server.tsv'
+ cfg=dict(s.config('server'),testvalidatorlog=str(logpath),testbackendmemory='4',testbackendlanes='1',validationtreememory='1')
+ (s.server_state/'endpoint.prf').write_text(''.join(f'{k} = {value}\n' for k,value in cfg.items()))
+ album=s.left/'album';album.mkdir();expected={}
+ for n in range(6):
+  data=b'TOY0 directory parent/child admission fixture '+bytes([n]);name=f'item-{n}.toy';(album/name).write_bytes(data);expected[name]=data
+ s.sync(policy='off',options=('-validationtreememory','1','-semanticmaxinflight','1','-semanticdng=false','-semanticpayloadbudget','32','-semanticdescriptorbudget','64'))
+ rows=[line.split('\t') for line in logpath.read_text().splitlines()];assert len(rows)==6
+ for row in rows:assert list(map(int,row[7:10]))==[12*1048576,37,1],row
+ assert {p.name:p.read_bytes() for p in (s.right/'album').iterdir()}==expected
+ assert {p.name:p.read_bytes() for p in album.iterdir()}==expected
+ assert not s.calls('client') and not s.calls('server')
+ cases.append(dict(name='manifest-partition',status='passed',files=6,globalTransactions=1,envelopeBytes=12*1048576,envelopeDescriptors=37,maximumGlobalTransactions=1,childDoubleDebit=False));print('PASS manifest-partition',flush=True)
+ for f in ['backendResources.ml','backendResources.mli','candidateValidator.ml','candidateValidator.mli','candidateValidators.ml','candidateValidators.mli','candidateValidation.ml','semanticRuntime.ml','semanticRuntime.mli','validationTreeBudget.ml','validationTreeBudget.mli','validationTreePolicy.ml','validationTreePolicy.mli']:
   assert H(src/f)==H(r/'src'/f),('source drift',f)
  j.update(status='passed',binarySha256=H(binary),sourcePins={f:H(r/f) for f in ['tests/backend_resources/plugin.ml','tests/backend_resources/controls.ml','tests/backend_resources/activation_negative.ml','tests/backend_resources/run.py','tests/validation_paths/run.py']},compiledSourcePins={str(x):H(src/x) for x in mods if (src/x).is_file()},scope='Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.')
 finally:

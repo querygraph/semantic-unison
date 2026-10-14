@@ -12,6 +12,12 @@ and a cancellation checkpoint before each native read. They count hidden and
 pending children before name buffering and reject publication on limit failure.
 [Contract/evidence](validation-tree-limits.md) keep these structural controls
 distinct from still-open global manifest memory and directory-creation admission.
+The subsequent opt-in `validationtreememory` now reserves both retained-manifest
+estimates and fixed file workspaces before enumeration. Children partition the
+held envelope without acquiring another global lease. [Successor evidence](../tests/validation_tree_limits/memory-qualification.json)
+proves parallel helpers with one transaction and same-process settled ledgers
+after success/rejection/cancellation/retry. Initial property/native allocation,
+whole-process RSS and pre-creation directory staging remain outside this claim.
 
 The current resource-admission successor pins resource-bearing backend
 participation as well as declarations, preventing late enablement from borrowing

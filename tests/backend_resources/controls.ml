@@ -86,4 +86,12 @@ let () =
     SemanticAdmission.retire r;
     let u = SemanticAdmission.usage gate in
     assert (u.payload_bytes=0 && u.descriptors=0 && u.transactions=0));
+  check "manifest declaration requires restart on growth" (fun () ->
+    Prefs.loadStrings ["validationtreememory = 1"];
+    assert (ValidationTreePolicy.memory_bytes ()=1048576);
+    Prefs.loadStrings ["validationtreememory = 2"];
+    (try ignore (ValidationTreePolicy.memory_bytes ()); failwith "accepted manifest growth"
+     with Util.Fatal _ -> ());
+    Prefs.loadStrings ["validationtreememory = 1"];
+    assert (ValidationTreePolicy.memory_bytes ()=1048576));
   Printf.printf "PASSED %d resource controls\n%!" !passed

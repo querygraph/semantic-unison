@@ -56,7 +56,11 @@ registration, not runtime loading of peer-supplied plugins.
 
 The regular-file publication path reserves before staging. Existing staged
 directory paths admit validation work, but this does not establish that their
-entire tree was reserved before creation or bound their manifests. CPU
+entire tree was reserved before creation. With positive `validationtreememory`,
+both retained-manifest estimates and parallel file workspaces are reserved
+before enumeration; a local gate partitions held credits rather than nesting
+global acquisition. Initial property reading/serialization is not allocator-
+enforced. See the [directory contract](validation-tree-limits.md). CPU
 declarations do not force an arbitrary library to honor nested thread limits;
 the adapter must enforce and qualify that behavior using the shared supervisor.
 Memory estimates, covered allocation quotas and OS process limits remain
@@ -111,5 +115,5 @@ pre-staging rejection, immutable declarations and overflow/borrow controls on
 stock and OxCaml. The [participation successor](../tests/backend_resources/participation-qualification.json)
 adds pinned activation and a genuine previous-implementation negative control;
 the original receipt remains historical. Actual SDK memory/codec parity, whole-process memory,
-complete directory admission and full M4-V/M6 remain open. Photo Root continues owning preview generators, Lightroom
+complete pre-creation directory admission and full M4-V/M6 remain open. Photo Root continues owning preview generators, Lightroom
 oracles and publisher recovery; this work starts no competing native operation.

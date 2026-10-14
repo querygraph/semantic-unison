@@ -25,4 +25,19 @@ let () =
   let paths = ValidationTreeBudget.create ~max_entries:0 ~max_path_bytes:9 in
   rejected (fun () -> ValidationTreeBudget.reserve paths ~prefix_bytes:8 ~name_bytes:2);
   check (ValidationTreeBudget.usage paths=(0,0));
+  let memory = ValidationTreeBudget.create_with_memory ~max_memory_bytes:1100
+    ~max_entries:0 ~max_path_bytes:0 in
+  ValidationTreeBudget.reserve memory ~prefix_bytes:1 ~name_bytes:1;
+  check (ValidationTreeBudget.estimated_bytes memory=1040);
+  ValidationTreeBudget.charge_metadata memory 7;
+  check (ValidationTreeBudget.estimated_bytes memory=1096);
+  rejected (fun () -> ValidationTreeBudget.charge_metadata memory 1);
+  check (ValidationTreeBudget.estimated_bytes memory=1096);
+  rejected (fun () -> ValidationTreeBudget.reserve memory ~prefix_bytes:0 ~name_bytes:0);
+  check (ValidationTreeBudget.usage memory=(1,2));
+  rejected (fun () -> ValidationTreeBudget.charge_metadata memory max_int);
+  check (ValidationTreeBudget.estimated_bytes memory=1096);
+  (try ignore (ValidationTreeBudget.create_with_memory ~max_memory_bytes:(-1)
+      ~max_entries:0 ~max_path_bytes:0); failwith "accepted negative memory"
+   with Invalid_argument _ -> incr checks);
   Printf.printf "PASS validation tree arithmetic/boundaries: %d checks\n" !checks

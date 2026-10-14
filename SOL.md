@@ -4,6 +4,24 @@
 
 ## Live implementation handoff
 
+* Estimated directory memory admission (2026-10-14): opt-in endpoint-local
+  `validationtreememory` reserves two retained-manifest estimates and parallel
+  per-file workspaces before enumeration. A local gate partitions held credits;
+  children never acquire another global lease. Regular publication includes the
+  two estimates even if validation is off, and budget changes require restart.
+  Scans cap the retained estimate: 1,024 bytes per discovered entry plus eight
+  times path/serialized property/symlink bytes. Stock/Ox pass 14 tree-boundary
+  checks, 16 resource/declaration controls, ten actual tree receiving cases,
+  one-parent compiled-backend accounting, two concurrent synthetic helpers,
+  and same-process success/rejection/cancellation/retry with zero residual
+  ledgers. Make/Dune+selftests and all 21 receiving regressions pass per compiler.
+  [Contract](doc/validation-tree-limits.md),
+  [successor pins](tests/validation_tree_limits/memory-qualification.json).
+  Estimates do not enforce transient property/native/SDK allocation or RSS;
+  directory pre-creation admission and actual experimental SDK runtime remain
+  open. Zero preserves default behavior. No Adobe/Photo invocation or full
+  M4-V/M6 completion is claimed.
+
 * Receiving directory manifest controls (2026-10-14): opt-in endpoint-local
   `validationtreeentries` and `validationtreepathbytes` now cap discovered
   entries and cumulative relative path bytes before name buffering/Path
