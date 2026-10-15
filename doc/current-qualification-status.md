@@ -62,6 +62,21 @@ not parallel/OxCaml512MiB, full six-part, single2GiB-file or physical-I/O proof.
 [Raw data](../bench/sync/results/warm-512MiB-4files-part0-20261015.json) retain
 all receipts. Subsequent parts are unallocated and must retain matched provenance.
 
+## Completed warm512 stock worker6 partition
+
+The [part1 sealed return](../bench/sync/results/warm512-frozen-part1-actual-return-20261015.json)
+and [raw rows](../bench/sync/results/warm-512MiB-4files-part1-20261015.json)
+record actual owner89135/96b778/exit0/no session,18rows/54CLI and aggregate69503
+closed/reaped/others absent in2059.198s. Independent per-CLI/client/server/supervisor
+audit passes; zero SDK helpers expected, no unresolved markers. Exact source and
+runner pins stayed matched to part0. Median ordinary/clone/semantic update times
+are37.027/36.344/34.209s (five measured repetitions, stockworker6).
+Semantic elapsed time is about7.6% below ordinary in this warm generated test.
+Four remaining partitions, Ox512 and broader performance remain unqualified.
+The mandatory part0 overlap addendum remains attached; no clean-cohort claim,
+sample replacement or successor execution follows. Actual closure sent to Photo
+Root for independent resource adoption;18credits released on the Unison side.
+
 ## Boundaries that remain explicit
 
 The [bounded lifecycle controls](../bench/sync/results/bounded-lifecycle-qualification-20261015.json)

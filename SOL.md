@@ -10,9 +10,14 @@ run. [Addendum](bench/sync/results/warm512-part0-timing-overlap-addendum-2026101
 flags measured1 semantic definitely and measured1 receiver-clone tail possibly.
 All original samples/return hashes and medians remain unchanged; no rerun.
 
-Latest runtime: warm512 part0 PASSED/CLOSED, owner74730/c65a5b/0,18rows/54sync
-invocations, no unresolved markers; all18credits released. This is stock worker1
-only, not a complete512MiB stock/Ox/parallel matrix. See the live entry below.
+Latest runtime: [frozen warm512 part1](bench/sync/results/warm512-frozen-part1-actual-return-20261015.json)
+PASSED/CLOSED, actual owner89135/96b778/0,18rows/54sync invocations, aggregate69503
+reaped/others absent in2059.198s; no unresolved markers. All18credits released on
+the Unison side; sealed actual closure queued to Photo Root. Exact detached
+a6f0b695 source and all14execution/21runner pins remained unchanged. Stockworker6
+ordinary/clone/semantic medians37.027/36.344/34.209s. This completes parts0 and1,
+not the full six-part512MiB stock/Ox matrix. Part0's timing addendum remains
+mandatory; do not claim a clean full cohort. No successor allocated or started.
 
 Current stock/Ox full Make+selftests,41 helper groups per compiler and five
 receiving diagnostic cases per compiler pass. Generic APFS/SDE/DNG/optional
