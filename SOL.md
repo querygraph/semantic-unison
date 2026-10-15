@@ -2733,3 +2733,17 @@ Root queued actual closure01a13ce7-0119-7552-bf81-596dd66d7654; all compiler/cor
 credits released. No SDK/Photo invocation, fuzzing or completed-slot replay.
 This removes one explicit buffer allocation, not every potential runtime or
 closure allocation and not physical-OOM/failed-domain recovery qualification.
+
+### Fresh merged-output SDK request after prior unstarted expiry
+
+Confirmed Root's sealed v1 EXPIRED_UNSTARTED/zero SDK execution and continued
+absence of its workspace. Read-only revalidation passes all three preparation/
+executor evidence pins, all six executor source pins, the qualified single-thread
+tool/manifest and three frozen merged candidate sizes/hashes/canonical commands.
+Prepared [successor request v2](tests/qualification/sdk-merged-output-request-v2-20261014.json)
+with a new unique workspace and separate v2 admission path. Same finite3calls/
+3inputs/3states/1credit/300saggregate, no generation/writer/Photo work. Frozen
+outputs retain historical source scope; no claim of current receiving-path or
+pixel/render/resource/performance qualification. Prior admission cannot launch
+this successor. Fresh Root review/admission is required; none exists or has been
+inferred, no native execution performed. All compiler/core handles remain closed.
