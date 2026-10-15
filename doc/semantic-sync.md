@@ -111,6 +111,14 @@ write even though the payload includes them. Full candidate verification still
 follows. These counters do not measure physical APFS writes, durability or
 elapsed-time savings.
 
+`-debug validation-process` records settled receiving-helper results on each
+endpoint: historical child PID, wait status/outcome, candidate hash/size and up
+to 4 KiB per stdout/stderr stream in hex, with explicit clipping flags. This is
+opt-in and applies to trusted validation companions generally. A child can exit
+zero while reporting findings that reject the file; these diagnostics do not
+prove validator acceptance, publication or surviving process/group ownership.
+See [controls and scope](../tests/validation_process/README.md).
+
 Production admission also limits concurrent transactions, estimated retained
 payload buffers and descriptors. See [worker limits](semantic-workers.md) for
 `semanticmaxinflight`, `semanticpayloadbudget` and `semanticdescriptorbudget`.

@@ -2,6 +2,27 @@ open Lwt
 let reserve_entry budget ~prefix_bytes ~name_bytes =
   try ValidationTreeBudget.reserve budget ~prefix_bytes ~name_bytes
   with ValidationTreeBudget.Exceeded reason -> raise (Util.Transient reason)
+(* Owner-only diagnostics after supervised execution has settled. These records
+   describe a helper, never validator acceptance or publication authority. *)
+let trace_process (expected:CandidateValidator.snapshot) (process:HelperSupervisor.result) =
+  Trace.debug "validation-process" (fun () ->
+    let prefix text = String.sub text 0 (min 4096 (String.length text)) in
+    let status = match process.status with
+      | None -> "none"
+      | Some (Unix.WEXITED n) -> "exit:" ^ string_of_int n
+      | Some (Unix.WSIGNALED n) -> "signal:" ^ string_of_int n
+      | Some (Unix.WSTOPPED n) -> "stopped:" ^ string_of_int n in
+    let outcome = match process.outcome with
+      | HelperSupervisor.Completed -> "completed"
+      | HelperSupervisor.Cancelled -> "cancelled"
+      | HelperSupervisor.Timed_out -> "timed-out"
+      | HelperSupervisor.Output_limit -> "output-limit"
+      | HelperSupervisor.Failed _ -> "failed" in
+    let pid = match process.child_pid with None -> "none" | Some pid -> string_of_int pid in
+    Util.msg "Helper result v0 pid=%s status=%s outcome=%s candidate-sha256=%s candidate-bytes=%Ld capture-truncated=%b stdout-truncated=%b stderr-truncated=%b stdout-hex=%s stderr-hex=%s\n"
+      pid status outcome expected.sha256 expected.size process.output_truncated
+      (String.length process.stdout > 4096) (String.length process.stderr > 4096)
+      (SemanticHash.hex (prefix process.stdout)) (SemanticHash.hex (prefix process.stderr)))
 let enabled () = match CandidateValidators.selected () with [] -> false | _ -> true
 let with_descriptor path operation =
   let owned = ref true in
@@ -129,11 +150,15 @@ let validate_file ?partition ~reservation ~validators ~destination path =
           if List.length selected <> List.length formats then
             fail (Util.Transient "Unexpected validation recognition selection")
           else
+          let expected = snapshot_of_fingerprint fingerprint in
+          let execute run = BorrowedWork.bind
+            (fun () -> SemanticRuntime.with_io_file cancellation candidate run)
+            (fun process -> trace_process expected process; return process) in
           let context = {
             CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;
-            expected=snapshot_of_fingerprint fingerprint;resources=requirements;
+            expected;resources=requirements;
             inspect=snapshot pool cancellation;
-            execute=SemanticRuntime.with_io_file cancellation candidate;
+            execute;
           } in
           let rec invoke = function
             | [] -> Abort.checkAll (); return ()

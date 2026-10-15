@@ -2863,3 +2863,44 @@ Root closure queue01a13cf6-f032-79e1-9f0b-0ec57ed7e185 releases all4credits.
 No SDK/Photo/renderer invocation. This is a tested diagnostic prerequisite,
 not implementation/qualification of the complete helper-group ledger or live
 SDK receiving gate. Both remain next; no fresh native release has been inferred.
+
+### Generic receiving helper diagnostic — source prepared during getter hold
+
+While Root's read-only Classic getter reservation remains unreleased here,
+prepared owner-side -debug validation-process in CandidateValidation's generic
+context.execute wrapper, after supervised/I/O work settles and before validator
+policy interpretation. It reports historical helper PID/status/outcome, candidate
+SHA/size and bounded4KiB-per-stream hex stdout/stderr with explicit diagnostic
+clipping and original capture-truncation flags. Default debug-off path does not
+format/copy streams; no wire/archive/validator policy or worker logging change.
+This applies to trusted companion backends, not just Adobe.
+
+Prepared five finite fake-validator CLI controls in tests/validation_process:
+default off, actual process/candidate/raw receipt binding, no-op silence,
+exit-zero finding still rejects publication, arbitrary byte stderr clipping.
+These new source and test changes are UNBUILT/UNRUN/uncommitted pending Root
+release. Previous build/SDK qualifications do not cover this current source.
+No compiler/core/SDK dispatch occurred; no native slot inferred or replayed.
+Diagnostic lines are NOT surviving PID ownership, group-absence or validator/
+publication authority; complete helper ledger remains required. Full goal active.
+
+### Receiving diagnostic source qualified after getter release
+
+After Root getter68209/aa5991/0 closed and all18released, serial stock/Ox Make+
+selftests pass, and both current binaries pass five actual fake-validator CLI
+controls. Default diagnostics are off, reported PID matches the fake child's
+independent getpid record, captured protocol binds the candidate, no-op emits
+nothing, helper exit0/errors1 still rejects and preserves the old target, and
+arbitrary5KiBstderr clips exactly to4KiB in hex while valid receipt acceptance
+is unchanged. [Current qualification](tests/validation_process/qualification.json).
+Initial fixture-only failure correctly rejected an edited fake executable under
+its stale private server pin; refreshed that fixture profile before both final
+passing runs. No production change was needed for the fixture correction.
+
+Actual stockbuild40120/724471, Ox40857/7cafb3, stockCLI49819/8a5d8e, Ox59407/
+f00fcf all exit0/no sessions; initial73327/96de74 exit1 also genuinely terminal.
+Root closure queue01a13cfc-b333-76f2-86e8-50ef52ecb50d releases all4credits.
+This supersedes the UNBUILT/UNRUN checkpoint above for these sources only.
+No SDK/Photo call, fuzzing or old admission reuse. Generic diagnostics remain
+observational; the separate helper-group lifetime ledger and actual SDK-gated
+production merge receiving test remain unqualified. Full goal active.
