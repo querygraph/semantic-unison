@@ -4,6 +4,15 @@
 
 ## Current checkpoint — 2026-10-15
 
+Prepared remaining [unrun frozen warm512 part5 request](bench/sync/results/warm512-frozen-part5-prepared-request-20261015.json):
+OxCamlworker8/three modes/18rows54CLI, proposed18quietcredits/7200s. Fresh clean
+a6f0b695/14execution21runner/evidence pins checked; workspace/allocation/output
+absent. Queued for LATER Root scheduling after actual Photo recovery closure;
+**unallocated/unstarted**, no release inferred from source preparation. Passed
+part4 acceptance pinned; failedpart3 and brew/review/part0e311d5f6 caveats stay
+preserved. Frozen200ms remains unchanged, no policy substitution/retry/fullmatrix
+claim. Photo retains its own current recovery window; no Unison job or credits.
+
 Latest [frozen Oxworker6 part4](bench/sync/results/warm512-frozen-part4-actual-return-20261015.json)
 PASSED/CLOSED: owner57036/f228d4/exit0/no session; aggregate30613 reaped0/others
 absent in2082.230s, independent18rows/54CLI client/server/supervisor auditPASS,

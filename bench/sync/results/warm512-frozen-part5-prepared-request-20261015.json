@@ -1,0 +1,116 @@
+{
+  "state": "PREPARED_UNALLOCATED_NOT_STARTED",
+  "plan": {
+    "path": "/private/tmp/unison-warm512-frozen-plan-20261015-v10.json",
+    "bytes": 54188,
+    "sha256": "575674e5d8eeecd04338bb546338414d974ce65cc53d1c98be7c7795b5bb1155"
+  },
+  "batch_index": 1,
+  "partition_index": 5,
+  "workspace": "/private/tmp/unison-warm512-frozen-part5",
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/private/tmp/unison-warm512-source-a6f0b695/bench/sync/run_bounded.py",
+    "--plan",
+    "/private/tmp/unison-warm512-frozen-plan-20261015-v10.json",
+    "--batch-index",
+    "1",
+    "--partition",
+    "5",
+    "--workspace",
+    "/private/tmp/unison-warm512-frozen-part5",
+    "--allocation",
+    "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-FROZEN-PART5-ADMISSION-20261015.json"
+  ],
+  "source_pins": {
+    "bench/sync/run_bounded.py": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508",
+    "bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0",
+    "bench/sync/prepare_plan.py": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864",
+    "bench/sync/run.py": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b",
+    "bench/sync/fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699",
+    "bench/sync/partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+    "bench/sync/measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+  },
+  "limits": {
+    "cpu_credits": 18,
+    "aggregate_seconds": 7200,
+    "cli_invocations": 54
+  },
+  "allocation_file": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-FROZEN-PART5-ADMISSION-20261015.json",
+  "required_allocation_state": "ROOT_ALLOCATED_FINITE_SYNC_PARTITION_V1",
+  "required_allocation_fields": [
+    "plan",
+    "batch_index",
+    "partition_index",
+    "workspace",
+    "command",
+    "source_pins",
+    "limits",
+    "startDeadlineUnix"
+  ],
+  "source_snapshot": {
+    "path": "/private/tmp/unison-warm512-source-a6f0b695",
+    "repository_head": "a6f0b695159b3bdb5c3e73d57c0a54900fe86d6d",
+    "runner_sha256": {
+      "prepare_plan_test.py": "dc61c903a25c133ef2a3746b3dc67f2187aa0a400947207895b7efadb7d93bd2",
+      "merge_partitions_test.py": "689874ee37ef9e7d8d9d05245e5c96fe33ecf0c751bce05650a8bee90b39eac7",
+      "ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+      "measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+      "partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+      "run.py": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b",
+      "run_bounded.py": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508",
+      "partition_dispatch_test.py": "fedafa5f138df38ed1ff43fa2f08c3acdb2355cd9a90156dbe274282bd80ff45",
+      "check.py": "5f64df8d2a54e35d60ecff04fb68737522773334f0cca9661c844e80c92c5a50",
+      "aggregate_successor_lifecycle_test.py": "fac56ca371715f3640fcdc68afe3c5f34c155f082c9846ce62bc7d5b1712aa58",
+      "proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+      "bounded_source_test.py": "7360073a4ccc0257d295d5768b8a71a920e4ecafae2e0cdd0b5e8dcadbd5cc2b",
+      "interrupted_receipt_lifecycle_test.py": "6eb2f4a04c3049ff5571f2021112991db049cad84166f245fc8e9e471b7cd479",
+      "interrupted_receipt_test.py": "abfb87ac6f5262e2daab8e58fc9ecba0fb1c3aa8cb361966e72f763f10f79557",
+      "merge_partitions.py": "5824deac54ab0a55f7709a7b3665de2a2a3df38c1f9b9ae0f4cd8dd5e92b241a",
+      "partitions_test.py": "f61b2bb7c6c3781932de75430fc57b139893e19339b5311781ac868a14c75925",
+      "launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+      "batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0",
+      "prepare_plan.py": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864",
+      "read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+      "fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699"
+    },
+    "git_worktree_locked": true,
+    "scope": "Detached revision and fresh byte checks, not immutable filesystem enforcement; revalidate before/after dispatch."
+  },
+  "predecessor_result": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part4-actual-return-20261015.json",
+    "bytes": 6064,
+    "sha256": "e25c3c60066a4c55fae0cdb4b94871557ef7907d076b8fd630556314db240831"
+  },
+  "mandatory_timing_addendum": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json",
+    "bytes": 6788,
+    "sha256": "e311d5f64c8fa5dde2a8e361b3858db367a01c1aaa3b38c5961fe279b7e6b6b5"
+  },
+  "scope": "Only unrun512MiB x4 part5: OxCamlworker8, three modes,1warmup+5measured repetitions,18rows/54sync CLI. Same frozen source/runner cohort. NoSDK/Photo/compiler builds, part3 retry or automatic otherpart.",
+  "scheduling": "Fresh explicit Root allocation required; no release/admission/quiet-timing inferred. Part0 remains contaminated as disclosed and all samples stay retained.",
+  "predecessor_root_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-FROZEN-PART4-ACTUAL-ACCEPTANCE-20261015.json",
+    "bytes": 1576,
+    "sha256": "272487e7602d82796da6531cdf4529ba61b3a80ae94f261afa4290df496282ff"
+  },
+  "predecessor_scope": "Part4 passed18rows54CLI, independent resource acceptance pinned. Separate part3 remains FAILED/INCOMPLETE16rows49CLI; no relabel/retry/replacement or complete six-part coverage inferred.",
+  "harness_policy_scope": "Frozen a6f0b695 retains original200ms normal-EOF grace and can reject delayed server settlement. Main successor2s policy passed separate lifecycle controls but is NOT substituted into this frozen cohort. Any failed row remains failed; no automatic retry, softened audit or source change.",
+  "settlement_successor_evidence": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json",
+    "bytes": 13445,
+    "sha256": "2a348bc6f91c31332fb19a168f85965bfe9a4cbd3e00c343f80950bcb9846ce3"
+  },
+  "failed_part3_preserved": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part3-failed-return-20261015.json",
+    "bytes": 14660,
+    "sha256": "c7f0627f955ab8b91b4de2b3f96f02b4dabfb33aa381b9114f6cdfe8c1bd86af"
+  }
+}
