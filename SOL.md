@@ -3299,3 +3299,15 @@ pins. Evidence bench/sync/results/bounded-source-preparation-20261015.json, plan
 actual ownership/benchmark qualification; interruptedreceipt realfakechild and
 aggregate successor fakeworker regressions still pending fresh coordination.
 ZERO new runtime jobs or credits allocated. RootPhoto fidelity priority retained.
+
+### Finite receipt/aggregate successor lifecycle scripts prepared, NOT RUN
+
+interrupted_receipt_lifecycle_test.py covers actual selfSIGINT direct/wrapper and
+first/second capturecreation failure with original sleeping children, receiptPID/
+reaped flag and independent ECHILD. aggregate_successor_lifecycle_test.py reuses
+original4worker fixtures with explicitmaximum7200 but actual12s fixture deadlines;
+no2hour wait or matrix. ASTonly9c15cf/0 valid; NO child dispatched. Exact sources/
+serial commands/proposed1credit/<60s coordination request
+bench/sync/results/lifecycle-successor-request-20261015.json. Timing DEFER
+remains; these small regressions also await explicit allocation to avoid another
+crossed dispatch. Future refreshed timing plan follows runtime qualification.

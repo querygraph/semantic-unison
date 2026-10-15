@@ -1,0 +1,64 @@
+{
+  "state": "SOURCE_READY_TESTS_NOT_STARTED",
+  "scope": "four original fake-child receipt cases plus four original aggregate worker cases; no benchmark/compiler/SDK/Photo",
+  "commands": [
+    [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/alexy/src/unison/bench/sync/interrupted_receipt_lifecycle_test.py"
+    ],
+    [
+      "/usr/local/opt/python@3.14/bin/python3.14",
+      "/Users/alexy/src/unison/bench/sync/aggregate_successor_lifecycle_test.py"
+    ]
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/interrupted_receipt_lifecycle_test.py",
+      "bytes": 3011,
+      "sha256": "6eb2f4a04c3049ff5571f2021112991db049cad84166f245fc8e9e471b7cd479"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/aggregate_successor_lifecycle_test.py",
+      "bytes": 720,
+      "sha256": "fac56ca371715f3640fcdc68afe3c5f34c155f082c9846ce62bc7d5b1712aa58"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3745,
+      "sha256": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 28908,
+      "sha256": "7cadd5bb79f52a82c8769c5328f2a66bcfb516e6f00510b607eed2fc199d736f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 6223,
+      "sha256": "7c1b1d430b3d906764b4fe850c6543a2c7a1aca16261ef42b09491cfa87786bb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate_test.py",
+      "bytes": 2173,
+      "sha256": "65f69f2d047f457916392573ffc15e1c0d579f9acffcde0d5cc384f1f9ced0bd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    }
+  ],
+  "proposed_limits": {
+    "cpu_credits": 1,
+    "serial_commands": 2,
+    "fake_cases": 8,
+    "expected_seconds_under": 60
+  },
+  "runtime_started": false,
+  "timing_allocation": false
+}
