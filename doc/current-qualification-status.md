@@ -10,31 +10,27 @@ fault or compatibility test.
 | Reuse upstream clone paths | `wholeFileClone`, `CloneRange`, `copy.ml`; [whole-file controls](../tests/whole_file_clone/qualification.json) | Preserve upstream/platform behavior; no new ZFS/ReFS runtime claim |
 | General receiver-basis APFS updates | Ordinary files use the generic sink, independent of DNG; [cross-volume tests](../tests/cross_volume/qualification.json) | Representative workloads, physical-device performance and broader failure/property combinations |
 | Semantic extensions and SDE | Static format registry; exact DNG/JPEG profiles, bounded envelopes, advisory classification and conservative fallback; `doc/semantic-delta-v0.md` | Full acceptance-matrix coverage must be audited against exact fixture scopes; unsupported layouts remain ordinary exact transfer |
-| Metadata merge | Opt-in scalar merge and compact immutable common metadata bases; [quota/merge evidence](../tests/sdk_container_receive/quota-merge-qualification.json) | SDK-gated production merge receiving request below; no general rendering-field or arbitrary RDF merge claim |
-| Optional Adobe validation | Per-candidate off/warn/require gate, driver pin/receipt checks, CPU budget and cancellation; actual SDK receive/host/frozen-output pilots are separately pinned | Broader real-camera/copy-only corpus and production-path merge receiving; experimental native host remains separate |
+| Metadata merge | Opt-in scalar merge and compact immutable common metadata bases; [quota/merge evidence](../tests/sdk_container_receive/quota-merge-qualification.json) | SDK-gated production merge receiving passed below; broader real-camera corpus remains; no general rendering-field or arbitrary RDF merge claim |
+| Optional Adobe validation | Per-candidate off/warn/require gate, driver pin/receipt checks, CPU budget and cancellation; actual SDK receive/host/frozen-output pilots are separately pinned | Broader real-camera/copy-only corpus and representative receiving-path/camera coverage; experimental native host remains separate |
 | Stock and OxCaml builds | Both current full Make builds+selftests, 41 helper groups/compiler and five receiving diagnostic cases/compiler [pass](../tests/validation_process/group-integration-qualification.json) | Preserve Make/Dune/platform qualification scopes; compiler-checked ML boundaries do not prove C/native contracts |
 | Coordinated workers/resources | Immutable worker jobs, bounded mailboxes and shared weighted permits; [checked workers](../tests/checked_worker/qualification.json), [resource integration](../tests/dng_backend_resources/qualification.json) | Production native threads, RSS, cancellation and scaling; estimates/covered allocators are not whole-process enforcement |
 | Performance | Functional read/write/wire measurements and small synthetic sync matrices exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
 
-## Immediate next gate
+## Actual live SDK merge milestone
 
-[Fresh six-call request](../tests/qualification/sdk-live-merge-request-v1-20261015.json)
-is **source-ready, runtime-unadmitted**. It proposes stock-client/Ox-server
-production receiving over three retained generated codecs, twelve scalar states,
-six SDK calls and four CPU credits, with an independently owned 300-second worker
-aggregate. Wrapper preflight before supervision is explicitly outside that limit.
+The [six-call production live merge return](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
+is **PASSED/CLOSED** after fresh explicit Root admission. Actual owner43830,
+terminal699a51 exited0 with no session. Nine stock-client/Ox-server CLI runs and
+six qualified SDKv1 validation receipts pass across three generated codecs; exact
+outputs/no-op identity, nine CLI closures, six retained helper observations and
+no unresolved markers were independently read back. Aggregate93039 closed/reaped
+in32.486s, within300s. Wrapper preflight remained outside that aggregate limit.
 
-[Full mock receiving](../tests/sdk_container_receive/live-merge-full-mock-qualification.json),
-[CLI-owner lifecycle](../tests/sdk_container_receive/live-merge-owner-lifecycle-qualification.json)
-and [aggregate lifecycle](../tests/sdk_container_receive/live-merge-aggregate-qualification.json)
-pass. Source-only native preflight and seven admission refusal controls pass.
-No SDK execution has occurred under this new request. Root must issue a fresh
-exact admission/deadline; old slots are consumed. No retry follows ambiguity.
-
-After actual native closure, independently verify both endpoints' SDK receipts,
-exact output hashes, no-op identity, every actual parent/CLI/aggregate terminal,
-six retained-helper observations and unresolved-marker absence. A mock result or
-an observed zero before reap is not a substitute for that native result.
+Root independent acceptance is pending. The admission is consumed; no replay or
+new SDK slot follows. This is functional exact generated-container receiving,
+not a throughput, camera-corpus, decoded-pixel or preview-reuse qualification.
+Broader native resource/scaling, real-camera corpus and representative performance
+gates remain open. All Unison runtime allocations are closed.
 
 ## Boundaries that remain explicit
 

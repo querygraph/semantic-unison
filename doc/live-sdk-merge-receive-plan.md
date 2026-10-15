@@ -1,3 +1,9 @@
+Actual native milestone: [sealed six-call return](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
+PASSED/CLOSED under fresh Root admission. Nine CLI runs/six SDK gates, stock/Ox,
+exact outputs and full retained lifecycle proof pass; Root independent acceptance
+is pending. Admission consumed/no replay. The design/preparation history below
+retains its original narrower checkpoints and does not authorize new execution.
+
 Current checkpoint: executor/admission wrapper is implemented, complete mock
 receiving matrix and owner/aggregate lifecycle controls pass. Fresh native
 request [v1](../tests/qualification/sdk-live-merge-request-v1-20261015.json) is

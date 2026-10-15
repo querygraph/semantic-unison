@@ -10,9 +10,10 @@ validator implementation is present; the full goal is NOT complete. The latest
 [current qualification index](doc/current-qualification-status.md) lists remaining
 corpus, native-resource, acceptance-matrix and performance qualification.
 
-The [six-call live SDK merge request](tests/qualification/sdk-live-merge-request-v1-20261015.json)
-is source-ready but UNADMITTED. Nine-run full mock receiving and finite owner/
-aggregate lifecycle controls pass. No SDK call has run under this request.
+The separately admitted [six-call live SDK merge](tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
+now PASSED/CLOSED: actual owner43830/699a51/0,9CLI runs/six SDK validations,
+stock-client/Ox-server,32.486s aggregate. Independent retained readback passes;
+Root independent acceptance is pending. Admission is consumed, not reusable.
 All Unison allocations are closed. Root's latest explicit color recovery closure
 reports original4750/097f59/0 and recovery55005/cfd119/0, leasefree and18released.
 Fresh Photo reservations still require coordination; no SDK admission follows
@@ -3200,3 +3201,22 @@ metadata overlays (duplicates/native relabel) without modifying original evidenc
 Successor evidence live-merge-return-audit-v2-qualification.json; native branch
 not exercised because no native admission/result exists. Runtime request pins
 remain unchanged/current. Root recovery release acknowledged, no Unison dispatch.
+
+### Actual separately admitted production SDK-gated merge receiving PASSED/CLOSED
+
+Fresh Root8d714359 admitted exact request7c108071. Exact command dispatched once
+owner43830; wrapper93031, worker93039 START1792027837.012396 before1792028000.3138611.
+Actual parent43830/699a51/0/no session; aggregate93039 reaped/own-group othersabsent
+/exit0 in32.48622679398977s within300. All9actualCLIclosures,6qualifiedSDKv1 raw
+protocols over3generatedcodecs on stockclient/Oxserver,all6retainedhelpergroup0,
+exactmergedoutputs/noopidentities/staging cleanup and unresolvedscan[] PASS.
+Native return auditor6980a0/0 independently reparses retained proof and provenance;
+all11runtime sourcepins unchanged. SDK warnings remain receipt findings, not
+pixel proof. No Photo/Classic/Main/cache operation.
+
+Sealed actual return tests/qualification/sdk-live-merge-v1-actual-return-20261015.json
+and actual parentterminal sibling pin all receipts/rawlogs/auditor/input/build
+references. Actual RETURN queue01a13d2f-bac4-7f33-b4e1-0841bb69188b. All4credits
+released, no successor active; Root independent audit pending. Admission consumed,
+NO replay/newslot. This closes the finite production merge-receiving SDK gate,
+not broader realcamera corpus/nativeRSSthreads/scaling/benchmark/fullgoal gates.
