@@ -3175,3 +3175,15 @@ Fresh pinned request tests/qualification/sdk-live-merge-request-v1-20261015.json
 is SOURCE_READY_RUNTIME_UNADMITTED:6SDKcalls/3inputs/12states/4credits/300s,
 no Photo/Classic/Main/cache, no retries. Do NOT execute before fresh Root admission
 and exact start deadline. Earlier SDK slots remain consumed. Full goal active.
+
+### Read-only live-return auditor implemented during Photo hold
+
+Added audit_live_merge.py: independently reads wrapper/preparation binding, actual
+parent terminal,9CLI START/CLOSED identities,aggregate/supervisor binding,sixraw
+protocols/group records,retained target bytes/identities,staging and unresolved
+markers. Shares bounded protocol parsers, not claimed as independent source
+review or native instrumentation. Actual pure922e83/0 passes prior genuine mock
+readback and4terminal/provenance refusals; no subprocess. Evidence
+live-merge-return-audit-qualification.json. Native request runtime source pins
+unchanged; new auditor is offline only and request remains UNADMITTED. Root same
+91195/4750 Photo lease+18credits hold remains; no compiler/core/helper/SDK dispatch.
