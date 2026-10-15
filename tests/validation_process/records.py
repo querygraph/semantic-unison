@@ -82,3 +82,54 @@ def parse(log):
         if len(result) > 4096:
             raise ValueError('diagnostic record count limit')
     return result
+
+
+GROUP_PREFIX = re.compile(r'^\[(server: )?validation-group\] ')
+GROUP_PATTERN = re.compile(
+    r'Retained group v0 pid=(none|[1-9][0-9]{0,9}) '
+    r'candidate-sha256=([0-9a-f]{64}) '
+    r'other-members=(unobserved|unknown|0|[1-9][0-9]?)')
+
+
+@dataclass(frozen=True)
+class GroupRecord:
+    endpoint: str
+    pid: int | None
+    candidate_sha256: str
+    observation: str  # observed, unknown, unobserved
+    other_members: int | None
+
+
+def parse_groups(log):
+    """Parse past observations only; no lifetime join, verdict or PID authority."""
+    if not isinstance(log, str) or len(log) > MAX_LOG_BYTES:
+        raise ValueError('diagnostic log size/type limit')
+    if len(log.encode('utf-8')) > MAX_LOG_BYTES:
+        raise ValueError('diagnostic log byte limit')
+    result = []
+    for line in log.splitlines():
+        prefix = GROUP_PREFIX.match(line)
+        if prefix is None:
+            continue
+        if len(line) > MAX_LINE:
+            raise ValueError('diagnostic line size limit')
+        fields = GROUP_PATTERN.fullmatch(line[prefix.end():])
+        if fields is None:
+            raise ValueError('malformed or unknown group diagnostic')
+        pid, digest, count = fields.groups()
+        pid = None if pid == 'none' else int(pid)
+        if pid is not None and pid >= 2**31:
+            raise ValueError('PID overflow')
+        state = count if count in ('unknown', 'unobserved') else 'observed'
+        count = int(count) if state == 'observed' else None
+        # Native enumeration has a fixed 64-record capacity. Unknown and absent
+        # observations never become an observed empty process group.
+        if count is not None and count > 64:
+            raise ValueError('group count exceeds backend capacity')
+        if pid is None and state != 'unobserved':
+            raise ValueError('group observation without a spawned child')
+        result.append(GroupRecord('server' if prefix.group(1) else 'client',
+                                  pid, digest, state, count))
+        if len(result) > 4096:
+            raise ValueError('diagnostic record count limit')
+    return result

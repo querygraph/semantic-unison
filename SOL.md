@@ -2992,3 +2992,15 @@ parser changes. Added fake-valid/fake-error-zero receipt controls to ensure the
 observation cannot replace SDK receipt checks. All these additions UNCOMPILED/UNRUN
 during Root exclusive18 HostV15; zero new helper/compiler/core/SDK processes.
 Next actual integration qualification must include these current sources.
+
+### HostV15 hold: bounded group parser actual pure controls
+
+Added immutable records.parse_groups for validation-group v0: bounded log/line/
+record count, canonical PID/hash/count, native64record-capacity bound, and distinct
+observed/unknown/unobserved states. Missing trace remains absent; duplicate PID
+records remain separate past observations, never a joined lifetime or verdict.
+Actual pure parser run7b187d/exit0 passes14 malformed group fixtures; existing
+process parser22 malformed cases and six retained mock CLI records still pass.
+Pinned report tests/validation_process/group-parser-qualification.json. No
+compiler/core/helper/SDK/Photo invocation during Root hold. Current native/
+forwarding source still awaits stock/Ox runs after explicit release.

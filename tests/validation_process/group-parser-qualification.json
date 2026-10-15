@@ -1,0 +1,57 @@
+{
+  "scope": "Pure synthetic group parser only; forwarding/native integration is uncompiled and unrun at these pins. No SDK/Photo/compiler/helper execution.",
+  "actual_terminal": {
+    "chunk": "7b187d",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "group_parser": {
+    "passed": true,
+    "malformed_fixtures": 14,
+    "observed_unknown_unobserved_distinct": true,
+    "duplicates_preserved": true
+  },
+  "prior_process_parser": {
+    "passed": true,
+    "malformed_fixtures": 22,
+    "retained_actual_records_read": 6,
+    "report": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-parser-57vcvw47/RESULT.json"
+  },
+  "source_pins": [
+    {
+      "path": "tests/validation_process/records.py",
+      "bytes": 5765,
+      "sha256": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+    },
+    {
+      "path": "tests/validation_process/group_parser_test.py",
+      "bytes": 1993,
+      "sha256": "9b25fe4c1d10709650aed8db6a6e236d2cd1ce20d163ece48bca961265bd6c48"
+    },
+    {
+      "path": "src/dngCandidateValidation.ml",
+      "bytes": 8029,
+      "sha256": "1edb0cf7f616eb0d4888003367b70918e7472c5610f3f91f41ad02a16d2c8414"
+    },
+    {
+      "path": "src/dngValidation.ml",
+      "bytes": 9638,
+      "sha256": "50a3cb8573ec604c4b04e08e176923dcc744a56c42ab46da08614b969a3d8207"
+    },
+    {
+      "path": "src/dngValidation.mli",
+      "bytes": 4296,
+      "sha256": "b7ec7165a13578fbaf2a803d850398e6d8d32b74ae1f7c452014bd43995844d4"
+    },
+    {
+      "path": "src/helperSupervisor.ml",
+      "bytes": 22752,
+      "sha256": "67bdf3575d6d541ebb6952614d8777c255d036251015663c7882a90950b739ac"
+    },
+    {
+      "path": "src/helperSupervisor.mli",
+      "bytes": 5987,
+      "sha256": "0b82eeccd5f0e771bde86c1d23c47799ff74c5ec3c49521e227fcbad0719d97d"
+    }
+  ]
+}

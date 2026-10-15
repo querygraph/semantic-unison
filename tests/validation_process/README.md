@@ -65,9 +65,20 @@ normal terminal observation did not run (for example synchronous teardown).
 A nonnegative number is only a bounded process-table observation before reap.
 It is neither an SDK verdict nor durable/escaped-process absence proof and
 does not grant authority to signal the historical PID. The existing bounded
-`validation-process` v0 format/parser remains unchanged; it does not parse this
-separate trace class. Tracing remains off by default.
+`validation-process` v0 format remains unchanged. `records.parse_groups` parses
+this separate trace class into immutable observations without joining PID
+lifetimes or deriving validation verdicts. Tracing remains off by default.
 
 This forwarding/trace integration is source-only until current stock/Ox helper
 and receiving CLI checks complete; prior native primitive or diagnostic results
 do not qualify this new source. No SDK invocation is authorized by the flag.
+
+Run the pure group parser controls with:
+
+```
+python3 tests/validation_process/group_parser_test.py
+```
+
+[Pure parser qualification](group-parser-qualification.json) covers state
+distinction, bounded framing/count/PID checks, duplicate preservation and14
+malformed fixtures. Native integration remains uncompiled/unrun at these pins.
