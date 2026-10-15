@@ -3108,3 +3108,17 @@ lifecycle controls, native admission wrapper and independently timed aggregate30
 supervisor are NOT implemented/qualified yet. Existing monotonic deadline in
 Runner is not claimed as total-wrapper300s supervision. No SDK/Photo calls, no
 current compiler/core/helper allocation. Full goal remains active.
+
+### Actual finite original fake-child CLI-owner lifecycle controls passed
+
+After Root color57228/b45fbf/0 closed/released, actual one-credit serial lifecycle
+test13675/96f3ba/0 passes six cases: normal,nonzero,5MiBoutput/4MiBcapture,TERM-
+ignoring timeout→KILL,same-group descendant cleanup,capture setup failure. Each
+actual direct child independently ECHILD after return, group absence observed
+before leader reap, active owner retired. Test markers intentionally remain
+because individual fake calls supply no six-helper matrix evidence; no live
+child/CPU hold remains. Evidence live-merge-owner-lifecycle-qualification.json.
+
+No SDK/Photo/compiler/real receiving call; aggregate300s controller/admission
+entry still required and unqualified. This run is finite deterministic original
+fixtures, not fuzzing/sanitizer work. One credit genuinely released.
