@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+Shared entrypoint implementation: `SHARED_CPU_CREDITS=1..4` in tests/manual.py
+admits compile-only stock-build/ox-build (defaultJOBS=min2,grant; reject excess),
+reviewed pure targets and four-credit sync-functional (both endpoints counted).
+Other test targets refuse this mode until budgeted; legacy nonshared behavior
+unchanged. New build-only receipts do not replace build+selftest qualification.
+[Four pure selections/seven refusals](tests/qualification/shared-entrypoints-pure-controls-20261015.json)
+pass without compiler/child/output creation. Standing4/12+2 policy/commonpool ACK
+still pending; this is a local command-budget guard, no global token or OS cap.
+No runtime grant, Photo lease use, benchmark or build executed.
+
 User scheduling correction: ordinary development should share Morrobay with
 Photo, rather than make all progress depend on exclusive18 benchmarks.
 [Shared-machine proposal](doc/shared-machine-policy.md) queued to Photo Root:

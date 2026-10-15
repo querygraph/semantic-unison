@@ -28,6 +28,29 @@ It is suitable for shared functional work. The prepared frozen worker8 benchmark
 has a different, larger allocation and cannot silently run under this split.
 Build entry points accept `JOBS`; use2 for ordinary shared development.
 
+The capped entry points are implemented, but do not themselves grant a running
+slot or acquire global tokens. After standing scheduling acknowledgment:
+
+```sh
+SHARED_CPU_CREDITS=4 JOBS=2 OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" \
+  make -f tests/Makefile ox-build
+SHARED_CPU_CREDITS=4 JOBS=2 STOCK_PREFIX="$HOME/.opam/default/bin" \
+  make -f tests/Makefile stock-build
+```
+
+Run these serially. They compile/link only and do not execute the resulting
+Unison binary or selftests. Their receipts therefore do not replace completed
+build-plus-selftest qualifications. `SHARED_CPU_CREDITS` admits1..4, defaults
+compiler jobs to the smaller of2 and the grant, and rejects excess `JOBS`.
+Legacy entry points keep their existing behavior when the variable is absent.
+
+The same shared flag admits pure parser/interface checks and `sync-functional`
+(four credits required); it rejects other targets whose whole test budget has
+not been qualified. That rejection does not prevent source work or a separately
+scheduled invocation. This dispatcher is a local command-budget guard, not a
+global pool allocator, memory bound, OS thread cap or scheduling acknowledgment.
+The [pure entrypoint controls](../tests/manual_shared_test.py) launch no children.
+
 ## Separate CPU sharing from native ownership
 
 Photo Root retains ownership of Lightroom/UI operations, catalog/cache writes,

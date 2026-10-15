@@ -13,6 +13,7 @@ HELP = '''Run from the repository root: make -f tests/Makefile TARGET
 Targets:
   stock-make / stock-dune  build stock CLI and run selftests; STOCK_PREFIX required
   ox-make / ox-dune        build checked OxCaml CLI and run selftests; OX_PREFIX required
+  stock-build / ox-build  Make build only; no resulting Unison executable invocation
   cache-storage           private cache/quota controls; BUILD_RECEIPT required
   cache-ownership         private cleanup exception controls; BUILD_RECEIPT required
   cache-cli               loopback merge/recovery, fake validators; BUILD_RECEIPT required
@@ -29,6 +30,11 @@ Targets:
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
+SHARED_CPU_CREDITS=4 selects capped shared entry points: build-only defaults
+to JOBS=2 and rejects JOBS above the credit ceiling. sync-functional requires
+at least four credits for its two endpoints. Other targets need a separately
+qualified resource scope; this option does not claim a kernel CPU limit or
+acquire Photo's token pool. Standing scheduling agreement is still required.
 DRY_RUN=1 prints JSON argv without executing a check or creating a report directory.
 OUTPUT_DIR for build/cache/reader/sync targets must be fresh; otherwise a private temporary
 directory retains the receipt. Host checks print their own workspace/receipt.
@@ -64,6 +70,15 @@ def checked_build(path):
 
 
 def command(target, output, environment):
+    shared = environment.get('SHARED_CPU_CREDITS')
+    if shared is not None:
+        shared = int(shared)
+        require(1 <= shared <= 4, 'shared Unison lane must be 1..4 credits')
+        require(target in ('stock-build', 'ox-build', 'sync-functional',
+                           'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface'),
+                'target has no shared resource scope; use build-only or separately coordinate it')
+        if target == 'sync-functional':
+            require(shared >= 4, 'functional loopback requires four endpoint credits')
     if target in ('helper-stock', 'helper-ox'):
         key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
@@ -79,17 +94,22 @@ def command(target, output, environment):
         script = ('interrupted_receipt_lifecycle_test.py' if target == 'interrupted-receipts'
                   else 'aggregate_successor_lifecycle_test.py')
         return [sys.executable, str(ROOT / 'bench/sync' / script)]
-    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune'):
+    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune', 'stock-build', 'ox-build'):
         kind, system = target.split('-')
+        build_only = system == 'build'
+        if build_only:
+            system = 'make'
         key = 'STOCK_PREFIX' if kind == 'stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
         prefix = Path(environment[key]).resolve()
         require((prefix / 'ocamlopt').is_file(), 'compiler prefix must contain ocamlopt')
-        jobs = int(environment.get('JOBS', '4'))
+        jobs = int(environment.get('JOBS', str(min(2, shared)) if shared is not None else '4'))
         require(1 <= jobs <= 18, 'JOBS must be 1..18')
+        require(shared is None or jobs <= shared, 'JOBS exceeds shared CPU-credit ceiling')
         return [sys.executable, str(ROOT / 'tests/build_snapshot.py'),
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
-                '--build-system', system, '--selftest', '--report', str(output / 'RESULT.json')]
+                '--build-system', system] + ([] if build_only else ['--selftest']) + [
+                '--report', str(output / 'RESULT.json')]
     if target == 'sync-functional':
         argv = [sys.executable, str(ROOT / 'bench/sync/run.py')]
         for label, key in (('stock', 'STOCK_RECEIPT'), ('ox', 'OX_RECEIPT')):
