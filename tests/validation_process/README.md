@@ -1,3 +1,8 @@
+Current retained-group integration qualification: [stock/Ox builds, selftests and
+five actual synthetic receiving cases each](group-integration-qualification.json)
+now pass. This supersedes source-only checkpoints below for the pinned sources.
+SDK receiving and performance qualification remain separate.
+
 # Receiving helper diagnostics
 
 [Stock/Ox qualification](qualification.json) records successful Make/selftests

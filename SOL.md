@@ -3038,3 +3038,23 @@ single-process fake-helper signal setup remain recorded. Pinned actual terminals
 and sources: tests/helper_group_observation/integration-qualification.json.
 No SDK/Photo invocation; full stock/Ox builds and receiving CLI still pending.
 Finite pair allocation CLOSED/released, no successor dispatched.
+
+### Actual full current group integration qualification passed
+
+Following explicit Root14750/65151e/0 release, serial stock full Make+selftest
+48021/4e32ed/0 and Ox47235/019297/0 pass. Actual receiving CLI stock11158/35a57b/0
+and Ox75415/590990/0 each pass five cases: trace default/noop absent, each normal
+helper observed group0 bound to independent actual PID and candidate, exit0/
+errors1 preserves old target, arbitrary stderr clipping preserves acceptance.
+All handles terminal/no sessions. Independent pure readback reparses all six
+actual group records against CLI evidence and rehashes all recorded src pins,
+current binaries, raw logs, receipts. Pinned qualification:
+tests/validation_process/group-integration-qualification.json. This supersedes
+UNCOMPILED/UNRUN checkpoints above for exactly these current sources. Prior
+41group stock/Ox helper suite qualification also remains current.
+
+All4credits genuinely RELEASED via queue01a13d1e-7e5f-7160-827e-82ba37980e55. No
+SDK/Photo call or successor active. Next real integration target remains finite
+SDK-gated production merged receiving with fresh explicit admission after source/
+lifecycle review; these past group queries do not prove escaped-process absence,
+owner-SIGKILL recovery, full corpus or throughput. Full goal active.

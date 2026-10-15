@@ -114,3 +114,9 @@ serially and uses original synthetic children; validation-cli requires a current
 successful build/selftest receipt and launches only synthetic receiving cases.
 The group-parser target executes pure Python fixtures only. No target invokes
 Adobe or opens Photo/Lightroom. Coordinate CPU reservations before native checks.
+
+Current integration qualification supersedes the source-only checkpoint above:
+[41 stock/Ox helper groups each](../helper_group_observation/integration-qualification.json)
+and [both full builds/selftests plus five receiving cases each](../validation_process/group-integration-qualification.json)
+pass. The new timeout, cancellation, synchronous teardown and receipt-forwarding
+controls were actually executed. No SDK/Photo calls were involved.
