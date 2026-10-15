@@ -1,0 +1,42 @@
+{
+  "state": "SOURCE_READY_NOT_RUNTIME_QUALIFIED_UNALLOCATED",
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v4.json",
+    "bytes": 8894,
+    "sha256": "524a2869cb20bbdb78c4912228892335e585d4974b2cc0c50bca93f53a3bba35"
+  },
+  "controller_sources": {
+    "bench/sync/run_bounded.py": "f9ecd63f54cd71c9dcc3b9320e9b397ee687a20027dfc70f5da069de807e72e7",
+    "bench/sync/batch_audit.py": "a387bf28f89f8e4d437e5c54ee1cc8701c891754f7738c9a11bbd66509174e09",
+    "bench/sync/prepare_plan.py": "7c7ef7a1e6859b3a7d345656fb52481ef2430b0ec5c253ce1557e2c1502f331a",
+    "bench/sync/run.py": "7cadd5bb79f52a82c8769c5328f2a66bcfb516e6f00510b607eed2fc199d736f",
+    "bench/sync/fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+    "bench/sync/measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "7c1b1d430b3d906764b4fe850c6543a2c7a1aca16261ef42b09491cfa87786bb",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+  },
+  "owned_limits": {
+    "cpu_credits": 18,
+    "aggregate_seconds": 7200,
+    "cli_invocations": 324
+  },
+  "pure_controls": {
+    "terminal_chunk": "eeb471",
+    "exit_code": 0,
+    "historical_cli_receipts_read": 216,
+    "matrix_refusals": 5,
+    "allocation_refusals": 7,
+    "prefork_ceiling_refusals": 2
+  },
+  "runtime_started": false,
+  "pending": [
+    "Actual interrupted-receipt fake-child regression",
+    "Aggregate successor real fake-worker lifecycle regression",
+    "Fresh Root source/scheduling allocation before timing; stopped60597 cannot resume/replay"
+  ]
+}

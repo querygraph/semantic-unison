@@ -55,6 +55,9 @@ def prepare(stock_receipt, ox_receipt, output_root):
                          'expected_cli_invocations': 324, 'command': command})
     return {'schema': 'unison-warm-sync-measurement-plan/1', 'runtime_started': False,
             'cpu_reservation': False, 'requires_coordination': True,
+            'owned_batch_seconds': 7200, 'owned_batch_cli_invocations': 324,
+            'owner_controller': pin(ROOT / 'bench/sync/run_bounded.py'),
+            'owner_lifecycle_runtime_qualified': False,
             'build_receipts': [pin(path) for path in (stock_receipt, ox_receipt)],
             'binaries': [pin(item['binary']) for item in builds],
             'runner_sources': [pin(path) for path in sorted((ROOT / 'bench/sync').glob('*.py'))],

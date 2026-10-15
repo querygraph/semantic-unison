@@ -23,8 +23,13 @@ class Cancelled(BaseException):
     pass
 
 
-def supervise(function, workspace, *, seconds=300, expected_helper_calls=6):
-    if threading.active_count() != 1 or not 5 <= seconds <= 300:
+def supervise(function, workspace, *, seconds=300, expected_helper_calls=6,
+              maximum_seconds=300):
+    # SDK callers retain the default300s ceiling. A separately pinned non-SDK
+    # benchmark controller may explicitly request at most two hours.
+    if type(maximum_seconds) is not int or not 5 <= maximum_seconds <= 7200:
+        raise ValueError('invalid explicit aggregate ceiling')
+    if threading.active_count() != 1 or not 5 <= seconds <= maximum_seconds:
         raise ValueError('single-threaded finite aggregate required')
     if expected_helper_calls not in (0, 6):
         raise ValueError('only zero-helper fixtures or exact six-helper pilot allowed')

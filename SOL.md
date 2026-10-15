@@ -3279,3 +3279,23 @@ and whole324CLI ownedaggregate deadline remain required before a refreshed
 immutable plan/review. Existing SDKlive return accepted under original pins is
 unchanged/historical; new sharedmeasure source is not relabelled oldqualified.
 No SDK/Photo/compiler/new benchmark invoked by this source correction.
+
+### Whole-batch owned deadline successor implemented SOURCE ONLY
+
+Added run_bounded.py and batch_audit.py. Fresh exact Root allocation binds full
+plan/index/workspace/command/sourcepins/deadline and18credits/7200s/324CLI. Worker
+executes existing unchanged matrix then audits every row and client/supervisor/
+server actualsettlement before success. Aggregateworker group has independent
+wallclock supervision and unresolved retention; SDK default remains300s, only
+explicitnonSDK maximum7200 overrides it. Wrapper preflight remains outside owned
+worker deadline; no hard OS uninterruptible-wait claim. Allmatrix intact, no retry
+or resumption of stopped60597.
+
+Pureeeb471/0 reads216historical CLI receipts, rejects5badmatrix/7badallocation/
+2preforkceiling cases, plus originalinterrupt receipt fixture. Purefaa69f/0
+checks3largerbatch+3invalidbuild cases and freshly rehashes all v4plan/controller
+pins. Evidence bench/sync/results/bounded-source-preparation-20261015.json, plan
+/private/tmp/unison-warm-sync-measurement-plan-20261015-v4.json. These are NOT
+actual ownership/benchmark qualification; interruptedreceipt realfakechild and
+aggregate successor fakeworker regressions still pending fresh coordination.
+ZERO new runtime jobs or credits allocated. RootPhoto fidelity priority retained.

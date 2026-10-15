@@ -271,3 +271,30 @@ current stock/Ox core builds, reader/worker controls, both exact CLI paths and
 twelve small full-harness rows. It is not throughput, physical-I/O, full-read or
 whole-process resource qualification. This option invokes no Adobe validator;
 SDK execution still requires its own fresh coordinated admission.
+
+## Whole-batch ownership successor (source checkpoint)
+
+`prepare_plan.py` now emits a fresh source-matched plan including the full
+324-CLI batch's proposed 7,200-second owned aggregate and controller pin.
+`run_bounded.py` requires a fresh exact Root allocation binding the plan, batch,
+workspace, source hashes, command, limits and start deadline. It executes the
+existing matrix inside an independently timed retained worker and audits all
+rows plus each client/supervisor/native-server receipt before recording success.
+Worker-group closure is separate from per-CLI/server settlement. Cancellation or
+incomplete evidence retains unresolved markers rather than a completed result.
+SDK callers of the shared aggregate retain their default300-second ceiling.
+
+This successor is **source-only**, not timing-allocated or lifecycle-qualified.
+The interrupted60597 attempt is stopped/incomplete and cannot resume or replay
+under a delayed ACK. Fresh real fake-child lifecycle controls and Root review
+must precede any new timing dispatch. Pure checks launch no process:
+
+```sh
+python3 bench/sync/interrupted_receipt_test.py
+python3 bench/sync/bounded_source_test.py
+```
+
+Historical 216-CLI receipts can be read by the pure auditor without relabeling
+those historical measurements as current. The receipt-preservation correction
+carries the actual settled outcome on the original exception; it does not
+retroactively reconstruct a missing client receipt from the stopped attempt.
