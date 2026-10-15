@@ -79,6 +79,17 @@ Root for independent resource adoption;18credits released on the Unison side.
 
 ## Boundaries that remain explicit
 
+The [stockworker8 part2 return](../bench/sync/results/warm512-frozen-part2-actual-return-20261015.json)
+and [raw rows](../bench/sync/results/warm-512MiB-4files-part2-20261015.json)
+add18passed rows/54settled CLI: actual owner55681/d32adc/exit0/no session,
+aggregate81032 reaped/others absent in2052.876s, unresolved empty. Source/runner
+pins stay matched to the frozen cohort. Ordinary/clone/semantic medians are
+37.028/36.299/34.232s. Six/eightworker semantic medians are nearly identical
+on these four files. All three stock partitions now exist; the three Ox512
+partitions remain unrun. The part0 timing disclosure still applies to the
+series; no clean full-cohort or physical-I/O claim. Actual closure sent to Root,
+18credits released on Unison side; no successor authorized.
+
 The [bounded lifecycle controls](../bench/sync/results/bounded-lifecycle-qualification-20261015.json)
 passed all eight fake-child/worker cases in6.528s, owner46880/86b330/0.
 Root independently accepted25 artifact/source pins and all child settlements.

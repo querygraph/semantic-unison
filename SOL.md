@@ -4,11 +4,23 @@
 
 ## Current checkpoint — 2026-10-15
 
-Next runtime preparation: [frozen warm512 part2 request](bench/sync/results/warm512-frozen-part2-prepared-request-20261015.json)
+Latest runtime: [frozen warm512 part2](bench/sync/results/warm512-frozen-part2-actual-return-20261015.json)
+PASSED/CLOSED, actual owner55681/d32adc/exit0/no session; aggregate81032
+reaped/others absent in2052.876s. Independent18row/54CLI client/server/supervisor
+audit passes, zero SDK helpers expected, unresolved empty. Source14/runner21
+hashes remain matched to detached a6f0b695. Stockworker8 ordinary/clone/semantic
+medians37.028/36.299/34.232s; semantic6/8worker medians are nearly identical
+for four files. Parts0..2 complete the stock half only; Ox512/full six-part,
+physical I/O and broader performance remain open. Mandatory part0e311d5f6
+timing disclosure persists. Closure queued to Photo Root;18credits released
+on Unison side, no successor allocated or started.
+
+Consumed runtime preparation: [frozen warm512 part2 request](bench/sync/results/warm512-frozen-part2-prepared-request-20261015.json)
 pins stockworker8/three modes/18rows54CLI, the same detached a6f0b695 cohort,
 and independently accepted part1 predecessor. All14execution/21runner hashes
 rechecked; unique workspace/allocation/output absent. Request queued to Photo
-Root for scheduling, **unallocated/unstarted**; no SDK/compiler/native job runs.
+Root for scheduling and subsequently admitted/executed once as recorded above;
+no SDK/compiler/native job remains running. Do not replay this request.
 Goal reactivated by user; full qualification remains incomplete. Part1 actual
 closure and sealed return are now independently accepted by Photo Root, with
 all18credits released; no stale resource hold remains.
