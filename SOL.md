@@ -39,6 +39,14 @@ Preparing the plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Source-only usage review (2026-10-15): reviewed registry negotiation,
+  exact/complement proof separation, clone-range prefix validation and physical
+  CPU selection. No runtime qualification is added by this review. The
+  [usage guide](doc/semantic-sync.md) now explains per-endpoint CPU budgets
+  (two local peers do not share a machine-wide permit pool) and the implemented
+  opt-in retained-group diagnostic, including unknown/unobserved outcomes.
+  No core source, build, test or native dispatch changed; successor hold remains.
+
 * Benchmark failure settlement (2026-10-14): each validation job now records
   its first observed error and cancels peers immediately, rather than waiting
   for an aggregate's ordered observation. BorrowedWork drains all submitted

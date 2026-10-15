@@ -28,6 +28,13 @@ the [cached synthetic Adobe comparison](../bench/adobe/README.md) also measured
 1/18/36-worker validation throughput. Neither comparison establishes a general
 photographic-corpus or full-sync speedup. Production validation uses one thread
 per file; concurrent files consume the shared budget.
+The budget is local to each Unison process, not machine-wide across peers or
+other applications. Two loopback endpoints using automatic mode can each select
+18 on this host. For a coordinated two-endpoint evaluation, explicitly setting
+`semanticworkers = 8` on both endpoints budgets16 worker/helper credits in total
+and leaves room for the owners and bridge. This is scheduling guidance, not an
+OS-enforced CPU limit or a measured optimal worker count. A genuinely remote
+endpoint has its own machine budget.
 Profiles are trusted, compiled extensions, selected by exact versioned ID.
 Neither extension code nor helper commands are accepted from a peer.
 
@@ -118,6 +125,18 @@ opt-in and applies to trusted validation companions generally. A child can exit
 zero while reporting findings that reject the file; these diagnostics do not
 prove validator acceptance, publication or surviving process/group ownership.
 See [controls and scope](../tests/validation_process/README.md).
+
+`-debug validation-group` separately enables an endpoint-local observation of
+the receiving helper's process group while the owner still retains the leader
+PID. It reports `other-members=0`, a positive count, `unknown`, or `unobserved`;
+the latter two must not be read as zero. The binding is retired before reaping
+the leader, and diagnostic output is emitted after helper settlement. This
+does not change validation policy, establish decoded-pixel equality, or prove
+that a descendant did not escape into another process group. Leave this and
+other debug counters off for timing comparisons. The current
+[stock/Ox receiving controls](../tests/validation_process/group-integration-qualification.json)
+and [six-call SDK live-merge return](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
+record their exact functional scopes; neither establishes a throughput gain.
 
 Production admission also limits concurrent transactions, estimated retained
 payload buffers and descriptors. See [worker limits](semantic-workers.md) for
