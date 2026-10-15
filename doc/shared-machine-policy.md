@@ -5,18 +5,17 @@ Exclusive 18-core timing windows must not block all useful Unison work.
 
 ## Current user agreement: eight credits each
 
-The latest user instruction is an equal8/8 CPU split, with2 credits left for the
-OS. This supersedes the earlier10/6 and4/12 splits. Root was notified through the
-parent queue. Root's preceding immutable policy-v2 file (SHA256
-`4b9f20df567a31dedac231ff2f5ff44f2d059cbaa60aab54db8b978639f11a4e`)
-supplies the stable pool/lifecycle protocol; its4/12 CPU fields are historical,
-not the new CPU allocation. Pool integration and runtime qualification remain
-pending. The standing agreement does not alter the live frozen part5 exception.
+The authoritative standing agreement is Photo Root's immutable
+`SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json`, SHA256
+`1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352`.
+It records the user's equal8/8 CPU split, with2 credits left for the OS, and
+supersedes both10/6 and4/12. Pool integration and runtime qualification remain
+pending. The agreement does not alter the live frozen part5 exception.
 
 | Lane | CPU-credit ceiling | Normal work |
 | --- | ---: | --- |
-| Unison | 8 | Both endpoints plus2 owner credits; current functional profile peaks at2+2+2=6; compiler jobs at most2 |
-| Photo | 8 | Native/staging work and orchestration combined; Photo's owner qualifies its reduced-grant successor |
+| Unison | 8 | Default3+3 endpoint workers plus2 owner credits; current finite profile peaks at2+2+2=6; compiler jobs at most2 |
+| Photo | 8 | Native/staging maximum6 plus2 owner credits; Photo's owner qualifies its reduced-grant successor |
 | Headroom | 2 | Interactive applications, owners, transport and OS activity |
 
 Memory reservations are32GiB for Unison,64GiB for Photo,32GiB system headroom;
@@ -40,6 +39,8 @@ plus two owner credits would require10 and must be refused under8. These source
 changes are not yet runtime-qualified. The frozen worker8 benchmark
 has a different, larger allocation and cannot silently run under this split.
 Build entry points accept `JOBS`; use2 for ordinary shared development.
+The default3+3 profile needs worker3 admission support and post-slot controls;
+it is not yet an implemented or tested shared-runtime default.
 
 The capped entry points are implemented, but do not themselves grant a running
 slot or acquire global tokens. After standing scheduling acknowledgment:
@@ -81,13 +82,24 @@ missing PID alone is insufficient release evidence.
 Canonical existing pool manifest:
 `/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json`.
 Use its existing directory and inode-bound files, never create a competing pool.
-The equal-split token layout sent to Root is Unison0..7, Photo8..15, with16..17
-idle; its immutable policy successor is pending. Acquire a
+The agreed token layout is Unison0..7, Photo8..15, with16..17 idle. Acquire a
 complete required set nonblocking; on contention release every partial lock
 before waiting. Never replace token files. The dispatcher currently describes
 this accounting in dry-run JSON but does **not** acquire those locks. Its output
 explicitly labels token acquisition, memory enforcement and physical IO identity
 as unimplemented. Source labels cannot substitute for actual ownership.
+
+[Token primitive source](../tests/shared_cpu_pool.py) is prepared but unexecuted
+and not connected to the dispatcher. It reads a bounded pinned manifest, opens
+existing inode-bound private regular tokens on fresh descriptions, attempts an
+ascending explicit set, and closes a partial acquisition before returning busy.
+Close uncertainty retains the coordinator's remaining descriptors and never
+retries uncertain descriptor numbers. It has no automatic context-manager or
+destructor unlock, and uses close rather than LOCK_UN so inherited copies retain
+locks. Its release method consumes the runner's current settlement attestation;
+it does not produce kernel proof or independently verify process receipts.
+The runner must retain ownership on unknown children/groups. Actual contention,
+inheritance, rollback, cancellation and dispatcher integration remain unqualified.
 
 For bulk IO, identify the physical device/container first: Ten/Quasar or two APFS
 volumes cannot be assumed independent from volume names alone. One bulk scan,

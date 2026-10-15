@@ -1,0 +1,24 @@
+{
+  "state": "TOKEN_PRIMITIVE_SOURCE_PREPARED_UNEXECUTED_UNCONNECTED",
+  "authoritative_policy": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json",
+    "bytes": 5585,
+    "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352"
+  },
+  "source": {
+    "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+    "bytes": 10031,
+    "sha256": "1fc9dc45eb1d5cdb2e6fc1f76b48a773c0a3105b7c457be60d76b1ffccbfa278"
+  },
+  "scope": "Existing inode-bound pool only; bounded pinned manifest, no create/write/truncate/LOCK_UN; ascending explicit nonblocking set with partial close on contention; no automatic release on exceptions, unknown settlement/close retains owner. Runner supplies actual current settlement evidence; primitive is not proof producer or OS cap.",
+  "runtime_entrypoint_connected": false,
+  "module_imported_or_tests_executed": false,
+  "live_pool_opened_or_locked": false,
+  "compiler_or_native_invocations": 0,
+  "next_qualification": [
+    "Pure malformedbudget/manifest/partialclose/unknown-settlement controls.",
+    "Finite disposable and canonical two-owner real flock contention, distinctdescription/inheritedFD, rollback and actual owner/group closure afterpart5.",
+    "Wire dispatcher retained owner; physicalIO lanes/memory admission and sharedfunctional checks."
+  ],
+  "current_benchmark": "Samefrozenpart5exclusive18/live52232 unchanged; bounded sourceediting disclosed, no absolutequiet claim."
+}

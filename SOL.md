@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+Exact authoritative shared policy now Rootv3 SHA1dbe12eb: standing8/8/2,
+Unison00..07/Photo08..15/16..17idle, memory32/64/32GiB. Both priorCPU splits
+are historical. [Token primitive source preparation](tests/qualification/shared-token-source-preparation-20261015.json)
+adds tests/shared_cpu_pool.py, UNIMPORTED/UNTESTED/UNCONNECTED: pinned bounded
+manifest, existingprivateinode-boundpool only, nonblocking ascending explicit
+set, partial-acquisition close, no LOCK_UN or automaticerrorunlock. Unknown
+settlement/close retainsowner; release consumes caller's actualsettlement
+attestation, does not prove it. Livepool neveropened/locked, no test/build/native.
+Sourceworkdisclosed in currentpart5 workspace; frozenrun remains same18grant,
+livehandle52232. Postclosure: source/refusal controls, realtwo-owner/inheritance/
+rollback/unknownlifecycle, dispatcherowner integration, worker3defaultsupport,
+physicalIO/memory admission and sharedfunctional qualification. No capability
+claim from tokenfile labels or source alone.
+
 LATEST USER CPU agreement supersedes older proposals: equal8Unison/8Photo/2OS.
 [Equal8 source preparation](tests/qualification/shared-equal8-source-integration-20261015.json)
 pins precedingRootv2 pool/lifecycle contract while explicitly superseding its
