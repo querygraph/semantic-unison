@@ -74,11 +74,18 @@ def run(command, environment, timeout, max_output=4 * 1048576, cleanup_grace=2):
             child.process.stdout.close()
         if stderr is None:
             child.process.stderr.close()
-    if fault:
-        raise fault
-    return {"command": command, "returncode": settled["returncode"],
+    outcome = {"command": command, "returncode": settled["returncode"],
             "wall_seconds": time.monotonic() - start, "timed_out": timed_out,
             "resources": receipt(usage), "client_cleanup": settled,
             "capture_bytes": {"stdout": output["bytes"], "stderr": errors["bytes"]},
             "capture_truncated": output["truncated"] or errors["truncated"],
             "stdout": output["text"], "stderr": errors["text"]}
+    if fault:
+        # Preserve the original exception identity while carrying actual
+        # settlement/capture evidence to the owning invocation wrapper.
+        try:
+            fault.owned_process_outcome = outcome
+        except BaseException:
+            pass  # Never replace the first error just to enrich diagnostics.
+        raise fault
+    return outcome

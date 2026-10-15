@@ -185,6 +185,10 @@ def measure_invocation(command, environment, timeout, proxy_script, use_proxy=Tr
             fault = "native client failed, timed out or exceeded captured output limit"
     except BaseException as error:
         fault = repr(error)
+        # A settled direct client may have been interrupted before run()
+        # returned. Keep its real receipt rather than replacing it with only
+        # the exception text. Missing evidence stays missing.
+        measured = getattr(error, "owned_process_outcome", None)
     finally:
         if supervisor is not None:
             settled, _ = supervisor.finish(timeout=0 if fault else 5, cancel_reason=fault)

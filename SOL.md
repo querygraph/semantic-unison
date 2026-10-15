@@ -3257,3 +3257,25 @@ Purebf22d2/0 checks3largerbatches+3invalidbuildrefusals. Evidence
 bench/sync/results/warm-larger-plan-qualification-20261015.json. Proposed scheduling
 now first128MiBbatch only; earlier32MiBproposal withdrawn unstarted, no resources
 held. SDKactualRoot acceptance adopted; no newSDK/native/Photo capability.
+
+### Warm128 dispatch STOPPED after Root scheduling DEFER; no measured result
+
+Started first128MiB×4 batch owner60597 after observing Rootpublishedreserved0 and
+announcing18credits, but BEFORE explicit Root timing allocation. That was a
+scheduling mistake; current Root review DEFER/ZERO overrides intent. Actual
+normalSIGINT to still-live benchmarkchild95348 ended60597/c34ac2/exit1/no session.
+Eight warmups passed, zero measuredsamples, reportcompletefalse, privatefixture
+removed, no matching workspace process. Server96294 and supervisor96291 have
+actualreaped0 receipts; original nativeclient receipt was lost on exception
+rethrow and is NOT fabricated retroactively. Partial owner/limits evidence
+bench/sync/results/warm-128-stopped-20261015.json. Owner reservation relinquished,
+no successor starts absent explicit coordinated allocation.
+
+Fixed source measure.run to attach actual settled outcome to the original
+exception and run.measure_invocation to retain it. Originalexception identity/
+payload preserved; unknown evidence stays missing. Purecb0a3d/0 interface fixtures
+pass across both wrappers, no child. Real fake-process successor qualification
+and whole324CLI ownedaggregate deadline remain required before a refreshed
+immutable plan/review. Existing SDKlive return accepted under original pins is
+unchanged/historical; new sharedmeasure source is not relabelled oldqualified.
+No SDK/Photo/compiler/new benchmark invoked by this source correction.
