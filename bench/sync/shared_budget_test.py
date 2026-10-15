@@ -21,6 +21,11 @@ cases = (
     (['--orchestration-cpu-credits', '19'], False),
     (['--orchestration-cpu-credits', '2'], False),
     (['--workers', '4', '--modes', 'source-clone', '--loopback-cpu-credits', '5', '--orchestration-cpu-credits', '2'], False),
+    (['--shared-qualification', '--loopback-cpu-credits', '8', '--orchestration-cpu-credits', '2'], True),
+    (['--shared-qualification', '--loopback-cpu-credits', '8'], False),
+    (['--shared-qualification', '--loopback-cpu-credits', '5', '--orchestration-cpu-credits', '2'], False),
+    (['--shared-qualification', '--qualification', '--loopback-cpu-credits', '8', '--orchestration-cpu-credits', '2'], False),
+    (['--shared-qualification', '--partition', '0', '--loopback-cpu-credits', '8', '--orchestration-cpu-credits', '2'], False),
 )
 
 for options, admitted in cases:
@@ -37,4 +42,4 @@ for options, admitted in cases:
             assert not admitted and error.code == 2 and metadata.call_count == 0
         else:
             raise AssertionError('escaped pre-dispatch boundary')
-print('PASS four budget admissions/six refusals before tool metadata; no child/output')
+print('PASS five budget admissions/ten refusals before tool metadata; no child/output')

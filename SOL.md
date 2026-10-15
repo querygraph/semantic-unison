@@ -4,6 +4,19 @@
 
 ## Current checkpoint — 2026-10-15
 
+LATEST USER CPU agreement supersedes older proposals: equal8Unison/8Photo/2OS.
+[Equal8 source preparation](tests/qualification/shared-equal8-source-integration-20261015.json)
+pins precedingRootv2 pool/lifecycle contract while explicitly superseding its
+4/12CPU fields. Proposed stable token ranges0..7Unison/8..15Photo/16..17idle.
+Manualshared ceiling8/compilerjobs<=2 plus2owner; new --shared-qualification
+keeps workers1/2 perendpoint plus2owner(max6declared) inside8. Old functional
+4credit accounting without owner budget is not silently claimed equivalent.
+Updated source/refusal scripts NOT RUN during currentpart5; source/doc/queue work
+only, disclosed in part5workspace. Currentfrozenpart5 remains LIVE52232 under
+existing18grant, no shrink/preemption/redispatch. Commonpool FD integration,
+IO/memory admission and finite contention/sharedruntime qualification still
+pending; labels are not locks/OSCPU/RSS caps. No test/build/native process started.
+
 Root shared-policy successor adopted as SOURCE ONLY:
 `SHARED-DEVELOPMENT-RESOURCE-POLICY-v1.json` SHA2924dc03 (Unison10=4+4+2,
 Photo6=4+2,OS2; memory32/64/32GiB). [Source integration](tests/qualification/shared-policy-v1-source-integration-20261015.json)

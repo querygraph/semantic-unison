@@ -5,7 +5,7 @@ from unittest.mock import patch
 import manual
 
 out = Path('/UNCREATED-shared-control')
-env = {'OX_PREFIX': '/UNREAD-compiler', 'SHARED_CPU_CREDITS': '10'}
+env = {'OX_PREFIX': '/UNREAD-compiler', 'SHARED_CPU_CREDITS': '8'}
 with patch.object(Path, 'is_file', return_value=True):
     argv = manual.command('ox-build', out, env)
     assert argv[argv.index('--jobs') + 1] == '2' and '--selftest' not in argv
@@ -18,7 +18,7 @@ with patch.object(Path, 'is_file', return_value=True):
     for target, changes in (
         ('ox-build', {'JOBS': '5'}),
         ('ox-build', {'SHARED_CPU_CREDITS': '0'}),
-        ('ox-build', {'SHARED_CPU_CREDITS': '11'}),
+        ('ox-build', {'SHARED_CPU_CREDITS': '9'}),
         ('ox-build', {'SHARED_CPU_CREDITS': 'bad'}),
         ('ox-make', {}),
         ('host-executor', {}),
@@ -35,11 +35,11 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
                                                        'compiler': '/NEVER-query'}):
     argv = manual.command('sync-functional', out,
                           dict(env, STOCK_RECEIPT='unread', OX_RECEIPT='unread'))
-    assert '--qualification' in argv
-    assert argv[argv.index('--loopback-cpu-credits') + 1] == '10'
+    assert '--shared-qualification' in argv and '--qualification' not in argv
+    assert argv[argv.index('--loopback-cpu-credits') + 1] == '8'
     assert argv[argv.index('--orchestration-cpu-credits') + 1] == '2'
     plan = manual.shared_resource_plan('sync-functional', env)
-    assert plan['cpu_token_indexes'] == list(range(10))
+    assert plan['cpu_token_indexes'] == list(range(8))
     assert plan['endpoint_workers'] == [2, 2] and plan['declared_peak_credits'] == 6
     assert plan['orchestration_credits'] == 2 and plan['memory_reservation_gib'] == 32
     assert not plan['runtime_grant'] and not plan['token_acquisition_implemented']

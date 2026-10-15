@@ -30,9 +30,9 @@ Targets:
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
-SHARED_CPU_CREDITS=10 selects capped shared entry points: build-only defaults
+SHARED_CPU_CREDITS=8 selects capped shared entry points: build-only defaults
 to JOBS=2 and rejects JOBS above two or the ceiling minus two owner credits.
-sync-functional needs four endpoint plus two owner credits. Other targets need a separately
+sync-functional selects workers1/2 per endpoint plus two owner credits. Other targets need a separately
 qualified resource scope; this option does not claim a kernel CPU limit or
 acquire Photo's token pool. Standing scheduling agreement is still required.
 DRY_RUN=1 prints JSON argv without executing a check or creating a report directory.
@@ -75,7 +75,7 @@ def shared_resource_plan(target, environment):
     if value is None:
         return None
     credits = int(value)
-    require(1 <= credits <= 10, 'shared Unison lane must be 1..10 credits')
+    require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
     build = target in ('stock-build', 'ox-build')
     endpoints = [2, 2] if target == 'sync-functional' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 0
@@ -97,12 +97,12 @@ def command(target, output, environment):
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
-        require(1 <= shared <= 10, 'shared Unison lane must be 1..10 credits')
+        require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'sync-functional':
-            require(shared >= 6, 'functional loopback requires four endpoint plus two owner credits')
+            require(shared >= 6, 'shared functional loopback requires four endpoint plus two owner credits')
     if target in ('helper-stock', 'helper-ox'):
         key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
@@ -144,7 +144,7 @@ def command(target, output, environment):
             receipt = checked_build(environment[key])
             argv.extend(['--binary', label + '=' + receipt['binary'],
                          '--compiler', label + '=' + receipt['compiler']])
-        return argv + ['--qualification', '--measure-primary-reads',
+        return argv + ['--shared-qualification' if shared is not None else '--qualification', '--measure-primary-reads',
                        '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
                        ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [
                        '--timeout', '30',

@@ -238,6 +238,8 @@ def main():
     parser.add_argument("--timeout", type=float, default=180)
     parser.add_argument("--qualification", action="store_true",
                         help="fixed finite smoke: two 2 MiB files, workers 1/2, no warmup, one sample")
+    parser.add_argument("--shared-qualification", action="store_true",
+                        help="finite shared smoke: two 2 MiB files, workers1/2, six to eight credits including two owner credits")
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
     parser.add_argument("--measure-primary-reads", action="store_true",
                         help="opt-in worker primary-reader counters; not total application/disk reads")
@@ -255,9 +257,14 @@ def main():
         workers = [int(value) for value in args.workers.split(",")]
     except ValueError:
         parser.error("workers must be comma-separated integers")
-    if args.qualification:
+    if args.qualification and args.shared_qualification:
+        parser.error("choose one qualification profile")
+    finite_qualification = args.qualification or args.shared_qualification
+    if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2]
+    if args.shared_qualification and (args.loopback_cpu_credits not in (6, 7, 8) or args.orchestration_cpu_credits != 2):
+        parser.error("shared qualification requires six to eight credits including two owner credits")
     if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
         parser.error("workers must be unique values from 1,2,4,6,8,18,36")
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
@@ -278,12 +285,12 @@ def main():
         size = validate_dimensions(args.file_mib, args.files, args.packet_bytes)
     except ValueError as error:
         parser.error(str(error))
-    if not args.qualification and (args.warmups < 1 or args.repetitions < 5):
+    if not finite_qualification and (args.warmups < 1 or args.repetitions < 5):
         parser.error("performance run requires at least one warmup and five measured repetitions")
     configurations = [(label, mode, worker) for label in binaries for mode in modes for worker in workers]
     configurations += [(label, "reference", None) for label in references]
     if args.partition is not None:
-        if args.qualification:
+        if finite_qualification:
             parser.error("performance partitions cannot use qualification counts")
         if modes != list(partitions.MODES) or workers != list(partitions.WORKERS):
             parser.error("partition mode/worker order must match the canonical matrix")
@@ -303,7 +310,8 @@ def main():
             host[key] = int(query.stdout) if query.returncode == 0 else None
     scripts = {path.name: sha256(path) for path in HERE.glob("*.py")}
     result = {"schema": "unison-synthetic-sync/0", "complete": False,
-              "purpose": "finite harness qualification" if args.qualification else "warm-cache performance",
+              "purpose": ("finite shared-harness qualification" if args.shared_qualification else
+                          "finite harness qualification" if args.qualification else "warm-cache performance"),
               "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "repository_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "runner_sha256": scripts, "host": host, "binaries": metadata,
