@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+Prepared [settlement lifecycle v2 request](bench/sync/results/native-settlement-lifecycle-request-v2-20261015.json)
+for seven finite original-Python cases: six direct child policies plus the actual
+proxy delayed-echo client/server/supervisor path. OneCPU/45s retained aggregate
+(maximum60), no compiler/SDK/Unison binary/Photo/timing. Exact command and12
+transitive source pins queued to Root; **unallocated/unstarted**. In-memory
+syntax compilation only, no test child executed. V1 request is preserved but
+withdrawn unstarted because two transitive imports were missing from its pin
+inventory; v2 leaves command/cases/limits unchanged. Fake children cannot prove
+historical part3 cause or restore its incomplete matrix; no retry authorized.
+
 Post-failure source successor: proxy normal EOF settlement now allows up to2s
 capped by the remaining protocol deadline, rather than sharing the200ms TERM
 grace. Known faults still signal TERM immediately; the old NativeChild default

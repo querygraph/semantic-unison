@@ -1,0 +1,93 @@
+{
+  "state": "PREPARED_UNALLOCATED_NOT_STARTED",
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/bench/sync/native_settlement_lifecycle_test.py",
+    "--workspace",
+    "/private/tmp/unison-native-settlement-lifecycle-v1"
+  ],
+  "workspace": "/private/tmp/unison-native-settlement-lifecycle-v1",
+  "source_pins": {
+    "bench/sync/native_settlement_lifecycle_test.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/native_settlement_lifecycle_test.py",
+      "bytes": 5997,
+      "sha256": "d710aa65d8e56de9da31eff5a1e6fbd787a96c95254811b660f040b7845ff79a"
+    },
+    "bench/sync/ownership.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 7154,
+      "sha256": "4a679e6c736bf4a1b152ebdb4cde57a2b83a38466acd77133a27c1c9449147d2"
+    },
+    "bench/sync/proxy.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    "bench/sync/measure.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3745,
+      "sha256": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b"
+    },
+    "bench/sync/run.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 29520,
+      "sha256": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b"
+    },
+    "bench/sync/fixtures.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/fixtures.py",
+      "bytes": 3352,
+      "sha256": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699"
+    },
+    "bench/sync/partitions.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4609,
+      "sha256": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8"
+    },
+    "bench/sync/batch_audit.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    },
+    "tests/sdk_container_receive/live_merge_aggregate.py": {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 7294,
+      "sha256": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f"
+    },
+    "tests/sdk_container_receive/live_merge_owner.py": {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    }
+  },
+  "limits": {
+    "cpu_credits": 1,
+    "aggregate_seconds": 45,
+    "aggregate_maximum_seconds": 60,
+    "logical_cases": 7,
+    "original_child_processes": 9,
+    "retained_worker_processes": 1
+  },
+  "pre_aggregate_scope": "Interpreter imports and unique workspace creation precede aggregate; no native test child before supervision. No total-wrapper hard deadline claim.",
+  "cases": [
+    "normal-delayed",
+    "legacy-grace-refusal",
+    "known-fault",
+    "term-ignoring",
+    "nonzero-native-exit",
+    "expired-normal-budget",
+    "actual-proxy-delayed-echo"
+  ],
+  "allowed_operations": "Original generated Python children only; no compiler/SDK/Unison executable/Photo/Lightroom/cache/Main/timing benchmark. No retry or automatic successor.",
+  "prior_failure": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part3-failed-return-20261015.json",
+    "bytes": 14660,
+    "sha256": "c7f0627f955ab8b91b4de2b3f96f02b4dabfb33aa381b9114f6cdfe8c1bd86af"
+  },
+  "pure_policy_controls": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/native-settlement-policy-source-controls-20261015.json",
+    "bytes": 1902,
+    "sha256": "e7d6f4d57616f5f619510fc7aecfd6a32aff7dbd5d58066bf930e6598bcfba1b"
+  },
+  "qualification_scope": "Real finite delayed normal-exit/TERM/KILL and actual proxy caller cleanup only. Cannot repair or complete historical part3, prove its root cause, or qualify performance.",
+  "admission": "Fresh explicit Root scheduling ACK for this exact request/command required before one dispatch. No prior benchmark/SDK admission reuse."
+}
