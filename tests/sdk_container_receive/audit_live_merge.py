@@ -26,6 +26,25 @@ def audit(packet, workspace, terminal):
     prep.require(result['complete'] and result['cli_runs'] == 9 and result['validation_calls'] == 6,
                  'incomplete receiving matrix')
     prep.require(start['mode'] == result['mode'] and result['mode'] in ('native', 'mock'), 'mode mismatch')
+    prep.require([item['codec'] for item in result['results']] == list(prep.CODECS),
+                 'exact unique ordered codec results required')
+    if result['mode'] == 'native':
+        prep.require(start['admission'] is not None, 'native return lacks admission')
+        admission = prep.checked(start['admission'])
+        dispatch = json.loads((workspace / 'START.json').read_text())
+        prep.require(admission['state'] == 'ROOT_ADMITTED_FINITE_UNISON_LIVE_MERGE_V1'
+                     and admission['prepared'] == start['prepared']
+                     and admission['workspace'] == str(workspace.resolve())
+                     and admission['source_pins'] == start['sources']
+                     and dispatch['mode'] == 'native' and dispatch['pid'] == aggregate['pid']
+                     and dispatch['unix'] < admission['startDeadlineUnix'],
+                     'native admission/dispatch binding mismatch')
+        prep.require(cases.host.tool(Path(packet['tool']['manifest']), False) == packet['tool'],
+                     'native return requires qualified v1 tool, not mock protocol')
+    else:
+        prep.require(packet['tool']['build_id'].startswith('MOCK-') and start['admission'] is None,
+                     'mock return mode/provenance mismatch')
+
     prep.require(aggregate['pid'] == phase_start['pid'] and aggregate['reaped']
                  and aggregate['other_cli_group_members_absent_before_reap']
                  and aggregate['returncode'] == 0 and aggregate['within_wall_limit']
@@ -55,7 +74,8 @@ def audit(packet, workspace, terminal):
                          'retained output changed')
             prep.require(not list((root / side).rglob('.unison.*')), 'staging leftovers')
         recorded = next(item for item in result['results'] if item['codec'] == case['codec'])
-        prep.require(recorded['receipts'] == receipts
+        prep.require(recorded['target_sha256'] == case['states']['target']['sha256']
+                     and recorded['receipts'] == receipts
                      and recorded['output_identities'] == [cases.identity(root / side / 'image.dng')
                                                           for side in ('left', 'right')],
                      'executor receipts/retained identities disagree')

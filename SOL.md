@@ -13,9 +13,10 @@ corpus, native-resource, acceptance-matrix and performance qualification.
 The [six-call live SDK merge request](tests/qualification/sdk-live-merge-request-v1-20261015.json)
 is source-ready but UNADMITTED. Nine-run full mock receiving and finite owner/
 aggregate lifecycle controls pass. No SDK call has run under this request.
-All Unison allocations are closed. Root's current-color reference holds18credits;
-coordinator91195 was actually observed live. Do not start compiler/core/helper/
-SDK successors until Root's actual closure/release. Earlier entries below are
+All Unison allocations are closed. Root's latest explicit color recovery closure
+reports original4750/097f59/0 and recovery55005/cfd119/0, leasefree and18released.
+Fresh Photo reservations still require coordination; no SDK admission follows
+from a resource release. Earlier entries below are
 historical evidence and must not override a newer pinned checkpoint.
 
 ## Live implementation handoff
@@ -3187,3 +3188,15 @@ readback and4terminal/provenance refusals; no subprocess. Evidence
 live-merge-return-audit-qualification.json. Native request runtime source pins
 unchanged; new auditor is offline only and request remains UNADMITTED. Root same
 91195/4750 Photo lease+18credits hold remains; no compiler/core/helper/SDK dispatch.
+
+### Offline native-return provenance hardening
+
+Auditor now rejects duplicate/reordered codec rows and checks recorded target
+hashes. Native mode separately requires pinned fresh admission, wrapper prepared/
+source/workspace and actual dispatchPID/startdeadline bindings plus qualifiedv1
+tool provenance; mock cannot become native by relabeling mode. Pure current
+e25e5d/0 rereads genuine nine-run mock and rejects six cases, including two owned
+metadata overlays (duplicates/native relabel) without modifying original evidence.
+Successor evidence live-merge-return-audit-v2-qualification.json; native branch
+not exercised because no native admission/result exists. Runtime request pins
+remain unchanged/current. Root recovery release acknowledged, no Unison dispatch.

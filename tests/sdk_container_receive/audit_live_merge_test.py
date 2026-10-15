@@ -3,6 +3,7 @@
 import argparse
 import copy
 import json
+import tempfile
 from pathlib import Path
 import audit_live_merge as audit
 
@@ -32,3 +33,27 @@ except ValueError:
 else:
     raise AssertionError('mismatched target accepted')
 print('PASS closed nine-run mock readback and four terminal/provenance refusals; no process/SDK')
+
+# Mutate only owned metadata copies. Retained original logs/output bytes are
+# referenced read-only; no original receipt is overwritten.
+original=a.mock_workspace/'runtime'
+for name in ('duplicate-codec', 'mock-relabeled-native'):
+    overlay=Path(tempfile.mkdtemp(prefix='unison-return-audit-overlay-'))
+    for item in original.iterdir():
+        (overlay/item.name).symlink_to(item, target_is_directory=item.is_dir())
+    result=json.loads((original/'RESULT.json').read_text())
+    start=json.loads((original/'WRAPPER-START.json').read_text())
+    if name=='duplicate-codec':
+        result['results'].append(result['results'][0])
+    else:
+        result['mode']=start['mode']='native'
+    for filename,value in (('RESULT.json',result),('WRAPPER-START.json',start)):
+        (overlay/filename).unlink()
+        (overlay/filename).write_text(json.dumps(value))
+    try:
+        audit.audit(packet,overlay,terminal)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('invalid retained metadata accepted: '+name)
+print('PASS duplicate-codec and native-relabel refusal on disposable metadata overlays')
