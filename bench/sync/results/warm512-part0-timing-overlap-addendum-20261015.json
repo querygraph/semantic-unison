@@ -1,0 +1,166 @@
+{
+  "state": "TIMING_OVERLAP_DISCLOSED_ORIGINAL_ARTIFACTS_UNCHANGED",
+  "original_measurement": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-512MiB-4files-part0-20261015.json",
+    "bytes": 765831,
+    "sha256": "7ea2087c9f521bbeae1660c948fd60d872b056982543f715063630b66c08909a"
+  },
+  "original_return": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-v9-part0-actual-return-20261015.json",
+    "bytes": 6386,
+    "sha256": "2bde606fa9cb6bc256d3bd782c6440daf8fe51caa00940fc7b7f438eece0ed24"
+  },
+  "root_disclosure": {
+    "path": "/Users/alexy/src/photo/preview-generator/table-storage-source-v1/DISASSEMBLER-STOPPED.json",
+    "bytes": 460,
+    "sha256": "646dedac8ae9919606b99871f6e35c0e1c32f51649898ae494f246e9d2201657"
+  },
+  "preserved_disclosure_copy": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-part0-disassembler-source-20261015.json",
+    "bytes": 460,
+    "sha256": "646dedac8ae9919606b99871f6e35c0e1c32f51649898ae494f246e9d2201657"
+  },
+  "interval_unix": [
+    1792046929.4774537,
+    1792046988.967324
+  ],
+  "interval_utc": [
+    "2026-10-15T06:48:49.477454+00:00",
+    "2026-10-15T06:49:48.967324+00:00"
+  ],
+  "duration_seconds": 59.48987030982971,
+  "wall_clock_mapping": "Captured dated Unison logs interpreted with user/host America/Los_Angeles zone (PDT on2026-10-14); no per-row absolute begin/end stamps existed. No clock-jump evidence or quantified clock-error bound.",
+  "row_flags": [
+    {
+      "sample_index_zero_based": 4,
+      "identity": {
+        "label": "stock",
+        "mode": "receiver-clone",
+        "workers": 1,
+        "phase": "measured",
+        "repetition": 1
+      },
+      "sample_sha256_canonical_json": "3029cde21d22654fd660650bb08fc29dbb6e3320f66347758d44352a1a37e7b5",
+      "stages": {
+        "seed_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:47:08",
+            "Unison 2.54.0 (ocaml 5.2.0) started propagating changes at 23:47:12.18 on 14 Oct 2026",
+            "Unison 2.54.0 (ocaml 5.2.0) finished propagating changes at 23:47:37.55 on 14 Oct 2026, 25.365 s"
+          ],
+          "recorded_wall_seconds": 29.207753284979844,
+          "started_propagation_unix_from_log": 1792046832.18,
+          "finished_propagation_unix_from_log": 1792046857.55
+        },
+        "update_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:47:46",
+            "Unison 2.54.0 (ocaml 5.2.0) started propagating changes at 23:47:50.45 on 14 Oct 2026",
+            "Unison 2.54.0 (ocaml 5.2.0) finished propagating changes at 23:48:23.21 on 14 Oct 2026, 32.763 s"
+          ],
+          "recorded_wall_seconds": 36.69972132600378,
+          "started_propagation_unix_from_log": 1792046870.45,
+          "finished_propagation_unix_from_log": 1792046903.21
+        },
+        "noop_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:48:37"
+          ],
+          "recorded_wall_seconds": 3.89263392900466
+        }
+      },
+      "classification": "POSSIBLE_POST_NOOP_VERIFICATION_CLEANUP_BOUNDARY_OVERLAP",
+      "notes": "Timed update and noop ended before Root interval by log+duration bounds; uninstrumented post-noop hashing/cleanup and next-row fixture preparation boundary is not precisely timestamped. Conservatively retain this possible tail flag."
+    },
+    {
+      "sample_index_zero_based": 5,
+      "identity": {
+        "label": "stock",
+        "mode": "semantic",
+        "workers": 1,
+        "phase": "measured",
+        "repetition": 1
+      },
+      "sample_sha256_canonical_json": "42ec4fe2e9f6193123bae071152cd1143074347ce2704d6e5d49bb7d465b1681",
+      "stages": {
+        "seed_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:49:04",
+            "Unison 2.54.0 (ocaml 5.2.0) started propagating changes at 23:49:08.19 on 14 Oct 2026",
+            "Unison 2.54.0 (ocaml 5.2.0) finished propagating changes at 23:49:34.22 on 14 Oct 2026, 26.030 s"
+          ],
+          "recorded_wall_seconds": 29.91944882099051,
+          "started_propagation_unix_from_log": 1792046948.19,
+          "finished_propagation_unix_from_log": 1792046974.22
+        },
+        "update_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:49:43",
+            "Unison 2.54.0 (ocaml 5.2.0) started propagating changes at 23:49:47.07 on 14 Oct 2026",
+            "Unison 2.54.0 (ocaml 5.2.0) finished propagating changes at 23:50:52.77 on 14 Oct 2026, 65.706 s"
+          ],
+          "recorded_wall_seconds": 69.5700863560196,
+          "started_propagation_unix_from_log": 1792046987.07,
+          "finished_propagation_unix_from_log": 1792047052.77
+        },
+        "noop_sync": {
+          "captured_log_lines": [
+            "Unison 2.54.0 (ocaml 5.2.0) log started at 2026-10-14 at 23:51:07"
+          ],
+          "recorded_wall_seconds": 3.9617654950125143
+        }
+      },
+      "classification": "DEFINITE_SEED_AND_EARLY_MEASURED_UPDATE_OVERLAP",
+      "notes": "Root interval contains the seed propagation and the beginning of measured update propagation. Entire row retained; no replacement/exclusion."
+    }
+  ],
+  "interpretation": {
+    "quiet_uncontaminated_timing_claim_withdrawn": true,
+    "cpu_disk_cache_interference_possible": true,
+    "impact_magnitude_unknown": true,
+    "all18rows_all15measured_samples_retained": true,
+    "sample_exclusions": [],
+    "replacement_runs": 0,
+    "original_summary_unchanged": [
+      {
+        "label": "stock",
+        "mode": "ordinary",
+        "workers": 1,
+        "samples": 5,
+        "wall_seconds": {
+          "median": 37.42266914699576,
+          "minimum": 37.3895740910084,
+          "maximum": 37.76742627299973
+        },
+        "all_results_exact": true
+      },
+      {
+        "label": "stock",
+        "mode": "receiver-clone",
+        "workers": 1,
+        "samples": 5,
+        "wall_seconds": {
+          "median": 36.69972132600378,
+          "minimum": 36.60974631900899,
+          "maximum": 36.81985539197922
+        },
+        "all_results_exact": true
+      },
+      {
+        "label": "stock",
+        "mode": "semantic",
+        "workers": 1,
+        "samples": 5,
+        "wall_seconds": {
+          "median": 69.65878984500887,
+          "minimum": 69.31997268798295,
+          "maximum": 70.21430851801415
+        },
+        "all_results_exact": true
+      }
+    ],
+    "functional_exactness_and_actual_resource_closure_unchanged": true,
+    "later_samples_not_claimed_free_of_cache_carryover": true,
+    "retry_or_replacement_authorized": false
+  }
+}

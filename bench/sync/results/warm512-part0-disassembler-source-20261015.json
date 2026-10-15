@@ -1,0 +1,16 @@
+{
+  "state": "SOURCE_DISASSEMBLER_RANGE_IGNORED_STOPPED_TIMING_OVERLAP_DISCLOSED",
+  "pid": 54583,
+  "actualOwnerTerminal": {
+    "session": 57433,
+    "chunk": "2b183a",
+    "exitCode": 143,
+    "runningSessionReturned": false
+  },
+  "startUnixFromOutputBirthtime": 1792046929.4774537,
+  "endUnixConservative": 1792046988.967324,
+  "outputBytes": 91279134,
+  "adobeCodeExecuted": false,
+  "compilerExecuted": false,
+  "potentialBenchmarkInterference": true
+}

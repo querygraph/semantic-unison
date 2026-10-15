@@ -45,6 +45,13 @@ status of this exact v5 batch; later sizes and broader performance remain open.
 
 ## Completed warm512 first partition
 
+**Timing caveat:** [Root's disclosed overlap and row flags](../bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json)
+supersede the original quiet-window assumption. A59.49s static disassembler
+interval definitely overlaps measured1 semantic seed/early update; the previous
+receiver-clone row's post-noop tail is possibly affected. Keep all samples and
+medians, with no retry/replacement. No clean quiet-performance claim; exactness
+and actual process closure remain passed. Raw data/original return are unchanged.
+
 The [first512MiB part](../bench/sync/results/warm512-v9-part0-actual-return-20261015.json)
 passed18rows/54 synchronization invocations: stock OCaml, one worker, three
 modes and five measured repetitions. Owner74730/c65a5b/0 and aggregate52671

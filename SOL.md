@@ -4,6 +4,12 @@
 
 ## Current checkpoint — 2026-10-15
 
+Timing correction: warm512 part0 has a disclosed59.49s CPU/disk overlap.
+Functional/ownership checks pass, but it is not an uncontaminated quiet timing
+run. [Addendum](bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json)
+flags measured1 semantic definitely and measured1 receiver-clone tail possibly.
+All original samples/return hashes and medians remain unchanged; no rerun.
+
 Latest runtime: warm512 part0 PASSED/CLOSED, owner74730/c65a5b/0,18rows/54sync
 invocations, no unresolved markers; all18credits released. This is stock worker1
 only, not a complete512MiB stock/Ox/parallel matrix. See the live entry below.
@@ -48,6 +54,19 @@ the actual result is linked above. The prepared plan itself remains immutable.
 Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
+
+* Timing overlap disclosure (2026-10-15): Root reported static disassembler54583
+  active conservativelyUnix1792046929.4774537..1792046988.967324, output91,279,134B,
+  owner57433/2b183a/143 closed. Preserved its pinned receipt and immutable
+  [analysis addendum](bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json).
+  Dated Unison logs show measured1 semantic seed propagation and early timed
+  update inside that interval. Preceding measured1 receiver-clone update ended
+  earlier, but its uninstrumented post-noop tail/next-fixture boundary could
+  overlap, so it is conservatively flagged. Entire run's quiet-timing claim is
+  withdrawn; possible cache carryover/impact magnitude unknown. All18 raw rows,
+  five samples/mode, original hashes and summaries are preserved, no exclusions,
+  retry or replacement. Resource closure/exactness remain passed and18released.
+  Carry this sidecar with any future combined-series performance publication.
 
 * Actual warm512 first part PASSED/CLOSED (2026-10-15): fresh allocationf9b954a2
   ran once, actual owner74730/c65a5b/exit0, aggregate52671 closed/reaped/others

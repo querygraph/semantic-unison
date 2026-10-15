@@ -9,6 +9,16 @@ validity or Adobe-current-edits rendering.
 
 ## Completed warm512 part0 — 2026-10-15
 
+**Timing overlap disclosed:** a separate static disassembler consumed CPU/disk
+for59.49s during this part. [Pinned addendum](results/warm512-part0-timing-overlap-addendum-20261015.json)
+flags measured repetition1 semantic (seed and early update definitely overlap)
+and the preceding repetition1 receiver-clone row's possible post-noop tail.
+This is **not an uncontaminated quiet timing run**. All raw rows and the
+original return remain byte-identical; all samples/medians are retained, with
+no exclusions, replacements or reruns. Exactness/resource closure still pass;
+interference magnitude and cache carryover are not quantified. Attach this
+addendum whenever publishing or merging this part's timing results.
+
 [Raw18 rows](results/warm-512MiB-4files-part0-20261015.json) and
 [sealed return](results/warm512-v9-part0-actual-return-20261015.json) cover only
 stock OCaml with one semantic worker per endpoint, all three modes, one warmup
@@ -25,15 +35,16 @@ No other partition or larger workload was dispatched under this allocation.
 | Semantic, one worker | 69.659 | 69.320 | 70.214 |
 
 Four512MiB generated files form a2GiB corpus; this is not a single2GiB-file test.
-Sequential semantic transfer is about1.86x the ordinary elapsed time here.
+The observed sequential semantic median is about1.86x the ordinary median
+in this contaminated run; this is not a controlled causal speed comparison.
 It still returns only12,288 logical write bytes in four attempts, with32,768
 packet payload bytes and51,861 median forwarded protocol bytes. Ordinary
 protocol median806,012 bytes, receiver-clone806,013. Receiver cloning inherits
 2,147,352,576 output bytes, leaving a131,072-byte non-inherited materialization
 model; the ordinary full-extent model is2,147,483,648 bytes. These models are
 not syscall/physical-write telemetry. Same internal APFS volume and warm,
-uncontrolled caches; Root held competing Photo work, unrelated OS activity
-was not continuously measured. Fixture generation/seed/verification/no-op work
+uncontrolled caches; the intended reservation was interrupted by the disclosed
+static disassembler. Other OS activity was not continuously measured. Fixture generation/seed/verification/no-op work
 is outside the reported update times but inside the actual owned aggregate.
 Binary/compiler provenance queries are not counted as synchronization samples.
 
