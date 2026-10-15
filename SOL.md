@@ -55,6 +55,21 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Exact512MiB cohort source retained (2026-10-15): created/locked detached
+  worktree `/private/tmp/unison-warm512-source-a6f0b695` at the actual part0
+  runtime revisiona6f0b695. All21 runner hashes match the captured manifest,
+  tracked source is clean, and stock/Ox receipt/source checks pass without
+  invoking binaries/compilers. [Snapshot record](bench/sync/results/warm512-source-snapshot-20261015.json).
+  This preserves strict cross-part provenance despite report commits in the
+  main checkout; do not weaken repository/runner comparisons or replay part0.
+  Fresh [part1 request](bench/sync/results/warm512-frozen-part1-prepared-request-20261015.json)
+  uses that retained source/plan, stockworker6/three modes/18rows/54syncCLI only.
+  It is UNALLOCATED/UNSTARTED, no credits held or successor automatically run.
+  Part0's timing contamination addendum is mandatory for any series publication.
+  Worktree lock prevents accidental git removal, not edits; fresh byte checks
+  remain necessary. Native scheduling still belongs to Photo Root.
+
+
 * Timing overlap disclosure (2026-10-15): Root reported static disassembler54583
   active conservativelyUnix1792046929.4774537..1792046988.967324, output91,279,134B,
   owner57433/2b183a/143 closed. Preserved its pinned receipt and immutable
