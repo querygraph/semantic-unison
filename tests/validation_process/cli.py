@@ -7,6 +7,9 @@ import json
 from pathlib import Path
 import re
 import tempfile
+import sys
+
+import records
 
 p = argparse.ArgumentParser(description=__doc__)
 p.add_argument('--build-receipt', type=Path, required=True)
@@ -42,23 +45,36 @@ def observed(log, session, expected, truncated=False):
     raw = bytes.fromhex(stdout)
     assert len(raw) <= 4096 and len(bytes.fromhex(stderr)) <= 4096
     assert raw.startswith(b'UNISON-DNG-VALIDATION 1\n') and raw.endswith(b'END\n')
-    return {'pid': int(pid), 'candidate_sha256': digest, 'stdout': raw.decode('ascii'),
+    groups = records.parse_groups(log)
+    assert len(groups) == 1, groups
+    group = groups[0]
+    assert group.endpoint == 'server' and group.pid == int(pid)
+    assert group.candidate_sha256 == digest
+    if sys.platform == 'darwin':
+        assert group.observation == 'observed' and group.other_members == 0, group
+    else:
+        assert group.observation == 'unknown' and group.other_members is None, group
+    return {'group_observation': group.observation, 'group_other_members': group.other_members,
+            'pid': int(pid), 'candidate_sha256': digest, 'stdout': raw.decode('ascii'),
             'stderr_hex': stderr, 'stderr_truncated': truncated}
 
 original = b'original synthetic filename-claimed DNG bytes'
 plain = v.Session(work / 'default', build['binary'])
 (plain.left / 'image.dng').write_bytes(original)
-assert not reports(plain.sync())
+plain_log = plain.sync()
+assert not reports(plain_log) and not records.parse_groups(plain_log)
 assert (plain.right / 'image.dng').read_bytes() == original
 
 s = v.Session(work / 'observed', build['binary'])
 (s.left / 'image.dng').write_bytes(original)
-options = ('-debug', 'validation-process')
+options = ('-debug', 'validation-process', '-debug', 'validation-group')
 passed = observed(s.sync(options=options), s, original)
 assert 'errors 0\n' in passed['stdout']
 assert (s.right / 'image.dng').read_bytes() == original
 before = len(s.calls('server'))
-assert not reports(s.sync(options=options)) and len(s.calls('server')) == before
+noop_log = s.sync(options=options)
+assert not reports(noop_log) and not records.parse_groups(noop_log)
+assert len(s.calls('server')) == before
 changed = original + b' rejected change'
 (s.left / 'image.dng').write_bytes(changed)
 s.control('image.dng', server='error')
@@ -82,8 +98,8 @@ clipped_result = observed(clipped.sync(options=options), clipped, original, True
 assert bytes.fromhex(clipped_result['stderr_hex']) == bytes(range(256)) * 16
 assert (clipped.right / 'image.dng').read_bytes() == original
 report = {'complete': True, 'workspace': str(work), 'binary_sha256': build['binary_sha256'],
-          'build_receipt_sha256': sha(a.build_receipt), 'runner_sha256': sha(__file__),
-          'cases': ['default-off', 'actual-pid-and-raw-receipt', 'noop-no-report',
+          'build_receipt_sha256': sha(a.build_receipt), 'runner_sha256': sha(__file__), 'parser_sha256': sha(root / 'tests/validation_process/records.py'),
+          'cases': ['default-off', 'actual-pid-raw-receipt-and-retained-group', 'noop-no-report',
                     'exit-zero-finding-still-rejects', 'bounded-arbitrary-stderr'],
           'observations': [passed, rejected, clipped_result],
           'scope': 'production CLI with original fake validators; no SDK/Photo; diagnostic status is not validation/publication authority or surviving PID/group ownership'}

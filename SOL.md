@@ -3004,3 +3004,14 @@ process parser22 malformed cases and six retained mock CLI records still pass.
 Pinned report tests/validation_process/group-parser-qualification.json. No
 compiler/core/helper/SDK/Photo invocation during Root hold. Current native/
 forwarding source still awaits stock/Ox runs after explicit release.
+
+### HostV15 hold: current CLI receiving regression prepared
+
+Extended tests/validation_process/cli.py to request both trace classes and bind
+each group observation to the independently recorded fake-helper PID and exact
+candidate SHA. Current macOS normal helpers must report observed zero; other
+backends explicitly unknown. Default-off and no-op must emit neither trace.
+Exit0/errors1 still must preserve the old target, while raw/binary stderr bounds
+remain tested. Parser source SHA now accompanies the CLI report. AST parse and
+diff check pass; CLI execution remains NOT RUN pending Root release/current
+stock+Ox builds. No new processes beyond source/pure Python work, no SDK calls.
