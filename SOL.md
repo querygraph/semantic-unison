@@ -4,11 +4,25 @@
 
 ## Current checkpoint — 2026-10-15
 
-Next prepared work: [frozen warm512 part3](bench/sync/results/warm512-frozen-part3-prepared-request-20261015.json),
+Latest runtime: [frozen Oxworker1 part3 FAILED/INCOMPLETE](bench/sync/results/warm512-frozen-part3-failed-return-20261015.json).
+Actual owner76640/df5ca2/exit1/no session; aggregate88119 reaped1/others absent
+in2113.568s. Sixteen completed rows pass exactness/basis/noop (48CLI). The
+next seed's client/server returned0 but supervisor returned70: server failed
+to settle within post-output-EOF grace; retained server cancellation reason
+is preserved, server later reaped0 without hard kill. Independent49CLI audit
+proves all clients/supervisors/servers reaped and input pumps joined. Fixtures
+removed. Conservative EXTERNAL-HELPERS-UNRESOLVED expected_calls0 marker stays
+preserved; actual resource evidence is separate from that generic failed-worker
+marker and from functional success. Root sent actual closure,18released on
+Unison side; no retry/successor or completed-part claim. Homebrew neomutt/make
+activity observed during timing and reviewer-stop timing disclosed; no causal
+claim about the failure, no clean timing, final medians or sample replacement.
+
+Consumed preparation: [frozen warm512 part3](bench/sync/results/warm512-frozen-part3-prepared-request-20261015.json),
 the first OxCaml512 partition (worker1/three modes/18rows54CLI). Fresh clean
 detached a6f0b695/14execution+21runner hashes and accepted part2 predecessor
 verified; workspace/allocation/output absent. Queued to Photo Root for a fresh
-18credit/7200s scheduling decision, **unallocated/unstarted**. Root independently
+18credit/7200s scheduling decision, then admitted and executed once as above. Root independently
 accepted part2 actual closure and sealed return; all18credits are released.
 No old admission reuse, SDK/compiler dispatch or automatic successor. Mandatory
 part0e311d5f6 timing disclosure remains with the series.

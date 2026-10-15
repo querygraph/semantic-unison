@@ -79,6 +79,18 @@ Root for independent resource adoption;18credits released on the Unison side.
 
 ## Boundaries that remain explicit
 
+The [Oxworker1 part3 attempt](../bench/sync/results/warm512-frozen-part3-failed-return-20261015.json)
+is FAILED/INCOMPLETE:16completed exact rows/48successful CLI, then a seed's
+post-output-EOF server settlement grace failure (client/server0, supervisor70).
+Actual parent76640/df5ca2/exit1 and aggregate88119/reaped1/others absent closed.
+Independent49CLI readback proves all clients/supervisors/servers reaped and
+pumps joined; private fixtures removed. Generic expected_helpers0 unresolved
+marker is preserved and explained, not erased or represented as successful
+qualification. Homebrew compilation overlapped this attempt; impact and cause
+of settlement failure remain unknown. Raw partial samples and timing disclosures
+remain intact; no final medians/replacement/retry/fullpart success claimed.
+Root has actual closure for resource adoption; no successor starts.
+
 The [stockworker8 part2 return](../bench/sync/results/warm512-frozen-part2-actual-return-20261015.json)
 and [raw rows](../bench/sync/results/warm-512MiB-4files-part2-20261015.json)
 add18passed rows/54settled CLI: actual owner55681/d32adc/exit0/no session,
