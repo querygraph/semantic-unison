@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+User scheduling correction: ordinary development should share Morrobay with
+Photo, rather than make all progress depend on exclusive18 benchmarks.
+[Shared-machine proposal](doc/shared-machine-policy.md) queued to Photo Root:
+Unison4/Photo12/headroom2; serial Unison buildsJOBS2, functional loopback
+workers1/2 with both endpoints counted within4. Pending standing ACK and common
+token-pool integration, not an active grant or preemption of retained recovery.
+Photo's inspected native adapter currently claims all18 even at small thread
+targets; its owner must qualify reduced grants before concurrent rendering.
+SDK/Lightroom/IO ownership remains separate. Shared timing is background-contended;
+quiet peak-concurrency experiments stay exceptional, not a whole-goal blocker.
+
 Prepared remaining [unrun frozen warm512 part5 request](bench/sync/results/warm512-frozen-part5-prepared-request-20261015.json):
 OxCamlworker8/three modes/18rows54CLI, proposed18quietcredits/7200s. Fresh clean
 a6f0b695/14execution21runner/evidence pins checked; workspace/allocation/output
