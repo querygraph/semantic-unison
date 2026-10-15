@@ -160,6 +160,11 @@ make -f tests/Makefile aggregate-lifecycle
 
 Each runner creates and prints its own private workspace and receipts. These
 targets invoke no compiler, SDK, Lightroom, source photograph or timing matrix.
+`make -f tests/Makefile aggregate-preflight` checks interpreter capabilities
+and ten missing-capability refusals without creating any test child. The
+aggregate refuses unsupported Python ownership APIs before allocating readiness
+pipes, writing markers or forking. Presence of these APIs is a prerequisite,
+not qualification of their behavior on an untested operating system.
 The aggregate's failure fixtures intentionally retain unresolved-proof markers
 while checking that their actual workers were reaped; those expected markers
 are not passing native-helper proofs. `DRY_RUN=1` prints the selected command

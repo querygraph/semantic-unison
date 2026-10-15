@@ -23,6 +23,17 @@ class Cancelled(BaseException):
     pass
 
 
+def require_worker_ownership_support():
+    # This owner is constructed with __new__ after fork, so OwnedGroup's
+    # constructor preflight does not protect this path. Reject an interpreter
+    # without retained-child observation/reaping BEFORE creating any resource.
+    methods = ('fork', 'setsid', 'waitid', 'wait4', 'waitstatus_to_exitcode', 'killpg')
+    constants = ('P_PID', 'WEXITED', 'WNOHANG', 'WNOWAIT')
+    if (any(not callable(getattr(os, name, None)) for name in methods)
+            or any(not isinstance(getattr(os, name, None), int) for name in constants)):
+        raise RuntimeError('qualified POSIX waitid(WNOWAIT)/wait4 Python required before worker dispatch')
+
+
 def supervise(function, workspace, *, seconds=300, expected_helper_calls=6,
               maximum_seconds=300):
     # SDK callers retain the default300s ceiling. A separately pinned non-SDK
@@ -33,6 +44,7 @@ def supervise(function, workspace, *, seconds=300, expected_helper_calls=6,
         raise ValueError('single-threaded finite aggregate required')
     if expected_helper_calls not in (0, 6):
         raise ValueError('only zero-helper fixtures or exact six-helper pilot allowed')
+    require_worker_ownership_support()
     work = Path(workspace)
     aggregate_marker = work / 'AGGREGATE-OWNERSHIP-UNRESOLVED.json'
     external_marker = work / 'EXTERNAL-HELPERS-UNRESOLVED.json'

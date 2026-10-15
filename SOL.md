@@ -45,6 +45,15 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Aggregate interpreter preflight (2026-10-15): source review found that direct
+  `OwnedGroup.__new__` bypassed its constructor's waitid/WNOWAIT support check.
+  The aggregate now checks retained observation/reap/session APIs before any
+  pathname, marker, pipe or fork. Pure missing-capability controls demonstrate
+  refusal before resource acquisition; no child, compiler, SDK, Photo or timing
+  successor is invoked. The completed warm128 allocation remains consumed and
+  its historical source pins unchanged. User-run `aggregate-preflight` target
+  reproduces this check; supported API presence does not prove another platform.
+
 * Manual lifecycle entry points (2026-10-15): added `interrupted-receipts` and
   `aggregate-lifecycle` to `tests/Makefile`/`tests/manual.py`, selecting the exact
   already-qualified scripts with literal argv and runner-owned workspaces.
