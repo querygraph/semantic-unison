@@ -7,7 +7,7 @@
 Current stock/Ox full Make+selftests,41 helper groups per compiler and five
 receiving diagnostic cases per compiler pass. Generic APFS/SDE/DNG/optional
 validator implementation is present; the full goal is NOT complete. The latest
-[implementation/evidence index](doc/implementation-status.md) lists remaining
+[current qualification index](doc/current-qualification-status.md) lists remaining
 corpus, native-resource, acceptance-matrix and performance qualification.
 
 The [six-call live SDK merge request](tests/qualification/sdk-live-merge-request-v1-20261015.json)
