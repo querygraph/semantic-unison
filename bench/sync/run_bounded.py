@@ -68,6 +68,17 @@ def check_allocation(allocation, plan_path, index, workspace, command, *, partit
     require(time.time() < allocation['startDeadlineUnix'], 'allocation expired')
 
 
+def audit_measurement(result, row, partition=None):
+    expected = {'file_mib': row['file_mib'], 'files': row['files'],
+                'workers': [1, 6, 8], 'warmups': 1, 'repetitions': 5}
+    if partition is None:
+        proof = audit(result, expected)
+    else:
+        proof = audit_part(result, expected, expected_partition=partition)
+    require(proof['cli_invocations'] == row['expected_cli_invocations'], 'measurement CLI count differs')
+    return proof
+
+
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--plan', type=Path, required=True)
@@ -115,11 +126,8 @@ def main():
         sys.argv = row['command'][1:]
         runpy.run_path(str(ROOT / 'bench/sync/run.py'), run_name='__main__')
         result = json.loads(output.read_text())
-        auditor = audit if args.partition is None else audit_part
-        proof = auditor(result, {'file_mib': row['file_mib'], 'files': row['files'],
-                                 'workers': [1, 6, 8], 'warmups': 1, 'repetitions': 5})
-        require(proof['cli_invocations'] == expected_calls and sources() == source_pins,
-                'batch proof/source changed')
+        proof = audit_measurement(result, row, args.partition)
+        require(sources() == source_pins, 'batch sources changed')
         write(workspace / 'BATCH-PROOFS-COMPLETE.json', {'measurement': pin(output), 'proof': proof})
 
     closure = supervise(worker, workspace, seconds=7200, maximum_seconds=7200, expected_helper_calls=0)

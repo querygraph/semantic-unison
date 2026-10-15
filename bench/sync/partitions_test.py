@@ -6,12 +6,17 @@ from pathlib import Path
 
 from batch_audit import audit
 from partitions import COUNT, audit_part, merge, specification
+from run_bounded import audit_measurement
+
+refusals = 0
 
 
 def refuse(function):
+    global refusals
     try:
         function()
     except (ValueError, KeyError):
+        refusals += 1
         return
     raise AssertionError('invalid partition accepted')
 
@@ -29,8 +34,15 @@ def main():
         # Deliberately stale summary must never be trusted by the merger.
         part['summary'] = [{'untrusted': True}]
         assert audit_part(part)['cli_invocations'] == 54
+        assert audit_part(part, expected_partition=index)['cli_invocations'] == 54
+        refuse(lambda: audit_part(part, expected_partition=(index + 1) % COUNT))
         refuse(lambda: audit(part))
         parts.append(part)
+    row = {'file_mib': 128, 'files': 4, 'expected_cli_invocations': 54}
+    assert audit_measurement(parts[0], row, 0)['cli_invocations'] == 54
+    refuse(lambda: audit_measurement(parts[0], row, 1))
+    refuse(lambda: audit_measurement(parts[0], dict(row, file_mib=512), 0))
+    refuse(lambda: audit_measurement(parts[0], dict(row, expected_cli_invocations=324), 0))
     combined = merge(list(reversed(parts)))
     assert combined['partition_merge_proof']['rows'] == 108
     assert combined['partition_merge_proof']['cli_invocations'] == 324
@@ -64,7 +76,7 @@ def main():
     changed[1]['parameters']['background_note'] = 'different observed slot activity'
     accepted = merge(changed)
     assert accepted['partition_provenance'][1]['background_note'] == 'different observed slot activity'
-    print('PASS six54-CLI partitions/full324-CLI merge;26 refusals; summaries recomputed and slot provenance retained')
+    print('PASS six54-CLI partitions/full324-CLI merge;%d refusals; allocated result binding, summaries and slot provenance retained' % refusals)
 
 
 if __name__ == '__main__':

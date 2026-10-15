@@ -1,0 +1,45 @@
+{
+  "scope": "Pure allocated-result binding/partition accounting, not worker execution or large-file qualification",
+  "actual_terminal": {
+    "chunk": "6b0192",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "partition_audit_refusals": 35,
+  "parser_refusals": 6,
+  "selection_dimension_allocation_refusals": 17,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4609,
+      "sha256": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions_test.py",
+      "bytes": 3900,
+      "sha256": "f61b2bb7c6c3781932de75430fc57b139893e19339b5311781ac868a14c75925"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run_bounded.py",
+      "bytes": 7385,
+      "sha256": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partition_dispatch_test.py",
+      "bytes": 4291,
+      "sha256": "fedafa5f138df38ed1ff43fa2f08c3acdb2355cd9a90156dbe274282bd80ff45"
+    }
+  ],
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v9.json",
+    "bytes": 52801,
+    "sha256": "8bc35c6a5f32f71f307c7dcb7bb164a4cc0cf049cbeb06729bb5fddacd7da8d7"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-v9-part0-prepared-request-20261015.json",
+    "bytes": 3455,
+    "sha256": "5f0828da6d65e992b22b54ed64ce5833ddbc4016b040cbe680b283dec9f51e88"
+  },
+  "runtime_started": false,
+  "credits_reserved": 0
+}

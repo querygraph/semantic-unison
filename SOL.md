@@ -45,6 +45,19 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Allocated partition result binding (2026-10-15): the worker's completed
+  result must now match its allocated partition index, workload dimensions and
+  exact54CLI count. Previously independent part validity alone did not bind the
+  declared result back to the selected index. Pure coverage passes35 refusals,
+  including wrong-index/dimensions/count, plus existing parser/selection checks.
+  [Evidence](bench/sync/results/partition-result-binding-pure-controls-20261015.json).
+  Fresh v9 [first512MiB part request](bench/sync/results/warm512-v9-part0-prepared-request-20261015.json)
+  binds final source/build/plan pins. It is UNALLOCATED/UNSTARTED and only covers
+  stock worker1 across three modes; all six parts remain necessary for the full
+  matrix. No new core/native/compiler/SDK/timing job or credits held. Photo's
+  migration reservation has not been treated as released.
+
+
 * Partition runner/controller wiring (2026-10-15): `run.py --partition0..5`
   selects one exact label/worker slice, three modes and all five repetitions.
   The bounded owner requires a fresh partition-specific allocation/state/index,

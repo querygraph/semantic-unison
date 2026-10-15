@@ -1,0 +1,65 @@
+{
+  "state": "PREPARED_UNALLOCATED_NOT_STARTED",
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v9.json",
+    "bytes": 52801,
+    "sha256": "8bc35c6a5f32f71f307c7dcb7bb164a4cc0cf049cbeb06729bb5fddacd7da8d7"
+  },
+  "batch_index": 1,
+  "partition_index": 0,
+  "workspace": "/private/tmp/unison-warm512-v9-part0",
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/bench/sync/run_bounded.py",
+    "--plan",
+    "/private/tmp/unison-warm-sync-measurement-plan-20261015-v9.json",
+    "--batch-index",
+    "1",
+    "--partition",
+    "0",
+    "--workspace",
+    "/private/tmp/unison-warm512-v9-part0",
+    "--allocation",
+    "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-V9-PART0-ADMISSION-20261015.json"
+  ],
+  "source_pins": {
+    "bench/sync/run_bounded.py": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508",
+    "bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0",
+    "bench/sync/prepare_plan.py": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864",
+    "bench/sync/run.py": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b",
+    "bench/sync/fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699",
+    "bench/sync/partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+    "bench/sync/measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+  },
+  "limits": {
+    "cpu_credits": 18,
+    "aggregate_seconds": 7200,
+    "cli_invocations": 54
+  },
+  "allocation_file": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-V9-PART0-ADMISSION-20261015.json",
+  "required_allocation_state": "ROOT_ALLOCATED_FINITE_SYNC_PARTITION_V1",
+  "required_allocation_fields": [
+    "plan",
+    "batch_index",
+    "partition_index",
+    "workspace",
+    "command",
+    "source_pins",
+    "limits",
+    "startDeadlineUnix"
+  ],
+  "scope": "Only first512MiB x4 part, stock worker1 across ordinary/receiver-clone/semantic, one warmup/five repetitions;18rows/54CLI. No successors/SDK/Photo/compiler. Five other parts still required for complete stock/Ox matrix; no full-matrix performance claim from this part.",
+  "planning_estimate": {
+    "linear_equal_part_estimate_seconds": 2284.042845946659,
+    "aggregate_ceiling_seconds": 7200,
+    "scope": "Rough equal-part estimate only; semantic/sequential configurations have different cost."
+  },
+  "scheduling": "Photo migration priority/reservation remains respected. Request for separate future scheduling only, no CPU allocation or dispatch inferred. Consumed128 allocation cannot be reused."
+}

@@ -27,9 +27,11 @@ def select(configurations, index):
     return [value for value in configurations if value in wanted]
 
 
-def audit_part(result, expected_parameters=None):
+def audit_part(result, expected_parameters=None, *, expected_partition=None):
     part = result['partition']
     require(part == specification(part['index']), 'partition declaration differs')
+    if expected_partition is not None:
+        require(part == specification(expected_partition), 'result is not the allocated partition')
     params = result['parameters']
     require(params['modes'] == list(MODES) and params['workers'] == list(WORKERS),
             'partition must retain the full declared mode/worker universe')
