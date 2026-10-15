@@ -2795,3 +2795,28 @@ That snapshot is not a new native process-group/wait4 proof. Root closure queue
 01a13cee-777e-75b1-8807-0ea9cd65cbb2 releases all4corecredits. No compiler/SDK/
 Photo operations, no production paths, no old admission replay. Fresh SDKv2
 admission still required; merged byte validation/pixels/performance remain open.
+
+### Actual merged synthetic output SDK acceptance — v2 consumed
+
+Root issued fresh admission872819f54f550a742e909d572665bbd290b245e2847d82307334dda739e3f48b
+for exact request70a380ae. Revalidated hash/deadline/source/command/limits and
+unused workspace, dispatched once before deadline. Actual wrapper69150,
+aggregate69151, owner3883. Exactly3sequential qualified single-thread SDK calls
+(uncompressed/JPEG/JXL) accept all three frozen merged candidates: structure
+valid, decode success, raw digest valid, errors0, expected warnings4 each (same
+CFA edge-padding findings). Reparsed raw protocols against candidate SHA/size/
+build, entry multiplicity, child reaps and post-source/tool/candidate pins.
+Aggregate CLOSED/reaped/othermembersabsent/exit0 in5.3315609249984846s, unresolved
+marker absent. Parent3883/5aae79 actual terminal0/no session.
+[Sealed actual return](tests/qualification/sdk-merged-output-v2-actual-return-20261014.json)
+and [parent terminal](tests/qualification/sdk-merged-output-v2-parent-terminal-20261014.json).
+Queue actual return01a13cef-6cdb-7462-aab1-22db8f137613 to Root; independent Root
+acceptance not yet inferred. v2 admission consumed, no retry/replay/new slot.
+
+This supersedes pending merged-byte SDK acceptance notes for these exact three
+candidates only. Current stock/Ox output equality was independently checked in
+current-merge-frozen-binding.json; the SDK calls here validated those same bytes
+as frozen files, not a live SDK-gated receiving pipeline. Broader corpus, pixel
+identity/rendering, production C-backend timing, experimental threads/RSS,
+representative full-sync performance and full goal qualification remain open.
+No Photo/Lightroom/Main/cache call or production driver replacement occurred.

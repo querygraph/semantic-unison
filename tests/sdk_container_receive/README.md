@@ -98,3 +98,14 @@ closure, refuses consumed workspaces and noncanonical argv before another call,
 and checks seven pure admission cases. [Source qualification](merged-executor-qualification.json)
 and [finite review request](../qualification/sdk-merged-output-request-v1-20261014.json)
 are not runtime permission. No old slot may be reused.
+
+The separately admitted [merged-output v2 actual run](../qualification/sdk-merged-output-v2-actual-return-20261014.json)
+validated three frozen uncompressed/JPEG/JXL merged outputs with the qualified
+single-thread SDK driver: valid structure, successful decode, valid raw digest,
+zero errors and four existing CFA-padding warnings each. All three calls and the
+owned aggregate closed; the parent terminal is sealed separately. Current stock
+and Ox merge outputs match those candidate hashes in
+[current-core binding](current-merge-frozen-binding.json). This qualifies the
+exact merged synthetic bytes, not a live production SDK-gated merge receive,
+pixel equality, camera corpus, renderer or performance. The admission is consumed
+and cannot be replayed.
