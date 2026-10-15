@@ -1,0 +1,42 @@
+{
+  "state": "SINGLE_ACTUAL_RUN_ALLOCATION_REFERENCE_DISCREPANCY_PRESERVED_NO_REPLAY",
+  "original_sealed_return_unchanged": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json",
+    "bytes": 13445,
+    "sha256": "2a348bc6f91c31332fb19a168f85965bfe9a4cbd3e00c343f80950bcb9846ce3"
+  },
+  "actual_dispatch_reference": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-NATIVE-SETTLEMENT-LIFECYCLE-V1-ALLOCATION-20261015.json",
+    "bytes": 3407,
+    "sha256": "10b7a29aa5db9985abdcd59c8ff84072731baccb60769e0a2378e5e003802a9e"
+  },
+  "separately_published_root_v2_allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-NATIVE-SETTLEMENT-LIFECYCLE-V2-ALLOCATION-20261015.json",
+    "bytes": 3904,
+    "sha256": "c0a50ff0d73f57d1a93dd0bf0b1808218e47e5d90afa130d1d8d4133a6a4091a"
+  },
+  "root_independent_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SETTLEMENT-LIFECYCLE-V2-ACTUAL-ACCEPTANCE-20261015.json",
+    "bytes": 2052,
+    "sha256": "1200212b66a7d03ea828cec9226223c65935729cd53318a22e31b27fb742fd20"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 3736,
+    "terminal_chunk": "16df12",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "observed_owner_sequence": [
+    "Received explicit user allocation message referencing v1 hash10b7a29a and exact request27982bfe.",
+    "Verified v1 bytes/hash/deadline and exactcommand; additionally verified all12 v2-superset source pins and identical command/workspace/limits.",
+    "Dispatched once; actual owner session3736 returned from exec chunk8abdce.",
+    "Queued actual START01a13f34-2575-7901-9dc4-f3f3c7bdbc9e; collected actual terminal16df12/exit0/no session.",
+    "Sealed actual return and queued01a13f34-8215-7083-a1c5-361db0c9a782.",
+    "Later received user-delivered correction referencing v1 supersession and fresh v2 allocation. Did not dispatch again; queued reconciliation01a13f35-47ba-7041-80e2-82ae15edccac.",
+    "Root independently accepted the one actual run; later explicitly retained allocation-reference discrepancy without inventing cross-session ordering."
+  ],
+  "ordering_limits": "This is observed owner conversation/tool sequence, not a synchronized wall-clock ordering proof of Root allocation creation/supersession or cross-session delivery. File mtime and allocation UTC alone do not establish which supersession was visible to the owner at exec.",
+  "reference_limit": "Actual dispatch checked/referenced v1. Do not relabel it as a separately observed v2 dispatch. Root v2-named acceptance stands for exact same command/limits and all12 verified pins; one execution only.",
+  "resource_and_functional_scope": "Seven finite Python lifecycle cases/nine children and aggregate1705 closed/reaped/others absent in2.386906776984688s; unresolved empty; onecredit released. No performance/part3-repair/SDK/Photo/compiler qualification.",
+  "successors_authorized": false
+}

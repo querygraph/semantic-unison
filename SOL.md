@@ -4,6 +4,15 @@
 
 ## Current checkpoint — 2026-10-15
 
+Root independently accepted the single settlement lifecycle run, all12postpins
+and resource closure; onecredit released. [Immutable allocation reconciliation](bench/sync/results/native-settlement-allocation-reconciliation-20261015.json)
+keeps actual dispatch's v1 reference distinct from separately published v2
+allocation and v2-named Root acceptance. Command/workspace/limits were identical;
+all12superset hashes checked, one execution only. Original sealed return stays
+unchanged; no synchronized cross-session creation/delivery ordering is inferred.
+No false claim of a separately observed v2 dispatch, replay or new hold. Photo
+V27 pending; Unison successors remain unallocated.
+
 Actual [settlement lifecycle return](bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json)
 PASSED/CLOSED: owner3736/16df12/exit0/no session; aggregate1705 reaped0/others
 absent in2.387s. Six direct original Python children prove delayed normal exit,
