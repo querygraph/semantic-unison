@@ -34,6 +34,15 @@ gates remain open. All Unison runtime allocations are closed.
 
 ## Boundaries that remain explicit
 
+The [bounded lifecycle controls](../bench/sync/results/bounded-lifecycle-qualification-20261015.json)
+passed all eight fake-child/worker cases in6.528s, owner46880/86b330/0.
+Root independently accepted25 artifact/source pins and all child settlements.
+This closes the finite one-credit allocation; it does not admit timing work.
+The earlier interrupted benchmark60597 remains incomplete (eight warmups,
+zero measured samples), with its missing historical direct-client receipt
+explicitly unqualified. Its source fix passed the later fake-child controls;
+those controls do not reconstruct the missing historical receipt.
+
 - Photo Root/original preview owner owns Lightroom, renderer fidelity, preview
   generators, Ten/Quasar placement and publisher recovery. Those are not Unison
   deliverables and do not establish semantic-DNG validation or preview reuse.

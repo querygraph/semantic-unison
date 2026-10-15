@@ -30,6 +30,13 @@ This does not repair the missing historical interrupted-client receipt for
 stopped benchmark60597. Benchmark v4 remains UNADMITTED; no compiler, SDK,
 Photo, timing run or successor is authorized by this completed allocation.
 
+Source-only successor [warm128 v5 request](bench/sync/results/warm-128-v5-prepared-request-20261015.json)
+now binds fresh plan/source/build/binary pins, first128MiB x4 only, and the
+7200s aggregate owner plus324 CLI/server settlement audit. The plan references
+actual fake-lifecycle evidence separately from full-batch runtime qualification.
+No timing allocation exists; Photo priority/successor hold remains in force.
+Preparing the plan performed only file hashing/JSON work, not builds or tests.
+
 ## Live implementation handoff
 
 * Benchmark failure settlement (2026-10-14): each validation job now records
