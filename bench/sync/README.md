@@ -7,6 +7,60 @@ preview generator, and never reads or writes photographic inputs, catalogs,
 caches or Photo volumes. These inputs qualify transfer behavior, not DNG image
 validity or Adobe-current-edits rendering.
 
+## Completed warm128 benchmark — 2026-10-15
+
+[Raw108 rows](results/warm-128MiB-4files-20261015.json) and
+[sealed return](results/warm-128-v5-actual-return-20261015.json) preserve the exact
+source/build/binary/compiler pins, all324 CLI/server settlements and actual
+owner34823/c78138/exit0 terminal. Aggregate12254 closed/reaped in3426.064s
+within7200s; no unresolved markers remained. Root was notified of resource
+release. This one-use allocation is consumed; later sizes are not authorized.
+
+Four128MiB generated files, fixed8KiB XMP each, one warmup and five measured
+repetitions/configuration; order reverses on alternate repetitions. Updates
+use a loopback bridge on one internal APFS volume. Caches are warm/uncontrolled.
+Competing Photo work was held; unrelated host/OS activity was not continuously
+measured or controlled. Reported wall times include each update CLI; fixture
+generation, seed sync, independent verification and no-op sync are recorded
+separately. Whole-batch time includes those stages.
+
+Median update seconds (five samples per cell):
+
+| Mode | Workers per endpoint | Stock OCaml | OxCaml |
+| --- | ---: | ---: | ---: |
+| ordinary | 1 | 9.942 | 9.585 |
+| ordinary | 6 | 10.197 | 9.598 |
+| ordinary | 8 | 9.962 | 9.609 |
+| receiver-clone | 1 | 9.776 | 9.437 |
+| receiver-clone | 6 | 9.763 | 9.437 |
+| receiver-clone | 8 | 9.756 | 9.441 |
+| semantic | 1 | 18.153 | 18.094 |
+| semantic | 6 | 9.269 | 9.248 |
+| semantic | 8 | 9.268 | 9.212 |
+
+At8 workers, OxCaml semantic median9.212s versus ordinary9.609s is about4.1%
+lower elapsed time in this workload; stock semantic9.268s versus ordinary9.962s
+is about7.0% lower. Semantic1→8 improves about1.96x on both compilers.
+At8 workers, stock/Ox semantic medians differ by only about0.6%; this does not
+establish a general OxCaml speed advantage. Six and eight semantic workers
+perform similarly on four files. Ordinary-mode worker settings do not turn
+the legacy transfer path into the semantic domain pool.
+
+Across the measured semantic rows, production counters report12,288 logical
+write bytes in four attempts,32,768 payload bytes, and an Ox8 protocol median
+51,918 bytes. Ordinary Ox8 protocol median379,437 bytes; receiver-clone379,438.
+Receiver-clone inherits536,805,376 bytes of the536,870,912-byte output, leaving
+a65,536-byte non-inherited materialization model. Ordinary full-extent model
+is536,870,912 bytes. Only the semantic figure counts actual returned write
+bytes; the other materialization figures are models, not pwrite telemetry.
+
+The main demonstrated benefit is lower logical materialization and protocol
+traffic, with modest wall-time gain once full verification is included. These
+results do not measure physical APFS writes/shared blocks, total application
+reads, internal parse/hash/commit stages, aggregate RSS, FD/queue peaks, cold
+cache, other devices, real networks, original-upstream baselines, SDK cost or
+photographic-corpus performance. No production speed or durability claim follows.
+
 Use already-qualified private builds. The runner never compiles or writes
 build products into the shared checkout:
 

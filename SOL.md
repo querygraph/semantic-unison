@@ -14,10 +14,15 @@ The separately admitted [six-call live SDK merge](tests/qualification/sdk-live-m
 now PASSED/CLOSED: actual owner43830/699a51/0,9CLI runs/six SDK validations,
 stock-client/Ox-server,32.486s aggregate. Independent retained readback passes;
 Root independent acceptance5b9235bc is adopted. Admission is consumed, not reusable.
-All Unison allocations are closed. Root's latest explicit color recovery closure
-reports original4750/097f59/0 and recovery55005/cfd119/0, leasefree and18released.
-Fresh Photo reservations still require coordination; no SDK admission follows
-from a resource release. Earlier entries below are
+All Unison allocations are closed. The newly user-authorized/Root-allocated
+[warm128 v5 benchmark](bench/sync/results/warm-128-v5-actual-return-20261015.json)
+PASSED/CLOSED: actual owner34823/c78138/0,18warmups+90measured rows,324CLI
+settlements and aggregate12254 reaped in3426.064s. All18 credits released;
+no successor/SDK/Photo operation follows. At8workers, Ox semantic median9.212s
+versus ordinary9.609s; semantic writes12,288 logical bytes across four128MiB
+files. Physical writes, broader corpus/platform and other benchmark sizes remain
+unqualified. See [measurement interpretation](bench/sync/README.md).
+Earlier entries below are
 historical evidence and must not override a newer pinned checkpoint.
 
 Finite lifecycle qualification is now [PASSED/CLOSED](bench/sync/results/bounded-lifecycle-qualification-20261015.json):
@@ -30,12 +35,13 @@ This does not repair the missing historical interrupted-client receipt for
 stopped benchmark60597. Benchmark v4 remains UNADMITTED; no compiler, SDK,
 Photo, timing run or successor is authorized by this completed allocation.
 
-Source-only successor [warm128 v5 request](bench/sync/results/warm-128-v5-prepared-request-20261015.json)
+The previously source-only [warm128 v5 request](bench/sync/results/warm-128-v5-prepared-request-20261015.json)
 now binds fresh plan/source/build/binary pins, first128MiB x4 only, and the
 7200s aggregate owner plus324 CLI/server settlement audit. The plan references
 actual fake-lifecycle evidence separately from full-batch runtime qualification.
-No timing allocation exists; Photo priority/successor hold remains in force.
-Preparing the plan performed only file hashing/JSON work, not builds or tests.
+It subsequently ran once under explicit user authorization and fresh Root allocation;
+the actual result is linked above. The prepared plan itself remains immutable.
+Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 

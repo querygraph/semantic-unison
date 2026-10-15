@@ -14,7 +14,7 @@ fault or compatibility test.
 | Optional Adobe validation | Per-candidate off/warn/require gate, driver pin/receipt checks, CPU budget and cancellation; actual SDK receive/host/frozen-output pilots are separately pinned | Broader real-camera/copy-only corpus and representative receiving-path/camera coverage; experimental native host remains separate |
 | Stock and OxCaml builds | Both current full Make builds+selftests, 41 helper groups/compiler and five receiving diagnostic cases/compiler [pass](../tests/validation_process/group-integration-qualification.json) | Preserve Make/Dune/platform qualification scopes; compiler-checked ML boundaries do not prove C/native contracts |
 | Coordinated workers/resources | Immutable worker jobs, bounded mailboxes and shared weighted permits; [checked workers](../tests/checked_worker/qualification.json), [resource integration](../tests/dng_backend_resources/qualification.json) | Production native threads, RSS, cancellation and scaling; estimates/covered allocators are not whole-process enforcement |
-| Performance | Functional read/write/wire measurements and small synthetic sync matrices exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
+| Performance | [Full warm128MiB x4 batch](../bench/sync/results/warm-128-v5-actual-return-20261015.json):18 configurations, five measured repetitions,108 total rows/324 CLI settlements; small synthetic matrices also exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
 
 ## Actual live SDK merge milestone
 
@@ -31,6 +31,17 @@ new SDK slot follows. This is functional exact generated-container receiving,
 not a throughput, camera-corpus, decoded-pixel or preview-reuse qualification.
 Broader native resource/scaling, real-camera corpus and representative performance
 gates remain open. All Unison runtime allocations are closed.
+
+## Completed first warm128 performance batch
+
+The [raw measurements](../bench/sync/results/warm-128MiB-4files-20261015.json)
+and [sealed closure](../bench/sync/results/warm-128-v5-actual-return-20261015.json)
+prove the first prepared batch completed once after explicit user authorization
+and Root scheduling ACK. Owner34823/c78138/0 and aggregate12254 closed/reaped;
+all324 CLI/server settlements audited, unresolved markers empty,18credits released.
+[Interpretation and all18 medians](../bench/sync/README.md) separate logical write
+savings from modest warm-loopback elapsed gains. This supersedes the unstarted
+status of this exact v5 batch; later sizes and broader performance remain open.
 
 ## Boundaries that remain explicit
 
