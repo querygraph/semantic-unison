@@ -2980,3 +2980,15 @@ are NOT RUN; only the preceding39group stock integration run is actual evidence.
 No compiler/helper/core/SDK dispatched during this hold. Next after explicit Root
 closure/release: run current stock/Ox helper suites, then full serial builds.
 Current integration remains unqualified for SDK receiving until these pass.
+
+### HostV15 hold: deferred retained-group diagnostic forwarding
+
+Source now forwards optional observe_group through DngValidation.validate_with_execution.
+DngCandidateValidation enables it only with debug validation-group, captures the
+observation in memory on the retained-child path and logs after supervised helper
+settlement, bound to candidate SHA and historical child PID. Unknown/unobserved
+remain distinct; no result policy, archive/wire or existing validation-process v0
+parser changes. Added fake-valid/fake-error-zero receipt controls to ensure the
+observation cannot replace SDK receipt checks. All these additions UNCOMPILED/UNRUN
+during Root exclusive18 HostV15; zero new helper/compiler/core/SDK processes.
+Next actual integration qualification must include these current sources.

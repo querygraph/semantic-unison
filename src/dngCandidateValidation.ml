@@ -83,9 +83,24 @@ let select () =
         Abort.checkAll ();
         if HelperSupervisor.is_cancelled context.cancellation then
           raise (Util.Transient "Helper limiter validation cancelled") in
+      (* Capture only while the child is retained; print after the supervisor
+         has settled, when owner logging may safely run the event loop. *)
+      let group_observation = ref None in
+      let observe_group = if Trace.enabled "validation-group" then
+        Some (fun count -> group_observation := Some count) else None in
+      let execute run = BorrowedWork.bind (fun () -> context.execute run) (fun child ->
+        Trace.debug "validation-group" (fun () ->
+          let count = match !group_observation with
+            | None -> "unobserved" | Some None -> "unknown"
+            | Some (Some count) -> string_of_int count in
+          let pid = match child.HelperSupervisor.child_pid with
+            | None -> "none" | Some pid -> string_of_int pid in
+          Util.msg "Retained group v0 pid=%s candidate-sha256=%s other-members=%s\n"
+            pid context.expected.sha256 count);
+        return child) in
       BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
         ~inspect:inspect_limiter ~check_cancel (fun process_limits ->
-          DngValidation.validate_with_execution ?process_limits ~execute:context.execute
+          DngValidation.validate_with_execution ?process_limits ?observe_group ~execute
             context.supervisor context.cancellation ~policy:selected ~tool ~inspect
             ~candidate:context.candidate ~expected:(convert context.expected))) (fun result ->
       Abort.checkAll ();

@@ -244,6 +244,17 @@ let () =
       ~executable:"/unison-synthetic-does-not-exist" ~arguments:[||] ~environment:[||]) in
     check (match r.outcome with H.Failed _ -> true | _ -> false) "spawn failure lost";
     finish t);
+  test "validation forwards optional group observation without bypassing receipt checks" (fun () ->
+    let t = supervisor () and calls = ref 0 in
+    let validate mode = Lwt_unix.run (V.validate_with_execution
+      ~observe_group:(fun _ -> incr calls) ~execute:(fun run -> run ())
+      t (H.cancellation ()) ~policy:V.Require ~tool:(Some (tool mode))
+      ~inspect ~candidate:"/synthetic/candidate.dng" ~expected) in
+    (match validate "valid" with V.Passed _ -> () | _ -> failwith "valid receipt rejected");
+    check (!calls = 1) "valid helper observation missing";
+    check (rejected (validate "error-zero")) "observation bypassed SDK error count";
+    check (!calls = 2) "rejected helper observation missing";
+    finish t);
   test "valid qualified structured receipt" (fun () ->
     check (match validate "valid" with V.Passed r ->
       r.report.raw_digest = V.Valid && r.candidate = expected | _ -> false) "valid rejected");

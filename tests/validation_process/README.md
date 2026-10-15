@@ -48,3 +48,26 @@ actual six-record readback against pinned original CLI reports, arbitrary byte
 preservation, endpoints and empty/clipped/nonzero observations. Python3.14 and
 system3.9 both pass; this does not qualify Python3.9 native process supervision.
 No child process is launched by this parser test.
+
+Optional retained-group diagnostics (integration source checkpoint)
+----------------------------------------------------------------
+
+`-debug validation-group` enables a spawn-bound query on the DNG validator helper
+only. The owner captures it while the terminal direct child is retained, then
+prints after helper settlement:
+
+```
+Retained group v0 pid=123 candidate-sha256=<hex> other-members=0
+```
+
+`unknown` means unsupported backend or query failure; `unobserved` means the
+normal terminal observation did not run (for example synchronous teardown).
+A nonnegative number is only a bounded process-table observation before reap.
+It is neither an SDK verdict nor durable/escaped-process absence proof and
+does not grant authority to signal the historical PID. The existing bounded
+`validation-process` v0 format/parser remains unchanged; it does not parse this
+separate trace class. Tracing remains off by default.
+
+This forwarding/trace integration is source-only until current stock/Ox helper
+and receiving CLI checks complete; prior native primitive or diagnostic results
+do not qualify this new source. No SDK invocation is authorized by the flag.

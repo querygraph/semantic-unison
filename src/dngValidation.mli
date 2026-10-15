@@ -76,6 +76,7 @@ val validate :
 
 val validate_with_execution :
   ?process_limits:HelperSupervisor.process_limits ->
+  ?observe_group:(int option -> unit) ->
   execute:((unit -> HelperSupervisor.result Lwt.t) -> HelperSupervisor.result Lwt.t) ->
   HelperSupervisor.t -> HelperSupervisor.cancellation ->
   policy:policy -> tool:tool option ->
@@ -85,3 +86,7 @@ val validate_with_execution :
     helper execution. Pre/post digest inspections run outside this wrapper, so
     a shared I/O lease cannot deadlock nested worker admission. The wrapper
     must await helper settlement on every path before releasing its resources. *)
+
+(** [validate_with_execution]'s optional [observe_group] has the same owner-loop,
+    observational-only contract as [HelperSupervisor.run]. It never substitutes
+    for SDK receipt validation or candidate identity checks. *)

@@ -96,7 +96,7 @@ let check_snapshot s =
     failwith "invalid inspected snapshot"
 exception Candidate_inspection_failed of string
 
-let validate_with_execution ?process_limits ~execute supervisor cancellation ~policy ~(tool : tool option) ~inspect ~candidate ~expected =
+let validate_with_execution ?process_limits ?observe_group ~execute supervisor cancellation ~policy ~(tool : tool option) ~inspect ~candidate ~expected =
   match policy with
   | Off -> return Skipped
   | Warn | Require ->
@@ -137,7 +137,7 @@ let validate_with_execution ?process_limits ~execute supervisor cancellation ~po
         "--"; candidate |] in
       BorrowedWork.bind (fun () -> execute (fun () ->
         execution_started := true;
-        HelperSupervisor.run ?process_limits supervisor ~weight:tool.cpu_weight cancellation
+        HelperSupervisor.run ?process_limits ?observe_group supervisor ~weight:tool.cpu_weight cancellation
           ~limits:tool.limits ~executable:tool.executable ~arguments
           ~environment:tool.environment)) (fun child ->
       process := Some child;
