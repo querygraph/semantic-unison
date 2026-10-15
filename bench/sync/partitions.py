@@ -19,13 +19,22 @@ def specification(index):
             'configurations': [[label, mode, workers] for mode in MODES]}
 
 
-def audit_part(result):
+def select(configurations, index):
+    wanted = {tuple(value) for value in specification(index)['configurations']}
+    universe = {(label, mode, workers) for label in LABELS for mode in MODES for workers in WORKERS}
+    require(len(configurations) == len(universe) and set(configurations) == universe,
+            'partition selection requires the exact full stock/Ox matrix')
+    return [value for value in configurations if value in wanted]
+
+
+def audit_part(result, expected_parameters=None):
     part = result['partition']
     require(part == specification(part['index']), 'partition declaration differs')
     params = result['parameters']
     require(params['modes'] == list(MODES) and params['workers'] == list(WORKERS),
             'partition must retain the full declared mode/worker universe')
-    return audit(result, configurations=[tuple(value) for value in part['configurations']])
+    return audit(result, expected_parameters,
+                 configurations=[tuple(value) for value in part['configurations']])
 
 
 def common_parameters(result):

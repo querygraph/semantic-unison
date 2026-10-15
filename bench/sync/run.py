@@ -17,7 +17,8 @@ import tempfile
 import time
 import zlib
 
-from fixtures import create, edit, equal_files, sha256
+from fixtures import create, edit, equal_files, sha256, validate_dimensions
+import partitions
 from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
@@ -223,6 +224,8 @@ def main():
     parser.add_argument("--compiler", action="append", default=[], metavar="LABEL=OCAMLOPT")
     parser.add_argument("--modes", default="ordinary,receiver-clone,semantic")
     parser.add_argument("--workers", default="1")
+    parser.add_argument("--partition", type=int,
+                        help="one explicit0..5 stock/Ox worker partition; never starts other parts")
     parser.add_argument("--loopback-cpu-credits",type=int,
                         help="Bound the sum of configured semantic/helper CPU budgets across same-host endpoints; not an OS CPU cap")
     parser.add_argument("--file-mib", type=int, default=32)
@@ -262,15 +265,25 @@ def main():
         if references:parser.error("reference CPU budgets cannot be qualified by the loopback credit bound")
         if args.loopback_cpu_credits<=0 or endpoint_count*max(workers)>args.loopback_cpu_credits:
             parser.error("sum of configured endpoint CPU credits exceeds loopback budget")
-    if not (1 <= args.file_mib <= 512 and 1 <= args.files <= 256 and
-            256 <= args.packet_bytes <= 1048576 and args.warmups >= 0 and
-            1 <= args.repetitions <= 50 and args.timeout > 0):
+    if not (args.warmups >= 0 and 1 <= args.repetitions <= 50 and args.timeout > 0):
         parser.error("fixture/count bounds exceeded")
-    size = args.file_mib * 1048576
-    if size * args.files > 8 * 1024 ** 3 or args.packet_bytes + 8192 >= size:
-        parser.error("fixture working set exceeds 8 GiB or packet does not fit")
+    try:
+        size = validate_dimensions(args.file_mib, args.files, args.packet_bytes)
+    except ValueError as error:
+        parser.error(str(error))
     if not args.qualification and (args.warmups < 1 or args.repetitions < 5):
         parser.error("performance run requires at least one warmup and five measured repetitions")
+    configurations = [(label, mode, worker) for label in binaries for mode in modes for worker in workers]
+    configurations += [(label, "reference", None) for label in references]
+    if args.partition is not None:
+        if args.qualification:
+            parser.error("performance partitions cannot use qualification counts")
+        if modes != list(partitions.MODES) or workers != list(partitions.WORKERS):
+            parser.error("partition mode/worker order must match the canonical matrix")
+        try:
+            configurations = partitions.select(configurations, args.partition)
+        except ValueError as error:
+            parser.error(str(error))
     environment = os.environ.copy()
     for key in ("OCAMLLIB", "OCAMLPATH", "CAML_LD_LIBRARY_PATH", "OCAMLRUNPARAM"):
         environment.pop(key, None)
@@ -307,6 +320,8 @@ def main():
                     "range/extent sharing", "cross-volume or non-APFS behavior", "cold cache",
                     "real SSH/network behavior", "Adobe validation or photographic rendering"],
               "samples": [], "summary": []}
+    if args.partition is not None:
+        result['partition'] = partitions.specification(args.partition)
     save(args.output, result)
     if args.prepare_only:
         result["preparation_complete"] = True
@@ -341,8 +356,6 @@ def main():
                 volume = plistlib.loads(query.stdout)
                 result["filesystem"].update({key: volume.get(key) for key in
                     ("FilesystemType", "DeviceIdentifier", "VolumeUUID", "TotalSize", "Internal")})
-        configurations = [(label, mode, worker) for label in binaries for mode in modes for worker in workers]
-        configurations += [(label, "reference", None) for label in references]
         save(args.output, result)
 
         def invoke(label, binary, mode, worker, directory, stage):

@@ -5,6 +5,19 @@ import random
 import struct
 
 
+def validate_dimensions(file_mib, files, packet_bytes):
+    if not (type(file_mib) is int and type(files) is int and type(packet_bytes) is int
+            and 1 <= file_mib <= 2048 and 1 <= files <= 256
+            and 256 <= packet_bytes <= 1048576):
+        raise ValueError('fixture dimensions exceed declared bounds')
+    size = file_mib * 1048576
+    if size * files > 8 * 1024 ** 3 or packet_bytes + 8192 >= size:
+        raise ValueError('fixture working set exceeds8GiB or packet does not fit')
+    # The largest admitted file and its protected byte count fit classic TIFF's
+    # unsigned32-bit fields. This is argument admission, not large-file proof.
+    return size
+
+
 def packet(size, generation):
     value = (b'<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">'
              b'<rdf:Description rdf:about="" xmlns:xmp="http://ns.adobe.com/xap/1.0/" '

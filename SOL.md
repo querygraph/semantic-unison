@@ -45,6 +45,21 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Partition runner/controller wiring (2026-10-15): `run.py --partition0..5`
+  selects one exact label/worker slice, three modes and all five repetitions.
+  The bounded owner requires a fresh partition-specific allocation/state/index,
+ 54CLI limit and unique workspace; it never starts a successor. Full larger
+  batches flagged beyond the planning ceiling require partition selection.
+  Shared fixture dimension admission now allows2048MiB (previous512MiB limit
+  contradicted that unexecuted plan), retaining8GiB corpus/TIFF32 bounds.
+  Actual CLI parsing is checked through a mocked metadata boundary; six invalid
+  CLI cases and17 selection/dimension/allocation refusals pass without native
+  calls. Planner partition counts/unique outputs and historical whole/merge
+  audits also pass. [Source qualification](bench/sync/results/partition-execution-source-qualification-20261015.json)
+  pins fresh v8; no actual partition/2GiB transfer, SDK, compiler or benchmark
+  ran. Photo's exclusive migration slot remains respected; no credits held.
+
+
 * Partition accounting kernel (2026-10-15): six exact label/worker parts each
   cover all three modes, one warmup/five measured repetitions,18rows/54CLI.
   Pure merger reconstructs all108rows/324CLI only when every part, current

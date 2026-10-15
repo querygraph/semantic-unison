@@ -64,6 +64,29 @@ photographic-corpus performance. No production speed or durability claim follows
 Use already-qualified private builds. The runner never compiles or writes
 build products into the shared checkout:
 
+For larger workloads, source support now divides the same complete matrix into
+six explicit label/worker partitions, each containing all three modes, one
+warmup and five measured repetitions (18 rows/54 CLI invocations). All six
+parts together retain108 rows/324 CLI invocations. `run.py --partition 0..5`
+selects exactly one part. The bounded controller also requires `--partition N`
+and a separately bound `ROOT_ALLOCATED_FINITE_SYNC_PARTITION_V1` allocation with
+`partition_index=N` and a54-CLI limit. It never loops into a successor part.
+Each part uses a fresh workspace/output and its own7200s aggregate deadline;
+larger plans flagged for partition review refuse a whole-batch dispatch.
+
+The pure `partitions.merge` function accepts all six results only after checking
+the exact Cartesian coverage, every CLI/server settlement and common source,
+binary/compiler, host, filesystem and workload identity. It recomputes summaries
+from raw samples and keeps per-slot dates/background observations. A partition
+cannot pass the full-matrix audit. Merged row accounting does not replace each
+part's actual parent-terminal/aggregate closure, and separately scheduled slots
+are not one continuous timing window. These execution routes are source/pure
+qualified only; no new partition or larger benchmark has run. TwoGiB fixture
+argument admission is tested; that does not prove an actual2GiB transfer.
+
+The following direct runner example is for an independently coordinated complete
+batch; it does not create a reservation:
+
 ```sh
 python3 bench/sync/run.py \
   --binary stock=/absolute/stock-snapshot/src/unison \
