@@ -45,6 +45,19 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Offline partition report command (2026-10-15): `merge_partitions.py` accepts
+  six stable bounded regular JSON inputs and creates a new report exclusively.
+  It verifies full108-row/324CLI accounting, recomputes summaries and records
+  exact input hashes; it never invokes Unison or releases CPU/native ownership.
+  Eight artifact refusals and historical positive reconstruction pass, including
+  existing-output preservation, duplicate/missing/oversized/nonregular/changed
+  inputs and malformed JSON. [Evidence](bench/sync/results/offline-partition-merge-controls-20261015.json).
+  Actual parent-tool terminal and aggregate closures remain separately required
+  for every runtime part. Pending v9 execution source pins/plan still verify;
+  unused offline helper additions do not alter the controller dependency set.
+  No partition started, no credits held, Photo migration scheduling respected.
+
+
 * Allocated partition result binding (2026-10-15): the worker's completed
   result must now match its allocated partition index, workload dimensions and
   exact54CLI count. Previously independent part validity alone did not bind the

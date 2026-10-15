@@ -84,6 +84,23 @@ are not one continuous timing window. These execution routes are source/pure
 qualified only; no new partition or larger benchmark has run. TwoGiB fixture
 argument admission is tested; that does not prove an actual2GiB transfer.
 
+After all six independently scheduled parts finish, offline row accounting can
+be reproduced without starting any Unison process:
+
+```sh
+python3 bench/sync/merge_partitions.py \
+  --part part0.json --part part1.json --part part2.json \
+  --part part3.json --part part4.json --part part5.json \
+  --output combined-new.json
+```
+
+Inputs must be stable regular JSON files, at most16MiB each. The output must
+be new; it never overwrites an input or an existing report. Input hashes are
+recorded in the combined artifact. This command proves row accounting only,
+not actual parent-tool terminal status or aggregate-group closure. Retain those
+separate receipts for every part before releasing its reservation or publishing
+a completed run. `resource_release` in the command's output is always false.
+
 The following direct runner example is for an independently coordinated complete
 batch; it does not create a reservation:
 

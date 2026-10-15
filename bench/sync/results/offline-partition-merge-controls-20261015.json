@@ -1,0 +1,47 @@
+{
+  "scope": "Offline artifact merge controls over copied historical rows; no new measurements, native/Unison/compiler/SDK/Photo process or aggregate closure proof.",
+  "actual_terminal": {
+    "chunk": "843f2e",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "positive_rows": 108,
+  "positive_cli_receipts": 324,
+  "artifact_refusals": 8,
+  "inputs_unchanged_except_deliberate_owned_malformed_fixture": true,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/merge_partitions.py",
+      "bytes": 2790,
+      "sha256": "5824deac54ab0a55f7709a7b3665de2a2a3df38c1f9b9ae0f4cd8dd5e92b241a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/merge_partitions_test.py",
+      "bytes": 3057,
+      "sha256": "689874ee37ef9e7d8d9d05245e5c96fe33ecf0c751bce05650a8bee90b39eac7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4609,
+      "sha256": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    }
+  ],
+  "historical_input": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-128MiB-4files-20261015.json",
+    "bytes": 3426268,
+    "sha256": "95d3a078666257b5db2010309f4abf817b89c90423beb6b3e2936378cb5a1114"
+  },
+  "pending_request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-v9-part0-prepared-request-20261015.json",
+    "bytes": 3455,
+    "sha256": "5f0828da6d65e992b22b54ed64ce5833ddbc4016b040cbe680b283dec9f51e88"
+  },
+  "pending_request_execution_source_pins_unchanged": true,
+  "runtime_started": false,
+  "credits_reserved": 0
+}
