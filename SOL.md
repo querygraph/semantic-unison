@@ -3122,3 +3122,19 @@ child/CPU hold remains. Evidence live-merge-owner-lifecycle-qualification.json.
 No SDK/Photo/compiler/real receiving call; aggregate300s controller/admission
 entry still required and unqualified. This run is finite deterministic original
 fixtures, not fuzzing/sanitizer work. One credit genuinely released.
+
+### Independent aggregate controller implemented and fake-worker qualified
+
+Added live_merge_aggregate.py: child establishes session before parentACK, parent
+retains workerPID through independent wall deadline/cleanup/membership query and
+wait4. Worker group closure is scoped separately from production helper groups.
+EXTERNAL-HELPERS-UNRESOLVED can clear only after normal worker exit,9clean actual
+CLI receipts and6required helper proofs; no signaling historical helper PIDs.
+No native CLI/admission entry exists, six-helper production branch uninvoked.
+
+Actual one-credit finite fixture owner42542/cf1c11/0 passes normal,failure,missing
+helperproof,TERMignoringtimeout. Every worker independently ECHILD after actual
+reap and within12s testlimit. Failed fixtures intentionally retain external proof
+markers, not live children. Pinned evidence live-merge-aggregate-qualification.json.
+No SDK/Photo/UnisonCLI/compiler executed. One credit RELEASED. Native entry/source
+review/full mock receiving matrix still pending; full goal active.
