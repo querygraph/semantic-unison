@@ -4,6 +4,15 @@
 
 ## Current checkpoint — 2026-10-15
 
+Next prepared work: [frozen warm512 part3](bench/sync/results/warm512-frozen-part3-prepared-request-20261015.json),
+the first OxCaml512 partition (worker1/three modes/18rows54CLI). Fresh clean
+detached a6f0b695/14execution+21runner hashes and accepted part2 predecessor
+verified; workspace/allocation/output absent. Queued to Photo Root for a fresh
+18credit/7200s scheduling decision, **unallocated/unstarted**. Root independently
+accepted part2 actual closure and sealed return; all18credits are released.
+No old admission reuse, SDK/compiler dispatch or automatic successor. Mandatory
+part0e311d5f6 timing disclosure remains with the series.
+
 Latest runtime: [frozen warm512 part2](bench/sync/results/warm512-frozen-part2-actual-return-20261015.json)
 PASSED/CLOSED, actual owner55681/d32adc/exit0/no session; aggregate81032
 reaped/others absent in2052.876s. Independent18row/54CLI client/server/supervisor
