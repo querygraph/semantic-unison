@@ -13,7 +13,7 @@ corpus, native-resource, acceptance-matrix and performance qualification.
 The separately admitted [six-call live SDK merge](tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
 now PASSED/CLOSED: actual owner43830/699a51/0,9CLI runs/six SDK validations,
 stock-client/Ox-server,32.486s aggregate. Independent retained readback passes;
-Root independent acceptance is pending. Admission is consumed, not reusable.
+Root independent acceptance5b9235bc is adopted. Admission is consumed, not reusable.
 All Unison allocations are closed. Root's latest explicit color recovery closure
 reports original4750/097f59/0 and recovery55005/cfd119/0, leasefree and18released.
 Fresh Photo reservations still require coordination; no SDK admission follows
@@ -3236,3 +3236,12 @@ command executed/creditsreserved. Pinned v2plan/evidence
 bench/sync/results/warm-plan-qualification-20261015.json. Performance runs still
 UNSTARTED; Root scheduling needed before first32MiBbatch. Real native SDK merge
 return remains passed/closed, independent Root acceptance pending, no SDK replay.
+
+### Root independent live merge acceptance adopted
+
+Verified Root5b9235bc independently accepted exact9CLI/6SDKreceipt/group/output/
+admission/sourcepins and actual43830/699a51/0 closure32.486s. Receiver adoption
+tests/qualification/sdk-live-merge-v1-root-adoption-20261015.json records exact
+receipt pin. Fourcredits released, admission consumed/no replay. Planned warm
+benchmark remains UNSTARTED, needs separate coordination before Root next18credit
+color render; no new core/helper/SDK/compiler dispatch from this adoption.

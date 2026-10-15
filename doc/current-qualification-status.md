@@ -26,7 +26,7 @@ outputs/no-op identity, nine CLI closures, six retained helper observations and
 no unresolved markers were independently read back. Aggregate93039 closed/reaped
 in32.486s, within300s. Wrapper preflight remained outside that aggregate limit.
 
-Root independent acceptance is pending. The admission is consumed; no replay or
+Root independently accepted the sealed result; [receiver adoption](../tests/qualification/sdk-live-merge-v1-root-adoption-20261015.json) pins its receipt. The admission is consumed; no replay or
 new SDK slot follows. This is functional exact generated-container receiving,
 not a throughput, camera-corpus, decoded-pixel or preview-reuse qualification.
 Broader native resource/scaling, real-camera corpus and representative performance

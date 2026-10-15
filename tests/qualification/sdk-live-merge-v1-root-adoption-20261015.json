@@ -1,0 +1,11 @@
+{
+  "scope": "Receiver adoption of independently accepted finite production SDK merge receiving, no new execution or admission.",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-LIVE-MERGE-V1-ROOT-ACTUAL-ACCEPTANCE-20261015.json",
+    "bytes": 14644,
+    "sha256": "5b9235bc7718d8f837902de8f480a52924db634d0f8fcbe6c4a51b6e181453e1"
+  },
+  "actual_return": "tests/qualification/sdk-live-merge-v1-actual-return-20261015.json",
+  "admission_consumed": true,
+  "new_slot": false
+}
