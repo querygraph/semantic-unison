@@ -3091,3 +3091,20 @@ unexpected-noop call rejection. No actual receiving CLI/SDK executed. Aggregate
 controller/admission entry and original fake-tool lifecycle qualification remain
 unimplemented; no native readiness/request inferred. All previous SDK slots
 remain consumed. No compiler/core/helper or Photo operation in this step.
+
+### Live receiving direct CLI owner source and refusal controls
+
+Added live_merge_owner.py (no native CLI/admission). Runner retains each CLI
+leader through group SIGTERM/KILL, bounded pre-reap membership checks and actual
+wait4; captures stdout/stderr bounded4MiB, keeps active_owner reachable if cleanup
+fails, writes individual START/CLOSED receipts. This certifies only the CLI group;
+ordinary production helper groups remain separate. HELPER-OWNERSHIP-UNRESOLVED
+starts before dispatch and can clear only after nine actual matching clean CLI
+receipts and six audited endpoint proofs. No historical-PID signaling.
+
+Pure refusal controls b654d9/0 and successor rerun pass incomplete/missing receipts
+and pre-dispatch budget/time refusal with zero subprocesses. Finite real fake-child
+lifecycle controls, native admission wrapper and independently timed aggregate300s
+supervisor are NOT implemented/qualified yet. Existing monotonic deadline in
+Runner is not claimed as total-wrapper300s supervision. No SDK/Photo calls, no
+current compiler/core/helper allocation. Full goal remains active.

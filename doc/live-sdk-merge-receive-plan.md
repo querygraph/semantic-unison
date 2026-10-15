@@ -119,3 +119,14 @@ provide its own admission or aggregate ownership. Its injected `run_sync` must
 settle the direct CLI child, bound capture and retain unresolved helper ownership
 on interruption. The actual controller is still required. Pure audit fixtures
 cover both endpoints and11 negative traces; no SDK or CLI was invoked by them.
+
+## Direct CLI ownership source
+
+`live_merge_owner.py` provides the direct CLI retained-leader owner and bounded
+stream capture. It does not claim ownership of separately grouped helpers. The
+runner preserves an active owner on cleanup failure and an unresolved marker
+until all nine actual CLI receipts and six helper proofs pass. Pure incomplete-
+proof and pre-dispatch refusal controls run without children. Actual fake-child
+lifecycle tests, independently enforced aggregate300s supervision, source-pinned
+admission and native CLI entry remain pending. A monotonic deadline checked by
+the runner is not itself aggregate or total-wrapper supervision.
