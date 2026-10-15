@@ -11,7 +11,33 @@ independent core implementation here; historical Photo notices below do not
 release a native window.
 
 
-## Current qualification checkpoints — 2026-10-14
+## Superseding evidence — 2026-10-15
+
+Use the [current qualification index](current-qualification-status.md) for the
+present requirements and remaining work. In particular, do not schedule a repeat
+of a completed SDK pilot merely because a historical row below calls it pending:
+
+- [Production live scalar merge receiving](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
+  passed nine CLI runs and six SDK calls over three generated codecs, with
+  [independent Root acceptance](../tests/qualification/sdk-live-merge-v1-root-adoption-20261015.json).
+  This supersedes the generated-input merged-output SDK gap below, not the
+  broader real-camera corpus or performance requirements.
+- [Typed whole-file clone routing](../tests/whole_file_clone/qualification.json)
+  covers60 groups/536 assertions and five negative controls per compiler. Both
+  legacy boolean APIs are poisoned in the Copy caller fixtures. Their continued
+  existence is not evidence that the qualified production routes still consume
+  their ambiguous results. Native sharing, other-platform and crash claims retain
+  the [suite's explicit limits](../tests/whole_file_clone/README.md).
+- [Cross-volume qualification](../tests/cross_volume/qualification.json) covers
+  private APFS/HFS+ roots in both directions, separately from remount/reformat,
+  distinct physical-device performance or broader platform behavior.
+- [Fake lifecycle qualification](../bench/sync/results/bounded-lifecycle-qualification-20261015.json)
+  passed eight allocated cases. It does not qualify the full timing matrix or
+  reconstruct the missing historical receipt for stopped60597. The prepared
+  [bounded timing successor](../bench/sync/results/warm-128-v5-prepared-request-20261015.json)
+  is unadmitted and has not started.
+
+## Historical qualification snapshot — 2026-10-14
 
 | Area | Authoritative current evidence | What remains unproved |
 | --- | --- | --- |

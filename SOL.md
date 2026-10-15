@@ -39,6 +39,12 @@ Preparing the plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Acceptance audit refresh (2026-10-15): the detailed implementation audit now
+  labels its October14 snapshot as historical and links superseding SDK live
+  merge, typed whole-clone, cross-volume and lifecycle evidence. This closes
+  stale descriptions, not broader camera/performance/platform gates. No timing
+  allocation appeared in the scheduling readback; no successor was dispatched.
+
 * Source-only usage review (2026-10-15): reviewed registry negotiation,
   exact/complement proof separation, clone-range prefix validation and physical
   CPU selection. No runtime qualification is added by this review. The
