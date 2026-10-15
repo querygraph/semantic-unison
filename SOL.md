@@ -3074,3 +3074,20 @@ executor and original fake-tool lifecycle controls; do not reuse contained-helpe
 phase.py as if it owned production helper groups. Native-group integration is now
 qualified; unknown/missing/nonzero observations must retain unresolved failure
 rather than signal historical PIDs. No compiler/SDK/Photo process active here.
+
+### Live merge receiving case body and proof checking implemented
+
+Added live_merge_cases.py without a native CLI/admission: caller must supply owned
+run_sync and aggregate supervision. Body selects actual stock client/Ox server,
+ordinary production helper groups, seed-off/disjoint-require/noop-require over
+three codecs, target hashes/exact no-op identities/staging cleanup. Proof audit
+requires exactly both endpoint receipts, candidate/hash/actualPID binding, full
+capture/completed/exit0/SDK success/rawdigestvalid/errors0 and observed group0.
+Unknown/unobserved/nonzero is unresolved failure; no historical-PID signaling.
+Caller must return actual direct-child reap and bounded capture.
+
+Pure audit tests pass9615e5/0: positive two-endpoint proof,11 negative traces and
+unexpected-noop call rejection. No actual receiving CLI/SDK executed. Aggregate
+controller/admission entry and original fake-tool lifecycle qualification remain
+unimplemented; no native readiness/request inferred. All previous SDK slots
+remain consumed. No compiler/core/helper or Photo operation in this step.

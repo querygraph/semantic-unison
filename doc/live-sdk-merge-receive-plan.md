@@ -110,3 +110,12 @@ records the actual pure run and eight malformed/protected-byte controls. No SDK
 call occurred; the proposed six-call runtime is still unadmitted and its executor
 is not implemented. Production-path group ownership during failure remains a
 requirement of that executor, not proof supplied by a prepared packet.
+
+## Case body and proof audit
+
+`live_merge_cases.py` supplies the three seed/merge/noop sequences and strict
+receiving proof checks. It has no native command-line entry point and cannot
+provide its own admission or aggregate ownership. Its injected `run_sync` must
+settle the direct CLI child, bound capture and retain unresolved helper ownership
+on interruption. The actual controller is still required. Pure audit fixtures
+cover both endpoints and11 negative traces; no SDK or CLI was invoked by them.
