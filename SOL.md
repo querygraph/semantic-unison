@@ -20,6 +20,16 @@ Fresh Photo reservations still require coordination; no SDK admission follows
 from a resource release. Earlier entries below are
 historical evidence and must not override a newer pinned checkpoint.
 
+Finite lifecycle qualification is now [PASSED/CLOSED](bench/sync/results/bounded-lifecycle-qualification-20261015.json):
+actual owner46880/86b330/0, eight fake-child/worker cases, whole wrapper6.528s
+within the one-credit/60s allocation. All actual children/workers were reaped;
+no active ownership remains. Expected negative-fixture markers are preserved
+and scoped in the receipt. A wrapper syntax preflight failed before any test
+was dispatched; the corrected wrapper ran the admitted cases once.
+This does not repair the missing historical interrupted-client receipt for
+stopped benchmark60597. Benchmark v4 remains UNADMITTED; no compiler, SDK,
+Photo, timing run or successor is authorized by this completed allocation.
+
 ## Live implementation handoff
 
 * Benchmark failure settlement (2026-10-14): each validation job now records
