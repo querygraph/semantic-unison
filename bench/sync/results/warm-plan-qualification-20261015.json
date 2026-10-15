@@ -1,0 +1,27 @@
+{
+  "scope": "Read-only performance preparation only, no benchmark/compiler/core/helper/SDK call. Not CPU admission.",
+  "actual_pure_terminal": {
+    "chunk": "5bcf0a",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v2.json",
+    "bytes": 8948,
+    "sha256": "3073d416227eaadd9d1eee405a5c28d47a5c96d7c46f4c0f959ad6cc33a30254"
+  },
+  "sources": [
+    {
+      "path": "bench/sync/prepare_plan.py",
+      "bytes": 4761,
+      "sha256": "bc2b8b3a541a9169a61c4e40daca8703ca195b0ab8621e7cb3274b393da3ff18"
+    },
+    {
+      "path": "bench/sync/prepare_plan_test.py",
+      "bytes": 1662,
+      "sha256": "b60454fb57c0ee2267983e2d3216198c2f8a1d9059bffba5313eaa61abbd4271"
+    }
+  ],
+  "negative_build_controls": 3,
+  "runtime_started": false
+}

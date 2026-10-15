@@ -3220,3 +3220,19 @@ references. Actual RETURN queue01a13d2f-bac4-7f33-b4e1-0841bb69188b. All4credits
 released, no successor active; Root independent audit pending. Admission consumed,
 NO replay/newslot. This closes the finite production merge-receiving SDK gate,
 not broader realcamera corpus/nativeRSSthreads/scaling/benchmark/fullgoal gates.
+
+### Representative-size warm sync measurement preparation, no dispatch
+
+Added bench/sync/prepare_plan.py: rechecks current stock/Ox build/selftest/source/
+compiler/binary pins, emits literal commands only. Four separate batches32/128/
+512MiB×4files and2048MiB×2files; each compares ordinary/receiverclone/SDE stock/Ox
+workers1/6/8,onewarmup+5measuredreps (18configs,90samples,324CLIinvocations).
+Loopback2endpoints means8+8=16configuredworkers under proposed18credit scheduling,
+not18+18 on18cores. Primary-reader debug counters intentionally off for timing.
+No coldcache/network/crossvolume/upstreamoriginal or physicalAPFS/RSS inference.
+
+Actual pure5bcf0a/0 validates command/CPU/sample counts and3badbuild refusals; no
+command executed/creditsreserved. Pinned v2plan/evidence
+bench/sync/results/warm-plan-qualification-20261015.json. Performance runs still
+UNSTARTED; Root scheduling needed before first32MiBbatch. Real native SDK merge
+return remains passed/closed, independent Root acceptance pending, no SDK replay.
