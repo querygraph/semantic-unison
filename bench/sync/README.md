@@ -7,6 +7,44 @@ preview generator, and never reads or writes photographic inputs, catalogs,
 caches or Photo volumes. These inputs qualify transfer behavior, not DNG image
 validity or Adobe-current-edits rendering.
 
+## Completed warm512 part0 — 2026-10-15
+
+[Raw18 rows](results/warm-512MiB-4files-part0-20261015.json) and
+[sealed return](results/warm512-v9-part0-actual-return-20261015.json) cover only
+stock OCaml with one semantic worker per endpoint, all three modes, one warmup
+and five measured repetitions. All54 synchronization invocations passed exact
+output, unchanged basis, no-op inode and client/server settlement checks.
+Actual owner74730/c65a5b/exit0 and aggregate52671 genuinely closed/reaped,
+others absent, in2293.507s (38.23min); unresolved markers empty,18credits released.
+No other partition or larger workload was dispatched under this allocation.
+
+| Mode | Median update seconds | Minimum | Maximum |
+| --- | ---: | ---: | ---: |
+| Ordinary | 37.423 | 37.390 | 37.767 |
+| Receiver clone | 36.700 | 36.610 | 36.820 |
+| Semantic, one worker | 69.659 | 69.320 | 70.214 |
+
+Four512MiB generated files form a2GiB corpus; this is not a single2GiB-file test.
+Sequential semantic transfer is about1.86x the ordinary elapsed time here.
+It still returns only12,288 logical write bytes in four attempts, with32,768
+packet payload bytes and51,861 median forwarded protocol bytes. Ordinary
+protocol median806,012 bytes, receiver-clone806,013. Receiver cloning inherits
+2,147,352,576 output bytes, leaving a131,072-byte non-inherited materialization
+model; the ordinary full-extent model is2,147,483,648 bytes. These models are
+not syscall/physical-write telemetry. Same internal APFS volume and warm,
+uncontrolled caches; Root held competing Photo work, unrelated OS activity
+was not continuously measured. Fixture generation/seed/verification/no-op work
+is outside the reported update times but inside the actual owned aggregate.
+Binary/compiler provenance queries are not counted as synchronization samples.
+
+The serial semantic path reduces logical materialization/protocol traffic but
+is slower once full verification is included. Parallel and OxCaml512MiB parts
+remain unrun; this result cannot establish their performance or complete the
+six-part matrix. All further parts need fresh allocation/parent/group closure.
+Retain the exact source snapshot and runtime provenance of this part when
+scheduling later parts; result/documentation commits alone must not silently
+change the recorded repository head or runner manifest across a merged series.
+
 ## Completed warm128 benchmark — 2026-10-15
 
 [Raw108 rows](results/warm-128MiB-4files-20261015.json) and

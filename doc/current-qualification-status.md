@@ -43,6 +43,18 @@ all324 CLI/server settlements audited, unresolved markers empty,18credits releas
 savings from modest warm-loopback elapsed gains. This supersedes the unstarted
 status of this exact v5 batch; later sizes and broader performance remain open.
 
+## Completed warm512 first partition
+
+The [first512MiB part](../bench/sync/results/warm512-v9-part0-actual-return-20261015.json)
+passed18rows/54 synchronization invocations: stock OCaml, one worker, three
+modes and five measured repetitions. Owner74730/c65a5b/0 and aggregate52671
+closed/reaped in2293.507s; unresolved markers empty,18credits released.
+Median update times37.423/36.700/69.659s (ordinary/clone/semantic); semantic
+returned12KiB writes over a2GiB corpus but was slower sequentially. This is
+not parallel/OxCaml512MiB, full six-part, single2GiB-file or physical-I/O proof.
+[Raw data](../bench/sync/results/warm-512MiB-4files-part0-20261015.json) retain
+all receipts. Subsequent parts are unallocated and must retain matched provenance.
+
 ## Boundaries that remain explicit
 
 The [bounded lifecycle controls](../bench/sync/results/bounded-lifecycle-qualification-20261015.json)

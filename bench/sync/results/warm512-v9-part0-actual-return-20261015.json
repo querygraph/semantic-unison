@@ -1,0 +1,194 @@
+{
+  "state": "ACTUAL_WARM512_V9_PART0_PASSED_CLOSED",
+  "measurement": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-512MiB-4files-part0-20261015.json",
+    "bytes": 765831,
+    "sha256": "7ea2087c9f521bbeae1660c948fd60d872b056982543f715063630b66c08909a"
+  },
+  "original_measurement": {
+    "path": "/private/tmp/unison-warm-sync-measurements-20261015-v9/warm-512MiB-4files-part0.json",
+    "bytes": 765831,
+    "sha256": "7ea2087c9f521bbeae1660c948fd60d872b056982543f715063630b66c08909a"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-v9-part0-prepared-request-20261015.json",
+    "bytes": 3455,
+    "sha256": "5f0828da6d65e992b22b54ed64ce5833ddbc4016b040cbe680b283dec9f51e88"
+  },
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-V9-PART0-ADMISSION-20261015.json",
+    "bytes": 2867,
+    "sha256": "f9b954a2f578db93b542f593fd1584654443a3c2d66f0f377149a108e21cab21"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 74730,
+    "terminal_chunk": "c65a5b",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "scope": "actual owner tool terminal, not inferred from process absence"
+  },
+  "aggregate": {
+    "pid": 52671,
+    "returncode": 0,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 52671,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 2293.507083881006,
+    "seconds": 7200,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "independent_readback_audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "declared matrix rows and retained per-invocation receipts; not aggregate owner closure, physical I/O or aggregate RSS"
+  },
+  "partition": {
+    "schema": "unison-sync-partition/1",
+    "index": 0,
+    "count": 6,
+    "configurations": [
+      [
+        "stock",
+        "ordinary",
+        1
+      ],
+      [
+        "stock",
+        "receiver-clone",
+        1
+      ],
+      [
+        "stock",
+        "semantic",
+        1
+      ]
+    ]
+  },
+  "summary": [
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 37.42266914699576,
+        "minimum": 37.3895740910084,
+        "maximum": 37.76742627299973
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 806012,
+        "minimum": 806012,
+        "maximum": 806012
+      },
+      "logical_materialization_model_values": [
+        2147483648
+      ],
+      "semantic_actual_logical_write_bytes": null
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 36.69972132600378,
+        "minimum": 36.60974631900899,
+        "maximum": 36.81985539197922
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 806013,
+        "minimum": 806013,
+        "maximum": 806013
+      },
+      "logical_materialization_model_values": [
+        131072
+      ],
+      "semantic_actual_logical_write_bytes": null
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 69.65878984500887,
+        "minimum": 69.31997268798295,
+        "maximum": 70.21430851801415
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51861,
+        "minimum": 51861,
+        "maximum": 51861
+      },
+      "logical_materialization_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes": 12288
+    }
+  ],
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/AGGREGATE-CLOSED.json",
+      "bytes": 399,
+      "sha256": "429a3c60a37fa2f222e1831b5e2afb89349dcc373e5dfb17813df3c27d2b9411"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/AGGREGATE-START.json",
+      "bytes": 38,
+      "sha256": "9cca96938ce91e244d8230855675f60a0101b187627c8ab45fa4ac7234d1f4cd"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/BATCH-PROOFS-COMPLETE.json",
+      "bytes": 473,
+      "sha256": "a006687ec697293a3ff522c0ca7d8a8889fc1f22d7841511e64eed6cb548a77e"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/BATCH-RETURN.json",
+      "bytes": 1081,
+      "sha256": "3b818e88418b60c6d2d1e091c5d51f3609be5962ac8972ce8a2ce189d742a031"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/OWNER-RETURN.json",
+      "bytes": 768,
+      "sha256": "600b20fa0f0693b182069e1790ccc327c178ecf60c2b9c60ffc0a9bfb7020200"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/OWNER-TERMINAL.json",
+      "bytes": 187,
+      "sha256": "d06f1ac9318760373bd1fe9873553c81cb6ca45aa44e7a6aba8e55c27d3ff0ce"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/START.json",
+      "bytes": 1137,
+      "sha256": "10099de27490afe1e381b417b6ae572912352e57b677dc797dc6415fa0daa8b6"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/SUPERVISOR-CLOSED.json",
+      "bytes": 606,
+      "sha256": "c36cf0dbb45d6122c1e51d9e3c65fe5011d9b804eccaed2438570e9a933c3a71"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-v9-part0/WRAPPER-START.json",
+      "bytes": 1965,
+      "sha256": "b8e6b8a2aa2abca5af657f3f08f2c245fe261b3e33caa22d6834345cd2eb5f44"
+    }
+  ],
+  "unresolved_markers": [],
+  "credits_released": 18,
+  "other_parts_executed": false,
+  "scope": "Only stock OCaml worker1, ordinary/receiver-clone/semantic, four512MiB generated files, one warmup/five measured repetitions. Not full six-part matrix, OxCaml/parallel512MiB results, actual2GiB single file, SDK/camera corpus, physical I/O, cold cache, original-upstream or real network qualification.",
+  "background_observation": "Photo native/compiler/timing held by Root; unrelated host/OS activity not continuously sampled or controlled. Same internal APFS warm/uncontrolled loopback; no CPU affinity/cache flush.",
+  "metadata_scope": "54 counted synchronization invocations (seed/update/noop). Runner also queried binary/compiler provenance; those are not compilation jobs or additional synchronization samples."
+}

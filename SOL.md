@@ -4,6 +4,10 @@
 
 ## Current checkpoint — 2026-10-15
 
+Latest runtime: warm512 part0 PASSED/CLOSED, owner74730/c65a5b/0,18rows/54sync
+invocations, no unresolved markers; all18credits released. This is stock worker1
+only, not a complete512MiB stock/Ox/parallel matrix. See the live entry below.
+
 Current stock/Ox full Make+selftests,41 helper groups per compiler and five
 receiving diagnostic cases per compiler pass. Generic APFS/SDE/DNG/optional
 validator implementation is present; the full goal is NOT complete. The latest
@@ -44,6 +48,20 @@ the actual result is linked above. The prepared plan itself remains immutable.
 Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
+
+* Actual warm512 first part PASSED/CLOSED (2026-10-15): fresh allocationf9b954a2
+  ran once, actual owner74730/c65a5b/exit0, aggregate52671 closed/reaped/others
+  absent in2293.507s, no unresolved markers. All18rows/54 synchronization CLI
+  receipts passed;18credits released and Root notified. [Raw data](bench/sync/results/warm-512MiB-4files-part0-20261015.json),
+  [sealed return](bench/sync/results/warm512-v9-part0-actual-return-20261015.json).
+  Stock worker1 medians: ordinary37.423s, clone36.700s, semantic69.659s.
+  Semantic writes12,288 logical bytes across2GiB, but is slower sequentially.
+  No parallel/Ox512MiB claim; other five parts and single2GiB transfer remain
+  unrun. The old unallocated v9 notes below are superseded ONLY for this part;
+  allocation consumed, no successor authorized. Preserve this part's exact
+  repository/runner snapshot for subsequent separately scheduled parts so the
+  strict full-series provenance audit can remain meaningful after report commits.
+
 
 * Offline partition report command (2026-10-15): `merge_partitions.py` accepts
   six stable bounded regular JSON inputs and creates a new report exclusively.
