@@ -45,6 +45,18 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Aggregate setup failure settlement (2026-10-15, SOURCE ONLY): preparation
+  now includes both readiness-pipe acquisitions and stdout/stderr flush inside
+  the pre-fork cleanup guard. Previously a second-pipe or flush exception could
+  leak already acquired descriptors; a close failure could skip siblings and
+  replace the original fork exception. Cleanup now attempts every acquired
+  slot and rethrows the original exception. Six finite mocked acquisition,
+  flush, fork and cleanup-failure regressions are prepared in
+  `tests/sdk_container_receive/aggregate_setup_test.py`; they have NOT been
+  executed while Photo owns its exclusive18 MOV repair slot. No native worker,
+  compiler, core test or benchmark was dispatched. Earlier completed runtime
+  evidence retains its historical source pins; future runs need current pins.
+
 * Aggregate interpreter preflight (2026-10-15): source review found that direct
   `OwnedGroup.__new__` bypassed its constructor's waitid/WNOWAIT support check.
   The aggregate now checks retained observation/reap/session APIs before any

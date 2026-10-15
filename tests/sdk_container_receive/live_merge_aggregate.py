@@ -50,16 +50,23 @@ def supervise(function, workspace, *, seconds=300, expected_helper_calls=6,
     external_marker = work / 'EXTERNAL-HELPERS-UNRESOLVED.json'
     write(aggregate_marker, {'state': 'PREPARING', 'seconds': seconds})
     write(external_marker, {'state': 'PROOFS_PENDING', 'expected_calls': expected_helper_calls})
-    ready_read, ready_write = os.pipe()
-    start_read, start_write = os.pipe()
     start = time.monotonic()
     deadline = start + seconds
-    sys.stdout.flush(); sys.stderr.flush()
+    ready_read = ready_write = start_read = start_write = None
     try:
+        ready_read, ready_write = os.pipe()
+        start_read, start_write = os.pipe()
+        sys.stdout.flush(); sys.stderr.flush()
         pid = os.fork()
     except BaseException:
         for fd in (ready_read, ready_write, start_read, start_write):
-            os.close(fd)
+            if fd is not None:
+                # A failed close must neither skip sibling descriptors nor
+                # replace the original acquisition/flush/fork exception.
+                try:
+                    os.close(fd)
+                except BaseException:
+                    pass
         raise
     if pid == 0:
         os.close(ready_read); os.close(start_write)
