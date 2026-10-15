@@ -19,7 +19,18 @@ the completed report. A throwing observer uses the existing error channel while
 sibling replies and the pool remain usable. Selection changes require an idle,
 open pool. Callback/read/stability failures return no reader report.
 
-Use a successful Make snapshot and its matching compiler:
+User-run Make entry points verify the saved compiler/binary and every recorded
+production source pin before dispatch. Use a fresh successful build receipt:
+
+```sh
+BUILD_RECEIPT=/absolute/build-RESULT.json make -f tests/Makefile read-workers
+BUILD_RECEIPT=/absolute/build-RESULT.json make -f tests/Makefile read-cli
+make -f tests/Makefile read-parser
+```
+
+`DRY_RUN=1` prints the command without dispatch. Worker checks require a Make
+snapshot; CLI checks also accept Dune. No target invokes Adobe or Photo.
+Equivalent direct commands using the matching compiler:
 
 ```sh
 python3 tests/workers/run.py --ocamlopt /absolute/compiler/ocamlopt \

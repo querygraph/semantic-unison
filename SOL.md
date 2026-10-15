@@ -2687,3 +2687,18 @@ partial/cancelled readers, prefetch/syscalls and physical I/O. application_read_
 bytes remains None. These are functional/diagnostic observations, not throughput,
 whole-process bounds or full M6 qualification. Expired SDK admission remains
 unstarted/unusable; no compiler/SDK/Photo/native-render activity remains owned.
+
+### Manual telemetry dispatch and stale-build refusal — 2026-10-14
+
+Added `read-workers`, `read-cli`, and `read-parser` to the user-run tests Make
+entry points. Build-dependent cache and reader targets now compare every recorded
+`src/` source pin, rather than checking only the cache module; stale worker or
+transfer code cannot silently qualify current core behavior through this wrapper.
+Existing binary/compiler checks and runner process ownership remain in place.
+Pure command-construction checks accepted five current snapshot routes, rejected
+four routes with a deliberately stale worker pin, and selected the parser route;
+no child test/compiler/SDK was dispatched. `git diff --check` passes. The already
+qualified runner suites were not rerun for this dispatcher-only change.
+Photo HostV5 closed failed/no output and released its reservation; no renderer
+success inferred. Merged SDK admission remains expired unstarted. Full goal is
+active; broader SDK/pixel/resource/performance gates remain open.

@@ -16,6 +16,9 @@ Targets:
   cache-storage           private cache/quota controls; BUILD_RECEIPT required
   cache-ownership         private cleanup exception controls; BUILD_RECEIPT required
   cache-cli               loopback merge/recovery, fake validators; BUILD_RECEIPT required
+  read-workers            reader/worker controls; Make BUILD_RECEIPT required
+  read-cli                synthetic telemetry sync; BUILD_RECEIPT required
+  read-parser             pure telemetry parser controls
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
@@ -49,16 +52,30 @@ def command(target, output, environment):
         return [sys.executable, str(ROOT / 'tests/build_snapshot.py'),
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
                 '--build-system', system, '--selftest', '--report', str(output / 'RESULT.json')]
-    if target in ('cache-storage', 'cache-ownership', 'cache-cli'):
+    if target in ('cache-storage', 'cache-ownership', 'cache-cli', 'read-workers', 'read-cli'):
         require(bool(environment.get('BUILD_RECEIPT')), 'BUILD_RECEIPT is required')
         receipt = json.loads(Path(environment['BUILD_RECEIPT']).read_text())
         require(receipt['complete'] and receipt['build_exit'] == receipt['selftest_exit'] == 0,
                 'completed successful build/selftest receipt required')
         require(sha(receipt['binary']) == receipt['binary_sha256']
                 and sha(receipt['compiler']) == receipt['compiler_sha256'], 'build artifact changed')
-        # Explicitly bind the live core relevant to these tests before launching.
-        for name in ('src/semanticMergeCache.ml', 'src/semanticMergeCache.mli'):
-            require(sha(ROOT / name) == receipt['source_sha256'][name], 'cache source changed')
+        # A cache-only pin could silently accept stale transfer/worker code.
+        pins = receipt['source_sha256']
+        require('src/semanticMergeCache.ml' in pins and 'src/semanticWorkers.ml' in pins,
+                'production source pins missing')
+        for name, digest in pins.items():
+            if name.startswith('src/'):
+                require(sha(ROOT / name) == digest, 'production source changed: ' + name)
+        if target == 'read-cli':
+            return [sys.executable, str(ROOT / 'tests/read_stats/cli.py'),
+                    '--build-receipt', str(Path(environment['BUILD_RECEIPT']).resolve()),
+                    '--report', str(output / 'RESULT.json')]
+        if target == 'read-workers':
+            require(receipt['build_system'] == 'make', 'native object probes require a Make snapshot')
+            return [sys.executable, str(ROOT / 'tests/workers/run.py'),
+                    '--ocamlopt', receipt['compiler'],
+                    '--build', str(Path(receipt['workspace']) / 'src'),
+                    '--read-stats-only', '--keep-work', '--receipt', str(output / 'RESULT.json')]
         if target == 'cache-cli':
             return [sys.executable, str(ROOT / 'tests/semantic_base_cache/run.py'),
                     '--unison', receipt['binary'], '--receipt', str(output / 'RESULT.json')]
@@ -67,6 +84,8 @@ def command(target, output, environment):
         return [sys.executable, str(ROOT / 'tests/semantic_base_cache' / script),
                 '--compiler', receipt['compiler'], '--build', receipt['workspace'],
                 '--report', str(output / 'RESULT.json')]
+    if target == 'read-parser':
+        return [sys.executable, str(ROOT / 'tests/read_stats/parser.py')]
     script = {'host-interface': 'test.py', 'host-executor': 'executor_test.py'}.get(target)
     require(script is not None, 'unknown check target')
     return [sys.executable, str(ROOT / 'tests/sdk_host_matrix' / script)]
@@ -81,7 +100,7 @@ def main():
         return
     dry = os.environ.get('DRY_RUN') == '1'
     requested = os.environ.get('OUTPUT_DIR')
-    host = target in ('host-interface', 'host-executor')
+    host = target in ('host-interface', 'host-executor', 'read-parser')
     require(not(host and requested), 'host checks own their output; do not set OUTPUT_DIR')
     output = Path(requested).resolve() if requested else Path(tempfile.gettempdir()) / 'UNCREATED-unison-check'
     if requested:
