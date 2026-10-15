@@ -2820,3 +2820,21 @@ as frozen files, not a live SDK-gated receiving pipeline. Broader corpus, pixel
 identity/rendering, production C-backend timing, experimental threads/RSS,
 representative full-sync performance and full goal qualification remain open.
 No Photo/Lightroom/Main/cache call or production driver replacement occurred.
+
+### SDK v2 independent adoption and live receiving successor scope
+
+Read Root's actual CLOSED receipt and independently matched its parent terminal,
+aggregate and released hold against the sealed owner result; rehashed runtime
+artifacts and terminal receipt. [Durable receiver adoption](tests/qualification/sdk-merged-output-v2-root-adoption-20261014.json).
+No new native execution. Next gate is actual SDK-gated production scalar-merge
+receiving, not another validation of the same frozen files.
+
+[Finite source plan](doc/live-sdk-merge-receive-plan.md) specifies3generatedinputs,
+12states,6SDKcalls across stock/Ox receiving endpoints, exact/no-op witnesses and
+one-thread qualified driver. Source review found the current aggregate runner
+requires contained helpers, whereas production HelperSupervisor creates separate
+groups. Its group receipt cannot be reused to claim production helper closure.
+A separately qualified helper-group ledger/capture owner is a prerequisite;
+do not modify production spawn behavior to fit the existing pilot. Proposed
+limits are not reservation/admission; executor/ledger implementation and finite
+lifecycle controls remain next. Full goal active, production paths untouched.
