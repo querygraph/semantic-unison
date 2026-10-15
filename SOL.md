@@ -4,6 +4,15 @@
 
 ## Current checkpoint — 2026-10-15
 
+Next runtime preparation: [frozen warm512 part2 request](bench/sync/results/warm512-frozen-part2-prepared-request-20261015.json)
+pins stockworker8/three modes/18rows54CLI, the same detached a6f0b695 cohort,
+and independently accepted part1 predecessor. All14execution/21runner hashes
+rechecked; unique workspace/allocation/output absent. Request queued to Photo
+Root for scheduling, **unallocated/unstarted**; no SDK/compiler/native job runs.
+Goal reactivated by user; full qualification remains incomplete. Part1 actual
+closure and sealed return are now independently accepted by Photo Root, with
+all18credits released; no stale resource hold remains.
+
 Timing correction: warm512 part0 has a disclosed59.49s CPU/disk overlap.
 Functional/ownership checks pass, but it is not an uncontaminated quiet timing
 run. [Addendum](bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json)
