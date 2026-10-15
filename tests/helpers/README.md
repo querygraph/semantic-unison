@@ -98,3 +98,19 @@ completion, callback exceptions, timeout, pre-spawn cancellation and synchronous
 disconnect teardown. A synchronous teardown retires its binding before blocking
 reap and emits no group observation. The latest added timeout/disconnect controls
 are source-only until the integration checkpoint records their actual runs.
+
+Manual Make entry points (run from the repository root):
+
+```
+STOCK_PREFIX="$HOME/.opam/default/bin" make -f tests/Makefile helper-stock
+OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" make -f tests/Makefile helper-ox
+BUILD_RECEIPT=/absolute/current-build.json make -f tests/Makefile validation-cli
+make -f tests/Makefile group-parser
+```
+
+Prefix values are read as argument values, never shell fragments. Use
+`DRY_RUN=1` to inspect a command without launching it. The helper suite compiles
+serially and uses original synthetic children; validation-cli requires a current
+successful build/selftest receipt and launches only synthetic receiving cases.
+The group-parser target executes pure Python fixtures only. No target invokes
+Adobe or opens Photo/Lightroom. Coordinate CPU reservations before native checks.

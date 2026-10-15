@@ -3015,3 +3015,13 @@ Exit0/errors1 still must preserve the old target, while raw/binary stderr bounds
 remain tested. Parser source SHA now accompanies the CLI report. AST parse and
 diff check pass; CLI execution remains NOT RUN pending Root release/current
 stock+Ox builds. No new processes beyond source/pure Python work, no SDK calls.
+
+### Manual entry points for current helper integration
+
+Added helper-stock/helper-ox/validation-cli/group-parser Make targets to preserve
+user-requested manual test execution. Compiler prefixes are passed as literal
+argv; CLI requires current build source/artifact pins via checked_build. Existing
+runner retains child ownership through exec, no extra SDK mode. Actual dry-run
+stock/Ox command generation and pure14case group-parser pass b824d4/exit0. No
+compiler/helper/core/SDK dispatched during HostV15 hold. Runtime integration
+qualification still pending, not inferred from dry-run generation.

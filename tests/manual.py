@@ -20,6 +20,9 @@ Targets:
   read-cli                synthetic telemetry sync; BUILD_RECEIPT required
   read-parser             pure telemetry parser controls
   sync-functional         finite stock/Ox matrix; STOCK_RECEIPT and OX_RECEIPT required
+  helper-stock / helper-ox finite synthetic helper suite; STOCK_PREFIX/OX_PREFIX required
+  validation-cli          synthetic receiving diagnostics; BUILD_RECEIPT required
+  group-parser            pure retained-group diagnostic parser controls
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
@@ -58,6 +61,15 @@ def checked_build(path):
 
 
 def command(target, output, environment):
+    if target in ('helper-stock', 'helper-ox'):
+        key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
+        require(bool(environment.get(key)), key + ' is required')
+        compiler = Path(environment[key]).resolve() / 'ocamlopt'
+        require(compiler.is_file(), 'compiler prefix must contain ocamlopt')
+        return [sys.executable, str(ROOT / 'tests/helpers/run_tests.py'),
+                '--ocamlopt', str(compiler)]
+    if target == 'group-parser':
+        return [sys.executable, str(ROOT / 'tests/validation_process/group_parser_test.py')]
     if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune'):
         kind, system = target.split('-')
         key = 'STOCK_PREFIX' if kind == 'stock' else 'OX_PREFIX'
@@ -80,11 +92,12 @@ def command(target, output, environment):
                        '--loopback-cpu-credits', '4', '--timeout', '30',
                        '--background-note', 'user-run finite functional checks; not a throughput comparison',
                        '--output', str(output / 'RESULT.json')]
-    if target in ('cache-storage', 'cache-ownership', 'cache-cli', 'read-workers', 'read-cli'):
+    if target in ('cache-storage', 'cache-ownership', 'cache-cli', 'read-workers', 'read-cli', 'validation-cli'):
         require(bool(environment.get('BUILD_RECEIPT')), 'BUILD_RECEIPT is required')
         receipt = checked_build(environment['BUILD_RECEIPT'])
-        if target == 'read-cli':
-            return [sys.executable, str(ROOT / 'tests/read_stats/cli.py'),
+        if target in ('read-cli', 'validation-cli'):
+            script = 'tests/read_stats/cli.py' if target == 'read-cli' else 'tests/validation_process/cli.py'
+            return [sys.executable, str(ROOT / script),
                     '--build-receipt', str(Path(environment['BUILD_RECEIPT']).resolve()),
                     '--report', str(output / 'RESULT.json')]
         if target == 'read-workers':
@@ -117,7 +130,8 @@ def main():
         return
     dry = os.environ.get('DRY_RUN') == '1'
     requested = os.environ.get('OUTPUT_DIR')
-    host = target in ('host-interface', 'host-executor', 'read-parser')
+    host = target in ('host-interface', 'host-executor', 'read-parser', 'group-parser',
+                      'helper-stock', 'helper-ox')
     require(not(host and requested), 'host checks own their output; do not set OUTPUT_DIR')
     output = Path(requested).resolve() if requested else Path(tempfile.gettempdir()) / 'UNCREATED-unison-check'
     if requested:
@@ -127,7 +141,7 @@ def main():
         print(json.dumps({'target': target, 'argv': argv, 'executes': False}))
         return
     if host:
-        print('Runner will print its own retained receipt/workspace.', flush=True)
+        print('Runner owns its output and process lifecycle.', flush=True)
         os.execv(sys.executable, argv)
     if requested:
         output.mkdir(mode=0o700)
