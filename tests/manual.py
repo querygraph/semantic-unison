@@ -23,6 +23,8 @@ Targets:
   helper-stock / helper-ox finite synthetic helper suite; STOCK_PREFIX/OX_PREFIX required
   validation-cli          synthetic receiving diagnostics; BUILD_RECEIPT required
   group-parser            pure retained-group diagnostic parser controls
+  interrupted-receipts    four fake-child interruption/receipt controls
+  aggregate-lifecycle     four fake-worker aggregate ownership controls
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
@@ -70,6 +72,10 @@ def command(target, output, environment):
                 '--ocamlopt', str(compiler)]
     if target == 'group-parser':
         return [sys.executable, str(ROOT / 'tests/validation_process/group_parser_test.py')]
+    if target in ('interrupted-receipts', 'aggregate-lifecycle'):
+        script = ('interrupted_receipt_lifecycle_test.py' if target == 'interrupted-receipts'
+                  else 'aggregate_successor_lifecycle_test.py')
+        return [sys.executable, str(ROOT / 'bench/sync' / script)]
     if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune'):
         kind, system = target.split('-')
         key = 'STOCK_PREFIX' if kind == 'stock' else 'OX_PREFIX'
@@ -131,7 +137,7 @@ def main():
     dry = os.environ.get('DRY_RUN') == '1'
     requested = os.environ.get('OUTPUT_DIR')
     host = target in ('host-interface', 'host-executor', 'read-parser', 'group-parser',
-                      'helper-stock', 'helper-ox')
+                      'helper-stock', 'helper-ox', 'interrupted-receipts', 'aggregate-lifecycle')
     require(not(host and requested), 'host checks own their output; do not set OUTPUT_DIR')
     output = Path(requested).resolve() if requested else Path(tempfile.gettempdir()) / 'UNCREATED-unison-check'
     if requested:

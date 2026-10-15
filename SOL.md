@@ -39,6 +39,13 @@ Preparing the plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Manual lifecycle entry points (2026-10-15): added `interrupted-receipts` and
+  `aggregate-lifecycle` to `tests/Makefile`/`tests/manual.py`, selecting the exact
+  already-qualified scripts with literal argv and runner-owned workspaces.
+  This is source preparation only; the new dispatcher routes have not been
+  executed under the current successor hold. The underlying eight-case actual
+  qualification remains pinned separately. No timing admission or replay.
+
 * Acceptance audit refresh (2026-10-15): the detailed implementation audit now
   labels its October14 snapshot as historical and links superseding SDK live
   merge, typed whole-clone, cross-volume and lifecycle evidence. This closes

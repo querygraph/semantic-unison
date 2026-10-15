@@ -150,6 +150,24 @@ copies, child memory or total process descriptors.
 
 Build and test references:
 
+The existing finite fake-child and fake-worker lifecycle controls can be run
+manually from the repository root, separately and serially:
+
+```sh
+make -f tests/Makefile interrupted-receipts
+make -f tests/Makefile aggregate-lifecycle
+```
+
+Each runner creates and prints its own private workspace and receipts. These
+targets invoke no compiler, SDK, Lightroom, source photograph or timing matrix.
+The aggregate's failure fixtures intentionally retain unresolved-proof markers
+while checking that their actual workers were reaped; those expected markers
+are not passing native-helper proofs. `DRY_RUN=1` prints the selected command
+without starting a child or creating its report directory. Use the qualified
+Python3.14 interpreter for reproduction (for example by placing its executable
+directory first on `PATH`). These entry points do not provide a machine-wide
+resource allocation; coordinate manual runs with other work.
+
 - [Isolated OxCaml/standard OCaml builds](oxcaml.md)
 - [APFS and peer compatibility tests](../tests/CLONE.md)
 - [Extension authoring contract](format-extensions.md)
