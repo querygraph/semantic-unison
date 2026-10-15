@@ -4,14 +4,28 @@
 
 ## Current checkpoint — 2026-10-15
 
+Actual [settlement lifecycle return](bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json)
+PASSED/CLOSED: owner3736/16df12/exit0/no session; aggregate1705 reaped0/others
+absent in2.387s. Six direct original Python children prove delayed normal exit,
+legacy short-grace refusal, fault TERM, TERM-ignore KILL, nonzero exit and expired
+normal budget; each independently ECHILD. Actual proxy delayed echo also passes
+client/supervisor/group/server/pump closure. Seven cases/nine original children,
+no unresolved markers, all12source pins unchanged. Fresh allocation10b7a29a
+explicitly authorized the earlier v1 command; v2's identical command/limits and
+two extra transitive pins were additionally checked. Root sent actual closure,
+onecredit released on Unison side. No benchmark/SDK/Photo/compiler or automatic
+successor. This qualifies the harness lifecycle successor, not historical part3
+cause, its missing rows or throughput. Frozen old cohort remains untouched.
+
 Prepared [settlement lifecycle v2 request](bench/sync/results/native-settlement-lifecycle-request-v2-20261015.json)
 for seven finite original-Python cases: six direct child policies plus the actual
 proxy delayed-echo client/server/supervisor path. OneCPU/45s retained aggregate
 (maximum60), no compiler/SDK/Unison binary/Photo/timing. Exact command and12
-transitive source pins queued to Root; **unallocated/unstarted**. In-memory
-syntax compilation only, no test child executed. V1 request is preserved but
+transitive source pins queued to Root, then executed under the fresh explicit
+allocation recorded above. Earlier preparation was in-memory syntax only. V1 was
 withdrawn unstarted because two transitive imports were missing from its pin
-inventory; v2 leaves command/cases/limits unchanged. Fake children cannot prove
+inventory; latest explicit allocation subsequently authorized that same command
+with all12pins freshly checked. V2 leaves command/cases/limits unchanged. Fake children cannot prove
 historical part3 cause or restore its incomplete matrix; no retry authorized.
 
 Post-failure source successor: proxy normal EOF settlement now allows up to2s

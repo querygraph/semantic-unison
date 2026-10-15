@@ -79,6 +79,15 @@ Root for independent resource adoption;18credits released on the Unison side.
 
 ## Boundaries that remain explicit
 
+The [settlement successor lifecycle](../bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json)
+passes seven original-Python cases under onecredit: actual owner3736/16df12/0,
+aggregate1705 reaped/others absent in2.387s. Delayed normal EOF, legacy refusal,
+fault TERM, TERM-ignore KILL, nonzero exit, expired budget and actual proxy echo
+all retain cleanup proofs; no unresolved markers or source changes. This
+qualifies the main-harness successor's finite lifecycle, not performance or
+the cause/completion of historical failed part3. No nativeSDK/Photo/compiler
+or benchmark ran; no new timing allocation follows.
+
 The [Oxworker1 part3 attempt](../bench/sync/results/warm512-frozen-part3-failed-return-20261015.json)
 is FAILED/INCOMPLETE:16completed exact rows/48successful CLI, then a seed's
 post-output-EOF server settlement grace failure (client/server0, supervisor70).
