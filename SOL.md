@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Post-failure source successor: proxy normal EOF settlement now allows up to2s
+capped by the remaining protocol deadline, rather than sharing the200ms TERM
+grace. Known faults still signal TERM immediately; the old NativeChild default
+is unchanged. Timeout policy and actual settlement wall time enter receipts.
+[Six pure mocked policy controls](bench/sync/results/native-settlement-policy-source-controls-20261015.json)
+pass, with no real child/signal/compiler/native invocation. Actual delayed-exit,
+hung/fault and caller-settlement controls remain required before new timing.
+This is main-source-only: frozen a6f0b69514execution/21runner pins rechecked
+unchanged, failed part3 raw/marker retained. It neither proves the failure's
+cause nor repairs/replays part3. Root independently accepted failed-part3
+resource closure; all18released, no successor runtime allocated.
+
 Latest runtime: [frozen Oxworker1 part3 FAILED/INCOMPLETE](bench/sync/results/warm512-frozen-part3-failed-return-20261015.json).
 Actual owner76640/df5ca2/exit1/no session; aggregate88119 reaped1/others absent
 in2113.568s. Sixteen completed rows pass exactness/basis/noop (48CLI). The

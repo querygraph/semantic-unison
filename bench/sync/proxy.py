@@ -149,7 +149,13 @@ def main():
             except OSError:
                 pass
         if native is not None:
-            cleanup, usage = native.finish(cancel_reason=fault)
+            # Allow ordinary native shutdown after EOF, without extending the
+            # protocol deadline or delaying a known fault's TERM. The outer
+            # owner permits five seconds for supervisor settlement; at most
+            # two here leaves room for TERM/KILL and the input-pump join.
+            normal_wait = max(0.0, min(2.0, deadline - time.monotonic()))
+            cleanup, usage = native.finish(cancel_reason=fault,
+                                          normal_exit_timeout=normal_wait)
             if cleanup["cancel_reason"] and fault is None:
                 fault = cleanup["cancel_reason"]
         if thread is not None:

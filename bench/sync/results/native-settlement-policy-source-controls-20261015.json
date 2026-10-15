@@ -1,0 +1,42 @@
+{
+  "state": "SOURCE_SUCCESSOR_PURE_POLICY_CONTROLS_PASSED_NOT_NATIVE_QUALIFIED",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 7154,
+      "sha256": "4a679e6c736bf4a1b152ebdb4cde57a2b83a38466acd77133a27c1c9449147d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/native_settlement_policy_test.py",
+      "bytes": 2282,
+      "sha256": "482dcd52c451b4caf4746bfd23c2bd32202dd9ec24d84ee52b9dd47adcc2aa44"
+    }
+  ],
+  "actual_pure_command": [
+    "python3",
+    "bench/sync/native_settlement_policy_test.py"
+  ],
+  "actual_terminal": {
+    "chunk": "de5b64",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "cases": 6,
+  "scope": "Mocked await_reap/signals/wait4/monotonic; no child processes, actual signals, compiler, SDK, Photo or benchmark. Normal EOF gets at most2s within remaining protocol deadline; known faults still TERM immediately then0.2s grace; legacy default remains0.2s. Records policy timeout and settlement wall time. Not real delayed-exit or cancellation/reap proof.",
+  "frozen_cohort_unchanged": {
+    "head": "a6f0b695159b3bdb5c3e73d57c0a54900fe86d6d",
+    "execution_pins_verified": 14,
+    "runner_pins_verified": 21
+  },
+  "historical_failed_result_unchanged": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part3-failed-return-20261015.json",
+    "bytes": 14660,
+    "sha256": "c7f0627f955ab8b91b4de2b3f96f02b4dabfb33aa381b9114f6cdfe8c1bd86af"
+  },
+  "next_required_evidence": "Separately scheduled finite fake-child delayed normal exit, hung exit, fault cancellation and caller settlement controls before admitting any new timing run. No automatic retry or old admission reuse."
+}

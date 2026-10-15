@@ -136,11 +136,18 @@ class NativeChild:
             time.sleep(0.005)
         return True
 
-    def finish(self, cancel_reason=None, grace=0.2):
+    def finish(self, cancel_reason=None, grace=0.2, normal_exit_timeout=None):
+        # Output EOF is not wait4 evidence: the process may still be shutting
+        # down, or merely descheduled. Keep normal exit separate from the
+        # short TERM grace. Existing callers retain their original policy.
+        normal_wait = grace if normal_exit_timeout is None else normal_exit_timeout
+        if normal_wait < 0:
+            raise ValueError("negative normal-exit timeout")
+        before = time.monotonic()
         reason = cancel_reason
         if reason:
             self.signal(signal.SIGTERM)
-        reaped = self.await_reap(grace)
+        reaped = self.await_reap(grace if reason else normal_wait)
         if not reaped and not reason:
             reason = "native child did not settle after output EOF"
             self.signal(signal.SIGTERM)
@@ -153,4 +160,6 @@ class NativeChild:
             self.process.returncode = os.waitstatus_to_exitcode(self.status)
         return {"pid": self.pid, "returncode": self.process.returncode,
                 "reaped": self.status is not None, "cancel_reason": reason,
-                "hard_kill_required": forced}, self.usage
+                "hard_kill_required": forced,
+                "normal_exit_timeout_seconds": normal_wait,
+                "settlement_wall_seconds": time.monotonic() - before}, self.usage
