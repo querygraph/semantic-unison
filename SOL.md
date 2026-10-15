@@ -2702,3 +2702,34 @@ qualified runner suites were not rerun for this dispatcher-only change.
 Photo HostV5 closed failed/no output and released its reservation; no renderer
 success inferred. Merged SDK admission remains expired unstarted. Full goal is
 active; broader SDK/pixel/resource/performance gates remain open.
+
+
+### Worker completion wake-up allocation — source preparation only
+
+During Photo's exclusive HostV6 runtime reservation, inspected clone/worker
+source without compiler/core/SDK dispatch. Found `SemanticWorkers.notify`
+allocated a one-byte Bytes buffer after completion mailbox publication; an
+allocation exception there can terminate the domain before its wake-up write.
+Source now writes an immutable constant string through Unix.write_substring,
+retaining EINTR retry and EAGAIN/EWOULDBLOCK coalescing. No mutable scratch buffer
+is shared across domains. This removes that specific explicit buffer allocation;
+it does not claim all notification/runtime operations allocation-free or solve
+all worker-exit/physical-OOM recovery. Source change is UNBUILT/UNTESTED pending
+Root release, and earlier qualification receipts do not cover it. Required next
+checks: compiler-matched stock/Ox builds plus existing worker/read-observer and
+shutdown controls. No new native slot, no SDK admission reuse. Goal active.
+
+### Worker wake-up source verified after HostV6 release
+
+After Root's actual HostV6 closure/all18 release, ran finite serial stock/Ox
+Make builds with at most4 compiler jobs and both complete selftests, then six
+focused reader/worker groups on each matching snapshot. All passed, including
+48 queued concurrent hashes/owner completions, observer exception/reentrancy and
+normal shutdown. Stock89617/1756f0, Ox62506/706868, worker39214/2895fe and
+23005/e18e05 actual parent terminals all exit0/no session. This supersedes the
+UNBUILT/UNTESTED note above for this change only. [Current source/build/worker
+pins and actual owner closure](tests/read_stats/wakeup-qualification.json).
+Root queued actual closure01a13ce7-0119-7552-bf81-596dd66d7654; all compiler/core
+credits released. No SDK/Photo invocation, fuzzing or completed-slot replay.
+This removes one explicit buffer allocation, not every potential runtime or
+closure allocation and not physical-OOM/failed-domain recovery qualification.

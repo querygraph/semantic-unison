@@ -57,8 +57,10 @@ let locked shared f =
   | x -> Mutex.unlock shared.mutex; x
   | exception e -> Mutex.unlock shared.mutex; raise e
 let notify shared =
-  let b = Bytes.make 1 '\001' in
-  let rec write () = try ignore (Unix.write shared.notify b 0 1) with
+  (* Completion is already published when a worker gets here. Do not allocate
+     a scratch buffer between publication and the owner's wake-up. The literal
+     is immutable and may safely be read by concurrent notifying domains. *)
+  let rec write () = try ignore (Unix.write_substring shared.notify "\001" 0 1) with
     | Unix.Unix_error (Unix.EINTR, _, _) -> write ()
     | Unix.Unix_error ((Unix.EAGAIN | Unix.EWOULDBLOCK), _, _) -> ()
   in write ()
