@@ -4,10 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
-Prepared [unrun frozen warm512 part4 request](bench/sync/results/warm512-frozen-part4-prepared-request-20261015.json):
+Latest [frozen Oxworker6 part4](bench/sync/results/warm512-frozen-part4-actual-return-20261015.json)
+PASSED/CLOSED: owner57036/f228d4/exit0/no session; aggregate30613 reaped0/others
+absent in2082.230s, independent18rows/54CLI client/server/supervisor auditPASS,
+SDKhelpers0/unresolved empty. All14execution/21runner hashes unchanged, frozen
+200ms policy retained. Ordinary/clone/semantic medians36.490/35.854/35.019s;
+semantic about4% below ordinary here, but slightly above stockworker6's34.209s
+separate-slot result, no compiler-speedup claim. Resource closure sent to Root,
+18released on Unison side. Part3 remains failed/incomplete; part5 unrun, no
+full six-part/clean-cohort/physicalIO qualification. No successor allocated.
+
+Consumed [frozen warm512 part4 request](bench/sync/results/warm512-frozen-part4-prepared-request-20261015.json):
 OxCamlworker6/three modes/18rows54CLI, proposed18quietcredits/7200s. Source
 a6f0b695 and14execution/21runner hashes rechecked; workspace/allocation/output
-absent. Queued to Photo Root for scheduling, **unallocated/unstarted**. Part3
+absent at preparation. Subsequently allocated/executed once as recorded above. Part3
 remains failed/incomplete with resource-only acceptance and brew/review caveats;
 no retry/replacement or full-six-part claim. Frozen cohort still uses200ms
 EOF grace; separately qualified main2s successor is not silently substituted.

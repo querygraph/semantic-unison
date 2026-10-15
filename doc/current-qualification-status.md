@@ -79,6 +79,15 @@ Root for independent resource adoption;18credits released on the Unison side.
 
 ## Boundaries that remain explicit
 
+The [Oxworker6 part4 result](../bench/sync/results/warm512-frozen-part4-actual-return-20261015.json)
+passes18rows/54CLI: actual57036/f228d4/0/no session, aggregate30613 reaped0/others
+absent in2082.230s, independently audited client/server/supervisor cleanup,
+SDKhelpers0 and unresolved empty. Source14/runner21 pins unchanged. Ordinary,
+clone and semantic medians36.490/35.854/35.019s; semantic about4% below ordinary
+in this partition, slightly slower than stockworker6's separate-slot result.
+No general compiler-speedup claim. Part3 stays incomplete, part5 remains unrun;
+the series retains all timing caveats and no full-matrix/physicalIO claim.
+
 The [settlement successor lifecycle](../bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json)
 passes seven original-Python cases under onecredit: actual owner3736/16df12/0,
 aggregate1705 reaped/others absent in2.387s. Delayed normal EOF, legacy refusal,

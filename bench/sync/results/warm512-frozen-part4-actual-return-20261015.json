@@ -1,0 +1,177 @@
+{
+  "state": "ACTUAL_WARM512_FROZEN_PART4_PASSED_CLOSED",
+  "measurement": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-512MiB-4files-part4-20261015.json",
+    "bytes": 766098,
+    "sha256": "f512887a01f7a9b99456ffbb1828d26888ed10e58514060e64dc64667c331555"
+  },
+  "original_measurement": {
+    "path": "/private/tmp/unison-warm512-frozen-measurements-20261015-v10/warm-512MiB-4files-part4.json",
+    "bytes": 766098,
+    "sha256": "f512887a01f7a9b99456ffbb1828d26888ed10e58514060e64dc64667c331555"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part4-prepared-request-20261015.json",
+    "bytes": 6997,
+    "sha256": "484e3ac943f004d6ccc69e6795a767be0a83d1c95b1670f0df122822bdb8d7e6"
+  },
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-FROZEN-PART4-ADMISSION-20261015.json",
+    "bytes": 3699,
+    "sha256": "ca2cb1e3d80abc16b6d2a143ab06dba27250700bf117f6f20290440ae0fa6a21"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 57036,
+    "terminal_chunk": "f228d4",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "scope": "actual tools.write_stdin terminal collected; not inferred from process absence"
+  },
+  "aggregate": {
+    "pid": 30613,
+    "returncode": 0,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 30613,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 2082.2300990420044,
+    "seconds": 7200,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "independent_readback_audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "declared matrix rows and retained per-invocation receipts; not aggregate owner closure, physical I/O or aggregate RSS"
+  },
+  "partition": {
+    "schema": "unison-sync-partition/1",
+    "index": 4,
+    "count": 6,
+    "configurations": [
+      [
+        "ox",
+        "ordinary",
+        6
+      ],
+      [
+        "ox",
+        "receiver-clone",
+        6
+      ],
+      [
+        "ox",
+        "semantic",
+        6
+      ]
+    ]
+  },
+  "summary": [
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 36.48963547500898,
+        "minimum": 36.43775948701659,
+        "maximum": 36.61259127999074
+      },
+      "all_results_exact": true
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 35.85391870100284,
+        "minimum": 35.84452838098514,
+        "maximum": 36.522743219014956
+      },
+      "all_results_exact": true
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 35.018746475019725,
+        "minimum": 34.93695334700169,
+        "maximum": 35.04128075297922
+      },
+      "all_results_exact": true
+    }
+  ],
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/AGGREGATE-CLOSED.json",
+      "bytes": 400,
+      "sha256": "00088dd30f81a158750a65e7a01d7245d08382f8dae59e9594e49344741e04cc"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/AGGREGATE-START.json",
+      "bytes": 38,
+      "sha256": "6807c2378220d9c6049bf8cd737c22229ff5aea1d94c6a2137821c9ac01ba922"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/BATCH-PROOFS-COMPLETE.json",
+      "bytes": 479,
+      "sha256": "5592ae506debdb1d476f6c86bf20528c3c68cd5ece57b708dafd788fab9b3d49"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/BATCH-RETURN.json",
+      "bytes": 1088,
+      "sha256": "b42c3d2defeec4040df043c5427068c136e3c5348d00423894ab25d1f589f968"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/OWNER-RETURN.json",
+      "bytes": 1096,
+      "sha256": "ebfc2f41b676d2048a9c28a6d0107ba12f91c3fb6e8da744739bc6a7e2b2c1fd"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/OWNER-TERMINAL.json",
+      "bytes": 204,
+      "sha256": "82800a45fcf2d91632fe278bada8564a30b9006980303fb7e7e089a59a333831"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/START.json",
+      "bytes": 1163,
+      "sha256": "33771d7e2100c2fb61d8a652453f8935095de917e22784df4fe8c19d90497898"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/SUPERVISOR-CLOSED.json",
+      "bytes": 607,
+      "sha256": "ee20bee50f386868fb89174ce63599481395528f4f237c505f214ce7e526420c"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part4/WRAPPER-START.json",
+      "bytes": 1963,
+      "sha256": "63ba1ef29af07bb8515fd9f1ba0e8480048d1529769967290aef40fa36695989"
+    }
+  ],
+  "unresolved_markers": [],
+  "credits_released": 18,
+  "successors_authorized": false,
+  "source_and_runner_pins_unchanged": true,
+  "mandatory_predecessor_timing_addendum": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json",
+    "bytes": 6788,
+    "sha256": "e311d5f64c8fa5dde2a8e361b3858db367a01c1aaa3b38c5961fe279b7e6b6b5"
+  },
+  "failed_part3_preserved": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part3-failed-return-20261015.json",
+    "bytes": 14660,
+    "sha256": "c7f0627f955ab8b91b4de2b3f96f02b4dabfb33aa381b9114f6cdfe8c1bd86af"
+  },
+  "scope": "OxCaml worker6 only; four512MiB generated files, three modes, one warmup/five measured repetitions. No SDK helpers/Photo/physicalIO/coldcache/full six-part qualification. Frozen200ms policy unchanged; failedpart3 and its brew/review disclosures plus part0 overlap remain preserved. No replacement, full clean-cohort or broad compiler speedup claim.",
+  "background_observation": "Root held competing Photo native/compiler/timing/recovery work; unrelated host/OS background not continuously sampled. Warm uncontrolled loopback APFS."
+}
