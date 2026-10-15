@@ -2921,3 +2921,34 @@ is not Python3.9 native-supervision qualification. [Pinned sources/reports](test
 No compiler, core executable, helper, SDK or Photo invocation occurred. Live SDK
 receiving executor/group-ledger work remains open; previous Root releases/admissions
 are not inferred as a new native slot. Goal active.
+
+### Spawn-bound helper group primitive: actual kernel/ABI qualification
+
+Implemented optional/unintegrated opaque group bindings in helperSupervisor_stubs.c.
+Create metadata before child acquisition; bound-spawn uses the exact original
+native spawn body/attributes and records child/group assignment without a later
+ML allocation. Counter accepts only an active same-process binding and retained
+terminal direct child, checks waitid(WNOWAIT) before/after bounded64record macOS
+process-group enumeration, and never signals/reaps. Retire before releasing PID.
+Non-macOS/contained observations remain unsupported; errors are not zero.
+Initial getpgid prototype actually failed ESRCH on zombie leader, motivating the
+birth binding, not a swallowed failure. Intermediate refactor compile failure
+spawned no child and was corrected before final checks.
+
+[Current qualified sources/artifacts/actual terminals](tests/helper_group_observation/qualification.json):
+stock20635/7194f8 and Ox1731/564275 pass native+bytecode five groups each plus four
+private query-failure cases (ENOMEM/bad length/wrong live group/duplicate leader).
+Tests include retained-zero, running/retired/reused/unspawned/lost-child refusal,
+GC/serialization, real child status and descendant present→absent before leader
+reap. Ordinary helper suites stock87305/70e74d and Ox1963/dee716 each38groups pass;
+full Make+selftests stock31089/6821e4 and Ox71700/31e8f5 pass. All terminal0/no
+sessions. Root closure01a13d11-df2f-7dc2-8cc5-9bcabef311aa releases all4credits;
+all prior prototype/compile handles are also terminal. No SDK/Photo operation.
+
+Production default ABI/spawn body is preserved and new observation calls remain
+UNINTEGRATED. No live helper-group diagnostic/SDK receiving qualification follows
+until bindings retire on all actual reap paths and current owner cancellation/
+exceptional teardown are qualified. Kernel queries are SPI/current-host evidence,
+not a future platform guarantee or escaped-child/owner-SIGKILL recovery promise.
+[Native contracts/source reference](tests/helper_group_observation/README.md).
+Full goal active, no native admission inferred/reused.

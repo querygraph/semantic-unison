@@ -76,3 +76,15 @@ existing helper suite. This result is not a retained PID reservation, group
 absence certificate or registration-before-dispatch journal. The ledger and
 its failure/capture ownership controls above remain required before this native
 receiving test is ready.
+
+A tested alternative foundation to the external proxy ledger now exists:
+[spawn-bound native group observations](../tests/helper_group_observation/README.md)
+can use the supervisor's existing retained direct-child owner instead of
+changing process groups. The opaque binding is prepared before spawn, authenticates
+group assignment at successful native spawn, and permits a kernel membership
+observation before the real owner reaps. This addresses the discovered Darwin
+zombie `getpgid` limitation. It is not yet integrated into HelperSupervisor or
+its diagnostics. That integration must invalidate bindings on every reap/lost-
+child path, preserve unknown/error observations, and qualify cancellation and
+returned-work cleanup before it can replace the corresponding proxy-ledger
+requirements above. Completed diagnostic PID integers remain insufficient.

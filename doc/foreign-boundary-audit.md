@@ -531,3 +531,29 @@ one open-file-description position. Deterministic reader cleanup and normal
 pool shutdown have current stock/Ox evidence in
 [the wake-up qualification](../tests/read_stats/wakeup-qualification.json).
 No new compiler/native test or sanitizer run was performed for this inventory.
+
+## Spawn-bound helper group observation (unintegrated primitive)
+
+[Current stock/Ox native/bytecode and kernel evidence](../tests/helper_group_observation/qualification.json)
+covers the new functions in helperSupervisor_stubs.c; production calls do not
+activate them yet. The old native spawn body is source-identical behind its
+unchanged entry point and passes the ordinary helper suite and full builds.
+
+Creation roots its unit argument and custom result before allocating a fixed
+metadata-only context. Default finalization owns no FD, process, signal or reap;
+serialization is rejected. The six-argument bound-spawn entry roots five values
+plus the owner, checks custom operations/owner process/unused state, and calls
+the existing native spawn implementation. No ML allocation/callback occurs
+between successful native spawn, context assignment and immediate PID return.
+Native and explicit six-argument bytecode entry points are exercised separately.
+C strings/file actions/temporary FD cleanup remain the existing implementation.
+
+The observer roots and authenticates the local custom owner, checks terminal
+unreaped direct-child status, queries at most64kinfo_proc records on its C stack,
+validates returned sizes/identities and rechecks the direct-child relationship.
+The runtime remains held; it borrows no ML heap pointer across runtime release,
+opens no descriptor, and neither signals nor reaps. A separately rooted retire
+operation invalidates observation before the caller releases the PID. These
+are owner-loop contracts, not compiler-enforced C/domain or hostile-OS proofs.
+Query/syscall duration is not a hard deadline and unsupported platforms cannot
+infer zero. See [scope/source reference](../tests/helper_group_observation/README.md).
