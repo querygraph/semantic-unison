@@ -2838,3 +2838,28 @@ A separately qualified helper-group ledger/capture owner is a prerequisite;
 do not modify production spawn behavior to fit the existing pilot. Proposed
 limits are not reservation/admission; executor/ledger implementation and finite
 lifecycle controls remain next. Full goal active, production paths untouched.
+
+### Helper terminal identity diagnostic foundation — 2026-10-14
+
+Added HelperSupervisor.result.child_pid, recording the successfully spawned
+DIRECT child beside existing actual wait status. A separate historical integer
+is installed nonallocating immediately after spawn while the original owned_pid
+still exclusively governs signaling/reap. Returned identity is never consulted
+by cleanup and never authorizes later signaling. Pre-spawn cancellation, failed
+spawn and unsupported backend return None; actual timeout retains child identity.
+No process-group creation, cancellation, wire/archive or validator policy change.
+
+Stock/Ox helper suites each pass38groups, including new child-reported identity /
+returned identity equality, ECHILD after successful supervisor reap, no fabricated
+pre-spawn/failed-spawn identity, and timeout identity. Existing TERM escalation,
+descendant cleanup, owner-loop/connection teardown and budget/validation tests
+pass. Fresh both compiler Make+selftests pass. [Sources, raw terminal logs and
+actual closures](tests/helpers/child-pid-qualification.json): stock suite78595/
+1f2b2c, Ox52409/f05781, stockbuild8581/c11912, Ox63551/767b07 all0/no session.
+Ox single-process synthetic helper retains two preexisting Sys.set_signal alerts;
+no checked-worker/native-safety claim follows from those fixtures.
+
+Root closure queue01a13cf6-f032-79e1-9f0b-0ec57ed7e185 releases all4credits.
+No SDK/Photo/renderer invocation. This is a tested diagnostic prerequisite,
+not implementation/qualification of the complete helper-group ledger or live
+SDK receiving gate. Both remain next; no fresh native release has been inferred.

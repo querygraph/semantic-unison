@@ -67,11 +67,19 @@ type outcome =
 type result = {
   outcome : outcome;
   status : Unix.process_status option;
+  child_pid : int option;
   stdout : string;
   stderr : string;
   output_truncated : bool;
   elapsed : float;
 }
+
+(** [child_pid] records the direct child identity after successful spawn, including
+    cancellation/timeouts/failures after spawn. [None] means no successful spawn
+    was recorded. It is historical diagnostic data, NEVER an owned process handle
+    or authorization to signal a PID/group after return. [status = Some _] is the
+    supervisor's observed direct-child wait status, not a descendant-group absence
+    receipt. PID identity alone does not prove launch time or surviving ownership. *)
 
 type process_limits = {
   launcher : string;

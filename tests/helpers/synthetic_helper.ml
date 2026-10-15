@@ -18,6 +18,8 @@ let report mode =
 let () =
   match Sys.argv.(1) with
   | "echo" -> print_endline Sys.argv.(2)
+  | "identity" -> Printf.printf "%d\n%!" (Unix.getpid ())
+  | "pid-wait" -> Printf.printf "%d\n%!" (Unix.getpid ()); sleep 10.
   | "sleep" -> sleep (float_of_string Sys.argv.(2))
   | "ignore-term" -> Sys.set_signal Sys.sigterm Sys.Signal_ignore; sleep 10.
   | "pid-sleep" ->

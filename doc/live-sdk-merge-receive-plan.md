@@ -66,3 +66,13 @@ and an explicit fresh Root deadline. Return START promptly, then actual parent
 terminal, every raw SDK protocol/entry/capture receipt, exact output hashes,
 all helper/aggregate closure evidence and unresolved-marker audit. Root's
 independent acceptance is separate from the owner result.
+
+The first implemented diagnostic foundation is `HelperSupervisor.result.child_pid`:
+it retains the spawned direct child's historical PID beside the supervisor's
+actual wait status. [Stock/Ox qualification](../tests/helpers/child-pid-qualification.json)
+covers actual identity/status binding, direct-child reap, timeout identity,
+pre-spawn cancellation and spawn failure without fabricated identity, plus the
+existing helper suite. This result is not a retained PID reservation, group
+absence certificate or registration-before-dispatch journal. The ledger and
+its failure/capture ownership controls above remain required before this native
+receiving test is ready.

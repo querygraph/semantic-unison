@@ -72,6 +72,26 @@ let () =
     unregister ();
     let unregister_late = H.on_cancel c (fun () -> incr hits) in
     check (!hits = 2) "late cancellation not immediate"; unregister_late ());
+  test "helper identity binds actual terminal and timeout, never pre-spawn cancellation" (fun () ->
+    let t = supervisor () in
+    let r = Lwt_unix.run (run t (H.cancellation ()) [|"identity"|]) in
+    let pid = int_of_string (String.trim r.stdout) in
+    check (completed r && r.child_pid = Some pid) "returned child identity differs";
+    check (try ignore (Unix.waitpid [Unix.WNOHANG] pid); false with
+      Unix.Unix_error (Unix.ECHILD,_,_) -> true) "direct child was not reaped";
+    let c = H.cancellation () in H.cancel c;
+    let stopped = Lwt_unix.run (run t c [|"identity"|]) in
+    check (stopped.child_pid = None && stopped.status = None && stopped.outcome = H.Cancelled)
+      "pre-spawn cancellation fabricated a child";
+    let failed = Lwt_unix.run (H.run t ~weight:1 (H.cancellation ()) ~limits
+      ~executable:"/UNISON-NONEXISTENT-HELPER" ~arguments:[||] ~environment:[||]) in
+    check (failed.child_pid = None && failed.status = None) "failed spawn fabricated a child";
+    let timed = Lwt_unix.run (run ~limits:{limits with timeout=0.2}
+      t (H.cancellation ()) [|"pid-wait"|]) in
+    check (timed.outcome = H.Timed_out && timed.status <> None &&
+      timed.child_pid = Some (int_of_string (String.trim timed.stdout)))
+      "timeout lost its actual spawned identity";
+    finish t);
   test "literal argv, no shell" (fun () ->
     let t = supervisor () in
     let text = "$(touch /bad); `false` * ' \"\n" in

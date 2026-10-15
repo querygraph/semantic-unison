@@ -206,6 +206,7 @@ type outcome = Completed | Cancelled | Timed_out | Output_limit | Failed of stri
 type result = {
   outcome : outcome;
   status : Unix.process_status option;
+  child_pid : int option;
   stdout : string;
   stderr : string;
   output_truncated : bool;
@@ -264,7 +265,7 @@ let drain scratch stream =
 let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
   let started = if Sys.win32 then 0. else monotonic_now () in
   let empty outcome =
-    { outcome; status = None; stdout = ""; stderr = "";
+    { outcome; status = None; child_pid = None; stdout = ""; stderr = "";
       output_truncated = false;
       elapsed = if Sys.win32 then 0. else monotonic_now () -. started } in
   if Sys.win32 then return (empty (Failed "POSIX helper backend unavailable"))
@@ -278,6 +279,9 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
     and err = capture Unix.stdin limits.stderr_bytes in
     let argv = Array.append [|argv0|] arguments in
     let owned_pid = ref (-1) in
+    (* Historical identity only: unlike owned_pid, never used for signaling. *)
+    let spawned_pid = ref (-1) in
+    let child_identity () = if !spawned_pid < 0 then None else Some !spawned_pid in
     let scratch = Bytes.create 16384 in
     let outcome = ref Completed in
     let terminate_at = ref None in
@@ -345,7 +349,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
         if !owned_pid >= 0 then signal_group !owned_pid Sys.sigterm
       end in
     let rec monitor () =
-      if !disposed then return { outcome = Cancelled; status = !reaped;
+      if !disposed then return { outcome = Cancelled; status = !reaped; child_pid = child_identity ();
         stdout = Buffer.contents out.buffer; stderr = Buffer.contents err.buffer;
         output_truncated = out.truncated || err.truncated;
         elapsed = monotonic_now () -. started }
@@ -384,7 +388,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
           err.truncated <- not err.eof || err.truncated;
           if !outcome = Completed then outcome := Output_limit
         end;
-        let result = { outcome = !outcome; status = !reaped;
+        let result = { outcome = !outcome; status = !reaped; child_pid = child_identity ();
           stdout = Buffer.contents out.buffer; stderr = Buffer.contents err.buffer;
           output_truncated = out.truncated || err.truncated;
           elapsed = monotonic_now () -. started } in
@@ -406,7 +410,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
             Unexpected OS refusal to reap remains outside a hard deadline. *)
          if !owned_pid >= 0 then raise exn);
       (try
-         return { outcome = Failed (Printexc.to_string exn); status = !reaped;
+         return { outcome = Failed (Printexc.to_string exn); status = !reaped; child_pid = child_identity ();
            stdout = Buffer.contents out.buffer; stderr = Buffer.contents err.buffer;
            output_truncated = out.truncated || err.truncated;
            elapsed = monotonic_now () -. started }
@@ -418,6 +422,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
       out.fd <- descriptors.(0); err.fd <- descriptors.(2);
       Unix.set_nonblock out.fd; Unix.set_nonblock err.fd;
       owned_pid := spawn_group executable argv environment descriptors.(1) descriptors.(3);
+      spawned_pid := !owned_pid;
       close 1; close 3;
       monitor () in
     let is_settled () =
@@ -453,7 +458,7 @@ let run ?argv0 ?process_limits t ~weight c ~limits ~executable ~arguments ~envir
   let owns_reservation = ref false in
   let abort_pending = ref (fun () -> ()) in
   let owner_cleanup = ref (fun () -> ()) and owner_settled = ref (fun () -> true) in
-  let cancelled = return { outcome = Cancelled; status = None; stdout = "";
+  let cancelled = return { outcome = Cancelled; status = None; child_pid = None; stdout = "";
     stderr = ""; output_truncated = false; elapsed = 0. } in
   let release_once () =
     if !owns_reservation && !owner_settled () then begin
