@@ -13,7 +13,7 @@ p.add_argument('--ox-build',type=Path,required=True)
 a=p.parse_args()
 work=Path(tempfile.mkdtemp(prefix='unison-sync-plan-control-'))
 plan=planner.prepare(a.stock_build,a.ox_build,work/'NOT-CREATED')
-assert len(plan['commands'])==4 and not plan['runtime_started'] and not plan['cpu_reservation']
+assert len(plan['commands'])==3 and not plan['runtime_started'] and not plan['cpu_reservation']
 assert plan['configured_endpoint_worker_maximum']==16 <= plan['proposed_cpu_credits']==18
 for row in plan['commands']:
     assert row['measured_updates']==18*5 and row['expected_cli_invocations']==(18+90)*3
@@ -32,4 +32,4 @@ for name in ('incomplete','changed-binary','missing-worker-pins'):
         pass
     else:
         raise AssertionError('invalid build accepted: '+name)
-print('PASS four bounded warm batches, worker/sample accounting and three invalid-build refusals; no command executed')
+print('PASS three larger bounded warm batches, worker/sample accounting and three invalid-build refusals; no command executed')

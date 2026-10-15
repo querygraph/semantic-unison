@@ -3245,3 +3245,15 @@ tests/qualification/sdk-live-merge-v1-root-adoption-20261015.json records exact
 receipt pin. Fourcredits released, admission consumed/no replay. Planned warm
 benchmark remains UNSTARTED, needs separate coordination before Root next18credit
 color render; no new core/helper/SDK/compiler dispatch from this adoption.
+
+### Performance next action revised after inspecting existing measured evidence
+
+Found existing actual checked-worker-performance-20261014.json:32MiB×8files,
+workers1/6,onewarmup/fivemeasuredreps,72rows. Do not relabel that historical source
+snapshot as current, and avoid a smaller redundant32MiB×4 preliminary run. Current
+plan successor v3 begins128MiB×4files, then512MiB×4 and2048MiB×2; workers1/6/8,
+18configs/90measuredsamples/324CLIinvocations percompletebatch. All UNSTARTED.
+Purebf22d2/0 checks3largerbatches+3invalidbuildrefusals. Evidence
+bench/sync/results/warm-larger-plan-qualification-20261015.json. Proposed scheduling
+now first128MiBbatch only; earlier32MiBproposal withdrawn unstarted, no resources
+held. SDKactualRoot acceptance adopted; no newSDK/native/Photo capability.

@@ -35,7 +35,7 @@ def prepare(stock_receipt, ox_receipt, output_root):
     commands = []
     # Each size is a separate complete measurement batch; never claim later
     # batches ran merely because the smaller batch passed. FourGiB corpus cap.
-    for mib, files in ((32, 4), (128, 4), (512, 4), (2048, 2)):
+    for mib, files in ((128, 4), (512, 4), (2048, 2)):
         output = output_root / ('warm-%dMiB-%dfiles.json' % (mib, files))
         if output.exists():
             raise ValueError('measurement output already exists')
@@ -60,6 +60,8 @@ def prepare(stock_receipt, ox_receipt, output_root):
             'runner_sources': [pin(path) for path in sorted((ROOT / 'bench/sync').glob('*.py'))],
             'configured_endpoint_worker_maximum': 16, 'proposed_cpu_credits': 18,
             'commands': commands,
+            'historical_small_workload': pin(ROOT / 'bench/sync/results/checked-worker-performance-20261014.json'),
+            'historical_small_workload_scope': '32MiB x8files, workers1/6, five repetitions, original source snapshot only; not current-build measurements',
             'scope': 'warm/uncontrolled generated fixed-layout XMP loopback only; no cold-cache, real network, camera corpus, cross-volume or SDK evidence',
             'limitations': ['Loopback has two endpoints:8+8 configured workers, not18+18 on18 physical cores.',
                 'Reserve18 credits for endpoints plus bridge/controller overhead; not OS hard CPU isolation.',
@@ -80,4 +82,4 @@ if __name__ == '__main__':
     with a.plan.open('x') as stream:
         json.dump(result, stream, indent=2)
         stream.write('\n')
-    print('Prepared four measurement batches; no command executed or CPU reserved')
+    print('Prepared three larger measurement batches; no command executed or CPU reserved')
