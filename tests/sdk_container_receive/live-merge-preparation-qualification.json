@@ -1,0 +1,32 @@
+{
+  "scope": "Pure preparation of retained generated inputs only; no validator/compiler/Photo/native invocation. Not a runtime admission.",
+  "actual_preparation_terminal": {
+    "owner_tool": 36144,
+    "terminal_chunk": "e792b6",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "prepared": {
+    "path": "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/PREPARED.json",
+    "bytes": 6467,
+    "sha256": "3e0f6b7ac04d018d880af4a0d2e736a53df572ba4fe320b9f789c3a6cd155b21"
+  },
+  "preparer": {
+    "path": "tests/sdk_container_receive/prepare_live_merge.py",
+    "bytes": 6376,
+    "sha256": "9d19cce82add536394e49ca8d61dab55197aa25d83b1c6fdf4c1c50042a5718d"
+  },
+  "pure_controls": {
+    "path": "tests/sdk_container_receive/prepare_live_merge_test.py",
+    "bytes": 1412,
+    "sha256": "96e00ab03bb9aa5a2fa2cda4698cf7f2df663b5d27758b238b3efdb6aa09cfd2"
+  },
+  "prior_merge_evidence": {
+    "path": "tests/sdk_container_receive/quota-merge-qualification.json",
+    "bytes": 14117,
+    "sha256": "3f7243f2a097fedc89ee93b0d0d680824d8989e5f4e5e6196ffa59bb1a9f13f0"
+  },
+  "all_six_historical_base_and_target_hash_bindings_match": true,
+  "runtime_admitted": false,
+  "executor_implemented": false
+}

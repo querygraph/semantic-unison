@@ -1,7 +1,8 @@
 # Live SDK-gated scalar merge receiving: next finite test
 
-Source design only; no executable, SDK admission or native dispatch is supplied
-by this document. The previous three-call admission is consumed and cannot be
+Preparation and lifecycle design; no SDK admission or native dispatch is supplied
+by this document. A source-matched preparation tool now freezes the twelve states;
+the runtime executor and its finite failure controls remain to be implemented. The previous three-call admission is consumed and cannot be
 reused. Photo Root retains native-slot coordination and preview ownership.
 
 The current production stock/Ox merge controls produce the same frozen target
@@ -83,8 +84,29 @@ can use the supervisor's existing retained direct-child owner instead of
 changing process groups. The opaque binding is prepared before spawn, authenticates
 group assignment at successful native spawn, and permits a kernel membership
 observation before the real owner reaps. This addresses the discovered Darwin
-zombie `getpgid` limitation. It is not yet integrated into HelperSupervisor or
-its diagnostics. That integration must invalidate bindings on every reap/lost-
-child path, preserve unknown/error observations, and qualify cancellation and
-returned-work cleanup before it can replace the corresponding proxy-ledger
-requirements above. Completed diagnostic PID integers remain insufficient.
+zombie `getpgid` limitation. It is now integrated into HelperSupervisor and opt-in validation-group diagnostics.
+[Current stock/Ox qualification](../tests/validation_process/group-integration-qualification.json)
+covers both full builds/selftests,41 helper groups per compiler and five actual
+receiving diagnostic cases per compiler. Bindings retire before every reap/lost-
+child path; unknown and unobserved remain distinct. This replaces the proposed
+proxy ledger for observing normal retained helper groups, without introducing a
+proxy or changing production groups. It does not supply an outer executor's
+failure/cleanup contract: that executor must refuse successful closure when a
+required helper observation is missing, unknown or nonzero, preserve unresolved
+ownership after ambiguous interruption, and never signal reaped historical PIDs. Completed diagnostic PID integers remain insufficient.
+
+## Frozen live-merge preparation
+
+`tests/sdk_container_receive/prepare_live_merge.py` verifies the prior closed
+three-codec SDK return and artifact pins, current stock/Ox build/selftest/source
+pins, original inputs and SDK-accepted merged target bytes. It reconstructs only
+the fixed-width Rating/Label values within the exact XMP extent and freezes four
+read-only states per codec in a fresh private directory. All bytes outside XMP
+are checked against the original. Each base and target hash matches both prior
+merge implementations. This does not assert SDK qualification of base/left/right.
+
+[Preparation evidence](../tests/sdk_container_receive/live-merge-preparation-qualification.json)
+records the actual pure run and eight malformed/protected-byte controls. No SDK
+call occurred; the proposed six-call runtime is still unadmitted and its executor
+is not implemented. Production-path group ownership during failure remains a
+requirement of that executor, not proof supplied by a prepared packet.

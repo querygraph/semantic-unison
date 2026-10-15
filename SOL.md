@@ -3058,3 +3058,19 @@ SDK/Photo call or successor active. Next real integration target remains finite
 SDK-gated production merged receiving with fresh explicit admission after source/
 lifecycle review; these past group queries do not prove escaped-process absence,
 owner-SIGKILL recovery, full corpus or throughput. Full goal active.
+
+### Live SDK merge receiving: actual pure input preparation
+
+Implemented prepare_live_merge.py: revalidates closed frozen SDK return/artifacts,
+current stock/Ox source-matched build/selftest receipts and binaries; checks exact
+protected bytes and reconstructs base/left/right/target within fixed XMP extents.
+Actual36144/e792b6/0 freezes12 read-only states over3 retained generated codecs,
+no native execution. Independently verifies all base/target hashes against both
+historical merge reports; pure4state/8negative fixture controls pass140b69/0.
+Evidence tests/sdk_container_receive/live-merge-preparation-qualification.json.
+
+No runtime executor/admission exists yet. Next implement bounded production-path
+executor and original fake-tool lifecycle controls; do not reuse contained-helper
+phase.py as if it owned production helper groups. Native-group integration is now
+qualified; unknown/missing/nonzero observations must retain unresolved failure
+rather than signal historical PIDs. No compiler/SDK/Photo process active here.
