@@ -45,6 +45,20 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Partition accounting kernel (2026-10-15): six exact label/worker parts each
+  cover all three modes, one warmup/five measured repetitions,18rows/54CLI.
+  Pure merger reconstructs all108rows/324CLI only when every part, current
+  provenance and every row settlement match; partials cannot pass full audit.
+  Summaries are recomputed and per-window observations preserved. Historical
+  readback plus26 refusal cases pass, and prior216CLI audit/14 refusal controls
+  still pass. [Evidence](bench/sync/results/partition-accounting-pure-controls-20261015.json).
+  Execution selection/owner/preparer wiring and actual per-part native closure
+  remain pending; no new measurements or scheduling allocation. Source review
+  also found runner max512MiB contradicts the unexecuted2048MiB plan; fix/test
+  this admission before presenting that workload as executable. v7 is historical
+  source preparation and will need fresh pins after partition wiring.
+
+
 * Larger-workload duration planning (2026-10-15): pure planner controls pass
   after binding the actual3426.064s warm128 reference. Simple byte scaling
   estimates512MiB x4 at13704s and2048MiB x2 at27409s, beyond the current7200s

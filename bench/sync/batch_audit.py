@@ -7,7 +7,7 @@ def require(value, message):
         raise ValueError(message)
 
 
-def audit(result, expected_parameters=None):
+def audit(result, expected_parameters=None, *, configurations=None):
     require(result['schema'] == 'unison-synthetic-sync/0' and result['complete'], 'incomplete benchmark')
     params = result['parameters']
     if expected_parameters is not None:
@@ -17,8 +17,17 @@ def audit(result, expected_parameters=None):
             and params['warmups'] >= 1 and params['repetitions'] >= 5, 'full timed matrix required')
     labels = set(result['binaries'])
     require(labels == {'stock', 'ox'}, 'stock/Ox comparison required')
+    if configurations is None:
+        require('partition' not in result, 'partition is not a complete matrix')
+        configurations = list(itertools.product(sorted(labels), params['modes'], params['workers']))
+    else:
+        require('partition' in result, 'explicit partition metadata required')
+        require(len(configurations) == len(set(configurations)) and configurations,
+                'invalid partition configurations')
+        require(all(label in labels and mode in params['modes'] and worker in params['workers']
+                    for label, mode, worker in configurations), 'unknown partition configuration')
     expected = set()
-    for label, mode, worker in itertools.product(labels, params['modes'], params['workers']):
+    for label, mode, worker in configurations:
         for phase, count in (('warmup', params['warmups']), ('measured', params['repetitions'])):
             expected.update((label, mode, worker, phase, repetition) for repetition in range(1, count+1))
     seen = set()
@@ -46,4 +55,4 @@ def audit(result, expected_parameters=None):
             native += 1
     require(seen == expected, 'missing measured/warmup rows')
     return {'rows': len(seen), 'cli_invocations': native, 'all_client_server_supervisor_settled': True,
-            'scope': 'complete warm synthetic matrix and retained per-invocation receipts; not physical I/O or aggregate RSS'}
+            'scope': 'declared matrix rows and retained per-invocation receipts; not aggregate owner closure, physical I/O or aggregate RSS'}
