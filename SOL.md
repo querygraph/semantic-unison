@@ -2,6 +2,22 @@
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
 
+## Current checkpoint — 2026-10-15
+
+Current stock/Ox full Make+selftests,41 helper groups per compiler and five
+receiving diagnostic cases per compiler pass. Generic APFS/SDE/DNG/optional
+validator implementation is present; the full goal is NOT complete. The latest
+[implementation/evidence index](doc/implementation-status.md) lists remaining
+corpus, native-resource, acceptance-matrix and performance qualification.
+
+The [six-call live SDK merge request](tests/qualification/sdk-live-merge-request-v1-20261015.json)
+is source-ready but UNADMITTED. Nine-run full mock receiving and finite owner/
+aggregate lifecycle controls pass. No SDK call has run under this request.
+All Unison allocations are closed. Root's current-color reference holds18credits;
+coordinator91195 was actually observed live. Do not start compiler/core/helper/
+SDK successors until Root's actual closure/release. Earlier entries below are
+historical evidence and must not override a newer pinned checkpoint.
+
 ## Live implementation handoff
 
 * Benchmark failure settlement (2026-10-14): each validation job now records
