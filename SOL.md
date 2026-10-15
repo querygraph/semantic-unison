@@ -3025,3 +3025,16 @@ runner retains child ownership through exec, no extra SDK mode. Actual dry-run
 stock/Ox command generation and pure14case group-parser pass b824d4/exit0. No
 compiler/helper/core/SDK dispatched during HostV15 hold. Runtime integration
 qualification still pending, not inferred from dry-run generation.
+
+### Actual current helper integration stock/Ox suites pass after HostV15 release
+
+After Root14750/65151e/0 actual release, serial stock51189/e8b8d1/0 and
+Ox38446/8d44f2/0 each pass41groups, no sessions remain. Current optional normal/
+timeout callbacks, pre-spawn cancellation, synchronous teardown/no fabricated
+observation, callback exception isolation and validator valid/error-zero cases
+pass alongside existing supervision controls. Both compile actual current
+production helper/validation modules. Two existing Ox alerts confined to original
+single-process fake-helper signal setup remain recorded. Pinned actual terminals
+and sources: tests/helper_group_observation/integration-qualification.json.
+No SDK/Photo invocation; full stock/Ox builds and receiving CLI still pending.
+Finite pair allocation CLOSED/released, no successor dispatched.
