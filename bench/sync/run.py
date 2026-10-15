@@ -228,6 +228,8 @@ def main():
                         help="one explicit0..5 stock/Ox worker partition; never starts other parts")
     parser.add_argument("--loopback-cpu-credits",type=int,
                         help="Bound the sum of configured semantic/helper CPU budgets across same-host endpoints; not an OS CPU cap")
+    parser.add_argument("--orchestration-cpu-credits", type=int, default=0,
+                        help="Additional owner/hash/transport credits inside the loopback bound; not OS isolation")
     parser.add_argument("--file-mib", type=int, default=32)
     parser.add_argument("--files", type=int, default=2)
     parser.add_argument("--packet-bytes", type=int, default=8192)
@@ -261,10 +263,15 @@ def main():
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
         parser.error("invalid/duplicate mode")
     endpoint_count=2 if any(mode!="source-clone" for mode in modes) else 1
+    if not 0 <= args.orchestration_cpu_credits <= 18:
+        parser.error("orchestration credits must be0..18")
+    if args.orchestration_cpu_credits and args.loopback_cpu_credits is None:
+        parser.error("orchestration credits require an explicit loopback CPU bound")
     if args.loopback_cpu_credits is not None:
         if references:parser.error("reference CPU budgets cannot be qualified by the loopback credit bound")
-        if args.loopback_cpu_credits<=0 or endpoint_count*max(workers)>args.loopback_cpu_credits:
-            parser.error("sum of configured endpoint CPU credits exceeds loopback budget")
+        if (args.loopback_cpu_credits<=0 or
+                endpoint_count*max(workers)+args.orchestration_cpu_credits>args.loopback_cpu_credits):
+            parser.error("endpoint plus orchestration CPU credits exceed loopback budget")
     if not (args.warmups >= 0 and 1 <= args.repetitions <= 50 and args.timeout > 0):
         parser.error("fixture/count bounds exceeded")
     try:
@@ -310,7 +317,9 @@ def main():
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
-                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers)},
+                    "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers),
+                    "orchestration_cpu_credits":args.orchestration_cpu_credits,
+                    "maximum_declared_cpu_credit_sum":endpoint_count*max(workers)+args.orchestration_cpu_credits},
               "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
               "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
               "rss_units": "bytes on Darwin; KiB on Linux; native OS units elsewhere",

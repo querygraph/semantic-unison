@@ -1,0 +1,51 @@
+{
+  "state": "SOURCE_INTEGRATED_NOT_TESTED_DURING_EXCLUSIVE_PART5",
+  "policy": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v1.json",
+    "bytes": 4294,
+    "sha256": "2924dc03ce15cc44e9d03018d247b105b6a632fdb4fb0af5ddda0775f94b50c4"
+  },
+  "canonical_pool_manifest": {
+    "path": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+    "bytes": 2106,
+    "sha256": "4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd"
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 30230,
+      "sha256": "384e4b3b072ed0433ff97ee1471608e77b7b7a027352edb41bd763363e90c20a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 12840,
+      "sha256": "318d69bbb93b799d56e6fa84f1c8dcbd9407a85275c953e34c2efcdca41adce8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 2537,
+      "sha256": "29b1c2e2322b2c6b65532d8b64b4a3536cc2cfae8de41b36677c8712cdfdfcb1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-machine-policy.md",
+      "bytes": 6729,
+      "sha256": "143b2fb388b4b595c8f9e85ebb1030e6a331d3676085a128f22128547b6d5994"
+    }
+  ],
+  "changes": [
+    "--orchestration-cpu-credits adds owner/hash/transport allocation within explicitloopbackCPUbound; per-endpoint4+4 plus2 fits10.",
+    "Sharedmanual mode allowsprojectcredits1..10; compilejobs atmost2 plus2ownercredits, sharedfunctional declares2+2+2=6 within10.",
+    "Dry-run resource plan names exact canonicalpool/tokenindexes0..grant-1/32GiBreservation and explicit false flags for token acquisition,memoryenforcement,physicalIOresolution."
+  ],
+  "outstanding": [
+    "Implement exact inode-bound all-or-release nonblocking token acquisition and retained ownership through actual group settlement.",
+    "Physical-device/container IO identity/commonbulk lane, memory admission and aggregate RSS observations.",
+    "Photo-owned successor to all18 nativeadapter, native<=4 and stage<=4 withinPhoto6.",
+    "Afterpart5closure, purebudget/refusal controls, finite two-owner realtokencontention/closure and sharedfunctional qualification."
+  ],
+  "runtime_grant": false,
+  "tests_executed": false,
+  "compiler_invocations": 0,
+  "pool_files_opened_or_mutated": false,
+  "frozen_part5_modified": false
+}

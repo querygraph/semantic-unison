@@ -30,9 +30,9 @@ Targets:
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
-SHARED_CPU_CREDITS=4 selects capped shared entry points: build-only defaults
-to JOBS=2 and rejects JOBS above the credit ceiling. sync-functional requires
-at least four credits for its two endpoints. Other targets need a separately
+SHARED_CPU_CREDITS=10 selects capped shared entry points: build-only defaults
+to JOBS=2 and rejects JOBS above two or the ceiling minus two owner credits.
+sync-functional needs four endpoint plus two owner credits. Other targets need a separately
 qualified resource scope; this option does not claim a kernel CPU limit or
 acquire Photo's token pool. Standing scheduling agreement is still required.
 DRY_RUN=1 prints JSON argv without executing a check or creating a report directory.
@@ -69,16 +69,40 @@ def checked_build(path):
     return receipt
 
 
+def shared_resource_plan(target, environment):
+    """Describe the local source budget; never acquire a token or grant a slot."""
+    value = environment.get('SHARED_CPU_CREDITS')
+    if value is None:
+        return None
+    credits = int(value)
+    require(1 <= credits <= 10, 'shared Unison lane must be 1..10 credits')
+    build = target in ('stock-build', 'ox-build')
+    endpoints = [2, 2] if target == 'sync-functional' else []
+    jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 0
+    overhead = 2 if build or endpoints else 1
+    require((not build or 1 <= jobs <= 2) and jobs + sum(endpoints) + overhead <= credits,
+            'declared shared work exceeds project grant')
+    return {'project': 'unison', 'cpu_credits': credits,
+            'declared_peak_credits': jobs + sum(endpoints) + overhead,
+            'compiler_jobs': jobs, 'endpoint_workers': endpoints,
+            'orchestration_credits': overhead, 'cpu_token_indexes': list(range(credits)),
+            'canonical_pool_manifest': str(ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),
+            'memory_reservation_gib': 32,
+            'runtime_grant': False, 'token_acquisition_implemented': False,
+            'memory_enforced': False, 'physical_io_lane_resolved': False,
+            'scope': 'source budget only; global token/IO/memory integration and shared qualification pending'}
+
+
 def command(target, output, environment):
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
-        require(1 <= shared <= 4, 'shared Unison lane must be 1..4 credits')
+        require(1 <= shared <= 10, 'shared Unison lane must be 1..10 credits')
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'sync-functional':
-            require(shared >= 4, 'functional loopback requires four endpoint credits')
+            require(shared >= 6, 'functional loopback requires four endpoint plus two owner credits')
     if target in ('helper-stock', 'helper-ox'):
         key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
@@ -103,9 +127,12 @@ def command(target, output, environment):
         require(bool(environment.get(key)), key + ' is required')
         prefix = Path(environment[key]).resolve()
         require((prefix / 'ocamlopt').is_file(), 'compiler prefix must contain ocamlopt')
-        jobs = int(environment.get('JOBS', str(min(2, shared)) if shared is not None else '4'))
+        if shared is not None:
+            require(shared >= 3, 'shared build needs one compiler plus two owner credits')
+        jobs = int(environment.get('JOBS', str(min(2, shared - 2)) if shared is not None else '4'))
         require(1 <= jobs <= 18, 'JOBS must be 1..18')
-        require(shared is None or jobs <= shared, 'JOBS exceeds shared CPU-credit ceiling')
+        require(shared is None or (jobs <= 2 and jobs + 2 <= shared),
+                'JOBS plus two owner credits exceeds shared policy (maximum two compiler jobs)')
         return [sys.executable, str(ROOT / 'tests/build_snapshot.py'),
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
                 '--build-system', system] + ([] if build_only else ['--selftest']) + [
@@ -118,7 +145,9 @@ def command(target, output, environment):
             argv.extend(['--binary', label + '=' + receipt['binary'],
                          '--compiler', label + '=' + receipt['compiler']])
         return argv + ['--qualification', '--measure-primary-reads',
-                       '--loopback-cpu-credits', '4', '--timeout', '30',
+                       '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
+                       ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [
+                       '--timeout', '30',
                        '--background-note', 'user-run finite functional checks; not a throughput comparison',
                        '--output', str(output / 'RESULT.json')]
     if target in ('cache-storage', 'cache-ownership', 'cache-cli', 'read-workers', 'read-cli', 'validation-cli'):
@@ -168,7 +197,8 @@ def main():
         require(not output.exists(), 'output directory already exists')
     argv = command(target, output, os.environ)
     if dry:
-        print(json.dumps({'target': target, 'argv': argv, 'executes': False}))
+        print(json.dumps({'target': target, 'argv': argv, 'executes': False,
+                          'shared_resource_plan': shared_resource_plan(target, os.environ)}))
         return
     if host:
         print('Runner owns its output and process lifecycle.', flush=True)

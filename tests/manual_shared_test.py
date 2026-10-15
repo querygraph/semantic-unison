@@ -5,12 +5,12 @@ from unittest.mock import patch
 import manual
 
 out = Path('/UNCREATED-shared-control')
-env = {'OX_PREFIX': '/UNREAD-compiler', 'SHARED_CPU_CREDITS': '4'}
+env = {'OX_PREFIX': '/UNREAD-compiler', 'SHARED_CPU_CREDITS': '10'}
 with patch.object(Path, 'is_file', return_value=True):
     argv = manual.command('ox-build', out, env)
     assert argv[argv.index('--jobs') + 1] == '2' and '--selftest' not in argv
     assert argv[argv.index('--build-system') + 1] == 'make'
-    one = manual.command('ox-build', out, dict(env, SHARED_CPU_CREDITS='1'))
+    one = manual.command('ox-build', out, dict(env, SHARED_CPU_CREDITS='3'))
     assert one[one.index('--jobs') + 1] == '1'
     legacy = manual.command('ox-make', out, {'OX_PREFIX': '/UNREAD-compiler'})
     assert '--selftest' in legacy and legacy[legacy.index('--jobs') + 1] == '4'
@@ -18,7 +18,7 @@ with patch.object(Path, 'is_file', return_value=True):
     for target, changes in (
         ('ox-build', {'JOBS': '5'}),
         ('ox-build', {'SHARED_CPU_CREDITS': '0'}),
-        ('ox-build', {'SHARED_CPU_CREDITS': '5'}),
+        ('ox-build', {'SHARED_CPU_CREDITS': '11'}),
         ('ox-build', {'SHARED_CPU_CREDITS': 'bad'}),
         ('ox-make', {}),
         ('host-executor', {}),
@@ -36,5 +36,14 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
     argv = manual.command('sync-functional', out,
                           dict(env, STOCK_RECEIPT='unread', OX_RECEIPT='unread'))
     assert '--qualification' in argv
-    assert argv[argv.index('--loopback-cpu-credits') + 1] == '4'
+    assert argv[argv.index('--loopback-cpu-credits') + 1] == '10'
+    assert argv[argv.index('--orchestration-cpu-credits') + 1] == '2'
+    plan = manual.shared_resource_plan('sync-functional', env)
+    assert plan['cpu_token_indexes'] == list(range(10))
+    assert plan['endpoint_workers'] == [2, 2] and plan['declared_peak_credits'] == 6
+    assert plan['orchestration_credits'] == 2 and plan['memory_reservation_gib'] == 32
+    assert not plan['runtime_grant'] and not plan['token_acquisition_implemented']
+    assert not plan['memory_enforced'] and not plan['physical_io_lane_resolved']
+    build_plan = manual.shared_resource_plan('ox-build', env)
+    assert build_plan['compiler_jobs'] == 2 and build_plan['declared_peak_credits'] == 4
 print('PASS four shared/legacy selections and seven refusals; no output, build or child')

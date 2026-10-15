@@ -4,6 +4,21 @@
 
 ## Current checkpoint — 2026-10-15
 
+Root shared-policy successor adopted as SOURCE ONLY:
+`SHARED-DEVELOPMENT-RESOURCE-POLICY-v1.json` SHA2924dc03 (Unison10=4+4+2,
+Photo6=4+2,OS2; memory32/64/32GiB). [Source integration](tests/qualification/shared-policy-v1-source-integration-20261015.json)
+pins policy/commonexistingpool and changed dispatcher/run.py. New
+`--orchestration-cpu-credits` counts owner/hash/transport INSIDE explicitloopback
+budget; sharedmanual ceiling10/compilerjobs<=2 plus2owner, functional2+2+2.
+Dry-run resourceplan names Unisontokenindexes0..9 and32GiB reservation while
+explicitly flagging token acquisition/memory enforcement/deviceIO unresolved.
+Two updated pure-control scripts are PREPARED NOT RUN during part5 quietslot.
+No compiler/native/qualification executed; boundedsourcework disclosure saved
+in part5workspace, unknown rowimpact/noabsolutequietclaim. Frozena6f0b695 untouched.
+After actualclosure: source/refusal checks, exactsetinode-bound nonblocking
+commonpool integration, partial-lock release, retainedowner failures, physicalIO
+lanes/memoryadmission and finite sharedqualification. No runtimegrant inferred.
+
 Shared entrypoint implementation: `SHARED_CPU_CREDITS=1..4` in tests/manual.py
 admits compile-only stock-build/ox-build (defaultJOBS=min2,grant; reject excess),
 reviewed pure targets and four-credit sync-functional (both endpoints counted).
