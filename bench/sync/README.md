@@ -242,3 +242,32 @@ storage/network behavior follows. Warmups remain visible, including the slow
 23.314-second first stock semantic single-worker row; it is excluded only by
 the predeclared warmup policy. The remaining memory/read/stage/real-network
 and native SDK qualifications are open.
+
+
+## Optional primary-reader diagnostics
+
+The opt-in `--measure-primary-reads` flag enables
+`-debug semantic-reads` on current endpoints. It parses owner-delivered stable
+worker primary-reader reports into `primary_reader_reads`, independently of
+`application_read_bytes`, which remains unknown. Client and server job IDs have
+separate namespaces. Malformed/duplicate/saturated reports reject the measurement;
+semantic rows require reports. An empty report set means unavailable or no
+primary-reader jobs, never a measured zero. Reference rows remain uninstrumented.
+
+These counts include repeated reads delivered through each job's primary input
+reader. Nested readers (including output verification), legacy/validator reads,
+partial/cancelled readers, channel prefetch, syscalls and physical disk I/O are
+excluded. This option changes diagnostics/wire overhead and must be recorded
+when comparing samples; it establishes no speedup or total-I/O reduction.
+
+Pure checks, with no compiler, Unison or SDK process:
+
+```sh
+python3 tests/read_stats/parser.py
+```
+
+[Functional qualification](../../tests/read_stats/qualification.json) covers
+current stock/Ox core builds, reader/worker controls, both exact CLI paths and
+twelve small full-harness rows. It is not throughput, physical-I/O, full-read or
+whole-process resource qualification. This option invokes no Adobe validator;
+SDK execution still requires its own fresh coordinated admission.

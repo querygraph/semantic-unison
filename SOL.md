@@ -2638,3 +2638,52 @@ Fresh merged SDK admissione29f00cd expired UNSTARTED per Root; never executed
 here, no SDK outputs, no replay. Separate future admission required. Photo
 standalone-render failure remains unqualified; no native/render success inferred.
 Goal remains active with the pending qualification work above.
+
+
+### Primary-reader parser and benchmark bridge — source/pure checks only
+
+During Root's approaching18render hold, no compiler/Unison/SDK dispatch.
+Implemented a strict bounded pure parser for primary-reader diagnostic lines:
+separate client/server job identities, exact field/byte-chunk relationships,
+signed-int64 bounds, duplicate/saturation rejection and absence distinct from
+measured zero. Five pure check groups pass, including18bad-receipt controls,
+log-size admission and benchmark-counter opt-in/default behavior. Retained actual
+stock CLI log independently reparses to3reports/6291684primary input bytes.
+[Pure/readback evidence](tests/read_stats/parser-qualification.json).
+
+`bench/sync/run.py` source now accepts --measure-primary-reads, enabling the debug
+category only on current endpoints and storing a separate primary_reader_reads
+counter. Semantic rows reject missing reports; application_read_bytes remains
+None. Reference rows remain uninstrumented. No benchmark execution or timing/
+physical/total-read claim. New whole-harness flag and final Ox CLI/latest failure
+controls remain UNRUN; telemetry source remains uncommitted pending release and
+verification. All six source pins of the deferred merged-output SDK request are
+unchanged. Its expired admission stays consumed-unstarted, not reusable.
+
+
+### Opt-in primary-reader telemetry qualified — 2026-10-14
+
+Following actual Photo diagnostic closure/all18release (no render success
+inferred), completed pending tests without Adobe calls. Final stock/Ox Make+
+selftests pass; both compiler-matched reader/worker suites pass six groups,
+including invalid/bounds reads, mutation at final stability check, callback
+cleanup, owner-only reports, reentrant observer disable,48queued16MiBhashes in
+four domains under3CPUpermits, and throwing-observer/sibling recovery. Both CLI
+controls reconstruct exact SDE bytes, preserve old basis/no-op and report
+6291684primary-input bytes for a2MiBfile. No counter state for disabled jobs.
+
+The --measure-primary-reads full-harness functional matrix passes12rows and36CLI
+invocations across stock/Ox ordinary/receiver-clone/SDE with1/2worker budgets
+(max4configuredendpointcredits). All seed/update/no-op client/server/supervisor
+closures verified, exact targets/bases/inodes/staging/private cleanup pass. Each
+SDE2file row reports6primary-reader jobs/12583368logical bytes. Ordinary missing
+reports remain unknown/not measured zero. Parent85911/d3a7ba exited0, no session.
+[Sealed qualification](tests/read_stats/qualification.json),
+[scope/manual checks](tests/read_stats/README.md).
+
+This supersedes earlier pending-check notes for these same source features.
+Primary readers exclude nested output verification, legacy/validator reads,
+partial/cancelled readers, prefetch/syscalls and physical I/O. application_read_
+bytes remains None. These are functional/diagnostic observations, not throughput,
+whole-process bounds or full M6 qualification. Expired SDK admission remains
+unstarted/unusable; no compiler/SDK/Photo/native-render activity remains owned.

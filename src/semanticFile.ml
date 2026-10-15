@@ -28,8 +28,21 @@ let write_at writer data start length position =
     ignore (Unix.LargeFile.lseek writer.output position Unix.SEEK_SET);
     Unix.write_substring writer.output data start length
   end
+type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
+type read_counter = { mutable bytes : int64; mutable chunks_read : int64;
+                      mutable overflow : bool }
 type t = { channel : in_channel; initial : Unix.LargeFile.stats;
-           check_cancel : unit -> unit }
+           check_cancel : unit -> unit; reads : read_counter option }
+let account_read t length = match t.reads with
+  | None -> ()
+  | Some counter when length > 0 ->
+      let bytes = Int64.of_int length in
+      if counter.bytes > Int64.sub Int64.max_int bytes then begin
+        counter.bytes <- Int64.max_int; counter.overflow <- true
+      end else counter.bytes <- Int64.add counter.bytes bytes;
+      if counter.chunks_read = Int64.max_int then counter.overflow <- true
+      else counter.chunks_read <- Int64.succ counter.chunks_read
+  | Some _ -> ()
 let size t = t.initial.Unix.LargeFile.st_size
 let same_inode t fd =
   let b = Unix.LargeFile.fstat fd in
@@ -42,7 +55,7 @@ let check t =
      a.Unix.LargeFile.st_size <> b.Unix.LargeFile.st_size || a.Unix.LargeFile.st_mtime <> b.Unix.LargeFile.st_mtime ||
      a.Unix.LargeFile.st_ctime <> b.Unix.LargeFile.st_ctime then
     raise (Invalid "file changed while inspecting")
-let with_fd ?(check_cancel = fun () -> ()) fd f =
+let with_fd_internal ~measure_reads ~check_cancel fd f =
   check_cancel ();
   let initial = Unix.LargeFile.fstat fd in
   if initial.Unix.LargeFile.st_kind <> Unix.S_REG || initial.Unix.LargeFile.st_size < 0L then
@@ -69,12 +82,22 @@ let with_fd ?(check_cancel = fun () -> ()) fd f =
        close the new channel locally rather than retrying its raw FD. *)
     (try owned_channel := Some channel
      with error -> (try close_in_noerr channel with _ -> ()); raise error);
-    let t = {channel;initial;check_cancel} in
+    let reads = if measure_reads then Some {bytes=0L;chunks_read=0L;overflow=false} else None in
+    let t = {channel;initial;check_cancel;reads} in
     let result = f t in
     check t;
     close ();
     result
   with error -> close_noerr (); raise error
+let with_fd ?(check_cancel = fun () -> ()) fd f =
+  with_fd_internal ~measure_reads:false ~check_cancel fd f
+let with_read_stats ?(check_cancel = fun () -> ()) fd f =
+  with_fd_internal ~measure_reads:true ~check_cancel fd (fun file ->
+    let result = f file in
+    let stats = match file.reads with
+      | Some counter -> {logical_bytes=counter.bytes;chunks=counter.chunks_read;saturated=counter.overflow}
+      | None -> assert false in
+    result,stats)
 let bounds t offset length =
   if offset < 0L || length < 0L || offset > size t || length > Int64.sub (size t) offset then
     raise (Invalid "extent outside file")
@@ -83,7 +106,11 @@ let read t offset length =
   if length < 0 || length > 1048576 then raise (Invalid "read limit");
   bounds t offset (Int64.of_int length);
   LargeFile.seek_in t.channel offset;
-  try really_input_string t.channel length with End_of_file -> raise (Invalid "truncated file")
+  try
+    let result = really_input_string t.channel length in
+    account_read t length;
+    result
+  with End_of_file -> raise (Invalid "truncated file")
 let iter t offset length f =
   t.check_cancel ();
   bounds t offset length;
@@ -93,6 +120,7 @@ let iter t offset length f =
     t.check_cancel ();
     let n = Int64.to_int (min remaining 65536L) in
     (try really_input t.channel b 0 n with End_of_file -> raise (Invalid "truncated file"));
+    account_read t n;
     f b n; loop (Int64.sub remaining (Int64.of_int n))
   end in loop length
 let digest t =

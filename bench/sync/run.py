@@ -20,6 +20,7 @@ import zlib
 from fixtures import create, edit, equal_files, sha256
 from measure import CapturedStream, run
 from ownership import OwnedGroup
+from read_stats import parse as primary_reader_counters
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
@@ -105,7 +106,7 @@ def save(path, value):
     temporary.replace(path)
 
 
-def internal_counters(log, mode, files, size):
+def internal_counters(log, mode, files, size, *, primary_reads=False):
     semantic = [tuple(int(value) for value in match[:4]) + (match[4],)
                 for match in SDE.findall(log)]
     preserved = [int(value) for value in PRESERVED.findall(log)]
@@ -149,6 +150,8 @@ def internal_counters(log, mode, files, size):
             "materialization_model_basis": model_basis,
             "receiver_clone_declines": log.count("Receiver clone declined:"),
             "semantic_fallback_events": log.count("Remote semantic fallback:"),
+            "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic")
+              if primary_reads else None,
             "application_read_bytes": None, "hash_parse_verify_commit_seconds": None,
             "physical_storage_write_bytes": None, "queue_descriptor_peaks": None}
 
@@ -227,6 +230,8 @@ def main():
     parser.add_argument("--qualification", action="store_true",
                         help="fixed finite smoke: two 2 MiB files, workers 1/2, no warmup, one sample")
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
+    parser.add_argument("--measure-primary-reads", action="store_true",
+                        help="opt-in worker primary-reader counters; not total application/disk reads")
     parser.add_argument("--background-note", default="ordinary host activity uncontrolled")
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
@@ -286,6 +291,7 @@ def main():
                     "files": args.files, "packet_bytes": args.packet_bytes,
                     "warmups": args.warmups, "repetitions": args.repetitions,
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
+                    "measure_primary_reads": args.measure_primary_reads,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
                     "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers)},
               "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
@@ -338,6 +344,8 @@ def main():
         def invoke(label, binary, mode, worker, directory, stage):
             assert sha256(binary) == metadata[label]["sha256"], "binary changed"
             flags = ["-debug", "copy", "-debug", "semantic"] if mode != "reference" else []
+            if args.measure_primary_reads and mode != "reference":
+                flags += ["-debug", "semantic-reads"]
             if worker is not None:
                 flags += ["-clone", "off" if mode == "ordinary" else "auto",
                           "-semanticworkers", str(worker), "-maxthreads", str(max(2, worker))]
@@ -395,7 +403,8 @@ def main():
                         measured = invoke(label, binary, mode, worker, directory, "update")
                         sample["update_sync"] = measured
                         log = measured["stdout"] + measured["stderr"] + measured["supervisor_output"]
-                        sample["counters"] = internal_counters(log, mode, args.files, size)
+                        sample["counters"] = internal_counters(log, mode, args.files, size,
+                            primary_reads=args.measure_primary_reads and mode != "reference")
                         verification_start = time.monotonic()
                         inodes = {}
                         for item in fixtures:

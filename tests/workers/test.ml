@@ -269,7 +269,101 @@ let apply_scheduling_stress () =
   verify (!cancelled>0) "no cancellation exercised";
   Printf.printf "PASS seeded apply stress seeds=6 jobs=%d completed=%d cancelled=%d late_cancel=%d checks=%d\n%!"
     (!completed+ !cancelled) !completed !cancelled !late !checks
+let read_stats_tests () =
+  let expected = write_fixture () in
+  test "reader reports exact repeated reads/iteration/hash and ignores empty requests" (fun () ->
+    let file = fd "sample" in
+    let size = (Unix.LargeFile.fstat file).Unix.LargeFile.st_size in
+    let digest,stats = SemanticFile.with_read_stats file (fun input ->
+      ignore (SemanticFile.read input 2L 3);
+      ignore (SemanticFile.read input 0L 0);
+      SemanticFile.iter input 0L 65537L (fun _ _ -> ());
+      SemanticFile.iter input 0L 0L (fun _ _ -> failwith "empty iteration callback");
+      SemanticFile.digest input) in
+    Unix.close file;
+    check (digest=expected) "measurement changed digest";
+    check (stats.SemanticFile.logical_bytes=Int64.add size 65540L) "logical read total";
+    check (stats.chunks=Int64.add (Int64.div size 65536L) 3L && not stats.saturated)
+      "logical chunk total");
+  test "read failures and callback exceptions close readers without reporting success" (fun () ->
+    let baseline=Array.length(Sys.readdir "/dev/fd") in
+    let file=fd "sample" in
+    let rejected = try ignore(SemanticFile.with_read_stats file (fun input ->
+      ignore(SemanticFile.read input 0L 1);raise Exit));false with Exit -> true in
+    check rejected "callback exception changed";
+    let bad_read = try
+      ignore(SemanticFile.with_read_stats file (fun input -> SemanticFile.read input 0L 1048577));false
+      with SemanticFile.Invalid _ -> true in
+    check bad_read "invalid measured read accepted";
+    let size=(Unix.LargeFile.fstat file).Unix.LargeFile.st_size in
+    let writer=Unix.openfile "sample" [Unix.O_WRONLY;Unix.O_CLOEXEC] 0 in
+    let unstable = Fun.protect ~finally:(fun () ->
+      Unix.LargeFile.ftruncate writer size;Unix.close writer) (fun () ->
+      try ignore(SemanticFile.with_read_stats file (fun input ->
+        ignore(SemanticFile.read input 0L 1);
+        Unix.LargeFile.ftruncate writer (Int64.succ size)));false
+      with SemanticFile.Invalid _ -> true) in
+    Unix.close file;
+    check unstable "unstable measured reader returned success";
+    check (Array.length(Sys.readdir "/dev/fd")=baseline) "measured reader descriptor leak");
+  test "worker read observer is opt-in owner-only exact and idle-bound" (fun () ->
+    let b=budget 1 in let pool=W.create ~workers:1 ~max_pending:4 ~budget:b in
+    let owner=Domain.self () and events=ref [] in
+    ignore(Lwt_unix.run(hash pool (H.cancellation ()) "sample"));
+    W.set_read_observer pool (Some(fun id stats ->
+      check (Domain.self()=owner) "observer ran on worker";events:=(id,stats)::!events));
+    let job=hash pool (H.cancellation ()) "sample" in
+    check (try W.set_read_observer pool None;false with Invalid_argument _ -> true)
+      "changed observer while pending";
+    (match Lwt_unix.run job with Some value -> check(value.W.digest=expected) "measured hash changed"
+     | None -> failwith "measured hash cancelled");
+    check (List.length !events=1) "observer completion count";
+    let _,stats=List.hd !events in
+    check (stats.SemanticFile.logical_bytes=16777216L && stats.chunks=256L && not stats.saturated)
+      "worker read total";
+    W.set_read_observer pool None;
+    ignore(Lwt_unix.run(hash pool (H.cancellation ()) "sample"));
+    check(List.length !events=1) "disabled observer invoked";
+    finish pool b);
+  test "reply callback may disable future telemetry without losing its own report" (fun () ->
+    let b=budget 1 in let pool=W.create ~workers:1 ~max_pending:4 ~budget:b in
+    let reports=ref 0 in
+    W.set_read_observer pool (Some(fun _ _ -> incr reports));
+    ignore(Lwt_unix.run(hash pool (H.cancellation ()) "sample" >>= fun value ->
+      W.set_read_observer pool None;return value));
+    check(!reports=1) "reentrant observer change discarded completed read report";
+    finish pool b);
+  test "parallel measured jobs return exact independent owner reports" (fun () ->
+    let b=budget 3 in let pool=W.create ~workers:4 ~max_pending:64 ~budget:b in
+    let owner=Domain.self() and reports=ref [] in
+    W.set_read_observer pool (Some(fun id stats ->
+      check(Domain.self()=owner) "parallel observer ran on domain";
+      reports:=(id,stats)::!reports));
+    let jobs=List.init 48(fun _ -> hash pool (H.cancellation ()) "sample") in
+    List.iter(function Some value -> check(value.W.digest=expected) "parallel measured hash changed"
+      | None -> failwith "parallel measured job cancelled") (Lwt_unix.run(await jobs));
+    check(List.length !reports=48) "parallel report count";
+    check(List.length(List.sort_uniq Int.compare(List.map fst !reports))=48) "duplicate report ID";
+    List.iter(fun (_,stats) ->
+      check(stats.SemanticFile.logical_bytes=16777216L && stats.chunks=256L && not stats.saturated)
+        "parallel report total") !reports;
+    check((W.usage pool).peak_running<=3) "measured jobs bypassed CPU budget";
+    finish pool b);
+  test "throwing read observer leaves replies siblings and pool usable" (fun () ->
+    let b=budget 1 in let pool=W.create ~workers:1 ~max_pending:4 ~budget:b in
+    let once=ref false in
+    W.set_read_observer pool (Some(fun _ _ -> if not !once then begin
+      once:=true;failwith "synthetic read observer" end));
+    let jobs=List.init 3(fun _ -> hash pool (H.cancellation ()) "sample") in
+    let failed=try ignore(Lwt_unix.run(await jobs >>= fun _ -> Lwt_unix.sleep 0.03));false
+      with Failure reason -> reason="synthetic read observer" in
+    check failed "observer error disappeared";
+    List.iter(function Some value -> check(value.W.digest=expected) "sibling changed"
+      | None -> failwith "sibling cancelled") (Lwt_unix.run(await jobs));
+    W.set_read_observer pool None;
+    ignore(Lwt_unix.run(hash pool (H.cancellation ()) "sample"));finish pool b)
 let () =
+  if Array.exists ((=) "--read-stats-only") Sys.argv then (read_stats_tests ();exit 0);
   if Array.exists ((=) "--apply-stress-only") Sys.argv then (apply_scheduling_stress ();exit 0);
   if Array.exists ((=) "--stress-only") Sys.argv then (scheduling_stress ();exit 0);
   identify_tests ();

@@ -24,10 +24,10 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Identify of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
-             operation : operation }
+             operation : operation; measure_reads : bool }
 type shared = {
   mutex : Mutex.t; ready : Condition.t;
-  jobs : job Mailbox.t; completions : (int * response) Mailbox.t;
+  jobs : job Mailbox.t; completions : (int * response * SemanticFile.read_stats option) Mailbox.t;
   notify : Unix.file_descr;
   stopping : bool Atomic.t; running : int Atomic.t; peak : int Atomic.t;
 }
@@ -41,6 +41,7 @@ type t = {
   mutable joined : bool;
   mutable shutdown_result : unit Lwt.t option;
   pump_done : unit Lwt.t;
+  mutable read_observer : (int -> SemanticFile.read_stats -> unit) option;
 }
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
 let close_operation = function Apply (_, _, fd) -> close_noerr fd | _ -> ()
@@ -78,7 +79,7 @@ let execute job =
   try
     check_cancel ();
     let stats = Unix.LargeFile.fstat job.fd in
-    let result = SemanticFile.with_fd ~check_cancel job.fd (fun file ->
+    let operation file =
       match job.operation with
       | Digest -> Hashed {digest = SemanticFile.digest file; stats}
       | Identify recognizers ->
@@ -118,15 +119,19 @@ let execute job =
         let report = SemanticDelta.apply_report_with_extension ~check_cancel
           ~max_payload:(FormatExtension.payload_limit extension) (FormatExtension.implementation extension)
           plan ~basis:file ~output in
-        Applied report) in
+        Applied report in
+    let result,reads = if job.measure_reads then
+        let result,reads = SemanticFile.with_read_stats ~check_cancel job.fd operation in
+        result,Some reads
+      else SemanticFile.with_fd ~check_cancel job.fd operation,None in
     if not (unchanged stats (Unix.LargeFile.fstat job.fd)) then
-      Error "file changed while hashing"
-    else result
+      Error "file changed while hashing",None
+    else result,reads
   with
-  | Cancelled_job -> Cancelled
-  | SemanticFile.Invalid reason | Invalid_argument reason -> Error reason
-  | Unix.Unix_error (err, operation, _) -> Error (operation ^ ": " ^ Unix.error_message err)
-  | _ -> Error "unexpected digest worker failure"
+  | Cancelled_job -> Cancelled,None
+  | SemanticFile.Invalid reason | Invalid_argument reason -> Error reason,None
+  | Unix.Unix_error (err, operation, _) -> Error (operation ^ ": " ^ Unix.error_message err),None
+  | _ -> Error "unexpected digest worker failure",None
 let rec worker shared () =
   let next = locked shared (fun () ->
     let rec take () = match Mailbox.pop shared.jobs with
@@ -144,12 +149,12 @@ let rec worker shared () =
   match next with
   | None -> ()
   | Some job ->
-    let result = execute job in
+    let result,reads = execute job in
     close_noerr job.fd;
     close_operation job.operation;
     locked shared (fun () ->
       Atomic.set shared.running (Atomic.get shared.running - 1);
-      match Mailbox.push shared.completions (job.id, result) with
+      match Mailbox.push shared.completions (job.id, result, reads) with
       | Mailbox.Added -> ()
       | Mailbox.Full | Mailbox.Closed -> failwith "worker completion mailbox invariant");
     notify shared;
@@ -164,12 +169,20 @@ let take_completions shared = locked shared (fun () ->
   in drain [])
 let dispatch t =
   let first_error = ref None in
-  List.iter (fun (id, result) ->
+  List.iter (fun (id, result, reads) ->
     match Hashtbl.find_opt t.replies id with
     | None -> ()
     | Some reply ->
+      let read_observer = t.read_observer in
       Hashtbl.remove t.replies id;
-      (try Lwt.wakeup reply result with error ->
+      (try
+         Lwt.wakeup reply result;
+         (* Owner-only diagnostics follow reply settlement. A logging exception
+            cannot strand this reply or prevent sibling completion delivery. *)
+         (match read_observer,reads with
+          | Some observer,Some reads -> observer id reads
+          | _ -> ())
+       with error ->
          if !first_error = None then first_error := Some error)) (take_completions t.shared);
   !first_error
 let rec pump t scratch =
@@ -234,7 +247,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
     let t = { shared; domains = !domains; budget; io; max_pending; reader;
       replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
-      shutdown_result = None; pump_done = Lwt.wait () } in
+      shutdown_result = None; pump_done = Lwt.wait (); read_observer = None } in
     Lwt.ignore_result (pump t (Bytes.create 4096));
     has_read := false; has_write := false;
     t
@@ -243,6 +256,10 @@ let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
   create_internal ~io:(Some io) ~workers ~max_pending ~budget
+let set_read_observer t observer =
+  if t.closing || t.pending <> 0 then
+    invalid_arg "SemanticWorkers.set_read_observer requires an idle open pool";
+  t.read_observer <- observer
 let usage t =
   let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
   {workers = List.length t.domains; pending = t.pending; running; peak_running}
@@ -313,7 +330,8 @@ let submit t cancellation fd requested_operation =
             let reply = Lwt.wait () in
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
-              (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation} with
+              (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation;
+                 measure_reads = Option.is_some t.read_observer} with
                | Mailbox.Added -> transferred := true
                | Mailbox.Full | Mailbox.Closed -> raise (Failed "worker job mailbox invariant"));
               Condition.signal t.shared.ready);

@@ -1,0 +1,44 @@
+# Primary-reader diagnostics
+
+Enable `-debug semantic-reads` before the semantic runtime starts. The owner
+prints one bounded line for a delivered, stable job's primary input reader.
+The worker sends immutable counters through its existing bounded completion
+mailbox; it never reads preferences or performs logging. Ordinary jobs create no
+counter state. An idle-pool observer API supports trusted owner integrations.
+
+Counts include successful nonempty `SemanticFile.read` and 64 KiB iteration
+chunks, repeated ranges and hashing through that reader. They exclude nested
+readers (including output verification), legacy/validator reads, partial or
+cancelled readers, channel prefetch, syscalls and physical I/O. Counters saturate
+instead of failing the operation; exact benchmark parsing rejects saturation.
+These are diagnostic observations, never validation/publication authority.
+
+The observer is captured before waking the reply, then invoked on the owner
+after reply settlement. Changing observation for future jobs does not discard
+the completed report. A throwing observer uses the existing error channel while
+sibling replies and the pool remain usable. Selection changes require an idle,
+open pool. Callback/read/stability failures return no reader report.
+
+Use a successful Make snapshot and its matching compiler:
+
+```sh
+python3 tests/workers/run.py --ocamlopt /absolute/compiler/ocamlopt \
+  --build /absolute/qualified-snapshot/src --read-stats-only --keep-work \
+  --receipt /private/tmp/new-worker-read-report.json
+python3 tests/read_stats/cli.py --build-receipt /absolute/build-RESULT.json \
+  --report /private/tmp/new-cli-read-report.json
+python3 tests/read_stats/parser.py
+```
+
+The six reader/worker groups include exact repeated/empty reads, invalid reads,
+mutation before final stability checks, descriptor cleanup, owner execution,
+reentrant observer changes, 48 queued hashes in a four-domain pool under three
+CPU permits, and observer failure recovery. CLI checks use original synthetic
+DNG-shaped files with Adobe disabled, exact SDE output, an old receiver hardlink
+and a no-op. They do not validate DNG pixels or Adobe acceptance.
+
+The [qualification](qualification.json) records stock/Ox Make+selftests, both
+compiler-matched groups, both CLI checks, pure parser controls and the 12-row
+functional harness with `--measure-primary-reads`. This small harness is not a
+throughput comparison. Default behavior leaves collection off; nested/total
+application I/O and complete resource/performance qualification remain open.

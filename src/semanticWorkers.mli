@@ -25,6 +25,13 @@ val create_with_io : io:IoAdmission.t -> workers:int -> max_pending:int ->
     and output devices atomically before a domain slot and CPU permit. The
     lease lasts through active worker completion and worker duplicate closure;
     waiting I/O jobs consume neither domain slots nor CPU credits. *)
+val set_read_observer : t -> (int -> SemanticFile.read_stats -> unit) option -> unit
+(** Owner-only opt-in read reporting; requires an idle open pool. Worker-local
+    counters cross the completion mailbox as immutable data. Observer executes
+    on the owner after reply settlement; its exceptions use existing completion
+    error delivery without stranding sibling replies. Reports cover successfully
+    returned, stable reader jobs only, not partial/cancelled reads or other I/O.
+    Disable with [None]; no counter state is allocated for disabled jobs. *)
 val usage : t -> usage
 val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprint option Lwt.t
 (** Borrows the caller's regular descriptor until the promise settles. Its

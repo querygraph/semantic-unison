@@ -23,6 +23,14 @@ retains preview/native scheduling and all renderer/publisher ownership. Detailed
 checkpoints below retain their original pinned scopes; newer checkpoints here
 supersede stale descriptions of those same features.
 
+Opt-in `-debug semantic-reads` now reports completed worker primary-reader
+logical bytes/chunks on the owner. `--measure-primary-reads` ingests these into
+the sync harness without relabeling them as total application/disk I/O.
+[Stock/Ox functional qualification](../tests/read_stats/qualification.json)
+covers six reader/worker groups, both exact CLI paths and twelve complete small
+harness rows. Nested/legacy/validator/failed reads, physical I/O and performance
+remain outside this scope.
+
 ## User-run checks
 
 Use `make -f tests/Makefile help` from the repository root. This separate test

@@ -22,6 +22,16 @@ val with_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 'a) -> 'a
     the duplicate shares its file position with the original descriptor.
     The optional worker-local cancellation check runs before opening, reading,
     each 64 KiB iteration, and final stability checks. *)
+type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
+val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
+  (t -> 'a) -> 'a * read_stats
+(** Opt-in accounting for a successfully completed, stability-checked reader.
+    Counts bytes delivered by nonempty [read] and 64 KiB [iter] chunks, including
+    repeated ranges and [digest]. Excludes channel prefetch, failed/partial reads,
+    seeks/stats, writes, other readers and physical I/O. Callback/read/stability
+    failure returns no report. Counters saturate rather than fail the operation;
+    [saturated] makes an exact-total claim unavailable. Ordinary [with_fd] does
+    not allocate/update counters. Worker-local state, no shared/global metrics. *)
 val size : t -> int64
 val check : t -> unit
 val same_inode : t -> Unix.file_descr -> bool
