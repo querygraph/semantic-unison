@@ -45,6 +45,18 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
 
 ## Live implementation handoff
 
+* Larger-workload duration planning (2026-10-15): pure planner controls pass
+  after binding the actual3426.064s warm128 reference. Simple byte scaling
+  estimates512MiB x4 at13704s and2048MiB x2 at27409s, beyond the current7200s
+  owner ceiling. These are heuristics, not measured bounds. The
+  [prepared v7 plan](bench/sync/results/larger-batch-duration-preparation-20261015.json)
+  explicitly flags partition review; no larger run/allocation is requested or
+  started. Next work must preserve all18 configurations/five repetitions/324CLI
+  proof accounting across bounded parts rather than silently shrink the matrix.
+  Source/build/binary pins were refreshed; pure checks invoked no compiler or
+  benchmark. The completed128 batch and its consumed allocation stay immutable.
+
+
 * Aggregate setup failure settlement (2026-10-15, SOURCE ONLY): preparation
   now includes both readiness-pipe acquisitions and stdout/stderr flush inside
   the pre-fork cleanup guard. Previously a second-pipe or flush exception could

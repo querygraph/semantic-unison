@@ -32,6 +32,16 @@ def build(path):
 
 def prepare(stock_receipt, ox_receipt, output_root):
     builds = [build(path) for path in (stock_receipt, ox_receipt)]
+    reference_path = ROOT / 'bench/sync/results/warm-128-v5-actual-return-20261015.json'
+    reference = json.loads(reference_path.read_text())
+    if reference['state'] != 'ACTUAL_WARM128_V5_PASSED_CLOSED':
+        raise ValueError('completed timing reference required for duration planning')
+    measurement = ROOT / 'bench/sync/results/warm-128MiB-4files-20261015.json'
+    if pin(measurement)['sha256'] != reference['measurement']['sha256']:
+        raise ValueError('timing reference measurement changed')
+    reference_seconds = reference['aggregate']['wall_seconds']
+    if not reference['aggregate']['reaped'] or not 0 < reference_seconds < 7200:
+        raise ValueError('settled finite timing reference required')
     commands = []
     # Each size is a separate complete measurement batch; never claim later
     # batches ran merely because the smaller batch passed. FourGiB corpus cap.
@@ -49,14 +59,21 @@ def prepare(stock_receipt, ox_receipt, output_root):
                     '--timeout', '180', '--background-note',
                     'planned coordinated warm-cache run; actual background activity must be recorded separately',
                     '--output', str(output)]
+        estimate = reference_seconds * (mib * files) / (128 * 4)
         commands.append({'file_mib': mib, 'files': files, 'corpus_bytes': mib * files * 1048576,
                          'capacity_model_bytes': 4 * mib * files * 1048576 + 64 * 1048576,
                          'configurations': 18, 'warmup_updates': 18, 'measured_updates': 90,
+                         'duration_planning': {
+                             'linear_byte_scaling_seconds': estimate,
+                             'aggregate_ceiling_seconds': 7200,
+                             'partition_review_needed': estimate > 7200,
+                             'scope': 'Rough byte-scaling estimate, not a runtime bound or authorization; larger batches need partition review when estimate exceeds the owner ceiling.'},
                          'expected_cli_invocations': 324, 'command': command})
     return {'schema': 'unison-warm-sync-measurement-plan/1', 'runtime_started': False,
             'cpu_reservation': False, 'requires_coordination': True,
             'owned_batch_seconds': 7200, 'owned_batch_cli_invocations': 324,
             'owner_controller': pin(ROOT / 'bench/sync/run_bounded.py'),
+            'duration_planning_reference': pin(reference_path),
             'full_batch_runtime_measured': False,
             'fake_lifecycle_qualification': pin(ROOT / 'bench/sync/results/bounded-lifecycle-qualification-20261015.json'),
             'fake_lifecycle_scope': 'Eight admitted fake-child/worker cases passed; not execution of this324CLI timing matrix.',

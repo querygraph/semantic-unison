@@ -15,6 +15,10 @@ work=Path(tempfile.mkdtemp(prefix='unison-sync-plan-control-'))
 plan=planner.prepare(a.stock_build,a.ox_build,work/'NOT-CREATED')
 assert len(plan['commands'])==3 and not plan['runtime_started'] and not plan['cpu_reservation']
 assert plan['configured_endpoint_worker_maximum']==16 <= plan['proposed_cpu_credits']==18
+assert [row['duration_planning']['partition_review_needed'] for row in plan['commands']] == [False, True, True]
+assert [row['duration_planning']['linear_byte_scaling_seconds'] /
+        plan['commands'][0]['duration_planning']['linear_byte_scaling_seconds']
+        for row in plan['commands']] == [1, 4, 8]
 for row in plan['commands']:
     assert row['measured_updates']==18*5 and row['expected_cli_invocations']==(18+90)*3
     assert '--measure-primary-reads' not in row['command'] and '--qualification' not in row['command']
