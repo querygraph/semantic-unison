@@ -19,11 +19,12 @@ Targets:
   read-workers            reader/worker controls; Make BUILD_RECEIPT required
   read-cli                synthetic telemetry sync; BUILD_RECEIPT required
   read-parser             pure telemetry parser controls
+  sync-functional         finite stock/Ox matrix; STOCK_RECEIPT and OX_RECEIPT required
   host-interface          pure plan/receipt controls, no tool invocation
   host-executor           original fake validators and owned-group closure controls
 JOBS defaults to 4 (1..18), for build targets only.
 DRY_RUN=1 prints JSON argv without executing a check or creating a report directory.
-OUTPUT_DIR for build/cache targets must be fresh; otherwise a private temporary
+OUTPUT_DIR for build/cache/reader/sync targets must be fresh; otherwise a private temporary
 directory retains the receipt. Host checks print their own workspace/receipt.
 Build snapshots/workspaces are retained separately.
 No target executes Adobe, opens Photo/Lightroom, or starts a fuzz/sanitizer campaign.
@@ -40,6 +41,22 @@ def sha(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def checked_build(path):
+    receipt = json.loads(Path(path).read_text())
+    require(receipt['complete'] and receipt['build_exit'] == receipt['selftest_exit'] == 0,
+            'completed successful build/selftest receipt required')
+    require(sha(receipt['binary']) == receipt['binary_sha256']
+            and sha(receipt['compiler']) == receipt['compiler_sha256'], 'build artifact changed')
+    # A cache-only pin could silently accept stale transfer/worker code.
+    pins = receipt['source_sha256']
+    require('src/semanticMergeCache.ml' in pins and 'src/semanticWorkers.ml' in pins,
+            'production source pins missing')
+    for name, digest in pins.items():
+        if name.startswith('src/'):
+            require(sha(ROOT / name) == digest, 'production source changed: ' + name)
+    return receipt
+
+
 def command(target, output, environment):
     if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune'):
         kind, system = target.split('-')
@@ -52,20 +69,20 @@ def command(target, output, environment):
         return [sys.executable, str(ROOT / 'tests/build_snapshot.py'),
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
                 '--build-system', system, '--selftest', '--report', str(output / 'RESULT.json')]
+    if target == 'sync-functional':
+        argv = [sys.executable, str(ROOT / 'bench/sync/run.py')]
+        for label, key in (('stock', 'STOCK_RECEIPT'), ('ox', 'OX_RECEIPT')):
+            require(bool(environment.get(key)), key + ' is required')
+            receipt = checked_build(environment[key])
+            argv.extend(['--binary', label + '=' + receipt['binary'],
+                         '--compiler', label + '=' + receipt['compiler']])
+        return argv + ['--qualification', '--measure-primary-reads',
+                       '--loopback-cpu-credits', '4', '--timeout', '30',
+                       '--background-note', 'user-run finite functional checks; not a throughput comparison',
+                       '--output', str(output / 'RESULT.json')]
     if target in ('cache-storage', 'cache-ownership', 'cache-cli', 'read-workers', 'read-cli'):
         require(bool(environment.get('BUILD_RECEIPT')), 'BUILD_RECEIPT is required')
-        receipt = json.loads(Path(environment['BUILD_RECEIPT']).read_text())
-        require(receipt['complete'] and receipt['build_exit'] == receipt['selftest_exit'] == 0,
-                'completed successful build/selftest receipt required')
-        require(sha(receipt['binary']) == receipt['binary_sha256']
-                and sha(receipt['compiler']) == receipt['compiler_sha256'], 'build artifact changed')
-        # A cache-only pin could silently accept stale transfer/worker code.
-        pins = receipt['source_sha256']
-        require('src/semanticMergeCache.ml' in pins and 'src/semanticWorkers.ml' in pins,
-                'production source pins missing')
-        for name, digest in pins.items():
-            if name.startswith('src/'):
-                require(sha(ROOT / name) == digest, 'production source changed: ' + name)
+        receipt = checked_build(environment['BUILD_RECEIPT'])
         if target == 'read-cli':
             return [sys.executable, str(ROOT / 'tests/read_stats/cli.py'),
                     '--build-receipt', str(Path(environment['BUILD_RECEIPT']).resolve()),

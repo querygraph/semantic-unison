@@ -30,6 +30,20 @@ make -f tests/Makefile read-parser
 
 `DRY_RUN=1` prints the command without dispatch. Worker checks require a Make
 snapshot; CLI checks also accept Dune. No target invokes Adobe or Photo.
+The finite two-compiler sync matrix is also available without reconstructing
+benchmark arguments:
+
+```sh
+STOCK_RECEIPT=/absolute/stock-RESULT.json OX_RECEIPT=/absolute/ox-RESULT.json \
+  make -f tests/Makefile sync-functional
+```
+
+It runs 12 rows / 36 CLI calls on synthetic two-file 2 MiB fixtures, with
+at most four configured endpoint CPU credits, exact output/basis/no-op checks,
+and primary-reader diagnostics. This is a functional check, not a speed test.
+Coordinate those four credits with other local work. Both receipts must match
+current production sources; `DRY_RUN=1` checks them and prints argv without sync.
+
 Equivalent direct commands using the matching compiler:
 
 ```sh

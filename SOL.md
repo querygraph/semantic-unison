@@ -2747,3 +2747,19 @@ outputs retain historical source scope; no claim of current receiving-path or
 pixel/render/resource/performance qualification. Prior admission cannot launch
 this successor. Fresh Root review/admission is required; none exists or has been
 inferred, no native execution performed. All compiler/core handles remain closed.
+
+### User-run full functional sync matrix entry point
+
+Added `make -f tests/Makefile sync-functional`, taking STOCK_RECEIPT/OX_RECEIPT
+and optional fresh OUTPUT_DIR. It verifies both successful build/selftest,
+compiler/binary and recorded production source pins, then directly execs the
+existing finite sync runner with --qualification --measure-primary-reads and
+four configured endpoint credits. This makes the 12-row/36-call exact synthetic
+matrix reproducible from build receipts without shell assembly; it does not
+start a benchmark, SDK, fuzz campaign or Photo operation. Shared build verification
+also retains the existing cache/reader routes. Pure command construction accepts
+both current wake-up snapshots, rejects missing/stale Ox receipts and preserves
+five existing routes; no child matrix/compiler/test dispatched. Existing actual
+matrix evidence remains historical, not relabeled as a new wrapper runtime.
+Fresh merged-output v2 admission still absent on current readback; queued request
+is not a release. Goal remains active.
