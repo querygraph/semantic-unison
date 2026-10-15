@@ -52,9 +52,12 @@ Preparing that plan performed only file hashing/JSON work, not builds or tests.
   replace the original fork exception. Cleanup now attempts every acquired
   slot and rethrows the original exception. Six finite mocked acquisition,
   flush, fork and cleanup-failure regressions are prepared in
-  `tests/sdk_container_receive/aggregate_setup_test.py`; they have NOT been
-  executed while Photo owns its exclusive18 MOV repair slot. No native worker,
-  compiler, core test or benchmark was dispatched. Earlier completed runtime
+  `tests/sdk_container_receive/aggregate_setup_test.py` were left unexecuted
+  during Photo's exclusive18 MOV repair. After actual release, all six mocks
+  and the supported-interpreter plus ten capability-refusal controls passed
+  (actual terminal062b40/exit0); [pure evidence](tests/qualification/aggregate-setup-pure-controls-20261015.json).
+  No real test descriptor, worker, compiler, SDK, Photo or benchmark was invoked.
+  Mock close attempts are not native FD/reap qualification. Earlier runtime
   evidence retains its historical source pins; future runs need current pins.
 
 * Aggregate interpreter preflight (2026-10-15): source review found that direct
