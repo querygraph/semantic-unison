@@ -2777,3 +2777,21 @@ new runtime evidence or all-inherited-FFI completion. HostV8 process-name snapsh
 found no matching runtime command; that is not owner terminal/release proof, so
 its reported reservation remains respected pending Root closure. Fresh merged
 v2 SDK admission is still not inferred from its queued request. Goal active.
+
+### Current core binds the frozen merged SDK candidates
+
+After actual HostV8 closure/all18 release, ran the existing compact-cache merge
+controls serially against current stock/Ox wake-up builds:15cases each across
+retained generated uncompressed/JPEG/JXL containers (disjoint, competing,
+protected change, missing base, partial receiver recovery). All30pass with mock
+validators only. Rehashed every recorded current production source; all24
+retained disjoint/partial-recovery left/right replicas match the three frozen
+SDK candidates in exact bytes/size/SHA. This closes the current-output linkage
+without regenerating inputs or changing immutable SDKv2 request pins.
+[Actual runs/output binding](tests/sdk_container_receive/current-merge-frozen-binding.json).
+Stock85623/c61399 and Ox30602/546f48 actual parent terminals exit0/no session;
+post-terminal process snapshot finds no matching fixture-workspace processes.
+That snapshot is not a new native process-group/wait4 proof. Root closure queue
+01a13cee-777e-75b1-8807-0ea9cd65cbb2 releases all4corecredits. No compiler/SDK/
+Photo operations, no production paths, no old admission replay. Fresh SDKv2
+admission still required; merged byte validation/pixels/performance remain open.

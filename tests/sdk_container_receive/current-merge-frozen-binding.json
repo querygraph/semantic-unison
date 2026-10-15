@@ -1,0 +1,746 @@
+{
+  "schema": "unison-current-container-merge-frozen-output-binding/1",
+  "utc": "2026-10-15T00:20:23.477053+00:00",
+  "complete": true,
+  "runs": [
+    {
+      "compiler": "stock",
+      "terminal": {
+        "owner_tool": 85623,
+        "chunk": "c61399",
+        "exit_code": 0,
+        "running_session_returned": false
+      },
+      "build": {
+        "path": "/private/tmp/unison-wakeup-stock-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "1a94874174d55d0ff117356a3769e4cddccd1dd656b514f49c062a716e5525f2"
+      },
+      "report": {
+        "path": "/private/tmp/unison-current-wakeup-stock-container-merge-20261014.json",
+        "bytes": 4560,
+        "sha256": "25324c80f0f3514f54ef11018aaee961ad784f36bbc305baf7340b97547019ad"
+      },
+      "actual": {
+        "schema": "unison-sdk-container-compact-merge/1",
+        "workspace": "/private/tmp/unison-sdk-container-merge-wizxar2h",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "source_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "base_sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+            "target_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "xmp_offset": 630,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "source_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "base_sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+            "target_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "xmp_offset": 3714,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "source_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "base_sha256": "9330bf02e83f6496e3452354ece9e8a2c2bbc73e348204ec7ee16c2cb4911f5b",
+            "target_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "xmp_offset": 1134,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          }
+        ],
+        "binary_sha256": "efc5b4be5006b94c7dae64474d3a7931d2dd99e6a0539dfdaba30a644a1e6167",
+        "build_receipt_sha256": "1a94874174d55d0ff117356a3769e4cddccd1dd656b514f49c062a716e5525f2",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a",
+        "scope": "current production CLI/loopback with compact cache only, generated original codec containers modified solely in fixed XMP regions; mock validators; no SDK/Photo/Adobe calls or changed-output decode qualification"
+      }
+    },
+    {
+      "compiler": "ox",
+      "terminal": {
+        "owner_tool": 30602,
+        "chunk": "546f48",
+        "exit_code": 0,
+        "running_session_returned": false
+      },
+      "build": {
+        "path": "/private/tmp/unison-wakeup-ox-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "75eab649a007ca5bc29d9289f7e270aaec442350ad2d42e6900dc46de4a2088d"
+      },
+      "report": {
+        "path": "/private/tmp/unison-current-wakeup-ox-container-merge-20261014.json",
+        "bytes": 4560,
+        "sha256": "6605d7cb55a99af2b592a224de30e37987434b9895b2d2d4d6e8d2fb26274c2c"
+      },
+      "actual": {
+        "schema": "unison-sdk-container-compact-merge/1",
+        "workspace": "/private/tmp/unison-sdk-container-merge-uovzt9_4",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "source_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "base_sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+            "target_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "xmp_offset": 630,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "source_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "base_sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+            "target_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "xmp_offset": 3714,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "source_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "base_sha256": "9330bf02e83f6496e3452354ece9e8a2c2bbc73e348204ec7ee16c2cb4911f5b",
+            "target_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "xmp_offset": 1134,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          }
+        ],
+        "binary_sha256": "99678081ddf380ea3e0e2908075892d00533f7bcb797abbe26254b78d9f70895",
+        "build_receipt_sha256": "75eab649a007ca5bc29d9289f7e270aaec442350ad2d42e6900dc46de4a2088d",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a",
+        "scope": "current production CLI/loopback with compact cache only, generated original codec containers modified solely in fixed XMP regions; mock validators; no SDK/Photo/Adobe calls or changed-output decode qualification"
+      }
+    }
+  ],
+  "frozen_preparation": {
+    "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/PREPARED.json",
+    "bytes": 7586,
+    "sha256": "ac01b8e706e6c95bedf180044ab1ed5557c2fbe30f795080e3a3b148a2aace9a"
+  },
+  "exact_output_witnesses": [
+    {
+      "compiler": "stock",
+      "codec": "uncompressed",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/uncompressed-disjoint/left/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "uncompressed",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/uncompressed-disjoint/right/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "uncompressed",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/uncompressed-partial-recovery/left/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "uncompressed",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/uncompressed-partial-recovery/right/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jpeg",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jpeg-disjoint/left/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jpeg",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jpeg-disjoint/right/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jpeg",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jpeg-partial-recovery/left/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jpeg",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jpeg-partial-recovery/right/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jxl",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jxl-disjoint/left/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jxl",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jxl-disjoint/right/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jxl",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jxl-partial-recovery/left/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "stock",
+      "codec": "jxl",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-wizxar2h/jxl-partial-recovery/right/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "uncompressed",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/uncompressed-disjoint/left/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "uncompressed",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/uncompressed-disjoint/right/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "uncompressed",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/uncompressed-partial-recovery/left/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "uncompressed",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/uncompressed-partial-recovery/right/image.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/uncompressed-merged.dng",
+        "bytes": 48005534,
+        "sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jpeg",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jpeg-disjoint/left/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jpeg",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jpeg-disjoint/right/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jpeg",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jpeg-partial-recovery/left/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jpeg",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jpeg-partial-recovery/right/image.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jpeg-merged.dng",
+        "bytes": 39016722,
+        "sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jxl",
+      "mode": "disjoint",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jxl-disjoint/left/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jxl",
+      "mode": "disjoint",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jxl-disjoint/right/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jxl",
+      "mode": "partial-recovery",
+      "side": "left",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jxl-partial-recovery/left/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    },
+    {
+      "compiler": "ox",
+      "codec": "jxl",
+      "mode": "partial-recovery",
+      "side": "right",
+      "output": {
+        "path": "/private/tmp/unison-sdk-container-merge-uovzt9_4/jxl-partial-recovery/right/image.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      },
+      "candidate": {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/jxl-merged.dng",
+        "bytes": 38237658,
+        "sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    }
+  ],
+  "matching_workspace_processes_on_post_terminal_snapshot": [],
+  "scope": "30 current stock/Ox mock-validator cases;24 retained merged replica outputs match3 frozen SDK candidates exactly. No SDK execution, decode/pixel/renderer/resource ceiling or process-group-reap qualification inferred from ps snapshot."
+}
