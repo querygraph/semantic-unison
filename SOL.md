@@ -3138,3 +3138,24 @@ reap and within12s testlimit. Failed fixtures intentionally retain external proo
 markers, not live children. Pinned evidence live-merge-aggregate-qualification.json.
 No SDK/Photo/UnisonCLI/compiler executed. One credit RELEASED. Native entry/source
 review/full mock receiving matrix still pending; full goal active.
+
+### Full live receiving mock passed; fresh native request ready/unadmitted
+
+Implemented run_live_merge.py admission wrapper. Native binds exact command/
+workspace/prepared/source/limits/deadline, checks again in independently owned
+worker; qualified v1 tool and fixed variants rederived from original+SDKaccepted
+target witness pins. Mock tool cannot enter native mode. Aggregate300s covers
+worker preflight+matrix, not total wrapper presupervision hashing.
+
+Actual mock53937/a3cf4a/0 passes9CLI/six fake validations on production stock
+client/Oxserver over3codecs. Exact final targets/noop identities/staging cleanup,
+all nineCLI receipts, six endpointgroup0 observations, aggregate+external proof
+closure and no unresolved markers pass. Evidence live-merge-full-mock-qualification.json.
+All4credits RELEASED queue01a13d28-5e19-7700-acef-f772517af54f, no successor.
+Seven pure admission refusal cases pass; native source-only preflight96729/
+f0da0d/0 passes without any SDK invocation.
+
+Fresh pinned request tests/qualification/sdk-live-merge-request-v1-20261015.json
+is SOURCE_READY_RUNTIME_UNADMITTED:6SDKcalls/3inputs/12states/4credits/300s,
+no Photo/Classic/Main/cache, no retries. Do NOT execute before fresh Root admission
+and exact start deadline. Earlier SDK slots remain consumed. Full goal active.

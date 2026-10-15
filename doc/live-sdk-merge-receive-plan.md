@@ -1,3 +1,10 @@
+Current checkpoint: executor/admission wrapper is implemented, complete mock
+receiving matrix and owner/aggregate lifecycle controls pass. Fresh native
+request [v1](../tests/qualification/sdk-live-merge-request-v1-20261015.json) is
+SOURCE_READY_RUNTIME_UNADMITTED. No SDK run has occurred under this request.
+Earlier source-only/pending paragraphs below record design history; this
+checkpoint supersedes their implementation status, not qualification scope.
+
 # Live SDK-gated scalar merge receiving: next finite test
 
 Preparation and lifecycle design; no SDK admission or native dispatch is supplied
@@ -130,3 +137,22 @@ proof and pre-dispatch refusal controls run without children. Actual fake-child
 lifecycle tests, independently enforced aggregate300s supervision, source-pinned
 admission and native CLI entry remain pending. A monotonic deadline checked by
 the runner is not itself aggregate or total-wrapper supervision.
+
+## Current executable request
+
+`run_live_merge.py` binds a native command to a fresh admission containing exact
+source, preparation, workspace and limits; the deadline is rechecked inside the
+owned worker before dispatch. Native mode revalidates qualified v1 tool, frozen
+accepted targets and all reconstructed scalar states against their provenance.
+Mock mode requires a MOCK build and cannot pass native provenance checks.
+
+Actual full mock matrix: nine stock-client/Ox-server CLI invocations, six original
+fake validators, all outputs exact and no-op identities unchanged; aggregate,
+nine CLI and six retained helper observations closed, no unresolved markers.
+Evidence: [full mock](../tests/sdk_container_receive/live-merge-full-mock-qualification.json).
+Seven pure admission refusal controls and actual source-only native preflight
+pass. Aggregate300s covers the owned worker including its repeated preflight;
+total wrapper preflight before that worker is not claimed to fit300s.
+
+The native request must receive a fresh explicit Root admission and start deadline
+before its exact command runs once. No retry or prior consumed slot reuse.
