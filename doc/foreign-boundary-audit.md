@@ -497,3 +497,37 @@ The broader foreign-call inventory, supported sanitizer/platform runs,
 representative corpus, filesystem fault matrix and enforced parent/child memory
 limits remain open M6 acceptance work. This audit narrows the reviewed surface;
 it does not close those gates.
+
+## Worker-reachable primitive inventory (2026-10-14)
+
+This source inventory follows `SemanticWorkers.execute` and its worker loop,
+`SemanticFile`, `SemanticHash`, and `SemanticDelta.apply_report_with_extension`.
+It narrows the inherited-FFI review work; it is not a review of the compiler's
+Unix/runtime C sources, every installed extension, or all inherited Unison FFI.
+The five private local primitives below are the only `external` declarations
+in the current SemanticFile/SemanticHash modules. Registration does not make
+arbitrary future extension native code safe.
+
+| Boundary | Worker use and ownership | Remaining obligation |
+| --- | --- | --- |
+| `unison_semantic_sha256_init/feed/finish` | Job-local hash context and bounded input, through SemanticHash. No shared context or callback. Existing native rooting/runtime review above applies. | Context/input exclusivity is a caller contract; compiler modes do not verify C. Other-platform native hashing is not qualified by macOS tests. |
+| `unison_semantic_prepare_writer/pwrite` | Apply only. Worker holds its output duplicate through completion; admission checks precede writes. Bounded native stack copy, no heap pointer retained across runtime release. | Output/status-flag exclusivity, one-attempt short-write/EINTR handling and caller publication fence remain necessary. No in-call I/O deadline. |
+| `Unix.LargeFile.fstat`, `Unix.dup`, channel conversion/descriptor lookup, `LargeFile.seek_in`, `really_input[_string]`, channel/Unix close | Each reader owns its duplicate/channel, checks regular kind and initial/final stamp, and closes on callback failure. Primary input and nested output verification use separate reader lifetimes. | `dup` shares an open-file-description position. Neither Safe.spawn nor immutable job records permit concurrent seek/read through the original or another duplicate. Borrowers must hold that position exclusively until settlement; separate opens are needed for independent concurrent readers. Successful reads remain observations, not a hostile mutation lock. |
+| Windows fallback `Unix.LargeFile.lseek` / `Unix.write_substring` | Apply's non-positional writer uses the worker-held private output. | It changes the shared position; do not infer POSIX positional-write guarantees or Windows runtime qualification. |
+| `Mutex`, `Condition`, `Atomic`, domain entry/join and Unix pipe write | Queue transitions use the pool mutex; mailbox payloads are immutable, cancellation is atomic. Worker closes job duplicates before publishing completion and notifying the owner. Owner retains pipe ends until shutdown/joins settle. The notification uses an immutable one-byte string (qualified change ad7a385). | Runtime primitives still require their supplied domain-safe implementation. Removal of an explicit scratch allocation does not establish allocation-free notification or recovery from arbitrary worker termination. Pipe errors other than EINTR/EAGAIN/EWOULDBLOCK propagate; complete unexpected-domain-exit recovery is not proved by ordinary shutdown tests. |
+| Extension/recognizer callbacks and portable ML parser/hash operations | Owner selects trusted immutable handles. Jobs call identification/inspection/observation/reconciliation/application without invoking the registry. Each callback receives the worker-local bounded reader. | Checked portable signatures constrain ML values, not foreign libraries, hidden mutable globals, arbitrary callbacks, parser heap use or native thread creation. Each new backend needs its own resource and foreign-boundary review. |
+
+Descriptor duplication at submission, CPU/filesystem admission, reply callbacks,
+read-observer logging, helper spawn/reap, clone/range creation and final rename
+belong to the owner/control path. They are not run by `execute` merely because
+an Apply job uses a previously cloned output. The trusted SDK validator is a
+supervised child, not an in-domain Adobe call. Therefore its allocator/task-host
+qualification remains separate from both this inventory and Safe.spawn.
+
+The current worker contract expressly forbids caller seek/read/write/close on
+borrowed descriptors until promise settlement. The 48-job diagnostic control
+uses independently opened inputs; it does not qualify simultaneous jobs sharing
+one open-file-description position. Deterministic reader cleanup and normal
+pool shutdown have current stock/Ox evidence in
+[the wake-up qualification](../tests/read_stats/wakeup-qualification.json).
+No new compiler/native test or sanitizer run was performed for this inventory.

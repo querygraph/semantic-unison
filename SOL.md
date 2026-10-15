@@ -2763,3 +2763,17 @@ five existing routes; no child matrix/compiler/test dispatched. Existing actual
 matrix evidence remains historical, not relabeled as a new wrapper runtime.
 Fresh merged-output v2 admission still absent on current readback; queued request
 is not a release. Goal remains active.
+
+### Worker-reachable foreign boundary source inventory
+
+During Photo HostV8 reservation (no compiler/core/SDK dispatch), traced current
+worker execution through SemanticFile/Hash/Delta. [Foreign audit inventory](doc/foreign-boundary-audit.md#worker-reachable-primitive-inventory-2026-10-14)
+now separates five local C primitives, inherited Unix/channel/synchronization
+operations, Windows fallback, trusted callback obligations and owner-only native
+work. Explicitly retains shared-open-file-position exclusivity and identifies
+unexpected worker/notification failure recovery as unproved, rather than treating
+Safe.spawn as an FFI proof. This is source review, not compiler-runtime C audit,
+new runtime evidence or all-inherited-FFI completion. HostV8 process-name snapshot
+found no matching runtime command; that is not owner terminal/release proof, so
+its reported reservation remains respected pending Root closure. Fresh merged
+v2 SDK admission is still not inferred from its queued request. Goal active.
