@@ -2952,3 +2952,31 @@ exceptional teardown are qualified. Kernel queries are SPI/current-host evidence
 not a future platform guarantee or escaped-child/owner-SIGKILL recovery promise.
 [Native contracts/source reference](tests/helper_group_observation/README.md).
 Full goal active, no native admission inferred/reused.
+
+### Optional retained-group callback integrated: stock regression passed
+
+HelperSupervisor.run now accepts optional observe_group, creating a private
+spawn-bound owner only when requested. Normal terminal monitoring queries before
+reaping; every waitpid path retires the binding first, including synchronous
+teardown/EINTR retry and lost-child handling. Unsupported/query failures yield
+None, never zero; diagnostic callback exceptions do not change helper policy.
+Default spawn/result/wire behavior is unchanged. Callback is owner-only and must
+not block, signal, reap, or reenter supervision. No diagnostic v1 format or SDK
+receiving executor activation yet.
+
+Actual stock helper suite39groups passes, owner31405/chunk884624/exit0/no session,
+including callback failure isolation and independent post-return ECHILD. No SDK
+or Photo invocation. Ox/native-bytecode full integration and optional teardown
+path qualification remain pending; previous primitive-only qualification is not
+relabelled as current integration proof. No full build claim. Full goal active.
+
+### HostV15 hold: optional lifecycle regression source prepared
+
+During Root exclusive18 HostV15, added focused opt-in timeout and pre-spawn
+cancellation controls, and enabled observation in the existing synchronous
+disconnect test. The latter asserts no fabricated terminal callback while
+confirming actual child reap before the owner loop resumes. These additions
+are NOT RUN; only the preceding39group stock integration run is actual evidence.
+No compiler/helper/core/SDK dispatched during this hold. Next after explicit Root
+closure/release: run current stock/Ox helper suites, then full serial builds.
+Current integration remains unqualified for SDK receiving until these pass.

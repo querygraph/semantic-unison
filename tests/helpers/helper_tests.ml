@@ -6,8 +6,8 @@ let helper = Sys.argv.(1)
 let limits = { H.timeout = 2.; terminate_grace = 0.05;
                stdout_bytes = 4096; stderr_bytes = 4096 }
 let supervisor () = H.create ~cpu_permits:2 ~max_children:2 ~max_pending:8
-let run ?(limits=limits) ?(weight=1) t c args =
-  H.run t ~weight c ~limits ~executable:helper ~arguments:args ~environment:[||]
+let run ?(limits=limits) ?(weight=1) ?observe_group t c args =
+  H.run ?observe_group t ~weight c ~limits ~executable:helper ~arguments:args ~environment:[||]
 let completed r = r.H.outcome = H.Completed && r.status = Some (Unix.WEXITED 0)
 let describe r = Printf.sprintf "outcome=%s status=%s stdout=%S stderr=%S"
   (match r.H.outcome with H.Completed -> "completed" | H.Cancelled -> "cancelled"
@@ -35,6 +35,26 @@ let validate ?(policy=V.Require) ?(inspect=inspect) ?configured mode =
 let rejected = function V.Rejected _ -> true | _ -> false
 
 let () =
+  test "optional retained-group observation precedes reap and cannot change result" (fun () ->
+    let t = supervisor () in
+    let observations = ref [] in
+    let r = Lwt_unix.run (H.run ~observe_group:(fun count ->
+      observations := count :: !observations;
+      failwith "diagnostic callback failure") t ~weight:1 (H.cancellation ())
+      ~limits ~executable:helper ~arguments:[|"identity"|] ~environment:[||]) in
+    check (completed r) (describe r);
+    check (List.length !observations = 1) "missing or repeated observation";
+    (match !observations with
+     | [Some n] -> check (n >= 0) "negative group count"
+     | [None] -> ()
+     | _ -> assert false);
+    (match r.child_pid with
+     | Some pid ->
+         (try ignore (Unix.waitpid [Unix.WNOHANG] pid);
+              failwith "child not reaped"
+          with Unix.Unix_error (Unix.ECHILD, _, _) -> ())
+     | None -> failwith "no child identity");
+    finish t);
   test "online CPU budget available" (fun () -> check (H.available_cpus () > 0) "no CPUs");
   test "physical CPU budget matches host topology or logical fallback" (fun () ->
     let logical = H.available_cpus () and physical = H.available_physical_cpus () in
@@ -92,6 +112,20 @@ let () =
       timed.child_pid = Some (int_of_string (String.trim timed.stdout)))
       "timeout lost its actual spawned identity";
     finish t);
+  test "optional observation preserves timeout and pre-spawn cancellation" (fun () ->
+    let t = supervisor () in
+    let calls = ref 0 in
+    let observe_group _ = incr calls in
+    let timed = Lwt_unix.run (run ~observe_group
+      ~limits:{limits with timeout = 0.15} t (H.cancellation ()) [|"ignore-term"|]) in
+    check (timed.outcome = H.Timed_out &&
+      timed.status = Some (Unix.WSIGNALED Sys.sigkill) && !calls = 1)
+      "observed timeout changed outcome or skipped terminal callback";
+    let c = H.cancellation () in H.cancel c;
+    let stopped = Lwt_unix.run (run ~observe_group t c [|"identity"|]) in
+    check (stopped.child_pid = None && !calls = 1)
+      "pre-spawn cancellation fabricated an observation";
+    finish t);
   test "literal argv, no shell" (fun () ->
     let t = supervisor () in
     let text = "$(touch /bad); `false` * ' \"\n" in
@@ -124,7 +158,9 @@ let () =
   test "disconnect cleanup kills and reaps with stopped owner loop" (fun () ->
     let t = supervisor () and c = H.cancellation () in
     let path = Filename.concat (Filename.dirname helper) "disconnect-pid" in
-    let child = run t c [|"pid-sleep"; path|] in
+    let observations = ref 0 in
+    let child = run ~observe_group:(fun _ -> incr observations)
+      t c [|"pid-sleep"; path|] in
     let rec ready attempts =
       if Sys.file_exists path then () else if attempts = 0 then failwith "child not ready"
       else (ignore (Unix.select [] [] [] 0.01); ready (attempts - 1)) in
@@ -137,6 +173,7 @@ let () =
     let reaped = try ignore (Unix.waitpid [Unix.WNOHANG] pid); false
       with Unix.Unix_error (Unix.ECHILD, _, _) -> true in
     check reaped "disconnected helper left running or unreaped";
+    check (!observations = 0) "synchronous teardown fabricated a terminal observation";
     H.cancel_and_cleanup c;
     let r = Lwt_unix.run child in
     check (r.outcome = H.Cancelled && r.status = Some (Unix.WSIGNALED Sys.sigkill))

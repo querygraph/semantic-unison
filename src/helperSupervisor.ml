@@ -6,6 +6,13 @@ external available_physical_cpus : unit -> int = "unsn_helper_available_physical
 external spawn_group :
   string -> string array -> string array -> Unix.file_descr -> Unix.file_descr -> int
   = "unsn_helper_spawn_group"
+type group_owner
+external group_owner_create : unit -> group_owner = "unsn_helper_group_owner_create"
+external group_owner_retire : group_owner -> unit = "unsn_helper_group_owner_retire"
+external spawn_group_owned :
+  string -> string array -> string array -> Unix.file_descr -> Unix.file_descr -> group_owner -> int
+  = "unsn_helper_spawn_group_owned_bytecode" "unsn_helper_spawn_group_owned"
+external retained_group_others : group_owner -> int = "unsn_helper_retained_group_others"
 external exited_unreaped : int -> bool = "unsn_helper_exited_unreaped"
 external signal_target : int -> int = "unsn_helper_signal_target"
 
@@ -262,7 +269,7 @@ let drain scratch stream =
   in
   loop 65536
 
-let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
+let execute ?observe_group c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
   let started = if Sys.win32 then 0. else monotonic_now () in
   let empty outcome =
     { outcome; status = None; child_pid = None; stdout = ""; stderr = "";
@@ -273,6 +280,20 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
     (* Prepare the entire owner before creating pipes or a child. Descriptor
        slots and the child PID are installed by nonallocating assignments;
        later record/closure/registry allocation can always find that owner. *)
+    let group_owner = match observe_group with
+      | None -> None | Some _ -> Some (group_owner_create ()) in
+    let retire_group () = match group_owner with
+      | None -> () | Some owner -> group_owner_retire owner in
+    (* Observation is diagnostic only. Query errors/unsupported platforms are
+       unknown, never an invented empty group. Callback errors cannot strand
+       a child or change its validation outcome. *)
+    let observe_before_reap () =
+      match group_owner, observe_group with
+      | Some owner, Some callback ->
+          let count = try let n = retained_group_others owner in
+            if n < 0 then None else Some n with _ -> None in
+          (try callback count with _ -> ())
+      | _ -> () in
     let descriptors = Array.make 4 Unix.stdin in
     let owns_descriptor = Array.make 4 false in
     let out = capture Unix.stdin limits.stdout_bytes
@@ -305,6 +326,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
     let rec reap_now () =
       if !owned_pid >= 0 then
         try
+          retire_group ();
           let _, status = Unix.waitpid [] !owned_pid in
           (* waitpid has released this PID. Clear ownership before the
              option allocation so failure cannot signal a recycled group. *)
@@ -312,12 +334,12 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
           reaped := Some status
         with
         | Unix.Unix_error (Unix.EINTR, _, _) -> reap_now ()
-        | Unix.Unix_error (Unix.ECHILD, _, _) -> owned_pid := -1 in
+        | Unix.Unix_error (Unix.ECHILD, _, _) -> retire_group (); owned_pid := -1 in
     let rec owns_child () =
       if !owned_pid < 0 then false else
       try ignore (exited_unreaped !owned_pid); true with
       | Unix.Unix_error (Unix.EINTR, _, _) -> owns_child ()
-      | Unix.Unix_error (Unix.ECHILD, _, _) -> owned_pid := -1; false in
+      | Unix.Unix_error (Unix.ECHILD, _, _) -> retire_group (); owned_pid := -1; false in
     let retire () =
       disposed := true;
       outcome := Cancelled;
@@ -375,6 +397,8 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
            descendants that change credentials or escape its group. *)
         (try signal_group !owned_pid Sys.sigkill with
          | Unix.Unix_error (Unix.EPERM, _, _) -> ());
+        observe_before_reap ();
+        retire_group ();
         let _, status = Unix.waitpid [] !owned_pid in
         owned_pid := -1;
         reaped := Some status;
@@ -404,7 +428,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
          signal that PID's group after it may have been recycled. *)
       let lost_child = match exn with
         | Unix.Unix_error (Unix.ECHILD, _, _) -> true | _ -> false in
-      if lost_child then owned_pid := -1;
+      if lost_child then begin retire_group (); owned_pid := -1 end;
       (try teardown () with _ ->
          (* A later status/cleanup allocation must not hide the first error.
             Unexpected OS refusal to reap remains outside a hard deadline. *)
@@ -421,7 +445,9 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
       pipe 2 3;
       out.fd <- descriptors.(0); err.fd <- descriptors.(2);
       Unix.set_nonblock out.fd; Unix.set_nonblock err.fd;
-      owned_pid := spawn_group executable argv environment descriptors.(1) descriptors.(3);
+      owned_pid := (match group_owner with
+        | None -> spawn_group executable argv environment descriptors.(1) descriptors.(3)
+        | Some owner -> spawn_group_owned executable argv environment descriptors.(1) descriptors.(3) owner);
       spawned_pid := !owned_pid;
       close 1; close 3;
       monitor () in
@@ -439,7 +465,7 @@ let execute c ~release ~owner_cleanup ~owner_settled limits executable argv0 arg
       raise exn
 
 type process_limits = { launcher : string; descriptors : int; address_space_bytes : int64 }
-let run ?argv0 ?process_limits t ~weight c ~limits ~executable ~arguments ~environment =
+let run ?argv0 ?process_limits ?observe_group t ~weight c ~limits ~executable ~arguments ~environment =
   let argv0 = match argv0 with None -> executable | Some name -> name in
   if contains_nul argv0 then invalid_arg "HelperSupervisor: NUL in argv[0]";
   validate ~limits ~executable ~arguments ~environment;
@@ -466,7 +492,7 @@ let run ?argv0 ?process_limits t ~weight c ~limits ~executable ~arguments ~envir
       release t ~weight ~child:true
     end in
   let execute_owned () =
-    execute c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
+    execute ?observe_group c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
   let failed exn =
     (try !owner_cleanup () with _ -> ());
     release_once (); fail exn in

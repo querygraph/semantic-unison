@@ -92,3 +92,9 @@ On macOS, an additional test opens an unrelated non-cloexec descriptor and prove
 that `POSIX_SPAWN_CLOEXEC_DEFAULT` excludes it from the helper. Other POSIX systems
 currently rely on unrelated application descriptors having close-on-exec set;
 the supervisor's own pipe descriptors always have that flag.
+
+The optional retained-group callback integration has focused controls for normal
+completion, callback exceptions, timeout, pre-spawn cancellation and synchronous
+disconnect teardown. A synchronous teardown retires its binding before blocking
+reap and emits no group observation. The latest added timeout/disconnect controls
+are source-only until the integration checkpoint records their actual runs.

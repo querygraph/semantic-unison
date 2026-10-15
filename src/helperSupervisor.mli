@@ -94,7 +94,8 @@ type process_limits = {
     not qualified on macOS. No RSS, group-wide memory/FD or sandbox claim. *)
 
 val run :
-  ?argv0:string -> ?process_limits:process_limits -> t -> weight:int -> cancellation -> limits:limits ->
+  ?argv0:string -> ?process_limits:process_limits ->
+  ?observe_group:(int option -> unit) -> t -> weight:int -> cancellation -> limits:limits ->
   executable:string -> arguments:string array -> environment:string array ->
   result Lwt.t
 (** [arguments] excludes argv[0]. The optional [argv0] preserves a generic
@@ -108,3 +109,12 @@ val run :
     not a sandbox. An optional trusted launcher applies process limits in its own
     new process, preserving target argv/environment, PID and supervisor group.
     Launcher trust/pinning belongs to the owner caller. *)
+
+(** [observe_group] is an optional owner-loop diagnostic callback, called only
+    on the ordinary terminal-child path before its PID is released. [Some n]
+    counts other members observed in the retained child's group on the qualified
+    macOS backend; [None] means unsupported or failed observation. The callback
+    may be absent on teardown/failure and is never validation or durable absence
+    proof. Exceptions from it are ignored. It must not block, reap children,
+    signal processes, or reenter supervision. Default execution does not allocate
+    a group binding or query the process table. *)
