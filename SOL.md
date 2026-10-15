@@ -2904,3 +2904,20 @@ This supersedes the UNBUILT/UNRUN checkpoint above for these sources only.
 No SDK/Photo call, fuzzing or old admission reuse. Generic diagnostics remain
 observational; the separate helper-group lifetime ledger and actual SDK-gated
 production merge receiving test remain unqualified. Full goal active.
+
+### Bounded receiving diagnostic parser and independent readback
+
+Implemented tests/validation_process/records.py for the opt-in helper diagnostic
+format: immutable endpoint/PID/status/candidate/capture observations,4MiBlog /
+20kline /4096record /4KiBstream bounds, strict framing/numeric/hex checks and
+separate capture/diagnostic clipping. Missing observations remain absent;
+repeated PID observations are not deduplicated into an invented lifetime proof;
+nonzero exits and exit0 findings do not become validator acceptance.
+
+Pure finite controls pass22 malformed cases and independently decode six actual
+retained stock/Ox mock records against their pinned original CLI reports, including
+arbitrary stderr bytes and exit0/errors1. Both Python3.14/system3.9 pass; this
+is not Python3.9 native-supervision qualification. [Pinned sources/reports](tests/validation_process/parser-qualification.json).
+No compiler, core executable, helper, SDK or Photo invocation occurred. Live SDK
+receiving executor/group-ledger work remains open; previous Root releases/admissions
+are not inferred as a new native slot. Goal active.

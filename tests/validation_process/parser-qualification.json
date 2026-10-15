@@ -1,0 +1,203 @@
+{
+  "schema": "unison-validation-diagnostic-parser-qualification/1",
+  "complete": true,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/records.py",
+      "bytes": 3647,
+      "sha256": "de46e14ae38d02a50c71b034e90f667f91eebffb9f1c7be4dfe42972dbd15f6c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/parser_test.py",
+      "bytes": 5226,
+      "sha256": "97f31783a092b25ddadac216f29274d716cf260226bfc84cba1b1577190a220f"
+    }
+  ],
+  "prior_cli_qualification": {
+    "path": "/Users/alexy/src/unison/tests/validation_process/qualification.json",
+    "bytes": 5519,
+    "sha256": "9fb5ca77c030fe005fade0bcbdd4d7db90083e25ce793f59d67f2ce21d47790d"
+  },
+  "runs": [
+    {
+      "report": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-parser-p5o9ujpb/RESULT.json",
+        "bytes": 3595,
+        "sha256": "9dd01ab3e10bece68eec9b933d31bdb946c467b9fdbb7ff1fb7e79eb729f4b10"
+      },
+      "actual": {
+        "complete": true,
+        "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [Clang 17.0.0 (clang-1700.6.4.2)]",
+        "malformed_controls": 22,
+        "actual_retained_log_readback": [
+          {
+            "compiler": "stock",
+            "actual_records": 3,
+            "pinned_prior_report": {
+              "path": "/private/tmp/unison-validation-process-stock-cli-20261014.json",
+              "bytes": 10294,
+              "sha256": "023b3f01c90d3a575c910d20dac35a63793581273d8fe7d232e8645c2f9d1bfc"
+            },
+            "current_log_pins": [
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/clipped/run-01.log",
+                "bytes": 12501,
+                "sha256": "ff809956f9324fe000b5af3ac6392624ee366ab1a4c1e897ab2665b813e23b1e"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/default/run-01.log",
+                "bytes": 3553,
+                "sha256": "3d118f6ac8603fa44179f9d1bf3e518ac69145a1f3d7ee69810afca16d5cd416"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-01.log",
+                "bytes": 4320,
+                "sha256": "583dd1fafbad7679aea964dbda1205c38e128d462970d2058ec3c438a240275a"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-02.log",
+                "bytes": 757,
+                "sha256": "287fe4dfc7cfad697c78061e9a42074cf979ccbe3618fd4d90d1ba232d7f4c6d"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-03.log",
+                "bytes": 3667,
+                "sha256": "70510a106fdd7138c9ee743094cbd14216687afe05db833f8b71594f146c2468"
+              }
+            ]
+          },
+          {
+            "compiler": "ox",
+            "actual_records": 3,
+            "pinned_prior_report": {
+              "path": "/private/tmp/unison-validation-process-ox-cli-20261014.json",
+              "bytes": 10294,
+              "sha256": "d69e316b0d62a468e9955d8196f6bd867560e858a404ef0a602abca5b08713da"
+            },
+            "current_log_pins": [
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/clipped/run-01.log",
+                "bytes": 12513,
+                "sha256": "8d32aaec5e1bd425b3ee79c7b006809f4518788a02bcec2adb9ba69843f09a15"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/default/run-01.log",
+                "bytes": 3565,
+                "sha256": "d59c74084166096768de0d1602ce602b39e65cc81f1046a2b72389c7f1714b7f"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-01.log",
+                "bytes": 4332,
+                "sha256": "9bbf67efd4f482b7109d63ae079243e5c0309c79beb8f7b1abb91fc9428fd6a6"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-02.log",
+                "bytes": 763,
+                "sha256": "0e6769bf07590f03a70e2dd61ee981e4173d215f61ac4ce82254e817ac12510a"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-03.log",
+                "bytes": 3679,
+                "sha256": "415dc178de4b05a3e9d6da9b08735a24df9c3ec1539375c8afed7ac4bdfc7ee0"
+              }
+            ]
+          }
+        ],
+        "scope": "pure bounded parser and existing synthetic logs only; no subprocess, native or SDK call"
+      }
+    },
+    {
+      "report": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-parser-egckjrko/RESULT.json",
+        "bytes": 3599,
+        "sha256": "2ed2395b410578ac12dbc804b41b265f7a12ac423f0c6b2d9b2f501652435eab"
+      },
+      "actual": {
+        "complete": true,
+        "python": "3.9.6 (default, Jan  9 2026, 11:03:41) \n[Clang 17.0.0 (clang-1700.6.4.2)]",
+        "malformed_controls": 22,
+        "actual_retained_log_readback": [
+          {
+            "compiler": "stock",
+            "actual_records": 3,
+            "pinned_prior_report": {
+              "path": "/private/tmp/unison-validation-process-stock-cli-20261014.json",
+              "bytes": 10294,
+              "sha256": "023b3f01c90d3a575c910d20dac35a63793581273d8fe7d232e8645c2f9d1bfc"
+            },
+            "current_log_pins": [
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/clipped/run-01.log",
+                "bytes": 12501,
+                "sha256": "ff809956f9324fe000b5af3ac6392624ee366ab1a4c1e897ab2665b813e23b1e"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/default/run-01.log",
+                "bytes": 3553,
+                "sha256": "3d118f6ac8603fa44179f9d1bf3e518ac69145a1f3d7ee69810afca16d5cd416"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-01.log",
+                "bytes": 4320,
+                "sha256": "583dd1fafbad7679aea964dbda1205c38e128d462970d2058ec3c438a240275a"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-02.log",
+                "bytes": 757,
+                "sha256": "287fe4dfc7cfad697c78061e9a42074cf979ccbe3618fd4d90d1ba232d7f4c6d"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l/observed/run-03.log",
+                "bytes": 3667,
+                "sha256": "70510a106fdd7138c9ee743094cbd14216687afe05db833f8b71594f146c2468"
+              }
+            ]
+          },
+          {
+            "compiler": "ox",
+            "actual_records": 3,
+            "pinned_prior_report": {
+              "path": "/private/tmp/unison-validation-process-ox-cli-20261014.json",
+              "bytes": 10294,
+              "sha256": "d69e316b0d62a468e9955d8196f6bd867560e858a404ef0a602abca5b08713da"
+            },
+            "current_log_pins": [
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/clipped/run-01.log",
+                "bytes": 12513,
+                "sha256": "8d32aaec5e1bd425b3ee79c7b006809f4518788a02bcec2adb9ba69843f09a15"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/default/run-01.log",
+                "bytes": 3565,
+                "sha256": "d59c74084166096768de0d1602ce602b39e65cc81f1046a2b72389c7f1714b7f"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-01.log",
+                "bytes": 4332,
+                "sha256": "9bbf67efd4f482b7109d63ae079243e5c0309c79beb8f7b1abb91fc9428fd6a6"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-02.log",
+                "bytes": 763,
+                "sha256": "0e6769bf07590f03a70e2dd61ee981e4173d215f61ac4ce82254e817ac12510a"
+              },
+              {
+                "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9/observed/run-03.log",
+                "bytes": 3679,
+                "sha256": "415dc178de4b05a3e9d6da9b08735a24df9c3ec1539375c8afed7ac4bdfc7ee0"
+              }
+            ]
+          }
+        ],
+        "scope": "pure bounded parser and existing synthetic logs only; no subprocess, native or SDK call"
+      }
+    }
+  ],
+  "actual_terminal": {
+    "chunk": "78972b",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "scope": "Pure Python3.14/3.9 controls and pinned retained stock/Ox fake-validator log readback only. Zero compiler/child/SDK/Photo invocation. Does not qualify process ownership, a validator verdict, or native supervisors under Python3.9."
+}

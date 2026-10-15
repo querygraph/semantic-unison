@@ -29,3 +29,22 @@ precedes validator interpretation and does not authorize publication, prove
 validation success, retain a PID reservation, or prove descendant-group absence.
 Do not signal its returned PID. This does not replace the separate helper-group
 ownership prerequisite for an actual SDK receiving pilot.
+
+
+[The independent parser](records.py) bounds logs to 4 MiB, recognized lines to
+20,000 characters, records to 4096 and decoded streams to 4096 bytes each. It
+rejects malformed/unknown framing, overflow, odd hex and inconsistent clipping;
+it preserves empty observation sets, duplicate diagnostic identities, nonzero
+statuses and capture-incomplete records. Its immutable records never authorize
+signaling or publication. SDK acceptance still requires independently parsing
+and binding the complete SDK protocol and its qualified tool/candidate pins.
+
+```sh
+python3 tests/validation_process/parser_test.py
+```
+
+[Pure qualification](parser-qualification.json) covers 22 malformed controls,
+actual six-record readback against pinned original CLI reports, arbitrary byte
+preservation, endpoints and empty/clipped/nonzero observations. Python3.14 and
+system3.9 both pass; this does not qualify Python3.9 native process supervision.
+No child process is launched by this parser test.
