@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+Prepared [unrun frozen warm512 part4 request](bench/sync/results/warm512-frozen-part4-prepared-request-20261015.json):
+OxCamlworker6/three modes/18rows54CLI, proposed18quietcredits/7200s. Source
+a6f0b695 and14execution/21runner hashes rechecked; workspace/allocation/output
+absent. Queued to Photo Root for scheduling, **unallocated/unstarted**. Part3
+remains failed/incomplete with resource-only acceptance and brew/review caveats;
+no retry/replacement or full-six-part claim. Frozen cohort still uses200ms
+EOF grace; separately qualified main2s successor is not silently substituted.
+Future late settlement must still fail closed. Part0e311d5f6 remains mandatory.
+Photo's V36 scope is separate and genuinely closed; its release is not a Unison
+runtime allocation. No compiler/SDK/Photo/benchmark process runs here.
+
 Root independently accepted the single settlement lifecycle run, all12postpins
 and resource closure; onecredit released. [Immutable allocation reconciliation](bench/sync/results/native-settlement-allocation-reconciliation-20261015.json)
 keeps actual dispatch's v1 reference distinct from separately published v2
