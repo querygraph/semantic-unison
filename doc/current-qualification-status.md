@@ -32,8 +32,12 @@ now passes47fixedchecks/compiler but is NOT active in profiles0/1.
 an unknown-global barrier and complete-member union planner. Ten pure controls
 passed. Root provisioned the sole `io-lanes-v1` EX_GLOBAL barrier, adopted in
 [proposalv3](shared-physical-io-proposal-v3.json). Disposable backend combined-close
-controls passed; canonical locking/probe, topology provider and joint runtime
-integration remain pending. CPU sharing is already implemented.
+controls passed; the [canonical lock-only probe](../tests/qualification/canonical-io-probe-actual-20261016.json)
+and [one tiny complete-local dispatcher job](../tests/qualification/shared-io-local-job-actual-20261016.json)
+passed and closed. The latter covers8synthetic cases/24CLI with both IO and CPU
+released after group settlement; it does not prove receiver-basis semantic fallback.
+Topology provider, general production integration and cross-project payload
+qualification remain pending. CPU sharing is already implemented.
 
 ## Acceptance scope audit
 

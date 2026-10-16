@@ -3,7 +3,7 @@
 This source successor connects the accepted existing-only EX_GLOBAL backend to
 `tests/shared_dispatch.py`. It is not a live bulk-job grant or production-Unison
 IO integration. The canonical lock-only probe passed separately; this new job
-integration has only mock admission/refusal coverage so far.
+integration now has one accepted tiny synthetic local-job execution, described below.
 
 Default shared commands remain CPU-only. IO is requested only with BOTH
 `SHARED_IO_ADMISSION=/absolute/root-receipt.json` and
@@ -33,11 +33,11 @@ receipts distinguish IO from CPU-only operation; unknown evidence includes
 retained IO FDs and every structured uncertain-close record. Close functions
 consume caller proofs; they do not independently establish child closure.
 
-No job with this mode has been admitted or executed. Before a first live job,
-prepare the complete fresh pinned Root request and qualify mocked lifecycle/
-settlement ordering plus a finite separately coordinated live synthetic job.
-The current mock tests cover source/admission/target/deadline refusals and
-unchanged default selection only; they do NOT cover the whole new lifecycle.
+The first tiny synthetic local job has now passed, after mocked full-lifecycle
+controls. This does not authorize any additional job or broaden the supported
+targets. The initial four mock tests covered source/admission/target/deadline
+refusals and unchanged default selection; later lifecycle controls and the
+scoped actual execution provide the additional evidence below.
 Existing native/UI lease acquisition, physical-member discovery, general
 production dispatchers, whole-process hard resource limits, and simultaneous
 cross-project payload qualification remain separate. No Photo payload or SDK
@@ -57,6 +57,13 @@ No actual IO or test children were used in these controls.
 
 A [separate tiny live-job request](shared-io-local-job-request-v1.json) freezes the
 new owner and existing24-CLI synthetic local-clone child. It is NOT the already
-completed canonical probe and is NOT admitted. Before dispatch, Root must
-coordinate the new job and publish the exact admission; compiled binary/receipt
-pins are independently revalidated by the dispatching operator as specified.
+completed canonical probe. Root admission `cc06492f` was consumed once.
+The [actual receipt](../tests/qualification/shared-io-local-job-actual-20261016.json)
+records owner86809/session5692 terminal49da7c/exit0/no session, worker86810
+reaped0/other group members absent, all8cases/24CLI waits0 and log hashes checked.
+IO and CPU00..07 were closed and execution source pins stayed unchanged. Root
+independently accepted the runtime terminal event. Local whole-source cloning
+precedes semantic inspection here: receiver-basis semantic fallback is not
+qualified by this job. No camera/SDK/Adobe input, production integration, topology
+independence, OS-thread or RSS hard cap is inferred. Any further IO job needs
+its own coordination; the original request and admission remain immutable.

@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+Actual [tiny shared IO dispatcher job](tests/qualification/shared-io-local-job-actual-20261016.json)
+PASSED/CLOSED: owner86809/session5692 actual terminal49da7c/0/no session;
+worker86810 reaped0/other group members absent before reap. All8 synthetic
+cases/24CLI waits0, exact outputs/basis/no-op and log hashes independently
+checked. CPU00..07 and EX_GLOBAL IO closed; source pins unchanged; Root
+independently accepted runtime item_completed evidence. Admissioncc06492f consumed.
+This supersedes earlier NOTadmitted/UNQUALIFIED notes for this exact tiny job;
+no receiver-basis fallback, realcamera semantics, production/nativeUI integration,
+physical topology or resource hard-cap claim. Photo V12 owns the next IO window;
+no competing IO or automatic successor. Transport-separated case remains source-only.
+
 Core receiving follow-up prepared: [transport-separated opaqueDNG fallback case](tests/private_dng_remote_fallback/README.md)
 reuses strictloopback owners for4stock/Oxclient/serverpairs,12CLI future scope.
 Audit requires actualsemanticdecline+receiverbasisclone, independentfull/complement/
