@@ -1,4 +1,15 @@
-# Generated-input receiving comparison preparation
+# Generated-input receiving comparison
+
+Current actual status: [V1 PASSED/CLOSED](../qualification/sdk-receiving-comparison-v1-actual-20261016.json),
+owner36282/0f8d61/0/no session,24CLI/48SDK helpers, all groups and CPU8/EXglobal
+closed. Admissionac55fe28 consumed once. [Report](../../bench/sync/results/sdk-receiving-comparison-v1-20261016/sdk-receiving-comparison.md)
+retains4warmups+20measured rows. Stock endpoint1/3 median3.384026/2.503401s;
+Ox3.364461/2.476375s. Descriptive generated receiving ratios1.3518/1.3586;
+not isolated SDK decode speedups, quiet timing or corpus qualification.
+All SDK reports have rawdigestvalid/decodeSUCCESS/errors0 and FOUR warnings,
+preserved as findings. Earlier source/preparation states below are historical;
+none is authority to replay this consumed request.
+
 
 `plan.py` constructs a fixed source-only comparison: stock/Ox, one versus three
 workers on each endpoint, one warmup and five measured repetitions for each of

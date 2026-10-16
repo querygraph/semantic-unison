@@ -1,7 +1,7 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T20:59:27Z. Comparison admission/workspace last checked
-absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
+Last updated: 2026-10-16T21:03:03Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
@@ -16,11 +16,27 @@ adding general APFS receiver-basis clone updates, DNG semantic extensions/SDE,
 optional per-file Adobe validation, and qualified OxCaml coordinated workers;
 deliver tested, reviewable code while preserving photos and existing workflows.
 
-**Immediate next task:** source review and fresh scheduling of the exact
-sequential/parallel receiving comparison request described below. Its entry,
-dispatcher, worker, independent auditor and fake-process lifecycle are implemented
-and tested. It has NOT been admitted or executed as an SDK comparison. Continue
-independent useful work while review is pending. No existing native grant is reusable.
+**Latest actual milestone:** SDK receiving comparison V1 PASSED/CLOSED ONCE.
+Actual owning-tool36282/f540b7 -> terminal0f8d61/exit0/no session, owner87016 /
+worker87017. Admissionac55fe28 consumed; never replay. All24CLI/48qualifiedSDK
+helpers independently reparsed with raw proxy/client/server/supervisor/pump and
+worker/group settlement. All172 execution source pins and borrowed8field epochs
+matched; unresolved[]. CPU00..07+EXglobal closed. Actualterminal and post-audit
+queued to Photo01a14685-697f and01a14685-fd19; independent Root adoption pending,
+not a sealing/resource hold. Sealed actual return:
+`tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json`.
+
+Report `bench/sync/results/sdk-receiving-comparison-v1-20261016/` preserves all
+24ordered rows (4warmups/20measured). Five measured samples/configuration:
+stock endpoint1/3 median3.384026/2.503401s; Ox3.364461/2.476375s, descriptive
+ratios1.3518/1.3586. SDK protocols all rawdigestvalid/decodeSUCCESS/errors0,
+FOUR warnings each retained. Generated-input end-to-end receiving only, includes
+hash/transport/staging/startup/SDK; not quiet, causal SDK speedup, pixel/corpus or
+production qualification. Offline report ownerd1500e/0 also closed.
+
+**Immediate next task:** deliver/adopt independent Root review of the actual
+sealed return, then continue remaining SOL acceptance/resource/corpus/platform
+requirements. Do not reconstruct this completed run from old absent snapshots.
 
 **Report preparation:** `bench/report_sdk_receiving_comparison.py` now independently
 re-audits comparison receipts before statistics. It preserves exact sample order
@@ -74,10 +90,10 @@ Receipt `compact-cache-torn-ledger-actual-20261016.json` preserves successor
 sources separately. Controlled corrupt inputs are not actual power-loss testing;
 uncertain-close lifetime remains unqualified beyond prior explicit scopes.
 
-**Current resources:** no Unison job or retained CPU/IO ownership remains from
-our completed work. Latest Photo notices released its relevant window; that is
-not a claim that Photo can never start a new window. Recheck fresh coordination
-before IO/SDK dispatch. Standing sharing is Unison8 / Photo8 / system2.
+**Current resources:** no Unison live owner or retained CPU/IO reservation.
+Comparison actual parent and offline audit owners closed. Photo was promptly
+notified; its independent scheduling adoption is separate from our actual tool
+terminal proof. Standing8/8/2 unchanged, no18borrow/newSDK grant.
 
 **Git/review:** workspace `/Users/alexy/src/unison`, branch
 `feat/semantic-dng-oxcaml`, fork `git@github.com:querygraph/unison.git`.
@@ -548,7 +564,7 @@ that differs from proving representative supported coverage.
 | M1/M4 | Representative semantic eligibility/private-reference closure and supported corpus strata; preserve exact fallback rather than broadening tags to make one camera pass. |
 | M2-G | Broader property/publication/fault combinations, platform guards and honest generic clone telemetry. Existing exact/cross-volume controls are not physical IO proof. |
 | M3 | Remaining compatibility/disconnect/restart/cancel/failure combinations; actual old-peer/current behavior must keep exact fallback and archive recovery. |
-| M4-V | Execute the freshly admitted comparison only after source review/scheduling; then mixed real helper/hash accounting, resource/cancellation and representative corpus qualification. Current48-call plan is prepared, not run. |
+| M4-V | Comparison V1 now actual24CLI/48SDK PASS/CLOSED with five measurements/configuration; continue mixed real helper/hash accounting, resource/cancellation and representative corpus qualification. No replay. |
 | M5 | Required conservative conflict, stale/missing base, partial-two-replica and fault scopes; do not implement arbitrary RDF/rendering merge merely to avoid conflicts. |
 | M6 | Complete benchmark/resource evidence, actual bounded mixed work and broader cancellation/platform scope. Samples/reservations are not hard RSS/FD/CPU limits or speedup. |
 

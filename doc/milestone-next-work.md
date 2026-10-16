@@ -280,3 +280,21 @@ Proposed24 CLI/48SDK calls, Unison8+EXglobal, fixed one warmup/five measured
 repetitions/configuration; shared-machine disclosures remain mandatory.
 Fresh Root source review and separate finite scheduling are pending. Prior
 multi-file V1 admission7b320b51 remains consumed/accepted, never reusable.
+
+## Actual receiving comparison checkpoint
+
+The [exact V1 receiving comparison](../tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json)
+now PASSED/CLOSED: owning tool36282/0f8d61/0/no session,24receiving calls and
+48qualified single-thread SDK helpers. Raw proxies and all client/server/pump/
+supervisor/helper/worker groups audited; CPU8/EXglobal closed,172 source pins
+and borrowed-input epochs match. All SDK reports preserve four warnings with
+errors0/rawdigestvalid/decodeSUCCESS. Four warmups and20measured rows remain
+in the [report](../bench/sync/results/sdk-receiving-comparison-v1-20261016/sdk-receiving-comparison.md).
+
+Median worker1/3 receiving ratios1.3518stock/1.3586Ox are descriptive for two
+warm generated inputs. They include hashing, transport, staging and helper
+startup; they do not isolate SDK CPU scaling or prove quiet timing, physical IO,
+hard RSS/FD/thread caps, corpus/semantic/pixel eligibility or production safety.
+The remaining M4-V/M6 work includes mixed helper/hash resource accounting,
+selected cancellation/fault scopes and representative supported corpus strata.
+This consumed admission is not an authorization for another native run.

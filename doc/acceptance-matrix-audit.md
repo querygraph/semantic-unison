@@ -18,9 +18,16 @@ Known-live helper spans are not CPU compute overlap or throughput evidence.
 This advances rows4/9/12 without closing their broader requirements.
 
 The distinct [receiving comparison request](sdk-receiving-comparison-request-v1.json)
-is source-frozen, not admitted or executed:24calls/48helpers maximum, endpoint
-workers1/3, stock/Ox, one warmup/five measurements per configuration. All172
-execution-source pins matched at Unix1792184033; admission/workspace absent.
+subsequently ran once and [PASSED/CLOSED](../tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json):
+actual36282/0f8d61/0,24CLI/48SDKhelpers, all raw proxy/client/server/pump/helper
+and worker groups independently audited, all172 postpins/borrowed epochs match,
+CPU8/EXglobal closed. Four warmups and20measured samples are retained in the
+[report](../bench/sync/results/sdk-receiving-comparison-v1-20261016/sdk-receiving-comparison.md).
+Worker1/3 descriptive median ratios are1.3518stock/1.3586Ox for these two warm
+generated inputs. This advances comparative end-to-end receiving evidence,
+not isolated SDK scaling, quiet timing, representative corpus or hard limits.
+All48 protocols retain four warnings each with errors0/rawdigestvalid/decodeSUCCESS.
+Admissionac55fe28 consumed once; no replay or automatic successor.
 The [offline reporter](../bench/report_sdk_receiving_comparison.py) and
 [seven synthetic/disposable controls](../tests/qualification/sdk-receiving-comparison-report-entry-controls-20261016.json)
 qualify report behavior only; synthetic timings are not measured SDK evidence.
