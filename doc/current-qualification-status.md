@@ -11,12 +11,21 @@ Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inheri
 | --- | --- | --- |
 | Reuse upstream clone paths | `wholeFileClone`, `CloneRange`, `copy.ml`; [whole-file controls](../tests/whole_file_clone/qualification.json) | Preserve upstream/platform behavior; no new ZFS/ReFS runtime claim |
 | General receiver-basis APFS updates | Ordinary files use the generic sink, independent of DNG; [cross-volume tests](../tests/cross_volume/qualification.json) | Representative workloads, physical-device performance and broader failure/property combinations |
-| Semantic extensions and SDE | Static format registry; exact DNG/JPEG profiles, bounded envelopes, advisory classification and conservative fallback; `doc/semantic-delta-v0.md` | Full acceptance-matrix coverage must be audited against exact fixture scopes; unsupported layouts remain ordinary exact transfer |
+| Semantic extensions and SDE | Static format registry; exact DNG/JPEG profiles, bounded envelopes, advisory classification and conservative fallback; `doc/semantic-delta-v0.md` | [Twelve-row audit](acceptance-matrix-audit.md) records partial coverage and open fixture/platform scopes; unsupported layouts remain ordinary exact transfer |
 | Metadata merge | Opt-in scalar merge and compact immutable common metadata bases; [quota/merge evidence](../tests/sdk_container_receive/quota-merge-qualification.json) | SDK-gated production merge receiving passed below; broader real-camera corpus remains; no general rendering-field or arbitrary RDF merge claim |
 | Optional Adobe validation | Per-candidate off/warn/require gate, driver pin/receipt checks, CPU budget and cancellation; actual SDK receive/host/frozen-output pilots are separately pinned | Broader real-camera/copy-only corpus and representative receiving-path/camera coverage; experimental native host remains separate |
 | Stock and OxCaml builds | Both current full Make builds+selftests, 41 helper groups/compiler and five receiving diagnostic cases/compiler [pass](../tests/validation_process/group-integration-qualification.json) | Preserve Make/Dune/platform qualification scopes; compiler-checked ML boundaries do not prove C/native contracts |
 | Coordinated workers/resources | Immutable worker jobs, bounded mailboxes and shared weighted permits; [checked workers](../tests/checked_worker/qualification.json), [resource integration](../tests/dng_backend_resources/qualification.json) | Production native threads, RSS, cancellation and scaling; estimates/covered allocators are not whole-process enforcement |
 | Performance | [Full warm128MiB x4 batch](../bench/sync/results/warm-128-v5-actual-return-20261015.json):18 configurations, five measured repetitions,108 total rows/324 CLI settlements; small synthetic matrices also exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
+
+## Acceptance scope audit
+
+The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to
+40 pinned supporting receipt references. Every row is partially qualified;
+receipt bytes were checked, not historical source parity or new runtime cases.
+Real-camera receiving, power-loss recovery, hard whole-tree memory/resource
+limits and broader platform/native coverage remain open. This source-only audit
+ran no test, SDK, Adobe or Photo payload operation.
 
 ## Reusable read-only inspection build
 

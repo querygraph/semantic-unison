@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+A [twelve-row acceptance scope audit](doc/acceptance-matrix-audit.md) now maps
+all required matrix categories to40 pinned supporting receipt references.
+Every row remains PARTIALLY_QUALIFIED. This is existing-document/source review,
+not new runtime execution, source-snapshot parity revalidation, independent
+implementation review or whole-goal completion. It keeps real-camera/SDK,
+power-loss/abrupt-owner, hardmemory/physicalIO and platform gaps explicit, and
+avoids promoting intermediate producer/publication receipts to newer scopes.
+No Photo/Adobe/payload/test dispatch during Root's shared native slot.
+
+
 Shared owner startup additionally refuses unsupported Python ownership primitives
 before pool access, avoiding a pointless retained grant when the interpreter
 cannot supervise anything. [Actual pure guard controls](tests/qualification/shared-owner-preflight-actual-20261016.json)

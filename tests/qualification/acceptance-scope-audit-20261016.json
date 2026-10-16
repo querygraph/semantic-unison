@@ -1,0 +1,319 @@
+{
+  "schema": "unison-required-acceptance-scope-audit/1",
+  "kind": "SOURCE_AND_EXISTING_RECEIPT_SCOPE_AUDIT_ONLY",
+  "full_goal_complete": false,
+  "all_rows_fully_qualified": false,
+  "new_runtime_executions": 0,
+  "new_photo_or_sdk_operations": 0,
+  "evidence_check": "Pinned local receipt bytes and documented scope; not replay, source-snapshot parity validation, independent implementation review or new test acceptance.",
+  "rows": [
+    {
+      "number": 1,
+      "requirement": "Exactness",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Independent SDE/SDR vectors, complement/full hashes, scoped synthetic materialization, exact CLI/no-op controls.",
+      "open_scope": "Full source-selected fork/property state across all supported filesystem and publication families is not established by kernel vectors.",
+      "supporting_receipts": [
+        {
+          "path": "tests/semantic/conformance/qualification-20261013.json",
+          "bytes": 13532,
+          "sha256": "ab26faf2532e54a2c9265ed10fddffca00e6f315383f12838f8ec4c3744ba713"
+        },
+        {
+          "path": "tests/qualification/shared-functional-actual-20261016.json",
+          "bytes": 4677,
+          "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "requirement": "Container coverage",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Synthetic classic TIFF/BigTIFF in both byte orders, embedded CR graph and independently placed protected values; narrow standard JPEG XMP profile.",
+      "open_scope": "Representative real-camera corpus, broader private tag/layout strata and photographic validity are not established. Unsupported layouts use ordinary exact transfer.",
+      "supporting_receipts": [
+        {
+          "path": "tests/dng_profile_v1/qualification-20261013.json",
+          "bytes": 570196,
+          "sha256": "bcfb3648ec7a2453def1d3871899a97560f9933b459b2ab1ea41c0cd9e38670f"
+        },
+        {
+          "path": "tests/jpeg/qualification.json",
+          "bytes": 153025,
+          "sha256": "8632ab6ca42ef99f0e560dfbc36ed22f08e2b4efd8e5abff41db3ee49001a6c6"
+        }
+      ]
+    },
+    {
+      "number": 3,
+      "requirement": "Malformed input",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Finite malformed directories, bounded graph/count/extent handling, wire rejection vectors and JPEG fill bounds.",
+      "open_scope": "No automatic fuzz/sanitizer campaign or whole-process parser RSS qualification. User-run fuzz workflows remain separate.",
+      "supporting_receipts": [
+        {
+          "path": "tests/dng_profile_v1/qualification-20261013.json",
+          "bytes": 570196,
+          "sha256": "bcfb3648ec7a2453def1d3871899a97560f9933b459b2ab1ea41c0cd9e38670f"
+        },
+        {
+          "path": "tests/semantic/conformance/qualification-20261013.json",
+          "bytes": 13532,
+          "sha256": "ab26faf2532e54a2c9265ed10fddffca00e6f315383f12838f8ec4c3744ba713"
+        },
+        {
+          "path": "tests/jpeg/fill-bound-qualification.json",
+          "bytes": 69529,
+          "sha256": "58c02bc0c8301ff1cf556a4e6cf9eaba743ee7bab088ab23b2e68e37b0406592"
+        }
+      ]
+    },
+    {
+      "number": 4,
+      "requirement": "Integrity",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Full/complement identities and corrupt wire proofs; generated SDK raw-digest controls and exact production receiving/merge pilots.",
+      "open_scope": "Real-camera SDK corpus, decoded pixel/encoding distinctions and universal Adobe validation are not inferred. Preview fidelity is Photo-owned evidence, not semantic-DNG integrity proof.",
+      "supporting_receipts": [
+        {
+          "path": "tests/semantic/conformance/qualification-20261013.json",
+          "bytes": 13532,
+          "sha256": "ab26faf2532e54a2c9265ed10fddffca00e6f315383f12838f8ec4c3744ba713"
+        },
+        {
+          "path": "tests/qualification/sdk-live-merge-v1-actual-return-20261015.json",
+          "bytes": 24219,
+          "sha256": "746ef5e5457604e2342ad5b061174137678c0e1955f63ff1056e6758a2ac6cb3"
+        }
+      ]
+    },
+    {
+      "number": 5,
+      "requirement": "Concurrent modification",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Retained regular-file producer witness, stable target/source binding, cooperative namespace guards and seeded canceled worker apply controls.",
+      "open_scope": "No atomic namespace compare-and-swap against hostile writers, reliable mount-incarnation detection, persistent OOM or universal async fault coverage.",
+      "supporting_receipts": [
+        {
+          "path": "tests/qualification/retained-producer-publication-20261013.json",
+          "bytes": 96600,
+          "sha256": "581715fc94e7c06557a88e71e9c6c47addbc16b3852959d24e9df969d088d095"
+        },
+        {
+          "path": "tests/workers/seeded-apply-stress-qualification.json",
+          "bytes": 11317,
+          "sha256": "9ea9a9e0f31f05365c08c2805e71e1b0fd1b77b28e955885e66383648caeab3e"
+        }
+      ]
+    },
+    {
+      "number": 6,
+      "requirement": "Failure and recovery",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Scoped native/Files/CLI publication faults, validator settlement, two-receiver merge rejection/retry and owned process cleanup.",
+      "open_scope": "Not a complete clone/write/properties/flush/rename/archive fault cross-product or power-loss durability proof. Additional-name/directory/legacy families and abrupt owner-SIGKILL remain distinct.",
+      "supporting_receipts": [
+        {
+          "path": "tests/qualification/retained-producer-publication-20261013.json",
+          "bytes": 96600,
+          "sha256": "581715fc94e7c06557a88e71e9c6c47addbc16b3852959d24e9df969d088d095"
+        },
+        {
+          "path": "tests/validation_settlement/qualification-20261013.json",
+          "bytes": 14189,
+          "sha256": "1db6b454317609cccd8cc26761c953f1e30a9a9568df494a4101a102ed753aa0"
+        },
+        {
+          "path": "tests/dng_merge/qualification.json",
+          "bytes": 97465,
+          "sha256": "dc57518a293bf00d841ae57a0a1ba6501db1166564a4ccf816f9404c50c0428b"
+        }
+      ]
+    },
+    {
+      "number": 7,
+      "requirement": "Filesystem behavior",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Owned APFS clone contracts plus private cross-volume fallback/exact/no-op controls and existing property/publication fixtures.",
+      "open_scope": "No new Linux/ZFS/ReFS runtime, physical allocation/write-amplification, mount-loss, independent-device throughput or exhaustive fork/ACL/sparse/compression coverage.",
+      "supporting_receipts": [
+        {
+          "path": "tests/whole_file_clone/qualification.json",
+          "bytes": 12471,
+          "sha256": "cbc40461f6c25ff041c6f903cf847d087396f589909f0b2fac24f7b02fad9d51"
+        },
+        {
+          "path": "tests/qualification/whole-file-clone-integration-20261014.json",
+          "bytes": 5867,
+          "sha256": "3acef23fbafc2f313bd4ffd1bcf3e09dfbb284acef8ccab562d354d2d3d6076b"
+        },
+        {
+          "path": "tests/cross_volume/qualification.json",
+          "bytes": 40333,
+          "sha256": "e0bb7cd24d65c8a22f1c6cd5ef432d33742fd051169e7f45040642844bdd69bc"
+        }
+      ]
+    },
+    {
+      "number": 8,
+      "requirement": "Compatibility",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Stock/Ox builds and same-host wire controls; archive roundtrip through installed unmodified2.53.5, missing-base refusal and later merge recovery.",
+      "open_scope": "Not complete GUI/platform/monitor/build or every profile/ignore/property/cancellation combination. Historical receipts retain their exact source snapshots.",
+      "supporting_receipts": [
+        {
+          "path": "tests/archive_downgrade/qualification.json",
+          "bytes": 28920,
+          "sha256": "d908686ff5fedd88463c2b9ad93cc5b28402b5b2dabebdf41ceb5cc50e87b312"
+        },
+        {
+          "path": "tests/qualification/shared-functional-actual-20261016.json",
+          "bytes": 4677,
+          "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        }
+      ]
+    },
+    {
+      "number": 9,
+      "requirement": "Parallelism and resource accounting",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Checked worker closures, seeded apply/cancellation parity, endpoint-local filesystem job gates and actual standing8 shared ownership/functional controls.",
+      "open_scope": "No hard whole-tree RSS/FD/CPU cap, physical-device shared IO lanes, arbitrary native thread fanout or race-sanitizer qualification. st_dev is not a physical disk identity.",
+      "supporting_receipts": [
+        {
+          "path": "tests/checked_worker/qualification.json",
+          "bytes": 240697,
+          "sha256": "f53cb62766a7920004bc84ce6f6b856fa9b348ca8899dffe9e9715e97c382b15"
+        },
+        {
+          "path": "tests/workers/seeded-apply-stress-qualification.json",
+          "bytes": 11317,
+          "sha256": "9ea9a9e0f31f05365c08c2805e71e1b0fd1b77b28e955885e66383648caeab3e"
+        },
+        {
+          "path": "tests/io_admission/runtime-qualification-20261013.json",
+          "bytes": 32148,
+          "sha256": "28468ff458255c2c76a6a304dfa41fa2558152dd393da3d0d1282db299ce0d4e"
+        },
+        {
+          "path": "tests/qualification/shared-entrypoints-actual-20261016.json",
+          "bytes": 9732,
+          "sha256": "fae17dba329a7c00b55678ea81b9aadd4d89b205e4829c1f95eb451042e30b7b"
+        },
+        {
+          "path": "tests/qualification/shared-functional-actual-20261016.json",
+          "bytes": 4677,
+          "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        }
+      ]
+    },
+    {
+      "number": 10,
+      "requirement": "Semantic merge",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Conservative opt-in fixed-region scalar reconciliation, compact common-base cache controls, archive downgrade/refusal and generated SDK receiving/merge.",
+      "open_scope": "No general RDF/Bag/Seq/Alt/qualifier/rendering merge, packet growth or distributed atomic two-replica commit. Unsupported shape/unknown edits must preserve conflict, not imply safe semantic equivalence.",
+      "supporting_receipts": [
+        {
+          "path": "tests/dng_reconcile/qualification.json",
+          "bytes": 423470,
+          "sha256": "cef3725b7c597c0e663a69c1b0704ab93238104ae8575cf2bc52ab18ed92c9b7"
+        },
+        {
+          "path": "tests/dng_merge/qualification.json",
+          "bytes": 97465,
+          "sha256": "dc57518a293bf00d841ae57a0a1ba6501db1166564a4ccf816f9404c50c0428b"
+        },
+        {
+          "path": "tests/sdk_container_receive/quota-merge-qualification.json",
+          "bytes": 14117,
+          "sha256": "3f7243f2a097fedc89ee93b0d0d680824d8989e5f4e5e6196ffa59bb1a9f13f0"
+        },
+        {
+          "path": "tests/archive_downgrade/qualification.json",
+          "bytes": 28920,
+          "sha256": "d908686ff5fedd88463c2b9ad93cc5b28402b5b2dabebdf41ceb5cc50e87b312"
+        },
+        {
+          "path": "tests/qualification/sdk-live-merge-v1-actual-return-20261015.json",
+          "bytes": 24219,
+          "sha256": "746ef5e5457604e2342ad5b061174137678c0e1955f63ff1056e6758a2ac6cb3"
+        }
+      ]
+    },
+    {
+      "number": 11,
+      "requirement": "Generic cloned transfer",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Upstream reuse, strict whole-file clone, receiver-basis ordinary-file path, scoped range adapter and exact/no-op generated comparisons.",
+      "open_scope": "Not filesystem-wide capability caching/mount incarnation, universal alignment/partial-effect/native-backend qualification or physical sharing proof. Failed timed part3 remains incomplete.",
+      "supporting_receipts": [
+        {
+          "path": "tests/whole_file_clone/qualification.json",
+          "bytes": 12471,
+          "sha256": "cbc40461f6c25ff041c6f903cf847d087396f589909f0b2fac24f7b02fad9d51"
+        },
+        {
+          "path": "tests/qualification/whole-file-clone-integration-20261014.json",
+          "bytes": 5867,
+          "sha256": "3acef23fbafc2f313bd4ffd1bcf3e09dfbb284acef8ccab562d354d2d3d6076b"
+        },
+        {
+          "path": "tests/cross_volume/qualification.json",
+          "bytes": 40333,
+          "sha256": "e0bb7cd24d65c8a22f1c6cd5ef432d33742fd051169e7f45040642844bdd69bc"
+        },
+        {
+          "path": "tests/qualification/shared-functional-actual-20261016.json",
+          "bytes": 4677,
+          "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        },
+        {
+          "path": "tests/qualification/native-copy-range-integration-20261013.json",
+          "bytes": 56562,
+          "sha256": "bb797de78a12925080f8c70120d68e35511ab7a41a89aae94141a5f4ce790ad7"
+        },
+        {
+          "path": "tests/native_copy_range/typed-context-qualification.json",
+          "bytes": 62787,
+          "sha256": "2278a512c5e310164671a6980518d8ad06de8f365e8e97886bcb0ed4cf7aad74"
+        }
+      ]
+    },
+    {
+      "number": 12,
+      "requirement": "Adobe invocation and CPU accounting",
+      "status": "PARTIALLY_QUALIFIED",
+      "documented_subset": "Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting.",
+      "open_scope": "No all-scanned validation feature, representative camera corpus, experimental SDK OS-thread/scaling/RSS/cancellation qualification or full mixed ExifTool/hash/Adobe workload proof. Each new SDK slot remains separately coordinated.",
+      "supporting_receipts": [
+        {
+          "path": "tests/validation_paths/qualification-20261013.json",
+          "bytes": 127002,
+          "sha256": "f038621f401a33e8739a01ec6bdce9ea24553b33295563d65e13ca5d0524927f"
+        },
+        {
+          "path": "tests/qualification/validation-companion-integration-20261013.json",
+          "bytes": 55088,
+          "sha256": "bd4b56f41253439940b7079cf88e81166b4ba965835237cb0b73d3131c967095"
+        },
+        {
+          "path": "tests/validation_settlement/qualification-20261013.json",
+          "bytes": 14189,
+          "sha256": "1db6b454317609cccd8cc26761c953f1e30a9a9568df494a4101a102ed753aa0"
+        },
+        {
+          "path": "tests/qualification/sdk-live-merge-v1-actual-return-20261015.json",
+          "bytes": 24219,
+          "sha256": "746ef5e5457604e2342ad5b061174137678c0e1955f63ff1056e6758a2ac6cb3"
+        },
+        {
+          "path": "tests/qualification/shared-functional-actual-20261016.json",
+          "bytes": 4677,
+          "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        }
+      ]
+    }
+  ]
+}
