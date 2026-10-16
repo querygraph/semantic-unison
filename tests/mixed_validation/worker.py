@@ -7,6 +7,15 @@ from audit import audit
 from shared_cpu_pool import UnresolvedOwnership
 
 
+def execute_plan(plan, *, deadline, **callbacks):
+    """Consume the exact source contract; caller still proves admission/FDs."""
+    from plan import commands
+    argv=commands(plan)
+    return execute(argv,deadline=deadline,
+                   metadata_version=plan['metadata']['version'],
+                   headroom=plan['limits']['probe_seconds'],**callbacks)
+
+
 def execute(commands, *, deadline, metadata_version, prepare, invoke, persist,
             check_sources, verify_input, clock=time.monotonic, headroom=120,
             inspect=audit):

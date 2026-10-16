@@ -120,3 +120,23 @@ child99655 reaped0/group absent/Unison8 closed; actual owner session55301,
 terminal4d83d1/0/no running session. No SDK, installed ExifTool, Photo data or
 EXglobal access. Native one-use entry/strict plan/inherited9FD binding remain
 the next integration work; this receipt supplies no native runtime grant.
+
+## Exact source plan
+
+`plan.py` validates declarations without opening files or acquiring resources.
+It derives two exact stock-then-Ox argv and fixes Unison8/EXglobal, two SDK/two
+metadata helpers,16 hash tasks/probe,120s probe/10s helper observation and the
+2192MiB/64-credit backend envelope. Its2GiB IO declaration is not an enforced
+physical limit. It requires pinned probe/build receipts, qualified single SDK,
+metadata version/dependency inventory, one input/eight-field epoch, ancestry and
+execution inventory outside the fresh disposable workspace. Checking these
+declarations does not verify their bytes or authorize access.
+
+`worker.execute_plan` consumes those derived argv/version/headroom; caller-owned
+source/input checks, actual invocation and durable publication remain mandatory.
+[Five plan and eight worker controls](../qualification/mixed-validation-plan-actual-20261016.json)
+passed with actual children404/407 reaped0/groups absent/Unison8 closed, owning
+terminal9e19fe/0/no session. No SDK/metadata/media/EXglobal execution occurred.
+The prior fresh-process receipt remains tied to its earlier worker source;
+native entrypoint, artifact preparation, exact9FD and dispatcher admission are
+still outstanding and must not be inferred from this pure contract.

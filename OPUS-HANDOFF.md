@@ -188,7 +188,17 @@ CPU8 closed; owner session55301/terminal4d83d1/0/no running session. Receipt
 `mixed-validation-journal-process-actual-20261016.json`. No SDK/installed
 ExifTool/Photo/EXglobal operation. The copied private binaries are control
 participants, not a new immutable native build inventory.
-Next: strictplan/admission/inherited9FD boundary and actual
+**Exact mixed plan source contract now implemented:** `mixed_validation/plan.py`
+derives stock-then-Ox argv, requires probe/build/tool/metadata-dependency/input/
+ancestry/execution pins and exact eight-field input epoch, fixes Unison8/EXglobal,
+120s probe/10s helper observation/2192MiB+64 backend credits and declared2GiB IO
+(not physical hard cap). `worker.execute_plan` consumes its argv/version/headroom.
+Five plan+eight worker controls actually passed, children404/407 reaped0/groups
+absent/CPU8 closed; actual terminal9e19fe/0/no session. Receipt
+`mixed-validation-plan-actual-20261016.json`. Pure declarations do not verify
+artifact bytes, grant runtime permission or qualify native FD ownership. Prior
+fresh-process receipt remains pinned to its earlier worker version.
+Next: native artifact preparation/admission/inherited9FD boundary and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

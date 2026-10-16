@@ -1,0 +1,78 @@
+{
+  "scope": "Five plan plus eight worker controls; no SDK/ExifTool/media/EXIO",
+  "rows": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/plan_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.017s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 404,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/worker_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.007s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 407,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "cpu_closed": true,
+  "prior_plan_terminal": {
+    "chunk_id": "b68c10",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "sources": [
+    {
+      "path": "tests/mixed_validation/plan.py",
+      "sha256": "647ee8faeb04c308afae0a91c7b0e869a3ea85bd03fe3fbb52517948a707e5b8"
+    },
+    {
+      "path": "tests/mixed_validation/plan_test.py",
+      "sha256": "6ecc4114651ad484a9a5668ad135920d7159b1e9538428436fb28592c9cef450"
+    },
+    {
+      "path": "tests/mixed_validation/worker.py",
+      "sha256": "4ceda7c6965ed3e0f0b4456e7ce3dd536302f815e0c2d4ef96e4ee9575516a85"
+    },
+    {
+      "path": "tests/mixed_validation/worker_test.py",
+      "sha256": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb"
+    }
+  ],
+  "owning_tool_terminal": {
+    "chunk_id": "9e19fe",
+    "exit_code": 0,
+    "no_session": true
+  }
+}
