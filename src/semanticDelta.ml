@@ -152,7 +152,7 @@ let decode ?(max_payload=FormatExtension.max_payload) s =
     if n > Int64.of_int max then raise (Bad "limit exceeded"); Int64.to_int n in
   if take 8 <> magic then raise (Bad "unknown envelope version");
   let profile = take (small 128) in
-  if profile = "" then raise (Bad "empty profile");
+  if profile = "" || String.contains profile '\000' then raise (Bad "invalid profile identifier");
   let nonce = take 32 in
   let size = integer () in
   let base_digest = take 32 in let target_digest = take 32 in let preserved = take 32 in
@@ -208,7 +208,7 @@ let decode_request s =
   if take 8 <> request_magic then raise (Bad "unknown request version");
   let nonce = take 32 in
   let name = take (small 128) in
-  if name = "" then raise (Bad "empty request profile");
+  if name = "" || String.contains name '\000' then raise (Bad "invalid request profile identifier");
   let size = integer () in let full = take 32 in let preserved = take 32 in
   let count = small 64 in
   if count = 0 then raise (Bad "empty request manifest");

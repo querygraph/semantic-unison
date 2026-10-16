@@ -243,3 +243,9 @@ now passed stock/Ox: identical706requested bytes each, recognized Adobe/MakN
 headers, exact source native epoch preserved, all owners/IO/CPU closed. Maker
 body bytes were skipped. This does not establish private-reference closure or
 semantic eligibility; real-camera receiving and SDK corpus remain unqualified.
+
+[Current SDE/SDR identifier hardening](../tests/qualification/sde-profile-identifiers-actual-20261016.json)
+rejects embedded NULs before registry selection. Stock/Ox independent conformance
+passes127commands/2191assertions each; private old-check negative controls fail
+as intended. Valid committed wire goldens are unchanged. This qualifies the
+codec change, not a fresh complete application build or camera receiving.

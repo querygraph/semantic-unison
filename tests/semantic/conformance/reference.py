@@ -170,8 +170,8 @@ def decode_envelope(data, max_payload=MAX_PAYLOAD):
     if reader.take(8) != SDE:
         raise Invalid("version")
     profile = reader.take(reader.integer(128))
-    if not profile:
-        raise Invalid("empty profile")
+    if not profile or b"\0" in profile:
+        raise Invalid("invalid profile identifier")
     nonce, size = reader.take(32), reader.integer()
     base, target, preserved = (reader.take(32) for _ in range(3))
     count = reader.integer(64)
@@ -201,8 +201,8 @@ def decode_request(data):
         raise Invalid("version")
     nonce = reader.take(32)
     profile = reader.take(reader.integer(128))
-    if not profile:
-        raise Invalid("empty profile")
+    if not profile or b"\0" in profile:
+        raise Invalid("invalid profile identifier")
     size, whole, preserved, count = reader.integer(), reader.take(32), reader.take(32), reader.integer(64)
     if count == 0:
         raise Invalid("empty count")

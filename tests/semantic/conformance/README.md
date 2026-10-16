@@ -96,3 +96,18 @@ python3 tests/semantic/conformance/vectors.py --write-goldens
 
 These are synthetic conformance tests, not an Adobe SDK validation, a claim
 of general DNG coverage, or a filesystem allocation/performance benchmark.
+
+
+Shared-machine manual route (fixed generated inputs only):
+
+```sh
+SHARED_CPU_CREDITS=8 make -f tests/Makefile sde-conformance
+```
+
+Use the qualified CPython3.14 interpreter on PATH. One compiler runs at a time,
+stock then Ox, within Unison's existing00..07 lane. Each compiler runs current
+production codecs plus a private negative control restoring the prior NUL-profile
+checks. The outer owner bounds/settles the whole group; no servers, SDK, Adobe,
+camera inputs or automatic fuzzing run. The[identifier qualification](../../qualification/sde-profile-identifiers-actual-20261016.json)
+retains actual results and lifecycle proof. Valid independent wire goldens remain
+unchanged; both decoders reject every NUL position in the three golden IDs.

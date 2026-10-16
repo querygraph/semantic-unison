@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Production SDE/SDR decoders now reject NUL-containing profile identifiers, matching
+FormatExtension.trusted's registrable identifier domain. Prior decoders accepted
+unregistrable wire IDs (local registry still rejected authorization; no successful
+write exploit claimed). [Actual independent conformance refresh](tests/qualification/sde-profile-identifiers-actual-20261016.json)
+stock+Ox PASS:127commands/2191assertions each, including158NUL-position
+rejections/compiler plus158independentPython rejections. Private builds restoring
+ONLYpriorprofilechecks fail newregression onbothcompilers; validwiregoldens
+unchanged. Actualowner21359/ebc0cb/0/no session, groupreaped/tokensclosed. New
+manual sde-conformance target ownsUnison00..07,1serialcompiler+2overhead;
+entrymapping10b29d/0closed. No Adobe/camera/RPC/nativefilesystem/fullbuildclaim.
+
+
 ACTUAL [receiving-clone bounded framing v2](tests/qualification/private-framing-input-actual-20261016.json)
 PASS/CLOSED: owner22960/initialterminal914a6a/exit0/no session, worker22963
 reaped0/othermembersabsent-before-reap, EXIO+CPU00..07closed. FreshRootadmission

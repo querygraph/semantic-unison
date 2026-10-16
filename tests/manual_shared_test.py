@@ -24,6 +24,11 @@ with patch.object(Path, 'is_file', return_value=True):
     local_clone = manual.command('private-dng-local-clone', out, env)
     assert local_clone == [sys.executable, str(manual.ROOT / 'tests/private_dng_local_clone/run.py')]
     assert manual.shared_resource_plan('private-dng-local-clone', env)['declared_peak_credits'] == 5
+    conformance = manual.command('sde-conformance', out, env)
+    assert conformance == [sys.executable, str(manual.ROOT / 'tests/semantic/conformance/shared.py')]
+    conformance_plan = manual.shared_resource_plan('sde-conformance', env)
+    assert conformance_plan['compiler_jobs'] == 1 and conformance_plan['declared_peak_credits'] == 3
+    assert conformance_plan['token_acquisition_implemented']
     framing = manual.command('dng-private-framing', out, env)
     assert framing == [sys.executable, str(manual.ROOT / 'tests/dng_private_data/run.py')]
     framing_plan = manual.shared_resource_plan('dng-private-framing', env)

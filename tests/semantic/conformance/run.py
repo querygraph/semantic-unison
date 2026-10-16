@@ -30,7 +30,7 @@ def main():
                         help="compile and generate immutable synthetic commands without running the test")
     parser.add_argument("--sanitize", choices=("address", "undefined", "address,undefined"),
                         help="instrument native C helpers; OCaml/runtime code remains unsanitized")
-    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation"),
+    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation", "profile-id"),
                         help="privately corrupt nonce binding or preservation hashing and require detection")
     args = parser.parse_args()
     compiler = shutil.which(args.ocamlopt)
@@ -59,6 +59,22 @@ def main():
     # Import-independent expected bytes are checked against the committed
     # goldens, not replaced with whatever the production codec happens to emit.
     verify_goldens(fixture_root / "golden")
+    # Independent decoder checks for the registry identifier domain; committed
+    # valid wire goldens and their hashes remain unchanged.
+    profile_id_rejections = 0
+    for _, profile, regions, nonce, base, target in golden_values():
+        before, after = inspect(base, profile, regions), inspect(target, profile, regions)
+        for data, start, decode in [(encode_envelope(plan(nonce, before, after)), 16, decode_envelope),
+                                    (encode_request(nonce, before), 48, decode_request)]:
+            for position in range(len(profile)):
+                malformed = data[:start+position] + b"\0" + data[start+position+1:]
+                try:
+                    decode(malformed)
+                except Invalid:
+                    profile_id_rejections += 1
+                else:
+                    raise AssertionError('reference accepted unregistrable profile')
+    print('Independent NUL profile rejections:', profile_id_rejections, flush=True)
     cases = wire_cases()
     pinned_manifest = json.loads((fixture_root / "golden/boundary-manifest.json").read_text())
     assert case_manifest(cases) == pinned_manifest, "deterministic boundary recipes differ from committed pins"
@@ -163,6 +179,11 @@ def main():
         source = (source_dir / "semanticDelta.ml").read_text()
         if args.negative_control == "nonce":
             source, count = re.subn(r"t\.nonce = nonce && t\.profile = base\.name", "t.profile = base.name", source, count=1)
+        elif args.negative_control == "profile-id":
+            previous = source
+            source = source.replace("profile = \"\" || String.contains profile '\\000'", 'profile = ""')
+            source = source.replace("name = \"\" || String.contains name '\\000'", 'name = ""')
+            count = 1 if source != previous else 0
         else:
             source, count = re.subn(r'feed_string preserved "SDE/0-preserved',
                                    'feed_string preserved "SDE/0-incorrect-preserved', source, count=1)
@@ -205,6 +226,7 @@ def main():
     if args.negative_control:
         assert result.returncode != 0, "corrupted production negative control unexpectedly passed"
         expected = ("response-nonce-zero: request proof binding mismatch" if args.negative_control == "nonce"
+                    else "unregistrable NUL profile accepted" if args.negative_control == "profile-id"
                     else "multi: independently computed whole/region/preserved proof mismatch")
         assert expected in result.stderr, result.stderr
         print("PASS private", args.negative_control, "negative control was detected", flush=True)

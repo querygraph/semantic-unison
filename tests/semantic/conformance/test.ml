@@ -53,6 +53,17 @@ let decode_sdr name path expected outer_error =
       if outer_error <> "-" then check (reason = outer_error) (name ^ ": outer SDR cap not checked first")
 
 let golden name base_path target_path request_path envelope_path profile region_text kind =
+  (* A profile must be representable by the local registry. Exercise every
+     byte position, including embedded NULs rather than just empty names. *)
+  let reject_nuls wire start decode =
+    for index = 0 to String.length profile - 1 do
+      let malformed = Bytes.of_string wire in
+      Bytes.set malformed (start + index) '\000';
+      check (match decode (Bytes.to_string malformed) with Error _ -> true | Ok _ -> false)
+        (name ^ ": unregistrable NUL profile accepted at " ^ string_of_int index)
+    done in
+  reject_nuls (read request_path) 48 SemanticDelta.decode_request;
+  reject_nuls (read envelope_path) 16 SemanticDelta.decode;
   let selected = extension kind profile region_text in
   let base_bytes = read base_path and target_bytes = read target_path in
   let base = inspect selected base_path and target = inspect selected target_path in

@@ -130,3 +130,9 @@ staging, mutation during inspection, truncated input, and trailing garbage.
 Unsupported eligibility falls back before writing; verification failures after
 planning are errors and cannot commit. Hashes are integrity checks, not peer
 authentication. Unison archive fingerprints remain unchanged.
+
+Profile identifiers in both SDE and SDR must be nonempty, at most128bytes, and
+contain no NUL byte, matching the locally registrable format identifier domain.
+Unknown nonempty NUL-free identifiers can decode, but still require exact local
+registry resolution before any authorization or write. Decoder rejection is not
+a substitute for profile selection or content/proof validation.

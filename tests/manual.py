@@ -30,6 +30,7 @@ Targets:
   shared-entrypoints      pure shared command/budget controls
   shared-sync-controls    pure sync budget/receipt controls, no binaries
   shared-io-controls      pure physical-IO claim controls; no device or IO lock access
+  sde-conformance         serial stock/Ox fixed independent wire controls; no SDK/camera
   dng-private-framing     serial stock/Ox fixed synthetic framing checks; no SDK/image reads
   dng-private-diagnostic  serial stock/Ox stdin diagnostic controls; generated inputs only
   private-dng-framing-input  admitted bounded receiving-clone diagnostic; explicit FRAMING_PLAN and SHA required
@@ -89,7 +90,7 @@ def shared_resource_plan(target, environment):
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
     build = target in ('stock-build', 'ox-build')
-    framing = target in ('dng-private-framing', 'dng-private-diagnostic')
+    framing = target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
     inspect_file = target in ('inspect-file', 'private-dng-framing-input')
     endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
@@ -101,7 +102,7 @@ def shared_resource_plan(target, environment):
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
-                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
+                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + inspector_workers + overhead,
             'inspector_workers': inspector_workers,
@@ -130,11 +131,11 @@ def command(target, output, environment):
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
-                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
+                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'private-dng-local-clone':
             require(shared >= 5, 'local clone controls require three worker plus two owner credits')
-        if target in ('dng-private-framing', 'dng-private-diagnostic'):
+        if target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic'):
             require(shared >= 3, 'framing controls require one compiler plus two owner credits')
         if target == 'sync-functional':
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
@@ -153,6 +154,8 @@ def command(target, output, environment):
                 '--plan', path, '--plan-sha256', digest]
     if target == 'private-dng-local-clone':
         return [sys.executable, str(ROOT / 'tests/private_dng_local_clone/run.py')]
+    if target == 'sde-conformance':
+        return [sys.executable, str(ROOT / 'tests/semantic/conformance/shared.py')]
     if target == 'dng-private-diagnostic':
         return [sys.executable, str(ROOT / 'tools/private-dng-framing/controls.py')]
     if target == 'dng-private-framing':

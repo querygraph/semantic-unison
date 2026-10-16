@@ -32,3 +32,7 @@ dng-private-diagnostic:
 .PHONY: private-dng-framing-input
 private-dng-framing-input:
 	python3 tests/manual.py private-dng-framing-input
+
+.PHONY: sde-conformance
+sde-conformance:
+	python3 tests/manual.py sde-conformance
