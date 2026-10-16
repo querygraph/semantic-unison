@@ -52,6 +52,12 @@ output/basis/complement/no-op/staging checks. All direct groups, server waits an
 pumps settled, actual parent exit0, CPU/IO closed. No real-camera eligibility,
 SDK/pixel validity, performance or physical storage savings follows from this.
 
+[Distinct-byte coverage successor](../tests/qualification/private-remote-distinct-fallback-actual-20261016.json)
+also passed4pairs/12CLI under a fresh admission, with1035264logical same-offset
+inheritedbytes/case and all exact preservation checks. Both layouts' samples
+remain preserved; no production algorithm or semantic eligibility changed.
+This is reuse/path coverage, not a physical savings or throughput comparison.
+
 ## Current diagnostic module packaging
 
 [Stock and Ox Dune build-only snapshots](../tests/qualification/current-dune-diagnostic-packaging-actual-20261016.json)

@@ -152,3 +152,22 @@ current no-child/control-flow proof only that owned idle parent was killed
 control run subsequently acquired and closed all8 descriptions. The dispatcher
 now rejects non-script argv before pool reads; its regression test confirms
 no pool acquisition. Historical unknown marker/stop proof remain unchanged.
+
+## Actual distinct-byte execution — 2026-10-16
+
+[Distinct actual receipt](../qualification/private-remote-distinct-fallback-actual-20261016.json):
+fresh admissiond1bf995b consumed once, actual owner97683/session12934 terminal
+4f2c29/exit0/no session, worker97684 reaped0/other group members absent. All four
+stock/Ox pairs passed twelve CLI calls and the independent saved-outcome/raw
+proxy/source/descriptor identity audit. Each update reported1035264logical
+same-offset inheritedbytes (98.73046875% of1MiB), above the983040 requirement;
+exact output, basis, complement, no-op FIVE and clean staging passed. CPU and
+EX_GLOBAL IO closed, unknown markers absent.
+
+This supplements the uniform fixture's successful3072-byte path observation,
+without rerunning/replacing its samples or changing the production algorithm.
+Different generated payload layouts exercise different matching opportunities;
+these are not timed comparisons or a full causal trace. No camera eligibility,
+SDK/pixel validity, physical extent sharing/write savings, throughput, IO topology
+or hard OS-thread/RSS limit is inferred. The prior v2 preparation notes are now
+historical for this exact consumed admission. No automatic successor is granted.

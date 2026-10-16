@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL [distinct-raw remote fallback v2](tests/qualification/private-remote-distinct-fallback-actual-20261016.json)
+PASS/CLOSED:4stock/Oxpairs/12CLI, each1035264logical sameoffsetinheritedbytes
+(98.73046875%of1MiB) with exactoutput/basis/complement/no-opFIVE/stagingpass.
+Owner97683/session12934 actual4f2c29/0/no session, worker97684reaped0/groupabsent;
+12savedcall/rawproxybindings+16copiedsourcepins/all18executionpins andexact
+CPU00..07+EXIOfdidentities independentlychecked. IO/CPUclosed/unknownabsent.
+Freshd1bf995b admission consumed once beforedeadline, Rootterminalnotified
+immediately, no replay/nextgrant. Originaluniformv1successfulreceipt417af937
+unchanged; no algorithm/profilechange or SDK/camera/pixel/physicalIO/timingclaim.
+Priorv2source-only/unrun notices superseded for this exactscope only.
+
 Current [stock/Ox Dune packaging builds](tests/qualification/current-dune-diagnostic-packaging-actual-20261016.json)
 PASS/CLOSED frommatching424inputmanifests/sourceheadbbe9f60: stock95344/55372/
 4c05a4/0; Ox96295/73195/9d4bc7/0 actualterminals/no sessions. CLIhashesand

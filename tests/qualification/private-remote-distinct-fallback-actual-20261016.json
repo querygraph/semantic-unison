@@ -1,0 +1,988 @@
+{
+  "schema": "firstpair-private-remote-fallback-owner-return/2",
+  "state": "FOUR_DISTINCT_COMPILER_PAIRS_TWELVE_CLI_PASSED_CLOSED",
+  "source_head": "b39fad5",
+  "admission": {
+    "path": "/private/tmp/unison-private-remote-fallback-admission-v2.json",
+    "bytes": 636,
+    "sha256": "d1bf995b556643de8f178424085e54d3d7477fef9d4baa3b1d33e563ee8e08dc"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/private-dng-remote-fallback-request-v2.json",
+    "bytes": 7579,
+    "sha256": "2b641e49bd5712c4e1afa2cdb5a16ea9ddb41146444aac26de032422a2327822"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-dng-remote-fallback-plan-v2.json",
+    "bytes": 3429,
+    "sha256": "8e23fc292fae42b989f7002119758c8c1a5da6f1a328c4ab45937d3a07b37388"
+  },
+  "actual_owner_terminal": {
+    "owner_pid": 97683,
+    "tool_session": 12934,
+    "initial_chunk": "ad3a0a",
+    "terminal_chunk": "4f2c29",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual write_stdin completion, not process absence",
+    "dispatch_unix": 1792119053.3382452
+  },
+  "closure": {
+    "worker": {
+      "pid": 97684,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 97684,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "remote_calls": [
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "seed",
+        "client_pid": 97686,
+        "supervisor_pid": 97685,
+        "server_pid": 97688,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "update",
+        "client_pid": 97694,
+        "supervisor_pid": 97693,
+        "server_pid": 97696,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "noop",
+        "client_pid": 97702,
+        "supervisor_pid": 97701,
+        "server_pid": 97704,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "seed",
+        "client_pid": 97717,
+        "supervisor_pid": 97712,
+        "server_pid": 97719,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "update",
+        "client_pid": 97725,
+        "supervisor_pid": 97724,
+        "server_pid": 97727,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "noop",
+        "client_pid": 97733,
+        "supervisor_pid": 97732,
+        "server_pid": 97735,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "seed",
+        "client_pid": 97741,
+        "supervisor_pid": 97740,
+        "server_pid": 97743,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "update",
+        "client_pid": 97749,
+        "supervisor_pid": 97748,
+        "server_pid": 97751,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "noop",
+        "client_pid": 97757,
+        "supervisor_pid": 97756,
+        "server_pid": 97759,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "seed",
+        "client_pid": 97765,
+        "supervisor_pid": 97764,
+        "server_pid": 97767,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "update",
+        "client_pid": 97774,
+        "supervisor_pid": 97772,
+        "server_pid": 97781,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "noop",
+        "client_pid": 97788,
+        "supervisor_pid": 97787,
+        "server_pid": 97790,
+        "settled": true,
+        "test_success_not_inferred": true
+      }
+    ],
+    "cpu_closed": true,
+    "io_closed": true,
+    "functional_pass": true,
+    "parent_terminal": "must be collected separately from owning tool"
+  },
+  "audit": {
+    "compiler_pairs": 4,
+    "cli_calls": 12,
+    "receiver_basis_fallback_cases": 4,
+    "payload_layout": "distinct-raw-v1",
+    "scope": "finite generated opaque-tag fallback only; not real-camera or SDK/pixel/performance proof"
+  },
+  "independent_reparse": {
+    "call_ledgers": 12,
+    "proxy_receipt_bindings": 12,
+    "copied_transport_source_pins": 16,
+    "inherited_CPU_IO_identity_set_verified": true,
+    "no_unknown_markers": true
+  },
+  "cases": [
+    {
+      "pair": [
+        "ox",
+        "ox"
+      ],
+      "payload_layout": "distinct-raw-v1",
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "8f6d194f350e45c816bba78434d658c9f191cf2257fad860cb52ec61cabb3d09",
+      "after_sha256": "a1689efcef713e049e9033f863bd9e9bf3e006cff8194ea04472dcccf92bd692",
+      "complement_sha256": "2622b59070b0197343c23e57aa4377bd3a89164e00f0aa97d141229eaca79d8f",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 1035264,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 97686,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97685,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97688,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.005663419986376539
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 97694,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97693,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97696,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002495319931767881
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 97702,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97701,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97704,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00023576599778607488
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "ox",
+        "stock"
+      ],
+      "payload_layout": "distinct-raw-v1",
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "8f6d194f350e45c816bba78434d658c9f191cf2257fad860cb52ec61cabb3d09",
+      "after_sha256": "a1689efcef713e049e9033f863bd9e9bf3e006cff8194ea04472dcccf92bd692",
+      "complement_sha256": "2622b59070b0197343c23e57aa4377bd3a89164e00f0aa97d141229eaca79d8f",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 1035264,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 97717,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97712,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97719,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00025285998708568513
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 97725,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97724,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97727,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00023957600933499634
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 97733,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97732,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97735,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0003005659964401275
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "stock",
+        "ox"
+      ],
+      "payload_layout": "distinct-raw-v1",
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "8f6d194f350e45c816bba78434d658c9f191cf2257fad860cb52ec61cabb3d09",
+      "after_sha256": "a1689efcef713e049e9033f863bd9e9bf3e006cff8194ea04472dcccf92bd692",
+      "complement_sha256": "2622b59070b0197343c23e57aa4377bd3a89164e00f0aa97d141229eaca79d8f",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 1035264,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 97741,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97740,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97743,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00025208998704329133
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 97749,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97748,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97751,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002475509827490896
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 97757,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97756,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97759,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002359930076636374
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "stock",
+        "stock"
+      ],
+      "payload_layout": "distinct-raw-v1",
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "8f6d194f350e45c816bba78434d658c9f191cf2257fad860cb52ec61cabb3d09",
+      "after_sha256": "a1689efcef713e049e9033f863bd9e9bf3e006cff8194ea04472dcccf92bd692",
+      "complement_sha256": "2622b59070b0197343c23e57aa4377bd3a89164e00f0aa97d141229eaca79d8f",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 1035264,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 97765,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97764,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97767,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002413680194877088
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 97774,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97772,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97781,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002456479996908456
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 97788,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 97787,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 97790,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002462590055074543
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/OWNER-TERMINAL.json",
+      "bytes": 262,
+      "sha256": "a56a7b352aeb675b5d005674ef79392714d6de95fabf5b1ddb9a1f492711b202"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ATTEMPT.json",
+      "bytes": 200,
+      "sha256": "54d5a6f3eaffb701dee868dce308cdeacd275faa2d88a5d169b2e8c6847ecd94"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/START.json",
+      "bytes": 356,
+      "sha256": "39f0b2b390204001ef528f8c7997d673dfc9e5f13c9510849804b197b9ff05f9"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/WORKER-PACKET.json",
+      "bytes": 4347,
+      "sha256": "294b6b75311b5e0033fdcadf2074ad6fc619396ad1b4485eba577f2823cac45e"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/WORKER-RESULT.json",
+      "bytes": 82796,
+      "sha256": "d872c283dae13e895c99dafa34aaadc1bfb22bd74f2ed52da2b8ed92026494a0"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/REMOTE-SETTLED.json",
+      "bytes": 2965,
+      "sha256": "2f59d35f0afb7cfa66141ed73adf7e7ab9ed4462683a177c666cd5d47c99988e"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/AGGREGATE-CLOSED.json",
+      "bytes": 3380,
+      "sha256": "74fe4cbdedb4c8e1946972ad04099d3aadca61fa1dd326f7d01a571d29f20889"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/seed-INTENT.json",
+      "bytes": 691,
+      "sha256": "4e2f7674b4cac943ec07b83a4191cfce7b4e3026f6cc64aaa0e4907e2bc58323"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/seed-OUTCOME.json",
+      "bytes": 6222,
+      "sha256": "58236075abee812c0c6ae786e67e42612bf72f858aa1c9ce28df5dc453715a14"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/seed-proxy.json",
+      "bytes": 1077,
+      "sha256": "6a99d05a92c6c68c145d6cca4188253d44336b284f96fd4fc465ce12f918907f"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/update-INTENT.json",
+      "bytes": 693,
+      "sha256": "f8bf62a531e8f30f330568c056bd2363b8ea4e3fc7205e2e0308000403d31136"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/update-OUTCOME.json",
+      "bytes": 6767,
+      "sha256": "666715e4100037a3fa97f9aac8c70afaac4ccf2e571475e4e36815daf153450e"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/update-proxy.json",
+      "bytes": 1089,
+      "sha256": "174b1bd832869f319619e6d3790067db67a25a1ff8c31aabf78431d32ab398e3"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/noop-INTENT.json",
+      "bytes": 691,
+      "sha256": "24b40b6b32e649c5415633c386aa3c06ea7fc911b79a3efde56ce430eb873dc3"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/noop-OUTCOME.json",
+      "bytes": 3857,
+      "sha256": "d5e5c90ad14d064a234a936eba0fe9b09aba93947db81abdeef9a53506325b3d"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/noop-proxy.json",
+      "bytes": 1074,
+      "sha256": "f94265e8cedd0695fff58841e084562b1a5528c40c995c8eed28f29e7ff5991c"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-ox/CASE.json",
+      "bytes": 18891,
+      "sha256": "defeb563e7642ffd3270f379926411678ac05fb36a02db17281f57724fcac409"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/seed-INTENT.json",
+      "bytes": 700,
+      "sha256": "b5c176aa8be513c6f47b9a38455cf49bf9f27b1eb9c122c7baabc40a46e3d09c"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/seed-OUTCOME.json",
+      "bytes": 6260,
+      "sha256": "2067488b7c42866f83b48e0396cf01fe7dd22efd413437213ef1f78952ecab1b"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/seed-proxy.json",
+      "bytes": 1080,
+      "sha256": "b4b3ce020e4017e05f6a7c3cfbd322f865f8bf1b0057d901f208e0f33a1a2ec4"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/update-INTENT.json",
+      "bytes": 702,
+      "sha256": "8a15a05ac58eeec332683eb9d22f6c3bd1159fd4ed87047685ed283ca66f5f13"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/update-OUTCOME.json",
+      "bytes": 6824,
+      "sha256": "191738cff8baafc35d4af278976f4d3eea586293015c28827cb1a87f228a9bba"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/update-proxy.json",
+      "bytes": 1102,
+      "sha256": "425f3e5455daaaaf5a2c62527a08f301d4bd67d10eb0c78da9a563c4b6109d13"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/noop-INTENT.json",
+      "bytes": 700,
+      "sha256": "e443df2833d53c46e86533816018206516f0b160f9d756a55da22c4d5c47a833"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/noop-OUTCOME.json",
+      "bytes": 3889,
+      "sha256": "58703841223c1f7b026be74cbdfb3afd393ed04614ef15c3d8c67a30e4dc3341"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/noop-proxy.json",
+      "bytes": 1087,
+      "sha256": "3f842fe6498afd0f223d12cc914a6adb3c01fcd6cfd67464d12e145951fadb91"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/ox-stock/CASE.json",
+      "bytes": 19021,
+      "sha256": "450d1be5dd58dc696ab32b0a33ba29a223fce42f40abacc2d6d0eff7869e86c7"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/seed-INTENT.json",
+      "bytes": 700,
+      "sha256": "02ca2c8b9291d89f5795cd3eb03b4de4071c34118a03ce778443c33ae1bc41aa"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/seed-OUTCOME.json",
+      "bytes": 6248,
+      "sha256": "9585bd820b24b97b0e8b3f07822e56d5dc5203c03c00380069efcd5ed160dd1c"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/seed-proxy.json",
+      "bytes": 1080,
+      "sha256": "c2b28c0c74d20b98d1e764e4b0e0dc4f0978317bbeba5617a3b802596f887a95"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/update-INTENT.json",
+      "bytes": 702,
+      "sha256": "d00928b075203db23521942c9cd703acbac7562c2b734f31848f07e6a9612773"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/update-OUTCOME.json",
+      "bytes": 6787,
+      "sha256": "48baddd9767a473b732c7e7bc80d4f5a1d3111383a254def8ab866b6b5a7057f"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/update-proxy.json",
+      "bytes": 1076,
+      "sha256": "236b748314829bd279a46ebd2ce9bad373882dd16d061896894ce33c9dc0c43f"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/noop-INTENT.json",
+      "bytes": 700,
+      "sha256": "8283ed1c18302e19e01053bc3c9511e92b5f4d680772b69818ac54ee1ebc63ed"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/noop-OUTCOME.json",
+      "bytes": 3871,
+      "sha256": "3548477828e59894581623c7a4efd303e5ceef2522c0e9b9f17ab807dbbc1198"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/noop-proxy.json",
+      "bytes": 1087,
+      "sha256": "efe2e4767ab928493e36977994a70894759d4e8d41ff06d170cef04a66df8b84"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-ox/CASE.json",
+      "bytes": 18954,
+      "sha256": "7535ef859fb1cca316e96e76978813c6f996f7b78349a8fcc54f1e4108c554de"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/seed-INTENT.json",
+      "bytes": 709,
+      "sha256": "71a2ac97103331ebf36e679e2b55e6d89e4cd4938bf7e9c3dfc48baab42d0827"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/seed-OUTCOME.json",
+      "bytes": 6310,
+      "sha256": "e119d06af7e2aeb74065e0bad6f16ea04615aa18eae7131fe1b868e2bd86b6d9"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/seed-proxy.json",
+      "bytes": 1078,
+      "sha256": "b2163105eb3841498c413a7670a6e83bab73133213daad17a5b75f98bed84d36"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/update-INTENT.json",
+      "bytes": 711,
+      "sha256": "bb8976149bc66005163406e8f9d8a4b1707bb2c0ea929cfcbf6a3e6c05a5bfdc"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/update-OUTCOME.json",
+      "bytes": 6819,
+      "sha256": "6482e6834ae848b5d3d1ee2b5e29228ce2995326bcd4043cf1de8e2181c6e6a4"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/update-proxy.json",
+      "bytes": 1088,
+      "sha256": "e2ccd030dc0cc14488b162f7397142850c88d93a897aa89d47084eae1947078c"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/noop-INTENT.json",
+      "bytes": 709,
+      "sha256": "ea3a73b221b8da99e05cd49c60dfa146bbe563f247c27ac4b332116321302e59"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/noop-OUTCOME.json",
+      "bytes": 3881,
+      "sha256": "e3315454a3afa8ceb270494b5b00f38bc0121ea83f0519d0f392ed9e826d118a"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/noop-proxy.json",
+      "bytes": 1075,
+      "sha256": "71a4ec10dee24c095fffe81d1af2e747f01137aacf12e939e81ab9cf5f289d4e"
+    },
+    {
+      "path": "/private/tmp/u-rf-76ce91a4d29b/stock-stock/CASE.json",
+      "bytes": 19061,
+      "sha256": "3655d93a5ca8f0d3182296d81c79e0a20075fbab600bb98dc578e017301983b2"
+    }
+  ],
+  "uniform_predecessor_unchanged": {
+    "path": "/Users/alexy/src/unison/tests/qualification/private-remote-fallback-actual-20261016.json",
+    "bytes": 32799,
+    "sha256": "417af937c074a25aed192c1250141bbd6045e9abaac8f7c954dd6643f4d992dc"
+  },
+  "scope": [
+    "NEW original distinct-raw-v1 generated1MiBfixtures only, not retry/replacement of uniform predecessor",
+    "Unsupported50740 semantics decline; ordinary immutable receiver-basis transfer exact output/basis/complement/no-op/staging pass",
+    "1035264logical sameoffset inheritedbytes percase; not physical writes/extents or throughput",
+    "No real-camera semantic eligibility/SDK/Adobe/pixel/Photo/source/Main/cache access",
+    "No automatic successor/admission reuse/production IO topology or hardOSthread/RSS qualification"
+  ],
+  "owner_return": {
+    "path": "/private/tmp/u-rf-76ce91a4d29b/OWNER-RETURN.json",
+    "bytes": 33128,
+    "sha256": "abe3e600b2a758ea0d2c80204b08d1cee68d59982d8f3a81e949688f02dda639"
+  }
+}
