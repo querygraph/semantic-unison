@@ -18,6 +18,15 @@ Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inheri
 | Coordinated workers/resources | Immutable worker jobs, bounded mailboxes and shared weighted permits; [checked workers](../tests/checked_worker/qualification.json), [resource integration](../tests/dng_backend_resources/qualification.json) | Production native threads, RSS, cancellation and scaling; estimates/covered allocators are not whole-process enforcement |
 | Performance | [Full warm128MiB x4 batch](../bench/sync/results/warm-128-v5-actual-return-20261015.json):18 configurations, five measured repetitions,108 total rows/324 CLI settlements; small synthetic matrices also exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
 
+## Reusable read-only inspection build
+
+[Stock and Ox inspector build-only controls](../tests/qualification/inspector-build-only-actual-20261016.json)
+pass after restoring the missing xmpMerge build dependency. Retained builds pin
+compiler, sources and binary; no inspector/image/SDK invocation occurred.
+[Pure command controls](../tests/qualification/inspector-command-controls-actual-20261016.json)
+pass under the shared owner. Copy-only real-camera eligibility/receiving is next,
+subject to candidate/source-ancestry and physical IO coordination with Photo.
+
 ## Actual live SDK merge milestone
 
 The [six-call production live merge return](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json)
@@ -62,7 +71,7 @@ Median update times37.423/36.700/69.659s (ordinary/clone/semantic); semantic
 returned12KiB writes over a2GiB corpus but was slower sequentially. This is
 not parallel/OxCaml512MiB, full six-part, single2GiB-file or physical-I/O proof.
 [Raw data](../bench/sync/results/warm-512MiB-4files-part0-20261015.json) retain
-all receipts. Subsequent parts are unallocated and must retain matched provenance.
+all receipts. Later partition outcomes below retain the matched frozen provenance.
 
 ## Completed warm512 stock worker6 partition
 
@@ -74,7 +83,7 @@ audit passes; zero SDK helpers expected, no unresolved markers. Exact source and
 runner pins stayed matched to part0. Median ordinary/clone/semantic update times
 are37.027/36.344/34.209s (five measured repetitions, stockworker6).
 Semantic elapsed time is about7.6% below ordinary in this warm generated test.
-Four remaining partitions, Ox512 and broader performance remain unqualified.
+See later partition outcomes below; the full six-part matrix remains incomplete.
 The mandatory part0 overlap addendum remains attached; no clean-cohort claim,
 sample replacement or successor execution follows. Actual closure sent to Photo
 Root for independent resource adoption;18credits released on the Unison side.
@@ -90,8 +99,8 @@ Frozen14execution21runner pins unchanged. Medians36.346/35.664/34.684s
 this warm generated control. All five bounded source-activity disclosures stay
 attached; exactrowimpact unknown, no absolutelyquiet claim. Five complete512
 partitions now exist, but part3 remains failed/incomplete: no fullsix-part
-qualification or physicalIO/compiler-speedup claim. Standing8/8 sharing is
-source-prepared; token/lifecycle/IO/memory integration remains unqualified.
+qualification or physicalIO/compiler-speedup claim. Standing8/8 token ownership and finite functional sharing are qualified above;
+physical IO/memory isolation and throughput remain unqualified.
 
 The [Oxworker6 part4 result](../bench/sync/results/warm512-frozen-part4-actual-return-20261015.json)
 passes18rows/54CLI: actual57036/f228d4/0/no session, aggregate30613 reaped0/others
@@ -99,7 +108,7 @@ absent in2082.230s, independently audited client/server/supervisor cleanup,
 SDKhelpers0 and unresolved empty. Source14/runner21 pins unchanged. Ordinary,
 clone and semantic medians36.490/35.854/35.019s; semantic about4% below ordinary
 in this partition, slightly slower than stockworker6's separate-slot result.
-No general compiler-speedup claim. Part3 stays incomplete, part5 remains unrun;
+No general compiler-speedup claim. Part3 stays incomplete; part5 passed above;
 the series retains all timing caveats and no full-matrix/physicalIO claim.
 
 The [settlement successor lifecycle](../bench/sync/results/native-settlement-lifecycle-actual-return-20261015.json)
@@ -129,8 +138,8 @@ add18passed rows/54settled CLI: actual owner55681/d32adc/exit0/no session,
 aggregate81032 reaped/others absent in2052.876s, unresolved empty. Source/runner
 pins stay matched to the frozen cohort. Ordinary/clone/semantic medians are
 37.028/36.299/34.232s. Six/eightworker semantic medians are nearly identical
-on these four files. All three stock partitions now exist; the three Ox512
-partitions remain unrun. The part0 timing disclosure still applies to the
+on these four files. All three stock partitions exist; Ox6/8 passed and
+Ox1 remains failed/incomplete, as recorded above. The part0 timing disclosure still applies to the
 series; no clean full-cohort or physical-I/O claim. Actual closure sent to Root,
 18credits released on Unison side; no successor authorized.
 

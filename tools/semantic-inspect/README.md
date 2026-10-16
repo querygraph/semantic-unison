@@ -38,3 +38,33 @@ Unsupported XMP interpretation carries a reason while retaining the whole-file
 and preservation proof. These fields are advisory; they are not RDF value
 canonicalization, rendered-pixel identity or merge authority. See
 [the observation contract](../../doc/semantic-observation-v1.md).
+
+## Build once without opening an input
+
+A reusable inspector can be built in the standing Unison CPU lane:
+
+```sh
+SHARED_CPU_CREDITS=8 STOCK_PREFIX="$HOME/.opam/default/bin" \
+  make -f tests/Makefile inspect-stock
+SHARED_CPU_CREDITS=8 OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" \
+  make -f tests/Makefile inspect-ox
+```
+
+Run serially. Each uses one compiler job, retains a private build and prints its
+report directory. `RESULT.json` contains the binary path/hash, compiler hash,
+all copied source hashes, command, log hash and actual build exit. The build-only
+branch invokes no inspector, opens no image and uses no Adobe SDK. The receipt's
+`inspector_executions=0` describes that build, not future manual invocations.
+
+The direct form is `python3 tools/semantic-inspect/run.py --ocamlopt /absolute/compiler
+--build-only --report /fresh/path/build.json` (one shell line). It requires a fresh
+report and forbids forwarded inspector arguments. Reusing an existing report is
+refused rather than overwriting it. Builds retain failures for review. Normal
+one-shot invocation still builds in a temporary directory and cleans it afterward.
+The missing `xmpMerge` dependency required by current `SemanticDelta` is included.
+
+[Stock/Ox build-only evidence](../../tests/qualification/inspector-build-only-actual-20261016.json)
+and [command refusals](../../tests/qualification/inspector-command-controls-actual-20261016.json)
+cover build/ownership only. They establish no real-camera layout eligibility,
+Adobe validation or production receiving result. Coordinate source-copy IO before
+using Photo-owned fixtures; never substitute this tool for a rendering fingerprint.

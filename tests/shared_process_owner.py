@@ -5,6 +5,14 @@ import subprocess
 import time
 
 
+def require_ownership_support():
+    methods = ('waitid', 'wait4', 'waitstatus_to_exitcode', 'killpg')
+    constants = ('P_PID', 'WEXITED', 'WNOHANG', 'WNOWAIT')
+    if (any(not callable(getattr(os, name, None)) for name in methods)
+            or any(type(getattr(os, name, None)) is not int for name in constants)):
+        raise ValueError('shared ownership requires Python with waitid(WNOWAIT)/wait4 before token entry')
+
+
 def retain_forever():
     """A coordinated recovery must resolve ownership before this owner exits."""
     for number in (signal.SIGINT, signal.SIGTERM):

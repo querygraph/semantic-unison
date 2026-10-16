@@ -12,7 +12,7 @@ import sys
 import time
 
 from shared_cpu_pool import Pool, authorized_unison_tokens, require, UnresolvedOwnership
-from shared_process_owner import settle, retain_after_record
+from shared_process_owner import settle, retain_after_record, require_ownership_support
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'bench/sync'))
@@ -23,7 +23,7 @@ MANIFEST = ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-
 MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd'
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
-           'sync-functional'}
+           'sync-functional', 'inspect-stock', 'inspect-ox'}
 
 
 def write(path, value):
@@ -35,6 +35,7 @@ def write(path, value):
 def run(target, argv, output, credits):
     require(target in TARGETS, 'target has no shared owner scope')
     require(type(credits) is int and 1 <= credits <= 8, 'shared credit count differs')
+    require_ownership_support()
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]
     pool = Pool.read(MANIFEST, MANIFEST_SHA)
@@ -60,7 +61,7 @@ def run(target, argv, output, credits):
                               for p in (Path(__file__), ROOT / 'tests/manual.py',
                                         ROOT / 'tests/shared_cpu_pool.py',
                                         ROOT / 'tests/shared_process_owner.py')}})
-            seconds = 300 if target == 'sync-functional' else 600 if target.endswith('-build') else 60
+            seconds = 300 if target == 'sync-functional' or target.startswith('inspect-') else 600 if target.endswith('-build') else 60
             if target == 'sync-functional':
                 # Separate server sessions retain their own coordinator. Do
                 # not kill it on an outer deadline and discard live handles.

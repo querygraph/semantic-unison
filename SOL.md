@@ -4,6 +4,27 @@
 
 ## Current checkpoint — 2026-10-15
 
+Shared owner startup additionally refuses unsupported Python ownership primitives
+before pool access, avoiding a pointless retained grant when the interpreter
+cannot supervise anything. [Actual pure guard controls](tests/qualification/shared-owner-preflight-actual-20261016.json)
+41ad96/0 pass with compiler/inspector/SDK activity0. Runtime unknown-outcome
+retention remains unchanged. No whole-machine allocation or new Photo authority.
+
+
+Real-camera copy-only qualification preparation found/fixed a usable-tool bug:
+the standalone inspector build omitted xmpMerge despite current SemanticDelta's
+dependency. New retained `--build-only --report` and shared `inspect-stock`/
+`inspect-ox` entrypoints compile once without opening an input. [Both compiler
+builds](tests/qualification/inspector-build-only-actual-20261016.json) PASS/CLOSED:
+stock55065/dc8308/0, Ox36559/52457c/0, allgroups/tokens00..07closed; onecompiler
+perbuild, inspector executions0. [Pure command controls](tests/qualification/inspector-command-controls-actual-20261016.json)
+ac6dc7/0 pass, including pre-workspace/input refusals. No Photo/Adobe/SDK/payload
+access; Root notified queue01a1421e-e92c. Requested existing verified privatecopy
+candidate/ancestry and later IO coordination from Photo queue01a1421b-047e; no
+payload authorization inferred or read performed. Real-camera eligibility,
+exact receiving and SDK validation remain distinct pending gates.
+
+
 Latest [standing8 shared functional qualification](tests/qualification/shared-functional-actual-20261016.json)
 PASSED/CLOSED: actualtool15884/672587/exit0/no session,18rows54CLI, stock/Ox
 ordinary/receiver-clone/semantic with workers1/2/3. Two private2MiB files perrow;

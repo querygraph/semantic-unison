@@ -15,7 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'bench' / 'sync'))
 from ownership import OwnedGroup
 from shared_cpu_pool import Pool, authorized_unison_tokens, UnresolvedOwnership
-from shared_process_owner import settle, retain_after_record
+from shared_process_owner import settle, retain_after_record, require_ownership_support
 
 POLICY = Path('/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json')
 MANIFEST = Path('/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json')
@@ -34,6 +34,7 @@ def main():
     output = Path(sys.argv[1])
     if not output.is_absolute():
         raise SystemExit('absolute output required')
+    require_ownership_support()
     indexes = authorized_unison_tokens(POLICY.read_bytes())
     pool = Pool.read(MANIFEST, MANIFEST_SHA)
     output.mkdir(mode=0o700, parents=False, exist_ok=False)

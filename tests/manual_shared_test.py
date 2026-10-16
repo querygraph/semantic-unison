@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 """Pure shared-entrypoint boundary controls; no build, tool or child runs."""
 from pathlib import Path
+import io
+import runpy
+import sys
 from unittest.mock import patch
 import manual
 
@@ -14,6 +17,10 @@ with patch.object(Path, 'is_file', return_value=True):
     assert one[one.index('--jobs') + 1] == '1'
     legacy = manual.command('ox-make', out, {'OX_PREFIX': '/UNREAD-compiler'})
     assert '--selftest' in legacy and legacy[legacy.index('--jobs') + 1] == '4'
+    inspector = manual.command('inspect-ox', out, env)
+    assert '--build-only' in inspector and '--report' in inspector and '--selftest' not in inspector
+    assert inspector[inspector.index('--report') + 1] == str(out / 'RESULT.json')
+    assert manual.shared_resource_plan('inspect-ox', env)['declared_peak_credits'] == 3
 
     for target, changes in (
         ('ox-build', {'JOBS': '5'}),
@@ -23,6 +30,7 @@ with patch.object(Path, 'is_file', return_value=True):
         ('ox-make', {}),
         ('host-executor', {}),
         ('sync-functional', {'SHARED_CPU_CREDITS': '2'}),
+        ('inspect-ox', {'SHARED_CPU_CREDITS': '2'}),
     ):
         try:
             manual.command(target, out, dict(env, **changes))
@@ -51,4 +59,29 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
     from shared_dispatch import TARGETS
     assert 'sync-functional' in TARGETS
     assert {'stock-build', 'ox-build', 'shared-entrypoints', 'group-parser'} <= TARGETS
-print('PASS four shared/legacy selections and seven refusals; no output, build or child')
+print('PASS shared/legacy command selections and budget refusals; no output, build or child')
+
+inspector_main = runpy.run_path(str(manual.ROOT / 'tools/semantic-inspect/run.py'))['main']
+for arguments in (['--build-only'], ['--report', '/NEVER-CREATED'],
+                  ['--build-only', '--report', '/NEVER-CREATED', '--', '/NEVER-READ.dng']):
+    with patch.object(sys, 'argv', ['inspector'] + arguments), patch.object(sys, 'stderr', io.StringIO()), \
+            patch('subprocess.run', side_effect=AssertionError('unexpected compiler/inspector execution')), \
+            patch('tempfile.mkdtemp', side_effect=AssertionError('unexpected workspace')):
+        try:
+            inspector_main()
+        except SystemExit as error:
+            assert error.code == 2
+        else:
+            raise AssertionError('ambiguous build-only command admitted')
+print('PASS three inspector build-only refusals before workspace/compiler/payload access')
+
+import shared_dispatch
+with patch.object(shared_dispatch.os, 'waitid', None), \
+        patch.object(shared_dispatch.Pool, 'read', side_effect=AssertionError('pool touched')):
+    try:
+        shared_dispatch.run('group-parser', [], out, 8)
+    except ValueError:
+        pass
+    else:
+        raise AssertionError('unsupported interpreter acquired shared ownership')
+print('PASS unsupported interpreter refusal before pool read/acquisition')

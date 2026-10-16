@@ -1,0 +1,31 @@
+{
+  "state": "PURE_INSPECTOR_COMMAND_CONTROLS_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "chunk": "ac6dc7",
+    "exit": 0,
+    "running_session": false
+  },
+  "scope": "Shared dispatcher selection/budget controls plus three inspector build-only pre-workspace/compile/input refusals; no compiler or payload in this run.",
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-xq991rnl/SHARED-CLOSED.json",
+      "bytes": 424,
+      "sha256": "0d52131e8581fe090ac6ba180687b5d92f99fdd702a46bc2807ae1d4e49da26c"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-xq991rnl/SHARED-START.json",
+      "bytes": 753,
+      "sha256": "b8d847ad354ee4d6f0f2377759b1f707da16045b80ef47ee4e9279e709448d45"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-xq991rnl/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-xq991rnl/SHARED-STDOUT.txt",
+      "bytes": 167,
+      "sha256": "707797710522bdada2636a9825cfaac49a9ec345c74ba6d20daffa5d6edf862d"
+    }
+  ]
+}

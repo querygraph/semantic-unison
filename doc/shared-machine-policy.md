@@ -27,7 +27,8 @@ set in ascending order using fresh descriptions and nonblocking flock. Contentio
 closes all partial acquisitions before returning busy. Unison selects only a
 subset of authorized00..07; caller-selected indexes cannot authorize borrowing.
 
-The manual dispatcher retains token descriptors through direct-child and group
+The manual dispatcher refuses an interpreter without waitid(WNOWAIT)/wait4
+before reading/acquiring the pool. It retains token descriptors through direct-child and group
 settlement. It passes descriptors to the runner; inherited copies keep a lock
 when the parent's copy closes. Indeterminate close never retries that numeric
 FD. Unknown acquisition/settlement retains the owner even if receipt writing
@@ -62,7 +63,9 @@ SHARED_CPU_CREDITS=8 STOCK_RECEIPT=/path/stock-build-selftest.json \
 Build-only commands compile/link and do not execute the resulting binary or
 selftests. They do not replace build-plus-selftest qualification; sync requires
 existing successful selftest receipts with unchanged production-source/artifact
-pins. Shared builds accept3..8 credits and at most2 compiler jobs plus2 owner
+pins. Shared inspector builds (`inspect-stock`/`inspect-ox`) retain a pinned binary with
+zero inspector executions and one compiler job. Shared builds accept3..8 credits
+and at most2 compiler jobs plus2 owner
 credits. Shared sync requires the complete8-credit lane. Pure parser/interface
 scopes can use a smaller authorized subset. Unscoped tests remain refused in
 shared mode; they need an appropriate resource owner rather than an arbitrary

@@ -14,6 +14,7 @@ Targets:
   stock-make / stock-dune  build stock CLI and run selftests; STOCK_PREFIX required
   ox-make / ox-dune        build checked OxCaml CLI and run selftests; OX_PREFIX required
   stock-build / ox-build  Make build only; no resulting Unison executable invocation
+  inspect-stock / inspect-ox build/retain the read-only inspector only; compiler prefix required
   cache-storage           private cache/quota controls; BUILD_RECEIPT required
   cache-ownership         private cleanup exception controls; BUILD_RECEIPT required
   cache-cli               loopback merge/recovery, fake validators; BUILD_RECEIPT required
@@ -81,14 +82,15 @@ def shared_resource_plan(target, environment):
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
     build = target in ('stock-build', 'ox-build')
+    inspector = target in ('inspect-stock', 'inspect-ox')
     endpoints = [3, 3] if target == 'sync-functional' else []
-    jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 0
-    overhead = 2 if build or endpoints else 1
+    jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector else 0
+    overhead = 2 if build or inspector or endpoints else 1
     require((not build or 1 <= jobs <= 2) and jobs + sum(endpoints) + overhead <= credits,
             'declared shared work exceeds project grant')
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
-                             'shared-sync-controls', 'sync-functional')
+                             'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + overhead,
             'compiler_jobs': jobs, 'endpoint_workers': endpoints,
@@ -107,10 +109,19 @@ def command(target, output, environment):
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
-                           'shared-entrypoints', 'shared-sync-controls'),
+                           'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'sync-functional':
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
+        if target in ('inspect-stock', 'inspect-ox'):
+            require(shared >= 3, 'inspector build needs one compiler plus two owner credits')
+    if target in ('inspect-stock', 'inspect-ox'):
+        key = 'STOCK_PREFIX' if target == 'inspect-stock' else 'OX_PREFIX'
+        require(bool(environment.get(key)), key + ' is required')
+        compiler = Path(environment[key]).resolve() / 'ocamlopt'
+        require(compiler.is_file(), 'compiler prefix must contain ocamlopt')
+        return [sys.executable, str(ROOT / 'tools/semantic-inspect/run.py'),
+                '--ocamlopt', str(compiler), '--build-only', '--report', str(output / 'RESULT.json')]
     if target in ('helper-stock', 'helper-ox'):
         key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
