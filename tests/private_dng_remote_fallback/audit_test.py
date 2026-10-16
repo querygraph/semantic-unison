@@ -58,5 +58,31 @@ class Controls(unittest.TestCase):
             v=result();v['cases'][0]['calls']['update']['stdout']=log
             with self.subTest(log=log),self.assertRaises(ValueError):audit(v)
 
+    def test_distinct_version_keeps_legacy_scope(self):
+        v=result();v['schema']='unison-private-dng-remote-fallback/2'
+        v['parameters']['payload_layout']='distinct-raw-v1'
+        for case in v['cases']:
+            case['payload_layout']='distinct-raw-v1'
+            case['calls']['update']['stdout']=case['calls']['update']['stdout'].replace('917504','1032192')
+        self.assertEqual(audit(v)['payload_layout'],'distinct-raw-v1')
+        self.assertEqual(audit(result())['payload_layout'],'uniform-v1')
+
+    def test_distinct_requires_bound_layout(self):
+        v=result();v['schema']='unison-private-dng-remote-fallback/2'
+        with self.assertRaises(ValueError):audit(v)
+        v['parameters']['payload_layout']='distinct-raw-v1'
+        for case in v['cases']:
+            case['payload_layout']='uniform-v1'
+        with self.assertRaises(ValueError):audit(v)
+
+    def test_distinct_counter_cannot_use_uniform_small_reuse(self):
+        for count in (3072,983039,1048576):
+            v=result();v['schema']='unison-private-dng-remote-fallback/2'
+            v['parameters']['payload_layout']='distinct-raw-v1'
+            for case in v['cases']:
+                case['payload_layout']='distinct-raw-v1'
+                case['calls']['update']['stdout']=case['calls']['update']['stdout'].replace('917504',str(count))
+            with self.subTest(count=count),self.assertRaises(ValueError):audit(v)
+
 
 if __name__=='__main__':unittest.main()

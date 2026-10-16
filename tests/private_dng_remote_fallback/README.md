@@ -119,3 +119,36 @@ No original/privatecamera/Photo/Adobe data or code was used.
 The request/plan and source/mocked-control sections above remain historical
 preparation records. They are superseded only for this exact four-pair test by
 the actual evidence here; no new admission or automatic successor is implied.
+
+## Distinct-byte source successor — not executed
+
+The successful uniform fixture is mostly repeated0x95 bytes. Source inspection
+shows `hashSig` prepends signatures and `findBlock` takes the first strong match;
+`Copy`'s counter increases only when the referenced immutable basis offset equals
+the output position. Repeated regions permit valid shifted references. This is
+a plausible explanation for the small3072-byte counter, not a per-token causal
+proof: the completed run did not capture a full token sequence. No transfer
+algorithm, wire protocol or production clone policy was changed on this evidence.
+
+[Plan v2](../../doc/private-dng-remote-fallback-plan-v2.json) and
+[request v2](../../doc/private-dng-remote-fallback-request-v2.json) prepare a new
+original deterministic `distinct-raw-v1` fixture: TIFF/XMP/private control bytes
+are retained, the region from16384 to1MiB uses fixed seeded synthetic bytes.
+The default uniform generator remains byte-identical. Version2 keeps exact
+output/complement/basis/no-op checks and separately requires at least983040
+logical same-offset inherited bytes per update. That count is a reuse-coverage
+assertion, not a byte-equivalence tolerance or physical/performance measurement.
+Version1's actual successful result and all immutable source/admission/plan
+records remain preserved. A new live run needs a distinct admission and IO slot.
+
+[47fixed source controls](../qualification/private-remote-distinct-source-controls-actual-20261016.json)
+passed actual94421/011263/exit0/no session, group94422 reaped0/others absent,
+CPU00..07 closed. Only generated tiny files and mocked owners were used; no
+Unison executable/transport/camera/SDK/compiler/canonical IO calls. The receipt
+also preserves an initial control-launch error: Python `-m` reached wrapper
+source-pin validation before any child, retaining an idle CPU owner. After
+current no-child/control-flow proof only that owned idle parent was killed
+(actual56656/5a25d2/137), with no fabricated normal close. The fresh full-token
+control run subsequently acquired and closed all8 descriptions. The dispatcher
+now rejects non-script argv before pool reads; its regression test confirms
+no pool acquisition. Historical unknown marker/stop proof remain unchanged.

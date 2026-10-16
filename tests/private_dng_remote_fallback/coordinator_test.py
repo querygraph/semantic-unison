@@ -179,7 +179,7 @@ class EvidenceControls(unittest.TestCase):
 
     def test_plan_fixed_scope_and_source_pins(self):
         def plan():
-            return {'schema': 'unison-private-dng-remote-owner/1', 'parameters': dict(c.PARAMETERS),
+            return {'schema': 'unison-private-dng-remote-owner/2', 'parameters': dict(c.PARAMETERS),
                     'worker_seconds': 480, 'execution_source_sha256': {},
                     'workspace': '/private/tmp/u-rf-fixed',
                     'binaries': {label: {'label': label, 'path': '/fixed/'+label, 'sha256': '0'*64}

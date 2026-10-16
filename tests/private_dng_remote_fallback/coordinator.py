@@ -29,7 +29,7 @@ from ledger import audit_directory, exclusive_json
 
 PARAMETERS = {'file_bytes': 1048576, 'files': 1, 'client_workers': 2,
               'server_workers': 2, 'owner_credits': 2, 'total_grant': 8,
-              'tag': 50740, 'adobe_validation': 'off'}
+              'tag': 50740, 'adobe_validation': 'off', 'payload_layout': 'distinct-raw-v1'}
 SOURCES = (
     'tests/private_dng_remote_fallback/coordinator.py',
     'tests/private_dng_remote_fallback/case.py',
@@ -52,7 +52,7 @@ def source_pins():
 
 
 def checked_plan(plan):
-    require(plan['schema'] == 'unison-private-dng-remote-owner/1' and
+    require(plan['schema'] == 'unison-private-dng-remote-owner/2' and
             plan['parameters'] == PARAMETERS and
             all(type(plan['parameters'][k]) is type(v) for k, v in PARAMETERS.items()) and
             type(plan['worker_seconds']) is int and plan['worker_seconds'] == 480,
@@ -114,7 +114,7 @@ def worker(packet_path):
         require((s.st_dev, s.st_ino) == (row['device'], row['inode']),
                 'inherited grant descriptor identity differs')
     require(time.monotonic() < packet['deadline_monotonic'], 'worker dispatch deadline passed')
-    result = {'schema': 'unison-private-dng-remote-fallback/1', 'complete': False,
+    result = {'schema': 'unison-private-dng-remote-fallback/2', 'complete': False,
               'parameters': PARAMETERS, 'cases': []}
     failure = original_error = None
     try:
@@ -122,7 +122,8 @@ def worker(packet_path):
         for client, server in sorted(PAIRS):
             result['cases'].append(execute_case(workspace/(client+'-'+server),
                 plan['binaries'][client], plan['binaries'][server],
-                deadline_monotonic=packet['deadline_monotonic']))
+                deadline_monotonic=packet['deadline_monotonic'],
+                payload_layout=PARAMETERS['payload_layout']))
         result['complete'] = True
         result['audit'] = audit(result)
     except BaseException as error:

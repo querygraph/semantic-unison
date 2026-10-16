@@ -32,6 +32,13 @@ class Lease:
 
 
 class Lifecycle(unittest.TestCase):
+    def test_bad_script_form_refuses_before_pool_read(self):
+        for argv in ([sys.executable,'-m','unittest'],[sys.executable],
+                     [sys.executable,'/outside/repository.py']):
+            with patch.object(d.Pool,'read') as pool, self.assertRaises(ValueError):
+                d.run('private-dng-local-clone',argv,Path('/never-created'),8)
+            pool.assert_not_called()
+
     def setUp(self):
         self.temp = tempfile.TemporaryDirectory(prefix='unison-io-fake-dispatch-')
         self.output = Path(self.temp.name)

@@ -4,6 +4,19 @@
 
 ## Current checkpoint — 2026-10-15
 
+StandingUnison8 remains sufficient; no larger CPUrequest. NEW source-only
+[distinct-byte remote fixture v2](doc/private-dng-remote-fallback-request-v2.json)
+prepared after uniformactualPASS (notretry/replacement). Reversebucket/first
+strongmatch andsameoffset-onlycounter can explain repeatedbytefixture's3072
+logicalinheritance, but no fulltoken causaltrace/performanceclaim. Production
+transferalgorithmunchanged. Version2 originalseededrawregion requires>=983040
+logicalreuse+all exactbyte/basis/complement/no-op proofs,4pairs/12CLI/Unison8+EXIO,
+NOTadmitted/dispatched. [47fixed original/mockcontrols](tests/qualification/private-remote-distinct-source-controls-actual-20261016.json)
+actual94421/011263/0 CLOSED/worker94422reaped0/CPU00..07closed. Initialincorrect
+Python-m control launch preserved: nochild/IO before sourcepinerror, idleowned
+parent93935 SIGKILLonly afterfreshproof, actual56656/5a25d2/137; no forgednormal
+close. Dispatcher now rejectsbadscripttokens beforepoolread, regressionpassed.
+
 ACTUAL [transport-separated opaque50740 fallback](tests/qualification/private-remote-fallback-actual-20261016.json)
 PASS/CLOSED: fourstock/Oxclient-serverpairs/12CLI, owner91702/session11511
 actuala3b0b5/0/no session, worker91703reaped0/groupothersabsent. All12saved

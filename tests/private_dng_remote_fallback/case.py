@@ -9,6 +9,7 @@ import hashlib
 import json
 import os
 from pathlib import Path
+import random
 import shutil
 import sys
 import time
@@ -26,17 +27,27 @@ fixtures=importlib.util.module_from_spec(spec)
 spec.loader.exec_module(fixtures)
 
 
-def prepare(directory):
+def prepare(directory, *, payload_layout='uniform-v1'):
     """Only future admitted owner may call; creates original synthetic bytes."""
+    require(payload_layout in ('uniform-v1', 'distinct-raw-v1'), 'unknown original fixture layout')
     directory.mkdir(mode=0o700)
     for name in ('left','right','state'):(directory/name).mkdir(mode=0o700)
     for name in ('proxy.py','measure.py','launcher.py','ownership.py'):
         shutil.copyfile(ROOT/'bench/sync'/name,directory/name)
     (directory/'launcher.py').chmod(0o700)
-    return fixtures.fixture(directory/'left/synthetic-private.dng',True)
+    source = directory/'left/synthetic-private.dng'
+    length = fixtures.fixture(source, True)
+    if payload_layout == 'distinct-raw-v1':
+        # Original fixed synthetic bytes, never a photographic source. Keep
+        # the TIFF/private/XMP control region intact; vary the declared raw
+        # region so duplicate block signatures do not dominate this probe.
+        with source.open('r+b') as stream:
+            stream.seek(fixtures.RAW)
+            stream.write(random.Random(0x465031).randbytes(fixtures.SIZE-fixtures.RAW))
+    return length
 
 
-def execute_case(directory, client, server, *, deadline_monotonic):
+def execute_case(directory, client, server, *, deadline_monotonic, payload_layout='uniform-v1'):
     """client/server are trusted pinned {label,path,sha256} records.
 
     Exceptions retain partial result files. They are NOT blanket settlement
@@ -44,7 +55,7 @@ def execute_case(directory, client, server, *, deadline_monotonic):
     handles/leases on unknown. This function has no permission/admission policy.
     """
     require((client['label'],server['label']) in PAIRS,'fixed compiler pair required')
-    packet_length=prepare(directory)
+    packet_length=prepare(directory, payload_layout=payload_layout)
     source=directory/'left/synthetic-private.dng'
     target=directory/'right/synthetic-private.dng'
     basis=directory/'prior-receiver-inode'
@@ -55,7 +66,8 @@ def execute_case(directory, client, server, *, deadline_monotonic):
         return hashlib.sha256(data[:fixtures.XMP]+data[fixtures.XMP+packet_length:]).hexdigest()
     complement_before=complement(source)
     calls={}
-    result={'compiler_pair':[client['label'],server['label']],'calls':calls}
+    result={'compiler_pair':[client['label'],server['label']],
+            'payload_layout':payload_layout,'calls':calls}
     def save():(directory/'CASE.json').write_text(json.dumps(result,indent=2)+'\n')
     def call(stage):
         require(deadline_monotonic-time.monotonic()>10,'no new remote call near outer deadline')

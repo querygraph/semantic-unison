@@ -58,6 +58,14 @@ def checked_io_request(request, target, argv, output, credits):
 def run(target, argv, output, credits, *, io_admission=None):
     require(target in TARGETS, 'target has no shared owner scope')
     require(type(credits) is int and 1 <= credits <= 8, 'shared credit count differs')
+    # Every supported target uses an explicit repository script. Reject e.g.
+    # Python -m before acquiring descriptions, rather than failing while
+    # constructing its source pin and retaining an idle no-child owner.
+    require(isinstance(argv, list) and len(argv) >= 2 and type(argv[1]) is str,
+            'shared target requires explicit script argv')
+    script = Path(argv[1])
+    require(script.is_absolute() and script.is_relative_to(ROOT) and script.is_file()
+            and script.resolve() == script, 'shared target requires canonical repository script path')
     require_ownership_support()
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]
