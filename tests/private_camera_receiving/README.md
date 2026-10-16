@@ -15,6 +15,18 @@ cover both modules using only tiny original data and a fake clone callback.
 Fake callbacks explicitly report a test-double backend, never native success.
 The actual native clone callback remains unexecuted by this qualification.
 
+`transport.py` supplies a prepared fixed seed/update/no-op invoker with no
+standalone entrypoint. It reuses bounded no-follow artifact hashing and the
+qualified strict loopback measure wrapper, journals before/after each call,
+and consumes a stage even when the call fails. Two workers per endpoint plus
+two owner credits fit Unison8. Per-call timeout60s/native supervisor65s and
+70s minimum remaining observation time are explicit; they do not establish a
+whole-job hard wall. Update success additionally requires actual semantic
+decline and one immutable receiver-basis clone marker, with no semantic or local
+whole-source clone marker. [Twenty preparation controls](../qualification/camera-transport-preparation-source-controls-actual-20261016.json)
+passed with mocked invocations and tiny original inputs only. The outer
+admission/clone/execution/aggregate audit is still required before any real use.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 
