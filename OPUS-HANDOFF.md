@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:22:48Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:28:44Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -143,6 +143,20 @@ ExifTool, Photo/EXIO/receiving/compute-overlap/hardcap qualification. This has N
 native admission route yet: next implement independent prefix auditor, exact
 one-use entry/inherited9FD guard and memory/deadline/intent ownership before
 preparing real-tool request. Source/method docs in tests/mixed_validation/README.md.
+
+**Mixed independent auditor integrated:** `tests/mixed_validation/audit.py`
+now joins exact8argv/candidate/build identity, SDK raw protocol+group/wait,
+metadata process and source/version JSON, ownerclosed counters and directprobe
+cleanup. Prefix audit separates complete2probes/knownfailedprefix/precallzero/
+missingoutcome; continued work after failure or unknown groups refuses. Decimal
+metadata versions preserve13.10 versus13.1. No authentication/release authority.
+Eight source groups plus eight fresh fake cases across stock/Ox PASS,16fake
+helpers/128hashes; actual49452/e2115a/0/no session, children96507/96509/96551
+reaped0/groups absent/CPU8closed. Receipt `mixed-validation-audit-integration-actual-20261016.json`;
+initial7group e04faf source predecessor retained. No SDK/ExifTool/Photo/EXIO.
+Next explicit gap: probe still CPU-only and needs declared backend memory/FD
+admission, then durable nativeentry journal/inherited9FD/oneuse guards and
+actual lifecycle qualification before requesting native scheduling.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
 selftests actual87161/b8ddda ->52664d/0/no session and Ox80362/27ce49 ->09fca0/0
