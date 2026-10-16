@@ -209,3 +209,18 @@ photographic/semantic validity oracle. No runtime request/admission exists yet.
 cover entry/metadata/resource guards and existing SDK/shared-IO regression paths.
 FD/canonical-acquisition/worker hooks are mocks. Finite actual inherited-bundle
 and complete dispatcher fault controls remain before any receiving request.
+
+## Actual inherited-FD refusal probes
+
+[Two real Python probes](../qualification/concurrent-worker-fd-lifecycle-actual-20261016.json)
+now exercise the new shared target with disposable inner CPU/IO locks. Nine
+inherited descriptions reach a deliberately refusing kernel hook; eight refuse
+before it. Both actual children exit7, group-before-reap/zero-call parent audits
+pass, all disposable descriptions close and fresh exclusive reacquisition passes.
+The outer canonical Unison8 owner exits0 and closes its tokens.
+
+Admission/command identity and interpreter hashing are explicit probe doubles.
+The actual receiving kernel is never called. This qualifies inherited-descriptor
+and zero-call failure closure only, not canonical EXglobal acquisition for this
+job, complete receiving, SDK work or runtime admission. Complete dispatcher
+failed-prefix/unknown controls and fresh immutable review still precede dispatch.
