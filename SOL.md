@@ -4,6 +4,14 @@
 
 ## Current checkpoint — 2026-10-15
 
+Namespace reconciliation is explicit in immutable [proposal v3](doc/shared-physical-io-proposal-v3.json):
+adopt Root io-lanes-v1/manifestf7b55398/directory307225492/barrier307225493 ONLY.
+Alternate v2 physical-io-lanes-v1 suggestion is superseded and MUST NOT be created.
+Backend/consumer contract already pinned actual existing namespace; canonical
+qualification remains outstanding, EX_GLOBAL_ONLY/no lanes. Root provisioning
+is not a runtime grant, and completed manual privateDAcontrol is not IO backend
+qualification. Topology freshness contract remains separate source-only review.
+
 ACTUAL first real-camera private DA [clone/inspection control](tests/qualification/private-dng-clone-inspection-actual-20261016.json)
 CLOSED under explicit one-use manual IO admission77ea9eeb/plan c29d92ec. Owner77296
 actualinitialterminalc15ad5/0/no session; worker77297reaped0/othersabsent, stock
