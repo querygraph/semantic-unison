@@ -1,0 +1,50 @@
+{
+  "schema": "unison-private-dng-remote-owner/1",
+  "state": "SOURCE_READY_NOT_ADMITTED_NOT_DISPATCHED",
+  "parameters": {
+    "file_bytes": 1048576,
+    "files": 1,
+    "client_workers": 2,
+    "server_workers": 2,
+    "owner_credits": 2,
+    "total_grant": 8,
+    "tag": 50740,
+    "adobe_validation": "off"
+  },
+  "worker_seconds": 480,
+  "workspace": "/private/tmp/u-rf-c4e61f73982a",
+  "binaries": {
+    "stock": {
+      "label": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+      "sha256": "5237f14c70f83d19e8a63da568f8f5a563b9a2dff0baa514675223b4c23fb3ce"
+    },
+    "ox": {
+      "label": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+      "sha256": "0a7b264264a26cebfe5a8d9ddc96f3e45efbd25868c21db11891052c32142f49"
+    }
+  },
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/coordinator.py": "48aaa05b6988c96e84bc4950ce2b6d5a2cd8078828c2110d8d835ea6d46d5694",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/case.py": "4e81fe63e8949957012bfceaa155329b2c39f164fdb1d42367c7a94ee65e7299",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit.py": "b549437c9b288ed277169c0f7cd48995975d1f9098b5edbd997b2931b0ce54ae",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger.py": "9eb528bd53cb7e77484f59e69d5680c95992d4a43ec904880fbe482d4c37da93",
+    "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py": "fdcd5157fe70f1e3aa717e374dd93ccad56f31ba6e28029b1f4dfd29e14a045d",
+    "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+    "/Users/alexy/src/unison/tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+    "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "/Users/alexy/src/unison/tests/shared_dispatch.py": "99a9999b08e60e4bfbe2ccc30e3b1c5a7de6a719b2ddddc642f7705a9e6ef2d9",
+    "/Users/alexy/src/unison/bench/sync/run.py": "c88d30674fa8a37da77e84cbc8c8ac186355d805090a2e2e24fbdc60fb35ae42",
+    "/Users/alexy/src/unison/bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison/bench/sync/proxy.py": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178",
+    "/Users/alexy/src/unison/bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "/Users/alexy/src/unison/bench/sync/fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699",
+    "/Users/alexy/src/unison/bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "/Users/alexy/src/unison/bench/sync/partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+    "/Users/alexy/src/unison/bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+  },
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "cpu_manifest_sha256": "4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd"
+}

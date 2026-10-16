@@ -1,0 +1,97 @@
+{
+  "schema": "firstpair-private-remote-owner-mock-controls/1",
+  "state": "FIFTEEN_FIXED_MOCK_CONTROLS_PASSED_CLOSED",
+  "actual_owner_terminal": {
+    "pid": 89733,
+    "chunk": "52c049",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual exec_command completion"
+  },
+  "closure": {
+    "child": {
+      "pid": 89734,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 89734,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-final-xqzk87mu/SHARED-START.json",
+      "bytes": 1201,
+      "sha256": "9e6c060ac1cb46d7624b3d7f8540bbe76bc252528b192e8872b889fcd389c9d1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-final-xqzk87mu/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "8037fb92d4ef65b4df0ca779eca64d42e881af4acdd7c241afc516a29a8c2956"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-final-xqzk87mu/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-final-xqzk87mu/SHARED-STDERR.txt",
+      "bytes": 114,
+      "sha256": "a49d7fe8a545cea484ea22e586a9b5eb4b29dc7b64212aacf994b706370fe20a"
+    }
+  ],
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/coordinator.py": "48aaa05b6988c96e84bc4950ce2b6d5a2cd8078828c2110d8d835ea6d46d5694",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/case.py": "4e81fe63e8949957012bfceaa155329b2c39f164fdb1d42367c7a94ee65e7299",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit.py": "b549437c9b288ed277169c0f7cd48995975d1f9098b5edbd997b2931b0ce54ae",
+    "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger.py": "9eb528bd53cb7e77484f59e69d5680c95992d4a43ec904880fbe482d4c37da93",
+    "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py": "fdcd5157fe70f1e3aa717e374dd93ccad56f31ba6e28029b1f4dfd29e14a045d",
+    "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+    "/Users/alexy/src/unison/tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+    "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "/Users/alexy/src/unison/tests/shared_dispatch.py": "99a9999b08e60e4bfbe2ccc30e3b1c5a7de6a719b2ddddc642f7705a9e6ef2d9",
+    "/Users/alexy/src/unison/bench/sync/run.py": "c88d30674fa8a37da77e84cbc8c8ac186355d805090a2e2e24fbdc60fb35ae42",
+    "/Users/alexy/src/unison/bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison/bench/sync/proxy.py": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178",
+    "/Users/alexy/src/unison/bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "/Users/alexy/src/unison/bench/sync/fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699",
+    "/Users/alexy/src/unison/bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "/Users/alexy/src/unison/bench/sync/partitions.py": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8",
+    "/Users/alexy/src/unison/bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+  },
+  "test_source": {
+    "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/coordinator_test.py",
+    "bytes": 13481,
+    "sha256": "2a599b3ebfa4a4ee312a9ae384aced306d784ca6217756573be342c916d6189c"
+  },
+  "initial_ten_control_run": {
+    "pid": 89354,
+    "chunk": "d9bee0",
+    "exit_code": 0,
+    "note": "Historical initial10 controls before subsequent binding/readiness refinements; final15 run qualifies current source",
+    "artifacts": [
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-qw0250tk/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "315ac1a183a6a1576d0514d0d8dc8ad1bf0e48d06f854d03aabcf68012233467"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-owner-controls-qw0250tk/SHARED-STDERR.txt",
+        "bytes": 109,
+        "sha256": "d0f4cb4453a92a69d5dd26c24dffc24abb841b09c300bd1df43f899fc1976ff5"
+      }
+    ]
+  },
+  "scope": "Only fake leases/owners/receipts and disposable metadata; no actual canonical IO, transport, SDK, compiler or Photo input. Worker/retention/signals/real receiving require separate admitted execution."
+}

@@ -1,10 +1,11 @@
 # Prepared transport-separated opaque-DNG fallback case
 
-This package is SOURCE PREPARATION, not a runnable/admitted test. There is no
-standalone entry point that can launch Unison. `case.execute_case` requires a
-future qualified outer coordinator to own the IO/CPU bundle and all separately
-sessioned client/supervisor/server lifetimes, retain unknown outcomes, and audit
-the result before releasing anything. Do not wrap it in the simple local-job
+This package is SOURCE PREPARATION, not an admitted test. The prepared
+`coordinator.py` entrypoint requires a fresh exact Root admission, plan and
+admission SHA before resource acquisition or launching the internal worker.
+`case.execute_case` requires that coordinator to own the IO/CPU bundle and all
+separately sessioned client/supervisor/server lifetimes, retain unknown outcomes,
+and audit the result before release. Do not wrap it in the simple local-job
 shared target or run it as an unowned subprocess.
 
 Why separate transport: actual local-root tests showed the preferred whole-source
@@ -38,8 +39,8 @@ mean the test accidentally exercised another path. The general timed/shared
 matrix auditors are unchanged and not weakened to accept this smaller result.
 The [pure audit receipt](../qualification/private-remote-fallback-audit-controls-20261016.json)
 uses fabricated reports/logs only. It does not prove real receiving or the case
-helper's execution. A pinned aggregate/controller and separately coordinated
-finite IO window remain required before the first transfer.
+helper's execution. The aggregate/controller is now source-prepared below; a separately admitted
+finite IO window remains required before the first transfer.
 
 ## Pre-launch ledger and failure settlement
 
@@ -56,4 +57,40 @@ is not independently established no-dispatch proof.
 
 [Seven fixed fabricated controls](../qualification/private-remote-ledger-controls-actual-20261016.json)
 passed under Unison00..07 and closed; no transport, payload or Photo IO ran.
-The complete aggregate/coordinator remains to be prepared and qualified.
+The aggregate/coordinator below has mocked coverage only; live qualification
+remains separate.
+
+## Prepared aggregate coordinator
+
+[Plan v1](../../doc/private-dng-remote-fallback-plan-v1.json) and
+[request v1](../../doc/private-dng-remote-fallback-request-v1.json) freeze the
+coordinator and all18 execution sources. No admission exists in this request.
+Root's eventual receipt must bind the exact plan hash, workspace, fresh start
+deadline and `launch_argv_without_admission_sha256` prefix; append
+`--admission-sha256 <published-receipt-hash>` at launch. Omitting that hash from
+the receipt's own argv field avoids a self-referential hash.
+
+The coordinator exclusively creates a one-use workspace, acquires EX_GLOBAL IO
+then Unison00..07 as one nonblocking bundle, revalidates source/admission and
+binaries, and launches one worker inheriting all9 descriptors. The parent keeps
+its copies throughout. The worker stops starting calls before440 seconds; the
+owner observes up to480 seconds, reserving40 seconds for a bounded in-progress
+call to settle. Unknown settlement retains ownership past the observation
+deadline; it is not a hard aggregate kill deadline. It never kills an aggregate
+whose separately sessioned native children lack proof. Parent preflight and
+post-observation census/receipt work are explicit additional scope.
+
+After worker terminal observation, the parent independently reparses every
+stage ledger, checks the worker's separate closure record, settles the worker
+group, binds functional results to the exact saved call outcomes, and closes
+CPU then IO. Nonzero but fully settled failure is released as failure, never
+converted to pass. Missing evidence, uncertain close, changed source, or pending
+worker retains ownership. A final report error after known closure propagates
+as a reporting failure without falsely claiming live resources.
+
+[Fifteen fixed mocked controls](../qualification/private-remote-owner-controls-actual-20261016.json)
+passed and closed under Unison00..07. They use fake grants/owners/receipts only;
+no actual IO lock, transport, source fixture, native/SDK/Photo input or compiler.
+Thus real aggregate/server settlement and receiver-basis fallback remain unrun.
+The proposed budget is conservative declared logical IO, not enforced physical
+IO, RSS, descriptor-count or OS-thread caps.

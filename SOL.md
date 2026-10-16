@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+[Remote fallback aggregate coordinator](tests/private_dng_remote_fallback/README.md)
+source prepared; [15fixed mocked owner controls](tests/qualification/private-remote-owner-controls-actual-20261016.json)
+actual89733/52c049/0 CLOSED/worker89734reaped0/CPU00..07closed. ExactRoot
+admission required before IO→CPU acquisition/internalworker; no live transport
+dispatched. Parent retains inheritedgrants through every remote ledger+worker
+closure, nonzero settledfailure remainsfailure, pending/changedsource/FDunknown
+retainsowner (no broadaggregatekill). Savedoutcomes bind functionalresult.
+[Plan](doc/private-dng-remote-fallback-plan-v1.json)/[request](doc/private-dng-remote-fallback-request-v1.json)
+freeze18sources/4compilerpairs/12CLI/one generated1MiBfixtureeach/Unison8+EXIO.
+No photographic/privatecamera/SDK/Photo rights or automatic successor.
+
 Remote fallback case now records pre-launch INTENT and exclusive OUTCOME for
 every stage. [Seven fixed ledger controls](tests/qualification/private-remote-ledger-controls-actual-20261016.json)
 actual88356/f1ee66/0 CLOSED/worker88357reaped0/CPU00..07closed: pending/malformed
