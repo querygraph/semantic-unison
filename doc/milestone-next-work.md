@@ -136,3 +136,12 @@ This closes the pending V2 request state, not hard resource limits, peaks,
 cancellation, pixels or speedup. Admission735810e6 is consumed, never reusable.
 Real multi-file receiving/SDK overlap remains separate; its new worker/case/
 clone/transport/parent libraries have source/tiny injected controls only.
+
+The new multi-file entry's actual two-child FD boundary is now
+[qualified with disposable inner locks](../tests/qualification/sdk-multifile-entry-lifecycle-actual-20261016.json).
+The valid nine-description handoff reaches an intentional pre-SDK refusal;
+an incomplete handoff refuses before the worker. Real child/group settlement,
+parent zero-call audit, inner lock reacquisition and outer Unison8 closure pass.
+No clone/receiving/SDK/canonical IO ran. Next qualify complete original-fake
+transport composition, then freeze a fresh exact generated-input receiving
+request; no current native admission exists for this target.

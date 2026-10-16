@@ -181,3 +181,14 @@ module names. It specifically constructs the four-slot adapter in a process
 where the historical SDK `plan` module is already loaded. Counts include
 imported regression groups, not58 independent native scenarios. No actual
 worker, receiving CLI, SDK or canonicalEXIO lifecycle is inferred.
+
+The [actual two-child boundary controls](../qualification/sdk-multifile-entry-lifecycle-actual-20261016.json)
+now pass: nine inherited disposable descriptions reach the deliberate pre-SDK
+worker refusal, while eight refuse at the real inherited-FD guard. The real
+parent dispatcher independently audits each zero-call failed prefix, reaps the
+child after group closure, closes both inner leases and reacquires every lock.
+The outer canonical Unison8 owner also closed (actual tool a77473/exit0).
+Admission, canonical inventory, argv and artifact SHA are explicit doubles;
+there are zero clone, CLI, SDK or canonical IO calls. Complete fake transport
+composition and actual generated-input SDK receiving still require separate
+qualification; this control grants neither.
