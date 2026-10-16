@@ -361,6 +361,16 @@ alertpreserved. Containing6855/6896reaped0/groupsabsent/outerCPU8closed, actual
 Productionhash unchanged/all326mixedpins verified unchanged. Prior hash source-
 audit test.ml binding nowhistorical; don't relabel old5.5.1 result current5.2.0.
 No SDK/image/EXIO; no currentUnisonresources.
+**Deterministic completed-before-owner worker control passed:** new standalone
+tests/workers/late_cancel.ml outside326frozenpins links actual production objects.
+Atomicbarrier+W.usage mutex proves completion queued/running0 while ownerLwtloop
+stopped; replysleeping/CPU1+IO1+pending1held. Normal delivery succeeds, caller
+cancel/shutdown suppress queuedresult, callerFD/sourcefence and allledgers/FDs
+settle. Threecases/compiler stock5.2/Ox, actual11412/66fb24/0/no running session,
+allcompile/runtimegroupsclosed/CPU8closed. Receipt worker-late-owner-completion-
+actual-20261017. Newcompilercompanions initiallyemittedbesidesource thenretained
+inOxworkdir; no production/buildobject changed. No SDK/media/canonicalIO or
+publicationcommit inference; all326mixedpins reverifiedunchanged.
 Next: reconcile Root review/admission against exact request, then actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 

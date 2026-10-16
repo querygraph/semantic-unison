@@ -31,6 +31,15 @@ closed, actual40896/bd9038/0. Only the component test changed; production and
 all326 frozen mixed execution pins remain unchanged. This supersedes the prior
 test-source binding for that test file while preserving the historical receipt.
 
+Requirement5's late-worker result scope now also has a deterministic
+[completed-before-owner control](../tests/qualification/worker-late-owner-completion-actual-20261017.json).
+On actual production-linked stock/Ox workers, completion is queued before the
+owner loop resumes. CPU/IO/job credits remain charged, cancellation and shutdown
+suppress the queued result, normal delivery succeeds, and all descriptors/
+ledgers settle. Source and frozen mixed pins remain unchanged. This advances
+late-delivery evidence without claiming an atomic namespace commit or universal
+async-fault coverage. Actual owner11412/66fb24/0/no session, Unison8 closed.
+
 The current [SDK resource-observation scope addendum](../tests/qualification/acceptance-sdk-scope-addendum-20261016.json)
 updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
 actual completed native runs, not pending requests; V2 includes12 SDK calls and62
