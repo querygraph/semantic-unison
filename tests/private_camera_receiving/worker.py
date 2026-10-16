@@ -30,11 +30,12 @@ def execute(plan,workspace,deadline_monotonic):
     output=workspace/'RESULT.json'
     journal=Journal(result,lambda:save(output,result))
     save(output,result)
-    borrowed=os.open(source,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
+    borrowed=None
     def check():
         case.require(clone.stamp(os.fstat(borrowed))==expected==clone.stamp(os.lstat(source)),
                      'borrowed source native epoch changed')
     try:
+        borrowed=os.open(source,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
         check()
         # These are same-compiler cases, deliberately not all four wire pairs.
         for label in ('stock','ox'):
@@ -78,4 +79,5 @@ def execute(plan,workspace,deadline_monotonic):
     finally:
         # An admitted entrypoint must retain an uncertain-close carrier rather
         # than exiting and discarding it. Do not retry the numeric descriptor.
-        clone.close_descriptors([borrowed])
+        if borrowed is not None:
+            clone.close_descriptors([borrowed])

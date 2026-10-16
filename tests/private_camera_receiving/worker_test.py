@@ -69,6 +69,21 @@ class Controls(unittest.TestCase):
         result=json.loads((self.work/'RESULT.json').read_text())
         self.assertEqual(result['phase'],'PREPARING_NO_TRANSPORT_DISPATCH')
         self.assertEqual(result['invocations'],[]);self.assertEqual(self.calls,0)
+    def test_borrowed_open_refusal_preserves_failure_before_calls(self):
+        original=worker.os.open
+        def opened(path,*args,**kwargs):
+            if str(path)==str(self.source):raise PermissionError('original borrowed-open refusal')
+            return original(path,*args,**kwargs)
+        with patch.object(worker.os,'open',side_effect=opened):
+            with self.assertRaises(PermissionError):self.execute()
+        result=json.loads((self.work/'RESULT.json').read_text())
+        self.assertFalse(result['complete']);self.assertEqual(result['invocations'],[])
+        self.assertEqual(result['phase'],'PREPARING_NO_TRANSPORT_DISPATCH')
+        self.assertIn('original borrowed-open refusal',result['failure']);self.assertEqual(self.calls,0)
+        import audit
+        proof=audit.audit(result,self.plan,self.work)
+        self.assertEqual(proof['functional_status'],'FAILED')
+        self.assertEqual(proof['attempted_cli_invocations'],0)
 
 
 if __name__=='__main__':unittest.main()
