@@ -22,15 +22,24 @@ def sources():
     paths=set((HERE).glob('*.py'))|set((ROOT/'bench/sync').glob('*.py'))
     for pkg in ['camera_sdk_concurrency','camera_sdk_receiving','private_camera_receiving']:paths.update((ROOT/'tests'/pkg).glob('*.py'))
     paths.add(ROOT/'tests/validation_process/records.py')
+    paths.update((ROOT/'tests/process_observation').glob('*.py'))
+    paths.add(ROOT/'tools/process-observation/task_info.c')
     paths.update(ROOT/'tests'/n for n in ['shared_cpu_pool.py','shared_io_pool.py','shared_process_owner.py','shared_dispatch.py','manual.py'])
     paths.update((ROOT/'tools/adobe-validator').glob('*.h'));paths.add(ROOT/'tools/adobe-validator/driver.cpp')
     return {str(p):artifact_sha(p) for p in sorted(paths)}
 def checked_plan(path,digest):
     p=Path(path);require(p.is_absolute() and p.resolve()==p,'canonical plan required');d=read_manifest(p,digest)
-    require(set(d)=={'schema','workspace','parameters','execution_source_sha256','tools','fixtures','host_memory_bytes','interpreter'},'exact SDK plan fields required')
-    require(d['schema']=='unison-shared-sdk-host-plan/1' and d['parameters']==PARAMETERS
+    observed=d.get('schema')=='unison-shared-sdk-host-plan/2'
+    fields={'schema','workspace','parameters','execution_source_sha256','tools','fixtures','host_memory_bytes','interpreter'}
+    require(set(d)==fields|({'process_observation'} if observed else set()),'exact SDK plan fields required')
+    require(d['schema'] in ('unison-shared-sdk-host-plan/1','unison-shared-sdk-host-plan/2') and d['parameters']==PARAMETERS
         and all(type(d['parameters'][k]) is type(v) for k,v in PARAMETERS.items())
         and all(type(x) is int for x in d['parameters']['native_thread_targets']),'fixed finite SDK limits required')
+    if observed:
+        from shared_observed import checked_contract
+        c=checked_contract(d['process_observation'])
+        require(c['sample_limit']==32 and c['interval_seconds']==.1,
+                'fixed32-sample/100ms observation contract required')
     require(sys.executable==PYTHON and d['interpreter']==dict(path=PYTHON,sha256='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'),'qualified interpreter required')
     require(d['execution_source_sha256']==sources(),'current source closure differs')
     w=Path(d['workspace']);require(w.parent==Path('/private/tmp') and w.name.startswith('u-shm-') and 8<len(w.name)<=32,'fresh short private namespace required')
@@ -76,7 +85,12 @@ def worker(args,plan):
         for item in plan['tools'].values():require(artifact_sha(item['executable'])==item['sha256'],'tool changed before call')
         for item in plan['fixtures']:
             st=os.lstat(item['path']);require(all(getattr(st,k)==v for k,v in item['identity'].items()),'fixture epoch changed before call')
-        out=invoke(case['command'],dict(LANG='C',LC_ALL='C',PATH='/usr/bin:/bin'),min(deadline,time.monotonic()+60),pass_fds=binding['inherited_fds'])
+        call_args=dict(pass_fds=binding['inherited_fds'])
+        call_invoke=invoke
+        if plan.get('process_observation') is not None:
+            from shared_observed import invoke_observed
+            call_invoke=invoke_observed;call_args['contract']=plan['process_observation']
+        out=call_invoke(case['command'],dict(LANG='C',LC_ALL='C',PATH='/usr/bin:/bin'),min(deadline,time.monotonic()+60),**call_args)
         try:
             for item in plan['tools'].values():require(artifact_sha(item['executable'])==item['sha256'],'tool changed after call')
             for item in plan['fixtures']:

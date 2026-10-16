@@ -22,6 +22,17 @@ class Entry(unittest.TestCase):
             return e.checked_plan('/private/tmp/inert-plan.json','f'*64)
     def test_exact_plan_and_nine_word_worker_command(self):
         p=self.fixture();self.assertEqual(self.check(p),p);self.assertEqual(len(e.child_argv('/inert','a'*64,p['workspace'])),9)
+    def test_v2_observation_contract_is_explicit_and_fixed(self):
+        p=self.fixture();p['schema']='unison-shared-sdk-host-plan/2'
+        p['process_observation']=dict(path='/private/tmp/inert-probe',sha256='d'*64,sample_limit=32,interval_seconds=.1)
+        self.assertEqual(self.check(p),p)
+        for changes in [dict(sample_limit=128),dict(interval_seconds=.05),dict(sha256='bad')]:
+            q=copy.deepcopy(p);q['process_observation'].update(changes)
+            with self.assertRaises(ValueError):self.check(q)
+        q=copy.deepcopy(p);q['schema']='unison-shared-sdk-host-plan/1'
+        with self.assertRaises(ValueError):self.check(q)
+        del p['process_observation']
+        with self.assertRaises(ValueError):self.check(p)
     def test_retained_generated_0644_is_preserved_not_chmodded(self):
         p=self.fixture()
         for f in p['fixtures']:f['identity']['st_mode']=stat.S_IFREG|0o644

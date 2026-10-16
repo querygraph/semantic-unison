@@ -13,6 +13,13 @@ class Parent(unittest.TestCase):
     def call(self,args,d):return audit(d,reference=args[0],experimental=args[1],fixtures=args[2],memory_bytes=args[3])
     def test_complete_does_not_establish_aggregate_release(self):
         args,d=self.fixture();p=self.call(args,d);self.assertEqual(p['functional_status'],'PASSED');self.assertFalse(p['resource_release_authorized'])
+    def test_observation_requires_explicit_contract_and_complete_records(self):
+        args,d=self.fixture();d['invocations'][0]['outcome']['process_observations']={}
+        with self.assertRaises(ValueError):self.call(args,d)
+        del d['invocations'][0]['outcome']['process_observations']
+        contract=dict(path='/private/tmp/inert-probe',sha256='d'*64,sample_limit=32,interval_seconds=.1)
+        with self.assertRaises(ValueError):
+            audit(d,reference=args[0],experimental=args[1],fixtures=args[2],memory_bytes=args[3],observation_contract=contract)
     def test_known_nonzero_prefix_is_failed_not_pass(self):
         args,d=self.fixture();d.update(complete=False,phase='CALL_MAY_HAVE_STARTED',failure='original',rows=[],invocations=d['invocations'][:1]);d['invocations'][0]['outcome']['returncode']=7;d['invocations'][0]['outcome']['client_cleanup']['returncode']=7
         self.assertEqual(self.call(args,d)['functional_status'],'FAILED')

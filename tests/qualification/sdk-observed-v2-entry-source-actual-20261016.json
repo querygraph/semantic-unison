@@ -1,0 +1,84 @@
+{
+  "outcomes": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.020s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 37667,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..........\n----------------------------------------------------------------------\nRan 10 tests in 0.019s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 37669,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_dispatch_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.164s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 37671,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "version2 plan/entry/parent/dispatcher source controls; no SDK or payload/EXIO",
+  "source_sha256": {
+    "tests/sdk_host_matrix/shared_execute.py": "1d7686e79d622b8b02abc3c4adcc357389107922b342c043f408d495178ad180",
+    "tests/sdk_host_matrix/shared_execute_test.py": "70a739843b6d8469a3b3909f7f1a82a47b5b5cf317c6030267c9400daafbb55b",
+    "tests/sdk_host_matrix/shared_parent_audit_test.py": "c89928d3de9fe0569e16a20ee575acc777c983acbfe8adc50b47d8c1e771f696",
+    "tests/shared_dispatch.py": "c2a907d9640f7b2ff720e80d2954e9043bd6e4b757b34ab5f4edef5f1825b868"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "f4b191",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

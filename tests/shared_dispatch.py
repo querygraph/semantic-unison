@@ -234,7 +234,8 @@ def run(target, argv, output, credits, *, io_admission=None):
                     from shared_parent_audit import audit as sdk_matrix_audit
                     plan=read_manifest(argv[4],argv[6])
                     external=sdk_matrix_audit(result,reference=plan['tools']['reference'],experimental=plan['tools']['experimental'],
-                        fixtures=plan['fixtures'],memory_bytes=plan['host_memory_bytes'])
+                        fixtures=plan['fixtures'],memory_bytes=plan['host_memory_bytes'],
+                        observation_contract=plan.get('process_observation'))
                     for fixture in plan['fixtures']:
                         observed=os.lstat(fixture['path'])
                         require(all(getattr(observed,k)==v for k,v in fixture['identity'].items()),'SDK fixture epoch changed before release')

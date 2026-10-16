@@ -93,3 +93,20 @@ probe-reap evidence and changed-budget records rejected. Nine existing parent
 audit controls also passed. CPU8 and all test/probe groups closed; zero SDK,
 photo payload or EXglobal IO calls occurred. This is component integration,
 not a new native admission or resource measurement on SDK work.
+
+The SDK entry now supports `unison-shared-sdk-host-plan/2`, whose additional
+`process_observation` contract requires an exact probe path/SHA,32 samples and
+a100ms interval. V1 plans cannot carry it. The execution source closure includes
+the observer/probe/auditor sources and C probe source. Each selected SDK call
+uses the observed component; the parent dispatcher supplies the exact pinned
+contract to its independent audit before releasing worker/CPU/IO ownership.
+At most384 probe calls are possible across the twelve SDK calls; query overhead
+is part of observed elapsed time and precludes a direct unobserved speed claim.
+The probes are sequential and share the existing two owner credits alongside
+the native target1/2/6 declaration; no hard OS-thread limit is implied.
+
+[Thirty source controls](../../tests/qualification/sdk-observed-v2-entry-source-actual-20261016.json)
+passed for entry, parent and dispatcher, including V1/extra-field and missing
+observation refusal. No native SDK, payload or EXglobal ran. Full fake-worker
+composition and a newly frozen V2 request remain required before any new
+reviewed native admission; the completed V1 grant remains consumed.
