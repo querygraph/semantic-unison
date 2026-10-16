@@ -11,16 +11,25 @@ class Entry(unittest.TestCase):
             fixtures=[dict(codec=c,path='/private/tmp/inert-'+c,sha256='c'*64,size=10,identity=dict(identity)) for c in ['uncompressed','jpeg','jxl']],host_memory_bytes=1073741824,
             interpreter=dict(path=e.PYTHON,sha256='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'))
         return p
-    def check(self,p):
+    def check(self,p,observed_mode=None):
         def read(path,h):
             if str(path)=='/private/tmp/inert-plan.json':return p
             item=next(i for i in p['tools'].values() if i['manifest']==str(path))
             return dict(executable=item['executable'],executable_sha256=item['sha256'],build_id=item['build_id'],source_sha256='a'*64,adapter_headers_sha256={'area_scheduler.h':'a'*64})
         identity=self.fixture()['fixtures'][0]['identity']
+        if observed_mode is not None:identity['st_mode']=stat.S_IFREG|observed_mode
         with patch.object(e,'read_manifest',side_effect=read),patch.object(e,'sources',return_value={}),patch.object(e,'artifact_sha',return_value='a'*64),patch.object(e.os,'lstat',return_value=SimpleNamespace(**identity)):
             return e.checked_plan('/private/tmp/inert-plan.json','f'*64)
     def test_exact_plan_and_nine_word_worker_command(self):
         p=self.fixture();self.assertEqual(self.check(p),p);self.assertEqual(len(e.child_argv('/inert','a'*64,p['workspace'])),9)
+    def test_retained_generated_0644_is_preserved_not_chmodded(self):
+        p=self.fixture()
+        for f in p['fixtures']:f['identity']['st_mode']=stat.S_IFREG|0o644
+        self.assertEqual(self.check(p,observed_mode=0o644),p)
+    def test_unaccepted_writable_mode_refuses_even_with_matching_epoch(self):
+        p=self.fixture()
+        for f in p['fixtures']:f['identity']['st_mode']=stat.S_IFREG|0o600
+        with self.assertRaises(ValueError):self.check(p,observed_mode=0o600)
     def test_limits_and_source_snapshot_refused(self):
         for mode in ['cpu','targets','memory','source','extra']:
             p=self.fixture()

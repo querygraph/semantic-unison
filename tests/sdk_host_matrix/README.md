@@ -209,3 +209,25 @@ groups settle, parent disposable grants close and fresh exclusive reacquisition
 passes. Actual tiny fixture/fake-helper hashes are checked. Canonical inventory,
 admission/child argv and interpreter SHA remain explicit doubles; these controls
 are not canonical IO admission or actual SDK/native plan qualification.
+
+## Prepared shared native V1 request
+
+[Exact request](../../doc/shared-sdk-host-request-v1.json) and
+[plan](../../doc/shared-sdk-host-plan-v1.json) freeze125 execution sources,
+20 prerequisite receipts, the existing qualified reference and unqualified
+experimental artifact, and three retained SDK-generated codecs. Metadata-only
+preflight passed without opening tool/fixture payloads. The generated fixtures
+remain their exact0644 native identities;0400 inputs are also supported. The
+worker performs read-only access and preserves exact metadata, not a chmod or
+recopy. Input provenance is the pinned historical generated-input READY/plan,
+not Photo's separately owned readonly-copy contract.
+
+[Seven policy/entry controls](../qualification/sdk-shared-generated-fixture-policy-source-actual-20261016.json)
+include0400/0644 acceptance and matching0600 refusal. Driver source opens hashing
+streams `rb`; the pinned SDK file-stream constructor defaults to output=false.
+The source checks do not prove runtime behavior of the experimental tool.
+The new request covers12 serial SDK calls/reference1/experimental1,2,6 under
+Unison8+EXglobal; no admission exists and no runtime is dispatched. Task/allocator
+observations and validation-result parity will not establish pixels, OS-thread
+hard caps, RSS, scaling speedup or throughput. A new exact Root admission is
+required; historical18-credit plans and prior consumed SDK slots stay unchanged.

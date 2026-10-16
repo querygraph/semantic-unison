@@ -14,7 +14,7 @@ from shared_kernel import Kernel
 from shared_child import invoke
 PYTHON='/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14'
 PARAMETERS=dict(cpu_credits=8,calls=12,inputs=3,owner_credits=2,native_thread_targets=[1,2,6],
-    observation_seconds=600,worker_seconds=570,per_call_seconds=60,declared_logical_io_bytes=8*1073741824,io_budget_enforced=False)
+    observation_seconds=600,worker_seconds=570,per_call_seconds=60,declared_logical_io_bytes=8*1073741824,io_budget_enforced=False,fixture_access='read-only-open-preserve-exact-metadata')
 FIELDS=('st_dev','st_ino','st_mode','st_size','st_mtime_ns','st_ctime_ns','st_nlink','st_uid')
 def require(v,s):
     if not v:raise ValueError(s)
@@ -54,7 +54,7 @@ def checked_plan(path,digest):
         q=Path(item['path']);require(q.is_absolute() and q.resolve()==q and q.is_relative_to('/private/tmp'),'private retained generated fixture path required')
         require(type(item['size']) is int and 0<item['size']<=128*1048576 and set(item['identity'])==set(FIELDS),'bounded fixture identity required')
         st=os.lstat(q);require(all(type(item['identity'][k]) is int and getattr(st,k)==item['identity'][k] for k in FIELDS),'fixture metadata changed')
-        require(item['size']==st.st_size and st.st_nlink==1 and st.st_uid==os.getuid() and stat.S_ISREG(st.st_mode) and st.st_mode & 0o777==0o400,'readonly single-owner private fixture required')
+        require(item['size']==st.st_size and st.st_nlink==1 and st.st_uid==os.getuid() and stat.S_ISREG(st.st_mode) and stat.S_IMODE(st.st_mode) in (0o400,0o644),'retained generated fixture mode/owner/type differs')
     require(type(d['host_memory_bytes']) is int and 0<d['host_memory_bytes']<=4*1073741824,'bounded covered allocator declaration required')
     shared_matrix(d['tools']['reference'],d['tools']['experimental'],d['fixtures'],d['host_memory_bytes'])
     return d
