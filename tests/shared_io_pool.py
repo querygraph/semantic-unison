@@ -19,6 +19,48 @@ CANONICAL_MANIFEST = '/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-I
 CANONICAL_SHA256 = 'f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636'
 
 
+class UnresolvedIOOwnership(UnresolvedOwnership):
+    """All close uncertainties, with only pre-close identity observations.
+
+    uncertain_fd is populated only for the unambiguous single-close case.
+    uncertain_closes is authoritative for combined failures; never retry any
+    recorded numeric descriptor or inspect it after an uncertain close.
+    """
+    def __init__(self, message, *, retained_fds=(), uncertain_closes=(),
+                 original_failure=None, close_failure=None):
+        self.uncertain_closes = tuple(uncertain_closes)
+        self.uncertain_fds = tuple(item['fd'] for item in self.uncertain_closes)
+        super().__init__(message, retained_fds=tuple(dict.fromkeys(retained_fds)),
+                         uncertain_fd=self.uncertain_fds[0] if len(self.uncertain_fds) == 1 else None)
+        self.original_failure = original_failure
+        self.close_failure = close_failure
+
+
+def descriptor_observation(fd, role):
+    # Call BEFORE attempting close, never on a descriptor with uncertain close.
+    try:
+        s = os.fstat(fd)
+        identity = {'device': s.st_dev, 'inode': s.st_ino, 'uid': s.st_uid,
+                    'mode': s.st_mode, 'nlink': s.st_nlink}
+        error = None
+    except BaseException as failure:
+        identity = None
+        error = repr(failure)
+    return {'fd': fd, 'role': role, 'observed_before_close': identity,
+            'identity_observation_error': error}
+
+
+def uncertainty_records(error, observations):
+    if isinstance(error, UnresolvedIOOwnership):
+        return error.uncertain_closes
+    if isinstance(error, UnresolvedOwnership) and error.uncertain_fd is not None:
+        fd = error.uncertain_fd
+        return (observations.get(fd, {'fd': fd, 'role': 'upstream_descriptor',
+                'observed_before_close': None,
+                'identity_observation_error': 'upstream carrier supplied no pre-close identity'}),)
+    return ()
+
+
 def read_manifest(path, digest):
     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC)
     try:
@@ -107,6 +149,7 @@ class GlobalPool:
         directory = os.open(self.path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
                             | os.O_NONBLOCK | os.O_CLOEXEC)
         owned = []
+        observations = {directory: descriptor_observation(directory, "io_directory")}
         lease = None
         failure = None
         try:
@@ -118,6 +161,7 @@ class GlobalPool:
             except BaseException:
                 close_descriptors([fd])
                 raise
+            observations[fd] = descriptor_observation(fd, "io_barrier")
             self._barrier_bound(directory, fd)
             try:
                 fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
@@ -150,11 +194,16 @@ class GlobalPool:
             try:
                 os.close(directory)
             except BaseException as error:
-                if failure is not None:
-                    failure.add_note('IO directory close uncertain, no numeric retry: %r' % error)
-                else:
-                    raise UnresolvedOwnership('IO directory close unknown; retain barrier owner',
-                              retained_fds=lease.fds if lease else (), uncertain_fd=directory) from error
+                prior = uncertainty_records(failure, observations)
+                retained = failure.retained_fds if isinstance(failure, UnresolvedOwnership) else ()
+                if lease is not None:
+                    retained = tuple(retained) + lease.fds
+                carrier = UnresolvedIOOwnership(
+                    'IO directory close unknown; retain all descriptor ownership',
+                    retained_fds=retained,
+                    uncertain_closes=prior + (observations[directory],),
+                    original_failure=failure, close_failure=error)
+                raise carrier from (failure if failure is not None else error)
 
 
 def close_unstarted(lease):
@@ -175,9 +224,10 @@ def try_io_cpu_bundle(io_pool, cpu_pool, authorized_indexes):
     try:
         cpu = cpu_pool.try_acquire(authorized_indexes)
     except UnresolvedOwnership as error:
-        raise UnresolvedOwnership('CPU acquisition unknown; retain IO plus CPU ownership',
+        raise UnresolvedIOOwnership('CPU acquisition unknown; retain IO plus CPU ownership',
               retained_fds=io.fds + error.retained_fds,
-              uncertain_fd=error.uncertain_fd) from error
+              uncertain_closes=uncertainty_records(error, {}),
+              original_failure=error) from error
     except BaseException:
         close_unstarted(io)
         raise

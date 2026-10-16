@@ -83,11 +83,20 @@ class Controls(unittest.TestCase):
         try:
             self.assertEqual(child.stdout.readline(), b'READY\n')
             # Parent copy closes; child ownership is retained by this test.
-            io.close_unstarted(first)
+            # Explicit transfer: READY was actually received from the live
+            # inherited holder. Close parent copies without claiming child
+            # settlement; retain child handle until actual communicate/wait.
+            first.closed = True
+            io.close_descriptors(first.fds)
+            print(json.dumps({'event': 'PARENT_COPY_TRANSFER', 'holder_pid': child.pid,
+                  'ready_received': True, 'parent_copies_closed': True,
+                  'child_settled': False}), flush=True)
             self.assertIsNone(self.pool.try_acquire())
         finally:
             child.communicate(b'x', timeout=3)
             self.assertEqual(child.returncode, 0)
+            print(json.dumps({'event': 'HOLDER_ACTUAL_WAIT', 'pid': child.pid,
+                              'exit': child.returncode}), flush=True)
         second = self.pool.try_acquire()
         io.close_unstarted(second)
 
@@ -168,6 +177,69 @@ class Controls(unittest.TestCase):
         for fd in raised.exception.retained_fds:
             original(fd)
         original(directory_fd[0])
+
+    def test_refusal_plus_directory_close_carries_unresolved(self):
+        original_close = os.close
+        original_failure = ValueError('injected ordinary identity refusal')
+        seen = {}
+        def refuse(pool, fd):
+            seen['directory'] = fd
+            seen['identity'] = io.descriptor_observation(fd, 'io_directory')
+            raise original_failure
+        def fail_close(fd):
+            if fd == seen.get('directory'):
+                raise OSError('injected directory close before kernel close')
+            return original_close(fd)
+        with patch.object(io.GlobalPool, '_directory_bound', refuse), \
+             patch.object(io.os, 'close', side_effect=fail_close):
+            with self.assertRaises(io.UnresolvedIOOwnership) as raised:
+                self.pool.try_acquire()
+        error = raised.exception
+        self.assertIs(error.original_failure, original_failure)
+        self.assertIs(error.__cause__, original_failure)
+        self.assertEqual(error.retained_fds, ())
+        self.assertEqual(error.uncertain_fds, (seen['directory'],))
+        self.assertEqual(error.uncertain_closes[0], seen['identity'])
+        # Injector explicitly executed NO kernel close; this is resolution
+        # using injector proof, never retry of a genuinely unknown close.
+        original_close(seen['directory'])
+
+    def test_rollback_and_directory_close_both_uncertainties_preserved(self):
+        original_close = os.close
+        original_bound = self.pool._barrier_bound
+        seen = {'calls': 0, 'close_calls': []}
+        refusal = ValueError('injected post-lock identity refusal')
+        def refuse_after_lock(pool, directory, fd):
+            seen.update(directory=directory, barrier=fd)
+            seen['calls'] += 1
+            original_bound(directory, fd)
+            if seen['calls'] == 2:
+                raise refusal
+        def fail_close(fd):
+            if fd in (seen.get('directory'), seen.get('barrier')):
+                seen['close_calls'].append(fd)
+                raise OSError('injected close before kernel close')
+            return original_close(fd)
+        with patch.object(io.GlobalPool, '_barrier_bound', refuse_after_lock), \
+             patch.object(io.os, 'close', side_effect=fail_close):
+            with self.assertRaises(io.UnresolvedIOOwnership) as raised:
+                self.pool.try_acquire()
+        error = raised.exception
+        self.assertEqual(error.uncertain_fds, (seen['barrier'], seen['directory']))
+        self.assertIsNone(error.uncertain_fd)  # no misleading singular close
+        self.assertEqual(seen['close_calls'], [seen['barrier'], seen['directory']])
+        self.assertEqual([x['role'] for x in error.uncertain_closes],
+                         ['io_barrier', 'io_directory'])
+        self.assertEqual(error.uncertain_closes[0]['observed_before_close']['inode'],
+                         self.value['barrier']['identity']['inode'])
+        self.assertEqual(error.uncertain_closes[1]['observed_before_close']['inode'],
+                         self.value['directoryIdentity']['inode'])
+        self.assertIs(error.original_failure.__cause__, refusal)
+        self.assertIs(error.__cause__, error.original_failure)
+        # Both fake failures executed no closes; verify retained actual lock.
+        self.assertIsNone(self.pool.try_acquire())
+        original_close(seen['barrier'])
+        original_close(seen['directory'])
 
 
 if __name__ == '__main__':

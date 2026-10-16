@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Combined IOclose failures fixed in source successor: UnresolvedIOOwnership carries
+ALLuncertainFD pre-close identities plus known-open FDs/original cause, even ordinary
+refusal+directoryclose or rollbackclose+directoryclose. No post-uncertain fstat/numeric
+retry. [12disposable+4inert controls](tests/qualification/shared-io-combined-failure-successor-actual-20261016.json)
+9ae1a3/0+d1573a/0 CLOSED/groupsreaped/tokens00..07closed. Inherited-holder test
+now records explicit actualREADY→parentcopytransfer(child_settled=false)→actualwait0,
+never fabricated settlement while live. Canonical [probe v3](doc/shared-physical-io-canonical-qualification-plan-v3.json)
+keeps ALLparent FD copies until group settlement; [consumer v2](doc/shared-physical-io-consumer-contract-v2.json)
+pins updated backend/unknown-log carrier. Earlier source plans remain immutable
+historical/unstarted; v3 needs exact Root admission before any canonical IOtest.
+No canonical IO lock, DNG/SDK/Adobe/payload operation or new pool created.
+
 Namespace reconciliation is explicit in immutable [proposal v3](doc/shared-physical-io-proposal-v3.json):
 adopt Root io-lanes-v1/manifestf7b55398/directory307225492/barrier307225493 ONLY.
 Alternate v2 physical-io-lanes-v1 suggestion is superseded and MUST NOT be created.

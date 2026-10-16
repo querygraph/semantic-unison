@@ -16,7 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'tests'))
 sys.path.insert(0, str(ROOT / 'bench/sync'))
 from shared_cpu_pool import Pool, authorized_unison_tokens, require, UnresolvedOwnership, unique_object
-from shared_io_pool import GlobalPool, try_io_cpu_bundle, close_unstarted, CANONICAL_MANIFEST, CANONICAL_SHA256
+from shared_io_pool import GlobalPool, try_io_cpu_bundle, close_unstarted, CANONICAL_MANIFEST, CANONICAL_SHA256, UnresolvedIOOwnership, descriptor_observation, uncertainty_records
 from shared_process_owner import settle, retain_after_record, require_ownership_support
 from ownership import OwnedGroup
 
@@ -46,13 +46,22 @@ def pinned_plan(path):
 def verify_held(io_pool, lease):
     directory = os.open(io_pool.path, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW
                         | os.O_NONBLOCK | os.O_CLOEXEC)
+    observation = descriptor_observation(directory, 'io_revalidation_directory')
+    failure = None
     try:
         io_pool._directory_bound(directory)
         io_pool._barrier_bound(directory, lease.fds[0])
+    except BaseException as error:
+        failure = error
+        raise
     finally:
-        # If close is uncertain, outer live bundle owner retains ownership;
-        # this numeric directory FD is never retried.
-        os.close(directory)
+        try:
+            os.close(directory)
+        except BaseException as error:
+            raise UnresolvedIOOwnership('revalidation directory close unknown',
+                retained_fds=lease.fds,
+                uncertain_closes=uncertainty_records(failure, {}) + (observation,),
+                original_failure=failure, close_failure=error) from (failure or error)
 
 
 def worker(plan_path, admission_path):
@@ -150,7 +159,10 @@ def main():
     except BaseException as error:
         if bundle is not None or isinstance(error, UnresolvedOwnership) or child is not None and not child.reaped:
             retain_after_record(lambda: write(output / 'OWNERSHIP-UNRESOLVED.json',
-                               {'owner_pid': os.getpid(), 'error': repr(error)}))
+                               {'owner_pid': os.getpid(), 'error': repr(error),
+                                'retained_fds': list(getattr(error, 'retained_fds', ())),
+                                'uncertain_fd': getattr(error, 'uncertain_fd', None),
+                                'uncertain_closes': list(getattr(error, 'uncertain_closes', ())) }))
         write(output / 'FAILED-KNOWN-CLOSED.json', {'error': repr(error)})
         return 1
 
