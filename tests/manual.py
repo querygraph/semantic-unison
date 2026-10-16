@@ -31,6 +31,7 @@ Targets:
   shared-sync-controls    pure sync budget/receipt controls, no binaries
   shared-io-controls      pure physical-IO claim controls; no device or IO lock access
   dng-private-framing     serial stock/Ox fixed synthetic framing checks; no SDK/image reads
+  dng-private-diagnostic  serial stock/Ox stdin diagnostic controls; generated inputs only
   private-dng-local-clone  tiny synthetic local source-clone exact/no-op controls; no SDK/Photo
   interrupted-receipts    four fake-child interruption/receipt controls
   aggregate-lifecycle     four fake-worker aggregate ownership controls
@@ -87,7 +88,7 @@ def shared_resource_plan(target, environment):
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
     build = target in ('stock-build', 'ox-build')
-    framing = target == 'dng-private-framing'
+    framing = target in ('dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
     inspect_file = target == 'inspect-file'
     endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
@@ -99,7 +100,7 @@ def shared_resource_plan(target, environment):
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
-                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'private-dng-local-clone')
+                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + inspector_workers + overhead,
             'inspector_workers': inspector_workers,
@@ -128,11 +129,11 @@ def command(target, output, environment):
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
-                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'private-dng-local-clone'),
+                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'private-dng-local-clone':
             require(shared >= 5, 'local clone controls require three worker plus two owner credits')
-        if target == 'dng-private-framing':
+        if target in ('dng-private-framing', 'dng-private-diagnostic'):
             require(shared >= 3, 'framing controls require one compiler plus two owner credits')
         if target == 'sync-functional':
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
@@ -142,6 +143,8 @@ def command(target, output, environment):
             require(shared >= 3, 'inspector execution needs one worker plus two owner credits')
     if target == 'private-dng-local-clone':
         return [sys.executable, str(ROOT / 'tests/private_dng_local_clone/run.py')]
+    if target == 'dng-private-diagnostic':
+        return [sys.executable, str(ROOT / 'tools/private-dng-framing/controls.py')]
     if target == 'dng-private-framing':
         return [sys.executable, str(ROOT / 'tests/dng_private_data/run.py')]
     if target == 'inspector-reuse-controls':

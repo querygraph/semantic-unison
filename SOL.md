@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+[Private framing stdin diagnostic](tools/private-dng-framing/README.md) now has
+stock/Ox builds+22original inert CLI controls ACTUALPASS/CLOSED owner99760/
+17366/24e618/0, worker99761reaped0/groupabsent/CPU00..07closed. Sourcepinsstable;
+recordedreadranges/bytecount capped331558/773callbacks, no channelprefetch,
+no sourcepathname/decoder/hash/profileeligibility. Childmode0400/nlink1 regular
+borrow, refusalsbeforeread; Pythonfixtureowner checkedactualnative-nsFIVE/mode/
+nlink. Childexplicitlyemitsnative-nsfence=false (callerresponsibility). Initial
+strictrecordfieldcompilefailureb69aaa/1 preservedclosed, qualifiednamesfixed.
+Make dng-private-diagnostic runsfixedinputs only; pureentrymappingb56359/0 closed.
+No camera/preservedclone/SDK/Photo/EXIO access; futureexecutor+admission remain
+separate. Untrustedmetadataoffsets bounded, notall-image-disjointnessproved.
+
 ACTUAL [distinct-raw remote fallback v2](tests/qualification/private-remote-distinct-fallback-actual-20261016.json)
 PASS/CLOSED:4stock/Oxpairs/12CLI, each1035264logical sameoffsetinheritedbytes
 (98.73046875%of1MiB) with exactoutput/basis/complement/no-opFIVE/stagingpass.

@@ -66,6 +66,15 @@ CLI and diagnostic module native/interface artifacts. Both owning tools exited0,
 worker groups reaped, allUnison8 tokens closed. This is packaging evidence, not
 a new CLI selftest/receiving run or semantic eligibility qualification.
 
+## Private framing diagnostic tool
+
+[Borrowed-stdin developer diagnostic](../tools/private-dng-framing/README.md)
+built stock/Ox and passed22generated-input controls, with bounded read ranges
+and native owner epoch comparisons. It has no input path argument or full-file
+hash/decoder, never decides eligibility, and is not active in a DNG profile.
+The executable's own timestamp check is not a native-nanosecond fence; any
+camera-input executor/IO admission and exact owner epoch proof remain pending.
+
 ## Acceptance scope audit
 
 The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to

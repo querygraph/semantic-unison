@@ -29,6 +29,10 @@ with patch.object(Path, 'is_file', return_value=True):
     framing_plan = manual.shared_resource_plan('dng-private-framing', env)
     assert framing_plan['declared_peak_credits'] == 3 and framing_plan['compiler_jobs'] == 1
     assert framing_plan['token_acquisition_implemented']
+    diagnostic = manual.command('dng-private-diagnostic', out, env)
+    assert diagnostic == [sys.executable, str(manual.ROOT / 'tools/private-dng-framing/controls.py')]
+    assert manual.shared_resource_plan('dng-private-diagnostic', env)['declared_peak_credits'] == 3
+    assert manual.shared_resource_plan('dng-private-diagnostic', env)['compiler_jobs'] == 1
     reuse_env = dict(env, INSPECTOR_RECEIPT='/NEVER-EXECUTED receipt.json',
                      INSPECT_INPUT='/NEVER-READ input.dng')
     reuse = manual.command('inspect-file', out, reuse_env)
@@ -46,6 +50,7 @@ with patch.object(Path, 'is_file', return_value=True):
         ('sync-functional', {'SHARED_CPU_CREDITS': '2'}),
         ('inspect-ox', {'SHARED_CPU_CREDITS': '2'}),
         ('dng-private-framing', {'SHARED_CPU_CREDITS': '2'}),
+        ('dng-private-diagnostic', {'SHARED_CPU_CREDITS': '2'}),
         ('private-dng-local-clone', {'SHARED_CPU_CREDITS': '4'}),
     ):
         try:
@@ -95,9 +100,9 @@ import shared_dispatch
 with patch.object(shared_dispatch.os, 'waitid', None), \
         patch.object(shared_dispatch.Pool, 'read', side_effect=AssertionError('pool touched')):
     try:
-        shared_dispatch.run('group-parser', [], out, 8)
-    except ValueError:
-        pass
+        shared_dispatch.run('group-parser', [sys.executable, str(Path(__file__).resolve())], out, 8)
+    except ValueError as error:
+        assert 'waitid' in str(error)
     else:
         raise AssertionError('unsupported interpreter acquired shared ownership')
 print('PASS unsupported interpreter refusal before pool read/acquisition')

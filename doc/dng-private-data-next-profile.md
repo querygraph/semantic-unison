@@ -98,3 +98,22 @@ were verified. This checks Dune's automatic module discovery, distinct from the
 standalone162-check suite. These were build-only runs: no final CLI/selftest,
 receiving, SDK, Adobe or photographic payload operation. No profile activation
 or general format/corpus qualification follows from successful packaging.
+
+## Borrowed-descriptor diagnostic CLI
+
+[Developer tool](../tools/private-dng-framing/README.md) now combines the inactive
+locator/framer with unbuffered exact-length reads on an owner-supplied regular
+stdin descriptor. It opens no source path and accepts no input argument. The
+fixed target `dng-private-diagnostic` builds stock/Ox and tests only generated
+inert files. [22actual CLI controls](../tests/qualification/private-framing-cli-controls-actual-20261016.json)
+passed with application read-range/count checks, declared maker payload skipped,
+native owner FIVE/mode/nlink unchanged, both compilers and process groups closed.
+Pipes, writable-mode/multi-link inputs and unexpected pathname arguments refuse
+before child reads. One strict compile failure was preserved and corrected.
+
+Limits are331558requested application bytes/773logical read callbacks; no full
+SHA, decoder or vendor/closed-reference proof. The child reports its timestamp
+fence lacks native nanosecond precision; an admitting owner must supply exact
+FD/path epoch fencing and actual settlement. Untrusted pointers are bounded, not
+proved to be genuine metadata. No camera/preserved clone/Photo data was read,
+no current profile was widened, and no future diagnostic admission is inferred.

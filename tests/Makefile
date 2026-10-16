@@ -24,3 +24,7 @@ dng-private-framing:
 .PHONY: private-dng-local-clone
 private-dng-local-clone:
 	python3 tests/manual.py private-dng-local-clone
+
+.PHONY: dng-private-diagnostic
+dng-private-diagnostic:
+	python3 tests/manual.py dng-private-diagnostic

@@ -24,7 +24,7 @@ MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
            'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
-           'shared-io-controls', 'dng-private-framing', 'private-dng-local-clone'}
+           'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone'}
 
 
 def write(path, value):
@@ -111,6 +111,9 @@ def run(target, argv, output, credits, *, io_admission=None):
         if target == 'dng-private-framing':
             sources.extend([ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
                             ROOT / 'tests/dng_private_data/test.ml'])
+        if target == 'dng-private-diagnostic':
+            sources.extend([ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
+                            ROOT / 'tools/private-dng-framing/inspect.ml'])
         if target == 'shared-io-controls':
             sources.append(ROOT / 'tests/shared_io_plan.py')
         pins = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
