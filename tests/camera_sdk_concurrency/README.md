@@ -136,3 +136,16 @@ success leaves overlap false. Corrupt output and failed CLI outcomes preserve
 known helper evidence while remaining incomplete. No mocked PID/protocol frame
 is actual process settlement, and no transport or helper runs in these controls.
 The admitted aggregate/dispatcher remains outstanding.
+
+## Parent result audit before dispatcher integration
+
+`result_audit.audit` describes the forthcoming synthetic worker result contract.
+It consumes the existing strict client/server/supervisor/pump prefix auditor,
+requires exact ordered one-seed compiler commands, independently rechecks
+helper/group/receipt/live evidence and binds complete case rows to those calls.
+An empty journal is accepted only for explicit failed pre-call preparation.
+The pinned proxy's exact no-server branch is the only zero-helper alternative;
+null PID or missing logs alone never suffice. Aggregate reap and FD closure
+remain outside this pure function. [Five source controls](../qualification/concurrent-parent-audit-prefix-controls-actual-20261016.json)
+qualify refusal/delegation boundaries only. Positive parent-audit fixtures and
+actual dispatcher integration are still required before a runtime request.

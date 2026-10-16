@@ -1,0 +1,50 @@
+{
+  "schema": "unison-concurrent-parent-audit-prefix-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "f04a27",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit.py",
+      "bytes": 5070,
+      "sha256": "4cdf30761b73cbff10a5327f19b569034445a96d4917e25300552e6d7a1897ba"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit_test.py",
+      "bytes": 2142,
+      "sha256": "f0c0328304996eda2991f7889e18f4161c6243b3133ee2cf48c81d8c09febb0d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6685,
+      "sha256": "dec9c4b27c625d75addf7f89c4806e39eadf91c93b74b47b351c89253436d48b"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-parent-audit-controls-20261016b/SHARED-START.json",
+      "bytes": 1120,
+      "sha256": "7906cdb5e1bac7e5d429f25b284ff64c64d1e4b2d0175397231a0e47e3fbe706"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-audit-controls-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "7e5a6b9d254e83f844a0b23dea2f6c44a2645cf4574060709ac5e5d2a439354e"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-audit-controls-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-audit-controls-20261016b/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "1683faffcdfbe110d76dbff5223ec6c50e28683becee8feb448717707418bee4"
+    }
+  ],
+  "scope": "5original prefix/schema/namespace/delegation controls; attempted call auditor mocked to refuse; positive full parent audit and dispatcher integration still unqualified; no CLI/helper/SDK/Photo/payload/EXglobal",
+  "full_goal_complete": false
+}
