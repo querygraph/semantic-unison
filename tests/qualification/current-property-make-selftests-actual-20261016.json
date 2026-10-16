@@ -1,0 +1,104 @@
+{
+  "schema": "unison-current-make-selftests/1",
+  "builds": {
+    "stock": {
+      "actual_owner_terminal": {
+        "session": 14445,
+        "chunk": "234020",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-property-stock-check-5c70f84b/RESULT.json",
+        "bytes": 43592,
+        "sha256": "dafdd3a47a9dfda217e3994cd5db3c0ea85a5e9e614e0bc7685d8363bc55f6fe"
+      },
+      "closure": {
+        "child": {
+          "pid": 38529,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 38529,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-property-stock-check-5c70f84b/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "3634d173166fea7950249630f7298a4818810173f251770576ac256d4d18d677"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-2qbpj8z2/src/unison",
+        "bytes": 5656936,
+        "sha256": "ff9bb332665bfda7f443cc3d21ca1d4f8811054619eeb7c7ed211126aaa54c8e"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "production_source_count": 425
+    },
+    "ox": {
+      "actual_owner_terminal": {
+        "session": 16814,
+        "chunk": "c91786",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-property-ox-check-031f4c97/RESULT.json",
+        "bytes": 43598,
+        "sha256": "a31f274f3452bcbef6f30a244c096c9de6d5a21a97c9a5554339a19161a982b5"
+      },
+      "closure": {
+        "child": {
+          "pid": 39718,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 39718,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-property-ox-check-031f4c97/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "11ec2a5a27f4f929c63a5991606fa30f51aee24fe0291b227a4e15b5097f43c0"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yqj7rrds/src/unison",
+        "bytes": 7580464,
+        "sha256": "e7d9328eab83901e6a09fb2400c5a6569dd785f082088b97618c7f9a5bcdc580"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "production_source_count": 425
+    }
+  },
+  "scope": "Actual historical tool terminals retained from this owner; current425 production/build source pins rehashed, both binaries/compilers unchanged. Make build+selftests only; no optional property-transfer run. Python dispatcher source is a successor to these build-owner pins, not relabelled unchanged."
+}
