@@ -150,3 +150,39 @@ worker primitive, not an enabled all-scanned feature. Next implement the private
 staging owner with source/name fences and bounded outer admission, then actual
 scan-selected coverage and negotiated scope. Existing worker close-error fault
 limits and platform scopes are not expanded by these successful cases.
+
+## Private stage owner checkpoint
+
+`validationStage.{ml,mli}` now provides the owner-loop lifetime primitive:
+existing owned0700 parent, read-only source name/descriptor binding, exclusive
+0600 stage, native macOS source epoch when supported, cooperative stat fallback
+only for exact unsupported-platform ENOSYS. Rebound parents, source names,
+source epochs and stage names refuse. Only the disposable path is exposed for
+future helper use; owned descriptors are close-on-exec. Parent creation, outer
+admission, worker/helper invocation and scan selection are not done here.
+
+Retirement unlinks only the still-bound owned stage and closes independent
+descriptors once. Replacements are preserved. A close error retains pre-close
+facts in an opaque owner; later getters and retirement preserve that carrier
+without probing/retrying the uncertain number. The first caller-supplied failure
+can be retained alongside cleanup uncertainty. The eventual asynchronous wrapper
+MUST keep admission/FD credits on that carrier rather than throwing through an
+auto-releasing callback. A persistent allocation-failure or arbitrary same-UID
+namespace attack is not qualified by these finite controls.
+
+Stock/Ox standalone controls passed seven groups each: normal snapshot/private
+mutation cleanup, source replacement, stage replacement, preentry refusals,
+exclusive-create collision, external source edit and close-error/no-retry
+retention. The close control deliberately closes a borrowed descriptor first
+(precondition violation), then reuses its numeric slot and proves a second
+retirement leaves the new descriptor intact. This is an injected EBADF model,
+not a genuinely ambiguous kernel-close experiment. All native test processes
+and compiler groups reaped0, CPU8 closed: actual18118/5cfea1/0, outer30366.
+[Evidence](../tests/qualification/validation-stage-owner-v2-actual-20261017.json)
+preserves the raw four compiler/test outcomes and exact sources. No SDK, photo,
+native cloning, Main/cache writes or enabled all-scanned path.
+
+This owner remains separately compiled groundwork. Dune's standard module
+discovery will see it on the next build; explicit Make wiring and the actual
+CandidateValidation asynchronous staging wrapper remain next. That integration
+must handle retained uncertainty before exposing any all-scanned setting.

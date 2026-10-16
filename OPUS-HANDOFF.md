@@ -88,6 +88,24 @@ Next concrete implementation: private staging owner, name/sourcefences and
 bounded outer admission; then scan-selected coverage and negotiated scope.
 Worker close-error/platform fault limits remain explicit; no all-scannedfeature
 or full-goal completion is inferred.
+Private stage owner now implemented in src/validationStage.{ml,mli}: owned0700
+parent, readonlysource name/FD epoch fence (FileObservation native onMac, exact
+unsupported-platformENOSYS fallback only), exclusive0600stage, path identity
+checks and replacement-preserving one-attempt retirement. Close uncertainty
+retains opaqueowner/preclosefacts/originalfailure; getters cannot downgrade it,
+no numericclose/probe retries. Caller mustretain outer admission oncarrier.
+Standalone stock/Ox7groups passed: normalcopy+private mutation cleanup, source/
+stage rebinds, preentry, O_EXCLcollision, external source edit, intentional
+borrow-precondition EBADF+numeric-slot reuse/no retry. It is not a genuine
+ambiguousOSclose or sameUIDsandbox/OOM qualification. Actualsession18118/5cfea1/0,
+outer30366+4containedcompiler/test groups reaped0, canonicalCPU8closed.
+Receipt validation-stage-owner-v2-actual-20261017.json, priorv1preserved. No
+SDK/photo/nativeclone/Main/cache/publish calls. No enabled all-scannedpath.
+Owner separatelycompiled only: Dune standard discovery seesnewmodule atnext
+build; Makeexplicitwiring pending. Next implement asynchronous CandidateValidation
+private-staging wrapper with bounded admission and retained-uncertainty handling,
+then scan-selected coverage/negotiatedscope.
+
 
 
 
