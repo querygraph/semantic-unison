@@ -62,3 +62,8 @@ observer inactive. IO admission clears its callback first and does not let that
 inactive-list cleanup failure lose a published grant. The previous source fails
 the lost-grant assertion; current stock/Ox controls and20-group suites pass.
 This does not suppress uncertain OS close/reap errors or prove complete OOM recovery.
+
+The [cancellation successor control](../qualification/io-cancel-unregister-actual-20261016.json)
+also injects unregister failure while cancelling a queued owner. Its reply must
+be `None`, its ready sibling must later complete, and both active/pending counts
+must return to zero. This passes on stock/Ox without further production changes.

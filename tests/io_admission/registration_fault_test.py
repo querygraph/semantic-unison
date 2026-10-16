@@ -57,7 +57,21 @@ let () =
  check (HelperSupervisor.test_unregister_consumed ()) "unregister failure was not injected";
  check ((IoAdmission.usage t).active_jobs=0 && (IoAdmission.usage t).pending=0)
    "unregister failure leaked IO credit";
- print_endline "PASS registration and unregister failure controls"
+ let release3=Lwt.wait () and cancellation=HelperSupervisor.cancellation () in
+ let active3=IoAdmission.with_devices t (HelperSupervisor.cancellation ()) ~devices:[1] (fun () -> release3) in
+ let cancelled=IoAdmission.with_devices t cancellation ~devices:[1]
+   (fun () -> failwith "cancelled IO callback started") in
+ let sibling=IoAdmission.with_devices t (HelperSupervisor.cancellation ()) ~devices:[1] (fun () -> return 11) in
+ HelperSupervisor.test_fail_unregister (); HelperSupervisor.cancel cancellation;
+ check (HelperSupervisor.test_unregister_consumed ()) "cancel unregister failure was not injected";
+ check (Lwt.poll cancelled=Some None && (IoAdmission.usage t).pending=1)
+   "unregister failure lost cancelled IO reply or sibling";
+ Lwt.wakeup release3 (); ignore(Lwt_unix.run active3);
+ check (Lwt_unix.run sibling=Some 11) "cancel unregister failure stranded later IO owner";
+ check ((IoAdmission.usage t).active_jobs=0 && (IoAdmission.usage t).pending=0)
+   "cancel unregister failure leaked IO credits";
+ print_endline "PASS registration, grant-unregister and cancellation-unregister controls"
+
 
 ''')
 log=w/'control.log'

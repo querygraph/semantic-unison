@@ -1,0 +1,69 @@
+{
+  "schema": "unison-io-cancel-unregister/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/ioAdmission.ml",
+      "bytes": 6881,
+      "sha256": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/io_admission/registration_fault_test.py",
+      "bytes": 6295,
+      "sha256": "94f0804b7bf1a98529f1ca01c8171f448998b8659dadb699b98a8dabb3600a99"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 24697,
+      "chunk": "30fe50",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-stock-20261016a/RESULT.json",
+          "bytes": 1870,
+          "sha256": "d80485d4c8cd256d609ec02819b9f9a7d88f366d3fd6f7550abd0710c11237ca"
+        },
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-stock-20261016a/SHARED-START.json",
+          "bytes": 1266,
+          "sha256": "a0cb64740a7b0cab16d6d177d4e1c0986cfeddd18f85c5a9d1f4a82eb15911e5"
+        },
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "c45301d5b65f11b1ee4c20648551781dcbd744646e6c9bd86d022cecc94f6060"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 71889,
+      "chunk": "6d09bc",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-ox-20261016a/RESULT.json",
+          "bytes": 1871,
+          "sha256": "8bbd34ed4d4889654fe63814e141d6907f6e31cdb8131013e9d7e33847434148"
+        },
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-ox-20261016a/SHARED-START.json",
+          "bytes": 1264,
+          "sha256": "2b5d1a6128c2daa7e75bd688e3addbd9df44b446203eba657a1ea50d601188a4"
+        },
+        {
+          "path": "/private/tmp/unison-io-cancel-unregister-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "b9777232a9f5a3d28b4f1c9541bdd5d02f438d4be8d2d42ef75756e00e9979ca"
+        }
+      ]
+    }
+  ],
+  "scope": "finite registration/grant-unregister/cancel-unregister failures, cancelled reply and ready-sibling progress; synthetic promises only, no SDK/Photo/native IO/EXglobal or whole-process bounds",
+  "production_change": "none beyond existing743ffdf",
+  "full_goal_complete": false
+}
