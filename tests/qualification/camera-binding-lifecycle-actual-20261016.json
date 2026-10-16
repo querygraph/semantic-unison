@@ -1,0 +1,263 @@
+{
+  "schema": "unison-camera-binding-lifecycle/1",
+  "owner_terminal": {
+    "chunk": "d7fe16",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "result": {
+    "workspace": "/private/tmp/ucr-life-f31yqvp2",
+    "cases": [
+      {
+        "workspace": "/private/tmp/ucr-life-f31yqvp2/8",
+        "cpu_descriptors": 8,
+        "entry_binding_passed": true,
+        "actual_child": {
+          "pid": 71834,
+          "returncode": 7,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 71834,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "disposable_grants_closed": true,
+        "result_audit": {
+          "functional_status": "FAILED",
+          "attempted_cli_invocations": 0,
+          "preparation_before_transport_proved": true,
+          "scope": "pinned worker preparation phase only; aggregate exit still required"
+        }
+      },
+      {
+        "workspace": "/private/tmp/ucr-life-f31yqvp2/7",
+        "cpu_descriptors": 7,
+        "entry_binding_passed": false,
+        "actual_child": {
+          "pid": 71836,
+          "returncode": 7,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 71836,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "disposable_grants_closed": true,
+        "result_audit": {
+          "functional_status": "FAILED",
+          "attempted_cli_invocations": 0,
+          "preparation_before_transport_proved": true,
+          "scope": "pinned worker preparation phase only; aggregate exit still required"
+        }
+      }
+    ],
+    "scope": "actual Python children/inherited FD checks/reap; disposable inner grants/tiny data only"
+  },
+  "closure": {
+    "child": {
+      "pid": 71833,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 71833,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/INDEPENDENT-IDLE-FIXTURE-STOP.json",
+      "bytes": 601,
+      "sha256": "92df2078eed141d0ceed6ef896688ee15e4dcd37fd26ab96c987debc3b40cd69"
+    },
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/SHARED-IO-ATTEMPT.json",
+      "bytes": 607,
+      "sha256": "c1e9dc0f432e5ea6b6248b78c5370103bb3f15563321533d670b02758b704396"
+    },
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/SHARED-OWNERSHIP-RETAINED.json",
+      "bytes": 315,
+      "sha256": "7442d71b2acaf04e870d9bde31232441935c6b27cfaa7efbc7fa86e2836da6d8"
+    },
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/SHARED-START.json",
+      "bytes": 7106,
+      "sha256": "bd61c6423668354aef46f3e568512d3a0b7392ec1c95dbb2a08d6380e1851214"
+    },
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/SHARED-STDERR.txt",
+      "bytes": 471,
+      "sha256": "1623ccff7964cdfa919572b5c6d2bd5155e217997d3a3a62fec14e547ca1ce95"
+    },
+    {
+      "path": "/private/tmp/ucr-life-7nitgfzy/8/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/RESULT.json",
+      "bytes": 291,
+      "sha256": "f35d6bc29f297e95d2a1b2c5adf83cb7f24ada07e10be397648fa10675dc910b"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "5001ae72ce6f74065f26b09c53fd10103faa6afd31cede0c1f383feb818fb0ef"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-IO-ATTEMPT.json",
+      "bytes": 607,
+      "sha256": "1a70dca7c41d96e68ce02f238a4fe8d136df67ac9b57f140466b3edcb28bf721"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-SERVER-AUDIT.json",
+      "bytes": 199,
+      "sha256": "1850fdffaf659160ab4124c916a753717c1628eb2bb6c0aa99e8d6f84b572af1"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-START.json",
+      "bytes": 7026,
+      "sha256": "b43dd4ee292f8f8358dc13340fc150cdbd0e0c2468f5bb1c29ce05db3b5cd28f"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/7/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/RESULT.json",
+      "bytes": 284,
+      "sha256": "154bca6bd82f39714b256ca6c52ea56cecc15bb955d5137921cc7d17c09daa97"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "646c206f5ff573683fc5a0abc7b4948ec26117439650d49d0e43be4a6195c88a"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-IO-ATTEMPT.json",
+      "bytes": 607,
+      "sha256": "b7cc274e396ff2d9d2cf6245e6a1ceb8179f316fc513912184056aa99cf1d6f5"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-SERVER-AUDIT.json",
+      "bytes": 199,
+      "sha256": "1850fdffaf659160ab4124c916a753717c1628eb2bb6c0aa99e8d6f84b572af1"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-START.json",
+      "bytes": 7107,
+      "sha256": "5bb4b28e3763779b563d9f28070328e8a987de66b5169452c70f2cdb5fec02c5"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/ucr-life-f31yqvp2/8/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-aud5f_md/SHARED-CLOSED.json",
+      "bytes": 501,
+      "sha256": "5f1b4dd840472ffeea499be2a0db6c75be9fac315e22fbc57ed124320efea22f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-aud5f_md/SHARED-START.json",
+      "bytes": 1231,
+      "sha256": "8b1f6bc9872aefc1a3bbfb0118cf36e8c3005d7d5698925b6b65ff6680d20f33"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-aud5f_md/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-aud5f_md/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-obd37_mv/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f45e5db6cc889f661279c76c2768b2011a9dc17932cdef30c8afb063c207392a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-obd37_mv/SHARED-START.json",
+      "bytes": 1231,
+      "sha256": "fb64ccfc68732d32a82827cf5a7f81071196e2384a62980c4bdaf5a11006afbe"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-obd37_mv/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-binding-lifecycle-obd37_mv/SHARED-STDOUT.txt",
+      "bytes": 1392,
+      "sha256": "bac627309b1541f2c23d8b3bd6c4ba208a308e3f8f812d72f0a3c75ec553fa5f"
+    }
+  ],
+  "source": {
+    "path": "/Users/alexy/src/unison/tests/private_camera_receiving/lifecycle.py",
+    "bytes": 5330,
+    "sha256": "b8cf917f8cda4227fd898fff71b9af72340e64b07ee9cfb4607cf4bd021625e3"
+  },
+  "prior_failed_fixture": {
+    "actual_terminal": {
+      "session": 42657,
+      "chunk": "c1bde7",
+      "exit_code": 247,
+      "running_session": false
+    },
+    "closure": {
+      "child": {
+        "pid": 71642,
+        "returncode": -9,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 71642,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "reason": "argv fixture indexedPythonargv asifinterpreterincluded; childfailedbeforeplanread. Independentidlefixturestopproof preserved. Originalinnerworkerwait4 notclaimed."
+  },
+  "scope": "RealPythonparent/child FDinheritance and reap; disposableinneradmission/IOCPU/commandidentity doubles, tiny4Binput. RealoutercanonicalCPU8closed. No camera/nativeclone/realtransport/EXglobal/SDK/Adobe. Notlivepayloadadmission."
+}

@@ -60,6 +60,17 @@ pass, including scope/ancestry and pre-payload parent-binding refusals. The new
 full inherited-resource lifecycle still needs disposable qualification; no live
 camera plan or admission is created or implied here.
 
+The [disposable inherited-resource lifecycle successor](../qualification/camera-binding-lifecycle-actual-20261016.json)
+now passed with real Python children: nine inherited descriptors accepted the
+live-parent binding and reached an intentionally refused pre-payload boundary;
+eight descriptors refused before entry. Each child exited7, was actually reaped
+with its group settled, and the inner disposable leases closed before outer
+canonicalCPU8 release/actualterminal0. Inner admission and command identity are
+explicit test doubles, not canonicalEXglobal qualification. The initial argv
+fixture error and independently proved idle-fixture recovery remain preserved.
+Neither run touched a camera file or invoked native clone/transport. A fresh
+exact source-reviewed IO plan/admission is still required for actual payload use.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 
