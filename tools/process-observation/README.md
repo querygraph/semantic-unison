@@ -67,3 +67,15 @@ three probe children independently reaped after group closure. The observed
 child and outer owner also closed, and canonical Unison8 tokens were released.
 No compiler, SDK, photo payload or EXglobal IO ran. This qualifies this finite
 probe integration; it does not measure SDK resources or authorize native work.
+
+`tests/process_observation/audit.py` independently binds returned samples to
+exact probe argv/PID, the expected artifact SHA, bounded raw frames and each
+probe child's actual group-before-reap settlement. It rejects duplicate raw
+fields, inconsistent clocks, unknown/duplicated probe outcomes and typed-value
+substitutions. Missing remains missing. This audits records; it does not rehash
+the live artifact, establish parent/FD closure or infer sampling coverage.
+
+[Audit controls](../../tests/qualification/os-observation-audit-actual-20261016.json)
+reparse the saved three-snapshot component result and reject eleven corruptions.
+A separate unavailable-frame case passes without zero counters. No new probe,
+SDK or payload was invoked; child/group and canonical Unison8 tokens closed.
