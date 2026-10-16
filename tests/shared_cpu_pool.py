@@ -16,6 +16,18 @@ from pathlib import Path
 import stat
 
 DEFAULT_UNISON_TOKENS = tuple(range(8))
+POLICY_SHA256 = '1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352'
+
+
+def authorized_unison_tokens(raw):
+    """Derive the standing grant from the exact policy, never caller indexes."""
+    require(hashlib.sha256(raw).hexdigest() == POLICY_SHA256, 'standing policy pin differs')
+    policy = json.loads(raw, object_pairs_hook=unique_object)
+    require(policy['version'] == 3
+            and policy['defaultShared']['unison']['cpuCredits'] == 8
+            and policy['locking']['defaultUnisonTokenIndexes'] == list(DEFAULT_UNISON_TOKENS),
+            'standing Unison grant differs')
+    return DEFAULT_UNISON_TOKENS
 
 
 class UnresolvedOwnership(RuntimeError):

@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Standing8/8 transition: [eight disposable-pool controls](tests/qualification/shared-pool-controls-actual-20261016.json)
+now PASSED/CLOSED under actual canonical Unison00..07 ownership. Owner61132,
+child61134, actual tool terminal3e0f5f/exit0/no session; child group cleanup
+preceded wait4 and token closure. Tests cover late-token contention rollback,
+unknown settlement retention, indeterminate-close nonretry, directory-close
+failure retention, replacement refusal and unpinned-policy refusal. Photo was
+notified through parent queue01a1420e-5278. This supersedes the untested status
+of the earlier primitive source preparation below. General build/sync dispatcher,
+inherited-child contention and memory/physical-device IO qualification remain
+pending. No new benchmark, SDK or Lightroom work ran.
+
+
 Latest [frozen Oxworker8 part5](bench/sync/results/warm512-frozen-part5-actual-return-20261015.json)
 PASSED/CLOSED: actualowner52232/2b05a9/exit0/no session; aggregate51654
 reaped0/others absent in2070.618s, independent18rows54CLI client/server/supervisor
@@ -19,7 +31,7 @@ post-slot source/token qualification under standing8/8, not another18hold.
 Exact authoritative shared policy now Rootv3 SHA1dbe12eb: standing8/8/2,
 Unison00..07/Photo08..15/16..17idle, memory32/64/32GiB. Both priorCPU splits
 are historical. [Token primitive source preparation](tests/qualification/shared-token-source-preparation-20261015.json)
-adds tests/shared_cpu_pool.py, UNIMPORTED/UNTESTED/UNCONNECTED: pinned bounded
+originally added tests/shared_cpu_pool.py as untested/unconnected source: pinned bounded
 manifest, existingprivateinode-boundpool only, nonblocking ascending explicit
 set, partial-acquisition close, no LOCK_UN or automaticerrorunlock. Unknown
 settlement/close retainsowner; release consumes caller's actualsettlement
