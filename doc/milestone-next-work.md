@@ -182,3 +182,10 @@ is excluded or replaced. Only empirical ranks and observed maxima are reported,
 not small-sample p95/p99 or population worst cases. Two focused report controls
 and reconstruction passed under Unison8, all groups/tokens closed. This improves
 historical benchmark transparency without completing M6 or authorizing a rerun.
+
+The [native clone adapter tiny control](../tests/qualification/sdk-multifile-native-clone-tiny-actual-20261016.json)
+adds four actual fclonefileat operations for original disposable0400/0644 files,
+with exact bytes, distinct inodes, source metadata preservation and occupied-name
+refusal. Actual7f783b/0/group+Unison8 closed. No retained generated DNG/SDK work
+ran; frozen receiving V1 remains unadmitted and unchanged. Physical sharing is
+not inferred from successful clone calls.

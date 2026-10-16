@@ -212,3 +212,13 @@ test code, and preparation writes tiny original files rather than cloning.
 This closes the real transport-composition control gap; actual stock/Ox receiving
 with generated DNG inputs and SDK execution still needs a fresh exact request
 and separate IO/SDK admission. No retained payload or canonical IO was accessed.
+
+A separate [tiny native clone adapter control](../qualification/sdk-multifile-native-clone-tiny-actual-20261016.json)
+now exercises four actual fclonefileat calls on2,688 total bytes of original
+synthetic fixtures, for read-only and0644 sources. Exact clone bytes, distinct
+inodes, mode0600, unchanged source eight-field metadata and occupied-name refusal
+pass. This is an actual syscall-adapter control, not generated-DNG receiving,
+SDK validation or proof of physical APFS sharing. No retained payload or
+canonical IO was accessed; control/group and outer Unison8 closed normally.
+The frozen V1 request/pins remain unchanged; this additional test is outside
+its execution-source closure and supplies no admission.
