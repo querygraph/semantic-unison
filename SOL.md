@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+Framing v1 IO admission243b8fc6 expired before dispatch: actual deadline guard
+6b42f1/exit1/no session at1792121697.41903, deadline1792121569.0876641.
+[Preserved expiry evidence](tests/qualification/private-framing-input-v1-expired-20261016.json)
+records no executor/payload/IOCPU acquisition and absent workspace. Original
+request/admission bytes remain historical. [Separate v2 scheduling request](doc/private-dng-framing-input-request-v2.json)
+changes only unused output/admission paths; same reviewed plan2236f356, source11,
+interpreter/artifact pins and byte/time limits reverified. Clone native8field
+lstat unchanged; no payload opened. V2 NOT admitted/dispatched; no auto-renewal.
+
+
 Prepared [one-receiving-clone framing executor/request](doc/private-dng-framing-input-request-v1.json)
 SOURCEONLY/notadmitted/notdispatched. ParentEXIO→CPU00..07 exact11sourcepins,
 mandatoryadmission/noCPU-onlyroute, liveparent/argv+oneusestart binding. Worker

@@ -231,3 +231,9 @@ those controls do not reconstruct the missing historical receipt.
 - Physical APFS block sharing/write amplification, power-loss durability and
   escaped-process/owner-SIGKILL recovery are not inferred from logical counters,
   exact hashes, process-group observations or ordinary restart tests.
+
+The first framing-input admission expired before launch; the actual pre-exec
+refusal is [retained](../tests/qualification/private-framing-input-v1-expired-20261016.json).
+The [v2 scheduling request](private-dng-framing-input-request-v2.json) preserves
+the reviewed executor, plan and budgets with fresh unused output/admission paths.
+It grants no runtime permission; camera-derived diagnostic evidence remains absent.
