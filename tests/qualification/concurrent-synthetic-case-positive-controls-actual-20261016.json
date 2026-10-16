@@ -1,0 +1,50 @@
+{
+  "schema": "unison-concurrent-synthetic-case-positive-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "e1b339",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/synthetic_case.py",
+      "bytes": 4170,
+      "sha256": "77ca8b34cc48de19cca39d520ce05d294d1fdad90f97903d91362d40623ec972"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/synthetic_case_test.py",
+      "bytes": 5584,
+      "sha256": "8dc90e48066fc885299663aa3c855a1ad0f84f06a9929fb3617e080430d911e6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/combined.py",
+      "bytes": 4003,
+      "sha256": "fe5e3e78f4ca66ae3e6ae5f0f17323513ce9c1c47f1eea33330d71b806087026"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-synthetic-case-positive-controls-20261016a/SHARED-START.json",
+      "bytes": 1123,
+      "sha256": "670666fa3184d7b24e578c79d7559f0f522b4693d71038f6ac29e1e157024213"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-positive-controls-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "871577642c24ee645c3c6a0abf9ec18c6dc7124bfc0f9637afd1663a80dc7d4c"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-positive-controls-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-positive-controls-20261016a/SHARED-STDERR.txt",
+      "bytes": 110,
+      "sha256": "588ca9b54347f483de815e6714c84bdaaa9b93c4094dd97192aa6dde4b344a9a"
+    }
+  ],
+  "scope": "11original kernel/mock-outcome groups; exact generated output path, serial-vs-overlap distinction, corrupt output/failed call preserve known-helper evidence; helper PIDs/protocols inert, no actual receiving/helper/SDK/camera/Photo/EXglobal",
+  "full_goal_complete": false
+}

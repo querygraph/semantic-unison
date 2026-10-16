@@ -128,3 +128,11 @@ than becoming ordinary failed-prefix results. Known preparation failures remain
 explicit. [Seven source controls](../qualification/concurrent-synthetic-case-controls-actual-20261016.json)
 cover the refusal/phase/uncertainty paths. No transport is dispatched by these
 controls; positive receiving and admitted parent integration remain next.
+
+The [positive/mock successor controls](../qualification/concurrent-synthetic-case-positive-controls-actual-20261016.json)
+expand the case suite to11 groups. The full kernel follows successful two-file
+output checks and durable phases with inert helper frames; serial functional
+success leaves overlap false. Corrupt output and failed CLI outcomes preserve
+known helper evidence while remaining incomplete. No mocked PID/protocol frame
+is actual process settlement, and no transport or helper runs in these controls.
+The admitted aggregate/dispatcher remains outstanding.
