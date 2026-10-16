@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:08:49Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:15:04Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -22,8 +22,7 @@ worker87017. Admissionac55fe28 consumed; never replay. All24CLI/48qualifiedSDK
 helpers independently reparsed with raw proxy/client/server/supervisor/pump and
 worker/group settlement. All172 execution source pins and borrowed8field epochs
 matched; unresolved[]. CPU00..07+EXglobal closed. Actualterminal and post-audit
-queued to Photo01a14685-697f and01a14685-fd19; independent Root adoption pending,
-not a sealing/resource hold. Sealed actual return:
+queued to Photo01a14685-697f and01a14685-fd19; independent Root actual closure is adopted below; no sealing/resource hold. Sealed actual return:
 `tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json`.
 
 Report `bench/sync/results/sdk-receiving-comparison-v1-20261016/` preserves all
@@ -116,10 +115,30 @@ Not full Perl dependency inventory, independently observed ExifTool PID, sampled
 CPU overlap, hardlimits or combined Adobe/ExifTool qualification. Default14
 synthetic helper cases unchanged; newcase requires explicit installed tool.
 
-**Current resources:** no Unison live owner or retained CPU/IO reservation.
-Comparison actual parent and offline audit owners closed. Photo was promptly
-notified; its independent scheduling adoption is separate from our actual tool
-terminal proof. Standing8/8/2 unchanged, no18borrow/newSDK grant.
+**Current resources:** zero Unison live jobs/retained grants. Full stock build/
+selftests actual87161/b8ddda ->52664d/0/no session and Ox80362/27ce49 ->09fca0/0
+both CLOSED; canonicalCPU00..07 released. No EXIO/SDK/Photo operations.
+
+**Current production change:** `src/supervisedExternal.ml` adds opt-in
+`external-process` diagnostics after supervised helper settlement: historical
+PID/wait/outcome/CPUweight/capturetruncation/retained-group census. No arguments
+or output logged, default no group query, APIs and existing exit/cancel policies
+unchanged. Final16componentcases/compiler pass against explicit unchanged
+production CMI (hash equality checked), actual owner47300/e110a5/0/no session,
+children93360/93444 reaped0/groups absent/CPU8closed. Initial73564/32deca overlay
+inferredCMI remains preserved with that limitation; runner now copies `.mli`.
+Full current Make+CLI selftests pass on stock5.2.0/Ox5.2.0+ox,293production source
+pins match each build/current checkout; binarySHA independently checked.
+Receipts `external-process-current-interface-actual-20261016.json` and
+`external-process-full-cli-actual-20261016.json`. Prior Dune/nativeSDK receipts
+retain their historical sources; no SDK replay or current Dune/GUI claim.
+Initial fullbuild96cbc5/2 refused missingSTOCK_PREFIX before dispatch; corrected
+explicit compiler path used actual87161/newunusednamespace, no startedjobretry.
+
+**Next substantive step:** use these generic helper observations when preparing
+one source-reviewed/admitted actual combined ExifTool/hash/SDK workload; no
+runtime grant exists. Keep exact per-helper/group/FD proof and unknown retention,
+not sampled overlap as settlement. Continue broader SOL/corpus/platform work.
 
 **Git/review:** workspace `/Users/alexy/src/unison`, branch
 `feat/semantic-dng-oxcaml`, fork `git@github.com:querygraph/unison.git`.

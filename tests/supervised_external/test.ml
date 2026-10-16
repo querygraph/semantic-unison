@@ -31,7 +31,12 @@ let main () =
   check (first==runtime.R.supervisor) "worker runtime created a second helper CPU budget";
   Fun.protect ~finally:(fun () -> Abort.reset (); ignore (Lwt_unix.run (W.shutdown runtime.R.pool))) (fun () ->
     begin match case with
+    | "observed" ->
+        Prefs.loadStrings ["debug=external-process"];
+        let status,_=Lwt_unix.run(call "echo" ["private argument not logged"]) in
+        check(status=Unix.WEXITED 0) "observed helper changed exit policy"
     | "exiftool-readonly" ->
+        Prefs.loadStrings ["debug=external-process"];
         let path=Filename.concat(Sys.getcwd()) "private.xmp" in
         let packet="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:Description rdf:about=\"\" xmp:Rating=\"3\" xmp:Label=\"Blue\"/></rdf:RDF>" in
         write path packet;

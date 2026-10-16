@@ -197,3 +197,13 @@ ordinary exact transfer continues. Old peers retain the SIR/0 byte report.
 Property encodings and namespace contexts are compared without RDF/value
 canonicalization, rendered-pixel equality or automatic conflict resolution.
 See [SIR/1](semantic-observation-v1.md) for bounds and versioning.
+
+`-debug external-process` separately records generic copy/merge/diff helper
+lifecycle diagnostics after supervised execution settles: historical child PID,
+wait status/outcome, declared CPU weight, capture truncation and retained-group
+observation. It logs no command arguments or captured output. Default execution
+adds no group query. `unobserved` and `unknown` do not mean zero; a numeric
+other-member count is one census before leader reap, not durable process-tree
+closure. These records are diagnostics, not publication/validator acceptance or
+permission to signal a historical PID. Existing command exit/cancellation policy
+is unchanged.

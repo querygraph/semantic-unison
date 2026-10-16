@@ -54,3 +54,26 @@ CPU8 closure. Perl/module inventory, standalone child-PID observation, sampled
 CPU overlap, hard limits, simultaneous ExifTool/Adobe and throughput remain
 outside this case. Tool configuration is explicitly opt-in; no installation or
 change to production preferences occurs.
+
+## Opt-in external helper lifecycle diagnostics
+
+`-debug external-process` enables an owner-side result record after helper
+execution settles. It reports the historical PID, wait status/outcome, declared
+CPU weight, capture truncation and a retained-group observation. Command
+arguments and captured stdout/stderr are omitted. Default execution does not
+query the process table or emit this record. Ordinary nonzero exit policy,
+cancellation, signals, output and timeout limits keep their existing behavior.
+
+`other-members=unobserved` means no callback ran; `unknown` is an unsupported or
+failed observation. Numeric counts describe one census before leader reap,
+not durable process-tree closure or authorization to signal a historical PID.
+The observed fixture case binds the record to its actual PID file and independent
+ECHILD check. ExifTool's PID comes from the supervised trace, not process absence.
+The initial [component receipt](../qualification/external-process-observation-actual-20261016.json)
+retains16cases/compiler; its private overlay inferred the CMI. The [successor current-interface16-case runs](../qualification/external-process-current-interface-actual-20261016.json)
+pass on both compilers with exact CMI equality, and
+[full Make builds/CLI selftests](../qualification/external-process-full-cli-actual-20261016.json)
+pass/close on both. Current Dune/GUI qualification is not inferred.
+`--current-bridge` compiles only the current bridge against the snapshot's
+unchanged dependency objects and matching explicit production interface; other
+production source mismatches still refuse.
