@@ -1,0 +1,90 @@
+{
+  "schema": "unison-camera-sdk-receiving-actual/1",
+  "state": "PASSED_CLOSED",
+  "actual_owner_terminal": {
+    "tool": 66811,
+    "chunk": "65a573",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "audit": {
+    "attempted_cli_invocations": 2,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": false,
+    "scope": "one copied candidate per compiler; no semantic/pixel/corpus claim",
+    "helper_invocations": 2,
+    "helper_settlements": [
+      {
+        "helper_pid": 91489,
+        "endpoint": "server",
+        "candidate_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+        "candidate_bytes": 193851848,
+        "wait_status": [
+          "exit",
+          0
+        ],
+        "outcome": "completed",
+        "observed_other_group_members_before_reap": 0,
+        "settlement_only": true
+      },
+      {
+        "helper_pid": 91522,
+        "endpoint": "server",
+        "candidate_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+        "candidate_bytes": 193851848,
+        "wait_status": [
+          "exit",
+          0
+        ],
+        "outcome": "completed",
+        "observed_other_group_members_before_reap": 0,
+        "settlement_only": true
+      }
+    ],
+    "functional_status": "PASSED"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/u-cs-v2-0a3ef752d1/OWNER-TERMINAL.json",
+      "bytes": 301,
+      "sha256": "c70218816129e90b87ccaf22eeba52a677dc041cd361469e2c284a5395308c77"
+    },
+    {
+      "path": "/private/tmp/u-cs-v2-0a3ef752d1/RESULT.json",
+      "bytes": 50714,
+      "sha256": "41bb2f5597b5795c1d2ebafec5850d4a2f9c33773083bf32e7f3a4d2f9cf3ae3"
+    },
+    {
+      "path": "/private/tmp/u-cs-v2-0a3ef752d1/SHARED-START.json",
+      "bytes": 9289,
+      "sha256": "53172e4378483b51201f374b06d82f31a71f2335931b93f4c8fcf3fd9331128d"
+    },
+    {
+      "path": "/private/tmp/u-cs-v2-0a3ef752d1/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "1fc3f8e7cc15277f41a1ba1ab5bae8ef1807db83ffb80561806383f010910a80"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-sdk-receiving-plan-v2.json",
+      "bytes": 11048,
+      "sha256": "eae6ae5369e930eb655bcbf100fc3ed8e7126e47a5f697d8e19bab1e76c696b1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-sdk-receiving-request-v2.json",
+      "bytes": 15366,
+      "sha256": "01358087ba4624bd43165cf31d444068ffcdb2e45f856df92f730c831f9a16ad"
+    },
+    {
+      "path": "/private/tmp/unison-camera-sdk-receiving-admission-v2.json",
+      "bytes": 10093,
+      "sha256": "2eb56afd02ce03919fa808792ee8b5747a9118a2b814a25ba5185c3c35dddd48"
+    }
+  ],
+  "limitations": [
+    "two full receiving seeds only",
+    "no semantic eligibility, pixel equivalence or corpus claim",
+    "missing raw digest is not verified",
+    "no automatic retry or successor"
+  ]
+}

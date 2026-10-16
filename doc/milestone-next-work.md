@@ -64,3 +64,12 @@ reservation errors now remain recoverable (`Util.Transient`); direct stock/Ox
 controls and prior-guard negatives, current full Make+selftests, and actual tiny
 rejected/fitting CLI cases passed/closed. No SDK/camera runtime occurred in these
 controls. V2 needs a separate exact admission; do not reuse consumed V1.
+
+SDK V2 has now executed once and [PASSED/CLOSED](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json):
+actual owner66811/65a573/0, two receiving seeds and two SDK helper invocations,
+stock and Ox both reported structure valid/decode success/raw digest valid with
+zero errors/warnings. Exact receiving candidate SHA/size and all call/helper/group
+settlements were independently reparsed; worker reaped0 and IO/CPU closed. This
+supersedes the pending scheduling statements above, while preserving V1's failure.
+It proves one copied camera candidate per compiler, not semantic eligibility,
+pixel equivalence, corpus coverage, hard RSS limits or a new runtime admission.
