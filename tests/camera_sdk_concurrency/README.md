@@ -43,3 +43,19 @@ Before any runtime request, a versioned executor must:
 The next work is owner/protocol integration and finite fake-helper lifecycle
 controls, then immutable review/admission. This document creates no runtime gate
 beyond the existing coordination contract and grants no payload access.
+
+## Interval evidence component
+
+`intervals.py` is a pure auditor for exactly two independently bound single-thread
+helper PID/candidate pairs and four common-clock monotonic-nanosecond events.
+It rejects malformed, duplicated, incomplete, reversed or mixed-clock evidence.
+Touching or serial intervals are valid evidence with `overlap_observed=false`;
+only a positive common interval establishes observed overlap in these records.
+
+[Eight original fixture groups](../qualification/sdk-overlap-evidence-controls-actual-20261016.json)
+pass under the owned CPU lane. An initial wrong fixture expectation is preserved
+and corrected separately. This component does not authenticate the timestamp
+producer, prove actual helper concurrency, establish settlement, close FDs or
+authorize resource release. Its output explicitly leaves those flags false.
+Next integration must bind events to the actual supervised spawn/terminal
+observations and separately audit all existing helper/group ownership proofs.
