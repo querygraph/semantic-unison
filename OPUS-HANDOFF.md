@@ -272,7 +272,19 @@ with pins, preserving true task/parent resource scope. Fake build-id/version are
 protocol text, not actual SDK/ExifTool qualification. Admission/entry/inventory
 doubles remain; no canonicalIO/Photo/nativegrant. Unknown-retention composition
 and compiled/native dependency inventory are still outstanding.
-Next: unknown composition, compiled artifact preparation and actual
+**Unknown-prefix composition now passed:** lifecycle --unknown-controls uses
+pinned pre-probe replacement to persist INTENT/noOUTCOME. Real parent audit
+refuses and enters retained-owner handler; control intercepts infinite wait only
+after genuine retention marker/all9innerlocksbusy/workerunreaped proof. Separate
+source-bound no-probe recovery then reaps4190/7/group absent, closes/reacquires
+inner locks; containing4189 reaped0/group absent/outerCPU8closed. Actuald81fa2/0/
+no session. Receipt mixed-validation-unknown-lifecycle-actual embeds5raw metadata
+artifacts and preserves predecessor labeling. Original unknown journal remains,
+no normal SHARED-CLOSED/accepted parent proof invented. This is authored-control
+recovery only, not permission to release real unknown SDK/helper/FD ownership.
+No canonicalIO/probe/SDK/ExifTool/Photo. Source lifecycle success/refusal/unknown
+composition now has evidence; fresh compiled/dependency inventory still needed.
+Next: compiled artifact preparation and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

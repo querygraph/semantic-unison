@@ -288,3 +288,23 @@ RESULT, prefix/exit/closure and helper ledgers are embedded with exact pins.
 Admission/entry-script/inventory remain explicit disposable doubles, no canonical
 IO/Adobe/ExifTool/Photo access or native admission. Unknown-retention composition
 and newly pinned compiled/native dependency inventory remain before real review.
+
+`lifecycle.py --unknown-controls` deliberately writes an INTENT with no outcome
+inside the pinned pre-probe refusal replacement. The real parent audit refuses
+that journal and selects its retained-owner handler. The control intercepts the
+infinite wait only after writing the genuine retention marker and proving all
+nine disposable lock descriptions remain busy and the worker remains unreaped.
+It then uses its exact no-probe control branch plus actual worker/group settlement
+to recover those inner locks. This recovery is specific to the authored control,
+not a generic way to clear unknown SDK/helper/descriptor ownership.
+
+[Actual retained-prefix control](../qualification/mixed-validation-unknown-lifecycle-actual-20261016.json)
+passed: worker4190 genuinely reaped7/group absent only in the separate recovery;
+inner locks then closed/reacquired; containing4189 reaped0/group absent/outerCPU8
+closed, actuald81fa2/0/no session. Raw unknown journal/retention marker remain
+unchanged; no normal SHARED-CLOSED or successful parent audit is manufactured.
+Five raw metadata artifacts are embedded. A predecessor with less precise
+recovery labeling is preserved. No canonicalIO, compiled probe, SDK, ExifTool or
+Photo access. Source composition checks are now present for success, known
+refusal and missing-outcome retention; fresh compiled-artifact/dependency
+preparation and separately reviewed actual native admission remain outstanding.

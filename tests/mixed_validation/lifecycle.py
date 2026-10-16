@@ -55,6 +55,10 @@ def child():
     inventory=entry.document(Path(args.workspace)/'DISPOSABLE-INVENTORY.json')
     def refuse(*a,**k):
         (Path(args.workspace)/'BOUNDARY-REACHED').write_text('actual inherited guard passed; no probes started\n')
+        if (Path(args.workspace)/'UNKNOWN-PREFIX').exists():
+            save(args.workspace,dict(schema='unison-mixed-validation-worker/1',complete=False,
+                 phase='CALL_MAY_HAVE_STARTED',failure='injected missing outcome; control never invoked probe',
+                 invocations=[dict(index=0,state='INTENT',outcome=None)]))
         raise ValueError('deliberate pre-probe control refusal')
     actual_invoke=entry.invoke;calls=[]
     def fake_call(command,*a,**k):
@@ -82,7 +86,7 @@ def child():
     raise AssertionError('control must refuse before probe')
 
 
-def controls(*,success=False):
+def controls(*,success=False,unknown=False):
     root=Path(tempfile.mkdtemp(prefix='unison-mixed-lifecycle-',dir='/private/tmp'));cases=[]
     common=root/'inert';common.write_bytes(b'private inert artifact; never executed')
     stock=root/'stock';stock.write_bytes(b'inert stock')
@@ -101,7 +105,7 @@ def controls(*,success=False):
         sdk.write_text((original/'validator.py').read_text().replace('synthetic-mixed-v1','unison-sdk171-2724-v1-single'))
         metadata.write_text((original/'metadata.py').read_text().replace('synthetic-only','13.10'))
         sdk.chmod(0o700);metadata.chmod(0o700)
-    for count in ((8,) if success else (8,7)):
+    for count in ((8,) if success or unknown else (8,7)):
         w=root/('case-'+str(count));w.mkdir(mode=0o700)
         for name in ('cpu','io'):(w/name).mkdir(mode=0o700)
         cpu=Lease(w/'cpu',count);io=Lease(w/'io',1)
@@ -110,6 +114,7 @@ def controls(*,success=False):
         identities.append((os.fstat(io.fds[0]).st_dev,os.fstat(io.fds[0]).st_ino))
         (w/'DISPOSABLE-INVENTORY.json').write_text(json.dumps(identities))
         plan=fixture();plan['workspace']=str(w)
+        if unknown:(w/'UNKNOWN-PREFIX').write_text('injected journal gap; probe kernel replaced by preentry refusal\n')
         for row,executable in zip(plan['probes'],(stock,ox)):
             row['executable']=artifact(executable);row['build_receipt']=artifact(common)
         for k in ('executable','manifest'):plan['sdk'][k]=artifact(common)
@@ -125,13 +130,59 @@ def controls(*,success=False):
         class IO:
             def try_acquire(self):return io
         io_pool=IO();deadline=entry.time.time()+60
-        with patch.object(dispatch.Pool,'read',return_value=CPU()),\
-             patch.object(dispatch,'checked_io_request',return_value=(io_pool,deadline)):
-            code=dispatch.run(dispatch.MIXED_TARGET,argv(plan,interpreter=sys.executable,plan_path=str(p),plan_sha256=digest),
-                              w,8,io_admission=dict(path='/disposable-admission-only',sha256='0'*64))
-        closed=json.loads((w/'SHARED-CLOSED.json').read_text())
-        proof=json.loads((w/'SHARED-SERVER-AUDIT.json').read_text())
-        exit_proof=json.loads((w/'SHARED-WORKER-EXIT-AUDIT.json').read_text())
+        class RetentionObserved(BaseException):pass
+        owners=[];real_owner=dispatch.OwnedGroup
+        def owner(*a,**k):
+            actual=real_owner(*a,**k);owners.append(actual);return actual
+        def retained(record):
+            record()
+            assert not cpu.closed and not io.closed and not owners[0].reaped
+            assert not (w/'SHARED-CLOSED.json').exists()
+            for folder,n in (('cpu',count),('io',1)):
+                for i in range(n):
+                    fd=os.open(w/folder/str(i),os.O_RDWR|os.O_NOFOLLOW|os.O_CLOEXEC)
+                    try:
+                        try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
+                        except BlockingIOError:pass
+                        else:raise AssertionError('unknown prefix released a lock')
+                    finally:close_descriptors([fd])
+            raise RetentionObserved()
+        with ExitStack() as stack:
+            stack.enter_context(patch.object(dispatch.Pool,'read',return_value=CPU()))
+            stack.enter_context(patch.object(dispatch,'checked_io_request',return_value=(io_pool,deadline)))
+            if unknown:
+                stack.enter_context(patch.object(dispatch,'OwnedGroup',side_effect=owner))
+                stack.enter_context(patch.object(dispatch,'retain_after_record',side_effect=retained))
+            try:
+                code=dispatch.run(dispatch.MIXED_TARGET,argv(plan,interpreter=sys.executable,plan_path=str(p),plan_sha256=digest),
+                                  w,8,io_admission=dict(path='/disposable-admission-only',sha256='0'*64))
+                assert not unknown
+            except RetentionObserved:
+                assert unknown and len(owners)==1 and (w/'BOUNDARY-REACHED').exists()
+                assert not (w/'EXECUTE-FAKES').exists()
+                # Independent recovery is specific to this pinned control's
+                # deliberately replaced kernel: there were no probe/helper calls.
+                actual=owners[0]
+                assert actual.await_terminal(2)
+                recovered=dispatch.settle(actual,entry.time.monotonic()+3)
+                assert recovered['reaped'] and recovered['returncode']==7 and recovered['other_group_members_absent_before_reap']
+                cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+                io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+                save(w/'cpu',dict(control_specific_recovery=True,actual_child=recovered,
+                     probe_calls=0,helper_calls=0,original_unknown_journal_preserved=True))
+                code=7
+        if unknown:
+            closed=dict(child=recovered)
+            proof=dict(functional_status='FAILED',attempted_probes=0,retention_selected=True,
+                       all_inner_locks_busy_before_recovery=True)
+            exit_proof=dict(worker_exit_bound=True,resource_release_authorized=False)
+            assert not (w/'SHARED-CLOSED.json').exists()
+            assert (w/'SHARED-OWNERSHIP-RETAINED.json').exists()
+            assert entry.document(w/'RESULT.json')['invocations'][0]['state']=='INTENT'
+        else:
+            closed=json.loads((w/'SHARED-CLOSED.json').read_text())
+            proof=json.loads((w/'SHARED-SERVER-AUDIT.json').read_text())
+            exit_proof=json.loads((w/'SHARED-WORKER-EXIT-AUDIT.json').read_text())
         expected_exit=0 if success else 7
         assert code==expected_exit and closed['child']['reaped'] and closed['child']['returncode']==expected_exit
         assert closed['child']['other_group_members_absent_before_reap'] and cpu.closed and io.closed
@@ -143,10 +194,12 @@ def controls(*,success=False):
                 fd=os.open(w/folder/str(i),os.O_RDWR|os.O_NOFOLLOW|os.O_CLOEXEC)
                 try:fcntl.flock(fd,fcntl.LOCK_EX|fcntl.LOCK_NB)
                 finally:close_descriptors([fd])
-        cases.append(dict(workspace=str(w),descriptors=count+1,boundary_reached=count==8,
-                          child=closed['child'],parent_audit=proof,exit_audit=exit_proof,inner_locks_closed=True,
-                          fresh_inner_locks_reacquired=True))
-    summary=dict(workspace=str(root),cases=cases,scope=('One actual worker/two compiled stock+Ox probes/four authored fake helpers/32hash tasks/native tiny clones; ' if success else 'Two actual Python refusal workers; ')+'disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/SDK/Photo')
+        case=dict(workspace=str(w),descriptors=count+1,boundary_reached=count==8,
+                  child=closed['child'],inner_locks_closed=True,fresh_inner_locks_reacquired=True)
+        if unknown:case['control_specific_recovery']=proof
+        else:case.update(parent_audit=proof,exit_audit=exit_proof)
+        cases.append(case)
+    summary=dict(workspace=str(root),cases=cases,scope=('One actual worker/two compiled stock+Ox probes/four authored fake helpers/32hash tasks/native tiny clones; ' if success else 'One injected missing-outcome refusal worker with control-specific recovery; ' if unknown else 'Two actual Python refusal workers; ')+'disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/SDK/Photo')
     save(root,summary);print(json.dumps(summary),flush=True)
 
 
@@ -155,6 +208,7 @@ if __name__=='__main__':
         if sys.argv[1:2]==['--worker']:raise SystemExit(child())
         if sys.argv[1:]==['--controls']:controls()
         elif sys.argv[1:]==['--success-controls']:controls(success=True)
+        elif sys.argv[1:]==['--unknown-controls']:controls(unknown=True)
         else:raise ValueError('fixed controls or parent-owned worker only')
     except UnresolvedOwnership as error:
         retain_after_record(lambda:print('MIXED_LIFECYCLE_RETAINED '+repr(error),flush=True))
