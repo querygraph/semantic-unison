@@ -6,6 +6,15 @@ it reads no input. There is no camera path default or standalone payload command
 passed under canonical Unison8, with actual outer terminal/group/token closure.
 They do not use Unison, Adobe, a camera file, or EXglobal IO.
 
+`clone.py` now defines descriptor-based native `fclonefileat` preparation with
+no fallback. It fences the admitted readonly source epoch, holds the private
+sender directory descriptor, refuses existing targets and inode aliases, and
+makes only the new clone0600. Unknown descriptor closes use the existing shared
+uncertainty carrier; a future executor must retain it. [Thirteen current controls](../qualification/camera-clone-preparation-source-controls-actual-20261016.json)
+cover both modules using only tiny original data and a fake clone callback.
+Fake callbacks explicitly report a test-double backend, never native success.
+The actual native clone callback remains unexecuted by this qualification.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 
