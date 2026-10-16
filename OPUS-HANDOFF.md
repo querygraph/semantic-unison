@@ -101,10 +101,32 @@ ambiguousOSclose or sameUIDsandbox/OOM qualification. Actualsession18118/5cfea1/
 outer30366+4containedcompiler/test groups reaped0, canonicalCPU8closed.
 Receipt validation-stage-owner-v2-actual-20261017.json, priorv1preserved. No
 SDK/photo/nativeclone/Main/cache/publish calls. No enabled all-scannedpath.
-Owner separatelycompiled only: Dune standard discovery seesnewmodule atnext
-build; Makeexplicitwiring pending. Next implement asynchronous CandidateValidation
-private-staging wrapper with bounded admission and retained-uncertainty handling,
-then scan-selected coverage/negotiatedscope.
+That owner-only checkpoint is superseded: ValidationStageWork.run now awaits
+actual snapshot work, validates only privatepath via settled callback, rehashes
+stage against original snapshot SHA and rechecks source/name fences before
+retire. Cancellation never closes sleeping callback borrowers. Cleanupunknown
+stronglyrootsopaqueowner and returns permanentlypending work, retaining caller
+admission; even throwingdiagnostics cannot release it. No numericFDretry or
+callerassertedrecovery. Outer admission is a caller precondition; wrapper does
+not selectformats/scans or enableall-scanned.
+Both owner modules nowexplicitlyMakewired; Dune standard module discovery
+alreadycovers them. Current fullMake stockstage003 actual60053/7cfbba/0 and
+Oxstage003 actual69129/c42aad/0 closed, all currentproductionpinsmatch. Receipt
+validation-stage-work-builds-actual-20261017.json.
+Focused production-object controls initialstockcompile failed Lwt.state API
+(embeddedLwt usespoll); actual9a7e58/1/compiler34415reaped2/controller34414reaped1/
+CPU8closed preserved in validation-stage-work-actual-20261017.json. No runtime
+case executed there. Fixedcontrol only; freshstock/Ox bothPASS actual76318/
+f66e06/0, outer34811+4compile/test groups reaped0/CPU8closed. Receipt
+validation-stage-work-v2-actual-20261017.json. Cases: success, callbackfailure,
+private mutation rejection, sleeping-callback cancellation retaining stage+
+admission untilsettled, injectedcleanupEBADF+throwingdiagnostic retains gate.
+Unknowncase symbolic admission intentionally1untilactualtestprocessexit, NOT
+callbacksettled/creditrelease; all domainworkers joined. No SDK/photos/scan/UI.
+Next: CandidateValidation selected-companion/outeradmission entry; held readonly
+recognition before expensive snapshots avoids failing huge non-DNG on sizecap.
+Then actual scan-selected coverage and negotiatedscope. all-scanned stillOFF/
+unavailable. Fullgoal remainsactive; no new runtimeIO/SDK grant inferred.
 
 
 

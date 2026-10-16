@@ -1,0 +1,50 @@
+{
+  "schema": "unison-validation-stage-work-builds/1",
+  "rows": [
+    {
+      "label": "stock",
+      "report": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-stage-003-20261017/RESULT.json",
+        "bytes": 45424,
+        "sha256": "ec5560e76e194067cf9e6e38ebf2333222cc6af862565ffc8f7e220b9bc593b4"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-stage-003-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f6fe829a4b6cf76f6c157e5ca46cb67b8b84c168ef95721490401a557662b7d4"
+      },
+      "production_sources_match_current": true,
+      "actual_tool_terminal": {
+        "initial_chunk_id": "c2d546",
+        "session_id": 60053,
+        "terminal_chunk_id": "7cfbba",
+        "exit_code": 0,
+        "running_session_id": null
+      }
+    },
+    {
+      "label": "ox",
+      "report": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-stage-003-20261017/RESULT.json",
+        "bytes": 45430,
+        "sha256": "11363ae10710fb420d258311fb6af540abe99bed59bbfc44e3e7a0f4a6ffefb3"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-stage-003-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "7e479f0c2efea81bcaa9ab8ba66cdd2d839f9147f48ac09aed119959ae860240"
+      },
+      "production_sources_match_current": true,
+      "actual_tool_terminal": {
+        "initial_chunk_id": "a0e587",
+        "session_id": 69129,
+        "terminal_chunk_id": "c42aad",
+        "exit_code": 0,
+        "running_session_id": null
+      }
+    }
+  ],
+  "SDK_invoked": false,
+  "build_only": true,
+  "all_project_tokens_closed": true
+}

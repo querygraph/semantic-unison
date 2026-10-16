@@ -186,3 +186,41 @@ This owner remains separately compiled groundwork. Dune's standard module
 discovery will see it on the next build; explicit Make wiring and the actual
 CandidateValidation asynchronous staging wrapper remain next. That integration
 must handle retained uncertainty before exposing any all-scanned setting.
+
+## Asynchronous staging wrapper checkpoint
+
+`ValidationStageWork.run` now composes the real snapshot queue, original/stage
+fences, an owner-side validation callback, independent final stage rehash and
+retirement. Its callback receives the disposable candidate pathname and snapshot
+report; it must return the promise covering every borrower it starts. Returned
+sleeping work is guarded by BorrowedWork before retirement. Cancellation after
+validation starts waits for that work, then fails and cleans up. Stage mutation
+rejects even when the callback returns success.
+
+The caller must acquire the full outer memory/descriptor envelope first.
+Cleanup uncertainty roots the opaque owner and returns an uncompleted promise,
+so automatic admission cleanup cannot run. Diagnostic callback failures cannot
+release it. No numeric-FD retry, release Boolean or fabricated recovery API is
+provided; whole-process closure/coordinated recovery is separate. The future
+CandidateValidation entry must provide meaningful retention diagnostics.
+
+Both owner modules are now explicitly linked in Make; Dune discovers them via
+its existing standard module set. Current stock/Ox full Make build-only slots
+passed/closed, with all production source hashes matching;
+[build evidence](../tests/qualification/validation-stage-work-builds-actual-20261017.json).
+Current production-object controls passed success, callback failure, mutation,
+sleeping callback cancellation and retained cleanup uncertainty on both compilers
+(actual76318/f66e06/0, outer34811/four compile-test groups reaped0/CPU8 closed).
+[Raw controls](../tests/qualification/validation-stage-work-v2-actual-20261017.json)
+explicitly retain one symbolic admission in the injected EBADF case until the
+test process exits; no successful callback release is claimed. As before this
+injection intentionally violates a borrow precondition, not a genuine ambiguous
+OS-close experiment. The first control compile failed because embedded Lwt has
+poll rather than state; its actual failed-prefix evidence is preserved, and the
+control-only fix did not change production code.
+
+No SDK, photos, catalog, production publication or enabled all-scanned scope.
+Next connect selected validators and bounded outer admission in CandidateValidation.
+Select formats through held read-only recognition before expensive snapshots,
+so a huge non-DNG does not fail a DNG snapshot-size policy. Then implement actual
+scan-selected coverage, preference negotiation and no-op/cross-peer controls.

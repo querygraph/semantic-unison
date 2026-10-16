@@ -23,7 +23,8 @@ acceptance is implied. Photo owns preview generation/publishing qualification.
 The follow-up originally changed only `src/supervisedExternal.ml` in production
 for opt-in helper settlement diagnostics. It now also adds the isolated
 `validationSnapshot` kernel, a typed `SemanticWorkers.snapshot` operation and
-checked WholeFileClone/snapshot Make/Dune interfaces. These are groundwork for
+checked WholeFileClone/snapshot Make/Dune interfaces, plus private stage
+ownership and asynchronous validation composition. These are groundwork for
 unchanged-file validation; no enabled all-scanned preference or scan hook exists
 yet. Read [the integration plan and current evidence](all-scanned-validation-implementation.md).
 Most other follow-up files are qualification/source-owner harnesses and sealed
