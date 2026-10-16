@@ -4,6 +4,23 @@
 
 ## Current checkpoint — 2026-10-16
 
+Real-camera receiving is now prepared for exact source review as a separate
+bounded fallback test: [camera requestV2](doc/camera-receiving-request-v2.json),
+[planV2](doc/camera-receiving-plan-v2.json). Both are UNADMITTED/UNSTARTED at this
+checkpoint.51 execution sources, current stock/Ox Make artifacts, fixed retained
+Unison-owned clone identity, two native-clone-only disposable senders and six
+serial CLI calls are pinned. Only metadata of the retained input was checked;
+no fresh source payload read/hash occurred. The source kernel, strict transport,
+result audit, exact-admission/inherited-FD parent protocol, actual disposable
+lifecycle and33 tiny/mock/refusal controls have scoped evidence. V1 was
+superseded unstarted after fixing borrowed-open failure recording; old bytes
+remain preserved. This is not semantic/private-reference/camera-corpus/SDK
+qualification, and neither a free resource pool nor this plan authorizes IO.
+
+The full goal stays ACTIVE while that one IO decision is pending. Independent
+source/build/audit work can continue on Unison00..07. Do not mark the whole goal
+blocked solely because one finite qualification window awaits coordination.
+
 Generated property-transfer V3 now [PASSED/CLOSED](tests/qualification/shared-property-io-actual-20261016.json)
 once under fresh admissione333f952. Actual owner24600/e4fe28/exit0/no session;
 worker58421 reaped0/other group members absent, EXglobal and Unison00..07 closed.
