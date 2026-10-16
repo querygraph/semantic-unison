@@ -72,3 +72,19 @@ thread cancellation, RSS or all heaps. Those remain separate gates before
 production integration or a scaling claim. One fixed-order sample per setting
 is not a throughput benchmark. The actual admission is consumed; preparation
 and accepted results do not authorize another SDK invocation.
+
+## Shared8 source successor
+
+`shared_plan.shared_matrix` is a pure metadata constructor for a future versioned
+executor: three codecs, reference1 and experimental1/2/6,12 sequential calls,
+Unison00..07 with2owner credits. It reuses the existing protocol constructor and
+preserves the old18-credit matrix and historical source receipts. It does not
+open/hash inputs or tools, build, admit or execute anything.
+
+[Six source controls](../qualification/sdk-shared-matrix-source-actual-20261016.json)
+verify thread argv/accounting, reference versus experimental protocol/memory,
+codec/budget refusal and false runtime/hard-cap flags. A fresh exact executor
+must still acquire IO→CPU, own every helper/group through actual settlement,
+retain unknown ownership, bind telemetry and compare reference results before
+any real SDK scaling qualification. This constructor is not accepted by the old
+18-credit native executor and cannot grant a shared or borrowed native window.
