@@ -33,6 +33,15 @@ class Entry(unittest.TestCase):
         with patch.object(e,'read_manifest',side_effect=read),patch.object(e,'sources',return_value=original['execution_source_sha256']),patch.object(e.os,'lstat',side_effect=lstat):
             return e.checked_plan('/private/tmp/inert-plan','d'*64)
     def test_exact_metadata_only_plan(self):self.assertEqual(self.check(self.fixture()),self.fixture())
+    def test_worker_import_coexists_with_historical_sdk_plan_module(self):
+        import plan as historical
+        from sdk_multifile import worker,transport
+        self.assertTrue(callable(worker.execute));self.assertTrue(callable(transport.Invoker))
+        self.assertTrue(hasattr(historical,'matrix'))
+        p=self.fixture()
+        call=transport.Invoker('/private/tmp/u-smr-unit-test/stock',binary=p['binaries']['stock'],tool=p['tool'],
+                               journal=None,script_pins=p['transport_source_sha256'],deadline=200.)
+        flags=call.contract['argv'];self.assertEqual(flags[flags.index('-semanticmaxinflight')+1],'4')
     def test_limits_source_and_tool_changes_refuse(self):
         for mutate in [lambda d:d['parameters'].update(cpu_credits=18),lambda d:d['parameters'].update(sdk_calls=True),
                        lambda d:d['tool'].update(threads=2),lambda d:d['execution_source_sha256'].update(extra='x'),

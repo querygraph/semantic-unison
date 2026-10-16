@@ -11,12 +11,12 @@ sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'bench/sync'),str(ROOT/'tests/camera_sd
 from invocation_journal import Journal
 from shared_cpu_pool import UnresolvedOwnership
 from camera_sdk_concurrency.worker import prepare_scripts
-from transport import Invoker
-from case import execute as execute_case
-from parent import audit
+from sdk_multifile.transport import Invoker
+from sdk_multifile.case import execute as execute_case
+from sdk_multifile.parent import audit
 
 
-def execute(plan,workspace,deadline,*,prepare_sources,read_proxy,persist):
+def execute(plan,workspace,deadline,*,prepare_sources,read_proxy,persist,check_sources=lambda:None):
     w=Path(workspace)
     if str(w)!=plan['workspace'] or not w.is_absolute() or w.is_symlink() or not w.is_dir():
         raise ValueError('exact prepared worker namespace required')
@@ -28,6 +28,7 @@ def execute(plan,workspace,deadline,*,prepare_sources,read_proxy,persist):
     journal=Journal(result,save);save()
     try:
         for label in ['stock','ox']:
+            check_sources()
             directory=w/label;directory.mkdir(mode=0o700)
             for name in ['left','right','state']:(directory/name).mkdir(mode=0o700)
             pins=prepare_scripts(directory,plan['transport_source_sha256'])
@@ -36,7 +37,8 @@ def execute(plan,workspace,deadline,*,prepare_sources,read_proxy,persist):
             call=Invoker(directory,binary=plan['binaries'][label],tool=plan['tool'],
                          journal=journal,script_pins=pins,deadline=deadline)
             def save_case(value):row['case']=value;save()
-            row['case']=execute_case(directory,sources=plan['sources'],invoke=call,persist=save_case);save()
+            row['case']=execute_case(directory,sources=plan['sources'],invoke=call,persist=save_case)
+            check_sources();save()
         candidate=dict(result,complete=True,phase='FINISHED')
         proxies=[read_proxy(w/label/'seed-proxy.json') for label in ['stock','ox']]
         proof=audit(candidate,plan,raw_proxy_receipts=proxies)

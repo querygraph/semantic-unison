@@ -4,7 +4,7 @@ import unittest
 from unittest.mock import patch
 from transport import Invoker
 import invocation as original
-from plan import BUILD
+from sdk_multifile.plan import BUILD
 
 
 class Journal:

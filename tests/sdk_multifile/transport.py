@@ -3,9 +3,9 @@ import json
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'tests/camera_sdk_concurrency'))
+sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'tests/camera_sdk_concurrency')]
 from invocation import Invoker as OwnedInvoker
-from plan import plan
+from sdk_multifile.plan import plan
 
 
 class Invoker(OwnedInvoker):

@@ -157,3 +157,27 @@ passed metadata doubles and canonical manifest metadata/injected descriptor
 observations, with no IO pool acquisition, SDK or retained payload access.
 The outer control groups and Unison8 tokens closed. Completed SDK V2 receipts
 keep their old source pins; this successor does not revise their actual scope.
+
+The runtime successor is now wired through the distinct shared-dispatch target
+`sdk-multifile-receive`. Exact fresh IO admission and shared8 are mandatory;
+there is no CPU-only native route. The entry binds actual parent/worker argv
+and the canonical9 inherited FD metadata before source preparation, checks
+interpreter/binary/tool hashes under IO, and supplies native clone-only preparation
+and source-epoch fences. The parent reparses separately read raw proxy files,
+audits all attempted CLI/helper records, rehashes both receiving/source-clone
+outputs on complete cases, checks borrowed epochs and settles the worker before
+closing CPU then IO. Unknown retains the owner and all known/uncertain FDs.
+
+Module imports are qualified so the old SDK `plan` module can coexist with
+the multi-file plan. [Fifty-eight entry/dispatcher/worker, component and old-target controls](../qualification/sdk-multifile-dispatch-source-actual-20261016.json)
+passed, including exact source/namespace guard, no CPU-only route, corrupt
+output retention before reap and failed-worker retention. Owners/proxy frames
+and inner leases were inert/disposable models; actual CLI/SDK/canonicalEXIO
+execution and new-target child-boundary lifecycle qualification remain pending.
+Outer control groups and canonical Unison8 tokens closed. No grant follows.
+
+The expanded run includes all affected component/import paths after qualifying
+module names. It specifically constructs the four-slot adapter in a process
+where the historical SDK `plan` module is already loaded. Counts include
+imported regression groups, not58 independent native scenarios. No actual
+worker, receiving CLI, SDK or canonicalEXIO lifecycle is inferred.

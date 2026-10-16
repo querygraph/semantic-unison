@@ -7,7 +7,7 @@ sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'tests/camera_sdk_concurrency')]
 from invocation import artifact_sha
 from shared_cpu_pool import UnresolvedOwnership
 from combined import sdk_audit,settlements
-from receipts import audit,BUILD
+from sdk_multifile.receipts import audit,BUILD
 
 
 def execute(directory,*,sources,invoke,persist):

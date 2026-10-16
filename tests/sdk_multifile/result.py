@@ -1,6 +1,9 @@
 """Reparse returned two-candidate case records; CLI/FD/output audit is separate."""
 import re
-from receipts import audit as verdict,BUILD
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from sdk_multifile.receipts import audit as verdict,BUILD
 from combined import settlements,sdk_audit
 
 

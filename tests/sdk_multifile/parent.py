@@ -2,11 +2,11 @@
 from pathlib import Path
 import sys
 ROOT=Path(__file__).resolve().parents[2]
-sys.path.insert(0,str(ROOT/'bench/sync'))
+sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'bench/sync')]
 from invocation_journal import audit_attempted
-from plan import plan as command_plan
-from result import audit as case_audit
-from receipts import sdk_audit
+from sdk_multifile.plan import plan as command_plan
+from sdk_multifile.result import audit as case_audit
+from sdk_multifile.receipts import sdk_audit
 from live_records import parse as parse_live
 
 

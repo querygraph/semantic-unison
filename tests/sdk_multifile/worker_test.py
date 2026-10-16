@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 import worker as w
 from combined_test import frame
-from plan import BUILD
+from sdk_multifile.plan import BUILD
 from invocation import SCRIPT_NAMES
 
 
@@ -25,7 +25,7 @@ class Worker(unittest.TestCase):
             class Invoke:
                 def __init__(self,directory,*,binary,tool,journal,**kw):self.d=Path(directory);self.binary=binary;self.journal=journal
                 def __call__(self):
-                    from plan import plan
+                    from sdk_multifile.plan import plan
                     argv=plan(self.binary,p['tool'],self.d)['command'];i=len(calls)
                     self.journal.begin(dict(label=self.binary['label'],mode='semantic',workers=3,directory=str(self.d),stage='seed'),argv)
                     owner=dict(pid=50+i,returncode=0,reaped=True,group_cleanup_before_leader_reap=True,other_group_members_absent_before_reap=True)
