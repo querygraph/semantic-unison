@@ -220,3 +220,19 @@ Evidence: `tests/qualification/private-maker-entry-final-source-actual-20261017.
 No canonicalIO or retained payload was accessed. Real disposable worker-route
 qualification remains before freezing a retained-input request; no runtime grant
 is implied by this implementation.
+
+Real disposable lifecycle controls now passed candidate/decline/stale-source/
+uncertain-close paths with four actual worker processes and nine inherited
+private lock descriptions. The injected close occurs before any OS close; the
+worker and all locks stayed live until a control-specific exit acknowledgement.
+No descriptor retry or forged SHARED-CLOSED was used. All worker groups were
+reaped, inner locks reacquired, and outer canonical CPU8 released. Final38
+controls plus four workers actualsession42242/ff73f1/0 are pinned in
+`tests/qualification/private-maker-integrated-ready-actual-20261017.json`.
+
+The preflight now retains parent ownership if qualified metadata close becomes
+uncertain before token acquisition. Manual command construction does not open
+the plan. `doc/private-maker-slice-{plan,request}-v1.json` freezes the exact
+retained-clone candidate slice,13runtime sources and9prerequisites. Fresh lstat
+still matches; workspace/admission absent. No retained payload was read and no
+new IO grant exists. This request is ready for separate Root review/scheduling.

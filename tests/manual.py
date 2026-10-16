@@ -157,12 +157,13 @@ def command(target, output, environment):
             require(shared >= 3, 'inspector execution needs one worker plus two owner credits')
     if target == 'private-maker-slice':
         require(shared==8 and bool(io_path) and bool(io_sha),'slice requires exact shared8 IO admission')
-        from private_maker_execute import checked_plan
-        from private_maker_plan import worker_argv
         path=environment.get('MAKER_SLICE_PLAN','');digest=environment.get('MAKER_SLICE_PLAN_SHA256','')
-        plan=checked_plan(path,digest)
-        require(plan['workspace']==str(output),'slice output must match frozen workspace')
-        return worker_argv(plan,interpreter=sys.executable,plan_path=path,plan_sha256=digest)
+        require(Path(path).is_absolute() and '..' not in Path(path).parts and len(digest)==64
+                and all(c in '0123456789abcdef' for c in digest),'exact slice plan path/digest required')
+        # Pure command construction: the retained dispatcher validates the plan
+        # and handles metadata-close uncertainty, before any payload access.
+        return [sys.executable,str(ROOT/'tests/private_maker_execute.py'),'--worker',
+                '--plan',path,'--plan-sha256',digest,'--workspace',str(output)]
     if target == 'private-dng-framing-input':
         require(shared is not None and environment.get('SHARED_IO_ADMISSION'),
                 'camera-derived framing input requires explicit shared IO admission')

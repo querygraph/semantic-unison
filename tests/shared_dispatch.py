@@ -152,8 +152,15 @@ def run(target, argv, output, credits, *, io_admission=None):
     indexes = authorized[:credits]
     pool = Pool.read(MANIFEST, MANIFEST_SHA)
     io_lease = None
-    io_pool, io_deadline = (checked_io_request(io_admission, target, argv, output, credits)
-                            if io_admission is not None else (None, None))
+    try:
+        io_pool, io_deadline = (checked_io_request(io_admission, target, argv, output, credits)
+                                if io_admission is not None else (None, None))
+    except UnresolvedOwnership as error:
+        retain_after_record(lambda: write(output / 'SHARED-OWNERSHIP-RETAINED.json', {
+            'owner_pid':os.getpid(),'stage':'metadata_preflight_before_acquisition',
+            'error':repr(error),'retained_fds':list(error.retained_fds),
+            'uncertain_fd':error.uncertain_fd,
+            'uncertain_closes':list(getattr(error,'uncertain_closes',()))}))
     if io_pool is not None:
         write(output / 'SHARED-IO-ATTEMPT.json', {'admission': io_admission, 'target': target,
               'owner_pid': os.getpid(), 'command': argv})

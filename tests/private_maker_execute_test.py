@@ -68,6 +68,13 @@ class Execute(unittest.TestCase):
             self.assertEqual(command[2:4],['--worker','--plan'])
             for changed in ({'SHARED_CPU_CREDITS':'4'},{'SHARED_IO_ADMISSION':''}):
                 with self.assertRaises(ValueError):manual.command('private-maker-slice',Path(plan['workspace']),dict(environment,**changed))
+    def test_manual_constructs_command_without_opening_metadata(self):
+        import manual
+        plan=fixture();environment=dict(SHARED_CPU_CREDITS='8',SHARED_IO_ADMISSION='/admission',
+            SHARED_IO_ADMISSION_SHA256='b'*64,MAKER_SLICE_PLAN='/plan',MAKER_SLICE_PLAN_SHA256='c'*64)
+        with patch.object(entry,'checked_plan') as opened:
+            manual.command('private-maker-slice',Path(plan['workspace']),environment)
+            opened.assert_not_called()
 
 
 if __name__=='__main__':unittest.main()

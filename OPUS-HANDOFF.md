@@ -79,9 +79,25 @@ and complete/failed-exit contradiction. Final child14610 reaped0/group absent/
 CPU8 closed, actual12cea2/0. No canonicalIO acquisition or retained input read.
 Receipts private-maker-entry-{source,parent-source,final-source}-actual-20261017
 preserve the three progressive source checks; final is current.
-Next concrete action: qualify the integrated route with real disposable children
-and injected fixture/metadata binding (no canonicalIO/media), then freeze current
-source pins and exact retained-source metadata for fresh IO review, then investigate a vendor-specific reference contract from
+Real integrated disposable lifecycle qualification now PASSED: four worker
+processes for candidate, parser decline, stale source and injected close
+uncertainty. Unknown worker remained actually live with all nine inner locks
+busy, no RESULT/SHARED-CLOSED; control-specific acknowledged exit recovered
+without any numeric close retry. All worker groups reaped; all inner locks
+reacquired; canonical Unison8 outer lease closed. Also fixed plan-close
+uncertainty before acquisition to retain the parent; manual argv construction
+is now pure and does not open plan metadata. Final38 controls plus4realworkers
+passed, actualsession42242/ff73f1/0/no session, children16661/16663reaped0.
+Receipt private-maker-integrated-ready-actual-20261017.json includes before/after
+source pins; prior lifecycle receipt preserved. No canonicalIO/media reads.
+Fresh metadata-only retained clone lstat still equals exact eight-field epoch.
+Frozen doc/private-maker-slice-plan-v1.json SHAcd734403 and request-v1.json
+now specify one at-most3078B/two-pread run, Unison8+EXglobal,10s worker/60s
+parent observation (not hard kill),13executionpins+9prereqs. Workspace
+/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa and
+/private/tmp/unison-private-maker-slice-admission-v1.json remain absent.
+No grant or dispatch inferred. Next action: submit exact frozen request for
+Root source review/fresh finite IO scheduling; dispatch only after fresh grant, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.

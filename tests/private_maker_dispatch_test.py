@@ -68,6 +68,20 @@ class SliceParent(unittest.TestCase):
         self.closure['returncode']=1
         with self.assertRaises(Retained):self.run_slice()
         self.assertFalse(self.cpu.closed or self.io.closed)
+    def test_preflight_close_uncertainty_retains_before_acquisition(self):
+        from shared_io_pool import UnresolvedIOOwnership
+        error=UnresolvedIOOwnership('injected metadata close',uncertain_closes=[{'fd':900}])
+        command=[d.sys.executable,str(Path(entry.__file__).resolve())]
+        def retained(record):record();raise Retained()
+        with patch.object(d.Pool,'read') as pool,\
+             patch.object(d,'checked_io_request',side_effect=error),\
+             patch.object(d,'retain_after_record',side_effect=retained):
+            with self.assertRaises(Retained):d.run(d.SLICE_TARGET,command,self.output,8,
+                io_admission={'path':'/inert','sha256':'b'*64})
+            pool.return_value.try_acquire.assert_not_called()
+        record=json.loads((self.output/'SHARED-OWNERSHIP-RETAINED.json').read_text())
+        self.assertEqual(record['stage'],'metadata_preflight_before_acquisition')
+        self.assertEqual(record['uncertain_closes'],[{'fd':900}])
 
 
 if __name__=='__main__':unittest.main()
