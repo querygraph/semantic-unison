@@ -23,8 +23,13 @@ let () =
     A.with_lease admission cancellation ~role:A.Consumer
       ~cost:{A.payload_bytes=1048576;descriptors=16} (fun () ->
         ValidationStageWork.run ~pool ~cancellation ~max_bytes:1024L ~create
-          ~validate:(fun ~candidate:path ~snapshot ->
+          ~validate:(fun ~candidate:path ~snapshot ~output ->
             candidate:=path;check (path<>source && bytes path=data) "helper received original/wrong snapshot";
+            let held=Unix.LargeFile.fstat output and named=Unix.LargeFile.lstat path
+            and original=Unix.LargeFile.lstat source in
+            check (held.st_dev=named.st_dev && held.st_ino=named.st_ino &&
+              (held.st_dev<>original.st_dev || held.st_ino<>original.st_ino))
+              "borrowed validation output does not bind the isolated stage";
             validate ~candidate:path ~snapshot)
           ~on_retained ()) in
   let quiet ()=check ((A.usage admission).transactions=0 && (A.usage admission).pending=0)

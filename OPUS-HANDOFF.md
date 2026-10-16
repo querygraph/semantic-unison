@@ -1,11 +1,42 @@
 # Unison implementation handoff
 
-Latest checkpoint: real scanner bounded unchanged-file coverage PASS/CLOSED; endpoint policy/activation remains pending.
+Latest checkpoint: unchanged-file validators borrow the isolated stage FD; stock/Ox controls PASS/CLOSED. Endpoint policy/activation remains pending.
 This supersedes prior mixed-request pending/unexecuted/absent observations.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
+
+## Held-output validation checkpoint
+
+Unchanged-file CandidateValidation now borrows the private stage owner's held
+output FD for recognition, reinspection and filesystem admission around execution.
+It does not reopen that path through the legacy temporary-descriptor wrappers.
+Inspection refuses every other pathname, including the original. StageWork lends
+ONLY the disposable output FD, never the original FD; trusted callbacks must read
+it without closing/retaining it beyond their actual returned promise. The stage
+owner/admission stays live throughout callback settlement and final integrity
+checks. Pathname helpers still receive only the private pathname. This is not an
+OS-enforced read-only handle or sandbox. Existing received-file wrapper and worker
+close-fault limitations are not relabeled as fixed by this change.
+
+Current stock/Ox Make builds passed; actual37127/3ba42a/0 and14865/b9ed28/0.
+Two controllers/eight compiler-or-test calls passed under canonical Unison8;
+actual60080/a2dead/exit0/no session, all attempted groups reaped0 and tokens closed.
+Evidence `tests/qualification/validation-borrowed-output-actual-20261017.json`.
+Original fixtures check stage-FD/inode isolation, original-path refusal, held-FD
+inspection while the disposable pathname is temporarily moved then restored,
+filesystem admission around an original fake execution callback, mutation
+rejection, sleeping cancellation and retained uncertainty. The fake execution
+callback launches NO subprocess and provides no SDK/helper protocol acceptance.
+No Photo payload/source mutation/new native admission.
+
+All-scanned endpoint integration remains pending. The lifetime correction was
+needed before enabling it; next implement private endpoint directory ownership,
+non-CWD-changing followed-path resolution/fences, strict scope/capability handling,
+scan-error propagation and awaited endpoint completion. Do not expose the option
+based on the component tests alone. Full SOL.md goal remains active/incomplete.
+
 
 ## Current scanner coverage checkpoint
 

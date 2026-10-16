@@ -38,7 +38,7 @@ let run ~pool ~cancellation ~max_bytes ~create ~validate
       | Some snapshot ->
         ValidationStage.check owner;cancelled ();
         let candidate=ValidationStage.path owner in
-        BorrowedWork.bind (fun () -> validate ~candidate ~snapshot) (fun () ->
+        BorrowedWork.bind (fun () -> validate ~candidate ~snapshot ~output) (fun () ->
           ValidationStage.check owner;cancelled ();
           BorrowedWork.bind (fun () -> SemanticWorkers.digest pool cancellation output) (function
           | None -> fail Cancelled

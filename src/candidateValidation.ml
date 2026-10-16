@@ -114,7 +114,7 @@ let verify_tree before after =
     | _ -> false in
   if not (same before after) then
     raise (Util.Transient "Validation candidate tree changed during validation")
-let validate_file ?partition ~reservation ~validators ~destination path =
+let validate_file ?partition ?borrowed_output ~reservation ~validators ~destination path =
   Abort.checkAll ();
   let runtime = SemanticRuntime.get () in
   let supervisor = runtime.SemanticRuntime.supervisor
@@ -138,10 +138,12 @@ let validate_file ?partition ~reservation ~validators ~destination path =
           (function Some result -> return result
            | None -> fail (Util.Transient "Validation partition admission cancelled")) in
     admitted (fun () ->
-      (* Recognition and the initial full digest use the same held input. Close
-         that owner before helper execution; every phase retains this one loan. *)
+      (* Unchanged stages loan their existing owner's output FD. Received
+         candidates preserve their existing pathname-open lifetime. *)
       BorrowedWork.bind
-        (fun () -> with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)) (function
+        (fun () -> match borrowed_output with
+          | None -> with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)
+          | Some fd -> SemanticWorkers.identify pool cancellation ~recognizers fd) (function
       | None -> fail (Util.Transient "Validation recognition cancelled")
       | Some {SemanticWorkers.formats=[];fingerprint=None;_} -> return ()
       | Some {SemanticWorkers.formats;fingerprint=Some fingerprint;_} when formats <> [] ->
@@ -151,13 +153,26 @@ let validate_file ?partition ~reservation ~validators ~destination path =
             fail (Util.Transient "Unexpected validation recognition selection")
           else
           let expected = snapshot_of_fingerprint fingerprint in
+          let inspect name = match borrowed_output with
+            | None -> snapshot pool cancellation name
+            | Some fd ->
+                if name<>candidate then fail (Util.Transient "Borrowed validation inspection path differs") else
+                BorrowedWork.bind (fun () -> SemanticWorkers.digest pool cancellation fd) (function
+                  | None -> fail (Util.Transient "Borrowed validation hashing cancelled")
+                  | Some fingerprint -> return (snapshot_of_fingerprint fingerprint)) in
           let execute run = BorrowedWork.bind
-            (fun () -> SemanticRuntime.with_io_file cancellation candidate run)
+            (fun () -> match borrowed_output with
+              | None -> SemanticRuntime.with_io_file cancellation candidate run
+              | Some fd -> BorrowedWork.bind
+                  (fun () -> IoAdmission.with_devices runtime.io cancellation
+                    ~devices:(IoAdmission.devices_of_fds [fd]) run)
+                  (function Some result -> return result
+                   | None -> fail (Util.Transient "Borrowed validation I/O admission cancelled")))
             (fun process -> trace_process expected process; return process) in
           let context = {
             CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;
             expected;resources=requirements;
-            inspect=snapshot pool cancellation;
+            inspect;
             execute;
           } in
           let rec invoke = function
@@ -274,8 +289,8 @@ let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
             if List.length !selected<>List.length recognition.formats then
               fail (Util.Transient "Unexpected unchanged validation recognition selection")
             else return (!selected<>[])) in
-      let validate ~candidate ~snapshot:_ =
-        validate_file ~partition ~reservation:None ~validators:!selected
+      let validate ~candidate ~snapshot:_ ~output =
+        validate_file ~partition ~borrowed_output:output ~reservation:None ~validators:!selected
           ~destination:(Path.toString destination)
           (Fspath.child staging_directory (Name.fromString (Filename.basename candidate))) in
       BorrowedWork.catch

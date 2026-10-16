@@ -3,7 +3,8 @@ exception Cancelled
 exception Snapshot_changed
 val run : pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation ->
   max_bytes:int64 -> create:(unit -> ValidationStage.t) ->
-  validate:(candidate:string -> snapshot:ValidationSnapshot.report -> unit Lwt.t) ->
+  validate:(candidate:string -> snapshot:ValidationSnapshot.report ->
+    output:Unix.file_descr -> unit Lwt.t) ->
   ?select:(source:Unix.file_descr -> bool Lwt.t) ->
   ?on_retained:(ValidationStage.t -> unit) -> unit -> unit Lwt.t
 (** Caller acquires the full staging/backend memory and FD envelope BEFORE
@@ -16,7 +17,11 @@ val run : pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation -
     invoke a pathname helper. False skips copying and validation, after source
     fences, and retires the empty stage. Its promise must cover every borrower.
     Materialize with the actual worker queue, check original/stage fences,
-    invoke [validate] with ONLY the disposable candidate pathname, await its
+    invoke [validate] with ONLY the disposable candidate pathname and its held
+    output descriptor (never the original descriptor). The descriptor is borrowed
+    for trusted read-only inspection and must not be closed or retained beyond
+    the callback's returned promise. It is close-on-exec; pathname helpers receive
+    only the disposable path. Await the callback's
     actual helper/worker settlement, then rehash the held snapshot and recheck
     fences before cleanup. A returned validation promise must cover every
     borrower it starts. Cancellation never retires active borrowers early.

@@ -14,6 +14,24 @@ module Validator = struct
     if snapshot<>context.expected then failwith "private snapshot context differs";
     match !mode with
     | "reject" -> fail (Util.Transient "original fake validator finding")
+    | "wrong-path" -> context.inspect !original >>= fun _ -> failwith "borrowed inspection opened original"
+    | "borrowed-inspect" ->
+        let moved=context.candidate^".held-fixture" in
+        Unix.rename context.candidate moved;
+        Lwt.try_bind (fun () -> context.inspect context.candidate)
+          (fun observed ->
+            Unix.rename moved context.candidate;
+            if observed.sha256<>context.expected.sha256 || observed.size<>context.expected.size then
+              failwith "held output inspection differs";
+            return ())
+          (fun error -> Unix.rename moved context.candidate;fail error)
+    | "execute" ->
+        context.execute (fun () ->
+          if (IoAdmission.usage (SemanticRuntime.get ()).io).active_jobs<>1 then
+            failwith "borrowed output execution missing filesystem admission";
+          return {HelperSupervisor.outcome=HelperSupervisor.Failed "original fake callback; no subprocess";
+            status=None;child_pid=None;stdout="";stderr="";output_truncated=false;elapsed=0.})
+        >>= fun _ -> return ()
     | "mutate" ->
         let output=open_out_bin context.candidate in output_string output "PRIVATE MUTATION";close_out output;return ()
     | _ -> return ())
@@ -59,9 +77,9 @@ let () =
     mode:=selected;
     let before= !calls in
     let passed=try Lwt_unix.run (run 1024L);true with Util.Transient _ -> false in
-    check (passed=(selected="pass") && !calls=before+1 && read source=data) "selected private validation result";
+    check (passed=List.mem selected ["pass";"execute";"borrowed-inspect"] && !calls=before+1 && read source=data) "selected private validation result";
     quiet ();
     Printf.printf "PASS unchanged %s original-exact/global-local-admission-settled\n%!" selected)
-    ["pass";"reject";"mutate";"pass"];
+    ["pass";"reject";"wrong-path";"borrowed-inspect";"execute";"mutate";"pass"];
   Lwt_unix.run (SemanticWorkers.shutdown runtime.pool);
   print_endline "PASS unchanged off/no-open and bounded nonmatch/size/private-companion controls; zero SDK"

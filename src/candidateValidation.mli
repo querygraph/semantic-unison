@@ -8,8 +8,12 @@ val unchanged_file : staging_directory:Fspath.t -> source:Fspath.t ->
     Selected files are validated only through a private snapshot in an existing
     owned0700 staging_directory. A one-file local gate partitions the existing
     envelope, never reacquiring global admission. Original/stage fences, final
-    snapshot hash and actual callback settlement precede cleanup. Unknown stage
-    cleanup retains its owner/admission; existing worker/reader close-fault
+    snapshot hash and actual callback settlement precede cleanup.
+    Inspection/recognition borrow the stage's held output descriptor, not a
+    separately reopened pathname. Execute groups filesystem admission from that
+    descriptor. Inspection rejects any other pathname, including the original.
+    The descriptor owner remains live across the entire callback promise.
+    Unknown stage cleanup retains its owner/admission; existing worker/reader close-fault
     limitations remain separate. Resource, staging and integrity errors do not
     become permissive validator warnings. Regular nonsymlink source required. *)
 val before_commit : directory:Fspath.t -> candidate:Path.local ->
