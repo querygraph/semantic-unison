@@ -66,3 +66,11 @@ was reaped. [Preserved recovery](../qualification/shared-mixed-first-compile-rec
 records actual outer exit137, no fabricated normal exit or original wait4
 receipt, and subsequent fresh whole-token acquisition. The corrected successor
 checks known nonzero outcomes before releasing settled outer ownership.
+
+The [group-observed successor](../qualification/shared-mixed-helper-groups-actual-20261016.json)
+records all eight helper PIDs per compiler, actual direct wait0 and the qualified
+macOS `observe_group` callback reporting zero other members before leader reap.
+Missing/unknown/nonzero observations fail this host-specific test; no historical
+PID is signaled. This is a diagnostic census plus separate supervisor wait, not
+a durable descendant absence proof or support for deliberately escaped groups.
+Hash parity, permit/queue settlement and descriptor baseline checks still pass.

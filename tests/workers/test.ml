@@ -420,16 +420,22 @@ let shared_mixed_tests () =
     let b = budget permits in
     let pool = W.create ~workers:6 ~max_pending:32 ~budget:b in
     let helper weight =
-      H.run b ~weight (H.cancellation ())
+      let group = ref None in
+      H.run ~observe_group:(fun value -> group:=Some value) b ~weight (H.cancellation ())
         ~limits:{H.timeout=5.;terminate_grace=0.1;stdout_bytes=128;stderr_bytes=128}
-        ~executable:"/bin/sleep" ~arguments:[|"0.05"|] ~environment:[||] in
+        ~executable:"/bin/sleep" ~arguments:[|"0.05"|] ~environment:[||]
+      >>= fun result -> return (result,!group) in
     let first = helper 1 in
     let second = helper (min 2 permits) in
     let jobs = List.init 16 (fun _ -> hash pool (H.cancellation ()) "sample") in
     List.iter (function Some value -> check (value.W.digest=expected) "mixed hash parity"
       | None -> failwith "unexpected mixed hash cancellation") (Lwt_unix.run (await jobs));
-    List.iter (fun value ->
-        check (value.H.outcome=H.Completed && value.H.status=Some (Unix.WEXITED 0)) "mixed helper failed"
+    List.iter (fun (value,group) ->
+        check (value.H.outcome=H.Completed && value.H.status=Some (Unix.WEXITED 0)) "mixed helper failed";
+        check (group=Some (Some 0)) "mixed helper retained-group observation missing or nonzero";
+        let pid=match value.H.child_pid with Some pid when pid>0 -> pid
+          | _ -> failwith "mixed helper actual child identity missing" in
+        Printf.printf "PASS shared mixed helper permits=%d pid=%d waited=0 observed-other-members=0\n%!" permits pid
       )
       (Lwt_unix.run (await [first;second]));
     let usage = W.usage pool in
