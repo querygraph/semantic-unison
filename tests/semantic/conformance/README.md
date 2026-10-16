@@ -111,3 +111,14 @@ checks. The outer owner bounds/settles the whole group; no servers, SDK, Adobe,
 camera inputs or automatic fuzzing run. The[identifier qualification](../../qualification/sde-profile-identifiers-actual-20261016.json)
 retains actual results and lifecycle proof. Valid independent wire goldens remain
 unchanged; both decoders reject every NUL position in the three golden IDs.
+
+
+The shared fixed suite now also checks the role of decoded SDR proofs: six
+local/peer-base combinations must reject hash-only targets, while peer-base to
+fully inspected target planning remains byte-identical to the goldens. A second
+private negative variant (`--negative-control target-proof`) removes only this
+production guard and must fail at the named regression. The fixed shared target
+runs current plus both profile-ID and target-proof negatives on each compiler,
+six serial runs total. [Actual target-proof evidence](../../qualification/sde-target-proof-actual-20261016.json)
+retains all native outcomes and group/token closure; this does not rerun full
+application Make/Dune or any receiving/SDK/camera test.

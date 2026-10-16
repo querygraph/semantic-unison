@@ -30,7 +30,7 @@ def main():
                         help="compile and generate immutable synthetic commands without running the test")
     parser.add_argument("--sanitize", choices=("address", "undefined", "address,undefined"),
                         help="instrument native C helpers; OCaml/runtime code remains unsanitized")
-    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation", "profile-id"),
+    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation", "profile-id", "target-proof"),
                         help="privately corrupt nonce binding or preservation hashing and require detection")
     args = parser.parse_args()
     compiler = shutil.which(args.ocamlopt)
@@ -75,6 +75,20 @@ def main():
                 else:
                     raise AssertionError('reference accepted unregistrable profile')
     print('Independent NUL profile rejections:', profile_id_rejections, flush=True)
+    incomplete_target_rejections = 0
+    for _, profile, regions, nonce, base, target in golden_values():
+        before, after = inspect(base, profile, regions), inspect(target, profile, regions)
+        _, base_claim = decode_request(encode_request(nonce, before))
+        _, target_claim = decode_request(encode_request(nonce, after))
+        for source in (before, base_claim):
+            try:
+                plan(nonce, source, target_claim)
+            except Invalid:
+                incomplete_target_rejections += 1
+            else:
+                raise AssertionError('reference accepted hash-only target')
+        assert encode_envelope(plan(nonce, base_claim, after)) == encode_envelope(plan(nonce, before, after))
+    print('Independent incomplete target rejections:', incomplete_target_rejections, flush=True)
     cases = wire_cases()
     pinned_manifest = json.loads((fixture_root / "golden/boundary-manifest.json").read_text())
     assert case_manifest(cases) == pinned_manifest, "deterministic boundary recipes differ from committed pins"
@@ -179,6 +193,13 @@ def main():
         source = (source_dir / "semanticDelta.ml").read_text()
         if args.negative_control == "nonce":
             source, count = re.subn(r"t\.nonce = nonce && t\.profile = base\.name", "t.profile = base.name", source, count=1)
+        elif args.negative_control == "target-proof":
+            guard = '''  else if List.exists (fun (item:item) ->
+    String.length item.contents <> item.region.length) target.items then
+    Error "target metadata contents unavailable"
+'''
+            count = source.count(guard)
+            source = source.replace(guard, "", 1)
         elif args.negative_control == "profile-id":
             previous = source
             source = source.replace("profile = \"\" || String.contains profile '\\000'", 'profile = ""')
@@ -226,6 +247,7 @@ def main():
     if args.negative_control:
         assert result.returncode != 0, "corrupted production negative control unexpectedly passed"
         expected = ("response-nonce-zero: request proof binding mismatch" if args.negative_control == "nonce"
+                    else "hash-only target proof accepted without payload" if args.negative_control == "target-proof"
                     else "unregistrable NUL profile accepted" if args.negative_control == "profile-id"
                     else "multi: independently computed whole/region/preserved proof mismatch")
         assert expected in result.stderr, result.stderr

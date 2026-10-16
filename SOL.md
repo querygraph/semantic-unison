@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+SDE planning now rejects decodedSDR/hash-only TARGET proofs: targetmustretain
+full replacementbytes; peerBASE remainslegal/unverified. Priorplanner could
+return an incompletepayloadenvelope fromanSDRtarget (receiverstillrejected;
+noinvalidcommitclaimed). [Current stock/Ox conformance](tests/qualification/sde-target-proof-actual-20261016.json)
+127commands/2197assertions eachPASS,6targetrole negatives each+6independentPython
+rejections; priorguardprivatebuilds failnamedregression. Existinggoldens and
+peerbase/fulltarget plansremainexact. Actual56828/200da1/0/no session,
+workerreaped0/groupabsent/tokensclosed. NoAdobe/camera/EXIO; priorfullMake+
+selftest qualification stayspinnedtoitsolder source, notsilentlyrefreshed.
+
+
 Current fullMake+application selftests now refreshed under standingUnison8:
 [stock/Ox actual receipt](tests/qualification/shared-current-make-selftests-actual-20261016.json)
 stock88175/42daa2/0 andOx65915/817054/0, no sessions, bothgroupsreaped0/

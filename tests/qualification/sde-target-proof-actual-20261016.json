@@ -1,0 +1,187 @@
+{
+  "schema": "unison-sde-target-proof/1",
+  "state": "PASS_CLOSED",
+  "actual_owner_tool_terminal": {
+    "session": 56828,
+    "chunk": "200da1",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-sde-target-proof-865da53e/SHARED-START.json",
+      "bytes": 1066,
+      "sha256": "9ee991938a3fce146338cc61bea2e2af737e785e007b13af52b4e2cccfeb1b14"
+    },
+    {
+      "path": "/private/tmp/unison-sde-target-proof-865da53e/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "28e1a61d839f9aa1a0c0f935a4837026895e6e14383657d1e0c5f477615dd794"
+    },
+    {
+      "path": "/private/tmp/unison-sde-target-proof-865da53e/SHARED-STDOUT.txt",
+      "bytes": 10280,
+      "sha256": "b522f5f49e96c2fa06de2a71abe55f144d536752dc50a3a427d274f1a4fe7d31"
+    },
+    {
+      "path": "/private/tmp/unison-sde-target-proof-865da53e/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-current.json",
+      "bytes": 24231,
+      "sha256": "67bdeabda72564e8ff355fb4adc7d0f669bc67bcdb57680750481774cd703603"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-current.log",
+      "bytes": 3850,
+      "sha256": "af7710c4b72b999169abf9533b46356f496179bd4b00279de69d17018db620bf"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-previous-profile-domain.json",
+      "bytes": 24237,
+      "sha256": "8054ee701d986734ce83cda6f0fb7dfa6b2d80dafd06a8514aa31649936b3f7e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-previous-profile-domain.log",
+      "bytes": 2691,
+      "sha256": "df0223db078270d78181e31f9178a20465c551d0f88fe76b858798304a206125"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-previous-target-proof.json",
+      "bytes": 24239,
+      "sha256": "a7490ff1b40fcd7041778caaa40b56b2c60ad439300c39c1d7721a2ad36c356e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/stock-previous-target-proof.log",
+      "bytes": 2699,
+      "sha256": "eb01f3dc29f9109b4b2c6339cbab95484d32c95289a0266e56bed33e8dd282ef"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-current.json",
+      "bytes": 24235,
+      "sha256": "13d85484466541a6b49b5092da11227f5f899c560c4307afed11cd831351361b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-current.log",
+      "bytes": 3847,
+      "sha256": "03774e7723b1aeb3cb4dcdba063e803a8a5737aa94939b09a2f1e6b5ac2055d1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-previous-profile-domain.json",
+      "bytes": 24241,
+      "sha256": "3649e6fb555604fde03d838a4f341a1d8204e43d9708083319a6840d1d34d8e5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-previous-profile-domain.log",
+      "bytes": 2688,
+      "sha256": "ee568cc6e2a3b5120043ac21c782715e8ace46049781d43a30f8d28e2883d677"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-previous-target-proof.json",
+      "bytes": 24243,
+      "sha256": "2444f86df7676112610c393abed0dc9657ebbaaa15d6ae30443cbfadabf1bb5a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-alh8zcc5/ox-previous-target-proof.log",
+      "bytes": 2696,
+      "sha256": "236073c1a476a45d30a0ae68b1e3309723cd7ec70f166114abc641c141a744a7"
+    }
+  ],
+  "sources": {
+    "src/semanticDelta.ml": "df169d15dff25b16bbc9c07cdf6cc4b3aea49e1f0b9b23cc9fad2cdcff174bc3",
+    "src/semanticDelta.mli": "b087bf1d0e31148bb17e7c07367f8f0e73500d825a4b5f9ae537d216c2b36a41",
+    "tests/semantic/conformance/test.ml": "124f3896e5e882ccc6bd08b2c47b95152f5b4b21285f754908595695376967ac",
+    "tests/semantic/conformance/reference.py": "0cd110501807de0a299209ec1b0210c13ad9623d8dc14611cfcd95a2fb1800c1",
+    "tests/semantic/conformance/run.py": "7094f07752202765d482635a5e279ad680c1a31c9fd9a758b43ff77d4f1f7d88",
+    "tests/semantic/conformance/shared.py": "ca2419ef55bc46bdadcc44d7c2351840ace83ba794abbcf45100b83ad4f2a532"
+  },
+  "runs": [
+    {
+      "compiler": "stock",
+      "variant": "current",
+      "pid": 28646,
+      "actual_wait_exit": 0,
+      "native_test_exit": 0,
+      "negative_control_detected": false,
+      "commands": 127,
+      "assertions": 2197
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-profile-domain",
+      "pid": 28693,
+      "actual_wait_exit": 0,
+      "native_test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-target-proof",
+      "pid": 28737,
+      "actual_wait_exit": 0,
+      "native_test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "ox",
+      "variant": "current",
+      "pid": 28787,
+      "actual_wait_exit": 0,
+      "native_test_exit": 0,
+      "negative_control_detected": false,
+      "commands": 127,
+      "assertions": 2197
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-profile-domain",
+      "pid": 28844,
+      "actual_wait_exit": 0,
+      "native_test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-target-proof",
+      "pid": 28972,
+      "actual_wait_exit": 0,
+      "native_test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    }
+  ],
+  "independent_reference_incomplete_target_rejections": 6,
+  "native_incomplete_target_rejections_per_compiler": 6,
+  "valid_peer_base_plan_still_exact": true,
+  "valid_goldens_unchanged": true,
+  "owner_group_closure": {
+    "child": {
+      "pid": 28645,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 28645,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "scope": "Abstract proof planning role boundary. SDR carries region hashes but no packet bytes: valid as peer base claim, not a replacement target. Old behavior could encode an incomplete envelope; no prior successful invalid commit claimed. Current conformance only, full application build receipts remain pinned to their earlier production source. Fixed generated bytes, no fuzz/sanitizer/Adobe/SDK/camera/Photo/EXIO."
+}

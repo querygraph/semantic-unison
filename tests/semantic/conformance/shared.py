@@ -30,12 +30,14 @@ def main():
     for label, compiler, variant in [(label, compiler, variant)
             for label, compiler in [('stock', '/Users/alexy/.opam/default/bin/ocamlopt'),
                             ('ox', '/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt')]
-            for variant in ('current', 'previous-profile-domain')]:
+            for variant in ('current', 'previous-profile-domain', 'previous-target-proof')]:
         report = work/(label+'-'+variant+'.json')
         command = [sys.executable, str(ROOT/'tests/semantic/conformance/run.py'),
                    '--ocamlopt', compiler, '--report', str(report)]
         if variant == 'previous-profile-domain':
             command += ['--negative-control', 'profile-id']
+        elif variant == 'previous-target-proof':
+            command += ['--negative-control', 'target-proof']
         log = work/(label+'-'+variant+'.log')
         with log.open('xb') as stream:
             child = subprocess.Popen(command, stdout=stream, stderr=subprocess.STDOUT)

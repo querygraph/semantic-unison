@@ -78,6 +78,9 @@ let classify ~base ~target =
 let plan ~nonce ~(base:proof) ~(target:proof) =
   if String.length nonce <> 32 then Error "nonce must be 32 bytes"
   else if not (same_layout base target) then Error "profile, size or layout changed"
+  else if List.exists (fun (item:item) ->
+    String.length item.contents <> item.region.length) target.items then
+    Error "target metadata contents unavailable"
   else if base.preserved <> target.preserved then Error "bytes outside editable regions changed"
   else Ok { profile = base.name; nonce; size = base.size;
     base_digest = base.full; target_digest = target.full; preserved = base.preserved;

@@ -256,3 +256,9 @@ pins, exactbinary/log hashes, actual parent/group closure and Unison8token relea
 New stock-check/ox-check entrypoints serialize build then selftest, at most two
 compilerjobs, explicitsemanticworkers3 and Adobeoff. No current Dune, GUI,
 physicalIO or complete acceptance claim is added by these Make checks.
+
+The newer [target-proof planning guard](../tests/qualification/sde-target-proof-actual-20261016.json)
+rejects SDR hash-only targets before creating an incomplete payload envelope.
+Peer-base claims remain accepted against full local targets. Stock/Ox conformance
+passes127commands/2197assertions each and detects the private old-guard variant.
+Earlier full Make/selftest evidence remains for its exact earlier source snapshot.

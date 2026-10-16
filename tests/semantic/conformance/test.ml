@@ -70,6 +70,11 @@ let golden name base_path target_path request_path envelope_path profile region_
   let nonce, claimed_base = ok (SemanticDelta.decode_request (read request_path)) in
   check (SemanticDelta.encode_request ~nonce base = read request_path)
     (name ^ ": independently computed whole/region/preserved proof mismatch");
+  let _, target_claim = ok (SemanticDelta.decode_request (SemanticDelta.encode_request ~nonce target)) in
+  List.iter (fun source ->
+    check (match SemanticDelta.plan ~nonce ~base:source ~target:target_claim with
+      | Error _ -> true | Ok _ -> false)
+      (name ^ ": hash-only target proof accepted without payload")) [base; claimed_base];
   let planned = ok (SemanticDelta.plan ~nonce ~base ~target) in
   check (SemanticDelta.encode planned = read envelope_path) (name ^ ": independent exact SDE mismatch");
   let received = ok (SemanticDelta.decode (read envelope_path)) in

@@ -9,6 +9,9 @@ type sample = { region : FormatExtension.region; digest : string;
                 prefix : string; truncated : bool }
 val inspect : ?max_payload:int -> (module FormatExtension.S) @ portable contended -> SemanticFile.t -> (proof, string) result
 val plan : nonce:string -> base:proof -> target:proof -> (t, string) result
+(** A target must retain full editable packet bytes from local inspection.
+    A decoded SDR proof can be a base claim, but cannot supply target bytes.
+    Neither successful planning nor a decoded base authorizes publication. *)
 val classify : base:proof -> target:proof -> FormatExtension.change
 val encode : t -> string
 val decode : ?max_payload:int -> string -> (t, string) result

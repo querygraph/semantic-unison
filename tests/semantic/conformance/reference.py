@@ -100,6 +100,9 @@ def plan(nonce, base, target):
         raise Invalid("nonce length")
     if (base.profile, base.size, base.regions) != (target.profile, target.size, target.regions):
         raise Invalid("profile, size or layout changed")
+    if len(target.contents) != len(target.regions) or any(
+            len(contents) != region.length for region, contents in zip(target.regions, target.contents)):
+        raise Invalid("target metadata contents unavailable")
     if base.preserved != target.preserved:
         raise Invalid("outside bytes changed")
     return Envelope(base.profile, nonce, base.size, base.whole, target.whole,

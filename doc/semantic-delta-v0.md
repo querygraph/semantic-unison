@@ -136,3 +136,12 @@ contain no NUL byte, matching the locally registrable format identifier domain.
 Unknown nonempty NUL-free identifiers can decode, but still require exact local
 registry resolution before any authorization or write. Decoder rejection is not
 a substitute for profile selection or content/proof validation.
+
+
+An SDR proof contains no replacement packet contents. The source may use that
+unverified proof as the base claim when planning against a fully inspected local
+target. A decoded SDR proof cannot be used as the target: `plan` rejects a target
+whose retained contents do not exactly fill each editable region. This check
+prevents a local caller from emitting an envelope whose declared region length
+has no corresponding payload; it does not authenticate a peer's base claim or
+replace receiver-side verification and authorization.
