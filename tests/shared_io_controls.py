@@ -10,7 +10,8 @@ import tempfile
 ROOT = Path(__file__).resolve().parents[1]
 SCRIPTS = ('tests/shared_io_plan_test.py', 'tests/shared_io_dispatch_test.py',
            'tests/shared_io_dispatch_lifecycle_test.py', 'bench/sync/artifact_pins_test.py',
-           'bench/sync/properties_test.py', 'bench/sync/invocation_journal_test.py')
+           'bench/sync/properties_test.py', 'bench/sync/invocation_journal_test.py',
+           'bench/sync/journal_lifecycle_test.py')
 
 def main():
     if len(sys.argv) != 1:
@@ -21,7 +22,8 @@ def main():
              'tests/shared_cpu_pool.py','tests/shared_process_owner.py','tests/manual.py',
              'tests/shared_io_plan.py','bench/sync/artifact_pins.py','bench/sync/run.py',
              'tests/shared_io_controls.py','bench/sync/properties.py','bench/sync/shared_audit.py',
-             'bench/sync/invocation_journal.py')
+             'bench/sync/invocation_journal.py','bench/sync/proxy.py',
+             'bench/sync/measure.py','bench/sync/ownership.py')
     def pins():
         return {name:hashlib.sha256((ROOT/name).read_bytes()).hexdigest() for name in sources}
     before=pins();rows=[]

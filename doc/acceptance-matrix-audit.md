@@ -47,4 +47,12 @@ cover known failed-prefix release, unknown-call retention before reap, and
 contradictory successful worker-exit retention. Actual failed sync-call lifecycle
 integration remains unqualified; these controls do not authorize an IO run.
 
+The [actual Python-peer lifecycle control](../tests/qualification/journal-peer-lifecycle-actual-20261016.json)
+exercises the real loopback proxy and measure wrapper with two tiny original
+Python peers: exit0 and deliberate exit7. Both retain client/supervisor/server
+settlement receipts through journal persistence and a later verification-failure
+record. The containing owner actually exited0 with its group settled and tokens
+closed. This component control uses no Unison executable or EXglobal IO and does
+not by itself qualify complete dispatcher failed-run release or property receiving.
+
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.
