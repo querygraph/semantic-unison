@@ -88,3 +88,30 @@ HFS+, but no complete physical-leaf provider or runtime IO pool is qualified.
 No device media/DNG payload, native Photo/SDK, live provisioning or private-DNG
 admission occurred. Current V7/other dispatchers do not gain this protocol by
 source publication.
+
+## Actual provisioned namespace and EX_GLOBAL backend
+
+Root has provisioned the original `io-lanes-v1` namespace, with sole existing
+`all-devices.lock` barrier and no physical-device lanes. Adopt exact manifest
+`/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json`, SHA
+`f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636`.
+The later v2 `physical-io-lanes-v1` path suggestion remains historical and must
+not be created as another pool. No manifest was modified by Unison.
+
+The [joint consumer contract](shared-physical-io-consumer-contract-v1.json) pins
+the actual directory/barrier and the existing-only `tests/shared_io_pool.py`
+backend. Only nonblocking EX_GLOBAL is supported; IO precedes CPU, and all
+partial descriptions close before busy/wait. Existing native/UI ownership must
+be acquired nonblocking last by a future qualified consumer, with full rollback.
+The backend does not implement that native/UI stage or bind either production
+dispatcher. Close functions consume caller settlement proofs; unknown retains
+ownership and prohibits numeric descriptor retries.
+
+[Ten disposable controls](../tests/qualification/shared-io-disposable-controls-actual-20261016.json)
+passed with independent Python contention, inherited descriptions and late-CPU
+rollback, plus refusal/uncertainty cases. No canonical IO file was opened.
+The [finite canonical qualification plan](shared-physical-io-canonical-qualification-plan-v1.json)
+is source preparation only; exact driver/command freeze and a separate finite
+canonical test admission remain before the first live barrier test. Neither
+provisioning nor these disposable tests grant payload/SDK execution or live bulk
+dispatcher integration.

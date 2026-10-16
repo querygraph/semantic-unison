@@ -1,0 +1,76 @@
+{
+  "schema": "firstpair-canonical-io-barrier-qualification-plan/1",
+  "state": "PLANNED_NOT_ADMITTED_NOT_STARTED_DRIVER_NOT_YET_FROZEN",
+  "contract": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v1.json",
+    "bytes": 4475,
+    "sha256": "e68f5a1cc370e37e07dff5cb1c205a606347ef7483541131b1f477ef58e51661"
+  },
+  "canonical_manifest": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+    "bytes": 1500,
+    "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+  },
+  "backend": {
+    "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+    "bytes": 8568,
+    "sha256": "43fab637ea5782905b8ec19c2474d4c2fc3c270ab7956c906ed8762009de9be9"
+  },
+  "disposable_tests": {
+    "path": "/Users/alexy/src/unison/tests/shared_io_pool_test.py",
+    "bytes": 7559,
+    "sha256": "fee9a9d87708ae760553b9d4d9e0cae7eb61e5393dd3c7f2862e856240ab015f"
+  },
+  "limits": {
+    "max_whole_owner_seconds": 60,
+    "max_lock_hold_seconds": 30,
+    "max_cases": 5,
+    "max_python_children": 6,
+    "unison_cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "compilers": 0,
+    "sdk_adobe_native": 0,
+    "media_payload_bytes": 0,
+    "pool_file_writes": 0,
+    "log_bytes_max": 2097152
+  },
+  "cases": [
+    {
+      "id": "A",
+      "description": "Owner A opens exact manifest, NB EX global IO then exactUnison00..07 CPU; no native/UI acquisition or payload."
+    },
+    {
+      "id": "B",
+      "description": "Independent fixed Python owner B opens a fresh IO description and must return BUSY without acquiring CPU; actual child wait0 before continuing. This is lock metadata only inside As grant."
+    },
+    {
+      "id": "C",
+      "description": "A starts one fixed no-spawn holder child inheriting IO+CPU descriptions, receives explicit READY. A closes its parent copies while retaining child handle/ownership. A second independent B probe still must return BUSY before any CPU acquisition."
+    },
+    {
+      "id": "D",
+      "description": "Send holder ALLOW_EXIT; obtain actual holder wait0 with its fixed no-spawn protocol. No process-absence substitution. All children must settle before concluding locks released."
+    },
+    {
+      "id": "E",
+      "description": "After prior CPU+IO copies actually closed, fresh whole IO\u2192CPU acquisition succeeds. Close only after known no child owners. Verify all manifest bytes/directory/barrier identities unchanged, exact owned group census/reap and actual parent terminal."
+    }
+  ],
+  "failure": "Stop starting cases on first failure; preserve partial receipts. Unknown group/FD closure retains owner and descriptors, no numeric retry/LOCK_UN. No automatic repeated canonical test or payload successor. Known contention before A acquisition yields unstarted closure, not bypass.",
+  "dispatch_gate": "Return frozen driver source, exact interpreter/argv/workspace/source pins plus actual disposable receipts to Root; require separate exact finite canonical-test admission before first canonical IO lock. This plan is intentionally not a command or a runtime grant.",
+  "does_not_prove": [
+    "Physical device/member mapping",
+    "Production dispatcher deadlock freedom/nativeUI rollback",
+    "Photo original/current payload rights",
+    "SDK/Adobe or privateDNG test admission",
+    "Fairness/performance/OS hard caps or fault crossproduct"
+  ]
+}

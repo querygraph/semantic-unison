@@ -4,6 +4,21 @@
 
 ## Current checkpoint — 2026-10-15
 
+Root provisioned the SOLE actual `io-lanes-v1` namespace/barrier, manifestSHA
+f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636,
+EX_GLOBAL_ONLY/no device lanes. The [joint consumer contract](doc/shared-physical-io-consumer-contract-v1.json)
+explicitly adopts this namespace; later v2 physical-io-lanes path suggestion is
+unprovisioned/historical, not a second pool. New `tests/shared_io_pool.py` backend
+opens existing pinned files only, full NB IO→CPU rollback, close-only/unknown
+retention; no topology/nativeUI hook/production dispatcher integration.
+[Ten disposable lifecycle controls](tests/qualification/shared-io-disposable-controls-actual-20261016.json)
+01e671/0 CLOSED under00..07, group reaped/othersabsent/tokensclosed: independent
+child contention, inheritance, lateCPU rollback, replacement/missing/alias refusals
+and close-uncertainty injection. No canonical IO file opened.
+[Five-case canonical qualification plan](doc/shared-physical-io-canonical-qualification-plan-v1.json)
+prepared, NOT admitted/started; exact driver/command still needs freeze/review.
+Manifest provisioning is not payload or SDK permission.
+
 Joint physical-IO [source successor v2](doc/shared-physical-io-proposal-v2.json)
 uses Root-requested `physical-io-lanes-v1` plus proposed Root workspace manifest;
 no pool provisioned. IO→CPU→existing native/UI full nonblocking rollback, stable
