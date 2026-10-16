@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Latest [frozen Oxworker8 part5](bench/sync/results/warm512-frozen-part5-actual-return-20261015.json)
+PASSED/CLOSED: actualowner52232/2b05a9/exit0/no session; aggregate51654
+reaped0/others absent in2070.618s, independent18rows54CLI client/server/supervisor
+auditPASS, SDKhelpers0/unresolved empty/fixturesremoved. All14execution21runner
+pins unchanged and frozenHEADclean. Ordinary/clone/semantic medians
+36.346/35.664/34.684s; semantic about4.6% below ordinary here, no broadcompiler
+speedup claim. Five source-activity disclosures pinned (bothowners); exactrow
+impact unknown/no absolutequiet timing. Part3 stays FAILED/INCOMPLETE and
+part0e311d5f6 remains mandatory; no complete six-part claim. Root sent actual
+closure;18released on Unison side, no benchmark/native successor. Next is
+post-slot source/token qualification under standing8/8, not another18hold.
+
 Exact authoritative shared policy now Rootv3 SHA1dbe12eb: standing8/8/2,
 Unison00..07/Photo08..15/16..17idle, memory32/64/32GiB. Both priorCPU splits
 are historical. [Token primitive source preparation](tests/qualification/shared-token-source-preparation-20261015.json)

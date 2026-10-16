@@ -79,6 +79,18 @@ Root for independent resource adoption;18credits released on the Unison side.
 
 ## Boundaries that remain explicit
 
+The [Oxworker8 part5 return](../bench/sync/results/warm512-frozen-part5-actual-return-20261015.json)
+and [raw data](../bench/sync/results/warm-512MiB-4files-part5-20261015.json)
+pass18rows54CLI: actualowner52232/2b05a9/0/no session; aggregate51654 reaped0/others
+absent in2070.618s, fullclient/server/supervisor auditPASS/unresolved empty.
+Frozen14execution21runner pins unchanged. Medians36.346/35.664/34.684s
+(ordinary/clone/semantic), roughly4.6% lower semantic elapsed than ordinary in
+this warm generated control. All five bounded source-activity disclosures stay
+attached; exactrowimpact unknown, no absolutelyquiet claim. Five complete512
+partitions now exist, but part3 remains failed/incomplete: no fullsix-part
+qualification or physicalIO/compiler-speedup claim. Standing8/8 sharing is
+source-prepared; token/lifecycle/IO/memory integration remains unqualified.
+
 The [Oxworker6 part4 result](../bench/sync/results/warm512-frozen-part4-actual-return-20261015.json)
 passes18rows/54CLI: actual57036/f228d4/0/no session, aggregate30613 reaped0/others
 absent in2082.230s, independently audited client/server/supervisor cleanup,
