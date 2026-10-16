@@ -75,7 +75,7 @@ OCAMLOBJS = \
           props.cmo fileinfo.cmo os.cmo lock.cmo clroot.cmo common.cmo \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
           borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
-          semanticHash.cmo semanticFile.cmo formatExtension.cmo formatRecognition.cmo \
+          semanticHash.cmo semanticFile.cmo validationSnapshot.cmo formatExtension.cmo formatRecognition.cmo \
           xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
@@ -221,6 +221,20 @@ semanticMailbox.cmo: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter
 	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
 semanticMailbox.cmx: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter$(EXEC_EXT)
 	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
+
+wholeFileClone.cmi: wholeFileClone.mli wholeFileClone.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/wholeFileClone.mli
+wholeFileClone.cmo: wholeFileClone.ml wholeFileClone.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/wholeFileClone.ml
+wholeFileClone.cmx: wholeFileClone.ml wholeFileClone.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/wholeFileClone.ml
+
+validationSnapshot.cmi: validationSnapshot.mli validationSnapshot.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/validationSnapshot.mli
+validationSnapshot.cmo: validationSnapshot.ml validationSnapshot.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/validationSnapshot.ml
+validationSnapshot.cmx: validationSnapshot.ml validationSnapshot.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/validationSnapshot.ml
 
 formatRecognition.cmi: formatRecognition.mli formatRecognition.ox.mli.in semantic_mode_filter$(EXEC_EXT)
 	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatRecognition.mli

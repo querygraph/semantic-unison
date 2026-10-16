@@ -20,7 +20,7 @@ def main():
     modules=['semanticHash','semanticFile','formatExtension','xmpObservation','xmpMerge',
              'dngSemantic','dngExtended','semanticDelta','wholeFileClone','validationSnapshot']
     names=[ROOT/'src'/(name+suffix) for name in modules for suffix in ('.mli','.ml')]
-    names += [ROOT/'src/semanticHash_stubs.c',ROOT/'src/semanticFile_stubs.c',
+    names += [ROOT/'src/semanticHash_stubs.c',ROOT/'src/semanticFile_stubs.c',ROOT/'src/wholeFileClone_stubs.c',
               ROOT/'tests/semantic/snapshot.ml',Path(__file__).resolve()]
     pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in names}
     root=Path(tempfile.mkdtemp(prefix='unison-snapshot-kernel-',dir='/private/tmp'));calls=[]
@@ -30,7 +30,7 @@ def main():
         work=root/label;work.mkdir(mode=0o700)
         for path in names:
             if path.suffix!='.py':shutil.copyfile(path,work/path.name)
-        argv=[str(compiler),'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
+        argv=[str(compiler),'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c','wholeFileClone_stubs.c']
         for name in modules:argv.extend([name+'.mli',name+'.ml'])
         argv.extend(['snapshot.ml','-o','snapshot-kernel'])
         previous=Path.cwd()

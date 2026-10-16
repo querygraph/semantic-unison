@@ -1,6 +1,6 @@
 (** Isolated full-file snapshot kernel, not scan selection or helper execution.
     The caller owns admission, cancellation, namespace and descriptor lifetime.
-    Not yet wired into unchanged-file validation or the worker dispatcher. *)
+    Worker dispatch is available; unchanged-file scan integration is pending. *)
 type report = {
   bytes : int64;
   sha256 : string;
@@ -8,6 +8,11 @@ type report = {
   logical_bytes_written : int64;
   source_stats : Unix.LargeFile.stats;
 }
+val existing_clone : expected_length:int64 -> Unix.file_descr -> Unix.file_descr ->
+  WholeFileClone.result
+(** The existing strict whole-file FD clone primitive and decoder. No named
+    output creation or second filesystem clone engine. Platform/filesystem
+    declines retain their original scope. *)
 val materialize :
   check_cancel:(unit -> unit) -> max_bytes:int64 ->
   clone:(expected_length:int64 -> Unix.file_descr -> Unix.file_descr -> WholeFileClone.result) ->

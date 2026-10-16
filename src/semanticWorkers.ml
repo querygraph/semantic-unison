@@ -17,12 +17,14 @@ type response = Hashed of fingerprint | Inspected of inspection
   | Observed of observation
   | Identified of identification
   | Reconciled of reconciliation
-  | Applied of SemanticDelta.application | Cancelled | Error of string
+  | Applied of SemanticDelta.application
+  | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
 type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
   | Identify of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
+  | Snapshot of int64 * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
              operation : operation; measure_reads : bool }
 type shared = {
@@ -44,12 +46,15 @@ type t = {
   mutable read_observer : (int -> SemanticFile.read_stats -> unit) option;
 }
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
-let close_operation = function Apply (_, _, fd) -> close_noerr fd | _ -> ()
+let close_operation = function Apply (_, _, fd) | Snapshot (_,fd) -> close_noerr fd | _ -> ()
 let duplicate_operation = function
   | Apply (extension, plan, fd) ->
       let owned = Unix.dup ~cloexec:true fd in
       (try Apply (extension, plan, owned)
        with error -> close_noerr owned; raise error)
+  | Snapshot (limit,fd) ->
+      let owned=Unix.dup ~cloexec:true fd in
+      (try Snapshot (limit,owned) with error -> close_noerr owned;raise error)
   | operation -> operation
 let locked shared f =
   Mutex.lock shared.mutex;
@@ -121,8 +126,14 @@ let execute job =
         let report = SemanticDelta.apply_report_with_extension ~check_cancel
           ~max_payload:(FormatExtension.payload_limit extension) (FormatExtension.implementation extension)
           plan ~basis:file ~output in
-        Applied report in
-    let result,reads = if job.measure_reads then
+        Applied report
+      | Snapshot (max_bytes,output) ->
+        Snapshotted (ValidationSnapshot.materialize ~check_cancel ~max_bytes
+          ~clone:ValidationSnapshot.existing_clone ~source:job.fd ~output) in
+    (* Snapshot owns independent source/output readers. The outer reader's
+       zero counter would not measure that job; do not emit a false sample. *)
+    let measured = job.measure_reads && (match job.operation with Snapshot _ -> false | _ -> true) in
+    let result,reads = if measured then
         let result,reads = SemanticFile.with_read_stats ~check_cancel job.fd operation in
         result,Some reads
       else SemanticFile.with_fd ~check_cancel job.fd operation,None in
@@ -341,14 +352,14 @@ let submit t cancellation fd requested_operation =
           end)) (function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Reconciled _ | Applied _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result)) fail in
     let admitted_execution () = match t.io with
       | None -> execute ()
       | Some io ->
           let descriptors = match !operation with
-            | Apply (_, _, output) -> [!owned;output]
+            | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
             | Digest | Inspect _ | Observe _ | Identify _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
@@ -386,6 +397,13 @@ let digest t cancellation fd =
   | None -> return None
   | Some (Hashed result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected digest response")) fail
+
+let snapshot t cancellation ~max_bytes ~source ~output =
+  if max_bytes<0L then invalid_arg "SemanticWorkers.snapshot byte limit";
+  BorrowedWork.try_bind (fun () -> submit t cancellation source (Snapshot (max_bytes,output))) (function
+  | None -> return None
+  | Some (Snapshotted report) -> return (Some report)
+  | Some _ -> fail (Failed "unexpected snapshot response")) fail
 
 let inspect t cancellation ~extension fd =
   BorrowedWork.try_bind (fun () -> submit t cancellation fd (Inspect extension)) (function

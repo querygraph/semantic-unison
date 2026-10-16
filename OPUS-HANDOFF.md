@@ -57,16 +57,37 @@ copy/short-write+EINTR handling, complete source/output SHA comparison and
 cooperative source metadata fences. Budget/alias/nonempty guards precede effects;
 no path/create/unlink/close/publication. Caller retains exclusive output/name
 ownership and stronger epoch fences; OCaml stat timestamps are not native-ns
-attestation. New module is NOT yet in worker/build graph or all-scanned path.
+attestation. That kernel-only checkpoint is superseded by worker integration
+below; all-scanned scan/staging-owner integration is still pending.
 Stock/Ox standalone component controls passed (six exact sizes incl0/64KiB
 boundaries, budget/alias/nonempty refusal, native exception+typed failure,
 correct simulated success and wrong-byte success rejection, cancellation).
 Actualsession8225/fd198f/0, outer20205 and four contained calls reaped0/groups
 absent, canonicalCPU8 closed. Receipt validation-snapshot-kernel-v2-actual-20261017
 (preserves prior first-pass receipt). No nativeclone/SDK/media/fullCLI claims.
-Next concrete implementation: typed SemanticWorkers snapshot response/operation,
-duplicated outputFD retirement and source/destination IO admission; then private
-staging owner and actual scan-selected coverage/negotiated scope.
+Typed worker integration now implemented: SemanticWorkers.snapshot duplicates
+outputFD, admits atomic source/destination filesystem-key union beforeCPU,
+retains bothduplicates through worker settlement and maps Snapshotted response.
+Uses existing unison_clone_file_status nativeprimitive/WholeFileClone decoder,
+not a second clone engine. Added portable WholeFileClone/ValidationSnapshot
+interfaces and Make/Dune preprocessor wiring; Safe.spawn checked Ox builds pass.
+FullMake stock001/244e05/0 +Ox001/4d41bf/0 and Dune stock15d6d4/0+Ox56032a/0
+closed. First stock prefix error e9bda0/2 was preentry/no resources; corrected
+bin prefix then actualbuilt. Final telemetry fix excludes Snapshot from outer
+reader0byte samples; digest observer still131111B. Rebuilt currentMake002
+stock701971/0+Ox1da355/0 bothclosed; earlierDune pair covers pre-fix graph only.
+Allsix build-only slots closedCPU8/no executable selftest or SDK invocation.
+Current production-object stock/Ox worker controls passed: exact3copies each of
+131111B, budget/aliasrefusal, CPUqueuedcancel, observers and emptyIO/CPU/worker
+ledgers. Allsix nativeFDadapter results declined onmacOS; ordinarycopiedbytes
+verified, no APFSsharing claim. Finalactualsession63473/c1af41/0, outer28224+four
+compiler/test groups reaped0/CPU8 closed. Receipts validation-snapshot-workers-
+v2-actual-20261017 and validation-snapshot-builds-actual-20261017; earlier worker
+receipt preserved. No photos/SDK/catalog/publication/nativeUI.
+Next concrete implementation: private staging owner, name/sourcefences and
+bounded outer admission; then scan-selected coverage and negotiated scope.
+Worker close-error/platform fault limits remain explicit; no all-scannedfeature
+or full-goal completion is inferred.
 
 
 

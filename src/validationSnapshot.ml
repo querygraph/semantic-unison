@@ -2,6 +2,11 @@ type report = {
   bytes : int64; sha256 : string; native_clone : bool;
   logical_bytes_written : int64; source_stats : Unix.LargeFile.stats;
 }
+external existing_clone_raw : Unix.file_descr -> Unix.file_descr -> int64 -> WholeFileClone.native_raw
+  (* ox-portable-ffi *) = "unison_clone_file_status"
+let existing_clone ~expected_length source output =
+  if expected_length<0L then invalid_arg "ValidationSnapshot.existing_clone length";
+  WholeFileClone.decode_native ~expected_length (existing_clone_raw source output expected_length)
 let invalid reason = raise (SemanticFile.Invalid reason)
 let stable a b =
   {a with Unix.LargeFile.st_atime=0.} = {b with Unix.LargeFile.st_atime=0.}

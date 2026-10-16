@@ -115,8 +115,38 @@ preserves the adapter as an explicit test double: no native cloning, SDK,
 retained photo or full CLI execution occurred. The earlier control receipt
 remains historical.
 
-The module is not yet in the production worker operation/build graph or scan
-path. Next integrate a typed snapshot operation into `SemanticWorkers`, including
-output-FD duplication/retirement and real source/destination IO accounting, then
-wire the isolated owner/staging and selected-scan coverage. `all-scanned` is
-still unavailable; receiving defaults remain unchanged.
+At that checkpoint the kernel was not yet wired. The subsequent worker/build
+integration below supersedes that state; scan coverage is still pending.
+
+## Worker/build integration checkpoint
+
+`SemanticWorkers.snapshot` now uses a typed operation/response and the existing
+output-FD duplication, queue transfer and retirement path. Source and destination
+filesystem keys are admitted as one union before CPU admission. Snapshot code
+binds the same `unison_clone_file_status` primitive/receipt decoder used by
+`Fs.clone_file_status`; no second native engine or named-owner protocol was added.
+Both descriptors stay borrowed until actual settlement; cancellation suppresses
+delivery and does not authorize early staging deletion.
+
+WholeFileClone and ValidationSnapshot now have checked portable interfaces and
+explicit Make/Dune mode-filter wiring. Full stock/Ox Make build-only runs passed;
+Dune build-only wiring passed on the first version, before the final worker
+telemetry/comment correction. Current002 Make builds cover that correction.
+All six actual build parents/groups/CPU8 leases closed; no CLI selftests or SDK
+were invoked by these build-only slots.
+
+Current production-object controls passed on stock and checked Ox: three exact
+131111B snapshots, byte-budget and same-inode refusal, CPU-queued cancellation,
+empty worker/CPU/IO ledgers and immutable source bytes. The macOS FD clone
+backend declined; all six copies used the bounded ordinary path. This is not
+APFS native-sharing evidence. Snapshot jobs intentionally do not emit the outer
+reader's zero-byte counter; an ordinary digest still emits131111B. Actual final
+owner63473/c1af41/0, outer28224 and four compiler/test children reaped0; CPU8
+closed. See [current worker controls](../tests/qualification/validation-snapshot-workers-v2-actual-20261017.json)
+and [build closures](../tests/qualification/validation-snapshot-builds-actual-20261017.json).
+
+No retained photo, SDK, catalog or publication operation occurred. This is the
+worker primitive, not an enabled all-scanned feature. Next implement the private
+staging owner with source/name fences and bounded outer admission, then actual
+scan-selected coverage and negotiated scope. Existing worker close-error fault
+limits and platform scopes are not expanded by these successful cases.

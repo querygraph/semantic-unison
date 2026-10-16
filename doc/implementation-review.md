@@ -20,10 +20,14 @@ acceptance is implied. Photo owns preview generation/publishing qualification.
 
 ## Current evidence to read first
 
-The follow-up since fork/master4a620ea changes only `src/supervisedExternal.ml`
-in production: opt-in helper settlement diagnostics after actual execution and
-limiter settlement. Most follow-up files are qualification/source-owner harnesses
-and sealed evidence. The [actual mixed workload](../tests/qualification/mixed-validation-v1-actual-20261017.json)
+The follow-up originally changed only `src/supervisedExternal.ml` in production
+for opt-in helper settlement diagnostics. It now also adds the isolated
+`validationSnapshot` kernel, a typed `SemanticWorkers.snapshot` operation and
+checked WholeFileClone/snapshot Make/Dune interfaces. These are groundwork for
+unchanged-file validation; no enabled all-scanned preference or scan hook exists
+yet. Read [the integration plan and current evidence](all-scanned-validation-implementation.md).
+Most other follow-up files are qualification/source-owner harnesses and sealed
+evidence. The [actual mixed workload](../tests/qualification/mixed-validation-v1-actual-20261017.json)
 and [Root independent adoption](../tests/qualification/mixed-validation-v1-root-adoption-20261017.json)
 now pass/close two SDK calls, two readonly ExifTool requests and32 shared hash
 tasks under Unison8/EXglobal. Four SDK warnings each remain visible. No quiet

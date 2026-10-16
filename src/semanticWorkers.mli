@@ -39,6 +39,16 @@ val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprin
     seek, read, write, or close it meanwhile. The duplicate is always closed.
     None means cancelled; failures are [Failed]. Cancellation is checked at
     64 KiB boundaries and permits remain reserved until the worker finishes. *)
+val snapshot : t -> HelperSupervisor.cancellation -> max_bytes:int64 ->
+  source:Unix.file_descr -> output:Unix.file_descr -> ValidationSnapshot.report option Lwt.t
+(** Borrow a readable source and caller-owned exclusive empty private read/write
+    output on a distinct inode. Both descriptors are duplicated before queueing,
+    retained until actual worker settlement and admitted together through one
+    source/destination I/O lease before CPU admission. Cancellation suppresses
+    delivery but does not undo partial private staging. Caller must discard a
+    failed/cancelled stage only after the returned work settles. Namespace,
+    private-output provenance and outer memory/descriptor admission remain the
+    caller's responsibility. No unchanged-file scan or helper is invoked. *)
 val shutdown : t -> unit Lwt.t
 (** Reject new jobs, cancel pending jobs, await completions, then join domains
     and close the notification pipe. Idempotent. Does not cancel unrelated
