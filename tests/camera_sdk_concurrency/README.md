@@ -224,3 +224,11 @@ The actual receiving kernel is never called. This qualifies inherited-descriptor
 and zero-call failure closure only, not canonical EXglobal acquisition for this
 job, complete receiving, SDK work or runtime admission. Complete dispatcher
 failed-prefix/unknown controls and fresh immutable review still precede dispatch.
+
+[Six new-target dispatcher fault controls](../qualification/concurrent-dispatch-fault-controls-actual-20261016.json)
+now cover audit-before-reap/reverse-close, known failed-prefix closure without
+functional pass, contradictory successful worker exit, observed-live retention,
+unknown-group retention before reap, and IO retention/no retry after an injected
+CPU-close uncertainty. Owners and protocol frames are inert doubles; disposable
+FDs never reach a real child in these controls. Outer CPU ownership closes.
+These supplement actual zero-call FD probes without inventing native settlement.
