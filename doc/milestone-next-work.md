@@ -48,3 +48,11 @@ children and dispatcher regressions, all closed without Adobe/camera/EX IO.
 Its two real require-policy receiving seeds and two SDK invocations remain
 UNADMITTED/UNSTARTED. Root review must check this new closure and grant a separate
 finite SDK/IO slot; neither camera V4 nor an available CPU pool authorizes it.
+
+Actual SDK V1 was separately admitted and FAILED at the first stock seed's
+resource reservation (2048MiB SDK workspace versus512MiB semantic gate), before
+SDK helper creation. [Independent recovery](../tests/qualification/camera-sdk-v1-failed-recovery-actual-20261016.json)
+retains actual5460/003cbb/137, all direct-call closures, source-bound no-helper
+proof, no original-worker wait4 claim, and fresh EXglobal/CPU8 acquisition/close.
+V1 is consumed, not SDK-qualified or retryable. Correct budget compatibility and
+failure reporting in a source successor before a new immutable runtime request.

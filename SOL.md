@@ -33,16 +33,29 @@ all groups/tokens closed and per-pool descriptor baselines restored. Pool8 uses
 six CPU permits plus owner2 within standing8, not eight simultaneous execution,
 a hard resource cap, independent algorithm proof or throughput result.
 
-The [camera SDK receiving source](tests/camera_sdk_receiving/README.md) now has
-exact parent/worker admission binding and independent combined CLI+SDK audit.
-[RequestV1](doc/camera-sdk-receiving-request-v1.json) pins67 execution sources,
-qualified single-thread driver and two same-compiler receiving seeds/two SDK
-calls on disposable native clones. It remains UNADMITTED/UNSTARTED, not a reuse
-of consumed camera V4. [28 source/mock controls and actual Python FD/refusal lifecycle](tests/qualification/camera-sdk-owner-source-controls-actual-20261016.json)
-passed with groups/tokens closed, no canonical EXglobal/SDK/camera payload.
-Missing/unknown helper proofs retain ownership; settled invalid SDK findings are
-failed results. Optional missing raw digest is explicit, not verified. The
-original18-control kernel receipt retains its earlier source scope.
+Camera SDK receiving V1 **FAILED before SDK creation and was independently
+recovered/closed**: [sealed failure](tests/qualification/camera-sdk-v1-failed-recovery-actual-20261016.json).
+Fresh admission0cfee4b6 ran once: actual owner5460/003cbb/exit137/no session after
+verified idle-retention-parent recovery. The first stock seed's client/server/
+supervisor actually settled; the original aggregate worker wait4 by its parent
+is NOT claimed. Declared validator workspace2048MiB exceeded the default512MiB
+semantic resource gate. Pinned compiled control flow requires this reservation
+before target production or SDK validation; missing helper logs alone were not
+used as a no-helper proof. Independent source/census proof preceded stopping
+only idle Python83002; fresh EXglobal then Unison8 acquisition/close verified
+recovery. All67 runtime source postpins and borrowed native metadata matched.
+No SDK validation, completed case or Ox execution is claimed. Original failure,
+retention and exact V1 request/admission bytes remain preserved and consumed.
+Next source work must fix explicit budget compatibility before any successor;
+no automatic retry or SDK/payload grant follows closure.
+
+The [source/owner qualification](tests/qualification/camera-sdk-owner-source-controls-actual-20261016.json)
+retains28 pure/mock cases and actual inherited-FD refusal children, with all
+actual outer groups/tokens closed and no Adobe/camera/EX IO. Supplemental
+[six dispatcher fault cases](tests/qualification/camera-sdk-dispatch-fault-controls-actual-20261016.json)
+verify combined SDK audit before worker reap, known rejection versus uncertainty,
+metadata fences and reverse grant closure with explicit fake inner owners.
+They did not change V1's67 execution pins and are not actual SDK lifecycle proof.
 
 The full goal remains ACTIVE: representative real-camera semantic/private
 reference closure and receiving SDK validation remain distinct next work, along

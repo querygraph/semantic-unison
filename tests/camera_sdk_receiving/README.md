@@ -69,3 +69,24 @@ with groups/tokens closed; no canonical EXglobal or Adobe is exercised. One
 initial lifecycle wrapper tried a nested outer grant and exited2 before cases;
 that attempt is preserved, followed by the correct explicit `--controls` call.
 This is source/mock/ownership evidence, not SDK or candidate qualification.
+
+## V1 actual failed attempt
+
+The prepared V1 was later separately admitted and consumed once. It failed the
+first stock seed before SDK creation: the explicit2048MiB validator estimate
+cannot fit the default512MiB semantic gate. The strict SDK audit retained its
+parent rather than assuming an empty helper log meant no invocation. Independent
+compiled-source proof established that helper execution was unreachable before
+that reservation; all actual CLI owners had closed. Only the verified idle
+Python parent was stopped, yielding actual tool5460/003cbb/137. Original-worker
+wait4 is not claimed. Fresh IO→CPU8 acquisition/close proved resource recovery.
+[Sealed failure](../qualification/camera-sdk-v1-failed-recovery-actual-20261016.json)
+preserves the originals; no SDK validation, completed case or Ox invocation
+occurred, and the consumed grant cannot be retried. Earlier unstarted text is
+historical preparation scope, not current permission/state.
+
+Supplemental [six mock dispatcher faults](../qualification/camera-sdk-dispatch-fault-controls-actual-20261016.json)
+check SDK-audit-before-reap, missing-group/changed-source/live-worker retention,
+known rejected-findings release, and worker-exit contradictions. Canonical outer
+CPU ownership actually closes; inner IO/process observations are explicit fakes.
+These controls leave the67 execution-source request pins unchanged.

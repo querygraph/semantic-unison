@@ -1,0 +1,82 @@
+{
+  "schema": "unison-camera-sdk-failed-recovery-qualification/1",
+  "state": "FAILED_RECOVERY_CLOSED_NOT_SDK_PASS",
+  "owner_return": {
+    "path": "/private/tmp/u-cs-v1-2ef6d190a3/OWNER-RETURN.json",
+    "bytes": 5226,
+    "sha256": "9f916c4cbfd1c532fb2eb359ed82e9a1b301361adbd6610db8dc5678a584ca83"
+  },
+  "actual_terminal": {
+    "path": "/private/tmp/u-cs-v1-2ef6d190a3/OWNER-TERMINAL.json",
+    "bytes": 317,
+    "sha256": "939f335cc6c6eae98ed818cc437a5e3a61d0d7f3354371717b0020d5216f1dfa"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/SHARED-START.json",
+      "bytes": 9051,
+      "sha256": "3df57c47b1405f5aaa9dc6aa22fcf33269ece3b8c6ca270634074d9800c09a05"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/EXECUTOR-START.json",
+      "bytes": 42,
+      "sha256": "5e2361f3582e4ecc5a6e57f58741ae953d3c1934ec07cfbfa4cf94df7e82c200"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/RESULT.json",
+      "bytes": 27724,
+      "sha256": "bd988878100e527b0016ae1721527636b6b6b78825127c0d4e4e11d62f168ce5"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/SHARED-OWNERSHIP-RETAINED.json",
+      "bytes": 326,
+      "sha256": "aefe6f40e2e984c342614f7e217578c7a8083572683a854ea06dcbcaa653d272"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/SHARED-STDERR.txt",
+      "bytes": 9054,
+      "sha256": "be3f4974a5a67d3309659323e7227a2b2750f8257855cfbfe475d34b4ca6c3d5"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/INDEPENDENT-PRE-HELPER-STOP-PROOF.json",
+      "bytes": 4880,
+      "sha256": "8075364547a9646cb7ed520c9f9e4bb8899fc24e1283c85b395a4974d250a6d0"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/INDEPENDENT-IDLE-OWNER-STOP.json",
+      "bytes": 341,
+      "sha256": "6ad58aaab3f6d35c5b89792973c8eb82ae83941cb4d01617f15fdf5908ff977b"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/INDEPENDENT-RECOVERY-CLOSURE.json",
+      "bytes": 1410,
+      "sha256": "2e11243febc68b6dac37a341ac694c61a0a7627c3395fff31e519ceedcaeff95"
+    },
+    {
+      "path": "/private/tmp/u-cs-v1-2ef6d190a3/OWNER-TERMINAL.json",
+      "bytes": 317,
+      "sha256": "939f335cc6c6eae98ed818cc437a5e3a61d0d7f3354371717b0020d5216f1dfa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-sdk-receiving-request-v1.json",
+      "bytes": 13658,
+      "sha256": "65c7fc2da2d8d854cf37758f44d6cefeb9aa7a6dcf12ff0e87326d31bae77047"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-sdk-receiving-plan-v1.json",
+      "bytes": 10685,
+      "sha256": "bb77fa765a2b5502583b729c7b63edaf5904b65d6237105a42545181a63e6e06"
+    },
+    {
+      "path": "/private/tmp/unison-camera-sdk-receiving-admission-v1.json",
+      "bytes": 9809,
+      "sha256": "0cfee4b6032c227337b9b2a77dc4039eeee77b91576d6507aad1ee0b2394ea9e"
+    }
+  ],
+  "scope": "One failed first seed, zero SDK invocations by source proof; no original-parent worker wait4 claim or successful receiving qualification"
+}
