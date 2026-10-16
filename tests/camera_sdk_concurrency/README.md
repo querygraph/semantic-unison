@@ -69,3 +69,17 @@ control observes overlapping live spans and empty groups/direct reap on stock/Ox
 this is not yet connected to DNG validation or a qualified SDK event stream.
 Default calls omit the observer and emit no live samples. Actual process lifetime
 overlap does not establish simultaneous CPU execution or throughput improvement.
+
+## Combined two-candidate audit
+
+`combined.py` joins exactly two independently supplied helper PID/candidate
+ID/hash/size bindings with process, group, SDK receipt and bounded live-span
+records. Its separate `settlements` function can describe known closed helpers
+with rejected findings; `audit_success` additionally enforces full capture,
+exit0 and exact candidate receipts. A successful serial pair returns zero live
+overlap. Unknown/duplicate/mismatched process or group records cannot settle.
+[Eight original fixture groups](../qualification/concurrent-validation-join-controls-actual-20261016.json)
+exercise these distinctions. The auditor has no signaling/FD authority and does
+not authenticate the timestamp producer or establish SDK decode overlap.
+The future executor must bind current owner/source/tool provenance and audit
+all CLI/server/pump/worker/FD settlements independently before any resource release.
