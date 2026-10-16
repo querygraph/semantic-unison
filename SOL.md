@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL first real-camera private DA [clone/inspection control](tests/qualification/private-dng-clone-inspection-actual-20261016.json)
+CLOSED under explicit one-use manual IO admission77ea9eeb/plan c29d92ec. Owner77296
+actualinitialterminalc15ad5/0/no session; worker77297reaped0/othersabsent, stock
+wrapper77298wait0 thenOx77302wait0, CPU00..07closed/unresolvedabsent. Clone
+193851848B distinctinode307228717/0400/nlink1 hashes1a4f578e (sole cloneSHApass),
+source FIVE/mode/nlink unchanged. BOTH inspectors return identical UNSUPPORTED
+TIFFtag50740 opaque/privategraph. Integrity+crosscompileragreement PASS, camera
+semantic eligibility NOTqualified; exact ordinary fallback remains required. No
+inspector fullhash claim on unsupported result, no receiving/SDK/Adobe/pixels/
+publication/sharedblock measurement. Admission consumed, no retries/successors.
+Canonical IO probe still unexecuted; manual window does not qualify backend.
+
 The canonical EX_GLOBAL lock-only [probe v2](doc/shared-physical-io-canonical-qualification-plan-v2.json)
 now has exact source/interpreter/command/workspace pins. Parent retains IO+CPU
 FDs through group settlement; one fresh independent contender must busy before
