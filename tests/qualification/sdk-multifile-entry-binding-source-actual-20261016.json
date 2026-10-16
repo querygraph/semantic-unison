@@ -1,0 +1,62 @@
+{
+  "outcomes": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/entry_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.008s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 45164,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.009s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 45166,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "multi-file metadata plan source guards and canonical manifest metadata/injected9FD target binding; no payload/SDK/pool IO acquisition",
+  "source_sha256": {
+    "tests/sdk_multifile/entry.py": "0ade1985c6c859408767a47b76111467e1b729163cf5e217b67bf46a2b253116",
+    "tests/sdk_multifile/entry_test.py": "cd9e9b840d78c72984e3667727613dcf1f471d2ea04fbacfe0bf20167969f3ca",
+    "tests/sdk_host_matrix/shared_binding.py": "4efa40319f200f6d0f6e65d56f7c15e36b72335c7f36bc04772bb3ac30959a1e",
+    "tests/sdk_host_matrix/shared_binding_test.py": "570a3591e30ccd4295cabf933e9932c3e3a91fc41dcfa8c36a468903c79084e2"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "59f4db",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

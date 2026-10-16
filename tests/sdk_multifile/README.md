@@ -141,3 +141,19 @@ passed, including a deliberate change to the other original disposable input
 during first-clone preparation; the second clone was not created. All data and
 cloning were original test doubles, not retained DNG/native clone/SDK/EXglobal
 access. The outer child/group and Unison8 tokens closed.
+
+`entry.py` currently supplies the exact metadata plan guard only. It fixes two
+compiler cases/four single-thread SDK calls, the600/570/120/90s observation
+budgets,16GiB declared logical IO (not enforced), canonical retained generated
+input paths/epochs and candidate identities, tool manifest, source closure,
+transport pins and interpreter. It reads no input/tool payload. Runtime CLI
+and dispatcher registration are not enabled yet. The canonical9FD guard now
+accepts the separately explicit fixed `sdk-multifile-receive` target; the old
+SDK-host default still rejects a mismatched target. Target binding grants no
+locks, SDK access or resource-release authority.
+
+[Three entry and five binding controls](../qualification/sdk-multifile-entry-binding-source-actual-20261016.json)
+passed metadata doubles and canonical manifest metadata/injected descriptor
+observations, with no IO pool acquisition, SDK or retained payload access.
+The outer control groups and Unison8 tokens closed. Completed SDK V2 receipts
+keep their old source pins; this successor does not revise their actual scope.

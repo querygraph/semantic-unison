@@ -22,13 +22,14 @@ def inventory():
     cpu=Pool.read(MANIFEST,MANIFEST_SHA);io=GlobalPool.read(IO_MANIFEST,IO_SHA)
     return tuple(cpu.token_identities[i] for i in range(8))+((io.barrier_identity['device'],io.barrier_identity['inode']),)
 
-def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat):
+def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET):
     def require(v,s):
         if not v:raise ValueError(s)
     require(type(parent_pid) is int and parent_pid>0 and type(worker_pid) is int and worker_pid>0,'actual parent/worker IDs required')
+    require(target in (TARGET,'sdk-multifile-receive'),'known exact native SDK target required')
     require(type(start) is dict and type(start.get('owner_pid')) is int and type(start.get('child_pid')) is int
         and start['owner_pid']==parent_pid and start['child_pid']==worker_pid
-        and start.get('target')==TARGET and start.get('command')==command
+        and start.get('target')==target and start.get('command')==command
         and type(start.get('cpu_credits')) is int and start['cpu_credits']==8
         and start.get('token_indexes')==list(range(8)) and start.get('io_mode')=='EX_GLOBAL','actual parent/command/shared8/EXglobal binding differs')
     expected=inventory();rows=start.get('inherited_resource_fds')

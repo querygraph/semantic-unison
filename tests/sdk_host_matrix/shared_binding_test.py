@@ -14,6 +14,12 @@ class Binding(unittest.TestCase):
     def test_exact_canonical_metadata_not_lock_or_release_authority(self):
         d=self.call(self.fixture());self.assertEqual(d['inherited_fds'],tuple(range(100,109)))
         self.assertTrue(d['canonical_metadata_bound']);self.assertFalse(d['lock_ownership_independently_proved']);self.assertFalse(d['resource_release_authorized'])
+    def test_multifile_target_requires_explicit_exact_binding(self):
+        s=self.fixture();s['target']='sdk-multifile-receive'
+        with self.assertRaises(ValueError):self.call(s)
+        value=verify(s,self.command,parent_pid=11,worker_pid=22,observe=self.observe,target='sdk-multifile-receive')
+        self.assertTrue(value['canonical_metadata_bound'])
+        with self.assertRaises(ValueError):verify(s,self.command,parent_pid=11,worker_pid=22,observe=self.observe,target='arbitrary')
     def test_parent_target_command_or_grant_refused(self):
         for k,v in [('owner_pid',12),('child_pid',23),('target','old'),('command',['other']),('cpu_credits',True),('token_indexes',list(range(8,16))),('io_mode','none')]:
             s=self.fixture();s[k]=v
