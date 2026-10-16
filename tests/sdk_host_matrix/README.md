@@ -162,3 +162,14 @@ remain held until actual child reap/group absence, then close and fresh lock
 acquisition succeeds. Canonical inventory and child START metadata are explicit
 test doubles. This proves descriptor lifetime/refusal mechanics, not actual
 canonical IO admission, the new exact parent dispatcher or SDK authorization.
+
+`shared_parent_audit.audit` adds the parent-side attempted-call boundary: exact
+ordered intent/outcome commands and identities, direct wait status, group absence
+before reap, bounded raw diagnostics and journal-to-functional-row equality.
+Complete matrices additionally pass the independent functional audit; known
+nonzero prefixes remain FAILED, not functional success. An empty prefix requires
+an explicit PREPARING_NO_CALL failure. Unknown outcomes or group proofs refuse.
+[Actual source/composed controls](../qualification/sdk-shared-parent-audit-actual-20261016.json)
+cover inert faults and the16 original fake-helper composition. The audit never
+proves its aggregate parent exited or that IO/CPU FDs closed. It precedes new
+exact-target dispatcher integration, which remains unimplemented/unadmitted.

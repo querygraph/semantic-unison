@@ -15,9 +15,11 @@ class Kernel:
     def execute(self,*,invoke,persist):
         if self.used:raise ValueError('one matrix only; no retry')
         self.used=True
-        result=dict(schema='unison-shared-sdk-kernel/1',complete=False,rows=[],
+        result=dict(schema='unison-shared-sdk-kernel/1',complete=False,rows=[],phase='PREPARING_NO_CALL',
                     resource_release_authorized=False)
-        def save():persist(copy.deepcopy(result))
+        def save():
+            if result['invocations'] and not result['complete']:result['phase']='CALL_MAY_HAVE_STARTED'
+            persist(copy.deepcopy(result))
         journal=Journal(result,save);save()
         try:
             for index,case in enumerate(self.proposal['cases'],1):
@@ -39,7 +41,7 @@ class Kernel:
                 # Stop starting calls immediately on the first functional failure.
                 result['functional_audit']=audit(*self.args,result['rows'],require_complete=False)
                 save()
-            result['complete']=True;save();return result
+            result['complete']=True;result['phase']='FINISHED';save();return result
         except UnresolvedOwnership:raise
         except BaseException as error:
             result['complete']=False;result['failure']=repr(error)

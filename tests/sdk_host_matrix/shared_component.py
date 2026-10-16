@@ -7,6 +7,7 @@ from persistence import save
 from shared_kernel import Kernel
 from shared_child import invoke
 from shared_result import audit
+from shared_parent_audit import audit as parent_audit
 from shared_plan import REFERENCE,EXPERIMENTAL
 HELPER='''#!PYTHON
 import os,sys
@@ -45,7 +46,9 @@ def controls(directory):
         if mode=='pass':
             assert result['complete'];audit(reference,experimental,fixtures,1073741824,result['rows'])
         else:assert not result['complete'] and failure and len(result['invocations'])==2
-        cases.append(dict(mode=mode,calls=len(calls),functional_complete=result['complete'],failure=failure,
+        parent_proof=parent_audit(result,reference=reference,experimental=experimental,fixtures=fixtures,memory_bytes=1073741824)
+        assert parent_proof['attempted_direct_calls']==expected and parent_proof['functional_status']==('PASSED' if mode=='pass' else 'FAILED')
+        cases.append(dict(parent_audit=parent_proof,mode=mode,calls=len(calls),functional_complete=result['complete'],failure=failure,
                           result_path=str(work/'RESULT.json'),result_sha256=hashlib.sha256((work/'RESULT.json').read_bytes()).hexdigest()))
     save(root,dict(cases=cases,actual_original_fake_children=16,sdk_calls=0,
         scope='12success +2warning-divergence +2missing-telemetry original fake-helper calls; exactjournal/actualdirectgroupwait/boundedcapture/durablepersist/functionaljoin. Inert fixture paths never opened. Fake protocol fields are NOT SDK verification.',
