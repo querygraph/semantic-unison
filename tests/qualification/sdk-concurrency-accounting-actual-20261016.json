@@ -1,0 +1,45 @@
+{
+  "schema": "unison-sdk-concurrency-accounting/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "38d108",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/planning.py",
+      "bytes": 2328,
+      "sha256": "37ad328ccd7646430ed22dfa6683ceb71035804a841c30bf7ebf22d9fd9e3cdb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/planning_test.py",
+      "bytes": 2145,
+      "sha256": "10ec6fe7a062b20288237ae13650ecec4477b390e027965d3ad05bd1b029050d"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-concurrency-planning-20261016a/SHARED-START.json",
+      "bytes": 1110,
+      "sha256": "2e097c1615e3c381eb77ce5bcbf4b6e9790b96c5feefd5897c13bcfd63e038f6"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-concurrency-planning-20261016a/SHARED-CLOSED.json",
+      "bytes": 498,
+      "sha256": "d0eca790734243f637ec39ad2e40964ae0f042519db2a42094a7b33eae1ec095"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-concurrency-planning-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-concurrency-planning-20261016a/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "83166b089fbcb82fac63f22522fa6ae99bb5e46368cd35d756277fd463dd6346"
+    }
+  ],
+  "scope": "seven pure accounting boundary groups; no SDK, payload, compiler or EXglobal; runtime_admitted=false; actual concurrency unqualified",
+  "full_goal_complete": false
+}
