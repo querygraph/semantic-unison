@@ -1,0 +1,21 @@
+{
+  "schema": "unison-private-maker-root-adoption/1",
+  "root_receipts": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-PRIVATE-MAKER-SLICE-V1-ACTUAL-CLOSURE-20261017.json",
+      "bytes": 1657,
+      "sha256": "6751d183b7372960559cbe02d1715accff3162b10216347a6aef3d8ee4f5c98a"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-PRIVATE-MAKER-SLICE-V1-SEALED-ADOPTION-20261017.json",
+      "bytes": 973,
+      "sha256": "b8d05b41cdd31a63ad2c65ed02f1b965a3505b863b56ea096763f57983558231"
+    }
+  ],
+  "actual_owner_terminal": "d8fe2f/exit0/no session (owner reported to Root; not an independent Root tool poll)",
+  "root_state": "CONSUMED_ACTUAL_CLOSED_PHOTO_IO_COORDINATION_RELEASED",
+  "root_scope": "33candidate entries/402bytes/two preads; no vendor grammar/private closure/semantic eligibility.",
+  "coordination_hold": false,
+  "replayed": false,
+  "new_media_read": false
+}

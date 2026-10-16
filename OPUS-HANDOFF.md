@@ -35,6 +35,22 @@ compiler PASS (both profiles/bothorders, explicit safe flag1). Actualsession
 Receipt private-safety-actual-20261017.json. No SDK/media/fuzz/production edits.
 Pinned MakerNotes Hasselblad branch is only a special-base/unknown-table source
 example; do NOT identify the sample from its tag-shape resemblance.
+Root actual slice closure and sealed adoption now read/rehashed into
+private-maker-slice-v1-root-adoption-20261017.json: actuald8fe2f/0 was adopted
+from our owner report, not Root tool polling; Root photoIoWaitActiveFALSE,
+33entry/402byte geometry only, no newhold/replay/payload.
+Independent M4 work traced missing all-scanned validation: synchronous
+Update.findLocal +watcher/directory skips +NoUpdates omission prevent a simple
+post-filter hook. Existing CandidateValidation assumes private received stages;
+SemanticWorkers has no isolated snapshot job. Source hashes/findings recorded
+in all-scanned-source-audit-20261017.json and concrete integration plan in
+doc/all-scanned-validation-implementation.md. No new preference or production
+feature exposed. Next implementation work: admitted cancel-aware isolated
+snapshot worker API using existing clone adapter, then exact scan-selected
+coverage and asynchronous endpoint wiring. Keep default received/off/no-op
+behavior and originals untouched; no helper may receive a live unchanged file.
+This is independent of still-open MakN vendor/reference grammar.
+
 
 **Previous mixed runtime (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69
 was discovered fresh, exact request3e76df16/plan0fd5d23f/326sources/9prereqs/

@@ -326,3 +326,16 @@ hard RSS/FD/thread caps, corpus/semantic/pixel eligibility or production safety.
 The remaining M4-V/M6 work includes mixed helper/hash resource accounting,
 selected cancellation/fault scopes and representative supported corpus strata.
 This consumed admission is not an authorization for another native run.
+
+## Unchanged-file validation implementation
+
+The optional all-scanned scope remains unimplemented. A fresh source trace
+identifies why a preference plus post-filter would be incomplete: synchronous
+scan recursion, directory/watcher pruning and omitted unchanged children.
+The [concrete integration plan](all-scanned-validation-implementation.md)
+starts with an admitted isolated snapshot worker job reusing the existing
+clone adapter, then exact selected-path collection and asynchronous validation.
+The [source audit](../tests/qualification/all-scanned-source-audit-20261017.json)
+pins current sources; it is not execution or unchanged-file coverage evidence.
+Default receiving/off behavior stays unchanged. This independent work does not
+need another private-camera read or SDK allocation to begin.

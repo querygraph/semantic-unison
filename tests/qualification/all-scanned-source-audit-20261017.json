@@ -1,0 +1,47 @@
+{
+  "schema": "unison-all-scanned-source-audit/1",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/update.ml",
+      "bytes": 122801,
+      "sha256": "072868d39d1cb3a5b4911f7632d2f711be695c36afedbd2b8ad01c705fac62b0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/candidateValidation.ml",
+      "bytes": 14270,
+      "sha256": "30eafe7008978c91213fb01c8a8946bf41a401896c6d454292fd9ab93abc26b0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/candidateValidation.mli",
+      "bytes": 1293,
+      "sha256": "98deb666436a8eee5f81ecd3edd48120fdc902bdaf3dd62dee9b9729367b921f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngCandidateValidation.ml",
+      "bytes": 9439,
+      "sha256": "25a6d95c996562259f556b86354dff7eaad0ab46363e011d03b31829becfb3b5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticWorkers.mli",
+      "bytes": 6543,
+      "sha256": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticRuntime.mli",
+      "bytes": 3148,
+      "sha256": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/fs.mli",
+      "bytes": 6215,
+      "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45"
+    }
+  ],
+  "scope": "Source integration audit only; no all-scanned implementation/feature/SDK execution or payload access.",
+  "findings": [
+    "Scan result omits unchanged children; watcher and directory pruning can skip them.",
+    "Synchronous findLocal cannot await helper work in place.",
+    "Existing validation assumes private receiving candidates.",
+    "An admitted isolated snapshot worker API and scan-selected coverage collection remain required."
+  ]
+}
