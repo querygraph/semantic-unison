@@ -19,9 +19,18 @@ from shared_cpu_pool import UnresolvedOwnership
 from shared_io_pool import unique_object
 from shared_process_owner import retain_after_record
 from shared_child import invoke
+from inventory import verify as verify_inventory
 
 PYTHON='/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14'
 PYTHON_SHA='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'
+
+
+def checked_plan(plan_path,digest):
+    path(plan_path)
+    plan=document(plan_path,digest)
+    commands(plan)
+    verify_inventory(plan)
+    return plan
 
 
 def document(path,digest=None):
@@ -78,7 +87,7 @@ def main():
     parser.add_argument('--worker',action='store_true',required=True)
     for name in ('plan','plan-sha256','workspace'):parser.add_argument('--'+name,required=True)
     args=parser.parse_args();path(args.plan);path(args.workspace)
-    plan=document(args.plan,args.plan_sha256);commands(plan)
+    plan=checked_plan(args.plan,args.plan_sha256)
     if args.workspace!=plan['workspace']:raise ValueError('worker workspace differs')
     try:return worker(args,plan)
     except UnresolvedOwnership:raise

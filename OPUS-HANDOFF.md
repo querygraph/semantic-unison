@@ -227,7 +227,19 @@ metadata control groups passed, child1778 reaped0/group absent/CPU8 closed;
 actual5723b6/0/no session. Receipt `mixed-validation-entry-actual-20261016.json`.
 No probes/SDK/ExifTool/media/EXglobal use; no standalone parent/admission mode.
 Actual inherited lifecycle and dispatcher qualification remain outstanding.
-Next: exact admission/source closure/parent prefix audit/actual inherited9FD lifecycle and actual
+**Exact source closure and parent prefix now implemented:** inventory.py binds
+all current mixed Python/probe code, transitive resource/process/clone/persistence
+helpers and production source/build descriptions. execute.checked_plan enforces
+exact paths+hashes. Two inventory+three inert entry groups passed, children2130/
+2132 closed, actual80b051/0/no session. Receipt mixed-validation-inventory-actual.
+parent.py reconstructs exact prefixes/helper settlements/backend envelopes,
+rechecks sources/tools/source epoch and hashes invoked disposable clones under
+retained IO; actual worker exit is separately bound. Offline check_files=False
+explicitly leaves byte verification false; neither mode grants FD release.
+Three parent+two inventory groups passed, children2226/2228 closed,
+actual91e30c/0/no session. Receipt mixed-validation-parent-actual. No SDK/media/
+EXglobal operations; current compiled artifact build linkage remains separate.
+Next: exact admission/dispatcher wiring/actual inherited9FD lifecycle and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

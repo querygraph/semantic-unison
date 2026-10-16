@@ -199,3 +199,29 @@ No compiled probe, SDK, ExifTool, media or EXglobal access occurred. These check
 do not qualify actual inherited locks, native execution or dispatcher release.
 The next work is exact admission/source-inventory enforcement, parent prefix
 audit and actual disposable inherited-process lifecycle before native review.
+
+## Source closure and independent parent prefix
+
+`inventory.py` requires the exact current mixed Python/probe source set,
+transitive resource/process/persistence/clone helpers and production source/build
+descriptions. `execute.checked_plan` checks that set and every declared source
+hash after bounded plan loading. This does not authenticate compiled artifacts:
+their build receipt/source/object linkage remains a separate preparation duty.
+[Two inventory plus three inert entry groups](../qualification/mixed-validation-inventory-actual-20261016.json)
+passed, actual children2130/2132 reaped0/groups absent/CPU8 closed;
+terminal80b051/0/no session. No media/tool payload was read by these controls.
+
+`parent.py` reconstructs exact command prefixes and helper outcomes with backend
+envelope evidence, rechecks execution/tool pins and source metadata, and hashes
+only disposable invoked inputs under retained IO. Actual worker wait status is
+bound separately by `bind_exit`; complete results require exit0 and failed
+results require nonzero. Missing outcomes remain unknown. Neither stage grants
+resource release or proves aggregate FD closure. The explicit saved-log mode
+`check_files=False` carries false byte-reverification flags and is for offline
+analysis, not a release path.
+[Three parent plus two inventory groups](../qualification/mixed-validation-parent-actual-20261016.json)
+passed using saved outcomes/inert source callbacks; actual children2226/2228
+reaped0/groups absent/CPU8 closed, terminal91e30c/0/no session. No native execution
+or bulk IO occurred. Parent dispatcher/admission wiring and actual inherited
+process controls remain next, followed by immutable artifact preparation and a
+separately admitted SDK/ExifTool run.
