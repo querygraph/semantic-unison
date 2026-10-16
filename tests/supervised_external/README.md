@@ -77,3 +77,14 @@ pass/close on both. Current Dune/GUI qualification is not inferred.
 `--current-bridge` compiles only the current bridge against the snapshot's
 unchanged dependency objects and matching explicit production interface; other
 production source mismatches still refuse.
+
+`external_records.py` is the bounded strict consumer for these diagnostics.
+It preserves client/server endpoints, canonical historical PID/status/CPU fields,
+truncation and observed/unknown/unobserved group distinctions. It does not dedupe
+PIDs into a lifetime claim. All parsed records explicitly lack producer
+authentication and resource-release authority: merged output could contain
+helper-authored lookalikes, so an independent call/owner/source binding remains
+required. Unknown versions/extra fields, contradictory identities, overflow and
+line/count/UTF-8 byte limits refuse. [Six controls](../qualification/external-process-parser-actual-20261016.json)
+include independent reparse/hash checks on four saved real stock/Ox records;
+no external helper is rerun by the parser test.

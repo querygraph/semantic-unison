@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:15:04Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:17:54Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -45,8 +45,8 @@ Initial five synthetic/disposable controls passed under canonical Unison00..07:
 actual owning-tool terminal `d7cc17/exit0/no session`, child85163 reaped0 and
 other group members absent before reap; all CPU descriptors closed. Zero SDK,
 CLI, retained-input payload, or canonical IO calls. These report-only files are
-outside the frozen172-source execution closure. Actual SDK comparison admission
-remains a separate fresh scheduling requirement; this test grants no execution.
+outside the frozen172-source execution closure. At that preparation checkpoint SDK comparison admission was still pending;
+the later actual consumed run is recorded above. These tests grant no execution.
 
 Report successor now exposes callable `main(argv)` and qualifies the complete
 24-call synthetic input-to-JSON/Markdown path, exclusive report creation,
@@ -114,6 +114,21 @@ linked production objects pinned. No SDK/Photo/EXIO or installation/prefchange.
 Not full Perl dependency inventory, independently observed ExifTool PID, sampled
 CPU overlap, hardlimits or combined Adobe/ExifTool qualification. Default14
 synthetic helper cases unchanged; newcase requires explicit installed tool.
+
+**Diagnostic consumer:** `tests/supervised_external/external_records.py` now
+strictly bounds log/line/count/UTF8 and canonicalPID/status/CPU/group fields.
+Unknown/unobserved never become zero; duplicatehistoricalPIDs do not establish
+lifetimes. All records have producer_authenticatedFALSE/resource_releaseFALSE
+because helper text can resemble a diagnostic. Six pure groups plus four saved
+real-record reparses passed actual0ba874/0/no session, child94391reaped0/group
+absent/CPU8closed. Receipt `external-process-parser-actual-20261016.json`.
+
+**User clarification:** OxCaml is usable independently of semantic hashing;
+ordinary sync/generic cloning do not require semantic profiles or Adobe.
+`doc/oxcaml.md` now states this, preserves the distinction between full compiled
+feature modules and runtime enablement, and avoids claiming ordinary-sync
+compiler speedup. Shared recipes use ownedUnison8/max2compilerjobs/selftest3
+perendpoint. Current stock5.2.0 evidence is distinct from historical5.5.1.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
 selftests actual87161/b8ddda ->52664d/0/no session and Ox80362/27ce49 ->09fca0/0
