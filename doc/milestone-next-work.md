@@ -102,3 +102,13 @@ A crossed V1 admission was refused before executor/resource entry; original
 bytes remain preserved. V2 binds the helper to owned private candidate ancestry,
 adds actual sanitized-environment controls, and freezes96 sources/new workspace.
 Production helper environment remains restricted; no receiving run is inferred.
+
+Synthetic receiving V2 is now [PASSED/CLOSED](../tests/qualification/concurrent-synthetic-receiving-v2-actual-20261016.json):
+actual74146/b2b6ab/0; two receiving calls/four fake validators, exact two-file
+outputs per compiler and positive known-live overlap on stock/Ox. Independent
+prefix/helper audit, raw proxy binding, group/FD closure and96 postpins passed.
+The separately admitted one-use run contained zero SDK/camera/Photo payload.
+This closes the synthetic multi-file integration gate, not real SDK throughput
+or experimental area-host scaling. The shared8 area-host plan/result/journal/
+direct-child components remain source/Adobe-free only; their fault/inheritance/
+exact parent owner integration must precede native requests.

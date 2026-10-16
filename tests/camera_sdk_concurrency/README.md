@@ -247,3 +247,17 @@ source-prepared, not admitted or dispatched. V1's crossed admission was refused
 before executor/locks/calls because its old fake-helper pin no longer matched;
 the withdrawal and refusal records preserve the original request/admission.
 No pending request authorizes a run or a receiving/SDK capability.
+
+## Actual V2 receiving result
+
+[V2 executed once and PASSED/CLOSED](../qualification/concurrent-synthetic-receiving-v2-actual-20261016.json):
+actual74146/b2b6ab/exit0/no session, two receiving CLI calls/four original fake
+validators. Both candidates arrived exactly on stock and Ox. Independent joined
+call/helper/group audit passed; all resource descriptions and worker group
+closed with96 source postpins unchanged and no unresolved markers. Candidate-
+bound known-live intervals overlapped233090998ns(stock) and238479998ns(Ox).
+These intervals establish overlapping fake-helper lifetimes in production
+receiving, not SDK decode overlap, CPU utilization, scaling or throughput.
+Synthetic raw-digest protocol fields are not native raw-digest verification.
+No SDK/Adobe/camera/Photo payload ran. Admission957750d2 is consumed once; this
+result authorizes no retry, real SDK successor or new native/IO window.
