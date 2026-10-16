@@ -189,3 +189,10 @@ with exact bytes, distinct inodes, source metadata preservation and occupied-nam
 refusal. Actual7f783b/0/group+Unison8 closed. No retained generated DNG/SDK work
 ran; frozen receiving V1 remains unadmitted and unchanged. Physical sharing is
 not inferred from successful clone calls.
+
+Two [combined clone/close uncertainty cases](../tests/qualification/sdk-multifile-clone-uncertainty-actual-20261016.json)
+now verify the real preparation adapter preserves ordinary and already-nested
+failures through directory-close uncertainty: all identities retained, no
+numeric retry or ordinary-error downgrade. Actual4295e9/0/controlgroup+Unison8
+closed; inert descriptor injection only, zero payload/SDK/canonicalIO. The
+frozen receiving request and159 execution pins remain unchanged.

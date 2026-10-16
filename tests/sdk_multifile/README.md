@@ -222,3 +222,12 @@ SDK validation or proof of physical APFS sharing. No retained payload or
 canonical IO was accessed; control/group and outer Unison8 closed normally.
 The frozen V1 request/pins remain unchanged; this additional test is outside
 its execution-source closure and supplies no admission.
+
+The [combined clone/close uncertainty controls](../qualification/sdk-multifile-clone-uncertainty-actual-20261016.json)
+cover an ordinary clone refusal plus directory-close failure, and an existing
+nested uncertainty plus that second close failure. Both emerge as unresolved:
+original failures and all uncertain identities survive, remaining owned FDs
+stay retained, and the directory number is attempted exactly once. Descriptor
+numbers are inert doubles; this checks the real adapter/finally/carrier
+composition without an actual close failure, clone syscall or payload access.
+No failed-prefix release or dispatch permission follows. Outer Unison8 closed.
