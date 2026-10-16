@@ -33,12 +33,16 @@ all groups/tokens closed and per-pool descriptor baselines restored. Pool8 uses
 six CPU permits plus owner2 within standing8, not eight simultaneous execution,
 a hard resource cap, independent algorithm proof or throughput result.
 
-A separate [camera SDK receiving kernel](tests/camera_sdk_receiving/README.md)
-is source/mock prepared:18 original controls verify strict candidate/helper/group
-binding, receipt framing, optional missing-versus-verified raw digest, one-shot
-require command and unresolved ownership bypass. No Adobe executable or camera
-payload was used. Exact owner/admission/helper-ledger integration remains before
-any fresh SDK runtime request; generic camera V4 grants cannot be reused.
+The [camera SDK receiving source](tests/camera_sdk_receiving/README.md) now has
+exact parent/worker admission binding and independent combined CLI+SDK audit.
+[RequestV1](doc/camera-sdk-receiving-request-v1.json) pins67 execution sources,
+qualified single-thread driver and two same-compiler receiving seeds/two SDK
+calls on disposable native clones. It remains UNADMITTED/UNSTARTED, not a reuse
+of consumed camera V4. [28 source/mock controls and actual Python FD/refusal lifecycle](tests/qualification/camera-sdk-owner-source-controls-actual-20261016.json)
+passed with groups/tokens closed, no canonical EXglobal/SDK/camera payload.
+Missing/unknown helper proofs retain ownership; settled invalid SDK findings are
+failed results. Optional missing raw digest is explicit, not verified. The
+original18-control kernel receipt retains its earlier source scope.
 
 The full goal remains ACTIVE: representative real-camera semantic/private
 reference closure and receiving SDK validation remain distinct next work, along

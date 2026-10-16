@@ -40,3 +40,11 @@ missing digest distinction, one-shot require command and unknown-retention
 selection. No SDK/camera payload/EXglobal invocation occurred. Its admitted-owner
 integration and full execution pins are still required before a runtime request;
 it does not reuse camera V4's consumed admission.
+
+The [camera SDK requestV1](camera-sdk-receiving-request-v1.json) is now source
+prepared with exact67-source parent/worker integration. The source/ownership
+qualification adds28 mock controls, live positive/negative inherited-FD refusal
+children and dispatcher regressions, all closed without Adobe/camera/EX IO.
+Its two real require-policy receiving seeds and two SDK invocations remain
+UNADMITTED/UNSTARTED. Root review must check this new closure and grant a separate
+finite SDK/IO slot; neither camera V4 nor an available CPU pool authorizes it.
