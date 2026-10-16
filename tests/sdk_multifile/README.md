@@ -25,3 +25,17 @@ prerequisite pins, then request a separately coordinated finite IO/SDK window.
 Measure actual overlap rather than promising it; preserve a truthful false
 result when helpers do not overlap. No source mutation, original camera access,
 pixel equivalence, semantic eligibility or throughput claim follows.
+
+The independent `receipts.py` audit reuses the bounded process/group/raw SDK
+protocol parsers and binds two distinct candidates to their expected helper
+PIDs and server owner. Generated-input success requires valid raw digests.
+Two adequately sampled same-owner monotonic spans can establish reported
+known-live overlap; absent/single-sample timing remains unknown, while two
+serial bounded spans report false. This does not prove SDK compute overlap
+or authenticate the producer without the future pinned call/transport audit.
+Process/group settlement stays mandatory independently of timing coverage.
+
+[Four synthetic receipt controls](../qualification/sdk-multifile-receipts-source-actual-20261016.json)
+passed, including serial/missing timing and invalid digest/group/owner/duplicate
+rejection. These original diagnostic frames invoked no SDK, probe, payload or
+EXglobal IO. The test owner/group and canonical Unison8 tokens closed.
