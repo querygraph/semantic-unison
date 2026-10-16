@@ -1,0 +1,121 @@
+{
+  "schema": "firstpair-canonical-io-probe/1",
+  "state": "FROZEN_SOURCE_READY_NOT_ADMITTED_NOT_EXECUTED",
+  "supersedes_plan": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v1.json",
+    "bytes": 3444,
+    "sha256": "b55ccc1e1fbb0210974d9040dcac4766586ffaee4bdc49a8a44eed9b7c363577"
+  },
+  "contract": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v1.json",
+    "bytes": 4475,
+    "sha256": "e68f5a1cc370e37e07dff5cb1c205a606347ef7483541131b1f477ef58e51661"
+  },
+  "workspace": "/private/tmp/unison-canonical-io-probe-277520a504074cc39780955f68c511e1",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+      "bytes": 7858,
+      "sha256": "119103211f1d438fb4c0553a3bcd989b861c40ee57876198f8ad97cc101a2ea1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe_test.py",
+      "bytes": 2578,
+      "sha256": "0c66a5d4cfa9f4238c6b82a19744e531393b082766f994d3df884f1f3fedfda3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 8568,
+      "sha256": "43fab637ea5782905b8ec19c2474d4c2fc3c270ab7956c906ed8762009de9be9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 10664,
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "bytes": 18749552,
+      "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json",
+      "bytes": 5585,
+      "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+      "bytes": 2106,
+      "sha256": "4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+      "bytes": 1500,
+      "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+    }
+  ],
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v2.json",
+    "--admission",
+    "/private/tmp/unison-canonical-io-probe-ADMISSION-v2.json"
+  ],
+  "limits": {
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "max_python_children": 2,
+    "owned_worker_group_seconds": 60,
+    "contender_wait_seconds": 10,
+    "preflight_and_postgroup_metadata": "Outside worker-group ceiling; bounded local source/manifest reads only. No hard whole-parent wall cap claimed.",
+    "media_payload_bytes": 0,
+    "native_adobe_sdk_compiler_operations": 0,
+    "pool_file_writes": 0,
+    "log_budget_bytes": 2097152,
+    "log_limit_scope": "Fixed metadata-only protocol has bounded small expected messages; no RLIMIT/aggregate byte counter in this probe."
+  },
+  "stages": [
+    "Parent authenticates exact Root admission/plan/source/CPU policy/IO+CPU manifest pins; creates private absent workspace once.",
+    "Parent acquires existing EX_GLOBAL IO barrier then Unison00..07 as NB whole bundle. Contention closes known partials and stops unstarted; no waiting/automatic retry. Verify held+visible IO identities after acquisition.",
+    "Parent holds ALL IO+CPU FD copies while one retained worker group starts. Worker starts exactly one fixed no-spawn Python contender in SAME group, whose fresh IO description must return busy before any CPU request. Worker obtains actual contender wait0. Inherited parent grant accounts both processes inside8.",
+    "Outer parent performs retained-leader group census/settlement and wait4, still holding IO+CPU copies; unknown retains live parent+FDs. Revalidate plan/manifest and held/visible IO identity, then close CPU and IO only after actual group closure.",
+    "Parent tries ONE fresh IO\u2192CPU bundle after prior copies fully closed; verifies held identities and closes known no-child bundle. If another owner wins, preserve known-closed failure, no retry. Actual parent tool terminal separately sealed."
+  ],
+  "scope_adjustment": "Prior v1 proposed canonical inheritance/parent-copy release; those semantics already actually qualified on disposable pool. This v2 canonical probe intentionally keeps parent copies for unambiguous deadline/unknown retention. Canonical inheritance is NOT separately claimed by this probe.",
+  "admission": {
+    "path": "/private/tmp/unison-canonical-io-probe-ADMISSION-v2.json",
+    "required_state": "ROOT_ADMITTED_ONE_LOCK_ONLY_CANONICAL_IO_PROBE",
+    "required_fields": [
+      "plan_sha256",
+      "command",
+      "start_deadline_unix"
+    ],
+    "authority": "Root publishes exact private metadata receipt and SHA through queue. No canonical IO operation before fresh finite test admission."
+  },
+  "does_not_qualify": [
+    "Private DNG payload or SDK/native grant",
+    "Production Unison/Photo dispatchers",
+    "Physical-member/provider mapping or disjoint IO",
+    "Native/UI last-stage rollback integration",
+    "Performance or total OS thread/RSS hard cap"
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "state": "FOUR_INERT_CANONICAL_PROBE_ADMISSION_CONTROLS_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "chunk": "86540f",
+    "exit": 0,
+    "running_session": false
+  },
+  "prior_terminal": {
+    "chunk": "1f7ec3",
+    "exit": 0,
+    "running_session": false,
+    "scope": "Before explicit held-binding checks added; preserved historical."
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-canonical-io-probe-inert-6a2rgf3t",
+  "closure": {
+    "child": {
+      "pid": 76735,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 76735,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "probe_source_before_after": "119103211f1d438fb4c0553a3bcd989b861c40ee57876198f8ad97cc101a2ea1",
+  "scope": "No canonical IO file opened/locked; tests only metadata fixtures and mocked admissions. No payload/SDK/Adobe/compiler. CPU00..07 closed. Source/schema/command/digest/deadline refusals only; real canonical runtime not qualified.",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+      "bytes": 7858,
+      "sha256": "119103211f1d438fb4c0553a3bcd989b861c40ee57876198f8ad97cc101a2ea1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe_test.py",
+      "bytes": 2578,
+      "sha256": "0c66a5d4cfa9f4238c6b82a19744e531393b082766f994d3df884f1f3fedfda3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v2.json",
+      "bytes": 5839,
+      "sha256": "b058c871a330da32edb63747f0fe6907881e545a9bea23faa1c67d3d6386358d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-canonical-io-probe-inert-6a2rgf3t/SHARED-START.json",
+      "bytes": 951,
+      "sha256": "c20224e75a5ceecbe59ce8de39cf7162e1f16e84e663f7df87dde300fa20b235"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-canonical-io-probe-inert-6a2rgf3t/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "e54d2fb1bbf5103cb7a1adc08ce2ed0a749726de12b465df3f3c8265c56f9d86"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-canonical-io-probe-inert-6a2rgf3t/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-canonical-io-probe-inert-6a2rgf3t/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

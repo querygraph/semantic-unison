@@ -4,6 +4,19 @@
 
 ## Current checkpoint — 2026-10-15
 
+The canonical EX_GLOBAL lock-only [probe v2](doc/shared-physical-io-canonical-qualification-plan-v2.json)
+now has exact source/interpreter/command/workspace pins. Parent retains IO+CPU
+FDs through group settlement; one fresh independent contender must busy before
+CPU entry; after actual settlement/close, one fresh whole bundle reacquires.
+This replaces v1 canonical inheritance idea with retained-parent bounded ownership;
+disposable inheritance remains qualified separately, not newly canonical.
+[Four inert admission controls](tests/qualification/canonical-io-probe-inert-controls-actual-20261016.json)
+86540f/0 CLOSED/tokens00..07closed; no canonical IO lock opened. Root source/budget
+ACK naming older privateDNGbe25 is NOT admission to currentc29 executor; current
+ancestry2345ed50 pin and uninstrumented8GiB acceptance retained, old pins historical.
+Payload executor IO integration/phase-deadline successor remains next after
+actual canonical qualification. No source payload/SDK/native access.
+
 Root provisioned the SOLE actual `io-lanes-v1` namespace/barrier, manifestSHA
 f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636,
 EX_GLOBAL_ONLY/no device lanes. The [joint consumer contract](doc/shared-physical-io-consumer-contract-v1.json)
