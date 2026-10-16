@@ -35,15 +35,21 @@ def sources():
     return result
 
 
-def checked_plan(path,digest):
-    path=Path(path);require(path.is_absolute() and path.resolve()==path,'canonical plan path required')
-    d=read_manifest(path,digest)
+def typed_equal(actual,expected):
+    if type(actual) is not type(expected):return False
+    if type(expected) is dict:
+        return actual.keys()==expected.keys() and all(typed_equal(actual[k],v) for k,v in expected.items())
+    if type(expected) is list:
+        return len(actual)==len(expected) and all(typed_equal(a,b) for a,b in zip(actual,expected))
+    return actual==expected
+
+
+def _checked_packet(d,*,schema,parameters,source_pins,workspace_prefix):
     require(set(d)=={'schema','workspace','parameters','execution_source_sha256','binaries','tool','inputs','sources','transport_source_sha256','interpreter'},'exact multi-file plan fields required')
-    require(d['schema']=='unison-sdk-multifile-plan/1' and d['parameters']==PARAMETERS
-            and all(type(d['parameters'][k]) is type(v) for k,v in PARAMETERS.items()),'fixed finite limits required')
-    require(d['execution_source_sha256']==sources(),'current execution closure differs')
+    require(d['schema']==schema and typed_equal(d['parameters'],parameters),'fixed finite limits required')
+    require(d['execution_source_sha256']==source_pins,'current execution closure differs')
     require(sys.executable==PYTHON and d['interpreter']==dict(path=PYTHON,sha256=PYTHON_SHA),'qualified interpreter required')
-    w=Path(d['workspace']);require(w.parent==Path('/private/tmp') and w.name.startswith('u-smr-') and 8<len(w.name)<=32,'fresh short namespace required')
+    w=Path(d['workspace']);require(w.parent==Path('/private/tmp') and w.name.startswith(workspace_prefix) and 8<len(w.name)<=32,'fresh short namespace required')
     require(set(d['binaries'])=={'stock','ox'},'fixed compiler pair required')
     for label,item in d['binaries'].items():
         require(set(item)=={'label','path','sha256'} and item['label']==label,'exact binary metadata required')
@@ -75,6 +81,14 @@ def checked_plan(path,digest):
     require(d['transport_source_sha256']=={n:d['execution_source_sha256'][str(ROOT/'bench/sync'/n)] for n in SCRIPT_NAMES},'copied transport pins differ')
     for label in ['stock','ox']:command_plan(d['binaries'][label],tool,w/label)
     return d
+
+
+
+def checked_plan(path,digest):
+    path=Path(path);require(path.is_absolute() and path.resolve()==path,'canonical plan path required')
+    d=read_manifest(path,digest)
+    return _checked_packet(d,schema='unison-sdk-multifile-plan/1',parameters=PARAMETERS,
+                           source_pins=sources(),workspace_prefix='u-smr-')
 
 
 def child_argv(path,digest,workspace):

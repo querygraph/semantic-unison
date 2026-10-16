@@ -1,0 +1,108 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_throughput/entry_lifecycle.py",
+      "--controls"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-st-boundary-e_s2g4yd\", \"cases\": 2, \"sdk_calls\": 0, \"children_reaped\": true}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 56447,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/shared_dispatch.py": "0fe2159c42d8b2eebe7258c0def81a74461d5cbece168bfac2165dfd7283b0d5",
+    "tests/sdk_multifile/entry.py": "a177a1912c1f310c12328c20fe0f2e79426c4b296e59c78e33c13f7d03bd2e09",
+    "tests/sdk_host_matrix/shared_binding.py": "6b48e1a33ed5a84b93d60f1194c9d49234614cfc418fa69ca0def5024ce430b3",
+    "tests/sdk_throughput/audit.py": "70a751122906e10bd65ad3de54e6ef71209f31c7848327cb4fdd5bbcc8a25675",
+    "tests/sdk_throughput/audit_test.py": "fc3329eaf647f049d8854dcf17122309cc32b14bf61987613284bcab2c6738a2",
+    "tests/sdk_throughput/dispatch_test.py": "cbe8458259e95e926e2300ad1d94d3eceb111a1cd7596d5f48ee7aa80aaae7d6",
+    "tests/sdk_throughput/entry.py": "49f3e3e338f9bd87680954dbaac42829de9f7c26f5b7fab0a9cd808dde88a96e",
+    "tests/sdk_throughput/entry_lifecycle.py": "f8cc19f9d46349a1b35ffefe9f82d9f53bab111a7490895c179994c4f0537f3d",
+    "tests/sdk_throughput/entry_test.py": "19c9eb82a9eb6cb30a41056811786e34cdc7e068a8d8f69d744138ac8b435a08",
+    "tests/sdk_throughput/lifecycle.py": "bb2e4864df952a7d2e57f1da843117245ab9c76924c29cdb2c1d1dc949a03e24",
+    "tests/sdk_throughput/plan.py": "9e65ea8d69cb5f3aeb47e6b02ede969dd1f5e4c6c54c1f7ded11bfdc801e5515",
+    "tests/sdk_throughput/plan_test.py": "9d0bd92728b616da3d6bd36d69e9072c73e32989756af72c45e9aa9b3be31b84",
+    "tests/sdk_throughput/transport.py": "e16d43a8b30ce5a15a25eb7835d71a1c98875abd33434d9b6d6431f6b0733708",
+    "tests/sdk_throughput/transport_test.py": "a37c36967a34b039975cd638a808e6bf6c565f7e6bd03a8c9961e45a6968ac3f",
+    "tests/sdk_throughput/worker.py": "56dc3e423916e222fff1db31300c959fa2742e9a851a717f81442c93b3f9358f",
+    "tests/sdk_throughput/worker_test.py": "e37f802b710c12cc54bf6c7d04d00e0e7143ac918b1dc69755400c6dc09a134a"
+  },
+  "scope": "Two actual Python worker-boundary refusals through newtarget parentaudit and inherited FD guard. Disposable inner CPU/IO grants; admission/inventory/argv/SHA explicit doubles. Zero clone/CLI/SDK/retained payload/canonical IO.",
+  "owner_tool_terminal": {
+    "chunk_id": "19f501",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Faithful transcription of actual owning tool result collected before user pause."
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/RESULT.json",
+      "bytes": 1818,
+      "sha256": "b8a5915e75799ac354655cdee0c0f7efb259bdfe359265286997df680012d1ff"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/8/plan.json",
+      "bytes": 847,
+      "sha256": "d106f636d878e9bbb9e0b845fff65f53f186fa328f94302f19e0bfc2f39399e6"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/8/SHARED-START.json",
+      "bytes": 21039,
+      "sha256": "d06f9ffdc466318a550364558a053ed56d6cb0d462efcc7d6d1d6dc3cd2e10dd"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/8/RESULT.json",
+      "bytes": 308,
+      "sha256": "c8e74866e89c88d5a1852843d4ac7545b807fd094cdf02df0b68931e179e4994"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "0ece6e7b21d886ffe197eec3debf2f9b1bbe1c3555a8fccd4d5d88d50c625642"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/8/SHARED-SERVER-AUDIT.json",
+      "bytes": 138,
+      "sha256": "7836021e3ef83b86141c30aa0f43e6c9359beffc20a2789485c3ef9b418bb12b"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/7/plan.json",
+      "bytes": 824,
+      "sha256": "548af33efab5231ec884b79528ab14935fdaa682b9e22f261b879341dcd7dbff"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/7/SHARED-START.json",
+      "bytes": 20959,
+      "sha256": "5360d102871b7de58df5cf1b8cab6faf00d7bd1a832ebcbe8dc088ff7f301dbf"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/7/RESULT.json",
+      "bytes": 314,
+      "sha256": "00ad0c8d6947aaadc9b821d161552258aac0a8635842203f8cbd25b6bc3886d5"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/7/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "fdf893c9835c34507efd1ac02fe4c6012079e8d31fb2255604ef244218ace44a"
+    },
+    {
+      "path": "/private/tmp/u-st-boundary-e_s2g4yd/7/SHARED-SERVER-AUDIT.json",
+      "bytes": 138,
+      "sha256": "7836021e3ef83b86141c30aa0f43e6c9359beffc20a2789485c3ef9b418bb12b"
+    }
+  ]
+}

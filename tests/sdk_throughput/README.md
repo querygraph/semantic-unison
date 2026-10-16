@@ -79,3 +79,24 @@ pins preserve the raw evidence. No SDK, retained generated inputs, canonical IO
 or native cloning ran. These timings are control-process timings only. This
 closes the full fake transport lifecycle step, not admitted dispatcher ownership
 or SDK throughput qualification.
+
+The exact-admission entry and dispatcher integration is now source-qualified.
+`entry.py` binds a distinct schema/limits/source closure to its fixed command,
+requires the actual parent START plus canonical nine inherited FD identities,
+and verifies interpreter/binary/tool hashes under IO before clone preparation.
+The parent reconstructs all row directories before opening raw proxy receipts,
+audits the full attempted prefix, rechecks borrowed epochs and complete output
+bytes, then settles the worker before closing CPU and IO. No CPU-only route is
+available. Metadata validation shares the prior multi-file packet validator;
+each entry fixes its own schema/parameters/namespace/source set, with strict
+recursive types (including integer lists).
+
+[Forty source/regression groups](../qualification/sdk-throughput-dispatch-source-actual-20261016.json)
+and [two actual child-boundary controls](../qualification/sdk-throughput-entry-lifecycle-actual-20261016.json)
+passed before the user pause; current source hashes were reverified on resume.
+The valid nine-FD disposable handoff reaches an intentional pre-SDK refusal;
+an incomplete handoff refuses before the worker. Both real children and groups
+settle, inner locks close/reacquire and outer Unison8 closes. Admission,
+inventory, argv and artifact SHA are explicit doubles. Zero SDK/retained payload
+or canonical IO ran. A fresh immutable plan/request and separate runtime grant
+remain required; completed historical SDK admissions are never reusable.

@@ -24,8 +24,9 @@ MANIFEST = ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-
 MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd'
 SDK_MATRIX_TARGET = 'shared-sdk-host-matrix'
 SDK_MULTI_TARGET = 'sdk-multifile-receive'
+SDK_COMPARE_TARGET = 'sdk-receiving-comparison'
 RECEIVING_TARGETS = ('camera-receive','camera-sdk-receive','synthetic-concurrent-receive')
-TARGETS = {SDK_MATRIX_TARGET, SDK_MULTI_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
+TARGETS = {SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
            'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
            'sde-conformance', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'}
@@ -40,7 +41,7 @@ def write(path, value):
 def checked_io_request(request, target, argv, output, credits):
     """Read admission metadata only; this does not acquire IO/CPU locks."""
     from shared_io_pool import GlobalPool, read_manifest, CANONICAL_MANIFEST, CANONICAL_SHA256
-    require(target in (SDK_MATRIX_TARGET, SDK_MULTI_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+    require(target in (SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
             'IO mode requires a complete job with qualified external-owner audit')
     require(isinstance(request, dict) and set(request) == {'path', 'sha256'},
             'explicit pinned IO admission required')
@@ -64,12 +65,15 @@ def checked_io_request(request, target, argv, output, credits):
         packet=shared_execute.checked_plan(argv[4],argv[6])
         require(packet['workspace']==str(output),'shared SDK namespace differs')
         source_paths.update(Path(name) for name in shared_execute.sources())
-    if target == SDK_MULTI_TARGET:
-        entry=ROOT/'tests/sdk_multifile/entry.py'
+    if target in (SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
+        entry=ROOT/('tests/sdk_multifile/entry.py' if target==SDK_MULTI_TARGET else 'tests/sdk_throughput/entry.py')
         require(credits==8 and len(argv)==9 and argv[0]==sys.executable and argv[1]==str(entry)
                 and argv[2:4]==['--worker','--plan'] and argv[5]=='--plan-sha256'
                 and argv[7:]==['--workspace',str(output)],'exact multi-file SDK worker argv required')
-        from sdk_multifile.entry import checked_plan,sources
+        if target==SDK_MULTI_TARGET:
+            from sdk_multifile.entry import checked_plan,sources
+        else:
+            from sdk_throughput.entry import checked_plan,sources
         packet=checked_plan(argv[4],argv[6]);require(packet['workspace']==str(output),'multi-file namespace differs')
         source_paths.update(Path(name) for name in sources())
     if target in RECEIVING_TARGETS:
@@ -120,7 +124,7 @@ def run(target, argv, output, credits, *, io_admission=None):
             and script.resolve() == script, 'shared target requires canonical repository script path')
     require(target != 'private-dng-framing-input' or io_admission is not None,
             'framing input has no CPU-only runtime route')
-    require(target not in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET) or (io_admission is not None and credits==8),
+    require(target not in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET) or (io_admission is not None and credits==8),
             'camera receiving requires exact shared8 IO admission')
     require('--property-removal-controls' not in argv or io_admission is not None,
             'property-removal matrix has no CPU-only runtime route')
@@ -168,8 +172,11 @@ def run(target, argv, output, credits, *, io_admission=None):
             sys.path.insert(0,str(ROOT/'tests/sdk_host_matrix'))
             import shared_execute
             sources.extend(Path(name) for name in shared_execute.sources())
-        if target == SDK_MULTI_TARGET:
-            from sdk_multifile.entry import sources as multi_sources
+        if target in (SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
+            if target==SDK_MULTI_TARGET:
+                from sdk_multifile.entry import sources as multi_sources
+            else:
+                from sdk_throughput.entry import sources as multi_sources
             sources.extend(Path(name) for name in multi_sources())
         if target in RECEIVING_TARGETS:
             if target=='synthetic-concurrent-receive':
@@ -218,13 +225,13 @@ def run(target, argv, output, credits, *, io_admission=None):
                   'io_admission': io_admission,
                   'cpu_credits': credits, 'unix': time.time(),
                   'inherited_resource_fds': [dict(fd=fd,device=os.fstat(fd).st_dev,inode=os.fstat(fd).st_ino)
-                      for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET) else [],
+                      for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET) else [],
                   'sources': pins})
             seconds = 300 if target == 'sync-functional' or target.startswith('inspect-') else 600 if target.endswith(('-build', '-check')) else 60
-            if target in ('sync-functional',*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET):
+            if target in ('sync-functional',*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
                 # Separate server sessions retain their own coordinator. Do
                 # not kill it on an outer deadline and discard live handles.
-                if not child.await_terminal((600 if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET) else seconds) - 2):
+                if not child.await_terminal((600 if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET) else seconds) - 2):
                     raise RuntimeError('shared sync batch deadline; live coordinator retained')
                 from shared_audit import audit_shared
                 report_path = output / 'RESULT.json'
@@ -251,25 +258,32 @@ def run(target, argv, output, credits, *, io_admission=None):
                     for fixture in plan['fixtures']:
                         observed=os.lstat(fixture['path'])
                         require(all(getattr(observed,k)==v for k,v in fixture['identity'].items()),'SDK fixture epoch changed before release')
-                elif target == SDK_MULTI_TARGET:
+                elif target in (SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
                     from shared_io_pool import read_manifest
-                    from sdk_multifile.parent import audit as multi_audit
                     from sdk_multifile.entry import artifact_sha
                     plan=read_manifest(argv[4],argv[6])
+                    if target==SDK_MULTI_TARGET:
+                        from sdk_multifile.parent import audit as multi_audit
+                        directories=[output/label for label in ('stock','ox')]
+                    else:
+                        from sdk_throughput.audit import audit as multi_audit
+                        from sdk_throughput.plan import comparison
+                        directories=[Path(r['directory']) for r in comparison(plan['binaries'],plan['tool'],output)['rows']]
                     proxies=[]
-                    for entry in result.get('invocations',[]):
-                        label=entry['identity']['label'];require(label in ('stock','ox'),'bounded proxy namespace required')
-                        path=output/label/'seed-proxy.json'
+                    for i,entry in enumerate(result.get('invocations',[])):
+                        require(i<len(directories) and entry['identity']['label'] in ('stock','ox')
+                                and entry['identity']['directory']==str(directories[i]),'bounded exact proxy namespace required')
+                        path=directories[i]/'seed-proxy.json'
                         proxies.append(read_manifest(path,artifact_sha(path)))
                     external=multi_audit(result,plan,raw_proxy_receipts=proxies)
                     for item in plan['inputs']:
                         observed=os.lstat(item['path'])
                         require(all(getattr(observed,k)==v for k,v in item['identity'].items()),'multi-file borrowed input epoch changed')
                     if result['complete']:
-                        for label in ('stock','ox'):
+                        for directory in directories:
                             for source in plan['sources']:
                                 for side in ('left','right'):
-                                    path=output/label/side/source['candidate_id']
+                                    path=directory/side/source['candidate_id']
                                     require(path.lstat().st_size==source['bytes'] and artifact_sha(path)==source['sha256'],
                                             'multi-file input/received candidate bytes differ at parent')
                         external['receiving_bytes_reverified']=True
@@ -298,7 +312,7 @@ def run(target, argv, output, credits, *, io_admission=None):
                     external['functional_result'] = 'FAILED'
                 write(output / 'SHARED-SERVER-AUDIT.json', external)
                 closure = settle(child, time.monotonic() + 2)
-                if target in (SDK_MATRIX_TARGET,SDK_MULTI_TARGET):
+                if target in (SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
                     require(not result['complete'] or closure['returncode']==0,'complete SDK matrix contradicts failed worker exit')
                 require(result['complete'] or closure['returncode'] != 0,
                         'failed result contradicts successful coordinator exit')

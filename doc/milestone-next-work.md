@@ -260,3 +260,12 @@ The unchanged24-row worker and per-row1/3 adapter compose through real loopback
 transport; CPU8 closed. Zero SDK/retained payload/canonicalIO/nativeclone;
 control timings are not benchmark data. Next exact-admitted dispatcher/entry
 binding and actual FD boundary, then freeze a distinct runtime source request.
+
+On resume, all uncommitted comparison entry/dispatcher source hashes matched
+the saved40-group and two-real-child receipts. The integration now requires its
+distinct exact admission, inherited canonical9FD START binding and under-IO
+artifact verification; parent audits reconstruct directories and reverify bytes
+before group/FD release. Known failures and uncertainty retain their distinct
+paths. All prior test owners/CPU8 closed; no test replay was needed merely for
+resume. Next freeze the exact comparison request and coordinate its finite SDK
+window; no runtime admission or successor is implied.
