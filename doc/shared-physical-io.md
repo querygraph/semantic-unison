@@ -68,3 +68,23 @@ and a bounded simultaneous synthetic workload. Until both dispatchers join the
 same qualified protocol, physical IO coordination is by explicit owner messages.
 This proposal grants no payload access, native window, quiet timing, hard RSS/CPU
 limit or production publication authority.
+
+## Joint namespace successor
+
+The immutable [v2 source proposal](shared-physical-io-proposal-v2.json) supersedes
+the v1 namespace suggestion with `FirstPair Lightroom Shuttle/physical-io-lanes-v1`
+and a Root-published `SHARED-PHYSICAL-IO-POOL-v1.json` manifest. Neither exists by
+this work. Photo/UI and migration locks remain separate and are never repurposed.
+The full bundle order is IO, CPU, then existing native/UI ownership, all
+nonblocking with complete rollback before waiting. Stable physical identity,
+oldest-observation freshness, mount/boot binding, hotplug/refusal and immutable
+manifest succession are explicit source requirements, not implemented detection.
+
+[Six actual read-only metadata commands](../tests/qualification/topology-metadata-actual-20261016.json)
+completed under Unison00..07, 398869 raw bytes, all child waits0 and owned group
+reaped with other members absent; tokens closed. Raw bounded diskutil/ioreg
+receipts are private and pinned. Quasar UUID matches the handoff and Ten reports
+HFS+, but no complete physical-leaf provider or runtime IO pool is qualified.
+No device media/DNG payload, native Photo/SDK, live provisioning or private-DNG
+admission occurred. Current V7/other dispatchers do not gain this protocol by
+source publication.

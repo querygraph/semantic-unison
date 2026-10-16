@@ -1,0 +1,162 @@
+{
+  "schema": "firstpair-physical-io-coordination-source-proposal/2",
+  "state": "SOURCE_PROPOSAL_NOT_LIVE_IO_ADMISSION",
+  "cpuPolicy": {
+    "version": 3,
+    "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+    "unisonTokens": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "photoTokens": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "idleTokens": [
+      16,
+      17
+    ]
+  },
+  "canonicalNamespace": {
+    "provisioned": false,
+    "manifest": null,
+    "pathProposal": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/physical-io-lanes-v1",
+    "provisioningOwner": "Joint Root-coordinated one-time publication of existing-file inode manifest; neither consumer recreates missing files",
+    "storageDomain": "One pinned host domain, not a caller-selected mount or project label",
+    "barrierFilename": "all-devices.lock",
+    "deviceFilenames": "physical-<sha256-of-canonical-resource-key>.lock",
+    "fileContract": "Private owned directory; fresh open descriptions; existing regular single-link private files; O_NOFOLLOW; held and visible dev/inode/owner/mode checks before and after nonblocking flock; no LOCK_UN",
+    "manifestProposal": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+    "neverRepurpose": [
+      "Photo/native/UI io-leases/Photo-CB2B2D86-3BAE-4319-9DB4-D25E6B462D44.lock dev16777223 inode304149394",
+      "Existing migration job lock",
+      "Canonical cpu-credits-v1 files"
+    ]
+  },
+  "claims": {
+    "source": "Complete physical leaf/member union from separately qualified trusted local topology provider plus fresh stable volume/topology observations",
+    "identityKeys": "Canonical lowercase ASCII [a-z0-9][a-z0-9._:-]{0,127}; names are scheduling identities, not publication authority",
+    "known": "Shared SAME barrier inode + exclusive lanes for sorted deduplicated complete physical-member union",
+    "unknown": "Exclusive SAME barrier inode; never an independent unknown-device lane",
+    "changedOrUnqualified": "Use exclusive global barrier or fail before dispatch; no independent-device claim",
+    "limits": "At most16 before/after volume pairs,32 members per observation,64 union members",
+    "doNotInfer": [
+      "Different st_dev means different physical storage",
+      "Different APFS volume/container names means independent disks",
+      "SoftRAID virtual disk parent exhaustively identifies physical members",
+      "A mounted filesystem identity proves physical topology or mount incarnation"
+    ]
+  },
+  "acquisition": {
+    "order": [
+      "IO barrier",
+      "sorted physical-member lanes if known",
+      "sorted explicitly authorized CPU tokens",
+      "existing native/UI lease when job requires it"
+    ],
+    "nonblocking": true,
+    "onContention": "All stages nonblocking. On contention at ANY stage close every known-open partial native/UI, CPU and IO description before busy/wait. Never wait while holding earlier stages; unknown close retains ownership and prohibits retry.",
+    "onUnknownClose": "Retain owner and known-open descriptors, preserve uncertain numeric descriptor without retry",
+    "afterDispatch": "Hold inherited descriptions through actual direct/nested group and worker settlement; parent terminal collected separately; timeout or process absence is not release proof",
+    "scope": "Photo canonical UI/catalog/IO lease remains separately owned; this grants no Adobe/cache/Main/publication rights"
+  },
+  "providerExtensibility": {
+    "apfs": "Planned provider must unify sibling volumes/containers that share physical leaves",
+    "compositeStorage": "All qualified RAID/pool/member leaves reserved; incomplete topology uses global fallback",
+    "zfsAndRefs": "Future local providers supply the same complete canonical member contract; no new runtime support claimed"
+  },
+  "qualificationRequired": [
+    "Same-physical sibling contention and disjoint-device concurrency in disposable pool",
+    "Unknown exclusive barrier conflicts with every known shared-barrier claim",
+    "CPU contention releases all IO and partial CPU locks",
+    "Late physical-lane contention releases earlier lanes and barrier",
+    "Inherited descriptions outlive parent-copy close until actual child closure",
+    "Replaced/symlink/aliased files and manifest/topology changes refuse before dispatch",
+    "Close uncertainty retains owner without numeric descriptor retry",
+    "Both project dispatchers join SAME manifest/barrier before any system-wide IO-coordination claim",
+    "Finite simultaneous synthetic IO/latency/memory qualification only after lifecycle and topology qualification"
+  ],
+  "livePoolCreated": false,
+  "kernelIoLockingImplemented": false,
+  "osTopologyProviderImplemented": false,
+  "physicalIoIsolationQualified": false,
+  "runtimeGrant": false,
+  "sourcePlanner": "tests/shared_io_plan.py",
+  "topologyUpdates": "Qualified topology/manifest publication requires exclusive canonical barrier, stable barrier inode and no active bulk claims; both consumers must adopt a pinned successor. Missing/stale namespace identity fails before IO; no fallback to a second pool.",
+  "jobScope": "Complete local bulk jobs or endpoint-local IO phases; no per-phase IO lease across peer-dependent RPC waits. Same-host loopback accounts both endpoints; distributed production admission requires separate deadlock qualification.",
+  "supersedes_source_proposal_sha256": "7b49a431e45f14fbf78cc2fa0c95ec6925c8b0106a987c35e7e245d232d1f429",
+  "stablePhysicalIdentity": {
+    "resourceKey": "physical-SHA256(providerDomain + NUL + qualifiedStableLeafIdentity)",
+    "neverSufficient": [
+      "diskN or BSD name alone",
+      "st_dev",
+      "mount path",
+      "APFS volume/container name",
+      "virtual RAID parent alone"
+    ],
+    "requiredEvidence": [
+      "Host/boot binding and provider/schema/source pins",
+      "Qualified collision-resistant persistent leaf identity (e.g. provider-verified WWN/serial+vendor binding), not an unverified display serial",
+      "Fresh bounded volume UUID/filesystem identity, mount incarnation evidence, container/store/RAID complete member graph and leaf ancestry",
+      "Before/after graph and host/boot identity agreement; command raw receipts and observation times retained"
+    ],
+    "missingOrAmbiguous": "EXCLUSIVE same global barrier or refuse; no disjoint physical-lane claim. Stable identity is scheduling scope, not file byte identity."
+  },
+  "topologyFreshness": {
+    "proposedMaxAgeSeconds": 5,
+    "proposedCaptureDeadlineSeconds": 8,
+    "proposedMaxRawBytesPerCommand": 2097152,
+    "proposedMaxVolumes": 16,
+    "proposedMaxLeafUnion": 64,
+    "dispatch": "After full IO/CPU/native bundle acquisition, reobserve required graph and mount/host/boot bindings before payload dispatch. Change/remount/hotplug/ambiguous/timeout/overflow: release known descriptions and refuse dispatch, never upgrade shared barrier in place. Global fallback requires new whole bundle attempt.",
+    "duringJob": "A topology event or observation uncertainty after dispatch marks outcome unresolved and prevents subsequent phases. Retain ownership through actual child/group settlement; moving to global barrier in place is forbidden. No claim of detecting every hardware event until provider/event monitoring is independently qualified.",
+    "currentStatus": "Proposed thresholds, no qualified provider or event monitor. Metadata snapshots alone cannot authorize physical lanes.",
+    "ageDefinition": "Age measured from OLDEST required observation start to dispatch, never newest command completion. If complete census cannot meet freshness window, refuse known-lane admission or take fresh global fallback bundle."
+  },
+  "manifestContract": {
+    "schemaProposal": "firstpair-shared-physical-io-pool/1",
+    "requiredFields": [
+      "version",
+      "state",
+      "hostDomain",
+      "namespaceDirectoryPathAndDevInodeUidMode",
+      "stableBarrierPathDevInodeUidModeNlink",
+      "sortedLeafKeysAndTokenPathDevInodeUidModeNlink",
+      "providerSchemasAndSourcePins",
+      "provisioningReceipt",
+      "predecessorHashIfAny"
+    ],
+    "authority": "Root provisions ONCE only after both source consumers agree. Publish exact immutable manifest bytes/SHA, both consumers adopt. Consumers never create/repair/rebind files.",
+    "update": "Hold exclusive SAME stable barrier; no active claims. Preserve barrier inode forever. Add leaf lanes with no active claims and publish immutable successor manifest; both consumers explicitly adopt. Replacement/loss of barrier requires explicit stop-world recovery, not transparent recreation."
+  },
+  "currentConsumers": {
+    "unisonCpuDispatcherQualified": true,
+    "unisonPhysicalIoDispatcherIntegrated": false,
+    "photoV7UsesNewProtocol": false,
+    "photoCurrentAdapterUsesNewProtocol": false,
+    "existingPhotoUiLeaseIsPhysicalPool": false
+  },
+  "topologyPreparation": {
+    "script": "tests/topology_metadata_capture.py",
+    "sourceOnlyUntilActualReceipt": true,
+    "authority": "User/Photo authorized bounded diskutil/ioreg read-only metadata within Unison00..07. No media payload/SDK/nativePhoto/privateDNG grant.",
+    "maxCommands": 6,
+    "maxSecondsEach": 8,
+    "maxStdoutAndStderrBytesEach": 2097152,
+    "maxRawBytesTotal": 25165824,
+    "ownerGroupCeilingSeconds": 60,
+    "providerQualifiedByCapture": false
+  }
+}

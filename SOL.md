@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+Joint physical-IO [source successor v2](doc/shared-physical-io-proposal-v2.json)
+uses Root-requested `physical-io-lanes-v1` plus proposed Root workspace manifest;
+no pool provisioned. IO→CPU→existing native/UI full nonblocking rollback, stable
+physical IDs/fresh oldest observation/mount+boot/change refusal are required.
+[Actual six metadata commands](tests/qualification/topology-metadata-actual-20261016.json)
+owner75007/session2715/7e617c/0 CLOSED:398869B bounded raw diskutil/ioreg output,
+all direct waits0/group75008reaped0/othersabsent/tokens00..07closed. QuasarUUID
+matches; TenHFS+ observed. Physical leaves/provider remain UNQUALIFIED, so no
+disjoint-device claim; global fallback/refusal only. No media/DNG/SDK/nativePhoto
+payload, pool creation, dispatcher integration claim or private-DNG IO grant.
+
 The private DA control now has an exact [v2 command/source plan](doc/dng-private-copy-plan-v2.json)
 and `tests/private_dng_copy.py` owner/worker, still NOT payload-admitted. Requires
 fresh Root disk-IO receipt bound to plan/command/deadline and explicit acceptance
