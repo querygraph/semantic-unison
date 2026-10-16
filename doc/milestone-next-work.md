@@ -80,7 +80,7 @@ already drains ready siblings; the CPU supervisor uses ticket polling. This
 review does not extend the SemanticAdmission fix into an unproven claim about
 physical device isolation, descriptor peaks or RSS limits.
 
-The current [two-file synthetic receiving request](concurrent-synthetic-receiving-request-v1.json)
+The current [two-file synthetic receiving request V2](concurrent-synthetic-receiving-request-v2.json)
 is frozen, not admitted or dispatched. It composes actual production receiving
 with original tiny fixtures and a fake validator, two candidates per compiler.
 Candidate-bound nonterminal live-span diagnostics are already component-tested
@@ -95,3 +95,10 @@ now cover the current production helper-observer/live-span changes. Both actual
 owners exited0, worker groups settled and Unison8 tokens closed; all pinned
 production source hashes match the checkout. This updates the older Dune scope
 without promoting build success into SDK concurrency or receiving evidence.
+
+The original synthetic V1 request was withdrawn unstarted after finding that its
+fake helper expected a variable excluded by production's sanitized environment.
+A crossed V1 admission was refused before executor/resource entry; original
+bytes remain preserved. V2 binds the helper to owned private candidate ancestry,
+adds actual sanitized-environment controls, and freezes96 sources/new workspace.
+Production helper environment remains restricted; no receiving run is inferred.

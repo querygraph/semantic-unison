@@ -204,11 +204,12 @@ there is no CPU-only or partial-credit route. Existing camera source fences rema
 `fake_validator.py` is original test software, not Adobe: it accepts only two
 fixed tiny payload hashes within the explicit private receiving namespace and
 emits a synthetic receipt after a short controlled delay. It is never a
-photographic/semantic validity oracle. No runtime request/admission exists yet.
+photographic/semantic validity oracle. The initial source checkpoint had no
+runtime request; see the current versioned request status below.
 [23source controls](../qualification/concurrent-entry-dispatch-source-controls-actual-20261016.json)
 cover entry/metadata/resource guards and existing SDK/shared-IO regression paths.
-FD/canonical-acquisition/worker hooks are mocks. Finite actual inherited-bundle
-and complete dispatcher fault controls remain before any receiving request.
+FD/canonical-acquisition/worker hooks in those23 controls are mocks. Subsequent
+actual inherited-bundle and dispatcher fault evidence is recorded below.
 
 ## Actual inherited-FD refusal probes
 
@@ -239,3 +240,10 @@ The helper now binds exact private stock/Ox/right ancestry and owned0700 roots.
 [Actual sanitized-environment controls](../qualification/concurrent-sanitized-helper-actual-20261016.json)
 pass both originals and reject outside, symlink, wrong-byte and nonprivate cases.
 A fresh successor request is required; historical V1 plan bytes remain preserved.
+
+The current [V2 request](../../doc/concurrent-synthetic-receiving-request-v2.json)
+freezes96 execution sources and a new workspace after that correction. It is
+source-prepared, not admitted or dispatched. V1's crossed admission was refused
+before executor/locks/calls because its old fake-helper pin no longer matched;
+the withdrawal and refusal records preserve the original request/admission.
+No pending request authorizes a run or a receiving/SDK capability.
