@@ -18,7 +18,7 @@ def main():
         raise ValueError('fixed original conformance controls accept no arguments')
     os.umask(0o077)
     work = Path(tempfile.mkdtemp(prefix='unison-sde-shared-controls-'))
-    sources = ['src/semanticDelta.ml', 'src/semanticDelta.mli',
+    sources = ['src/formatExtension.ml', 'src/formatExtension.mli', 'src/formatExtension.ox.mli.in', 'src/semanticDelta.ml', 'src/semanticDelta.mli',
                'tests/semantic/conformance/test.ml',
                'tests/semantic/conformance/reference.py',
                'tests/semantic/conformance/run.py',
@@ -30,7 +30,7 @@ def main():
     for label, compiler, variant in [(label, compiler, variant)
             for label, compiler in [('stock', '/Users/alexy/.opam/default/bin/ocamlopt'),
                             ('ox', '/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt')]
-            for variant in ('current', 'previous-profile-domain', 'previous-target-proof')]:
+            for variant in ('current', 'previous-profile-domain', 'previous-target-proof', 'previous-profile-inspection')]:
         report = work/(label+'-'+variant+'.json')
         command = [sys.executable, str(ROOT/'tests/semantic/conformance/run.py'),
                    '--ocamlopt', compiler, '--report', str(report)]
@@ -38,6 +38,8 @@ def main():
             command += ['--negative-control', 'profile-id']
         elif variant == 'previous-target-proof':
             command += ['--negative-control', 'target-proof']
+        elif variant == 'previous-profile-inspection':
+            command += ['--negative-control', 'profile-inspection']
         log = work/(label+'-'+variant+'.log')
         with log.open('xb') as stream:
             child = subprocess.Popen(command, stdout=stream, stderr=subprocess.STDOUT)

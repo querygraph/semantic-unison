@@ -122,3 +122,15 @@ runs current plus both profile-ID and target-proof negatives on each compiler,
 six serial runs total. [Actual target-proof evidence](../../qualification/sde-target-proof-actual-20261016.json)
 retains all native outcomes and group/token closure; this does not rerun full
 application Make/Dune or any receiving/SDK/camera test.
+
+
+Direct extension inspection also enforces the registry identifier domain before
+calling a compiled plugin parser. The fixed suite covers empty/NUL/129-byte IDs
+at trusted-constructor, direct-inspection and proof-inspection boundaries. The
+fake invalid plugin raises if entered. `--negative-control profile-inspection`
+removes only the new production inspection guard in a private snapshot and must
+fail at that marker. The shared target now runs eight serial variants total
+(current plus three negatives per compiler). [Actual module-identity evidence](../../qualification/profile-inspection-identity-actual-20261016.json)
+records2224current assertions/compiler and actual group/token closure. This is
+local compiled-module consistency, not sandboxing arbitrary plugins or new
+format/camera support.

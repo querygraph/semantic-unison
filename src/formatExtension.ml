@@ -18,7 +18,7 @@ let trusted ?capability ?(max_payload=max_payload) ?(suffixes=[]) ?observer
     ((module E : S) as extension) =
   if max_payload <= 0 || max_payload > 16 * 1048576 then
     invalid_arg "invalid format payload limit";
-  if E.profile = "" || String.length E.profile > 128 || String.contains E.profile '\000' then
+  if not (valid_id 128 E.profile) then
     invalid_arg "invalid format profile";
   let capability = match capability with Some value -> value
     | None -> "semantic-profile:" ^ E.profile in
@@ -82,7 +82,8 @@ let observe handle packets = match handle.observer with
 let inspect ?(max_payload=max_payload) (module E : S) file =
   if max_payload <= 0 || max_payload > 16 * 1048576 then
     invalid_arg "invalid inspection payload limit";
-  match E.inspect file with
+  if not (valid_id 128 E.profile) then Error "invalid format profile"
+  else match E.inspect file with
   | Error _ as error -> error
   | Ok manifest ->
     let rec check previous total count = function

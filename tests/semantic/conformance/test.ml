@@ -64,6 +64,22 @@ let golden name base_path target_path request_path envelope_path profile region_
     done in
   reject_nuls (read request_path) 48 SemanticDelta.decode_request;
   reject_nuls (read envelope_path) 16 SemanticDelta.decode;
+  List.iter (fun invalid ->
+    let module Invalid = struct
+      let profile = invalid
+      let inspect _ = failwith "invalid profile plugin entered"
+    end in
+    let extension = (module Invalid : FormatExtension.S) in
+    check (try ignore (FormatExtension.trusted extension); false
+      with Invalid_argument _ -> true) (name ^ ": invalid module registered");
+    with_file base_path (fun file ->
+      check (match FormatExtension.inspect extension file with
+        | Error "invalid format profile" -> true | _ -> false)
+        (name ^ ": invalid module reached direct parser");
+      check (match SemanticDelta.inspect extension file with
+        | Error "invalid format profile" -> true | _ -> false)
+        (name ^ ": invalid module produced local proof")))
+    [""; "bad\000id"; String.make 129 'p'];
   let selected = extension kind profile region_text in
   let base_bytes = read base_path and target_bytes = read target_path in
   let base = inspect selected base_path and target = inspect selected target_path in

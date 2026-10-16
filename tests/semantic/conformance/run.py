@@ -30,7 +30,7 @@ def main():
                         help="compile and generate immutable synthetic commands without running the test")
     parser.add_argument("--sanitize", choices=("address", "undefined", "address,undefined"),
                         help="instrument native C helpers; OCaml/runtime code remains unsanitized")
-    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation", "profile-id", "target-proof"),
+    parser.add_argument("--negative-control", nargs="?", const="nonce", choices=("nonce", "preservation", "profile-id", "target-proof", "profile-inspection"),
                         help="privately corrupt nonce binding or preservation hashing and require detection")
     args = parser.parse_args()
     compiler = shutil.which(args.ocamlopt)
@@ -190,9 +190,14 @@ def main():
     environment["PATH"] = str(Path(compiler).parent) + os.pathsep + environment.get("PATH", "")
     source_dir = work / "src"
     if args.negative_control:
-        source = (source_dir / "semanticDelta.ml").read_text()
+        negative_source = source_dir / ("formatExtension.ml" if args.negative_control == "profile-inspection" else "semanticDelta.ml")
+        source = negative_source.read_text()
         if args.negative_control == "nonce":
             source, count = re.subn(r"t\.nonce = nonce && t\.profile = base\.name", "t.profile = base.name", source, count=1)
+        elif args.negative_control == "profile-inspection":
+            guard = '  if not (valid_id 128 E.profile) then Error "invalid format profile"\n  else match E.inspect file with'
+            count = source.count(guard)
+            source = source.replace(guard, '  match E.inspect file with', 1)
         elif args.negative_control == "target-proof":
             guard = '''  else if List.exists (fun (item:item) ->
     String.length item.contents <> item.region.length) target.items then
@@ -209,7 +214,7 @@ def main():
             source, count = re.subn(r'feed_string preserved "SDE/0-preserved',
                                    'feed_string preserved "SDE/0-incorrect-preserved', source, count=1)
         assert count == 1, "nonce binding private negative-control anchor changed"
-        (source_dir / "semanticDelta.ml").write_text(source)
+        negative_source.write_text(source)
     compiled_sources = {"src/" + path.name: sha(path.read_bytes()) for path in source_dir.iterdir()
                         if path.is_file() and path.suffix in (".ml", ".mli", ".c")}
     compiler_version = subprocess.check_output([compiler, "-version"], text=True, env=environment).strip()
@@ -247,6 +252,7 @@ def main():
     if args.negative_control:
         assert result.returncode != 0, "corrupted production negative control unexpectedly passed"
         expected = ("response-nonce-zero: request proof binding mismatch" if args.negative_control == "nonce"
+                    else "invalid profile plugin entered" if args.negative_control == "profile-inspection"
                     else "hash-only target proof accepted without payload" if args.negative_control == "target-proof"
                     else "unregistrable NUL profile accepted" if args.negative_control == "profile-id"
                     else "multi: independently computed whole/region/preserved proof mismatch")

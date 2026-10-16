@@ -52,7 +52,10 @@ val observe : handle -> string list -> (observation, string) result option
 val validate_observation : observation -> (unit, string) result
 (** Check the same bounds/canonical unique ordering on a decoded peer statement. *)
 val inspect : ?max_payload:int -> (module S) -> SemanticFile.t -> (manifest, string) result
-(** Independently checks region bounds, canonical order and the total payload
-    declaration before the core copies or hashes editable packet contents. *)
+(** Rejects empty, over128-byte or NUL-containing profile names before invoking
+    the extension parser. Valid unregistered local modules may still be inspected;
+    registration/negotiation and write authority remain separate. Independently
+    checks region bounds, canonical order and the total payload declaration
+    before the core copies or hashes editable packet contents. *)
 val max_region : int
 val max_payload : int

@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+Localextension identity boundary corrected: FormatExtension.inspect rejects empty/
+NUL/>128B profile names BEFOREparserentry, samevalid_idpredicateastrustedhandle
+construction. This prevents directfirst-classmodules producingproofswith
+unregistrableidentifiers; validunregisteredmodules stillallowed/no registry
+sideeffect/profile/wireexpansion. [Stock/Ox conformance](tests/qualification/profile-inspection-identity-actual-20261016.json)
+127commands/2224assertions eachPASS;27moduleboundarycheckspercompiler andprivate
+predecessorguard-removalbuilds detectparserentry. Allvalidwiregoldens unchanged.
+Actual97863/66c3af/0/no session/groupreaped/tokensclosed. NoEXIO/camera/SDK/Photo;
+priorwholebuild/functionalIOreceipts staypinnedtotheirpredecessor core sources.
+
+
 ACTUAL [shared EXIO functional sync](tests/qualification/shared-sync-io-actual-20261016.json)
 PASS/CLOSED onceunderfreshRoot4fd3481d:79452/b5e982/0/no session,
 owner34236/worker34237reaped0/othersabsent; EXIO+CPU00..07closed. Independent

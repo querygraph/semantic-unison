@@ -285,3 +285,10 @@ basis/noop checks passed; all client/supervisor/server/pump and containing
 parent/group proofs audited, IO/CPU released. Worker artifact hash sets and32
 source pins matched. This is generated-fixture functional evidence, not camera,
 SDK, quiet throughput, hard resource bounds or physical topology qualification.
+
+[Local extension inspection identity checks](../tests/qualification/profile-inspection-identity-actual-20261016.json)
+now reject empty/NUL/over128B names before plugin parser entry, consistently with
+trusted registration and wire decoding. Stock/Ox127commands/2224assertions each,
+with predecessor guard-removal negatives detected. Current component conformance
+passed and resources closed; earlier whole-application/IO runs retain their exact
+older core source pins, not a silent current-build claim.
