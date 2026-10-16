@@ -89,3 +89,9 @@ complete receiving integration and independent parent audit. It deliberately
 makes no real SDK, camera eligibility, CPU utilization or throughput claim.
 A real multi-file single-thread SDK successor still requires separate source,
 budget and lifecycle qualification followed by explicit scheduling.
+
+[Fresh stock/Ox Dune builds and application selftests](../tests/qualification/validation-live-current-dune-actual-20261016.json)
+now cover the current production helper-observer/live-span changes. Both actual
+owners exited0, worker groups settled and Unison8 tokens closed; all pinned
+production source hashes match the checkout. This updates the older Dune scope
+without promoting build success into SDK concurrency or receiving evidence.
