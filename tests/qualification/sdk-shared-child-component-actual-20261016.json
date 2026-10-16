@@ -1,0 +1,60 @@
+{
+  "schema": "unison-sdk-shared-child-component/1",
+  "state": "COMPONENT_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "6f8a13",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child.py",
+      "bytes": 3667,
+      "sha256": "65f2f3bd8dbd21059cb1e09b419fdce2b327eef88f4d52d18986428ce93d05cc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child_test.py",
+      "bytes": 1512,
+      "sha256": "5e582783cd1b3694dd5f9de6cb085eec7a0e1a3cc5c845122c1268843bfd1dcc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-child-source-20261016b/SHARED-START.json",
+      "bytes": 1108,
+      "sha256": "fa5d270b7ce9e8f61fad41de8e02a78f0d2a27c2037de833c7bc776387b4fced"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-child-source-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "81150bd55306474e9841179592e6e49a5d091978dc4f34e8ecda4a89c445eaab"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-child-source-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-child-source-20261016b/SHARED-STDERR.txt",
+      "bytes": 101,
+      "sha256": "7af37a5850d582a23e74ab3e867ad36ad2bf43575f12b0646594244bfc0119d1"
+    }
+  ],
+  "scope": "3groups/3actual original Python children exit0/exit7/oversizedcapture. Actualgroupcensus before directwait4, repeatwaitECHILD, truncatedcaptureboundedanddrained. No SDK/Adobe/fixturepayload/EXglobal. Unknown/closefailure paths source-only not fault-qualified; not readyfornativegrant.",
+  "full_goal_complete": false
+}

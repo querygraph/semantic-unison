@@ -110,3 +110,15 @@ failed-prefix closure. All returned results retain false release authority.
 exercise five kernel groups and five result groups with inert callbacks/frames.
 No CLI/native entrypoint, deadline or real helper ownership is implemented here;
 a separately qualified owner must supply those before any native admission.
+
+`shared_child.invoke` is a direct-child component without CLI/admission or resource
+acquisition. It retains a separate group leader until terminal observation and
+other-member absence, then waits once and drains bounded output. Expired/unknown
+observation retains the owner and capture objects without signalling; capture
+finish failures preserve pre-close identity without numeric retry. It never
+claims aggregate/parent terminal or IO/CPU release authority.
+[Three component groups](../qualification/sdk-shared-child-component-actual-20261016.json)
+run three actual original Python helpers (normal, exit7, truncated output), not
+SDK code. Unknown/group/close-fault injection, inherited resource descriptors,
+exact artifact/input/admission binding and the real parent remain unqualified.
+No native runtime or SDK admission follows from this component.
