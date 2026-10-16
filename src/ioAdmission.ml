@@ -132,7 +132,10 @@ let acquire t cancellation devices =
       fail (Failed "filesystem I/O admission queue is full")
     else begin
       let ticket = {devices;reply=Lwt.wait ();waiting=true;unregister=(fun () -> ())} in
-      t.queue <- t.queue @ [ticket];
+      (* Allocate the queue cell, then register cancellation before publication.
+         A failed registration must not leave an unreachable ticket that can
+         later acquire credits. Immediate cancellation revokes [waiting]. *)
+      let queue = t.queue @ [ticket] in
       ticket.unregister <- HelperSupervisor.on_cancel cancellation (fun () ->
         if ticket.waiting then begin
           ticket.waiting <- false;
@@ -141,6 +144,7 @@ let acquire t cancellation devices =
           request_dispatch t;
           Lwt.wakeup ticket.reply false
         end);
+      if ticket.waiting then t.queue <- queue;
       ticket.reply
     end
 

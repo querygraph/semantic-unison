@@ -1,0 +1,140 @@
+{
+  "schema": "unison-io-registration-publication/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/ioAdmission.ml",
+      "bytes": 6588,
+      "sha256": "81b51ba70eaf868aca2280008b1692cc92054878916ce784c2ab31d572d3b1f9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/io_admission/registration_fault_test.py",
+      "bytes": 3959,
+      "sha256": "586109b83a2fc3767482c82ee2d0e2927e61ea4b3aef1df1a2a3cc5b691de0e3"
+    }
+  ],
+  "runs": [
+    {
+      "label": "before",
+      "actual_tool": 84369,
+      "terminal_chunk": "644f4a",
+      "exit_code": 2,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-registration-before-20261016a/RESULT.json",
+          "bytes": 1866,
+          "sha256": "f07395351e56c2af77f1724a158a4db666f74677c3d91c5a5ea0e20fcf655d60"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-before-20261016a/SHARED-START.json",
+          "bytes": 1264,
+          "sha256": "78c831fd89f91e91f051395d09d4cbfad221a429211055a01bb3d6a737b9f66d"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-before-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d2cc54ed28af4330696702c2799b6f1fd1251caf6018ff63c7ce749a83660076"
+        }
+      ]
+    },
+    {
+      "label": "final-stock",
+      "actual_tool": 44274,
+      "terminal_chunk": "a37828",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-registration-final-stock-20261016a/RESULT.json",
+          "bytes": 1865,
+          "sha256": "0c3eef0bc277eb8eafcedb11da04d3af43982c3b2d375708672273aff220c677"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-final-stock-20261016a/SHARED-START.json",
+          "bytes": 1269,
+          "sha256": "6e00cdc985ec0e53a998141cbb11db89040eb2fa7b5547ca9ae60e2bb0e6ea55"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-final-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ceede1489127f3bc44d41e56f2c9f7f95e640c96af865ded7faa855afa35b314"
+        }
+      ]
+    },
+    {
+      "label": "final-ox",
+      "actual_tool": 71679,
+      "terminal_chunk": "2480fe",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-registration-final-ox-20261016a/RESULT.json",
+          "bytes": 1866,
+          "sha256": "df3bf71db5629bf9771e73ea0ae54867d2bbe834bc38067d445ad09595f09e1a"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-final-ox-20261016a/SHARED-START.json",
+          "bytes": 1266,
+          "sha256": "e99aaa03ef200514d6c0f9c61103b7c46abce5ae11f088e59ca5abfe81ef79be"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-final-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d7e8fb4c5e2cd2d7854cb91fc557bf0ad9361911fbc7695a80f6a2c39ab390c7"
+        }
+      ]
+    },
+    {
+      "label": "suite-stock",
+      "actual_tool": 91587,
+      "terminal_chunk": "b36aa1",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-registration-suite-stock-20261016a/RESULT.json",
+          "bytes": 4979,
+          "sha256": "0d758506ceb86d4c1095b25d65878a7c6f220f3b9d92a4ac9632cb3237824a91"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-suite-stock-20261016a/SHARED-START.json",
+          "bytes": 1244,
+          "sha256": "a13e4a9bc42d02a27acbaa02c84e76cf19ebfa7e55e8a67ca911c88e6e3ae6ec"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-suite-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "9b74b35fcd9a012cbebcd1d8cf7c4d889b2ad5543d167b8df0cc061c5dcd820e"
+        }
+      ]
+    },
+    {
+      "label": "suite-ox",
+      "actual_tool": 64241,
+      "terminal_chunk": "e03254",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-registration-suite-ox-20261016a/RESULT.json",
+          "bytes": 4983,
+          "sha256": "c2381e25cdfaafb21ddd5c48d85d70a2a14afe5ae2be922bd1b749c91e3cf39f"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-suite-ox-20261016a/SHARED-START.json",
+          "bytes": 1242,
+          "sha256": "4054f963e2d86a7d4ec9ebccd408f4c228aa97c6a2b5bd6698aca07cd88e40f4"
+        },
+        {
+          "path": "/private/tmp/unison-io-registration-suite-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "a5f4edd974a4d82698f87172b02f7bc76e625da1eb42aec20d2a694c672a8618"
+        }
+      ]
+    }
+  ],
+  "scope": "prior source fails one injected observer-registration OOM; fixed stock/Ox pass OOM and immediate-cancel cases plus20-group IO suite/fairness negative; no SDK/Photo/camera/EXglobal/native resource-peak claim; full CLI build not repeated for this isolated ML change",
+  "full_goal_complete": false
+}

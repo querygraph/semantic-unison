@@ -47,3 +47,11 @@ actual memory exhaustion or claiming arbitrary asynchronous-exception safety.
 Six positive runtime scenarios pass 107 assertions per compiler. The runtime
 receipt pins production source, every linked object, binaries, logs and both
 private mutations; `runtime-qualification-20261013.json` combines both compilers.
+
+A separate [registration fault control](../qualification/io-registration-publication-actual-20261016.json)
+checks that cancellation observer registration completes before queue publication.
+One injected registration exception must leave no pending ticket or later debit;
+immediate cancellation during registration must not publish a revoked request.
+The earlier implementation fails the unreachable-ticket assertion. Run
+`registration_fault_test.py --compiler /absolute/ocamlopt --report /fresh/result.json`
+in the standing CPU lane; no physical IO lane or photo input is involved.
