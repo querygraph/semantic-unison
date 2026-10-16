@@ -80,3 +80,19 @@ passed exact command/server flags, one-use ordering and predispatch pin/deadline
 refusal. No real proxy/CLI, SDK, retained payload or EXglobal ran; the outer
 control group and Unison8 tokens closed. Actual fake-transport composition
 and independent complete parent audits remain next.
+
+`parent.py` joins the exact stock/Ox call order and four-slot argv to the
+one-shot invocation journal, separate raw proxy frames and independently
+audited two-candidate cases. Existing journal checks require actual client,
+supervisor, server and pump settlement. A server-not-created prefix requires
+the full pinned proxy pre-creation receipt plus no contradictory process/group/
+live SDK records or success summaries; null PID alone is insufficient.
+The future executor must authenticate/read those raw proxy files, retain exact
+source/tool pins, freshly verify received bytes and settle worker/FD ownership.
+This pure audit expressly authorizes no release by itself.
+
+[Four parent groups plus three result regressions](../qualification/sdk-multifile-parent-source-actual-20261016.json)
+passed exact journal/proxy/case composition and command/order/group/raw-proxy
+corruptions, explicit zero-call preparation and no-server proof controls.
+All frames and tiny bytes were original test fixtures; no CLI, SDK, retained
+payload or EXglobal ran. The control owner/group and Unison8 tokens closed.
