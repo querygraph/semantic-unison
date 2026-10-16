@@ -170,7 +170,15 @@ stock/Ox; refusal changesonlygate6144->512, zeroledger/FD baseline restored/no
 helperPIDledgers. Actual80121/609ad1/0/no session, children97688/97697/97745
 reaped0/groups absent/CPU8closed. Receipt `mixed-validation-memory-admission-actual-20261016.json`.
 Declaredcredits only, no actualGiBallocation/hardRSS/FD cap/nativeSDK/EXIO grant.
-Next: outer owned journal/strictplan/admission/inherited9FD boundary and actual
+**Journal worker checkpoint:** `tests/mixed_validation/worker.py` now persists
+INTENT before launch and raw OUTCOME before audit/input fences, stops successors
+after failure, checks deadline headroom before preparation and launch, and turns
+publication failure into retained ownership uncertainty. It owns no release
+authority. Eight actual callback/durable saved-outcome controls passed,
+child99285 reaped0/group absent/Unison8 closed, actual terminal28c503/0/no session.
+Receipt `mixed-validation-journal-actual-20261016.json`. Historical fake outcomes
+were re-audited, not executed again; no SDK/ExifTool/camera/EXglobal operation.
+Next: fresh original-process worker composition, strictplan/admission/inherited9FD boundary and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

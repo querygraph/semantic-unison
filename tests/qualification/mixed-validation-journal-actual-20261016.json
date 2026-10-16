@@ -1,0 +1,46 @@
+{
+  "scope": "Eight journal controls including durable historical-outcome re-audit; no new SDK/ExifTool/payload/EXIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/worker_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.007s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 99285,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "sources": [
+    {
+      "path": "tests/mixed_validation/worker.py",
+      "sha256": "b313d6cf6395148a0477992a856c3428d536a4d45b1634cc22246aca85137dbf"
+    },
+    {
+      "path": "tests/mixed_validation/worker_test.py",
+      "sha256": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb"
+    }
+  ],
+  "prior_seven_group_terminal": {
+    "chunk_id": "7b084f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "28c503",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

@@ -85,3 +85,22 @@ These are symbolic admission estimates, not GiB allocations, hard RSS/FD limits,
 SDK qualification or native runtime permission. Actual parent/worker inherited
 canonical9FD, immutable plan/admission, durable journal and unknown retention
 still precede the next real-tool scheduling request.
+
+## Callable journal worker
+
+`worker.py` runs exactly two caller-pinned probes serially. It persists a detached
+INTENT before invocation and the raw OUTCOME before auditing or checking input
+fences. A failed first probe prevents the successor; insufficient deadline
+headroom prevents preparation/launch. Publication errors become retained
+ownership uncertainty, and existing uncertainty carriers propagate unchanged.
+The worker never releases resource descriptors. Its callback contract requires
+the caller to provide pinned preparation, invocation, source and input checks.
+
+[Eight journal controls](../qualification/mixed-validation-journal-actual-20261016.json)
+cover ordering, detached snapshots, failed-prefix stops, missing outcomes,
+headroom, post-input failure and publication uncertainty. Durable RESULT writing
+and strict prefix audit also join historical qualified fake outcomes; those
+saved outcomes are not new helper executions. Actual test child99285 reaped0,
+group absent, Unison8 closed; owning terminal28c503/0/no session. No SDK,
+ExifTool, camera or EXglobal access. Fresh original-process composition and the
+native entrypoint/plan/admission/inherited9FD integration remain outstanding.
