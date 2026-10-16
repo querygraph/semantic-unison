@@ -73,7 +73,10 @@ built stock/Ox and passed22generated-input controls, with bounded read ranges
 and native owner epoch comparisons. It has no input path argument or full-file
 hash/decoder, never decides eligibility, and is not active in a DNG profile.
 The executable's own timestamp check is not a native-nanosecond fence; any
-camera-input executor/IO admission and exact owner epoch proof remain pending.
+camera-input runtime qualification remains pending. A
+[source-tested executor and exact one-clone request](private-dng-framing-input-request-v1.json)
+now provide the admission-only route, native epoch fences and binary reuse; no
+new camera bytes have been read and no IO admission exists for that request.
 
 ## Acceptance scope audit
 

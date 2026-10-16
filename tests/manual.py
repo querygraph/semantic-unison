@@ -32,6 +32,7 @@ Targets:
   shared-io-controls      pure physical-IO claim controls; no device or IO lock access
   dng-private-framing     serial stock/Ox fixed synthetic framing checks; no SDK/image reads
   dng-private-diagnostic  serial stock/Ox stdin diagnostic controls; generated inputs only
+  private-dng-framing-input  admitted bounded receiving-clone diagnostic; explicit FRAMING_PLAN and SHA required
   private-dng-local-clone  tiny synthetic local source-clone exact/no-op controls; no SDK/Photo
   interrupted-receipts    four fake-child interruption/receipt controls
   aggregate-lifecycle     four fake-worker aggregate ownership controls
@@ -90,7 +91,7 @@ def shared_resource_plan(target, environment):
     build = target in ('stock-build', 'ox-build')
     framing = target in ('dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
-    inspect_file = target == 'inspect-file'
+    inspect_file = target in ('inspect-file', 'private-dng-framing-input')
     endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector or framing else 0
     overhead = 2 if build or inspector or framing or inspect_file or endpoints else 1
@@ -100,7 +101,7 @@ def shared_resource_plan(target, environment):
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
-                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone')
+                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + inspector_workers + overhead,
             'inspector_workers': inspector_workers,
@@ -120,7 +121,7 @@ def command(target, output, environment):
         require(bool(io_path) and Path(io_path).is_absolute() and bool(io_sha)
                 and len(io_sha) == 64 and all(c in '0123456789abcdef' for c in io_sha)
                 and environment.get('SHARED_CPU_CREDITS') is not None
-                and target in ('inspect-file', 'private-dng-local-clone'),
+                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input'),
                 'IO mode requires pinned admission, shared CPU and complete-local-job target')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
@@ -129,7 +130,7 @@ def command(target, output, environment):
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
-                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone'),
+                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'private-dng-local-clone':
             require(shared >= 5, 'local clone controls require three worker plus two owner credits')
@@ -139,8 +140,17 @@ def command(target, output, environment):
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
         if target in ('inspect-stock', 'inspect-ox'):
             require(shared >= 3, 'inspector build needs one compiler plus two owner credits')
-        if target == 'inspect-file':
+        if target in ('inspect-file', 'private-dng-framing-input'):
             require(shared >= 3, 'inspector execution needs one worker plus two owner credits')
+    if target == 'private-dng-framing-input':
+        require(shared is not None and environment.get('SHARED_IO_ADMISSION'),
+                'camera-derived framing input requires explicit shared IO admission')
+        path = environment.get('FRAMING_PLAN', '')
+        digest = environment.get('FRAMING_PLAN_SHA256', '')
+        require(Path(path).is_absolute() and len(digest) == 64 and
+                all(c in '0123456789abcdef' for c in digest), 'exact absolute framing plan and SHA required')
+        return [sys.executable, str(ROOT / 'tools/private-dng-framing/admitted.py'),
+                '--plan', path, '--plan-sha256', digest]
     if target == 'private-dng-local-clone':
         return [sys.executable, str(ROOT / 'tests/private_dng_local_clone/run.py')]
     if target == 'dng-private-diagnostic':

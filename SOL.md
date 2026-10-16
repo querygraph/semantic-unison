@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Prepared [one-receiving-clone framing executor/request](doc/private-dng-framing-input-request-v1.json)
+SOURCEONLY/notadmitted/notdispatched. ParentEXIO→CPU00..07 exact11sourcepins,
+mandatoryadmission/noCPU-onlyroute, liveparent/argv+oneusestart binding. Worker
+reusespinnedstock/Oxdiagnostics, readsONLYfixedUnisonreceivingclone(readonly
+nofollow), native-nsFD/pathFIVE+mode/nlink/uidbeforeaftereach of2serial10schildren,
+max663116applicationreadbytes/no sourceSHA/copyfallback; actualprocessclosure
+required. [9worker+6admission+15fake lifecycle+entrymapping controls](tests/qualification/private-framing-admitted-source-controls-actual-20261016.json)
+ACTUALexit0/groupsreaped/Unison8closed; no camera/IOpool/SDK/Adobe/native
+diagnostic invoked. Ancestry/nativecopyidentity verified metadataonly, prior
+fullcloneSHA historical notfresh. Still no currentcamera semanticeligibility or
+profilewidening; exactpayloadIOrequiresRootseparatefreshadmission.
+
 [Private framing stdin diagnostic](tools/private-dng-framing/README.md) now has
 stock/Ox builds+22original inert CLI controls ACTUALPASS/CLOSED owner99760/
 17366/24e618/0, worker99761reaped0/groupabsent/CPU00..07closed. Sourcepinsstable;

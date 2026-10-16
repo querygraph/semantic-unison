@@ -33,6 +33,19 @@ with patch.object(Path, 'is_file', return_value=True):
     assert diagnostic == [sys.executable, str(manual.ROOT / 'tools/private-dng-framing/controls.py')]
     assert manual.shared_resource_plan('dng-private-diagnostic', env)['declared_peak_credits'] == 3
     assert manual.shared_resource_plan('dng-private-diagnostic', env)['compiler_jobs'] == 1
+    for incomplete in ({}, {'FRAMING_PLAN': '/fixed', 'FRAMING_PLAN_SHA256': '0'*64}):
+        try:
+            manual.command('private-dng-framing-input', out, dict(env, **incomplete))
+        except ValueError:
+            pass
+        else:
+            raise AssertionError('framing input admitted without IO grant')
+    framing_env = dict(env, FRAMING_PLAN='/fixed-plan', FRAMING_PLAN_SHA256='0'*64,
+                       SHARED_IO_ADMISSION='/fixed-admission', SHARED_IO_ADMISSION_SHA256='1'*64)
+    argv = manual.command('private-dng-framing-input', out, framing_env)
+    assert argv[1] == str(manual.ROOT/'tools/private-dng-framing/admitted.py')
+    assert argv[-4:] == ['--plan', '/fixed-plan', '--plan-sha256', '0'*64]
+    assert manual.shared_resource_plan('private-dng-framing-input', framing_env)['declared_peak_credits'] == 3
     reuse_env = dict(env, INSPECTOR_RECEIPT='/NEVER-EXECUTED receipt.json',
                      INSPECT_INPUT='/NEVER-READ input.dng')
     reuse = manual.command('inspect-file', out, reuse_env)

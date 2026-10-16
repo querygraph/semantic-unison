@@ -24,7 +24,7 @@ MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
            'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
-           'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-local-clone'}
+           'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'}
 
 
 def write(path, value):
@@ -36,7 +36,7 @@ def write(path, value):
 def checked_io_request(request, target, argv, output, credits):
     """Read admission metadata only; this does not acquire IO/CPU locks."""
     from shared_io_pool import GlobalPool, read_manifest, CANONICAL_MANIFEST, CANONICAL_SHA256
-    require(target in ('inspect-file', 'private-dng-local-clone'),
+    require(target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input'),
             'IO successor only supports complete local single-group jobs')
     require(isinstance(request, dict) and set(request) == {'path', 'sha256'},
             'explicit pinned IO admission required')
@@ -50,6 +50,9 @@ def checked_io_request(request, target, argv, output, credits):
     source_paths = {Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_io_pool.py',
                     ROOT / 'tests/shared_cpu_pool.py', ROOT / 'tests/shared_process_owner.py',
                     ROOT / 'bench/sync/ownership.py', Path(argv[1])}
+    if target == 'private-dng-framing-input':
+        source_paths.update({ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
+            ROOT / 'tools/private-dng-framing/inspect.ml', ROOT / 'tools/private-dng-framing/controls.py'})
     expected = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in source_paths}
     require(value['execution_source_sha256'] == expected, 'exact IO execution source set changed')
     return GlobalPool.read(CANONICAL_MANIFEST, CANONICAL_SHA256), value['start_deadline_unix']
@@ -66,6 +69,8 @@ def run(target, argv, output, credits, *, io_admission=None):
     script = Path(argv[1])
     require(script.is_absolute() and script.is_relative_to(ROOT) and script.is_file()
             and script.resolve() == script, 'shared target requires canonical repository script path')
+    require(target != 'private-dng-framing-input' or io_admission is not None,
+            'framing input has no CPU-only runtime route')
     require_ownership_support()
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]
@@ -114,6 +119,9 @@ def run(target, argv, output, credits, *, io_admission=None):
         if target == 'dng-private-diagnostic':
             sources.extend([ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
                             ROOT / 'tools/private-dng-framing/inspect.ml'])
+        if target == 'private-dng-framing-input':
+            sources.extend([ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
+                ROOT / 'tools/private-dng-framing/inspect.ml', ROOT / 'tools/private-dng-framing/controls.py'])
         if target == 'shared-io-controls':
             sources.append(ROOT / 'tests/shared_io_plan.py')
         pins = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()

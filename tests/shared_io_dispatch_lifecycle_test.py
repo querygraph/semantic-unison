@@ -83,7 +83,7 @@ class Lifecycle(unittest.TestCase):
         record()
         self.held_record = json.loads((self.output/'SHARED-OWNERSHIP-RETAINED.json').read_text())
         raise Retained()
-    def run_case(self):
+    def run_case(self, target='private-dng-local-clone'):
         class Pool:
             pass
         self.io_pool = Pool()
@@ -102,8 +102,13 @@ class Lifecycle(unittest.TestCase):
             stack.enter_context(patch.object(d,'OwnedGroup',side_effect=self.spawn))
             stack.enter_context(patch.object(d,'settle',side_effect=self.settle))
             stack.enter_context(patch.object(d,'retain_after_record',side_effect=self.retain))
-            return d.run('private-dng-local-clone',[sys.executable,str(Path(__file__).resolve())],
+            return d.run(target,[sys.executable,str(Path(__file__).resolve())],
                          self.output,8,io_admission={'path':'/never-read','sha256':'0'*64})
+
+    def test_framing_input_parent_resource_order(self):
+        self.assertEqual(self.run_case('private-dng-framing-input'),0)
+        self.assertEqual(self.events,['acquire:io','acquire:cpu','spawn','settle','close:cpu','close:io'])
+        self.assertEqual(set(self.passed_fds),set(self.io.fds+self.cpu.fds))
 
     def test_order_inheritance_and_settlement_before_reverse_close(self):
         self.assertEqual(self.run_case(),0)

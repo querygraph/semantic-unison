@@ -1,0 +1,141 @@
+{
+  "schema": "firstpair-private-framing-input-request/1",
+  "state": "SOURCE_READY_REQUESTED_NOT_ADMITTED_NOT_DISPATCHED",
+  "target": "private-dng-framing-input",
+  "workspace": "/private/tmp/unison-private-framing-input-4701bc8e",
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tools/private-dng-framing/admitted.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/private-dng-framing-input-plan-v1.json",
+    "--plan-sha256",
+    "2236f3563d9756e55837d772021dcba8920a4c53ff8bfb6547631b4c16ba68ae"
+  ],
+  "cpu_credits": 8,
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison/src/dngPrivateData.ml": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575",
+    "/Users/alexy/src/unison/src/dngPrivateData.mli": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89",
+    "/Users/alexy/src/unison/tests/manual.py": "cee55ed889daab70f7341078254e9a921dbc97abe47ab3d1dc474cb5c8aa201b",
+    "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+    "/Users/alexy/src/unison/tests/shared_dispatch.py": "da58675ed0dd1bb3730677328ca1d3c1ed261e532431c752846816015c1e1e50",
+    "/Users/alexy/src/unison/tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+    "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "/Users/alexy/src/unison/tools/private-dng-framing/admitted.py": "bf9177f93379637a8cd2d92ab6abb0cca58ddcbdde06dcec18df69c815f2b246",
+    "/Users/alexy/src/unison/tools/private-dng-framing/controls.py": "1292a41561b60ea2b1198b62a9b8b3e8612a752441d69bd2716d42358b9d87e5",
+    "/Users/alexy/src/unison/tools/private-dng-framing/inspect.ml": "2a7eb3fd289c4291b8e2843e3dee0a6b20c66515595f13a7355ba3f3853e9465"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-dng-framing-input-plan-v1.json",
+    "bytes": 1916,
+    "sha256": "2236f3563d9756e55837d772021dcba8920a4c53ff8bfb6547631b4c16ba68ae"
+  },
+  "admission_path": "/private/tmp/unison-private-framing-input-admission-v1.json",
+  "admission_fields": {
+    "state": "ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB",
+    "target": "private-dng-framing-input",
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison/tools/private-dng-framing/admitted.py",
+      "--plan",
+      "/Users/alexy/src/unison/doc/private-dng-framing-input-plan-v1.json",
+      "--plan-sha256",
+      "2236f3563d9756e55837d772021dcba8920a4c53ff8bfb6547631b4c16ba68ae"
+    ],
+    "workspace": "/private/tmp/unison-private-framing-input-4701bc8e",
+    "cpu_credits": 8,
+    "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+    "execution_source_sha256": {
+      "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+      "/Users/alexy/src/unison/src/dngPrivateData.ml": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575",
+      "/Users/alexy/src/unison/src/dngPrivateData.mli": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89",
+      "/Users/alexy/src/unison/tests/manual.py": "cee55ed889daab70f7341078254e9a921dbc97abe47ab3d1dc474cb5c8aa201b",
+      "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+      "/Users/alexy/src/unison/tests/shared_dispatch.py": "da58675ed0dd1bb3730677328ca1d3c1ed261e532431c752846816015c1e1e50",
+      "/Users/alexy/src/unison/tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+      "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+      "/Users/alexy/src/unison/tools/private-dng-framing/admitted.py": "bf9177f93379637a8cd2d92ab6abb0cca58ddcbdde06dcec18df69c815f2b246",
+      "/Users/alexy/src/unison/tools/private-dng-framing/controls.py": "1292a41561b60ea2b1198b62a9b8b3e8612a752441d69bd2716d42358b9d87e5",
+      "/Users/alexy/src/unison/tools/private-dng-framing/inspect.ml": "2a7eb3fd289c4291b8e2843e3dee0a6b20c66515595f13a7355ba3f3853e9465"
+    },
+    "start_deadline_unix": "ROOT_FRESH_START_DEADLINE_REQUIRED"
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/manual.py",
+    "private-dng-framing-input"
+  ],
+  "launch_environment": {
+    "SHARED_CPU_CREDITS": "8",
+    "OUTPUT_DIR": "/private/tmp/unison-private-framing-input-4701bc8e",
+    "SHARED_IO_ADMISSION": "/private/tmp/unison-private-framing-input-admission-v1.json",
+    "SHARED_IO_ADMISSION_SHA256": "ROOT_PUBLISHED_SHA_REQUIRED",
+    "FRAMING_PLAN": "/Users/alexy/src/unison/doc/private-dng-framing-input-plan-v1.json",
+    "FRAMING_PLAN_SHA256": "2236f3563d9756e55837d772021dcba8920a4c53ff8bfb6547631b4c16ba68ae"
+  },
+  "prerequisites": [
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-framing-admitted-source-controls-actual-20261016.json",
+      "bytes": 11058,
+      "sha256": "6518dad32001eb2f970a54cea6cbd39c8fba50f772b4085a05a0514887757671"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-framing-cli-controls-actual-20261016.json",
+      "bytes": 36518,
+      "sha256": "debdfe235de8c4426e5485f7e870c1ed40e36c78a8420c69258d018833f42422"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-dng-clone-inspection-actual-20261016.json",
+      "bytes": 13360,
+      "sha256": "d923bdf27824a9a834893fd6a857a1a5b239f4056511cdb090c65150ff6018c1"
+    }
+  ],
+  "source_metadata_only_preparation": {
+    "st_dev": 16777223,
+    "st_ino": 307228717,
+    "st_size": 193851848,
+    "st_mtime_ns": 1792099229810540469,
+    "st_ctime_ns": 1792113844382073309,
+    "st_mode": 33024,
+    "st_nlink": 1,
+    "st_uid": 501
+  },
+  "limits": {
+    "inputs": 1,
+    "diagnostics": 2,
+    "serial_diagnostic_seconds_each": 10,
+    "containing_worker_seconds": 60,
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "declared_peak_credits": 3,
+    "source_requested_read_bytes_each": 331558,
+    "source_requested_read_bytes_total": 663116,
+    "logical_ranges_each": 773,
+    "binary_hash_bytes_ceiling_each": 33554432,
+    "declared_total_logical_IO_budget_bytes": 134217728,
+    "native_stdout_bytes_each_postcheck": 262144,
+    "memory_note": "Trusted source bounds diagnostic output; capture is not an OS hard RSS limit. Source byte limits are instrumented diagnostic application requests, not physical/kernel IO.",
+    "preflight": "Parent metadata/source checks outside containing worker60s; no SDK/Adobe/UI/receiving/hash/clone fallback or new source copy"
+  },
+  "rights": "One bounded read-only diagnostic of the existing UNISON RECEIVING CLONE, not Photo retained copy or original. Untrusted TIFF pointers may direct bounded reads anywhere within this admitted clone; do not claim no input-payload reads. No image decoding/source hash/copy/chmod/xattr/rename/link/unlink/Main/cache/SDK/Adobe operation. Current native nanosecond identity checked descriptor/path before/after each child; only headers/numbers/decline reasons output, semantic eligibility alwaysfalse. Source-only metadata preparation; explicit fresh Root IO admission required; no replay/successor.",
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "bytes": 18749552,
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "ancestry_preparation_verified": {
+    "clone_identity_fields_match_prior_accepted_result": true,
+    "historical_full_clone_sha_matches_prior_accepted_result": true,
+    "current_preparation_payload_reads": 0,
+    "scope": "fresh lstat and receipt reads only; no current clone content hash inferred"
+  }
+}

@@ -8,6 +8,37 @@ import shared_io_pool as pool
 
 
 class Controls(unittest.TestCase):
+    def test_framing_input_never_has_cpu_only_route(self):
+        argv = ['/python', str(d.ROOT/'tools/private-dng-framing/admitted.py')]
+        with patch.object(d.Pool, 'read') as read:
+            with self.assertRaises(ValueError):
+                d.run('private-dng-framing-input', argv, Path('/none'), 8)
+            read.assert_not_called()
+
+    def test_framing_input_exact_source_superset(self):
+        argv = ['/python', str(d.ROOT/'tools/private-dng-framing/admitted.py'), '--plan', '/fixed']
+        base = {Path(d.__file__), d.ROOT/'tests/manual.py', d.ROOT/'tests/shared_io_pool.py',
+                d.ROOT/'tests/shared_cpu_pool.py', d.ROOT/'tests/shared_process_owner.py',
+                d.ROOT/'bench/sync/ownership.py', Path(argv[1])}
+        extra = {d.ROOT/p for p in ('src/dngPrivateData.ml', 'src/dngPrivateData.mli',
+                 'tools/private-dng-framing/inspect.ml', 'tools/private-dng-framing/controls.py')}
+        value = {'state':'ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB', 'target':'private-dng-framing-input',
+                 'command':argv, 'workspace':'/none', 'cpu_credits':8,
+                 'io_manifest_sha256':pool.CANONICAL_SHA256, 'start_deadline_unix':200,
+                 'execution_source_sha256': {str(p):hashlib.sha256(p.read_bytes()).hexdigest()
+                                            for p in base|extra}}
+        request = {'path':'/never-opened', 'sha256':'0'*64}
+        with patch.object(pool, 'read_manifest', return_value=value), \
+             patch.object(pool.GlobalPool, 'read', return_value='metadata-only') as read, \
+             patch.object(d.time, 'time', return_value=100):
+            self.assertEqual(d.checked_io_request(request, 'private-dng-framing-input', argv,
+                             Path('/none'), 8), ('metadata-only',200))
+            for path in extra:
+                saved = value['execution_source_sha256'].pop(str(path));read.reset_mock()
+                with self.assertRaises(ValueError):
+                    d.checked_io_request(request, 'private-dng-framing-input', argv, Path('/none'), 8)
+                read.assert_not_called();value['execution_source_sha256'][str(path)] = saved
+
     def test_no_io_admission_on_default_existing_path(self):
         # Default API stays CPU-only, never silently enables IO.
         import inspect
