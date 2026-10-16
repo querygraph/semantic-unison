@@ -1,0 +1,65 @@
+{
+  "schema": "unison-sdk-shared-kernel-source/1",
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "b948b6",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_kernel.py",
+      "bytes": 2491,
+      "sha256": "3b4bc4418e221f6bb871bcfda5ccc02dd22972fe54f8f7eeeac208b512a99534"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_kernel_test.py",
+      "bytes": 2565,
+      "sha256": "7ed576fcedd0c4614c634ee07e38d56253a8b8bbe4c40a62908b4f79e064a61a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_result.py",
+      "bytes": 2843,
+      "sha256": "da511a6b97b5c5e11f2bfe6c4f9d524841bfcc2215ee92e912ebe0cbcef72147"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_result_test.py",
+      "bytes": 3478,
+      "sha256": "c3dba98648a9c95043279b7256d6f23c37d923f37edcbab84b311d43e0074a83"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_plan.py",
+      "bytes": 1881,
+      "sha256": "3285912ce59a17393cd6281c18b622890bf9dc9ffe308f769174df169c989c33"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6685,
+      "sha256": "dec9c4b27c625d75addf7f89c4806e39eadf91c93b74b47b351c89253436d48b"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-kernel-source-20261016a/SHARED-START.json",
+      "bytes": 1110,
+      "sha256": "bdff187272e87f32d012d46a9a2fd3b674ce34d9482c7d1ddac65d544bd96675"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-kernel-source-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "29572f4ce6d0ae43c886e38e2cab42045bc8fb25b736fdfa7e63b0814123c561"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-kernel-source-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-kernel-source-20261016a/SHARED-STDERR.txt",
+      "bytes": 109,
+      "sha256": "58a520a024f15707222afe6575db8a3a9dbe7469c2c156ae0f9979903d48645a"
+    }
+  ],
+  "scope": "5injected call-kernel groups+5existing result groups; intent before call/outcome before audit/firstfailure stop/oneuse/no-outcome or result-persistence uncertainty retains. No actual SDK/helper/receiving/payload/EXIO. Outer actual group+tokensclosed; no runtime entrypoint or resource-release authority.",
+  "full_goal_complete": false
+}

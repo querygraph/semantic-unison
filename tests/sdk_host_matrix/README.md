@@ -99,3 +99,14 @@ parent-terminal, OS-thread scaling, RSS and pixel proof flags remain false.
 use inert frames, not real SDK lifecycles. A future executor must bind these
 frames to its actual journal/pins and separately own the aggregate and all IO/CPU
 FD copies; this functional auditor cannot substitute for that work.
+
+`shared_kernel.Kernel` is an inert, one-use composition around an injected
+`invoke` callback and persistence sink. It reuses the invocation journal, saves
+intent before calling and outcome before functional audit, and stops at the
+first failed call. A possible call with no returned outcome, or failure to
+persist a returned outcome, raises retained ownership rather than ordinary
+failed-prefix closure. All returned results retain false release authority.
+[Ten source controls](../qualification/sdk-shared-kernel-source-actual-20261016.json)
+exercise five kernel groups and five result groups with inert callbacks/frames.
+No CLI/native entrypoint, deadline or real helper ownership is implemented here;
+a separately qualified owner must supply those before any native admission.

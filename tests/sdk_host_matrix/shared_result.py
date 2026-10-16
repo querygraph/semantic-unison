@@ -2,9 +2,11 @@
 from plan import receipt,telemetry,require
 from shared_plan import shared_matrix
 
-def audit(reference,experimental,fixtures,memory_bytes,rows):
+def audit(reference,experimental,fixtures,memory_bytes,rows,*,require_complete=True):
     proposal=shared_matrix(reference,experimental,fixtures,memory_bytes)
-    require(type(rows) is list and len(rows)==12,'exact twelve returned calls required')
+    require(type(require_complete) is bool,'typed audit scope required')
+    require(type(rows) is list and (len(rows)==12 if require_complete else 1<=len(rows)<=12),
+            'bounded ordered returned calls required')
     references={};results=[];pids=set()
     for index,(case,row) in enumerate(zip(proposal['cases'],rows),1):
         require(type(row) is dict and set(row)=={'index','command','outcome'}
@@ -29,7 +31,8 @@ def audit(reference,experimental,fixtures,memory_bytes,rows):
         observed=telemetry(out['stderr'],case,memory_bytes) if case['backend']=='experimental' else None
         results.append(dict(index=index,codec=case['codec'],backend=case['backend'],
                             requested_threads=case['threads_including_caller'],receipt=value,observations=observed))
-    return dict(functional_results=results,calls=12,experimental_calls=9,
+    return dict(functional_results=results,calls=len(rows),experimental_calls=sum(r['backend']=='experimental' for r in results),
+        full_matrix_complete=len(rows)==12,
         aggregate_group_settlement_proved=False,parent_terminal_proved=False,
         io_cpu_fd_closure_proved=False,resource_release_authorized=False,
         os_thread_scaling_proved=False,hard_rss_cap_proved=False,pixel_equivalence_proved=False,
