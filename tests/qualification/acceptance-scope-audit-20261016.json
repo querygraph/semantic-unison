@@ -73,7 +73,7 @@
       "number": 4,
       "requirement": "Integrity",
       "status": "PARTIALLY_QUALIFIED",
-      "documented_subset": "Full/complement identities and corrupt wire proofs; generated SDK raw-digest controls and exact production receiving/merge pilots.",
+      "documented_subset": "Full/complement identities and corrupt wire proofs; generated SDK raw-digest controls and exact production receiving/merge pilots. One retained real-camera candidate received and SDK-validated by stock and Ox, raw digest valid; all owners closed.",
       "open_scope": "Real-camera SDK corpus, decoded pixel/encoding distinctions and universal Adobe validation are not inferred. Preview fidelity is Photo-owned evidence, not semantic-DNG integrity proof.",
       "supporting_receipts": [
         {
@@ -85,6 +85,11 @@
           "path": "tests/qualification/sdk-live-merge-v1-actual-return-20261015.json",
           "bytes": 24219,
           "sha256": "746ef5e5457604e2342ad5b061174137678c0e1955f63ff1056e6758a2ac6cb3"
+        },
+        {
+          "path": "tests/qualification/camera-sdk-receiving-v2-actual-20261016.json",
+          "bytes": 2926,
+          "sha256": "4e87f785f8b4706c905434909f57801b28c6c40edf8ee212eed25a5add093862"
         }
       ]
     },
@@ -285,7 +290,7 @@
       "number": 12,
       "requirement": "Adobe invocation and CPU accounting",
       "status": "PARTIALLY_QUALIFIED",
-      "documented_subset": "Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting.",
+      "documented_subset": "Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting. One retained real-camera candidate received and SDK-validated by stock and Ox, raw digest valid; all owners closed.",
       "open_scope": "No all-scanned validation feature, representative camera corpus, experimental SDK OS-thread/scaling/RSS/cancellation qualification or full mixed ExifTool/hash/Adobe workload proof. Each new SDK slot remains separately coordinated.",
       "supporting_receipts": [
         {
@@ -312,6 +317,11 @@
           "path": "tests/qualification/shared-functional-actual-20261016.json",
           "bytes": 4677,
           "sha256": "a22d74e7587ba12f59919c3aac18d694c7149e2b9e75a2f0238895ba99ee4d5d"
+        },
+        {
+          "path": "tests/qualification/camera-sdk-receiving-v2-actual-20261016.json",
+          "bytes": 2926,
+          "sha256": "4e87f785f8b4706c905434909f57801b28c6c40edf8ee212eed25a5add093862"
         }
       ]
     }

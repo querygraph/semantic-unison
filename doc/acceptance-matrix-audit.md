@@ -21,6 +21,16 @@ This improves exact receiving evidence, while real-camera semantic eligibility,
 private-reference closure, SDK/photographic validity and broader corpus remain
 open. V4 is consumed once; no automatic successor or payload access follows.
 
+The [camera SDK V2 receiving control](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json)
+now adds two full receiving seeds on native clones of that retained camera copy,
+one each for stock and Ox. Each actual receiver invoked the qualified single-thread
+SDK driver once: structure valid, decode success, raw digest valid, zero errors
+and warnings, bound to the exact candidate SHA/size. Actual owner66811/65a573/0,
+all CLI/server/helper groups and worker settled; IO/CPU closed. This adds a real
+camera sample to requirement4; it does not prove semantic profile eligibility,
+pixel equivalence, representative corpus coverage or hard resource caps. V1's
+pre-helper budget failure and independent recovery remain preserved separately.
+
 | Requirement | Existing scoped evidence | Still open |
 | --- | --- | --- |
 | 1. Exactness | Independent SDE/SDR vectors, complement/full hashes, scoped synthetic materialization, exact CLI/no-op controls. [conformance](../tests/semantic/conformance/qualification-20261013.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Full source-selected fork/property state across all supported filesystem and publication families is not established by kernel vectors. |
