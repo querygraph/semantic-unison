@@ -83,8 +83,11 @@ let dispatch t =
     t.pending <- t.pending - 1;
     reserve t ticket.cost;
     unregister ticket;
-    Lwt.wakeup_from ticket.reply ticket.granted;
-    drain () in
+    (* A reply observer can throw after the grant is already published. Keep
+       draining ready owners before propagating that first exception; otherwise
+       an unrelated waiter can remain asleep with free capacity and no pump. *)
+    (try Lwt.wakeup_from ticket.reply ticket.granted; drain ()
+     with error -> (try drain () with _ -> ()); raise error) in
   (* wakeup_from may execute owner continuations synchronously. Reentrant
      retirement/cancellation updates the queues observed by the next drain. *)
   if not t.pumping then begin

@@ -65,3 +65,10 @@ settlements were independently reparsed; worker reaped0 and IO/CPU closed. This
 supersedes the pending scheduling statements above, while preserving V1's failure.
 It proves one copied camera candidate per compiler, not semantic eligibility,
 pixel equivalence, corpus coverage, hard RSS limits or a new runtime admission.
+
+A subsequent admission review found a ready-sibling progress bug: a throwing
+queued-grant reply observer could stop the deferred pump after its own grant
+was published. The dispatcher now drains other ready owners before propagating
+the first exception. A new finite fault control fails on the prior source and
+passes with the fix on stock and Ox; this is owner-loop accounting evidence,
+not native descriptor/RSS or universal asynchronous-fault qualification.

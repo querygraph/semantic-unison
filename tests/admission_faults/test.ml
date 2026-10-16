@@ -59,6 +59,23 @@ let () =
     let rejected = try Lwt.wakeup_from failed completed; false with Invalid_argument _ -> true in
     let unchanged = try ignore (Lwt.poll failed); false with e -> e==marker in
     check (rejected && unchanged) "failed destination was replaced");
+  test "throwing-grant-observer-drains-ready-sibling" (fun () ->
+    let t = A.create ~source_headroom:None ~max_transactions:2
+      ~max_payload_bytes:20 ~max_descriptors:48 ~max_pending:4 in
+    let first = held t and second = held t in
+    let third = owner t and fourth = owner t in
+    let waiting = acquire third and sibling = acquire fourth in
+    let marker = Failure "private throwing grant observer" and called = ref 0 in
+    Lwt.test_raw_observer waiting (fun () -> incr called; raise marker);
+    A.retire first; A.retire second;
+    let caught = try drive (); None with error -> Some error in
+    check (match caught with Some error -> error == marker | None -> false)
+      "grant observer exception was lost or replaced";
+    check (!called=1 && Lwt.poll waiting=Some true && A.is_held third)
+      "throwing observer revoked or replayed its granted owner";
+    check (Lwt.poll sibling=Some true && A.is_held fourth)
+      "throwing grant observer stranded a ready sibling";
+    A.retire third; A.retire fourth; drive (); settled t);
   test "grant-unregister-oom" (fun () ->
     let t = gate () in let first = held t and second = owner t in
     let waiting = acquire second in usage t ~transactions:1 ~pending:1;
