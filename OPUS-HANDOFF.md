@@ -208,7 +208,17 @@ child1003 reaped0/group absent/CPU8 closed; actualbf3840/0/no session. Receipt
 `mixed-validation-artifacts-actual-20261016.json` preserves initial import
 failure60cbd8/1 closed before controls. No SDK/ExifTool/Photo/camera/EXglobal use.
 Preparation is callable only: no admission authority or lock acquisition.
-Next: native admission/inherited9FD boundary and actual
+**Mixed inherited metadata boundary implemented:** `boundary.py` derives exact
+intended execute.py worker argv and binds plan path/SHA/interpreter/workspace to
+parent START/PIDs and the existing canonical9FD guard's explicit mixed target.
+Shared guard now rejects bool token indexes. Four new injected boundary groups
+plus five existing guard groups passed, actual children1380/1383 reaped0/groups
+absent/CPU8 closed; terminalc976ae/0/no session. Receipt
+`mixed-validation-boundary-actual-20261016.json`. Canonical manifests read only;
+no IO locks/SDK/payload/native launch. This is metadata binding, not lock proof,
+START authentication or settlement. Intended execute.py is not implemented yet;
+actual inherited lifecycle and dispatcher qualification remain outstanding.
+Next: native entrypoint/admission/actual inherited9FD lifecycle and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

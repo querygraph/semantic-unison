@@ -161,3 +161,21 @@ absent/Unison8 closed; owning terminalbf3840/0/no session. Initial import failur
 Photo/camera data or canonical EXglobal operation. These callable preparation
 functions still require the native entrypoint's verified admission and held IO;
 they do not acquire resources or authorize execution themselves.
+
+## Launch and inherited descriptor boundary
+
+`boundary.py` derives the intended entrypoint argv from the exact plan path/SHA,
+interpreter and workspace and binds it to the actual parent START command/PIDs.
+It explicitly selects the mixed target in the existing canonical9FD guard.
+That guard checks ordered Unison00..07 plus EXglobal inode observations and
+rejects missing, aliased or changed descriptors. Token indexes now require exact
+integers, so bools cannot alias numeric indexes. It does not acquire locks,
+authenticate the START writer, verify plan/interpreter bytes, or settle children.
+The named execute.py path is the next entrypoint to implement, not runnable yet.
+
+[Four boundary and five existing guard groups](../qualification/mixed-validation-boundary-actual-20261016.json)
+passed: injected fstat metadata plus real canonical-manifest metadata reads,
+actual children1380/1383 reaped0/groups absent/Unison8 closed; owning terminal
+c976ae/0/no session. No canonical IO lock, SDK, payload or native launch occurred.
+Actual inherited-description lifecycle and dispatcher admission integration
+remain outstanding; source acceptance is not native runtime qualification.
