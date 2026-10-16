@@ -21,3 +21,10 @@ exact production collector prefix on stock/Ox and tests bounds, PID/time/child
 binding and invalid summaries. It does not run the receiving companion. Full
 CLI builds check integration separately; actual trace emission/parsing and
 fake-helper receiving controls precede any real SDK concurrency request.
+
+The [strict record parser controls](../qualification/validation-live-record-controls-actual-20261016.json)
+add11 finite groups for malformed/excessive records, typed PID/digest/size/endpoint
+binding, invalid/insufficient spans, exponent limits and conservative conversion
+to nanosecond bounds. `live_records.bound` contracts both ends by representation
+margin and inward integer rounding. It never proves settlement or SDK activity.
+Synthetic protocol records do not establish actual receiving emission.
