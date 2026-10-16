@@ -1,0 +1,432 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_throughput/lifecycle.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-st-wire-c2_vpfdl\", \"rows\": 24, \"actual_original_helpers\": 48, \"actual_launchers\": 24, \"sdk_calls\": 0, \"retained_payload_reads\": 0}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 55211,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/sdk_throughput/audit.py": "70a751122906e10bd65ad3de54e6ef71209f31c7848327cb4fdd5bbcc8a25675",
+    "tests/sdk_throughput/audit_test.py": "fc3329eaf647f049d8854dcf17122309cc32b14bf61987613284bcab2c6738a2",
+    "tests/sdk_throughput/lifecycle.py": "bb2e4864df952a7d2e57f1da843117245ab9c76924c29cdb2c1d1dc949a03e24",
+    "tests/sdk_throughput/plan.py": "9e65ea8d69cb5f3aeb47e6b02ede969dd1f5e4c6c54c1f7ded11bfdc801e5515",
+    "tests/sdk_throughput/plan_test.py": "9d0bd92728b616da3d6bd36d69e9072c73e32989756af72c45e9aa9b3be31b84",
+    "tests/sdk_throughput/transport.py": "e16d43a8b30ce5a15a25eb7835d71a1c98875abd33434d9b6d6431f6b0733708",
+    "tests/sdk_throughput/transport_test.py": "a37c36967a34b039975cd638a808e6bf6c565f7e6bd03a8c9961e45a6968ac3f",
+    "tests/sdk_throughput/worker.py": "56dc3e423916e222fff1db31300c959fa2742e9a851a717f81442c93b3f9358f",
+    "tests/sdk_throughput/worker_test.py": "e37f802b710c12cc54bf6c7d04d00e0e7143ac918b1dc69755400c6dc09a134a"
+  },
+  "scope": "Actual full24row original-fake loopback lifecycle; zero SDK/retained payload/canonical IO or benchmark qualification.",
+  "owner_tool_terminal": {
+    "session_id": 59736,
+    "initial_chunk": "dad7d9",
+    "terminal_chunk": "b5f148",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Actual owning write_stdin terminal."
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/RESULT.json",
+      "bytes": 564885,
+      "sha256": "befa65904fdb1f85a4bf59adb8611d10386e419b7e63e00d9c3bf86e94ca819d"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/CONTROL-RESULT.json",
+      "bytes": 108377,
+      "sha256": "92d1d6b2eea9f4b2e3ac60f5408c712bf0789ccedeea0fc9ac45fdee7d7345b8"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/CONTROL-PLAN.json",
+      "bytes": 1394,
+      "sha256": "9d68d31840df7ff06ac57cfad4cf7a0a7b5af2ecb8693025c5bf1b5f1182b5e3"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/original-endpoint",
+      "bytes": 2848,
+      "sha256": "ccddcaf9f3520d56e48b39335b3616173cdcda978b0a6aea60d9d71a70cea39a"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/never-executed-sdk",
+      "bytes": 48,
+      "sha256": "1ef84d8b79a55be997567d675a79a510cec8d623186c070cf4f84e2ed5097d50"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w1/seed-proxy.json",
+      "bytes": 1535,
+      "sha256": "fb088215267ce0a5d16eb0ba9cc46fd17149ef0aac231bb6498ca70cc94dda81"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "a9ac336911a3d23a8d01b5c6499ab2948ca2ff5ec169b41683f88ad33ff4263c"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "443df28834c951f71a98c6330471eaddf365645c760ae534295a4fe7749f4278"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w1/seed-proxy.json",
+      "bytes": 1536,
+      "sha256": "c7e8c9433ab68a6fbb75e145695f104b71c5100925161f06fcd3441fceda3ad7"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "ff1c985a4d64f9b3b42002416f7ec3bcde0b46f4892cb1d0f4b1fc299c2ed611"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "4099f6c22c5ca5426c2411b88aae005c4ee67275d1a8e9246cffc4dd49100bf5"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w3/seed-proxy.json",
+      "bytes": 1548,
+      "sha256": "c87be412dcf63e0d819cc93ce6b5f64b50d4b028ed3ff6adf6917bd4701feb95"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "8582dc4e2590afd8988523d60b44dcb16203518739e031efb00f7063706a77a9"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "b3412623b40f0f15fc2dbc08ab15a77544c1f168fa14329b36e6788555069afa"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w3/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "29a605848c0eb70f409d94df49309bd1fb138072c31b605d52e7eafcbdccfe96"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "9414fb97ee02599fc3061e9ad7a9bfa2460806973ea51f3e56c961312e0c598c"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r0/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "59da530905902ad97ed42f25935559e46eb5e3f9a77fda753b7352e671f02afe"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w1/seed-proxy.json",
+      "bytes": 1536,
+      "sha256": "f5815ec0bf4075563b2349f12db6eef14ef350de6229055cfd19a68eaee8b875"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "0faed50c147ceba8b32fa47b82a193876eaf1a4f1a90148f52abd9c42ac90ae0"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "487542b3a261c054cf40f4d3c32bf2e521135805f286a855c896f274e90cf839"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w3/seed-proxy.json",
+      "bytes": 1546,
+      "sha256": "0e6212da1b62676ff8d27254eb11a7ebde40b6311ea176b5206653885c4bed59"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "cd896208531d2822957475585fcd2f454a4e1832285f2d4e62dbddcbe593b010"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "05c606c0433eff3e3c540d1518c36198264c48ff9fb735d47cd01faa5b833b2d"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w3/seed-proxy.json",
+      "bytes": 1535,
+      "sha256": "7dcacdd973a9220cad4528c4cfbbd2772105a132493d0a4c8f0657ae65f18d12"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "580f28605c7f58019444c8e4cb64188a45c2cbc04e7c29e2eaf9c736415f5968"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "204ffe2ff078c5fc69a61ceb748775000378e7bc5e273d722be2f392e2fb6a9f"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w1/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "7474a3ffeae95f1bbbda02121bb354b4643cb051a38207f9b5e14c2d37da8dc4"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "da37dade0b7003635838600eab5b5fce1da702b8a672b6d950edb86dbb2f544e"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r1/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "1517d5a3e93febbeaa63b57521cdec22a98627de9f50a1f4f3fd2d15437df628"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w3/seed-proxy.json",
+      "bytes": 1557,
+      "sha256": "020855741502f2f90fd46152fbb0c51a05a7753bed12e6449807fbab58bce2ed"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "f6afdfe2437f88befc96f2d689b6b88492e62256cf3616f919b4ba318df3c329"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "547ea08d52d1dcd001d46235ba875429bb640b370c752d448ff8c9aee1e75b56"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w3/seed-proxy.json",
+      "bytes": 1536,
+      "sha256": "628a1df8db478cb3002de9c2c98f4987975a25c05d23cace48de3d63a67cd95e"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "2f3a7aa5c0eca68a2e5b408562afcbb4522748f68344754c5ce346ca8473e432"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "7d0408ec3a17b6a2f985d760b0b1370080ec0424833276b54ec595004472a4d2"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w1/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "4830a15a0dd00cddc85d28a5ff6ea1c8169a55c386fd75596f259e9dd4c96208"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "7e8ae8a26e682a0bb1a74619e06f5c425c2972b1fdd2e92dec969476d64f0781"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "4d63ceb3513e3c9ba59dee68b1a59fd3df9e0f4e86f964603b82366570a34663"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w1/seed-proxy.json",
+      "bytes": 1536,
+      "sha256": "9b182ee1df2475babc5b80bd878654939ed57322b89e27a9349ee2112e5ddaa7"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "230bad8a4af40e1e26b8ae12f8d905cb1c76fc1869667c97b50d153090d52a27"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r2/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "9831aa38d02882f2960108bab0d4acd0b3e66ea5d7b13bb2024ae8681be22a82"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w3/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "7006ca07d49e3bf29ee8ea15ba30c910207eeea68ec4f3ab1792a09489aa4d9d"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "098133df020161844e7c45a419c4a71d7c066c5a36447f67e91dc364b5a1d62c"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "4c19a32d3cdba1af3b79698232b9af2256050c6f86045eb69a30edc444fc30c6"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w1/seed-proxy.json",
+      "bytes": 1546,
+      "sha256": "7bdb961e695bee3561e5b713a7f34a8ea9711c25c4467bf25dfe671c12dab381"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "1eead9a7700343593a1b47fb6f987ece3adce05f7113af416011755c53634474"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "da2cb61f7a995ce2c84936de63a53525345fb05d8cb61b116b67fc152ac83093"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w1/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "7bbacc028ee41e41a106228838c1326a975835fd28ef93fcd4e0181146fddb11"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "f7077c139a16b4ba49826bf557af8d8fc39ba6f713493f0d4c030f9c682ed2a2"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "ce219acf624b1f7e97661a7f45727c899ec3591bdb56cc3656e0c9aa10d8be0d"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w3/seed-proxy.json",
+      "bytes": 1536,
+      "sha256": "f141d80670af121a0d06ef348e05b9f478a6311739b9f237a3a212df1d20cab7"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "72172185d17a08ffd6fd99a42f2e5913414c5f63e1f2ce7a95e2ab22c1c41ed2"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r3/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "254159ce1d020acc9951c389ed77ab782cdb8eadc196957fb393a4ac1c235661"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w1/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "ae08c215c3245f00c68e3c534917458cbb6a6bb3440d6cab2222a5ae84e79559"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "7011b67a49f5693b0f514b7d31c2be5498c7c664b2e59c9ecfa20acecf316cec"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "24302a76da194e0b02565157c05a7e183a41f17066e2cef8deb7f10356ed6124"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w1/seed-proxy.json",
+      "bytes": 1547,
+      "sha256": "89911dee6bda705723f8b7645985a0f4011fbcd4e0cae7a1a7753fe86251f016"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "081211c47b78065b1a1cfc2439152c0fbbf6078232ed6831b3cef4f2b52ec76c"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "06d93cf2450a7d1c4a6f505d5ed353ed4ef74f8ad6f85520edea9c1d60c47ff7"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w3/seed-proxy.json",
+      "bytes": 1535,
+      "sha256": "398d231d7a58d5b1cf251fda2e475543147169adb7bf8cfc236ff8fc3d38b21a"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "19fac65a5e040973c96bdfa7bb7c111bf2484ce7f6b782914944ff71ae35fd89"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "c1267444dacc75b2184281f7e9ba5c8ed024c336a93463cc066338877cebc57f"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w3/seed-proxy.json",
+      "bytes": 1537,
+      "sha256": "91c9a7712b914aabd0d394d23d6ff90cbd28b6f60900630c57181b12e04cbe98"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "3521021e4c413cc04910f004efd1acd181597971b16ab52952a59713b29068e8"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r4/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "5a417d8136c67607e4eab92870fa31700c8eb191d9354df78a7c540a1dc4f4be"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w1/seed-proxy.json",
+      "bytes": 1548,
+      "sha256": "e5c738cfebfdd840ce34294710fa990df395d0f842c19474f8a333525fa8f7dd"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "c9cbdc3d4fd8cf3d5cfaa032ea4d6426994336cfdeab42dec0314988b757ea93"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "9a05b1133a9fe16eafb87e92873b6b7e1e183707ac7cfbd9095d3e56a1bae693"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w3/seed-proxy.json",
+      "bytes": 1546,
+      "sha256": "b634b7bb72bf3ab2d96f169054d054cb54e4e346b865dcabbedd70455e7ed146"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "c8157b3d0cab318831e76bd26ad19c1a2c6ed72c7683e833001e5d472f68902c"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "fca3edd55af620f34a4b5c758887c3627749c810269ed9035d1fedc65d22183d"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w3/seed-proxy.json",
+      "bytes": 1535,
+      "sha256": "3633baac1278c416a107f2263e4d12ca5b096b2f0e59f38b0442daed2b203c48"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w3/ORIGINAL-HELPERS.json",
+      "bytes": 1629,
+      "sha256": "16303bb4a92e22f227bc094e6f5271212b5fb75582e8fc854a4ccbbfcafc32f6"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/ox-w3/ORIGINAL-LAUNCHER.json",
+      "bytes": 2488,
+      "sha256": "994064b9a343dac7ffd061b6afcc1db0188e4c95a7e6934d639b1d58187bce98"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w1/seed-proxy.json",
+      "bytes": 1546,
+      "sha256": "00b6ff2665ccc7814b2043a8369d6a2089ea8c1b914888c58fc44da795465be7"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w1/ORIGINAL-HELPERS.json",
+      "bytes": 1635,
+      "sha256": "d8a1a75ab8598fd8c1bc10077d67597b967d45a205fae4325ab277753be01a99"
+    },
+    {
+      "path": "/private/tmp/u-st-wire-c2_vpfdl/r5/stock-w1/ORIGINAL-LAUNCHER.json",
+      "bytes": 2491,
+      "sha256": "b82c379e38e9f07ffb17144b462338e3958ff5f4bb2ab02b6e78f4cb722aa81a"
+    }
+  ]
+}

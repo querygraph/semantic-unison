@@ -66,3 +66,16 @@ attempt's missing borrowed-module import failed before controls and is preserved
 separately, with its group/CPU closure. No real CLI/SDK/retained input ran.
 The worker is callable only; actual fake lifecycle, admitted entry/dispatcher,
 strict source/input/build pins and new runtime admission remain outstanding.
+
+The [full24-row original-fake lifecycle](../qualification/sdk-throughput-fake-lifecycle-actual-20261016.json)
+now PASSED/CLOSED: actual owner59736/b5f148/exit0/no session, containing child
+55211 reaped0/group absent and outer Unison8 closed. The unchanged worker and
+Invoker executed24 actual fake clients,24 fake servers,24 launcher children and
+48 Python hash helpers through copied proxy/launcher scripts. Every helper and
+launcher has an actual direct-wait/group receipt; raw proxies and the independent
+case/prefix auditor bind client/server/supervisor/pump settlements for all rows.
+All tiny left/right outputs were rehashed after execution.77 control/artifact
+pins preserve the raw evidence. No SDK, retained generated inputs, canonical IO
+or native cloning ran. These timings are control-process timings only. This
+closes the full fake transport lifecycle step, not admitted dispatcher ownership
+or SDK throughput qualification.

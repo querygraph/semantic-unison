@@ -252,3 +252,11 @@ an honest failed prefix. Three tiny-file/model-transport groups passed9e473b/0,
 Unison8 closed; prior12d9ec/1 import failure preserved/pre-control/closed.
 Zero actual CLI/SDK/retained payload/IO. Next actual original-fake lifecycle and
 fresh admitted entry/dispatcher integration; no automatic runtime successor.
+
+Actual comparison fake lifecycle is now PASSED/CLOSED59736/b5f148/0:
+24 real original-fake clients+servers,24 launchers,48 Python hash helpers,
+all raw direct/group/pump receipts and tiny output hashes independently checked.
+The unchanged24-row worker and per-row1/3 adapter compose through real loopback
+transport; CPU8 closed. Zero SDK/retained payload/canonicalIO/nativeclone;
+control timings are not benchmark data. Next exact-admitted dispatcher/entry
+binding and actual FD boundary, then freeze a distinct runtime source request.
