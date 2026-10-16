@@ -930,6 +930,18 @@ exact identity and actual terminal, not by repeating them.
 
 ## Fork merge checkpoint
 
+**Current follow-up review:** draft PR2
+https://github.com/querygraph/unison/pull/2 opened after actual mixed qualification
+and independent Root adoption. Base is **querygraph/unison:master**, observed
+4a620ea0160d4ac021c02c8246a3bb41db8acda3; initial PR2 head
+a0e0e961cec47f1072aeae12fe90e81ba66f1de9, draft state independently read back.
+Only production delta since that base is supervisedExternal.ml's opt-in helper
+diagnostics; large remainder is tests/owner harnesses/receipts/reports/docs.
+PR1 remains merged history. PR2 is not merged or submitted upstream, and is not
+full-goal acceptance. Native mixed admission is already consumed/closed, not a
+review prerequisite to rerun. Follow-up work must preserve supported corpus,
+platform/failure/compatibility and resource/benchmark open scopes above.
+
 User explicitly requested merging PR #1 during the handoff turn. Completed:
 
 - Handoff/review-navigation commit `4af7931c041e7592fc178b78fc190923899c995c` pushed.
