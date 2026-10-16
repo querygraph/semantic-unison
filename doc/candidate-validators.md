@@ -100,7 +100,41 @@ receiving controls per compiler, with logging disabled, real hash workers and
 synthetic supervised helpers. It preserves parent log-only and missing-yield
 negative controls. No Adobe SDK or native UI was invoked for this slice.
 
-Current qualification uses synthetic candidates and Adobe-free drivers on
-stock OCaml and OxCaml. See the [integration receipt](../tests/qualification/validation-companion-integration-20261013.json)
-and its separate independent review. Real-camera/SDK receiving-path coverage,
-resource limits and throughput remain separate acceptance work.
+The initial [integration receipt](../tests/qualification/validation-companion-integration-20261013.json)
+uses synthetic candidates and Adobe-free drivers on stock OCaml and OxCaml.
+The later [camera SDK receiving control](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json)
+adds one retained camera candidate per compiler: two full receiving seeds and
+exactly two qualified single-thread SDK calls. Both report valid structure,
+successful decode, valid raw digest and zero errors/warnings. This is not a
+representative camera corpus, semantic eligibility or pixel-equivalence proof.
+
+### Size the admission envelope before enabling a validator
+
+`adobevalidatorworkspace` declares estimated backend memory in MiB. It is added
+to receiving publication accounting; it is not a replacement for the source and
+publication buffers. `semanticpayloadbudget` must accommodate those envelopes
+and any configured validation-tree memory as well. A gate equal to the validator
+workspace can therefore still refuse the transfer. Neither setting is a hard
+process RSS cap, and inflating the declaration does not measure SDK memory.
+
+The camera control used these explicit endpoint settings:
+
+```text
+adobevalidatorworkspace = 2048
+semanticpayloadbudget = 4096
+validationtreememory = 0
+semanticdescriptorbudget = 64
+adobevalidatorthreads = 1
+```
+
+These are tested accounting values for that control, not universal sizing advice
+or a complete validator configuration. The receiver still needs its own qualified
+executable, SHA-256 pin, build ID and policy. With the fixed maximum payload bound,
+the control's source plus publication envelope was 2416443392 bytes; its declared
+4 GiB gate fit. Larger concurrency or different backends require fresh sizing.
+
+The earlier 512 MiB gate with a 2048 MiB workspace failed before any SDK helper
+could start. The [resource-admission fix](../tests/qualification/publication-admission-resource-fix-actual-20261016.json)
+keeps an oversized receiving reservation a recoverable transfer error instead of
+an uncaught server exception, without weakening the gate. Check the diagnostic
+and correct the endpoint configuration; do not treat refusal as SDK decode failure.

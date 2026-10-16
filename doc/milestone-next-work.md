@@ -34,20 +34,12 @@ limitations are not automatically new features to implement, and its narrow
 receipts must not be promoted to universal platform/corpus guarantees. Determine
 each requirement's actual source/runtime proof before declaring the goal done.
 
-The next optional Adobe receiving kernel is now [source/mock prepared](../tests/camera_sdk_receiving/README.md):
-18 original controls cover one bound helper/group, exact SDK receipt, optional
-missing digest distinction, one-shot require command and unknown-retention
-selection. No SDK/camera payload/EXglobal invocation occurred. Its admitted-owner
-integration and full execution pins are still required before a runtime request;
-it does not reuse camera V4's consumed admission.
-
-The [camera SDK requestV1](camera-sdk-receiving-request-v1.json) is now source
-prepared with exact67-source parent/worker integration. The source/ownership
-qualification adds28 mock controls, live positive/negative inherited-FD refusal
-children and dispatcher regressions, all closed without Adobe/camera/EX IO.
-Its two real require-policy receiving seeds and two SDK invocations remain
-UNADMITTED/UNSTARTED. Root review must check this new closure and grant a separate
-finite SDK/IO slot; neither camera V4 nor an available CPU pool authorizes it.
+The [camera SDK receiving integration](../tests/camera_sdk_receiving/README.md)
+uses a pinned parent/worker and a combined CLI/SDK settlement audit. Its source
+controls include original receipt/budget cases, actual inherited-FD refusal
+children and dispatcher regressions. Historical V1 preparation receipts retain
+their exact67-source scope; V2 has69 execution pins. Neither old request can be
+replayed, and runtime permission is separate from source qualification.
 
 Actual SDK V1 was separately admitted and FAILED at the first stock seed's
 resource reservation (2048MiB SDK workspace versus512MiB semantic gate), before
@@ -63,7 +55,7 @@ explicit4096MiB gates/2048MiB validator workspaces plus source/publication headr
 reservation errors now remain recoverable (`Util.Transient`); direct stock/Ox
 controls and prior-guard negatives, current full Make+selftests, and actual tiny
 rejected/fitting CLI cases passed/closed. No SDK/camera runtime occurred in these
-controls. V2 needs a separate exact admission; do not reuse consumed V1.
+controls. Those source controls preceded the separately admitted V2 result below.
 
 SDK V2 has now executed once and [PASSED/CLOSED](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json):
 actual owner66811/65a573/0, two receiving seeds and two SDK helper invocations,

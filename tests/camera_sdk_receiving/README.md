@@ -105,3 +105,13 @@ not a hard memory limit, and does not authorize SDK allocation or execution.
 32 original controls pass. [Production error handling evidence](../qualification/publication-admission-resource-fix-actual-20261016.json)
 adds current Make+selftests and tiny fake-validator CLI refusal/fitting checks.
 Only a fresh separately coordinated SDK+EXglobal admission may dispatch V2.
+
+## V2 actual receiving result
+
+V2 was separately admitted and executed once. The [sealed actual result](../qualification/camera-sdk-receiving-v2-actual-20261016.json)
+records owner66811/65a573/exit0/no session, two full receiving seeds and two
+SDK calls. Stock and Ox both report structure valid, decode success, raw digest
+valid, errors0/warnings0; all CLI/server/helper/worker groups and IO/CPU closed.
+This replaces V2's preparation-only scheduling state above. The admission is
+consumed and must not be dispatched again. One candidate per compiler does not
+establish semantic eligibility, pixel equivalence or representative corpus coverage.
