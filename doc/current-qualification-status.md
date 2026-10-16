@@ -20,8 +20,10 @@ Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inheri
 
 Reusable inspector receipt/argument checks are implemented; [eight inert-artifact
 controls](../tests/qualification/inspector-reuse-controls-actual-20261016.json)
-and shared entrypoint controls passed with execution mocked. Actual new reuse on
-Photo copies and real-camera receiving remain pending separate IO coordination.
+and shared entrypoint controls passed with execution mocked. [Actual stock/Ox reuse on tiny independent DNGgoldens](../tests/qualification/inspector-reuse-synthetic-actual-20261016.json)
+also passed, with matching16B metadata classification and full/complement hashes.
+Reuse on Photo copies and real-camera receiving remain pending separate IO
+coordination.
 
 ## Acceptance scope audit
 

@@ -98,3 +98,11 @@ for a Photo-owned copy or a new SDK/native-Photo allocation.
 [Eight inert-artifact/refusal controls](../../tests/qualification/inspector-reuse-controls-actual-20261016.json)
 pass with execution mocked; no photographic input or actual reused inspector
 was executed in that qualification. Real-copy IO and receiving follow separately.
+
+[Actual reuse smoke evidence](../../tests/qualification/inspector-reuse-synthetic-actual-20261016.json)
+now covers both retained stock/Ox binaries on the committed independent256B
+DNGpair: equal reports,16B metadata change, matching full/complement hashes and
+wire sizes; both containing groups settled and tokens closed. No compilation or
+Adobe call occurred. These arbitrary-byte packets intentionally lack supported
+XML interpretation. This qualifies actual reuse plumbing, not real-camera
+validity, XML merge, receiving/publication or Photo-copy authorization.

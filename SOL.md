@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Actual [stock/Ox reused-inspector synthetic pair](tests/qualification/inspector-reuse-synthetic-actual-20261016.json)
+PASSED/CLOSED: completed parentterminals407ea5/0 and99b987/0/no sessions,
+strict containing groups reaped0/othermembersabsent/sourcepinsunchanged,
+canonical00..07closed. Both prebuilt inspectors executed once without compiler
+lookup/rebuild. Identical reports for independent256B DNGgoldens match16Bpacket,
+full/complementhashes, editable region and SDR199B/SDE279Bsizes. No actual
+receiving/publication or realcamera/validXML claim; synthetic packet observation
+correctly says unsupported XMP root while exact-byte classification remains valid.
+No SDK/Adobe/Photo data. Root received closure/candidate reminder queue01a14230-15c9;
+no permission to open Photo-owned copies was inferred.
+
+
 Reusable inspection now has `--use-build` and the owned `inspect-file` target:
 checks bounded local build receipt, current19-file kernel source pins, private
 workspace/binary binding and binary SHA before forwarding arguments, with no
