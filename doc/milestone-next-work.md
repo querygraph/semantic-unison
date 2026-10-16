@@ -145,3 +145,10 @@ parent zero-call audit, inner lock reacquisition and outer Unison8 closure pass.
 No clone/receiving/SDK/canonical IO ran. Next qualify complete original-fake
 transport composition, then freeze a fresh exact generated-input receiving
 request; no current native admission exists for this target.
+
+An additional [four actual Python helper control](../tests/qualification/sdk-multifile-helper-lifecycle-actual-20261016.json)
+passes through both modeled CLI worker cases and independent parent audit.
+Each original helper hashes only a tiny disposable input and is actually reaped
+with group closure; no live spans means overlap stays unknown. CLI/server
+lifecycle and SDK protocol are explicit models, so real transport composition
+remains the next gap. Canonical Unison8 closed; zero SDK/canonical IO calls.

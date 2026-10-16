@@ -1,0 +1,47 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/helper_lifecycle_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-smr-helpers-zuz_7pds\", \"actual_original_helpers\": 4, \"sdk_calls\": 0}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 48305,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "scope": "Actual four original helpers within modeled CLI worker composition; zero SDK/native/payload/canonical IO.",
+  "source_sha256": "2410098c39e7f45c4a4934f9a85160d764cb1e648c95581999c6d7beed9be4cf",
+  "owner_tool_terminal": {
+    "chunk_id": "0da451",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command response."
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-smr-helpers-zuz_7pds/CONTROL-RESULT.json",
+      "bytes": 35190,
+      "sha256": "8b34be595107c93f9f24aeaa990f94296b576aa665c6ab3ebfae52e4849d01cb"
+    }
+  ],
+  "prior_control": {
+    "owner_tool_chunk": "b7ac87",
+    "exit_code": 0,
+    "workspace": "/private/tmp/u-smr-helpers-foo1kvrr",
+    "source_sha256": "09e4943093b1f93d439e34816d867273434dfae521b494dded442d2cabf1b7e4",
+    "reason_for_successor": "Remove unittest exception swallowing at executable entry; first successful artifacts preserved."
+  }
+}

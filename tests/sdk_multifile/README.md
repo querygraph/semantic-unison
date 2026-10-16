@@ -192,3 +192,11 @@ Admission, canonical inventory, argv and artifact SHA are explicit doubles;
 there are zero clone, CLI, SDK or canonical IO calls. Complete fake transport
 composition and actual generated-input SDK receiving still require separate
 qualification; this control grants neither.
+
+The [actual four-helper composition control](../qualification/sdk-multifile-helper-lifecycle-actual-20261016.json)
+adds real original Python hash children and pre-leader-reap group proofs to the
+worker/case/parent join. Both modeled CLI cases pass and all four helpers close;
+missing live spans correctly leave overlap unknown. CLI/server identities and
+SDK verdict protocol remain synthetic. The executable bypasses unittest's
+exception catcher so unresolved ownership retains its process. No SDK,
+retained input or canonical IO ran; complete real transport is still pending.
