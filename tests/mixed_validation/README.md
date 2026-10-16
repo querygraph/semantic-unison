@@ -308,3 +308,23 @@ recovery labeling is preserved. No canonicalIO, compiled probe, SDK, ExifTool or
 Photo access. Source composition checks are now present for success, known
 refusal and missing-outcome retention; fresh compiled-artifact/dependency
 preparation and separately reviewed actual native admission remain outstanding.
+
+## Fresh compiled probe artifacts
+
+`build.py` is build-only. It requires an actual successful compiler-matched
+production build/selftest receipt, checks current production source and compiler
+pins, then links the current private probe in a fresh namespace. Its persisted
+compiler intent/outcome records retain actual child settlement; source/compiler/
+linked objects and implicit .o/.cmi companions are checked again after linking.
+The output executable is hashed but never launched. Existing qualified compiler
+installation is reused; a complete standard-library inventory is explicitly
+false, not inferred from the compiler executable SHA.
+
+[Actual stock/Ox builds](../qualification/mixed-validation-probe-build-actual-20261016.json)
+passed serially under Unison8: containing children4468/4487 and both compiler
+children reaped0/groups absent, outerCPU8 closed; owning session27185/30e59c/0/
+no running session. Stock probe SHA f9c30d5d..., Ox2630d749...; exact artifact
+paths/hashes/object companions and prior production build pins are in the
+receipts. These fresh probes remain unexecuted. No SDK, ExifTool, media or
+canonical EXglobal access. Next: native build-receipt enforcement, metadata
+dependency inventory and immutable mixed request for separately coordinated IO.

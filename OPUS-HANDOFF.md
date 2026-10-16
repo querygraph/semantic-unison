@@ -284,7 +284,18 @@ no normal SHARED-CLOSED/accepted parent proof invented. This is authored-control
 recovery only, not permission to release real unknown SDK/helper/FD ownership.
 No canonicalIO/probe/SDK/ExifTool/Photo. Source lifecycle success/refusal/unknown
 composition now has evidence; fresh compiled/dependency inventory still needed.
-Next: compiled artifact preparation and actual
+**Fresh compiled probes built, not executed:** build.py validates actual current
+production build/selftest/compiler pins, records compiler intent/outcome, links
+current probe with exact production .cmx/native objects plus .o/.cmi companions,
+and rechecks all inputs after link. Stock output /private/tmp/unison-mixed-build-
+stock-10a96e53e97d4da6acc3fd070fd607d7/probe SHAf9c30d5dcf317e7f359f38e1510d67afccbe3ef2b0e24931e56cc8f0e8668aa6;
+Ox output /private/tmp/unison-mixed-build-ox-a70eace440964e0c8486e65e33647713/probe
+SHA2630d74939e71f9b43016df9e56ee3f1370cec46b3f94075d368ea61d4e3c03b.
+Actual containing4468/4487 and compilerchildren reaped0/groups absent/CPU8closed;
+actual27185/30e59c/0/no running session. Receipt mixed-validation-probe-build-actual.
+Both probes UNEXECUTED. No SDK/ExifTool/media/EXglobal. Complete standard-library
+inventory explicitly false; existing qualified compiler installation reused.
+Next: build-receipt enforcement/metadata dependency inventory/request and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
