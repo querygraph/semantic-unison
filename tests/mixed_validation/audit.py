@@ -37,7 +37,7 @@ def report(raw,command):
     return values
 
 
-def audit(outcome,*,command,metadata_version,expected_helpers=None):
+def audit(outcome,*,command,metadata_version,expected_helpers=None,require_admission=False):
     require(type(metadata_version) is str and 0<len(metadata_version)<=128 and '\0' not in metadata_version,'exact metadata version required')
     require(type(command) is list and len(command)==8 and all(type(x) is str and '\0' not in x and len(x)<=4096 for x in command),'exact bounded command required')
     require(all(Path(x).is_absolute() for x in command[:4])
@@ -61,6 +61,16 @@ def audit(outcome,*,command,metadata_version,expected_helpers=None):
     require(len(sdk)==len(closed)==1,'exact SDK and closed records required')
     sm=SDK.fullmatch(sdk[0]);cm=CLOSED.fullmatch(closed[0])
     require(sm is not None and cm is not None,'unknown or malformed task state')
+    admission=[line for line in lines if line.startswith('MIXED_ADMISSION ')]
+    retired=[line for line in lines if line.startswith('MIXED_ADMISSION_CLOSED ')]
+    admission_accounted=False
+    if admission or retired or require_admission:
+        require(len(admission)==len(retired)==1,'backend envelope evidence absent or duplicated')
+        expected_held=f'MIXED_ADMISSION owner={child["pid"]} payload={2192*1048576} descriptors=64 transactions=1 active=true'
+        expected_retired=f'MIXED_ADMISSION_CLOSED owner={child["pid"]} transactions=0 pending=0 payload=0 descriptors=0'
+        require(admission[0]==expected_held and retired[0]==expected_retired,'backend envelope/counter binding differs')
+        require(lines.index(admission[0])<lines.index(sdk[0])<lines.index(retired[0])<lines.index(closed[0]),'backend envelope lifecycle order differs')
+        admission_accounted=True
     pid,status,kind,members,truncated,raw,diagnostic=sm.groups()
     synthetic=f'[external-process] External result v0 pid={pid} status={status} outcome={kind} cpu-weight=1 other-members={members} capture-truncated={truncated}'
     sdk_process=external_records(synthetic)[0]
@@ -107,12 +117,14 @@ def audit(outcome,*,command,metadata_version,expected_helpers=None):
                 sdk_protocol_finding=finding,metadata_protocol_finding=metadata_finding,
                 sdk_stdout_hex=raw.hex(),sdk_stderr_hex=diagnostic.hex(),worker_hashes_reported=16,
                 known_helper_settlements=2,independent_helper_ledger_bound=expected_helpers is not None,
+                backend_envelope_accounted=admission_accounted,backend_payload_bytes=2192*1048576 if admission_accounted else None,
+                backend_descriptor_credits=64 if admission_accounted else None,
                 owning_tool_terminal_proved=False,worker_bytes_rehashed=False,
                 resource_release_authorized=False,producer_authenticated=False,
                 scope='Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations.')
 
 
-def audit_prefix(result,*,commands,metadata_version):
+def audit_prefix(result,*,commands,metadata_version,require_admission=False):
     require(type(commands) is list and len(commands)==2,'exact stock/Ox two-probe plan required')
     require(result.get('schema')=='unison-mixed-validation-worker/1' and type(result.get('complete')) is bool,'typed mixed worker result required')
     entries=result.get('invocations');complete=result['complete']
@@ -126,7 +138,7 @@ def audit_prefix(result,*,commands,metadata_version):
         require(type(entry) is dict and set(entry)=={'index','state','outcome'}
                 and type(entry['index']) is int and entry['index']==index and entry['state']=='OUTCOME','unknown/reordered/extra invocation state')
         require(not proofs or proofs[-1]['functional_status']=='PASSED','continued execution after failed mixed task')
-        proofs.append(audit(entry['outcome'],command=commands[index],metadata_version=metadata_version))
+        proofs.append(audit(entry['outcome'],command=commands[index],metadata_version=metadata_version,require_admission=require_admission))
     if complete:require(len(proofs)==2 and all(p['functional_status']=='PASSED' for p in proofs),'two complete functional probes required')
     return dict(functional_status='PASSED' if complete else 'FAILED',attempted_probes=len(proofs),
                 sdk_helpers_settled=len(proofs),metadata_helpers_settled=len(proofs),case_audits=proofs,

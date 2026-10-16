@@ -105,7 +105,7 @@ print(json.dumps([{'SourceFile':sys.argv[-1],'Rating':3,'Label':'Blue','ExifTool
                     and ext[0].outcome=='completed' and ext[0].other_members==0, 'metadata helper binding/settlement differs')
             expected_closed=f'MIXED_CLOSED owner={out["client_cleanup"]["pid"]} sdk-ok={str(errors==0).lower()} metadata-ok={str(meta_ok).lower()} hashes-ok=true hashes=16 cpu=0 children=0 pending=0 running=0 fd-baseline=true'
             require(log.count(expected_closed)==1, 'exact mixed closed accounting absent')
-            independent=audit_mixed(out,command=out['command'],metadata_version='synthetic-only',expected_helpers=dict(sdk=sdk_pid,metadata=metadata_pid))
+            independent=audit_mixed(out,command=out['command'],metadata_version='synthetic-only',expected_helpers=dict(sdk=sdk_pid,metadata=metadata_pid),require_admission=True)
             require(independent['functional_status']==('PASSED' if mode=='pass' else 'FAILED'),'independent verdict differs')
             after=tuple(getattr(os.lstat(candidate),n) for n in ('st_dev','st_ino','st_size','st_mtime_ns','st_ctime_ns','st_mode','st_nlink','st_uid'))
             require(before==after and sha(candidate)==expected, 'original private candidate changed')
@@ -116,7 +116,26 @@ print(json.dumps([{'SourceFile':sys.argv[-1],'Rating':3,'Label':'Blue','ExifTool
         except BaseException as error:
             raise UnresolvedOwnership('mixed child evidence unresolved: '+repr(error)) from error
         print('PASS mixed fake-only '+mode,flush=True)
-    receipt=dict(schema='unison-mixed-validation-controls/1',workspace=str(work),cases=cases,commands=commands,
+    # Same production graph/private harness with ONLY the configured budget
+    # lowered below the envelope: no candidate open/helper may follow refusal.
+    original=(ROOT/'tests/mixed_validation/probe.ml').read_text()
+    require(original.count('"semanticpayloadbudget=6144"')==1,'exact refusal participant anchor required')
+    (work/'refused.ml').write_text(original.replace('"semanticpayloadbudget=6144"','"semanticpayloadbudget=512"'))
+    rejected_build=run([build['compiler'],*flags,'unix.cmxa','str.cmxa',*[src/m for m in modules],
+                       *[src/n for n in native],'refused.ml','-o','refused'],work)
+    require(rejected_build['returncode']==0,rejected_build['stderr'])
+    directory=work/'admission-refused';directory.mkdir(mode=0o700)
+    candidate=directory/'private.dng';candidate.write_bytes(b'original pre-admission control')
+    sdk=directory/'validator.py';metadata=directory/'metadata.py'
+    shutil.copyfile(work/'pass/validator.py',sdk);shutil.copyfile(work/'pass/metadata.py',metadata)
+    sdk.chmod(0o700);metadata.chmod(0o700)
+    refused=run([work/'refused',sdk,metadata,candidate,sha(sdk),'synthetic-mixed-v1',sha(candidate),str(candidate.stat().st_size)],directory)
+    expected_refusal=f'MIXED_ADMISSION_REFUSED owner={refused["client_cleanup"]["pid"]} transactions=0 pending=0 payload=0 descriptors=0 fd-baseline=true before-candidate-open=true'
+    require(refused['returncode']==2 and refused['stdout'].strip()==expected_refusal
+            and not refused['stderr'] and not sdk.with_suffix('.calls').exists()
+            and not metadata.with_suffix('.calls').exists(),'pre-helper memory refusal evidence differs')
+    print('PASS declared-memory refusal before helpers',flush=True)
+    receipt=dict(schema='unison-mixed-validation-controls/1',workspace=str(work),cases=cases,commands=commands,admission_refusal=dict(outcome=refused,participant_source_sha256=sha(work/'refused.ml'),expected=expected_refusal),
       sources={str(p):sha(p) for p in [ROOT/'tests/mixed_validation/probe.ml',Path(__file__),ROOT/'tests/mixed_validation/audit.py',ROOT/'tests/supervised_external/external_records.py']},
       objects={str(src/p):sha(src/p) for p in modules+native},build_result_sha256=sha(args.build_result),
       scope='Eight original fake helpers/64worker hashes; no SDK/ExifTool/Photo/EXIO/native-admission route. Accounting and settlement only, no compute overlap or throughput claim.')

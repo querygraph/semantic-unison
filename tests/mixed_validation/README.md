@@ -56,9 +56,32 @@ auditor using independently written fake-helper PID ledgers. Sixteen fake
 helpers/128worker hashes and containing groups/CPU8 closed. The earlier
 seven-group saved-log receipt remains preserved as a source predecessor.
 
-Native readiness remains incomplete. In particular, `probe.ml` currently
-accounts CPU but needs an explicit backend-memory/descriptor admission envelope
-before native use. The exact parent/worker inherited9FD boundary, durable
+Native readiness remains incomplete. The backend-memory/descriptor envelope is now implemented and qualified below;
+this does not complete the outer native ownership boundary. The exact parent/worker inherited9FD boundary, durable
 intent/outcome journal, disposable-only input preparation and one-use admission
 still precede any source-reviewed actual SDK/ExifTool window. No current native
 grant exists and no prior admission may be reused.
+
+## Declared backend envelope
+
+Before candidate inspection, the probe now creates/acquires one durable
+SemanticAdmission owner using checked BackendResources additions: SDK2048MiB/
+8credits, metadata128MiB/8credits, and hashing/bridge16MiB/48credits, totaling
+2192MiB and64descriptor credits. The configured gate is6144MiB/256credits.
+Every inspector entry checks that same envelope remains held; no nested leases
+or CPU permits span its acquisition. It retires only after helper/hash results
+and candidate fences settle, before pool shutdown and final FD-baseline check.
+Close attempts for owned inspection descriptors are single-use, not numeric retries.
+
+The auditor can require the exact held/retired envelope records and ordering.
+Older CPU-only receipts remain explicitly without backend accounting evidence.
+A private participant changing ONLY the gate to512MiB refuses before candidate
+open/helper dispatch, preserves zero admission counters, shuts down the pool
+and restores its descriptor baseline. Both fake-tool call ledgers remain absent.
+
+[Nine audit groups and stock/Ox controls](../qualification/mixed-validation-memory-admission-actual-20261016.json)
+pass, including two real pre-helper refusals and the eight fake mixed cases.
+These are symbolic admission estimates, not GiB allocations, hard RSS/FD limits,
+SDK qualification or native runtime permission. Actual parent/worker inherited
+canonical9FD, immutable plan/admission, durable journal and unknown retention
+still precede the next real-tool scheduling request.

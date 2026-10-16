@@ -68,6 +68,17 @@ class Audit(unittest.TestCase):
         c=fixture();p=audit(c['outcome'],command=c['outcome']['command'],metadata_version='wrong-version')
         self.assertEqual(p['functional_status'],'FAILED');self.assertFalse(p['metadata_fields_verified'])
         self.assertEqual(p['known_helper_settlements'],2)
+    def test_memory_admission_requirement_never_promotes_legacy_cpu_only_evidence(self):
+        c=fixture();out=c['outcome'];args=dict(command=out['command'],metadata_version='synthetic-only')
+        self.assertFalse(audit(out,**args)['backend_envelope_accounted'])
+        with self.assertRaises(ValueError):audit(out,**args,require_admission=True)
+        held=f'MIXED_ADMISSION owner={out["client_cleanup"]["pid"]} payload={2192*1048576} descriptors=64 transactions=1 active=true'
+        retired=f'MIXED_ADMISSION_CLOSED owner={out["client_cleanup"]["pid"]} transactions=0 pending=0 payload=0 descriptors=0'
+        out['stdout']=held+'\n'+out['stdout'].replace('MIXED_CLOSED ',retired+'\nMIXED_CLOSED ')
+        self.assertTrue(audit(out,**args,require_admission=True)['backend_envelope_accounted'])
+        for replacement in ('payload=1 descriptors=64','payload='+str(2192*1048576)+' descriptors=63'):
+            bad=copy.deepcopy(out);bad['stdout']=bad['stdout'].replace('payload='+str(2192*1048576)+' descriptors=64',replacement)
+            with self.assertRaises(ValueError):audit(bad,**args,require_admission=True)
     def test_metadata_numeric_version_preserves_decimal_spelling(self):
         c=fixture();out=c['outcome'];line=next(x for x in out['stdout'].splitlines() if x.startswith('METADATA_RESULT stdout-hex='))
         raw=bytes.fromhex(line.split('=',1)[1]).replace(b'"synthetic-only"',b'13.10')

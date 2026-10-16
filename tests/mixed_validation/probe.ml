@@ -5,6 +5,7 @@ module H = HelperSupervisor
 module W = SemanticWorkers
 module R = SemanticRuntime
 module D = DngValidation
+module A = SemanticAdmission
 let check value reason = if not value then failwith reason
 let identity s = Printf.sprintf "%d:%d:%Ld:%.17g:%.17g:%d:%d"
   s.Unix.LargeFile.st_dev s.st_ino s.st_size s.st_mtime s.st_ctime s.st_perm s.st_nlink
@@ -25,16 +26,50 @@ let main () =
   Unix.mkdir Util.unisonDir 0o700;
   let initial=Array.length(Sys.readdir "/dev/fd") in
   Prefs.loadStrings ["semanticworkers=6";"semanticvolumejobs=1";"externalhelperthreads=1";
+    "semanticpayloadbudget=6144";"semanticdescriptorbudget=256";
     "externalhelpertimeout=10";"externalhelperoutput=1";"debug=external-process";"log=false"];
   let runtime=R.get () and cancellation=H.cancellation () in
+  let sdk_resources=BackendResources.make ~backend:"org.unison.test-mixed-sdk/1"
+    ~cpu_lanes:1 ~covered_bytes:0 ~uncovered_estimate:(2048*1048576)
+    ~descriptor_credits:8 ~coverage:BackendResources.Accounting_only in
+  let metadata_resources=BackendResources.make ~backend:"org.unison.test-mixed-metadata/1"
+    ~cpu_lanes:1 ~covered_bytes:0 ~uncovered_estimate:(128*1048576)
+    ~descriptor_credits:8 ~coverage:BackendResources.Accounting_only in
+  let payload,descriptors=BackendResources.add_cost sdk_resources
+    ~bytes:(16*1048576) ~descriptors:48 in
+  let payload,descriptors=BackendResources.add_cost metadata_resources ~bytes:payload ~descriptors in
+  let reservation=match
+    A.make_reservation runtime.admission ~role:A.Consumer ~cost:{A.payload_bytes=payload;descriptors}
+    with
+    | owner->owner
+    | exception A.Failed _ ->
+        let usage=A.usage runtime.admission in
+        check(usage.A.transactions=0 && usage.pending=0 && usage.payload_bytes=0 && usage.descriptors=0)
+          "refused mixed admission changed ledger";
+        ignore(Lwt_unix.run(W.shutdown runtime.pool));
+        check(Array.length(Sys.readdir "/dev/fd")=initial) "refused mixed admission leaked descriptors";
+        Printf.printf "MIXED_ADMISSION_REFUSED owner=%d transactions=0 pending=0 payload=0 descriptors=0 fd-baseline=true before-candidate-open=true\n%!" (Unix.getpid());
+        exit 2 in
+  check(Lwt_unix.run(A.acquire reservation cancellation)) "mixed admission cancelled";
+  let require_admission () =
+    let usage=A.usage runtime.admission in
+    check(A.is_held reservation && usage.A.transactions=1 && usage.pending=0 &&
+          usage.payload_bytes=payload && usage.descriptors=descriptors)
+      "mixed backend envelope retired while work remained" in
+  require_admission();
+  Printf.printf "MIXED_ADMISSION owner=%d payload=%d descriptors=%d transactions=1 active=true\n%!"
+    (Unix.getpid()) payload descriptors;
   let inspect path =
+    require_admission();
+    let owned=ref true in
+    let close fd=if !owned then (owned:=false;Unix.close fd) in
     let fd=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
     BorrowedWork.try_bind (fun () -> W.digest runtime.R.pool cancellation fd)
-      (fun result -> Unix.close fd; match result with
+      (fun result -> close fd; match result with
        | Some result -> return {D.sha256=SemanticHash.hex result.W.digest;
            size=result.stats.Unix.LargeFile.st_size;identity=identity result.stats}
        | None->fail(Failure "mixed inspection cancelled"))
-      (fun error -> Unix.close fd;fail error) in
+      (fun error -> close fd;fail error) in
   let expected=Lwt_unix.run(inspect candidate) in
   check(expected.D.sha256=expected_hash && expected.size=expected_size) "prepared candidate differs";
   let source_before=Unix.LargeFile.lstat candidate in
@@ -72,7 +107,13 @@ let main () =
   check(H.usage runtime.supervisor=(0,0)) "mixed CPU/child ledger not settled";
   let usage=W.usage runtime.pool in
   check(usage.W.pending=0 && usage.running=0 && usage.peak_running<=6) "mixed worker ledger not settled";
+  require_admission();
+  A.retire reservation;
+  let admission=A.usage runtime.admission in
+  check(admission.A.transactions=0 && admission.pending=0 && admission.payload_bytes=0 && admission.descriptors=0)
+    "mixed admission did not settle";
   ignore(Lwt_unix.run(W.shutdown runtime.pool));
+  Printf.printf "MIXED_ADMISSION_CLOSED owner=%d transactions=0 pending=0 payload=0 descriptors=0\n%!" (Unix.getpid());
   check(Array.length(Sys.readdir "/dev/fd")=initial) "mixed owner descriptor baseline differs";
   Printf.printf "MIXED_CLOSED owner=%d sdk-ok=%b metadata-ok=%b hashes-ok=%b hashes=16 cpu=0 children=0 pending=0 running=0 fd-baseline=true\n%!"
     (Unix.getpid()) sdk_ok metadata_ok hash_ok

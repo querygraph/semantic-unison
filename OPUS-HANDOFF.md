@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:28:44Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:33:15Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -154,9 +154,24 @@ Eight source groups plus eight fresh fake cases across stock/Ox PASS,16fake
 helpers/128hashes; actual49452/e2115a/0/no session, children96507/96509/96551
 reaped0/groups absent/CPU8closed. Receipt `mixed-validation-audit-integration-actual-20261016.json`;
 initial7group e04faf source predecessor retained. No SDK/ExifTool/Photo/EXIO.
-Next explicit gap: probe still CPU-only and needs declared backend memory/FD
-admission, then durable nativeentry journal/inherited9FD/oneuse guards and
-actual lifecycle qualification before requesting native scheduling.
+That predecessor was CPU-only; the memory-admission successor below supersedes
+that limit. Durable nativeentry journal/inherited9FD/oneuse guards and actual
+lifecycle qualification remain before requesting native scheduling.
+
+**Mixed backend admission now qualified:** probe acquires one durable production
+SemanticAdmission envelope BEFOREcandidateopen: checkedBackendResources addition
+SDK2048MiB/8FD +metadata128MiB/8FD +hash/bridge16MiB/48FD =2192MiB/64FD.
+Gate6144MiB/256FD, sixCPU+twoowner. Eachinspection checks owner stillheld;
+retirement follows all helper/hash/fence settlement. Single-attempt descriptor
+close guards prevent numeric retry. Exact held/retired records audited;
+legacyCPU-only receipts do not gain memory-accounting qualification.
+Nineauditgroups +eightfreshfakecases +two private512MiB prehelperrefusals PASS
+stock/Ox; refusal changesonlygate6144->512, zeroledger/FD baseline restored/no
+helperPIDledgers. Actual80121/609ad1/0/no session, children97688/97697/97745
+reaped0/groups absent/CPU8closed. Receipt `mixed-validation-memory-admission-actual-20261016.json`.
+Declaredcredits only, no actualGiBallocation/hardRSS/FD cap/nativeSDK/EXIO grant.
+Next: outer owned journal/strictplan/admission/inherited9FD boundary and actual
+fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
 selftests actual87161/b8ddda ->52664d/0/no session and Ox80362/27ce49 ->09fca0/0
