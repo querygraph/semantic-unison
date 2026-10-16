@@ -4,6 +4,12 @@
 
 ## Current checkpoint — 2026-10-15
 
+Canonicalprobev3 admission241da556 expired before execution: [guard receipt](tests/qualification/canonical-io-probe-v3-expired-unstarted-20261016.json)
+actual2df62f/1/no session, deadlineassertion beforeexec. Workspace absent, no
+START/worker/contender/IOlock/CPUtokens; no canonical test actually ran. Root
+notified queue01a1425d-0e61; zeroUnisonresourcesheld, no reuse/autorefresh.
+Frozenv3source75401072 unchanged; fresh separate scheduling needed ifresumed.
+
 The realcamera tag50740 gap now has a [spec/source-backed profile-successor prerequisite](doc/dng-private-data-next-profile.md):
 new original `DngPrivateData` Adobe/MakN framing module, NOT activated in profiles0/1.
 [Stock/Ox47checks each](tests/qualification/dng-private-framing-actual-20261016.json)
