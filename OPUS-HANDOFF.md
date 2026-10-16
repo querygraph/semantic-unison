@@ -50,6 +50,24 @@ snapshot worker API using existing clone adapter, then exact scan-selected
 coverage and asynchronous endpoint wiring. Keep default received/off/no-op
 behavior and originals untouched; no helper may receive a live unchanged file.
 This is independent of still-open MakN vendor/reference grammar.
+Snapshot kernel implementation checkpoint: src/validationSnapshot.{ml,mli}
+now performs borrowed-FD isolated materialization using an injected existing
+WholeFileClone adapter, strict no-effect-decline fallback, <=64KiB cancel-aware
+copy/short-write+EINTR handling, complete source/output SHA comparison and
+cooperative source metadata fences. Budget/alias/nonempty guards precede effects;
+no path/create/unlink/close/publication. Caller retains exclusive output/name
+ownership and stronger epoch fences; OCaml stat timestamps are not native-ns
+attestation. New module is NOT yet in worker/build graph or all-scanned path.
+Stock/Ox standalone component controls passed (six exact sizes incl0/64KiB
+boundaries, budget/alias/nonempty refusal, native exception+typed failure,
+correct simulated success and wrong-byte success rejection, cancellation).
+Actualsession8225/fd198f/0, outer20205 and four contained calls reaped0/groups
+absent, canonicalCPU8 closed. Receipt validation-snapshot-kernel-v2-actual-20261017
+(preserves prior first-pass receipt). No nativeclone/SDK/media/fullCLI claims.
+Next concrete implementation: typed SemanticWorkers snapshot response/operation,
+duplicated outputFD retirement and source/destination IO admission; then private
+staging owner and actual scan-selected coverage/negotiated scope.
+
 
 
 **Previous mixed runtime (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69

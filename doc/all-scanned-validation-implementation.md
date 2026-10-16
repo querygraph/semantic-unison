@@ -91,3 +91,32 @@ owned descriptor contract, followed by scan coverage collection and endpoint
 integration. Do not expose an enabled all-scanned setting before those parts
 are wired and qualified. Private MakN vendor grammar remains separate work;
 all-scanned validates DNGs independently of semantic-transfer eligibility.
+
+## Snapshot kernel checkpoint
+
+`src/validationSnapshot.{ml,mli}` now implements the isolated borrowed-FD
+materializer. It checks an explicit source-byte budget and distinct, empty,
+single-link output before calling the injected existing-clone adapter. Strict
+receipt validation permits fallback only after a no-effect decline; native
+exceptions/failures/cursor changes/inconsistent effects never select fallback.
+The ordinary path writes in <=64KiB chunks with cancellation and EINTR/short-write
+handling, hashes the source stream, then independently hashes the full output.
+It fences cooperative source metadata across the operation. Read/write output
+ownership, path bindings and any stronger native timestamp fences remain caller
+responsibilities; no file is created, published, chmodded or retired here.
+
+Stock and Ox component builds and original generated-fixture controls passed,
+including empty and64KiB boundaries, budget/same-inode/nonempty refusals, native
+exception and typed failure, correct simulated native output, false-success
+digest rejection and cancellation. All four compiler/test groups and the outer
+controller reaped0, CPU8 closed: actualsession8225/fd198f/0.
+[Evidence](../tests/qualification/validation-snapshot-kernel-v2-actual-20261017.json)
+preserves the adapter as an explicit test double: no native cloning, SDK,
+retained photo or full CLI execution occurred. The earlier control receipt
+remains historical.
+
+The module is not yet in the production worker operation/build graph or scan
+path. Next integrate a typed snapshot operation into `SemanticWorkers`, including
+output-FD duplication/retirement and real source/destination IO accounting, then
+wire the isolated owner/staging and selected-scan coverage. `all-scanned` is
+still unavailable; receiving defaults remain unchanged.
