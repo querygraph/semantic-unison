@@ -1,0 +1,46 @@
+{
+  "schema": "unison-concurrent-sanitized-helper/1",
+  "state": "PASSED_CLOSED",
+  "actual_terminal": {
+    "tool": 10048,
+    "chunk": "55ff15",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/fake_validator.py",
+      "bytes": 2681,
+      "sha256": "147d300903d5274eca9df4f88b97ab57d1064675c8b1369f390322691e833d66"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/fake_validator_test.py",
+      "bytes": 2377,
+      "sha256": "ad461661d63ad4876e3b611e160c9d3486e8c17185d8e85854db7efabaca6156"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-synthetic-sanitized-helper-20261016a/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "4a28eb824e28bc3885d774f340d15ea86fa56402a78ab081396dd94a86d01612"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-sanitized-helper-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d9d0ac2dc2f3ebc8928a90a2ba1d87a78c9508671bd8db5ac228d62532749706"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-sanitized-helper-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-sanitized-helper-20261016a/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "2be8bb1da06cc310e2921d21ca2abed5f6301cd8e2b6f5d8ee77600a9b18b367"
+    }
+  ],
+  "scope": "5groups/6 actual original fake helper processes; sanitized production LANG/LC_ALL/PATH environment, two exact tiny originals pass, outside/symlink/wrongbytes/nonprivate reject; direct communicates and outer group/token closure; no receiving/SDK/Photo/camera/EXglobal",
+  "full_goal_complete": false
+}

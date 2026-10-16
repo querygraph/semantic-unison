@@ -232,3 +232,10 @@ unknown-group retention before reap, and IO retention/no retry after an injected
 CPU-close uncertainty. Owners and protocol frames are inert doubles; disposable
 FDs never reach a real child in these controls. Outer CPU ownership closes.
 These supplement actual zero-call FD probes without inventing native settlement.
+
+V1 request is withdrawn unstarted: the fake helper expected an environment hint
+that production deliberately excludes. Production sanitation stays unchanged.
+The helper now binds exact private stock/Ox/right ancestry and owned0700 roots.
+[Actual sanitized-environment controls](../qualification/concurrent-sanitized-helper-actual-20261016.json)
+pass both originals and reject outside, symlink, wrong-byte and nonprivate cases.
+A fresh successor request is required; historical V1 plan bytes remain preserved.
