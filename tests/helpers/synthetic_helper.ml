@@ -47,6 +47,8 @@ let () =
         Unix.stdin Unix.stdout Unix.stderr in
       Printf.printf "%d\n%!" pid
   | "marker" -> sleep 0.4; let out = open_out Sys.argv.(2) in close_out out
+  | "slow-valid" -> sleep 0.12; report "valid"
+  | "slow-error" -> sleep 0.12; report "error-zero"
   | "malformed" -> print_endline "success"
   | "exit-nonzero" -> report "valid"; exit 4
   | mode -> report mode

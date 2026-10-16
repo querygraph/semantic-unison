@@ -1,0 +1,105 @@
+{
+  "schema": "unison-validation-live-observer-bridge/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.ml",
+      "bytes": 23247,
+      "sha256": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.mli",
+      "bytes": 6581,
+      "sha256": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngValidation.ml",
+      "bytes": 9668,
+      "sha256": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngValidation.mli",
+      "bytes": 4360,
+      "sha256": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/helper_tests.ml",
+      "bytes": 20304,
+      "sha256": "ea9d0cafd32cc15ae040269ce975ad61458bd6f755c35e8b2921c6b67aa0fb80"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/synthetic_helper.ml",
+      "bytes": 2562,
+      "sha256": "5092b94d28e7a98bbd2e10b40c609327328d19ba84b514e090d96f6e8363cee0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/run_tests.py",
+      "bytes": 1952,
+      "sha256": "72a6d1f3dd769fcca42f97d6676d76592232b8a687d04e57e8772e36384b9b3c"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 13653,
+      "chunk": "3c4dc1",
+      "exit_code": 0,
+      "running_session": false,
+      "pass_groups": 43,
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-alive-stock-20261016a/SHARED-START.json",
+          "bytes": 1137,
+          "sha256": "6b0f12543859b1c81a040e9e49b9732350c01ca34527a6ad042bc6fc18101141"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "fbb56e5643b66fe5809b6744dcc1b480d754e7f9666b3f9864510fa009095932"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-stock-20261016a/SHARED-STDOUT.txt",
+          "bytes": 2338,
+          "sha256": "c511657604022b3d7fce10d84f3fc093a39cedd7c5b9dc9d7bb37f885c42b35d"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-stock-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 53269,
+      "chunk": "2a04d5",
+      "exit_code": 0,
+      "running_session": false,
+      "pass_groups": 43,
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-alive-ox-20261016a/SHARED-START.json",
+          "bytes": 1138,
+          "sha256": "28ad32eda89f5cb6cf20bf54d997f4d376fb43f28e28ca0e9d1965a6dfa136bf"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "6764a2bafac1fdba131df19027753ae740da067b83864e9ace4f9044c00d57b9"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-ox-20261016a/SHARED-STDOUT.txt",
+          "bytes": 2338,
+          "sha256": "c511657604022b3d7fce10d84f3fc093a39cedd7c5b9dc9d7bb37f885c42b35d"
+        },
+        {
+          "path": "/private/tmp/unison-validation-alive-ox-20261016a/SHARED-STDERR.txt",
+          "bytes": 466,
+          "sha256": "a132f969d82217706cb1e440ee3d024d527aade7e89326d7f3d20b10cb5e30be"
+        }
+      ]
+    }
+  ],
+  "scope": "43actual synthetic helper/validation groups per compiler; live sample PID matches returned helper, valid/error-zero policy checks and off-no-execution remain enforced; no Adobe/SDK/camera/Photo/EXglobal; production candidate trace and SDK concurrency not yet integrated; fullCLI not rerun for optional bridge",
+  "full_goal_complete": false
+}

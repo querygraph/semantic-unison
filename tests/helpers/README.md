@@ -120,3 +120,10 @@ Current integration qualification supersedes the source-only checkpoint above:
 and [both full builds/selftests plus five receiving cases each](../validation_process/group-integration-qualification.json)
 pass. The new timeout, cancellation, synchronous teardown and receipt-forwarding
 controls were actually executed. No SDK/Photo calls were involved.
+
+`DngValidation.validate_with_execution` can forward an optional `observe_alive`
+callback to the actual supervisor. The [bridge controls](../qualification/validation-live-observer-bridge-actual-20261016.json)
+run43 synthetic groups per compiler: sample PID binding, valid versus exit-zero
+error receipt decisions, and validation-off skipping both diagnostics/execution.
+This remains observational, not commit authority or proof of SDK concurrency.
+The receiving companion does not yet emit these samples into its diagnostic protocol.

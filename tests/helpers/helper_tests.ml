@@ -255,6 +255,29 @@ let () =
     check (rejected (validate "error-zero")) "observation bypassed SDK error count";
     check (!calls = 2) "rejected helper observation missing";
     finish t);
+  test "validation live samples retain candidate receipt enforcement" (fun () ->
+    List.iter(fun (mode,should_pass) ->
+      let t=supervisor () and samples=ref [] in
+      let result=Lwt_unix.run(V.validate_with_execution
+        ~observe_alive:(fun pid time -> samples:=(pid,time)::!samples)
+        ~execute:(fun run -> run ()) t (H.cancellation ()) ~policy:V.Require
+        ~tool:(Some(tool mode)) ~inspect ~candidate:"/synthetic/candidate.dng" ~expected) in
+      let process=match result with
+        | V.Passed receipt when should_pass -> receipt.process
+        | V.Rejected(_,Some process) when not should_pass -> process
+        | _ -> failwith "live observer changed receipt decision" in
+      check(List.length !samples>=2) "validation live callback not forwarded";
+      List.iter(fun (pid,time) ->
+        check(process.H.child_pid=Some pid && Float.is_finite time && time>=0.)
+          "validation live callback child binding differs") !samples;
+      finish t) ["slow-valid",true;"slow-error",false]);
+  test "validation off omits live observer and execution" (fun () ->
+    let t=supervisor () in
+    let forbidden () = failwith "off performed diagnostic or execution" in
+    check(Lwt_unix.run(V.validate_with_execution ~observe_alive:(fun _ _ -> forbidden ())
+      ~execute:(fun _ -> forbidden ()) t (H.cancellation ()) ~policy:V.Off ~tool:None
+      ~inspect:(fun _ -> forbidden ()) ~candidate:"/synthetic/candidate.dng" ~expected)=V.Skipped)
+      "off validation changed"; finish t);
   test "valid qualified structured receipt" (fun () ->
     check (match validate "valid" with V.Passed r ->
       r.report.raw_digest = V.Valid && r.candidate = expected | _ -> false) "valid rejected");
