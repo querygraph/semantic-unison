@@ -4,6 +4,14 @@
 
 ## Current checkpoint — 2026-10-15
 
+**Canonical scheduling reconciled:** Root reschedule2519623d is CONSUMED_ACTUAL_CLOSED
+(owner82843/actual7efd2e/0; worker82844reaped0/othersabsent; contenderbusy;
+IO+CPUclosed/freshbundleclosed), independently acceptedcf171d71. [V4duplicate
+request withdrawn unstarted](tests/qualification/canonical-io-v4-duplicate-withdrawal-20261016.json),
+its workspace remainsabsent and oldrequest/plan preserved. DO NOTdispatchv4 or
+request another canonicalprobe. Old241da556 remainsEXPIRED_UNSTARTED, nohold.
+Any future dispatcherjob qualification is distinct scope, not probe replay.
+
 DuringPhotoV11IOhold, [opt-in dispatcher source successor](doc/shared-io-dispatch-successor.md)
 connects EX_GLOBAL→CPU wholebundle to complete-local-job inspect-file/private-DNG
 syntheticclone targets only; defaultCPU-only unchanged. Explicit pinnedRootIOjob
