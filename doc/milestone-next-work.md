@@ -196,3 +196,14 @@ failures through directory-close uncertainty: all identities retained, no
 numeric retry or ordinary-error downgrade. Actual4295e9/0/controlgroup+Unison8
 closed; inert descriptor injection only, zero payload/SDK/canonicalIO. The
 frozen receiving request and159 execution pins remain unchanged.
+
+Multi-file receiving V1 now [actually PASSED/CLOSED](../tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json):
+23264/2004ad/exit0/no session, two stock/Ox receiving seeds/four single-thread
+SDK calls, exact outputs, valid raw digests/decode success/errors0/warnings4.
+All client/server/supervisor/pump/helper/worker/group ownership audited, CPU8 and
+EXglobal closed,159 source pins and retained input metadata unchanged.
+Known-live spans overlap~0.379/~0.373s, not compute/throughput/pixel evidence.
+This supersedes pending statements above; immutable request/plan and admission
+7b320b51 remain consumed once. Next M4-V work is reproducible multi-file
+throughput and mixed native-helper accounting, alongside broader corpus and
+required failure/platform coverage; no automatic native successor is admitted.

@@ -231,3 +231,16 @@ stay retained, and the directory number is attempted exactly once. Descriptor
 numbers are inert doubles; this checks the real adapter/finally/carrier
 composition without an actual close failure, clone syscall or payload access.
 No failed-prefix release or dispatch permission follows. Outer Unison8 closed.
+
+The separately admitted [actual multi-file SDK receiving V1](../qualification/sdk-multifile-receiving-v1-actual-20261016.json)
+now PASSED/CLOSED: owning session23264/terminal2004ad/exit0, worker51818
+reaped0/groups absent. Stock then Ox each received two generated DNG candidates
+with two qualified reference single-thread SDK calls. All four raw digests valid,
+decode success/errors0/warnings4; exact output bytes reverified by the admitted
+parent. Known-live lifetimes overlap378621998ns/373058998ns; these are not
+SDK-compute-overlap or throughput results.159 post-source pins and both borrowed
+eight-field identities match; all CPU8/EXglobal ownership closed/unresolved[].
+Admission7b320b51 consumed exactly once, no retry or successor. Original source
+request/plan bytes stay preserved; their unadmitted state describes preparation,
+not this later completed execution. No representative corpus/pixel/production
+qualification or new payload permission follows.

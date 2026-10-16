@@ -1,0 +1,153 @@
+{
+  "schema": "unison-sdk-multifile-owner-return/1",
+  "state": "PASSED_ACTUAL_CLOSED",
+  "owner_tool": {
+    "session_id": 23264,
+    "initial_chunk": "f178d0",
+    "terminal_chunk": "2004ad",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "owner_pid": 51817,
+  "worker_pid": 51818,
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/sdk-multifile-receiving-request-v1.json",
+    "bytes": 29372,
+    "sha256": "6a12c677626448ad520fe29df3253a6e890ac6bd9cd125cbe218ab1f9cdfb684"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/sdk-multifile-receiving-plan-v1.json",
+    "bytes": 25164,
+    "sha256": "6fc3a45b822f444a73da093798dfdcef3cfbc1517b3846faafdafeff9f9ac1e5"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-sdk-multifile-receiving-admission-v1.json",
+    "bytes": 22621,
+    "sha256": "7b320b5137f4ae24fd16da9256fcd03386868130cf7c6c7459735182596a234d"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/OWNER-TERMINAL.json",
+      "bytes": 335,
+      "sha256": "9b82ee0befa67d3452d2567558b5f33b2a1e066b6e20103b2266a97edc933499"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-START.json",
+      "bytes": 19658,
+      "sha256": "24f2b5647788eb8c074c1d88aba4f47bccde57b498771686f64a7348579689e6"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/RESULT.json",
+      "bytes": 64889,
+      "sha256": "37a97cf3f7a2acd981e3987f65b96a8ac12c799d9c88cc7812e15101bc72bba3"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "266a1f9f320cccabaccb63e4074a0dae6adba247abdaeeeb875694e4dffd857e"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-SERVER-AUDIT.json",
+      "bytes": 959,
+      "sha256": "f66b6c652db5ee17b2ee6cd0a99894f429cdc54801d17df9171adcfa8c5f77aa"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-IO-ATTEMPT.json",
+      "bytes": 666,
+      "sha256": "3f8a32bf3884e71fdea7b2f30c307dc54d615370be50c61cf85a20ebd5150ef9"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/stock/seed-proxy.json",
+      "bytes": 1612,
+      "sha256": "0cc95ca51af0b8f97310f25e8749930db7bfc81d28674758329f0b2ef606dfcd"
+    },
+    {
+      "path": "/private/tmp/u-smr-v1-13fc44d676/ox/seed-proxy.json",
+      "bytes": 1623,
+      "sha256": "fd98fdd4f4354162d2c57958d584a96dfee040880e4bc5b7c3caac8c36208ce2"
+    }
+  ],
+  "independently_reparsed_parent_audit": {
+    "attempted_cli_invocations": 2,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": false,
+    "scope": "journal-prefix lifecycle only; not aggregate or parent terminal",
+    "functional_status": "PASSED",
+    "sdk_helpers_settled": 4,
+    "case_audits": [
+      {
+        "functional_status": "PASSED",
+        "sdk_helpers_settled": 2,
+        "no_call_preparation": false,
+        "cli_worker_fd_closure_proved": false,
+        "receiving_bytes_reverified": false,
+        "resource_release_authorized": false
+      },
+      {
+        "functional_status": "PASSED",
+        "sdk_helpers_settled": 2,
+        "no_call_preparation": false,
+        "cli_worker_fd_closure_proved": false,
+        "receiving_bytes_reverified": false,
+        "resource_release_authorized": false
+      }
+    ],
+    "aggregate_parent_fd_closure_proved": false,
+    "receiving_bytes_reverified": false,
+    "resource_release_authorized": false
+  },
+  "post_execution_source_pins": 159,
+  "borrowed_input_metadata_unchanged": true,
+  "unresolved_markers": [],
+  "cases": [
+    {
+      "label": "stock",
+      "sdk_helpers": 2,
+      "raw_digests_verified": true,
+      "known_live_overlap_ns": 378621998,
+      "known_live_overlap_observed": true,
+      "warnings": [
+        "4",
+        "4"
+      ],
+      "errors": [
+        "0",
+        "0"
+      ],
+      "wall_seconds": 2.530339571996592
+    },
+    {
+      "label": "ox",
+      "sdk_helpers": 2,
+      "raw_digests_verified": true,
+      "known_live_overlap_ns": 373058998,
+      "known_live_overlap_observed": true,
+      "warnings": [
+        "4",
+        "4"
+      ],
+      "errors": [
+        "0",
+        "0"
+      ],
+      "wall_seconds": 2.484711824974511
+    }
+  ],
+  "scope": "Two stock/Ox receiving seeds, each two retained generated DNG inputs prepared by native clone only and two qualified SDK v1 single-thread helper calls. Exact received bytes reverified by admitted parent; raw digest valid/decode success, errors0/warnings4 per helper. Positive known-nonterminal lifetimes, not SDK compute overlap or throughput/pixel/corpus/production qualification. No new payload read during sealing.",
+  "owner_return": {
+    "path": "/private/tmp/u-smr-v1-13fc44d676/OWNER-RETURN.json",
+    "bytes": 5054,
+    "sha256": "3d94056ef4d0fc2b5ebc50a963a35777fdb63ce61b7f3497e6d0ad92389de81e"
+  }
+}

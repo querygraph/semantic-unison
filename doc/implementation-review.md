@@ -56,10 +56,11 @@ not peaks, whole-tree limits, calibrated CPU units or speedup qualification.
 Its admission735810e6 is consumed and cannot authorize further native work.
 
 The [multi-file receiving V1 request](sdk-multifile-receiving-request-v1.json)
-is a separate prepared, unstarted integration step: two actual stock/Ox receiving
-seeds, each with two generated DNG candidates and up to two qualified
-single-thread SDK helpers. Its metadata checks and original fake loopback
-controls pass, while actual receiving/SDK behavior remains unproven. No actual
-overlap or throughput claim follows from requested flags or synthetic receipts.
+was subsequently admitted and [actually passed](../tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json):
+two stock/Ox receiving seeds, each with two generated DNG candidates and two
+qualified single-thread SDK helpers. Actual23264/2004ad/exit0/allgroups/FDs
+closed; raw digests valid/decode success/errors0/warnings4. Positive known-live
+lifetimes are observed, not SDK compute overlap or throughput qualification.
+The preparation request remains immutable; admission7b320b51 is consumed once.
 The full goal remains incomplete, including representative semantic eligibility,
 required failure/platform scope and the remaining benchmark/resource evidence.
