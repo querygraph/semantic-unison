@@ -80,6 +80,15 @@ let () =
   let overflow_payload="SBQ1 99999999999999999999 00000000000000000000\n" in
   write ledger (overflow_payload ^ SemanticHash.string overflow_payload);
   quota_refuses "overflow quota";
+  (* Every possible interrupted prefix of the fixed ledger is ambiguous.
+     Existing records must prohibit initialization even for a zero-byte prefix. *)
+  for length=0 to 78 do
+    let prefix=String.sub saved_ledger 0 length in
+    write ledger prefix;
+    quota_refuses (Printf.sprintf "torn quota prefix %d" length);
+    check(read ledger=prefix) "refused torn ledger was repaired or charged"
+  done;
+  print_endline "PASS79 interrupted ledger prefixes refuse capture without rewriting recovery state";
   write ledger saved_ledger;Unix.chmod ledger 0o644;
   quota_refuses "permissive quota";Unix.chmod ledger 0o600;
   let ledger_alias="quota-hardlink" in

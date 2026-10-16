@@ -72,3 +72,12 @@ a claim about hostile writers, physical storage accounting or thread safety.
 records both29-case suites and normal group/CPU8 closure, with no SDK, Photo
 payload or canonical IO. It uses current compiler-matched production native
 objects; production source inventory matched each build before linking.
+
+[Interrupted-ledger qualification](../qualification/compact-cache-torn-ledger-actual-20261016.json)
+now additionally tests every incomplete prefix length0..78 of the79-byte ledger
+with existing recovery records. Every attempted new capture refuses, leaves the
+prefix bytes untouched, keeps the original base readable, and restores the
+parent descriptor baseline. Both stock/Ox storage suites passed. These are
+controlled corrupt/truncated inputs, not a claim about actual power-loss or
+fsync ordering. The earlier29-case receipt remains unchanged; the successor
+records79 additional prefix variants explicitly.

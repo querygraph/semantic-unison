@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T20:57:54Z. Comparison admission/workspace last checked
+Last updated: 2026-10-16T20:59:27Z. Comparison admission/workspace last checked
 absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -64,6 +64,15 @@ zero SDK/Photo payload/canonicalEXIO. This does not force execution overlap or
 prove crash durability. Current stock probe/compiler-matched build says5.2.0,
 so the current compiler description below is corrected rather than borrowing
 historical5.5.1 wording. Frozen172-source request unchanged.
+
+**Interrupted quota state:** successor storage controls now test all79 incomplete
+ledger prefixes (length0..78), including empty ledger over retained records.
+Every new capture refuses without rewriting the prefix or losing the original
+readable base; descriptor baselines hold. Actual owner13248/060692/0/no session,
+children86696/86712 reaped0/groups absent, CPU8 closed, both stock/Ox pass.
+Receipt `compact-cache-torn-ledger-actual-20261016.json` preserves successor
+sources separately. Controlled corrupt inputs are not actual power-loss testing;
+uncertain-close lifetime remains unqualified beyond prior explicit scopes.
 
 **Current resources:** no Unison job or retained CPU/IO ownership remains from
 our completed work. Latest Photo notices released its relevant window; that is

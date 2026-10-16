@@ -1,0 +1,121 @@
+{
+  "scope": "Disposable merge-base storage plus all79 torn ledger prefixes over existing recovery records; zero SDK/Photo/retained payload/canonicalEXIO; CPU8 serial compilation",
+  "rows": [
+    {
+      "label": "stock",
+      "build_receipt": {
+        "path": "/private/tmp/unison-validation-live-full-stock-20261016a/RESULT.json",
+        "sha256": "e046e0854ade0adad2fb88cb4350f2d7c610aac0a77166f136f5f7e83c4c8807"
+      },
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/semantic_base_cache/storage.py",
+          "--compiler",
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rm7wj0u5",
+          "--report",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-cache-torn-controls-1ouneddr/stock.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "Workspace: /private/tmp/unison-cache-storage-pzxo772r\nPASS checksum\nPASS truncated\nPASS oversized\nPASS permissive\nPASS hardlink\nPASS symlink\nPASS79 interrupted ledger prefixes refuse capture without rewriting recovery state\nPASS global quota/idempotence/corruption/range/trust/missing-ledger/real process lock/legacy fallback\nPASS private storage trust/capacity/idempotence and repeated descriptor settlement\nPASS concurrent process quota reservation preserves exactly one remaining entry\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 86696,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "workspace": "/private/tmp/unison-cache-storage-pzxo772r",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rm7wj0u5",
+        "cases": 29,
+        "baseline_cases": 16,
+        "quota_cases": 13,
+        "torn_ledger_prefixes": 79,
+        "compiler_version": "5.2.0",
+        "probe_source_sha256": "fb9ac8cb7ad61fdc9f56ce9ddf6a8f735ff383b2d4d8ef89be3015abaa6d2d85",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+        "binary_sha256": "f380fe0b923220fd8917f4c80db6c12fbccab09743418fbda500a6c2ec7f243e"
+      }
+    },
+    {
+      "label": "ox",
+      "build_receipt": {
+        "path": "/private/tmp/unison-validation-live-full-ox-20261016a/RESULT.json",
+        "sha256": "8379ebcad4bb18c10e330ada820ad17924f45148c4517380313180ce810668aa"
+      },
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/semantic_base_cache/storage.py",
+          "--compiler",
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ma367lji",
+          "--report",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-cache-torn-controls-1ouneddr/ox.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "Workspace: /private/tmp/unison-cache-storage-yalav0xu\nPASS checksum\nPASS truncated\nPASS oversized\nPASS permissive\nPASS hardlink\nPASS symlink\nPASS79 interrupted ledger prefixes refuse capture without rewriting recovery state\nPASS global quota/idempotence/corruption/range/trust/missing-ledger/real process lock/legacy fallback\nPASS private storage trust/capacity/idempotence and repeated descriptor settlement\nPASS concurrent process quota reservation preserves exactly one remaining entry\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 86712,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "workspace": "/private/tmp/unison-cache-storage-yalav0xu",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ma367lji",
+        "cases": 29,
+        "baseline_cases": 16,
+        "quota_cases": 13,
+        "torn_ledger_prefixes": 79,
+        "compiler_version": "5.2.0+ox",
+        "probe_source_sha256": "fb9ac8cb7ad61fdc9f56ce9ddf6a8f735ff383b2d4d8ef89be3015abaa6d2d85",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+        "binary_sha256": "6ed8c4e185f84608c02f1470ac0f4b15c5682f7aed5984a1ffc8d7e860c72aa0"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "sources": {
+    "tests/semantic_base_cache/storage.ml": "fb9ac8cb7ad61fdc9f56ce9ddf6a8f735ff383b2d4d8ef89be3015abaa6d2d85",
+    "tests/semantic_base_cache/storage.py": "676885077df9ee34508fca37a56c26967ff7a76c8b3244dbadc90151cf83713b",
+    "src/semanticMergeCache.ml": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+    "src/semanticMergeCache.mli": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+  },
+  "owning_tool_terminal": {
+    "session_id": 13248,
+    "initial_chunk": "561fd8",
+    "terminal_chunk": "060692",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Faithful actual write_stdin terminal transcription; not child/group inference"
+  },
+  "limitations": [
+    "Deliberately truncated disposable ledger bytes, not power-loss injection or filesystem fsync durability qualification.",
+    "Only managed new captures refuse; previously valid recovery base must remain readable.",
+    "No uncertain OS close/reap injection or hard process RSS/FD cap claim."
+  ]
+}

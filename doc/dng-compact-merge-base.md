@@ -130,3 +130,9 @@ two-record ledger charge, and the original recovery base. Both children are
 waited, and containing process groups/CPU8 close. Schedule order is uncontrolled;
 this strengthens cooperative quota accounting evidence without establishing
 crash durability, hostile-writer safety or physical space bounds.
+
+Every incomplete ledger prefix0..78 is now covered by
+[stock/Ox recovery controls](../tests/qualification/compact-cache-torn-ledger-actual-20261016.json).
+Over surviving records, even the empty prefix refuses new capture without
+repairing/resetting the ledger or losing the readable base. This tests recovery
+refusal on supplied interrupted states, not actual crash/fsync durability.
