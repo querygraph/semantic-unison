@@ -21,7 +21,7 @@ The [machine-readable map](../tests/qualification/acceptance-scope-audit-2026101
 
 Next practical gate: bounded copy-only real-camera DNG eligibility and exact receiving, using explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
 
-An optional generated-fixture property-removal matrix is now source-prepared
+An optional generated-fixture property-removal successor matrix is source-prepared
 (`SYNC_PROPERTY_REMOVAL_CONTROLS=1` on the exact-admitted shared IO route).
 It checks named xattr/native resource-fork removal, readonly mode, retained old
 reader bytes/properties and unchanged no-op epochs. The CPU-only dispatcher
@@ -34,6 +34,17 @@ outcomes remain unknown; neither a journal entry nor a nonzero outcome proves
 settlement. Failed partial-matrix release and actual property-transfer controls
 remain to be qualified before scheduling the new IO run. Historical admitted
 source pins and completed runs are unchanged.
+
+Its v1 attempt failed on the first seed's CLI argument parsing, before any
+server creation: [preserved failure/recovery](../tests/qualification/shared-property-failed-actual-20261016.json).
+No rows completed, and no property receiving pass is claimed. The original
+idle retention owner was stopped only after independent no-server/client/group
+proof; actual parent exit137 and absence of original-parent worker wait4 are
+explicit. All resources were independently reacquired/closed and Root adopted
+recovery. [V2](shared-property-io-request-v2.json) fixes `-xattrs=true` and adds
+an explicit no-server proof branch, with [actual Python peer/dispatcher controls](../tests/qualification/property-v2-source-lifecycle-actual-20261016.json).
+Only a full pinned no-creation frame is accepted; null server PID alone is not
+evidence. V1 is consumed; V2 needs a fresh admission and has never run.
 
 A separate [journal-prefix source qualification](../tests/qualification/journal-prefix-source-controls-actual-20261016.json)
 now distinguishes known nonzero call settlement from functional success. Its

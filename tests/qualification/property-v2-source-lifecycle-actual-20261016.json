@@ -1,0 +1,292 @@
+{
+  "schema": "unison-property-v2-source-lifecycle/1",
+  "runs": [
+    {
+      "owner_terminal": {
+        "session": 10119,
+        "chunk": "21f879",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 56783,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 56783,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "result": {
+        "schema": "unison-io-source-controls/1",
+        "complete": true,
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix",
+        "sources": {
+          "tests/shared_io_plan_test.py": "1c98ab90944c38cd6f6549f25d6f50d06bc584057f2e910aa167e4adf31d96fc",
+          "tests/shared_io_dispatch_test.py": "d74bae0056f312f48757ef59acc11cfd72b7e28e09dfaa745ebc7a2d6b0997f3",
+          "tests/shared_io_dispatch_lifecycle_test.py": "afee530fa1055f4ce48a1c9768e260682098028bb8c6f785be33d8603ecb4ccb",
+          "bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304",
+          "bench/sync/properties_test.py": "9f4ee7ce9e8d12ac7cae7a9d4eb03374b52d7ac765f5c8af5986ea6975868ac8",
+          "bench/sync/invocation_journal_test.py": "dad2b764eba3401edce959368957af0c3770e15b0e3252ab961b2726a690fae7",
+          "bench/sync/journal_lifecycle_test.py": "53e007d6f3b32db8fcbeaaaeb94838f93a5360c9a4b7e8d7315528ab8d399b46",
+          "tests/shared_dispatch.py": "6d9eef97dd4ffa144fd3488400e39ba4209f4b547367ead9a7621235b227cce9",
+          "tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+          "tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+          "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+          "tests/manual.py": "c8144b70d6cdd9e45f59441d453e6470c9d3b2730872d89b8b035e790929d658",
+          "tests/shared_io_plan.py": "3641d4923c64c9ad15f72b03b7b41d71bf35bc1dcc2e1cfa7fb85fc21b539b3c",
+          "bench/sync/artifact_pins.py": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd",
+          "bench/sync/run.py": "73d83116d266596f18b3dc10afefadc7283577275c1480471e59ea52897e3829",
+          "tests/shared_io_controls.py": "e8b7eb0dcdd5119658172a16172c065f505a6baee3816c207926d7a0881cc276",
+          "bench/sync/properties.py": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889",
+          "bench/sync/shared_audit.py": "b67d42a1c1164cb8a1c0a5a8fef70f7defbe9271ea772c79d82fdd798b18274c",
+          "bench/sync/invocation_journal.py": "494a437284cc170f2b3a5344d3253593c5aa4a280b601e2a301adcd530adae53",
+          "bench/sync/proxy.py": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178",
+          "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+          "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+        },
+        "calls": [
+          {
+            "script": "tests/shared_io_plan_test.py",
+            "pid": 56784,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/0.log",
+            "log_sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+          },
+          {
+            "script": "tests/shared_io_dispatch_test.py",
+            "pid": 56785,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/1.log",
+            "log_sha256": "74202dc09a3347400de94f86db7081b0c92ff6270bca74570c143aa53888e576"
+          },
+          {
+            "script": "tests/shared_io_dispatch_lifecycle_test.py",
+            "pid": 56786,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/2.log",
+            "log_sha256": "aba8f7ee23df91130bbff27cb05bb5ce9da600d976493f1e7025c369621ad48e"
+          },
+          {
+            "script": "bench/sync/artifact_pins_test.py",
+            "pid": 56787,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/3.log",
+            "log_sha256": "8f2c3cf5d3bf9284b6f5a737141442af9cd5313f865e0a157807be3354be9b86"
+          },
+          {
+            "script": "bench/sync/properties_test.py",
+            "pid": 56788,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/4.log",
+            "log_sha256": "ca76ae23d74a4f8311220fb98bf9133410292fe2127b0b3238e002043c23db77"
+          },
+          {
+            "script": "bench/sync/invocation_journal_test.py",
+            "pid": 56789,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/5.log",
+            "log_sha256": "b986091cdd4d7aeb1185de9a51d74065913d71702d10fa5dada3e4c584a2ddd7"
+          },
+          {
+            "script": "bench/sync/journal_lifecycle_test.py",
+            "pid": 56790,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/6.log",
+            "log_sha256": "b90b0b80f16a41e8b7ceac4c1f7989b7b077a9198db47f01f4ec30671aef21e1"
+          }
+        ]
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/0.log",
+          "bytes": 109,
+          "sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/1.log",
+          "bytes": 106,
+          "sha256": "74202dc09a3347400de94f86db7081b0c92ff6270bca74570c143aa53888e576"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/2.log",
+          "bytes": 120,
+          "sha256": "aba8f7ee23df91130bbff27cb05bb5ce9da600d976493f1e7025c369621ad48e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/3.log",
+          "bytes": 104,
+          "sha256": "8f2c3cf5d3bf9284b6f5a737141442af9cd5313f865e0a157807be3354be9b86"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/4.log",
+          "bytes": 107,
+          "sha256": "ca76ae23d74a4f8311220fb98bf9133410292fe2127b0b3238e002043c23db77"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/5.log",
+          "bytes": 112,
+          "sha256": "b986091cdd4d7aeb1185de9a51d74065913d71702d10fa5dada3e4c584a2ddd7"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-aryx9cix/6.log",
+          "bytes": 443,
+          "sha256": "b90b0b80f16a41e8b7ceac4c1f7989b7b077a9198db47f01f4ec30671aef21e1"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-k91haqg8/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "68237ad720b3a9051a80dcbe0a3b064d7fe8412dbbb6b5ebe8e7a878daf9ae00"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-k91haqg8/SHARED-START.json",
+          "bytes": 1149,
+          "sha256": "2dbfe3f29c50e7e7cdc75631a8b4fbfd4c1030c25f0233eae3b070fa42a56a3d"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-k91haqg8/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-k91haqg8/SHARED-STDOUT.txt",
+          "bytes": 6113,
+          "sha256": "f76158293d24deb61bb631555ec9294b5126add30dc7941c95d698fa0951fa5f"
+        }
+      ]
+    },
+    {
+      "owner_terminal": {
+        "session": 94523,
+        "chunk": "8cfdd3",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 56840,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 56840,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "result": {
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn",
+        "inner_result": 7,
+        "disposable_leases_closed": true,
+        "audit": {
+          "attempted_cli_invocations": 3,
+          "server_not_created_invocations": 1,
+          "all_attempted_client_server_supervisor_settled": true,
+          "functional_success_inferred": false,
+          "scope": "journal-prefix lifecycle only; not aggregate or parent terminal",
+          "functional_result": "FAILED"
+        },
+        "scope": "actual peer/dispatcher settlement; inner IO/CPU leases disposable"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/RESULT.json",
+          "bytes": 7612,
+          "sha256": "795856110902c284a0c376dab1ab737910bc4a1d2194e9bc2c387ce6fce770bf"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-CLOSED.json",
+          "bytes": 499,
+          "sha256": "4aacd665c8bafe1ce0d4d8c6332ff942c89e4432092faf9b2cb18d0d6e8dabcb"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-IO-ATTEMPT.json",
+          "bytes": 483,
+          "sha256": "9f2db74efc22df4edb8237f1dad73a4e64c1fca0e4437c4d53b2ae7f7040cd2e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-SERVER-AUDIT.json",
+          "bytes": 285,
+          "sha256": "7ff3f23d30780f6e12c2d4e2916acb438b767006c7b7dc723d9f04b989435c8e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-START.json",
+          "bytes": 4685,
+          "sha256": "7723935ecc85124fbebd13ac7442d4e6a51add4f871abfa5b0683c21c40d4bcd"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-bsl_5jhn/SHARED-STDOUT.txt",
+          "bytes": 443,
+          "sha256": "02964bdef669426c883cd81b888e8fbaca0900c853d3dcafa744f8166961addd"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-gz9_f6ee/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "0eca90115508095c6ec6bc3f17cd135bee546225af5d9dff2e2b15e3a7b69187"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-gz9_f6ee/SHARED-START.json",
+          "bytes": 1190,
+          "sha256": "cc4ab38affd12c2d85888cbbd79c6fa090749bb8a9e799da9179255aa13f6143"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-gz9_f6ee/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-gz9_f6ee/SHARED-STDOUT.txt",
+          "bytes": 512,
+          "sha256": "fe2b39d22785859054418e73c1999cc4711593283fe735473808cd2619e7709d"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 36019,
+      "sha256": "73d83116d266596f18b3dc10afefadc7283577275c1480471e59ea52897e3829"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6151,
+      "sha256": "494a437284cc170f2b3a5344d3253593c5aa4a280b601e2a301adcd530adae53"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/journal_lifecycle_test.py",
+      "bytes": 3437,
+      "sha256": "53e007d6f3b32db8fcbeaaaeb94838f93a5360c9a4b7e8d7315528ab8d399b46"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/failed_sync_dispatch_lifecycle.py",
+      "bytes": 3484,
+      "sha256": "4d8b5a45348f235a18d36907a012ed82287b177584de86bdf80dea9d27b9c3a4"
+    }
+  ],
+  "scope": "InlinepropertyCLIvalues and explicit pinnedproxy no-servercreation proof. Real3Pythonpeer calls and composeddispatcher actualnonzeroinnerexit/reap/disposableleaseclose; outercanonical8 closed. No actual propertysync/Unisonbinary/canonicalEXIO/camera/SDK/Adobe; v1failedbytesunchanged."
+}

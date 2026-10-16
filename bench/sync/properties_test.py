@@ -6,6 +6,14 @@ import tempfile
 import unittest
 from unittest.mock import patch
 import properties as p
+from run import selected_property_flags
+
+
+class ArgumentControls(unittest.TestCase):
+    def test_property_values_cannot_be_anonymous_roots(self):
+        flags=selected_property_flags()
+        self.assertEqual(flags,['-rsrc=true','-xattrs=true','-perms=0o777'])
+        self.assertTrue(all(flag.startswith('-') and '=' in flag for flag in flags))
 
 
 @unittest.skipUnless(sys.platform == 'darwin', 'native ResourceFork fixture requires Darwin')

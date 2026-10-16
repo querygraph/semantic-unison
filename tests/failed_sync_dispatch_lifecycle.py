@@ -68,7 +68,8 @@ def worker():
     assert closed['child']['returncode'] == 7 and closed['child']['reaped']
     assert closed['child']['other_group_members_absent_before_reap']
     assert proof['functional_result'] == 'FAILED'
-    assert proof['attempted_cli_invocations'] == 2
+    assert proof['attempted_cli_invocations'] == 3
+    assert proof['server_not_created_invocations'] == 1
     print(json.dumps({'workspace': str(output), 'inner_result': code,
                       'disposable_leases_closed': True, 'audit': proof,
                       'scope': 'actual peer/dispatcher settlement; inner IO/CPU leases disposable'}))

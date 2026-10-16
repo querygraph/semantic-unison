@@ -15,6 +15,7 @@ if '-server' in sys.argv:
     assert sys.stdin.buffer.read()==b'ping'
     sys.stdout.buffer.write(b'pong');sys.stdout.buffer.flush()
 else:
+    if sys.argv[1]=='9':sys.exit(9) # original pre-transport refusal
     sock=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)
     sock.connect(os.environ['UNISON_SYNC_BENCH_SOCKET'])
     args=json.dumps([sys.executable,__file__,'-server']).encode()
@@ -44,7 +45,7 @@ def main():
     output = work / 'journal.json'
     journal = Journal(result, lambda: save(output, result))
     here = Path(__file__).resolve().parent
-    for expected in (0, 7):
+    for number, expected in enumerate((0, 7, 9), 1):
         directory = work / str(expected)
         directory.mkdir()
         env = dict(os.environ, UNISON_SYNC_BENCH_BINARY=sys.executable,
@@ -60,7 +61,7 @@ def main():
                                          strict_group_settlement=True)
         except InvocationFailure as error:
             outcome = error.outcome
-            assert expected == 7
+            assert expected in (7, 9)
         else:
             assert expected == 0
         journal.finish(outcome)
@@ -70,10 +71,11 @@ def main():
         save(output, result)
         saved = json.loads(output.read_text())
         proof = audit_attempted(saved)
-        assert proof['attempted_cli_invocations'] == (1 if expected == 0 else 2)
+        assert proof['attempted_cli_invocations'] == number
+        assert proof['server_not_created_invocations'] == (1 if expected == 9 else 0)
         assert proof['functional_success_inferred'] is False
     print(json.dumps({'workspace': str(work), 'journal': str(output),
-                      'proof': proof, 'actual_calls': 2,
+                      'proof': proof, 'actual_calls': 3,
                       'scope': 'original Python peers and actual proxy/client/server ownership only'}))
 
 

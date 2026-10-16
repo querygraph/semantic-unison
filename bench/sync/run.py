@@ -37,6 +37,12 @@ SDE = re.compile(
 PRESERVED = re.compile(r"(?<!Local )Receiver clone preserved (\d+) logical bytes")
 
 
+def selected_property_flags():
+    # Uarg.Bool does not consume a separate "true" argument. Inline values
+    # work for BOOL, BOOLDEF and INT and cannot become anonymous roots.
+    return ['-rsrc=true', '-xattrs=true', '-perms=0o777']
+
+
 def executable(value):
     path = Path(value).expanduser().resolve()
     if not path.is_file() or not os.access(path, os.X_OK):
@@ -422,7 +428,7 @@ def main():
                 if mode == "semantic":
                     flags += ["-semanticdng"]
             if args.property_removal_controls:
-                flags += ["-rsrc", "true", "-xattrs", "true", "-perms", "0o777"]
+                flags += selected_property_flags()
             command = [str(binary), str(directory / "left")]
             receipt_path = directory / (stage + "-proxy.json")
             socket_path = directory / (stage + ".sock")

@@ -13,8 +13,22 @@ settlement and Unison00..07 release. Earlier full-build receipts below retain
 their historical source scopes. Standing sharing remains8Unison/8Photo/2system;
 the separately coordinated Photo scaling window completed and released.
 
-Generated property-removal receiving is SOURCE PREPARED, not yet executed.
-The [exact request](doc/shared-property-io-request-v1.json) binds current Make
+Generated property-removal v1 ran once and FAILED before its first seed server:
+`-xattrs true` left a third anonymous argument, interpreted as a profile.
+Actual client/supervisor groups were reaped; explicit no-server creation was
+independently proved from pinned proxy control flow. Original idle retention
+parent alone was stopped after proof; actual17842/c39203/137/no session, original
+worker wait4 by parent NOT claimed. Fresh IO/CPU bundle reacquisition closed;
+[failure/recovery evidence](tests/qualification/shared-property-failed-actual-20261016.json)
+preserves originals. Admissiond18c405c consumed, no replay/property pass.
+
+The fresh [v2 request](doc/shared-property-io-request-v2.json) is SOURCE PREPARED,
+not admitted/executed. Inline CLI property values eliminate anonymous arguments;
+failed-prefix audit now recognizes only complete explicit pre-server-creation
+evidence plus independently reaped client/supervisor groups. [Actual successor controls](tests/qualification/property-v2-source-lifecycle-actual-20261016.json)
+include three original Python peer calls and composed dispatcher normal release
+of their failed result, disposable inner leases/real outerCPU8. No actual Unison
+property receiving is qualified. The exact request binds current Make
 artifacts, all execution sources,18rows54CLI/two2MiB fixtures per row, selected
 native fork/xattr removal and0640→0400 mode, retained old readers and unchanged
 no-op epochs. Maximum36 old readers and conservative uninstrumented8GiB logical

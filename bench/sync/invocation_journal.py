@@ -11,8 +11,8 @@ def audit_attempted(result):
 
     This does not prove the aggregate owner exited, authenticate a receipt, or
     release any FD. Only the exact shared loopback configuration is supported.
-    Missing client/server evidence (including failures before server creation)
-    remains unknown rather than being interpreted as a no-start proof.
+    Missing evidence remains unknown. A pinned proxy's explicit pre-creation
+    state is the sole supported server-not-started proof, not null PID alone.
     """
     def require(value, message):
         if not value:
@@ -20,6 +20,7 @@ def audit_attempted(result):
     entries = result.get('invocations')
     require(type(entries) is list and 0 < len(entries) <= 54, 'bounded nonempty journal required')
     seen = {}
+    never_created = 0
     for index, entry in enumerate(entries):
         require(type(entry['index']) is int and entry['index'] == index
                 and entry['state'] == 'OUTCOME', 'unknown or reordered invocation')
@@ -53,7 +54,27 @@ def audit_attempted(result):
                     'call owner group unsettled')
         require(run['client_cleanup']['returncode'] == run['returncode'], 'client exit differs')
         proxy = run['proxy']
+        require(type(proxy) is dict and proxy.get('schema') == 'unison-loopback-protocol-count/1',
+                'pinned proxy receipt schema required')
         server = proxy['server_cleanup']
+        if server is None:
+            # proxy.py assigns command BEFORE constructing NativeChild, so
+            # null command + complete normal-finally receipt proves that the
+            # creation line was never reached. The supervisor group proof
+            # above is independently required even in this branch.
+            require(all(proxy.get(k, 'MISSING') is None for k in (
+                    'server_command', 'server_pid', 'server_returncode',
+                    'server_cleanup', 'server_resources', 'launcher_control_header_bytes_excluded'))
+                    and proxy.get('forwarded_protocol_bytes') == {
+                        'client_to_server_bytes': 0, 'server_to_client_bytes': 0}
+                    and proxy.get('input_pump_joined') is True
+                    and proxy.get('pump_errors') == []
+                    and type(proxy.get('fault')) is str and bool(proxy['fault'])
+                    and run['supervisor_cleanup']['returncode'] == 70
+                    and run['returncode'] != 0,
+                    'server no-creation proof incomplete')
+            never_created += 1
+            continue
         require(type(server['pid']) is int and server['pid'] > 0
                 and server['reaped'] is True and type(server['returncode']) is int
                 and proxy['server_pid'] == server['pid']
@@ -62,6 +83,7 @@ def audit_attempted(result):
                 and proxy['server_command'][0] == entry['command'][0],
                 'server or pump settlement missing')
     return {'attempted_cli_invocations': len(entries),
+            'server_not_created_invocations': never_created,
             'all_attempted_client_server_supervisor_settled': True,
             'functional_success_inferred': False,
             'scope': 'journal-prefix lifecycle only; not aggregate or parent terminal'}

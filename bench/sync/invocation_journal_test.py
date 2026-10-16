@@ -70,7 +70,8 @@ class Controls(unittest.TestCase):
         outcome = {'command': ['fake'], 'returncode': 7, 'capture_truncated': False,
                    'supervisor_capture_truncated': False, 'client_cleanup': owner,
                    'supervisor_cleanup': dict(owner, pid=12),
-                   'proxy': {'server_cleanup': dict(owner, pid=13), 'server_pid': 13,
+                   'proxy': {'schema': 'unison-loopback-protocol-count/1',
+                             'server_cleanup': dict(owner, pid=13), 'server_pid': 13,
                              'server_returncode': 7, 'server_command': ['fake', '-server'],
                              'input_pump_joined': True}}
         return {'invocations': [{'index': 0, 'state': 'OUTCOME',
@@ -110,6 +111,40 @@ class Controls(unittest.TestCase):
         result['invocations'].append(second)
         with self.assertRaises(ValueError):
             audit_attempted(result)
+
+    def unstarted(self):
+        result = self.prefix()
+        run = result['invocations'][0]['outcome']
+        run['supervisor_cleanup']['returncode'] = 70
+        run['proxy'] = {'schema': 'unison-loopback-protocol-count/1',
+                        **{k: None for k in ('server_command', 'server_pid', 'server_returncode',
+                            'server_cleanup', 'server_resources', 'launcher_control_header_bytes_excluded')},
+                        'forwarded_protocol_bytes': {'client_to_server_bytes': 0, 'server_to_client_bytes': 0},
+                        'input_pump_joined': True, 'pump_errors': [], 'fault': 'cancel before accept'}
+        return result
+
+    def test_explicit_no_server_creation(self):
+        proof = audit_attempted(self.unstarted())
+        self.assertEqual(proof['server_not_created_invocations'], 1)
+        self.assertIs(proof['functional_success_inferred'], False)
+
+    def test_missing_or_contradictory_no_creation_refused(self):
+        mutations = [lambda p: p.pop('server_resources'),
+                     lambda p: p.update(server_command=['fake','-server']),
+                     lambda p: p.update(server_pid=42),
+                     lambda p: p.update(launcher_control_header_bytes_excluded=4),
+                     lambda p: p.update(forwarded_protocol_bytes={'client_to_server_bytes':1,'server_to_client_bytes':0}),
+                     lambda p: p.update(input_pump_joined=False),
+                     lambda p: p.update(fault=None)]
+        for mutate in mutations:
+            result = self.unstarted()
+            mutate(result['invocations'][0]['outcome']['proxy'])
+            with self.assertRaises(ValueError): audit_attempted(result)
+
+    def test_nonstandard_supervisor_exit_refuses_no_creation(self):
+        result = self.unstarted()
+        result['invocations'][0]['outcome']['supervisor_cleanup']['returncode'] = 9
+        with self.assertRaises(ValueError): audit_attempted(result)
 
 
 if __name__ == '__main__':
