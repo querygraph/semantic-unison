@@ -1,0 +1,25 @@
+{
+  "scope": "Read-only retained artifact consistency audit of prior genuine mock matrix. Reuses bounded protocol parsers; not independent source review/native instrumentation and not a new runtime admission.",
+  "actual_pure_terminal": {
+    "chunk": "922e83",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "auditor": {
+    "path": "tests/sdk_container_receive/audit_live_merge.py",
+    "bytes": 5327,
+    "sha256": "33b377312273ba71697cb75b50b135c20852a18fe30fb8fe2ed8722112d0cccd"
+  },
+  "controls": {
+    "path": "tests/sdk_container_receive/audit_live_merge_test.py",
+    "bytes": 1427,
+    "sha256": "7079cb5f6335e173c0e7cca1ef77211dd59fecad9102cc34e1ea9bf0985a2e13"
+  },
+  "actual_mock_evidence": {
+    "path": "tests/sdk_container_receive/live-merge-full-mock-qualification.json",
+    "bytes": 11975,
+    "sha256": "3ea40b2c552c738fef9a8e80885d117182a63195d45956ee000909c245cf6d57"
+  },
+  "negative_controls": 4,
+  "dispatches": 0
+}

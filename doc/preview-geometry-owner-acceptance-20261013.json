@@ -1,0 +1,226 @@
+{
+  "schema": "unison-preview-geometry-owner-acceptance/1",
+  "utc": "2026-10-14T00:02:47.953486+00:00",
+  "status": "Owner acceptance receipt verified; final independent document review pending and closed separately.",
+  "parent_commit": "f6b0ec0601660ff898a1ce67af3fddbbe4395e79",
+  "owner_acknowledgment": {
+    "path": "/Users/alexy/src/photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json",
+    "bytes": 6728,
+    "sha256": "f66ed2f48cdc1d29793a17a195a09b571c8569d1669e7e12b38fe6bf10e46f5e"
+  },
+  "accepted_owner": "/root/preview_implementation",
+  "ownership_retained": true,
+  "unison_role": "source/interface and independent review only; no competing publisher",
+  "owner_verified_artifact_pins": 17,
+  "independently_rechecked_json_text_pins": [
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json",
+      "bytes": 2500,
+      "sha256": "cf29ca2d407a9c67f286a92e686ce06cf052e0322ee92852b0ad0bdacdd00437"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/COMPLETE.json",
+      "bytes": 943,
+      "sha256": "3213824b6d2610ab36d36f3c3f5c8b1e60962b36c1dc83d8624424d853e60a77"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/SUMMARY.json",
+      "bytes": 19614,
+      "sha256": "2b74c0f59f3729b3a574e51d2ef44eb18fb26f464101461ee63b7068cad51280"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/FINDINGS.txt",
+      "bytes": 3141,
+      "sha256": "ae1091a70a17c48651027db489d28d9ebf0e521e7bed84cadb89b7717f5f8110"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-controls-20261013-v1/COMPLETE.json",
+      "bytes": 613,
+      "sha256": "cd6e598862a60cfd34072f81951cea4cfb90f52a2216f9db4b998a0e55229cf7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/COMPLETE.json",
+      "bytes": 907,
+      "sha256": "20c80498a9ccedad7169a500ab5ce9868e34cfd33173a1b68ef7d895a65c9763"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "972260dc6729155242d3d0f3f5fc57f977b8081b7d2f0b8f104a59ed75ba5469"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/MISSING-CONTAINER-EXTERNAL-CONTEXT.json",
+      "bytes": 213901,
+      "sha256": "e736cbfd7d6273204a5de39f2488807b99ba362d488b0a7ecc2549782adcd5c6"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/COMPLETE.json",
+      "bytes": 909,
+      "sha256": "cb5f49cf41131575f8d2511ebcbbfb2d53d39d52ce7bad8407ab726b75d25725"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "8baaa73f2f12a659fc17766be3879777012ebe2778cdc93f646a863b27333681"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-alignment-current-20261013-v3/COMPLETE.json",
+      "bytes": 977,
+      "sha256": "0f745603ad1f015043faf4cbef9c05e0950c502f378b851785eaf49e062e82e3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-alignment-current-20261013-v3/SUMMARY.json",
+      "bytes": 14427,
+      "sha256": "32fc93e3179380846c1c92147d1b1eb252167c9c40e6331e493f39708d58bb0d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/SUMMARY.json",
+      "bytes": 1786,
+      "sha256": "2e9b56b625d0e4218714fefcbef673d98268962c756a612ebe9ccccd8f5f75ad"
+    },
+    {
+      "path": "/Users/alexy/src/photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json",
+      "bytes": 2624,
+      "sha256": "7c5602963c1ec7f56e73f39c324eb276b8704e6db4dd9e798f0d56c7644960da"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/abi-layout-qualification-20261013T223153Z/COMPLETE.json",
+      "bytes": 6584,
+      "sha256": "89054915c458af61eeb39daa1c0d1888a070c8e49e8b9438191c100de6cb5bbb"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json",
+      "bytes": 8132,
+      "sha256": "52ea2ac1c22d68a8f6917845d01067af3690b61aa44ec11392757437e67ae8b3"
+    }
+  ],
+  "header_pin_reported_by_owner_not_reopened_here": {
+    "path": "/Users/alexy/src/photo/preview-generator/oracle-source-v1/include/preview_backend_v0.h",
+    "bytes": 9547,
+    "sha256": "47314395530b3a53220cc80247f91859720f8c82dfa4689f58c6f3480cdecb58"
+  },
+  "accepted_closed_geometry": {
+    "modernNativeFiles": 44281,
+    "legacyHighestSections": 147460,
+    "combinedFilesAndSections": 191741,
+    "returnedMarkerAndSOFBytes": 6308224,
+    "framingHolds": 0,
+    "geometryMismatches": 0,
+    "observedIdentityChanges": 0,
+    "allSourceReadersClosed": true,
+    "legacyWorkerPid": 56590,
+    "legacyWorkerExitCodeReportedByRoot": 0,
+    "restartOrReplayRequired": false
+  },
+  "planning_only": {
+    "equalStoredCropFinalNonproxyCandidates": 133181,
+    "fit5120x2880BothStoredAxisOrders": 142029,
+    "fitBothStoredAxisOrdersKnownNonproxy": 139426,
+    "fitSwappedOnly": 226,
+    "fitNeither": 5205,
+    "meaning": "Stored geometry and metadata planning only; no current native crop, orientation, chosen tier, freshness, decoded pixels, color, rendering, recognition, monitor or 1:1 qualification."
+  },
+  "alignment_reported_by_owner": {
+    "currentKeySets": 156253,
+    "currentImages": 156255,
+    "productionAdmitted": false,
+    "all987FormerMetadataHoldsResolved": true,
+    "nativePositiveFileSizeMatches": 4299
+  },
+  "preservation_reported_by_owner": {
+    "mappedTombstones": 55,
+    "rootPixelsSeparate": true,
+    "faceMotionSeparate": true,
+    "historicalAndOpaqueMetadataRetained": true,
+    "acceptedOrientationMappingCorrectionRetained": true,
+    "acceptedAbiHeaderUnchanged": true
+  },
+  "compiled_interface_scope": {
+    "cRustStructs": 8,
+    "fields": 56,
+    "layoutMetrics": 172,
+    "typedSignatures": 15,
+    "actualOxCamlCStubPassed": true,
+    "uint64OxCamlRepresentation": "Int64 bit containers with explicit unsigned interpretation",
+    "scope": "Project ABI layout and synthetic typed transport only; does not qualify an Adobe host/backend or faithful renderer runtime."
+  },
+  "admission": {
+    "nativeWindowReleased": false,
+    "nativeRegistrationRecognitionQualified": false,
+    "rendererRuntimeFidelityQualified": false,
+    "offlinePublisherAdmitted": false,
+    "fullRunAdmitted": false,
+    "registrationLoadRestartControl10031592Invoked": false
+  },
+  "ack_actions": {
+    "controlArtifactVerificationOnly": true,
+    "adobeInvocations": 0,
+    "nativeRequests": 0,
+    "payloadAccess": 0,
+    "newGeneratorBuilds": 0,
+    "benchmarks": 0,
+    "publisherChanges": 0,
+    "catalogWrites": 0,
+    "liveCacheWrites": 0,
+    "previewCopies": 0,
+    "payloadHashes": 0,
+    "sealedSourceReceiptChanges": 0,
+    "goalOrProgressChanges": 0
+  },
+  "new_owner_ack_pending": false,
+  "new_native_oracle_readiness": false,
+  "fresh_receiver_admission_inferred": false,
+  "previous_receipts_unchanged": {
+    "geometry_integration": {
+      "path": "/Users/alexy/src/unison/doc/preview-geometry-integration-20261013.json",
+      "bytes": 7829,
+      "sha256": "f54a8cb1a75b59a4f5f74ea6903e9ef7ba638c8bc6e857a0ac0d3c643a31d9b8"
+    },
+    "geometry_independent_review": {
+      "path": "/Users/alexy/src/unison/doc/preview-geometry-independent-review-20261013.json",
+      "bytes": 9956,
+      "sha256": "004cbfc2ee127e410d45e74941392325b49c632f04e96cb706c93d814e5b85f2"
+    },
+    "scope": "Their pending-ACK/document pins remain historical at f6b0ec0601660ff898a1ce67af3fddbbe4395e79; this separate addendum closes owner acceptance only."
+  },
+  "this_integration": {
+    "metadata_and_document_review_only": true,
+    "payload_database_volume_native_access": 0,
+    "adobe_calls": 0,
+    "tests_builds_benchmarks": 0,
+    "external_relay": false,
+    "production_or_test_source_changes": false,
+    "production_publisher_started": false,
+    "shared_eighteen_credit_and_quasar_ten_contract": "unchanged"
+  },
+  "document_pins": {
+    "SOL.md": {
+      "path": "/Users/alexy/src/unison/SOL.md",
+      "bytes": 174758,
+      "sha256": "c8b7a71df39e70673bb51352a3804592e3458eab411ad9773e42321e384dfc23"
+    },
+    "doc/implementation-status.md": {
+      "path": "/Users/alexy/src/unison/doc/implementation-status.md",
+      "bytes": 59886,
+      "sha256": "1349097fe003ffedd8b7995b1350bad9c8e022b5bc2ecb24398b465b41920b78"
+    },
+    "doc/lightroom-preview-placement.md": {
+      "path": "/Users/alexy/src/unison/doc/lightroom-preview-placement.md",
+      "bytes": 30698,
+      "sha256": "ea63bb9ad5db2dad53beb8b8297c4a64f8bf35ec83af856bbc537828fc9e35c8"
+    },
+    "doc/preview-design-integration.md": {
+      "path": "/Users/alexy/src/unison/doc/preview-design-integration.md",
+      "bytes": 36394,
+      "sha256": "5d297be4a07867f8e4a2fabe3e5fb61fdc08691dddf0dbe6f51c36302e56029d"
+    }
+  },
+  "independent_review": "doc/preview-geometry-owner-acceptance-independent-review-20261013.json",
+  "limits": [
+    "Native finite window remains UNRELEASED; all recorded qualification/admission flags remain false.",
+    "Stored crop/quality/nonproxy/axis-fit remain conditional planning; no current edits, decode, color, viewport, native chosen tier, monitor or 1:1 qualification.",
+    "Sixteen JSON/text pins rechecked here; seventeenth accepted header pin is attributed to original owner, not newly read/compiled here.",
+    "Owner reports legacy process exit; no process probe/replay or native/load/restart invocation here.",
+    "No underlying preview payloads, Main/cache databases, physical volumes, compiler artifacts or mutable goal/progress refresh performed."
+  ]
+}

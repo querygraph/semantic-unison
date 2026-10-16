@@ -1,0 +1,132 @@
+{
+  "utc": "2026-10-14T03:29:36.179307+00:00",
+  "state": "ACCEPTED_ONE_CONTROL_CURRENT_PROCESS_NATIVE_SELECTED_TIER_AND_COMMIT_VISIBILITY_COLD_HIGHEST_UNQUALIFIED",
+  "scope": "Unison source/interface review of original Photo owner metadata only; no independent Adobe/UI/Main/cache/media invocation or payload access",
+  "rendererPublisherOwner": "/root/preview_implementation",
+  "control": {
+    "image": 10031592,
+    "rootFile": 10031593,
+    "uuid": "8EE855A1-C41C-4C9A-9CC0-35F8C04E12C3",
+    "digest": "46e0a188a3f637676f25db569a11268b",
+    "settingsId": 10031601,
+    "orientation": "AB"
+  },
+  "testedProcess": {
+    "pid": 2844,
+    "start": "Tue Oct 13 08:27:50 2026"
+  },
+  "immutableEvidencePins": [
+    {
+      "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/COMPLETE.json",
+      "bytes": 3061,
+      "sha256": "cb05bbf510587c56d2d08497bfbad9fb3e1c2e4b87d57c25254d704794c6d959"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/RETURN-PACKET.json",
+      "bytes": 21269,
+      "sha256": "945bf7c7dca3617b9d2ed4e7d7e1871d56ccd3d6ce5a3d5264c32d6f1f10d1b1"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/SLOT-CLOSED.json",
+      "bytes": 2043,
+      "sha256": "e171446ef424a60e26f86abf3c8a2d4a714807fca90cd38d1835b6809c3f8e97"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/GENUINE-REQUEST-CLOSURE.json",
+      "bytes": 6907,
+      "sha256": "26f5bffc91f3c9e97b424e3d6ac2613195ab78d2db1cf05d7eac9feb03e1b92c"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/COMMIT-VISIBLE-READBACK.json",
+      "bytes": 3806,
+      "sha256": "26d99a7a08bdeb4adbfab5fcf606c67e1f9af89599a9f504cf6a8915fe919b59"
+    },
+    {
+      "path": "/Users/alexy/src/photo/one-preview-independent-files-20261014T020147Z-3e1efa99/POST-NATIVE-RESULT.json",
+      "bytes": 35766,
+      "sha256": "98fba14bd0f2e156e040be08f78d9717fc35b97735078a70db6564879b78622f"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-final/PRE-ENTRY-HELD-CLOSED.json",
+      "bytes": 1410,
+      "sha256": "cabdf85939c33d3a987ac5fe4eba9d8527f4586a885a1890088e20248ef71505"
+    }
+  ],
+  "rootVerification": {
+    "artifactPins": 7,
+    "rawCurrentMappingStages": 6,
+    "loads": 2,
+    "nativeRegistrations": 1,
+    "registeredLevels": 6,
+    "positiveFileSizes": [
+      1567,
+      4784,
+      19032,
+      77130,
+      251034,
+      646453
+    ],
+    "selectedNativeDecodedDimensions": [
+      1136,
+      852
+    ],
+    "mappingOrientation": "direct stored AB equals captured Main/native-effective AB; native default false",
+    "mappingTiming": "BEFORE_LOAD is after registration; no raw preregistration row",
+    "commitVisibility": "separate read-only reader observed six levels and current mapping; reader closed",
+    "requestClosure": "eight owned callbacks returned and helpers restored; coordinator idle normal exit0, kernel lease released; no global application quiescence claim"
+  },
+  "independentMediaEvidence": {
+    "reportedByOwnerOnly": true,
+    "allSixSectionsExact": true,
+    "allSixIndependentEntropyDecodes": true,
+    "sevenRetainedFileIdentitiesAndHashesUnchanged": true,
+    "highestDimensions": [
+      2272,
+      1704
+    ],
+    "highestNativeSelectedDecode": false,
+    "nativeGlobalPhysicalReadBytesMeasured": false
+  },
+  "latestOwnerMetadataObservation": {
+    "path": "/Users/alexy/src/unison/PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json",
+    "bytes": 3420,
+    "sha256": "bf2f166bffc6785f46d2db6f16a8f338665d06cc4f2d870bb0155c29674ef743",
+    "utc": "2026-10-14T03:30:07.967940+00:00",
+    "actualClassicPID": 40020,
+    "start": "Tue Oct13 19:47:43 2026",
+    "desktopLocked": true,
+    "coldHighestNativeTestEntered": false,
+    "noNativeOrUIRequestPending": true,
+    "canonicalPhotoLeaseReleased": true,
+    "headlessNativePingReleased": false,
+    "freshRuntimeRecheckByUnison": false
+  },
+  "remainingUnqualified": [
+    "native highest-level load/decode",
+    "cold recognition after restart",
+    "5120x2880 monitor fit and native 1:1",
+    "Quasar split/symlinks/mount-loss/native trim and restart",
+    "faithful current-edit standalone rendering",
+    "offline publisher and full generation run",
+    "native pixel array/color transform equality",
+    "stale fallback and timeout branches",
+    "intrinsic JPEG orientation and preregistration mapping continuity",
+    "power-loss durability",
+    "whole namespace/tombstone preservation census"
+  ],
+  "preservationPolicy": "Retain historic 55 tombstone, alias/opaque fields and RootPixels/face/motion separation; no new global census claimed",
+  "priorAdmissionReceipt": "doc/preview-finite-oracle-resumption-20261013.json",
+  "independentReview": {
+    "path": "doc/preview-native-one-control-independent-review-20261013.json",
+    "bytes": 28799,
+    "sha256": "672a0dc69e57f8f59fbbf14857f369b91843373f8b014cf8ab406e1de8215cea",
+    "state": "ACCEPTED_LIMITED_CURRENT_PROCESS_ONE_CONTROL_SELECTED_TIER_SOURCE_AND_RECEIPT_REVIEW"
+  },
+  "authorization": "No additional native slot, full run, benchmark or competing publisher follows from this receipt",
+  "parentQueueAcknowledgment": {
+    "threadId": "01a13369-8b68-7aa1-be91-cba984ba269b",
+    "deliveryAccepted": true,
+    "downstreamAcceptanceInferred": false,
+    "noAdditionalTestRequested": true
+  }
+}

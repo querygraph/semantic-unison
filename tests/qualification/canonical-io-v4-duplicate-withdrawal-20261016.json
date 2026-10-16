@@ -1,0 +1,43 @@
+{
+  "schema": "firstpair-duplicate-canonical-probe-withdrawal/1",
+  "state": "V4_WITHDRAWN_UNSTARTED_DUPLICATE_OF_COMPLETED_ROOT_RESCHEDULE",
+  "request_preserved": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-probe-request-v4.json",
+    "bytes": 4589,
+    "sha256": "dc026d9ef9c501d3d4048a0fd671590824709d98ee56a55282c578ad4f913f97"
+  },
+  "plan_preserved": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v4.json",
+    "bytes": 6702,
+    "sha256": "443d033b26af5558ba13b367a0f59bada262ee4676821934822abcd80df23802"
+  },
+  "v4_workspace": "/private/tmp/unison-canonical-io-probe-03e3968c395a4a668820abaaffe35a45",
+  "v4_workspace_observed_absent": true,
+  "v4_admission_created_by_unison": false,
+  "dispatch_count_v4": 0,
+  "completed_reschedule": {
+    "admission_sha256": "2519623d74be2bfa12adc56e438d38c67631291215b4dc31f5ff1b08fdf529bd",
+    "owner_pid": 82843,
+    "actual_terminal": {
+      "tool": "exec_command",
+      "chunk": "7efd2e",
+      "exit": 0,
+      "running_session": false
+    },
+    "state": "CONSUMED_ACTUAL_CLOSED",
+    "root_independent_acceptance": {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-CANONICAL-IO-RESCHEDULE-ACTUAL-ACCEPTANCE-20261016.json",
+      "bytes": 3316,
+      "sha256": "cf171d713c756e919d25cbcf19992c9602141d36708359608a2ed9381a6c0b5b"
+    },
+    "unison_sealed_return": {
+      "path": "/Users/alexy/src/unison/tests/qualification/canonical-io-probe-actual-20261016.json",
+      "bytes": 8928,
+      "sha256": "531e6c90a9f9a0a2108b3c5af4d72e315a70b490ea1ba89bf7a2133882eee3e0"
+    }
+  },
+  "older_admission241": "EXPIRED_UNSTARTED_UNCHANGED",
+  "observed_unix": 1792115746.949945,
+  "no_resource_hold": true,
+  "scope": "Scheduling reconciliation only. No canonical lock/payload/SDK/native access, new admission, replay or new qualification. Future real dispatcher-job integration is a separate scope, never another canonical-probe replay."
+}

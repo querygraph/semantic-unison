@@ -1,0 +1,219 @@
+{
+  "scope": "Current Intel macOS stock/Ox Make+selftests and five original synthetic receiving cases each; no SDK/Photo invocation. Retained group observations are past bounded queries, not durable absence or process ownership.",
+  "actual_parent_terminals": [
+    {
+      "owner_tool": 48021,
+      "terminal_chunk": "4e32ed",
+      "exit_code": 0,
+      "running_session_returned": false
+    },
+    {
+      "owner_tool": 47235,
+      "terminal_chunk": "019297",
+      "exit_code": 0,
+      "running_session_returned": false
+    },
+    {
+      "owner_tool": 11158,
+      "terminal_chunk": "35a57b",
+      "exit_code": 0,
+      "running_session_returned": false
+    },
+    {
+      "owner_tool": 75415,
+      "terminal_chunk": "590990",
+      "exit_code": 0,
+      "running_session_returned": false
+    }
+  ],
+  "helper_integration": {
+    "path": "tests/helper_group_observation/integration-qualification.json",
+    "bytes": 7522,
+    "sha256": "185f17ce2638e8de6dd9695ec075c10f61c3e2ed95d3c8ee4bbd12c7583b2584"
+  },
+  "sources": [
+    {
+      "path": "src/helperSupervisor.ml",
+      "bytes": 22752,
+      "sha256": "67bdf3575d6d541ebb6952614d8777c255d036251015663c7882a90950b739ac"
+    },
+    {
+      "path": "src/helperSupervisor.mli",
+      "bytes": 5987,
+      "sha256": "0b82eeccd5f0e771bde86c1d23c47799ff74c5ec3c49521e227fcbad0719d97d"
+    },
+    {
+      "path": "src/helperSupervisor_stubs.c",
+      "bytes": 11700,
+      "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+    },
+    {
+      "path": "src/dngValidation.ml",
+      "bytes": 9638,
+      "sha256": "50a3cb8573ec604c4b04e08e176923dcc744a56c42ab46da08614b969a3d8207"
+    },
+    {
+      "path": "src/dngValidation.mli",
+      "bytes": 4296,
+      "sha256": "b7ec7165a13578fbaf2a803d850398e6d8d32b74ae1f7c452014bd43995844d4"
+    },
+    {
+      "path": "src/dngCandidateValidation.ml",
+      "bytes": 8029,
+      "sha256": "1edb0cf7f616eb0d4888003367b70918e7472c5610f3f91f41ad02a16d2c8414"
+    },
+    {
+      "path": "tests/validation_process/cli.py",
+      "bytes": 5772,
+      "sha256": "550c64dd578c54d2f2b2aedaeec33a1e8860f3112b8ef5ab85d3279c447cd929"
+    },
+    {
+      "path": "tests/validation_process/records.py",
+      "bytes": 5765,
+      "sha256": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+    }
+  ],
+  "runs": [
+    {
+      "compiler_kind": "stock",
+      "build_receipt": {
+        "path": "/private/tmp/unison-group-integration-stock-build-20261015.json",
+        "bytes": 42906,
+        "sha256": "2f37acf6970c2255aebd1a8b2317f1b6e451e86ff042801ead5b55f837c0c4cf"
+      },
+      "cli_receipt": {
+        "path": "/private/tmp/unison-group-integration-stock-cli-20261015.json",
+        "bytes": 10609,
+        "sha256": "fb9c4370d0eebe26a74dcd9c7c1d1ad5c7c6f1c3c709baaf663e00090693f9b7"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+        "bytes": 5656712,
+        "sha256": "5237f14c70f83d19e8a63da568f8f5a563b9a2dff0baa514675223b4c23fb3ce"
+      },
+      "build_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/build.log",
+        "bytes": 76492,
+        "sha256": "4c3ca16700a7d8e9e28ea5cd7e48f886c90a1298f82163d465b48c33cb4a21a7"
+      },
+      "selftest_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/selftest.log",
+        "bytes": 683,
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      },
+      "group_logs": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-nxwd6awh/clipped/run-01.log",
+          "bytes": 12654,
+          "sha256": "4656c3479d206001ace8a9d2295f53544e956d6efd8b48e6f5cadc35e495b35a"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-nxwd6awh/observed/run-01.log",
+          "bytes": 4473,
+          "sha256": "22ec545d715f9beb2cac724a876fc30c15f36dcc07be53d879294707837eb12e"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-nxwd6awh/observed/run-03.log",
+          "bytes": 3820,
+          "sha256": "036ace98eaae2de4317e10d3da73c3fb6cc451dfc8b066ebc4b6df4c6497fafc"
+        }
+      ],
+      "independently_reparsed_groups": [
+        {
+          "endpoint": "server",
+          "pid": 88819,
+          "candidate_sha256": "68cffdae6acc4a28f6565d071488af1a8506afa28d1883af13b78275027cd8b9",
+          "observation": "observed",
+          "other_members": 0
+        },
+        {
+          "endpoint": "server",
+          "pid": 88811,
+          "candidate_sha256": "68cffdae6acc4a28f6565d071488af1a8506afa28d1883af13b78275027cd8b9",
+          "observation": "observed",
+          "other_members": 0
+        },
+        {
+          "endpoint": "server",
+          "pid": 88816,
+          "candidate_sha256": "12f7e49f1fb500124a01f1c89ab78c6cb2715f4b8fff194ce9a64f42fe6a5b71",
+          "observation": "observed",
+          "other_members": 0
+        }
+      ]
+    },
+    {
+      "compiler_kind": "ox",
+      "build_receipt": {
+        "path": "/private/tmp/unison-group-integration-ox-build-20261015.json",
+        "bytes": 42912,
+        "sha256": "0cd0821a40483412f616d59e7bde6ab429bd314130d5eb49fab694d189e6f150"
+      },
+      "cli_receipt": {
+        "path": "/private/tmp/unison-group-integration-ox-cli-20261015.json",
+        "bytes": 10609,
+        "sha256": "475cd2e74ea4046236f1b43bd79f79115710059c6c39cf0cb56eb00d569df63b"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+        "bytes": 7580152,
+        "sha256": "0a7b264264a26cebfe5a8d9ddc96f3e45efbd25868c21db11891052c32142f49"
+      },
+      "build_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/build.log",
+        "bytes": 80658,
+        "sha256": "dc5ea5f1590507d49a9db8235651d173924fdba77da8b72b3b0a4ce8a4ac8427"
+      },
+      "selftest_log": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/selftest.log",
+        "bytes": 686,
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      },
+      "group_logs": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-u_qemhjn/clipped/run-01.log",
+          "bytes": 12666,
+          "sha256": "8d0a3d7ad661708fe8ed56ea40db4064ffbb36c8c38db77ec8f7a45d007d4101"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-u_qemhjn/observed/run-01.log",
+          "bytes": 4485,
+          "sha256": "51fef1e91f0bbd1433698751e6aa845713a20119fa676ea9b25096300328a4d0"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-u_qemhjn/observed/run-03.log",
+          "bytes": 3832,
+          "sha256": "7ea847e90445386cadc0852e2348aa793b0cf2748e3a990a401fcddb6fee7775"
+        }
+      ],
+      "independently_reparsed_groups": [
+        {
+          "endpoint": "server",
+          "pid": 88851,
+          "candidate_sha256": "68cffdae6acc4a28f6565d071488af1a8506afa28d1883af13b78275027cd8b9",
+          "observation": "observed",
+          "other_members": 0
+        },
+        {
+          "endpoint": "server",
+          "pid": 88843,
+          "candidate_sha256": "68cffdae6acc4a28f6565d071488af1a8506afa28d1883af13b78275027cd8b9",
+          "observation": "observed",
+          "other_members": 0
+        },
+        {
+          "endpoint": "server",
+          "pid": 88848,
+          "candidate_sha256": "12f7e49f1fb500124a01f1c89ab78c6cb2715f4b8fff194ce9a64f42fe6a5b71",
+          "observation": "observed",
+          "other_members": 0
+        }
+      ]
+    }
+  ],
+  "pending": [
+    "Actual production SDK-gated merged receiving pilot under fresh Root admission",
+    "Descendant escape/owner-SIGKILL recovery are outside supervisor contract",
+    "No throughput/RSS/full-corpus qualification from these cases"
+  ]
+}

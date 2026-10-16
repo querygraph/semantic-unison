@@ -1,0 +1,256 @@
+{
+  "outcomes": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/entry_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.024s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46591,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/dispatch_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.148s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46593,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/worker_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.013s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46595,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/plan_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46597,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/transport_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46599,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/case_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.013s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46601,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/result_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.022s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46604,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/parent_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.051s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46606,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_multifile/clone_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.010s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46609,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_dispatch_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "............\n----------------------------------------------------------------------\nRan 12 tests in 0.163s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 46611,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "multi-file entry/dispatcher/worker/namespace and component source controls plus old SDK dispatcher regressions; includes imported test groups; inert owners/proxy frames/disposable inner FDs/tiny files only; no SDK or canonical EXIO",
+  "source_sha256": {
+    "tests/shared_dispatch.py": "d82a9f29bd6f2c6a1fbede0d3c9944c8b1abf3cc316f1c2b11092908664e0107",
+    "tests/sdk_multifile/worker.py": "e1ed302fa5d2b69fe116a0c94ddfb3f2c02d9dd248d3a943b4d28cac8d60609e",
+    "tests/sdk_multifile/parent_test.py": "356daf3ddfe7b40ff1095764a808402e6c0a84543d8587c2de5a3c8d8df99908",
+    "tests/sdk_multifile/plan.py": "d83335ec6b133f9efe2619e61f2cf5297ea93bccfc493fa4e390499cc895d4ce",
+    "tests/sdk_multifile/receipts.py": "2f50e224ba7e9fa12005d4a3e85be07cc374771febcbde7c2279f1646045ddee",
+    "tests/sdk_multifile/clone_test.py": "b9d1843d436b2fb00cc3ec60193197f71138b6c4ab293d873568865befc4d4a4",
+    "tests/sdk_multifile/dispatch_test.py": "7428d925cedb19170a1ccce5d9c35a980b55e9acab5760d493eb94f2b06e08ed",
+    "tests/sdk_multifile/transport.py": "62d3415b10669d8d241d2db5750d23b2bf113ce93c7de3cca977ab35b8bae2db",
+    "tests/sdk_multifile/parent.py": "fab969cedfb82df6d726ea34637a7f0c646452d2b7dc9ec76cb5d1a0682a8d94",
+    "tests/sdk_multifile/entry_test.py": "a0131a19bac9c66109df9c834c52e3d023017ab25a93559afaebcc102b317f62",
+    "tests/sdk_multifile/receipts_test.py": "83ef8de65e3b2cf37313d53576dc015882b80c4a3bc31931926bc23d7a5523eb",
+    "tests/sdk_multifile/worker_test.py": "6bf52a86c37b59ba320fff14fb0d2c1627349898f22736ec356618f6b75d3276",
+    "tests/sdk_multifile/result.py": "7d899993c580b29d62963a273060a5b4a8c7ba2f2acb32088921136d0119f6e9",
+    "tests/sdk_multifile/plan_test.py": "009dda08dc8e3901bd963d421646b18935f5d711c6590eebe8d661b0958474b1",
+    "tests/sdk_multifile/result_test.py": "8b45ec48cdab4d8d351d825871c92b91dc514725971bf9f4ce7f1e0feb31b32d",
+    "tests/sdk_multifile/case_test.py": "8658e3d58c2cccad7cd1ac32ee6c2a71a12c78b3f2a2fc9342c8604e4db07117",
+    "tests/sdk_multifile/entry.py": "ea07998c5f9ecd6170a8e6bc515de60e6a011e79e7f8551c6b921637b0c217df",
+    "tests/sdk_multifile/case.py": "58c054f7cc7167889ebbdba910d3f3d98f4e5c3cd6350a5360f8b42c6be9841f",
+    "tests/sdk_multifile/transport_test.py": "52d1236f48a329c815087b8655f9101af3db7e9480047a642ec7f6bd56289ee0",
+    "tests/sdk_multifile/clone.py": "b21ab8124fbb3abb6f84f76e6ae8dc49fd1efd0cd8f205e4603f8cf243d48c8b"
+  },
+  "actual_owner_terminal": {
+    "session_id": 37230,
+    "initial_chunk_id": "015552",
+    "terminal_chunk_id": "b5cdf2",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

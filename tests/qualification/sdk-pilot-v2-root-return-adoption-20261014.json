@@ -1,0 +1,28 @@
+{
+  "utc": "2026-10-14T18:48:44.564549+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-PILOT-V2-RETURN-ACCEPTED-20261014.json",
+    "bytes": 543,
+    "sha256": "c11b656b51ed6082855f17ff03a669ef91b59828a1153b156c9b392058672cdc"
+  },
+  "root_acceptance": {
+    "utc": "2026-10-14T18:44:06.128016+00:00",
+    "state": "ROOT_ACCEPTED_SEALED_ACTUAL_SDK_V2_RETURN",
+    "returnPacket": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-pilot-v2-actual-return-20261014.json",
+      "bytes": 50296,
+      "sha256": "a0704a0e7a26513c36f6e773a700c0893e918c6b965311b1e025cdf8b008a5ab"
+    },
+    "embeddedPinsVerified": 6,
+    "embeddedResultMatchesActualFile": true,
+    "previousRootOutcomeAndOwnerClosureUnchanged": true,
+    "noReplay": true,
+    "newWindowGranted": false,
+    "previewRendererQualified": false
+  },
+  "accepted_return_sha256": "a0704a0e7a26513c36f6e773a700c0893e918c6b965311b1e025cdf8b008a5ab",
+  "scope": "same actual SDK functional/lifecycle return acceptance; no preview fidelity",
+  "new_SDK_window": false,
+  "replay": false,
+  "preview_provenance_owner": "Photo Root/original preview implementation"
+}

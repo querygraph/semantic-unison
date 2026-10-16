@@ -1,0 +1,48 @@
+{
+  "schema": "unison-private-framing-input/1",
+  "state": "SOURCE_READY_NOT_ADMITTED_NOT_DISPATCHED",
+  "source": {
+    "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "identity": {
+      "st_dev": 16777223,
+      "st_ino": 307228717,
+      "st_size": 193851848,
+      "st_mtime_ns": 1792099229810540469,
+      "st_ctime_ns": 1792113844382073309,
+      "st_mode": 33024,
+      "st_nlink": 1,
+      "st_uid": 501
+    },
+    "historical_full_clone_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+    "new_source_sha256_computed": false
+  },
+  "programs": [
+    {
+      "label": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/stock/private-framing-diagnostic",
+      "sha256": "30007fc90f38d4f0120d63f5ed17ca25e0d31f3bcba53350327d2e1679db8909",
+      "build_report": {
+        "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-STDOUT.txt",
+        "bytes": 25205,
+        "sha256": "8b888e3e4e9f4a6b49d0d8d5c7ea634c91779c3710c4650f8312d57eab908010"
+      }
+    },
+    {
+      "label": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/ox/private-framing-diagnostic",
+      "sha256": "809eca68370754e78c225e4400b9b517940fdf8c62442282d30faea55dcda663",
+      "build_report": {
+        "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-STDOUT.txt",
+        "bytes": 25205,
+        "sha256": "8b888e3e4e9f4a6b49d0d8d5c7ea634c91779c3710c4650f8312d57eab908010"
+      }
+    }
+  ],
+  "max_reads_each": 331558,
+  "diagnostic_seconds_each": 10,
+  "source_ancestry": {
+    "path": "/Users/alexy/src/unison/tests/qualification/private-dng-clone-inspection-actual-20261016.json",
+    "bytes": 13360,
+    "sha256": "d923bdf27824a9a834893fd6a857a1a5b239f4056511cdb090c65150ff6018c1"
+  }
+}

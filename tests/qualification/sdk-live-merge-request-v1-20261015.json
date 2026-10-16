@@ -1,0 +1,73 @@
+{
+  "schema": "unison-live-merge-native-request/1",
+  "state": "SOURCE_READY_RUNTIME_UNADMITTED",
+  "prepared": {
+    "path": "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/PREPARED.json",
+    "bytes": 6467,
+    "sha256": "3e0f6b7ac04d018d880af4a0d2e736a53df572ba4fe320b9f789c3a6cd155b21"
+  },
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/tests/sdk_container_receive/run_live_merge.py",
+    "--prepared",
+    "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/PREPARED.json",
+    "--workspace",
+    "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59",
+    "--mode",
+    "native",
+    "--admission",
+    "/Users/alexy/src/photo/preview-generator/UNISON-LIVE-MERGE-V1-ADMISSION-20261015.json"
+  ],
+  "workspace": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59",
+  "admission_path": "/Users/alexy/src/photo/preview-generator/UNISON-LIVE-MERGE-V1-ADMISSION-20261015.json",
+  "source_pins": {
+    "tests/sdk_container_receive/run_live_merge.py": "fd8592325d1bf3d7527eccb87448981f568203092b879c11fc13448d7f0bc383",
+    "tests/sdk_container_receive/live_merge_cases.py": "d1fe15d5f5a08fb89ae763604f0a623a57215bb74fc999d44d37d9d97888d0ec",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "88d1b4a429485e0e3337425d239a09e258af9335a12752843329acc66e3e77c9",
+    "tests/sdk_container_receive/prepare_live_merge.py": "9d19cce82add536394e49ca8d61dab55197aa25d83b1c6fdf4c1c50042a5718d",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2",
+    "tests/validation_process/records.py": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7",
+    "tests/sdk_host_matrix/plan.py": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+  },
+  "limits": {
+    "sdk_calls": 6,
+    "inputs": 3,
+    "logical_states": 12,
+    "cpu_credits": 4,
+    "aggregate_seconds": 300
+  },
+  "evidence": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live-merge-full-mock-qualification.json",
+      "bytes": 11975,
+      "sha256": "3ea40b2c552c738fef9a8e80885d117182a63195d45956ee000909c245cf6d57"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live-merge-owner-lifecycle-qualification.json",
+      "bytes": 3082,
+      "sha256": "ab939a5636b782c851c495a7ae95b9d32c54d48a632efc391932791799d3595a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live-merge-aggregate-qualification.json",
+      "bytes": 2636,
+      "sha256": "bdd63eaeef28c46668fa23082219b850061e8cdd3f7d5da11cb354875976d2c8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/group-integration-qualification.json",
+      "bytes": 8216,
+      "sha256": "8762d77fa30b7d2597d98449ecaa4c68e2b58ca77967e3534716a28bb0363941"
+    }
+  ],
+  "constraints": [
+    "Fresh exact Root admission/deadline required; no old slot reuse/retry",
+    "Qualified SDKv1 singlethread only; no Photo/Classic/Main/cache",
+    "300s aggregate starts with owned worker; wrapper preflight outside aggregate explicitly",
+    "Actual parent terminal plus all closure proofs/unresolved audit required",
+    "Six SDKcalls only disjoint merge receiving; seed/noop none",
+    "Functional generated-container receiving only, not pixels/throughput/corpus/preview reuse"
+  ]
+}

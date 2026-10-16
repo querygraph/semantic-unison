@@ -1,0 +1,53 @@
+{
+  "state": "LARGER_BATCH_PREPARATION_REQUIRES_PARTITION_REVIEW_UNALLOCATED",
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v7.json",
+    "bytes": 10859,
+    "sha256": "2fbfcb814621ed5a28fd0cfe36d0b064867d45927de998d8b3e96b4155400699"
+  },
+  "pure_planning_controls": {
+    "terminal_chunk": "144daf",
+    "exit_code": 0,
+    "no_compiler_binary_or_benchmark_invoked": true
+  },
+  "duration_planning_reference": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-128-v5-actual-return-20261015.json",
+    "sha256": "a1f1f63ab388364e88d8310064b74e4f6988423e29d9992bbc09d70d45bb75d7"
+  },
+  "batches": [
+    {
+      "file_mib": 128,
+      "files": 4,
+      "duration_planning": {
+        "linear_byte_scaling_seconds": 3426.0642689199885,
+        "aggregate_ceiling_seconds": 7200,
+        "partition_review_needed": false,
+        "scope": "Rough byte-scaling estimate, not a runtime bound or authorization; larger batches need partition review when estimate exceeds the owner ceiling."
+      }
+    },
+    {
+      "file_mib": 512,
+      "files": 4,
+      "duration_planning": {
+        "linear_byte_scaling_seconds": 13704.257075679954,
+        "aggregate_ceiling_seconds": 7200,
+        "partition_review_needed": true,
+        "scope": "Rough byte-scaling estimate, not a runtime bound or authorization; larger batches need partition review when estimate exceeds the owner ceiling."
+      }
+    },
+    {
+      "file_mib": 2048,
+      "files": 2,
+      "duration_planning": {
+        "linear_byte_scaling_seconds": 27408.51415135991,
+        "aggregate_ceiling_seconds": 7200,
+        "partition_review_needed": true,
+        "scope": "Rough byte-scaling estimate, not a runtime bound or authorization; larger batches need partition review when estimate exceeds the owner ceiling."
+      }
+    }
+  ],
+  "next_action": "Design bounded partitions that preserve the full18-configuration/five-repetition matrix and audit all324 CLI settlements across parts; do not merely cut repetitions or reuse the consumed128 run. Fresh scheduling required before any larger measurement.",
+  "runtime_started": false,
+  "credits_reserved": 0,
+  "limits": "Byte scaling is a rough planning estimate, not a guarantee that a batch will or will not fit7200s."
+}

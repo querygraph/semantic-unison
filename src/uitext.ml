@@ -645,7 +645,9 @@ let interact prilist rilist =
                   ("show details (curr or match)"),
                   (fun () ->
                       actOnMatching ~change:false
-                        (fun ri -> displayDetails ri; true)));
+                        (fun ri ->
+                          if not (Prefs.read silent) then Uicommon.inspectDetails ri;
+                          displayDetails ri; true)));
                  (["L"],
                   ("list all (or matching) following changes tersely"),
                   (fun () -> newLine();

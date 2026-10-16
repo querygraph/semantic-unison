@@ -1,0 +1,158 @@
+{
+  "schema": "unison-merged-output-sdk-v2-actual-return/1",
+  "utc": "2026-10-15T00:21:26.288092+00:00",
+  "complete": true,
+  "request": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-merged-output-request-v2-20261014.json",
+    "bytes": 4180,
+    "sha256": "70a380ae34efa4258f17d26b093eacfc272d1833520225dcd1b92626d6bb617c"
+  },
+  "admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-MERGED-OUTPUT-V2-ADMISSION-20261014.json",
+    "bytes": 2167,
+    "sha256": "872819f54f550a742e909d572665bbd290b245e2847d82307334dda739e3f48b"
+  },
+  "prepared": {
+    "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/PREPARED.json",
+    "bytes": 7586,
+    "sha256": "ac01b8e706e6c95bedf180044ab1ed5557c2fbe30f795080e3a3b148a2aace9a"
+  },
+  "parent_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-merged-output-v2-parent-terminal-20261014.json",
+    "bytes": 255,
+    "sha256": "1c78fe891f7359fad9b26c2ef1525cad2ba68c7573ae04ed341a8abf212df99b"
+  },
+  "actual_terminal": {
+    "owner_tool": 3883,
+    "terminal_chunk": "5aae79",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "workspace": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901",
+    "wrapper_pid": 69150,
+    "aggregate_pid": 69151
+  },
+  "source_pins": {
+    "tests/sdk_container_receive/validate_merged.py": "f0dc76ad5b2e7b6d48adf890df6503c12c6e7876da713eb2db3979c9f2d4cbb1",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2",
+    "tests/sdk_host_matrix/plan.py": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b",
+    "bench/adobe/phase.py": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/AGGREGATE-CLOSED.json",
+      "bytes": 420,
+      "sha256": "44c00bff73a1bad6bb52459de3e84c6bdc437fa0f616eb91ecf5cfbb3a8219c3"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/CALL-01.json",
+      "bytes": 938,
+      "sha256": "8c8f776cb003b50578bc2469aca4adf60817c1788fb84d846cb7839f797546b7"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/CALL-02.json",
+      "bytes": 938,
+      "sha256": "420d240fea41837c9507873a71db26f8af2179733a40d73bc1a21b500eb96997"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/CALL-03.json",
+      "bytes": 924,
+      "sha256": "b42adf030ddee7cfb733a17a840a030f945bd4c936184619543537baf7a64ca3"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/ENTRY-01.json",
+      "bytes": 722,
+      "sha256": "0541728faad033de627a2756e7722c4a5b8f9f71fec87e66c99c4ff7bc70245a"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/ENTRY-02.json",
+      "bytes": 698,
+      "sha256": "444aa9af7a4e9a4f343650370eab98c4e09e6c20c891f4d182c04885b24511b9"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/ENTRY-03.json",
+      "bytes": 695,
+      "sha256": "ec30b4bf06f836b8e4cf139f18c44f19472c511b32f2e60418f273a13a4cb49e"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/RESULT.json",
+      "bytes": 797,
+      "sha256": "83dfb73e9c8f42379c6b28e1a4594dfaf9c420d8c1287a5960e9ba1d8bd00d83"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/START.json",
+      "bytes": 50,
+      "sha256": "4dcf586b819e3a1a47638036f3e8a1876aeba77eb8752a6870c44c6baf10862d"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/SUPERVISOR-RETURN.json",
+      "bytes": 585,
+      "sha256": "41f1fe0f52d736d318dc1289680d68561c262774a5f27db89d3dd638fefb7655"
+    },
+    {
+      "path": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901/WRAPPER-START.json",
+      "bytes": 1137,
+      "sha256": "130acf257ec3d313bbfa76df28482a9ce9219c132af03dd257a775b78de42e21"
+    }
+  ],
+  "actual_result": {
+    "calls": 3,
+    "results": [
+      {
+        "codec": "uncompressed",
+        "receipt": {
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        }
+      },
+      {
+        "codec": "jpeg",
+        "receipt": {
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        }
+      },
+      {
+        "codec": "jxl",
+        "receipt": {
+          "structure": "valid",
+          "decode": "success",
+          "raw-digest": "valid",
+          "errors": "0",
+          "warnings": "4"
+        }
+      }
+    ],
+    "mode": "native",
+    "scope": "merged synthetic bytes SDK acceptance only; not production receiving-path, pixels, performance or preview qualification"
+  },
+  "actual_closure": {
+    "pid": 69151,
+    "seconds": 300,
+    "closed": true,
+    "scope": "finite contained pilot only",
+    "timed_out": false,
+    "reaped": true,
+    "returncode": 0,
+    "group_members_before_leader_reap": [
+      {
+        "pid": 69151,
+        "stat": "Z"
+      }
+    ],
+    "other_members_absent": true,
+    "wall_seconds": 5.3315609249984846,
+    "child_user_seconds": 4.892402,
+    "child_system_seconds": 0.378243,
+    "within_wall_limit": true
+  },
+  "unresolved_markers": [],
+  "scope": "Three frozen synthetic merged output bytes accepted by qualified SDKv1 structure/decode/raw-digest validation. Four known CFA-padding warnings each. Current core output equality separately proved by c2668fe2. No camera corpus/pixel equality/renderer/RSS/thread/scaling/production receiving-path qualification."
+}

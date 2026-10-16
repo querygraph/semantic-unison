@@ -1,0 +1,78 @@
+{
+  "scope": "Actual stock/Ox native helper integration suites only; 41 groups each. Full receiving trace path/full builds pending; no SDK/Photo calls.",
+  "sources": [
+    {
+      "path": "src/helperSupervisor.ml",
+      "bytes": 22752,
+      "sha256": "67bdf3575d6d541ebb6952614d8777c255d036251015663c7882a90950b739ac"
+    },
+    {
+      "path": "src/helperSupervisor.mli",
+      "bytes": 5987,
+      "sha256": "0b82eeccd5f0e771bde86c1d23c47799ff74c5ec3c49521e227fcbad0719d97d"
+    },
+    {
+      "path": "src/helperSupervisor_stubs.c",
+      "bytes": 11700,
+      "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+    },
+    {
+      "path": "src/dngValidation.ml",
+      "bytes": 9638,
+      "sha256": "50a3cb8573ec604c4b04e08e176923dcc744a56c42ab46da08614b969a3d8207"
+    },
+    {
+      "path": "src/dngValidation.mli",
+      "bytes": 4296,
+      "sha256": "b7ec7165a13578fbaf2a803d850398e6d8d32b74ae1f7c452014bd43995844d4"
+    },
+    {
+      "path": "src/dngCandidateValidation.ml",
+      "bytes": 8029,
+      "sha256": "1edb0cf7f616eb0d4888003367b70918e7472c5610f3f91f41ad02a16d2c8414"
+    },
+    {
+      "path": "tests/helpers/helper_tests.ml",
+      "bytes": 18793,
+      "sha256": "af6b4dad8ae0b03c8d296be386b568e29a42eb5453f00b1aa6dbb1eb79f22c85"
+    },
+    {
+      "path": "tests/helpers/run_tests.py",
+      "bytes": 1952,
+      "sha256": "72a6d1f3dd769fcca42f97d6676d76592232b8a687d04e57e8772e36384b9b3c"
+    }
+  ],
+  "actual_terminals": {
+    "stock": {
+      "owner_tool": 51189,
+      "chunk_id": "e8b8d1",
+      "wall_time_seconds": 0.613979947,
+      "exit_code": 0,
+      "original_token_count": 555,
+      "output": "PASS optional retained-group observation precedes reap and cannot change result\nPASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS optional observation preserves timeout and pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS validation forwards optional group observation without bypassing receipt checks\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    },
+    "ox": {
+      "owner_tool": 38446,
+      "chunk_id": "8d44f2",
+      "wall_time_seconds": 3.368266042,
+      "exit_code": 0,
+      "original_token_count": 671,
+      "output": "File \"synthetic_helper.ml\", line 24, characters 21-35:\n24 |   | \"ignore-term\" -> Sys.set_signal Sys.sigterm Sys.Signal_ignore; sleep 10.\n                          ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\n\nFile \"synthetic_helper.ml\", line 26, characters 6-20:\n26 |       Sys.set_signal Sys.sigterm Sys.Signal_ignore;\n           ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\nPASS optional retained-group observation precedes reap and cannot change result\nPASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS optional observation preserves timeout and pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS validation forwards optional group observation without bypassing receipt checks\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    }
+  },
+  "stock_compiler": {
+    "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+    "bytes": 12749464,
+    "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+  },
+  "ox_compiler": {
+    "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+    "bytes": 49930888,
+    "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+  },
+  "limits": [
+    "Ox original single-process fake helper emits two existing Sys.set_signal unsafe_multidomain alerts.",
+    "Prior primitive query fault/native-bytecode tests remain historical separate evidence.",
+    "No full build or actual CLI trace qualification yet."
+  ]
+}

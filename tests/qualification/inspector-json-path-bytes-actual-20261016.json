@@ -1,0 +1,123 @@
+{
+  "schema": "unison-inspector-json-path/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tools/semantic-inspect/inspect.ml",
+      "bytes": 6042,
+      "sha256": "b7551d2520c83aceb220193a930034182f2f86a35e1ae567fd8edecd350abb77"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/semantic-inspect/json_test.py",
+      "bytes": 2148,
+      "sha256": "77fb518bb5c4f623d434e897113133a72d139127b5a687eb3c4005ba315a6465"
+    }
+  ],
+  "runs": [
+    {
+      "label": "stock",
+      "actual_terminal": {
+        "chunk": "de2bb6",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-inspector-json-stock-20261016a/RESULT.json",
+          "bytes": 519,
+          "sha256": "b637ce5df40a5bfa0bd432284d0b6346942e773697e398f119375eac156de97b"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-stock-20261016a/SHARED-START.json",
+          "bytes": 1243,
+          "sha256": "31bf7ce457d0fb1f2c62c22f223b1820c57174bf2dbe690c2fda425586f42f52"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "beffa53a42f8b4404828396eb0b95923bc30da2280dfd8a4b97a8e92eacbb578"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "actual_terminal": {
+        "tool": 50869,
+        "chunk": "a43250",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-inspector-json-ox-20261016a/RESULT.json",
+          "bytes": 520,
+          "sha256": "0c5a4654b9b611ef1153eb1ee921711f22664f47b0f999a1879a898853a14bd1"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-ox-20261016a/SHARED-START.json",
+          "bytes": 1240,
+          "sha256": "4a632544219639cc4b8ec761ca7c7d445ab66ab9d5a7c1906c04d27e16daa7bc"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "4b021d12aaca34b747c72cc7d46fdc85404eeb34eae148613f924e1f83254f03"
+        }
+      ]
+    },
+    {
+      "label": "build-stock",
+      "actual_terminal": {
+        "tool": 50869,
+        "chunk": "a43250",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-inspector-json-build-stock-20261016a/RESULT.json",
+          "bytes": 3236,
+          "sha256": "b9042fb4e686ce129ba02e6d811cdf5377ab8d3f257c9b46133835124b53ee41"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-build-stock-20261016a/SHARED-START.json",
+          "bytes": 1259,
+          "sha256": "2a0437b0fd745c5284c4b3a8e02eb946d67600e83caa96a14084307abb176835"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-build-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "1e3c57d85e78d041b6d715a55f78dbd4fd7943eeac2bb88f1ee494813e842b77"
+        }
+      ]
+    },
+    {
+      "label": "build-ox",
+      "actual_terminal": {
+        "tool": 29663,
+        "chunk": "3b6010",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-inspector-json-build-ox-20261016a/RESULT.json",
+          "bytes": 3238,
+          "sha256": "5225f063bfa0cb7d8d8c6f0fe00d3ef25964ab16a1e318daf1d7de8e4c38a498"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-build-ox-20261016a/SHARED-START.json",
+          "bytes": 1254,
+          "sha256": "dfcf8d76f2aad4bc86a1951f202cea823e47e476108d322a78e6a0137ca6250a"
+        },
+        {
+          "path": "/private/tmp/unison-inspector-json-build-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "69cb791ed8240f15f3a49cf74ba552a60405118bfb58bdd958811e66a850c821"
+        }
+      ]
+    }
+  ],
+  "scope": "268 independent JSON/UTF-8 cases per compiler and complete stock/Ox inspector build-only; no image input, camera payload, Adobe, SDK or EXglobal operation",
+  "full_goal_complete": false
+}

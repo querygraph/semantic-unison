@@ -1,0 +1,36 @@
+{
+  "utc": "2026-10-14T18:47:41.115530+00:00",
+  "wrapper_pid": 53126,
+  "controller_pid": 53120,
+  "wrapper_exit_source": "OwnedGroup.finish wait4 reserved direct child; see raw WRAPPER-CLOSED.json",
+  "wrapper_closure": {
+    "pid": 53126,
+    "returncode": 0,
+    "reaped": true,
+    "cancel_reason": null,
+    "hard_kill_required": false,
+    "observation_error": null,
+    "group_cleanup_result": "only_owned_leader_zombie_darwin",
+    "group_cleanup_before_leader_reap": true
+  },
+  "raw_wrapper_receipt": {
+    "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/WRAPPER-CLOSED.json",
+    "bytes": 246,
+    "sha256": "6db9549dc60e17efa7ee130004c2909bbc2b0688386c267861a2be778c1d0bf5"
+  },
+  "parent_tool_terminal": {
+    "tool": "functions.exec tools.write_stdin",
+    "session_id": 4905,
+    "exit_code": 0,
+    "session_id_returned": false,
+    "chunk_id": "621ce0",
+    "observed_stdout": "WRAPPER_CLOSED {\"pid\": 53126, \"returncode\": 0, \"reaped\": true, \"cancel_reason\": null, \"hard_kill_required\": false, \"observation_error\": null, \"group_cleanup_result\": \"only_owned_leader_zombie_darwin\", \"group_cleanup_before_leader_reap\": true}",
+    "evidence_source": "actual terminal tool return observed before actual packet publication; not ps absence"
+  },
+  "root_outcome": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-PILOT-V2-ACTUAL-OUTCOME-20261014.json",
+    "sha256": "69b725e7678a4df98728988361ed1738dfb4db6a0a8911cf079f755d07f1f4f9"
+  },
+  "no_replay": true,
+  "new_native_release_inferred": false
+}

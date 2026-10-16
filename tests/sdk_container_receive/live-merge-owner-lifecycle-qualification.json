@@ -1,0 +1,71 @@
+{
+  "scope": "six finite original fake-child cases, actual direct reap and own-group absence only; no SDK/Photo, aggregate controller or helper-proof release qualification",
+  "actual_parent_terminal": {
+    "owner_tool": 13675,
+    "terminal_chunk": "96f3ba",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "sources": [
+    {
+      "path": "tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_owner_lifecycle_test.py",
+      "bytes": 3335,
+      "sha256": "d79a06ddfb9f784988f6edf9c96086732777101df5ec693c22acef222ef1e165"
+    },
+    {
+      "path": "bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "bench/sync/measure.py",
+      "bytes": 3407,
+      "sha256": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    }
+  ],
+  "report": {
+    "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/RESULT.json",
+    "bytes": 3878,
+    "sha256": "5701f0e4521f5b34e1c4c788476708fb9e35dc32a0b82e97ebfc09636b173dd0"
+  },
+  "case_receipts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/bounded-output/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "1bf24f6368a69e1e060ce384066689fea4d5b206b881034eda0f88166284e52f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/capture-setup-failure/CLI-01-CLOSED.json",
+      "bytes": 335,
+      "sha256": "3976dedc5d78b230430eec1e7691db41dc4b666ab41804b479851d107b10075f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/nonzero/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "8ff9d58cc964ebddc0ec40a6a2d93645db7010f5fc0e0f0733c08b79a10be2f6"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/normal/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "ec10ca508242df9b47c999904af9eb85d66cd697d0a4ddede6dad53a645543fc"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/same-group-descendant/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "9075a6eaf8ddec34c464b7d01e41c4cab8cb6748755ffb0da23db8f7c2056eae"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-owner-lifecycle-newerxzl/term-ignoring-timeout/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "2f988e70b540785df056c1fe6847c6a33db895098c44504903c9597294809363"
+    }
+  ],
+  "intentional_test_markers": "All six HELPER-OWNERSHIP-UNRESOLVED files retained because a single fake CLI supplies no full matrix; all actual fake children reaped, not an active allocation.",
+  "aggregate_supervision_qualified": false,
+  "sdk_admission": false
+}

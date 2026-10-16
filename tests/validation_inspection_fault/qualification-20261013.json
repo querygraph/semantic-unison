@@ -1,0 +1,519 @@
+{
+  "schema": "org.firstpair.unison.validation-identify-and-inspection-qualification/0",
+  "date": "2026-10-13",
+  "status": "runtime passed; source/artifact independent audit pending",
+  "root_production_freeze": {
+    "path": "/private/tmp/unison-validation-companion-source-freeze.json",
+    "sha256": "be132ea8aee2516ebf1e04fabec442837146de84b10274870649dc33119072c6"
+  },
+  "source_pins": {
+    "tests/workers/run.py": {
+      "path": "/Users/alexy/src/unison/tests/workers/run.py",
+      "sha256": "793bf33378a61604b92750431acbfa6f1e4a533da9d8bd5dc9814eab7d0c7884"
+    },
+    "tests/workers/test.ml": {
+      "path": "/Users/alexy/src/unison/tests/workers/test.ml",
+      "sha256": "29f9c3b33ecf1ca04ae4bc8277e0c88ff06c42d98c242de33b2648111d939b8a"
+    },
+    "tests/helpers/run_tests.py": {
+      "path": "/Users/alexy/src/unison/tests/helpers/run_tests.py",
+      "sha256": "5f7bedff8ec49235acfc2d07d542dd223aee52f58ab4cf1350469a9c29cb75f7"
+    },
+    "tests/helpers/helper_tests.ml": {
+      "path": "/Users/alexy/src/unison/tests/helpers/helper_tests.ml",
+      "sha256": "77aec7f26fa8dc5ed5d6c2dfaf52791298f27ead62285634a48914aa04304d09"
+    },
+    "tests/validation_inspection_fault/run.py": {
+      "path": "/Users/alexy/src/unison/tests/validation_inspection_fault/run.py",
+      "sha256": "1f70f20749ef10501a29bf61d6fb52b93a8417351230970c078396677b73c7ee"
+    },
+    "tests/validation_inspection_fault/archive_node.ml": {
+      "path": "/Users/alexy/src/unison/tests/validation_inspection_fault/archive_node.ml",
+      "sha256": "3833a8b87838313363d5ee1e31ae1a982f70866c7526b545779bc49587fe4d4e"
+    },
+    "tests/validation_inspection_fault/README.md": {
+      "path": "/Users/alexy/src/unison/tests/validation_inspection_fault/README.md",
+      "sha256": "07e5b7853a9bc318d06814eec6b604754edea8a137a9890b0d1a3032744da164"
+    }
+  },
+  "retained_sources": {
+    "tests/workers/run.py": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/workers/run.py",
+      "sha256": "793bf33378a61604b92750431acbfa6f1e4a533da9d8bd5dc9814eab7d0c7884"
+    },
+    "tests/workers/test.ml": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/workers/test.ml",
+      "sha256": "29f9c3b33ecf1ca04ae4bc8277e0c88ff06c42d98c242de33b2648111d939b8a"
+    },
+    "tests/helpers/run_tests.py": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/helpers/run_tests.py",
+      "sha256": "5f7bedff8ec49235acfc2d07d542dd223aee52f58ab4cf1350469a9c29cb75f7"
+    },
+    "tests/helpers/helper_tests.ml": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/helpers/helper_tests.ml",
+      "sha256": "77aec7f26fa8dc5ed5d6c2dfaf52791298f27ead62285634a48914aa04304d09"
+    },
+    "tests/validation_inspection_fault/run.py": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/validation_inspection_fault/run.py",
+      "sha256": "1f70f20749ef10501a29bf61d6fb52b93a8417351230970c078396677b73c7ee"
+    },
+    "tests/validation_inspection_fault/archive_node.ml": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/validation_inspection_fault/archive_node.ml",
+      "sha256": "3833a8b87838313363d5ee1e31ae1a982f70866c7526b545779bc49587fe4d4e"
+    },
+    "tests/validation_inspection_fault/README.md": {
+      "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/sources/tests/validation_inspection_fault/README.md",
+      "sha256": "07e5b7853a9bc318d06814eec6b604754edea8a137a9890b0d1a3032744da164"
+    }
+  },
+  "retention_wrapper": {
+    "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/retain.py",
+    "sha256": "3cc1dc14d1774440705b6aa9bd4f448aa7937ffdc3bc010551510900d51f8ce2"
+  },
+  "runs": [
+    {
+      "compiler": "stock",
+      "units": {
+        "workers": {
+          "groups": 7,
+          "terminal_exit": 0,
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-workers.log",
+            "sha256": "a8fbc89be341e07120d18118735e8919c02771a5b93e89c234f2d23c989fecba"
+          },
+          "retained_artifacts": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-workers-artifacts.json",
+            "sha256": "d1ed80b16ba72dbe6071a18250264674862201bbcf2d5ac44465e6ea5ebfcfb2"
+          }
+        },
+        "helpers": {
+          "groups": 37,
+          "terminal_exit": 0,
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-helpers.log",
+            "sha256": "51c76f2839c34e92ea61d2c59203a03d697638c22d3c6fd2205212145378a3bb"
+          },
+          "retained_artifacts": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-helpers-artifacts.json",
+            "sha256": "86586ffa088cf2b816c23b165f3920504dce2e164c2579ec125110aa9afb1c80"
+          }
+        },
+        "actual_cli": {
+          "cases": 2,
+          "terminal_exit": 0,
+          "receipt": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli-final.json",
+            "sha256": "307d52453297498963ef615e575b227e71129958766d127a5475b4f2f9db653c"
+          },
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli-final.log",
+            "sha256": "c37e665e27ca1a7146c8b3fe2eca48bc10a4eae3ebd6ed72e0793aae01072430"
+          },
+          "work": "/private/tmp/unison-validation-inspection-fault-4r9fyosl",
+          "case_results": [
+            {
+              "remote": false,
+              "initial_identify_completed_before_injected_inspect": true,
+              "warn_rejected_before_helper": true,
+              "failed_live_bytes_and_inode_preserved": true,
+              "typed_archive_file_fingerprints_preserved": true,
+              "archives_before": {
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/state/ar09444e1ac5ec32451e9f2d5549caecbe": {
+                  "raw_sha256": "e098d22d602b78fd0b03fce81cbaedfe0ca732112b16e6d3bd14adfb5ebef3df",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/archives-before/state-ar09444e1ac5ec32451e9f2d5549caecbe",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "7526bd0287d7e7ede3c8f283a392b7637333f4a124fa403a5fb2886d7ac81fd9",
+                    "role": "receiver"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/state/ar02d972e4e99bfbf9aa60be1f3361875a": {
+                  "raw_sha256": "3c988c265f6d4ec981a550ebd2a89b5d14791ff27e3cb31015879ceac8150da0",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/archives-before/state-ar02d972e4e99bfbf9aa60be1f3361875a",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "3db130e5ecaaf37a3226f6474383f4b1235a77c4d5f1b0b17c136d5f287be382",
+                    "role": "source"
+                  }
+                }
+              },
+              "archives_after_failure": {
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/state/ar09444e1ac5ec32451e9f2d5549caecbe": {
+                  "raw_sha256": "9765a6dd92f8bba5a08c642f7a4f67758dd9b996f13ed8253997d1d1785b7f69",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/archives-after-failure/state-ar09444e1ac5ec32451e9f2d5549caecbe",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "80ac6d337cd13bcf91ca8bc0096a3da68f412fbccd205d0a3deb3755ab2bdaff",
+                    "role": "receiver"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/state/ar02d972e4e99bfbf9aa60be1f3361875a": {
+                  "raw_sha256": "5ae3f33d1f78aaba4ca57d99a410ee0d0c5332cdc49f5ab24f3eb804a9b1386a",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/archives-after-failure/state-ar02d972e4e99bfbf9aa60be1f3361875a",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "3db130e5ecaaf37a3226f6474383f4b1235a77c4d5f1b0b17c136d5f287be382",
+                    "role": "source"
+                  }
+                }
+              },
+              "discarded_candidate": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/local/right/.unison.renamed.bin.09444e1ac5ec32451e9f2d5549caecbe.unison.tmp",
+              "exact_retry": true,
+              "noop_inodes_stable": true,
+              "driver_sha256": "77a253b11dce45fc9a90feee7ce7fc2fdb3db3a833fd0385869da7bf2df2eb9a"
+            },
+            {
+              "remote": true,
+              "initial_identify_completed_before_injected_inspect": true,
+              "warn_rejected_before_helper": true,
+              "failed_live_bytes_and_inode_preserved": true,
+              "typed_archive_file_fingerprints_preserved": true,
+              "archives_before": {
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/state/ar03ed0aa163075b60cab0b51d5f1aaa0e": {
+                  "raw_sha256": "45d5eac8a0c2af263c6b4b666ce4474d5d610588125d4d60889d32ab3f5ad432",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/archives-before/state-ar03ed0aa163075b60cab0b51d5f1aaa0e",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "b50bec0612dbdb28ea4d6f2dd81c40f810a8b7b1a1f705569f9482608c2bc1a9",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/receiver/ara4dfdb236e2cab864205321812dfffff": {
+                  "raw_sha256": "1ff72ae995e1a0f803e2675e1433cf5c21659800463d58d6583c124f2a3db807",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/archives-before/receiver-ara4dfdb236e2cab864205321812dfffff",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "148f0649353f0a17a93207aa081c333975de519fa08288b6f589f8a62ca5236a",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "archives_after_failure": {
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/state/ar03ed0aa163075b60cab0b51d5f1aaa0e": {
+                  "raw_sha256": "ddb1a1d0ca17a8f6710ce476b652a7f404fa3662b965656cda51b7aa96e1ca0e",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/archives-after-failure/state-ar03ed0aa163075b60cab0b51d5f1aaa0e",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "b50bec0612dbdb28ea4d6f2dd81c40f810a8b7b1a1f705569f9482608c2bc1a9",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/receiver/ara4dfdb236e2cab864205321812dfffff": {
+                  "raw_sha256": "ebe21fd480550abc37a65efbaaade5f658418610b0f8cad924028e2a9858dc3c",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/archives-after-failure/receiver-ara4dfdb236e2cab864205321812dfffff",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "f84633c135394689fbad60e751207d19035f019ddb5f2d39916ca219ce187770",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "discarded_candidate": "/private/tmp/unison-validation-inspection-fault-4r9fyosl/remote/right/.unison.renamed.bin.a4dfdb236e2cab864205321812dfffff.unison.tmp",
+              "exact_retry": true,
+              "noop_inodes_stable": true,
+              "driver_sha256": "77a253b11dce45fc9a90feee7ce7fc2fdb3db3a833fd0385869da7bf2df2eb9a"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "compiler": "ox",
+      "units": {
+        "workers": {
+          "groups": 7,
+          "terminal_exit": 0,
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-workers.log",
+            "sha256": "d36efaa809682b204b0cba7e5520df6dd11c5be194d1d63487ca1fdd3c4179cd"
+          },
+          "retained_artifacts": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-workers-artifacts.json",
+            "sha256": "cec10662e91e142a8a3e62140bda711f38c3256ba6b9dabfcf244fc38eeee838"
+          }
+        },
+        "helpers": {
+          "groups": 37,
+          "terminal_exit": 0,
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-helpers.log",
+            "sha256": "fd5c9f7751e1bd0765cc1a04ed7f9672586e23e794a907492c1d8c0a1bf36032"
+          },
+          "retained_artifacts": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-helpers-artifacts.json",
+            "sha256": "963ffd9b2303bc214d7b310efc63d3a0c1992908c1c18b64197fd886aa50a6c7"
+          }
+        },
+        "actual_cli": {
+          "cases": 2,
+          "terminal_exit": 0,
+          "receipt": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli-final.json",
+            "sha256": "d1f2340b42aae22f8d1ca5711fcadd0b21d626c94340ec6411a8f43862a24e5a"
+          },
+          "log": {
+            "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli-final.log",
+            "sha256": "9a120eecd4684c0c3178cd35aec8be17f48f02f7cb6a53d11a5c3cf275e82e4f"
+          },
+          "work": "/private/tmp/unison-validation-inspection-fault-ombsi_m4",
+          "case_results": [
+            {
+              "remote": false,
+              "initial_identify_completed_before_injected_inspect": true,
+              "warn_rejected_before_helper": true,
+              "failed_live_bytes_and_inode_preserved": true,
+              "typed_archive_file_fingerprints_preserved": true,
+              "archives_before": {
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/state/arf7455ab57c9472f1f2cfb903d36aab38": {
+                  "raw_sha256": "886e196b67d4a7b82ab1296ee8c0cf8d5beec6dfe0700b51b263236360062651",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/archives-before/state-arf7455ab57c9472f1f2cfb903d36aab38",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "31f1af4f257b2f75cc440f4f31983da9922ded1dd59d3724825cac5327c9918c",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/state/ar2ede56fa380f85c39ec3496bd78c2ac6": {
+                  "raw_sha256": "6d91e269eb682135de3fabab163ab836948fe2660a7f0ca2e7d3df7f724ddfd2",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/archives-before/state-ar2ede56fa380f85c39ec3496bd78c2ac6",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "8689d936c06c41c38979ea887bb07e978eb0750c80839086cb74c0fddb00cc65",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "archives_after_failure": {
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/state/arf7455ab57c9472f1f2cfb903d36aab38": {
+                  "raw_sha256": "0c0783948b2596a6c8fd964522659de872ea4179531b83d0abe45bbf2b3d5e9e",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/archives-after-failure/state-arf7455ab57c9472f1f2cfb903d36aab38",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "31f1af4f257b2f75cc440f4f31983da9922ded1dd59d3724825cac5327c9918c",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/state/ar2ede56fa380f85c39ec3496bd78c2ac6": {
+                  "raw_sha256": "b9420227bafee65e24b9af474de9ff33a87e2efbb61413b0a77ddb1850b0d598",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/archives-after-failure/state-ar2ede56fa380f85c39ec3496bd78c2ac6",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "208cc2befaac9fc4addc2d0ef8d10b78dca4f41a4df739b69533e233a084584e",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "discarded_candidate": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/local/right/.unison.renamed.bin.2ede56fa380f85c39ec3496bd78c2ac6.unison.tmp",
+              "exact_retry": true,
+              "noop_inodes_stable": true,
+              "driver_sha256": "77a253b11dce45fc9a90feee7ce7fc2fdb3db3a833fd0385869da7bf2df2eb9a"
+            },
+            {
+              "remote": true,
+              "initial_identify_completed_before_injected_inspect": true,
+              "warn_rejected_before_helper": true,
+              "failed_live_bytes_and_inode_preserved": true,
+              "typed_archive_file_fingerprints_preserved": true,
+              "archives_before": {
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/state/ar4436142e18cbf28178daacd85df6f11b": {
+                  "raw_sha256": "fbd3572589acee5efd697276c8f220d0869d73b43d1a96737bc7732c2ee541af",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/archives-before/state-ar4436142e18cbf28178daacd85df6f11b",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "35379f5b5d065ab8ae4b82ea994b64550007ae2f95b94d1043354c32de0506c2",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/receiver/ar23406037786330ed727ea95746f05c19": {
+                  "raw_sha256": "7fbd4cade088e7c5aae1cce45aaa696099d16e4aa69abacf802b7b687ab19b18",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/archives-before/receiver-ar23406037786330ed727ea95746f05c19",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "6a8db735f11a1f716d9de1d3d48e47fb3ab30c422814f342443cf70f10dfac1c",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "archives_after_failure": {
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/state/ar4436142e18cbf28178daacd85df6f11b": {
+                  "raw_sha256": "5f189a1e00764dbaadb8fa223d960e6d7b410846e4a149aacac1fbdf3cdaef7a",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/archives-after-failure/state-ar4436142e18cbf28178daacd85df6f11b",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "35379f5b5d065ab8ae4b82ea994b64550007ae2f95b94d1043354c32de0506c2",
+                    "role": "source"
+                  }
+                },
+                "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/receiver/ar23406037786330ed727ea95746f05c19": {
+                  "raw_sha256": "e17c4ad3cf3e49c07f7fd5317b3929f718e17367344aa1ea3912fba553a38c96",
+                  "retained": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/archives-after-failure/receiver-ar23406037786330ed727ea95746f05c19",
+                  "node": {
+                    "format": 23,
+                    "archive_root": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "peer_roots": "//morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/left, //morrobay.local//private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right",
+                    "filename": "renamed.bin",
+                    "fullfingerprint": "(d128695271f95d929d79501ec015f2a0,)",
+                    "node_sha256": "546ed166f408373799675fbccb4d77c8369a4c89ae96a07a93cb81865cece854",
+                    "role": "receiver"
+                  }
+                }
+              },
+              "discarded_candidate": "/private/tmp/unison-validation-inspection-fault-ombsi_m4/remote/right/.unison.renamed.bin.23406037786330ed727ea95746f05c19.unison.tmp",
+              "exact_retry": true,
+              "noop_inodes_stable": true,
+              "driver_sha256": "77a253b11dce45fc9a90feee7ce7fc2fdb3db3a833fd0385869da7bf2df2eb9a"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "retained_failed_trials": [
+    {
+      "compiler": "stock",
+      "trial": "cli",
+      "receipt": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli.json",
+        "sha256": "9a0456e7742e7b1451840fe450d292a8a16301d5bedfb52fb2425cb4983351be"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli.log",
+        "sha256": "0371784cad7d81e02c73d42cd51a76a2b5f3f9d2afad33f68122fbd1697c3adc"
+      },
+      "retained_work": "/private/tmp/unison-validation-inspection-fault-sqienq_s",
+      "exact_prior_runner": {
+        "path": "/private/tmp/unison-validation-inspection-fault-sqienq_s/runner.py",
+        "sha256": "0f71466fb37cb97df069e361e2736716dc8a2a825a5080ffaaa0dab31a924566"
+      },
+      "reason": "whole-archive-byte equality exceeded node-content scope"
+    },
+    {
+      "compiler": "stock",
+      "trial": "cli-typed",
+      "receipt": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli-typed.json",
+        "sha256": "a850c4fe23bf45afa0f2e6dd51150d6d21dc6d1b3ee409da73fc5299e4e9f5c2"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/stock-cli-typed.log",
+        "sha256": "249df2c9440ab12137e32ddee8c9eb9630d0666953fdd5c4e7563d443e45adc8"
+      },
+      "retained_work": "/private/tmp/unison-validation-inspection-fault-fhwnrfwu",
+      "exact_prior_runner": {
+        "path": "/private/tmp/unison-validation-inspection-fault-fhwnrfwu/runner.py",
+        "sha256": "1bd6d90b770afd4ebf11afb3e04d77a6a038319a4020e6a0d59867192f8ac6fd"
+      },
+      "reason": "private decoder local Umarshal open shadowed Proplist; compile-only failure"
+    },
+    {
+      "compiler": "ox",
+      "trial": "cli",
+      "receipt": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli.json",
+        "sha256": "e17536fcfae39fe5463706cbd32941c840f5f1f5996c77baf668d0cf46d97693"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli.log",
+        "sha256": "99f5145ef9b6b6fa862649c73870d134b8be8c53fedc5c552ccda75c6daee062"
+      },
+      "retained_work": "/private/tmp/unison-validation-inspection-fault-758c886u",
+      "exact_prior_runner": {
+        "path": "/private/tmp/unison-validation-inspection-fault-758c886u/runner.py",
+        "sha256": "0f71466fb37cb97df069e361e2736716dc8a2a825a5080ffaaa0dab31a924566"
+      },
+      "reason": "whole-archive-byte equality exceeded node-content scope"
+    },
+    {
+      "compiler": "ox",
+      "trial": "cli-typed",
+      "receipt": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli-typed.json",
+        "sha256": "2a771a568a37ae1974256758101dc705062596a756e244dd7bc5117a7a5bd86a"
+      },
+      "log": {
+        "path": "/private/tmp/unison-validation-owned-controls-4veaj53q/ox-cli-typed.log",
+        "sha256": "3c1706f79367ed916d2c09de28a0a1409326be1c2be5c38e0047ef27f96a3ec0"
+      },
+      "retained_work": "/private/tmp/unison-validation-inspection-fault-0_5pca9i",
+      "exact_prior_runner": {
+        "path": "/private/tmp/unison-validation-inspection-fault-0_5pca9i/runner.py",
+        "sha256": "1bd6d90b770afd4ebf11afb3e04d77a6a038319a4020e6a0d59867192f8ac6fd"
+      },
+      "reason": "private decoder local Umarshal open shadowed Proplist; compile-only failure"
+    }
+  ],
+  "scope": [
+    "Seven new typed Identify groups use two workers: off-owner recognition, forced filename/indeterminate selection, no unmatched hash via unchanged shared FD position, renamed content despite opaque transfer ineligibility, operational/nonregular/closed-FD failures, CPU waiting cancellation, bounded unique captures, FD/CPU/pending settlement.",
+    "Four new Warn helper pre-inspection cases (EIO, malformed snapshot, invalid expected snapshot, cancellation) reject with no process or execution-wrapper entry; all 33 historical helper groups also pass.",
+    "Actual local and loopback remote ordinary receives of renamed synthetic DNG content, with warn policy and a one-file private CandidateValidation.snapshot EIO insertion.",
+    "Compiler-linked public Update.marchive format23 decoder binds filename, canonical archive root and ar-name MD5 recipe, verifies old file MD5 and unchanged full fingerprint; raw archive auxiliary metadata may change.",
+    "Actual receiving fault preserves destination bytes/inode and source bytes/identity, invokes no helper, discards staging; normal retry and inode-stable no-op pass."
+  ],
+  "limits": [
+    "No SDK/Adobe/Photo/cache/volume operations. Synthetic driver claims no real format/pixel validation.",
+    "Only new Identify worker groups executed in this focused matrix; historical performance/domain groups were not rerun.",
+    "One private receiving-production source file is changed. Separate archive reader is new standalone test source linked to normal frozen objects, with no production mli exports or edits.",
+    "In-process counters are observed by unit controls; CLI exit does not imply whole-process resource accounting.",
+    "Retained failed trials remain unchanged; their preceding live-preservation/no-helper evidence and excess archive/decoder assumptions are not presented as completed qualification."
+  ]
+}

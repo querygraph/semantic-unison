@@ -1,0 +1,112 @@
+{
+  "schema": "unison-validation-live-companion/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_live/companion.ml",
+      "bytes": 2217,
+      "sha256": "bf92cf784292de966bac6231be4f66b988bcd7b65d34af95d2fed0dd6e75761e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_live/companion_run.py",
+      "bytes": 4351,
+      "sha256": "57ec49a55bf2fcbb85e3529fee7ca522037a875fbd330bbcce48b97ce740c37f"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 44345,
+      "chunk": "88ff1d",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-live-companion-final-stock-20261016a/RESULT.json",
+          "bytes": 17697,
+          "sha256": "a92e24a445cf44014cab5f74aa5538adba2a7b66fd5c224381330f1f0c548ef4"
+        },
+        {
+          "path": "/private/tmp/unison-live-companion-final-stock-20261016a/SHARED-START.json",
+          "bytes": 1287,
+          "sha256": "fc16ae3b29acb5cdf3a3cc89edef98d1f49c8388698a3db618a520ea3e43d003"
+        },
+        {
+          "path": "/private/tmp/unison-live-companion-final-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "a986ee0ca1a802234b2a313ce8031070cc675345b523c65e66664732473ba52e"
+        }
+      ],
+      "case_outputs": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-gt9utfbi/pass/output.log",
+          "bytes": 464,
+          "sha256": "b3b77c079fdd496df7b4ce0d7e78470667bc6f5d9a62f01bc81f72713a13c778"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-gt9utfbi/error/output.log",
+          "bytes": 470,
+          "sha256": "65488e111d832b88c2dccb7889f115e1a59fec62a8f8b5c32668188c5f8de7e7"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-gt9utfbi/silent/output.log",
+          "bytes": 213,
+          "sha256": "e8cb5eaf5f977e4a2d4d898c5ab2cd6764dbec5468efba2ce9dfc88f8cbf1da4"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-gt9utfbi/off/output.log",
+          "bytes": 65,
+          "sha256": "da9f9bd5a8a5a1801472bd8a59b9a18f576ac9348588f228f3f5728d91f9a6f2"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 55694,
+      "chunk": "b5080a",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-live-companion-final-ox-20261016a/RESULT.json",
+          "bytes": 17697,
+          "sha256": "e46ff3fc4134205b837fe6ed4eaa0aa63b1c280036f333dd052e157d7d479b52"
+        },
+        {
+          "path": "/private/tmp/unison-live-companion-final-ox-20261016a/SHARED-START.json",
+          "bytes": 1281,
+          "sha256": "3bdb20f7cdc1fac48e9df6bbc136375f5c66d416fb671a00f1a9996b10ac8762"
+        },
+        {
+          "path": "/private/tmp/unison-live-companion-final-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d36d9be98de0c541e073e8aee6a11ccadade484e415f05bb7c8a7b76ef413d78"
+        }
+      ],
+      "case_outputs": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-bep1h0n3/pass/output.log",
+          "bytes": 464,
+          "sha256": "95327bdb13dfa666edf694f11f5ebbbf87d82900b0fc679577781c5a8d65fa12"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-bep1h0n3/error/output.log",
+          "bytes": 464,
+          "sha256": "8164c32df5e543740a7139e889776c77fefe9538ac63c66c408c022e159b4469"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-bep1h0n3/silent/output.log",
+          "bytes": 213,
+          "sha256": "7c9896d45b3a04530b16f6eb025c2fdb1fb56d50310a1bc9b6106e5255162655"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-companion-bep1h0n3/off/output.log",
+          "bytes": 65,
+          "sha256": "005fb22b1471c04cca900d18ad0311fe3cd9865a69635711f92aefe8e3bad9db"
+        }
+      ]
+    }
+  ],
+  "scope": "actual compiled production receiving companion;4component cases per compiler;3synthetic helpers per compiler bound/reaped/group0; valid and error-zero decisions, debug-default and off omissions; no full CLI sync, SDK, Photo, camera payload, EXglobal or SDK concurrency claim",
+  "full_goal_complete": false
+}

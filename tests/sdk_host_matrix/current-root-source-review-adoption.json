@@ -1,0 +1,28 @@
+{
+  "schema": "unison-current-host-source-review-adoption/1",
+  "root_review": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-CURRENT-EXECUTOR-SOURCE-REVIEW-20261014.json",
+    "bytes": 2160,
+    "sha256": "a5084a78590a430629af58cb3e961f25a2e776b7db4b51dc3914a931da13fd8e"
+  },
+  "scope": "narrow current executor/telemetry source interface only; historical90b27d2 review not reused",
+  "request": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-request-v1-20261014.json",
+    "bytes": 5814,
+    "sha256": "7f3260c517a11ed6d9a6fb1febdb10269e6633d766d341b7acd2c6399ff21699"
+  },
+  "source_review_alone_authorizes_runtime": false,
+  "subsequent_separate_runtime_admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ADMISSION-20261014.json",
+    "bytes": 1953,
+    "sha256": "100faf0049db1e0cd3957ad0ed7dd7e076b996b64006d4cb92384d3938db3eba"
+  },
+  "actual_consumed_runtime_return": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-actual-return-20261014.json",
+    "bytes": 32446,
+    "sha256": "b81e64017e5535ce2941c496e38179070bc9f24ae36bc0d2dd10d07abfe60348"
+  },
+  "runtime_slot_state": "CONSUMED_ACTUAL_PASS_CLOSED",
+  "deadline_scope": "300s supervised aggregate excludes pre-supervision wrapper validation",
+  "new_runtime_release": false
+}

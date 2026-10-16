@@ -1,0 +1,63 @@
+{
+  "schema": "firstpair-shared-physical-io-joint-consumer-contract/1",
+  "state": "SOURCE_CONTRACT_DISPOSABLE_TESTED_NOT_CANONICAL_RUNTIME_QUALIFIED",
+  "canonical_manifest": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+    "bytes": 1500,
+    "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+  },
+  "namespace": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/io-lanes-v1",
+  "storage_domain": "morrobay-e5126513bb354ef288c2fa754ac4fbb7",
+  "directory_identity": {
+    "device": 16777223,
+    "inode": 307225492,
+    "uid": 501,
+    "gid": 20,
+    "mode": 448,
+    "nlink": 3
+  },
+  "barrier": {
+    "name": "all-devices.lock",
+    "path": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/io-lanes-v1/all-devices.lock",
+    "identity": {
+      "device": 16777223,
+      "inode": 307225493,
+      "uid": 501,
+      "gid": 20,
+      "mode": 384,
+      "nlink": 1
+    }
+  },
+  "claim_mode": "EX_GLOBAL_ONLY",
+  "physical_lanes": [],
+  "namespace_reconciliation": "Root actually provisioned io-lanes-v1 under original proposal7b49a431. Adopt this SOLE namespace; v2 physical-io-lanes-v1 path suggestion is historical/unprovisioned and will NOT be created. Root manifest is preserved unchanged.",
+  "trusted_authority": "Manifest storageDomain is coordination nonce plus hostname observation, not physical topology/hardware attestation. Pin exact bytes and existing directory/barrier identities. Missing/replaced/aliased/nonprivate files refuse; consumers never create/repair.",
+  "backend": {
+    "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+    "bytes": 8568,
+    "sha256": "43fab637ea5782905b8ec19c2474d4c2fc3c270ab7956c906ed8762009de9be9"
+  },
+  "api": {
+    "read": "GlobalPool.read(exactManifestPath, exactManifestSha): bounded owned regular nofollow stable metadata; refuse any lanes/qualified topology/other claim mode. Does not open IO namespace.",
+    "try_acquire": "Fresh directory/barrier descriptions; held+visible checks, NB EX flock same barrier; revalidate; returns Lease or None. None means known partial descriptions closed, not permission to bypass.",
+    "bundle": "try_io_cpu_bundle(ioPool,cpuPool,authorizedIndexes): IO first, CPU ascending whole exact set second. CPU contention rolls all CPU partials and IO back before return. Authority to CPU indexes must come separately from exact standing8/8 policy, not arbitrary caller indexes.",
+    "native_ui": "Not implemented in backend. Native consumer must try existing native/UI lease nonblocking AFTER IO+CPU; rollback all earlier stages before waiting if busy. Existing Photo/UI or migration locks never repurposed.",
+    "close": "Inherited FDs held until actual child/group/worker settlement. Lease.close_after_verified_settlement CONSUMES caller proof, does not establish closure. close_unstarted is only known no-child rollback. No LOCK_UN/destructor/unconditional finally unlock/numeric-FD retry.",
+    "unknown": "UnresolvedOwnership carries retainedFDs+uncertainFD; owning wrapper retains live process/known FDs and records unknown; not a busy/retry signal."
+  },
+  "consumer_requirements": [
+    "Both source consumers adopt SAME exact manifest/backend contract or independently source-reviewed equivalent; no live bulk join from provisioning/test success alone.",
+    "Source/policy/manifest checks precede acquisition; revalidate manifest/current held inode bindings before dispatch. Manifest changes require refusal/review; no transparent new namespace or lane.",
+    "Unknown physical topology remains same exclusive global barrier. No shared-barrier or per-device lanes in this backend; future qualified topology/immutable successor required.",
+    "Complete local jobs/endpoint phases only. Never hold IO across peer-dependent RPC wait. Distributed/loopback multi-owner deadlock behavior requires separate integration qualification.",
+    "No current Unison production IoAdmission, PhotoV7 or newer production adapter uses this module merely from publication. Current kernel module is a local developer backend only.",
+    "Actual owning tool terminal collected separately from group closure. SDK/Adobe/Classic/payload/data rights remain separate."
+  ],
+  "qualification": {
+    "disposableOnly": true,
+    "canonicalIoLockAcquired": false,
+    "liveBulkDispatcherIntegrated": false,
+    "runtimeQualified": false,
+    "physicalTopologyQualified": false
+  }
+}

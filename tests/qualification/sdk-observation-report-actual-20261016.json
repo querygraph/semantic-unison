@@ -1,0 +1,45 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/bench/report_sdk_observations.py",
+      "--plan",
+      "/Users/alexy/src/unison/doc/shared-sdk-host-plan-v2.json",
+      "--plan-sha256",
+      "7a89bc36b29f9572e62ae183cdfccb016be01281e58c493d31aa612d47288c92",
+      "--result",
+      "/private/tmp/u-shm-v2-36d2e4bba9/RESULT.json",
+      "--result-sha256",
+      "7bc3442ab273c2c0d17368f0bbcd1d12b0b87bb636cca527b203af19703d74b2",
+      "--output",
+      "/Users/alexy/src/unison/bench/sdk-shared-host-v2-observations-20261016.json"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 44192,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "probe_calls": 0,
+  "scope": "saved V2 JSON reparse/independent audit/OS sample report only; no new native/payload/IO operation",
+  "source_sha256": "298e1831d430163697586398e1388a865602a327a1609fdc4104d03ee6f4551a",
+  "result_sha256": "7bc3442ab273c2c0d17368f0bbcd1d12b0b87bb636cca527b203af19703d74b2",
+  "actual_owner_terminal": {
+    "chunk_id": "1be97d",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

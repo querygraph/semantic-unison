@@ -1,0 +1,14 @@
+{
+  "schema": "unison-property-v2-preexec-refusal/1",
+  "actual_owner_terminal": {
+    "chunk": "5533d2",
+    "exit_code": 2,
+    "running_session": false
+  },
+  "admission_sha256": "8cbec05c75c1bedd96dfec039a9b36441787037066a4cf124f3bdb4b621a47f8",
+  "state": "REFUSED_BEFORE_SHARED_CHILD_OR_RESOURCE_ACQUISITION",
+  "empty_workspace_observed": "/private/tmp/unison-shared-properties-v2-02af617d",
+  "admitted_child_interpreter": "/usr/local/opt/python@3.15/bin/python3.15",
+  "launch_and_pinned_interpreter": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+  "scope": "Actualmanualguard exactcommand mismatch. No SHARED-START/IOATTEMPT/worker/CLI/lease acquisition. Directory preserved; no retry."
+}

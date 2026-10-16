@@ -1,0 +1,64 @@
+{
+  "schema": "unison-scalar-rating-decision-qualification/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 59813,
+      "chunk": "5e007b",
+      "exit_code": 0,
+      "running_session": false,
+      "rating_triples_per_domain": 343,
+      "replica_symmetry_checks_per_domain": 343,
+      "additional_rdf_conflicts_per_domain": 4,
+      "control_domains": 1,
+      "references": [
+        {
+          "path": "/private/tmp/unison-merge-rating-final-stock-20261016a/RESULT.json",
+          "bytes": 1971,
+          "sha256": "a2666dfc959056eed4e1e5da337ab3b5ecddd81d4b3b3607e84b9b2955185d04"
+        },
+        {
+          "path": "/private/tmp/unison-merge-rating-final-stock-20261016a/SHARED-START.json",
+          "bytes": 1222,
+          "sha256": "4edd58d4792db06ad9e8acf53ec5c80d1fe33185ae69b8dfa4e136b573d3ee4b"
+        },
+        {
+          "path": "/private/tmp/unison-merge-rating-final-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "b52c6740810f6d456a84bdc4fe651df5f5eeeeec6fcf5c5d93f32e006373511e"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 57012,
+      "chunk": "e14e95",
+      "exit_code": 0,
+      "running_session": false,
+      "rating_triples_per_domain": 343,
+      "replica_symmetry_checks_per_domain": 343,
+      "additional_rdf_conflicts_per_domain": 4,
+      "control_domains": 4,
+      "references": [
+        {
+          "path": "/private/tmp/unison-merge-rating-final-ox-20261016a/RESULT.json",
+          "bytes": 1974,
+          "sha256": "3191910c1c61483a9d65e9cd1c9c9c6a9c4ac93f6c5deabab0c26bc9036606b3"
+        },
+        {
+          "path": "/private/tmp/unison-merge-rating-final-ox-20261016a/SHARED-START.json",
+          "bytes": 1219,
+          "sha256": "0ccd0de5cc7c0c60fe1501438ad49faee0b2f60563436e7a5bea8746776a0278"
+        },
+        {
+          "path": "/private/tmp/unison-merge-rating-final-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "88373ee1e0994e9b2948d23b012c1c5fc9ad91375310193b91f9db944a6fa012"
+        }
+      ]
+    }
+  ],
+  "scope": "25 existing packet controls +343 finite supported rating triples and symmetry +4 RDF conflicts per domain; actual kernel objects; no file merge, archive, receiving, Photo, Adobe, SDK or EXglobal operation",
+  "full_goal_complete": false
+}

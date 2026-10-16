@@ -1,0 +1,37 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/transport_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.002s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 41404,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "three injected transport/journal command and refusal groups; no real CLI, SDK, retained payload or EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/transport.py": "ef5b06f1f00fd6ef2524da8c1614cbd37f390cedd95e904c73031f1e00994e2a",
+    "tests/sdk_multifile/transport_test.py": "0f65e358a61d71cdfd9347b368cd6416ae7b8464d8a79e468236f34b31515d22",
+    "tests/camera_sdk_concurrency/invocation.py": "b3b1463647c598c71b0a4151fbf74c31c073e8015c393098a360bcbd949d660f"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "c9a4de",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

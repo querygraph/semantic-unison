@@ -5,7 +5,7 @@ let debug = Util.debug "prefs"
 
 type 'a t =
   { mutable value : 'a; defaultValue : 'a; mutable names : string list;
-    mutable setInProfile : bool }
+    mutable setInProfile : bool; mutable endpointLocal : bool }
 
 let read p = p.value
 
@@ -17,9 +17,11 @@ let name p = p.names
 
 let readDefault p = p.defaultValue
 
+let makeEndpointLocal p = p.endpointLocal <- true; p
+
 let rawPref default name =
   { value = default; defaultValue = default; names = [name];
-    setInProfile = false }
+    setInProfile = false; endpointLocal = false }
 
 (* ------------------------------------------------------------------------- *)
 
@@ -181,6 +183,7 @@ type apref =
     fulldoc : string;
     typ : typ;
     cli_only : bool;
+    endpoint_local : unit -> bool;
     deprec : bool;
   }
 
@@ -262,7 +265,8 @@ let registerPref name typ cell pspec category cli_only deprec doc fulldoc =
   let pspec =
     if not deprec then pspec
     else deprecatedPref name cell pspec in
-  let pref = {category; doc; pspec; fulldoc; typ; cli_only; deprec} in
+  let pref = {category; doc; pspec; fulldoc; typ; cli_only; deprec;
+              endpoint_local = (fun () -> cell.endpointLocal)} in
   prefs := Util.StringMap.add name pref !prefs
 
 let errRPCVersion ver  =
@@ -278,7 +282,8 @@ let createPrefInternal name typ category cli_only local send default deprecated 
     else (true, Some (fun () -> false))
   in
   adddumper name local
-    (fun () -> match send with None -> true | Some f -> f ())
+    (fun () -> not newCell.endpointLocal &&
+      match send with None -> true | Some f -> f ())
     (function
      | 1 -> Umarshal.to_string m (newCell.value, newCell.names)
      | v -> errRPCVersion v);
@@ -288,7 +293,10 @@ let createPrefInternal name typ category cli_only local send default deprecated 
        newCell.setInProfile <- false; newCell.value <- newCell.defaultValue);
   addloader name
     (fun rpcVer s ->
-       if not cli_only then   (* Better for compatibility to not fail if cli_only *)
+       (* Ignore endpoint-local values before decoding, including values sent
+          under an alias. The shared cell also protects aliases registered
+          before [makeEndpointLocal]. *)
+       if not cli_only && not newCell.endpointLocal then
        let (value, names) =
          match rpcVer with
          | 1 -> Umarshal.from_string m s 0
@@ -302,12 +310,13 @@ let create name ~category ?(cli_only=false) ?(local=false) ?send default ?(depre
     (fun cell -> Uarg.String (fun s -> set cell (intern (read cell) s)))
     m
 
-let createBool name ~category ?(cli_only=false) ?(local=false) ?send default ?(deprecated=false) doc fulldoc =
+let createBool name ~category ?(cli_only=false) ?(local=false) ?send
+    ?(send_value=Umarshal.id) default ?(deprecated=false) doc fulldoc =
   let doc = if default then doc ^ " (default true)" else doc in
   createPrefInternal name `BOOL category cli_only local send default deprecated doc fulldoc
     (fun v -> [if v then "true" else "false"])
     (fun cell -> Uarg.Bool (fun b -> set cell b))
-    Umarshal.bool
+    Umarshal.(sum1 bool send_value id)
 
 let createInt name ~category ?(cli_only=false) ?(local=false) ?send default ?(deprecated=false) doc fulldoc =
   createPrefInternal name `INT category cli_only local send default deprecated doc fulldoc
@@ -321,11 +330,12 @@ let createString name ~category ?(cli_only=false) ?(local=false) ?send default ?
     (fun cell -> Uarg.String (fun s -> set cell s))
     Umarshal.string
 
-let createStringList name ~category ?(cli_only=false) ?(local=false) ?send ?(deprecated=false) doc fulldoc =
+let createStringList name ~category ?(cli_only=false) ?(local=false) ?send
+    ?(send_value=Umarshal.id) ?(deprecated=false) doc fulldoc =
   createPrefInternal name `STRING_LIST category cli_only local send [] deprecated doc fulldoc
     (fun v -> v)
     (fun cell -> Uarg.String (fun s -> set cell (s:: read cell)))
-    Umarshal.(list string)
+    Umarshal.(sum1 (list string) send_value id)
 
 let createBoolWithDefault name ~category ?(cli_only=false) ?(local=false) ?send ?(deprecated=false) doc fulldoc =
   createPrefInternal name `BOOLDEF category cli_only local send `Default deprecated doc fulldoc
@@ -552,7 +562,7 @@ let topicsInOrder = [ `Sync; `Syncprocess; `Syncprocess_CLI; `CLI; `GUI; `Remote
 
 let oneLineDocs ?(hpre="") ?(hpost="") u =
   let buf = Buffer.create 1024 in
-  let out = Buffer.add_string buf in
+  let out s = Buffer.add_string buf s in
   let fmt = Format.formatter_of_buffer buf in
   let () = Format.pp_set_margin fmt 81 in  (* cols + 1 *)
 
@@ -649,6 +659,34 @@ let scanCmdLine usage =
        | Uarg.String _ -> Uarg.String (fun s -> insert name s)
        | _             -> assert false);
   !m
+
+let loadEndpointLocal usage =
+  (* This reserved profile contains only endpoint configuration. In particular,
+     loading it on a server must not install sync policy or roots before the
+     client sends its preferences. Check included files as well. *)
+  let lines = readAFile ~fail:false ~add_ext:false "endpoint.prf" in
+  Safelist.iter
+    (fun ((location, line), name, _) ->
+       let allowed = try
+         let pref = Util.StringMap.find name !prefs in
+         pref.endpoint_local () && not pref.cli_only
+       with Not_found -> false in
+       if not allowed then raise (Util.Fatal (Printf.sprintf
+         "%s, line %d: `%s' is not an endpoint-local option" location line name)))
+    lines;
+  processLines lines;
+  (* Unlike normal client startup, server startup deliberately applies only
+     endpoint-local command-line options. Ignore the other registered options
+     without invoking their handlers (including include/source and roots). *)
+  processCmdLine usage
+    (fun name pspec ->
+       let pref = Util.StringMap.find name !prefs in
+       if pref.endpoint_local () then pspec else
+       match pspec with
+       | Uarg.Bool _ -> Uarg.Bool (fun _ -> ())
+       | Uarg.Int _ -> Uarg.Int (fun _ -> ())
+       | Uarg.String _ -> Uarg.String (fun _ -> ())
+       | _ -> assert false)
 
 (*****************************************************************************)
 (*                            Printing                                       *)

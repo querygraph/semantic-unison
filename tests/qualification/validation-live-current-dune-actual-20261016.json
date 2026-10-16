@@ -1,0 +1,66 @@
+{
+  "schema": "unison-validation-live-current-dune/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 93597,
+      "chunk": "b5f26a",
+      "exit_code": 0,
+      "running_session": false,
+      "production_source_count": 429,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gdku4vso/_build/default/src/linktext.exe",
+        "sha256": "d44c46c45bac03ccbd175b3dea7450e7fe5f060ad4623b01dc35d709dcc57d39"
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-live-current-dune-stock-20261016b/RESULT.json",
+          "bytes": 43847,
+          "sha256": "f4762853664b8a4cd50f73bfd2e9ec101d497ab22e0990db64da1eb5f8a210af"
+        },
+        {
+          "path": "/private/tmp/unison-live-current-dune-stock-20261016b/SHARED-START.json",
+          "bytes": 1335,
+          "sha256": "21efb2cbb632689079ba99406a77b87c9052caef2fa1d5046d028b36cfd58072"
+        },
+        {
+          "path": "/private/tmp/unison-live-current-dune-stock-20261016b/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "92485401c083dfcc5cd6fe8f8f23ee5045262590225849dd651de485c4a969d6"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 36232,
+      "chunk": "5f6fb5",
+      "exit_code": 0,
+      "running_session": false,
+      "production_source_count": 429,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-1xxxet6x/_build/default/src/linktext.exe",
+        "sha256": "231937f4d85bfd9c2617bd997287099b23b9cee1e6a08277553d22cc033bf191"
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-live-current-dune-ox-20261016b/RESULT.json",
+          "bytes": 43851,
+          "sha256": "b96eae941637583e12361e055012bb76b7117b5490f5b9255d7ed3719226b41e"
+        },
+        {
+          "path": "/private/tmp/unison-live-current-dune-ox-20261016b/SHARED-START.json",
+          "bytes": 1329,
+          "sha256": "a41ffe0056cc2d627bebb31766b0111f3875b5387bdeb63acc4c5fa67047433e"
+        },
+        {
+          "path": "/private/tmp/unison-live-current-dune-ox-20261016b/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "b5fcc94922b8a24982bc46487c29d7e550648f8d41a0a2d4e113837dff48a8e8"
+        }
+      ]
+    }
+  ],
+  "scope": "Current production sources including optional nonterminal/live-span observers; serial Dune build and application selftests on stock/Ox, workers3/compilerjobs2 within Unison8; no SDK/Photo/camera/EXglobal/receiving/concurrent validator qualification",
+  "full_goal_complete": false
+}

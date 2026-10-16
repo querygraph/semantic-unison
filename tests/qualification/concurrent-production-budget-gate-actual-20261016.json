@@ -1,0 +1,148 @@
+{
+  "schema": "unison-concurrent-production-budget-gate/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 30202,
+      "chunk": "b433b4",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-budget-stock-20261016a/SHARED-START.json",
+          "bytes": 1159,
+          "sha256": "9a95e54c29ba48a42b9da8ed28c87b92dea2aaf202ae89784f3d92f8e3661717"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "689e4c97f2b8c6ac7c9fbccb0548a39681c4b74b4c684c04759151af09cabcc4"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-stock-20261016a/SHARED-STDOUT.txt",
+          "bytes": 205,
+          "sha256": "af22d0eabff92b1edaa7dcb2afe961c0012789ee0cf7e2d9e1131bfefe22e59e"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-stock-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 33828,
+      "chunk": "c5e4e4",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-budget-ox-20261016a/SHARED-START.json",
+          "bytes": 1161,
+          "sha256": "e83565115c9a289dfc84f92b321bc3a150529db05e5ee96a78ad0391ff1bb87c"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "9d835b50a51b942182a5fa1c3b99261937ebe8c6907e65faab38234a72b524df"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-ox-20261016a/SHARED-STDOUT.txt",
+          "bytes": 205,
+          "sha256": "af22d0eabff92b1edaa7dcb2afe961c0012789ee0cf7e2d9e1131bfefe22e59e"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-ox-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/lwt.mli",
+      "bytes": 4593,
+      "sha256": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/lwt.ml",
+      "bytes": 4513,
+      "sha256": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/pqueue.mli",
+      "bytes": 467,
+      "sha256": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/pqueue.ml",
+      "bytes": 2671,
+      "sha256": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/generic/lwt_unix_impl.ml",
+      "bytes": 10319,
+      "sha256": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/lwt_unix.mli",
+      "bytes": 2292,
+      "sha256": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/lwt/lwt_unix.ml",
+      "bytes": 22,
+      "sha256": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/borrowedWork.mli",
+      "bytes": 1586,
+      "sha256": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/borrowedWork.ml",
+      "bytes": 4004,
+      "sha256": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor_stubs.c",
+      "bytes": 11700,
+      "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.mli",
+      "bytes": 6581,
+      "sha256": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.ml",
+      "bytes": 23247,
+      "sha256": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticAdmission.mli",
+      "bytes": 2803,
+      "sha256": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticAdmission.ml",
+      "bytes": 10765,
+      "sha256": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/concurrent_budget_gate/run.py",
+      "bytes": 1488,
+      "sha256": "2e6ce744d23b527a66a6934ed33c0273dec316f3ec6276bfd69976bb2690751d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/concurrent_budget_gate/test.ml",
+      "bytes": 1606,
+      "sha256": "6c060b2f47733d3e58e18eb19073a012ce1871080c55e983fd7a387ccd25ecf6"
+    }
+  ],
+  "scope": "Actual compiled production SemanticAdmission objects: two consumer envelopes plus source held simultaneously; 4GiB memory/55FD gates queue second consumer, cancellation clears queue and all credits retire.3checks/compiler; no native workspaces allocated/SDK/receiving/EXglobal/Photo/camera/RSS proof.",
+  "full_goal_complete": false
+}

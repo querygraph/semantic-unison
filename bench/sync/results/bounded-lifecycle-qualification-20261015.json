@@ -1,0 +1,455 @@
+{
+  "scope": "Actual allocated eight original fake-child/worker cases only; no compiler/SDK/Photo/Classic/timing benchmark or successor. No retroactive receipt proof for stopped60597.",
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-FAKE-LIFECYCLE-ONE-CREDIT-20261015.json",
+    "bytes": 2783,
+    "sha256": "b4d34178512e794997e9b9cb55b9e323abb113098fa146e998b413eb7eabdbd3"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 46880,
+    "terminal_chunk": "86b330",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "preflight_no_dispatch": {
+    "terminal_chunk": "90fe27",
+    "exit_code": 1,
+    "reason": "wrapper import syntax typo before imports/child acquisition; no tests dispatched"
+  },
+  "owner_receipt": {
+    "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/OWNER-RESULT.json",
+    "bytes": 515,
+    "sha256": "7fc54b9918bef1acfaf925859f666ed8a4529fe8f451f2817433e253ad52e3e2"
+  },
+  "actual_owner": {
+    "complete": true,
+    "aggregate": {
+      "pid": 98690,
+      "returncode": 0,
+      "reaped": true,
+      "other_cli_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 98690,
+          "state": "Z"
+        }
+      ],
+      "scope": "aggregate worker group only; external helper proof gate is separate",
+      "wall_seconds": 6.498634083982324,
+      "seconds": 60,
+      "timed_out": false,
+      "fault": null,
+      "within_wall_limit": true
+    },
+    "whole_wrapper_seconds": 6.52820114599308
+  },
+  "test_reports": [
+    {
+      "pin": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-interrupted-receipts-eu58exgi/RESULT.json",
+        "bytes": 5101,
+        "sha256": "d0b21800b9fec690999f752e5b1f985e0f8df8ef08e0a37e1de4525221243578"
+      },
+      "actual": {
+        "complete": true,
+        "cases": [
+          {
+            "case": "sigint-direct",
+            "actual_receipt": {
+              "command": [
+                "/usr/local/opt/python@3.14/bin/python3.14",
+                "-c",
+                "import time;time.sleep(30)"
+              ],
+              "returncode": -15,
+              "wall_seconds": 0.015392888017231598,
+              "timed_out": false,
+              "resources": {
+                "wait4_user_seconds": 0.000542,
+                "wait4_system_seconds": 0.0008709999999999999,
+                "wait4_maxrss_native_units": 454656,
+                "minor_faults": 406,
+                "major_faults": 0,
+                "block_input_operations": 0,
+                "block_output_operations": 0
+              },
+              "client_cleanup": {
+                "pid": 98692,
+                "returncode": -15,
+                "reaped": true,
+                "cancel_reason": "capture wait interrupted",
+                "hard_kill_required": false,
+                "observation_error": null,
+                "group_cleanup_result": "only_owned_leader_zombie_darwin",
+                "group_cleanup_before_leader_reap": true
+              },
+              "capture_bytes": {
+                "stdout": 0,
+                "stderr": 0
+              },
+              "capture_truncated": false,
+              "stdout": "",
+              "stderr": ""
+            }
+          },
+          {
+            "case": "sigint-wrapper",
+            "actual_receipt": {
+              "command": [
+                "/usr/local/opt/python@3.14/bin/python3.14",
+                "-c",
+                "import time;time.sleep(30)"
+              ],
+              "returncode": -15,
+              "wall_seconds": 0.013168369012419134,
+              "timed_out": false,
+              "resources": {
+                "wait4_user_seconds": 0.000557,
+                "wait4_system_seconds": 0.0008139999999999999,
+                "wait4_maxrss_native_units": 454656,
+                "minor_faults": 359,
+                "major_faults": 0,
+                "block_input_operations": 0,
+                "block_output_operations": 0
+              },
+              "client_cleanup": {
+                "pid": 98694,
+                "returncode": -15,
+                "reaped": true,
+                "cancel_reason": "capture wait interrupted",
+                "hard_kill_required": false,
+                "observation_error": null,
+                "group_cleanup_result": "only_owned_leader_zombie_darwin",
+                "group_cleanup_before_leader_reap": true
+              },
+              "capture_bytes": {
+                "stdout": 0,
+                "stderr": 0
+              },
+              "capture_truncated": false,
+              "stdout": "",
+              "stderr": "",
+              "native_client_lifetime_seconds": 0.013139964983565733,
+              "supervisor_cleanup": null,
+              "supervisor_output": "",
+              "supervisor_capture_bytes": 0,
+              "supervisor_capture_truncated": false,
+              "proxy": null,
+              "fault": "KeyboardInterrupt()"
+            }
+          },
+          {
+            "case": "capture-first",
+            "actual_receipt": {
+              "command": [
+                "/usr/local/opt/python@3.14/bin/python3.14",
+                "-c",
+                "import time;time.sleep(30)"
+              ],
+              "returncode": -15,
+              "wall_seconds": 0.013944645004812628,
+              "timed_out": false,
+              "resources": {
+                "wait4_user_seconds": 0.000401,
+                "wait4_system_seconds": 0.0008659999999999999,
+                "wait4_maxrss_native_units": 348160,
+                "minor_faults": 335,
+                "major_faults": 0,
+                "block_input_operations": 0,
+                "block_output_operations": 0
+              },
+              "client_cleanup": {
+                "pid": 98696,
+                "returncode": -15,
+                "reaped": true,
+                "cancel_reason": "capture wait interrupted",
+                "hard_kill_required": false,
+                "observation_error": null,
+                "group_cleanup_result": "only_owned_leader_zombie_darwin",
+                "group_cleanup_before_leader_reap": true
+              },
+              "capture_bytes": {
+                "stdout": 0,
+                "stderr": 0
+              },
+              "capture_truncated": false,
+              "stdout": "",
+              "stderr": ""
+            }
+          },
+          {
+            "case": "capture-second",
+            "actual_receipt": {
+              "command": [
+                "/usr/local/opt/python@3.14/bin/python3.14",
+                "-c",
+                "import time;time.sleep(30)"
+              ],
+              "returncode": -15,
+              "wall_seconds": 0.012801131000742316,
+              "timed_out": false,
+              "resources": {
+                "wait4_user_seconds": 0.000472,
+                "wait4_system_seconds": 0.000719,
+                "wait4_maxrss_native_units": 454656,
+                "minor_faults": 368,
+                "major_faults": 0,
+                "block_input_operations": 0,
+                "block_output_operations": 0
+              },
+              "client_cleanup": {
+                "pid": 98698,
+                "returncode": -15,
+                "reaped": true,
+                "cancel_reason": "capture wait interrupted",
+                "hard_kill_required": false,
+                "observation_error": null,
+                "group_cleanup_result": "only_owned_leader_zombie_darwin",
+                "group_cleanup_before_leader_reap": true
+              },
+              "capture_bytes": {
+                "stdout": 0,
+                "stderr": 0
+              },
+              "capture_truncated": false,
+              "stdout": "",
+              "stderr": ""
+            }
+          }
+        ],
+        "scope": "four actual original fake-child interruption/capture regressions; no SDK/Photo or timing matrix"
+      },
+      "script_closure": {
+        "pid": 98691,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false
+      }
+    },
+    {
+      "pin": {
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-7zua94zp/RESULT.json",
+        "bytes": 2962,
+        "sha256": "22379952c81565d62fae5934fdfe505a941606738c1796d9b60826fb724d8691"
+      },
+      "actual": {
+        "complete": true,
+        "cases": [
+          {
+            "case": "normal",
+            "error": null,
+            "receipt": {
+              "pid": 98701,
+              "returncode": 0,
+              "reaped": true,
+              "other_cli_group_members_absent_before_reap": true,
+              "members_before_reap": [
+                {
+                  "pid": 98701,
+                  "state": "Z"
+                }
+              ],
+              "scope": "aggregate worker group only; external helper proof gate is separate",
+              "wall_seconds": 0.048614844999974594,
+              "seconds": 12,
+              "timed_out": false,
+              "fault": null,
+              "within_wall_limit": true
+            },
+            "external_marker_retained": false
+          },
+          {
+            "case": "worker-failure",
+            "error": "worker failed; external helper hold retained",
+            "receipt": {
+              "pid": 98703,
+              "returncode": 1,
+              "reaped": true,
+              "other_cli_group_members_absent_before_reap": true,
+              "members_before_reap": [
+                {
+                  "pid": 98703,
+                  "state": "Z"
+                }
+              ],
+              "scope": "aggregate worker group only; external helper proof gate is separate",
+              "wall_seconds": 0.04810059801093303,
+              "seconds": 12,
+              "timed_out": false,
+              "fault": null,
+              "within_wall_limit": true
+            },
+            "external_marker_retained": true
+          },
+          {
+            "case": "missing-helper-proof",
+            "error": "[Errno 2] No such file or directory: '/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-7zua94zp/missing-helper-proof/HELPER-PROOFS-COMPLETE.json'",
+            "receipt": {
+              "pid": 98705,
+              "returncode": 0,
+              "reaped": true,
+              "other_cli_group_members_absent_before_reap": true,
+              "members_before_reap": [
+                {
+                  "pid": 98705,
+                  "state": "Z"
+                }
+              ],
+              "scope": "aggregate worker group only; external helper proof gate is separate",
+              "wall_seconds": 0.04663446199265309,
+              "seconds": 12,
+              "timed_out": false,
+              "fault": null,
+              "within_wall_limit": true
+            },
+            "external_marker_retained": true
+          },
+          {
+            "case": "term-ignoring-timeout",
+            "error": "worker failed; external helper hold retained",
+            "receipt": {
+              "pid": 98707,
+              "returncode": -9,
+              "reaped": true,
+              "other_cli_group_members_absent_before_reap": true,
+              "members_before_reap": [
+                {
+                  "pid": 98707,
+                  "state": "Z"
+                }
+              ],
+              "scope": "aggregate worker group only; external helper proof gate is separate",
+              "wall_seconds": 6.043104515993036,
+              "seconds": 12,
+              "timed_out": true,
+              "fault": null,
+              "within_wall_limit": true
+            },
+            "external_marker_retained": true
+          }
+        ],
+        "scope": "four original fake-worker aggregate lifecycle cases only; no SDK/Photo/CLI. Intentional external markers represent missing proof, not live children."
+      },
+      "script_closure": {
+        "pid": 98700,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false
+      }
+    }
+  ],
+  "controller_artifacts": [
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/AGGREGATE-CLOSED.json",
+      "bytes": 397,
+      "sha256": "1f6624983eacaa3eb5da3fb012b0a5b74bbaa1c643ddd2571e3711d9f42290e5"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/AGGREGATE-START.json",
+      "bytes": 36,
+      "sha256": "43f28a11d88f206d30801e2a27728a510271a6fe98cdae2a67916ee8a3a392b2"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/OWNER-RESULT.json",
+      "bytes": 515,
+      "sha256": "7fc54b9918bef1acfaf925859f666ed8a4529fe8f451f2817433e253ad52e3e2"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-01-CLOSED.json",
+      "bytes": 112,
+      "sha256": "41616a2adc7eaa2afb7c3229cff2c6584eaf7d22e08923a976e38eeaeb6fa9fc"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-01.stderr",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-01.stdout",
+      "bytes": 332,
+      "sha256": "6c8fa65c64a79fd68e81061a0da182d0bcc8c1adfb1605ad88a1d1d35d228ae9"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-02-CLOSED.json",
+      "bytes": 112,
+      "sha256": "de0353f841d0a3f90474a6668aae57bb9e3307f71596aa9018ce40d49cbed747"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-02.stderr",
+      "bytes": 420,
+      "sha256": "1801aa2776d6d4bb177ef1b20cf4cd638a815bb6028ab659e14b1516e8a380e0"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SCRIPT-02.stdout",
+      "bytes": 323,
+      "sha256": "cbbe3a9072b0fac127eb52da162e22c549db31c260a9aba2dda6574752f69b44"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/START.json",
+      "bytes": 48,
+      "sha256": "11c4b026c106ddba5e1db6df299169c66d18b0302fea3cfbdeb6992a60a9904c"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/SUPERVISOR-CLOSED.json",
+      "bytes": 604,
+      "sha256": "58c1fc2fa5a5c13828a99a0081d5a6adad3a1acb82ff5b7865afcbf5b4ea3f3f"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/TEST-RESULT.json",
+      "bytes": 10601,
+      "sha256": "7ecdeb8eda39ffc16052a594f9b07481f164fa452b19345f94eca491adb55db1"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admitted-lifecycle-xqr9qbzd/WRAPPER-START.json",
+      "bytes": 181,
+      "sha256": "ad1d96c01a72a3a9f82811dbb799d96be381e01dd291818c9cf63898038dc839"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/interrupted_receipt_lifecycle_test.py",
+      "bytes": 3011,
+      "sha256": "6eb2f4a04c3049ff5571f2021112991db049cad84166f245fc8e9e471b7cd479"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/aggregate_successor_lifecycle_test.py",
+      "bytes": 720,
+      "sha256": "fac56ca371715f3640fcdc68afe3c5f34c155f082c9846ce62bc7d5b1712aa58"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3745,
+      "sha256": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 28908,
+      "sha256": "7cadd5bb79f52a82c8769c5328f2a66bcfb516e6f00510b607eed2fc199d736f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 6223,
+      "sha256": "7c1b1d430b3d906764b4fe850c6543a2c7a1aca16261ef42b09491cfa87786bb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate_test.py",
+      "bytes": 2173,
+      "sha256": "65f69f2d047f457916392573ffc15e1c0d579f9acffcde0d5cc384f1f9ced0bd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    }
+  ],
+  "actual_top_level_unresolved_markers": [],
+  "intentional_fixture_markers": "Failed synthetic worker fixtures retain missing-external-proof markers by design; all actual workers reaped, not an active allocation.",
+  "timing_benchmark_allocated": false
+}

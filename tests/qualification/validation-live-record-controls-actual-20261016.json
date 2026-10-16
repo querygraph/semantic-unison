@@ -1,0 +1,45 @@
+{
+  "schema": "unison-validation-live-record-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "e881b5",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/live_records.py",
+      "bytes": 4241,
+      "sha256": "bdd2259f03379d27451a60ab8f6290deb88ff64f2ad0a1b0dbd396a0a1908366"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/live_records_test.py",
+      "bytes": 3062,
+      "sha256": "f77c25d2023d18d4bdbae05f4c341de3b8322eabca1d9dc7fd3866dddebe14a4"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-live-record-controls-20261016b/SHARED-START.json",
+      "bytes": 1120,
+      "sha256": "d38b7ac692e70230910bf9e12c57988c764ddae7ae64f0f68a78a57db9aba741"
+    },
+    {
+      "path": "/private/tmp/unison-live-record-controls-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "48d9e59526e20884dca6c65caf34bfcd9e526fd9f8926fd3c38ad16950c1ff91"
+    },
+    {
+      "path": "/private/tmp/unison-live-record-controls-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-live-record-controls-20261016b/SHARED-STDERR.txt",
+      "bytes": 110,
+      "sha256": "504c8e6756400e42b339ba57220c75a961fa18dfa3de38640e9260b16c718cac"
+    }
+  ],
+  "scope": "11 original protocol/binding/rounding controls; no actual receiving trace/helper/SDK/Photo/payload/EXglobal; independent process/group settlement still required",
+  "full_goal_complete": false
+}

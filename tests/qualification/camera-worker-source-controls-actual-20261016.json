@@ -1,0 +1,99 @@
+{
+  "schema": "unison-camera-worker-source-controls/1",
+  "owner_terminal": {
+    "chunk": "7150f6",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "closure": {
+    "child": {
+      "pid": 69735,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 69735,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "controls": 23,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case.py",
+      "bytes": 5740,
+      "sha256": "9257a0b41b5d2a7eb3a14f2ba1fcaadb844bb40118d2d2d7add73be36c1b09e0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case_test.py",
+      "bytes": 3368,
+      "sha256": "eeb8619ca6a2006c9e039d9f446a46ccd359a32fac8edee9aaa6db3ac5cbcc54"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone.py",
+      "bytes": 3965,
+      "sha256": "f280735c2855204f811f8e7385b00efb2bff8783f5e39620e0007161b9db2d3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone_test.py",
+      "bytes": 2581,
+      "sha256": "9a069c28b4bce3818489f293717a0723c9023d577744c54b5d01dd5b0e299819"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/controls.py",
+      "bytes": 337,
+      "sha256": "5ace27021ffef0adb952a7c162840111f89af7cd1a61b52e26fa1d4bbcde1f69"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport.py",
+      "bytes": 4727,
+      "sha256": "cc7478f183487c6ba3defd8da118ee22176bd0b02a2967189123d41f3e5c2f4d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport_test.py",
+      "bytes": 3832,
+      "sha256": "0c1cd5078194a32e93c09078950e21c6ffb18000eb6a5d73b509662164a2b53c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker.py",
+      "bytes": 3788,
+      "sha256": "37a43a60d4bc9d4bc2cd2398b32b4067a3a0d04d0b1d80e7b1dc5d1b96e4b5b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker_test.py",
+      "bytes": 4109,
+      "sha256": "7ba1d968b7a444693780454372f6b9c94bdc8e47562baae6e58abdbd154ae087"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-worker-source-80hhl8ub/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5372b7dc7c461ec41b67e8d630ad3c627190bfc8ceb19d36b6d63ad7d8ac3053"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-worker-source-80hhl8ub/SHARED-START.json",
+      "bytes": 1180,
+      "sha256": "14bfc2e24db91c125169b52c2af0feb7e280df0f521d6b8d1604e3487d8f663f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-worker-source-80hhl8ub/SHARED-STDERR.txt",
+      "bytes": 122,
+      "sha256": "f22730652b32d926fc08de44dbd6e2bddd9e4d4b49551541d955775fed9913cb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-worker-source-80hhl8ub/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Original4byte/32byte fixtures, mocknativeclone/mocktransport. Composedworker sixmockcalls/prefixfailure/metadatarefusal. OuteractualcanonicalCPU8closed; nativeclone/Unison/camera/SDK/Adobe/EXglobalNOTexecuted. Noentrypoint/admissiongrant."
+}

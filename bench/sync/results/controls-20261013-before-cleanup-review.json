@@ -1,0 +1,40 @@
+{
+  "utc": "2026-10-13T17:43:56.707387+00:00",
+  "status": "bounded synthetic functional qualification complete; broad performance qualification incomplete",
+  "source_sha256": {
+    "check.py": "e164dfc6544e81b7208dababafc1c3a88a80f0c06c0ea6c08a486988a24c6067",
+    "fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+    "launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "measure.py": "5958ae13455f57ea25c8a3466a9ed531fe0a44f71e8ffbecedd720bab35fb446",
+    "proxy.py": "33574d457402997d46fc14a77b518da9cce8527e04248945a1ab2286d93ba1d3",
+    "run.py": "a916a3cdf43ceb9abb003d09506797ecae98d887eff5fc17075d3a84057ef622"
+  },
+  "readme_sha256": "6b2bd25ec06ba752e8bb0d241689172b55ee1f94477e7cd1f0831493d0061e3d",
+  "native_cli_receipt": "bench/sync/results/qualification-20261013.json",
+  "native_cli_receipt_sha256": "18cc585b26d558f4baf02906dd9364075be6d87609a5c34a8889279e44341df8",
+  "final_native_cli_rows": 13,
+  "current_binary_package_inputs_each": {
+    "stock": 315,
+    "ox": 315
+  },
+  "small_control_command": [
+    "python3",
+    "bench/sync/check.py"
+  ],
+  "small_control_result": "exit0; fixture complement unchanged, output cap and timeout, missing/wrong mode rejection, exact echo protocol bytes/header exclusion, native exit19 propagation and reap",
+  "current_native_cli_result": "13 rows pass exact full hashes/byte comparison, unchanged old hardlink basis, inode-stable no-op, no staging files, native server/supervisor reaped",
+  "runtime_scope": "Synthetic private temporary paths only; no actual Adobe, Lightroom, preview generator, Photo payload/catalog/cache or photographic-volume access.",
+  "limits": [
+    "application read bytes",
+    "internal hash/parse/verify/commit times",
+    "aggregate process-tree peak RSS",
+    "descriptor/queue peaks",
+    "physical storage writes",
+    "range/extent sharing",
+    "cross-volume or non-APFS behavior",
+    "cold cache",
+    "real SSH/network behavior",
+    "Adobe validation or photographic rendering"
+  ],
+  "prior_failed_preflights": "Incomplete receipts retained privately; fixed explicit Boolean flag syntax and Unison ssh launcher 10ms kill grace; no failed sample accepted."
+}

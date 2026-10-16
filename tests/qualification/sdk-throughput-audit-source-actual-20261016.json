@@ -1,0 +1,40 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_throughput/audit_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.141s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 54079,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/sdk_throughput/audit.py": "97ae6a2a74765874b9e170c81dc6ad8d1b34c96c1730b741bf9a4296b5d43748",
+    "tests/sdk_throughput/audit_test.py": "71b048abf7c6fae14757708aac806e03abbf46de01fa82f01ec26ca52b284226",
+    "tests/sdk_throughput/plan.py": "e9213b99de2c80f326801c45667525c49e316318cf044565fa30639efde5c3bb",
+    "tests/sdk_throughput/plan_test.py": "9d0bd92728b616da3d6bd36d69e9072c73e32989756af72c45e9aa9b3be31b84",
+    "tests/sdk_throughput/transport.py": "a9eeb16ec35d9b34689f494c9ade8d4abfd5d42a3a46bb8ec4f212fd4f848734",
+    "tests/sdk_throughput/transport_test.py": "1dff2aeadb1f0eba9f6a6776998ea88e66ad9eb42a0b2ecdb5ef01c561dc8123"
+  },
+  "scope": "Four new pure prefix audit groups plus imported parent regression groups; synthetic24row/48helper frames only; zero CLI/SDK/payload/IO execution or release authority.",
+  "owner_tool_terminal": {
+    "chunk_id": "ae5d35",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal."
+  }
+}

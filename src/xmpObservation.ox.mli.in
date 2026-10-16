@@ -1,0 +1,72 @@
+@@ portable
+(** Bounded, advisory observations of an XMP packet.  This module performs no
+    file I/O and makes no claim about RDF value equivalence, rendered pixels, or
+    which metadata is safe to merge. *)
+
+type category = Descriptive | Rendering | Identity | Workflow | Opaque
+
+type property = {
+  name : string;
+  (** Expanded name in Clark notation [{namespace-URI}local-name]. *)
+  category : category;
+  digest : string;
+  (** Raw 32-byte SHA-256 of the versioned encoding/context transcript described
+      below.  This is independent of Unison's archive fingerprint. *)
+}
+
+type observation = { properties : property list }
+
+val observe : string -> (observation, string) result
+(** Accepts at most 1 MiB of UTF-8 XML 1.0, with optional UTF-8 BOM, XML declaration,
+    packet processing instructions, and an [adobe:ns:meta/] [xmpmeta] envelope.
+    The RDF root contains either one anonymous Description, or descriptions
+    carrying the same explicit [rdf:about] subject (including an explicit empty
+    subject).  An absent subject is never equated with an explicit empty subject.
+    Description attributes
+    and direct child properties are observed in packet order; duplicate expanded
+    property names are rejected even if their bytes agree.
+
+    Attribute encodings are the exact bytes between their quotation marks.
+    Child encodings are the entire exact element span, including opening/closing
+    markup, descendants, comments, CDATA, and nested masks or AI data.  A digest
+    additionally binds every sorted in-scope prefix/decoded-URI mapping, including
+    declarations on the property element.  Ancestor rebinding therefore changes
+    the digest; an unused binding change can conservatively do so as well.
+
+    Transcript: ASCII [Unison-XMP-observation], NUL, ASCII [v1], NUL; one byte
+    [A] for an attribute value or [E] for a child element; a big-endian unsigned
+    32-bit binding count; for each binding sorted by prefix, length-prefixed
+    prefix then URI; finally length-prefixed exact encoding bytes.  Each length
+    is a big-endian unsigned 32-bit byte count.  No XML/RDF canonicalization,
+    entity-value normalization, or alias equivalence is asserted by the digest.
+
+    Limits: 128 properties, 512 bytes per expanded name or namespace URI,
+    128 bytes per prefix, 256 bytes per local name, 64 active namespace bindings
+    (including the predefined [xml] binding), depth 64, 8192 content/element
+    nodes, 256 attributes per element, and 16384 attributes in the packet.
+    XML QNames are restricted to ASCII.  Namespace URI whitespace, controls,
+    unsupported ASCII URI characters (including braces), and malformed percent
+    escapes are rejected, so expanded names are unambiguous.  Predefined and numeric
+    character references are accepted and validated; namespace values decode
+    them for namespace resolution.  DTDs, external/general entities, UTF-16,
+    XML 1.1, nested processing instructions, [rdf:ID]/[rdf:nodeID] subjects,
+    XML-namespace attributes on structural Description elements (including
+    [xml:base], [xml:id], [xml:lang], and [xml:space]), and unsupported envelope/RDF
+    structures return a bounded [Error] reason without an input excerpt.
+
+    [rdf:about], namespace declarations, the XML/packet declarations, and
+    [xmpmeta] toolkit attributes are structural and are not emitted as
+    properties.  This observation is consequently neither a complete packet
+    fingerprint nor an Adobe rendering/dependency interpretation. *)
+
+(** Lossless scalar view for the explicitly versioned reconciliation policy.
+    Only xmp:Rating and xmp:Label Description attributes are supported edits.
+    All other bytes remain in [shell], including subjects/namespaces, qualifiers,
+    unknown properties, rendering data and packet padding. Attribute XML entity
+    and whitespace normalization determines [value]; [encoded] retains exact
+    bytes. Rating must normalize to -1 or0..5; Label is at most256 UTF-8 bytes,
+    with at most4096 encoded bytes. Element forms are unsupported. *)
+type scalar = { scalar_name : string; first : int; last : int;
+                value : string; encoded : string }
+type scalar_view = { scalars : scalar list; shell : string }
+val scalar_view : string -> (scalar_view, string) result

@@ -1,0 +1,85 @@
+{
+  "schema": "unison-sdk-shared-child-faults/1",
+  "state": "SOURCE_AND_COMPONENT_CONTROLS_CLOSED",
+  "runs": [
+    {
+      "actual_terminal": {
+        "chunk": "57bbb6",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "scope": "5 inert-owner/capture fault controls; injected failures never OS-close",
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-faults-20261016a/SHARED-START.json",
+          "bytes": 1121,
+          "sha256": "c0059567b795e0b5cc614d703f7e1ac23624314bec350b79a3b2c56ae05daf10"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-faults-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "9a968e981504c19989366b258ead3080b10fd340fa71935d59cfc1d5881d33e3"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-faults-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-faults-20261016a/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk": "e5be2b",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "scope": "3 actual original Python children regressions",
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-source-20261016c/SHARED-START.json",
+          "bytes": 1108,
+          "sha256": "8dd4b917a2641b8474ee7bb188f4f78400073cc97f73753b962bfbbd9b21142e"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-source-20261016c/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "0a9b0051f6e253351ba4b6df3d1e038cdabb52bddc5ea7e0a97b16dd0f441a4e"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-source-20261016c/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-child-source-20261016c/SHARED-STDERR.txt",
+          "bytes": 101,
+          "sha256": "7fde5e77b74703a270b3c352e2b643807b3c3b7bf2c619096ea043298073e322"
+        }
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child.py",
+      "bytes": 4010,
+      "sha256": "ec72c4a7772599d91ee2d7bf1cccabf1f01e593d72458c8f308f9a9b09a31c59"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child_test.py",
+      "bytes": 1512,
+      "sha256": "5e582783cd1b3694dd5f9de6cb085eec7a0e1a3cc5c845122c1268843bfd1dcc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child_fault_test.py",
+      "bytes": 3510,
+      "sha256": "ded278bf3eaf7a5f08f2d87f32f7dcbb2c40a0bbcf14c69664305aeccaf4b0d9"
+    }
+  ],
+  "scope": "Live/census/partial capture/close/nested uncertain carrier retains child+captures+allidentities without signals/reap on unknown or numeric-close retry. MockPID900001 inert; no actual uncertain OSclose. Actual3fakechildren normallysettled. NoSDK/Photo/camera/payload/EXIO/nativeadmission.",
+  "full_goal_complete": false
+}

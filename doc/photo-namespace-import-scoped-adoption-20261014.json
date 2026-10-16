@@ -1,0 +1,211 @@
+{
+  "utc": "2026-10-14T19:46:45.383756+00:00",
+  "source": {
+    "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/INDEPENDENT-ACTUAL-NAMESPACE-OBSERVATION-ADDENDUM.json",
+    "bytes": 9759,
+    "sha256": "a1a81136d057ed0eb6f93ab5d63a6cab48e8dc3e776235abf536521543f6c4bb"
+  },
+  "adoption_scope": "Photo-owner reported standalone host namespace import observation only; not rendering or production qualification",
+  "original_failed_closed_parser_preserved": true,
+  "unresolved_risks": [
+    "three duplicate ObjC-class warnings",
+    "rendering and actual AgImageIO dependencies remain with Photo owner"
+  ],
+  "RAW_calls": 0,
+  "render_calls": 0,
+  "new_slot": false,
+  "replay": false,
+  "normative_preview_contract": "1.0.2 unchanged",
+  "ownership": "Photo Root/original preview owner retains renderer, generators, Ten/Quasar publication; Unison remains semantic DNG/filesystem/worker owner",
+  "source_receipt": {
+    "state": "INDEPENDENT_EXACT_SAVED_AGCRCONTEXT_NAMESPACE_OBSERVATION_QUALIFIED_WITH_ORIGINAL_PARSER_FAILURE_PRESERVED",
+    "utc": "2026-10-14T19:36:17.096366+00:00",
+    "reviewer": "/root/preview_implementation",
+    "inputs": {
+      "ROOT-ADMISSION.json": {
+        "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/ROOT-ADMISSION.json",
+        "bytes": 7919,
+        "sha256": "72bf806d485e37422ff7f8ad0832d07e10ebef00f9835240287f62ecb7e26edd"
+      },
+      "HOST-CALL.json": {
+        "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/HOST-CALL.json",
+        "bytes": 5099,
+        "sha256": "fe556e576a9ac51f302d95de96666938459c4a0ef686435617bc1f32047818b4"
+      },
+      "AGGREGATE-CLOSED.json": {
+        "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/AGGREGATE-CLOSED.json",
+        "bytes": 441,
+        "sha256": "0b1d688deb896ae32ba7a1c2407c5fa02dd8ef9d7a79e831f0e87d774e61daa4"
+      },
+      "ROOT-NAMESPACE-RESULT.json": {
+        "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/ROOT-NAMESPACE-RESULT.json",
+        "bytes": 667,
+        "sha256": "31b538f484ca2891dc48eb61baa1e9cd6abd0413f9a4ab3c7e39d459bd669f90"
+      },
+      "ROOT-LEASE-ACQUIRED.json": {
+        "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/runtimes/namespace-5e2c900c7d584b5281d35051015cb4a8/ROOT-LEASE-ACQUIRED.json",
+        "bytes": 68,
+        "sha256": "e856942dfe47f9173546b181201f1cae693e168ddf9988a9313ecd7da188d69e"
+      }
+    },
+    "sourceBuildReview": {
+      "path": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/build-002/INDEPENDENT-MINIMUM-NAMESPACE-SOURCE-BUILD-COORDINATOR-REVIEW.json",
+      "bytes": 9171,
+      "sha256": "de3cb339ef9fc0ddea4f48a1cb5683798622eca90a667eeddbba8dc4a0392f53"
+    },
+    "pinnedAdmissionFilesVerified": 23,
+    "actualNativeReceipt": {
+      "resourcesClosedScope": "NORMAL_STATE_AND_UNIVERSE_CLOSE_RETURN_ONLY",
+      "namespaceObservationValidated": true,
+      "processExitCode": 0,
+      "mainUniverseReturned": true,
+      "luaSmokeStatus": 0,
+      "state": "OWNED_HOST_AGCRCONTEXT_NAMESPACE_ONLY_RETURNED",
+      "photographicSourceObjects": 0,
+      "AgImageIOImportCalls": 0,
+      "resourcesClosed": true,
+      "renderCalls": 0,
+      "mode": "FIXED_AGCRCONTEXT_NAMESPACE_ONLY_V4",
+      "nativeGlobalInitTeardownQualified": false,
+      "AgCRContextImported": true,
+      "ownedBundle": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/build-002/FirstPairHost.app",
+      "ownershipRetained": false,
+      "fixedProgramTargetNamespaceImportSites": 1,
+      "dyldAfterNamespace": {
+        "observedImageCount": 445,
+        "concurrentDyldEnumerationQualified": false,
+        "AgUIImages": [
+          {
+            "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/AgUI.framework/Versions/A/AgUI",
+            "canonicalPath": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/AgUI.framework/Versions/A/AgUI"
+          }
+        ],
+        "CameraRawImages": [
+          {
+            "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit/Versions/A/CameraRaw",
+            "canonicalPath": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit/Versions/A/CameraRaw"
+          }
+        ]
+      },
+      "dyldBeforeNamespace": {
+        "observedImageCount": 398,
+        "concurrentDyldEnumerationQualified": false,
+        "AgUIImages": [],
+        "CameraRawImages": []
+      },
+      "ownedSmokeLoaderCalls": 1,
+      "universeCloseCandidateReturn": 0,
+      "rendererQualified": false,
+      "nativeSwitchMutationsAttempted": 0,
+      "stateCloseReturned": true,
+      "targetNamespaceImportCallCountKnown": true,
+      "AgCGBridgeSuiteImportCalls": 0,
+      "productionPublisherReleased": false,
+      "nativeResidentByteBoundQualified": false,
+      "configurationNativeSwitchMutationQualified": false,
+      "returnedNativeEntryPointCalls": 0,
+      "namespaceObservation": {
+        "returnedNativeFunctionsInvoked": false,
+        "state": "AGCRCONTEXT_NAMESPACE_ONLY_OBSERVED",
+        "rawSourceOpened": false,
+        "sourceToolkitIdentifier": "com.adobe.ag.AgImageIO",
+        "namespaceImportReturned": true,
+        "sourceExportBinding": "C:AgCRContext_load",
+        "getReferenceCountWhat": "C",
+        "sourceToolkitPath": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit",
+        "AgImageIOImportedByProbe": false,
+        "namespaceName": "AgCRContext",
+        "renderCalled": false,
+        "canonicalToolkitPath": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit",
+        "validateDNGFileType": "function",
+        "AgCGBridgeSuiteImportedByProbe": false,
+        "getReferenceCountType": "function",
+        "validateDNGFileWhat": "C"
+      },
+      "ownMainBundleExportResolved": true,
+      "CameraRawCanonicalImageTransitionValidated": true,
+      "targetNamespaceProgramAttempted": true,
+      "rawSourceOpenCalls": 0,
+      "ownedDataDirectory": "/Users/alexy/src/photo/preview-generator/standalone-host-init-v4/build-002/runtime-support",
+      "nativeInternalThreadCapQualified": false,
+      "targetNamespaceImportCalls": 1,
+      "session": "namespace-v4-0011e37a6d0b430b81907f0ace771379",
+      "privateABIOriginallyDeclaredByAdobe": false,
+      "stateOpenReturned": true,
+      "universeCloseReturned": true
+    },
+    "stdoutFraming": {
+      "exactLineCount": 2,
+      "jsonLineIndex": 0,
+      "trailingExactDiagnostic": "Global info:: SPL ~DefaultMemoryManagerImpl bytesAllocated = 0",
+      "diagnosticBytesSha256": "6f9484f5663a8d0910bb339967249453457cb9d1cc2d882f032d871016e64fe8",
+      "unknownTrailingOutputAccepted": false,
+      "interpretation": "Exact known trailer is a destructor diagnostic, not a second host result; no blanket stderr/stdout filtering or rerun."
+    },
+    "historicalRootResultPreserved": {
+      "state": "NAMESPACE_PROBE_FAILED_CLOSED",
+      "qualified": false,
+      "error": "non-JSON native stdout",
+      "rewritten": false
+    },
+    "actualProcessEvidence": {
+      "nativePID": 77385,
+      "nativeReturncode": 0,
+      "nativeReaped": true,
+      "cancelReason": null,
+      "hardKillRequired": false,
+      "aggregatePID": 77384,
+      "aggregateReaped": true,
+      "otherMembersAbsent": true,
+      "wallSeconds": 0.5336060260015074,
+      "within30SecondWall": true,
+      "normalStateAndUniverseCloseReturned": true,
+      "canonicalLeaseReleaseReported": true,
+      "all18ReservationReleaseReported": true
+    },
+    "objectiveCWarnings": {
+      "exactStderr": "objc[77385]: Class SODSFileDecode is implemented in both /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/WichitaFoundation.agtoolkit/Versions/A/WichitaFoundation (0x102cff0b8) and /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit/Versions/A/CameraRaw (0x11fdb6cc0). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.\nobjc[77385]: Class _GPUOperator is implemented in both /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/WichitaFoundation.agtoolkit/Versions/A/WichitaFoundation (0x102cff130) and /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit/Versions/A/CameraRaw (0x11fdb6d38). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.\nobjc[77385]: Class _CPUOperator is implemented in both /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/WichitaFoundation.agtoolkit/Versions/A/WichitaFoundation (0x102cff180) and /Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/CameraRaw.lrtoolkit/Versions/A/CameraRaw (0x11fdb6d88). This may cause spurious casting failures and mysterious crashes. One of the duplicates must be removed or renamed.\n",
+      "classes": [
+        "SODSFileDecode",
+        "_GPUOperator",
+        "_CPUOperator"
+      ],
+      "coexistingImages": [
+        "WichitaFoundation",
+        "CameraRaw"
+      ],
+      "scope": "The one namespace-only process returned normally. Duplicate registration can select an unintended class implementation and is an unresolved later raw/render stability risk. It does not establish rendering failure or safety of methods not called.",
+      "installedModificationAllowed": false,
+      "removeOrRenameClassesAttempted": false
+    },
+    "qualifiedObservations": {
+      "ownedHostInitializationAndOwnExport": true,
+      "exactAgCRContextNamespaceLoadedOutsideLightroom": true,
+      "canonicalCameraRawImageTransitionObserved": true,
+      "twoReturnedCFunctionsObservedNotInvoked": true,
+      "oneNormalStateAndUniverseClose": true,
+      "photographicSourceObjects": 0,
+      "RAWOrRenderCalls": 0
+    },
+    "limits": {
+      "rendererQualified": false,
+      "AgImageIONamespaceQualified": false,
+      "negativeOrContextCreationQualified": false,
+      "currentEditsFidelityQualified": false,
+      "globalNativeTeardownQualified": false,
+      "nativeResourceEnforcementQualified": false,
+      "duplicateObjectiveCClassStabilityQualified": false,
+      "productionPublisherReleased": false,
+      "fullRunReleased": false
+    },
+    "actions": {
+      "hostExecutions": 0,
+      "AdobeInvocations": 0,
+      "PhotoReads": 0,
+      "MainOrCacheOperations": 0,
+      "realLeaseOperations": 0
+    },
+    "cumulativeExecutedUnchanged": 56,
+    "replayOrNewNativeAdmission": false
+  }
+}

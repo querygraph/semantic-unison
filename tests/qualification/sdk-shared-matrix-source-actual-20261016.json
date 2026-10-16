@@ -1,0 +1,50 @@
+{
+  "schema": "unison-sdk-shared-matrix-source/1",
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "219e72",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 9295,
+      "sha256": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_plan.py",
+      "bytes": 1881,
+      "sha256": "3285912ce59a17393cd6281c18b622890bf9dc9ffe308f769174df169c989c33"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_plan_test.py",
+      "bytes": 2780,
+      "sha256": "a33ca8f9eb6e622a1b18392a451321d85d2e1f3a5d36287ba41c5c5e382f5b41"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-matrix-source-20261016a/SHARED-START.json",
+      "bytes": 1107,
+      "sha256": "877396fae1b44afc15b7e2dc20855ac5bdb9fc5540d0889305ecd08765b71505"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-matrix-source-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "93756a6de7a4f0618d5993f02c1364ab8c40b692c908de8e5743b21ea28cdded"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-matrix-source-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-matrix-source-20261016a/SHARED-STDERR.txt",
+      "bytes": 104,
+      "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+    }
+  ],
+  "scope": "Six pure metadata groups,12proposed calls/inert nonexistent executable+fixture paths, native1/2/6+owner2 within8. No fixture/toolpayload open/hash/build/execution or SDK/Adobe/Photo/EXIO. Source proposal only; no runtime executor/admission.",
+  "full_goal_complete": false
+}

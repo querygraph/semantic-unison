@@ -211,11 +211,14 @@ let int =
       );
   }
 
-let string =
+let bounded_string max_length =
+  if max_length < 0 then invalid_arg "Umarshal.bounded_string";
   {
     read =
       (fun recv ->
         let length = int.read recv in
+        if length < 0 || length > max_length then
+          raise (Error "bounded_string: length exceeds limit");
         let buffer = Bytes.create length in
         recv buffer 0 length;
         Bytes.to_string buffer
@@ -223,10 +226,14 @@ let string =
     write =
       (fun send x ->
         let length = String.length x in
+        if length > max_length then
+          raise (Error "bounded_string: length exceeds limit");
         int.write send length;
         send (Bytes.of_string x) 0 length
       );
   }
+
+let string = bounded_string Sys.max_string_length
 
 type bytearray =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t

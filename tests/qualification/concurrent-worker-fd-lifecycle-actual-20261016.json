@@ -1,0 +1,100 @@
+{
+  "schema": "unison-concurrent-worker-fd-lifecycle/1",
+  "state": "PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "1a524f",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/lifecycle.py",
+      "bytes": 5053,
+      "sha256": "7ffba6c49088d05958dcb0eed1156ac89879c7c06fc4a58dfb6f8d21f7e2a016"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/execute.py",
+      "bytes": 6528,
+      "sha256": "7032747ac3a3bf25e129011a806d937e804f0150019db483fe303cf1d8875c78"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit.py",
+      "bytes": 5163,
+      "sha256": "670fbee96e8165e7c58a533c7a20df19efe6f4ea5569c10a6408d654971e40d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 17937,
+      "sha256": "a4d8fcaca6bc7692c5bde9a1d2a2cddaee6ca10c8e84505c1037cde5bc9b25aa"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-fd-lifecycle-20261016b/SHARED-START.json",
+      "bytes": 1227,
+      "sha256": "693923e493e456c59a960de1f0e4f8fe691a7a6b5828ba40d10a70b95c164e2e"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-fd-lifecycle-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f9fd79feaa26b8ebd8f716702a679a0ae6b81c0ab0e695c20df1109d4d4f3b1b"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-fd-lifecycle-20261016b/SHARED-STDOUT.txt",
+      "bytes": 1371,
+      "sha256": "ff78e9ce31306ed1732047f6a7c3bf3f53b8f6522c320f9c19dc0b13bb7065cb"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-fd-lifecycle-20261016b/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/RESULT.json",
+      "bytes": 1791,
+      "sha256": "63256c89218a2880b8bc92e1a77ef6b196259eb9512e74ca5a327eec183c4199"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/8/SHARED-START.json",
+      "bytes": 12242,
+      "sha256": "96ea893d1402d2e213a795ba3cfaffcbd35191f00ca6202c2a8fde7202cf0e4f"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "fb78c1cc0c73bfab27f3c9a5dcef5d56f63e272605d88310c04ec3e5e2771759"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/8/SHARED-SERVER-AUDIT.json",
+      "bytes": 98,
+      "sha256": "3148d96c5e272f8e2586bce0e396d516eefde24e67a34bc8033fbecafb4e3c04"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/8/RESULT.json",
+      "bytes": 273,
+      "sha256": "8aa20a2a054619db14849aa55d4224b8e7248ffe291ebf5e4cfab88a410e086c"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/7/SHARED-START.json",
+      "bytes": 12162,
+      "sha256": "8f9119133c0e6b402075da8b945f6e54effa6330f25500e74ffb3d9e0ffc0b01"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/7/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "f98283af18bace2dd762988ea65fd98df8d7c4f84cc20b1d82dcd825de2289fc"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/7/SHARED-SERVER-AUDIT.json",
+      "bytes": 98,
+      "sha256": "3148d96c5e272f8e2586bce0e396d516eefde24e67a34bc8033fbecafb4e3c04"
+    },
+    {
+      "path": "/private/tmp/u-crs-fd-ii04vcp2/7/RESULT.json",
+      "bytes": 273,
+      "sha256": "b3764616503728f8ca07a1c3949d677dfd4316881635f2b9f4f3fe151f5f1f76"
+    }
+  ],
+  "scope": "actual2Python header children with9positive/8negative inherited disposable lock FDs; expected7/directreaped/groupabsent/zero-call parent audits; inner lock FDclose and fresh reacquisition; outer canonical Unison8 closed. Admission/argv and interpreter-hash gates doubled; no receiving kernel/CLI/helper/SDK/Photo/camera/canonicalEXglobal qualification",
+  "full_goal_complete": false
+}

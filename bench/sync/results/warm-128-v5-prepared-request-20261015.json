@@ -1,0 +1,66 @@
+{
+  "state": "PREPARED_UNADMITTED_NOT_STARTED",
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v5.json",
+    "bytes": 9605,
+    "sha256": "5f8d1635ad506c949ae071bc1e51a5eaff329cd1d67aeb2e5113e3cd9c4cd39c"
+  },
+  "batch_index": 0,
+  "workspace": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB",
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/bench/sync/run_bounded.py",
+    "--plan",
+    "/private/tmp/unison-warm-sync-measurement-plan-20261015-v5.json",
+    "--batch-index",
+    "0",
+    "--workspace",
+    "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB",
+    "--allocation",
+    "/Users/alexy/src/photo/preview-generator/UNISON-WARM128-V5-ADMISSION-20261015.json"
+  ],
+  "source_pins": {
+    "bench/sync/run_bounded.py": "f9ecd63f54cd71c9dcc3b9320e9b397ee687a20027dfc70f5da069de807e72e7",
+    "bench/sync/batch_audit.py": "a387bf28f89f8e4d437e5c54ee1cc8701c891754f7738c9a11bbd66509174e09",
+    "bench/sync/prepare_plan.py": "1e9e843cd9e1ac9e0a7196458f7a527f24ad7d218d724d2be0c9401b8bf99e21",
+    "bench/sync/run.py": "7cadd5bb79f52a82c8769c5328f2a66bcfb516e6f00510b607eed2fc199d736f",
+    "bench/sync/fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+    "bench/sync/measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "7c1b1d430b3d906764b4fe850c6543a2c7a1aca16261ef42b09491cfa87786bb",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+  },
+  "limits": {
+    "cpu_credits": 18,
+    "aggregate_seconds": 7200,
+    "cli_invocations": 324
+  },
+  "allocation_file": "/Users/alexy/src/photo/preview-generator/UNISON-WARM128-V5-ADMISSION-20261015.json",
+  "required_allocation_state": "ROOT_ALLOCATED_FINITE_SYNC_BATCH_V1",
+  "required_allocation_fields": [
+    "plan",
+    "batch_index",
+    "workspace",
+    "command",
+    "source_pins",
+    "limits",
+    "startDeadlineUnix"
+  ],
+  "lifecycle_evidence": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/bounded-lifecycle-qualification-20261015.json",
+    "bytes": 17225,
+    "sha256": "166da4c4f9e7606bc4a832fcd4794da43115d48ff0e69a00938748ed66e2b527"
+  },
+  "root_lifecycle_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-FAKE-LIFECYCLE-ROOT-ACCEPTANCE-20261015.json",
+    "bytes": 571,
+    "sha256": "bf2ea5f3bf19b6e48363fb43085b2aa63107330e7fd93df4decbbe00a355fa30"
+  },
+  "scope": "First128MiB x4 only; stock/Ox ordinary, receiver-clone and semantic, workers1/6/8, one warmup/five repetitions. No compiler/SDK/Photo/Classic. Later batches excluded.",
+  "ownership": "Whole324CLI batch inside7200s aggregate; wrapper hash preflight outside. Every CLI/client/server settlement separately audited before success. Unknown outcome retains ownership; actual parent terminal and group closure required.",
+  "scheduling": "Preparation only. Photo priority and successor hold remain; no resource reservation or dispatch. Never replay stopped60597 or use its output."
+}

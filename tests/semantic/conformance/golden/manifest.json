@@ -1,0 +1,109 @@
+{
+  "format": "independent-sde-sdr-goldens-v1",
+  "normative_source": "doc/semantic-delta-v0.md",
+  "generation": "Python standard-library reference.py; no production calls",
+  "vectors": [
+    {
+      "name": "multi",
+      "profile": "org.firstpair.conformance-multi/0",
+      "nonce_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "regions": [
+        {
+          "offset": 0,
+          "length": 3
+        },
+        {
+          "offset": 3,
+          "length": 2
+        },
+        {
+          "offset": 11,
+          "length": 4
+        },
+        {
+          "offset": 27,
+          "length": 5
+        }
+      ],
+      "preserved_sha256": "5c6e790768c7a63f6f1ba6886748533619b9e2623ac890c08105d20ba2ab4f00",
+      "files": {
+        "base": {
+          "bytes": 32,
+          "sha256": "64fec337382cbac4b0fd58fd08987975ea69cdb8e8ea8be2d0f2335e74a27c9e"
+        },
+        "target": {
+          "bytes": 32,
+          "sha256": "1f9dc1d6c9d1de7eb30a09cb6382cf00702a98d88f2b4b41e8cae0caf129cf29"
+        },
+        "sde": {
+          "bytes": 527,
+          "sha256": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895"
+        },
+        "sdr": {
+          "bytes": 353,
+          "sha256": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd"
+        }
+      }
+    },
+    {
+      "name": "dng-le",
+      "profile": "org.firstpair.dng-xmp/0",
+      "nonce_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "regions": [
+        {
+          "offset": 96,
+          "length": 16
+        }
+      ],
+      "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+      "files": {
+        "base": {
+          "bytes": 256,
+          "sha256": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2"
+        },
+        "target": {
+          "bytes": 256,
+          "sha256": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c"
+        },
+        "sde": {
+          "bytes": 279,
+          "sha256": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22"
+        },
+        "sdr": {
+          "bytes": 199,
+          "sha256": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8"
+        }
+      }
+    },
+    {
+      "name": "dng-be",
+      "profile": "org.firstpair.dng-xmp/0",
+      "nonce_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "regions": [
+        {
+          "offset": 96,
+          "length": 16
+        }
+      ],
+      "preserved_sha256": "52ea8f8e49a42cea32bec708368f252c37d5ef4f41289bdba760f6a603c656f3",
+      "files": {
+        "base": {
+          "bytes": 256,
+          "sha256": "a309884b55c4c0f3db9b7766ce4a9b9d2acc2492b2fc70c959e0dfde367b6916"
+        },
+        "target": {
+          "bytes": 256,
+          "sha256": "d42103c1a18d0ad994d6590985650b85780652eb810d5073301b0dcb8d19e9ed"
+        },
+        "sde": {
+          "bytes": 279,
+          "sha256": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe"
+        },
+        "sdr": {
+          "bytes": 199,
+          "sha256": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e"
+        }
+      }
+    }
+  ]
+}

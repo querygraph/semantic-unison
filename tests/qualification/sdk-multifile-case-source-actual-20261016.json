@@ -1,0 +1,36 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/case_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.013s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 40532,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "five injected two-candidate case controls on original tiny files; no transport, SDK, retained DNG, Photo or EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/case.py": "15370373f41edb0d5f597450a0e174bd75d9b21e6aa9bb8af07fe740d50ff509",
+    "tests/sdk_multifile/case_test.py": "8658e3d58c2cccad7cd1ac32ee6c2a71a12c78b3f2a2fc9342c8604e4db07117"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "dadb11",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

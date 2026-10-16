@@ -1,0 +1,1052 @@
+{
+  "schema": "unison-native-clone-scratch-qualified/1",
+  "observed_utc": "2026-10-13T18:38:45.372600+00:00",
+  "terminal": "passed",
+  "sources": {
+    "src/copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+    "src/fs.ml": "31c00b85a1ae1fc350c914b58a6f584386e17a30fd98e2840323dbe24ee7d763",
+    "src/fs.mli": "5ab6513cb1a379d632849935f223c4facd57b2ddc002349aca6f27ecf68523c7",
+    "tests/clone_scratch/fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+    "tests/clone_scratch/test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b",
+    "tests/clone_scratch/run.py": "6b059798d56dfb64b02749e22339a3862c465f30954db7821cb7ab3eafad0970",
+    "tests/clone_scratch/README.md": "a0c06881967dee5d6839c73cde07ee534b555fecc43ed31142a5824c3e334d65"
+  },
+  "direct_qualification": [
+    {
+      "schema": "unison-native-clone-scratch-qualification/1",
+      "compiler": "/usr/local/bin/ocamlopt",
+      "compiler_version": "5.5.1",
+      "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+      "compiler_config": "version: 5.5.1\nstandard_library_default: /usr/local/lib/ocaml\nstandard_library_relative: \nstandard_library: /usr/local/lib/ocaml\nccomp_type: cc\nc_compiler: clang\nbytecode_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nocamlc_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nbytecode_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nnative_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nocamlopt_cflags: -O2 -fno-strict-aliasing -fwrapv   -pthread \nnative_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: clang -O2 -fno-strict-aliasing -fwrapv   -pthread   -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: clang -O2 -fno-strict-aliasing -fwrapv   -pthread   -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries: -lzstd    -lpthread\nnative_c_libraries:    -lpthread\ncompression_c_libraries: -lzstd\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: amd64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: clang -c -Wno-trigraphs\nasm_cfi_supported: true\nasm_size_type_directives: false\nwith_frame_pointers: false\nwith_nonexecstack_note: false\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: x86_64-apple-darwin24.6.0\ntarget: x86_64-apple-darwin24.6.0\nbytecode_runtime_id: a100\nnative_runtime_id: a100\nflambda: false\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nalign_double: false\nalign_int64: false\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nwith_codegen_invariants: true\nexec_magic_number: Caml1999X037\ncmi_magic_number: Caml1999I037\ncmo_magic_number: Caml1999O037\ncma_magic_number: Caml1999A037\ncmx_magic_number: Caml1999Y037\ncmxa_magic_number: Caml1999Z037\nast_impl_magic_number: Caml1999M037\nast_intf_magic_number: Caml1999N037\ncmxs_magic_number: Caml1999D037\ncmt_magic_number: Caml1999T037\nlinear_magic_number: Caml1999L037\n",
+      "native_compiler": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "native_compiler_sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769",
+      "native_compiler_version": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: x86_64-apple-darwin24.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "build_environment": {
+        "SDKROOT": null,
+        "MACOSX_DEPLOYMENT_TARGET": null,
+        "CC": null,
+        "CFLAGS": null
+      },
+      "sources": {
+        "src/copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+        "src/fs.ml": "31c00b85a1ae1fc350c914b58a6f584386e17a30fd98e2840323dbe24ee7d763",
+        "src/fs.mli": "5ab6513cb1a379d632849935f223c4facd57b2ddc002349aca6f27ecf68523c7",
+        "tests/clone_scratch/fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+        "tests/clone_scratch/test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b",
+        "tests/clone_scratch/run.py": "6b059798d56dfb64b02749e22339a3862c465f30954db7821cb7ab3eafad0970",
+        "tests/clone_scratch/README.md": "a0c06881967dee5d6839c73cde07ee534b555fecc43ed31142a5824c3e334d65"
+      },
+      "artifacts": "/private/tmp/unison-clone-scratch-jg1hs2ya",
+      "runs": [
+        {
+          "mode": "fixed",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13626697399740806,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.03715864400146529,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14080256700253813,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3562016700016102,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.4115194610058097,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/scratch-test",
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/files-all",
+              "all"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed",
+            "exit_code": 0,
+            "elapsed_seconds": 0.5697072000039043,
+            "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/run-all.log",
+            "log_sha256": "f29b82155b842ac5ed30a5cadabf9b2cf73d7e458338ecb122be40bb31a13bfd",
+            "cases": 182,
+            "assertions": 1984,
+            "filesystem": "apfs",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/files-all/inventory.json",
+            "native_artifact_manifest_sha256": "8dbad6eca1b78c16456c29a55bfbb2bfeac357b05454d45f7e6add8776335124"
+          },
+          "additional_executions": [],
+          "production_copy_sha256": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+          "binary": "/private/tmp/unison-clone-scratch-jg1hs2ya/fixed/scratch-test",
+          "binary_sha256": "7cc7472f470694572135d0c6900e6bee271fe93fe40663dd1be500c5a4c0e7a6",
+          "qualified_build_sources": {
+            "copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "c9b119ffa5eee14defa0043c63288a77af079a6575d53cf395b85d43b8933b25",
+            "fspath.cmx": "ebc93102d207239b316cab2ecdb9347d0af03f9419f245dba2170334f11abfb8",
+            "fs.cmx": "09c4e2575897ad347e715682bf24b57e5a9b3b2ee2889f6745171fc85ee7fbef"
+          }
+        },
+        {
+          "mode": "absolute-reservation",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13130432900652522,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.03682441500131972,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13802816099632764,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.24368084400339285,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/fixture.c.compile.log",
+              "log_sha256": "af96cf5396f4017c1f3840d8aded757dfe9d18d32b91d2c549921eafedc6772a"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3613193310011411,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/scratch-test",
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-legacy",
+              "held-parent-rebind",
+              "legacy"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+            "exit_code": 2,
+            "elapsed_seconds": 0.3093454779955209,
+            "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/run-legacy.log",
+            "log_sha256": "9c704bcdc26d74b588e7172c8d053759341e4014e63fc5b1f258c53517897c94",
+            "detected_defect": "held-parent-rebind",
+            "detected_assertion": "reservation escaped held parent",
+            "abi": "legacy",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-legacy/inventory.json",
+            "native_artifact_manifest_sha256": "42a93d421dee39b1364a03de7d1b3ac940516800c99e683dce5851ae5a1a0eab"
+          },
+          "additional_executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/scratch-test",
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-strict",
+                "held-parent-rebind",
+                "strict"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 2,
+              "elapsed_seconds": 0.013192662998335436,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/run-strict.log",
+              "log_sha256": "8466cd4f556f221491a97bf79fea7b7a9a0a2999808128f1efa7441f16568c88",
+              "detected_defect": "held-parent-rebind",
+              "detected_assertion": "reservation escaped held parent",
+              "abi": "strict",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-strict/inventory.json",
+              "native_artifact_manifest_sha256": "26e19443efd29ff486f5ebd06eeffb42f6f81953c51b9404fb21b6e6b641da11"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/scratch-test",
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-handles",
+                "held-parent-rebind",
+                "handles"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation",
+              "exit_code": 2,
+              "elapsed_seconds": 0.01362465800048085,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/run-handles.log",
+              "log_sha256": "ee827cf1a09ae5a69b5aa882979d9917dbeb484e2463d698d4e61db71ee7b7f5",
+              "detected_defect": "held-parent-rebind",
+              "detected_assertion": "reservation escaped held parent",
+              "abi": "handles",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/files-handles/inventory.json",
+              "native_artifact_manifest_sha256": "1776231dcf997f14d120d251704b01210fe3ee37e38e77dab63700be103d45ae"
+            }
+          ],
+          "production_copy_sha256": "9436c852e53c03b3a3e1da31b07bc52bca69003fe9658d4e9ce6096720408164",
+          "binary": "/private/tmp/unison-clone-scratch-jg1hs2ya/absolute-reservation/scratch-test",
+          "binary_sha256": "eeb13360dccd6328b23f1125a6f629ef3958ad9a02edb995b54001dcca06c51b",
+          "qualified_build_sources": {
+            "copy_stubs.c": "9436c852e53c03b3a3e1da31b07bc52bca69003fe9658d4e9ce6096720408164",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "13187e21c4323e67ae625e7c34d5b7dbb45fbe4a5a19e7fc054b5ab06b25596b",
+            "fspath.cmx": "ebc93102d207239b316cab2ecdb9347d0af03f9419f245dba2170334f11abfb8",
+            "fs.cmx": "09c4e2575897ad347e715682bf24b57e5a9b3b2ee2889f6745171fc85ee7fbef"
+          }
+        },
+        {
+          "mode": "missing-reservation-guard",
+          "commands": [
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.08688866200100165,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.0267628869987675,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13151750800170703,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.29547685800207546,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/usr/local/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.36598452200269094,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/scratch-test",
+              "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-legacy",
+              "reservation-replacement",
+              "legacy"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+            "exit_code": 2,
+            "elapsed_seconds": 0.30163231000187807,
+            "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/run-legacy.log",
+            "log_sha256": "9f0a05d54535b2742a67b1493060365a059ce56b141b1f8a415db295f0b4fac1",
+            "detected_defect": "reservation-replacement",
+            "detected_assertion": "reservation-replacement: unexpected success",
+            "abi": "legacy",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-legacy/inventory.json",
+            "native_artifact_manifest_sha256": "b5d73541bc3a766d3038ab6c5d8454506806dcdf5ab5901a558377d3d72730ed"
+          },
+          "additional_executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/scratch-test",
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-strict",
+                "reservation-replacement",
+                "strict"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.01438789399981033,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/run-strict.log",
+              "log_sha256": "82d199e453189045e99edcf8a75f6d08b623e8c77fb5ac64fbed92aab976a0f0",
+              "detected_defect": "reservation-replacement",
+              "detected_assertion": "reservation-replacement: unexpected success",
+              "abi": "strict",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-strict/inventory.json",
+              "native_artifact_manifest_sha256": "f5ede5fee9d53ef1ba55cdf7fe93d3678bb43127c512ff87586ab4e2d248b6c5"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/scratch-test",
+                "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-handles",
+                "reservation-replacement",
+                "handles"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.01292509499762673,
+              "log": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/run-handles.log",
+              "log_sha256": "b00684e38d10863ca217de9d556e60fb6ad9313230e39819af0ab6f73d8acbaa",
+              "detected_defect": "reservation-replacement",
+              "detected_assertion": "reservation-replacement: unexpected success",
+              "abi": "handles",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/files-handles/inventory.json",
+              "native_artifact_manifest_sha256": "4e09084714d12a715765c4a3c79a5cc3ec239b4ef365e080655d3323044edb0a"
+            }
+          ],
+          "production_copy_sha256": "26f2880625f24fba71199d04ff59183a44cf71923d57ea7b4739391cd7856731",
+          "binary": "/private/tmp/unison-clone-scratch-jg1hs2ya/missing-reservation-guard/scratch-test",
+          "binary_sha256": "cd791eab3e45df5f9e2b928bb1613f7b87246673e4eb7311adbd987f3c9734e0",
+          "qualified_build_sources": {
+            "copy_stubs.c": "26f2880625f24fba71199d04ff59183a44cf71923d57ea7b4739391cd7856731",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "2c853f95fd3db19e199d9a3dbe1acc0a1215feda7ed1e524652f34d999e0d7b2",
+            "fspath.cmx": "ebc93102d207239b316cab2ecdb9347d0af03f9419f245dba2170334f11abfb8",
+            "fs.cmx": "09c4e2575897ad347e715682bf24b57e5a9b3b2ee2889f6745171fc85ee7fbef"
+          }
+        }
+      ],
+      "source_guards": "result preallocation/pending dispatch/no-pending release; not allocation-fault or native-deadline proof",
+      "scope": "synthetic disposable local APFS files only; no Photo, catalog, SDK, Lightroom or production volume access",
+      "terminal": "passed",
+      "external_receipt": {
+        "path": "/private/tmp/unison-clone-scratch-stock-qualification.json",
+        "sha256": "2f867b8f74639caddf9661b66118cf2fdbb850a17df302ad6028ce65c0af3669"
+      }
+    },
+    {
+      "schema": "unison-native-clone-scratch-qualification/1",
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "compiler_version": "5.2.0+ox",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "compiler_config": "version: 5.2.0+ox\nstandard_library_default: /Users/alexy/.opam/5.2.0+ox/lib/ocaml\nstandard_library: /Users/alexy/.opam/5.2.0+ox/lib/ocaml\nccomp_type: cc\nc_compiler: gcc\nocamlc_cflags:  -O2 -fno-strict-aliasing -fwrapv  \nocamlc_cppflags:  -D_FILE_OFFSET_BITS=64 \nocamlopt_cflags:  -O2 -fno-strict-aliasing -fwrapv  \nocamlopt_cppflags:  -D_FILE_OFFSET_BITS=64 \nbytecomp_c_compiler: gcc  -O2 -fno-strict-aliasing -fwrapv    -D_FILE_OFFSET_BITS=64 \nnative_c_compiler: gcc  -O2 -fno-strict-aliasing -fwrapv    -D_FILE_OFFSET_BITS=64 \nbytecomp_c_libraries:    -pthread\nnative_c_libraries:    -pthread\nnative_ldflags: \nnative_pack_linker: ld -r -o \nnative_compiler: true\narchitecture: amd64\nmodel: default\nint_size: 63\nword_size: 64\nsystem: macosx\nasm: gcc -c -Wno-trigraphs\nasm_cfi_supported: true\nwith_frame_pointers: false\nwith_address_sanitizer: false\nwith_cpp_mangling: false\nname_mangling_scheme: flat\next_exe: \next_obj: .o\next_asm: .s\next_lib: .a\next_dll: .so\nos_type: Unix\ndefault_executable_name: a.out\nsysthread_supported: true\nhost: x86_64-apple-darwin24.6.0\ntarget: x86_64-apple-darwin24.6.0\nflambda: false\nflambda2: true\nsafe_string: true\ndefault_safe_string: true\nflat_float_array: true\nfunction_sections: false\nafl_instrument: false\ntsan: false\nwindows_unicode: false\nsupports_shared_libraries: true\nnative_dynlink: true\nnaked_pointers: false\nparameterised_modules: true\nexec_magic_number: Caml1999X578\ncmi_magic_number: Caml1999I578\ncmo_magic_number: Caml1999O578\ncma_magic_number: Caml1999A578\ncmx_magic_number: Caml1999Y578\ncmxa_magic_number: Caml1999Z578\nast_impl_magic_number: Caml1999M578\nast_intf_magic_number: Caml1999N578\ncmxs_magic_number: Caml1999D578\ncmt_magic_number: Caml1999T578\ncms_magic_number: Caml1999S578\ncmj_magic_number: Caml1999J578\ncmja_magic_number: Caml1999K578\nlinear_magic_number: Caml1999L578\nflambda_backend: true\nprobes: false\nstack_allocation: true\nruntime5: true\nno_stack_checks: false\nmultidomain: true\npoll_insertion: true\nox: true\noxcaml_dwarf: false\nobjcopy: \n",
+      "native_compiler": "/Library/Developer/CommandLineTools/usr/bin/clang",
+      "native_compiler_sha256": "15339439a6be4a9d33d281ec040a7e0092190b1c8d7de5f94d824b50ffae0769",
+      "native_compiler_version": "Apple clang version 17.0.0 (clang-1700.6.4.2)\nTarget: x86_64-apple-darwin24.6.0\nThread model: posix\nInstalledDir: /Library/Developer/CommandLineTools/usr/bin\n",
+      "build_environment": {
+        "SDKROOT": null,
+        "MACOSX_DEPLOYMENT_TARGET": null,
+        "CC": null,
+        "CFLAGS": null
+      },
+      "sources": {
+        "src/copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+        "src/fs.ml": "31c00b85a1ae1fc350c914b58a6f584386e17a30fd98e2840323dbe24ee7d763",
+        "src/fs.mli": "5ab6513cb1a379d632849935f223c4facd57b2ddc002349aca6f27ecf68523c7",
+        "tests/clone_scratch/fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+        "tests/clone_scratch/test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b",
+        "tests/clone_scratch/run.py": "6b059798d56dfb64b02749e22339a3862c465f30954db7821cb7ab3eafad0970",
+        "tests/clone_scratch/README.md": "a0c06881967dee5d6839c73cde07ee534b555fecc43ed31142a5824c3e334d65"
+      },
+      "artifacts": "/private/tmp/unison-clone-scratch-i2k21pxp",
+      "runs": [
+        {
+          "mode": "fixed",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.14721342400298454,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04325285799859557,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1394083419945673,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3100652959983563,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+              "exit_code": 0,
+              "elapsed_seconds": 0.8012189009969006,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/scratch-test",
+              "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/files-all",
+              "all"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed",
+            "exit_code": 0,
+            "elapsed_seconds": 0.5676440219976939,
+            "log": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/run-all.log",
+            "log_sha256": "f29b82155b842ac5ed30a5cadabf9b2cf73d7e458338ecb122be40bb31a13bfd",
+            "cases": 182,
+            "assertions": 1984,
+            "filesystem": "apfs",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/files-all/inventory.json",
+            "native_artifact_manifest_sha256": "0453d66cb8622daef705025dbcb00796b59b046252141a3939e1141c3181ed51"
+          },
+          "additional_executions": [],
+          "production_copy_sha256": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+          "binary": "/private/tmp/unison-clone-scratch-i2k21pxp/fixed/scratch-test",
+          "binary_sha256": "820628eb504b9cebc3f700be1b2aae1963612d0f9cac0211ed5a0b3af6513d36",
+          "qualified_build_sources": {
+            "copy_stubs.c": "8478e89400128ba53500e3d78e4e8eab854ad744ffc3a886a6d5b037c9d8760b",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "0be3221b4d13254b7eac320eb1781a73ba58a9c46d7b50f39ad61a76d62228eb",
+            "fspath.cmx": "077568b5936aad77ebac8e72cf1adab64306827b89ec6a4e0e2bbfc67e7e5e69",
+            "fs.cmx": "ff665c368e491afe5dd48ed9b7c3b9776e227c962d3e427826613c23a3467d95"
+          }
+        },
+        {
+          "mode": "absolute-reservation",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.13975816200400004,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.04621809899981599,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.15191655600210652,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.29869559800135903,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/fixture.c.compile.log",
+              "log_sha256": "af96cf5396f4017c1f3840d8aded757dfe9d18d32b91d2c549921eafedc6772a"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 0,
+              "elapsed_seconds": 0.7650267770004575,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/scratch-test",
+              "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-legacy",
+              "held-parent-rebind",
+              "legacy"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+            "exit_code": 2,
+            "elapsed_seconds": 0.30952387399884174,
+            "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/run-legacy.log",
+            "log_sha256": "9c704bcdc26d74b588e7172c8d053759341e4014e63fc5b1f258c53517897c94",
+            "detected_defect": "held-parent-rebind",
+            "detected_assertion": "reservation escaped held parent",
+            "abi": "legacy",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-legacy/inventory.json",
+            "native_artifact_manifest_sha256": "923b92d311629d36a6c00863c9a2ed48821e62742c790cc61f2e730c98e75dbc"
+          },
+          "additional_executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/scratch-test",
+                "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-strict",
+                "held-parent-rebind",
+                "strict"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 2,
+              "elapsed_seconds": 0.014540156000293791,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/run-strict.log",
+              "log_sha256": "8466cd4f556f221491a97bf79fea7b7a9a0a2999808128f1efa7441f16568c88",
+              "detected_defect": "held-parent-rebind",
+              "detected_assertion": "reservation escaped held parent",
+              "abi": "strict",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-strict/inventory.json",
+              "native_artifact_manifest_sha256": "ccda8181e256f95ed71a5b5e5f8b7ef00c3e3281c2eb0c33012bf08ff4979d0e"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/scratch-test",
+                "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-handles",
+                "held-parent-rebind",
+                "handles"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation",
+              "exit_code": 2,
+              "elapsed_seconds": 0.012002619994746055,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/run-handles.log",
+              "log_sha256": "ee827cf1a09ae5a69b5aa882979d9917dbeb484e2463d698d4e61db71ee7b7f5",
+              "detected_defect": "held-parent-rebind",
+              "detected_assertion": "reservation escaped held parent",
+              "abi": "handles",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/files-handles/inventory.json",
+              "native_artifact_manifest_sha256": "9009dc3c5dd7450517ba9d91ed926332e60d231beb4403d2dd111b6c608fff71"
+            }
+          ],
+          "production_copy_sha256": "9436c852e53c03b3a3e1da31b07bc52bca69003fe9658d4e9ce6096720408164",
+          "binary": "/private/tmp/unison-clone-scratch-i2k21pxp/absolute-reservation/scratch-test",
+          "binary_sha256": "2cc04de849549ec66dc2d499cd1c37a935c141a58e7713fd88744594b147de10",
+          "qualified_build_sources": {
+            "copy_stubs.c": "9436c852e53c03b3a3e1da31b07bc52bca69003fe9658d4e9ce6096720408164",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "caea045295cb82593869d3e0827bff8d021fc2210460da915707043f9a62e2e3",
+            "fspath.cmx": "077568b5936aad77ebac8e72cf1adab64306827b89ec6a4e0e2bbfc67e7e5e69",
+            "fs.cmx": "ff665c368e491afe5dd48ed9b7c3b9776e227c962d3e427826613c23a3467d95"
+          }
+        },
+        {
+          "mode": "missing-reservation-guard",
+          "commands": [
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fspath.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.18973134100087918,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/fspath.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.mli"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.048137907004274894,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/fs.mli.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fs.ml"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.1390471400009119,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/fs.ml.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "-ccopt",
+                "-Wall",
+                "-ccopt",
+                "-Wextra",
+                "-c",
+                "fixture.c"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.3110403170067002,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/fixture.c.compile.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            },
+            {
+              "argv": [
+                "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                "-I",
+                "+unix",
+                "unix.cmxa",
+                "fspath.cmx",
+                "fs.cmx",
+                "fixture.o",
+                "test.ml",
+                "-o",
+                "scratch-test"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 0,
+              "elapsed_seconds": 0.7466529480007011,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/link.log",
+              "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ],
+          "execution": {
+            "argv": [
+              "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/scratch-test",
+              "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-legacy",
+              "reservation-replacement",
+              "legacy"
+            ],
+            "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+            "exit_code": 2,
+            "elapsed_seconds": 0.30012148300011177,
+            "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/run-legacy.log",
+            "log_sha256": "9f0a05d54535b2742a67b1493060365a059ce56b141b1f8a415db295f0b4fac1",
+            "detected_defect": "reservation-replacement",
+            "detected_assertion": "reservation-replacement: unexpected success",
+            "abi": "legacy",
+            "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-legacy/inventory.json",
+            "native_artifact_manifest_sha256": "fe5f3f4509592cf231419902ff604af9801531bc4078cda9971b1233c1363d55"
+          },
+          "additional_executions": [
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/scratch-test",
+                "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-strict",
+                "reservation-replacement",
+                "strict"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.014514615999360103,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/run-strict.log",
+              "log_sha256": "82d199e453189045e99edcf8a75f6d08b623e8c77fb5ac64fbed92aab976a0f0",
+              "detected_defect": "reservation-replacement",
+              "detected_assertion": "reservation-replacement: unexpected success",
+              "abi": "strict",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-strict/inventory.json",
+              "native_artifact_manifest_sha256": "d55378b3274af9a3c724c8549f0f72e41c27a02ccfcd60829a8043020a0ef4e9"
+            },
+            {
+              "argv": [
+                "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/scratch-test",
+                "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-handles",
+                "reservation-replacement",
+                "handles"
+              ],
+              "cwd": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard",
+              "exit_code": 2,
+              "elapsed_seconds": 0.013391451000643428,
+              "log": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/run-handles.log",
+              "log_sha256": "b00684e38d10863ca217de9d556e60fb6ad9313230e39819af0ab6f73d8acbaa",
+              "detected_defect": "reservation-replacement",
+              "detected_assertion": "reservation-replacement: unexpected success",
+              "abi": "handles",
+              "native_artifact_manifest": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/files-handles/inventory.json",
+              "native_artifact_manifest_sha256": "be04148b47aa545fcb502414d2d62c6845c37dc5c927aadff0579cf3ccbdede6"
+            }
+          ],
+          "production_copy_sha256": "26f2880625f24fba71199d04ff59183a44cf71923d57ea7b4739391cd7856731",
+          "binary": "/private/tmp/unison-clone-scratch-i2k21pxp/missing-reservation-guard/scratch-test",
+          "binary_sha256": "2860905b8b81558521df5c4b3fc75730775154938bb8794aea721ac83c4777b5",
+          "qualified_build_sources": {
+            "copy_stubs.c": "26f2880625f24fba71199d04ff59183a44cf71923d57ea7b4739391cd7856731",
+            "fspath.ml": "888e893df21a246a3051596505c53191a2dfcf34a430f69f59155cf737120aee",
+            "fs.ml": "a5a6b11609fb4aad86a049bb96b6e3bde75efeae8d7f7e1d0d384de71adfef51",
+            "fs.mli": "dcfcadb88dc80c126a2c6e1c7972e4383d12290f0bb35640cd36b1d542adff26",
+            "fixture.c": "0e3ec56ec2c7da84fa631d29ff6411a9e57097f0c600b77c465b33c74faf2637",
+            "test.ml": "d0d7388d94c4c7bfb219a315364792ae5e97855afba82d3d81dc0c947014865b"
+          },
+          "qualified_objects": {
+            "fixture.o": "8d5c6935de05a93acb69e26877a43f6b50ab70400b86c170318ef35d84e1eaf9",
+            "fspath.cmx": "077568b5936aad77ebac8e72cf1adab64306827b89ec6a4e0e2bbfc67e7e5e69",
+            "fs.cmx": "ff665c368e491afe5dd48ed9b7c3b9776e227c962d3e427826613c23a3467d95"
+          }
+        }
+      ],
+      "source_guards": "result preallocation/pending dispatch/no-pending release; not allocation-fault or native-deadline proof",
+      "scope": "synthetic disposable local APFS files only; no Photo, catalog, SDK, Lightroom or production volume access",
+      "terminal": "passed",
+      "external_receipt": {
+        "path": "/private/tmp/unison-clone-scratch-ox-qualification.json",
+        "sha256": "fe3bf735dc92fd64c70c2fe40ab7a759658fe1dbc46439699135654a9b366af9"
+      }
+    }
+  ],
+  "outcomes": {
+    "per_compiler": {
+      "direct_cases": 182,
+      "assertions": 1984,
+      "legacy_cases": 61,
+      "strict_cases": 61,
+      "handles_cases": 60
+    },
+    "compilers": [
+      "5.5.1",
+      "5.2.0+ox"
+    ],
+    "native_filesystem": "apfs",
+    "negative_controls": {
+      "absolute_reservation": {
+        "all_three_abis": "designated failure: reservation escaped held parent"
+      },
+      "missing_reservation_identity_guard": {
+        "all_three_abis": "designated failure: reservation-replacement: unexpected success"
+      }
+    },
+    "native_artifacts": "Complete retained per-execution inventories; preserved collision/replacement/alias/displaced-owned/unproven artifacts distinguish cleanup authority",
+    "source_counter": "Normal success observes exactly2 input fstats and1 source pathname lstat per ABI; reservation failure observes no clones",
+    "fd_counter": "Exact per-case open descriptor counts before/after, including real close/reuse sentinels; success returned FD count2 or3",
+    "remaining_integration": "Separate pending-signal/status/handles/publication and synthetic local/remote integration owner qualifies the same frozen production source; not claimed by this direct receipt"
+  },
+  "limitations": [
+    "Cooperative namespace fencing; no hostile atomic compare-and-unlink, crash recovery, crash durability or native syscall deadline claim",
+    "Exclusive clone syscall returns no created FD; opening/admitting basis or output retains first-admission interval; failed first admission preserves unproven artifacts",
+    "Repeated witness/removal failures preserve private reservation/basis artifacts; replacement leaves and displaced owned aliases are preserved",
+    "Late creation-parent close failure on otherwise successful two-FD ABI preserves linked output after held directory authority is lost",
+    "No source flags/xattrs/ACL expansion claim; existing integration controls cover those separate scopes",
+    "No SDK/Lightroom/Photo data/catalog/cache/productionvolume operations or preview generator benchmarks"
+  ]
+}

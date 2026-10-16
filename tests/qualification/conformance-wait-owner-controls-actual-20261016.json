@@ -1,0 +1,36 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/semantic/conformance/shared_owner_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.002s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 52625,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/semantic/conformance/shared.py": "aaa9cf9a5c7d9b96c660a67c107881d02ccc440557b7e2bd5109e0bb37c7112d",
+    "tests/semantic/conformance/shared_owner_test.py": "97ba017cccfdae53504a8b9ca5968b28ffbd1ff96e746cf9b124fc0b0aeb35fe"
+  },
+  "scope": "Inert child wait/timeout/interruption/error controls only; no actual compiler timeout or conformance rerun/SDK/payload/canonical IO.",
+  "owner_tool_terminal": {
+    "chunk_id": "644a31",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal."
+  }
+}

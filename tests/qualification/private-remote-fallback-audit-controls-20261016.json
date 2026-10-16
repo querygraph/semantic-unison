@@ -1,0 +1,102 @@
+{
+  "state": "FIVE_PURE_REMOTE_FALLBACK_AUDIT_METHODS_PASSED_NOT_TRANSFER_QUALIFIED",
+  "actual_parent_terminal": {
+    "chunk": "4bf355",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-fallback-audit-owner-8fiis4xp",
+  "closure": {
+    "child": {
+      "pid": 86379,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 86379,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "scope": "Fabricated receipt/log dictionaries only. No transfer/proxy/server/testchildren/compiler/SDK/Photo/payload/canonicalIO. ActualCPU00..07 closed. Case helper parsed as Python source but not imported or executed; outer aggregate/retained-owner binding and newjobIOadmission still absent. Existing production DNG profiles/algorithms unchanged.",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit.py",
+      "bytes": 3440,
+      "sha256": "b549437c9b288ed277169c0f7cd48995975d1f9098b5edbd997b2931b0ce54ae"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit_test.py",
+      "bytes": 3778,
+      "sha256": "e0751a8926a2b90ce7e24aebd4d2671ede7d0ffdcaf3e34aa3e8cb0c01e2aae6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/case.py",
+      "bytes": 5529,
+      "sha256": "c0ccae0274e380c58496f48896079b3ede5c7ca54566e52d22c95e47b383922a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/README.md",
+      "bytes": 2815,
+      "sha256": "eb1b4f480ecf8582c378cc0e5d7f7535b0ca7766aa942d811875b9a9bbbdd82a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py",
+      "bytes": 6477,
+      "sha256": "fdcd5157fe70f1e3aa717e374dd93ccad56f31ba6e28029b1f4dfd29e14a045d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 31243,
+      "sha256": "c88d30674fa8a37da77e84cbc8c8ac186355d805090a2e2e24fbdc60fb35ae42"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/launcher.py",
+      "bytes": 1486,
+      "sha256": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-fallback-audit-owner-8fiis4xp/SHARED-START.json",
+      "bytes": 1035,
+      "sha256": "0dc4fb87a56a29ebe0b62b71d858e64f2e73d802f455b18a042d3fffd7bee55b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-fallback-audit-owner-8fiis4xp/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "1f16f2c2934e56cf9bfbefe2dc3a4df3787d6c2f87f16bbb01804bb4baa0d4ed"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-fallback-audit-owner-8fiis4xp/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-fallback-audit-owner-8fiis4xp/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "0f7e4b97443e54aca647179972594d13bb587afcbf151fab8228148587ea844a"
+    }
+  ]
+}

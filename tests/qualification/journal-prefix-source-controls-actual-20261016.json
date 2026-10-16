@@ -1,0 +1,100 @@
+{
+  "schema": "unison-journal-prefix-source-controls/1",
+  "actual_tool_terminal": {
+    "chunk": "8ff9c1",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-42vdqbxu",
+  "closure": {
+    "child": {
+      "pid": 45468,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 45468,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "report": {
+    "schema": "unison-io-source-controls/1",
+    "complete": true,
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc",
+    "sources": {
+      "tests/shared_io_plan_test.py": "1c98ab90944c38cd6f6549f25d6f50d06bc584057f2e910aa167e4adf31d96fc",
+      "tests/shared_io_dispatch_test.py": "d74bae0056f312f48757ef59acc11cfd72b7e28e09dfaa745ebc7a2d6b0997f3",
+      "tests/shared_io_dispatch_lifecycle_test.py": "d2bbbbe7a963570c8433e29062676aedc78634b44860014d45ec6516c2b4d831",
+      "bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304",
+      "bench/sync/properties_test.py": "0ee8463e97786a7c9405d25c9a0dbef1a76ad3b0ef9118a9cf712a2464f3072b",
+      "bench/sync/invocation_journal_test.py": "4aee61bef2beb421095e6c7dd2dae1c5d40dd240bd745dc86df9af45bee30dd8",
+      "tests/shared_dispatch.py": "160b3badc65559e63b63c633299dd3ab24bcea3d5ddd57eed6eb069f199a0594",
+      "tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+      "tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+      "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+      "tests/manual.py": "c8144b70d6cdd9e45f59441d453e6470c9d3b2730872d89b8b035e790929d658",
+      "tests/shared_io_plan.py": "3641d4923c64c9ad15f72b03b7b41d71bf35bc1dcc2e1cfa7fb85fc21b539b3c",
+      "bench/sync/artifact_pins.py": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd",
+      "bench/sync/run.py": "488debb4a3773456c90a60c1d53ccffe11280d054b1c49dc7e178fc8e5329906",
+      "tests/shared_io_controls.py": "236399dbd998400f4ed56b3eae3af74ca561e86edb83e33a8837fa0cf0a7de2c",
+      "bench/sync/properties.py": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889",
+      "bench/sync/shared_audit.py": "b67d42a1c1164cb8a1c0a5a8fef70f7defbe9271ea772c79d82fdd798b18274c",
+      "bench/sync/invocation_journal.py": "324b02029e39d70cca9d2b84a76e85859adf16a79db4039f7519d328f0afd694"
+    },
+    "calls": [
+      {
+        "script": "tests/shared_io_plan_test.py",
+        "pid": 45469,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/0.log",
+        "log_sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+      },
+      {
+        "script": "tests/shared_io_dispatch_test.py",
+        "pid": 45470,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/1.log",
+        "log_sha256": "6ff8cb6673e52248481ba0fa0eca3657ce430b443dbc93e93c7a3e25938b7877"
+      },
+      {
+        "script": "tests/shared_io_dispatch_lifecycle_test.py",
+        "pid": 45471,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/2.log",
+        "log_sha256": "166a19e481e74e542a6a933f18db7892e7ecf92497c833712a8d196b8860492e"
+      },
+      {
+        "script": "bench/sync/artifact_pins_test.py",
+        "pid": 45472,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/3.log",
+        "log_sha256": "d26bdd8902cfd9615fdc56631c8cf5c6f50365669f489e98ad81e93f48fdb11a"
+      },
+      {
+        "script": "bench/sync/properties_test.py",
+        "pid": 45473,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/4.log",
+        "log_sha256": "6ff8cb6673e52248481ba0fa0eca3657ce430b443dbc93e93c7a3e25938b7877"
+      },
+      {
+        "script": "bench/sync/invocation_journal_test.py",
+        "pid": 45474,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-1058bjyc/5.log",
+        "log_sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+      }
+    ]
+  },
+  "scope": "Ten fake journal controls (including 11 refusal mutations), existing source/mock/disposable suite. No sync binary, camera, Adobe or EXIO execution. Prefix auditor not connected to release; aggregate and actual parent proof still required.",
+  "runtime_partial_release_qualified": false
+}

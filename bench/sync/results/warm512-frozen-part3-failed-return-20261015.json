@@ -1,0 +1,143 @@
+{
+  "state": "ACTUAL_WARM512_FROZEN_PART3_FAILED_INCOMPLETE_PARENT_AND_RESOURCES_CLOSED",
+  "measurement": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-512MiB-4files-part3-incomplete-20261015.json",
+    "bytes": 731305,
+    "sha256": "bb50216fc1ca26268d03bd8960fc0223d659aca3f680bd73f1db1e57d85951fc"
+  },
+  "original_measurement": {
+    "path": "/private/tmp/unison-warm512-frozen-measurements-20261015-v10/warm-512MiB-4files-part3.json",
+    "bytes": 731305,
+    "sha256": "bb50216fc1ca26268d03bd8960fc0223d659aca3f680bd73f1db1e57d85951fc"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-frozen-part3-prepared-request-20261015.json",
+    "bytes": 6256,
+    "sha256": "4eb68d4af4d03db3ac6f92bd17c5921784f056a97f6f0782e2ad50413eec54c0"
+  },
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-WARM512-FROZEN-PART3-ADMISSION-20261015.json",
+    "bytes": 3079,
+    "sha256": "b06d59f356d861a9d29d79c46a24d553a46574a919e4d08ea03d14f86de11a09"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 76640,
+    "terminal_chunk": "df5ca2",
+    "exit_code": 1,
+    "running_session_returned": false,
+    "scope": "actual tools.write_stdin terminal; not process-absence inference"
+  },
+  "aggregate": {
+    "pid": 88119,
+    "returncode": 1,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 88119,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 2113.567641235015,
+    "seconds": 7200,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "partial_settlement_audit": {
+    "completed_exact_rows": 16,
+    "completed_successful_cli": 48,
+    "failed_next_seed_cli": 1,
+    "total_observed_cli": 49,
+    "all49_client_and_supervisor_reaped_with_group_cleanup_before_reap": true,
+    "all49_servers_reaped_and_input_pumps_joined": true,
+    "expected_sdk_helpers": 0,
+    "private_fixture_root_removed": true,
+    "failed_seed_client_exit": 0,
+    "failed_seed_supervisor_exit": 70,
+    "failed_seed_server_cleanup": {
+      "pid": 45907,
+      "returncode": 0,
+      "reaped": true,
+      "cancel_reason": "native child did not settle after output EOF",
+      "hard_kill_required": false
+    },
+    "scope": "resource settlement readback; not successful54CLI qualification or repaired benchmark"
+  },
+  "failure": "InvocationFailure('sync invocation failed: {\"command\": [\"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison\", \"/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left\", \"ssh://localhost//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\", \"-sshcmd\", \"/private/tmp/unison-sync-bench-l4arovhi/launcher.py\", \"-servercmd\", \"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison\", \"-batch\", \"-auto\", \"-fastcheck\", \"false\", \"-times\", \"-debug\", \"copy\", \"-debug\", \"semantic\", \"-clone\", \"auto\", \"-semanticworkers\", \"1\", \"-maxthreads\", \"2\"], \"returncode\": 0, \"wall_seconds\": 29.98360038897954, \"timed_out\": false, \"resources\": {\"wait4_user_seconds\": 8.08255, \"wait4_system_seconds\": 2.87655, \"wait4_maxrss_native_units\": 18337792, \"minor_faults\": 11191, \"major_faults\": 58, \"block_input_operations\": 0, \"block_output_operations\": 0}, \"client_cleanup\": {\"pid\": 45899, \"returncode\": 0, \"reaped\": true, \"cancel_reason\": null, \"hard_kill_required\": false, \"observation_error\": null, \"group_cleanup_result\": \"only_owned_leader_zombie_darwin\", \"group_cleanup_before_leader_reap\": true}, \"capture_bytes\": {\"stdout\": 1272, \"stderr\": 1812}, \"capture_truncated\": false, \"stdout\": \"Warning: No archive files were found for these roots, whose canonical names are:\\\\n\\\\t/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left\\\\n\\\\t//morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\nThis can happen either\\\\nbecause this is the first time you have synchronized these roots, \\\\nor because you have upgraded Unison to a new version with a different\\\\narchive format.  \\\\n\\\\nUpdate detection may take a while on this run if the replicas are \\\\nlarge.\\\\n\\\\nUnison will assume that the \\'last synchronized state\\' of both replicas\\\\nwas completely empty.  This means that any files that are different\\\\nwill be reported as conflicts, and any files that exist only on one\\\\nreplica will be judged as new and propagated to the other replica.\\\\nIf the two replicas are identical, then no changes will be reported.\\\\n\\\\nIf you see this message repeatedly, it may be because one of your machines\\\\nis getting its address from DHCP, which is causing its host name to change\\\\nbetween synchronizations.  See the documentation for the UNISONLOCALHOSTNAME\\\\nenvironment variable for advice on how to correct this.\\\\n\\\\n\\\\nfile     ---->            image-0000.dng  \\\\nfile     ---->            image-0001.dng  \\\\nfile     ---->            image-0002.dng  \\\\nfile     ---->            image-0003.dng  \\\\n\", \"stderr\": \"\\\\nUnison 2.54.0 (ocaml 5.2.0+ox) log started at 2026-10-15 at  3:38:29\\\\n\\\\nRoots:\\\\n  /private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left\\\\n  ssh://localhost//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\n\\\\nUnison 2.54.0 (ocaml 5.2.0+ox): Contacting server...\\\\nConnected [//morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left -> //morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right]\\\\n\\\\nLooking for changes\\\\n  image-0001.dng\\\\n  image-0002.dng\\\\n  image-0003.dng\\\\n  \\\\n  Waiting for changes from server\\\\nReconciling changes\\\\n\\\\n4 items will be synced, 0 skipped\\\\n2.00 GiB to be synced from local to morrobay.local\\\\n0 B to be synced from morrobay.local to local\\\\nPropagating updates\\\\nUnison 2.54.0 (ocaml 5.2.0+ox) started propagating changes at 03:38:33.72 on 15 Oct 2026\\\\n[BGN] Copying image-0000.dng from /private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left to //morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\n[BGN] Copying image-0001.dng from /private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left to //morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\n[END] Copying image-0000.dng\\\\n[BGN] Copying image-0002.dng from /private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left to //morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\n[END] Copying image-0001.dng\\\\n[BGN] Copying image-0003.dng from /private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left to //morrobay.local//private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right\\\\n[END] Copying image-0002.dng\\\\n[END] Copying image-0003.dng\\\\nUnison 2.54.0 (ocaml 5.2.0+ox) finished propagating changes at 03:38:59.41 on 15 Oct 2026, 25.690 s\\\\nSaving synchronizer state\\\\nSynchronization complete at 03:38:59  (4 items transferred, 0 skipped, 0 failed)\\\\n\", \"native_client_lifetime_seconds\": 29.587531976983882, \"supervisor_cleanup\": {\"pid\": 45883, \"returncode\": 70, \"reaped\": true, \"cancel_reason\": null, \"hard_kill_required\": false, \"observation_error\": null, \"group_cleanup_result\": \"only_owned_leader_zombie_darwin\", \"group_cleanup_before_leader_reap\": true}, \"supervisor_output\": \"[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left,image-0000.dng) -> (/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right,.unison.image-0000.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp,image-0000.dng,modified on 2026-10-15 at  3:38:18  size 536870912 rw-r--r--)\\\\n[server: copy] Starting the actual transfer\\\\n[server: copy] transferResourceForkAndSetFileinfo .unison.image-0000.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp\\\\n[server: copy] Resource fork transferred for image-0000.dng; doing last paranoid check\\\\n[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left,image-0001.dng) -> (/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right,.unison.image-0001.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp,image-0001.dng,modified on 2026-10-15 at  3:38:21  size 536870912 rw-r--r--)\\\\n[server: copy] Starting the actual transfer\\\\n[server: copy] transferResourceForkAndSetFileinfo .unison.image-0001.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp\\\\n[server: copy] Resource fork transferred for image-0001.dng; doing last paranoid check\\\\n[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left,image-0002.dng) -> (/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right,.unison.image-0002.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp,image-0002.dng,modified on 2026-10-15 at  3:38:25  size 536870912 rw-r--r--)\\\\n[server: copy] Starting the actual transfer\\\\n[server: copy] transferResourceForkAndSetFileinfo .unison.image-0002.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp\\\\n[server: copy] Resource fork transferred for image-0002.dng; doing last paranoid check\\\\n[server: copy] tryCopyMovedFile didn\\'t work, so now we actually transfer\\\\n[server: copy] reallyTransferFile(/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/left,image-0003.dng) -> (/private/tmp/unison-sync-bench-l4arovhi/measured-5-1/right,.unison.image-0003.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp,image-0003.dng,modified on 2026-10-15 at  3:38:28  size 536870912 rw-r--r--)\\\\n[server: copy] Starting the actual transfer\\\\n[server: copy] transferResourceForkAndSetFileinfo .unison.image-0003.dng.dcf65edd7dadeb89e3ddb2f0d3894304.unison.tmp\\\\n[server: copy] Resource fork transferred for image-0003.dng; doing last paranoid check\\\\n\", \"supervisor_capture_bytes\": 2544, \"supervisor_capture_truncated\": false, \"proxy\": {\"schema\": \"unison-loopback-protocol-count/1\", \"server_command\": [\"/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison\", \"-server\", \"__new-rpc-mode\", \"-debug\", \"copy\", \"-debug\", \"semantic\", \"-clone\", \"auto\", \"-semanticworkers\", \"1\", \"-maxthreads\", \"2\"], \"server_pid\": 45907, \"server_returncode\": 0, \"server_cleanup\": {\"pid\": 45907, \"returncode\": 0, \"reaped\": true, \"cancel_reason\": \"native child did not settle after output EOF\", \"hard_kill_required\": false}, \"fault\": \"native child did not settle after output EOF\", \"forwarded_protocol_bytes\": {\"client_to_server_bytes\": 2150548847, \"server_to_client_bytes\": 5085}, \"server_wall_seconds\": 29.81687326799147, \"server_resources\": {\"wait4_user_seconds\": 14.530725, \"wait4_system_seconds\": 7.278691, \"wait4_maxrss_native_units\": 63918080, \"minor_faults\": 16150, \"major_faults\": 0, \"block_input_operations\": 0, \"block_output_operations\": 0}, \"pump_errors\": [], \"cancellation_signals\": [], \"input_pump_joined\": true, \"launcher_control_header_bytes_excluded\": 126}, \"fault\": \"loopback native/supervisor outcome is unqualified\"}')",
+  "failed_invocation_preserved_in_raw": true,
+  "source_and_runner_pins_unchanged": true,
+  "mandatory_part0_timing_addendum": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json",
+    "bytes": 6788,
+    "sha256": "e311d5f64c8fa5dde2a8e361b3858db367a01c1aaa3b38c5961fe279b7e6b6b5"
+  },
+  "brew_disclosure": {
+    "path": "/private/tmp/unison-warm512-frozen-part3/USER-BREW-TIMING-DISCLOSURE.json",
+    "bytes": 1314,
+    "sha256": "727eb0cc2840d6023c4faf3f251b912c8184d652963c8ab385d5c7eea45b561b"
+  },
+  "reviewer_timing_disclosure": {
+    "reported_review_file_lastmtime_unix": 1792058613.7564378,
+    "actual_start_unix": 1792058626.808021,
+    "scope": "Root reports review sealed before START; not proof every review activity ended. Any overlap remains unknown."
+  },
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/AGGREGATE-CLOSED.json",
+      "bytes": 399,
+      "sha256": "c932d074410a2864eefda91c40672417de9489f6782a4f03121ef3171304202f"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/AGGREGATE-START.json",
+      "bytes": 38,
+      "sha256": "21dd6954b61cd279e7774369d5ff4b45efb1aa856101cf7db9f526c0c7ce33b5"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/EXTERNAL-HELPERS-UNRESOLVED.json",
+      "bytes": 55,
+      "sha256": "0f3dd88bbb6dc9a13779b06e436d6dcf525db3f49637d2c6a428a16b15323553"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/OWNER-RETURN.json",
+      "bytes": 1371,
+      "sha256": "b70dd02f58fbd5a470fc141806e82c062aeff4e894af624f651a9a430faacfe0"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/OWNER-TERMINAL.json",
+      "bytes": 190,
+      "sha256": "0e2118dede314e1dee34f999cce4b752a0ca5c2cd05447268a106a145f812544"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/PARTIAL-SETTLEMENT-AUDIT.json",
+      "bytes": 693,
+      "sha256": "e661bf196c61674cdcff72936ec2bba1ec4669b281de3068e3e8ffcf918a8262"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/START.json",
+      "bytes": 1162,
+      "sha256": "959eecc693f100aae14d031150eea51ae0881fe888552014467ed55d2bb35767"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/USER-BREW-TIMING-DISCLOSURE.json",
+      "bytes": 1314,
+      "sha256": "727eb0cc2840d6023c4faf3f251b912c8184d652963c8ab385d5c7eea45b561b"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/WRAPPER-START.json",
+      "bytes": 1963,
+      "sha256": "be086f17c0e62f158170a234b6e67d70526f88c811bb8f671d9efd46c842eb34"
+    }
+  ],
+  "unresolved_markers_preserved": [
+    {
+      "path": "/private/tmp/unison-warm512-frozen-part3/EXTERNAL-HELPERS-UNRESOLVED.json",
+      "bytes": 55,
+      "sha256": "0f3dd88bbb6dc9a13779b06e436d6dcf525db3f49637d2c6a428a16b15323553"
+    }
+  ],
+  "credits_released_on_unison_side": 18,
+  "successors_authorized": false,
+  "scope": "FAILED incomplete16/18rows49/54CLI; no final medians/fullpart qualification. All samples preserved; brew compilation observed, exact busy interval/impact/carryover unknown; no quiet-clean claim, exclusion, replacement or retry."
+}

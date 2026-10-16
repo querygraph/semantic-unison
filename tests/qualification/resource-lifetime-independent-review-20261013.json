@@ -1,0 +1,645 @@
+{
+  "schema": "unison-resource-lifetime-independent-review-v1",
+  "reviewer": "/root/scratch_review",
+  "utc": "2026-10-13T21:26:10.496142+00:00",
+  "status": "Selected checkpoint source, recorded artifacts and final documentation accepted within per-portion scope; larger implementation goal remains incomplete.",
+  "activity": "Read-only source/artifact review; private JSON audit records and this separate receipt written. No test/native invocation, production code mutation, Photo or Adobe access. git show only reads pinned historical source; private mutations reconstructed in Python memory.",
+  "authorship_boundary": {
+    "helper": "Reviewer authored helper ML/focused tests and its qualification receipt. This record does not claim independent helper source review. Independent source/artifact acceptance is attributed to /root/scratch_controls and /root/scratch_integration.",
+    "admission_and_fd": "Reviewer authored none of the production admission/early-FD implementations or their test fixtures; source and retained artifact review is independent."
+  },
+  "portions": {
+    "admission": {
+      "receipt": "/Users/alexy/src/unison/tests/admission_faults/qualification-20261013.json",
+      "sha256": "ad1d884a88ba8e3e065f7c8cba23ef470ab881767979f3fb70f9b120bf02f1d1",
+      "status": "independent recorded artifact/source/scope review accepted; no test execution",
+      "source_pins": 20,
+      "hash_comparisons": 1627,
+      "memory_only_source_reconstructions": 222,
+      "terminal_outcomes": [
+        {
+          "portion": "admission",
+          "backend": "stock",
+          "exit": 0,
+          "groups": 26
+        },
+        {
+          "portion": "admission",
+          "backend": "ox",
+          "exit": 0,
+          "groups": 26
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "stock",
+          "control": null,
+          "exit": 0,
+          "groups": 16
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "ox",
+          "control": null,
+          "exit": 0,
+          "groups": 16
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "stock",
+          "control": "unregister",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "stock",
+          "control": "schedule",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "stock",
+          "control": "allocating-grant",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "stock",
+          "control": "allocating-retire",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "ox",
+          "control": "unregister",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "ox",
+          "control": "schedule",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "ox",
+          "control": "allocating-grant",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "finite_fault",
+          "backend": "ox",
+          "control": "allocating-retire",
+          "exit": 2,
+          "groups": 0
+        },
+        {
+          "portion": "registry",
+          "backend": "stock",
+          "case": "positive",
+          "runner_exit": 0,
+          "positive_groups": 106
+        },
+        {
+          "portion": "registry",
+          "backend": "stock",
+          "case": "negative-close",
+          "runner_exit": 0,
+          "positive_groups": null
+        },
+        {
+          "portion": "registry",
+          "backend": "stock",
+          "case": "negative-handoff",
+          "runner_exit": 0,
+          "positive_groups": null
+        },
+        {
+          "portion": "registry",
+          "backend": "ox",
+          "case": "positive",
+          "runner_exit": 0,
+          "positive_groups": 106
+        },
+        {
+          "portion": "registry",
+          "backend": "ox",
+          "case": "negative-close",
+          "runner_exit": 0,
+          "positive_groups": null
+        },
+        {
+          "portion": "registry",
+          "backend": "ox",
+          "case": "negative-handoff",
+          "runner_exit": 0,
+          "positive_groups": null
+        }
+      ],
+      "limits": [
+        "Descriptor credits here are logical ledger values; this receipt does not measure actual native file-descriptor peaks, context counts or whole-process descriptors. Root-owned native lifetime/census qualification is separate.",
+        "Payload credits estimate retained workspaces; no hard RSS, external-helper memory or whole-machine resource ceiling is qualified.",
+        "Selected one-shot allocation faults and named synchronous/asynchronous paths are qualified. Persistent/repeated allocation failure and unexpected OS refusal to settle resources are not universal recovery guarantees.",
+        "Repeated with_cpu_permits waiter-allocation failures may retain CPU credits in a cleanup registry while raising before the borrower finishes. Do not treat this as a universal caller-awaits-settlement guarantee.",
+        "The helper spawn/capture/child reaping matrix is independently owned and qualified separately. These tests invoke no external helper, Adobe SDK, Lightroom, Photo data, production cache or full generator run.",
+        "Registry control prefixes printed by expected failing negatives are duplicate portions of the 106-group suite, not additional independent positive groups.",
+        "Runtime success and recorded-pin consistency are verified here. Independent artifact-audit acceptance is pending."
+      ]
+    },
+    "helper_record_consistency": {
+      "receipt": "/Users/alexy/src/unison/tests/helper_ownership/qualification-20261013.json",
+      "sha256": "07ef16076cc8a0ab8978d8b219a78cc4af9771fcd0f8e5a8e69fda96e9e257df",
+      "status": "authored source excluded from independent source claim; frozen recorded artifact/source-mutation consistency reviewed read-only",
+      "independent_source_reviewers": [
+        "/root/scratch_controls",
+        "/root/scratch_integration"
+      ],
+      "hash_comparisons": 659,
+      "memory_only_source_reconstructions": 10,
+      "positive_cases_per_compiler": 36,
+      "positive_assertions_per_compiler": 211,
+      "private_negative_variants_per_compiler": 4,
+      "existing_groups_per_compiler": 33,
+      "terminal_outcomes": [
+        {
+          "backend": "stock",
+          "variant": "positive",
+          "exit": 0
+        },
+        {
+          "backend": "stock",
+          "variant": "missing-guard",
+          "exit": 2
+        },
+        {
+          "backend": "stock",
+          "variant": "missing-outer-guard",
+          "exit": 2
+        },
+        {
+          "backend": "stock",
+          "variant": "early-release",
+          "exit": 2
+        },
+        {
+          "backend": "stock",
+          "variant": "early-cpu-release",
+          "exit": 2
+        },
+        {
+          "backend": "ox",
+          "variant": "positive",
+          "exit": 0
+        },
+        {
+          "backend": "ox",
+          "variant": "missing-guard",
+          "exit": 2
+        },
+        {
+          "backend": "ox",
+          "variant": "missing-outer-guard",
+          "exit": 2
+        },
+        {
+          "backend": "ox",
+          "variant": "early-release",
+          "exit": 2
+        },
+        {
+          "backend": "ox",
+          "variant": "early-cpu-release",
+          "exit": 2
+        }
+      ],
+      "limits": [
+        "No Adobe, Photo, Lightroom or production native calls; isolated finite synthetic children only.",
+        "Descriptor inventory covers descriptor numbers 0 through 255 in this isolated low-descriptor macOS fixture.",
+        "Source-directed one-shot allocator faults do not establish actual exhausted-heap recovery or universal asynchronous exception safety.",
+        "Native successful child waits plus ECHILD are checked; PID absence is not reap evidence.",
+        "Repeated allocation failure may retain CPU/child credits and registry ownership while returning an error before a borrower settles; this is not an unconditional caller-awaits-settlement guarantee.",
+        "Unexpected OS refusal, uninterruptible reaping, external competing reapers and escaping helper descendants have no hard settlement deadline.",
+        "CPU ownership/counters do not impose a whole-process descriptor or RSS cap.",
+        "Private early-release regression removes owner_settled admission guard and inserts early teardown release to restore the historical premature-credit defect."
+      ]
+    },
+    "helper_independent_acceptance": {
+      "status": "accepted by independent sibling reviewer as delivered by collaboration message",
+      "reviewer": "/root/scratch_controls",
+      "receipt_sha256": "07ef16076cc8a0ab8978d8b219a78cc4af9771fcd0f8e5a8e69fda96e9e257df",
+      "production_sha256": "2b513a7fd213c6cce3f902b59c5a74fff22aa63534c85ebe366adb8aaeb5111a",
+      "reported_hash_or_byte_comparisons": 681,
+      "unique_retained_artifact_paths": 460,
+      "private_source_variants_reconstructed": 10,
+      "source_and_receipt_stability_checked": true,
+      "execution": "none; read-only source and recorded artifact review",
+      "limit": "Reported sibling audit is attributed evidence; its comparisons are not counted as this reviewer's own verification."
+    },
+    "early_fd": {
+      "receipt": "/Users/alexy/src/unison/tests/fd_ownership/qualification-20261013.json",
+      "sha256": "f546bcdf8b9cfccf8428fa879c3d55572cc0431eca6b2693103053c4e9b9864d",
+      "status": "independent source/artifact/scope review accepted; no native/test execution",
+      "hash_comparisons": 1962,
+      "complete_retained_artifact_entries": 976,
+      "memory_only_private_source_reconstructions": 24,
+      "source_pins": 35,
+      "positive_per_compiler": {
+        "cases": 20,
+        "assertions": 110
+      },
+      "negative_variants_per_compiler": 3,
+      "typed_worker_groups_per_compiler": 19,
+      "terminal_outcomes": [
+        {
+          "compiler": "/usr/local/bin/ocamlopt",
+          "mode": "fixed",
+          "exit": 0
+        },
+        {
+          "compiler": "/usr/local/bin/ocamlopt",
+          "mode": "old-file-channel",
+          "exit": 2
+        },
+        {
+          "compiler": "/usr/local/bin/ocamlopt",
+          "mode": "old-pool-pipe",
+          "exit": 2
+        },
+        {
+          "compiler": "/usr/local/bin/ocamlopt",
+          "mode": "old-submit-listener",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "mode": "fixed",
+          "exit": 0
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "mode": "old-file-channel",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "mode": "old-pool-pipe",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "mode": "old-submit-listener",
+          "exit": 2
+        }
+      ],
+      "scope": [
+        "Actual kernel descriptor census, borrowed descriptors and source bytes; selected private ML exception seams, no shipped test hook or interface change.",
+        "Descriptor-to-channel/record handoff, notification-pipe/pool initialization and submit duplicate-to-listener/monitor/admission setup are guarded.",
+        "Close-error fixtures close the owned FD, allocate a foreign sentinel at exactly the same FD integer, then raise EIO. Primary exceptions survive and sentinels remain open.",
+        "Actual spawned domains are joined during pool initialization failure; normal worker execution and shutdown remain functional.",
+        "Historical negative function bodies come from pinned commit e9be47381d35af82d816b1f80df348ddf7409180; each exposes the intended kernel descriptor leak.",
+        "Broken submit negative skips its stranded pending-counter shutdown so the designated leak assertion can terminate the disposable process.",
+        "Final focused and full typed-worker runs use frozen HelperSupervisor2b513a7f and exact final-tree dependency pins above.",
+        "No universal allocator/OOM, asynchronous exception, constructor-internal or post-dispatch promise-chain recovery guarantee; no process RSS cap or full durable-admission qualification.",
+        "No Photo, Adobe, Lightroom, catalog/cache or production data access; only own synthetic /private/tmp fixtures."
+      ],
+      "source_review_pins": {
+        "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+        "src/semanticWorkers.ml": "1ff0fc9c4dc0a03b8880f098765630e191127c2993f837d8fb4173a3d6d65a6e"
+      }
+    },
+    "nonce_source": {
+      "status": "independent source review accepted; finite runtime controls not reviewed here",
+      "source": "src/semanticRemote.ml",
+      "sha256": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+      "observed_guards": [
+        "Buffers, ownership state and read/close callbacks precede open.",
+        "Close clears ownership before the OS call.",
+        "Exceptional cleanup preserves the first error and cannot retry a recycled descriptor."
+      ],
+      "limit": "Does not independently prove OS settlement or qualify constructor-internal/global allocator failures."
+    },
+    "retained_publication_wiring": {
+      "status": "independent selected source review accepted",
+      "source_pins": {
+        "src/semanticAdmission.ml": "a2cdc3892e85ea9d25338375356d98e72aebbafe3d11d8199787c2a37a7645d8",
+        "src/semanticRuntime.ml": "9fc82014304813fe938d8e370ddeb3d2ddaf9a1236936c12494647790127f1fb",
+        "src/targetBinding.ml": "c4daadab64d23f7633a90474fac4064c6f55780efd81eae5f970fdfb5bdd433c",
+        "src/files.ml": "73dcce0dec87fad704a1e23bf638ec6c2c1182298088fc43e3adb89c30b2dfa8",
+        "src/copy.ml": "cac5a74e323100d6cdf3ca3f700b66f203aa1791ea17f46ca8e3b8186346b575",
+        "src/candidateValidation.ml": "0c9efee322953030d684e8759e3cad70a3894db79ebe925e6af94f74ef036750",
+        "src/semanticSync.ml": "e553de2fb043fa2db1d4d06624f0309e6e99aab228cca881bb6da36d3c931843",
+        "src/semanticRemote.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+        "src/semanticWorkers.ml": "1ff0fc9c4dc0a03b8880f098765630e191127c2993f837d8fb4173a3d6d65a6e",
+        "src/semanticFile.ml": "fa26f37d3cca27b7b09f2768fb8be6e2de965ab719feae53f6fd633ea8877fd7",
+        "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded"
+      },
+      "observed_contract": [
+        "Consumer reservation is caller-owned before debit and native preparation, then retained through Ready/Producing/Finalized/Committing.",
+        "Local/remote Copy materializers receive the explicit reservation; bound validation uses one serial workspace without nested gate acquisition.",
+        "Native owners close before final reservation retirement; active borrowing and busy registry callbacks defer release until qualified settlement.",
+        "Source service headroom, FIFO and priority remain separate and span response encoding/marshal/dump.",
+        "Deferred orphan recovery precedes new admission; dispatch has no Some constructor between dequeue and debit/preallocated result installation."
+      ],
+      "remaining_edges": [
+        "An outer Files setup waiter allocation failure can abandon a pending prepare that later becomes an indexed Ready owner; credits remain charged and connection/session teardown is required if no token was received.",
+        "Generic SemanticRuntime cancellation/caller wrappers and arbitrary post-worker-queue exception delivery require broader allocator/cancellation stress.",
+        "Repeated helper waiter failures or uncertain OS settlement can retain owners while an error returns before work settles; no universal caller-awaits-settlement guarantee."
+      ]
+    },
+    "native_lifetime_census": {
+      "receipt": "/Users/alexy/src/unison/tests/resource_lifetime/qualification-20261013.json",
+      "sha256": "d56771caac2adc17039d0af6c7b6823d5a17f5278c61bd7586d5176e396019c4",
+      "status": "independent source/retained artifact/scope review accepted; no execution",
+      "hash_comparisons": 518,
+      "retained_artifact_entries": 226,
+      "memory_only_private_mutation_reconstructions": 8,
+      "positive_groups_per_compiler": 8,
+      "positive_assertions_per_compiler": 58,
+      "private_source_mutations_per_compiler": 3,
+      "designated_rejections_per_compiler": 4,
+      "outcomes": [
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-early-release",
+          "exit": 2
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-nested-gate",
+          "exit": 2
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-handoff-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-handoff-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-handoff-pre-fix",
+          "exit": 2
+        },
+        {
+          "compiler": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-7b6siwog/resource-handoff-pre-fix",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-early-release",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-nested-gate",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-handoff-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-handoff-current",
+          "exit": 0
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-handoff-pre-fix",
+          "exit": 2
+        },
+        {
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-mgqaaeld/resource-handoff-pre-fix",
+          "exit": 2
+        }
+      ],
+      "scope": [
+        "Actual native FinalPublication and TargetBinding phase-boundary FD census, with lazy resource runtime and minimum Source/Consumer budgets.",
+        "Original six native groups retain exact source bytes, borrowed validation, Source headroom, producer handoff/commit/release and failure/retry behavior.",
+        "Two private Runtime success-continuation faults execute after actual four-FD Ready preparation and cancellation cleanup: immediate grant and genuinely queued asynchronous grant. Both preserve the original exception, close native ownership before retirement and complete admitted retry.",
+        "Private pre-fix cleanup removes only recorded-native-owner closure, preserving all other guards; both synchronous and asynchronous cases reject the resulting actual FD escape. Two existing private regressions detect producer early retirement and nested-consumer admission deadlock.",
+        "No transient native FD-peak measurement, global allocator exhaustion, universal asynchronous recovery, whole-process FD/RSS cap or external child/SDK resource bound.",
+        "Compiler-matched retained Make snapshots are identified by linked object and source pins, including final SemanticRemote nonce source; nonce behavior itself has separate integration qualification. No Photo, Adobe, Lightroom, catalog/cache or production data access."
+      ]
+    },
+    "complete_build_and_cli_integration": {
+      "receipt": "/Users/alexy/src/unison/tests/qualification/resource-lifetime-integration-20261013.json",
+      "sha256": "c43c78700244f43f2cebb639bbe7b4275d7cfa6def8f11446ad1bf1e5c15ce58",
+      "status": "independent recorded artifact/source/scope review accepted; no builds/tests/native invocations",
+      "hash_comparisons": 2167,
+      "production_inputs": 316,
+      "production_source_locations": 5,
+      "make_and_dune_build_selftest_pairs": 4,
+      "test_pins": 10,
+      "logs": 18,
+      "commands": 14,
+      "files": [
+        {
+          "backend": "stock",
+          "cases": 79,
+          "retained": "/private/tmp/unison-final-caller-c7bhlg3_",
+          "private_build_pins_verified": 6,
+          "limit": "Full directory retained; aggregate directly pins run receipt, while build-receipt supplies private code/binary/build-log pins. This audit does not invent historical full-tree hashes."
+        },
+        {
+          "backend": "ox",
+          "cases": 79,
+          "retained": "/private/tmp/unison-final-caller-038nh3w0",
+          "private_build_pins_verified": 6,
+          "limit": "Full directory retained; aggregate directly pins run receipt, while build-receipt supplies private code/binary/build-log pins. This audit does not invent historical full-tree hashes."
+        }
+      ],
+      "validation": [
+        {
+          "backend": "stock",
+          "cases": 21,
+          "retained": "/private/tmp/unison-validation-paths-7ipv_ogk",
+          "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+          "limitations": [
+            "Synthetic receive-gate behavior, not Adobe format/decode correctness.",
+            "Reused file is a retained exact donor; rename-only moves remain outside received scope.",
+            "Merges use an existing configured external merge command, not an XMP semantic merge.",
+            "Process crashes are an interruption fixture; crash-durable publication is not claimed."
+          ]
+        },
+        {
+          "backend": "ox",
+          "cases": 21,
+          "retained": "/private/tmp/unison-validation-paths-zapp9lq5",
+          "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+          "limitations": [
+            "Synthetic receive-gate behavior, not Adobe format/decode correctness.",
+            "Reused file is a retained exact donor; rename-only moves remain outside received scope.",
+            "Merges use an existing configured external merge command, not an XMP semantic merge.",
+            "Process crashes are an interruption fixture; crash-durable publication is not claimed."
+          ]
+        }
+      ],
+      "io_runtime": [
+        {
+          "backend": "stock",
+          "positive_scenarios": 6,
+          "assertions": 107,
+          "private_rejections": 1,
+          "retained": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-runtime-kam6h_ld"
+        },
+        {
+          "backend": "ox",
+          "positive_scenarios": 6,
+          "assertions": 107,
+          "private_rejections": 1,
+          "retained": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-runtime-9o147u8k"
+        }
+      ],
+      "nonblocking_per_compiler": 5,
+      "remote_recorded_evidence": "local source-clone priority; remote/local receivers; 24-key bidirectional minimum32-credit and56-credit scopes; exact fallback and old-peer cases",
+      "limits": [
+        "All inputs synthetic; no Photo payload/catalog/cache/volume access, Adobe/Lightroom invocation, SDK linking, deployment or performance measurements.",
+        "Resource envelopes cover selected admitted transaction lifetimes, not a whole-process FD/RSS cap. Fixed pool/transport/legacy baselines, native transient census, parser/RPC ingress/tree/SDK memory and broader post-dispatch recovery remain required.",
+        "Outer Files waiter allocation can abandon an indexed Ready owner whose credits remain held until session teardown. Persistent allocator exhaustion, arbitrary post-worker-queue faults and unexpected OS close/reap refusal are unqualified.",
+        "Remote and nonblocking runners verify bytes/lifetimes during execution and remove their temporary data/binaries; only exact source/build/test/log evidence is retained for those runs.",
+        "Native lifecycle census and native handoff controls have separate retained receipts; they observe phase-boundary FDs and do not sample hidden native transient allocation peaks."
+      ]
+    },
+    "final_documentation": {
+      "status": "independent final documentation claim/scope review accepted; authored helper README independently supported by sibling source/artifact review",
+      "source_pins": {
+        "SOL.md": "e617bbe6d435e7feacdff81aef0ea68bd2d3ceddbc3a28f731439153a807b0e8",
+        "doc/resource-admission.md": "9b01c4f9bda0eb76d87fcaba1321a4914848a72e81174720492b7e337565e38b",
+        "doc/resource-lifetime-inventory.md": "863f42df71a149c339054fb27f6d48377cbda7d1bf7c3f86d6823f01164ee319",
+        "doc/semantic-workers.md": "2f94d51e8876b4c3d8c069450a055710c2c0869c034e39524af591ed9cfdbaad",
+        "doc/implementation-status.md": "7e2b0b5d6ed4c5e1c4671bb88fe3c473fa4746181eafb77d625f7c3f95981c7f",
+        "doc/foreign-boundary-audit.md": "d8c290d9c7e951e98cf36f56d641f7909fd13f64975b9f062e3f10bdc5ef2038",
+        "tests/README.md": "fe6f71ca739aa8dd0442cd0a1b3752f299e9d89cca9b8db7b19abcf66822baaa",
+        "tests/resource_lifetime/README.md": "b1486b18fe3dace6a971d46c06d32744e50fd2538bd90fa4d5fcbbbfcc5db8ef",
+        "tests/fd_ownership/README.md": "a140c6f5b74d59d45221d5ca704bfec430f5b78f1db9c3e89aee53b24aa257b5",
+        "tests/helper_ownership/README.md": "d9c4bd55b1075f786a7ffa0d9f2db1e97a9e43c1b0588f99300374062b7a4125",
+        "tests/admission_faults/README.md": "8af0a63c0c1f07654bc77a8aeff142552864ceb1cdac4b36ac2e47d540386fe8",
+        "tests/nonce_ownership/README.md": "40ab444ff24a9cb22940cea7fa4bdf64b6297c3df3cdc1b51de12803e4c0d888"
+      },
+      "hash_comparisons": 12,
+      "observed_contract": [
+        "SOL first three live bullets match final production envelope/lifetime and recorded per-compiler counts.",
+        "SOL historical eight-credit correction identifies the predecessor lifetime gap and superseding retained24-credit implementation.",
+        "Inventory remains explicitly historical e9be473 source-only counts; native census is phase-boundary only.",
+        "Worker/resource docs distinguish explicit borrowing, conservative Source headroom, estimated buffers, fixed exclusions and complete process policy.",
+        "Implementation status keeps prior checkpoints historical and records current selected lifetime coverage.",
+        "New README scopes distinguish logical admission/no-op registry seams, actual FD controls, finite helper ownership, extracted nonce consumed-close EIO and real native publication.",
+        "All docs keep native transients, complete legacy families/process RSS, RPC/parser ingress, directory/SDK memory, outer waiter/repeated allocator/uncertain OS recovery and physical performance outside accepted coverage."
+      ],
+      "remaining_scope": "No documentation claim of complete resource control, production Photo/Adobe invocation, preview publication or full generator authorization is accepted."
+    },
+    "nonce_independent_acceptance": {
+      "status": "independent source/harness/artifact audit accepted by sibling reviewer, attributed as delivered by collaboration message",
+      "reviewer": "/root/scratch_controls",
+      "receipt": "tests/nonce_ownership/qualification-20261013.json",
+      "sha256": "2b318c8df3d6d8c4a1875f6b5dabfc69b6699fbcc13d792c7ef643ba896ff194",
+      "source_sha256": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+      "reported_file_hash_comparisons": 161,
+      "reported_unique_paths": 148,
+      "reported_byte_source_reconstruction_comparisons": 51,
+      "complete_retained_artifact_entries": 130,
+      "compiled_exact_or_mutated_function_variants": 6,
+      "positive_groups_per_compiler": 13,
+      "designated_rejections_per_compiler": 2,
+      "acceptance": "Exact source/function extraction and all private variants re-derived against current source and pinned e9be473 history; commands/logs, actual FD leak/double-close/reuse observations and post-fixture EBADF cleanup match. No native/test execution, builds or edits during audit.",
+      "limits": [
+        "Extracted function/harness qualification, not whole Remote protocol.",
+        "EIO fixture consumes the close before raising; OS refusal to close is not qualified.",
+        "Sibling-reported comparisons are not counted as this reviewer's own verification."
+      ]
+    },
+    "publication_inventory": {
+      "status": "accepted by independent sibling reviewer as delivered by collaboration message",
+      "reviewer": "/root/scratch_integration",
+      "paths": 62,
+      "excluded_external_coordination_roots": 5,
+      "readme_links_and_new_readmes_checked": 20,
+      "scope": "Publication inventory excludes external coordination roots and generated/native fixtures/private key/token patterns; component pins, reserved wrapper/FIFO/budget diff and private fault seams checked; git diff --check clean.",
+      "limit": "This is attributed packaging review, not an additional native/test run."
+    }
+  },
+  "recorded_hash_comparisons_by_reviewer": 6967,
+  "comparisons_are_unique_files": false,
+  "comparison_count_definition": "4,270 earlier admission/helper/early-FD comparisons + 518 final native comparisons + 2,167 final aggregate comparisons + 12 frozen documentation checks = 6,967. Source-summary captures are not added. Sibling-reported helper681 and nonce161 hash/51 byte comparisons are attributed separately.",
+  "retained_audit_records": {
+    "audit.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/audit.json",
+      "sha256": "c2426f794252895dbd7c5fcd05c722d8a3ede0e10e53b96bbfe005647d3da193"
+    },
+    "comparisons.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/comparisons.json",
+      "sha256": "f7480b5db9092373ffb9a58d0e6fa6042d6c7260d99463731216df0f8860a61f"
+    },
+    "fd-audit.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/fd-audit.json",
+      "sha256": "92118fdf462e384c03740fd20ab3e1892eda57572a1acb048a6a08d59e0f5c07"
+    },
+    "fd-comparisons.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/fd-comparisons.json",
+      "sha256": "f3b79fb0db5a58a735c56769582f90eadfd7f1688e7f5b1f0e512445b6a054e6"
+    },
+    "native-integration-audit.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/native-integration-audit.json",
+      "sha256": "9443abe9f3e4bc978b8f4ec3767c065d8f1f58d9c13bb6bbfc2ce22e637fef7e"
+    },
+    "native-integration-comparisons.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/native-integration-comparisons.json",
+      "sha256": "6f673d4ada3f189042f4ddff55f2da8c4cf8923c0491608dbebb12c3a5208dc8"
+    },
+    "doc-audit.json": {
+      "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/doc-audit.json",
+      "sha256": "96a07cdd35d1f19f88c336a6b01235b8d909b4101255d894ae92f2087b0f5c18"
+    }
+  },
+  "limits": [
+    "Selected source-directed finite one-shot controls and named publication/queue/borrow paths are accepted; no complete native transient peak/legacy-family, hard RSS or whole-process descriptor/SDK memory policy is qualified.",
+    "Incoming raw/decoded RPC arguments, parser amplification, directory manifests, fixed pool/transport/archive baselines and broader post-dispatch allocation/cancellation stress remain outside accepted coverage.",
+    "An outer Files waiter can abandon an indexed Ready owner whose credits remain held until session teardown. Repeated helper waiter faults can retain registry/CPU ownership while an error returns before borrower settlement; uncertain OS close/reap settlement has no hard deadline.",
+    "Phase-boundary native census observes retained native owners, not hidden allocation peaks. No physical APFS block-sharing, disk-write, performance, crash-durability or other-platform runtime result is inferred.",
+    "Historical registry tests use explicit no-op admission/native compatibility seams and do not prove resource lifetime. Existing helper/typed-worker and remote/nonblocking runners delete temporary binaries/data; exact retained logs/source/build pins are accepted with those stated limits.",
+    "Helper source/tests were authored by this reviewer; independent source/artifact acceptance is attributed to sibling reviewers, not self-claimed. Nonce audit and final packaging audit are likewise explicitly attributed.",
+    "No reviewer test/native invocation or production-code mutation occurred during these audits; no Adobe/Photo/Lightroom, cache/publisher operations, preview benchmark or generator full run. Sealed component/aggregate receipts remain unchanged; their initial audit-pending fields are superseded only by this separate scoped acceptance."
+  ],
+  "previous_review": {
+    "path": "/private/tmp/unison-resource-independent-audit-o0qzi0qx/resource-lifetime-independent-review-before-native-20261013.json",
+    "sha256": "c4255169314d61cad86cecd219e045a2102ca9c06273fdbdd24d60d407fc7cc2",
+    "scope": "Earlier per-portion acceptance before final native/aggregate/nonce/doc audit; preserved byte-exact."
+  }
+}

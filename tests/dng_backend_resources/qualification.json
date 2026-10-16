@@ -1,0 +1,193 @@
+{
+  "scope": "Actual DNG companion admission with synthetic protocol helpers; no SDK runtime or thread/RSS enforcement proof",
+  "compilers": {
+    "stock": {
+      "receiving": {
+        "receipt": "/private/tmp/unison-dng-resources-stock.json",
+        "receipt_sha256": "e0baddc5c9beeb0a9b14fa56839c4ab0ae2716235c873332c6d82615ee53e576",
+        "cases": [
+          {
+            "name": "fits",
+            "passed": true,
+            "helper_calls": 1,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": true
+          },
+          {
+            "name": "memory-too-large",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "memory-too-large-warn",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "cpu-too-large",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "negative-workspace",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "zero-cpu",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "off-ignores-inactive-estimate",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": true
+          },
+          {
+            "name": "nested-directory",
+            "passed": true,
+            "helper_calls": 6,
+            "peak_helpers": 1,
+            "source_unchanged": true,
+            "destination_published": true
+          }
+        ]
+      },
+      "regressions": {
+        "receipt": "/private/tmp/unison-dng-resources-stock-regressions.json",
+        "receipt_sha256": "7b7640440eb55eb995a18ff47b54a25c2c14e1de2d131dd2438a73a7f8e54ae2",
+        "cases_passed": 21
+      },
+      "make": {
+        "receipt": "/private/tmp/unison-dng-resources-stock-build.json",
+        "receipt_sha256": "f0b64ccb54747b1b18fe7fd4d0d899d8d78c5c733c03fea06e66bb1f866b2a6d",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/unison",
+        "binary_sha256": "59b184204237895d98081420f73cd33288b96efd33599c3e5e1909e3b57ba6db",
+        "selftest_passed": true
+      },
+      "dune": {
+        "receipt": "/private/tmp/unison-dng-resources-stock-dune.json",
+        "receipt_sha256": "dfe0b59b06f3ed1b9e50cecd1fc9440d763a8e5064891cff485578d7994c9656",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-u306ctk3/_build/default/src/linktext.exe",
+        "binary_sha256": "5eb73574e320f618482f325656fc5b99cf81211df5bfd470a95e74417649abd1",
+        "selftest_passed": true
+      }
+    },
+    "ox": {
+      "receiving": {
+        "receipt": "/private/tmp/unison-dng-resources-ox.json",
+        "receipt_sha256": "52eb2689a3029e7672614ab51d5ab24b3d8d604c7653470acc4527a20634a061",
+        "cases": [
+          {
+            "name": "fits",
+            "passed": true,
+            "helper_calls": 1,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": true
+          },
+          {
+            "name": "memory-too-large",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "memory-too-large-warn",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "cpu-too-large",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "negative-workspace",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "zero-cpu",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": false
+          },
+          {
+            "name": "off-ignores-inactive-estimate",
+            "passed": true,
+            "helper_calls": 0,
+            "peak_helpers": null,
+            "source_unchanged": true,
+            "destination_published": true
+          },
+          {
+            "name": "nested-directory",
+            "passed": true,
+            "helper_calls": 6,
+            "peak_helpers": 1,
+            "source_unchanged": true,
+            "destination_published": true
+          }
+        ]
+      },
+      "regressions": {
+        "receipt": "/private/tmp/unison-dng-resources-ox-regressions.json",
+        "receipt_sha256": "b9b34b5ce73cb7c73801fff00351a616c82519a2ffa5d5cfabddbf156c38f64f",
+        "cases_passed": 21
+      },
+      "make": {
+        "receipt": "/private/tmp/unison-dng-resources-ox-build.json",
+        "receipt_sha256": "776cfaaead27094f4be114cc285c2c1e3e847234086208c3808abe763bcf28eb",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/unison",
+        "binary_sha256": "772c2762f6273a186e4c7057b4371e21c66fb5227cb0825e043cbbcb9d573e50",
+        "selftest_passed": true
+      },
+      "dune": {
+        "receipt": "/private/tmp/unison-dng-resources-ox-dune.json",
+        "receipt_sha256": "7dc8d08c2f9dfc3ac4180dca1cc1482a983abbe1995718e001f653357a0b76cd",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-u4isz0yh/_build/default/src/linktext.exe",
+        "binary_sha256": "3214d3ce1f6a4dd6f49755ffad4ace2c2652d346aefe4407ff436be584da8eef",
+        "selftest_passed": true
+      }
+    }
+  },
+  "sources": {
+    "src/dngCandidateValidation.ml": "f4bd11e7da512ea331575141e39ca65191b77c668af8d5fb60d7a603fefc1f81",
+    "src/dngCandidateValidation.mli": "0140fd90a273da43862f8aba8bcfa59275efb3098dd0bff27ad48be03c2fcab9",
+    "src/candidateValidators.ml": "cc7a19837a89f3deb1363ff79020c26c288ce674389fd0ba93820961fcf7dea0",
+    "tests/dng_backend_resources/run.py": "b3a40cbdf26e1939ebdca028461c0c2a7007c7e68ad46c53671a8a7fdca608eb"
+  }
+}

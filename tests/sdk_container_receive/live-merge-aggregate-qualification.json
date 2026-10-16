@@ -1,0 +1,65 @@
+{
+  "scope": "Four actual original fake-worker aggregate cases, no SDK/Photo/Unison CLI/native validator. External unresolved markers intentionally retained on failed fixtures, all worker children actually reaped.",
+  "actual_parent_terminal": {
+    "owner_tool": 42542,
+    "terminal_chunk": "cf1c11",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "report": {
+    "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-jdxwx2zy/RESULT.json",
+    "bytes": 2963,
+    "sha256": "38b26c01d949b575563abda26127737af1c3e13d679f35a41fad0b9bfabe74ad"
+  },
+  "source_pins": [
+    {
+      "path": "tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 5889,
+      "sha256": "88d1b4a429485e0e3337425d239a09e258af9335a12752843329acc66e3e77c9"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_aggregate_test.py",
+      "bytes": 2173,
+      "sha256": "65f69f2d047f457916392573ffc15e1c0d579f9acffcde0d5cc384f1f9ced0bd"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    },
+    {
+      "path": "bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "bench/sync/measure.py",
+      "bytes": 3407,
+      "sha256": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    }
+  ],
+  "worker_closure_receipts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-jdxwx2zy/missing-helper-proof/AGGREGATE-CLOSED.json",
+      "bytes": 400,
+      "sha256": "0bdafa3ccf97f68ff891c53b3b6b75a7a06126634c062234bd7204bb8460325c"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-jdxwx2zy/normal/AGGREGATE-CLOSED.json",
+      "bytes": 400,
+      "sha256": "79e7a1bc37bd8b5663d7a6d96cbb8fd241c5315e67b3c49c0bcd62cd286cb228"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-jdxwx2zy/term-ignoring-timeout/AGGREGATE-CLOSED.json",
+      "bytes": 397,
+      "sha256": "8a2159838222d2ce5a2f81d12008db045d7cc375da50c0b5567966d6d4a63ced"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-aggregate-fixtures-jdxwx2zy/worker-failure/AGGREGATE-CLOSED.json",
+      "bytes": 399,
+      "sha256": "42c08f3edb7d626ecc800f98bb6a9874d13f07c3a20d24672d010024820d3db1"
+    }
+  ],
+  "sdk_admitted": false,
+  "native_entry_implemented": false
+}

@@ -1,0 +1,103 @@
+(* Build-only, stock-compatible selector for individually qualified OxCaml
+   contracts. It neither receives peer code nor suppresses portability errors. *)
+let read path =
+  let ch=open_in_bin path in
+  try
+    let length=in_channel_length ch in
+    if length>1048576 then invalid_arg "mode filter source limit";
+    let text=really_input_string ch length in close_in ch;text
+  with error -> close_in_noerr ch;raise error
+let replace text needle replacement =
+  let size=String.length needle in
+  let output=Buffer.create(String.length text) and count=ref 0 in
+  let rec loop at =
+    if at+size>String.length text then
+      Buffer.add_substring output text at (String.length text-at)
+    else if String.sub text at size=needle then begin
+      incr count;Buffer.add_string output replacement;loop(at+size)
+    end else begin Buffer.add_char output text.[at];loop(at+1) end in
+  loop 0;Buffer.contents output, !count
+let is_ox version = snd(replace version "+ox" "")>0
+let exact text needle replacement =
+  let output,count=replace text needle replacement in
+  if count<>1 then invalid_arg "qualified mode declaration changed";
+  output
+let transform version path =
+  let name=Filename.basename path in
+  let source=read path in
+  let component=Filename.remove_extension name in
+  let interface=Filename.extension name=".mli" in
+  if (not interface && Filename.extension name<>".ml") ||
+     not(List.mem component ["semanticHash";"semanticFile";"semanticMailbox";
+       "formatRecognition";"dngRecognition";"formatExtension";"xmpObservation";
+       "xmpMerge";"dngSemantic";"dngExtended";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
+  then invalid_arg "unqualified mode-filter module";
+  if not(is_ox version) then source
+  else if component="semanticFormats" then
+    if not interface then source else
+    let expected=exact source "(module FormatExtension.S) -> unit"
+      "(module FormatExtension.S) @ portable contended -> unit" in
+    let template=read(Filename.concat(Filename.dirname path)(component^".ox.mli.in")) in
+    if template<>expected then invalid_arg "owner mode template differs from qualified interface";
+    template
+  else if component="semanticWorkers" then
+    if interface then source else
+    exact source "Domain.spawn (* ox-safe-worker-spawn *)"
+      "Domain.Safe.spawn"
+  else begin
+    let signature_count,field_count = match component,interface with
+      | "formatRecognition",true -> 1,0
+      | "formatRecognition",false -> 1,1
+      | "formatExtension",true -> 1,1
+      | "formatExtension",false -> 1,2
+      | _ -> 0,0 in
+    let body,ns=replace source "(* ox-portable-signature *)" "@@ portable contended" in
+    let body,nf=replace body "(* ox-portable-field *)" "@@ portable contended" in
+    if ns<>signature_count || nf<>field_count then
+      invalid_arg "qualified extension mode declarations changed";
+    if interface then begin
+      let body = if component="semanticMailbox" then
+        exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
+      else if component="formatRecognition" || component="formatExtension" then
+        exact body "type handle\n" "type handle : value mod portable contended\n"
+      else if component="semanticDelta" then
+        exact (exact body "type proof\n" "type proof : value mod portable contended\n")
+          "type t\n" "type t : value mod portable contended\n"
+      else body in
+      let body = if component="formatRecognition" || component="formatExtension" then
+        let body,_=replace body "(module S)" "(module S) @ portable contended" in
+        let body,_=replace body "(module S) @ portable contended option"
+          "(module S) option @ contended" in body
+      else if component="semanticDelta" then
+        fst(replace body "(module FormatExtension.S)"
+          "(module FormatExtension.S) @ portable contended")
+      else body in
+      let owner_declarations = match component with
+        | "formatExtension" -> [
+          "val resolve : string -> handle option";
+          "  ?observer:observer -> (module S) @ portable contended -> unit";
+          "val find : string -> (module S) option @ contended";
+          "val profiles : unit -> string list";
+          "val registered : unit -> handle list"]
+        | "semanticDelta" -> [
+          "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
+          "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]
+        | _ -> [] in
+      let body=List.fold_left (fun body declaration ->
+        exact body declaration (declaration^" @@ nonportable")) body owner_declarations in
+      let expected="@@ portable\n"^body in
+      let template=read(Filename.concat(Filename.dirname path)(component^".ox.mli.in")) in
+      if template<>expected then invalid_arg "checked mode template differs from qualified interface";
+      template
+    end else begin
+      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 2 | _ -> 0 in
+      let result,count=replace body "(* ox-portable-ffi *)" "@@ portable" in
+      if count<>expected then invalid_arg "qualified native mode declarations changed";
+      result
+    end
+  end
+let () =
+  if Array.length Sys.argv<>3 then invalid_arg "usage: semantic_mode_filter COMPILER_VERSION INPUT";
+  let result=transform Sys.argv.(1) Sys.argv.(2) in
+  set_binary_mode_out stdout true;
+  print_string result

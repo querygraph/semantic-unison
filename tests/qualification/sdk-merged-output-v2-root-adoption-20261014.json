@@ -1,0 +1,42 @@
+{
+  "schema": "unison-merged-output-v2-root-adoption/1",
+  "utc": "2026-10-15T00:24:17.224725+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-MERGED-OUTPUT-V2-ROOT-CLOSED-20261014.json",
+    "bytes": 1142,
+    "sha256": "c55d76fbc02b993d18f1be36eeea37d4c9e28545fbcf1f540b4d3ba4601938ac"
+  },
+  "accepted_terminal": {
+    "owner_tool": 3883,
+    "terminal_chunk": "5aae79",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "workspace": "/private/tmp/unison-merged-output-native-v2-ed919ddf7f5a4b91829425211b53d901",
+    "wrapper_pid": 69150,
+    "aggregate_pid": 69151
+  },
+  "accepted_aggregate": {
+    "pid": 69151,
+    "seconds": 300,
+    "closed": true,
+    "scope": "finite contained pilot only",
+    "timed_out": false,
+    "reaped": true,
+    "returncode": 0,
+    "group_members_before_leader_reap": [
+      {
+        "pid": 69151,
+        "stat": "Z"
+      }
+    ],
+    "other_members_absent": true,
+    "wall_seconds": 5.3315609249984846,
+    "child_user_seconds": 4.892402,
+    "child_system_seconds": 0.378243,
+    "within_wall_limit": true
+  },
+  "hold_released": true,
+  "new_executions": 0,
+  "scope": "Exactly three frozen synthetic merged-output validations only; no renderer or production receiving-path qualification.",
+  "admission_consumed": true
+}

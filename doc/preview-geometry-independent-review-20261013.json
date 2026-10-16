@@ -1,0 +1,177 @@
+{
+  "schema": "unison-preview-geometry-interface-independent-review/1",
+  "utc": "2026-10-13T23:59:53.108805+00:00",
+  "status": "ACCEPTED_METADATA_RECEIPT_AND_DOCUMENT_SCOPE_ONLY",
+  "reviewer": "/root/geometry_handoff_review",
+  "independence": "Reviewer authored none of the four updated documents or integration receipt; authored only this separate review receipt.",
+  "parent_commit": "941b99f3f48e56beca774899443cac752575dc47",
+  "integration_receipt": {
+    "path": "/Users/alexy/src/unison/doc/preview-geometry-integration-20261013.json",
+    "bytes": 7829,
+    "sha256": "f54a8cb1a75b59a4f5f74ea6903e9ef7ba638c8bc6e857a0ac0d3c643a31d9b8"
+  },
+  "review_scope": {
+    "metadata_input_documents": 14,
+    "packet_listed_receipts": 9,
+    "document_bodies": 4,
+    "all_metadata_and_document_bytes_and_sha256_match": true,
+    "production_and_test_diff_from_parent": "git diff --name-only 941b99f3f48e56beca774899443cac752575dc47 -- src tests returned no paths",
+    "reviewed_changes": "Final geometry/status/planning wording and integration receipt; earlier whole-project safety and runtime claims are not requalified."
+  },
+  "verified_metadata_pins": [
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json",
+      "bytes": 2500,
+      "sha256": "cf29ca2d407a9c67f286a92e686ce06cf052e0322ee92852b0ad0bdacdd00437"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/COMPLETE.json",
+      "bytes": 943,
+      "sha256": "3213824b6d2610ab36d36f3c3f5c8b1e60962b36c1dc83d8624424d853e60a77"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/SUMMARY.json",
+      "bytes": 19614,
+      "sha256": "2b74c0f59f3729b3a574e51d2ef44eb18fb26f464101461ee63b7068cad51280"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/FINDINGS.txt",
+      "bytes": 3141,
+      "sha256": "ae1091a70a17c48651027db489d28d9ebf0e521e7bed84cadb89b7717f5f8110"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-controls-20261013-v1/COMPLETE.json",
+      "bytes": 613,
+      "sha256": "cd6e598862a60cfd34072f81951cea4cfb90f52a2216f9db4b998a0e55229cf7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/COMPLETE.json",
+      "bytes": 907,
+      "sha256": "20c80498a9ccedad7169a500ab5ce9868e34cfd33173a1b68ef7d895a65c9763"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "972260dc6729155242d3d0f3f5fc57f977b8081b7d2f0b8f104a59ed75ba5469"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/MISSING-CONTAINER-EXTERNAL-CONTEXT.json",
+      "bytes": 213901,
+      "sha256": "e736cbfd7d6273204a5de39f2488807b99ba362d488b0a7ecc2549782adcd5c6"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/COMPLETE.json",
+      "bytes": 909,
+      "sha256": "cb5f49cf41131575f8d2511ebcbbfb2d53d39d52ce7bad8407ab726b75d25725"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "8baaa73f2f12a659fc17766be3879777012ebe2778cdc93f646a863b27333681"
+    },
+    {
+      "path": "/Users/alexy/src/photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json",
+      "bytes": 2624,
+      "sha256": "7c5602963c1ec7f56e73f39c324eb276b8704e6db4dd9e798f0d56c7644960da"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-abi-owner-publication-bcdc5d3dede14316b237eab2eb43402a/COMPLETE.json",
+      "bytes": 1144,
+      "sha256": "7bd189319524caa14260921245984cfa4615df633149e2fab40381b5b5a6a54d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json",
+      "bytes": 8132,
+      "sha256": "52ea2ac1c22d68a8f6917845d01067af3690b61aa44ec11392757437e67ae8b3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json",
+      "bytes": 2467,
+      "sha256": "028592026d6469077bc8172304a1ec1a0950005dd2b528ed9c57997cddd463a8"
+    }
+  ],
+  "verified_document_pins": {
+    "SOL.md": {
+      "path": "/Users/alexy/src/unison/SOL.md",
+      "bytes": 174459,
+      "sha256": "a6a0e43a99f3f30baf27b37ab4e8c40f94147393f6f1727153b3fc36c7cffb10"
+    },
+    "doc/preview-design-integration.md": {
+      "path": "/Users/alexy/src/unison/doc/preview-design-integration.md",
+      "bytes": 35719,
+      "sha256": "926878a7c4d53ca167a8ce2354a64cc2ad0ad539a3577c003d7b5dc09c4f9c39"
+    },
+    "doc/lightroom-preview-placement.md": {
+      "path": "/Users/alexy/src/unison/doc/lightroom-preview-placement.md",
+      "bytes": 30434,
+      "sha256": "c5a0f3d8672820a1f5afd11111ec51abc06c4b08845a97dbcd586fbfccf80304"
+    },
+    "doc/implementation-status.md": {
+      "path": "/Users/alexy/src/unison/doc/implementation-status.md",
+      "bytes": 59573,
+      "sha256": "c04f88491831b4f5658531e2857d1456c2cbeeb71e07cd25fb5abc802097c106"
+    }
+  },
+  "accepted_geometry_counts": {
+    "modern_candidate_files": 39982,
+    "native_targets": 4299,
+    "legacy_highest_sections": 147460,
+    "files_or_sections": 191741,
+    "returned_marker_sof_bytes": 6308224,
+    "modern_native_returned_bytes": 1597728,
+    "legacy_returned_bytes": 4710496,
+    "framing_holds": 0,
+    "dimension_mismatches": 0,
+    "observed_identity_changes": 0,
+    "all_source_readers_closed": true
+  },
+  "accepted_planning_counts": {
+    "stored_equal_crop": 135881,
+    "stored_within_crop": 11579,
+    "explicit_proxy": 1080,
+    "equal_crop_explicit_nonproxy": 133527,
+    "equal_crop_explicit_nonproxy_quality_final": 133181,
+    "provisional_viewport": [
+      5120,
+      2880
+    ],
+    "fit_both_axis_orders": 142029,
+    "fit_both_explicit_nonproxy": 139426,
+    "fit_swapped_only": 226,
+    "fit_neither": 5205,
+    "missing_container_historical_records": 67,
+    "excluded_modern_alternatives": 1469
+  },
+  "findings": [
+    "The completed geometry packet and publication agree on 39,982 modern candidate files, 4,299 native targets and 147,460 highest legacy sections: 191,741 total.",
+    "The returned-byte total is 1,597,728 modern/native plus 4,710,496 legacy, equaling 6,308,224; this does not measure physical disk read amplification.",
+    "All requested source readers are closed; framing holds, dimension mismatches and observed identity changes are zero. The four updated documents contain no stale PID 56590 / roughly 100,000-live status.",
+    "Native width, height and positive file bytes match the captured level rows; marker/SOF agreement does not prove entropy integrity, current edits or native recognition.",
+    "Equal-crop, within-crop, explicit-proxy and quality declarations, and provisional 5120x2880 both-axis/swapped/neither calculations agree with FINDINGS and planning SUMMARY and retain their conditional scope.",
+    "The 67 missing-container historical records remain absent-file context; 1,469 modern alternatives beside qualified legacy containers remain outside the inspected filename-only cohort.",
+    "The earlier ABI assessment and original-owner ACK are independently pinned metadata. They accept synthetic C/Rust/OxCaml project-interface evidence, not a private Adobe ABI/runtime, faithful renderer, registration/restart, benchmark or full run.",
+    "The earlier owner ACK historical legacy-live observation is superseded by the completed geometry packet; that immutable ACK is not rewritten or treated as current worker liveness.",
+    "User-reported V3 roster/gap/admission, final handoff/new-ACK, unavailable desktop and unreleased-window states are explicitly separate in the integration receipt. This review does not independently refresh V3 gaps or infer a new ACK, readiness or admission.",
+    "The known 485,185 other-digest plus 252,676 no-file categories total 737,861, while 39 unknown digests remain separate; this arithmetic is not a proved regeneration requirement.",
+    "Stat-only unchanged Main/WAL/cache-family observations cannot provide fresh publication admission. Mutable publishedControls pins remain historical and were not refreshed.",
+    "The receiving-validation checkpoint and immutable validation receipts retain document proof at parent 941b99f; this documentation update makes no production/test changes or new execution claims."
+  ],
+  "this_review": {
+    "underlying_photo_payload_catalog_cache_database_or_volume_access": 0,
+    "preview_payload_reads_hashes_copies_decodes": 0,
+    "tests_builds_benchmarks_native_or_adobe_invocations": 0,
+    "production_writes_or_registration": 0,
+    "external_relay": false,
+    "renderer_or_publisher_started": false,
+    "edits": "Only doc/preview-geometry-independent-review-20261013.json"
+  },
+  "limits": [
+    "SOF dimensions and stored crop/proxy/quality do not prove decoded integrity, actual crop/orientation/viewport, edit freshness, native selected level or original-detail 1:1 recognition.",
+    "Returned marker/SOF bytes do not measure physical disk read amplification.",
+    "Missing-container records remain absent-file historical context; excluded alternatives are not counted as inspected modern files.",
+    "Stat-only unchanged Main/WAL/cache families do not constitute fresh native publication admission; no database is opened here.",
+    "No native registration/load/restart, private Adobe runtime/current-edit rendering or split-storage publication qualification; no new owner ACK/window readiness/receiver admission inferred.",
+    "ABI synthetic project-interface proof and older owner ACK retain their own scope; mutable publishedControls pins are historical and not refreshed."
+  ],
+  "issues": []
+}

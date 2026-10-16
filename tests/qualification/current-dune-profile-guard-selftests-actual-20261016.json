@@ -1,0 +1,109 @@
+{
+  "schema": "unison-current-dune-profile-guard-selftests/1",
+  "builds": {
+    "stock": {
+      "owner_terminal": {
+        "session": 57329,
+        "chunk": "ff434f",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-current-dune-stock-3a97b804/RESULT.json",
+        "bytes": 43419,
+        "sha256": "f297b098d4bc6e5ddeab58a1f784b7888fbe30f05d607bf27ae65acd3c46227e"
+      },
+      "closure": {
+        "child": {
+          "pid": 47215,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 47215,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-current-dune-stock-3a97b804/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c249af17198bd679576b8adc29798df724a191c532b68ed6abc8e62dd99918f4"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-h3kq_2k1/_build/default/src/linktext.exe",
+        "bytes": 5697160,
+        "sha256": "08a691c53e5c12598b9a460621ca2b3c7201e1bbbe75d43d0f7faa698328cb88"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "current_production_source_count": 425
+    },
+    "ox": {
+      "owner_terminal": {
+        "session": 37070,
+        "chunk": "eda56c",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "result": {
+        "path": "/private/tmp/unison-current-dune-ox-cf72a109/RESULT.json",
+        "bytes": 43423,
+        "sha256": "a7954c191f8c29a6be65df7f526e5163a40773a5e1a0259062b78d2385169e2e"
+      },
+      "closure": {
+        "child": {
+          "pid": 48286,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 48286,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "closure_pin": {
+        "path": "/private/tmp/unison-current-dune-ox-cf72a109/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "4fa28b1bde11fd45ddbb5bdd8d6914a9eb6971f396d58265e9777112d5bb85b9"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-5ndctwbr/_build/default/src/linktext.exe",
+        "bytes": 7282592,
+        "sha256": "3e5201cbaf4fcafaac49f38c7faa84a488292a502964fc176dc9b04f12c9d5bb"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "current_production_source_count": 425
+    }
+  },
+  "scope": "Current425production/build sources including profileinspectionguard. Stock/Ox Dune builds+CLIselftests, serialmax2compilerjobs and3workersperendpoint withinUnison8. No property-transfer/Adobe/camera/EXglobalIO. EarlierDune receipts preserved historical.",
+  "preexec_refusal": {
+    "chunk": "fd85fb",
+    "exit_code": 2,
+    "reason": "compiler prefix used switch root instead of bin; before owned build start"
+  }
+}

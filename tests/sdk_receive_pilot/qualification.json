@@ -1,0 +1,241 @@
+{
+  "schema": "unison-finite-sdk-receive-source-mock/1",
+  "utc": "2026-10-14T20:27:56.975710+00:00",
+  "scope": "source/build-only preparation plus mock lifecycle; zero SDK invocations",
+  "source_pins": {
+    "tests/sdk_receive_pilot/admission_test.py": {
+      "bytes": 2617,
+      "sha256": "dab20609ae34761c96aa73a25745fba72784c9ba5467cabd9f8a14dfe62ecfa5"
+    },
+    "tests/sdk_receive_pilot/guard.py": {
+      "bytes": 2118,
+      "sha256": "fc29c18472258c4dd557f96a8fc7dce021c19692b79635a823df4af030f30575"
+    },
+    "tests/sdk_receive_pilot/guard_test.py": {
+      "bytes": 2248,
+      "sha256": "1209985d31f161c2869b18076f03f967d08a6925a9587c53869d41a0bdea0551"
+    },
+    "tests/sdk_receive_pilot/run.py": {
+      "bytes": 14933,
+      "sha256": "05ff0ab8beafc15c6586f6ec931a93b2d3c77f72bc3f909d76dd5ee354d856db"
+    }
+  },
+  "mock": {
+    "workspace": "/private/tmp/unison-receive-pilot-mock-20261014-v8",
+    "result": {
+      "mode": "MOCK",
+      "cases": [
+        {
+          "codec": "uncompressed",
+          "direction": "stock-ox",
+          "status": "passed"
+        },
+        {
+          "codec": "uncompressed",
+          "direction": "ox-stock",
+          "status": "passed"
+        },
+        {
+          "codec": "jpeg",
+          "direction": "stock-ox",
+          "status": "passed"
+        },
+        {
+          "codec": "jpeg",
+          "direction": "ox-stock",
+          "status": "passed"
+        },
+        {
+          "codec": "jxl",
+          "direction": "stock-ox",
+          "status": "passed"
+        },
+        {
+          "codec": "jxl",
+          "direction": "ox-stock",
+          "status": "passed"
+        }
+      ],
+      "actual_tool_entries": [
+        {
+          "pid": 864,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/uncompressed-original.dng",
+          "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+          "size": 48005534,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 869,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jpeg-original.dng",
+          "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+          "size": 39016722,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 873,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-original.dng",
+          "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+          "size": 38237658,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 915,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/uncompressed-stock-ox/right/.unison.image.dng.2396164065e45aa3dec1c166c40a63d4.unison.tmp",
+          "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+          "size": 48005534,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 928,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/uncompressed-stock-ox/right/.unison.image.dng.2396164065e45aa3dec1c166c40a63d4.unison.tmp",
+          "sha256": "93065fd3d4414b889a6f1a956cf38478b4f70ec3e8f4e92651536b24a1614813",
+          "size": 48005534,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 981,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/uncompressed-ox-stock/right/.unison.image.dng.354076f52bba8f5da3fd7a25b817e504.unison.tmp",
+          "sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+          "size": 48005534,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 1005,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jpeg-stock-ox/right/.unison.image.dng.2a8c3318f962a92a6d0f85aa845a6448.unison.tmp",
+          "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+          "size": 39016722,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 1053,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jpeg-ox-stock/right/.unison.image.dng.f0b76eae4efd27a48261b0e6b11c8998.unison.tmp",
+          "sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+          "size": 39016722,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 1066,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-stock-ox/right/.unison.image.dng.6ea9461b9f556ad276eb9477d86b0939.unison.tmp",
+          "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+          "size": 38237658,
+          "mode": "MOCK"
+        },
+        {
+          "pid": 1102,
+          "pgid": 863,
+          "candidate": "/private/tmp/unison-receive-pilot-mock-20261014-v8/jxl-ox-stock/right/.unison.image.dng.42f08472b0a37c90474e3b9165a53702.unison.tmp",
+          "sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+          "size": 38237658,
+          "mode": "MOCK"
+        }
+      ],
+      "sdk_calls": 0
+    },
+    "aggregate": {
+      "pid": 863,
+      "seconds": 300,
+      "closed": true,
+      "scope": "finite contained pilot only",
+      "timed_out": false,
+      "reaped": true,
+      "returncode": 0,
+      "group_members_before_leader_reap": [
+        {
+          "pid": 863,
+          "stat": "Z"
+        }
+      ],
+      "other_members_absent": true,
+      "wall_seconds": 22.64487068800372,
+      "child_user_seconds": 17.543969,
+      "child_system_seconds": 2.977845,
+      "within_wall_limit": true
+    },
+    "pins": {
+      "READY.json": {
+        "bytes": 45248,
+        "sha256": "4f28e9b888ba31ac2775c1a8850fa3d0014017e9b6d01e669db53697d49b891a"
+      },
+      "RESULT.json": {
+        "bytes": 3834,
+        "sha256": "265a35c86d06505ff68dd06e4d403880ef2416246c6d866bd3b88bd1306a9e33"
+      },
+      "WRAPPER-START.json": {
+        "bytes": 54,
+        "sha256": "14617e15869561e4e7feeb23dd8f00dc83f38887a4c28a22075f64ea0729b85e"
+      },
+      "SUPERVISOR-RETURN.json": {
+        "bytes": 587,
+        "sha256": "bf3988addf24f249ea1d7ba93395aba89b098cd692878a2348f0954485cc6a88"
+      },
+      "AGGREGATE-CLOSED.json": {
+        "bytes": 416,
+        "sha256": "9bd68d0bbc10d243a443fe64ab4abd975840cbbeafc0827980c0c9681c5cf51d"
+      }
+    },
+    "parent_terminal_observed": {
+      "tool_session": 45265,
+      "chunk": "71be81",
+      "exit_code": 0,
+      "scope": "actual terminal tool return; not inferred from psabsence or supervisor-return file"
+    }
+  },
+  "guard_controls": {
+    "workspace": "/private/tmp/unison-receive-guard-7og8lw49",
+    "receipt": {
+      "scope": "guard-only finite controls; mock executable, zero SDK calls",
+      "workspace": "/private/tmp/unison-receive-guard-7og8lw49",
+      "positive_mock_entries": 10,
+      "rejected_before_entry": [
+        "wrong group",
+        "wrong executable pin",
+        "unlisted input",
+        "eleventh call"
+      ],
+      "guard_sha256": "fc29c18472258c4dd557f96a8fc7dce021c19692b79635a823df4af030f30575",
+      "actual_processes": 14,
+      "sdk_calls": 0
+    },
+    "pin": {
+      "bytes": 422,
+      "sha256": "e94d80f31147d78b388b66fd5c04a3baaf22e32181169d3fe9a612f6f8dc4c47"
+    },
+    "child_python_optimization": 1
+  },
+  "admission_controls": {
+    "workspace": "/private/tmp/unison-receive-admission-94crnlfz",
+    "receipt": {
+      "scope": "pure admission checks; zero SDK/process invocations",
+      "workspace": "/private/tmp/unison-receive-admission-94crnlfz",
+      "positive": 1,
+      "denials": 9,
+      "runner_sha256": "05ff0ab8beafc15c6586f6ec931a93b2d3c77f72bc3f909d76dd5ee354d856db"
+    },
+    "pin": {
+      "bytes": 254,
+      "sha256": "4189235ad9b0073a7f01935808be435defb7eea3cd31a6137714130aba990e59"
+    }
+  },
+  "prepared": {
+    "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/READY.json",
+    "bytes": 45372,
+    "sha256": "8be53ca4a0fc1b90e0ab10d8f116b22c6356a071ad8812a70c62cff458f2604a",
+    "no_native_release": true
+  },
+  "limits": [
+    "No current native receive result; fresh Root admission required",
+    "Contained test C backend differs from production group backend; no timing qualification",
+    "8 host credits are conservative planning headroom, not measured hard CPU/RSS ceiling",
+    "Trusted tools must not escape groups; uncooperative namespace changes/outer-owner kill/kernel stalls remain outside guarantee",
+    "Does not complete receive corpus/large-file parallelism/full M4-V/M5/M6"
+  ]
+}

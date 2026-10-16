@@ -1,0 +1,88 @@
+{
+  "schema": "unison-concurrent-budget-order/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 21143,
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-stock-20261016a/SHARED-START.json",
+          "bytes": 1159,
+          "sha256": "1e22ce89c4795fc9a3b0af667dc2ff4d1de65d98833fa337c5f57a44f894f699"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "a212a2730fc6049e04c30eeb57da352bdcc91f72607c7b0e48dc75fb294e3219"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-stock-20261016a/SHARED-STDOUT.txt",
+          "bytes": 370,
+          "sha256": "0dd9bfdad6f97f10a3bb1227ee8f3668ecd20717cd8a09c32e9e10342053561d"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-stock-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "chunk": "6132d3"
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 67077,
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-ox-20261016a/SHARED-START.json",
+          "bytes": 1160,
+          "sha256": "d3ad117314063baa40292ee70dc5d24d85ae2927a00b99acfc75a509a967bf94"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d22e4cda1e97e5dc699b7b93d339ad010d4a43e18edf82c5a4cea0a430174824"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-ox-20261016a/SHARED-STDOUT.txt",
+          "bytes": 370,
+          "sha256": "0dd9bfdad6f97f10a3bb1227ee8f3668ecd20717cd8a09c32e9e10342053561d"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-budget-order-ox-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "chunk": "e915fe"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/concurrent_budget_gate/test.ml",
+      "bytes": 2833,
+      "sha256": "f19b52ac0e91a518976e538ed8a359cd88bf54731d46c597918fe091c1e42391"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/concurrent_budget_gate/run.py",
+      "bytes": 1488,
+      "sha256": "2e6ce744d23b527a66a6934ed33c0273dec316f3ec6276bfd69976bb2690751d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticAdmission.ml",
+      "bytes": 10765,
+      "sha256": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticAdmission.mli",
+      "bytes": 2803,
+      "sha256": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae"
+    }
+  ],
+  "scope": "Actual production gate all3source/two-consumer orders at4slots;3slot source-first queues second consumer and cancels cleanly. Prior6GiB/64FD receipt uses4slots, not proof of3slot order-independent overlap. No receiving/SDK/EXIO/Photo/camera/hardRSS.",
+  "full_goal_complete": false
+}

@@ -68,6 +68,18 @@ let fail e = make (Fail e)
 let wait () = make Sleep
 let wakeup t v = restart t (Return v) "wakeup"
 let wakeup_exn t e = restart t (Fail e) "wakeup_exn"
+let wakeup_from t settled =
+  match settled.state with
+  | Sleep -> invalid_arg "wakeup_from: unsettled source"
+  | state ->
+      if t.state <> Sleep then invalid_arg "wakeup_from";
+      (* The caller preallocated [state] before acquiring external ownership.
+         Install it before any observer dispatch; do not allocate Return/Fail
+         between the owner's debit and its observable reply. *)
+      t.state <- state;
+      let waiters = t.waiters in
+      t.waiters <- [];
+      List.iter (fun f -> f ()) waiters
 
 let rec bind x f =
   match x.state with

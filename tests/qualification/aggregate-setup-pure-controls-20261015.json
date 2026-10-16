@@ -1,0 +1,42 @@
+{
+  "scope": "Pure source-controller checks only: no real descriptor, fork, test child, compiler, SDK, Photo or timing invocation. Mock cleanup observes attempts, not actual OS close/reap behavior.",
+  "actual_terminal": {
+    "chunk": "062b40",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "interpreter": {
+    "path": "/usr/local/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+    "bytes": 13592,
+    "sha256": "b08b055365df6dcd3fff0b805b688428f0f6a01839303f22c0716780155c480d"
+  },
+  "cases": {
+    "setup_failures": 6,
+    "current_interpreter_support": 1,
+    "missing_capability_refusals": 10
+  },
+  "verified_invariants": [
+    "Every acquired mock descriptor receives a close attempt on first/second pipe, stdout/stderr flush or fork failure",
+    "One mocked close failure does not skip remaining descriptors or replace original exception identity",
+    "No closure receipt published on setup failure",
+    "Missing ownership APIs reject before workspace, markers, pipe or fork"
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 7294,
+      "sha256": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/aggregate_setup_test.py",
+      "bytes": 2423,
+      "sha256": "07fb87f736b3786846dd8a0f1b6845c393df3635b1fe6a9840b86aaefeb41125"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/aggregate_preflight_test.py",
+      "bytes": 1507,
+      "sha256": "a5fa32c8ff0fe37e09b8a62ed05ba1a5eca8afb3337fbfed194d53355726db40"
+    }
+  ],
+  "runtime_qualification": "Earlier real worker/SDK/benchmark evidence retains historical pins; no new runtime admission or replay inferred."
+}

@@ -1,0 +1,136 @@
+{
+  "schema": "unison-current-final-publication/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 7333,
+      "terminal_chunk": "ee9306",
+      "exit_code": 0,
+      "running_session": false,
+      "cases": 170,
+      "retained_producer_cases": 71,
+      "current_sources": [
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication.mli",
+          "bytes": 11280,
+          "sha256": "1133576a069990ee6ff04e76befeed9464e2dd3d0990876d56dfb3ca82a70a7b"
+        },
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication.ml",
+          "bytes": 4069,
+          "sha256": "a1e7e34e08c421348a759d200c2a8f7b2deb1a56891090573aca08edbbf0a579"
+        },
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication_stubs.c",
+          "bytes": 52476,
+          "sha256": "b2510f3099a2d316d346eb820f27979f448e52732d4e0df4eaece2199ff59127"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/fixture.c",
+          "bytes": 13197,
+          "sha256": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/test.ml",
+          "bytes": 30979,
+          "sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/producerTest.ml",
+          "bytes": 33839,
+          "sha256": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        }
+      ],
+      "references": [
+        {
+          "path": "/private/tmp/unison-current-publication-stock-20261016a/SHARED-START.json",
+          "bytes": 1165,
+          "sha256": "325960f5fa4ce682e3479c24ab0b2cc02bdf484ab5a6eee215d26bf1249516fe"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ac5989718b0508bf541a54dda331c2e8ebe3b8c6893a45eb39dd4e381de51c9d"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-stock-20261016a/SHARED-STDOUT.txt",
+          "bytes": 18258,
+          "sha256": "ec74128e8f3f4b60d758551a5f82cd68ad41258a0a89fbfce9a5dd7601aec3c8"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-stock-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "retained_build_directory": "/private/tmp/unison-final-publication-mtt10zlg"
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 20345,
+      "terminal_chunk": "9cd13f",
+      "exit_code": 0,
+      "running_session": false,
+      "cases": 170,
+      "retained_producer_cases": 71,
+      "current_sources": [
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication.mli",
+          "bytes": 11280,
+          "sha256": "1133576a069990ee6ff04e76befeed9464e2dd3d0990876d56dfb3ca82a70a7b"
+        },
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication.ml",
+          "bytes": 4069,
+          "sha256": "a1e7e34e08c421348a759d200c2a8f7b2deb1a56891090573aca08edbbf0a579"
+        },
+        {
+          "path": "/Users/alexy/src/unison/src/finalPublication_stubs.c",
+          "bytes": 52476,
+          "sha256": "b2510f3099a2d316d346eb820f27979f448e52732d4e0df4eaece2199ff59127"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/fixture.c",
+          "bytes": 13197,
+          "sha256": "4ff717bfb98ea2e71dcd8dfc8d8abbbbdd89beca70bb1c2f09dbf973d392f6d9"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/test.ml",
+          "bytes": 30979,
+          "sha256": "3e0faa149ffc43e481cde28a84e0293b326689498be5d20b54e70f77b315bf80"
+        },
+        {
+          "path": "/Users/alexy/src/unison/tests/final_publication/producerTest.ml",
+          "bytes": 33839,
+          "sha256": "ba649e6e1fdc06ae2237388cef0986c210b0bb2b8fedab1c157812d5671009ea"
+        }
+      ],
+      "references": [
+        {
+          "path": "/private/tmp/unison-current-publication-ox-20261016a/SHARED-START.json",
+          "bytes": 1166,
+          "sha256": "599954a4a72b41ae3f0311eb9e2efa47cf83bc25393f3243d71cba1b44a001f3"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "c2ab9183ba44bf45c8609c2337bf1f8b16f0b42ef01e6a0ebd08e1f90b4ab782"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-ox-20261016a/SHARED-STDOUT.txt",
+          "bytes": 18261,
+          "sha256": "e4aca61903d69057394439018e8900396d6ed41747895bfb53207218875087bf"
+        },
+        {
+          "path": "/private/tmp/unison-current-publication-ox-20261016a/SHARED-STDERR.txt",
+          "bytes": 1097,
+          "sha256": "4fda99c9295a1f30caf80d6d6c05fc3ff36f06a3a8fd1dae046b801a5d23b747"
+        }
+      ],
+      "retained_build_directory": "/private/tmp/unison-final-publication-lchi9h25"
+    }
+  ],
+  "scope": "production final-publication ML/C under private syscall wrappers and tiny generated fixtures; no Photo/camera/SDK/EXglobal operation; does not establish hostile-writer atomic namespace CAS, power-loss durability or every legacy publication family",
+  "full_goal_complete": false
+}

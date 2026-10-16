@@ -1,0 +1,243 @@
+{
+  "state": "STOCK_AND_OXCAML_INSPECTOR_BUILD_ONLY_PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler_label": "stock",
+      "actual_parent_terminal": {
+        "tool": 55065,
+        "chunk": "dc8308",
+        "exit": 0,
+        "running_session": false
+      },
+      "build": {
+        "schema": "unison-semantic-inspector-build/1",
+        "complete": true,
+        "build_only": true,
+        "inspector_executions": 0,
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-coy927g6",
+        "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+        "source_sha256": {
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "src/semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+          "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+          "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/semanticDelta.ml": "08c3ec7b9e8d55479f12d53594488e02981e2e9f12a2f9dce0b085a4fc77b005",
+          "src/semanticDelta.mli": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "tools/semantic-inspect/inspect.ml": "a35eff9bda0dfff118358151962085684dfb24e6b4e8e1995e40e7f61ec455d5"
+        },
+        "runner_sha256": "c44281c870e5a08f6b13d8f6678198a38ee89ddff23fc5cfaf2f3738900162ca",
+        "build_exit": 0,
+        "command": [
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "-I",
+          "+unix",
+          "unix.cmxa",
+          "semanticHash_stubs.c",
+          "semanticFile_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "semanticFile.mli",
+          "semanticFile.ml",
+          "formatExtension.mli",
+          "formatExtension.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "xmpMerge.mli",
+          "xmpMerge.ml",
+          "dngSemantic.mli",
+          "dngSemantic.ml",
+          "dngExtended.mli",
+          "dngExtended.ml",
+          "semanticDelta.mli",
+          "semanticDelta.ml",
+          "inspect.ml",
+          "-o",
+          "semantic-inspect"
+        ],
+        "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-coy927g6/semantic-inspect",
+        "binary_sha256": "901c8e8030264e1b73f001e325ac8a0452a5d91bc35d75a86d7994001516fce2"
+      },
+      "owner_closure": {
+        "child": {
+          "pid": 66049,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 66049,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/RESULT.json",
+          "bytes": 3236,
+          "sha256": "fa3c0c9230861afbe21cf5bfbbb4a5780bfa85ed3e42332323d8c36b46b691bf"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/SHARED-CLOSED.json",
+          "bytes": 424,
+          "sha256": "678dd2e9f57e27c500b450733ea8a8f769970b4be3aca23b9eccde921b607eb3"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/SHARED-START.json",
+          "bytes": 956,
+          "sha256": "10f1fbaa867abf25de0350e85dbe743f34358430ca5551eba9cb0673a0c3e6ed"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/SHARED-STDOUT.txt",
+          "bytes": 224,
+          "sha256": "cb52976ea116774f853497b351c8f4f1c7527ad7259728562f111e6e1fc509ba"
+        }
+      ]
+    },
+    {
+      "compiler_label": "ox",
+      "actual_parent_terminal": {
+        "tool": 36559,
+        "chunk": "52457c",
+        "exit": 0,
+        "running_session": false
+      },
+      "build": {
+        "schema": "unison-semantic-inspector-build/1",
+        "complete": true,
+        "build_only": true,
+        "inspector_executions": 0,
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-7vhcy9y6",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "source_sha256": {
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "src/semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+          "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+          "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/semanticDelta.ml": "08c3ec7b9e8d55479f12d53594488e02981e2e9f12a2f9dce0b085a4fc77b005",
+          "src/semanticDelta.mli": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "tools/semantic-inspect/inspect.ml": "a35eff9bda0dfff118358151962085684dfb24e6b4e8e1995e40e7f61ec455d5"
+        },
+        "runner_sha256": "c44281c870e5a08f6b13d8f6678198a38ee89ddff23fc5cfaf2f3738900162ca",
+        "build_exit": 0,
+        "command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "-I",
+          "+unix",
+          "unix.cmxa",
+          "semanticHash_stubs.c",
+          "semanticFile_stubs.c",
+          "semanticHash.mli",
+          "semanticHash.ml",
+          "semanticFile.mli",
+          "semanticFile.ml",
+          "formatExtension.mli",
+          "formatExtension.ml",
+          "xmpObservation.mli",
+          "xmpObservation.ml",
+          "xmpMerge.mli",
+          "xmpMerge.ml",
+          "dngSemantic.mli",
+          "dngSemantic.ml",
+          "dngExtended.mli",
+          "dngExtended.ml",
+          "semanticDelta.mli",
+          "semanticDelta.ml",
+          "inspect.ml",
+          "-o",
+          "semantic-inspect"
+        ],
+        "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-7vhcy9y6/semantic-inspect",
+        "binary_sha256": "f296cc824d1a1ec0d3edaa87175369aa0a8d9c8df6601eef1452b63b99d973c5"
+      },
+      "owner_closure": {
+        "child": {
+          "pid": 66117,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 66117,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/RESULT.json",
+          "bytes": 3238,
+          "sha256": "812a0d29221d6845c19b0672cc770b3ed6313b9d6d91d521ec2507c6a3fc69a3"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/SHARED-CLOSED.json",
+          "bytes": 424,
+          "sha256": "a889276205d0699de59e2b85ee03c14df83ff890d66f6be3dbb5f0c19f5b0fed"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/SHARED-START.json",
+          "bytes": 951,
+          "sha256": "1eb515c7ab984107ca14bb7c7737b8b4c2ccfa7ac610a793528c3ee56cd313b1"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/SHARED-STDOUT.txt",
+          "bytes": 221,
+          "sha256": "c3b986f6ea3b91148fbe63f061b5f15b6dc0511fa1dfe14d11e87c3ad66d3a6a"
+        }
+      ]
+    }
+  ],
+  "scope": "Serialonecompiler perbuild under canonicalUnison00..07; no inspector/SDK/Adobe/Photo payload execution. xmpMerge dependency restored. Realcamera eligibility/receiving unqualified.",
+  "pure_command_controls_terminal": {
+    "chunk": "52d0f1",
+    "exit": 0,
+    "running_session": false
+  }
+}

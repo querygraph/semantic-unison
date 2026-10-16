@@ -1,0 +1,39 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/receipts_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.002s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 40127,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "four synthetic two-helper SDK verdict/settlement/known-live evidence audit groups; no SDK/native probe/payload/EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/receipts.py": "2f50e224ba7e9fa12005d4a3e85be07cc374771febcbde7c2279f1646045ddee",
+    "tests/sdk_multifile/receipts_test.py": "83ef8de65e3b2cf37313d53576dc015882b80c4a3bc31931926bc23d7a5523eb",
+    "tests/camera_sdk_concurrency/combined.py": "fe5e3e78f4ca66ae3e6ae5f0f17323513ce9c1c47f1eea33330d71b806087026",
+    "tests/camera_sdk_concurrency/combined_test.py": "a17f3e20adaec92f10b86b6aa5958a494150b239e6398e843b34d2a270d9ed92",
+    "tests/camera_sdk_concurrency/live_records.py": "bdd2259f03379d27451a60ab8f6290deb88ff64f2ad0a1b0dbd396a0a1908366"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "50b3f7",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

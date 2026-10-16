@@ -1,0 +1,125 @@
+{
+  "schema": "unison-camera-sdk-kernel-source-controls/1",
+  "scope": "18 original tiny/fake controls; no SDK/Adobe/camera payload/EXglobal",
+  "actual_parent_terminal": {
+    "chunk": "b1d9e9",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "artifacts": [
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-sdk-final-controls-a3aio3pu/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "9d74644f339765b415370f04f2a7b392ece5290b3c085f9fcdb94921f07ccfd5"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-sdk-final-controls-a3aio3pu/SHARED-START.json",
+      "bytes": 1204,
+      "sha256": "36a1f45bee3c76fbf8bd4d4bbba1cbc386c20b520888b9ef69e59ab18626fd13"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-sdk-final-controls-a3aio3pu/SHARED-STDERR.txt",
+      "bytes": 117,
+      "sha256": "92f33dbe830c1260c382f6ed1abc0b484089b08767e8010459c169f7995afaad"
+    },
+    {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-sdk-final-controls-a3aio3pu/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "closure": {
+    "child": {
+      "pid": 79657,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 79657,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/artifact_pins.py",
+      "bytes": 2192,
+      "sha256": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 36019,
+      "sha256": "73d83116d266596f18b3dc10afefadc7283577275c1480471e59ea52897e3829"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/controls.py",
+      "bytes": 341,
+      "sha256": "2e7640a660c525dcb89ff2106e4e08c3533a10682f62c1e6e8ab589f24590a8b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_audit.py",
+      "bytes": 4771,
+      "sha256": "cdfea583ad0e43548ce7463336c8025ff90fbdd50e9c3f66f0a964882340dca2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_audit_test.py",
+      "bytes": 4333,
+      "sha256": "4363a2451509ad296b427eb43d4cd30bd9bcbd482e52ce05d56fa87443bca200"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_seed.py",
+      "bytes": 3916,
+      "sha256": "7fdb1d09e507853d4ec73cc92d924cf1ed7ef181e538d6a566ee6b66676c5570"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_seed_test.py",
+      "bytes": 3626,
+      "sha256": "d3627ea7cfdfe1eceb317237cca4d79145d9f89bb2a93dcf5e398ec0d1708fd0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_transport.py",
+      "bytes": 3897,
+      "sha256": "3b38101433064705d02424d031d6ee88d300387dd8ff3e9a2e0f821e06cea5d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_transport_test.py",
+      "bytes": 2923,
+      "sha256": "65fa013013597a15f96fc11ee6bc9b8b713688e4445e59f9319a23f542459c5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case.py",
+      "bytes": 5877,
+      "sha256": "264e23a8099dab29269604bea5c708431294472ac704f9d6ad3bc3f2b23a86f2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/close.py",
+      "bytes": 1628,
+      "sha256": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 10664,
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/records.py",
+      "bytes": 5765,
+      "sha256": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+    }
+  ],
+  "runtime_qualified": false,
+  "remaining": "Pinned owner/admission/inherited IOCPU/SDK ledger lifecycle before any fresh runtime request"
+}

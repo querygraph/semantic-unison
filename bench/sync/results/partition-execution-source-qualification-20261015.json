@@ -1,0 +1,110 @@
+{
+  "state": "PARTITION_EXECUTION_SOURCE_WIRED_PURE_QUALIFIED_UNALLOCATED",
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v8.json",
+    "bytes": 52801,
+    "sha256": "592bc45f637269a04e64844fd4761e0993ac7074de4d2574995e0ffcaa80f93b"
+  },
+  "controller_sources": {
+    "bench/sync/run_bounded.py": "2ce32047a10dedb148d6382fd90d43a0cdac30c26118d60210656a81a481334b",
+    "bench/sync/batch_audit.py": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0",
+    "bench/sync/prepare_plan.py": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864",
+    "bench/sync/run.py": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b",
+    "bench/sync/fixtures.py": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699",
+    "bench/sync/partitions.py": "f530a60534f655ddd0f97f111b6c9bff150b9958a33ba6d7eb47166aaabe1e50",
+    "bench/sync/measure.py": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "bench/sync/launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+  },
+  "actual_pure_controls": {
+    "parser_selection_allocation_and_planner_terminal": {
+      "chunk": "65f3ff",
+      "exit_code": 0
+    },
+    "partition_merge_terminal": {
+      "chunk": "afba6b",
+      "exit_code": 0
+    },
+    "unpartitioned_compatibility_terminal": {
+      "chunk": "fcc3b0",
+      "exit_code": 0
+    }
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 29520,
+      "sha256": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run_bounded.py",
+      "bytes": 7163,
+      "sha256": "2ce32047a10dedb148d6382fd90d43a0cdac30c26118d60210656a81a481334b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/fixtures.py",
+      "bytes": 3352,
+      "sha256": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4442,
+      "sha256": "f530a60534f655ddd0f97f111b6c9bff150b9958a33ba6d7eb47166aaabe1e50"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/prepare_plan.py",
+      "bytes": 7954,
+      "sha256": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partition_dispatch_test.py",
+      "bytes": 4291,
+      "sha256": "fedafa5f138df38ed1ff43fa2f08c3acdb2355cd9a90156dbe274282bd80ff45"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions_test.py",
+      "bytes": 3244,
+      "sha256": "144ac7b878d4f6c6093a43f1f7bbe534782740f77c7fb27a1eca217c9409d05e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/prepare_plan_test.py",
+      "bytes": 2442,
+      "sha256": "dc61c903a25c133ef2a3746b3dc67f2187aa0a400947207895b7efadb7d93bd2"
+    }
+  ],
+  "per_part": {
+    "configurations": 3,
+    "warmups": 3,
+    "measured_updates": 15,
+    "cli_invocations": 54,
+    "aggregate_seconds": 7200,
+    "proposed_cpu_credits": 18
+  },
+  "full_matrix": {
+    "parts": 6,
+    "configurations": 18,
+    "warmups": 18,
+    "measured_updates": 90,
+    "cli_invocations": 324
+  },
+  "pure_checks": [
+    "Actual runner parser reaches the mocked metadata boundary with2048MiB/twofiles/canonical partition; six invalid CLI configurations refuse earlier",
+    "Seven invalid dimensions, three invalid configuration universes and seven allocation mismatches reject",
+    "TwoGiB files and8GiB total admitted arithmetically, without fixture creation",
+    "All six generated partition commands have unique outputs and sum to all324 CLI invocations",
+    "Historical full-matrix/partition merge accounting passes; not new measurement or aggregate closure"
+  ],
+  "scope": "Pure source/controller qualification only. No child/native/Unison/compiler/SDK/Photo/benchmark dispatch. Actual large-file execution and every part parent/aggregate closure remain unproved. New scheduling required; old128 allocation consumed.",
+  "runtime_started": false,
+  "credits_reserved": 0
+}

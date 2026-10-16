@@ -1,0 +1,108 @@
+{
+  "schema": "unison-sdk-shared-parent-audit/1",
+  "state": "SOURCE_AND_FAKE_COMPONENT_PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit.py",
+      "bytes": 3335,
+      "sha256": "e4e09d4324e3c8f5fa7ecfa17af51c3dcb49b421ad4d733dc919e3ab4a601d8a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit_test.py",
+      "bytes": 2752,
+      "sha256": "1c967e6c55872562d6c6d9b2711ec0a9cc5b14721c09b846eae0c5ec68826cc5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_kernel.py",
+      "bytes": 2661,
+      "sha256": "76cf82ba5e4e5b12717522d8b9df30f5cc4dab7bec1ee456d0f26f6a4b4c756f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_component.py",
+      "bytes": 4387,
+      "sha256": "2258ce982bfe339b22de999ca5204ed7c8d909b99311db03ff272fc808e85433"
+    }
+  ],
+  "runs": [
+    {
+      "actual_terminal": {
+        "chunk": "381db4",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-source-20261016a/SHARED-START.json",
+          "bytes": 1122,
+          "sha256": "f25413f6d50c8ccbe4a8c9f3c3b676317e4d6bb4fee5ffe14d4e83dfffdec1c5"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-source-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5b2f4572fb39a53405aff3ea178dd6ab6dffa79bf13748830d86e105d64b0105"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-source-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-source-20261016a/SHARED-STDERR.txt",
+          "bytes": 107,
+          "sha256": "5684d13977a1f6829bcd5f644c72b35ab6f8d42951d571a5f230c4cc35a359f3"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk": "2096d3",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/SHARED-START.json",
+          "bytes": 1204,
+          "sha256": "cdba32a3d3fd71f3e0f054d30398801748a383a07f28d6439196bfae17e49536"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "1824bb7cad92abc89ef33ee58d3c471b8b1f4eb2bc4de60b05d4248d03efb142"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/SHARED-STDOUT.txt",
+          "bytes": 6884,
+          "sha256": "1ee6dffba46c2327906696c9fc8b441641572adda37d9bed7fafedb3d257b70d"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/controls/RESULT.json",
+          "bytes": 12938,
+          "sha256": "bdf2246d99da4ae370d154f686472ab2567bd950bb7d0c27ec2a18bca78baf1a"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/controls/pass/RESULT.json",
+          "bytes": 55300,
+          "sha256": "613512879038f61b7a42acb1daf45dd59e65e039e8fef569a0c6d353e44c0093"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/controls/warning/RESULT.json",
+          "bytes": 8565,
+          "sha256": "e9a0875c7f4574371170c7e3ab81cc676852479b55569d66bb8592449e344070"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-parent-audit-composed-20261016a/controls/missing/RESULT.json",
+          "bytes": 8205,
+          "sha256": "410911aa11694531190aa1e2234f9ac1b01fc5da7e902829abf28291f39de497"
+        }
+      ]
+    }
+  ],
+  "scope": "4new parentprefixgroups+5reused resultgroups; complete12calls, failedknownprefix and unknownrefusal. Composed16actualoriginalfakehelpers/12pass+2warning+2missing eachaudited clientwait/groupbeforeleaderreap/command/journal. Aggregate/FDrelease authorityFALSE; noSDK/payload/EXIO or dispatchertarget/nativeadmission.",
+  "full_goal_complete": false
+}

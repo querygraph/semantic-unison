@@ -87,21 +87,19 @@ let registerIOClose io f =
   ioCleanups := (io, f) :: !ioCleanups
 
 let lostConnectionHandler ch =
-  let aux ((i, o), f) =
-    if i = ch || o = ch then begin
-      f ();
-      false (* Each handler is run only once *)
-    end else
-      true
-  in
-  ioCleanups := Safelist.filter aux !ioCleanups
+  (* Closing descriptors can synchronously fail pending I/O and re-enter this
+     handler. Detach first, preserving any handlers registered during cleanup. *)
+  let pending, remaining = List.partition
+    (fun ((i, o), _) -> i = ch || o = ch) !ioCleanups in
+  ioCleanups := remaining;
+  Safelist.iter (fun (_, f) -> try f () with _ -> ()) pending
 
 let lostConnection ch =
   begin try lostConnectionHandler ch with _ -> () end;
   Lwt.fail (Util.Fatal "Lost connection with the server")
 
 let catchIoErrors ch th =
-  Lwt.catch th
+  BorrowedWork.catch th
     (fun e ->
        match e with
          Unix.Unix_error(Unix.ECONNRESET, _, _)
@@ -220,11 +218,11 @@ let peekWithBlocking conn =
 let rec sendOutput conn =
   catchIoErrors conn.channel
     (fun () ->
-       begin if conn.opened then
+       BorrowedWork.bind (fun () -> if conn.opened then
          Lwt_unix.write conn.channel conn.buffer 0 conn.length
        else
          Lwt.return conn.length
-       end >>= fun len ->
+       ) (fun len ->
        debugV (fun() ->
          Util.msg "dump: %s\n"
            (String.escaped (Bytes.sub_string conn.buffer 0 len)));
@@ -233,12 +231,12 @@ let rec sendOutput conn =
        if conn.length > 0 then
          Bytes.blit
            conn.buffer len conn.buffer 0 conn.length;
-       Lwt.return ())
+       Lwt.return ()))
 
 let rec fillBuffer2 conn s pos len =
   if conn.length = bufferSize then
-    sendOutput conn >>= fun () ->
-    fillBuffer2 conn s pos len
+    BorrowedWork.bind (fun () -> sendOutput conn) (fun () ->
+      fillBuffer2 conn s pos len)
   else begin
     let l = min (len - pos) (bufferSize - conn.length) in
     Bytearray.blit_to_bytes s pos conn.buffer conn.length l;
@@ -255,15 +253,15 @@ let rec fillBuffer conn l =
       assert (pos >= 0);
       assert (len >= 0);
       assert (pos <= Bytearray.length s - len);
-      fillBuffer2 conn s pos len >>= fun () ->
-      fillBuffer conn rem
+      BorrowedWork.bind (fun () -> fillBuffer2 conn s pos len) (fun () ->
+        fillBuffer conn rem)
   | [] ->
       Lwt.return ()
 
 let rec flushBuffer conn =
   if conn.length > 0 then
-    sendOutput conn >>= fun () ->
-    flushBuffer conn
+    BorrowedWork.bind (fun () -> sendOutput conn) (fun () ->
+      flushBuffer conn)
   else
     Lwt.return ()
 
@@ -276,19 +274,46 @@ type kind = Normal | Idle | Last | Urgent
 type outputQueue =
   { mutable available : bool;
     mutable canWrite : bool;
+    mutable failure : exn option;
     mutable flowControl : bool;
     writes : (kind * (unit -> unit Lwt.t) * unit Lwt.t) Queue.t;
     urgentWrites : (kind * (unit -> unit Lwt.t) * unit Lwt.t) Queue.t;
     idleWrites : (kind * (unit -> unit Lwt.t) * unit Lwt.t) Queue.t;
     flush : outputQueue -> unit Lwt.t }
 
+let failPending thread error =
+  (* A wakeup may run an [ignore_result] continuation that raises. Teardown
+     must still settle the other independent operations. *)
+  if (try Lwt.poll thread = None with _ -> false) then
+    try Lwt.wakeup_exn thread error with _ -> ()
+
+let failOutputQueue q error =
+  let error = match q.failure with
+    | Some error -> error
+    | None -> q.failure <- Some error; error in
+  q.available <- false;
+  (* Remove closures retaining reply buffers before waking their waiters. The
+     currently executing action settles separately, after its I/O has stopped. *)
+  let pending = ref [] in
+  List.iter (fun queue ->
+    while not (Queue.is_empty queue) do
+      let _,_,res = Queue.take queue in pending := res :: !pending
+    done) [q.writes; q.urgentWrites; q.idleWrites];
+  List.iter (fun res -> failPending res error) !pending
+
 let rec performOutputRec q (kind, action, res) =
-  action () >>= fun () ->
-  Lwt.wakeup res ();
-  popOutputQueues q
+  BorrowedWork.catch
+    (fun () ->
+       BorrowedWork.bind
+         (fun () -> match q.failure with Some e -> Lwt.fail e | None -> action ()) (fun () ->
+       match q.failure with
+       | Some e -> Lwt.fail e
+       | None -> Lwt.wakeup res (); popOutputQueues q))
+    (fun e -> failOutputQueue q e; failPending res e; Lwt.fail e)
 
 and popOutputQueues q =
-  if not (Queue.is_empty q.urgentWrites) then
+  if q.failure <> None then Lwt.return ()
+  else if not (Queue.is_empty q.urgentWrites) then
     performOutputRec q (Queue.take q.urgentWrites)
   else if not (Queue.is_empty q.writes) && q.canWrite then
     performOutputRec q (Queue.take q.writes)
@@ -303,7 +328,9 @@ and popOutputQueues q =
 
 (* Perform an output action in an atomic way *)
 let performOutput q kind action =
-  if q.available && (kind = Urgent || q.canWrite) then begin
+  match q.failure with
+  | Some e -> Lwt.fail e
+  | None -> if q.available && (kind = Urgent || q.canWrite) then begin
     q.available <- false;
     performOutputRec q (kind, action, Lwt.wait ())
   end else begin
@@ -318,12 +345,14 @@ let performOutput q kind action =
   end
 
 let allowWrites q =
+  if q.failure = None then begin
   assert (not q.canWrite);
   q.canWrite <- true;
   q.available <- false;
   (* We yield to let the receiving thread restart and to let some time
      to the requests to be processed *)
   Lwt.ignore_result (Lwt_unix.yield () >>= fun () -> popOutputQueues q)
+  end
 
 let disableFlowControl q =
   q.flowControl <- false;
@@ -335,7 +364,7 @@ let outputQueueIsEmpty q = q.available
    handshake. Flow control is part of RPC protocol and must be enabled
    only after RPC version handshake is complete. *)
 let makeOutputQueue isServer flush =
-  { available = true; canWrite = true; flowControl = false;
+  { available = true; canWrite = true; failure = None; flowControl = false;
     writes = Queue.create (); urgentWrites = Queue.create ();
     idleWrites = Queue.create ();
     flush = flush }
@@ -383,7 +412,8 @@ let maybeFlush pendingFlush q buf =
   (* If we are doing flow control and we can write, we need to send
      a write token even when the buffer is empty. *)
   if
-    !pendingFlush || (buf.length = 0 && not (q.flowControl && q.canWrite))
+    q.failure <> None || !pendingFlush ||
+    (buf.length = 0 && not (q.flowControl && q.canWrite))
   then
     Lwt.return ()
   else begin
@@ -417,10 +447,19 @@ let makeConnection isServer inCh outCh =
       makeOutputQueue isServer
         (fun q -> maybeFlush pendingFlush q outputBuffer) }
 
+let stopConnectionOutput conn =
+  conn.outputBuffer.opened <- false;
+  failOutputQueue conn.outputQueue (Util.Fatal "Lost connection with the server")
+
 let closeConnection conn =
-  begin try Lwt_unix.close conn.inputBuffer.channel with Unix.Unix_error _ -> () end;
-  begin try Lwt_unix.close conn.outputBuffer.channel with Unix.Unix_error _ -> () end;
-  conn.outputBuffer.opened <- false
+  if conn.outputBuffer.opened then begin
+    (* Mark terminal before waking any owner continuations. Repeated/reentrant
+       closes must not close a reused descriptor. *)
+    stopConnectionOutput conn;
+    begin try Lwt_unix.close conn.inputBuffer.channel with _ -> () end;
+    if conn.outputBuffer.channel <> conn.inputBuffer.channel then
+      begin try Lwt_unix.close conn.outputBuffer.channel with _ -> () end
+  end
 
 let connectionIO conn =
   (conn.inputBuffer.channel, conn.outputBuffer.channel)
@@ -453,8 +492,8 @@ let dumpIdle conn l =
 let dumpUrgent conn l =
   performOutput conn.outputQueue Urgent
     (fun () ->
-       fillBuffer conn.outputBuffer l >>= fun () ->
-       flushBuffer conn.outputBuffer)
+       BorrowedWork.bind (fun () -> fillBuffer conn.outputBuffer l) (fun () ->
+         flushBuffer conn.outputBuffer))
 
 let enableFlowControl conn isServer =
   let rec waitDrain () =
@@ -654,15 +693,20 @@ let clientCloseRootConnection = function
 type ('a, 'b, 'c) resourceC =
   { register : 'a -> 'a; release : 'a -> 'b; release_noerr : 'a -> 'c }
 let resourceWithConnCleanup close close_noerr =
-  let h = Hashtbl.create 17 in
+  (* Resources may contain mutable records/atomics. Structural hash/equality
+     changes as those objects are used and can also alias distinct resources.
+     These short owner-thread lists deliberately use stable physical identity. *)
+  let resources = ref [] in
   let closeAll () =
-    Hashtbl.iter (fun x _ -> ignore (close_noerr x)) h;
-    Hashtbl.clear h
+    let pending = !resources in
+    resources := [];
+    Safelist.iter (fun x -> ignore (close_noerr x)) pending
   in
   at_conn_close closeAll;
-  let register x = Hashtbl.add h x true; x in
-  let release x = Hashtbl.remove h x; close x in
-  let release_noerr x = Hashtbl.remove h x; close_noerr x in
+  let register x = resources := x :: !resources; x in
+  let unregister x = resources := Safelist.filter (fun y -> x != y) !resources in
+  let release x = unregister x; close x in
+  let release_noerr x = unregister x; close_noerr x in
   { register; release; release_noerr }
 
 let lwtRegionWithConnCleanup sz =
@@ -876,12 +920,13 @@ packet to invoke a function remotely on the client.  In this case, the
 two switch roles.)
 *)
 
-let receivePacket conn =
+let receivePacket ?maxBytes conn =
   (* Get the length of the packet *)
   let int_buf = Bytearray.create intSize in
   grab conn.inputBuffer int_buf intSize >>= (fun () ->
   let length = decodeInt int_buf 0 in
-  assert (length >= 0);
+  if length < 0 || (match maxBytes with Some n -> length > n | None -> false) then
+    raise (Util.Fatal "RPC packet length exceeds command limit");
   (* Get packet *)
   let buf = Bytearray.create length in
   grab conn.inputBuffer buf length >>= (fun () ->
@@ -897,6 +942,9 @@ type servercmd =
   connection -> Bytearray.t ->
   ((Bytearray.t * int * int) list -> (Bytearray.t * int * int) list) Lwt.t
 let serverCmds = ref (Util.StringMap.empty : servercmd Util.StringMap.t)
+let serverArgLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
+type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
+let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
 
 type serverstream =
   connection -> Bytearray.t -> unit
@@ -930,15 +978,13 @@ let ((marshalHeader, unmarshalHeader) : header marshalingFunctions) =
   makeMarshalingFunctions (defaultMarshalingFunctions mheader) "rsp"
 
 let processRequest conn id cmdName buf =
+  if not conn.outputBuffer.opened then
+    Lwt.fail (Util.Fatal "Lost connection with the server") else
   let cmd =
     try Util.StringMap.find cmdName !serverCmds
     with Not_found -> raise (Util.Fatal (cmdName ^ " not registered!"))
   in
-  Lwt.try_bind (fun () -> cmd conn buf)
-    (fun marshal ->
-       debugE (fun () -> Util.msg "Sending result (id: %d)\n" (decodeInt id 0));
-       dump conn ((id, 0, intSize) :: marshalHeader conn NormalResult (marshal [])))
-    (function
+  let sendException = function
        Util.Transient s ->
          debugE (fun () ->
            Util.msg "Sending transient exception (id: %d)\n" (decodeInt id 0));
@@ -948,7 +994,26 @@ let processRequest conn id cmdName buf =
            Util.msg "Sending fatal exception (id: %d)\n" (decodeInt id 0));
          dump conn ((id, 0, intSize) :: marshalHeader conn (FatalExn s) [])
      | e ->
-         Lwt.fail e)
+         Lwt.fail e
+  in
+  let started = ref false in
+  let reply_started = ref false in
+  let dispatch () =
+    if !started then invalid_arg "RPC server scope invoked its callback twice";
+    started := true;
+    BorrowedWork.try_bind (fun () -> cmd conn buf)
+      (fun marshal ->
+         debugE (fun () -> Util.msg "Sending result (id: %d)\n" (decodeInt id 0));
+         let reply = (id, 0, intSize) :: marshalHeader conn NormalResult (marshal []) in
+         reply_started := true;
+         dump conn reply)
+      (fun error -> if !reply_started then Lwt.fail error else sendException error)
+  in
+  match Util.StringMap.find_opt cmdName !serverScopes with
+  | None -> dispatch ()
+  | Some scope ->
+      BorrowedWork.catch (fun () -> scope conn buf dispatch)
+        (fun e -> if !started then Lwt.fail e else sendException e)
   (* With the current RPC protocol it is not possible to recover from situations
      where an RPC packet is not completely transmitted (due to an interrupted
      write syscall). The other side will hang forever, waiting for the complete
@@ -961,6 +1026,15 @@ let processRequest conn id cmdName buf =
      Util.Fatal, unless the connection is already known to be broken. Likewise,
      other exception handlers than the one just above must avoid writing out
      additional data to the RPC connection. *)
+
+let processDetachedRequest conn id cmdName buf =
+  BorrowedWork.catch (fun () -> processRequest conn id cmdName buf)
+    (function
+     | Util.Fatal "Lost connection with the server" when not conn.outputBuffer.opened ->
+         (* Work may settle after a persistent server accepted another client.
+            Its expected old-connection failure belongs to that closed session. *)
+         Lwt.return ()
+     | error -> Lwt.fail error)
 
 let streamAbortedSrc = ref 0
 let streamAbortedDst = ref false
@@ -1010,13 +1084,19 @@ let newMsgId () = incr ids; if !ids = hugeint then ids := 2; !ids
 
 (* Threads waiting for a response from the other side *)
 let receivers = ref MsgIdMap.empty
+let receiverLimits = ref MsgIdMap.empty
 let resetReceivers () =
-  receivers := MsgIdMap.empty
+  let pending = !receivers in
+  receivers := MsgIdMap.empty;
+  receiverLimits := MsgIdMap.empty;
+  MsgIdMap.iter (fun _ reply ->
+    failPending reply (Util.Fatal "Lost connection with the server")) pending
 let () = at_conn_close resetReceivers
 
 let find_receiver id =
   let thr = MsgIdMap.find id !receivers in
   receivers := MsgIdMap.remove id !receivers;
+  receiverLimits := MsgIdMap.remove id !receiverLimits;
   thr
 
 (* Receiving thread: read a message and dispatch it to the right
@@ -1040,16 +1120,17 @@ let rec receive conn =
       let req = unmarshalHeader conn buf in
       begin match req with
         Request cmdName ->
-          receivePacket conn >>= (fun buf ->
+          receivePacket ?maxBytes:(try Some (Util.StringMap.find cmdName !serverArgLimits)
+            with Not_found -> None) conn >>= (fun buf ->
           (* We yield before starting processing the request.
              This way, the request may call [Lwt_unix.run] and this will
              not block the receiving thread. *)
           Lwt.ignore_result
             (Lwt_unix.yield () >>= (fun () ->
-             processRequest conn id cmdName buf));
+             processDetachedRequest conn id cmdName buf));
           receive conn)
       | NormalResult ->
-          receivePacket conn >>= (fun buf ->
+          receivePacket ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits) conn >>= (fun buf ->
           Lwt.wakeup (find_receiver num_id) buf;
           receive conn)
       | TransientExn s ->
@@ -1071,18 +1152,30 @@ let rec receive conn =
     end)
   end
 
-let wait_for_reply id =
+let wait_for_reply ?maxBytes id =
   let res = Lwt.wait () in
+  try
   receivers := MsgIdMap.add id res !receivers;
+  (match maxBytes with None -> () | Some n ->
+    receiverLimits := MsgIdMap.add id n !receiverLimits);
   (* We yield to let the receiving thread restart.  This way, the
      thread may call [Lwt_unix.run] and this will not block the
      receiving thread. *)
-  Lwt.catch
+  BorrowedWork.catch
     (fun () ->
-       res >>= (fun v -> Lwt_unix.yield () >>= (fun () -> Lwt.return v)))
-    (fun e -> Lwt_unix.yield () >>= (fun () -> Lwt.fail e))
+       BorrowedWork.bind (fun () -> res) (fun v ->
+         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return v)))
+    (fun e -> BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
+  with error ->
+    (match MsgIdMap.find_opt id !receivers with
+     | None -> ()
+     | Some pending -> ignore (find_receiver id); failPending pending error);
+    raise error
 
 let registerSpecialServerCmd
+    ?maxResult
+    ?maxResultForArgs
+    ?withScope
     (cmdName : string)
     marshalingFunctionsArgs
     marshalingFunctionsResult
@@ -1099,23 +1192,42 @@ let registerSpecialServerCmd
   (* Create a server function and remember it *)
   let server conn buf =
     let args = unmarshalArgs conn buf in
-    serverSide conn args >>= (fun answer ->
+    BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
     Lwt.return (marshalResult conn answer))
   in
   serverCmds := Util.StringMap.add cmdName server !serverCmds;
+  (match withScope with
+   | None -> ()
+   | Some scope ->
+       serverScopes := Util.StringMap.add cmdName
+         (fun conn buf f -> scope conn (unmarshalArgs conn buf) f) !serverScopes);
   (* Create a client function and return it *)
   let client conn serverArgs =
+    match conn.outputQueue.failure with
+    | Some e -> Lwt.fail e
+    | None ->
+    let maxBytes = match maxResultForArgs with
+      | None -> maxResult
+      | Some limit ->
+          let n = limit serverArgs in
+          if n < 0 then invalid_arg "RPC result limit must be nonnegative";
+          Some (match maxResult with None -> n | Some cap -> min n cap)
+    in
     let id = newMsgId () in (* Message ID *)
     assert (id >= 0); (* tracking down an assert failure in receivePacket... *)
     let request =
       encodeInt id ::
       marshalHeader conn (Request cmdName) (marshalArgs conn serverArgs [])
     in
-    let reply = wait_for_reply id in
+    let reply = wait_for_reply ?maxBytes id in
     debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
-    dump conn request >>= (fun () ->
-    reply >>= (fun buf ->
-    Lwt.return (unmarshalResult conn buf)))
+    BorrowedWork.try_bind (fun () -> dump conn request)
+      (fun () -> BorrowedWork.bind (fun () -> reply) (fun buf -> Lwt.return (unmarshalResult conn buf)))
+      (fun e ->
+         (match MsgIdMap.find_opt id !receivers with
+          | None -> ()
+          | Some pending -> ignore (find_receiver id); failPending pending e);
+         Lwt.fail e)
   in
   client
 
@@ -1123,6 +1235,14 @@ let registerServerCmd name mArg mRet f =
   registerSpecialServerCmd
     name (defaultMarshalingFunctions mArg)
          (defaultMarshalingFunctions mRet) f
+
+let registerBoundedServerCmd ?withScope ?maxResultForArgs
+    name ~maxArgs ~maxResult mArg mRet f =
+  if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
+  let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult name
+    (defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in
+  serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
+  command
 
 (* RegisterHostCmd is a simpler version of registerClientServer [registerServerCmd?].
    It is used to create remote procedure calls: the only communication
@@ -2195,12 +2315,11 @@ let forwardMsgToClient =
    the relevant functions. *)
 let commandLoop in_ch out_ch =
   Trace.runningasserver := true;
-  (* Restore prefs to their default values. It is possible to do here because
-     command line preferences are never parsed by the server process directly.
-     New preference values are going to be received from the client. Resetting
-     to defaults here prevents any values from a previous client session
-     leaking over to this session. *)
+  (* Reset every connection so a previous client's settings cannot leak into
+     this session. Endpoint-local configuration comes from this host's reserved
+     profile and startup options; ordinary preferences arrive from the client. *)
   Prefs.resetToDefaults ();
+  Prefs.loadEndpointLocal "Unison server options";
   (* Send header indicating to the client that it has successfully
      connected to the server *)
   let conn = makeConnection true in_ch out_ch in
@@ -2222,6 +2341,10 @@ let commandLoop in_ch out_ch =
        receive conn >>=
        Lwt.wait))
     (fun e ->
+       (* The socket server's I/O handler has already closed its descriptor.
+          Stop queued output here without closing a potentially reused fd.
+          This also settles replies waiting for a half-duplex write token. *)
+       stopConnectionOutput conn;
        match e with
          Util.Fatal "Lost connection with the server" ->
            debug (fun () -> Util.msg "Connection closed by the client\n");
@@ -2234,7 +2357,6 @@ let commandLoop in_ch out_ch =
                wait (n - 1)
              end
            in
-           conn.outputBuffer.opened <- false;
            wait 10
        | _ ->
            Lwt.fail e)
@@ -2314,7 +2436,9 @@ let waitOnPort hosts port =
          (* The client has closed its end of the connection *)
          if not (Prefs.read killServer) then handleClients ()
        and doCleanup socket =
-         begin try Lwt_unix.close socket with Unix.Unix_error _ -> () end;
+         (* Failing active I/O can raise from a resumed continuation. Always
+            sweep the remaining connection resources after closing. *)
+         begin try Lwt_unix.close socket with _ -> () end;
          if not (Prefs.read killServer) then runConnCloseHandlers true
        in
        try

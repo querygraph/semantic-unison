@@ -1,0 +1,12 @@
+{
+  "schema": "unison-sdk-shared-entry-lifecycle-scope-correction/1",
+  "original": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-shared-entry-lifecycle-actual-20261016.json",
+    "bytes": 5891,
+    "sha256": "e94aebdfd8d7d4e5cf3232e0cfc5ac2e7f1f2c31e0eae9c61df982ad1ce4e245"
+  },
+  "correction": "Original limits prose readonlytinybytehash is inaccurate: disposable tiny fixtures were0600. Their actual byte hashes and identities were checked, but this composition intentionally doubled plan preflight and does not qualify native0400 fixture mode. Canonical inventory/admission/interpreter doubles remain explicit. Original receipt and raw runtime artifacts unchanged.",
+  "native_readonly_fixture_gate_qualified_by_this_component": false,
+  "actual_closure_unchanged": true,
+  "sdk_calls": 0
+}

@@ -1,0 +1,203 @@
+{
+  "scope": "Actual production-object benchmark builds only; no SDK link/initialization/fixture generation/validation/measurement",
+  "compilers": {
+    "stock": {
+      "receipt": "/private/tmp/unison-current-adobe-bench-stock-build.json",
+      "receipt_sha256": "b4a399f67f692a6359a61ac111371df3f063f563d683c198b3436c72036956a9",
+      "build": {
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-_eyxvs7q",
+        "retained": true,
+        "production_snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e",
+        "linked_object_sha256": {
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt.cmi": "b880d873673e1843a2bce092821a99a4a9ab4f35b897acfe224e86d9918591cb",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt.cmx": "9c97ae7a95795babc5d3e2a8ca1542e3f667dedfa7ae1cfffbefaeae71eea745",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt.o": "b6fad37257954504c50c0a43c70fcd2b37f4956ec7568fe8be1aff016ab2f95b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/pqueue.cmi": "d028b85d4897c0af916b77c2498fc25cb26f123fef5b684824e2ad165088a437",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/pqueue.cmx": "b1fc200c0a0de19f087025d5fa77acc09044cb261b0de1494a48fffb3eada2a5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/pqueue.o": "2a7855dbbab937d22d0bfa165106c0b757fcb0d2e8b4e55fbd7390700c0455bd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/generic/lwt_unix_impl.cmi": "b35b9b5e5c7698dfe9dde295f27ee6cc402f0ff8092f081d80caf603e05c602f",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/generic/lwt_unix_impl.cmx": "87a832beb905282717a3bbfcefd39ccf35df4ecde725c88cf98d5125568972a3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/generic/lwt_unix_impl.o": "e0a2839bb6b316b7e6e217708f344e8536ece7c414c328b57ee2ecef496676d3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt_unix.cmi": "9b893fe5e3b78f650d6457209240f24be8071f3a109d5c5014afb4386f4e53fd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt_unix.cmx": "bcb271a898bbb7bc3a813f7a9f9ff1976aae9698d6051867f7c347b953baa260",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/lwt/lwt_unix.o": "e0f153a507d284a333d51e99ec4cff5522d66759b28059e846e0dc5a77795e63",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/borrowedWork.cmi": "50c4509f3a8ea8a31a36a743ea9ea0a69d3975ad93cc9177ad2699b08994b7c7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/borrowedWork.cmx": "4a244ee748f6ca77c9da481ae78267fdba6aef764883b637654799f63044a1d0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/borrowedWork.o": "4457643cbe66575143c37f2d4bef86364020a95721dffefdd800ef108cffb2ad",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/helperSupervisor_stubs.o": "a2f78a455c6c0ab0274b55d2ac2836f99fa7f0e59bb26e88b19e3d825492f1bf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/helperSupervisor.cmi": "facd13c11e15523397d0622745556e2a8fd86f5b335e19cb1d5263d167e703b2",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/helperSupervisor.cmx": "cb73b31b16af41f70f255b94baebf72a7dd3b14c146d343819963e438344a5e2",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/helperSupervisor.o": "3b023109f3c4abf7b5a3d21a2c8a1b701fc84902e6f260787fbca6685a500896",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticAdmission.cmi": "1a3e5beeb9a22aa929f1e8a134bf7fd994c661faa3c6641f84f7dd13d7960e35",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticAdmission.cmx": "80bfc9452d7f8436a3d2294360a90de21f0e8ab623ddc7e676c79ff696d75572",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticAdmission.o": "fc1a67c3b42194acd2f63c4ca9d30787346cf73370ded591dbc181b34063bd5a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/ioAdmission.cmi": "dff1880a16586a22fd7d06920b269489d0eb29b0633a8c252192d6166b53ef61",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/ioAdmission.cmx": "d796ef7ed6c978d9bc14f4d4467de33d191d56ed600fb29ea9a5fb5e34d23ab8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/ioAdmission.o": "a3d3828f878a4b7fce37918a3ccced52f02e33cc2e3ff698ce473c43d64f99a8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticMailbox.cmi": "703642d8150d789527d154929b7c255a2f0825e356edf71d0e5a5819f7e21a93",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticMailbox.cmx": "3057397ec9abbd555f810c6a6a8dce8890601eabc3e672b1f1dbb78ead76a0aa",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticMailbox.o": "a973e5d439a91d4f7391c6290866afd88523aa959c94395a3e0fe7d8b25767df",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticHash_stubs.o": "cdf76bfbfe14fe6489c5d55f8e6c57a84a8a3418bba7249a434a229da3ddcea8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticHash.cmi": "c5d82bb70cb9f8b5370db0e039cb04db7aa304446d8dd068e5a4f2753785a49c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticHash.cmx": "7e77591869bab0b1c6d13fa994f3c4e63afb360801eae9496f95888061531a1a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticHash.o": "09b0eeda4d4794e954943452a1585b86cc43d96678ef22cc4d64f218fdc57cf6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticFile_stubs.o": "55df31c4803afeb6d667958e8baa8e4b8c39f95a5e7a6932cebeaafd9493382d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticFile.cmi": "ea7dc43e6f0e6fda1bb02fc2e989a92fd54b7db3276e5fd252652727e9653da5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticFile.cmx": "4ed3d5950872a03dba6e9203434e44c8b2e53340f6c8f6fe1f9c4342a01520bf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticFile.o": "f51a9ae99c38923d05ed4147cd410339d5c01c212741472608d4ef36d7cf63c8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatRecognition.cmi": "9dc477295f8bd1024e9a159ff2824da30d2c90662ca535bdd8347a413b681103",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatRecognition.cmx": "1051d3cbb767ace8aa7fb352b15c7e5e15c516a978eb6420d7cec5bbdbae40c8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatRecognition.o": "d1eac01a68e12c8172462028f6c5b6482ef3d0025b5f59fb7b4abdc7e5e821a8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatExtension.cmi": "9da4a3925711474069b5f8489ee87464ab2c62e903c420e7a8612ba946eb3dee",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatExtension.cmx": "a9aa28466c02ae49b6eba933ae2b9bd59d2fe8bb784f7ef0737d5130b9a85ccd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/formatExtension.o": "17f20e82315a45554096fb10bb12bf005e8a2b3eb680116d809837be8a57b9bf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpObservation.cmi": "1879e959c6d9c630f747e153747bc304721b170e6bc678b4062e1f8d2c976e14",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpObservation.cmx": "68b6ee1bbfc0cc7ed17b639c60dfa47c3868c3610dd3bf949273392695351644",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpObservation.o": "d131001579e0ad110511d68acb8f545be3a8cd2ec8690c8507c2126291280c01",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpMerge.cmi": "44daea08d72de9fc5f8f18bce0b5f8296dd5c585084c6fee746166a2d14ff8a8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpMerge.cmx": "19ddf882b2c81b040766212f8c58bb20b5d123e09cbe8c520c9b7ed4fc743eb4",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/xmpMerge.o": "0546f989904adfd496822926664a8e7758e31fe887bb1cbbb4677a7c77e7eb24",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngSemantic.cmi": "53bd2123bf7deee0ab3fc50cbf718a3606ee4dd6689043ebeadf6598a346cccd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngSemantic.cmx": "0b90974ef483b9beddec16aedbdc9fda9baa2d8731a29994b11217d800af3a0a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngSemantic.o": "a9dc6cd8fff543712a3ce26b1d9e23457c103140b66bdb5142d3efa6a5f0a5ad",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticDelta.cmi": "23d3d6d9afc319cf37c36a59d76e3efd6d2fce05058e42c081a48478d06f35a7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticDelta.cmx": "2772dc741da86392e8a2c0a69f01f2a72461e44cfb2b53e3f894ee41729292a6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticDelta.o": "77102bb2062b266f9a944b1d103b387b407610ebe4e28b2e9060e896b0654418",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticWorkers.cmi": "3e2b795559095779946b660d09fb55f7d016860a4dca6d1ed26d24648fd2ce14",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticWorkers.cmx": "a9d60879e9cdac692375f0bb71281c39987dc0fa7b4591304d63d2cb64f0f887",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/semanticWorkers.o": "ca838e14ba6a26d8e89522c17d32c604f587c5c84965b8d65216f69d73540cf0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngValidation.cmi": "3d936851a899eecdb915395a74b42fcec7ec1255e3e96f61252d6acb1c84551d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngValidation.cmx": "090b9ad21b9e3b857d2d697f95df85bc81a04fabc50b59cff0fdc1b88ab53084",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dx4dj64e/src/dngValidation.o": "be62e2a7fdde5718144d367409c72219e2120a447f0e8231ee3efe6c6d836168"
+        },
+        "binary_sha256": "ca21f9a36d8d8f1ead575ffdf6dd0cf98c0bd8782f7194fc3263dc5b96934a4a",
+        "production_receipt_sha256": "f0b64ccb54747b1b18fe7fd4d0d899d8d78c5c733c03fea06e66bb1f866b2a6d",
+        "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true,
+        "native_calls_during_build": false
+      },
+      "compiler": {
+        "version": "5.2.0",
+        "executable_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+        "flags": [
+          "-I",
+          "+unix"
+        ]
+      }
+    },
+    "ox": {
+      "receipt": "/private/tmp/unison-current-adobe-bench-ox-build.json",
+      "receipt_sha256": "10001187bff11217d5a44a2467ac2290e0072a69571c7b81655b6078defbb890",
+      "build": {
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-m7y5izkz",
+        "retained": true,
+        "production_snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4",
+        "linked_object_sha256": {
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt.cmi": "84e5bea2e09b5414ba3665396a643c59de2820227ea5c2368684399dde5d8df3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt.cmx": "fcd0f6662885d3095ae0d5b7cfa0dcc9b1c4c785de889ebf2b1dc30fdcacb954",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt.o": "47401ea4283303875eddd09f3afc35b9df4b8d64f29571acf69191e7ad816752",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/pqueue.cmi": "50cdab77c8558807b9fd4c63f978cfaa4ad5b5c3ce55750fef886191f6a37073",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/pqueue.cmx": "a83163e8500b88331fd9a8a653dfd666d517e1d24852ae8bb7fb58778bbd58ae",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/pqueue.o": "2751e1c2eb1cf3616cc52ee7b6de436719b9b3411b570c995946d3adde249f92",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/generic/lwt_unix_impl.cmi": "9e04bbce40b6fa6421ca8137a40d3ff203ab1150bb065a159a207ec0a65039fc",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/generic/lwt_unix_impl.cmx": "cac895b380b6c20961ce3d6eeff34d832ae41bd2723f9dd5a5b2364315bedecb",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/generic/lwt_unix_impl.o": "34615da97de1d262678f1160ea8f8282e829bbf5a267cb006f0da79fedd9af22",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt_unix.cmi": "ea6f29a612074dec023063f6c61ca147bffd65ecfb7c0e662e03b54a3e209670",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt_unix.cmx": "ac071e9aafe03618f2d17959d5ce58ad1637fae0c9ef1f1c317ade47683cc825",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/lwt/lwt_unix.o": "e5b05bf28d533f7c12a1471a9933dba09ff005a7f25ea60cadf24bde12b17cf8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/borrowedWork.cmi": "84ee6734c3c82351068a85d3bcb84e0d0b8bd3920809428ac44487305e8b2328",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/borrowedWork.cmx": "de76888edc1e98e07807d734a12d0bf98d8d4416b7996883af9a1ba89be9dcb2",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/borrowedWork.o": "fb82e824edf9a3e7200dc766e17b05e0f6eace7b0820a1b28bf93f25f189db45",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/helperSupervisor_stubs.o": "136ae9633c260555b59543d582d0dce8515e482da99715ee1a36dfe8db49f05a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/helperSupervisor.cmi": "60767a03f55f102a315c11bbe57e3b189febaafaa229346ea052ebcebc0c6d51",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/helperSupervisor.cmx": "30dfba42db6c699432f7d1b8aac23582485f23da63fb1f0202e025e05e7f0f56",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/helperSupervisor.o": "6050ca3f6e8281d1c0669623b5e449a022abec2e2a0f1bf10b24050b61615a78",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticAdmission.cmi": "b21b363363d83bad915fb1b2c0d58dc3f77144664ca095cea1fd8f3b50f79433",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticAdmission.cmx": "fb363f306a6dae93d4044911f1e6084ef488ad3c5dce53d1c6479f68a10d6b3e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticAdmission.o": "20c1bcb2c439e63dba853ed4ab9038f8469ec8967951525427add4da165655b3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/ioAdmission.cmi": "b8e9734c6fe73ad5bb4e4e8616fdf45c16a2a48087ef6d2ad59c7b8f02aab8af",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/ioAdmission.cmx": "6dfb5b9002a3fc3de006609258ca6247bec8b87d06db768c6dc1a0efc47329e6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/ioAdmission.o": "40d3074a4894583086f90dd4186e059c605e7cd200ac82b7e9aeab2dc23d3242",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticMailbox.cmi": "e0cbf8cf7b6d7be460846e42e03659fce8bb751a4534e8c71c339945ff37d3d5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticMailbox.cmx": "6323147201ddbb7902b8ce4b8bdbda6d09d3d88d2f1273696e9783969d376cf9",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticMailbox.o": "00e9ca008d80661fd13826aa15f45ec8dabac52a75596792f0a009917b1889c3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticHash_stubs.o": "10856aba2a0709f6a03f9b16a87f0ab6a13040ad949126368ca49ea0fa69c47a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticHash.cmi": "576b34b939feaa7c33eb65bdef2436420b10a39d7cf7e713ad6ccafb1e5251bf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticHash.cmx": "6ff95f4be4f01a4ec2cbc98bb415f6ec9ce1543c074344a67d737c7b3eeeaf76",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticHash.o": "760c1121c98d69e20f82da4a011b915bd24119101fc01333e05e55dae1cf9b6d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticFile_stubs.o": "92565fe92792875db2c3b66e2272a6ed8ed0b2b21e746e780445e9f44472f655",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticFile.cmi": "5ad8a696f8f22ac55ec905ac4b0cc6365051826ec0599644713cc3be09048e1f",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticFile.cmx": "62da2e9764a726a641f2d83519723c91ad05ff1ca6069a8911868bda8f262f34",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticFile.o": "ee851ee2a6887dda616c83f7e7c54369c1162f24d8dd66a82120f57c884162e6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatRecognition.cmi": "3d10a9b0d1dcf2a8da485ce29e130799344984023231424cc458f26f7cef4abd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatRecognition.cmx": "eea4f2cfb41e561710bc7762a25ac8004e0edeb7a7a735f623e2e62a33f830c5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatRecognition.o": "c60e8c2b1c2216d2cb55310b3e51172810afff848abbd3a16493171ab414ffa6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatExtension.cmi": "34a1383a8f1b9715deb94779d310513908242536793ae464ffd5497e6e3d1de7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatExtension.cmx": "9c484327cffa88c19c88132f7bd3c0c049cc6fa76573e677d95e0550ee6edd34",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/formatExtension.o": "e7e73a169715ae51cecf2096a3cdfecf09ff98126c5e744f30c72c80d151ef2d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpObservation.cmi": "3ddd2db0d656792987da5cf4269a2d145a5953a619b22f3e86968caa126f54ab",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpObservation.cmx": "b74b62d07e0d17c2c6ddbb3c98dcad35723d09b09c593376301ab352605f3526",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpObservation.o": "1305f1d4ab58d684324de646584fea9414c9bfbbbf4f9290ae2ba546a103e5dd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpMerge.cmi": "55273137c955b4475be87c997f42f90f374510afd3257e812259295fe5e07036",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpMerge.cmx": "e26be363891bb950254dcb99a055d9d83f048d978620ee6eff10633b9e8a70ec",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/xmpMerge.o": "8129c771fa3a3f6690866fd2f6aef7327c56ce601715407987ec58cf1886538a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngSemantic.cmi": "992038d37ba09746274bedd9248f0b7966620eb544742b2d37c1fec471b46e18",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngSemantic.cmx": "55bee9c45a407b2bcd71394ad8a623acb0bb4d3a63dc2fd86119ac004ae0ed59",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngSemantic.o": "ca4c8ee558a8c9bb2d6b0d34a2eaec938bdd30f2c5be7aab781c8bfd8416b64b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticDelta.cmi": "33cab65a79954b05dc62517d854daf1d19321baaf4b1713ceca4f6180e162cbe",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticDelta.cmx": "fe8588f3f86f97f4f92a547950783da7181c32587af290bbb170c533e62f095d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticDelta.o": "758d6603067647dc92b58c784b581d9968ff338edf2082059b56d0e45f24dbb8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticWorkers.cmi": "d79785c9cf0a16fbac8e56ad4b568714eaad02adf75e38c367f21483c91aa7d1",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticWorkers.cmx": "438e573c8609ddda8cba9b70749cd7d0fdb5c2e1f1f3f7e588e4d1aed8afa887",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/semanticWorkers.o": "2b9251b3cc8845956fc207561a152ffc299d0db932f6129734eb52c7319dbfde",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngValidation.cmi": "f0f7ebdda5bc34b1d89d05e41e306a395907d06e375de83cc572ca11f2bc400f",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngValidation.cmx": "43e5aaa278f4b52cb2d8af20dada24ffde3f33d3e42f80e6b219f06c4d34e70d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z4mptgt4/src/dngValidation.o": "d96b9009ee8466ff545e61e7e3bc9b4c6e71a83001fef9d34c7a0b8ec81d09a0"
+        },
+        "binary_sha256": "3bab3684b7ad3f96288f7228841dd44365bf0dbbe8d9f05bf3b9e6c0139a942e",
+        "production_receipt_sha256": "776cfaaead27094f4be114cc285c2c1e3e847234086208c3808abe763bcf28eb",
+        "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true,
+        "native_calls_during_build": false
+      },
+      "compiler": {
+        "version": "5.2.0+ox",
+        "executable_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "flags": [
+          "-I",
+          "+unix"
+        ]
+      }
+    }
+  },
+  "controls": {
+    "unreleased-marker": {
+      "receipt": "/private/tmp/unison-adobe-bench-gate-qunx1v3d/receipt.json",
+      "sha256": "14288cdd79b4819f6f9f4fafcc3e1cdf62987053d248bebced110320f8610d77",
+      "timed_out_before_fixtures": true,
+      "source_scope": "Final callback ordering; before later metadata-only runner pin additions"
+    },
+    "prebuild-rejections": {
+      "receipt": "/private/tmp/unison-adobe-build-controls-8_7c5avo/RESULT.json",
+      "sha256": "68c0c3b9139fa2fa2afcc4f0fc61b43986c3f62620f050f600d437345aa8bf53",
+      "cases": [
+        {
+          "case": "missing-production",
+          "exit": 2,
+          "log": "/private/tmp/unison-adobe-build-controls-8_7c5avo/missing-production.log"
+        },
+        {
+          "case": "wrong-compiler",
+          "exit": 2,
+          "log": "/private/tmp/unison-adobe-build-controls-8_7c5avo/wrong-compiler.log"
+        },
+        {
+          "case": "over-budget",
+          "exit": 2,
+          "log": "/private/tmp/unison-adobe-build-controls-8_7c5avo/over-budget.log"
+        }
+      ]
+    }
+  },
+  "runner_sha256": "362049196e7b57295d9691262d53de86da77442e7897bf91276ce9702c191322"
+}

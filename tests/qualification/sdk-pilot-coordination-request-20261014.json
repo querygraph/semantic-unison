@@ -1,0 +1,53 @@
+{
+  "utc": "2026-10-14T17:49:45.059485+00:00",
+  "scope": "Request only; no native release inferred",
+  "goal": "Finite public DNG SDK v1 pilot of current checked Unison worker/hash/helper core; independent of Lightroom/previews",
+  "owner": "Unison implementation; Photo Root coordinates host/native window",
+  "limits": {
+    "sources_maximum": 7,
+    "logical_sdk_invocations_maximum": 12,
+    "cpu_credits_requested": 1,
+    "wall_deadline_seconds": 300,
+    "full_benchmark": false,
+    "photographic_inputs": false,
+    "Lightroom_calls": false,
+    "production_cache_or_catalog_writes": false
+  },
+  "artifacts": {
+    "bench/adobe/run.py": {
+      "bytes": 16058,
+      "sha256": "362049196e7b57295d9691262d53de86da77442e7897bf91276ce9702c191322"
+    },
+    "bench/adobe/fixtures.py": {
+      "bytes": 8888,
+      "sha256": "1e4512bb613320f64b517c316a59569d6f5af09c27decdbcbe3e2f86572c6869"
+    },
+    "bench/adobe/README.md": {
+      "bytes": 8687,
+      "sha256": "f82d95e60759e028bc8af7b3bc581829b3c8c23703777b399d8bb442387672e3"
+    },
+    "bench/adobe/results/current-core-build-handoff-20261014.json": {
+      "bytes": 25318,
+      "sha256": "252f3800828a726baeb814df787c2415bd3795a2f592202a031958bcafb0e9c0"
+    }
+  },
+  "command": [
+    "python3",
+    "/Users/alexy/src/unison/bench/adobe/run.py",
+    "--sdk-build",
+    "/private/tmp/unison-adobe-driver-build",
+    "--ocamlopt",
+    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+    "--production-build",
+    "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj",
+    "--pilot",
+    "--workers",
+    "1",
+    "--cpu-credit-budget",
+    "1",
+    "--keep-work",
+    "--output",
+    "/private/tmp/unison-current-sdk-pilot.json"
+  ],
+  "prerequisite": "Photo Root must explicitly coordinate a separate finite SDK slot. Do not reuse an earlier Lightroom/preview window. Validate source/binary pins and generated-input roster before dispatch."
+}

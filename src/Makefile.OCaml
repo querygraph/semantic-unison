@@ -44,6 +44,7 @@ ubase/projectInfo.ml: Makefile.ProjectInfo
 	ocaml make_tools.ml projectinfo NAME="$(NAME)" VERSION="$(VERSION)" MAJORVERSION="$(MAJORVERSION)" > $@
 
 clean::
+	-$(RM) semantic_mode_filter semantic_mode_filter.exe
 	cd ubase && $(RM) projectInfo.ml
 
 ####################################################################
@@ -69,12 +70,17 @@ OCAMLOBJS = \
           lwt/$(SYSTEM)/lwt_unix_impl.cmo lwt/lwt_unix.cmo \
           \
           features.cmo uutil.cmo case.cmo pred.cmo terminal.cmo \
-          fileutil.cmo name.cmo path.cmo fspath.cmo fs.cmo fingerprint.cmo \
+          fileutil.cmo name.cmo path.cmo fspath.cmo fileObservation.cmo stagePublication.cmo wholeFileClone.cmo fs.cmo fingerprint.cmo \
           abort.cmo osx.cmo fswatch.cmo propsdata.cmo \
           props.cmo fileinfo.cmo os.cmo lock.cmo clroot.cmo common.cmo \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
-          remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
-          fpcache.cmo update.cmo moves.cmo copy.cmo stasher.cmo \
+          borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
+          semanticHash.cmo semanticFile.cmo formatExtension.cmo formatRecognition.cmo \
+          xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
+          semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
+          validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
+          candidateValidation.cmo finalPublication.cmo targetBinding.cmo \
+          fpcache.cmo update.cmo moves.cmo cloneRange.cmo cloneLease.cmo copyRange.cmo copy.cmo stasher.cmo \
           files.cmo sortri.cmo recon.cmo transport.cmo \
           strings.cmo uicommon.cmo uitext.cmo test.cmo \
           main.cmo
@@ -87,7 +93,8 @@ OCAMLINCLUDES = -I +unix -I +str
 # C objects for both bytecode and native versions
 COBJS = osxsupport$(OBJ_EXT) pty$(OBJ_EXT) bytearray_stubs$(OBJ_EXT) \
         hash_compat$(OBJ_EXT) props_xattr$(OBJ_EXT) props_acl$(OBJ_EXT) \
-        copy_stubs$(OBJ_EXT) $(WINCOBJS)
+        copy_stubs$(OBJ_EXT) nativeCopyRange_stubs$(OBJ_EXT) wholeFileClone_stubs$(OBJ_EXT) fileObservation_stubs$(OBJ_EXT) stagePublication_stubs$(OBJ_EXT) finalPublication_stubs$(OBJ_EXT) helperSupervisor_stubs$(OBJ_EXT) \
+        semanticHash_stubs$(OBJ_EXT) semanticFile_stubs$(OBJ_EXT) $(WINCOBJS)
 
 ####################################################################
 ### User Interface setup
@@ -190,6 +197,129 @@ CAMLCFLAGS_X = $(CAMLCFLAGS) $(CAMLCFLAGS_FSM_X)
 
 .SUFFIXES:
 .SUFFIXES: .mli .cmi .ml .cmo .cmx .c .o .obj
+
+# Explicit rules are portable across make implementations. The selector uses
+# the configured compiler's complete version, not the ambient OCaml interpreter.
+semantic_mode_filter$(EXEC_EXT): semantic_mode_filter.ml
+	$(OCAMLC) -o $@ semantic_mode_filter.ml
+
+semanticHash.cmi: semanticHash.mli semanticHash.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.mli
+semanticHash.cmo: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
+semanticHash.cmx: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
+semanticFile.cmi: semanticFile.mli semanticFile.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.mli
+semanticFile.cmo: semanticFile.ml semanticFile.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.ml
+semanticFile.cmx: semanticFile.ml semanticFile.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.ml
+semanticMailbox.cmi: semanticMailbox.mli semanticMailbox.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.mli
+semanticMailbox.cmo: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
+semanticMailbox.cmx: semanticMailbox.ml semanticMailbox.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticMailbox.ml
+
+formatRecognition.cmi: formatRecognition.mli formatRecognition.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatRecognition.mli
+
+formatRecognition.cmo: formatRecognition.ml formatRecognition.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatRecognition.ml
+
+formatRecognition.cmx: formatRecognition.ml formatRecognition.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatRecognition.ml
+
+dngRecognition.cmi: dngRecognition.mli dngRecognition.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngRecognition.mli
+
+dngRecognition.cmo: dngRecognition.ml dngRecognition.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngRecognition.ml
+
+dngRecognition.cmx: dngRecognition.ml dngRecognition.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngRecognition.ml
+
+formatExtension.cmi: formatExtension.mli formatExtension.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatExtension.mli
+
+formatExtension.cmo: formatExtension.ml formatExtension.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatExtension.ml
+
+formatExtension.cmx: formatExtension.ml formatExtension.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/formatExtension.ml
+
+xmpObservation.cmi: xmpObservation.mli xmpObservation.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpObservation.mli
+
+xmpObservation.cmo: xmpObservation.ml xmpObservation.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpObservation.ml
+
+xmpObservation.cmx: xmpObservation.ml xmpObservation.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpObservation.ml
+
+dngSemantic.cmi: dngSemantic.mli dngSemantic.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngSemantic.mli
+
+dngSemantic.cmo: dngSemantic.ml dngSemantic.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngSemantic.ml
+
+dngSemantic.cmx: dngSemantic.ml dngSemantic.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngSemantic.ml
+
+dngExtended.cmi: dngExtended.mli dngExtended.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngExtended.mli
+
+dngExtended.cmo: dngExtended.ml dngExtended.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngExtended.ml
+
+dngExtended.cmx: dngExtended.ml dngExtended.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngExtended.ml
+
+jpegSemantic.cmi: jpegSemantic.mli jpegSemantic.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/jpegSemantic.mli
+
+jpegSemantic.cmo: jpegSemantic.ml jpegSemantic.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/jpegSemantic.ml
+
+jpegSemantic.cmx: jpegSemantic.ml jpegSemantic.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/jpegSemantic.ml
+
+semanticDelta.cmi: semanticDelta.mli semanticDelta.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticDelta.mli
+
+semanticDelta.cmo: semanticDelta.ml semanticDelta.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticDelta.ml
+
+semanticDelta.cmx: semanticDelta.ml semanticDelta.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticDelta.ml
+
+semanticWorkers.cmi: semanticWorkers.mli semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticWorkers.mli
+
+semanticWorkers.cmo: semanticWorkers.ml semanticWorkers.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticWorkers.ml
+
+semanticWorkers.cmx: semanticWorkers.ml semanticWorkers.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticWorkers.ml
+
+semanticFormats.cmi: semanticFormats.mli semanticFormats.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFormats.mli
+
+semanticFormats.cmo: semanticFormats.ml semanticFormats.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFormats.ml
+
+semanticFormats.cmx: semanticFormats.ml semanticFormats.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFormats.ml
+
+xmpMerge.cmi: xmpMerge.mli xmpMerge.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.mli
+
+xmpMerge.cmo: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.ml
+
+xmpMerge.cmx: xmpMerge.ml xmpMerge.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/xmpMerge.ml
 
 .mli.cmi:
 	@echo "$(CAMLC): $< ---> $@"

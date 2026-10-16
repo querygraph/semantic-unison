@@ -1,0 +1,21 @@
+{
+  "state": "METADATA_PREPARED_NOT_ADMITTED_NOT_DISPATCHED",
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/sdk-receiving-comparison-request-v1.json",
+    "bytes": 104886,
+    "sha256": "82248f18e67264be108c32e26e15c2a779a765b56298959fed192392cab3ca1b"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/sdk-receiving-comparison-plan-v1.json",
+    "bytes": 26961,
+    "sha256": "97b458b29efcab162672103393500e7d01b42c8ab4133971e433a568cb2a4854"
+  },
+  "owner_tool_terminal": {
+    "chunk_id": "eb404f",
+    "exit_code": 0,
+    "session_id": null
+  },
+  "canonical_cpu8_closed": true,
+  "checked_plan_passed": true,
+  "scope": "172source pins/11prerequisites/input8field metadata/compiled production inventories checked; zero payload hash/read or binary/SDK execution; no IO acquisition or runtime grant."
+}

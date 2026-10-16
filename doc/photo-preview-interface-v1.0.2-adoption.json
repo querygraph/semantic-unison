@@ -1,0 +1,61 @@
+{
+  "schema": "unison-photo-interface-adoption/1",
+  "utc": "2026-10-14T08:37:02.814910+00:00",
+  "state": "RECEIVER_ADOPTED_EXACT_NORMATIVE_SOURCE_CONTRACT",
+  "contractId": "firstpair.lightroom.preview-storage-identity-recovery",
+  "version": "1.0.2",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/preview-storage-identity-recovery-v1.0.2.json",
+      "bytes": 19157,
+      "sha256": "4975d77d4c8c6221bbfc3a8ffd80a40feb23dd05f66ace0ffba05da836f356cc"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/preview-storage-identity-recovery-v1.0.2.md",
+      "bytes": 6423,
+      "sha256": "5628119fe2d92e938ae006f8f56a25cc396c6c6dc99eaff49cecedecf755ed93"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/INDEPENDENT-CONTRACT-v1.0.2-REVIEW.json",
+      "bytes": 7092,
+      "sha256": "7d4832f66909954ed94c29327ab731e63c0215441815acbbb4fbe841199811d3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/interfaces/ROOT-CONTRACT-v1.0.2-COUNTERSIGN.json",
+      "bytes": 2199,
+      "sha256": "f63c2e968fc1e635cd9c8e6477e57a0669d41d90a6086f0011e2103acce4f90b"
+    }
+  ],
+  "evidencePinsVerified": 8,
+  "scope": "Source/interface adoption only; no runtime replay or executable implementation qualification",
+  "ownership": {
+    "photoOwner": "/root",
+    "rendererPublisherImplementationOwner": "/root/preview_implementation",
+    "unisonOwnerScope": [
+      "semantic DNG comparison/synchronization",
+      "general clone/filesystem tools",
+      "independent OxCaml worker/interface work"
+    ],
+    "singlePublisherOwner": true,
+    "externalQueueRouting": "Root parent CLI queue, after countersign; no native or publisher concurrency inferred"
+  },
+  "capabilityFlags": {
+    "tenPreservedNativeRecipeFinite": true,
+    "absentAndPopulatedAuxiliaryFinite": true,
+    "quasarStrictPlacement": false,
+    "faithfulStandaloneRendering": false,
+    "monitorViewportQualified": false,
+    "libraryUiRecognition": false,
+    "productionPublisher": false,
+    "fullRun": false
+  },
+  "runtimeGrant": {
+    "nativeWindowReleased": false,
+    "productionPublicationAdmitted": false,
+    "fullRunAdmitted": false,
+    "rendererAdmitted": false,
+    "admissionRule": "Every mutation/native slot requires its separately reviewed Root release, current identities/nonces/expiry/resource ownership and actual settlement."
+  },
+  "receiptBoundary": "Unison semantic-DNG/clone/delivery receipts alone cannot authorize preview reuse or the current native digest. Verify immutable source/settings/dependency epochs and exactly what pixel/metadata semantic domain the tooling covered. XMP, metadata or rendering-dependency changes invalidate the affected captured/rendered results even when payload pixels compare equal.",
+  "amendmentPolicy": "A changed normative field or qualification scope requires a new immutable version or explicitly pinned evidence addendum; never edit sealed receipts."
+}

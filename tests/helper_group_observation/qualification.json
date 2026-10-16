@@ -1,0 +1,592 @@
+{
+  "schema": "unison-retained-helper-group-observation-qualification/1",
+  "complete": true,
+  "platform": "macOS-15.7.9-x86_64-i386-64bit-Mach-O",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor_stubs.c",
+      "bytes": 11700,
+      "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helper_group_observation/probe.ml",
+      "bytes": 5374,
+      "sha256": "f25be8239add3ddac5edf1fef6bfad8292c22a171153a45b9a154f7aa1ec693f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helper_group_observation/run.py",
+      "bytes": 3974,
+      "sha256": "c0be0936012911e8059d39e556717c35e3c1d7b255b7ddaea2abb065614d88c0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/synthetic_helper.ml",
+      "bytes": 2463,
+      "sha256": "8701d7b2d5abcf64099790310c8015cf2a8fd786ce6fe4dad8c07311d6727cca"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/helper_tests.ml",
+      "bytes": 16180,
+      "sha256": "0e1801c1b95e9f8111acb23fa1eac14fe3497c4061f01663d850e2dc3459158f"
+    }
+  ],
+  "runs": [
+    {
+      "compiler_kind": "stock",
+      "build": {
+        "path": "/private/tmp/unison-group-owner-stock-build-20261014.json",
+        "bytes": 42906,
+        "sha256": "3876bb595ba2cb27a2da64c0161facb7bfd21be7bd8cba3f9a40ab35b3dac06e"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yu5s3xsi/src/unison",
+        "bytes": 5647192,
+        "sha256": "2f7e62cdc99246045176086085f4ceaff418613559fa3ffdca2bef1fa3ea6eb3"
+      },
+      "probe_report": {
+        "path": "/private/tmp/unison-retained-group-stock-final-20261014.json",
+        "bytes": 10047,
+        "sha256": "64b83d09723b93dab99cfb3f4dec16df13640e9fbf42d58c283b3ffaa4b0e738"
+      },
+      "probe_steps": 18,
+      "probe_artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/ENOMEM-probe",
+          "bytes": 1474840,
+          "sha256": "f3dc467a7aa7343fa1f93aa178c24ad58d988553da9feb731033dc54fa0e32dc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/ENOMEM.c",
+          "bytes": 343,
+          "sha256": "8ff7dcf414607feb4b47fb03d67205e6630ca7f1c28981442043b2e2d0a9ac52"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/ENOMEM.o",
+          "bytes": 7632,
+          "sha256": "f85233efbe098be3bdbbeaf44b756bea311eeaaeda70b3ff001f41b93dd0779f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/duplicate-probe",
+          "bytes": 1474840,
+          "sha256": "89446545a16da62882bbfef7d1a686ee0292509c241836c03f7d4db5df98ab54"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/duplicate.c",
+          "bytes": 527,
+          "sha256": "af91c7c64e983a6e4788de001bb4459049c409c51d93a4e402435636a04c52af"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/duplicate.o",
+          "bytes": 7720,
+          "sha256": "6aa3edb44ee0aefe63b798c6747ca15de7f155a50aa79dba39f14188a8082115"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/helperSupervisor_stubs.c",
+          "bytes": 11700,
+          "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/helperSupervisor_stubs.o",
+          "bytes": 8744,
+          "sha256": "bc3058c8cc69fef31005b51e9aca6f025cc3efab8191a197b05dce6c673d2687"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/identity-probe",
+          "bytes": 1474840,
+          "sha256": "2afa7632cd1e590a582bc9e0c03860094073aad90a7a470b16f5ce2dfdde8cd4"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/identity.c",
+          "bytes": 505,
+          "sha256": "7aa7e757c7959794ff9bb6b1cd46063e3073d8035ccd595815e2b05f48b56026"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/identity.o",
+          "bytes": 7632,
+          "sha256": "0e8603e6cc05d5c73500a5cea4f80e4c946c694bb3fddbeebb576f280e0366ce"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe",
+          "bytes": 1474880,
+          "sha256": "58a9ac117580c4235ee2a118c5e25fbac98e20dc442d4f23c597295e42fcf1e3"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.byte",
+          "bytes": 887401,
+          "sha256": "fbdf53569ea529331d4825ba4a4f455818d2d572cfaccef73f9992040b9f16bb"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.cmi",
+          "bytes": 2523,
+          "sha256": "5623989472ea88c07abedb69039c9c3b97e9dabafa9b8d81ccc6dcbe1cc5bbf1"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.cmo",
+          "bytes": 7303,
+          "sha256": "82deb6ce36ab7da72c214c775bfc378aad9bcd41e4bc4ea90e504ef2bc5deb0f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.cmx",
+          "bytes": 1120,
+          "sha256": "1966ab32ac72f78096a572e6905bf902f53c9e93ba15cc50c5ed42dae23736fd"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.ml",
+          "bytes": 5374,
+          "sha256": "f25be8239add3ddac5edf1fef6bfad8292c22a171153a45b9a154f7aa1ec693f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/probe.o",
+          "bytes": 20880,
+          "sha256": "009844654d74289cc7d7efd148752d451d6a36d0f0081183b70bd38374b881e9"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/size-probe",
+          "bytes": 1474840,
+          "sha256": "595fb7046d7553ca6fd5459257ec03a3168559b0b7584e30dc8547d50c936a43"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/size.c",
+          "bytes": 339,
+          "sha256": "44fce07f536814ec0d95b251048ef190e36d077069efaa286953dd1e2a755ff2"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/size.o",
+          "bytes": 7632,
+          "sha256": "cea49044287fa3883cd74eca919e1d693a0ffbcdfd9dde9db8e88e22c1528769"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-0.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-1.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-10.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-11.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-12.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-13.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-14.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-15.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-16.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-17.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-2.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-3.log",
+          "bytes": 336,
+          "sha256": "fcc2d78ae7f208429143de0c8de01565eab788326546bcb184228d8ff2ad9bac"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-4.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-5.log",
+          "bytes": 336,
+          "sha256": "fcc2d78ae7f208429143de0c8de01565eab788326546bcb184228d8ff2ad9bac"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-6.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-7.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-8.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/step-9.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/synthetic_helper",
+          "bytes": 1408696,
+          "sha256": "4f9c214b503f8f3ec193d5c1e0d39fda43d003108ff02bd2acc04ce4b81832f5"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/synthetic_helper.cmi",
+          "bytes": 875,
+          "sha256": "8c5d96c15090975d2653d1b701fbb613998570d62132949160427aa7875f3f3c"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/synthetic_helper.cmx",
+          "bytes": 830,
+          "sha256": "4d3ef7060fe40d1594b3e81503107f555cf8bee0017b11807e43cf5667127a10"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/synthetic_helper.ml",
+          "bytes": 2463,
+          "sha256": "8701d7b2d5abcf64099790310c8015cf2a8fd786ce6fe4dad8c07311d6727cca"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-z9o9k_uq/synthetic_helper.o",
+          "bytes": 12672,
+          "sha256": "b3d8f225f7d9971a334d1fcdc98e23eb47b898a20946e4a27731347c1f857811"
+        }
+      ]
+    },
+    {
+      "compiler_kind": "ox",
+      "build": {
+        "path": "/private/tmp/unison-group-owner-ox-build-20261014.json",
+        "bytes": 42912,
+        "sha256": "a89d3fbad2b7bbd8785ae8d0a125633ac5475aa9058166fe42e7a564e8319ff9"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-n_nvex4q/src/unison",
+        "bytes": 7574248,
+        "sha256": "caf9f61ded88da40014c0a192b5d40d1a74357df0543a34de983709b61c58798"
+      },
+      "probe_report": {
+        "path": "/private/tmp/unison-retained-group-ox-final-20261014.json",
+        "bytes": 10062,
+        "sha256": "3cba3254ecd084222e43e606a43e298125debcfa7eb1143648688e959883c108"
+      },
+      "probe_steps": 18,
+      "probe_artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/ENOMEM-probe",
+          "bytes": 2192168,
+          "sha256": "7aa455c3ec5847931c3d4c7ba81b1c1ad44eaad71b33194059ea079188eb5f62"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/ENOMEM.c",
+          "bytes": 343,
+          "sha256": "8ff7dcf414607feb4b47fb03d67205e6630ca7f1c28981442043b2e2d0a9ac52"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/ENOMEM.o",
+          "bytes": 7664,
+          "sha256": "0f4a1199c38215d86593feb49ff59a380e911370a241ba14319ea88a78093d13"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/duplicate-probe",
+          "bytes": 2192168,
+          "sha256": "7b885a1a06d0194183cac448da76812024cc3b5dbead9719f9383e0dc2fffa3d"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/duplicate.c",
+          "bytes": 527,
+          "sha256": "af91c7c64e983a6e4788de001bb4459049c409c51d93a4e402435636a04c52af"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/duplicate.o",
+          "bytes": 7752,
+          "sha256": "1f712aa8e539da7d263d1e5330981c73e5a485b5b1a214e82ff6852920653349"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/helperSupervisor_stubs.c",
+          "bytes": 11700,
+          "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/helperSupervisor_stubs.o",
+          "bytes": 8776,
+          "sha256": "47af4f0187176c23d178289215e1672fe8446a3521b042cc7192c4c300c3532a"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/identity-probe",
+          "bytes": 2192168,
+          "sha256": "7031aff76c35b04770e68aa6362eeca1fc89851e1380ef984c372d83630d9799"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/identity.c",
+          "bytes": 505,
+          "sha256": "7aa7e757c7959794ff9bb6b1cd46063e3073d8035ccd595815e2b05f48b56026"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/identity.o",
+          "bytes": 7664,
+          "sha256": "1357cbb45dadc76f25e77986de8e11d00aa4db36beae55147537a20098bfa5d5"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe",
+          "bytes": 2192216,
+          "sha256": "51892195e3126ea3d8faefa3873a11f06d56182f1c4f0ee63851fe49d7e8d8a6"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.byte",
+          "bytes": 1152067,
+          "sha256": "dea33da2ba204e59f77eea057a7547027b7113b6813ff0c8a71a3542a097a6a9"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.cmi",
+          "bytes": 5120,
+          "sha256": "1789bbc5c3e84f795b5f6e5941a264ccfd9b924860a99b09c16dcfe8ec36cf89"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.cmo",
+          "bytes": 7289,
+          "sha256": "cdfa6ca45d89c977a6978ab5ee72e5cd2b9fce9431804c7ffe658dea46c3eb64"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.cmx",
+          "bytes": 6929,
+          "sha256": "11dfa9bd3392329d083e5e6808d3863268961232e55e9d0b7d3878f8650e0298"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.ml",
+          "bytes": 5374,
+          "sha256": "f25be8239add3ddac5edf1fef6bfad8292c22a171153a45b9a154f7aa1ec693f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/probe.o",
+          "bytes": 25032,
+          "sha256": "25ccbfd0a81fdbeebcccb42973393e3511e87d7f342431692f762e1eaeb326e9"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/size-probe",
+          "bytes": 2192168,
+          "sha256": "6198e0e3f859bcb9844344e194e48f037761d8879d445b24b61e771c5cfd8c79"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/size.c",
+          "bytes": 339,
+          "sha256": "44fce07f536814ec0d95b251048ef190e36d077069efaa286953dd1e2a755ff2"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/size.o",
+          "bytes": 7664,
+          "sha256": "f4867c35a6a183e7bd38b6d7d539fff21dde0783ad0b591c55d3176396d403e4"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-0.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-1.log",
+          "bytes": 466,
+          "sha256": "a132f969d82217706cb1e440ee3d024d527aade7e89326d7f3d20b10cb5e30be"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-10.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-11.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-12.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-13.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-14.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-15.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-16.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-17.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-2.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-3.log",
+          "bytes": 336,
+          "sha256": "fcc2d78ae7f208429143de0c8de01565eab788326546bcb184228d8ff2ad9bac"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-4.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-5.log",
+          "bytes": 336,
+          "sha256": "fcc2d78ae7f208429143de0c8de01565eab788326546bcb184228d8ff2ad9bac"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-6.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-7.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-8.log",
+          "bytes": 78,
+          "sha256": "c0f6294762ab2fab12ea8ad18be7ce6eb37065372a3b112e9f8e5298bcd4b0cc"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/step-9.log",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/synthetic_helper",
+          "bytes": 2088168,
+          "sha256": "2f5b676d200bdc9d7a3a3ed121297808a98203c2d15528dcd934e2c3f81b80cb"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/synthetic_helper.cmi",
+          "bytes": 1274,
+          "sha256": "1774db649c710dc3c85f2c5ccb5ae49cd950a30d6071122d07622bcb34f8aae4"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/synthetic_helper.cmx",
+          "bytes": 3323,
+          "sha256": "477f8a76998b4533570f16680d84651fbb9c9cd946200b4968332cea694eadfb"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/synthetic_helper.ml",
+          "bytes": 2463,
+          "sha256": "8701d7b2d5abcf64099790310c8015cf2a8fd786ce6fe4dad8c07311d6727cca"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-owned-group-probe-yirqrz0g/synthetic_helper.o",
+          "bytes": 16608,
+          "sha256": "a3a7718db89e936974a47256cc7bad560944c24ee3bac9f46fd902c058f44347"
+        }
+      ]
+    }
+  ],
+  "default_spawn_body_preserved": true,
+  "default_spawn_body_sha256": "e180998c1ad933fd27b20a85b4bc34810a4b3cffed36dd909d76189e9b663ab9",
+  "actual_parent_terminals": [
+    {
+      "kind": "stock-probe",
+      "owner_tool": 20635,
+      "terminal_chunk": "7194f8",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS retained leader zero, repeat observation, real status and post-reap refusal\nPASS running child rejected before observing terminated owned group\nPASS unspawned/retired bindings cannot certify a group\nPASS external reap cannot produce a fresh group observation\nPASS descendant present then absent while exact leader remains unreaped\nPASS retained leader zero, repeat observation, real status and post-reap refusal\nPASS running child rejected before observing terminated owned group\nPASS unspawned/retired bindings cannot certify a group\nPASS external reap cannot produce a fresh group observation\nPASS descendant present then absent while exact leader remains unreaped\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\n"
+    },
+    {
+      "kind": "ox-probe",
+      "owner_tool": 1731,
+      "terminal_chunk": "564275",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS retained leader zero, repeat observation, real status and post-reap refusal\nPASS running child rejected before observing terminated owned group\nPASS unspawned/retired bindings cannot certify a group\nPASS external reap cannot produce a fresh group observation\nPASS descendant present then absent while exact leader remains unreaped\nPASS retained leader zero, repeat observation, real status and post-reap refusal\nPASS running child rejected before observing terminated owned group\nPASS unspawned/retired bindings cannot certify a group\nPASS external reap cannot produce a fresh group observation\nPASS descendant present then absent while exact leader remains unreaped\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\nPASS injected observation failure refuses zero and preserves exact owned reap\n"
+    },
+    {
+      "kind": "stock-helpers",
+      "owner_tool": 87305,
+      "terminal_chunk": "70e74d",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    },
+    {
+      "kind": "ox-helpers",
+      "owner_tool": 1963,
+      "terminal_chunk": "dee716",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "File \"synthetic_helper.ml\", line 24, characters 21-35:\n24 |   | \"ignore-term\" -> Sys.set_signal Sys.sigterm Sys.Signal_ignore; sleep 10.\n                          ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\n\nFile \"synthetic_helper.ml\", line 26, characters 6-20:\n26 |       Sys.set_signal Sys.sigterm Sys.Signal_ignore;\n           ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\nPASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    },
+    {
+      "kind": "stock-build",
+      "owner_tool": 31089,
+      "terminal_chunk": "6821e4",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Built: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yu5s3xsi/src/unison\nSelftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-yu5s3xsi/selftest.log\n"
+    },
+    {
+      "kind": "ox-build",
+      "owner_tool": 71700,
+      "terminal_chunk": "31e8f5",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Built: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-n_nvex4q/src/unison\nSelftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-n_nvex4q/selftest.log\n"
+    }
+  ],
+  "earlier_attempts": [
+    {
+      "owner_tool": 7276,
+      "terminal_chunk": "dccf61",
+      "exit_code": 1,
+      "scope": "Unbound getpgid prototype fails ESRCH on retained zombie; replaced, never empty-success."
+    },
+    {
+      "terminal_chunk": "a15360",
+      "exit_code": 1,
+      "scope": "Intermediate compile-only refactor error; no probe child dispatched."
+    },
+    {
+      "owner_tool": 87591,
+      "terminal_chunk": "26e04d",
+      "exit_code": 0
+    },
+    {
+      "owner_tool": 15831,
+      "terminal_chunk": "5f1426",
+      "exit_code": 0
+    }
+  ],
+  "scope": "Actual Intel macOS owned fake-child group observations, stock/Ox native+bytecode ABI, four private query faults each, ordinary helper38groups each and Make/selftests. New opaque binding/query not activated in production. No SDK/Photo, escaped-descendant, memory/CPU cap or live production receive qualification."
+}

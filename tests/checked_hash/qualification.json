@@ -1,0 +1,781 @@
+{
+  "schema": "unison-checked-semantic-hash-qualification/1",
+  "utc": "2026-10-14T09:47:38.132206+00:00",
+  "state": "CHECKED_COMPONENT_NATIVE_AND_FORCED_REFERENCE_PASSED",
+  "baseCommit": "e519dda",
+  "participants": [
+    {
+      "label": "stock",
+      "checkedHash": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-hash-stock.json",
+          "sha256": "f4855056fba8c4f404cdfb7d049645687d167e17438bb7b9fb6719c7699f58a1",
+          "bytes": 3722
+        },
+        "receipt": {
+          "schema": "unison-checked-hash/1",
+          "status": "passed",
+          "compiler": {
+            "path": "/usr/local/bin/ocamlopt",
+            "version": "5.5.1",
+            "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1"
+          },
+          "modeChecked": false,
+          "workspace": "/private/tmp/unison-checked-hash-epxtgs53",
+          "sourcePins": {
+            "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+            "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "tests/checked_hash/test.ml": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+            "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64"
+          },
+          "results": [
+            {
+              "mode": "native",
+              "root": "/private/tmp/unison-checked-hash-epxtgs53/native",
+              "commands": [
+                {
+                  "name": "compile",
+                  "argv": [
+                    "/usr/local/bin/ocamlopt",
+                    "-I",
+                    "+unix",
+                    "unix.cmxa",
+                    "semanticHash_stubs.c",
+                    "semanticHash.mli",
+                    "semanticHash.ml",
+                    "test.ml",
+                    "-o",
+                    "test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                {
+                  "name": "runtime",
+                  "argv": [
+                    "/private/tmp/unison-checked-hash-epxtgs53/native/test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "7d47946ff176c7e07ed4958753e33eb0cba87a6ac59ea68b60a05ef691861567"
+                }
+              ],
+              "compiledInputs": {
+                "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+                "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+                "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+                "test.ml": "74040479b8c0ce6763489fc7459a29ba8bc9fde6d607b175adaa3f848fe63530"
+              },
+              "binarySha256": "d108b1fe2f84e4b09c75b196d60ea4a86a3e7a0df1e8e770347b9956d8430ffd"
+            },
+            {
+              "mode": "forced-reference",
+              "root": "/private/tmp/unison-checked-hash-epxtgs53/forced-reference",
+              "commands": [
+                {
+                  "name": "compile",
+                  "argv": [
+                    "/usr/local/bin/ocamlopt",
+                    "-I",
+                    "+unix",
+                    "unix.cmxa",
+                    "semanticHash_stubs.c",
+                    "semanticHash.mli",
+                    "semanticHash.ml",
+                    "test.ml",
+                    "-o",
+                    "test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+                },
+                {
+                  "name": "runtime",
+                  "argv": [
+                    "/private/tmp/unison-checked-hash-epxtgs53/forced-reference/test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "7d47946ff176c7e07ed4958753e33eb0cba87a6ac59ea68b60a05ef691861567"
+                }
+              ],
+              "compiledInputs": {
+                "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+                "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+                "semanticHash_stubs.c": "d921347607e17ee900ae35be707498d2f3c53099a287769a2d52746693158ff9",
+                "test.ml": "74040479b8c0ce6763489fc7459a29ba8bc9fde6d607b175adaa3f848fe63530"
+              },
+              "binarySha256": "00c48a5a50e198cfdb4cf63b5e7b82e811931f9c6efcf950ee930bd0ef00414d"
+            }
+          ],
+          "productionModeInterfaceSelected": false
+        }
+      },
+      "microbench": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-hash-bench-stock.json",
+          "sha256": "915a235e3915261c91ad7354eba6929a6b8d84b76ad092ce7db857dba36e3440",
+          "bytes": 4172
+        },
+        "receipt": {
+          "schema": "unison-hash-round-lookup-microbench/1",
+          "compiler": "/usr/local/bin/ocamlopt",
+          "version": "5.5.1",
+          "workspace": "/private/tmp/unison-hash-lookup-bench-eemvx96f",
+          "samples": {
+            "new-reference": [
+              {
+                "cpu": 0.025302,
+                "wall": 0.025307894
+              },
+              {
+                "cpu": 0.030407,
+                "wall": 0.030516148
+              },
+              {
+                "cpu": 0.027505,
+                "wall": 0.02750802
+              },
+              {
+                "cpu": 0.026609,
+                "wall": 0.026612043
+              },
+              {
+                "cpu": 0.028032,
+                "wall": 0.028035879
+              },
+              {
+                "cpu": 0.027809,
+                "wall": 0.02781105
+              },
+              {
+                "cpu": 0.027783,
+                "wall": 0.027786016
+              },
+              {
+                "cpu": 0.029357,
+                "wall": 0.029360056
+              },
+              {
+                "cpu": 0.029891,
+                "wall": 0.029895067
+              }
+            ],
+            "old-reference": [
+              {
+                "cpu": 0.026066,
+                "wall": 0.026068926
+              },
+              {
+                "cpu": 0.027464,
+                "wall": 0.027471066
+              },
+              {
+                "cpu": 0.027149,
+                "wall": 0.027153969
+              },
+              {
+                "cpu": 0.026959,
+                "wall": 0.026963234
+              },
+              {
+                "cpu": 0.027961,
+                "wall": 0.027964115
+              },
+              {
+                "cpu": 0.028622,
+                "wall": 0.028625011
+              },
+              {
+                "cpu": 0.02909,
+                "wall": 0.029093981
+              },
+              {
+                "cpu": 0.029218,
+                "wall": 0.029222965
+              },
+              {
+                "cpu": 0.028908,
+                "wall": 0.028911114
+              }
+            ],
+            "old-native": [
+              {
+                "cpu": 0.002833,
+                "wall": 0.002834082
+              },
+              {
+                "cpu": 0.003844,
+                "wall": 0.003904104
+              },
+              {
+                "cpu": 0.002836,
+                "wall": 0.002836943
+              },
+              {
+                "cpu": 0.002547,
+                "wall": 0.002548933
+              },
+              {
+                "cpu": 0.002888,
+                "wall": 0.002890825
+              },
+              {
+                "cpu": 0.002919,
+                "wall": 0.002920866
+              },
+              {
+                "cpu": 0.002892,
+                "wall": 0.002894878
+              },
+              {
+                "cpu": 0.002912,
+                "wall": 0.002915144
+              },
+              {
+                "cpu": 0.003175,
+                "wall": 0.00317812
+              }
+            ],
+            "new-native": [
+              {
+                "cpu": 0.002636,
+                "wall": 0.002638102
+              },
+              {
+                "cpu": 0.003069,
+                "wall": 0.00307107
+              },
+              {
+                "cpu": 0.002578,
+                "wall": 0.00257802
+              },
+              {
+                "cpu": 0.003026,
+                "wall": 0.00302887
+              },
+              {
+                "cpu": 0.002548,
+                "wall": 0.002548933
+              },
+              {
+                "cpu": 0.002697,
+                "wall": 0.002697945
+              },
+              {
+                "cpu": 0.002772,
+                "wall": 0.002773046
+              },
+              {
+                "cpu": 0.002867,
+                "wall": 0.002870083
+              },
+              {
+                "cpu": 0.002744,
+                "wall": 0.002745152
+              }
+            ]
+          },
+          "medians": {
+            "new-reference": {
+              "cpu": 0.027809,
+              "wall": 0.02781105
+            },
+            "old-reference": {
+              "cpu": 0.027961,
+              "wall": 0.027964115
+            },
+            "old-native": {
+              "cpu": 0.002892,
+              "wall": 0.002894878
+            },
+            "new-native": {
+              "cpu": 0.002744,
+              "wall": 0.002745152
+            }
+          },
+          "newToOldCpuRatio": {
+            "reference": 0.9945638568005436,
+            "native": 0.9488243430152143
+          },
+          "inputBytesPerSample": 1048576,
+          "oldSourceCommit": "e519dda",
+          "compiledInputs": {
+            "bench.ml": "196c44f31b8ff55f83b154779e5bccf1a75a5ca7a239591581b6fc0254c4de7b",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "oldHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "oldHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0"
+          },
+          "binarySha256": "fc5d99122f57825e9656a4427216355db74efa48b1f496e25b34e197d96bbd6c",
+          "logSha256": "68b526a489c951f9793cd46f57adc8351c3e1ccd2942b5c47d237c5a50e37b19",
+          "scope": "Cached string microbenchmark,9samples,alternating reference order; not full worker/sync/storage performance"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e9dcmq66",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e9dcmq66/src/unison",
+          "sha256": "795634c08c195ea5d802edf3d6d18a65ccfde133e369b56ce0f65f7702bfdbec",
+          "bytes": 5465680
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e9dcmq66/build.log",
+          "sha256": "6e631da11cd6153d19c09a5563211fda7246bf4d779197a78aa923c89e584be6",
+          "bytes": 64314
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e9dcmq66/selftest.log",
+          "sha256": "563a4f97f34dfebddab8aefcab8ed16d2484d385a0f0265fcfc673a6e91f8ad8",
+          "bytes": 683
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-checked-hash-dune-stock.json",
+        "sha256": "dc90487b6265b343e8669f628869a4178d891ff7b53c9390f357968376808198",
+        "bytes": 34244
+      }
+    },
+    {
+      "label": "ox",
+      "checkedHash": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-hash-ox.json",
+          "sha256": "8fca9d306fcfb18cc14ed87096891fbaaa16628137b2c0ba9b754e04350360ed",
+          "bytes": 5295
+        },
+        "receipt": {
+          "schema": "unison-checked-hash/1",
+          "status": "passed",
+          "compiler": {
+            "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "version": "5.2.0+ox",
+            "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+          },
+          "modeChecked": true,
+          "workspace": "/private/tmp/unison-checked-hash-dzua82in",
+          "sourcePins": {
+            "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+            "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "tests/checked_hash/test.ml": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+            "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64"
+          },
+          "results": [
+            {
+              "mode": "native",
+              "root": "/private/tmp/unison-checked-hash-dzua82in/native",
+              "commands": [
+                {
+                  "name": "compile",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-I",
+                    "+unix",
+                    "unix.cmxa",
+                    "semanticHash_stubs.c",
+                    "semanticHash.mli",
+                    "semanticHash.ml",
+                    "test.ml",
+                    "-o",
+                    "test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "0140e5bb9a7d26f9c22534d668ff4bfb420f72ab9d8208e11e0dfd6b870f4511"
+                },
+                {
+                  "name": "runtime",
+                  "argv": [
+                    "/private/tmp/unison-checked-hash-dzua82in/native/test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "7d47946ff176c7e07ed4958753e33eb0cba87a6ac59ea68b60a05ef691861567"
+                },
+                {
+                  "name": "context",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-c",
+                    "context.ml"
+                  ],
+                  "exit": 2,
+                  "logSha256": "3204cfc6c2110b19ed08a392caebaba0a3fea6476e73abc38763f8f6a86458df"
+                },
+                {
+                  "name": "input",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-c",
+                    "input.ml"
+                  ],
+                  "exit": 2,
+                  "logSha256": "a6e6240d8efb845546bcfff3c301a46a91f20571c9909fedf9161acf357a73da"
+                }
+              ],
+              "compiledInputs": {
+                "input.ml": "69a3cd933c945d302d68a9b40ef2696653a45a76c1a604b5ae5f03703a21bbd1",
+                "context.ml": "ee902a831cd32004d444736380762cf01074d369e089dc80e71cabcfd099e437",
+                "semanticHash.mli": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+                "semanticHash.ml": "b1ac061e218e78f5e9b1f75a98cef29a6101e0999969b3d183a24c9659b3d433",
+                "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+                "test.ml": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977"
+              },
+              "binarySha256": "d8b38eae6a70d3e4c7f856df83edd5208083c03cc2ea300b3b9a3ea728e3a512"
+            },
+            {
+              "mode": "forced-reference",
+              "root": "/private/tmp/unison-checked-hash-dzua82in/forced-reference",
+              "commands": [
+                {
+                  "name": "compile",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-I",
+                    "+unix",
+                    "unix.cmxa",
+                    "semanticHash_stubs.c",
+                    "semanticHash.mli",
+                    "semanticHash.ml",
+                    "test.ml",
+                    "-o",
+                    "test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "0140e5bb9a7d26f9c22534d668ff4bfb420f72ab9d8208e11e0dfd6b870f4511"
+                },
+                {
+                  "name": "runtime",
+                  "argv": [
+                    "/private/tmp/unison-checked-hash-dzua82in/forced-reference/test"
+                  ],
+                  "exit": 0,
+                  "logSha256": "7d47946ff176c7e07ed4958753e33eb0cba87a6ac59ea68b60a05ef691861567"
+                },
+                {
+                  "name": "context",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-c",
+                    "context.ml"
+                  ],
+                  "exit": 2,
+                  "logSha256": "3204cfc6c2110b19ed08a392caebaba0a3fea6476e73abc38763f8f6a86458df"
+                },
+                {
+                  "name": "input",
+                  "argv": [
+                    "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                    "-c",
+                    "input.ml"
+                  ],
+                  "exit": 2,
+                  "logSha256": "a6e6240d8efb845546bcfff3c301a46a91f20571c9909fedf9161acf357a73da"
+                }
+              ],
+              "compiledInputs": {
+                "input.ml": "69a3cd933c945d302d68a9b40ef2696653a45a76c1a604b5ae5f03703a21bbd1",
+                "context.ml": "ee902a831cd32004d444736380762cf01074d369e089dc80e71cabcfd099e437",
+                "semanticHash.mli": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+                "semanticHash.ml": "b1ac061e218e78f5e9b1f75a98cef29a6101e0999969b3d183a24c9659b3d433",
+                "semanticHash_stubs.c": "d921347607e17ee900ae35be707498d2f3c53099a287769a2d52746693158ff9",
+                "test.ml": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977"
+              },
+              "binarySha256": "b6b0903878d9c11fe3fc86da34d611b24dfb726772fffe36e5663ed7f5657333"
+            }
+          ],
+          "productionModeInterfaceSelected": false
+        }
+      },
+      "microbench": {
+        "pin": {
+          "path": "/private/tmp/unison-checked-hash-bench-ox.json",
+          "sha256": "dcb60f3e22423b9047c6661c783a408f325e606a9bc5bc1a5ff1c14b678de4d9",
+          "bytes": 4190
+        },
+        "receipt": {
+          "schema": "unison-hash-round-lookup-microbench/1",
+          "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "version": "5.2.0+ox",
+          "workspace": "/private/tmp/unison-hash-lookup-bench-4o2diied",
+          "samples": {
+            "new-reference": [
+              {
+                "cpu": 0.06257,
+                "wall": 0.06257391
+              },
+              {
+                "cpu": 0.058539,
+                "wall": 0.058542967
+              },
+              {
+                "cpu": 0.056933,
+                "wall": 0.056936979
+              },
+              {
+                "cpu": 0.055922,
+                "wall": 0.055927038
+              },
+              {
+                "cpu": 0.056107,
+                "wall": 0.056151867
+              },
+              {
+                "cpu": 0.056512,
+                "wall": 0.056515932
+              },
+              {
+                "cpu": 0.056668,
+                "wall": 0.05667305
+              },
+              {
+                "cpu": 0.056367,
+                "wall": 0.056370974
+              },
+              {
+                "cpu": 0.056887,
+                "wall": 0.056902885
+              }
+            ],
+            "old-reference": [
+              {
+                "cpu": 0.061642,
+                "wall": 0.061651945
+              },
+              {
+                "cpu": 0.059814,
+                "wall": 0.059821129
+              },
+              {
+                "cpu": 0.055727,
+                "wall": 0.055731058
+              },
+              {
+                "cpu": 0.055391,
+                "wall": 0.055394888
+              },
+              {
+                "cpu": 0.056337,
+                "wall": 0.056340933
+              },
+              {
+                "cpu": 0.056567,
+                "wall": 0.056610107
+              },
+              {
+                "cpu": 0.056805,
+                "wall": 0.056826115
+              },
+              {
+                "cpu": 0.055674,
+                "wall": 0.05569315
+              },
+              {
+                "cpu": 0.055377,
+                "wall": 0.055380106
+              }
+            ],
+            "old-native": [
+              {
+                "cpu": 0.00337,
+                "wall": 0.003371954
+              },
+              {
+                "cpu": 0.00311,
+                "wall": 0.003112078
+              },
+              {
+                "cpu": 0.002494,
+                "wall": 0.002496958
+              },
+              {
+                "cpu": 0.002616,
+                "wall": 0.002619028
+              },
+              {
+                "cpu": 0.002897,
+                "wall": 0.002900124
+              },
+              {
+                "cpu": 0.002871,
+                "wall": 0.002874136
+              },
+              {
+                "cpu": 0.002951,
+                "wall": 0.002953053
+              },
+              {
+                "cpu": 0.002445,
+                "wall": 0.002449989
+              },
+              {
+                "cpu": 0.002487,
+                "wall": 0.002489805
+              }
+            ],
+            "new-native": [
+              {
+                "cpu": 0.003401,
+                "wall": 0.003403902
+              },
+              {
+                "cpu": 0.002937,
+                "wall": 0.002939939
+              },
+              {
+                "cpu": 0.002475,
+                "wall": 0.002478123
+              },
+              {
+                "cpu": 0.00253,
+                "wall": 0.002532005
+              },
+              {
+                "cpu": 0.00288,
+                "wall": 0.002882004
+              },
+              {
+                "cpu": 0.002981,
+                "wall": 0.002983093
+              },
+              {
+                "cpu": 0.002987,
+                "wall": 0.002990007
+              },
+              {
+                "cpu": 0.002647,
+                "wall": 0.002649069
+              },
+              {
+                "cpu": 0.002526,
+                "wall": 0.002528906
+              }
+            ]
+          },
+          "medians": {
+            "new-reference": {
+              "cpu": 0.056668,
+              "wall": 0.05667305
+            },
+            "old-reference": {
+              "cpu": 0.056337,
+              "wall": 0.056340933
+            },
+            "old-native": {
+              "cpu": 0.002871,
+              "wall": 0.002874136
+            },
+            "new-native": {
+              "cpu": 0.00288,
+              "wall": 0.002882004
+            }
+          },
+          "newToOldCpuRatio": {
+            "reference": 1.0058753572252694,
+            "native": 1.0031347962382446
+          },
+          "inputBytesPerSample": 1048576,
+          "oldSourceCommit": "e519dda",
+          "compiledInputs": {
+            "bench.ml": "196c44f31b8ff55f83b154779e5bccf1a75a5ca7a239591581b6fc0254c4de7b",
+            "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+            "oldHash.ml": "3f91e659503b183a28cf3dd1e3d052b1a5213a7deaa7088433859dd3f5ceade2",
+            "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+            "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+            "oldHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0"
+          },
+          "binarySha256": "e0640f23705a645de1cfea175fa5af0053f08a364149dca7fc4b5cbb66718376",
+          "logSha256": "efad09e0eeda243515043b8d011909ea2eb5a72ad6bc07b3601fff837e8a49f4",
+          "scope": "Cached string microbenchmark,9samples,alternating reference order; not full worker/sync/storage performance"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pbu4ngxh",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pbu4ngxh/src/unison",
+          "sha256": "ce16ed697d445775380678485961fb1bed05fcb9e27bff7353ea3f740674cbcf",
+          "bytes": 7372560
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pbu4ngxh/build.log",
+          "sha256": "cabbc6ebb144d25e8012e8f6c888e2172b635375e561b8d18b756c2b18ac0a98",
+          "bytes": 75774
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-pbu4ngxh/selftest.log",
+          "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2",
+          "bytes": 686
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-checked-hash-dune-ox.json",
+        "sha256": "b6f6e22085e859fa7e5cebbd807a0ab511fb76f377f5f6a39c4284065edb35f7",
+        "bytes": 34252
+      }
+    }
+  ],
+  "sourcePins": {
+    "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+    "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+    "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64",
+    "tests/checked_hash/test.ml": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+    "tests/checked_hash/bench.py": "0e13c5f34b73f5320ecac0f95bc46eade592b516882ef70600a0c44b3dac918e",
+    "tests/checked_hash/bench.ml": "196c44f31b8ff55f83b154779e5bccf1a75a5ca7a239591581b6fc0254c4de7b"
+  },
+  "foreignContract": {
+    "rootOwnedAudit": true,
+    "compilerProvesForeignImplementation": false,
+    "scope": "Three reviewed C entry points; rooted fresh/local state, bounded input, no stored global pointers/callbacks/runtime-release pointer access",
+    "source": {
+      "path": "src/semanticHash_stubs.c",
+      "sha256": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+      "bytes": 2416
+    }
+  },
+  "semanticKernelRegression": {
+    "compilers": [
+      "stock5.5.1",
+      "OxCaml5.2.0+ox"
+    ],
+    "observedExits": [
+      0,
+      0
+    ],
+    "command": "tests/semantic/run.py --skip-conformance",
+    "scope": "Sparse metadata writes, SHA vectors, TIFF byte orders, patches, opaque/malformed rejection, read-only reports and explicit BigTIFF/v0 fallback; full conformance not rerun"
+  },
+  "exploratoryDiagnostics": [
+    {
+      "path": "/private/tmp/unison-safe-hash-probe-e_94592g/compile.log",
+      "sha256": "91cec21d0352d8a4e0eb53ae98c5b50a01455f80cdc303b9fe18b185c1e51f45",
+      "bytes": 91
+    },
+    {
+      "path": "/private/tmp/unison-safe-hash-probe-e_94592g/compile-no-prefix.log",
+      "sha256": "f0de62942050d82db05f7c4dafc00dc16d4ae4d95bde50c9bdf16171697931b2",
+      "bytes": 709
+    },
+    {
+      "path": "/private/tmp/unison-safe-hash-probe-e_94592g/compile-ffi-contract.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ],
+  "rootOwnedReview": true,
+  "independentAgentReview": false,
+  "productionModeInterfaceSelected": false,
+  "limits": [
+    "Full worker execution/registry/FFI/counter portability remains open",
+    "FFI portability declarations are manually justified contracts, not compiler proof about C",
+    "Microbench does not establish meaningful throughput/speedup/RSS/storage behavior",
+    "No other-platform runtime or Adobe/Photo/Lightroom invocation"
+  ],
+  "goalComplete": false
+}

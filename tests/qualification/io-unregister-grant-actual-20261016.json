@@ -1,0 +1,140 @@
+{
+  "schema": "unison-io-unregister-grant/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/ioAdmission.ml",
+      "bytes": 6881,
+      "sha256": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/io_admission/registration_fault_test.py",
+      "bytes": 5250,
+      "sha256": "c31de395c4f9950eeea6e615adab8b2231ecc6f09e4ab5a6b89f22ebd5d108f3"
+    }
+  ],
+  "runs": [
+    {
+      "label": "before2",
+      "actual_tool": 24476,
+      "chunk": "a791c0",
+      "exit_code": 2,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-unregister-before2-20261016a/RESULT.json",
+          "bytes": 1871,
+          "sha256": "ecfdf73dc7c38fb9a901ef182f8b824843d3d1980e50f55c43e4c5c79ecc72ad"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-before2-20261016a/SHARED-START.json",
+          "bytes": 1261,
+          "sha256": "661b3df1aac8f98f80d4991fd351c57222d094f13186fff8a5e4714d7393b3d9"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-before2-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "6b6cb47dfa396f874461e24400d2814e60638175fe26d243e7bb89a19da71945"
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "actual_tool": 58402,
+      "chunk": "8f0959",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-unregister-stock-20261016a/RESULT.json",
+          "bytes": 1870,
+          "sha256": "3d4a6f7a59c860ad23bb1cdf364e68d462c39f8ee4b5aa9888ddd08ea9384933"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-stock-20261016a/SHARED-START.json",
+          "bytes": 1259,
+          "sha256": "1a23f1da9954a223b42a97e53ecc498a06e6f25e2bb9523979d89fc22bbcee89"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "3c248544d80f4396fe91e71568bc56ccc1d2210ce6709d024a8678846a0a6760"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "actual_tool": 76068,
+      "chunk": "e04af5",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-unregister-ox-20261016a/RESULT.json",
+          "bytes": 1871,
+          "sha256": "4cab519b28f3a1f0060236344bb2d60ae4be7f269a164f6357e70619e1e495b4"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-ox-20261016a/SHARED-START.json",
+          "bytes": 1257,
+          "sha256": "9c35ef12bbe0b0b4e721e9099cae35ad04bd90284cd57fe9b2266d758d3468e2"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "5747a6a03e374bd5e1b89959831c304d92046e2350b73355c2c3d27359232174"
+        }
+      ]
+    },
+    {
+      "label": "suite-stock",
+      "actual_tool": 73716,
+      "chunk": "0be6e5",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-stock-20261016a/RESULT.json",
+          "bytes": 4979,
+          "sha256": "9c50c6ac127cb078e44cb0cd2dc4583f60da7c8e47a2529b5f545c855df3a88b"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-stock-20261016a/SHARED-START.json",
+          "bytes": 1239,
+          "sha256": "5a69897f178e4ea4acc73afe7c42c7b695b0683493fb157c9ffd78330db97d56"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "3f83b83a2c3e792055194030f20423b5ffcb352810ed7fbc2cab7f65acae0b73"
+        }
+      ]
+    },
+    {
+      "label": "suite-ox",
+      "actual_tool": 47046,
+      "chunk": "b02f12",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-ox-20261016a/RESULT.json",
+          "bytes": 4983,
+          "sha256": "c3fa7d5cb2c398f9863be6c50935dfe2169cdb4b4e6a0b123a5b201b14b53a60"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-ox-20261016a/SHARED-START.json",
+          "bytes": 1238,
+          "sha256": "4e40c6c9f090530bdacb2ce5613e3696f5bdb59940d02a51e56820297295f340"
+        },
+        {
+          "path": "/private/tmp/unison-io-unregister-suite-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "c43a48ac03e05d72b2ab4a57cb2d9fa2de3416899a2cdb539f86eac1d61e58a5"
+        }
+      ]
+    }
+  ],
+  "scope": "finite private ML registration/cancellation/unregister faults plus stock/Ox20-group IO suites; prior source fails lost-grant assertion; no OS-close uncertainty suppression, SDK, Photo, camera or EXglobal; full CLI builds retain previous-source scope",
+  "full_goal_complete": false
+}

@@ -1,0 +1,17 @@
+(** Bounded atomic FIFO for immutable worker messages. Thread-safe queue state
+    does not make a mutable payload safe: payload ownership/portability belongs
+    to its caller. No blocking, Lwt, worker creation, descriptor ownership or
+    global registry access. CAS order defines enqueue/dequeue linearization. *)
+type 'a t
+type push = Added | Full | Closed
+type 'a pop = Item of 'a | Empty | Drained
+type usage = { capacity : int; pending : int; closed : bool }
+val create : capacity:int -> 'a t
+(** Capacity must be1..65536 messages. Payload bytes are not bounded here. *)
+val push : 'a t -> 'a -> push
+val pop : 'a t -> 'a pop
+val close : 'a t -> unit
+(** Reject future pushes while allowing already accepted messages to drain.
+    Idempotent. [Drained] means closed and empty; [Empty] means open and empty. *)
+val usage : 'a t -> usage
+(** A single atomic snapshot; no guarantee it remains current after return. *)

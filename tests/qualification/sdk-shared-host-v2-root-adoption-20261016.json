@@ -1,0 +1,19 @@
+{
+  "state": "ROOT_INDEPENDENT_ACTUAL_ACCEPTANCE_ADOPTED",
+  "root_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SHARED-SDK-HOST-V2-ACTUAL-ACCEPTANCE-20261016.json",
+    "bytes": 16879,
+    "sha256": "f16bd1f227e1370ebf8a8fc57487c063baf56fab0954ac7e7d3f152003234807"
+  },
+  "actual_owner": {
+    "session_id": 39043,
+    "terminal_chunk_id": "ef80c4",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "resources_released": true,
+  "admission_consumed_once": true,
+  "new_sdk_calls": 0,
+  "new_grant": false,
+  "scope": "Root independent12SDK/62probe closure and scoped sample audit; not peaks/tree/hardcaps/calibratedCPU/pixels/production"
+}

@@ -1,0 +1,206 @@
+{
+  "schema": "unison-profile-inspection-identity/1",
+  "state": "PASS_CLOSED",
+  "actual_owner_terminal": {
+    "session": 97863,
+    "chunk": "66c3af",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "source_sha256": {
+    "src/formatExtension.ml": "4e0225aa32e3ec345f3cc88c2bc88a92a4867c1fc7fee39574afe6b9a756e2c5",
+    "src/formatExtension.mli": "8d6a40e593b80d299b954ef2aea0160184f881e9e3a49e622b43470606a286d9",
+    "src/formatExtension.ox.mli.in": "19ec9078a0f58c2492a7294df67fe6f655821a2be2e747f9358e4f0c3db4e765",
+    "src/semanticDelta.ml": "df169d15dff25b16bbc9c07cdf6cc4b3aea49e1f0b9b23cc9fad2cdcff174bc3",
+    "src/semanticDelta.mli": "b087bf1d0e31148bb17e7c07367f8f0e73500d825a4b5f9ae537d216c2b36a41",
+    "tests/semantic/conformance/test.ml": "9fd454222297fee5f9a0b71d7c29c01284daf6713ce356da79885b85c7594521",
+    "tests/semantic/conformance/reference.py": "0cd110501807de0a299209ec1b0210c13ad9623d8dc14611cfcd95a2fb1800c1",
+    "tests/semantic/conformance/run.py": "f2141134a4e342a769c856666341fcd360d1ba4e61e604446d5808ab67653505",
+    "tests/semantic/conformance/shared.py": "c966f146574650b9a83a9aa448c1dbd72d58c7f37c7a17e85937a05a8c6418aa"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-profile-inspection-final-e47c4a01/SHARED-START.json",
+      "bytes": 1065,
+      "sha256": "1471cc13196c44a05016164bd79d04853aa6436499da56aa875b60d1a3d955d1"
+    },
+    {
+      "path": "/private/tmp/unison-profile-inspection-final-e47c4a01/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e459a934f2ca3998ce9a6083b2e812d33afa61ad3fc52ea4d8725705ca9cd2c0"
+    },
+    {
+      "path": "/private/tmp/unison-profile-inspection-final-e47c4a01/SHARED-STDOUT.txt",
+      "bytes": 13966,
+      "sha256": "af99706dff2fb9581fdc61fc72a1b1c101790a73acde2417d5d35f1e8b422c66"
+    },
+    {
+      "path": "/private/tmp/unison-profile-inspection-final-e47c4a01/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-current.json",
+      "bytes": 24231,
+      "sha256": "f5e46f12609ef308770f7f4f1d2546079f0fb994196fa5a3e56bc7c42aa10a71"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-current.log",
+      "bytes": 3850,
+      "sha256": "65f1b3be10aca5b6613d614ca57af94730496d9f50ec5768d83f66a8dc446228"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-profile-domain.json",
+      "bytes": 24237,
+      "sha256": "cf53eb9e4cd11455d07ea946db3c1353b06ec26c4c11a839b09f72de5708f26b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-profile-domain.log",
+      "bytes": 2691,
+      "sha256": "b5d66c54d5d4000e712103da414a1b6afd17d2c32552634cc2110001ee9bf9e6"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-target-proof.json",
+      "bytes": 24239,
+      "sha256": "e71b29aa68c1a752d5b09ef2239b60ee466d451f47f65a00f7ffbf58269cc2f5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-target-proof.log",
+      "bytes": 2699,
+      "sha256": "85434eb17afbcbbc02723cd6b2a4c7d6742fdc45a697184041178a197f364137"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-profile-inspection.json",
+      "bytes": 24245,
+      "sha256": "34be2bba222916c1b4d3f2c21b06a37210435e370dfb7efeb3fedd13ab5963cd"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/stock-previous-profile-inspection.log",
+      "bytes": 2687,
+      "sha256": "e48206df2fb45f167dd98e2e6de1a5420f007048b94537184f782073c1cb19cb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-current.json",
+      "bytes": 24235,
+      "sha256": "50f561aa28f87377c38cbfd0ea1a2b401c68108e7f9d026f723971747de88cdb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-current.log",
+      "bytes": 3847,
+      "sha256": "4ebeff374f177e4ac6bd738070735227da93198a7a4deac979de9f652686c85e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-profile-domain.json",
+      "bytes": 24241,
+      "sha256": "40d63937252a1dcf326b34b70969ab6c5b4b886a467ddf91f893aa2ba5692cfb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-profile-domain.log",
+      "bytes": 2688,
+      "sha256": "5550f2f94fdf52cbfd4ccf662c23761c9e78b5ac885680ba6057aa050f07917a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-target-proof.json",
+      "bytes": 24243,
+      "sha256": "863bd0cd545da6c776ebab31bad838994d9d16aaf597922ba7acaec0c63b46f5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-target-proof.log",
+      "bytes": 2696,
+      "sha256": "89ba865f85f7b064a0454c32377d342a7981b7af0025810cf4128ebacb104f26"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-profile-inspection.json",
+      "bytes": 24249,
+      "sha256": "e816f242d6377be33f8b0f1cb7a88cf8a5e9225da4c14352faae8bce553e6aa8"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-c1sywfuf/ox-previous-profile-inspection.log",
+      "bytes": 2684,
+      "sha256": "6767f75bc94ca67709893fd126bb3fce134254c53644b69176f840fc6091da20"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "variant": "current",
+      "harness_wait_exit": 0,
+      "test_exit": 0,
+      "negative_control_detected": false,
+      "commands": 127,
+      "assertions": 2224
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-profile-domain",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-target-proof",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-profile-inspection",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "ox",
+      "variant": "current",
+      "harness_wait_exit": 0,
+      "test_exit": 0,
+      "negative_control_detected": false,
+      "commands": 127,
+      "assertions": 2224
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-profile-domain",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-target-proof",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-profile-inspection",
+      "harness_wait_exit": 0,
+      "test_exit": 2,
+      "negative_control_detected": true,
+      "commands": 83,
+      "assertions": null
+    }
+  ],
+  "module_identity_assertions_per_compiler": 27,
+  "coverage": "Three invalid IDs(empty/NUL/129bytes), trusted-constructor/direct FormatExtension.inspect/SemanticDelta.inspect boundaries, repeated across three originalgoldens. Fake plugin raises if entered, proving pre-parser refusal. Prior malformedwire and targetproof controls retained; all validwiregoldens unchanged.",
+  "preliminary_identical_code_run": {
+    "workspace": "/private/tmp/unison-profile-inspection-23b974ec",
+    "terminal": "b9b9bd",
+    "exit_code": 0,
+    "interface_documentation_relocated_before_final_run": true
+  },
+  "scope": "Local trusted-compiled extension API consistency only; not a plugin sandbox/security exploit claim. One compiler at a time under Unison00..07, groups reaped andtokensclosed, noEXIO/SDK/Adobe/camera/Photo/newwholeapplicationbuild. Priorfullbuild/receivingreceipts retain exact older sourcecohorts."
+}

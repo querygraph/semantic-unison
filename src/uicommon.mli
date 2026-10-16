@@ -52,6 +52,10 @@ val testServer : bool Prefs.t
 (* Format the information about current contents of a path in one replica (the second argument
    is used as a separator) *)
 val details2string : Common.reconItem -> string -> string
+val inspectDetails : Common.reconItem -> unit
+(** Explicit user-requested current-replica inspection. Populates a one-shot
+    observation consumed by the immediately following details2string call.
+    Formatting alone performs no hashing or RPC inspection. *)
 
 (* Format a path, eliding initial components that are the same as the
    previous path *)

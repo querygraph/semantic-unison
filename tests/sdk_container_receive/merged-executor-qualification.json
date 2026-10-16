@@ -1,0 +1,235 @@
+{
+  "schema": "unison-merged-output-executor-source-qualification/1",
+  "utc": "2026-10-14T21:45:50.983377+00:00",
+  "report": {
+    "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/RESULT.json",
+    "bytes": 12951,
+    "sha256": "abdc4b50bb10c7039a2086d7b9a45dc1b1ff943a5eb3bcd08aed1a0f22565a34"
+  },
+  "actual": {
+    "schema": "unison-merged-executor-fake-qualification/1",
+    "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq",
+    "records": [
+      {
+        "fault": "none",
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+          "--prepared",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/PREPARED.json",
+          "--workspace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-positive",
+          "--mode",
+          "mock"
+        ],
+        "exit": 0,
+        "stdout": "START /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-positive/START.json\nCLOSED /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-positive\n",
+        "stderr": "",
+        "closure": {
+          "pid": 29037,
+          "seconds": 300,
+          "closed": true,
+          "scope": "finite contained pilot only",
+          "timed_out": false,
+          "reaped": true,
+          "returncode": 0,
+          "group_members_before_leader_reap": [
+            {
+              "pid": 29037,
+              "stat": "Z"
+            }
+          ],
+          "other_members_absent": true,
+          "wall_seconds": 0.4386054959904868,
+          "child_user_seconds": 0.097621,
+          "child_system_seconds": 0.041624999999999995,
+          "within_wall_limit": true
+        }
+      },
+      {
+        "fault": "digest",
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+          "--prepared",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/PREPARED.json",
+          "--workspace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-digest",
+          "--mode",
+          "mock"
+        ],
+        "exit": 1,
+        "stdout": "START /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-digest/START.json\n",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 95, in supervise\n    function()\n    ~~~~~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 108, in phase\n    receipt = host.receipt(result['stdout'],\n               {'fixture': {'sha256': candidate['sha256'], 'size': candidate['bytes']},\n                'build_id': packet['tool']['build_id']})\n  File \"/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py\", line 83, in receipt\n    require(fields['candidate-sha256'] == case['fixture']['sha256']\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            and fields['candidate-size'] == str(case['fixture']['size'])\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            and fields['driver-build'] == case['build_id'], 'receipt binding')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py\", line 19, in require\n    raise ValueError(message)\nValueError: receipt binding\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 129, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 122, in main\n    closure = supervise(phase, work, 300)\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 177, in supervise\n    raise RuntimeError('native phase failed after genuine group closure')\nRuntimeError: native phase failed after genuine group closure\n",
+        "closure": {
+          "pid": 29043,
+          "seconds": 300,
+          "closed": true,
+          "scope": "finite contained pilot only",
+          "timed_out": false,
+          "reaped": true,
+          "returncode": 1,
+          "group_members_before_leader_reap": [
+            {
+              "pid": 29043,
+              "stat": "Z"
+            }
+          ],
+          "other_members_absent": true,
+          "wall_seconds": 0.09742121997987852,
+          "child_user_seconds": 0.034171,
+          "child_system_seconds": 0.016167,
+          "within_wall_limit": true
+        }
+      },
+      {
+        "fault": "warnings",
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+          "--prepared",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/PREPARED.json",
+          "--workspace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-warnings",
+          "--mode",
+          "mock"
+        ],
+        "exit": 1,
+        "stdout": "START /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-warnings/START.json\n",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 95, in supervise\n    function()\n    ~~~~~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 113, in phase\n    prep.require(receipt['warnings'] == '4', 'warning count changed')\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/prepare_merged.py\", line 22, in require\n    raise ValueError(message)\nValueError: warning count changed\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 129, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 122, in main\n    closure = supervise(phase, work, 300)\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 177, in supervise\n    raise RuntimeError('native phase failed after genuine group closure')\nRuntimeError: native phase failed after genuine group closure\n",
+        "closure": {
+          "pid": 29047,
+          "seconds": 300,
+          "closed": true,
+          "scope": "finite contained pilot only",
+          "timed_out": false,
+          "reaped": true,
+          "returncode": 1,
+          "group_members_before_leader_reap": [
+            {
+              "pid": 29047,
+              "stat": "Z"
+            }
+          ],
+          "other_members_absent": true,
+          "wall_seconds": 0.10239952499978244,
+          "child_user_seconds": 0.034488,
+          "child_system_seconds": 0.017162999999999998,
+          "within_wall_limit": true
+        }
+      },
+      {
+        "fault": "truncated",
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+          "--prepared",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/PREPARED.json",
+          "--workspace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-truncated",
+          "--mode",
+          "mock"
+        ],
+        "exit": 1,
+        "stdout": "START /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-truncated/START.json\n",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 95, in supervise\n    function()\n    ~~~~~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 108, in phase\n    receipt = host.receipt(result['stdout'],\n               {'fixture': {'sha256': candidate['sha256'], 'size': candidate['bytes']},\n                'build_id': packet['tool']['build_id']})\n  File \"/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py\", line 77, in receipt\n    require(len(lines) == 10 and lines[0] == 'UNISON-DNG-VALIDATION 1'\n    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n            and lines[-1] == 'END', 'receipt framing')\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py\", line 19, in require\n    raise ValueError(message)\nValueError: receipt framing\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 129, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 122, in main\n    closure = supervise(phase, work, 300)\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 177, in supervise\n    raise RuntimeError('native phase failed after genuine group closure')\nRuntimeError: native phase failed after genuine group closure\n",
+        "closure": {
+          "pid": 29051,
+          "seconds": 300,
+          "closed": true,
+          "scope": "finite contained pilot only",
+          "timed_out": false,
+          "reaped": true,
+          "returncode": 1,
+          "group_members_before_leader_reap": [
+            {
+              "pid": 29051,
+              "stat": "Z"
+            }
+          ],
+          "other_members_absent": true,
+          "wall_seconds": 0.10333880601683632,
+          "child_user_seconds": 0.034962,
+          "child_system_seconds": 0.017409,
+          "within_wall_limit": true
+        }
+      },
+      {
+        "fault": "exit",
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+          "--prepared",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/PREPARED.json",
+          "--workspace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-exit",
+          "--mode",
+          "mock"
+        ],
+        "exit": 1,
+        "stdout": "START /private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-merged-executor-i6d2drnq/run-exit/START.json\n",
+        "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 95, in supervise\n    function()\n    ~~~~~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 105, in phase\n    prep.require(result['returncode'] == 0 and not result['timed_out']\n    ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n                 and not result['capture_truncated'], 'child exit/deadline/capture failure')\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/prepare_merged.py\", line 22, in require\n    raise ValueError(message)\nValueError: child exit/deadline/capture failure\nTraceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 129, in <module>\n    main()\n    ~~~~^^\n  File \"/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py\", line 122, in main\n    closure = supervise(phase, work, 300)\n  File \"/Users/alexy/src/unison/bench/adobe/phase.py\", line 177, in supervise\n    raise RuntimeError('native phase failed after genuine group closure')\nRuntimeError: native phase failed after genuine group closure\n",
+        "closure": {
+          "pid": 29055,
+          "seconds": 300,
+          "closed": true,
+          "scope": "finite contained pilot only",
+          "timed_out": false,
+          "reaped": true,
+          "returncode": 1,
+          "group_members_before_leader_reap": [
+            {
+              "pid": 29055,
+              "stat": "Z"
+            }
+          ],
+          "other_members_absent": true,
+          "wall_seconds": 0.09949777397559956,
+          "child_user_seconds": 0.034267,
+          "child_system_seconds": 0.016635,
+          "within_wall_limit": true
+        }
+      }
+    ],
+    "canonical_argv_refused_before_acquisition": true,
+    "consumed_workspace_refused": true,
+    "mock_refuses_native_identity": true,
+    "pure_admission_controls": 7,
+    "sdk_executions": 0,
+    "sources": [
+      {
+        "path": "/Users/alexy/src/unison/tests/sdk_container_receive/prepare_merged.py",
+        "bytes": 6778,
+        "sha256": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+      },
+      {
+        "path": "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged.py",
+        "bytes": 6401,
+        "sha256": "f0dc76ad5b2e7b6d48adf890df6503c12c6e7876da713eb2db3979c9f2d4cbb1"
+      },
+      {
+        "path": "/Users/alexy/src/unison/tests/sdk_container_receive/validate_merged_test.py",
+        "bytes": 5280,
+        "sha256": "5bcd3f284d16c1494543f38a1452f17fe1963b05f997d7a7984705e248daddf2"
+      }
+    ],
+    "scope": "Fake validator success/zero-exit bad receipt/nonzero exit and genuine aggregate closure only; no SDK runtime admission."
+  },
+  "parent_terminal": {
+    "tool_handle": 99880,
+    "chunk": "a078b5",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "current_sources": {
+    "tests/sdk_container_receive/validate_merged.py": "f0dc76ad5b2e7b6d48adf890df6503c12c6e7876da713eb2db3979c9f2d4cbb1",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2",
+    "tests/sdk_host_matrix/plan.py": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b",
+    "bench/adobe/phase.py": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+  },
+  "prepared_native_pin_validation_only": true,
+  "sdk_executions": 0,
+  "scope": "Original fake Python tools + pure native-plan/admission validation only; no Adobe execution or native admission."
+}

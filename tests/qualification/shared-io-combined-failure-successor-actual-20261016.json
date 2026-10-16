@@ -1,0 +1,138 @@
+{
+  "state": "TWELVE_DISPOSABLE_IO_CONTROLS_AND_FOUR_INERT_PROBE_CONTROLS_PASSED_CLOSED",
+  "runs": [
+    {
+      "parent_terminal": {
+        "chunk": "9ae1a3",
+        "exit": 0,
+        "running_session": false
+      },
+      "scope": "12 disposable backend methods; two combined-failure controls and explicit READY/parent-copy-transfer/actual-holder-wait records. Injectors prove zero kernel close executed before resolving fake uncertainties; not retry of genuine unknown FD.",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-combined-failure-controls-z6rivixu",
+      "closure": {
+        "child": {
+          "pid": 78139,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 78139,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "backend_sha_before_after": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "parent_terminal": {
+        "chunk": "d1573a",
+        "exit": 0,
+        "running_session": false
+      },
+      "scope": "4 inert admission/source controls after revalidation-close carrier and structured unknown log successor.",
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-successor-probe-inert-zebjl7zj",
+      "closure": {
+        "child": {
+          "pid": 78249,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 78249,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "probe_sha_before_after": "63e235f4ad0afc0ba278613dd8163678796f2d556f1ebf4c49cdfeb3bbb46018"
+    }
+  ],
+  "no_canonical_io_namespace_open": true,
+  "no_payload_sdk_adobe_compiler": true,
+  "qualification_limits": "No canonical kernel locking qualified; no Root admission consumed, no dispatcher integration/ownership-transfer production API or original/privateDNG reads. Old receipts/source snapshots preserved unchanged.",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool_test.py",
+      "bytes": 11620,
+      "sha256": "dbac45c518ed42e76fae0564d58dc84498f98fa1787f0ab1371fd3cb70d80c1a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+      "bytes": 8591,
+      "sha256": "63e235f4ad0afc0ba278613dd8163678796f2d556f1ebf4c49cdfeb3bbb46018"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe_test.py",
+      "bytes": 2578,
+      "sha256": "0c66a5d4cfa9f4238c6b82a19744e531393b082766f994d3df884f1f3fedfda3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v2.json",
+      "bytes": 5519,
+      "sha256": "d260893ef5161e2a0e376f9fba356fd33e5e2c5ed37d023a432b82f8a48a1d5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v3.json",
+      "bytes": 6687,
+      "sha256": "7540107284b5fbd7d5e0bed182ec94a4495f4b274ac822ffce43ee14439038c9"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-combined-failure-controls-z6rivixu/SHARED-START.json",
+      "bytes": 943,
+      "sha256": "d981c70b753b8fb36a2b6e66cb683cf9551aef98db89f6a867a8ee9f961d6574"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-combined-failure-controls-z6rivixu/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "d5120ed84245a4d0f7f02b129984f4c9462f766a35c21ebe9fbf7486ecf0aff6"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-combined-failure-controls-z6rivixu/SHARED-STDOUT.txt",
+      "bytes": 190,
+      "sha256": "3deced37002493755e538cd3adc2942ef41e1d029e20be81211d4950d65d834e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-combined-failure-controls-z6rivixu/SHARED-STDERR.txt",
+      "bytes": 111,
+      "sha256": "e9f4145743db78f146b05a941fe915655d4fe1059af36b3128672ff3688bc116"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-successor-probe-inert-zebjl7zj/SHARED-START.json",
+      "bytes": 952,
+      "sha256": "67c6f06acd407d9cb33ed52d411df651d4f449583f8835a9970084b7166f89f5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-successor-probe-inert-zebjl7zj/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "074f0978b3189361973fd8e05768bd162f7b74112ae797c1ee46cf15a81a8d21"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-successor-probe-inert-zebjl7zj/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-successor-probe-inert-zebjl7zj/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    }
+  ]
+}

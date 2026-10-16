@@ -1,0 +1,60 @@
+{
+  "schema": "unison-concurrent-validation-join-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "1bc82b",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/combined.py",
+      "bytes": 4003,
+      "sha256": "fe5e3e78f4ca66ae3e6ae5f0f17323513ce9c1c47f1eea33330d71b806087026"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/combined_test.py",
+      "bytes": 3060,
+      "sha256": "a17f3e20adaec92f10b86b6aa5958a494150b239e6398e843b34d2a270d9ed92"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/live_records.py",
+      "bytes": 4241,
+      "sha256": "bdd2259f03379d27451a60ab8f6290deb88ff64f2ad0a1b0dbd396a0a1908366"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_receiving/sdk_audit.py",
+      "bytes": 4771,
+      "sha256": "cdfea583ad0e43548ce7463336c8025ff90fbdd50e9c3f66f0a964882340dca2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/records.py",
+      "bytes": 5765,
+      "sha256": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-combined-controls-20261016b/SHARED-START.json",
+      "bytes": 1112,
+      "sha256": "b0e7338845af5b0d2723cbb575b0ae250d4a011549baaaf9cf7ba7a70142e1f7"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-combined-controls-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b5f8491365048fc6477dbf29169879b3e9edf473060866974c9b37aaaad44632"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-combined-controls-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-combined-controls-20261016b/SHARED-STDERR.txt",
+      "bytes": 106,
+      "sha256": "75ff54e727b57e4bd7b88956ed0c92c4b9a416e6f0976707e8fb54aa385ac0bd"
+    }
+  ],
+  "scope": "8original protocol fixture groups; separate helper settlement/receipt validity/live overlap; no actual CLI/worker/FD closure, timestamp producer authentication, SDK activity/camera/Photo/EXglobal or real concurrency qualification",
+  "full_goal_complete": false
+}

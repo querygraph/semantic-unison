@@ -1,0 +1,37 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/clone_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.011s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 43460,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "native_clone_calls": 0,
+  "scope": "five original tiny preparation groups, including two-input mapping and cross-input mutation stop; injected clone only/no retained DNG/SDK/EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/clone.py": "b21ab8124fbb3abb6f84f76e6ae8dc49fd1efd0cd8f205e4603f8cf243d48c8b",
+    "tests/sdk_multifile/clone_test.py": "b9d1843d436b2fb00cc3ec60193197f71138b6c4ab293d873568865befc4d4a4"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "6bf238",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

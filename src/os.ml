@@ -262,6 +262,8 @@ let fingerprint fspath path typ =
   (Fingerprint.file fspath path,
    Osx.ressFingerprint fspath path typ)
 
+let data_only_fingerprint fingerprint = (fingerprint,Fingerprint.dummy)
+
 let pseudoFingerprint path size =
   (Fingerprint.pseudo path size, Fingerprint.dummy)
 

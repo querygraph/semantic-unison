@@ -1,0 +1,391 @@
+{
+  "schema": "unison-current-quota-container-merge-qualification/1",
+  "utc": "2026-10-14T21:41:48.440472+00:00",
+  "scope": "Current production stock/Ox CLI loopback with quota-backed compact common bases, retained generated uncompressed/JPEG/JXL containers and mock validators. No SDK execution or changed-output decode qualification.",
+  "cases_per_compiler": 15,
+  "cross_compiler_expected_outputs_identical": true,
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/merge.py",
+      "bytes": 6302,
+      "sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_paths/run.py",
+      "bytes": 37630,
+      "sha256": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticMergeCache.ml",
+      "bytes": 13805,
+      "sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticMergeCache.mli",
+      "bytes": 544,
+      "sha256": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "report": {
+        "path": "/private/tmp/unison-cache-quota-stock-container-merge-20261014.json",
+        "bytes": 4560,
+        "sha256": "67a92ea6206b1e2f67bee06dd637062be3c8b67909f2b2192e96b575feb5f791"
+      },
+      "actual": {
+        "schema": "unison-sdk-container-compact-merge/1",
+        "workspace": "/private/tmp/unison-sdk-container-merge-hpujtrw_",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "source_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "base_sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+            "target_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "xmp_offset": 630,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "source_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "base_sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+            "target_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "xmp_offset": 3714,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "source_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "base_sha256": "9330bf02e83f6496e3452354ece9e8a2c2bbc73e348204ec7ee16c2cb4911f5b",
+            "target_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "xmp_offset": 1134,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          }
+        ],
+        "binary_sha256": "f20283243c0a0413fe9eea3056f7e1221e2bf33a7625b92fc98d0b40bc151cd7",
+        "build_receipt_sha256": "cb1cdda2e3ac5a4126a13bbf374b5376459afa053c9ed792a07844b8d8b6f8a0",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a",
+        "scope": "current production CLI/loopback with compact cache only, generated original codec containers modified solely in fixed XMP regions; mock validators; no SDK/Photo/Adobe calls or changed-output decode qualification"
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-cache-quota-stock-make.json",
+        "bytes": 42595,
+        "sha256": "cb1cdda2e3ac5a4126a13bbf374b5376459afa053c9ed792a07844b8d8b6f8a0"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-4o1hnl2z/src/unison",
+        "bytes": 5629456,
+        "sha256": "f20283243c0a0413fe9eea3056f7e1221e2bf33a7625b92fc98d0b40bc151cd7"
+      },
+      "terminal": {
+        "tool_handle": 82031,
+        "chunk": "2080af",
+        "exit_code": 0,
+        "running_session_returned": false
+      }
+    },
+    {
+      "compiler": "ox",
+      "report": {
+        "path": "/private/tmp/unison-cache-quota-ox-container-merge-20261014.json",
+        "bytes": 4560,
+        "sha256": "bb7aa33294459abdc23a4f81b5eeea0c36632b440e5f4172d1aef76aa93024f4"
+      },
+      "actual": {
+        "schema": "unison-sdk-container-compact-merge/1",
+        "workspace": "/private/tmp/unison-sdk-container-merge-fm0ygr4h",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "disjoint",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "competing",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "missing-base",
+            "cache_sizes": [],
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "partial-recovery",
+            "cache_sizes": [
+              5155
+            ],
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "source_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "base_sha256": "0155369458cc4a3f4a9393d5c9dbdebb4c2eb06bc3e9804a5df2dc4893bb9586",
+            "target_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "xmp_offset": 630,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "source_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "base_sha256": "15d637b5364737ecf14f1a557ebbbe77c430dd063843303fcd6b12f6cd1575ac",
+            "target_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "xmp_offset": 3714,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          },
+          {
+            "source": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "source_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "base_sha256": "9330bf02e83f6496e3452354ece9e8a2c2bbc73e348204ec7ee16c2cb4911f5b",
+            "target_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "xmp_offset": 1134,
+            "xmp_size": 4543,
+            "provenance": "original generated container with inserted scalar attributes consuming only XMP padding; changed base/targets not SDK-validated"
+          }
+        ],
+        "binary_sha256": "7ee3ce7b4c5ced060fe15b8bb5aecff19a317a85f2b7cf1c8b0d6ccda582bdce",
+        "build_receipt_sha256": "50f846fe586f8415ac7c1d36996283a3801a648d3127dc0230fcf744626f9506",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "e50b6bdcf7da6b5bf01bf7318e45c40d85d3c405082a686ee98ba709349dc73a",
+        "scope": "current production CLI/loopback with compact cache only, generated original codec containers modified solely in fixed XMP regions; mock validators; no SDK/Photo/Adobe calls or changed-output decode qualification"
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-cache-quota-ox-make.json",
+        "bytes": 42601,
+        "sha256": "50f846fe586f8415ac7c1d36996283a3801a648d3127dc0230fcf744626f9506"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mzldcm0_/src/unison",
+        "bytes": 7552720,
+        "sha256": "7ee3ce7b4c5ced060fe15b8bb5aecff19a317a85f2b7cf1c8b0d6ccda582bdce"
+      },
+      "terminal": {
+        "tool_handle": 13897,
+        "chunk": "e5f787",
+        "exit_code": 0,
+        "running_session_returned": false
+      }
+    }
+  ],
+  "limits": [
+    "Actual merged-output SDK validation remains open.",
+    "No camera corpus, general RDF/growth, RSS, crash/power-loss, performance or production Adobe backend qualification."
+  ]
+}

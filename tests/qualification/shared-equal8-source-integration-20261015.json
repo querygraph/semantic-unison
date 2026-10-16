@@ -1,0 +1,79 @@
+{
+  "state": "EQUAL8_SOURCE_PREPARED_NOT_TESTED_DURING_PART5",
+  "authority": "Latest direct user: we have agreed with photo on an equal split in CPUs,8/8. Supersedes10/6 and4/12 CPU fields.",
+  "cpu_split": {
+    "unison": 8,
+    "photo": 8,
+    "system": 2
+  },
+  "preceding_root_pool_and_lifecycle_contract": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v2.json",
+    "bytes": 5827,
+    "sha256": "4b9f20df567a31dedac231ff2f5ff44f2d059cbaa60aab54db8b978639f11a4e"
+  },
+  "root_cpu_fields_superseded": true,
+  "proposed_token_indexes": {
+    "unison": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "photo": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "idle": [
+      16,
+      17
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 12906,
+      "sha256": "38df118f6176012bd904f1e80f8b9f9798e3686dc63b3d33bfb64e2f33023e2b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 2574,
+      "sha256": "aea5680686431de4c1f6f67e18f6f1e1e6f80805fd6eb5b0d593f27255f446b9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 30952,
+      "sha256": "9db335bebb444c43d4142d4565dc30e6d6b36acd13db58b60221e43b51b93837"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/shared_budget_test.py",
+      "bytes": 2506,
+      "sha256": "1611f23f923a11627a6e191cc5464f4c77ce7e7dfbec9ed1d97f70a6bcf115bf"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-machine-policy.md",
+      "bytes": 7106,
+      "sha256": "c0a58d3bcb4a659898fb12984b25b25973a6fbb4b9394b4aa2514f926bf4a29c"
+    }
+  ],
+  "source_behavior": "Manualshared ceiling8; compiler<=2+owner2, sharedfunctional --shared-qualification workers1/2 perendpoint+2owner(max6declared) within8. Sharedqualification requires6..8 credits and exactly2owner; conflicting qualification/partition flags refused. Puretests updated NOT RUN.",
+  "runtime_grant": false,
+  "token_acquisition_implemented": false,
+  "memory_and_physical_io_qualified": false,
+  "memory_reservations_carried_forward_gib": {
+    "unison": 32,
+    "photo": 64,
+    "system": 32
+  },
+  "current_part5": "Existing18allocation remains unchanged/live handle52232; no retroactive shrink/preemption or second dispatch. Frozen source untouched; boundedsourcework disclosed.",
+  "next_after_closure": "Run prepared pure controls, implement exactcommonpool fullset/nonblocking/partialrelease/identity checks and retained FD lifecycle; qualify finite two-owner contention and sharedfunctional before concurrent runtime."
+}

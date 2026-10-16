@@ -1,0 +1,327 @@
+{
+  "scope": "Real clang compilation and object/depfile readback of owned original C; no SDK link/load/runtime",
+  "workspace": "/private/tmp/unison-native-cache-4ua2l8df",
+  "cases": [
+    {
+      "name": "initial",
+      "cache_hit": false,
+      "object_sha256": "cc9e6659cce492fc5a187c3b2ec832edaf5a7e66b7fee8a117de70b95185a3c4"
+    },
+    {
+      "name": "unchanged",
+      "cache_hit": true,
+      "object_sha256": "cc9e6659cce492fc5a187c3b2ec832edaf5a7e66b7fee8a117de70b95185a3c4"
+    },
+    {
+      "name": "transitive-header-restored-mtime",
+      "cache_hit": false,
+      "object_sha256": "eebf11351eb0bd64be5a73a05bf55d907e47311a6e7551db2b44ee39bf595a24"
+    },
+    {
+      "name": "header-successor-hit",
+      "cache_hit": true,
+      "object_sha256": "eebf11351eb0bd64be5a73a05bf55d907e47311a6e7551db2b44ee39bf595a24"
+    },
+    {
+      "name": "source-restored-mtime",
+      "cache_hit": false,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "flags-changed",
+      "cache_hit": false,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "object-corrupted",
+      "cache_hit": false,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "receipt-corrupted",
+      "cache_hit": false,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "dependencies-missing",
+      "cache_hit": false,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "restored-hit",
+      "cache_hit": true,
+      "object_sha256": "856e0fdee0746d9756ae884d0c3ef68c19a7340b2eb93bce51a83a5e1d3012f5"
+    },
+    {
+      "name": "during-compile-change",
+      "rejected": true
+    },
+    {
+      "name": "retry-after-input-change",
+      "cache_hit": false,
+      "object_sha256": "858001813a89e82b47bc791d2c3fa3ce96ef8bfa76b1d398a98d230093f25cf3"
+    },
+    {
+      "name": "actual-builder-transitive-header",
+      "current_rebuilt": true,
+      "previous_retained_stale_object": true,
+      "previous_function_sha256": "f6686482448af7739b97a598ed0019eb47e2b359daba74c3b95c3984ebe936fd"
+    }
+  ],
+  "commands": [
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DOTHER=1",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DNEW=1",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-DNEW=1",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original object.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.o"
+    ],
+    [
+      "clang",
+      "-O2",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/previous-builder/original-a290031781cdf34b.o"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-M",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.d",
+      "-MT",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.o",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c"
+    ],
+    [
+      "/usr/bin/clang",
+      "-O2",
+      "-MD",
+      "-MF",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.d",
+      "-c",
+      "/private/tmp/unison-native-cache-4ua2l8df/original.c",
+      "-o",
+      "/private/tmp/unison-native-cache-4ua2l8df/current-builder/original-a290031781cdf34b.o"
+    ]
+  ],
+  "sources": {
+    "tools/adobe-validator/object_cache.py": "e9f12ed825d02f80185b4664cc1ce77eccb6d8835045b6d83663b00796afd656",
+    "tools/adobe-validator/build.py": "3572e86ca5bcfb3c6ec005594c4e7c6afd9f677bc6858b046588e9d0889a1f00",
+    "tests/native_object_cache/run.py": "c344d3add27b8c998546f1d1840ca53b2240c1d0f680c322430fc710eeb1c851"
+  }
+}

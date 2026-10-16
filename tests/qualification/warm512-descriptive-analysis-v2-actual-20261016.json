@@ -1,0 +1,50 @@
+{
+  "schema": "unison-warm512-descriptive-analysis/2",
+  "state": "ANALYSIS_CLOSED",
+  "actual_terminal": {
+    "chunk": "d1778c",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "runner": {
+    "path": "/Users/alexy/src/unison/bench/report_warm512.py",
+    "bytes": 6364,
+    "sha256": "571d8f3e2162bf29121ef9f69a7ff71fb15331d42997df2f41846a23420423dc"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016b/SHARED-START.json",
+      "bytes": 1160,
+      "sha256": "8b0610efaef7b2cffbe52a6f2cff8d270c4f037284c1dc9ec8782cdbdad15aa1"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "7233f3aa0aba098ee6681c0e2f649f256f4deaa81ac280d9cb2e5103603f182e"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016b/SHARED-STDOUT.txt",
+      "bytes": 125,
+      "sha256": "6da0f23a5642ea358c12541e13a6b9b930e279d096ca14032d5e15afe7f31c66"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016b/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/results/warm512-observed-results-v2.json",
+      "bytes": 13440,
+      "sha256": "0bff5c4cf6fac8f9e2f18ce3e522c4f4721ec90ade694eda5aea99054b5ff3df"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/results/warm512-observed-results-v2.md",
+      "bytes": 3373,
+      "sha256": "6c1415cd45b387e2d05f1ebb8acc10eca931c936f2b50702ba4c2570e91959b6"
+    }
+  ],
+  "scope": "Published retained JSON analysis only: protocol forwarded counts and separate logical materialization models/semantic successful writes; physical storage bytes explicitly unknown. Prior report/rawbytes unchanged; no receiving/SDK/Photo/camera/EXIO/benchmarkexecution.",
+  "full_goal_complete": false
+}

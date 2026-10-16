@@ -1,0 +1,26 @@
+{
+  "state": "EXPIRED_UNSTARTED_NO_CANONICAL_IO_OR_CPU_ACQUISITION",
+  "admission": {
+    "path": "/private/tmp/unison-canonical-io-probe-ADMISSION-v3.json",
+    "bytes": 1648,
+    "sha256": "241da5560756d330c6ff0669234ecd45c26e7cc375fcd2da9ddaa84858cbca18",
+    "start_deadline_unix": 1792114565.4982789
+  },
+  "plan_sha256": "7540107284b5fbd7d5e0bed182ec94a4495f4b274ac822ffce43ee14439038c9",
+  "guard_actual_terminal": {
+    "tool": "exec_command",
+    "chunk": "2df62f",
+    "exit": 1,
+    "running_session": false,
+    "reason": "Pre-exec guard line6 deadline assertion refused dispatch. Exact command/plan/pins verified, but deadline expired; os.execv never reached."
+  },
+  "revalidation_unix": 1792114757.139539,
+  "workspace": "/private/tmp/unison-canonical-io-probe-194be0344b084fe98c41c36d8d3056ef",
+  "workspace_exists": false,
+  "started_probe_processes": 0,
+  "canonical_io_lock_acquired": false,
+  "cpu_tokens_acquired": false,
+  "payload_or_sdk_native": false,
+  "no_replay": true,
+  "scope": "Metadata/source pin read only. Failed launcher is not a canonical test runtime/failure; no worker or contender/group created. Original admission unchanged. Fresh separate admission required."
+}

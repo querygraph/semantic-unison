@@ -1,0 +1,178 @@
+{
+  "schema": "unison-camera-entrypoint-source-controls/1",
+  "runs": [
+    {
+      "owner_terminal": {
+        "chunk": "fba6c3",
+        "session": 36628,
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 70900,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 70900,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-rm8e408k/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "db2bafdf910263719512b76309fe09f80c7fca035a3f56a5d1b9b6d52004e1c8"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-rm8e408k/SHARED-START.json",
+          "bytes": 1182,
+          "sha256": "488d566e6a7f9ffab68dd9678c8aaa5c9197cfe96ae0a3fe1d12b76220315e84"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-rm8e408k/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-rm8e408k/SHARED-STDOUT.txt",
+          "bytes": 6113,
+          "sha256": "b2f4934d14a8974fdfc25f1a4482f49603a3a369ffadd6d17777e2eeb670da20"
+        }
+      ]
+    },
+    {
+      "owner_terminal": {
+        "chunk": "b9c8df",
+        "session": null,
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 71083,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 71083,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-entry-source-4fwrqm7e/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5146ea0e7470257923d7bedcf583e0e6ab993d56cc9cdca3eb963c34403c807e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-entry-source-4fwrqm7e/SHARED-START.json",
+          "bytes": 1212,
+          "sha256": "baf9bb2c6f8d0ba8cbfa654ae3d0a45e7cdcbf7d8b016cf4f7e76b3b91aad7b2"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-entry-source-4fwrqm7e/SHARED-STDERR.txt",
+          "bytes": 131,
+          "sha256": "1ac71a53d63a9fc2cdc0fb27d760942ebf0c2f1335a1ea97b109059a60d9af7c"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-entry-source-4fwrqm7e/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/audit.py",
+      "bytes": 4715,
+      "sha256": "c5ead935e9efc458f5e9fc158a3741acb64bc910cb8e69fe1c6bda3a4a45e2d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/audit_test.py",
+      "bytes": 2976,
+      "sha256": "92cd79d875baa41c8052eb0036e24d330cf45df8519c80ccc59d53f58036c89c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case.py",
+      "bytes": 5740,
+      "sha256": "9257a0b41b5d2a7eb3a14f2ba1fcaadb844bb40118d2d2d7add73be36c1b09e0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case_test.py",
+      "bytes": 3368,
+      "sha256": "eeb8619ca6a2006c9e039d9f446a46ccd359a32fac8edee9aaa6db3ac5cbcc54"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone.py",
+      "bytes": 3965,
+      "sha256": "f280735c2855204f811f8e7385b00efb2bff8783f5e39620e0007161b9db2d3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone_test.py",
+      "bytes": 2581,
+      "sha256": "9a069c28b4bce3818489f293717a0723c9023d577744c54b5d01dd5b0e299819"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/controls.py",
+      "bytes": 337,
+      "sha256": "5ace27021ffef0adb952a7c162840111f89af7cd1a61b52e26fa1d4bbcde1f69"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/execute.py",
+      "bytes": 6920,
+      "sha256": "9469a27b22ce482d57880191799286011184853bbaf5a4771a7803e8ddef8d91"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/execute_test.py",
+      "bytes": 3103,
+      "sha256": "47010ede0f18e73eba0b27bfe8e59438a05d24ce184c37dad9aa1b8e04b1c34e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport.py",
+      "bytes": 4727,
+      "sha256": "cc7478f183487c6ba3defd8da118ee22176bd0b02a2967189123d41f3e5c2f4d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport_test.py",
+      "bytes": 3832,
+      "sha256": "0c1cd5078194a32e93c09078950e21c6ffb18000eb6a5d73b509662164a2b53c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker.py",
+      "bytes": 3821,
+      "sha256": "39570050ca2ef8da4510611e465093f442c6947efaaa5fd1b07745c08fd11a47"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker_test.py",
+      "bytes": 4293,
+      "sha256": "8d8c090a109ea27653a05be366153614724ac4716f65be5876f2c5bc2707ee9c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 16506,
+      "sha256": "0e2ec09256f0a3846bf9349c7b141e3912dad9840b3b297b7af1a6a879e1c219"
+    }
+  ],
+  "scope": "Preparedexactadmissionentrypoint +32tinyfixture/mock/refusalcontrols and sharedsource/lifecycle regressions. No camera/nativeclone/realUnisontransport/EXglobal. Newparentworkerfullinheritedresourceprotocol remains toqualify before liveadmission."
+}

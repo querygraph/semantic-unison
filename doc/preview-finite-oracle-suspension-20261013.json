@@ -1,0 +1,31 @@
+{
+  "schema": "unison-preview-oracle-coordination/1",
+  "state": "NATIVE_WINDOW_SUSPENDED_NO_REGISTRATION_RESULT",
+  "observedUtc": "2026-10-14T02:18:00Z",
+  "suspension": {
+    "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/ROOT-WINDOW-SUSPENDED.json",
+    "bytes": 1042,
+    "sha256": "4c01d3092fd7c084017a1382e3d12f35173a13ecf83aa99d1c7385db9c7d5f5e"
+  },
+  "helperClosure": {
+    "path": "/Users/alexy/src/photo/native-preview-oracle-window-238f45ad3ef4469eaf19e74a331e6ef5/SUSPENDED-ALL-HELPERS-CLOSED.json",
+    "bytes": 8741,
+    "sha256": "f59eb0950120f3768f859bdb57ecc1cafad6fe07934da0909ce0d1adeca90b15"
+  },
+  "helperAttempts": 5,
+  "helpersClosedAndDispatcherRestored": true,
+  "registrationAttempts": 3,
+  "registrationAttemptOutcome": "WAIT_FOR_MAIN_CATALOG",
+  "registrationInvoked": false,
+  "coordinatorPID": 18036,
+  "canonicalPhotoLeaseHeldByOwner": true,
+  "activeNativeCPUCredits": 0,
+  "nativeRecognitionPacketPending": true,
+  "independentSixFileByteAndDecodeResultIsNativeRecognitionProof": false,
+  "unisonNativeOperations": 0,
+  "unisonPreviewFilesGenerated": 0,
+  "nextNativeAction": "Root must revalidate actual unlock and renew original-owner admission; no request replay.",
+  "unisonContinuation": "Isolated Unison builds and synthetic-file tests; no Adobe, Photo payload, live cache or generator access.",
+  "parentQueueThread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "parentQueueAcknowledgmentAccepted": true
+}

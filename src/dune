@@ -6,27 +6,44 @@
 (library
  (name unison_lib)
  (wrapped false)
- (modules :standard \ linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools compat_digest)
+ (modules :standard \ linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools semantic_mode_filter compat_digest)
  (modules_without_implementation ui)
  (flags :standard
         -open Compat_digest
         -w -3-6-9-10-26-27-32-34-35-38-39-50-52
         -warn-error -3-6-9-10-26-27-32-34-35-39-50-52
         -no-strict-sequence)
+ (preprocess
+  (per_module
+   ((action (run %{exe:semantic_mode_filter.exe} %{ocaml_version} %{input-file}))
+    SemanticHash SemanticFile SemanticMailbox
+    FormatRecognition DngRecognition FormatExtension XmpObservation XmpMerge DngSemantic DngExtended JpegSemantic SemanticDelta SemanticWorkers SemanticFormats)))
+ (preprocessor_deps semanticHash.ox.mli.in semanticFile.ox.mli.in semanticMailbox.ox.mli.in
+  formatRecognition.ox.mli.in dngRecognition.ox.mli.in formatExtension.ox.mli.in xmpObservation.ox.mli.in xmpMerge.ox.mli.in dngSemantic.ox.mli.in dngExtended.ox.mli.in jpegSemantic.ox.mli.in semanticDelta.ox.mli.in semanticFormats.ox.mli.in)
  (foreign_stubs
   (language c)
-  (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs))
+  (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs nativeCopyRange_stubs wholeFileClone_stubs fileObservation_stubs stagePublication_stubs finalPublication_stubs helperSupervisor_stubs semanticHash_stubs semanticFile_stubs))
  (c_library_flags -lutil)
  (libraries compat str unix lwt_lib bigarray))
 
 (include_subdirs unqualified)
+
+; Test registers Uicommon.testFunction during initialization. Force only this
+; archive into the CLI; global -linkall would also link Windows-only modules.
+(library
+ (name unison_selftest)
+ (wrapped false)
+ (modules test)
+ (flags :standard -w -27-32)
+ (library_flags -linkall)
+ (libraries unison_lib))
 
 (executable
  (name linktext)
  (public_name unison)
  (package unison) ; Dummy: we don't use packages
  (modules linktext)
- (libraries unison_lib))
+ (libraries unison_lib unison_selftest))
 
 (executable
  (name linkgtk3)
@@ -35,3 +52,8 @@
  (flags :standard -w -3-6-9-27-32-52)
  (modules linkgtk3 uigtk3 pixmaps)
  (libraries threads unison_lib lablgtk3))
+
+; Build-only selector; not linked into the synchronizer.
+(executable
+ (name semantic_mode_filter)
+ (modules semantic_mode_filter))

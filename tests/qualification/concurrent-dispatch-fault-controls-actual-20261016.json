@@ -1,0 +1,50 @@
+{
+  "schema": "unison-concurrent-dispatch-fault-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "dc1498",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/dispatch_fault_test.py",
+      "bytes": 6469,
+      "sha256": "75b9e3f3bd2a6df8958612582b25f3ccaa0ab18721eb2bc95ff7ed25eb738b63"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit.py",
+      "bytes": 5163,
+      "sha256": "670fbee96e8165e7c58a533c7a20df19efe6f4ea5569c10a6408d654971e40d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 17937,
+      "sha256": "a4d8fcaca6bc7692c5bde9a1d2a2cddaee6ca10c8e84505c1037cde5bc9b25aa"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-dispatch-fault-controls-20261016a/SHARED-START.json",
+      "bytes": 1123,
+      "sha256": "22690f6445687f74db92332b0f4a926cf7c436a0884a6bdefe18dc364492728d"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-dispatch-fault-controls-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "99fec54a67334db8d03e4322e6287299f0e7ac876afdc365a662e377319086de"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-dispatch-fault-controls-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-dispatch-fault-controls-20261016a/SHARED-STDERR.txt",
+      "bytes": 104,
+      "sha256": "e04b881b57d5d4ca3ace79c02f0452f4e168145a6c7494fd6a518f25febd2ec7"
+    }
+  ],
+  "scope": "6new-target parent mock-fault controls with inert owners/protocols and disposable devnull FDs; audit-before-reap/reverse-close and unknown retention; outer canonical Unison8 actualclosed; no real receiving/SDK/Photo/camera/canonicalEXglobal or native helper settlement claim",
+  "full_goal_complete": false
+}

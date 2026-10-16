@@ -1,0 +1,75 @@
+{
+  "schema": "unison-required-acceptance-sdk-scope-addendum/1",
+  "kind": "SOURCE_AND_EXISTING_RECEIPT_SCOPE_AUDIT_ONLY",
+  "full_goal_complete": false,
+  "new_runtime_executions": 0,
+  "new_sdk_or_payload_operations": 0,
+  "requirements": [
+    9,
+    12
+  ],
+  "evidence": [
+    {
+      "path": "tests/qualification/sdk-shared-host-v1-actual-20261016.json",
+      "bytes": 11330,
+      "sha256": "b7704b4e722e7c2c8cf15ab6d98774afc1cd50158eeed2443115116abaa9b14e"
+    },
+    {
+      "path": "tests/qualification/sdk-shared-host-v2-actual-20261016.json",
+      "bytes": 16119,
+      "sha256": "c07aa055d60c93fc20cc58fe2fbbd3fbc0a266d9d68e769b2b8f79967dea3b96"
+    },
+    {
+      "path": "tests/qualification/sdk-shared-host-v2-root-adoption-20261016.json",
+      "bytes": 679,
+      "sha256": "8d26a53f5f74d43d7ca6a8c2bc2fdbd0f71fd925b48ba60f7f9fe802d04c9789"
+    },
+    {
+      "path": "tests/qualification/sdk-multifile-entry-lifecycle-actual-20261016.json",
+      "bytes": 3291,
+      "sha256": "964dc97831976e877f2711eac8d7923a04ecebce1f64671f5e68e26efbcd0db0"
+    },
+    {
+      "path": "tests/qualification/sdk-multifile-helper-lifecycle-actual-20261016.json",
+      "bytes": 1733,
+      "sha256": "4a097d04c1712ac52874beb07ba367008794dbb8df5e792e3905d0935d6c848c"
+    },
+    {
+      "path": "tests/qualification/sdk-multifile-transport-lifecycle-actual-20261016.json",
+      "bytes": 4805,
+      "sha256": "94e69befb14f5d314f4bd7e1aceb37d5365711326d6781283b74ed81c67ff396"
+    },
+    {
+      "path": "tests/qualification/sdk-multifile-request-metadata-actual-20261016.json",
+      "bytes": 1307,
+      "sha256": "9ce62dca7d3df203e71f29c5fb64a46ebf58134e1d923acdc75455ad76acc493"
+    },
+    {
+      "path": "bench/sdk-shared-host-v2-observations-20261016.json",
+      "bytes": 18340,
+      "sha256": "42d0909e1575268ad100566b5b04404d125e5b91408577c575914b28daf472ad"
+    },
+    {
+      "path": "doc/sdk-multifile-receiving-request-v1.json",
+      "bytes": 29372,
+      "sha256": "6a12c677626448ad520fe29df3253a6e890ac6bd9cd125cbe218ab1f9cdfb684"
+    }
+  ],
+  "established": [
+    "Shared SDK V1 and observed V2 actually completed, with direct helper/probe and worker/group/FD closure; admissions consumed.",
+    "V2 contains12 actual SDK calls and62 actual probe children; bounded per-process observations, not peak/tree/hardcap evidence.",
+    "New multi-file receiving worker boundary and original fake transport controls pass with actual child/group settlement. SDK protocol in fake controls explicitly synthetic."
+  ],
+  "incomplete": [
+    "Actual new multi-file stock/Ox receiving with four SDK helper calls has not been admitted or executed.",
+    "Multiple internally parallel SDK processes during actual receiving, representative multi-file single-thread throughput and mixed ExifTool/hash/Adobe throughput remain distinct gaps.",
+    "Representative real-camera semantic eligibility, broader fault/platform scope and complete benchmark requirements remain open."
+  ],
+  "current_dispatch_state": {
+    "admission_path": "/private/tmp/unison-sdk-multifile-receiving-admission-v1.json",
+    "admission_present": false,
+    "workspace": "/private/tmp/u-smr-v1-13fc44d676",
+    "workspace_present": false
+  },
+  "audit_limitations": "Receipt byte pins and explicit recorded scopes only. No historical runtime replay/source-snapshot parity requalification, new native observation or resource acquisition."
+}

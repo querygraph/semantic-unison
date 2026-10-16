@@ -1,0 +1,126 @@
+{
+  "schema": "unison-helper-child-pid-qualification/1",
+  "complete": true,
+  "builds": [
+    {
+      "compiler_kind": "stock",
+      "receipt": {
+        "path": "/private/tmp/unison-helper-pid-stock-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "cfde981744dbf1829d39df1c4e4e783cab6b56ace0c6b7c01de12516be51605c"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-oio0buq9/src/unison",
+        "bytes": 5639744,
+        "sha256": "39be4b75ed6a6971c10d9df9b6fc6ae658d33f9d0696a373b8706494677490be"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "all_recorded_production_sources_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    {
+      "compiler_kind": "ox",
+      "receipt": {
+        "path": "/private/tmp/unison-helper-pid-ox-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "0342501987d24c0410d3aa6d31f12f48839c8adcae3a6f33bc675b99850b37df"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-jtc7d1co/src/unison",
+        "bytes": 7567976,
+        "sha256": "6e31f82c455c4c4b192e62817bc2528dde5c871b6516d7bbaeed43d70e3293f8"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "all_recorded_production_sources_match": true,
+      "build_exit": 0,
+      "selftest_exit": 0
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.ml",
+      "bytes": 21193,
+      "sha256": "5358490ed9c36489b757c6a0e8927968e89e651bfa1618f5a685be7446e4876e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.mli",
+      "bytes": 5337,
+      "sha256": "3214c00db077f4efe080ad8d24b8d6fbe7f77df7f7cf3ff190ce3f698a18baef"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor_stubs.c",
+      "bytes": 5766,
+      "sha256": "d8d947f632e846afebae7aa3f30b0133be771e57564421684c5fd9552b107fb6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/helper_tests.ml",
+      "bytes": 16180,
+      "sha256": "0e1801c1b95e9f8111acb23fa1eac14fe3497c4061f01663d850e2dc3459158f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/synthetic_helper.ml",
+      "bytes": 2463,
+      "sha256": "8701d7b2d5abcf64099790310c8015cf2a8fd786ce6fe4dad8c07311d6727cca"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/helpers/run_tests.py",
+      "bytes": 1952,
+      "sha256": "72a6d1f3dd769fcca42f97d6676d76592232b8a687d04e57e8772e36384b9b3c"
+    }
+  ],
+  "runs": [
+    {
+      "kind": "stock-helper-suite",
+      "owner_tool": 78595,
+      "terminal_chunk": "1f2b2c",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    },
+    {
+      "kind": "ox-helper-suite",
+      "owner_tool": 52409,
+      "terminal_chunk": "f05781",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "File \"synthetic_helper.ml\", line 24, characters 21-35:\n24 |   | \"ignore-term\" -> Sys.set_signal Sys.sigterm Sys.Signal_ignore; sleep 10.\n                          ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\n\nFile \"synthetic_helper.ml\", line 26, characters 6-20:\n26 |       Sys.set_signal Sys.sigterm Sys.Signal_ignore;\n           ^^^^^^^^^^^^^^\nAlert unsafe_multidomain: Stdlib.Sys.set_signal\nUse [Sys.Safe.set_signal].\nPASS online CPU budget available\nCPU topology: logical=36 automatic=18\nPASS physical CPU budget matches host topology or logical fallback\nPASS cancellation identity remains stable in connection resource registry\nPASS worker cancellation callback synchronous, once, unregisterable\nPASS helper identity binds actual terminal and timeout, never pre-spawn cancellation\nPASS literal argv, no shell\nPASS bounded simultaneous stdout/stderr\nPASS timeout escalates ignored TERM and releases permits\nPASS owner loop remains responsive during cancellation\nPASS disconnect cleanup kills and reaps with stopped owner loop\nPASS disconnect removes pending admission without an owner-loop tick\nPASS normal process exit cleans abandoned helpers\nPASS macOS helpers do not inherit unrelated non-cloexec descriptors\nPASS weighted admission and queued cancellation\nPASS CPU callbacks release permits on exception\nPASS two children can run concurrently\nPASS remaining descendants terminated before leader reap\nPASS missing executable fails without leaking budget\nPASS valid qualified structured receipt\nPASS missing optional raw digest remains distinct from corruption\nPASS reject mismatch\nPASS reject error-zero\nPASS reject unsupported\nPASS reject wrong-hash\nPASS reject wrong-build\nPASS reject malformed\nPASS reject exit-nonzero\nPASS policy off does not inspect or execute\nPASS require tool unavailable rejected, warn explicit\nPASS tool pin mismatch rejected before invocation\nPASS post-validation candidate mutation rejected\nPASS warn cannot permit mutation after malformed receipt\nPASS warn cannot permit candidate changed before validation\nPASS warn rejects pre-helper candidate inspection EIO\nPASS warn rejects pre-helper candidate inspection malformed snapshot\nPASS warn rejects pre-helper candidate inspection invalid expected\nPASS warn rejects pre-helper candidate inspection cancelled inspection\nPASS strict parser rejects extra fields and oversized receipt\nAll helper/validation tests passed.\n"
+    },
+    {
+      "kind": "stock-make-selftests",
+      "owner_tool": 8581,
+      "terminal_chunk": "c11912",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Selftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-oio0buq9/selftest.log\n"
+    },
+    {
+      "kind": "ox-make-selftests",
+      "owner_tool": 63551,
+      "terminal_chunk": "767b07",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Selftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-jtc7d1co/selftest.log\n"
+    }
+  ],
+  "scope": "Historical direct-child PID returned alongside existing supervisor status. Stock/Ox helper suites and Make/selftests pass. No SDK/Photo invocation, no fresh process-group ownership/absence proof, no live signaling authority from child_pid.",
+  "helper_pass_groups": [
+    {
+      "kind": "stock-helper-suite",
+      "count": 38
+    },
+    {
+      "kind": "ox-helper-suite",
+      "count": 38
+    }
+  ],
+  "known_alerts": "Ox synthetic single-process helper retains two existing unsafe_multidomain Sys.set_signal alerts; production checked-worker selection unchanged."
+}

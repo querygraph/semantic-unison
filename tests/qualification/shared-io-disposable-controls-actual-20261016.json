@@ -1,0 +1,79 @@
+{
+  "state": "TEN_DISPOSABLE_EX_GLOBAL_CONTROLS_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "chunk": "01e671",
+    "exit": 0,
+    "running_session": false
+  },
+  "owner_pid": 75902,
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-bjw8qhl7",
+  "prior_nine_case_terminal": {
+    "chunk": "9bc5e6",
+    "exit": 0,
+    "running_session": false,
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-pyco3q3y"
+  },
+  "backend_sha_before_after": "43fab637ea5782905b8ec19c2474d4c2fc3c270ab7956c906ed8762009de9be9",
+  "closure": {
+    "child": {
+      "pid": 75904,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 75904,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "scope": "Disposable private manifest/directory/barrier+fake18CPU pool only. Independent Python contender waits and holder inheritance tested; no canonical IO namespace opened, media/Photo/DNG/SDK/Adobe/compiler operation. CanonicalCPU00..07 owner only. Mock close error injected before kernel close and resolved using injector proof, not retry of genuinely unknown close.",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 8568,
+      "sha256": "43fab637ea5782905b8ec19c2474d4c2fc3c270ab7956c906ed8762009de9be9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool_test.py",
+      "bytes": 7559,
+      "sha256": "fee9a9d87708ae760553b9d4d9e0cae7eb61e5393dd3c7f2862e856240ab015f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v1.json",
+      "bytes": 4475,
+      "sha256": "e68f5a1cc370e37e07dff5cb1c205a606347ef7483541131b1f477ef58e51661"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v1.json",
+      "bytes": 3444,
+      "sha256": "b55ccc1e1fbb0210974d9040dcac4766586ffaee4bdc49a8a44eed9b7c363577"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-bjw8qhl7/SHARED-START.json",
+      "bytes": 943,
+      "sha256": "87bd2f1c8f86333e506033d6bb81f04f1cae633ad6950b93afddb3dd0a8b1add"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-bjw8qhl7/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "610215b37ec1d7f9a4f2488458e355ef0d174f16b22dd92fd701c13e80eb9822"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-bjw8qhl7/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-disposable-io-controls-bjw8qhl7/SHARED-STDERR.txt",
+      "bytes": 109,
+      "sha256": "4f93bfd4e4569f80b9e4bcf664343b2999020a7a5aba6c1f99f39b8eeb6f0d89"
+    }
+  ]
+}

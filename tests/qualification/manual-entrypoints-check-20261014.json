@@ -1,0 +1,49 @@
+{
+  "schema": "unison-user-run-entrypoint-check/1",
+  "utc": "2026-10-14T21:25:41.404300+00:00",
+  "scope": "manual dispatcher dry-run smoke plus existing pure host-interface runner; no compilers/SDK/core pipeline/fuzz/sanitizer execution",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/Makefile",
+      "bytes": 418,
+      "sha256": "4639fdbf183d3d9f65eeb09b24987a6d57bcf73ab951cd5b66309d57c195806a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 5683,
+      "sha256": "db0017b28e661be02128f11c24a162af520bafa54f6cdd614861fa82cfaa4d1f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/implementation-status.md",
+      "bytes": 77111,
+      "sha256": "c63ce394891068e20d2eb03bcdee4a2a2342e111f53751d2d1498a33bd8f96e5"
+    }
+  ],
+  "checks": [
+    {
+      "command": "DRY_RUN=1 STOCK_PREFIX=/Users/alexy/.opam/default/bin JOBS=4 make -f tests/Makefile stock-make",
+      "chunk": "435530",
+      "exit": 0,
+      "execution": false
+    },
+    {
+      "command": "DRY_RUN=1 BUILD_RECEIPT=/private/tmp/unison-cache-quota-stock-make.json make -f tests/Makefile cache-storage",
+      "chunk": "1973de",
+      "exit": 0,
+      "execution": false
+    },
+    {
+      "command": "make -f tests/Makefile host-interface",
+      "chunk": "0dd0a4",
+      "exit": 0,
+      "pure_result": {
+        "path": "/private/tmp/unison-sdk-host-plan-roohesi8/RESULT.json",
+        "bytes": 368,
+        "sha256": "c05a58d6dd276ced3aea5518779f3356b864e1e62fa1db9381f003e8c996435e"
+      }
+    }
+  ],
+  "pending_sdk_request_pins_unchanged": true,
+  "SDK_calls": 0,
+  "native_release": false
+}

@@ -1,0 +1,690 @@
+{
+  "schema": "unison-sdk-host-matrix-actual-return/1",
+  "utc": "2026-10-14T21:33:14.722247+00:00",
+  "state": "ACTUAL_TWELVE_CALL_FUNCTIONAL_PASS_CLOSED",
+  "request": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-request-v1-20261014.json",
+    "bytes": 5814,
+    "sha256": "7f3260c517a11ed6d9a6fb1febdb10269e6633d766d341b7acd2c6399ff21699"
+  },
+  "root_current_source_review": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-CURRENT-EXECUTOR-SOURCE-REVIEW-20261014.json",
+    "bytes": 2160,
+    "sha256": "a5084a78590a430629af58cb3e961f25a2e776b7db4b51dc3914a931da13fd8e"
+  },
+  "admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ADMISSION-20261014.json",
+    "bytes": 1953,
+    "sha256": "100faf0049db1e0cd3957ad0ed7dd7e076b996b64006d4cb92384d3938db3eba"
+  },
+  "plan": {
+    "path": "/private/tmp/unison-sdk-host-comparison-plan-20261014-v3.json",
+    "bytes": 13624,
+    "sha256": "811c62cbedfebc08f52330946ca4b23edc218a0a0b2977905d1866b7e7cce1ee"
+  },
+  "parent_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-parent-terminal-20261014.json",
+    "bytes": 1493,
+    "sha256": "56b4da85f3f50a0943c6938c0442d5f00f600a6c3572fa6be3e18371b7e29c59"
+  },
+  "aggregate": {
+    "pin": {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/AGGREGATE-CLOSED.json",
+      "bytes": 431,
+      "sha256": "1b8406ecf654a9c774c5f2c2c9893a26ca50d074578eead67a56730fa5283fc2"
+    },
+    "actual": {
+      "pid": 25466,
+      "seconds": 300,
+      "closed": true,
+      "scope": "finite contained pilot only",
+      "timed_out": false,
+      "reaped": true,
+      "returncode": 0,
+      "group_members_before_leader_reap": [
+        {
+          "pid": 25466,
+          "stat": "Z"
+        }
+      ],
+      "other_members_absent": true,
+      "wall_seconds": 11.523550753016025,
+      "child_user_seconds": 14.890282,
+      "child_system_seconds": 1.6722359999999998,
+      "within_wall_limit": true
+    }
+  },
+  "result": {
+    "pin": {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/RESULT.json",
+      "bytes": 7532,
+      "sha256": "4bb9c986b718b5c49109870cb93bc05e2407a61271b4a787fa3dab38c93f7f39"
+    },
+    "actual": {
+      "mode": "native",
+      "results": [
+        {
+          "index": 1,
+          "codec": "uncompressed",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 2,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 3,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 6,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 4,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 18,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 18,
+              "active": 0,
+              "peak": 18,
+              "max-partition": 18,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 50372608,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 5,
+          "codec": "jpeg",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 6,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49159936,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 7,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 12,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 50452246,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 8,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 18,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 36,
+              "active": 0,
+              "peak": 18,
+              "max-partition": 18,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 53299522,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 9,
+          "codec": "jxl",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 10,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 119889977,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 11,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 10,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 233987414,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 12,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 18,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 22,
+              "active": 0,
+              "peak": 18,
+              "max-partition": 18,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 507634690,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        }
+      ],
+      "calls": 12,
+      "runtime_scaling_qualified": false
+    }
+  },
+  "raw_calls": [
+    {
+      "index": 1,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-01.json",
+        "bytes": 871,
+        "sha256": "b593abd198a5258c2bfc65da5f788bb4f1f8338c56ff440b86c628e7aab818a3"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-01.json",
+        "bytes": 971,
+        "sha256": "8e77778bcd18493b7cd53f5d67847a7dc873b1c7db7adefec6d9c7c106e79068"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.091 sec\n",
+      "seconds": 0.3934236339991912
+    },
+    {
+      "index": 2,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-02.json",
+        "bytes": 1003,
+        "sha256": "87da17ef8d99bcc5d529e8aa9dcbda82ac5c09a2da6c78d359c410f78899fc55"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-02.json",
+        "bytes": 1163,
+        "sha256": "b1737e07d32acea7d5fb4cd820e7d4493788bd8ab065f7ca69fcc034fd184d1d"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\nUNISON-HOST-AREA 1 tasks=0 started=0 finish=0 calls=0 active=0 peak=0 max-partition=0 reference=1\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=49165248 live=0 denied=0\n",
+      "seconds": 0.7233045850007329
+    },
+    {
+      "index": 3,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-03.json",
+        "bytes": 1003,
+        "sha256": "173fc657e842e45b6541d54c5f5ff5379ca82215dc5f3d3128f7f678bf05604c"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-03.json",
+        "bytes": 1164,
+        "sha256": "f992d41f5cdc77a98aea3ceb8ef4034a32b70d19d81ab81a30ba2e634ab1fe38"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.018 sec\nUNISON-HOST-AREA 1 tasks=1 started=1 finish=1 calls=6 active=0 peak=6 max-partition=6 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=49165248 live=0 denied=0\n",
+      "seconds": 0.31116033799480647
+    },
+    {
+      "index": 4,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-04.json",
+        "bytes": 1005,
+        "sha256": "3760a888a44958a2e1fc860edf2a53ad5cb435c45ec241de20d3f8fd0790171a"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-04.json",
+        "bytes": 1167,
+        "sha256": "1dc8d794128d011ff8f70d681840511e1a6bdcc3abb8f2bfdae5348a71eeb375"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e\ncandidate-size 48005534\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.012 sec\nUNISON-HOST-AREA 1 tasks=1 started=1 finish=1 calls=18 active=0 peak=18 max-partition=18 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=50372608 live=0 denied=0\n",
+      "seconds": 0.30582030600635335
+    },
+    {
+      "index": 5,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-05.json",
+        "bytes": 839,
+        "sha256": "19a59f4d8870e61a53f1fe9b67d0db206ffc096d87fb6953c2c33050a2f7f2ce"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-05.json",
+        "bytes": 971,
+        "sha256": "39079620792d74faa279e77163bb3dfa5304a258ac28217dff75a6f2e86ada2c"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.091 sec\n",
+      "seconds": 0.5883291969948914
+    },
+    {
+      "index": 6,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-06.json",
+        "bytes": 971,
+        "sha256": "7d5a293ec0fbe5d88787e53713c3c1f7632e654a18196eb8ae226750e2cbbee5"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-06.json",
+        "bytes": 1163,
+        "sha256": "3d19e63026e16308045aa0cb912b57ff51c910b2f7ac617aed6d6d58d375db07"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.092 sec\nUNISON-HOST-AREA 1 tasks=0 started=0 finish=0 calls=0 active=0 peak=0 max-partition=0 reference=1\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=49159936 live=0 denied=0\n",
+      "seconds": 0.5915376610064413
+    },
+    {
+      "index": 7,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-07.json",
+        "bytes": 971,
+        "sha256": "848d298e947a382842e3e34de6ab273b08517d86c8ca7068cef55e210ca72767"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-07.json",
+        "bytes": 1164,
+        "sha256": "6b34bd370c8a1e1adcce36923a8b5885c1d91345cbcbde33cb5779a5c61ed3d5"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.018 sec\nUNISON-HOST-AREA 1 tasks=2 started=2 finish=2 calls=12 active=0 peak=6 max-partition=6 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=50452246 live=0 denied=0\n",
+      "seconds": 0.3014634099963587
+    },
+    {
+      "index": 8,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-08.json",
+        "bytes": 973,
+        "sha256": "8b912a9f75f17a6446b8b8056a93ce741d3c0b2b1c476a540e971fce35083944"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-08.json",
+        "bytes": 1167,
+        "sha256": "d108ab4d8f5331db51a92aaa5378528d4783573813dd43c4b7ce010a60f8bf80"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a\ncandidate-size 39016722\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nFindNewRawImageDigest time: 0.012 sec\nUNISON-HOST-AREA 1 tasks=2 started=2 finish=2 calls=36 active=0 peak=18 max-partition=18 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=53299522 live=0 denied=0\n",
+      "seconds": 0.29670859401812777
+    },
+    {
+      "index": 9,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-09.json",
+        "bytes": 835,
+        "sha256": "e1a61df3d8d642d7185031de3472f756651a9acb7c13a7465d34fffe05ac04d2"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-09.json",
+        "bytes": 957,
+        "sha256": "e48d4dbb629c5e0e7f8739faeaeeadee0509128812c37c629b09494449f95d2a"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v1-single\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.059 sec\n",
+      "seconds": 1.9832297090033535
+    },
+    {
+      "index": 10,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-10.json",
+        "bytes": 968,
+        "sha256": "38467b67dee5530325f8f5052de274beabe01d65e87e7b4b6f4dbe315b69a9ce"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-10.json",
+        "bytes": 1149,
+        "sha256": "0943d97e717ff0b7bde4dc6eea9360dbb94eed148fb1ff837c58f13a8e376410"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.058 sec\nUNISON-HOST-AREA 1 tasks=0 started=0 finish=0 calls=0 active=0 peak=0 max-partition=0 reference=1\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=119889977 live=0 denied=0\n",
+      "seconds": 2.005298206000589
+    },
+    {
+      "index": 11,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-11.json",
+        "bytes": 968,
+        "sha256": "cf8cb6914020172d467ea13dd19059f3ddc58f57eefdf73d8ec686e8dbc3790f"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-11.json",
+        "bytes": 1150,
+        "sha256": "4681e125862e1fcf52aebb70c0bcb7272abae74af7a816f9e81029b24cf668f8"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.031 sec\nUNISON-HOST-AREA 1 tasks=2 started=2 finish=2 calls=10 active=0 peak=6 max-partition=6 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=233987414 live=0 denied=0\n",
+      "seconds": 0.581996576016536
+    },
+    {
+      "index": 12,
+      "entry": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-12.json",
+        "bytes": 970,
+        "sha256": "756982e208e22da4168ff58876347a2f2b37fbd0f8f979131b7252705041d686"
+      },
+      "call": {
+        "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-12.json",
+        "bytes": 1154,
+        "sha256": "17fdb53e0391209ce57295c4218c4e6d07938b63052c28ab3ed7960eb32ac99f"
+      },
+      "actual_stdout": "UNISON-DNG-VALIDATION 1\ncandidate-sha256 3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf\ncandidate-size 38237658\ndriver-build unison-sdk171-2724-v3-area-memory-unqualified\nstructure valid\ndecode success\nraw-digest valid\nerrors 0\nwarnings 4\nEND\n",
+      "actual_stderr": "*** Warning: Too little padding on left edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on top edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on right edge of CFA image (possible interpolation artifacts) ***\n*** Warning: Too little padding on bottom edge of CFA image (possible interpolation artifacts) ***\nInterleave2D: 0.031 sec\nUNISON-HOST-AREA 1 tasks=2 started=2 finish=2 calls=22 active=0 peak=18 max-partition=18 reference=0\nUNISON-HOST-MEMORY 1 limit=1073741824 used=0 peak=507634690 live=0 denied=0\n",
+      "seconds": 0.41773040397674777
+    }
+  ],
+  "post_inputs": [
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-original.dng",
+      "bytes": 48005534,
+      "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e"
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-original.dng",
+      "bytes": 39016722,
+      "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a"
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-original.dng",
+      "bytes": 38237658,
+      "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf"
+    }
+  ],
+  "post_tools": [
+    {
+      "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+      "bytes": 9017656,
+      "sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a"
+    },
+    {
+      "path": "/private/tmp/unison-adobe-area-memory-observed-20261014-v1/unison-adobe-validator-area-memory-unqualified",
+      "bytes": 9056800,
+      "sha256": "12df79747c16a87618d69a6ef16e24351e082be80dc1debed4234798d1f10278"
+    }
+  ],
+  "source_pins_verified": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 9295,
+      "sha256": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/run.py",
+      "bytes": 6079,
+      "sha256": "26d25da362e02aaaf2890dc50eeea19f4086cd1782b32f0a8adca6a4db23c97a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/adobe/phase.py",
+      "bytes": 8110,
+      "sha256": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3407,
+      "sha256": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/driver.cpp",
+      "bytes": 13547,
+      "sha256": "0c4fdeba27197836fa95b129ad3e75098eef6d5af1d4614a3787e9f7f10f9925"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/area_scheduler.h",
+      "bytes": 7249,
+      "sha256": "87fbed2108ecd48de7e32f20e124840dc872ec28bf8dc4dfc1c5b3737b837902"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/area_task_host.h",
+      "bytes": 4190,
+      "sha256": "12ca3b66aa2a90e3ff62da48ce6008d2f8299ae3c286a24198cbb33c5b7afd34"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/memory_budget.h",
+      "bytes": 2569,
+      "sha256": "dd5f7ef98280551a081bc2c4cfed0b89b8f874c53b2612a5f10f9687cce7eea0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/memory_allocator.h",
+      "bytes": 1719,
+      "sha256": "1ee30e9b5b262bf9c3fd2751e1fa143c22a0f11130217339f4b48fbc1bd47cb2"
+    }
+  ],
+  "unresolved_marker_absent": true,
+  "actual_calls": 12,
+  "SDK_other_calls": 0,
+  "retries": 0,
+  "admission_consumed": true,
+  "capability_limits": [
+    "generated24MPcodec originals only",
+    "validation result parity, not decoded pixel/RGB/preview fidelity",
+    "callback frames/partitions, not independent OS-thread ceiling proof",
+    "covered allocator bytes, not all heaps/RSS",
+    "single fixed-order sample per combination, not throughput/scaling benchmark",
+    "no actual cancellation/quota exhaustion/production receiving test in this slot",
+    "no production driver replacement or Photo/Lightroom/Main/cache work"
+  ]
+}

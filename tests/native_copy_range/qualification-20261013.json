@@ -1,0 +1,349 @@
+{
+  "coverage": {
+    "actual_macOS_ABI_groups_each_compiler": 13,
+    "existing_bound_groups_preserved": 9,
+    "new_bound_groups": 5,
+    "production_caller_groups_each_compiler": 14,
+    "production_suffix_control": "Requested source interval has37extra bytes; native first copies3 then platform declines; exactly len-3 copied, source+cached/native destination positions checked before fixture flush, next literal appended after interval.",
+    "three_negative_controls_each_compiler": [
+      "private mutation-guard removal: unknown-extra-byte write oracle fails",
+      "private original-length fallback: surrounding byte sentinels fail",
+      "private cached-offset reconciliation removal: channel/native cursor assertion fails"
+    ],
+    "typed_groups_each_compiler": 16
+  },
+  "current_test_source_pins": {
+    "tests/native_copy_range/README.md": {
+      "bytes": 2544,
+      "path": "/Users/alexy/src/unison/tests/native_copy_range/README.md",
+      "sha256": "7067bba36f3e8e2dec63b6f5a6e14722b46d6f03fff5bf3f757309ac3ba463fa"
+    },
+    "tests/native_copy_range/native.ml": {
+      "bytes": 9116,
+      "path": "/Users/alexy/src/unison/tests/native_copy_range/native.ml",
+      "sha256": "f29e3b09aab6d7843f92703627e3e46fbd8ca092da42dfc239a4a6879196c4f5"
+    },
+    "tests/native_copy_range/run.py": {
+      "bytes": 9017,
+      "path": "/Users/alexy/src/unison/tests/native_copy_range/run.py",
+      "sha256": "2518667d750f796fed097706a816d1d7acf5e85e9141653ef52973b59cb19c54"
+    },
+    "tests/native_copy_range/test.ml": {
+      "bytes": 16105,
+      "path": "/Users/alexy/src/unison/tests/native_copy_range/test.ml",
+      "sha256": "64d186ab477b352245d56315988d832dd9e9d39f5a843cf178eb218a70ecabe5"
+    },
+    "tests/test_clone_bound_range.py": {
+      "bytes": 24378,
+      "path": "/Users/alexy/src/unison/tests/test_clone_bound_range.py",
+      "sha256": "0119135a6aba45ddcaec1b5569c871a32579c839079a89e876a080a82fdf38b6"
+    }
+  },
+  "date": "2026-10-13",
+  "final_runs": {
+    "ox_channel_negative": {
+      "artifact_pins_verified": 16,
+      "bytes": 37235,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": {
+        "detected": true,
+        "kind": "channel-reconciliation"
+      },
+      "path": "/private/tmp/unison-strict-bound-range-ox-channel-negative.json",
+      "production_named_groups": null,
+      "sha256": "52fb34d9799600d70c946db035fe7c4e9966710a888f92c67ed959701d84b55f",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-ei1ynnn0"
+    },
+    "ox_production_bound": {
+      "artifact_pins_verified": 16,
+      "bytes": 37170,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": null,
+      "path": "/private/tmp/unison-strict-bound-range-ox-final.json",
+      "production_named_groups": 14,
+      "sha256": "51d28e25e87740daf2c7f9630d3356692f147f50a9657db9965549bfcbf07996",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-0dziway1"
+    },
+    "ox_suffix_negative": {
+      "artifact_pins_verified": 16,
+      "bytes": 37236,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": {
+        "detected": true,
+        "kind": "original-length-suffix"
+      },
+      "path": "/private/tmp/unison-strict-bound-range-ox-suffix-negative.json",
+      "production_named_groups": null,
+      "sha256": "410a72eb2ab42f715c5ec1d5ab79b947d57a69fb521df9cac243eb93b7b0a85b",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-a6wh1fm0"
+    },
+    "ox_typed_native": {
+      "artifact_pins_verified": 66,
+      "bytes": 25608,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiler": {
+        "library": "/Users/alexy/.opam/5.2.0+ox/lib/ocaml",
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": {
+        "block_sharing": false,
+        "executed": true,
+        "named_groups": 13,
+        "other_platforms": false,
+        "platform": "macOS"
+      },
+      "negative_control": {
+        "detected": true,
+        "expected_failure": "unauthorized or repeated suffix write",
+        "only_production_edit": "disable strict indeterminate-decline guard in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-0dl7u08s/negative/copyRange.ml",
+        "source_sha256": "7c50a79c1060b171adfb09fad064d7a7d9ae5d4eeb8c545e6ff87d79128a0d8d"
+      },
+      "path": "/private/tmp/unison-strict-native-range-ox-final.json",
+      "production_named_groups": null,
+      "sha256": "085388e3c2f56f69a28a08d60a38b2e4c7adc8948d41cc58c13e7c256e7dd005",
+      "typed_named_groups": 16,
+      "work": "/private/tmp/unison-native-copy-range-0dl7u08s"
+    },
+    "stock_channel_negative": {
+      "artifact_pins_verified": 16,
+      "bytes": 37162,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": {
+        "detected": true,
+        "kind": "channel-reconciliation"
+      },
+      "path": "/private/tmp/unison-strict-bound-range-stock-channel-negative.json",
+      "production_named_groups": null,
+      "sha256": "bf88f8d607d8d7c0644bc2922077fbbbf73bb1d3caf53f4165a09bddd6afd746",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-pvgpec2f"
+    },
+    "stock_production_bound": {
+      "artifact_pins_verified": 16,
+      "bytes": 37097,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": null,
+      "path": "/private/tmp/unison-strict-bound-range-stock-final.json",
+      "production_named_groups": 14,
+      "sha256": "13200e723e89043d73800bbd7c1a21d3efa1702c247eaa0d3e463e8c033d2953",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-5ypobxmk"
+    },
+    "stock_suffix_negative": {
+      "artifact_pins_verified": 16,
+      "bytes": 37163,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        2
+      ],
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": null,
+      "negative_control": {
+        "detected": true,
+        "kind": "original-length-suffix"
+      },
+      "path": "/private/tmp/unison-strict-bound-range-stock-suffix-negative.json",
+      "production_named_groups": null,
+      "sha256": "72d9e56985bd15ab90b8ad99fce3e6dd46e4b5a4040ce4160baf5e645d842188",
+      "typed_named_groups": null,
+      "work": "/private/tmp/unison-bound-copy-7hpwnjb1"
+    },
+    "stock_typed_native": {
+      "artifact_pins_verified": 66,
+      "bytes": 25611,
+      "command_exit_statuses": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "compiler": {
+        "library": "/usr/local/lib/ocaml",
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "current_source_pins_verified": 11,
+      "native_abi": {
+        "block_sharing": false,
+        "executed": true,
+        "named_groups": 13,
+        "other_platforms": false,
+        "platform": "macOS"
+      },
+      "negative_control": {
+        "detected": true,
+        "expected_failure": "unauthorized or repeated suffix write",
+        "only_production_edit": "disable strict indeterminate-decline guard in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-qdga98v_/negative/copyRange.ml",
+        "source_sha256": "7c50a79c1060b171adfb09fad064d7a7d9ae5d4eeb8c545e6ff87d79128a0d8d"
+      },
+      "path": "/private/tmp/unison-strict-native-range-stock-final.json",
+      "production_named_groups": null,
+      "sha256": "2888057cd0807a46ab943b5e509699dc33f7439ecaf31d097f1796a48bbf5f6e",
+      "typed_named_groups": 16,
+      "work": "/private/tmp/unison-native-copy-range-qdga98v_"
+    }
+  },
+  "historical_trials": {
+    "initial_ox_fixture_keyword_pass": {
+      "bytes": 25608,
+      "explanation": "Ox accepted the earlier fixture keyword; superseded by final common-fixture pins.",
+      "path": "/private/tmp/unison-strict-native-range-ox.json",
+      "sha256": "57e0a59718f26db6c88d1ca6f5719b5a307c1a1f74b9f126eacf942072c338f4",
+      "success": true,
+      "work": "/private/tmp/unison-native-copy-range-wv12c2tg"
+    },
+    "initial_stock_fixture_keyword_failure": {
+      "bytes": 9090,
+      "explanation": "Stock5.5 rejected the test variable effect; changed only fixture name to performed, production freeze unchanged.",
+      "path": "/private/tmp/unison-strict-native-range-stock.json",
+      "sha256": "11eb7ef33990bd3bacbdc0fb4366b9f3e23cd7b721af60ba18b61b01b57bd794",
+      "success": false,
+      "work": "/private/tmp/unison-native-copy-range-qy09376f"
+    },
+    "ox_bound_before_oracle_order_refinement": {
+      "bytes": 37170,
+      "explanation": "All14 passed; superseded after capturing preflush positions and checking independent sentinels before asserting them.",
+      "path": "/private/tmp/unison-strict-bound-range-ox.json",
+      "sha256": "6d5bdff3193e868b5a3057c1cba25a47d9f075379bcad2d70e96decd9b25bf3e",
+      "success": true,
+      "work": "/private/tmp/unison-bound-copy-654a3_4f"
+    },
+    "stock_bound_before_oracle_order_refinement": {
+      "bytes": 37097,
+      "explanation": "All14 passed; superseded after capturing preflush positions and checking independent sentinels before asserting them.",
+      "path": "/private/tmp/unison-strict-bound-range-stock.json",
+      "sha256": "844dda2b2c1cf4b66074cf262a2efbb77acd28c6be51bb54e67693ee9de82056",
+      "success": true,
+      "work": "/private/tmp/unison-bound-copy-vgux3qbu"
+    }
+  },
+  "limits": [
+    "Only own disposable synthetic files were touched. No Photo, Lightroom, Adobe or production-volume access.",
+    "Actual native qualification is macOS argument/descriptor preflight and platform-unavailable/no-effect results. Other-platform IDs/errors in unit tests are synthetic transport/loop evidence.",
+    "No real native Linux/FreeBSD/Solaris/Windows/ZFS/ReFS qualification, native range-sharing proof, physical storage measurement or performance claim.",
+    "Expected private negative binaries exit nonzero; each runner verifies the specific independently detected failure and exits0.",
+    "This is a component receipt. Root owns full Make/Dune and real CLI integration/legacy loop regression aggregation."
+  ],
+  "parent_source_freeze": {
+    "bytes": 33857,
+    "path": "/private/tmp/unison-strict-range-build-records/SOURCE-FREEZE.json",
+    "sha256": "833655ce65a5898154f5dfac05d5daf635d8a09c65f53b7ae7c410ca27a2ed41"
+  },
+  "retained_artifact_pins_verified": 228,
+  "schema": 1,
+  "scope": "Independent synthetic strict-result loop, actual macOS preflight/unavailable C ABI, production Copy.copyClonedRange and Copy.copyFile through a private native-result seam.",
+  "status": "component-qualified"
+}

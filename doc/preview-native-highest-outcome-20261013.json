@@ -1,0 +1,272 @@
+{
+  "utc": "2026-10-14T04:03:43.576514+00:00",
+  "state": "ACCEPTED_ONE_CONTROL_POST_RESTART_HIGHEST_NATIVE_RECOGNITION_AND_FINITE_CLOSURE",
+  "scope": "Original Photo owner execution, reviewed source/log/JSON only by Unison; no repeated native/media/DB invocation",
+  "owner": "/root/preview_implementation",
+  "packetPin": {
+    "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/RETURN-PACKET.json",
+    "bytes": 9019,
+    "sha256": "5eff456fe9dc7ad7f196f95fbd3c8eb2aeafe1ec2a1771cd79b4c3a388053eee"
+  },
+  "sourceAndEvidencePinsVerified": {
+    "entries": 32,
+    "uniquePaths": 29,
+    "pins": [
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ACTUAL-UNLOCKED-BEFORE-HELPER.json",
+        "bytes": 162,
+        "sha256": "75a0a3265bcc3a729808f53bd1697233bf886d4490ca48ad25ebf18a9f264ab9"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMMIT-VISIBLE-READBACK.json",
+        "bytes": 2266,
+        "sha256": "37e44f0da196d08ece339a3b4699c553550456c7cdaadb082bd72124ec528eef"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMPLETE.json",
+        "bytes": 28923,
+        "sha256": "5c14b1f24909b92845babfa3824f4c37d583380089aab3ce8cad429d70623553"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-AFTER.json",
+        "bytes": 3340,
+        "sha256": "1b68cf62090c788fe964c171de0f083ae8a7828ba67b684789d7875152ae24cd"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-BEFORE.json",
+        "bytes": 3341,
+        "sha256": "f7ae052246cddd2743761dd141501bfaa2088c75582e82da9b5c1a210b44ed44"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FirstPair) Observe retained previews directly.lua",
+        "bytes": 35121,
+        "sha256": "83414f168f7dfb9f9c6f993aa4f5c44b4dce228f661f3b3baf0c3b7a823b3d26"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/GENUINE-CLOSURE.json",
+        "bytes": 1166,
+        "sha256": "db0d8904a4b9b9fa54009d12c4758dba2a62e81adb790adeb233e94873c1234d"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-PROCESS.json",
+        "bytes": 114,
+        "sha256": "12826846a4abda50d6b6b1719366b6f1f892084e3ece121bab5227955d082764"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-STDOUT.txt",
+        "bytes": 557,
+        "sha256": "126a7c3288bdc7e0a2aad3491f673072f4160f45edcae0bd504a1ac3da20c748"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/LEASE-ACQUIRED.json",
+        "bytes": 312,
+        "sha256": "4c330ca46319d4cfc4aa6770926dc9907b49cdeece7cf99a0681419df903c14b"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/LEASE-RELEASED.json",
+        "bytes": 299,
+        "sha256": "90e56aa353d35c133d84b4da9d8144163af9bd053ded0ba62cbe8e2cd6003455"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/MAIN-AFTER.txt",
+        "bytes": 210,
+        "sha256": "61d21e5fb5e3cc3f0dd7ce5b71d1cae77aec0ffa6ceb3b8bcfabf15006122098"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/MAIN-BEFORE.txt",
+        "bytes": 211,
+        "sha256": "8cd8c746310fff174190fbb0570e445b634f3ae0c2668254f84d768e46b7a2b2"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/NATIVE-ADMISSION.json",
+        "bytes": 1008,
+        "sha256": "90220039c9859c90f0a8c01a6d12f8e7e37e1bd8208595040c4790dbebc106bf"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREPARATION.json",
+        "bytes": 6773,
+        "sha256": "33d19de8ca3f578cc80a6e5964132e313231c56d7549f1dc8cbeb382082a34ed"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREVIEW-SERVER.txt",
+        "bytes": 23970,
+        "sha256": "a790e744dd3a05cd0e8e55ff11a1c69caea2c00e908a9afb1fa3e7ac002db1ef"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREVIOUS-INSTALLED-MENU.lua",
+        "bytes": 544151,
+        "sha256": "92589c22beee19f310fcd478b56bcab6f77d271322f78d009035d4a4415fd02b"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-HIGHEST-RELEASE.json",
+        "bytes": 6247,
+        "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-PRE-LOAD-COMMIT-ROWS.json",
+        "bytes": 4087,
+        "sha256": "e3f876fea8d0413e55c491b24eb82964d47eac0dfcb41317870b6e8e01b16027"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-RELEASE-SHA256.txt",
+        "bytes": 65,
+        "sha256": "f31523560e94c0f916d6b7bcad5b338f52153ac8400af114f0984ed2bb07fbe0"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-RELEASE.json",
+        "bytes": 6247,
+        "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/SLOT-CLOSED.json",
+        "bytes": 2886,
+        "sha256": "662c05ee78718dd5971b161d5e9c8cc35c1a9843a825c33c846122c616ac8a44"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/UI.txt",
+        "bytes": 916,
+        "sha256": "db69fe968e3c29c41a42513653941c0fb7a9e9aad38afcea4917ea4f70b738ad"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/WITHDRAWN-ADMISSION.txt",
+        "bytes": 53,
+        "sha256": "0cfa8d53aa57da97e406b90a7eea10804fd1b7ccdf63d95c7bb96eefbc08fe26"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/coordinator.py",
+        "bytes": 11373,
+        "sha256": "b7bb7ac0cd0e29ae481465efb500a1132f677d3ed30ee4fd8fa4f5c1882bc2b3"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMPLETE.json",
+        "bytes": 28923,
+        "sha256": "5c14b1f24909b92845babfa3824f4c37d583380089aab3ce8cad429d70623553"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/SLOT-CLOSED.json",
+        "bytes": 2886,
+        "sha256": "662c05ee78718dd5971b161d5e9c8cc35c1a9843a825c33c846122c616ac8a44"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-HIGHEST-RELEASE.json",
+        "bytes": 6247,
+        "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+      },
+      {
+        "path": "/Users/alexy/src/unison/doc/preview-post-restart-highest-request-20261013.json",
+        "bytes": 11233,
+        "sha256": "08597ca76a6d8465f0d1f74d37eba9cfdc1edd08236100454e932cc552177452"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_server.lua.in",
+        "bytes": 23054,
+        "sha256": "b24796a57616d233cf83374c55ceb2cbd3e00080f9e9047081d7c00daf3182f0"
+      },
+      {
+        "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/INDEPENDENT-SUCCESSOR-REVIEW-FINAL.json",
+        "bytes": 6560,
+        "sha256": "64cf4288e6ebc5a3a664366895022c493e4e77746b09b0a3b6ac88d26042f8da"
+      }
+    ]
+  },
+  "control": {
+    "image": 10031592,
+    "rootFile": 10031593,
+    "uuid": "8EE855A1-C41C-4C9A-9CC0-35F8C04E12C3",
+    "digest": "46e0a188a3f637676f25db569a11268b"
+  },
+  "testedProcess": {
+    "pid": 40020,
+    "start": "Tue Oct 13 19:47:43 2026",
+    "nonce": "cold-native-preview-b1c6c27826eb466dbbb10e72b44788af"
+  },
+  "rootAssertions": {
+    "nativeLoads": 2,
+    "ownedCallbacks": 5,
+    "returnedLevelBindings": 12,
+    "rawCurrentMappingStages": 6,
+    "selectedNativeDecodes": 2,
+    "selectedGeometry": [
+      2272,
+      1704
+    ],
+    "selectedLevel": 6,
+    "selectedBytes": 646453,
+    "levelQualityProfileOrientationBothPasses": [
+      "final",
+      "AdobeRGB",
+      "AB"
+    ],
+    "nativeWidthHeightScale": [
+      "full",
+      null,
+      null
+    ],
+    "registrationReplays": 0,
+    "currentMappingValuesAvailableBeforeFirstAuthoredLoad": true,
+    "mappingRowNeverRewrittenByAutonomousStartupProven": false,
+    "perLevelPreviewUuidAbsentAccepted": true,
+    "packetFlagsTakenAsProofAlone": false,
+    "committedLevelRowsAndMappingBeforeAfterEqual": true,
+    "commonPyramidHeaderFieldsEqual": [
+      "uuid",
+      "digest",
+      "quality",
+      "colorProfile",
+      "croppedWidth",
+      "croppedHeight",
+      "fromProxy"
+    ],
+    "preOnlyOpaqueHeaderFieldsNotComparedAfter": [
+      "fileTimeStamp",
+      "pyramidFileTimeStamp",
+      "fingerprint"
+    ],
+    "sevenFileMetadataHashArraysEqual": true
+  },
+  "ownerEvidenceAcceptedFromPinnedReceipts": {
+    "sixCommittedLevelRowsBeforeAfter": true,
+    "sevenRetainedFileIdentitiesBytesHashesUnchanged": true,
+    "helpersRestored": true,
+    "leaseReleasedAndKernelAvailabilityProbed": true,
+    "globalApplicationQuiescenceClaimed": false
+  },
+  "remainingUnqualified": [
+    "independently authored closed-cache publisher/recovery recipe",
+    "Quasar split link/native write/trim/missing-highest/restart behavior",
+    "native RGB equality/color-transform correctness",
+    "large-crop5120x2880/actual viewport/native1:1 coverage",
+    "faithful standalone current-edit rendering",
+    "power-loss durability/hardware cold-I/O",
+    "full cache/production/full run/benchmark"
+  ],
+  "sealedRequestPreserved": {
+    "path": "/Users/alexy/src/unison/doc/preview-post-restart-highest-request-20261013.json",
+    "bytes": 11233,
+    "sha256": "08597ca76a6d8465f0d1f74d37eba9cfdc1edd08236100454e932cc552177452"
+  },
+  "independentReview": {
+    "path": "doc/preview-native-highest-independent-review-20261013.json",
+    "bytes": 25739,
+    "sha256": "5ea6ddc0256ec3a73276b9e75fbe198412e2d3c919d48a44ae113bb171b5d973",
+    "state": "ACCEPTED_ONE_CONTROL_POST_RESTART_NATIVE_HIGHEST_LOAD_AND_RELOAD"
+  },
+  "nextGate": "Original owner qualifies a Ten-only offline metadata recipe from preserved native JPEGs with closed database-family/exclusion/before-images/aliases/tombstones/RootPixels contracts, then fresh native reopen/readback; subsequent split matrix remains separately admitted",
+  "storagePlan": "doc/preview-split-storage-test-plan.md",
+  "additionalSlotReleased": false,
+  "unisonOperations": {
+    "nativeAdobeUi": 0,
+    "mainCacheDbOpens": 0,
+    "mediaPayloadOpensHashesDecodes": 0,
+    "previewPublication": 0
+  },
+  "verificationNotes": [
+    "Initial ad hoc whole-header equality check included pre-only columns and did not pass; corrected comparison uses all actually captured post-header fields and separately retains unexamined pre-only fields. No runtime/data failure inferred.",
+    "SLOT-CLOSED nativeCallbacks is an array of five records, not an integer; root verifies its length and genuine closure fields."
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "schema": "unison-validation-live-collector-build/1",
+  "state": "PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/dngCandidateValidation.ml",
+      "bytes": 9439,
+      "sha256": "25a6d95c996562259f556b86354dff7eaad0ab46363e011d03b31829becfb3b5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_live/test.ml",
+      "bytes": 892,
+      "sha256": "1e8652b3e04b8e1ca4b05d2d2217452386712d57a19436bcaa8be7646f1a3a89"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_live/run.py",
+      "bytes": 1263,
+      "sha256": "e4ae3beb1b639b98d3b78a905949a3eedf46bab915d7dd4da9e3dda5fc0cbfa7"
+    }
+  ],
+  "runs": [
+    {
+      "kind": "collector-only",
+      "compiler": "stock",
+      "actual_terminal": {
+        "chunk": "5f131f",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-live-stock-20261016a/RESULT.json",
+          "bytes": 401,
+          "sha256": "ea8c2cacb787e158831d3db3b61a01466b8e0ef10e4d80ee828ab078dc91f43c"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-stock-20261016a/SHARED-START.json",
+          "bytes": 1227,
+          "sha256": "5233cb397c37f33b7c1efee623137ce3c5c0b811bca8a48483fd816ca21d229a"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "40e20b6c351cf8174910c16c809ea5574e18c32ed4362e51751ac5321b5ef6e5"
+        }
+      ]
+    },
+    {
+      "kind": "collector-only",
+      "compiler": "ox",
+      "actual_terminal": {
+        "tool": 14148,
+        "chunk": "447075",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-live-ox-20261016a/RESULT.json",
+          "bytes": 401,
+          "sha256": "33183e699f9901e5151f1c0434a3b48cb95249e64d0b7d2ed3ea0f015cee6380"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-ox-20261016a/SHARED-START.json",
+          "bytes": 1225,
+          "sha256": "65298b8f6205bbb677208b422a4813b430214632852657862f1c53a5ca2aad5c"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "567aa8034ef6d4ff0688b55a6bb6b0da484d75d9ad5ac66479456c1d89b0528a"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "stock",
+      "actual_tool": 14148,
+      "chunk": "447075",
+      "exit_code": 0,
+      "running_session": false,
+      "source_pins": 428,
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-live-full-stock-20261016a/RESULT.json",
+          "bytes": 43909,
+          "sha256": "e046e0854ade0adad2fb88cb4350f2d7c610aac0a77166f136f5f7e83c4c8807"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-full-stock-20261016a/SHARED-START.json",
+          "bytes": 1330,
+          "sha256": "21ea01bed68c4783b52aae9f6e724f33a64d23ae21ce6b60c756736f58f1e786"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-full-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "f15debdb4f3f481f835201309fdd1c6a8d963de1ccb20db735ed89132c1fc992"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "ox",
+      "actual_tool": 75001,
+      "chunk": "bd0690",
+      "exit_code": 0,
+      "running_session": false,
+      "source_pins": 428,
+      "references": [
+        {
+          "path": "/private/tmp/unison-validation-live-full-ox-20261016a/RESULT.json",
+          "bytes": 43916,
+          "sha256": "8379ebcad4bb18c10e330ada820ad17924f45148c4517380313180ce810668aa"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-full-ox-20261016a/SHARED-START.json",
+          "bytes": 1325,
+          "sha256": "372414bbcbc74c16c8f44da7163220669fff12e01432e0d37c784fe72763c432"
+        },
+        {
+          "path": "/private/tmp/unison-validation-live-full-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "3becb7bcfa302092081d48a4646d12d7e0f4fc79820764bb542c5b5a1f3d3e87"
+        }
+      ]
+    }
+  ],
+  "scope": "exact collector prefix bounds and current fullMakeCLI/selftests on stock/Ox; actual receiving trace emission/parser and SDK concurrency remain unqualified; no SDK/Photo/camera/payload/EXglobal",
+  "full_goal_complete": false
+}

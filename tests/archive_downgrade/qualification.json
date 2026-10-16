@@ -1,0 +1,588 @@
+{
+  "schema": "unison-missing-merge-base-archive-qualification/1",
+  "utc": "2026-10-14T21:53:34.631673+00:00",
+  "scope": "Current stock/Ox Make+selftests and10private loopback archive roundtrip stages each through installed unmodified2.53.5. Missing baseline-era common base refuses recoverably and preserves both edits; explicit common synchronization permits later merge.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticSync.ml",
+      "bytes": 27711,
+      "sha256": "ebaf8ef9210a1e0fea3ca7cb36b400b37292278a706ec7d525c17ceedc942fa3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/archive_downgrade/run.py",
+      "bytes": 6885,
+      "sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/archive_downgrade/README.md",
+      "bytes": 1619,
+      "sha256": "f88a57019f5bbe58a785c2143297977096d563475fee174c0315ab2ad247a42f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_paths/run.py",
+      "bytes": 37630,
+      "sha256": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/dng-compact-merge-base.md",
+      "bytes": 8005,
+      "sha256": "b9c1eb1c3a2302957e2052133e32c5752da9e15567862f30916ab4bea56b6eb6"
+    }
+  ],
+  "baseline_version": "unison version 2.53.5 (ocaml 5.2.0)",
+  "runs": [
+    {
+      "compiler": "stock",
+      "report": {
+        "path": "/private/tmp/unison-archive-downgrade-stock-20261014-v3.json",
+        "bytes": 8488,
+        "sha256": "3786ecf3cb38a0a3a592daa9b2210790a7f9b2280a04532315ede1a9853a1216"
+      },
+      "actual": {
+        "schema": "unison-archive-downgrade/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i",
+        "build_receipt": "/private/tmp/unison-missing-merge-base-stock-build-20261014.json",
+        "build_receipt_sha256": "1cc043624a27138048a016fe3521bc6393c30219c4f13a557f814308efa81992",
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/unison",
+        "binary_sha256": "b62630ada75ef7ea30607b83c789cf6ed57de156f9ee9397140165f34ae55983",
+        "baseline": "/usr/local/bin/unison",
+        "baseline_sha256": "007ee901f33089827afc3721cdee0b15e82d64124225a8e66630bfad7b4d7454",
+        "stages": [
+          {
+            "name": "seed",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "5e9aa666964c0432560b0d95b8204cb9c62c38cfcced1e5eb5ecb03f1c1281ef"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "c6b0c67dbe05bf9e064cdf083f07140e52c7f0881dc273b29c48e5494dc15100"
+              }
+            },
+            "output_sha256": "746748984d4ed46357c596f048e4f9f1a7585e88b163a52ecc4965f2d83d59bb",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-01.log"
+          },
+          {
+            "name": "current-merge-before-downgrade",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "c3446ffb6cd697a9c8a86d1bd44717cd03d7aad8cb279cc1bb263bc68e869aa0"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "e3d655e63b048eeda4438a81d7ed3c776c693a52fa34870e77b94b1407197380"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-02.log"
+          },
+          {
+            "name": "baseline-noop",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/baseline-noop.log",
+            "archive_before": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "c3446ffb6cd697a9c8a86d1bd44717cd03d7aad8cb279cc1bb263bc68e869aa0"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "e3d655e63b048eeda4438a81d7ed3c776c693a52fa34870e77b94b1407197380"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "db217ba27385dbe015b200c7caf672586b1bf4c6ee3aab7d1b09ba0b1b9e8d25"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "307ce353253fd1dbf2bc4dd1ff3bc4a3a4e3d45348f04fc98ae2855d9b56889b"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de"
+          },
+          {
+            "name": "baseline-update",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/baseline-update.log",
+            "archive_before": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "db217ba27385dbe015b200c7caf672586b1bf4c6ee3aab7d1b09ba0b1b9e8d25"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "307ce353253fd1dbf2bc4dd1ff3bc4a3a4e3d45348f04fc98ae2855d9b56889b"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "5e572312408920dd37fd910ea028d9aa6cb3218ac3b16e7ee66a87a78ad81320"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "d97f005e7bf5ee12b7b25b916a34148ec492670e5e0e83fda61711bb960276da"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95"
+          },
+          {
+            "name": "current-reopen",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "4d3c71081c760b636fe3de75567fb49b8aff6128552ba5616e28271927da65c5"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "d8ec334a3eb0a2b47fed0aff7453cdf2eaa6f55652f82845732959abeeefd553"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-03.log"
+          },
+          {
+            "name": "missing-baseline-era-base-refused",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-04.log",
+            "both_edits_preserved": true
+          },
+          {
+            "name": "restore-known-common-fixture",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "843e20098aa3d17388428cd1236a56b31414dfb91f259595eeaa4527baba8ee1"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "552a00c4e8ed2b821dd78cd2bd8aa330b3e178455da2cf0e222702a2ff5411b0"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-05.log"
+          },
+          {
+            "name": "current-captured-common-update",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "561b5b34d072abd3be57309d14c7ce28797665920790da75bc32b5ff7b02cb48"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "0febf9a44511b8000928fec41217f22b25242a090311ac59c4b610965f64c278"
+              }
+            },
+            "output_sha256": "d9ddcc2a497e91690a5f7d3d01b02b70a96ca6a1a9ae1ee17e2dee20651c817d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-06.log"
+          },
+          {
+            "name": "current-merge-after-baseline",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "aba6d407cda38ea037815c60217e4c213ec7add41a5d3192a96b43bf0ef3be9e"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "e9e8aa98951eb8bdf6c399ae9db4c3347ef09b00c1b359846b90e50f98574666"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-07.log"
+          },
+          {
+            "name": "current-final-noop",
+            "archive_inventory": {
+              "client": {
+                "ar36178c600c469ad5713ce067f77d8e16": "9417b046fa230b0e42831de08752347a59b43dd19bc2e1ee53c4e05c6bd7e392"
+              },
+              "server": {
+                "areb8034d0be5636fa19f86235e5c52706": "d7a556b2a412999e8a4e1e52b98ce3a68357237e3f958548da333806914398f1"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-08.log"
+          }
+        ],
+        "complete": true,
+        "scope": "Private synthetic current scalar merge/compact bases -> baseline archive load/update -> current merge. No SDK, photos, catalog or production archives.",
+        "runner_sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+      },
+      "build": {
+        "path": "/private/tmp/unison-missing-merge-base-stock-build-20261014.json",
+        "bytes": 42685,
+        "sha256": "1cc043624a27138048a016fe3521bc6393c30219c4f13a557f814308efa81992"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-qvn3w4w2/src/unison",
+        "bytes": 5633592,
+        "sha256": "b62630ada75ef7ea30607b83c789cf6ed57de156f9ee9397140165f34ae55983"
+      },
+      "terminal": {
+        "handle": 2315,
+        "chunk": "6f903d",
+        "exit": 0
+      },
+      "build_terminal": {
+        "handle": 9146,
+        "chunk": "47d81c",
+        "exit": 0
+      },
+      "logs": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-01.log",
+          "bytes": 3559,
+          "sha256": "b545fd8385f65a3c555ef4d6a17ea004a95fc995a688ec704064bf659da24ae3"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-02.log",
+          "bytes": 6297,
+          "sha256": "a758dade9bdcd5ed04a731aa2e52d0898334d93116446855ae51862fa035e2e7"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/baseline-noop.log",
+          "bytes": 757,
+          "sha256": "ad2b646d2cc3b38e21236a6ab9d570ecb677d28ad098648476e5edaa6f5a5cee"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/baseline-update.log",
+          "bytes": 1475,
+          "sha256": "6281c49cf424f6956699a00b816b7355efe5bf7b88dcafee6a0e863a6d7bcad8"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-03.log",
+          "bytes": 757,
+          "sha256": "e331438b216004fcd204e258307d0ca99f7aeb302b3138abeed04c928c39c8b7"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-04.log",
+          "bytes": 3905,
+          "sha256": "00bf2fa053090361765ed8f3d3461611d7488779b7829143d5e63e3dd88c00b8"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-05.log",
+          "bytes": 757,
+          "sha256": "e331438b216004fcd204e258307d0ca99f7aeb302b3138abeed04c928c39c8b7"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-06.log",
+          "bytes": 8675,
+          "sha256": "b77f88721d5dc6d04677f68819b702469f62e7e177f3ce229a9e133704c47920"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-07.log",
+          "bytes": 6297,
+          "sha256": "1d2cdd6df0b68a84c7f41990b471d1e43f02a98426f3d9beb93c3c6572da955d"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-sr84d02i/roundtrip/run-08.log",
+          "bytes": 757,
+          "sha256": "22f7008ff4b9fb94f79aa5ad493129c80621816124eeddc9c337aaa938c5a4a8"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "report": {
+        "path": "/private/tmp/unison-archive-downgrade-ox-20261014.json",
+        "bytes": 8485,
+        "sha256": "77fd9b3744e91fd360aa916d82fd21890105b7df49baf46b6f479243fb8baee4"
+      },
+      "actual": {
+        "schema": "unison-archive-downgrade/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z",
+        "build_receipt": "/private/tmp/unison-missing-merge-base-ox-build-20261014.json",
+        "build_receipt_sha256": "32fecebff931a9f00ae923a3760030d8f60e74b2358d54befb5adbfb4c29ee51",
+        "binary": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-v9jnyp1d/src/unison",
+        "binary_sha256": "31b1c568dea029e291a1cc956654a97bd3c3e1da41f539246f8903244ad631ee",
+        "baseline": "/usr/local/bin/unison",
+        "baseline_sha256": "007ee901f33089827afc3721cdee0b15e82d64124225a8e66630bfad7b4d7454",
+        "stages": [
+          {
+            "name": "seed",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "0732b78122665854b5fc256aa6607ae0ee780534e9c247deb2b9656040e1973c"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "af4d2fafdfcf49a292f2eb03544b758eb9cd197bd426228d3780e934dcd304e6"
+              }
+            },
+            "output_sha256": "746748984d4ed46357c596f048e4f9f1a7585e88b163a52ecc4965f2d83d59bb",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-01.log"
+          },
+          {
+            "name": "current-merge-before-downgrade",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "689350d28a0217afe312129e61fe21464f407b0412da257be707e6e737212834"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "c0613e483b7a6f9768b9093bededdc41c40ad0a3a1e0b68286251eee0b102ccd"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-02.log"
+          },
+          {
+            "name": "baseline-noop",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/baseline-noop.log",
+            "archive_before": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "689350d28a0217afe312129e61fe21464f407b0412da257be707e6e737212834"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "c0613e483b7a6f9768b9093bededdc41c40ad0a3a1e0b68286251eee0b102ccd"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "3fb231860876b2beff88128e9ceb16c131ac8dd0551eadbe16a9d2d8b457c5b5"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "40637c2e944df0ad8e3369e03854a9af50da7019ca0e138943171f0a4a3c7aa5"
+              }
+            },
+            "output_sha256": "f14a8e001801bec2be62bc6e751d996f078b28473051f83aeef2a93627c8c3de"
+          },
+          {
+            "name": "baseline-update",
+            "command": [
+              "/usr/local/bin/unison",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/left",
+              "ssh://localhost//private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/right",
+              "-sshcmd",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/loopback.py",
+              "-servercmd",
+              "/usr/local/bin/unison",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-debug",
+              "archive"
+            ],
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/baseline-update.log",
+            "archive_before": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "3fb231860876b2beff88128e9ceb16c131ac8dd0551eadbe16a9d2d8b457c5b5"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "40637c2e944df0ad8e3369e03854a9af50da7019ca0e138943171f0a4a3c7aa5"
+              }
+            },
+            "archive_after": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "ab70995f00e42f17acedbfa4013f07d6225ea8d9be9df2ce0ef7d11cb45e14d5"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "0d6e31edac0df66ac482b1fa97b929cd9a6fb1bc9b02a0c542f72178e4b860d6"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95"
+          },
+          {
+            "name": "current-reopen",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "cd2cbd9a2379008b27e9e09a69a6feb63a1f1f246cb39ff9ffa105067257d7d7"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "cbdfe67204c437d2c5ff63e90a6b7413af7cf224700b0b21b3bef6da932d9b1c"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-03.log"
+          },
+          {
+            "name": "missing-baseline-era-base-refused",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-04.log",
+            "both_edits_preserved": true
+          },
+          {
+            "name": "restore-known-common-fixture",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "5f46b716addfb3175f88ee1266da3a7a9d248a6d9e8cc645d6b243c250547e0f"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "309db2faed615b7af03f3f6453cb5f41a0fc9d78e6cc3b59057b5414b8204600"
+              }
+            },
+            "output_sha256": "34724198abd1d7ae91be7f6e5cf68bc25b40b68a888dc4642cabd238199a8b95",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-05.log"
+          },
+          {
+            "name": "current-captured-common-update",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "97fc22eaf0d520810d45b82df2aa08123b6e58d402b5f0156e04aa6e41d0f6c9"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "0110820948fc0acd1cbb9e3aa312dd334101c33ed5fa235017c6ea1186c96afc"
+              }
+            },
+            "output_sha256": "d9ddcc2a497e91690a5f7d3d01b02b70a96ca6a1a9ae1ee17e2dee20651c817d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-06.log"
+          },
+          {
+            "name": "current-merge-after-baseline",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "add70c929d5805c1065f1df89258a9dd1f8c9ab33db64ed4364d3e4a309cee30"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "6478292744b518fb28886bb44c893d9485ab48632c3db8807b7468b716a19b0c"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-07.log"
+          },
+          {
+            "name": "current-final-noop",
+            "archive_inventory": {
+              "client": {
+                "arbf876be6c92df1c169bbb01e14265ac8": "c6c2a3b7e8266cd0090111e05b57a0ada7550fb50cc0ffcb5070fd1ce222e530"
+              },
+              "server": {
+                "ar51a38c13b3d93849fad7f526cf7b8bdd": "fa010cd1c9869363b6d9a5fbce74df9dc5c8ea5abe308b4b2c4d4a030917d780"
+              }
+            },
+            "output_sha256": "967424cbf9654a6604bfa03a542ec9bfdc6765d589c3386905b9e821d508350d",
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-08.log"
+          }
+        ],
+        "complete": true,
+        "scope": "Private synthetic current scalar merge/compact bases -> baseline archive load/update -> current merge. No SDK, photos, catalog or production archives.",
+        "runner_sha256": "aafe9f016fd5acd5f4f2a427166a8a3636a63510fcaf4be98b6a709c44fcafc8"
+      },
+      "build": {
+        "path": "/private/tmp/unison-missing-merge-base-ox-build-20261014.json",
+        "bytes": 42691,
+        "sha256": "32fecebff931a9f00ae923a3760030d8f60e74b2358d54befb5adbfb4c29ee51"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-v9jnyp1d/src/unison",
+        "bytes": 7552720,
+        "sha256": "31b1c568dea029e291a1cc956654a97bd3c3e1da41f539246f8903244ad631ee"
+      },
+      "terminal": {
+        "handle": 69098,
+        "chunk": "1c3904",
+        "exit": 0
+      },
+      "build_terminal": {
+        "handle": 78274,
+        "chunk": "ff45c6",
+        "exit": 0
+      },
+      "logs": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-01.log",
+          "bytes": 3571,
+          "sha256": "d188f7bc54fcd7b0bb4224e96c6cb265b792c1102916c791dbfdc896d0f8aa5a"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-02.log",
+          "bytes": 6309,
+          "sha256": "0ef6c1dbe2517f11b5b804377021d1925292a15360ae0b297cf50fbaf7fef1fb"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/baseline-noop.log",
+          "bytes": 757,
+          "sha256": "4d98e5d830bad3fa9f74c2ad335f2cd658d7946cc697e48c1144588ad1793d9c"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/baseline-update.log",
+          "bytes": 1475,
+          "sha256": "ffd0fdd3b35cf2de2807af05ea30135da157e8dda75bfaddb602035fc8e5a2d3"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-03.log",
+          "bytes": 763,
+          "sha256": "18c626a67a73187be876eabcd0a2420110f48b8c1024bacdaaacdbd2f4626f69"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-04.log",
+          "bytes": 3917,
+          "sha256": "b2d090b89b594a395a8967db7719a70249f7601f9fed2146b401ae0c07fb12e5"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-05.log",
+          "bytes": 763,
+          "sha256": "8ef40b78fb612b1242b3cc389ddf81bf8505c49d9a547396fa74ed8cec48eb16"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-06.log",
+          "bytes": 8687,
+          "sha256": "ce275ea6c49b3b93c50b98128c7b632541fc6b214e1f7545dcfccba92b2d329c"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-07.log",
+          "bytes": 6309,
+          "sha256": "574815b6632be08b214c0ce830f824dd2d37833003ef6e3e4db3fee8aa788f42"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-l70us78z/roundtrip/run-08.log",
+          "bytes": 763,
+          "sha256": "8ef40b78fb612b1242b3cc389ddf81bf8505c49d9a547396fa74ed8cec48eb16"
+        }
+      ]
+    }
+  ],
+  "prior_binary_negative": {
+    "report": {
+      "path": "/private/tmp/unison-archive-downgrade-stock-20261014-v2.json",
+      "bytes": 5829,
+      "sha256": "0cbcbee9ca405c4a36201b4cc20703a9eab70630b067f83a64346f7d094af069"
+    },
+    "log": {
+      "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-archive-downgrade-wl6rozak/roundtrip/run-04.log",
+      "bytes": 6271,
+      "sha256": "cb7a27bfa861d5539e63ff7d0c43f1126aab74164c686b5f883bf0577ea38059"
+    },
+    "tool_handle": 41656,
+    "terminal_chunk": "6ad4bd",
+    "exit": 1,
+    "observed": "Previous quota binary reports uncaught ENOENT on missing .unison.mergearch saved base; original report preserved incomplete."
+  },
+  "sdk_executions": 0,
+  "limits": [
+    "Archive hashes may change for normal bookkeeping; same names and normal old-peer no-op/update are checked.",
+    "Only tested baseline/version/platform/feature combination.",
+    "No guessed base or automatic capture for unchanged old-version common state.",
+    "No SDK/Photo/Lightroom or production/source-photo changes."
+  ]
+}

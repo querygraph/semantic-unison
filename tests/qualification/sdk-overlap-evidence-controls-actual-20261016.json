@@ -1,0 +1,81 @@
+{
+  "schema": "unison-sdk-overlap-evidence-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/intervals.py",
+      "bytes": 2983,
+      "sha256": "69cb2ecd8d34ee74d084651fe5f67ce19eecb42a3a626fa28ab8072bf5416342"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/intervals_test.py",
+      "bytes": 3287,
+      "sha256": "3af4b32d13e98a382639a0dd17f6cd6a12597a51d61228bceb0a82c50502539b"
+    }
+  ],
+  "runs": [
+    {
+      "label": "initial-invalid-fixture-expectation",
+      "actual_terminal": {
+        "chunk": "f013bb",
+        "exit_code": 1,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016a/SHARED-START.json",
+          "bytes": 1112,
+          "sha256": "bf2e3648802956072cc7909583d815ba38493616dc3f594bf558e659b6165301"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "ccb2709c5d6d4ae614a43888900196e207303afdc9bda39be992adc365cd6389"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016a/SHARED-STDERR.txt",
+          "bytes": 699,
+          "sha256": "e9959614f40f566da06a9fe27b616eb8bbf730330556311e13ff180b726dafb4"
+        }
+      ]
+    },
+    {
+      "label": "corrected-eight-groups",
+      "actual_terminal": {
+        "chunk": "6beb5b",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016b/SHARED-START.json",
+          "bytes": 1110,
+          "sha256": "15a29508eec4f77e51e304548eac3014610cf27e740827107003a40f9548b517"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016b/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "23d1ef26f94224d2317e30b295d6d9f03d8b870f5ebea4356adaa499c29c44e6"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016b/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-overlap-controls-20261016b/SHARED-STDERR.txt",
+          "bytes": 106,
+          "sha256": "698d16d7b93c4bd9707d3cfacda6fb1e0fea99ed0cda6e69bedc42772940540a"
+        }
+      ]
+    }
+  ],
+  "fixture_correction": "initial expectation treated a valid touching interval as invalid; corrected fixture uses zero-duration interval; touching intervals remain valid serial evidence",
+  "scope": "original event records only; no helpers/process census/SDK/Photo/payload/EXglobal; timestamp producer and actual overlap unqualified; no resource settlement inferred from intervals",
+  "full_goal_complete": false
+}

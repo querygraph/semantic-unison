@@ -1,0 +1,239 @@
+{
+  "schema": "unison-validation-warning-integration/1",
+  "utc": "2026-10-14T06:26:23.216232+00:00",
+  "base_commit": "31980e3d286f5b7a408613faf7a983dc37d1f017",
+  "qualified_scope": "DNG companion warning channel, deferred owner delivery, cancellation/error rejection and actual SDK-free receiving transport; source/mock mac status routing only",
+  "status": "passed_root_checks_with_separate_independent_acceptance",
+  "independent_acceptance": {
+    "relative_path": "tests/validation_warning/independent-review-20261014.json",
+    "path": "/Users/alexy/src/unison/tests/validation_warning/independent-review-20261014.json",
+    "bytes": 15921,
+    "sha256": "a2ca178967f60a6f28924700ead4f8db4cc3626dfafa78b5b48170891d2bb207"
+  },
+  "production_freeze": {
+    "path": "/private/tmp/unison-validation-warning-build-records/SOURCE-FREEZE.json",
+    "bytes": 32651,
+    "sha256": "17185d6d3b28f8293f76d5401272f61c9021ff793466b782b5b99bc2b17b554b"
+  },
+  "production_source_count": 330,
+  "production_pins": {
+    "src/dngCandidateValidation.ml": "d7c5d5ea4049966db1e62a5094dd47411464ba04de93e16c40af1c68722d5605",
+    "src/uimacbridge.ml": "06d72fffa2b9e4d2c06dd4b626783f8f8d90c0dfcbe47adfa568489671d69d9c",
+    "src/uimac/MyController.m": "0dc3e687d96296bfcc355a647dd0e257d676d2fd25c29388a7cbda27587c5614"
+  },
+  "test_source_pins": {
+    "tests/validation_warning/README.md": "4aaa4ddbf0355e71294d213b7817cbd8492d897c5c992fc47e4c21d4a0f2fed9",
+    "tests/validation_warning/helper.ml": "4faa426bc937acbc89e92712659111bf649b95745ba35942f2326b78f9445c80",
+    "tests/validation_warning/mac_route.py": "e64fcaa2d67de441e758553a08055ad330815c2e4f205fc9dea87d30fc551eaf",
+    "tests/validation_warning/probe.ml": "4f382d4d82d51eec6990587ae71dd2c75746c1bfbf659f607af182405ac3dcb5",
+    "tests/validation_warning/run.py": "85e70cbdbd7e0da125088df1323e09043ada274eb007f4cb207c759fcc83e75c",
+    "tests/validation_warning/test.ml": "bb79cefb3b6914575171dfcdeddda24a6c1b6809746142fa8c536232002ca24f"
+  },
+  "participants": [
+    {
+      "label": "stock",
+      "compiler": {
+        "path": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+        "version": "5.5.1"
+      },
+      "make": {
+        "path": "/private/tmp/unison-validation-warning-build-records/stock-build.json",
+        "bytes": 44930,
+        "sha256": "8d769cc7446672ff2316aa74b0c9cfe9b8d5fde28df42ac82278250e5629cfcd"
+      },
+      "dune": {
+        "path": "/private/tmp/unison-validation-warning-build-records/stock-dune.json",
+        "bytes": 91446,
+        "sha256": "07e443291f7d688cc72c1aa4b823990a5bb53af36db480a210f66dc826815d79"
+      },
+      "warning_controls": {
+        "path": "/private/tmp/unison-validation-warning-build-records/stock-warnings.json",
+        "bytes": 497632,
+        "sha256": "6f0ef8fd4e3fb4782770fe47b28a159eb81b0cecb87fdbd8223b05ee49d50b91"
+      },
+      "mac_source_routes": {
+        "path": "/private/tmp/unison-validation-warning-build-records/stock-mac-route.json",
+        "bytes": 19752,
+        "sha256": "2b54ca3120277cff679573b1c52cb3b48bfa2a6a898950c4a911d44fc2c53e16"
+      },
+      "cases": {
+        "actual_companion": 11,
+        "actual_companion_assertions": 105,
+        "complete_cli_receiving": 3,
+        "companion_negatives": 2,
+        "mock_mac_ocaml_routes": 4,
+        "foundation_only_filter_cases": 6,
+        "mock_mac_parent_negatives": 2
+      },
+      "actual_companion_controls": [
+        "warn-error",
+        "warn-pass",
+        "require-error",
+        "off",
+        "warn-inspection-error",
+        "warn-mutation",
+        "warn-active-cancel",
+        "warn-before-delivery-cancel",
+        "warn-delivery-cancel",
+        "warn-delivery-abort",
+        "warn-printer-error"
+      ],
+      "complete_cli_controls": [
+        {
+          "case": "loopback-warn",
+          "warnings": 1,
+          "published": true,
+          "helper_calls": {
+            "client": 0,
+            "server": 1
+          }
+        },
+        {
+          "case": "loopback-require",
+          "warnings": 0,
+          "published": false,
+          "helper_calls": {
+            "client": 0,
+            "server": 1
+          }
+        },
+        {
+          "case": "loopback-off",
+          "warnings": 0,
+          "published": true,
+          "helper_calls": {
+            "client": 0,
+            "server": 0
+          }
+        }
+      ],
+      "current_match_guards": {
+        "workspace_sources_still_match": true,
+        "snapshot_sources_still_match": true,
+        "test_sources_still_match": true
+      }
+    },
+    {
+      "label": "ox",
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "version": "5.2.0+ox"
+      },
+      "make": {
+        "path": "/private/tmp/unison-validation-warning-build-records/ox-build.json",
+        "bytes": 45098,
+        "sha256": "74a8a17eb5669457990534edf355706563cdb6c2e9cd284413a580328451cf65"
+      },
+      "dune": {
+        "path": "/private/tmp/unison-validation-warning-build-records/ox-dune.json",
+        "bytes": 91513,
+        "sha256": "1a338ffc7cc6e4f322e8d3455c557effa1fa5242e0d7358e74bd0eafd7a41428"
+      },
+      "warning_controls": {
+        "path": "/private/tmp/unison-validation-warning-build-records/ox-warnings.json",
+        "bytes": 497822,
+        "sha256": "6d14e2089d034cb354af2051d44907aed16766749e2f6fbb27bea54f040725cd"
+      },
+      "mac_source_routes": {
+        "path": "/private/tmp/unison-validation-warning-build-records/ox-mac-route.json",
+        "bytes": 19749,
+        "sha256": "59974e0710112b82f8eb5fd18b7b15759af3ac3762fafca33c970ab965e153b2"
+      },
+      "cases": {
+        "actual_companion": 11,
+        "actual_companion_assertions": 105,
+        "complete_cli_receiving": 3,
+        "companion_negatives": 2,
+        "mock_mac_ocaml_routes": 4,
+        "foundation_only_filter_cases": 6,
+        "mock_mac_parent_negatives": 2
+      },
+      "actual_companion_controls": [
+        "warn-error",
+        "warn-pass",
+        "require-error",
+        "off",
+        "warn-inspection-error",
+        "warn-mutation",
+        "warn-active-cancel",
+        "warn-before-delivery-cancel",
+        "warn-delivery-cancel",
+        "warn-delivery-abort",
+        "warn-printer-error"
+      ],
+      "complete_cli_controls": [
+        {
+          "case": "loopback-warn",
+          "warnings": 1,
+          "published": true,
+          "helper_calls": {
+            "client": 0,
+            "server": 1
+          }
+        },
+        {
+          "case": "loopback-require",
+          "warnings": 0,
+          "published": false,
+          "helper_calls": {
+            "client": 0,
+            "server": 1
+          }
+        },
+        {
+          "case": "loopback-off",
+          "warnings": 0,
+          "published": true,
+          "helper_calls": {
+            "client": 0,
+            "server": 0
+          }
+        }
+      ],
+      "current_match_guards": {
+        "workspace_sources_still_match": true,
+        "snapshot_sources_still_match": true,
+        "test_sources_still_match": true
+      }
+    }
+  ],
+  "full_mac_controller_syntax": {
+    "path": "/private/tmp/unison-validation-warning-build-records/mac-controller-syntax.json",
+    "bytes": 2500,
+    "sha256": "048d6bfcc759b8336a5a45526401e3e3705c6762f3d57df263dfad1229f5c482"
+  },
+  "retained_failed_trials": [
+    {
+      "path": "/private/tmp/unison-validation-warning-build-records/mac-controller-syntax-trial1.json",
+      "bytes": 2161,
+      "sha256": "f15a58dcbfa52b536be1e14c12d91363cb4002213a822dc9e7191ae214f35992"
+    },
+    {
+      "path": "/private/tmp/unison-validation-warning-build-records/stock-warnings-trial1.json",
+      "bytes": 299,
+      "sha256": "0406b3ce5e2ac238fe0bc8b37390ab362d9b0b4a70748c99168f9178efd41ba6"
+    },
+    {
+      "path": "/private/tmp/unison-validation-warning-build-records/stock-warnings-trial2.json",
+      "bytes": 1087,
+      "sha256": "5c7be7c94f9b47466e6b0c0895928dd7c49b423cb619f06e2a5f635b56bc9966"
+    },
+    {
+      "path": "/private/tmp/unison-validation-warning-build-records/stock-warnings-trial3.json",
+      "bytes": 479822,
+      "sha256": "a9d990d8b0088228e80094c3043ea025e9e3b3fa2ab3c5d8a89e411d9adb3f44"
+    }
+  ],
+  "native_UI_or_Adobe_or_Photo_access": false,
+  "performance_claim": false,
+  "limits": [
+    "Companion controls use privately observed actual hash workers and runtime; injected observation points are not production code. The parent negative restores one exact parent participant in a current graph, not an entire parent build.",
+    "Complete receiving controls use actual Unison client/server local-exec transport with synthetic protocol helpers. No SSH-network or real SDK/corpus result follows.",
+    "Mac tests use mocked OCaml sinks and Foundation-only objects. Full bridge/controller checks are compiler-only; no Cocoa app link, GUI paint, modal interaction or persistent batch visibility is proved.",
+    "The mac batch status field is transient and later updates may overwrite a warning; durable user-observed visibility remains unqualified.",
+    "Current helper/worker/I/O work settles before warning while the outer candidate workspace remains retained. This is not a global-zero-work claim or whole-process FD/RSS limit.",
+    "Hard SDK memory/descriptor limits, all-helper supervision, generic temporary cleanup/additional-name families and complete M4-V/M5/M6 work remain open."
+  ]
+}

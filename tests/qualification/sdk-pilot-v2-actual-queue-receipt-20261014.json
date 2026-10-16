@@ -1,0 +1,10 @@
+{
+  "utc": "2026-10-14T18:41:58.828329+00:00",
+  "queue": "Queued message 01a13bb8-a426-7940-b95d-a5c995958469 for thread 01a13369-8b68-7aa1-be91-cba984ba269b.",
+  "return_packet": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-pilot-v2-actual-return-20261014.json",
+    "bytes": 50296,
+    "sha256": "a0704a0e7a26513c36f6e773a700c0893e918c6b965311b1e025cdf8b008a5ab"
+  },
+  "state": "ACTUAL_RESULT_QUEUED_NO_NEW_WINDOW"
+}

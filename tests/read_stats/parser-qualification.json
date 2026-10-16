@@ -1,0 +1,49 @@
+{
+  "schema": "unison-primary-read-parser-controls/1",
+  "groups": [
+    "client/server job IDs have separate namespaces",
+    "missing reports differ from reported zero",
+    "18 missing/duplicate/malformed/saturated/bounds controls reject",
+    "retained log cap rejects excessive input",
+    "benchmark default stays off and primary metrics never become total application reads"
+  ],
+  "source_pins": {
+    "tests/read_stats/parser.py": "544ab10dc580c829584ddf16866fe496af5b3ef0126d0c459a2201e61b463b5f",
+    "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+    "bench/sync/run.py": "d3aff8711a04c5794c0786a20f8305602918f9b7a55ebb4a523f4fc060e5109c"
+  },
+  "scope": "Pure Python static receipt/benchmark-counter parsing only; no compiler, native, SDK or Unison process.",
+  "retained_stock_cli_readback": {
+    "report_path": "/private/tmp/unison-read-stats-stock-final-cli-20261014.json",
+    "report_sha256": "427c5c2e62d3a511667fce41ec2daa12cba00cef112066bfc72ea7c064534a7f",
+    "log_path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9/sync/run-02.log",
+    "log_sha256": "2e4514caf9e5c8086d8a41ca7aa5997af3382e069ebd74c7b66f62cba919c5dd",
+    "parsed": {
+      "reported_jobs": 3,
+      "logical_bytes": 6291684,
+      "chunks": 120,
+      "records": [
+        {
+          "endpoint": "server",
+          "job": 0,
+          "logical_bytes": 2097228,
+          "chunks": 40
+        },
+        {
+          "endpoint": "client",
+          "job": 0,
+          "logical_bytes": 2097228,
+          "chunks": 40
+        },
+        {
+          "endpoint": "server",
+          "job": 1,
+          "logical_bytes": 2097228,
+          "chunks": 40
+        }
+      ],
+      "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+      "absence": null
+    }
+  }
+}

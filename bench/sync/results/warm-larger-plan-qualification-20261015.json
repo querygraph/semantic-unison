@@ -1,0 +1,32 @@
+{
+  "scope": "Larger warm benchmark preparation only. Historical32MiB x8 data preserved with original sources, not relabelled current. No execution/reservation.",
+  "actual_pure_terminal": {
+    "chunk": "bf22d2",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "plan": {
+    "path": "/private/tmp/unison-warm-sync-measurement-plan-20261015-v3.json",
+    "bytes": 7931,
+    "sha256": "6e71e97129a60599a629e99b5348ef92a5c660aea79684641e57e45141988210"
+  },
+  "sources": [
+    {
+      "path": "bench/sync/prepare_plan.py",
+      "bytes": 5033,
+      "sha256": "71731c780fe065a4295cb27fa148068dd1570842efcd9da9d816be3f7417adae"
+    },
+    {
+      "path": "bench/sync/prepare_plan_test.py",
+      "bytes": 1670,
+      "sha256": "aa730c87c30b71b0cee1e8ca5209b4e7355e770b9c313ff31fc69daf19116f7b"
+    }
+  ],
+  "historical_small": {
+    "path": "bench/sync/results/checked-worker-performance-20261014.json",
+    "bytes": 3080067,
+    "sha256": "68e725c88d1caf0d91a808b1fd4d28fb0ec707bc478063420f7f2dfa3e9d8a1e"
+  },
+  "negative_build_controls": 3,
+  "runtime_started": false
+}

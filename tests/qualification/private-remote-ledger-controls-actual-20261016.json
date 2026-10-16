@@ -1,0 +1,85 @@
+{
+  "schema": "firstpair-private-remote-ledger-controls/1",
+  "state": "SEVEN_FIXED_RECEIPT_CONTROLS_PASSED_CLOSED",
+  "actual_owner_terminal": {
+    "owner_pid": 88356,
+    "chunk": "f1ee66",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual exec_command completion"
+  },
+  "closure": {
+    "child": {
+      "pid": 88357,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 88357,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "runtime_artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-ledger-controls-zk8545xp/SHARED-START.json",
+      "bytes": 1191,
+      "sha256": "38cb08e1051e0731f0b22f515418a9a41e9aa416f53826371b04ee06b60612df"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-ledger-controls-zk8545xp/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "2b2b2113e61861e7161f1a0921a3525d42af70238e84a08e2687a77785c49c35"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-ledger-controls-zk8545xp/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-ledger-controls-zk8545xp/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "209637c5270ea62667d3505f25f6e8e713fd220b3020983b799e40ff6ae4138a"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/case.py",
+      "bytes": 5697,
+      "sha256": "4e81fe63e8949957012bfceaa155329b2c39f164fdb1d42367c7a94ee65e7299"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger.py",
+      "bytes": 4502,
+      "sha256": "9eb528bd53cb7e77484f59e69d5680c95992d4a43ec904880fbe482d4c37da93"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger_test.py",
+      "bytes": 4541,
+      "sha256": "1f2358609e0e081b377d7ee79b8c36a4a6b7d34ca5de703adf921a1b8cc3dd05"
+    }
+  ],
+  "checks": [
+    "complete prefix ledger",
+    "nonzero settled is not success",
+    "direct group identity/reap/type/census",
+    "server wait binding and pump join",
+    "pending or orphan outcomes retain unknown",
+    "prefix/argv binding/exclusive records",
+    "malformed or unknown stages refuse"
+  ],
+  "exclusions": [
+    "Fabricated receipt objects and private temporary JSON only",
+    "No transport/client/server/native/SDK/Photo or payload dispatch",
+    "Audit consumes recorded proof; does not establish outer worker closure or authorize lock release",
+    "Aggregate coordinator and real remote receiving qualification remain pending"
+  ]
+}

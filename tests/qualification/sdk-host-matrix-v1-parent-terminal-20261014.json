@@ -1,0 +1,41 @@
+{
+  "schema": "unison-sdk-host-matrix-parent-terminal/1",
+  "utc": "2026-10-14T21:33:14.399190+00:00",
+  "wrapper_pid": 25464,
+  "aggregate_group": 25466,
+  "tool_handle": 93165,
+  "actual_terminal_chunk": "0ea119",
+  "actual_tool_exit_code": 0,
+  "running_session_returned": false,
+  "stdout": "CLOSED /private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452\n",
+  "scope": "actual parent tool terminal; process absence is corroboration only",
+  "supplementary_ps": {
+    "command": [
+      "/bin/ps",
+      "-p",
+      "25464,25466",
+      "-o",
+      "pid=,comm="
+    ],
+    "exit": 1,
+    "stdout": ""
+  },
+  "wrapper_start": {
+    "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/WRAPPER-START.json",
+    "bytes": 214,
+    "sha256": "b745757fb36a9a2314e511deea62279de87a286a27233e4d9de32f554bbcf894"
+  },
+  "aggregate_closure": {
+    "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/AGGREGATE-CLOSED.json",
+    "bytes": 431,
+    "sha256": "1b8406ecf654a9c774c5f2c2c9893a26ca50d074578eead67a56730fa5283fc2"
+  },
+  "supervisor_return": {
+    "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/SUPERVISOR-RETURN.json",
+    "bytes": 599,
+    "sha256": "c4d76bf47dfb0b1bf310da3d5e6a2e0047f2752cb36e7a405c3a7a6078b888fc"
+  },
+  "unresolved_marker_absent": true,
+  "admission_consumed": true,
+  "automatic_retry": false
+}

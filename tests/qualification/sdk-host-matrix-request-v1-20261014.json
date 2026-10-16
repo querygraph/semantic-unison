@@ -1,0 +1,133 @@
+{
+  "schema": "unison-sdk-host-matrix-request/1",
+  "utc": "2026-10-14T21:15:23.026280+00:00",
+  "state": "REQUEST_REVIEW_AND_FUTURE_FINITE_SLOT_NOT_RELEASED",
+  "review_required": "current telemetry/executor source; historical90b27d2 acceptance does not cover this successor",
+  "plan": {
+    "path": "/private/tmp/unison-sdk-host-comparison-plan-20261014-v3.json",
+    "bytes": 13624,
+    "sha256": "811c62cbedfebc08f52330946ca4b23edc218a0a0b2977905d1866b7e7cce1ee"
+  },
+  "command": [
+    "/usr/local/opt/python@3.14/bin/python3.14",
+    "/Users/alexy/src/unison/tests/sdk_host_matrix/run.py",
+    "--plan",
+    "/private/tmp/unison-sdk-host-comparison-plan-20261014-v3.json",
+    "--workspace",
+    "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452",
+    "--mode",
+    "native",
+    "--admission",
+    "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ADMISSION-20261014.json"
+  ],
+  "workspace_must_be_absent": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452",
+  "admission_path": "/Users/alexy/src/photo/preview-generator/UNISON-HOST-MATRIX-V1-ADMISSION-20261014.json",
+  "admission_required_state": "ROOT_ADMITTED_FINITE_UNISON_HOST_MATRIX_V1",
+  "limits": {
+    "calls": 12,
+    "inputs": 3,
+    "logical_states": 12,
+    "sequential_calls": true,
+    "CPU_credits": 18,
+    "aggregate_seconds": 300
+  },
+  "call_roster": "3 generated codec originals x (reference1 + experimental1/6/18) =12 total; sequential; setup/failures included; zero writers/generation/retries",
+  "host_memory_bytes": 1073741824,
+  "input_namespaces": "only three accepted generated originals retained in private receiving-pilot workspace; zero Photo/Lightroom inputs",
+  "qualification": {
+    "source_mock": {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/telemetry-qualification.json",
+      "bytes": 2033,
+      "sha256": "be58247a7acdab4d12683e01b22cab24105832fb014919204f2d608c936ce356"
+    },
+    "source_headers": {
+      "path": "/Users/alexy/src/unison/tests/area_scheduler/activity-qualification-20261014.json",
+      "bytes": 19621,
+      "sha256": "9c8d6d3a2db1bed7e016179a21e4f0763d14aa49b021ff99d078b4e0a634d98e"
+    },
+    "actual_link": {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/observed-link-qualification.json",
+      "bytes": 120327,
+      "sha256": "581c67778b0ea7d747b9e898807ede0287de625d7bc5a876873bb946d9ad1702"
+    },
+    "actual_link_parent_terminal": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-observed-link-parent-terminal-20261014.json",
+      "bytes": 1732,
+      "sha256": "f8911ed8b839eb9ed0dfda0f21ffd7737a9a6d0a8c1b52fb84b908697efc3baf"
+    }
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 9295,
+      "sha256": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/run.py",
+      "bytes": 6079,
+      "sha256": "26d25da362e02aaaf2890dc50eeea19f4086cd1782b32f0a8adca6a4db23c97a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/adobe/phase.py",
+      "bytes": 8110,
+      "sha256": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 6537,
+      "sha256": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3407,
+      "sha256": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/driver.cpp",
+      "bytes": 13547,
+      "sha256": "0c4fdeba27197836fa95b129ad3e75098eef6d5af1d4614a3787e9f7f10f9925"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/area_scheduler.h",
+      "bytes": 7249,
+      "sha256": "87fbed2108ecd48de7e32f20e124840dc872ec28bf8dc4dfc1c5b3737b837902"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/area_task_host.h",
+      "bytes": 4190,
+      "sha256": "12ca3b66aa2a90e3ff62da48ce6008d2f8299ae3c286a24198cbb33c5b7afd34"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/memory_budget.h",
+      "bytes": 2569,
+      "sha256": "dd5f7ef98280551a081bc2c4cfed0b89b8f874c53b2612a5f10f9687cce7eea0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/memory_allocator.h",
+      "bytes": 1719,
+      "sha256": "1ee30e9b5b262bf9c3fd2751e1fa143c22a0f11130217339f4b48fbc1bd47cb2"
+    }
+  ],
+  "required_start": "fresh release+all pin/no-workspace/deadline checks; START only inside owned group after validation; return actual wrapper/group/tool handle",
+  "required_return": [
+    "genuine parent tool terminal exit; separate from supervisor return",
+    "AGGREGATE-CLOSED closed/reaped/others absent/within300s and unresolved audit",
+    "all raw per-call results plus parsed validation/telemetry",
+    "exact input/tool/source post-readbacks and actual call count; failures consume slot"
+  ],
+  "capability_limits": [
+    "functional validation-result/callback/covered allocator observations only",
+    "callback frames are not OS thread counts; codecs excluded",
+    "not decoded pixel equivalence or current-edit/preview reuse",
+    "one sample per combination is not a benchmark or scaling proof",
+    "backing allowance is not RSS/all heaps",
+    "not production endpoint integration or C-backend receive timing"
+  ],
+  "excluded": [
+    "Photo/Lightroom/Main/cache/preview APIs",
+    "renderer, source photo payloads or publication",
+    "qualifiedv1 replacement",
+    "old admission reuse, automatic retry or runtime renewal"
+  ],
+  "native_release": false
+}

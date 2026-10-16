@@ -1,0 +1,81 @@
+{
+  "schema": "unison-sdk-host-matrix-executor-qualification/1",
+  "utc": "2026-10-14T20:51:11.689651+00:00",
+  "scope": "original fake tools and pure admission/receipt checks; zero SDK/Photo/Lightroom invocations",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 6458,
+      "sha256": "416cca0b1187c56d1400891d2808f24db16f2abc10ffc9e92cfc953af1ce5818"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/run.py",
+      "bytes": 5849,
+      "sha256": "34a8b5b414bc405c635c3a28b40b23f759794900e875e0ce09eda5ede5d19dab"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/test.py",
+      "bytes": 2985,
+      "sha256": "3e19b448d9178d803101c88d6da0aede64a2957dfdb40fc1f85d971c593435f1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/executor_test.py",
+      "bytes": 3880,
+      "sha256": "fd94e02c6f8407450e9a72bf2c66468176f58ef61a75dd689b2f41a7c271b7f7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/admission_test.py",
+      "bytes": 1506,
+      "sha256": "968337c971b13d83adbd03850c58d899b66710ac43247b01e22ee447513d2937"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/README.md",
+      "bytes": 3527,
+      "sha256": "45a217ba2624417c554d58a34340e17df5f4e167a194fb80aa30eb15ce6d0ace"
+    }
+  ],
+  "mock": {
+    "path": "/private/tmp/unison-host-matrix-mock-p8fwzlyn/RESULT.json",
+    "bytes": 675,
+    "sha256": "4072446ef92c716d941ec8280ab028872cfce6c53f8e14a9945dc5c1d3239b94"
+  },
+  "pure_receipts": {
+    "path": "/private/tmp/unison-sdk-host-plan-8o1ednys/RESULT.json",
+    "bytes": 313,
+    "sha256": "191c5c072e7a78f192ef900f9072bfabe02c78c6f634dd7e6d610495ef558c05"
+  },
+  "pure_admission": {
+    "path": "/private/tmp/unison-host-admission-rbcv2lin/RESULT.json",
+    "bytes": 192,
+    "sha256": "5afa2538e314d27ac5df04d3c44e12b6deb0f8ecae1c51d9ed6e49551c8c7197"
+  },
+  "plan": {
+    "path": "/private/tmp/unison-sdk-host-comparison-plan-20261014-v2.json",
+    "bytes": 13580,
+    "sha256": "862033d3f9fb1b0901c22284464a8b0b17a97919839401f2d0e1a25ec8a207c8"
+  },
+  "terminals": [
+    {
+      "chunk": "fb4a31",
+      "exit": 0,
+      "scope": "actual fake-tool wrapper test suite"
+    },
+    {
+      "chunk": "0e8458",
+      "exit": 0,
+      "scope": "receipt controls and build-only plan preparation"
+    },
+    {
+      "chunk": "7afc2c",
+      "exit": 0,
+      "scope": "pure admission controls"
+    }
+  ],
+  "native_release": false,
+  "runtime_qualified": false,
+  "limits_of_proof": [
+    "mock process closure is not SDK runtime proof",
+    "no pixel/thread-count/allocator/cancellation/scaling qualification",
+    "fresh separate Root release required; existing slots consumed"
+  ]
+}

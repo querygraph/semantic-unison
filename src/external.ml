@@ -45,6 +45,10 @@ let search_in_path ?(path = path) name =
     path)
     name
 
+let resolve_program name =
+  let found = search_in_path name in
+  if Filename.is_relative found then Filename.concat (Sys.getcwd ()) found else found
+
 (* Make sure external process resources are collected and zombie processes
    reaped when the Lwt thread calling the external program is stopped
    suddenly due to remote connection being closed. *)

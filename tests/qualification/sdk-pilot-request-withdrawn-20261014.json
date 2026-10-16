@@ -1,0 +1,14 @@
+{
+  "utc": "2026-10-14T18:04:57.780900+00:00",
+  "state": "WITHDRAWN_UNARMED",
+  "original_request_sha256": "3b6b51db500fdc717d0725b176cf8a3cb804f00531f245b6e96f34f3e1014dc8",
+  "draft_queue_message": "01a13b88-d395-7bc2-8139-6d6127bc83d7",
+  "withdrawal_queue_message": "01a13b8a-6683-72b1-81a9-c7ad27ded21c",
+  "reasons": [
+    "13 actual SDK calls, not the draft 12",
+    "Whole fixture-plus-batch deadline is not enforced yet"
+  ],
+  "native_dispatch_allowed": false,
+  "SDK_invocations_performed_here": 0,
+  "next_gate": "Complete source/synthetic qualification of the whole-run owner/deadline before requesting a new finite slot"
+}

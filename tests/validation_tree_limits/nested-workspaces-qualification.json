@@ -1,0 +1,1496 @@
+{
+  "schema": "unison-nested-backend-workspaces/1",
+  "status": "passed",
+  "parent": "5dac6acdde66bc48dc6f0cae147c4f6c53143b2a",
+  "sources": {
+    "src/backendResources.ml": "bf5a39fb6ac88ee7401eedd0c30b95b0ba8110b04a01e8f4cefa126da44d2e63",
+    "src/backendResources.mli": "442e808a6c0efb611eab9b749c9027d93bf3e335ae1b272509c123f042405224",
+    "src/candidateValidation.ml": "12dc6c94035f061947e7b5d1c7658e4cd5eb2930d0048f1ce97ec8cb94cbb0f8",
+    "src/validationTreeBudget.ml": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970",
+    "src/validationTreeBudget.mli": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773",
+    "src/validationTreePolicy.ml": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092",
+    "src/validationTreePolicy.mli": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f",
+    "src/semanticRuntime.ml": "2d2511c8e7394d8eb6e413d25ed7ffb4022d3b3c43c0c10e2e7a79e1b50d2967",
+    "src/semanticRuntime.mli": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531",
+    "src/Makefile.OCaml": "8194063483e909d9c9a571f0da96f949d15057953d2c4f1ab3227449d29428ee",
+    "tests/backend_resources/controls.ml": "2ac045263dd3f04c3de8ec1a5b2a39ed8f1f7198a5730df061dff876555cd49a",
+    "tests/backend_resources/plugin.ml": "46b60d995a398935a6970200e585a6b20e030e17aca4f4a7db8c83389d326ea8",
+    "tests/backend_resources/run.py": "fe45d2e8fa5d6cb5fcb48b2fea76094333837b964b548a895e4c0fdb45fba0d0",
+    "tests/validation_tree_limits/settlement.ml": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b",
+    "tests/validation_tree_limits/run.py": "234b45c303a82d6e2207469f38a08c42b22b5501b2e7693c23a943904b8a3939"
+  },
+  "builds": [
+    {
+      "tool": "Make",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-71u1alc8",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "6258f02acbcc1701586568e98e2e8eb001153fd35ba8c75927dd71170f9ff320",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-71u1alc8/build.log",
+        "sha256": "66fdfd47b52d70346a857ba4f330624a4c515fe2e724e96d4e05d0b1e2d35b84"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-71u1alc8/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Make",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-nvz2i9z9",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "a927f28de8bd8b763fdd8f7d3db4483ed269e0c4b7e0eeebff8183c904c723b3",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-nvz2i9z9/build.log",
+        "sha256": "4c33808cdf8b41a4b8d3af15e486210d5595cfe88483908534596215c384c8d3"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-nvz2i9z9/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-stock-qr9fgy1_",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "350df8af07f6bb4f4db0447a265c40b95963f89018716bc03e6037cb4662c455",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-stock-qr9fgy1_/build.log",
+        "sha256": "2b14cbcc0793effedce1268079d60926923c72a4eba042b2859b7f7dd7d2088c"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-stock-qr9fgy1_/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-ox-f71uw0hy",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "4b0585ccefc0667c2f98353be66f09c0a4a4eb3516211925a9b155dae366f056",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-ox-f71uw0hy/build.log",
+        "sha256": "f4261dec26a9f1036beb6dc32f2716859278f525bcb959ce9c00ebdebe5bba68"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-nested-dune-ox-f71uw0hy/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    }
+  ],
+  "receipts": {
+    "backend-stock": {
+      "path": "/private/tmp/unison-nested-workspaces-stock.json",
+      "sha256": "eb351c6a571b1950b08e93417bc586b8727eb657ac3076be61b6398868182b19",
+      "summary": {
+        "status": "passed",
+        "scope": "Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6",
+        "cases": [
+          {
+            "name": "fits",
+            "status": "passed",
+            "backendBytes": 4194304,
+            "envelopeBytes": 5242880,
+            "envelopeDescriptors": 26,
+            "doubleDebit": false
+          },
+          {
+            "name": "memory-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "cpu-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "manifest-partition",
+            "status": "passed",
+            "files": 6,
+            "globalTransactions": 1,
+            "envelopeBytes": 12582912,
+            "envelopeDescriptors": 37,
+            "maximumGlobalTransactions": 1,
+            "childDoubleDebit": false
+          },
+          {
+            "name": "nested-backend-partition",
+            "status": "passed",
+            "files": 6,
+            "cpuBudget": 2,
+            "backendLanes": 2,
+            "workspaces": 1,
+            "envelopeBytes": 7340032,
+            "envelopeDescriptors": 26,
+            "configuredBytes": 8388608,
+            "allDeclaredCpuPermitsHeld": true,
+            "scope": "Synthetic permit ownership, not SDK threading/CPU utilization."
+          }
+        ],
+        "activationNegative": {
+          "parent": "4717a6c",
+          "participantSha256": "9eb9f1164e70d7d729e5635412af0ff262ad9956a5c8a182446e4b8af866f10b",
+          "binarySha256": "210b1d4641a0d5eb42e5d4062a295c5135a772bcc5df953b64741d867519a441",
+          "exit": 2,
+          "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/negative/result.log",
+          "logSha256": "121b271007dbe596243ca8a99044e3f8891ce1a5b6ca5e3616e810508a98aa89",
+          "scope": "Exact previous CandidateValidator implementation only, other prefix objects current; independently rejected by late-activation oracle."
+        },
+        "binarySha256": "a8a5780087e7e7b51c4b24e6869f3896020daf431dd52dba0f2158ac40127352",
+        "compiledSourcePins": {
+          "ubase/umarshal.cmx": "79c5028e3e81196289ebcf2ce79b415c6c1e3375e6c0db6cf1f61dd46ed00d2d",
+          "ubase/rx.cmx": "8f0ba5af4adb35948bfb67597d727fd8ab3c9284ec0465fd8914523fc4a942a8",
+          "unicode_tables.cmx": "723576e2e4beb1a14b851fa6a332cd77d6aec87201724b7fad3cf0962a6c20ab",
+          "unicode.cmx": "68237b74745033de976f3127a48f3ad72dadfa7476d46aead4b2873ba78505ea",
+          "bytearray.cmx": "e8cc232180c1c71459bf8a2a2471e39c5c0464749e4a65b2fa689bbcf65c0e4c",
+          "system/system_generic.cmx": "06ff050dab24a2a04a1efdc86d857193ba25ded8a8286820407948209c97b13c",
+          "system/generic/system_impl.cmx": "8aa4d31609d94de39b69eff9c23619ee77a5bd102367ad6b43d8f97801cf8f7c",
+          "system.cmx": "d37c96e017909a6193dfc4866e6d0255b52db6d1fa8b34fda80ced4e9c4cfa76",
+          "ubase/projectInfo.cmx": "8f08e6eaca9ad923b0666fc3ff3c04fb04d968d6bff0c98f3897d3415e70de93",
+          "ubase/myMap.cmx": "86cc6cc0bff562c3032724554dba607e201b158182bf6c6cec43002669828793",
+          "ubase/safelist.cmx": "257625e8aa9e55d914a4650d002316049dd7369ef146c18457e59a368d72b2b0",
+          "ubase/util.cmx": "b762b633d9cf6c8cb2ddfdeaa80f99e1738bf18d4f95ddcc5fd8b2c9ad197017",
+          "ubase/uarg.cmx": "0d74f57ae9f9a715f5685f237347eb7591cbfce1114ec3c8ea23f0484cf7dd3d",
+          "ubase/prefs.cmx": "f379d2c362d59daef593b2f0748e9b356239398b2213c1892d1727592c2e375a",
+          "ubase/trace.cmx": "6dd968a7cd3e3419ae56c499fbfc9669cb3a7258695fcd11c47e4096ad55219f",
+          "ubase/proplist.cmx": "43cc1dffeccb5a9ae7e97e4ec9503309646bf942cc6787c89a576bfe91d24a1a",
+          "lwt/pqueue.cmx": "0cbac2866689fc2d183f85694e53fe3ecd7db4803d0fe2529f9cc19ca6baa866",
+          "lwt/lwt.cmx": "7f96fa88c20214ed76459349f8f2bc1d33527c170988b586d2eb6f8e9910f816",
+          "lwt/lwt_util.cmx": "ebffde3871e774cdc5b923082e5a1f7d8e0e91f9c6ef70d28321941303e2136a",
+          "lwt/generic/lwt_unix_impl.cmx": "ddb0faa0654c818a55b975b504dfda8fa383a7565faf1e39f6cbbda01cdce343",
+          "lwt/lwt_unix.cmx": "74fa0e6a04cf40730ef942a068b14233f26ef306b840f2f5ea34110e54516588",
+          "features.cmx": "8be8d1ef2886d71e430266ec9de8c4089988433417a3a1310153fbcbb2569a79",
+          "uutil.cmx": "27534298e7567c1f7bcf0cf4db94fc15e68c2f7b774fcd0ebebe29ff6a3caf4d",
+          "case.cmx": "84dcb1edb900ae3a8969736c0cfba1f671c34772c28ee544af40f2ddb4dedf6b",
+          "pred.cmx": "258b66a4422db6e6b22e699245e51be718869e96b894dd467df0a663269f2d1a",
+          "terminal.cmx": "00e3edee734d4a17af35e3a6736099346622b5672641e90f9302885687744f1a",
+          "fileutil.cmx": "f6bc60753cd8ca01e838fa50954de73d28637fe19d3682482b1277602adf7d39",
+          "name.cmx": "c41818e8c1a1add2b5a8de5e103f9b54a21b9f870f7c094f4a75d9ddb43b87ff",
+          "path.cmx": "41425eb6518a908d22b264baf358289b27fb85ca6f8f649a8959b9238d3ec729",
+          "fspath.cmx": "86f8ea8509997d2cbfa14a971b26bc5487fca5115c812dd5609eaf6e79d1acf1",
+          "fileObservation.cmx": "cd5e2b6abaf6f37afae730fd17eedfb9d6fc609673d8ed7c9655fb6870442c51",
+          "stagePublication.cmx": "60d6e8e7389ae04e95f09272018c39d292a47c0ecd8259f85b91042418e9ad81",
+          "wholeFileClone.cmx": "1d75178511f5748d44f105c759cd1c6c2d184ac287875403d0e241d1bb899b94",
+          "fs.cmx": "b09cd9e6567af9a394572893f68573bfeb46ab1a591f0f56c130e49defdd9c0e",
+          "fingerprint.cmx": "5620a9547660531e80b2516b2cae398b09b43510c8a5a6b64100f6803a212285",
+          "abort.cmx": "458edd9a9e8f0179743f28191e3533c136644f955e00923f4c2993582b70cdad",
+          "osx.cmx": "8ecf6acce2328dac85a7fdcd52e18a5bc3496b8ffdce51eb3b7244ccc6df4e38",
+          "fswatch.cmx": "b93b4aec1a47fbd14405b07c5cb2afff60c82b497a73b2dc84924e7d6a098c25",
+          "propsdata.cmx": "03fee2034809ffb6014cdc9de9ed0e1b10ca9ec95cf6c02452e7c11f8b4d008a",
+          "props.cmx": "1f5959a4ab1f66615969a20c373a9c50c75f624ee5ce9b693d15a20bf2c9fab5",
+          "fileinfo.cmx": "5480fdd357d764432716cf2d282738ef0bf5a087cbfb5b66c1ba86b65ece5a58",
+          "os.cmx": "405b787b62bca068c827d49bb73e31f1463777746d33d4fe71ff2dae13e21daa",
+          "lock.cmx": "26f7d5eb912a7a41ef39e9b25f7f0ac93cdba03b72fd175fb8e81088580ccf7d",
+          "clroot.cmx": "bd45ef9d2887d5536dee113a270c9524cc85d28731459f937a821694f7e7db2c",
+          "common.cmx": "2c3f12d70b7138bf7dfed21bd33e7e6b77bb62b8bd4b39db8b9ad9f89f006bb0",
+          "tree.cmx": "3c66b678cd5b78d81922492d3da0c5e451b2c2a857fd39681cb66e4939e6c0b1",
+          "checksum.cmx": "f24353d5305b270278406ace1842fd8d1410e9bc130ffff1bc55f0c36f1d2351",
+          "transfer.cmx": "4281165c06416c04fe5a3521d058057ac5769a59b7bfc4aa964ea459981cb465",
+          "xferhint.cmx": "27b35bd924c767fcd2c6bc051e93af97185094972acaeb01d2e4d76ead66dceb",
+          "borrowedWork.cmx": "218d0f9f74af173eeaae82198f5f7fbe6e1f00c19ee0d34ccbc145d1be2d3822",
+          "remote.cmx": "f633fb607d5d1e52fdc95e8c90fd4ec00c6a1b0bade037ea9c237c8fc0b010f4",
+          "external.cmx": "6051d78e5e2b4c8c18a52adf31c5f2903d2525277199b61ffc1059a2c240ac2e",
+          "negotiate.cmx": "2d9f2aaaccde97e2caf6ba4417bdfa5ec56629aba641bb8c00dbcbae316820ef",
+          "globals.cmx": "71ba89379dff980bd11973e899651d763e526cc9abc6edaf5a5dae2fd86a0b9e",
+          "fswatchold.cmx": "19951a0dec6f5f208e23a1330e31ac53955158d03ec92c4f4dd0b6674071c994",
+          "semanticHash.cmx": "3b2fe27c15c0d286c6cd9e9b67d1b2439f2bf25416f2717b73bda85933c66e3c",
+          "semanticFile.cmx": "d344efa9bf3b508188961309b0ba0fd53875b86c2e078710ebc9b51b9e376bc1",
+          "formatExtension.cmx": "7a5d6c803ab13610cf6b438d3ebbbd001c492edd7b9b79ad8ebc2b8aea5a1364",
+          "formatRecognition.cmx": "e5680b6a37658e029c76e8a1824b25f417bef7482ee2c311896fdcca8d97989d",
+          "xmpObservation.cmx": "b15812b3a52c1f9ddc453d98e3f37707d15d8606bd9559bf9a03d5b8e3d1b57b",
+          "xmpMerge.cmx": "c38a2d3b4ade636dbbb60849136f2c05976414b5124122788a40742c2b86b230",
+          "dngSemantic.cmx": "7c46569060b6e2a70ea4a12c6f4519da1d6094b73d1afcd9f62f7d70346ffadd",
+          "dngExtended.cmx": "0ae42e5e3209db036a7a997ff549eae6997cd6f111b0aa28d0bf0154a742acc1",
+          "jpegSemantic.cmx": "8e9ceb85615b92bc4ca52432919f5ef82fcf487da0fe506f12e4e0742e70a71a",
+          "dngRecognition.cmx": "7a2c725b2ddb66598d01cfd196155ee6ed227cad2838406716fd261fbed3b455",
+          "semanticDelta.cmx": "bd01645470cc011f01adbf5c9694f2930a318d32d7931350583df8736b86d26d",
+          "semanticReport.cmx": "ed8f23cc10601155d193e59efa82dcc8545dff535a791960d257fb6787f2432f",
+          "helperSupervisor.cmx": "873e996f7dddc71ce02cfe73b1069e363abe467785d4ad2d9643dbca97cad248",
+          "semanticAdmission.cmx": "ff8f609a85cd27332dc3bf3c973088f0f3c0bd3dec8a51349082fca9295e441c",
+          "semanticMailbox.cmx": "4630bc012ee9ec7d17da93930ad6980645bfecc5b353ec609676834783f052cd",
+          "ioAdmission.cmx": "0908990ee8af0e642fc9017012b4e1fc59f16bdc3e5411188bb82deb3ead84ab",
+          "semanticWorkers.cmx": "6e939535c7062c0b7ee5b95296c892e5fea412abc10b7e936d9cce3b82fd24a8",
+          "semanticFormats.cmx": "a2e0c39f42bc83e90f27b92a410d063d0c3ee8cd16ea68193c7962e7ff033844",
+          "backendResources.cmx": "3a37e26b9a81d2c2ee9e8b92ed8c9b7bad5fbef185a27fd65646dc830d6498f4",
+          "helperLimiter.cmx": "50c5d67ca2d7ddfc3ed0c0ddb09228ff51af27d268c710fe3af3e73e4b3db2ae",
+          "candidateValidator.cmx": "affd380ce5135fa86b9ac0a4a9a7c9af1738b072938934a74e5b4b7ccdf95e2b",
+          "dngValidation.cmx": "00ff5954a4ee93791f6c1407e4740720114c5754f67cce169e63cf422baed51a",
+          "dngCandidateValidation.cmx": "33eae7c3261faf208313c7858aa8073a272f21809b8e18f7586c0025ecb132b0",
+          "candidateValidators.cmx": "cac341dc176709598e7e35eb7a6d46341998c835bcab189636ee155fcd972eb9",
+          "validationTreeBudget.cmx": "b0ffb3f8736719d59a031b8d61ee151a53728e4c6c9b6ed527ebaf5faf82c64a",
+          "validationTreePolicy.cmx": "8a811df4e4d3333ccdffc3af4123c0137dd899816d38e1a60793d6cb114e19a1",
+          "semanticRuntime.cmx": "bb4d348194f6a573c5fe477b4a1a070589f6238b9fc07356e65a850cb4fd1a2a",
+          "supervisedExternal.cmx": "b4b5d96189d188ee9bfe53977b7fd392ac3f1f47fa7d692c6671a111bb39dcac",
+          "semanticSync.cmx": "7461350907e40a42014823959db3f0196f0cbac41626a9d5a1b7e11779131378",
+          "semanticRemote.cmx": "e67f040f80277b5dd738e61658fa0e390cd2204d49bf8e775b64491aad618556",
+          "candidateValidation.cmx": "2e08fdc4ce454c604a72ebe0b18ad9134439448eaea21352d5d0f8bfafc2eff6",
+          "finalPublication.cmx": "2bf952981fa7f1c26f2a7ca051aea457a8f97fb8372a0772712d6617ec5789fc",
+          "targetBinding.cmx": "79316cddc6064bd0a75bd2df04ff194e5b74970aaf5434558902f7a2890689a6",
+          "fpcache.cmx": "8e96eeb6dad276045a72938a8d8f581e8ddcc46583dea70d32515c39f2a7a26a",
+          "update.cmx": "54f377757598682398684c2bbfae25747b6404aa7e2788cad4a5e612c1c7a3d4",
+          "moves.cmx": "3c0fb4664d9e57d2cc94254a2e3515a6c177b31bb170dabf9f9d69de6ef77503",
+          "cloneRange.cmx": "44346972adf8cb075ddd39df6f602b8d29a20a1a3aa8086257367abc6c477a58",
+          "cloneLease.cmx": "197cadedc1ac316f834d9370599938b3037f455a6ce8b84f83b935f0e32a6fcf",
+          "copyRange.cmx": "439b7dbfbce1358bcf6a65cf3cae1a851298c1d8450b99a535e33615cc407d3e",
+          "copy.cmx": "45764b3858c775a96dc31ef84d212008f878a74daaed46e137c960e753a734c6",
+          "stasher.cmx": "4d28eb7afc3bd76811163c974cc149a3788b330c6c29d1681e9b9d0d47acbd12",
+          "files.cmx": "99638d40f4b64e28dfc90f58753b9dd6070a8d7063442744c1077aec489de2e5",
+          "sortri.cmx": "fd2a25f9c3c1af242e9ee4ea1b352dd1891e1916ac87bb2d936ca572ac9d8b86",
+          "recon.cmx": "20d545c6309344c9f3a1820a3941a86fe041992a4d500797fe5677aa0fd4f30d",
+          "transport.cmx": "989297f0b7f61e1c0914bd8ada0b987bde573b2bc48fb43a676ac87ca2f10e17",
+          "strings.cmx": "29abafb1fa99d2a47d220794c94d30b8e0dd60c150f2512bc0d0d77bacddeb17",
+          "uicommon.cmx": "dc771b45e3877f7bd1a60710929ee0c8a7760d21e90c186d30da20cdcebccabb",
+          "uitext.cmx": "a6dfeeb14c1dfa6c2d41f2dacd7c6c3d252102f3c48aefe7cadd75618c39de8f",
+          "test.cmx": "eb337e5744c372d59ca684995cc7945338f16f0e56e0566a27eb2cd4cff120d1",
+          "main.cmx": "68f023a59d86557905b86610f625434d849e138ca9b134d56af8b1c12aa60005"
+        },
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/plugin-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/plugin-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/controls-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/controls-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/resource-controls.log",
+            "sha256": "6e33afba580790fe9ef5b90fc4c50e036226ae58591c6cef8650b3ad0940cd78"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/negative-validator-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/negative-validator-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/negative-oracle-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/positive-oracle-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/positive-oracle-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/positive-activation-oracle.log",
+            "sha256": "b62aeeb4e9bbe5f3ed21bbb32b2a739c3da0670de6a6c9b2c3e5638b301cac69"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-v3xkbly6/negative-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      }
+    },
+    "tree-stock": {
+      "path": "/private/tmp/unison-nested-tree-stock.json",
+      "sha256": "0a07c8f8fc2a387795d3e8e0de1e03dc72424d2599e815a71dd6d43c6a1c9390",
+      "summary": {
+        "schema": "unison-validation-tree-structure/1",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1",
+        "cases": [
+          {
+            "name": "exact-entries",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "entries-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "entries-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "path-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "path-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "negative-config",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "post-helper-hidden-entry",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "manifest-memory-pass",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true,
+            "manifestMiB": 1,
+            "peakHelpers": 2
+          },
+          {
+            "name": "manifest-reservation-too-large",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 32,
+            "peakHelpers": null
+          },
+          {
+            "name": "manifest-retained-too-large",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 1,
+            "peakHelpers": null
+          }
+        ],
+        "commands": [
+          {
+            "name": "actual-object-kernel",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/kernel.log",
+            "sha256": "ff28cf6e5cb92aea60cd41f2e568a7d49c4d512d85972c2d3cc7bc10fe48ea7f"
+          },
+          {
+            "name": "settlement-link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/settlement/settlement-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "settlement",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/settlement/settlement.log",
+            "sha256": "7fa6e630a1ded1ebef9fea81c091c05b4ecfb38ffd34ab1ec04f98e747856379"
+          },
+          {
+            "name": "nested-settlement",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/nested-settlement/nested-settlement.log",
+            "sha256": "451ca8ff531c1416c1750c276a2673d9df80226a3e486426f77c11f5b13ac3c7"
+          },
+          {
+            "name": "previous-compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/previous-workspaces/previous-compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/previous-workspaces/previous-compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/previous-workspaces/previous-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-workspaces",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/previous-workspaces/previous-workspaces.log",
+            "sha256": "dccb825e266aeb95d3ff2ba5f44ea17fe3107f1dd3b589d3bf6e66820db28caf"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/positive/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/positive/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/positive/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/positive/enumeration.log",
+            "sha256": "a27e94234b13226e2546126c48602d4a0a0300c2bf03cd0190358c4264f7e60c"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/removed-check/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/removed-check/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/removed-check/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-ox87q7a1/removed-check/enumeration.log",
+            "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+          }
+        ],
+        "limits": [
+          "Entry/path accounting is not heap/RSS or full directory resource admission. Properties, symlink target bytes and SDK heaps are outside these structural limits."
+        ],
+        "PhotoOrAdobeAccess": false,
+        "settlement": {
+          "binarySha256": "27b41e5686a724a37f91c2e6c397ca41aea40428af5ad4d7d57252b3f65751ba",
+          "scenarios": [
+            "pass",
+            "reject",
+            "cancel",
+            "fresh-pass"
+          ],
+          "sourceSha256": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b"
+        },
+        "nestedSettlement": {
+          "binarySha256": "27b41e5686a724a37f91c2e6c397ca41aea40428af5ad4d7d57252b3f65751ba",
+          "scenarios": [
+            "pass",
+            "reject",
+            "cancel",
+            "fresh-pass"
+          ],
+          "cpuLanes": 2,
+          "cpuBudget": 2,
+          "workspaces": 1,
+          "peakPermits": 2
+        },
+        "previousWorkspaceNegative": {
+          "parent": "5dac6ac",
+          "participantSha256": "5874fa373bc7db97cc4aed7e627fb5ad7da1dfd103d667fefdc4805a752cd710",
+          "binarySha256": "b058cae8e74e367546ff2eece18ae6a6c168341da54c9a12654eaeb6fe2ec8b4",
+          "expectedExit": 2,
+          "scope": "Exact previous CandidateValidation only, other prefix objects current; same nested-backend fixture exceeds the budget before work."
+        },
+        "enumeration": {
+          "positive": {
+            "binarySha256": "87e4be21506a405a49fbf9f531e1dc206bc0ae4ccf95a3dd78c4861a4a17ef1f",
+            "privateParticipantSha256": "92c0d9b5dee761330e320599f8eb63527c0fa4f00d41d7402e77c6ed3a34f326",
+            "expectedExit": 0
+          },
+          "removed-check": {
+            "binarySha256": "194d0f16fa066f3ef5c3f452a98ae84f031897ef65ca05105b1ca9febd3f9ba2",
+            "privateParticipantSha256": "50c737dfc86096a5ebce290ba94f53c3814af4de20fc5a6d8f50cda4a87ea614",
+            "expectedExit": 2
+          }
+        },
+        "status": "passed",
+        "binarySha256": "6258f02acbcc1701586568e98e2e8eb001153fd35ba8c75927dd71170f9ff320",
+        "sources": {
+          "src/validationTreeBudget.ml": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970",
+          "src/validationTreeBudget.mli": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773",
+          "src/validationTreePolicy.ml": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092",
+          "src/validationTreePolicy.mli": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f",
+          "src/candidateValidation.ml": "12dc6c94035f061947e7b5d1c7658e4cd5eb2930d0048f1ce97ec8cb94cbb0f8",
+          "src/semanticRuntime.ml": "2d2511c8e7394d8eb6e413d25ed7ffb4022d3b3c43c0c10e2e7a79e1b50d2967",
+          "src/Makefile.OCaml": "8194063483e909d9c9a571f0da96f949d15057953d2c4f1ab3227449d29428ee",
+          "tests/validation_tree_limits/test.ml": "117544f2d7889979b3a3ce407e691a6d4a586f9725175c878bb05fc545617bae",
+          "tests/validation_tree_limits/settlement.ml": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b",
+          "tests/validation_tree_limits/run.py": "234b45c303a82d6e2207469f38a08c42b22b5501b2e7693c23a943904b8a3939",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "compiledObjectPins": {
+          "validationTreeBudget.cmx": "b0ffb3f8736719d59a031b8d61ee151a53728e4c6c9b6ed527ebaf5faf82c64a",
+          "validationTreeBudget.cmi": "162249d2f296a87d85c948b3c966c51cbc1e60811407ce0f6866bc5383efce0d",
+          "validationTreePolicy.cmx": "8a811df4e4d3333ccdffc3af4123c0137dd899816d38e1a60793d6cb114e19a1",
+          "candidateValidation.cmx": "2e08fdc4ce454c604a72ebe0b18ad9134439448eaea21352d5d0f8bfafc2eff6",
+          "semanticRuntime.cmx": "bb4d348194f6a573c5fe477b4a1a070589f6238b9fc07356e65a850cb4fd1a2a"
+        },
+        "scope": "Actual loopback CLI receiving tree entry/path/retained-estimate caps, partitioned admission and helper-mutation failure on private synthetic inputs. No native Adobe/Lightroom operation."
+      }
+    },
+    "receiving-stock": {
+      "path": "/private/tmp/unison-nested-receiving-stock.json",
+      "sha256": "7d8837f378bab9aba54a9fee6f30d9ec28810ea4abdcdd5c2836cf29b06c6072",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "work": "/private/tmp/unison-validation-paths-d9h033g4",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306194403,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306194562,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306194746,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306194901,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1162149919837248,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1246431969921105,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.12905787699855864,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.0728909800236579,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ]
+      }
+    },
+    "backend-ox": {
+      "path": "/private/tmp/unison-nested-workspaces-ox.json",
+      "sha256": "068e9c8af8e53d93f3cce77602cda2735bbba4de414b54975f40febf550a791f",
+      "summary": {
+        "status": "passed",
+        "scope": "Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs",
+        "cases": [
+          {
+            "name": "fits",
+            "status": "passed",
+            "backendBytes": 4194304,
+            "envelopeBytes": 5242880,
+            "envelopeDescriptors": 26,
+            "doubleDebit": false
+          },
+          {
+            "name": "memory-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "cpu-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "manifest-partition",
+            "status": "passed",
+            "files": 6,
+            "globalTransactions": 1,
+            "envelopeBytes": 12582912,
+            "envelopeDescriptors": 37,
+            "maximumGlobalTransactions": 1,
+            "childDoubleDebit": false
+          },
+          {
+            "name": "nested-backend-partition",
+            "status": "passed",
+            "files": 6,
+            "cpuBudget": 2,
+            "backendLanes": 2,
+            "workspaces": 1,
+            "envelopeBytes": 7340032,
+            "envelopeDescriptors": 26,
+            "configuredBytes": 8388608,
+            "allDeclaredCpuPermitsHeld": true,
+            "scope": "Synthetic permit ownership, not SDK threading/CPU utilization."
+          }
+        ],
+        "activationNegative": {
+          "parent": "4717a6c",
+          "participantSha256": "9eb9f1164e70d7d729e5635412af0ff262ad9956a5c8a182446e4b8af866f10b",
+          "binarySha256": "73e170bc97c98f356f9499343cbd3e68fef2518d337f634e6f55392c8fe1e6c3",
+          "exit": 2,
+          "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/negative/result.log",
+          "logSha256": "121b271007dbe596243ca8a99044e3f8891ce1a5b6ca5e3616e810508a98aa89",
+          "scope": "Exact previous CandidateValidator implementation only, other prefix objects current; independently rejected by late-activation oracle."
+        },
+        "binarySha256": "f1605f9a4844fa5957e417abf3ab0861da8cf2a13d5228478bdb3ba8eb226ba0",
+        "compiledSourcePins": {
+          "ubase/umarshal.cmx": "a7c68d5522f151c6f693e5536cf598139fede46ea97896ad2296150810d5bfc6",
+          "ubase/rx.cmx": "f1f9bb7ec9136bc0799a7c81443393654046d91eeb3a624d99053d1510c4fa4d",
+          "unicode_tables.cmx": "8a017b6a4790dd1518a78f25a47351204cea38b0edf88339e295a5380f5f7970",
+          "unicode.cmx": "981811cca11c818e9d067f434ece3d1f89131f86dddb69b12a4b600fe3747445",
+          "bytearray.cmx": "0954a4213fed57dafc9388fdddb762714d0bc974f5e9fdd8f5f2ad659495d589",
+          "system/system_generic.cmx": "01dece7865e7505307507429bdd174d695940d1efed9716762bf67c7e78fb9d1",
+          "system/generic/system_impl.cmx": "0f2f7b1a250ec7403d4b4e18e7f252e79c8a86a0676d5f190dd8929931a98818",
+          "system.cmx": "5e43641fa97a0e7552780a1c960e73091effcd5539a24f37ba540604c150bc9e",
+          "ubase/projectInfo.cmx": "a35bc32d1719cf23aceb642fb3ead37ef0980798ff8d1fcb950fbe93cfa6b5f9",
+          "ubase/myMap.cmx": "57863a44c6ff43a9ee609a90657714ffd25d10a21423315394e5bd5f0889eeec",
+          "ubase/safelist.cmx": "7f475ac0a637946d825cd84d52b2df24b5f5ab0197b810985e233aa91c7a379f",
+          "ubase/util.cmx": "366e1cbab99da236841a761962c1025ff25593c0905fefc6c5cbe512a76c51f3",
+          "ubase/uarg.cmx": "a6f7145b9c2bc64f7c2f9576393265b34680b3ed84255c0ec7f18f8c4c5fd66f",
+          "ubase/prefs.cmx": "8feae992caacd130c85d9f4b52e47b9d294ceecb9ea6d3819aa69acecbabfb8c",
+          "ubase/trace.cmx": "5e92238ba56b196094d016399e94f27de8e9fe2876a1c091eeb4c4b00e5b8c8c",
+          "ubase/proplist.cmx": "448382610739f99409c43952b279f7af9e5438546c6f964d300bc9f67636e13f",
+          "lwt/pqueue.cmx": "0bb96dae243bb08d25b272370fcf0ee3e7e33e92af6f6b46798a7314dd70bc48",
+          "lwt/lwt.cmx": "c3ac3340abbfd5dfbfb5db7b66c1d61ee8e63deb0c9e5d406547c5483634ee90",
+          "lwt/lwt_util.cmx": "1c591357bee83b71f5f293668da69da484fb438b3b71e45c9f51e3aa76b36141",
+          "lwt/generic/lwt_unix_impl.cmx": "3aaf6e87185565960ac8f43921def9bd288d312e7c1547c038c2f6f4b5ac7c79",
+          "lwt/lwt_unix.cmx": "604f9c393af7a0e4d9d0aede9e28193f9f2d1bfb697b3951b0a69b4dea92fbf6",
+          "features.cmx": "bc566a5ae1d913025845a723f7697d9c175a56fa989920cd759cfc8e385c5e79",
+          "uutil.cmx": "7a01766cf4afae8b14495ed578fe83223b5683f1b77fa7429c72630082be1e10",
+          "case.cmx": "41c5457b28fa1f54808a6415c9d5cb375981b326b3287e07f453b39d23ef956f",
+          "pred.cmx": "7d0ef4ea8a9c0231536971dd5a3165081c4caf73ae51147f110dc0c2eb3e56db",
+          "terminal.cmx": "74910a7fa2dd09b2201431557a8b0bde788a6a1342fb7813635ccdd62d972539",
+          "fileutil.cmx": "b017713f1bfb3ab4c325c7b8efc07e179aa41caec95737371865857e856cd9e9",
+          "name.cmx": "097d827481164e03642dd877b5fbc6a47f6a9545aaedbc4dfd78bb080e4cde9f",
+          "path.cmx": "0b60b8c180d23965d1ca1c7632f8a7a28b2e9dffc748bdc753b1f1cf57912f65",
+          "fspath.cmx": "6fdbd9eb35ff59db13a59d5d6ec1215f3b8490ba0abf3784162addcdb989fbf7",
+          "fileObservation.cmx": "6548d90ef516d53a769dc2982b63c69ddb0c74deb031f8088ddd6bf8f65d15f3",
+          "stagePublication.cmx": "0379823444d93a38eb1d278bc0228f76bba0d47390329152330dae54174f761c",
+          "wholeFileClone.cmx": "21a24c3af904cab7f01bf8f52a8f75369546f278b6c89189d96fdde8ff9ea608",
+          "fs.cmx": "9a1d4e5cc2bd33ee8d5762457782a844f75cfd1505ccf58939c0b7641ea01c0b",
+          "fingerprint.cmx": "5c178788c2b0dee229dce7fe0dc7901ebbe65f5275d7adec4d7cd25a95732a36",
+          "abort.cmx": "61fa4df7068bca1258a044c15f2b76f1c89bc712c6ab89f2b213fad5b1ec0ed7",
+          "osx.cmx": "2bc4ea8de7a2d9aee3a97da60f2b51feee090e88d36d1d84ba39417857fe3121",
+          "fswatch.cmx": "9c914365db9a41c89e97b1b3a4a3b6394da5e19e5c35ee6053bde1bc05024fd6",
+          "propsdata.cmx": "b1f3e159a785dec2156300b92265edf83e7821c7108a95d46712af7179a7afb8",
+          "props.cmx": "745bd440d71f1d1147ef28b304a87a9248f87839abac53bbe4dcefb06a011856",
+          "fileinfo.cmx": "4537f5919d98cf5e986cb72f3679f07fc27f176d4ef7bf3b801a6698cd61f299",
+          "os.cmx": "3c9bead56210f09a0321ddabd794b627b460adc0d43775e0f8ccbe0a7430c08d",
+          "lock.cmx": "98a8fc05ef16c03a7cd5d81f026aa48a393def797d10758c5ee0175f93e66996",
+          "clroot.cmx": "522b2401e6f971526fddc1ec6d4155464fabe54a410cce381fb4920e2e688806",
+          "common.cmx": "618d2541ab5f92bb9fb529d50d9a9e2c84e1d90601e6a56f7c8cd61df307c6fb",
+          "tree.cmx": "98755e8633eb2853722498cf973bb441f3738a83b86faee9529feba52211ebed",
+          "checksum.cmx": "5baa5474a815453865fe399cafa738a6edf9a8abd5cf19e68303217952d148d4",
+          "transfer.cmx": "3ce1ae1f0b32b8d3ffdf34f3c5d5cfd328da6a0f8dddd12cbccbd3d4c71f84d9",
+          "xferhint.cmx": "413ebd5836c25ab7e43f9309c3a6465bad4d144561ec3bb1e6b0509a13b6a3a3",
+          "borrowedWork.cmx": "df9fe9e66e145dd270a00397fa8e416e489b161ecc712cbd8fd4d31d4d7674e4",
+          "remote.cmx": "be923cdd490b52f8d124d4307057f2b854ee59a3e6207745d6ed5383b63dec8d",
+          "external.cmx": "3f125025703773aa4faa69e9bc243e9cdac491aa94a8f75358afbc439bbe09ad",
+          "negotiate.cmx": "1abfb378feb16ef16377b8fd381eab7dabc239a4979bc6ae63ffc6f240577a56",
+          "globals.cmx": "ad029dcb4c11079d99aa66715e98298d1d29d848b5476de1718e34ad76d00546",
+          "fswatchold.cmx": "9844dae09166edb10c15bc3c6b612e0b1595833449249a88d90e0e01cd1f0993",
+          "semanticHash.cmx": "699f18bb16bb452277f148e5d06bbf100eaf82dc98666cad413590117f210a89",
+          "semanticFile.cmx": "b8a252104f4816a2c05ef2d844f2f12cfe26297ec52929637122d7e9ca7ece8e",
+          "formatExtension.cmx": "2a886f6f7761e6b9599cc967da098e700242f3bf6f5f1071bb03da709654cfab",
+          "formatRecognition.cmx": "2153d4b4cf39ce2f41b26981637e6be99397698e52287b87736c23d2d9d8a35c",
+          "xmpObservation.cmx": "edebe9ad9cdbbb57ecee72237324618e59e4733acf97d5a08f806fdeef304253",
+          "xmpMerge.cmx": "53fed37cc4d5194321fb1eabf1fe14ce436ba7e3512df6b3a11044c552992df2",
+          "dngSemantic.cmx": "f39d151ea3ee38f2f02ec2f3f26d94a2e22658838b5e0c9379cd995aef50281e",
+          "dngExtended.cmx": "95d2074552b7ccd03824e6f90a1619dd845e54f256248395a83fa5d87ffe1a39",
+          "jpegSemantic.cmx": "4ce43f32bc8e0d8fe351df0ba902c9c67de7757c24dbf0a0892c2e909be8f684",
+          "dngRecognition.cmx": "5c57a071d7b3cb51e0a17f3e3e31eee964ad33876b7f01dce55b4c94472af309",
+          "semanticDelta.cmx": "773741487e2bf2d2548e0911db0fc47a503e9a80d7312d2a6a40721f0cdf27cc",
+          "semanticReport.cmx": "82d95c1d3014187cc341802e6e65dead21c2597d4758d6bf950738d3a992fe75",
+          "helperSupervisor.cmx": "64353db21e5b88d9809e3f20cf234f7c122ca31538396e32d121e49c63ab7ace",
+          "semanticAdmission.cmx": "cd1dfd28f0fe480e6ea42579d24bf5876ee3c40177a25c5faa035bd37f5636da",
+          "semanticMailbox.cmx": "1c51aefc21b1828accf4590bbdbf5773e20d4b1817eadbea4c2d116d4b86e326",
+          "ioAdmission.cmx": "b4810174da1532aacf6ea2e8f4f1f9dceace23c0e58193dcab0c65ce8af6e2f2",
+          "semanticWorkers.cmx": "a88d8281dc8eed63f7e5dd1cef6b66a7337b67f2d44ce7174be3b73ba784c724",
+          "semanticFormats.cmx": "db05ca2163b50e0d612e2cc77e4aa37792b1a7991e85d28150bc04f9fc9e9897",
+          "backendResources.cmx": "2f075ea68b1ba896c8f86b295fc7b93a8318e268d2f5f0792dea9ca6d7f2789b",
+          "helperLimiter.cmx": "ecef25d27c765aaeb4f31e720438f3e6bc6048e9aec27de754983b0fb83e4eee",
+          "candidateValidator.cmx": "175b4ac6b707c61313733fe6002cf98cbaf48d171271a2f298fead8ea7fdf1fb",
+          "dngValidation.cmx": "9f425a962261486558121af41eeffc7267f9476450297516eaa3a7228142d468",
+          "dngCandidateValidation.cmx": "3f3961137f1db30bc8a641808cd0f56ce3042e580763517b9ce980b4506eb2a2",
+          "candidateValidators.cmx": "9fcd4d8ba8d67943338256103a0edb9b0ee827f70919297d218bc13859537c3f",
+          "validationTreeBudget.cmx": "2f1ecc0af6d13f788ec900fa46c7d5bad6cb9bdca79aa13a0fb94022c0e30ef2",
+          "validationTreePolicy.cmx": "f17090a43c24e70a29d7ca7fbb6ac6e2e4a7cbb89aeafa181a2eb500c0b1dffe",
+          "semanticRuntime.cmx": "5971164e9d5067fe38211ade1178bf847f56d1167421e7002b6e252ba4567c48",
+          "supervisedExternal.cmx": "58eed4ce6c0469366812460cb7f503a1585f3a82c342cbad9d42cf94dad231e4",
+          "semanticSync.cmx": "da5c42c6cd54492eb0e2fef8fe8d773e37abf073c9fa89afb3b902e16b2d9b73",
+          "semanticRemote.cmx": "6b9bd71995732ad18157650778e3a1ef2cf52815a3f6bbc8ac42d6eb953ac7c9",
+          "candidateValidation.cmx": "f94f7d0f541eb525ebd1eda82f55ab596ea7bac99cd11992aa67d214b8fd2bda",
+          "finalPublication.cmx": "997860928a610dfae354b2a708da9aa8701a836ef2a03f3a70661cd9fcf256a7",
+          "targetBinding.cmx": "3890344c83c82d694731ea121954e3dd7c7e95c4b41238d9b13efeba1ff82da6",
+          "fpcache.cmx": "9710ce9af74432b93c37f9384f6169e6fc47684ced691259420f192dac670141",
+          "update.cmx": "4d7d9c2eff7a39f63567371172a304ed8e26d83cd92868a68387759856bd53b4",
+          "moves.cmx": "8d21b33bcf46e6076f22fe8ba4b58e5d90dec9299dd71e22cd0c337430d7790e",
+          "cloneRange.cmx": "61d3c0b61ec0f3b6e5e604cbd3dcb09b1ccfb4fa9aa6018db9db3b4bf3d06774",
+          "cloneLease.cmx": "45b75c5100a80d1522b71cba781b2933fde8c914bdffe740d0256210a2136494",
+          "copyRange.cmx": "ce657556ca6e0ed2b11faa4ef44cfc3472cc481e0b3d19d65852581198a8c0da",
+          "copy.cmx": "a9513986a3faa19f21905b52955656e8c05506af0f3ad4956b3c3cd7e8c96c8e",
+          "stasher.cmx": "77b680122c2e35747727d4af7431a4ae3d1146525a3686f95fb7ef0b89d4f901",
+          "files.cmx": "bf11ee2bfb37a89ae19db359ef168b96f0316c627264089fe84fd5461d661c0c",
+          "sortri.cmx": "0dff4d5251ce85737b69447fe26f5cf969e097b43ee4850a892f2111844b06ac",
+          "recon.cmx": "a15056f727a23bbb99f62403736f54f4c97613b53906b003f975d8a3aa880808",
+          "transport.cmx": "ea191a11c79fd1f3550bac8ee714c4926dfa837eef126516423a3365c080d5c5",
+          "strings.cmx": "fbf4eb301b0640c243c64cf415b7b7d9d857f109054dce1139d63ce2cb78bc7b",
+          "uicommon.cmx": "63ae80dfaa972891fc32c56c96725d1dafe21dae225290ab3663d5da13820262",
+          "uitext.cmx": "a73753835a0625abb9417ccdd61f1f2e23e12e2a2c640cbe5a8f73a2e0e82a34",
+          "test.cmx": "68af20c2a922f3fc4d0068daf92d4808b404315fc40b17ea977bf506d7a8dcde",
+          "main.cmx": "d54f5dbb4708d35991a275cf6123a2b98b89fc5a233c1c8908a897f2dca55c78"
+        },
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/plugin-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/plugin-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/controls-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/controls-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/resource-controls.log",
+            "sha256": "6e33afba580790fe9ef5b90fc4c50e036226ae58591c6cef8650b3ad0940cd78"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/negative-validator-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/negative-validator-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/negative-oracle-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/positive-oracle-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/positive-oracle-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/positive-activation-oracle.log",
+            "sha256": "b62aeeb4e9bbe5f3ed21bbb32b2a739c3da0670de6a6c9b2c3e5638b301cac69"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-beu0xprs/negative-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          }
+        ]
+      }
+    },
+    "tree-ox": {
+      "path": "/private/tmp/unison-nested-tree-ox.json",
+      "sha256": "e2b67bf4539206d186d369fee2cf0b2dc343612cc2c42f8845f49a0e8a0ad0ea",
+      "summary": {
+        "schema": "unison-validation-tree-structure/1",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc",
+        "cases": [
+          {
+            "name": "exact-entries",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "entries-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "entries-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "path-require",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "path-warn",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "negative-config",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "post-helper-hidden-entry",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 0,
+            "peakHelpers": null
+          },
+          {
+            "name": "manifest-memory-pass",
+            "status": "passed",
+            "helperCalls": 6,
+            "sourceUnchanged": true,
+            "destinationPublished": true,
+            "endpointLocal": true,
+            "manifestMiB": 1,
+            "peakHelpers": 2
+          },
+          {
+            "name": "manifest-reservation-too-large",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 32,
+            "peakHelpers": null
+          },
+          {
+            "name": "manifest-retained-too-large",
+            "status": "passed",
+            "helperCalls": 0,
+            "sourceUnchanged": true,
+            "destinationPublished": false,
+            "endpointLocal": true,
+            "manifestMiB": 1,
+            "peakHelpers": null
+          }
+        ],
+        "commands": [
+          {
+            "name": "actual-object-kernel",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/kernel.log",
+            "sha256": "ff28cf6e5cb92aea60cd41f2e568a7d49c4d512d85972c2d3cc7bc10fe48ea7f"
+          },
+          {
+            "name": "settlement-link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/settlement/settlement-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "settlement",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/settlement/settlement.log",
+            "sha256": "7fa6e630a1ded1ebef9fea81c091c05b4ecfb38ffd34ab1ec04f98e747856379"
+          },
+          {
+            "name": "nested-settlement",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/nested-settlement/nested-settlement.log",
+            "sha256": "451ca8ff531c1416c1750c276a2673d9df80226a3e486426f77c11f5b13ac3c7"
+          },
+          {
+            "name": "previous-compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/previous-workspaces/previous-compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/previous-workspaces/previous-compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/previous-workspaces/previous-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "previous-workspaces",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/previous-workspaces/previous-workspaces.log",
+            "sha256": "dccb825e266aeb95d3ff2ba5f44ea17fe3107f1dd3b589d3bf6e66820db28caf"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/positive/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/positive/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/positive/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/positive/enumeration.log",
+            "sha256": "a27e94234b13226e2546126c48602d4a0a0300c2bf03cd0190358c4264f7e60c"
+          },
+          {
+            "name": "compile-mli",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/removed-check/compile-mli.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "compile-ml",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/removed-check/compile-ml.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "link",
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/removed-check/link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "name": "enumeration",
+            "exit": 2,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-tree-0nhxaiuc/removed-check/enumeration.log",
+            "sha256": "46b4a3bb107b40e903dbf3736bf3476c4af5773d546dce0f8e84d46899d69787"
+          }
+        ],
+        "limits": [
+          "Entry/path accounting is not heap/RSS or full directory resource admission. Properties, symlink target bytes and SDK heaps are outside these structural limits."
+        ],
+        "PhotoOrAdobeAccess": false,
+        "settlement": {
+          "binarySha256": "ce58762582fe9d7c76ac301e15506f587f9ece176a6bbdcfafcf5cd89bd67bda",
+          "scenarios": [
+            "pass",
+            "reject",
+            "cancel",
+            "fresh-pass"
+          ],
+          "sourceSha256": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b"
+        },
+        "nestedSettlement": {
+          "binarySha256": "ce58762582fe9d7c76ac301e15506f587f9ece176a6bbdcfafcf5cd89bd67bda",
+          "scenarios": [
+            "pass",
+            "reject",
+            "cancel",
+            "fresh-pass"
+          ],
+          "cpuLanes": 2,
+          "cpuBudget": 2,
+          "workspaces": 1,
+          "peakPermits": 2
+        },
+        "previousWorkspaceNegative": {
+          "parent": "5dac6ac",
+          "participantSha256": "5874fa373bc7db97cc4aed7e627fb5ad7da1dfd103d667fefdc4805a752cd710",
+          "binarySha256": "93e9351b4999fc8e43e694e004823d493530b52f0e4a36a13f4499c9108137f7",
+          "expectedExit": 2,
+          "scope": "Exact previous CandidateValidation only, other prefix objects current; same nested-backend fixture exceeds the budget before work."
+        },
+        "enumeration": {
+          "positive": {
+            "binarySha256": "c23eabb5d65d34da9487e0abc70712a686206915ee49dc63e64efe964bb6f430",
+            "privateParticipantSha256": "92c0d9b5dee761330e320599f8eb63527c0fa4f00d41d7402e77c6ed3a34f326",
+            "expectedExit": 0
+          },
+          "removed-check": {
+            "binarySha256": "903ab9405af8afa69d84618f81f3f9f252e9a3d18b0e85c28dfa2d2054d891f4",
+            "privateParticipantSha256": "50c737dfc86096a5ebce290ba94f53c3814af4de20fc5a6d8f50cda4a87ea614",
+            "expectedExit": 2
+          }
+        },
+        "status": "passed",
+        "binarySha256": "a927f28de8bd8b763fdd8f7d3db4483ed269e0c4b7e0eeebff8183c904c723b3",
+        "sources": {
+          "src/validationTreeBudget.ml": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970",
+          "src/validationTreeBudget.mli": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773",
+          "src/validationTreePolicy.ml": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092",
+          "src/validationTreePolicy.mli": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f",
+          "src/candidateValidation.ml": "12dc6c94035f061947e7b5d1c7658e4cd5eb2930d0048f1ce97ec8cb94cbb0f8",
+          "src/semanticRuntime.ml": "2d2511c8e7394d8eb6e413d25ed7ffb4022d3b3c43c0c10e2e7a79e1b50d2967",
+          "src/Makefile.OCaml": "8194063483e909d9c9a571f0da96f949d15057953d2c4f1ab3227449d29428ee",
+          "tests/validation_tree_limits/test.ml": "117544f2d7889979b3a3ce407e691a6d4a586f9725175c878bb05fc545617bae",
+          "tests/validation_tree_limits/settlement.ml": "78db2a331187db00d2909ae7a8de9961887788b168c3a68cbef8c2d318d1b82b",
+          "tests/validation_tree_limits/run.py": "234b45c303a82d6e2207469f38a08c42b22b5501b2e7693c23a943904b8a3939",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "compiledObjectPins": {
+          "validationTreeBudget.cmx": "2f1ecc0af6d13f788ec900fa46c7d5bad6cb9bdca79aa13a0fb94022c0e30ef2",
+          "validationTreeBudget.cmi": "52b11c58726a3c3df5f2b5f468ebed0f64929f1cb6296d7501b2524eedda1ee1",
+          "validationTreePolicy.cmx": "f17090a43c24e70a29d7ca7fbb6ac6e2e4a7cbb89aeafa181a2eb500c0b1dffe",
+          "candidateValidation.cmx": "f94f7d0f541eb525ebd1eda82f55ab596ea7bac99cd11992aa67d214b8fd2bda",
+          "semanticRuntime.cmx": "5971164e9d5067fe38211ade1178bf847f56d1167421e7002b6e252ba4567c48"
+        },
+        "scope": "Actual loopback CLI receiving tree entry/path/retained-estimate caps, partitioned admission and helper-mutation failure on private synthetic inputs. No native Adobe/Lightroom operation."
+      }
+    },
+    "receiving-ox": {
+      "path": "/private/tmp/unison-nested-receiving-ox.json",
+      "sha256": "39fb5628efd1efc0f8b09e4bbc5180dc54b654fbac0f08e736f6d1982a0d2694",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "work": "/private/tmp/unison-validation-paths-l50ri0fx",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306194407,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306194564,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306194748,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306194903,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1082375739933923,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1128089470148552,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.06480005400953814,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.12251568300416693,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ]
+      }
+    }
+  },
+  "summary": {
+    "resourceControlsPerCompiler": 17,
+    "compiledBackendReceivingCasesPerCompiler": 5,
+    "treeReceivingCasesPerCompiler": 10,
+    "legacyAndNestedSettlementScenariosPerCompiler": 8,
+    "previousParticipantOverreservationNegativePerCompiler": 1,
+    "receivingRegressionsPerCompiler": 21,
+    "buildsAndSelftests": 4
+  },
+  "limits": [
+    "Synthetic CPU permit ownership and workspace admission, not actual SDK thread compliance or CPU utilization.",
+    "18-core geometry is arithmetic; no 18-helper/SDK runtime benchmark performed.",
+    "Memory credits estimate retained workspaces, not RSS/allocator containment.",
+    "Exact prior CandidateValidation participant with current prefix objects is not a full prior executable.",
+    "No Adobe/Photo/Lightroom operations occurred."
+  ]
+}

@@ -1610,6 +1610,23 @@ It simply means \verb|backup = Name *| and \verb|backuplocation = local|.
 Unison can invoke external programs to merge conflicting versions of a file.
 The preference \verb|merge| controls this process.
 
+This build also supports an opt-in built-in DNG scalar policy. Configure
+\begin{verbatim}
+    backupcurrent = Name *.dng
+    merge = Name *.dng -> unison:dng-xmp-scalars/0
+\end{verbatim}
+before synchronizing the common version. This exact command identifier merges
+only supported Rating/Label attribute edits in a fixed-layout XMP packet.
+It requires an archived common base with matching full fingerprint and unchanged
+image/other protected bytes. Missing/stale bases, resource forks, competing
+values, deletion, rendering/unknown field changes and packet growth decline.
+One exact result uses the ordinary guarded merge commit and any configured
+receiving validation on both replicas. A second-receiver failure can leave the
+first committed; retry requires the retained common base and fresh validation.
+Other merge commands retain their external-program behavior. Remove this rule
+before using a baseline binary that does not implement the identifier; archive
+and backup formats remain unchanged.
+
 The \verb|merge| preference may be given once or several times in a
 preference file (it can also be given on the command line, of course, but
 this tends to be awkward because of the spaces and special characters

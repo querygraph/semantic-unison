@@ -1,0 +1,72 @@
+{
+  "state": "SOURCE_PROPOSAL_AND_TEN_PURE_CLAIM_CONTROLS_PASSED_NO_LIVE_IO_QUALIFICATION",
+  "actual_parent_terminal": {
+    "chunk": "fb8786",
+    "exit": 0,
+    "running_session": false
+  },
+  "owner_closure": {
+    "child": {
+      "pid": 71945,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 71945,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-proposal-v1.json",
+      "bytes": 5008,
+      "sha256": "7b49a431e45f14fbf78cc2fa0c95ec6925c8b0106a987c35e7e245d232d1f429"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_plan.py",
+      "bytes": 4295,
+      "sha256": "3641d4923c64c9ad15f72b03b7b41d71bf35bc1dcc2e1cfa7fb85fc21b539b3c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_plan_test.py",
+      "bytes": 3240,
+      "sha256": "1c98ab90944c38cd6f6549f25d6f50d06bc584057f2e910aa167e4adf31d96fc"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-esxd_2ey/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "c1fc0b6edd17ef2cd7cbee9a1b87504b70c6f80ccd58cde48d9a720edac0fc73"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-esxd_2ey/SHARED-START.json",
+      "bytes": 1056,
+      "sha256": "41973bd0db79aa8fe9c541000552cd4ac6616bc0f322d3d88702d0e0be8e9c86"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-esxd_2ey/SHARED-STDERR.txt",
+      "bytes": 109,
+      "sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-esxd_2ey/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "live_io_pool_created": false,
+  "kernel_io_locks_tested": false,
+  "os_topology_provider_qualified": false,
+  "bulk_payload_reads": 0,
+  "sdk_adobe_operations": 0,
+  "scope": "Pure planning/conflict/bounds cases under canonicalCPU00..07 only. CPUtokensclosed; no physicaldevice metadata discovery or IOlocking dispatched. Jointnamespace/provisioning/lifecycle qualification pending."
+}

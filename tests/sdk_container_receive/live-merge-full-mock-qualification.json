@@ -1,0 +1,259 @@
+{
+  "scope": "production stock/Ox receiving with original fake SDK protocol, no Adobe/Photo",
+  "actual_parent_terminal": {
+    "owner_tool": 53937,
+    "terminal_chunk": "a3cf4a",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "report": {
+    "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/RESULT.json",
+    "bytes": 8622,
+    "sha256": "2e6fb2cfe45a8952d612c9e1c60d88e92903d7a02268dd5690244ea469202b3b"
+  },
+  "sources": [
+    {
+      "path": "tests/sdk_container_receive/run_live_merge.py",
+      "bytes": 7043,
+      "sha256": "fd8592325d1bf3d7527eccb87448981f568203092b879c11fc13448d7f0bc383"
+    },
+    {
+      "path": "tests/sdk_container_receive/run_live_merge_test.py",
+      "bytes": 2963,
+      "sha256": "b71415a1b41de78b5e7047abc14dc8bd57def7bbcb95e7d232b4adf2961632c1"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_cases.py",
+      "bytes": 6990,
+      "sha256": "d1fe15d5f5a08fb89ae763604f0a623a57215bb74fc999d44d37d9d97888d0ec"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    },
+    {
+      "path": "tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 5889,
+      "sha256": "88d1b4a429485e0e3337425d239a09e258af9335a12752843329acc66e3e77c9"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/AGGREGATE-CLOSED.json",
+      "bytes": 399,
+      "sha256": "a05341cceea31dca5c7b0dcad14b3b4a3cf340c9ef7ecaa2cd83bc4a585821fb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/AGGREGATE-START.json",
+      "bytes": 37,
+      "sha256": "9c1d5191f30135aef9dbe9c8e9b114c2206b1275ddc59db555d3aa595a42bc3d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "07c95a242bed499f1d9f884b6936e9d92aa7f9719f3511f330828a8b23157961"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-01-START.json",
+      "bytes": 1462,
+      "sha256": "86ed61eeaf097ade3d2bc0845e3d389386827a902b3c2d7713ab316cdcd77160"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-02-CLOSED.json",
+      "bytes": 294,
+      "sha256": "cee0cbab09f46e2547aa82a548d60709d804c704b6bd8517dfb4aeed83e6c6ec"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-02-START.json",
+      "bytes": 1466,
+      "sha256": "63f391f999370336efaefa2d18a5cc5f857d9f77a6d5afbbae3ffe9fb1b1d238"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-03-CLOSED.json",
+      "bytes": 294,
+      "sha256": "87f7f7ed4dab24017d6d931c9631f30bc914d13380355c884bae593421e9b3fa"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-03-START.json",
+      "bytes": 1466,
+      "sha256": "a2c9ecb849d86c2f962c6d374d923a334a56ffd2d4e415ccb5c00ac5cdcc803d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-04-CLOSED.json",
+      "bytes": 294,
+      "sha256": "342609749156a4bab83845de49444fdf4be20931eb78bbd855ea95e28d585b4e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-04-START.json",
+      "bytes": 1438,
+      "sha256": "50c7d48d32b65c0337b0d3ff317aaa1ba2c9467dc4726f3de283548ceae30ae9"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-05-CLOSED.json",
+      "bytes": 294,
+      "sha256": "db5cff12a74fc5a47c742a356a9bbc6387802e73f940c69d3a41bd4814479b79"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-05-START.json",
+      "bytes": 1442,
+      "sha256": "405c5357a6b352585966ceb8da24ce88d99986117f4dbaa9d0eaf078d937a6be"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-06-CLOSED.json",
+      "bytes": 294,
+      "sha256": "294d44436e620c2fbe31e33296fb7b251e0f1f49eaa9559bdeb9c0d4d027994b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-06-START.json",
+      "bytes": 1442,
+      "sha256": "c8859367199cf966273b6c781cdf6b1f6c54a7fe15d505e59b5123b473c05b9f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-07-CLOSED.json",
+      "bytes": 294,
+      "sha256": "85f75dd33bcf8f44dea5d1733a3955e747fdc9efdde4fa914efddfc83732008e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-07-START.json",
+      "bytes": 1435,
+      "sha256": "b7c21fb965fb6b04c6fe01089009fef7d2aa03909d2c40a3be76ba2f2e11be47"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-08-CLOSED.json",
+      "bytes": 294,
+      "sha256": "8a586725bb28964349ad58caa6ab4498a3153c721b5e77f0273bb9706c5e92c8"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-08-START.json",
+      "bytes": 1439,
+      "sha256": "3e6586625ed90b5c1693f19ca700bb9eecc1ade61027103c2ac8f4e515f40410"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-09-CLOSED.json",
+      "bytes": 294,
+      "sha256": "2489726a6e11d5b08b4173d771539599d85e780b61f8b46a4206c205f8d46009"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/CLI-09-START.json",
+      "bytes": 1439,
+      "sha256": "74997f0cd2bc98f4f42b29906f33e51fc2299cd1523b0e53490d98dd91c96125"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/HELPER-PROOFS-COMPLETE.json",
+      "bytes": 7313,
+      "sha256": "92e96712c47060f271c101296c6f37bfbf9ab365041449a8a51ab517cb31f94a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/RESULT.json",
+      "bytes": 7367,
+      "sha256": "69c1882c155e4cd55d42ebd6ca949c578d6a910e7466727222e015e16d6d80a3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/START.json",
+      "bytes": 67,
+      "sha256": "332db47f92aece8402fe0297070259ad0dc2c15291da2987821e8127c29f3070"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/SUPERVISOR-CLOSED.json",
+      "bytes": 606,
+      "sha256": "abae8daa5e2427d398343a097505282180c53006315e471d07aa95119b8830d3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/WRAPPER-START.json",
+      "bytes": 1578,
+      "sha256": "926bd21e67f3fea94a2d95d50e3ff2bf4de6dd25a337f0edcd8748d58b9a4b89"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/client-validator.control.json",
+      "bytes": 204,
+      "sha256": "ea7b1d8c576fcc65251a96969e93d9ef957915b97976ae1e50cc1702a73c57d5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/external-copy.control.json",
+      "bytes": 19,
+      "sha256": "14ba2aca5ea56921bb371f9d84de3a611d26711fb3d2282e0c2a913038ee31ae"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/server-validator.control.json",
+      "bytes": 205,
+      "sha256": "c20126e8e17476e5f9db3f694fca34aa26b593cb8ce1f754e103dbcff0f4edf9"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/client-validator.control.json",
+      "bytes": 203,
+      "sha256": "ba56be269ceaf05b506cbb4d46f9ffd13dd01edfd105dd0215ddb0aa2cbe382f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/external-copy.control.json",
+      "bytes": 19,
+      "sha256": "14ba2aca5ea56921bb371f9d84de3a611d26711fb3d2282e0c2a913038ee31ae"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/server-validator.control.json",
+      "bytes": 204,
+      "sha256": "17f3f7541d5b945f2ccec078c84b5446e6b619227d370d7031eb23010cae1412"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/client-validator.control.json",
+      "bytes": 212,
+      "sha256": "72f837cc053c66d72d2905de022c5fc8e269444d6960bb5e4eda0859112c4209"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/external-copy.control.json",
+      "bytes": 19,
+      "sha256": "14ba2aca5ea56921bb371f9d84de3a611d26711fb3d2282e0c2a913038ee31ae"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/server-validator.control.json",
+      "bytes": 213,
+      "sha256": "120249563242c8897dde195108b8ffd138aa9f05ad261612c39e5840e7b8ea2e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/run-01.log",
+      "bytes": 3569,
+      "sha256": "f2f7c0bc33ef8b90b5f7d656613353651f80ff25dabcb12b99a9c720c02c8015"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/run-02.log",
+      "bytes": 8326,
+      "sha256": "813244690caf4e4b1a0c93dd7d09e6a7057c47ccb6a4d582f65e216a22cabd0d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jpeg/run-03.log",
+      "bytes": 761,
+      "sha256": "331ffdb81ce55ad1c9593c54d7864eefcfd977d179b132f8ffb7eef31534b764"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/run-01.log",
+      "bytes": 3559,
+      "sha256": "bf590564505d7430a71b579fb08704e22acf31fdef2e7d1de03a2218dae51fe9"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/run-02.log",
+      "bytes": 8302,
+      "sha256": "b0350aa16830125118b96f789c4b693ffdd72b52bb5a234793b1d0f44afd776d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/jxl/run-03.log",
+      "bytes": 757,
+      "sha256": "4310fff4e4beb2636b285b2f58b04a86a6ece7bc6ad136003fa50ddfbecfe84d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/run-01.log",
+      "bytes": 3649,
+      "sha256": "2ec2844c7e2332e7782d4e39233305ca4acfed617cb52c599dc469dd26d4a32e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/run-02.log",
+      "bytes": 8536,
+      "sha256": "d263a8ee028e92382b84c7234a3eb1fc9fa327f58e363137da7d0dcdc38a7494"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-live-merge-mock-dzzfvs7i/runtime/uncompressed/run-03.log",
+      "bytes": 793,
+      "sha256": "9243e99a314ef76804a4e56bafd6ebd160edbfe4b43500129356d1d5e6d22455"
+    }
+  ],
+  "native_admitted": false
+}

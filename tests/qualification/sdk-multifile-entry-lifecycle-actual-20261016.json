@@ -1,0 +1,91 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/entry_lifecycle.py",
+      "--controls"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-smr-boundary-rjp5ypqy\", \"cases\": 2, \"sdk_calls\": 0, \"children_reaped\": true}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 47852,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "scope": "Actual two-child disposable inner FD lifecycle; zero SDK/native/payload/canonical IO.",
+  "source_sha256": "1a713eb83b21055284754d75b5f9a65047db7a4fb972e9a869343987876fcc8b",
+  "owner_tool_terminal": {
+    "chunk_id": "a77473",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command response; not process absence."
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/RESULT.json",
+      "bytes": 1926,
+      "sha256": "7e68566fb6a5bb4d8a9a8fecfc8728bbc71593207a5bf448b2ac85e64347c014"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/8/plan.json",
+      "bytes": 757,
+      "sha256": "6d2829e3b60e72a380a82835cb381809f8cc881eaa4e7eec1a81a3f66b0e0a64"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/8/SHARED-START.json",
+      "bytes": 19268,
+      "sha256": "a91d70f3429328725169fd86c8b0924818b2c02bb8d1b5009178456c4d6451cd"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/8/RESULT.json",
+      "bytes": 264,
+      "sha256": "3c1f29f52355705879f7087e75ca29a1e8096b1951d14c928c855f9b756fb5c1"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "41962a40e836641d55e903ae6589fd98507fed48f9b7cc9843ea0b1e4dc93b2d"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/8/SHARED-SERVER-AUDIT.json",
+      "bytes": 185,
+      "sha256": "3d0bf55fe511bebb511fab39ffcb6d8b5fe58262fd9cd85f5eaeae8d7d40301b"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/7/plan.json",
+      "bytes": 734,
+      "sha256": "118d129907c352062d3b6b1a673365e0512ce8ec4cb01395f58dd7553678c611"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/7/SHARED-START.json",
+      "bytes": 19188,
+      "sha256": "87a398b248de9ce624a2f5954e6f8435019a3fac8d0dff2177aacc35f48736ba"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/7/RESULT.json",
+      "bytes": 270,
+      "sha256": "b5271175935171244b2516b2652ef2feeeb8c52ae5124f82d66a8380dcc4642a"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/7/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "27e2dd9f6347537b5303191b22ca626196687d85cc7db717dcba4adf3a7f8cf6"
+    },
+    {
+      "path": "/private/tmp/u-smr-boundary-rjp5ypqy/7/SHARED-SERVER-AUDIT.json",
+      "bytes": 185,
+      "sha256": "3d0bf55fe511bebb511fab39ffcb6d8b5fe58262fd9cd85f5eaeae8d7d40301b"
+    }
+  ]
+}

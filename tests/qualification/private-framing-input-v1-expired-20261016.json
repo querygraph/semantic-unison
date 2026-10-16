@@ -1,0 +1,17 @@
+{
+  "state": "EXPIRED_UNSTARTED",
+  "admission_sha256": "243b8fc6cc31ed5ee5107ac7dbff6e0fd75ee5958825a14d49fc0190c8595a78",
+  "deadline_unix": 1792121569.0876641,
+  "guard_observed_unix": 1792121697.41903,
+  "workspace_absent_observed_unix": 1792121707.589359,
+  "workspace": "/private/tmp/unison-private-framing-input-4701bc8e",
+  "owner_tool_terminal": {
+    "chunk": "6b42f1",
+    "exit_code": 1,
+    "running_session": false
+  },
+  "dispatch_performed": false,
+  "payload_opened": false,
+  "io_or_cpu_acquired": false,
+  "reason": "Fresh deadline guard refused before executor/parent dispatch; no renewal or replay."
+}

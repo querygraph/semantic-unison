@@ -1,0 +1,253 @@
+{
+  "state": "SIX_FIXED_READONLY_TOPOLOGY_METADATA_COMMANDS_CLOSED_NOT_PROVIDER_QUALIFICATION",
+  "actual_parent_terminal": {
+    "session": 2715,
+    "chunk": "7e617c",
+    "exit": 0,
+    "running_session": false
+  },
+  "owner_pid": 75007,
+  "closure": {
+    "child": {
+      "pid": 75008,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 75008,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "raw_workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw",
+  "total_raw_command_bytes": 398869,
+  "command_results": [
+    {
+      "command": [
+        "/usr/sbin/diskutil",
+        "list",
+        "-plist"
+      ],
+      "pid": 75009,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113208.5614688,
+      "end_unix": 1792113208.6941938,
+      "plist_shape_only": {
+        "type": "dict",
+        "top_level_count": 4
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/disk-list.stdout",
+          "bytes": 57502,
+          "sha256": "b10c180001e7f44b563a7b1c28773da9c95100e72ebb3c6989b8fe0efc0b384d"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/disk-list.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": [
+        "/usr/sbin/diskutil",
+        "apfs",
+        "list",
+        "-plist"
+      ],
+      "pid": 75010,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113208.694519,
+      "end_unix": 1792113208.929445,
+      "plist_shape_only": {
+        "type": "dict",
+        "top_level_count": 1
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/apfs-list.stdout",
+          "bytes": 7529,
+          "sha256": "7198f151e6a42a2f4d576bba90fda6f92385214c6d85e2930bd46ba76f80b3ce"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/apfs-list.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": [
+        "/usr/sbin/diskutil",
+        "info",
+        "-plist",
+        "/"
+      ],
+      "pid": 75011,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113208.929586,
+      "end_unix": 1792113209.112855,
+      "plist_shape_only": {
+        "type": "dict",
+        "top_level_count": 66
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/root-info.stdout",
+          "bytes": 5110,
+          "sha256": "824723d4cbe42dbcd8fb9a0158b49f9ecfa3a398eccd8ca7b550cdd8aef01b99"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/root-info.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": [
+        "/usr/sbin/diskutil",
+        "info",
+        "-plist",
+        "/Volumes/Quasar"
+      ],
+      "pid": 75012,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113209.1129751,
+      "end_unix": 1792113209.239948,
+      "plist_shape_only": {
+        "type": "dict",
+        "top_level_count": 58
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/quasar-info.stdout",
+          "bytes": 3025,
+          "sha256": "a70b758733d5c6a2433e7ea90c5f2e5290ae1a7bf3406ae49dd997c2910f6eb2"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/quasar-info.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": [
+        "/usr/sbin/diskutil",
+        "info",
+        "-plist",
+        "/Volumes/Ten"
+      ],
+      "pid": 75013,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113209.240057,
+      "end_unix": 1792113209.636908,
+      "plist_shape_only": {
+        "type": "dict",
+        "top_level_count": 51
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/ten-info.stdout",
+          "bytes": 2786,
+          "sha256": "0aeecfa111e2beca418946ee78146cb2d4a1dd8a4491229e5f879efca630bb37"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/ten-info.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "command": [
+        "/usr/sbin/ioreg",
+        "-a",
+        "-r",
+        "-c",
+        "IOBlockStorageDevice"
+      ],
+      "pid": 75014,
+      "actual_wait_exit": 0,
+      "timed_out": false,
+      "start_unix": 1792113209.637037,
+      "end_unix": 1792113209.7287822,
+      "plist_shape_only": {
+        "type": "list",
+        "top_level_count": 33
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/block-registry.stdout",
+          "bytes": 322917,
+          "sha256": "010c8781cca5642aeeeb5d5789293285981b18ef5ff8132659607bdfd0746e40"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/block-registry.stderr",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "claims": {
+    "no_media_or_photograph_payload_open": true,
+    "no_live_pool_created": true,
+    "complete_stable_physical_leaf_mapping_qualified": false,
+    "no_new_protocol_current_dispatcher_claim": true,
+    "quasar_volume_uuid_observed": "E31B795D-FA19-4938-97E2-B6ED56A7C78F",
+    "ten_filesystem_observed": "hfs",
+    "physical_member_identity": "UNRESOLVED; disk identifiers/volume UUID alone insufficient. Global fallback or refusal only."
+  },
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-proposal-v2.json",
+      "bytes": 9472,
+      "sha256": "9d48e24e6cbd8915d885853f97b8234bd8182dd6fb689eb71435bf4eb8bbbd23"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/topology_metadata_capture.py",
+      "bytes": 3043,
+      "sha256": "8c7afb8b9899621d94fd4c5823d998dcbacc623fecfb436602c3293371fac41b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/raw/RESULT.json",
+      "bytes": 5961,
+      "sha256": "e4c3025472562007d30a766edfacf1b92575e8955bbbc25052aaf83f86117b72"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/SHARED-START.json",
+      "bytes": 1055,
+      "sha256": "76b81e285a7990fd26178f1792e3364bfc78364f5ec05ce836b1ffe5b6c5a869"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "57408bcedb90344f9c7ab9734e3f4ebdb21f82d335f62acb8642d69ddf52c30a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-topology-metadata-owner-_8vm_hya/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

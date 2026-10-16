@@ -46,8 +46,11 @@ let ocamlopt = "OCAMLOPT" <--? tool_prefix ^ "ocamlopt"
 
 let ocaml_conf_var varname = shell (ocamlc ^ " -config-var " ^ varname)
 
+let ocaml_mode_version = ocaml_conf_var "version"
+let () = "OCAML_MODE_VERSION" <-- ocaml_mode_version
+
 let ocaml_ver_major, ocaml_ver_minor, ocaml_ver_patch =
-  Scanf.sscanf (ocaml_conf_var "version") "%d.%d.%d" (fun x y z -> x, y, z)
+  Scanf.sscanf ocaml_mode_version "%d.%d.%d" (fun x y z -> x, y, z)
 
 (*********************************************************************
 *** Try to automatically guess OS ***)

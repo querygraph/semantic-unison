@@ -1,0 +1,140 @@
+{
+  "schema": "unison-validation-process-diagnostics-qualification/1",
+  "complete": true,
+  "runs": [
+    {
+      "compiler_kind": "stock",
+      "build": {
+        "path": "/private/tmp/unison-validation-process-stock-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "a011434bec82cb6690ab12dfc1360b1332fd4acdea1c03d0341419b2d725bad9"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-lrr2lg2k/src/unison",
+        "bytes": 5642200,
+        "sha256": "cfd59d4b25b430b5ad1d14a02448ecf4b27761efd462cc831041fce4cbb38815"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "bytes": 12749464,
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "cli_report": {
+        "path": "/private/tmp/unison-validation-process-stock-cli-20261014.json",
+        "bytes": 10294,
+        "sha256": "023b3f01c90d3a575c910d20dac35a63793581273d8fe7d232e8645c2f9d1bfc"
+      },
+      "all_recorded_production_sources_match": true,
+      "actual_cases": [
+        "default-off",
+        "actual-pid-and-raw-receipt",
+        "noop-no-report",
+        "exit-zero-finding-still-rejects",
+        "bounded-arbitrary-stderr"
+      ],
+      "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-8rdayf1l"
+    },
+    {
+      "compiler_kind": "ox",
+      "build": {
+        "path": "/private/tmp/unison-validation-process-ox-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "d29d766b4858b9b3a855e7c5e5aa5df9774a01576b3a726a49c60a3577075379"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-2zgp9w56/src/unison",
+        "bytes": 7569256,
+        "sha256": "cae3affb0abdd04948013a2195c3312e289872d13b051b5b4be28e5eaa10831b"
+      },
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "bytes": 49930888,
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "cli_report": {
+        "path": "/private/tmp/unison-validation-process-ox-cli-20261014.json",
+        "bytes": 10294,
+        "sha256": "d69e316b0d62a468e9955d8196f6bd867560e858a404ef0a602abca5b08713da"
+      },
+      "all_recorded_production_sources_match": true,
+      "actual_cases": [
+        "default-off",
+        "actual-pid-and-raw-receipt",
+        "noop-no-report",
+        "exit-zero-finding-still-rejects",
+        "bounded-arbitrary-stderr"
+      ],
+      "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-ob1pmxl9"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/candidateValidation.ml",
+      "bytes": 14270,
+      "sha256": "30eafe7008978c91213fb01c8a8946bf41a401896c6d454292fd9ab93abc26b0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.ml",
+      "bytes": 21193,
+      "sha256": "5358490ed9c36489b757c6a0e8927968e89e651bfa1618f5a685be7446e4876e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/helperSupervisor.mli",
+      "bytes": 5337,
+      "sha256": "3214c00db077f4efe080ad8d24b8d6fbe7f77df7f7cf3ff190ce3f698a18baef"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_process/cli.py",
+      "bytes": 4996,
+      "sha256": "55cb96047c14362a7708f58e103dc04f17e3da0d2150c762f70d4d79f8bdb2fb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/validation_paths/run.py",
+      "bytes": 37630,
+      "sha256": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+    }
+  ],
+  "actual_parent_terminals": [
+    {
+      "kind": "stock-build",
+      "owner_tool": 40120,
+      "terminal_chunk": "724471",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Built: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-lrr2lg2k/src/unison\nSelftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-lrr2lg2k/selftest.log\n"
+    },
+    {
+      "kind": "ox-build",
+      "owner_tool": 40857,
+      "terminal_chunk": "7cafb3",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "Selftest exit: 0 log: /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-2zgp9w56/selftest.log\n"
+    },
+    {
+      "kind": "stock-cli",
+      "owner_tool": 49819,
+      "terminal_chunk": "8a5d8e",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS five receiving diagnostic controls; no Adobe calls\n"
+    },
+    {
+      "kind": "ox-cli",
+      "owner_tool": 59407,
+      "terminal_chunk": "f00fcf",
+      "exit_code": 0,
+      "running_session_returned": false,
+      "stdout": "PASS five receiving diagnostic controls; no Adobe calls\n"
+    }
+  ],
+  "initial_fixture_failure": {
+    "owner_tool": 73327,
+    "terminal_chunk": "96de74",
+    "exit_code": 1,
+    "running_session_returned": false,
+    "reason": "Test edited fake executable after Session froze its endpoint pin; correct pre-helper pin mismatch. Refreshed private endpoint config before final runs; no production change.",
+    "retained_log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-validation-process-710tx6et/clipped/run-01.log"
+  },
+  "scope": "Opt-in owner receiving-helper diagnostics on actual stock/Ox CLI with fake validators. Five cases each; no Adobe/Photo/SDK calls, helper-group ownership/absence, pixel, performance or live SDK receiving qualification."
+}

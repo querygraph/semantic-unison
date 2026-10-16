@@ -1,0 +1,51 @@
+{
+  "schema": "unison-private-dng-crossed-retirement-reconciliation/1",
+  "state": "ACTUALLY_CONSUMED_ONCE_CLOSED_NO_REPLAY",
+  "actual_start_unix": 1792113844.2988029,
+  "later_root_retirement_unix": 1792113887.3426728,
+  "actual_parent_terminal": {
+    "owner_pid": 77296,
+    "chunk": "c15ad5",
+    "exit": 0,
+    "running_session": false
+  },
+  "retirement_original_preserved_unmodified": {
+    "path": "/private/tmp/unison-dng-da-copy-IO-ADMISSION-v2-RETIRED.json",
+    "bytes": 422,
+    "sha256": "4ea9ab9b4b4beb29d7674e520039793ab414036110c0bb9b54c26a4210a770c9"
+  },
+  "actual_evidence": [
+    {
+      "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/START.json",
+      "bytes": 334,
+      "sha256": "b4b43981b9498b1b2c438b28c8281d0baf66c074e63b7e2b0fdf740975b0f09e"
+    },
+    {
+      "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/OWNER-TERMINAL.json",
+      "bytes": 253,
+      "sha256": "dad72aef854d7499a03fad1eb59b9dfb29664c806e60fddd7c149709c65258f5"
+    },
+    {
+      "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/OWNER-RETURN.json",
+      "bytes": 3099,
+      "sha256": "ead3e0e929d287af70a1ab72e15532ebf81c5a4ae3204a66d5a5e6e8147495e7"
+    },
+    {
+      "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/RESULT.json",
+      "bytes": 1293,
+      "sha256": "2b59968decc7e7112016bedffada7383c09f064b57e179b035f2b3745f790e8d"
+    },
+    {
+      "path": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/AGGREGATE-CLOSED.json",
+      "bytes": 453,
+      "sha256": "6d7ada830e03a52c226fc460a3929c7555e38fe37528ad94641754f5e72823ef"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-dng-clone-inspection-actual-20261016.json",
+      "bytes": 13360,
+      "sha256": "d923bdf27824a9a834893fd6a857a1a5b239f4056511cdb090c65150ff6018c1"
+    }
+  ],
+  "explanation": "Delayed old source-only no-dispatch statement crossed newer explicit exact admission and actual one-use execution. ROOT_RETIRED_UNEXERCISED marker is preserved as historical crossed observation, not factual no-execution proof. Actual START precedes retirement marker. This addendum neither overwrites Root state nor creates another admission. Root was sent exact correction queue01a14254-8b5f.",
+  "scope": "Only clone SHA+safe unsupportedtag50740 compiler agreement; CPU/group closed. No SDK/receiving/semantic support/privateDNG retry/newgrant."
+}

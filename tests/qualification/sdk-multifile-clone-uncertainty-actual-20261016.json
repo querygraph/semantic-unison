@@ -1,0 +1,33 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/test_sdk_multifile_clone_uncertainty.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".\n----------------------------------------------------------------------\nRan 1 test in 0.002s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 50830,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "source_sha256": "7d927fd81e3ae859803b2982ac65af15ac5e65e35dd0d62e75ea5db8cee50389",
+  "scope": "Two combined-failure injected cases with inert descriptor numbers; real adapter/finally and qualified close carrier; no source payload, clone syscall, SDK or canonical IO.",
+  "owner_tool_terminal": {
+    "chunk_id": "4295e9",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal."
+  }
+}

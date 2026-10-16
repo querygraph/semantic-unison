@@ -1,0 +1,84 @@
+{
+  "state": "FOUR_MOCK_ONLY_IO_DISPATCH_ADMISSION_CONTROLS_PASSED_NOT_LIVE_JOB_QUALIFIED",
+  "actual_terminal": {
+    "chunk": "149bdc",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-mock-a2lqtdz_",
+  "closure": {
+    "child": {
+      "pid": 84158,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 84158,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "scope": "Mock admission/target/source/command/deadline refusals and default API only. CanonicalCPU00..07 held by test wrapper and closed; NO canonicalIOfile/lock/Photo/payload/SDK/compiler access. No live IO job or full dispatcher lifecycle qualified.",
+  "earlier_mock_terminals": [
+    {
+      "chunk": "fd2882",
+      "exit": 0,
+      "scope": "3 initial methods before CLI env integration"
+    },
+    {
+      "chunk": "09cdf5",
+      "exit": 0,
+      "scope": "4 methods before final prelaunch deadline recheck"
+    }
+  ],
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 10584,
+      "sha256": "00bb61c5a947ffbcdf356a83a853fd5411ddcb1130ebd8f0da9ab6379c98b430"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 19014,
+      "sha256": "7e7a371a749429a305d22d02f374109e228d07725797081fd771b6ec8f2b4160"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_dispatch_test.py",
+      "bytes": 3434,
+      "sha256": "27cbedf6922e794a221335e8e31ca46c86645c16d4c5a38c8239b9c201fdf88e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-io-dispatch-successor.md",
+      "bytes": 2815,
+      "sha256": "07ccb093060f4109023ac483a96e61d1b1895f9644ff66c9607f87a230d7d696"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-mock-a2lqtdz_/SHARED-START.json",
+      "bytes": 1004,
+      "sha256": "f3fd3d57da72e9af0d72c323ab428f8666c60a9f28578173d61f508cb20159c8"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-mock-a2lqtdz_/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "33e094cc27b075ded5ef1ed4c8a99cfeb219b3e261e00bc122fffd535ebea26d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-mock-a2lqtdz_/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-mock-a2lqtdz_/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    }
+  ]
+}

@@ -9,6 +9,13 @@ val name : 'a t -> string list
 val overrideDefault : 'a t -> 'a -> unit
 val readDefault : 'a t -> 'a
 
+(* Keep this preference on the endpoint where it is configured. It is never
+   sent by [dump], and [load] ignores incoming values under every alias without
+   decoding them. Profiles, command-line options and [set] still apply. Returns
+   the same preference so it can wrap a creation call. Unlike [local], which
+   only lets a peer ignore an unknown preference, this prevents remote writes. *)
+val makeEndpointLocal : 'a t -> 'a t
+
 type topic = [
   | `General
   | `Sync
@@ -43,6 +50,11 @@ val createBool :
      -> ?cli_only:bool      (* only a command line option, not in a profile *)
      -> ?local:bool             (* whether it is local to the client *)
      -> ?send:(unit->bool)  (* whether preference should be sent to server *)
+     -> ?send_value:(bool->bool)
+                            (* pure outgoing-only value transformation;
+                               defaults to identity. Keeps BOOL CLI parsing,
+                               local values/printing and incoming decoding;
+                               the default wire encoding is unchanged. *)
      -> bool                (* initial value *)
      -> ?deprecated:bool    (* preference is deprecated (default false) *)
      -> string              (* documentation string *)
@@ -79,6 +91,11 @@ val createStringList :
      -> ?cli_only:bool      (* only a command line option, not in a profile *)
      -> ?local:bool             (* whether it is local to the client *)
      -> ?send:(unit->bool)  (* whether preference should be sent to server *)
+     -> ?send_value:(string list->string list)
+                            (* pure outgoing-only value transformation;
+                               defaults to identity. Keeps STRING_LIST CLI
+                               parsing, local values/printing and incoming
+                               decoding; default wire encoding is unchanged. *)
      -> ?deprecated:bool    (* preference is deprecated (default false) *)
      -> string              (* documentation string *)
      -> string              (* full (tex) documentation string *)
@@ -178,18 +195,26 @@ val loadTheFile : unit -> unit
 (* Parse the given strings as if they were part of the preferences file      *)
 val loadStrings : string list -> unit
 
+(* Load the optional reserved [endpoint.prf] in this endpoint's Unison
+   configuration directory, then apply endpoint-local command-line options.
+   Reject any non-endpoint-local setting in the file (including its includes).
+   Call after resetting defaults and before loading a normal client profile.
+   The argument is the usage message used for command-line parsing. *)
+val loadEndpointLocal : string -> unit
+
 (* ------------------------------------------------------------------------- *)
 
 type dumpedPrefs
 
 val mdumpedPrefs : dumpedPrefs Umarshal.t
 
-(* Dump current values of all preferences into a value that can be
-   marshalled and sent over the network or stored in a file for fast
-   retrieval *)
+(* Dump current values of transmitted preferences into a value that can be
+   marshalled and sent over the network. Endpoint-local and command-line-only
+   preferences are omitted. *)
 val dump : int -> dumpedPrefs
 
-(* Load new values of all preferences from a string created by dump          *)
+(* Load transmitted preferences from a value created by [dump]. Incoming
+   endpoint-local and command-line-only values are ignored. *)
 val load : dumpedPrefs -> int -> unit
 
 (* ------------------------------------------------------------------------- *)

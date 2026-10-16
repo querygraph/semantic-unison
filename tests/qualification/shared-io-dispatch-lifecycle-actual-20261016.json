@@ -1,0 +1,88 @@
+{
+  "state": "THIRTEEN_FAKE_IO_DISPATCH_LIFECYCLE_CONTROLS_PASSED_CLOSED",
+  "parent_terminal": {
+    "chunk": "be66c9",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ltj97cpv",
+  "closure": {
+    "child": {
+      "pid": 85199,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 85199,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "prior_failure": {
+    "chunk": "aba94d",
+    "exit": 1,
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ss3qs82u",
+    "scope": "Reproducer: post-known-close receipt-write failure incorrectly entered retained-owner path. Original failed fixture trace/groupclosure preserved; no realIO/childowners."
+  },
+  "scope": "Fake leases/PIDs and fake child owners only. Outer CPU00..07 actually owned and closed. No canonicalIO namespace/lock/Photo/SDK/payload/native/compiler/testchildren. Tests cover orderedbundle/contention/prelaunchrollback/FDinheritance+heldthroughsettlement/failure+timeout proofs/uncertaincloses/reportingfailure afterknownclose. They do not prove real-job integration or all OS-fault crossproducts.",
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 10963,
+      "sha256": "99a9999b08e60e4bfbe2ccc30e3b1c5a7de6a719b2ddddc642f7705a9e6ef2d9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_dispatch_lifecycle_test.py",
+      "bytes": 8571,
+      "sha256": "4b6cc6359734b2ffbe6900a8e607c05a13fba0b7c9082fa4adc0f31dfac9b6ab"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ltj97cpv/SHARED-START.json",
+      "bytes": 1024,
+      "sha256": "ab59f37461ac53ead614e3481db5e77e47656810e1aa632fc58642e5cb366927"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ltj97cpv/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "a64cf9b7bf8d9ff1bae6c2b87a355fa27b1efda619d5ab606e132b80f344b991"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ltj97cpv/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ltj97cpv/SHARED-STDERR.txt",
+      "bytes": 112,
+      "sha256": "60b5edc8087e061f2f9c8555ca9c1875fac04657d569ed1c0f03fc9a75a17576"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ss3qs82u/SHARED-START.json",
+      "bytes": 1024,
+      "sha256": "5ddaccdeab9815d30c539b6bc149330713037143e3d7663357a2b7382624be83"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ss3qs82u/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "91c12b26e9a5938d6658215d781240f4c84e30f324ee6b0ea1b5166decfa15e8"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ss3qs82u/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-dispatch-lifecycle-owner-ss3qs82u/SHARED-STDERR.txt",
+      "bytes": 4439,
+      "sha256": "e890196c38675b5df3f8d63aeb19d4db10830c5c568a5dc80994bb2f511f174c"
+    }
+  ]
+}

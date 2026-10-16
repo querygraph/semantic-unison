@@ -1,0 +1,11 @@
+@@ portable
+include FormatExtension.S
+val inspect_extended : SemanticFile.t -> (FormatExtension.manifest, string) result
+(** Inspector for the separately negotiated v1 profile. Extends the unchanged
+    v0 subset with BigTIFF and bounded embedded CR camera-profile graphs. Both
+    byte orders and each embedded profile's relative offset base are explicit.
+    The same single fixed XMP region and complete complement proof are required;
+    this does not establish full DNG validity or rendering equivalence. *)
+val observer : FormatExtension.observer
+(** Advisory namespace-aware XMP property encodings. Parsing failures affect
+    descriptions only; exact byte proofs and transfer eligibility are unchanged. *)

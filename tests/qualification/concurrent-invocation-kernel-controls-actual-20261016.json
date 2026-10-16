@@ -1,0 +1,55 @@
+{
+  "schema": "unison-concurrent-invocation-kernel-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "3532ba",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/invocation.py",
+      "bytes": 3236,
+      "sha256": "b3b1463647c598c71b0a4151fbf74c31c073e8015c393098a360bcbd949d660f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/invocation_test.py",
+      "bytes": 3838,
+      "sha256": "000355cf84922e85a6f541f2df881c87598d12cbe02ea6bacee8fd60155822a1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/command.py",
+      "bytes": 2753,
+      "sha256": "2304361afe3f85c9bf0882c7f06c54a9f9ef3114882dfbaacc119f95f2e217fc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/close.py",
+      "bytes": 1628,
+      "sha256": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-invocation-controls-20261016a/SHARED-START.json",
+      "bytes": 1114,
+      "sha256": "63fd9c5e9fa76c7d96bd8b238b2a56e22a32d49274911a6fbe7cea8700ed8987"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-invocation-controls-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3fe4bdd5d7bd66fb034a9f7df098410e2295602e24d4dcda47b21e7b5c392757"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-invocation-controls-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-invocation-controls-20261016a/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "e586fc0f3bb2a05f4c80f07d1b4c6171e830592f6c7aaf70d4af3b0aa3ebd072"
+    }
+  ],
+  "scope": "7original mocks/tiny-artifact controls; no receiving transport, CLI, helper, SDK, camera, Photo or EXglobal; aggregate/FD lifecycle authority remains with future admitted owner",
+  "full_goal_complete": false
+}

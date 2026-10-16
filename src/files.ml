@@ -385,28 +385,182 @@ let performRename fspathTo localPathTo (workingDirFrom, pathFrom)
    check that their assumptions had not been violated and then switch the
    temp file into place, but remain able to roll back if something fails
    either locally or on the other side. *)
-let renameLocal
+let checkPublication binding operation =
+  Util.convertUnixErrorsToTransient "checking final publication binding"
+    (fun () ->
+      TargetBinding.check_open binding;
+      TargetBinding.recheck_resolution binding;
+      operation (TargetBinding.native binding))
+
+let preparePublication binding workingDir pathFrom pathTo notDefault =
+  match binding with
+  | None -> None
+  | Some binding ->
+      checkPublication binding (fun _ -> ());
+      if TargetBinding.requires_producer binding then begin
+        if not (TargetBinding.finalized binding) || TargetBinding.fingerprint binding = None then
+          raise (Util.Transient "Final publication has no finalized producer receipt");
+        checkPublication binding FinalPublication.check_candidate
+      end;
+      (* These transactions have additional names or move-first behavior.
+         Preserve their existing implementation until their complete families
+         have a publication contract. Named legacy attachment follows this
+         choice; strict producer handoff checks its already frozen witness. *)
+      let legacy =
+        (notDefault && Prefs.read copyOnConflict) ||
+        Fileinfo.getType false workingDir pathTo = `DIRECTORY in
+      if legacy then (TargetBinding.legacy_handoff binding; None) else begin
+        if Fileinfo.getType false workingDir pathFrom <> `FILE then
+          raise (Util.Transient "Final publication candidate is not a regular file");
+        let context = TargetBinding.native binding in
+        if not (Util.convertUnixErrorsToTransient "checking publication auxiliary names"
+                  (fun () -> FinalPublication.auxiliary_absent context)) then
+          (TargetBinding.legacy_handoff binding; None)
+        else begin
+          if TargetBinding.requires_producer binding then
+            checkPublication binding FinalPublication.check_candidate
+          else
+            checkPublication binding FinalPublication.attach;
+          Some binding
+        end
+      end
+
+let renameLocalWithBinding ?binding
       (fspathTo,
        ((localPathTo, workingDir, pathFrom, pathTo), (ui, archOpt, notDefault))) =
+  let publication = preparePublication binding workingDir pathFrom pathTo notDefault in
+  (* Keep the live object observed before asynchronous validation through the
+     later logical destination checker and backups. Identical-byte replacement
+     is still a namespace change during this bound commit. *)
+  (match publication with
+   | None -> ()
+   | Some binding -> checkPublication binding FinalPublication.observe_target);
+  let checkCandidate () = match publication with
+    | None -> ()
+    | Some binding -> checkPublication binding FinalPublication.check in
+  let checkActualFingerprint () = match publication with
+    | Some binding when TargetBinding.requires_producer binding ->
+        let expected = match TargetBinding.fingerprint binding with
+          | Some expected -> expected
+          | None -> raise (Util.Transient "Final publication has no actual fingerprint receipt") in
+        checkCandidate ();
+        let actual = Os.fingerprint workingDir pathFrom `FILE in
+        checkCandidate ();
+        if not (Os.fullfingerprintEqual actual expected) then
+          raise (Util.Transient "Final publication candidate differs from its producer fingerprint");
+        Some actual
+    | _ -> None in
+  checkCandidate ();
+  BorrowedWork.bind (fun () ->
+   if not (CandidateValidation.enabled ()) && publication = None then Lwt.return () else
+   BorrowedWork.catch
+    (fun () ->
+      ignore (checkActualFingerprint ());
+      BorrowedWork.bind (fun () -> if CandidateValidation.enabled () then
+         CandidateValidation.before_commit_with_reservation
+           ~reservation:(Option.bind binding TargetBinding.reservation)
+           ~directory:workingDir ~candidate:pathFrom
+           ~destination:pathTo
+       else Lwt.return ()) (fun () ->
+      let actual = checkActualFingerprint () in
+      (* Rebind finalized staging, including resource forks, to the transfer's
+         expected archive. Keep pseudo-fingerprint behavior compatible with
+         the earlier source check. *)
+      (match archOpt, actual with
+       | None, _ -> ()
+       | Some (Update.ArchiveFile (_, expected, _, _)), Some actual ->
+           if not (Os.isPseudoFingerprint expected) &&
+              not (Os.fullfingerprintEqual actual expected) then
+             raise (Util.Transient "Validation candidate differs from transferred source")
+       | Some archive, _ -> Update.iterFiles workingDir pathFrom archive
+           (fun directory path expected ->
+             if not (Os.isPseudoFingerprint expected) then begin
+               let actual = Os.fingerprint directory path `FILE in
+               if not (Os.fullfingerprintEqual actual expected) then
+                 raise (Util.Transient "Validation candidate differs from transferred source")
+             end));
+      Lwt.return ()))
+    (fun error ->
+      (* A rejected candidate is not a resumable prefix. In particular, hidden
+         helper-created children must not become trusted on the next attempt.
+         All validators have settled before before_commit reports failure.
+         Quarantine first so an interrupted/failed deletion cannot become a
+         resumable candidate. Only private copy/merge staging is discarded;
+         the destination and its archive have not yet been changed. *)
+      let discard () =
+        let rejected = Os.tempPath ~fresh:true workingDir
+          (Path.addSuffixToFinalName pathFrom "-validation-rejected") in
+        let paths =
+          match Os.rename "quarantining rejected validation candidate"
+                  workingDir pathFrom workingDir rejected with
+          | () -> [rejected]
+          | exception _ -> [pathFrom; rejected] in
+        let failures = ref [] in
+        List.iter (fun path ->
+          try Os.delete workingDir path with cleanup_error ->
+            failures := (Fspath.toPrintString (Fspath.concat workingDir path) ^ ": " ^
+                         Printexc.to_string cleanup_error) :: !failures) paths;
+        if !failures <> [] then
+          raise (Util.Transient (String.concat "; " (List.rev !failures))) in
+      let discard () = match publication with
+        | None -> discard ()
+        | Some binding ->
+            (* Helpers have settled. The captured parent/witness, rather than
+               a now-rebound pathname, owns rejected regular-file cleanup. *)
+            Util.convertUnixErrorsToTransient "discarding rejected bound candidate"
+              (fun () -> TargetBinding.quarantine binding) in
+      match discard () with
+      | () -> Lwt.fail error
+      | exception cleanup_error ->
+        Lwt.fail (Util.Transient
+          (Printf.sprintf "Validation failed (%s); could not discard private staging (%s)"
+            (Printexc.to_string error) (Printexc.to_string cleanup_error)))))
+  (fun () ->
+  checkCandidate ();
   let copyInfo = prepareCopy workingDir pathTo notDefault in
   (* Make sure the target is unchanged, then do the rename.
      (Note that there is an unavoidable race condition here...) *)
   let prevArch = Update.checkNoUpdates fspathTo localPathTo ui in
+  (match publication with
+   | None -> ()
+   | Some binding -> checkPublication binding FinalPublication.check);
   (* Create a conflict copy if the file was modified in one replica
      and deleted in the other replica. *)
   let pathTo = match finishCopy copyInfo with
   | Some conflictPath -> conflictPath
   | None -> pathTo in
-  performRename fspathTo localPathTo (workingDir, pathFrom) (workingDir, pathTo) prevArch;
+  Abort.checkAll ();
+  (match publication with
+   | None ->
+       performRename fspathTo localPathTo (workingDir, pathFrom) (workingDir, pathTo) prevArch
+   | Some binding ->
+       checkPublication binding FinalPublication.check;
+       Stasher.backup fspathTo localPathTo `ByCopying prevArch;
+       checkPublication binding FinalPublication.check;
+       Abort.checkAll ();
+       Util.convertUnixErrorsToTransient "publishing bound candidate"
+         (fun () -> FinalPublication.publish (TargetBinding.native binding));
+       (* Native ownership changes before pending exception delivery. Any
+          failure from this point leaves live output for the next scan; the
+          binding's cleanup never deletes it or advances an archive. *)
+       checkPublication binding FinalPublication.check_published);
+  let checkPublished () = match publication with
+    | None -> ()
+    | Some binding -> checkPublication binding FinalPublication.check_published in
   begin match archOpt with
-    Some archTo -> Stasher.stashCurrentVersion fspathTo localPathTo None;
+    Some archTo -> checkPublished ();
+                   Stasher.stashCurrentVersion fspathTo localPathTo None;
+                   checkPublished ();
                    Update.iterFiles fspathTo localPathTo archTo
                      Xferhint.insertEntry;
+                   checkPublished ();
                    (* Archive update must be done last *)
                    Update.replaceArchiveLocal fspathTo localPathTo archTo
   | None        -> ()
   end;
-  Lwt.return ()
+  Lwt.return ())
+
+let renameLocal args = renameLocalWithBinding args
 
 let mrename = Umarshal.(prod2
                           (prod4 Path.mlocal Fspath.m Path.mlocal Path.mlocal id id)
@@ -416,14 +570,59 @@ let mrename = Umarshal.(prod2
 let renameOnHost =
   Remote.registerRootCmd "rename" mrename Umarshal.unit renameLocal
 
-let rename root localPath workingDir pathOld pathNew ui archOpt notDefault =
+let renameBoundLocal connection (root, token, args) =
+  let ((localPath, workingDir, candidate, target), _) = args in
+  BorrowedWork.catch
+    (fun () -> TargetBinding.with_binding ?connection ~token ~logical_root:root
+      ~local_path:localPath ~working_dir:workingDir ~candidate ~target
+      (fun binding -> renameLocalWithBinding ~binding (root, args)))
+    (function
+      | Unix.Unix_error (error, phase, path) ->
+          Lwt.fail (Util.Transient (Printf.sprintf
+            "Final publication (%s, %s): %s" phase path (Unix.error_message error)))
+      | error -> Lwt.fail error)
+
+let renameBoundOnHost = Remote.registerServerCmd "renameBoundV0"
+  Umarshal.(prod3 Fspath.m (bounded_string 64) mrename id id) Umarshal.unit
+  (fun connection args -> renameBoundLocal (Some connection) args)
+
+let releaseBoundLocal connection (root, token) =
+  Util.convertUnixErrorsToTransient "releasing final publication binding"
+    (fun () -> TargetBinding.release_ticket ?connection ~logical_root:root ~token ());
+  Lwt.return ()
+
+let releaseBoundOnHost = Remote.registerServerCmd "releaseTargetBindingV0"
+  Umarshal.(prod2 Fspath.m (bounded_string 64) id id) Umarshal.unit
+  (fun connection args -> releaseBoundLocal (Some connection) args)
+
+let releaseTargetBinding root = function
+  | None -> Lwt.return ()
+  | Some token ->
+      match fst root with
+      | Local -> releaseBoundLocal None (snd root, token)
+      | Remote _ -> releaseBoundOnHost (Remote.connectionOfRoot root) (snd root, token)
+
+let withTargetBinding root token f =
+  BorrowedWork.try_bind f
+    (fun result -> BorrowedWork.bind (fun () -> releaseTargetBinding root token)
+      (fun () -> Lwt.return result))
+    (fun error -> BorrowedWork.bind
+      (fun () -> BorrowedWork.catch (fun () -> releaseTargetBinding root token)
+        (fun _ -> Lwt.return ())) (fun () -> Lwt.fail error))
+
+let rename ?token root localPath workingDir pathOld pathNew ui archOpt notDefault =
   debug (fun() ->
     Util.msg "rename(root=%s, localPath=%s, pathOld=%s, pathNew=%s)\n"
       (root2string root)
       (Path.toString localPath)
       (Path.toString pathOld) (Path.toString pathNew));
-  renameOnHost root
-    ((localPath, workingDir, pathOld, pathNew), (ui, archOpt, notDefault))
+  let args = ((localPath, workingDir, pathOld, pathNew), (ui, archOpt, notDefault)) in
+  match token with
+  | None -> renameOnHost root args
+  | Some token ->
+      match fst root with
+      | Local -> renameBoundLocal None (snd root, token, args)
+      | Remote _ -> renameBoundOnHost (Remote.connectionOfRoot root) (snd root, token, args)
 
 (* ------------------------------------------------------------ *)
 
@@ -486,6 +685,73 @@ let setupTargetPathsAndCreateParentDirectory =
     Umarshal.(prod2 Path.m (list Props.mx) id id)
     Umarshal.(prod4 Fspath.m Path.mlocal Path.mlocal Path.mlocal id id)
     setupTargetPathsAndCreateParentDirectoryLocal
+
+let normalizeTargetPath normalize path =
+  if not normalize then path else
+  match Path.deconstructRev path with
+  | None -> assert false
+  | Some (name, parent) -> Path.child parent (Name.normalize name)
+
+let prepareTargetBinding connection root normalize wantBinding
+      (workingDir, realPath, candidate, localPath) =
+  if not wantBinding || not (TargetBinding.supported ()) ||
+     Fileinfo.getType true root Path.empty <> `DIRECTORY then Lwt.return None else
+  Util.convertUnixErrorsToTransient "preparing final publication binding"
+    (fun () -> TargetBinding.prepare_admitted ?connection ~logical_root:root
+      ~require_producer:(TargetBinding.producer_supported ())
+      ~local_path:localPath ~working_dir:workingDir ~candidate
+      ~target:(normalizeTargetPath normalize realPath) ~normalize
+      ~check_apple_double:(Prefs.read Osx.rsrc) ())
+
+let returnBoundSetup connection root paths token =
+  try Lwt.return (paths, token) with error ->
+    (match token with
+     | None -> ()
+     | Some token ->
+         (try TargetBinding.release_ticket ?connection ~logical_root:root ~token ()
+          with _ -> ()));
+    raise error
+
+let setupBoundLocal connection (root, (path, normalize, wantBinding)) =
+  setupTargetPathsLocal (root, path) >>= fun paths ->
+  prepareTargetBinding connection root normalize wantBinding paths >>= fun token ->
+  returnBoundSetup connection root paths token
+
+let setupBoundWithParentsLocal connection
+      (root, ((path, props), normalize, wantBinding)) =
+  setupTargetPathsAndCreateParentDirectoryLocal (root, (path, props)) >>= fun paths ->
+  prepareTargetBinding connection root normalize wantBinding paths >>= fun token ->
+  returnBoundSetup connection root paths token
+
+let msetupBoundResult = Umarshal.(prod2 msetupTargetPaths
+  (option (bounded_string 64)) id id)
+
+let setupBoundOnHost = Remote.registerServerCmd "setupTargetBindingV0"
+  Umarshal.(prod2 Fspath.m (prod3 Path.m bool bool id id) id id)
+  msetupBoundResult (fun connection args -> setupBoundLocal (Some connection) args)
+
+let setupBoundWithParentsOnHost = Remote.registerServerCmd "setupTargetBindingWithParentsV0"
+  Umarshal.(prod2 Fspath.m
+    (prod3 (prod2 Path.m (list Props.mx) id id) bool bool id id) id id)
+  msetupBoundResult
+  (fun connection args -> setupBoundWithParentsLocal (Some connection) args)
+
+let setupTargetPathsForCopy root ~normalize ~wantBinding path =
+  if not wantBinding || not (TargetBinding.supported ()) then
+    setupTargetPaths root path >>= fun paths -> Lwt.return (paths, None)
+  else match fst root with
+  | Local -> setupBoundLocal None (snd root, (path, normalize, wantBinding))
+  | Remote _ -> setupBoundOnHost (Remote.connectionOfRoot root)
+                  (snd root, (path, normalize, wantBinding))
+
+let setupTargetPathsWithParentsForCopy root ~normalize ~wantBinding args =
+  if not wantBinding || not (TargetBinding.supported ()) then
+    setupTargetPathsAndCreateParentDirectory root args >>= fun paths ->
+    Lwt.return (paths, None)
+  else match fst root with
+  | Local -> setupBoundWithParentsLocal None (snd root, (args, normalize, wantBinding))
+  | Remote _ -> setupBoundWithParentsOnHost (Remote.connectionOfRoot root)
+                  (snd root, (args, normalize, wantBinding))
 
 let rec readParentsExtData rootFrom pathFrom acc = function
   | [] -> Safelist.rev acc |> Lwt.return
@@ -580,6 +846,15 @@ let rec normalizeProps propsFrom propsTo =
 (* ------------------------------------------------------------ *)
 
 let copyReg = Remote.lwtRegionWithConnCleanup 50
+(* Transport may raise copyReg to 1000 while streaming. Final publication
+   retains directories from setup until commit, so its separate admission
+   spans that complete lifetime and starts before endpoint preparation. *)
+let publicationReg = Remote.lwtRegionWithConnCleanup 64
+
+let withPublicationAdmission wanted f =
+  if wanted && TargetBinding.supported () then
+    Lwt_util.run_in_region !publicationReg 1 f
+  else f ()
 
 let copy
       update
@@ -602,25 +877,23 @@ let copy
       (root2string rootTo) (Path.toString pathTo));
   (* Calculate source path *)
   Update.translatePath rootFrom pathFrom >>= fun localPathFrom ->
+  (* Determine the top-level candidate kind before reserving publication
+     handles. Directory/move-first transactions keep their existing path. *)
+  let rootLocal = List.hd (Globals.rootsInCanonicalOrder ()) in
+  let localArch = Update.updateArchive (snd rootLocal) localPathFrom uiFrom in
+  let wantBinding = match localArch with Update.ArchiveFile _ -> true | _ -> false in
+  withPublicationAdmission wantBinding (fun () ->
   (* Calculate target paths *)
   normalizeProps propsFrom propsTo
   |> readParentsExtData rootFrom localPathFrom [] >>= fun parentProps ->
-  setupTargetPathsAndCreateParentDirectory rootTo
+  setupTargetPathsWithParentsForCopy rootTo ~normalize:(update = `Copy) ~wantBinding
     (pathTo, parentProps)
-     >>= fun (workingDir, realPathTo, tempPathTo, localPathTo) ->
+     >>= fun ((workingDir, realPathTo, tempPathTo, localPathTo), token) ->
+  withTargetBinding rootTo token (fun () ->
+  let commitToken = ref token in
   (* When in Unicode case-insensitive mode, we want to create files
      with NFC normal-form filenames. *)
-  let realPathTo =
-    match update with
-      `Update _ ->
-        realPathTo
-    | `Copy ->
-        match Path.deconstructRev realPathTo with
-          None ->
-            assert false
-        | Some (name, parentPath) ->
-            Path.child parentPath (Name.normalize name)
-  in
+  let realPathTo = normalizeTargetPath (update = `Copy) realPathTo in
   let errors = ref [] in
   (* Inner loop for recursive copy... *)
   let rec copyRec pFrom      (* Path to copy from *)
@@ -641,9 +914,18 @@ let copy
                Abort.check id;
                let stmp =
                  if Update.useFastChecking () then Some stamp else None in
-               Copy.file
-                 rootFrom pFrom rootTo workingDir pTo realPTo
-                 update desc fp stmp ress id
+               (match !commitToken with
+                | Some token when TargetBinding.producer_supported () ->
+                    Copy.fileBound ~token ~local_path:localPathTo
+                      rootFrom pFrom rootTo workingDir pTo realPTo
+                      update desc fp stmp ress id >>= fun (info, completion) ->
+                    (match completion with
+                     | TargetBinding.Guarded_producer -> ()
+                     | TargetBinding.Legacy_backend -> commitToken := None);
+                    Lwt.return info
+                | _ -> Copy.file
+                    rootFrom pFrom rootTo workingDir pTo realPTo
+                    update desc fp stmp ress id)
                  >>= fun info ->
                let ress' = Osx.stamp info.Fileinfo.osX in
                Lwt.return
@@ -715,10 +997,6 @@ let copy
          | _ ->
              Lwt.fail e)
   in
-  (* Compute locally what we need to propagate *)
-  let rootLocal = List.hd (Globals.rootsInCanonicalOrder ()) in
-  let localArch =
-    Update.updateArchive (snd rootLocal) localPathFrom uiFrom in
   copyRec localPathFrom tempPathTo realPathTo localArch
     >>= fun (archTo, errPaths) ->
   if archTo = Update.NoArchive then
@@ -728,7 +1006,7 @@ let copy
     (* Rename the files to their final location and then update the
        archive on the destination replica *)
     debugverbose (fun () -> Util.msg "rename from copy\n");
-    rename rootTo localPathTo workingDir tempPathTo realPathTo uiTo
+    rename ?token:(!commitToken) rootTo localPathTo workingDir tempPathTo realPathTo uiTo
       (Some archTo) notDefault >>= fun () ->
     (* Update the archive on the source replica
        FIX: we could reuse localArch if rootFrom is the same as rootLocal *)
@@ -737,7 +1015,7 @@ let copy
     match Safelist.rev !errors with
       e :: _ -> Lwt.fail e
     | []     -> Lwt.return ()
-  end
+  end))
 
 (* ------------------------------------------------------------ *)
 
@@ -942,7 +1220,7 @@ let rec diff root1 path1 ui1 root2 path2 ui2 showDiff id =
         Util.replacesubstrings (Prefs.read diffCmd)
           ["CURRENT1", Fspath.quotes fspath1;
            "CURRENT2", Fspath.quotes fspath2] in
-    let _, diffResult = Lwt_unix.run (External.runExternalProgram cmd) in
+    let _, diffResult = Lwt_unix.run (SupervisedExternal.runExternalProgram cmd) in
     if diffResult <> "" then
       showDiff cmd diffResult
   in
@@ -1068,18 +1346,29 @@ let formatMergeCmd p f1 f2 backup out1 out2 outarch batchmode =
   cooked
 
 let copyBack fspathFrom pathFrom rootTo pathTo propsTo uiTo archTo id =
-  setupTargetPaths rootTo pathTo
-    >>= (fun (workingDirForCopy, realPathTo, tempPathTo, localPathTo) ->
+  withPublicationAdmission true (fun () ->
+  setupTargetPathsForCopy rootTo ~normalize:false ~wantBinding:true pathTo
+    >>= (fun ((workingDirForCopy, realPathTo, tempPathTo, localPathTo), token) ->
+  withTargetBinding rootTo token (fun () ->
   let info = Fileinfo.getBasicWithRess false fspathFrom pathFrom in
   let fp = Os.fingerprint fspathFrom pathFrom info.Fileinfo.typ in
   let stamp = Osx.stamp info.Fileinfo.osX in
   let newprops = Props.setLength propsTo (Props.length info.Fileinfo.desc) in
-  Copy.file
-    (Local, fspathFrom) pathFrom rootTo workingDirForCopy tempPathTo realPathTo
-    `Copy newprops fp None stamp id >>= fun info ->
+  (match token with
+   | Some token when TargetBinding.producer_supported () ->
+       Copy.fileBound ~token ~local_path:localPathTo
+         (Local, fspathFrom) pathFrom rootTo workingDirForCopy tempPathTo realPathTo
+         `Copy newprops fp None stamp id >>= fun (info, completion) ->
+       Lwt.return (info, match completion with
+         | TargetBinding.Guarded_producer -> Some token
+         | TargetBinding.Legacy_backend -> None)
+   | _ -> Copy.file
+       (Local, fspathFrom) pathFrom rootTo workingDirForCopy tempPathTo realPathTo
+       `Copy newprops fp None stamp id >>= fun info -> Lwt.return (info, token))
+    >>= fun (info, commitToken) ->
   debugverbose (fun () -> Util.msg "rename from copyBack\n");
-  rename rootTo localPathTo workingDirForCopy tempPathTo realPathTo
-    uiTo archTo false)
+  rename ?token:commitToken rootTo localPathTo workingDirForCopy tempPathTo realPathTo
+    uiTo archTo false)))
 
 let keeptempfilesaftermerge =
   Prefs.createBool
@@ -1197,6 +1486,27 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
       let fp1 = Os.fingerprint workingDirForMerge working1 info1 in
       let info2 = Fileinfo.getType false workingDirForMerge working2 in
       let fp2 = Os.fingerprint workingDirForMerge working2 info2 in
+      let returnValue, mergeResultLog =
+        if Globals.mergeCmdForPath path1 = "unison:dng-xmp-scalars/0" then begin
+          let base_fingerprint = match ui1,ui2 with
+            | Updates (_, PrevFile (_, fp, _, _)),
+              Updates (_, PrevFile (_, fp2, _, _)) when Os.fullfingerprintEqual fp fp2 -> fp
+            | NoUpdates, Updates (_, PrevFile (_, fp, _, _))
+            | Updates (_, PrevFile (_, fp, _, _)), NoUpdates -> fp
+            | _ -> raise (Util.Transient "DNG scalar merge requires a common previous archive") in
+          if arch = None && not (SemanticMergeCache.enabled ()) then
+            raise (Util.Transient "DNG scalar merge requires a saved common version; enable backupcurrent before synchronization");
+          copy [(working1,new1)];
+          let report = Lwt_unix.run (SemanticSync.merge_local_async_with_cache
+            ~cache:(fspath1,localPath1) ~base_fingerprint
+            ~base:(Fspath.concat workingDirForMerge workingarch)
+            ~left:(Fspath.concat workingDirForMerge working1)
+            ~right:(Fspath.concat workingDirForMerge working2)
+            ~output:(Fspath.concat workingDirForMerge new1)) in
+          Unix.WEXITED 0, Printf.sprintf
+            "Built-in DNG scalar merge verified one exact result (%d metadata bytes, %d writes).\n"
+            report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
+        end else begin
       let cmd = formatMergeCmd
           path1
           (Fspath.quotes (Fspath.concat workingDirForMerge working1))
@@ -1208,8 +1518,9 @@ let merge root1 path1 ui1 root2 path2 ui2 id showMergeFn =
           (if Prefs.read Globals.batch then "batch" else "") in
       Trace.log (Printf.sprintf "Merge command: %s\n" cmd);
 
-      let returnValue, mergeResultLog =
-        Lwt_unix.run (External.runExternalProgram cmd) in
+      Lwt_unix.run (SupervisedExternal.runExternalProgram cmd)
+
+        end in
 
       Trace.log (Printf.sprintf "Merge result (%s):\n%s\n"
                    (showStatus returnValue) mergeResultLog);

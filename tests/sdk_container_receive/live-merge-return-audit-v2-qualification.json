@@ -1,0 +1,29 @@
+{
+  "scope": "Read-only current audit controls over prior actual mock, plus two disposable metadata overlays. No native result or runtime admission inferred.",
+  "actual_pure_terminal": {
+    "chunk": "e25e5d",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "sources": [
+    {
+      "path": "tests/sdk_container_receive/audit_live_merge.py",
+      "bytes": 6700,
+      "sha256": "c9269dac13d0e90c58d4759932ef5cd2aee5d30f74284fe34385e54a474477cc"
+    },
+    {
+      "path": "tests/sdk_container_receive/audit_live_merge_test.py",
+      "bytes": 2571,
+      "sha256": "5f4a52a287330c2743848d9bdbc1f361681987eacf4565269f6a50fcbc026b3b"
+    }
+  ],
+  "historical_audit": {
+    "path": "tests/sdk_container_receive/live-merge-return-audit-qualification.json",
+    "bytes": 960,
+    "sha256": "f1846eb945b8d9c25a7a877aa228fd578f70941ee025cf3443165ba9bf6f6643"
+  },
+  "positive_mock_readback": true,
+  "negative_controls": 6,
+  "dispatches": 0,
+  "native_branch_executed": false
+}

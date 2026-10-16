@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-13",
+  "final_native_receipt": {
+    "all_binary_snapshot_runner_pins_verified": true,
+    "all_exact_basis_noop_cleanup_checks_verified": true,
+    "all_normal_cleanup_and_fault_guards_verified": true,
+    "current_package_input_pins_per_binary": 315,
+    "logical_models": {
+      "generic_complete_minus_inherited": 16384,
+      "ordinary_complete_extent": 4194304,
+      "semantic_packet_payload_bytes": 16384,
+      "semantic_successful_returned_write_bytes": 6144,
+      "semantic_write_attempts": 2
+    },
+    "path": "bench/sync/results/qualification-20261013.json",
+    "per_current_row_wall_seconds_range": [
+      0.27198314800625667,
+      0.40068622999388026
+    ],
+    "rows": 13,
+    "seed_update_noop_invocations": 39,
+    "sha256": "2b163fd7f4fc18856b46a64d083e38179c6ae4abc9465b36401ec0867b2e7569",
+    "whole_protocol_total_bytes": {
+      "generic": 34081,
+      "ordinary": 34080,
+      "semantic_ox": 30337,
+      "semantic_stock": 30298
+    }
+  },
+  "final_owner_controls_receipt": {
+    "path": "bench/sync/results/controls-20261013.json",
+    "sha256": "dadec2d87025be0e2b251010c17717302beb12afb717527eaf05f28bf6fa6258"
+  },
+  "findings": [
+    "Successfully forwarded protocol counters add actual pipe-write/socket-send return values in both directions. Bounded launcher command-header bytes are excluded. Echo control independently checks exact bytes.",
+    "OwnedGroup retains the leader via waitid(WNOWAIT), signals the group before wait4 reaps that leader, and avoids Popen polling that would release its PID reservation early.",
+    "Darwin EPERM handling accepts only recognized empty output or exactly the retained owned-leader zombie from bounded ps -g probes; unexpected/ambiguous/living/extra persisted members fail qualification.",
+    "Proxy try/finally cancels and wait4-reaps its native child before returning fault receipts for pump exceptions, deadline and cooperative cancellation. Abrupt supervisor exit has group-cleanup/native-PID-absence evidence only, never native-owner wait4 proof or an accepted benchmark row.",
+    "Both client and supervisor captures continuously drain with bounded retained memory. First/second captured-reader creation controls confirm child ownership settlement on construction failures.",
+    "The materializer byte count is successful returned Unix.write_substring bytes after lseek. Calls count attempts, including EINTR retries; fields no longer imply pwrite syscalls or attempted-byte counts.",
+    "Ordinary/receiver-clone/source-clone logical output quantities remain declared models. Wrong, mixed and preserved-only algorithm traces are rejected. Physical write, allocation and sharing amounts are not measured.",
+    "Fixture controls independently prove unchanged complement and exact expected source bytes. Actual selected snapshot source/package manifests identify binary source artifacts rather than changing repository HEAD."
+  ],
+  "independent_controls": {
+    "cases": [
+      {
+        "control": "output-pump",
+        "exact_native_pid_absent": true,
+        "native_owner_reap_attested": true,
+        "native_pid": 59431,
+        "supervisor_reaped": true
+      },
+      {
+        "control": "deadline",
+        "exact_native_pid_absent": true,
+        "native_owner_reap_attested": true,
+        "native_pid": 59436,
+        "supervisor_reaped": true
+      },
+      {
+        "control": "client-timeout",
+        "exact_native_pid_absent": true,
+        "native_owner_reap_attested": true,
+        "native_pid": 59441,
+        "supervisor_reaped": true
+      },
+      {
+        "control": "supervisor-exit",
+        "exact_native_pid_absent": true,
+        "native_owner_reap_attested": false,
+        "native_pid": 59446,
+        "supervisor_reaped": true
+      }
+    ],
+    "command": "UNISON_SYNC_CONTROLS_OUTPUT=/private/tmp/unison-sync-independent-controls-20261013.json python3 bench/sync/check.py",
+    "exit_code": 0,
+    "receipt_path": "/private/tmp/unison-sync-independent-controls-20261013.json",
+    "receipt_sha256": "fbb9adb4b55657c5fef5440e42ed8db75b2b612541fd89c18e3b4525b94a6873"
+  },
+  "limitations": [
+    "Finite qualification is not throughput, 18-versus-36 worker selection, OxCaml-specific speedup, representative photograph or Adobe validation evidence.",
+    "Worker budgets are independently configured per same-host endpoint, allowing two budgets rather than enforcing a machine-wide cap.",
+    "wait4 CPU may include reaped descendants; maximum RSS is not aggregate process-tree peak RSS or a memory cap. Block operations are not physical storage byte counts.",
+    "Python socket/pipe bridge overhead and warm/uncontrolled host activity remain part of this experiment; there is no encrypted/real-network, cold-cache, cross-volume or non-APFS qualification.",
+    "No Adobe, Lightroom, preview renderer, Photo payload/catalog/cache or Photo-volume operations were performed by this independent audit. Only small synthetic controls ran."
+  ],
+  "readme_sha256": "4d2bf11a8971b88b8eba709753882777eb7c62ab268860141a27617d92de095d",
+  "resolved_findings": [
+    "Native child was formerly unguarded on supervisor output-pump failure; proxy finally now settles and wait4-reaps it.",
+    "Previously terminal supervisors bypassed parent group cleanup; WNOWAIT reservation now preserves ownership through kill-before-leader-reap.",
+    "Captured-reader creation formerly preceded the ownership guard; both reader construction failures now settle the spawned client.",
+    "Byte fields previously said attempted pwrite bytes; fields now report successful returned write bytes and attempts, matching lseek/write production code.",
+    "Semantic/source-clone/ordinary selectors formerly admitted some incompatible traces; strict mixed and preserved-only controls now reject them."
+  ],
+  "reviewer": "/root/validation_paths",
+  "source_sha256": {
+    "check.py": "5f64df8d2a54e35d60ecff04fb68737522773334f0cca9661c844e80c92c5a50",
+    "fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+    "launcher.py": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed",
+    "measure.py": "d14d51c18e0f59180f3eeef8534eaf517ed6821a40d54697673309b8fc1ae9ff",
+    "ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "proxy.py": "6deb3bdb11c9d32e72962aa16e16dff81b4696feb18ab4c2d1dadfdff824de98",
+    "run.py": "7fc75cd53a738256ef24ed1390c9a0fe99abaf8b48b0a6f74d2412935526c706"
+  },
+  "status": "accepted: final source, independently rerun small controls and terminal 13-row native CLI receipt"
+}

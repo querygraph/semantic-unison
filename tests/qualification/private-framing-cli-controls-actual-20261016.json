@@ -1,0 +1,762 @@
+{
+  "schema": "firstpair-private-framing-stdin-diagnostic-controls/1",
+  "state": "TWO_COMPILERS_TWENTY_TWO_FIXED_CLI_CONTROLS_PASSED_CLOSED",
+  "actual_owner_terminal": {
+    "pid": 99760,
+    "session": 17366,
+    "terminal_chunk": "24e618",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual write_stdin completion"
+  },
+  "closure": {
+    "child": {
+      "pid": 99761,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 99761,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "result": {
+    "schema": "unison-private-framing-cli-controls/1",
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66",
+    "source_sha256": {
+      "/Users/alexy/src/unison/src/dngPrivateData.mli": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89",
+      "/Users/alexy/src/unison/src/dngPrivateData.ml": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575",
+      "/Users/alexy/src/unison/tools/private-dng-framing/inspect.ml": "2a7eb3fd289c4291b8e2843e3dee0a6b20c66515595f13a7355ba3f3853e9465",
+      "/Users/alexy/src/unison/tools/private-dng-framing/controls.py": "1292a41561b60ea2b1198b62a9b8b3e8612a752441d69bd2716d42358b9d87e5"
+    },
+    "builds": [
+      {
+        "compiler_label": "stock",
+        "command": [
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "-I",
+          "+unix",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "unix.cmxa",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "inspect.ml",
+          "-o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/stock/private-framing-diagnostic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/stock/private-framing-diagnostic",
+        "binary_sha256": "30007fc90f38d4f0120d63f5ed17ca25e0d31f3bcba53350327d2e1679db8909"
+      },
+      {
+        "compiler_label": "ox",
+        "command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "-I",
+          "+unix",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "unix.cmxa",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "inspect.ml",
+          "-o",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/ox/private-framing-diagnostic"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "binary": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-cli-ijbb2n66/ox/private-framing-diagnostic",
+        "binary_sha256": "809eca68370754e78c225e4400b9b517940fdf8c62442282d30faea55dcda663"
+      }
+    ],
+    "controls": [
+      {
+        "compiler_label": "stock",
+        "name": "layout-False-False",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":59,\"requested_read_bytes\":59,\"read_requests\":7,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"big\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254433,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119585899799045,
+          "st_ctime_ns": 1792119585899867305,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254433,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119585899799045,
+          "st_ctime_ns": 1792119585899867305,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "layout-False-True",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":59,\"requested_read_bytes\":59,\"read_requests\":7,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254434,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586149268915,
+          "st_ctime_ns": 1792119586149328701,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254434,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586149268915,
+          "st_ctime_ns": 1792119586149328701,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "layout-True-False",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":93,\"requested_read_bytes\":93,\"read_requests\":8,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":8},{\"offset\":32,\"length\":8},{\"offset\":40,\"length\":48},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"big\",\"big_tiff\":true,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254435,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586157153685,
+          "st_ctime_ns": 1792119586157209166,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254435,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586157153685,
+          "st_ctime_ns": 1792119586157209166,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "layout-True-True",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":93,\"requested_read_bytes\":93,\"read_requests\":8,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":8},{\"offset\":32,\"length\":8},{\"offset\":40,\"length\":48},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":true,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254436,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586164850738,
+          "st_ctime_ns": 1792119586164909301,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254436,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586164850738,
+          "st_ctime_ns": 1792119586164909301,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "unrecognized-creator",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":44,\"requested_read_bytes\":44,\"read_requests\":4,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":false,\"reason\":\"unrecognized private creator\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254437,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586171813546,
+          "st_ctime_ns": 1792119586171867102,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254437,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586171813546,
+          "st_ctime_ns": 1792119586171867102,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "private-type-decline",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":38,\"requested_read_bytes\":38,\"read_requests\":3,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":false,\"framing_recognized\":false,\"reason\":\"diagnostic private type\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254438,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586179805275,
+          "st_ctime_ns": 1792119586179882047,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254438,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586179805275,
+          "st_ctime_ns": 1792119586179882047,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "non-TIFF-decline",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":8,\"requested_read_bytes\":8,\"read_requests\":1,\"read_ranges\":[{\"offset\":0,\"length\":8}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":false,\"framing_recognized\":false,\"reason\":\"diagnostic not TIFF\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254439,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586186935638,
+          "st_ctime_ns": 1792119586186998401,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254439,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586186935638,
+          "st_ctime_ns": 1792119586186998401,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "writable-mode",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254440,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586194081585,
+          "st_ctime_ns": 1792119586194134358,
+          "st_mode": 33152,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254440,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586194081585,
+          "st_ctime_ns": 1792119586194134358,
+          "st_mode": 33152,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "multiple-links",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254441,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586200864375,
+          "st_ctime_ns": 1792119586201275314,
+          "st_mode": 33024,
+          "st_nlink": 2
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254441,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586200864375,
+          "st_ctime_ns": 1792119586201275314,
+          "st_mode": 33024,
+          "st_nlink": 2
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "pipe",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254444,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586208408684,
+          "st_ctime_ns": 1792119586208461014,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254444,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586208408684,
+          "st_ctime_ns": 1792119586208461014,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "stock",
+        "name": "path-argument",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"no pathname or inspection arguments accepted\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254445,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586215672995,
+          "st_ctime_ns": 1792119586215735294,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254445,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586215672995,
+          "st_ctime_ns": 1792119586215735294,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "layout-False-False",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":59,\"requested_read_bytes\":59,\"read_requests\":7,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"big\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254468,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586895024894,
+          "st_ctime_ns": 1792119586895154464,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254468,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119586895024894,
+          "st_ctime_ns": 1792119586895154464,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "layout-False-True",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":59,\"requested_read_bytes\":59,\"read_requests\":7,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254471,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587149216703,
+          "st_ctime_ns": 1792119587149276427,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254471,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587149216703,
+          "st_ctime_ns": 1792119587149276427,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "layout-True-False",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":93,\"requested_read_bytes\":93,\"read_requests\":8,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":8},{\"offset\":32,\"length\":8},{\"offset\":40,\"length\":48},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"big\",\"big_tiff\":true,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254472,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587157210978,
+          "st_ctime_ns": 1792119587157266915,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254472,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587157210978,
+          "st_ctime_ns": 1792119587157266915,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "layout-True-True",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":93,\"requested_read_bytes\":93,\"read_requests\":8,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":8},{\"offset\":32,\"length\":8},{\"offset\":40,\"length\":48},{\"offset\":512,\"length\":6},{\"offset\":518,\"length\":8},{\"offset\":526,\"length\":6},{\"offset\":535,\"length\":1}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":true,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":3,\"original_offset\":17,\"byte_order\":\"little\"}]}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254473,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587164896667,
+          "st_ctime_ns": 1792119587164954202,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254473,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587164896667,
+          "st_ctime_ns": 1792119587164954202,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "unrecognized-creator",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":44,\"requested_read_bytes\":44,\"read_requests\":4,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28},{\"offset\":512,\"length\":6}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":512,\"block_length\":24,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":false,\"reason\":\"unrecognized private creator\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254474,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587172961559,
+          "st_ctime_ns": 1792119587173056198,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254474,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587172961559,
+          "st_ctime_ns": 1792119587173056198,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "private-type-decline",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":38,\"requested_read_bytes\":38,\"read_requests\":3,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":32,\"length\":2},{\"offset\":34,\"length\":28}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":false,\"framing_recognized\":false,\"reason\":\"diagnostic private type\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254475,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587180924821,
+          "st_ctime_ns": 1792119587180979108,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254475,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587180924821,
+          "st_ctime_ns": 1792119587180979108,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "non-TIFF-decline",
+        "returncode": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":8,\"requested_read_bytes\":8,\"read_requests\":1,\"read_ranges\":[{\"offset\":0,\"length\":8}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":false,\"framing_recognized\":false,\"reason\":\"diagnostic not TIFF\"}\n",
+        "stderr": "",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254476,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587188734218,
+          "st_ctime_ns": 1792119587188788867,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254476,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587188734218,
+          "st_ctime_ns": 1792119587188788867,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "writable-mode",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254477,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587196332354,
+          "st_ctime_ns": 1792119587196388873,
+          "st_mode": 33152,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254477,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587196332354,
+          "st_ctime_ns": 1792119587196388873,
+          "st_mode": 33152,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "multiple-links",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254478,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587203479869,
+          "st_ctime_ns": 1792119587203885436,
+          "st_mode": 33024,
+          "st_nlink": 2
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254478,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587203479869,
+          "st_ctime_ns": 1792119587203885436,
+          "st_mode": 33024,
+          "st_nlink": 2
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "pipe",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"caller must pass a private singly-linked mode0400 regular descriptor as stdin\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254481,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587211773441,
+          "st_ctime_ns": 1792119587211850038,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254481,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587211773441,
+          "st_ctime_ns": 1792119587211850038,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      },
+      {
+        "compiler_label": "ox",
+        "name": "path-argument",
+        "returncode": 2,
+        "stdout": "",
+        "stderr": "{\"schema\":\"unison-private-framing-diagnostic-error/1\",\"error\":\"Invalid_argument(\\\"no pathname or inspection arguments accepted\\\")\",\"logical_read_bytes\":0,\"requested_read_bytes\":0,\"read_ranges\":[],\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false}\n",
+        "before": {
+          "st_dev": 16777223,
+          "st_ino": 307254482,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587219154710,
+          "st_ctime_ns": 1792119587219221582,
+          "st_mode": 33024,
+          "st_nlink": 1
+        },
+        "after": {
+          "st_dev": 16777223,
+          "st_ino": 307254482,
+          "st_size": 1024,
+          "st_mtime_ns": 1792119587219154710,
+          "st_ctime_ns": 1792119587219221582,
+          "st_mode": 33024,
+          "st_nlink": 1
+        }
+      }
+    ],
+    "complete": true
+  },
+  "runtime_artifacts": [
+    {
+      "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-START.json",
+      "bytes": 1372,
+      "sha256": "cb296d0ddb95aa5126fc013c77cb2c9b4ad2144bfa264b30713328f459e3154c"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "65c2ceda9b7ea2842210e53279b861d25d3aed582ddb316d0cac64e3bc0ced70"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-STDOUT.txt",
+      "bytes": 25205,
+      "sha256": "8b888e3e4e9f4a6b49d0d8d5c7ea634c91779c3710c4650f8312d57eab908010"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-cli-controls-5fc934d8/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_epoch_checks": "Python control owner compared actual nanosecond FIVE plus mode/nlink for its own generated fixtures; child explicitly reports native_nanosecond_epoch_fence_performed_by_child=false",
+  "manual_entry_mapping_controls": {
+    "owner_terminal": {
+      "chunk": "b56359",
+      "exit_code": 0,
+      "running_session": false
+    },
+    "closure": {
+      "child": {
+        "pid": 186,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 186,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "artifacts": [
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-3tpsbi26/SHARED-START.json",
+        "bytes": 1152,
+        "sha256": "eb35dd3b5782f6d99b204058a2f5b1cc60cf6758fee0289ee1c03c39e857a4b9"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-3tpsbi26/SHARED-CLOSED.json",
+        "bytes": 496,
+        "sha256": "306f757bdf31b4863268c899678689f9852595b0b32627c778668466080b248b"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-3tpsbi26/SHARED-STDOUT.txt",
+        "bytes": 233,
+        "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-3tpsbi26/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "preserved_initial_compile_failure": {
+    "actual_terminal": {
+      "chunk": "b69aaa",
+      "exit_code": 1,
+      "running_session": false
+    },
+    "reason": "Warnings-as-errors rejected unqualified record fields. Module-qualified names fixed; zero diagnostic executable calls before failure.",
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-private-framing-cli-controls-d37cae4b/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c9fc4df85df0a5c22e40f4d486839ac27dffcbabfb5a745b6077f03cfc508b42"
+      },
+      {
+        "path": "/private/tmp/unison-private-framing-cli-controls-d37cae4b/SHARED-STDERR.txt",
+        "bytes": 11324,
+        "sha256": "ba386fa21a8f894508b3f2ca6e971c527a6a41de1372637b23fbad8425dcf5f9"
+      }
+    ]
+  },
+  "intermediate_without_range_reporting": {
+    "actual_terminal": {
+      "session": 38075,
+      "chunk": "382461",
+      "exit_code": 0,
+      "running_session": false
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-private-framing-cli-controls-2e70ad93/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "faeba5d6eb316ea86ff986fedd30e73a2b2e2e6830e64d47b0cc64081ceed942"
+      },
+      {
+        "path": "/private/tmp/unison-private-framing-cli-controls-2e70ad93/SHARED-STDOUT.txt",
+        "bytes": 22569,
+        "sha256": "e2b9e1a237842f62e900d430371115fa52fb48bdd56dbb9e6a6cf6f93fe0472d"
+      }
+    ]
+  },
+  "scope": [
+    "Generated inert inputs only; no camera/preservedclone/SDK/Adobe/Photo input or EXIO grant",
+    "Borrowed read-only stdin; no pathname opening or output files by native diagnostic; file position changes",
+    "Max331558 requested/delivered application bytes and773logical read ranges, not physical disk telemetry or OS RSS/CPU limits",
+    "Diagnostic headers do not prove semantic eligibility/closed references/vendor/pixels/full-fileSHA",
+    "Future input owner must independently verify exact native epoch/physical IO/current admission and retain unknown"
+  ]
+}

@@ -1,0 +1,441 @@
+{
+  "schema": "unison-dng-modern-scalars-receive-qualification/1",
+  "utc": "2026-10-14T19:58:09.830676+00:00",
+  "status": "passed scoped source/functional qualification",
+  "source_pins": {
+    "src/dngSemantic.ml": {
+      "bytes": 15057,
+      "sha256": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad"
+    },
+    "src/dngExtended.ml": {
+      "bytes": 277,
+      "sha256": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a"
+    },
+    "tests/dng_profile_v1/fixtures.py": {
+      "bytes": 28347,
+      "sha256": "8f668289b24e652162dc9ea1b8617bcefd3c5257d85d09645ccf3345a12215b7"
+    },
+    "tests/dng_profile_v1/run.py": {
+      "bytes": 17031,
+      "sha256": "c07978fd291503c4db6eb26810dfaa0641586cd107529e11f134fd948ef02343"
+    },
+    "tests/dng_profile_v1/test.ml": {
+      "bytes": 11403,
+      "sha256": "b425d170d814c69c19a20916eed1d4a130df5208f65f3c550f5ac5d27be7dc91"
+    },
+    "tests/sdk_container_receive/run.py": {
+      "bytes": 5166,
+      "sha256": "ffaf9fb8a1498b38d5c521c9499fcf1005b64a1fe012b2a9370465d2cd349c84"
+    },
+    "tests/sdk_container_receive/README.md": {
+      "bytes": 1686,
+      "sha256": "8a23c2fda6888ec615bd05d9bbb090a90d84c9f9ef05e55e62ba5df65f84066f"
+    },
+    "tests/sdk_container_receive/MODERN-SCALAR-NOTES.md": {
+      "bytes": 1864,
+      "sha256": "3e89c9eff36ab8fa6bebbfbd8fbaffc78acb47ccf8f7689650d7aa644dd68608"
+    }
+  },
+  "evidence": {
+    "stock-make": {
+      "path": "/private/tmp/unison-modern-scalars-stock-make.json",
+      "pin": {
+        "bytes": 42375,
+        "sha256": "34ef5889e276cab9f9f1ca0fe5b1b7b75bff1ac001ff36faea5979bfe8545709"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-0sw22_1v",
+      "compiler_version": "5.2.0",
+      "binary_sha256": "c62d3a6c28a1fef693076c64318839baa1f689e44f3d0de9202861dfdaaf0346",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "stock-dune": {
+      "path": "/private/tmp/unison-modern-scalars-stock-dune.json",
+      "pin": {
+        "bytes": 42181,
+        "sha256": "3089d186fb2eb572c837714c0bc56daf8476a29c3ab4daf3fc7334c26be29ac3"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-iqbcx3f7",
+      "compiler_version": "5.2.0",
+      "binary_sha256": "b0f6b019efc5558361d847930fe0b2b637c8d7319ec1be6ddf98272c386db6da",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "stock-kernel": {
+      "path": "/private/tmp/unison-dng-modern-scalars-kernel-stock.json",
+      "pin": {
+        "bytes": 259922,
+        "sha256": "6633623b21dcda0a263d52320f36e8c49570ec2e32afd38a719b8a30cd5c9975"
+      },
+      "test": {
+        "argv": [
+          "/private/tmp/unison-dng-profile-v1-vgx2lxff/fixed/dng-profile-test",
+          "/private/tmp/unison-dng-profile-v1-vgx2lxff/fixed/commands.tsv",
+          "/private/tmp/unison-dng-profile-v1-vgx2lxff/fixtures"
+        ],
+        "cwd": "/private/tmp/unison-dng-profile-v1-vgx2lxff/fixed",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7307558419997804,
+        "log": "/private/tmp/unison-dng-profile-v1-vgx2lxff/fixed/test.log",
+        "log_sha256": "f2226587c5c3f5b92ca24e6b90e6f64564b4c5d945f9d8f50d9798030f083ede",
+        "cases": 1253,
+        "assertions": 6288,
+        "maximum_cancellation_checks": 1037
+      },
+      "artifact_directory": "/private/tmp/unison-dng-profile-v1-vgx2lxff"
+    },
+    "stock-receive": {
+      "path": "/private/tmp/unison-sdk-container-receive-stock.json",
+      "pin": {
+        "bytes": 4519,
+        "sha256": "eb791bcee46e779de2ebe7dc98fd236e9ff22930a1e6b271e74f9fc325704cc0"
+      },
+      "receipt": {
+        "schema": "unison-existing-sdk-container-receive/1",
+        "workspace": "/private/tmp/unison-sdk-container-receive-2vb61bln",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "1a507ea5d4ad9b5f9d225d031df6c54aee6076289d5d746c247da69c9792bad0",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "5653b37df0463ba8748a23f12507e8853eb3ac89229bb0980ca315f7bae4f9b8",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "fa812722ef6780f9260fa72be40cb79e919da6ab085dd3a1df7ac235d68e9ec8",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "size": 48005534,
+            "xmp_offset": 630,
+            "xmp_size": 4543
+          },
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "size": 39016722,
+            "xmp_offset": 3714,
+            "xmp_size": 4543
+          },
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "size": 38237658,
+            "xmp_offset": 1134,
+            "xmp_size": 4543
+          }
+        ],
+        "binary_sha256": "c62d3a6c28a1fef693076c64318839baa1f689e44f3d0de9202861dfdaaf0346",
+        "build_receipt_sha256": "34ef5889e276cab9f9f1ca0fe5b1b7b75bff1ac001ff36faea5979bfe8545709",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "ffaf9fb8a1498b38d5c521c9499fcf1005b64a1fe012b2a9370465d2cd349c84",
+        "scope": "current production CLI/loopback/APFS and mock validation on retained SDK-generated originals; no SDK invocation, no target decode/current SDK receive qualification"
+      }
+    },
+    "stock-prior-jxl-fallback": {
+      "path": "/private/tmp/unison-sdk-container-receive-1mt_rc93/jxl-semantic/run-02.log",
+      "pin": {
+        "bytes": 2288,
+        "sha256": "e9b5ec69ecc60c0a8b406ff7e1e41677c70c401bae33f7301a3b4c81b8abd513"
+      },
+      "scope": "preceding production Make snapshot refused SDE but preserved exact target through general receiver clone"
+    },
+    "ox-make": {
+      "path": "/private/tmp/unison-modern-scalars-ox-make.json",
+      "pin": {
+        "bytes": 42381,
+        "sha256": "610c6314f38d6dbbf350684a4db75ace1d9dd55420b0e8a3a8c5ce4280aebf27"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-dm4st3bi",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "4023dd4ccd2ae6310cf203382f798c2e70e61d913f5c5085a9ba174c491e5cb1",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-dune": {
+      "path": "/private/tmp/unison-modern-scalars-ox-dune.json",
+      "pin": {
+        "bytes": 42185,
+        "sha256": "23cfe92e349b193ba3316e4c21634186747fbfd39b7ede763653bc70418e5580"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-zolm2l5a",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "f1b93eba5b4502f6d30efb3a0477033842e1ac6071cce719d14a7bcf3f529ae6",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-kernel": {
+      "path": "/private/tmp/unison-dng-modern-scalars-kernel-ox.json",
+      "pin": {
+        "bytes": 260273,
+        "sha256": "82c63763c4b6fc479eab8e4db797479ff4b54c71e98193ca2d93465ccf737eaa"
+      },
+      "test": {
+        "argv": [
+          "/private/tmp/unison-dng-profile-v1-imczt0qp/fixed/dng-profile-test",
+          "/private/tmp/unison-dng-profile-v1-imczt0qp/fixed/commands.tsv",
+          "/private/tmp/unison-dng-profile-v1-imczt0qp/fixtures"
+        ],
+        "cwd": "/private/tmp/unison-dng-profile-v1-imczt0qp/fixed",
+        "exit_code": 0,
+        "elapsed_seconds": 1.7817284330085386,
+        "log": "/private/tmp/unison-dng-profile-v1-imczt0qp/fixed/test.log",
+        "log_sha256": "f2226587c5c3f5b92ca24e6b90e6f64564b4c5d945f9d8f50d9798030f083ede",
+        "cases": 1253,
+        "assertions": 6288,
+        "maximum_cancellation_checks": 1037
+      },
+      "artifact_directory": "/private/tmp/unison-dng-profile-v1-imczt0qp"
+    },
+    "ox-receive": {
+      "path": "/private/tmp/unison-sdk-container-receive-ox.json",
+      "pin": {
+        "bytes": 4519,
+        "sha256": "1e88017bd3ce6db8ddd6a779fc1f06e18e6fbafa0416e74dec21463979a749c3"
+      },
+      "receipt": {
+        "schema": "unison-existing-sdk-container-receive/1",
+        "workspace": "/private/tmp/unison-sdk-container-receive-8638m5fr",
+        "cases": [
+          {
+            "codec": "uncompressed",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "f0c75f68d75b983ffc83b09d46bb0af03db4b9601d72007d6359ce85792d2ddc",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "1a507ea5d4ad9b5f9d225d031df6c54aee6076289d5d746c247da69c9792bad0",
+            "status": "passed"
+          },
+          {
+            "codec": "uncompressed",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "0f648c80f3fbde8160c4f9cfc8d7bb0d3b5e582b54a7b1e0a0afd6df6999830b",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "5653b37df0463ba8748a23f12507e8853eb3ac89229bb0980ca315f7bae4f9b8",
+            "status": "passed"
+          },
+          {
+            "codec": "jpeg",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "semantic",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "clone-off",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "9ea08eee82ad9229a659b24f033ef7c7b1f3ec284ba3aaba8401d5de971ee11a",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "protected-change",
+            "semantic": false,
+            "metadata_payload_bytes": null,
+            "target_sha256": "fa812722ef6780f9260fa72be40cb79e919da6ab085dd3a1df7ac235d68e9ec8",
+            "status": "passed"
+          },
+          {
+            "codec": "jxl",
+            "mode": "validation-reject",
+            "semantic": true,
+            "metadata_payload_bytes": 4543,
+            "target_sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "status": "passed"
+          }
+        ],
+        "inputs": [
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/uncompressed.dng",
+            "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+            "size": 48005534,
+            "xmp_offset": 630,
+            "xmp_size": 4543
+          },
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jpeg.dng",
+            "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+            "size": 39016722,
+            "xmp_offset": 3714,
+            "xmp_size": 4543
+          },
+          {
+            "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-8yaxonb8/fixtures/jxl.dng",
+            "sha256": "3696d39bb928d7b013ff33cba05caabbf89fae6359e84c5f1bc26a8ab3c61edf",
+            "size": 38237658,
+            "xmp_offset": 1134,
+            "xmp_size": 4543
+          }
+        ],
+        "binary_sha256": "4023dd4ccd2ae6310cf203382f798c2e70e61d913f5c5085a9ba174c491e5cb1",
+        "build_receipt_sha256": "610c6314f38d6dbbf350684a4db75ace1d9dd55420b0e8a3a8c5ce4280aebf27",
+        "sdk_result_sha256": "2cb79ab00574d56da16a66c696f0b82e27749dc43994f5084450e67115a1fae1",
+        "runner_sha256": "ffaf9fb8a1498b38d5c521c9499fcf1005b64a1fe012b2a9370465d2cd349c84",
+        "scope": "current production CLI/loopback/APFS and mock validation on retained SDK-generated originals; no SDK invocation, no target decode/current SDK receive qualification"
+      }
+    },
+    "ox-prior-jxl-fallback": {
+      "path": "/private/tmp/unison-sdk-container-receive-vy3lmzev/jxl-semantic/run-02.log",
+      "pin": {
+        "bytes": 2300,
+        "sha256": "840e12ab0ea30e1b806f583b98f304250e16b0e9de94b6e4343438138ee20e6f"
+      },
+      "scope": "preceding production Make snapshot refused SDE but preserved exact target through general receiver clone"
+    }
+  },
+  "limitations": [
+    "No SDK invocation; all validators in current receiving tests are mocks",
+    "Prior fixture SDK positives bind original files, not changed outputs",
+    "No camera/Lightroom/current-edits/physical block/performance/full M4-V/M5/M6 completion claim",
+    "Only extended /1 admits new shapes; v0 and wire unchanged; old peers may fall back"
+  ],
+  "sdk_source_authority": {
+    "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/dng_sdk/source/dng_tag_codes.h": {
+      "bytes": 16790,
+      "sha256": "779e4a6802bad289a39952d9c1599fb827131b736bf4689fa321ad6fcebc06ad"
+    },
+    "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/dng_sdk/source/dng_ifd.cpp": {
+      "bytes": 97540,
+      "sha256": "3f9a0e2e803d3a349c575b6c190bcfb6414bf293957a64b7dd6f125a95ee9d61"
+    }
+  }
+}

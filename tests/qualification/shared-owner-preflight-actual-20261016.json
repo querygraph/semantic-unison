@@ -1,0 +1,31 @@
+{
+  "state": "SHARED_OWNER_PREFLIGHT_AND_INSPECTOR_ARGUMENT_CONTROLS_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "chunk": "41ad96",
+    "exit": 0,
+    "running_session": false
+  },
+  "scope": "Pure shared command/budget and inspector argument refusals; unsupported waitid interpreter refused before pool read/acquisition. No compiler/inspector/Photo/SDK operation in this run.",
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-nd01wxof/SHARED-CLOSED.json",
+      "bytes": 424,
+      "sha256": "89cccadefdecbae743f3faeec61399503e2743975a0f54f079fdbb8156431d2b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-nd01wxof/SHARED-START.json",
+      "bytes": 754,
+      "sha256": "6325d61bd116fc6de5b7a2526310bbec582bfc32a30ed3939ec8513a0a98967b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-nd01wxof/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-nd01wxof/SHARED-STDOUT.txt",
+      "bytes": 233,
+      "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+    }
+  ]
+}

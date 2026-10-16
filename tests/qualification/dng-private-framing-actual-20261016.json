@@ -1,0 +1,300 @@
+{
+  "state": "ADOBE_MAKN_FRAMING_PREREQUISITE_FIXED_SYNTHETIC_CONTROLS_PASSED_NOT_ELIGIBILITY",
+  "production_profile_widened": false,
+  "private_camera_payload_opened": false,
+  "module_not_linked_in_production": true,
+  "actual_parent_terminal": {
+    "session": 19777,
+    "chunk": "a4a593",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-dng-private-framing-0a4ipfdd",
+  "closure": {
+    "child": {
+      "pid": 80040,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 80040,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "result": {
+    "state": "TWO_COMPILER_FIXED_FRAMING_CONTROLS_PASS",
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-_6fru9cl",
+    "source_pins": {
+      "/Users/alexy/src/unison/src/dngPrivateData.mli": "c20a6cc03d56db3e8839a31f766693e7291032236290bf7b6802f68a7776c2bd",
+      "/Users/alexy/src/unison/src/dngPrivateData.ml": "4cf18cffe72197a25d49608d8cbeda1db5fa3632980b152037d0af4c2b76459b",
+      "/Users/alexy/src/unison/tests/dng_private_data/test.ml": "e9b78c7f607f8f903bc64bf8fcaa1d5ecdc8d79d0a35fc12060b93a711440e46"
+    },
+    "runs": [
+      {
+        "label": "stock",
+        "phase": "compile",
+        "command": [
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "test.ml",
+          "-o",
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "stock",
+        "phase": "fixed-controls",
+        "command": [
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-_6fru9cl/stock/test"
+        ],
+        "returncode": 0,
+        "stdout": "PASS 47 checks; framing evidence only, no semantic eligibility\n",
+        "stderr": ""
+      },
+      {
+        "label": "ox",
+        "phase": "compile",
+        "command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "test.ml",
+          "-o",
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "ox",
+        "phase": "fixed-controls",
+        "command": [
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-_6fru9cl/ox/test"
+        ],
+        "returncode": 0,
+        "stdout": "PASS 47 checks; framing evidence only, no semantic eligibility\n",
+        "stderr": ""
+      }
+    ],
+    "semantic_eligibility_qualified": false
+  },
+  "entrypoint_controls": {
+    "terminal": {
+      "chunk": "1f3a05",
+      "exit": 0,
+      "running_session": false
+    },
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-4mab_ij6",
+    "closure": {
+      "child": {
+        "pid": 80185,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 80185,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "source_pins_unchanged": true,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  },
+  "earlier_runs": [
+    {
+      "chunk": "f80f86",
+      "exit": 2,
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ja6vucs8",
+      "reason": "strict ambiguous docstring warning; corrected comment; original failure retained"
+    },
+    {
+      "chunk": "45063d",
+      "exit": 2,
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ct72imfy",
+      "reason": "strict fragile result-pattern warnings in tests; corrected explicit constructors"
+    },
+    {
+      "session": 61809,
+      "chunk": "eae25e",
+      "exit": 0,
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-cut5jyhu",
+      "reason": "first two-compiler47checks before adding scoped manual target"
+    }
+  ],
+  "specification": {
+    "url": "https://helpx.adobe.com/content/dam/help/en/camera-raw/digital-negative/jcr_content/root/content/flex/items/position/position-par/download_section_733958301/download-1/DNG_Spec_1_7_1_0.pdf",
+    "version": "1.7.1.0",
+    "page": 41,
+    "scope": "Source review of tag grammar requirements, no copied specification text or downloaded PDF hash claimed."
+  },
+  "limits": [
+    "Framing only: no embedded maker graph/self-containment/raw validation or metadata patch authority.",
+    "No assumption that actual DA camera private block is Adobe/MakN; no second camera payload probe ran.",
+    "No SDK/native execution or canonicalIOlocking; CPU00..07 only. Serial one-job compilers and original fixed in-memory strings.",
+    "64MiB test uses synthetic reader and20returnedheaderbytes, not a64MiB file/payload or allocation/IO measurement.",
+    "Compile/test subprocess.run waits are observed in result; individual compiler/binary PIDs not recorded. Strict containing group census/reap covers group before token release."
+  ],
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/src/dngPrivateData.ml",
+      "bytes": 2611,
+      "sha256": "4cf18cffe72197a25d49608d8cbeda1db5fa3632980b152037d0af4c2b76459b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngPrivateData.mli",
+      "bytes": 1014,
+      "sha256": "c20a6cc03d56db3e8839a31f766693e7291032236290bf7b6802f68a7776c2bd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/dng_private_data/test.ml",
+      "bytes": 3426,
+      "sha256": "e9b78c7f607f8f903bc64bf8fcaa1d5ecdc8d79d0a35fc12060b93a711440e46"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/dng_private_data/run.py",
+      "bytes": 1968,
+      "sha256": "cfdfb164a2ae0dc69e429a3330bf74449b3e03071ef22010a2426880832b6c09"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/dng-private-data-next-profile.md",
+      "bytes": 3828,
+      "sha256": "7b4428dfcf6c896fd5df5c78ee56f7777b02edc78c81375c242ca258e3b2e07c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 17731,
+      "sha256": "b4a2aa8b14bb60c059ff34b49baf137e9c97a5fdd07f17e35ce6a896af1ae219"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 6425,
+      "sha256": "05f60cef84af6b6b12bb9aadc63aa941db3ff1b1e611cdfb62558e614bbcae6e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 5481,
+      "sha256": "b0a0395b4c57630a22b2262eab23f59d131eb5a5185e43cf9f396f7a5f87751e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/Makefile",
+      "bytes": 1326,
+      "sha256": "3783951da7dce2e0b8c3ee0d3ea4b7448f24b692c2b6a5568a4eb82f8abdc739"
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/dng_sdk/source/dng_info.cpp",
+      "bytes": 63259,
+      "sha256": "ad0f39425a16d9c267e53c7d36f0e172fb2dab2561bda21f9c8dce61174c6bdb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-dng-private-framing-0a4ipfdd/SHARED-START.json",
+      "bytes": 1254,
+      "sha256": "48078661fd656e3fd8efcfd11aa9fa2ce14e70ea2ac8bae742d89bcc303cb8cc"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-dng-private-framing-0a4ipfdd/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "400c39fe52457c874a47108dee8dc22bc223060db2daca3f6968875112a1cfe1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-dng-private-framing-0a4ipfdd/SHARED-STDOUT.txt",
+      "bytes": 1608,
+      "sha256": "4fb19941d4c66679731c1a10ec9b02eef1d32afd7e1834ffde8ec14d43afa799"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-dng-private-framing-0a4ipfdd/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-4mab_ij6/SHARED-START.json",
+      "bytes": 1054,
+      "sha256": "28f60c15681b9bb710c5f6b04d996e6765fa2edf1f66b02e09a78096c9255841"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-4mab_ij6/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "618521541c1458e734df5b87aa1d9123ee7d5a24130e22e7a033658ea8e7298e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-4mab_ij6/SHARED-STDOUT.txt",
+      "bytes": 233,
+      "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-4mab_ij6/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ja6vucs8/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "d792b477bf860906b71c68517e521b055954b2198a42e02c4a95fee60ed0a0f4"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ja6vucs8/SHARED-STDOUT.txt",
+      "bytes": 837,
+      "sha256": "72b5833b4412ffd1e5c5ed18cb8d6d46bedc50652b01237a711c84b89b005464"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ja6vucs8/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ct72imfy/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "6a120d710986933460a78c935af1e2fc0ec07b95087a28329ca9d1836db00feb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ct72imfy/SHARED-STDOUT.txt",
+      "bytes": 1045,
+      "sha256": "1727d42d2f6a56b070ef476acc585392b305fc5adc4527eb603e2f3d5078c321"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-ct72imfy/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-cut5jyhu/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "2add0dd34d585113838575baf8c3b4fc34d7b346a294e607fb8a2ff0672a2b97"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-cut5jyhu/SHARED-STDOUT.txt",
+      "bytes": 1608,
+      "sha256": "23766ea46157a2cc629dd9d6f919630eeb3ec2be6d95600e373cc4fe076fda7f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-framing-owner-cut5jyhu/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

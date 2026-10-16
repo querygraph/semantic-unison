@@ -1,0 +1,172 @@
+{
+  "schema": "unison-preview-geometry-interface-integration/1",
+  "utc": "2026-10-13T23:58:35.596716+00:00",
+  "status": "Metadata receipt checks passed; independent final document review pending, closed by a separate review receipt.",
+  "parent_commit": "941b99f3f48e56beca774899443cac752575dc47",
+  "input_packet": {
+    "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/RETURN-PACKET.json",
+    "bytes": 2500,
+    "sha256": "cf29ca2d407a9c67f286a92e686ce06cf052e0322ee92852b0ad0bdacdd00437"
+  },
+  "verified_packet_metadata_pins": [
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/COMPLETE.json",
+      "bytes": 943,
+      "sha256": "3213824b6d2610ab36d36f3c3f5c8b1e60962b36c1dc83d8624424d853e60a77"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/SUMMARY.json",
+      "bytes": 19614,
+      "sha256": "2b74c0f59f3729b3a574e51d2ef44eb18fb26f464101461ee63b7068cad51280"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-planning-20261013-v1/FINDINGS.txt",
+      "bytes": 3141,
+      "sha256": "ae1091a70a17c48651027db489d28d9ebf0e521e7bed84cadb89b7717f5f8110"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-controls-20261013-v1/COMPLETE.json",
+      "bytes": 613,
+      "sha256": "cd6e598862a60cfd34072f81951cea4cfb90f52a2216f9db4b998a0e55229cf7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/COMPLETE.json",
+      "bytes": 907,
+      "sha256": "20c80498a9ccedad7169a500ab5ce9868e34cfd33173a1b68ef7d895a65c9763"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "972260dc6729155242d3d0f3f5fc57f977b8081b7d2f0b8f104a59ed75ba5469"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-modern_native-20261013-v1/MISSING-CONTAINER-EXTERNAL-CONTEXT.json",
+      "bytes": 213901,
+      "sha256": "e736cbfd7d6273204a5de39f2488807b99ba362d488b0a7ecc2549782adcd5c6"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/COMPLETE.json",
+      "bytes": 909,
+      "sha256": "cb5f49cf41131575f8d2511ebcbbfb2d53d39d52ce7bad8407ab726b75d25725"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-jpeg-geometry-legacy_highest-20261013-v1/CLOSED.json",
+      "bytes": 108,
+      "sha256": "8baaa73f2f12a659fc17766be3879777012ebe2778cdc93f646a863b27333681"
+    }
+  ],
+  "final_geometry_publication": {
+    "path": "/Users/alexy/src/photo/completed-preview-geometry-publication-324918754b8644e3ba5f5ef8b40d428f/COMPLETE.json",
+    "bytes": 2624,
+    "sha256": "7c5602963c1ec7f56e73f39c324eb276b8704e6db4dd9e798f0d56c7644960da"
+  },
+  "earlier_abi_owner_publication": {
+    "path": "/Users/alexy/src/photo/preview-abi-owner-publication-bcdc5d3dede14316b237eab2eb43402a/COMPLETE.json",
+    "bytes": 1144,
+    "sha256": "7bd189319524caa14260921245984cfa4615df633149e2fab40381b5b5a6a54d"
+  },
+  "verified_abi_owner_metadata_pins": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/abi-layout-qualification-20261013T223153Z/ASSESSMENT.json",
+      "bytes": 8132,
+      "sha256": "52ea2ac1c22d68a8f6917845d01067af3690b61aa44ec11392757437e67ae8b3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/mass-preview-alignment-publication-66241f91142d4992a7333c88d2a8ba22/ORIGINAL-PREVIEW-OWNER-ACKNOWLEDGED.json",
+      "bytes": 2467,
+      "sha256": "028592026d6469077bc8172304a1ec1a0950005dd2b528ed9c57997cddd463a8"
+    }
+  ],
+  "completed_geometry": {
+    "modern_candidate_files": 39982,
+    "native_targets": 4299,
+    "legacy_highest_sections": 147460,
+    "files_or_sections": 191741,
+    "returned_marker_sof_bytes": 6308224,
+    "modern_native_returned_bytes": 1597728,
+    "legacy_returned_bytes": 4710496,
+    "framing_holds": 0,
+    "dimension_mismatches": 0,
+    "observed_identity_changes": 0,
+    "all_source_readers_closed": true
+  },
+  "planning_only": {
+    "stored_equal_crop": 135881,
+    "stored_within_crop": 11579,
+    "explicit_proxy": 1080,
+    "equal_crop_explicit_nonproxy": 133527,
+    "equal_crop_explicit_nonproxy_quality_final": 133181,
+    "provisional_viewport": [
+      5120,
+      2880
+    ],
+    "fit_both_axis_orders": 142029,
+    "fit_both_explicit_nonproxy": 139426,
+    "fit_swapped_only": 226,
+    "fit_neither": 5205,
+    "missing_container_historical_records": 67,
+    "excluded_modern_alternatives": 1469
+  },
+  "user_reported_coordination": {
+    "original_owner": "Photo-session /root/preview_implementation",
+    "final_geometry_handoff_sent": true,
+    "new_source_interface_ack": "requested; pending",
+    "prior_abi_owner_ack": "accepted; independently pinned above",
+    "native_oracle_window": "UNRELEASED",
+    "user_can_unlock_currently": false,
+    "fresh_receiver_admission_inferred": false,
+    "candidate_current_key_sets": 156253,
+    "candidate_images": 156255,
+    "candidate_production_admitted": false,
+    "known_exact_current_standalone_gaps": 737861,
+    "other_digest_retained_keys": 485185,
+    "known_no_file_keys": 252676,
+    "unknown_empty_digests": 39,
+    "gap_counts_reverified_by_this_geometry_review": false,
+    "proved_regeneration_requirement": false,
+    "shared_cpu_credits": 18,
+    "quasar_ten_contract": "unchanged"
+  },
+  "this_integration": {
+    "scope": "Source/interface receipt and document review only",
+    "preview_payload_reads_hashes_copies_decodes": 0,
+    "database_volume_native_access": 0,
+    "tests_builds_benchmarks": 0,
+    "production_writes_registration": 0,
+    "new_external_relay": false,
+    "competing_renderer_or_publisher": false,
+    "production_and_test_changes_from_941b99f": false,
+    "previous_validation_receipts": "Immutable; their document pins apply to commit 941b99f3f48e56beca774899443cac752575dc47."
+  },
+  "limits": [
+    "SOF dimensions and stored crop/proxy/quality do not prove decoded integrity, actual crop/orientation/viewport, edit freshness, native selected level or original-detail 1:1 recognition.",
+    "Returned marker/SOF bytes do not measure physical disk read amplification.",
+    "Missing-container records remain absent-file historical context; excluded alternatives are not counted as inspected modern files.",
+    "Stat-only unchanged Main/WAL/cache families do not constitute fresh native publication admission; no database is opened here.",
+    "No native registration/load/restart, private Adobe runtime/current-edit rendering or split-storage publication qualification; no new owner ACK/window readiness/receiver admission inferred.",
+    "ABI synthetic project-interface proof and older owner ACK retain their own scope; mutable publishedControls pins are historical and not refreshed."
+  ],
+  "document_pins": {
+    "SOL.md": {
+      "path": "/Users/alexy/src/unison/SOL.md",
+      "bytes": 174459,
+      "sha256": "a6a0e43a99f3f30baf27b37ab4e8c40f94147393f6f1727153b3fc36c7cffb10"
+    },
+    "doc/preview-design-integration.md": {
+      "path": "/Users/alexy/src/unison/doc/preview-design-integration.md",
+      "bytes": 35719,
+      "sha256": "926878a7c4d53ca167a8ce2354a64cc2ad0ad539a3577c003d7b5dc09c4f9c39"
+    },
+    "doc/lightroom-preview-placement.md": {
+      "path": "/Users/alexy/src/unison/doc/lightroom-preview-placement.md",
+      "bytes": 30434,
+      "sha256": "c5a0f3d8672820a1f5afd11111ec51abc06c4b08845a97dbcd586fbfccf80304"
+    },
+    "doc/implementation-status.md": {
+      "path": "/Users/alexy/src/unison/doc/implementation-status.md",
+      "bytes": 59573,
+      "sha256": "c04f88491831b4f5658531e2857d1456c2cbeeb71e07cd25fb5abc802097c106"
+    }
+  },
+  "independent_review": "doc/preview-geometry-independent-review-20261013.json"
+}

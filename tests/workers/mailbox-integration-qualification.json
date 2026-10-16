@@ -1,0 +1,212 @@
+{
+  "schema": "unison-worker-mailbox-integration/1",
+  "utc": "2026-10-14T09:31:53.837077+00:00",
+  "state": "PASSED_RUNTIME_MAILBOX_INTEGRATION_FULL_PORTABILITY_OPEN",
+  "baseCommit": "defdbd8",
+  "sourcePins": {
+    "src/semanticWorkers.ml": "ab9c58ebf3b8470a274f6c8bd2538cf9a03d7f7d42ac69bfc6d9b8e12ffe1c3e",
+    "src/semanticWorkers.mli": "cd76ab6751bca68ef387e5d9963faf711112fb6b6f72970fafcee7a81dc9acaf",
+    "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+    "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+    "tests/fd_ownership/run.py": "dd6021f5355afc27583bd5762cce3121c899d5e43a4fd74526cb8bec5a524bb0",
+    "tests/fd_ownership/test.ml": "dd310780a5a1a003d05bae9a813babf545bb0b5668511d57a8edcc0ddfe11a12",
+    "tests/worker_settlement/run.py": "64b8514a9ff0167369ec6372c5b77fcdb782513b8ebd0334333edd726eefba14",
+    "tests/workers/run.py": "e3bff0c899ef277a003fd4d2aaaf933ce5f1e0874c73e37bf86e0fd92eeb5f0e",
+    "tests/workers/test.ml": "cb2921e14654f7422f3e3b006ff7589ebee0341daa0e4b08c45f47f68ea2751b",
+    "tests/workers/mailbox_pressure.py": "1dbd15af56dd48f1fc0208a5b9e6a0a095dc178676f16927f975b38c1aecf067",
+    "tests/workers/mailbox_pressure.ml": "a4e2b2c551c53abb376661d374e80321103c152ac98ff81b1cce925df4e8c1de",
+    "tests/io_admission/runtime_run.py": "3e70d6e131e2a433094869413d1f88b4ba9f66adc9e2303f56eb8506b9b5c742"
+  },
+  "participants": [
+    {
+      "label": "stock",
+      "runs": {
+        "stress": {
+          "path": "/private/tmp/unison-mailbox-integrated-stress-stock.json",
+          "bytes": 4727,
+          "sha256": "13cd81c031dfd6a8b1e7e1e3f2f20f6505970c218fa5ecbb175557e93949ea04"
+        },
+        "apply": {
+          "path": "/private/tmp/unison-mailbox-integrated-apply-stock.json",
+          "bytes": 4734,
+          "sha256": "0f2d2acfbb4da8c2fd5051c38f449da504bfd3166e1c1b224c34bd3236eb6c48"
+        },
+        "settlement": {
+          "path": "/private/tmp/unison-mailbox-integrated-settlement-stock.json",
+          "bytes": 129308,
+          "sha256": "b965a74d5d2173a3f42109ee227fc0768d1b911d0003949d07462e68293c482a"
+        },
+        "fd-final": {
+          "path": "/private/tmp/unison-mailbox-integrated-fd-final-stock.json",
+          "bytes": 109151,
+          "sha256": "8f4e844404341a49e2c2473fbb22380b8e092863e441d72a7b66a8180423e35d"
+        },
+        "receive": {
+          "path": "/private/tmp/unison-mailbox-integrated-receive-stock.json",
+          "bytes": 5508,
+          "sha256": "2e17dcf7595d1dfde32ea1aea1b20dd6c07bcb1224541cddcd618b716041c040"
+        },
+        "helper": {
+          "path": "/private/tmp/unison-mailbox-integrated-helper-stock.json",
+          "bytes": 46899,
+          "sha256": "d211fefdab6e696aa43997b04d0544684aee267b7b614450f8b05ac92042a730"
+        },
+        "pressure": {
+          "path": "/private/tmp/unison-mailbox-integrated-pressure-stock.json",
+          "bytes": 1321,
+          "sha256": "2a9d281f55d4b76ed4a6a8327bfa24d094f61d3013b62677636b7003f79181eb"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z43iemj3",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z43iemj3/src/unison",
+          "bytes": 5465520,
+          "sha256": "9eaf99e6bdc0d2a5f394e246db63c15e1428dc71bf036b2c76ff1f44490d4a40"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z43iemj3/build.log",
+          "bytes": 64314,
+          "sha256": "352e2eb10976808794db43bf517ba8a20b28a08da41a0887b126001efeb98a55"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z43iemj3/selftest.log",
+          "bytes": 683,
+          "sha256": "563a4f97f34dfebddab8aefcab8ed16d2484d385a0f0265fcfc673a6e91f8ad8"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-mailbox-integrated-dune-stock.json",
+        "bytes": 34166,
+        "sha256": "87566dbaa23843fa2a77577bf3f44d5251d75a05cca4c118c887d4648baf93d4"
+      },
+      "frozenSourceInputs": 341,
+      "counts": {
+        "hashInspectionJobs": 3840,
+        "hashInspectionChecks": 8046,
+        "additionalInvalidCapacityChecks": 9,
+        "applyJobs": 384,
+        "applyChecks": 1255,
+        "settlementCases": 39,
+        "fdCases": 21,
+        "fdChecks": 117,
+        "adaptedHistoricalGuardNegatives": 3,
+        "receivingCases": 21,
+        "helperCases": 14,
+        "helperChecks": 84,
+        "pressureCases": 1
+      }
+    },
+    {
+      "label": "ox",
+      "runs": {
+        "stress": {
+          "path": "/private/tmp/unison-mailbox-integrated-stress-ox.json",
+          "bytes": 4747,
+          "sha256": "f1172c8e62c1436d678a868a22104fa466325d0ac1250e4247bd7435743ffd4f"
+        },
+        "apply": {
+          "path": "/private/tmp/unison-mailbox-integrated-apply-ox.json",
+          "bytes": 4754,
+          "sha256": "d6a55438c19c684a4c632ca67e31abc35552e522017773b068dca7201c447781"
+        },
+        "settlement": {
+          "path": "/private/tmp/unison-mailbox-integrated-settlement-ox.json",
+          "bytes": 129253,
+          "sha256": "1dd696acb4aca2f3f0af9ec0fa71ffee84deb0f794b420b616e1bb10750098a3"
+        },
+        "fd-final": {
+          "path": "/private/tmp/unison-mailbox-integrated-fd-final-ox.json",
+          "bytes": 111788,
+          "sha256": "949c5baad138791285763c884f4f3f42502a836523a59cb58db1b8881dec9b6a"
+        },
+        "receive": {
+          "path": "/private/tmp/unison-mailbox-integrated-receive-ox.json",
+          "bytes": 5508,
+          "sha256": "21d3b4f6be6b020ab4991cb02cb34bc1abb8c23f2a7e531bf29e332307fc9992"
+        },
+        "helper": {
+          "path": "/private/tmp/unison-mailbox-integrated-helper-ox.json",
+          "bytes": 46898,
+          "sha256": "56b1c526021a1110dd83a925f02cc1cf9ce62ee163599b66c28c76c6a267ee27"
+        },
+        "pressure": {
+          "path": "/private/tmp/unison-mailbox-integrated-pressure-ox.json",
+          "bytes": 1338,
+          "sha256": "e76735c18fcb4eb3f27e2a051aec71837e88b465cf3bc9469d29fe9131900d22"
+        }
+      },
+      "make": {
+        "root": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-vt64nh1a",
+        "binary": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-vt64nh1a/src/unison",
+          "bytes": 7372400,
+          "sha256": "21a16af9a86dd7b73693585a7590fa218bfac495e6ec3d9be8ce060c5875bc9f"
+        },
+        "buildLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-vt64nh1a/build.log",
+          "bytes": 75774,
+          "sha256": "307c7f39fbecafca1a96ccbcb4090681a70294ff333f3920c79507ded3ab569c"
+        },
+        "selftestLog": {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-vt64nh1a/selftest.log",
+          "bytes": 686,
+          "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+        },
+        "observedBuildExit": 0,
+        "observedSelftestExit": 0
+      },
+      "dune": {
+        "path": "/private/tmp/unison-mailbox-integrated-dune-ox.json",
+        "bytes": 34174,
+        "sha256": "ad813f2a84129f7c857803ef9cc3aa4fae2b5685105b0cfc2e56c296ce58ef5e"
+      },
+      "frozenSourceInputs": 341,
+      "counts": {
+        "hashInspectionJobs": 3840,
+        "hashInspectionChecks": 8046,
+        "additionalInvalidCapacityChecks": 9,
+        "applyJobs": 384,
+        "applyChecks": 1255,
+        "settlementCases": 39,
+        "fdCases": 21,
+        "fdChecks": 117,
+        "adaptedHistoricalGuardNegatives": 3,
+        "receivingCases": 21,
+        "helperCases": 14,
+        "helperChecks": 84,
+        "pressureCases": 1
+      }
+    }
+  ],
+  "checkedClosureStillRejected": {
+    "path": "/private/tmp/unison-mailbox-integrated-safe-gap.json",
+    "bytes": 12850,
+    "sha256": "2eed00d0758ac832ecf9de0126f8d979676193c7a197cd03b9ce9ac255393ed4"
+  },
+  "jpegReceiving": {
+    "path": "/private/tmp/unison-mailbox-integrated-jpeg.json",
+    "bytes": 2052,
+    "sha256": "fa4547b5eae0ea8c0edb4538c5e3fd1ab8cb54a7e3a736bd90bd0ba35e718863"
+  },
+  "dngRemote": {
+    "compiler": "OxCaml5.2.0+ox",
+    "observedExit": 0,
+    "scope": "Both semantic receiving directions, APFS source clone priority/properties/noop, saturated24-file bidirectional admission and both old-peer directions"
+  },
+  "generatedSourceScope": "Untracked ubase/projectInfo.ml is pinned to its compiler-matched Make snapshot; all other helper-linked sources match workspace",
+  "historicalNegativeScope": "Three historical acquisition-guard sections with only Queue allocation/enqueue adapted to the current mailbox ABI; not genuine complete prior binaries",
+  "rootOwnedReview": true,
+  "independentAgentReview": false,
+  "workerIntegrated": true,
+  "productionModeInterfaceSelected": false,
+  "limits": [
+    "Domain.spawn/mutex counter boundary and extension/FFI execution still manually audited",
+    "No compiler-safe full worker, persistence/powerloss or measured performance claim",
+    "Persistent allocation/native faults, fairness and hard RSS/global FD limits remain open",
+    "No SDK, Photo/Lightroom or native preview operations"
+  ],
+  "goalComplete": false
+}

@@ -1,0 +1,181 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/process_observation/probe_control.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"observed_child\": {\"command\": [\"/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14\", \"-c\", \"import time;time.sleep(.4)\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 36592, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false, \"process_observations\": {\"pid\": 36592, \"samples\": [{\"before_monotonic_ns\": 286927903279684, \"after_monotonic_ns\": 286927953188314, \"observation\": {\"resident_bytes\": 1409024, \"virtual_bytes\": 34412539904, \"threads\": 1, \"running_threads\": 1, \"total_user_native_units\": 4746441, \"total_system_native_units\": 1950051, \"pid\": 36592, \"available\": true}}, {\"before_monotonic_ns\": 286928003996771, \"after_monotonic_ns\": 286928053360962, \"observation\": {\"resident_bytes\": 10596352, \"virtual_bytes\": 35239239680, \"threads\": 1, \"running_threads\": 0, \"total_user_native_units\": 15469045, \"total_system_native_units\": 6028198, \"pid\": 36592, \"available\": true}}, {\"before_monotonic_ns\": 286928106562457, \"after_monotonic_ns\": 286928154951729, \"observation\": {\"resident_bytes\": 10596352, \"virtual_bytes\": 35239239680, \"threads\": 1, \"running_threads\": 0, \"total_user_native_units\": 15469045, \"total_system_native_units\": 6028198, \"pid\": 36592, \"available\": true}}], \"sample_limit\": 3, \"process_settlement_proved\": false, \"resource_release_authorized\": false, \"scope\": \"sampled per-process OS counters; not peaks, tree totals or hard caps\"}}, \"probe_children\": [{\"command\": [\"/private/tmp/unison-os-process-observation-20261016a/controls/probe\", \"36592\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"{\\\"available\\\":true,\\\"pid\\\":36592,\\\"backend\\\":\\\"Darwin-PROC_PIDTASKINFO\\\",\\\"resident_bytes\\\":1409024,\\\"virtual_bytes\\\":34412539904,\\\"threads\\\":1,\\\"running_threads\\\":1,\\\"total_user_native_units\\\":4746441,\\\"total_system_native_units\\\":1950051}\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 36593, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}, {\"command\": [\"/private/tmp/unison-os-process-observation-20261016a/controls/probe\", \"36592\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"{\\\"available\\\":true,\\\"pid\\\":36592,\\\"backend\\\":\\\"Darwin-PROC_PIDTASKINFO\\\",\\\"resident_bytes\\\":10596352,\\\"virtual_bytes\\\":35239239680,\\\"threads\\\":1,\\\"running_threads\\\":0,\\\"total_user_native_units\\\":15469045,\\\"total_system_native_units\\\":6028198}\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 36595, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}, {\"command\": [\"/private/tmp/unison-os-process-observation-20261016a/controls/probe\", \"36592\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"{\\\"available\\\":true,\\\"pid\\\":36592,\\\"backend\\\":\\\"Darwin-PROC_PIDTASKINFO\\\",\\\"resident_bytes\\\":10596352,\\\"virtual_bytes\\\":35239239680,\\\"threads\\\":1,\\\"running_threads\\\":0,\\\"total_user_native_units\\\":15469045,\\\"total_system_native_units\\\":6028198}\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 36597, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}], \"probe_sha256\": \"fc122e591ef1b5e2c943675c4193ac19b43870ba4e08597e7f894f7a91a1b017\", \"sdk_calls\": 0, \"scope\": \"three sampled per-process observations; not peak/tree RSS, thread cap or SDK qualification\"}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 36591,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "result": {
+    "observed_child": {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-c",
+        "import time;time.sleep(.4)"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 36592,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false,
+      "process_observations": {
+        "pid": 36592,
+        "samples": [
+          {
+            "before_monotonic_ns": 286927903279684,
+            "after_monotonic_ns": 286927953188314,
+            "observation": {
+              "resident_bytes": 1409024,
+              "virtual_bytes": 34412539904,
+              "threads": 1,
+              "running_threads": 1,
+              "total_user_native_units": 4746441,
+              "total_system_native_units": 1950051,
+              "pid": 36592,
+              "available": true
+            }
+          },
+          {
+            "before_monotonic_ns": 286928003996771,
+            "after_monotonic_ns": 286928053360962,
+            "observation": {
+              "resident_bytes": 10596352,
+              "virtual_bytes": 35239239680,
+              "threads": 1,
+              "running_threads": 0,
+              "total_user_native_units": 15469045,
+              "total_system_native_units": 6028198,
+              "pid": 36592,
+              "available": true
+            }
+          },
+          {
+            "before_monotonic_ns": 286928106562457,
+            "after_monotonic_ns": 286928154951729,
+            "observation": {
+              "resident_bytes": 10596352,
+              "virtual_bytes": 35239239680,
+              "threads": 1,
+              "running_threads": 0,
+              "total_user_native_units": 15469045,
+              "total_system_native_units": 6028198,
+              "pid": 36592,
+              "available": true
+            }
+          }
+        ],
+        "sample_limit": 3,
+        "process_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "sampled per-process OS counters; not peaks, tree totals or hard caps"
+      }
+    },
+    "probe_children": [
+      {
+        "command": [
+          "/private/tmp/unison-os-process-observation-20261016a/controls/probe",
+          "36592"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "{\"available\":true,\"pid\":36592,\"backend\":\"Darwin-PROC_PIDTASKINFO\",\"resident_bytes\":1409024,\"virtual_bytes\":34412539904,\"threads\":1,\"running_threads\":1,\"total_user_native_units\":4746441,\"total_system_native_units\":1950051}\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 36593,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/private/tmp/unison-os-process-observation-20261016a/controls/probe",
+          "36592"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "{\"available\":true,\"pid\":36592,\"backend\":\"Darwin-PROC_PIDTASKINFO\",\"resident_bytes\":10596352,\"virtual_bytes\":35239239680,\"threads\":1,\"running_threads\":0,\"total_user_native_units\":15469045,\"total_system_native_units\":6028198}\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 36595,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      {
+        "command": [
+          "/private/tmp/unison-os-process-observation-20261016a/controls/probe",
+          "36592"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "{\"available\":true,\"pid\":36592,\"backend\":\"Darwin-PROC_PIDTASKINFO\",\"resident_bytes\":10596352,\"virtual_bytes\":35239239680,\"threads\":1,\"running_threads\":0,\"total_user_native_units\":15469045,\"total_system_native_units\":6028198}\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 36597,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      }
+    ],
+    "probe_sha256": "fc122e591ef1b5e2c943675c4193ac19b43870ba4e08597e7f894f7a91a1b017",
+    "sdk_calls": 0,
+    "scope": "three sampled per-process observations; not peak/tree RSS, thread cap or SDK qualification"
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "io_acquired": false,
+  "source_sha256": {
+    "tests/process_observation/probe.py": "e71ad3f501b665f8f24631a5fed3a5a2934d91c965b07acbf8c2c434c5665a80",
+    "tests/process_observation/probe_control.py": "c0fe454329edecd5f497f8e1da1bb8c7e70170df4f2e0db9198b4de465643fc9",
+    "tests/process_observation/retained.py": "d798cdb1356b427902ebc83185efb77f51e5aea5b9656c91ec4c9bd4a0242144",
+    "tests/sdk_host_matrix/shared_child.py": "da0c26a3c79a22f3e20358bec99d87b5b8aa291855130b568de52a7489962b52"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "06d286",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

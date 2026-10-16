@@ -1,0 +1,90 @@
+{
+  "outcomes": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/workers/run.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/default/bin/ocamlopt",
+        "--build",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rm7wj0u5/src",
+        "--shared-mixed-only",
+        "--keep-work",
+        "--receipt",
+        "/private/tmp/unison-shared-mixed-stock-groups-20261016.json"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "PASS shared mixed helper permits=1 pid=39303 waited=0 observed-other-members=0\nPASS shared mixed helper permits=1 pid=39304 waited=0 observed-other-members=0\nPASS shared mixed permits=1 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=2 pid=39305 waited=0 observed-other-members=0\nPASS shared mixed helper permits=2 pid=39306 waited=0 observed-other-members=0\nPASS shared mixed permits=2 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=4 pid=39307 waited=0 observed-other-members=0\nPASS shared mixed helper permits=4 pid=39308 waited=0 observed-other-members=0\nPASS shared mixed permits=4 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=6 pid=39309 waited=0 observed-other-members=0\nPASS shared mixed helper permits=6 pid=39310 waited=0 observed-other-members=0\nPASS shared mixed permits=6 hashes=16 helpers=2 settled\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 39292,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/workers/run.py",
+        "--ocamlopt",
+        "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "--build",
+        "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ma367lji/src",
+        "--shared-mixed-only",
+        "--keep-work",
+        "--receipt",
+        "/private/tmp/unison-shared-mixed-ox-groups-20261016.json"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "PASS shared mixed helper permits=1 pid=39331 waited=0 observed-other-members=0\nPASS shared mixed helper permits=1 pid=39332 waited=0 observed-other-members=0\nPASS shared mixed permits=1 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=2 pid=39333 waited=0 observed-other-members=0\nPASS shared mixed helper permits=2 pid=39334 waited=0 observed-other-members=0\nPASS shared mixed permits=2 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=4 pid=39335 waited=0 observed-other-members=0\nPASS shared mixed helper permits=4 pid=39336 waited=0 observed-other-members=0\nPASS shared mixed permits=4 hashes=16 helpers=2 settled\nPASS shared mixed helper permits=6 pid=39337 waited=0 observed-other-members=0\nPASS shared mixed helper permits=6 pid=39338 waited=0 observed-other-members=0\nPASS shared mixed permits=6 hashes=16 helpers=2 settled\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 39313,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "refs": [
+    {
+      "path": "/private/tmp/unison-shared-mixed-stock-groups-20261016.json",
+      "bytes": 15632,
+      "sha256": "1e901fdb94dcf14b687d0fefb14be7e414d8efa8fba53a80443662be3e3b5742"
+    },
+    {
+      "path": "/private/tmp/unison-shared-mixed-ox-groups-20261016.json",
+      "bytes": 15636,
+      "sha256": "e249334e97c1c5e05f77ae49684cbfaa77469903c0b1ad4fd04930a109352e90"
+    }
+  ],
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "stock/Ox actual production helper direct wait0 and qualified pre-reap observed-other-members0 for8synthetic sleep helpers each; mixed64hashes/compiler CPU1/2/4/6; no SDK/ExifTool/payload/physicalIO/throughput claim",
+  "source_sha256": {
+    "tests/workers/test.ml": "763865c1f16638aafac7bc00d1c4cdc9e4d8faa7e8636b7f3916ac69f86c9a44",
+    "tests/workers/run.py": "82e931891ec10ccc892de8ba28e892dd0eebd3ab2ab3b726df2e75c3c489a1ff"
+  },
+  "actual_owner_terminal": {
+    "session_id": 56732,
+    "initial_chunk_id": "362603",
+    "terminal_chunk_id": "b69654",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

@@ -161,7 +161,9 @@ let hd = List.hd
 let tl = List.tl
 let nth = List.nth
 let length = List.length
-let mem = List.mem
+(* Eta-expand to retain this module's ordinary OCaml interface when the
+   compiler's List.mem also accepts OxCaml local arguments. *)
+let mem x l = List.mem x l
 let assoc = List.assoc
 let for_all = List.for_all
 let exists = List.exists

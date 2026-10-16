@@ -1,0 +1,100 @@
+{
+  "schema": "unison-private-framing-input-qualification/1",
+  "return": {
+    "path": "/private/tmp/unison-private-framing-input-v2-956e802a/OWNER-RETURN.json",
+    "bytes": 5482,
+    "sha256": "8962c699e7a659a2a283078d07975c202c2182a4bae783079f89e2741ccfe821"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/SHARED-START.json",
+      "bytes": 1931,
+      "sha256": "aee5c64fa3de10855709e6ec0d7fa21fdca5ca6c3aa07c9c1381f1df98bb836c"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "770adea29657ae40a2d5c6bc1ddce6dd4209982fabaee4a2cd291c0c742e8d98"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/SHARED-IO-ATTEMPT.json",
+      "bytes": 604,
+      "sha256": "41ee2cefc2cfe16a12c74c966e5ea079ce41e8d910bdce3aa24688279c685f2f"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/DIAGNOSTIC-WORKER-START.json",
+      "bytes": 361,
+      "sha256": "ba565d6846b160e62d1559f8351b0cbe886658836e602aaea80d91aa61aeaab9"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/SHARED-STDOUT.txt",
+      "bytes": 2262,
+      "sha256": "50de7930740f4591b074d533bba74e5d3c4691e89ca0d16cff13ba3ef33b55c8"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-v2-956e802a/OWNER-TERMINAL.json",
+      "bytes": 269,
+      "sha256": "8613fe1598135791eea37c05a5baf7ce48cd838219f4bf9f945e36d9cc9c6630"
+    },
+    {
+      "path": "/private/tmp/unison-private-framing-input-admission-v2.json",
+      "bytes": 2113,
+      "sha256": "e3d65a1963bc5b5272b6b06cf7fc9f6f2c4918f02277a2fbd9a38504699ec9f5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/private-dng-framing-input-request-v2.json",
+      "bytes": 9112,
+      "sha256": "dc993b711007e441ada28aedda65ad4a62a5d0af8caab2b952f37bcb97dc61af"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/private-dng-framing-input-plan-v1.json",
+      "bytes": 1916,
+      "sha256": "2236f3563d9756e55837d772021dcba8920a4c53ff8bfb6547631b4c16ba68ae"
+    }
+  ],
+  "actual_terminal": {
+    "chunk": "914a6a",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "result": {
+    "schema": "unison-private-framing-input-result/1",
+    "complete": true,
+    "calls": [
+      {
+        "compiler_label": "stock",
+        "actual_wait_exit": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":706,\"requested_read_bytes\":706,\"read_requests\":6,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":2},{\"offset\":10,\"length\":676},{\"offset\":10970,\"length\":6},{\"offset\":10976,\"length\":8},{\"offset\":10984,\"length\":6}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":10970,\"block_length\":6576,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":6556,\"original_offset\":1404,\"byte_order\":\"little\"}]}\n",
+        "stderr": ""
+      },
+      {
+        "compiler_label": "ox",
+        "actual_wait_exit": 0,
+        "stdout": "{\"schema\":\"unison-private-framing-diagnostic/1\",\"logical_read_bytes\":706,\"requested_read_bytes\":706,\"read_requests\":6,\"read_ranges\":[{\"offset\":0,\"length\":8},{\"offset\":8,\"length\":2},{\"offset\":10,\"length\":676},{\"offset\":10970,\"length\":6},{\"offset\":10976,\"length\":8},{\"offset\":10984,\"length\":6}],\"read_limit_bytes\":331558,\"diagnostic_only\":true,\"semantic_eligibility\":false,\"full_file_sha256_computed\":false,\"sdk_validation\":false,\"native_nanosecond_epoch_fence_performed_by_child\":false,\"locator_completed\":true,\"block_offset\":10970,\"block_length\":6576,\"container_byte_order\":\"little\",\"big_tiff\":false,\"framing_recognized\":true,\"sections\":[{\"payload_offset_in_private_block\":20,\"payload_length\":6556,\"original_offset\":1404,\"byte_order\":\"little\"}]}\n",
+        "stderr": ""
+      }
+    ],
+    "source_sha256_computed": false,
+    "semantic_eligibility": false,
+    "sdk_validation": false,
+    "source_native_epoch_before_after": {
+      "st_dev": 16777223,
+      "st_ino": 307228717,
+      "st_size": 193851848,
+      "st_mtime_ns": 1792099229810540469,
+      "st_ctime_ns": 1792113844382073309,
+      "st_mode": 33024,
+      "st_nlink": 1,
+      "st_uid": 501
+    },
+    "source_native_epoch_verified": true,
+    "total_logical_read_bytes": 1412
+  },
+  "independent_audit": "Reparsed two raw stdout protocols, exact ranges/sums/body disjointness, program wait0s, group-before-reap proof, source native8-field lstat and all11current execution source hashes. No clone content reopened for audit. Parent locks closed per held-owner receipt, not inferred from ps.",
+  "scope": "One clone framing diagnostic only; no semantic eligibility/SDK/fullhash/receiving or pixel claim."
+}

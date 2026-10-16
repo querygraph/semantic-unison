@@ -1,0 +1,476 @@
+{
+  "schema": "unison-nonce-ownership-qualification-v1",
+  "date": "2026-10-13",
+  "status": "Runtime qualified; independent harness source/artifact review pending.",
+  "owner": "/root/scratch_integration",
+  "sources": {
+    "src/semanticRemote.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+    "tests/nonce_ownership/run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+    "tests/nonce_ownership/harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+    "tests/nonce_ownership/test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303"
+  },
+  "production_nonce_sha256": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+  "original_negative_provenance": {
+    "commit": "e9be47381d35af82d816b1f80df348ddf7409180",
+    "source_sha256": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+    "nonce_sha256": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb"
+  },
+  "counts_per_compiler": {
+    "positive_groups": 13,
+    "safe_negative_controls_rejected": 2
+  },
+  "scope": [
+    "The entire production nonce() function is extracted byte-for-byte and compiled unchanged with private module aliases. No production module or nonce body is edited for positive controls.",
+    "Unix/Bytes fault shims inject named finite exceptions/results while delegating actual random-file opens, reads and closes to the native Unix module.",
+    "Successful nonce length is 32 and consumes 32 actual OS random bytes; owned descriptors settle once.",
+    "Constructor OOM precedes native open; native open failure, post-open read-dispatch OOM, read failure, initial/partial EOF, finite EINTR plus short reads and consumed-close EIO preserve the specified primary errors.",
+    "Three reuse controls close the random descriptor, immediately allocate a regular synthetic sentinel at that exact descriptor number, and verify its inode/type/content survive source cleanup retry paths.",
+    "Pinned original e9be473 function opens an actual descriptor before constructor OOM: the negative measures the live leaked descriptor before fixture cleanup and rejects the regression.",
+    "The private unchecked-close negative measures two native closes and a lost reused sentinel, then rejects the regression. All positive and negative fixture-owned descriptors are observed closed before fixture completion."
+  ],
+  "production_function_source_review": {
+    "reviewer": "/root/scratch_integration",
+    "observed": "Buffer, ownership flag and read/close callbacks precede open. The post-open read/close/result path is guarded, close clears ownership before the native call, and cleanup exceptions preserve the first error.",
+    "scope": "Read-only review of the extracted function and named finite fault contract; no whole-module RPC or native transfer proof."
+  },
+  "matrix_index": {
+    "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/verification.json",
+    "sha256": "38b83e51cf8e6cf7db3d31576f3cd0a15852bac03c2c229df51a63828e70bf92"
+  },
+  "matrix_runner": {
+    "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/run.py",
+    "sha256": "8a08206de64f0aa61bcdf03b6fe92c8511d6a59232f12c7af432c274f9f4ae55"
+  },
+  "runs": {
+    "stock": {
+      "compiler": "/usr/local/bin/ocamlopt",
+      "compiler_resolved": "/usr/local/Cellar/ocaml/5.5.1/bin/ocamlopt.opt",
+      "compiler_sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1",
+      "compiler_version": "5.5.1",
+      "cases": [
+        {
+          "case": "positive",
+          "runner_exit": 0,
+          "fixture_exit": 0,
+          "groups": 13,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/usr/local/bin/ocamlopt",
+            "--keep-work"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-swc2x_91/verification.json",
+            "sha256": "006fb854b6e4ac35ab48d686fa7b6678d8a42fe3fc2cfce7b9ddc26c83667e0d"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/stock-positive.log",
+            "sha256": "3d8f9f398d64bf712031c9ae9fa1419e51212aea99f2c5a816c74220c0f3a90b"
+          },
+          "compiled_nonce_body_sha256": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+          "exact_current_function": true,
+          "exact_original_function": false,
+          "observations": [
+            "OBS success open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS constructor-oom-pre-open open_attempts=0 opens=0 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=1 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS native-open-error open_attempts=1 opens=0 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS post-open-read-dispatch-oom open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS read-error open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS eof open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS prefix-then-eof open_attempts=1 opens=1 reads=2 actual_reads=1 bytes=8 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS eintr-and-short-reads open_attempts=1 opens=1 reads=8 actual_reads=5 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=3 random_alive=false reused=false sentinel_alive=false",
+            "OBS close-eio open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=1 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS read-error-before-close-eio open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=1 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=1 eintr=0 random_alive=false reused=true sentinel_alive=true",
+            "OBS post-close-string-oom-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=1 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=true sentinel_alive=true",
+            "OBS primary-read-error-close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=1 eintr=0 random_alive=false reused=true sentinel_alive=true"
+          ],
+          "fixture_cleanup": [
+            "CLEAN success owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN constructor-oom-pre-open owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN native-open-error owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN post-open-read-dispatch-oom owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN read-error owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN eof owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN prefix-then-eof owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN eintr-and-short-reads owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN close-eio owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN read-error-before-close-eio owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN post-close-string-oom-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN primary-read-error-close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-swc2x_91",
+            "pins": {
+              "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "harness.cmi": "77cd94cbcd40588d36e83732326d4f5b5802d56783674ad08903ad17e613c42d",
+              "harness.cmx": "5e388ccc64f3ac50c79e3e79befa93536172900c84c961372fb6391593218206",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "7466f08bdcd9c4ef518dbbdac44175b2c4600e8ad529c4bd1f59c35e2df2e0f9",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "11c8c1a0c3bef94174261d96879130b1cecb933df66efbd051a0d11a0785a56d",
+              "nonceFunction.cmi": "fd4e935284d85c7c9c2ca345f8e12b5a1a9c86fc88d950a1277605cc5c1e881a",
+              "nonceFunction.cmx": "e08cf3f84563cf9917af433a2669e8f5ac0a459e380c951981c39fc0602b2095",
+              "nonceFunction.ml": "95ea3a87e80fa279d627402e783c38b24f1600fc98f61880195b92813830861c",
+              "nonceFunction.o": "ff366917642e6207eb39e02ed30056b4b367aee6e8b36e8cf21ae54cb79307ef",
+              "reuse-sentinel": "5c53eb47b830e9d17eeb0ff8b533edaf4cc67919d8b452dc22e78b5ada1b462f",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "94a4f04a1423c8237a345788c478bc6f5314e19c8bae9bc772149ab38f2b1ed9",
+              "test.cmx": "d75ddff1a29566c0917b631454f3aa687b945608dc19a71321590b291f1b3460",
+              "test.log": "66379724367b571515ba513e0ec688d16ab0de682259fe342f42979f55b59eb8",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "0666eea5d038ce7338bf2af8dbbc68420af07fa8e3d8944b724a81254122ed25",
+              "verification.json": "006fb854b6e4ac35ab48d686fa7b6678d8a42fe3fc2cfce7b9ddc26c83667e0d"
+            }
+          }
+        },
+        {
+          "case": "original-constructor",
+          "runner_exit": 0,
+          "fixture_exit": 2,
+          "groups": 0,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/usr/local/bin/ocamlopt",
+            "--keep-work",
+            "--negative-control",
+            "original-constructor"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-1_ky9z7i/verification.json",
+            "sha256": "37275b98bc25af79b20839ecfb10def58f4c600a6d1b7b8bbdbfcaee4b90176e"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/stock-original-constructor.log",
+            "sha256": "46752844b3969b3c51967645c30415ae6a23a40cdd1897be799e847232416239"
+          },
+          "compiled_nonce_body_sha256": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+          "exact_current_function": false,
+          "exact_original_function": true,
+          "observations": [
+            "OBS constructor-oom-pre-open open_attempts=1 opens=1 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=1 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=true reused=false sentinel_alive=false"
+          ],
+          "fixture_cleanup": [
+            "CLEAN constructor-oom-pre-open owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-1_ky9z7i",
+            "pins": {
+              "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "harness.cmi": "77cd94cbcd40588d36e83732326d4f5b5802d56783674ad08903ad17e613c42d",
+              "harness.cmx": "5e388ccc64f3ac50c79e3e79befa93536172900c84c961372fb6391593218206",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "7466f08bdcd9c4ef518dbbdac44175b2c4600e8ad529c4bd1f59c35e2df2e0f9",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "4d77880fc4f33ddbc38b438b3e16630e9cf1772cbb118adf4173fe7f271a3840",
+              "nonceFunction.cmi": "126fabfec0b375896ce0238a30275d7711ed0ef780050814f235c9d0ead78b91",
+              "nonceFunction.cmx": "5c9d60db285823eb9b0aae9c5487e72958ba78242e727134d4b37d7847c1d884",
+              "nonceFunction.ml": "6bdb8e32b4159a0b2cf7cc9f83fd978559b0053a3d811ddf5f3ee301891835fc",
+              "nonceFunction.o": "72b28a406c0570d8870f443e6367204ac24c78a9022231817319851e3e679316",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "d0ef01fa22883645e7b5031aad2b6716f06d42527b1c6a7dfccd21e7f5abd659",
+              "test.cmx": "95cdd2cebf3fd692d7f92a04beb78424b00ca663e1730a3094b70ed3a09b17ab",
+              "test.log": "6d576fdb537011f0700fe88a77709df5fe9dc055ae54040b3f6b9a93eb0ebda9",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "0666eea5d038ce7338bf2af8dbbc68420af07fa8e3d8944b724a81254122ed25",
+              "verification.json": "37275b98bc25af79b20839ecfb10def58f4c600a6d1b7b8bbdbfcaee4b90176e"
+            }
+          }
+        },
+        {
+          "case": "unchecked-close",
+          "runner_exit": 0,
+          "fixture_exit": 2,
+          "groups": 0,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/usr/local/bin/ocamlopt",
+            "--keep-work",
+            "--negative-control",
+            "unchecked-close"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-d2j9gdn6/verification.json",
+            "sha256": "c37729c08d19068bcc029a96eb58b393a1139bf0909421a82b63f00dff37c0f2"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/stock-unchecked-close.log",
+            "sha256": "7d0d5e3aec4fa291742364ca1d54ecb168f4db2a1f652c73283be7af28cacc9e"
+          },
+          "compiled_nonce_body_sha256": "b98afb49a8136396bfba59676a8165b4f0df6a0d11dc4095140020769661551c",
+          "exact_current_function": false,
+          "exact_original_function": false,
+          "observations": [
+            "OBS close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=2 actual_closes=2 constructor_faults=0 string_faults=0 read_faults=0 close_faults=2 eintr=0 random_alive=false reused=true sentinel_alive=false"
+          ],
+          "fixture_cleanup": [
+            "CLEAN close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-d2j9gdn6",
+            "pins": {
+              "build.log": "f5e3d62e017fc6c26d865ab93b48001c14f3893953400765e5bfc49a847406bd",
+              "harness.cmi": "77cd94cbcd40588d36e83732326d4f5b5802d56783674ad08903ad17e613c42d",
+              "harness.cmx": "5e388ccc64f3ac50c79e3e79befa93536172900c84c961372fb6391593218206",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "7466f08bdcd9c4ef518dbbdac44175b2c4600e8ad529c4bd1f59c35e2df2e0f9",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "7fe366c677f5d0163e9e8d1a061df0cc12369958eda78df1019fa0dc99ee600f",
+              "nonceFunction.cmi": "fd4e935284d85c7c9c2ca345f8e12b5a1a9c86fc88d950a1277605cc5c1e881a",
+              "nonceFunction.cmx": "e08cf3f84563cf9917af433a2669e8f5ac0a459e380c951981c39fc0602b2095",
+              "nonceFunction.ml": "7ac208e1902d2077ef2928595a7c854a7e2a34f51faf0ab761c08311beaa78b1",
+              "nonceFunction.o": "2a154d3fb619f0339d01337b612d2179777e4ad0d835c802cbf04552bf081c86",
+              "reuse-sentinel": "5c53eb47b830e9d17eeb0ff8b533edaf4cc67919d8b452dc22e78b5ada1b462f",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "94a4f04a1423c8237a345788c478bc6f5314e19c8bae9bc772149ab38f2b1ed9",
+              "test.cmx": "d75ddff1a29566c0917b631454f3aa687b945608dc19a71321590b291f1b3460",
+              "test.log": "da5f31faf16d5ce78b0476480a4239ee2bdc410a26797d3c3a252b2606fc7ac2",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "0666eea5d038ce7338bf2af8dbbc68420af07fa8e3d8944b724a81254122ed25",
+              "verification.json": "c37729c08d19068bcc029a96eb58b393a1139bf0909421a82b63f00dff37c0f2"
+            }
+          }
+        }
+      ]
+    },
+    "ox": {
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "compiler_resolved": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "compiler_version": "5.2.0+ox",
+      "cases": [
+        {
+          "case": "positive",
+          "runner_exit": 0,
+          "fixture_exit": 0,
+          "groups": 13,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "--keep-work"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-frxu5cgl/verification.json",
+            "sha256": "78082ef99026de196da30bf27e4c546227652d02e8e8af2efbf75c56f18c3a52"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/ox-positive.log",
+            "sha256": "fb5ffbacee1642ce114d5c2d07f8fe4416ddaa308fe3349aa4eb41b179b2c4fd"
+          },
+          "compiled_nonce_body_sha256": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+          "exact_current_function": true,
+          "exact_original_function": false,
+          "observations": [
+            "OBS success open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS constructor-oom-pre-open open_attempts=0 opens=0 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=1 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS native-open-error open_attempts=1 opens=0 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS post-open-read-dispatch-oom open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS read-error open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS eof open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS prefix-then-eof open_attempts=1 opens=1 reads=2 actual_reads=1 bytes=8 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS eintr-and-short-reads open_attempts=1 opens=1 reads=8 actual_reads=5 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=0 eintr=3 random_alive=false reused=false sentinel_alive=false",
+            "OBS close-eio open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=1 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS read-error-before-close-eio open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=1 eintr=0 random_alive=false reused=false sentinel_alive=false",
+            "OBS close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=0 close_faults=1 eintr=0 random_alive=false reused=true sentinel_alive=true",
+            "OBS post-close-string-oom-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=1 read_faults=0 close_faults=0 eintr=0 random_alive=false reused=true sentinel_alive=true",
+            "OBS primary-read-error-close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=0 bytes=0 close_calls=1 actual_closes=1 constructor_faults=0 string_faults=0 read_faults=1 close_faults=1 eintr=0 random_alive=false reused=true sentinel_alive=true"
+          ],
+          "fixture_cleanup": [
+            "CLEAN success owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN constructor-oom-pre-open owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN native-open-error owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN post-open-read-dispatch-oom owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN read-error owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN eof owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN prefix-then-eof owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN eintr-and-short-reads owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN close-eio owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN read-error-before-close-eio owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN post-close-string-oom-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true",
+            "CLEAN primary-read-error-close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-frxu5cgl",
+            "pins": {
+              "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "harness.cmi": "549bdfa11ef279a45172535aa41bd83f15ba9cef3b5cb7467002a8b3a76afa25",
+              "harness.cmx": "7acea5072ca416b1e53c19cf98749d31df6612818d53da0fc90d56f412f7990f",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "bb91a8085013259bd7badd6bd9fa5ec4d3351063a10fbcc6b61103588d044875",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "d774a8fbd7ef5d4796c04ba2085abe183fb71d937bc1bacdda51810a34320c51",
+              "nonceFunction.cmi": "862d347af62b672d56d522d93c999c523c50a1f4e48da0017efb02ed1160a385",
+              "nonceFunction.cmx": "af9cb97774f1a363d69dd41bef36f9e2ea2cf610693cfb42d5e7bc1e37cfbe49",
+              "nonceFunction.ml": "95ea3a87e80fa279d627402e783c38b24f1600fc98f61880195b92813830861c",
+              "nonceFunction.o": "d4af2eb6cc4dd77f7e6cc4e6cca776d7867e54cba197b2dacb8f5cb37def13d7",
+              "reuse-sentinel": "5c53eb47b830e9d17eeb0ff8b533edaf4cc67919d8b452dc22e78b5ada1b462f",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "7b1bbba0de4394bad4b61f8e05909392b217252a712c4199cb66d9adba895c0e",
+              "test.cmx": "fd4e92922242bdb8d7ee5955d0222f3c05d7371a2ab803cd4244b5ef9c023f4a",
+              "test.log": "66379724367b571515ba513e0ec688d16ab0de682259fe342f42979f55b59eb8",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "b83158ff013c204164706bd44594e84ebb145266032141d57622fed3910d9345",
+              "verification.json": "78082ef99026de196da30bf27e4c546227652d02e8e8af2efbf75c56f18c3a52"
+            }
+          }
+        },
+        {
+          "case": "original-constructor",
+          "runner_exit": 0,
+          "fixture_exit": 2,
+          "groups": 0,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "--keep-work",
+            "--negative-control",
+            "original-constructor"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-pc1iz_i3/verification.json",
+            "sha256": "f1910e91c240c6742b2c3e2ff22801f8089e8922a4a8efaee79b53f706a6262a"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/ox-original-constructor.log",
+            "sha256": "9289f7c9ea549b6542c87bd5deace50a69ee875e6d22f0b3053e9b27cc1621a5"
+          },
+          "compiled_nonce_body_sha256": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+          "exact_current_function": false,
+          "exact_original_function": true,
+          "observations": [
+            "OBS constructor-oom-pre-open open_attempts=1 opens=1 reads=0 actual_reads=0 bytes=0 close_calls=0 actual_closes=0 constructor_faults=1 string_faults=0 read_faults=0 close_faults=0 eintr=0 random_alive=true reused=false sentinel_alive=false"
+          ],
+          "fixture_cleanup": [
+            "CLEAN constructor-oom-pre-open owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-pc1iz_i3",
+            "pins": {
+              "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+              "harness.cmi": "549bdfa11ef279a45172535aa41bd83f15ba9cef3b5cb7467002a8b3a76afa25",
+              "harness.cmx": "7acea5072ca416b1e53c19cf98749d31df6612818d53da0fc90d56f412f7990f",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "bb91a8085013259bd7badd6bd9fa5ec4d3351063a10fbcc6b61103588d044875",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "5f9ee160f4294184c98e1e05324983388f4c0f0dfe2c0007cad857095fa3406c",
+              "nonceFunction.cmi": "3549352694e68de47d66386dfd0293d24165a0e7a1be192746ab4e67c24c6932",
+              "nonceFunction.cmx": "01d754295ae9de353ffe9191eed8a3458c19d382ea77f149877a8f5523e87a02",
+              "nonceFunction.ml": "6bdb8e32b4159a0b2cf7cc9f83fd978559b0053a3d811ddf5f3ee301891835fc",
+              "nonceFunction.o": "2f3a9e4030470981c3112ca4df0ed8c67f62d2a0f403d969acd22e4af8a33cdb",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "60539278830e7fc1a73ee68bb2f8fa0bc71c338fd374c88cd8c21c6e3d1693c7",
+              "test.cmx": "e8f2d4a936472e5f0e21f556ee04d04de8141135862a9034ba8cd8b7256ac4c3",
+              "test.log": "6d576fdb537011f0700fe88a77709df5fe9dc055ae54040b3f6b9a93eb0ebda9",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "b83158ff013c204164706bd44594e84ebb145266032141d57622fed3910d9345",
+              "verification.json": "f1910e91c240c6742b2c3e2ff22801f8089e8922a4a8efaee79b53f706a6262a"
+            }
+          }
+        },
+        {
+          "case": "unchecked-close",
+          "runner_exit": 0,
+          "fixture_exit": 2,
+          "groups": 0,
+          "command": [
+            "python3",
+            "/Users/alexy/src/unison/tests/nonce_ownership/run.py",
+            "--ocamlopt",
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "--keep-work",
+            "--negative-control",
+            "unchecked-close"
+          ],
+          "verification": {
+            "path": "/private/tmp/unison-nonce-ownership-4_dyjoe0/verification.json",
+            "sha256": "851dc9dc905507217e1873cbd84c3bbb36f333452dc128918846c046191b94fc"
+          },
+          "terminal_log": {
+            "path": "/private/tmp/unison-nonce-matrix-vtpcu6hu/ox-unchecked-close.log",
+            "sha256": "8f1f9fe20f5c72712d899def637e07cb041d60c20376397f12974e0e337474a0"
+          },
+          "compiled_nonce_body_sha256": "b98afb49a8136396bfba59676a8165b4f0df6a0d11dc4095140020769661551c",
+          "exact_current_function": false,
+          "exact_original_function": false,
+          "observations": [
+            "OBS close-eio-reused-number open_attempts=1 opens=1 reads=1 actual_reads=1 bytes=32 close_calls=2 actual_closes=2 constructor_faults=0 string_faults=0 read_faults=0 close_faults=2 eintr=0 random_alive=false reused=true sentinel_alive=false"
+          ],
+          "fixture_cleanup": [
+            "CLEAN close-eio-reused-number owned_flags_clear=true random_number_closed=true sentinel_number_closed=true"
+          ],
+          "artifacts": {
+            "path": "/private/tmp/unison-nonce-ownership-4_dyjoe0",
+            "pins": {
+              "build.log": "f5e3d62e017fc6c26d865ab93b48001c14f3893953400765e5bfc49a847406bd",
+              "harness.cmi": "549bdfa11ef279a45172535aa41bd83f15ba9cef3b5cb7467002a8b3a76afa25",
+              "harness.cmx": "7acea5072ca416b1e53c19cf98749d31df6612818d53da0fc90d56f412f7990f",
+              "harness.ml": "a542cd4f5907458b4573998ae0d5a180d9df6cd50d346d339ae1b5d88dbdd19b",
+              "harness.o": "bb91a8085013259bd7badd6bd9fa5ec4d3351063a10fbcc6b61103588d044875",
+              "nonce-current.ml": "6f4f18386004ae6203fcdf6d1624ca8a221a54ec8850b255c39887dae208d30e",
+              "nonce-original.ml": "a9010b5ccc01aadd16e0b9294e2e7f786800902508c0e511cac6895a754734bb",
+              "nonce-test": "f568f531d45a82518ae2dc3223127a0446236acd291c0a28db4e3a9a77756c18",
+              "nonceFunction.cmi": "862d347af62b672d56d522d93c999c523c50a1f4e48da0017efb02ed1160a385",
+              "nonceFunction.cmx": "1ab82e6ea40b65d7d9b8d5550d5fe34bd5db059d1143918e59fe40a902029d5e",
+              "nonceFunction.ml": "7ac208e1902d2077ef2928595a7c854a7e2a34f51faf0ab761c08311beaa78b1",
+              "nonceFunction.o": "79ef141e579117728f1ef1ce1576dc5eea4f153fc5c93cff58007d43fc9e3266",
+              "reuse-sentinel": "5c53eb47b830e9d17eeb0ff8b533edaf4cc67919d8b452dc22e78b5ada1b462f",
+              "run.py": "84da025ccb0d19e350008f86774cac4b84d7331d2046382df508b3a85046a5b6",
+              "semanticRemote-current.ml": "9b54e591663a03f59951e451b5628c52863ba3d8d01e75bd584172fef42215be",
+              "semanticRemote-original.ml": "0dec71478fea4d1a34bb02482f0b21d21f0df15d8576bb764da6316f65203d9b",
+              "test.cmi": "7b1bbba0de4394bad4b61f8e05909392b217252a712c4199cb66d9adba895c0e",
+              "test.cmx": "d538b9ebb8db7a8a9862afcc0f2b5e56b5b134621e1a8d51ff917d26e5dd8967",
+              "test.log": "da5f31faf16d5ce78b0476480a4239ee2bdc410a26797d3c3a252b2606fc7ac2",
+              "test.ml": "c165501fd14c1880f83f497da6eedac33b113fcd0ed20c070c8c982f567fb303",
+              "test.o": "b83158ff013c204164706bd44594e84ebb145266032141d57622fed3910d9345",
+              "verification.json": "851dc9dc905507217e1873cbd84c3bbb36f333452dc128918846c046191b94fc"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "retained_prior_matrix": {
+    "path": "/private/tmp/unison-nonce-matrix-_r0l6nhs/verification.json",
+    "sha256": "739b0341b4e7391332a9fc1a6fab0b2d8f13bc747c232952d8db88fdfb10b8cb",
+    "scope": "Earlier same 13-group/two-negative outcomes before explicit post-fixture EBADF observations; preserved as an earlier version, superseded by this receipt."
+  },
+  "limitations": [
+    "Only the exact isolated nonce function is compiled here; SemanticRemote RPC, SDE consumer integration, CPU/resource admission and the entire Unison build are qualified separately.",
+    "Injected close EIO is reported after the shim delegates a successful native close. This tests consumed-close errors and descriptor reuse; it does not prove behavior for a kernel close refusal leaving a descriptor open.",
+    "These are named finite private exceptions and EOF/EINTR results, not system-wide memory exhaustion, universal asynchronous exceptions or every OS failure.",
+    "Runtime descriptor observations and sentinel identity/content checks are recorded in logs; completed process descriptor states cannot be reread after process exit.",
+    "Fixture cleanup uses real native close outside the production shims, verifies final EBADF and preserves the primary failing assertion in safe negative controls.",
+    "No external helper/Adobe SDK/Lightroom/Photo/cache invocation, production file modification, heavy benchmark or full generator run occurs.",
+    "Independent harness source and artifact-audit acceptance is pending."
+  ],
+  "receipt_assembly_script": {
+    "path": "/private/tmp/unison-nonce-seal-rhg5_oew/make_receipt.py",
+    "sha256": "8077e29a04fbce93493742bb3a44c2a3f6ba52a6bd4e333f3e167c00468565a0"
+  }
+}

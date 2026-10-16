@@ -1,0 +1,49 @@
+{
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "cee24f",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute.py",
+      "bytes": 9191,
+      "sha256": "14b7a29eb6adcc356177693cc09766a890eb5fe6168f1a3176ca1d7ac7a4ddc0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute_test.py",
+      "bytes": 4821,
+      "sha256": "42ee45efa519a7f73782eba359d965043fa4b4b879073deffdbfda272e6714c3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/adobe-validator/driver.cpp",
+      "bytes": 13547,
+      "sha256": "0c4fdeba27197836fa95b129ad3e75098eef6d5af1d4614a3787e9f7f10f9925"
+    },
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1/dng_sdk/source/dng_file_stream.h",
+      "bytes": 2620,
+      "sha256": "d3129354305973408e5e05af2d7580924c64d1c143ec21a8560f406b27a9a6df"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016e/SHARED-START.json",
+      "bytes": 1113,
+      "sha256": "a54a151afb00bb64d2172b57d5676816a6f13be641a865cd9f19606454459f44"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016e/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "2fd70fd6dbd68f1e0dbb47eaa77bf746158690fd69e05d88edc19a034218d6dd"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016e/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "209637c5270ea62667d3505f25f6e8e713fd220b3020983b799e40ff6ae4138a"
+    }
+  ],
+  "scope": "7metadata-only groups incl0400/0644 exactepoch preserve, matching0600 refusal. Driverhash fopen rb/SDKdng_file_stream defaultoutputfalse source-bound; no runtimeSDK/fixturepayload/EXIO or sourcechmod. Photo-owned source constraints unchanged.",
+  "full_goal_complete": false
+}

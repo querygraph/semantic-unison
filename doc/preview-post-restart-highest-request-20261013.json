@@ -1,0 +1,205 @@
+{
+  "schema": "unison-preview-oracle-next-request/1",
+  "utc": "2026-10-14T03:42:42.089649+00:00",
+  "state": "EXACT_POST_RESTART_HIGHEST_REQUEST_QUEUED_TO_ORIGINAL_OWNER_RUNTIME_RESULT_PENDING",
+  "priority": "User requested preview validation before catalog repairs; core clone implementation yields to preview interface review in this checkpoint",
+  "completedBaseline": {
+    "implementationCommit": "7e27a836c47d536d5eabd9fe745d74f2f670256f",
+    "outcome": "doc/preview-finite-oracle-outcome-20261013.json",
+    "independentReview": "doc/preview-native-one-control-independent-review-20261013.json",
+    "returnedPacketSha256": "945bf7c7dca3617b9d2ed4e7d7e1871d56ccd3d6ce5a3d5264c32d6f1f10d1b1",
+    "committedReadbackSha256": "26d99a7a08bdeb4adbfab5fcf606c67e1f9af89599a9f504cf6a8915fe919b59"
+  },
+  "originalRendererPublisherOwner": "/root/preview_implementation",
+  "queue": {
+    "parentThreadId": "01a13369-8b68-7aa1-be91-cba984ba269b",
+    "deliveryAccepted": true,
+    "downstreamAcceptanceOrWindowReleaseInferred": false,
+    "deliveryAcceptedMessages": 3
+  },
+  "candidate": {
+    "image": 10031592,
+    "rootFile": 10031593,
+    "uuid": "8EE855A1-C41C-4C9A-9CC0-35F8C04E12C3",
+    "digest": "46e0a188a3f637676f25db569a11268b",
+    "settingsId": 10031601,
+    "orientation": "AB",
+    "expectedHighestRow": {
+      "level": 6,
+      "width": 2272,
+      "height": 1704,
+      "fileSize": 646453,
+      "longDimension": 2272
+    },
+    "expectedIdentityAndRowConditionalOnFreshOwnerRead": true,
+    "doNotRegisterAgain": true,
+    "sourcePayloadOrRegenerationRequired": false,
+    "expectedPyramidHeader": {
+      "quality": "final",
+      "colorProfile": "AdobeRGB",
+      "fromProxy": 0,
+      "croppedWidth": 2272,
+      "croppedHeight": 1704
+    }
+  },
+  "test": {
+    "mode": "HIGHEST_REGISTERED",
+    "reason": "develop_gpu_loupe_initial_pixels",
+    "width": "full",
+    "height": null,
+    "scale": null,
+    "selection": "unique object matching fresh copied highest native row, independent of returned array order",
+    "nativeDecode": "post-maybeMakePixels dimensions/digest/orientation bound to fresh native row and current Main",
+    "purpose": "Persisted registration recognition and highest-level native selected decode after actual process restart, without author replay or preseed",
+    "requiredPasses": [
+      "LOAD",
+      "RELOAD"
+    ],
+    "postPolicyFieldsMustBeCaptured": {
+      "width": "full",
+      "height": null,
+      "scale": null
+    }
+  },
+  "requiredAdmission": [
+    "Fresh Root admission for actual current process/start/catalog owner, canonical lease, current nonce and finite deadline",
+    "Close or terminally hold any preceding pure-read probe before serial native continuation",
+    "Prior denied/held preparation, old PID2844 admission and prior renewed slot are historical; do not reuse expired nonce/admission",
+    "Root owns native/UI sequence, existing source workflow and restoration; Unison launches no competing operation",
+    "Shared eighteen-credit ceiling and existing <=8 photo sources/<=16 logical states; one current-key control here"
+  ],
+  "requiredReturnedEvidence": [
+    "Exact source/rendered/installed module/config/runtime admission pins and actual current process identity",
+    "Fresh current Main image/rootFile/UUID/digest/settingsId/orientation before and after native phases",
+    "Raw BEFORE_LOAD/POST_LOAD/POST_DECODE mapping; final imageId/UUID/digest binding before effective orientation; direct stored equality separate from nil/false normalization",
+    "Fresh highest native row copied before load and unique highest selection; actual decoded2272x1704, current level digest, exact row level6 and positive646453 bytes if expected identity remains current",
+    "No fabricated per-level UUID; whole-pyramid identity and level digest/geometry are distinct",
+    "Separate positive file sizes and stable before/after retained file identities/bytes from owner verifier",
+    "Actual deadline and fallback outcome: stale/current/expired/held remain distinct; no success claim if a guard holds or helper never enters",
+    "Genuine callback/helper restoration and kernel lease settlement after returned work; finite closure is not global Lightroom quiescence",
+    "Separate commit visibility evidence and no author registration replay; process restart recognition is not fsync/power-loss or cold-I/O benchmarking",
+    "Both LOAD and RELOAD select/decode the unique current highest object; capture actual post-policy width/height/scale and report actual returned level count; validate each returned level without inventing six native decodes",
+    "Independently accept logged current Pyramid quality=final, colorProfile=AdobeRGB, fromProxy0, crop2272x1704; highest source logs these fields but does not itself gate them",
+    "Fresh separate read-only committed six-row/current mapping observation; no authored touchPyramid, explicit save, authored SQL writes or new renderer/publication",
+    "The existing Root restart is sufficient if fresh ownership remains valid; no additional restart requested",
+    "Capture raw mapping BEFORE the first LOAD: current imageId/UUID/digest/directAB here is required to claim original committed ImageCacheEntry survived restart. A stale/absent mapping repaired after load may qualify highest loading but not preexisting mapping persistence; classify that outcome separately",
+    "Record all busy/drain attempts, actual owned callback/load counts and outstanding callback closure. Existing reviewed source may reach21callbacks/10loads; quiet5callbacks/2loads is not a global maximum. Deadline expiry does not cancel a native C call or permit early lease/resource release"
+  ],
+  "sourceEvidencePins": [
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/INDEPENDENT-SUCCESSOR-REVIEW-FINAL.json",
+      "bytes": 6560,
+      "sha256": "64cf4288e6ebc5a3a664366895022c493e4e77746b09b0a3b6ac88d26042f8da"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_server.lua.in",
+      "bytes": 23054,
+      "sha256": "b24796a57616d233cf83374c55ceb2cbd3e00080f9e9047081d7c00daf3182f0"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_main.lua.in",
+      "bytes": 2318,
+      "sha256": "b0b2f621b042570187fcd34598cd4a166d499ec96b29c9d0867a6083acd65196"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_ui.lua.in",
+      "bytes": 8384,
+      "sha256": "473148bb2d8a1f0cb6100273bd5ff5e7d7a6ca30e642e6f589c6084ca3b153b2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/prepare.py",
+      "bytes": 6050,
+      "sha256": "6c0248ab9a86f0faa3bff00ee1181f691cc51aae136cbfb73727a3faeb74aa3b"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/test_successor.py",
+      "bytes": 9061,
+      "sha256": "a401988db304f3bde93b077823e3549beb76a01552425b8855320086124f54d7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/CANONICAL-TO-SUCCESSOR.patch",
+      "bytes": 14020,
+      "sha256": "47c6b2171db29ff39f9132ff7e2d3510541481c23caed4de930ccf79a130ba4f"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-final/PRE-ENTRY-HELD-CLOSED.json",
+      "bytes": 1410,
+      "sha256": "cabdf85939c33d3a987ac5fe4eba9d8527f4586a885a1890088e20248ef71505"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/FINAL-TEST-STDOUT.txt",
+      "bytes": 1388,
+      "sha256": "662fdb78758cfdbb6024e149785bbbe4f9359635cf6049ff43b1efa3fdabcecd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/FINAL-TEST-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/INSTALLED-POLICY-INDEPENDENT-REVIEW.json",
+      "bytes": 12164,
+      "sha256": "88516a6b4aab74b952ef8fd0c0994fb2212e31db952c66fcd9d4ca9e851157d0"
+    }
+  ],
+  "sourceOnlyValidation": {
+    "finalReviewedSourceCases": 39,
+    "finalReviewSha256": "64cf4288e6ebc5a3a664366895022c493e4e77746b09b0a3b6ac88d26042f8da",
+    "historicalValidationJsonCases": 36,
+    "historicalValidationIsFinalProof": false,
+    "nativeResultInferred": false
+  },
+  "ownerStatusObserved": {
+    "path": "/Users/alexy/src/unison/PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json",
+    "utc": "2026-10-14T03:41:04.276416+00:00",
+    "bytes": 4644,
+    "sha256": "2d3893ba078c58d61bd3a6b53ea48c8f588392151add90ec9730101e5345b8a3",
+    "actualClassicPID": 40020,
+    "desktopLocked": true,
+    "separatePureReadPingReleaseReported": false,
+    "previewReleaseFromPureRead": false,
+    "currentRuntimeStateRecheckedByUnison": false
+  },
+  "remainingOutsideRequestedTest": [
+    "5120x2880 coverage on large current-crop sources",
+    "measured physical monitor fit versus actual Library viewport",
+    "rotated/default-orientation coverage beyond directAB control",
+    "faithful standalone rendering with current masks/AI/dependencies",
+    "Quasar highest-level symlink publication, native trim/write/restart and mount-loss fallback",
+    "offline publisher/full-cache production admission/full generation run/benchmark",
+    "power-loss durability or hardware cold-I/O proof"
+  ],
+  "unisonOperations": {
+    "sourceLogJsonReadsOnly": true,
+    "adobeNativeUiInvocations": 0,
+    "mainCacheDatabaseOpens": 0,
+    "previewMediaOpensHashesDecodes": 0,
+    "productionVolumeChanges": 0,
+    "competingPublisher": false
+  },
+  "runtimeOutcome": "Pending original owner tested result; queue receipt and source39cases do not prove execution",
+  "sourceBounds": {
+    "quietSuccessOwnedCallbacks": 5,
+    "quietSuccessNativeLoads": 2,
+    "maximumOwnedCallbacksWithReviewedBusyDrainBranches": 21,
+    "maximumNativeLoadsWithReviewedBusyDrainBranches": 10,
+    "maximumAttempts": 10,
+    "sourceOverallDeadlineSeconds": 180,
+    "sourceCallbackDeadlineSeconds": 30,
+    "deadlinesCancelOrInterruptNativeCalls": false,
+    "actualRootAdmissionMustCoverPermittedSourceBounds": true,
+    "strictTwoLoadMaximumRequiresSeparatelyReviewedPolicyChange": true
+  },
+  "independentSourceReview": {
+    "reviewer": "/root/strict_range_review",
+    "filesChanged": 0,
+    "scope": "read-only existing source/log/JSON; no source execution, media/DB/native access",
+    "findings": [
+      "Final reviewed39cases supersede historical36case VALIDATION",
+      "Require logged Pyramid header/profile checks and capture actual post-policy full/nil/nil fields",
+      "Raw current BEFORE first LOAD is needed for original mapping restart-persistence claim; post-load repair is weaker",
+      "Reviewed busy/drain branches have21callback/10load bound; source deadlines are not native cancellation",
+      "Original owner fresh admission/nonce necessary; prior held preparation stays closed"
+    ]
+  }
+}

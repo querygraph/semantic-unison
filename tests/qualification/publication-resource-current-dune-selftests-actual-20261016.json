@@ -1,0 +1,58 @@
+{
+  "schema": "unison-current-dune-qualification/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler_kind": "stock",
+      "actual_tool": 33348,
+      "terminal_chunk": "f06d73",
+      "exit_code": 0,
+      "running_session": false,
+      "current_source_pins_checked": 426,
+      "references": [
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-stock-20261016a/RESULT.json",
+          "bytes": 43530,
+          "sha256": "cb7dbcbdb00112a1ef0c2925fa9261cf1ce05be24ee4e0d3aed476e98f56514a"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-stock-20261016a/SHARED-START.json",
+          "bytes": 1335,
+          "sha256": "20969a30db89d445affd4a1e2daa4a05b0c6c2eeb4a073358fcd726f4b03b674"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "8b179c92b4748334447cda561bfc764a5de72e14e1ac2185ee7a0b68adf395a9"
+        }
+      ]
+    },
+    {
+      "compiler_kind": "ox",
+      "actual_tool": 52808,
+      "terminal_chunk": "b18211",
+      "exit_code": 0,
+      "running_session": false,
+      "current_source_pins_checked": 426,
+      "references": [
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-ox-20261016a/RESULT.json",
+          "bytes": 43534,
+          "sha256": "c83ea494c74fb51683a5c65831c39f0c5d51184573370154c648d96fbec26168"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-ox-20261016a/SHARED-START.json",
+          "bytes": 1330,
+          "sha256": "6f1583ab10a28dc6c6b427577e5979d2e57c154224644cf42c49f8d2bf860b0b"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-dune-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "174cb63705f17ae3b7e3f904fd7bc813431d5de4b2ed1b3ef950b7f98c4987f8"
+        }
+      ]
+    }
+  ],
+  "scope": "Current stock/Ox Dune link and bounded application selftests; Unison00..07, compilerjobs2, endpointworkers3; no SDK/Adobe/Photo payload/EXglobal invocation",
+  "full_goal_complete": false
+}

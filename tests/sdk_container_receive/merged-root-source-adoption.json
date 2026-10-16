@@ -1,0 +1,55 @@
+{
+  "schema": "unison-merged-output-root-source-adoption/1",
+  "utc": "2026-10-14T22:00:34.240322+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-MERGED-OUTPUT-V1-ROOT-SOURCE-REVIEW-20261014.json",
+    "bytes": 2630,
+    "sha256": "f9d0244356566d67212d7816bef47d3a6b778380f03f10dfdff2659de4563cb7"
+  },
+  "verified": {
+    "utc": "2026-10-14T21:58:13.063672+00:00",
+    "state": "SOURCE_REVIEW_ACCEPTED_RUNTIME_DEFERRED",
+    "request": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-merged-output-request-v1-20261014.json",
+      "bytes": 3416,
+      "sha256": "a1cfe59cf35c2474af8d34abc4a7064d98a69a0df9350bd928affe4237bf76bf"
+    },
+    "verifiedEvidencePins": [
+      {
+        "path": "/private/tmp/unison-merged-output-sdk-prepared-20261014-v1/PREPARED.json",
+        "bytes": 7586,
+        "sha256": "ac01b8e706e6c95bedf180044ab1ed5557c2fbe30f795080e3a3b148a2aace9a"
+      },
+      {
+        "path": "/Users/alexy/src/unison/tests/sdk_container_receive/merged-preparation-qualification.json",
+        "bytes": 10066,
+        "sha256": "c00908b6efe69988ed2cd49f0cd33d8d0629cdabbb5b0b0c47f9c61bdf73c13d"
+      },
+      {
+        "path": "/Users/alexy/src/unison/tests/sdk_container_receive/merged-executor-qualification.json",
+        "bytes": 14731,
+        "sha256": "00d5b2366005148a4c19176b73445047241ee36957c70ca71153867a25907b4c"
+      }
+    ],
+    "verifiedSourcePins": {
+      "tests/sdk_container_receive/validate_merged.py": "f0dc76ad5b2e7b6d48adf890df6503c12c6e7876da713eb2db3979c9f2d4cbb1",
+      "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2",
+      "tests/sdk_host_matrix/plan.py": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b",
+      "bench/adobe/phase.py": "1f6b6bf2e3569a87a325196474bacc94ee06a0466b0c77f918313b76c380f497",
+      "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+      "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+    },
+    "review": "Exact three codec commands; candidate/tool binding before and after calls; raw receipt framing/digest/error gates and exact warning count; 60-second child bounds inside genuine owned 300-second aggregate; unique workspace; parent terminal evidence required separately. Pre-supervision hashing excluded from aggregate as declared.",
+    "runtimeAdmission": false,
+    "reservedCpuCredits": 0,
+    "reason": "Preserve exclusive availability for first standalone preview render. Separate fresh admission required after preview slot closure.",
+    "limits": [
+      "No generation, writer, Photo, Lightroom, Main/cache, production helper replacement, renderer or source-photo operations.",
+      "This does not replay any consumed admission.",
+      "A pass qualifies only these merged synthetic output bytes; no receiving-path integration, camera corpus, pixels, RSS, OS-thread ceiling, scaling or preview reuse inference."
+    ],
+    "newSDKExecutions": 0
+  },
+  "runtime_admitted": false,
+  "scope": "Source review acceptance only; runtime deferred for first standalone preview render. No compiler credit, SDK slot or replay authorized."
+}

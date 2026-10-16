@@ -1,6 +1,11 @@
 (* Module [Lwt]: cooperative light-weight threads. *)
 
 type 'a t
+val wakeup_from : 'a t -> 'a t -> unit
+(** Resolve a sleeping promise from an already completed promise. Copies its
+    preallocated success/failure state before dispatching observers, avoiding a
+    new result constructor at an external-resource ownership handoff. Raises
+    Invalid_argument for a completed destination or sleeping source. *)
       (* The type of threads returning a result of type ['a]. *)
 
 val return : 'a -> 'a t

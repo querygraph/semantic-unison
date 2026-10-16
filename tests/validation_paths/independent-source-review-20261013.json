@@ -1,0 +1,32 @@
+{
+  "findings": [
+    "CandidateValidation wraps only HelperSupervisor.run through validate_with_execution; before/after candidate and executable snapshots run outside the same I/O lease.",
+    "Worker source/output keys are reserved atomically before domain-slot and CPU admission. The helper takes the same I/O-before-CPU order; no reviewed path holds CPU while awaiting this I/O gate.",
+    "with_io_file keeps a nonblocking read descriptor until the callback settles, rejects non-regular objects before accounting, and closes its own descriptor on success or exception.",
+    "DngValidation Off returns before execution admission. Candidate mutation, malformed or misbound receipts, confirmed errors and all cancellation guards retain their existing require/warn semantics.",
+    "Execution cancellation cannot become a Warning pass: cancelled cancellation overrides the verdict. The supervisor returns only after helper settlement; queued cancellation returns without spawning a child.",
+    "Per-device keys are explicitly ephemeral st_dev scheduling groups. This creates no physical-disk identity, pathname pin, mount-lifetime authority, memory cap or throughput proof.",
+    "Known descriptor estimate increases from eight to nine for the extra held execution descriptor; actual global descriptor/RSS accounting remains outside this source qualification.",
+    "The extra execution descriptor ownership flag is allocated before open; the outer allocation guard closes only while owned and clears ownership before close, preventing a later outer exception from re-closing a recycled descriptor."
+  ],
+  "limitations": [
+    "This audit does not qualify actual Adobe initialization, decoding, codecs, parallel area tasks, RSS or real-corpus validation.",
+    "Existing FinalPublication/candidate snapshot fences remain essential; the filesystem gate is not an authorization or byte-equality proof.",
+    "All native processes and inputs in the independent integration suite are test-created synthetic fixtures, under /private/tmp only."
+  ],
+  "reviewer": "/root/validation_paths",
+  "runtime_evidence": "tests/validation_paths/qualification-20261013.json records separately pinned actual CLI qualification.",
+  "scope": "Independent integration audit; no Adobe SDK or Photo operations.",
+  "source_sha256": {
+    "src/candidateValidation.ml": "a5cd5a8265387a0733280df3c1030243da1edf69c854c3c06693cc54e4f870d9",
+    "src/dngValidation.ml": "657e9e858e897950b026a23b768dd26d1510e48f5893579a08c51c3c5bc4735a",
+    "src/dngValidation.mli": "4a15c2b6575b417f188db2ac617db1c65070673696ef23e44e3eb22891af6bc9",
+    "src/ioAdmission.ml": "021ec08b97ed3005034b67bb716913f16431bca724ac2b2a0562237a345081b2",
+    "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+    "src/semanticRuntime.ml": "aa4a89c459e171807e4f7ea38009ab155d5cfe53f1b4155881284dc24dc751cd",
+    "src/semanticRuntime.mli": "028db47a00b1e7274aee9b2523f25998b70aef04891b24ea1ca7532ac2a11a42",
+    "src/semanticWorkers.ml": "5cbfe5f34746797f9af57a71b0045549fe6a7387b5c5ec13eea4acd4156c1c73",
+    "src/semanticWorkers.mli": "e036c75526ed77155b4f99e850d777d9e6df3d288d41c32896fd755a4f4a712f"
+  },
+  "status": "accepted-source-only"
+}

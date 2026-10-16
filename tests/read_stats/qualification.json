@@ -1,0 +1,1218 @@
+{
+  "schema": "unison-primary-reader-qualification/1",
+  "utc": "2026-10-15T00:05:03.525844+00:00",
+  "scope": "Opt-in primary-input logical-reader counters, immutable worker delivery, owner observers and strict benchmark parsing. Functional qualification only.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile.ml",
+      "bytes": 6095,
+      "sha256": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile.mli",
+      "bytes": 2672,
+      "sha256": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile.ox.mli.in",
+      "bytes": 2684,
+      "sha256": "73d8cd0e3b4b827025affaf7a866bca27faa0260cac33cc77204cbd942537c0e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticWorkers.ml",
+      "bytes": 21799,
+      "sha256": "3bb777e17ab41ca17195822317529196b9602fa14640d7874fd04732705f0eca"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticWorkers.mli",
+      "bytes": 6543,
+      "sha256": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticRuntime.ml",
+      "bytes": 11983,
+      "sha256": "1797fdba8462bddef263ccf5d75dfc4041eace907145e9471c9e7cc669a18439"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/workers/test.ml",
+      "bytes": 49964,
+      "sha256": "e2908068c0f8a92d1fc2901035c85570e04cef8a45df63dbb6b1c386b2d7d99a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/workers/run.py",
+      "bytes": 8425,
+      "sha256": "14070615b987b7edf3092a555178ec08855985ede933efef6fd65a7b4e8fe86f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/read_stats/cli.py",
+      "bytes": 3519,
+      "sha256": "2da093cd64c4ffae2be237ef7fe13b8832c98d7258931448a41a4091a11bb8e7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/read_stats/parser.py",
+      "bytes": 3903,
+      "sha256": "544ab10dc580c829584ddf16866fe496af5b3ef0126d0c459a2201e61b463b5f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/read_stats.py",
+      "bytes": 2395,
+      "sha256": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 28631,
+      "sha256": "d3aff8711a04c5794c0786a20f8305602918f9b7a55ebb4a523f4fc060e5109c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/read_stats/README.md",
+      "bytes": 2547,
+      "sha256": "bf61f45149d6574305ed15a5e15caf2e35fca12e48903b308557745aa8df0944"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/README.md",
+      "bytes": 17149,
+      "sha256": "713853d1d3226958ea5410307d15bd7a3c94c80d378d05eb2f6c41adab6542ae"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "build": {
+        "path": "/private/tmp/unison-read-stats-stock-final-build-20261014.json",
+        "bytes": 42791,
+        "sha256": "94075ed124638e16960697e8856b63489d96c9160c95dfd1c8fff57794108628"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/unison",
+        "bytes": 5635536,
+        "sha256": "45be7995f564632853f4f6a97a83ddf40c327b3904b9ea05484e40c26144a72f"
+      },
+      "worker_report": {
+        "path": "/private/tmp/unison-read-stats-stock-complete-20261014.json",
+        "bytes": 15571,
+        "sha256": "39710d1e130a27157765da4ff0413a96a293f4c7fe7d55fab96c5aa97357c038"
+      },
+      "worker_actual": {
+        "schema": "unison-worker-scheduling/1",
+        "utc": "2026-10-15T00:00:50.701674+00:00",
+        "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+        "compiler_version": "5.2.0",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-9bcbkh49",
+        "retained": true,
+        "actual_production_build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src",
+        "linked_object_pins": {
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt.cmi": "fe2038f1393cd5fb43cd51a34819da7fb7df5aa2890e6ca149d5bd01220d83ea",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt.cmx": "0f99a84b845ce3d48599696da23d38b6bf451fe46c2fe6f13b821445b8e95564",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt.o": "3ade1ac772006b43e64c1176e7ee6c09a81761f324bb79b8a60f1e21c5d75455",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/pqueue.cmi": "ef085af8725a746ca9c5ccc40f19f013037f1f675ed5499d248403bdb0d04033",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/pqueue.cmx": "f4a026dbbe6d42c5a96650d3d2a4ebbc8eb8b57542ef62ee61ba946605770064",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/pqueue.o": "b16db1899baa0809cad0dc7dc51ac19ed0306be1c7453631e6a33ecf6dcb7d0b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/generic/lwt_unix_impl.cmi": "a6d11df4b58be95f846982348a7e0cfa275251288d20db47e0b783fcc9ecfe9d",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/generic/lwt_unix_impl.cmx": "084f2d1f34e3f4b0b37c596037b176b40e9365c48fa7ebe5a0f27d1e4ed4a636",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/generic/lwt_unix_impl.o": "fc1651652f8892dc4b6e856d003711db0a1da0e0901cf0d6e3c3abda745854c2",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt_unix.cmi": "4e992e0a17226307b8b02796f62cabb6f9a03353d6b4e630aa4e835bfa7d03e7",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt_unix.cmx": "cbec7981a023f9f567425ef89f9bd3e619957858c1174d406f087f6139c042fc",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/lwt/lwt_unix.o": "02febc89561bab44e85ac5471a6201176d2962052c74f8e53d52771249e819df",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/borrowedWork.cmi": "f4a7bc46aa6e6bec0508f34236e961a5ad38843befcdef48f075c13b4d2581fd",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/borrowedWork.cmx": "b4d037434358dc46d06578009fd75bf9e81aa70050c7fa95badd1998905ad8bc",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/borrowedWork.o": "15376752c7e533b4e0af89e0fb0d79607a6321ca3901ebbae970d93581643226",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/helperSupervisor_stubs.o": "323abb746448d8861589822a5ac8b0b088119e6033aed7bfcc81d26efe436c30",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/helperSupervisor.cmi": "dc28127984f887d4ce3eb63cd9f68377b987681a4a58a3952f1bfaae35c44ecf",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/helperSupervisor.cmx": "c3a6bca089e3a31182c6635f0c29a81efaf8c6eb494dbeaf7d0059ef224fc65e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/helperSupervisor.o": "650ed20fb9386eb924a36232972ff957c29b8710044848e245d2cd9234da0139",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticAdmission.cmi": "4f94155ffc9d69b51eca7c450d275b186395c2dd2498e2796158dfcaa0fced68",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticAdmission.cmx": "bb52576933f0d8202c31c703ee9f1ec088e3997a5abbeebdf1a2a6c683f2048a",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticAdmission.o": "b42f336182e74a851d6609dcd974cb568157f8194f694bfc8e289ca76ce61d07",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/ioAdmission.cmi": "1eb0e0656c7ff9fc386bca454858bbded07291226e52533c511fb47aec7250e5",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/ioAdmission.cmx": "7a53746da6b9e65f876f71f9dffd31beba954f5625e84e094f7f4baf630662b6",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/ioAdmission.o": "da624b6a391be5bc079bd4e90b3b32a6f2017b5b792fd0946fff3ab87cb564a4",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticHash_stubs.o": "92910cb04db7b0e1d9cb87d461d90ba8f1b229ad105b319d2a244a06af786e97",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticHash.cmi": "0baffb1dc027286d0f0b9839df19d72d0177c294d6e37e2f103fda0957c80d72",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticHash.cmx": "4b641f6c92a220a5bc4db2b93de01ce1a687509dc771ef65a3d85a9add803890",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticHash.o": "0a8323766f875ef24a4cb7b0f77621785dc26d980f84e2c66ef654b640f06d05",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticFile_stubs.o": "79a62e84ba4be6d3143e1c9ec6c8b584322b99bb77ecf474ce14fb3b064affe4",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticFile.cmi": "7fa7414232088828e78225357185deee3574b678b245bfb4c7793f1f1521ae2b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticFile.cmx": "b7a1da6ffb7bbfedcbcba0a36b7637bef66daa4d2b2fd3502e82553a709dca35",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticFile.o": "c3595a35bfcb0ab16d8bf8484153234520bef2c6be574c822e151356ed493be2",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatRecognition.cmi": "3f0b90bf404495b6a48d58af1d4ea48dbe2f535f917e1d53c102a6b5faeb0364",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatRecognition.cmx": "fdaab3f00fee423dba3b53680855555b7abb4c9dee8dbd777724a934da9c58c1",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatRecognition.o": "bf7dec84997955b81951fa01a1f2fce642598d3e344a94ef355f777b427ed401",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngRecognition.cmi": "5e345edd68d656a1121712c6bf78bc7cd58ea8ce91d97d05db0381bea3eb9f4b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngRecognition.cmx": "30f4e7ea3dacadf93c9943fc31a3945f10b39c5fe2cabe2d8796b5bea5c29357",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngRecognition.o": "af33f560e860a6c0a110ad4dba145ca8691e9f35d95c814e968d5091ee9a172a",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatExtension.cmi": "5a69ec3e66a28b28c79b75f23f8b354e79231c57ed1d83a10ec3c36e6d22012c",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatExtension.cmx": "5e5d5098dbd63f37d4c24805ea2e37de5cda8d8c4f0487a96627d26350ca781e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/formatExtension.o": "eb9a34fdbbe0ebef940fb14ec24e1afc33c220afc19a094de928215b19b1937a",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpObservation.cmi": "7a4225bf85ec344e940abe60cb80f74dcd1f5a69ac90b9e2cfedb4dae03db042",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpObservation.cmx": "4640203b2bd748b5459794b26c8439b5cf3d4e918712d988082e010dbf095521",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpObservation.o": "4bec0e0f2bd4e83d539d5d85e5ed5bf6f4e2dae652865b0c8a34427f51d6b618",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpMerge.cmi": "36064e7e6e9a4ed5cea429905f7996dbc850df30f841e478cbfc1a62c31166e2",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpMerge.cmx": "2223f346b2c8c0516003ed187e23a0b97c7ed5c0b451f9ac85640a163e2fd80a",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/xmpMerge.o": "7b76d6f7cc58615cdc38e3c6e915e257e1f3f15b6b6b4f9dd9b81b1b6dcdfd38",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngSemantic.cmi": "f3087dfd05582601fa0879f686a044e67333ff6d297d16a7afd65e89c7540c8e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngSemantic.cmx": "f006f15a1fae6658c74d368fe164789eb50c46bd372b727ad955e9dfe33bfee0",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngSemantic.o": "b3eac71f714397eb612b5ab73f8c1f3ae5bb89ae63e47c378af1457deb282a8c",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngExtended.cmi": "4638a1e063755a5cf18083bdcc0bdb9a23d95d07f0c1165633f38719772734cc",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngExtended.cmx": "0903d086460f2f7b3002452924a41637b59911463e490bc905150bcf4a36964b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/dngExtended.o": "15f4b0d46e0392b36f70c647c3d80c207147b6b9a1f1c8031de997801a7846a7",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticDelta.cmi": "247a9a9f06c4d01911dab613cb35418891b2382a8e641b39e6f65b4cd83d19be",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticDelta.cmx": "cd37698466022ce0df182f11f483400d5be635273d7e40b1b144733f835655a0",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticDelta.o": "c64a02b2e88e0540d4c3168678034ce2cb28d9a1dadf436d34e2e3bda011d4e1",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticMailbox.cmi": "bfc07bb04b8bf14a584e61ee7c7632b0dd5cf82a48c2370dbec33a656fa7e748",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticMailbox.cmx": "c2521929be23886df11e9057c2d65971f994df4eef3ab704664c641df30a03bd",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticMailbox.o": "73a1841c270fe13b82d16296b409d38b9f6515a4c72e4386a40b121c6de4f137",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticWorkers.cmi": "7dad6e6f23d23849171e1217fd09046357eb46fe6f343989307a765d657165db",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticWorkers.cmx": "97e166e3b6ac75982b0fc3f655cc53b501636fed7aea0f57b6d3b7da6392f04e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-glhzt7js/src/semanticWorkers.o": "dfd6b0b7f4673eb70f11d1fb0e1304fe63be368016ad7db163bb87c16e704387"
+        },
+        "stress_only": false,
+        "apply_stress_only": false,
+        "read_stats_only": true,
+        "exit": 0,
+        "source_pins": {
+          "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "src/helperSupervisor_stubs.c": "d8d947f632e846afebae7aa3f30b0133be771e57564421684c5fd9552b107fb6",
+          "src/helperSupervisor.mli": "d92a68a533c1938dda676acfe54213ff88241e8e84443d25dc8b4f46e1e9a1d5",
+          "src/helperSupervisor.ml": "d4472ef855ad1ebda749cf934537ec5300dc7231488c587f6082416a601d0b98",
+          "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+          "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "src/semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "src/semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "src/formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+          "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+          "src/dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "src/dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+          "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/semanticDelta.mli": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305",
+          "src/semanticDelta.ml": "08c3ec7b9e8d55479f12d53594488e02981e2e9f12a2f9dce0b085a4fc77b005",
+          "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+          "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+          "src/semanticWorkers.mli": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d",
+          "src/semanticWorkers.ml": "3bb777e17ab41ca17195822317529196b9602fa14640d7874fd04732705f0eca",
+          "tests/workers/test.ml": "e2908068c0f8a92d1fc2901035c85570e04cef8a45df63dbb6b1c386b2d7d99a",
+          "tests/workers/run.py": "14070615b987b7edf3092a555178ec08855985ede933efef6fd65a7b4e8fe86f"
+        },
+        "binary_sha256": "baf7921a3b9d899d35a04633c428e4b98319b8b0f5881777c9e851547fbab923",
+        "log_sha256": "ae6a5f8a320ba8ec201a87788630de48ecc739cd9c29bd22a0faee2a35b96a6b",
+        "summary": []
+      },
+      "worker_terminal": {
+        "handle": 74114,
+        "chunk": "102923",
+        "exit": 0
+      },
+      "cli_report": {
+        "path": "/private/tmp/unison-read-stats-stock-final-cli-20261014.json",
+        "bytes": 2308,
+        "sha256": "427c5c2e62d3a511667fce41ec2daa12cba00cef112066bfc72ea7c064534a7f"
+      },
+      "cli_actual": {
+        "schema": "unison-logical-read-cli/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9",
+        "build_receipt": "/private/tmp/unison-read-stats-stock-final-build-20261014.json",
+        "build_receipt_sha256": "94075ed124638e16960697e8856b63489d96c9160c95dfd1c8fff57794108628",
+        "binary_sha256": "45be7995f564632853f4f6a97a83ddf40c327b3904b9ea05484e40c26144a72f",
+        "records": [
+          {
+            "job": 0,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          },
+          {
+            "job": 0,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          },
+          {
+            "job": 1,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          }
+        ],
+        "logical_worker_read_bytes": 6291684,
+        "successful_nonempty_chunks": 120,
+        "output_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+        "old_basis_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+        "exact_result_basis_and_noop": true,
+        "sdk_calls": 0,
+        "sources": {
+          "tests/read_stats/cli.py": "2da093cd64c4ffae2be237ef7fe13b8832c98d7258931448a41a4091a11bb8e7",
+          "bench/sync/fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "logs": [
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9/sync/run-01.log",
+            "sha256": "28b0cce6d9e4b2180abde5d3f953a09a7e7a6928188bb42f09b593cd2141ac42"
+          },
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9/sync/run-02.log",
+            "sha256": "2e4514caf9e5c8086d8a41ca7aa5997af3382e069ebd74c7b66f62cba919c5dd"
+          },
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9/sync/run-03.log",
+            "sha256": "713d83bcbe48794102d45830a9adb0971b0b53f53b1032b94e1ef922c6b1b40c"
+          }
+        ],
+        "scope": "Completed worker primary-reader reports across client/server; excludes nested readers (including output verification), legacy/validator reads, partial/cancelled jobs, channel prefetch, syscalls and physical I/O. Not a throughput measurement."
+      },
+      "cli_terminal": {
+        "chunk": "c91e0a",
+        "exit": 0
+      }
+    },
+    {
+      "compiler": "ox",
+      "build": {
+        "path": "/private/tmp/unison-read-stats-ox-final-build-20261014.json",
+        "bytes": 42797,
+        "sha256": "f00d9041b63546037166e62b4c8369bc473d2c19af264587f8f0994d215aa179"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/unison",
+        "bytes": 7563712,
+        "sha256": "c368af31389f5f4334bd912fe4ecd9401c974de941953ae74a01b16db56ab8ad"
+      },
+      "worker_report": {
+        "path": "/private/tmp/unison-read-stats-ox-complete-20261014.json",
+        "bytes": 15575,
+        "sha256": "69ebfb47fda5b49a5265127407d358c67cc1133ea9fe34207e5fa7bc960664ce"
+      },
+      "worker_actual": {
+        "schema": "unison-worker-scheduling/1",
+        "utc": "2026-10-15T00:00:58.436697+00:00",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "compiler_version": "5.2.0+ox",
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-workers-ai7by4_q",
+        "retained": true,
+        "actual_production_build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src",
+        "linked_object_pins": {
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt.cmi": "97599be70436e79d01d0e525ebfd34eb5c3e5d34827abb4cd1f25590624232ac",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt.cmx": "b030a3884243e0f50575e13c71daceb068155782fa15fa2f080fe8eba66f5877",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt.o": "2e141f2707a2d75a079c75e473d2a19be63f801e228784f3f8289f103b1659ae",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/pqueue.cmi": "84655d72fe2a6750d4da758c6d864b4e248fb5f7a05f39c322006f846e867ea7",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/pqueue.cmx": "c22dc11f014b41e6d9cba217be6b7403017647e20fecbe7a0126199a6956af3e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/pqueue.o": "06c86c67341c0ea6d6d0a782fb5a3cb28910ebbfacc052f892d881ad9f26423a",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/generic/lwt_unix_impl.cmi": "b3edfb1e3968db423a7b96992566790b9440fccfbe285dcccad4c2515557ae35",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/generic/lwt_unix_impl.cmx": "7730a17e67edc88013519fd38bc992dfb6f058ec2ce89b60192a6e3f8b28ab55",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/generic/lwt_unix_impl.o": "f6c4134ff8c588cc5e3f87a49ee5fc47ac38e5f9799d8a8038098bb1b4979b88",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt_unix.cmi": "cebd67eea40953d44944333928332d3afa7eea1c1871bf06c773d762d8b1dbdd",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt_unix.cmx": "5c11c33f160a52cb33543f346ac46bafac825d859841c6271885a2e8a937fcc5",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/lwt/lwt_unix.o": "f4f69c9787e3fc469eb74e7f68e85f411fffab2ae6be203cbb5ac1a7b429c1b1",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/borrowedWork.cmi": "0cef388ae690ee5c12d66ef3b04c2ace1e74dfa0f350b5cfa47ebdd546491269",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/borrowedWork.cmx": "405aef4fa36fa402cdfcc9d54379a9e328111ae6c4b843e947dadbe519e69991",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/borrowedWork.o": "47ea6efd35370c0bf4a319336eba0373fa56e65544f1b589db5f5022f3f8658e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/helperSupervisor_stubs.o": "a3faa2333cccbfab477e53d37cb7b7ae368c89d1f4b47aaab8f72c93cf9c96a6",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/helperSupervisor.cmi": "61d23686c7488986ec7f4af81bcb83556578fdb7e476614d0b355f43d6957956",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/helperSupervisor.cmx": "36a76993b7841e2313b8783245a7472fdc90dc5bc6279b8b38a57a82fcfed99e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/helperSupervisor.o": "54b1bf5c32bb958d6a736b1445a07fb6f5c72e9021484bc4a3fad75fd85e9fe5",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticAdmission.cmi": "2ec18ad9728de501ecd82f3e26778325d8fcbf9612c0c26e808cff66198e4cc4",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticAdmission.cmx": "caf6d701ff9b0d3869655e582be4a8f69fe3f907caed615a0ad060ed0e012a36",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticAdmission.o": "3c38dd15a2e1142d8ea8d2239d48aa1ace4d3cd419124afc99c31468356b1e08",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/ioAdmission.cmi": "51f25532c004066681c7aaa45d2f24a92ad03f3d8f3a7a837be7b631647a50ac",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/ioAdmission.cmx": "818f3aec7c8bb761d5384369235690d68771ae9a687b2ba7becb9b403e1ea146",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/ioAdmission.o": "c9e3b82075283a258e0fc74e99108f1bcfaad207974d6e2fd5cd4c06ce15a00d",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticHash_stubs.o": "22b8f67218c01ac1385482d0e68d149e52bd4f5cdfedb1c80a8ac195ed34f5d6",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticHash.cmi": "beb4116910a3b28a00dce346bfef4cf9b231c459a00312dcbcb4cce3d2b6696e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticHash.cmx": "0539841e9201824bc0bc769edf94b01b6654808d39558c47d6ec157a2694e748",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticHash.o": "e36d931f1f469677a2ad6735b65b80427e6b8006ee87be63e0a06c813ea6c699",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticFile_stubs.o": "b714232433f1d9b90677c69133dceb3c8d6ba8941843ca478480d196f8270511",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticFile.cmi": "98921547c9fdf464090a09a4a0101b18ad00b27e74dd4d32cbd5d99f90df04ca",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticFile.cmx": "1c38960a09e9a3d54f4a5da0ebb293ab66451d46cebfc746c3ecfb6380cb9146",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticFile.o": "74fed0f60a1b51cf2cc0959121cc7b2231bc5c7b094b38392547a72a4ea887b3",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatRecognition.cmi": "cae9694ed7ae6b703e2268a7612cc5ff9d53223d2248bc6a9912f87be43c01a5",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatRecognition.cmx": "15d970a4b4641901331e4a2d53cdbf73add050baa51c3e129514b46be221a374",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatRecognition.o": "e4b8effc56aff5bf12864234fa15267f7cb9268151a6661c96dee0267a980549",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngRecognition.cmi": "5f32abdc64bb82f1573ddadf85b391669eec77360da3c4329ae1056913e9a4d0",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngRecognition.cmx": "52c2e685248dcd038d1313e81d2f084315c1b57bd8c0e0ac3a380a45afb9a7d5",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngRecognition.o": "c7ca321682a617ec52406a43c83004b02965611f8d2d1310ee93dcea7049b474",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatExtension.cmi": "3ccf8c0e307d27420d33df7ac8a5e00fac1f586058bbd209da8896d69c385244",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatExtension.cmx": "9bda50361c3f72e827c553d4f130999f890430afbf7d57c25f945c76e6c63cdb",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/formatExtension.o": "1564ca5f04a697a12c935911c6dcbb0330a63a00b2b687d3b6fd3c49d293445f",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpObservation.cmi": "77144748dbfcad11fc426ad91314a44611a05523c3f669623e21b924bdfefaea",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpObservation.cmx": "7fb1a7591cdfc9308be450b576be80e94746d7c28b64441712660b0c9eb90392",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpObservation.o": "2103bd9eacfd4da2645e640f44d4c2d4382b73faaebc384ff2752b3a74a65d96",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpMerge.cmi": "8a4be4f88d1558455d1609c6b7e04cddc56183ff1cde6211e7f4ff1007b5db58",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpMerge.cmx": "74fd7b1f12c88729ba755353b2bf35e30125c42693360bfbeb5e395e258779c4",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/xmpMerge.o": "7922ab1ed2b109e449acfe87960aba6b64bb60bdbc8011bfb74dbcde93a81643",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngSemantic.cmi": "d5e45dab9fe876e2cfa6fc81a3d41364b022d07cc985e72c5fcd9e21a6671f7b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngSemantic.cmx": "fb812d92cf4448dd78fe631c4bd6d9f7df6050ce4a76ddedf87e821cff427955",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngSemantic.o": "9806d8ec045b34ce667cdbb6b5126266ae4faa15a99bd183217b077ee7b15a7b",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngExtended.cmi": "6f41105d55191042141e84240a5dae57b07661674180a7d0ac67c5079cf79df2",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngExtended.cmx": "816175df75d9cfbf942cfcac85b45686fec8eb2b0e00b153e966ebce5e52170c",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/dngExtended.o": "5d36a751c52bad5c2311bc93dcf8ddf52085758180bf754f70e1735858ababdb",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticDelta.cmi": "4d266b5be99863e1cec18a1957205a10b96efafe28689d51f42a1c964c75a42e",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticDelta.cmx": "0607fd12f695a0290ed8c6f0cbd8e6d07d99834334535abfe1d8fdb984022117",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticDelta.o": "a2f538810ccc9c71efa3480f4e45ae8c6d561e79a8288fa3d952c8198695fbc9",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticMailbox.cmi": "45c2926118bf2197f99f1e99176ec10089394c75df6f7582f1d3f2f7e2baa8a2",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticMailbox.cmx": "54ff5c861b2f628232c3b84f9f2643854828a0c5a5d4d7e5a54f78301d6be821",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticMailbox.o": "ec499ead7871af5add1224a216810d44e8503e747d82d3d5857ed3dc50f5fe3d",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticWorkers.cmi": "0030298178be3159cc6ef89c0b17ca522b1c65211c40b1bd2f0fb141a1897d31",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticWorkers.cmx": "c60aeba5a10e1c68abef21ba4b3a01d97982a27e707404da6c696cdb3b14f230",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kwxvu9tj/src/semanticWorkers.o": "34c38a0cdb7b8191e9a8d0c72b742756ef4352ac9b84e90b68602eaec029bc6a"
+        },
+        "stress_only": false,
+        "apply_stress_only": false,
+        "read_stats_only": true,
+        "exit": 0,
+        "source_pins": {
+          "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "src/helperSupervisor_stubs.c": "d8d947f632e846afebae7aa3f30b0133be771e57564421684c5fd9552b107fb6",
+          "src/helperSupervisor.mli": "d92a68a533c1938dda676acfe54213ff88241e8e84443d25dc8b4f46e1e9a1d5",
+          "src/helperSupervisor.ml": "d4472ef855ad1ebda749cf934537ec5300dc7231488c587f6082416a601d0b98",
+          "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+          "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+          "src/semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "src/semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "src/formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+          "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+          "src/dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "src/dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+          "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+          "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "src/dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "src/semanticDelta.mli": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305",
+          "src/semanticDelta.ml": "08c3ec7b9e8d55479f12d53594488e02981e2e9f12a2f9dce0b085a4fc77b005",
+          "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+          "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+          "src/semanticWorkers.mli": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d",
+          "src/semanticWorkers.ml": "3bb777e17ab41ca17195822317529196b9602fa14640d7874fd04732705f0eca",
+          "tests/workers/test.ml": "e2908068c0f8a92d1fc2901035c85570e04cef8a45df63dbb6b1c386b2d7d99a",
+          "tests/workers/run.py": "14070615b987b7edf3092a555178ec08855985ede933efef6fd65a7b4e8fe86f"
+        },
+        "binary_sha256": "4bddcd266f3f4063c56a24cd955c0295e7ec241c8e331f51ad1d99fffb20b5b5",
+        "log_sha256": "ae6a5f8a320ba8ec201a87788630de48ecc739cd9c29bd22a0faee2a35b96a6b",
+        "summary": []
+      },
+      "worker_terminal": {
+        "handle": 76758,
+        "chunk": "b6c9c4",
+        "exit": 0
+      },
+      "cli_report": {
+        "path": "/private/tmp/unison-read-stats-ox-final-cli-20261014.json",
+        "bytes": 2305,
+        "sha256": "8e3ef7e6e132667d6c49f713a7bf0b25484daeda87e3577b162e2ea943665cb8"
+      },
+      "cli_actual": {
+        "schema": "unison-logical-read-cli/1",
+        "workspace": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-5_ck2to9",
+        "build_receipt": "/private/tmp/unison-read-stats-ox-final-build-20261014.json",
+        "build_receipt_sha256": "f00d9041b63546037166e62b4c8369bc473d2c19af264587f8f0994d215aa179",
+        "binary_sha256": "c368af31389f5f4334bd912fe4ecd9401c974de941953ae74a01b16db56ab8ad",
+        "records": [
+          {
+            "job": 0,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          },
+          {
+            "job": 0,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          },
+          {
+            "job": 1,
+            "logical_bytes": 2097228,
+            "chunks": 40,
+            "saturated": false
+          }
+        ],
+        "logical_worker_read_bytes": 6291684,
+        "successful_nonempty_chunks": 120,
+        "output_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+        "old_basis_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+        "exact_result_basis_and_noop": true,
+        "sdk_calls": 0,
+        "sources": {
+          "tests/read_stats/cli.py": "2da093cd64c4ffae2be237ef7fe13b8832c98d7258931448a41a4091a11bb8e7",
+          "bench/sync/fixtures.py": "9d3e47b0083f6204646e08a11edc1ad9065e39d3abc6244223b83c6c9eacc580",
+          "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7"
+        },
+        "logs": [
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-5_ck2to9/sync/run-01.log",
+            "sha256": "df56e890cc6cc443af6175abf2191131dc43df6fb61510a120f5b803ef9f2253"
+          },
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-5_ck2to9/sync/run-02.log",
+            "sha256": "84b627555c9a32f1bfd4567702e3bbab6b587ce22704f5ef9c425d156ea3244d"
+          },
+          {
+            "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-5_ck2to9/sync/run-03.log",
+            "sha256": "5c4352aac43d84ab25e87221107477a3a015ee89e9f377c22d1a0db6110827bf"
+          }
+        ],
+        "scope": "Completed worker primary-reader reports across client/server; excludes nested readers (including output verification), legacy/validator reads, partial/cancelled jobs, channel prefetch, syscalls and physical I/O. Not a throughput measurement."
+      },
+      "cli_terminal": {
+        "chunk": "25d3f0",
+        "exit": 0
+      }
+    }
+  ],
+  "parser": {
+    "pin": {
+      "path": "/Users/alexy/src/unison/tests/read_stats/parser-qualification.json",
+      "bytes": 2015,
+      "sha256": "19b6eefe691b90e246f56d5b44de839909e31952fee6d46123eb57bfde02113f"
+    },
+    "actual": {
+      "schema": "unison-primary-read-parser-controls/1",
+      "groups": [
+        "client/server job IDs have separate namespaces",
+        "missing reports differ from reported zero",
+        "18 missing/duplicate/malformed/saturated/bounds controls reject",
+        "retained log cap rejects excessive input",
+        "benchmark default stays off and primary metrics never become total application reads"
+      ],
+      "source_pins": {
+        "tests/read_stats/parser.py": "544ab10dc580c829584ddf16866fe496af5b3ef0126d0c459a2201e61b463b5f",
+        "bench/sync/read_stats.py": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f",
+        "bench/sync/run.py": "d3aff8711a04c5794c0786a20f8305602918f9b7a55ebb4a523f4fc060e5109c"
+      },
+      "scope": "Pure Python static receipt/benchmark-counter parsing only; no compiler, native, SDK or Unison process.",
+      "retained_stock_cli_readback": {
+        "report_path": "/private/tmp/unison-read-stats-stock-final-cli-20261014.json",
+        "report_sha256": "427c5c2e62d3a511667fce41ec2daa12cba00cef112066bfc72ea7c064534a7f",
+        "log_path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-read-stats-cli-jshgysp9/sync/run-02.log",
+        "log_sha256": "2e4514caf9e5c8086d8a41ca7aa5997af3382e069ebd74c7b66f62cba919c5dd",
+        "parsed": {
+          "reported_jobs": 3,
+          "logical_bytes": 6291684,
+          "chunks": 120,
+          "records": [
+            {
+              "endpoint": "server",
+              "job": 0,
+              "logical_bytes": 2097228,
+              "chunks": 40
+            },
+            {
+              "endpoint": "client",
+              "job": 0,
+              "logical_bytes": 2097228,
+              "chunks": 40
+            },
+            {
+              "endpoint": "server",
+              "job": 1,
+              "logical_bytes": 2097228,
+              "chunks": 40
+            }
+          ],
+          "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+          "absence": null
+        }
+      }
+    }
+  },
+  "harness": {
+    "pin": {
+      "path": "/private/tmp/unison-read-stats-harness-20261014.json",
+      "bytes": 421717,
+      "sha256": "0a7b78ae59361ca81a2a88b6f785dbfc8f7552020a16066182c790ec268aeeff"
+    },
+    "parameters": {
+      "modes": [
+        "ordinary",
+        "receiver-clone",
+        "semantic"
+      ],
+      "workers": [
+        1,
+        2
+      ],
+      "file_mib": 2,
+      "files": 2,
+      "packet_bytes": 8192,
+      "warmups": 0,
+      "repetitions": 1,
+      "timeout_seconds": 30.0,
+      "background_note": "finite functional controls only; no Adobe/Photo; four configured endpoint credits",
+      "measure_primary_reads": true,
+      "loopback_cpu_credit_bound": 4,
+      "maximum_configured_endpoint_credit_sum": 4
+    },
+    "samples": [
+      {
+        "label": "stock",
+        "mode": "ordinary",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 4194304,
+          "materialization_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "stock",
+        "mode": "ordinary",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 4194304,
+          "materialization_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "stock",
+        "mode": "receiver-clone",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 2,
+          "receiver_clone_completed": 2,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 4177920,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 16384,
+          "materialization_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "stock",
+        "mode": "receiver-clone",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 2,
+          "receiver_clone_completed": 2,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 4177920,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 16384,
+          "materialization_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "stock",
+        "mode": "semantic",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 2,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": 6144,
+          "semantic_write_attempts": 2,
+          "semantic_payload_bytes": 16384,
+          "semantic_comparison_windows": [
+            4096
+          ],
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "materialization_non_inherited_logical_bytes_model": 6144,
+          "materialization_model_basis": "production SemanticDelta successful returned logical write bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 6,
+            "logical_bytes": 12583368,
+            "chunks": 240,
+            "records": [
+              {
+                "endpoint": "client",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "client",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 2,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 3,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              }
+            ],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": null
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "stock",
+        "mode": "semantic",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 2,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": 6144,
+          "semantic_write_attempts": 2,
+          "semantic_payload_bytes": 16384,
+          "semantic_comparison_windows": [
+            4096
+          ],
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "materialization_non_inherited_logical_bytes_model": 6144,
+          "materialization_model_basis": "production SemanticDelta successful returned logical write bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 6,
+            "logical_bytes": 12583368,
+            "chunks": 240,
+            "records": [
+              {
+                "endpoint": "client",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "client",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 2,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 3,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              }
+            ],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": null
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "ordinary",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 4194304,
+          "materialization_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "ordinary",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 4194304,
+          "materialization_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "receiver-clone",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 2,
+          "receiver_clone_completed": 2,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 4177920,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 16384,
+          "materialization_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "receiver-clone",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 0,
+          "receiver_clone_starts": 2,
+          "receiver_clone_completed": 2,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 4177920,
+          "semantic_logical_write_bytes": null,
+          "semantic_write_attempts": null,
+          "semantic_payload_bytes": null,
+          "semantic_comparison_windows": [],
+          "semantic_profiles": [],
+          "materialization_non_inherited_logical_bytes_model": 16384,
+          "materialization_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 0,
+            "logical_bytes": null,
+            "chunks": null,
+            "records": [],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": "unavailable or no primary-reader jobs; not measured zero"
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "semantic",
+        "workers": 1,
+        "counters": {
+          "semantic_updates": 2,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": 6144,
+          "semantic_write_attempts": 2,
+          "semantic_payload_bytes": 16384,
+          "semantic_comparison_windows": [
+            4096
+          ],
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "materialization_non_inherited_logical_bytes_model": 6144,
+          "materialization_model_basis": "production SemanticDelta successful returned logical write bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 6,
+            "logical_bytes": 12583368,
+            "chunks": 240,
+            "records": [
+              {
+                "endpoint": "client",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "client",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 2,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 3,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              }
+            ],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": null
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      },
+      {
+        "label": "ox",
+        "mode": "semantic",
+        "workers": 2,
+        "counters": {
+          "semantic_updates": 2,
+          "receiver_clone_starts": 0,
+          "receiver_clone_completed": 0,
+          "source_clone_completed": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_logical_write_bytes": 6144,
+          "semantic_write_attempts": 2,
+          "semantic_payload_bytes": 16384,
+          "semantic_comparison_windows": [
+            4096
+          ],
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "materialization_non_inherited_logical_bytes_model": 6144,
+          "materialization_model_basis": "production SemanticDelta successful returned logical write bytes",
+          "receiver_clone_declines": 0,
+          "semantic_fallback_events": 0,
+          "primary_reader_reads": {
+            "reported_jobs": 6,
+            "logical_bytes": 12583368,
+            "chunks": 240,
+            "records": [
+              {
+                "endpoint": "client",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "client",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 0,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 1,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 2,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              },
+              {
+                "endpoint": "server",
+                "job": 3,
+                "logical_bytes": 2097228,
+                "chunks": 40
+              }
+            ],
+            "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+            "absence": null
+          },
+          "application_read_bytes": null,
+          "hash_parse_verify_commit_seconds": null,
+          "physical_storage_write_bytes": null,
+          "queue_descriptor_peaks": null
+        },
+        "exact_result_and_unchanged_basis": true,
+        "noop_preserved_receiver_inode": true,
+        "staging_cleaned": true,
+        "private_fixture_removed": true
+      }
+    ],
+    "rows": 12,
+    "cli_invocations": 36,
+    "actual_parent_terminal": {
+      "handle": 85911,
+      "chunk": "d3a7ba",
+      "exit": 0,
+      "running_session_returned": false
+    },
+    "client_and_supervisor_groups_cleaned_server_children_reaped": true
+  },
+  "build_owner_closure": {
+    "path": "/Users/alexy/src/unison/tests/qualification/read-stats-build-owner-closure-20261014.json",
+    "bytes": 2858,
+    "sha256": "74cf212e1f999e6956866c8abdb63034efaee51908172c176cea0c27c736040d"
+  },
+  "sdk_executions": 0,
+  "limits": [
+    "Primary input reader only; nested readers/output verification/legacy/validator/failed reads and all physical/syscall I/O excluded.",
+    "No speedup or total application-read/RSS/global resource qualification.",
+    "Saturating-counter arithmetic source-reviewed; parser saturation rejection tested, actual int64 counter exhaustion not exercised.",
+    "No SDK/Photo/Lightroom or renderer capability."
+  ]
+}

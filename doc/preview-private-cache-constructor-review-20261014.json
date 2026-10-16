@@ -1,0 +1,201 @@
+{
+  "schema": "unison-preview-constructor-source-review/1",
+  "dateUTC": "2026-10-14",
+  "decision": "ACCEPT_SOURCE_MECHANISM_FOR_EMPTY_PREREQUISITE_WITH_RUNTIME_PASS_HOLD_CONDITIONS",
+  "ownership": {
+    "nativeDriver": "Photo Root",
+    "rendererPublisher": "original /root/preview_implementation",
+    "UnisonScope": "source/interface review only",
+    "newNativeWindowReleased": false
+  },
+  "inputs": [
+    {
+      "role": "coordination_ack",
+      "path": "/Users/alexy/src/photo/unison-preview-bridge-ack-1eb34b2ffeb049ec8aa24ceb7486ce12.json",
+      "bytes": 1669,
+      "sha256": "f5720547477dd864e90e7d22f52c4954a144a6d9261439386c3f466c4f385dff"
+    },
+    {
+      "role": "constructor_source_proposal",
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/FIXTURE-SELECTION-SOURCE.md",
+      "bytes": 18261,
+      "sha256": "d99a89b8b6644bb4355736bdcb74dc678f7c1d2432c2aa8d85675a9ac7656383"
+    },
+    {
+      "role": "sealed_recipe_gate",
+      "path": "/Users/alexy/src/unison/doc/preview-offline-registration-test-plan.md",
+      "bytes": 7009,
+      "sha256": "3646aa7809ba86cc85db95143a8509f72b265b1015dc86ebe2bb857dab5af40f"
+    },
+    {
+      "role": "recipe_ready",
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/READY-FOR-REVIEW.json",
+      "bytes": 4298,
+      "sha256": "f657564ad0f31604d00cfc9e7e17418906507dabefa09c4dca3dac86d6899537"
+    },
+    {
+      "role": "scope_erratum",
+      "path": "/Users/alexy/src/photo/preview-generator/offline-recipe-v1/ERRATA-NEXT-NATIVE-SCOPE-20261014.json",
+      "bytes": 1677,
+      "sha256": "beaffbddc8d41b418046b17014ab25877499ae73ca8e2f9254d57e31ec493f72"
+    },
+    {
+      "role": "current_pointer_observed",
+      "path": "/Users/alexy/src/unison/PHOTO-OWNER-PREVIEW-VALIDATION-CURRENT.json",
+      "bytes": 10489,
+      "sha256": "a2ebbb3cf7a1109700f650f5a564c57d02e402335db1cb6912c99e99d0a3a422"
+    }
+  ],
+  "localSourceArtifacts": [
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/PreviewCache-direct-transport.disassembly.txt",
+      "bytes": 65229,
+      "sha256": "6fd2f404157ccae9aaf198c6b4a735efab04dee3c83114601a6ce01011797eee"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/PreviewFileStore-direct-transport.disassembly.txt",
+      "bytes": 69407,
+      "sha256": "78e5329d1b3b98af6416f6686002503274eea91e12a45ef9c7fa552af0ecfeeb"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/PreviewDataStore-direct-transport.disassembly.txt",
+      "bytes": 138170,
+      "sha256": "011fa8a3d247fbb88afb91b5bc96ac22239b733e1929eec150d23cbeef3f3efc"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/RootPixelsStore-census.disassembly.txt",
+      "bytes": 24510,
+      "sha256": "1cb602bf1da93d2d582e26bdb0710e3e690b6357bf118d7ef46d205caa2eb2bd"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/AgServerUtils-fixture-selection.disassembly.txt",
+      "bytes": 13651,
+      "sha256": "02f06af48afa4fe1e303439c409c5b44c9238891151e2a0b303879d0fab67549"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/AgEventLoop-fixture-selection.disassembly.txt",
+      "bytes": 98159,
+      "sha256": "6e3eae82976d63b56935c18352212cdb2b75a3ba028304c50cd3bd113ee134a7"
+    },
+    {
+      "role": "local source analysis; not redistributed",
+      "path": "/private/tmp/AgPreviewUtils-fixture-selection.disassembly.txt",
+      "bytes": 73149,
+      "sha256": "423ccf77295aa91131edb4d3fd7142437d14fc8ba501535837ec16799ea86b5d"
+    }
+  ],
+  "reviewMethod": {
+    "root": "Verified supplied SHA pins, read current pointer first, independently inspected constructor/close/observer/store source sections and compared sealed recipe gate",
+    "subagent": "Separate read-only source review independently inspected lifecycle and preference sections; no execution or edits",
+    "installedRuntimeClaims": "Source artifacts support inspected internal Lua mechanism; fresh executable/module/owner admission remains Photo Root responsibility"
+  },
+  "findings": [
+    {
+      "id": "C1",
+      "result": "SOURCE_SUPPORTED",
+      "observation": "Aggregate factory receives root/preferences, creates three stores, then cache table; this body does not replace processor.previewCache or active catalog. Internal Lua route is not a public SDK guarantee.",
+      "source": "/private/tmp/PreviewCache-direct-transport.disassembly.txt:2075",
+      "acceptance": "Successful returned private cache and three distinct private stores, exact private root/database paths, independent scalar preference copy, production object/path identities unchanged."
+    },
+    {
+      "id": "C2",
+      "result": "EXPLICIT_RUNTIME_HOLD",
+      "observation": "Stores, queue and heartbeat registrations can exist before aggregate cache table/return; no constructor rollback is visible.",
+      "source": "/private/tmp/PreviewCache-direct-transport.disassembly.txt:2075",
+      "acceptance": "Unexpected construction exception is HOLD. Retain coordinator/lease and unresolved recovery ownership; callback closure or absent returned cache does not prove earlier stores/observers/queue settled. No deliberate failure injection in first qualification."
+    },
+    {
+      "id": "C3",
+      "result": "SOURCE_SUPPORTED_WITH_RUNTIME_EVIDENCE",
+      "observation": "Four distinct private heartbeat registrations require four removals; ordinary close does not remove them. Removal takes one plain private object argument.",
+      "sources": [
+        "/private/tmp/PreviewCache-direct-transport.disassembly.txt:2104",
+        "/private/tmp/PreviewFileStore-direct-transport.disassembly.txt:2256",
+        "/private/tmp/PreviewDataStore-direct-transport.disassembly.txt:1552",
+        "/private/tmp/RootPixelsStore-census.disassembly.txt:497",
+        "/private/tmp/AgServerUtils-fixture-selection.disassembly.txt:377"
+      ],
+      "acceptance": "Retain strong private references and log all four completed removals without voluntary yield/load/save. No production observer removal. Reentrant/unknown cleanup stays HOLD; no claim that removal cancels an already executing task."
+    },
+    {
+      "id": "C4",
+      "result": "BOUNDED_FIRST_PASS",
+      "observation": "Cleanup idle callback calls shared quiesce(true). Queue task stop is not running-coroutine or native-call cancellation.",
+      "sources": [
+        "/private/tmp/PreviewCache-direct-transport.disassembly.txt:1827",
+        "/private/tmp/PreviewCache-direct-transport.disassembly.txt:1849",
+        "/private/tmp/AgEventLoop-fixture-selection.disassembly.txt:1463"
+      ],
+      "acceptance": "Simplest first pass requires deletionTask nil. Record all five FileStore conditions: activeTasks, pendingPaths, pendingTasks empty; pixelsInQueue and previewsInQueue zero. Unknown/running task, timeout or teardown error retains ownership."
+    },
+    {
+      "id": "C5",
+      "result": "SOURCE_SUPPORTED_CLOSE_ROUTE",
+      "observation": "Aggregate close is FileStore then DataStore then RootPixelsStore; earlier failure skips later stores. FileStore flushes/waits/requests queue quit; these inspected sections do not prove OS worker termination or clearing writeQueue.",
+      "sources": [
+        "/private/tmp/PreviewCache-direct-transport.disassembly.txt:1975",
+        "/private/tmp/PreviewFileStore-direct-transport.disassembly.txt:1902"
+      ],
+      "acceptance": "One normal close completion plus genuine owned request closure and independent closed-family readback. Report API-close scope; no automatic second aggregate close, timeout cancellation or worker-exit inference. Partial close retains all remaining strong references and recovery ledger."
+    },
+    {
+      "id": "C6",
+      "result": "NATIVE_TRANSACTION_ROUTE_ONLY",
+      "observation": "Both databases own separate native Auto savepoints/flush observers; normal close releases that store Auto, clears inTransaction and closes database.",
+      "sources": [
+        "/private/tmp/PreviewDataStore-direct-transport.disassembly.txt:1518",
+        "/private/tmp/PreviewDataStore-direct-transport.disassembly.txt:1574",
+        "/private/tmp/PreviewDataStore-direct-transport.disassembly.txt:4008",
+        "/private/tmp/RootPixelsStore-census.disassembly.txt:497",
+        "/private/tmp/RootPixelsStore-census.disassembly.txt:730"
+      ],
+      "acceptance": "No authored transaction SQL or dirty/inTransaction manipulation. Independent read-only closed private family confirms schema13/schema1, absence of control registrations and actual companion state. Empty auxiliary state does not qualify populated recipe."
+    },
+    {
+      "id": "C7",
+      "result": "LATER_GATE_SCOPE_ADDENDUM_REQUIRED",
+      "observation": "Same-server private cache construction/load qualifies explicit-root native cache mechanism. It does not establish active Library/UI recognition, normal app restart, rendering or Quasar placement.",
+      "acceptance": "Preserve sealed recipe-gate bytes. Add separate same-server route mapping: independent committed readback BEFORE private construction/open, exclusive CLOSED private-family publication, fresh private cache/store-root admission, current production Main binding before/after, preserved control highest+lower decode and raw mappings, zero repair/replay/legacy fallback. Normal close while Main stays open is a separately scoped private-family alternative to sealed gate normal app close/open; do not silently claim original app/UI variant passed."
+    }
+  ],
+  "citationErrata": [
+    {
+      "proposalEntry": "PreviewCache cleanup 1850\u20131898",
+      "correctedLocalLines": "1827\u20131866 (entry1827\u20131848, callback1849\u20131866)",
+      "semanticContractChanged": false
+    },
+    {
+      "proposalEntry": "Eleven-field preference producer1523\u20131564",
+      "correctedLocalLines": "1523\u20131568 (includes gpuConcurrencyLimit/return)",
+      "semanticContractChanged": false
+    }
+  ],
+  "firstEmptyPassProves": [
+    "Actual existing-thread factory/environment works with one owned Ten-only root and exact captured scalar preferences",
+    "Private store root binding and finite observer/task/normal-close route under that admission",
+    "Independent closed native schema families after successful teardown"
+  ],
+  "firstEmptyPassDoesNotProve": [
+    "Partial constructor or failure cleanup",
+    "Populated RootPixels handling or authored recipe recognition",
+    "Preview load/decode/save or pixel color fidelity",
+    "Cold private one-control reuse, normal app restart or production Library/UI recognition",
+    "Quasar split/native rewrite/trim/missing-target behavior,5120 monitor coverage,renderer/full run,power-loss durability"
+  ],
+  "execution": {
+    "nativeCalls": 0,
+    "previewLoads": 0,
+    "decodeSave": 0,
+    "AdobeUIInvocations": 0,
+    "databaseOrMediaPayloadOpens": 0,
+    "fixtureCreations": 0,
+    "productionMutations": 0,
+    "sourceReadAndRepoDocumentationOnly": true
+  }
+}

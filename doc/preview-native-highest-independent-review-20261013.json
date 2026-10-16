@@ -1,0 +1,492 @@
+{
+  "schemaVersion": 1,
+  "state": "ACCEPTED_ONE_CONTROL_POST_RESTART_NATIVE_HIGHEST_LOAD_AND_RELOAD",
+  "utc": "2026-10-14T04:04:25.634672+00:00",
+  "reviewer": "/root/strict_range_review",
+  "originalRendererPublisherOwner": "/root/preview_implementation",
+  "acceptance": "One current-key control is recognized after the actual Classic process restart: committed six-level registration and direct storedAB mapping were observed before the first authored highest request; both LOAD and RELOAD selected and decoded the registered2272x1704 highest JPEG. Five owned callbacks and the associated helper/admission/canonical lease are evidenced closed. No blocker within this exact scope.",
+  "reviewOperations": {
+    "sourceLogJsonOnly": true,
+    "previewOrPhotoPayloadOpensHashesDecodes": 0,
+    "mainOrCacheDbOpens": 0,
+    "adobeNativeUiInvocations": 0,
+    "testBuildBenchmarkReruns": 0,
+    "productionOrOwnerFileEdits": 0,
+    "onlyNewFile": "doc/preview-native-highest-independent-review-20261013.json",
+    "firstControlHistoryReaudit": false
+  },
+  "runtime": {
+    "directory": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z",
+    "catalogPID": 40020,
+    "start": "Tue Oct 13 19:47:43 2026",
+    "nonce": "cold-native-preview-b1c6c27826eb466dbbb10e72b44788af",
+    "control": {
+      "image": 10031592,
+      "rootFile": 10031593,
+      "uuid": "8EE855A1-C41C-4C9A-9CC0-35F8C04E12C3",
+      "digest": "46e0a188a3f637676f25db569a11268b",
+      "settingsId": 10031601,
+      "orientation": "AB"
+    },
+    "rootReleasePin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-HIGHEST-RELEASE.json",
+      "bytes": 6247,
+      "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+    },
+    "returnPacketPin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/RETURN-PACKET.json",
+      "bytes": 9019,
+      "sha256": "5eff456fe9dc7ad7f196f95fbd3c8eb2aeafe1ec2a1771cd79b4c3a388053eee"
+    },
+    "completePin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMPLETE.json",
+      "bytes": 28923,
+      "sha256": "5c14b1f24909b92845babfa3824f4c37d583380089aab3ce8cad429d70623553"
+    },
+    "closurePin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/SLOT-CLOSED.json",
+      "bytes": 2886,
+      "sha256": "662c05ee78718dd5971b161d5e9c8cc35c1a9843a825c33c846122c616ac8a44"
+    },
+    "actualUnlockedBeforeHelperReceipt": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ACTUAL-UNLOCKED-BEFORE-HELPER.json",
+      "bytes": 162,
+      "sha256": "75a0a3265bcc3a729808f53bd1697233bf886d4490ca48ad25ebf18a9f264ab9"
+    },
+    "rootRawStartHasFourTerminalAsciiSpaces": true,
+    "normalizedAdmissionStartPreservesInternalSpacing": true,
+    "freshNonceDistinctFromPriorHeldRuntime": true
+  },
+  "sourceAndAdmission": {
+    "privateServer": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_server.lua.in",
+      "bytes": 23054,
+      "sha256": "b24796a57616d233cf83374c55ceb2cbd3e00080f9e9047081d7c00daf3182f0"
+    },
+    "sourceReview": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/INDEPENDENT-SUCCESSOR-REVIEW-FINAL.json",
+      "bytes": 6560,
+      "sha256": "64cf4288e6ebc5a3a664366895022c493e4e77746b09b0a3b6ac88d26042f8da"
+    },
+    "unisonRequest": {
+      "path": "/Users/alexy/src/unison/doc/preview-post-restart-highest-request-20261013.json",
+      "bytes": 11233,
+      "sha256": "08597ca76a6d8465f0d1f74d37eba9cfdc1edd08236100454e932cc552177452"
+    },
+    "preparedSourcePinsChecked": 5,
+    "installedModulePinsChecked": 11,
+    "nativeAdmissionMatchesRootRuntimeSourceAndProcessPins": true,
+    "onlyHighestRegisteredMode": true,
+    "requestWidth": "full",
+    "requestHeight": null,
+    "requestScale": null,
+    "reason": "develop_gpu_loupe_initial_pixels",
+    "noAuthoredReregistrationExplicitSaveSqlRenderOrPlacement": true,
+    "rootCallbackMaximum": 21,
+    "rootNativeLoadMaximum": 10,
+    "rootAttemptMaximum": 10,
+    "overallSourceDeadlineSeconds": 180,
+    "callbackSourceDeadlineSeconds": 30,
+    "sourceDeadlinesCancelNativeCalls": false,
+    "aggregateCredits": 18,
+    "runtimeSources": 1,
+    "runtimeCurrentKeyStates": 1
+  },
+  "rawEvidence": {
+    "serverRecordsParsed": 54,
+    "twoModes": [
+      "LOAD",
+      "RELOAD"
+    ],
+    "actualReturnedLevelCountEachPass": 6,
+    "returnedLevelBindingsVerified": 12,
+    "highestExpectationsCopiedBeforeLoad": 2,
+    "highestRowLevel": 6,
+    "highestDimensions": [
+      2272,
+      1704
+    ],
+    "highestLongDimension": 2272,
+    "highestPositiveFileSize": 646453,
+    "actualNativeSelectedDecodes": 2,
+    "selectedIndexEachPass": 6,
+    "selectionQualifiedByExactHighestGeometryAndNativeRowNotArrayPosition": true,
+    "wholePyramidUuidDigestCurrentBothPasses": true,
+    "allReturnedLevelDigestsCurrentBothPasses": true,
+    "actualLevelUuidAbsentAccepted": true,
+    "selectedPostMaybeMakePixelsDigestGeometryOrientationMatch": true,
+    "rawMappingStagesVerified": [
+      "LOAD:BEFORE_LOAD",
+      "LOAD:POST_LOAD",
+      "LOAD:POST_DECODE",
+      "RELOAD:BEFORE_LOAD",
+      "RELOAD:POST_LOAD",
+      "RELOAD:POST_DECODE"
+    ],
+    "allSixMappingsCurrentDirectStoredAB": true,
+    "nativeDefaultApplied": false,
+    "selectedTasksPendingOrActiveAtFinalObservation": false,
+    "recordedCompletePassArraysExactlyMatchRawLogs": true
+  },
+  "properties": {
+    "pyramidHeaderBeforeAfterBothPasses": {
+      "uuid": "8EE855A1-C41C-4C9A-9CC0-35F8C04E12C3",
+      "digest": "46e0a188a3f637676f25db569a11268b",
+      "quality": "final",
+      "colorProfile": "AdobeRGB",
+      "croppedWidth": 2272,
+      "croppedHeight": 1704,
+      "fromProxy": 0
+    },
+    "eachReturnedLevelQuality": "final",
+    "eachReturnedLevelProfile": "AdobeRGB",
+    "eachReturnedLevelOrientation": "AB",
+    "allTwelveLevelPropertiesIndependentlyChecked": true,
+    "actualPostPolicyWidth": "full",
+    "actualPostPolicyHeight": null,
+    "actualPostPolicyScale": null,
+    "nativePixelColorInterpretationOrRgbEqualityCaptured": false
+  },
+  "registrationAndMappingAvailability": {
+    "beforeFirstLoadCommittedRows": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-PRE-LOAD-COMMIT-ROWS.json",
+      "bytes": 4087,
+      "sha256": "e3f876fea8d0413e55c491b24eb82964d47eac0dfcb41317870b6e8e01b16027"
+    },
+    "afterLoadReloadCommittedRows": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMMIT-VISIBLE-READBACK.json",
+      "bytes": 2266,
+      "sha256": "37e44f0da196d08ece339a3b4699c553550456c7cdaadb082bd72124ec528eef"
+    },
+    "separateReadonlyReadersAcceptedFromPinnedReceipts": true,
+    "beforeAfterSixLevelRowsEqual": true,
+    "beforeAfterCurrentImageCacheEntryValuesEqual": true,
+    "beforeFirstLoadNativeRawMappingCurrentAndStoredAB": true,
+    "mappingRepairedByThisAuthoredLoadRequired": false,
+    "sourceRowsAndDiskByteMetadataMatch": true,
+    "scope": "Committed current-key rows and mapping values are available after restart before this authored highest request, then match afterward without authored registration replay. Autonomous startup/background operations were not exhaustively audited; uninterrupted physical SQLite-row identity is not claimed.",
+    "readerQueriesExecutedByThisReviewer": false
+  },
+  "fileEvidence": {
+    "beforePin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-BEFORE.json",
+      "bytes": 3341,
+      "sha256": "f7ae052246cddd2743761dd141501bfaa2088c75582e82da9b5c1a210b44ed44"
+    },
+    "afterPin": {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-AFTER.json",
+      "bytes": 3340,
+      "sha256": "1b68cf62090c788fe964c171de0f083ae8a7828ba67b684789d7875152ae24cd"
+    },
+    "sevenIdentitySizeMtimeCtimeAndShaArraysEqual": true,
+    "allSixRegisteredPositiveSizesMatchOwnerFileMetadata": true,
+    "preLoadTargetsMatchOwnerBeforeIdentities": true,
+    "ownerVerifierReadersClosedAccordingToReceipts": true,
+    "ownerBeforeAndAfterMediaBytesTotal": 4001600,
+    "ownerNewIndependentEntropyDecodes": 0,
+    "reviewerMediaBytesRead": 0,
+    "sourceScope": "The runtime verifier hashes the one preserved container and six existingJPEGs before/after. Historical independent codec validation is an accepted earlier checkpoint, not re-run or reconstructed here. Native cache read bytes are not globally measured."
+  },
+  "closure": {
+    "callbacks": [
+      [
+        "1",
+        "MAIN_BEFORE",
+        "IDENTITIES_MATCHED"
+      ],
+      [
+        "2",
+        "PREVIEW_10031592_LOAD",
+        "CURRENT_INITIAL_OBSERVATION"
+      ],
+      [
+        "3",
+        "PREVIEW_10031592_OBSERVE",
+        "DRAINED"
+      ],
+      [
+        "4",
+        "PREVIEW_10031592_RELOAD",
+        "CURRENT_NATIVE_DISK_OBSERVATION"
+      ],
+      [
+        "5",
+        "MAIN_AFTER",
+        "IDENTITIES_MATCHED"
+      ]
+    ],
+    "submittedReturnedCallbackSequencesMatch": true,
+    "ownedCallbackCount": 5,
+    "nativeLoadCount": 2,
+    "drainObservationCount": 1,
+    "mainBeforeAfterRowsEqual": true,
+    "outstandingOwnedRequests": 0,
+    "ownedRequestHandlesClosedPerPinnedUiSource": true,
+    "helperResponseAndDispatcherRestorePinsMatch": true,
+    "observerPreviousSourceMatchesRestorationReceipt": true,
+    "canonicalLeasePath": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/io-leases/Photo-CB2B2D86-3BAE-4319-9DB4-D25E6B462D44.lock",
+    "canonicalLeaseDevIno": [
+      16777223,
+      304149394
+    ],
+    "acquiredReleasedIdentityMatches": true,
+    "genuineClosurePrecedesLeaseRelease": true,
+    "kernelLeaseAvailableAcceptedFromRootSlotReceipt": true,
+    "kernelProbePerformedByThisReviewer": false,
+    "admissionWithdrawnAndNoAdmittedFileRemains": true,
+    "coordinatorExitedAccordingToRootSlotReceipt": true,
+    "coordinatorOuterExitCodeNotSeparatelyRetainedInThisPacket": true,
+    "globalLightroomQuiescenceClaimed": false,
+    "rootBackgroundTimerExcludedByWatcherLock": false
+  },
+  "remainingLimits": [
+    "This is process-restart recognition of one existing current key and its native highest selectedJPEG. It is not hardware cold-I/O or fsync/power-loss durability, native rendering of all levels, or a performance benchmark.",
+    "The small2272x1704 control cannot qualify large-source5120x2880 monitor coverage, actual Library viewport/backing-scale fit, complete pyramid ladder/rounding policy, or rotated/default-orientation cases.",
+    "Final/AdobeRGB/AB native metadata and post-decode geometry/digest/orientation are checked. No nativeRGB array equality, external-profile color-transform fidelity, intrinsicJPEG orientation or faithful masks/AI/dependency rendering is established.",
+    "Before-first-load current committed mapping supports observed availability across restart without authored repair. It does not prove continuous row/byte state during unobserved startup/background activity or all future invocations.",
+    "No Quasar target/symlink publication, native rewrite/trim/delete, missing-highest mount-loss fallback, offline metadata publisher, root-pixels publication recipe or cross-volume interruption recovery is qualified.",
+    "No new55-tombstone/full namespace preservation census, renderer/generator/full-cache admission,18-worker throughput or storage physical-sharing evidence is supplied.",
+    "Source39cases remain source evidence. Runtime proves the successful highest/directAB branch only; stale/default/timeout and busy-bound branches were not all exercised. Closure is five owned callbacks and associated helper/lease, not global native quiescence.",
+    "This reviewer read only source/log/JSON and accepted retained owner reader/kernel-probe receipts; live database/media/kernel state was not independently invoked. No new oracle or publisher window is released."
+  ],
+  "baselineIndependentReviewReference": {
+    "path": "/Users/alexy/src/unison/doc/preview-native-one-control-independent-review-20261013.json",
+    "bytes": 28799,
+    "sha256": "672a0dc69e57f8f59fbbf14857f369b91843373f8b014cf8ab406e1de8215cea",
+    "notReauditedHere": true
+  },
+  "verifiedArtifactEntries": 51,
+  "uniqueArtifactPins": 46,
+  "artifactPins": [
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ACTUAL-UNLOCKED-BEFORE-HELPER.json",
+      "bytes": 162,
+      "sha256": "75a0a3265bcc3a729808f53bd1697233bf886d4490ca48ad25ebf18a9f264ab9"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMMIT-VISIBLE-READBACK.json",
+      "bytes": 2266,
+      "sha256": "37e44f0da196d08ece339a3b4699c553550456c7cdaadb082bd72124ec528eef"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/COMPLETE.json",
+      "bytes": 28923,
+      "sha256": "5c14b1f24909b92845babfa3824f4c37d583380089aab3ce8cad429d70623553"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-AFTER.json",
+      "bytes": 3340,
+      "sha256": "1b68cf62090c788fe964c171de0f083ae8a7828ba67b684789d7875152ae24cd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FILES-BEFORE.json",
+      "bytes": 3341,
+      "sha256": "f7ae052246cddd2743761dd141501bfaa2088c75582e82da9b5c1a210b44ed44"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/FirstPair) Observe retained previews directly.lua",
+      "bytes": 35121,
+      "sha256": "83414f168f7dfb9f9c6f993aa4f5c44b4dce228f661f3b3baf0c3b7a823b3d26"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/GENUINE-CLOSURE.json",
+      "bytes": 1166,
+      "sha256": "db0d8904a4b9b9fa54009d12c4758dba2a62e81adb790adeb233e94873c1234d"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-PROCESS.json",
+      "bytes": 114,
+      "sha256": "12826846a4abda50d6b6b1719366b6f1f892084e3ece121bab5227955d082764"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/HELPER-STDOUT.txt",
+      "bytes": 557,
+      "sha256": "126a7c3288bdc7e0a2aad3491f673072f4160f45edcae0bd504a1ac3da20c748"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/LEASE-ACQUIRED.json",
+      "bytes": 312,
+      "sha256": "4c330ca46319d4cfc4aa6770926dc9907b49cdeece7cf99a0681419df903c14b"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/LEASE-RELEASED.json",
+      "bytes": 299,
+      "sha256": "90e56aa353d35c133d84b4da9d8144163af9bd053ded0ba62cbe8e2cd6003455"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/MAIN-AFTER.txt",
+      "bytes": 210,
+      "sha256": "61d21e5fb5e3cc3f0dd7ce5b71d1cae77aec0ffa6ceb3b8bcfabf15006122098"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/MAIN-BEFORE.txt",
+      "bytes": 211,
+      "sha256": "8cd8c746310fff174190fbb0570e445b634f3ae0c2668254f84d768e46b7a2b2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/NATIVE-ADMISSION.json",
+      "bytes": 1008,
+      "sha256": "90220039c9859c90f0a8c01a6d12f8e7e37e1bd8208595040c4790dbebc106bf"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREPARATION.json",
+      "bytes": 6773,
+      "sha256": "33d19de8ca3f578cc80a6e5964132e313231c56d7549f1dc8cbeb382082a34ed"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREVIEW-SERVER.txt",
+      "bytes": 23970,
+      "sha256": "a790e744dd3a05cd0e8e55ff11a1c69caea2c00e908a9afb1fa3e7ac002db1ef"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/PREVIOUS-INSTALLED-MENU.lua",
+      "bytes": 544151,
+      "sha256": "92589c22beee19f310fcd478b56bcab6f77d271322f78d009035d4a4415fd02b"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-HIGHEST-RELEASE.json",
+      "bytes": 6247,
+      "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-PRE-LOAD-COMMIT-ROWS.json",
+      "bytes": 4087,
+      "sha256": "e3f876fea8d0413e55c491b24eb82964d47eac0dfcb41317870b6e8e01b16027"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-RELEASE-SHA256.txt",
+      "bytes": 65,
+      "sha256": "f31523560e94c0f916d6b7bcad5b338f52153ac8400af114f0984ed2bb07fbe0"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/ROOT-RELEASE.json",
+      "bytes": 6247,
+      "sha256": "56f2f27c9aa609f7d0690edcc0dde3695940b0b905b9d1eb0dca43b1a9940631"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/SLOT-CLOSED.json",
+      "bytes": 2886,
+      "sha256": "662c05ee78718dd5971b161d5e9c8cc35c1a9843a825c33c846122c616ac8a44"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/UI.txt",
+      "bytes": 916,
+      "sha256": "db69fe968e3c29c41a42513653941c0fb7a9e9aad38afcea4917ea4f70b738ad"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/WITHDRAWN-ADMISSION.txt",
+      "bytes": 53,
+      "sha256": "0cfa8d53aa57da97e406b90a7eea10804fd1b7ccdf63d95c7bb96eefbc08fe26"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/coordinator.py",
+      "bytes": 11373,
+      "sha256": "b7bb7ac0cd0e29ae481465efb500a1132f677d3ed30ee4fd8fa4f5c1882bc2b3"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_server.lua.in",
+      "bytes": 23054,
+      "sha256": "b24796a57616d233cf83374c55ceb2cbd3e00080f9e9047081d7c00daf3182f0"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/INDEPENDENT-SUCCESSOR-REVIEW-FINAL.json",
+      "bytes": 6560,
+      "sha256": "64cf4288e6ebc5a3a664366895022c493e4e77746b09b0a3b6ac88d26042f8da"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/preview-post-restart-highest-request-20261013.json",
+      "bytes": 11233,
+      "sha256": "08597ca76a6d8465f0d1f74d37eba9cfdc1edd08236100454e932cc552177452"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/prepare.py",
+      "bytes": 6050,
+      "sha256": "6c0248ab9a86f0faa3bff00ee1181f691cc51aae136cbfb73727a3faeb74aa3b"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_ui.lua.in",
+      "bytes": 8384,
+      "sha256": "473148bb2d8a1f0cb6100273bd5ff5e7d7a6ca30e642e6f589c6084ca3b153b2"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/native_direct_preview_probe_main.lua.in",
+      "bytes": 2318,
+      "sha256": "b0b2f621b042570187fcd34598cd4a166d499ec96b29c9d0867a6083acd65196"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/AgPreviewManager.lua",
+      "bytes": 44794,
+      "sha256": "f95ace0ff7eeba2bf8e45bd33cead804252c2a938e6691e1a4af1aba9d7bcd39"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/PreviewCache.lua",
+      "bytes": 17156,
+      "sha256": "56901336d6799557b24e4eaf2c192cbc5932987e14f3f397f61a635ac7fbdec1"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/PreviewReason.lua",
+      "bytes": 5703,
+      "sha256": "ae6d421962a13cd8159a9fbbf2d9eb474481c92db97452536171592bea1f8478"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/PreviewFileStore.lua",
+      "bytes": 18331,
+      "sha256": "3de3989f2dc6a9ffbf811c2249a2fa10e021a7012a525ff0aca8c05d93378f69"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/PreviewFile.lua",
+      "bytes": 9054,
+      "sha256": "e38f9a5c37f0856517ee7d0654799c4c8846ba2b6a4ad190a726d60e504ca5e8"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/Preview.lua",
+      "bytes": 2942,
+      "sha256": "22c3d2fec490750484365bce89b88f4ee7210058f42db1cfa7055be238b082b7"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/PreviewDataStore.lua",
+      "bytes": 39554,
+      "sha256": "af7f79d6c4e4cb927d542e20f547d93e8653a0f918a7d56ac507a6c097cd8ce4"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/LibraryToolkit.agtoolkit/Contents/Resources/AgPreviewUtils.lua",
+      "bytes": 22027,
+      "sha256": "1c2d98d958999da2954cef30b8f47304e8513da001d9a7e85e6de2f24eabeff5"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/AgSubstrate.framework/Versions/A/Resources/AgServer.lua",
+      "bytes": 14985,
+      "sha256": "09fd62cd6bab70d7091cb2f69542d290448c80e807d0d9dddf715636e4d5a9b9"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/AgSubstrate.framework/Versions/A/Resources/AgServerHandle.lua",
+      "bytes": 10546,
+      "sha256": "47a7fe8f2a9270d6e0d9a493fe78f2b888c3f2a9ff8044b1cbc16237f31488d6"
+    },
+    {
+      "path": "/Applications/Adobe Lightroom Classic/Adobe Lightroom Classic.app/Contents/Frameworks/AgSubstrate.framework/Versions/A/Resources/AgServerUtils.lua",
+      "bytes": 4689,
+      "sha256": "7662e00bb2626fb51dab181d9e238fec380be09b8e63973e02fb89b15ffc085b"
+    },
+    {
+      "path": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/morrobay-lux-receiver-20261013T044039Z-33902261d05f49b7bac620eaccecc364/ui-click_preview_script-3c0667d3692c4398b3b507d689df6943/RESPONSE.txt",
+      "bytes": 64,
+      "sha256": "a174d3250874a5669fd776d0f2e4734b7f0b427bfb5bd446059a2a4cf0c983ce"
+    },
+    {
+      "path": "/Users/alexy/Library/Application Support/FirstPair Lightroom Shuttle/morrobay-lux-receiver-20261013T044039Z-33902261d05f49b7bac620eaccecc364/ui-click_preview_script-3c0667d3692c4398b3b507d689df6943/RESTORED.json",
+      "bytes": 115,
+      "sha256": "07dee809225946518802ed2a5df919e071566d2b94b2c6a9ee62962c37748e74"
+    },
+    {
+      "path": "/Users/alexy/src/photo/native-preview-cold-highest-source-v1-20261014/runtimes/post-restart-highest-unlocked-20261014T0354Z/RETURN-PACKET.json",
+      "bytes": 9019,
+      "sha256": "5eff456fe9dc7ad7f196f95fbd3c8eb2aeafe1ec2a1771cd79b4c3a388053eee"
+    }
+  ]
+}

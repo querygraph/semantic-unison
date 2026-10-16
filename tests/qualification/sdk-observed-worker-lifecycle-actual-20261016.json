@@ -1,0 +1,69 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_entry_lifecycle.py",
+      "--observed-controls"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-shm-entry-obkffsw4\", \"cases\": 1, \"actual_children_reaped\": true, \"actual_fake_helpers\": 12, \"sdk_calls\": 0}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 37974,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "summary": {
+    "workspace": "/private/tmp/u-shm-entry-obkffsw4",
+    "cases": 1,
+    "actual_children_reaped": true,
+    "actual_fake_helpers": 12,
+    "sdk_calls": 0
+  },
+  "probe_calls": 25,
+  "all12_observation_audits_passed": true,
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "refs": [
+    {
+      "path": "/private/tmp/u-shm-entry-obkffsw4/RESULT.json",
+      "bytes": 16978,
+      "sha256": "d595a6a0f4afd6210035c75eda873d548c40c0303fa95aa47991150f8d8da07d"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-obkffsw4/observed-8/RESULT.json",
+      "bytes": 142046,
+      "sha256": "85b3d3fcf2d9e0b812b714b1d3b91c7f2c554d0be22cb2304efcd8d82472baa1"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-obkffsw4/observed-8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "28bef7330234f7ea87a65ff11e1faacfc8d51b206466840c95707365b7c4436e"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-obkffsw4/observed-8/SHARED-SERVER-AUDIT.json",
+      "bytes": 13175,
+      "sha256": "1ed81ea1674cd4be864d63cb5478b80999c583d58f25c2ab440ef218e8ca8d0a"
+    }
+  ],
+  "scope": "One observed actual worker/12original fake validators/real OS probes/independent parent observation audit. Admission/canonicalinventory/childargv/interpreterSHA are explicitdoubles; tinyfixtures/fakehelperSHA real. ZeroSDK/Photo/camera/canonicalEXIO.",
+  "source_sha256": {
+    "tests/sdk_host_matrix/shared_entry_lifecycle.py": "f1bf60569f4e5d577a9437af09dcb92233afcda0bdc783f74ea6afa00653121d"
+  },
+  "actual_owner_terminal": {
+    "session_id": 74306,
+    "initial_chunk_id": "642565",
+    "terminal_chunk_id": "7911be",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

@@ -1,0 +1,521 @@
+{
+  "state": "ACTUAL_WARM128_V5_PASSED_CLOSED",
+  "measurement": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-128MiB-4files-20261015.json",
+    "bytes": 3426268,
+    "sha256": "95d3a078666257b5db2010309f4abf817b89c90423beb6b3e2936378cb5a1114"
+  },
+  "original_measurement": {
+    "path": "/private/tmp/unison-warm-sync-measurements-20261015-v5/warm-128MiB-4files.json",
+    "bytes": 3426268,
+    "sha256": "95d3a078666257b5db2010309f4abf817b89c90423beb6b3e2936378cb5a1114"
+  },
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-WARM128-V5-ADMISSION-20261015.json",
+    "bytes": 2479,
+    "sha256": "eec103fb5c958885a9254f69e14312989f0b436c742f58f37815d9c5e9cb9e39"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-128-v5-prepared-request-20261015.json",
+    "bytes": 3651,
+    "sha256": "79ef5bc58c97caaefb2c5576d04e78efae68f948bd2d966ee8febf39de99d397"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 34823,
+    "terminal_chunk": "c78138",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "scope": "actual tool terminal returned; not process absence inference"
+  },
+  "aggregate": {
+    "pid": 12254,
+    "returncode": 0,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 12254,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 3426.0642689199885,
+    "seconds": 7200,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "independent_readback_audit": {
+    "rows": 108,
+    "cli_invocations": 324,
+    "all_client_server_supervisor_settled": true,
+    "scope": "complete warm synthetic matrix and retained per-invocation receipts; not physical I/O or aggregate RSS"
+  },
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/AGGREGATE-CLOSED.json",
+      "bytes": 400,
+      "sha256": "102e98456a289704f7b189b591c191c80ea40f3f9c6e6a79e03a1316fd65ba00"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/AGGREGATE-START.json",
+      "bytes": 38,
+      "sha256": "be4a6db9c85c3bb307d826c0d53c232105a2707758a75cdfa1e5b7d8be3ce705"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/BATCH-PROOFS-COMPLETE.json",
+      "bytes": 455,
+      "sha256": "af7c651e642ac1c330160ec1bfc85830ab8c635ff892b84dc0fc809df9a1bbbe"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/BATCH-RETURN.json",
+      "bytes": 1055,
+      "sha256": "3365b3143aac9dc4332d25aa96788950eef94e558f5fe2b5aa8f85015e93980e"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/OWNER-RETURN.json",
+      "bytes": 804,
+      "sha256": "bf042e6d595f0dbef7e2c8af548b1b5d83a759ffad2dfcc76d72a8c71a5244af"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/OWNER-TERMINAL.json",
+      "bytes": 186,
+      "sha256": "481e6adf520eb48d582fb219e09f1ec7b176c2ec69b3c6eeaf8ec370c1b53e91"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/START.json",
+      "bytes": 1103,
+      "sha256": "e559865be870a7261a2ceabdb97b5a899a3e924705877b980109a0fa31c3fe68"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/SUPERVISOR-CLOSED.json",
+      "bytes": 607,
+      "sha256": "8d56f3a9b22cfa468e67c9aafdacb622d31fa5adce053ca0ff65524cae21a298"
+    },
+    {
+      "path": "/private/tmp/unison-warm-sync-bounded-v5-first-128MiB/WRAPPER-START.json",
+      "bytes": 1834,
+      "sha256": "ff238ce62d8c4e8c5724781da0952688e97aa58453f973ab8abffd8d9de2054b"
+    }
+  ],
+  "summary": [
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.942025533993728,
+        "minimum": 9.734566598985111,
+        "maximum": 10.175167576002423
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379380,
+        "minimum": 379380,
+        "maximum": 379437
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 10.19669537601294,
+        "minimum": 9.949354892014526,
+        "maximum": 10.34084815098322
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379380,
+        "minimum": 379380,
+        "maximum": 379437
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.96185933300876,
+        "minimum": 9.713515064009698,
+        "maximum": 10.357973167003365
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379380,
+        "minimum": 379380,
+        "maximum": 379437
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.775770195003133,
+        "minimum": 9.520779954997124,
+        "maximum": 10.379527008975856
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379381,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.762605375988642,
+        "minimum": 9.518745465000393,
+        "maximum": 10.223231445997953
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379381,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.7559314550017,
+        "minimum": 9.526634225010639,
+        "maximum": 10.091868926974712
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379381,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 18.153351588989608,
+        "minimum": 17.75308308401145,
+        "maximum": 18.82278343901271
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51861,
+        "minimum": 51861,
+        "maximum": 51918
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.269387962995097,
+        "minimum": 8.999041981005576,
+        "maximum": 9.56551497700275
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51861,
+        "minimum": 51861,
+        "maximum": 51918
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.267579447012395,
+        "minimum": 8.931639399001142,
+        "maximum": 9.624963448994095
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51861,
+        "minimum": 51861,
+        "maximum": 51861
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.584536239010049,
+        "minimum": 9.355752609000774,
+        "maximum": 9.963377110019792
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379380,
+        "minimum": 379380,
+        "maximum": 379380
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.59752601600485,
+        "minimum": 9.3182075949735,
+        "maximum": 10.104000422987156
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379437,
+        "minimum": 379380,
+        "maximum": 379437
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.609396207000827,
+        "minimum": 9.324460161005845,
+        "maximum": 10.092845239007147
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379437,
+        "minimum": 379380,
+        "maximum": 379437
+      },
+      "materialization_logical_bytes_model_values": [
+        536870912
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.436999429017305,
+        "minimum": 9.227706808014773,
+        "maximum": 9.853122063999763
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379438,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.436831846978748,
+        "minimum": 9.144852526980685,
+        "maximum": 10.052951664983993
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379438,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.44141774700256,
+        "minimum": 9.148666757013416,
+        "maximum": 9.970260850997875
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 379438,
+        "minimum": 379381,
+        "maximum": 379438
+      },
+      "materialization_logical_bytes_model_values": [
+        65536
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        null
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 1,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 18.093981716025155,
+        "minimum": 17.528017932985676,
+        "maximum": 19.13888812001096
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51918,
+        "minimum": 51861,
+        "maximum": 51918
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 6,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.247699920990271,
+        "minimum": 8.864587382005993,
+        "maximum": 9.593285660987021
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51918,
+        "minimum": 51861,
+        "maximum": 51918
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 8,
+      "samples": 5,
+      "wall_seconds": {
+        "median": 9.211739181017037,
+        "minimum": 8.862434003007365,
+        "maximum": 9.50572943399311
+      },
+      "all_results_exact": true,
+      "forwarded_protocol_bytes": {
+        "median": 51918,
+        "minimum": 51861,
+        "maximum": 51918
+      },
+      "materialization_logical_bytes_model_values": [
+        12288
+      ],
+      "semantic_actual_logical_write_bytes_values": [
+        12288
+      ]
+    }
+  ],
+  "unresolved_markers": [],
+  "credits_released": 18,
+  "scope": "One128MiB x4 generated warm-cache same-APFS loopback batch,108rows/324CLI, five measured repetitions/configuration. No SDK, source photos, physical writes, original-upstream reference, cold cache, real network or broader corpus qualification. No later batch or successor authorized.",
+  "background_observation": "Root explicitly held competing Photo native/compiler/timing work. Other host/OS activity was not continuously sampled or controlled; warm/uncontrolled cache scope retained."
+}

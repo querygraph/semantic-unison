@@ -1,0 +1,36 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/result_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "........\n----------------------------------------------------------------------\nRan 8 tests in 0.022s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 41011,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "three independent result-audit groups plus five imported tiny case regressions; no transport, SDK, retained payload or EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/result.py": "6f7b9f8678e9fc91f21b3ebd1f0a8691ad75c3100dd96f50539abc043a1f1a4e",
+    "tests/sdk_multifile/result_test.py": "8b45ec48cdab4d8d351d825871c92b91dc514725971bf9f4ce7f1e0feb31b32d"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "45fea6",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

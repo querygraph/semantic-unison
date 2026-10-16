@@ -1,0 +1,92 @@
+{
+  "schema": "firstpair-physical-io-coordination-source-proposal/1",
+  "state": "SOURCE_PROPOSAL_NOT_LIVE_IO_ADMISSION",
+  "cpuPolicy": {
+    "version": 3,
+    "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+    "unisonTokens": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "photoTokens": [
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "idleTokens": [
+      16,
+      17
+    ]
+  },
+  "canonicalNamespace": {
+    "provisioned": false,
+    "manifest": null,
+    "pathProposal": "~/Library/Application Support/FirstPair Lightroom Shuttle/io-lanes-v1",
+    "provisioningOwner": "Joint Root-coordinated one-time publication of existing-file inode manifest; neither consumer recreates missing files",
+    "storageDomain": "One pinned host domain, not a caller-selected mount or project label",
+    "barrierFilename": "all-devices.lock",
+    "deviceFilenames": "physical-<sha256-of-canonical-resource-key>.lock",
+    "fileContract": "Private owned directory; fresh open descriptions; existing regular single-link private files; O_NOFOLLOW; held and visible dev/inode/owner/mode checks before and after nonblocking flock; no LOCK_UN"
+  },
+  "claims": {
+    "source": "Complete physical leaf/member union from separately qualified trusted local topology provider plus fresh stable volume/topology observations",
+    "identityKeys": "Canonical lowercase ASCII [a-z0-9][a-z0-9._:-]{0,127}; names are scheduling identities, not publication authority",
+    "known": "Shared SAME barrier inode + exclusive lanes for sorted deduplicated complete physical-member union",
+    "unknown": "Exclusive SAME barrier inode; never an independent unknown-device lane",
+    "changedOrUnqualified": "Use exclusive global barrier or fail before dispatch; no independent-device claim",
+    "limits": "At most16 before/after volume pairs,32 members per observation,64 union members",
+    "doNotInfer": [
+      "Different st_dev means different physical storage",
+      "Different APFS volume/container names means independent disks",
+      "SoftRAID virtual disk parent exhaustively identifies physical members",
+      "A mounted filesystem identity proves physical topology or mount incarnation"
+    ]
+  },
+  "acquisition": {
+    "order": [
+      "IO barrier",
+      "sorted physical-member lanes if known",
+      "sorted explicitly authorized CPU tokens"
+    ],
+    "nonblocking": true,
+    "onContention": "Close every partial IO and CPU description before returning busy/waiting; never hold IO while waiting for CPU or upgrade a shared barrier in place",
+    "onUnknownClose": "Retain owner and known-open descriptors, preserve uncertain numeric descriptor without retry",
+    "afterDispatch": "Hold inherited descriptions through actual direct/nested group and worker settlement; parent terminal collected separately; timeout or process absence is not release proof",
+    "scope": "Photo canonical UI/catalog/IO lease remains separately owned; this grants no Adobe/cache/Main/publication rights"
+  },
+  "providerExtensibility": {
+    "apfs": "Planned provider must unify sibling volumes/containers that share physical leaves",
+    "compositeStorage": "All qualified RAID/pool/member leaves reserved; incomplete topology uses global fallback",
+    "zfsAndRefs": "Future local providers supply the same complete canonical member contract; no new runtime support claimed"
+  },
+  "qualificationRequired": [
+    "Same-physical sibling contention and disjoint-device concurrency in disposable pool",
+    "Unknown exclusive barrier conflicts with every known shared-barrier claim",
+    "CPU contention releases all IO and partial CPU locks",
+    "Late physical-lane contention releases earlier lanes and barrier",
+    "Inherited descriptions outlive parent-copy close until actual child closure",
+    "Replaced/symlink/aliased files and manifest/topology changes refuse before dispatch",
+    "Close uncertainty retains owner without numeric descriptor retry",
+    "Both project dispatchers join SAME manifest/barrier before any system-wide IO-coordination claim",
+    "Finite simultaneous synthetic IO/latency/memory qualification only after lifecycle and topology qualification"
+  ],
+  "livePoolCreated": false,
+  "kernelIoLockingImplemented": false,
+  "osTopologyProviderImplemented": false,
+  "physicalIoIsolationQualified": false,
+  "runtimeGrant": false,
+  "sourcePlanner": "tests/shared_io_plan.py",
+  "topologyUpdates": "Qualified topology/manifest publication requires exclusive canonical barrier, stable barrier inode and no active bulk claims; both consumers must adopt a pinned successor. Missing/stale namespace identity fails before IO; no fallback to a second pool.",
+  "jobScope": "Complete local bulk jobs or endpoint-local IO phases; no per-phase IO lease across peer-dependent RPC waits. Same-host loopback accounts both endpoints; distributed production admission requires separate deadlock qualification."
+}

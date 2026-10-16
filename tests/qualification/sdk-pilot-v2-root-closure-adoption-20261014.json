@@ -1,0 +1,37 @@
+{
+  "utc": "2026-10-14T18:48:23.292799+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-PILOT-V2-OWNER-CLOSURE-20261014.json",
+    "bytes": 951,
+    "sha256": "4ac67c8cae8903aaf7cc074b940c03b73d600f7666d0024831ac50c4ec3fbb67"
+  },
+  "receipt": {
+    "utc": "2026-10-14T18:42:09.216691+00:00",
+    "state": "ROOT_ACCEPTED_OWNER_TERMINAL_WRAPPER_AND_PRIOR_AGGREGATE_CLOSURE",
+    "start": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/START.json",
+      "bytes": 1311,
+      "sha256": "08cef7ea79003b994fcdccb7a03968cd4acc417de815bf99f3240600de34d5ba"
+    },
+    "wrapper": {
+      "path": "/private/tmp/unison-sdk-pilot-v2-dispatch-7f7389ffe25b4354a0bafc3bdbbca9eb/WRAPPER-CLOSED.json",
+      "bytes": 246,
+      "sha256": "6db9549dc60e17efa7ee130004c2909bbc2b0688386c267861a2be778c1d0bf5"
+    },
+    "actualOutcome": {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-PILOT-V2-ACTUAL-OUTCOME-20261014.json",
+      "bytes": 994,
+      "sha256": "69b725e7678a4df98728988361ed1738dfb4db6a0a8911cf079f755d07f1f4f9"
+    },
+    "wrapperExit": 0,
+    "wrapperReaped": true,
+    "previewSDKCoordinationHoldReleased": true,
+    "newNativeWindowGranted": false,
+    "noReplay": true
+  },
+  "adoption_scope": "same completed SDK pilot functional/lifecycle and actual wrapper/aggregate ownership closure; SDK coordination hold released",
+  "new_SDK_slot": false,
+  "replay": false,
+  "preview_owner": "Photo Root and original preview implementation unchanged",
+  "full_goal_complete": false
+}

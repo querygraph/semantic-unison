@@ -1,0 +1,45 @@
+{
+  "schema": "unison-sdk-shared-binding-source/1",
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "d71a23",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py",
+      "bytes": 3110,
+      "sha256": "22df61c51420934c7e79e226d87cf420020df3f8f328943954c2b126aeb6cc0b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding_test.py",
+      "bytes": 2535,
+      "sha256": "1fd10bc651a46eb15e8bfe7d053ae3977fe84c8bece8a67099fc2100a4891ccc"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-binding-source-20261016b/SHARED-START.json",
+      "bytes": 1112,
+      "sha256": "c8681f120f9ac2f15ea87b5fa9017cb9cd7c1ef7935f7cecdeb2307bc6f42c83"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-binding-source-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "69b0be129e5ddec2f037b852be28ac167db93dde5e8bf30b9985b6269e9bac9d"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-binding-source-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-binding-source-20261016b/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "120fcf1e1b1ef6883b716f1b33b4fbea79c7089f1d1ff950e98c9608d82abb42"
+    }
+  ],
+  "scope": "4groups actualpinnedpolicy/CPU/IOmanifest metadata +injectedfstatframes only; exactorderedcanonical9FD/parentworkercommand/grant8 checks inclmissingduplicatewrongstdio/type/identity refusal. No innercanonicalIOlock/acquisition/inheritance/SDK/Photo/payload. OuterUnison8closed; lock/releaseproof flagsfalse.",
+  "full_goal_complete": false
+}

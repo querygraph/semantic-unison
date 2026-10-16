@@ -1,0 +1,33 @@
+{
+  "state": "EIGHT_DISPOSABLE_POOL_CONTROLS_PASSED_CLOSED",
+  "owner_terminal": {
+    "chunk": "3e0f5f",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/private/tmp/unison-shared-pool-controls-20261016-001",
+  "policy_sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-shared-pool-controls-20261016-001/CLOSED.json",
+      "bytes": 432,
+      "sha256": "a463b8e1ab0c4aad2cc8961f86acd004669831af8da1b0f7ce15e05e99d10c89"
+    },
+    {
+      "path": "/private/tmp/unison-shared-pool-controls-20261016-001/START.json",
+      "bytes": 682,
+      "sha256": "16f3e26d5e6b8590fc29c80308a61cadd907e772fbe8b340886a9865b44f39a6"
+    },
+    {
+      "path": "/private/tmp/unison-shared-pool-controls-20261016-001/stderr.txt",
+      "bytes": 106,
+      "sha256": "fdb64f76ee3faf48d76ab43bbb2a2d0a9d4cc51971bf0df9590990e31971669c"
+    },
+    {
+      "path": "/private/tmp/unison-shared-pool-controls-20261016-001/stdout.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "limits": "Only Unison00..07 acquired; no Adobe/SDK/compiler/Photo payload; no general dispatcher qualification or child inheritance proof."
+}

@@ -1,0 +1,69 @@
+{
+  "state": "STOPPED_INCOMPLETE_NO_MEASURED_RESULT",
+  "actual_owner_closure": {
+    "state": "STOPPED_INCOMPLETE",
+    "actual_parent_terminal": {
+      "owner_tool": 60597,
+      "terminal_chunk": "c34ac2",
+      "exit_code": 1,
+      "running_session_returned": false
+    },
+    "result": {
+      "path": "/private/tmp/unison-warm-sync-measurements-20261015-v3/warm-128MiB-4files.json",
+      "sha256": "aee14c4ddf6be828105a7149ec4e32d3fd47cb8cec04bdb7bc18e2209ebf2993"
+    },
+    "accepted_warmup_rows": 8,
+    "measured_rows": 0,
+    "supervisor_cleanup": {
+      "pid": 96291,
+      "returncode": 0,
+      "reaped": true,
+      "cancel_reason": "KeyboardInterrupt()",
+      "hard_kill_required": false,
+      "observation_error": null,
+      "group_cleanup_result": "only_owned_leader_zombie_darwin",
+      "group_cleanup_before_leader_reap": true
+    },
+    "server_cleanup": {
+      "pid": 96294,
+      "returncode": 0,
+      "reaped": true,
+      "cancel_reason": null,
+      "hard_kill_required": false
+    },
+    "fixture_directory_removed": true,
+    "native_client_receipt_missing": true,
+    "scope": "Normal SIGINT stopped crossed benchmark dispatch; original client exception rethrow discarded serialized client cleanup receipt. Existing code finally settles it before raising, but no separate actual client wait4 receipt is asserted. No live workspace process observed, no successful benchmark claim."
+  },
+  "owner_receipt": {
+    "path": "/private/tmp/unison-warm-benchmark-owner-60597.json",
+    "bytes": 1276,
+    "sha256": "ab2c10acb61b0b54e1faafade05d6b60a206dc38b20b709a5eda47793665f87d"
+  },
+  "reason": "Started first128MiB batch before explicit Root timing allocation; obeyed subsequent DEFER with normal SIGINT. No restart authorized.",
+  "successor_source_only_fix": [
+    {
+      "path": "bench/sync/measure.py",
+      "bytes": 3745,
+      "sha256": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b"
+    },
+    {
+      "path": "bench/sync/run.py",
+      "bytes": 28908,
+      "sha256": "7cadd5bb79f52a82c8769c5328f2a66bcfb516e6f00510b607eed2fc199d736f"
+    },
+    {
+      "path": "bench/sync/interrupted_receipt_test.py",
+      "bytes": 1960,
+      "sha256": "abfb87ac6f5262e2daab8e58fc9ecba0fb1c3aa8cb361966e72f763f10f79557"
+    }
+  ],
+  "pure_fix_terminal": {
+    "chunk": "cb0a3d",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "fix_does_not_retroactively_create_client_wait4_receipt": true,
+  "new_runtime_started": false,
+  "aggregate_successor_implemented": false
+}

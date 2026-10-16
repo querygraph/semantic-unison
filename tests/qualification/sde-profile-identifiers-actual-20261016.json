@@ -1,0 +1,138 @@
+{
+  "schema": "unison-sde-profile-identifiers/1",
+  "state": "PASS_CLOSED",
+  "actual_owner_terminal": {
+    "session": 21359,
+    "chunk": "ebc0cb",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-sde-profile-identifiers-final-8bd131de/SHARED-START.json",
+      "bytes": 1064,
+      "sha256": "6b9df2efd49081d7352de3c20d1780a79987400c80261dfc5e4492100cdcbbff"
+    },
+    {
+      "path": "/private/tmp/unison-sde-profile-identifiers-final-8bd131de/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "8ded05f30491329479db26beebeb18004ca998cd5ca0e5eb7b827ce158224e24"
+    },
+    {
+      "path": "/private/tmp/unison-sde-profile-identifiers-final-8bd131de/SHARED-STDOUT.txt",
+      "bytes": 7004,
+      "sha256": "1dd5960c2734c0b57f0a2467109a85ac81731bc8e90afb668c0d54aa63b18ec3"
+    },
+    {
+      "path": "/private/tmp/unison-sde-profile-identifiers-final-8bd131de/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/stock-current.json",
+      "bytes": 24231,
+      "sha256": "09adb86c5634d38f0aac2b94e2b560cdd384d117740e95cbcd7e0011d6c772a1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/stock-current.log",
+      "bytes": 3806,
+      "sha256": "8d306e7eec8cbdc00187e6c30dace05cf7bd0fc8a0d2a5ad20481b2b643ff7f6"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/stock-previous-profile-domain.json",
+      "bytes": 24237,
+      "sha256": "adce44a20c7dba87dcdc8159c2dd012f49f85ad363092fb1f9b96e770096dcf1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/stock-previous-profile-domain.log",
+      "bytes": 2647,
+      "sha256": "be01fa35f01c2c210b9a27f29b7333dccf272453039f739f2162978185320274"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/ox-current.json",
+      "bytes": 24235,
+      "sha256": "510af45f6c8b5f6aec610b874fe9be65284b38b90b362aedeba2f4d5f1d046e3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/ox-current.log",
+      "bytes": 3803,
+      "sha256": "67555050f5f8b997e6894206e62b24eb7e6fc76b042fc540f9017989b4027f2e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/ox-previous-profile-domain.json",
+      "bytes": 24241,
+      "sha256": "293e33ceed11832c0df0d2399af732b4d3a935977b7c4af7bda55c6bf3b84758"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sde-shared-controls-bbur6rs8/ox-previous-profile-domain.log",
+      "bytes": 2644,
+      "sha256": "c2afd345491a2fe90a364ff0cbc4f92e3b223f18410facf09a8fce615cd0794d"
+    }
+  ],
+  "sources": {
+    "src/semanticDelta.ml": "94bcae5730c195cc99229d7ea985e21560bfe6dab62401a2f7718923d7a52448",
+    "src/semanticDelta.mli": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305",
+    "tests/semantic/conformance/test.ml": "266fb74ae4880e4c90db8630e6a923964da86bcaffcc107a72db41f96d62ab28",
+    "tests/semantic/conformance/reference.py": "fa2feb39325c6066ce907ba10675c050fa29529961207ded883a466a45d49c39",
+    "tests/semantic/conformance/run.py": "8752f339bf06b47cb14bded0de444098eae5b7ea3fa19cc35df008fd999fc6ac",
+    "tests/semantic/conformance/shared.py": "2f35cf637df3ec90d13932ed977e9aa3cd542b0c569b297940151dacbe976781"
+  },
+  "runs": [
+    {
+      "compiler": "stock",
+      "variant": "current",
+      "harness_wait_exit": 0,
+      "native_test_exit": 0,
+      "commands": 127,
+      "assertions": 2191,
+      "negative_detected": false
+    },
+    {
+      "compiler": "stock",
+      "variant": "previous-profile-domain",
+      "harness_wait_exit": 0,
+      "native_test_exit": 2,
+      "commands": 83,
+      "assertions": null,
+      "negative_detected": true
+    },
+    {
+      "compiler": "ox",
+      "variant": "current",
+      "harness_wait_exit": 0,
+      "native_test_exit": 0,
+      "commands": 127,
+      "assertions": 2191,
+      "negative_detected": false
+    },
+    {
+      "compiler": "ox",
+      "variant": "previous-profile-domain",
+      "harness_wait_exit": 0,
+      "native_test_exit": 2,
+      "commands": 83,
+      "assertions": null,
+      "negative_detected": true
+    }
+  ],
+  "independent_reference_nul_rejections": 158,
+  "current_native_nul_rejections_per_compiler": 158,
+  "valid_goldens_unchanged": true,
+  "shared_entrypoint_controls": {
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-7osleah2",
+    "actual_terminal": "10b29d",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "preserved_preliminary": {
+    "positive_only_workspace": "/private/tmp/unison-sde-profile-identifiers-745f9a20",
+    "actual_terminal": "cb3588",
+    "exit_code": 0,
+    "preexec_entrypoint_output_override_refusal": {
+      "chunk": "1857c1",
+      "exit_code": 2,
+      "children_dispatched": 0
+    }
+  },
+  "scope": "Malformed profile domain rejection only. Existing valid SDE/SDR goldens unchanged; no wire version/profile expansion. Old behavior decoder accepted invalid input but local registry already refused authorization; no prior successful-write exploit claimed. Original deterministic hand-written controls only, no fuzz/sanitizer/Adobe/camera/RPC/platform/fullbuild proof. Unison00..07 only/all child groups and tokens settled."
+}

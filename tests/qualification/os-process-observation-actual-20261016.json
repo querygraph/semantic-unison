@@ -1,0 +1,67 @@
+{
+  "schema": "unison-os-process-observation/1",
+  "state": "COMPONENT_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "917c39",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tools/process-observation/task_info.c",
+      "bytes": 1453,
+      "sha256": "1cb6c772e7c3eb31a88bf1c8541c6b9ea7a6ac57595897a7588a5b5da75a3c0b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/process_observation/run.py",
+      "bytes": 3341,
+      "sha256": "39eb3ee4c261c37f92e8720552bf99d0a35f5961e0b900f0cfebda618d21b861"
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/proc_info.h",
+      "bytes": 31262,
+      "sha256": "e427fa96b348537b21552b9de71e01039410bcad2cedee5584c5e5fddafd70fc"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/SHARED-START.json",
+      "bytes": 1171,
+      "sha256": "53f763fe19ec1a125e92de74795598abdde2c5aa7bcc79583f880f7b5ac2242a"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "069b754edf8822bad16cbcc19dbd6825bfa3554ec0ce18f10c710c4ef8d45c0f"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/SHARED-STDOUT.txt",
+      "bytes": 162,
+      "sha256": "9b3d7c94ea02893b690a84c741625376950d3db26ee680761ff8c6a96c9f83bd"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/controls/RESULT.json",
+      "bytes": 2228,
+      "sha256": "486360c58d936a934187a4cc48058555cf14d25f9317fab7414da0a6f9129312"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/controls/build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-os-process-observation-20261016a/controls/original.py",
+      "bytes": 326,
+      "sha256": "41edf3697c893023a66453e20479490c71abd0c308261db5c9c22f5bf55d517e"
+    }
+  ],
+  "scope": "OS kernel per-process snapshot on1originalPythonchild with6waiting threads;3samples/6invalidPID/unknownPID controls. Not aggregate-tree RSS, peak memory, CPU unit calibration, SDK/OSthread cap or performance.",
+  "sdk_calls": 0,
+  "canonical_io_acquired": false,
+  "full_goal_complete": false
+}

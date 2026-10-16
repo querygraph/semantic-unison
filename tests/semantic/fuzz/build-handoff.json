@@ -1,0 +1,1519 @@
+{
+  "stock": {
+    "build": {
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+      "version": "5.2.0",
+      "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "source_sha256": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+        "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+        "src/jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+        "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "tests/semantic/fuzz/target.ml": "79b0525e94851188d7ac9708a555fff38a345ad412ad23efeae79591b1e143d9"
+      },
+      "target_sha256": "a78a3535c7c025fb3a3760b08fb64ec5bae6b27e5953d3e25c871c1cdfb75da0",
+      "workspace": "/private/tmp/unison-semantic-afl-0p203nj_",
+      "build_only": true,
+      "native_or_input_execution": false
+    },
+    "conformance": {
+      "created_utc": "2026-10-14T16:40:14.756974+00:00",
+      "scope": "production semantic kernel codecs/proofs in a compiler-matched private snapshot; synthetic bytes only",
+      "compiler": "/Users/alexy/.opam/default/bin/ocamlopt",
+      "compiler_version": "5.2.0",
+      "compiler_binary_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+      "private_snapshot": "/private/tmp/unison-sde-conformance-l9egxq24",
+      "build_exit": 0,
+      "test_exit": 0,
+      "negative_control": null,
+      "negative_control_detected": false,
+      "commands_passed": 127,
+      "assertions_passed": 2033,
+      "source_sha256": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "doc/semantic-delta-v0.md": "4cb6f4aacd62941652a81f5519c0f8b75b070da9b39968fd5d454d9f1ec5c072",
+        "doc/dng-profile-v0.md": "8257154e0c8ee7d3e3ac2701f829315ad45b4d95c7894a2560ced11390188201",
+        "tests/semantic/conformance/README.md": "f22de86632287cf77a9cc9f89592179d8996cbc516248884a3431eb72be6b320",
+        "tests/semantic/conformance/golden/boundary-manifest.json": "1c60e4473f4e5b97eca446f13ebf2dbf7cb1db0a8c9933c2e58f6c688681f5de",
+        "tests/semantic/conformance/golden/dng-be.base": "a309884b55c4c0f3db9b7766ce4a9b9d2acc2492b2fc70c959e0dfde367b6916",
+        "tests/semantic/conformance/golden/dng-be.sde": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe",
+        "tests/semantic/conformance/golden/dng-be.sdr": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e",
+        "tests/semantic/conformance/golden/dng-be.target": "d42103c1a18d0ad994d6590985650b85780652eb810d5073301b0dcb8d19e9ed",
+        "tests/semantic/conformance/golden/dng-le.base": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+        "tests/semantic/conformance/golden/dng-le.sde": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22",
+        "tests/semantic/conformance/golden/dng-le.sdr": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8",
+        "tests/semantic/conformance/golden/dng-le.target": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+        "tests/semantic/conformance/golden/manifest.json": "ce0884c7bddafb7a4e975b56d89616f8c96ac528f1c479faef43d720c640ce10",
+        "tests/semantic/conformance/golden/multi.base": "64fec337382cbac4b0fd58fd08987975ea69cdb8e8ea8be2d0f2335e74a27c9e",
+        "tests/semantic/conformance/golden/multi.sde": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+        "tests/semantic/conformance/golden/multi.sdr": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd",
+        "tests/semantic/conformance/golden/multi.target": "1f9dc1d6c9d1de7eb30a09cb6382cf00702a98d88f2b4b41e8cae0caf129cf29",
+        "tests/semantic/conformance/reference.py": "0cdcbad7aefa89f42f5dcd8577d81302a2c63fa7b211ab96203b11fd0fa5cb74",
+        "tests/semantic/conformance/run.py": "0c74a8e277c9f00f4f40d256d7fc180f3cb0cea9551c20b32ddeff9d598f9c09",
+        "tests/semantic/conformance/test.ml": "1d0e9c27088aa68c8c2996c9e62ad0123be67c8a2ae2edda4c2db93ed9c0f8f2",
+        "tests/semantic/conformance/vectors.py": "aa949d3bc797e9786a71d3f1fa7d1bcd2ad53a204c3e121db0a6a552d7dfdf57"
+      },
+      "compiled_source_sha256": {
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d"
+      },
+      "current_source_matches_snapshot": true,
+      "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_log_sha256": "aaf40ad0d62924cb88048c0ba8a8652717a36c96c5911483c13dbe94817eb4b3",
+      "commands_sha256": "eae203e717d81bd518d9a816a46f80cde3945e6111801dffc4f1d54a7e1afc8f",
+      "commands": [
+        {
+          "name": "multi",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "multi",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "dng-le",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "dng-le",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "dng-be",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "dng-be",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-version",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-magic",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "size-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "zero-file-with-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "offset-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "offset-past-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "extent-past-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "overlapping-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "out-of-order-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "trailing-byte",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "missing-nonce-byte",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-version",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-magic",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "size-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "zero-file-with-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "offset-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "offset-past-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "extent-past-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "overlapping-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "out-of-order-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "trailing-byte",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "missing-nonce-byte",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "replacement-hash-mismatch",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "replacement-hash-field-mismatch",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "nonce-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-profile",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-length-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-length-128",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-whole-base-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-preservation-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-old-range-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-target-digest",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "incomplete-local-region-list",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "single-byte-at-signed-int64-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "single-byte-at-signed-int64-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "extent-end-signed-int64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "extent-end-signed-int64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048575",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048575",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048576",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048576",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "maximum-valid-wire-shape",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "maximum-valid-wire-shape",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-DNG-payload-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-DNG-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-over-core",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "aggregate-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "aggregate-payload-plus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-minus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-minus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-exact",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-plus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "multi",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "multi",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "multi-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "multi-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-le",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "dng-le",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "dng-le-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-le-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-be",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "dng-be",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "dng-be-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-be-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "exact-proof",
+          "mode": "bind",
+          "scope": "all receiver proof fields"
+        },
+        {
+          "name": "response-nonce-zero",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-unknown-profile",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-whole-base-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-preservation-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-old-range-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-incomplete-local-region-list",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "request-nonce",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-profile",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-file-size",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-whole-base",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-preservation",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-placement",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-length",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-old-region-hash",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-count",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "target-digest-checked-by-materializer",
+          "mode": "bind",
+          "scope": "request binding does not claim the target hash is already verified"
+        },
+        {
+          "name": "unknown-profile",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-whole-base-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-preservation-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-old-range-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "incomplete-local-region-list",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-target-digest",
+          "mode": "reject_apply",
+          "scope": "target verification of private output after writes"
+        }
+      ],
+      "wire_case_count": 83,
+      "wire_accepted_count": 27,
+      "wire_rejected_count": 56,
+      "strict_prefix_rejections": 1836,
+      "limitations": [
+        "No profile proof from Adobe SDK or personal DNG files",
+        "No RPC allocation/transport lifecycle measurement",
+        "No physical APFS write/allocation or speed claim",
+        "No production renderer, preview/cache/catalog invocation"
+      ]
+    }
+  },
+  "ox": {
+    "build": {
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+      "version": "5.2.0+ox",
+      "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "source_sha256": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+        "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+        "src/jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+        "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "tests/semantic/fuzz/target.ml": "79b0525e94851188d7ac9708a555fff38a345ad412ad23efeae79591b1e143d9"
+      },
+      "target_sha256": "9384de30589b635c99bc14ff3c2cacbbed10170302ad10724e5d16345bd3b52f",
+      "workspace": "/private/tmp/unison-semantic-afl-1g1xq2wr",
+      "build_only": true,
+      "native_or_input_execution": false
+    },
+    "conformance": {
+      "created_utc": "2026-10-14T16:39:46.878954+00:00",
+      "scope": "production semantic kernel codecs/proofs in a compiler-matched private snapshot; synthetic bytes only",
+      "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+      "compiler_version": "5.2.0+ox",
+      "compiler_binary_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+      "private_snapshot": "/private/tmp/unison-sde-conformance-gzz9h27w",
+      "build_exit": 0,
+      "test_exit": 0,
+      "negative_control": null,
+      "negative_control_detected": false,
+      "commands_passed": 127,
+      "assertions_passed": 2033,
+      "source_sha256": {
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "doc/semantic-delta-v0.md": "4cb6f4aacd62941652a81f5519c0f8b75b070da9b39968fd5d454d9f1ec5c072",
+        "doc/dng-profile-v0.md": "8257154e0c8ee7d3e3ac2701f829315ad45b4d95c7894a2560ced11390188201",
+        "tests/semantic/conformance/README.md": "f22de86632287cf77a9cc9f89592179d8996cbc516248884a3431eb72be6b320",
+        "tests/semantic/conformance/golden/boundary-manifest.json": "1c60e4473f4e5b97eca446f13ebf2dbf7cb1db0a8c9933c2e58f6c688681f5de",
+        "tests/semantic/conformance/golden/dng-be.base": "a309884b55c4c0f3db9b7766ce4a9b9d2acc2492b2fc70c959e0dfde367b6916",
+        "tests/semantic/conformance/golden/dng-be.sde": "d3071f07d9556ebacb3ba118699fe82ea6b8782250cf6f4bab4769c541d34dbe",
+        "tests/semantic/conformance/golden/dng-be.sdr": "175b0ff3cd058dbc4eaf70a744b96888695bed9598c2eb37d895e0de27d75c0e",
+        "tests/semantic/conformance/golden/dng-be.target": "d42103c1a18d0ad994d6590985650b85780652eb810d5073301b0dcb8d19e9ed",
+        "tests/semantic/conformance/golden/dng-le.base": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+        "tests/semantic/conformance/golden/dng-le.sde": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22",
+        "tests/semantic/conformance/golden/dng-le.sdr": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8",
+        "tests/semantic/conformance/golden/dng-le.target": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+        "tests/semantic/conformance/golden/manifest.json": "ce0884c7bddafb7a4e975b56d89616f8c96ac528f1c479faef43d720c640ce10",
+        "tests/semantic/conformance/golden/multi.base": "64fec337382cbac4b0fd58fd08987975ea69cdb8e8ea8be2d0f2335e74a27c9e",
+        "tests/semantic/conformance/golden/multi.sde": "952505aa2c354d08b1ff24357585ce7e46021ee78f8854dcc69d1d95be623895",
+        "tests/semantic/conformance/golden/multi.sdr": "2041b83ec626b4ed22f85b7478ee6d0a9043424ee45541f8abae38868b5769fd",
+        "tests/semantic/conformance/golden/multi.target": "1f9dc1d6c9d1de7eb30a09cb6382cf00702a98d88f2b4b41e8cae0caf129cf29",
+        "tests/semantic/conformance/reference.py": "0cdcbad7aefa89f42f5dcd8577d81302a2c63fa7b211ab96203b11fd0fa5cb74",
+        "tests/semantic/conformance/run.py": "0c74a8e277c9f00f4f40d256d7fc180f3cb0cea9551c20b32ddeff9d598f9c09",
+        "tests/semantic/conformance/test.ml": "1d0e9c27088aa68c8c2996c9e62ad0123be67c8a2ae2edda4c2db93ed9c0f8f2",
+        "tests/semantic/conformance/vectors.py": "aa949d3bc797e9786a71d3f1fa7d1bcd2ad53a204c3e121db0a6a552d7dfdf57"
+      },
+      "compiled_source_sha256": {
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d"
+      },
+      "current_source_matches_snapshot": true,
+      "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "test_log_sha256": "aaf40ad0d62924cb88048c0ba8a8652717a36c96c5911483c13dbe94817eb4b3",
+      "commands_sha256": "55960f77e2edc746363eeae8df2637fd21e2a001fb7759f9c19a4bd6bf27b264",
+      "commands": [
+        {
+          "name": "multi",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "multi",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "dng-le",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "dng-le",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "dng-be",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "dng-be",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-version",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-magic",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "size-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "count-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "zero-file-with-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "offset-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "offset-past-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-over-limit",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "length-u64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "extent-past-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "overlapping-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "out-of-order-operation",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "trailing-byte",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "missing-nonce-byte",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-version",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-magic",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "profile-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "size-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "count-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "zero-file-with-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "offset-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "offset-past-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-zero",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-over-limit",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "length-u64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "extent-past-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "overlapping-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "out-of-order-operation",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "trailing-byte",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "missing-nonce-byte",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "replacement-hash-mismatch",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "replacement-hash-field-mismatch",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "nonce-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "unknown-profile",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-length-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "profile-length-128",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-whole-base-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-preservation-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-old-range-proof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "wrong-target-digest",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "incomplete-local-region-list",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "single-byte-at-signed-int64-eof",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "single-byte-at-signed-int64-eof",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "extent-end-signed-int64-overflow",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "extent-end-signed-int64-overflow",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048575",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048575",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048576",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "region-bytes-1048576",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "maximum-valid-wire-shape",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "maximum-valid-wire-shape",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-DNG-payload-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-DNG-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-zero",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "declared-payload-over-core",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "aggregate-payload-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "aggregate-payload-plus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-minus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-exact",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "envelope-cap-plus-one",
+          "mode": "sde",
+          "scope": "structural decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-minus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-exact",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "request-cap-plus-one",
+          "mode": "sdr",
+          "scope": "structural request decoder and canonical encoder"
+        },
+        {
+          "name": "multi",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "multi",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "multi-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "multi-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "multi-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-le",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "dng-le",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "dng-le-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-le-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-le-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-be",
+          "mode": "golden",
+          "scope": "local file inspection, preservation transcript, local/claimed-base plan, exact apply and source preservation"
+        },
+        {
+          "name": "dng-be",
+          "mode": "truncate",
+          "scope": "every strict prefix of fixed golden SDE and SDR"
+        },
+        {
+          "name": "dng-be-nonce-length-0",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-nonce-length-31",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-nonce-length-33",
+          "mode": "reject_plan",
+          "scope": "plan/request construction nonce length"
+        },
+        {
+          "name": "dng-be-growth",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "dng-be-opaque-change",
+          "mode": "reject_plan",
+          "scope": "same-size exact-layout and opaque-byte preservation contract"
+        },
+        {
+          "name": "exact-proof",
+          "mode": "bind",
+          "scope": "all receiver proof fields"
+        },
+        {
+          "name": "response-nonce-zero",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-unknown-profile",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-whole-base-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-preservation-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-wrong-old-range-proof",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "response-incomplete-local-region-list",
+          "mode": "bind",
+          "scope": "changed response field binding"
+        },
+        {
+          "name": "request-nonce",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-profile",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-file-size",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-whole-base",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-preservation",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-placement",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-length",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-old-region-hash",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "request-region-count",
+          "mode": "bind",
+          "scope": "changed retained request field binding"
+        },
+        {
+          "name": "target-digest-checked-by-materializer",
+          "mode": "bind",
+          "scope": "request binding does not claim the target hash is already verified"
+        },
+        {
+          "name": "unknown-profile",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-whole-base-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-preservation-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-old-range-proof",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "incomplete-local-region-list",
+          "mode": "reject_apply",
+          "scope": "local authorization before writes"
+        },
+        {
+          "name": "wrong-target-digest",
+          "mode": "reject_apply",
+          "scope": "target verification of private output after writes"
+        }
+      ],
+      "wire_case_count": 83,
+      "wire_accepted_count": 27,
+      "wire_rejected_count": 56,
+      "strict_prefix_rejections": 1836,
+      "limitations": [
+        "No profile proof from Adobe SDK or personal DNG files",
+        "No RPC allocation/transport lifecycle measurement",
+        "No physical APFS write/allocation or speed claim",
+        "No production renderer, preview/cache/catalog invocation"
+      ]
+    }
+  },
+  "harness_source_sha256": {
+    "target.ml": "79b0525e94851188d7ac9708a555fff38a345ad412ad23efeae79591b1e143d9",
+    "run.py": "970d108743c3070c98ecf34da947d9e08eaf794611f3027409947ae456fdc14b"
+  },
+  "scope": "Target build and existing deterministic conformance; runner saved-failure checks source-reviewed only; no new campaign"
+}

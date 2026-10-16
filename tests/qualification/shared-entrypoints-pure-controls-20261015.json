@@ -1,0 +1,33 @@
+{
+  "state": "SHARED_ENTRYPOINT_PURE_CONTROLS_PASSED_NO_RUNTIME_GRANT",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 10922,
+      "sha256": "e2cde0dc5807fde3b1317e1abff284a14c1d83005407489b91a14b0c8303c22b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/Makefile",
+      "bytes": 784,
+      "sha256": "39ba87f00ae7e85891095799ac3a88d757612eefae15406827979531f9cbe7fa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 1858,
+      "sha256": "b932cf61bed981de96d0e6c071281b5a20ee81e6789ffbb06b0d56965d2202f4"
+    }
+  ],
+  "actual_command": [
+    "python3",
+    "tests/manual_shared_test.py"
+  ],
+  "actual_terminal": {
+    "chunk": "220aef",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "positive_selections": 4,
+  "refusals": 7,
+  "scope": "Pure mocked command construction only; no compiler/child/build/output/global token/native work. Optional SHARED_CPU_CREDITS1..4; build-only defaults min2,grant, rejects excess JOBS; qualified functional loopback requires4; unbudgeted targets refused. Existing nonshared commands retain behavior.",
+  "remaining": "Photo standing shared split and canonical pool ACK/integration pending. No OS hard cap/wholeRSS/scheduling grant inferred."
+}

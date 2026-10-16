@@ -1,0 +1,114 @@
+{
+  "schema": "unison-sdk-shared-composed-fake/1",
+  "state": "COMPONENT_PASSED_CLOSED",
+  "actual_terminal": {
+    "tool": 96437,
+    "chunk": "4c50b5",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_component.py",
+      "bytes": 4033,
+      "sha256": "6aa6cdb88b5163d4b3c820bfb6d9bd1eab41742ae3ef2b247c80cbc4ed324d9d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_kernel.py",
+      "bytes": 2491,
+      "sha256": "3b4bc4418e221f6bb871bcfda5ccc02dd22972fe54f8f7eeeac208b512a99534"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child.py",
+      "bytes": 4010,
+      "sha256": "ec72c4a7772599d91ee2d7bf1cccabf1f01e593d72458c8f308f9a9b09a31c59"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_plan.py",
+      "bytes": 1881,
+      "sha256": "3285912ce59a17393cd6281c18b622890bf9dc9ffe308f769174df169c989c33"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_result.py",
+      "bytes": 2843,
+      "sha256": "da511a6b97b5c5e11f2bfe6c4f9d524841bfcc2215ee92e912ebe0cbcef72147"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/plan.py",
+      "bytes": 9295,
+      "sha256": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/persistence.py",
+      "bytes": 1569,
+      "sha256": "6cdc729e4ac75443f9931cd210acb9a6df41188330c92ac9660db96ebb6048a3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6685,
+      "sha256": "dec9c4b27c625d75addf7f89c4806e39eadf91c93b74b47b351c89253436d48b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/SHARED-START.json",
+      "bytes": 1190,
+      "sha256": "e9df30da11c2f2747e794594b58da22008944ecd3b5e122bdea31e4413d17248"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5f4536abd4be6645e28368d3b4b4e3d8de0d706ab8b01d4cef3460a411228b8c"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/SHARED-STDOUT.txt",
+      "bytes": 1006,
+      "sha256": "a5350ff8dca46ec9c6f53c0e3ee42ef99ec0113239c2b3550f567173367c5f44"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/controls/RESULT.json",
+      "bytes": 1411,
+      "sha256": "c1e0856d974f132b0425bfd123e36794fa0c797dce7c51a9d75b114bb4cda626"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/controls/pass/RESULT.json",
+      "bytes": 54653,
+      "sha256": "005930450c228e830cc0878e48079d9ef2dd76976911cc1cde9aeaa8896f7748"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/controls/warning/RESULT.json",
+      "bytes": 8425,
+      "sha256": "03b00ef27b53b443180b4f648f18ca7f6ab57db855967afe251493a0944fb1f9"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/controls/missing/RESULT.json",
+      "bytes": 8065,
+      "sha256": "65c4f3b81a68c0a38839fc3918b927c7e2317074e6e37f808b8879cd2423f5a5"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-composed-20261016a/controls/original-fake.py",
+      "bytes": 1115,
+      "sha256": "6001fe0621d2c0b59fe13bd8d052f37f7eef991278b29c42a843a93ab84ae595"
+    }
+  ],
+  "actual_fake_helpers": 16,
+  "sdk_calls": 0,
+  "scope": "12success +2warning-divergence +2missing-telemetry original fake-helper calls; exactjournal/actualdirectgroupwait/boundedcapture/durablepersist/functionaljoin. Inert fixture paths never opened. Fake protocol fields are NOT SDK verification.",
+  "limits": "No inherited canonical9FD/nativeSDK/payload/EXglobal or endtoendparent admission qualification; outerUnison8 closes normally, fake protocol is not SDK raw-digest verification.",
+  "full_goal_complete": false
+}

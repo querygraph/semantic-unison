@@ -158,7 +158,7 @@ let rec run thread =
                          Unix.Unix_error (Unix.ENOTCONN, _, _) ->
                            ignore (Unix.read fd (Bytes.create 1) 0 1))
              | `Wait res ->
-                  wrap_syscall inputs fd res (fun () -> ())
+                  wrap_syscall outputs fd res (fun () -> ())
            with Not_found ->
              ())
         writers;
@@ -239,7 +239,35 @@ let socketpair dom typ proto =
 let bind = Unix.bind
 let setsockopt = Unix.setsockopt
 let listen = Unix.listen
-let close = Unix.close
+let close ch =
+  (* Remove every registration before closing or waking anything: continuations
+     run synchronously and may close again, open a descriptor with the same
+     number, or register fresh I/O. Old operations must never reach that fd. *)
+  let pending_inputs, other_inputs = List.partition (fun (fd, _) -> fd = ch) !inputs in
+  let pending_outputs, other_outputs = List.partition (fun (fd, _) -> fd = ch) !outputs in
+  inputs := other_inputs;
+  outputs := other_outputs;
+  let close_error = try Unix.close ch; None with e -> Some e in
+  let terminal = Unix.Unix_error (Unix.EBADF, "close", "") in
+  let callback_error = ref None in
+  let wake res =
+    try Lwt.wakeup_exn res terminal with e ->
+      if !callback_error = None then callback_error := Some e
+  in
+  List.iter (fun (_, operation) -> match operation with
+    | `Read (_, _, _, res) -> wake res
+    | `Accept res -> wake res
+    | `Wait res -> wake res) pending_inputs;
+  List.iter (fun (_, operation) -> match operation with
+    | `Write (_, _, _, res) | `WriteSubstring (_, _, _, res) -> wake res
+    | `CheckSocket res -> wake res
+    | `Wait res -> wake res) pending_outputs;
+  (* Preserve the close failure even if a continuation raises; otherwise retain
+     Lwt's normal propagation of an unhandled asynchronous exception, after
+     settling all detached operations. *)
+  match close_error, !callback_error with
+  | Some e, _ | None, Some e -> raise e
+  | None, None -> ()
 let set_close_on_exec = Unix.set_close_on_exec
 
 let accept ch =

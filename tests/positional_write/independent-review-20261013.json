@@ -1,0 +1,110 @@
+{
+  "schema": "unison-positional-write-independent-review/0",
+  "recorded_utc": "2026-10-13T19:47:28.548715+00:00",
+  "reviewer": "/root/scratch_review",
+  "accepted_documentation_utc": "2026-10-13T19:45:42.291667+00:00",
+  "status": "ACCEPTED: source, direct/integration recorded evidence and final documentation",
+  "review_mode": "Independent read-only source/artifact/log review; no independent native/test rerun or edits.",
+  "integration_status_superseded": "The frozen integration receipt recorded source acceptance with artifact audit pending. This separate acceptance closes that audit without rewriting its original record.",
+  "source_sha256": {
+    "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+    "src/semanticFile.ml": "2526e9334c5ca6cb34be2d0e2c4d1ee43fbc067b5177fa0cacb54a8ecf279372",
+    "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+    "src/semanticDelta.ml": "0723ba20acc53fd3a0e7e55355420fa354df468ad5c3a2b896115448bb34b7a2",
+    "src/semanticDelta.mli": "c9d7fc24ee722fd243449b7cd5f26a16d0deba2c2a94035258b999a459b7cf3a",
+    "src/Makefile.OCaml": "955954bdae8566a945a03dd3b05adb98d9115e0667e93b7e1b828fef22b59914",
+    "src/dune": "6c5ed958739eaf1bbef5b358d119ad4c7630861f08bbd0d868022443aad5034c",
+    "tests/test_positional_sync.py": "36f5bff06bad5d4819ffcd608a9c4351227a1ec3e9a096171c6eb98b6856f58f"
+  },
+  "qualification_receipts": {
+    "tests/positional_write/qualification-20261013.json": "eeb6a54cf9e19dbbd3fc48c70f897d43b03d49bc514b0a5e103a27e2e420d05f",
+    "tests/qualification/positional-write-integration-20261013.json": "3721bea474daf6db7e81ca8a8ed1b103fd7b076f5b80439a8c0cf4c0bdca8d5b"
+  },
+  "reviewed_documentation_sha256": {
+    "SOL.md": "7fe8ad3fbc16f3e00ed1053c014fae286edf0126d0a940581d7946430b50f9cc",
+    "doc/implementation-status.md": "82b84e4ac2578a2a0c11298e55888cdc8052c24925277bfe8bbfd466cf3aec7a",
+    "doc/foreign-boundary-audit.md": "3acbcf881447ff79cc3adbc4ff036b3554f3ba1f25dc1d19ca4e4fdf8575a1bb",
+    "tests/README.md": "c3d1dc6b2a7c9e5c406632819e34a0bb07ed9e5e549d7bb76a78a44076f58a05",
+    "bench/sync/README.md": "5652da6d1ffb3e0203cba1ba613bdd0010e26b5cf0faf25079648e6a1bf48c86"
+  },
+  "audit": {
+    "direct": {
+      "file_hash_comparisons": 492,
+      "reconstructed_native_artifact_entries": 238,
+      "native_cases_each_compiler": 59,
+      "native_assertions_each_compiler": 1070,
+      "artificial_ML_progress_cases_each_compiler": 2,
+      "artificial_ML_progress_assertions_each_compiler": 32,
+      "forced_ML_backend_cases_each_compiler": 3,
+      "forced_ML_backend_assertions_each_compiler": 29,
+      "total_positive_cases_each_compiler": 64,
+      "total_positive_assertions_each_compiler": 1131,
+      "private_C_variants_reconstructed": 6,
+      "negative_controls": "Three source variants fail four designated runs per compiler: seek/write position disturbance, append admission direct/unchanged-plan rejection, released heap pointer. Pointer negative rejects before dereferencing heap storage.",
+      "sparse_scope": "Actual offsets above2GiB with bounded64-byte head/tail inventory samples; no whole sparse-hole hash.",
+      "query_scope": "New native admission counters only; existing ML/Unix proof queries are excluded."
+    },
+    "integration": {
+      "recorded_pin_hash_comparisons": 4502,
+      "final_current_source_stability_rechecks": 339,
+      "total_file_hash_comparisons": 4841,
+      "production_inputs": 316,
+      "production_locations": [
+        "workspace",
+        "stockMake",
+        "OxMake",
+        "stockDune",
+        "OxDune"
+      ],
+      "test_ownership_capture_sources": 23,
+      "suite_logs": 16,
+      "build_and_selftest": "Both compiler-matched Make and Dune snapshots terminal0; all source inputs, compiler/binary/object and log pins match.",
+      "conformance_commands_each_compiler": 127,
+      "conformance_assertions_each_compiler": 2033,
+      "worker_groups_each_compiler": 19,
+      "report_groups_each_compiler": 15,
+      "local_producer_groups_each_compiler": 10,
+      "remote_source_bidirectional_oldpeer_groups_each_compiler": 12,
+      "bidirectional_keys_each_compiler": 24,
+      "full_Files_cases_each_compiler": 79,
+      "excluded_Files_cases": 0,
+      "matched_Files_compile_link_commands_each_compiler": 24,
+      "retained_Files_artifacts_each_compiler": 365,
+      "retained_partial_sync_artifacts_each_compiler": 25,
+      "actual_partial_sync_cases": 4,
+      "actual_sync_phase_owner_capture_records": 16,
+      "remote_child_records": 8,
+      "current_exact_root_inventories": 8,
+      "finite_cleanup_control_records": 8,
+      "native_trace": "Four trace pairs bind writer PID/PGID and stage dev/inode/path: first65536-byte returned pwrite at1024 fully read back, then EIO at66560 with16-byte prefix recheck.",
+      "private_mutations": "Both partial-sync native C mutations reconstructed byte-for-byte from frozen production source and retained runner.",
+      "current_states": "Retained current bytes/inodes match exact retry and stable no-op; current/before archive files support narrowed raw old/new MD5 observations."
+    },
+    "combined_file_hash_comparisons": 5333,
+    "count_scope": "Comparisons include repeated pins/locations; not unique-file counts."
+  },
+  "resolved_findings": [
+    "Direct fixture now explicitly macOS-only; it no longer advertises Linux execution while requiring xcrun.",
+    "Nonuniform production-loop target bytes independently expose wrong source-slice advancement on short writes.",
+    "Partial-sync deadline/terminal-leader paths retain the owned PID via WNOWAIT through group cleanup before wait4 reap. Both captures settle; primary errors survive secondary capture failures; failed fixtures are retained.",
+    "Archive assertions and documentation are narrowed to raw fingerprint-byte observations without decoded header/node authority.",
+    "Whole materialization may move shared positions during proof/hash reads; only each POSIX native write preserves its position. Windows fallback and historical benchmark scope stay explicit."
+  ],
+  "generated_depend": {
+    "path": "src/.depend",
+    "sha256": "75a5edfc58129bc63a1aa1a55e762a27d0bb9c2f9212ec43cb2bba5235fe67d0",
+    "scope": "Byte-identical workspace/both fresh Make snapshots; excluded from316-input manifest."
+  },
+  "limits": [
+    "Borrowed writer owns no FD; requires live descriptor, stable flags and exclusive private output. No concurrent close/F_SETFL, FD-reuse lease or hostile namespace guarantee.",
+    "Native POSIX runtime evidence is macOS/APFS on pinned OCaml5.5.1 and OxCaml5.2.0+ox. Forced fallback tests on this host do not qualify Windows ABI/runtime or other POSIX platforms.",
+    "Discarded stage bytes and intermediate failed-transfer live/archive states are in-execution retained runner assertions, not independent later rereadable snapshots.",
+    "Raw Main-archive MD5-byte observations do not decode archive header or bind image.dng node; exact retry/stable no-op independently exercise later sync behavior.",
+    "Owned wait4 reap concerns the client leader. No descendant reap follows from PID absence; no complete credit/FD census or one machine-wide18CPU limit.",
+    "Bounded capture/wait observations preserve existing OS wait4-after-SIGKILL limits; no absolute native-I/O or process-settlement deadline claim.",
+    "Logical successful returned bytes and attempt counts do not attest physical writes/sharing, speedup or crash durability. An asynchronous exception may leave unreported private effects.",
+    "Complete-lifetime FD/memory policy, native filesystem lifecycle/range/platform coverage, broader DNG/SDK/corpus/performance and Photo-owned preview qualification remain unfinished.",
+    "Synthetic private temporary files and finite Python controls only; no Adobe SDK/Lightroom/Photo payload/catalog/cache/volume/publisher invocation or access. External oracle window remains unreleased."
+  ],
+  "goal_status": "active; full implementation objective remains unfinished"
+}

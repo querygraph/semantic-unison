@@ -1,0 +1,164 @@
+{
+  "schema": "unison-concurrent-entry-dispatch-source-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 17937,
+      "sha256": "a4d8fcaca6bc7692c5bde9a1d2a2cddaee6ca10c8e84505c1037cde5bc9b25aa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/execute.py",
+      "bytes": 6528,
+      "sha256": "7032747ac3a3bf25e129011a806d937e804f0150019db483fe303cf1d8875c78"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/execute_test.py",
+      "bytes": 3822,
+      "sha256": "5ff3c12f516b4f0dabad400f58a4acbeb546a4291208804ee605d94c43fc6d2d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/dispatch_test.py",
+      "bytes": 2317,
+      "sha256": "1de14ce411131993106b2eacb9f508c361b523e04caf0399a2fc7a78722fd8ed"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/fake_validator.py",
+      "bytes": 2062,
+      "sha256": "b8cbaaec4006a6383f36aa7533773680aa72fabf33c47ed597c92200efda35c1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/command.py",
+      "bytes": 2803,
+      "sha256": "f00c47f85e7583a532b3ffb68a79257431408166d98213c8685fb14a3b2099bc"
+    }
+  ],
+  "runs": [
+    {
+      "label": "entry",
+      "tests": 6,
+      "actual_terminal": {
+        "chunk": "902411",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-entry-controls-20261016a/SHARED-START.json",
+          "bytes": 1109,
+          "sha256": "68608397c3b5182d299db03f7214b76bca3f968b098efb1a84c875a540060d83"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-entry-controls-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "22a35cd9f3cefa59ef42ea37900cc6ab997d67ecd09a7b69c054201173a4c6de"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-entry-controls-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-entry-controls-20261016a/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "1e43b905e11ca028139fe5078016515111aaf7cebf8d6a3e224b7d03b9cb6ac9"
+        }
+      ]
+    },
+    {
+      "label": "old-sdk",
+      "tests": 6,
+      "actual_terminal": {
+        "chunk": "62cc74",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-old-sdk-controls-20261016a/SHARED-START.json",
+          "bytes": 1090,
+          "sha256": "e745a17d17828e6bd5d24a2fc1b68f750aa64913b674896bd8ece98b229c1a81"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-old-sdk-controls-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "e8d5d2510627852c073e028674989a9842e5ae1ccc5deecb89b8eb61efcd8d0f"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-old-sdk-controls-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-old-sdk-controls-20261016a/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "b45cbb440fe08cb440a1baa3af38f7bc8d0bce62313eef02c0e7ec1856866c63"
+        }
+      ]
+    },
+    {
+      "label": "shared-io",
+      "tests": 8,
+      "actual_terminal": {
+        "chunk": "6c969f",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-shared-io-controls-20261016a/SHARED-START.json",
+          "bytes": 1085,
+          "sha256": "63439168ecddbdb53d068e4b9b54154b26f62b02a36c3b858bd5177c54eead56"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-shared-io-controls-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "b8e6c77761294ed29a770211d60831cf00765651c60d79683b053df2f5a7121e"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-shared-io-controls-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-shared-io-controls-20261016a/SHARED-STDERR.txt",
+          "bytes": 106,
+          "sha256": "274f6bac38cd9c543013527ca3004ec792d15edc09b5a81dc5a505bd86dbbc90"
+        }
+      ]
+    },
+    {
+      "label": "new-guards",
+      "tests": 3,
+      "actual_terminal": {
+        "chunk": "76339e",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-new-guards-20261016a/SHARED-START.json",
+          "bytes": 1111,
+          "sha256": "ad0e6955e44d7b7bd9bdf879054ee9245da4bde7c8adfcf1a4ab3d85e108a234"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-new-guards-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "e6c37dc2d05896340b731a2efa714d9fff858fc96181064de63c2b8f61cdf615"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-new-guards-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-dispatch-new-guards-20261016a/SHARED-STDERR.txt",
+          "bytes": 101,
+          "sha256": "41cee9cc70f8e2902ff4277cf9577cbdf05c130cf7652490990fd48efa2e4859"
+        }
+      ]
+    }
+  ],
+  "scope": "23entry/dispatcher guard and legacy mock-fault controls; header FD identities/canonical acquisition are mocked; no new target dispatch, receiving/helper/SDK/Photo/payload/EXglobal; no runtime admission or inherited-bundle qualification",
+  "full_goal_complete": false
+}

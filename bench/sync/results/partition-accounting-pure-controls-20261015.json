@@ -1,0 +1,58 @@
+{
+  "scope": "Pure partition accounting over copied historical128MiB rows, not new execution, performance samples, aggregate/native closure or runtime admission.",
+  "actual_terminal": {
+    "chunk": "afba6b",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "compatibility_control_terminal": {
+    "chunk": "fcc3b0",
+    "exit_code": 0,
+    "historical_cli_receipts": 216
+  },
+  "positive_accounting": {
+    "parts": 6,
+    "cli_per_part": 54,
+    "full_rows": 108,
+    "full_cli": 324,
+    "measured_repetitions_per_configuration": 5
+  },
+  "negative_cases": 26,
+  "checks": [
+    "A partial result cannot pass the full audit",
+    "All six exact label/worker partitions required; no missing/duplicate or undeclared rows",
+    "Binary/compiler/runner/repository/host/filesystem/cache/parameter identities match across parts",
+    "Each CLI/client/server receipt settled and preservation checks true",
+    "Summary recomputed from raw rows, not accepted from a part",
+    "Per-slot background observations retained, not relabelled one timing window"
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 3933,
+      "sha256": "0c353a3e85fc81fccf0f874f9e6c05e97f51025fd40041fc78368dc2bc2afb6c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions_test.py",
+      "bytes": 3244,
+      "sha256": "144ac7b878d4f6c6093a43f1f7bbe534782740f77c7fb27a1eca217c9409d05e"
+    }
+  ],
+  "historical_input": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/warm-128MiB-4files-20261015.json",
+    "bytes": 3426268,
+    "sha256": "95d3a078666257b5db2010309f4abf817b89c90423beb6b3e2936378cb5a1114"
+  },
+  "pending": [
+    "Runner partition selection, bounded owner and preparation bindings",
+    "Pure tests for2048MiB argument admission; source review found existing runner limit512MiB contradicts that unexecuted plan",
+    "Fresh per-part scheduling and actual parent/aggregate closure before larger performance claims"
+  ],
+  "runtime_started": false,
+  "credits_reserved": 0
+}

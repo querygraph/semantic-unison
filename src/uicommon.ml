@@ -303,8 +303,30 @@ let roots2niceStrings length = function
     (Util.truncateString host length, Util.truncateString "local" length)
  | _ -> assert false  (* BOGUS? *)
 
+type semantic_detail = {
+  item : Common.reconItem;
+  roots : Common.root * Common.root;
+  snapshots : (Fspath.t * Unix.LargeFile.stats) list;
+  text : string;
+}
+(* A one-shot observation is consumed by the immediately following details
+   display. Generic formatters and later scans do not reuse remote observations
+   or perform implicit file/RPC inspection. *)
+let semantic_detail = ref None
+let () = Remote.at_conn_close (fun () -> semantic_detail:=None)
+let same_observed_stats a b =
+  a.Unix.LargeFile.st_dev=b.Unix.LargeFile.st_dev && a.st_ino=b.st_ino &&
+  a.st_kind=b.st_kind && a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime
+let take_semantic_detail ri =
+  let pending= !semantic_detail in semantic_detail:=None;
+  match pending with
+  | Some value when value.item==ri && value.roots=Globals.roots () ->
+      let stable = List.for_all (fun (path,stats) ->
+        try same_observed_stats stats (Fs.stat path) with Unix.Unix_error _ -> false) value.snapshots in
+      if stable then Some value.text else None
+  | _ -> None
 let details2string theRi sep =
-  match theRi.replicas with
+  let ordinary = match theRi.replicas with
     Problem s ->
       Printf.sprintf "Error: %s\n" s
   | Different {rc1 = rc1; rc2 = rc2} ->
@@ -312,7 +334,8 @@ let details2string theRi sep =
         roots2niceStrings 12 (Globals.roots()) in
       Printf.sprintf "%-12s : %s\n%-12s : %s"
         root1str (replicaContent2string rc1 sep)
-        root2str (replicaContent2string rc2 sep)
+        root2str (replicaContent2string rc2 sep) in
+  match take_semantic_detail theRi with None -> ordinary | Some text -> ordinary ^ "\n" ^ text
 
 let displayPath previousPath path =
   let previousNames = Path.toNames previousPath in
@@ -409,6 +432,49 @@ let exn2string e =
    | other -> Printf.sprintf "Uncaught exception (please report a bug): %s\n%s"
        (Printexc.to_string other) (Printexc.get_backtrace ())
 
+let semantic_paths ri = match ri.Common.replicas with
+  | Different {rc1={typ=`FILE;status=st1;ui=ui1};rc2={typ=`FILE;status=st2;ui=ui2}} ->
+      let path1=match st1 with `MovedOut (path,_,_) -> path | _ -> ri.path1
+      and path2=match st2 with `MovedOut (path,_,_) -> path | _ -> ri.path2 in
+      Some (path1,ui1,path2,ui2)
+  | _ -> None
+let observe_semantic_pair ri =
+  let open Lwt in
+  match semantic_paths ri,SemanticFormats.local_enabled () with
+  | None,_ | _,[] -> return None
+  | Some (path1,_,path2,_),extensions ->
+      let root1,root2=Globals.roots () in
+      BorrowedWork.bind (fun () -> Update.translatePath root1 path1) (fun local1 ->
+      BorrowedWork.bind (fun () -> Update.translatePath root2 path2) (fun local2 ->
+      let absolute1=Fspath.concat (snd root1) local1 and absolute2=Fspath.concat (snd root2) local2 in
+      let left_label,right_label=roots2niceStrings 12 (root1,root2) in
+      let rec select best = function
+        | [] -> return best
+        | extension::rest ->
+          (* Await both inspections even on failure. Each owns its descriptors
+             and reservation until its own operation has stopped. *)
+          BorrowedWork.bind (fun () -> BorrowedWork.all
+            [(fun () -> SemanticRemote.observe ~root:root1 ~path:absolute1 ~extension);
+             (fun () -> SemanticRemote.observe ~root:root2 ~path:absolute2 ~extension)]) (function
+          | [left;right] ->
+            let supported = function SemanticReport.Supported _ -> true | _ -> false in
+            let both=supported left.SemanticRemote.observation && supported right.SemanticRemote.observation in
+            let hinted=FormatExtension.matches_filename extension (Path.toString path1) ||
+              FormatExtension.matches_filename extension (Path.toString path2) in
+            let handled=both || supported left.observation || supported right.observation || hinted in
+            let snapshots=List.filter_map (fun value -> value.SemanticRemote.local_snapshot) [left;right] in
+            let observation = if handled then Some {item=ri;roots=(root1,root2);snapshots;
+              text=SemanticReport.render ~left_label ~right_label left.observation right.observation} else None in
+            if both then return observation else select (match best with Some _ -> best | None -> observation) rest
+          | _ -> assert false)
+      in select None extensions))
+let inspectDetails ri =
+  semantic_detail:=None;
+  try semantic_detail:=Lwt_unix.run (observe_semantic_pair ri)
+  with Util.Transient why ->
+    semantic_detail:=Some {item=ri;roots=Globals.roots ();snapshots=[];
+      text="Semantic observation unavailable: " ^ SemanticReport.display_reason why ^ "\n"}
+
 (* precondition: uc = File (Updates(_, ..) on both sides *)
 let showDiffs ri printer errprinter id =
   match ri.replicas with
@@ -424,7 +490,17 @@ let showDiffs ri printer errprinter id =
         and path2, ui2 =
           match st2 with | `MovedOut (n, {ui}, _) -> n, ui | _ -> ri.path2, ui2
         in
-        try Files.diff root1 path1 ui1 root2 path2 ui2 printer id
+        try
+          match Lwt_unix.run (observe_semantic_pair ri) with
+          | Some observation ->
+              (* Check local names once more before displaying. Remote reports
+                 are explicitly observations, never synchronization authority. *)
+              semantic_detail:=Some observation;
+              begin match take_semantic_detail ri with
+              | Some text -> printer "Semantic current-replica inspection" text
+              | None -> errprinter "File changed after semantic inspection; request the diff again"
+              end
+          | None -> Files.diff root1 path1 ui1 root2 path2 ui2 printer id
         with Util.Transient e -> errprinter e
       end
   | Different _ ->
@@ -1009,6 +1085,9 @@ let initPrefs ~profileName ~promptForRoots ?(prepDebug = fun () -> ()) () =
   initComplete := false;
   (* Restore prefs to their default values *)
   Prefs.resetToDefaults ();
+  (* Host configuration supplies defaults; the selected client profile and
+     command line can override them on this endpoint only. *)
+  Prefs.loadEndpointLocal usageMsg;
   (* Clear out any roots left from a previous profile. They can't remain
      hanging around if [initPrefs] for the new profile receives an exception
      before fully completing. *)

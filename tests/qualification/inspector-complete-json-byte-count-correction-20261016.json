@@ -1,0 +1,12 @@
+{
+  "corrects": {
+    "path": "tests/qualification/inspector-complete-json-integration-actual-20261016.json",
+    "bytes": 1257,
+    "sha256": "4d60c7fff2eca55491fac90e490ee6933a8e4de47d44ee5aeeed1dee587b5438"
+  },
+  "field": "scope prose fixture byte count",
+  "actual_fixture_bytes": 801,
+  "previous_prose_fixture_bytes": 800,
+  "evidence": "RESULT.json fixture_bytes=801; referenced raw result unchanged",
+  "runtime_or_scope_change": false
+}

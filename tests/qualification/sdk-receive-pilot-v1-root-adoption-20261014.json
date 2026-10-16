@@ -1,0 +1,39 @@
+{
+  "schema": "unison-sdk-receive-v1-root-adoption/1",
+  "utc": "2026-10-14T20:44:07.469297+00:00",
+  "root_receipt": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-ROOT-ACTUAL-CLOSED-20261014.json",
+    "bytes": 1421,
+    "sha256": "37ae8c9820085bcda31d8b1a0162e9ef3c8262a213480170fcded1e4923a6d0a"
+  },
+  "verified": {
+    "utc": "2026-10-14T20:42:03.100191+00:00",
+    "state": "ACCEPT_ACTUAL_RECEIVE_PILOT_PASSED_CLOSED_TERMINAL_VERIFIED",
+    "ownerReturn": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-receive-pilot-v1-actual-return-20261014.json",
+      "bytes": 19659,
+      "sha256": "e62f4e08ad22b605e083f76d0f2a0302859016d990c5a1502382d358a3fee1b1"
+    },
+    "parentTerminal": {
+      "path": "/Users/alexy/src/unison/tests/qualification/sdk-receive-pilot-v1-parent-terminal-20261014.json",
+      "bytes": 1581,
+      "sha256": "d24f6c98c090e8b90ccb000606210839990aecec895b093bf1b507c8529b69ca"
+    },
+    "independentNativeAudit": {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-RECEIVE-PILOT-V1-INDEPENDENT-AUDIT-PENDING-TERMINAL-20261014.json",
+      "bytes": 3540,
+      "sha256": "63994c9373e264fff6ae36a229fbe7f618d87eb4eafa84ba73add1c7ba28d17d"
+    },
+    "parentTerminalExitCode": 0,
+    "actualSdkCalls": 10,
+    "sixMixedCompilerReceivesPassed": true,
+    "badDigestReceiveRejected": true,
+    "aggregateClosedReapedOthersAbsent": true,
+    "unresolvedMarkerAbsent": true,
+    "previewCoordinationHoldReleased": true,
+    "slotConsumed": true,
+    "automaticReplay": false,
+    "qualificationLimit": "Generated containers and contained-group pilot C helper functional/lifecycle only; receive helper raw SDK stdout not independently retained; no production C timing/Photo/Lightroom/render/current-digest-preview reuse qualification."
+  },
+  "scope": "Root independently accepts actual functional/lifecycle and terminal closure; slot consumed; preview coordination hold released, no new SDK permission"
+}

@@ -1,0 +1,1173 @@
+{
+  "schema": "unison-native-range-typed-context-qualification/1",
+  "utc": "2026-10-14T20:11:25.805732+00:00",
+  "status": "passed scoped contracts/callers",
+  "source_pins": {
+    "src/copyRange.ml": {
+      "bytes": 10539,
+      "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7"
+    },
+    "src/copyRange.mli": {
+      "bytes": 4515,
+      "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4"
+    },
+    "src/nativeCopyRange_stubs.c": {
+      "bytes": 30950,
+      "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902"
+    },
+    "src/copy.ml": {
+      "bytes": 101517,
+      "sha256": "efaa18eab835b5b798217f018116951a04b775c19d353cac5e6f345188af1814"
+    },
+    "tests/native_copy_range/test.ml": {
+      "bytes": 17296,
+      "sha256": "37d1250f7355759ddd7def5ad1463aa40b979d56390c59ee5377685735b7c99e"
+    },
+    "tests/native_copy_range/run.py": {
+      "bytes": 10165,
+      "sha256": "a361ffa8f26906c7d06709f6a1523b06d7274d40356b938494f931542a701911"
+    },
+    "tests/test_clone_bound_range.py": {
+      "bytes": 24378,
+      "sha256": "0119135a6aba45ddcaec1b5569c871a32579c839079a89e876a080a82fdf38b6"
+    }
+  },
+  "evidence": {
+    "stock-contracts": {
+      "path": "/private/tmp/unison-native-context-stock.json",
+      "pin": {
+        "bytes": 31219,
+        "sha256": "b772410f11dada433aba19fca091e20c859c443c2180f82db356b1d0d706aeb7"
+      },
+      "work": "/private/tmp/unison-native-copy-range-p4u054rl",
+      "typed_groups": 17,
+      "native_abi_groups": 13,
+      "mutation_negative": {
+        "detected": true,
+        "expected_failure": "unauthorized or repeated suffix write",
+        "only_production_edit": "disable strict indeterminate-decline guard in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-p4u054rl/negative/copyRange.ml",
+        "source_sha256": "786d2232c1263889b0115957e11ca86cd4686138ffe20e65d6f46d44421b0773"
+      },
+      "context_negative": {
+        "detected": true,
+        "expected_failure": "contradictory typed context authorized progress/fallback",
+        "only_production_edit": "remove direct typed context guards in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/copyRange.ml",
+        "source_sha256": "c1d35a665012a72eadbcbf27806bef74812a88be5c32325778d1a8c86eb8101c"
+      },
+      "commands": [
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-version"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/compiler-version.log",
+          "log_sha256": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-where"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/compiler-library.log",
+          "log_sha256": "d9ef22385c815497643db367b1d94726a2c6ab7d7663be1e7fcd8bef69e1f216"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/unit/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/unit/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/unit/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-p4u054rl/unit/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/unit/test.log",
+          "log_sha256": "ae5a0c9a55b8a7cf67c26e790bb944dd418e003fc54e5ab6d41edb5d8a130796"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/negative/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/negative/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/negative/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-p4u054rl/negative/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/negative",
+          "exit": 2,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/negative/test.log",
+          "log_sha256": "30f2459141d3ace6ae988ccfb7377ef9c568df1759776f643b77858e2b716893"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative",
+          "exit": 2,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/context-negative/test.log",
+          "log_sha256": "d3aea6cb8121bba66b6e3cc00cdc3867028755418325cc089f070d6af4f2da67"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "nativeApi.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/compile-nativeApi.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "nativeCopyRange_stubs.c"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/compile-nativeCopyRange_stubs.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copy_stubs.c"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/compile-copy_stubs.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "nativeApi.cmx",
+            "nativeCopyRange_stubs.o",
+            "copy_stubs.o",
+            "native.ml",
+            "-o",
+            "native-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-p4u054rl/native/native-test",
+            "/private/tmp/unison-native-copy-range-p4u054rl/native/fixtures"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-p4u054rl/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-p4u054rl/native/test.log",
+          "log_sha256": "70a52d8e5dc40fda7711912d4ced0e7e22d32206df30a7f766f109624b31d82d"
+        }
+      ]
+    },
+    "stock-caller": {
+      "path": "/private/tmp/unison-native-context-stock-caller.json",
+      "pin": {
+        "bytes": 40671,
+        "sha256": "0838ca0a256a06acd2f29f0a3ca82662c2738cf77e084fdfb8cbfef50bd8e598"
+      },
+      "work": "/private/tmp/unison-bound-copy-9hcn2njx",
+      "groups": 14,
+      "production_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3",
+      "commands": [
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-version"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-9hcn2njx",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-9hcn2njx/compiler-version.log",
+          "log_sha256": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "nativeStep.c"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-9hcn2njx",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-9hcn2njx/compile-nativeStep.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "copyForTest.ml"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-9hcn2njx",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-9hcn2njx/compile-copyForTest.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/umarshal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/rx.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/unicode_tables.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/unicode.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/bytearray.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system/system_generic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system/generic/system_impl.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/system.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/projectInfo.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/myMap.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/safelist.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/util.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/uarg.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/prefs.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/trace.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ubase/proplist.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/pqueue.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/lwt.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/lwt_util.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/generic/lwt_unix_impl.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lwt/lwt_unix.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/features.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/uutil.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/case.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/pred.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/terminal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fileutil.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/name.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/path.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fspath.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fileObservation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/stagePublication.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/wholeFileClone.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fs.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fingerprint.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/abort.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/osx.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fswatch.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/propsdata.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/props.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fileinfo.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/os.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/lock.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/clroot.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/common.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/tree.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/checksum.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/transfer.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/xferhint.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/borrowedWork.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/remote.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/external.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/negotiate.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/globals.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fswatchold.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticHash.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticFile.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/formatExtension.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/formatRecognition.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/xmpObservation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/xmpMerge.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/dngSemantic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/dngExtended.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/jpegSemantic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/dngRecognition.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticDelta.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticReport.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/helperSupervisor.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticAdmission.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticMailbox.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/ioAdmission.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticWorkers.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticFormats.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/backendResources.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/helperLimiter.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/candidateValidator.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/dngValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/dngCandidateValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/candidateValidators.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/validationTreeBudget.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/validationTreePolicy.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticRuntime.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/supervisedExternal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticMergeCache.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticSync.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticRemote.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/candidateValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/finalPublication.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/targetBinding.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fpcache.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/update.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/moves.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/cloneRange.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/cloneLease.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/copyRange.cmx",
+            "copyForTest.cmx",
+            "boundTest.ml",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/osxsupport.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/pty.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/bytearray_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/hash_compat.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/props_xattr.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/props_acl.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/copy_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/nativeCopyRange_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/wholeFileClone_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/fileObservation_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/stagePublication_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/finalPublication_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/helperSupervisor_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticHash_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3/src/semanticFile_stubs.o",
+            "nativeStep.o",
+            "-o",
+            "bound-copy-test"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-9hcn2njx",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-9hcn2njx/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-bound-copy-9hcn2njx/bound-copy-test",
+            "/private/tmp/unison-bound-copy-9hcn2njx"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-9hcn2njx",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-9hcn2njx/test.log",
+          "log_sha256": "599b85581786054e62273fc3878b4be554c1aadfb5514e2e3af94a72f7e7a301"
+        }
+      ]
+    },
+    "stock-make": {
+      "path": "/private/tmp/unison-native-context-stock-make.json",
+      "pin": {
+        "bytes": 42489,
+        "sha256": "e018499e4929bf9b8ddfbf9940d772b4406b2783a6752736182f52a72bebc83e"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-y4y_g_k3",
+      "compiler_version": "5.2.0",
+      "binary_sha256": "45d7a64edfb81ee64aa2954edae56c3a0e040c7e8c2078464e202f79114735ae",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "stock-dune": {
+      "path": "/private/tmp/unison-native-context-stock-dune.json",
+      "pin": {
+        "bytes": 42295,
+        "sha256": "7ef30b6d59f765b94869d3e3ed418aa9a0a81c3d2904c250c127b73a12845c7d"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-o99ss5bf",
+      "compiler_version": "5.2.0",
+      "binary_sha256": "0d47b6515e80c8969b9f81e2a3943d34f6356fcfa23aea958f646b5d199481e1",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-contracts": {
+      "path": "/private/tmp/unison-native-context-ox.json",
+      "pin": {
+        "bytes": 31250,
+        "sha256": "bfc0487bf244e6ab2f43e42b0bb10adfa05ffce4daf0d3b87d30348a1f34f1da"
+      },
+      "work": "/private/tmp/unison-native-copy-range-_4jfw1s7",
+      "typed_groups": 17,
+      "native_abi_groups": 13,
+      "mutation_negative": {
+        "detected": true,
+        "expected_failure": "unauthorized or repeated suffix write",
+        "only_production_edit": "disable strict indeterminate-decline guard in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/copyRange.ml",
+        "source_sha256": "786d2232c1263889b0115957e11ca86cd4686138ffe20e65d6f46d44421b0773"
+      },
+      "context_negative": {
+        "detected": true,
+        "expected_failure": "contradictory typed context authorized progress/fallback",
+        "only_production_edit": "remove direct typed context guards in private CopyRange.ml",
+        "source": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/copyRange.ml",
+        "source_sha256": "c1d35a665012a72eadbcbf27806bef74812a88be5c32325778d1a8c86eb8101c"
+      },
+      "commands": [
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-version"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/compiler-version.log",
+          "log_sha256": "fb355d5f164b1b43cce4bbe63a4ea894cc416c77748e0893b56bbd7eb8ba487a"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-where"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/compiler-library.log",
+          "log_sha256": "4e4eb76a3398f335db776839be6054accc57a0c6da3441c3700d06214f2f9bb9"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-_4jfw1s7/unit/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/unit/test.log",
+          "log_sha256": "ae5a0c9a55b8a7cf67c26e790bb944dd418e003fc54e5ab6d41edb5d8a130796"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative",
+          "exit": 2,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/negative/test.log",
+          "log_sha256": "30f2459141d3ace6ae988ccfb7377ef9c568df1759776f643b77858e2b716893"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "test.ml",
+            "-o",
+            "typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/typed-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative",
+          "exit": 2,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/context-negative/test.log",
+          "log_sha256": "d3aea6cb8121bba66b6e3cc00cdc3867028755418325cc089f070d6af4f2da67"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copyRange.mli"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/compile-copyRange.mli.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copyRange.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/compile-copyRange.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "nativeApi.ml"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/compile-nativeApi.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "nativeCopyRange_stubs.c"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/compile-nativeCopyRange_stubs.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "-ccopt",
+            "-Wall",
+            "-ccopt",
+            "-Wextra",
+            "-c",
+            "copy_stubs.c"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/compile-copy_stubs.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "copyRange.cmx",
+            "nativeApi.cmx",
+            "nativeCopyRange_stubs.o",
+            "copy_stubs.o",
+            "native.ml",
+            "-o",
+            "native-test"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-native-copy-range-_4jfw1s7/native/native-test",
+            "/private/tmp/unison-native-copy-range-_4jfw1s7/native/fixtures"
+          ],
+          "cwd": "/private/tmp/unison-native-copy-range-_4jfw1s7/native",
+          "exit": 0,
+          "log": "/private/tmp/unison-native-copy-range-_4jfw1s7/native/test.log",
+          "log_sha256": "70a52d8e5dc40fda7711912d4ced0e7e22d32206df30a7f766f109624b31d82d"
+        }
+      ]
+    },
+    "ox-caller": {
+      "path": "/private/tmp/unison-native-context-ox-caller.json",
+      "pin": {
+        "bytes": 40683,
+        "sha256": "b7bff55de026986b18df54fe8702f86be68631aa7448dcc38914b5be64dd08f3"
+      },
+      "work": "/private/tmp/unison-bound-copy-8jkpeyr9",
+      "groups": 14,
+      "production_build": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz",
+      "commands": [
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-version"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-8jkpeyr9",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-8jkpeyr9/compiler-version.log",
+          "log_sha256": "fb355d5f164b1b43cce4bbe63a4ea894cc416c77748e0893b56bbd7eb8ba487a"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "nativeStep.c"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-8jkpeyr9",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-8jkpeyr9/compile-nativeStep.c.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "-c",
+            "copyForTest.ml"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-8jkpeyr9",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-8jkpeyr9/compile-copyForTest.ml.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system/generic",
+            "-I",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/generic",
+            "-I",
+            "+unix",
+            "-I",
+            "+str",
+            "unix.cmxa",
+            "str.cmxa",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/umarshal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/rx.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/unicode_tables.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/unicode.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/bytearray.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system/system_generic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system/generic/system_impl.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/system.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/projectInfo.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/myMap.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/safelist.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/util.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/uarg.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/prefs.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/trace.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ubase/proplist.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/pqueue.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/lwt.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/lwt_util.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/generic/lwt_unix_impl.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lwt/lwt_unix.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/features.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/uutil.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/case.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/pred.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/terminal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fileutil.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/name.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/path.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fspath.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fileObservation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/stagePublication.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/wholeFileClone.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fs.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fingerprint.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/abort.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/osx.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fswatch.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/propsdata.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/props.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fileinfo.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/os.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/lock.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/clroot.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/common.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/tree.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/checksum.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/transfer.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/xferhint.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/borrowedWork.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/remote.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/external.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/negotiate.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/globals.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fswatchold.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticHash.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticFile.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/formatExtension.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/formatRecognition.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/xmpObservation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/xmpMerge.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/dngSemantic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/dngExtended.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/jpegSemantic.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/dngRecognition.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticDelta.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticReport.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/helperSupervisor.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticAdmission.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticMailbox.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/ioAdmission.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticWorkers.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticFormats.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/backendResources.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/helperLimiter.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/candidateValidator.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/dngValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/dngCandidateValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/candidateValidators.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/validationTreeBudget.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/validationTreePolicy.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticRuntime.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/supervisedExternal.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticMergeCache.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticSync.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticRemote.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/candidateValidation.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/finalPublication.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/targetBinding.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fpcache.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/update.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/moves.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/cloneRange.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/cloneLease.cmx",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/copyRange.cmx",
+            "copyForTest.cmx",
+            "boundTest.ml",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/osxsupport.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/pty.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/bytearray_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/hash_compat.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/props_xattr.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/props_acl.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/copy_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/nativeCopyRange_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/wholeFileClone_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/fileObservation_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/stagePublication_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/finalPublication_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/helperSupervisor_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticHash_stubs.o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz/src/semanticFile_stubs.o",
+            "nativeStep.o",
+            "-o",
+            "bound-copy-test"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-8jkpeyr9",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-8jkpeyr9/link.log",
+          "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "command": [
+            "/private/tmp/unison-bound-copy-8jkpeyr9/bound-copy-test",
+            "/private/tmp/unison-bound-copy-8jkpeyr9"
+          ],
+          "cwd": "/private/tmp/unison-bound-copy-8jkpeyr9",
+          "exit": 0,
+          "log": "/private/tmp/unison-bound-copy-8jkpeyr9/test.log",
+          "log_sha256": "599b85581786054e62273fc3878b4be554c1aadfb5514e2e3af94a72f7e7a301"
+        }
+      ]
+    },
+    "ox-make": {
+      "path": "/private/tmp/unison-native-context-ox-make.json",
+      "pin": {
+        "bytes": 42495,
+        "sha256": "404dbbea4336a0315f75abd2b7b0b5bed42b278adfd4f052a99532ae88968ee8"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hhrexqkz",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "da502c6d4cc5e8e9821b91f12df506460af38ac81e1ad13f94402b0d33aed087",
+      "build_exit": 0,
+      "selftest_exit": 0
+    },
+    "ox-dune": {
+      "path": "/private/tmp/unison-native-context-ox-dune.json",
+      "pin": {
+        "bytes": 42299,
+        "sha256": "9d2ec8ed1ec940c3ae480729e05c21659f14b59a75ec12cded672d395801083e"
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gnombrok",
+      "compiler_version": "5.2.0+ox",
+      "binary_sha256": "7941699c87387cc1446c92dc7ae9c4351bbf63690a2a8c954c80c374ea8b0201",
+      "build_exit": 0,
+      "selftest_exit": 0
+    }
+  },
+  "limits": [
+    "Typed-context and byte-accounting contracts only; no native Linux/FreeBSD/Solaris/Windows/ZFS/ReFS runtime qualification",
+    "macOS range C tests establish unavailable/preflight ABI, not range-sharing capability",
+    "Production caller uses controlled native adapter on disposable files; no physical allocation/performance claim",
+    "No Adobe/SDK/Photo calls; full M4-V/M5/M6 remain open"
+  ]
+}

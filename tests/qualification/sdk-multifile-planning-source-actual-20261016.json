@@ -1,0 +1,36 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/plan_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "....\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 39760,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "scope": "four pure new real-SDK multi-file receiving command/budget groups; all executable/fixture values inert, no SDK/payload/EXIO",
+  "source_sha256": {
+    "tests/sdk_multifile/plan.py": "d83335ec6b133f9efe2619e61f2cf5297ea93bccfc493fa4e390499cc895d4ce",
+    "tests/sdk_multifile/plan_test.py": "31124b9983a073d4679028a00150699e6a95b1bf726991e52a7a4148e6ccd35c"
+  },
+  "actual_owner_terminal": {
+    "chunk_id": "a21258",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

@@ -1,0 +1,500 @@
+{
+  "utc": "2026-10-14T18:12:35.114009+00:00",
+  "state": "SOURCE_CHECKPOINT_NOT_READY_FOR_NATIVE_ADMISSION",
+  "review_sha256": "c9ebf150d69764ded93cc26a784100c7a083a264b867380d2d5e6e5f6ecc3d50",
+  "fresh_fixture_SDK_calls": 13,
+  "breakdown": {
+    "seed": 1,
+    "writers": 3,
+    "positive": 3,
+    "negative": 3,
+    "pilot": 3
+  },
+  "native_calls_here": 0,
+  "request_remains_withdrawn": true,
+  "passed": [
+    "stock and Ox build-only",
+    "five actual-core synthetic helper settlement cases each compiler",
+    "four original Python native-deadline controls"
+  ],
+  "remaining_gate": "External aggregate wrapper supervision including Python fixture/hash work and abrupt-wrapper failure; prove exact descendants settled before any ownership release",
+  "evidence": {
+    "/private/tmp/unison-aggregate-stock-build.json": {
+      "schema": "unison-adobe-validation-core-v1",
+      "complete": false,
+      "mode": "throughput",
+      "created_utc": "2026-10-14T18:11:32.932085+00:00",
+      "runner_sha256": "9df236349f81789909a30dc3c6abeea18b53a2e62f841ac65e2061a8c4b240eb",
+      "fixture_generator_sha256": "68fee929357d8f8dd61388383d24f4fd9da3f41188351c46df8b8bc853a95a3b",
+      "host": {
+        "system": "Darwin",
+        "release": "24.6.0",
+        "machine": "x86_64",
+        "logical_cpus": 36,
+        "hw.physicalcpu": 18,
+        "hw.memsize": 137438953472
+      },
+      "scope": "Cached synthetic CFA files; production shared validation/hash/helper/resource core, not full synchronization or Lightroom.",
+      "background_activity": "Ordinary system activity uncontrolled; no cache flush or CPU affinity.",
+      "compiler": {
+        "version": "5.2.0",
+        "executable_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+        "flags": [
+          "-I",
+          "+unix"
+        ]
+      },
+      "driver": {
+        "sdk": "Adobe DNG SDK 1.7.1 build 2724",
+        "executable_sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+        "build_id": "unison-sdk171-2724-v1-single",
+        "source_sha256": "15d505f4fedb931e14f0e5654fd5c3858cec7e03324dce66a79acd37fefdc957",
+        "threads": 1,
+        "qualification": "passed synthetic CFA uncompressed/lossless JPEG/JXL and XMP controls; see qualification.json"
+      },
+      "source_sha256": {
+        "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+        "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+        "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+        "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+        "src/helperSupervisor.mli": "d92a68a533c1938dda676acfe54213ff88241e8e84443d25dc8b4f46e1e9a1d5",
+        "src/helperSupervisor.ml": "678432dcd4ed1dce0439356b45f8f3114904b202bf413ae6c7896c0455dc1a36",
+        "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+        "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+        "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+        "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+        "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+        "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticWorkers.mli": "b458429384c808f7877e3b32153ef4c9a4e1435aa3323e6c35de53a5a71ce285",
+        "src/semanticWorkers.ml": "cb7bb2fd87cf9d59ae5e2f55fd135f20e3cc42974f60c9515cbe916a9026ba18",
+        "src/dngValidation.mli": "cd4d0660783e3d446817381b539bc3110c8c4fa5ca49ab8cd9351e36549efa30",
+        "src/dngValidation.ml": "8d6f9b21e0e77178ff711fae94de4aab16d4867524ce7bc85be979b80da99715",
+        "bench/adobe/clock_stubs.c": "e9bb0cf393496b54cd52f8f9d6ff571579f69d8c073dfa52c648f8441d62a8f2",
+        "bench/adobe/validation_bench.ml": "67e82eedf55c7da17243bda34874e3691a9088497802706568adca2092683678"
+      },
+      "clock": {
+        "wall": "CLOCK_MONOTONIC",
+        "parent_cpu": "CLOCK_PROCESS_CPUTIME_ID",
+        "child_cpu": "getrusage RUSAGE_CHILDREN after reap"
+      },
+      "parameters": {
+        "workers": [
+          1,
+          6,
+          18
+        ],
+        "jobs": 72,
+        "repetitions": 5,
+        "control_repetitions": 1,
+        "warmups": 1,
+        "one_worker_warmup_jobs": 1,
+        "peak_sampling_seconds": 0.001,
+        "cpu_credit_budget": 18
+      },
+      "samples": [],
+      "summary": [],
+      "build": {
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-z5j8ftql",
+        "retained": true,
+        "production_snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i",
+        "linked_object_sha256": {
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt.cmi": "df248ce98c10a839dba170866c16731d096451f5a347f0ca6511f5375a5d8eb4",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt.cmx": "e371d4a8122fef44d95bb47f3b5c4a24892afa66eb712cdc58969cc6b23f86cf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt.o": "47f64c8aa9cc29ae9ac163978dd3e6d0b57ccd2f682478da57f0f972c0beab09",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/pqueue.cmi": "e06109c55b86b5b89aec2a9fdeece3d771923b7d6d975b2651a016c6069d9bba",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/pqueue.cmx": "0aefa1209bbe9299d7618473ec23ac35cab2180964a81242b0e3bccadc06d0c5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/pqueue.o": "e1571370200553b2091fec880fa76b6194d2ba5c7eee38bb79afa0ae6952595e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/generic/lwt_unix_impl.cmi": "019b1c658f152341874c63c4368ffebbe3ef66fe277ea4f2fae237f7fc8f6a93",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/generic/lwt_unix_impl.cmx": "43708ab7c2a8cebe72fafd95630561ce0e43e2f89e8a4b9f7fe8fb4bda75a00b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/generic/lwt_unix_impl.o": "5f540af06ff50c81ea0da15d33f563611cf2551e1fd7b4a86ef566bc5929ba07",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt_unix.cmi": "7316316a31fc33aa3abc49760f069b4c1a16a30bed8b98fe6dc14e4e6cb191db",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt_unix.cmx": "ce586a2da538c7096fefc7c894ee22248b00cd8eba032eb3aac2218a9d35bd38",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/lwt/lwt_unix.o": "31a0ae0b0ca134c17d164dc6516124d065e837cbf7892ba41d9a538a5288ae1b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/borrowedWork.cmi": "94cb74a128f7f09392f176377b2089e9e7dfa84453a16c5b956336dd25cbe390",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/borrowedWork.cmx": "5bdbfea44bcc084e13541c2d5e096950219e651e54bb46e3665322427e53486e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/borrowedWork.o": "314e8ddb1f27ad4a57188af62a6eb2384b16b576e88c7bd5c8add70e547329b0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/helperSupervisor_stubs.o": "c746cd09b6c609d325736c58866a9c26e6b9736a92a08cd54f075c6ee590641c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/helperSupervisor.cmi": "93014597cd0e5f8b3b6b3e80e649e88d70fb71524d5b9c74b787c206390bc76c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/helperSupervisor.cmx": "00388116f125177f8b6f9f99347c1c396b2be7209a0ff8536f6ad71261948cef",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/helperSupervisor.o": "c1d0aea801e862a9a8b978cd9c137e3e67b1a68fddb00a4375dc2c62cb1b66e4",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticAdmission.cmi": "fbf435b5868019d8ccb114e9733dc19ffcbb04ef5fe4ce6a09ebcda7f23c7529",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticAdmission.cmx": "4b8be7faf8e9d4d8ad307b0486761608956670c6719fb7e15817703ccfef2676",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticAdmission.o": "35d95e2ac65b1f21b3c84a19dca368cdf7e49391a3d434d88eb6e02b8ffd0862",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/ioAdmission.cmi": "78b00e0c69fb792626f29700fea045dd65f952f4d3365077743b37bba4b5ffd7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/ioAdmission.cmx": "e9b1a0acd0a9ca38ae3f3c720a12d2634021b7df1e9e99214fdab777b69087ef",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/ioAdmission.o": "788a2dc2ed1c4c5c41e5d1a07032e99176956fe4ae4d4914120de2eaee6935dd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticMailbox.cmi": "1d960b41824a1807a26f88376afba5eb24196b6ccdecce1937049f34d913d3d2",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticMailbox.cmx": "0654aaff2ffdc3568551680ccffa2a861c56d9c9e33dc2c2ea86e8a10e45ce92",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticMailbox.o": "6169bbd46dea97c8b46f2302ffa5dfd57ab12d22aadfa5244dc6b3582d1028a1",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticHash_stubs.o": "f72ddd53320a27165fa7f0c1fc0a21907611d87f4a9a022a4a39aa1f2b75ba29",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticHash.cmi": "8ea88e0b5703db3f627cdb2719611404291fb07abc514e53eb9c5d69c9c6c41e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticHash.cmx": "2f43fdb249910d70163c30f954d58371b884e9c4e399fe74869595b3dd480ac6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticHash.o": "0bd4ec0953754c8e61219aaf232e7a9605f4f85e2a81ccc19d7c95938f4c7461",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticFile_stubs.o": "f1fa71b726814a11bf8479c6021f5138b7b375bc4826dbdefd15bcb2a642e7bf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticFile.cmi": "4e6b0c548fff686a9897f8c56385a0fb15a971d5ce0b857169a6d56804c4512b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticFile.cmx": "818e4cc292337a13f007fac2e0e87fb7e3ce3aa53ad8db59443ba5d15dbcd4b2",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticFile.o": "879aec3a2eb3373138fc81ffeade62a0a4a40f2ea2aa74487e695bc2c8a6afc7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatRecognition.cmi": "458e7e02f404a4aac99ea6529b221be556d740a9d0e262bf722953d7a4cd2740",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatRecognition.cmx": "8b15d0c7c738962f22b1252b9f8cd5022698f6600cca108c40e223effead2c17",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatRecognition.o": "bc50eff01b082217e7c0068a94e69735060bece1f83a9db3897b2fa0c0ee533a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatExtension.cmi": "5e0091c3c692e98e71c18eeac0ced44af2651061d45f436977036b67833a5cc0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatExtension.cmx": "a72ef4a3206d6885671b040b26705ea353cc18837e960aeaf516ce1114c2eace",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/formatExtension.o": "8bdc54ef8d43d60f6fedc68b53ad8eb6aa105c165baec1401c6c86c6c572dd0e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpObservation.cmi": "0eb08828c4c7bf24dfe10d2327ed12962b03d0c8613f9e8b7b49a5e3884a7320",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpObservation.cmx": "c54ed7ad7ce327bcb6b6114cffb10fd1641d64eb8af94aa3ecddeb11685bcc50",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpObservation.o": "62bc1ddbffbabd2daa179e8e22eaaf99c742f6c8306a50ee1a45139e61a3c606",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpMerge.cmi": "ae6cb2266bb0df59c01a3cafc9bf77a9a1f605ef070f69a8a61734e115bedff8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpMerge.cmx": "726f0bb595ca5486c77ea798ebd18b3a988a7655c8586546ba12367981a32cea",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/xmpMerge.o": "acb181bf66cbbb54fe31aa6986c5e020743c4d5562d8737adc27aa4b2f9eb3c5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngSemantic.cmi": "9c8dd7f5b9c1afa8abd42979bdba79c4be28478621bc41756c5e7f2d17956f2b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngSemantic.cmx": "90702a3ddd8cde3bd7ba1e8e56f04d0f9136cf611f68ea94e8750e367c4179ef",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngSemantic.o": "9c8f489aa4a1e75a97c2b335ff19e2a0bb7318ccc2e93953b2b0d61f84ee020a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticDelta.cmi": "1f2292dffaaa3c570a3f3ccefe20e5b7b893ad31bdce8e3d6fcc2e7bcb5b2181",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticDelta.cmx": "0dc04ff851fbc168ca770f02c0e2d1a4909c8183bc1473f63bb07162cd2e248e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticDelta.o": "b723eb51252ab0c163b5f6c35d3a4854093c4895b3035b341123e65457c800dd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticWorkers.cmi": "ffdeff926ec2a39c3960cab2f420086d7a57f045c98a51b1a6b3c05652a0027b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticWorkers.cmx": "0ff2c4fd3f0d890cedf4f919d119ccc308ab714c20ba0256cc85d037f5402a90",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/semanticWorkers.o": "c2e6c5891f4cf96abcb92ce62fbc6c0b4a114dc813143518369e669a71868525",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngValidation.cmi": "effc120326c0dc36e04473f55d81c814ad76fbd7bde55ddaeb31b635c638cb67",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngValidation.cmx": "5e4ee65c2d6d3c32da984ae43d60e6247106e0a42212a66434b27a2de97a0b60",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-p_cwff7i/src/dngValidation.o": "1ec0736829aefe6bcdb311417ae57bb3876afa483d21ba50e541fb73b4fe0e44"
+        },
+        "binary_sha256": "6f3c2e18fb43915412681d82c6b962615bd7fd1a3707e3fbde50efde326c9ffd",
+        "production_receipt_sha256": "4be2e57414586b8f9b4b03c28c1b856ee27f30f7a383eb2d3a1b550388f6dd61",
+        "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "complete": true,
+        "native_calls_during_build": false
+      }
+    },
+    "/private/tmp/unison-aggregate-ox-build.json": {
+      "schema": "unison-adobe-validation-core-v1",
+      "complete": false,
+      "mode": "throughput",
+      "created_utc": "2026-10-14T18:10:51.827053+00:00",
+      "runner_sha256": "ef355e88c98d8cec5c13314f08ce11f7ccd71508bf1bbbe77e524635f5205747",
+      "fixture_generator_sha256": "68fee929357d8f8dd61388383d24f4fd9da3f41188351c46df8b8bc853a95a3b",
+      "host": {
+        "system": "Darwin",
+        "release": "24.6.0",
+        "machine": "x86_64",
+        "logical_cpus": 36,
+        "hw.physicalcpu": 18,
+        "hw.memsize": 137438953472
+      },
+      "scope": "Cached synthetic CFA files; production shared validation/hash/helper/resource core, not full synchronization or Lightroom.",
+      "background_activity": "Ordinary system activity uncontrolled; no cache flush or CPU affinity.",
+      "compiler": {
+        "version": "5.2.0+ox",
+        "executable_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "flags": [
+          "-I",
+          "+unix"
+        ]
+      },
+      "driver": {
+        "sdk": "Adobe DNG SDK 1.7.1 build 2724",
+        "executable_sha256": "ca49a32bd5980b5cb16e10421d2d7a41542698a49f03a5b50007ff234b432b4a",
+        "build_id": "unison-sdk171-2724-v1-single",
+        "source_sha256": "15d505f4fedb931e14f0e5654fd5c3858cec7e03324dce66a79acd37fefdc957",
+        "threads": 1,
+        "qualification": "passed synthetic CFA uncompressed/lossless JPEG/JXL and XMP controls; see qualification.json"
+      },
+      "source_sha256": {
+        "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+        "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+        "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+        "src/helperSupervisor_stubs.c": "8b09080d7c743ae781ad3c9420ea6b7fc5da5df58587f4d84ffb6ab834fec9e4",
+        "src/helperSupervisor.mli": "d92a68a533c1938dda676acfe54213ff88241e8e84443d25dc8b4f46e1e9a1d5",
+        "src/helperSupervisor.ml": "678432dcd4ed1dce0439356b45f8f3114904b202bf413ae6c7896c0455dc1a36",
+        "src/semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+        "src/semanticAdmission.ml": "c4e9a0aaa6b6c724bf4b078dce1914f75396a2ddf9f99e9a6b8fe58eb1343937",
+        "src/ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "src/ioAdmission.ml": "b753920044cc2064184d4630d36ed21131b5fdbe21d4ae9f8b38012f29743597",
+        "src/semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+        "src/semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+        "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+        "src/semanticFile_stubs.c": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70",
+        "src/semanticFile.mli": "f522ed2d9fd48ef69e7e4ff9b0ab1c5a601669c7a5cc1f43cd8ede4c206b148f",
+        "src/semanticFile.ml": "f4ed8ebad077b9d9fddee12100ae5e9bbd87535a7d1ee4d08eed7c50fa30e8a1",
+        "src/formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+        "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+        "src/formatExtension.mli": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc",
+        "src/formatExtension.ml": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+        "src/dngSemantic.ml": "da6271cd7fbccd1050e95b3c31b9a84fbb6b616178a6497cf8159c52c6bda6b8",
+        "src/semanticDelta.mli": "b1830acc50ebfd8bcd5e72ae46da9d7700a8ae94afda27cb3c7532fbfd4cf78f",
+        "src/semanticDelta.ml": "92063be38d1c8374030faa9cfa3a5545c6700acd8b6d8f4e628bbe598a8d11ce",
+        "src/semanticWorkers.mli": "b458429384c808f7877e3b32153ef4c9a4e1435aa3323e6c35de53a5a71ce285",
+        "src/semanticWorkers.ml": "cb7bb2fd87cf9d59ae5e2f55fd135f20e3cc42974f60c9515cbe916a9026ba18",
+        "src/dngValidation.mli": "cd4d0660783e3d446817381b539bc3110c8c4fa5ca49ab8cd9351e36549efa30",
+        "src/dngValidation.ml": "8d6f9b21e0e77178ff711fae94de4aab16d4867524ce7bc85be979b80da99715",
+        "bench/adobe/clock_stubs.c": "e9bb0cf393496b54cd52f8f9d6ff571579f69d8c073dfa52c648f8441d62a8f2",
+        "bench/adobe/validation_bench.ml": "67e82eedf55c7da17243bda34874e3691a9088497802706568adca2092683678"
+      },
+      "clock": {
+        "wall": "CLOCK_MONOTONIC",
+        "parent_cpu": "CLOCK_PROCESS_CPUTIME_ID",
+        "child_cpu": "getrusage RUSAGE_CHILDREN after reap"
+      },
+      "parameters": {
+        "workers": [
+          1,
+          6,
+          18
+        ],
+        "jobs": 72,
+        "repetitions": 5,
+        "control_repetitions": 1,
+        "warmups": 1,
+        "one_worker_warmup_jobs": 1,
+        "peak_sampling_seconds": 0.001,
+        "cpu_credit_budget": 18
+      },
+      "samples": [],
+      "summary": [],
+      "build": {
+        "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-adobe-bench-ej4xvpfg",
+        "retained": true,
+        "production_snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj",
+        "linked_object_sha256": {
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt.cmi": "ab7a5bb4cb970b86b15ff61d9e5e91a3feece9cbcc65f4edaa913add69ef0369",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt.cmx": "9a1d0142dd316606af5e209d731ed4ee4a9cee67860a0df308b081aecbb4fdd7",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt.o": "8b6cd22479fbe3bdcd07f42ba5f670a0a3cfe56d8f557fd84542262f80895fd0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/pqueue.cmi": "8a14e118aa85b8e74d1811f516cea200367507379de90c3141e2b631660e6b96",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/pqueue.cmx": "efdacbab35d569854049ebe9593ca7a7e648d1b454a19a2c440365aaaf0815b0",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/pqueue.o": "df865fde238714592a428a615d78ad117887c27d1a857c80f79744130db20b26",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/generic/lwt_unix_impl.cmi": "7df5d5c87b4be31ff1a727458e4668e4a0cd7d9976380f5661b81668edae656b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/generic/lwt_unix_impl.cmx": "639c0c1c08b6f5c963b5f5fec5db7d69b92cb125a2533cd458cd91f687f0e8a3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/generic/lwt_unix_impl.o": "1df8fba1b8bf35a2004a62f57313d7c0965a8209e41d299261c1df7962c2038d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt_unix.cmi": "9f49efc11b66ba279b077cecedf1a325e14fcc32820eee227b1461cc515f4d27",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt_unix.cmx": "d349654aba9845d0073f53513f5d5dec0d13a7d6f4823173f9f20e405b758661",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/lwt/lwt_unix.o": "42acb364610d2966c562844d40ba7abdbd3ec1d450cfbcda3baa33d125c9f852",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/borrowedWork.cmi": "22e1b5fa1c3010255075e2dd09d4136fc5d0cc40ddd28aa03ed4de67931b769c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/borrowedWork.cmx": "e28dddd55c1a7ac19d04eb4ae8231a2ddafb93381e725303e49fb1c679ab456c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/borrowedWork.o": "b57166b41de30b0b8f7ffd0bfaa25859e6f7d4ec7bbcb9957c864964c9f26a22",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/helperSupervisor_stubs.o": "9fd280c201a0bac040b87f80f7ff627af0b053718e294cb72780ca0405614eb4",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/helperSupervisor.cmi": "70b72278dbbd363016a21d99bbe9bc24ff336ebb6ec38a54c559240ef6f4a593",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/helperSupervisor.cmx": "2a070497f357758c8fccd412feace0883c22bef03b538d8d9aa4e38d72bebf04",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/helperSupervisor.o": "b2df27b0627c9bed1a68b525739d89816bfb3650f70954ef2434d98bc02fc5fb",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticAdmission.cmi": "440d6075d62e7d99c787e81a34ffa44c8975a7ae814cd18dceef87d30655df2e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticAdmission.cmx": "07a441ae20ede89f4f1b676acc773ff5a8d21d4bca9be98c82ea7f709047a445",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticAdmission.o": "824f9c8c4b194a7bc14953d464239c02fc331d771ad4fde0c321b08c67064699",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/ioAdmission.cmi": "b2081493207c005ac4b931bef3fd1943f1183416f364ce55b7e1f5518d3a4b40",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/ioAdmission.cmx": "09084225a40eb3cc4ff2073dbbdec23597d972e913aa67a22a0b62baf2ea5d47",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/ioAdmission.o": "4bd40859eff45656c960ec69414561f8bb7acfc6e32f3fa657be93464aed17b9",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticMailbox.cmi": "0c2638d4df7f4663694994fa1c93f65015bcbb2b0b5d69dd337eacab2f0a50be",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticMailbox.cmx": "50d01d58b57272fe5d6a86dc0ea95d2c39a46e2d9fa8a2e5bfc5eb20c7d0a7dd",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticMailbox.o": "3c6f90958e5446f8ea25383e2b8bb21a37eefabbf06dd68b6c46c9bc7e1d571d",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticHash_stubs.o": "bf000b705934759ac18f2ff4c821bd8af8a298f94636c473c4af087cd44e1994",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticHash.cmi": "2d7f207e6dd8041f5f87d8d53df6d94ff3cb22605c2f009c22ae9f7e540d27d5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticHash.cmx": "2cd2cd9b8c06767f0bcc5c10c7afef5c98fd0804ced7a727c7d46a8939947e5e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticHash.o": "d8e8bb2c8ec0ab68427af128f5fadc186adf68585f47e052ef636c3546309741",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticFile_stubs.o": "41e882fbdc9cad70eb918112ab0b4ee408664a0d4c76aeb9fc1f5026da22b1b3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticFile.cmi": "477452859fb27df5972b2df6ca5317296bdaf65cc56572b8119d4f1eb3cbf111",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticFile.cmx": "bc25981f195e7be7f97d4997cfea9af56a1ac7b90545cec6e2f923f439495405",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticFile.o": "a81a892973357d98bc2e33832539628d0d48800134aa48e0c2d63feff5bd1675",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatRecognition.cmi": "3f46c71890166638a4ffdc9022c9cc0c2ced7272182d12e8627a628b36cc6938",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatRecognition.cmx": "35031e336325e3c9ad22cda9163a72aa38e53de9d30128d12cf56ee00a63998a",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatRecognition.o": "7403c2fc077173fcf1ee59ddb173bcb1985170374694107d5a18f5c055a4b8e5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatExtension.cmi": "eeb1404c183ecc96ffd00c28cff615c1c849658c015c5fa185f9b44ff279de96",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatExtension.cmx": "45f46933ab0aadcef2f4e2afdab9578e2f882e493f22f93f0b18bcb2cc4d8234",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/formatExtension.o": "3ccc2e393eb880828f0a238ae9ac117591a1c801164fa967cc51b3b177c1b9ee",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpObservation.cmi": "8ac51ee5e3b12221e96f647fde6809ede5f73139cf0a2c4aa8e66392dbf4d571",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpObservation.cmx": "0180f11c4c84cf7c9de7b5163a6bcc76c2bd11efdbf76e3419692e1fe87801b3",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpObservation.o": "222cdd952a81b2d9919294b2e987afd45b7056b709eb0911804c4bb7c66003f6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpMerge.cmi": "fd22c937b3d13cc92902f8dac483d735c36c85da9c83f8e50347f7ec68a29061",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpMerge.cmx": "ef1d7b52e0cc6167962877b028302cea478c26b74d0c02b4a5ea9463737d392b",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/xmpMerge.o": "3a5ccc720e18be32c0db4f951c019e2ab3655ef9574291977e908225d53c6926",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngSemantic.cmi": "cf49b0941bd3cb0164a390475eeb432c6d67e8a56f1b714b349aaf9dd217534e",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngSemantic.cmx": "071c4e21a3bc4903a35a24f82657b31615b06a18eb419376d0aa254a7b827dcb",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngSemantic.o": "80f6c1f216369e4910a36503bf2cee3b6278cedde12408ce0ba2c06192c99022",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticDelta.cmi": "d5cf09fd6875f5c46fd209a4e1905a95080086928ae83be1609845f24829e1ce",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticDelta.cmx": "01ec0b6e0bbf479c29dedcff671ac7a27381d9d90e7e910acf1c27aba941c3f6",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticDelta.o": "2bf6a25047d0c663e29ea5e30907cc2dfc13a347caee612535d9fb65943c4d2c",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticWorkers.cmi": "00b146cfb94665b0c3261a7880b0f6ba71a1f723fb011b7877577afb2e9663cf",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticWorkers.cmx": "cac76d42439ebfc3663fe497ec388008146cd0fb4dc10413488e7a7b0276b8b8",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/semanticWorkers.o": "188bc1508b4a7d9ed63bcb7144b9265e1964a5b0d53571833843a97262612bec",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngValidation.cmi": "d6a70c4d1206eee0556c989c3824e8040c46fd23861fea902a0bb28540806e17",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngValidation.cmx": "5cb5dee3a037f8bc50cfb3952b9914728a7463506c1c075146880bfb5508a9f5",
+          "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-47jhgxaj/src/dngValidation.o": "5b3918ac92763029b82bb4921d628a490667ff9236c3506e6f50932e7ccaf3c7"
+        },
+        "binary_sha256": "b326ca4fed46208db4c8b47c1d98a4cc4cfcec016574ce619f5641c1efbf0391",
+        "production_receipt_sha256": "8f898403e23c475a33279c559e75cff73556d951d38c3bf258fab85b817aef41",
+        "build_log_sha256": "7d100cc71505b6792cac485d83c9bb000fb5272ba4e30d404267e61bf1e28298",
+        "complete": true,
+        "native_calls_during_build": false
+      }
+    },
+    "/private/tmp/unison-aggregate-stock-settlement.json": {
+      "workspace": "/private/tmp/unison-bench-settlement-428j4rpl",
+      "scope": "Actual current core benchmark with synthetic helper processes; no SDK",
+      "target_sha256": "6f3c2e18fb43915412681d82c6b962615bd7fd1a3707e3fbde50efde326c9ffd",
+      "cases": [
+        {
+          "case": "0-pass",
+          "exit": 0,
+          "seconds": 0.6709596659929957,
+          "helper_pids": [
+            43299,
+            43298
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "1-reject-peer",
+          "exit": 2,
+          "seconds": 2.1947618249978404,
+          "helper_pids": [
+            43301,
+            43302
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "2-hang",
+          "exit": 2,
+          "seconds": 2.331838596990565,
+          "helper_pids": [
+            43307,
+            43308
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "3-hang-signal",
+          "exit": 2,
+          "seconds": 2.1769315260171425,
+          "helper_pids": [
+            43317,
+            43316
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "4-pass",
+          "exit": 0,
+          "seconds": 0.1565021499991417,
+          "helper_pids": [
+            43326,
+            43327
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        }
+      ],
+      "test_sha256": "22bad08d39ed29f298db9b8a582abe487cdd30250f03cf20a594f837b4ab493e"
+    },
+    "/private/tmp/unison-aggregate-ox-settlement.json": {
+      "workspace": "/private/tmp/unison-bench-settlement-itcstg99",
+      "scope": "Actual current core benchmark with synthetic helper processes; no SDK",
+      "target_sha256": "b326ca4fed46208db4c8b47c1d98a4cc4cfcec016574ce619f5641c1efbf0391",
+      "cases": [
+        {
+          "case": "0-pass",
+          "exit": 0,
+          "seconds": 0.6793249799811747,
+          "helper_pids": [
+            43205,
+            43204
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "1-reject-peer",
+          "exit": 2,
+          "seconds": 2.1981861570093315,
+          "helper_pids": [
+            43208,
+            43207
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "2-hang",
+          "exit": 2,
+          "seconds": 2.3386992680025287,
+          "helper_pids": [
+            43218,
+            43217
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "3-hang-signal",
+          "exit": 2,
+          "seconds": 2.1849314630089793,
+          "helper_pids": [
+            43227,
+            43228
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        },
+        {
+          "case": "4-pass",
+          "exit": 0,
+          "seconds": 0.1649289760098327,
+          "helper_pids": [
+            43240,
+            43239
+          ],
+          "helpers_absent_after_return": true,
+          "input_unchanged": true
+        }
+      ],
+      "test_sha256": "22bad08d39ed29f298db9b8a582abe487cdd30250f03cf20a594f837b4ab493e"
+    },
+    "/private/tmp/unison-native-deadline-dy6gwor0/RESULT.json": {
+      "cases": [
+        "normal-exit-reap-and-call-cap",
+        "aggregate-expiry-before-dispatch",
+        "aggregate-expiry-kill-reap-unresolved-marker",
+        "missing-helper-proof-retains-ownership"
+      ],
+      "scope": "synthetic only; whole-wrapper lifetime not qualified"
+    }
+  }
+}

@@ -1,0 +1,629 @@
+{
+  "schema": "unison-sdk-sampled-os-report/1",
+  "rows": [
+    {
+      "index": 1,
+      "codec": "uncompressed",
+      "backend": "reference",
+      "requested_threads": 1,
+      "samples": 3,
+      "available_samples": 3,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 53190656
+    },
+    {
+      "index": 2,
+      "codec": "uncompressed",
+      "backend": "experimental",
+      "requested_threads": 1,
+      "samples": 3,
+      "available_samples": 3,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 54341632
+    },
+    {
+      "index": 3,
+      "codec": "uncompressed",
+      "backend": "experimental",
+      "requested_threads": 2,
+      "samples": 3,
+      "available_samples": 3,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 53346304
+    },
+    {
+      "index": 4,
+      "codec": "uncompressed",
+      "backend": "experimental",
+      "requested_threads": 6,
+      "samples": 2,
+      "available_samples": 2,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 50987008
+    },
+    {
+      "index": 5,
+      "codec": "jpeg",
+      "backend": "reference",
+      "requested_threads": 1,
+      "samples": 4,
+      "available_samples": 4,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 53051392
+    },
+    {
+      "index": 6,
+      "codec": "jpeg",
+      "backend": "experimental",
+      "requested_threads": 1,
+      "samples": 4,
+      "available_samples": 4,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 53358592
+    },
+    {
+      "index": 7,
+      "codec": "jpeg",
+      "backend": "experimental",
+      "requested_threads": 2,
+      "samples": 3,
+      "available_samples": 3,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 2,
+      "maximum_sampled_resident_bytes": 56070144
+    },
+    {
+      "index": 8,
+      "codec": "jpeg",
+      "backend": "experimental",
+      "requested_threads": 6,
+      "samples": 2,
+      "available_samples": 2,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 6,
+      "maximum_sampled_resident_bytes": 43032576
+    },
+    {
+      "index": 9,
+      "codec": "jxl",
+      "backend": "reference",
+      "requested_threads": 1,
+      "samples": 13,
+      "available_samples": 13,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 114302976
+    },
+    {
+      "index": 10,
+      "codec": "jxl",
+      "backend": "experimental",
+      "requested_threads": 1,
+      "samples": 13,
+      "available_samples": 13,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 1,
+      "maximum_sampled_resident_bytes": 119595008
+    },
+    {
+      "index": 11,
+      "codec": "jxl",
+      "backend": "experimental",
+      "requested_threads": 2,
+      "samples": 8,
+      "available_samples": 8,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 2,
+      "maximum_sampled_resident_bytes": 120934400
+    },
+    {
+      "index": 12,
+      "codec": "jxl",
+      "backend": "experimental",
+      "requested_threads": 6,
+      "samples": 4,
+      "available_samples": 4,
+      "missing_samples": 0,
+      "minimum_sampled_threads": 1,
+      "maximum_sampled_threads": 6,
+      "maximum_sampled_resident_bytes": 153579520
+    }
+  ],
+  "sdk_calls": 12,
+  "probe_calls": 62,
+  "audit": {
+    "attempted_direct_calls": 12,
+    "all_attempted_direct_children_and_groups_settled": true,
+    "functional_status": "PASSED",
+    "functional_audit": {
+      "functional_results": [
+        {
+          "index": 1,
+          "codec": "uncompressed",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 2,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 3,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 2,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 4,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 6,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 5,
+          "codec": "jpeg",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 6,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49159936,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 7,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49503154,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 8,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 12,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 50452246,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 9,
+          "codec": "jxl",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 10,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 119889977,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 11,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 142719090,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 12,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 10,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 233987414,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        }
+      ],
+      "calls": 12,
+      "experimental_calls": 9,
+      "full_matrix_complete": true,
+      "aggregate_group_settlement_proved": false,
+      "parent_terminal_proved": false,
+      "io_cpu_fd_closure_proved": false,
+      "resource_release_authorized": false,
+      "os_thread_scaling_proved": false,
+      "hard_rss_cap_proved": false,
+      "pixel_equivalence_proved": false,
+      "runtime_qualification_requires_actual_owned_receipts": true
+    },
+    "aggregate_parent_fd_closure_proved": false,
+    "resource_release_authorized": false,
+    "process_observation_audits": [
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 2,
+        "available_samples": 2,
+        "missing_samples": 0,
+        "probe_children_settled": 2,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 2,
+        "available_samples": 2,
+        "missing_samples": 0,
+        "probe_children_settled": 2,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 13,
+        "available_samples": 13,
+        "missing_samples": 0,
+        "probe_children_settled": 13,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 13,
+        "available_samples": 13,
+        "missing_samples": 0,
+        "probe_children_settled": 13,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 8,
+        "available_samples": 8,
+        "missing_samples": 0,
+        "probe_children_settled": 8,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      }
+    ]
+  },
+  "scope": "sample maxima only; not actual peaks, process-tree totals, hard caps, calibrated CPU, pixels or speedup",
+  "sampling_overhead_included": true,
+  "fixed_order_single_calls": true,
+  "parent_and_fd_closure_proved": false
+}

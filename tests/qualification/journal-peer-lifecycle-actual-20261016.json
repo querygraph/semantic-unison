@@ -1,0 +1,359 @@
+{
+  "schema": "unison-journal-peer-lifecycle/1",
+  "actual_owner_terminal": {
+    "session": 9849,
+    "chunk": "8c6ef8",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "closure": {
+    "child": {
+      "pid": 46000,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 46000,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "controls": {
+    "schema": "unison-io-source-controls/1",
+    "complete": true,
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a",
+    "sources": {
+      "tests/shared_io_plan_test.py": "1c98ab90944c38cd6f6549f25d6f50d06bc584057f2e910aa167e4adf31d96fc",
+      "tests/shared_io_dispatch_test.py": "d74bae0056f312f48757ef59acc11cfd72b7e28e09dfaa745ebc7a2d6b0997f3",
+      "tests/shared_io_dispatch_lifecycle_test.py": "afee530fa1055f4ce48a1c9768e260682098028bb8c6f785be33d8603ecb4ccb",
+      "bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304",
+      "bench/sync/properties_test.py": "0ee8463e97786a7c9405d25c9a0dbef1a76ad3b0ef9118a9cf712a2464f3072b",
+      "bench/sync/invocation_journal_test.py": "4aee61bef2beb421095e6c7dd2dae1c5d40dd240bd745dc86df9af45bee30dd8",
+      "bench/sync/journal_lifecycle_test.py": "1bf10654d70bf3c4548b5ea000885f809f3b24843cbb0806483bdefd2d60f9cd",
+      "tests/shared_dispatch.py": "6d9eef97dd4ffa144fd3488400e39ba4209f4b547367ead9a7621235b227cce9",
+      "tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+      "tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+      "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+      "tests/manual.py": "c8144b70d6cdd9e45f59441d453e6470c9d3b2730872d89b8b035e790929d658",
+      "tests/shared_io_plan.py": "3641d4923c64c9ad15f72b03b7b41d71bf35bc1dcc2e1cfa7fb85fc21b539b3c",
+      "bench/sync/artifact_pins.py": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd",
+      "bench/sync/run.py": "488debb4a3773456c90a60c1d53ccffe11280d054b1c49dc7e178fc8e5329906",
+      "tests/shared_io_controls.py": "e8b7eb0dcdd5119658172a16172c065f505a6baee3816c207926d7a0881cc276",
+      "bench/sync/properties.py": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889",
+      "bench/sync/shared_audit.py": "b67d42a1c1164cb8a1c0a5a8fef70f7defbe9271ea772c79d82fdd798b18274c",
+      "bench/sync/invocation_journal.py": "8e110f69f4578018e252f695ce33de67b7dd75a1b6b1743ec9cf04ddcfa5d3d0",
+      "bench/sync/proxy.py": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178",
+      "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+      "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    "calls": [
+      {
+        "script": "tests/shared_io_plan_test.py",
+        "pid": 46001,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/0.log",
+        "log_sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+      },
+      {
+        "script": "tests/shared_io_dispatch_test.py",
+        "pid": 46002,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/1.log",
+        "log_sha256": "713972b30bbbb93930114261a846150033bb4ae557443bb0167e5db8710ff990"
+      },
+      {
+        "script": "tests/shared_io_dispatch_lifecycle_test.py",
+        "pid": 46003,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/2.log",
+        "log_sha256": "3489cd54abd135d488e06b831c89af30d666bc40eb80bb7a613ad89a61c9935b"
+      },
+      {
+        "script": "bench/sync/artifact_pins_test.py",
+        "pid": 46004,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/3.log",
+        "log_sha256": "f36e1d7c9fef0d8379f06c5a18f342fc336eddf4df0971de085f44eada61e9ae"
+      },
+      {
+        "script": "bench/sync/properties_test.py",
+        "pid": 46005,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/4.log",
+        "log_sha256": "713972b30bbbb93930114261a846150033bb4ae557443bb0167e5db8710ff990"
+      },
+      {
+        "script": "bench/sync/invocation_journal_test.py",
+        "pid": 46006,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/5.log",
+        "log_sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+      },
+      {
+        "script": "bench/sync/journal_lifecycle_test.py",
+        "pid": 46007,
+        "actual_wait_exit": 0,
+        "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-r7usj4_a/6.log",
+        "log_sha256": "a8460d1a1c7e93a7c01e8f203a7defe06b9f4996a7ab46bc6a6fdf0224c41d53"
+      }
+    ]
+  },
+  "peer_result": {
+    "workspace": "/private/tmp/uj-4wm_iqb5",
+    "journal": "/private/tmp/uj-4wm_iqb5/journal.json",
+    "proof": {
+      "attempted_cli_invocations": 2,
+      "all_attempted_client_server_supervisor_settled": true,
+      "functional_success_inferred": false,
+      "scope": "journal-prefix lifecycle only; not aggregate or parent terminal"
+    },
+    "actual_calls": 2,
+    "scope": "original Python peers and actual proxy/client/server ownership only"
+  },
+  "journal": {
+    "complete": false,
+    "invocations": [
+      {
+        "index": 0,
+        "identity": {
+          "label": "stock",
+          "mode": "ordinary",
+          "workers": 1,
+          "directory": "/private/tmp/uj-4wm_iqb5/0",
+          "stage": "seed"
+        },
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/private/tmp/uj-4wm_iqb5/peer.py",
+          "0"
+        ],
+        "state": "OUTCOME",
+        "outcome": {
+          "command": [
+            "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+            "/private/tmp/uj-4wm_iqb5/peer.py",
+            "0"
+          ],
+          "returncode": 0,
+          "wall_seconds": 0.22287541697733104,
+          "timed_out": false,
+          "resources": {
+            "wait4_user_seconds": 0.030504999999999997,
+            "wait4_system_seconds": 0.008277999999999999,
+            "wait4_maxrss_native_units": 13729792,
+            "minor_faults": 4175,
+            "major_faults": 0,
+            "block_input_operations": 0,
+            "block_output_operations": 0
+          },
+          "client_cleanup": {
+            "pid": 46009,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "capture_bytes": {
+            "stdout": 0,
+            "stderr": 0
+          },
+          "capture_truncated": false,
+          "stdout": "",
+          "stderr": "",
+          "native_client_lifetime_seconds": 0.1361954999738373,
+          "supervisor_cleanup": {
+            "pid": 46008,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor_output": "",
+          "supervisor_capture_bytes": 0,
+          "supervisor_capture_truncated": false,
+          "proxy": {
+            "schema": "unison-loopback-protocol-count/1",
+            "server_command": [
+              "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+              "/private/tmp/uj-4wm_iqb5/peer.py",
+              "-server"
+            ],
+            "server_pid": 46010,
+            "server_returncode": 0,
+            "server_cleanup": {
+              "pid": 46010,
+              "returncode": 0,
+              "reaped": true,
+              "cancel_reason": null,
+              "hard_kill_required": false,
+              "normal_exit_timeout_seconds": 2.0,
+              "settlement_wall_seconds": 0.0002766549587249756
+            },
+            "fault": null,
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 4,
+              "server_to_client_bytes": 4
+            },
+            "server_wall_seconds": 0.07810471201082692,
+            "server_resources": {
+              "wait4_user_seconds": 0.028724999999999997,
+              "wait4_system_seconds": 0.008185,
+              "wait4_maxrss_native_units": 13606912,
+              "minor_faults": 4136,
+              "major_faults": 0,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "pump_errors": [],
+            "cancellation_signals": [],
+            "input_pump_joined": true,
+            "launcher_control_header_bytes_excluded": 138
+          }
+        }
+      },
+      {
+        "index": 1,
+        "identity": {
+          "label": "stock",
+          "mode": "ordinary",
+          "workers": 1,
+          "directory": "/private/tmp/uj-4wm_iqb5/7",
+          "stage": "seed"
+        },
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "/private/tmp/uj-4wm_iqb5/peer.py",
+          "7"
+        ],
+        "state": "OUTCOME",
+        "outcome": {
+          "command": [
+            "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+            "/private/tmp/uj-4wm_iqb5/peer.py",
+            "7"
+          ],
+          "returncode": 7,
+          "wall_seconds": 0.22429391101468354,
+          "timed_out": false,
+          "resources": {
+            "wait4_user_seconds": 0.029921,
+            "wait4_system_seconds": 0.00885,
+            "wait4_maxrss_native_units": 13684736,
+            "minor_faults": 4173,
+            "major_faults": 0,
+            "block_input_operations": 0,
+            "block_output_operations": 0
+          },
+          "client_cleanup": {
+            "pid": 46016,
+            "returncode": 7,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "capture_bytes": {
+            "stdout": 0,
+            "stderr": 0
+          },
+          "capture_truncated": false,
+          "stdout": "",
+          "stderr": "",
+          "native_client_lifetime_seconds": 0.13552078901557252,
+          "supervisor_cleanup": {
+            "pid": 46015,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": "native client failed, timed out or exceeded captured output limit",
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor_output": "",
+          "supervisor_capture_bytes": 0,
+          "supervisor_capture_truncated": false,
+          "proxy": {
+            "schema": "unison-loopback-protocol-count/1",
+            "server_command": [
+              "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+              "/private/tmp/uj-4wm_iqb5/peer.py",
+              "-server"
+            ],
+            "server_pid": 46017,
+            "server_returncode": 0,
+            "server_cleanup": {
+              "pid": 46017,
+              "returncode": 0,
+              "reaped": true,
+              "cancel_reason": null,
+              "hard_kill_required": false,
+              "normal_exit_timeout_seconds": 2.0,
+              "settlement_wall_seconds": 0.00026639498537406325
+            },
+            "fault": null,
+            "forwarded_protocol_bytes": {
+              "client_to_server_bytes": 4,
+              "server_to_client_bytes": 4
+            },
+            "server_wall_seconds": 0.08007433399325237,
+            "server_resources": {
+              "wait4_user_seconds": 0.029331,
+              "wait4_system_seconds": 0.008616,
+              "wait4_maxrss_native_units": 13443072,
+              "minor_faults": 4076,
+              "major_faults": 0,
+              "block_input_operations": 0,
+              "block_output_operations": 0
+            },
+            "pump_errors": [],
+            "cancellation_signals": [],
+            "input_pump_joined": true,
+            "launcher_control_header_bytes_excluded": 138
+          },
+          "fault": "native client failed, timed out or exceeded captured output limit"
+        }
+      }
+    ],
+    "failure": "original synthetic post-call verification refusal"
+  },
+  "artifact_pins": [
+    {
+      "path": "/private/tmp/uj-4wm_iqb5/journal.json",
+      "bytes": 7441,
+      "sha256": "6a0dcac2d488e2049c9a4c0de2e44f879a234b7d2a74ed8d3ff14157e13282a2"
+    },
+    {
+      "path": "/private/tmp/uj-4wm_iqb5/0/proxy.json",
+      "bytes": 958,
+      "sha256": "779434df012cd08ee30fb63157261541b65e0690768455fd8a2682affc85c05e"
+    },
+    {
+      "path": "/private/tmp/uj-4wm_iqb5/7/proxy.json",
+      "bytes": 947,
+      "sha256": "a9329de74117b04bd3c1cb4f62009d17f179eaeac78a885b632e52128a7d49a8"
+    }
+  ],
+  "scope": "Two original tiny Python peers over actual loopback proxy: successful and exit7 calls. Actual client/supervisor/server closure and journal persistence after post-call verification refusal. No Unison binary/EXIO/camera/Adobe/SDK. Complete dispatcher end-to-end failure release not inferred from this component test.",
+  "property_transfer_qualified": false
+}

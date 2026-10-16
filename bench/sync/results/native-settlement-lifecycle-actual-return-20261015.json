@@ -1,0 +1,367 @@
+{
+  "state": "ACTUAL_SETTLEMENT_LIFECYCLE_PASSED_CLOSED",
+  "allocation": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-NATIVE-SETTLEMENT-LIFECYCLE-V1-ALLOCATION-20261015.json",
+    "bytes": 3407,
+    "sha256": "10b7a29aa5db9985abdcd59c8ff84072731baccb60769e0a2378e5e003802a9e"
+  },
+  "allocated_request": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/native-settlement-lifecycle-request-v1-20261015.json",
+    "bytes": 4171,
+    "sha256": "27982bfe5fb001129d81c76a932cdd2ee569576dc670984e7b6915418bb45e5f"
+  },
+  "additional_source_inventory": {
+    "path": "/Users/alexy/src/unison/bench/sync/results/native-settlement-lifecycle-request-v2-20261015.json",
+    "bytes": 5052,
+    "sha256": "79be947a35eb1563325d54317fbe95e708a0b692e742aca23954cb1ea12af61a"
+  },
+  "request_reconciliation": "Fresh explicit latest allocation authorized exactv1 command; v2 changes only2extra transitive source pins. All12freshchecked before/after, identicalcommand/workspace/limits.",
+  "actual_parent_terminal": {
+    "owner_tool": 3736,
+    "terminal_chunk": "16df12",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "scope": "actual owner tools.write_stdin terminal; not inferred from psabsence"
+  },
+  "aggregate": {
+    "pid": 1705,
+    "returncode": 0,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 1705,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 2.386906776984688,
+    "seconds": 45,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "cases": [
+    {
+      "case": "normal-delayed",
+      "cleanup": {
+        "pid": 1706,
+        "returncode": 0,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "normal_exit_timeout_seconds": 2.0,
+        "settlement_wall_seconds": 0.6052787210210226
+      },
+      "signals": [],
+      "independent_echild": true
+    },
+    {
+      "case": "legacy-grace-refusal",
+      "cleanup": {
+        "pid": 1707,
+        "returncode": -15,
+        "reaped": true,
+        "cancel_reason": "native child did not settle after output EOF",
+        "hard_kill_required": false,
+        "normal_exit_timeout_seconds": 0.2,
+        "settlement_wall_seconds": 0.2108175590110477
+      },
+      "signals": [
+        15
+      ],
+      "independent_echild": true
+    },
+    {
+      "case": "known-fault",
+      "cleanup": {
+        "pid": 1708,
+        "returncode": -15,
+        "reaped": true,
+        "cancel_reason": "original transport fault",
+        "hard_kill_required": false,
+        "normal_exit_timeout_seconds": 2.0,
+        "settlement_wall_seconds": 0.005835641000885516
+      },
+      "signals": [
+        15
+      ],
+      "independent_echild": true
+    },
+    {
+      "case": "term-ignoring",
+      "cleanup": {
+        "pid": 1709,
+        "returncode": -9,
+        "reaped": true,
+        "cancel_reason": "native child did not settle after output EOF",
+        "hard_kill_required": true,
+        "normal_exit_timeout_seconds": 0.05,
+        "settlement_wall_seconds": 0.25872018199879676
+      },
+      "signals": [
+        15,
+        9
+      ],
+      "independent_echild": true
+    },
+    {
+      "case": "nonzero-native-exit",
+      "cleanup": {
+        "pid": 1712,
+        "returncode": 19,
+        "reaped": true,
+        "cancel_reason": null,
+        "hard_kill_required": false,
+        "normal_exit_timeout_seconds": 2.0,
+        "settlement_wall_seconds": 0.005249919020570815
+      },
+      "signals": [],
+      "independent_echild": true
+    },
+    {
+      "case": "expired-normal-budget",
+      "cleanup": {
+        "pid": 1717,
+        "returncode": -15,
+        "reaped": true,
+        "cancel_reason": "native child did not settle after output EOF",
+        "hard_kill_required": false,
+        "normal_exit_timeout_seconds": 0.0,
+        "settlement_wall_seconds": 0.0057598749990575016
+      },
+      "signals": [
+        15
+      ],
+      "independent_echild": true
+    },
+    {
+      "case": "actual-proxy-delayed-echo",
+      "outcome": {
+        "command": [
+          "/usr/local/opt/python@3.14/bin/python3.14",
+          "-c",
+          "import json,os,socket,struct\ns=socket.socket(socket.AF_UNIX,socket.SOCK_STREAM)\ns.connect(os.environ[\"UNISON_SYNC_BENCH_SOCKET\"])\nh=json.dumps([os.environ[\"UNISON_SYNC_BENCH_BINARY\"],\"-server\"]).encode()\ns.sendall(struct.pack(\">I\",len(h))+h+b\"hello\");s.shutdown(socket.SHUT_WR)\nr=bytearray()\nwhile True:\n b=s.recv(65536)\n if not b:break\n r.extend(b)\nassert r==b\"hello\"\n"
+        ],
+        "returncode": 0,
+        "wall_seconds": 1.011967630009167,
+        "timed_out": false,
+        "resources": {
+          "wait4_user_seconds": 0.033975,
+          "wait4_system_seconds": 0.010841,
+          "wait4_maxrss_native_units": 10891264,
+          "minor_faults": 4376,
+          "major_faults": 0,
+          "block_input_operations": 0,
+          "block_output_operations": 0
+        },
+        "client_cleanup": {
+          "pid": 1720,
+          "returncode": 0,
+          "reaped": true,
+          "cancel_reason": null,
+          "hard_kill_required": false,
+          "observation_error": null,
+          "group_cleanup_result": "only_owned_leader_zombie_darwin",
+          "group_cleanup_before_leader_reap": true
+        },
+        "capture_bytes": {
+          "stdout": 0,
+          "stderr": 0
+        },
+        "capture_truncated": false,
+        "stdout": "",
+        "stderr": "",
+        "native_client_lifetime_seconds": 0.9453878420172259,
+        "supervisor_cleanup": {
+          "pid": 1719,
+          "returncode": 0,
+          "reaped": true,
+          "cancel_reason": null,
+          "hard_kill_required": false,
+          "observation_error": null,
+          "group_cleanup_result": "only_owned_leader_zombie_darwin",
+          "group_cleanup_before_leader_reap": true
+        },
+        "supervisor_output": "",
+        "supervisor_capture_bytes": 0,
+        "supervisor_capture_truncated": false,
+        "proxy": {
+          "schema": "unison-loopback-protocol-count/1",
+          "server_command": [
+            "/private/tmp/unison-native-settlement-lifecycle-v1/delayed_echo.py",
+            "-server"
+          ],
+          "server_pid": 1721,
+          "server_returncode": 0,
+          "server_cleanup": {
+            "pid": 1721,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.6113251769857015
+          },
+          "fault": null,
+          "forwarded_protocol_bytes": {
+            "client_to_server_bytes": 5,
+            "server_to_client_bytes": 5
+          },
+          "server_wall_seconds": 0.9371389589796308,
+          "server_resources": {
+            "wait4_user_seconds": 0.0298,
+            "wait4_system_seconds": 0.009913,
+            "wait4_maxrss_native_units": 10436608,
+            "minor_faults": 4182,
+            "major_faults": 0,
+            "block_input_operations": 0,
+            "block_output_operations": 0
+          },
+          "pump_errors": [],
+          "cancellation_signals": [],
+          "input_pump_joined": true,
+          "launcher_control_header_bytes_excluded": 85
+        }
+      }
+    }
+  ],
+  "source_pins_unchanged": {
+    "bench/sync/native_settlement_lifecycle_test.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/native_settlement_lifecycle_test.py",
+      "bytes": 5997,
+      "sha256": "d710aa65d8e56de9da31eff5a1e6fbd787a96c95254811b660f040b7845ff79a"
+    },
+    "bench/sync/ownership.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 7154,
+      "sha256": "4a679e6c736bf4a1b152ebdb4cde57a2b83a38466acd77133a27c1c9449147d2"
+    },
+    "bench/sync/proxy.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    "bench/sync/measure.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3745,
+      "sha256": "f1fb3abefbf19a244d2db68be495e32109ed326a084949e1834f7ad021808a1b"
+    },
+    "bench/sync/run.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 29520,
+      "sha256": "564a074330b20bfbf46b55eefbc35a69b9f814bd370169f9c693f1024f26494b"
+    },
+    "bench/sync/fixtures.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/fixtures.py",
+      "bytes": 3352,
+      "sha256": "890f8b6208409c395975e8c557ca068fe469ce39dd48c36b274514878ddbe699"
+    },
+    "bench/sync/partitions.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4609,
+      "sha256": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8"
+    },
+    "bench/sync/batch_audit.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    },
+    "tests/sdk_container_receive/live_merge_aggregate.py": {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_aggregate.py",
+      "bytes": 7294,
+      "sha256": "7d5817d5887219af9fa9e07e2f3a9c0908310fb11c9c3705ed5509f59c81c47f"
+    },
+    "tests/sdk_container_receive/live_merge_owner.py": {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/live_merge_owner.py",
+      "bytes": 7373,
+      "sha256": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6"
+    },
+    "bench/sync/read_stats.py": {
+      "path": "/Users/alexy/src/unison/bench/sync/read_stats.py",
+      "bytes": 2395,
+      "sha256": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f"
+    },
+    "tests/sdk_container_receive/prepare_merged.py": {
+      "path": "/Users/alexy/src/unison/tests/sdk_container_receive/prepare_merged.py",
+      "bytes": 6778,
+      "sha256": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2"
+    }
+  },
+  "receipts": [
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/AGGREGATE-CLOSED.json",
+      "bytes": 395,
+      "sha256": "2ca5071a8d64cc87b4f3e19c9ed5bd8906cdf85c4f91cdcaf36374afa45c485f"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/AGGREGATE-START.json",
+      "bytes": 35,
+      "sha256": "47be6d734f7d932c4f991cedc7367f2b56a044683b65c8513cd7337945680e27"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/CASES-COMPLETE.json",
+      "bytes": 5901,
+      "sha256": "379e0129b42117986d5fa49876f6df6bffedb39c454ec375e8af34c8821779f4"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/OWNER-RETURN.json",
+      "bytes": 793,
+      "sha256": "1eebbc1afed72ae05aaf9524fa74714fb33278a9f0be91e454b58975cb69ad0d"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/OWNER-TERMINAL.json",
+      "bytes": 193,
+      "sha256": "872d8fa52db9ea0510b5ad98c0afd09c089d2f5a8c4886f360da08c2361fb033"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/RESULT.json",
+      "bytes": 6836,
+      "sha256": "2ea1a0e74d73577f580c7cb71343b8ff9be198fc0140566f27a356e010359c46"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/SUPERVISOR-CLOSED.json",
+      "bytes": 602,
+      "sha256": "ecd6212c09cd94ae9e9e20c94fba58b58c3ec692b79db3db113ebd53380a4acf"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/expired-normal-budget-CLOSED.json",
+      "bytes": 370,
+      "sha256": "a3dd683f9afadb2834de1fa8cc748d7dec28c4f696ac094d6f0507e66750bb28"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/known-fault-CLOSED.json",
+      "bytes": 339,
+      "sha256": "02acf894fd8f2721b36f2807caeb0a5cee684f6e964101a5c3c900d1e212183e"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/legacy-grace-refusal-CLOSED.json",
+      "bytes": 366,
+      "sha256": "951611749e6b0c5a856fbd0efda385faef733cf9ed8214b9e96b9b4d1b0cb9f3"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/nonzero-native-exit-CLOSED.json",
+      "bytes": 314,
+      "sha256": "9da3866183c6d533a51ecde43748725ee388be445aa9035ad9e83e8dbf8c1f21"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/normal-delayed-CLOSED.json",
+      "bytes": 306,
+      "sha256": "7575c2f3197d1a8b78ebb439281fff1b97dc4d296901fa450e4ee70df3901d64"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/proxy.json",
+      "bytes": 884,
+      "sha256": "6460ec654579f497f3b5e5834594b42e460d1de6a809212457cf91ed690e49d8"
+    },
+    {
+      "path": "/private/tmp/unison-native-settlement-lifecycle-v1/term-ignoring-CLOSED.json",
+      "bytes": 366,
+      "sha256": "9722b8691b596daeef32b58edc7b6eb801db5c58140a6e6a4431cc86804cc874"
+    }
+  ],
+  "unresolved_markers": [],
+  "credits_released": 1,
+  "successors_authorized": false,
+  "scope": "Seven original Python fake-child cases only; real delayedEOF/TERM/KILL/nonzeroexit/proxycaller lifecycle. Does not prove cause of failed part3, repair missing rows, qualify throughput or admit any benchmark/SDK/Photo/compiler successor."
+}

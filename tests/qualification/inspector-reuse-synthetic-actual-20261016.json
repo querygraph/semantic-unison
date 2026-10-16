@@ -1,0 +1,224 @@
+{
+  "state": "ACTUAL_STOCK_OX_REUSED_INSPECTORS_SYNTHETIC_GOLDEN_PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler_label": "stock",
+      "actual_parent_terminal": {
+        "chunk": "407ea5",
+        "exit": 0,
+        "running_session": false
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-8cgrluxn",
+      "result": {
+        "schema": "unison-semantic-inspect/1",
+        "target": {
+          "path": "/Users/alexy/src/unison/tests/semantic/conformance/golden/dng-le.target",
+          "status": "supported",
+          "profile": "org.firstpair.dng-xmp/0",
+          "size": 256,
+          "sha256": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+          "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+          "editable_regions": [
+            {
+              "offset": 96,
+              "length": 16
+            }
+          ],
+          "interpretation_unavailable": "unsupported XMP document root"
+        },
+        "basis": {
+          "path": "/Users/alexy/src/unison/tests/semantic/conformance/golden/dng-le.base",
+          "status": "supported",
+          "profile": "org.firstpair.dng-xmp/0",
+          "size": 256,
+          "sha256": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+          "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+          "editable_regions": [
+            {
+              "offset": 96,
+              "length": 16
+            }
+          ],
+          "interpretation_unavailable": "unsupported XMP document root"
+        },
+        "classification": "editable_metadata",
+        "patch_eligible": true,
+        "metadata_payload_bytes": 16,
+        "envelope_bytes": 279,
+        "request_bytes": 199,
+        "verification": "Supported inputs were fully read and SHA-256 hashed. This is a read-only observation, not a commit authorization or Adobe validation."
+      },
+      "closure": {
+        "child": {
+          "pid": 69800,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 69800,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-8cgrluxn/SHARED-CLOSED.json",
+          "bytes": 457,
+          "sha256": "6fd0a0b770b040ab8cca0aef02490a38a2a38aed5510056fb104d9b8206f5937"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-8cgrluxn/SHARED-START.json",
+          "bytes": 1305,
+          "sha256": "7c79349e76784e6229f3255c588383ddf749be5c3d8b05495d0f96f722fe76ba"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-8cgrluxn/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-8cgrluxn/SHARED-STDOUT.txt",
+          "bytes": 1175,
+          "sha256": "1b999fc7e71512a2e311dcc3973451a207e36a4c9e6f4ec8b94999d04140ad0c"
+        }
+      ]
+    },
+    {
+      "compiler_label": "ox",
+      "actual_parent_terminal": {
+        "chunk": "99b987",
+        "exit": 0,
+        "running_session": false
+      },
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-7cgt7p8w",
+      "result": {
+        "schema": "unison-semantic-inspect/1",
+        "target": {
+          "path": "/Users/alexy/src/unison/tests/semantic/conformance/golden/dng-le.target",
+          "status": "supported",
+          "profile": "org.firstpair.dng-xmp/0",
+          "size": 256,
+          "sha256": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c",
+          "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+          "editable_regions": [
+            {
+              "offset": 96,
+              "length": 16
+            }
+          ],
+          "interpretation_unavailable": "unsupported XMP document root"
+        },
+        "basis": {
+          "path": "/Users/alexy/src/unison/tests/semantic/conformance/golden/dng-le.base",
+          "status": "supported",
+          "profile": "org.firstpair.dng-xmp/0",
+          "size": 256,
+          "sha256": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2",
+          "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+          "editable_regions": [
+            {
+              "offset": 96,
+              "length": 16
+            }
+          ],
+          "interpretation_unavailable": "unsupported XMP document root"
+        },
+        "classification": "editable_metadata",
+        "patch_eligible": true,
+        "metadata_payload_bytes": 16,
+        "envelope_bytes": 279,
+        "request_bytes": 199,
+        "verification": "Supported inputs were fully read and SHA-256 hashed. This is a read-only observation, not a commit authorization or Adobe validation."
+      },
+      "closure": {
+        "child": {
+          "pid": 69818,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 69818,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-7cgt7p8w/SHARED-CLOSED.json",
+          "bytes": 457,
+          "sha256": "3e5c24bfac1f8b6971c3efca471d53c1c766c858476f113300358e10a05120c0"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-7cgt7p8w/SHARED-START.json",
+          "bytes": 1302,
+          "sha256": "486e9231019ab31ae8c93dcee463a99a8d969637bc0c82e860532f4cf281a281"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-7cgt7p8w/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-file-7cgt7p8w/SHARED-STDOUT.txt",
+          "bytes": 1175,
+          "sha256": "1b999fc7e71512a2e311dcc3973451a207e36a4c9e6f4ec8b94999d04140ad0c"
+        }
+      ]
+    }
+  ],
+  "independent_oracle": {
+    "path": "tests/semantic/conformance/golden/manifest.json",
+    "sha256": "ce0884c7bddafb7a4e975b56d89616f8c96ac528f1c479faef43d720c640ce10",
+    "vector": {
+      "name": "dng-le",
+      "profile": "org.firstpair.dng-xmp/0",
+      "nonce_hex": "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f",
+      "regions": [
+        {
+          "offset": 96,
+          "length": 16
+        }
+      ],
+      "preserved_sha256": "9c61234242784e3d534971aca674f84829c39ee5b1110f74ea42852fd78a43ef",
+      "files": {
+        "base": {
+          "bytes": 256,
+          "sha256": "684ceaad9787db51bbb9f0f84def2b15f777de28a893d20730ee595bccacb3b2"
+        },
+        "target": {
+          "bytes": 256,
+          "sha256": "82d36a0f384f14594f69269b569f21b4679fe9b2adf70ddc94c6fec96839c70c"
+        },
+        "sde": {
+          "bytes": 279,
+          "sha256": "5290632bc5b2d5a38e0cd64f0757ce010e9c3fe9add8a696d6d9337e42365e22"
+        },
+        "sdr": {
+          "bytes": 199,
+          "sha256": "a89cf2a4e0953acef0871c0b5f7c808bb095619e74e8227c26e2ff62734998f8"
+        }
+      }
+    }
+  },
+  "scope": "Two actual retained inspector executions, no compiler rebuild. Tiny committed arbitrary-byte syntheticDNG; exact16Bpacketclassification/proof sizes andsourcehashes match independentgolden. No Adobe/SDK/Photo payload or actualreceiving/publication.",
+  "limits": [
+    "Not real-camera eligibility or photographic validity/rendering",
+    "Synthetic packet has unsupported XMP interpretation; exact byte semantics remain distinct",
+    "Inner inspector exit is propagated by subprocess.run; no separate inner PID receipt was created; strict containing group/runner closure is recorded",
+    "No timing/physical sharing/nativePhoto grant"
+  ]
+}

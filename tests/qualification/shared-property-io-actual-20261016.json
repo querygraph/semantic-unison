@@ -1,0 +1,90 @@
+{
+  "schema": "unison-property-io-qualification/1",
+  "return": {
+    "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/OWNER-RETURN.json",
+    "bytes": 2971,
+    "sha256": "9e9f5b76e313650fe305636fa67fece01d2df025726b56a6880c9d59e21942d0"
+  },
+  "result": {
+    "schema": "unison-shared-properties-actual-return/1",
+    "status": "PASSED_CLOSED",
+    "actual_owner_terminal": {
+      "schema": "unison-owner-terminal-transcription/1",
+      "session": 24600,
+      "initial_chunk": "3f738f",
+      "terminal_chunk": "e4fe28",
+      "exit_code": 0,
+      "running_session": false,
+      "scope": "Actual write_stdin terminal observed before this later transcription; not ps inference."
+    },
+    "owner_pid": 58420,
+    "worker_pid": 58421,
+    "rows": 18,
+    "CLI_calls": 54,
+    "fixture_files_per_row": 2,
+    "max_retained_readers": 36,
+    "selected_properties": {
+      "named_xattr": "org.firstpair.synthetic-clone-removal",
+      "native_resource_fork": "com.apple.ResourceFork",
+      "old_mode": "0640",
+      "selected_mode": "0400"
+    },
+    "source_pins_verified": 37,
+    "admission": {
+      "path": "/private/tmp/unison-shared-properties-admission-v3.json",
+      "bytes": 6466,
+      "sha256": "e333f95237175264afd15a9707c8acad93278c396db9653514cd9bdfcffa5d6e"
+    },
+    "request": {
+      "path": "/Users/alexy/src/unison/doc/shared-property-io-request-v3.json",
+      "bytes": 14010,
+      "sha256": "496b0db8491b6a311205a8d973242a3f89f285d225bb4d2e77d5feceb52056d7"
+    },
+    "pins": [
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/SHARED-START.json",
+        "bytes": 5659,
+        "sha256": "f147d8323db81924528261c8c225f7a4d5dcf46304eae62624c1d49ac4236d52"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/RESULT.json",
+        "bytes": 1076941,
+        "sha256": "85a1e8285fee72420128c4b7db35c4fc1f726e2bcf3e9225b9f09c58f2369d7e"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/SHARED-CLOSED.json",
+        "bytes": 499,
+        "sha256": "317a2b75dd99748e9633d328fa33229cca39b114ba056e8297e8a96485c08796"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/SHARED-SERVER-AUDIT.json",
+        "bytes": 196,
+        "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/SHARED-STDOUT.txt",
+        "bytes": 1269,
+        "sha256": "7d83e812c1da7f438bea0787a327f2841fb1f5761d15ad9d806baeb4941e56b9"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-v3-a9fb7452/OWNER-TERMINAL.json",
+        "bytes": 283,
+        "sha256": "71d99c396ddf73d8be3def16d062fa570ffa8381c55b88f4e4342b3b2e4f318d"
+      }
+    ],
+    "scope": "Generated2MiB fixtures only, stock/Ox ordinary/receiverclone/semantic workers1/2/3. Exact data/basis/fork+xattr removal/selectedmode/oldFDreaders/noop epochs. No camera/SDK/Adobe/quiettiming/physicalsharing/hardCPUorRSS/allpropertiesorplatforms claim.",
+    "historical_v1_failed_v2_refused_preserved": true,
+    "admission_consumed_once_no_successor": true
+  },
+  "qualification_limits": [
+    "Only source-selected namedxattr/nativefork/mode on generatedDarwinfixtures; no universalACL/AppleDouble/ignoredattrs/sparse/compression coverage.",
+    "Oldreader ctime/linkcount intentionally excluded; olddata/fork/xattr/mode/mtime and independentbasis bytes checked.",
+    "Actualjournal and strict54callsettlement reaudited; parentterminal separate observedtoolresult.",
+    "8GiB logicalbudget declarednotinstrumented/physicalhardcap."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "state": "WITHDRAWN_UNSTARTED_SOURCE_ENVIRONMENT_GAP",
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/concurrent-synthetic-receiving-request-v1.json",
+    "bytes": 19530,
+    "sha256": "fdd483dfc7ac6562ea86419984e0509a32dc49f9e428c0778b97ae66c57fc30f"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/concurrent-synthetic-receiving-plan-v1.json",
+    "bytes": 14848,
+    "sha256": "501aba60f81e1857f54fdca291f8288652820440d922e61e4f5ba22f9e40a9b0"
+  },
+  "reason": "Original fake validator expected environment variable excluded by production sanitized helper environment. Original request/plan preserved. New private candidate ancestry binding qualified separately; fresh successor request required.",
+  "runtime_dispatched": false
+}

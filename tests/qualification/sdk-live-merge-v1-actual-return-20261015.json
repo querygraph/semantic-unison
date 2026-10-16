@@ -1,0 +1,412 @@
+{
+  "schema": "unison-live-merge-v1-actual-return/1",
+  "complete": true,
+  "request": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-live-merge-request-v1-20261015.json",
+    "bytes": 3832,
+    "sha256": "7c108071d425e98d026d6730b5b7e05392d118c2c6f1d8c953d1be9208eb5794"
+  },
+  "admission": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-LIVE-MERGE-V1-ADMISSION-20261015.json",
+    "bytes": 3070,
+    "sha256": "8d71435991404fb1924cec23de9cb01b941e1053825aaba69dbb7464d0c4f3a6"
+  },
+  "prepared": {
+    "path": "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/PREPARED.json",
+    "bytes": 6467,
+    "sha256": "3e0f6b7ac04d018d880af4a0d2e736a53df572ba4fe320b9f789c3a6cd155b21"
+  },
+  "actual_parent_terminal": {
+    "owner_tool": 43830,
+    "terminal_chunk": "699a51",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "wrapper_pid": 93031,
+    "aggregate_pid": 93039
+  },
+  "parent_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-live-merge-v1-parent-terminal-20261015.json",
+    "bytes": 161,
+    "sha256": "d05ce5fa05e89175a18df94d180354e5c96d308ef10da098d0de2dd916fae0b8"
+  },
+  "source_pins": {
+    "tests/sdk_container_receive/run_live_merge.py": "fd8592325d1bf3d7527eccb87448981f568203092b879c11fc13448d7f0bc383",
+    "tests/sdk_container_receive/live_merge_cases.py": "d1fe15d5f5a08fb89ae763604f0a623a57215bb74fc999d44d37d9d97888d0ec",
+    "tests/sdk_container_receive/live_merge_owner.py": "a84f0061412b2e10b19e2f91efdccd6dec8f450130b462606848067703449ce6",
+    "tests/sdk_container_receive/live_merge_aggregate.py": "88d1b4a429485e0e3337425d239a09e258af9335a12752843329acc66e3e77c9",
+    "tests/sdk_container_receive/prepare_live_merge.py": "9d19cce82add536394e49ca8d61dab55197aa25d83b1c6fdf4c1c50042a5718d",
+    "tests/sdk_container_receive/prepare_merged.py": "f1e21f8d5965b19343e3a89c2a7d92bb047ecc2d7a7fe0bd496f50f1ab6b2de2",
+    "tests/validation_process/records.py": "77609536c34b8b28e9edad210cc9940d292516a170d584061907f3ddcba4171d",
+    "tests/validation_paths/run.py": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7",
+    "tests/sdk_host_matrix/plan.py": "393d34bb969cfedf725294b647ae9cd46c7fa36741550a99d6cdb9f42c03996b",
+    "bench/sync/ownership.py": "3d369617e08656e3f58209e1a4d984a498d2ece383c1ff8892d484dc5a458288",
+    "bench/sync/measure.py": "e9c7352073bfacfb89547f08f964c9c5e5c2235a058098e9505d34c50e7f289a"
+  },
+  "actual_result": {
+    "complete": true,
+    "mode": "native",
+    "cli_runs": 9,
+    "validation_calls": 6,
+    "results": [
+      {
+        "codec": "uncompressed",
+        "receipts": [
+          {
+            "endpoint": "client",
+            "historical_pid": 93074,
+            "candidate_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620383534663466633530356565343061613262346539363138353433396231616264316664373932303432373238613931613232653663616633633162616232360a63616e6469646174652d73697a652034383030353533340a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303932207365630a",
+            "retained_group_other_members": 0
+          },
+          {
+            "endpoint": "server",
+            "historical_pid": 93075,
+            "candidate_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620383534663466633530356565343061613262346539363138353433396231616264316664373932303432373238613931613232653663616633633162616232360a63616e6469646174652d73697a652034383030353533340a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303931207365630a",
+            "retained_group_other_members": 0
+          }
+        ],
+        "output_identities": [
+          [
+            16777223,
+            306835359,
+            48005534,
+            1792027841865383333,
+            1792027843069049187
+          ],
+          [
+            16777223,
+            306835360,
+            48005534,
+            1792027843390864518,
+            1792027844595858349
+          ]
+        ],
+        "target_sha256": "854f4fc505ee40aa2b4e96185439b1abd1fd792042728a91a22e6caf3c1bab26"
+      },
+      {
+        "codec": "jpeg",
+        "receipts": [
+          {
+            "endpoint": "client",
+            "historical_pid": 93104,
+            "candidate_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620396163666662323365396339366430663432646165373932323435323239646338616630343861396532616566646137343236346466336439393630663937380a63616e6469646174652d73697a652033393031363732320a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303931207365630a",
+            "retained_group_other_members": 0
+          },
+          {
+            "endpoint": "server",
+            "historical_pid": 93118,
+            "candidate_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620396163666662323365396339366430663432646165373932323435323239646338616630343861396532616566646137343236346466336439393630663937380a63616e6469646174652d73697a652033393031363732320a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a46696e644e6577526177496d6167654469676573742074696d653a20302e303932207365630a",
+            "retained_group_other_members": 0
+          }
+        ],
+        "output_identities": [
+          [
+            16777223,
+            306835473,
+            39016722,
+            1792027849292838810,
+            1792027850562437388
+          ],
+          [
+            16777223,
+            306835480,
+            39016722,
+            1792027850826148087,
+            1792027852113481595
+          ]
+        ],
+        "target_sha256": "9acffb23e9c96d0f42dae792245229dc8af048a9e2aefda74264df3d9960f978"
+      },
+      {
+        "codec": "jxl",
+        "receipts": [
+          {
+            "endpoint": "client",
+            "historical_pid": 93144,
+            "candidate_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620386136393237376232343161633634363731653639613931663337333261653334363962643762623861393530653362303236383138633236363163383065340a63616e6469646174652d73697a652033383233373635380a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a496e7465726c6561766532443a20302e303538207365630a",
+            "retained_group_other_members": 0
+          },
+          {
+            "endpoint": "server",
+            "historical_pid": 93152,
+            "candidate_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4",
+            "receipt": {
+              "structure": "valid",
+              "decode": "success",
+              "raw-digest": "valid",
+              "errors": "0",
+              "warnings": "4"
+            },
+            "raw_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620386136393237376232343161633634363731653639613931663337333261653334363962643762623861393530653362303236383138633236363163383065340a63616e6469646174652d73697a652033383233373635380a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320340a454e440a",
+            "raw_stderr_hex": "2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e206c6566742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20746f702065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e2072696768742065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a2a2a2a205761726e696e673a20546f6f206c6974746c652070616464696e67206f6e20626f74746f6d2065646765206f662043464120696d6167652028706f737369626c6520696e746572706f6c6174696f6e2061727469666163747329202a2a2a0a496e7465726c6561766532443a20302e303538207365630a",
+            "retained_group_other_members": 0
+          }
+        ],
+        "output_identities": [
+          [
+            16777223,
+            306835593,
+            38237658,
+            1792027856643556835,
+            1792027859302429398
+          ],
+          [
+            16777223,
+            306835597,
+            38237658,
+            1792027859555476173,
+            1792027862224922596
+          ]
+        ],
+        "target_sha256": "8a69277b241ac64671e69a91f3732ae3469bd7bb8a950e3b026818c2661c80e4"
+      }
+    ],
+    "scope": "exact generated scalar merge receiving only; no pixels/performance/Photo inference"
+  },
+  "actual_aggregate": {
+    "pid": 93039,
+    "returncode": 0,
+    "reaped": true,
+    "other_cli_group_members_absent_before_reap": true,
+    "members_before_reap": [
+      {
+        "pid": 93039,
+        "state": "Z"
+      }
+    ],
+    "scope": "aggregate worker group only; external helper proof gate is separate",
+    "wall_seconds": 32.48622679398977,
+    "seconds": 300,
+    "timed_out": false,
+    "fault": null,
+    "within_wall_limit": true
+  },
+  "auditor": {
+    "path": "/Users/alexy/src/unison/tests/sdk_container_receive/audit_live_merge.py",
+    "bytes": 6700,
+    "sha256": "c9269dac13d0e90c58d4759932ef5cd2aee5d30f74284fe34385e54a474477cc"
+  },
+  "independent_retained_readback": {
+    "path": "/private/tmp/unison-live-merge-native-v1-independent-audit-20261015.json",
+    "bytes": 12199,
+    "sha256": "238726b53b7c9aede072f64f044f027ce8d7b4731d2bdcbabe956bc1b4faf56c"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/AGGREGATE-CLOSED.json",
+      "bytes": 398,
+      "sha256": "b404655d3bc137ba7ae9061ace5f2181a4aa59d7a686e6c2b1a5648ed8e7e9f2"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/AGGREGATE-START.json",
+      "bytes": 37,
+      "sha256": "778d66f6ac9795d0c62ab769d3d9a7321854026ba667916b9230986db30beaad"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-01-CLOSED.json",
+      "bytes": 294,
+      "sha256": "86f472b96d9ffec00e640eec9301abcd6904d7c2d7ff15c7aa82856e3ad5e8c4"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-01-START.json",
+      "bytes": 1357,
+      "sha256": "7f5d7cd34c9cbd455a69d0f1bff6aab0cc936429365be6b4bbd53f7460cc4614"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-02-CLOSED.json",
+      "bytes": 294,
+      "sha256": "72f00721c2d3185f7000052240feefca9cdd238c0d39facd68edd6d63ea77d21"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-02-START.json",
+      "bytes": 1361,
+      "sha256": "565910c970c88b5e93a2086917265db05728345cb32493bae1c26844f3fa3336"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-03-CLOSED.json",
+      "bytes": 294,
+      "sha256": "629eb57aa4a94c625a7d2004bd85e01a8746432c5cd8d233ce15d4756c7d0244"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-03-START.json",
+      "bytes": 1361,
+      "sha256": "faf5071f18f568154fe0eaa873a6383e87c6b4e3f435877c9fa940e21b541181"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-04-CLOSED.json",
+      "bytes": 294,
+      "sha256": "81a5041da3872eab2ff72927d1fe339e88ee2138c125f806681f85a79f3cc6f4"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-04-START.json",
+      "bytes": 1333,
+      "sha256": "0aff69117284386ebf584d90774c4821017394f61e14cc84f16c244545094068"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-05-CLOSED.json",
+      "bytes": 294,
+      "sha256": "c65eadb05b6a6f04a1015e50cb3b287e11b2a4207c45a394e5393597e3d6e086"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-05-START.json",
+      "bytes": 1337,
+      "sha256": "82dbfe06428059f3d939f44f934055f81006c47a7137610966864ab0e71210cb"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-06-CLOSED.json",
+      "bytes": 294,
+      "sha256": "1be72e58707b18ed43d1536763d269925af87edf5db8ad4ef6617001396d55ca"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-06-START.json",
+      "bytes": 1337,
+      "sha256": "79049e0054e6bff0de8f361633bddacf388057551d16b0164acbdc666aa343ba"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-07-CLOSED.json",
+      "bytes": 294,
+      "sha256": "ab86b014a5a714e66d370055673f4604aa4a8160ccb07777d5749e459bbb59d8"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-07-START.json",
+      "bytes": 1330,
+      "sha256": "5237916260f824eb9e1e1280195e6dac53650f38e14e196bc2bfce78545e2a8d"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-08-CLOSED.json",
+      "bytes": 294,
+      "sha256": "e91a2385d0757485168d5bd7ed66a65671bd74b02946f53048c562274a22f102"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-08-START.json",
+      "bytes": 1334,
+      "sha256": "850704e999af1abce036ed3ce1a3a6f4d7ea62cbc420fde22dc621cdb6e72250"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-09-CLOSED.json",
+      "bytes": 294,
+      "sha256": "151c82e8a56cf0494477ccfab166b0eb2e72f2d94544eae54374b0ebad8ceea2"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/CLI-09-START.json",
+      "bytes": 1334,
+      "sha256": "ab2ce48ea326ee372341094c22a4f6096dbef73881eae052d11c2a59e22cbb0b"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/HELPER-PROOFS-COMPLETE.json",
+      "bytes": 12513,
+      "sha256": "e52611255551e7ca5d78e6b2add4a6e11f4249d783de0a35a75128d7ef593b42"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/RESULT.json",
+      "bytes": 12569,
+      "sha256": "9c5c1f06886e058dfcd60bdd276b97012208f655970ec6237e8f49dc61f38e03"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/START.json",
+      "bytes": 68,
+      "sha256": "a5ce845290f693cef868d2c2419b92e403692109cb3ee788617a004f33dd5261"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/SUPERVISOR-CLOSED.json",
+      "bytes": 605,
+      "sha256": "a8aa44854a07a3b4bf9b13f7f217354dc68125cf6048dac27d50c4b6b7706cb0"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/WRAPPER-START.json",
+      "bytes": 1744,
+      "sha256": "e16a92a8c850d2c8a50b5477dfc141f97056e8f3cd8c8c2c54a4aca85c09dd2f"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jpeg/run-01.log",
+      "bytes": 3339,
+      "sha256": "465d08db972f8442bfe8ed55e90b3f3fe088b2bba2ca4b3d9a1ca6b4c6bbec77"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jpeg/run-02.log",
+      "bytes": 9480,
+      "sha256": "864be00e0ccf253498a06a2bfc8c225b5118e6cec486675fa1f7a353630f129f"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jpeg/run-03.log",
+      "bytes": 669,
+      "sha256": "6e6f5ee1f54efd62e13b9f6d1257ce7137ebf17cdb0d47a3feda7ff7ff940a14"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jxl/run-01.log",
+      "bytes": 3329,
+      "sha256": "0c23f92d23134af901599c04e81730f4f067a4a2d23a50a98557a7b594f6e2f7"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jxl/run-02.log",
+      "bytes": 9400,
+      "sha256": "0945b825204c0c95053cfea20c8741a1c7681bb1aab50a2f3be117e30956c2d4"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/jxl/run-03.log",
+      "bytes": 665,
+      "sha256": "af664e1defde5fa9222d438e3fe46b888fe453cf9f6db83dc5071c1967f2ecf2"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/uncompressed/run-01.log",
+      "bytes": 3419,
+      "sha256": "08f18be6aa5938d3e0231e7c9fbbd96afe40d46b9cc2a061b8c5eac1d31f2eec"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/uncompressed/run-02.log",
+      "bytes": 9690,
+      "sha256": "7fb2c9feadf377f53587728095a8ef6eaa97687ab37ded8171ccf3b219c6b875"
+    },
+    {
+      "path": "/private/tmp/unison-live-merge-native-v1-2f89cde2562f422e882cff9d4fca9c59/uncompressed/run-03.log",
+      "bytes": 701,
+      "sha256": "69ef0a62435ac8a945c3c8b2925c8767dce563527b3e9c70629ed79613b2bbed"
+    }
+  ],
+  "unresolved_markers": [],
+  "scope": "Actual qualified SDKv1 gate on production stock-client/Ox-server scalar merge receiving of three retained generated codecs; exact outputs/noop and lifecycle only, not corpus/pixels/throughput/preview qualification."
+}

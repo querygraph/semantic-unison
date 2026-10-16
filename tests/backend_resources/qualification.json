@@ -1,0 +1,1096 @@
+{
+  "schema": "unison-backend-resource-admission/1",
+  "status": "passed",
+  "parent": "3fb85b2059b6823edb9b25dbf9d12244d7fc0630",
+  "sources": {
+    "src/backendResources.ml": "4ccbf17281286cfd035a91ba7fd8de98855508aa61e55fbf2231da80bfaaf5fb",
+    "src/backendResources.mli": "ec410f0da68c69536b0ec1e5e7706354cdbe9159ce442a52f2c8625fe82dd33d",
+    "src/Makefile.OCaml": "f1d57ef5c0d0ae874a3a4552c8c9746fcca6f93a79d24578b688e568b0396ff2",
+    "src/candidateValidator.ml": "9eb9f1164e70d7d729e5635412af0ff262ad9956a5c8a182446e4b8af866f10b",
+    "src/candidateValidator.mli": "b672ecfb23790601700969bb78f578941334b67170812cc6f5b5deb36fa2d5c8",
+    "src/candidateValidators.ml": "e9f6da063cba990398ddb38e123fd25195f7aad7ae8176fdcca1e829f892487a",
+    "src/candidateValidators.mli": "72305d84c8928c20dba44913575a974f1905eadfb987f51365f1b9dc644a6c0a",
+    "src/candidateValidation.ml": "a86654131560aac7a3eba62157a0f6c74a413df8397fd3cc28ca1be88698d6ff",
+    "src/semanticRuntime.ml": "11da8bdb423224c92a51b795acd964647ff2efd3c6202f4c2c3313cc538b43a8",
+    "src/semanticRuntime.mli": "a4f4b04e8ccc489b98904616a0ce6332afb7fcb19a548132fb10e1c8bdd8122d",
+    "tests/backend_resources/run.py": "302c749b9f4169b81fa9502755941a9f8ccd324cd13ada71121c6be1813d3790",
+    "tests/backend_resources/plugin.ml": "1a7cae1bb89225b3ebb96ce8a2d11159e6a01ac4288d264b205e7933d0aeb038",
+    "tests/backend_resources/controls.ml": "f3e71e6663b9862a2a086ef996cfc8c2c2efe7678009747567f0f563d42e4f4c",
+    "tests/backend_resources/README.md": "c65e0a157a1a66bff5624bc6e3abc945c64c60b84cf671f36f2107d9d191d4ca",
+    "tests/validation_warning/run.py": "6af62c94876ac7f225b2be2fba4a799a79e75afa55cebff68ffd872be306ed5e",
+    "tests/validation_warning/test.ml": "5eb5723525dd55915275236454a0884dd5f289bdd8e53679097e03e25f5b0ffe"
+  },
+  "builds": [
+    {
+      "tool": "Make",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gpb7tant",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "774d6a3f0ff32905ec2a6f72e2670705a4abc0acf159d6f18f51cbaf282147da",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gpb7tant/build.log",
+        "sha256": "485c626a196e1017bfcaa67ad35d95fcfa6f79eab77d26a39145f9f7e14b40f7"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-gpb7tant/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Make",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-1j8fw65i",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "8c0a98848b346b92d449bbceca9dfc396348fef1ef403f40f8183e4756e24cc7",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-1j8fw65i/build.log",
+        "sha256": "29638d0e80a1af5ec89f9fa8126a33208c7bc5017a092bead71bb5dab9dc2514"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-1j8fw65i/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "stock",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-stock-jbafpeh8",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "93d9ad04cf2dff9a16870b4afad25e505604c24d5d7c6c524e8b3d8aaaad04aa",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-stock-jbafpeh8/build.log",
+        "sha256": "842f12f2b9ae0eadb28381a0c63120580587158a6a50df6b82e3103fa98da360"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-stock-jbafpeh8/selftest.log",
+        "sha256": "bd624ad867820aa0300a5712fb927e0336640cb7bccb8ad9144e3d29887b3205"
+      }
+    },
+    {
+      "tool": "Dune",
+      "mode": "ox",
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-ox-4hv0fdvm",
+      "buildExit": 0,
+      "selftestExit": 0,
+      "binarySha256": "0c2616faa1011899ea96a83dc5e2e0c6dd6b1270be76c372bfda3f2de36df901",
+      "buildLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-ox-4hv0fdvm/build.log",
+        "sha256": "f4261dec26a9f1036beb6dc32f2716859278f525bcb959ce9c00ebdebe5bba68"
+      },
+      "selftestLog": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-dune-ox-4hv0fdvm/selftest.log",
+        "sha256": "fe4c246b5e9da968ae163099471f55f8bbb2ea44ec12c594fd3eb65c67758df2"
+      }
+    }
+  ],
+  "receipts": {
+    "resources-stock": {
+      "path": "/private/tmp/unison-backend-resources-stock.json",
+      "sha256": "f4dc421bde8b9aaddffeeb5dfc716a325858e31056a4ac348afc204df887a734",
+      "summary": {
+        "status": "passed",
+        "scope": "Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346",
+        "binarySha256": "dac80ad63e07e32fc6d26284e3d584bdde387c055fc0bcbf9e4c4755944ac2ac",
+        "cases": [
+          {
+            "name": "fits",
+            "status": "passed",
+            "backendBytes": 4194304,
+            "envelopeBytes": 5242880,
+            "envelopeDescriptors": 26,
+            "doubleDebit": false
+          },
+          {
+            "name": "memory-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "cpu-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          }
+        ],
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346/plugin-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346/plugin-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346/controls-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346/controls-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-qibmi346/resource-controls.log",
+            "sha256": "ffc921056ed0e884138fbf3c221d2da1f3e05bd4b2feef6178207dc530d0e2a2"
+          }
+        ],
+        "backendCompiledObjectPins": {
+          "semanticAdmission.cmx": "d28fd489bcde4edda2e443e3cfbb3a65dea1747c89162db65498fdab0b6283d0",
+          "backendResources.cmx": "71e0e5cb42f192da237fd55644a94123e85d82439a61e04fbb10ff578db7515e",
+          "candidateValidator.cmx": "d68cac41bc80286f5ee716ab24e7a46ad09241ea4a39558a03657eab0b84d4e1",
+          "candidateValidators.cmx": "4cf778dc9b7f4d82e2aaae45e11b2df1864c2eca1bbb5647e1eb72915331b13c",
+          "semanticRuntime.cmx": "fd10b06681c338a29963e5a6b00438b4187932df30eb00197707c1be2494f978",
+          "candidateValidation.cmx": "28aaa45cf14803962b71beae981a7932fffc625e25c068bc2c4045ab39340239"
+        }
+      }
+    },
+    "resources-ox": {
+      "path": "/private/tmp/unison-backend-resources-ox.json",
+      "sha256": "843080a926fccecb1021c27491d31afd08f54092411643d71bf3d9921f94b5ea",
+      "summary": {
+        "status": "passed",
+        "scope": "Actual CLI compiled-object registration/core memory admission, synthetic TOY0 backend. Accounting declarations, not SDK enforcement/RSS; no Adobe/Photo/native preview work.",
+        "work": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990",
+        "binarySha256": "95d4f2c3c2782056e79f73ff93429873fda8a5e55b1c820d3e469095d86976bf",
+        "cases": [
+          {
+            "name": "fits",
+            "status": "passed",
+            "backendBytes": 4194304,
+            "envelopeBytes": 5242880,
+            "envelopeDescriptors": 26,
+            "doubleDebit": false
+          },
+          {
+            "name": "memory-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          },
+          {
+            "name": "cpu-too-large",
+            "status": "passed",
+            "rejectedBeforeStage": true
+          }
+        ],
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990/plugin-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990/plugin-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990/controls-compile.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990/controls-link.log",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-backend-resources-17_ay990/resource-controls.log",
+            "sha256": "ffc921056ed0e884138fbf3c221d2da1f3e05bd4b2feef6178207dc530d0e2a2"
+          }
+        ],
+        "backendCompiledObjectPins": {
+          "semanticAdmission.cmx": "5829bd62e9eb5a8cd01dce4dd3086d90b1f558fd32965c146178937a94362030",
+          "backendResources.cmx": "e1405e610c91edaf98fbbfebc7a3c066f141a7fd70d4c7f41f92eaa2c1229fc8",
+          "candidateValidator.cmx": "24f203822b4288937bd4d681a351819bcf9b65f975872124a4381bed1be33046",
+          "candidateValidators.cmx": "4c6b49378a5d60e142329c859fe80053574b7346084a22270fa4aa7b7a309ff3",
+          "semanticRuntime.cmx": "bd292d61af327bf828d5aea7875b61d7ff9446678351f19a9729fb8c9e029bb6",
+          "candidateValidation.cmx": "0b53ffd7163579f967ba62bfd277f7c1887aea98331cef70dca4bafdcd2ba7dc"
+        }
+      }
+    },
+    "receiving-stock": {
+      "path": "/private/tmp/unison-backend-receiving-stock.json",
+      "sha256": "447df2383ea80c64f05aed7348e23e17d6509293f72e0714482468baa985c979",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "work": "/private/tmp/unison-validation-paths-m_incta_",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306030520,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306030841,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306031323,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306031758,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1101432599971304,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.113750111006084,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.07440175900410395,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.07813736298703589,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ],
+        "commands": [],
+        "backendCompiledObjectPins": {}
+      }
+    },
+    "receiving-ox": {
+      "path": "/private/tmp/unison-backend-receiving-ox.json",
+      "sha256": "cc6304aff6a6e9cd9dff162d2edd0193b0a03f17a6f4865b7592a4ad0019f216",
+      "summary": {
+        "status": "passed",
+        "scope": "Adobe-free actual Unison receive-gate integration; synthetic bytes only",
+        "work": "/private/tmp/unison-validation-paths-63u7n_0d",
+        "cases": [
+          {
+            "calls": 1,
+            "candidate_inode": 306018717,
+            "kind": "complete",
+            "mode": "pass",
+            "name": "resume-complete-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306019607,
+            "kind": "complete",
+            "mode": "error",
+            "name": "resume-complete-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "calls": 1,
+            "candidate_inode": 306020246,
+            "kind": "partial",
+            "mode": "pass",
+            "name": "resume-partial-pass",
+            "rejected_then_fresh_retry": false,
+            "status": "passed"
+          },
+          {
+            "calls": 2,
+            "candidate_inode": 306020554,
+            "kind": "partial",
+            "mode": "error",
+            "name": "resume-partial-error",
+            "rejected_then_fresh_retry": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "pass",
+            "name": "external-pass-require",
+            "policy": "require",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-require",
+            "policy": "require",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-warn",
+            "policy": "warn",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "error",
+            "name": "external-error-off",
+            "policy": "off",
+            "rejected": false,
+            "status": "passed"
+          },
+          {
+            "external_calls": 1,
+            "mode": "mutate",
+            "name": "external-mutate-warn",
+            "policy": "warn",
+            "rejected": true,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "pass",
+            "name": "reuse-pass-require",
+            "policy": "require",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-require",
+            "policy": "require",
+            "receiver_calls": 2,
+            "status": "passed"
+          },
+          {
+            "hint_reuse_not_rename_only": true,
+            "mode": "error",
+            "name": "reuse-error-warn",
+            "policy": "warn",
+            "receiver_calls": 1,
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-pass-pass",
+            "recovery": "not needed",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "error",
+            "first_committed_before_second_rejection": false,
+            "name": "merge-error-pass",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "pass",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-error",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "error",
+            "status": "passed"
+          },
+          {
+            "client_mode": "pass",
+            "first_committed_before_second_rejection": true,
+            "name": "merge-pass-wrong-receipt",
+            "recovery": "exact convergence with required receive gates",
+            "server_mode": "wrong-receipt",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1135122880077688,
+            "followup_receive_progress": true,
+            "name": "timeout-require",
+            "policy": "require",
+            "status": "passed"
+          },
+          {
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 1.1170781389955664,
+            "followup_receive_progress": true,
+            "name": "timeout-warn",
+            "policy": "warn",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.08279156900243834,
+            "fresh_retry_validated": true,
+            "name": "cancel-require",
+            "policy": "require",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "active_client_receiver_cancelled": true,
+            "child_reaped_before_result": true,
+            "elapsed_seconds": 0.0716717869945569,
+            "fresh_retry_validated": true,
+            "name": "cancel-warn",
+            "policy": "warn",
+            "remote_signal_forwarding": "not qualified by this case",
+            "status": "passed"
+          },
+          {
+            "cpu_budget": 2,
+            "files": 6,
+            "filesystem_limit_behaviorally_checked": false,
+            "name": "directory-execution-admission",
+            "peak_helpers": 2,
+            "status": "passed"
+          }
+        ],
+        "commands": [],
+        "backendCompiledObjectPins": {}
+      }
+    },
+    "warning-stock": {
+      "path": "/private/tmp/unison-backend-warning-stock.json",
+      "sha256": "01cc1c8f992d3356c685ea0f8f3d93cb057452db09656aa72196d7b16ba74aca",
+      "summary": {
+        "success": true,
+        "scope": "Actual DngCandidateValidation.select and full compiler-matched legacy-Lwt/core graph; synthetic helper and files; private worker-dispatch observations.",
+        "work": "/private/tmp/unison-validation-warning-pao7tkt2",
+        "compiler": {
+          "path": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+          "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+          "version": "5.2.0"
+        },
+        "runs": [
+          {
+            "mode": "fixed",
+            "case": "warn-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-pass",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "require-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "off",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-inspection-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-mutation",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-active-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-before-delivery-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-delivery-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-delivery-abort",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-printer-error",
+            "designated_negative_detected": false
+          }
+        ],
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/compiler-version.log",
+            "log_sha256": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/frozen-inputs/link-helper.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-probe.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticWorkers.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticWorkers.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticFormats.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticFormats.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-backendResources.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-backendResources.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-helperLimiter.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-helperLimiter.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-candidateValidator.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-candidateValidator.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-dngValidation.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-dngValidation.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-dngCandidateValidation.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-dngCandidateValidation.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-candidateValidators.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-candidateValidators.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticRuntime.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/compile-semanticRuntime.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/link.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-error/test.log",
+            "log_sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-pass/test.log",
+            "log_sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/require-error/test.log",
+            "log_sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/off/test.log",
+            "log_sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-inspection-error/test.log",
+            "log_sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-mutation/test.log",
+            "log_sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-active-cancel/test.log",
+            "log_sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-before-delivery-cancel/test.log",
+            "log_sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-delivery-cancel/test.log",
+            "log_sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-delivery-abort/test.log",
+            "log_sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-pao7tkt2/fixed/warn-printer-error/test.log",
+            "log_sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+          }
+        ],
+        "backendCompiledObjectPins": {}
+      }
+    },
+    "warning-ox": {
+      "path": "/private/tmp/unison-backend-warning-ox.json",
+      "sha256": "b2a9c234ce8ca3bc1bfb38a0b3ecf0e34186d057ce7b784d91eef0462d8a8f8f",
+      "summary": {
+        "success": true,
+        "scope": "Actual DngCandidateValidation.select and full compiler-matched legacy-Lwt/core graph; synthetic helper and files; private worker-dispatch observations.",
+        "work": "/private/tmp/unison-validation-warning-liejezcf",
+        "compiler": {
+          "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+          "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+          "version": "5.2.0+ox"
+        },
+        "runs": [
+          {
+            "mode": "fixed",
+            "case": "warn-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-pass",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "require-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "off",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-inspection-error",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-mutation",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-active-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-before-delivery-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-delivery-cancel",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-delivery-abort",
+            "designated_negative_detected": false
+          },
+          {
+            "mode": "fixed",
+            "case": "warn-printer-error",
+            "designated_negative_detected": false
+          }
+        ],
+        "commands": [
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/compiler-version.log",
+            "log_sha256": "fb355d5f164b1b43cce4bbe63a4ea894cc416c77748e0893b56bbd7eb8ba487a"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/frozen-inputs/link-helper.log",
+            "log_sha256": "045eca8b11550a3ac4e7b5503c788b2ee7f748ba523ddc920893fc81ae4383cf"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-probe.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticWorkers.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticWorkers.ml.log",
+            "log_sha256": "8f07d6062e728e1b3a17fac9e914b897e7632e8e71b870c9b26cf7687987b8d1"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticFormats.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticFormats.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-backendResources.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-backendResources.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-helperLimiter.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-helperLimiter.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-candidateValidator.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-candidateValidator.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-dngValidation.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-dngValidation.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-dngCandidateValidation.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-dngCandidateValidation.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-candidateValidators.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-candidateValidators.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticRuntime.mli.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/compile-semanticRuntime.ml.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/link.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-error/test.log",
+            "log_sha256": "baced06ff2e814e5a919dd43be9aa5406d6cf58e5ae396320b78406759fd2d11"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-pass/test.log",
+            "log_sha256": "56e3ff57dbeeeedac9c1bffd590b9b41d114d7f2c6812bee82f9b30540cf2d74"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/require-error/test.log",
+            "log_sha256": "ac129721129d87a08beba8dd6559f66b182f599b5477fa7c464b74d5812a1caf"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/off/test.log",
+            "log_sha256": "bb3ec88f116f8a7b6e4b929228d2ebd48d6c1e8aff0446c566f5201127e76fe2"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-inspection-error/test.log",
+            "log_sha256": "be8f553c2d42af45482659de58e21bc235ba657c31c9d0f7ac52a6719a7babaa"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-mutation/test.log",
+            "log_sha256": "b57d2b5f2a2702417e0c2f6d35109c3bee6eba5715d8ec2e4b93281d9ee2bbeb"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-active-cancel/test.log",
+            "log_sha256": "249de275161fd73a5cdabca747df006d29ea6fb59700f15589a5b0024301c526"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-before-delivery-cancel/test.log",
+            "log_sha256": "86b5a9f967fa28f25839d3d0165d6c075650ab98e1715f8ddb17f767c663937d"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-delivery-cancel/test.log",
+            "log_sha256": "258147676bbec2d5fbff99995c7b4540e6cb3a6c78236102dbaf08c43bb265c6"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-delivery-abort/test.log",
+            "log_sha256": "3b00acc32f86c71dc5b08040aeee0173f1b98707a40a789959b468e01b8efe0e"
+          },
+          {
+            "exit": 0,
+            "log": "/private/tmp/unison-validation-warning-liejezcf/fixed/warn-printer-error/test.log",
+            "log_sha256": "c5cce522b6221d4bbaa7b83579633bf567c53d8672d0ea245976d1632feb57e1"
+          }
+        ],
+        "backendCompiledObjectPins": {}
+      }
+    }
+  },
+  "limits": [
+    "Resource declarations and admission are accounting estimates, not whole-process RSS or native SDK enforcement.",
+    "Production Adobe v1 has no experimental quota invocation. No SDK linking, initialization or execution occurred.",
+    "Regular-file staging has upfront admission; complete legacy directory staging/manifests remain unqualified.",
+    "CPU declarations do not establish arbitrary backend nested-thread compliance.",
+    "No Photo payload, Lightroom, preview publisher or native oracle operation was performed."
+  ],
+  "failedPreparation": [
+    "Dune on Make snapshots rejected generated object/source rule collisions; successor clean snapshots passed.",
+    "Warning fixture assumed former Runtime ordering and omitted OxCaml selector; corrected real graph/selector passed.",
+    "New borrow fixture initially used modern Lwt.state absent in bundled legacy Lwt; successor uses actual Lwt.poll."
+  ],
+  "summary": {
+    "declarationAndBorrowControlsPerCompiler": 13,
+    "compiledBackendReceivingCasesPerCompiler": 3,
+    "existingReceivingCasesPerCompiler": 21,
+    "warningControlsPerCompiler": 11,
+    "makeAndDuneBuildsWithSelftests": 4
+  }
+}

@@ -60,6 +60,9 @@ val int64 : int64 t
 val float : float t
 
 val string : string t
+val bounded_string : int -> string t
+(** Same encoding as [string], with a length check before allocation on read
+    and before emission on write. Does not bound an enclosing transport frame. *)
 
 type bytearray =
   (char, Bigarray.int8_unsigned_elt, Bigarray.c_layout) Bigarray.Array1.t

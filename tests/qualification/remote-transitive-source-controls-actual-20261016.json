@@ -1,0 +1,120 @@
+{
+  "schema": "unison-remote-transitive-source-controls/1",
+  "owner_terminal": {
+    "chunk": "d0c827",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-source-deps-t6jpnjop",
+  "closure": {
+    "child": {
+      "pid": 67469,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 67469,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit.py",
+      "bytes": 4059,
+      "sha256": "9273338ec0ec48b42e75f11cc78c6af0d0cafc227450869fc5df58e20a066f0d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/audit_test.py",
+      "bytes": 5207,
+      "sha256": "25b6eaa1621c1341a99bdea1dd9cf9afd2fed7074e133e7cf426893ff77baf4f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/case.py",
+      "bytes": 6429,
+      "sha256": "5ba62c3053ab155c1b354fcf1fa7c51ebc6962f17a14f862ac669b3ede6e2043"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/coordinator.py",
+      "bytes": 13954,
+      "sha256": "3f844931914364d743ae580db911d598cd4d2b9c9a5736fc5de617726abd4170"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/coordinator_test.py",
+      "bytes": 14467,
+      "sha256": "c901aa33420170bb1570ccfc7246545c128dc3f44c0c59592b0acc8f055cc4c6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/fixture_test.py",
+      "bytes": 2037,
+      "sha256": "a5734db0aeb116f51d35a49cb429e1e97f328b8cbe40378cbf4423160003d941"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger.py",
+      "bytes": 4502,
+      "sha256": "9eb528bd53cb7e77484f59e69d5680c95992d4a43ec904880fbe482d4c37da93"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger_test.py",
+      "bytes": 4541,
+      "sha256": "1f2358609e0e081b377d7ee79b8c36a4a6b7d34ca5de703adf921a1b8cc3dd05"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/source_controls.py",
+      "bytes": 744,
+      "sha256": "dcf83c15bb2999f279150a77a9c4ae74e72268e2160703dae43c50b6333e3bbe"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 36019,
+      "sha256": "73d83116d266596f18b3dc10afefadc7283577275c1480471e59ea52897e3829"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/artifact_pins.py",
+      "bytes": 2192,
+      "sha256": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/properties.py",
+      "bytes": 4839,
+      "sha256": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6151,
+      "sha256": "494a437284cc170f2b3a5344d3253593c5aa4a280b601e2a301adcd530adae53"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-source-deps-t6jpnjop/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "00a3640f5a84b2658e9e801b9aa0640685369e8704df75b657ed16c7d622f4c3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-source-deps-t6jpnjop/SHARED-START.json",
+      "bytes": 1199,
+      "sha256": "e8294b31ebb42d29b5b287ffb4e50fcbf59b7143889ae375b59793cd80ab3db0"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-source-deps-t6jpnjop/SHARED-STDERR.txt",
+      "bytes": 154,
+      "sha256": "6b1980e0c17208b6826393f46f9263acbf1f0a5e6d4732a8d7aff8f0f94b7094"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-source-deps-t6jpnjop/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "controls": 55,
+  "scope": "Original generated1MiBfixtures + mockowners, AST directimport closure and omissionnegatives. No actualtransport/camera/SDK/Adobe/EXglobal; oldconsumedsource18 receipts unchanged. Newfutureplan requires current21runtime sourcepins."
+}
