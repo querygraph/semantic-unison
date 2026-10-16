@@ -53,6 +53,8 @@ class Lifecycle(unittest.TestCase):
         self.passed_fds = None
         self.spawned = False
         self.held_record = None
+        self.await_result = True
+        self.audit_error = None
     def tearDown(self):
         self.temp.cleanup()
     def acquire_io(self):
@@ -69,7 +71,11 @@ class Lifecycle(unittest.TestCase):
         self.spawned = True
         self.passed_fds = kw['pass_fds']
         self.assertFalse(self.io.closed or self.cpu.closed)
+        outer = self
         class Owner:
+            def await_terminal(self, seconds):
+                outer.events.append("await:worker")
+                return outer.await_result
             pid = 900001
             reaped = False
         return Owner()
@@ -96,7 +102,15 @@ class Lifecycle(unittest.TestCase):
             if self.check_calls == 2 and self.second_check_error:
                 raise self.second_check_error
             return self.io_pool,self.deadline
+        if target == 'sync-functional':
+            (self.output/'RESULT.json').write_text('{"mock":true}')
+        def audit(result):
+            self.events.append('audit:external')
+            self.assertFalse(self.cpu.closed or self.io.closed)
+            if self.audit_error: raise self.audit_error
+            return {'rows':18,'cli_invocations':54}
         with ExitStack() as stack:
+            stack.enter_context(patch('shared_audit.audit_shared',side_effect=audit))
             stack.enter_context(patch.object(d.Pool,'read',return_value=cpu_pool))
             stack.enter_context(patch.object(d,'checked_io_request',side_effect=checked))
             stack.enter_context(patch.object(d,'OwnedGroup',side_effect=self.spawn))
@@ -104,6 +118,23 @@ class Lifecycle(unittest.TestCase):
             stack.enter_context(patch.object(d,'retain_after_record',side_effect=self.retain))
             return d.run(target,[sys.executable,str(Path(__file__).resolve())],
                          self.output,8,io_admission={'path':'/never-read','sha256':'0'*64})
+
+    def test_sync_external_proofs_precede_group_reap_and_io_close(self):
+        self.assertEqual(self.run_case('sync-functional'),0)
+        self.assertEqual(self.events,['acquire:io','acquire:cpu','spawn','await:worker','audit:external','settle','close:cpu','close:io'])
+
+    def test_sync_missing_server_proof_retains_both_without_reap(self):
+        self.audit_error=ValueError('server ownership not proved')
+        with self.assertRaises(Retained):self.run_case('sync-functional')
+        self.assertFalse(self.cpu.closed or self.io.closed)
+        self.assertNotIn('settle',self.events)
+
+    def test_sync_live_coordinator_deadline_retains_no_broad_kill(self):
+        self.await_result=False
+        with self.assertRaises(Retained):self.run_case('sync-functional')
+        self.assertFalse(self.cpu.closed or self.io.closed)
+        self.assertNotIn('audit:external',self.events)
+        self.assertNotIn('settle',self.events)
 
     def test_framing_input_parent_resource_order(self):
         self.assertEqual(self.run_case('private-dng-framing-input'),0)

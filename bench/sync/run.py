@@ -19,6 +19,7 @@ import zlib
 
 from fixtures import create, edit, equal_files, sha256, validate_dimensions
 import partitions
+import artifact_pins
 from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
@@ -247,6 +248,10 @@ def main():
                         help="opt-in worker primary-reader counters; not total application/disk reads")
     parser.add_argument("--background-note", default="ordinary host activity uncontrolled")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--expected-binary-sha256", action="append", default=[],
+                        help="optional exact label=SHA256 set, verified before any executable call")
+    parser.add_argument("--expected-compiler-sha256", action="append", default=[],
+                        help="optional exact compiler label=SHA256 set, verified before version calls")
     args = parser.parse_args()
     binaries, references = pairs(args.binary, parser), pairs(args.reference, parser)
     compilers = pairs(args.compiler, parser)
@@ -303,6 +308,13 @@ def main():
     environment = os.environ.copy()
     for key in ("OCAMLLIB", "OCAMLPATH", "CAML_LD_LIBRARY_PATH", "OCAMLRUNPARAM"):
         environment.pop(key, None)
+    try:
+        admitted_binary_pins = artifact_pins.verify({**binaries, **references},
+                                                   artifact_pins.parse(args.expected_binary_sha256))
+        admitted_compiler_pins = artifact_pins.verify(compilers,
+                                                     artifact_pins.parse(args.expected_compiler_sha256))
+    except (ValueError, OSError) as error:
+        parser.error(str(error))
     metadata = {label: binary_info(path) for label, path in {**binaries, **references}.items()}
     host = {"system": platform.system(), "release": platform.release(),
             "machine": platform.machine(), "logical_cpus": os.cpu_count()}
@@ -317,6 +329,8 @@ def main():
               "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
               "repository_head": subprocess.check_output(["git", "rev-parse", "HEAD"], cwd=ROOT, text=True).strip(),
               "runner_sha256": scripts, "host": host, "binaries": metadata,
+              "admitted_binary_sha256": admitted_binary_pins,
+              "admitted_compiler_sha256": admitted_compiler_pins,
               "compilers": {label: {"path": str(path),
                     "version": subprocess.check_output([str(path), "-version"], text=True).strip(),
                     "configuration": subprocess.check_output([str(path), "-config"], text=True)}

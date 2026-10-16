@@ -317,3 +317,11 @@ Unison8 token protocol and explicitworker/Adobeoff settings as the Make check
 route; legacy stock-dune/ox-dune defaults stay separate.
 [Actual current Dune qualification](qualification/shared-current-dune-selftests-actual-20261016.json)
 retains full source/binary/log/module and owner/group closure pins.
+
+
+`shared-io-controls` now runs the fixed planner, IO admission, fake multi-owner
+lifecycle and inert executable-pin suites (41checks total) under Unison's CPU
+lane. It acquires no canonical IO lock and runs no sync/Adobe/compiler or
+camera workload. `sync-functional` may request explicit `SHARED_IO_ADMISSION`
+mode, but only with a fresh exact Root grant; its source support is not a grant
+or current live IO qualification. See[the transport IO source review request](../doc/shared-sync-io-request-v1.json).

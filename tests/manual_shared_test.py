@@ -91,10 +91,13 @@ with patch.object(Path, 'is_file', return_value=True):
             raise AssertionError('unqualified shared request admitted: ' + target)
 
 with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execute',
-                                                       'compiler': '/NEVER-query'}):
+                                                       'compiler': '/NEVER-query',
+                                                       'binary_sha256':'a'*64,'compiler_sha256':'b'*64}):
     argv = manual.command('sync-functional', out,
                           dict(env, STOCK_RECEIPT='unread', OX_RECEIPT='unread'))
     assert '--shared-qualification' in argv and '--qualification' not in argv
+    assert argv.count('--expected-binary-sha256') == 2
+    assert argv.count('--expected-compiler-sha256') == 2
     assert argv[argv.index('--loopback-cpu-credits') + 1] == '8'
     assert argv[argv.index('--orchestration-cpu-credits') + 1] == '2'
     plan = manual.shared_resource_plan('sync-functional', env)

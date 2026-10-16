@@ -36,8 +36,8 @@ def write(path, value):
 def checked_io_request(request, target, argv, output, credits):
     """Read admission metadata only; this does not acquire IO/CPU locks."""
     from shared_io_pool import GlobalPool, read_manifest, CANONICAL_MANIFEST, CANONICAL_SHA256
-    require(target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input'),
-            'IO successor only supports complete local single-group jobs')
+    require(target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+            'IO mode requires a complete job with qualified external-owner audit')
     require(isinstance(request, dict) and set(request) == {'path', 'sha256'},
             'explicit pinned IO admission required')
     value = read_manifest(request['path'], request['sha256'])
@@ -50,6 +50,17 @@ def checked_io_request(request, target, argv, output, credits):
     source_paths = {Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_io_pool.py',
                     ROOT / 'tests/shared_cpu_pool.py', ROOT / 'tests/shared_process_owner.py',
                     ROOT / 'bench/sync/ownership.py', Path(argv[1])}
+    if target == 'sync-functional':
+        from artifact_pins import parse as artifact_pin_set
+        require(credits == 8 and '--shared-qualification' in argv and '--reference' not in argv,
+                'IO sync requires the finite shared8 qualification matrix')
+        for option in ('--expected-binary-sha256', '--expected-compiler-sha256'):
+            positions = [i for i, word in enumerate(argv) if word == option]
+            require(len(positions) == 2 and all(i+1 < len(argv) for i in positions),
+                    'two expected stock/Ox artifact hashes required')
+            require(set(artifact_pin_set([argv[i+1] for i in positions])) == {'stock','ox'},
+                    'exact stock/Ox artifact hash labels required')
+        source_paths.update((ROOT / 'bench/sync').glob('*.py'))
     if target == 'private-dng-framing-input':
         source_paths.update({ROOT / 'src/dngPrivateData.ml', ROOT / 'src/dngPrivateData.mli',
             ROOT / 'tools/private-dng-framing/inspect.ml', ROOT / 'tools/private-dng-framing/controls.py'})

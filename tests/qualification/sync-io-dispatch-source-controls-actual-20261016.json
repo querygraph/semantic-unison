@@ -1,0 +1,73 @@
+{
+  "schema": "unison-sync-io-dispatch-source-controls/1",
+  "state": "SOURCE_CONTROLS_PASS_NOT_LIVE_QUALIFIED",
+  "owner_terminal": {
+    "chunk": "dfefd4",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "source_pins": {
+    "tests/shared_io_plan_test.py": "1c98ab90944c38cd6f6549f25d6f50d06bc584057f2e910aa167e4adf31d96fc",
+    "tests/shared_io_dispatch_test.py": "97d62c51b9b2b3c2637430559f29478c6092ac6dad6e126b13c1ad6b386b813e",
+    "tests/shared_io_dispatch_lifecycle_test.py": "d2bbbbe7a963570c8433e29062676aedc78634b44860014d45ec6516c2b4d831",
+    "bench/sync/artifact_pins_test.py": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304",
+    "tests/shared_dispatch.py": "518d7ba41a3c421feac275bdd46709936c04bd6f7c96cc8e589ff3e61c2f2460",
+    "tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+    "tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+    "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+    "tests/manual.py": "fa8957783faedfae656f3e6d6f5742e5823e020bb0d7936b34cb4c9bfa024c1d",
+    "tests/shared_io_plan.py": "3641d4923c64c9ad15f72b03b7b41d71bf35bc1dcc2e1cfa7fb85fc21b539b3c",
+    "bench/sync/artifact_pins.py": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd",
+    "bench/sync/run.py": "50dc09752da9364ef7570d312696e289b49b825986566049de398f8f55d1bc82",
+    "tests/shared_io_controls.py": "638d1cc1dcf24a140c8bc1d0650d25c33ca7e60b2f9f0a1a06a02274cf0a87ec"
+  },
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-ul3e3xed/SHARED-START.json",
+      "bytes": 1150,
+      "sha256": "3c6870200863bf5bc55cfaba91f8d9cb064836a3080b3a6f34827974c571d71b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-ul3e3xed/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "75a47aa959d69ec8044a5b0c913998816be820cc53136313926aa95f0459531a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-ul3e3xed/SHARED-STDOUT.txt",
+      "bytes": 3607,
+      "sha256": "bffd5e80be2b8adf527018c40921172f87a5b16e03fe52be062b91d19733d241"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-ul3e3xed/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-v8y3u7kt/0.log",
+      "bytes": 109,
+      "sha256": "cf8d3a2572a7898fcf32a4c2dd1445509b3d59e66061853243c4627f80695068"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-v8y3u7kt/1.log",
+      "bytes": 105,
+      "sha256": "cedb82dc56386349028ceffb44102c4710aeaac8c7851a279af282486d8d23a8"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-v8y3u7kt/2.log",
+      "bytes": 117,
+      "sha256": "30c043ede17bc519f707f3f9ff82d7a8073636a00951490677e4c4d5ef7d3105"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-io-source-controls-v8y3u7kt/3.log",
+      "bytes": 104,
+      "sha256": "056be428f93d5c221fb5111f4d266e542ea3d7ce13f6fa95f050091739b87b53"
+    }
+  ],
+  "suite_counts": {
+    "planner": 10,
+    "admission": 7,
+    "fake_lifecycle": 18,
+    "inert_artifact": 6
+  },
+  "scope": "41fixed source/disposable/mock cases; no canonicalIO acquisition, no actualsync/transport/binary/compiler/SDK/Adobe/camera. CPU00..07 closed. NewIOtransport path requires fresh explicit admission. Incomplete server proof/livecoordinator retains bothleases without reap or broad kill. Epoch-fenced hashes bound artifacts before versions, not hostile sameUID exec atomicity."
+}

@@ -39,6 +39,32 @@ class Controls(unittest.TestCase):
                     d.checked_io_request(request, 'private-dng-framing-input', argv, Path('/none'), 8)
                 read.assert_not_called();value['execution_source_sha256'][str(path)] = saved
 
+    def test_sync_requires_all_transport_sources(self):
+        argv = ['/python', str(d.ROOT/'bench/sync/run.py'), '--shared-qualification',
+                '--expected-binary-sha256','stock='+'a'*64,'--expected-binary-sha256','ox='+'b'*64,
+                '--expected-compiler-sha256','stock='+'c'*64,'--expected-compiler-sha256','ox='+'d'*64]
+        paths = {Path(d.__file__), d.ROOT/'tests/manual.py', d.ROOT/'tests/shared_io_pool.py',
+                 d.ROOT/'tests/shared_cpu_pool.py', d.ROOT/'tests/shared_process_owner.py',
+                 d.ROOT/'bench/sync/ownership.py', Path(argv[1])}
+        paths.update((d.ROOT/'bench/sync').glob('*.py'))
+        value={'state':'ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB','target':'sync-functional',
+               'command':argv,'workspace':'/none','cpu_credits':8,
+               'io_manifest_sha256':pool.CANONICAL_SHA256,'start_deadline_unix':200,
+               'execution_source_sha256':{str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths}}
+        with patch.object(pool,'read_manifest',return_value=value),patch.object(pool.GlobalPool,'read',return_value='pool') as read,patch.object(d.time,'time',return_value=100):
+            self.assertEqual(d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8),('pool',200))
+            valid = argv.copy()
+            for flag in ('--expected-binary-sha256','--expected-compiler-sha256'):
+                at=argv.index(flag); saved=argv[at+1];argv[at+1]='missing-or-bad'
+                read.reset_mock()
+                with self.assertRaises(ValueError):d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8)
+                read.assert_not_called();argv[at+1]=saved
+            self.assertEqual(argv,valid)
+            del value['execution_source_sha256'][str(d.ROOT/'bench/sync/artifact_pins.py')]
+            read.reset_mock()
+            with self.assertRaises(ValueError):d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8)
+            read.assert_not_called()
+
     def test_no_io_admission_on_default_existing_path(self):
         # Default API stays CPU-only, never silently enables IO.
         import inspect
@@ -48,7 +74,7 @@ class Controls(unittest.TestCase):
         with patch.object(pool, 'read_manifest', side_effect=AssertionError('IO metadata touched')):
             with self.assertRaises(ValueError):
                 d.checked_io_request({'path': '/none', 'sha256': '0'*64},
-                                     'sync-functional', [], Path('/none'), 8)
+                                     'stock-build', [], Path('/none'), 8)
 
     def test_manual_mode_requires_complete_admission_and_supported_target(self):
         import manual

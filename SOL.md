@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+Sharedfunctional EXIO source successor prepared: existing54CLIstrictmulti-owner
+proof precedesworkerreap andCPU→IOclose; livecoordinator/missingserverproof
+retainsbothleases/no broadkill. Exact32sourcepinadmission andtwo stock/Ox binary+
+compiler SHAsets required, workerhashesbeforeanyversion/configexecution.
+BoundednofollowregularFD nativeepoch hashhelper; legacyunpinnedcallers unchanged.
+[41source/disposable/mock controls](tests/qualification/sync-io-dispatch-source-controls-actual-20261016.json)
+ACTUALdfefd4/0/groupreaped/CPU00..07closed; no canonicalIO/sync/binary/native
+execution. [Finitefunctionalrequest](doc/shared-sync-io-request-v1.json)32sources/
+18rows54CLI/two2MiBfixtures/8credits/30sperCLI/300sobservation NOT guaranteed
+wrapperwall, unknownretains. Rootsource-review/schedulingrequested, NOTruntime
+admitted/executed, noSDK/camera/grantfromresourceclosure. Earlierfrozenbench
+sourceworktree andalltimingcaveats unchanged.
+
+
 Currentstock/Ox fullDune+selftests [ACTUALPASS/CLOSED](tests/qualification/shared-current-dune-selftests-actual-20261016.json)
 include target-proofguard:7962/7d4775/0 and22524/d2520c/0/no sessions;
 workerreaped0/othermembersabsent/tokensclosed.425current source/buildpins match

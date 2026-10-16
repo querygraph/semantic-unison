@@ -115,3 +115,31 @@ is source preparation only; exact driver/command freeze and a separate finite
 canonical test admission remain before the first live barrier test. Neither
 provisioning nor these disposable tests grant payload/SDK execution or live bulk
 dispatcher integration.
+
+
+## Shared functional transport successor (source controls only)
+
+The existing `sync-functional` matrix can now be explicitly admitted through
+EX_GLOBAL IO then Unison00..07. Unlike the earlier single-group tiny local job,
+its loopback servers have separate owners. The existing strict54CLI
+client/supervisor/server/pump audit must succeed before the containing worker is
+reaped or either lease closes. A live coordinator at300s observation, partial or
+missing external proof, or uncertain closure retains the owner and both leases;
+no broad aggregate kill or timeout-only release is introduced. This is not a
+promise of completed-wrapper wall time300s.
+
+For this IO target, the exact admission must include every current `bench/sync`
+Python source plus owner/CPU/IO/manual sources. Both stock/Ox binary and compiler
+SHA sets are mandatory. The worker checks stable no-follow bounded artifact FDs
+before any executable version/config call. This is cooperative epoch validation,
+not hostile-writer atomic execution or a persistent capability cache. Legacy
+un-pinned benchmark callers keep their previous behavior.
+
+[41 source/disposable/mock controls](../tests/qualification/sync-io-dispatch-source-controls-actual-20261016.json)
+passed and closed (no canonical IO or actual transport). They include missing
+artifact/source refusals, artifact-hash-before-version execution, external proof
+ordering, and retention without broad kill on live or unproved servers.
+[The exact fresh request](shared-sync-io-request-v1.json) remains unadmitted and
+unexecuted until Root schedules it. Two generated2MiBfiles/18rows54CLI only;
+no camera, Adobe/SDK, compilation, quiet benchmark or physical-device isolation
+claim. Existing physical pool manifest and prior consumed runs remain unchanged.

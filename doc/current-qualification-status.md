@@ -269,3 +269,11 @@ source/build pins, binary/log hashes and native module objects checked. Actual
 parent/group closure and tokens released. New shared Dune-check targets retain
 max2compilerjobs, then explicitworkers3/adobeoff selftests. No new Make, GUI,
 camera, SDK, hard resource-cap or whole-goal acceptance follows from this refresh.
+
+A [source-controlled shared functional IO route](shared-sync-io-request-v1.json)
+now requires explicit exact Root admission, EXglobal beforeCPU, mandatory
+worker-side artifact hashes, and all54separate client/server lifecycle proofs
+before release. [41source/mock/disposable checks](../tests/qualification/sync-io-dispatch-source-controls-actual-20261016.json)
+passed/closed; actual transport under this IO successor is unqualified/unstarted.
+The300s parent observation retains unknown owners instead of promising completed
+wall time. No camera/SDK or automatic runtime grant follows.

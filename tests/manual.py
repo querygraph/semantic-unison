@@ -128,8 +128,8 @@ def command(target, output, environment):
         require(bool(io_path) and Path(io_path).is_absolute() and bool(io_sha)
                 and len(io_sha) == 64 and all(c in '0123456789abcdef' for c in io_sha)
                 and environment.get('SHARED_CPU_CREDITS') is not None
-                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input'),
-                'IO mode requires pinned admission, shared CPU and complete-local-job target')
+                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+                'IO mode requires pinned admission, shared CPU and complete job with qualified closure audit')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
@@ -169,7 +169,7 @@ def command(target, output, environment):
     if target == 'inspector-reuse-controls':
         return [sys.executable, str(ROOT / 'tools/semantic-inspect/reuse_test.py')]
     if target == 'shared-io-controls':
-        return [sys.executable, str(ROOT / 'tests/shared_io_plan_test.py')]
+        return [sys.executable, str(ROOT / 'tests/shared_io_controls.py')]
     if target == 'inspect-file':
         for key in ('INSPECTOR_RECEIPT', 'INSPECT_INPUT'):
             require(bool(environment.get(key)) and Path(environment[key]).is_absolute(),
@@ -238,7 +238,9 @@ def command(target, output, environment):
             require(bool(environment.get(key)), key + ' is required')
             receipt = checked_build(environment[key])
             argv.extend(['--binary', label + '=' + receipt['binary'],
-                         '--compiler', label + '=' + receipt['compiler']])
+                         '--compiler', label + '=' + receipt['compiler'],
+                         '--expected-binary-sha256', label + '=' + receipt['binary_sha256'],
+                         '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
         return argv + ['--shared-qualification' if shared is not None else '--qualification', '--measure-primary-reads',
                        '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
                        ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [
