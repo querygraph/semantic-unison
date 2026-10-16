@@ -58,7 +58,8 @@ def audit(result,plan,workspace):
             require(outcome['returncode']==0 and outcome['supervisor_cleanup']['returncode']==0
                     and outcome['proxy']['server_returncode']==0 and not outcome['timed_out']
                     and not outcome['capture_truncated'] and not outcome['supervisor_capture_truncated']
-                    and outcome['proxy'].get('fault') is None,'complete worker contradicts failed CLI')
+                    and outcome['proxy'].get('fault') is None and outcome.get('fault') is None
+                    and outcome['proxy']['pump_errors']==[],'complete worker contradicts failed CLI')
             verdict=audit_success(log,expected=expected,
                 owner_pid=outcome['proxy']['server_pid'],build_id=BUILD)
             row=rows[index];case=row['case']

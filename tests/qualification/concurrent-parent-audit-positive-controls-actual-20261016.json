@@ -1,0 +1,60 @@
+{
+  "schema": "unison-concurrent-parent-audit-positive-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "a7f318",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit.py",
+      "bytes": 5163,
+      "sha256": "670fbee96e8165e7c58a533c7a20df19efe6f4ea5569c10a6408d654971e40d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/result_audit_test.py",
+      "bytes": 6028,
+      "sha256": "d392dba2ce05e85f6c12ca59b8ab277f718e0b9ad1f2c0283cfd863981e726a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/synthetic_case_test.py",
+      "bytes": 5584,
+      "sha256": "8dc90e48066fc885299663aa3c855a1ad0f84f06a9929fb3617e080430d911e6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/combined.py",
+      "bytes": 4003,
+      "sha256": "fe5e3e78f4ca66ae3e6ae5f0f17323513ce9c1c47f1eea33330d71b806087026"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6685,
+      "sha256": "dec9c4b27c625d75addf7f89c4806e39eadf91c93b74b47b351c89253436d48b"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-parent-positive-controls-20261016b/SHARED-START.json",
+      "bytes": 1119,
+      "sha256": "5c70c26676f2d136772b1b5e2e9bf15666fbef54b16eb8e7658d691c3f41505d"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-positive-controls-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "9cb49b7801c65d8c5ec5c2448a6c968e58b8b57ce5884409c5cbc0bdf2c4f70f"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-positive-controls-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-parent-positive-controls-20261016b/SHARED-STDERR.txt",
+      "bytes": 109,
+      "sha256": "f30d010c0822f8e179b3a8911294020a5abd4b3751001cab66864ada6397acb2"
+    }
+  ],
+  "scope": "10original protocol fixtures; real pure auditors with inert process/helper IDs; two compiler cases/four helper records, case/command/order/pump/group tampering refused and known failed prefix remains failed; no actual transport/helper/SDK/Photo/EXglobal",
+  "full_goal_complete": false
+}

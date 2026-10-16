@@ -149,3 +149,12 @@ null PID or missing logs alone never suffice. Aggregate reap and FD closure
 remain outside this pure function. [Five source controls](../qualification/concurrent-parent-audit-prefix-controls-actual-20261016.json)
 qualify refusal/delegation boundaries only. Positive parent-audit fixtures and
 actual dispatcher integration are still required before a runtime request.
+
+[Positive parent-audit controls](../qualification/concurrent-parent-audit-positive-controls-actual-20261016.json)
+expand to10 groups with inert complete protocol fixtures through the real pure
+call/helper/live auditors. Two exact compiler cases/four helper records pass;
+changed source/case verdicts, ordering, commands, unknown groups and pump errors
+refuse. A known failed prefix can preserve two helper settlements while staying
+FAILED. The complete branch explicitly requires no pump errors and no call fault.
+These are not actual child/CLI/helper closures; dispatcher ownership integration
+and finite live controls remain required before requesting the receiving window.
