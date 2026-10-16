@@ -17,6 +17,7 @@ parser.add_argument("--build",type=Path,help="Use actual compiled production obj
 parser.add_argument("--identify-only",action="store_true")
 parser.add_argument("--shared-parity-only",action="store_true")
 parser.add_argument("--shared-mixed-only",action="store_true")
+parser.add_argument("--shared-mixed-hash-only",action="store_true")
 parser.add_argument("--read-stats-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
 parser.add_argument("--apply-stress-only",action="store_true")
@@ -49,6 +50,11 @@ with workspace as tmp:
     build = Path(tmp)
     for source in sources:
         shutil.copyfile(root / source, build / Path(source).name)
+    version=subprocess.check_output([args.ocamlopt,"-version"],text=True).strip()
+    if '+ox' in version:
+        participant=build/'test.ml';text=participant.read_text()
+        assert text.count('Domain.spawn (* TEST_HASH_SPAWN *)')==1
+        participant.write_text(text.replace('Domain.spawn (* TEST_HASH_SPAWN *)','Domain.Safe.spawn'))
     linked_pins = {}
     if args.build:
         for source in sources[:-1]:
@@ -128,6 +134,7 @@ with workspace as tmp:
     if args.identify_only: command.append("--identify-only")
     if args.shared_parity_only: command.append("--shared-parity-only")
     if args.shared_mixed_only: command.append("--shared-mixed-only")
+    if args.shared_mixed_hash_only: command.append("--shared-mixed-hash-only")
     if args.read_stats_only: command.append("--read-stats-only")
     if args.stress_only: command.append("--stress-only")
     if args.apply_stress_only: command.append("--apply-stress-only")
@@ -143,6 +150,7 @@ with workspace as tmp:
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),
                  summary=[line for line in result.stdout.splitlines() if line.startswith("PASS seeded")])
     receipt['shared_mixed_only']=args.shared_mixed_only
+    receipt['shared_mixed_hash_only']=args.shared_mixed_hash_only
     (build/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
     if args.receipt: args.receipt.write_text(json.dumps(receipt,indent=2)+"\n")
     result.check_returncode()

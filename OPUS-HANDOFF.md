@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:03:03Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:06:04Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -34,9 +34,8 @@ FOUR warnings each retained. Generated-input end-to-end receiving only, includes
 hash/transport/staging/startup/SDK; not quiet, causal SDK speedup, pixel/corpus or
 production qualification. Offline report ownerd1500e/0 also closed.
 
-**Immediate next task:** deliver/adopt independent Root review of the actual
-sealed return, then continue remaining SOL acceptance/resource/corpus/platform
-requirements. Do not reconstruct this completed run from old absent snapshots.
+**Immediate next task:** continue remaining SOL acceptance/resource/corpus/platform
+requirements; Root independent actual comparison closure is adopted below. Do not reconstruct this completed run from old absent snapshots.
 
 **Report preparation:** `bench/report_sdk_receiving_comparison.py` now independently
 re-audits comparison receipts before statistics. It preserves exact sample order
@@ -89,6 +88,21 @@ children86696/86712 reaped0/groups absent, CPU8 closed, both stock/Ox pass.
 Receipt `compact-cache-torn-ledger-actual-20261016.json` preserves successor
 sources separately. Controlled corrupt inputs are not actual power-loss testing;
 uncertain-close lifetime remains unqualified beyond prior explicit scopes.
+
+**Latest mixed-work control:** `tests/workers/run.py --shared-mixed-hash-only`
+now uses original actual CPU-hashing helpers (one/two domains) beside parent
+worker hash jobs under one HelperSupervisor, budgets1/2/4/6. Stock/Ox each pass
+64parenthashes/eighthelpers with exact portable-reference transcripts, actual
+helpergroup-before-reap/parentFD baseline closure. Ox test helpers compile through
+Safe.spawn (warning retained); production objects unchanged. Actual owner6607 /
+72ea0f/0/no session, children88355/88378 reaped0/groups absent/CPU8 closed.
+Receipt `shared-mixed-cpu-hash-actual-20261016.json`. No SDK/ExifTool/camera/EXIO,
+OSthread/RSS caps or compute-overlap claim; actual mixed external tools remain open.
+
+Root independent comparison adoption is now durable:
+`tests/qualification/sdk-receiving-comparison-v1-root-adoption-20261016.json`
+binds Root actualclosure04535268. StateCONSUMED_ACTUAL_CLOSED_COORDINATION_RELEASED;
+actualterminal/result/workerclosure pins verified. No renewed run or hold.
 
 **Current resources:** no Unison live owner or retained CPU/IO reservation.
 Comparison actual parent and offline audit owners closed. Photo was promptly
