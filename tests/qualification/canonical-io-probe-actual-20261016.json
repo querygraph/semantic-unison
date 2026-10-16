@@ -1,0 +1,213 @@
+{
+  "state": "CANONICAL_SINGLE_EX_GLOBAL_LOCK_ONLY_PROBE_ACTUALLY_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "state": "ACTUAL_OWNER_TOOL_TERMINAL_OBSERVED",
+    "owner_pid": 82843,
+    "tool": "exec_command",
+    "chunk": "7efd2e",
+    "exit": 0,
+    "running_session": false,
+    "exec_wall_seconds": 0.342358923,
+    "scope": "Initial exec_command returned actual terminal; not inferred from process absence. Tool wall is not a separately instrumented worker-phase measurement."
+  },
+  "workspace": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c",
+  "admission": {
+    "path": "/private/tmp/unison-canonical-io-probe-admission-33ea18d4743b4dbe81bc09feb6b8147c.json",
+    "bytes": 1466,
+    "sha256": "2519623d74be2bfa12adc56e438d38c67631291215b4dc31f5ff1b08fdf529bd"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-CANONICAL-IO-PROBE-RESCHEDULE-33ea18d4743b4dbe81bc09feb6b8147c.json",
+    "bytes": 7176,
+    "sha256": "22ac585e68abf94cd9792fc3c2119c213b545ce1f01a0570df5564cc1c8086f6"
+  },
+  "start": {
+    "owner_pid": 82843,
+    "group_pid": 82844,
+    "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "plan_sha256": "22ac585e68abf94cd9792fc3c2119c213b545ce1f01a0570df5564cc1c8086f6",
+    "admission_sha256": "2519623d74be2bfa12adc56e438d38c67631291215b4dc31f5ff1b08fdf529bd"
+  },
+  "worker_result": {
+    "contender_pid": 82845,
+    "actual_wait_exit": 0,
+    "scope": "fixed no-spawn Python contender only"
+  },
+  "contender_result": {
+    "busy": true
+  },
+  "group_closure": {
+    "state": "LOCK_ONLY_PROBE_PASSED_CLOSED",
+    "child": {
+      "pid": 82844,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 82844,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "io_and_cpu_copies_closed": true,
+    "fresh_whole_bundle_reacquired_and_closed": true,
+    "parent_terminal": "collect actual owner tool terminal separately",
+    "no_payload_native_or_dispatcher_qualification": true
+  },
+  "canonical_manifest": {
+    "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+    "bytes": 1500,
+    "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+  },
+  "post_metadata_identity": {
+    "directory_device": 16777223,
+    "directory_inode": 307225492,
+    "barrier_device": 16777223,
+    "barrier_inode": 307225493
+  },
+  "source_pins_unchanged": [
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+      "bytes": 8591,
+      "sha256": "63e235f4ad0afc0ba278613dd8163678796f2d556f1ebf4c49cdfeb3bbb46018"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe_test.py",
+      "bytes": 2578,
+      "sha256": "0c66a5d4cfa9f4238c6b82a19744e531393b082766f994d3df884f1f3fedfda3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 10664,
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "bytes": 18749552,
+      "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json",
+      "bytes": 5585,
+      "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+      "bytes": 2106,
+      "sha256": "4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+      "bytes": 1500,
+      "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v2.json",
+      "bytes": 5519,
+      "sha256": "d260893ef5161e2a0e376f9fba356fd33e5e2c5ed37d023a432b82f8a48a1d5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool_test.py",
+      "bytes": 11620,
+      "sha256": "dbac45c518ed42e76fae0564d58dc84498f98fa1787f0ab1371fd3cb70d80c1a"
+    }
+  ],
+  "pins": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-CANONICAL-IO-PROBE-RESCHEDULE-33ea18d4743b4dbe81bc09feb6b8147c.json",
+      "bytes": 7176,
+      "sha256": "22ac585e68abf94cd9792fc3c2119c213b545ce1f01a0570df5564cc1c8086f6"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-admission-33ea18d4743b4dbe81bc09feb6b8147c.json",
+      "bytes": 1466,
+      "sha256": "2519623d74be2bfa12adc56e438d38c67631291215b4dc31f5ff1b08fdf529bd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+      "bytes": 1500,
+      "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/START.json",
+      "bytes": 393,
+      "sha256": "13d66da1e3866973749cc33d812b947bd29f387b17c53d86aea8f76e76200da9"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/WORKER-RESULT.json",
+      "bytes": 105,
+      "sha256": "61b832d2e82226c8b1f99588759f2796dfb37ec7b93404147bae3b62b4419281"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/CONTENDER-STDOUT.json",
+      "bytes": 15,
+      "sha256": "3c62f5f33209153175542e480c4dd6331c073b92a8d0fe22bc400386fecb47fc"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/CONTENDER-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/AGGREGATE-CLOSED.json",
+      "bytes": 598,
+      "sha256": "792a65e96bc6e00dcabc98cdf9b95ee06cdfad1254f2456889d134632025652e"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/OWNER-TERMINAL.json",
+      "bytes": 364,
+      "sha256": "ee931864e42080f07a57a485051d98a779624a4b6ee2fbd0a5139da3f9cf0b10"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/OWNER-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/OWNER-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-canonical-io-probe-33ea18d4743b4dbe81bc09feb6b8147c/OWNER-RETURN.json",
+      "bytes": 3271,
+      "sha256": "b20210fba6692db07fe2ae5fcc1c6691299037ee4d2f8f374dd2ee73ee18b180"
+    }
+  ],
+  "narrow_qualification": [
+    "Root-existing singleton EX barrier pinned directory307225492/barrier307225493; IO then UnisonCPU00..07 bundle acquired, independent process fresh descriptor contends before any CPUrequest.",
+    "Parent retained IO+CPU FD copies through workergroup actual census/reap; all known copies closed; ONE fresh whole IO\u2192CPU bundle reacquired and closed.",
+    "Actual parent terminal collected separately, no unknown marker. No canonical holder transfer/inheritance claim; disposable transfer test remains separate.",
+    "No payload/SDK/Adobe/nativeUI/compiler/media commands, physical leaf topology/device isolation/fairness/performance/production dispatcher qualification or live bulk join.",
+    "Root manifest bytes/state not changed by runtime test. consumerIntegrationQualified remainsfalse until actual consumers separately integrated/qualified; no silent state promotion.",
+    "Old241da556 remains expiredunstarted. SeparateRoot33ea18d4/2519623d consumedonce; Unisonpendingv4request superseded unstarted, no extraadmission/test/payload successor implied."
+  ]
+}

@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL [canonical EX_GLOBAL probe](tests/qualification/canonical-io-probe-actual-20261016.json)
+PASS/CLOSED under freshRoot33ea18d4 reschedule22ac585e/admission2519623d:
+owner82843 initialterminal7efd2e/0/no session, worker82844reaped0/othersabsent,
+independentcontender82845wait0/busytrue. ParentheldIO+CPU00..07FDsthroughgroup
+settlement, closed, ONEfreshwholeIO→CPUbundle reacquired+closed. Allpins unchanged,
+barrier307225493/directory307225492 preserved, unknownabsent/resourcesreleased.
+NO payload/SDK/Adobe/UI/compiler/topology/productiondispatcher/isolation claim.
+Rootmanifest remains unchanged/unqualifiedconsumerflags; actualscopedreceipt only.
+Old241expiredunstarted; pendingUnisonv4request supersededunstarted byRoot33ea.
+No extra test/bulkjoin/payload successor grant; Rootnotifiedactualclosureimmediately.
+
 PhotoV45 actualclosed/released. Canonical lock-only [fresh v4 request](doc/shared-physical-io-canonical-probe-request-v4.json)
 prepared after verifying ALLv3source pins unchanged and priorworkspaceabsent.
 Driver/backend/limits unchanged; NEWworkspace+admissionpath prevents expired
