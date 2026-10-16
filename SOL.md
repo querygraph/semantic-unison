@@ -4,6 +4,12 @@
 
 ## Current checkpoint — 2026-10-15
 
+PhotoV45 actualclosed/released. Canonical lock-only [fresh v4 request](doc/shared-physical-io-canonical-probe-request-v4.json)
+prepared after verifying ALLv3source pins unchanged and priorworkspaceabsent.
+Driver/backend/limits unchanged; NEWworkspace+admissionpath prevents expired
+241da556reuse. Actualpriorguard2df62f/1 createdNOprobe/IOlock/CPUtokens.
+Currentv4source-onlyNOTadmitted/dispatched; no resourcehold or auto-successor.
+
 Actual [private-tag local clone controls](tests/qualification/private-tag-local-source-clone-actual-20261016.json)
 PASS/CLOSED:8cases(stock/Ox×classicLE/BE×cloneoff/auto),24actualCLIwait0,
 exactmetadatachangedoutput/priorreceiverinode preserved/no-opFIVEstable. Owner81876

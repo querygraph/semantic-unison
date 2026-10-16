@@ -1,0 +1,115 @@
+{
+  "schema": "firstpair-finite-canonical-io-probe-request/1",
+  "state": "REQUESTED_NOT_ADMITTED_NOT_DISPATCHED",
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v4.json",
+    "bytes": 6702,
+    "sha256": "443d033b26af5558ba13b367a0f59bada262ee4676821934822abcd80df23802"
+  },
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/shared-physical-io-canonical-qualification-plan-v4.json",
+    "--admission",
+    "/private/tmp/unison-canonical-io-probe-ADMISSION-v4.json"
+  ],
+  "workspace": "/private/tmp/unison-canonical-io-probe-03e3968c395a4a668820abaaffe35a45",
+  "workspace_observed_absent": true,
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe.py",
+      "bytes": 8591,
+      "sha256": "63e235f4ad0afc0ba278613dd8163678796f2d556f1ebf4c49cdfeb3bbb46018"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/canonical_io_probe_test.py",
+      "bytes": 2578,
+      "sha256": "0c66a5d4cfa9f4238c6b82a19744e531393b082766f994d3df884f1f3fedfda3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 10664,
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "bytes": 18749552,
+      "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json",
+      "bytes": 5585,
+      "sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json",
+      "bytes": 2106,
+      "sha256": "4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/SHARED-PHYSICAL-IO-POOL-v1.json",
+      "bytes": 1500,
+      "sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-physical-io-consumer-contract-v2.json",
+      "bytes": 5519,
+      "sha256": "d260893ef5161e2a0e376f9fba356fd33e5e2c5ed37d023a432b82f8a48a1d5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool_test.py",
+      "bytes": 11620,
+      "sha256": "dbac45c518ed42e76fae0564d58dc84498f98fa1787f0ab1371fd3cb70d80c1a"
+    }
+  ],
+  "limits": {
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "max_python_children": 2,
+    "owned_worker_group_seconds": 60,
+    "contender_wait_seconds": 10,
+    "preflight_and_postgroup_metadata": "Outside worker-group ceiling; bounded local source/manifest reads only. No hard whole-parent wall cap claimed.",
+    "media_payload_bytes": 0,
+    "native_adobe_sdk_compiler_operations": 0,
+    "pool_file_writes": 0,
+    "log_budget_bytes": 2097152,
+    "log_limit_scope": "Fixed metadata-only protocol has bounded small expected messages; no RLIMIT/aggregate byte counter in this probe."
+  },
+  "prior_actual_state": {
+    "expired_admission": "241da5560756d330c6ff0669234ecd45c26e7cc375fcd2da9ddaa84858cbca18",
+    "actual_guard_terminal": {
+      "chunk": "2df62f",
+      "exit": 1,
+      "running_session": false
+    },
+    "probe_dispatch_count": 0,
+    "prior_workspace_observed_absent": true
+  },
+  "checks_unix": 1792115267.199977,
+  "required_root_action": "Separate fresh exact command/plan-bound finite lock-only admission at v4 path with start_deadline_unix; source request alone never dispatches.",
+  "scope": "No payload/SDK/Adobe/compiler/nativeUI/physical-leaf proof or production dispatcher grant. Existing singleton EX_GLOBAL and Unison00..07 only; actual parent/group/FD closure before release."
+}
