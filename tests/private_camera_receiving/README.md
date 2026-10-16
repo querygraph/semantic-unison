@@ -27,6 +27,17 @@ whole-source clone marker. [Twenty preparation controls](../qualification/camera
 passed with mocked invocations and tiny original inputs only. The outer
 admission/clone/execution/aggregate audit is still required before any real use.
 
+`worker.py` now composes two serial same-compiler stock/Ox cases with a retained
+borrowed-input descriptor, native epoch fencing before/after calls, one shared
+invocation journal, and persisted partial case records. Its phase changes
+irreversibly before transport may start; failures preserve their original
+outcome rather than relabeling a missing result as no-start. [Twenty-three
+preparation controls](../qualification/camera-worker-source-controls-actual-20261016.json)
+pass using only tiny original fixtures and mocked boundaries. The worker has no
+CLI/default camera input. Its eventual admitted entrypoint must retain uncertain
+descriptor carriers and its parent must independently audit calls and aggregate
+closure before release. Native clone and actual camera transport remain unrun.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 
