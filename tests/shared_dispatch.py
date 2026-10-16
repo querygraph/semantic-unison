@@ -332,7 +332,8 @@ def run(target, argv, output, credits, *, io_admission=None):
                 closure = settle(child, time.monotonic() + 2)
                 if target == MIXED_TARGET:
                     from mixed_validation.parent import bind_exit
-                    bind_exit(external,closure['returncode'])
+                    exit_proof=bind_exit(external,closure['returncode'])
+                    write(output / 'SHARED-WORKER-EXIT-AUDIT.json',exit_proof)
                 if target in (SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET):
                     require(not result['complete'] or closure['returncode']==0,'complete SDK matrix contradicts failed worker exit')
                 require(result['complete'] or closure['returncode'] != 0,

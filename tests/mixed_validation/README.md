@@ -250,3 +250,23 @@ canonical IO acquisition. Dispatcher source integration is not yet composed
 actual-lock/native qualification. Next: actual disposable inherited-process
 controls, immutable compiled-probe/build/dependency inventory preparation, and
 fresh reviewed one-use native admission. No current mixed native grant exists.
+
+## Actual disposable inherited-lock refusals
+
+`lifecycle.py --controls` now starts two real Python workers through the mixed
+dispatcher using private inner flock files. A nine-description worker passes the
+inherited guard and deliberately refuses before the probe kernel; an eight-
+description worker refuses the guard. Exact source-plan loading and independent
+parent zero-call/failed-prefix audit run in both cases. Admission, entry script
+and expected inventory are explicit disposable-control doubles; no canonical
+IO barrier is acquired. The parent now persists SHARED-WORKER-EXIT-AUDIT after
+actual reap and exit/result binding, separately from the pre-reap prefix audit.
+
+[Actual qualification](../qualification/mixed-validation-lifecycle-actual-20261016.json)
+passed: workers3552/3554 genuinely reaped7/groups absent, all inner descriptors
+closed/fresh locks reacquired; containing child3551 reaped0/group absent and
+outer Unison8 closed. Owning terminal06bb6e/0/no session. The predecessor run
+before separately persisted exit evidence is preserved. No compiled probe,
+SDK, ExifTool, camera/Photo data or canonical IO use. This qualifies known
+pre-probe refusal composition; successful compiled-probe inheritance and unknown
+retention composition still need evidence before a real mixed native request.

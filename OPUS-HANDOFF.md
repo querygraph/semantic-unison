@@ -251,7 +251,17 @@ Initial regression import failures allclosed/preserved; corrected eight suites/
 8f6368/0/no running session. Receipt mixed-validation-dispatch-source-actual.
 No SDK/camera/canonicalIO acquired. Actual inherited-process qualification and
 immutable compiled-artifact/dependency inventory remain outstanding; no nativegrant.
-Next: actual inherited9FD lifecycle/compiled artifact preparation and actual
+**Actual disposable inherited-refusal composition now passed:** lifecycle.py
+starts two real workers via mixed shared dispatch/private inner flock locks.
+Nine descriptors pass guard then deliberately refuse before probe; eight refuse
+guard. Source plan/prefix audit real; admission/entry argv/inventory explicit
+doubles. Parent now persists SHARED-WORKER-EXIT-AUDIT after actual worker reap.
+Workers3552/3554 reaped7/groups absent/inner locks closed+freshly reacquired;
+containing3551 reaped0/group absent/outerCPU8 closed, actual06bb6e/0/no session.
+Receipt mixed-validation-lifecycle-actual preserves predecessor without separate
+exit receipt. No compiledprobe/SDK/ExifTool/Photo/canonicalIO use. Known refusal
+composition only; success-probe inheritance/unknown retention remain open.
+Next: successful inherited-probe/unknown composition, compiled artifact preparation and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
