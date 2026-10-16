@@ -1,5 +1,8 @@
 # Implementation review entry point
 
+For complete continuation state, exact pending request, ownership rules and next
+steps, read [OPUS-HANDOFF.md](../OPUS-HANDOFF.md). Keep it updated at material checkpoints.
+
 This branch is unfinished. Use this map to review production changes before
 examining the larger historical evidence archive. The pinned upstream base is
 `8772d26a2eb77cfd0cb6da81807e81f24f51044c`; current branch work is on
