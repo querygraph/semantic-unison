@@ -161,3 +161,15 @@ SDK verdict protocol remains synthetic and endpoint binaries are original test
 code, so no actual stock/Ox receiving or SDK validation follows. The next step
 is to freeze current exact source/build/prerequisite pins into a distinct
 multi-file receiving plan/request and coordinate its finite IO/SDK window.
+
+A fresh [multi-file receiving V1 request](sdk-multifile-receiving-request-v1.json)
+and [exact plan](sdk-multifile-receiving-plan-v1.json) are now frozen, NOT admitted
+or dispatched. Metadata checks verify159 execution pins, exact dispatcher argv,
+unchanged generated-input eight-field epochs and current production build
+sources (294 entries/compiler). Both historical428-entry build inventories
+have one explicitly disclosed nonproduction difference: tests/workers/test.ml.
+Binary/tool hashes remain historical until fresh owned-IO verification. Proposed
+scope is two receiving seeds/four qualified single-thread SDK calls on two
+retained generated DNG inputs, clone-only preparation, Unison8 plus EXglobal.
+Photo's current two-original render window takes priority; request review and
+separate scheduling do not authorize overlapping native/IO dispatch.

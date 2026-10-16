@@ -1,0 +1,37 @@
+{
+  "state": "METADATA_CHECKED_NOT_ADMITTED_NOT_DISPATCHED",
+  "plan_sha256": "6fc3a45b822f444a73da093798dfdcef3cfbc1517b3846faafdafeff9f9ac1e5",
+  "request_sha256": "6a12c677626448ad520fe29df3253a6e890ac6bd9cd125cbe218ab1f9cdfb684",
+  "checked_plan_passed": true,
+  "exact_dispatch_metadata_passed": true,
+  "execution_sources": 159,
+  "build_inventory": [
+    {
+      "label": "stock",
+      "inventory_entries": 428,
+      "production_entries_checked": 294,
+      "production_current": true,
+      "changed_nonproduction_entries": [
+        "tests/workers/test.ml"
+      ]
+    },
+    {
+      "label": "ox",
+      "inventory_entries": 428,
+      "production_entries_checked": 294,
+      "production_current": true,
+      "changed_nonproduction_entries": [
+        "tests/workers/test.ml"
+      ]
+    }
+  ],
+  "scope": "Canonical manifest metadata and disposable admission-shaped fixture only; no IO acquisition, binary/SDK execution or fixture payload read. Historical binary hashes await fresh under-IO verification.",
+  "canonical_cpu8_closed": true,
+  "workspace": "/private/tmp/u-smr-metadata-5oiqcxh3",
+  "owner_tool_terminal": {
+    "chunk_id": "0c7434",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal; no child dispatch in metadata check."
+  }
+}
