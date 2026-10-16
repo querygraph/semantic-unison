@@ -40,3 +40,27 @@ with all such extents inside the payload remains semantically ineligible until
 the remaining rules are established. Keep unknown layouts on exact ordinary
 fallback. No current source-tag allowlist or frozen slice request changed in
 this review.
+
+## Safety flag and candidate geometry
+
+The [DNG1.7.1 specification, printed page41](https://helpx.adobe.com/content/dam/help/en/camera-raw/digital-negative/jcr_content/root/content/flex/items/position/position-par/download_section_733958301/download-1/DNG_Spec_1_7_1_0.pdf)
+distinguishes the DNGPrivateData contract from MakerNoteSafety's description of
+EXIF MakerNote preservation. Both discuss self-contained relative references and
+byte-order independence. A writer's flag does not give our parser the private
+field grammar needed to verify those properties. It also does not identify the
+Adobe wrapper's embedded vendor.
+
+A focused production-linked regression now proves that current profiles/0 and/1
+do not use MakerNoteSafety=1 as a private-tag bypass. Original classic TIFF
+fixtures in both byte orders accept the scalar flag alone but decline an EXIF
+MakerNote child and a DNGPrivateData block. Stock and Ox each passed four scalar
+baselines/eight refusals; all compiler/test/outer groups and CPU8 closed, actual
+session30095/5049a3/0.
+[Raw evidence](../tests/qualification/private-safety-actual-20261017.json) binds
+production sources and compiler hashes. No SDK, camera data or fuzz campaign.
+
+The pinned MakerNotes table's Hasselblad branch (around161–175) explicitly uses
+a generic unknown table and a special base rule. This is a source example of
+why tag-shaped geometry is insufficient, **not an identification of our sample**.
+Our observed33-entry table is still vendor-unrecognized. No production
+allowlist, negotiated profile or source metadata was changed.

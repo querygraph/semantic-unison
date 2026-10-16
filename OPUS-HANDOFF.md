@@ -26,6 +26,15 @@ Sealed notice01a146d9-2eed. Metadata-only seal construction TypeError19bf7b/1
 runtime/audit/resources repeated. No currenthold; old prepared/pending notes
 below are historical, do not replay. Next: vendor-specific grammar/reference
 closure source work from saved geometry, then separately qualified profile.
+Independent follow-up checked DNG1.7.1 page41: MakerNoteSafety describes EXIF
+MakerNote preservation and does not supply private pointer grammar or identify
+the MakN vendor. Added focused production-linked tests/semantic/private_safety.ml
+and serial stock/Ox runner; four scalar baselines/eight private refusals per
+compiler PASS (both profiles/bothorders, explicit safe flag1). Actualsession
+30095/5049a3/0, four compiler/test groups plusouter18617 reaped0; CPU8 closed.
+Receipt private-safety-actual-20261017.json. No SDK/media/fuzz/production edits.
+Pinned MakerNotes Hasselblad branch is only a special-base/unknown-table source
+example; do NOT identify the sample from its tag-shape resemblance.
 
 **Previous mixed runtime (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69
 was discovered fresh, exact request3e76df16/plan0fd5d23f/326sources/9prereqs/
