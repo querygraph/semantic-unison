@@ -79,3 +79,17 @@ the live artifact, establish parent/FD closure or infer sampling coverage.
 reparse the saved three-snapshot component result and reject eleven corruptions.
 A separate unavailable-frame case passes without zero counters. No new probe,
 SDK or payload was invoked; child/group and canonical Unison8 tokens closed.
+
+`tests/sdk_host_matrix/shared_observed.py` composes the observed child call and
+probe adapter under an exact four-field contract (canonical path, SHA, sample
+limit, interval). Its independent audit checks every returned probe outcome.
+The SDK parent auditor accepts a separately supplied observation contract and
+otherwise rejects unexpected observation records. No current SDK entrypoint
+selects this mode; it still requires a versioned plan/source/dispatcher closure.
+
+[Composed-call controls](../../tests/qualification/sdk-observed-call-component-actual-20261016.json)
+passed on one original Python child plus two actual OS probes, with missing
+probe-reap evidence and changed-budget records rejected. Nine existing parent
+audit controls also passed. CPU8 and all test/probe groups closed; zero SDK,
+photo payload or EXglobal IO calls occurred. This is component integration,
+not a new native admission or resource measurement on SDK work.
