@@ -1,5 +1,29 @@
 # Mixed validator, metadata helper and worker control
 
+## Latest actual native result
+
+Mixed V1 ran once and [PASSED/CLOSED](../qualification/mixed-validation-v1-actual-20261017.json):
+actual owning session59209/terminalcedf13/exit0/no running session; parent8085,
+worker8086 reaped0/other group members absent before reap, CPU8 and EXglobal
+closed. Two stock/Ox probes each ran one actual single-thread SDK helper, one
+readonly installed ExifTool request and16 hash tasks through the shared runtime.
+SDK raw digests valid/decode success/errors0, with four warnings each preserved.
+Metadata source/version fields and backend2192MiB/64-credit accounting passed.
+The parent rehashed both disposable native clones under owned IO; all326 source
+postpins and the retained generated input's eight-field epoch matched. Sealing
+read metadata/source only, not image payload. Exact raw outcomes and ten direct
+artifact pins are in the sealed return.
+
+Admission00d8de55 is consumed once; workspace
+`/private/tmp/unison-mixed-native-v1-e3d4f770baf243db915be0b3fdc0be9d` preserves
+OWNER-TERMINAL/OWNER-RETURN, raw journal and independent audits. Actual terminal
+was queued immediately, before sealing. No retry/successor or continuing hold.
+This is one generated-input functional/accounting scope, not CPU compute
+overlap, hard RSS/thread/FD limits, quiet throughput, camera/pixel/corpus or
+production qualification. Root independent adoption may follow separately.
+The preparation/unexecuted/pending sections below are historical checkpoints;
+their immutable request/build bytes remain preserved.
+
 `probe.ml` links the current compiler-matched production runtime, validator,
 external-helper bridge and worker implementations. It starts one require-mode
 validator, one metadata request and sixteen hashes in the same six-credit

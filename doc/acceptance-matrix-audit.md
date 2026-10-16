@@ -2,6 +2,16 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+The [actual mixed SDK/ExifTool/hash V1](../tests/qualification/mixed-validation-v1-actual-20261017.json)
+now advances rows9/12: two stock/Ox probes, two single-thread SDK helpers, two
+readonly ExifTool requests and32 shared hash tasks. Actual59209/cedf13/0/no
+session; worker/probe/helper groups and CPU8/EXglobal closed, parent disposable
+byte checks/all326 source pins/input epoch match. SDK errors0/rawvalid/decode
+success retain four warnings each. Declared backend2192MiB/64 credits is symbolic
+accounting, not RSS/FD peaks or hard limits. Shared functional completion does
+not prove simultaneous CPU computation, quiet scaling, representative inputs
+or whole-goal acceptance. Admission00d8de55 is consumed, no replay/successor.
+
 ## Hash-backend source reconciliation
 
 The [current source/receipt rebind](../tests/qualification/hash-backend-source-audit-20261017.json)

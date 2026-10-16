@@ -1,10 +1,31 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:33:15Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Latest checkpoint: actual mixed SDK/ExifTool/hash V1 PASS/CLOSED, owner59209/cedf13/0.
+This supersedes prior mixed-request pending/unexecuted/absent observations.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
+
+**LATEST RUNTIME (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69
+was discovered fresh, exact request3e76df16/plan0fd5d23f/326sources/9prereqs/
+interpreter/deadline/unusedworkspace revalidated, then dispatched ONCE. Owning
+session59209 initial87a8e5 terminalcedf13/exit0/NO running session; parent8085,
+worker8086 actuallyreaped0/othergroupmembersabsent-before-reap. Two stock/Ox
+probes/2actualSDKsingle/2readonlyExifTool/32hash tasks passed. Both SDK frames
+rawdigestvalid/decodeSUCCESS/errors0/**warnings4 each retained**. Parent source/
+disposableclone byte checks and backend2192MiB+64credits passed; CPU8+EXglobal
+closed, all326sourcepostpins/borrowed8field epoch unchanged. Actual terminal
+sent immediately in Rootqueue01a146c4-af06, no reportsealing resourcehold.
+Sealed tests/qualification/mixed-validation-v1-actual-20261017.json63631B
+SHAa828f2166927fc5f97b60162850f9f45931973b87ff128a1255b2fb54bdcf20e;
+OWNERRETURN3800B SHAe4f15f69d2a31e96f13a2aaa35b58794d84718089f887d5b6e8228039ee4fe24
+under /private/tmp/unison-mixed-native-v1-e3d4f770baf243db915be0b3fdc0be9d.
+Rawjournal/ownerterminal/parentexit/independentpostaudit+10directpins preserved.
+No camera/pixels/corpus/production, quietthroughput/CPUcomputeoverlap/hardcaps
+inference. Admission CONSUMED, no retry/successor. Root independent adoption
+pending separately; no currentUnisonresourcehold. Historical pending notes below
+do not authorize another dispatch or claim fresh probes remain unexecuted.
 
 The full SOL.md implementation goal is **active and incomplete**. The user
 requested this handoff because usage limits are approaching, and requested that
