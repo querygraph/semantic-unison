@@ -1,0 +1,527 @@
+{
+  "schema": "unison-sdk-observed-host-actual/1",
+  "request": "doc/shared-sdk-host-request-v2.json",
+  "admission_sha256": "735810e60f9a0917fdb9f84e5bd916be85b1a644c4b980b78774f10aa10e32f6",
+  "owner_return": {
+    "path": "/private/tmp/u-shm-v2-36d2e4bba9/OWNER-RETURN.json",
+    "bytes": 15736,
+    "sha256": "fcfda60e509d26e4621d929fa7b9d4de078c82cec0a891ebdafb774f39fa8b3d"
+  },
+  "state": "ACTUAL_PASSED_CLOSED",
+  "actual_terminal": {
+    "session_id": 39043,
+    "initial_chunk_id": "4849c4",
+    "terminal_chunk_id": "ef80c4",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "Faithful transcription of actual owning write_stdin result collected by assistant"
+  },
+  "audit": {
+    "attempted_direct_calls": 12,
+    "all_attempted_direct_children_and_groups_settled": true,
+    "functional_status": "PASSED",
+    "functional_audit": {
+      "functional_results": [
+        {
+          "index": 1,
+          "codec": "uncompressed",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 2,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 3,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 2,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 4,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 6,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 5,
+          "codec": "jpeg",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 6,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49159936,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 7,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49503154,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 8,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 12,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 50452246,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 9,
+          "codec": "jxl",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 10,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 119889977,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 11,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 142719090,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 12,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 10,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 233987414,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        }
+      ],
+      "calls": 12,
+      "experimental_calls": 9,
+      "full_matrix_complete": true,
+      "aggregate_group_settlement_proved": false,
+      "parent_terminal_proved": false,
+      "io_cpu_fd_closure_proved": false,
+      "resource_release_authorized": false,
+      "os_thread_scaling_proved": false,
+      "hard_rss_cap_proved": false,
+      "pixel_equivalence_proved": false,
+      "runtime_qualification_requires_actual_owned_receipts": true
+    },
+    "aggregate_parent_fd_closure_proved": false,
+    "resource_release_authorized": false,
+    "process_observation_audits": [
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 2,
+        "available_samples": 2,
+        "missing_samples": 0,
+        "probe_children_settled": 2,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 3,
+        "available_samples": 3,
+        "missing_samples": 0,
+        "probe_children_settled": 3,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 2,
+        "available_samples": 2,
+        "missing_samples": 0,
+        "probe_children_settled": 2,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 13,
+        "available_samples": 13,
+        "missing_samples": 0,
+        "probe_children_settled": 13,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 13,
+        "available_samples": 13,
+        "missing_samples": 0,
+        "probe_children_settled": 13,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 8,
+        "available_samples": 8,
+        "missing_samples": 0,
+        "probe_children_settled": 8,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      },
+      {
+        "samples": 4,
+        "available_samples": 4,
+        "missing_samples": 0,
+        "probe_children_settled": 4,
+        "observed_child_settled": true,
+        "parent_and_fd_settlement_proved": false,
+        "resource_release_authorized": false,
+        "scope": "returned sampled per-process records; no peak, tree total, hard cap or artifact rehash proof"
+      }
+    ]
+  },
+  "counts": {
+    "sdk_calls": 12,
+    "probe_children": 62,
+    "available_samples": 62,
+    "missing_samples": 0
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-shm-v2-36d2e4bba9/OWNER-TERMINAL.json",
+      "bytes": 236,
+      "sha256": "60cbc9d0bfa75ba5898d9496df8d8a5b486d8cd3b1e8505c46cd37965ad40f53"
+    },
+    {
+      "path": "/private/tmp/u-shm-v2-36d2e4bba9/SHARED-START.json",
+      "bytes": 17144,
+      "sha256": "2b2945699b4f95c63cf58144d694eb69ec0d9fa8e9b9934446450f40765d2973"
+    },
+    {
+      "path": "/private/tmp/u-shm-v2-36d2e4bba9/RESULT.json",
+      "bytes": 269335,
+      "sha256": "7bc3442ab273c2c0d17368f0bbcd1d12b0b87bb636cca527b203af19703d74b2"
+    },
+    {
+      "path": "/private/tmp/u-shm-v2-36d2e4bba9/SHARED-SERVER-AUDIT.json",
+      "bytes": 13222,
+      "sha256": "48a58399f1d9fc8428609ae5c1832007e5314d78ada9a03e0756e2d272c51f51"
+    },
+    {
+      "path": "/private/tmp/u-shm-v2-36d2e4bba9/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "72436896313ca16df2df961782727d4fc96346c7104b2108b7e25cbdcc2bbe78"
+    }
+  ],
+  "scope": "12 serial generated-input SDK calls with sampled per-process OS observations; not peaks/tree totals/hardRSS/thread caps/calibratedCPU/speedup/pixels/production"
+}

@@ -126,3 +126,13 @@ the separately tested OS observer, with missing observations preserved and
 actual settlement independent of sampling; any native execution needs a new
 source-bound admission. Broader semantic eligibility and publication/fault
 coverage remain open independently of SDK resource observations.
+
+The [observed shared-eight SDK V2 run](../tests/qualification/sdk-shared-host-v2-actual-20261016.json)
+is now PASSED/CLOSED: actual39043/ef80c4/0,12 SDK calls plus62 independently
+audited probe children, all worker/group/FD/CPU/IO ownership closed.
+[Per-call observations](../bench/sdk-shared-host-v2-observations-20261016.md)
+include actual2/6 OS-thread samples on JPEG/JXL and bounded RSS snapshots.
+This closes the pending V2 request state, not hard resource limits, peaks,
+cancellation, pixels or speedup. Admission735810e6 is consumed, never reusable.
+Real multi-file receiving/SDK overlap remains separate; its new worker/case/
+clone/transport/parent libraries have source/tiny injected controls only.
