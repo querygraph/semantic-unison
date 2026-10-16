@@ -189,3 +189,23 @@ pass. A failed final worker save explicitly clears complete before recording
 failure. These selected controls do not prove power-loss recovery or hard RSS
 limits. The future admitted entrypoint must use this persistence and preserve
 unknown descriptor ownership instead of treating the JSON file as resource release.
+
+## Exact-admission entry and shared target (source only)
+
+`execute.py` and `synthetic-concurrent-receive` now bind a fixed synthetic plan,
+all current execution sources, the qualified interpreter and the one compiled-in
+fake validator path/hash/build. External input fields and real SDK mode refuse.
+The parent requires a fresh exact IO admission before namespace creation; the
+worker binds actual parent/child/command and nine inherited IO/CPU descriptions.
+It uses qualified durable persistence and retains unknown close outcomes.
+The shared parent runs the independent result audit before aggregate reap/FD close;
+there is no CPU-only or partial-credit route. Existing camera source fences remain.
+
+`fake_validator.py` is original test software, not Adobe: it accepts only two
+fixed tiny payload hashes within the explicit private receiving namespace and
+emits a synthetic receipt after a short controlled delay. It is never a
+photographic/semantic validity oracle. No runtime request/admission exists yet.
+[23source controls](../qualification/concurrent-entry-dispatch-source-controls-actual-20261016.json)
+cover entry/metadata/resource guards and existing SDK/shared-IO regression paths.
+FD/canonical-acquisition/worker hooks are mocks. Finite actual inherited-bundle
+and complete dispatcher fault controls remain before any receiving request.

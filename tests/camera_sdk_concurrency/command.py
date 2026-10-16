@@ -35,7 +35,7 @@ def command(directory, *, binary, tool):
     argv=[binary['path'],str(directory/'left'),'ssh://localhost/'+str(directory/'right'),
         '-sshcmd',str(directory/'launcher.py'),'-servercmd',binary['path'],
         '-batch','-auto','-fastcheck','false','-times',*flags]
-    overrides={'UNISON':str(directory/'state'),'UNISON_SYNC_BENCH_BINARY':binary['path'],
+    overrides={'UNISON_CONCURRENT_SYNTHETIC_ROOT':str(directory),'UNISON':str(directory/'state'),'UNISON_SYNC_BENCH_BINARY':binary['path'],
         'UNISON_SYNC_BENCH_SERVER_FLAGS':json.dumps(flags),
         'UNISON_SYNC_BENCH_PROXY_RECEIPT':str(directory/'seed-proxy.json'),
         'UNISON_SYNC_BENCH_SOCKET':str(socket),'UNISON_SYNC_BENCH_DEADLINE_SECONDS':'125'}
