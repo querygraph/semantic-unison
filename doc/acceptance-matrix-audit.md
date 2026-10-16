@@ -12,6 +12,15 @@ all supported filesystem properties or platforms. V1 failure/recovery and V2
 pre-exec refusal remain preserved; this separately admitted V3 is consumed once.
 The source-prepared/unstarted descriptions below retain their predecessor scope.
 
+The [actual camera-derived generic fallback control](../tests/qualification/camera-receiving-actual-20261016.json)
+adds two same-compiler stock/Ox cases with six seed/update/no-op calls on native
+clones of one193851848B retained copy. Append-trailer updates decline semantic
+eligibility and use immutable receiver clone bases; output hashes, old-reader
+bytes and no-op epochs pass. All call/worker groups and IO/CPU descriptors closed.
+This improves exact receiving evidence, while real-camera semantic eligibility,
+private-reference closure, SDK/photographic validity and broader corpus remain
+open. V4 is consumed once; no automatic successor or payload access follows.
+
 | Requirement | Existing scoped evidence | Still open |
 | --- | --- | --- |
 | 1. Exactness | Independent SDE/SDR vectors, complement/full hashes, scoped synthetic materialization, exact CLI/no-op controls. [conformance](../tests/semantic/conformance/qualification-20261013.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Full source-selected fork/property state across all supported filesystem and publication families is not established by kernel vectors. |

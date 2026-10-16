@@ -1,0 +1,94 @@
+{
+  "schema": "unison-camera-receiving-qualification/1",
+  "owner_return": {
+    "path": "/private/tmp/u-cr-v4-c391e8f02a/OWNER-RETURN.json",
+    "bytes": 4353,
+    "sha256": "4701c2481f93c74dc5dd22391d854cd241e840e78560fce4e16b0c72d6e20f96"
+  },
+  "actual_owner_terminal": {
+    "path": "/private/tmp/u-cr-v4-c391e8f02a/OWNER-TERMINAL.json",
+    "bytes": 307,
+    "sha256": "e037af420c986478b3fedf3055b1b134e2c10ca877df7c11c33832a808e92e32"
+  },
+  "references": [
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-receiving-request-v4.json",
+      "bytes": 13465,
+      "sha256": "420aba0823d1aad675136fb6aa8f12c00ef6f951ea834ec80e271cdf9a912f32"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/camera-receiving-plan-v4.json",
+      "bytes": 8426,
+      "sha256": "f7456d0968a7688856bb108671826ac4dacd8f406b05f26b98ea4bcd4d0241be"
+    },
+    {
+      "path": "/private/tmp/unison-camera-receiving-admission-v4.json",
+      "bytes": 7812,
+      "sha256": "dc2eb9b9194b0955c230f3ee9684a27b74128dabc8532629e1f1b0f96f90c017"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/OWNER-TERMINAL.json",
+      "bytes": 307,
+      "sha256": "e037af420c986478b3fedf3055b1b134e2c10ca877df7c11c33832a808e92e32"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/SHARED-START.json",
+      "bytes": 7387,
+      "sha256": "0481740f7b2c11c289a7a5e9b5bbdd1ef5a7ed11076db8c564678177022179bd"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/EXECUTOR-START.json",
+      "bytes": 42,
+      "sha256": "e89a40a2460ca671f6777d4d240e3b7ad83480911f777da4baa2909413bbbd6d"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/RESULT.json",
+      "bytes": 83098,
+      "sha256": "6248ef498ddf7976e0efaa55e65df2d502f3847193a96ac68e20dd568a5fbd38"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/SHARED-SERVER-AUDIT.json",
+      "bytes": 315,
+      "sha256": "454d463d44224556e082740baa5dd184085b23615549ab16d1475f3a28d5758a"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "36b987c7b94961fce203b94cefafd1a216146d9d1d7f81874b6e4c634effffc3"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-cr-v4-c391e8f02a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "audit": {
+    "attempted_cli_invocations": 6,
+    "server_not_created_invocations": 0,
+    "all_attempted_client_server_supervisor_settled": true,
+    "functional_success_inferred": false,
+    "scope": "one camera-derived exact fallback control; not corpus/SDK/photographic validity",
+    "functional_status": "PASSED",
+    "cases": 2
+  },
+  "updates": [
+    {
+      "label": "stock",
+      "semantic_declined": true,
+      "receiver_basis_clone_count": 1,
+      "wall_seconds": 3.4648339340346865
+    },
+    {
+      "label": "ox",
+      "semantic_declined": true,
+      "receiver_basis_clone_count": 1,
+      "wall_seconds": 3.4789118909975514
+    }
+  ],
+  "scope": "one copied camera-derived generic receiver-basis fallback; not semantic/SDK/photographic validity or representative corpus"
+}

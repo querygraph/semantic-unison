@@ -4,25 +4,27 @@
 
 ## Current checkpoint — 2026-10-16
 
-Real-camera receiving is now prepared for exact source review as a separate
-bounded fallback test: [camera requestV4](doc/camera-receiving-request-v4.json),
-[planV4](doc/camera-receiving-plan-v4.json). Both are UNADMITTED/UNSTARTED at this
-checkpoint.53 execution sources, current stock/Ox Make artifacts, fixed retained
-Unison-owned clone identity, two native-clone-only disposable senders and six
-serial CLI calls are pinned. Only metadata of the retained input was checked;
-no fresh source payload read/hash occurred. The source kernel, strict transport,
-result audit, exact-admission/inherited-FD parent protocol, actual disposable
-lifecycle and39 tiny/mock/refusal controls have scoped evidence. V1 was
-superseded unstarted after fixing borrowed-open failure recording; old bytes
-remain preserved. This is not semantic/private-reference/camera-corpus/SDK
-qualification, and neither a free resource pool nor this plan authorizes IO.
+One camera-derived **generic fallback receiving control PASSED/CLOSED**:
+[camera qualification](tests/qualification/camera-receiving-actual-20261016.json),
+[exact V4 request](doc/camera-receiving-request-v4.json) and
+[plan](doc/camera-receiving-plan-v4.json). Fresh admissiondc2eb9b9 was consumed
+once before its deadline. Actual owner29392/3b4789/exit0/no session; worker77717
+reaped0/group absent; six client/supervisor/server/pump settlements audited,
+Unison00..07 and EXglobal descriptors closed, all53 execution pins unchanged.
+Two native-clone-only disposable senders came from the unchanged193851848B
+retained Unison-owned copy. Stock-stock and Ox-Ox each passed seed/update/no-op,
+full receiving SHA, retained old-reader bytes and unchanged no-op epochs.
+Each appended-trailer update explicitly declined semantic eligibility and used
+one immutable receiver clone basis. No source payload rehash, Photo-original
+access, SDK, photographic validity, semantic safety, physical savings or timing
+claim follows. V1–V3 are preserved unstarted/superseded; V4 is consumed, no replay
+or automatic successor. Initial metadata guard placeholder refusal occurred
+before executor/workspace/locks and is retained in the return.
 
-The close-uncertainty successor preserves each uncertain descriptor's pre-close
-identity and original failure through nested cleanup and the retaining entrypoint.
+The close-uncertainty successor preserves every uncertain descriptor pre-close
+identity and original failure through nested cleanup and retaining entrypoint.
 [39 disposable controls](tests/qualification/camera-entry-retention-actual-20261016.json)
-include mocked retention selection and failed-prefix audit rejection. V1–V3
-remain preserved/unstarted and superseded; only a fresh V4 admission can authorize
-its exact payload control.
+include mocked retention selection and failed-prefix audit rejection.
 
 Current [stock/Ox configured-worker parity](tests/qualification/shared-worker-parity-actual-20261016.json)
 adds64 original tiny jobs/compiler at pool sizes1/2/4/8,48 exact completions and
@@ -31,9 +33,12 @@ all groups/tokens closed and per-pool descriptor baselines restored. Pool8 uses
 six CPU permits plus owner2 within standing8, not eight simultaneous execution,
 a hard resource cap, independent algorithm proof or throughput result.
 
-The full goal stays ACTIVE while that one IO decision is pending. Independent
-source/build/audit work can continue on Unison00..07. Do not mark the whole goal
-blocked solely because one finite qualification window awaits coordination.
+The full goal remains ACTIVE: representative real-camera semantic/private
+reference closure and receiving SDK validation remain distinct next work, along
+with broader failure/platform/resource coverage in the acceptance matrix.
+Routine source/build/audit work continues in Unison00..07; new IO/SDK/Photo slots
+need their existing separate coordination. Pending windows alone do not block
+the whole implementation goal.
 
 Generated property-transfer V3 now [PASSED/CLOSED](tests/qualification/shared-property-io-actual-20261016.json)
 once under fresh admissione333f952. Actual owner24600/e4fe28/exit0/no session;
