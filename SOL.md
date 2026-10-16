@@ -13,7 +13,11 @@ disposable inheritance remains qualified separately, not newly canonical.
 [Four inert admission controls](tests/qualification/canonical-io-probe-inert-controls-actual-20261016.json)
 86540f/0 CLOSED/tokens00..07closed; no canonical IO lock opened. Root source/budget
 ACK naming older privateDNGbe25 is NOT admission to currentc29 executor; current
-ancestry2345ed50 pin and uninstrumented8GiB acceptance retained, old pins historical.
+ancestry2450B/2345ed50 pin and uninstrumented8GiB acceptance retained.
+Receipt-name correction:87b83d62... identifies READONLY-COPY-IDENTITY.json, NOT
+SOURCE-COPY-ANCESTRY.json. Earlier ancestry2449B observation has no historical
+hash restated or inferred. Current SOURCE-COPYb2e3b13a/job652e9110 pins remain
+as supplied; this wording correction adds no test/payload gate or runtime grant.
 Payload executor IO integration/phase-deadline successor remains next after
 actual canonical qualification. No source payload/SDK/native access.
 
