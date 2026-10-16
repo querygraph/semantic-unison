@@ -1,0 +1,67 @@
+{
+  "schema": "unison-private-makn-source-review/1",
+  "inputs": [
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/DNG.pm",
+      "bytes": 33853,
+      "sha256": "4f86d9260d226c6703f02699a58177993b182c000110fc5aa12247b7e61b90a4",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 71169296,
+        "st_size": 33853,
+        "st_mtime_ns": 1734713027000000000,
+        "st_ctime_ns": 1736306254276188103
+      }
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/MakerNotes.pm",
+      "bytes": 71302,
+      "sha256": "e889491010117df0ba19fa63edd91d37aa5710994ec9f6b489d4b001d6bd4b58",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 71169380,
+        "st_size": 71302,
+        "st_mtime_ns": 1734713027000000000,
+        "st_ctime_ns": 1736306254326833626
+      }
+    },
+    {
+      "path": "/usr/local/Cellar/exiftool/13.10/libexec/lib/Image/ExifTool/Exif.pm",
+      "bytes": 268124,
+      "sha256": "a8454b8ed0f39b709a882566102442ec66f236bfc123b559558ee065519c2e7a",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 71169302,
+        "st_size": 268124,
+        "st_mtime_ns": 1734713027000000000,
+        "st_ctime_ns": 1736306254278598214
+      }
+    }
+  ],
+  "source_inventory": {
+    "path": "/Users/alexy/src/unison/doc/mixed-exiftool-package-inventory-v1.json",
+    "sha256": "f918c0425c87adbc2bd26e6f86e30dc5ed77fc8665c5c4aa22d1c80da142f014"
+  },
+  "source_ranges": [
+    {
+      "module": "DNG.pm",
+      "lines": "50-69,140-157,680-755"
+    },
+    {
+      "module": "MakerNotes.pm",
+      "lines": "1667-1700"
+    }
+  ],
+  "findings": [
+    "Adobe MakN framing delegates vendor selection to the MakerNotes table; the wrapper alone is not vendor recognition.",
+    "The maker directory location is selected by vendor LocateIFD; offset zero is only our explicit candidate assumption.",
+    "Original-offset base correction is conditional on vendor subdirectory Base rules, not a universal extent proof.",
+    "The parser contains a JPEG-conversion header workaround; it is historical compatibility handling, not a normative safe profile.",
+    "External original MakerNote references can be missing from a converted DNG; decoder metadata extraction does not prove complete pointer closure."
+  ],
+  "tools_executed": false,
+  "photo_or_retained_media_opened": false,
+  "semantic_eligibility_proved": false,
+  "pending_slice_request_modified": false,
+  "next_action": "Interpret any bounded candidate result only as geometry. A future private profile needs an explicit vendor identity/header grammar, base rule, complete private pointer graph, overlap partition and exact-byte vectors; ambiguous cases keep ordinary fallback."
+}

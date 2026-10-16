@@ -3,12 +3,22 @@
 This is an active work queue against SOL.md, not a completion claim or a new
 permission policy. Historical receipts retain their exact source snapshots.
 
-Current next runtime request is [mixed SDK/ExifTool/hash V1](mixed-validation-request-v1.json),
-prepared with326 source pins and nine prerequisites. It is not admitted or
-executed as of source readback1792188297 (admission/workspace absent). Source and
-tiny/disposable composition cover success, known refusal and missing-outcome
-retention; fresh probes built without execution. This pending IO window does
-not block independent source/document review or authorize a tool replacement.
+The mixed SDK/ExifTool/hash V1 has [actually passed and closed](../tests/qualification/mixed-validation-v1-actual-20261017.json):
+owner59209/cedf13/0/no session, two stock/Ox probes, two SDK calls, two readonly
+ExifTool requests and32 hash tasks. All326 source pins and group/CPU8/EXglobal
+closures were checked and Root independently adopted the result. Four SDK
+warnings each remain visible. The admission is consumed; no pending mixed hold
+or unexecuted probe remains. Broader resource/scaling/corpus requirements stay
+open.
+
+Current runtime request is the [bounded private MakN candidate slice](private-maker-slice-request-v1.json):
+13 execution pins/nine prerequisites, <=3078 requested media bytes/two preads,
+Unison8+EXglobal, no SDK/Adobe/original access. Final38 source controls and four
+real disposable workers passed, including uncertain-close retention/recovery.
+The request was sent for separate Root review/scheduling; no grant or payload
+execution is inferred. A pending IO review does not block independent work.
+The [pinned MakN source review](private-makn-source-review.md) identifies the
+vendor grammar/reference rules still needed beyond candidate table geometry.
 
 [Hash backend source reconciliation](acceptance-matrix-audit.md#hash-backend-source-reconciliation)
 confirms macOS already uses CommonCrypto and historical native/reference checked

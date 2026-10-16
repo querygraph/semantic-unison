@@ -96,8 +96,18 @@ now specify one at-most3078B/two-pread run, Unison8+EXglobal,10s worker/60s
 parent observation (not hard kill),13executionpins+9prereqs. Workspace
 /private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa and
 /private/tmp/unison-private-maker-slice-admission-v1.json remain absent.
-No grant or dispatch inferred. Next action: submit exact frozen request for
-Root source review/fresh finite IO scheduling; dispatch only after fresh grant, then investigate a vendor-specific reference contract from
+No grant or dispatch inferred. Exact request45c2b707/7040B was queued to Photo
+01a146d6-31b5; branch pushed throughc7976eb. Pending review is not a resource
+hold. Source-only follow-up rehashed the pinned ExifTool13.10 DNG/MakerNotes/Exif
+modules against the existing package inventory: vendor handler selection,
+LocateIFD and conditional base rules prevent treating a generic in-bounds
+classic table as private closure. Receipt private-makn-source-review-20261017
+and doc/private-makn-source-review.md capture the next explicit vendor grammar/
+reference/overlap requirements. No ExifTool execution/media read, no frozen
+request changes. milestone-next-work lead and acceptance row12 now reflect the
+completed mixed actual result instead of stale pending status.
+Next action: await fresh source review/finite IO grant for the frozen slice,
+continue independent source work, and dispatch only after fresh grant, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
