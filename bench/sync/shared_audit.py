@@ -1,5 +1,7 @@
 """Finite functional-scope audit; does not relax the timed matrix audit."""
 import itertools
+import stat
+import properties as property_controls
 from batch_audit import require
 
 
@@ -16,6 +18,8 @@ def audit_shared(result):
         require(params[key] == value, 'shared parameter differs: ' + key)
     require(result['purpose'] == 'finite shared-harness qualification', 'shared scope differs')
     require(set(result['binaries']) == {'stock', 'ox'}, 'shared stock/Ox pair required')
+    property_mode = params.get('property_removal_controls', False)
+    require(type(property_mode) is bool, 'typed property control flag required')
     expected = set(itertools.product(('stock', 'ox'), expected_parameters['modes'], (1, 2, 3)))
     seen = set()
     calls = 0
@@ -28,6 +32,29 @@ def audit_shared(result):
         require(all(sample[name] is True for name in ('exact_result_and_unchanged_basis',
                     'noop_preserved_receiver_inode', 'staging_cleaned', 'private_fixture_removed')),
                 'shared row preservation failed')
+        if property_mode:
+            require(all(sample.get(name) is True for name in ('source_selected_properties_removed',
+                        'retained_old_readers_preserved', 'noop_properties_preserved')),
+                    'shared property/old reader preservation failed')
+            fixtures = sample['fixtures']
+            names = {item['name'] for item in fixtures}
+            require(len(fixtures) == len(names) == 2, 'two property fixture identities required')
+            old, current = sample['old_reader_snapshots'], sample['noop_property_epochs']
+            require(set(old) == set(current) == names, 'property witness names differ')
+            for item in fixtures:
+                before, after = old[item['name']], current[item['name']]
+                require(all(type(before[k]) is int for k in ('st_dev','st_ino','st_size','st_mtime_ns','st_mode'))
+                        and all(type(after[k]) is int for k in ('st_dev','st_ino','st_size','st_mtime_ns','st_ctime_ns','st_mode')),
+                        'typed property witnesses required')
+                require(before['st_size'] == after['st_size'] == 2*1048576
+                        and stat.S_ISREG(before['st_mode']) and stat.S_IMODE(before['st_mode']) == 0o640
+                        and stat.S_ISREG(after['st_mode']) and stat.S_IMODE(after['st_mode']) == 0o400,
+                        'property witness size/mode differs')
+                require(before['sha256'] == item['before_sha256']
+                        and before['xattr_hex'] == property_controls.OLD_VALUE.hex()
+                        and before['fork_hex'] == property_controls.OLD_FORK.hex()
+                        and (before['st_dev'],before['st_ino']) != (after['st_dev'],after['st_ino']),
+                        'old reader content/properties or replacement identity differs')
         for stage in ('seed_sync', 'update_sync', 'noop_sync'):
             run = sample[stage]
             require(run['returncode'] == 0 and not run['timed_out'] and not run['capture_truncated'],

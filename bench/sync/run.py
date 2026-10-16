@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Synthetic, exact-byte end-to-end Unison sync measurements, without Adobe."""
 import argparse
+from contextlib import ExitStack
 import datetime
 import hashlib
 import json
@@ -20,6 +21,8 @@ import zlib
 from fixtures import create, edit, equal_files, sha256, validate_dimensions
 import partitions
 import artifact_pins
+import properties as property_controls
+from invocation_journal import Journal
 from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
@@ -104,8 +107,16 @@ def binary_info(path):
 def save(path, value):
     path.parent.mkdir(parents=True, exist_ok=True)
     temporary = path.with_suffix(path.suffix + ".new")
-    temporary.write_text(json.dumps(value, indent=2) + "\n")
+    with temporary.open('w') as stream:
+        stream.write(json.dumps(value, indent=2) + "\n")
+        stream.flush()
+        os.fsync(stream.fileno())
     temporary.replace(path)
+    directory = os.open(path.parent, os.O_RDONLY)
+    try:
+        os.fsync(directory)
+    finally:
+        os.close(directory)
 
 
 def internal_counters(log, mode, files, size, *, primary_reads=False):
@@ -243,6 +254,8 @@ def main():
                         help="fixed finite smoke: two 2 MiB files, workers 1/2, no warmup, one sample")
     parser.add_argument("--shared-qualification", action="store_true",
                         help="finite shared smoke: two 2 MiB files, workers1/2, six to eight credits including two owner credits")
+    parser.add_argument("--property-removal-controls", action="store_true",
+                        help="Darwin shared functional fixtures: old fork/xattr removal and retained readers")
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
     parser.add_argument("--measure-primary-reads", action="store_true",
                         help="opt-in worker primary-reader counters; not total application/disk reads")
@@ -270,6 +283,8 @@ def main():
     if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2, 3] if args.shared_qualification else [1, 2]
+    if args.property_removal_controls and (not args.shared_qualification or platform.system() != "Darwin"):
+        parser.error("property-removal controls require the Darwin shared qualification matrix")
     if args.shared_qualification and (args.loopback_cpu_credits != 8 or args.orchestration_cpu_credits != 2):
         parser.error("shared qualification requires eight credits including two owner credits")
     if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
@@ -340,6 +355,7 @@ def main():
                     "warmups": args.warmups, "repetitions": args.repetitions,
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
+                    "property_removal_controls": args.property_removal_controls,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
                     "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers),
                     "orchestration_cpu_credits":args.orchestration_cpu_credits,
@@ -361,11 +377,13 @@ def main():
         save(args.output, result)
         print("Prepared metadata only; no sync or measurement executed.")
         return
-    with tempfile.TemporaryDirectory(prefix="unison-sync-bench-", dir="/private/tmp") as temporary:
+    with tempfile.TemporaryDirectory(prefix="unison-sync-bench-", dir="/private/tmp") as temporary, ExitStack() as reader_owners:
         work = Path(temporary)
         capacity=os.statvfs(work)
         available=capacity.f_bavail*capacity.f_frsize
         required=4*size*args.files+64*1048576
+        if args.property_removal_controls:
+            required += size * args.files * len(configurations)
         result["fixture_capacity"]={"available_bytes_before_run":available,
             "required_bytes":required,"model":"four full corpus extents plus64MiB headroom, one row at a time; not APFS allocation proof"}
         if available<required:raise RuntimeError("insufficient private fixture capacity")
@@ -391,6 +409,8 @@ def main():
                     ("FilesystemType", "DeviceIdentifier", "VolumeUUID", "TotalSize", "Internal")})
         save(args.output, result)
 
+        journal = Journal(result, lambda: save(args.output, result))
+
         def invoke(label, binary, mode, worker, directory, stage):
             assert sha256(binary) == metadata[label]["sha256"], "binary changed"
             flags = ["-debug", "copy", "-debug", "semantic"] if mode != "reference" else []
@@ -401,6 +421,8 @@ def main():
                           "-semanticworkers", str(worker), "-maxthreads", str(max(2, worker))]
                 if mode == "semantic":
                     flags += ["-semanticdng"]
+            if args.property_removal_controls:
+                flags += ["-rsrc", "true", "-xattrs", "true", "-perms", "0o777"]
             command = [str(binary), str(directory / "left")]
             receipt_path = directory / (stage + "-proxy.json")
             socket_path = directory / (stage + ".sock")
@@ -416,13 +438,18 @@ def main():
                 command += ["ssh://localhost/" + str(directory / "right"),
                             "-sshcmd", str(work / "launcher.py"), "-servercmd", str(binary)]
             command += ["-batch", "-auto", "-fastcheck", "false", "-times", *flags]
+            journal.begin({'label': label, 'mode': mode, 'workers': worker,
+                           'directory': str(directory), 'stage': stage}, command)
             try:
-                return measure_invocation(command, env, args.timeout, work / "proxy.py",
+                outcome = measure_invocation(command, env, args.timeout, work / "proxy.py",
                                           use_proxy=mode != "source-clone",
                                           strict_group_settlement=args.shared_qualification)
             except InvocationFailure as error:
                 result["failed_invocation"] = error.outcome
+                journal.finish(error.outcome)
                 raise
+            journal.finish(outcome)
+            return outcome
 
         try:
             for phase, count in (("warmup", args.warmups), ("measured", args.repetitions)):
@@ -437,14 +464,25 @@ def main():
                         start = time.monotonic()
                         fixtures = [create(directory / "left" / f"image-{index:04d}.dng", size,
                                            args.packet_bytes, index) for index in range(args.files)]
+                        if args.property_removal_controls:
+                            for item in fixtures:
+                                property_controls.initialise(directory / "left" / item["name"])
                         preparation_seconds = time.monotonic() - start
                         binary = binaries.get(label, references.get(label))
                         seed = invoke(label, binary, mode, worker, directory, "seed")
+                        old_readers = {}
                         for item in fixtures:
                             name = item["name"]
                             assert sha256(directory / "right" / name) == item["before_sha256"]
                             os.link(directory / "right" / name, directory / "basis" / name)
+                            if args.property_removal_controls:
+                                handle = reader_owners.enter_context((directory / "right" / name).open('rb'))
+                                observed = property_controls.old_reader_snapshot(handle.fileno())
+                                assert observed['sha256'] == item['before_sha256']
+                                old_readers[name] = (handle, observed)
                             item["expected_after_sha256"] = edit(directory / "left" / name, item)
+                            if args.property_removal_controls:
+                                property_controls.remove_source(directory / "left" / name)
                         sample = {"label": label, "mode": mode, "workers": worker,
                                   "phase": phase, "repetition": repetition,
                                   "fixture_preparation_seconds": preparation_seconds,
@@ -458,6 +496,7 @@ def main():
                             primary_reads=args.measure_primary_reads and mode != "reference")
                         verification_start = time.monotonic()
                         inodes = {}
+                        selected_property_epochs = {}
                         for item in fixtures:
                             name = item["name"]
                             for replica in ("left", "right"):
@@ -465,6 +504,11 @@ def main():
                             assert equal_files(directory / "left" / name, directory / "right" / name)
                             assert sha256(directory / "basis" / name) == item["before_sha256"]
                             inodes[name] = (directory / "right" / name).stat().st_ino
+                            if args.property_removal_controls:
+                                property_controls.verify_removed(directory / "left" / name)
+                                selected_property_epochs[name] = property_controls.noop_snapshot(directory / "right" / name)
+                                handle, observed = old_readers[name]
+                                assert property_controls.old_reader_snapshot(handle.fileno()) == observed
                         sample["verification_seconds"] = time.monotonic() - verification_start
                         sample["noop_sync"] = invoke(label, binary, mode, worker, directory, "noop")
                         for item in fixtures:
@@ -472,6 +516,16 @@ def main():
                             assert (directory / "right" / name).stat().st_ino == inodes[name]
                             assert sha256(directory / "right" / name) == item["expected_after_sha256"]
                             assert sha256(directory / "basis" / name) == item["before_sha256"]
+                        if args.property_removal_controls:
+                            for item in fixtures:
+                                name = item['name']
+                                assert property_controls.noop_snapshot(directory / "right" / name) == selected_property_epochs[name]
+                                handle, observed = old_readers[name]
+                                assert property_controls.old_reader_snapshot(handle.fileno()) == observed
+                            sample.update(source_selected_properties_removed=True,
+                                          retained_old_readers_preserved=True, noop_properties_preserved=True,
+                                          old_reader_snapshots={name:value[1] for name,value in old_readers.items()},
+                                          noop_property_epochs=selected_property_epochs)
                         expected_names = {item["name"] for item in fixtures}
                         assert {path.name for path in (directory / "right").iterdir()} == expected_names
                         assert {path.name for path in (directory / "left").iterdir()} == expected_names

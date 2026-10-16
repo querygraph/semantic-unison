@@ -82,6 +82,8 @@ def run(target, argv, output, credits, *, io_admission=None):
             and script.resolve() == script, 'shared target requires canonical repository script path')
     require(target != 'private-dng-framing-input' or io_admission is not None,
             'framing input has no CPU-only runtime route')
+    require('--property-removal-controls' not in argv or io_admission is not None,
+            'property-removal matrix has no CPU-only runtime route')
     require_ownership_support()
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]

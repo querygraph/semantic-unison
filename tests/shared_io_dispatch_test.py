@@ -15,6 +15,12 @@ class Controls(unittest.TestCase):
                 d.run('private-dng-framing-input', argv, Path('/none'), 8)
             read.assert_not_called()
 
+    def test_property_matrix_has_no_cpu_only_route(self):
+        argv=['/python',str(d.ROOT/'bench/sync/run.py'),'--property-removal-controls']
+        with patch.object(d.Pool,'read') as read:
+            with self.assertRaises(ValueError):d.run('sync-functional',argv,Path('/none'),8)
+            read.assert_not_called()
+
     def test_framing_input_exact_source_superset(self):
         argv = ['/python', str(d.ROOT/'tools/private-dng-framing/admitted.py'), '--plan', '/fixed']
         base = {Path(d.__file__), d.ROOT/'tests/manual.py', d.ROOT/'tests/shared_io_pool.py',

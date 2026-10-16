@@ -21,4 +21,18 @@ The [machine-readable map](../tests/qualification/acceptance-scope-audit-2026101
 
 Next practical gate: bounded copy-only real-camera DNG eligibility and exact receiving, using explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
 
+An optional generated-fixture property-removal matrix is now source-prepared
+(`SYNC_PROPERTY_REMOVAL_CONTROLS=1` on the exact-admitted shared IO route).
+It checks named xattr/native resource-fork removal, readonly mode, retained old
+reader bytes/properties and unchanged no-op epochs. The CPU-only dispatcher
+refuses this route. [Source controls](../tests/qualification/property-journal-source-controls-actual-20261016.json)
+cover eight four-byte Darwin fixtures, seven fake-call journal cases and the
+existing admission/lifecycle controls. This is not actual property receiving
+qualification. Each invocation now persists intent before dispatch and its
+returned outcome before row verification, with file and directory fsync. Missing
+outcomes remain unknown; neither a journal entry nor a nonzero outcome proves
+settlement. Failed partial-matrix release and actual property-transfer controls
+remain to be qualified before scheduling the new IO run. Historical admitted
+source pins and completed runs are unchanged.
+
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.

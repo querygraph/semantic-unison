@@ -111,6 +111,7 @@ def shared_resource_plan(target, environment):
             'declared_peak_credits': declared_peak,
             'selftest_endpoint_workers': selftest_endpoints,
             'build_and_selftest_are_serial': bool(selftest_endpoints),
+            'retained_property_reader_limit': 36 if target == 'sync-functional' and environment.get('SYNC_PROPERTY_REMOVAL_CONTROLS') == '1' else 0,
             'inspector_workers': inspector_workers,
             'compiler_jobs': jobs, 'endpoint_workers': endpoints,
             'orchestration_credits': overhead, 'cpu_token_indexes': list(range(credits)),
@@ -130,6 +131,10 @@ def command(target, output, environment):
                 and environment.get('SHARED_CPU_CREDITS') is not None
                 and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
                 'IO mode requires pinned admission, shared CPU and complete job with qualified closure audit')
+    property_controls = environment.get('SYNC_PROPERTY_REMOVAL_CONTROLS')
+    require(property_controls is None or (property_controls == '1' and target == 'sync-functional'
+            and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)),
+            'property-removal controls require explicit shared8 functional IO admission')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
@@ -241,6 +246,8 @@ def command(target, output, environment):
                          '--compiler', label + '=' + receipt['compiler'],
                          '--expected-binary-sha256', label + '=' + receipt['binary_sha256'],
                          '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
+        if property_controls == '1':
+            argv += ['--property-removal-controls']
         return argv + ['--shared-qualification' if shared is not None else '--qualification', '--measure-primary-reads',
                        '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
                        ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [
