@@ -35,4 +35,12 @@ settlement. Failed partial-matrix release and actual property-transfer controls
 remain to be qualified before scheduling the new IO run. Historical admitted
 source pins and completed runs are unchanged.
 
+A separate [journal-prefix source qualification](../tests/qualification/journal-prefix-source-controls-actual-20261016.json)
+now distinguishes known nonzero call settlement from functional success. Its
+pure audit requires ordered intent/outcome bindings, client and supervisor
+group-before-reap proofs, server exit/PID/command binding and joined input pump.
+Missing server creation evidence remains unknown. The auditor is not yet wired
+to dispatcher release: complete functional audit remains mandatory there until
+failed-prefix owner-binding/lifecycle controls qualify that integration.
+
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.
