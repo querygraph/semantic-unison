@@ -200,3 +200,12 @@ live observation and one-shot CPU-close uncertainty retaining IO. Seven new
 inert-owner cases plus four reused audit cases pass with actual outerCPU8 closure.
 MockPID900001 is never an OS child and mock close failures never call OS close;
 no native/canonical IO or actual new-target lifecycle is inferred.
+
+[Actual new-target entry composition](../qualification/sdk-shared-entry-lifecycle-actual-20261016.json)
+now exercises three worker children:9inheritedFDs reach a deliberately refused
+kernel,8refuse before it, and a third runs12 original fake validators through the
+actual worker/kernel/child/persistence/parent audit path. All worker and helper
+groups settle, parent disposable grants close and fresh exclusive reacquisition
+passes. Actual tiny fixture/fake-helper hashes are checked. Canonical inventory,
+admission/child argv and interpreter SHA remain explicit doubles; these controls
+are not canonical IO admission or actual SDK/native plan qualification.

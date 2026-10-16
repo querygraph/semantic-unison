@@ -1,0 +1,145 @@
+{
+  "schema": "unison-sdk-shared-entry-lifecycle/1",
+  "state": "COMPONENT_PASSED_CLOSED",
+  "actual_terminal": {
+    "tool": 42980,
+    "chunk": "86cddb",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_entry_lifecycle.py",
+      "bytes": 6148,
+      "sha256": "a6096dba984b82bd8f2a597d84329ef0bdaeedf0ee402fa9eb1369b36a999fa0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute.py",
+      "bytes": 9115,
+      "sha256": "2caa82a24b6490dfa9ac160fc3dff7c51d409674e84ad4d94ec6763c1131cbf3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py",
+      "bytes": 3110,
+      "sha256": "22df61c51420934c7e79e226d87cf420020df3f8f328943954c2b126aeb6cc0b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_kernel.py",
+      "bytes": 2661,
+      "sha256": "76cf82ba5e4e5b12717522d8b9df30f5cc4dab7bec1ee456d0f26f6a4b4c756f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child.py",
+      "bytes": 4010,
+      "sha256": "ec72c4a7772599d91ee2d7bf1cccabf1f01e593d72458c8f308f9a9b09a31c59"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit.py",
+      "bytes": 3335,
+      "sha256": "e4e09d4324e3c8f5fa7ecfa17af51c3dcb49b421ad4d733dc919e3ab4a601d8a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_component.py",
+      "bytes": 4387,
+      "sha256": "2258ce982bfe339b22de999ca5204ed7c8d909b99311db03ff272fc808e85433"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 19956,
+      "sha256": "eb2de22a29e9854fb7ee00a57b15fa741efc3ba142c7efc797aad72905138c7c"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-lifecycle-20261016b/SHARED-START.json",
+      "bytes": 1136,
+      "sha256": "b618a7df5b9e86eb47591e86f1208cd180b7b5d872681e70ef8c0c81f1d4ebbb"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-lifecycle-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "eae0074043a3c98d693bf24f8ecfe0cb60d7095c01b55b5eb7428ee6c96553c6"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-lifecycle-20261016b/SHARED-STDOUT.txt",
+      "bytes": 138,
+      "sha256": "ff95bec0b98a6441c35171b262d3d764533854893cd65ac66784e4d423cc8c2c"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-entry-lifecycle-20261016b/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/RESULT.json",
+      "bytes": 13755,
+      "sha256": "1726fa4d9f0d800fd8d2050f592e4ff8ca253867ec06329951dd6f2283186699"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-8/RESULT.json",
+      "bytes": 237,
+      "sha256": "65a030d431fd24c096b7ea1b35ed04de87d51581d52b031ffba5630bc0b49b8e"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-8/SHARED-START.json",
+      "bytes": 15870,
+      "sha256": "6e044bbf0b8224e300b45a7c2441a6d931812e406881616cafeb1e56c61319fc"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "786cc1181d53d2a01bdd512af4e69b1214580b7e3b2882106c3f0909c343983d"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-8/SHARED-SERVER-AUDIT.json",
+      "bytes": 242,
+      "sha256": "5ae700e3035d8bbf233628e120473338d26ae63aad042125c89ba09db3362c4b"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-7/RESULT.json",
+      "bytes": 241,
+      "sha256": "a4077ab51aa05a20d4351f24bb0dba06845c41cbf45f1fd30c28feb06be14d21"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-7/SHARED-START.json",
+      "bytes": 15789,
+      "sha256": "87a6d625931c7d117be52aa6f68862cc66bd31aed42775811db88baa0fcff043"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-7/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "6ada62161a4ba4b614def4d7abad6d8b557d55c749f440bc70b7237928200247"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/refuse-7/SHARED-SERVER-AUDIT.json",
+      "bytes": 242,
+      "sha256": "5ae700e3035d8bbf233628e120473338d26ae63aad042125c89ba09db3362c4b"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/fake-8/RESULT.json",
+      "bytes": 54660,
+      "sha256": "2e57707ba917c8aeb949bebcd6e151757268677df8d02ef6db566749232eba78"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/fake-8/SHARED-START.json",
+      "bytes": 15865,
+      "sha256": "7b476e0c696d368d412f51b2922c4ec3fbbe3159414b9db9a73f527dfc4a00bc"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/fake-8/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "59ccf6a2d613a7278e9e1d1faee985b50ff1292051f93a1ddde68d5e549c9cc0"
+    },
+    {
+      "path": "/private/tmp/u-shm-entry-01na7322/fake-8/SHARED-SERVER-AUDIT.json",
+      "bytes": 8745,
+      "sha256": "e7d3368a4fa1c5542ea4b18220e6fd7e222766cb670a642d68c1b39e473f91fb"
+    }
+  ],
+  "scope": "3actualPython workerchildren/newtarget parentaudit/realinheritedFDguard; twozero-callrefusals +onecomplete12originalfakehelpercalls. Admission/canonicalinventory/childargv/interpreterSHA are explicitdoubles; tinyfixtures/fakehelperSHA real. ZeroSDK/Photo/camera/canonicalEXIO.",
+  "actual_worker_children": 3,
+  "actual_original_fake_helpers": 12,
+  "sdk_calls": 0,
+  "limits": "Canonical inventory/admission/childargv/interpreterSHA explicit doubles; no canonicalEXglobal or actual exact-nativeplan binding. Realdisposable9FDguard/readonlytinybytehash/helperhash/journal/groupwait/durablepersist/parentaudit/FDclose. No nativequalification/releasegrant inferred.",
+  "full_goal_complete": false
+}
