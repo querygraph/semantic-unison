@@ -114,3 +114,19 @@ The [subsequent full CLI check](../tests/qualification/io-registration-full-cli-
 rebuilds current stock/Ox Make applications and runs their bounded selftests after
 the IO registration repair. Both actual parents exit0 with groups and CPU tokens
 closed. Dune receipts remain their historical source snapshots.
+
+## Machine-integer accounting boundaries
+
+The [current stock/Ox admission suite](../tests/qualification/admission-integer-boundaries-actual-20261016.json)
+passes28 groups/compiler, including maximal machine-integer payload/descriptor
+budgets. A full `max_int` reservation blocks a positive sibling without wrapping
+its ledger; cancellation removes that pending owner and retirement returns the
+ledger to zero. `min_int` costs refuse before debit. A maximal valid source
+headroom and its complementary consumer envelope sum exactly to the declared
+budget, while headroom one unit above the half-budget bound refuses.
+
+These use declared integer credits and sleeping promises, not massive allocations
+or operating-system descriptor opens. They qualify accounting arithmetic and
+owner transitions, not RSS, live FD peaks, physical IO or whole-process caps.
+Both serial compiler/test groups and the canonical Unison8 owner closed normally;
+no SDK, Photo payload or EXglobal IO was used. Production sources were unchanged.

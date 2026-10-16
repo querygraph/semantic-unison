@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T20:52:55Z. Comparison admission/workspace last checked
+Last updated: 2026-10-16T20:55:41Z. Comparison admission/workspace last checked
 absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -43,6 +43,15 @@ preserves this successor separately from the first five-test result. The accepta
 matrix now reflects the already accepted real multi-file SDK run rather than
 its obsolete pending state. Fresh metadata-only rehash atUnix1792184033 found
 all172 comparison execution pins unchanged, admission/workspace absent.
+
+**Additional resource qualification:** admission suite now has28 groups on both
+pinned compilers, including `max_int` saturated ledgers, queued sibling/cancel,
+`min_int` cost rejection and exact source/consumer headroom partition.
+`tests/qualification/admission-integer-boundaries-actual-20261016.json` records
+actual owner88672/1adabb/0/no session; children85752/85812 reaped0 with other
+group members absent before reap and CPU8 closed. Serial compiles only, no SDK,
+Photo payload or EXIO; arithmetic credits are not hard RSS/FD caps. Production
+sources unchanged; test files are outside the frozen172 comparison closure.
 
 **Current resources:** no Unison job or retained CPU/IO ownership remains from
 our completed work. Latest Photo notices released its relevant window; that is
