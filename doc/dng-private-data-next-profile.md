@@ -87,3 +87,14 @@ short reads, and a virtual maximum directory with exact finite read count.
 The earlier47-check receipt remains historical evidence for the earlier source.
 The existing manual target runs the expanded fixed suite; no fuzz campaign,
 SDK, Adobe or photographic payload is involved.
+
+## Current Dune packaging check
+
+[Current-source stock/Ox Dune builds](../tests/qualification/current-dune-diagnostic-packaging-actual-20261016.json)
+both passed under the standing Unison8-credit grant, serially with2compiler jobs
+each. The424-input source manifests match and were rechecked against the
+checkout; the CLI hashes and diagnostic module's native object/interface artifacts
+were verified. This checks Dune's automatic module discovery, distinct from the
+standalone162-check suite. These were build-only runs: no final CLI/selftest,
+receiving, SDK, Adobe or photographic payload operation. No profile activation
+or general format/corpus qualification follows from successful packaging.

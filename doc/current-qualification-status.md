@@ -52,6 +52,14 @@ output/basis/complement/no-op/staging checks. All direct groups, server waits an
 pumps settled, actual parent exit0, CPU/IO closed. No real-camera eligibility,
 SDK/pixel validity, performance or physical storage savings follows from this.
 
+## Current diagnostic module packaging
+
+[Stock and Ox Dune build-only snapshots](../tests/qualification/current-dune-diagnostic-packaging-actual-20261016.json)
+passed from matching424-input manifests (source headbbe9f60). Dune produced the
+CLI and diagnostic module native/interface artifacts. Both owning tools exited0,
+worker groups reaped, allUnison8 tokens closed. This is packaging evidence, not
+a new CLI selftest/receiving run or semantic eligibility qualification.
+
 ## Acceptance scope audit
 
 The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to

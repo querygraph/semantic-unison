@@ -4,6 +4,14 @@
 
 ## Current checkpoint — 2026-10-15
 
+Current [stock/Ox Dune packaging builds](tests/qualification/current-dune-diagnostic-packaging-actual-20261016.json)
+PASS/CLOSED frommatching424inputmanifests/sourceheadbbe9f60: stock95344/55372/
+4c05a4/0; Ox96295/73195/9d4bc7/0 actualterminals/no sessions. CLIhashesand
+auto-discoveredinactiveDNGnative.cmx/.o/interface.cmi artifacts checked; allinput
+pins rereadcurrent. Twoserialbuilds/jobs2/Unison00..07, bothworkergroupsreaped0/
+tokensclosed. No finalUnisonCLI/selftest/receiving/SDK/Adobe/Photooperation or
+semanticprofileactivation. Runtime8/8 sharing retained, no extraCPUrequest.
+
 StandingUnison8 remains sufficient; no larger CPUrequest. NEW source-only
 [distinct-byte remote fixture v2](doc/private-dng-remote-fallback-request-v2.json)
 prepared after uniformactualPASS (notretry/replacement). Reversebucket/first
