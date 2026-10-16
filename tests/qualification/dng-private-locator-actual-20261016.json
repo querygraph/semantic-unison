@@ -1,0 +1,170 @@
+{
+  "schema": "firstpair-dng-private-ifd0-locator-controls/1",
+  "state": "TWO_COMPILER_162_FIXED_CHECKS_PASSED_CLOSED",
+  "actual_owner_terminal": {
+    "session": 93739,
+    "terminal_chunk": "f1e0b3",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual write_stdin completion"
+  },
+  "start": {
+    "owner_pid": 91150,
+    "child_pid": 91151,
+    "target": "dng-private-framing",
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison/tests/dng_private_data/run.py"
+    ],
+    "token_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "io_mode": "NOT_ACQUIRED",
+    "io_admission": null,
+    "cpu_credits": 8,
+    "unix": 1792117763.6732311,
+    "sources": {
+      "src/dngPrivateData.mli": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89",
+      "src/dngPrivateData.ml": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575",
+      "tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c",
+      "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+      "tests/shared_dispatch.py": "99a9999b08e60e4bfbe2ccc30e3b1c5a7de6a719b2ddddc642f7705a9e6ef2d9",
+      "tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+      "tests/dng_private_data/test.ml": "811b3604530cf92e3cbc247451c22d19b5cb8e3b839384b23038c3036aecb1d7",
+      "tests/dng_private_data/run.py": "cfdfb164a2ae0dc69e429a3330bf74449b3e03071ef22010a2426880832b6c09",
+      "tests/manual.py": "7e7a371a749429a305d22d02f374109e228d07725797081fd771b6ec8f2b4160"
+    }
+  },
+  "closure": {
+    "child": {
+      "pid": 91151,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 91151,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "runtime_artifacts": [
+    {
+      "path": "/private/tmp/unison-private-locator-controls-6acb8c910d654d92/SHARED-START.json",
+      "bytes": 1357,
+      "sha256": "64baebf5cd8b5027a4762c147af5e4ec702f9ef5562aeede257d32a04673c286"
+    },
+    {
+      "path": "/private/tmp/unison-private-locator-controls-6acb8c910d654d92/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "10a236ca045bee9971c2d988a35143240417a8e0e44bcf37e9ce25571f81252b"
+    },
+    {
+      "path": "/private/tmp/unison-private-locator-controls-6acb8c910d654d92/SHARED-STDOUT.txt",
+      "bytes": 1630,
+      "sha256": "e0af1e36a9d12214bbe1689d65bedd4f811a149a780807f1ef9d1134b15115f3"
+    },
+    {
+      "path": "/private/tmp/unison-private-locator-controls-6acb8c910d654d92/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "result": {
+    "state": "TWO_COMPILER_FIXED_FRAMING_CONTROLS_PASS",
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-xga9_o5i",
+    "source_pins": {
+      "/Users/alexy/src/unison/src/dngPrivateData.mli": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89",
+      "/Users/alexy/src/unison/src/dngPrivateData.ml": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575",
+      "/Users/alexy/src/unison/tests/dng_private_data/test.ml": "811b3604530cf92e3cbc247451c22d19b5cb8e3b839384b23038c3036aecb1d7"
+    },
+    "runs": [
+      {
+        "label": "stock",
+        "phase": "compile",
+        "command": [
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "test.ml",
+          "-o",
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "stock",
+        "phase": "fixed-controls",
+        "command": [
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-xga9_o5i/stock/test"
+        ],
+        "returncode": 0,
+        "stdout": "PASS 162 checks; diagnostic locator/framing only, no semantic eligibility\n",
+        "stderr": ""
+      },
+      {
+        "label": "ox",
+        "phase": "compile",
+        "command": [
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "-w",
+          "+a-70",
+          "-warn-error",
+          "+a-70",
+          "dngPrivateData.mli",
+          "dngPrivateData.ml",
+          "test.ml",
+          "-o",
+          "test"
+        ],
+        "returncode": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "label": "ox",
+        "phase": "fixed-controls",
+        "command": [
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-dng-private-framing-xga9_o5i/ox/test"
+        ],
+        "returncode": 0,
+        "stdout": "PASS 162 checks; diagnostic locator/framing only, no semantic eligibility\n",
+        "stderr": ""
+      }
+    ],
+    "semantic_eligibility_qualified": false
+  },
+  "runner_pin": {
+    "path": "/Users/alexy/src/unison/tests/dng_private_data/run.py",
+    "bytes": 1968,
+    "sha256": "cfdfb164a2ae0dc69e429a3330bf74449b3e03071ef22010a2426880832b6c09"
+  },
+  "scope": [
+    "Pure inactive diagnostic locator plus existing Adobe/MakN framing",
+    "Classic TIFF/BigTIFF and both byte orders, selected duplicate/shape/range/header/IFD0 overlap refusals",
+    "Maximum16384IFD0entries/max327712readbytes using virtual sparse input, no private body read",
+    "No DNG profile/registry/inspector/transfer activation or semantic eligibility widening",
+    "No camera/original/preserved clone/SDK/Adobe input, decoding or native call",
+    "No read-syscall instrumentation/physical IO/RSS proof; supplied trusted reader owns file identity fencing"
+  ]
+}

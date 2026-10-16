@@ -26,7 +26,10 @@ Actual [private DA clone/inspection](../tests/qualification/private-dng-clone-in
 closed under one manual IO window: clone SHA/source preservation passed; both
 inspectors safely declined50740. Real-camera semantic eligibility/receiving remain
 unqualified. [Private-data framing groundwork](dng-private-data-next-profile.md)
-now passes47fixedchecks/compiler but is NOT active in profiles0/1.
+now includes an inactive bounded IFD0 diagnostic locator;
+[162fixedchecks/compiler](../tests/qualification/dng-private-locator-actual-20261016.json)
+passed. Neither locator nor framing evidence is an eligibility proof; profiles0/1
+remain unchanged and no camera payload was read in these controls.
 
 [Physical IO coordination](shared-physical-io.md) is now source-proposed with
 an unknown-global barrier and complete-member union planner. Ten pure controls

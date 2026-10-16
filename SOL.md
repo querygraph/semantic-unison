@@ -4,6 +4,15 @@
 
 ## Current checkpoint — 2026-10-15
 
+Inactive `DngPrivateData.locate_ifd0_private` now finds one out-of-line primary
+BYTE50740 beside bounded BYTE[4] DNGVersion, classic/BigTIFF andbothendianness.
+Max16384entries/327712header-directorybytes, selectedduplicate/type/shape/
+range/header+directoryoverlap refusals; NOprivatebodyread/graphclosure/validDNG/
+semanticeligibility proof or profile0/1 activation. [162fixedchecks/compiler](tests/qualification/dng-private-locator-actual-20261016.json)
+stock+Ox actualsession93739/f1e0b3/0 CLOSED/worker91151reaped0/CPU00..07closed.
+No camera/retainedclone/SDK/Photo input; trustedreader file-epoch fencing remains
+caller responsibility. Diagnostic source prerequisite only, not finalprofile.
+
 [Remote fallback aggregate coordinator](tests/private_dng_remote_fallback/README.md)
 source prepared; [15fixed mocked owner controls](tests/qualification/private-remote-owner-controls-actual-20261016.json)
 actual89733/52c049/0 CLOSED/worker89734reaped0/CPU00..07closed. ExactRoot

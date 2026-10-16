@@ -14,6 +14,37 @@ let reject value = match inspect value with Error _ -> check true "decline"
   | Ok _ -> failwith "unsupported or malformed frame admitted"
 let expect value = match inspect value with Ok frame -> frame
   | Error why -> failwith why
+let integer little width value = String.init width (fun j ->
+  let i = if little then j else width-1-j in
+  Char.chr (Int64.to_int (Int64.logand 255L (Int64.shift_right_logical value (i*8)))))
+let tiff ?(big=false) ?(little=true) ?(private_type=1L) ?(private_length=24L)
+    ?(private_offset=512L) ?(version=true) ?(private_tag=true) ?(duplicate=false) () =
+  let field = if big then 8 else 4 and entry = if big then 20 else 12 in
+  let value_at = if big then 12 else 8 in
+  let data = Bytes.make 1024 '\000' in
+  let put at value = Bytes.blit_string value 0 data at (String.length value) in
+  put 0 (if little then "II" else "MM");
+  put 2 (integer little 2 (if big then 43L else 42L));
+  if big then begin put 4 (integer little 2 8L);put 8 (integer little 8 32L) end
+  else put 4 (integer little 4 32L);
+  let count = (if version then 1 else 0) + (if private_tag then 1 else 0) +
+              (if duplicate then 1 else 0) in
+  let count_width = if big then 8 else 2 in
+  put 32 (integer little count_width (Int64.of_int count));
+  let n = ref 0 in
+  let add tag typ length value =
+    let at = 32+count_width+entry* !n in incr n;
+    put at (integer little 2 tag);put (at+2) (integer little 2 typ);
+    put (at+4) (integer little field length);put (at+value_at) value in
+  if version then add 50706L 1L 4L "\001\007\001\000";
+  let private_entry () = add 50740L private_type private_length (integer little field private_offset) in
+  if private_tag then private_entry ();
+  if duplicate then private_entry ();
+  Bytes.to_string data
+let locate value = locate_ifd0_private ~size:(Int64.of_int (String.length value))
+  ~read:(fun at n -> String.sub value (Int64.to_int at) n)
+let reject_tiff value = check (match locate value with Error _ -> true | Ok _ -> false)
+  "malformed diagnostic TIFF admitted"
 let () =
   let value = "Adobe\000" ^ section ~original:0xffffffffL "xyz" in
   let frame = expect value in
@@ -60,4 +91,67 @@ let () =
    | Error why -> failwith why);
   (* Every possible incomplete prefix of a tiny valid frame must decline. *)
   for n=0 to String.length value-1 do reject (String.sub value 0 n) done;
-  Printf.printf "PASS %d checks; framing evidence only, no semantic eligibility\n" !checks
+  List.iter (fun big -> List.iter (fun little ->
+    let value = tiff ~big ~little () in
+    let seen = ref 0 in
+    let read at n =
+      if Int64.add at (Int64.of_int n) > 512L then failwith "locator read private body";
+      seen := !seen+n;String.sub value (Int64.to_int at) n in
+    (match locate_ifd0_private ~size:1024L ~read with
+    | Error why -> failwith why
+    | Ok extent ->
+        check (extent.block_offset=512L && extent.block_length=24L) "private extent";
+        check (extent.is_big_tiff=big && extent.container_byte_order=
+          (if little then Little else Big)) "container layout";
+        check (extent.locator_bytes_read= !seen && !seen=(if big then 72 else 38))
+          "exact locator read count");
+    List.iter reject_tiff [tiff ~big ~little ~private_type:7L ();
+      tiff ~big ~little ~private_length:0L ();
+      tiff ~big ~little ~private_length:(Int64.of_int (if big then 8 else 4)) ();
+      tiff ~big ~little ~private_length:(Int64.succ max_block_length) ();
+      tiff ~big ~little ~private_offset:4L ();
+      tiff ~big ~little ~private_offset:32L ();
+      tiff ~big ~little ~private_offset:1010L ();
+      tiff ~big ~little ~version:false ();
+      tiff ~big ~little ~private_tag:false ();
+      tiff ~big ~little ~duplicate:true ()];
+    let mutated at replacement =
+      let data=Bytes.of_string value in
+      Bytes.blit_string replacement 0 data at (String.length replacement);Bytes.to_string data in
+    reject_tiff (mutated 0 "ZZ");reject_tiff (mutated 2 (integer little 2 41L));
+    reject_tiff (mutated (if big then 8 else 4) (integer little (if big then 8 else 4) 0L));
+    reject_tiff (mutated 32 (integer little (if big then 8 else 2)
+      (Int64.of_int (max_ifd0_entries+1))));
+    if big then begin
+      reject_tiff (mutated 4 (integer little 2 4L));
+      reject_tiff (mutated 6 (integer little 2 1L));
+      reject_tiff (mutated 8 (integer little 8 Int64.min_int))
+    end
+  ) [true;false]) [false;true];
+  let small = tiff () in
+  for n=0 to 37 do reject_tiff (String.sub small 0 n) done;
+  check (match locate_ifd0_private ~size:Int64.max_int ~read:(fun _ _ -> "") with
+    Error _ -> true | Ok _ -> false) "locator short read";
+  check (try ignore (locate_ifd0_private ~size:1024L ~read:(fun _ _ -> failwith "trusted-reader"));false
+    with Failure text -> text="trusted-reader") "trusted reader exception propagated";
+  let little = true in
+  let sparse_header = "II" ^ integer little 2 43L ^ integer little 2 8L ^ "\000\000" in
+  let sparse_table = Bytes.make (max_ifd0_entries*20+8) '\000' in
+  let table_put at s = Bytes.blit_string s 0 sparse_table at (String.length s) in
+  table_put 0 (integer little 2 50706L ^ integer little 2 1L ^ integer little 8 4L ^ "\001\007\001\000");
+  table_put 20 (integer little 2 50740L ^ integer little 2 1L ^ integer little 8 max_block_length ^
+                integer little 8 1000000L);
+  let total = ref 0 in
+  let sparse_read at n = total := !total+n;
+    match at,n with
+    | 0L,8 -> sparse_header
+    | 8L,8 -> integer little 8 32L
+    | 32L,8 -> integer little 8 (Int64.of_int max_ifd0_entries)
+    | 40L,n when n=Bytes.length sparse_table -> Bytes.to_string sparse_table
+    | _ -> failwith "diagnostic locator unexpected or payload read" in
+  (match locate_ifd0_private ~size:Int64.max_int ~read:sparse_read with
+   | Error why -> failwith why
+   | Ok extent -> check (extent.block_length=max_block_length &&
+       extent.locator_bytes_read=max_locator_read_bytes && !total=max_locator_read_bytes)
+       "maximum locator count has finite exact read budget");
+  Printf.printf "PASS %d checks; diagnostic locator/framing only, no semantic eligibility\n" !checks

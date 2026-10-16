@@ -60,3 +60,30 @@ fixtures only and calls no SDK/Adobe/Photo code. It is a finite hand-written sui
 not a fuzz campaign. The [actual receipt](../tests/qualification/dng-private-framing-actual-20261016.json)
 records47 checks/compiler and owned-group/token closure; broader format eligibility
 remains unqualified.
+
+## Inactive primary-directory diagnostic locator
+
+`locate_ifd0_private` now locates one out-of-line BYTE tag50740 in a primary
+directory bearing one BYTE[4] DNGVersion beginning with1. It handles classic
+TIFF/BigTIFF, both byte orders, signed-domain integer checks, bounded directory
+counts, exact reads, duplicate selected tags and selected extent bounds. It
+rejects overlap with the TIFF header or primary directory. At most16384entries
+and327712header/directory bytes are read; the private body is never read by
+this locator. The caller's trusted reader remains responsible for held-file
+identity, size and before/after epoch fencing.
+
+Unknown other tags and other directories are deliberately not interpreted.
+Locating an extent does not prove valid DNG, all-file graph closure, XMP
+disjointness, self-contained private references, vendor identity, rendering
+equivalence or transfer eligibility. It is a diagnostic prerequisite for a
+future separately admitted bounded inspection, not profile0/1 activation.
+No camera or preserved receiving clone was opened to develop or test it.
+
+The [new actual stock/Ox receipt](../tests/qualification/dng-private-locator-actual-20261016.json)
+records162fixedchecks/compiler and actual owning-tool/group/token closure.
+These include the prior framing checks plus four layout/endian combinations,
+malformed directory/selected-entry controls, trusted-reader error propagation,
+short reads, and a virtual maximum directory with exact finite read count.
+The earlier47-check receipt remains historical evidence for the earlier source.
+The existing manual target runs the expanded fixed suite; no fuzz campaign,
+SDK, Adobe or photographic payload is involved.
