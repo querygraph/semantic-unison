@@ -3,6 +3,8 @@ import fcntl
 import os
 from pathlib import Path
 import tempfile
+import subprocess
+import sys
 import unittest
 from unittest.mock import patch
 
@@ -114,6 +116,54 @@ class PoolControls(unittest.TestCase):
     def test_unpinned_policy_cannot_authorize_caller_tokens(self):
         with self.assertRaises(ValueError):
             authorized_unison_tokens(b'{"version":3,"tokens":[8,9]}')
+
+    def test_failed_receipt_write_still_enters_retained_owner(self):
+        from shared_process_owner import retain_after_record
+        class RetainedForTest(BaseException):
+            pass
+        def disk_failure():
+            raise OSError('synthetic full disk')
+        with patch('shared_process_owner.retain_forever', side_effect=RetainedForTest) as retain:
+            with self.assertRaises(RetainedForTest):
+                retain_after_record(disk_failure)
+            retain.assert_called_once_with()
+
+    def test_inherited_description_keeps_lock_after_parent_close(self):
+        lease = self.pool.try_acquire((0,))
+        read_ready, write_ready = os.pipe()
+        child = None
+        try:
+            code = ('import os,sys; fd=int(sys.argv[1]); ready=int(sys.argv[2]); '
+                    'os.fstat(fd); os.write(ready,b"R"); os.close(ready); '
+                    'assert sys.stdin.buffer.read(1)==b"X"; os.close(fd)')
+            child = subprocess.Popen([sys.executable, '-B', '-c', code,
+                                      str(lease.fds[0]), str(write_ready)],
+                                     stdin=subprocess.PIPE, stdout=subprocess.PIPE,
+                                     stderr=subprocess.PIPE, pass_fds=lease.fds + (write_ready,))
+            os.close(write_ready)
+            write_ready = None
+            import select
+            self.assertTrue(select.select([read_ready], [], [], 5)[0])
+            self.assertEqual(os.read(read_ready, 1), b'R')
+            # Deliberate disposable-pool experiment, NOT production release:
+            # closing this parent's copy must not unlock the inherited copy.
+            os.close(lease.fds[0])
+            lease.closed = True
+            self.assertIsNone(self.pool.try_acquire((0,)))
+            stdout, stderr = child.communicate(b'X', timeout=5)
+            self.assertEqual((child.returncode, stdout, stderr), (0, b'', b''))
+            again = self.pool.try_acquire((0,))
+            self.assertIsNotNone(again)
+            self.release(again)
+        finally:
+            if child is not None and child.returncode is None:
+                child.kill()
+                child.communicate(timeout=5)
+            os.close(read_ready)
+            if write_ready is not None:
+                os.close(write_ready)
+            if not lease.closed:
+                self.release(lease)
 
 
 if __name__ == '__main__':

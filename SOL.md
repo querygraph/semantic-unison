@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+Shared entry points now own canonical Unison tokens for build-only and pure
+parser controls. [Actual inheritance/dispatcher qualification](tests/qualification/shared-entrypoints-actual-20261016.json):
+final ten disposable controls PASS (including child-inherited lock retention and
+receipt-write failure retention); real shared parser and command-budget controls
+PASS; stock Make build-only with jobs2 PASS, owner57789/30f8d3/exit0/no session.
+All owned groups were observed without other members before actual wait4; all
+tokens closed. Photo08..15 untouched; Root notified queue01a14211-f272. No built
+Unison executable or Adobe invoked. Shared sync remains explicitly unconnected:
+its separately-sessioned servers need independent closure receipts before token
+release. Physical IO lanes/memory and shared performance remain unqualified.
+`SHARED_CPU_CREDITS=8 make -f tests/Makefile stock-build` now uses retained
+ownership (STOCK_PREFIX required); build-only and parser scopes only.
+
+
 Standing8/8 transition: [eight disposable-pool controls](tests/qualification/shared-pool-controls-actual-20261016.json)
 now PASSED/CLOSED under actual canonical Unison00..07 ownership. Owner61132,
 child61134, actual tool terminal3e0f5f/exit0/no session; child group cleanup

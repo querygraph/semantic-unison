@@ -1,0 +1,262 @@
+{
+  "state": "SHARED_TOKEN_INHERITANCE_AND_BUILD_PARSER_ENTRYPOINTS_PASSED_CLOSED",
+  "policy_sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+  "runs": [
+    {
+      "workspace": "/private/tmp/unison-shared-pool-controls-20261016-002",
+      "actual_parent_terminal": {
+        "chunk": "9f5c6b",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 61563,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 61563,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; no separately-sessioned children admitted"
+        },
+        "tokens_closed": true,
+        "passed": true,
+        "dispatcher_integration_qualified": false,
+        "parent_tool_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-002/CLOSED.json",
+          "bytes": 479,
+          "sha256": "35dbd8e73a4f1033fb04b86a2f42fceb89c04272bdedc736eb72d032b0815c3d"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-002/START.json",
+          "bytes": 813,
+          "sha256": "5bc2535316f2328de990733ef76bf01bd1db78f943f74c9ef72c8811dff031dc"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-002/stderr.txt",
+          "bytes": 107,
+          "sha256": "80813fea2a5c418cf207c936fb2200286c24f040ff6f1c23936712ed80c7e1bb"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-002/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-shared-pool-controls-20261016-003",
+      "actual_parent_terminal": {
+        "chunk": "b4a820",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 62808,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62808,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; no separately-sessioned children admitted"
+        },
+        "tokens_closed": true,
+        "passed": true,
+        "dispatcher_integration_qualified": false,
+        "parent_tool_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-003/CLOSED.json",
+          "bytes": 479,
+          "sha256": "98bc0b5e92d2237734c386e819c69260199ea4d730cb8e997f0ef474b9b9e45f"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-003/START.json",
+          "bytes": 811,
+          "sha256": "133e5cb060e7c61e6b306b2b8d0c96c1dd06929ba7b710b253bf7b6714f0870c"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-003/stderr.txt",
+          "bytes": 109,
+          "sha256": "e1f812f21ec14829e38225ec47971f3cb7b16086c18b5500726bb408c88c46b6"
+        },
+        {
+          "path": "/private/tmp/unison-shared-pool-controls-20261016-003/stdout.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-group-parser-qpq_h_g4",
+      "actual_parent_terminal": {
+        "chunk": "9a959b",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 61579,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 61579,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; no separately-sessioned children admitted"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-group-parser-qpq_h_g4/SHARED-CLOSED.json",
+          "bytes": 411,
+          "sha256": "dcc882caac26a9fc5e31b6ea9768e88013661d53e9067df8fe401da4694bdd5e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-group-parser-qpq_h_g4/SHARED-START.json",
+          "bytes": 766,
+          "sha256": "18b7eed3445df45c9c2459c7e025e0e39b254d399cdafbb1c7ce1bdf09dd0250"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-group-parser-qpq_h_g4/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-group-parser-qpq_h_g4/SHARED-STDOUT.txt",
+          "bytes": 102,
+          "sha256": "900ae2ba1ff658fab3b5c35f3b431185bd07a9a0bb695cb452c7cf17929b84dd"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-73m1fwdo",
+      "actual_parent_terminal": {
+        "chunk": "974be8",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 61676,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 61676,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; no separately-sessioned children admitted"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-73m1fwdo/SHARED-CLOSED.json",
+          "bytes": 411,
+          "sha256": "8ab4fa0ab89d6e5fc96381189666eb73077e1a9683e579ec37d454a597495978"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-73m1fwdo/SHARED-START.json",
+          "bytes": 753,
+          "sha256": "18b0bf704e0304b3ee0df0849708e4f70eec56b14dba04e43b0c07b1f120c3b5"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-73m1fwdo/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-73m1fwdo/SHARED-STDOUT.txt",
+          "bytes": 81,
+          "sha256": "747073f39f08c4e0dbf108c207ef479e3b977313b53b6881255fc5daf49b9eba"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys",
+      "actual_parent_terminal": {
+        "chunk": "30f8d3",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 61746,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 61746,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; no separately-sessioned children admitted"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys/RESULT.json",
+          "bytes": 42817,
+          "sha256": "de6229e351a82b44b0fad07ec863df8b1adb926d0e2997c53ac8d0cdfcbe9411"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys/SHARED-CLOSED.json",
+          "bytes": 411,
+          "sha256": "e2b075fe3616313d7e0abe770432289b0169965c4d14c66db50efc551a4ee123"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys/SHARED-START.json",
+          "bytes": 981,
+          "sha256": "4c4b283b453582b65dda92f2ab5d598ad371e521d7282dc0baac8ffbd24fe199"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-stock-build-ytc4flys/SHARED-STDOUT.txt",
+          "bytes": 176,
+          "sha256": "3010aad6bb844fab1b8dd3f828679105e64fc575c31b436740296549a4631597"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "No shared sync/server-group qualification",
+    "No hard CPU/RSS or physical IO-lane isolation",
+    "No Adobe/SDK/Photo data",
+    "Stock build-only, no resulting binary execution",
+    "Post-build receipt-failure retention source successor covered by final ten-control suite; build retained its actual pre-successor source pins"
+  ]
+}

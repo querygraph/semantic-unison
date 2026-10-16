@@ -130,3 +130,15 @@ does not block unrelated source preparation or make all remaining goal work
 depend on that benchmark. Existing frozen results, the failed part3, and timing
 disclosures remain untouched. No automatic retry, sample exclusion, replacement
 or successor allocation follows from this policy.
+
+## Implemented shared build/parser owner
+
+The manual dispatcher now acquires the pinned canonical Unison token subset,
+passes descriptors to its direct child, and observes group settlement before
+wait4 and token closure. Unknown acquisition/settlement or receipt-write failure
+retains the owner. Actual inheritance, ten disposable-pool controls, parser and
+stock jobs2 build-only evidence is in
+[shared-entrypoints-actual-20261016.json](../tests/qualification/shared-entrypoints-actual-20261016.json).
+No Photo08..15 token is requested. Shared sync remains refused at execution until
+its separate server/group proofs are integrated; dry-run command planning is not
+runtime qualification. No physical IO lane or hard CPU/RSS enforcement is claimed.

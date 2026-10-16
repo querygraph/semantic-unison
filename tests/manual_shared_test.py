@@ -46,4 +46,9 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
     assert not plan['memory_enforced'] and not plan['physical_io_lane_resolved']
     build_plan = manual.shared_resource_plan('ox-build', env)
     assert build_plan['compiler_jobs'] == 2 and build_plan['declared_peak_credits'] == 4
+    assert build_plan['token_acquisition_implemented']
+    assert manual.shared_resource_plan('group-parser', env)['token_acquisition_implemented']
+    from shared_dispatch import TARGETS
+    assert 'sync-functional' not in TARGETS
+    assert {'stock-build', 'ox-build', 'shared-entrypoints', 'group-parser'} <= TARGETS
 print('PASS four shared/legacy selections and seven refusals; no output, build or child')
