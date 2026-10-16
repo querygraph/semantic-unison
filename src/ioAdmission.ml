@@ -78,6 +78,14 @@ let select t =
         else scan (add_devices blocked ticket.devices) (ticket :: before) rest
   in scan Devices.empty [] t.queue
 
+let noop () = ()
+let unregister (ticket:ticket) =
+  let cleanup = ticket.unregister in
+  ticket.unregister <- noop;
+  (* HelperSupervisor revokes the observer before allocating list removal.
+     Failure removing that inactive entry must not lose a grant or reply. *)
+  try cleanup () with _ -> ()
+
 let dispatch t =
   if not t.pumping then begin
     t.pumping <- true;
@@ -88,7 +96,7 @@ let dispatch t =
           reserve t ticket.devices;
           t.queue <- remaining;
           ticket.waiting <- false;
-          ticket.unregister ();
+          unregister ticket;
           (* A throwing result observer must not strand admissible siblings.
              Reentrant release/enqueue is observed by the next fresh scan. *)
           (try Lwt.wakeup ticket.reply true with error ->
@@ -140,7 +148,7 @@ let acquire t cancellation devices =
         if ticket.waiting then begin
           ticket.waiting <- false;
           t.queue <- List.filter (fun other -> other != ticket) t.queue;
-          ticket.unregister ();
+          unregister ticket;
           request_dispatch t;
           Lwt.wakeup ticket.reply false
         end);

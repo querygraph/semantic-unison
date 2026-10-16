@@ -19,7 +19,12 @@ for name in sources:
  b=(root/name).read_bytes();pins[name]=hashlib.sha256(b).hexdigest();(w/Path(name).name).write_bytes(b)
 f=w/'helperSupervisor.ml';s=f.read_text();anchor='let on_cancel c notify =';assert s.count(anchor)==1
 f.write_text(s.replace(anchor,'let registration_fault = ref false\nlet test_fail_registration () = registration_fault := true\nlet cancel_registration = ref false\nlet test_cancel_registration () = cancel_registration := true\n'+anchor+'\n  if !registration_fault then (registration_fault := false; raise Out_of_memory);\n  if !cancel_registration then (cancel_registration := false; cancel c);'))
-with (w/'helperSupervisor.mli').open('a') as f:f.write('\nval test_fail_registration : unit -> unit\nval test_cancel_registration : unit -> unit\n')
+s=f.read_text()
+s='let unregister_fault = ref false\nlet test_fail_unregister () = unregister_fault := true\nlet test_unregister_consumed () = not !unregister_fault\n'+s
+seam='listener.listening <- false;\n      c#state.listeners <- List.filter'
+assert s.count(seam)==1
+f.write_text(s.replace(seam,'listener.listening <- false;\n      if !unregister_fault then (unregister_fault := false; raise Out_of_memory);\n      c#state.listeners <- List.filter'))
+with (w/'helperSupervisor.mli').open('a') as f:f.write('\nval test_fail_registration : unit -> unit\nval test_cancel_registration : unit -> unit\nval test_fail_unregister : unit -> unit\nval test_unregister_consumed : unit -> bool\n')
 (w/'test.ml').write_text('''open Lwt
 let check b s = if not b then failwith s
 let () =
@@ -42,7 +47,18 @@ let () =
  check (not !entered && (IoAdmission.usage t).active_jobs=0) "failed IO owner later acquired credits";
  check (Lwt_unix.run(IoAdmission.with_devices t (HelperSupervisor.cancellation ()) ~devices:[1]
    (fun () -> return 7))=Some 7) "registration failure poisoned later IO work";
- print_endline "PASS registration failure leaves no published ticket or debit"
+ let release2=Lwt.wait () in
+ let active2=IoAdmission.with_devices t (HelperSupervisor.cancellation ()) ~devices:[1] (fun () -> release2) in
+ let queued=IoAdmission.with_devices t (HelperSupervisor.cancellation ()) ~devices:[1] (fun () -> return 9) in
+ HelperSupervisor.test_fail_unregister ();
+ let failed=try Lwt.wakeup release2 (); ignore(Lwt_unix.run active2);
+   ignore(Lwt_unix.run(Lwt_unix.sleep 0.02));false with Out_of_memory -> true in
+ check (not failed && Lwt.poll queued=Some(Some 9)) "unregister failure lost granted IO owner";
+ check (HelperSupervisor.test_unregister_consumed ()) "unregister failure was not injected";
+ check ((IoAdmission.usage t).active_jobs=0 && (IoAdmission.usage t).pending=0)
+   "unregister failure leaked IO credit";
+ print_endline "PASS registration and unregister failure controls"
+
 ''')
 log=w/'control.log'
 with log.open('w') as out:
@@ -52,5 +68,5 @@ with log.open('w') as out:
  r=subprocess.run([str(w/'control')],cwd=w,stdout=out,stderr=subprocess.STDOUT,timeout=10)
 a.report.write_text(json.dumps({'passed':r.returncode==0,'exit_code':r.returncode,'workspace':str(w),
  'source_pins':pins,'compiler':a.compiler,'log':str(log),'log_sha256':hashlib.sha256(log.read_bytes()).hexdigest(),
- 'scope':'one original injected registration OOM; synthetic owner-loop promises; no SDK/Photo/native IO'},indent=2)+'\n')
+ 'scope':'finite original registration/unregister OOM; synthetic owner-loop promises; no SDK/Photo/native IO'},indent=2)+'\n')
 print(log.read_text(),end='');raise SystemExit(r.returncode)

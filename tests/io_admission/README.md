@@ -55,3 +55,10 @@ immediate cancellation during registration must not publish a revoked request.
 The earlier implementation fails the unreachable-ticket assertion. Run
 `registration_fault_test.py --compiler /absolute/ocamlopt --report /fresh/result.json`
 in the standing CPU lane; no physical IO lane or photo input is involved.
+
+The [unregister fault successor](../qualification/io-unregister-grant-actual-20261016.json)
+extends that control to removal failure after HelperSupervisor has marked its
+observer inactive. IO admission clears its callback first and does not let that
+inactive-list cleanup failure lose a published grant. The previous source fails
+the lost-grant assertion; current stock/Ox controls and20-group suites pass.
+This does not suppress uncertain OS close/reap errors or prove complete OOM recovery.
