@@ -1,7 +1,8 @@
 """Canonical token owner for fixed Adobe-free build/parser entry points.
 
-Loopback sync has separately-sessioned server owners. Its exact functional
-matrix/server/pump proofs must pass before the runner is reaped or tokens close.
+Loopback sync has separately-sessioned server owners. Complete runs require
+functional matrix proofs; failed runs require every attempted call's lifecycle
+proof before the runner is reaped or tokens close. Neither infers the other.
 """
 import hashlib
 import json
@@ -181,9 +182,20 @@ def run(target, argv, output, credits, *, io_admission=None):
                 require((info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
                         == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns)
                         and len(raw) == info.st_size, 'shared result changed')
-                external = audit_shared(json.loads(raw))
+                result = json.loads(raw)
+                require(type(result.get('complete')) is bool, 'typed completion state required')
+                if result['complete']:
+                    external = audit_shared(result)
+                else:
+                    from invocation_journal import audit_attempted
+                    require(type(result.get('failure')) is str and result['failure'],
+                            'failed result must preserve original failure')
+                    external = audit_attempted(result)
+                    external['functional_result'] = 'FAILED'
                 write(output / 'SHARED-SERVER-AUDIT.json', external)
                 closure = settle(child, time.monotonic() + 2)
+                require(result['complete'] or closure['returncode'] != 0,
+                        'failed result contradicts successful coordinator exit')
             else:
                 closure = settle(child, time.monotonic() + seconds)
         source_unchanged = all(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest

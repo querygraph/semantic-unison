@@ -39,8 +39,12 @@ A separate [journal-prefix source qualification](../tests/qualification/journal-
 now distinguishes known nonzero call settlement from functional success. Its
 pure audit requires ordered intent/outcome bindings, client and supervisor
 group-before-reap proofs, server exit/PID/command binding and joined input pump.
-Missing server creation evidence remains unknown. The auditor is not yet wired
-to dispatcher release: complete functional audit remains mandatory there until
-failed-prefix owner-binding/lifecycle controls qualify that integration.
+Missing server creation evidence remains unknown. The dispatcher now uses this
+audit for explicitly failed results, then independently settles its aggregate
+worker and requires its actual nonzero exit before closing leases. Complete
+results retain the full 54-call functional audit. [Fake-owner integration controls](../tests/qualification/failed-sync-dispatch-source-controls-actual-20261016.json)
+cover known failed-prefix release, unknown-call retention before reap, and
+contradictory successful worker-exit retention. Actual failed sync-call lifecycle
+integration remains unqualified; these controls do not authorize an IO run.
 
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.

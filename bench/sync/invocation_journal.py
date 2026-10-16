@@ -31,8 +31,9 @@ def audit_attempted(result):
         key = identity['directory']
         require(type(key) is str and key, 'invocation directory missing')
         previous = seen.setdefault(key, [])
-        require(identity['stage'] == ('seed', 'update', 'noop')[len(previous)]
-                if len(previous) < 3 else False, 'duplicate or unordered stage')
+        require(len(previous) < 3, 'duplicate invocation after noop')
+        require(identity['stage'] == ('seed', 'update', 'noop')[len(previous)],
+                'duplicate or unordered stage')
         configuration = (identity['label'], identity['mode'], identity['workers'])
         require(not previous or previous[0] == configuration, 'directory configuration changed')
         previous.append(configuration)

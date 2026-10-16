@@ -55,6 +55,7 @@ class Lifecycle(unittest.TestCase):
         self.held_record = None
         self.await_result = True
         self.audit_error = None
+        self.result = {'mock': True, 'complete': True}
     def tearDown(self):
         self.temp.cleanup()
     def acquire_io(self):
@@ -103,7 +104,7 @@ class Lifecycle(unittest.TestCase):
                 raise self.second_check_error
             return self.io_pool,self.deadline
         if target == 'sync-functional':
-            (self.output/'RESULT.json').write_text('{"mock":true}')
+            (self.output/'RESULT.json').write_text(json.dumps(self.result))
         def audit(result):
             self.events.append('audit:external')
             self.assertFalse(self.cpu.closed or self.io.closed)
@@ -111,6 +112,7 @@ class Lifecycle(unittest.TestCase):
             return {'rows':18,'cli_invocations':54}
         with ExitStack() as stack:
             stack.enter_context(patch('shared_audit.audit_shared',side_effect=audit))
+            stack.enter_context(patch('invocation_journal.audit_attempted',side_effect=audit))
             stack.enter_context(patch.object(d.Pool,'read',return_value=cpu_pool))
             stack.enter_context(patch.object(d,'checked_io_request',side_effect=checked))
             stack.enter_context(patch.object(d,'OwnedGroup',side_effect=self.spawn))
@@ -135,6 +137,30 @@ class Lifecycle(unittest.TestCase):
         self.assertFalse(self.cpu.closed or self.io.closed)
         self.assertNotIn('audit:external',self.events)
         self.assertNotIn('settle',self.events)
+
+    def test_failed_sync_known_prefix_closes_but_returns_failure(self):
+        self.result = {'complete': False, 'failure': 'post-seed exactness refused'}
+        self.closure['returncode'] = 7
+        self.assertEqual(self.run_case('sync-functional'), 7)
+        self.assertEqual(self.events, ['acquire:io','acquire:cpu','spawn','await:worker',
+                                     'audit:external','settle','close:cpu','close:io'])
+        proof=json.loads((self.output/'SHARED-SERVER-AUDIT.json').read_text())
+        self.assertEqual(proof['functional_result'], 'FAILED')
+
+    def test_failed_sync_unknown_call_retains_before_worker_reap(self):
+        self.result = {'complete': False, 'failure': 'call unknown'}
+        self.audit_error = ValueError('intent has no outcome')
+        with self.assertRaises(Retained):
+            self.run_case('sync-functional')
+        self.assertNotIn('settle', self.events)
+        self.assertFalse(self.cpu.closed or self.io.closed)
+
+    def test_failed_sync_success_exit_contradiction_retains(self):
+        self.result = {'complete': False, 'failure': 'contradiction'}
+        with self.assertRaises(Retained):
+            self.run_case('sync-functional')
+        self.assertIn('settle', self.events)
+        self.assertFalse(self.cpu.closed or self.io.closed)
 
     def test_framing_input_parent_resource_order(self):
         self.assertEqual(self.run_case('private-dng-framing-input'),0)
