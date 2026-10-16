@@ -237,3 +237,9 @@ refusal is [retained](../tests/qualification/private-framing-input-v1-expired-20
 The [v2 scheduling request](private-dng-framing-input-request-v2.json) preserves
 the reviewed executor, plan and budgets with fresh unused output/admission paths.
 It grants no runtime permission; camera-derived diagnostic evidence remains absent.
+
+A separately admitted [camera-derived receiving-clone framing diagnostic](../tests/qualification/private-framing-input-actual-20261016.json)
+now passed stock/Ox: identical706requested bytes each, recognized Adobe/MakN
+headers, exact source native epoch preserved, all owners/IO/CPU closed. Maker
+body bytes were skipped. This does not establish private-reference closure or
+semantic eligibility; real-camera receiving and SDK corpus remain unqualified.

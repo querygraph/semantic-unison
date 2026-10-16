@@ -117,3 +117,26 @@ fence lacks native nanosecond precision; an admitting owner must supply exact
 FD/path epoch fencing and actual settlement. Untrusted pointers are bounded, not
 proved to be genuine metadata. No camera/preserved clone/Photo data was read,
 no current profile was widened, and no future diagnostic admission is inferred.
+
+
+## First camera-derived receiving-clone framing observation
+
+The [actual bounded v2 diagnostic](../tests/qualification/private-framing-input-actual-20261016.json)
+ran once under fresh Root EX-global IO admission and Unison00..07. Stock and Ox
+returned identical protocols after706requested bytes each (1412total), six
+logical ranges each. The selected classic little-endian TIFF private extent is
+6576bytes at10970; its Adobe/MakN framing declares one6556byte little-endian
+maker body with original offset1404. No recorded read intersects the maker body.
+The owner fenced the exact native nanosecond descriptor/path identity before and
+after each child; audit lstat matched. Two program waits, containing worker/group
+and actual parent terminal0 are retained; IO/CPU closed. No source full hash,
+image decode, Adobe/SDK, production transfer or receiving ran.
+
+This resolves only whether the observed50740 payload uses the bounded recognized
+framing. It does not identify the camera vendor or interpret maker references,
+prove private-byte self-containment, establish the complete TIFF graph or permit
+relocation. Profiles0/1 remain unchanged and safely decline this clone. Broader
+support requires a separate exact preservation/reference-closure policy and
+independent conformance plus receiving qualification; recognition alone must not
+remove the unknown-private-data refusal. Earlier statements of no camera data
+read describe their original source/control runs, not this later admitted run.

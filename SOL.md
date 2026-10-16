@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL [receiving-clone bounded framing v2](tests/qualification/private-framing-input-actual-20261016.json)
+PASS/CLOSED: owner22960/initialterminal914a6a/exit0/no session, worker22963
+reaped0/othermembersabsent-before-reap, EXIO+CPU00..07closed. FreshRootadmission
+e3d65a19 consumed once beforedeadline; earlier243b8fc6 remains expiredunstarted.
+Two pinnedstock/Ox actualwait0 protocols byte-identical:706requestedclonebytes
+and6ranges each/1412total. ClassicTIFF littleendian selected50740 at10970/6576B;
+Adobe/MakN frame contains6556B declared maker body/originaloffset1404. Recorded
+reads skip that body; native-ns FD/path8field epoch unchanged and11sourcepins
+reverified. No fullclonehash/SDK/image decode/receiving/profileactivation.
+Framing recognized does NOT prove maker-reference closure or semanticeligibility;
+current profiles remain conservative fallback. Actualterminal notifiedRootbefore
+sealing; no resources held or automatic successor.
+
+
 Framing v1 IO admission243b8fc6 expired before dispatch: actual deadline guard
 6b42f1/exit1/no session at1792121697.41903, deadline1792121569.0876641.
 [Preserved expiry evidence](tests/qualification/private-framing-input-v1-expired-20261016.json)
