@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:17:54Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:22:48Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -129,6 +129,20 @@ ordinary sync/generic cloning do not require semantic profiles or Adobe.
 feature modules and runtime enablement, and avoids claiming ordinary-sync
 compiler speedup. Shared recipes use ownedUnison8/max2compilerjobs/selftest3
 perendpoint. Current stock5.2.0 evidence is distinct from historical5.5.1.
+
+**Mixed-work integration harness:** new `tests/mixed_validation/probe.ml`
+composes real DngValidation/SupervisedExternal/SemanticWorkers on one six-credit
+runtime, waits all task results, emits raw validator process/group/protocol and
+metadata trace, then checks candidate/CPU/child/worker/FD closure. Fake-only
+`run_controls.py` passes four success/error combinations per compiler,16original
+fake helpers/128workerhashes overall; SDK-error is exit0/errors1 and mustreject,
+metadata-error exit7 retains ordinary status while other work settles. Actual
+30357/a567f6/0/no session, children95446/95485 reaped0/groups absent/CPU8closed.
+Receipt `mixed-validation-fake-controls-actual-20261016.json`. No actual SDK,
+ExifTool, Photo/EXIO/receiving/compute-overlap/hardcap qualification. This has NO
+native admission route yet: next implement independent prefix auditor, exact
+one-use entry/inherited9FD guard and memory/deadline/intent ownership before
+preparing real-tool request. Source/method docs in tests/mixed_validation/README.md.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
 selftests actual87161/b8ddda ->52664d/0/no session and Ox80362/27ce49 ->09fca0/0
