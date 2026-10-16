@@ -2,7 +2,41 @@
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
 
-## Current checkpoint — 2026-10-15
+## Current checkpoint — 2026-10-16
+
+Current stock/Ox application qualification includes the local profile-inspection
+guard in both build systems: [Make pair](tests/qualification/current-property-make-selftests-actual-20261016.json)
+and [Dune pair](tests/qualification/current-dune-profile-guard-selftests-actual-20261016.json).
+All425 production/build input pins were rechecked against the checkout; both
+builds and selftests passed per compiler, with actual tool terminals, group
+settlement and Unison00..07 release. Earlier full-build receipts below retain
+their historical source scopes. Standing sharing remains8Unison/8Photo/2system;
+the separately coordinated Photo scaling window completed and released.
+
+Generated property-removal receiving is SOURCE PREPARED, not yet executed.
+The [exact request](doc/shared-property-io-request-v1.json) binds current Make
+artifacts, all execution sources,18rows54CLI/two2MiB fixtures per row, selected
+native fork/xattr removal and0640→0400 mode, retained old readers and unchanged
+no-op epochs. Maximum36 old readers and conservative uninstrumented8GiB logical
+IO budget are explicit. Fresh Root admission and EXglobal coordination remain
+required; no Photo/camera/Adobe input or prior admission reuse is allowed.
+
+Invocation accounting now persists intent before dispatch and outcome before
+caller verification, including file/directory fsync. Missing outcomes stay
+unknown. Failed results have a separate lifecycle audit, not a functional pass:
+the parent requires every attempted client/supervisor/server/pump settlement,
+then actual aggregate nonzero exit before lease closure. Source/fake controls
+and [actual Python peer/dispatcher control](tests/qualification/failed-sync-dispatch-peer-actual-20261016.json)
+passed; the latter holds real outerUnison8 but disposable innerIO/CPUleases.
+This is process-lifecycle evidence, not canonical payload admission or actual
+property receiving. A pending request alone starts nothing.
+
+The [acceptance matrix audit](doc/acceptance-matrix-audit.md) remains open:
+representative camera semantic eligibility/SDK receiving, broader properties,
+platform/fault coverage and complete resource bounds are not established by
+these builds or component controls. Frozenpart3 staysfailed/incomplete and all
+timing disclosures remain. The full goal is unfinished; newer scoped evidence
+supersedes only matching historical unstarted/source-only statements below.
 
 Localextension identity boundary corrected: FormatExtension.inspect rejects empty/
 NUL/>128B profile names BEFOREparserentry, samevalid_idpredicateastrustedhandle
