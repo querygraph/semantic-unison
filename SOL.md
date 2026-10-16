@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+Physical IO coordination now has a concrete [source protocol](doc/shared-physical-io.md)
+and pure planner. Known jobs require sharedglobalbarrier+exclusive complete
+physical-member union; unknown/changed/unqualified topology requires EXCLUSIVE
+samebarrier, preventing false independence. IOthenCPU nonblocking wholebundle
+rollback/retainedunknown lifecycle proposed; no peer-dependent RPC waits while
+holding a per-phase IOlease. [Ten pure controls](tests/qualification/shared-io-source-ready-20261016.json)
+fb8786/0 PASS/CLOSED under00..07; sourcepinsunchanged/groupreaped/tokensclosed.
+No device discovery, liveIOpool, kernelIOlocking, SDK/Photo payload or native
+operation. Jointnamespace/manifest and lifecycle/topology qualification remain
+pending; existing productionIoAdmission is still endpoint-localst_dev only.
+CPUdispatcher already qualified8da1cc6; user/Root's bothV9shared6 closures do not
+imply OSthread/RSS/physicalIO/fullrun qualification or a UnisonSDK grant.
+
+
 Actual [stock/Ox reused-inspector synthetic pair](tests/qualification/inspector-reuse-synthetic-actual-20261016.json)
 PASSED/CLOSED: completed parentterminals407ea5/0 and99b987/0/no sessions,
 strict containing groups reaped0/othermembersabsent/sourcepinsunchanged,

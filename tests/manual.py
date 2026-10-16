@@ -29,6 +29,7 @@ Targets:
   group-parser            pure retained-group diagnostic parser controls
   shared-entrypoints      pure shared command/budget controls
   shared-sync-controls    pure sync budget/receipt controls, no binaries
+  shared-io-controls      pure physical-IO claim controls; no device or IO lock access
   interrupted-receipts    four fake-child interruption/receipt controls
   aggregate-lifecycle     four fake-worker aggregate ownership controls
   aggregate-preflight     pure interpreter-capability refusals; no test children
@@ -95,7 +96,7 @@ def shared_resource_plan(target, environment):
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
-                             'inspect-file', 'inspector-reuse-controls')
+                             'inspect-file', 'inspector-reuse-controls', 'shared-io-controls')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + inspector_workers + overhead,
             'inspector_workers': inspector_workers,
@@ -116,7 +117,7 @@ def command(target, output, environment):
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
-                           'inspect-file', 'inspector-reuse-controls'),
+                           'inspect-file', 'inspector-reuse-controls', 'shared-io-controls'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'sync-functional':
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
@@ -126,6 +127,8 @@ def command(target, output, environment):
             require(shared >= 3, 'inspector execution needs one worker plus two owner credits')
     if target == 'inspector-reuse-controls':
         return [sys.executable, str(ROOT / 'tools/semantic-inspect/reuse_test.py')]
+    if target == 'shared-io-controls':
+        return [sys.executable, str(ROOT / 'tests/shared_io_plan_test.py')]
     if target == 'inspect-file':
         for key in ('INSPECTOR_RECEIPT', 'INSPECT_INPUT'):
             require(bool(environment.get(key)) and Path(environment[key]).is_absolute(),
@@ -237,7 +240,7 @@ def main():
     host = target in ('host-interface', 'host-executor', 'read-parser', 'group-parser',
                       'helper-stock', 'helper-ox', 'interrupted-receipts', 'aggregate-lifecycle',
                       'aggregate-preflight', 'shared-entrypoints', 'shared-sync-controls',
-                      'inspector-reuse-controls')
+                      'inspector-reuse-controls', 'shared-io-controls')
     require(not(host and requested), 'host checks own their output; do not set OUTPUT_DIR')
     output = Path(requested).resolve() if requested else Path(tempfile.gettempdir()) / 'UNCREATED-unison-check'
     if requested:

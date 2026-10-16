@@ -23,7 +23,8 @@ MANIFEST = ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-
 MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd'
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
-           'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls'}
+           'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
+           'shared-io-controls'}
 
 
 def write(path, value):
@@ -59,6 +60,8 @@ def run(target, argv, output, credits):
             sources.append(ROOT / 'tools/semantic-inspect/run.py')
         if target in ('sync-functional', 'shared-sync-controls'):
             sources.extend((ROOT / 'bench/sync').glob('*.py'))
+        if target == 'shared-io-controls':
+            sources.append(ROOT / 'tests/shared_io_plan.py')
         pins = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in set(sources)}
         with (output / 'SHARED-STDOUT.txt').open('x') as stdout, (output / 'SHARED-STDERR.txt').open('x') as stderr:

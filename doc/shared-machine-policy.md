@@ -93,3 +93,12 @@ and actual closure. Ordinary shared timing is background-contended. Preserve
 workload disclosures; no absolute quiet claim. Frozen results, incompletepart3,
 and all timing caveats remain unchanged. No automatic retry, replacement or
 successor allocation follows from a resource release.
+
+## Physical IO source successor
+
+The [barrier/member proposal](shared-physical-io.md) separates CPU sharing from
+bulk-device scheduling. Known jobs hold a shared global barrier and exclusive
+complete physical-member lanes; unknown/unqualified topology holds that same
+barrier exclusively. Ten pure claim controls pass; no IO pool/kernel locks or
+OS discovery are implemented or qualified. Both owners must adopt one canonical
+inode manifest before live integration. Existing CPU grants remain unchanged.

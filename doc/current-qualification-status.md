@@ -25,6 +25,11 @@ also passed, with matching16B metadata classification and full/complement hashes
 Reuse on Photo copies and real-camera receiving remain pending separate IO
 coordination.
 
+[Physical IO coordination](shared-physical-io.md) is now source-proposed with
+an unknown-global barrier and complete-member union planner. Ten pure controls
+passed; live canonical IO namespace, kernel locking, topology provider and joint
+runtime integration remain pending. CPU sharing is already implemented.
+
 ## Acceptance scope audit
 
 The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to
