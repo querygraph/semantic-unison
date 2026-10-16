@@ -115,3 +115,16 @@ cover that path, changed pins, deadline refusal and journal/call ordering. They
 use mocks and a tiny original artifact only. The future aggregate owner must
 still bind the admission, inherit IO/CPU ownership, audit all helper/call groups
 and retain unknown outcomes before this kernel may be used for actual receiving.
+
+## Synthetic case worker kernel
+
+`synthetic_case.execute` has no entry point and accepts only the fixed synthetic
+validator build ID. In an already admitted prepared namespace it creates exactly
+two original tiny files with qualified descriptor cleanup, persists preparation
+and possible-call phases, saves outcomes before audits, independently joins
+helper/group/receipt/live records and checks exact receiving outputs. Unknown
+call outcomes or unparseable/missing helper proof raise retained ownership rather
+than becoming ordinary failed-prefix results. Known preparation failures remain
+explicit. [Seven source controls](../qualification/concurrent-synthetic-case-controls-actual-20261016.json)
+cover the refusal/phase/uncertainty paths. No transport is dispatched by these
+controls; positive receiving and admitted parent integration remain next.

@@ -1,0 +1,55 @@
+{
+  "schema": "unison-concurrent-synthetic-case-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "c78b04",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/synthetic_case.py",
+      "bytes": 4170,
+      "sha256": "77ca8b34cc48de19cca39d520ce05d294d1fdad90f97903d91362d40623ec972"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/synthetic_case_test.py",
+      "bytes": 2795,
+      "sha256": "16c94edd7cd0309c00ebc1ef0becc5706a02db759e9ccb6eb5d7e95b03516d82"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/invocation.py",
+      "bytes": 3236,
+      "sha256": "b3b1463647c598c71b0a4151fbf74c31c073e8015c393098a360bcbd949d660f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/combined.py",
+      "bytes": 4003,
+      "sha256": "fe5e3e78f4ca66ae3e6ae5f0f17323513ce9c1c47f1eea33330d71b806087026"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-synthetic-case-controls-20261016b/SHARED-START.json",
+      "bytes": 1123,
+      "sha256": "06923871e2fbd00113929b4a45ceb4544be524a4fe0122288ab9840d0fe38ac4"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-controls-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "b9577904ae6433c9e5636722b262e485e28ba9b1a04e80f5959ed9a69bea6478"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-controls-20261016b/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-synthetic-case-controls-20261016b/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "4190e6532da5d52050bd5ea71ff40310f4ffe0846610b4b159650675a5a9c2b2"
+    }
+  ],
+  "scope": "7original source/kernel refusal and uncertainty controls; generated tiny fixtures only; no actual transport/helper/SDK/camera/Photo/EXglobal or runtime grant; positive receiving path still to qualify",
+  "full_goal_complete": false
+}
