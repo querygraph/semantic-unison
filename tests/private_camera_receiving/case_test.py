@@ -6,6 +6,7 @@ from pathlib import Path
 import tempfile
 import time
 import unittest
+from unittest.mock import patch
 import case
 
 
@@ -32,6 +33,34 @@ class Controls(unittest.TestCase):
                 check_borrowed=self.check,invoke=self.invoke,
                 save=lambda value:self.saved.append(copy.deepcopy(value)),
                 deadline_monotonic=kwargs.get('deadline',time.monotonic()+120))
+    def test_each_owned_close_uncertainty_retains(self):
+        # Separate fixtures: initial hash, append writer, retained old reader.
+        for fail_at in (1, 3, 8):
+            with self.subTest(close_number=fail_at):
+                if self.target.exists():
+                    self.target.unlink()
+                self.source.write_bytes(b'original tiny generated control\0')
+                calls = 0
+                uncertain = []
+                original = case.close_descriptors
+                def close(fds):
+                    nonlocal calls
+                    calls += 1
+                    if calls == fail_at:
+                        uncertain.extend(fds)
+                        with patch('close.os.close', side_effect=OSError('fixture uncertain close')):
+                            original(fds)
+                    else:
+                        original(fds)
+                try:
+                    with patch.object(case, 'close_descriptors', side_effect=close):
+                        with self.assertRaises(case.UnresolvedOwnership) as caught:
+                            self.run_case()
+                    self.assertEqual(caught.exception.uncertain_fds, tuple(uncertain))
+                finally:
+                    for fd in uncertain:
+                        os.close(fd)  # injected fault did not actually close fixture
+
     def test_exact_three_stages_and_old_reader(self):
         result=self.run_case()
         self.assertTrue(result['complete']);self.assertEqual(self.calls,['seed','update','noop'])

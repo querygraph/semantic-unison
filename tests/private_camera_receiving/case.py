@@ -9,6 +9,8 @@ from pathlib import Path
 import stat
 import time
 
+from close import close_descriptors, UnresolvedOwnership
+
 TRAILER = b'UNISON-ORIGINAL-DISPOSABLE-RECEIVING-CONTROL\n' * 64
 MAX_INPUT = 256 * 1048576
 FIELDS = ('st_dev', 'st_ino', 'st_size', 'st_mtime_ns', 'st_ctime_ns',
@@ -49,7 +51,7 @@ def sha(path):
                 'disposable receiving file changed during hash')
         return value
     finally:
-        os.close(fd)
+        close_descriptors([fd])
 
 
 def exercise(directory, *, initial_sha256, check_borrowed, invoke, save,
@@ -107,7 +109,7 @@ def exercise(directory, *, initial_sha256, check_borrowed, invoke, save,
                 data=data[n:]
             os.fsync(fd)
         finally:
-            os.close(fd)
+            close_descriptors([fd])
         expected=sha(source)
         call('update')
         require(sha(target)==expected, 'updated receiving bytes differ')
@@ -123,10 +125,12 @@ def exercise(directory, *, initial_sha256, check_borrowed, invoke, save,
                       retained_old_receiver_unchanged=True,noop_epoch_unchanged=True)
         save(result)
         return result
+    except UnresolvedOwnership:
+        raise
     except BaseException as error:
         result['failure']=repr(error)
         save(result)
         raise
     finally:
         if old is not None:
-            os.close(old)
+            close_descriptors([old])

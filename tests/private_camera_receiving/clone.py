@@ -10,7 +10,7 @@ import stat
 import sys
 
 sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
-from shared_cpu_pool import close_descriptors
+from close import close_descriptors
 from case import FIELDS, MAX_INPUT, require
 
 

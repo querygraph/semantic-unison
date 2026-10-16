@@ -5,6 +5,7 @@ bind inherited descriptors before invoking this kernel. It must retain unknown
 child/FD outcomes and audit this journal before aggregate reap or lease release.
 """
 import os
+from close import UnresolvedOwnership
 from pathlib import Path
 import sys
 
@@ -71,6 +72,8 @@ def execute(plan,workspace,deadline_monotonic):
         result.update(complete=True,phase='FINISHED',call_lifecycle=proof)
         save(output,result)
         return result
+    except UnresolvedOwnership:
+        raise
     except BaseException as error:
         result['complete']=False
         result['failure']=repr(error)
