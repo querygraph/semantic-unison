@@ -16,6 +16,7 @@ parser.add_argument("--ocamlopt", default="ocamlopt")
 parser.add_argument("--build",type=Path,help="Use actual compiled production objects from this snapshot src directory")
 parser.add_argument("--identify-only",action="store_true")
 parser.add_argument("--shared-parity-only",action="store_true")
+parser.add_argument("--shared-mixed-only",action="store_true")
 parser.add_argument("--read-stats-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
 parser.add_argument("--apply-stress-only",action="store_true")
@@ -126,6 +127,7 @@ with workspace as tmp:
     command=[str(build / "worker-test")]
     if args.identify_only: command.append("--identify-only")
     if args.shared_parity_only: command.append("--shared-parity-only")
+    if args.shared_mixed_only: command.append("--shared-mixed-only")
     if args.read_stats_only: command.append("--read-stats-only")
     if args.stress_only: command.append("--stress-only")
     if args.apply_stress_only: command.append("--apply-stress-only")
@@ -140,6 +142,7 @@ with workspace as tmp:
                  binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),
                  summary=[line for line in result.stdout.splitlines() if line.startswith("PASS seeded")])
+    receipt['shared_mixed_only']=args.shared_mixed_only
     (build/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
     if args.receipt: args.receipt.write_text(json.dumps(receipt,indent=2)+"\n")
     result.check_returncode()

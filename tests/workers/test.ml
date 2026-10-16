@@ -409,7 +409,38 @@ let shared_worker_parity () =
       "configured-worker descriptor leak";
     Printf.printf "PASS shared parity workers=%d admitted_cpu=%d jobs=16 cancelled=4 completed=12\n%!"
       workers cpu) [1;2;4;8]
+let shared_mixed_tests () =
+  let before = Array.length (Sys.readdir "/dev/fd") in
+  let channel = open_out_bin "sample" in
+  output_string channel (String.make 64 'm'); close_out channel;
+  let file = fd "sample" in
+  let expected = SemanticFile.with_fd file SemanticFile.digest in
+  Unix.close file;
+  List.iter (fun permits ->
+    let b = budget permits in
+    let pool = W.create ~workers:6 ~max_pending:32 ~budget:b in
+    let helper weight =
+      H.run b ~weight (H.cancellation ())
+        ~limits:{H.timeout=5.;terminate_grace=0.1;stdout_bytes=128;stderr_bytes=128}
+        ~executable:"/bin/sleep" ~arguments:[|"0.05"|] ~environment:[||] in
+    let first = helper 1 in
+    let second = helper (min 2 permits) in
+    let jobs = List.init 16 (fun _ -> hash pool (H.cancellation ()) "sample") in
+    List.iter (function Some value -> check (value.W.digest=expected) "mixed hash parity"
+      | None -> failwith "unexpected mixed hash cancellation") (Lwt_unix.run (await jobs));
+    List.iter (fun value ->
+        check (value.H.outcome=H.Completed && value.H.status=Some (Unix.WEXITED 0)) "mixed helper failed"
+      )
+      (Lwt_unix.run (await [first;second]));
+    let usage = W.usage pool in
+    check (usage.peak_running <= permits) "mixed workers exceeded CPU budget";
+    finish pool b;
+    check (Array.length (Sys.readdir "/dev/fd")=before) "mixed helper/domain FD leak";
+    Printf.printf "PASS shared mixed permits=%d hashes=16 helpers=2 settled\n%!" permits
+  ) [1;2;4;6]
+
 let () =
+  if Array.exists ((=) "--shared-mixed-only") Sys.argv then (shared_mixed_tests ();exit 0);
   if Array.exists ((=) "--shared-parity-only") Sys.argv then (shared_worker_parity ();exit 0);
   if Array.exists ((=) "--read-stats-only") Sys.argv then (read_stats_tests ();exit 0);
   if Array.exists ((=) "--apply-stress-only") Sys.argv then (apply_scheduling_stress ();exit 0);

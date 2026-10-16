@@ -46,3 +46,23 @@ caps, hard RSS/FD bounds, active native-write cancellation, or throughput.
 [Actual stock/Ox evidence](../qualification/shared-worker-parity-actual-20261016.json)
 retains both production-object pins, actual parent terminals and group/token
 closure. No EXglobal IO, camera payload or Adobe operation is used.
+
+## Standing-eight mixed workers and weighted helpers
+
+`--shared-mixed-only --build SNAPSHOT/src --keep-work` links actual
+compiler-matched production objects. Budgets1/2/4/6 each submit sixteen hashes
+of an original64-byte fixture and two real `/bin/sleep` helpers with weights1
+and min(2,budget). Completion requires exact sequential hash parity, successful
+helper waits, zero remaining permits/queues and restored descriptor count.
+These are synthetic helper stand-ins, not ExifTool/Adobe validation or measured
+CPU utilization/throughput; six permits plus two owner credits fits Unison8.
+
+[Actual stock/Ox qualification](../qualification/shared-mixed-worker-helper-actual-20261016.json)
+passed64 hashes/eight helpers per compiler, with both outer owners/groups and
+canonical tokens closed. An initial test-only compile error (mistaking the
+direct helper result for an optional admission result) ran no test helpers;
+its idle outer owner required independently scoped recovery after the runner
+was reaped. [Preserved recovery](../qualification/shared-mixed-first-compile-recovery-20261016.json)
+records actual outer exit137, no fabricated normal exit or original wait4
+receipt, and subsequent fresh whole-token acquisition. The corrected successor
+checks known nonzero outcomes before releasing settled outer ownership.
