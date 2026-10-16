@@ -39,3 +39,18 @@ Process/group settlement stays mandatory independently of timing coverage.
 passed, including serial/missing timing and invalid digest/group/owner/duplicate
 rejection. These original diagnostic frames invoked no SDK, probe, payload or
 EXglobal IO. The test owner/group and canonical Unison8 tokens closed.
+
+`case.py` consumes exactly two already prepared private input names and an
+empty receiving root. It hashes the disposable inputs, invokes one injected
+transport, persists the returned outcome before audits, requires two joined
+helper settlements, validates SDK verdicts and verifies both received/input
+bytes. A possible call without returned outcome, missing helper settlement or
+failed returned-outcome persistence retains unresolved ownership with its
+partial result. Known byte/verdict/post-call errors preserve original failure
+and known helper settlement; they cannot turn into a functional success.
+
+[Five case controls](../qualification/sdk-multifile-case-source-actual-20261016.json)
+passed using only original tiny fake files and injected synthetic receipt
+transport. No actual CLI, SDK, retained DNG, Photo payload or EXglobal IO was
+used. These controls do not qualify clone preparation, transport owner binding,
+parent release or real SDK operation; those remain next integration work.
