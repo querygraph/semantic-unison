@@ -235,3 +235,12 @@ Nine source controls including old-target regressions passed20b954/0 with all
 groups/Unison8 closed. Measurement calls are injected: no CLI/SDK/payload/IO.
 Next implement independently reconstructed per-row and whole-prefix audits,
 then actual lifecycle composition; no runtime request/admission exists yet.
+
+The comparison's independent prefix auditor is now implemented: exact24-row
+schedule/command/worker/case/raw-proxy join, all helper and CLI lifecycle proofs,
+complete versus failed/unknown distinction, and finite raw measurements.
+Typed row matching also refuses boolean-for-integer metadata.14 source groups
+including4 imported parent regressions passed26614a/0; Unison8 closed, no
+CLI/SDK/payload/IO. Pure audit does not establish fresh bytes or release FDs.
+Next compose the retained worker and actual original-fake lifecycle before a
+new source-bound runtime request. Prior multi-file admission stays consumed.

@@ -15,6 +15,12 @@ def configuration(index):
     return (CONFIGURATIONS[offset:]+CONFIGURATIONS[:offset])[index%4]
 
 
+def row_matches(actual,expected):
+    """Exact values and scalar types; bool must never stand in for an int."""
+    return (type(actual) is dict and actual==expected
+            and all(type(actual[k]) is type(v) for k,v in expected.items()))
+
+
 def row_plan(binary,tool,workspace,index):
     label,workers=configuration(index)
     if binary.get('label')!=label:raise ValueError('compiler identity differs from scheduled row')

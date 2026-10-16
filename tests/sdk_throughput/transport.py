@@ -6,7 +6,7 @@ import sys
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tests'))
 from sdk_multifile.transport import Invoker as OwnedInvoker
-from sdk_throughput.plan import row_plan
+from sdk_throughput.plan import row_plan,row_matches
 
 
 class RowJournal:
@@ -30,7 +30,7 @@ class Invoker(OwnedInvoker):
         if type(row) is not dict or type(row.get('directory')) is not str:raise ValueError('exact scheduled row required')
         row=copy.deepcopy(row)
         directory=Path(row['directory'])
-        if len(directory.parents)<2 or row!=row_plan(binary,tool,directory.parents[1],row.get('index')):
+        if len(directory.parents)<2 or not row_matches(row,row_plan(binary,tool,directory.parents[1],row.get('index'))):
             raise ValueError('row command/limits/namespace differs')
         super().__init__(directory,binary=binary,tool=tool,journal=RowJournal(row,journal),script_pins=script_pins,deadline=deadline)
         self.contract['argv']=list(row['command'])

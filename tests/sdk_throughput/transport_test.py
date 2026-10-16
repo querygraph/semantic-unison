@@ -40,7 +40,7 @@ class Transport(unittest.TestCase):
             self.assertEqual(j.events[-1],('finish',outcome))
     def test_tampered_schedule_flags_limits_or_namespace_refuses(self):
         b,t,original=self.fixture(0)
-        for mutate in [lambda r:r.update(index=True),lambda r:r.update(endpoint_workers=3),lambda r:r.update(reserved_cpu_credits=18),
+        for mutate in [lambda r:r.update(round=False),lambda r:r.update(index=True),lambda r:r.update(endpoint_workers=3),lambda r:r.update(reserved_cpu_credits=18),
                        lambda r:r['command'].append('-extra'),lambda r:r.update(directory='/private/tmp/u-st-unit/r1/stock-w1')]:
             r=copy.deepcopy(original);mutate(r)
             with self.assertRaises(ValueError):Invoker(r,binary=b,tool=t,journal=Journal(),script_pins={},deadline=200)

@@ -35,3 +35,19 @@ cover the schedule, adapter, mutation refusal and old-target regressions. Calls
 and outcomes are injected; there is no native execution or runtime admission.
 Independent per-row/case/whole-prefix audit and actual child-boundary integration
 remain required before freezing a request.
+
+`audit.py` now reconstructs the24-row schedule independently, joins each case
+to its exact invocation and separately supplied raw proxy, reparses both SDK
+helper settlements, and validates the client/supervisor/server/pump prefix.
+A complete result requires all24 rows/48 helper settlements. A known failed
+prefix remains FAILED; missing outcomes, reordered rows, continued execution
+after a failed case, malformed timing and unknown group evidence refuse.
+Empty preparation is distinct from possible execution. Typed row matching
+rejects booleans masquerading as integer indexes or round/worker metadata.
+
+[Fourteen typed-row source groups](../qualification/sdk-throughput-audit-typed-source-actual-20261016.json)
+(including four imported regressions) pass with outer Unison8 closed. Records
+are synthetic; this auditor has no child/FD release authority and does not
+establish throughput or fresh received-byte identity. The earlier eight-group
+predecessor receipt is preserved. Actual worker, owned dispatcher and lifecycle
+integration remain pending; no execution or SDK grant exists for this matrix.
