@@ -23,7 +23,12 @@ def objects(text,name):
 def main():
     ap=argparse.ArgumentParser(description=__doc__)
     ap.add_argument('--build',type=Path,required=True);ap.add_argument('--ocamlopt',required=True)
-    ap.add_argument('--receipt',type=Path,required=True);args=ap.parse_args()
+    ap.add_argument('--receipt',type=Path,required=True)
+    ap.add_argument('--exiftool',type=Path)
+    ap.add_argument('--exiftool-only',action='store_true');args=ap.parse_args()
+    if args.exiftool_only and args.exiftool is None:ap.error('--exiftool-only requires explicit installed --exiftool')
+    exiftool=args.exiftool.resolve() if args.exiftool is not None else None
+    exiftool_before=sha(exiftool) if exiftool is not None else None
     src=args.build.resolve()/'src';compiler=Path(shutil.which(args.ocamlopt) or args.ocamlopt).resolve()
     allmods=objects((src/'Makefile.OCaml').read_text(),'OCAMLOBJS')
     modules=allmods[:allmods.index('supervisedExternal.cmx')+1];native=objects((src/'Makefile.OCaml').read_text(),'COBJS')
@@ -59,13 +64,18 @@ def main():
         command([compiler,'-I','+unix','unix.cmxa','helper.ml','-o','helper'],work,'helper-build')
         command([compiler,*flags,'unix.cmxa','str.cmxa',*[src/m for m in modules],*[src/n for n in native],
             'test.ml','-o','test'],work,'test-build')
-        for case in CASES:
+        selected=('exiftool-readonly',) if args.exiftool_only else CASES+(('exiftool-readonly',) if exiftool is not None else ())
+        for case in selected:
             directory=work/case;directory.mkdir()
-            result=command([work/'test',case,work/'helper'],directory,'run',{'UNISON':str(directory/'state')})
+            result=command([work/'test',case,exiftool if case=='exiftool-readonly' else work/'helper'],directory,'run',{'UNISON':str(directory/'state')})
             assert 'PASS '+case+' checks=' in result.stdout
             receipt['cases'].append(case);print(result.stdout.strip(),flush=True)
         receipt['artifacts']={str(p.relative_to(work)):{'bytes':p.stat().st_size,'sha256':sha(p)}
             for p in sorted(work.rglob('*')) if p.is_file()}
+        if exiftool is not None:
+            assert sha(exiftool)==exiftool_before,'ExifTool script changed'
+            receipt['actual_exiftool']={'path':str(exiftool),'sha256':exiftool_before,'post_sha256_unchanged':True,'full_dependency_inventory_qualified':False,'configuration_disabled':True}
+            receipt['scope']='Actual SupervisedExternal and installed ExifTool readonly metadata plus worker hashes on original private XMP; zero SDK/Photo; tool script pin only, not full Perl dependency qualification'
         receipt['success']=True
     finally:
         args.receipt.write_text(json.dumps(receipt,indent=2)+'\n');print('receipt',args.receipt,'work',work,flush=True)

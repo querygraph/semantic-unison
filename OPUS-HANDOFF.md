@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T21:06:04Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
+Last updated: 2026-10-16T21:08:49Z. Actual SDK comparison PASS/CLOSED supersedes prior START and absent checks.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -103,6 +103,18 @@ Root independent comparison adoption is now durable:
 `tests/qualification/sdk-receiving-comparison-v1-root-adoption-20261016.json`
 binds Root actualclosure04535268. StateCONSUMED_ACTUAL_CLOSED_COORDINATION_RELEASED;
 actualterminal/result/workerclosure pins verified. No renewed run or hold.
+
+**Installed ExifTool bridge:** opt-in `tests/supervised_external/run.py
+--exiftool /usr/local/bin/exiftool --exiftool-only` now qualifies real readonly
+metadata alongside16 worker hashes in each compiler-matched runtime. ExifTool
+13.10/config disabled, Rating3/LabelBlue, privateXMP byte/native8field fence,
+helper/worker ledger settlement pass24assertions/compiler. Actual owner11684 /
+ffac16/0/no session, children89057/89084 reaped0/groups absent, CPU8 closed.
+Receipt `shared-exiftool-hash-actual-20261016.json`; scriptSHA before/after and
+linked production objects pinned. No SDK/Photo/EXIO or installation/prefchange.
+Not full Perl dependency inventory, independently observed ExifTool PID, sampled
+CPU overlap, hardlimits or combined Adobe/ExifTool qualification. Default14
+synthetic helper cases unchanged; newcase requires explicit installed tool.
 
 **Current resources:** no Unison live owner or retained CPU/IO reservation.
 Comparison actual parent and offline audit owners closed. Photo was promptly

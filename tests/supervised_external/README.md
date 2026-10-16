@@ -36,3 +36,21 @@ Current evidence is root-owned, not a new independent-agent review. Declared
 CPU weights do not constrain unknown internal parallelism; Windows, child
 memory/global FD limits, actual SDK/corpus and broader M4-V/M5/M6 work remain
 open. No benchmark or machine-wide quota is inferred.
+
+## Installed ExifTool read-only control
+
+Pass `--exiftool /absolute/installed/exiftool --exiftool-only` to run the
+separate real-tool case (the default fourteen synthetic cases are unchanged).
+It disables ExifTool user configuration with `-config ""`, requests only JSON
+Rating/Label/ExifToolVersion from a newly authored private XMP, and submits16
+hash jobs to the same production runtime/budget. Status, metadata values, exact
+source bytes/eight-field native stat fence and settled helper/worker ledgers are
+checked. No editing flag, photo input, SDK or catalog is involved.
+
+[Actual stock/Ox evidence](../qualification/shared-exiftool-hash-actual-20261016.json)
+passes24 assertions/compiler and records installed version13.10, script SHA
+before/after, compiler-matched object/source pins and actual containing group/
+CPU8 closure. Perl/module inventory, standalone child-PID observation, sampled
+CPU overlap, hard limits, simultaneous ExifTool/Adobe and throughput remain
+outside this case. Tool configuration is explicitly opt-in; no installation or
+change to production preferences occurs.

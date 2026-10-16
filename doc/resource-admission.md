@@ -130,3 +130,11 @@ or operating-system descriptor opens. They qualify accounting arithmetic and
 owner transitions, not RSS, live FD peaks, physical IO or whole-process caps.
 Both serial compiler/test groups and the canonical Unison8 owner closed normally;
 no SDK, Photo payload or EXglobal IO was used. Production sources were unchanged.
+
+The [installed ExifTool/hash bridge control](../tests/qualification/shared-exiftool-hash-actual-20261016.json)
+now exercises actual read-only ExifTool13.10 requests alongside sixteen worker
+hashes on an original private XMP per compiler. Shared supervisor identity,
+exact metadata/byte/stat fences, settled helper/worker ledgers and containing
+owner closure pass on stock/Ox. This adds real external-tool evidence to the
+synthetic/helper CPU controls; it does not qualify simultaneous Adobe/ExifTool,
+full installation dependencies, resource peaks or representative camera input.
