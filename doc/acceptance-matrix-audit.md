@@ -55,4 +55,14 @@ record. The containing owner actually exited0 with its group settled and tokens
 closed. This component control uses no Unison executable or EXglobal IO and does
 not by itself qualify complete dispatcher failed-run release or property receiving.
 
+The subsequent [actual dispatcher/peer control](../tests/qualification/failed-sync-dispatch-peer-actual-20261016.json)
+does exercise complete failed-run release: an inner worker performs the real
+two-peer component test, writes its failed result and exits7; the actual parent
+audits that journal, settles the worker group, closes disposable inner leases,
+and returns7. Its outer canonical eight-credit owner then closes normally with
+actual terminal0. Admission authentication and canonical physical IO are not
+mocked into claims: inner leases are explicitly disposable, and no EXglobal
+barrier or Unison binary is used. The pending generated property-transfer
+request retains its original execution pins; this is additional evidence only.
+
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.

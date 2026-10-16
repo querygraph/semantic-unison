@@ -1,0 +1,87 @@
+{
+  "schema": "unison-failed-sync-dispatch-peer/1",
+  "actual_tool_terminal": {
+    "chunk": "5317ef",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "outer": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-rxrnj97g",
+  "inner": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371",
+  "result": {
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371",
+    "inner_result": 7,
+    "disposable_leases_closed": true,
+    "audit": {
+      "attempted_cli_invocations": 2,
+      "all_attempted_client_server_supervisor_settled": true,
+      "functional_success_inferred": false,
+      "scope": "journal-prefix lifecycle only; not aggregate or parent terminal",
+      "functional_result": "FAILED"
+    },
+    "scope": "actual peer/dispatcher settlement; inner IO/CPU leases disposable"
+  },
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/failed_sync_dispatch_lifecycle.py",
+      "bytes": 3428,
+      "sha256": "97096bd959ca267fc09efc0ded661d98e164a1534c687cc3ca6b6035bc938d24"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-rxrnj97g/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d651915c3f84036fd8af0378bd8f7e6963d3b944a52869e9b28887642249595f"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-rxrnj97g/SHARED-START.json",
+      "bytes": 1189,
+      "sha256": "a258171a7c08030445135b1981ab1bdb17b97183b48dcc0a1146c94bef6dd51d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-rxrnj97g/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-outer-rxrnj97g/SHARED-STDOUT.txt",
+      "bytes": 475,
+      "sha256": "7fc98373292cb93d0a6cad33977a71755133dbaf38e820284f185b6f97326506"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "6092cee4a4b64488e5e0fa7e7b4b0aa411a38997690049969d9cfe6c1024c393"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-IO-ATTEMPT.json",
+      "bytes": 483,
+      "sha256": "926fc814346b6d2e3f5fb0336327cdc28cffcdbaa13dc83c7182b19c637c6c2e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-SERVER-AUDIT.json",
+      "bytes": 246,
+      "sha256": "02bd3b4acc2e3ff0b0a8499149fd9d9d277bba9fae8b8d517d19d4a4157a3e56"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-START.json",
+      "bytes": 4685,
+      "sha256": "7db88c5e35a9cf77dbf8219f16d3dc78c9aecf350db49f163df5a2110c8a7bb9"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/SHARED-STDOUT.txt",
+      "bytes": 406,
+      "sha256": "33e8de562bb6e34d67ea17c9656e4dd0eadd52a3539fbc9d949ac0ee4d221de0"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-failed-sync-inner-lmjp7371/RESULT.json",
+      "bytes": 5366,
+      "sha256": "75e4456a37e25ae766ddb01c5a62daaaa920e55e24776138c892823cfb1a7176"
+    }
+  ],
+  "scope": "Actual outer canonicalUnison8, inner real dispatcher/peer groups with disposable CPU/IO FDs. Actual nonzero inner worker release after journal-prefix audit; outer wait0/groupsclosed/tokensclosed. No canonicalEXIO/admission authentication/Unisonbinary/camera/SDK/Adobe qualification.",
+  "property_receiving_qualified": false
+}
