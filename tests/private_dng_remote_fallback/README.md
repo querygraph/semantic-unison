@@ -1,5 +1,14 @@
 # Transport-separated opaque-DNG fallback qualification
 
+Current source dependency closure is a successor to the historical runtime
+receipts: the coordinator now pins21 files, including `artifact_pins.py`,
+`properties.py` and `invocation_journal.py` imported by the current sync runner.
+[55 finite controls](../qualification/remote-transitive-source-controls-actual-20261016.json)
+passed, with AST discovery of direct local imports and omission negatives.
+This is source/mock/generated-fixture evidence only. It does not requalify or
+replay the consumed18-source historical jobs, and no camera payload scope has
+been added to this synthetic harness.
+
 The first exact scoped execution has passed and closed; see the actual section
 below. Its admission is consumed, not permission to rerun. The
 `coordinator.py` entrypoint requires a fresh exact Root admission, plan and

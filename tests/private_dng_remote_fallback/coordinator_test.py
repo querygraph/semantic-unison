@@ -1,5 +1,6 @@
 """Fixed mocked owner controls. No canonical lock or transport is acquired."""
 from contextlib import ExitStack
+import ast
 import json
 from pathlib import Path
 import tempfile
@@ -8,6 +9,25 @@ import unittest
 from unittest.mock import patch
 
 import coordinator as c
+
+
+class SourceClosureControls(unittest.TestCase):
+    def test_run_direct_local_imports_are_pinned(self):
+        source = c.ROOT/'bench/sync/run.py'
+        names = set()
+        for node in ast.walk(ast.parse(source.read_text())):
+            if isinstance(node, ast.Import):
+                names.update(alias.name.split('.')[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                names.add(node.module.split('.')[0])
+        local = {'bench/sync/'+name+'.py' for name in names
+                 if (source.parent/(name+'.py')).is_file()}
+        self.assertTrue(local)
+        self.assertLessEqual(local, set(c.SOURCES))
+        for omitted in ('artifact_pins', 'properties', 'invocation_journal'):
+            self.assertNotIn('bench/sync/'+omitted+'.py',
+                             set(c.SOURCES)-{'bench/sync/'+omitted+'.py'})
+            self.assertFalse(local <= set(c.SOURCES)-{'bench/sync/'+omitted+'.py'})
 
 
 class Retained(Exception):

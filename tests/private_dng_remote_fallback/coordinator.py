@@ -41,6 +41,8 @@ SOURCES = (
     'bench/sync/run.py', 'bench/sync/measure.py', 'bench/sync/ownership.py',
     'bench/sync/proxy.py', 'bench/sync/launcher.py', 'bench/sync/fixtures.py',
     'bench/sync/read_stats.py', 'bench/sync/partitions.py', 'bench/sync/batch_audit.py')
+SOURCES += ('bench/sync/artifact_pins.py', 'bench/sync/properties.py',
+            'bench/sync/invocation_journal.py')
 
 
 def digest(path):
