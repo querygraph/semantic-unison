@@ -1,3 +1,21 @@
+module LiveSamples = struct
+  type t = { mutable pid:int; mutable first:float; mutable last:float;
+             mutable count:int; mutable valid:bool }
+  let create () = {pid=0;first=0.;last=0.;count=0;valid=true}
+  let add t pid time =
+    if t.count >= 65536 then t.valid <- false
+    else begin
+      if pid <= 0 || not (Float.is_finite time) || time < 0. then t.valid <- false;
+      if t.count=0 then (t.pid <- pid; t.first <- time)
+      else if pid<>t.pid || time<t.last then t.valid <- false;
+      t.last <- time; t.count <- t.count+1
+    end
+  let summary t pid =
+    if t.valid && t.count>0 && pid=Some t.pid then
+      Printf.sprintf "samples=%d valid=true first=%.17g last=%.17g" t.count t.first t.last
+    else Printf.sprintf "samples=%d valid=false first=none last=none" t.count
+end
+
 open Lwt
 let category = `Advanced `General
 let policy_pref = Prefs.createString "adobevalidate" "off" ~local:true ~category
@@ -88,6 +106,9 @@ let select () =
       let group_observation = ref None in
       let observe_group = if Trace.enabled "validation-group" then
         Some (fun count -> group_observation := Some count) else None in
+      let live = LiveSamples.create () in
+      let observe_alive = if Trace.enabled "validation-live" then
+        Some (LiveSamples.add live) else None in
       let execute run = BorrowedWork.bind (fun () -> context.execute run) (fun child ->
         Trace.debug "validation-group" (fun () ->
           let count = match !group_observation with
@@ -97,10 +118,16 @@ let select () =
             | None -> "none" | Some pid -> string_of_int pid in
           Util.msg "Retained group v0 pid=%s candidate-sha256=%s other-members=%s\n"
             pid context.expected.sha256 count);
+        Trace.debug "validation-live" (fun () ->
+          let pid = match child.HelperSupervisor.child_pid with
+            | None -> "none" | Some pid -> string_of_int pid in
+          Util.msg "Live span v0 owner-pid=%d pid=%s candidate-sha256=%s candidate-bytes=%Ld clock=monotonic-seconds-v0 %s\n"
+            (Unix.getpid ()) pid context.expected.sha256 context.expected.size
+            (LiveSamples.summary live child.child_pid));
         return child) in
       BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
         ~inspect:inspect_limiter ~check_cancel (fun process_limits ->
-          DngValidation.validate_with_execution ?process_limits ?observe_group ~execute
+          DngValidation.validate_with_execution ?process_limits ?observe_group ?observe_alive ~execute
             context.supervisor context.cancellation ~policy:selected ~tool ~inspect
             ~candidate:context.candidate ~expected:(convert context.expected))) (fun result ->
       Abort.checkAll ();
