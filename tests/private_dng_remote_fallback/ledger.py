@@ -6,6 +6,10 @@ This module never signals, waits, acquires resources or launches anything.
 """
 import json
 from pathlib import Path
+import sys
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[2]/'bench/sync'))
+from invocation_journal import audit_no_server_creation
 
 STAGES = ('seed', 'update', 'noop')
 
@@ -52,6 +56,12 @@ def settled(outcome):
             'client wait binding differs')
     proxy = outcome['proxy']
     server = proxy['server_cleanup']
+    if server is None:
+        audit_no_server_creation(outcome)
+        return {'client_pid': outcome['client_cleanup']['pid'],
+                'supervisor_pid': outcome['supervisor_cleanup']['pid'],
+                'server_pid': None, 'server_not_created': True, 'settled': True,
+                'test_success_not_inferred': True}
     require(type(server['pid']) is int and server['pid'] > 0 and
             server['pid'] not in (outcome['client_cleanup']['pid'],
                                   outcome['supervisor_cleanup']['pid']) and

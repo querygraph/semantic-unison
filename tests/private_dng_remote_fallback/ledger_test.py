@@ -20,6 +20,41 @@ def outcome():
 
 
 class Controls(unittest.TestCase):
+    def unstarted(self):
+        v = outcome()
+        v['returncode'] = v['client_cleanup']['returncode'] = 1
+        v['supervisor_cleanup']['returncode'] = 70
+        v.update(capture_truncated=False, supervisor_capture_truncated=False)
+        v['proxy'] = {'schema':'unison-loopback-protocol-count/1',
+            **{k:None for k in ('server_command','server_pid','server_returncode',
+                               'server_cleanup','server_resources','launcher_control_header_bytes_excluded')},
+            'forwarded_protocol_bytes':{'client_to_server_bytes':0,'server_to_client_bytes':0},
+            'input_pump_joined':True,'pump_errors':[],'fault':'cancel before accept'}
+        return v
+
+    def test_pre_server_refusal_has_complete_explicit_proof(self):
+        v = self.unstarted()
+        proof = settled(v)
+        self.assertTrue(proof['server_not_created'])
+        self.assertTrue(proof['test_success_not_inferred'])
+        with tempfile.TemporaryDirectory() as name:
+            begin(name,'seed',v['command']);record(name,'seed',v)
+            self.assertEqual(audit_directory(name)[0]['server_pid'],None)
+
+    def test_no_creation_frame_never_replaces_group_proof(self):
+        for key in ('client_cleanup','supervisor_cleanup'):
+            v=self.unstarted();v[key]['reaped']=False
+            with self.assertRaises(ValueError):settled(v)
+
+    def test_incomplete_no_creation_frame_refused(self):
+        for mutation in (lambda v:v['proxy'].pop('server_command'),
+                         lambda v:v['proxy'].update(server_command=['fake','-server']),
+                         lambda v:v['proxy'].update(server_pid=1),
+                         lambda v:v['proxy'].update(launcher_control_header_bytes_excluded=4),
+                         lambda v:v.update(capture_truncated=True)):
+            v=self.unstarted();mutation(v)
+            with self.assertRaises(ValueError):settled(v)
+
     def test_complete_prefix(self):
         with tempfile.TemporaryDirectory() as name:
             for stage in ('seed', 'update', 'noop'):

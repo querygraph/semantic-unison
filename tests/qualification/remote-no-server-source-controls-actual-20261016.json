@@ -1,0 +1,123 @@
+{
+  "schema": "unison-remote-no-server-source-controls/1",
+  "runs": [
+    {
+      "owner_terminal": {
+        "chunk": "f373de",
+        "session": 6698,
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 67833,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 67833,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-cygukhy1/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5a0833eca81efa575e7767ec623aed0fb4c62ea1d8540faf4c2d8d5f0908f455"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-cygukhy1/SHARED-START.json",
+          "bytes": 1149,
+          "sha256": "78d130e887bdfb27d6032f2be02726595461f138202a28ac041bb1438a302b5e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-cygukhy1/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-io-controls-cygukhy1/SHARED-STDOUT.txt",
+          "bytes": 6113,
+          "sha256": "8256912817dd7e5c1c93af06f11829eb3861dbfff16171042ebcb43351200f1f"
+        }
+      ]
+    },
+    {
+      "owner_terminal": {
+        "chunk": "d3725d",
+        "session": null,
+        "exit_code": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 67877,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 67877,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-no-server-tzev_9a4/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "9a5ae65c3f969e7de533585d358e5b0a8020aaf78bc15ba339cde67739323f9f"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-no-server-tzev_9a4/SHARED-START.json",
+          "bytes": 1200,
+          "sha256": "162f66b1a5815fe94d57dcadbf85f6952fa1e819620a91b27069806dd03f1ebd"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-no-server-tzev_9a4/SHARED-STDERR.txt",
+          "bytes": 157,
+          "sha256": "c8b168131a50730381e18b21e987a53075866d9b767b97f3d05d7f411e513f8e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-no-server-tzev_9a4/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 6685,
+      "sha256": "dec9c4b27c625d75addf7f89c4806e39eadf91c93b74b47b351c89253436d48b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger.py",
+      "bytes": 4977,
+      "sha256": "eac3c07a9f3331880a02673430e3547acf2d41fbf2774c4e82d60a8116d167d8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_remote_fallback/ledger_test.py",
+      "bytes": 6455,
+      "sha256": "a20d19083ff6cd0e4f11a51a267f9562714c6080e99564d9d1a13073ee603641"
+    }
+  ],
+  "scope": "Commonpinnedproxy no-serverproof reused by syncjournal and remoteledger; fulloriginalsharedcontrols plus remotefixture/mockcontrols. RealPythonpeers only insharedsuite; no actualremoteUnison/camera/SDK/Adobe/EXglobal. HistoricalpassedpropertyV3 sourcesremainhistorical, no replay."
+}

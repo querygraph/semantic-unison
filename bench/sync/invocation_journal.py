@@ -6,6 +6,30 @@ process settlement. Outcomes contain evidence; this journal does not audit it.
 import copy
 
 
+def audit_no_server_creation(run):
+    """Consume a pinned proxy's complete pre-creation frame.
+
+    Caller must separately audit client/supervisor identity, reap and groups;
+    this helper alone proves neither those lifetimes nor aggregate closure.
+    """
+    proxy = run.get('proxy')
+    if not (type(proxy) is dict
+            and proxy.get('schema') == 'unison-loopback-protocol-count/1'
+            and all(proxy.get(k, 'MISSING') is None for k in (
+                'server_command', 'server_pid', 'server_returncode',
+                'server_cleanup', 'server_resources', 'launcher_control_header_bytes_excluded'))
+            and proxy.get('forwarded_protocol_bytes') == {
+                'client_to_server_bytes': 0, 'server_to_client_bytes': 0}
+            and proxy.get('input_pump_joined') is True
+            and proxy.get('pump_errors') == []
+            and type(proxy.get('fault')) is str and bool(proxy['fault'])
+            and run.get('capture_truncated') is False
+            and run.get('supervisor_capture_truncated') is False
+            and run['supervisor_cleanup']['returncode'] == 70
+            and type(run.get('returncode')) is int and run['returncode'] != 0):
+        raise ValueError('server no-creation proof incomplete')
+
+
 def audit_attempted(result):
     """Audit a journal prefix's lifecycle, independently of functional success.
 
@@ -62,17 +86,7 @@ def audit_attempted(result):
             # null command + complete normal-finally receipt proves that the
             # creation line was never reached. The supervisor group proof
             # above is independently required even in this branch.
-            require(all(proxy.get(k, 'MISSING') is None for k in (
-                    'server_command', 'server_pid', 'server_returncode',
-                    'server_cleanup', 'server_resources', 'launcher_control_header_bytes_excluded'))
-                    and proxy.get('forwarded_protocol_bytes') == {
-                        'client_to_server_bytes': 0, 'server_to_client_bytes': 0}
-                    and proxy.get('input_pump_joined') is True
-                    and proxy.get('pump_errors') == []
-                    and type(proxy.get('fault')) is str and bool(proxy['fault'])
-                    and run['supervisor_cleanup']['returncode'] == 70
-                    and run['returncode'] != 0,
-                    'server no-creation proof incomplete')
+            audit_no_server_creation(run)
             never_created += 1
             continue
         require(type(server['pid']) is int and server['pid'] > 0

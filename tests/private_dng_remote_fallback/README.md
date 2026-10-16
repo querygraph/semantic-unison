@@ -9,6 +9,14 @@ This is source/mock/generated-fixture evidence only. It does not requalify or
 replay the consumed18-source historical jobs, and no camera payload scope has
 been added to this synthetic harness.
 
+The ledger now shares the exact explicit no-server-creation verifier with the
+sync journal. Null PID alone never qualifies: a complete pinned proxy frame
+must show command/header/server resources absent, zero protocol counts, joined
+pump and a known failed supervisor/client outcome. Direct client/supervisor
+group/reap proofs remain required before this branch. [Current controls](../qualification/remote-no-server-source-controls-actual-20261016.json)
+cover the full prefix and malformed/group-proof refusals; no new remote runtime
+job is qualified by this source successor.
+
 The first exact scoped execution has passed and closed; see the actual section
 below. Its admission is consumed, not permission to rerun. The
 `coordinator.py` entrypoint requires a fresh exact Root admission, plan and
