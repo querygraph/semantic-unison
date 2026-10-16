@@ -261,7 +261,18 @@ containing3551 reaped0/group absent/outerCPU8 closed, actual06bb6e/0/no session.
 Receipt mixed-validation-lifecycle-actual preserves predecessor without separate
 exit receipt. No compiledprobe/SDK/ExifTool/Photo/canonicalIO use. Known refusal
 composition only; success-probe inheritance/unknown retention remain open.
-Next: successful inherited-probe/unknown composition, compiled artifact preparation and actual
+**Successful inherited-probe composition now passed:** lifecycle --success-controls
+uses actual worker/clone-only tiny inputs/compiled stock+Ox probes/four authored
+fake helpers/32hash tasks under disposable inherited locks. Raw helper PID ledgers
+joined to audits, real parent prefix/bytes/source/exit checks run before closure.
+Worker3818/probes/helpers settled; all inner locks closed+reacquired, containing
+3817 reaped0/group absent/outerCPU8 closed. Actual66769/99d55b/0/no running session.
+Receipt mixed-validation-success-lifecycle-actual embeds8raw metadata artifacts
+with pins, preserving true task/parent resource scope. Fake build-id/version are
+protocol text, not actual SDK/ExifTool qualification. Admission/entry/inventory
+doubles remain; no canonicalIO/Photo/nativegrant. Unknown-retention composition
+and compiled/native dependency inventory are still outstanding.
+Next: unknown composition, compiled artifact preparation and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

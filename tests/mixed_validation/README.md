@@ -270,3 +270,21 @@ before separately persisted exit evidence is preserved. No compiled probe,
 SDK, ExifTool, camera/Photo data or canonical IO use. This qualifies known
 pre-probe refusal composition; successful compiled-probe inheritance and unknown
 retention composition still need evidence before a real mixed native request.
+
+`lifecycle.py --success-controls` now additionally runs the full successful
+worker: real source-plan checks, tiny native clones, stock then Ox compiled
+production-linked probes, durable journal and post-input fences, all under
+disposable inherited inner locks. Four authored fake helpers emit the SDK frame
+and metadata JSON; their separately written PID ledgers are joined to the raw
+task audits. The fake build-id/version strings are protocol controls, not real
+SDK/ExifTool provenance. The same parent audit rehashes both disposable inputs
+and binds actual worker exit before releasing descriptors.
+
+[Actual successful composition](../qualification/mixed-validation-success-lifecycle-actual-20261016.json)
+passed: worker3818/probes/four fake helpers settled,32 hash tasks, inner locks
+closed/freshly reacquired; containing3817 reaped0/group absent/outerUnison8
+closed. Owning session66769/terminal99d55b/0/no running session. Raw START,
+RESULT, prefix/exit/closure and helper ledgers are embedded with exact pins.
+Admission/entry-script/inventory remain explicit disposable doubles, no canonical
+IO/Adobe/ExifTool/Photo access or native admission. Unknown-retention composition
+and newly pinned compiled/native dependency inventory remain before real review.
