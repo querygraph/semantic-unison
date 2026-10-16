@@ -1,0 +1,60 @@
+{
+  "schema": "unison-sdk-shared-dispatch-faults/1",
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "actual_terminal": {
+    "chunk": "0c3d70",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 19956,
+      "sha256": "eb2de22a29e9854fb7ee00a57b15fa741efc3ba142c7efc797aad72905138c7c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_dispatch_test.py",
+      "bytes": 5604,
+      "sha256": "3d18e6dcf86d9982e312287facbc3f7f580e8e72694ae79ad64229a4031c39aa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit.py",
+      "bytes": 3335,
+      "sha256": "e4e09d4324e3c8f5fa7ecfa17af51c3dcb49b421ad4d733dc919e3ab4a601d8a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_parent_audit_test.py",
+      "bytes": 2752,
+      "sha256": "1c967e6c55872562d6c6d9b2711ec0a9cc5b14721c09b846eae0c5ec68826cc5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/dispatch_fault_test.py",
+      "bytes": 6469,
+      "sha256": "75b9e3f3bd2a6df8958612582b25f3ccaa0ab18721eb2bc95ff7ed25eb738b63"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-dispatch-faults-20261016a/SHARED-START.json",
+      "bytes": 1114,
+      "sha256": "302f8d323412ad6626980a0592abd07463333926f1b17bc906bf6303ab7149c6"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-dispatch-faults-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "20beb2f29f1969c24bfd1390aa62f08633545d7a9e04018f634c2e25e97354bd"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-dispatch-faults-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-dispatch-faults-20261016a/SHARED-STDERR.txt",
+      "bytes": 110,
+      "sha256": "87bafeb69ac8b9060062f37ecfb55296ac686a403e533df4656a62a00406ac84"
+    }
+  ],
+  "scope": "7newSDKtarget parentmockfault groups+4reused prefixaudit groups; inertPID900001 never actualchild, devnullFDs neverchildpassed. Auditbeforeaggregate/reverseclose/failedprefix/live/unknown/exitcontradiction/CPUcloseuncertainty retention. Mockclosefailure never OScloses sofixture cleanup not numericretry. ActualouterUnison8closed; noSDK/Photo/payload/EXIO/nativegrant.",
+  "full_goal_complete": false
+}

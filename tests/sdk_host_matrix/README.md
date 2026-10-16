@@ -192,3 +192,11 @@ pass17 groups using metadata/artifact/owner doubles. No plan/admission/native
 runtime exists for this target yet. New-target parent fault controls and actual
 entry/dispatcher composition must precede a fresh reviewed native request.
 Historical18-credit matrix and consumed receiving slots are not reusable.
+
+[New-target parent fault controls](../qualification/sdk-shared-dispatch-faults-actual-20261016.json)
+now cover audit-before-reap/reverse-close, known failed-prefix closure without
+functional pass, unknown direct groups, complete/failed worker-exit contradictions,
+live observation and one-shot CPU-close uncertainty retaining IO. Seven new
+inert-owner cases plus four reused audit cases pass with actual outerCPU8 closure.
+MockPID900001 is never an OS child and mock close failures never call OS close;
+no native/canonical IO or actual new-target lifecycle is inferred.
