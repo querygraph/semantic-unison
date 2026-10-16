@@ -54,3 +54,16 @@ passed using only original tiny fake files and injected synthetic receipt
 transport. No actual CLI, SDK, retained DNG, Photo payload or EXglobal IO was
 used. These controls do not qualify clone preparation, transport owner binding,
 parent release or real SDK operation; those remain next integration work.
+
+`result.py` independently reparses a returned case against caller-supplied
+source identities and actual server binding. It reconstructs the helper census
+and compares stored settlement/verdict summaries to raw records. A failed
+preparation with no possible call is distinct from a known settled failed
+call; a possible call with no returned evidence is rejected. Complete results
+cannot hide original failures. The audit explicitly does not prove parent,
+CLI/worker/FD settlement or freshly rehash output paths. A future parent must
+compose those checks and the exact journal/proxy binding before release.
+
+[Three result audit groups plus five case regressions](../qualification/sdk-multifile-result-source-actual-20261016.json)
+passed with original tiny fixtures and synthetic diagnostics only. No CLI,
+SDK, retained DNG or EXglobal access occurred; outer group/tokens closed.
