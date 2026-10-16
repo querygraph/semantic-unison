@@ -28,7 +28,7 @@ def main():
                        'src/validationSnapshot.mli','src/validationSnapshot.ml']
     root=Path(tempfile.mkdtemp(prefix='unison-snapshot-workers-',dir='/private/tmp'));calls=[];artifacts={}
     for label in ('stock','ox'):
-        report=document('/private/tmp/unison-snapshot-worker-'+label+'-002-20261017/RESULT.json')
+        report=document('/private/tmp/unison-snapshot-worker-'+label+'-select-005-20261017/RESULT.json')
         assert report['complete'] and report['build_exit']==0
         compiler=report['compiler'];assert hashlib.sha256(Path(compiler).read_bytes()).hexdigest()==report['compiler_sha256']
         work=root/label;work.mkdir(mode=0o700);actual=Path(report['workspace'])/'src';objects=[]

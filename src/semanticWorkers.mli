@@ -12,6 +12,7 @@ type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
                         stats : Unix.LargeFile.stats }
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
+type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
@@ -66,6 +67,13 @@ val identify : t -> HelperSupervisor.cancellation ->
     an unmatched file is not hashed. Both outcomes require stable reads.
     Operational failure/cancellation never means no match. Same ownership,
     filesystem/domain/CPU admission and settlement rules as [digest]. *)
+val recognize : t -> HelperSupervisor.cancellation ->
+  recognizers:(FormatRecognition.handle * bool) list ->
+  Unix.file_descr -> recognition option Lwt.t
+(** Same bounded recognition/claim/error rules as [identify], but never add a
+    full-file fingerprint pass. Use to select unchanged candidates before size-
+    bounded private snapshotting. A trusted recognizer owns its own read bounds;
+    this is not an instrumented physical-I/O ceiling. *)
 val observe : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
   Unix.file_descr -> observation option Lwt.t
 (** Read-only inspection plus optional extension interpretation of the complete

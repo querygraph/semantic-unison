@@ -29,7 +29,7 @@ def main():
     rows += ['src/fileObservation_stubs.c','src/fileObservation.mli','src/fileObservation.ml','src/validationStage.mli','src/validationStage.ml','src/validationStageWork.mli','src/validationStageWork.ml']
     root=Path(tempfile.mkdtemp(prefix='unison-stage-work-',dir='/private/tmp'));calls=[];artifacts={}
     for label in ('stock','ox'):
-        report=document('/private/tmp/unison-snapshot-worker-'+label+'-stage-003-20261017/RESULT.json')
+        report=document('/private/tmp/unison-snapshot-worker-'+label+'-select-005-20261017/RESULT.json')
         assert report['complete'] and report['build_exit']==0
         compiler=report['compiler'];assert hashlib.sha256(Path(compiler).read_bytes()).hexdigest()==report['compiler_sha256']
         work=root/label;work.mkdir(mode=0o700);actual=Path(report['workspace'])/'src';objects=[]
@@ -55,7 +55,7 @@ def main():
         finally:os.chdir(previous)
     result=dict(calls=calls,linked_artifact_sha256=artifacts,workspace=str(root),SDK_invoked=False,
         source_pins={str(ROOT/p):hashlib.sha256((ROOT/p).read_bytes()).hexdigest()
-            for p in rows+['tests/workers/run.py','tests/workers/stage_work.ml','tests/workers/snapshot_controls.py']},
+            for p in rows+['tests/workers/run.py','tests/workers/stage_work.ml',str(Path(__file__).resolve().relative_to(ROOT))]},
         scope='Current production Make objects; actual snapshot workers plus asynchronous private-stage validation doubles. Cleanup uncertainty is injected EBADF; symbolic admission deliberately remains held until test-process exit. No SDK/photos/scan integration.')
     save(root/'RESULT.json',result);print(json.dumps(result),flush=True)
 

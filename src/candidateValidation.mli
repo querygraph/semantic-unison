@@ -1,4 +1,17 @@
 val enabled : unit -> bool
+val unchanged_file : staging_directory:Fspath.t -> source:Fspath.t ->
+  destination:Path.local -> max_bytes:int64 -> unit Lwt.t
+(** Internal unchanged-file entry, not scan selection or an enabled scope.
+    Off selects no companions and opens nothing. Otherwise hold one bounded
+    snapshot/backend envelope; recognize through the held read-only source
+    before copying. Nonmatches skip full hashing/copying even above max_bytes.
+    Selected files are validated only through a private snapshot in an existing
+    owned0700 staging_directory. A one-file local gate partitions the existing
+    envelope, never reacquiring global admission. Original/stage fences, final
+    snapshot hash and actual callback settlement precede cleanup. Unknown stage
+    cleanup retains its owner/admission; existing worker/reader close-fault
+    limitations remain separate. Resource, staging and integrity errors do not
+    become permissive validator warnings. Regular nonsymlink source required. *)
 val before_commit : directory:Fspath.t -> candidate:Path.local ->
   destination:Path.local -> unit Lwt.t
 (** Validate finalized private received candidates, including descendants of

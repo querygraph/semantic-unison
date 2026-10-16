@@ -3,7 +3,8 @@ exception Cancelled
 exception Snapshot_changed
 let retained = ref []
 let retained_owners ()=List.rev !retained
-let run ~pool ~cancellation ~max_bytes ~create ~validate ?(on_retained=fun _ -> ()) () =
+let run ~pool ~cancellation ~max_bytes ~create ~validate
+    ?(select=fun ~source:_ -> return true) ?(on_retained=fun _ -> ()) () =
   if max_bytes<0L then invalid_arg "ValidationStageWork.max_bytes";
   let hold owner =
     if not (List.exists (fun current -> current==owner) !retained) then
@@ -26,6 +27,11 @@ let run ~pool ~cancellation ~max_bytes ~create ~validate ?(on_retained=fun _ -> 
     cancelled ();
     let source,output=ValidationStage.descriptors owner in
     BorrowedWork.bind
+      (fun () -> select ~source)
+      (fun selected ->
+      ValidationStage.check owner;cancelled ();
+      if not selected then return () else
+      BorrowedWork.bind
       (fun () -> SemanticWorkers.snapshot pool cancellation ~max_bytes ~source ~output)
       (function
       | None -> fail Cancelled
@@ -40,7 +46,7 @@ let run ~pool ~cancellation ~max_bytes ~create ~validate ?(on_retained=fun _ -> 
             ValidationStage.check owner;cancelled ();
             if SemanticHash.hex fingerprint.SemanticWorkers.digest<>snapshot.ValidationSnapshot.sha256 ||
                fingerprint.stats.Unix.LargeFile.st_size<>snapshot.bytes then fail Snapshot_changed
-            else return ()))) in
+            else return ()))) ) in
   BorrowedWork.try_bind
     (fun () ->
       cancelled ();

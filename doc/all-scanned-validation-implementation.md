@@ -224,3 +224,37 @@ Next connect selected validators and bounded outer admission in CandidateValidat
 Select formats through held read-only recognition before expensive snapshots,
 so a huge non-DNG does not fail a DNG snapshot-size policy. Then implement actual
 scan-selected coverage, preference negotiation and no-op/cross-peer controls.
+
+## Current source checkpoint — internal unchanged-file validation
+
+The new `CandidateValidation.unchanged_file` entry is implemented and qualified
+against current stock/Ox Make objects. It remains INTERNAL: no all-scanned
+preference, negotiated capability, scan traversal, or production activation yet.
+`SemanticWorkers.recognize` performs bounded recognition without the existing
+Identify operation's whole-file fingerprint. Off opens nothing; a generated
+nonmatch larger than the snapshot budget reads only four recognition bytes and
+skips hashing/copying/validation. A matched file obeys the snapshot byte budget;
+validators receive only its private snapshot. Success, rejection, private
+mutation, cancellation, and retained-uncertainty controls passed for both
+compilers. The canonical staging Fspath is passed in; this entry never changes
+process CWD. The worker Identify fingerprint behavior remains covered.
+
+Actual control owner ec7bac/session38387 -> terminal4df709/exit0/no session;
+three controllers/twelve compile-or-test child calls reaped0, groups settled,
+Unison00..07 released. Evidence:
+`tests/qualification/unchanged-validation-entry-actual-20261017.json`.
+Current Make build005 stock and Ox succeeded; stock's original parent handle
+85221 was missing on continuation, so its parent terminal is NOT reconstructed
+from SHARED-CLOSED. Ox actual47362/ce238f/0/no session. Build004 preceded the
+CWD correction and is historical. The stage-work harness now pins itself;
+older harness receipts are not retroactively described as self-pinned.
+All fixtures generated/private; no SDK, Photo payload, new native sharing,
+all-scanned activation, or general legacy FD-fault qualification follows.
+
+Next: exact scan-selected work coverage, private endpoint staging initialization,
+followed-link/path policy, scope/capability negotiation and default/no-op tests.
+Do not expose all-scanned based only on this internal entry.
+
+User steering: exiftool-rs is being extended separately for dng-compare. Revisit
+reuse here after that work is ready; do not install, switch validators, or add
+an exiftool-rs dependency now. Existing source review remains historical.

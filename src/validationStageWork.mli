@@ -4,6 +4,7 @@ exception Snapshot_changed
 val run : pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation ->
   max_bytes:int64 -> create:(unit -> ValidationStage.t) ->
   validate:(candidate:string -> snapshot:ValidationSnapshot.report -> unit Lwt.t) ->
+  ?select:(source:Unix.file_descr -> bool Lwt.t) ->
   ?on_retained:(ValidationStage.t -> unit) -> unit -> unit Lwt.t
 (** Caller acquires the full staging/backend memory and FD envelope BEFORE
     invoking this operation, and retains it until the returned work settles.
@@ -11,6 +12,9 @@ val run : pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation -
     ownership through ValidationStage's exceptions. No independent async work
     may be started and then hidden by throwing before returning its promise.
 
+    [select] may perform trusted read-only recognition on the held source, never
+    invoke a pathname helper. False skips copying and validation, after source
+    fences, and retires the empty stage. Its promise must cover every borrower.
     Materialize with the actual worker queue, check original/stage fences,
     invoke [validate] with ONLY the disposable candidate pathname, await its
     actual helper/worker settlement, then rehash the held snapshot and recheck

@@ -10,12 +10,14 @@ type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
                         stats : Unix.LargeFile.stats }
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
+type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
   | Observed of observation
   | Identified of identification
+  | Recognized of recognition
   | Reconciled of reconciliation
   | Applied of SemanticDelta.application
   | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
@@ -23,6 +25,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
   | Identify of (FormatRecognition.handle * bool) list
+  | Recognize of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
   | Snapshot of int64 * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
@@ -89,7 +92,7 @@ let execute job =
     let operation file =
       match job.operation with
       | Digest -> Hashed {digest = SemanticFile.digest file; stats}
-      | Identify recognizers ->
+      | Identify recognizers | Recognize recognizers ->
         let formats = List.filter_map (fun (recognizer,claimed) ->
           check_cancel ();
           let selected = claimed || match FormatRecognition.identify recognizer file with
@@ -99,12 +102,14 @@ let execute job =
           recognizers in
         check_cancel ();
         SemanticFile.check file;
-        let fingerprint = match formats with
-          | [] -> None
+        let fingerprint = match formats,job.operation with
+          | _,Recognize _ -> None
+          | [],_ -> None
           | _ -> Some {digest=SemanticFile.digest file;stats} in
         check_cancel ();
         SemanticFile.check file;
-        Identified {formats;fingerprint;stats}
+        (match job.operation with Recognize _ -> Recognized {formats;stats}
+         | _ -> Identified {formats;fingerprint;stats})
       | Inspect extension ->
         Inspected {proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
@@ -352,7 +357,7 @@ let submit t cancellation fd requested_operation =
           end)) (function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result)) fail in
     let admitted_execution () = match t.io with
@@ -360,7 +365,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ | Reconcile _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -418,12 +423,20 @@ let reconcile_xmp t cancellation ~extension ~nonce ~base ~left ~right fd =
     | Some(Reconciled result) -> return(Some result)
     | Some _ -> fail(Failed "unexpected reconciliation response")) fail
 
-let identify t cancellation ~recognizers fd =
+let check_recognizers recognizers =
   if List.length recognizers > FormatRecognition.max_recognizers then
     invalid_arg "candidate recognition limit";
   let ids = List.map (fun (handle,_) -> FormatRecognition.format handle) recognizers in
   if List.length (List.sort_uniq String.compare ids) <> List.length ids then
-    invalid_arg "duplicate candidate recognition format";
+    invalid_arg "duplicate candidate recognition format"
+let recognize t cancellation ~recognizers fd =
+  check_recognizers recognizers;
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Recognize recognizers)) (function
+  | None -> return None
+  | Some (Recognized result) -> return (Some result)
+  | Some _ -> fail (Failed "unexpected recognition response")) fail
+let identify t cancellation ~recognizers fd =
+  check_recognizers recognizers;
   BorrowedWork.try_bind (fun () -> submit t cancellation fd (Identify recognizers)) (function
   | None -> return None
   | Some (Identified result) -> return (Some result)

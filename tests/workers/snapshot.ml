@@ -40,6 +40,23 @@ let () =
   ignore (Lwt_unix.run (W.digest pool (H.cancellation ()) source));
   check (match !observed with [stats] -> stats.SemanticFile.logical_bytes=131111L | _ -> false)
     "ordinary digest read observer changed";
+  let module Header = struct
+    let format="test/bounded-header-recognition"
+    let identify file=ignore (SemanticFile.read file 0L 4);FormatRecognition.Recognized
+  end in
+  let recognizers=[FormatRecognition.trusted (module Header),false] in
+  observed:=[];
+  let selected=Lwt_unix.run (W.recognize pool (H.cancellation ()) ~recognizers source) in
+  check (match selected with Some value -> value.W.formats=[Header.format] | None -> false)
+    "bounded recognition lost match";
+  check (match !observed with [stats] -> stats.SemanticFile.logical_bytes=4L | _ -> false)
+    "recognition unexpectedly performed full hash";
+  observed:=[];
+  let identified=Lwt_unix.run (W.identify pool (H.cancellation ()) ~recognizers source) in
+  check (match identified with Some {W.fingerprint=Some _;_} -> true | _ -> false)
+    "existing identify stopped fingerprinting";
+  check (match !observed with [stats] -> stats.SemanticFile.logical_bytes=131115L | _ -> false)
+    "existing identify read scope changed";
   let alias=try ignore (Lwt_unix.run (W.snapshot pool (H.cancellation ())
       ~max_bytes:131111L ~source ~output:source));false with W.Failed _ -> true in
   check (alias && bytes "source"=data) "worker alias refusal";

@@ -242,3 +242,61 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
 
 let before_commit ~directory ~candidate ~destination =
   before_commit_with_reservation ~reservation:None ~directory ~candidate ~destination
+
+let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
+  if max_bytes<0L then invalid_arg "CandidateValidation unchanged byte limit";
+  let validators=CandidateValidators.selected () in
+  if validators=[] then return () else
+  let runtime=SemanticRuntime.get () in
+  let requirements=CandidateValidators.maximum_resources validators in
+  if BackendResources.cpu_lanes requirements>runtime.SemanticRuntime.cpu_budget then
+    raise (Util.Fatal "Backend CPU declaration exceeds the shared budget");
+  let child_bytes,child_descriptors=BackendResources.add_cost requirements ~bytes:1048576 ~descriptors:9 in
+  if child_bytes>max_int-1048576 || child_descriptors>max_int-16 then
+    raise (Util.Fatal "Unchanged validation resource accounting overflow");
+  SemanticRuntime.with_cancellation (fun cancellation ->
+    SemanticRuntime.with_admission cancellation ~payload_bytes:(child_bytes+1048576)
+      ~descriptors:(child_descriptors+16) (fun () ->
+      let partition=SemanticAdmission.create ~source_headroom:None ~max_transactions:1
+        ~max_payload_bytes:child_bytes ~max_descriptors:child_descriptors ~max_pending:1 in
+      let selected=ref [] in
+      let recognizers=List.map (fun (validator:CandidateValidator.selected) ->
+        validator.recognition,FormatRecognition.matches_filename validator.recognition
+          (Path.toString destination)) validators in
+      let select ~source =
+        BorrowedWork.bind
+          (fun () -> SemanticWorkers.recognize runtime.pool cancellation ~recognizers source)
+          (function
+          | None -> fail ValidationStageWork.Cancelled
+          | Some recognition ->
+            selected:=List.filter (fun (validator:CandidateValidator.selected) ->
+              List.mem (FormatRecognition.format validator.recognition) recognition.SemanticWorkers.formats) validators;
+            if List.length !selected<>List.length recognition.formats then
+              fail (Util.Transient "Unexpected unchanged validation recognition selection")
+            else return (!selected<>[])) in
+      let validate ~candidate ~snapshot:_ =
+        validate_file ~partition ~reservation:None ~validators:!selected
+          ~destination:(Path.toString destination)
+          (Fspath.child staging_directory (Name.fromString (Filename.basename candidate))) in
+      BorrowedWork.catch
+        (fun () -> BorrowedWork.bind
+          (fun () -> ValidationStageWork.run ~pool:runtime.pool ~cancellation ~max_bytes
+            ~create:(fun () -> ValidationStage.create ~directory:(Fspath.toString staging_directory)
+              ~source:(Fspath.toString source) ~max_bytes:Int64.max_int)
+            ~select ~validate
+            ~on_retained:(fun _ -> Util.warn "Unchanged-file validation cleanup ownership is unresolved; resource admission remains retained.") ())
+          (fun () ->
+            let usage=SemanticAdmission.usage partition in
+            if usage.transactions<>0 || usage.pending<>0 then
+              fail (Util.Transient "Unchanged validation partition did not settle") else return ()))
+        (function
+        | ValidationStageWork.Cancelled -> fail (Util.Transient "Unchanged-file validation cancelled")
+        | ValidationStageWork.Snapshot_changed -> fail (Util.Transient "Unchanged validation snapshot mutated")
+        | SemanticFile.Invalid reason | SemanticWorkers.Failed reason -> fail (Util.Transient reason)
+        | ValidationStage.Cleanup_failed error ->
+          fail (Util.Transient ("Unchanged validation cleanup: "^Printexc.to_string error))
+        | ValidationStage.Preparation_failed (original,cleanup) ->
+          fail (Util.Transient ("Unchanged validation failed: "^Printexc.to_string original^
+            "; cleanup: "^Printexc.to_string cleanup))
+        | Unix.Unix_error _ as error -> fail (Util.Transient ("Unchanged validation: "^Printexc.to_string error))
+        | error -> fail error)))
