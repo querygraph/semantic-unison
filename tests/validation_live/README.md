@@ -28,3 +28,12 @@ binding, invalid/insufficient spans, exponent limits and conservative conversion
 to nanosecond bounds. `live_records.bound` contracts both ends by representation
 margin and inward integer rounding. It never proves settlement or SDK activity.
 Synthetic protocol records do not establish actual receiving emission.
+
+[Actual companion controls](../qualification/validation-live-companion-actual-20261016.json)
+now link current compiler-matched production objects and exercise four cases
+per compiler: passing synthetic receipt, exit-zero/errors1 rejection, tracing
+disabled, and validation off. The strict parser binds emitted live spans and
+group observations to the actual component/helper PIDs and candidate SHA/size.
+All component exits, helper direct reaps, group0 observations and outer CPU
+closures pass. This is component emission, not full receiving sync or SDK concurrency.
+The runner copies its ML control into its private workspace before compiling.
