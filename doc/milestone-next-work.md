@@ -226,3 +226,12 @@ closed; no payload/SDK/runtime execution. This is end-to-end validation-path
 comparison, not isolated SDK decode throughput. Per-row retained ownership,
 independent audit, exact source/input/build pins and a fresh admission remain
 required before any run. Standing8/8 stays the default; no exclusive18 request.
+
+The receiving-comparison transport now binds each exact scheduled row to both
+endpoint flags and an explicit1/3-worker journal identity while reusing the
+qualified one-shot owned Invoker. Constructor checks reject schedule/command/
+limit/namespace changes; input mutation cannot alter the copied binding.
+Nine source controls including old-target regressions passed20b954/0 with all
+groups/Unison8 closed. Measurement calls are injected: no CLI/SDK/payload/IO.
+Next implement independently reconstructed per-row and whole-prefix audits,
+then actual lifecycle composition; no runtime request/admission exists yet.

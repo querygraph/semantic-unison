@@ -24,3 +24,14 @@ passed with the outer Unison8 closed. Runtime dispatcher, exact input/build/sour
 pins, per-row lifecycle and independent audit integration are still pending.
 Fresh source review and separate IO/SDK scheduling admission are required before
 execution. The actual multi-file V1 grant is consumed and cannot authorize this.
+
+`transport.py` reuses the qualified one-shot transport, artifact/source hash
+checks and intent/outcome persistence. It independently reconstructs each finite
+row before binding its command, both endpoint flags and journal worker count.
+The legacy transport's fixed workers3 identity is explicitly checked then
+adapted to the row's exact1/3 setting; a changed identity is refused, not silently
+normalized. Input rows are copied before use. [Nine source controls](../qualification/sdk-throughput-transport-source-actual-20261016.json)
+cover the schedule, adapter, mutation refusal and old-target regressions. Calls
+and outcomes are injected; there is no native execution or runtime admission.
+Independent per-row/case/whole-prefix audit and actual child-boundary integration
+remain required before freezing a request.
