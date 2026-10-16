@@ -22,6 +22,7 @@ from shared_process_owner import retain_after_record
 from shared_cpu_pool import UnresolvedOwnership
 from mixed_validation.audit import audit as audit_task
 from mixed_validation import build_receipts
+from mixed_validation import metadata_dependencies
 import shared_binding
 import shared_dispatch as dispatch
 
@@ -76,6 +77,7 @@ def child():
         stack.enter_context(patch.object(boundary,'worker_argv',side_effect=argv))
         stack.enter_context(patch.object(shared_binding,'inventory',return_value=tuple(tuple(x) for x in inventory)))
         stack.enter_context(patch.object(entry,'verify_build',return_value=dict(disposable_build_double=True)))
+        stack.enter_context(patch.object(entry,'verify_metadata',return_value=dict(disposable_metadata_double=True)))
         if not (Path(args.workspace)/'EXECUTE-FAKES').exists():
             stack.enter_context(patch.object(entry,'execute_plan',side_effect=refuse))
         else:stack.enter_context(patch.object(entry,'invoke',side_effect=fake_call))
@@ -153,6 +155,7 @@ def controls(*,success=False,unknown=False):
             stack.enter_context(patch.object(dispatch.Pool,'read',return_value=CPU()))
             stack.enter_context(patch.object(dispatch,'checked_io_request',return_value=(io_pool,deadline)))
             stack.enter_context(patch.object(build_receipts,'verify',return_value=dict(disposable_build_double=True)))
+            stack.enter_context(patch.object(metadata_dependencies,'verify',return_value=dict(disposable_metadata_double=True)))
             if unknown:
                 stack.enter_context(patch.object(dispatch,'OwnedGroup',side_effect=owner))
                 stack.enter_context(patch.object(dispatch,'retain_after_record',side_effect=retained))

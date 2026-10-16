@@ -345,3 +345,25 @@ checked, children4897/4899/4901 reaped0/groups absent/Unison8 closed, owning
 terminal3cb65b/0/no session. The fresh compiled probes remain unexecuted. No
 SDK/metadata/image/canonicalIO access. Metadata dependency inventory and exact
 one-use request preparation remain before coordinated native execution.
+
+## Metadata package inventory
+
+`metadata_dependencies.py` captures and verifies the installed ExifTool13.10
+script, complete236-file package roster and exact system Perl5.34 executable.
+Worker source checks and parent audit now enforce that inventory. The canonical
+package files are bounded owned regular single-link artifacts; the system Perl
+reader separately requires a root-owned non-writable executable and qualified
+one-attempt close handling. Config remains disabled in the probe's exact argv.
+
+[Installed inventory](../../doc/mixed-exiftool-package-inventory-v1.json)
+is49424B/SHAf918c0425c87adbc2bd26e6f86e30dc5ed77fc8665c5c4aa22d1c80da142f014.
+[Actual capture/recheck](../qualification/mixed-validation-metadata-inventory-actual-20261016.json)
+closed child5242/terminal58e027/0. [Two saved-package mutation and three inert
+entry groups](../qualification/mixed-validation-metadata-enforcement-actual-20261016.json)
+passed, children5325/5327 reaped0/groups absent/CPU8closed, terminal491c01/0.
+No ExifTool command, SDK, media or canonicalIO operation occurred. OS Perl
+module search paths and dylibs remain an explicit trust boundary, so full
+runtime-dependency completeness stays false. Disposable lifecycle fixtures now
+explicitly double package verification as well as build/admission/inventory.
+Next is the frozen exact plan/request with current execution/prerequisite pins;
+it still requires separately reviewed native IO admission before any SDK run.

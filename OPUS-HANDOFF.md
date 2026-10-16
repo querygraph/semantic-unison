@@ -306,7 +306,18 @@ session. Receipt mixed-validation-build-enforcement-actual. No SDK/media/EXIO.
 Lifecycle control source now explicitly doubles build receipts, alongside prior
 admission/inventory doubles; prior lifecycle evidence remains source-pinned.
 Complete standard-library inventory still false, no new execution authorization.
-Next: metadata dependency inventory/request and actual
+**Metadata inventory captured/enforced:** metadata_dependencies.py pins installed
+ExifTool13.10 script+all236packagefiles+root-owned non-writable system Perl5.34
+executable. Worker source checks/parent audit enforce. doc/mixed-exiftool-package-
+inventory-v1.json49424B SHA f918c0425c87adbc2bd26e6f86e30dc5ed77fc8665c5c4aa22d1c80da142f014.
+Actualcapture/recheck child5242/58e027/0 closed;2metadata+3inertentry groups passed
+children5325/5327 closed/CPU8closed, actual491c01/0/no session. Receipts metadata-
+inventory-actual and metadata-enforcement-actual. No ExifTool command/SDK/media/
+EXglobal. Full runtime closure FALSE: OS Perl module search paths/dylibs remain
+trusted, not a hermetic runtime claim. Lifecycle source explicitly doubles
+package verifier alongside prior build/admission/inventory doubles.
+Next: frozen exact mixed plan/request (review conservative declared IO budget)
+and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

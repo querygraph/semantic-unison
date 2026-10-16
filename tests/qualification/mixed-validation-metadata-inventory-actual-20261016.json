@@ -1,0 +1,33 @@
+{
+  "scope": "Installed metadata package source/interpreter inventory only; zero ExifTool execution/SDK/media/EXIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,json,hashlib\nfrom pathlib import Path\nsys.path.insert(0,'tests')\nfrom mixed_validation.metadata_dependencies import capture,verify\nrecord=capture();p=Path('doc/mixed-exiftool-package-inventory-v1.json')\nwith p.open('x') as stream:json.dump(record,stream,indent=2);stream.write('\\n')\nraw=p.read_bytes();item=dict(path=str(p.resolve()),bytes=len(raw),sha256=hashlib.sha256(raw).hexdigest())\nproof=verify(dict(executable=record['executable'],version=record['version'],inventory=item))\nprint(json.dumps(dict(inventory=item,verification=proof)))\n"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"inventory\": {\"path\": \"/Users/alexy/src/unison/doc/mixed-exiftool-package-inventory-v1.json\", \"bytes\": 49424, \"sha256\": \"f918c0425c87adbc2bd26e6f86e30dc5ed77fc8665c5c4aa22d1c80da142f014\"}, \"verification\": {\"package_modules_verified\": 236, \"system_interpreter_verified\": true, \"full_runtime_dependency_inventory_complete\": false, \"execution_authorized\": false}}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 5242,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "source_sha256": "4125b83dd400e389afb5c70c8ccedc04d0348c067018b897ff859c7031e32c1e",
+  "owning_tool_terminal": {
+    "chunk_id": "58e027",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

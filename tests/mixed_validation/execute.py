@@ -22,6 +22,7 @@ from shared_process_owner import retain_after_record
 from shared_child import invoke
 from mixed_validation.inventory import verify as verify_inventory
 from mixed_validation.build_receipts import verify as verify_build
+from mixed_validation.metadata_dependencies import verify as verify_metadata
 
 PYTHON='/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14'
 PYTHON_SHA='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'
@@ -73,6 +74,9 @@ def worker(args,plan):
     verified_hash(dict(path=PYTHON,sha256=PYTHON_SHA,bytes=os.lstat(PYTHON).st_size))
     for row in plan['probes']:verify_build(row)
     records={};deadline=time.monotonic()+plan['limits']['observation_seconds']
+    def sources():
+        verify_sources(plan)
+        verify_metadata(plan['metadata'])
     def prepare(index,command):records[index]=prepare_input(plan,index)
     def call(index,command,end):
         return invoke(command,dict(PATH='/usr/bin:/bin',LANG='C',LC_ALL='C',
@@ -80,7 +84,7 @@ def worker(args,plan):
                       min(end,time.monotonic()+plan['limits']['probe_seconds']),
                       pass_fds=binding['inherited_fds'])
     execute_plan(plan,deadline=deadline,prepare=prepare,invoke=call,
-                 persist=lambda r:save(workspace,r),check_sources=lambda:verify_sources(plan),
+                 persist=lambda r:save(workspace,r),check_sources=sources,
                  verify_input=lambda index,command:verify_input(plan,index,records[index]))
     return 0
 

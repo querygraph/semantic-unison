@@ -15,7 +15,9 @@ def audit(result,plan,*,check_files=True):
     proof=audit_prefix(result,commands=argv,metadata_version=plan['metadata']['version'],require_admission=True)
     if check_files:
         from mixed_validation.build_receipts import verify as verify_build
+        from mixed_validation.metadata_dependencies import verify as verify_metadata
         for row in plan['probes']:verify_build(row)
+        verify_metadata(plan['metadata'])
         verify_sources(plan)
         # Hash only disposable candidates for calls with actual outcomes.
         # The retained source remains an exact metadata-only fence.
