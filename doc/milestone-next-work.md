@@ -33,3 +33,10 @@ The detailed [acceptance matrix](acceptance-matrix-audit.md) remains open. Its
 limitations are not automatically new features to implement, and its narrow
 receipts must not be promoted to universal platform/corpus guarantees. Determine
 each requirement's actual source/runtime proof before declaring the goal done.
+
+The next optional Adobe receiving kernel is now [source/mock prepared](../tests/camera_sdk_receiving/README.md):
+18 original controls cover one bound helper/group, exact SDK receipt, optional
+missing digest distinction, one-shot require command and unknown-retention
+selection. No SDK/camera payload/EXglobal invocation occurred. Its admitted-owner
+integration and full execution pins are still required before a runtime request;
+it does not reuse camera V4's consumed admission.

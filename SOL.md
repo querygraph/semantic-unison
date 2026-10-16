@@ -33,6 +33,13 @@ all groups/tokens closed and per-pool descriptor baselines restored. Pool8 uses
 six CPU permits plus owner2 within standing8, not eight simultaneous execution,
 a hard resource cap, independent algorithm proof or throughput result.
 
+A separate [camera SDK receiving kernel](tests/camera_sdk_receiving/README.md)
+is source/mock prepared:18 original controls verify strict candidate/helper/group
+binding, receipt framing, optional missing-versus-verified raw digest, one-shot
+require command and unresolved ownership bypass. No Adobe executable or camera
+payload was used. Exact owner/admission/helper-ledger integration remains before
+any fresh SDK runtime request; generic camera V4 grants cannot be reused.
+
 The full goal remains ACTIVE: representative real-camera semantic/private
 reference closure and receiving SDK validation remain distinct next work, along
 with broader failure/platform/resource coverage in the acceptance matrix.
