@@ -2,6 +2,27 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+## Hash-backend source reconciliation
+
+The [current source/receipt rebind](../tests/qualification/hash-backend-source-audit-20261017.json)
+confirms all six source pins in both historical checked-hash participants still
+match. `semanticHash.create` selects CommonCrypto through the native stubs on
+macOS; the portable reference is the fallback elsewhere and independently
+testable. The C context is private to its worker, copied through a properly
+aligned local context, rooted across allocations, and fed in bounded64KiB
+chunks without storing global OCaml pointers or calling back into OCaml.
+These source properties and the historical vector/domain tests are not a new
+independent cryptographic audit or NIST module-validation claim.
+
+The historical stock participant was5.5.1, not the current5.2.0 build; Ox was
+5.2.0+ox. Native and qualification-only forced-reference modes both passed then.
+The source identity rebind preserves that distinction and does not invent a new
+execution. macOS already consumes a maintained platform hash implementation;
+the non-Apple reference fallback does not close the maintained-library and
+runtime qualification requirements for other platforms. Keep those scopes open
+rather than replacing the current macOS backend or counting vector agreement
+as a third-party implementation audit. This review changes no frozen mixed pins.
+
 The current [SDK resource-observation scope addendum](../tests/qualification/acceptance-sdk-scope-addendum-20261016.json)
 updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
 actual completed native runs, not pending requests; V2 includes12 SDK calls and62

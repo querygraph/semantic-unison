@@ -341,6 +341,16 @@ Optional future supervised CLI evaluation described, not a new gate on current
 mixed request. No SDK/image/source bytes opened. Latest source-only scheduling
 readbackccede4 Unix1792188204: admission/workspace bothabsent; no currentresources.
 All326 frozen execution pins remain unchanged by these doc-only artifacts.
+**Hash-backend requirement source audit:** current macOS implementation already
+selects CommonCrypto via private rooted C contexts/64KiB feeds; portable manual
+reference is fallback elsewhere. Fresh source rebind matches all6historical
+checked-hash pins on stock+Ox. Receipt hash-backend-source-audit-20261017.json,
+actualsource15397d/0 (no test/compiler/media execution). Historicalstock5.5.1 is
+not current5.2.0; native+forcedreference controls remain exacthistory, no NIST/
+independentcrypto audit claimed. No macOS backend rewrite needed for this gap;
+non-Apple maintained-library/platformqualification still open. Acceptance and
+next-work docs updated without changing326frozenmixedsources. Latest admission
+readback958179 Unix1792188297 bothadmission/workspaceabsent, no resourcesheld.
 Next: reconcile Root review/admission against exact request, then actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 

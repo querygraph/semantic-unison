@@ -3,6 +3,21 @@
 This is an active work queue against SOL.md, not a completion claim or a new
 permission policy. Historical receipts retain their exact source snapshots.
 
+Current next runtime request is [mixed SDK/ExifTool/hash V1](mixed-validation-request-v1.json),
+prepared with326 source pins and nine prerequisites. It is not admitted or
+executed as of source readback1792188297 (admission/workspace absent). Source and
+tiny/disposable composition cover success, known refusal and missing-outcome
+retention; fresh probes built without execution. This pending IO window does
+not block independent source/document review or authorize a tool replacement.
+
+[Hash backend source reconciliation](acceptance-matrix-audit.md#hash-backend-source-reconciliation)
+confirms macOS already uses CommonCrypto and historical native/reference checked
+source pins still match. No macOS hash rewrite is called for by this finding.
+Non-Apple maintained-library/runtime scope remains open. The optional
+[exiftool-rs candidate review](exiftool-rs-review.md) found a CLI delimiter/version
+contract difference; evaluating it is a separate successor, not a prerequisite
+or silent change to the frozen mixed request.
+
 | Milestone | Current implementation/evidence | Next required work |
 | --- | --- | --- |
 | M0 baseline/toolchains | Upstream clone reuse, pinned stock/Ox, current Make and Dune application selftests | Keep current production changes covered; platform/GUI scopes stay explicit. |
