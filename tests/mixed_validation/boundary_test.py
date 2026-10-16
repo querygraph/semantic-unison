@@ -6,7 +6,7 @@ import unittest
 from unittest.mock import patch
 
 from boundary import bind,worker_argv
-from plan import TARGET
+from mixed_validation.plan import TARGET
 from plan_test import fixture
 
 
@@ -33,7 +33,7 @@ class Boundary(unittest.TestCase):
         self.assertFalse(p['lock_ownership_independently_proved'])
         self.assertFalse(p['resource_release_authorized'])
     def test_launch_changes_refused_even_if_parent_record_agrees(self):
-        for index in (0,1,2,5,7,9):
+        for index in (0,1,2,4,6,8):
             argv=list(self.argv);argv[index]+='changed'
             start=copy.deepcopy(self.start);start['command']=argv
             with self.subTest(index=index),self.assertRaises(ValueError):self.call(start,argv)

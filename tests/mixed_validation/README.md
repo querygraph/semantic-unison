@@ -171,8 +171,8 @@ That guard checks ordered Unison00..07 plus EXglobal inode observations and
 rejects missing, aliased or changed descriptors. Token indexes now require exact
 integers, so bools cannot alias numeric indexes. It does not acquire locks,
 authenticate the START writer, verify plan/interpreter bytes, or settle children.
-The named execute.py worker entry is now implemented below; parent dispatch is
-not integrated yet.
+The execute.py worker and exact-admission parent dispatch are now implemented
+below; actual inherited-process qualification is still outstanding.
 
 [Four boundary and five existing guard groups](../qualification/mixed-validation-boundary-actual-20261016.json)
 passed: injected fstat metadata plus real canonical-manifest metadata reads,
@@ -190,7 +190,7 @@ checks the qualified interpreter under IO, then connects the journal worker to
 pinned source/tool checks, native-clone-only preparation and post-input fences.
 Each probe inherits all nine guardian descriptions and a private UNISON state
 path. Existing journals are preserved on failure; unknown ownership enters the
-retained-owner handler. It offers no standalone admission/parent dispatch mode.
+retained-owner handler. Its parent mode now requires a fresh pinned admission.
 
 [Three entry control groups](../qualification/mixed-validation-entry-actual-20261016.json)
 passed with actual metadata files and inert injected worker dependencies;
@@ -225,3 +225,28 @@ reaped0/groups absent/CPU8 closed, terminal91e30c/0/no session. No native execut
 or bulk IO occurred. Parent dispatcher/admission wiring and actual inherited
 process controls remain next, followed by immutable artifact preparation and a
 separately admitted SDK/ExifTool run.
+
+## Shared dispatcher integration
+
+The mixed target now has an exact nine-word worker argv, matching existing
+dispatcher script conventions (interpreter, explicit script, worker/plan/SHA/
+workspace options). Parent mode validates the frozen plan/source inventory and
+unused workspace before admission checking/creation. Shared dispatch requires
+Unison8 plus EXglobal, rechecks the admission immediately before launch, records
+all nine inherited identities, observes up to298s without a broad kill, and
+independently audits the saved prefix and disposable bytes before worker reap
+and resource close. Actual worker exit must agree with functional completion.
+Unknown states retain the owner and descriptors. No CPU-only route is allowed.
+
+Mixed imports now use explicit package names so SDK test modules named plan.py
+cannot replace the worker's plan during parent imports. An initial regression
+run caught those import collisions; all seven children/resources closed and
+the failed outputs/source pins remain in the successor receipt.
+[Eight suites/33 groups](../qualification/mixed-validation-dispatch-source-actual-20261016.json)
+then passed, including three inert admission controls; all eight children reaped0/
+groups absent/Unison8 closed, actual session53500/8f6368/0/no running session.
+Only tiny authored fixtures/inert dependencies were used, no SDK/camera or
+canonical IO acquisition. Dispatcher source integration is not yet composed
+actual-lock/native qualification. Next: actual disposable inherited-process
+controls, immutable compiled-probe/build/dependency inventory preparation, and
+fresh reviewed one-use native admission. No current mixed native grant exists.

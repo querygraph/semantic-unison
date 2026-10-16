@@ -1,4 +1,7 @@
 """Exact current mixed execution/source inventory; no helper or media access."""
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[2]
@@ -22,7 +25,7 @@ def paths():
 
 
 def verify(plan,*,checker=None):
-    from artifacts import verified_hash
+    from mixed_validation.artifacts import verified_hash
     checker=checker or verified_hash
     rows=plan['source_pins']
     if len(rows)!=len(paths()) or {item['path'] for item in rows}!={str(p) for p in paths()}:

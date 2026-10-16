@@ -1,7 +1,10 @@
 """Pure plan mutation controls; no pool, media or SDK access."""
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 import copy
 import unittest
-from plan import commands,LIMITS,SCHEMA,TARGET
+from mixed_validation.plan import commands,LIMITS,SCHEMA,TARGET
 
 
 def artifact(name,size=32):return dict(path='/private/tmp/prepared/'+name,sha256='a'*64,bytes=size)

@@ -239,7 +239,19 @@ explicitly leaves byte verification false; neither mode grants FD release.
 Three parent+two inventory groups passed, children2226/2228 closed,
 actual91e30c/0/no session. Receipt mixed-validation-parent-actual. No SDK/media/
 EXglobal operations; current compiled artifact build linkage remains separate.
-Next: exact admission/dispatcher wiring/actual inherited9FD lifecycle and actual
+**Mixed dispatcher source wiring now implemented:** target mixed-sdk-metadata-hash
+requires exact Unison8+EXglobal admission and a nine-word worker argv matching
+existing explicit-script conventions (no extra -B position). Parent mode checks
+frozen plan/current source closure/unused workspace, shared dispatch rechecks
+before launch, records9FD identities, observes298s without broadkill, reparses
+prefix/rechecks disposable bytes before reap/close, binds actual worker exit.
+No CPU-only route. Package-qualified imports remove sibling plan.py collisions.
+Initial regression import failures allclosed/preserved; corrected eight suites/
+33groups passed, all8children reaped0/groups absent/CPU8closed, actual session53500/
+8f6368/0/no running session. Receipt mixed-validation-dispatch-source-actual.
+No SDK/camera/canonicalIO acquired. Actual inherited-process qualification and
+immutable compiled-artifact/dependency inventory remain outstanding; no nativegrant.
+Next: actual inherited9FD lifecycle/compiled artifact preparation and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

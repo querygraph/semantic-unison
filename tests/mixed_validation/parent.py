@@ -1,9 +1,12 @@
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 """Parent-side exact prefix and stored-input audit under retained IO ownership."""
 import os
 
-from plan import commands
-from audit import audit_prefix
-from artifacts import verified_hash,verify_sources
+from mixed_validation.plan import commands
+from mixed_validation.audit import audit_prefix
+from mixed_validation.artifacts import verified_hash,verify_sources
 from sdk_multifile.clone import stamp
 
 

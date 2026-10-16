@@ -1,15 +1,18 @@
+import sys
+from pathlib import Path
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 """Callable two-probe journal worker; owns no resource-release authority."""
 import copy
 import math
 import time
 
-from audit import audit
+from mixed_validation.audit import audit
 from shared_cpu_pool import UnresolvedOwnership
 
 
 def execute_plan(plan, *, deadline, **callbacks):
     """Consume the exact source contract; caller still proves admission/FDs."""
-    from plan import commands
+    from mixed_validation.plan import commands
     argv=commands(plan)
     return execute(argv,deadline=deadline,
                    metadata_version=plan['metadata']['version'],

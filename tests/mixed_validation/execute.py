@@ -1,4 +1,4 @@
-"""Mixed worker-only entry; parent admission/dispatcher integration is separate."""
+"""Exact one-use admitted mixed-work parent/worker entry."""
 import argparse
 import hashlib
 import json
@@ -9,17 +9,18 @@ import sys
 import time
 
 # Import the local plan before sibling test packages that also contain plan.py.
-from plan import commands,path
-from worker import execute_plan
-from artifacts import verify_sources,prepare_input,verify_input,verified_hash
-from boundary import bind,worker_argv
+sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+from mixed_validation.plan import commands,path
+from mixed_validation.worker import execute_plan
+from mixed_validation.artifacts import verify_sources,prepare_input,verify_input,verified_hash
+from mixed_validation.boundary import bind,worker_argv
 from camera_sdk_concurrency.persistence import save
 from private_camera_receiving.close import close_descriptors
 from shared_cpu_pool import UnresolvedOwnership
 from shared_io_pool import unique_object
 from shared_process_owner import retain_after_record
 from shared_child import invoke
-from inventory import verify as verify_inventory
+from mixed_validation.inventory import verify as verify_inventory
 
 PYTHON='/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14'
 PYTHON_SHA='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'
@@ -84,10 +85,24 @@ def worker(args,plan):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--worker',action='store_true',required=True)
-    for name in ('plan','plan-sha256','workspace'):parser.add_argument('--'+name,required=True)
-    args=parser.parse_args();path(args.plan);path(args.workspace)
+    parser.add_argument('--worker',action='store_true')
+    for name in ('plan','plan-sha256'):parser.add_argument('--'+name,required=True)
+    for name in ('workspace','admission','admission-sha256'):parser.add_argument('--'+name)
+    args=parser.parse_args();path(args.plan)
     plan=checked_plan(args.plan,args.plan_sha256)
+    if not args.worker:
+        if not args.admission or not args.admission_sha256 or args.workspace:
+            raise ValueError('fresh pinned IO admission required for parent mode')
+        workspace=Path(plan['workspace'])
+        if os.path.lexists(workspace):raise ValueError('workspace consumed; no replay')
+        from shared_dispatch import checked_io_request,run,MIXED_TARGET
+        argv=worker_argv(plan,interpreter=sys.executable,plan_path=args.plan,plan_sha256=args.plan_sha256)
+        admission=dict(path=args.admission,sha256=args.admission_sha256)
+        checked_io_request(admission,MIXED_TARGET,argv,workspace,8)
+        os.umask(0o077);workspace.mkdir(mode=0o700)
+        return run(MIXED_TARGET,argv,workspace,8,io_admission=admission)
+    if args.admission or args.admission_sha256:raise ValueError('worker consumes parent START only')
+    path(args.workspace)
     if args.workspace!=plan['workspace']:raise ValueError('worker workspace differs')
     try:return worker(args,plan)
     except UnresolvedOwnership:raise
