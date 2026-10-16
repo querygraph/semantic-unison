@@ -4,6 +4,13 @@
 
 ## Current checkpoint — 2026-10-15
 
+[Crossed privateDA retirement reconciliation](tests/qualification/private-dng-crossed-retirement-reconciliation-20261016.json):
+actualSTART1792113844.2988029 under77ea9eeb/owner77296/c15ad5/0 preceded
+Rootretirement1792113887.3426728. Later ROOT_RETIRED_UNEXERCISED marker preserved
+unchanged as crossed observation; actual one-use execution/closure is not undone.
+Root sent exact correction receipts; no replay/newadmission/resourcehold. Current
+canonicalprobe isv3/backendcombined-failurefix736cac5, oldv2deferhistorical.
+
 Combined IOclose failures fixed in source successor: UnresolvedIOOwnership carries
 ALLuncertainFD pre-close identities plus known-open FDs/original cause, even ordinary
 refusal+directoryclose or rollbackclose+directoryclose. No post-uncertain fstat/numeric
