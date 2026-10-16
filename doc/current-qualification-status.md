@@ -277,3 +277,11 @@ before release. [41source/mock/disposable checks](../tests/qualification/sync-io
 passed/closed; actual transport under this IO successor is unqualified/unstarted.
 The300s parent observation retains unknown owners instead of promising completed
 wall time. No camera/SDK or automatic runtime grant follows.
+
+[Shared functional IO execution](../tests/qualification/shared-sync-io-actual-20261016.json)
+now passed actual18rows54CLI under one exact Root admission, EXglobal then
+Unison00..07. Current stock/Ox worker1/2/3 ordinary/clone/semantic outputs and
+basis/noop checks passed; all client/supervisor/server/pump and containing
+parent/group proofs audited, IO/CPU released. Worker artifact hash sets and32
+source pins matched. This is generated-fixture functional evidence, not camera,
+SDK, quiet throughput, hard resource bounds or physical topology qualification.

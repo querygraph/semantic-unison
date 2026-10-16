@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL [shared EXIO functional sync](tests/qualification/shared-sync-io-actual-20261016.json)
+PASS/CLOSED onceunderfreshRoot4fd3481d:79452/b5e982/0/no session,
+owner34236/worker34237reaped0/othersabsent; EXIO+CPU00..07closed. Independent
+reparse18rows54CLI(client/supervisor/server/pumps), workers1/2/3 andordinary/
+receiverclone/semantic, all exactoutput/basis/noop flags. Expectedstock/Ox binary+
+compiler hashes and32execution sourcepins match. SourcecurrentDunebinaries
+include target-proofguard; generatedtwo2MiBfiles perrow only. OWNERRETURN
+5b0054a1 sealed/all10references pinned; actualterminal sentRootbeforesealing.
+No quiettiming/physicalIO/deviceindependence/hardRSS/wholeGoal/camera/SDK claim;
+no pendingresources or automatic successor. Earlier source-onlyrequest preserved
+as predecessor, no replay. Formatprofile localAPI consistency audit notyet run;
+freshadmission was prioritized andproduction sourcepins left unchanged.
+
+
 Sharedfunctional EXIO source successor prepared: existing54CLIstrictmulti-owner
 proof precedesworkerreap andCPU→IOclose; livecoordinator/missingserverproof
 retainsbothleases/no broadkill. Exact32sourcepinadmission andtwo stock/Ox binary+

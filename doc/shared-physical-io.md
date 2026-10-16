@@ -143,3 +143,15 @@ ordering, and retention without broad kill on live or unproved servers.
 unexecuted until Root schedules it. Two generated2MiBfiles/18rows54CLI only;
 no camera, Adobe/SDK, compilation, quiet benchmark or physical-device isolation
 claim. Existing physical pool manifest and prior consumed runs remain unchanged.
+
+
+The [first actual shared functional IO matrix](../tests/qualification/shared-sync-io-actual-20261016.json)
+subsequently passed under fresh admission4fd3481d:18rows54CLI, workers1/2/3,
+stock/Ox current Dune executables, generated fixtures only. Owner79452 terminal
+b5e982/0/no session and worker34237/group closure are retained. Both expected
+artifact sets and32source hashes matched; all client/server/supervisor/pump
+proofs audited before release. All CPU/IO descriptors closed. This qualifies
+that finite consumer route's EXglobal lifecycle, not production core physical
+IO integration, independent device lanes, arbitrary owner death, hard caps or
+uncooperative processes. Immutable pool manifest state is unchanged. Original
+source-only request and prior single-group qualifications keep their scopes.

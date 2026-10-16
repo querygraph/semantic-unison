@@ -1,0 +1,79 @@
+{
+  "schema": "unison-shared-sync-io-qualification/1",
+  "state": "PASS_CLOSED",
+  "owner_return": {
+    "path": "/private/tmp/unison-shared-sync-io-c16b34d0/OWNER-RETURN.json",
+    "bytes": 17365,
+    "sha256": "5b0054a18b39b54646ed762cc5d9817b3ad307e3161f4a2c5b6d3c626012a26b"
+  },
+  "actual_parent_terminal": {
+    "session": 79452,
+    "chunk": "b5e982",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/RESULT.json",
+      "bytes": 449588,
+      "sha256": "974886605735a3dcace652f1531e63cf2f1942f791cb268a1182eaa87ff06571"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-START.json",
+      "bytes": 5119,
+      "sha256": "bc3854c3aee25333b7d1b05dc2b72ebe87c21dd94794d1e68daa082b2d764693"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-IO-ATTEMPT.json",
+      "bytes": 1570,
+      "sha256": "3cda8d8de56d2844268cda64675e70224b410e53acf9bd52cd4553e6896f57d3"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "7d845638910f28a2e5b99d567242bb6c1f50d7d525ab409a193a3d3c6d9eb4ff"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-SERVER-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-STDOUT.txt",
+      "bytes": 1269,
+      "sha256": "9642fcc6ee03ed309454667c5d1d1cbe40da200a57d702a969e10cbe1afa718c"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-c16b34d0/OWNER-TERMINAL.json",
+      "bytes": 265,
+      "sha256": "da62a880c8b4434fc76bdbb4f403bb83e7e64a98cdf8e011e180849d1038f4e0"
+    },
+    {
+      "path": "/private/tmp/unison-shared-sync-io-admission-v1.json",
+      "bytes": 5803,
+      "sha256": "4fd3481d6723d03de6279e333a2a3089e87c8746bd5d5be590bfa3008d0ec95f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/shared-sync-io-request-v1.json",
+      "bytes": 9183,
+      "sha256": "55d172cd0581bb67737e4125321d086ab1130a9f5f527c5eef877c202622f8f9"
+    }
+  ],
+  "audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "finite functional output/ownership only; no quiet timing, hard CPU/RSS or physical IO proof"
+  },
+  "execution_source_pins_verified": 32,
+  "binary_and_compiler_pin_sets_verified": true,
+  "io_cpu_closed": true,
+  "worker_group_reaped_before_lease_close": true,
+  "unresolved_markers": [],
+  "scope": "One finite functional sharedIO matrix, generatedtwo2MiBfiles perrow/worker1,2,3. Independent reparse of all54embedded actual process/server/pump proofs and row flags; source/artifact expected hashes matched. No surviving payload fixtures rehashed after producer removed them; exactness is evidenced by pinned running harness checks and saved row data. No quiet benchmark/physicalIO/topology/wholeGoal/camera or SDK claim."
+}
