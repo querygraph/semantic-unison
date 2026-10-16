@@ -110,3 +110,16 @@ passed for entry, parent and dispatcher, including V1/extra-field and missing
 observation refusal. No native SDK, payload or EXglobal ran. Full fake-worker
 composition and a newly frozen V2 request remain required before any new
 reviewed native admission; the completed V1 grant remains consumed.
+
+[Full observed worker composition](../../tests/qualification/sdk-observed-worker-lifecycle-actual-20261016.json)
+now passed one actual worker, twelve original fake validators and twenty-five
+OS probe children through the dispatcher and independent parent audit. Every
+call had available samples, all groups settled, and disposable locks were
+freshly reacquired; outer canonical Unison8 closed. Admission, inventory,
+child argv and interpreter SHA were explicit doubles; no canonical EXglobal,
+SDK or photo payload was used.
+
+The distinct [native V2 request](../../doc/shared-sdk-host-request-v2.json) freezes
+136 execution sources and29 prerequisites, including V1 actual acceptance and
+the new component/worker evidence. Its plan passed metadata-only checked_plan.
+It is source-prepared, not admitted or dispatched, and does not reuse V1.
