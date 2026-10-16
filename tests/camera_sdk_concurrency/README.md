@@ -98,3 +98,20 @@ bounds and no implicit grant. Actual artifact validation, intent/outcome journal
 aggregate ownership and admission still belong to the forthcoming executor.
 The first proposed runtime control uses original tiny fixtures and fake validators;
 real SDK/camera work requires a distinct later reviewed request.
+
+## One-shot invocation kernel
+
+`invocation.Invoker` has no entry point or admission authority. Once an admitted
+owner supplies its exact namespace, pinned binary/tool/copied scripts, journal
+and observation deadline, it consumes its instance before any refusal/dispatch.
+It rehashes artifacts under stable native epochs, records intent before the
+strict-owned proxy call and persists a returned success or InvocationFailure
+outcome before handing it to the worker. No automatic retry occurs.
+
+Artifact hashing uses the already-qualified uncertain-close carrier, preserving
+original errors and every uncertain FD identity without numeric retry.
+[Seven source controls](../qualification/concurrent-invocation-kernel-controls-actual-20261016.json)
+cover that path, changed pins, deadline refusal and journal/call ordering. They
+use mocks and a tiny original artifact only. The future aggregate owner must
+still bind the admission, inherit IO/CPU ownership, audit all helper/call groups
+and retain unknown outcomes before this kernel may be used for actual receiving.
