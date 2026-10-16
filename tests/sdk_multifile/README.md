@@ -67,3 +67,16 @@ compose those checks and the exact journal/proxy binding before release.
 [Three result audit groups plus five case regressions](../qualification/sdk-multifile-result-source-actual-20261016.json)
 passed with original tiny fixtures and synthetic diagnostics only. No CLI,
 SDK, retained DNG or EXglobal access occurred; outer group/tokens closed.
+
+`transport.py` reuses the existing owned proxy invocation and one-use journal
+without changing its pinned source. It replaces both endpoint command flags
+with the explicit four-slot plan and removes the synthetic-only environment
+marker. The inherited intent/outcome journal ordering, binary/script pin fences,
+120s CLI observation and135s headroom remain. A worker still must bind this
+adapter to an exact admitted plan and owned IO/CPU; the adapter grants none.
+
+[Three injected transport controls](../qualification/sdk-multifile-transport-source-actual-20261016.json)
+passed exact command/server flags, one-use ordering and predispatch pin/deadline
+refusal. No real proxy/CLI, SDK, retained payload or EXglobal ran; the outer
+control group and Unison8 tokens closed. Actual fake-transport composition
+and independent complete parent audits remain next.
