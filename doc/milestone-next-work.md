@@ -173,3 +173,12 @@ scope is two receiving seeds/four qualified single-thread SDK calls on two
 retained generated DNG inputs, clone-only preparation, Unison8 plus EXglobal.
 Photo's current two-original render window takes priority; request review and
 separate scheduling do not authorize overlapping native/IO dispatch.
+
+The [empirical warm512 distribution report](../bench/sync/results/warm512-empirical-distribution-v1.md)
+now reconstructs all88 retained measured samples across18 configurations,
+including failed part3's partial groups. Every point links to its zero-based
+raw source row, with pinned inputs and the mandatory timing caveats; no sample
+is excluded or replaced. Only empirical ranks and observed maxima are reported,
+not small-sample p95/p99 or population worst cases. Two focused report controls
+and reconstruction passed under Unison8, all groups/tokens closed. This improves
+historical benchmark transparency without completing M6 or authorizing a rerun.
