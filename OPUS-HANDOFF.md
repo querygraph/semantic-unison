@@ -351,6 +351,16 @@ independentcrypto audit claimed. No macOS backend rewrite needed for this gap;
 non-Apple maintained-library/platformqualification still open. Acceptance and
 next-work docs updated without changing326frozenmixedsources. Latest admission
 readback958179 Unix1792188297 bothadmission/workspaceabsent, no resourcesheld.
+**Independent hash boundary/state controls added during pending review:** only
+tests/checked_hash/test.ml changed (outside326frozenexecutionpins); ten invalid
+ranges/domain/min_int/max_int, zero-length edges, rejected-stream preservation
+and independent contexts. Actual stock5.2.0/Ox5.2.0+ox pass native+forcedreference,
+15vectors/fourdomainsmode, expectedsharedcapture rejections; compilerdo_not_spawn
+alertpreserved. Containing6855/6896reaped0/groupsabsent/outerCPU8closed, actual
+40896/bd9038/0/no running session. Receipt hash-bounds-current-actual-20261017.
+Productionhash unchanged/all326mixedpins verified unchanged. Prior hash source-
+audit test.ml binding nowhistorical; don't relabel old5.5.1 result current5.2.0.
+No SDK/image/EXIO; no currentUnisonresources.
 Next: reconcile Root review/admission against exact request, then actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 

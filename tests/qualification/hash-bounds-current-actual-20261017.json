@@ -1,0 +1,316 @@
+{
+  "scope": "Current stock5.2/Ox checked hash native+forced-reference boundary/state controls on generated tiny data; no media/SDK/EXIO",
+  "rows": [
+    {
+      "label": "stock",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/checked_hash/run.py",
+          "--compiler",
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "--receipt",
+          "/private/tmp/unison-checked-hash-bounds-stock-de55d1e31a0b42479cbfbcb539b92e7c.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "PASS portable native/reference hashing:15 hashlib vectors,4 actual domains,10 invalid ranges/domain, unchanged rejected streams, independent contexts, streaming and finalization\nPASS portable native/reference hashing:15 hashlib vectors,4 actual domains,10 invalid ranges/domain, unchanged rejected streams, independent contexts, streaming and finalization\nPASS checked hash 5.2.0 retained /private/tmp/unison-checked-hash-j7ms0eom\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 6855,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "schema": "unison-checked-hash/1",
+        "status": "passed",
+        "compiler": {
+          "path": "/Users/alexy/.opam/default/bin/ocamlopt",
+          "version": "5.2.0",
+          "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+        },
+        "modeChecked": false,
+        "workspace": "/private/tmp/unison-checked-hash-j7ms0eom",
+        "sourcePins": {
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "tests/checked_hash/test.ml": "2e244f7cfd2a18c95384bf5cd90b4cf24cb76c7883c1f5d49b4e1b793afde1a3",
+          "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64"
+        },
+        "results": [
+          {
+            "mode": "native",
+            "root": "/private/tmp/unison-checked-hash-j7ms0eom/native",
+            "commands": [
+              {
+                "name": "compile",
+                "argv": [
+                  "/Users/alexy/.opam/default/bin/ocamlopt",
+                  "-I",
+                  "+unix",
+                  "unix.cmxa",
+                  "semanticHash_stubs.c",
+                  "semanticHash.mli",
+                  "semanticHash.ml",
+                  "test.ml",
+                  "-o",
+                  "test"
+                ],
+                "exit": 0,
+                "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "name": "runtime",
+                "argv": [
+                  "/private/tmp/unison-checked-hash-j7ms0eom/native/test"
+                ],
+                "exit": 0,
+                "logSha256": "86d6690a81879146bd09dac1033caa20dd032a633a95e2b03954efb23100d4cc"
+              }
+            ],
+            "compiledInputs": {
+              "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+              "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+              "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+              "test.ml": "910e07c5bc902ce2de4a8dd6c13436a150b17c90b52e0e98954fef100ed08466"
+            },
+            "binarySha256": "a0371853330b92810aae580c082a0d76d6e7ba672cc6dd044827af043ad215e4"
+          },
+          {
+            "mode": "forced-reference",
+            "root": "/private/tmp/unison-checked-hash-j7ms0eom/forced-reference",
+            "commands": [
+              {
+                "name": "compile",
+                "argv": [
+                  "/Users/alexy/.opam/default/bin/ocamlopt",
+                  "-I",
+                  "+unix",
+                  "unix.cmxa",
+                  "semanticHash_stubs.c",
+                  "semanticHash.mli",
+                  "semanticHash.ml",
+                  "test.ml",
+                  "-o",
+                  "test"
+                ],
+                "exit": 0,
+                "logSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+              },
+              {
+                "name": "runtime",
+                "argv": [
+                  "/private/tmp/unison-checked-hash-j7ms0eom/forced-reference/test"
+                ],
+                "exit": 0,
+                "logSha256": "86d6690a81879146bd09dac1033caa20dd032a633a95e2b03954efb23100d4cc"
+              }
+            ],
+            "compiledInputs": {
+              "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+              "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+              "semanticHash_stubs.c": "d921347607e17ee900ae35be707498d2f3c53099a287769a2d52746693158ff9",
+              "test.ml": "910e07c5bc902ce2de4a8dd6c13436a150b17c90b52e0e98954fef100ed08466"
+            },
+            "binarySha256": "2041da385e40eec33d33fa5bb5372f42d5d0a03fa057c3808b66416077d6f06e"
+          }
+        ],
+        "productionModeInterfaceSelected": false
+      }
+    },
+    {
+      "label": "ox",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/checked_hash/run.py",
+          "--compiler",
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "--receipt",
+          "/private/tmp/unison-checked-hash-bounds-ox-057c0f7e5f4e402eb4ef0f27b0b44477.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "File \"test.ml\", line 34, characters 36-53:\n34 |   let domains=List.init 4 (fun _ -> Domain.Safe.spawn (fun () ->\n                                         ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\nPASS portable native/reference hashing:15 hashlib vectors,4 actual domains,10 invalid ranges/domain, unchanged rejected streams, independent contexts, streaming and finalization\nFile \"context.ml\", line 2, characters 8-25:\n2 | let _ = Domain.Safe.spawn (fun () -> ignore(SemanticHash.finish shared))\n            ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"context.ml\", line 2, characters 64-70:\n2 | let _ = Domain.Safe.spawn (fun () -> ignore(SemanticHash.finish shared))\n                                                                    ^^^^^^\nError: The value \"shared\" is \"nonportable\"\n       but is expected to be \"portable\"\n         because it is used inside the function at file \"context.ml\", line 2, characters 26-72\n         which is expected to be \"portable\".\nFile \"input.ml\", line 2, characters 8-25:\n2 | let _ = Domain.Safe.spawn (fun () -> SemanticHash.feed (SemanticHash.create ()) shared 0 3)\n            ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"input.ml\", line 2, characters 80-86:\n2 | let _ = Domain.Safe.spawn (fun () -> SemanticHash.feed (SemanticHash.create ()) shared 0 3)\n                                                                                    ^^^^^^\nError: This value is \"contended\"\n         because it is used inside the function at file \"input.ml\", line 2, characters 26-91\n         which is expected to be \"portable\".\n       However, the highlighted expression is expected to be \"uncontended\".\nFile \"test.ml\", line 34, characters 36-53:\n34 |   let domains=List.init 4 (fun _ -> Domain.Safe.spawn (fun () ->\n                                         ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\nPASS portable native/reference hashing:15 hashlib vectors,4 actual domains,10 invalid ranges/domain, unchanged rejected streams, independent contexts, streaming and finalization\nFile \"context.ml\", line 2, characters 8-25:\n2 | let _ = Domain.Safe.spawn (fun () -> ignore(SemanticHash.finish shared))\n            ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"context.ml\", line 2, characters 64-70:\n2 | let _ = Domain.Safe.spawn (fun () -> ignore(SemanticHash.finish shared))\n                                                                    ^^^^^^\nError: The value \"shared\" is \"nonportable\"\n       but is expected to be \"portable\"\n         because it is used inside the function at file \"context.ml\", line 2, characters 26-72\n         which is expected to be \"portable\".\nFile \"input.ml\", line 2, characters 8-25:\n2 | let _ = Domain.Safe.spawn (fun () -> SemanticHash.feed (SemanticHash.create ()) shared 0 3)\n            ^^^^^^^^^^^^^^^^^\nAlert do_not_spawn_domains: Stdlib.Domain.Safe.spawn\nUser programs should never spawn domains. To execute a function on a domain, use [Multicore] from the threading library. This is because spawning more than [recommended_domain_count] domains (the CPU core count) will significantly degrade GC performance. Using both [Domain.spawn] and [Multicore] can cause [Multicore] to abort.\n\nFile \"input.ml\", line 2, characters 80-86:\n2 | let _ = Domain.Safe.spawn (fun () -> SemanticHash.feed (SemanticHash.create ()) shared 0 3)\n                                                                                    ^^^^^^\nError: This value is \"contended\"\n         because it is used inside the function at file \"input.ml\", line 2, characters 26-91\n         which is expected to be \"portable\".\n       However, the highlighted expression is expected to be \"uncontended\".\nPASS checked hash 5.2.0+ox retained /private/tmp/unison-checked-hash-j9njnn9e\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 6896,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "schema": "unison-checked-hash/1",
+        "status": "passed",
+        "compiler": {
+          "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "version": "5.2.0+ox",
+          "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+        },
+        "modeChecked": true,
+        "workspace": "/private/tmp/unison-checked-hash-j9njnn9e",
+        "sourcePins": {
+          "src/semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "src/semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "tests/checked_hash/test.ml": "2e244f7cfd2a18c95384bf5cd90b4cf24cb76c7883c1f5d49b4e1b793afde1a3",
+          "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64"
+        },
+        "results": [
+          {
+            "mode": "native",
+            "root": "/private/tmp/unison-checked-hash-j9njnn9e/native",
+            "commands": [
+              {
+                "name": "compile",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-I",
+                  "+unix",
+                  "unix.cmxa",
+                  "semanticHash_stubs.c",
+                  "semanticHash.mli",
+                  "semanticHash.ml",
+                  "test.ml",
+                  "-o",
+                  "test"
+                ],
+                "exit": 0,
+                "logSha256": "adcbd82ad1b08ac43128055a2349e941ad6d9ac0cf6c60d7e25f966fd2d5e179"
+              },
+              {
+                "name": "runtime",
+                "argv": [
+                  "/private/tmp/unison-checked-hash-j9njnn9e/native/test"
+                ],
+                "exit": 0,
+                "logSha256": "86d6690a81879146bd09dac1033caa20dd032a633a95e2b03954efb23100d4cc"
+              },
+              {
+                "name": "context",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-c",
+                  "context.ml"
+                ],
+                "exit": 2,
+                "logSha256": "3204cfc6c2110b19ed08a392caebaba0a3fea6476e73abc38763f8f6a86458df"
+              },
+              {
+                "name": "input",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-c",
+                  "input.ml"
+                ],
+                "exit": 2,
+                "logSha256": "a6e6240d8efb845546bcfff3c301a46a91f20571c9909fedf9161acf357a73da"
+              }
+            ],
+            "compiledInputs": {
+              "input.ml": "69a3cd933c945d302d68a9b40ef2696653a45a76c1a604b5ae5f03703a21bbd1",
+              "context.ml": "ee902a831cd32004d444736380762cf01074d369e089dc80e71cabcfd099e437",
+              "semanticHash.mli": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+              "semanticHash.ml": "b1ac061e218e78f5e9b1f75a98cef29a6101e0999969b3d183a24c9659b3d433",
+              "semanticHash_stubs.c": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+              "test.ml": "2e244f7cfd2a18c95384bf5cd90b4cf24cb76c7883c1f5d49b4e1b793afde1a3"
+            },
+            "binarySha256": "d51e4a2bb9b3225caacfdf702d5f8ff10a10ea6d7957cd19b14c480684e6d177"
+          },
+          {
+            "mode": "forced-reference",
+            "root": "/private/tmp/unison-checked-hash-j9njnn9e/forced-reference",
+            "commands": [
+              {
+                "name": "compile",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-I",
+                  "+unix",
+                  "unix.cmxa",
+                  "semanticHash_stubs.c",
+                  "semanticHash.mli",
+                  "semanticHash.ml",
+                  "test.ml",
+                  "-o",
+                  "test"
+                ],
+                "exit": 0,
+                "logSha256": "adcbd82ad1b08ac43128055a2349e941ad6d9ac0cf6c60d7e25f966fd2d5e179"
+              },
+              {
+                "name": "runtime",
+                "argv": [
+                  "/private/tmp/unison-checked-hash-j9njnn9e/forced-reference/test"
+                ],
+                "exit": 0,
+                "logSha256": "86d6690a81879146bd09dac1033caa20dd032a633a95e2b03954efb23100d4cc"
+              },
+              {
+                "name": "context",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-c",
+                  "context.ml"
+                ],
+                "exit": 2,
+                "logSha256": "3204cfc6c2110b19ed08a392caebaba0a3fea6476e73abc38763f8f6a86458df"
+              },
+              {
+                "name": "input",
+                "argv": [
+                  "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+                  "-c",
+                  "input.ml"
+                ],
+                "exit": 2,
+                "logSha256": "a6e6240d8efb845546bcfff3c301a46a91f20571c9909fedf9161acf357a73da"
+              }
+            ],
+            "compiledInputs": {
+              "input.ml": "69a3cd933c945d302d68a9b40ef2696653a45a76c1a604b5ae5f03703a21bbd1",
+              "context.ml": "ee902a831cd32004d444736380762cf01074d369e089dc80e71cabcfd099e437",
+              "semanticHash.mli": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+              "semanticHash.ml": "b1ac061e218e78f5e9b1f75a98cef29a6101e0999969b3d183a24c9659b3d433",
+              "semanticHash_stubs.c": "d921347607e17ee900ae35be707498d2f3c53099a287769a2d52746693158ff9",
+              "test.ml": "2e244f7cfd2a18c95384bf5cd90b4cf24cb76c7883c1f5d49b4e1b793afde1a3"
+            },
+            "binarySha256": "ddbfa0a7ecc3a7df87e768f2bf8921d93f2e36aed2d56c9a6c4d6cfae2a00b7a"
+          }
+        ],
+        "productionModeInterfaceSelected": false
+      }
+    }
+  ],
+  "cpu_closed": true,
+  "production_source_unchanged": true,
+  "sources": {
+    "tests/checked_hash/test.ml": "2e244f7cfd2a18c95384bf5cd90b4cf24cb76c7883c1f5d49b4e1b793afde1a3",
+    "tests/checked_hash/run.py": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64"
+  },
+  "owning_tool_terminal": {
+    "session_id": 40896,
+    "chunk_id": "bd9038",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "frozen_mixed_execution_source_pins_unchanged": true
+}

@@ -23,6 +23,14 @@ runtime qualification requirements for other platforms. Keep those scopes open
 rather than replacing the current macOS backend or counting vector agreement
 as a third-party implementation audit. This review changes no frozen mixed pins.
 
+The [current boundary/state successor](../tests/qualification/hash-bounds-current-actual-20261017.json)
+subsequently passed on stock5.2.0 and Ox5.2.0+ox: native/forced-reference modes,
+ten rejected ranges/domain, unchanged stream after rejection, independent
+contexts and the existing15 vectors/four domains. All containing groups/Unison8
+closed, actual40896/bd9038/0. Only the component test changed; production and
+all326 frozen mixed execution pins remain unchanged. This supersedes the prior
+test-source binding for that test file while preserving the historical receipt.
+
 The current [SDK resource-observation scope addendum](../tests/qualification/acceptance-sdk-scope-addendum-20261016.json)
 updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
 actual completed native runs, not pending requests; V2 includes12 SDK calls and62

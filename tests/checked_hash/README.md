@@ -29,3 +29,20 @@ The microbenchmark links exact old and current modules, verifies output parity,
 reports nine CPU/wall samples per backend with1MiB work each, and alternates the
 reference order. Results are cached-string controls rather than meaningful
 complete sync/storage performance or a blanket speedup claim.
+
+## Current boundary/state successor
+
+[Current stock5.2.0/Ox5.2.0+ox qualification](../qualification/hash-bounds-current-actual-20261017.json)
+adds ten invalid ranges/domain (including min_int/max_int), valid zero-length
+edge feeds, stream continuation after rejection, and independent interleaved
+contexts. Both compilers pass native CommonCrypto and qualification-only forced
+reference modes,15 hashlib vectors and four domains/mode; Ox still rejects
+shared mutable context/input captures. The compiler's do_not_spawn_domains alert
+remains in the receipt; these isolated component domains are not a new product
+scheduler or an OS-thread cap.
+
+Actual containing children6855/6896 reaped0/groups absent/outer Unison8 closed;
+owning session40896/terminalbd9038/0/no running session. No image/SDK/EXglobal
+access. Production hash source is unchanged and the frozen mixed request's326
+execution pins still match. The earlier source-audit snapshot remains historical:
+this successor deliberately changes test.ml, not the hash implementation.
