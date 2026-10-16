@@ -1,3 +1,11 @@
+Current finite native evidence: the [prior host-matrix scope review](../../tests/qualification/sdk-prior-host-scope-review-20261016.json)
+reparses twelve actually completed October14 SDK calls on the same tool/input
+SHA pins proposed for shared8. Reference versus experimental1/6/18 validation
+outcomes matched, with reported task/covered allocator settlement. Historical
+source-only sections below describe their original qualification stage; they do
+not negate that later finite result. OS-thread/RSS/pixel/scaling/production
+qualification remains open. The new shared8 owner request is separately unadmitted.
+
 This optional, read-only driver invokes Adobe DNG SDK 1.7.1 build 2724 directly.
 Unison runs it through `HelperSupervisor` and accepts its versioned receipt via
 `DngValidation`. It is separate from the stock `dng_validate` CLI and from

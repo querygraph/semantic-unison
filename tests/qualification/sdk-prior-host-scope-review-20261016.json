@@ -1,0 +1,191 @@
+{
+  "schema": "unison-sdk-prior-host-scope-review/1",
+  "state": "PRIOR_ACTUAL_RECEIPTS_REPARSED_NOT_REEXECUTED",
+  "prior_actual_return": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-actual-return-20261014.json",
+    "bytes": 32446,
+    "sha256": "b81e64017e5535ce2941c496e38179070bc9f24ae36bc0d2dd10d07abfe60348"
+  },
+  "prior_root_adoption": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-root-adoption-20261014.json",
+    "bytes": 2176,
+    "sha256": "e935b54a458a7090180635eada958360e34ac86fbd7f428c266f93db21820b6f"
+  },
+  "prior_parent_terminal": {
+    "path": "/Users/alexy/src/unison/tests/qualification/sdk-host-matrix-v1-parent-terminal-20261014.json",
+    "bytes": 1493,
+    "sha256": "56b4da85f3f50a0943c6938c0442d5f00f600a6c3572fa6be3e18371b7e29c59"
+  },
+  "prior_aggregate": {
+    "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/AGGREGATE-CLOSED.json",
+    "bytes": 431,
+    "sha256": "1b8406ecf654a9c774c5f2c2c9893a26ca50d074578eead67a56730fa5283fc2"
+  },
+  "verified_raw_call_pins": [
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-01.json",
+      "bytes": 871,
+      "sha256": "b593abd198a5258c2bfc65da5f788bb4f1f8338c56ff440b86c628e7aab818a3"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-01.json",
+      "bytes": 971,
+      "sha256": "8e77778bcd18493b7cd53f5d67847a7dc873b1c7db7adefec6d9c7c106e79068"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-02.json",
+      "bytes": 1003,
+      "sha256": "87da17ef8d99bcc5d529e8aa9dcbda82ac5c09a2da6c78d359c410f78899fc55"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-02.json",
+      "bytes": 1163,
+      "sha256": "b1737e07d32acea7d5fb4cd820e7d4493788bd8ab065f7ca69fcc034fd184d1d"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-03.json",
+      "bytes": 1003,
+      "sha256": "173fc657e842e45b6541d54c5f5ff5379ca82215dc5f3d3128f7f678bf05604c"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-03.json",
+      "bytes": 1164,
+      "sha256": "f992d41f5cdc77a98aea3ceb8ef4034a32b70d19d81ab81a30ba2e634ab1fe38"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-04.json",
+      "bytes": 1005,
+      "sha256": "3760a888a44958a2e1fc860edf2a53ad5cb435c45ec241de20d3f8fd0790171a"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-04.json",
+      "bytes": 1167,
+      "sha256": "1dc8d794128d011ff8f70d681840511e1a6bdcc3abb8f2bfdae5348a71eeb375"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-05.json",
+      "bytes": 839,
+      "sha256": "19a59f4d8870e61a53f1fe9b67d0db206ffc096d87fb6953c2c33050a2f7f2ce"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-05.json",
+      "bytes": 971,
+      "sha256": "39079620792d74faa279e77163bb3dfa5304a258ac28217dff75a6f2e86ada2c"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-06.json",
+      "bytes": 971,
+      "sha256": "7d5a293ec0fbe5d88787e53713c3c1f7632e654a18196eb8ae226750e2cbbee5"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-06.json",
+      "bytes": 1163,
+      "sha256": "3d19e63026e16308045aa0cb912b57ff51c910b2f7ac617aed6d6d58d375db07"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-07.json",
+      "bytes": 971,
+      "sha256": "848d298e947a382842e3e34de6ab273b08517d86c8ca7068cef55e210ca72767"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-07.json",
+      "bytes": 1164,
+      "sha256": "6b34bd370c8a1e1adcce36923a8b5885c1d91345cbcbde33cb5779a5c61ed3d5"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-08.json",
+      "bytes": 973,
+      "sha256": "8b912a9f75f17a6446b8b8056a93ce741d3c0b2b1c476a540e971fce35083944"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-08.json",
+      "bytes": 1167,
+      "sha256": "d108ab4d8f5331db51a92aaa5378528d4783573813dd43c4b7ce010a60f8bf80"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-09.json",
+      "bytes": 835,
+      "sha256": "e1a61df3d8d642d7185031de3472f756651a9acb7c13a7465d34fffe05ac04d2"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-09.json",
+      "bytes": 957,
+      "sha256": "e48d4dbb629c5e0e7f8739faeaeeadee0509128812c37c629b09494449f95d2a"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-10.json",
+      "bytes": 968,
+      "sha256": "38467b67dee5530325f8f5052de274beabe01d65e87e7b4b6f4dbe315b69a9ce"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-10.json",
+      "bytes": 1149,
+      "sha256": "0943d97e717ff0b7bde4dc6eea9360dbb94eed148fb1ff837c58f13a8e376410"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-11.json",
+      "bytes": 968,
+      "sha256": "cf8cb6914020172d467ea13dd19059f3ddc58f57eefdf73d8ec686e8dbc3790f"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-11.json",
+      "bytes": 1150,
+      "sha256": "4681e125862e1fcf52aebb70c0bcb7272abae74af7a816f9e81029b24cf668f8"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/ENTRY-12.json",
+      "bytes": 970,
+      "sha256": "756982e208e22da4168ff58876347a2f2b37fbd0f8f979131b7252705041d686"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-host-matrix-native-v1-20261014-38d8249515bc4a4f9a2a1f83fca7a452/CALL-12.json",
+      "bytes": 1154,
+      "sha256": "17fdb53e0391209ce57295c4218c4e6d07938b63052c28ab3ed7960eb32ac99f"
+    }
+  ],
+  "proposed_plan": {
+    "path": "/Users/alexy/src/unison/doc/shared-sdk-host-plan-v1.json",
+    "bytes": 20580,
+    "sha256": "67d2fa64d1f10bd2f24e55d613a5312c729e93cac14b1ebc1e3b421171b8e1cf"
+  },
+  "planned_tool_and_input_pins_match_prior_verified_artifacts": true,
+  "prior_native_calls": 12,
+  "new_sdk_calls": 0,
+  "new_tool_or_input_payload_hash_reads": 0,
+  "prior_scope": "Same pinned reference and experimental tool: three generated codecs, reference1/experimental1,6,18 validation outcomes equal, task/coveredallocator settled; prior actual93165/0ea119/0 and aggregate25466/reaped0.",
+  "new_request_scope": "Fresh proposed shared8 executor/grant/inherited9FD binding and new experimental2-thread case. Existing1/6functional result is not a missing first-use gate. Exact new owner still requires separate admission.",
+  "limits": "No fresh SDK/tool/input execution or fullhash, no currentwholecode snapshot/nativeOSthreads/RSS/pixels/scaling/throughput/production qualification; old18slot consumed, no replay.",
+  "full_goal_complete": false,
+  "analysis_actual_terminal": {
+    "chunk": "38c89c",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "analysis_references": [
+    {
+      "path": "/private/tmp/unison-sdk-prior-native-scope-review-20261016a/SHARED-START.json",
+      "bytes": 1181,
+      "sha256": "40cd39f63adfc708362b55ded992d272b238e6795637c4c2c3c333ebcc0ff0bd"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-prior-native-scope-review-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "0a3d8c972d19403d4ac11561af67729f35657eb6cfb96b81b66d2f2c05d416a2"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-prior-native-scope-review-20261016a/SHARED-STDOUT.txt",
+      "bytes": 100,
+      "sha256": "83bcebc0bbda47fc96f0b42d25adb4b2daab4dec671b72f3bd18e112e02e93b8"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-prior-native-scope-review-20261016a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "analysis_runner": {
+    "path": "/Users/alexy/src/unison/tests/audit_sdk_host_history.py",
+    "bytes": 4001,
+    "sha256": "c5415da35629e7818020411338956b5e52d03b8cacd6f0112ca4471380d1b25d"
+  }
+}

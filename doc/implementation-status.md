@@ -1,3 +1,6 @@
+Current 2026-10-16 review navigation: [implementation review](implementation-review.md).
+The older checkpoints below retain their historical scope.
+
 Current qualification checkpoint: [2026-10-15 status](current-qualification-status.md).
 The detailed audit below is preserved with its original evidence scopes.
 
