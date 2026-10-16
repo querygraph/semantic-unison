@@ -292,3 +292,12 @@ trusted registration and wire decoding. Stock/Ox127commands/2224assertions each,
 with predecessor guard-removal negatives detected. Current component conformance
 passed and resources closed; earlier whole-application/IO runs retain their exact
 older core source pins, not a silent current-build claim.
+
+Current Make and Dune application evidence has since been refreshed for the
+profile-inspection guard: [Make pair](../tests/qualification/current-property-make-selftests-actual-20261016.json)
+and [Dune pair](../tests/qualification/current-dune-profile-guard-selftests-actual-20261016.json).
+Each stock/Ox build+selftest passed with425current production/build pins and
+actual terminal/group/token closure. Earlier paragraphs retain their historical
+source scopes; these new builds do not requalify earlier receiving results.
+The [property-transfer request](shared-property-io-request-v1.json) remains a
+separate, unstarted generated-fixture qualification, with no camera/Adobe grant.

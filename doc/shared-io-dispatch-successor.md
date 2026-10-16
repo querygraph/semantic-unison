@@ -8,9 +8,12 @@ integration now has one accepted tiny synthetic local-job execution, described b
 Default shared commands remain CPU-only. IO is requested only with BOTH
 `SHARED_IO_ADMISSION=/absolute/root-receipt.json` and
 `SHARED_IO_ADMISSION_SHA256=<exact externally supplied SHA256>`, alongside
-`SHARED_CPU_CREDITS`. Only `inspect-file` and `private-dng-local-clone` are
-supported: complete local jobs in a single containing group. Transport sync,
-builds, SDK/helper and distributed endpoint phases refuse this IO mode.
+`SHARED_CPU_CREDITS`. Supported targets are `inspect-file`,
+`private-dng-local-clone`, `private-dng-framing-input`, and the exact finite
+`sync-functional` matrix. Builds and SDK/helper phases refuse this IO mode.
+The framing route binds its bounded clone-read executor separately. Sync also
+requires stock/Ox binary/compiler hashes checked inside the IO-owned worker,
+and separate client/supervisor/server/pump closure proofs before release.
 
 The Root receipt must have state `ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB` and
 bind `target`, exact child `command` argv, fresh absolute `workspace`,
@@ -42,6 +45,21 @@ Existing native/UI lease acquisition, physical-member discovery, general
 production dispatchers, whole-process hard resource limits, and simultaneous
 cross-project payload qualification remain separate. No Photo payload or SDK
 rights follow from CPU grants or an accepted lock-only probe.
+
+The [actual shared sync receipt](../tests/qualification/shared-sync-io-actual-20261016.json)
+covers the admitted generated18-row/54-call matrix under its historical source
+pins. The new [property-removal request](shared-property-io-request-v1.json)
+adds native fork/named xattr removal, selected readonly mode, retained readers
+and unchanged no-op property epochs. It is source-prepared, not admitted by the
+earlier sync receipt. A pending request is not permission to execute it.
+
+For failed sync results, the invocation journal must account for every attempted
+call before the aggregate worker is reaped. A known settled prefix can release
+resources after actual nonzero worker settlement without implying a functional
+pass. Missing outcomes, server proofs, or uncertain FDs retain ownership.
+[Actual Python-peer dispatcher controls](../tests/qualification/failed-sync-dispatch-peer-actual-20261016.json)
+cover this path with disposable inner leases; they do not authorize new payload
+IO or substitute for actual property receiving.
 
 ## Fake full-lifecycle controls and reporting-failure correction
 

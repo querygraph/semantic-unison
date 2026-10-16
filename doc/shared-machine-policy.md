@@ -54,15 +54,24 @@ remains separate and still rejects this zero-warmup/one-repetition profile.
 Invoke from the repository root, serially within the Unison lane:
 
 ```sh
+# Use the qualified Python with waitid(WNOWAIT)/wait4 support.
+export PATH="$HOME/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin:$PATH"
 SHARED_CPU_CREDITS=8 JOBS=2 STOCK_PREFIX="$HOME/.opam/default/bin" \
-  make -f tests/Makefile stock-build
+  make -f tests/Makefile stock-check
 SHARED_CPU_CREDITS=8 JOBS=2 OX_PREFIX="$HOME/.opam/5.2.0+ox/bin" \
-  make -f tests/Makefile ox-build
+  make -f tests/Makefile ox-check
 SHARED_CPU_CREDITS=8 make -f tests/Makefile shared-sync-controls
-SHARED_CPU_CREDITS=8 STOCK_RECEIPT=/path/stock-build-selftest.json \
-  OX_RECEIPT=/path/ox-build-selftest.json make -f tests/Makefile sync-functional
 ```
 
+Prefixes name the directory containing `ocamlopt`, not the opam switch root.
+For Dune, substitute `stock-dune-check` and `ox-dune-check`; prerequisites must
+already be installed in those switches. Each command prints its private owner
+report directory. Keep its `RESULT.json` and `SHARED-CLOSED.json`, and collect
+the actual invoking tool's terminal separately. `OUTPUT_DIR=/fresh/path` selects
+an explicit retained workspace. `DRY_RUN=1` prints command/resource metadata and
+does not build or acquire tokens.
+
+Use `stock-build`/`ox-build` when only compilation is wanted.
 Build-only commands compile/link and do not execute the resulting binary or
 selftests. They do not replace build-plus-selftest qualification; sync requires
 existing successful selftest receipts with unchanged production-source/artifact
@@ -76,6 +85,19 @@ scopes can use a smaller authorized subset. Unscoped tests remain refused in
 shared mode; they need an appropriate resource owner rather than an arbitrary
 claim that their budget fits. Legacy commands retain their behavior without
 `SHARED_CPU_CREDITS`. `DRY_RUN=1` only prints a plan, acquiring no tokens.
+
+Run `shared-entrypoints`, `shared-sync-controls`, and `shared-io-controls` through
+the same eight-credit prefix for finite admission, receipt, disposable property
+and original Python-peer lifecycle controls. They do not invoke Adobe or open
+camera inputs. They are distinct from `sync-functional`, which executes Unison
+and creates generated fixtures. Bulk-IO sync requests use explicit pinned
+`SHARED_IO_ADMISSION` and SHA values supplied by coordination, plus successful
+stock/Ox build/selftest `RESULT.json` paths. The optional
+`SYNC_PROPERTY_REMOVAL_CONTROLS=1` route refuses CPU-only execution. See the
+[frozen request](shared-property-io-request-v1.json); its placeholder admission
+hash is deliberately not a runnable grant. No new opam installation, compiler
+upgrade, SDK run, or automatically scheduled timing experiment is part of these
+commands.
 
 ## Independent resources and exceptional timing
 
