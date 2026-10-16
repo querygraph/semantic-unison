@@ -47,6 +47,19 @@ after possible dispatch remains unknown. [Twenty-eight current controls](../qual
 pass on tiny original/mock fixtures. This pure audit does not prove aggregate
 or parent exit, authenticate admission, grant payload reads, or close resources.
 
+`execute.py` now defines the exact-admission parent/worker entrypoint. Its plan
+must bind the fixed retained Unison clone, full readonly native identity, current
+Python source closure, stock/Ox artifacts, short fresh workspace and declared
+budgets. The parent delegates IO→CPU acquisition to the existing dispatcher;
+there is no CPU-only camera route. The worker checks the live parent's START,
+exact command and nine inherited descriptor identities before payload entry.
+The dispatcher audits completed or failed-prefix receipts before aggregate reap,
+then freshly checks the borrowed input's metadata before closing leases. Unknown
+worker/FD outcomes retain ownership. [Current source controls](../qualification/camera-entrypoint-source-controls-actual-20261016.json)
+pass, including scope/ancestry and pre-payload parent-binding refusals. The new
+full inherited-resource lifecycle still needs disposable qualification; no live
+camera plan or admission is created or implied here.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 
