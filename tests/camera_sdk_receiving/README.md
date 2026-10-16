@@ -90,3 +90,18 @@ check SDK-audit-before-reap, missing-group/changed-source/live-worker retention,
 known rejected-findings release, and worker-exit contradictions. Canonical outer
 CPU ownership actually closes; inner IO/process observations are explicit fakes.
 These controls leave the67 execution-source request pins unchanged.
+
+## V2 budget-compatible source successor
+
+[RequestV2](../../doc/camera-sdk-receiving-request-v2.json) preserves V1 bytes and
+binds69 current execution sources/new stock/Ox Make binaries. On both endpoints,
+explicit `semanticpayloadbudget=4096`, `adobevalidatorworkspace=2048`,
+`validationtreememory=0`, and64 descriptor credits now fit the retained source
+and receiving publication envelopes. `sdk_budget.validate` rejects the actual
+V1 configuration and even a gate equal to the backend estimate: source and
+publication headroom must also fit. The fixed maximum payload bound gives
+2416443392 bytes of combined envelope. The4GiB endpoint budget is accounting,
+not a hard memory limit, and does not authorize SDK allocation or execution.
+32 original controls pass. [Production error handling evidence](../qualification/publication-admission-resource-fix-actual-20261016.json)
+adds current Make+selftests and tiny fake-validator CLI refusal/fitting checks.
+Only a fresh separately coordinated SDK+EXglobal admission may dispatch V2.

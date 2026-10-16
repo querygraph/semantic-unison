@@ -188,8 +188,10 @@ let publication_cost max_payload =
   {SemanticAdmission.payload_bytes=payload_bytes+manifests;descriptors}
 let make_publication_reservation () =
   let _,_,_,_,_,max_payload,_,_ = settings () in
-  SemanticAdmission.make_reservation (resource_gate ()) ~role:SemanticAdmission.Consumer
+  try SemanticAdmission.make_reservation (resource_gate ()) ~role:SemanticAdmission.Consumer
     ~cost:(publication_cost max_payload)
+  with SemanticAdmission.Failed reason ->
+    raise (Util.Transient ("Receiving resource admission: " ^ reason))
 let admission_usage () = SemanticAdmission.usage (resource_gate ())
 let with_transaction ?reservation ?(role=SemanticAdmission.Consumer) ~max_payload f =
   if max_payload <= 0 || max_payload > FormatExtension.max_payload then

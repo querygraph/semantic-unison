@@ -56,3 +56,11 @@ retains actual5460/003cbb/137, all direct-call closures, source-bound no-helper
 proof, no original-worker wait4 claim, and fresh EXglobal/CPU8 acquisition/close.
 V1 is consumed, not SDK-qualified or retryable. Correct budget compatibility and
 failure reporting in a source successor before a new immutable runtime request.
+
+The budget correction is implemented/qualified in [SDK V2 source request](camera-sdk-receiving-request-v2.json):
+explicit4096MiB gates/2048MiB validator workspaces plus source/publication headroom,
+69 current execution pins/new Make binaries. Narrow production over-budget
+reservation errors now remain recoverable (`Util.Transient`); direct stock/Ox
+controls and prior-guard negatives, current full Make+selftests, and actual tiny
+rejected/fitting CLI cases passed/closed. No SDK/camera runtime occurred in these
+controls. V2 needs a separate exact admission; do not reuse consumed V1.

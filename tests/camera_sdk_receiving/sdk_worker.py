@@ -9,6 +9,7 @@ from pathlib import Path
 import sys
 
 import sdk_seed as seed
+import sdk_budget
 import sdk_transport as transport
 import sdk_result_audit as result_audit
 
@@ -43,6 +44,7 @@ def execute(plan,workspace,deadline_monotonic):
         case.require(clone.stamp(os.fstat(borrowed))==expected==clone.stamp(os.lstat(source)),
                      'borrowed source native epoch changed')
     try:
+        sdk_budget.validate() # known zero-call refusal before any borrowed open/clone
         borrowed=os.open(source,os.O_RDONLY|os.O_NOFOLLOW|os.O_NONBLOCK|os.O_CLOEXEC)
         check()
         # These are same-compiler cases, deliberately not all four wire pairs.

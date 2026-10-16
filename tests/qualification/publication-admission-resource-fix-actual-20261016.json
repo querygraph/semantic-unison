@@ -1,0 +1,466 @@
+{
+  "schema": "unison-publication-admission-resource-fix/1",
+  "records": {
+    "stock-runtime": {
+      "actual_parent_terminal": {
+        "session": 41114,
+        "chunk": "a16815",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-fixed-fovmckbk/RESULT.json",
+          "bytes": 44455,
+          "sha256": "05072c0823c989395eea09e12582c4ccb2262c2bbb3d740601205332e4ed3247"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-fixed-fovmckbk/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ace0573281cf4094ce5b121d2990d65471559a30dffa1a5efd8f19939412db02"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-fixed-fovmckbk/SHARED-START.json",
+          "bytes": 1420,
+          "sha256": "d9200f89f4c912513fe209dd2ea173bb3f27c9ff3a2a61b3b31b78b3c96f7b4f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-fixed-fovmckbk/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-fixed-fovmckbk/SHARED-STDOUT.txt",
+          "bytes": 87,
+          "sha256": "75e9d21935f4f20268f0661a10e9f385e74d95925c9f66fa9d492e1ce1d50fdb"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 85325,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 85325,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "ox-runtime": {
+      "actual_parent_terminal": {
+        "session": 10414,
+        "chunk": "c36126",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-ox-vq08ngli/RESULT.json",
+          "bytes": 44460,
+          "sha256": "1eba6d2546859796597697d3a7ce0a56ec8d2086225f691252d576282daab42f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-ox-vq08ngli/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "23339d5f62051382b0b722d4f96fa50994236eef8c85c25280de811631d40be5"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-ox-vq08ngli/SHARED-START.json",
+          "bytes": 1408,
+          "sha256": "b62465d5c5bb1b15d759f440ea5bc361bec50ec2230ab1ace315e0ce3b01521c"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-ox-vq08ngli/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-ox-vq08ngli/SHARED-STDOUT.txt",
+          "bytes": 87,
+          "sha256": "37f3bb946d9476ce4afa5f4d7a32ee185eb9adbb9177788f26c8c05d4728a061"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 85401,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 85401,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "stock-build": {
+      "actual_parent_terminal": {
+        "session": 51101,
+        "chunk": "c309cb",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-admission-fix-stock-616e4a7b/RESULT.json",
+          "bytes": 43703,
+          "sha256": "66d056f3af9a64454e072605fedfb35018184b1654657d88d493ec7568143b62"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-stock-616e4a7b/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "be188edd22bdac12c8a57611ffa85cd36d9f2c8d2d18e8bbf95aa7def68b7578"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-stock-616e4a7b/SHARED-START.json",
+          "bytes": 1325,
+          "sha256": "25297abb4397c34becefbfe412d8f19df8e7604156ca5d896928fdebf5006e99"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-stock-616e4a7b/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-stock-616e4a7b/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "def19371fe83d29cbd9e44f34cafe29c2f9206d4c737544e94e0de7eccef6660"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 85867,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 85867,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "ox-build": {
+      "actual_parent_terminal": {
+        "session": 17865,
+        "chunk": "9e1a7c",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-admission-fix-ox-9bdc031e/RESULT.json",
+          "bytes": 43709,
+          "sha256": "d77894636ee307b5523208d77a0607770975883c68f4823fd4f411d1e169b13b"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-ox-9bdc031e/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "c465cf745376c83be15cb43a9fdcbc7d3c76d51a161c96295b76dbaffa9b854b"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-ox-9bdc031e/SHARED-START.json",
+          "bytes": 1319,
+          "sha256": "764f6fe0986c3cb5d834556e336006d8561eaa1ab4e12dff02d18d8f988e36d4"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-ox-9bdc031e/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-admission-fix-ox-9bdc031e/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "2d21bff9ac632b5fc63cde8d1d207244727505d9b1d8586abc37700a93625540"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 86994,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 86994,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "stock-cli": {
+      "actual_parent_terminal": {
+        "session": 86684,
+        "chunk": "2773ad",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-stock-mhe439yr/RESULT.json",
+          "bytes": 21496,
+          "sha256": "f91c934853f0edfbf6fee53e6c99e6be4a33bf704a89e194bbafba3b345433d9"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-stock-mhe439yr/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "4ff22fc9e264ed16fb478601fd086738241a406d117c9719f6d4a14ff27b8d93"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-stock-mhe439yr/SHARED-START.json",
+          "bytes": 1405,
+          "sha256": "617f9f5f522b21b33653c7895f27ef2ff8841b9ce9ddfa75d245f27f1a5984a0"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-stock-mhe439yr/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-stock-mhe439yr/SHARED-STDOUT.txt",
+          "bytes": 55,
+          "sha256": "6f640f2201b509a8537713b18884e7a1b5792420071d7db1550a7adb4639a822"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 88131,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88131,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "ox-cli": {
+      "actual_parent_terminal": {
+        "session": 55140,
+        "chunk": "7b6b9c",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-ox-7v4us0lw/RESULT.json",
+          "bytes": 21547,
+          "sha256": "2601cdfbfdec51bbe5d6290ea7ae2c3ded3646cf8bd21afbc2e85ad017c0a50f"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-ox-7v4us0lw/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "3dd51cd2d10e804927f276f08d976b43afb722ca22b9e2d1eb2b4912e2b2907e"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-ox-7v4us0lw/SHARED-START.json",
+          "bytes": 1399,
+          "sha256": "fed209e5a0acf992e39ed566e0dab3c261efcf06ea55c31e072ba7ec1a1d7240"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-ox-7v4us0lw/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-admission-cli-ox-7v4us0lw/SHARED-STDOUT.txt",
+          "bytes": 55,
+          "sha256": "e08cb6ebc9119b021b6d38fc547d68e9d4c33ec56b663f8572bbff3c34e668b1"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 88186,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 88186,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "budget-controls": {
+      "actual_parent_terminal": {
+        "session": null,
+        "chunk": "01ced7",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sdk-budget-controls-p1jsjp1f/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "380adaeb474e2a4be00ef94fddd4fb5c444d49a8ec8b40cb045a72f36246e516"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sdk-budget-controls-p1jsjp1f/SHARED-START.json",
+          "bytes": 1203,
+          "sha256": "3f21c5cbaa217be230a80d70d8e83a0f34ee474883d05c3d3f4b5e710c8c1106"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sdk-budget-controls-p1jsjp1f/SHARED-STDERR.txt",
+          "bytes": 131,
+          "sha256": "cb5c229e0eeab5aae27f7b372e4b013c3d761210577bf3ba6d2f30ac781a3bd7"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-sdk-budget-controls-p1jsjp1f/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 85660,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 85660,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    "initial-runtime-fixture": {
+      "actual_parent_terminal": {
+        "session": null,
+        "chunk": "71e697",
+        "exit_code": 1,
+        "running_session": false
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-uyd000hp/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "497089ec73fe43a03834f2740f036ce406c86bd41b7e79e45b7b338e7862dbd0"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-uyd000hp/SHARED-START.json",
+          "bytes": 1415,
+          "sha256": "f40924ee961505724187706b8f40b0edb8d2a3af5b79132d398675c669606461"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-uyd000hp/SHARED-STDERR.txt",
+          "bytes": 933,
+          "sha256": "d22511c7735a3cebbbf8e06a512c70be4ee37cbd4563c1b7ec512f8a4f496d11"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-publication-admission-stock-uyd000hp/SHARED-STDOUT.txt",
+          "bytes": 87,
+          "sha256": "8e7fe650f280b9f4cf5ce0e52966eb1d61acb00594594adc390136c1478ccd9c"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 85223,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 85223,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "cause": "No Features.setEnabled initialization in standalone fixture; no helper/payload; corrected before both compiler passes."
+    }
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticRuntime.ml",
+      "bytes": 12100,
+      "sha256": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/publication_admission/run.py",
+      "bytes": 4082,
+      "sha256": "3035690b89681e3d8a192c5a176f75a77a5c6a80e62eccc8473235c899f5f042"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/publication_admission/test.ml",
+      "bytes": 2283,
+      "sha256": "71b90eeaeddeb37ce1cfa03d5fe8bed3915e23caada2de0ced13435e6bd0ac8a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/publication_admission/cli.py",
+      "bytes": 4797,
+      "sha256": "7c8c013cb80b9afc97b4bebd2757e3cf958a25877f917b0364492b95086f41a9"
+    }
+  ],
+  "scope": [
+    "Only SemanticAdmission.Failed is converted to Util.Transient at publication reservation",
+    "Five direct production-runtime cases/compiler and exact prior-guard negative per compiler",
+    "Current complete stock/Ox Make builds and application selftests",
+    "Two actual CLI calls/compiler, tiny original data/fake Python validator only; refused memory leaves no receiver or helper, fitting one publishes exactly",
+    "32 SDK budget/kernel controls; explicit4GiB gate fits2GiB workspace plus both source/publication envelopes",
+    "No Adobe SDK, camera/Photo payload, canonical EX IO, hard RSS claim, or Dune refresh"
+  ]
+}

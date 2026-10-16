@@ -15,12 +15,15 @@ from shared_cpu_pool import UnresolvedOwnership
 from shared_process_owner import retain_after_record
 from artifact_pins import stable_sha
 import sdk_worker as worker
+import sdk_budget
 
 SOURCE=Path('/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG')
 PARAMETERS={'cpu_credits':8,'endpoint_workers':2,'cases':2,'calls':2,'sdk_calls':2,
             'observation_seconds':600,'per_call_seconds':120,
             'declared_logical_io_bytes':16*1073741824,'io_budget_enforced':False,
-            'adobe_validation':'require','full_copy_fallback':False}
+            'adobe_validation':'require','full_copy_fallback':False,
+            'semantic_payload_budget_mib':sdk_budget.GATE_MIB,
+            'validator_workspace_mib':sdk_budget.WORKSPACE_MIB}
 
 
 def require(value,reason):
@@ -43,6 +46,8 @@ def checked_plan(path,digest):
             and value['parameters']==PARAMETERS
             and all(type(value['parameters'][k]) is type(v) for k,v in PARAMETERS.items()),
             'fixed receiving scope differs')
+    sdk_budget.validate(gate_mib=value['parameters']['semantic_payload_budget_mib'],
+                        workspace_mib=value['parameters']['validator_workspace_mib'])
     require(value['execution_source_sha256']==sources(),'exact receiving source closure differs')
     require(Path(value['source']['path'])==SOURCE
             and value['source']['identity']['st_size']==193851848

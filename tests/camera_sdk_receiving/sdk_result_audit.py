@@ -3,6 +3,7 @@ from pathlib import Path
 import sys
 
 import sdk_audit
+import sdk_budget
 ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'bench/sync'))
 from invocation_journal import audit_attempted
@@ -41,7 +42,10 @@ def audit(result,plan,workspace,*,finishing=False):
         for flag,value in (('-adobevalidate','require'),('-adobevalidator',plan['tool']['path']),
                            ('-adobevalidatorhash',plan['tool']['sha256']),
                            ('-adobevalidatorbuild',plan['tool']['build_id']),
-                           ('-adobevalidatorthreads','1')):
+                           ('-adobevalidatorthreads','1'),
+                           ('-adobevalidatorworkspace',str(sdk_budget.WORKSPACE_MIB)),
+                           ('-semanticpayloadbudget',str(sdk_budget.GATE_MIB)),
+                           ('-validationtreememory','0'),('-semanticdescriptorbudget','64')):
             require(argv.count(flag)==1 and argv.index(flag)+1<len(argv)
                     and argv[argv.index(flag)+1]==value,'SDK invocation policy/tool differs')
         log=outcome['stdout']+outcome['stderr']+outcome['supervisor_output']

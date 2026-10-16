@@ -34,7 +34,9 @@ class Controls(unittest.TestCase):
             argv=[item['path'],str(directory/'left'),'ssh://localhost/'+str(directory/'right')]
             for k,v in (('-adobevalidate','require'),('-adobevalidator',tool['path']),
                         ('-adobevalidatorhash',tool['sha256']),('-adobevalidatorbuild',tool['build_id']),
-                        ('-adobevalidatorthreads','1')):argv += [k,v]
+                        ('-adobevalidatorthreads','1'),('-adobevalidatorworkspace','2048'),
+                        ('-semanticpayloadbudget','4096'),('-validationtreememory','0'),
+                        ('-semanticdescriptorbudget','64')):argv += [k,v]
             journal.begin({'label':item['label'],'mode':'semantic','workers':2,
                            'directory':str(directory),'stage':'seed'},argv)
             def group(pid):return {'pid':pid,'reaped':True,'returncode':0,

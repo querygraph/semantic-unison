@@ -20,6 +20,8 @@ class Controls(unittest.TestCase):
             self.assertEqual(argv[argv.index('-adobevalidate')+1],'require')
             self.assertEqual(argv[argv.index('-adobevalidatorthreads')+1],'1')
             self.assertEqual(argv[argv.index('-semanticworkers')+1],'2')
+            self.assertEqual(argv[argv.index('-semanticpayloadbudget')+1],'4096')
+            self.assertEqual(argv[argv.index('-adobevalidatorworkspace')+1],'2048')
             self.assertEqual(seconds,120);self.assertTrue(kwargs['strict_group_settlement'])
             return outcome
         with patch.object(transport,'stable_sha',side_effect=self.hash), \

@@ -49,6 +49,26 @@ retention and exact V1 request/admission bytes remain preserved and consumed.
 Next source work must fix explicit budget compatibility before any successor;
 no automatic retry or SDK/payload grant follows closure.
 
+Publication reservation refusal is now a recoverable transfer error: only
+`SemanticAdmission.Failed` in `make_publication_reservation` is converted to
+`Util.Transient`; invalid configuration and unrelated exceptions keep their
+classes. [Stock/Ox production-object and real CLI qualification](tests/qualification/publication-admission-resource-fix-actual-20261016.json)
+passed: repeated refused costs leave zero debit; fitting/off reservations retire;
+restoring only the old guard fails the named negative. Both full Make builds and
+application selftests passed on current425 source pins. Four tiny actual CLI
+calls use only original fake Python validators: oversized costs no longer crash
+the server or publish; fitting costs publish exactly. All actual groups/tokens
+closed, no Adobe/camera/EX IO. Prior Dune receipts retain their older source.
+
+[SDK receiving V2](doc/camera-sdk-receiving-request-v2.json) is source-prepared,
+UNADMITTED/UNSTARTED with69 execution pins and fresh stock/Ox binaries. Both
+endpoints now explicitly declare4096MiB semantic gates,2048MiB SDK workspace,
+zero tree manifests and64 descriptor credits. Pure preflight verifies source
+headroom+publication+workspace require2416443392 bytes, within4GiB. These are
+accounting declarations, not hard RSS bounds; native allocation is not inferred.
+32 source/mock controls passed. V1 remains failed/consumed and unreplayed; only
+a new exact Root admission can authorize V2's two seeds/two SDK calls.
+
 The [source/owner qualification](tests/qualification/camera-sdk-owner-source-controls-actual-20261016.json)
 retains28 pure/mock cases and actual inherited-FD refusal children, with all
 actual outer groups/tokens closed and no Adobe/camera/EX IO. Supplemental

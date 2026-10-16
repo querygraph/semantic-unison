@@ -8,6 +8,7 @@ import os
 from pathlib import Path
 import sys
 import time
+import sdk_budget
 
 ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'bench/sync'))
@@ -29,6 +30,7 @@ class Invoker:
         self.directory=Path(directory); self.binary=dict(binary); self.tool=dict(tool)
         self.journal=journal; self.pins=dict(script_pins); self.deadline=deadline_monotonic
         self.used=False
+        sdk_budget.validate()
         require(self.directory.is_absolute() and binary['label'] in ('stock','ox')
                 and set(self.pins)==set(SCRIPT_NAMES), 'exact owned same-compiler case required')
         require(tool['build_id']==BUILD and tool['threads']==1,
@@ -50,7 +52,9 @@ class Invoker:
                '-adobevalidate','require','-adobevalidator',self.tool['path'],
                '-adobevalidatorhash',self.tool['sha256'],
                '-adobevalidatorbuild',self.tool['build_id'],'-adobevalidatorthreads','1',
-               '-adobevalidatetimeout','90','-adobevalidatorworkspace','2048',
+               '-adobevalidatetimeout','90','-adobevalidatorworkspace',str(sdk_budget.WORKSPACE_MIB),
+               '-semanticpayloadbudget',str(sdk_budget.GATE_MIB),'-validationtreememory','0',
+               '-semanticdescriptorbudget','64',
                '-debug','validation-process',
                '-debug','validation-group','-debug','copy','-debug','semantic']
         socket=self.directory/'seed.sock'
