@@ -1,0 +1,338 @@
+{
+  "schema": "unison-warm512-descriptive-report/1",
+  "source_head": "a6f0b695159b3bdb5c3e73d57c0a54900fe86d6d",
+  "full_matrix_complete": false,
+  "samples_excluded": 0,
+  "reruns": 0,
+  "parts": [
+    {
+      "index": 0,
+      "complete": true,
+      "completed_rows": 18
+    },
+    {
+      "index": 1,
+      "complete": true,
+      "completed_rows": 18
+    },
+    {
+      "index": 2,
+      "complete": true,
+      "completed_rows": 18
+    },
+    {
+      "index": 3,
+      "complete": false,
+      "completed_rows": 16
+    },
+    {
+      "index": 4,
+      "complete": true,
+      "completed_rows": 18
+    },
+    {
+      "index": 5,
+      "complete": true,
+      "completed_rows": 18
+    }
+  ],
+  "rows": [
+    {
+      "part": 0,
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 37.42266914699576,
+        "minimum": 37.3895740910084,
+        "maximum": 37.76742627299973
+      }
+    },
+    {
+      "part": 0,
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 36.69972132600378,
+        "minimum": 36.60974631900899,
+        "maximum": 36.81985539197922
+      }
+    },
+    {
+      "part": 0,
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 69.65878984500887,
+        "minimum": 69.31997268798295,
+        "maximum": 70.21430851801415
+      }
+    },
+    {
+      "part": 1,
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 37.02736653300235,
+        "minimum": 36.97426201298367,
+        "maximum": 37.24922282999614
+      }
+    },
+    {
+      "part": 1,
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 36.344291138026165,
+        "minimum": 36.31598941399716,
+        "maximum": 36.41283951999503
+      }
+    },
+    {
+      "part": 1,
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 34.20899217799888,
+        "minimum": 34.16985033499077,
+        "maximum": 34.79250835298444
+      }
+    },
+    {
+      "part": 2,
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 37.02845366302063,
+        "minimum": 36.986188475973904,
+        "maximum": 37.113855623989366
+      }
+    },
+    {
+      "part": 2,
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 36.298735521995695,
+        "minimum": 36.254562130983686,
+        "maximum": 36.38651366200065
+      }
+    },
+    {
+      "part": 2,
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 34.231765989010455,
+        "minimum": 34.17108463900513,
+        "maximum": 34.284338330995524
+      }
+    },
+    {
+      "part": 3,
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 1,
+      "partition_complete": false,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 37.35286704200553,
+        "minimum": 36.21796806398197,
+        "maximum": 39.21909110300476
+      }
+    },
+    {
+      "part": 3,
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "partition_complete": false,
+      "completed_rows": 5,
+      "measured_count": 4,
+      "update_seconds": {
+        "median": 36.980068266013404,
+        "minimum": 35.43717069699778,
+        "maximum": 38.34471226797905
+      }
+    },
+    {
+      "part": 3,
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 1,
+      "partition_complete": false,
+      "completed_rows": 5,
+      "measured_count": 4,
+      "update_seconds": {
+        "median": 71.04578782200406,
+        "minimum": 70.47391383297509,
+        "maximum": 72.02058794500772
+      }
+    },
+    {
+      "part": 4,
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 36.48963547500898,
+        "minimum": 36.43775948701659,
+        "maximum": 36.61259127999074
+      }
+    },
+    {
+      "part": 4,
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 35.85391870100284,
+        "minimum": 35.84452838098514,
+        "maximum": 36.522743219014956
+      }
+    },
+    {
+      "part": 4,
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 6,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 35.018746475019725,
+        "minimum": 34.93695334700169,
+        "maximum": 35.04128075297922
+      }
+    },
+    {
+      "part": 5,
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 36.346189570991555,
+        "minimum": 36.278159413981484,
+        "maximum": 36.45007893498405
+      }
+    },
+    {
+      "part": 5,
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 35.663625357003184,
+        "minimum": 35.58643170498544,
+        "maximum": 35.69098094801302
+      }
+    },
+    {
+      "part": 5,
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 8,
+      "partition_complete": true,
+      "completed_rows": 6,
+      "measured_count": 5,
+      "update_seconds": {
+        "median": 34.68398331099888,
+        "minimum": 34.634873450995656,
+        "maximum": 34.717933865991654
+      }
+    }
+  ],
+  "inputs": [
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part0-20261015.json",
+      "bytes": 765831,
+      "sha256": "7ea2087c9f521bbeae1660c948fd60d872b056982543f715063630b66c08909a"
+    },
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part1-20261015.json",
+      "bytes": 765614,
+      "sha256": "c74b69721cf975ef5dcd904bfd4fbd8d1171be40326050a6e9c2bd4364ff8728"
+    },
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part2-20261015.json",
+      "bytes": 765542,
+      "sha256": "5f8c6a13536e31a106330a667a66de1ca88294be037acf1b111564f842b46602"
+    },
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part3-incomplete-20261015.json",
+      "bytes": 731305,
+      "sha256": "bb50216fc1ca26268d03bd8960fc0223d659aca3f680bd73f1db1e57d85951fc"
+    },
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part4-20261015.json",
+      "bytes": 766098,
+      "sha256": "f512887a01f7a9b99456ffbb1828d26888ed10e58514060e64dc64667c331555"
+    },
+    {
+      "path": "bench/sync/results/warm-512MiB-4files-part5-20261015.json",
+      "bytes": 766182,
+      "sha256": "d4251f334280fcbf5cb19d7e3295e07ea0c02d964e9e91a01143ceeb86133ddf"
+    },
+    {
+      "path": "bench/sync/results/warm512-part0-timing-overlap-addendum-20261015.json",
+      "bytes": 6788,
+      "sha256": "e311d5f64c8fa5dde2a8e361b3858db367a01c1aaa3b38c5961fe279b7e6b6b5"
+    }
+  ],
+  "caveats": [
+    "Part3 failed after16completedrows/49actualCLI; remaining rows absent, not zero or imputed.",
+    "Part0 static objdump overlap definitely affected zero-based row5 and possibly row4 boundary; impact/carryover unknown. Mandatory e311d5f6 addendum retained.",
+    "Part3 user brew/neomutt make and source review disclosure; part5 bounded source-edit disclosures retained. No absolute quiet or timing-clean cohort claim.",
+    "Four512MiB generated files; warm/uncontrolled caches, loopback protocol on one APFS host. No cold/network/physical IO savings, RSS hard-cap or camera throughput inference.",
+    "Medians use all retained measured update rows, including partial partition rows; warmups retained in original input, not measured statistics.",
+    "Frozen historical source, not current-code performance. Per-process wait4 values are not summed into tree RSS/CPU."
+  ]
+}

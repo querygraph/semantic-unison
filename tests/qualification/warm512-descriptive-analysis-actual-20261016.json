@@ -1,0 +1,50 @@
+{
+  "schema": "unison-warm512-descriptive-analysis/1",
+  "state": "ANALYSIS_CLOSED",
+  "actual_terminal": {
+    "chunk": "078987",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "runner": {
+    "path": "/Users/alexy/src/unison/bench/report_warm512.py",
+    "bytes": 5055,
+    "sha256": "7227da5bcf87ac047864009a7f9d7e865aa55b9bef0e0d017b9a12261354ffdb"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016a/SHARED-START.json",
+      "bytes": 1161,
+      "sha256": "0faac1bbf215357cee922de8e667e01a9d476795d08e0737bb06db12ac97d7e5"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "2999efdad7f5aef80ec7ade2329a7a9a7cc257241bd6c05c406325929c0463ee"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016a/SHARED-STDOUT.txt",
+      "bytes": 125,
+      "sha256": "6da0f23a5642ea358c12541e13a6b9b930e279d096ca14032d5e15afe7f31c66"
+    },
+    {
+      "path": "/private/tmp/unison-warm512-descriptive-report-20261016a/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/results/warm512-observed-results.json",
+      "bytes": 9043,
+      "sha256": "001b5a95edc6cd25bbf43c422b4d0bcfb3b85e19b621d7a1ff3a17e6a2c219dc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/results/warm512-observed-results.md",
+      "bytes": 2737,
+      "sha256": "83e6bd42ac2496ba7c10e394c043a5caa8d59eb03e73f9abac6c85cc4d2c1151"
+    }
+  ],
+  "scope": "Read retained published JSON reports only;18configuration summaries includingfailedpartialpart3, completepart medians independentlyrecomputedmatch; no sampleexclusions/newtiming/receiving/SDK/payload/EXIO.",
+  "full_goal_complete": false
+}
