@@ -104,3 +104,19 @@ saved outcomes are not new helper executions. Actual test child99285 reaped0,
 group absent, Unison8 closed; owning terminal28c503/0/no session. No SDK,
 ExifTool, camera or EXglobal access. Fresh original-process composition and the
 native entrypoint/plan/admission/inherited9FD integration remain outstanding.
+
+`journal_controls.py` now additionally runs fresh original fake helpers through
+the real compiled stock/Ox probes and callable worker. The success scenario
+durably records both outcomes; the SDK-error scenario records the first known
+functional failure and proves the Ox helper ledgers remain absent. Independent
+audits join each raw outcome to the fresh helper PID ledgers, input hash/epoch
+fences and exact backend envelope. It uses private prepared binaries from the
+qualified fake-control workspaces, checks their source/object ancestry and
+fresh copy hashes; it is not the future immutable native artifact inventory.
+
+[Actual process composition](../qualification/mixed-validation-journal-process-actual-20261016.json)
+passed three fresh probes, six fake helpers and48 hash tasks. Containing
+child99655 reaped0/group absent/Unison8 closed; actual owner session55301,
+terminal4d83d1/0/no running session. No SDK, installed ExifTool, Photo data or
+EXglobal access. Native one-use entry/strict plan/inherited9FD binding remain
+the next integration work; this receipt supplies no native runtime grant.

@@ -178,7 +178,17 @@ authority. Eight actual callback/durable saved-outcome controls passed,
 child99285 reaped0/group absent/Unison8 closed, actual terminal28c503/0/no session.
 Receipt `mixed-validation-journal-actual-20261016.json`. Historical fake outcomes
 were re-audited, not executed again; no SDK/ExifTool/camera/EXglobal operation.
-Next: fresh original-process worker composition, strictplan/admission/inherited9FD boundary and actual
+**Fresh journal/process composition now passed:** `journal_controls.py` uses
+the existing qualified private stock/Ox fake probes, checks source/object ancestry
+and fresh copied hashes, then runs two success probes and one failed-first probe
+through the durable worker. Six fake helpers/48hash tasks; independent actual PID
+ledgers, input hash/epoch fences and exact backend envelopes audited. No Ox
+successor after first functional failure. Actual child99655 reaped0/group absent,
+CPU8 closed; owner session55301/terminal4d83d1/0/no running session. Receipt
+`mixed-validation-journal-process-actual-20261016.json`. No SDK/installed
+ExifTool/Photo/EXglobal operation. The copied private binaries are control
+participants, not a new immutable native build inventory.
+Next: strictplan/admission/inherited9FD boundary and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
