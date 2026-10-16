@@ -1,7 +1,7 @@
 # Unison implementation handoff
 
-Last substantive checkpoint: 2026-10-16. Last metadata check before writing:
-2026-10-16T20:43:10Z. Implementation HEAD before this document:
+Last updated: 2026-10-16T20:48:21Z. Comparison admission/workspace last checked
+absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
@@ -30,10 +30,13 @@ before IO/SDK dispatch. Standing sharing is Unison8 / Photo8 / system2.
 **Git/review:** workspace `/Users/alexy/src/unison`, branch
 `feat/semantic-dng-oxcaml`, fork `git@github.com:querygraph/unison.git`.
 Pinned selected upstream base: `8772d26a2eb77cfd0cb6da81807e81f24f51044c`.
-[PR #1](https://github.com/querygraph/unison/pull/1) targets **master in
-querygraph/unison**, not bcpierce00/unison. At handoff preparation it was OPEN/DRAFT.
-The user has now explicitly instructed merging it; finish this document, push,
-then perform and verify that fork merge. Update the merge checkpoint below.
+[PR #1](https://github.com/querygraph/unison/pull/1) **MERGED** into master in
+querygraph/unison at2026-10-16T20:47:50Z, by explicit user instruction.
+Merged PR head `4af7931c041e7592fc178b78fc190923899c995c` included this handoff.
+Actual merge commit `dd35a2a9f2fc62dd9b50e5f9c683bb97cf0f5c6d`.
+The feature branch is preserved and fast-forwarded through that merge; the
+post-merge handoff checkpoint is published to both fork branches. Nothing was
+merged into bcpierce00/unison. The PR base was exactly the pinned upstream base.
 The implementation remains unfinished even after integration into fork master.
 No upstream PR, maintainer contact, deployment or production-photo mutation is authorized.
 Upstream CONTRIBUTING.md rejects LLM submissions; do not confuse our fork work
@@ -531,10 +534,17 @@ exact identity and actual terminal, not by repeating them.
 
 ## Fork merge checkpoint
 
-User explicitly requested merging PR #1 during this handoff turn. At initial
-inspection head50da86f/basequerygraph:master/OPEN/DRAFT, mergeability was UNKNOWN
-while GitHub calculated it. A subsequent check confirmed MERGEABLE/CLEAN and
-base master exactly8772d26a2eb77cfd0cb6da81807e81f24f51044c. Complete the handoff commit/push, mark ready and
-merge only after checking the final exact head and mergeability. Preserve the
-feature branch and raw evidence. Record actual merge SHA/state here afterwards.
-Do not claim that fork integration completes SOL.md or constitutes upstream acceptance.
+User explicitly requested merging PR #1 during the handoff turn. Completed:
+
+- Handoff/review-navigation commit `4af7931c041e7592fc178b78fc190923899c995c` pushed.
+- Exact-head guarded merge via `gh pr merge 1 --repo querygraph/unison --merge
+  --match-head-commit 4af7931c041e7592fc178b78fc190923899c995c` returned0.
+- GitHub independently read back state MERGED, mergedAt2026-10-16T20:47:50Z,
+  merge commit `dd35a2a9f2fc62dd9b50e5f9c683bb97cf0f5c6d`, base master.
+- Fetched fork/master and fast-forwarded the preserved local feature branch.
+- This post-merge handoff correction is a documentation-only checkpoint; no
+  production sources, frozen172 pins, request/admission or payload changed.
+
+Future implementation commits must not be described as updates to an open PR1:
+that PR is now merged. Continue on a suitable branch and use a distinct review
+when appropriate. No upstream submission or full-goal qualification follows.
