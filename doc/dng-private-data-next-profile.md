@@ -193,3 +193,13 @@ group absent, CPU8 closed). The specified executor path is a future implementati
 contract, not an existing command, admission or payload-access grant. Dispatcher
 binding, independent result audit and actual retained-input coordination remain
 open before execution.
+
+The independent result auditor `tests/private_maker_audit.py` validates exact
+report schemas, count/table-only read ranges and totals, sanitized decline
+reasons, TIFF type/extent arithmetic and false eligibility claims. It accepts
+the exact 256-entry/3078-byte boundary and rejects tampered reports. Five audit
+controls plus nine plan/reader controls passed (actuald927fb/0, child12640
+reaped0/group absent, CPU8 closed); evidence is in
+`tests/qualification/private-maker-audit-source-actual-20261017.json`. This is
+metadata consistency only: no raw payload authentication, process-settlement
+proof or descriptor-release authority is inferred. No retained payload read.

@@ -57,9 +57,16 @@ flags. Exact nine-word worker argv is specified, but its named executor file is
 NOT implemented or runnable yet; no admission/request was published. Four plan
 controls plus five slice controls passed (child12267 reaped0/group absent/CPU8
 closed; owning59b0b6/0). Receipt private-maker-plan-source-actual-20261017.json.
+Independent tests/private_maker_audit.py now checks exact report schemas,
+sanitized decline reasons, count/table-only read ranges, exact accounting,
+TIFF-type extent arithmetic, no inline values and false safety claims. It does
+not authenticate payload bytes or confer process/FD release authority. Five
+audit controls plus nine plan/slice controls passed, including the exact256-entry
+3078-byte boundary; child12640 reaped0/group absent/CPU8 closed, actuald927fb/0.
+Receipt private-maker-audit-source-actual-20261017.json.
 Next concrete action: implement the admitted owned executor and dispatcher
-binding, independently audit result/read ranges and close uncertainty, then
-freeze current source pins for fresh IO review, then investigate a vendor-specific reference contract from
+binding, qualify close uncertainty through that boundary, then freeze current
+source pins for fresh IO review, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
