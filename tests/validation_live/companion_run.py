@@ -20,14 +20,15 @@ r=subprocess.run(cmd,cwd=w,capture_output=True,text=True,timeout=30);(w/'build.l
 helper=w/'helper.py'
 helper.write_text('#!'+sys.executable+'\n'+'''import sys,time,pathlib,hashlib,os
 args=sys.argv;candidate=pathlib.Path(args[-1]);data=candidate.read_bytes()
-with pathlib.Path('helper.calls').open('x') as f:f.write(str(os.getpid())+'\\n')
+with pathlib.Path('helper.calls').open('a') as f:f.write(str(os.getpid())+'\\n')
 time.sleep(.12)
 errors=1 if pathlib.Path('mode').read_text()=='error' else 0
 print('UNISON-DNG-VALIDATION 1\\ncandidate-sha256 '+hashlib.sha256(data).hexdigest()+'\\ncandidate-size '+str(len(data))+'\\ndriver-build synthetic-live-1\\nstructure valid\\ndecode success\\nraw-digest valid\\nerrors '+str(errors)+'\\nwarnings 0\\nEND')
 ''');helper.chmod(0o700)
 runs=[]
-for mode in ['pass','error','silent','off']:
+for mode in ['pass','error','silent','off','parallel']:
  d=w/mode;d.mkdir(mode=0o700);(d/'candidate.dng').write_bytes(b'original tiny synthetic candidate\0'*32);(d/'mode').write_text(mode)
+ (d/'candidate2.dng').write_bytes(b'independent second synthetic candidate\0'*32)
  env=dict(os.environ,UNISON=str(d/'state'))
  child=subprocess.Popen([str(exe),mode,str(helper)],cwd=d,env=env,stdout=subprocess.PIPE,stderr=subprocess.STDOUT)
  output=child.communicate(timeout=15)[0].decode();(d/'output.log').write_text(output);assert child.returncode==0,output
@@ -37,10 +38,21 @@ for mode in ['pass','error','silent','off']:
   pid=int((d/'helper.calls').read_text());candidate=d/'candidate.dng'
   span=live_records.bound(live[0],endpoint='client',owner_pid=child.pid,helper_pid=pid,candidate_sha256=h(candidate),candidate_bytes=candidate.stat().st_size)
   assert live[0].samples>=2
+ elif mode=='parallel':
+  assert len(live)==len(groups)==2,output
+  calls={int(n) for n in (d/'helper.calls').read_text().splitlines()};assert len(calls)==2
+  spans=[]
+  for candidate in [d/'candidate.dng',d/'candidate2.dng']:
+   selected=[r for r in live if r.candidate_sha256==h(candidate)];assert len(selected)==1
+   record=selected[0];assert record.pid in calls
+   spans.append(live_records.bound(record,endpoint='client',owner_pid=child.pid,helper_pid=record.pid,candidate_sha256=h(candidate),candidate_bytes=candidate.stat().st_size))
+   matching=[g for g in groups if g.pid==record.pid and g.candidate_sha256==h(candidate)]
+   assert len(matching)==1 and matching[0].other_members==0
+  assert min(s['last_ns'] for s in spans)>max(s['first_ns'] for s in spans),'no conservative observed live overlap'
  else:assert not live,output
- assert len(groups)==(0 if mode=='off' else 1)
- if mode!='off':
+ assert len(groups)==(0 if mode=='off' else 2 if mode=='parallel' else 1)
+ if mode not in ('off','parallel'):
   assert groups[0].pid==int((d/'helper.calls').read_text()) and groups[0].candidate_sha256==h(d/'candidate.dng') and groups[0].other_members==0
  runs.append({'mode':mode,'owner_pid':child.pid,'owner_exit':child.returncode,'live_records':len(live),'groups':len(groups),'output':str(d/'output.log'),'output_sha256':h(d/'output.log')})
-a.report.write_text(json.dumps({'passed':True,'workspace':str(w),'runs':runs,'build_result_sha256':h(a.build_result),'linked_objects':{str(src/n):h(src/n) for n in mods+objects('COBJS')},'helper_sha256':h(helper),'sources':{str(p):h(p) for p in [root/'tests/validation_live/companion.ml',pathlib.Path(__file__),root/'tests/camera_sdk_concurrency/live_records.py']},'scope':'actual compiled receiving companion with4tiny synthetic/fake-validator cases; no SDK/Photo/camera/EXglobal/CLI sync'},indent=2)+'\n')
-print('PASS4 receiving companion trace cases; actual records bound; direct helpers reaped',flush=True)
+a.report.write_text(json.dumps({'passed':True,'workspace':str(w),'runs':runs,'build_result_sha256':h(a.build_result),'linked_objects':{str(src/n):h(src/n) for n in mods+objects('COBJS')},'helper_sha256':h(helper),'sources':{str(p):h(p) for p in [root/'tests/validation_live/companion.ml',pathlib.Path(__file__),root/'tests/camera_sdk_concurrency/live_records.py']},'scope':'actual compiled receiving companion with5tiny synthetic/fake-validator cases; no SDK/Photo/camera/EXglobal/CLI sync'},indent=2)+'\n')
+print('PASS5 receiving companion trace cases; actual records bound; direct helpers reaped',flush=True)

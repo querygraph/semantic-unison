@@ -37,3 +37,10 @@ group observations to the actual component/helper PIDs and candidate SHA/size.
 All component exits, helper direct reaps, group0 observations and outer CPU
 closures pass. This is component emission, not full receiving sync or SDK concurrency.
 The runner copies its ML control into its private workspace before compiling.
+
+The [parallel companion successor](../qualification/validation-live-parallel-companion-actual-20261016.json)
+adds a fifth case: two distinct tiny candidates invoke synthetic validators under
+one two-permit supervisor. Each emits its own PID/digest/size-bound live and group
+records, and contracted known-nonterminal spans overlap on stock/Ox. All direct
+helpers are reaped and group/permit counters close. The four prior cases remain
+passing. This is not full CLI receiving, SDK concurrency or throughput evidence.
