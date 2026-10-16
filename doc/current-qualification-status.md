@@ -5,7 +5,7 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
-Shared-machine transition: equal8/8/2 policyv3 is adopted. [Inherited locks and actual dispatcher controls](../tests/qualification/shared-entrypoints-actual-20261016.json) passed under canonical Unison00..07 ownership: ten disposable controls, real parser/command checks, and stock build-only jobs2. Actual parent/child/group closure and token release are recorded. Shared sync server proofs, physical IO lanes and memory sharing remain unqualified. No Photo tokens or Adobe work were used.
+Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inherited locks](../tests/qualification/shared-entrypoints-actual-20261016.json) passed, followed by [actual shared sync](../tests/qualification/shared-functional-actual-20261016.json): stock/Ox workers1/2/3,18rows54CLI with independent strict client/supervisor/server/pump proofs, exact results and all tokens released. Physical IO lanes, aggregate memory and shared throughput remain unqualified. No Photo tokens or Adobe work used.
 
 | Requirement | Implementation and evidence | Remaining qualification |
 | --- | --- | --- |

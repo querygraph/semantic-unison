@@ -1,7 +1,7 @@
 """Canonical token owner for fixed Adobe-free build/parser entry points.
 
-Loopback sync has separately-sessioned server owners and is deliberately not
-released on this group's closure alone. Its separate proof integration follows.
+Loopback sync has separately-sessioned server owners. Its exact functional
+matrix/server/pump proofs must pass before the runner is reaped or tokens close.
 """
 import hashlib
 import json
@@ -22,7 +22,8 @@ POLICY = ROOT.parent / 'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLI
 MANIFEST = ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'
 MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd'
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
-           'aggregate-preflight', 'host-interface', 'shared-entrypoints'}
+           'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
+           'sync-functional'}
 
 
 def write(path, value):
@@ -32,7 +33,7 @@ def write(path, value):
 
 
 def run(target, argv, output, credits):
-    require(target in TARGETS, 'shared sync requires separate server/helper settlement integration')
+    require(target in TARGETS, 'target has no shared owner scope')
     require(type(credits) is int and 1 <= credits <= 8, 'shared credit count differs')
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]
@@ -59,7 +60,29 @@ def run(target, argv, output, credits):
                               for p in (Path(__file__), ROOT / 'tests/manual.py',
                                         ROOT / 'tests/shared_cpu_pool.py',
                                         ROOT / 'tests/shared_process_owner.py')}})
-            closure = settle(child, time.monotonic() + (600 if target.endswith('-build') else 60))
+            seconds = 300 if target == 'sync-functional' else 600 if target.endswith('-build') else 60
+            if target == 'sync-functional':
+                # Separate server sessions retain their own coordinator. Do
+                # not kill it on an outer deadline and discard live handles.
+                if not child.await_terminal(seconds - 2):
+                    raise RuntimeError('shared sync batch deadline; live coordinator retained')
+                from shared_audit import audit_shared
+                report_path = output / 'RESULT.json'
+                info = report_path.lstat()
+                import stat
+                require(stat.S_ISREG(info.st_mode) and info.st_nlink == 1
+                        and info.st_uid == os.getuid() and 0 < info.st_size <= 16 * 1048576,
+                        'bounded private shared result required')
+                raw = report_path.read_bytes()
+                after = report_path.lstat()
+                require((info.st_dev, info.st_ino, info.st_size, info.st_mtime_ns, info.st_ctime_ns)
+                        == (after.st_dev, after.st_ino, after.st_size, after.st_mtime_ns, after.st_ctime_ns)
+                        and len(raw) == info.st_size, 'shared result changed')
+                external = audit_shared(json.loads(raw))
+                write(output / 'SHARED-SERVER-AUDIT.json', external)
+                closure = settle(child, time.monotonic() + 2)
+            else:
+                closure = settle(child, time.monotonic() + seconds)
         lease.close_after_verified_settlement(owner_reaped=closure['reaped'],
                     groups_settled=closure['other_group_members_absent_before_reap'],
                     external_children_settled=True)

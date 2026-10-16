@@ -63,4 +63,4 @@ def settle(owner, deadline):
     return {'pid': pid, 'returncode': owner.process.returncode, 'reaped': True,
             'other_group_members_absent_before_reap': True,
             'members_before_reap': members, 'timed_out': not terminal,
-            'scope': 'owned group only; no separately-sessioned children admitted'}
+            'scope': 'owned group only; separate sessions require independently audited proofs'}

@@ -52,9 +52,11 @@ class CapturedStream:
                 "text": b"".join(self.chunks).decode("utf-8", "replace")}
 
 
-def run(command, environment, timeout, max_output=4 * 1048576, cleanup_grace=2):
+def run(command, environment, timeout, max_output=4 * 1048576, cleanup_grace=2,
+        strict_group_settlement=False):
     start = time.monotonic()
-    child = OwnedGroup(command, env=environment, stdin=subprocess.DEVNULL,
+    child = OwnedGroup(command, strict_group_settlement=strict_group_settlement,
+                       env=environment, stdin=subprocess.DEVNULL,
                        stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     stdout = stderr = None
     timed_out = False

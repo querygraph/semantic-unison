@@ -25,6 +25,7 @@ Targets:
   validation-cli          synthetic receiving diagnostics; BUILD_RECEIPT required
   group-parser            pure retained-group diagnostic parser controls
   shared-entrypoints      pure shared command/budget controls
+  shared-sync-controls    pure sync budget/receipt controls, no binaries
   interrupted-receipts    four fake-child interruption/receipt controls
   aggregate-lifecycle     four fake-worker aggregate ownership controls
   aggregate-preflight     pure interpreter-capability refusals; no test children
@@ -33,8 +34,8 @@ Targets:
 JOBS defaults to 4 (1..18), for build targets only.
 SHARED_CPU_CREDITS=8 selects capped shared entry points: build-only defaults
 to JOBS=2 and rejects JOBS above two or the ceiling minus two owner credits.
-sync-functional describes workers1/2 per endpoint plus two owner credits; its
-shared runtime server-proof integration is pending. Other targets need a separately
+sync-functional uses workers1/2/3 per endpoint plus two owner credits and audits
+every separate server closure before releasing tokens. Other targets need a separately
 qualified resource scope; this option does not claim a kernel CPU limit or
 enforce kernel CPU limits. Shared build/parser execution acquires only authorized
 Unison tokens in the existing canonical pool and retains them through settlement.
@@ -80,13 +81,14 @@ def shared_resource_plan(target, environment):
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
     build = target in ('stock-build', 'ox-build')
-    endpoints = [2, 2] if target == 'sync-functional' else []
+    endpoints = [3, 3] if target == 'sync-functional' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 0
     overhead = 2 if build or endpoints else 1
     require((not build or 1 <= jobs <= 2) and jobs + sum(endpoints) + overhead <= credits,
             'declared shared work exceeds project grant')
     implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
-                             'aggregate-preflight', 'host-interface', 'shared-entrypoints')
+                             'aggregate-preflight', 'host-interface', 'shared-entrypoints',
+                             'shared-sync-controls', 'sync-functional')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': jobs + sum(endpoints) + overhead,
             'compiler_jobs': jobs, 'endpoint_workers': endpoints,
@@ -95,7 +97,7 @@ def shared_resource_plan(target, environment):
             'memory_reservation_gib': 32,
             'runtime_grant': False, 'token_acquisition_implemented': implemented,
             'memory_enforced': False, 'physical_io_lane_resolved': False,
-            'scope': 'standing Unison tokens for build/pure controls; sync server/IO/memory qualification pending'}
+            'scope': 'standing Unison tokens; finite sync server proofs; IO/memory qualification pending'}
 
 
 def command(target, output, environment):
@@ -105,10 +107,10 @@ def command(target, output, environment):
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
         require(target in ('stock-build', 'ox-build', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
-                           'shared-entrypoints'),
+                           'shared-entrypoints', 'shared-sync-controls'),
                 'target has no shared resource scope; use build-only or separately coordinate it')
         if target == 'sync-functional':
-            require(shared >= 6, 'shared functional loopback requires four endpoint plus two owner credits')
+            require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
     if target in ('helper-stock', 'helper-ox'):
         key = 'STOCK_PREFIX' if target == 'helper-stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
@@ -120,6 +122,8 @@ def command(target, output, environment):
         return [sys.executable, str(ROOT / 'tests/validation_process/group_parser_test.py')]
     if target == 'shared-entrypoints':
         return [sys.executable, str(ROOT / 'tests/manual_shared_test.py')]
+    if target == 'shared-sync-controls':
+        return [sys.executable, str(ROOT / 'tests/shared_sync_controls.py')]
     if target == 'aggregate-preflight':
         return [sys.executable, str(ROOT / 'tests/sdk_container_receive/aggregate_preflight_test.py')]
     if target in ('interrupted-receipts', 'aggregate-lifecycle'):
@@ -198,7 +202,7 @@ def main():
     requested = os.environ.get('OUTPUT_DIR')
     host = target in ('host-interface', 'host-executor', 'read-parser', 'group-parser',
                       'helper-stock', 'helper-ox', 'interrupted-receipts', 'aggregate-lifecycle',
-                      'aggregate-preflight', 'shared-entrypoints')
+                      'aggregate-preflight', 'shared-entrypoints', 'shared-sync-controls')
     require(not(host and requested), 'host checks own their output; do not set OUTPUT_DIR')
     output = Path(requested).resolve() if requested else Path(tempfile.gettempdir()) / 'UNCREATED-unison-check'
     if requested:
@@ -211,7 +215,7 @@ def main():
     shared = os.environ.get('SHARED_CPU_CREDITS')
     if shared is not None:
         from shared_dispatch import run, TARGETS
-        require(target in TARGETS, 'shared sync server-proof integration is pending; not dispatched')
+        require(target in TARGETS, 'target has no retained shared owner scope; not dispatched')
         if requested:
             output.mkdir(mode=0o700)
         else:

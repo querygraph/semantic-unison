@@ -9,11 +9,12 @@ import time
 class OwnedGroup:
     """Own a new-session leader; never release its PID before group cleanup."""
 
-    def __init__(self, command, **arguments):
+    def __init__(self, command, *, strict_group_settlement=False, **arguments):
         if not hasattr(os, "waitid") or not hasattr(os, "WNOWAIT"):
             raise RuntimeError("benchmark ownership requires waitid(WNOWAIT)")
         self.process = subprocess.Popen(command, start_new_session=True, **arguments)
         self.reaped = False
+        self.strict_group_settlement = strict_group_settlement
 
     @property
     def pid(self):
@@ -85,6 +86,27 @@ class OwnedGroup:
                     if time.monotonic() >= deadline:
                         raise RuntimeError("unattested zombie descendants persisted: " + repr(rows))
                     time.sleep(0.005)
+            if getattr(self, 'strict_group_settlement', False):
+                # Retain this exact leader/PID until every other member has
+                # disappeared. A successful group signal alone is not proof.
+                deadline = time.monotonic() + max(0.2, grace)
+                while True:
+                    query = subprocess.run(['/bin/ps', '-axo', 'pid=,pgid=,stat='],
+                                           capture_output=True, text=True, timeout=1)
+                    if query.returncode or query.stderr:
+                        raise RuntimeError('strict group census failed; leader retained')
+                    members = []
+                    for line in query.stdout.splitlines():
+                        fields = line.split()
+                        if len(fields) != 3 or not fields[0].isdigit() or not fields[1].isdigit():
+                            raise RuntimeError('strict group census malformed; leader retained')
+                        if int(fields[1]) == self.pid:
+                            members.append(int(fields[0]))
+                    if not any(pid != self.pid for pid in members) and self.terminal():
+                        break
+                    if time.monotonic() >= deadline:
+                        raise RuntimeError('strict group unsettled; leader retained')
+                    time.sleep(.005)
             waited, status, usage = os.wait4(self.pid, 0)
             assert waited == self.pid
             self.reaped = True
@@ -94,6 +116,8 @@ class OwnedGroup:
                 "hard_kill_required": not terminal,
                 "observation_error": observation_error,
                 "group_cleanup_result": group_result,
+                "other_group_members_absent_before_reap":
+                    True if getattr(self, 'strict_group_settlement', False) else None,
                 "group_cleanup_before_leader_reap": True}, usage
 
 

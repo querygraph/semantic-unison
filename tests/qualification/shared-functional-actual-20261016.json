@@ -1,0 +1,122 @@
+{
+  "state": "STANDING8_SHARED_FUNCTIONAL_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "tool": 15884,
+    "chunk": "672587",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc",
+  "token_indexes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "policy_sha256": "1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352",
+  "audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "finite functional output/ownership only; no quiet timing, hard CPU/RSS or physical IO proof"
+  },
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/RESULT.json",
+      "bytes": 576956,
+      "sha256": "6c10cf8171d5cbec3167ebe9d3108d75147f5165c4e41f423944f143dcf8487d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/SHARED-CLOSED.json",
+      "bytes": 411,
+      "sha256": "3d0ac95999f33c92043c4b2b97f9b8325cc02e726394e4f650b5b7ebc8b0b47e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/SHARED-SERVER-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/SHARED-START.json",
+      "bytes": 1488,
+      "sha256": "e2fef958bb546ad80b5f7c2cee84eeaf71b2261937f40c12339c2dba83fb7892"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-sync-functional-fdcgdabc/SHARED-STDOUT.txt",
+      "bytes": 1269,
+      "sha256": "4eaa86e81836adcbee024b49ae22d7748775f3930af930d8d324944f21c6951e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-sync-controls-ji87kud3/SHARED-CLOSED.json",
+      "bytes": 411,
+      "sha256": "35555ec456975f4219745e5aff5ad181c9b5214a27d0e9a129e22dd90cfd1a41"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-sync-controls-ji87kud3/SHARED-START.json",
+      "bytes": 757,
+      "sha256": "0834d0bd3bf126daab77350245c91305c375883dd01b6e0a9c29623d17edabdd"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-sync-controls-ji87kud3/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-sync-controls-ji87kud3/SHARED-STDOUT.txt",
+      "bytes": 178,
+      "sha256": "1a315437c1ec0dec42b413631c8c008364d19ff16b48821a8d2892aa51d8cb9b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-o0tx7giw/SHARED-CLOSED.json",
+      "bytes": 411,
+      "sha256": "fca242a4ee2d4c555001b050f41bfb77c56a412da762bee37b6be2e676f0a0fa"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-o0tx7giw/SHARED-START.json",
+      "bytes": 753,
+      "sha256": "aa543f59c442eda6761f762809c3b48292eee1e373de839bf37b3dc975acb693"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-o0tx7giw/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-o0tx7giw/SHARED-STDOUT.txt",
+      "bytes": 81,
+      "sha256": "747073f39f08c4e0dbf108c207ef479e3b977313b53b6881255fc5daf49b9eba"
+    }
+  ],
+  "limits": [
+    "finite synthetic functional only; no quiet timing",
+    "no hard CPU/RSS or physical IO-lane isolation",
+    "no SDK/Adobe/Photo payload",
+    "frozen timing series unchanged"
+  ],
+  "pure_controls_terminals": [
+    {
+      "chunk": "b93c2e",
+      "exit": 0,
+      "running_session": false
+    },
+    {
+      "chunk": "23b261",
+      "exit": 0,
+      "running_session": false
+    }
+  ],
+  "repo_raw": {
+    "path": "tests/qualification/shared-functional-result-20261016.json",
+    "bytes": 576956,
+    "sha256": "6c10cf8171d5cbec3167ebe9d3108d75147f5165c4e41f423944f143dcf8487d"
+  }
+}

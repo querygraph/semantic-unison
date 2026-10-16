@@ -4,6 +4,20 @@
 
 ## Current checkpoint — 2026-10-15
 
+Latest [standing8 shared functional qualification](tests/qualification/shared-functional-actual-20261016.json)
+PASSED/CLOSED: actualtool15884/672587/exit0/no session,18rows54CLI, stock/Ox
+ordinary/receiver-clone/semantic with workers1/2/3. Two private2MiB files perrow;
+maximum3+3+2=8. All108 client/supervisor strict group censuses and54server/pump
+receipts passed; exactoutput/basis/noop/cleanup preserved. Runner63782 actually
+reaped0 after independent server audit; canonical00..07 closed, Photo08..15
+untouched. Pure budget/receipt controls b93c2e/0+23b261/0 passed, including refusal
+of malformed strict census before wait4 and separation from timed audit. Root
+notified queue01a14216-e221. This closes the shared-sync wiring gap in the earlier
+checkpoint below; no quiet timing, hardCPU/RSS, physical IO lane or production
+corpus claim. Frozen timing series unchanged. Next goal work can use the ordinary
+standing lane; SDK/Photo native ownership remains separate.
+
+
 Shared entry points now own canonical Unison tokens for build-only and pure
 parser controls. [Actual inheritance/dispatcher qualification](tests/qualification/shared-entrypoints-actual-20261016.json):
 final ten disposable controls PASS (including child-inherited lock retention and

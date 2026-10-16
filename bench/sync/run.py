@@ -26,7 +26,7 @@ from read_stats import parse as primary_reader_counters
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
 MODES = ("ordinary", "receiver-clone", "semantic", "source-clone")
-WORKER_CHOICES = (1, 2, 4, 6, 8, 18, 36)
+WORKER_CHOICES = (1, 2, 3, 4, 6, 8, 18, 36)
 SDE = re.compile(
     r"Remote semantic clone wrote (\d+) logical metadata bytes in (\d+) write calls "
     r"\((\d+) payload bytes; (\d+)-byte comparison windows; ([^)]+)\)")
@@ -163,7 +163,8 @@ class InvocationFailure(RuntimeError):
         super().__init__("sync invocation failed: " + json.dumps(outcome))
 
 
-def measure_invocation(command, environment, timeout, proxy_script, use_proxy=True):
+def measure_invocation(command, environment, timeout, proxy_script, use_proxy=True,
+                       strict_group_settlement=False):
     """Own both groups through cancellation, cleanup and exact leader reap."""
     start = time.monotonic()
     supervisor = capture = None
@@ -172,7 +173,8 @@ def measure_invocation(command, environment, timeout, proxy_script, use_proxy=Tr
     fault = None
     try:
         if use_proxy:
-            supervisor = OwnedGroup([sys.executable, str(proxy_script)], env=environment,
+            supervisor = OwnedGroup([sys.executable, str(proxy_script)],
+                strict_group_settlement=strict_group_settlement, env=environment,
                 stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
             capture = CapturedStream(supervisor.process.stdout)
             deadline = time.monotonic() + 5
@@ -181,7 +183,7 @@ def measure_invocation(command, environment, timeout, proxy_script, use_proxy=Tr
                 if supervisor.terminal() or time.monotonic() >= deadline:
                     raise RuntimeError("loopback supervisor failed to listen")
                 time.sleep(0.005)
-        measured = run(command, environment, timeout)
+        measured = run(command, environment, timeout, strict_group_settlement=strict_group_settlement)
         if measured["returncode"] or measured["timed_out"] or measured["capture_truncated"]:
             fault = "native client failed, timed out or exceeded captured output limit"
     except BaseException as error:
@@ -262,11 +264,11 @@ def main():
     finite_qualification = args.qualification or args.shared_qualification
     if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
-        workers = [1, 2]
-    if args.shared_qualification and (args.loopback_cpu_credits not in (6, 7, 8) or args.orchestration_cpu_credits != 2):
-        parser.error("shared qualification requires six to eight credits including two owner credits")
+        workers = [1, 2, 3] if args.shared_qualification else [1, 2]
+    if args.shared_qualification and (args.loopback_cpu_credits != 8 or args.orchestration_cpu_credits != 2):
+        parser.error("shared qualification requires eight credits including two owner credits")
     if not workers or any(value not in WORKER_CHOICES for value in workers) or len(set(workers)) != len(workers):
-        parser.error("workers must be unique values from 1,2,4,6,8,18,36")
+        parser.error("workers must be unique values from 1,2,3,4,6,8,18,36")
     if not modes or any(mode not in MODES for mode in modes) or len(set(modes)) != len(modes):
         parser.error("invalid/duplicate mode")
     endpoint_count=2 if any(mode!="source-clone" for mode in modes) else 1
@@ -402,7 +404,8 @@ def main():
             command += ["-batch", "-auto", "-fastcheck", "false", "-times", *flags]
             try:
                 return measure_invocation(command, env, args.timeout, work / "proxy.py",
-                                          use_proxy=mode != "source-clone")
+                                          use_proxy=mode != "source-clone",
+                                          strict_group_settlement=args.shared_qualification)
             except InvocationFailure as error:
                 result["failed_invocation"] = error.outcome
                 raise
