@@ -44,8 +44,15 @@ without inlinevalues/pointedreads, reports outside-payload references. Maker
 recognition/private-reference closure/semanticeligibility stay FALSE always.
 Five authored-byte controls passed, child10346 reaped0/group absent/CPU8 closed,
 actual85eed6/0/no session; receipt private-maker-shape-source-actual-20261017.
-Next concrete action: design frozen slice/epoch/budget/sanitized-output executor
-for fresh IO review, then investigate a vendor-specific reference contract from
+The callable slice reader tests/private_maker_slice.py is now implemented:
+NOFOLLOW read-only open, exact eight-field inode/name epoch fences before/after
+each payload-relative pread, <=3078 requested bytes, sanitized shape output,
+and qualified uncertain-close carrier. Five generated-fixture controls passed
+(child11747 reaped0/group absent, CPU8 closed; actual2a33db/0/no session).
+Receipt: tests/qualification/private-maker-slice-source-actual-20261017.json.
+No retained source was opened. Next concrete action: freeze an admitted owned
+executor around this callable reader, exact saved geometry and source pins for
+fresh IO review, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.

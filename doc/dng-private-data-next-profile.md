@@ -170,3 +170,15 @@ sanitized-output executor and coordinated IO admission. Then use actual shape
 evidence plus a vendor-specific reference grammar to decide whether a bounded
 private profile can be justified. No current source-tag allowlist, receiving
 behavior or consumed admission is changed by this source-only work.
+
+The callable slice layer `tests/private_maker_slice.py` now binds this diagnostic
+to an exact read-only owned regular inode and path epoch (eight native fields),
+with NOFOLLOW, payload-relative `pread`, a 3078-byte requested-read ceiling and
+qualified descriptor cleanup. Source changes and observation expiry propagate
+as failures rather than unsupported-format results; uncertain close overrides
+a successful result and retains descriptor identity without retry. Five tiny
+generated-fixture controls passed with actual child/group settlement and CPU8
+release; see `tests/qualification/private-maker-slice-source-actual-20261017.json`
+(actual owning terminal2a33db/0). No retained payload was opened. This callable
+is not a dispatcher or admission: the frozen executor and fresh IO coordination
+remain to be implemented before any retained-input inspection.
