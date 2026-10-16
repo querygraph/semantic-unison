@@ -24,7 +24,10 @@ under /private/tmp/unison-mixed-native-v1-e3d4f770baf243db915be0b3fdc0be9d.
 Rawjournal/ownerterminal/parentexit/independentpostaudit+10directpins preserved.
 No camera/pixels/corpus/production, quietthroughput/CPUcomputeoverlap/hardcaps
 inference. Admission CONSUMED, no retry/successor. Root independent adoption
-pending separately; no currentUnisonresourcehold. Historical pending notes below
+now verified in mixed-validation-v1-root-adoption-20261017.json: Rootreceipt
+6811B SHA4ae4cfbc49720ea5e32a728a67d77ffb7a7e7266182e946938dda908d757bdc8,
+actualterminal/worker/resultpins rebound,326sources/raw2probeaudit accepted,
+PhotoIOwaitFALSE/no payloadhash byRoot. No currentUnisonresourcehold. Historical pending notes below
 do not authorize another dispatch or claim fresh probes remain unexecuted.
 
 The full SOL.md implementation goal is **active and incomplete**. The user

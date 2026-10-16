@@ -20,6 +20,15 @@ acceptance is implied. Photo owns preview generation/publishing qualification.
 
 ## Current evidence to read first
 
+The follow-up since fork/master4a620ea changes only `src/supervisedExternal.ml`
+in production: opt-in helper settlement diagnostics after actual execution and
+limiter settlement. Most follow-up files are qualification/source-owner harnesses
+and sealed evidence. The [actual mixed workload](../tests/qualification/mixed-validation-v1-actual-20261017.json)
+and [Root independent adoption](../tests/qualification/mixed-validation-v1-root-adoption-20261017.json)
+now pass/close two SDK calls, two readonly ExifTool requests and32 shared hash
+tasks under Unison8/EXglobal. Four SDK warnings each remain visible. No quiet
+scaling, hard whole-process limits, representative corpus or full-goal claim.
+
 - [Current helper-diagnostic Make pair](../tests/qualification/validation-live-collector-build-actual-20261016.json)
   and [Dune pair](../tests/qualification/validation-live-current-dune-actual-20261016.json).
 - [Camera SDK receiving V2](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json):
