@@ -55,3 +55,10 @@ review. The Rust parser is not a replacement for the exact-byte semantic kernel,
 complete preservation partition, receiving commit checks or optional Adobe raw
 validation. No implementation/adoption, semantic eligibility, pixels, resource
 cap, throughput or production qualification is established by this review.
+
+## Subsequent user direction
+
+The source review above remains historical. The user is extending exiftool-rs
+for dng-compare and asked to revisit its reuse here after that work is ready.
+Perl baseline13.59 is now separately installed/pinned and generated-XMP checked;
+see [upgrade](exiftool-13.59-upgrade.md). No Rust backend adopted.

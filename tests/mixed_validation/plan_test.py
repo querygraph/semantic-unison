@@ -13,7 +13,7 @@ def fixture():
                 probes=[dict(label=label,executable=artifact(label),build_receipt=artifact(label+'.json'))
                         for label in ('stock','ox')],
                 sdk=dict(executable=artifact('sdk'),manifest=artifact('sdk.json'),build_id='unison-sdk171-2724-v1-single'),
-                metadata=dict(executable=artifact('exiftool'),version='13.10',inventory=artifact('metadata-inventory.json')),
+                metadata=dict(executable=artifact('exiftool'),version='13.59',inventory=artifact('metadata-inventory.json')),
                 input=artifact('uncompressed-original.dng',4096),
                 input_epoch=dict(st_dev=1,st_ino=2,st_size=4096,st_mtime_ns=3,st_ctime_ns=4,
                                  st_mode=0o100644,st_nlink=1,st_uid=501),

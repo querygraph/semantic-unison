@@ -9,8 +9,10 @@ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
 from mixed_validation.artifacts import verified_hash
 from private_camera_receiving.close import close_descriptors
 
-PACKAGE=Path('/usr/local/Cellar/exiftool/13.10/libexec/lib')
-SCRIPT=Path('/usr/local/Cellar/exiftool/13.10/bin/exiftool')
+VERSION='13.59'
+INSTALLATION=Path('/Users/alexy/.local/share/unison/tools/exiftool/13.59/exiftool-2200871d9cef988051d2a99d67df3bda6cbb30a8')
+PACKAGE=INSTALLATION/'lib'
+SCRIPT=INSTALLATION/'exiftool'
 PERL=Path('/usr/bin/perl5.34')
 
 
@@ -52,7 +54,7 @@ def capture():
         item=dict(path=str(p),bytes=p.stat().st_size,sha256=hashlib.sha256(p.read_bytes()).hexdigest())
         verified_hash(item);rows.append(item)
     if package_paths()!=paths:raise ValueError('installed package roster changed')
-    return dict(schema='unison-mixed-exiftool-package/1',version='13.10',
+    return dict(schema='unison-mixed-exiftool-package/1',version=VERSION,
                 executable=rows[0],modules=rows[1:],system_interpreter=system_perl(),
                 package_root=str(PACKAGE),package_roster_complete=True,
                 full_runtime_dependency_inventory_complete=False,
@@ -64,8 +66,9 @@ def verify(metadata):
     verified_hash(metadata['inventory'])
     record=document(metadata['inventory']['path'],metadata['inventory']['sha256'])
     if (record.get('schema')!='unison-mixed-exiftool-package/1'
-            or record.get('version')!=metadata['version'] or metadata['version']!='13.10'
+            or record.get('version')!=metadata['version'] or metadata['version']!=VERSION
             or record.get('executable')!=metadata['executable']
+            or record.get('executable',{}).get('path')!=str(SCRIPT)
             or record.get('package_root')!=str(PACKAGE)
             or record.get('package_roster_complete') is not True
             or record.get('full_runtime_dependency_inventory_complete') is not False):

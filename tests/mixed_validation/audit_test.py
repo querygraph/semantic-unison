@@ -81,9 +81,9 @@ class Audit(unittest.TestCase):
             with self.assertRaises(ValueError):audit(bad,**args,require_admission=True)
     def test_metadata_numeric_version_preserves_decimal_spelling(self):
         c=fixture();out=c['outcome'];line=next(x for x in out['stdout'].splitlines() if x.startswith('METADATA_RESULT stdout-hex='))
-        raw=bytes.fromhex(line.split('=',1)[1]).replace(b'"synthetic-only"',b'13.10')
+        raw=bytes.fromhex(line.split('=',1)[1]).replace(b'"synthetic-only"',b'13.59')
         out['stdout']=out['stdout'].replace(line,'METADATA_RESULT stdout-hex='+raw.hex())
-        self.assertTrue(audit(out,command=out['command'],metadata_version='13.10')['metadata_fields_verified'])
+        self.assertTrue(audit(out,command=out['command'],metadata_version='13.59')['metadata_fields_verified'])
         self.assertFalse(audit(out,command=out['command'],metadata_version='13.1')['metadata_fields_verified'])
         with self.assertRaises(ValueError):audit(out,command=out['command'],metadata_version=True)
     def test_prefix_distinguishes_complete_failed_and_unstarted(self):

@@ -415,3 +415,25 @@ pins are in the request. No SDK/metadata command or media payload was executed
 during preparation; source epoch was rechecked without rehashing source bytes.
 Runtime needs fresh Root admission; do not infer a grant, dispatch, retry or
 successor from these files. System Perl/stdlib trust limits remain explicit.
+
+## Perl ExifTool baseline upgraded to 13.59
+
+User requested the same Perl13.59 baseline used by the separate exiftool-rs /
+dng-compare work. The current mixed-validation dependency verifier now selects
+the private versioned installation recorded in
+`doc/exiftool-13.59-installation-v1.json`, and exact246-library-file inventory
+`doc/mixed-exiftool-package-inventory-v2.json`. Shared/usr/local/bin/exiftool
+and the old13.10 package are untouched. Historical V1 plans, inventories,
+source reviews and actual receipts remain unchanged; do not replay them or
+relabel13.10 evidence as13.59.
+
+Actual final controls1e11d4/exit0/no session passed16 pure inventory/plan/audit
+tests plus two direct ExifTool calls: version13.59 and readonly generated Unicode
+XMP with the exact mixed-probe argv. Source/fixture/package fences and all
+contained groups settled, CPU8 closed. Evidence:
+`tests/qualification/exiftool-13.59-upgrade-v2-actual-20261017.json`.
+First upgrade controls95afc8/0 also passed; final successor adds exact executable
+path rejection. No SDK, media/photo payload, mixed native rerun or semantic/pixel
+qualification. Future mixed runs require current successor source/binary pins
+and fresh existing IO scheduling. exiftool-rs itself remains deferred until the
+user's extensions and dng-compare integration are ready.
