@@ -316,8 +316,22 @@ inventory-actual and metadata-enforcement-actual. No ExifTool command/SDK/media/
 EXglobal. Full runtime closure FALSE: OS Perl module search paths/dylibs remain
 trusted, not a hermetic runtime claim. Lifecycle source explicitly doubles
 package verifier alongside prior build/admission/inventory doubles.
-Next: frozen exact mixed plan/request (review conservative declared IO budget)
-and actual
+**First mixed native request FROZEN, NOT ADMITTED:** doc/mixed-validation-plan-v1.json
+62317B SHA0fd5d23f038930f1d55e535baeef15e76a316d6eb719d3f7cac3b412e2b3f88d;
+doc/mixed-validation-request-v1.json45039B SHA3e76df160f2248cd401ef5e9eabdbb82f0b819cca2fa2a9af87578dc7e5e4064.
+326executionpins/9prereqs, fresh unexecuted stock/Ox probes, one retained generated
+48005534B uncompressed input metadata-only/two clone-only disposable inputs;
+2serialSDKv1single+2ExifTool+32hash tasks/Unison8+EXglobal. DeclaredIO raised8GiB
+conservatively (not measured/enforced); fivebudget controls actual8c8b0a/0, final
+success+unknown composition/buildrecheck/metadata controls actual27349/9b7c25/0
+allgroups+CPU8closed. Receipts budget-actual and pre-request-actual.
+Workspace /private/tmp/unison-mixed-native-v1-e3d4f770baf243db915be0b3fdc0be9d,
+admission /private/tmp/unison-mixed-validation-admission-v1.json both absent at
+preparation22a98e/0; no currentUnisonresources. Exactrootrequestcommands/pins in
+request. No SDK/ExifTool/media execution. Needs fresh Root review+IO admission,
+never auto-dispatch from absence/resource release. Stdlib/systemPerl trust limits
+remain false for complete closure.
+Next: reconcile Root review/admission against exact request, then actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

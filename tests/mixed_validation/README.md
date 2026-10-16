@@ -126,7 +126,7 @@ the next integration work; this receipt supplies no native runtime grant.
 `plan.py` validates declarations without opening files or acquiring resources.
 It derives two exact stock-then-Ox argv and fixes Unison8/EXglobal, two SDK/two
 metadata helpers,16 hash tasks/probe,120s probe/10s helper observation and the
-2192MiB/64-credit backend envelope. Its2GiB IO declaration is not an enforced
+2192MiB/64-credit backend envelope. Its current8GiB IO declaration is not an enforced
 physical limit. It requires pinned probe/build receipts, qualified single SDK,
 metadata version/dependency inventory, one input/eight-field epoch, ancestry and
 execution inventory outside the fresh disposable workspace. Checking these
@@ -367,3 +367,27 @@ runtime-dependency completeness stays false. Disposable lifecycle fixtures now
 explicitly double package verification as well as build/admission/inventory.
 Next is the frozen exact plan/request with current execution/prerequisite pins;
 it still requires separately reviewed native IO admission before any SDK run.
+
+## Frozen first native request (not admitted)
+
+[Plan V1](../../doc/mixed-validation-plan-v1.json)62317B SHA
+0fd5d23f038930f1d55e535baeef15e76a316d6eb719d3f7cac3b412e2b3f88d;
+[request V1](../../doc/mixed-validation-request-v1.json)45039B SHA
+3e76df160f2248cd401ef5e9eabdbb82f0b819cca2fa2a9af87578dc7e5e4064.
+It pins326 execution sources/nine qualification prerequisites and both new
+unexecuted stock/Ox probes. One retained generated48005534B input receives only
+metadata checks; two disposable native clones are hashed/inspected. Two serial
+probes request two single-thread SDK calls, two readonly ExifTool calls and32
+hash tasks overall inside Unison8+EXglobal. Declared IO is now conservative8GiB,
+not measured/enforced; prior2GiB control receipts remain historical unchanged.
+Observation is300s owner/120s probe/10s helper; unknown retains beyond observation.
+The current budget successor's five controls and final success/unknown/build/
+metadata controls passed, actual9b7c25/0/no session/allgroups+CPU8closed.
+
+Fresh workspace unison-mixed-native-v1-e3d4f770baf243db915be0b3fdc0be9d and
+admission /private/tmp/unison-mixed-validation-admission-v1.json were absent
+at preparation. Exact argv, environment, source/ancestry/tool/build/dependency
+pins are in the request. No SDK/metadata command or media payload was executed
+during preparation; source epoch was rechecked without rehashing source bytes.
+Runtime needs fresh Root admission; do not infer a grant, dispatch, retry or
+successor from these files. System Perl/stdlib trust limits remain explicit.

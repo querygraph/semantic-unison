@@ -8,7 +8,7 @@ LIMITS=dict(cpu_credits=8,token_indexes=list(range(8)),io_mode='EX_GLOBAL',
             probes=2,sdk_helpers=2,metadata_helpers=2,hash_tasks_per_probe=16,
             observation_seconds=300,probe_seconds=120,helper_seconds=10,
             backend_payload_bytes=2192*1048576,backend_descriptor_credits=64,
-            declared_io_bytes=2*1024**3,physical_io_budget_enforced=False)
+            declared_io_bytes=8*1024**3,physical_io_budget_enforced=False)
 
 
 def require(value,message):
