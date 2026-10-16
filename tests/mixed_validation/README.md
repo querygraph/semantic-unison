@@ -140,3 +140,24 @@ terminal9e19fe/0/no session. No SDK/metadata/media/EXglobal execution occurred.
 The prior fresh-process receipt remains tied to its earlier worker source;
 native entrypoint, artifact preparation, exact9FD and dispatcher admission are
 still outstanding and must not be inferred from this pure contract.
+
+## Artifact and disposable-input preparation
+
+`artifacts.py` verifies bounded regular single-link owned artifacts through
+NOFOLLOW descriptors, exact SHA/size and pre/post native eight-field fences.
+Qualified close uncertainty preserves the descriptor identity and original
+failure without numeric retries. Execution/tool/dependency inventories are
+hashed; the retained generated source receives metadata fences only and cannot
+also appear as an execution artifact. Each stock/Ox row gets a fresh private
+native-clone-only candidate, with no copy fallback or overwrite. Only disposable
+clone bytes are hashed against the historical input SHA, before and after use.
+
+[Five artifact controls](../qualification/mixed-validation-artifacts-actual-20261016.json)
+passed using tiny authored data, including an actual native clone, source epoch
+preservation, symlink/hash/size rejection, consumed destination refusal and an
+injected close carrier with exactly one close attempt. Child1003 reaped0/group
+absent/Unison8 closed; owning terminalbf3840/0/no session. Initial import failure
+60cbd8/1 closed before controls and is preserved in the receipt. No SDK, ExifTool,
+Photo/camera data or canonical EXglobal operation. These callable preparation
+functions still require the native entrypoint's verified admission and held IO;
+they do not acquire resources or authorize execution themselves.

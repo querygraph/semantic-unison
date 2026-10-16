@@ -198,7 +198,17 @@ absent/CPU8 closed; actual terminal9e19fe/0/no session. Receipt
 `mixed-validation-plan-actual-20261016.json`. Pure declarations do not verify
 artifact bytes, grant runtime permission or qualify native FD ownership. Prior
 fresh-process receipt remains pinned to its earlier worker version.
-Next: native artifact preparation/admission/inherited9FD boundary and actual
+**Mixed artifact preparation implemented:** `artifacts.py` uses bounded
+NOFOLLOW regular/single-link/owned SHA+size+eight-field fences and qualified
+close carriers; source media is metadata-only, never an execution inventory
+artifact. Each row gets a distinct native-clone-only disposable input, no
+fallback/overwrite; clone SHA and identity are checked before/after use.
+Five tiny original controls passed (including real native clone/injected close),
+child1003 reaped0/group absent/CPU8 closed; actualbf3840/0/no session. Receipt
+`mixed-validation-artifacts-actual-20261016.json` preserves initial import
+failure60cbd8/1 closed before controls. No SDK/ExifTool/Photo/camera/EXglobal use.
+Preparation is callable only: no admission authority or lock acquisition.
+Next: native admission/inherited9FD boundary and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
