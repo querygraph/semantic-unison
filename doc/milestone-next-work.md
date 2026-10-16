@@ -112,3 +112,17 @@ This closes the synthetic multi-file integration gate, not real SDK throughput
 or experimental area-host scaling. The shared8 area-host plan/result/journal/
 direct-child components remain source/Adobe-free only; their fault/inheritance/
 exact parent owner integration must precede native requests.
+
+The [shared-eight SDK host V1 matrix](../tests/qualification/sdk-shared-host-v1-actual-20261016.json)
+now PASSED/CLOSED: actual session42215/e48a3d/0, twelve serial native calls
+on three retained generated inputs, reference1 and experimental1/2/6. The
+independent parent auditor reparsed every direct child/group outcome and
+functional protocol; worker34617 reaped0, all inherited CPU/IO descriptors closed
+and125 source pins remained unchanged. This supersedes the component-only
+shared-host status above. The historical native1/6/18 matrix remains distinct.
+No OS-thread, RSS, pixel, speedup or production qualification follows. Admission
+1851a5bb is consumed once. Next resource step is retained-child integration of
+the separately tested OS observer, with missing observations preserved and
+actual settlement independent of sampling; any native execution needs a new
+source-bound admission. Broader semantic eligibility and publication/fault
+coverage remain open independently of SDK resource observations.

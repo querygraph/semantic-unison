@@ -1,0 +1,399 @@
+{
+  "schema": "unison-shared-sdk-host-actual/1",
+  "state": "ACTUAL_PASSED_CLOSED",
+  "request": "doc/shared-sdk-host-request-v1.json",
+  "admission_sha256": "1851a5bbb115755bcf8a06654fa257dfd6f62b34d21ea9baa7728b0709e095c5",
+  "owner_return": {
+    "path": "/private/tmp/u-shm-v1-c6642e3643/OWNER-RETURN.json",
+    "bytes": 10949,
+    "sha256": "d167024fb1c431c694f10f66542b714d72a984c3040258b54f946fa849f27f3e"
+  },
+  "actual_terminal": {
+    "session_id": 42215,
+    "initial_chunk_id": "6663af",
+    "terminal_chunk_id": "e48a3d",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "Actual write_stdin response collected by owning assistant; faithful transcription."
+  },
+  "audit": {
+    "attempted_direct_calls": 12,
+    "all_attempted_direct_children_and_groups_settled": true,
+    "functional_status": "PASSED",
+    "functional_audit": {
+      "functional_results": [
+        {
+          "index": 1,
+          "codec": "uncompressed",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 2,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 3,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 2,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 4,
+          "codec": "uncompressed",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 1,
+              "started": 1,
+              "finish": 1,
+              "calls": 6,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49165248,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 5,
+          "codec": "jpeg",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 6,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49159936,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 7,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 49503154,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 8,
+          "codec": "jpeg",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 12,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 50452246,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 9,
+          "codec": "jxl",
+          "backend": "reference",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": null
+        },
+        {
+          "index": 10,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 1,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 0,
+              "started": 0,
+              "finish": 0,
+              "calls": 0,
+              "active": 0,
+              "peak": 0,
+              "max-partition": 0,
+              "reference": 1
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 119889977,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 11,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 2,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 4,
+              "active": 0,
+              "peak": 2,
+              "max-partition": 2,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 142719090,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        },
+        {
+          "index": 12,
+          "codec": "jxl",
+          "backend": "experimental",
+          "requested_threads": 6,
+          "receipt": {
+            "structure": "valid",
+            "decode": "success",
+            "raw-digest": "valid",
+            "errors": "0",
+            "warnings": "4"
+          },
+          "observations": {
+            "area_callback_frames": {
+              "tasks": 2,
+              "started": 2,
+              "finish": 2,
+              "calls": 10,
+              "active": 0,
+              "peak": 6,
+              "max-partition": 6,
+              "reference": 0
+            },
+            "covered_allocator_bytes": {
+              "limit": 1073741824,
+              "used": 0,
+              "peak": 233987414,
+              "live": 0,
+              "denied": 0
+            }
+          }
+        }
+      ],
+      "calls": 12,
+      "experimental_calls": 9,
+      "full_matrix_complete": true,
+      "aggregate_group_settlement_proved": false,
+      "parent_terminal_proved": false,
+      "io_cpu_fd_closure_proved": false,
+      "resource_release_authorized": false,
+      "os_thread_scaling_proved": false,
+      "hard_rss_cap_proved": false,
+      "pixel_equivalence_proved": false,
+      "runtime_qualification_requires_actual_owned_receipts": true
+    },
+    "aggregate_parent_fd_closure_proved": false,
+    "resource_release_authorized": false
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-shm-v1-c6642e3643/OWNER-TERMINAL.json",
+      "bytes": 237,
+      "sha256": "b9e8d6bbdb267856d2afdbb83345612f3675cfa6536c122bacd965e238f51308"
+    },
+    {
+      "path": "/private/tmp/u-shm-v1-c6642e3643/SHARED-START.json",
+      "bytes": 15887,
+      "sha256": "0672392d2f35ca724ba3c3ef3813fb170ee63c00bcb9510a1fc5edc702f6d551"
+    },
+    {
+      "path": "/private/tmp/u-shm-v1-c6642e3643/RESULT.json",
+      "bytes": 68991,
+      "sha256": "84e4958452deab4094db3bff1c056bd1d33a84a9fd30630de5ada2699ae1cfc1"
+    },
+    {
+      "path": "/private/tmp/u-shm-v1-c6642e3643/SHARED-SERVER-AUDIT.json",
+      "bytes": 8786,
+      "sha256": "2117050bfb2f209f6642254ddfc666aaf0b7cd74d947ab7f189cfd61ff1e1a26"
+    },
+    {
+      "path": "/private/tmp/u-shm-v1-c6642e3643/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "3e359b1933a873c6ed969de3b8ad63a9a9c5b142869a3bd3bdc7c9b9eb75c28c"
+    }
+  ],
+  "scope": "12 serial SDK calls, three retained generated inputs, reference1 and experimental1/2/6 within Unison8; no pixel, RSS, OS-thread hard cap, speedup or production qualification"
+}

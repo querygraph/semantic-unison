@@ -40,3 +40,9 @@ The [remaining-work queue](milestone-next-work.md) and twelve-row
 [acceptance audit](acceptance-matrix-audit.md) preserve the complete objective.
 A current build, source test or narrow SDK result must not silently close a
 broader corpus, platform, cancellation, resource or performance requirement.
+
+Latest native resource-owner evidence: [shared-eight SDK host V1](../tests/qualification/sdk-shared-host-v1-actual-20261016.json)
+passed12 serial reference/experimental calls with independent direct-child and
+worker/group settlement, unchanged source pins and closed CPU/IO ownership.
+This is shared-owner/inherited-descriptor functional evidence, not OS resource
+limits, pixel equivalence or a speedup result.
