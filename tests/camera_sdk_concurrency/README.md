@@ -158,3 +158,20 @@ refuse. A known failed prefix can preserve two helper settlements while staying
 FAILED. The complete branch explicitly requires no pump errors and no call fault.
 These are not actual child/CLI/helper closures; dispatcher ownership integration
 and finite live controls remain required before requesting the receiving window.
+
+## Two-compiler worker loop
+
+`worker.execute` composes the synthetic case kernels serially (stock then Ox),
+maintains one durable intent/outcome journal and saves case progress before
+continuing. Preparation with no journal remains explicitly pre-call; any intent
+marks the overall possible-call phase. Complete is published only after the
+independent parent result audit passes. First failure stops the successor, and
+unresolved ownership bypasses ordinary failed-result persistence. The admitted
+entrypoint must provide qualified durable persistence and inherited ownership.
+
+Script preparation reads/copies exactly four regular bounded epoch-stable pinned
+transport sources with qualified descriptor closes; only its disposable launcher
+gets execute permission. [Seven source controls](../qualification/concurrent-worker-source-controls-actual-20261016.json)
+cover composition/refusal ordering and actual script-copy hashes/modes. Invocation,
+case and final-audit hooks are mocks here; no transport or receiving owner runs.
+A fresh exact plan/admission parent and shared-dispatch target remain outstanding.
