@@ -1,0 +1,50 @@
+{
+  "schema": "unison-concurrent-receiving-command-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "fac845",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/command.py",
+      "bytes": 2753,
+      "sha256": "2304361afe3f85c9bf0882c7f06c54a9f9ef3114882dfbaacc119f95f2e217fc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/command_test.py",
+      "bytes": 2212,
+      "sha256": "cee508dd4cf85e3e9bb356632ebc0188c528bb1d70a1712f169128dd2bce10a6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/planning.py",
+      "bytes": 2328,
+      "sha256": "37ad328ccd7646430ed22dfa6683ceb71035804a841c30bf7ebf22d9fd9e3cdb"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-concurrent-command-controls-20261016a/SHARED-START.json",
+      "bytes": 1109,
+      "sha256": "09447ae1de8cdd9d2365cd1d7405fc8fc6760aee8a291e9580850392eda4314b"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-command-controls-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "acaa75b6844e5b03eab6b3d3a6327240f95ed8fd017f35c9896b2a865571645d"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-command-controls-20261016a/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-concurrent-command-controls-20261016a/SHARED-STDERR.txt",
+      "bytes": 104,
+      "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+    }
+  ],
+  "scope": "6pure command/resource shape controls; no launch/journal/transport/payload/helper/SDK/Photo/EXglobal; executor/admission and full CLI concurrency still absent",
+  "full_goal_complete": false
+}

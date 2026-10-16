@@ -83,3 +83,18 @@ exercise these distinctions. The auditor has no signaling/FD authority and does
 not authenticate the timestamp producer or establish SDK decode overlap.
 The future executor must bind current owner/source/tool provenance and audit
 all CLI/server/pump/worker/FD settlements independently before any resource release.
+
+## Full receiving command contract
+
+`command.py` constructs one two-file seed's exact client argv and mirrored
+server environment overrides without reading an input or invoking a process.
+It explicitly sets three endpoint worker credits, maxthreads3, maxinflight3,
+filesystem execution slots2, and the calculated6GiB/2GiB declaration. Omitting
+filesystem execution concurrency could serialize validator work despite enough
+CPU permits. Process/group/live diagnostics are all requested; no merge, update,
+base reuse or semantic eligibility is added. [Six source-control groups](../qualification/concurrent-receiving-command-controls-actual-20261016.json)
+check mirrored flags, one-seed count, executable/build pin shapes, socket/path
+bounds and no implicit grant. Actual artifact validation, intent/outcome journal,
+aggregate ownership and admission still belong to the forthcoming executor.
+The first proposed runtime control uses original tiny fixtures and fake validators;
+real SDK/camera work requires a distinct later reviewed request.
