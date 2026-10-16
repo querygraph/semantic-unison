@@ -1,0 +1,88 @@
+{
+  "outcomes": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/process_observation/child_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.444s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 36257,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.200s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 36267,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child_fault_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.005s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 36279,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "tokens_closed": true,
+  "sdk_calls": 0,
+  "io_acquired": false,
+  "scope": "actual2original observed child processes with injected missing samples; unobserved child regressions and inert observer/capture fault controls; no OS probe or SDK",
+  "source_sha256": {
+    "tests/process_observation/retained.py": "d798cdb1356b427902ebc83185efb77f51e5aea5b9656c91ec4c9bd4a0242144",
+    "tests/process_observation/child_test.py": "d14bef40bba29224e01c5cb3c4f6895b1f697bff56c5c055aa466573748f5434",
+    "tests/sdk_host_matrix/shared_child.py": "da0c26a3c79a22f3e20358bec99d87b5b8aa291855130b568de52a7489962b52",
+    "tests/sdk_host_matrix/shared_child_test.py": "5e582783cd1b3694dd5f9de6cb085eec7a0e1a3cc5c845122c1268843bfd1dcc",
+    "tests/sdk_host_matrix/shared_child_fault_test.py": "61907f698bab47e34ac2c0cb9918b5b3cc3a65fa4a494ebe0dd79dcb1268b7c7"
+  },
+  "actual_owner_terminal": {
+    "session_id": 74365,
+    "initial_chunk_id": "ddc794",
+    "terminal_chunk_id": "4ed142",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

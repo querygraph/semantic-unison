@@ -37,3 +37,19 @@ its own probe-process settlement; the collector never proves release.
 passed under canonical Unison00..07, with actual test child/group settlement and
 closed tokens. These controls use no OS probe or SDK. The collector is not yet
 integrated into an SDK owner loop and does not extend the completed V1 matrix.
+
+The direct-child component now accepts an optional synchronous observation
+factory. Its default unobserved path stays unchanged. Observations occur while
+the leader is unreaped, stop at terminal state, and remain separate from the
+subsequent group census, wait4 and capture closure. Observer failures propagate
+as retained ownership with the observer and child attached; no signal or reap
+is inferred from measurement failure. Observation deadlines are observation
+budgets, not hard bounds on a separately owned query adapter.
+
+[Actual child-loop integration](../../tests/qualification/observed-child-integration-actual-20261016.json)
+passed two integration groups, three unobserved-child regressions and six inert
+fault groups. Two original observed Python children exited0/7 and were reaped
+after group closure; bounded injected unavailable observations survived exactly.
+No OS probe or SDK ran. A native successor still needs a pinned probe adapter,
+separate probe-child closure and independent observation-result audit before
+review/admission. Completed SDK V1 receipts keep their historical source pins.

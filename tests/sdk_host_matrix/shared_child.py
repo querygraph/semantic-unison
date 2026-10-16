@@ -7,15 +7,20 @@ from ownership import OwnedGroup
 from measure import CapturedStream
 from shared_io_pool import UnresolvedIOOwnership,descriptor_observation,uncertainty_records
 
-def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
+def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144,
+           observation_factory=None,observation_interval=.05):
     if type(deadline) not in (int,float) or not time.monotonic()<deadline<float('inf'):
         raise ValueError('fresh finite observation deadline required')
     if type(capture_limit) is not int or not 1<=capture_limit<=262144:
         raise ValueError('bounded capture required')
+    if observation_factory is not None and (not callable(observation_factory)
+            or type(observation_interval) not in (int,float)
+            or not .01<=observation_interval<=1):
+        raise ValueError('bounded synchronous observation configuration required')
     owner=OwnedGroup(command,env=environment,stdin=subprocess.DEVNULL,
                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,pass_fds=pass_fds)
     streams=[owner.process.stdout,owner.process.stderr];captures=[]
-    identities=[]
+    identities=[];observer=None;observations=None
     fd_numbers=[s.fileno() for s in streams]
     def retain(reason,error=None,uncertain=()):
         records=list(uncertainty_records(error,dict(zip(fd_numbers,identities))))+list(uncertain)
@@ -23,13 +28,22 @@ def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
         retained=list(getattr(error,'retained_fds',()))+[fd for fd,s in zip(fd_numbers,streams) if not s.closed]
         e=UnresolvedIOOwnership(reason,retained_fds=[fd for fd in retained if fd not in excluded],
             uncertain_closes=records,original_failure=error)
-        e.child_owner=owner;e.capture_owners=captures
+        e.child_owner=owner;e.capture_owners=captures;e.process_observer=observer
         raise e from error
     try:
         for fd in fd_numbers:identities.append(descriptor_observation(fd,'shared_sdk_capture'))
         for stream in streams:captures.append(CapturedStream(stream,capture_limit))
-        if not owner.await_terminal(max(0,deadline-time.monotonic())):
-            retain('SDK observation expired; child retained without signals')
+        if observation_factory is None:
+            if not owner.await_terminal(max(0,deadline-time.monotonic())):
+                retain('SDK observation expired; child retained without signals')
+        else:
+            observer=observation_factory(owner)
+            while not owner.terminal():
+                if time.monotonic()>=deadline:
+                    retain('SDK observation expired; child and observer retained without signals')
+                observer.sample()
+                owner.await_terminal(min(observation_interval,max(0,deadline-time.monotonic())))
+            observations=observer.report()
         while True:
             query=subprocess.run(['/bin/ps','-axo','pid=,pgid=,stat='],capture_output=True,text=True,timeout=1)
             if query.returncode or query.stderr:retain('SDK group census failed')
@@ -55,8 +69,10 @@ def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
             # finish may have attempted close. Preserve its pre-close identity;
             # neither this component nor an outer cleanup may retry its number.
             retain('SDK capture finish/close unresolved',error,[identities[i]])
-    return dict(command=list(command),returncode=owner.process.returncode,timed_out=False,
+    result=dict(command=list(command),returncode=owner.process.returncode,timed_out=False,
         capture_truncated=any(x['truncated'] for x in output),stdout=output[0]['text'],stderr=output[1]['text'],
         client_cleanup=dict(pid=pid,returncode=owner.process.returncode,reaped=True,hard_kill_required=False,
             other_group_members_absent_before_reap=True,group_cleanup_before_leader_reap=True),
         aggregate_or_parent_terminal_proved=False,io_cpu_release_authorized=False)
+    if observer is not None:result['process_observations']=observations
+    return result

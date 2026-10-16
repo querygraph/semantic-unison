@@ -47,4 +47,17 @@ class Faults(unittest.TestCase):
         self.assertEqual(self.wait_calls,0);self.assertIs(self.error.original_failure,original)
         self.assertEqual(self.error.uncertain_closes,(record,))
         self.assertNotIn(record['fd'],self.error.retained_fds)
+    def test_observer_failure_retains_without_reap_or_signal(self):
+        original=RuntimeError('injected query failure');observer=SimpleNamespace()
+        def fail():raise original
+        observer.sample=fail;self.owner.terminal=lambda:False
+        with patch.object(c,'OwnedGroup',return_value=self.owner), \
+             patch.object(c,'CapturedStream',side_effect=self.captures), \
+             patch.object(c.os,'wait4') as reap,patch.object(c.os,'killpg') as signal:
+            with self.assertRaises(c.UnresolvedIOOwnership) as caught:
+                c.invoke(['/inert'],{},time.monotonic()+1,observation_factory=lambda _:observer)
+            reap.assert_not_called();signal.assert_not_called()
+        self.assertIs(caught.exception.process_observer,observer)
+        self.assertIs(caught.exception.original_failure,original)
+        self.assertFalse(self.owner.reaped)
 if __name__=='__main__':unittest.main()
