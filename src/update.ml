@@ -1395,7 +1395,8 @@ type scanInfo =
       dirStamp : Props.dirChangedStamp;
       rescanProps : bool;
       archHash : string;
-      showStatus : bool }
+      showStatus : bool;
+      validationPaths : ValidationPaths.t option }
 
 (** Status display **)
 
@@ -1686,6 +1687,24 @@ let getChildren fspath path =
   in
   findDuplicates children
 
+(* Immutable update detection deliberately skips existing children. Collect
+   validation coverage separately there, using the scanner's own filename,
+   ignore and followed-link rules, without changing the immutable archive/UI. *)
+let rec collectImmutableValidation fspath path paths =
+  if not (Globals.shouldIgnore path) then
+    let info=Fileinfo.get true fspath path in
+    match info.Fileinfo.typ with
+    | `FILE -> ValidationPaths.add paths path
+    | `DIRECTORY ->
+        List.iter (fun (name,status) ->
+          let child=Path.child path name in
+          if not (Globals.shouldIgnore child) then
+            match status with
+            | `Ok -> collectImmutableValidation fspath child paths
+            | _ -> raise (Util.Fatal ("Cannot collect validation path with invalid or conflicting name: "^
+                                      Path.toDebugString child))) (getChildren fspath path)
+    | _ -> ()
+
 (* from a list of (name, archive) pairs {usually the items in the same
    directory}, build two lists: the first a named list of the _old_
    archives, with their timestamps updated for the files whose contents
@@ -1762,6 +1781,9 @@ let rec buildUpdateChildren
       match status with
         `Ok | `Abs ->
           if skip && archive <> NoArchive && status <> `Abs then begin
+            (match scanInfo.validationPaths with
+             | None -> ()
+             | Some paths -> collectImmutableValidation fspath path' paths);
             begin match archive with
               ArchiveFile (_, archFp, _, _) ->
                 Xferhint.insertEntry fspath path' archFp
@@ -1846,6 +1868,9 @@ and buildUpdateRec archive currfspath path scanInfo =
       | _ -> None
     in
     let info = Fileinfo.get ?archProps true currfspath path in
+    (match info.Fileinfo.typ,scanInfo.validationPaths with
+     | `FILE,Some paths -> ValidationPaths.add paths path
+     | _ -> ());
     match (info.Fileinfo.typ, archive) with
       (`ABSENT, NoArchive) ->
         debug (fun() -> Util.msg "  buildUpdate -> Absent and no archive\n");
@@ -2389,7 +2414,7 @@ let previousFindOptions = Hashtbl.create 7
 (* for the given path, find the archive and compute the list of update
    items; as a side effect, update the local archive w.r.t. time-stamps for
    unchanged files *)
-let findLocal wantWatcher fspath pathList subpaths :
+let findLocal ?validationPaths wantWatcher fspath pathList subpaths :
       (Path.local * Common.updateItem * Props.t list) list =
   debug (fun() -> Util.msg
     "findLocal %s (%s)\n" (Fspath.toDebugString fspath)
@@ -2412,9 +2437,9 @@ let t1 = Unix.gettimeofday () in
       (* Directory optimization is disabled under Windows,
          as Windows does not update directory modification times
          on FAT filesystems. *)
-      dirFastCheck = useFastChecking () && Sys.unix;
+      dirFastCheck = validationPaths=None && useFastChecking () && Sys.unix;
       dirStamp; rescanProps; archHash = archiveHash fspath;
-      showStatus = not !Trace.runningasserver }
+      showStatus = not !Trace.runningasserver; validationPaths }
   in
   let (cacheFilename, _) = archiveName fspath FPCache in
   let cacheFile = Util.fileInUnisonDir cacheFilename in
@@ -2426,6 +2451,7 @@ let t1 = Unix.gettimeofday () in
     with Not_found ->
       false
   in
+  let subpaths=if validationPaths=None then subpaths else None in
   let paths =
     match subpaths with
       Some (unsynchronizedPaths, blacklistedPaths) when unchangedOptions
@@ -2496,6 +2522,13 @@ Format.eprintf "Update detection: %f@." (t2 -. t1);
   setArchiveLocal thisRoot archive;
   abortIfAnyMountpointsAreMissing fspath;
   updates
+
+let findLocalWithValidation ~max_files ~max_path_bytes wantWatcher fspath pathList subpaths =
+  let validationPaths=ValidationPaths.create ~max_files ~max_path_bytes in
+  let finish ()=Fun.protect ~finally:Fpcache.finish Fswatch.stopScanning in
+  let updates=Fun.protect ~finally:finish (fun () ->
+    findLocal ~validationPaths wantWatcher fspath pathList subpaths) in
+  updates,ValidationPaths.paths validationPaths
 
 let findOnRoot =
   Remote.registerRootCmd
@@ -2981,7 +3014,7 @@ let checkNoUpdates ?(fastCheck=false) fspath pathInArchive ui =
   let scanInfo =
     { fastCheck; dirFastCheck = false;
       dirStamp = Props.changedDirStamp; rescanProps = true;
-      archHash = "" (* Not used *); showStatus = false } in
+      archHash = "" (* Not used *); showStatus = false; validationPaths=None } in
   let (_, uiNew) = buildUpdateRec archive fspath localPath scanInfo in
   markPossiblyUpdatedRec fspath pathInArchive uiNew;
   explainUpdate pathInArchive uiNew;

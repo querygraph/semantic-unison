@@ -31,6 +31,16 @@ val findUpdates :
   ((Path.local * Common.updateItem * Props.t list) *
       (Path.local * Common.updateItem * Props.t list)) list
 
+val findLocalWithValidation :
+  max_files:int -> max_path_bytes:int -> bool -> Fspath.t -> Path.t list ->
+  (Path.t list * Path.t list) option ->
+  (Path.local * Common.updateItem * Props.t list) list * Path.local list
+(** Internal endpoint scan entry; archives/root setup must already be loaded.
+    Collects regular files during real selected traversal, including unchanged
+    and immutable files; bypasses watcher/directory coverage shortcuts. Existing
+    immutable update results remain unchanged. No helper invocation or preference
+    activates this entry yet. Limits abort rather than return partial coverage. *)
+
 (* Take a tree of equal update contents and update the archive accordingly. *)
 val markEqual :
   (Name.t * Name.t, Common.updateContent * Common.updateContent) Tree.t -> unit

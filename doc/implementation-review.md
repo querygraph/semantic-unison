@@ -115,3 +115,36 @@ Do not expose all-scanned based only on this internal entry.
 User steering: exiftool-rs is being extended separately for dng-compare. Revisit
 reuse here after that work is ready; do not install, switch validators, or add
 an exiftool-rs dependency now. Existing source review remains historical.
+
+## Current scanner coverage checkpoint
+
+`ValidationPaths` now bounds retained unique endpoint-local file count and total
+pathname bytes. Overflow poisons the collector: no partial prefix can be read
+or resumed. This does not claim a whole-process RSS or traversal-time hard cap.
+`Update.findLocalWithValidation` collects regular files directly during the real
+selected scanner traversal, including NoUpdates children, and disables watcher
+subpath/directory fast-check coverage omissions. Existing immutable subtrees use
+the scanner's same filename/ignore/follow metadata rules to collect coverage
+without changing immutable update detection/archive results. A failing bounded
+scan unwinds watcher bookkeeping and fingerprint cache state. No user-facing
+preference/RPC/feature activates the entry yet.
+
+Current stock/Ox Make002 builds passed and four current-object compiler/test
+calls passed over generated private replicas. Actual owner62296/0ed6c7/exit0/no
+session, all contained groups reaped0 and CPU8 closed. Unchanged nested files,
+modified immutable files, ignored paths, followed file links, overlapping selected
+paths, new/changed files, both resource refusals and a subsequent clean scan are
+covered. Evidence `tests/qualification/validation-scan-actual-20261017.json`.
+Stock001 preceded the watcher cleanup correction and is historical; stock002
+15629/6c0d6b/0 and Ox00224575/0abd92/0 match current production code.
+Watcher hints were supplied with watch=false; no live watcher helper/protocol
+qualification is claimed. Source/fixture only, no Adobe/SDK/Photo payload.
+
+Next endpoint activation must create a private staging directory outside roots,
+resolve/fence followed paths without process-CWD mutation, report existing nested
+scan errors rather than claim complete coverage, and await admitted private-file
+validation before the endpoint scan returns. Add strict received/all-scanned
+scope parsing and negotiated capability only with end-to-end default/off/no-op,
+old-peer, ignore/follow and failure/cancellation tests. All-scanned remains
+unavailable until that integration is qualified; private MakN grammar and broader
+native/resource/corpus requirements remain separately open.
