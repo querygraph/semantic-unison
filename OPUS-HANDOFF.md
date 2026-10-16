@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T20:48:21Z. Comparison admission/workspace last checked
+Last updated: 2026-10-16T20:52:55Z. Comparison admission/workspace last checked
 absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -21,6 +21,18 @@ sequential/parallel receiving comparison request described below. Its entry,
 dispatcher, worker, independent auditor and fake-process lifecycle are implemented
 and tested. It has NOT been admitted or executed as an SDK comparison. Continue
 independent useful work while review is pending. No existing native grant is reusable.
+
+**Report preparation:** `bench/report_sdk_receiving_comparison.py` now independently
+re-audits comparison receipts before statistics. It preserves exact sample order
+and failed prefixes, withholds ratios on incomplete cohorts, and reads stable
+owned JSON receipts up to16MiB with qualified close-uncertainty propagation.
+Five synthetic/disposable controls passed under canonical Unison00..07:
+`tests/qualification/sdk-receiving-comparison-report-controls-20261016.json`,
+actual owning-tool terminal `d7cc17/exit0/no session`, child85163 reaped0 and
+other group members absent before reap; all CPU descriptors closed. Zero SDK,
+CLI, retained-input payload, or canonical IO calls. These report-only files are
+outside the frozen172-source execution closure. Actual SDK comparison admission
+remains a separate fresh scheduling requirement; this test grants no execution.
 
 **Current resources:** no Unison job or retained CPU/IO ownership remains from
 our completed work. Latest Photo notices released its relevant window; that is
