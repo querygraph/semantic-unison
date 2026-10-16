@@ -120,3 +120,11 @@ change semantic proof identities or authorize later access to the path.
 `json_test.py --ocamlopt /absolute/compiler --report /fresh/report.json` compiles
 the exact JSON helpers and compares268 byte/Unicode cases against Python's
 independent strict JSON and UTF-8 decoding. It opens no image input.
+
+The [complete executable control](../../tests/qualification/inspector-complete-json-integration-actual-20261016.json)
+adds eight calls across pinned stock/Ox builds using original tiny TIFFs. It
+checks Unicode/quote/newline paths, exact byte-path fields, exact-byte versus
+editable-metadata versus protected-byte classifications, unsupported input, and
+unchanged input identities/bytes. It does not establish real-camera eligibility.
+Run `integration_test.py --build-receipt /stock/build.json --build-receipt
+/ox/build.json --report /fresh/report.json` after building the current inspector.

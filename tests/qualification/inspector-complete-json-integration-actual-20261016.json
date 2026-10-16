@@ -1,0 +1,33 @@
+{
+  "schema": "unison-inspector-complete-json-integration/1",
+  "state": "PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "089619",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "test_source": {
+    "path": "/Users/alexy/src/unison/tools/semantic-inspect/integration_test.py",
+    "bytes": 3611,
+    "sha256": "f6834309e9afec966dfc83422f2772924dd4865867fa9e4e7bb01e6b0af75b6d"
+  },
+  "references": [
+    {
+      "path": "/private/tmp/unison-inspector-json-integration-20261016a/RESULT.json",
+      "bytes": 4295,
+      "sha256": "04f4fb63e5e3ac446c8b40e8a9eb2d2f359ade54201f1af55466a9d6e192b541"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-json-integration-20261016a/SHARED-START.json",
+      "bytes": 1392,
+      "sha256": "9288cbc0863264e28b0dd4bee0fb28b00f4a9128d0663430dfe234bd38bb45d3"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-json-integration-20261016a/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "7aa30064cbede20b4ea633aa07ca2438287bf39c243c53db171ce9f1424c598f"
+    }
+  ],
+  "scope": "eight stock/Ox complete inspector calls; 800 generated fixture bytes; UTF-8/JSON path identity and classification; no camera input, SDK, Photo, EXglobal or production sync",
+  "full_goal_complete": false
+}
