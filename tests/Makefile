@@ -36,3 +36,7 @@ private-dng-framing-input:
 .PHONY: sde-conformance
 sde-conformance:
 	python3 tests/manual.py sde-conformance
+
+.PHONY: stock-check ox-check
+stock-check ox-check:
+	python3 tests/manual.py $@

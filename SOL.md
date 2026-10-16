@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Current fullMake+application selftests now refreshed under standingUnison8:
+[stock/Ox actual receipt](tests/qualification/shared-current-make-selftests-actual-20261016.json)
+stock88175/42daa2/0 andOx65915/817054/0, no sessions, bothgroupsreaped0/
+othermembersabsent andtokensclosed.425currentcore/build sourcepins match
+checkoutandbothsnapshots; binaries/loghashes independentlyrechecked. New explicit
+stock-check/ox-check manualtargets max2compilerjobs, serialbuildthenselftest,
+semanticworkers3/adobevalidateoff. Conservativeendpoint3+3+owner2 peak8 (not
+OSthreadhardcap). Existing legacybuild commands retain defaults; sharedcheck
+requiresfullUnison8. No Adobe/camera/Photo/EXIO, no currentDune/GUI/platformwide
+or entireacceptancematrix claim. Currentproductiondecoderfix included.
+
+
 Production SDE/SDR decoders now reject NUL-containing profile identifiers, matching
 FormatExtension.trusted's registrable identifier domain. Prior decoders accepted
 unregistrable wire IDs (local registry still rejected authorization; no successful

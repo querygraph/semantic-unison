@@ -13,6 +13,7 @@ HELP = '''Run from the repository root: make -f tests/Makefile TARGET
 Targets:
   stock-make / stock-dune  build stock CLI and run selftests; STOCK_PREFIX required
   ox-make / ox-dune        build checked OxCaml CLI and run selftests; OX_PREFIX required
+  stock-check / ox-check  Make plus selftests capped at3 semantic workers, shared lane
   stock-build / ox-build  Make build only; no resulting Unison executable invocation
   inspect-stock / inspect-ox build/retain the read-only inspector only; compiler prefix required
   inspect-file            reuse a pinned inspector; INSPECTOR_RECEIPT and absolute INSPECT_INPUT required
@@ -89,22 +90,26 @@ def shared_resource_plan(target, environment):
         return None
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
-    build = target in ('stock-build', 'ox-build')
+    build = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check')
     framing = target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
     inspect_file = target in ('inspect-file', 'private-dng-framing-input')
     endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector or framing else 0
+    selftest_endpoints = [3, 3] if target in ('stock-check', 'ox-check') else []
     overhead = 2 if build or inspector or framing or inspect_file or endpoints else 1
     inspector_workers = 1 if inspect_file else 0
-    require((not build or 1 <= jobs <= 2) and jobs + sum(endpoints) + inspector_workers + overhead <= credits,
+    declared_peak = max(jobs + sum(endpoints) + inspector_workers, sum(selftest_endpoints)) + overhead
+    require((not build or 1 <= jobs <= 2) and declared_peak <= credits,
             'declared shared work exceeds project grant')
-    implemented = target in ('stock-build', 'ox-build', 'read-parser', 'group-parser',
+    implemented = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
                              'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
-            'declared_peak_credits': jobs + sum(endpoints) + inspector_workers + overhead,
+            'declared_peak_credits': declared_peak,
+            'selftest_endpoint_workers': selftest_endpoints,
+            'build_and_selftest_are_serial': bool(selftest_endpoints),
             'inspector_workers': inspector_workers,
             'compiler_jobs': jobs, 'endpoint_workers': endpoints,
             'orchestration_credits': overhead, 'cpu_token_indexes': list(range(credits)),
@@ -128,7 +133,7 @@ def command(target, output, environment):
     if shared is not None:
         shared = int(shared)
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
-        require(target in ('stock-build', 'ox-build', 'sync-functional',
+        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
                            'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
@@ -202,11 +207,14 @@ def command(target, output, environment):
         script = ('interrupted_receipt_lifecycle_test.py' if target == 'interrupted-receipts'
                   else 'aggregate_successor_lifecycle_test.py')
         return [sys.executable, str(ROOT / 'bench/sync' / script)]
-    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune', 'stock-build', 'ox-build'):
+    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune', 'stock-build', 'ox-build', 'stock-check', 'ox-check'):
         kind, system = target.split('-')
         build_only = system == 'build'
-        if build_only:
+        shared_check = system == 'check'
+        if build_only or shared_check:
             system = 'make'
+        if shared_check:
+            require(shared is not None and shared >= 8, 'shared selftest requires full Unison8 lane')
         key = 'STOCK_PREFIX' if kind == 'stock' else 'OX_PREFIX'
         require(bool(environment.get(key)), key + ' is required')
         prefix = Path(environment[key]).resolve()
@@ -219,7 +227,7 @@ def command(target, output, environment):
                 'JOBS plus two owner credits exceeds shared policy (maximum two compiler jobs)')
         return [sys.executable, str(ROOT / 'tests/build_snapshot.py'),
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
-                '--build-system', system] + ([] if build_only else ['--selftest']) + [
+                '--build-system', system] + ([] if build_only else ['--selftest']) + (['--selftest-workers', '3'] if shared_check else []) + [
                 '--report', str(output / 'RESULT.json')]
     if target == 'sync-functional':
         argv = [sys.executable, str(ROOT / 'bench/sync/run.py')]

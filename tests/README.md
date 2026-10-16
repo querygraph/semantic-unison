@@ -276,3 +276,26 @@ worker/CLI paths with synthetic DNGs and a preceding SIR/0 binary.
 `tests/area_scheduler/` runs an Adobe-free C++ scheduler and compiles the two
 SDK adapter modes only to unlinked objects; this source receipt is not actual
 SDK runtime qualification.
+
+
+Current shared-machine Make plus application selftests can run independently
+within Unison's canonical00..07 lane, using the qualified Python3.14 interpreter:
+
+```sh
+SHARED_CPU_CREDITS=8 STOCK_PREFIX=/absolute/stock/compiler/bin \
+  /absolute/python3.14 tests/manual.py stock-check
+SHARED_CPU_CREDITS=8 OX_PREFIX=/absolute/ox/compiler/bin \
+  /absolute/python3.14 tests/manual.py ox-check
+```
+
+The equivalent Make targets are `make -f tests/Makefile stock-check` and
+`ox-check` with those environment variables and qualified Python on PATH.
+Each target acquires only Unison8; it builds with at most2compilerjobs, then runs
+application selftests with explicit `-semanticworkers 3 -adobevalidate off`.
+The serial phase declaration conservatively budgets two3-worker endpoints plus
+2owner credits, not an OS-level hard CPU/RSS cap. Output is a fresh private
+snapshot; no SDK/Adobe, camera, Photo catalog/cache or physicalIO-pool access.
+Outer group settlement remains mandatory before token close. The legacy
+stock-make/ox-make invocations retain their separate unshared defaults.
+[Actual matched current-source qualification](qualification/shared-current-make-selftests-actual-20261016.json)
+retains complete build/selftest/log/binary pins and owner terminals.

@@ -13,12 +13,16 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--compiler-prefix", required=True, help="absolute directory containing ocaml/ocamlopt")
 parser.add_argument("--jobs", type=int, default=min(os.cpu_count() or 1, 8))
 parser.add_argument("--selftest", action="store_true")
+parser.add_argument("--selftest-workers", type=int, choices=range(1, 4),
+                    help="explicit semantic worker budget for bounded shared selftests")
 parser.add_argument("--build-system", choices=("make", "dune"), default="make")
 parser.add_argument("--report", type=Path, help="save source/compiler/binary pins and actual outcomes")
 args = parser.parse_args()
 prefix = Path(args.compiler_prefix).resolve()
 if args.jobs < 1 or not (prefix / "ocamlopt").is_file():
     parser.error("positive jobs and a compiler directory with ocamlopt are required")
+if args.selftest_workers is not None and not args.selftest:
+    parser.error("--selftest-workers requires --selftest")
 root = Path(__file__).resolve().parents[1]
 work = Path(tempfile.mkdtemp(prefix="unison-build-"))
 paths = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"], cwd=root)
@@ -75,9 +79,18 @@ if args.selftest:
     state = work / "selftest-state"
     state.mkdir()
     with (work / "selftest.log").open("w") as log:
-        result = subprocess.run([str(binary), "-ui", "text", "-selftest"],
-                                cwd=work, env=dict(env, UNISON=str(state)), stdout=log,
-                                stderr=subprocess.STDOUT, timeout=600)
+        command = [str(binary), "-ui", "text", "-selftest"]
+        if args.selftest_workers is not None:
+            command += ["-semanticworkers", str(args.selftest_workers), "-adobevalidate", "off"]
+        receipt["selftest_command"] = command
+        receipt["selftest_workers"] = args.selftest_workers
+        save_receipt()
+        child = subprocess.Popen(command, cwd=work, env=dict(env, UNISON=str(state)),
+                                 stdout=log, stderr=subprocess.STDOUT)
+        receipt["selftest_pid"] = child.pid
+        save_receipt()
+        code = child.wait(timeout=600)
+        result = subprocess.CompletedProcess(command, code)
     print("Selftest exit:", result.returncode, "log:", work / "selftest.log", flush=True)
     receipt["selftest_exit"] = result.returncode
     receipt["selftest_log_sha256"] = sha(work / "selftest.log")

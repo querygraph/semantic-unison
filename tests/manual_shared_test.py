@@ -13,6 +13,12 @@ with patch.object(Path, 'is_file', return_value=True):
     argv = manual.command('ox-build', out, env)
     assert argv[argv.index('--jobs') + 1] == '2' and '--selftest' not in argv
     assert argv[argv.index('--build-system') + 1] == 'make'
+    shared_check = manual.command('ox-check', out, env)
+    assert '--selftest' in shared_check and shared_check[shared_check.index('--selftest-workers')+1] == '3'
+    assert shared_check[shared_check.index('--jobs')+1] == '2'
+    assert manual.shared_resource_plan('ox-check', env)['compiler_jobs'] == 2
+    assert manual.shared_resource_plan('ox-check', env)['declared_peak_credits'] == 8
+    assert manual.shared_resource_plan('ox-check', env)['selftest_endpoint_workers'] == [3, 3]
     one = manual.command('ox-build', out, dict(env, SHARED_CPU_CREDITS='3'))
     assert one[one.index('--jobs') + 1] == '1'
     legacy = manual.command('ox-make', out, {'OX_PREFIX': '/UNREAD-compiler'})
@@ -59,6 +65,7 @@ with patch.object(Path, 'is_file', return_value=True):
     assert manual.shared_resource_plan('inspect-file', reuse_env)['declared_peak_credits'] == 3
 
     for target, changes in (
+        ('ox-check', {'SHARED_CPU_CREDITS': '7'}),
         ('ox-build', {'JOBS': '5'}),
         ('ox-build', {'SHARED_CPU_CREDITS': '0'}),
         ('ox-build', {'SHARED_CPU_CREDITS': '9'}),

@@ -249,3 +249,10 @@ rejects embedded NULs before registry selection. Stock/Ox independent conformanc
 passes127commands/2191assertions each; private old-check negative controls fail
 as intended. Valid committed wire goldens are unchanged. This qualifies the
 codec change, not a fresh complete application build or camera receiving.
+
+[Shared current Make builds and application selftests](../tests/qualification/shared-current-make-selftests-actual-20261016.json)
+now passed stock/Ox after the decoder change:425matching current source/build
+pins, exactbinary/log hashes, actual parent/group closure and Unison8token release.
+New stock-check/ox-check entrypoints serialize build then selftest, at most two
+compilerjobs, explicitsemanticworkers3 and Adobeoff. No current Dune, GUI,
+physicalIO or complete acceptance claim is added by these Make checks.
