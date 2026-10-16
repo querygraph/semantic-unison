@@ -128,3 +128,16 @@ They verify preserved source modes/epochs, no overwrite, stale-source refusal
 and no source chmod through an alias. No native clone, retained DNG, source
 hash, SDK or EXglobal call occurred; the control group/tokens closed.
 Actual native cloning remains subject to a future exact IO admission.
+
+`clone.prepare_inputs` binds two distinct input inode/SHA identities to the
+fixed candidate names and case sizes. It rechecks both source epochs before
+and around the sequential preparations, preserving source modes and avoiding
+fresh source hashing. The case still must hash each disposable clone against
+the historical source SHA before transport. Metadata equality is not byte
+identity or a hostile-writer guarantee.
+
+[Five batch/preparation controls](../qualification/sdk-multifile-input-batch-source-actual-20261016.json)
+passed, including a deliberate change to the other original disposable input
+during first-clone preparation; the second clone was not created. All data and
+cloning were original test doubles, not retained DNG/native clone/SDK/EXglobal
+access. The outer child/group and Unison8 tokens closed.

@@ -5,6 +5,7 @@ The syscall adapter is test-harness preparation, not a new Unison clone engine.
 """
 import ctypes
 import os
+import re
 from pathlib import Path
 import stat
 import sys
@@ -54,3 +55,37 @@ def prepare(source,expected,directory,name,*,clone=native_clone):
         return dict(source_identity=dict(expected),clone_identity=stamp(after),candidate_id=name,
                     source_payload_read_bytes=0,backend='native-fclonefileat-only' if clone is native_clone else 'original-disposable-test-double')
     finally:close_descriptors(fds)
+
+
+def prepare_inputs(inputs,sources,directory,*,clone=native_clone):
+    """Bind both declared source epochs to the case identities, without hashing.
+
+    The worker hashes only the resulting disposable clones before transport.
+    Metadata fences do not replace that byte check or grant input access.
+    """
+    names=['uncompressed.dng','jpeg.dng']
+    if type(inputs) is not list or len(inputs)!=2 or type(sources) is not list or len(sources)!=2:
+        raise ValueError('exact two-input/candidate contract required')
+    identities=set();digests=set()
+    def check_all():
+        for item in inputs:
+            if stamp(os.lstat(item['path']))!=item['identity']:raise ValueError('input batch epoch changed')
+    for item,source,name in zip(inputs,sources,names):
+        if type(item) is not dict or set(item)!={'candidate_id','path','sha256','identity'} or item['candidate_id']!=name:
+            raise ValueError('fixed typed generated-input ancestry required')
+        identity=item['identity'];digest=item['sha256']
+        if type(identity) is not dict or set(identity)!=set(FIELDS) or any(type(v) is not int for v in identity.values()):
+            raise ValueError('typed full input identity required')
+        if type(digest) is not str or re.fullmatch('[0-9a-f]{64}',digest) is None:
+            raise ValueError('historical generated-input SHA required')
+        if type(source) is not dict or type(source.get('bytes')) is not int or source!=dict(candidate_id=name,sha256=digest,bytes=identity['st_size']):
+            raise ValueError('source ancestry differs from receiving identity')
+        native_id=(identity['st_dev'],identity['st_ino'])
+        if native_id in identities or digest in digests:raise ValueError('distinct generated inputs required')
+        identities.add(native_id);digests.add(digest)
+    check_all();records=[]
+    for item in inputs:
+        check_all()
+        records.append(prepare(item['path'],item['identity'],directory,item['candidate_id'],clone=clone))
+    check_all()
+    return records

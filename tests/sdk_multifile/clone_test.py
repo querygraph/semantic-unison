@@ -1,9 +1,10 @@
 import os
+import hashlib
 from pathlib import Path
 import stat
 import tempfile
 import unittest
-from clone import prepare,stamp
+from clone import prepare,prepare_inputs,stamp
 
 DATA=b'original generated-fixture clone control'
 
@@ -44,5 +45,27 @@ class Clone(unittest.TestCase):
             def fail(*_):raise original
             with self.assertRaises(OSError) as caught:prepare(source,identity,d,'jpeg.dng',clone=fail)
             self.assertIs(caught.exception,original);self.assertFalse((d/'jpeg.dng').exists())
+    def test_two_input_mapping_and_cross_input_epoch_fence(self):
+        for mutate in [False,True]:
+            with tempfile.TemporaryDirectory() as tmp:
+                root=Path(tmp);directory=root/'left';directory.mkdir(mode=0o700);inputs=[];sources=[];values={}
+                for i,name in enumerate(['uncompressed.dng','jpeg.dng']):
+                    value=DATA+bytes([i]);source=root/name;source.write_bytes(value);source.chmod(0o644)
+                    digest=hashlib.sha256(value).hexdigest();values[name]=value
+                    inputs.append(dict(candidate_id=name,path=str(source),sha256=digest,identity=stamp(source.stat())))
+                    sources.append(dict(candidate_id=name,sha256=digest,bytes=len(value)))
+                def clone(src,parent,name):
+                    fd=os.open(name,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600,dir_fd=parent)
+                    try:os.write(fd,values[name])
+                    finally:os.close(fd)
+                    if mutate and name=='uncompressed.dng':(root/'jpeg.dng').write_bytes(b'changed original disposable test input')
+                if mutate:
+                    with self.assertRaises(ValueError):prepare_inputs(inputs,sources,directory,clone=clone)
+                    self.assertFalse((directory/'jpeg.dng').exists())
+                else:
+                    records=prepare_inputs(inputs,sources,directory,clone=clone)
+                    self.assertEqual(len(records),2)
+                    self.assertTrue(all(stamp(Path(i['path']).stat())==i['identity'] for i in inputs))
+                    self.assertEqual((directory/'jpeg.dng').read_bytes(),values['jpeg.dng'])
 
 if __name__=='__main__':unittest.main()
