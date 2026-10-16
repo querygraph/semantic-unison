@@ -11,12 +11,15 @@ warnings each remain visible. The admission is consumed; no pending mixed hold
 or unexecuted probe remains. Broader resource/scaling/corpus requirements stay
 open.
 
-Current runtime request is the [bounded private MakN candidate slice](private-maker-slice-request-v1.json):
-13 execution pins/nine prerequisites, <=3078 requested media bytes/two preads,
-Unison8+EXglobal, no SDK/Adobe/original access. Final38 source controls and four
-real disposable workers passed, including uncertain-close retention/recovery.
-The request was sent for separate Root review/scheduling; no grant or payload
-execution is inferred. A pending IO review does not block independent work.
+The [bounded private MakN candidate slice](../tests/qualification/private-maker-slice-v1-actual-20261017.json)
+subsequently ran once and PASSED/CLOSED: actuald8fe2f/0/no session, parent17547/
+worker17548 reaped0/othersabsent, CPU8+EXglobal closed. Exactly402B/two preads
+yield33candidate entries/nextIFDzero/all declared out-of-line extents in payload.
+No pointed-value read, vendor recognition, private-reference closure or semantic
+eligibility is established. Source epoch and13runtime pins unchanged; admission
+7d914319 consumed, no retry/successor. The frozen request's prepared state is
+historical. Final38 source controls and four disposable workers remain separate
+lifecycle evidence. No pending slice IO hold or grant is needed for source work.
 The [pinned MakN source review](private-makn-source-review.md) identifies the
 vendor grammar/reference rules still needed beyond candidate table geometry.
 

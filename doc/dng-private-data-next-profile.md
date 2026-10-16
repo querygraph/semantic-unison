@@ -236,3 +236,22 @@ the plan. `doc/private-maker-slice-{plan,request}-v1.json` freezes the exact
 retained-clone candidate slice,13runtime sources and9prerequisites. Fresh lstat
 still matches; workspace/admission absent. No retained payload was read and no
 new IO grant exists. This request is ready for separate Root review/scheduling.
+
+## Actual bounded candidate result
+
+The separate Root admission7d914319 was executed ONCE after fresh13source/
+9prerequisite/interpreter/plan/epoch/deadline/unusedworkspace checks. Actual
+owning tool d8fe2f/exit0/no session; worker17548 reaped0/group absent and
+CPU8+EXglobal closed. The [sealed result](../tests/qualification/private-maker-slice-v1-actual-20261017.json)
+records exactly402bytes from two preads: offset10990 length2 and10992 length400.
+A33-entry classic candidate table and zero next-IFD field were observed. Every
+declared out-of-line TIFF value fits the6556-byte payload under the explicitly
+proposed originalbase1404. No values were followed or inline scalars disclosed.
+
+This supports the table-geometry hypothesis for this one payload. It does not
+identify a vendor, interpret inline pointers, prove complete private-reference
+closure, XMP independence or semantic eligibility. Those flags remain false.
+Actual terminal was sent before sealing; no resources remain held. An initial
+metadata-only seal-construction TypeError was corrected without repeating the
+run or saved-result audit, and is preserved in the seal. Old prepared/admitted
+request records are historical; no replay or new payload scope is authorized.

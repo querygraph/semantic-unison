@@ -1,13 +1,33 @@
 # Unison implementation handoff
 
-Latest checkpoint: actual mixed SDK/ExifTool/hash V1 PASS/CLOSED, owner59209/cedf13/0.
+Latest checkpoint: private MakN candidate slice V1 PASS/CLOSED, actuald8fe2f/0/no session.
 This supersedes prior mixed-request pending/unexecuted/absent observations.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
 
-**LATEST RUNTIME (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69
+**LATEST ACTUAL — slice V1 CONSUMED/CLOSED:** fresh Root admission
+/private/tmp/unison-private-maker-slice-admission-v1.json SHA7d914319 was found,
+request45c2b707/plan/13sources/9prereqs/interpreter/sourceepoch/deadline/absent
+workspace revalidated, executed ONCE. Actual initialexec_command d8fe2f/exit0/
+NO session, parent17547/worker17548. Worker reaped0/othersabsent; CPU8+EXglobal
+closed/allsourcepins unchanged. Exactly402B requested/received in2preads,33
+candidate entries, nextIFDzero; all declared out-of-line extents fit6556B.
+No pointed values/inline values/vendor recognition/private closure/semantic
+eligibility claim. Source exact8fields unchanged; no source hash/newclone/SDK.
+Actual terminal immediately queued01a146d8-8baf before sealing. Saved-result
+independent audit rechecked13pins/epoch/recordedcanonical9inodes/unresolvedempty,
+no payloadreread. Seal tests/qualification/private-maker-slice-v1-actual-20261017
+4213B SHA7b012251; OWNERRETURN3673B SHAf8257b68 plus9directartifacts in
+/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa.
+Sealed notice01a146d9-2eed. Metadata-only seal construction TypeError19bf7b/1
+(duplicate schema keyword after OWNERRETURN saved) preserved/corrected; no
+runtime/audit/resources repeated. No currenthold; old prepared/pending notes
+below are historical, do not replay. Next: vendor-specific grammar/reference
+closure source work from saved geometry, then separately qualified profile.
+
+**Previous mixed runtime (do not replay):** mixedV1 admission00d8de55dd7548b54ee47c4ce9d159d2dacb95285075410d04e98505da399c69
 was discovered fresh, exact request3e76df16/plan0fd5d23f/326sources/9prereqs/
 interpreter/deadline/unusedworkspace revalidated, then dispatched ONCE. Owning
 session59209 initial87a8e5 terminalcedf13/exit0/NO running session; parent8085,
@@ -106,8 +126,10 @@ and doc/private-makn-source-review.md capture the next explicit vendor grammar/
 reference/overlap requirements. No ExifTool execution/media read, no frozen
 request changes. milestone-next-work lead and acceptance row12 now reflect the
 completed mixed actual result instead of stale pending status.
-Next action: await fresh source review/finite IO grant for the frozen slice,
-continue independent source work, and dispatch only after fresh grant, then investigate a vendor-specific reference contract from
+That source review/grant subsequently arrived and the slice executed once as
+recorded at the top; no pending slice scheduling remains. Continue independent
+vendor grammar/reference source work; require fresh coordination for any new
+payload scope, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
