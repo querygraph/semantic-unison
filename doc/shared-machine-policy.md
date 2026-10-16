@@ -33,6 +33,9 @@ settlement. It passes descriptors to the runner; inherited copies keep a lock
 when the parent's copy closes. Indeterminate close never retries that numeric
 FD. Unknown acquisition/settlement retains the owner even if receipt writing
 fails; ordinary errors or timeouts do not establish release.
+Target entry scripts and declared helper modules are pinned before child launch
+and checked after settlement. Source changes invalidate qualification while
+known child/token closure remains separately recorded.
 
 [Ten disposable controls, actual parsers and a jobs2 stock build](../tests/qualification/shared-entrypoints-actual-20261016.json)
 passed. The bounded [shared functional sync](../tests/qualification/shared-functional-actual-20261016.json)
@@ -64,7 +67,9 @@ Build-only commands compile/link and do not execute the resulting binary or
 selftests. They do not replace build-plus-selftest qualification; sync requires
 existing successful selftest receipts with unchanged production-source/artifact
 pins. Shared inspector builds (`inspect-stock`/`inspect-ox`) retain a pinned binary with
-zero inspector executions and one compiler job. Shared builds accept3..8 credits
+zero inspector executions and one compiler job. `inspect-file` reuses a trusted
+pinned build with one synchronous worker plus2 owner credits, without rebuilding;
+copy consent and physical IO coordination remain independent. Shared builds accept3..8 credits
 and at most2 compiler jobs plus2 owner
 credits. Shared sync requires the complete8-credit lane. Pure parser/interface
 scopes can use a smaller authorized subset. Unscoped tests remain refused in

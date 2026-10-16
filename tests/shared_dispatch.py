@@ -23,7 +23,7 @@ MANIFEST = ROOT.parent / 'photo/preview-generator/engine-v3-native-control/ROOT-
 MANIFEST_SHA = '4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd'
 TARGETS = {'stock-build', 'ox-build', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
-           'sync-functional', 'inspect-stock', 'inspect-ox'}
+           'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls'}
 
 
 def write(path, value):
@@ -51,16 +51,23 @@ def run(target, argv, output, credits):
         return 2
     child = None
     try:
+        sources = [Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_cpu_pool.py',
+                   ROOT / 'tests/shared_process_owner.py', ROOT / 'bench/sync/ownership.py',
+                   Path(argv[1])]
+        if target in ('inspect-stock', 'inspect-ox', 'inspect-file',
+                      'inspector-reuse-controls', 'shared-entrypoints'):
+            sources.append(ROOT / 'tools/semantic-inspect/run.py')
+        if target in ('sync-functional', 'shared-sync-controls'):
+            sources.extend((ROOT / 'bench/sync').glob('*.py'))
+        pins = {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
+                for p in set(sources)}
         with (output / 'SHARED-STDOUT.txt').open('x') as stdout, (output / 'SHARED-STDERR.txt').open('x') as stderr:
             child = OwnedGroup(argv, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=stdout,
                                stderr=stderr, pass_fds=lease.fds)
             write(output / 'SHARED-START.json', {'owner_pid': os.getpid(), 'child_pid': child.pid,
                   'target': target, 'command': argv, 'token_indexes': list(indexes),
                   'cpu_credits': credits, 'unix': time.time(),
-                  'sources': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
-                              for p in (Path(__file__), ROOT / 'tests/manual.py',
-                                        ROOT / 'tests/shared_cpu_pool.py',
-                                        ROOT / 'tests/shared_process_owner.py')}})
+                  'sources': pins})
             seconds = 300 if target == 'sync-functional' or target.startswith('inspect-') else 600 if target.endswith('-build') else 60
             if target == 'sync-functional':
                 # Separate server sessions retain their own coordinator. Do
@@ -84,12 +91,15 @@ def run(target, argv, output, credits):
                 closure = settle(child, time.monotonic() + 2)
             else:
                 closure = settle(child, time.monotonic() + seconds)
+        source_unchanged = all(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest
+                               for name, digest in pins.items())
         lease.close_after_verified_settlement(owner_reaped=closure['reaped'],
                     groups_settled=closure['other_group_members_absent_before_reap'],
                     external_children_settled=True)
         write(output / 'SHARED-CLOSED.json', {'child': closure, 'tokens_closed': True,
+                                            'source_pins_unchanged': source_unchanged,
                                             'parent_terminal': 'collect separately from owning tool'})
-        return 124 if closure['timed_out'] else closure['returncode']
+        return 124 if closure['timed_out'] else 3 if not source_unchanged else closure['returncode']
     except BaseException as error:
         retain_after_record(lambda: write(output / 'SHARED-OWNERSHIP-RETAINED.json', {'error': repr(error),
               'owner_pid': os.getpid(), 'child_pid': child.pid if child else None}))

@@ -1,0 +1,206 @@
+{
+  "state": "PINNED_INSPECTOR_REUSE_INERT_ARTIFACT_CONTROLS_PASSED_CLOSED",
+  "runs": [
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-smfa3x43",
+      "actual_parent_terminal": {
+        "chunk": "2ba30f",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 68776,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 68776,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-smfa3x43/SHARED-CLOSED.json",
+          "bytes": 424,
+          "sha256": "e30e59a10604bf28012aa8099b58475f53397cda5f5076716e50c87e8683353e"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-smfa3x43/SHARED-START.json",
+          "bytes": 768,
+          "sha256": "5d46beebb18c42c6ff948b5618061c0d2888379f243c008c78c2ed7e970f5e7a"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-smfa3x43/SHARED-STDERR.txt",
+          "bytes": 106,
+          "sha256": "c57e833f026773c218c965cc8726b7bfb3b9b889adb427cb6bf285f303c799de"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-smfa3x43/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-wdiwqc0x",
+      "actual_parent_terminal": {
+        "chunk": "d247a2",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 68491,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 68491,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-wdiwqc0x/SHARED-CLOSED.json",
+          "bytes": 424,
+          "sha256": "cb5490eae4ba7327e6d69b3faf7be20c0fbe009c765ed3a27e10bab8ba321b3a"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-wdiwqc0x/SHARED-START.json",
+          "bytes": 753,
+          "sha256": "e607ec93a5e4a83cb3957b7203b409eccae6b48a32c1e49bf61298a4a6a6a0d0"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-wdiwqc0x/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-wdiwqc0x/SHARED-STDOUT.txt",
+          "bytes": 233,
+          "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-hl0hreyg",
+      "actual_parent_terminal": {
+        "chunk": "b07ee8",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 69383,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 69383,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-hl0hreyg/SHARED-CLOSED.json",
+          "bytes": 457,
+          "sha256": "ed6c9e58fd414f8a589602e7499c66dd08472391e421b4d782d0f53196cbc505"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-hl0hreyg/SHARED-START.json",
+          "bytes": 1085,
+          "sha256": "de9e62db78ccb7d7364a3f7972d05185b0e5bc205a3358beb777dc2030e63b16"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-hl0hreyg/SHARED-STDERR.txt",
+          "bytes": 106,
+          "sha256": "8291979b307800a2411ed99e4708747c62ec4cba471072141b444acc35421016"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspector-reuse-controls-hl0hreyg/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-ejnwl607",
+      "actual_parent_terminal": {
+        "chunk": "218c68",
+        "exit": 0,
+        "running_session": false
+      },
+      "closure": {
+        "child": {
+          "pid": 69386,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 69386,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-ejnwl607/SHARED-CLOSED.json",
+          "bytes": 457,
+          "sha256": "af6b3df9ca3319b4255397d677a03b78902272387a0f9a5f78fa27a8deb5ff42"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-ejnwl607/SHARED-START.json",
+          "bytes": 1061,
+          "sha256": "3d1da8d6aa3a985166ee44c84042c0a890e753a987367950a90741e9f54c6740"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-ejnwl607/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-ejnwl607/SHARED-STDOUT.txt",
+          "bytes": 233,
+          "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+        }
+      ]
+    }
+  ],
+  "scope": "Eight fixed inert-artifact methods plus shared command/budget/refusal controls; subprocess execution mocked. No actual inspector, compiler, SDK, Adobe or Photo input execution.",
+  "limits": [
+    "Trusted local build receipts only; not a plugin sandbox or peer executable authorization",
+    "No real-camera eligibility/receiving or actual new reuse execution on a photographic input",
+    "No payload permission inferred from CPU-token release"
+  ],
+  "final_source_pin_scope": "Final two runs pin target entry script and imported inspector driver plus common owner modules; post-run pins unchanged. Earlier runs retained with their original smaller source pin scope."
+}

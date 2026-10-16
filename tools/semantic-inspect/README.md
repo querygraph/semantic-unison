@@ -68,3 +68,33 @@ and [command refusals](../../tests/qualification/inspector-command-controls-actu
 cover build/ownership only. They establish no real-camera layout eligibility,
 Adobe validation or production receiving result. Coordinate source-copy IO before
 using Photo-owned fixtures; never substitute this tool for a rendering fingerprint.
+
+## Reuse the pinned build
+
+`--use-build /absolute/build-receipt.json -- ...` checks a successful retained
+build-only receipt, the exact current19-file kernel source set, the private
+workspace/binary binding and binary SHA256, then forwards arguments without a
+compiler lookup or rebuild. Receipt reads are bounded regular no-follow reads;
+duplicate keys, changed files and stale/missing pins fail before input access.
+The build's compiler/runner hashes remain historical provenance; reusing an
+already compiled binary does not execute or require a compiler. A build receipt
+is locally trusted developer input, not peer-provided code or a plugin sandbox.
+
+For a separately consented private copy, the shared entry point is:
+
+```sh
+SHARED_CPU_CREDITS=8 INSPECTOR_RECEIPT=/absolute/build/RESULT.json \
+  INSPECT_INPUT=/absolute/verified-private-copy.dng \
+  make -f tests/Makefile inspect-file
+```
+
+It defaults to DNGprofile1. `INSPECT_PROFILE` can select profile0; optional absolute
+`INSPECT_BASE` adds a comparison. One synchronous inspector plus2 owner credits
+fits the lane; all source/binary checks precede the image open. The dispatcher
+captures JSON in `SHARED-STDOUT.txt` in its printed private report directory.
+No image/archive/preferences are written. This command is not an IO permission
+for a Photo-owned copy or a new SDK/native-Photo allocation.
+
+[Eight inert-artifact/refusal controls](../../tests/qualification/inspector-reuse-controls-actual-20261016.json)
+pass with execution mocked; no photographic input or actual reused inspector
+was executed in that qualification. Real-copy IO and receiving follow separately.

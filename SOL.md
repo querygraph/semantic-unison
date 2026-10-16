@@ -4,6 +4,19 @@
 
 ## Current checkpoint — 2026-10-15
 
+Reusable inspection now has `--use-build` and the owned `inspect-file` target:
+checks bounded local build receipt, current19-file kernel source pins, private
+workspace/binary binding and binary SHA before forwarding arguments, with no
+compiler lookup/rebuild. [Eight inert-artifact methods and shared command controls](tests/qualification/inspector-reuse-controls-actual-20261016.json)
+PASS/CLOSED: finalparentterminals b07ee8/0 and218c68/0, tokens00..07closed;
+earlier2ba30f/0+d247a2/0 runs retained. Final target/driver/common source pins
+were recorded and rechecked unchanged. Execution was
+mocked; no real inspector, SDK/Adobe or Photo payload was invoked. This is API/
+artifact-control qualification only. Real-copy candidate/ancestry/IO coordination
+and actual receiving remain pending; no new native-Photo grant inferred from
+Root's completed DA recognition. Trusted local receipts are not peer-code trust.
+
+
 A [twelve-row acceptance scope audit](doc/acceptance-matrix-audit.md) now maps
 all required matrix categories to40 pinned supporting receipt references.
 Every row remains PARTIALLY_QUALIFIED. This is existing-document/source review,

@@ -21,6 +21,12 @@ with patch.object(Path, 'is_file', return_value=True):
     assert '--build-only' in inspector and '--report' in inspector and '--selftest' not in inspector
     assert inspector[inspector.index('--report') + 1] == str(out / 'RESULT.json')
     assert manual.shared_resource_plan('inspect-ox', env)['declared_peak_credits'] == 3
+    reuse_env = dict(env, INSPECTOR_RECEIPT='/NEVER-EXECUTED receipt.json',
+                     INSPECT_INPUT='/NEVER-READ input.dng')
+    reuse = manual.command('inspect-file', out, reuse_env)
+    assert '--use-build' in reuse and '--build-only' not in reuse and '--ocamlopt' not in reuse
+    assert reuse[-1] == reuse_env['INSPECT_INPUT']
+    assert manual.shared_resource_plan('inspect-file', reuse_env)['declared_peak_credits'] == 3
 
     for target, changes in (
         ('ox-build', {'JOBS': '5'}),

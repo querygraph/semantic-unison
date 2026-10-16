@@ -18,6 +18,11 @@ Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inheri
 | Coordinated workers/resources | Immutable worker jobs, bounded mailboxes and shared weighted permits; [checked workers](../tests/checked_worker/qualification.json), [resource integration](../tests/dng_backend_resources/qualification.json) | Production native threads, RSS, cancellation and scaling; estimates/covered allocators are not whole-process enforcement |
 | Performance | [Full warm128MiB x4 batch](../bench/sync/results/warm-128-v5-actual-return-20261015.json):18 configurations, five measured repetitions,108 total rows/324 CLI settlements; small synthetic matrices also exist | Representative warm/cold repeated full-sync measurements, stage timings, RSS/FD peaks and storage topology; no broad speedup claim |
 
+Reusable inspector receipt/argument checks are implemented; [eight inert-artifact
+controls](../tests/qualification/inspector-reuse-controls-actual-20261016.json)
+and shared entrypoint controls passed with execution mocked. Actual new reuse on
+Photo copies and real-camera receiving remain pending separate IO coordination.
+
 ## Acceptance scope audit
 
 The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to
