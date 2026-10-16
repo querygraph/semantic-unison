@@ -131,3 +131,14 @@ identity, excluding those numbers from any retained-FD retry set. These five
 cases use inert owners and injected errors that never actually call OS close;
 three actual fake-child regressions also pass on the corrected source. Real
 SDK/native ancestry and resource inheritance remain separate future gates.
+
+[Actual fake composition](../qualification/sdk-shared-composed-fake-actual-20261016.json)
+now runs16 original Python helpers through the one-use journal kernel, retained
+child adapter, qualified durable persistence and independent result auditor.
+Twelve reference/experimental-shaped fake calls succeed; warning divergence and
+missing telemetry each stop after the second call. All attempted direct children
+and groups settle, every outcome persists, and the outer Unison8 owner closes.
+Inert fixture paths are never opened; fake structured raw-digest fields are not
+SDK verification. The component has no SDK mode or native admission route.
+Canonical IO/inherited grant9FD binding, input/tool pins, actual aggregate owner
+and independently reviewed native dispatch remain outstanding before real SDK use.
