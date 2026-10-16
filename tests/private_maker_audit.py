@@ -8,6 +8,27 @@ def require(condition,message):
 def integer(n,low,high):return type(n) is int and low<=n<=high
 
 
+def audit_worker(result,geometry,*,parent_pid,worker_pid):
+    require(type(result) is dict and set(result)=={'schema','complete','diagnostic','failure',
+        'parent_pid','worker_pid','canonical_metadata_bound','external_children_started'},
+        'exact worker result fields required')
+    require(result['schema']=='unison-private-maker-worker/1'
+        and type(result['complete']) is bool and result['canonical_metadata_bound'] is True
+        and type(result['parent_pid']) is int and result['parent_pid']==parent_pid
+        and type(result['worker_pid']) is int and result['worker_pid']==worker_pid
+        and type(result['external_children_started']) is int and result['external_children_started']==0,
+        'exact actual worker/parent and zero external children required')
+    if result['complete']:
+        require(result['failure'] is None,'complete worker cannot hide a failure')
+        proof=audit(result['diagnostic'],geometry)
+    else:
+        require(result['diagnostic'] is None and type(result['failure']) is str
+                and 0<len(result['failure'])<=4096,'known failed worker must preserve error')
+        proof={'metadata_consistent':True,'candidate_shape':False,'semantic_eligibility':False}
+    return dict(proof,worker_complete=result['complete'],external_children_started=0,
+                resource_release_authorized=False)
+
+
 def audit(result,geometry):
     keys={'schema','diagnostic_complete','outcome','reason','shape','read_ranges',
           'requested_read_bytes','received_read_bytes','max_requested_read_bytes',

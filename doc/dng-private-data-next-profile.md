@@ -203,3 +203,20 @@ reaped0/group absent, CPU8 closed); evidence is in
 `tests/qualification/private-maker-audit-source-actual-20261017.json`. This is
 metadata consistency only: no raw payload authentication, process-settlement
 proof or descriptor-release authority is inferred. No retained payload read.
+
+The executor `tests/private_maker_execute.py` and shared dispatcher/manual
+`private-maker-slice` target are implemented. This route requires a fresh exact
+shared8+EXglobal admission and actual parent START/inherited nine-FD metadata
+binding. Worker starts no external children. Uncertain metadata/source/result
+close retains the worker; ordinary known failures preserve an error result. The
+parent observes terminal state without an observation-deadline kill, validates
+result/actual worker IDs and source epoch, settles the group, checks exit/result
+consistency, then releases descriptions. Output ceiling256KiB is separate from
+the64KiB plan/START metadata limit.
+
+Final36 controls passed with real outer CPU8 ownership and disposable/injected
+inner boundaries: actual12cea2/0, child14610 reaped0/group absent/CPU8 closed.
+Evidence: `tests/qualification/private-maker-entry-final-source-actual-20261017.json`.
+No canonicalIO or retained payload was accessed. Real disposable worker-route
+qualification remains before freezing a retained-input request; no runtime grant
+is implied by this implementation.

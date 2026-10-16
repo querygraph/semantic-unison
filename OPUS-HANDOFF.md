@@ -53,8 +53,9 @@ Receipt: tests/qualification/private-maker-slice-source-actual-20261017.json.
 No retained source was opened. Pure tests/private_maker_plan.py now binds the
 exact historical clone eight-field identity, payload10990/6556/originalbase1404,
 Unison8/EXglobal,10s worker and explicit false semantic/SDK/hash/pointed-read
-flags. Exact nine-word worker argv is specified, but its named executor file is
-NOT implemented or runnable yet; no admission/request was published. Four plan
+flags. Exact nine-word worker argv was specified at that checkpoint; the executor
+and shared dispatcher route are now implemented as described below. No new
+retained-input admission/request has been published. Four plan
 controls plus five slice controls passed (child12267 reaped0/group absent/CPU8
 closed; owning59b0b6/0). Receipt private-maker-plan-source-actual-20261017.json.
 Independent tests/private_maker_audit.py now checks exact report schemas,
@@ -64,9 +65,23 @@ not authenticate payload bytes or confer process/FD release authority. Five
 audit controls plus nine plan/slice controls passed, including the exact256-entry
 3078-byte boundary; child12640 reaped0/group absent/CPU8 closed, actuald927fb/0.
 Receipt private-maker-audit-source-actual-20261017.json.
-Next concrete action: implement the admitted owned executor and dispatcher
-binding, qualify close uncertainty through that boundary, then freeze current
-source pins for fresh IO review, then investigate a vendor-specific reference contract from
+The tests/private_maker_execute.py worker and manual private-maker-slice route
+now require exact shared8+EXglobal admission, frozen plan, actual START parent/
+worker IDs and inherited nine canonical descriptor metadata. No external children
+are started. Metadata/source/result descriptor closes use the qualified carrier;
+uncertainty retains the actual worker, never writes an ordinary failed result.
+Parent waits without deadline kill, audits exact worker result and source epoch
+before settlement, checks exit consistency, then closes CPU/IO. Report ceiling
+256KiB accommodates256sanitized entries; plan/START metadata stays64KiB.
+36 disposable/injected controls passed, including combined JSONparse+close
+uncertainty, no retry, failed worker, success/audit/reap/release, live retention
+and complete/failed-exit contradiction. Final child14610 reaped0/group absent/
+CPU8 closed, actual12cea2/0. No canonicalIO acquisition or retained input read.
+Receipts private-maker-entry-{source,parent-source,final-source}-actual-20261017
+preserve the three progressive source checks; final is current.
+Next concrete action: qualify the integrated route with real disposable children
+and injected fixture/metadata binding (no canonicalIO/media), then freeze current
+source pins and exact retained-source metadata for fresh IO review, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
