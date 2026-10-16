@@ -28,9 +28,8 @@ acceptance is implied. Photo owns preview generation/publishing qualification.
 - [Prior actual capped-host scope review](../tests/qualification/sdk-prior-host-scope-review-20261016.json):
   twelve historical native calls on the same planned tool/input SHA pins already
   passed reference versus experimental1/6/18 validation parity and reported
-  task/covered-allocation settlement. The new [shared8 request](shared-sdk-host-request-v1.json)
-  is about its new owner/grant integration and experimental2-thread case;
-  it is not a missing first-ever functional SDK test. No native admission yet.
+  task/covered-allocation settlement. Subsequent shared-owner V1 and observed V2
+  runs also completed; neither is a pending first-ever SDK test or reusable grant.
 - [Frozen warm512 report](../bench/sync/results/warm512-observed-results-v2.md):
   all retained samples, incomplete failed part3, explicit part0/brew/source timing
   disclosures; protocol bytes and logical models are separated from unknown
@@ -41,8 +40,26 @@ The [remaining-work queue](milestone-next-work.md) and twelve-row
 A current build, source test or narrow SDK result must not silently close a
 broader corpus, platform, cancellation, resource or performance requirement.
 
-Latest native resource-owner evidence: [shared-eight SDK host V1](../tests/qualification/sdk-shared-host-v1-actual-20261016.json)
+Earlier native resource-owner evidence: [shared-eight SDK host V1](../tests/qualification/sdk-shared-host-v1-actual-20261016.json)
 passed12 serial reference/experimental calls with independent direct-child and
 worker/group settlement, unchanged source pins and closed CPU/IO ownership.
 This is shared-owner/inherited-descriptor functional evidence, not OS resource
 limits, pixel equivalence or a speedup result.
+
+
+Latest [shared SDK host V2 actual result](../tests/qualification/sdk-shared-host-v2-actual-20261016.json)
+adds twelve real SDK calls plus62 independently audited OS-probe children;
+actual39043/ef80c4/exit0, worker43646 reaped0, all CPU/EXglobal ownership closed.
+The [reproducible observation report](../bench/sdk-shared-host-v2-observations-20261016.md)
+contains bounded process samples (including observed2/6 OS threads on JPEG/JXL),
+not peaks, whole-tree limits, calibrated CPU units or speedup qualification.
+Its admission735810e6 is consumed and cannot authorize further native work.
+
+The [multi-file receiving V1 request](sdk-multifile-receiving-request-v1.json)
+is a separate prepared, unstarted integration step: two actual stock/Ox receiving
+seeds, each with two generated DNG candidates and up to two qualified
+single-thread SDK helpers. Its metadata checks and original fake loopback
+controls pass, while actual receiving/SDK behavior remains unproven. No actual
+overlap or throughput claim follows from requested flags or synthetic receipts.
+The full goal remains incomplete, including representative semantic eligibility,
+required failure/platform scope and the remaining benchmark/resource evidence.

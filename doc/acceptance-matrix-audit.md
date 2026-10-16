@@ -2,6 +2,14 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+The current [SDK resource-observation scope addendum](../tests/qualification/acceptance-sdk-scope-addendum-20261016.json)
+updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
+actual completed native runs, not pending requests; V2 includes12 SDK calls and62
+closed process-probe children. Bounded per-process samples do not prove peaks,
+hard caps, mixed ExifTool/Adobe throughput or multi-file receiving SDK overlap.
+The separate multi-file receiving V1 remains prepared/unadmitted/unstarted at
+this audit. Original fake endpoints exercise its transport but are not SDKs.
+
 The latest [generated property-transfer V3 qualification](../tests/qualification/shared-property-io-actual-20261016.json)
 now adds actual18-row/54-call stock/Ox ordinary/clone/semantic coverage with
 workers1/2/3: selected named xattr/native fork removal,0640→0400 mode,
