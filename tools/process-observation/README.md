@@ -53,3 +53,17 @@ after group closure; bounded injected unavailable observations survived exactly.
 No OS probe or SDK ran. A native successor still needs a pinned probe adapter,
 separate probe-child closure and independent observation-result audit before
 review/admission. Completed SDK V1 receipts keep their historical source pins.
+
+`tests/process_observation/probe.py` is the pinned query adapter. Each call
+checks the probe's no-follow regular-file identity and SHA before and after
+execution, bounds capture and observes a separately retained probe process.
+It records actual probe outcomes before parsing and propagates close/ownership
+uncertainty. Artifact checks are cooperative mutation fences, not atomic
+execution against a hostile path replacement.
+
+[Actual adapter integration](../../tests/qualification/retained-os-probe-actual-20261016.json)
+collected three Darwin OS snapshots on one original Python child, with all
+three probe children independently reaped after group closure. The observed
+child and outer owner also closed, and canonical Unison8 tokens were released.
+No compiler, SDK, photo payload or EXglobal IO ran. This qualifies this finite
+probe integration; it does not measure SDK resources or authorize native work.
