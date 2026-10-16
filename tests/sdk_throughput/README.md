@@ -51,3 +51,18 @@ are synthetic; this auditor has no child/FD release authority and does not
 establish throughput or fresh received-byte identity. The earlier eight-group
 predecessor receipt is preserved. Actual worker, owned dispatcher and lifecycle
 integration remain pending; no execution or SDK grant exists for this matrix.
+
+`worker.py` now composes the exact24 rows with one-use transport, per-row source
+epoch fences, qualified script preparation, case persistence and the independent
+whole-prefix auditor. It stops before preparing the next row when less than135s
+of observation headroom remains. Earlier completed calls then form an auditable
+FAILED prefix; no new case or invocation intent is invented. Preparation or
+process/descriptor uncertainty propagates as unresolved ownership.
+
+[Three tiny-file composition groups](../qualification/sdk-throughput-worker-source-successor-actual-20261016.json)
+pass: all24 modeled calls/48 synthetic SDK records, a one-call known-prefix
+stop before the second preparation, and uncertainty before transport. The first
+attempt's missing borrowed-module import failed before controls and is preserved
+separately, with its group/CPU closure. No real CLI/SDK/retained input ran.
+The worker is callable only; actual fake lifecycle, admitted entry/dispatcher,
+strict source/input/build pins and new runtime admission remain outstanding.

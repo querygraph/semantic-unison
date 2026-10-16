@@ -244,3 +244,11 @@ including4 imported parent regressions passed26614a/0; Unison8 closed, no
 CLI/SDK/payload/IO. Pure audit does not establish fresh bytes or release FDs.
 Next compose the retained worker and actual original-fake lifecycle before a
 new source-bound runtime request. Prior multi-file admission stays consumed.
+
+The comparison worker now composes all24 scheduled rows, per-row case/journal
+ordering and source fences, plus independent whole-prefix audit. Its pre-row
+135s headroom guard stops without preparing or recording another call, retaining
+an honest failed prefix. Three tiny-file/model-transport groups passed9e473b/0,
+Unison8 closed; prior12d9ec/1 import failure preserved/pre-control/closed.
+Zero actual CLI/SDK/retained payload/IO. Next actual original-fake lifecycle and
+fresh admitted entry/dispatcher integration; no automatic runtime successor.

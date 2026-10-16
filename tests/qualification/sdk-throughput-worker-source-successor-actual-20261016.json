@@ -1,0 +1,42 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_throughput/worker_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.358s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 54863,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/sdk_throughput/audit.py": "70a751122906e10bd65ad3de54e6ef71209f31c7848327cb4fdd5bbcc8a25675",
+    "tests/sdk_throughput/audit_test.py": "fc3329eaf647f049d8854dcf17122309cc32b14bf61987613284bcab2c6738a2",
+    "tests/sdk_throughput/plan.py": "9e65ea8d69cb5f3aeb47e6b02ede969dd1f5e4c6c54c1f7ded11bfdc801e5515",
+    "tests/sdk_throughput/plan_test.py": "9d0bd92728b616da3d6bd36d69e9072c73e32989756af72c45e9aa9b3be31b84",
+    "tests/sdk_throughput/transport.py": "e16d43a8b30ce5a15a25eb7835d71a1c98875abd33434d9b6d6431f6b0733708",
+    "tests/sdk_throughput/transport_test.py": "a37c36967a34b039975cd638a808e6bf6c565f7e6bd03a8c9961e45a6968ac3f",
+    "tests/sdk_throughput/worker.py": "56dc3e423916e222fff1db31300c959fa2742e9a851a717f81442c93b3f9358f",
+    "tests/sdk_throughput/worker_test.py": "e37f802b710c12cc54bf6c7d04d00e0e7143ac918b1dc69755400c6dc09a134a"
+  },
+  "scope": "Three tiny-file worker composition groups:24modeled receiving calls/48synthetic SDK frames, known-prefix pre-row deadline stop, preparation uncertainty bypass. Zero actual CLI/SDK/native clone/retained payload/canonical IO.",
+  "owner_tool_terminal": {
+    "chunk_id": "9e473b",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal."
+  }
+}
