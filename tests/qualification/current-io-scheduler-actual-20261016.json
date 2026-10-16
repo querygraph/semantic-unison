@@ -1,0 +1,65 @@
+{
+  "schema": "unison-current-io-scheduler/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 69802,
+      "terminal_chunk": "b6131d",
+      "exit_code": 0,
+      "running_session": false,
+      "groups": 20,
+      "assertions": 243,
+      "fairness_negative_detected": true,
+      "source_pin_count": 16,
+      "references": [
+        {
+          "path": "/private/tmp/unison-current-io-stock-20261016a/RESULT.json",
+          "bytes": 4979,
+          "sha256": "3613ac1cfab86dcae8f86784e5a9a89b8377313b38cf8b48e7a05bd8fdcca80d"
+        },
+        {
+          "path": "/private/tmp/unison-current-io-stock-20261016a/SHARED-START.json",
+          "bytes": 1233,
+          "sha256": "f3e4b6e5375105086b8d2eaa660e88417fd94c7ef12a7320b139e9463e3a92d9"
+        },
+        {
+          "path": "/private/tmp/unison-current-io-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5b6305af2a467da4cdf5312565b5627b7f183386ec784aa9275f3f47a3135ea1"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 30999,
+      "terminal_chunk": "d54e33",
+      "exit_code": 0,
+      "running_session": false,
+      "groups": 20,
+      "assertions": 243,
+      "fairness_negative_detected": true,
+      "source_pin_count": 16,
+      "references": [
+        {
+          "path": "/private/tmp/unison-current-io-ox-20261016a/RESULT.json",
+          "bytes": 4983,
+          "sha256": "124c6adef362c73042b274d96b2c7778ec72b82f4adec4e601bae92d25a3e000"
+        },
+        {
+          "path": "/private/tmp/unison-current-io-ox-20261016a/SHARED-START.json",
+          "bytes": 1232,
+          "sha256": "e457d7982166223f65fc75289bbd432523f1dbf5ee91da5c1e5a2008fef01d34"
+        },
+        {
+          "path": "/private/tmp/unison-current-io-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5fe62b2b21c760aa4fabaa149f4fb0db1400b65b663908eedc5856d03f074217"
+        }
+      ]
+    }
+  ],
+  "source_review": "IO dispatch already drains ready siblings after throwing reply observers; CPU supervisor polls tickets rather than sharing this reply-drain path. SemanticAdmission bug fixed separately in b428a12.",
+  "scope": "current owner-loop IO scheduling, cancellation, native held-FD device keys and CPU handoff; generated tiny private fixtures only; no physical topology/isolation, RSS cap, SDK, Photo, camera payload or EXglobal operation",
+  "full_goal_complete": false
+}

@@ -72,3 +72,10 @@ was published. The dispatcher now drains other ready owners before propagating
 the first exception. A new finite fault control fails on the prior source and
 passes with the fix on stock and Ox; this is owner-loop accounting evidence,
 not native descriptor/RSS or universal asynchronous-fault qualification.
+
+The adjacent [current IO scheduler checks](../tests/qualification/current-io-scheduler-actual-20261016.json)
+pass20 groups/243 assertions on each compiler, including throwing admission and
+cancellation observers, and detect the private fairness regression. IO dispatch
+already drains ready siblings; the CPU supervisor uses ticket polling. This
+review does not extend the SemanticAdmission fix into an unproven claim about
+physical device isolation, descriptor peaks or RSS limits.
