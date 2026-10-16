@@ -122,3 +122,12 @@ run three actual original Python helpers (normal, exit7, truncated output), not
 SDK code. Unknown/group/close-fault injection, inherited resource descriptors,
 exact artifact/input/admission binding and the real parent remain unqualified.
 No native runtime or SDK admission follows from this component.
+
+[Child fault controls](../qualification/sdk-shared-child-faults-actual-20261016.json)
+now cover live observation/census refusal without signals or reap, partial
+capture construction, close uncertainty and nested uncertainty propagation.
+The carrier preserves child/capture objects plus every original uncertain-close
+identity, excluding those numbers from any retained-FD retry set. These five
+cases use inert owners and injected errors that never actually call OS close;
+three actual fake-child regressions also pass on the corrected source. Real
+SDK/native ancestry and resource inheritance remain separate future gates.

@@ -1,0 +1,10 @@
+{
+  "state": "ROOT_INDEPENDENT_ACCEPTANCE_ADOPTED",
+  "acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-CONCURRENT-SYNTHETIC-V2-ACTUAL-ACCEPTANCE-20261016.json",
+    "bytes": 6964,
+    "sha256": "be86dad1c61dbff170f4ef15d5afbc636a2d12c8ad6deb64b860690d8920e8dd"
+  },
+  "scope": "Same single consumed957750d2,actual74146/b2b6ab/0; independent2CLI4fakehelper/96pins/groupsFDclosure accepted. NoSDK/throughput/pixels/semantic/newgrant/replay.",
+  "resources_held": 0
+}

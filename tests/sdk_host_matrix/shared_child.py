@@ -5,7 +5,7 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tests'));sys.path.insert(0,str(ROOT/'bench/sync'))
 from ownership import OwnedGroup
 from measure import CapturedStream
-from shared_io_pool import UnresolvedIOOwnership,descriptor_observation
+from shared_io_pool import UnresolvedIOOwnership,descriptor_observation,uncertainty_records
 
 def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
     if type(deadline) not in (int,float) or not time.monotonic()<deadline<float('inf'):
@@ -18,9 +18,11 @@ def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
     identities=[]
     fd_numbers=[s.fileno() for s in streams]
     def retain(reason,error=None,uncertain=()):
-        excluded={item['fd'] for item in uncertain}
-        e=UnresolvedIOOwnership(reason,retained_fds=[fd for fd,s in zip(fd_numbers,streams) if not s.closed and fd not in excluded],
-            uncertain_closes=list(uncertain),original_failure=error)
+        records=list(uncertainty_records(error,dict(zip(fd_numbers,identities))))+list(uncertain)
+        excluded={item['fd'] for item in records}
+        retained=list(getattr(error,'retained_fds',()))+[fd for fd,s in zip(fd_numbers,streams) if not s.closed]
+        e=UnresolvedIOOwnership(reason,retained_fds=[fd for fd in retained if fd not in excluded],
+            uncertain_closes=records,original_failure=error)
         e.child_owner=owner;e.capture_owners=captures
         raise e from error
     try:
@@ -42,7 +44,9 @@ def invoke(command,environment,deadline,*,pass_fds=(),capture_limit=262144):
         pid,status,usage=os.wait4(owner.pid,0)
         if pid!=owner.pid:retain('SDK reap identity differs')
         owner.reaped=True;owner.process.returncode=os.waitstatus_to_exitcode(status)
-    except UnresolvedIOOwnership:raise
+    except UnresolvedIOOwnership as error:
+        if getattr(error,'child_owner',None) is owner:raise
+        retain('SDK nested ownership uncertainty; retain child and every descriptor',error)
     except BaseException as error:retain('SDK child/capture state unresolved',error)
     output=[]
     for i,capture in enumerate(captures):
