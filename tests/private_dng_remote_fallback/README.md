@@ -1,6 +1,7 @@
-# Prepared transport-separated opaque-DNG fallback case
+# Transport-separated opaque-DNG fallback qualification
 
-This package is SOURCE PREPARATION, not an admitted test. The prepared
+The first exact scoped execution has passed and closed; see the actual section
+below. Its admission is consumed, not permission to rerun. The
 `coordinator.py` entrypoint requires a fresh exact Root admission, plan and
 admission SHA before resource acquisition or launching the internal worker.
 `case.execute_case` requires that coordinator to own the IO/CPU bundle and all
@@ -94,3 +95,27 @@ no actual IO lock, transport, source fixture, native/SDK/Photo input or compiler
 Thus real aggregate/server settlement and receiver-basis fallback remain unrun.
 The proposed budget is conservative declared logical IO, not enforced physical
 IO, RSS, descriptor-count or OS-thread caps.
+
+## Actual first execution — 2026-10-16
+
+[Sealed actual receipt](../qualification/private-remote-fallback-actual-20261016.json):
+Root admission8894bb49 consumed once, owner91702/session11511 actual terminal
+a3b0b5/exit0/no session; worker91703 reaped0/other members absent. Four compiler
+pairs completed twelve calls. All12 raw proxy receipts and saved stage outcomes
+were independently rebound, all16 copied transport sources matched frozen pins,
+and the inherited descriptor identity set was exactly Unison00..07 plus the
+existing EX_GLOBAL barrier. IO and CPU descriptors closed; unknown markers absent.
+
+Every update showed explicit semantic decline, exactly one immutable receiver
+clone basis, positive partial logical inheritance (3072bytes each), exact output,
+unchanged prior receiver inode contents, unchanged source complement, stable
+no-op FIVE and no receiver staging residue. This is actual transport-separated
+ordinary fallback evidence, distinct from the local preferred whole-source clone.
+It does not demonstrate eligibility for opaque50740, SDK/pixel validity, physical
+extent sharing, physical writes, measured savings, throughput, network-device
+independence, a quiet timing window or a general production IO-pool integration.
+No original/privatecamera/Photo/Adobe data or code was used.
+
+The request/plan and source/mocked-control sections above remain historical
+preparation records. They are superseded only for this exact four-pair test by
+the actual evidence here; no new admission or automatic successor is implied.

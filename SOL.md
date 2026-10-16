@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+ACTUAL [transport-separated opaque50740 fallback](tests/qualification/private-remote-fallback-actual-20261016.json)
+PASS/CLOSED: fourstock/Oxclient-serverpairs/12CLI, owner91702/session11511
+actuala3b0b5/0/no session, worker91703reaped0/groupothersabsent. All12saved
+call/proxybindings and16copiedtransportsourcepins independentlychecked; exact
+CPU00..07+EXIOfdidentities; bothclosed/unknownabsent. Everyupdate explicitly
+declinedsemantics thenONEimmutable receiverbasisclone; reported3072logical
+inheritedbytes each, exactoutput/basis/sourcecomplement/no-opFIVE/stagingpass.
+Rootnotifiedactualterminalimmediately; admission8894bb49 consumed once before
+deadline, no retry/successor. No realcameraeligibility/SDK/pixels/physicalwrite/
+throughput or generalproductionIOintegrationclaim. Prior source-only/unrun
+notes for this exact four-pair test are superseded, immutableplans preserved.
+
 Inactive `DngPrivateData.locate_ifd0_private` now finds one out-of-line primary
 BYTE50740 beside bounded BYTE[4] DNGVersion, classic/BigTIFF andbothendianness.
 Max16384entries/327712header-directorybytes, selectedduplicate/type/shape/

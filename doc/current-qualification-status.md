@@ -42,6 +42,16 @@ released after group settlement; it does not prove receiver-basis semantic fallb
 Topology provider, general production integration and cross-project payload
 qualification remain pending. CPU sharing is already implemented.
 
+## Opaque-tag transport fallback
+
+[Four stock/Ox client-server pairs](../tests/qualification/private-remote-fallback-actual-20261016.json)
+passed12actualCLI calls under the scoped shared8+EX_GLOBAL coordinator. A tiny
+generated tag50740 fixture declined semantics, then ordinary transfer used the
+immutable receiver clone basis with3072logical inheritedbytes/case and exact
+output/basis/complement/no-op/staging checks. All direct groups, server waits and
+pumps settled, actual parent exit0, CPU/IO closed. No real-camera eligibility,
+SDK/pixel validity, performance or physical storage savings follows from this.
+
 ## Acceptance scope audit
 
 The [twelve-row audit](acceptance-matrix-audit.md) maps the required SOL matrix to

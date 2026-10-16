@@ -1,0 +1,977 @@
+{
+  "schema": "firstpair-private-remote-fallback-owner-return/1",
+  "state": "FOUR_COMPILER_PAIRS_TWELVE_CLI_PASSED_CLOSED",
+  "admission": {
+    "path": "/private/tmp/unison-private-remote-fallback-admission-v1.json",
+    "bytes": 636,
+    "sha256": "8894bb49bfb42e611b34dc5bdded3f42e706ef6493fdc012ad10b93b91240cbd"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/private-dng-remote-fallback-request-v1.json",
+    "bytes": 7627,
+    "sha256": "4fc590799a0f9a32a5f4d146d1e5cbe3dcf1c07d2e1b4aeb0d7013ffd2a364fc"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-dng-remote-fallback-plan-v1.json",
+    "bytes": 3388,
+    "sha256": "d4fda75f63f8a9a3f12a1aeda0979a2d204f37823e0b5cd916a78fdca1423e87"
+  },
+  "actual_owner_terminal": {
+    "owner_pid": 91702,
+    "tool_session": 11511,
+    "initial_chunk": "f89d1a",
+    "terminal_chunk": "a3b0b5",
+    "exit_code": 0,
+    "running_session": false,
+    "evidence": "actual write_stdin completion, not process absence",
+    "dispatch_unix": 1792117903.148057
+  },
+  "closure": {
+    "worker": {
+      "pid": 91703,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 91703,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "remote_calls": [
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "seed",
+        "client_pid": 91705,
+        "supervisor_pid": 91704,
+        "server_pid": 91707,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "update",
+        "client_pid": 91713,
+        "supervisor_pid": 91712,
+        "server_pid": 91715,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "ox"
+        ],
+        "stage": "noop",
+        "client_pid": 91721,
+        "supervisor_pid": 91720,
+        "server_pid": 91723,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "seed",
+        "client_pid": 91729,
+        "supervisor_pid": 91728,
+        "server_pid": 91731,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "update",
+        "client_pid": 91737,
+        "supervisor_pid": 91736,
+        "server_pid": 91739,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "ox",
+          "stock"
+        ],
+        "stage": "noop",
+        "client_pid": 91746,
+        "supervisor_pid": 91744,
+        "server_pid": 91749,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "seed",
+        "client_pid": 91760,
+        "supervisor_pid": 91759,
+        "server_pid": 91762,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "update",
+        "client_pid": 91768,
+        "supervisor_pid": 91767,
+        "server_pid": 91770,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "ox"
+        ],
+        "stage": "noop",
+        "client_pid": 91776,
+        "supervisor_pid": 91775,
+        "server_pid": 91778,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "seed",
+        "client_pid": 91784,
+        "supervisor_pid": 91783,
+        "server_pid": 91786,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "update",
+        "client_pid": 91792,
+        "supervisor_pid": 91791,
+        "server_pid": 91794,
+        "settled": true,
+        "test_success_not_inferred": true
+      },
+      {
+        "pair": [
+          "stock",
+          "stock"
+        ],
+        "stage": "noop",
+        "client_pid": 91800,
+        "supervisor_pid": 91799,
+        "server_pid": 91802,
+        "settled": true,
+        "test_success_not_inferred": true
+      }
+    ],
+    "cpu_closed": true,
+    "io_closed": true,
+    "functional_pass": true,
+    "parent_terminal": "must be collected separately from owning tool"
+  },
+  "audit": {
+    "compiler_pairs": 4,
+    "cli_calls": 12,
+    "receiver_basis_fallback_cases": 4,
+    "scope": "future finite generated opaque-tag fallback only; not real-camera or SDK/pixel/performance proof"
+  },
+  "independent_reparse": {
+    "call_ledgers": 12,
+    "proxy_receipt_bindings": 12,
+    "copied_transport_source_pins": 16,
+    "inherited_CPU_IO_identity_set_verified": true,
+    "no_unknown_markers": true
+  },
+  "cases": [
+    {
+      "pair": [
+        "ox",
+        "ox"
+      ],
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+      "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+      "complement_sha256": "ce085b85a75b9c971a26d340559b16986b945169f3731ac33baf677dd3f0f4b3",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 3072,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 91705,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91704,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91707,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00024523798492737114
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 91713,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91712,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91715,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00024055599351413548
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 91721,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91720,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91723,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002813909959513694
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "ox",
+        "stock"
+      ],
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+      "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+      "complement_sha256": "ce085b85a75b9c971a26d340559b16986b945169f3731ac33baf677dd3f0f4b3",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 3072,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 91729,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91728,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91731,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.005616218986688182
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 91737,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91736,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91739,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002492179919499904
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 91746,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91744,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91749,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00023450498702004552
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "stock",
+        "ox"
+      ],
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+      "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+      "complement_sha256": "ce085b85a75b9c971a26d340559b16986b945169f3731ac33baf677dd3f0f4b3",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 3072,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 91760,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91759,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91762,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002549000200815499
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 91768,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91767,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91770,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.000253373000305146
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 91776,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91775,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91778,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00023523700656369328
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    },
+    {
+      "pair": [
+        "stock",
+        "stock"
+      ],
+      "exact_output": true,
+      "basis_unchanged": true,
+      "noop_five_unchanged": true,
+      "source_complement_unchanged": true,
+      "staging_cleaned": true,
+      "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+      "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+      "complement_sha256": "ce085b85a75b9c971a26d340559b16986b945169f3731ac33baf677dd3f0f4b3",
+      "semantic_declined": true,
+      "receiver_clone_starts": 1,
+      "reported_logical_inherited_bytes": 3072,
+      "calls": [
+        {
+          "stage": "seed",
+          "client": {
+            "pid": 91784,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91783,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91786,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.006619977008085698
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "update",
+          "client": {
+            "pid": 91792,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91791,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91794,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.0002690770197659731
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        },
+        {
+          "stage": "noop",
+          "client": {
+            "pid": 91800,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "supervisor": {
+            "pid": 91799,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "observation_error": null,
+            "group_cleanup_result": "only_owned_leader_zombie_darwin",
+            "other_group_members_absent_before_reap": true,
+            "group_cleanup_before_leader_reap": true
+          },
+          "server": {
+            "pid": 91802,
+            "returncode": 0,
+            "reaped": true,
+            "cancel_reason": null,
+            "hard_kill_required": false,
+            "normal_exit_timeout_seconds": 2.0,
+            "settlement_wall_seconds": 0.00024656299501657486
+          },
+          "pump_joined": true,
+          "pump_errors": []
+        }
+      ]
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/OWNER-TERMINAL.json",
+      "bytes": 261,
+      "sha256": "534d1b41cf20193db7041a96e02cf6b2cd37d6de967e0e1f475b57fa89fa5131"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ATTEMPT.json",
+      "bytes": 200,
+      "sha256": "5bb2ed2314ed790717ff4ae0895e2f0f858dbd9944c4c7c04b1c7decdaf27810"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/START.json",
+      "bytes": 356,
+      "sha256": "5a3d0a753fc478785ef5fd6c2ef64b4d12702ffe5b6496e577920d398658705b"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/WORKER-PACKET.json",
+      "bytes": 4304,
+      "sha256": "03b54d4606d68912fa3b3d2f8e2e1d951096b2a52ed6493675e1cfdabac33f1c"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/WORKER-RESULT.json",
+      "bytes": 489798,
+      "sha256": "cd392dd6dd105bd90d131919c693a401bbae73d189e8538e775c5f537eef4221"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/REMOTE-SETTLED.json",
+      "bytes": 2965,
+      "sha256": "9b4dabba3c41e5a92b18256de32c13379631cc920e85996b75398c772d548cac"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/AGGREGATE-CLOSED.json",
+      "bytes": 3380,
+      "sha256": "4b19e597d85aab4e909f741ed2407674126d6bd21dc1e2f1b9c0e28806666f95"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/seed-INTENT.json",
+      "bytes": 691,
+      "sha256": "d1d5accd872f4582bb4ea81a0dac77ed955e5e6804a341a63a9b938d5ce7b495"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/seed-OUTCOME.json",
+      "bytes": 6223,
+      "sha256": "e731787974245396ab0c93228d47ae919d11b987d269c90a880d0e7a2af1beab"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/seed-proxy.json",
+      "bytes": 1080,
+      "sha256": "0d4af9870d3f1e3fca4c731f74cd061441ac378b6e764edabec176d6c3b2a85c"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/update-INTENT.json",
+      "bytes": 693,
+      "sha256": "07f1568168b4b317117f31ad34bddebf222cd250b9d05433fba009db203a4888"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/update-OUTCOME.json",
+      "bytes": 108577,
+      "sha256": "53c37d6133bc53800cb12b0fde50e0cae34afc5228579391bbff1e42e1cf0910"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/update-proxy.json",
+      "bytes": 1091,
+      "sha256": "1c243bbe32d70b63da947dce83e13d23abf53ba9ca8bc89855c2473c8fc56933"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/noop-INTENT.json",
+      "bytes": 691,
+      "sha256": "29d9e5859045fe19f99261d8b308114ce6617585603065500bf2a7a347774b4c"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/noop-OUTCOME.json",
+      "bytes": 3844,
+      "sha256": "01a55ee34d3029d107f5bde19c5e0e530f087ef23aca3e89d1028a511a76b845"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/noop-proxy.json",
+      "bytes": 1075,
+      "sha256": "633178e76697e7bfc1d9657f3e3e80d7c72332bb78f9bc17902857bb8d4d9173"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-ox/CASE.json",
+      "bytes": 120650,
+      "sha256": "6c52dfe0f712dd8c9be40ceb63b63a1a7273b7704a3e57d6e24bb6ba23b9deb7"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/seed-INTENT.json",
+      "bytes": 700,
+      "sha256": "83eef0ecf984e7f1b74b44a002efc4834b87f0e876e30c0e96f9f65f57b0c05b"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/seed-OUTCOME.json",
+      "bytes": 6260,
+      "sha256": "0aa215486dc42a30032cf0f249e9c9cb047a46aa2f753a833013e2a1d44df4e2"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/seed-proxy.json",
+      "bytes": 1078,
+      "sha256": "e2f1e979fe45278c8afcd13a57cc00f0d2c89e02c719bd2a40eeb03f56a8a21e"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/update-INTENT.json",
+      "bytes": 702,
+      "sha256": "77c9c984acc492958ff039980b60784b65c836b34e2b7f644399579d9bfd9789"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/update-OUTCOME.json",
+      "bytes": 108608,
+      "sha256": "cf7706e103c56d49fe5b0cac16b9373cb7de357794d24ad186c5c30da249908f"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/update-proxy.json",
+      "bytes": 1089,
+      "sha256": "463046c3ad8a2f5329c37552cb4b4f17262ea1693a5d30fd0511e9f22c1c1936"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/noop-INTENT.json",
+      "bytes": 700,
+      "sha256": "ae9b8ed7c4751314e2fc7d2ec1c071b1e310a125aab3f418bc07b2bedd20e1a3"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/noop-OUTCOME.json",
+      "bytes": 3879,
+      "sha256": "560e75412d4e1f0f21cd5a41cb6a98986b47ba05f8d42270919f490aed75d96f"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/noop-proxy.json",
+      "bytes": 1088,
+      "sha256": "afc1fcf844982066962a34cad8066be92b43660aaa6e5e4b8e4b64a3ea3fc8f3"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/ox-stock/CASE.json",
+      "bytes": 120756,
+      "sha256": "0210569ec66a172f8f48249fa683fb07091397587f143d5f39b075c3df555014"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/seed-INTENT.json",
+      "bytes": 700,
+      "sha256": "af3f05222985d617fcaed87f65facee4fc41fc8b0cf2bc4cbbb85e745f762c0a"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/seed-OUTCOME.json",
+      "bytes": 6259,
+      "sha256": "2390104bea0c0db00d40a7fd82ad224226f72a26b4f60f210874909ea748e55b"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/seed-proxy.json",
+      "bytes": 1090,
+      "sha256": "a62f5e4ef04385343b43adf13a6cfc225227ffc754083d0149817c0be26eae49"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/update-INTENT.json",
+      "bytes": 702,
+      "sha256": "3636f00a544c603a0444a13943d6f0635e57e2492632c5314e89ee6f2078b52c"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/update-OUTCOME.json",
+      "bytes": 108608,
+      "sha256": "b189afb6a8a6cbe3f64657a17175ed3eddf5fbfc80ea15578aeea8b5bca036b2"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/update-proxy.json",
+      "bytes": 1089,
+      "sha256": "eb843d438be6c1b65c62aa9eea1241fee9c4a16f33e471f34a5bef2aa290d38e"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/noop-INTENT.json",
+      "bytes": 700,
+      "sha256": "6dac366be74ea1091d40ff5bc22797f36de84cc9e7b12d53616d547a30c870a8"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/noop-OUTCOME.json",
+      "bytes": 3873,
+      "sha256": "cfb39e687e6df9a83973575578935d1c734121d9c113097bdf2f3370a41cb78e"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/noop-proxy.json",
+      "bytes": 1089,
+      "sha256": "2ffb04419cc6a726be98c01c4abe4a246d55d503f4fab9311b19b7186875c052"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-ox/CASE.json",
+      "bytes": 120749,
+      "sha256": "6489b89d0913d991e896902a297afbd4b5c9cb004c4849a21a1b7b78a04cfb16"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/seed-INTENT.json",
+      "bytes": 709,
+      "sha256": "60f41dfee9a41598d6b2297bf279c1be8cc7aebc4bb511ad2abd2283be154593"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/seed-OUTCOME.json",
+      "bytes": 6309,
+      "sha256": "c40f17ebcf78873eb5296b22ade4b4e0c647b5c8eb4447526894420b2731005c"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/seed-proxy.json",
+      "bytes": 1077,
+      "sha256": "e091f83faa4223370802f82d6770d798ab5bf1e4392720ae41ae89c7805c8123"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/update-INTENT.json",
+      "bytes": 711,
+      "sha256": "f46103174815ee970265dc229c6d6c58c4ee7d911200dbbc60996bfd93a7d419"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/update-OUTCOME.json",
+      "bytes": 108638,
+      "sha256": "7a20339e32f58ce13a327f6737d543b03e8d21876b49a9f04135777fc19177cf"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/update-proxy.json",
+      "bytes": 1075,
+      "sha256": "e0cbb7a024cb3e2ade1f5bba68b3414fbeddc850ca80a44a719c527700fbf54b"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/noop-INTENT.json",
+      "bytes": 709,
+      "sha256": "ae63f7ae60488d0e1c5fcb093acccc738f6a56582db4340be1c6ac0db6e281de"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/noop-OUTCOME.json",
+      "bytes": 3906,
+      "sha256": "ecf46e174717337cbd0fd97e41cf1609004ad241f93c34d0d38c8fd8f8178bdd"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/noop-proxy.json",
+      "bytes": 1088,
+      "sha256": "d7929c4ca5dfda9e80599af5bffc5bb24efdc4310cf65e4597407ecff6a7e986"
+    },
+    {
+      "path": "/private/tmp/u-rf-c4e61f73982a/stock-stock/CASE.json",
+      "bytes": 120865,
+      "sha256": "149abd1c1ee735902a7e73cb6761acc1dfde8e4d437f58a016cdc3e19370c19f"
+    }
+  ],
+  "scope": [
+    "Only four tiny generated1MiB opaque-tag50740 fixtures; no real-camera eligibility or SDK/pixel validation",
+    "Negotiated semantic decline followed by immutable receiver-basis clone and exact ordinary transfer",
+    "Reported inherited3072bytes/case is logical trace evidence, not APFS physical allocation or throughput",
+    "No performance/quiet-timing/OSthread/RSS/physical topology/production IO integration claim",
+    "No source/photo/Main/cache access, automatic successor or admission reuse"
+  ],
+  "owner_return": {
+    "path": "/private/tmp/u-rf-c4e61f73982a/OWNER-RETURN.json",
+    "bytes": 32609,
+    "sha256": "a83fd2af2a9a5c6b3d043585bb4e6a74037141329062bd6e77a8ac63272ab927"
+  }
+}
