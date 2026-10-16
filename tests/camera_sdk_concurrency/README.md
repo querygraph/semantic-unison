@@ -175,3 +175,17 @@ gets execute permission. [Seven source controls](../qualification/concurrent-wor
 cover composition/refusal ordering and actual script-copy hashes/modes. Invocation,
 case and final-audit hooks are mocks here; no transport or receiving owner runs.
 A fresh exact plan/admission parent and shared-dispatch target remain outstanding.
+
+## Durable result persistence
+
+`persistence.save` serializes finite JSON with a16MiB output limit, validates the
+private0700 namespace, then uses its retained directory FD for exclusive
+`RESULT.next` creation and replacement of `RESULT.json`. File and directory are
+fsynced; a failed temporary is preserved rather than overwritten or retried.
+Both descriptors close through the qualified uncertainty carrier, including
+combined close failures and a directory-close failure after publication.
+[Seven persistence/eight worker controls](../qualification/concurrent-persistence-controls-actual-20261016.json)
+pass. A failed final worker save explicitly clears complete before recording
+failure. These selected controls do not prove power-loss recovery or hard RSS
+limits. The future admitted entrypoint must use this persistence and preserve
+unknown descriptor ownership instead of treating the JSON file as resource release.

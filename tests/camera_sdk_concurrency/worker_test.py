@@ -44,6 +44,19 @@ class Worker(unittest.TestCase):
              patch.object(w,'audit',side_effect=ValueError('original audit refusal')):
             with self.assertRaises(ValueError):self.execute()
         self.assertFalse(self.saved[-1]['complete']);self.assertIn('original audit refusal',self.saved[-1]['failure'])
+    def test_completion_persist_failure_clears_complete(self):
+        failed=False
+        def persist(value):
+            nonlocal failed
+            if value['complete'] and not failed:
+                failed=True;raise OSError('injected final persistence failure')
+            self.saved.append(value)
+        with patch.object(w,'prepare_scripts',return_value=self.plan['transport_source_sha256']), \
+             patch.object(w,'Invoker',side_effect=self.invoker),patch.object(w,'execute_case',side_effect=self.case), \
+             patch.object(w,'audit',return_value={'mock':True}):
+            with self.assertRaises(OSError):w.execute(self.plan,self.d,time.monotonic()+400,persist=persist)
+        self.assertFalse(self.saved[-1]['complete'])
+        self.assertIn('injected final persistence failure',self.saved[-1]['failure'])
     def test_first_case_failure_stops_successor(self):
         def broken(directory,**kw):kw['invoke']();raise ValueError('first case failed')
         with patch.object(w,'prepare_scripts',return_value=self.plan['transport_source_sha256']), \

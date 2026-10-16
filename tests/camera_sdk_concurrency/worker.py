@@ -65,4 +65,5 @@ def execute(plan,workspace,deadline,*,persist):
     except UnresolvedOwnership:
         raise
     except BaseException as error:
+        result['complete']=False
         result['failure']=repr(error);save();raise

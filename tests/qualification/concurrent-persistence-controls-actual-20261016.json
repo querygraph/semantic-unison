@@ -1,0 +1,92 @@
+{
+  "schema": "unison-concurrent-persistence-controls/1",
+  "state": "SOURCE_CONTROLS_PASSED_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/persistence.py",
+      "bytes": 1569,
+      "sha256": "6cdc729e4ac75443f9931cd210acb9a6df41188330c92ac9660db96ebb6048a3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/persistence_test.py",
+      "bytes": 3437,
+      "sha256": "36212a96075849e5c9fb0788cf65fd81175d7a296b1ccdb07d3e81a93dd540bc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/worker.py",
+      "bytes": 3480,
+      "sha256": "71bc809aaa44f4d3c5f0c22939bcee09fcfb713e29cb20a0d825e4955e2a9310"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/worker_test.py",
+      "bytes": 5559,
+      "sha256": "3d75d4d24f7f361246b17ed558b23729f1478fd9a9451c71d0d31430290992e2"
+    }
+  ],
+  "runs": [
+    {
+      "label": "persistence",
+      "actual_terminal": {
+        "chunk": "30ef78",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "tests": 7,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-persistence-controls-20261016b/SHARED-START.json",
+          "bytes": 1117,
+          "sha256": "4c23b8a9499f3ebb9366446c02abec6ba18d0541933ce66a0aa4689433361297"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-persistence-controls-20261016b/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "73f3e7bcee6f149c685483805542f1472ad1ea04dcb043ba57de4856fc732f14"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-persistence-controls-20261016b/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-persistence-controls-20261016b/SHARED-STDERR.txt",
+          "bytes": 105,
+          "sha256": "86c967a00f06ad033ecab8fdfd48f0dfe4f7c54ecd2a5af426df39e10af79aa8"
+        }
+      ]
+    },
+    {
+      "label": "worker",
+      "actual_terminal": {
+        "chunk": "1fe238",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "tests": 8,
+      "references": [
+        {
+          "path": "/private/tmp/unison-concurrent-worker-persist-controls-20261016a/SHARED-START.json",
+          "bytes": 1107,
+          "sha256": "a70f83ed07e837bbd41755e1c1697af063cfbbaddbab9c5b04f2dc41701ca9b4"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-worker-persist-controls-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d9742cce3c107326c93136c810a8c98ed17613f94bbcc4aff87ab378789263e6"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-worker-persist-controls-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-concurrent-worker-persist-controls-20261016a/SHARED-STDERR.txt",
+          "bytes": 106,
+          "sha256": "74202dc09a3347400de94f86db7081b0c92ff6270bca74570c143aa53888e576"
+        }
+      ]
+    }
+  ],
+  "scope": "7private JSON publication/uncertain-close controls and8mock-worker controls; fake FD numbers in close faults, tiny generated real files only; no transport/helper/SDK/Photo/camera/EXglobal; no power-loss durability or whole-process memory bound",
+  "full_goal_complete": false
+}
