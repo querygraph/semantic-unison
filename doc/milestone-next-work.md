@@ -207,3 +207,10 @@ This supersedes pending statements above; immutable request/plan and admission
 7b320b51 remain consumed once. Next M4-V work is reproducible multi-file
 throughput and mixed native-helper accounting, alongside broader corpus and
 required failure/platform coverage; no automatic native successor is admitted.
+
+The shared SDE conformance runner now retains child/log ownership on timed-wait
+failure instead of unwinding an unreaped handle. Two focused inert-child groups
+cover returned exit statuses, timeout, interruption and wait error; no second
+wait, signal or release proof is invented. Actual644a31/0/controlgroup+Unison8
+closed. Production/wire code and completed SDK159-source snapshot unchanged;
+actual compiler-timeout recovery remains separate from these injected controls.

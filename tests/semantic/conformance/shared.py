@@ -12,6 +12,26 @@ import sys
 import tempfile
 
 ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(ROOT / 'tests'))
+from shared_process_owner import retain_after_record
+
+
+def wait_owned_child(child, *, timeout, record):
+    """An observation failure never discards the unreaped direct-child handle.
+
+    Compiler descendants stay in the existing containing shared process group.
+    This does not create a separate session or claim settlement on timeout.
+    """
+    try:
+        return child.wait(timeout=timeout)
+    except BaseException as error:
+        # Called inside the log context: retain both child and open log owner
+        # before unwinding. retain_after_record retains even if recording fails.
+        retain_after_record(lambda: record(dict(
+            state='CONFORMANCE_CHILD_OWNERSHIP_RETAINED',child_pid=child.pid,
+            error=repr(error),direct_child_wait_proved=False,
+            group_closure_proved=False,resource_release_authorized=False)))
+        raise RuntimeError('ownership retention unexpectedly returned')
 
 def main():
     if len(sys.argv) != 1:
@@ -43,7 +63,9 @@ def main():
         log = work/(label+'-'+variant+'.log')
         with log.open('xb') as stream:
             child = subprocess.Popen(command, stdout=stream, stderr=subprocess.STDOUT)
-            code = child.wait(timeout=50)
+            code = wait_owned_child(child, timeout=50, record=lambda value:
+                (work/'OWNERSHIP-RETAINED.json').write_text(json.dumps(dict(value,
+                    command=command,log=str(log)),indent=2)+'\n'))
         rows.append({'compiler': label, 'variant':variant, 'pid': child.pid, 'actual_wait_exit': code,
                      'command': command, 'log': str(log),
                      'log_sha256': hashlib.sha256(log.read_bytes()).hexdigest(),

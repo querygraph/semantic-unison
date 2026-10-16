@@ -134,3 +134,12 @@ fail at that marker. The shared target now runs eight serial variants total
 records2224current assertions/compiler and actual group/token closure. This is
 local compiled-module consistency, not sandboxing arbitrary plugins or new
 format/camera support.
+
+The standing shared conformance wrapper retains its direct child and open log
+when a timed wait raises, before the log context or child handle can unwind.
+Its diagnostic explicitly denies direct-wait/group/resource-release proof;
+the containing shared owner remains responsible for group settlement. No new
+session or separate unowned compiler group is created. Successful/nonzero wait
+statuses remain unchanged. [Focused inert-child controls](../../qualification/conformance-wait-owner-controls-actual-20261016.json)
+cover timeout, interruption and wait errors without numeric retry or signals.
+They do not establish actual compiler-timeout recovery or rerun conformance.
