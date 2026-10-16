@@ -153,3 +153,12 @@ or authorizes resource release.
 [Four source groups](../qualification/sdk-shared-binding-source-actual-20261016.json)
 use actual pinned manifest metadata and injected descriptor observations. Real
 inherited canonical ownership/dispatcher binding remains to be qualified.
+
+[Actual disposable inheritance](../qualification/sdk-shared-inheritance-actual-20261016.json)
+now exercises two real Python children through the retained child adapter:
+all9 inherited lock descriptions reach the guard and fresh distinct contenders
+see all locks busy; omitting one refuses before further work. Parent copies
+remain held until actual child reap/group absence, then close and fresh lock
+acquisition succeeds. Canonical inventory and child START metadata are explicit
+test doubles. This proves descriptor lifetime/refusal mechanics, not actual
+canonical IO admission, the new exact parent dispatcher or SDK authorization.

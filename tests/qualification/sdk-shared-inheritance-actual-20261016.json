@@ -1,0 +1,56 @@
+{
+  "schema": "unison-sdk-shared-inheritance/1",
+  "state": "COMPONENT_PASSED_CLOSED",
+  "actual_terminal": {
+    "chunk": "7c6e74",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_inheritance.py",
+      "bytes": 4594,
+      "sha256": "233367ec17c3b889c737e16709999c7daec84a337deaa20e62dc20dda037939a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py",
+      "bytes": 3110,
+      "sha256": "22df61c51420934c7e79e226d87cf420020df3f8f328943954c2b126aeb6cc0b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_child.py",
+      "bytes": 4010,
+      "sha256": "ec72c4a7772599d91ee2d7bf1cccabf1f01e593d72458c8f308f9a9b09a31c59"
+    }
+  ],
+  "references": [
+    {
+      "path": "/private/tmp/unison-sdk-shared-inheritance-20261016b/SHARED-START.json",
+      "bytes": 1197,
+      "sha256": "fcf0b841ab216e5e0e057dfda236a799b700e53c5502318f25dff2d4ce8ab2e2"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-inheritance-20261016b/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "953ee59cf1cad9074ac0878300b1320aa8de37a700bcbe550a51425b2dd8c885"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-inheritance-20261016b/SHARED-STDOUT.txt",
+      "bytes": 154,
+      "sha256": "3088b3a0a97f5a5f8be8bd74afe7c3a2ae4b24f89d038d63afba6c004ddbf959"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-inheritance-20261016b/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sdk-shared-inheritance-20261016b/controls/RESULT.json",
+      "bytes": 2329,
+      "sha256": "edd782fea41418d561d1726032d99c9297c7ba40626b01dde498878b3111efd9"
+    }
+  ],
+  "scope": "2actualPythonchildren/disposable9FDflock inherited/realfstat +canonicalinventory and childSTARTrecord doubles; no canonical IO/admission/SDK/Photo/payload",
+  "limits": "All9 inherited disposablelocks remainbusy withparentcopiesheld;8FD childrefuses. Parentcopiesclose onlyafteractualchildreap/groupclosure; freshreacquisitionpasses. No canonical IO acquired/SDK/Photo/camera payload; outercanonicalUnison8 actualclosed. Not exactnewnativeparent/admission/inventoryauthority qualification.",
+  "full_goal_complete": false
+}
