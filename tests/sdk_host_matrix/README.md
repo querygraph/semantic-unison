@@ -142,3 +142,14 @@ Inert fixture paths are never opened; fake structured raw-digest fields are not
 SDK verification. The component has no SDK mode or native admission route.
 Canonical IO/inherited grant9FD binding, input/tool pins, actual aggregate owner
 and independently reviewed native dispatch remain outstanding before real SDK use.
+
+`shared_binding.verify` now checks the actual parent/worker/expected command and
+ordered nine inherited descriptions against pinned standing8 policy, CPU00..07
+and the sole EXglobal barrier manifest. It rejects caller-selected token ranges,
+missing/duplicate/reordered/noncanonical descriptors, stdio collisions and fresh
+fstat type/owner/mode/link/size/identity mismatches. It returns inherited numbers
+for a future owned child, never independently claims that flock locks are held
+or authorizes resource release.
+[Four source groups](../qualification/sdk-shared-binding-source-actual-20261016.json)
+use actual pinned manifest metadata and injected descriptor observations. Real
+inherited canonical ownership/dispatcher binding remains to be qualified.
