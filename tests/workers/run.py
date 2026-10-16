@@ -15,6 +15,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
 parser.add_argument("--build",type=Path,help="Use actual compiled production objects from this snapshot src directory")
 parser.add_argument("--identify-only",action="store_true")
+parser.add_argument("--shared-parity-only",action="store_true")
 parser.add_argument("--read-stats-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
 parser.add_argument("--apply-stress-only",action="store_true")
@@ -124,6 +125,7 @@ with workspace as tmp:
         out.truncate(1073741824)
     command=[str(build / "worker-test")]
     if args.identify_only: command.append("--identify-only")
+    if args.shared_parity_only: command.append("--shared-parity-only")
     if args.read_stats_only: command.append("--read-stats-only")
     if args.stress_only: command.append("--stress-only")
     if args.apply_stress_only: command.append("--apply-stress-only")
@@ -133,7 +135,7 @@ with workspace as tmp:
     print(result.stderr,end="")
     receipt=dict(schema="unison-worker-scheduling/1",utc=datetime.datetime.now(datetime.timezone.utc).isoformat(),
                  compiler=args.ocamlopt,compiler_version=subprocess.check_output([args.ocamlopt,"-version"],text=True).strip(),
-                 workspace=str(build),retained=args.keep_work,actual_production_build=str(args.build) if args.build else None,linked_object_pins=linked_pins,stress_only=args.stress_only,apply_stress_only=args.apply_stress_only,read_stats_only=args.read_stats_only,exit=result.returncode,
+                 workspace=str(build),retained=args.keep_work,actual_production_build=str(args.build) if args.build else None,linked_object_pins=linked_pins,shared_parity_only=args.shared_parity_only,stress_only=args.stress_only,apply_stress_only=args.apply_stress_only,read_stats_only=args.read_stats_only,exit=result.returncode,
                  source_pins={s:hashlib.sha256((root/s).read_bytes()).hexdigest() for s in sources+["tests/workers/run.py"]},
                  binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),

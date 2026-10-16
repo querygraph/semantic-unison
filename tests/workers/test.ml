@@ -362,7 +362,55 @@ let read_stats_tests () =
       | None -> failwith "sibling cancelled") (Lwt_unix.run(await jobs));
     W.set_read_observer pool None;
     ignore(Lwt_unix.run(hash pool (H.cancellation ()) "sample"));finish pool b)
+let shared_worker_parity () =
+  let path="shared-parity.bin" in
+  let data="SYN1" ^ String.init 60 (fun i -> Char.chr ((i*37+11) land 255)) in
+  let output=open_out_bin path in output_string output data;close_out output;
+  let source=fd path in
+  let expected=SemanticFile.with_fd source (SemanticDelta.inspect (module Synthetic)) in
+  Unix.close source;
+  let extension=FormatExtension.trusted (module Synthetic) in
+  List.iter (fun workers ->
+    let descriptors=Array.length(Sys.readdir "/dev/fd") in
+    let cpu=min workers 6 in
+    let b=budget cpu in
+    let pool=W.create ~workers ~max_pending:32 ~budget:b in
+    let release=Lwt.wait () in
+    let held=H.with_cpu_permits b ~weight:cpu (H.cancellation ()) (fun () -> release) in
+    let jobs=List.init 16 (fun index ->
+      let c=H.cancellation () in
+      let result=if index mod 2=0 then
+        hash pool c path >>= fun value ->
+        return (Option.map (fun actual ->
+          check(actual.W.digest=SemanticHash.string data) "configured-worker hash parity") value)
+      else
+        let input=fd path in
+        try_bind (fun () -> W.inspect pool c ~extension input)
+          (fun value -> Unix.close input;
+            return (Option.map (fun actual ->
+              check(match expected,actual.W.proof with
+                | Ok a,Ok b -> SemanticDelta.describe a=SemanticDelta.describe b
+                | _ -> false) "configured-worker proof parity") value))
+          (fun error -> Unix.close input;fail error) in
+      c,result,index mod 4=0) in
+    check(H.usage b=(cpu,0) && (W.usage pool).running=0)
+      "configured-worker queued jobs bypassed admission";
+    List.iter (fun (c,_,cancel) -> if cancel then H.cancel c) (List.rev jobs);
+    List.iter (fun (_,job,cancel) -> if cancel then
+      check(Lwt_unix.run job=None) "configured-worker queued cancellation") jobs;
+    Lwt.wakeup release ();
+    Lwt_unix.run(held >>= fun _ -> return());
+    let results=Lwt_unix.run(await(List.map(fun (_,job,_) -> job) jobs)) in
+    List.iter2 (fun (_,_,cancel) result ->
+      check((result=None)=cancel) "configured-worker cancellation parity") jobs results;
+    check((W.usage pool).peak_running<=cpu) "configured-worker CPU bound";
+    finish pool b;
+    check(Array.length(Sys.readdir "/dev/fd")=descriptors)
+      "configured-worker descriptor leak";
+    Printf.printf "PASS shared parity workers=%d admitted_cpu=%d jobs=16 cancelled=4 completed=12\n%!"
+      workers cpu) [1;2;4;8]
 let () =
+  if Array.exists ((=) "--shared-parity-only") Sys.argv then (shared_worker_parity ();exit 0);
   if Array.exists ((=) "--read-stats-only") Sys.argv then (read_stats_tests ();exit 0);
   if Array.exists ((=) "--apply-stress-only") Sys.argv then (apply_scheduling_stress ();exit 0);
   if Array.exists ((=) "--stress-only") Sys.argv then (scheduling_stress ();exit 0);

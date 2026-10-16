@@ -1,0 +1,137 @@
+{
+  "schema": "unison-shared-worker-parity/1",
+  "scope": "current compiler-matched production objects; configured pools1/2/4/8 with CPU permits1/2/4/6",
+  "jobs_per_compiler": 64,
+  "completed_per_compiler": 48,
+  "queued_cancelled_per_compiler": 16,
+  "engines": {
+    "stock": {
+      "actual_parent_terminal": {
+        "session": 7963,
+        "chunk": "375683",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-stock-shared-worker-parity-07bdji6g/RESULT.json",
+          "bytes": 15602,
+          "sha256": "4e671eee94fb532d6df0c47a4e5e4df5188bfdf4c1fa5fd146620f451f0638c7"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-stock-shared-worker-parity-07bdji6g/SHARED-START.json",
+          "bytes": 1505,
+          "sha256": "7a93c0cb61a11e41b32711a122174c2b1e5d968dfdf4c483785ae479e8003e52"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-stock-shared-worker-parity-07bdji6g/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "491963d11f1fa8c9489811f9510bb22f46e697b89e5bf0fccc295e9682ce627d"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-stock-shared-worker-parity-07bdji6g/SHARED-STDOUT.txt",
+          "bytes": 308,
+          "sha256": "1f425076660674fa862530da56f8d8e62cc2177c3be97cd53562d90b91d53399"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-stock-shared-worker-parity-07bdji6g/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 77088,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 77088,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "summary": [
+        "PASS shared parity workers=1 admitted_cpu=1 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=2 admitted_cpu=2 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=4 admitted_cpu=4 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=8 admitted_cpu=6 jobs=16 cancelled=4 completed=12"
+      ]
+    },
+    "ox": {
+      "actual_parent_terminal": {
+        "session": 60098,
+        "chunk": "178cc6",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "artifacts": [
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-ox-shared-worker-parity-m5vilu6r/RESULT.json",
+          "bytes": 15606,
+          "sha256": "3e42a88d8eadc5febfb1af95ee99bbaf8f1d6c919a1c19839c72d1f9af5741a2"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-ox-shared-worker-parity-m5vilu6r/SHARED-START.json",
+          "bytes": 1502,
+          "sha256": "322645da2c6dd41591340b25734b99f10a31ed11d23df28dd333907426471875"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-ox-shared-worker-parity-m5vilu6r/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "0d76028ee6865ef362e60fe461fdc34c246f818d7582395a841ab9b9cd8ff08b"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-ox-shared-worker-parity-m5vilu6r/SHARED-STDOUT.txt",
+          "bytes": 308,
+          "sha256": "1f425076660674fa862530da56f8d8e62cc2177c3be97cd53562d90b91d53399"
+        },
+        {
+          "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-ox-shared-worker-parity-m5vilu6r/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ],
+      "closure": {
+        "child": {
+          "pid": 77178,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 77178,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "summary": [
+        "PASS shared parity workers=1 admitted_cpu=1 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=2 admitted_cpu=2 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=4 admitted_cpu=4 jobs=16 cancelled=4 completed=12",
+        "PASS shared parity workers=8 admitted_cpu=6 jobs=16 cancelled=4 completed=12"
+      ]
+    }
+  },
+  "limits": [
+    "64-byte original synthetic fixture per configuration; no camera/Adobe/Photo/EX IO",
+    "No eight-simultaneous-job or throughput claim; pool8 capped6+owner2",
+    "FD parity after pool shutdown is not a hard FD/RSS/process-tree limit",
+    "Sequential proof/hash comparison checks scheduling parity, not an independent algorithm oracle"
+  ]
+}

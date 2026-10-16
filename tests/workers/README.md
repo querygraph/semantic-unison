@@ -28,3 +28,21 @@ The [current qualification](../checked_worker/qualification.json) combines these
 actual-object tests with compiler negative captures. Plain isolated runs above
 remain runtime scheduling controls; their ordinary interfaces do not establish
 compiler portability.
+
+## Standing-eight configured-pool parity
+
+`--shared-parity-only --build SNAPSHOT/src --keep-work` links the actual
+compiler-matched production objects and runs one 64-byte original fixture at
+configured pool sizes1/2/4/8. Sixteen jobs per configuration mix hashing and
+structural proof inspection. Four queued cancellations must settle while all
+CPU permits are deliberately held; the other twelve must match sequential
+results after release. Every shutdown restores the descriptor baseline and
+zero pending/running/CPU reservations.
+
+Admission is1/2/4/6 CPU permits respectively. The eight-worker configuration
+therefore fits six executing jobs plus two owner credits in the standing Unison
+eight-token lane. It does not establish eight simultaneous execution, OS thread
+caps, hard RSS/FD bounds, active native-write cancellation, or throughput.
+[Actual stock/Ox evidence](../qualification/shared-worker-parity-actual-20261016.json)
+retains both production-object pins, actual parent terminals and group/token
+closure. No EXglobal IO, camera payload or Adobe operation is used.

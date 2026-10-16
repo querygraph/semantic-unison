@@ -7,15 +7,29 @@
 Real-camera receiving is now prepared for exact source review as a separate
 bounded fallback test: [camera requestV4](doc/camera-receiving-request-v4.json),
 [planV4](doc/camera-receiving-plan-v4.json). Both are UNADMITTED/UNSTARTED at this
-checkpoint.51 execution sources, current stock/Ox Make artifacts, fixed retained
+checkpoint.53 execution sources, current stock/Ox Make artifacts, fixed retained
 Unison-owned clone identity, two native-clone-only disposable senders and six
 serial CLI calls are pinned. Only metadata of the retained input was checked;
 no fresh source payload read/hash occurred. The source kernel, strict transport,
 result audit, exact-admission/inherited-FD parent protocol, actual disposable
-lifecycle and33 tiny/mock/refusal controls have scoped evidence. V1 was
+lifecycle and39 tiny/mock/refusal controls have scoped evidence. V1 was
 superseded unstarted after fixing borrowed-open failure recording; old bytes
 remain preserved. This is not semantic/private-reference/camera-corpus/SDK
 qualification, and neither a free resource pool nor this plan authorizes IO.
+
+The close-uncertainty successor preserves each uncertain descriptor's pre-close
+identity and original failure through nested cleanup and the retaining entrypoint.
+[39 disposable controls](tests/qualification/camera-entry-retention-actual-20261016.json)
+include mocked retention selection and failed-prefix audit rejection. V1–V3
+remain preserved/unstarted and superseded; only a fresh V4 admission can authorize
+its exact payload control.
+
+Current [stock/Ox configured-worker parity](tests/qualification/shared-worker-parity-actual-20261016.json)
+adds64 original tiny jobs/compiler at pool sizes1/2/4/8,48 exact completions and
+16 queued cancellations. Actual compiler-matched production objects are linked;
+all groups/tokens closed and per-pool descriptor baselines restored. Pool8 uses
+six CPU permits plus owner2 within standing8, not eight simultaneous execution,
+a hard resource cap, independent algorithm proof or throughput result.
 
 The full goal stays ACTIVE while that one IO decision is pending. Independent
 source/build/audit work can continue on Unison00..07. Do not mark the whole goal
