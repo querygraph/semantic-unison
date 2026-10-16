@@ -1,0 +1,74 @@
+{
+  "schema": "unison-private-dng-copy-plan/1",
+  "state": "PREPARED_NOT_ADMITTED_NOT_EXECUTED",
+  "source": {
+    "path": "/Users/alexy/src/photo/preview-generator/coverage-selection-v2/da-source-31982627/source.DNG",
+    "identity": {
+      "st_ctime_ns": 1792099229840854311,
+      "st_dev": 16777223,
+      "st_ino": 307175756,
+      "st_mode": 33024,
+      "st_mtime_ns": 1792099229810540469,
+      "st_size": 193851848
+    },
+    "historical_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+    "sha_scope": "Historical full-copy receipt; not freshly verified by this preparation."
+  },
+  "destination": {
+    "workspace": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666",
+    "mode": "0700",
+    "clone": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "creation": "Exclusive absent workspace; native clonefile only, no copying fallback, no hardlinks. Refuse preexisting destination. Preserve source; any destination-only mode adjustment after distinct inode verified."
+  },
+  "steps": [
+    "Verify pinned ancestry metadata receipts and inspector build/source/binary pins before payload access.",
+    "After separate physical IO coordination, acquire Unison canonical CPU tokens 00..07; no SDK/Adobe/Classic access.",
+    "Open source O_RDONLY|O_NOFOLLOW, verify held and visible full supplied identity; require regular private read-only file. Clone through qualified native pathname clonefile route with immediately repeated source identity checks. Path-based clone is not an fd binding guarantee; destination historical SHA check is required.",
+    "Require destination distinct inode, exact size, regular file; SHA256 only destination once and compare historical digest. On mismatch stop without inspection; preserve private evidence.",
+    "Run pinned prebuilt stock then Ox inspector sequentially, DNG profile1, each inspecting only disposable clone, without --base. Unsupported layout is a valid observed result; compare report semantics after normalizing path only. No metadata mutation/receiving in this first control.",
+    "Recheck source full supplied identity and destination identities around each phase. Stop on drift; preserve failure and do not retry. Source bytes are not freshly rehashed.",
+    "Record actual parent terminal plus contained child/group settlements and CPU FD closure. Unknown ownership retains owner. Keep clone and logs private pending review; no automatic second run."
+  ],
+  "budgets": {
+    "cpu_grant": 8,
+    "concurrency": "One clone/hash/inspector phase at a time; two inspectors serial, no compiler.",
+    "source_payload_read_by_userspace": 0,
+    "clone_logical_size_bytes": 193851848,
+    "destination_initial_sha_read_bytes": 193851848,
+    "inspection_logical_read_planning_ceiling_bytes": 8589934592,
+    "inspection_ceiling_scope": "Conservative requested budget, not currently instrumented/enforced by inspector. Exact syscall bytes unknown; require IO owner acceptance or a separately qualified read counter before dispatch. No physical disk-byte claim.",
+    "maximum_new_payload_logical_bytes": 193851848,
+    "reserve_free_bytes": 1073741824,
+    "maximum_log_bytes": 16777216,
+    "time_seconds": {
+      "clone_and_destination_hash": 120,
+      "stock_inspection": 180,
+      "ox_inspection": 180,
+      "whole_owned_run": 600
+    },
+    "io_admission": "Separate explicit Photo Root physical-device coordination required; shared IO planner alone is not a live lock protocol. Unknown topology conflicts globally. No per-device lane assumed from st_dev."
+  },
+  "constraints": [
+    "No source writes/chmod/xattr/rename/unlink/hardlinks. No originals/Main/cache/renderer access.",
+    "No source re-copy fallback. Destination is independently disposable; APFS shared-block efficiency not inferred solely from clone success.",
+    "No semantic edit, receiving, SDK validation, pixel equivalence or current catalog reuse claim.",
+    "This plan is not executable admission; no payload access or native test performed during preparation."
+  ],
+  "ancestry_receipts": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/coverage-selection-v2/da-source-31982627/SOURCE-COPY.json",
+      "bytes": 1060,
+      "sha256": "b2e3b13a9222c3d78bb79a096e3ecf124881515d96b317157e7d80981bb3f5d8"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/coverage-current-capture-v1/da-job-v2-0620a2edeb4f4c5492718de6db503366/SOURCE-COPY-ANCESTRY.json",
+      "bytes": 2450,
+      "sha256": "2345ed5043cac6a7b6124438d08736f1c065b23a9ac3f48df9c9e3749f3ee2e7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/render-job-copy-ancestry-v2/jobs/job-12dacb316083401fafd81205df42c5f5.json",
+      "bytes": 5864,
+      "sha256": "652e911061e2b802394fe187171d6a23343bcf1a1088c17164ec67e84b3bf8d4"
+    }
+  ]
+}

@@ -1,0 +1,265 @@
+{
+  "schema": "unison-private-dng-copy-plan/2",
+  "state": "SOURCE_PREPARED_AWAITING_ROOT_IO_ADMISSION",
+  "source": {
+    "path": "/Users/alexy/src/photo/preview-generator/coverage-selection-v2/da-source-31982627/source.DNG",
+    "identity": {
+      "st_ctime_ns": 1792099229840854311,
+      "st_dev": 16777223,
+      "st_ino": 307175756,
+      "st_mode": 33024,
+      "st_mtime_ns": 1792099229810540469,
+      "st_size": 193851848,
+      "st_nlink": 1
+    },
+    "historical_sha256": "1a4f578ee6f23730afec8495c90b37f5272042331f3375d332a9065ce5bb3ee2",
+    "sha_scope": "Historical full-copy receipt; not freshly verified by this preparation.",
+    "nlink_scope": "Require exactly1 at execution; handoff did not supply link count, so this is a refusal condition, not an observed value."
+  },
+  "destination": {
+    "workspace": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666",
+    "mode": "0700",
+    "clone": "/private/tmp/unison-dng-da-copy-57c830f336da4ef099150958b2f3d666/source-clone.DNG",
+    "creation": "Exclusive absent workspace; native clonefile only, no copying fallback, no hardlinks. Refuse preexisting destination. Preserve source; any destination-only mode adjustment after distinct inode verified.",
+    "source_owner_uid": "current uid; never modify source",
+    "clone_mode": "0400 inherited from source; no chmod required"
+  },
+  "steps": [
+    "Verify pinned ancestry metadata receipts and inspector build/source/binary pins before payload access.",
+    "After separate physical IO coordination, acquire Unison canonical CPU tokens 00..07; no SDK/Adobe/Classic access.",
+    "Open source O_RDONLY|O_NOFOLLOW, verify held and visible full supplied identity; require regular private read-only file. Clone through qualified native pathname clonefile route with immediately repeated source identity checks. Path-based clone is not an fd binding guarantee; destination historical SHA check is required.",
+    "Require destination distinct inode, exact size, regular file; SHA256 only destination once and compare historical digest. On mismatch stop without inspection; preserve private evidence.",
+    "Run pinned prebuilt stock then Ox inspector sequentially, DNG profile1, each inspecting only disposable clone, without --base. Unsupported layout is a valid observed result; compare report semantics after normalizing path only. No metadata mutation/receiving in this first control.",
+    "Recheck source full supplied identity and destination identities around each phase. Stop on drift; preserve failure and do not retry. Source bytes are not freshly rehashed.",
+    "Record actual parent terminal plus contained child/group settlements and CPU FD closure. Unknown ownership retains owner. Keep clone and logs private pending review; no automatic second run."
+  ],
+  "budgets": {
+    "cpu_grant": 8,
+    "concurrency": "One clone/hash/inspector phase at a time; two inspectors serial, no compiler.",
+    "source_payload_read_by_userspace": 0,
+    "clone_logical_size_bytes": 193851848,
+    "destination_initial_sha_read_bytes": 193851848,
+    "inspection_logical_read_planning_ceiling_bytes": 8589934592,
+    "inspection_ceiling_scope": "Conservative requested budget, not currently instrumented/enforced by inspector. Exact syscall bytes unknown; require IO owner acceptance or a separately qualified read counter before dispatch. No physical disk-byte claim.",
+    "maximum_new_payload_logical_bytes": 193851848,
+    "reserve_free_bytes": 1073741824,
+    "maximum_log_bytes": 134217728,
+    "time_seconds": {
+      "stock_inspection": 180,
+      "ox_inspection": 180,
+      "whole_owned_run": 600,
+      "clone_and_destination_hash_planning_allowance": 120
+    },
+    "io_admission": "Separate explicit Photo Root physical-device coordination required; shared IO planner alone is not a live lock protocol. Unknown topology conflicts globally. No per-device lane assumed from st_dev.",
+    "total_destination_logical_read_request_bytes": 8783786440,
+    "read_budget_scope": "One exact193851848B destination SHA pass plus requested <=8GiB combined inspector logical reads (total8783786440B). Inspectors are not read-count-instrumented, so 8GiB is NOT an enforced syscall cap or physical IO measurement. Source userspace payload reads0; kernel clone internals unknown. Metadata, executable/source pin hashing and receipts are separate bounded local artifact IO; no camera source hash beyond clone SHA pass.",
+    "clone_and_inspector_metadata": "up to2MiB metadata/XMP logs per phase expected; RLIMIT_FSIZE16MiB per output after clone creation, not aggregate RSS/read cap",
+    "time_scope": "600s owned worker/group after spawn; imports/preflight source/binary/receipt validation before supervision explicitly outside600s. Subprocess inspectors180s each; clone/hash only bounded by outer600s, phase120s is planning allowance, NOT enforced.",
+    "log_budget_scope": "Requested128MiB total artifacts excluding clone; worker outputs individually capped16MiB via RLIMIT_FSIZE after clone. Total directory bytes not hard-enforced; owner START/closure metadata small and outside worker rlimit."
+  },
+  "constraints": [
+    "No source writes/chmod/xattr/rename/unlink/hardlinks. No originals/Main/cache/renderer access.",
+    "No source re-copy fallback. Destination is independently disposable; APFS shared-block efficiency not inferred solely from clone success.",
+    "No semantic edit, receiving, SDK validation, pixel equivalence or current catalog reuse claim.",
+    "This plan is not executable admission; no payload access or native test performed during preparation."
+  ],
+  "ancestry_receipts": [
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/coverage-selection-v2/da-source-31982627/SOURCE-COPY.json",
+      "bytes": 1060,
+      "sha256": "b2e3b13a9222c3d78bb79a096e3ecf124881515d96b317157e7d80981bb3f5d8"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/coverage-current-capture-v1/da-job-v2-0620a2edeb4f4c5492718de6db503366/SOURCE-COPY-ANCESTRY.json",
+      "bytes": 2450,
+      "sha256": "2345ed5043cac6a7b6124438d08736f1c065b23a9ac3f48df9c9e3749f3ee2e7"
+    },
+    {
+      "path": "/Users/alexy/src/photo/preview-generator/render-job-copy-ancestry-v2/jobs/job-12dacb316083401fafd81205df42c5f5.json",
+      "bytes": 5864,
+      "sha256": "652e911061e2b802394fe187171d6a23343bcf1a1088c17164ec67e84b3bf8d4"
+    }
+  ],
+  "inspectors": [
+    {
+      "label": "stock",
+      "receipt": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/RESULT.json"
+    },
+    {
+      "label": "ox",
+      "receipt": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/RESULT.json"
+    }
+  ],
+  "execution_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngExtended.ml",
+      "bytes": 277,
+      "sha256": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngExtended.mli",
+      "bytes": 138,
+      "sha256": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngSemantic.ml",
+      "bytes": 15057,
+      "sha256": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dngSemantic.mli",
+      "bytes": 702,
+      "sha256": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/formatExtension.ml",
+      "bytes": 5780,
+      "sha256": "7519d7b26b9e7bbf5be239e4c1d0dbede57a05f6c686e3898127de4b0f7dd9b8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/formatExtension.mli",
+      "bytes": 3627,
+      "sha256": "da559cf7b759a90574fdbcf0a0df57a22dbf8662924a4527a4274d215d0488bc"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticDelta.ml",
+      "bytes": 20948,
+      "sha256": "08c3ec7b9e8d55479f12d53594488e02981e2e9f12a2f9dce0b085a4fc77b005"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticDelta.mli",
+      "bytes": 5556,
+      "sha256": "671b7693123e2f7ff1a11dc5a51f4b7cd2c1fad14bf023408114b5bda8b2f305"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile.ml",
+      "bytes": 6095,
+      "sha256": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile.mli",
+      "bytes": 2672,
+      "sha256": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticFile_stubs.c",
+      "bytes": 4065,
+      "sha256": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash.ml",
+      "bytes": 6447,
+      "sha256": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash.mli",
+      "bytes": 395,
+      "sha256": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash_stubs.c",
+      "bytes": 2416,
+      "sha256": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/xmpMerge.ml",
+      "bytes": 1570,
+      "sha256": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/xmpMerge.mli",
+      "bytes": 792,
+      "sha256": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/xmpObservation.ml",
+      "bytes": 25841,
+      "sha256": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/xmpObservation.mli",
+      "bytes": 4281,
+      "sha256": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_copy.py",
+      "bytes": 10196,
+      "sha256": "210a6e6f29e9488a66b42bcf482185b368f26f9c32818c4d69ad98f73572a506"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_copy_test.py",
+      "bytes": 2820,
+      "sha256": "d512208df0296ad9c10e5806f56fa8930e6d5adcd7eb201fbdb6d846af6b6a15"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 10664,
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/semantic-inspect/inspect.ml",
+      "bytes": 5000,
+      "sha256": "a35eff9bda0dfff118358151962085684dfb24e6b4e8e1995e40e7f61ec455d5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/semantic-inspect/run.py",
+      "bytes": 8427,
+      "sha256": "5c88c4dedf0d44cf49039ae848875b916338e67b002aa18d6c8f6e915339c034"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-7vhcy9y6/semantic-inspect",
+      "bytes": 2382744,
+      "sha256": "f296cc824d1a1ec0d3edaa87175369aa0a8d9c8df6601eef1452b63b99d973c5"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-semantic-inspect-retained-coy927g6/semantic-inspect",
+      "bytes": 1669712,
+      "sha256": "901c8e8030264e1b73f001e325ac8a0452a5d91bc35d75a86d7994001516fce2"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-ox-cynp4svg/RESULT.json",
+      "bytes": 3238,
+      "sha256": "812a0d29221d6845c19b0672cc770b3ed6313b9d6d91d521ec2507c6a3fc69a3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-inspect-stock-ghsm68lc/RESULT.json",
+      "bytes": 3236,
+      "sha256": "fa3c0c9230861afbe21cf5bfbbb4a5780bfa85ed3e42332323d8c36b46b691bf"
+    }
+  ],
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/private_dng_copy.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/dng-private-copy-plan-v2.json",
+    "--io-admission",
+    "/private/tmp/unison-dng-da-copy-IO-ADMISSION-v2.json"
+  ],
+  "admission_contract": {
+    "required_state": "ROOT_ADMITTED_ONE_PRIVATE_DNG_IO_CONTROL",
+    "fields": [
+      "plan_sha256",
+      "command",
+      "start_deadline_unix",
+      "accepts_uninstrumented_inspector_logical_read_budget"
+    ],
+    "trust": "Root publishes private owned regular metadata file via queue; exact bytes/SHA independently rechecked before dispatch. CPU grant is not disk IO permission."
+  },
+  "limitations": [
+    "Source atime is not part of FIVE and no atime preservation guarantee is claimed. No source user-space payload read is performed.",
+    "No sandbox/OS thread/RSS hard cap; bounded group deadlines and cooperative CPU tokens only.",
+    "No success inferred until actual RESULT, aggregate closure and parent terminal inspected. A known failure may leave retained private clone/evidence; no retry or automatic cleanup.",
+    "Path-based clone race is fenced by before/after held+visible identity and destination historical SHA; it is not fd-based source provenance.",
+    "Preflight binary hashes may be read several times; no compile/tool lookup."
+  ]
+}

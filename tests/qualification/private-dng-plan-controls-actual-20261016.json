@@ -1,0 +1,66 @@
+{
+  "state": "FIVE_METADATA_ONLY_REFUSAL_TESTS_PASSED_CLOSED",
+  "parent_terminal": {
+    "chunk": "2ec280",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-plan-controls-7uyh3_02",
+  "scope": "No DNG open/hash/clone/inspector/SDK/Adobe. Fixture metadata and inert1B file only. These controls do not qualify clonefile/native runtime or complete lifecycle/fault crossproduct. Shared wrapper target read-parser owns original Python-only test command; no parser/native binary invoked.",
+  "closure": {
+    "child": {
+      "pid": 74305,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 74305,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_copy.py",
+      "bytes": 10196,
+      "sha256": "210a6e6f29e9488a66b42bcf482185b368f26f9c32818c4d69ad98f73572a506"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_copy_test.py",
+      "bytes": 2820,
+      "sha256": "d512208df0296ad9c10e5806f56fa8930e6d5adcd7eb201fbdb6d846af6b6a15"
+    },
+    {
+      "path": "/Users/alexy/src/unison/doc/dng-private-copy-plan-v2.json",
+      "bytes": 13652,
+      "sha256": "c29d92ec5e0f17852b5dd3af137341a8f7867ae02fe8d2e4087b0de12adb1c73"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-plan-controls-7uyh3_02/SHARED-START.json",
+      "bytes": 947,
+      "sha256": "a3299f3a68a9c69522712502285597cb6a4d270dd40325cbe38f9d370f030988"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-plan-controls-7uyh3_02/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "589c708d31e0c6ea171a899216e02a46d90bebfa8389e89b88eebd205aa86278"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-plan-controls-7uyh3_02/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-plan-controls-7uyh3_02/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "baf49b59538192f3e136ca0404cac516ecb8dd2fe5ba1416604056f3080fa49c"
+    }
+  ]
+}

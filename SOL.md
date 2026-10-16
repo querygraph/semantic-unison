@@ -4,6 +4,26 @@
 
 ## Current checkpoint — 2026-10-15
 
+The private DA control now has an exact [v2 command/source plan](doc/dng-private-copy-plan-v2.json)
+and `tests/private_dng_copy.py` owner/worker, still NOT payload-admitted. Requires
+fresh Root disk-IO receipt bound to plan/command/deadline and explicit acceptance
+of uninstrumented inspector budget. Clone-only/no fallback, source FIVE+0400+nlink1
+unchanged, distinct private inode+historical SHA, serial prebuilt stock/Ox; no SDK.
+Requested logical payload reads8783786440B (193851848 clonehash +8GiB inspectors),
+600s worker/group; preflight outside ceiling, source userspace reads0, physical
+clone/IO bytes unknown. [Five metadata-only refusals](tests/qualification/private-dng-plan-controls-actual-20261016.json)
+2ec280/0 PASS/CLOSED under00..07, group reaped/tokens closed. No DNG opened,
+clonefile/native path not yet runtime-qualified, no receiving/publication claim.
+
+Photo supplied one private DA DNG candidate as metadata-only handoff. The
+[bounded clone/inspection plan](doc/dng-private-copy-plan-v1.json) pins ancestry,
+source identity and an exact fresh private destination. Preparation verified only
+three metadata receipt pins; no DNG payload opened. Clone-only/no copy fallback,
+destination SHA verification, sequential stock/Ox observations, source preservation
+and explicit IO coordination are required. Inspector read budget is a conservative
+request, not an instrumented syscall cap; executor/IO admission remain pending.
+No receiving, SDK, pixel or production qualification is inferred.
+
 Physical IO coordination now has a concrete [source protocol](doc/shared-physical-io.md)
 and pure planner. Known jobs require sharedglobalbarrier+exclusive complete
 physical-member union; unknown/changed/unqualified topology requires EXCLUSIVE
