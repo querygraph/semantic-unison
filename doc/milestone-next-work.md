@@ -269,3 +269,14 @@ before group/FD release. Known failures and uncertainty retain their distinct
 paths. All prior test owners/CPU8 closed; no test replay was needed merely for
 resume. Next freeze the exact comparison request and coordinate its finite SDK
 window; no runtime admission or successor is implied.
+
+The [exact receiving comparison V1 request](sdk-receiving-comparison-request-v1.json)
+and [plan](sdk-receiving-comparison-plan-v1.json) are frozen/prepared, not admitted
+or dispatched. Metadata guard passed172 execution sources/11 prerequisites;
+both428-entry build inventories retain294 current production entries and only
+the disclosed nonproduction tests/workers/test.ml difference. Input metadata
+unchanged, no payload opened; binaries/SDK to be rehashed under admitted IO.
+Proposed24 CLI/48SDK calls, Unison8+EXglobal, fixed one warmup/five measured
+repetitions/configuration; shared-machine disclosures remain mandatory.
+Fresh Root source review and separate finite scheduling are pending. Prior
+multi-file V1 admission7b320b51 remains consumed/accepted, never reusable.
