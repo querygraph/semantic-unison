@@ -182,3 +182,14 @@ release; see `tests/qualification/private-maker-slice-source-actual-20261017.jso
 (actual owning terminal2a33db/0). No retained payload was opened. This callable
 is not a dispatcher or admission: the frozen executor and fresh IO coordination
 remain to be implemented before any retained-input inspection.
+
+`tests/private_maker_plan.py` now specifies the exact proposed one-source
+contract: retained clone identity, payload offset10990/length6556/original
+base1404, little-endian candidate directory offset0, requested-read ceiling3078,
+worker10s, Unison8 and EXglobal. It rejects alternate source paths, changed
+epoch/geometry, scope expansion and boolean numeric aliases. Four plan controls
+and the five slice controls passed together (actual59b0b6/0; child12267 reaped0,
+group absent, CPU8 closed). The specified executor path is a future implementation
+contract, not an existing command, admission or payload-access grant. Dispatcher
+binding, independent result audit and actual retained-input coordination remain
+open before execution.

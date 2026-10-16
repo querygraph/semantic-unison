@@ -50,9 +50,16 @@ each payload-relative pread, <=3078 requested bytes, sanitized shape output,
 and qualified uncertain-close carrier. Five generated-fixture controls passed
 (child11747 reaped0/group absent, CPU8 closed; actual2a33db/0/no session).
 Receipt: tests/qualification/private-maker-slice-source-actual-20261017.json.
-No retained source was opened. Next concrete action: freeze an admitted owned
-executor around this callable reader, exact saved geometry and source pins for
-fresh IO review, then investigate a vendor-specific reference contract from
+No retained source was opened. Pure tests/private_maker_plan.py now binds the
+exact historical clone eight-field identity, payload10990/6556/originalbase1404,
+Unison8/EXglobal,10s worker and explicit false semantic/SDK/hash/pointed-read
+flags. Exact nine-word worker argv is specified, but its named executor file is
+NOT implemented or runnable yet; no admission/request was published. Four plan
+controls plus five slice controls passed (child12267 reaped0/group absent/CPU8
+closed; owning59b0b6/0). Receipt private-maker-plan-source-actual-20261017.json.
+Next concrete action: implement the admitted owned executor and dispatcher
+binding, independently audit result/read ranges and close uncertainty, then
+freeze current source pins for fresh IO review, then investigate a vendor-specific reference contract from
 actual shape evidence. No camera/private input read/admission exists for this
 new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
 updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
