@@ -56,3 +56,19 @@ it does not prove universal allocation failure, native close failure or crash
 recovery behavior.
 
 [Sealed acquisition evidence](ownership-qualification.json) records both compiler runs and their private negative controls.
+
+## Concurrent final-entry reservation
+
+The storage suite now has29 finite checks, including two original child processes
+released by a shared pipe to capture distinct logical keys when only one quota
+entry remains. Exactly one capture succeeds and one refuses, both children are
+waited by exact PID, the durable ledger charges exactly the original plus one
+new record, exactly one new base loads, and the original base/parent descriptor
+baseline remains intact. OS scheduling is not forced; refusal can result from a
+busy lock, an epoch change, or exhausted quota. This is not a power-loss test or
+a claim about hostile writers, physical storage accounting or thread safety.
+
+[Actual stock/Ox qualification](../qualification/compact-cache-concurrent-quota-actual-20261016.json)
+records both29-case suites and normal group/CPU8 closure, with no SDK, Photo
+payload or canonical IO. It uses current compiler-matched production native
+objects; production source inventory matched each build before linking.

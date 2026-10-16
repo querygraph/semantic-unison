@@ -1,6 +1,6 @@
 # Unison implementation handoff
 
-Last updated: 2026-10-16T20:55:41Z. Comparison admission/workspace last checked
+Last updated: 2026-10-16T20:57:54Z. Comparison admission/workspace last checked
 absent at2026-10-16T20:43:10Z; recheck before any runtime. Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
@@ -52,6 +52,18 @@ actual owner88672/1adabb/0/no session; children85752/85812 reaped0 with other
 group members absent before reap and CPU8 closed. Serial compiles only, no SDK,
 Photo payload or EXIO; arithmetic credits are not hard RSS/FD caps. Production
 sources unchanged; test files are outside the frozen172 comparison closure.
+
+**Compact-base recovery qualification:** current production-object storage
+suite passes29 cases/compiler, adding two actual cooperative forked writers
+competing for one remaining quota entry. Exactly one new readable base and an
+exact two-record charge survive; the original base/FD baseline remain intact.
+`tests/qualification/compact-cache-concurrent-quota-actual-20261016.json` retains
+actual owner5065/365df7/0/no session, children86261/86284 reaped0/groups absent,
+CPU8 closed. Production inventory matched each retained build before linking;
+zero SDK/Photo payload/canonicalEXIO. This does not force execution overlap or
+prove crash durability. Current stock probe/compiler-matched build says5.2.0,
+so the current compiler description below is corrected rather than borrowing
+historical5.5.1 wording. Frozen172-source request unchanged.
 
 **Current resources:** no Unison job or retained CPU/IO ownership remains from
 our completed work. Latest Photo notices released its relevant window; that is
@@ -280,7 +292,7 @@ shared endpoint budgets must be supplied on this shared host.
 
 ## Current build/toolchain evidence
 
-Pinned stock compiler `/Users/alexy/.opam/default/bin/ocamlopt` (5.5.1), SHA256
+Pinned stock compiler `/Users/alexy/.opam/default/bin/ocamlopt` (current retained build and storage probe report5.2.0; earlier5.5.1 evidence is historical), SHA256
 `f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf`.
 Ox `/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt`, SHA256
 `e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166`.
