@@ -173,3 +173,22 @@ an explicit PREPARING_NO_CALL failure. Unknown outcomes or group proofs refuse.
 cover inert faults and the16 original fake-helper composition. The audit never
 proves its aggregate parent exited or that IO/CPU FDs closed. It precedes new
 exact-target dispatcher integration, which remains unimplemented/unadmitted.
+
+## Exact shared native entry: source integrated, unadmitted
+
+`shared_execute.py` and the `shared-sdk-host-matrix` dispatcher target now wire
+fresh exact admission, immutable plan/source/tool manifests, three readonly
+private fixture identities, the pinned interpreter and actual inherited9FD
+binding. Tool/input payload hashes run only inside the owned IO grant; tool pins
+are rechecked per call. Every direct helper inherits resource FDs and receives
+an explicit observation deadline; unknown child/capture/group state retains.
+The parent independently audits every attempted prefix before aggregate reap,
+checks input epochs, and closes CPU then IO only after known settlement. A
+complete result with failed worker exit, or failed result with successful worker
+exit, retains ownership instead of claiming closure.
+
+[Source controls and prior dispatcher regressions](../qualification/sdk-shared-entry-dispatch-source-actual-20261016.json)
+pass17 groups using metadata/artifact/owner doubles. No plan/admission/native
+runtime exists for this target yet. New-target parent fault controls and actual
+entry/dispatcher composition must precede a fresh reviewed native request.
+Historical18-credit matrix and consumed receiving slots are not reusable.

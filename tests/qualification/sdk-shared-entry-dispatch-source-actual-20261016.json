@@ -1,0 +1,112 @@
+{
+  "schema": "unison-sdk-shared-entry-dispatch-source/1",
+  "state": "SOURCE_CONTROLS_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 19956,
+      "sha256": "eb2de22a29e9854fb7ee00a57b15fa741efc3ba142c7efc797aad72905138c7c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute.py",
+      "bytes": 9115,
+      "sha256": "2caa82a24b6490dfa9ac160fc3dff7c51d409674e84ad4d94ec6763c1131cbf3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_execute_test.py",
+      "bytes": 4231,
+      "sha256": "96094c1816a55d42820722176d824797c1a79528bf50b558ab04571233255b6f"
+    }
+  ],
+  "runs": [
+    {
+      "actual_terminal": {
+        "chunk": "c1c4bf",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016c/SHARED-START.json",
+          "bytes": 1113,
+          "sha256": "d6e0800c7a76a3a4f6110856ded6473ce1415c786efea2f8a4504aa9644efcb2"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016c/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "8137462b05e87eeb32249ba8e1731fba3499edeb32d58408bf0c3f283c6d09aa"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016c/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-shared-entry-controls-20261016c/SHARED-STDERR.txt",
+          "bytes": 103,
+          "sha256": "9f169aa04896ef0203477ff61d8d57406ec0dab00b71ec15cf38cdae22509147"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk": "a1827a",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-old-sdk-20261016a/SHARED-START.json",
+          "bytes": 1094,
+          "sha256": "5441439ba4710da1c45fe0bda1ef95be4a5dfe56cbfbf41e0dca82009e302d7f"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-old-sdk-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "20da2f9cba5eb0d0857d66c29fe63e33202a05cb7cdf9ea0edf9485e9488ec3f"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-old-sdk-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-old-sdk-20261016a/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "b45cbb440fe08cb440a1baa3af38f7bc8d0bce62313eef02c0e7ec1856866c63"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk": "a1827a",
+        "exit_code": 0,
+        "running_session": false
+      },
+      "references": [
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-receiving-20261016a/SHARED-START.json",
+          "bytes": 1126,
+          "sha256": "10247695a959bdabe3ce5849cfd637339ff9f6c78d931d6243e8554dd1aa8d29"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-receiving-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "f1cf4093bac94e4e777e145f3076b3ffecc358577500eccf31f962e6fd44b595"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-receiving-20261016a/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-sdk-target-regression-receiving-20261016a/SHARED-STDERR.txt",
+          "bytes": 104,
+          "sha256": "71b40fd0510f1c258c1462079631cfc5a9b69efa837f163dd56d27fc782d99b1"
+        }
+      ]
+    }
+  ],
+  "scope": "5new metadata/command/noCPUonly guards +6existingSDKdispatcher +6syntheticreceivingdispatcher inertfault controls. Native SDK entry/target source wired, no actualnativeparent/newgrant/canonicalEXIO or SDK call. Parenttargetaudit/inherited actualcontrols stillrequired. ActualouterUnison8groupsclosed.",
+  "full_goal_complete": false
+}
