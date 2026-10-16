@@ -171,7 +171,8 @@ That guard checks ordered Unison00..07 plus EXglobal inode observations and
 rejects missing, aliased or changed descriptors. Token indexes now require exact
 integers, so bools cannot alias numeric indexes. It does not acquire locks,
 authenticate the START writer, verify plan/interpreter bytes, or settle children.
-The named execute.py path is the next entrypoint to implement, not runnable yet.
+The named execute.py worker entry is now implemented below; parent dispatch is
+not integrated yet.
 
 [Four boundary and five existing guard groups](../qualification/mixed-validation-boundary-actual-20261016.json)
 passed: injected fstat metadata plus real canonical-manifest metadata reads,
@@ -179,3 +180,22 @@ actual children1380/1383 reaped0/groups absent/Unison8 closed; owning terminal
 c976ae/0/no session. No canonical IO lock, SDK, payload or native launch occurred.
 Actual inherited-description lifecycle and dispatcher admission integration
 remain outstanding; source acceptance is not native runtime qualification.
+
+## Worker entrypoint
+
+`execute.py --worker` loads bounded SHA-bound plan metadata with duplicate-key
+rejection, native metadata fences and qualified one-attempt close handling. It
+waits briefly for actual parent START, binds exact launch/PIDs/nine descriptors,
+checks the qualified interpreter under IO, then connects the journal worker to
+pinned source/tool checks, native-clone-only preparation and post-input fences.
+Each probe inherits all nine guardian descriptions and a private UNISON state
+path. Existing journals are preserved on failure; unknown ownership enters the
+retained-owner handler. It offers no standalone admission/parent dispatch mode.
+
+[Three entry control groups](../qualification/mixed-validation-entry-actual-20261016.json)
+passed with actual metadata files and inert injected worker dependencies;
+child1778 reaped0/group absent/Unison8 closed; owning terminal5723b6/0/no session.
+No compiled probe, SDK, ExifTool, media or EXglobal access occurred. These checks
+do not qualify actual inherited locks, native execution or dispatcher release.
+The next work is exact admission/source-inventory enforcement, parent prefix
+audit and actual disposable inherited-process lifecycle before native review.

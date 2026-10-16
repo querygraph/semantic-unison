@@ -216,9 +216,18 @@ plus five existing guard groups passed, actual children1380/1383 reaped0/groups
 absent/CPU8 closed; terminalc976ae/0/no session. Receipt
 `mixed-validation-boundary-actual-20261016.json`. Canonical manifests read only;
 no IO locks/SDK/payload/native launch. This is metadata binding, not lock proof,
-START authentication or settlement. Intended execute.py is not implemented yet;
-actual inherited lifecycle and dispatcher qualification remain outstanding.
-Next: native entrypoint/admission/actual inherited9FD lifecycle and actual
+START authentication or settlement.
+**Mixed worker entry now implemented:** execute.py reads bounded SHA-bound plan
+metadata with duplicate-key/fence/qualified-close checks, binds actual START and
+inherited9FD metadata before preparation, verifies interpreter, and connects
+journal/source checks/clone-only inputs/post-fences to actual invoke with nine
+inherited guardian descriptions and private UNISON state. Existing journal is
+not replaced on failure; unknown ownership retains. Three inert-entry/original
+metadata control groups passed, child1778 reaped0/group absent/CPU8 closed;
+actual5723b6/0/no session. Receipt `mixed-validation-entry-actual-20261016.json`.
+No probes/SDK/ExifTool/media/EXglobal use; no standalone parent/admission mode.
+Actual inherited lifecycle and dispatcher qualification remain outstanding.
+Next: exact admission/source closure/parent prefix audit/actual inherited9FD lifecycle and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/
