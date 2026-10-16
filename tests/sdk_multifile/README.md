@@ -96,3 +96,19 @@ passed exact journal/proxy/case composition and command/order/group/raw-proxy
 corruptions, explicit zero-call preparation and no-server proof controls.
 All frames and tiny bytes were original test fixtures; no CLI, SDK, retained
 payload or EXglobal ran. The control owner/group and Unison8 tokens closed.
+
+`worker.py` now composes two serial compiler cases using the real one-use
+journal, case/verdict audit and independent parent join. Source preparation
+and raw proxy reading are required caller adapters; there is no CLI/implicit
+admission. Preparation must finish its owned child/FD work or propagate retained
+ownership. Two success rows are independently audited before the worker marks
+complete. Ordinary preparation refusal preserves an explicit no-call failure;
+uncertainty bypasses ordinary failed-result conversion.
+
+[Two worker composition controls](../qualification/sdk-multifile-worker-source-actual-20261016.json)
+passed with original tiny bytes. Preparation/scripts/transport/raw proxy
+reading were explicit doubles, while journal/case/verdict/parent auditors were
+real. Four modeled SDK helper records were audited, not executed. No actual
+CLI, SDK, retained input or EXglobal operation occurred; outer group/tokens
+closed. Actual clone preparation, fake-process transport, exact entry binding
+and native admission remain unqualified.
