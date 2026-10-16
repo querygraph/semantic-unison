@@ -46,4 +46,25 @@ let () =
  and r=packet "1" encoded ""^padding in
  List.iter(fun packet -> check(Result.is_ok(XmpObservation.scalar_view packet))"limit control input is unsupported") [b;l;r];
  check(XmpMerge.merge ~base:b ~left:l ~right:r=Error "merged packet limit")"combined packet limit escaped";
- print_endline "PASS25 scalar merge controls; exact base shell and conservative conflicts"
+ let ratings=["-1";"0";"1";"2";"3";"4";"5"] in
+ let decisions=ref 0 in
+ List.iter(fun b -> List.iter(fun l -> List.iter(fun r ->
+   let base=packet b "Blue" "" and left=packet l "Blue" ""
+   and right=packet r "Blue" "" in
+   let result=XmpMerge.merge ~base ~left ~right in
+   let expected=if l=r then Some l else if b=l then Some r
+     else if b=r then Some l else None in
+   (match expected,result with
+    | Some value,Ok actual -> check(actual=packet value "Blue" "") "rating truth-table output"
+    | None,Error _ -> ()
+    | _ -> failwith "rating truth-table conflict decision");
+   check(result=XmpMerge.merge ~base ~left:right ~right:left)
+     "rating truth-table replica symmetry";
+   incr decisions) ratings) ratings) ratings;
+ check(!decisions=343) "rating decision coverage changed";
+ List.iter(fun kind ->
+   let nested="<xmp:Label><rdf:"^kind^"><rdf:li>Blue</rdf:li></rdf:"^kind^"></xmp:Label>" in
+   no (packet "2" "Blue" "") (packet "1" "Blue" nested)) ["Bag";"Seq";"Alt"];
+ no (packet "2" "Blue" "")
+   (packet "1" "Blue" "<xmp:Label rdf:parseType=\"Resource\"><rdf:value>Blue</rdf:value><xmp:Qualifier>q</xmp:Qualifier></xmp:Label>");
+ print_endline "PASS25 original scalar controls +343 rating decisions/symmetry +4 RDF conflicts"
