@@ -92,10 +92,10 @@ def markdown(d):
     return '\n'.join(out)+'\n'
 
 
-if __name__=='__main__':
+def main(argv=None):
     parser=argparse.ArgumentParser(description=__doc__)
     for name in ('plan','result'):parser.add_argument('--'+name,required=True,type=Path);parser.add_argument('--'+name+'-sha256',required=True)
-    parser.add_argument('--report-dir',required=True,type=Path);args=parser.parse_args()
+    parser.add_argument('--report-dir',required=True,type=Path);args=parser.parse_args(argv)
     plan,plan_pin=read_receipt(args.plan,args.plan_sha256);result,result_pin=read_receipt(args.result,args.result_sha256)
     rows=comparison(plan['binaries'],plan['tool'],plan['workspace'])['rows'];proxies=[];pins=[]
     for row in rows[:len(result['invocations'])]:
@@ -107,3 +107,6 @@ if __name__=='__main__':
     for name,value in [('sdk-receiving-comparison.json',json.dumps(d,indent=2,allow_nan=False)+'\n'),('sdk-receiving-comparison.md',markdown(d))]:
         with (args.report_dir/name).open('x') as f:f.write(value)
     print(json.dumps(dict(complete=d['complete'],attempted_cli_calls=d['attempted_cli_calls'],sdk_helpers_settled=d['sdk_helpers_settled'],new_native_executions=0)))
+
+
+if __name__=='__main__':main()

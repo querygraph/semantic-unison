@@ -100,3 +100,24 @@ settle, inner locks close/reacquire and outer Unison8 closes. Admission,
 inventory, argv and artifact SHA are explicit doubles. Zero SDK/retained payload
 or canonical IO ran. A fresh immutable plan/request and separate runtime grant
 remain required; completed historical SDK admissions are never reusable.
+
+## Offline report reader
+
+`bench/report_sdk_receiving_comparison.py` reads a pinned plan/result and the
+raw proxies in independently reconstructed row directories. It reruns the
+whole-prefix auditor before reporting statistics. Invoke with `--plan PATH
+--plan-sha256 SHA --result PATH --result-sha256 SHA --report-dir NEW_DIR` under
+an appropriate metadata/output IO coordination window. It launches no SDK or
+receiving calls and has no resource-release authority. Receipt reads are stable,
+NOFOLLOW, owned single-link regular files bounded16MiB; close uncertainty keeps
+its qualified carrier. Outputs use exclusive creation, preserving prior reports.
+
+All verified measurements retain exact schedule indexes/order. Incomplete
+results preserve their failed prefix and receive no worker1/worker3 ratio.
+Complete cohorts receive medians/ranges and descriptive ratios, not confidence
+bounds or isolated SDK speedups. Seven synthetic/disposable tests, including the
+complete24-call report path, duplicate-key/symlink/oversize rejection and injected
+close uncertainty, passed in the report-entry qualification receipt. None of
+these fixtures constitutes an actual SDK comparison. Earlier preparation states
+above are historical; the exact runtime request is now frozen in
+`doc/sdk-receiving-comparison-request-v1.json`, still requiring fresh admission.

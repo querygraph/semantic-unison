@@ -7,8 +7,23 @@ updates rows9/12 without closing either row. Shared SDK V1 and observed V2 are
 actual completed native runs, not pending requests; V2 includes12 SDK calls and62
 closed process-probe children. Bounded per-process samples do not prove peaks,
 hard caps, mixed ExifTool/Adobe throughput or multi-file receiving SDK overlap.
-The separate multi-file receiving V1 remains prepared/unadmitted/unstarted at
-this audit. Original fake endpoints exercise its transport but are not SDKs.
+The separate multi-file receiving V1 subsequently ran once and
+[PASSED/CLOSED](../tests/qualification/sdk-multifile-receiving-v1-actual-20261016.json):
+actual23264/2004ad/0, two receiving calls/four qualified SDK helpers, exact four
+received outputs, all attempted groups and IO/CPU closed. Root independently
+[adopted the result](../tests/qualification/sdk-multifile-v1-root-adoption-20261016.json)
+and rehashed174044512B of received output. Raw SDK protocols reported valid
+raw digests/decode success/errors0 with four warnings each, preserved as findings.
+Known-live helper spans are not CPU compute overlap or throughput evidence.
+This advances rows4/9/12 without closing their broader requirements.
+
+The distinct [receiving comparison request](sdk-receiving-comparison-request-v1.json)
+is source-frozen, not admitted or executed:24calls/48helpers maximum, endpoint
+workers1/3, stock/Ox, one warmup/five measurements per configuration. All172
+execution-source pins matched at Unix1792184033; admission/workspace absent.
+The [offline reporter](../bench/report_sdk_receiving_comparison.py) and
+[seven synthetic/disposable controls](../tests/qualification/sdk-receiving-comparison-report-entry-controls-20261016.json)
+qualify report behavior only; synthetic timings are not measured SDK evidence.
 
 The latest [generated property-transfer V3 qualification](../tests/qualification/shared-property-io-actual-20261016.json)
 now adds actual18-row/54-call stock/Ox ordinary/clone/semantic coverage with

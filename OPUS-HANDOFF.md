@@ -26,13 +26,23 @@ independent useful work while review is pending. No existing native grant is reu
 re-audits comparison receipts before statistics. It preserves exact sample order
 and failed prefixes, withholds ratios on incomplete cohorts, and reads stable
 owned JSON receipts up to16MiB with qualified close-uncertainty propagation.
-Five synthetic/disposable controls passed under canonical Unison00..07:
+Initial five synthetic/disposable controls passed under canonical Unison00..07:
 `tests/qualification/sdk-receiving-comparison-report-controls-20261016.json`,
 actual owning-tool terminal `d7cc17/exit0/no session`, child85163 reaped0 and
 other group members absent before reap; all CPU descriptors closed. Zero SDK,
 CLI, retained-input payload, or canonical IO calls. These report-only files are
 outside the frozen172-source execution closure. Actual SDK comparison admission
 remains a separate fresh scheduling requirement; this test grants no execution.
+
+Report successor now exposes callable `main(argv)` and qualifies the complete
+24-call synthetic input-to-JSON/Markdown path, exclusive report creation,
+duplicate-key/symlink/oversize refusals. Seven controls passed; actual owner
+terminal `03792b/exit0/no session`, child85392 reaped0/group others absent,
+CPU8 closed. Receipt `sdk-receiving-comparison-report-entry-controls-20261016.json`
+preserves this successor separately from the first five-test result. The acceptance
+matrix now reflects the already accepted real multi-file SDK run rather than
+its obsolete pending state. Fresh metadata-only rehash atUnix1792184033 found
+all172 comparison execution pins unchanged, admission/workspace absent.
 
 **Current resources:** no Unison job or retained CPU/IO ownership remains from
 our completed work. Latest Photo notices released its relevant window; that is
