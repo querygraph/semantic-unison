@@ -295,7 +295,18 @@ Actual containing4468/4487 and compilerchildren reaped0/groups absent/CPU8closed
 actual27185/30e59c/0/no running session. Receipt mixed-validation-probe-build-actual.
 Both probes UNEXECUTED. No SDK/ExifTool/media/EXglobal. Complete standard-library
 inventory explicitly false; existing qualified compiler installation reused.
-Next: build-receipt enforcement/metadata dependency inventory/request and actual
+**Build receipt enforcement now implemented:** build_receipts.py binds planned
+probe executable to completed build-only receipt/actual compiler argv+exit+group,
+current probe source/qualified production build+selftest/matchingcompiler/exact
+declared object+.o+.cmi inventory. Worker checks before probe dispatch; parent
+checks before acceptance/release. Current binary/source/object rehashes passed
+for BOTH new unexecuted probes plus adversarial mutations;2build+3entry+3parent
+groups, actual4897/4899/4901 reaped0/groups absent/CPU8closed, actual3cb65b/0/no
+session. Receipt mixed-validation-build-enforcement-actual. No SDK/media/EXIO.
+Lifecycle control source now explicitly doubles build receipts, alongside prior
+admission/inventory doubles; prior lifecycle evidence remains source-pinned.
+Complete standard-library inventory still false, no new execution authorization.
+Next: metadata dependency inventory/request and actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
 **Current resources:** zero Unison live jobs/retained grants. Full stock build/

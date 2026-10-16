@@ -36,7 +36,7 @@ class Entry(unittest.TestCase):
             callbacks['persist']({'inert':True})
         with patch.object(entry,'document',return_value={'actual':'start'}),\
              patch.object(entry,'bind',side_effect=guard_failure or (lambda *a,**k:dict(inherited_fds=tuple(range(100,109))))),\
-             patch.object(entry,'verified_hash'),patch.object(entry,'verify_sources'),\
+             patch.object(entry,'verified_hash'),patch.object(entry,'verify_build'),patch.object(entry,'verify_sources'),\
              patch.object(entry,'prepare_input',side_effect=lambda p,i:prepared.append(i) or dict(index=i)),\
              patch.object(entry,'verify_input',side_effect=lambda p,i,r:verified.append((i,r))),\
              patch.object(entry,'invoke',side_effect=lambda command,env,end,**kw:calls.append((command,env,kw)) or {}),\

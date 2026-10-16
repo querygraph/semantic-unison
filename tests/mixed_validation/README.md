@@ -328,3 +328,20 @@ paths/hashes/object companions and prior production build pins are in the
 receipts. These fresh probes remain unexecuted. No SDK, ExifTool, media or
 canonical EXglobal access. Next: native build-receipt enforcement, metadata
 dependency inventory and immutable mixed request for separately coordinated IO.
+
+`build_receipts.py` now enforces that linkage in the worker before probe calls
+and in the parent before release auditing. It binds the planned executable to a
+completed build-only receipt, actual compiler argv/exit/group proof, current
+probe source, successful production build/selftest and matching compiler,
+declared production link objects and all implicit native/interface companions.
+It rehashes those artifacts/current production sources without executing them.
+This is source/build provenance, not independent compiler correctness or a full
+standard-library inventory. Disposable lifecycle controls explicitly double
+build receipts as well as admission/inventory; they cannot confer native provenance.
+
+[Two build, three inert entry and three parent groups](../qualification/mixed-validation-build-enforcement-actual-20261016.json)
+passed: both actual new build outputs/objects rehashed and mutation refusals
+checked, children4897/4899/4901 reaped0/groups absent/Unison8 closed, owning
+terminal3cb65b/0/no session. The fresh compiled probes remain unexecuted. No
+SDK/metadata/image/canonicalIO access. Metadata dependency inventory and exact
+one-use request preparation remain before coordinated native execution.

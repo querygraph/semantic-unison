@@ -21,6 +21,7 @@ from shared_io_pool import unique_object
 from shared_process_owner import retain_after_record
 from shared_child import invoke
 from mixed_validation.inventory import verify as verify_inventory
+from mixed_validation.build_receipts import verify as verify_build
 
 PYTHON='/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14'
 PYTHON_SHA='56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29'
@@ -70,6 +71,7 @@ def worker(args,plan):
     binding=bind(plan,start,argv,interpreter=PYTHON,plan_path=args.plan,
                  plan_sha256=args.plan_sha256,parent_pid=os.getppid(),worker_pid=os.getpid())
     verified_hash(dict(path=PYTHON,sha256=PYTHON_SHA,bytes=os.lstat(PYTHON).st_size))
+    for row in plan['probes']:verify_build(row)
     records={};deadline=time.monotonic()+plan['limits']['observation_seconds']
     def prepare(index,command):records[index]=prepare_input(plan,index)
     def call(index,command,end):
