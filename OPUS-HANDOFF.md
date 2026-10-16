@@ -331,6 +331,16 @@ preparation22a98e/0; no currentUnisonresources. Exactrootrequestcommands/pins in
 request. No SDK/ExifTool/media execution. Needs fresh Root review+IO admission,
 never auto-dispatch from absence/resource release. Stdlib/systemPerl trust limits
 remain false for complete closure.
+**User exiftool-rs candidate reviewed source-only:** doc/exiftool-rs-review.md
+and source-review-inputs-v1.json pin commit54a885f85692674f362e6256ba8609808d746d5d
+(Cargo/license/main/lib downloaded, no execution/build/install). ConcreteCLI
+difference: `--` goes through filename fallback rather than ending option parsing;
+current frozen Perl argv cannot be swapped unchanged. Crate0.10.0 targetsExifTool
+13.59 whereas existingPerl is13.10; retain actual backend/version provenance.
+Optional future supervised CLI evaluation described, not a new gate on current
+mixed request. No SDK/image/source bytes opened. Latest source-only scheduling
+readbackccede4 Unix1792188204: admission/workspace bothabsent; no currentresources.
+All326 frozen execution pins remain unchanged by these doc-only artifacts.
 Next: reconcile Root review/admission against exact request, then actual
 fake lifecycle; then fresh real-tool review/scheduling. Production core unchanged.
 
