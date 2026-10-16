@@ -127,3 +127,14 @@ Both stock/Ox owners and groups close normally. This refreshes requirements5/6
 evidence for candidate and producer binding, mutation/replacement refusal and
 legacy handoff guards; it does not prove hostile-writer atomic rename, power-loss
 durability or complete coverage of every publication family.
+
+The next [synthetic two-file receiving request](concurrent-synthetic-receiving-request-v1.json)
+is frozen for review, not a completed receiving run. Current production helper
+supervision can optionally record bounded candidate-bound known-live spans;
+[stock/Ox component controls](../tests/qualification/validation-live-parallel-companion-actual-20261016.json)
+observe positive overlap between two original synthetic validators. Parent
+source controls separately cover exact helper census, call/server/pump settlement,
+contradictory worker success and uncertainty retention. Neither component spans
+nor mock dispatcher owners prove concurrent SDK execution in a receiving CLI.
+The pending two-file receiving composition is the next integration step toward
+requirements9/12; subsequent real SDK concurrency remains separately unqualified.

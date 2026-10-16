@@ -60,14 +60,17 @@ calls use only original fake Python validators: oversized costs no longer crash
 the server or publish; fitting costs publish exactly. All actual groups/tokens
 closed, no Adobe/camera/EX IO. Prior Dune receipts retain their older source.
 
-[SDK receiving V2](doc/camera-sdk-receiving-request-v2.json) is source-prepared,
-UNADMITTED/UNSTARTED with69 execution pins and fresh stock/Ox binaries. Both
-endpoints now explicitly declare4096MiB semantic gates,2048MiB SDK workspace,
-zero tree manifests and64 descriptor credits. Pure preflight verifies source
-headroom+publication+workspace require2416443392 bytes, within4GiB. These are
-accounting declarations, not hard RSS bounds; native allocation is not inferred.
-32 source/mock controls passed. V1 remains failed/consumed and unreplayed; only
-a new exact Root admission can authorize V2's two seeds/two SDK calls.
+[SDK receiving V2](doc/camera-sdk-receiving-request-v2.json) executed once and
+[PASSED/CLOSED](tests/qualification/camera-sdk-receiving-v2-actual-20261016.json).
+Actual owner66811/65a573/exit0/no session; two receiving seeds and two qualified
+single-thread SDK helpers, one per stock/Ox compiler, reported structure valid,
+decode success and raw digest valid with zero errors/warnings. All direct call,
+server/pump/helper and worker groups settled; IO/CPU closed and69 post-source
+pins plus borrowed metadata matched. Explicit4096MiB semantic gates and2048MiB
+workspaces resolved V1's accounting mismatch; these remain declarations, not
+hard RSS bounds. Admission2eb56afd is consumed once and cannot be replayed.
+This is one copied camera candidate per compiler, not semantic eligibility,
+pixel equivalence, representative corpus or concurrent SDK execution evidence.
 
 The [source/owner qualification](tests/qualification/camera-sdk-owner-source-controls-actual-20261016.json)
 retains28 pure/mock cases and actual inherited-FD refusal children, with all
@@ -78,7 +81,7 @@ metadata fences and reverse grant closure with explicit fake inner owners.
 They did not change V1's67 execution pins and are not actual SDK lifecycle proof.
 
 The full goal remains ACTIVE: representative real-camera semantic/private
-reference closure and receiving SDK validation remain distinct next work, along
+reference closure and broader receiving SDK qualification remain distinct next work, along
 with broader failure/platform/resource coverage in the acceptance matrix.
 Routine source/build/audit work continues in Unison00..07; new IO/SDK/Photo slots
 need their existing separate coordination. Pending windows alone do not block

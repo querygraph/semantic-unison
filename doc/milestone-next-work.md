@@ -79,3 +79,13 @@ cancellation observers, and detect the private fairness regression. IO dispatch
 already drains ready siblings; the CPU supervisor uses ticket polling. This
 review does not extend the SemanticAdmission fix into an unproven claim about
 physical device isolation, descriptor peaks or RSS limits.
+
+The current [two-file synthetic receiving request](concurrent-synthetic-receiving-request-v1.json)
+is frozen, not admitted or dispatched. It composes actual production receiving
+with original tiny fixtures and a fake validator, two candidates per compiler.
+Candidate-bound nonterminal live-span diagnostics are already component-tested
+on stock/Ox, including overlapping synthetic helpers; this request will test the
+complete receiving integration and independent parent audit. It deliberately
+makes no real SDK, camera eligibility, CPU utilization or throughput claim.
+A real multi-file single-thread SDK successor still requires separate source,
+budget and lifecycle qualification followed by explicit scheduling.
