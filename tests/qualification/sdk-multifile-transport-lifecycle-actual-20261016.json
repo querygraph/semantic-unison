@@ -1,0 +1,129 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "/Users/alexy/src/unison/tests/sdk_multifile/transport_lifecycle.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "{\"workspace\": \"/private/tmp/u-smr-wire-tzeb9lni\", \"actual_original_clients\": 2, \"actual_original_servers\": 2, \"actual_original_helpers\": 4, \"sdk_calls\": 0}\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 48649,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "scope": "Actual original fake endpoints through loopback; zero SDK/retained payload/canonical IO.",
+  "sources": {
+    "tests/sdk_multifile/transport_lifecycle.py": "196d4dc4daa183ca46cbe97ee8f26436fcd6bb2844a9288fa824e1fb8ae40941",
+    "tests/sdk_multifile/fake_endpoint.py": "89ccd6edf98ec77a0ec4eda6cf2ee16da2ebcdf6943181f70043ec39fe0055db"
+  },
+  "owner_tool_terminal": {
+    "session_id": 35003,
+    "chunk_id": "8e1de0",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Actual owning write_stdin terminal; not process absence."
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/CONTROL-RESULT.json",
+      "bytes": 53057,
+      "sha256": "4b08c045c9f3c4416125c47f4d6fed3df4487e73fddc915c127bfff082b71f28"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/RESULT.json",
+      "bytes": 41961,
+      "sha256": "0956f2e5688eb64093fa06953fa93a211a3b0001a903a6eff6f756bb3a8f5ddd"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/original-endpoint",
+      "bytes": 2761,
+      "sha256": "1d0bd115f3932086f11e44a6e5cfb18797e44e02ae56e70c65c270f96512dc2c"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/never-executed-sdk",
+      "bytes": 52,
+      "sha256": "c98e8ec90fb157299cc16f4c03297b8c8fde3063cce88d781766caa5b9285186"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/seed-proxy.json",
+      "bytes": 1538,
+      "sha256": "c3881ad1344da39850144a3265e45dd693e4eb5872a6430af30937caf85948a6"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/ORIGINAL-HELPERS.json",
+      "bytes": 1625,
+      "sha256": "af6544abd760403f31b7518bedd2a60e8f41bb5d15f107e178d0d0266b8ce42b"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/ORIGINAL-LAUNCHER.json",
+      "bytes": 2487,
+      "sha256": "0eba32de66d20579e60006825d66385e05a19ed796c1d9cda8a553cc4f6080ab"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/launcher.py",
+      "bytes": 1486,
+      "sha256": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/stock/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/seed-proxy.json",
+      "bytes": 1537,
+      "sha256": "6cb5cedf9f88878580bd611e45fff08b0ee79c5598924ca38cde19d43b35c91e"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/ORIGINAL-HELPERS.json",
+      "bytes": 1619,
+      "sha256": "bd2e0c665ac9c339e0c138ac1c324723fe0183db3eeb0c3e0f92f051af1046fe"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/ORIGINAL-LAUNCHER.json",
+      "bytes": 2484,
+      "sha256": "15bcb7c76f58e4d57998e40bb1a6afe3561676e4358d8f8e7e9d77c8a278d1f1"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/proxy.py",
+      "bytes": 7765,
+      "sha256": "43d0ee7a28743f5f53f5e3c1f085e2d282637f1e0962cea2e7cdd76f26326178"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/launcher.py",
+      "bytes": 1486,
+      "sha256": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/private/tmp/u-smr-wire-tzeb9lni/ox/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    }
+  ]
+}

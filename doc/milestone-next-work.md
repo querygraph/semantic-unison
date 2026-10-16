@@ -152,3 +152,12 @@ Each original helper hashes only a tiny disposable input and is actually reaped
 with group closure; no live spans means overlap stays unknown. CLI/server
 lifecycle and SDK protocol are explicit models, so real transport composition
 remains the next gap. Canonical Unison8 closed; zero SDK/canonical IO calls.
+
+The [complete fake-endpoint loopback composition](../tests/qualification/sdk-multifile-transport-lifecycle-actual-20261016.json)
+now passes the unchanged four-slot Invoker, copied transport, real clients and
+servers, four actual hash helpers, worker case audit and independent parent
+journal/proxy join. All nested groups/pumps settle and outer Unison8 closes.
+SDK verdict protocol remains synthetic and endpoint binaries are original test
+code, so no actual stock/Ox receiving or SDK validation follows. The next step
+is to freeze current exact source/build/prerequisite pins into a distinct
+multi-file receiving plan/request and coordinate its finite IO/SDK window.

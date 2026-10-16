@@ -200,3 +200,15 @@ missing live spans correctly leave overlap unknown. CLI/server identities and
 SDK verdict protocol remain synthetic. The executable bypasses unittest's
 exception catcher so unresolved ownership retains its process. No SDK,
 retained input or canonical IO ran; complete real transport is still pending.
+
+The [complete original-endpoint loopback control](../qualification/sdk-multifile-transport-lifecycle-actual-20261016.json)
+now passes through the unchanged Invoker, exact four-slot command, copied
+proxy/launcher, two real fake clients, two real fake servers and four Python
+hash helpers. Worker and independent parent audits accept both cases. Actual
+client/supervisor/server/pump/launcher/helper closure is retained in the raw
+receipts, and outer canonical Unison8 closed (35003/8e1de0/exit0).
+The SDK protocol is deliberately synthetic, the endpoint executable is original
+test code, and preparation writes tiny original files rather than cloning.
+This closes the real transport-composition control gap; actual stock/Ox receiving
+with generated DNG inputs and SDK execution still needs a fresh exact request
+and separate IO/SDK admission. No retained payload or canonical IO was accessed.
