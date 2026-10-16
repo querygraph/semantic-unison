@@ -18,6 +18,7 @@ HERE=Path(__file__).resolve().parent
 sys.path.insert(0,str(ROOT/'bench/sync'))
 from run import measure_invocation, InvocationFailure
 from audit import invocation, require, PAIRS
+from ledger import begin, record
 
 spec=importlib.util.spec_from_file_location('private_tag_fixture_source',
                          ROOT/'tests/private_dng_local_clone/run.py')
@@ -72,12 +73,15 @@ def execute_case(directory, client, server, *, deadline_monotonic):
         command=[client['path'],str(directory/'left'),'ssh://localhost/'+str(directory/'right'),
              '-sshcmd',str(directory/'launcher.py'),'-servercmd',server['path'],
              '-batch','-auto','-fastcheck','false','-times',*flags]
+        begin(directory, stage, command)
         try:
             outcome=measure_invocation(command,environment,
                      min(20,deadline_monotonic-time.monotonic()-5),directory/'proxy.py',
                      strict_group_settlement=True)
         except InvocationFailure as error:
+            record(directory, stage, error.outcome)
             calls[stage]=error.outcome;save();raise
+        record(directory, stage, outcome)
         calls[stage]=outcome;save()
         invocation(outcome)  # Each owner/server/pump must already have closed.
     call('seed')

@@ -40,3 +40,20 @@ The [pure audit receipt](../qualification/private-remote-fallback-audit-controls
 uses fabricated reports/logs only. It does not prove real receiving or the case
 helper's execution. A pinned aggregate/controller and separately coordinated
 finite IO window remain required before the first transfer.
+
+## Pre-launch ledger and failure settlement
+
+The case helper now writes an exclusive stage INTENT before calling the existing
+transport owner and an exclusive OUTCOME after a returned success or qualified
+InvocationFailure. A pending intent is not erased on an unexpected exception.
+`ledger.audit_directory` checks every recorded call, including failed calls,
+for exact argv, direct client/supervisor group settlement, bound server wait
+and joined input pump. A nonzero settled call remains a functional failure.
+Missing or malformed proof stays unknown; no numeric PID cleanup follows from
+this validator. The future outer owner must stop new calls and independently
+prove its worker/group closure before consuming these records. Empty ledger
+is not independently established no-dispatch proof.
+
+[Seven fixed fabricated controls](../qualification/private-remote-ledger-controls-actual-20261016.json)
+passed under Unison00..07 and closed; no transport, payload or Photo IO ran.
+The complete aggregate/coordinator remains to be prepared and qualified.

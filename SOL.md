@@ -4,6 +4,14 @@
 
 ## Current checkpoint — 2026-10-15
 
+Remote fallback case now records pre-launch INTENT and exclusive OUTCOME for
+every stage. [Seven fixed ledger controls](tests/qualification/private-remote-ledger-controls-actual-20261016.json)
+actual88356/f1ee66/0 CLOSED/worker88357reaped0/CPU00..07closed: pending/malformed
+evidence refuses settlement; failed-but-settled is distinct from test success;
+exactargv/directgroups/serverwait/pumpjoin checked. No transport/Photo/payload
+ran; complete outer aggregate owner remains pending. This is source/lifecycle
+progress toward actual receiver-basis fallback, not proof that path ran.
+
 Actual [tiny shared IO dispatcher job](tests/qualification/shared-io-local-job-actual-20261016.json)
 PASSED/CLOSED: owner86809/session5692 actual terminal49da7c/0/no session;
 worker86810 reaped0/other group members absent before reap. All8 synthetic
