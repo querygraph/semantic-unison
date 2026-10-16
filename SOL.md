@@ -5,8 +5,8 @@
 ## Current checkpoint — 2026-10-16
 
 Real-camera receiving is now prepared for exact source review as a separate
-bounded fallback test: [camera requestV2](doc/camera-receiving-request-v2.json),
-[planV2](doc/camera-receiving-plan-v2.json). Both are UNADMITTED/UNSTARTED at this
+bounded fallback test: [camera requestV4](doc/camera-receiving-request-v4.json),
+[planV4](doc/camera-receiving-plan-v4.json). Both are UNADMITTED/UNSTARTED at this
 checkpoint.51 execution sources, current stock/Ox Make artifacts, fixed retained
 Unison-owned clone identity, two native-clone-only disposable senders and six
 serial CLI calls are pinned. Only metadata of the retained input was checked;

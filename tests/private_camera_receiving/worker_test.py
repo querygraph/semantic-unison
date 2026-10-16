@@ -85,5 +85,22 @@ class Controls(unittest.TestCase):
         self.assertEqual(proof['functional_status'],'FAILED')
         self.assertEqual(proof['attempted_cli_invocations'],0)
 
+    def test_case_uncertainty_is_not_published_as_known_failure(self):
+        from close import UnresolvedIOOwnership
+        carrier=UnresolvedIOOwnership('fixture unknown',uncertain_closes=[{
+            'fd':123456,'role':'inert test identity','observed_before_close':None,
+            'identity_observation_error':'no actual FD used'}])
+        with patch.object(worker.case,'exercise',side_effect=carrier):
+            with self.assertRaises(UnresolvedIOOwnership) as caught:
+                self.execute()
+        self.assertIs(caught.exception,carrier)
+        result=json.loads((self.work/'RESULT.json').read_text())
+        self.assertFalse(result['complete'])
+        self.assertNotIn('failure',result)
+        self.assertEqual(self.calls,0)
+        import audit
+        with self.assertRaises(ValueError):
+            audit.audit(result,self.plan,self.work)
+
 
 if __name__=='__main__':unittest.main()

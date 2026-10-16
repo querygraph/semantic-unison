@@ -53,5 +53,46 @@ class Controls(unittest.TestCase):
                 with self.assertRaises(ValueError):execute.worker_entry(args,plan)
             payload.assert_not_called()
 
+    def test_combined_uncertainty_enters_retention_not_failed_result(self):
+        from close import UnresolvedIOOwnership, descriptor_observation
+        class RetentionObserved(BaseException):
+            pass
+        with tempfile.TemporaryDirectory() as name:
+            plan=self.plan();plan['workspace']=name
+            args=SimpleNamespace(workspace=name,plan='/plan',plan_sha256='0'*64)
+            fds=[os.open('/dev/null',os.O_RDONLY) for _ in range(9)]
+            try:
+                start={'owner_pid':os.getppid(),'child_pid':os.getpid(),
+                       'target':'camera-receive','cpu_credits':8,'io_mode':'EX_GLOBAL',
+                       'token_indexes':list(range(8)),
+                       'command':execute.child_argv(args.plan,args.plan_sha256,name),
+                       'inherited_resource_fds':[{'fd':fd,'device':os.fstat(fd).st_dev,
+                                                  'inode':os.fstat(fd).st_ino} for fd in fds]}
+                records=[descriptor_observation(fd,'original_disposable_fixture') for fd in fds[:2]]
+                original=ValueError('original refusal')
+                carrier=UnresolvedIOOwnership('two uncertain fixture closes',
+                    retained_fds=[fds[2]],uncertain_closes=records,original_failure=original,
+                    close_failure=OSError('injected uncertain close'))
+                def retain(record):
+                    record()
+                    raise RetentionObserved()
+                with patch.object(execute,'stable_sha',return_value='0'*64), \
+                     patch.object(execute,'read_manifest',return_value=start), \
+                     patch.object(execute.worker,'execute',side_effect=carrier) as payload, \
+                     patch.object(execute,'retain_after_record',side_effect=retain) as retention:
+                    with self.assertRaises(RetentionObserved):
+                        execute.worker_entry(args,plan)
+                import json
+                saved=json.loads((Path(name)/'WORKER-OWNERSHIP-RETAINED.json').read_text())
+                self.assertEqual(saved['uncertain_closes'],records)
+                self.assertIsNone(saved['uncertain_fd'])
+                self.assertEqual(saved['retained_fds'],[fds[2]])
+                self.assertIn('original refusal',saved['original_failure'])
+                self.assertFalse((Path(name)/'RESULT.json').exists())
+                payload.assert_called_once();retention.assert_called_once()
+            finally:
+                for fd in fds:
+                    os.close(fd)  # no actual close fault or real resources in this fixture
+
 
 if __name__=='__main__':unittest.main()

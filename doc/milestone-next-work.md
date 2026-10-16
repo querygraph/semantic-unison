@@ -14,7 +14,7 @@ permission policy. Historical receipts retain their exact source snapshots.
 | M5 reconciliation | Opt-in fixed-region scalar policy, common base/quota, conflict and partial-two-replica controls | Remaining fault/platform combinations; no general RDF or distributed atomicity claim. |
 | M6 OxCaml/resources | Checked workers, stock/Ox conformance, current full builds, shared8 ownership, helper accounting | Complete benchmark/resource evidence and broader cancellation/platform coverage. Failed frozen part3 remains incomplete; no automatic replacement. |
 
-The immediate runtime candidate is [camera-receiving requestV2](camera-receiving-request-v2.json).
+The immediate runtime candidate is [camera-receiving requestV4](camera-receiving-request-v4.json).
 It uses the retained Unison-owned clone, native clone-only preparation of two
 disposable senders, an original appended trailer, and six stock/Ox same-compiler
 seed/update/no-op calls. Its claims are exact fallback bytes, retained old

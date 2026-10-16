@@ -99,7 +99,10 @@ def worker_entry(args,plan):
         def record():
             with (workspace/'WORKER-OWNERSHIP-RETAINED.json').open('x') as out:
                 json.dump({'error':repr(error),'retained_fds':list(error.retained_fds),
-                           'uncertain_fd':error.uncertain_fd},out)
+                           'uncertain_fd':error.uncertain_fd,
+                           'uncertain_closes':list(getattr(error,'uncertain_closes',())),
+                           'original_failure':repr(getattr(error,'original_failure',None)),
+                           'close_failure':repr(getattr(error,'close_failure',None))},out)
         retain_after_record(record)
 
 
