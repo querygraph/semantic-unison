@@ -119,3 +119,11 @@ guard, also passed fresh serial stock/Ox Dune builds and application selftests:
 Both owners exited0, with worker groups and Unison tokens closed. This updates
 build-system evidence only; it does not promote historical receiving receipts
 to new source snapshots or qualify the pending property-transfer matrix.
+
+The [current final-publication regression](../tests/qualification/current-final-publication-actual-20261016.json)
+rechecks170 cases per compiler, including71 retained-producer cases, against
+current ML/C sources with private syscall wrappers and tiny generated fixtures.
+Both stock/Ox owners and groups close normally. This refreshes requirements5/6
+evidence for candidate and producer binding, mutation/replacement refusal and
+legacy handoff guards; it does not prove hostile-writer atomic rename, power-loss
+durability or complete coverage of every publication family.

@@ -109,6 +109,11 @@
           "path": "tests/workers/seeded-apply-stress-qualification.json",
           "bytes": 11317,
           "sha256": "9ea9a9e0f31f05365c08c2805e71e1b0fd1b77b28e955885e66383648caeab3e"
+        },
+        {
+          "path": "tests/qualification/current-final-publication-actual-20261016.json",
+          "bytes": 5432,
+          "sha256": "0c194b5d967b97700b4a4c311fb15b7758157183f6957996f1e5de151a15c4df"
         }
       ]
     },
@@ -133,6 +138,11 @@
           "path": "tests/dng_merge/qualification.json",
           "bytes": 97465,
           "sha256": "dc57518a293bf00d841ae57a0a1ba6501db1166564a4ccf816f9404c50c0428b"
+        },
+        {
+          "path": "tests/qualification/current-final-publication-actual-20261016.json",
+          "bytes": 5432,
+          "sha256": "0c194b5d967b97700b4a4c311fb15b7758157183f6957996f1e5de151a15c4df"
         }
       ]
     },
