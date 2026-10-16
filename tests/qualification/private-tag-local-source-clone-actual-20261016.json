@@ -1,0 +1,1127 @@
+{
+  "state": "EIGHT_SYNTHETIC_PRIVATE_TAG_LOCAL_CLONE_CASES_24_CLI_PASSED_CLOSED",
+  "actual_parent_terminal": {
+    "session": 30155,
+    "chunk": "d5cea4",
+    "exit": 0,
+    "running_session": false
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-local-clone-owner-5a2ukqq9",
+  "result": {
+    "state": "EIGHT_PRIVATE_TAG_LOCAL_SOURCE_CLONE_RECEIVING_CASES_PASSED",
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g",
+    "cases": [
+      {
+        "compiler": "stock",
+        "little_endian": true,
+        "clone": "off",
+        "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+        "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": false,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81880,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/seed.log",
+            "log_sha256": "e2d2f3b03c1b33e9058d3d50f0f1aa42a9b689281b8d43cfd7fb528008efce1d"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81881,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/update.log",
+            "log_sha256": "c6606f2dc77aa35a668e714e6991fefb8b03a68a6a2c0b1319fa10e598fc041b"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81882,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/noop.log",
+            "log_sha256": "1397a1cca4aceb721d809b1392117b090b6ac6485101a03969745c7e1879acd1"
+          }
+        ]
+      },
+      {
+        "compiler": "stock",
+        "little_endian": true,
+        "clone": "auto",
+        "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+        "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": true,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81883,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/seed.log",
+            "log_sha256": "ebf517a0730d5ad02a88aa6db00ce3607b2df43af805b182676f3748aa45a73a"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81884,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/update.log",
+            "log_sha256": "316e1c17cd62f26353a6dd6a3ce7b96d8c24a805b0511333f0fa8e92a4480325"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81885,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/noop.log",
+            "log_sha256": "c5719d5ab74b4999eaa4f3605e9f1b8f428eb750e4e1e300ed8b77e518675fc1"
+          }
+        ]
+      },
+      {
+        "compiler": "stock",
+        "little_endian": false,
+        "clone": "off",
+        "before_sha256": "cc09eb1a9e7b14ea6dd874182b948586f7b0fbe04065bafff9a395039d54d62e",
+        "after_sha256": "09852d2a6bb7e3c4a2c52095f057e775a90aaf19366e3752503dee7f3807d329",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": false,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81886,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/seed.log",
+            "log_sha256": "61ace7b32ad77dabaa56b6e86ba15bd9a2fb2d78b58101ae7cb151bf9108b60a"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81887,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/update.log",
+            "log_sha256": "6c5d76e38ea3ac734c1cd99d963cad1d1fe3a68cbdfa91ee85ea7761193707eb"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81888,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/noop.log",
+            "log_sha256": "041f5d467d081957b3e1efd9c43b2e7c6a8d98de87a6dcd5ed5753cc8ec78c6d"
+          }
+        ]
+      },
+      {
+        "compiler": "stock",
+        "little_endian": false,
+        "clone": "auto",
+        "before_sha256": "cc09eb1a9e7b14ea6dd874182b948586f7b0fbe04065bafff9a395039d54d62e",
+        "after_sha256": "09852d2a6bb7e3c4a2c52095f057e775a90aaf19366e3752503dee7f3807d329",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": true,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81889,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/seed.log",
+            "log_sha256": "a7265b2852ab23547ac236518cdc7a8197ad00285b8d6764c8cb7cced8c66671"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81890,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/update.log",
+            "log_sha256": "e7a0dd89b899a4f3b1c875bf15c8907c5416cf52e7d2b106cbfaeb3854553871"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81891,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/noop.log",
+            "log_sha256": "eed91ed0a627f6506843b3231ea9cd4fc8265207eb536d59ce733f8a74928b68"
+          }
+        ]
+      },
+      {
+        "compiler": "ox",
+        "little_endian": true,
+        "clone": "off",
+        "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+        "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": false,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81892,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/seed.log",
+            "log_sha256": "0868251012e290dd6d02e9c3de7aea3a77814214db60aa6e3c5aa698418128e3"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81893,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/update.log",
+            "log_sha256": "19de13392de8549f2628b58c156785c1c0c9640f0e1646af7335b827172eb391"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81894,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/noop.log",
+            "log_sha256": "9a026c83fde1d514ea10a696de66371def14a9994ba8877de0f28ed1326737de"
+          }
+        ]
+      },
+      {
+        "compiler": "ox",
+        "little_endian": true,
+        "clone": "auto",
+        "before_sha256": "9d43bb830f7b68f077892689f4dda840adf6e0af7da99ecade0b6cdff897d9e6",
+        "after_sha256": "93dd48b4bdaf69a929834a4cc253a0a16ee736c99c920e0203aa004e30f7f9e3",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": true,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81895,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/seed.log",
+            "log_sha256": "0d3d572f5d965f2dfdefb6c5d875f9dc3907fcaae4c823d43c0ff12bd2201ebe"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81896,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/update.log",
+            "log_sha256": "c449b9ab582b0e37a0db05032415867047f9b4cff60a2166f0edfbbcc948d62a"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81897,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/noop.log",
+            "log_sha256": "52c855afb7bbc281bbc42f212698042bfae6059c8b938d4e1c227e6f054d44ec"
+          }
+        ]
+      },
+      {
+        "compiler": "ox",
+        "little_endian": false,
+        "clone": "off",
+        "before_sha256": "cc09eb1a9e7b14ea6dd874182b948586f7b0fbe04065bafff9a395039d54d62e",
+        "after_sha256": "09852d2a6bb7e3c4a2c52095f057e775a90aaf19366e3752503dee7f3807d329",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": false,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81898,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/seed.log",
+            "log_sha256": "b5f2b16937041cda9ef78c5b1fe9f77fae60edcf20f967501bb10467f46e651b"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81899,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/update.log",
+            "log_sha256": "ebb9b77a535d2effab910b65bbab331b632d4a1da35a0f55ff53d2d7dea2ac65"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "off",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81900,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/noop.log",
+            "log_sha256": "60f5facacd43727d349d03cca531050e2553e5c6275795a35ceac0d7249610d0"
+          }
+        ]
+      },
+      {
+        "compiler": "ox",
+        "little_endian": false,
+        "clone": "auto",
+        "before_sha256": "cc09eb1a9e7b14ea6dd874182b948586f7b0fbe04065bafff9a395039d54d62e",
+        "after_sha256": "09852d2a6bb7e3c4a2c52095f057e775a90aaf19366e3752503dee7f3807d329",
+        "exact": true,
+        "basis_preserved": true,
+        "noop_five_preserved": true,
+        "semantic_inspection_bypassed": true,
+        "source_clone_path_used": true,
+        "commands": [
+          {
+            "stage": "seed",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81901,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/seed.log",
+            "log_sha256": "85166b9a364bf555cfa55cdbf30bab7283e4934e685f5227898967b8ddcc03cc"
+          },
+          {
+            "stage": "update",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81902,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/update.log",
+            "log_sha256": "91da8a60050ab9ee3f84daac00c19a070365d3b72cc9781b2e9d2ae1da453ce2"
+          },
+          {
+            "stage": "noop",
+            "command": [
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/left",
+              "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/right",
+              "-batch",
+              "-auto",
+              "-fastcheck",
+              "false",
+              "-times",
+              "-clone",
+              "auto",
+              "-semanticdng=true",
+              "-semanticworkers",
+              "3",
+              "-adobevalidate",
+              "off",
+              "-debug",
+              "copy",
+              "-debug",
+              "semantic"
+            ],
+            "pid": 81903,
+            "actual_wait_exit": 0,
+            "log": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/noop.log",
+            "log_sha256": "0d14fd677f9c2d72610755567bf537593f3157881cf2aee6702c5b0dbfd0820b"
+          }
+        ]
+      }
+    ],
+    "scope": "Tiny generated invalid-photograph DNG-shaped fixture; no real-camera or SDK validity claim. Local roots only, no transport/server session.",
+    "cli_count": 24
+  },
+  "closure": {
+    "child": {
+      "pid": 81879,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 81879,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "entrypoint_mapping_controls": {
+    "terminal": {
+      "chunk": "bbd2f5",
+      "exit": 0,
+      "running_session": false
+    },
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-6usy5qmf",
+    "closure": {
+      "child": {
+        "pid": 82103,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 82103,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "source_pins_unchanged": true,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "scope": "Manual command/budget source refusals only;24actual CLI run used same shared owner through read-parser wrapper before dedicated target mapping. New target mapping not another24CLI run."
+  },
+  "earlier_failures": [
+    {
+      "chunk": "a82bf6",
+      "exit": 1,
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-xyuy__rs",
+      "reason": "Test expected semantic fallback trace with cloneoff; source review shows semantic path bypassed."
+    },
+    {
+      "chunk": "2d043f",
+      "exit": 1,
+      "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-q_q5enu5",
+      "reason": "Test expected receiverbasis fallback with localcloneauto; actualwhole-sourceclone beforesemantic correct. Failedresults preserved; not reclassified asreceiverbasis proof."
+    }
+  ],
+  "limits": [
+    "Generated invalid-photograph DNG-shaped data only; no Photo/original/private-camera payload, SDK/Adobe/compiler.",
+    "Localrootwhole-sourceclone ordering only; no transportreceiverbasis fallback or metadata semantic eligibility claimed.",
+    "Logical exactness/basis/noop proofs only, not physical allocated-block sharing/writes or throughput.",
+    "Local CLIs use Popen actualwaits in same containing group. No server or independent sessions. Shared outer group observed othermembersabsent before leaderreap, allCPUtokensclosed.",
+    "No production ML source change from these test additions. Historical binaries keep original build-source/compiler scopes; unlinkedprivateframing module not part ofbinary."
+  ],
+  "pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py",
+      "bytes": 6477,
+      "sha256": "fdcd5157fe70f1e3aa717e374dd93ccad56f31ba6e28029b1f4dfd29e14a045d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_dng_local_clone/README.md",
+      "bytes": 2107,
+      "sha256": "876b29146b4e206d22a2c082a28660fd22ac2a1e2984c13bc8f9032e527fee40"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 18206,
+      "sha256": "2f493156b52b41cb73d21778aca77c12e7c6d68980b53b63a1659dfee0d2673f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 5820,
+      "sha256": "6a4dd6a7edbb1f0652fae4defcef4017efa92c84600af7fd6e6acd1418bb23b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 6452,
+      "sha256": "348b838f7ce8a296e6d4a5f37c8bd185d5332b2a3c202b45fb4f0c39cd2442e2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/Makefile",
+      "bytes": 1433,
+      "sha256": "4a4b367f5fd2a443247ed0710bbd76eee01bbe0e0acefc40860b8a90184109f3"
+    },
+    {
+      "path": "/private/tmp/unison-group-integration-stock-build-20261015.json",
+      "bytes": 42906,
+      "sha256": "2f37acf6970c2255aebd1a8b2317f1b6e451e86ff042801ead5b55f837c0c4cf"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+      "bytes": 5656712,
+      "sha256": "5237f14c70f83d19e8a63da568f8f5a563b9a2dff0baa514675223b4c23fb3ce"
+    },
+    {
+      "path": "/private/tmp/unison-group-integration-ox-build-20261015.json",
+      "bytes": 42912,
+      "sha256": "0cd0821a40483412f616d59e7bde6ab429bd314130d5eb49fab694d189e6f150"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+      "bytes": 7580152,
+      "sha256": "0a7b264264a26cebfe5a8d9ddc96f3e45efbd25868c21db11891052c32142f49"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-local-clone-owner-5a2ukqq9/SHARED-START.json",
+      "bytes": 959,
+      "sha256": "c3b63dcac65be238d60d7ca7caaa61a6dc044e97c5f801762a6a7e130d3ce0b1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-local-clone-owner-5a2ukqq9/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "2f7a2228057229d5b0ed6071e9c5cba18363b8d6e15c1fa45585ab547e1f6df6"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-local-clone-owner-5a2ukqq9/SHARED-STDOUT.txt",
+      "bytes": 21593,
+      "sha256": "e6d5b3314d0b1ec7762b691aa06b2cf5a3481f786a9092021f0521fddad5e335"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-local-clone-owner-5a2ukqq9/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-6usy5qmf/SHARED-START.json",
+      "bytes": 1053,
+      "sha256": "044f7685e4a6f619101a39734bded958f51d0eacbac1ca3c56ca46117de88f10"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-6usy5qmf/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "f24cf95b681568ef678e6115f1a6684bb72b20a6b3ac80ec4586bf81837b7136"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-6usy5qmf/SHARED-STDOUT.txt",
+      "bytes": 233,
+      "sha256": "aa05c2b067a3a3b26d4c4d0da116ba94e75c5526a1c0eae04db3f21ca9270d9e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-shared-shared-entrypoints-6usy5qmf/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-xyuy__rs/SHARED-START.json",
+      "bytes": 954,
+      "sha256": "0157306947e4fc1cb2211e05956c4448969d1280018c85957be65360ef0ea35a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-xyuy__rs/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "b92c69a2db22327e77c0939d915dfe8112b0ff839f9867c755dab074e80c0ddd"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-xyuy__rs/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-xyuy__rs/SHARED-STDERR.txt",
+      "bytes": 2034,
+      "sha256": "ced1459c85369478a6d4779462041f01faa8eedc22f91c1d599cfde270fddc92"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-q_q5enu5/SHARED-START.json",
+      "bytes": 953,
+      "sha256": "6c0c4bf7cefd50a17ef789ae84f2af781b8af65723e9558aba5c6f9863a9a811"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-q_q5enu5/SHARED-CLOSED.json",
+      "bytes": 457,
+      "sha256": "1cdab5d87e206d57f38223ed7cb2c38c031fa36317cf758cc1063a041f99ee0d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-q_q5enu5/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-tag-fallback-owner-q_q5enu5/SHARED-STDERR.txt",
+      "bytes": 1657,
+      "sha256": "0c7a2b11fd4de8bad5c0cbcc3054373b517ed263be9d3a097b3f6685fb423954"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/RESULT.json",
+      "bytes": 29913,
+      "sha256": "454e4840b6ef159d95f6032e692eaacf5098ea94ba43cfb5a90fab2b65b2b9e0"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/seed.log",
+      "bytes": 2813,
+      "sha256": "e2d2f3b03c1b33e9058d3d50f0f1aa42a9b689281b8d43cfd7fb528008efce1d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/update.log",
+      "bytes": 1628,
+      "sha256": "c6606f2dc77aa35a668e714e6991fefb8b03a68a6a2c0b1319fa10e598fc041b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-off/noop.log",
+      "bytes": 446,
+      "sha256": "1397a1cca4aceb721d809b1392117b090b6ac6485101a03969745c7e1879acd1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/seed.log",
+      "bytes": 2729,
+      "sha256": "ebf517a0730d5ad02a88aa6db00ce3607b2df43af805b182676f3748aa45a73a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/update.log",
+      "bytes": 1245,
+      "sha256": "316e1c17cd62f26353a6dd6a3ce7b96d8c24a805b0511333f0fa8e92a4480325"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-le-auto/noop.log",
+      "bytes": 448,
+      "sha256": "c5719d5ab74b4999eaa4f3605e9f1b8f428eb750e4e1e300ed8b77e518675fc1"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/seed.log",
+      "bytes": 2813,
+      "sha256": "61ace7b32ad77dabaa56b6e86ba15bd9a2fb2d78b58101ae7cb151bf9108b60a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/update.log",
+      "bytes": 1628,
+      "sha256": "6c5d76e38ea3ac734c1cd99d963cad1d1fe3a68cbdfa91ee85ea7761193707eb"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-off/noop.log",
+      "bytes": 446,
+      "sha256": "041f5d467d081957b3e1efd9c43b2e7c6a8d98de87a6dcd5ed5753cc8ec78c6d"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/seed.log",
+      "bytes": 2729,
+      "sha256": "a7265b2852ab23547ac236518cdc7a8197ad00285b8d6764c8cb7cced8c66671"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/update.log",
+      "bytes": 1245,
+      "sha256": "e7a0dd89b899a4f3b1c875bf15c8907c5416cf52e7d2b106cbfaeb3854553871"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/stock-be-auto/noop.log",
+      "bytes": 448,
+      "sha256": "eed91ed0a627f6506843b3231ea9cd4fc8265207eb536d59ce733f8a74928b68"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/seed.log",
+      "bytes": 2801,
+      "sha256": "0868251012e290dd6d02e9c3de7aea3a77814214db60aa6e3c5aa698418128e3"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/update.log",
+      "bytes": 1622,
+      "sha256": "19de13392de8549f2628b58c156785c1c0c9640f0e1646af7335b827172eb391"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-off/noop.log",
+      "bytes": 446,
+      "sha256": "9a026c83fde1d514ea10a696de66371def14a9994ba8877de0f28ed1326737de"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/seed.log",
+      "bytes": 2717,
+      "sha256": "0d3d572f5d965f2dfdefb6c5d875f9dc3907fcaae4c823d43c0ff12bd2201ebe"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/update.log",
+      "bytes": 1245,
+      "sha256": "c449b9ab582b0e37a0db05032415867047f9b4cff60a2166f0edfbbcc948d62a"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-le-auto/noop.log",
+      "bytes": 448,
+      "sha256": "52c855afb7bbc281bbc42f212698042bfae6059c8b938d4e1c227e6f054d44ec"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/seed.log",
+      "bytes": 2801,
+      "sha256": "b5f2b16937041cda9ef78c5b1fe9f77fae60edcf20f967501bb10467f46e651b"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/update.log",
+      "bytes": 1622,
+      "sha256": "ebb9b77a535d2effab910b65bbab331b632d4a1da35a0f55ff53d2d7dea2ac65"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-off/noop.log",
+      "bytes": 446,
+      "sha256": "60f5facacd43727d349d03cca531050e2553e5c6275795a35ceac0d7249610d0"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/seed.log",
+      "bytes": 2717,
+      "sha256": "85166b9a364bf555cfa55cdbf30bab7283e4934e685f5227898967b8ddcc03cc"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/update.log",
+      "bytes": 1245,
+      "sha256": "91da8a60050ab9ee3f84daac00c19a070365d3b72cc9781b2e9d2ae1da453ce2"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-private-dng-local-clone-d82qbe6g/ox-be-auto/noop.log",
+      "bytes": 448,
+      "sha256": "0d14fd677f9c2d72610755567bf537593f3157881cf2aee6702c5b0dbfd0820b"
+    }
+  ]
+}

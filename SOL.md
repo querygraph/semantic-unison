@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+Actual [private-tag local clone controls](tests/qualification/private-tag-local-source-clone-actual-20261016.json)
+PASS/CLOSED:8cases(stock/Ox×classicLE/BE×cloneoff/auto),24actualCLIwait0,
+exactmetadatachangedoutput/priorreceiverinode preserved/no-opFIVEstable. Owner81876
+actuald5cea4/0/group81879reaped0/othersabsent/tokens00..07closed. Source review
+corrected initialtest routing errors: cloneoff bypassessemantic; auto localAPFS
+whole-sourceclone wins BEFOREsemantic inspection, independentofopaque50740.
+No receiverbasisfallback/semanticeligibility proof, no Photo/privatecamera/SDK/
+compiler/physicalIO/timing claim. Failedtestassumptions andclosures preserved.
+`private-dng-local-clone` manualtarget added; puremapping/budgetbbd2f5/0closed.
+Transport-separated fallback remains a distinct nextcoretest; expiredcanonical
+admission remainsunstarted, freshscheduling requestedqueue01a1425e-57a3.
+
 Canonicalprobev3 admission241da556 expired before execution: [guard receipt](tests/qualification/canonical-io-probe-v3-expired-unstarted-20261016.json)
 actual2df62f/1/no session, deadlineassertion beforeexec. Workspace absent, no
 START/worker/contender/IOlock/CPUtokens; no canonical test actually ran. Root

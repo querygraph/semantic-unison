@@ -20,3 +20,7 @@ stock-make ox-make stock-dune ox-dune stock-build ox-build cache-storage cache-o
 .PHONY: dng-private-framing
 dng-private-framing:
 	python3 tests/manual.py dng-private-framing
+
+.PHONY: private-dng-local-clone
+private-dng-local-clone:
+	python3 tests/manual.py private-dng-local-clone

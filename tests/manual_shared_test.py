@@ -21,6 +21,9 @@ with patch.object(Path, 'is_file', return_value=True):
     assert '--build-only' in inspector and '--report' in inspector and '--selftest' not in inspector
     assert inspector[inspector.index('--report') + 1] == str(out / 'RESULT.json')
     assert manual.shared_resource_plan('inspect-ox', env)['declared_peak_credits'] == 3
+    local_clone = manual.command('private-dng-local-clone', out, env)
+    assert local_clone == [sys.executable, str(manual.ROOT / 'tests/private_dng_local_clone/run.py')]
+    assert manual.shared_resource_plan('private-dng-local-clone', env)['declared_peak_credits'] == 5
     framing = manual.command('dng-private-framing', out, env)
     assert framing == [sys.executable, str(manual.ROOT / 'tests/dng_private_data/run.py')]
     framing_plan = manual.shared_resource_plan('dng-private-framing', env)
@@ -43,6 +46,7 @@ with patch.object(Path, 'is_file', return_value=True):
         ('sync-functional', {'SHARED_CPU_CREDITS': '2'}),
         ('inspect-ox', {'SHARED_CPU_CREDITS': '2'}),
         ('dng-private-framing', {'SHARED_CPU_CREDITS': '2'}),
+        ('private-dng-local-clone', {'SHARED_CPU_CREDITS': '4'}),
     ):
         try:
             manual.command(target, out, dict(env, **changes))
