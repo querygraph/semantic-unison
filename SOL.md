@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+[13fake dispatcher lifecycle controls](tests/qualification/shared-io-dispatch-lifecycle-actual-20261016.json)
+be66c9/0 CLOSED/groupreaped/tokens00..07closed; no realIO/testchildren. Tests
+found post-known-close receipt-write error falsely retainedowner: fixed with
+explicit knownclosed state; genuine uncertainprocess/FD stillretains. Unknownlog
+now includes knownopenCPU+IOFDs. Initialreproduceraba94d/1 preservedclosed.
+[New tiny EX_GLOBAL dispatcher-job request](doc/shared-io-local-job-request-v1.json)
+freezes source+24CLIexisting syntheticchild+artifactpins, NOTadmitted/dispatched.
+Distinct scope from completedcanonicalprobe/no repetition. No Photo/camera/SDK
+inputs, canonicalIOacquisition or runtimegrant in thissource/mock work.
+
 **Canonical scheduling reconciled:** Root reschedule2519623d is CONSUMED_ACTUAL_CLOSED
 (owner82843/actual7efd2e/0; worker82844reaped0/othersabsent; contenderbusy;
 IO+CPUclosed/freshbundleclosed), independently acceptedcf171d71. [V4duplicate

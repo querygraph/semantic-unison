@@ -42,3 +42,21 @@ Existing native/UI lease acquisition, physical-member discovery, general
 production dispatchers, whole-process hard resource limits, and simultaneous
 cross-project payload qualification remain separate. No Photo payload or SDK
 rights follow from CPU grants or an accepted lock-only probe.
+
+## Fake full-lifecycle controls and reporting-failure correction
+
+Thirteen [fake lease/owner lifecycle controls](../tests/qualification/shared-io-dispatch-lifecycle-actual-20261016.json)
+now pass, including acquisition order/rollback, FD inheritance and retention
+through settlement, child-failure and settled-timeout release, and uncertain
+closes. They found and fixed a reporting error: after resources are known
+closed, a final receipt-write failure now propagates as an error rather than
+claiming live ownership. Uncertain process/FD outcomes still retain ownership.
+This correction also applies to CPU-only reporting failures. Records now include
+known-open CPU FDs alongside IO FDs and structured uncertainty identities.
+No actual IO or test children were used in these controls.
+
+A [separate tiny live-job request](shared-io-local-job-request-v1.json) freezes the
+new owner and existing24-CLI synthetic local-clone child. It is NOT the already
+completed canonical probe and is NOT admitted. Before dispatch, Root must
+coordinate the new job and publish the exact admission; compiled binary/receipt
+pins are independently revalidated by the dispatching operator as specified.

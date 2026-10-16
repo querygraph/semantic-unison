@@ -88,6 +88,7 @@ def run(target, argv, output, credits, *, io_admission=None):
                                                 'token_indexes': list(indexes)})
         return 2
     child = None
+    resources_closed = False
     try:
         sources = [Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_cpu_pool.py',
                    ROOT / 'tests/shared_process_owner.py', ROOT / 'bench/sync/ownership.py',
@@ -117,6 +118,7 @@ def run(target, argv, output, credits, *, io_admission=None):
                 from shared_io_pool import close_unstarted
                 close_unstarted(lease)
                 close_unstarted(io_lease)
+                resources_closed = True
                 write(output / 'SHARED-NOT-STARTED.json', {'state': 'PRELAUNCH_REFUSAL_KNOWN_CLOSED',
                                                         'error': str(refusal)})
                 return 2
@@ -161,15 +163,21 @@ def run(target, argv, output, credits, *, io_admission=None):
             io_lease.close_after_verified_settlement(owner_reaped=closure['reaped'],
                 groups_settled=closure['other_group_members_absent_before_reap'],
                 external_children_settled=True)
+        resources_closed = True
         write(output / 'SHARED-CLOSED.json', {'child': closure, 'tokens_closed': True,
                                             'io_barrier_acquired_and_closed': io_lease is not None,
                                             'source_pins_unchanged': source_unchanged,
                                             'parent_terminal': 'collect separately from owning tool'})
         return 124 if closure['timed_out'] else 3 if not source_unchanged else closure['returncode']
     except BaseException as error:
+        if resources_closed:
+            # A reporting failure after known close is not live FD/process
+            # uncertainty. Preserve the exception, without inventing a hold.
+            raise
         retain_after_record(lambda: write(output / 'SHARED-OWNERSHIP-RETAINED.json', {'error': repr(error),
               'owner_pid': os.getpid(), 'child_pid': child.pid if child else None,
               'retained_io_fds': list(io_lease.fds) if io_lease is not None and not io_lease.closed else [],
+              'retained_cpu_fds': list(lease.fds) if not lease.closed else [],
               'error_retained_fds': list(getattr(error, 'retained_fds', ())),
               'uncertain_fd': getattr(error, 'uncertain_fd', None),
               'uncertain_closes': list(getattr(error, 'uncertain_closes', ())) }))

@@ -1,0 +1,95 @@
+{
+  "schema": "firstpair-shared-dispatch-ex-global-tiny-job-request/1",
+  "state": "SOURCE_READY_REQUESTED_NOT_ADMITTED_NOT_DISPATCHED",
+  "target": "private-dng-local-clone",
+  "workspace": "/private/tmp/unison-shared-io-local-job-e5c1c3c3f8564c9ebdf40bbba08d522e",
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py"
+  ],
+  "cpu_credits": 8,
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison/tests/manual.py": "7e7a371a749429a305d22d02f374109e228d07725797081fd771b6ec8f2b4160",
+    "/Users/alexy/src/unison/tests/private_dng_local_clone/run.py": "fdcd5157fe70f1e3aa717e374dd93ccad56f31ba6e28029b1f4dfd29e14a045d",
+    "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4",
+    "/Users/alexy/src/unison/tests/shared_dispatch.py": "99a9999b08e60e4bfbe2ccc30e3b1c5a7de6a719b2ddddc642f7705a9e6ef2d9",
+    "/Users/alexy/src/unison/tests/shared_io_pool.py": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7",
+    "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+  },
+  "artifacts_revalidate_before_dispatch": [
+    {
+      "path": "/private/tmp/unison-group-integration-stock-build-20261015.json",
+      "bytes": 42906,
+      "sha256": "2f37acf6970c2255aebd1a8b2317f1b6e451e86ff042801ead5b55f837c0c4cf"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-e_feuyog/src/unison",
+      "bytes": 5656712,
+      "sha256": "5237f14c70f83d19e8a63da568f8f5a563b9a2dff0baa514675223b4c23fb3ce"
+    },
+    {
+      "path": "/private/tmp/unison-group-integration-ox-build-20261015.json",
+      "bytes": 42912,
+      "sha256": "0cd0821a40483412f616d59e7bde6ab429bd314130d5eb49fab694d189e6f150"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-r1o9sy60/src/unison",
+      "bytes": 7580152,
+      "sha256": "0a7b264264a26cebfe5a8d9ddc96f3e45efbd25868c21db11891052c32142f49"
+    }
+  ],
+  "prerequisites": {
+    "canonical_probe_actual": {
+      "path": "/Users/alexy/src/unison/tests/qualification/canonical-io-probe-actual-20261016.json",
+      "bytes": 8928,
+      "sha256": "531e6c90a9f9a0a2108b3c5af4d72e315a70b490ea1ba89bf7a2133882eee3e0"
+    },
+    "mock_lifecycle": {
+      "path": "/Users/alexy/src/unison/tests/qualification/shared-io-dispatch-lifecycle-actual-20261016.json",
+      "bytes": 3963,
+      "sha256": "ab57edd5753c230ab6ba902ea490f19e5bca44abbc2b30eefb9e0e550d197d49"
+    },
+    "prior_same_child_cpu_only": {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-tag-local-source-clone-actual-20261016.json",
+      "bytes": 46693,
+      "sha256": "73eccdea028dd76c27d180acc476b859af733a9f2a1d80e08b4d402752ead076"
+    }
+  },
+  "admission_path": "/private/tmp/unison-shared-io-local-job-admission-v1.json",
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/manual.py",
+    "private-dng-local-clone"
+  ],
+  "launch_environment": {
+    "SHARED_CPU_CREDITS": "8",
+    "OUTPUT_DIR": "/private/tmp/unison-shared-io-local-job-e5c1c3c3f8564c9ebdf40bbba08d522e",
+    "SHARED_IO_ADMISSION": "/private/tmp/unison-shared-io-local-job-admission-v1.json",
+    "SHARED_IO_ADMISSION_SHA256": "ROOT_PUBLISHED_SHA_REQUIRED_NOT_YET_AVAILABLE"
+  },
+  "limits": {
+    "worker_group_seconds": 60,
+    "cli_seconds_each": 10,
+    "max_cli": 24,
+    "max_cases": 8,
+    "each_synthetic_file_bytes": 1048576,
+    "maximum_retained_synthetic_payload_logical_bytes": 33554432,
+    "logs_planning_bytes": 33554432,
+    "cpu_indexes": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "compilers_sdk_adobe_photo_inputs": 0,
+    "physical_io_claim": "EX_GLOBAL only; no leaf/device independence. Reads/logicalwrites/storage allowances are planning bounds, no syscallIO/RSShardcap or physical allocation measurement.",
+    "parent_preflight": "Outside worker60s: source/binary/receipt metadata reads; no hard wholeparent deadline claimed."
+  },
+  "rights": "Root must explicitly admit exact job/source/artifacts/workspace/deadline afterfreshreadback. No runtimepermission from request; no publicpoolprovisioning/canonicalprobe replay/privatecamera successor. Inputs are generated tiny nonphotographic fixtures only."
+}
