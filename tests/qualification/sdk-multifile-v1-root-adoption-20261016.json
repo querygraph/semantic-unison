@@ -1,0 +1,41 @@
+{
+  "root_acceptance": {
+    "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-MULTIFILE-RECEIVING-V1-ACTUAL-ACCEPTANCE-20261016.json",
+    "bytes": 1185,
+    "sha256": "f3b0707254804c44772d0665ec95a50e3fd4986e94a0ac8b57aba95a9a6ea209"
+  },
+  "root_evidence": {
+    "state": "ACTUAL_TWO_MULTIFILE_GENERATED_SDK_RECEIVING_SEEDS_PASSED_CLOSED_ACCEPTED",
+    "independentAudit": {
+      "path": "/Users/alexy/src/photo/preview-generator/UNISON-SDK-MULTIFILE-RECEIVING-V1-INDEPENDENT-AUDIT-20261016.json",
+      "bytes": 5258,
+      "sha256": "1621c9a1f80e12c7a4b906dae19dddfa104368faef6d18105006e0f7de4ecb0f"
+    },
+    "actualRootAuditTool": {
+      "chunk": "a268bd",
+      "exitCode": 0,
+      "noRunningSession": true
+    },
+    "actualRootAuditOwner": {
+      "path": "/Users/alexy/src/photo/preview-generator/engine-v14-original-cohort/root-io-controls-ee40e49064c54696aab8add07d4e20d1/RESULT.json",
+      "bytes": 557,
+      "sha256": "4dde2a3c3d6c2c75a5a7ae7a38603344feb57c0823f380264ec7e3d6f78dff88"
+    },
+    "ownerTerminalAdopted": {
+      "session": 23264,
+      "terminalChunk": "2004ad",
+      "exitCode": 0,
+      "noRunningSession": true
+    },
+    "CLIcalls": 2,
+    "SDKhelpers": 4,
+    "generatedOutputsRehashed": 4,
+    "allUnisonAndRootAuditIOCPUClosed": true,
+    "photoIOCoordinationReleased": true,
+    "noReplayOrAutomaticSuccessor": true,
+    "limits": [
+      "Generated-input receiving only; no Photo/camera/semantic eligibility/pixel/corpus/performance/production claim."
+    ]
+  },
+  "scope": "Metadata-only adoption of independent actual acceptance; no runtime/payload replay or new resource grant."
+}

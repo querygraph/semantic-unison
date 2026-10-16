@@ -214,3 +214,15 @@ cover returned exit statuses, timeout, interruption and wait error; no second
 wait, signal or release proof is invented. Actual644a31/0/controlgroup+Unison8
 closed. Production/wire code and completed SDK159-source snapshot unchanged;
 actual compiler-timeout recovery remains separate from these injected controls.
+
+Root's [independent multi-file V1 acceptance](../tests/qualification/sdk-multifile-v1-root-adoption-20261016.json)
+is now locally adopted after exact acceptance and both referenced audit-receipt
+pins passed. Resource closure/release stands; no replay or new grant.
+
+The next [source-only receiving comparison](../tests/sdk_throughput/README.md)
+fixes24 calls: stock/Ox × endpoint workers1/3 × one warmup/five measured repeats,
+48 SDK helpers maximum. Three pure controls passed actualf4bffd/0, Unison8
+closed; no payload/SDK/runtime execution. This is end-to-end validation-path
+comparison, not isolated SDK decode throughput. Per-row retained ownership,
+independent audit, exact source/input/build pins and a fresh admission remain
+required before any run. Standing8/8 stays the default; no exclusive18 request.

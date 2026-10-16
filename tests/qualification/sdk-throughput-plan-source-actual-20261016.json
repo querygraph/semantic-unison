@@ -1,0 +1,36 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_throughput/plan_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.003s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 53160,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "canonical_cpu8_closed": true,
+  "sources": {
+    "tests/sdk_throughput/plan.py": "433fd4b591c55bac2671f2d2811689763d425211247b249dd1dd6b434f378ec3",
+    "tests/sdk_throughput/plan_test.py": "9d0bd92728b616da3d6bd36d69e9072c73e32989756af72c45e9aa9b3be31b84"
+  },
+  "scope": "Pure fixed24row comparative planning/limits controls only; zero SDK/clone/receiving/retained payload/canonical IO; not a runtime request or admission.",
+  "owner_tool_terminal": {
+    "chunk_id": "f4bffd",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Actual owning exec_command terminal."
+  }
+}
