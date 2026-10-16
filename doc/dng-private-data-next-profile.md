@@ -140,3 +140,33 @@ support requires a separate exact preservation/reference-closure policy and
 independent conformance plus receiving qualification; recognition alone must not
 remove the unknown-private-data refusal. Earlier statements of no camera data
 read describe their original source/control runs, not this later admitted run.
+# Candidate MakerNote directory geometry — source-only successor
+
+The saved separately admitted framing V2 result identifies one Adobe/MakN
+section with6556 payload bytes and original offset1404 inside a6576-byte private
+block. That is framing evidence only; it does not identify the camera-specific
+pointer grammar or establish XMP independence. This review reread saved JSON,
+not camera or retained-clone payload bytes.
+
+`tests/private_maker_shape.py` now provides a pure candidate classic-IFD shape
+probe with an explicit payload-relative reader, byte order, original offset and
+candidate directory offset. It checks a nonempty count<=256, known TIFF type
+widths, duplicate tags and bounded directory reads (at most3078bytes). It reports
+declared out-of-line extents relative to the proposed original base, including
+extents outside the payload. It reads no pointed values and emits no inline
+values; a LONG or IFD-typed inline value may still be a private pointer. A
+nonzero next-directory field remains unresolved and is not traversed.
+
+[Five original controls](../tests/qualification/private-maker-shape-source-actual-20261017.json)
+pass both byte orders, in/out-of-payload extents, inline-pointer ambiguity,
+unknown types, duplicate/oversized/truncated tables and exact typed metadata.
+Actual10346 reaped0/group absent/Unison8 closed, owning85eed6/0/no session. No
+SDK, filesystem media, camera/Photo data or canonicalIO access. All outputs keep
+maker recognition, private-reference closure and semantic eligibility false.
+
+This is a candidate-shape diagnostic, not a new format/profile contract. Before
+using retained bytes, prepare a fresh exact payload-slice/epoch/read-budget/
+sanitized-output executor and coordinated IO admission. Then use actual shape
+evidence plus a vendor-specific reference grammar to decide whether a bounded
+private profile can be justified. No current source-tag allowlist, receiving
+behavior or consumed admission is changed by this source-only work.

@@ -35,6 +35,21 @@ requested this handoff because usage limits are approaching, and requested that
 it stay updated. Do not restart completed work or reduce the objective to the
 next test. Do not claim completion from a green build, narrow fixture, or receipt.
 
+**Current independent work after mixed acceptance:** pure
+tests/private_maker_shape.py candidate geometry diagnostic added (no production
+profile change). Saved framing V2 has one6556B payload/originaloffset1404; only
+that JSON was read, no new retained payload. New reader bounds classic candidate
+IFD tables to256entries/3078requestedbytes, emits tags/types/counts/extent geometry
+without inlinevalues/pointedreads, reports outside-payload references. Maker
+recognition/private-reference closure/semanticeligibility stay FALSE always.
+Five authored-byte controls passed, child10346 reaped0/group absent/CPU8 closed,
+actual85eed6/0/no session; receipt private-maker-shape-source-actual-20261017.
+Next concrete action: design frozen slice/epoch/budget/sanitized-output executor
+for fresh IO review, then investigate a vendor-specific reference contract from
+actual shape evidence. No camera/private input read/admission exists for this
+new diagnostic; old grants remain consumed. doc/dng-private-data-next-profile.md
+updated. DraftPR2 contains current follow-up; full M1/M4/M6 scope remains open.
+
 Original objective: implement SOL.md by reusing current upstream cloning,
 adding general APFS receiver-basis clone updates, DNG semantic extensions/SDE,
 optional per-file Adobe validation, and qualified OxCaml coordinated workers;
