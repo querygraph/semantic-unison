@@ -112,3 +112,19 @@ real. Four modeled SDK helper records were audited, not executed. No actual
 CLI, SDK, retained input or EXglobal operation occurred; outer group/tokens
 closed. Actual clone preparation, fake-process transport, exact entry binding
 and native admission remain unqualified.
+
+`clone.py` prepares fixed `uncompressed.dng`/`jpeg.dng` receiving candidates
+from exact eight-field generated-source identities. It accepts retained0400
+or0644 modes without changing them, opens sources readonly/no-follow, fences
+source and directory epochs, requires a distinct single-link target before
+chmod0600, and uses fclonefileat only at runtime. No full-copy fallback, source
+hash, overwrite or cleanup unlink is provided. Qualified close uncertainty
+propagates through the existing retained-ownership carrier. This is harness
+preparation, not a competing production Unison clone engine.
+
+[Four clone preparation controls](../qualification/sdk-multifile-clone-source-actual-20261016.json)
+passed on original tiny files with injected target creation/link/refusal.
+They verify preserved source modes/epochs, no overwrite, stale-source refusal
+and no source chmod through an alias. No native clone, retained DNG, source
+hash, SDK or EXglobal call occurred; the control group/tokens closed.
+Actual native cloning remains subject to a future exact IO admission.
