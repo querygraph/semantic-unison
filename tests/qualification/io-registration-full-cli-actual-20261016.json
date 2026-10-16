@@ -1,0 +1,58 @@
+{
+  "schema": "unison-io-registration-full-cli/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_tool": 95299,
+      "chunk": "71f940",
+      "exit_code": 0,
+      "running_session": false,
+      "current_source_pins": 426,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-reg-full-stock-20261016a/RESULT.json",
+          "bytes": 43702,
+          "sha256": "c01817856417552ca901dd0d26e347cad9013712c39dc3b745e265beed9ddc46"
+        },
+        {
+          "path": "/private/tmp/unison-io-reg-full-stock-20261016a/SHARED-START.json",
+          "bytes": 1324,
+          "sha256": "9e84e80fa1eb50998d276a847faa1c5906d31742da71d0cd60afd7a42b8d63b9"
+        },
+        {
+          "path": "/private/tmp/unison-io-reg-full-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "92891d24c5e1184b1317820000bdd16726a9866a97f3e8b88b21ddd466ed0ae8"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_tool": 59836,
+      "chunk": "c87004",
+      "exit_code": 0,
+      "running_session": false,
+      "current_source_pins": 426,
+      "references": [
+        {
+          "path": "/private/tmp/unison-io-reg-full-ox-20261016a/RESULT.json",
+          "bytes": 43708,
+          "sha256": "8f9b64eee45dba09a721a5161d59cb53a3814d490db5343cf446927357f3d5ae"
+        },
+        {
+          "path": "/private/tmp/unison-io-reg-full-ox-20261016a/SHARED-START.json",
+          "bytes": 1316,
+          "sha256": "dcb8487cd4a60e217ac5fee7d1fcd168a1d1d2a365576aa6e1fb80a819fbd0b6"
+        },
+        {
+          "path": "/private/tmp/unison-io-reg-full-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "ac5e8f56f0894d6602f88a386847ad05898d0f374ee4fd556dfe18ca184af031"
+        }
+      ]
+    }
+  ],
+  "scope": "current full stock/Ox Make CLI and bounded application selftests, compilerjobs2/endpointworkers3 under Unison8; no SDK/Adobe/Photo/camera/EXglobal operation; Dune remains prior-source evidence",
+  "full_goal_complete": false
+}

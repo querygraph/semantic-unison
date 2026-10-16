@@ -91,3 +91,26 @@ handles are outside the transaction envelope. Physical block writes/sharing and
 elapsed performance require separate evidence. All qualification for this slice
 uses synthetic files and private temporary directories; no Adobe or Photo
 invocation is needed.
+
+## Selected owner-loop progress and registration repairs
+
+A [grant-observer control](../tests/qualification/admission-grant-observer-progress-actual-20261016.json)
+found that a throwing queued SemanticAdmission reply observer could leave a ready
+sibling asleep. Dispatch now continues draining ready owners before propagating
+the first observer error. The already-published grant is preserved. Stock/Ox
+finite fault suites and complete CLI builds/selftests pass at that source snapshot.
+
+A separate [IO registration control](../tests/qualification/io-registration-publication-actual-20261016.json)
+found queue publication before cancellation-observer registration. A failed
+registration could leave an unreachable ticket that later acquired credits.
+Queue-cell allocation now precedes registration, and publication occurs only
+after registration succeeds while the ticket is still waiting. One injected
+registration failure and immediate cancellation pass on both compilers, as do
+the ordinary20-group IO suite and fairness negative control. These selected
+pre-return failures no longer fall under the broad historical exclusion above;
+other allocation/OS-ownership boundaries retain their stated limitations.
+
+The [subsequent full CLI check](../tests/qualification/io-registration-full-cli-actual-20261016.json)
+rebuilds current stock/Ox Make applications and runs their bounded selftests after
+the IO registration repair. Both actual parents exit0 with groups and CPU tokens
+closed. Dune receipts remain their historical source snapshots.
