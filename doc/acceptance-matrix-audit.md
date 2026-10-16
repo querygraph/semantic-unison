@@ -66,3 +66,10 @@ barrier or Unison binary is used. The pending generated property-transfer
 request retains its original execution pins; this is additional evidence only.
 
 The frozen benchmark series stays unchanged: part3 failed/incomplete, mandatory part0 overlap and part3/part5 disclosures retained. Five complete partitions do not establish a full six-part result or clean quiet timing. Routine Adobe-free work can continue in the standing Unison eight-credit lane; no new whole-machine reservation is required for this audit.
+
+Current production sources, including the local profile-inspection identity
+guard, also passed fresh serial stock/Ox Dune builds and application selftests:
+[actual Dune receipt](../tests/qualification/current-dune-profile-guard-selftests-actual-20261016.json).
+Both owners exited0, with worker groups and Unison tokens closed. This updates
+build-system evidence only; it does not promote historical receiving receipts
+to new source snapshots or qualify the pending property-transfer matrix.
