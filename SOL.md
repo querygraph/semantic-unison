@@ -4,6 +4,16 @@
 
 ## Current checkpoint — 2026-10-15
 
+Core receiving follow-up prepared: [transport-separated opaqueDNG fallback case](tests/private_dng_remote_fallback/README.md)
+reuses strictloopback owners for4stock/Oxclient/serverpairs,12CLI future scope.
+Audit requires actualsemanticdecline+receiverbasisclone, independentfull/complement/
+basis/no-op/staging proof; rejects local-sourceclone orSDEsuccess so no routing
+substitution. [5pure audit methods](tests/qualification/private-remote-fallback-audit-controls-20261016.json)
+4bf355/0 CLOSED/groupreaped/CPU00..07closed; fabricateddataonly/no actualtransport.
+Casehelper issource-prepared/syntaxchecked, NOTexecuted; future qualifiedouter
+owner mustretain separatelysessioned server/client/supervisor/pumps andunknown
+outcomes before anynewIOwindow. No newrootgrant/camera/SDK/Photo/payloadaccess.
+
 [13fake dispatcher lifecycle controls](tests/qualification/shared-io-dispatch-lifecycle-actual-20261016.json)
 be66c9/0 CLOSED/groupreaped/tokens00..07closed; no realIO/testchildren. Tests
 found post-known-close receipt-write error falsely retainedowner: fixed with
