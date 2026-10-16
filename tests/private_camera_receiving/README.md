@@ -38,6 +38,15 @@ CLI/default camera input. Its eventual admitted entrypoint must retain uncertain
 descriptor carriers and its parent must independently audit calls and aggregate
 closure before release. Native clone and actual camera transport remain unrun.
 
+`audit.py` now separates a complete two-case/six-call functional result from a
+settled failed prefix. It binds journal calls to the admitted compiler and case
+roots, matches each case's stored outcomes, checks exactness flags/digest scope,
+and refuses conflicting failure/success claims. Zero-call failure is accepted
+only in the pinned worker's pre-transport preparation phase; an empty journal
+after possible dispatch remains unknown. [Twenty-eight current controls](../qualification/camera-result-audit-source-controls-actual-20261016.json)
+pass on tiny original/mock fixtures. This pure audit does not prove aggregate
+or parent exit, authenticate admission, grant payload reads, or close resources.
+
 The next separately reviewed owner must provide all of the following before
 this kernel can be used with the retained Unison-owned camera-derived clone:
 

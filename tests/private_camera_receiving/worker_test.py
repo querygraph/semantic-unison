@@ -18,16 +18,17 @@ class Controls(unittest.TestCase):
         self.work=self.root/'work';self.work.mkdir(mode=0o700)
         self.plan={'source':{'path':str(self.source),'identity':worker.clone.stamp(self.source.lstat()),
                     'historical_sha256':hashlib.sha256(b'four').hexdigest()},
-                   'binaries':{label:{'label':label} for label in ('stock','ox')}}
+                   'binaries':{label:{'label':label,'path':'/mock/'+label} for label in ('stock','ox')}}
         self.calls=0;self.failure=None
     def tearDown(self):self.temp.cleanup()
     def prepare(self,source,expected,directory):
         target=directory/'image.dng';target.write_bytes(b'four');target.chmod(0o600)
         # Explicit mock of the runtime clone boundary, not native proof.
-        return {'backend':'native-fclonefileat-only','test_double':True}
+        return {'backend':'native-fclonefileat-only','test_double':True,'source_identity':dict(expected)}
     def invoker(self,directory,item,server,journal,pins,deadline):
         def call(stage):
-            self.calls+=1;argv=['mock-only',item['label'],stage]
+            self.calls+=1;argv=[item['path'],str(directory/'left'),
+                               'ssh://localhost/'+str(directory/'right')]
             journal.begin({'label':item['label'],'mode':'semantic','workers':2,
                            'directory':str(directory),'stage':stage},argv)
             def group(pid):return {'pid':pid,'reaped':True,'returncode':0,
@@ -36,7 +37,8 @@ class Controls(unittest.TestCase):
                 'supervisor_capture_truncated':False,'client_cleanup':group(10),
                 'supervisor_cleanup':group(11),'proxy':{'schema':'unison-loopback-protocol-count/1',
                     'server_cleanup':group(12),'server_pid':12,'server_returncode':0,
-                    'input_pump_joined':True,'server_command':['mock-only','-server']}}
+                    'input_pump_joined':True,'server_command':[item['path'],'-server'],
+                    'fault':None,'pump_errors':[]}}
             if stage==self.failure:
                 outcome['returncode']=outcome['client_cleanup']['returncode']=1
             elif stage!='noop':

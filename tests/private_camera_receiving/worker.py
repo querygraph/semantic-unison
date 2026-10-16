@@ -71,6 +71,7 @@ def execute(plan,workspace,deadline_monotonic):
         save(output,result)
         return result
     except BaseException as error:
+        result['complete']=False
         result['failure']=repr(error)
         save(output,result)
         raise

@@ -1,0 +1,109 @@
+{
+  "schema": "unison-camera-result-audit-source-controls/1",
+  "actual_owner_terminal": {
+    "chunk": "12d1ea",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "closure": {
+    "child": {
+      "pid": 70192,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 70192,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "controls": 28,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/audit.py",
+      "bytes": 4715,
+      "sha256": "c5ead935e9efc458f5e9fc158a3741acb64bc910cb8e69fe1c6bda3a4a45e2d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/audit_test.py",
+      "bytes": 2976,
+      "sha256": "92cd79d875baa41c8052eb0036e24d330cf45df8519c80ccc59d53f58036c89c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case.py",
+      "bytes": 5740,
+      "sha256": "9257a0b41b5d2a7eb3a14f2ba1fcaadb844bb40118d2d2d7add73be36c1b09e0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/case_test.py",
+      "bytes": 3368,
+      "sha256": "eeb8619ca6a2006c9e039d9f446a46ccd359a32fac8edee9aaa6db3ac5cbcc54"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone.py",
+      "bytes": 3965,
+      "sha256": "f280735c2855204f811f8e7385b00efb2bff8783f5e39620e0007161b9db2d3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/clone_test.py",
+      "bytes": 2581,
+      "sha256": "9a069c28b4bce3818489f293717a0723c9023d577744c54b5d01dd5b0e299819"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/controls.py",
+      "bytes": 337,
+      "sha256": "5ace27021ffef0adb952a7c162840111f89af7cd1a61b52e26fa1d4bbcde1f69"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport.py",
+      "bytes": 4727,
+      "sha256": "cc7478f183487c6ba3defd8da118ee22176bd0b02a2967189123d41f3e5c2f4d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/transport_test.py",
+      "bytes": 3832,
+      "sha256": "0c1cd5078194a32e93c09078950e21c6ffb18000eb6a5d73b509662164a2b53c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker.py",
+      "bytes": 3821,
+      "sha256": "39570050ca2ef8da4510611e465093f442c6947efaaa5fd1b07745c08fd11a47"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/worker_test.py",
+      "bytes": 4293,
+      "sha256": "8d8c090a109ea27653a05be366153614724ac4716f65be5876f2c5bc2707ee9c"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-audit-source-09l1nzkp/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d298a18b4199cdfc0a9756fee8d5e8076bf9375199d8f22164397f263c656a17"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-audit-source-09l1nzkp/SHARED-START.json",
+      "bytes": 1179,
+      "sha256": "94f2630a893e7d7b66c7752b550753de9146a940547396a489a1d7d423dbab70"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-audit-source-09l1nzkp/SHARED-STDERR.txt",
+      "bytes": 127,
+      "sha256": "040e1cbe462de1b5255d4ce95545a6647a835ed2df95f26ec945b43e0430046e"
+    },
+    {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-camera-audit-source-09l1nzkp/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Tinyoriginalfixtures/mockclone/mocktransport; purebinding and malformedresultrefusals. ActualoutercanonicalCPU8/groupclosed; camera/nativeclone/EXglobal/SDK/Adobe/Unisonbinary notexecuted. Parentactualterminal/reap remainsseparatefrompureaudit."
+}
