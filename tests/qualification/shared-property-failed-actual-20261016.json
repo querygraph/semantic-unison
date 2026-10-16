@@ -1,0 +1,87 @@
+{
+  "schema": "unison-property-failed-qualification/1",
+  "return": {
+    "path": "/private/tmp/unison-shared-properties-812b6b95/OWNER-RETURN.json",
+    "bytes": 3344,
+    "sha256": "bb62e6c91041f785a085c97dc792017032bb0556a3a51ed4e7dcf7447fa77c5f"
+  },
+  "result": {
+    "schema": "unison-property-failed-return/1",
+    "status": "FAILED_FIRST_SEED_RECOVERED_CLOSED",
+    "admission_sha256": "d18c405cb3d79a4ce6979202bc61fdd0949d7f93339035a4d87f1a5fed529db8",
+    "request_sha256": "a2a603602d7c3752c189ebb1d02ec59abdcc8d7c0d0bc0f90f519559e294593d",
+    "actual_owner_terminal": {
+      "schema": "unison-owner-terminal-transcription/1",
+      "session": 17842,
+      "initial_chunk": "1b84d6",
+      "terminal_chunk": "c39203",
+      "exit_code": 137,
+      "running_session": false,
+      "scope": "Actual write_stdin result after qualified idleparent-only stop; not normalexit/workerwait4."
+    },
+    "actual_cli_calls": 1,
+    "actual_server_starts": 0,
+    "completed_rows": 0,
+    "original_worker_reap_claimed": false,
+    "resource_reacquisition": {
+      "schema": "unison-property-failed-owner-closure/1",
+      "actual_owner_terminal": {
+        "session": 17842,
+        "chunk": "c39203",
+        "exit_code": 137,
+        "running_session": false
+      },
+      "original_worker_reaped_by_owner": false,
+      "worker_and_all_recorded_groups_absent": true,
+      "fresh_EXglobal_and_CPU00_07_bundle_acquired_and_closed": true,
+      "unix": 1792126986.348962,
+      "functional_status": "FAILED_FIRST_SEED_ZERO_SERVER_START_ZERO_COMPLETED_ROWS",
+      "scope": "Independent pinnedproxy no-servercreation+actualdirectcallreaps then idleparent-onlystop; preserve original retention and failure. Not54CLI/propertypass/normalownerexit/workerwait4 claim."
+    },
+    "cause_source_observation": "Uarg.Bool consumes only --flag=value form; -xattrs true left bare true as third anonymous root/profileargument. -rsrc usesString and takes separate true. No correctedCLIrun attempted.",
+    "pins": [
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/SHARED-START.json",
+        "bytes": 5657,
+        "sha256": "fd0d0c921af5ce5dd4144a878e266da3e4ca62e00e7d09979fb157637fafd1d0"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/RESULT.json",
+        "bytes": 154966,
+        "sha256": "95dccdee6c58ffa233ebded9bf7fc7f50dbb62cead271a27e8d779dc2f674e8c"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/SHARED-OWNERSHIP-RETAINED.json",
+        "bytes": 314,
+        "sha256": "4f6452a1de006400cf5baf349ff9958678f92ad2e0ded79c5d935e2bfc53d7fb"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/SHARED-STDERR.txt",
+        "bytes": 3716,
+        "sha256": "c5b916901d86e85594db4ade356f5b3e2255d912a4f9a463222542967ee022d4"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/INDEPENDENT-IDLE-OWNER-STOP-PROOF.json",
+        "bytes": 6122,
+        "sha256": "c01a42cb1ed01f2f33d307e1dfab8678f801d0339ce2841300c6394016a71076"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/INDEPENDENT-RECOVERY-CLOSED.json",
+        "bytes": 659,
+        "sha256": "f4dc68b41fd1bf9b9eea2a805bdceb74618e96fd10fc06821ac97f07e8f1823b"
+      },
+      {
+        "path": "/private/tmp/unison-shared-properties-812b6b95/OWNER-TERMINAL.json",
+        "bytes": 289,
+        "sha256": "4ff8e98855cebdc23cca0fef8387ec6c6292b74cad7b4573244f511d52a29eff"
+      }
+    ],
+    "no_retry_or_successor": true
+  },
+  "scope": "One failedseed and qualifiedidleparent recovery. Actualdirectclient+supervisorgroupsreaped; no servercreated. No propertyreceivingpass/54calls/normalownerexit/aggregateworkerwait4."
+}
