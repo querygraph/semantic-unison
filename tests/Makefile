@@ -40,3 +40,7 @@ sde-conformance:
 .PHONY: stock-check ox-check
 stock-check ox-check:
 	python3 tests/manual.py $@
+
+.PHONY: stock-dune-check ox-dune-check
+stock-dune-check ox-dune-check:
+	python3 tests/manual.py $@

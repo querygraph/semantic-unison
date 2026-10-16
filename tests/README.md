@@ -299,3 +299,21 @@ Outer group settlement remains mandatory before token close. The legacy
 stock-make/ox-make invocations retain their separate unshared defaults.
 [Actual matched current-source qualification](qualification/shared-current-make-selftests-actual-20261016.json)
 retains complete build/selftest/log/binary pins and owner terminals.
+
+
+Dune has equivalent bounded shared check targets:
+
+```sh
+SHARED_CPU_CREDITS=8 STOCK_PREFIX=/absolute/stock/compiler/bin \
+  /absolute/python3.14 tests/manual.py stock-dune-check
+SHARED_CPU_CREDITS=8 OX_PREFIX=/absolute/ox/compiler/bin \
+  /absolute/python3.14 tests/manual.py ox-dune-check
+```
+
+`make -f tests/Makefile stock-dune-check` and `ox-dune-check` also work with the
+same environment and qualified Python on PATH. The selected compiler prefix
+must provide Dune as well as OCaml. Same private snapshot, serial build/selftest,
+Unison8 token protocol and explicitworker/Adobeoff settings as the Make check
+route; legacy stock-dune/ox-dune defaults stay separate.
+[Actual current Dune qualification](qualification/shared-current-dune-selftests-actual-20261016.json)
+retains full source/binary/log/module and owner/group closure pins.

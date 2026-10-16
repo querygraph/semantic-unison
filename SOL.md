@@ -4,6 +4,17 @@
 
 ## Current checkpoint — 2026-10-15
 
+Currentstock/Ox fullDune+selftests [ACTUALPASS/CLOSED](tests/qualification/shared-current-dune-selftests-actual-20261016.json)
+include target-proofguard:7962/7d4775/0 and22524/d2520c/0/no sessions;
+workerreaped0/othermembersabsent/tokensclosed.425current source/buildpins match
+bothsnapshots+checkout; binary/loghashes and semanticDelta+dngPrivateData native
+CMX/O/CMI presence checked. New stock-dune-check/ox-dune-check route under
+Unison00..07/max2compilerjobs thenserialselftestworkers3/adobeoff, endpoint3+3+
+owner2 declared8. Inactivemodulecompilation isnotactivation/camerasupport.
+No EXIO/Adobe/SDK/Photo/GUI/currentMake refresh/quiettimingclaim; priorMake
+sourcequalification remains historical. Entiregoal/acceptancematrixstillopen.
+
+
 SDE planning now rejects decodedSDR/hash-only TARGET proofs: targetmustretain
 full replacementbytes; peerBASE remainslegal/unverified. Priorplanner could
 return an incompletepayloadenvelope fromanSDRtarget (receiverstillrejected;

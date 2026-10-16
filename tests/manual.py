@@ -14,6 +14,7 @@ Targets:
   stock-make / stock-dune  build stock CLI and run selftests; STOCK_PREFIX required
   ox-make / ox-dune        build checked OxCaml CLI and run selftests; OX_PREFIX required
   stock-check / ox-check  Make plus selftests capped at3 semantic workers, shared lane
+  stock-dune-check / ox-dune-check  Dune plus the same shared bounded selftests
   stock-build / ox-build  Make build only; no resulting Unison executable invocation
   inspect-stock / inspect-ox build/retain the read-only inspector only; compiler prefix required
   inspect-file            reuse a pinned inspector; INSPECTOR_RECEIPT and absolute INSPECT_INPUT required
@@ -90,19 +91,19 @@ def shared_resource_plan(target, environment):
         return None
     credits = int(value)
     require(1 <= credits <= 8, 'shared Unison lane must be 1..8 credits')
-    build = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check')
+    build = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check')
     framing = target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
     inspect_file = target in ('inspect-file', 'private-dng-framing-input')
     endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector or framing else 0
-    selftest_endpoints = [3, 3] if target in ('stock-check', 'ox-check') else []
+    selftest_endpoints = [3, 3] if target in ('stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check') else []
     overhead = 2 if build or inspector or framing or inspect_file or endpoints else 1
     inspector_workers = 1 if inspect_file else 0
     declared_peak = max(jobs + sum(endpoints) + inspector_workers, sum(selftest_endpoints)) + overhead
     require((not build or 1 <= jobs <= 2) and declared_peak <= credits,
             'declared shared work exceeds project grant')
-    implemented = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'read-parser', 'group-parser',
+    implemented = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
                              'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
                              'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone')
@@ -133,7 +134,7 @@ def command(target, output, environment):
     if shared is not None:
         shared = int(shared)
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
-        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'sync-functional',
+        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'sync-functional',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
                            'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'),
@@ -207,12 +208,14 @@ def command(target, output, environment):
         script = ('interrupted_receipt_lifecycle_test.py' if target == 'interrupted-receipts'
                   else 'aggregate_successor_lifecycle_test.py')
         return [sys.executable, str(ROOT / 'bench/sync' / script)]
-    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune', 'stock-build', 'ox-build', 'stock-check', 'ox-check'):
-        kind, system = target.split('-')
+    if target in ('stock-make', 'ox-make', 'stock-dune', 'ox-dune', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check'):
+        kind, system = target.split('-', 1)
         build_only = system == 'build'
-        shared_check = system == 'check'
-        if build_only or shared_check:
+        shared_check = system in ('check', 'dune-check')
+        if build_only or system == 'check':
             system = 'make'
+        elif system == 'dune-check':
+            system = 'dune'
         if shared_check:
             require(shared is not None and shared >= 8, 'shared selftest requires full Unison8 lane')
         key = 'STOCK_PREFIX' if kind == 'stock' else 'OX_PREFIX'

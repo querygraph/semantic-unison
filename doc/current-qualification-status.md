@@ -262,3 +262,10 @@ rejects SDR hash-only targets before creating an incomplete payload envelope.
 Peer-base claims remain accepted against full local targets. Stock/Ox conformance
 passes127commands/2197assertions each and detects the private old-guard variant.
 Earlier full Make/selftest evidence remains for its exact earlier source snapshot.
+
+[Current Dune application builds+selftests](../tests/qualification/shared-current-dune-selftests-actual-20261016.json)
+now passed on stock/Ox including the target-proof guard;425matching current
+source/build pins, binary/log hashes and native module objects checked. Actual
+parent/group closure and tokens released. New shared Dune-check targets retain
+max2compilerjobs, then explicitworkers3/adobeoff selftests. No new Make, GUI,
+camera, SDK, hard resource-cap or whole-goal acceptance follows from this refresh.
