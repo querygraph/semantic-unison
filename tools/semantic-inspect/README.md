@@ -106,3 +106,17 @@ wire sizes; both containing groups settled and tokens closed. No compilation or
 Adobe call occurred. These arbitrary-byte packets intentionally lack supported
 XML interpretation. This qualifies actual reuse plumbing, not real-camera
 validity, XML merge, receiving/publication or Photo-copy authorization.
+
+## Filename bytes in JSON
+
+Reports preserve valid UTF-8 text in `path`. Invalid UTF-8 filename bytes are
+escaped as JSON `\u00XX`, so every report remains valid UTF-8/JSON. Because that
+display can coincide with a genuine Unicode character, each target/basis also
+includes `path_bytes_hex`: lowercase hexadecimal of the exact original path
+bytes. Use that field for lossless filename identity; do not re-open a file by
+round-tripping the display string. This additive diagnostic field does not
+change semantic proof identities or authorize later access to the path.
+
+`json_test.py --ocamlopt /absolute/compiler --report /fresh/report.json` compiles
+the exact JSON helpers and compares268 byte/Unicode cases against Python's
+independent strict JSON and UTF-8 decoding. It opens no image input.

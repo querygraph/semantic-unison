@@ -2,12 +2,31 @@
 let quote s =
   let b = Buffer.create (String.length s + 2) in
   Buffer.add_char b '"';
-  String.iter (fun c -> match c with
-    | '"' -> Buffer.add_string b "\\\""
-    | '\\' -> Buffer.add_string b "\\\\"
-    | c when Char.code c < 32 ->
-        Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
-    | c -> Buffer.add_char b c) s;
+  let byte i = Char.code s.[i] in
+  let continuation i = i < String.length s && byte i land 0xc0 = 0x80 in
+  let rec loop i =
+    if i < String.length s then begin
+      let n = byte i in
+      let width =
+        if n >= 0xc2 && n <= 0xdf && continuation (i+1) then 2
+        else if n >= 0xe0 && n <= 0xef && continuation (i+1) && continuation (i+2)
+          && (n <> 0xe0 || byte (i+1) >= 0xa0)
+          && (n <> 0xed || byte (i+1) < 0xa0) then 3
+        else if n >= 0xf0 && n <= 0xf4 && continuation (i+1)
+          && continuation (i+2) && continuation (i+3)
+          && (n <> 0xf0 || byte (i+1) >= 0x90)
+          && (n <> 0xf4 || byte (i+1) < 0x90) then 4
+        else 1 in
+      if width > 1 then Buffer.add_substring b s i width
+      else (match s.[i] with
+        | '"' -> Buffer.add_string b "\\\""
+        | '\\' -> Buffer.add_string b "\\\\"
+        | c when n < 32 || n >= 128 ->
+            Buffer.add_string b (Printf.sprintf "\\u%04x" (Char.code c))
+        | c -> Buffer.add_char b c);
+      loop (i + width)
+    end in
+  loop 0;
   Buffer.add_char b '"'; Buffer.contents b
 let object_ fields = "{" ^ String.concat "," (List.map (fun (k,v) -> quote k ^ ":" ^ v) fields) ^ "}"
 let array xs = "[" ^ String.concat "," xs ^ "]"
@@ -21,12 +40,16 @@ let meanings extension proof = match SemanticDelta.observe ~extension proof with
       "properties",array (List.map (fun (p:FormatExtension.property) -> object_
         ["name",quote p.name;"category",quote (category p.category);
          "encoding_context_sha256",quote (SemanticHash.hex p.digest)]) value.properties)]
+let path_fields path =
+  let bytes = Buffer.create (2 * String.length path) in
+  String.iter (fun c -> Buffer.add_string bytes (Printf.sprintf "%02x" (Char.code c))) path;
+  ["path",quote path; "path_bytes_hex",quote (Buffer.contents bytes)]
 let report extension path = function
-  | Error reason -> object_ ["path",quote path; "status",quote "unsupported";
-                             "reason",quote reason]
+  | Error reason -> object_ (path_fields path @ ["status",quote "unsupported";
+                             "reason",quote reason])
   | Ok proof ->
     let d = SemanticDelta.describe proof in
-    object_ (["path",quote path; "status",quote "supported";
+    object_ (path_fields path @ ["status",quote "supported";
       "profile",quote d.profile; "size",Int64.to_string d.size;
       "sha256",quote (SemanticHash.hex d.digest);
       "preserved_sha256",quote (SemanticHash.hex d.preserved_digest);
