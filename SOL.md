@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+DuringPhotoV11IOhold, [opt-in dispatcher source successor](doc/shared-io-dispatch-successor.md)
+connects EX_GLOBAL→CPU wholebundle to complete-local-job inspect-file/private-DNG
+syntheticclone targets only; defaultCPU-only unchanged. Explicit pinnedRootIOjob
+receipt/source+argv+workspace+deadline required, oneattemptmarker, NB rollback,
+parent+worker inheritedIOFDsthroughgroup settlement, CPUthenIOclose/unknownretention.
+[4mock admission/refusal methods](tests/qualification/shared-io-dispatch-source-controls-20261016.json)
+149bdc/0 CLOSED/tokens00..07closed, NOcanonicalIO/payload/SDK/compiler. Fullnew
+dispatcher lifecycle/livejob integration remains UNQUALIFIED; no jobadmitted,
+no currentprivateDNG/Photo/V7production integration or physicalisolation claim.
+Nextsafeaction: mockedfull-lifecycle ordering then separately pinnedlive tinyjob
+afterPhotoactualclosure; currentIOhold respected. Goal remainsactive/incomplete.
+
 ACTUAL [canonical EX_GLOBAL probe](tests/qualification/canonical-io-probe-actual-20261016.json)
 PASS/CLOSED under freshRoot33ea18d4 reschedule22ac585e/admission2519623d:
 owner82843 initialterminal7efd2e/0/no session, worker82844reaped0/othersabsent,

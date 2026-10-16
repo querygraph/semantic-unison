@@ -113,6 +113,14 @@ def shared_resource_plan(target, environment):
 
 
 def command(target, output, environment):
+    io_path = environment.get('SHARED_IO_ADMISSION')
+    io_sha = environment.get('SHARED_IO_ADMISSION_SHA256')
+    if io_path is not None or io_sha is not None:
+        require(bool(io_path) and Path(io_path).is_absolute() and bool(io_sha)
+                and len(io_sha) == 64 and all(c in '0123456789abcdef' for c in io_sha)
+                and environment.get('SHARED_CPU_CREDITS') is not None
+                and target in ('inspect-file', 'private-dng-local-clone'),
+                'IO mode requires pinned admission, shared CPU and complete-local-job target')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
@@ -271,7 +279,10 @@ def main():
             output = Path(tempfile.mkdtemp(prefix='unison-shared-' + target + '-'))
             argv = command(target, output, os.environ)
         print('Shared owner report directory: ' + str(output), flush=True)
-        raise SystemExit(run(target, argv, output, int(shared)))
+        io_request = ({'path': os.environ['SHARED_IO_ADMISSION'],
+                       'sha256': os.environ['SHARED_IO_ADMISSION_SHA256']}
+                      if os.environ.get('SHARED_IO_ADMISSION') else None)
+        raise SystemExit(run(target, argv, output, int(shared), io_admission=io_request))
     if host:
         print('Runner owns its output and process lifecycle.', flush=True)
         os.execv(sys.executable, argv)
