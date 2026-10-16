@@ -299,5 +299,10 @@ and [Dune pair](../tests/qualification/current-dune-profile-guard-selftests-actu
 Each stock/Ox build+selftest passed with425current production/build pins and
 actual terminal/group/token closure. Earlier paragraphs retain their historical
 source scopes; these new builds do not requalify earlier receiving results.
-The [property-transfer request](shared-property-io-request-v1.json) remains a
-separate, unstarted generated-fixture qualification, with no camera/Adobe grant.
+The property-transfer sequence subsequently ran V3 under its fresh exact
+admission: [actual qualification](../tests/qualification/shared-property-io-actual-20261016.json).
+All18rows/54calls passed generated nativefork/xattr removal, selectedreadonly
+mode, retainedoldreaders and no-op epochs, with exactdata/basis and actual
+parent/group/IOCPUclosure. V1 failedfirstseed/recovery and V2 preexecinterpreter
+mismatch refusal remain preserved; V3 consumed once, no successor grant.
+This is generated-fixture scope, with no camera/Adobe/quiettiming qualification.

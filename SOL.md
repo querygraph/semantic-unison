@@ -4,6 +4,19 @@
 
 ## Current checkpoint — 2026-10-16
 
+Generated property-transfer V3 now [PASSED/CLOSED](tests/qualification/shared-property-io-actual-20261016.json)
+once under fresh admissione333f952. Actual owner24600/e4fe28/exit0/no session;
+worker58421 reaped0/other group members absent, EXglobal and Unison00..07 closed.
+All18 rows/54 client-supervisor-server call receipts and54 journal outcomes
+independently reparsed. Stock/Ox ordinary/receiverclone/semantic workers1/2/3
+preserved exact data/basis bytes, removed selected native fork/named xattr,
+selected0400 mode, retained old FD reader data/fork/xattr/mode/mtime, and left
+no-op identity/property epochs unchanged.36 generated2MiB fixtures only;
+no Photo/camera/SDK/Adobe/quiettiming/physicalsharing/hardRSS claim. V1 remains
+failed/recovered and V2 exact-command preexec refusal remains preserved; V3
+corrected interpreter binding, consumed once, no retry/successor authorization.
+Earlier property source-only checkpoints below are historical predecessors.
+
 Current stock/Ox application qualification includes the local profile-inspection
 guard in both build systems: [Make pair](tests/qualification/current-property-make-selftests-actual-20261016.json)
 and [Dune pair](tests/qualification/current-dune-profile-guard-selftests-actual-20261016.json).

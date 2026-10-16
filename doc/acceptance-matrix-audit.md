@@ -2,6 +2,16 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+The latest [generated property-transfer V3 qualification](../tests/qualification/shared-property-io-actual-20261016.json)
+now adds actual18-row/54-call stock/Ox ordinary/clone/semantic coverage with
+workers1/2/3: selected named xattr/native fork removal,0640→0400 mode,
+retained old FD readers and unchanged no-op property epochs, alongside exact
+data/basis checks. Actual owner24600/e4fe28/0 and all worker/call groups settled;
+EXglobal and Unison8 closed. This improves rows1/5/7/11 without establishing
+all supported filesystem properties or platforms. V1 failure/recovery and V2
+pre-exec refusal remain preserved; this separately admitted V3 is consumed once.
+The source-prepared/unstarted descriptions below retain their predecessor scope.
+
 | Requirement | Existing scoped evidence | Still open |
 | --- | --- | --- |
 | 1. Exactness | Independent SDE/SDR vectors, complement/full hashes, scoped synthetic materialization, exact CLI/no-op controls. [conformance](../tests/semantic/conformance/qualification-20261013.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Full source-selected fork/property state across all supported filesystem and publication families is not established by kernel vectors. |
