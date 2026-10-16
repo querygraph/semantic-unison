@@ -34,9 +34,12 @@ Before any runtime request, a versioned executor must:
    uncertain FD close retains ownership; deadline observations do not kill it.
 5. Bind each candidate receipt and digest independently, full receiving SHA,
    borrowed source metadata fences, and all final CPU/IO descriptor closures.
-6. Record helper start/end intervals from an authoritative monotonic clock and
-   actual PIDs. Two correct receipts alone do not prove overlap. If intervals
-   fail to overlap, record a functional serial result and leave concurrency open.
+6. Record two or more nonterminal observations per retained helper from the
+   supervisor's common monotonic clock and actual PIDs. Bound live intervals by
+   first/last nonterminal samples; spawn-to-observed-terminal times can overstate
+   overlap because an owner may notice exit late. Two correct receipts alone do
+   not prove overlap. If live spans fail to overlap, record a functional result
+   and leave concurrency open.
 7. Keep timing descriptive under shared8; throughput qualification needs its own
    controlled repeated workload. No semantic eligibility/pixel/corpus claim.
 
@@ -59,3 +62,10 @@ producer, prove actual helper concurrency, establish settlement, close FDs or
 authorize resource release. Its output explicitly leaves those flags false.
 Next integration must bind events to the actual supervised spawn/terminal
 observations and separately audit all existing helper/group ownership proofs.
+
+The production supervisor now offers optional `observe_alive` diagnostics at its
+retained nonterminal child census. A separate original `/bin/sleep` component
+control observes overlapping live spans and empty groups/direct reap on stock/Ox;
+this is not yet connected to DNG validation or a qualified SDK event stream.
+Default calls omit the observer and emit no live samples. Actual process lifetime
+overlap does not establish simultaneous CPU execution or throughput improvement.

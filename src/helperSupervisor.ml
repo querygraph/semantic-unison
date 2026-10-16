@@ -269,7 +269,7 @@ let drain scratch stream =
   in
   loop 65536
 
-let execute ?observe_group c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
+let execute ?observe_group ?observe_alive c ~release ~owner_cleanup ~owner_settled limits executable argv0 arguments environment =
   let started = if Sys.win32 then 0. else monotonic_now () in
   let empty outcome =
     { outcome; status = None; child_pid = None; stdout = ""; stderr = "";
@@ -388,7 +388,14 @@ let execute ?observe_group c ~release ~owner_cleanup ~owner_settled limits execu
            if !owned_pid >= 0 then signal_group !owned_pid Sys.sigkill;
            killed := true
        | _ -> ());
-      if !owned_pid >= 0 && exited_unreaped !owned_pid then begin
+      let exited = !owned_pid >= 0 && exited_unreaped !owned_pid in
+      if !owned_pid >= 0 && not exited then
+        (* [now] precedes the nonterminal census. The retained child identity
+           cannot be recycled before reap. This is observed process lifetime,
+           not CPU execution or successful validation. Observer failure enters
+           the ordinary owned-child teardown path. *)
+        (match observe_alive with None -> () | Some observe -> observe !owned_pid now);
+      if exited then begin
         (* Kill leftover descendants before waitpid releases the leader's
            PID, so a recycled PID cannot name an unrelated process group. *)
         (* Darwin reports EPERM, rather than ESRCH, for a group whose only
@@ -465,7 +472,7 @@ let execute ?observe_group c ~release ~owner_cleanup ~owner_settled limits execu
       raise exn
 
 type process_limits = { launcher : string; descriptors : int; address_space_bytes : int64 }
-let run ?argv0 ?process_limits ?observe_group t ~weight c ~limits ~executable ~arguments ~environment =
+let run ?argv0 ?process_limits ?observe_group ?observe_alive t ~weight c ~limits ~executable ~arguments ~environment =
   let argv0 = match argv0 with None -> executable | Some name -> name in
   if contains_nul argv0 then invalid_arg "HelperSupervisor: NUL in argv[0]";
   validate ~limits ~executable ~arguments ~environment;
@@ -492,7 +499,7 @@ let run ?argv0 ?process_limits ?observe_group t ~weight c ~limits ~executable ~a
       release t ~weight ~child:true
     end in
   let execute_owned () =
-    execute ?observe_group c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
+    execute ?observe_group ?observe_alive c ~release:release_once ~owner_cleanup ~owner_settled limits executable argv0 arguments environment in
   let failed exn =
     (try !owner_cleanup () with _ -> ());
     release_once (); fail exn in

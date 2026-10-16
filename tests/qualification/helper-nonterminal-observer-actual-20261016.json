@@ -1,0 +1,134 @@
+{
+  "schema": "unison-helper-nonterminal-observer/1",
+  "state": "PASSED_CLOSED",
+  "runs": [
+    {
+      "kind": "actual-sleep-helpers",
+      "compiler": "stock",
+      "actual_tool": 2355,
+      "chunk": "6fca10",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-helper-alive-stock-20261016b/RESULT.json",
+          "bytes": 1813,
+          "sha256": "084640d2069dcc87dae86e2c83940c91ba1ba0644ab3333758c6d78b2f7b2883"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-stock-20261016b/SHARED-START.json",
+          "bytes": 1217,
+          "sha256": "885dcd50388519ae26865ed8c6e37776e838bcc61cb8f78e898c3e4b90a86317"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-stock-20261016b/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "67d80147967aa0a9cd073b4fcfe9f4913e1367a3a2e12e6c0d41099b01707161"
+        }
+      ]
+    },
+    {
+      "kind": "actual-sleep-helpers",
+      "compiler": "ox",
+      "actual_tool": 78645,
+      "chunk": "a53dee",
+      "exit_code": 0,
+      "running_session": false,
+      "references": [
+        {
+          "path": "/private/tmp/unison-helper-alive-ox-20261016b/RESULT.json",
+          "bytes": 1814,
+          "sha256": "63d0955528e1d9dc2aad0204c9649c69ab522a9334a7554155c1c5307b6d3ba2"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-ox-20261016b/SHARED-START.json",
+          "bytes": 1217,
+          "sha256": "aaedf3f8c4376332815f9069fbebf2fcde27a564fe40c9b395ccbf873327e430"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-ox-20261016b/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "8ee7dad8fb7cb40c966785056a63fbc8ff555f8ab336071ef1836f73396b7002"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "stock",
+      "actual_tool": 45170,
+      "chunk": "987872",
+      "exit_code": 0,
+      "running_session": false,
+      "source_pins": 427,
+      "references": [
+        {
+          "path": "/private/tmp/unison-helper-alive-full-stock-20261016a/RESULT.json",
+          "bytes": 43804,
+          "sha256": "f7bc4ccc7eb47dd7db06daf8fa2ba14f4fc0de07d13108814b9c72c7e119b6f2"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-full-stock-20261016a/SHARED-START.json",
+          "bytes": 1327,
+          "sha256": "923c2d34587398658d65901b301c7e9b73b2aad08f3827cb749cbc144e2db8f8"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-full-stock-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "e162d349e22323f9e40682240732865bf4eec09febd98fc30470a831e78dcd62"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "ox",
+      "actual_tool": 66448,
+      "chunk": "5d2489",
+      "exit_code": 0,
+      "running_session": false,
+      "source_pins": 427,
+      "references": [
+        {
+          "path": "/private/tmp/unison-helper-alive-full-ox-20261016a/RESULT.json",
+          "bytes": 43810,
+          "sha256": "ab067dafd138ddc9bffa8130b0003de555f81d2bc28129c79917015a48c5c821"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-full-ox-20261016a/SHARED-START.json",
+          "bytes": 1322,
+          "sha256": "8b2b571eb2f19760b0e4d41a7bac8b76d0aa4364cfc062d782cd554d11306c04"
+        },
+        {
+          "path": "/private/tmp/unison-helper-alive-full-ox-20261016a/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "2aa5bb54f2d2c4acdc11260cf8815c1ddff903c508cec799818fa07c2efb08b2"
+        }
+      ]
+    }
+  ],
+  "initial_compile_fixture_failure": {
+    "actual_tool": 62356,
+    "chunk": "083612",
+    "exit_code": 1,
+    "running_session": false,
+    "reason": "Lwt.both unavailable in legacy Lwt; replaced with existing bind combinators; no helper executable launched",
+    "references": [
+      {
+        "path": "/private/tmp/unison-helper-alive-stock-20261016a/SHARED-START.json",
+        "bytes": 1219,
+        "sha256": "1db341fb9df9bb6b51d8f9fd80c74a8b866ca08fc48581d0d76a45e63dba70dc"
+      },
+      {
+        "path": "/private/tmp/unison-helper-alive-stock-20261016a/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "b082d63feb666a1811240f08fa05f850dabbe892f11314e0f75dd1002e3e0170"
+      },
+      {
+        "path": "/private/tmp/unison-helper-alive-stock-20261016a/SHARED-STDERR.txt",
+        "bytes": 962,
+        "sha256": "d7c1f10291e4fb23868988f3e6efaabc368232f9471bd112e92f9e7820da95fa"
+      }
+    ]
+  },
+  "scope": "actual3ordinarysleep helpers per compiler;2known-live spans overlap, all3directreaped0/group0/permits0;defaultobserve_alive absent emitsno samples;currentfullMakeCLI/selftests; no SDK/Photo/camera/EXglobal, CPU execution/scaling or actual SDK concurrency qualification",
+  "full_goal_complete": false
+}

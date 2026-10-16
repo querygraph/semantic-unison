@@ -95,7 +95,8 @@ type process_limits = {
 
 val run :
   ?argv0:string -> ?process_limits:process_limits ->
-  ?observe_group:(int option -> unit) -> t -> weight:int -> cancellation -> limits:limits ->
+  ?observe_group:(int option -> unit) ->
+  ?observe_alive:(int -> float -> unit) -> t -> weight:int -> cancellation -> limits:limits ->
   executable:string -> arguments:string array -> environment:string array ->
   result Lwt.t
 (** [arguments] excludes argv[0]. The optional [argv0] preserves a generic
@@ -118,3 +119,11 @@ val run :
     proof. Exceptions from it are ignored. It must not block, reap children,
     signal processes, or reenter supervision. Default execution does not allocate
     a group binding or query the process table. *)
+
+(** [observe_alive pid monotonic_seconds] is optional owner-loop diagnostics,
+    called only after the retained direct child is observed nonterminal. The
+    timestamp precedes that census and comes from the same host monotonic clock
+    as helper deadlines. Repeated samples can bound observed process lifetime,
+    not actual CPU work, SDK decode activity or descendant/group settlement.
+    Do not signal historical PIDs from these records. A throwing observer follows
+    owned-child teardown; observations do not authorize resource release. *)
