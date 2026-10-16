@@ -1,0 +1,23 @@
+{
+  "state": "NOT_DISPATCHED_WITHDRAWN_REQUEST_STALE_SOURCE",
+  "admission": {
+    "path": "/private/tmp/unison-concurrent-synthetic-receiving-admission-v1.json",
+    "bytes": 13864,
+    "sha256": "3c62088ad299c7557fcc0ed41c24da47fb3214d76b82e1b28114a99cb6b37e4d"
+  },
+  "observed_unix": 1792142242.942301,
+  "deadline": 1792142731.3539681,
+  "workspace": "/private/tmp/u-crs-v1-5ccbfcd085",
+  "workspace_exists": false,
+  "changed_sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/camera_sdk_concurrency/fake_validator.py",
+      "pinned": "b8cbaaec4006a6383f36aa7533773680aa72fabf33c47ed597c92200efda35c1",
+      "actual": "147d300903d5274eca9df4f88b97ab57d1064675c8b1369f390322691e833d66"
+    }
+  ],
+  "new_sources": [
+    "/Users/alexy/src/unison/tests/camera_sdk_concurrency/fake_validator_test.py"
+  ],
+  "reason": "V1 withdrawn before this crossed admission; corrected helper changes exact source closure. No executor/locks/payload/CLI/helper started."
+}
