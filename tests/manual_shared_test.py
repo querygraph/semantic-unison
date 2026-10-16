@@ -21,6 +21,11 @@ with patch.object(Path, 'is_file', return_value=True):
     assert '--build-only' in inspector and '--report' in inspector and '--selftest' not in inspector
     assert inspector[inspector.index('--report') + 1] == str(out / 'RESULT.json')
     assert manual.shared_resource_plan('inspect-ox', env)['declared_peak_credits'] == 3
+    framing = manual.command('dng-private-framing', out, env)
+    assert framing == [sys.executable, str(manual.ROOT / 'tests/dng_private_data/run.py')]
+    framing_plan = manual.shared_resource_plan('dng-private-framing', env)
+    assert framing_plan['declared_peak_credits'] == 3 and framing_plan['compiler_jobs'] == 1
+    assert framing_plan['token_acquisition_implemented']
     reuse_env = dict(env, INSPECTOR_RECEIPT='/NEVER-EXECUTED receipt.json',
                      INSPECT_INPUT='/NEVER-READ input.dng')
     reuse = manual.command('inspect-file', out, reuse_env)
@@ -37,6 +42,7 @@ with patch.object(Path, 'is_file', return_value=True):
         ('host-executor', {}),
         ('sync-functional', {'SHARED_CPU_CREDITS': '2'}),
         ('inspect-ox', {'SHARED_CPU_CREDITS': '2'}),
+        ('dng-private-framing', {'SHARED_CPU_CREDITS': '2'}),
     ):
         try:
             manual.command(target, out, dict(env, **changes))

@@ -4,6 +4,18 @@
 
 ## Current checkpoint — 2026-10-15
 
+The realcamera tag50740 gap now has a [spec/source-backed profile-successor prerequisite](doc/dng-private-data-next-profile.md):
+new original `DngPrivateData` Adobe/MakN framing module, NOT activated in profiles0/1.
+[Stock/Ox47checks each](tests/qualification/dng-private-framing-actual-20261016.json)
+manualtarget actuala4a593/0 CLOSED/group80040reaped0/othersabsent/CPU00..07closed;
+entrypoint controls1f3a05/0 CLOSED. Strict-docstring/testwarnings in earlier runs
+fixed with failures preserved. Bounded64MiB/256section framing recognizes only
+knownheaders; virtual64MiB block reads20headerbytes/no body. Embedded maker
+self-containment still needs separate closed-reference policy before newprofile
+registration; no source-private/camera payload reread/SDK/native/canonicalIO.
+This is groundwork for real DNG coverage, NOT camera semantic eligibility or
+whole-goalcompletion. Currentcamera50740 remains ordinary exactfallback.
+
 [Crossed privateDA retirement reconciliation](tests/qualification/private-dng-crossed-retirement-reconciliation-20261016.json):
 actualSTART1792113844.2988029 under77ea9eeb/owner77296/c15ad5/0 preceded
 Rootretirement1792113887.3426728. Later ROOT_RETIRED_UNEXERCISED marker preserved

@@ -16,3 +16,7 @@ shared-io-controls:
 	python3 tests/manual.py shared-io-controls
 stock-make ox-make stock-dune ox-dune stock-build ox-build cache-storage cache-ownership cache-cli host-interface host-executor read-workers read-cli read-parser sync-functional helper-stock helper-ox validation-cli group-parser interrupted-receipts aggregate-lifecycle aggregate-preflight:
 	python3 tests/manual.py $@
+
+.PHONY: dng-private-framing
+dng-private-framing:
+	python3 tests/manual.py dng-private-framing

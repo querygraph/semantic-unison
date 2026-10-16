@@ -22,13 +22,18 @@ Reusable inspector receipt/argument checks are implemented; [eight inert-artifac
 controls](../tests/qualification/inspector-reuse-controls-actual-20261016.json)
 and shared entrypoint controls passed with execution mocked. [Actual stock/Ox reuse on tiny independent DNGgoldens](../tests/qualification/inspector-reuse-synthetic-actual-20261016.json)
 also passed, with matching16B metadata classification and full/complement hashes.
-Reuse on Photo copies and real-camera receiving remain pending separate IO
-coordination.
+Actual [private DA clone/inspection](../tests/qualification/private-dng-clone-inspection-actual-20261016.json)
+closed under one manual IO window: clone SHA/source preservation passed; both
+inspectors safely declined50740. Real-camera semantic eligibility/receiving remain
+unqualified. [Private-data framing groundwork](dng-private-data-next-profile.md)
+now passes47fixedchecks/compiler but is NOT active in profiles0/1.
 
 [Physical IO coordination](shared-physical-io.md) is now source-proposed with
 an unknown-global barrier and complete-member union planner. Ten pure controls
-passed; live canonical IO namespace, kernel locking, topology provider and joint
-runtime integration remain pending. CPU sharing is already implemented.
+passed. Root provisioned the sole `io-lanes-v1` EX_GLOBAL barrier, adopted in
+[proposalv3](shared-physical-io-proposal-v3.json). Disposable backend combined-close
+controls passed; canonical locking/probe, topology provider and joint runtime
+integration remain pending. CPU sharing is already implemented.
 
 ## Acceptance scope audit
 
