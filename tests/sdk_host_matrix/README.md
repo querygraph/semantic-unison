@@ -88,3 +88,14 @@ must still acquire IO→CPU, own every helper/group through actual settlement,
 retain unknown ownership, bind telemetry and compare reference results before
 any real SDK scaling qualification. This constructor is not accepted by the old
 18-credit native executor and cannot grant a shared or borrowed native window.
+
+`shared_result.audit` independently joins twelve ordered returned call frames to
+that pure shared plan, checking exact commands, normal direct-child waits,
+reference-equivalent structured validation, and experimental task/allocator
+settlement observations. It rejects decoded-success frames with live/denied
+memory or unfinished/active tasks. Its resource-release, aggregate/group,
+parent-terminal, OS-thread scaling, RSS and pixel proof flags remain false.
+[Source controls](../qualification/sdk-shared-result-source-actual-20261016.json)
+use inert frames, not real SDK lifecycles. A future executor must bind these
+frames to its actual journal/pins and separately own the aggregate and all IO/CPU
+FD copies; this functional auditor cannot substitute for that work.
