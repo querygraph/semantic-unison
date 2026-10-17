@@ -116,3 +116,26 @@ for mutation in (
     except (ValueError,KeyError,TypeError):pass
     else:raise AssertionError('bad property witness accepted')
 print('PASS optional property audit positive and8malformed witness controls; no nativeIO')
+
+layout_result=copy.deepcopy(result)
+layout_result['parameters']['layout_only_controls']=True
+for sample in layout_result['samples']:
+    sample['fixtures']=[{'layout_only':True,'opaque_private_extent':[256,128],
+                         'opaque_xmp_references':[256,78]} for _ in range(2)]
+    sample['counters']={'semantic_profiles':['org.firstpair.dng-layout/0'], 'semantic_updates':2}
+assert audit_shared(layout_result)['cli_invocations']==54
+for mutation in (
+    lambda r:r['parameters'].update(layout_only_controls=1),
+    lambda r:r['parameters'].update(property_removal_controls=True),
+    lambda r:r['samples'][0]['fixtures'][0].update(layout_only=False),
+    lambda r:r['samples'][0]['fixtures'][0].update(opaque_xmp_references=[]),
+    lambda r:r['samples'][0]['fixtures'].pop(),
+    lambda r:next(s for s in r['samples'] if s['mode']=='semantic')['counters'].update(
+        semantic_profiles=['org.firstpair.dng-xmp/1']),
+    lambda r:next(s for s in r['samples'] if s['mode']=='semantic')['counters'].update(semantic_updates=1),
+):
+    broken=copy.deepcopy(layout_result);mutation(broken)
+    try:audit_shared(broken)
+    except (ValueError,KeyError,TypeError):pass
+    else:raise AssertionError('bad layout-only receiving witness accepted')
+print('PASS layout-profile audit positive and7malformed witness controls; no actual sync')

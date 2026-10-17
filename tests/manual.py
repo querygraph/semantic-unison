@@ -136,6 +136,11 @@ def command(target, output, environment):
     require(property_controls is None or (property_controls == '1' and target == 'sync-functional'
             and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)),
             'property-removal controls require explicit shared8 functional IO admission')
+    layout_controls = environment.get('SYNC_LAYOUT_ONLY_CONTROLS')
+    require(layout_controls is None or (layout_controls == '1' and target == 'sync-functional'
+            and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)
+            and property_controls is None),
+            'layout-only controls require separate explicit shared8 functional IO admission')
     shared = environment.get('SHARED_CPU_CREDITS')
     if shared is not None:
         shared = int(shared)
@@ -258,6 +263,8 @@ def command(target, output, environment):
                          '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
         if property_controls == '1':
             argv += ['--property-removal-controls']
+        if layout_controls == '1':
+            argv += ['--layout-only-controls']
         return argv + ['--shared-qualification' if shared is not None else '--qualification', '--measure-primary-reads',
                        '--loopback-cpu-credits', str(shared if shared is not None else 4)] + (
                        ['--orchestration-cpu-credits', '2'] if shared is not None else []) + [

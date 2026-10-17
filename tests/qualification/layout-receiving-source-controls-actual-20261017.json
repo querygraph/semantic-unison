@@ -1,0 +1,107 @@
+{
+  "schema": "unison-layout-receiving-source-controls/1",
+  "state": "SOURCE_FIXTURE_AND_PREFERENCE_CONTROLS_PASS_CLOSED_ACTUAL_SYNC_NOT_RUN",
+  "actual_parent_terminal": {
+    "session": 93255,
+    "chunk_id": "bd07e2",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "result": {
+    "path": "/private/tmp/unison-layout-receiving-controls-873b9ba1/RESULT.json",
+    "bytes": 83987,
+    "sha256": "fd71548930311c59bdf5bdac7dac69493913443ee1d2e1205ec71584ff97fbf2"
+  },
+  "closure": [
+    {
+      "path": "/private/tmp/unison-layout-receiving-source-controls-20261017-002/SHARED-START.json",
+      "bytes": 1277,
+      "sha256": "a9030ad73d5b83b88804250f36f105f0e1a5d383b2c7c54a97c0091b0c2b31c0"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-source-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "6dfc3cad9d11a17dbe92fdcdf4deecf10a7aadb44064e8bf66ba071b8929078a"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-source-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "f53c4696365b6cae0ea39a6010d139f54be1a0bebd6857df5acc8cde8aa90216"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-source-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/fixtures.py",
+      "bytes": 4072,
+      "sha256": "cd81f38c03d2e556726c3bb7752d0e72ae78ae36e71d362aea635b35dcb50335"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/layout_fixture_test.py",
+      "bytes": 1702,
+      "sha256": "13a3e5931626ee6edb25fd50b5539de8432dae6d41911359634391ff459b6c5d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 36780,
+      "sha256": "959b7f83d992bbee7f0a884c8527c08e4f6fc254009d58322500e5728c49d001"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/shared_audit.py",
+      "bytes": 6314,
+      "sha256": "cf3f56bff9e40cf9b9cf2158c7c96c9f1fdda630b30c910a26c954640d1b0148"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/dng_layout_preferences.ml",
+      "bytes": 6219,
+      "sha256": "7a1a2d6eca9b24da0a5705c070f807af39c494db20f46de42282c84add087564"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/layout_receiving_controls.py",
+      "bytes": 4629,
+      "sha256": "95dcbaab33ceabe0056ecc6618d417445f2fac4bc4fd509b0eff72293b82f531"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 23816,
+      "sha256": "a698886b21d39ef24ed9639a219ee8f4206b5fabfbad086680abb306dc4e3b2b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual_shared_test.py",
+      "bytes": 9789,
+      "sha256": "d47508894468e0e3fc0e5d76b1ce03ed498069c4ea382005caf629dd821a5f6e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 30006,
+      "sha256": "6a3021d83dcbb75c0b6f9532f124bfcd1c85bdbcafcb2d3a03a2872414f2e38b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_dispatch_test.py",
+      "bytes": 8367,
+      "sha256": "7519e67cbb7300b795a3d1ea6890493b9d8beff4165cc295f6f92836d3883c1a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_sync_controls.py",
+      "bytes": 7576,
+      "sha256": "e855f35787a3ba650880152244178c493c059bb575798df51d5615fcd45fc45b"
+    }
+  ],
+  "contained_calls": 8,
+  "preference_checks_per_compiler": 197,
+  "linked_production_artifacts": 338,
+  "earlier_closed_controls": {
+    "path": "/private/tmp/unison-layout-receiving-source-controls-20261017-001",
+    "actual_tool_terminal": {
+      "chunk_id": "4acf6e",
+      "exit_code": 0,
+      "remaining_session": null
+    },
+    "scope": "Four source/fixture controls before production preference-boundary integration."
+  },
+  "scope": "Original64KiB generated fixtures/deterministic bytes/XMP-only edits and unchanged opaque references. Mock shared54CLI audit positive/seven layout refusals, manual exact IO gate, CPU-only route refusal. Production-linked stock/Ox preference codecs preserve legacy wire and omit unnegotiated layout capability, retain local policy and clear stale alias. No actual sync, old-peer transport, camera/SDK, EXIO or physical allocation/throughput claim. All contained groups/CPU8 closed."
+}

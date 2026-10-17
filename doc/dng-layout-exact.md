@@ -76,3 +76,20 @@ next implementation layers. Remote/mixed-version receiving, broader failure
 cases and a separately admitted retained-camera disposable-clone case also
 remain qualification work. Unknown MakerNote meaning itself is not a global
 deployment gate; each operation needs its own appropriate evidence.
+
+## Production receiving successor
+
+[The finite receiving plan](layout-receiving-plan-v1.json) and
+[request](layout-receiving-request-v1.json) are prepared, not executed. They add
+original generated opaque private pointers into changed XMP to the existing
+18-row/54-CLI shared functional matrix, requiring the negotiated layout profile
+on each semantic update. Generic exact/clone controls, old bases and no-op
+epochs remain independently checked. This is not a photographic-validity test.
+
+[Source controls](../tests/qualification/layout-receiving-source-controls-actual-20261017.json)
+passed197 preference-boundary checks per stock/Ox compiler and the fixture/
+admission/audit controls. They prove current preference serialization omits
+unnegotiated layout capability and preserves local policy; they do not prove
+old-peer transport. [Both current Make/selftests](../tests/qualification/layout-receiving-build-selftests-actual-20261017.json)
+passed with workers3 per endpoint. Actual matrix execution requires a fresh
+Root IO admission; no historical admission may be reused.

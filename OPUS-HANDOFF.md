@@ -7,6 +7,49 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest: exact-layout production receiving request prepared, NOT dispatched
+
+New optional `SYNC_LAYOUT_ONLY_CONTROLS=1` routes only through the separately
+admitted shared8 `sync-functional` IO job. It uses the existing18 rows/54 CLI
+seed-update-noop lifecycle. Original generated DNGs include128 opaque bytes and
+an unknown IFD-shaped scalar, both deliberately referencing changed XMP. The
+semantic rows must select `org.firstpair.dng-layout/0`; exact output, unchanged
+old bases and no-op epochs are checked by the existing runner. Optional audit
+checks reject missing/changed private witnesses and wrong profile/update counts.
+Default fixtures and property-removal runs remain independent.
+
+Source controls actual93255/bd07e2/0/no session:8 contained calls,197 preference
+boundary checks per stock/Ox compiler linked to338 actual production artifacts,
+original tiny fixture checks, seven fake layout-audit refusals, exact manual
+route and CPU-only refusal controls. All groups/CPU8 closed. Receipt
+`tests/qualification/layout-receiving-source-controls-actual-20261017.json`
+4359B SHA7db703c799b2df265cf9a665a13d5e184c7dd7ff33b63babbbe50868f9d4981f.
+New `tests/dng_layout_preferences.ml` qualifies current all-three-profile alias
+and peer capability omission; old v1-only preference fixture remains historical.
+These are preference controls, NOT actual old-peer receiving/transport proof.
+
+Fresh Make+full selftests for both stock/Ox actual24573/212cf6/0/no session,
+workers3 per endpoint/jobs2/Adobe validation off;950 captured source hashes
+matched and all groups/CPU8 closed. Build receipts are under
+`/private/tmp/unison-layout-receiving-{stock,ox}-selftest-20261017-001/RESULT.json`.
+Repo evidence `tests/qualification/layout-receiving-build-selftests-actual-20261017.json`
+3961B SHA72a1d4221d3b1fd6bbe784fb92556317cf32f635d3ea3e23914d7d65d189f7e6.
+
+Fresh exact request `doc/layout-receiving-request-v1.json`10738B
+SHAa1b0dc643605c7fcecbfe4952d25cf14df839fae45fbcc82086a9d8e33d1491b,
+plan `doc/layout-receiving-plan-v1.json`8889B
+SHA77f87fab838911aa98aa3543cd9b9506c6360d4f73177ebdc959cc61e67d57a1;
+38 execution pins/six prerequisites. Workspace
+`/private/tmp/unison-layout-receiving-2a6cbd4b84be4d9c900b92271b38a530`
+and admission `/private/tmp/unison-layout-receiving-admission-v1.json` absent at
+preparation. Actual matrix NOT started, no live grants/resources. Root must
+publish a fresh exact admission/deadline; use once only after fresh checks.
+Limits:Unison00..07+existingEXglobal,300s observation/30s CLI/8GiB conservative
+logical planning budget (not measured physical cap), no SDK/media/compiler in
+actual matrix. Unknown retains real owners/grants; no replay/automatic successor.
+This advances the operation-specific receiving qualification, not complete
+camera understanding or semantic merge/rendering authority. Standing8/8 remains.
+
 ## Latest: owner-frozen nested DNG dispatch is implemented
 
 `DngComponents.freeze_decoders` now validates up to64 immutable ordered bindings

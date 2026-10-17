@@ -20,6 +20,8 @@ def audit_shared(result):
     require(set(result['binaries']) == {'stock', 'ox'}, 'shared stock/Ox pair required')
     property_mode = params.get('property_removal_controls', False)
     require(type(property_mode) is bool, 'typed property control flag required')
+    layout_mode=params.get('layout_only_controls',False)
+    require(type(layout_mode) is bool and not(layout_mode and property_mode), 'typed separate layout control flag required')
     expected = set(itertools.product(('stock', 'ox'), expected_parameters['modes'], (1, 2, 3)))
     seen = set()
     calls = 0
@@ -32,6 +34,15 @@ def audit_shared(result):
         require(all(sample[name] is True for name in ('exact_result_and_unchanged_basis',
                     'noop_preserved_receiver_inode', 'staging_cleaned', 'private_fixture_removed')),
                 'shared row preservation failed')
+        if layout_mode:
+            require(len(sample['fixtures'])==2 and all(
+                item.get('layout_only') is True and item.get('opaque_private_extent')==[256,128]
+                and item.get('opaque_xmp_references')==[256,78] for item in sample['fixtures']),
+                'layout fixture private-reference witness differs')
+            if sample['mode']=='semantic':
+                require(sample['counters']['semantic_profiles']==['org.firstpair.dng-layout/0']
+                        and sample['counters']['semantic_updates']==2,
+                        'layout-only production profile not selected')
         if property_mode:
             require(all(sample.get(name) is True for name in ('source_selected_properties_removed',
                         'retained_old_readers_preserved', 'noop_properties_preserved')),
