@@ -104,3 +104,9 @@ are observations, not physical alias proof; artifact SHA pins bind identity.
 Caller authentication and actual owning-tool terminal evidence remain separate.
 This helper is outside the unchanged pending worker closure; it grants no run
 or resource release and is not actual receiving qualification.
+
+Root issued V1 admission209266ba, but its start deadline passed before this
+owner dispatched. The [actual preexec refusal](../tests/qualification/layout-receiving-v1-expired-actual-20261017.json)
+records tool exit2 with no runtime/CLI/IOCPU entry. The original grant is
+preserved and must not be executed. Fresh scheduling uses a distinct successor;
+request/plan/code pins remain unchanged. No receiving pass is claimed.

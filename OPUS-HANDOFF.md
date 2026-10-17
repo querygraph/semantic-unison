@@ -7,6 +7,56 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Current receiving scheduling state: V1 issued, then expired unstarted
+
+Root DID issue `/private/tmp/unison-layout-receiving-admission-v1.json`7342B
+SHA209266ba0d44d1e588bd1fd50ef1d8df2995f61ab024732e4bfd7de21af261c9,
+with Root reviewd9044047 and exact requesta1b0dc64/plan77f87fab/38 code pins.
+Issued1792207049.53455, deadline1792207649.53455. Discovery during later source
+work at1792207724.68364 was AFTER expiry. Actual preexec guard00c0d2/exit2/no
+session refused before executor/CLI/payload/CPU/IO acquisition; original grant
+and absent workspace preserved. No runtime parent or worker existed to report.
+Owner refusal `/private/tmp/unison-layout-receiving-v1-EXPIRED-OWNER-20261017.json`
+920B SHA9d1c46236475c675047869d5c760b11e4564d07e7b7308d2b8ba629bd12ecc59.
+Repo `tests/qualification/layout-receiving-v1-expired-actual-20261017.json`
+1614B SHA65f778b8bb1c94365b4b32338d3257fdaf48ab2f00d0f143cde981f9a4d4d7c0.
+
+Root notified promptly queue01a147e8-8281 and asked for separately scheduled
+fresh successor/workspace, preserving the expired original. DO NOT dispatch
+209266ba, extend it or mistake old “not admitted” snapshots below for current
+state. Root may independently reschedule; reconcile any existing successor
+before preparing/launching another. Poll scheduling metadata promptly during
+future source work; late queue delivery is not a reason to miss a known window.
+No active Unison runtime/resources; original38 execution pins remain unchanged.
+
+## Latest partial-field decoder prototype: generated DNG nesting qualified
+
+`tools/dng-fields/privateIfdFields.{ml,mli}` creates a trusted compiled child
+plugin for up to32 selected ASCII fields in a bounded classic private directory.
+The owner supplies byte order and explicit signed parent-relative value-base
+translation. Inline/outlined values are checked; selected aliases, invalid
+ASCII/count/type/bounds and overflow refuse. Unknown entries and next links are
+not followed. Shared reader/budget errors propagate. Schema/code declarations
+are framed into provenance, also included in child schemas so private projection
+versions change while unrelated pixel hashes/nodes remain unchanged.
+
+It is NOT installed in Unison, a vendor-family router, an actual model-field
+mapping or a stability/ignore policy. No real camera/SDK or source-photo reads.
+All leftover bytes stay opaque/hash-covered. This is a concrete community/
+piecemeal child-decoder mechanism without requiring complete private grammar.
+README states address-space, trust, budget and confidence limits explicitly.
+
+Actual final31242/09d1b6/0/no session,47 contained calls,59 original checks per
+stock5.2/Ox5.2+ox compiler. Both private byte orders within actual DNG nesting
+passed; one first refinement charged6201B (4096 initial +57 decoder +2048 parent
+rehash), preserved full SHA and pixel projection/node; separate code-version
+branch changes private projection. Earlier00145checks/compiler core-only passed
+and is historical. Evidence
+`tests/qualification/private-ifd-fields-prototype-actual-20261017.json`9611B
+SHAaaaaa9a9bcf5023e4d83bb2a03e907b9960e2b60220aa9c8ef99cddbc8b0fc16.
+All owned groups/CPU8 closed; production src and pending receiving38 pins are
+untouched. No physical IO/RSS/performance, real-camera or production claim.
+
 ## Latest supplement: independent request/raw-log receiving auditor
 
 `tests/layout_receiving_result_audit.py` is a pure post-run consumer outside the
