@@ -62,8 +62,9 @@ let transform version path =
       else if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
       else if component="dngComponents" then
-        exact (exact body "type decoders\n" "type decoders : value mod portable contended\n")
-          "type owner_entry\n" "type owner_entry : value mod portable contended\n"
+        exact (exact (exact body "type decoders\n" "type decoders : value mod portable contended\n")
+          "type owner_entry\n" "type owner_entry : value mod portable contended\n")
+          "type owner_index\n" "type owner_index : value mod portable contended\n"
       else if component="formatRecognition" || component="formatExtension" then
         exact body "type handle\n" "type handle : value mod portable contended\n"
       else if component="semanticDelta" then
@@ -106,7 +107,8 @@ let transform version path =
           "val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit";
           "val cache_capture_state : cache_capture -> bool * bool";
           "val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery";
-          "val with_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->\n  max_read_bytes:int64 -> SemanticFile.t ->\n  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result"]
+          "val with_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->\n  max_read_bytes:int64 -> SemanticFile.t ->\n  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result";
+          "val with_indexed_capture : owner_index -> root_identity:string -> path:string ->\n  generation_sha256:string -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->\n  max_read_bytes:int64 -> SemanticFile.t ->\n  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]

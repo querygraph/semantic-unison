@@ -132,6 +132,48 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Owner-trusted selection ledger (source successor)
+
+`owner_index` is an immutable bounded value containing only previously trusted
+UDI/0 entries. Keys are the exact caller-owned root/path identities; selection
+also requires an explicit32-byte current generation. A different generation is
+a miss, never a reason to choose the newest-looking blob or trust disk contents.
+Insert requires absence, replacement/removal compare the old entry digest, and
+failed updates preserve the supplied prior value. Independent key updates
+commute. Generation digests have no inferred time or ordering semantics.
+
+`owner_index_usage` returns `(entry_count, encoded_entry_payload_bytes)`.
+
+The owner must serialize adoption against its current ledger. Two independently
+forked snapshots are still independent: these pure operations are not global
+atomic CAS or a cross-process writer lock. Limits are per-value encoded-entry
+payload (1..1024 entries,80B..8MiB); retained snapshots need separate aggregate
+memory accounting. Removal releases only this value's metadata charge, never a
+native cache reservation or on-disk object. The value may be shared immutably
+with qualified OxCaml workers; it owns no descriptors or source readers.
+
+`with_indexed_capture` selects that exact trusted owner/generation, then performs
+the complete metadata authentication and full-current-input/current-parser
+verification of `with_cache_capture` before decoder refresh. A selection miss
+returns before inspecting even supplied metadata/source readers or invoking the
+callback. Foreign/corrupt present evidence still raises after a selected entry;
+it cannot become an ordinary absence. This joins selection to actual reuse,
+without enabling managed namespace opening, disk-index persistence, archives,
+automatic fallback extraction or ordinary sync activation. Durable adoption still
+requires independent capture/FD settlement and owner-state publication.
+
+Original controls cover root/path/generation mismatch, stale insert/update/
+remove, immutable snapshots, independent insert order, separate count/byte
+exhaustion and malformed limits/identities. Actual capture reuse and changed-input
+refusal now go through indexed selection, with a zero-read-budget generation-miss
+control. Current qualification is in `tests/qualification/owner-index-actual-20261017.json`:
+1071DNGchecks/compiler, positive immutable-index Ox mode check, current stock/Ox
+Make/fullselftests/Dune compile,110workerchecks/compiler and1272current source
+checks pass/closed. An initial temporary interface-comment/source mismatch and
+worker refusal are preserved; only the corrected OxMake002/worker002 are adopted.
+This remains separate from PR4's prior scope and does not qualify automatically
+selected persistent disk caching.
+
 ### Borrowed positional readers
 
 `SemanticFile.with_borrowed_fd` supplies a POSIX reader for owner-held source or

@@ -7,6 +7,22 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Owner-index successor `feat/component-owner-index` in sibling
+`/Users/alexy/src/unison-component-index-20261017` is qualified on PR4 base835df2fc,
+leaving PR4 stable/ready. Bounded immutable trusted ledger (1024entries/8MiBencoded
+payload pervalue), exactroot/path/currentgeneration selection, pure olddigest
+replacement/removal and selected authenticated metadata/fullinput refresh.
+No inferred newestgeneration, globalCAS, namespace/persistence/automaticrouting,
+archiveadvancement/nativequota refund. Owner serializes adoption/retainedmemory.
+Focused14748/ba6934/0 and initialselector48015/b12b44/0 closed. Firstcontroller
+23119/d88402/0 had worker001reaped1 on OxMake001 temporarycomment/sourcepin
+mismatch; firstseal refused beforewrite/commit. Correctedactual70919/48638c/0,
+OxMake002+worker002 PASS/CLOSED. Selectedcurrent stockMake001/OxMake002/bothDune001
+1272sourcechecks match. Percompiler56component+1005checkpoint+27publicationfault+
+13readerfault+1071DNG+110workerchecks PASS. All7selectedworkers/groups/tokensclosed,
+originalfailurepreserved. `tests/qualification/owner-index-actual-20261017.json`.
+No SDK/photos/EXIO or RPC; main frozen342 unchanged/no transport grant inferred.
+
 Reader retirement follow-up qualified: read/iter/digest refuse expired readers
 BEFORE caller cancellation/iteration code can execute. Focused99430/44f833/0 and
 full44086/b80c8b/0 closed. Current56component+1005checkpoint+27publicationfault+

@@ -177,7 +177,8 @@ let with_refreshed_checkpoint ~previous ~decoders ~expected_checkpoint_sha256
 
 type owner_entry = { owner_encoded : string; owner_digest : string;
   owner_binding : string; record_digest : string; checkpoint_digest : string;
-  input_digest : string; previous : outcome list }
+  input_digest : string; previous : outcome list;
+  owner_root : string; owner_path : string; owner_generation : string }
 let owner_entry_bytes entry=entry.owner_encoded
 let owner_entry_sha256 entry=entry.owner_digest
 let owner_entry_binding entry=entry.owner_binding
@@ -234,7 +235,8 @@ let make_owner_entry ~root_identity ~path ~generation_sha256 ~checkpoint ~outcom
   let record_digest=SemanticHash.string(ComponentHash.checkpoint_record ~binding:owner_binding checkpoint) in
   let owner_encoded=prefix^checkpoint_digest^record_digest in
   {owner_encoded;owner_digest=SemanticHash.string owner_encoded;owner_binding;record_digest;
-   checkpoint_digest;input_digest;previous=outcomes}
+   checkpoint_digest;input_digest;previous=outcomes;
+   owner_root=root_identity;owner_path=path;owner_generation=generation_sha256}
 let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 encoded =
   if String.length encoded>owner_entry_max_size || String.length expected_entry_sha256<>32 ||
     SemanticHash.string encoded<>expected_entry_sha256 then owner_invalid "digest/size mismatch";
@@ -264,7 +266,8 @@ let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_s
   if encoded<>prefix^checkpoint_digest^record_digest then owner_invalid "noncanonical entry";
   {owner_encoded=encoded;owner_digest=expected_entry_sha256;
    owner_binding=SemanticHash.string("unison-dng-owner-binding/0\000"^prefix);
-   record_digest;checkpoint_digest;input_digest;previous}
+   record_digest;checkpoint_digest;input_digest;previous;
+   owner_root=root_identity;owner_path=path;owner_generation=generation_sha256}
 let checkpoint_for_owner_entry entry record =
   let checkpoint=ComponentHash.checkpoint_from_record ~expected_binding:entry.owner_binding
     ~expected_record_sha256:entry.record_digest record in
@@ -362,3 +365,51 @@ let with_cache_capture entry ~directory ~record ~index ~decoders ~max_read_bytes
     with_refreshed_checkpoint ~previous:entry.previous ~decoders
       ~expected_checkpoint_sha256:entry.checkpoint_digest ~max_read_bytes file
       (ComponentHash.checkpoint_bytes checkpoint) callback
+
+
+type owner_index = { indexed : ((string * string) * owner_entry) list;
+  indexed_bytes : int; entry_limit : int; byte_limit : int }
+let empty_owner_index ~max_entries ~max_bytes =
+  if max_entries<1 || max_entries>1024 || max_bytes<80 || max_bytes>8388608 then
+    invalid_arg "DNG owner index limits";
+  {indexed=[];indexed_bytes=0;entry_limit=max_entries;byte_limit=max_bytes}
+let owner_index_usage index=List.length index.indexed,index.indexed_bytes
+let owner_key ~root_identity ~path =
+  if not(bounded_id 4096 root_identity) || not(bounded_id 4096 path) then
+    owner_invalid "index root/path";
+  root_identity,path
+let select_owner_entry index ~root_identity ~path ~generation_sha256 =
+  let key=owner_key ~root_identity ~path in
+  if String.length generation_sha256<>32 then owner_invalid "index generation";
+  match List.assoc_opt key index.indexed with
+  | Some entry when entry.owner_generation=generation_sha256 -> Some entry
+  | None | Some _ -> None
+let replace_owner_entry index ~expected_entry_sha256 entry =
+  let key=entry.owner_root,entry.owner_path in
+  let old=List.assoc_opt key index.indexed in
+  let matches=match old,expected_entry_sha256 with
+    | None,None -> true
+    | Some old,Some expected -> String.length expected=32 && old.owner_digest=expected
+    | _ -> false in
+  if not matches then Error "component owner index compare-and-replace refused"
+  else
+    let remaining=List.remove_assoc key index.indexed in
+    let bytes=index.indexed_bytes + String.length entry.owner_encoded -
+      (match old with None -> 0 | Some old -> String.length old.owner_encoded) in
+    if List.length remaining>=index.entry_limit || bytes>index.byte_limit then
+      Error "component owner index capacity exhausted"
+    else Ok {index with indexed=List.sort(fun (a,_) (b,_) -> compare a b)
+      ((key,entry)::remaining);indexed_bytes=bytes}
+let remove_owner_entry index ~root_identity ~path ~expected_entry_sha256 =
+  let key=owner_key ~root_identity ~path in
+  match List.assoc_opt key index.indexed with
+  | Some old when String.length expected_entry_sha256=32 && old.owner_digest=expected_entry_sha256 ->
+    Ok {index with indexed=List.remove_assoc key index.indexed;
+      indexed_bytes=index.indexed_bytes-String.length old.owner_encoded}
+  | None | Some _ -> Error "component owner index compare-and-remove refused"
+
+let with_indexed_capture ledger ~root_identity ~path ~generation_sha256
+    ~directory ~record ~index ~decoders ~max_read_bytes file callback =
+  match select_owner_entry ledger ~root_identity ~path ~generation_sha256 with
+  | None -> Error "component owner index has no current entry"
+  | Some entry -> with_cache_capture entry ~directory ~record ~index ~decoders ~max_read_bytes file callback

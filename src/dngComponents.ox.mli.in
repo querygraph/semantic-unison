@@ -147,3 +147,39 @@ val with_cache_capture : owner_entry -> directory:Unix.file_descr ->
     invoking the callback; corrupt/foreign evidence and operational errors raise.
     No fallback extraction, opens/closes, selection, cleanup or publication. All
     source/cache readers and their borrowed descriptors remain caller-owned. *)
+
+type owner_index : value mod portable contended
+val empty_owner_index : max_entries:int -> max_bytes:int -> owner_index
+val owner_index_usage : owner_index -> int * int
+val select_owner_entry : owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> owner_entry option
+val replace_owner_entry : owner_index -> expected_entry_sha256:string option ->
+  owner_entry -> (owner_index, string) result
+val remove_owner_entry : owner_index -> root_identity:string -> path:string ->
+  expected_entry_sha256:string -> (owner_index, string) result
+(** Immutable owner-trusted selection ledger, at most1024 entries and8MiB encoded
+    entry payload. Caller chooses stricter positive limits. Keys are exact owner
+    root/path identities, not normalized/interpreted filesystem paths. Selection
+    requires the explicit current generation; no digest/time ordering or newest
+    disk-file inference. Insert requires absence; replace/remove compare the
+    previous trusted entry digest. Failed updates preserve the old value. Bounds
+    charge encoded metadata, not RSS, filesystem usage or native cache quota.
+    Only already trusted owner_entry values enter this ledger. Register durable
+    captures only after their separate descriptor/publication settlement; this
+    pure value proves neither settlement nor on-disk presence. Selected entries
+    still require authenticated metadata lookup and full-current-input restore.
+    No persistence, disk scan/open/close/eviction, quota refund, archive mutation,
+    peer authority or automatic source reading; snapshots can share immutably. *)
+
+val with_indexed_capture : owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> directory:Unix.file_descr ->
+  record:(Unix.file_descr * SemanticFile.t) option ->
+  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->
+  max_read_bytes:int64 -> SemanticFile.t ->
+  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result @@ nonportable
+(** Exact owner/generation selection followed by authenticated complete metadata
+    and full-current-input/parser verification, then scoped decoder refresh.
+    Selection miss returns Error before metadata/source inspection or callback;
+    never chooses a different generation or a digest discovered on disk. All
+    descriptor lifetimes/settlement and durable ledger publication are external.
+    No opens/closes, automatic fallback, archive advancement or disk scan. *)

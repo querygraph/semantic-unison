@@ -244,6 +244,79 @@ let () =
        let decode bytes sha=DngComponents.decode_owner_entry ~root_identity ~path ~generation_sha256
          ~expected_entry_sha256:sha bytes in
        let loaded=decode encoded digest in
+       let unwrap=function Ok value -> value | Error why -> failwith why in
+       let ledger=DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:8388608 in
+       let select index root name generation=DngComponents.select_owner_entry index
+         ~root_identity:root ~path:name ~generation_sha256:generation in
+       let selected index root name generation=Option.map DngComponents.owner_entry_sha256
+         (select index root name generation) in
+       check(DngComponents.owner_index_usage ledger=(0,0) && select ledger root_identity path generation_sha256=None)
+         "empty index granted an owner entry";
+       let first=unwrap(DngComponents.replace_owner_entry ledger ~expected_entry_sha256:None loaded) in
+       check(selected first root_identity path generation_sha256=Some digest)
+         "trusted index selection lost exact current entry";
+       check(select first (root_identity^"-other") path generation_sha256=None &&
+         select first root_identity (path^"-other") generation_sha256=None &&
+         select first root_identity path (SemanticHash.string "other-generation")=None)
+         "owner index crossed root/path/generation binding";
+       check(DngComponents.owner_index_usage ledger=(0,0)) "index insert mutated old snapshot";
+       check(match DngComponents.replace_owner_entry first ~expected_entry_sha256:None loaded with
+         Error _ -> true | _ -> false) "index overwrote without old-entry comparison";
+       check(match DngComponents.replace_owner_entry first ~expected_entry_sha256:(Some(String.make 32 'X')) loaded with
+         Error _ -> true | _ -> false) "index accepted stale digest comparison";
+       let newer_generation=SemanticHash.string "explicit-generation/2" in
+       let newer=DngComponents.make_owner_entry ~root_identity ~path ~generation_sha256:newer_generation
+         ~checkpoint ~outcomes in
+       let updated=unwrap(DngComponents.replace_owner_entry first ~expected_entry_sha256:(Some digest) newer) in
+       check(selected updated root_identity path newer_generation=Some(DngComponents.owner_entry_sha256 newer) &&
+         select updated root_identity path generation_sha256=None &&
+         selected first root_identity path generation_sha256=Some digest)
+         "generation replacement lost isolation or selected historical generation";
+       check(DngComponents.owner_index_usage updated=(1,String.length(DngComponents.owner_entry_bytes newer)))
+         "replacement double charged owner metadata";
+       let other=DngComponents.make_owner_entry ~root_identity ~path:(path^"-second") ~generation_sha256
+         ~checkpoint ~outcomes in
+       let both=unwrap(DngComponents.replace_owner_entry first ~expected_entry_sha256:None other) in
+       let reversed=unwrap(DngComponents.replace_owner_entry
+         (unwrap(DngComponents.replace_owner_entry ledger ~expected_entry_sha256:None other))
+         ~expected_entry_sha256:None loaded) in
+       check(DngComponents.owner_index_usage both=DngComponents.owner_index_usage reversed &&
+         selected both root_identity path generation_sha256=selected reversed root_identity path generation_sha256 &&
+         selected both root_identity (path^"-second") generation_sha256=
+           selected reversed root_identity (path^"-second") generation_sha256)
+         "independent trusted index inserts do not commute";
+       let tiny=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:(String.length encoded) in
+       let full=unwrap(DngComponents.replace_owner_entry tiny ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry full ~expected_entry_sha256:None other with
+         Error _ -> DngComponents.owner_index_usage full=(1,String.length encoded) | _ -> false)
+         "index capacity failure mutated old ledger";
+       let count_full=unwrap(DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:8388608)
+         ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry count_full ~expected_entry_sha256:None other with
+         Error _ -> true | _ -> false) "index ignored entry count with spare byte budget";
+       let byte_full=unwrap(DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:(String.length encoded))
+         ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry byte_full ~expected_entry_sha256:None other with
+         Error _ -> true | _ -> false) "index ignored bytes with spare entry count";
+       check(match DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:80) ~expected_entry_sha256:None loaded with
+         Error _ -> true | _ -> false) "index ignored encoded-byte bound";
+       check(match DngComponents.remove_owner_entry first ~root_identity ~path
+         ~expected_entry_sha256:(String.make 32 'X') with Error _ -> true | _ -> false)
+         "index removed stale entry";
+       let removed=unwrap(DngComponents.remove_owner_entry first ~root_identity ~path ~expected_entry_sha256:digest) in
+       check(DngComponents.owner_index_usage removed=(0,0) && selected first root_identity path generation_sha256=Some digest)
+         "index removal changed prior snapshot or retained metadata charge";
+       check(try ignore(select first root_identity path "bad");false with ComponentHash.Invalid _ -> true)
+         "index selected malformed generation";
+       check(try ignore(select first root_identity "bad\000path" generation_sha256);false with ComponentHash.Invalid _ -> true)
+         "index admitted malformed path identity";
+       check(try ignore(DngComponents.empty_owner_index ~max_entries:1025 ~max_bytes:8388608);false
+         with Invalid_argument _ -> true) "index count ceiling not enforced";
+       check(try ignore(DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:8388609);false
+         with Invalid_argument _ -> true) "index byte ceiling not enforced";
        let record=ComponentHash.checkpoint_record ~binding:(DngComponents.owner_entry_binding entry) checkpoint in
        check(DngComponents.owner_entry_record_sha256 loaded=SemanticHash.string record &&
          DngComponents.owner_entry_outcomes loaded=outcomes) "owner entry lost record/inventory binding";
@@ -379,9 +452,16 @@ let () =
                    | _ -> false) "record-only orphan misclassified")
                end else begin
                  with_record(fun record -> with_index(fun index ->
-                   let reuse source action=DngComponents.with_cache_capture entry ~directory
+                   let reuse source action=DngComponents.with_indexed_capture first
+                     ~root_identity ~path ~generation_sha256 ~directory
                      ~record:(Some record) ~index:(Some index) ~decoders:frozen
                      ~max_read_bytes:8192L source action in
+                   check(match DngComponents.with_indexed_capture first ~root_identity ~path
+                     ~generation_sha256:newer_generation ~directory ~record:None ~index:None
+                     ~decoders:frozen ~max_read_bytes:0L file
+                     (fun _ _ -> failwith "generation miss delivered callback") with
+                     | Error "component owner index has no current entry" -> true | _ -> false)
+                     "generation miss attempted metadata or source reuse";
                    check(match reuse file (fun current refreshed ->
                      check(ComponentHash.bytes_requested current=8192L)
                        "cache reuse reread unchanged decoder spans";
