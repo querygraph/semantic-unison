@@ -1,0 +1,55 @@
+{
+  "schema": "unison-component-remote-readiness/1",
+  "state": "READY_AFTER_ROOT_SOURCE_ACCEPTANCE_NO_ADMISSION_YET",
+  "prior_source_request": {
+    "path": "/Users/alexy/src/unison/doc/component-remote-request-v1.json",
+    "bytes": 2531,
+    "sha256": "d0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+    "bytes": 44341,
+    "sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad"
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/component_remote/coordinator.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+    "--admission",
+    "/private/tmp/unison-component-remote-admission-v1.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "workspace": "/private/tmp/u-cr-cf119542138e",
+  "proposed_admission_path": "/private/tmp/unison-component-remote-admission-v1.json",
+  "observed_unix": 1792212910.496145,
+  "workspace_absent_at_observation": true,
+  "admission_absent_at_observation": true,
+  "request_runtime_admission": true,
+  "schedule_only_after_source_acceptance": true,
+  "no_resources_reserved_by_request": true,
+  "runtime_source_closure_unchanged": true,
+  "runtime_source_count": 342,
+  "required_admission_fields": {
+    "state": "ROOT_ADMITTED_ONE_COMPONENT_RPC_JOB",
+    "plan_sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad",
+    "workspace": "/private/tmp/u-cr-cf119542138e",
+    "launch_argv_without_admission_sha256": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "/Users/alexy/src/unison/tests/component_remote/coordinator.py",
+      "--plan",
+      "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+      "--admission",
+      "/private/tmp/unison-component-remote-admission-v1.json"
+    ],
+    "start_deadline_unix": "Root publishes fresh finite start deadline"
+  },
+  "readback_control_qualification": {
+    "path": "/Users/alexy/src/unison/tests/qualification/component-remote-readback-controls-actual-20261017.json",
+    "bytes": 1771,
+    "sha256": "cbc3c712a03c75a028649db1fdff9e990dbf2a8ac83377df1ff2d92f7ba5b01b"
+  },
+  "scope": "one exact eight-case generated RPC matrix; no SDK/media/receiving/successor",
+  "standing_policy": "Unison00..07+existing EXglobal; Photo08..15 source work may continue; no18borrow or quiet timing claim"
+}

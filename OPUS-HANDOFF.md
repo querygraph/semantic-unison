@@ -7,6 +7,31 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## CURRENT: runtime readiness sent; no admission observed yet
+
+Frozen342 runtime pins / pland7a9f46d / requestd0f80794 remain UNCHANGED.
+`doc/component-remote-readiness-v1.json`2548B
+SHA8b4e7b4183aec81a76a4690e74e8726740ca088b687ac09f4850f95730758687
+now asks Root to schedule ONE finite run AFTER source acceptance, superseding only
+the earlier source-only coordination intent. Source review/admission not found
+at latest read of both legacy Photo and lightroom coordination locations; proposed
+admission `/private/tmp/unison-component-remote-admission-v1.json` and workspace
+`/private/tmp/u-cr-cf119542138e` absent at readiness observation. Queue01a14837-0d67.
+Do not infer a grant; if one arrives, freshcheck exact pins/deadline/unusedworkspace
+and execute the existing exact command ONCE, promptly return actual tool terminal.
+No resources or Photo hold is created by readiness; standing8/8 remains.
+
+Separate nonruntime `tests/component_remote/readback.py`+`readback_controls.py`
+added metadata-only independent readback. Eight original fabricated controls
+ACTUAL initialexec4fa3ff/0/NOsession, child6465reaped0/groupsabsent/CPUclosed.
+No canonical IO lock, RPC or media; never authenticates parent tool terminal,
+rehashes functional inputs or authorizes FD release. Runtime342 pins unchanged.
+Receipt `tests/qualification/component-remote-readback-controls-actual-20261017.json`
+1771B SHAcbc3c712a03c75a028649db1fdff9e990dbf2a8ac83377df1ff2d92f7ba5b01b.
+If Root review finds a source issue, preserve frozenv1 and prepare an immutable
+successor; do not mutate reviewed bytes or recreate an admission. Actual RPC
+transport and persistent binding still remain unqualified.
+
 ## CURRENT: component RPC coordinator frozen for SOURCE REVIEW ONLY
 
 `tests/component_remote/` now contains bounded qualified-close IO, exact plan

@@ -92,3 +92,25 @@ pins, six prerequisites and exact proposed argv. The request explicitly asks for
 source review only, not an expiring admission or Photo scheduling hold. Review
 and fresh readiness/finite Root IO admission remain required before runtime.
 Do not execute probe runtime modes merely because these controls passed.
+
+The separate [readiness addendum](component-remote-readiness-v1.json) now requests
+one finite window **after** Root accepts the sources. It preserves the original
+source-review request, plan,342 pins, argv and namespace; it is not an admission.
+The coordinator still requires Root's freshly pinned admission and deadline.
+
+## Independent metadata readback
+
+`tests/component_remote/readback.py` is outside the frozen runtime closure. Given
+trusted plan/admission pins, it reparses raw intent/outcome/proxy records and binds
+them to the owner/worker packet, reported worker reap and exact nine canonical
+inode observations. It reads metadata only, and explicitly returns
+`parent_terminal_authenticated=false`, `resource_release_authorized=false` and
+`functional_inputs_independently_rehashed=false`. Actual tool terminal and the
+authorized input/functional audit remain separate evidence. A closed marker
+alone never grants release.
+
+[Eight fabricated controls](../tests/qualification/component-remote-readback-controls-actual-20261017.json)
+cover positive/failed-prefix metadata, owner/admission/worker substitutions,
+wrong ranges/duplicate FDs/inodes, missing closure/raw proxy, incomplete passes
+and ancestor aliases. These controls passed with the outer Unison8 grant closed;
+no EXglobal lock, RPC, media or input-payload qualification occurred.

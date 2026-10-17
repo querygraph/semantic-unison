@@ -144,6 +144,12 @@ No canonical lock or RPC was exercised in these controls. Source review and a
 fresh finite IO admission remain required for actual transport, never inferred
 from source acceptance or release of previous slots.
 
+The unchanged frozen runtime now has an independent metadata-only readback tool
+outside its342-file closure, with eight original fabricated controls passed and
+all test CPU/groups closed. It explicitly does not authenticate parent terminal,
+rehash inputs or grant release. `doc/component-remote-readiness-v1.json` requests
+one window only after Root source acceptance; it is not runtime authorization.
+
 **Acceptance boundary for progressive rehashing:** release readiness is measured
 against the declared supported operations, not a percentage of fields decoded.
 A partially mapped camera may use the qualified pixel/metadata separation and
