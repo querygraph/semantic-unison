@@ -275,7 +275,16 @@ Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
 record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
 then integration after the frozen RPC window is resolved. Full-input verification
 can be avoided only with a separately qualified immutable/preservation witness.
-Stacked draft PR3 is open: https://github.com/querygraph/unison/pull/3,
+Latest user design clarification is recorded in SOL.md under "Rehashing is
+incremental refinement": deploy qualified pixel/metadata separation with exact
+opaque coverage; version each field refinement, invalidate only its dependency
+closure, preserve prior usable views and avoid mandatory archive-wide upgrades.
+This is a design requirement, not a new deployment or runtime qualification.
+
+PR3 was automatically marked merged by a mistaken temporary base-ref push on
+2026-10-17. The base was restored with an exact lease to03f4ef6c; cache code
+remains separate. A replacement stacked draft is being prepared. Historical PR3:
+https://github.com/querygraph/unison/pull/3,
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
 Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
 and110workerchecks/compiler PASS; all5workers/groups/grants closed underactual

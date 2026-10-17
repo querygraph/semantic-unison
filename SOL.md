@@ -108,6 +108,21 @@ projection policy, not just an untyped digest string.
 
 ### Rehashing is incremental refinement, not a new full-file project
 
+**Deploy first, refine without an archive-wide upgrade:** release the qualified
+pixel/metadata separation even when some smaller fields remain uninterpreted.
+Track coverage per component rather than assigning the whole file an
+"understood/not understood" status. Unknown fields retain exact byte hashes;
+learning their meaning or stability changes a versioned view, never silently
+changes an existing digest's meaning or drops byte-integrity checks.
+
+The refinement unit is a stable component plus its dependency closure. For
+example, upgrading one vendor field decoder from v1 to v2 should preserve the
+verified pixel component and unrelated metadata components, replace only that
+field's subtree, and recompute dependent roots. A failed upgrade leaves the
+previous verified view usable. Persist both versions until compatibility policy
+permits retiring the old one; pending refinement must not force retransmission
+or disable the already qualified exact-byte path.
+
 Treat each refinement as a composable change set: `(input binding, component ID,
 old contract, new contract, dependency digests) → replacement subtree + new roots`.
 Validate the input binding and old contract before applying it. Independent sibling
