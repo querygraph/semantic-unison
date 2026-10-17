@@ -2,6 +2,9 @@
 
 ## Latest namespace successor — 2026-10-17
 
+Source ed67f0eb is pushed as draft PR9:
+https://github.com/querygraph/unison/pull/9 (base PR8), no merge authorized.
+
 Branch `feat/component-cache-namespace`, sibling worktree
 `/Users/alexy/src/unison-component-namespace-20261017`, based on PR8, adds one-use
 macOS component-cache-v0 directory provision/open. Fresh refuses EEXIST; reopen
