@@ -34,7 +34,9 @@ base.write_bytes(fixture(b'<x>old</x>'))
 target.write_bytes(fixture(b'<x>new</x>'))
 data = bytearray(target.read_bytes()); data[170] ^= 1; other.write_bytes(data)
 unsupported.write_bytes(b'original unsupported tiny fixture')
-paths = [base,target,other,unsupported]
+opaque = w/'opaque-change.dng'
+data = bytearray(target.read_bytes()); data[250] ^= 1; opaque.write_bytes(data)
+paths = [base,target,other,unsupported,opaque]
 def identity(path):
     s = path.lstat()
     return [s.st_dev,s.st_ino,s.st_mode,s.st_size,s.st_mtime_ns,s.st_ctime_ns,s.st_nlink]
@@ -63,6 +65,37 @@ for receipt in a.build_receipt:
         log = w/(str(len(runs))+'.json'); log.write_bytes(r.stdout)
         runs.append({'binary':str(binary),'binary_sha256':driver.sha(binary),'label':label,
                      'exit_code':r.returncode,'report':str(log),'report_sha256':driver.sha(log)})
+# Exercise the newer layout view and advisory component forest independently
+# of the unchanged strict-profile cases above. Every byte remains covered.
+for receipt in a.build_receipt:
+    binary=driver.checked_inspector(receipt)
+    layout=subprocess.run([str(binary),'--profile','org.firstpair.dng-layout/0',
+        '--base',str(base),str(target)],capture_output=True,timeout=10)
+    assert layout.returncode==0,layout.stderr
+    value=json.loads(layout.stdout)
+    assert value['classification']=='uninterpreted_regions' and value['patch_eligible'] is True,value
+    log=w/(str(len(runs))+'.json');log.write_bytes(layout.stdout)
+    runs.append(dict(binary=str(binary),binary_sha256=driver.sha(binary),label='layout-profile',
+        exit_code=0,report=str(log),report_sha256=driver.sha(log)))
+    for label,changed,lane in [('component-metadata',target,'standard_metadata'),
+                               ('component-pixels',other,'encoded_pixels'),
+                               ('component-opaque',opaque,'opaque')]:
+        basis=base if changed==target else target
+        result=subprocess.run([str(binary),'--components','--base',str(basis),str(changed)],
+            capture_output=True,timeout=10)
+        assert result.returncode==0,result.stderr
+        value=json.loads(result.stdout);left=value['basis'];right=value['target']
+        assert left['status']==right['status']=='observed'
+        assert left['sha256']==hashlib.sha256(basis.read_bytes()).hexdigest()
+        assert right['sha256']==hashlib.sha256(changed.read_bytes()).hexdigest()
+        assert left['sha256']!=right['sha256']
+        assert left['projections'][lane]['sha256']!=right['projections'][lane]['sha256']
+        for stable in set(left['projections'])-{lane}:
+            assert left['projections'][stable]==right['projections'][stable],(label,stable)
+        assert left['hash_bytes_requested']==right['hash_bytes_requested']==256
+        log=w/(str(len(runs))+'.json');log.write_bytes(result.stdout)
+        runs.append(dict(binary=str(binary),binary_sha256=driver.sha(binary),label=label,
+            exit_code=0,report=str(log),report_sha256=driver.sha(log)))
 for path in paths:
     assert before[str(path)] == (identity(path),hashlib.sha256(path.read_bytes()).hexdigest())
 a.report.write_text(json.dumps({'passed':True,'workspace':str(w),'calls':len(runs),'runs':runs,

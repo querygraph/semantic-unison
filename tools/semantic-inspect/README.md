@@ -143,3 +143,18 @@ These are encoded byte-unit observations, not complete raw-image classification,
 decoded-pixel equality, render equivalence or persistent-cache authority. The
 hash-byte count excludes the parser's preceding bounded geometry reads. No sync
 archive or patch/merge policy changes. See [component hashing](../../doc/component-hashes.md).
+
+
+## Current source refresh (2026-10-17)
+
+The standalone build copies and pins the mandatory production EVP header.
+Current stock5.2.0 andOx5.2.0+ox build-only executions opened no image. Sixteen
+subsequent calls used only original256-byte fixtures: strict exact/metadata/
+complement/unsupported results, layout-only eligibility with uninterpreted-region
+classification, and role-separated metadata/pixel/opaque edits. Full SHA256 and
+unchanged input bytes/epochs were independently checked. Other role projections
+remain stable when only one role changes; opaque edits remain covered. Reuse and
+refusal controls pass. See
+`../../tests/qualification/integration-inspector-ready-actual-20261017.json`.
+This is not a real-camera/Adobe/decoded-pixel or receiving qualification. Fresh
+coordinated IO permission remains required before opening retained camera data.

@@ -3329,3 +3329,19 @@ reaped0/groupabsent/tokensclosed. Focusedparity omitsunused1GiBsparsefixtures.
 Receipt integration-worker-parity-actual-20261017.json. No newproduction/source
 pin changes to pendingpropertyrequest. No IO/SDK/camera/transport invoked; no
 speedup/hardthread/RSS/8executing inference. No actualownedjobs/resources now.
+
+
+## Current standalone inspector readiness — 2026-10-17
+
+Build-only actual84256/0cfdfb/0/no session stock/Ox PASS,0inputopens/0inspectorexec
+withinbuild. Mandatory productionEVPheader nowcopied/pinned. Subsequentoriginal
+tiny integration actual8c9c05/0 (16calls) andreuse/refusal29cc1b/0 PASS; allcontained
+workers/groups/tokensclosed. Strict/layout classifications and separate metadata,
+encodedpixels andopaque changes proven by actualJSON/fullhash plusunchangedsource
+epochs/bytes. Receipt integration-inspector-ready-actual-20261017.json pinsbuilds,
+logs/source/artifacts; no realcamera/SDK/pixel/receiving/runtimeIO grant inferred.
+
+This tooling can support a later separatelyadmitted privatecamera exact plan;
+do not use oldconsumedclone/SDK grants or assume profileeligibility. Currentproperty
+requeste60975f3 remainsseparatepending, its38execution/318productionpinsunchanged;
+tool/harness-only edits are outside that closure. Zeroactualownedresources now.
