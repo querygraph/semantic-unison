@@ -15,7 +15,9 @@ type identification = { formats : string list; fingerprint : fingerprint option;
 type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
-  refinements : DngComponents.outcome list; hash_bytes_requested : int64 }
+  refinements : DngComponents.outcome list; hash_bytes_requested : int64;
+  checkpoint : ComponentHash.checkpoint option;
+  reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -115,7 +117,7 @@ val reconcile_xmp : t -> HelperSupervisor.cancellation -> extension:FormatExtens
     settlement and CPU ownership follow [inspect]; conflicting metadata returns
     an explicit Error in [merge_plan], never an automatic fallback merge. *)
 
-val components : t -> HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+val components : t -> HelperSupervisor.cancellation -> ?capture_checkpoint:bool -> decoders:DngComponents.decoders ->
   max_read_bytes:int64 -> Unix.file_descr -> component_inspection option Lwt.t
 (** Explicit read-only component hashing and frozen private-decoder refinement.
     Same descriptor/domain/CPU/filesystem admission, cancellation and settlement
@@ -127,3 +129,33 @@ val components : t -> HelperSupervisor.cancellation -> decoders:DngComponents.de
     read observer. Unsupported format returns [components=Error _]; operational
     and budget errors fail the job, never become unsupported or no-match. No
     archive, persistent reuse, transfer, rendering or publication authority. *)
+(** [capture_checkpoint] defaults false. Explicit capture exports at most1MiB of
+    immutable metadata from the successful live extraction, before session expiry.
+    The owner may retain its digest as prior extraction provenance; delivery alone
+    does not publish an owner index or bind an archive generation. Account for up
+    to max_pending times1MiB additional completion payload when enabling capture.
+    No session/reader escapes. Cancelled/failed deliveries provide no checkpoint;
+    ordinary observations and restore jobs leave [checkpoint=None]. *)
+
+val restore_components : t -> HelperSupervisor.cancellation ->
+  expected_checkpoint_sha256:string -> encoded:string -> max_read_bytes:int64 ->
+  Unix.file_descr -> component_inspection option Lwt.t
+(** Restore owner-authenticated historical DNG components on a worker using the
+    same descriptor/CPU/IO/cancellation settlement as [components]. The prior
+    trusted digest is mandatory; arbitrary peer bytes plus their self-hash are
+    not trusted provenance. Verifies complete input and current DNG base geometry.
+    Returned refinements are empty: no current decoder was invoked or approved.
+    Only immutable summaries cross back; no session or reader escapes. No
+    automatic cache selection, archive trust or persistence is supplied. *)
+
+val refresh_components : t -> HelperSupervisor.cancellation ->
+  previous:DngComponents.outcome list -> decoders:DngComponents.decoders ->
+  ?capture_checkpoint:bool -> expected_checkpoint_sha256:string -> encoded:string ->
+  max_read_bytes:int64 -> Unix.file_descr -> component_inspection option Lwt.t
+(** Authenticated restore and decoder-inventory refresh on the coordinated worker.
+    Prior outcomes must come from trusted owner capture, complete and bound to the
+    supplied checkpoint. Reused/invalidated IDs distinguish historical retained
+    interpretations from freshly run decoders. Optional capture exports the new
+    live checkpoint; default false. Same cancellation/IO/CPU/FD settlement as
+    [components]. Account for bounded input checkpoint plus optional output per
+    pending job. No automatic owner index, peer code, archive or publication. *)

@@ -23,6 +23,14 @@ val with_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 'a) -> 'a
     the duplicate shares its file position with the original descriptor.
     The optional worker-local cancellation check runs before opening, reading,
     each 64 KiB iteration, and final stability checks. *)
+val with_borrowed_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 'a) -> 'a
+(** POSIX bounded positional reader borrowing the caller's descriptor. No opens,
+    duplicates, closes or shared-position changes, including error/cancellation.
+    Caller keeps the regular readable FD alive, immutable and unreassigned until
+    callback retirement; reader operations expire afterwards. Native reads use
+    at most64KiB per attempt with checked offsets, short-read/EINTR cancellation
+    loops and final stability checks. Windows explicitly refuses, no hidden
+    descriptor-owning fallback. Not hostile-writer exclusion or mount proof. *)
 type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
 val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
   (t -> 'a) -> 'a * read_stats

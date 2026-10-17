@@ -1,5 +1,11 @@
 # Component hashes and incremental decoder refinement
 
+Isolated successor: [owner-bound checkpoints](component-checkpoints.md) add
+explicit metadata export/restore with a prior trusted metadata digest and full
+current-file revalidation, plus narrowly scoped private-view invalidation before
+decoder replacement. This is not an automatic store, epoch-only skip or new
+archive/RPC authority; earlier qualifications below retain their original scope.
+
 `ComponentHash` implements the worker-local hashing/composition core of SOL.md's
 gradual-understanding design. The DNG adapter below now supplies physical
 components; [explicit typed worker inspection](component-workers.md) now consumes

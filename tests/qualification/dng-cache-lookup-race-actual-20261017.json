@@ -1,0 +1,127 @@
+{
+  "state": "LOOKUP_RACE_AND_GUARD_ABLATION_PASS_CLOSED",
+  "scope": "Deterministic midlookup equal-byte symlink replacement must refuse before result delivery; isolated removal of final record check must fail same assertion. Production unchanged; existing four full-build source pins rebound, not rebuilt.",
+  "actual_terminal": {
+    "session": 42365,
+    "chunk": "6e723a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "preserved_driver_failure": {
+    "session": 23875,
+    "chunk": "9f741a",
+    "outer_exit": 0,
+    "worker_exit": 1,
+    "reason": "expected native uncaught Failure exit1 but actual2; exact intended guard assertion reached; corrected only expected exit"
+  },
+  "lookup_guard_ablations": {
+    "ox": {
+      "ablated_sha256": "8af462b847f4c239962b2b40e136cf0b35f44baade35cf72218256364b97bc86",
+      "expected_failure": "changed named record escaped lookup before reader retirement",
+      "filtered_original_sha256": "848f6dd53f47924681d38b2e28dfbb6aad45947e4f035a08b569816ef37d0abe",
+      "production_source_modified": false,
+      "removed_guard": "(match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);"
+    },
+    "stock": {
+      "ablated_sha256": "8af462b847f4c239962b2b40e136cf0b35f44baade35cf72218256364b97bc86",
+      "expected_failure": "changed named record escaped lookup before reader retirement",
+      "filtered_original_sha256": "848f6dd53f47924681d38b2e28dfbb6aad45947e4f035a08b569816ef37d0abe",
+      "production_source_modified": false,
+      "removed_guard": "(match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);"
+    }
+  },
+  "production_rebind": [
+    {
+      "build": "stock-make",
+      "current_src_checked": 318,
+      "receipt_sha256": "d3b801c0b26c2d0cb55668184adb7d3a97a94d21ae8e38bc541b7c3dcf311e6a"
+    },
+    {
+      "build": "ox-make",
+      "current_src_checked": 318,
+      "receipt_sha256": "81588474f6910102670e1a7841d026aef6f3916d5803d7a9a6a97f8dee441d18"
+    },
+    {
+      "build": "stock-dune",
+      "current_src_checked": 318,
+      "receipt_sha256": "2851896957c91dbd36a1a0ad2556918afadfcfee2a809698c255a34703968999"
+    },
+    {
+      "build": "ox-dune",
+      "current_src_checked": 318,
+      "receipt_sha256": "1c465461a3b5fcdd36b6bf7edc981ce78cc60d68d89faa1f3e950d31eac0841a"
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-p1bbkdr7/RESULT.json",
+      "bytes": 430167,
+      "sha256": "e6f0d8eb7045f0a48103e93dea8782e744799a49aebae8ece1c77b1637db1dd4"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-mph19m9u/RESULT.json",
+      "bytes": 215963,
+      "sha256": "dac0c403844a2d9a0051e8a93cf94d5d45a2da1a827a66035c580c41b3a8f16f"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-make-20261017-001/RESULT.json",
+      "bytes": 49609,
+      "sha256": "d3b801c0b26c2d0cb55668184adb7d3a97a94d21ae8e38bc541b7c3dcf311e6a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-make-20261017-001/RESULT.json",
+      "bytes": 49615,
+      "sha256": "81588474f6910102670e1a7841d026aef6f3916d5803d7a9a6a97f8dee441d18"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-stock-dune-20261017-001/RESULT.json",
+      "bytes": 49053,
+      "sha256": "2851896957c91dbd36a1a0ad2556918afadfcfee2a809698c255a34703968999"
+    },
+    {
+      "path": "/private/tmp/unison-cache-recovery-ox-dune-20261017-001/RESULT.json",
+      "bytes": 49057,
+      "sha256": "1c465461a3b5fcdd36b6bf7edc981ce78cc60d68d89faa1f3e950d31eac0841a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "95626fd1fce1ee32d43671dd61b9a92cc510d5859a6afc7d01cd2793eaecd58c"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "95c5643b9128c4460940f55ae18c261d48bf8786e171f3a44c503711e1085ffe"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 758,
+      "sha256": "78e1e2999d52ac6b12e5a48b88741d42d2bd072bdef32e4e909efaa1865de06c"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-002/SHARED-START.json",
+      "bytes": 1125,
+      "sha256": "0fd3776e0b3fce6bcfa8717c4328e5d69221a807895a6ed4511888763fc9311a"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d73eb8edd9920405bdbb164f584bff1784138e2af0e01b54c528702d9296fd6d"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-cache-lookup-race-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "ae256f0e1a487c59240d6ee11511630b8eeb1c79082f125af14ed2c4b926ab3e"
+    }
+  ]
+}

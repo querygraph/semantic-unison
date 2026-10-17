@@ -27,6 +27,44 @@ let model_plugin : ComponentHash.plugin = {id="community.test.model/1";
       spec "file/private/rest" "unknown-private/0" ComponentHash.Opaque 16 3056])}
 let () =
   with_input data (fun _ fd ->
+    ignore(Unix.LargeFile.lseek fd 37L Unix.SEEK_SET);
+    let escaped=SemanticFile.with_borrowed_fd fd (fun file ->
+      check(SemanticFile.read file 65L 131=String.sub data 65 131) "borrowed positional read differs";
+      check(SemanticFile.digest file=SemanticHash.string data) "borrowed digest differs";
+      check(Unix.LargeFile.lseek fd 0L Unix.SEEK_CUR=37L) "borrowed reader moved shared position";
+      file) in
+    check(try ignore(SemanticFile.read escaped 0L 1);false with SemanticFile.Invalid _ -> true)
+      "borrowed reader escaped callback";
+    check((Unix.fstat fd).Unix.st_size=String.length data) "borrowed reader closed caller FD";
+    check(try SemanticFile.with_borrowed_fd fd (fun _ -> failwith "original callback failure");false
+      with Failure why when why="original callback failure" -> true) "borrowed callback failure changed";
+    let cancel=ref false in
+    check(try SemanticFile.with_borrowed_fd ~check_cancel:(fun () -> if !cancel then raise Exit) fd
+      (fun file -> cancel:=true;ignore(SemanticFile.read file 0L 1));false with Exit -> true)
+      "borrowed cancellation swallowed";
+    check(Unix.LargeFile.lseek fd 0L Unix.SEEK_CUR=37L) "borrowed failure changed position";
+    check((Unix.fstat fd).Unix.st_size=String.length data) "borrowed failure closed caller FD");
+  with_input data (fun _ fd ->
+    let retired=ref false and calls=ref 0 in
+    let escaped=SemanticFile.with_borrowed_fd ~check_cancel:(fun () ->
+      incr calls;if !retired then failwith "expired reader invoked caller code") fd (fun file -> file) in
+    retired:=true;
+    let before= !calls in
+    List.iter(fun action ->
+      check(try action ();false with SemanticFile.Invalid _ -> true)
+        "expired borrowed reader reached cancellation callback")
+      [(fun () -> ignore(SemanticFile.read escaped 0L 1));
+       (fun () -> SemanticFile.iter escaped 0L 1L (fun _ _ -> failwith "expired iteration callback"));
+       (fun () -> ignore(SemanticFile.digest escaped))];
+    check(!calls=before) "retired reader invoked caller cancellation code");
+  let large=String.init 131079 (fun i -> Char.chr(i land 255)) in
+  with_input large (fun _ fd -> SemanticFile.with_borrowed_fd fd (fun file ->
+    check(SemanticFile.read file 3L 131073=String.sub large 3 131073)
+      "borrowed read failed across native chunk boundaries";
+    let recovered=Buffer.create(String.length large) in
+    SemanticFile.iter file 1L 131077L (fun b n -> Buffer.add_subbytes recovered b 0 n);
+    check(Buffer.contents recovered=String.sub large 1 131077) "borrowed iteration differs"));
+  with_input data (fun _ fd ->
     let (),stats=SemanticFile.with_read_stats fd (fun file ->
       ComponentHash.with_snapshot ~max_read_bytes:20000L file layout (fun session initial ->
         check(ComponentHash.bytes_requested session=8192L) "initial read was not one full pass";

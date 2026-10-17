@@ -1,0 +1,116 @@
+{
+  "state": "FOCUSED_OWNER_ENTRY_PUBLICATION_PASS_CLOSED",
+  "scope": "Borrowed descriptor UDI/0 stage/readback/exclusive publish and whole-entry SHA refusal; current core/native fault regression; no automatic managed lookup/quota/full-build successor",
+  "actual_controller_terminal": {
+    "session": 98587,
+    "chunk": "e40f51",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "preexec_refusal": {
+    "chunk": "bb6df9",
+    "exit_code": 1,
+    "no_session": true,
+    "reason": "controller Python syntax error before execution/resource acquisition"
+  },
+  "runs": [
+    {
+      "suite": "dng",
+      "closure": {
+        "child": {
+          "pid": 47077,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 47077,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "suite": "core",
+      "closure": {
+        "child": {
+          "pid": 47462,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 47462,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-j5a2bojw/RESULT.json",
+      "bytes": 399297,
+      "sha256": "7ee87b72b8214829487ab74c3db85c254e14096a899c09fbcdd3e2710aad3c9e"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-dng-20261017-002/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "49fa0e3b878e38a4839b46e6d8dc4dc8262900dd78cc080306157452398bb68f"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-dng-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fe2a1c16cb6bfe8c8174890e9268fed23e05524f335149e44b777d8ff28d7ac1"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-dng-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-dng-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "2a56414e2e02ee089d8e58ae9431eb15fc95da5084b1653fda22d82197ec14e5"
+    },
+    {
+      "path": "/private/tmp/unison-component-controls-f61uik4s/RESULT.json",
+      "bytes": 132851,
+      "sha256": "60c9ec66ccf7a219c783724bdb3bfbcf002b94d4c7dd1d13ded97225765681ce"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-core-20261017-002/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "572139257ae9dc677e6d89e0400e6eca67ff5c721119cd914e1b9fa0eb896523"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-core-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e517991795dcf02b8874a059be7daa5b6fc8b90d65691f80e9e6b0fca9e94490"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-core-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-owner-entry-publication-core-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "77dff4cb5fd2b70d39ea937d31439c63fc78ec86e2eb9a02e492762256cfb7e0"
+    }
+  ]
+}

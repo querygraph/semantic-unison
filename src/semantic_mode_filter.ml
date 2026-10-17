@@ -57,10 +57,13 @@ let transform version path =
     if ns<>signature_count || nf<>field_count then
       invalid_arg "qualified extension mode declarations changed";
     if interface then begin
-      let body = if component="semanticMailbox" then
+      let body = if component="componentHash" then
+        exact body "type checkpoint\n" "type checkpoint : value mod portable contended\n"
+      else if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
       else if component="dngComponents" then
-        exact body "type decoders\n" "type decoders : value mod portable contended\n"
+        exact (exact body "type decoders\n" "type decoders : value mod portable contended\n")
+          "type owner_entry\n" "type owner_entry : value mod portable contended\n"
       else if component="formatRecognition" || component="formatExtension" then
         exact body "type handle\n" "type handle : value mod portable contended\n"
       else if component="semanticDelta" then
@@ -82,6 +85,28 @@ let transform version path =
           "val find : string -> (module S) option @ contended";
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
+        | "componentHash" -> [
+          "val metadata_leaf_present : directory:Unix.file_descr -> name:string -> bool";
+          "val check_metadata_leaf : directory:Unix.file_descr -> name:string -> max_bytes:int ->\n  Unix.file_descr -> unit";
+          "val prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int -> metadata_quota";
+          "val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool";
+          "val metadata_slot_reserved : metadata_quota -> bool";
+          "val metadata_slot_name : metadata_quota -> string";
+          "val admit_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
+          "val seal_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
+          "val record_publication_available : unit -> bool";
+          "val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> expected_binding:string -> expected_record_sha256:string ->\n  SemanticFile.t -> record_publication";
+          "val prepare_metadata_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> max_bytes:int -> expected_sha256:string -> SemanticFile.t -> record_publication";
+          "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
+          "val record_published : record_publication -> bool"]
+        | "dngComponents" -> [
+          "val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->\n  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication";
+          "val stage_cache_capture : owner_entry -> checkpoint:ComponentHash.checkpoint ->\n  quota:ComponentHash.metadata_quota -> directory:Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
+          "val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->\n  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->\n  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture";
+          "val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit";
+          "val cache_capture_state : cache_capture -> bool * bool";
+          "val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery";
+          "val with_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->\n  max_read_bytes:int64 -> SemanticFile.t ->\n  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]
@@ -93,7 +118,7 @@ let transform version path =
       if template<>expected then invalid_arg "checked mode template differs from qualified interface";
       template
     end else begin
-      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 2 | "validationSnapshot" -> 1 | _ -> 0 in
+      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 4 | "validationSnapshot" -> 1 | _ -> 0 in
       let result,count=replace body "(* ox-portable-ffi *)" "@@ portable" in
       if count<>expected then invalid_arg "qualified native mode declarations changed";
       result

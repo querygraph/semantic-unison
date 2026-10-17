@@ -7,6 +7,313 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Reader retirement follow-up qualified: read/iter/digest refuse expired readers
+BEFORE caller cancellation/iteration code can execute. Focused99430/44f833/0 and
+full44086/b80c8b/0 closed. Current56component+1005checkpoint+27publicationfault+
+13readerfault+1051DNG+110workerchecks percompiler PASS. Fresh stock/Ox Make+
+fullselftests/Dunecompile and1272current sourcepins matched. All7observedworkers,
+groups/tokensclosed. Receipt `tests/qualification/reader-retirement-actual-20261017.json`.
+PR4 handoff conflict resolved; main reviewed342RPC unchanged/no runtime grant.
+No automatic namespace/selection/activation, photos/SDK/transport or merge.
+
+Borrowed positional reader is now qualified: POSIX `with_borrowed_fd` borrows
+callerFD without opens/dup/closes or position changes, expires after callback,
+bounded64KiB pread with short/EINTR/cancel/EOF/EIO handling. Known-entry tests
+borrow record/index readers. Actualfocused4732/5c6873/0, fault32180/55eba7/0,
+full60005/7f8b98/0 closed; all7workers/groups/tokensclosed. Percompiler52component+
+1005checkpoint+27publicationfault+13readerfault+1051DNG+110workerchecks PASS,
+freshstock/Ox Make/fullselftests/Dunecompile1272current sourcepins match. First
+modefilter count refusal82216/96d6fa outer0/twoworkers1 preserved closed; exact
+native count2->4 corrected, no productionfaultswitch. Evidence
+`tests/qualification/borrowed-reader-actual-20261017.json`. Qualified macOS only;
+Windows explicitrefusal source/Linux runtime unqualified. Legacy channelcleanup
+unchanged. Still no managed namespace/automaticselection/SDK/media/transport.
+
+Partial-knowledge upgrade is now tested through actual authenticated cache reuse:
+unsupported replacement invalidates old private descendants while preserving
+pixel/full-byte identity and retaining the previous usable checkpoint. Focused
+1051DNGchecks/compiler actual8636/1547ac/0 closed; allchildgroups/tokensclosed.
+Test-only change, production unchanged;318sourcepins perprior4builds rebound
+(no build rerun). Receipt `tests/qualification/dng-cache-partial-upgrade-actual-20261017.json`.
+Root RPC readiness request01a148b7-6db0 remains separate; no runtime grant inferred.
+
+Authenticated capture-to-refresh integration is qualified: `with_cache_capture`
+requires complete trusted metadata, full-current-input/current-parser verification
+and derives decoder provenance only from the owner entry. Focused1047checks per
+compiler44609/428946/0 and fullcontroller93249/2fc314/0 closed: stock/Ox Make+
+fullselftests/Dunecompile/productionlinked110workerchecks percompiler,1272current
+sourcepins match. All6workers/groups/tokensclosed. Receipt
+`tests/qualification/dng-cache-reuse-actual-20261017.json`. Orphan/changedinput
+refuse beforecallback. No media/SDK/transport/automatic namespace or selection.
+
+Known-entry lookup final record recheck now has targeted race+ablation proof.
+Existing readercallback redirects equal-byte record afterrecordauth/duringindex
+check; normalcode refusesbeforeresultdelivery. Copied filtered variant removing
+onlyfinalrecordcheck reaches exactescaped-resultassertion onstock/Ox. Normal1043
+DNGchecks/compiler PASS42365/6e723a/0, worker73695reaped0/groupsabsent/tokensclosed.
+Initialdriver expecteduncaughtexit1 instead ofactual2 preserved; corrected only
+expectedcode, guardassertionunchanged. Receipt
+`tests/qualification/dng-cache-lookup-race-actual-20261017.json`. Production source
+unchanged;1272currentSRCpins rebound againstprior4builds, no fullrebuild claim.
+Managednamespace opening/automaticselection/recoveryscan remainopen; no SDK/media/EXIO.
+
+Known trusted-entry recovery lookup implemented: actual no-follow presence must
+match provided borrowedreaders; nativeFD/name/private/size/epoch checks around
+bounded record/index authentication. Complete/record-only/entry-only/missing
+classifications; foreignindex, wrongreader and equalbyte symlinkredirect refuse.
+No opens/closes/cleanup/scan; resultisnot producerterminal/resourceclosure/current
+source eligibility. Focused48730/287b5e/0 and all4builds+workers53905/09f4fb/0 PASS,
+allgroups/tokensclosed,1272SRCchecks. Receipt
+`tests/qualification/dng-cache-recovery-actual-20261017.json`. Managednamespace
+opening/automaticselection/recoveryscan/eviction stillopen; no media/SDK/EXIO/mainpins.
+
+Explicit quota-bound paired capture now implemented. Native admission binds two
+fresh distinct empty stages in actual reservednamespace before writes; seal pins
+same produceridentities with aggregatebounds. Failed/unsynced reservation cannot
+admitpayload. Record/index stage+readback then one-use record-first entry-second
+publication; entrycollision preserves record-only orphan/foreigntarget/entrystage/
+consumedquota, no replay/refund. No FDopens/closes; caller retains settlement.
+Focused52173/4a12f1/0 and all4builds+workers84836/be254d/0 PASS, allgroups/tokensclosed,
+1272SRCchecks. Receipt `tests/qualification/dng-cache-capture-actual-20261017.json`.
+Managedlookup/recoveryscanning/automaticactivation stillopen; no mainpins/media/SDK/
+EXIO. PR3 remains stacked/unmerged; this is metadata capture, not a photo render.
+
+macOS monotonic cache quota API now implemented: borrowed0700directory, identical
+immutable no-follow configuration, atomic emptydirectory slots charged2MiB each,
+max4096/8GiB; one attempt/ticket, no slot reclamation. Lostconfig over slots and
+settings mismatch refuse. Two real processes race finalslot: exactlyone granted,
+bothwaited0; injectedpostmkdir directoryEIO retains consumedslot/no replay/refund.
+Currentstock/Ox41component+1005checkpoint+26fault+110worker checks/compiler PASS;
+all4current Make+selftests/Dune builds PASS,1272SRCchecks. Actualfocused51354/88ab45/0,
+fullcontroller86525/7cd749/0, allgroups/tokensclosed. Receipt
+`tests/qualification/component-metadata-quota-actual-20261017.json`. Original tiny
+fixtures only; no media/SDK/EXIO/mainpins. Managed lookup/routing/recovery remains
+unimplemented; quota is conservative payload admission, not physicaldisk/RSS cap.
+
+Separate stacked draft PR now open: https://github.com/querygraph/unison/pull/3,
+`feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml`; qualified
+code/evidence throughf06f005a. No merge/mainRPC sourcechange. PR explicitly leaves
+managed lookup/quota/automatic selection unimplemented and does not grant runtime
+transport. All currentbuild/test owners closed; no resources held.
+
+Current owner-entry/source integration qualified:stock/Ox Make+fullselftests and
+Dune compile allPASS,1272SRC checks;110production-linked workerchecks/compiler
+alsoPASS. Commonactualcontroller41172/e6f14a/0/no session, all5workers/groups/CPU
+tokensclosed. Receipt `tests/qualification/dng-owner-entry-current-builds-actual-20261017.json`.
+Currentfork handoff/source-review evidence merged into isolatedbranch (ada13312),
+documentation/evidence only,0production sourcechanges from that merge. Preparing
+separate stacked draft againstfeat/semantic-dng-oxcaml; no mainRPCpinschanged or
+automatic cache enabled. Managedlookup/quota and actual newRPC remain open.
+
+UDI/0 entry now has borrowed-FD staging/readback and macOS immutable publication.
+CapturedentrySHA verified againstentirestage before nativeexclusive rename; exact
+postpublishreadback passes, unrelatedstagebytes/overwrite refuse. Shared bounded
+metadatawriter factored; privatepermissions now reject specialmodebits too. Both
+DNG/core focused suites passed commoncontroller98587/e40f51/0, allworkers/groups/
+tokensclosed; receipt `tests/qualification/dng-owner-entry-publication-actual-20261017.json`.
+Preserved preexecPython syntaxrefusal bb6df9/1 acquired0resources. Managednamespace/
+lookup/quotas and currentfull-build successor remain open; no media/SDK/EXIO/mainpins.
+
+UDI/0 owner-index entry codec now implemented in DngComponents: root/path/
+generation+input+orderedoutcomes bound to checkpoint/recorddigests; trusted-entry
+digest required on load, record loading rechecks references and private schemas.
+Metadata-only/portable; ComponentHash.checkpoint_root exposes bounded historical
+tree without currentinputauthority. Focusedstock/Ox controls passed23340/397bf5/0,
+worker45920reaped0/groupsabsent/tokensclosed; entryencode adds0source reads. Receipt
+`tests/qualification/dng-owner-entry-actual-20261017.json` includes truncation/tamper/
+wrongroot-path-generation/record/provenance controls. Managed owner-index namespace,
+atomic entry publication/lookup/quota and full-build successor remain outstanding.
+No media/SDK/EXIO/mainRPCpins changed.
+
+Record publisher now has original postrename/pre-sync fault proof plus all4current
+builds. Test-onlyfsyncshim (no production switch) proves directoryEIO afterrename
+retains published/exactbytes/no replay; stageEIO/EINTR leave unpublished and no
+retry. Focused20280/4c5cc4/0:41component+988checkpoint+21nativefaultchecks/compiler;
+repeated41setup is not extraindependentcoverage. Currentstock/Ox Make+selftests+
+Dune compile allPASS under commonactualcontroller66861/b6ab3a/0,1272productionSRC
+checks. Production-linked110workerchecks/compiler alsoPASS89713/f7593d/0. Allgroups/
+tokensclosed, no media/SDK/EXIO. Three exact receipts:
+`component-record-publication-fault-actual-20261017.json`,
+`component-record-publication-builds-actual-20261017.json`,
+`component-record-publication-worker-actual-20261017.json` in tests/qualification.
+Native record publication is qualified for these originals; persistent owner-index
+and automatic diskcache selection remain unimplemented. MainRPCpinsunchanged.
+
+macOS immutable-record publisher now implemented: independently authenticated
+readback + borrowedprivate0700directory/0600stage/fullnative/no-followbinding,
+stagefsync/exclusiverename/publishedidentitycheck/directoryfsync. No FDopens/dups/
+closes/retention; caller owns settlement. Native ticket records rename success
+before runtime/postrenameerrors, forbidsreplay, owner-onlynonportableAPI. Focused
+stock/Ox41core+988checkpointchecks each PASS58876/7a5f21/0,worker39556reaped0/groups
+absent/tokensclosed; extra negativeSafespawnticket control passes. Receipt
+`tests/qualification/component-record-publication-actual-20261017.json` preserves
+Darwinfeaturemacro and Oxowner-interface failures before finalsuccess. Actualtiny
+fixtures only, no media/SDK/EXIO/mainpinschanged. Fullbuilds/postrenamefailure
+injection/ownerindex integration still open; no hardwaredurability/productionclaim.
+
+Worker decoder refresh connected: `SemanticWorkers.refresh_components` restores
+trusted checkpoint+prioroutcomes, selects currentdecoders offowner, reports reused/
+invalidatedIDs and optionally captures refreshedmetadata. Unchangedinventory runs
+zero decoders; upgrade runs once within localizedbudget and preservespixels.
+Currentstock/Ox fullMake+selftests passed21922/e903fb/0+48701/08525e/0; worker110checks
+each passed6404/e45bad/0. Allworkers/groups/CPUtokensclosed;318sourcepins/build checked.
+Receipt `tests/qualification/component-worker-refresh-actual-20261017.json`.
+No media/SDK/EXIO/mainRPCsourcechanges. Namespace/ownerindex publication and current
+Dune successor remain outstanding; no automatic diskcache selection yet.
+
+Sibling composition qualified with actual sequential checkpoint upgrades: A→B and
+B→A produce identical checkpointbytes/layoutroots/pixelprojections; initial decoder
+order also commutes. Eachstep retains its independent sibling and charges only
+8192Bfullverification+130B or5Baffectedwork. Stock/Ox114DNGchecks each passed
+15700/95452e/0,worker34661reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-decoder-composition-actual-20261017.json`. Production
+source unchanged from4a387823; fullbuild successor/index publication still open.
+
+Owner-inventory decoder refresh now implemented: trusted prior outcomes checked
+against restored schemas; unchanged targets reused, changed/removed reset;
+invalidatedparentpreventsdescendantreuse; currentbindingsapplyparentfirst. Base
+fallback schemas preserved so removalcheckpoint restores. Private/opaque leaf
+reset nowallowed (needed for decoders returning no children). Stock/Ox103DNGchecks
+each PASS80431/99049c/0,worker33969reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-decoder-refresh-actual-20261017.json` preserves earlier
+narrowpass. Child-onlyupgrade charges8192+113B, parentupgrade8192+243B; no pixel
+reread beyond full inputverification. No disk/index publication or currentfullbuild
+successor yet. Existing publicationhelpers suppresscloseerrors, so not silently
+repurposed for the new retained-ownership store contract. No media/SDK/EXIO.
+
+Worker extraction now supports explicit optional capture_checkpoint (defaultfalse).
+Only successful live extraction exports bounded immutable checkpoint metadata;
+ordinary observations/restore returnNone, export adds no inputreads. Owner can
+retain its digest directly from extraction rather than trusting loaded bytes.
+Currentstock/Ox Make+selftests PASS actual76341/586683/0+80217/dea3a3/0; worker
+capture→restore controls106checks/compiler PASS53028/f3513e/0, allgroups/tokensclosed.
+Receipt `tests/qualification/component-worker-capture-actual-20261017.json`.
+Both318production sourcepins rechecked. No media/SDK/EXIO; automatic owner-index/
+namespace publication and current Dune successor checks remain outstanding.
+
+Borrowed-descriptor record staging/readback now implemented in ComponentHash.
+Fresh empty private0600 singlylinked regular outputs only; bounded writes+fsync+
+identity/sizecheck, explicit intendeddigest; bounded reader requires trusteddigest
+and ownerbinding. No pathnameopen/FDclose/namespace/indexpublication. Stock/Ox
+focused controls passed actual18467/4ae3fb/0, worker29828reaped0/groupsabsent/
+tokensclosed; original tiny disposable outputs only. Receipt
+`tests/qualification/component-record-storage-actual-20261017.json`. Independent
+readback before publication remains caller duty; failedstage staysowned, no retry.
+Atomic namespace/owner-index implementation and current full-build successor open.
+
+Persistent-record codec UCR/0 now implemented in ComponentHash: bounded record
+contains owner binding/raw checkpoint digest/exactlength/checkpoint, and unpack
+requires a separately trusted whole-record digest plus expected owner binding.
+Focusedstock/Ox41component+971checkpointchecks/compiler PASS (971includes every
+record/checkpoint-vector truncation, not971independentfixtures). Actual9682/5b7669/0,
+worker29241reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/component-owner-record-actual-20261017.json`. No filesystem
+publication/index or automatic persistence yet; full builds for this codec source
+remain outstanding. Prior full-build receipts retain their exact historical scope.
+
+Current accumulated cache/worker source now also passes Dune compilation under
+stock and Ox:actual36274/4d657c/0 and73981/8cc961/0, both worker groups/tokens
+closed,318currentproductionpins rechecked perbuild. Receipt
+`tests/qualification/component-cache-dune-actual-20261017.json`. Together with
+prior current Make+selftests and102workerchecks/compiler, both build systems are
+covered. Persistent store remains unimplemented; its concrete owner trust/index,
+atomic publication/quota/crash and uncertain-close contract is now in
+`doc/component-checkpoints.md`. Existing merge-base checksums are not same-UID
+authentication and must not silently promote arbitrary checkpoint bytes to trust.
+
+Restore-specific lifecycle successor now passes102workerchecks/compiler against
+the unchanged qualified stock/Ox production artifacts. New controls cover queued
+restore cancellation with zero read reports, changed input, insufficient budget,
+invalid digest/negative budget/oversized envelope preentry refusals, borrowed-FD
+preservation and successful recovery through filesystem admission. Actual
+37203/771174/0; worker26351reaped0/groupsabsent/allCPUtokensclosed. Receipt
+`tests/qualification/component-worker-restore-lifecycle-actual-20261017.json`.
+No media/SDK/EXIO, production source unchanged from the prior full builds.
+
+Worker restoration is connected: `SemanticWorkers.restore_components` takes bounded
+checkpoint bytes and separately trusted owner digest, verifies current input/base
+on a worker, returns immutable summaries/no fresh decoder approvals, and follows
+existing CPU/IO/descriptor/cancellation settlement. Both current full Make builds
+and selftests passed:stock25726/d3c966/0,Ox89779/00509e/0. Production-linked worker
+controls91checks/compiler passed62679/94caa6/0; all groups/tokens closed. Receipt
+`tests/qualification/component-worker-checkpoint-actual-20261017.json`. No media,
+SDK/EXIO or main RPC pin changes. Durable owner store, automatic decoder/cache
+selection and Dune successor qualification remain outstanding.
+
+Accumulated checkpoint/DNG restoration/replacement source4d42753b now passes
+current full Make builds+selftests on stock5.2.0 and OxCaml, each3semanticworkers.
+Actualstock90151/b8a560/0 andOx28025/35ef1b/0; both workers genuinelyreaped0,
+othergroupmembersabsent and allUnison8tokensclosed. Rechecked318currentproduction
+sourcepins perbuild. Receipt
+`tests/qualification/component-cache-integration-make-actual-20261017.json`.
+Dune successor checks, automatic decoder provenance selection, persistent owner
+store/worker integration and merge into main remain outstanding. No media/SDK/EXIO.
+
+Private decoder replacement now has an explicit DNG API with expected-old-schema
+guard, immutable success-only publication and shared private-fragment validation.
+Stock/Ox94DNGchecks each/58calls passed, including stale/unsupported retention,
+historical-view preservation and localized130B replacement after8192B restore.
+Actual91068/d77ad7/0; worker19920reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-private-replacement-actual-20261017.json`. No media/SDK/EXIO;
+automatic registry comparison/store integration and successor full builds remain.
+
+DNG checkpoint restore is now connected through `DngComponents.with_checkpoint`:
+fresh bounded DNG description, owner-authenticated metadata/full-input verification,
+current base-partition validation, then live callback. Historical private views
+remain explicit; owner decoder-provenance invalidation/store selection are still
+outstanding. Focused stock/Ox88DNGchecks each/58calls passed; actual12756/7b2a9c/0,
+worker19181reaped0/groupsabsent/tokensclosed. See
+`tests/qualification/dng-checkpoint-restore-actual-20261017.json`. No media/SDK/EXIO
+or automatic persistence; full builds for this successor still required.
+
+Checkpoint adapter groundwork: `ComponentHash.validate_base` now checks restored
+views against the current normalized parser partition without payload reads.
+Private/opaque refinements are allowed; altered base geometry/schema/roles and
+embedded pixel/standard claims refuse. Focused stock/Ox:41component+461checkpoint
+checks each,23calls; actual94856/6f91b4/0, worker18727reaped0/groupsabsent/tokensclosed.
+Receipt `tests/qualification/component-checkpoint-base-actual-20261017.json`.
+Full builds and DNG provenance/restore/store integration remain outstanding for
+this successor; earlier full-build receipts cover their exact historical sources.
+
+Isolated follow-up: frozen DNG decoder bindings now refuse child-before-parent
+order before file inspection, including nonadjacent ancestor relations while
+allowing textual-prefix siblings. Focused stock/Ox controls pass83checks each,
+58contained calls; actual83442/f7df5a/0, worker17995reaped0/groupsabsent/tokensclosed.
+Receipt `tests/qualification/dng-decoder-order-actual-20261017.json` preserves the
+initial interface-template mismatch failure and corrected successor. No main RPC
+source change, media/SDK/EXIO or persistent DNG checkpoint adapter integration.
+
+## CURRENT IN THIS WORKTREE: checkpoint core isolated from reviewed RPC main
+
+Branch `feat/component-cache-input-binding`, worktree
+`/Users/alexy/src/unison-component-cache-20261017`, based on mainee9015fc. Main
+`/Users/alexy/src/unison` and its342 frozen RPC execution pins remain unchanged.
+No RPC admission/review receipt observed during this work; do not dispatch without
+the exact Root file/fresh guard. This checkpoint core is NOT integrated into main.
+
+`ComponentHash.checkpoint` exports bounded UCH0 metadata; `with_checkpoint` requires
+the owner's prior trusted metadata digest and recognized root schema, validates
+canonical geometry and hashes the COMPLETE current input before cached subrange
+hashes can reach a fresh session callback. No epoch-only or IO-free reuse; a hash
+computed from an untrusted blob is not authenticated provenance. No automatic
+store/archive/writer/RPC/worker-cache integration supplied. `reset_private_view`
+invalidates one refined private/opaque subtree without reads or loss of raw-byte
+coverage, refusing any pixel/standard claim. Old snapshots/unaffected nodes stay
+immutable; replacement decoder reads/rechecks only that parent.
+
+Actual focused62449/361452/0/no session:41existing+454checkpointchecks/compiler,
+23containedcalls, positive portable immutable checkpoint capture/3negative live
+capability captures. Make+selftests stock87017/2f0ab0/0 and Ox8061/883242/0;
+Dune compilechecks stock81918/bfd974/0 and Ox12462/24ae26/0. All groups/tokens
+closed,1272 current src checks. No EXglobal/SDK/media. Preserved added-control
+failure13554/daa76b/outer0/child1 conflated provenance with identical leaf semantics;
+final controls distinguish implementation provenance and changed meaning schema.
+Receipt `tests/qualification/component-checkpoint-core-actual-20261017.json`43272B
+SHAb5e08611d797ad50a8cde78a8adfba0aba32755d5f92080e3ca692b25c256f00.
+Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
+record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
+then integration after the frozen RPC window is resolved. Full-input verification
+can be avoided only with a separately qualified immutable/preservation witness.
 Latest isolated integration08b4be45 (metadata merge10ace908) is qualified and
 pushed to draftPR4: complete trusted cache capture -> full-current-input/base
 verification -> scoped decoderrefresh.1047DNGchecks and110workerchecks percompiler,
@@ -27,9 +334,10 @@ This is a design requirement, not a new deployment or runtime qualification.
 Stacked draft PR4 is open: https://github.com/querygraph/unison/pull/4,
 replacing PR3 after a mistaken temporary base-ref push automatically marked it
 merged. Base was restored with an exact lease to03f4ef6c; isolated cache source
-remains separate. Current targeted race/ablation proof is914f10af (1043 DNG
-checks/compiler, unchanged production source rebound to prior four builds).
-Historical PR3: https://github.com/querygraph/unison/pull/3. PR4 targets
+remains separate. Current reuse integration/evidence is08b4be45,1047DNGchecks
+percompiler and fresh four-build/worker qualification as indexed above.
+Historical PR3: https://github.com/querygraph/unison/pull/3. PR4 carries
+
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
 Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
 and110workerchecks/compiler PASS; all5workers/groups/grants closed underactual

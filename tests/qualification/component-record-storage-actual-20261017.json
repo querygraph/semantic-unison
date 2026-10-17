@@ -1,0 +1,37 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "Bounded borrowed-descriptor owner record staging/readback, not namespace/index publication or full-build successor",
+  "actual_terminal": {
+    "session": 18467,
+    "chunk": "4ae3fb",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-controls-s_bmlq6e/RESULT.json",
+      "bytes": 114597,
+      "sha256": "b04afcc50db68f892528929bd58cf1d2e2a24ff1748ede996d759152ccf0a09c"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-storage-controls-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "be6cf566966b6cfc2cac4fbf35f78a04de90419e3f7dc89af980ca454643916e"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-storage-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d0fd1558e2fdbb50790eece9ccf7906cf55d17ea4d5e360461fc8de17b9a5177"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-storage-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-storage-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "6e193db43358607b88a0fd3a9f86f8f6300d4160953e282ea6db8c3102265470"
+    }
+  ]
+}

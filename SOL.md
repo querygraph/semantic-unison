@@ -4,6 +4,14 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Isolated checkpoint successor in `feat/component-cache-input-binding` now provides
+bounded owner-authenticated metadata export/restore with complete current-input
+SHA verification and private-subtree reset/replacement. Stock/Ox focused controls
+and full Make+selftests/Dune compile checks passed; see
+`doc/component-checkpoints.md` and
+`tests/qualification/component-checkpoint-core-actual-20261017.json`. This is not
+yet main/worker/archive/store integration, nor an epoch-only/IO-free cache. Main's
+reviewed342 RPC pins are deliberately unchanged while its actual run is pending.
 Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
 commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
 record publication now have current stock/Ox Make+selftests/Dune and original

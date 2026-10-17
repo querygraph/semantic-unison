@@ -1,0 +1,170 @@
+{
+  "state": "PASS_CLOSED",
+  "scope": "Both Make builds/full selftests and production-linked component worker restore controls; no persistent store/automatic cache selection/Dune successor qualification",
+  "runs": [
+    {
+      "kind": "stock",
+      "actual_terminal": {
+        "session": 25726,
+        "chunk": "d3c966",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "child": {
+          "pid": 23531,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 23531,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "kind": "ox",
+      "actual_terminal": {
+        "session": 89779,
+        "chunk": "00509e",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "child": {
+          "pid": 24691,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 24691,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "kind": "controls",
+      "actual_terminal": {
+        "session": 62679,
+        "chunk": "94caa6",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "child": {
+          "pid": 26061,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26061,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-worker-controls-wdfk3hq2/RESULT.json",
+      "bytes": 125265,
+      "sha256": "e35fc8464e25d13bb11477c591c91c262f13d0a8199b3aead76dd4e74a238af4"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-stock-20261017-001/RESULT.json",
+      "bytes": 49380,
+      "sha256": "39b88761d1b7180f8621d97b9343836ea35de083cc4f34431cf279cf193e9409"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-stock-20261017-001/SHARED-START.json",
+      "bytes": 1323,
+      "sha256": "f297088d0f6b2a1d2bdcd8b5ea900a74005bb03ca99ed6322e39fdee92e0d8cb"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-stock-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e2b1a25fc735d52ba9f9f8075bebd3ff330cbf815dd311c1fec913b13e40280d"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-stock-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "7e06618e19d341aa879d96ef2250de222c59df8f99fa652f9ec4243f428cac12"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-stock-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-ox-20261017-001/RESULT.json",
+      "bytes": 49386,
+      "sha256": "b2dfaa217c41ada4c2fa5511e1665d98fc2027a9f65a202aacc011d3f7849113"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-ox-20261017-001/SHARED-START.json",
+      "bytes": 1318,
+      "sha256": "94deaa9c42ce46525222ffc54dba336588fcf021313a4bb56d5e981991a996e2"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-ox-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "aac75c71a2bf6a3ec9b8f78d4984e55fee247a724de3415e60b9fbc420ad3b72"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-ox-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "958efb50fddaf7e2b16997f4c62f84b590f7b52f60233b915ca78fa5f273f8e8"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-ox-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-controls-20261017-001/SHARED-START.json",
+      "bytes": 1304,
+      "sha256": "164c19c826ae36c543a93b688d94855b205a752ccfe31421cbaa2926174bdc7c"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "8421367b0290661ce2d6e16526ad4327824d3b3e3384496e7125fd20ccc588a1"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "cb2390e72c3e82d9442d9732319dfb5b1ffdbcdd5e177ffb4a72a48f0fe71203"
+    },
+    {
+      "path": "/private/tmp/unison-worker-checkpoint-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

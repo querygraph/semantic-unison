@@ -1,0 +1,37 @@
+{
+  "state": "PASS_CLOSED",
+  "scope": "Worker restore queued cancellation, budget/input failures, preentry envelope bounds and recovery; existing exact production build artifacts reused unchanged",
+  "actual_terminal": {
+    "session": 37203,
+    "chunk": "771174",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-worker-controls-pkfohzlx/RESULT.json",
+      "bytes": 125273,
+      "sha256": "0ecd6609a87cc454f820fa88203c5fff89b89f0ce393b4805721c89a60843e3f"
+    },
+    {
+      "path": "/private/tmp/unison-worker-restore-lifecycle-20261017-001/SHARED-START.json",
+      "bytes": 1304,
+      "sha256": "2d1c118cc6adf2c5c478fa9ac778382e157475ce986cf41985bc693168ec7c5d"
+    },
+    {
+      "path": "/private/tmp/unison-worker-restore-lifecycle-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "77c561cd45f773c78d174f3303a597cfe696a3abdb3606077cf80d57323dd8ad"
+    },
+    {
+      "path": "/private/tmp/unison-worker-restore-lifecycle-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-worker-restore-lifecycle-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "ce9ddc19ed879fe0ee2e5824b1fa29477cbef22555ee421771d237847d4b8cb1"
+    }
+  ]
+}
