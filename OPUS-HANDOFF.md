@@ -3318,3 +3318,14 @@ workers23127/23166reaped0/groupsabsent/tokensclosed. Driver now copies/pins mand
 EVPheader; no production changes. Receipt integration-xmp-kernel-actual-20261017.json.
 This closes current kernel-source reexecution, NOT live merge receiving/SDK.
 No active owned resources, no payload/IO admission or replay.
+
+
+## Current worker pool parity — 2026-10-17
+
+Actual75221/88a8e1/0/no session passes stock/Ox current-production-object64jobs
+atconfigured1/2/4/8, queued cancellation, exact hash/proof parity, descriptor/CPU/
+queue recovery. Executingcredits cap6+owner2 within standing8. Workers23693/23707
+reaped0/groupabsent/tokensclosed. Focusedparity omitsunused1GiBsparsefixtures.
+Receipt integration-worker-parity-actual-20261017.json. No newproduction/source
+pin changes to pendingpropertyrequest. No IO/SDK/camera/transport invoked; no
+speedup/hardthread/RSS/8executing inference. No actualownedjobs/resources now.
