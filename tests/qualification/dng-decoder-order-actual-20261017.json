@@ -1,0 +1,64 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "DNG frozen decoder ancestor ordering; not persistent cache integration or full-build qualification",
+  "actual_terminal": {
+    "session": 83442,
+    "chunk": "f7df5a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "calls": 58,
+  "checks_per_compiler": 83,
+  "compilers": [
+    "stock",
+    "OxCaml"
+  ],
+  "preserved_failure": "001: interface/template comment mismatch; child1 genuinely reaped, tokens closed",
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-ujzb3uf_/RESULT.json",
+      "bytes": 339873,
+      "sha256": "fe648c8d6e16ca1f4135ac5891445f6d36c082b16aa0820415622ccd7dbea2ca"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "4d968a60cd13645e48a5fd087128bb740914a58bb84ca682b0b923aaa9c23b21"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "92c2ec75f81c07e77bb02d9fe2b210c1bf4fb4cafb70182a9be7b1df1dde08ed"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-001/SHARED-STDERR.txt",
+      "bytes": 756,
+      "sha256": "5b52c94ab1a0f586b07fa9cd80e5c41afc373d69a99d7a9046ae932874f9948a"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-002/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "fab1e72272519ba0c4397570b145f3d8dc9350aedba5adc58a2d99e45942d085"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f2c65251f8af2c830505c50c2d4fc6c1c19de6d93b8e39e3112c0a9fa6a3eaa9"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-decoder-order-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "643e2a8bed190a9bbd854dce0231394f718723d9374d385bfd898c4b9c10ad07"
+    }
+  ]
+}

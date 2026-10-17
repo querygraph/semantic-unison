@@ -11,7 +11,8 @@ val freeze_decoders : binding list -> (decoders, string) result
 (** Owner-selected immutable ordered bindings, at most64 distinct targets.
     IDs and implementation SHA declarations are checked before file inspection.
     No registry lookup, code loading or peer selection. Parent bindings precede
-    their children; missing targets/unsupported decoders preserve opaque bytes.
+    their children (reversed ancestor order is refused before inspection);
+    missing targets/unsupported decoders preserve opaque bytes.
     This does not authenticate locally supplied compiled code. *)
 val with_snapshot : decoders:decoders -> max_read_bytes:int64 -> SemanticFile.t ->
   (ComponentHash.session -> initial:ComponentHash.snapshot ->

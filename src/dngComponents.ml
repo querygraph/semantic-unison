@@ -29,6 +29,10 @@ type outcome = { component_id : string; decoder_id : string;
 let bounded_id maximum text = text<>"" && String.length text<=maximum
   && not(String.contains text '\000')
 let freeze_decoders bindings =
+  let descendant parent child =
+    let prefix=parent^"/" in
+    String.length child>String.length prefix &&
+    String.sub child 0 (String.length prefix)=prefix in
   let rec validate count seen = function
     | [] -> Ok bindings
     | (binding:binding)::rest ->
@@ -37,6 +41,8 @@ let freeze_decoders bindings =
         || String.length binding.component_id<4
         || String.sub binding.component_id 0 4<>"dng/" then Error "DNG decoder target ID"
       else if List.mem binding.component_id seen then Error "duplicate DNG decoder target"
+      else if List.exists (descendant binding.component_id) seen then
+        Error "DNG parent decoder must precede child bindings"
       else if not(bounded_id 128 binding.decoder.id)
         || String.length binding.decoder.implementation_sha256<>32 then Error "DNG decoder provenance"
       else validate (count+1) (binding.component_id::seen) rest in

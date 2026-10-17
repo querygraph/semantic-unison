@@ -75,6 +75,12 @@ let () =
    | Ok value -> value | Error reason -> failwith reason in
  check (match DngComponents.freeze_decoders [bind private_id parent;bind private_id child] with
    Error _ -> true | _ -> false) "duplicate decoder target";
+ check (match DngComponents.freeze_decoders [bind (private_id^"/nested") child;bind private_id parent] with
+   Error _ -> true | _ -> false) "child before parent refused";
+ check (match DngComponents.freeze_decoders [bind (private_id^"/nested/code") child;bind private_id parent] with
+   Error _ -> true | _ -> false) "descendant before ancestor refused";
+ check (match DngComponents.freeze_decoders [bind (private_id^"-sibling") child;bind private_id parent] with
+   Ok _ -> true | _ -> false) "textual prefix is not a component ancestor";
  check (match DngComponents.freeze_decoders [bind "outside/target" parent] with
    Error _ -> true | _ -> false) "decoder target namespace";
  check (match DngComponents.freeze_decoders [bind private_id {parent with implementation_sha256="bad"}] with

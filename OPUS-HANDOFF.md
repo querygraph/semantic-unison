@@ -7,6 +7,14 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Isolated follow-up: frozen DNG decoder bindings now refuse child-before-parent
+order before file inspection, including nonadjacent ancestor relations while
+allowing textual-prefix siblings. Focused stock/Ox controls pass83checks each,
+58contained calls; actual83442/f7df5a/0, worker17995reaped0/groupsabsent/tokensclosed.
+Receipt `tests/qualification/dng-decoder-order-actual-20261017.json` preserves the
+initial interface-template mismatch failure and corrected successor. No main RPC
+source change, media/SDK/EXIO or persistent DNG checkpoint adapter integration.
+
 ## CURRENT IN THIS WORKTREE: checkpoint core isolated from reviewed RPC main
 
 Branch `feat/component-cache-input-binding`, worktree
