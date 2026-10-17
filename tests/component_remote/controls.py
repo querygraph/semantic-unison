@@ -1,6 +1,8 @@
 """Original disposable/fabricated controls. No canonical locks or RPC dispatch."""
 from copy import deepcopy
 import json
+import ast
+import inspect
 import os
 from pathlib import Path
 import stat
@@ -12,17 +14,23 @@ import unittest
 from unittest.mock import patch
 ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'bench/sync')]
-from component_remote import audit, case, call, coordinator, io
+from component_remote import audit, case, call, coordinator, io, producer_schema
 from component_remote.contract import CASES, FLAGS, command, checked_plan, sources, PARAMETERS
-from shared_cpu_pool import UnresolvedOwnership
+from shared_cpu_pool import UnresolvedOwnership, close_descriptors
 
-def group(pid,code=0):return {'pid':pid,'returncode':code,'reaped':True,'cancel_reason':None,
+def client_group(pid,code=0):return {'pid':pid,'returncode':code,'reaped':True,'hard_kill_required':False,
  'group_cleanup_before_leader_reap':True,'other_group_members_absent_before_reap':True}
+def supervisor_group(pid,code=0):return {'pid':pid,'returncode':code,'reaped':True,
+ 'group_cleanup_before_leader_reap':True,'other_group_members_absent_before_reap':True,
+ 'members_before_reap':[{'pid':pid,'state':'Z'}],'timed_out':False,
+ 'scope':'owned group only; separate sessions require independently audited proofs'}
+def server_group(pid,code=0):return {'pid':pid,'returncode':code,'reaped':True,
+ 'cancel_reason':None,'hard_kill_required':False}
 def outcome(plan,index):
     pid=900+index*3;server=plan['artifacts'][CASES[index][1]]['path'];base=[server,'-server','__new-rpc-mode']
     return {'command':command(plan,index),'returncode':0,'timed_out':False,'capture_truncated':False,
-      'supervisor_capture_truncated':False,'client_cleanup':group(pid),'supervisor_cleanup':group(pid+1),
-      'stdout':'','proxy':{'schema':'unison-loopback-protocol-count/1','server_cleanup':group(pid+2),
+      'supervisor_capture_truncated':False,'client_cleanup':client_group(pid),'supervisor_cleanup':supervisor_group(pid+1),
+      'stdout':'','proxy':{'schema':'unison-loopback-protocol-count/1','server_cleanup':server_group(pid+2),
       'server_pid':pid+2,'server_returncode':0,'server_command':base+FLAGS,
       'launcher_control_header_bytes_excluded':4+len(json.dumps(base).encode()),
       'server_group_binding':{'native_pid':pid+2,'native_process_group':pid+1,'supervisor_pid':pid+1,
@@ -52,6 +60,60 @@ class Controls(unittest.TestCase):
                        lambda v:v.update(io_manifest_sha256='0'*64)):
             bad=deepcopy(p);mutate(bad)
             with self.assertRaises(ValueError):checked_plan(bad)
+
+    def test_source_schema_matches_real_producers_instead_of_test_fabrication(self):
+        tree=ast.parse((ROOT/'tests/sdk_host_matrix/shared_child.py').read_text())
+        definitions=[node.value for node in ast.walk(tree) if isinstance(node,ast.keyword)
+          and node.arg=='client_cleanup' and isinstance(node.value,ast.Call)]
+        self.assertEqual(len(definitions),1)
+        self.assertEqual({node.arg for node in definitions[0].keywords},producer_schema.CLIENT_KEYS)
+        tree=ast.parse((ROOT/'tests/shared_process_owner.py').read_text())
+        settle=next(node for node in tree.body if isinstance(node,ast.FunctionDef) and node.name=='settle')
+        returns=[node.value for node in ast.walk(settle) if isinstance(node,ast.Return) and isinstance(node.value,ast.Dict)]
+        self.assertEqual(len(returns),1)
+        emitted={node.value for node in returns[0].keys}
+        tree=ast.parse((ROOT/'tests/component_remote/call.py').read_text())
+        appended={target.slice.value for node in ast.walk(tree) if isinstance(node,ast.Assign)
+          for target in node.targets if isinstance(target,ast.Subscript) and isinstance(target.value,ast.Name)
+          and target.value.id=='stopped' and isinstance(target.slice,ast.Constant)}
+        self.assertEqual(appended,{'group_cleanup_before_leader_reap'})
+        self.assertEqual(emitted|appended,producer_schema.SUPERVISOR_KEYS)
+        self.assertIn(str(ROOT/'tests/component_remote/producer_schema.py'),sources())
+
+    def test_eight_projected_actual_receipts_match_accepted_schema(self):
+        vector=io.load(ROOT/'tests/component_remote/producer-shapes-v1.json')
+        self.assertEqual(vector['schema'],'component-rpc-actual-producer-shapes/1')
+        historical=io.load(ROOT/'doc/component-remote-plan-v1.json')['execution_source_sha256']
+        for name,digest in vector['producer_source_sha256'].items():
+            matches=[value for path,value in historical.items() if path.endswith('/'+name)]
+            self.assertEqual(matches,[digest])
+        # Historical receipt provenance stays immutable when unrelated producer
+        # comments change; the separate AST check binds the CURRENT field shape.
+        self.assertEqual([row['index'] for row in vector['runs']],list(range(8)))
+        for row in vector['runs']:
+            value=row['projected_run'];producer_schema.successful_call(value)
+            self.assertNotIn('cancel_reason',value['client_cleanup'])
+            self.assertNotIn('cancel_reason',value['supervisor_cleanup'])
+            for key in ('client_cleanup','supervisor_cleanup'):
+                bad=deepcopy(value);bad[key]['cancel_reason']=None
+                with self.assertRaises(ValueError):producer_schema.successful_call(bad)
+        from component_remote.saved_functional import successful_call as accepted_saved_predicate
+        # Preserve the sealed saved implementation while ensuring the new shared
+        # runtime predicate has the same already-adopted body and declared keys.
+        self.assertEqual(ast.dump(ast.parse(inspect.getsource(accepted_saved_predicate))),
+                         ast.dump(ast.parse(inspect.getsource(producer_schema.successful_call))))
+
+    def test_schema_helper_is_mandatory_in_future_source_inventory(self):
+        p={'schema':'unison-component-remote/1','workspace':'/private/tmp/u-cr-0123456789ab',
+          'parameters':deepcopy(PARAMETERS),'execution_source_sha256':sources(),
+          'artifacts':{key:{'path':'/fixed/'+key,'sha256':'0'*64}
+             for key in ('stock','ox','old-stock','stock-probe','ox-probe')},
+          'prerequisites':[{'path':'/fixed/p'+str(i),'sha256':'0'*64} for i in range(3)],
+          'interpreter':{'path':sys.executable,'sha256':'0'*64},
+          'io_manifest_sha256':coordinator.CANONICAL_SHA256,'cpu_manifest_sha256':coordinator.MANIFEST_SHA}
+        self.assertEqual(checked_plan(p),Path(p['workspace']))
+        del p['execution_source_sha256'][str(ROOT/'tests/component_remote/producer_schema.py')]
+        with self.assertRaises(ValueError):checked_plan(p)
 
     def test_exact_native_group_binding_and_raw_command(self):
         p=plan(Path('/fixed/work'));v=outcome(p,0)
@@ -283,6 +345,42 @@ class Controls(unittest.TestCase):
             self.assertEqual(io.load(work/'0/OUTCOME.json')['returncode'],1)
             self.assertEqual(len(audit.audit_prefix(p,work)),1)
 
+    def test_worker_real_producer_shape_success_and_original_predicate_regression(self):
+        from component_remote.saved_functional_controls import files
+        for old_predicate in (False,True):
+            with self.subTest(old_predicate=old_predicate),tempfile.TemporaryDirectory() as raw:
+                work=Path(raw);p,recorded=files(work);fds=[]
+                try:
+                    for index in range(9):
+                        path=work/('private-fake-grant-'+str(index));io.write(path,b'x')
+                        fds.append(os.open(path,os.O_RDONLY|os.O_CLOEXEC))
+                    rows=[{'fd':fd,'device':os.fstat(fd).st_dev,'inode':os.fstat(fd).st_ino} for fd in fds]
+                    packet={'plan':p,'parent_pid':os.getppid(),'inherited_fds':rows,'deadline_monotonic':999999999}
+                    original_load=coordinator.load
+                    def load_packet(path):
+                        return packet if Path(path)==work/'WORKER-PACKET.json' else original_load(path)
+                    actual=producer_schema.successful_call
+                    def predicate(value):
+                        if old_predicate:
+                            # This is the exact original erroneous assumption.
+                            for key in ('client_cleanup','supervisor_cleanup'):value[key]['cancel_reason']
+                        return actual(value)
+                    with patch.object(coordinator,'load',side_effect=load_packet),\
+                      patch.object(coordinator,'checked_plan',return_value=work),\
+                      patch.object(coordinator,'inherited_identities',return_value=[(r['device'],r['inode']) for r in rows]),\
+                      patch.object(coordinator,'check_artifacts'),\
+                      patch.object(case,'execute',side_effect=recorded['cases']) as execute,\
+                      patch.object(audit,'successful_call',side_effect=predicate):
+                        code=coordinator.worker(work/'WORKER-PACKET.json')
+                    result=io.load(work/'WORKER-RESULT.json');settled=io.load(work/'REMOTE-SETTLED.json')
+                    self.assertEqual(execute.call_count,8);self.assertEqual(len(result['cases']),8)
+                    self.assertEqual(code,1 if old_predicate else 0)
+                    self.assertIs(result['complete'],not old_predicate)
+                    self.assertIs(settled['functional_pass'],not old_predicate)
+                    if old_predicate:self.assertEqual(result['failure'],"KeyError('cancel_reason')")
+                    else:self.assertEqual(result['audit']['cases'],8)
+                finally:close_descriptors(fds)
+
     def test_worker_stops_successors_after_known_functional_failure(self):
         with tempfile.TemporaryDirectory() as raw:
             work=Path(raw);packet={'plan':plan(work),'parent_pid':os.getppid(),
@@ -301,9 +399,9 @@ class Controls(unittest.TestCase):
             self.assertIs(io.load(work/'REMOTE-SETTLED.json')['functional_pass'],False)
 
 if __name__=='__main__':
-    before=sources();before[str(Path(__file__))]=io.sha(__file__)
+    before=sources();before[str(Path(__file__))]=io.sha(__file__);before[str(ROOT/'tests/component_remote/producer-shapes-v1.json')]=io.sha(ROOT/'tests/component_remote/producer-shapes-v1.json');before[str(ROOT/'doc/component-remote-plan-v1.json')]=io.sha(ROOT/'doc/component-remote-plan-v1.json')
     result=unittest.TextTestRunner(verbosity=1).run(unittest.defaultTestLoader.loadTestsFromTestCase(Controls))
-    after=sources();after[str(Path(__file__))]=io.sha(__file__)
+    after=sources();after[str(Path(__file__))]=io.sha(__file__);after[str(ROOT/'tests/component_remote/producer-shapes-v1.json')]=io.sha(ROOT/'tests/component_remote/producer-shapes-v1.json');after[str(ROOT/'doc/component-remote-plan-v1.json')]=io.sha(ROOT/'doc/component-remote-plan-v1.json')
     if before!=after:raise RuntimeError('control/execution sources changed during controls')
     work=Path(tempfile.mkdtemp(prefix='unison-component-remote-controls-',dir='/private/tmp'))
     io.save(work/'RESULT.json',{'complete':result.wasSuccessful(),'tests':result.testsRun,
