@@ -4,6 +4,15 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+**Integration checkpoint:** this local candidate combines the qualified local
+managed-cache/report stack with the producer-schema RPC auditor correction.
+Neither PR has been merged on GitHub; combined-source validation remains pending.
+The checkpoint paragraphs below preserve earlier isolated histories and are not
+new execution/admission authority. Local opt-in cache/report routing is now
+implemented; remote endpoint cache routing is not. Unknown private camera fields
+remain exact opaque components and do not block baseline deployment.
+
+
 Current isolated local report successor now wires UI component details through
 an explicit endpoint-owner worker callback. Opt-in componentownercache plus an
 existing configured private componentcacheparent enables capture/reuse/restart;
@@ -54,6 +63,31 @@ and full Make+selftests/Dune compile checks passed; see
 `tests/qualification/component-checkpoint-core-actual-20261017.json`. This is not
 yet main/worker/archive/store integration, nor an epoch-only/IO-free cache. Main's
 reviewed342 RPC pins are deliberately unchanged while its actual run is pending.
+
+<!-- Parallel historical checkpoint retained from RPC auditor branch. -->
+Current actual RPC note: admission53a52254 was exercised ONCE, all8probe commands
+returned0, but original final auditor KeyError(cancel_reason) leaves actual parent
+91491/7ec39a/exit1. Root independently accepted resource closure/released; original
+failure bytes remain. Outside-frozen saved-only producer-schema audit verifies
+all8receipts and in-run hashes/current metadata without payload rehash or replay;
+see `doc/component-remote-actual-saved-audit.md`. This is separate evidence, not an
+original successful controller exit or independent new payload readback.
+
+Latest cache namespace source ed67f0eb, draft PR9 on PR8, provides one-use private
+fixed-child creation/exact trusted identity reopen with retained creation effects
+and nested descriptor uncertainty. Current stock/Ox fullselftests/Dune and original
+namespace/loader/archive/worker controls pass. No production namespace is installed;
+owner identity persistence and automatic capture/report wiring remain follow-ons.
+See sibling `unison-component-namespace-20261017/doc/component-cache-namespace.md`.
+
+Latest isolated cache loader is source `3d35cf81`, draft PR8, stacked on PR7:
+bounded macOS UIX/UDI/UCR reads now bind to an actual loaded local archive hint,
+with no-follow digest-leaf opens and retained close uncertainty. Current stock/Ox
+full Make selftests/Dune and original loader/archive/worker controls passed.
+This does not provision a namespace, automatically capture/adopt/report caches,
+merge into main or qualify new RPC/media/SDK/production work. See the sibling
+`unison-component-loader-20261017` handoff and `doc/component-cache-loader.md`.
+
 Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
 commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
 record publication now have current stock/Ox Make+selftests/Dune and original
@@ -277,6 +311,26 @@ The deployable baseline is standard metadata/pixel delineation plus opaque
 preservation and exact integrity. Deploy it when its own correctness, ownership,
 compatibility and failure checks pass; do not wait for complete MakerNote
 coverage. Additional interpretation unlocks additional narrowly scoped behavior.
+
+**Release and refinement are independent tracks.** A release checklist must not
+require zero opaque bytes or complete private-field mapping. Report the supported
+pixel/metadata projections and remaining opaque coverage explicitly; qualify the
+operations being shipped. An unresolved small field blocks only an operation
+whose safety depends on interpreting that field. Field size alone establishes
+neither harmlessness nor a deployment blocker.
+
+Represent later knowledge as immutable refinement revisions, not an in-place
+rewrite of the old identity. A revision records the prior component contract,
+new decoder and policy versions, affected byte ranges, dependency closure and
+validation evidence. Interpretation and stability revisions are separate: merely
+naming a field does not authorize excluding it from a semantic hash. Apply
+independent revisions in either order with identical resulting roots; reject
+conflicting revisions while retaining the prior usable view. Schedule affected
+reads and ancestor recomposition lazily within the existing resource budget.
+The exact file digest and opaque preservation remain available throughout;
+refinement is neither an eager archive migration nor a prerequisite for continuing
+the qualified deployment. These are design requirements, not a new deployment
+authorization or a claim that automatic refinement routing is complete.
 
 In particular, same-layout accelerated receiving can reconstruct the **actual
 donor's exact bytes**, retaining opaque private regions in place. Bound the

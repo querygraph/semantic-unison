@@ -1,5 +1,21 @@
 # Unison implementation handoff
 
+
+## Current integration candidate — 2026-10-17
+
+This local branch combines managed-cache/local-report source6b4d5204 (PR11) and
+independent RPC auditor sourcea3725eb5/current5f350db6 (PR10). No GitHub PR is
+merged, no old run/admission is replayed, no original sealed receipt rewritten.
+The code merged without conflicts; only these navigation documents required
+combining parallel history. Later paragraphs saying store/namespace/UI are
+pending are historical; local opt-in report cache is implemented and qualified
+on its exact branch. Remote cache routing remains absent. Candidate validation
+is still required before making any combined-source qualification claim.
+
+Current zero owned jobs/resources. Standing8/8 applies. Next inspect required
+SOL acceptance against current integrated code/evidence, then run appropriate
+current-source checks. No runtime/media/SDK/transport admission is created.
+
 ## Latest namespace successor — 2026-10-17
 
 Source ed67f0eb is pushed as draft PR9:
@@ -67,6 +83,132 @@ read, no admission/workspace exists at last check, and no current Photo liveness
 is inferred from that historical defer receipt.
 
 Latest checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
+
+<!-- Parallel historical checkpoint retained from RPC auditor branch. -->
+## Latest future RPC auditor source — 2026-10-17
+
+Source a3725eb5 is pushed as draft PR10:
+https://github.com/querygraph/unison/pull/10, base feat/semantic-dng-oxcaml.
+No merge or future transport execution authorized.
+
+Branch feat/component-rpc-producer-audit, worktree
+/Users/alexy/src/unison-component-rpc-audit-20261017, based on main a2ddb287,
+fixes the actual final-auditor field mismatch for future runs. New independently
+pinned producer_schema.py validates REAL separate client/supervisor shapes and
+server wait/cancel/pump proof; audit.functional retains raw binding and fresh
+synthetic-file SHA readback. Runtime inventory343 here; originalmain342 remains
+unchanged, and historicalplan/admission are not repinned/reused.
+
+22coordinator+8readback+6saved control groups PASS, actual batch93347/15fd98/0 and
+finalcoordinator9b669b/0/no sessions/allgroupsCPUclosed. Full simulated worker passes
+real-shaped receipts; restoring the original lookup reproduces exit1/KeyError.
+Current producer AST field extraction, eight historical metadata projections,
+mandatory-helper source pin and existing failedprefix/unknown controls qualify
+this source fix. All318C/OCaml production files unchanged; no rebuild/liveRPC/
+SDK/media/EXIO/new runtime plan or admission. Exact evidence:
+tests/qualification/component-rpc-producer-audit-source-actual-20261017.json and
+doc/component-rpc-producer-audit-successor.md.
+
+Main consumedV1 and its originalfailedbytes/sealedreferences remain untouched.
+Root already separately adopted all8saved functional cases, originalexit1 and
+zero new payload reads/replay; f3bc1d0f adoption is reconciled in main. Any current
+pending/awaiting message below is historical. No new runtime is required merely
+to correct that old report and no successor dispatch is inferred.
+
+## Current actual RPC and namespace state — 2026-10-17
+
+RPC V1 admission53a52254 is CONSUMED, not awaiting dispatch. Actual owner tool
+91491/7ec39a/exit1/NOsession, coordinator62256/worker62257: all8probe commands0,
+raw8client/supervisor/server/pump settlements pass, workerreaped1/othersabsent,
+CPU8+EXIOclosed. Final auditor failed KeyError(cancel_reason): original fabricated
+controls added that field but actual client/supervisor producers omit it. Original
+WORKER-RESULT completeFALSE/exit1 and OWNER-RETURN088ef9fb remain unchanged.
+Independent Root adoption f01c0b94 reparsed8prefixes, freshly reacquired EXIO/Photo8
+and explicitly RELEASED scheduling hold. No replay/new grant is authorized.
+
+Saved-only auditor outside frozen342 closure (tests/component_remote/saved_*)
+now checks exact producer schemas,8rawledgers/reports/in-run beforeafter hashes,
+expected fixture hashes computed IN MEMORY and current16lstat fences. It does NOT
+open/re-hash generated payload or turn original ownerexit1 into0. Actual metadata
+outputaudit e27a2d/0; six original control groups/13negative-schema variants actual
+90276/474f52/0, bothcontainedgroups/CPUclosed. Savedresult d6d94f4c is separate
+source-bound functional evidence. Root has now separately adopted all8saved
+cases in UNISON-COMPONENT-RPC-V1-SAVED-RECEIPT-FUNCTIONAL-ADOPTION-20261017.json,
+with342pins and0payload reads/replay/newadmission. Exact local reconciliation:
+tests/qualification/component-remote-root-saved-functional-adoption-20261017.json.
+This preserves original exit1 and does not claim a new independent payload hash. See doc/component-remote-actual-saved-audit.md and qualifications
+component-remote-actual-saved-audit-20261017.json plus root-closure-adoption.
+Main frozen342runtime sources/request/plan remain byte-identical; old slot never
+runs again. Next audit tooling fix must be versioned, preserve the original run
+and qualify REAL producer schemas, not require a new native run merely for a
+reporting correction.
+Sealed return: doc/component-remote-return-20261017.json,9590B
+SHA2ce13be049b9ede3fab46015d1f1d865145e10d8806c40d34cffc457879f7098.
+PR2's description now distinguishes original exit1 from saved-only evidence.
+
+Latest namespace source ed67f0eb is draft PR9
+https://github.com/querygraph/unison/pull/9, branch feat/component-cache-namespace,
+worktree /Users/alexy/src/unison-component-namespace-20261017, based on PR8.
+One-use fixed-child mkdir or trusted dev/inode reopen; retained mkdir effects,
+scoped close and nested known/uncertain/all-borrowed directory evidence. Current
+stock/Ox Make/fullselftests/Dune/1272SRCchecks,67namespace+9unmodified-native/
+80loader+7unmodified-native checks/compiler plus existing suites PASS. Controller
+61854/d0ad68/1 stopped safely before next job on fresh RPC admission after5passed
+steps; after actualRPCclosed,18854/f0c867/0 completed only4unstartedsteps. All9
+workers/groups/token setsclosed. See that branch's component-cache-namespace-
+actual-20261017.json and doc/component-cache-namespace.md. No production namespace,
+photos/SDK/transport or automatic cache activation. Durable namespace identity
+binding and capture/adoption/report routing remain optional cache follow-ons,
+not private-field-completeness deployment gates. No merges authorized.
+
+Previous loader successor: `3d35cf81`, draft PR8
+https://github.com/querygraph/unison/pull/8, branch `feat/component-cache-loader`,
+worktree `/Users/alexy/src/unison-component-loader-20261017`, stacked on PR7.
+Strict macOS UIX/UDI/UCR digest-leaf reads now use the actual loaded archive hint
+through Update.load_component_owner_index. Borrowed directory, no discovery or
+creation; owned leaf FDs close once, with original failure/last-known identity/
+known ancestor retention on close uncertainty and no numeric retry/finalizer.
+Current stock/Ox Make/fullselftests/Dune and1272SRCchecks passed; percompiler
+80loader+7unmodified-native checks and existing component/DNG/126worker suites;
+14archive-probe calls (2compiles+12runtime phases). Actual35813/42bf8f/0/no session,
+all nine contained workers/groups/tokens closed. Earlier failed fixture exception
+expectation and missing Ox owner-only annotation and pre-identity-fix pass are
+preserved; current proof uses final002 builds/controls. See that worktree's
+component-cache-loader-actual-20261017.json and doc/component-cache-loader.md.
+No namespace bootstrap, automatic capture/adoption/normal report routing or
+media/SDK/transport/production/power-loss qualification. Main runtime342RPC pins
+remain unchanged; that pending RPC slot has since been consumed and closed as
+recorded above. Do not reuse its admission or act on historical readiness.
+
+Previous worker successor: `5537ec16`, draft PR7
+https://github.com/querygraph/unison/pull/7, branch
+`feat/component-owned-worker-refresh`, worktree
+`/Users/alexy/src/unison-component-owned-worker-20261017` (stacked on PR6).
+Worker refresh now authenticates the retained record against the trusted owner
+entry and derives its decoder inventory there. Stock/Ox Make/fullselftests and
+116 worker checks/compiler passed, actual67532/754d9e/0/no session; all contained
+groups/tokens closed. See that worktree's qualification receipt and handoff.
+Subsequent indexed routing also passed current stock/Ox Make/fullselftests/Dune
+and126workerchecks/compiler,1272current source checks, actual19704/4509e5/0/no
+session; all five contained workers/groups/tokens closed. Exact owner/path/
+generation miss or stale entry freshly extracts; a hit authenticates and
+refreshes; missing selected record errors and foreign/corrupt records fail
+without silent fallback. Changed-input/cancellation controls pass. See
+component-indexed-worker-refresh-actual-20261017.json and
+doc/component-worker-cache-routing.md in that successor. No media/SDK/transport
+or automatic managed namespace selection/normal scan installation claimed.
+This remains separate from main's frozen RPC source/admission closure.
+
+User design clarification, 2026-10-17: SOL.md now explicitly separates release
+qualification from later field refinement. Qualified pixel/metadata separation
+may ship with exact opaque preservation; incomplete small-field mapping is not
+a global deployment gate. Immutable decoder/policy revisions compose across
+independent components, read only affected regions when input bindings permit,
+and recompute dependent roots while retaining old views. Interpretation alone
+does not prove stability or authorize hash exclusions. Automatic routing remains
+an implementation follow-on; this documentation change authorizes no deployment.
+
+Historical checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
 Older checkpoints below retain their original scopes and pending-state history.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
@@ -464,6 +606,11 @@ Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
 record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
 then integration after the frozen RPC window is resolved. Full-input verification
 can be avoided only with a separately qualified immutable/preservation witness.
+
+<!-- Parallel historical checkpoint retained from RPC auditor branch. -->
+The chronology below retains historical pending states. Current scheduling and
+actual consumed-run status above supersede old readiness/absence notices.
+
 Latest isolated integration08b4be45 (metadata merge10ace908) is qualified and
 pushed to draftPR4: complete trusted cache capture -> full-current-input/base
 verification -> scoped decoderrefresh.1047DNGchecks and110workerchecks percompiler,
@@ -3013,3 +3160,68 @@ Receipt component-report-admission-retention-actual-20261017.json. First23717/
 e57c75/1 sourcebuildfailure preserved (bundled Lwt.wait returns promise, notpair).
 No active uncertain descriptor/resource now. Remote cache route and broaderlegacy
 source-FD close audit remain separate; no SDK/media/transport or deployment.
+
+<!-- Parallel historical checkpoint retained from RPC auditor branch. -->
+
+## Isolated implementation pointers — 2026-10-17 storage successor
+
+PR4 https://github.com/querygraph/unison/pull/4 is ready for review on
+`feat/component-cache-input-binding`, qualified source835df2fc. PR5
+https://github.com/querygraph/unison/pull/5 is a draft stacked on PR4, branch
+`feat/component-owner-index`, latest sourcec372213a in sibling
+`/Users/alexy/src/unison-component-index-20261017`. Its own OPUS-HANDOFF.md is
+current for that successor; these implementations are not merged into this tree.
+
+PR5 now provides bounded trusted root/path/generation selection, UIX/0 reference
+manifest import/export and borrowed-FD staging/readback/one-shot macOS immutable
+publication. It does not establish managed namespace installation, referenced
+entry presence, quota admission/FD settlement, a separately trusted durable
+owner-state commit, automatic routing or production activation. Unknown camera
+fields remain exact opaque components; incomplete interpretation is not itself
+a deployment gate. Existing UDI/0 bytes and main's frozen342RPC pins are unchanged.
+
+Latest exact qualification is the isolated
+`tests/qualification/owner-manifest-publication-actual-20261017.json`: focused
+56956/e8cf00/0 and full85962/0cfdd3/0 terminal/no sessions, all7adoptedworkers/groups/
+tokensclosed. Percompiler56component+1005checkpoint+27publicationfault+13readerfault+
+1248DNG+110workerchecks, four current stock/Ox Make/fullselftest/Dune compile builds,
+1272sourcechecks. Framing vectors count as controls, not additional camera fixtures.
+No media/SDK/transport, production writes or new resource grant. The main prepared
+RPC still requires its fresh exact admission; no dispatch follows from this note.
+
+
+## Current archive-reference successor — 2026-10-17
+
+Draft PR6 https://github.com/querygraph/unison/pull/6, sourcef171539b/metadata
+d8cf5566, lives on `feat/component-archive-hints` in sibling
+`/Users/alexy/src/unison-component-archive-20261017`, stacked on PR5. PR4/PR5 are
+ready review levels; none of this successor is merged into main. See that
+branch's current OPUS-HANDOFF.md and `doc/component-archive-hints.md`.
+
+The default-off endpoint-local componentownercache option persists explicit
+normally-published manifest references through the normal archive transaction.
+Its private property key is removed before legacy payload serialization; UAX/0
+is an optional tail after the existing paths map. Archive format23/default-off
+serialization/negotiated features are unchanged. Rename+directoryEIO cannot grant
+an owner reference. Missing/malformed/off hints never promote self-hashed blobs.
+No automatic capture/reuse or managed namespace installation yet; actual old-
+CLI compatibility/hardware power-loss/legacy close-fault qualification remain
+open. Retained old production-object compatibility is now qualified below.
+This is local cache ownership, never common-file reconciliation authority.
+
+Exact isolated evidence `tests/qualification/component-archive-hints-actual-20261017.json`:
+focused63243/2ab595/0, full96641/27b99d/0 terminal/no sessions. Current stock/Ox
+Make/fullselftests/Dune1272SRCchecks,1391DNG+29archive-publication-fault+110worker
+checks/compiler and14linked private archive calls/6phases percompiler pass. All8
+adoptedworkers/groups/tokensclosed. Test-only import/symbol/preference setup
+failures preserved. No source-file payload, SDK/Adobe, remote process or transfer.
+Main frozen342RPC source remains unchanged; exact admission still required.
+
+Archive successor 4d1dcc6f adds actual retained pre-change production-object
+reader/writer compatibility evidence, pushed to PR6. Owner12014/2441f7/0 and all13
+direct calls settled: old reads preserve exact current stock/Ox archive bytes,
+old rewrites drop only the optional hint, the current reader safely misses, and
+the manifest payload stays unchanged. Source/artifact pins were independently
+rechecked. See that branch's component-archive-legacy-actual-20261017.json.
+This does not execute the untouched old CLI or qualify all old releases/network
+transfers. Production source and main's frozen RPC closure remain unchanged.
