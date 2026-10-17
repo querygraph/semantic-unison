@@ -2,8 +2,9 @@
 
 `ComponentHash` implements the worker-local hashing/composition core of SOL.md's
 gradual-understanding design. The DNG adapter below now supplies physical
-components; wire protocol, archive identity and persistent-cache integration
-remain open. It grants no transformation,
+components; [explicit typed worker inspection](component-workers.md) now consumes
+frozen decoder handles. Wire/report consumers, archive identity and persistent
+cache integration remain open. It grants no transformation,
 conflict-resolution, publication or decoded-pixel-equivalence authority.
 
 An owner supplies an immutable input snapshot and a root specification covering

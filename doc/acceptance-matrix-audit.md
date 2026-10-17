@@ -20,6 +20,15 @@ controls passed80 checks/compiler and four full builds. These are generated
 fixtures and historical snapshot hashes, not camera pixel/rendering equality,
 persistent reuse or component archive/worker deployment evidence.
 
+The [explicit component-worker API](component-workers.md) now has
+[stock/Ox87checks/compiler and four builds](../tests/qualification/component-domain-workers-actual-20261017.json),
+including Dune fullselftests and current-main byte rebind. Compact immutable
+observations cross the existing typed completion boundary; reader/session
+capabilities do not. Cancellation/shutdown, failure/FD/CPU/localIO settlement and
+read accounting passed on generated8KiB files. No new camera/SDK/EXglobal or
+persistent/archive/RPC/UI deployment follows. This advances worker integration;
+remaining report consumers and persistent identity binding are still open.
+
 The [new-profile production receiving successor](../tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
 now adds18actual rows/54CLI stock/Ox workers1/2/3, six semantic rows/twelve exact
 layout updates with opaque private references into changed XMP. Exact donor,
@@ -37,7 +46,7 @@ strict merge/cache authority and full staged-target hash verification.
 [Actual source qualification](../tests/qualification/dng-layout-exact-source-actual-20261017.json)
 includes49checks per stock/Ox compiler, strict safety regressions, four full builds
 and the stock legacy kernel/inspector. Broader remote/mixed-version receiving,
-component worker/archive integration and incremental cache remain open. The
+component report/RPC/archive integration and incremental cache remain open. The
 component forest and nested dispatch are now implemented as described above;
 neither full-goal acceptance nor production camera qualification follows.
 

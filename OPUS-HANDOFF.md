@@ -7,6 +7,46 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## CURRENT: typed component worker API qualified and integrated
+
+`SemanticWorkers.components` is now implemented on main via7b900ada, cherry-picked
+from tested isolated source9327553e. Explicit owner-frozen decoders and component/
+decoder read budget use the existing source FD/domain/CPU/local-filesystem gate
+and queue lifecycle. Compact immutable full/layout hashes, five optional counted
+role projections, decoder outcomes and original stats cross completion; no
+session/reader/snapshot capability escapes. Unsupported returns an explicit
+format Error; operational/budget failures fail the job, negative budget refuses
+before FD admission. Ordinary jobs do not add a component pass.
+
+Final focused actual86825/c76ad0/0/no session passed87checks/compiler,4 contained
+production-linked compile/runtime calls and334 linked artifact pins. Twelve
+separately opened FD jobs on configured2worker pool match full/pixel identities;
+private refinement runs off owner, read observer on owner. Baseline/refined charges
+8192/8321B versus measured delivered8280/8409B include88B DNG geometry. Successful
+IO-gated execution, operational failures, negative admission, queued/late cancel,
+completed-before-shutdown suppression and descriptor/permit/queue/localIO recovery
+passed. This is functional configured-worker parity, not compute overlap/speedup.
+Earlier00180checks and00284checks passed/closed with narrower coverage.
+
+Four full builds: Make pair actual38881/087acc/0; Dune+fullselftests(workers3)
+pair actual13072/c40426/0. All groups/canonicalUnison8 closed,1272 current compiled
+production-source checks matched. No EXglobal/SDK/media/camera/Photo lease used.
+Receipt `tests/qualification/component-domain-workers-actual-20261017.json`75212B
+SHAf701bc011ca6a40f24a4e4affd00efc93fb5288c271c864bc4a0b0b8443a35cc.
+After cherry-pick, all320 qualified source files were byte-rebound to main in
+`tests/qualification/component-workers-main-rebind-20261017.json`31585B
+SHAb2ab28ca1521538952a4c64cead65753bb3eba2fa4b22faedb00dfefd9457fa3.
+Contract: `doc/component-workers.md`.
+
+The isolated checkout/branch is now committed, not unbuilt; retained for evidence.
+No jobs/resources active. Main src changed AFTER accepted layout receiving, so
+old receiving binaries/receipts remain historical and must not be treated as
+fresh source pins or reused grants. Component RPC/UI consumers, persistent reuse/
+archive binding and representative real-camera qualification remain open; complete
+private grammar is not a baseline deployment gate. Next focus is an owner report
+consumer and qualified persistent identity binding, without broadening prior
+receiving/SDK/pixel/resource claims.
+
 ## CURRENT: layout reschedule actual PASS/CLOSED and independently adopted
 
 Root's distinct scheduling successor `/private/tmp/unison-layout-receiving-admission-rescheduled-80c9c19d3f48.json`
@@ -46,7 +86,7 @@ Root did NOT personally poll our tool; that distinction is explicit. Adoption
 SHAc22be7827e9bde67d5a37141d1b15df3225867f1d020aa7a9ec17592bfb59138.
 No hold, replay or successor. Original209266ba remains expired-unstarted.
 
-## ISOLATED next work: component worker API, unbuilt/unmerged
+## Historical isolated preparation: now superseded by qualification above
 
 To preserve the reviewed receiving source while scheduling was pending, created
 owned checkout `/Users/alexy/src/unison-component-workers-20261017`, branch

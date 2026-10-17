@@ -141,6 +141,17 @@ a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
 
+The [typed component worker API](doc/component-workers.md) is now integrated
+and [qualified](tests/qualification/component-domain-workers-actual-20261017.json):
+stock/Ox87checks each, four production-linked calls, four full Make/Dune builds
+and both Dune selftests passed; all canonicalCPU8/groups closed. It accepts frozen
+decoders and returns compact immutable observations without exporting reader/
+session/snapshot capabilities. Read reporting includes bounded parser reads;
+operational failures, queued/late cancellation and shutdown preserve settlement.
+[Current main source rebind](tests/qualification/component-workers-main-rebind-20261017.json)
+confirms320 qualified files. RPC/UI consumers, persistent/archive binding and
+real-camera component coverage remain open; no default transfer/archive change.
+
 The [layout-only receiving successor](tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
 now actually PASSED/CLOSED: stock/Ox18rows54CLI through production loopback
 ordinary/receiver-clone/semantic paths with workers1/2/3. Six semantic rows/twelve
