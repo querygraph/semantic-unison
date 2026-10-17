@@ -4,6 +4,13 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
+commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
+record publication now have current stock/Ox Make+selftests/Dune and original
+native error-path evidence. This does not implement the trusted persistent owner
+index/automatic cache selection, merge the branch, or qualify actual new RPC.
+Main's reviewed342 source pins remain unchanged; see OPUS-HANDOFF.md for receipts.
+
 Isolated successor `feat/component-cache-input-binding` now reaches `c55a90de`:
 current-parser partition checks, DNG authenticated checkpoint restore, guarded
 private-view replacement and coordinated worker restore are implemented there.

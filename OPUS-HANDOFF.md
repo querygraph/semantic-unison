@@ -7,6 +7,19 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Latest isolated cache successor is pushed through `e3c60795` on
+`feat/component-cache-input-binding`. It now includes worker capture/restore/
+decoder refresh, owner-bound record staging/readback and macOS borrowed-FD
+exclusive immutable-record publication. Sibling upgrades commute across restored
+checkpoints. Current stock/Ox Make+selftests and Dune compile pass; focused
+41component+988checkpoint+21originalnativefault checks/compiler and110workerchecks
+pass, allgroups/tokensclosed. Postrename directoryEIO retains published state;
+stageEIO/EINTR not retried; test shim is absent from production. See isolated
+`doc/component-checkpoints.md` and `component-record-publication-*` receipts.
+Still not merged into main:342reviewed RPC source pins unchanged. Persistent
+trusted owner-index/automatic diskcache selection and actual RPC transport remain
+open; no resources held, no media/SDK/transport run or new admission inferred.
+
 Isolated component-cache successor is now pushed through `c55a90de` on
 `feat/component-cache-input-binding`. It adds current-parser partition validation,
 DNG authenticated restore, explicit guarded private-view replacement and worker
