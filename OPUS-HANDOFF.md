@@ -2458,3 +2458,131 @@ the manifest payload stays unchanged. Source/artifact pins were independently
 rechecked. See that branch's component-archive-legacy-actual-20261017.json.
 This does not execute the untouched old CLI or qualify all old releases/network
 transfers. Production source and main's frozen RPC closure remain unchanged.
+
+
+## Resume checkpoint — current state on 2026-10-17
+
+This section supersedes earlier pending-RPC and next-step scheduling notes;
+historical receipts and sealed documents remain unchanged. User resumed the goal.
+
+- The single component RPC run is consumed and resource-closed: actual owning
+  tool91491/7ec39a/exit1/no session. All eight commands settled; the original
+  final auditor failed on an invented `cancel_reason` field. Saved-only corrected
+  audit and Root narrow functional adoption are recorded in
+  `doc/component-remote-root-adoption-addendum-20261017.md`. Preserve original
+  exit1 and sealed bytes; do not rerun its admission.
+- PR7 (owned/indexed worker refresh), PR8 (managed read loader), and PR9
+  (private namespace lifecycle) are implemented and qualified in their isolated
+  sibling checkouts. PR9 branch `feat/component-cache-namespace` is at d074fb8b;
+  its handoff contains detailed qualification and limits. These are unmerged.
+- PR10, `feat/component-rpc-producer-audit` at 5f350db6, is a separate draft
+  against this feature branch. It fixes future auditor producer schemas with
+  36 original control groups. Main's frozen342-source runtime and old sealed
+  return remain unchanged. No new RPC runtime is admitted or necessary merely
+  to acknowledge this source correction.
+- The next implementation checkout is
+  `/Users/alexy/src/unison-component-store-20261017`, branch
+  `feat/component-cache-store`, initially at d074fb8b. Only the checkout has
+  been created: no store code, tests, build, runtime, or resource reservation
+  has started there. Planned work composes bounded capture/staging/publication,
+  manifest completion, and guarded archive-head adoption, then automatic
+  capture/report routing. Close uncertainty must retain all ownership.
+- Remaining release work: finish automatic incremental cache capture/report
+  integration; consolidate the unmerged stack into a reviewable candidate;
+  run integrated compatibility/failure and supported-scope acceptance checks.
+  Exhaustive MakerNote interpretation is not a deployment prerequisite:
+  unknown bytes stay exact and hash-covered, with versioned incremental
+  refinements and old views retained.
+- At this checkpoint no known owned job, CPU token, IO barrier, or admission is
+  active. Standing Unison8/Photo8/system2 applies; future payload/SDK/transport
+  work needs its own exact coordinated admission. No old grant is reusable.
+
+Keep this main navigation document and the active successor's handoff updated
+at substantive implementation/qualification checkpoints. No merge authorization
+for PR2 or PR4–PR10 is implied by continuing the goal.
+
+
+## Managed store checkpoint — 2026-10-17
+
+Successor branch `feat/component-cache-store` in
+`/Users/alexy/src/unison-component-store-20261017` is now bf0527b0. Its managed
+store composes quota-bound exclusive stage creation, authenticated record/entry
+and manifest publication, full owned-descriptor settlement, and guarded in-memory
+archive-head adoption. Both stock/Ox Make builds/fullselftests and real production
+archive commit/fresh-process cold load passed. Original tiny failure controls
+cover four close-uncertainty positions, all four opens and every observed sync;
+94 composed failure checks/compiler passed, preserving partial effects and no
+adoptable reference on failure. All actual workers/groups/tokens closed.
+
+See that checkout's current OPUS-HANDOFF.md, doc/component-managed-store.md and
+component-managed-store-{normal,fault,archive}-actual-20261017.json receipts.
+This code remains isolated/unmerged; no PR or production activation is claimed.
+Automatic normal report capture/reuse routing and Dune/integrated release checks
+remain work. This supersedes the earlier checkout-only pointer, not sealed RPC
+or other historical evidence. No payload/SDK/transport/new resource grant occurred.
+
+
+## Current managed-cache draft PR — 2026-10-17
+
+PR11 https://github.com/querygraph/unison/pull/11 is now OPEN/DRAFT, stacked on
+PR9 feat/component-cache-namespace. Qualified source8e84a6a8 in sibling
+`/Users/alexy/src/unison-component-store-20261017` includes archive-bound namespace
+identity, retained-old-code compatibility, explicit endpoint-owner worker/capture/
+reuse orchestration and cancellation/concurrent-head fences. Current source
+stock/Ox Make+selftests and original owner-route controls passed; all processes
+and grants closed. Source before the later identity/report additions also has
+Dune qualification; current-source Dune remains pending. The active successor
+handoff has exact source/receipt pointers and preserved failed-control history.
+
+No default SemanticRemote/UI cache routing yet. Its private-parent ownership and
+loaded-owner integration remain actual implementation gaps, not camera-knowledge
+requirements. No merge, production use, media/SDK read, old admission reuse or
+new resource hold follows from the draft. Main's frozen RPC342 and sealed bytes
+remain untouched.
+
+
+## Local report successor current — 2026-10-17
+
+PR11 source is now6b4d5204 (pushed). UI component details has opt-in local cache
+routing via explicit private componentcacheparent, owned parent lifetime, configured
+path/permission rechecks, capture/reuse/restart and cancellation/head fences. Local
+cache uncertainty now keeps both descriptor carrier AND outer report admission
+held; actual original probes distinguish application retention until exit from OS
+child/group closure. Current stock/Ox Make+selftests/Dune and normal/retained report
+controls pass; exact source evidence in sibling store checkout's currenthandoff.
+No active owned resources. Earlier navigation saying UI remains unwired is now
+historical. Explicit parent provisioning, remote endpoint cache route, broader
+legacy source-FD close audit, stack consolidation and final integrated acceptance
+remain open. No merge/production/media/SDK/transport grant or full-goal claim.
+
+
+## Consolidated local candidate — 2026-10-17
+
+Current integration checkout `/Users/alexy/src/unison-sol-integration-20261017`,
+branch integration/sol-release-candidate, HEADb3d6ef9d, combines PR11 managed/local
+report source6b4d5204 and PR10 independent producer auditor5f350db6. No GitHub PR
+merge. All390 tracked production paths unchanged versus qualified cache branch;
+all production SRC pins in final stock/Ox Make+selftest/Dune reports rebound.
+All36auditorcontrols passed actual76033/d65499/0/no session; allworkers/grants
+closed. 46sealedmetadatareferences and originalseal2ce13be0 unchanged. Candidate
+receipt sol-integration-source-actual-20261017.json and current qualification index
+now replace stale pending-admission/cache-not-wired navigation. Full SOL twelve-row
+acceptance review remains next; no media/SDK/RPC/native/benchmark grant or replay.
+
+
+## Latest review and regression pointers — 2026-10-17
+
+Draft PR12 https://github.com/querygraph/unison/pull/12 now reviews qualified
+component source-FD owner sourceecad82f3, metadata66315d9f, against published
+integration base72a19d9d; no merge. Independent fix checkout and currenthandoff:
+/Users/alexy/src/unison-component-source-owner-20261017. It closes the component
+report source-cleanup gap and holds RPC source admission on uncertainty, with
+stock/Ox Make+selftests/Dune, directed controls and36auditorgroups passing.
+
+IntegrationlocalHEADc49a26fb adds current bounded worker384job/1255checks each and
+current scalar XMP25+343+4controls (Ox4checked domains). Allactualjobs/resources
+closed. Frozen source/IOrequeste60975f3 is queued01a14991-ce52 for18row/54CLI property
+regression; no admission present atlastread, no runtime dispatch or new grant.
+No oldgrantreuse; source/productionpins for that request remain unchanged. The
+release readiness document and activeworktree handoffs retain exact evidence and
+remaining claims. Broader actual transport/camera work remains separatelyadmitted.
