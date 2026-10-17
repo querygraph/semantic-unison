@@ -3682,3 +3682,32 @@ source-owner-actual-20261017.json pins exact artifacts. make_plan uses that help
 and is compiled/source-reviewed, NOT newly remotely executed. Legacy standalone
 source held_files registry removed; receiver candidate registry unchanged.
 Receiver native/ML cleanup gap remains, no full-goal completion or IOgrant.
+
+
+## Native publication explicit-owner backend in progress — 2026-10-17
+
+Current successor adds a distinct StagePublication.owned API; legacy public t
+callers remain unchanged. Native carrier rooted before first descriptor retains
+every uncertain close and remaining known handles, original native cause and
+actual lifecycle phase. Repeated operations refuse with same preallocated carrier;
+normal explicit abort/disarm releases the native root. Strict API is not wired
+into Copy/SemanticSync/SemanticRemote yet; outer admission integration remains.
+Details doc/stage-publication-owned-v1.md.
+
+First controller13859/bfd53d/1 failed after stock owned43checks PASS because the
+legacy runner argument was --compiler instead of --ocamlopt; no unknown process
+left, all groups/CPU closed. Preserved001. Corrected controller17264/30d895/0
+passed43new owned+58legacy tests per stock/Ox compiler, all child/group closures
+verified. Fault wrappers only copied disposable C; native unknown application
+owners intentionally last until process exit, not claimed normally closed.
+Full stock/Ox Make+selftests and Dune are now owned by actualtool23195; final
+terminal/qualification receipt follows. No transport/SDK/camera or bulk IO grant.
+
+Native owned backend qualification ACTUAL CLOSED23195/7fb21f/0/no session:
+stock/Ox Make+selftests and both Dune builds pass; all workers/groups/CPU leases
+closed. Together with corrected17264/30d895/0,43owned+58legacy controls/compiler
+pass. Exact receipt stage-publication-owned-backend-actual-20261017.json retains
+001failure and002success/binaries/current source pins. Backend ONLY: no production
+caller switched and no outer publication-admission qualification yet. Next migrate
+caller transaction owners and non-suppressing cleanup together, with composed
+fault controls; no transport/camera/SDK grant. Full goal remains active.

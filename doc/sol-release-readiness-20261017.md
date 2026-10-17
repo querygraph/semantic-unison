@@ -17,7 +17,7 @@ remain in scope; exhaustive private-field interpretation is not a release gate.
 | 3 Malformed input | Bounded graph/count/extent rules, malformed wire/container and JPEG controls | Current directed regressions, not an autonomous fuzz/sanitizer campaign (user excluded that work). No whole-process hard RSS claim. |
 | 4 Integrity | Full target SHA checks, raw-digest-invalid rejection, generated actual SDK receiving/merge and one real-camera SDK decode | Broader corpus and decoded-pixel identity remain separate claims. Do not rerun SDK without fresh coordination. |
 | 5 Concurrent modification | Source/target witnesses, queued completion cancellation; new report source/head/parent/permission fences | Current-object384-job apply/cancellation controls passed per compiler; precise source bindings remain in the receipts. No hostile-writer atomic namespace CAS claim. |
-| 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Legacy transfer-stage cleanup remains to review. Hardware power-loss and every fault cross-product are unproved. |
+| 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Explicit owned publication backend now qualified; legacy production callers still require coordinated migration. Hardware power-loss and every fault cross-product are unproved. |
 | 7 Filesystems | APFS ordinary clone/range path, cross-volume APFS/HFS+ historical exact controls, named property controls | No ZFS/ReFS implementation/runtime, physical sharing/write amplification or exhaustive sparse/ACL/compression claim. Fresh IO controls require a new exact window. |
 | 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Fresh candidate mixed-version transport evidence needed; UI tested through its production entry callback, not a manual GUI session. |
 | 9 Parallelism/resources | Checked worker closures, pool1/2/4/8 parity, source/accounted CPU/queue/FD controls, shared SDK tests | Current-object pool1/2/4/8 parity and384-job scheduling controls passed; see integration-worker-parity/apply receipts. Credits and bounded samples are not hard OS-thread/RSS caps or calibrated speedup. |
@@ -43,7 +43,10 @@ fault, transfer or scheduling controls.
    including an original injected-close failure control. Transfer source planning
    now shares that helper with fresh builds/controls; actual remote execution
    remains unverified. See transfer-source-ownership-review-20261017.md. Review receiver-stage
-   legacy cleanup separately;
+   cleanup next: the explicit StagePublication.owned backend passed43new and58legacy
+   controls/compiler plus stock/Ox Make+selftests/Dune. Copy/SemanticSync/Remote
+   transaction-owner migration and composed failure controls remain; see
+   stage-publication-owned-v1.md.
    report ownership tests must not be presented as transfer fault coverage.
 2. Frozen property requeste60975f3 is already queued from the separate integration
    checkout, with exact source/build pins. Its fresh Photo Root admission remains
