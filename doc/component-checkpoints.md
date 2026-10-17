@@ -112,3 +112,11 @@ original view available; operational errors propagate. Descendants of the target
 must be reselected afterward. Unrelated pixel/metadata nodes remain unchanged.
 This supplies localized version replacement, not an automatic decoder registry
 comparison or durable publication transaction.
+
+The worker entry point `SemanticWorkers.restore_components` accepts bounded
+encoded metadata plus the owner's separately trusted digest. It uses the normal
+borrowed-descriptor, filesystem/CPU admission, cancellation, completion and
+shutdown machinery and returns only immutable component summaries. Restoration
+reports no new decoder outcomes: historical interpretations are not fresh decoder
+approvals. Automatic cache selection and trusted persistent record storage remain
+separate owner work.

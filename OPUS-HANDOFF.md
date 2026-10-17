@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Worker restoration is connected: `SemanticWorkers.restore_components` takes bounded
+checkpoint bytes and separately trusted owner digest, verifies current input/base
+on a worker, returns immutable summaries/no fresh decoder approvals, and follows
+existing CPU/IO/descriptor/cancellation settlement. Both current full Make builds
+and selftests passed:stock25726/d3c966/0,Ox89779/00509e/0. Production-linked worker
+controls91checks/compiler passed62679/94caa6/0; all groups/tokens closed. Receipt
+`tests/qualification/component-worker-checkpoint-actual-20261017.json`. No media,
+SDK/EXIO or main RPC pin changes. Durable owner store, automatic decoder/cache
+selection and Dune successor qualification remain outstanding.
+
 Accumulated checkpoint/DNG restoration/replacement source4d42753b now passes
 current full Make builds+selftests on stock5.2.0 and OxCaml, each3semanticworkers.
 Actualstock90151/b8a560/0 andOx28025/35ef1b/0; both workers genuinelyreaped0,

@@ -127,3 +127,14 @@ val components : t -> HelperSupervisor.cancellation -> decoders:DngComponents.de
     read observer. Unsupported format returns [components=Error _]; operational
     and budget errors fail the job, never become unsupported or no-match. No
     archive, persistent reuse, transfer, rendering or publication authority. *)
+
+val restore_components : t -> HelperSupervisor.cancellation ->
+  expected_checkpoint_sha256:string -> encoded:string -> max_read_bytes:int64 ->
+  Unix.file_descr -> component_inspection option Lwt.t
+(** Restore owner-authenticated historical DNG components on a worker using the
+    same descriptor/CPU/IO/cancellation settlement as [components]. The prior
+    trusted digest is mandatory; arbitrary peer bytes plus their self-hash are
+    not trusted provenance. Verifies complete input and current DNG base geometry.
+    Returned refinements are empty: no current decoder was invoked or approved.
+    Only immutable summaries cross back; no session or reader escapes. No
+    automatic cache selection, archive trust or persistence is supplied. *)

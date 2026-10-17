@@ -59,7 +59,26 @@ let () =
  check(H.usage b=(0,0) && (W.usage pool).running=0) "failed job released early or leaked";
  check((summary(Lwt_unix.run(borrow pool (H.cancellation()) empty 8192L "fixture.dng"))).full_sha256=expected)
    "pool failed to recover";
- W.set_read_observer pool None;finish pool b;
+ W.set_read_observer pool None;
+ let fd=Unix.openfile "fixture.dng" [Unix.O_RDONLY] 0 in
+ let encoded,digest=SemanticFile.with_fd fd (fun file ->
+   match DngComponents.with_snapshot ~decoders:empty ~max_read_bytes:8192L file
+     (fun session ~initial:_ ~refined _ ->
+       let checkpoint=ComponentHash.checkpoint session refined in
+       ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint) with
+   | Ok value -> value | Error why -> failwith why) in
+ let restored=summary(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:digest ~encoded ~max_read_bytes:8192L fd)) in
+ check(restored.full_sha256=baseline.full_sha256 && restored.layout_sha256=baseline.layout_sha256 &&
+   restored.projections=baseline.projections) "worker restore changed cached identities";
+ check(restored.refinements=[] && restored.hash_bytes_requested=8192L)
+   "worker restore fabricated decoder approval or skipped input verification";
+ check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:(String.make 32 'X') ~encoded ~max_read_bytes:8192L fd));false
+   with W.Failed _ -> true) "worker accepted untrusted checkpoint";
+ check(H.usage b=(0,0) && (W.usage pool).running=0 &&
+   (Unix.fstat fd).Unix.st_kind=Unix.S_REG) "restore failure leaked budget or closed borrowed FD";
+ Unix.close fd;finish pool b;
  let b=budget 1 in let io=IoAdmission.create ~per_device:1 ~max_pending:4 in
  let pool=W.create_with_io ~io ~workers:1 ~max_pending:4 ~budget:b in
  let release=Lwt.wait () in
