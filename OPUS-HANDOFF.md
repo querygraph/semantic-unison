@@ -13,7 +13,12 @@ opaque coverage; version each field refinement, invalidate only its dependency
 closure, preserve prior usable views and avoid mandatory archive-wide upgrades.
 This is a design requirement, not a new deployment or runtime qualification.
 
-Stacked draft PR3 is open: https://github.com/querygraph/unison/pull/3,
+Stacked draft PR4 is open: https://github.com/querygraph/unison/pull/4,
+replacing PR3 after a mistaken temporary base-ref push automatically marked it
+merged. Base was restored with an exact lease to03f4ef6c; isolated cache source
+remains separate. Current targeted race/ablation proof is914f10af (1043 DNG
+checks/compiler, unchanged production source rebound to prior four builds).
+Historical PR3: https://github.com/querygraph/unison/pull/3. PR4 targets
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
 Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
 and110workerchecks/compiler PASS; all5workers/groups/grants closed underactual
