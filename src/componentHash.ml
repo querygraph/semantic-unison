@@ -240,6 +240,27 @@ let decode_checkpoint encoded =
   if !remaining<>0 || !position<>String.length encoded then invalid "component checkpoint count/trailing data";
   tree
 
+let checkpoint_record ~binding checkpoint =
+  if String.length binding<>32 then invalid "component record binding must be raw SHA256";
+  "UCR\000\000\000\000\000" ^ binding ^ checkpoint.digest ^
+    integer(Int64.of_int(String.length checkpoint.encoded)) ^ checkpoint.encoded
+
+let checkpoint_from_record ~expected_binding ~expected_record_sha256 encoded =
+  let size=String.length encoded in
+  if String.length expected_binding<>32 || String.length expected_record_sha256<>32 ||
+    size<80 || size>max_checkpoint_size+80 ||
+    SemanticHash.string encoded<>expected_record_sha256 then invalid "component record digest/size mismatch";
+  if String.sub encoded 0 8<>"UCR\000\000\000\000\000" ||
+    String.sub encoded 8 32<>expected_binding then invalid "component record version/owner binding mismatch";
+  let length=ref 0L in
+  for i=72 to 79 do length:=Int64.logor(Int64.shift_left !length 8)
+    (Int64.of_int(Char.code encoded.[i])) done;
+  if !length<>Int64.of_int(size-80) then invalid "component record payload length mismatch";
+  let payload=String.sub encoded 80 (size-80) and digest=String.sub encoded 40 32 in
+  if SemanticHash.string payload<>digest then invalid "component record checkpoint digest mismatch";
+  ignore(decode_checkpoint payload);
+  {encoded=payload;digest}
+
 let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
   if max_read_bytes<0L then invalid "negative component read budget";
   require_id expected_root_schema;

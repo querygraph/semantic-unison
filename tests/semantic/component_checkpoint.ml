@@ -39,6 +39,33 @@ let () =
         let checkpoint=C.checkpoint session snapshot in
         check(C.checkpoint_bytes checkpoint=encoded && C.checkpoint_sha256 checkpoint=seal)
           "checkpoint roundtrip not canonical";
+        let binding=SemanticHash.string "original-root/path/generation/decoder-contract" in
+        let record=C.checkpoint_record ~binding checkpoint in
+        let record_digest=SemanticHash.string record in
+        let unpack bytes digest=C.checkpoint_from_record ~expected_binding:binding
+          ~expected_record_sha256:digest bytes in
+        let restored=unpack record record_digest in
+        check(C.checkpoint_bytes restored=encoded && C.checkpoint_sha256 restored=seal)
+          "owner record changed checkpoint";
+        check(String.sub record 0 8="UCR\000\000\000\000\000" &&
+          String.sub record 8 32=binding && String.sub record 40 32=seal &&
+          String.sub record 72 8=put_number 0 (Int64.of_int(String.length encoded)) (String.make 8 '\000') &&
+          String.sub record 80 (String.length encoded)=encoded)
+          "owner record independent framing differs";
+        check(invalid(fun () -> C.checkpoint_from_record
+          ~expected_binding:(SemanticHash.string "different-generation")
+          ~expected_record_sha256:record_digest record)) "wrong owner generation accepted";
+        check(invalid(fun () -> unpack (mutate 90 'X' record) record_digest))
+          "tampered record accepted under trusted index digest";
+        List.iter(fun bytes -> check(invalid(fun () -> unpack bytes (SemanticHash.string bytes)))
+          "malformed authenticated record accepted")
+          [record^"x";mutate 0 'X' record;put_number 72 0L record;
+           mutate 40 'X' record;put_number 72 Int64.min_int record];
+        for count=0 to String.length record-1 do
+          let bytes=String.sub record 0 count in
+          check(invalid(fun () -> unpack bytes (SemanticHash.string bytes)))
+            "truncated owner record accepted"
+        done;
         let pixel=T.find snapshot "file/pixels" in
         C.validate_base session snapshot T.layout;
         check(C.bytes_requested session=8192L) "base validation read payload";

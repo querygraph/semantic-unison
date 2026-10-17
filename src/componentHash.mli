@@ -59,6 +59,16 @@ val checkpoint_sha256 : checkpoint -> string
     capabilities. Call while the snapshot's original session is live. Retain the
     digest in trusted owner state authenticated to that extraction; computing a
     digest from arbitrary peer/cache bytes is NOT equivalent provenance. *)
+val checkpoint_record : binding:string -> checkpoint -> string
+val checkpoint_from_record : expected_binding:string -> expected_record_sha256:string ->
+  string -> checkpoint
+(** Bounded UCR/0 owner-record framing (checkpoint limit plus80 bytes). Binding is
+    a raw32-byte digest of the owner's root/path/generation/decoder contract.
+    Keep the whole-record digest in separately trusted owner state at capture.
+    A self-hash of supplied record bytes does not establish that provenance.
+    Unpack checks exact binding, framing, digest and bounded checkpoint syntax;
+    actual input/base-partition validation still requires restore. No filesystem,
+    owner index, archive authority or automatic persistence is supplied. *)
 val with_checkpoint : expected_checkpoint_sha256:string -> expected_root_schema:string ->
   max_read_bytes:int64 -> SemanticFile.t -> string -> (session -> snapshot -> 'a) -> 'a
 (** Authenticate metadata against the owner's prior trusted checkpoint digest,

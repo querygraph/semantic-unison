@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Persistent-record codec UCR/0 now implemented in ComponentHash: bounded record
+contains owner binding/raw checkpoint digest/exactlength/checkpoint, and unpack
+requires a separately trusted whole-record digest plus expected owner binding.
+Focusedstock/Ox41component+971checkpointchecks/compiler PASS (971includes every
+record/checkpoint-vector truncation, not971independentfixtures). Actual9682/5b7669/0,
+worker29241reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/component-owner-record-actual-20261017.json`. No filesystem
+publication/index or automatic persistence yet; full builds for this codec source
+remain outstanding. Prior full-build receipts retain their exact historical scope.
+
 Current accumulated cache/worker source now also passes Dune compilation under
 stock and Ox:actual36274/4d657c/0 and73981/8cc961/0, both worker groups/tokens
 closed,318currentproductionpins rechecked perbuild. Receipt

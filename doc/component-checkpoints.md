@@ -123,6 +123,14 @@ separate owner work.
 
 ## Persistent owner-store contract (next implementation)
 
+The pure record codec is now implemented as `checkpoint_record` and
+`checkpoint_from_record`. UCR/0 is eight-byte magic `55 43 52 00 00 00 00 00`,
+raw32-byte owner binding, raw32-byte checkpoint digest, eight-byte big-endian
+payload length, then exact UCH/0 bytes. Total size is at most checkpoint limit
+plus80 bytes. Loading requires the expected binding and separately trusted
+whole-record digest; it verifies framing, checkpoint digest and bounded syntax.
+This codec alone provides no disk publication, index or current-input authority.
+
 Reuse the trust boundary of local Unison state, not peer reports or file-side
 metadata. This explicitly trusts the local state owner; checksums are corruption
 detection, not authentication against another process with that owner's access.
