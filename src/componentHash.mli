@@ -105,6 +105,14 @@ val metadata_slot_name : metadata_quota -> string
     Caller must reserve before creating bounded cache payloads and never delete
     slots/config. Charge excludes filesystem overhead, source/staging outside this
     cache and RSS; this is admission accounting, not a physical filesystem quota. *)
+type metadata_stage = Record_stage | Entry_stage | Manifest_stage
+val open_metadata_stage : metadata_quota -> Unix.file_descr -> metadata_stage -> Unix.file_descr
+val metadata_stage_created : metadata_quota -> metadata_stage -> bool
+(** One exclusive create attempt per role after successful reservation. Names
+    are slot-record.tmp, slot-entry.tmp and slot-manifest.tmp; no overwrite,
+    fallback, unlink or automatic close. Caller must record the returned owned
+    FD before validation, preserve actual creations after errors, and retain
+    ownership on uncertain close. This does not publish or adopt an index. *)
 val admit_metadata_stages : metadata_quota -> Unix.file_descr ->
   record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit
 val seal_metadata_stages : metadata_quota -> Unix.file_descr ->

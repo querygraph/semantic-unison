@@ -93,6 +93,8 @@ let transform version path =
           "val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool";
           "val metadata_slot_reserved : metadata_quota -> bool";
           "val metadata_slot_name : metadata_quota -> string";
+          "val open_metadata_stage : metadata_quota -> Unix.file_descr -> metadata_stage -> Unix.file_descr";
+          "val metadata_stage_created : metadata_quota -> metadata_stage -> bool";
           "val admit_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
           "val seal_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
           "val record_publication_available : unit -> bool";
@@ -101,6 +103,16 @@ let transform version path =
           "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val record_published : record_publication -> bool"]
         | "dngComponents" -> [
+          "val open_cache_parent : string -> cache_parent";
+          "val check_cache_parent : cache_parent -> unit";
+          "val cache_parent_descriptor : cache_parent -> Unix.file_descr";
+          "val settle_cache_parent : cache_parent -> exn option -> unit";
+          "val managed_cache_store_namespace : managed_cache_store -> int * int";
+          "val prepare_managed_cache_store : entry:owner_entry -> checkpoint:ComponentHash.checkpoint ->\n  index:owner_index -> expected_entry_sha256:string option -> binding:string ->\n  max_bytes:int64 -> max_entries:int -> managed_cache_store";
+          "val execute_managed_cache_store : managed_cache_store -> namespace:cache_namespace ->\n  parent:Unix.file_descr -> bool";
+          "val managed_cache_store_reference : managed_cache_store -> string * string";
+          "val managed_cache_store_index : managed_cache_store -> owner_index";
+          "val managed_cache_store_effects : managed_cache_store -> bool * bool * bool * bool * bool";
           "val prepare_cache_namespace : ?expected:(int * int) -> parent:Unix.file_descr -> unit -> cache_namespace";
           "val provision_cache_namespace : cache_namespace -> parent:Unix.file_descr -> unit";
           "val cache_namespace_created : cache_namespace -> bool";

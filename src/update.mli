@@ -104,6 +104,7 @@ val setStasherFun : (Fspath.t -> Path.local -> unit) -> unit
    all the roots and the current archive format *)
 val archiveHash : Fspath.t -> string
 
+val component_owner_namespace : Fspath.t -> (int * int) option
 val component_owner_reference : Fspath.t -> (string * string) option
 val load_component_owner_index : ?check_cancel:(unit -> unit) -> Fspath.t ->
   directory:Unix.file_descr -> max_entries:int -> max_bytes:int -> unit ->
@@ -115,6 +116,12 @@ val load_component_owner_index : ?check_cancel:(unit -> unit) -> Fspath.t ->
     caller supplies stable private namespace/IO/memory/lifetime admission. This
     neither opens a namespace root nor adopts/rewrites archive or file state. *)
 val set_component_owner_reference : Fspath.t -> DngComponents.owner_index_publication -> unit
+val adopt_component_cache_store : Fspath.t -> expected_reference:(string * string) option ->
+  DngComponents.managed_cache_store -> unit
+(** Owner-loop compare-and-replace of the loaded archive hint. Requires a fully
+    normally settled managed store and an unchanged expected reference. Memory
+    only: the ordinary archive transaction must still commit. Caller serializes
+    root ownership; refusal preserves published orphans and the old hint. *)
 val clear_component_owner_reference : Fspath.t -> unit
 (** Owner-loop opt-in local component-manifest hints. Getter returns
     (manifest binding,digest) from this loaded root's trusted archive context.
@@ -123,3 +130,22 @@ val clear_component_owner_reference : Fspath.t -> unit
     the optional hint, which never becomes file/reconciliation authority. Clear
     neither removes cache files nor refunds native quota. Default off; no automatic
     capture/reuse. Optional hints follow the paths tail, not legacy properties. *)
+
+val inspect_cached_components : ?check_parent:(unit -> unit) -> Fspath.t -> parent:Unix.file_descr -> path:Fspath.t ->
+  generation_sha256:string -> pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation ->
+  decoders:DngComponents.decoders -> max_read_bytes:int64 -> Unix.file_descr ->
+  SemanticWorkers.component_inspection option Lwt.t
+(** Endpoint-owner report orchestration. Parent/source remain exclusively borrowed
+    through the await; namespace/leaf FDs close before it. Loaded archive owns hints;
+    legacy no-identity hints stay cold. Full-input worker verification still applies.
+    Source/head fences precede one-use store and guarded memory adoption. Quota
+    exhaustion preserves the report; corruption/uncertain ownership propagates.
+    Caller supplies stable generation and later normal archive commit; no discovery,
+    source opening, decoder loading or synchronization decision is authorized. *)
+
+val inspect_configured_components : Fspath.t -> Fspath.t -> pool:SemanticWorkers.t ->
+  cancellation:HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> SemanticWorkers.component_inspection option Lwt.t
+(** Opt-in local report worker with explicit componentcacheparent. Parent survives
+    worker await and transfers into nested uncertainty. Empty/off remains uncached.
+    Epoch selects a candidate only; worker still authenticates complete input. *)

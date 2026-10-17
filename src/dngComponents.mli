@@ -304,3 +304,44 @@ val with_cache_namespace : cache_namespace -> parent:Unix.file_descr ->
 val cache_borrowed_directories : cache_ownership -> cache_descriptor list
 (** All borrowed directory identities retained through nested scopes. The singular
     accessor returns the originating directory for backward compatibility. *)
+
+type managed_cache_store
+val prepare_managed_cache_store : entry:owner_entry -> checkpoint:ComponentHash.checkpoint ->
+  index:owner_index -> expected_entry_sha256:string option -> binding:string ->
+  max_bytes:int64 -> max_entries:int -> managed_cache_store
+val execute_managed_cache_store : managed_cache_store -> namespace:cache_namespace ->
+  parent:Unix.file_descr -> bool
+val managed_cache_store_reference : managed_cache_store -> string * string
+val managed_cache_store_index : managed_cache_store -> owner_index
+val managed_cache_store_effects : managed_cache_store -> bool * bool * bool * bool * bool
+(** Synchronous one-use bounded capture, entry and next-manifest publication.
+    False means quota exhaustion; errors preserve all stages/orphans/reservations.
+    Reference/index access requires normal publication AND all owned FD closes.
+    Effects report reserved/record/entry/manifest/completed, not rollback. Parent
+    stays borrowed. Uncertain closes retain ownership through the existing carrier.
+    No archive commit, automatic report routing, deletion or eviction. *)
+
+val owner_namespace_reference_size : int
+val encode_owner_namespace_reference : archive_binding:string -> binding:string ->
+  manifest_sha256:string -> int * int -> string
+val decode_owner_namespace_reference : archive_binding:string -> binding:string ->
+  manifest_sha256:string -> string -> (int * int) option
+(** Optional archive-context and exact-manifest-bound namespace device/inode tail.
+    Missing, malformed, foreign or out-of-range values return None. *)
+val managed_cache_store_namespace : managed_cache_store -> int * int
+val owner_entry_reference : owner_index -> root_identity:string -> path:string -> string option
+(** Exact key's prior entry digest for compare-and-replace, independent of generation
+    selection. This is not permission to restore a stale generation. *)
+
+type cache_parent
+val open_cache_parent : string -> cache_parent
+val check_cache_parent : cache_parent -> unit
+val cache_parent_descriptor : cache_parent -> Unix.file_descr
+val settle_cache_parent : cache_parent -> exn option -> unit
+(** Existing absolute private0700 parent only, macOS no-follow/nonblocking/CLOEXEC.
+    Explicit owner survives async awaits; no finalizer or implicit close. Settle
+    once after all work: None closes, Some error closes and rethrows ordinary
+    errors, but nested ownership uncertainty retains this known FD in its carrier.
+    Close failure retains last observed identity and never retries a number.
+    Descriptor access remains borrowed, requiring caller-exclusive lifetime.
+    No mkdir, namespace discovery, canonical IO or source access permission. *)

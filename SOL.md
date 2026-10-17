@@ -4,6 +4,27 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Current isolated local report successor now wires UI component details through
+an explicit endpoint-owner worker callback. Opt-in componentownercache plus an
+existing configured private componentcacheparent enables capture/reuse/restart;
+empty/off stays uncached and remote summary transport is unchanged. Parent
+replacement, permissions, cancellation, source/head fences and cache-carrier
+outer admission retention have original production-linked controls. Current
+stock/Ox Make+selftests/Dune pass. See doc/component-managed-store.md and the
+component-local-report / component-report-admission qualification receipts.
+No production activation, automatic parent provisioning, remote cache route,
+SDK/media/physical-IO claim or full-goal completion is implied.
+
+Latest isolated managed-store successor (`feat/component-cache-store`, bf0527b0)
+now composes quota-bound stage creation, authenticated record/entry/manifest
+publication, close-uncertainty retention and expected-head guarded archive
+adoption. Stock/Ox production Make/fullselftests and normal archive commit plus
+fresh-process cold reload passed. Original tiny controls cover all four close,
+all four open and every observed sync failure position. This is not automatic
+report routing: the current SemanticRemote component inspector still invokes
+fresh extraction, and durable trusted namespace identity remains to be wired.
+See `doc/component-managed-store.md` and its actual qualification receipts.
+
 Latest isolated namespace successor (`feat/component-cache-namespace`, based on
 PR8) now provides one-use fixed-child creation or trusted device/inode reopen,
 retained mkdir effects on sync failure, scoped directory settlement and nested

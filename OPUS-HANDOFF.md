@@ -2778,3 +2778,238 @@ doc/component-worker-cache-routing.md. Main's reviewed frozen RPC still has no
 fresh admission; observed Photo defer is scheduling evidence, not proof of a
 currently live owner. No RPC retry/dispatch, media/SDK/transport or physical-read
 savings claim follows from these worker controls.
+
+
+## Managed store successor started — 2026-10-17
+
+Active checkout `/Users/alexy/src/unison-component-store-20261017`, branch
+`feat/component-cache-store`, based on PR9 d074fb8b. Source now adds quota-bound
+exclusive stage creation for record/entry/manifest, one attempt per role with
+actual creation state retained. Returned descriptors are caller-owned immediately;
+no post-open allocation/validation/close in the native opener. Added production
+namespace controls for private empty files, creation flags and replay refusal.
+These changes are UNBUILT/UNTESTED; diff whitespace check alone passed. Next qualify
+native/fault paths, then compose owned staging/publication and archive-head CAS.
+No payload/SDK/RPC invocation or new resource grant; no active owned job.
+
+
+Managed-store composition now exists in source: frozen entry/checkpoint/index CAS
+preparation, one-use quota-bound stage ownership, pair publication followed by
+manifest publication, reference/index access only after all owned scopes return.
+Readers retire BEFORE rename; an actual production-linked test caught the initial
+reader-live rename error, fixed without weakening file-change checks. A subsequent
+control corrected its own reuse of a consumed one-shot namespace ticket by making
+an explicit identity-bound fresh read ticket. Failed runs 001/002/003 all closed
+workers/groups/tokens; no payload/SDK/transport was involved. Initial stage-only
+qualification002 passed both compilers (actual1806/89678c/0). Combined run004 is
+being collected; do not infer its result from this preparation note. Fault-injected
+store paths, full builds, guarded archive adoption and automatic routing remain
+unqualified/incomplete. No production activation or new admission.
+
+
+Combined managed-store run004 subsequently PASSED: actual92385/ef8c02/exit0/no
+session; containedworker79464reaped0/othersabsent/tokensclosed/sourceunchanged.
+Both compilers' normal native store publication/cold-load controls pass alongside
+existing loader/namespace suites. Exact evidence and raw pins are in
+`tests/qualification/component-managed-store-normal-actual-20261017.json`.
+No active owned jobs/resources; store fault injection and archive adoption next.
+
+
+## Store failure qualification and archive guard — 2026-10-17
+
+Composed store close uncertainty at entry/record/manifest/namespace passed both
+compilers, then all four open failure positions and every observed sync position
+passed. Actual fault-run002 owner35661/d0009b/0/no session; worker80600reaped0/
+othersabsent/sourceunchanged/tokensclosed. Native fault wrapper now forwards the
+O_CREAT mode argument and accepts managed O_RDWR stages; production has no fault
+switch. Exact evidence: component-managed-store-fault-actual-20261017.json.
+No retry, failed reference adoption or numeric-FD retry; uncertain descriptors and
+known outer scopes remain represented. Tests explicitly close only known retained
+FDs after the disposable wrapper has consumed the uncertain FD.
+
+Update.adopt_component_cache_store source now performs loaded-head expected-value
+comparison and requires a normally settled store before memory adoption. This
+Update integration is NOT compiled/linked/qualified yet; normal archive commit and
+automatic report routing remain outstanding. Contract doc/component-managed-store.md.
+All test owners/groups/tokens currently closed; no new payload or SDK grant.
+
+
+## Managed store production build/archive qualification — 2026-10-17
+
+Current stock Make/fullselftests actual83029/a14d82/0 and Ox Make/fullselftests
+95059/acef23/0 passed; workers81233/82368 genuinelyreaped0/groupsabsent/tokensclosed.
+Production-linked archive controls actual88636/1ca3ca/0, worker83613reaped0/groupsabsent
+passed BOTH compilers: unsettled-store refusal, changed-head CAS refusal preserving
+old hint, normally settled store adoption, normal archive commit, fresh-process
+identity-bound namespace reopening, trusted manifest/entry/record cold reload.
+Exact pins: component-managed-store-archive-actual-20261017.json. No SDK/media/
+transport or source photos; no live owned jobs/resources. Dune and integrated
+normal report automatic capture/reuse remain next work. This supersedes the
+previous note that Update adoption was uncompiled, without changing old evidence.
+
+
+Current stock/Ox Dune compile checks now PASS: actual controller26178/7c4947/0/
+no session, stockworker84057 andOxworker85101reaped0/groupsabsent/tokensclosed.
+Receipt component-managed-store-dune-actual-20261017.json pins both reports.
+Current SemanticRemote inspection still uses fresh uncached components; durable
+namespace identity and owner-loop/asynchronous report routing remain explicit
+implementation work, detailed in doc/component-managed-store.md. SOL status
+updated accordingly. No active owned jobs/resources or payload grant.
+
+
+## Durable namespace identity implemented — 2026-10-17
+
+Optional UAN/0 fixed152B archive tail now binds namespace device/inode to exact
+archive context, owner binding and manifest digest. Normal settled-store adoption
+copies identity+reference together; raw legacy setter clears stale identity;
+clear removes both; neither private key enters legacy serialized properties.
+Missing/malformed/foreign/oversized identity becomes None, not archive reset.
+
+Actual framing/native controls65040/e91a13/0 and full stock/Ox Make+selftests+
+production archive persistence controller67113/1fa76a/0 PASSED. All workers86966,
+88074,89253 and controls86539 reaped0/groupsabsent/tokensclosed. Fresh-process
+store probe now reopens using Update.component_owner_namespace restored FROM
+archive, not a separate identity file. Exact pins component-namespace-archive-
+actual-20261017.json. Retained old-code new-tail compatibility and Dune still
+pending for this successor. Automatic report routing remains incomplete; no
+media/SDK/transport or active owned resources.
+
+
+## Namespace-tail old-code compatibility — 2026-10-17
+
+Actual retained pre-component production Update/Proplist/native objects now read
+current stock/Ox archives containing BOTH UAX/UAN tails byte-exact, rewrite them
+without either optional hint, leave all three published cache payloads unchanged,
+and current code restores the ordinary archive with no manifest/namespace authority.
+Actual30670/a9bf3e/0/no session; worker89496 reaped0/groupsabsent/tokensclosed,
+13 direct calls settled. Original retained CLI was rehashed, not invoked. Exact
+receipt component-store-namespace-legacy-actual-20261017.json. Source/build pins
+unchanged; only fixed probe gained an explicit legacy-missing phase. No all-old-
+versions/network/platform/media claim. No live owned jobs/resources. Next actual
+implementation: endpoint-owner report orchestration with scoped metadata load,
+immutable worker await, source/head recheck and optional capture; no synchronous
+namespace scope may span that await. Automatic routing is still NOT implemented.
+
+
+## Endpoint-owner report orchestration — 2026-10-17
+
+Update.inspect_cached_components now loads scoped authenticated index/record,
+closes all metadata descriptors before the worker await, runs indexed full-input
+inspection with checkpoint capture, rechecks source FD/path and archive head,
+skips unchanged-entry publication, or performs owned store and guarded adoption.
+Legacy no-identity hints stay cold. Exact-key prior-entry reference supports CAS
+across generation changes without granting stale-generation restore authority.
+
+Current stock98891/0a922c/0 andOx40800/3c2be3/0 full Make/selftests PASS; explicit
+owner-path controls39802/dd809c/0 and bothcompiler40800/3c2be3/0 PASS: original
+8192B DNG automatic capture, repeat unchanged-head reuse, normal archive commit,
+fresh-process restore+repeat reuse. All contained workers/groups/tokens closed.
+Receipt component-owner-report-actual-20261017.json. This is NOT yet wired into
+SemanticRemote/UI; private-parent selection/provisioning, failure/cancellation
+race controls and Dune remain. No payload/SDK/transport grant or live resources.
+
+
+## Report cancellation/head-change qualification — 2026-10-17
+
+Owner orchestration now checks cancellation before parent access and after worker
+reply. Original controls prove invalid-parent pre-cancel no access; submitted-job
+cancel returnsNone with unchanged head; another owner head change during await
+refuses stale report adoption. Stock/Ox full Make/selftests and corrected original
+controls PASS; currentactual63987/0e9544/0/no session, worker94018/95262reaped0/
+groupsabsent/tokensclosed; correctedstock16994/ecc9a9/0. Initial60471/4d70d6/1
+preserved: buildpassed, test wrongly injected through diagnostics AFTER reply;
+no production failure relabeled. Receipt component-owner-report-cancellation-
+actual-20261017.json. Allresourcesclosed. Explicit owner API remains separate
+from unwired SemanticRemote/UI; no payload/SDK/newgrant.
+
+
+## Draft review checkpoint — 2026-10-17
+
+Qualified source8e84a6a8 is pushed as draft PR11:
+https://github.com/querygraph/unison/pull/11, base feat/component-cache-namespace
+(PR9). No PR merge/production activation is authorized or claimed. This successor
+contains managed store, archive-owned namespace identity, explicit owner report
+capture/reuse, and cancellation/head-change fences. UI/SemanticRemote route and
+its private-parent asynchronous ownership remain unimplemented; latest Dune does
+not cover later identity/report changes. All actual jobs/resources closed.
+
+
+## Current owner-report Dune gap closed — 2026-10-17
+
+Current-source stock/Ox Dune compile checks PASS actual69606/f7728c/0/no session.
+Workers95833/96873 reaped0/groupsabsent/sourceunchanged/tokensclosed. Evidence
+component-owner-report-dune-actual-20261017.json supersedes pending-Dune notes
+for source8e84a6a8 (later commits metadata only). No report UI activation, media,
+SDK or transport run. Next code: explicit async parent-descriptor owner and
+local report entry-point integration; outer parent must remain retained on
+nested uncertainty. Allactualjobs/resourcesclosed.
+
+
+## Opt-in local report entry wired — 2026-10-17
+
+UI component details now calls SemanticRemote.observe_components_with_worker
+using Update.inspect_configured_components. Existing observe_components API and
+remote wire route remain unchanged. Both componentownercache=true and explicit
+existing absolute private0700 componentcacheparent are required; optional %ROOT%
+root-SHA expansion supports distinct pre-provisioned parents. No recursive mkdir,
+discovery, remote cache, production activation or source permission is implied.
+
+New explicit parent owner records before validation, normal closes once, refuses
+settlement replay, preserves original cause on close uncertainty and retains known
+outer FD on nested uncertainty. No finalizer/numericFDretry. Actual fault/native
+controls75816/bd9a22/0; configured stock64824/d9b260/0; Oxbuild+bothdirect-local-
+entry controls99167/236a7c/0 PASS; all worker/group/tokens closed. Current stock/Ox
+full Make+selftests passed. Direct production SemanticRemote entry (same UIcallback)
+proved exact generatedDNG report/capture/repeat/restart/head/cancellation; no manual
+GUI session claimed. Receipt component-local-report-route-actual-20261017.json.
+
+Initial stock13845/cb14a4/1 failed source build: invalid string preference API;
+fixed send:false and separated observer entry to preserve old caller shape.
+Preserved, no tests/source payloads ran there. Dune for this successor pending.
+Remote routing and parent path replacement/concurrent-owner stress remain open;
+no active owned resources or SDK/media/transport grant.
+
+
+## Review finding: outer report reservation retention — OPEN
+
+While parent-replacement qualification ran, source review found that generic
+SemanticAdmission.with_lease retires on exceptions. A propagated cache ownership
+carrier retains its FDs, but that alone does NOT prove the outer report resource
+reservation stays held. Before claiming UI uncertainty qualification, add a
+component-report-specific held/pending boundary INSIDE with_transaction, retaining
+the carrier and reservation until explicit independent settlement. Test actual
+cache uncertainty from a disposable invalidated owner descriptor; pending promise,
+unchanged admission usage after cancellation, and diagnostic retained carrier.
+Do not describe descriptor-only controls as proving outer admission retention.
+No actual uncertain FD or retained job currently exists; this is a source finding.
+
+
+Parent replacement/permissions source now checks before metadata load, after
+worker await and between completed store and archive adoption. Configured legacy
+no-identity hint bypasses parent opening. Actualstock45168/dc7a41/0; combined
+Ox+bothcontrols+bothDune7405/d32134/0 allPASS, allworkers/groups/tokensclosed.
+Exactreceipt component-local-parent-replacement-actual-20261017.json. This proves
+those refusals/builds, NOT the separately open outer-admission uncertainty issue.
+Next fix that held-boundary before broader activation/remote work.
+
+
+## Outer report admission finding FIXED/QUALIFIED — 2026-10-17
+
+This supersedes the OPEN finding above for the local cache-carrier route. Local
+SemanticRemote now retains Cache_ownership_uncertain INSIDE with_transaction via
+preallocated held promise/node/link and owner diagnostics. The outer lease cannot
+mistake it for an ordinary failed callback and retire credits. Generic admission
+policy unchanged; no automatic recovery/numericFDretry/normal-close assertion.
+
+Original production-linked probe produces actual uncertain close after deliberate
+private owner-FD invalidation, then tests real local report entry: pending promise,
+retained carrier, charged transaction/payload/FD credits unchanged after helper
+cancellation, no archive-head mutation. Application admission remains intentionally
+held until disposable process exit; external direct child/group wait proves OS
+closure, NOT native close or normal application retirement. Both stock/Ox retention
+and normal-report controls PASS; stock/Ox Make+selftests/Dune allPASS. Actual68144/
+6e0d4a/0 and86411/1de5ba/0/no sessions; allcontainedworkers/groups/tokensclosed.
+Receipt component-report-admission-retention-actual-20261017.json. First23717/
+e57c75/1 sourcebuildfailure preserved (bundled Lwt.wait returns promise, notpair).
+No active uncertain descriptor/resource now. Remote cache route and broaderlegacy
+source-FD close audit remain separate; no SDK/media/transport or deployment.

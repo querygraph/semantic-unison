@@ -310,6 +310,11 @@ external reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool
   = "unison_component_metadata_quota_reserve"
 external metadata_slot_reserved : metadata_quota -> bool = "unison_component_metadata_quota_reserved"
 external metadata_slot_name : metadata_quota -> string = "unison_component_metadata_quota_slot"
+type metadata_stage = Record_stage | Entry_stage | Manifest_stage
+external open_metadata_stage : metadata_quota -> Unix.file_descr -> metadata_stage -> Unix.file_descr
+  = "unison_component_metadata_stage_open"
+external metadata_stage_created : metadata_quota -> metadata_stage -> bool
+  = "unison_component_metadata_stage_created"
 external metadata_stages_raw : metadata_quota -> Unix.file_descr ->
   (Unix.file_descr * Unix.file_descr) -> bool -> unit = "unison_component_metadata_stages"
 let admit_metadata_stages quota directory ~record_stage ~entry_stage =

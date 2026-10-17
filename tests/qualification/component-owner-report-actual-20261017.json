@@ -1,0 +1,83 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 98891,
+      "chunk": "0a922c",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 39802,
+      "chunk": "dd809c",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 40800,
+      "chunk": "3c2be3",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "stock-make",
+      "result": {
+        "path": "/private/tmp/unison-report-cache-stock-make-20261017-001/RESULT.json",
+        "bytes": 50946,
+        "sha256": "4937e2faebb546e37747185fee81db57f78110c3ab016e983171918ec55679a0"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cache-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "71395376c7b893375e1cb67dc21438db45deeb222bb38a2b57a43de470798c89"
+      }
+    },
+    {
+      "name": "stock-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-j8uc3wsp/RESULT.json",
+        "bytes": 98331,
+        "sha256": "5a5357519db302401738536f1909243f1951379ceeb38335f94cf6f437eac134"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cache-stock-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "edfe295b18761ec87863c48f2a4e1e12494986591580248b58f6a094df1f66ed"
+      }
+    },
+    {
+      "name": "ox-make",
+      "result": {
+        "path": "/private/tmp/unison-report-cache-ox-make-20261017-001/RESULT.json",
+        "bytes": 51067,
+        "sha256": "9cc2c167c8c5bf4252d444e3dab958147100ed3deb6db79e7a3b7baccee1f427"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cache-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "4aa6da52f641311dfb6290e8f824e108195b04794fdbea5b9de5c0a215eb246e"
+      }
+    },
+    {
+      "name": "both-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-cakn4w3f/RESULT.json",
+        "bytes": 149854,
+        "sha256": "213a2a4216d9c239bfdfd4013b30a23ef191530c594492db356ce33fcb164b36"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cache-both-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "45da93b60e18fbdf46c80e253f8accba49c2b8cfbebb634c3c8df5404bf98158"
+      }
+    }
+  ],
+  "scope": "Endpoint-owner scoped metadata load, immutable worker inspection, guarded automatic capture, unchanged capture reuse and archive restart reuse using original 8192B DNG fixture",
+  "limitations": [
+    "Explicit owner API; UI/SemanticRemote route not wired",
+    "Failure/cancellation race controls and Dune pending for this successor",
+    "No media/SDK/transport or physical IO savings claim"
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 60471,
+      "chunk": "4d70d6",
+      "exit_code": 1,
+      "no_session": true,
+      "note": "Build passed; initial observer-timing test failed and closed"
+    },
+    {
+      "session": 16994,
+      "chunk": "ecc9a9",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 63987,
+      "chunk": "0e9544",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "stock-make",
+      "result": {
+        "path": "/private/tmp/unison-report-cancel-stock-make-20261017-001/RESULT.json",
+        "bytes": 51061,
+        "sha256": "4eb710c0220868d541c5973f7b4cfc4ab28079b3fd51abc8a6e315943b7b4edd"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cancel-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "26fd141f02485d3bc2b4bb0581bdc95ceef0a3ba64d6e82b6e5b6c0376e48db2"
+      }
+    },
+    {
+      "name": "stock-controls-002",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-7x4aivs6/RESULT.json",
+        "bytes": 98331,
+        "sha256": "771e28cf2de9281e4e5489b02c0d72803c3bae91ba4599699b1e60d3ab715f11"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cancel-stock-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "fd92f393a04ee183816a539d3b05be8c1308c1aaaa59e24bbca0f10efa2f3a56"
+      }
+    },
+    {
+      "name": "ox-make",
+      "result": {
+        "path": "/private/tmp/unison-report-cancel-ox-make-20261017-001/RESULT.json",
+        "bytes": 51067,
+        "sha256": "ff3bd588a679d2d933387bbd67f21d5d64e984da61cd32f8b417404b5be09575"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cancel-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c84ea9ab77790f0f74f1a9de9198f9b6c770cad7eda8e4bbd3775b9db2f03a80"
+      }
+    },
+    {
+      "name": "both-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-l1u3_kxm/RESULT.json",
+        "bytes": 149854,
+        "sha256": "f65067cb2c1f992b96b001dae34a67a55b132f26d0de269dacf0193b7b3067e5"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-cancel-both-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "a872281c286e6629e9bbd90669896f779810efab174d7556664273e45d2fc21d"
+      }
+    }
+  ],
+  "scope": "Stock/Ox production build/selftests and original report cancellation/concurrent-head controls; unchanged capture/restart coverage retained",
+  "limitations": [
+    "Explicit owner API; UI not wired",
+    "No media/SDK/transport/physical IO claim"
+  ]
+}
