@@ -59,6 +59,11 @@ let ()=
   ~pool ~cancellation:(HelperSupervisor.cancellation()) ~decoders ~max_read_bytes:8192L fd) with
  | Some {SemanticWorkers.components=Ok summary;_}->summary
  | _->failwith "cached report failed" in
+ let cancelled=HelperSupervisor.cancellation() in HelperSupervisor.cancel cancelled;
+ require(Lwt_unix.run(Update.inspect_cached_components left ~parent:Unix.stdin
+  ~path:(Fspath.resolve_existing source) ~generation_sha256:(SemanticHash.string "fixture-generation")
+  ~pool ~cancellation:cancelled ~decoders ~max_read_bytes:8192L fd)=None)
+  "pre-cancelled report touched invalid cache parent";
  let first=inspect () in
  require(first.full_sha256=SemanticHash.string(fixture true false (String.make 64 'X')))
   "report full hash differs";
@@ -67,6 +72,20 @@ let ()=
  let second=inspect () in
  require(second.full_sha256=first.full_sha256) "repeat report changed hash";
  require(Update.component_owner_reference left=head) "unchanged report republished manifest";
+ let request cancellation=Update.inspect_cached_components left ~parent
+  ~path:(Fspath.resolve_existing source) ~generation_sha256:(SemanticHash.string "fixture-generation")
+  ~pool ~cancellation ~decoders ~max_read_bytes:8192L fd in
+ let late=HelperSupervisor.cancellation() in
+ let pending=request late in HelperSupervisor.cancel late;
+ require(Lwt_unix.run pending=None) "cancelled submitted report reported success";
+ require(Update.component_owner_reference left=head) "cancelled report advanced head";
+ if phase="read" then begin
+  let pending=request(HelperSupervisor.cancellation()) in
+  Update.clear_component_owner_reference left;
+  let refused=try ignore(Lwt_unix.run pending);false with Util.Transient _ -> true in
+  require refused "changed archive head accepted cached result";
+  require(Update.component_owner_reference left=None) "stale report overwrote newer head"
+ end;
  Lwt_unix.run(SemanticWorkers.shutdown pool);
  require(HelperSupervisor.usage budget=(0,0)) "report worker budget retained";
  Unix.close fd;Unix.close parent;

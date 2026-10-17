@@ -652,6 +652,7 @@ let adopt_component_cache_store fspath ~expected_reference store =
 (* Endpoint-owner orchestration: no borrowed namespace scope spans worker await. *)
 let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~cancellation
     ~decoders ~max_read_bytes source =
+  if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
   if not(Prefs.read componentOwnerCache) then
     SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
   else begin
@@ -685,6 +686,7 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
     BorrowedWork.bind (fun () -> SemanticWorkers.components_indexed pool cancellation ~index
       ~root_identity ~path:key ~generation_sha256 ~record ~decoders ~capture_checkpoint:true
       ~max_read_bytes source) (fun result ->
+      if HelperSupervisor.is_cancelled cancellation then Lwt.return None else begin
       (match result with
        | Some inspection ->
          (match inspection.SemanticWorkers.components with
@@ -710,7 +712,7 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
                    adopt_component_cache_store fspath ~expected_reference:reference store
                end))
        | None -> ());
-      Lwt.return result)
+      Lwt.return result end)
   end
 let clear_component_owner_reference fspath =
   let root=thisRootsGlobalName fspath in

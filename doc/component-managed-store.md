@@ -117,3 +117,12 @@ a later normal archive commit. Generation selects a candidate; it does not prove
 bytes unchanged. Current worker refresh performs full-input verification. Source
 FD/path observations and loaded-head comparison are repeated before publishing.
 Report observations and cache-hint mutation never change common-file authority.
+
+
+Cancellation is checked before any cache parent access and again after worker
+reply, before capture/adoption. Submitted-job cancellation returns no report result
+and preserves the old cache head; native worker settlement still occurs through
+its existing lifecycle. A concurrent owner-head change is refused even when the
+returned capture would otherwise be unchanged. Controls schedule those changes
+between submission and owner-loop completion. Worker read observers run after
+reply delivery and are unsuitable as a before-reply race injection point.

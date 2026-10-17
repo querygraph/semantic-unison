@@ -2907,3 +2907,17 @@ fresh-process restore+repeat reuse. All contained workers/groups/tokens closed.
 Receipt component-owner-report-actual-20261017.json. This is NOT yet wired into
 SemanticRemote/UI; private-parent selection/provisioning, failure/cancellation
 race controls and Dune remain. No payload/SDK/transport grant or live resources.
+
+
+## Report cancellation/head-change qualification — 2026-10-17
+
+Owner orchestration now checks cancellation before parent access and after worker
+reply. Original controls prove invalid-parent pre-cancel no access; submitted-job
+cancel returnsNone with unchanged head; another owner head change during await
+refuses stale report adoption. Stock/Ox full Make/selftests and corrected original
+controls PASS; currentactual63987/0e9544/0/no session, worker94018/95262reaped0/
+groupsabsent/tokensclosed; correctedstock16994/ecc9a9/0. Initial60471/4d70d6/1
+preserved: buildpassed, test wrongly injected through diagnostics AFTER reply;
+no production failure relabeled. Receipt component-owner-report-cancellation-
+actual-20261017.json. Allresourcesclosed. Explicit owner API remains separate
+from unwired SemanticRemote/UI; no payload/SDK/newgrant.
