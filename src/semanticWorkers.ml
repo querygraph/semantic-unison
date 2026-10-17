@@ -34,6 +34,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Observe of FormatExtension.handle
   | Components of DngComponents.decoders * int64 * bool
   | Refresh_owned_components of DngComponents.owner_entry * string * DngComponents.decoders * int64 * bool
+  | Indexed_components of DngComponents.owner_index * string * string * string * string option * DngComponents.decoders * int64 * bool
   | Restore_components of string * string * int64
   | Refresh_components of DngComponents.outcome list * DngComponents.decoders * string * string * int64 * bool
   | Identify of (FormatRecognition.handle * bool) list
@@ -126,7 +127,7 @@ let execute job =
         Inspected {proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
           ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
-      | (Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _) as operation ->
+      | (Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _ | Indexed_components _) as operation ->
         let summarize session refined outcomes capture reused invalidated =
             check_cancel ();
             let projections=List.map (fun role -> role,ComponentHash.projection refined role)
@@ -137,19 +138,28 @@ let execute job =
              refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session;
              checkpoint=(if capture then Some(ComponentHash.checkpoint session refined) else None);
              reused_components=reused;invalidated_components=invalidated} in
+        let refresh_owned entry record decoders max_read_bytes capture =
+          let checkpoint=DngComponents.checkpoint_for_owner_entry entry record in
+          check_cancel ();
+          DngComponents.with_refreshed_checkpoint
+            ~previous:(DngComponents.owner_entry_outcomes entry) ~decoders
+            ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
+            ~max_read_bytes file (ComponentHash.checkpoint_bytes checkpoint)
+            (fun session result -> summarize session result.snapshot result.outcomes
+              capture result.reused result.invalidated) in
         let components=match operation with
           | Components (decoders,max_read_bytes,capture) ->
             DngComponents.with_snapshot ~decoders ~max_read_bytes file
               (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture [] [])
           | Refresh_owned_components (entry,record,decoders,max_read_bytes,capture) ->
-            let checkpoint=DngComponents.checkpoint_for_owner_entry entry record in
-            check_cancel ();
-            DngComponents.with_refreshed_checkpoint
-              ~previous:(DngComponents.owner_entry_outcomes entry) ~decoders
-              ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
-              ~max_read_bytes file (ComponentHash.checkpoint_bytes checkpoint)
-              (fun session result -> summarize session result.snapshot result.outcomes
-                capture result.reused result.invalidated)
+            refresh_owned entry record decoders max_read_bytes capture
+          | Indexed_components (index,root_identity,path,generation_sha256,record,decoders,max_read_bytes,capture) ->
+            (match DngComponents.select_owner_entry index ~root_identity ~path ~generation_sha256 with
+             | None -> DngComponents.with_snapshot ~decoders ~max_read_bytes file
+                 (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture [] [])
+             | Some entry -> match record with
+               | None -> Error "selected component owner entry has no retained record"
+               | Some record -> refresh_owned entry record decoders max_read_bytes capture)
           | Restore_components (expected_checkpoint_sha256,encoded,max_read_bytes) ->
             DngComponents.with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded
               (fun session snapshot -> summarize session snapshot [] false [] [])
@@ -413,7 +423,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _ | Reconcile _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _ | Indexed_components _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -577,3 +587,17 @@ let refresh_owned_components t cancellation ~entry ~record ~decoders
       | None -> return None
       | Some (Component_inspected result) -> return (Some result)
       | Some _ -> fail (Failed "unexpected owner-bound refreshed component response")) fail
+
+let components_indexed t cancellation ~index ~root_identity ~path ~generation_sha256
+    ~record ~decoders ?(capture_checkpoint=false) ~max_read_bytes fd =
+  if max_read_bytes<0L || String.length root_identity>4096 || String.length path>4096 ||
+    String.length generation_sha256<>32 ||
+    (match record with Some bytes -> String.length bytes>ComponentHash.max_checkpoint_size+80 | None -> false)
+  then invalid_arg "SemanticWorkers.components_indexed bounds";
+  BorrowedWork.try_bind
+    (fun () -> submit t cancellation fd
+      (Indexed_components(index,root_identity,path,generation_sha256,record,decoders,max_read_bytes,capture_checkpoint)))
+    (function
+      | None -> return None
+      | Some (Component_inspected result) -> return (Some result)
+      | Some _ -> fail (Failed "unexpected indexed component response")) fail

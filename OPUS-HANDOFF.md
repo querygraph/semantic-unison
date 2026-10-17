@@ -2693,3 +2693,22 @@ reuse pass. Receipt: tests/qualification/component-owned-worker-refresh-actual-2
 Dune was not rerun for this successor; no media/SDK/transport. Managed namespace
 opening and automatic capture/selection remain next integration work. Main's
 frozen RPC sources and separate admission requirements remain unchanged.
+
+## Indexed worker routing — 2026-10-17
+
+The same owned-worker successor now adds `components_indexed`: exact immutable
+owner/root/path/generation selection runs inside the worker. Missing/stale entry
+freshly extracts; matching entry authenticates its record and refreshes. A missing
+selected record reports incomplete metadata, corrupt/foreign evidence fails,
+and neither silently triggers extraction. Optional checkpoint capture supports
+both routes without publishing or advancing the index/archive. No managed cache
+loader or normal report-path installation is claimed.
+
+Actual owner19704/4509e5/0/no session: current stock/Ox Make/fullselftests/Dune,
+all five contained workers/groups/tokens closed; current production-source pins
+and linked fixture/control artifacts independently rebound. Exact count and pins
+are in component-indexed-worker-refresh-actual-20261017.json. Contract:
+doc/component-worker-cache-routing.md. Main's reviewed frozen RPC still has no
+fresh admission; observed Photo defer is scheduling evidence, not proof of a
+currently live owner. No RPC retry/dispatch, media/SDK/transport or physical-read
+savings claim follows from these worker controls.

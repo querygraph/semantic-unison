@@ -176,3 +176,21 @@ val refresh_owned_components : t -> HelperSupervisor.cancellation ->
     not namespace presence/producer settlement proof; no opens, cache selection,
     fallback extraction, archive mutation or publication. Account for at most
     one bounded record plus entry and optional checkpoint per pending job. *)
+
+val components_indexed : t -> HelperSupervisor.cancellation ->
+  index:DngComponents.owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> record:string option -> decoders:DngComponents.decoders ->
+  ?capture_checkpoint:bool -> max_read_bytes:int64 -> Unix.file_descr ->
+  component_inspection option Lwt.t
+(** Worker-side exact trusted owner/path/generation selection. A missing or stale
+    entry uses fresh extraction with current frozen decoders. A selected entry
+    requires its authenticated retained record and uses owner-bound refresh;
+    missing record is explicit [components=Error _], corrupt/foreign records fail
+    the job. Neither is silently downgraded to fresh extraction. Unselected record
+    bytes are ignored, never promoted into authority. Optional capture applies to
+    both routes; it does not publish or insert a new entry. Same CPU/IO/FD and
+    cancellation rules as [components]. Caller owns index provenance, current
+    generation selection, cache-read settlement and metadata memory admission.
+    Immutable index snapshots may be shared across queued jobs within owner
+    budgets. No opens, disk discovery, cleanup, archive mutation or automatic
+    installation in the normal scan path. *)
