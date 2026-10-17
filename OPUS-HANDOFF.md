@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Current owner-entry/source integration qualified:stock/Ox Make+fullselftests and
+Dune compile allPASS,1272SRC checks;110production-linked workerchecks/compiler
+alsoPASS. Commonactualcontroller41172/e6f14a/0/no session, all5workers/groups/CPU
+tokensclosed. Receipt `tests/qualification/dng-owner-entry-current-builds-actual-20261017.json`.
+Currentfork handoff/source-review evidence merged into isolatedbranch (ada13312),
+documentation/evidence only,0production sourcechanges from that merge. Preparing
+separate stacked draft againstfeat/semantic-dng-oxcaml; no mainRPCpinschanged or
+automatic cache enabled. Managedlookup/quota and actual newRPC remain open.
+
 UDI/0 entry now has borrowed-FD staging/readback and macOS immutable publication.
 CapturedentrySHA verified againstentirestage before nativeexclusive rename; exact
 postpublishreadback passes, unrelatedstagebytes/overwrite refuse. Shared bounded
