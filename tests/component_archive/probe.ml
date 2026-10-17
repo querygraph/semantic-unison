@@ -45,11 +45,22 @@ let () =
    require(Update.component_owner_reference left=Some expected) "archive did not restore exact hint";
    require(Update.component_owner_reference right=None) "other root acquired private hint";
    require(!Update.foundArchives) "archive was reset instead of restored";
+   let before=Array.length(Sys.readdir "/dev/fd") in
+   let directory=Unix.openfile(Filename.concat state ("manifest-"^nonce)) [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+   let loaded=Fun.protect ~finally:(fun () -> Unix.close directory) (fun () ->
+     Update.load_component_owner_index left ~directory ~max_entries:1 ~max_bytes:4096 ()) in
+   require((match loaded with Some value -> DngComponents.owner_index_usage value=(0,0)
+     | None -> false)) "archive-owned managed index did not load";
+   require(Array.length(Sys.readdir "/dev/fd")=before) "archive-owned loader leaked FD";
+   require(Update.load_component_owner_index right ~directory:Unix.stdin ~max_entries:1
+     ~max_bytes:4096 ()=None) "missing endpoint hint touched arbitrary namespace";
    Update.commitUpdates ()
  end else begin
    require(Update.component_owner_reference left=None && Update.component_owner_reference right=None)
      "disabled/absent/malformed hint became authority";
    require(!Update.foundArchives) "optional hint failure reset archives";
+   require(Update.load_component_owner_index left ~directory:Unix.stdin ~max_entries:1
+     ~max_bytes:4096 ()=None) "disabled/missing/corrupt hint touched namespace";
    if phase="off" then Update.commitUpdates ()
  end;
  Lwt_unix.run(Update.unlockArchives ());Globals.uninstallRoots ();

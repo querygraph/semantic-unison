@@ -522,3 +522,86 @@ let decode_owner_archive_reference ~archive_binding encoded =
      String.sub encoded 8 32<>archive_binding ||
      SemanticHash.string(String.sub encoded 0 104)<>String.sub encoded 104 32 then None
   else Some(String.sub encoded 40 32,String.sub encoded 72 32)
+
+(* Owner-only managed reads. Resource bookkeeping exists before native open;
+   borrowed readers never duplicate/close it. Uncertainty never retries a number
+   that the OS may already have recycled. *)
+external metadata_open : Unix.file_descr -> string -> Unix.file_descr
+  = "unison_component_metadata_open"
+external metadata_close : Unix.file_descr -> unit = "unison_component_metadata_close"
+type cache_descriptor = Unix.file_descr * Unix.LargeFile.stats option
+type cache_ownership = { cache_cause : exn option;
+  cache_uncertain : (cache_descriptor * exn) list;
+  cache_retained : cache_descriptor list;
+  cache_directory : cache_descriptor }
+exception Cache_ownership_uncertain of cache_ownership
+let cache_ownership_cause state=state.cache_cause
+let cache_uncertain_descriptors state=state.cache_uncertain
+let cache_retained_descriptors state=state.cache_retained
+let cache_borrowed_directory state=state.cache_directory
+type cache_fd_state = Cache_unopened | Cache_held | Cache_uncertain | Cache_closed
+type cache_resource = { mutable cache_fd : Unix.file_descr;
+  mutable cache_fd_state : cache_fd_state; mutable cache_identity : Unix.LargeFile.stats option }
+let cache_identity fd=try Some(Unix.LargeFile.fstat fd) with _ -> None
+let with_cache_leaf ~check_cancel ~directory ~digest ~max_bytes callback =
+  check_cancel ();
+  if String.length digest<>32 then owner_invalid "cache leaf digest";
+  let name=SemanticHash.hex digest in
+  let borrowed=directory,cache_identity directory in
+  let resource={cache_fd=Unix.stdin;cache_fd_state=Cache_unopened;cache_identity=None} in
+  let evidence ()=resource.cache_fd,resource.cache_identity in
+  let close cause =
+    (* A failed final stat must not erase the identity already observed at open. *)
+    (match cache_identity resource.cache_fd with
+     | None -> () | Some _ as observed -> resource.cache_identity <- observed);
+    resource.cache_fd_state <- Cache_uncertain;
+    try metadata_close resource.cache_fd;resource.cache_fd_state <- Cache_closed
+    with error -> raise(Cache_ownership_uncertain {cache_cause=cause;
+      cache_uncertain=[evidence (),error];cache_retained=[];cache_directory=borrowed}) in
+  try
+    let present=try
+      resource.cache_fd <- metadata_open directory name;
+      resource.cache_fd_state <- Cache_held;
+      true
+    with Unix.Unix_error(Unix.ENOENT,_,_) -> false in
+    if not present then None else begin
+      resource.cache_identity <- Some(Unix.LargeFile.fstat resource.cache_fd);
+      ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes resource.cache_fd;
+      let result=SemanticFile.with_borrowed_fd ~check_cancel resource.cache_fd (fun file ->
+        let result=callback file in
+        ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes resource.cache_fd;
+        result) in
+      close None;
+      Some result
+    end
+  with
+  | Cache_ownership_uncertain state ->
+      (* A nested leaf could fail close while this manifest is still held.
+         Preserve that known descriptor instead of attempting more cleanup. *)
+      if resource.cache_fd_state=Cache_held then
+        raise(Cache_ownership_uncertain {state with cache_retained=evidence ()::state.cache_retained})
+      else raise(Cache_ownership_uncertain state)
+  | error ->
+      if resource.cache_fd_state=Cache_held then close (Some error);
+      raise error
+let cache_leaf_bytes file =
+  let size=SemanticFile.size file in
+  let bytes=Buffer.create (Int64.to_int size) in
+  SemanticFile.iter file 0L size (fun data count -> Buffer.add_subbytes bytes data 0 count);
+  SemanticFile.check file;
+  Buffer.contents bytes
+let load_owner_index ?(check_cancel=fun () -> ()) ~directory ~expected_manifest_sha256 ~binding ~max_entries ~max_bytes () =
+  (* Validate caller bounds even when the selected manifest is absent. *)
+  ignore(empty_owner_index ~max_entries ~max_bytes);
+  if String.length binding<>32 then owner_invalid "cache manifest binding";
+  with_cache_leaf ~check_cancel ~directory ~digest:expected_manifest_sha256 ~max_bytes:max_owner_index_size
+    (fun file -> read_owner_index ~check_cancel ~expected_manifest_sha256 ~binding ~max_entries ~max_bytes
+      ~load_entry:(fun digest -> match with_cache_leaf ~check_cancel ~directory ~digest
+        ~max_bytes:owner_entry_max_size cache_leaf_bytes with
+        | Some bytes -> bytes | None -> owner_invalid "selected manifest entry is missing") file)
+let load_owner_record ?(check_cancel=fun () -> ()) ~directory ~entry () =
+  with_cache_leaf ~check_cancel ~directory ~digest:entry.record_digest
+    ~max_bytes:(ComponentHash.max_checkpoint_size+80) (fun file ->
+      let bytes=cache_leaf_bytes file in
+      ignore(checkpoint_for_owner_entry entry bytes);
+      bytes)

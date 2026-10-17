@@ -1,0 +1,43 @@
+/* Original disposable-only wrapper. Production has no mode or fault switch. */
+#define _DARWIN_C_SOURCE 1
+#include <caml/mlvalues.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <stdatomic.h>
+#include <errno.h>
+static _Atomic int failed_ordinal, closes, opens, reads;
+CAMLprim value unison_cache_control_mode(value ordinal)
+{
+  atomic_store(&failed_ordinal, Int_val(ordinal));
+  atomic_store(&closes, 0); atomic_store(&opens, 0); atomic_store(&reads, 0); return Val_unit;
+}
+CAMLprim value unison_cache_control_closes(value unit)
+{ (void)unit; return Val_int(atomic_load(&closes)); }
+CAMLprim value unison_cache_control_opens(value unit)
+{ (void)unit; return Val_int(atomic_load(&opens)); }
+int unison_cache_control_openat(int parent, const char *leaf, int flags, ...)
+{
+  atomic_fetch_add(&opens, 1);
+  return openat(parent, leaf, flags);
+}
+int unison_cache_control_close(int fd)
+{
+  int ordinal=atomic_fetch_add(&closes, 1)+1;
+  int access=fcntl(fd, F_GETFL), ownership=fcntl(fd, F_GETFD);
+  int valid=access!=-1 && (access & O_ACCMODE)==O_RDONLY &&
+    (access & O_NONBLOCK) && ownership!=-1 && (ownership & FD_CLOEXEC);
+  int result=close(fd), saved=errno;
+  if (!valid && access!=-1) { errno=EINVAL; return -1; }
+  if (ordinal==atomic_load(&failed_ordinal)) { errno=EIO; return -1; }
+  errno=saved;return result;
+}
+
+ssize_t unison_cache_control_pread(int fd, void *bytes, size_t length, off_t offset)
+{
+  ssize_t result=pread(fd, bytes, length, offset);
+  int saved=errno, ordinal=atomic_fetch_add(&reads, 1);
+  /* Qualified disposable failure only: lose the descriptor after returned bytes
+     so the final stat and first owner close fail. Never retry that stale number. */
+  if (atomic_load(&failed_ordinal)==-1 && ordinal==0 && result>0) close(fd);
+  errno=saved;return result;
+}

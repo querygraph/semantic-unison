@@ -105,6 +105,15 @@ val setStasherFun : (Fspath.t -> Path.local -> unit) -> unit
 val archiveHash : Fspath.t -> string
 
 val component_owner_reference : Fspath.t -> (string * string) option
+val load_component_owner_index : ?check_cancel:(unit -> unit) -> Fspath.t ->
+  directory:Unix.file_descr -> max_entries:int -> max_bytes:int -> unit ->
+  DngComponents.owner_index option
+(** Authenticate managed metadata using only this loaded root's trusted optional
+    archive reference. Disabled/unloaded/missing hints return None without touching
+    the supplied directory. Otherwise use the managed loader's strict digest-name,
+    ownership, bounds and retained-close-error contract. The directory is borrowed;
+    caller supplies stable private namespace/IO/memory/lifetime admission. This
+    neither opens a namespace root nor adopts/rewrites archive or file state. *)
 val set_component_owner_reference : Fspath.t -> DngComponents.owner_index_publication -> unit
 val clear_component_owner_reference : Fspath.t -> unit
 (** Owner-loop opt-in local component-manifest hints. Getter returns
