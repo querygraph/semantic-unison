@@ -489,14 +489,36 @@ let read_owner_index ?(check_cancel=fun () -> ()) ~expected_manifest_sha256 ~bin
   SemanticFile.check file;check_cancel ();restored
 
 type owner_index_publication = { manifest_publication : ComponentHash.record_publication;
-  mutable manifest_attempted : bool }
+  mutable manifest_attempted : bool; mutable manifest_completed : bool;
+  manifest_binding : string; manifest_digest : string }
 let prepare_owner_index_publication ~binding ledger ~directory ~stage ~temporary file =
   let encoded=owner_index_bytes ~binding ledger in
+  let manifest_digest=SemanticHash.string encoded in
   let manifest_publication=ComponentHash.prepare_metadata_publication ~directory ~stage ~temporary
-    ~max_bytes:max_owner_index_size ~expected_sha256:(SemanticHash.string encoded) file in
-  {manifest_publication;manifest_attempted=false}
+    ~max_bytes:max_owner_index_size ~expected_sha256:manifest_digest file in
+  {manifest_publication;manifest_attempted=false;manifest_completed=false;
+   manifest_binding=binding;manifest_digest}
 let publish_owner_index publication directory stage =
   if publication.manifest_attempted then owner_invalid "index publication already attempted";
   publication.manifest_attempted<-true;
-  ComponentHash.publish_checkpoint_record publication.manifest_publication directory stage
+  ComponentHash.publish_checkpoint_record publication.manifest_publication directory stage;
+  publication.manifest_completed<-true
 let owner_index_published publication=ComponentHash.record_published publication.manifest_publication
+
+let owner_index_reference publication =
+  if not publication.manifest_completed || not(owner_index_published publication) then
+    owner_invalid "index publication has not completed normally";
+  publication.manifest_binding,publication.manifest_digest
+let owner_archive_reference_size=136
+let encode_owner_archive_reference ~archive_binding ~binding ~manifest_sha256 =
+  if String.length archive_binding<>32 || String.length binding<>32 || String.length manifest_sha256<>32 then
+    owner_invalid "archive reference binding";
+  let body="UAX\000\000\000\000\000"^archive_binding^binding^manifest_sha256 in
+  body^SemanticHash.string body
+let decode_owner_archive_reference ~archive_binding encoded =
+  if String.length archive_binding<>32 then owner_invalid "archive reference context";
+  if String.length encoded<>owner_archive_reference_size ||
+     String.sub encoded 0 8<>"UAX\000\000\000\000\000" ||
+     String.sub encoded 8 32<>archive_binding ||
+     SemanticHash.string(String.sub encoded 0 104)<>String.sub encoded 104 32 then None
+  else Some(String.sub encoded 40 32,String.sub encoded 72 32)

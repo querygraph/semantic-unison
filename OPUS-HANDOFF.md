@@ -7,6 +7,42 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Retained old-production-code archive compatibility now PASS/CLOSED on PR6:
+actual12014/2441f7/0,13directcalls with currentstock/Ox producers and pre-component-
+RPC stock5.2.0 Update/Proplist/nativeobjects from pinnedreceiptf24467a3. Old code
+has no newhintregistration/API. Old read preserves exactarchivebytes, rewrite
+removes hint; currentcoldreload givescachemiss with immutableUIXpayloadunchanged.
+Allgroups/tokensclosed; oldsource/objects/originalCLI hash unchanged. The original
+CLI was NOT invoked; no network/fullsync/data-bearingroots/SDK/photos. Test-only
+successor; current productionSRC1272pins rebound to priorfourbuilds, not rebuilt.
+`tests/qualification/component-archive-legacy-actual-20261017.json`. No automatic
+capture/reuse, managednamespace or broad old-version compatibility is implied.
+
+Draft PR6 https://github.com/querygraph/unison/pull/6 is stacked on PR5,
+`feat/component-archive-hints` against `feat/component-owner-index`.
+Qualified source/evidencef171539b; all owned handles/grants are closed. PR4 and
+PR5 remain separate review levels; main frozen342RPC source is unchanged. No
+actual old-binary compatibility or automatic cache capture/reuse is claimed.
+
+Archive-hint successor `feat/component-archive-hints` in
+`/Users/alexy/src/unison-component-archive-20261017`, based on PR5c372213a, is
+qualified. Endpoint-local default-off componentownercache UAX/0 tail afterlegacy
+paths; privatekey removed beforelegacypropertyserialization. No format23/version/
+feature change. Reference derivation requires normallycompleted publication,
+not renameeffectalone; caller settlesFDs before local adoption. Existingarchive
+commit persists hint. Missing/malformed/off hints decline without blobdiscovery.
+Focused63243/2ab595/0 incl1391DNG+29archivepubfault checks/compiler passed.
+StockMake passed in77348/e17590/1; linked001import/002privateUtilsymbol/003missing
+maxthreadsPref failedclosed, preserved; test-only fixes, productionunchanged.
+Actual stocklinked00458999/8ec8ad/0 and full96641/27b99d/0 PASS/CLOSED. Current
+stock/Ox Make/fullselftests/Dunecompile1272SRCpins;56component/1005checkpoint/
+27publicationfault/13readerfault/110workerchecks percompiler pass. Both linked
+archiveprobes14directcalls/6phases each pass; all8adoptedworkers/groups/tokensclosed.
+`tests/qualification/component-archive-hints-actual-20261017.json`, contract
+`doc/component-archive-hints.md`. No oldbinary/remote/SDK/media/automaticcapture/
+managednamespace/hardwarepowerloss orlegacyclosefault qualification. Main frozen
+342RPC untouched/no runtime admission inferred; new source not merged to main.
+
 Manifest storage/publication successor on PR5 qualified. Borrowed-FD UIX write/
 read with pre/post-loader stability; owner-only native immutable publication,
 one attempt even afterfailedrename, actual-effectgetter. Sourcehelpers open/dup/

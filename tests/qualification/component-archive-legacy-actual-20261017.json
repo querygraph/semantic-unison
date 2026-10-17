@@ -1,0 +1,110 @@
+{
+  "state": "RETAINED_PRECHANGE_PRODUCTION_ARCHIVE_READER_WRITER_COMPATIBILITY_PASS_CLOSED",
+  "scope": "Actual retained pre-component-RPC fork production objects, old Update/Proplist without new hint registration, linked into a separate private empty-root probe. Current stock/Ox producers, exact read-only archive preservation, old rewrite hint drop, manifest payload preservation and current cold cache miss. Not untouched old CLI/network/upstream-all-versions/data-bearing-corpus qualification.",
+  "actual_parent_terminal": {
+    "session": 12014,
+    "chunk": "2441f7",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "closure": {
+    "child": {
+      "pid": 31031,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 31031,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "direct_calls": 13,
+  "cases": [
+    {
+      "archives_after": {
+        "/private/tmp/unison-archive-legacy-ehohf9p8/stock/state/ar140ff5ebd6abe7d547d01915f97a6df9": "b28d71b439caf1da56064ac1497a3fd1a6101b172279d14b1ab48fbdf63d80ed",
+        "/private/tmp/unison-archive-legacy-ehohf9p8/stock/state/ar3d4d5437101d6e7bd12bc15bc5fb9354": "2aa902ac160d185951d2ddbccd078f3190c5af6a582f1aa79378581ba15c0d79"
+      },
+      "archives_before": {
+        "/private/tmp/unison-archive-legacy-ehohf9p8/stock/state/ar140ff5ebd6abe7d547d01915f97a6df9": "1b041cedbb365238244146443f6b91d06f41b4b58b0b65b0808197ee9660cdaa",
+        "/private/tmp/unison-archive-legacy-ehohf9p8/stock/state/ar3d4d5437101d6e7bd12bc15bc5fb9354": "984eaa85ae96fec0380dbe9db9aae46cb1c0bffe9981e97301986f148c3b08e9"
+      },
+      "current": "stock",
+      "current_reload_cache_miss": true,
+      "legacy": "retained stock5.2.0 pre-component-RPC fork",
+      "manifest_payload_preserved": true,
+      "old_reader_preserved_exact_archive_bytes": true,
+      "old_writer_dropped_hint": true
+    },
+    {
+      "archives_after": {
+        "/private/tmp/unison-archive-legacy-ehohf9p8/ox/state/ar595935ee088f6560f6638460562ec273": "d69569d09e8da04bebc3d6f319d97aec715019444dc919fd44d1ed1ecbd4cd7b",
+        "/private/tmp/unison-archive-legacy-ehohf9p8/ox/state/ar7ad226c4aee7be69bbf2c46a4ecb0328": "45f2dbe32befef312fcd37920736d72bd290ef78a539237ba00efffa6651664e"
+      },
+      "archives_before": {
+        "/private/tmp/unison-archive-legacy-ehohf9p8/ox/state/ar595935ee088f6560f6638460562ec273": "e1bd2e0f73fd7e23517f4bc2939d267c1d1784eeec3fcb75ffc3c87cfa5534c6",
+        "/private/tmp/unison-archive-legacy-ehohf9p8/ox/state/ar7ad226c4aee7be69bbf2c46a4ecb0328": "c502031a7fdda7d34385461009b6397f1fc0f6fc200f87d09eaeab60df6d9303"
+      },
+      "current": "ox",
+      "current_reload_cache_miss": true,
+      "legacy": "retained stock5.2.0 pre-component-RPC fork",
+      "manifest_payload_preserved": true,
+      "old_reader_preserved_exact_archive_bytes": true,
+      "old_writer_dropped_hint": true
+    }
+  ],
+  "legacy_receipt": {
+    "path": "/private/tmp/unison-component-owner-stock-make-20261017-002/RESULT.json",
+    "sha256": "f24467a36b8a9cea3508acd630e53df1178dfb549291b0b31a2e8c39f905063b"
+  },
+  "raw": {
+    "path": "/private/tmp/unison-archive-legacy-ehohf9p8/RESULT.json",
+    "bytes": 259757,
+    "sha256": "b072c5ca7a8b434edeab270a3d5ca587ea07031803fde477fa53e6d0a8dbcf94"
+  },
+  "closure_pin": {
+    "path": "/private/tmp/unison-archive-legacy-controls-20261017-001/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "8113680c169acfada851639a71e2b36c3f4a84d7f9323e2581b67f916ee6973c"
+  },
+  "retained_legacy_source_files_rechecked": 318,
+  "linked_artifacts_rechecked": 645,
+  "current_build_source_rebinding": [
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-make-20261017-001/RESULT.json",
+      "sha256": "9d14c8baad1efdb75cebb9ae871859487d50f04ca1824bec095af59b99b6d1d1",
+      "current_production_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-make-20261017-001/RESULT.json",
+      "sha256": "5f5ba5ebce65ac85ba55881236a17bce9915a5587a3b510c3e0f9c7693bc6705",
+      "current_production_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-stock-dune-20261017-001/RESULT.json",
+      "sha256": "1815c49614f18536b51ad34cb8f393cdd592e7d71b639deb34f8186354a365d3",
+      "current_production_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-archive-hint-ox-dune-20261017-001/RESULT.json",
+      "sha256": "3c3ec2247fb433333c9afed0afec95ede23682a58cc440a5435033a134afccaa",
+      "current_production_source_checks": 318,
+      "rerun": false
+    }
+  ],
+  "production_source_changed": false,
+  "original_legacy_CLI_executed": false,
+  "SDK_media_or_transport": false
+}

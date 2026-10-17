@@ -375,7 +375,11 @@ let () =
              DngComponents.prepare_owner_index_publication ~binding:manifest_binding both
                ~directory ~stage ~temporary:"manifest.tmp" file) in
            check(not(DngComponents.owner_index_published publication)) "manifest published during preparation";
+           check(try ignore(DngComponents.owner_index_reference publication);false
+             with ComponentHash.Invalid _ -> true) "unpublished manifest granted owner reference";
            DngComponents.publish_owner_index publication directory stage;
+           check(DngComponents.owner_index_reference publication=(manifest_binding,SemanticHash.string manifest_bytes))
+             "normal publication lost captured owner reference";
            let target=Filename.concat folder (SemanticHash.hex(SemanticHash.string manifest_bytes)) in
            check(DngComponents.owner_index_published publication && not(Sys.file_exists(Filename.concat folder "manifest.tmp")) &&
              (Unix.lstat target).Unix.st_ino=(Unix.fstat stage).Unix.st_ino)
@@ -402,6 +406,8 @@ let () =
            check(not(DngComponents.owner_index_published publication) &&
              (Unix.lstat target).Unix.st_ino=foreign_identity && (Unix.stat target).Unix.st_size=7 &&
              Sys.file_exists(Filename.concat folder "collision.tmp")) "manifest collision lost preserved effects";
+           check(try ignore(DngComponents.owner_index_reference publication);false
+             with ComponentHash.Invalid _ -> true) "failed publication granted owner reference";
            Unix.unlink target; (* Only this fixture's deliberate collision. *)
            check(try DngComponents.publish_owner_index publication directory stage;false
              with ComponentHash.Invalid _ -> true) "failed manifest publication ticket replayed after collision removal");
@@ -416,6 +422,24 @@ let () =
              with SemanticFile.Invalid _ -> !changed && not !delivered)
              "changed manifest escaped helper before reader retirement";
            check((Unix.fstat stage).Unix.st_size=1) "manifest reader closed mutated caller FD"));
+       let archive_binding=SemanticHash.string "original-owner-archive-generation/1" in
+       let archive_hint=DngComponents.encode_owner_archive_reference ~archive_binding
+         ~binding:manifest_binding ~manifest_sha256:(SemanticHash.string manifest_bytes) in
+       check(String.length archive_hint=136 && DngComponents.owner_archive_reference_size=136 &&
+         DngComponents.decode_owner_archive_reference ~archive_binding archive_hint=
+           Some(manifest_binding,SemanticHash.string manifest_bytes)) "archive hint roundtrip differs";
+       check(DngComponents.decode_owner_archive_reference ~archive_binding:(String.make 32 'X') archive_hint=None)
+         "archive hint crossed root/pair/generation context";
+       check(DngComponents.decode_owner_archive_reference ~archive_binding (archive_hint^"x")=None)
+         "archive hint accepted trailing bytes";
+       let damaged_hint=Bytes.of_string archive_hint in
+       Bytes.set damaged_hint 135 (Char.chr(Char.code(Bytes.get damaged_hint 135) lxor 1));
+       check(DngComponents.decode_owner_archive_reference ~archive_binding (Bytes.to_string damaged_hint)=None)
+         "archive hint accepted corrupted checksum";
+       for length=0 to 135 do
+         check(DngComponents.decode_owner_archive_reference ~archive_binding (String.sub archive_hint 0 length)=None)
+           "archive hint truncation did not decline"
+       done;
        let tiny=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:(String.length encoded) in
        let full=unwrap(DngComponents.replace_owner_entry tiny ~expected_entry_sha256:None loaded) in
        check(match DngComponents.replace_owner_entry full ~expected_entry_sha256:None other with

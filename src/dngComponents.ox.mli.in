@@ -227,3 +227,16 @@ val owner_index_published : owner_index_publication -> bool @@ nonportable
     FD settlement, referenced-entry closure and separately trusted owner-state
     commit. A published file alone is not durable index adoption or crash-recovery
     authority. No output overwrites, cleanup, source-photo access or FD closes. *)
+
+val owner_index_reference : owner_index_publication -> string * string @@ nonportable
+(** Return captured (manifest binding, manifest digest) only after publication
+    returned normally, not merely after an observed rename. Caller must separately
+    settle descriptors/referenced objects before adopting it in trusted state. *)
+val owner_archive_reference_size : int
+val encode_owner_archive_reference : archive_binding:string -> binding:string ->
+  manifest_sha256:string -> string
+val decode_owner_archive_reference : archive_binding:string -> string -> (string * string) option
+(** Fixed136B UAX/0 local archive hint. Context is the owning archive root/pair/
+    generation binding, not peer metadata or a cache file's self-hash. Decoder
+    declines malformed/mismatched optional hints; this codec alone establishes no
+    authority. Use only inside already trusted local owner-state load/commit. *)
