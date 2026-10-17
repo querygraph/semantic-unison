@@ -220,6 +220,46 @@ truncated/overflow/reserved/trailing data, damaged/missing/oversized entry loads
 cancellation and unchanged prior views. Framing-vector truncations are counted
 as controls, not additional camera fixtures. No photos or SDK are involved.
 
+### Borrowed-FD manifest storage and immutable publication
+
+`write_owner_index` writes/syncs the captured UIX/0 bytes through the bounded
+private-stage writer and returns their whole digest. `read_owner_index` bounds
+size, verifies the manifest and referenced entries, and checks the manifest
+reader both before and after the loader runs. A loader-side mutation is refused
+before the helper delivers its result, rather than relying on later outer-reader
+retirement. Both functions borrow caller-owned descriptors/readers; they open,
+duplicate and close none. Actual entry loading remains owner-controlled.
+
+`prepare_owner_index_publication` independently hashes the stage against the
+captured ledger/binding, then pins the existing macOS private directory/stage/
+name ticket. The owner-only wrapper permits exactly one publication attempt,
+including failure before rename. `owner_index_published` preserves the actual
+native rename effect even if later checks fail. Collisions preserve the foreign
+object and unpublished stage; no overwrite, retry, reset or cleanup occurs.
+This uses the already-qualified exclusive-rename/fsync backend, not a second
+publisher or platform fallback. Publication does not close caller descriptors.
+
+This proves publication of manifest bytes only. It does not prove referenced
+entry/record presence, global writer exclusion, native quota reservation, FD
+settlement, hardware durability or the separately trusted owner-state commit.
+The owner must admit its IO/CPU/metadata space before stage creation, preserve
+failed stages/orphans and settle all borrowed resources before adopting a
+persistent pointer. No managed namespace or automatic cache activation is added.
+
+Original tiny controls exercise actual stage/write/read/publish/restore,
+position and FD preservation, wrong-binding and nonempty-stage refusal, actual
+rename identity, collision preservation and one-shot failure after removal of
+only the fixture's foreign object. A deterministic loader truncation must be
+rejected before result delivery. Separate Ox negative compile files cover both
+cache and manifest publication contexts; one earlier successful fixture run used
+one combined file and is not claimed as separate proof of both type boundaries.
+Current qualification is in `tests/qualification/owner-manifest-publication-actual-20261017.json`:
+1248DNGchecks/compiler, current stock/Ox Make/fullselftests/Dune compile,
+110workerchecks/compiler and1272current source checks pass/closed. Existing core
+fault controls cover the unchanged native publisher; no separate UIX postrename
+injection is claimed. No source photos, SDK, real cache or production publication
+is involved.
+
 ### Borrowed positional readers
 
 `SemanticFile.with_borrowed_fd` supplies a POSIX reader for owner-held source or

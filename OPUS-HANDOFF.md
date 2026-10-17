@@ -7,6 +7,20 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Manifest storage/publication successor on PR5 qualified. Borrowed-FD UIX write/
+read with pre/post-loader stability; owner-only native immutable publication,
+one attempt even afterfailedrename, actual-effectgetter. Sourcehelpers open/dup/
+close noFDs. Actualfocused56956/e8cf00/0 and full85962/0cfdd3/0 PASS/CLOSED;
+initialnativefixture94862/954705/0 preserved, separatefinal negativecompilefiles
+qualify cache+manifest contexts. Current56component+1005checkpoint+27publication
+fault+13readerfault+1248DNG+110workerchecks/compiler, freshstock/Ox Make/fullselftests/
+Dunecompile and1272current sourcepins match. All7observedworkers/groups/tokens
+closed. Receipt `tests/qualification/owner-manifest-publication-actual-20261017.json`.
+No quota reservation/namespace installation/trusted-state commit/crash-safe pointer/
+automaticrouting or actualPhoto/media/SDK/transport. Entry presence and FDsettlement
+still owner duties; new native fault scope is underlying unchanged core, not a
+separate UIXpostrename injector. Main frozen342RPC unchanged/no runtime grant.
+
 UIX/0 reference-manifest successor on PR5 is qualified. Header80B+32/reference,
 max32848B; prior trusted manifestSHA+ownerbinding+exactlimits required before
 entry resolution. Each referencedUDI independently digest/canonical/keyorder/

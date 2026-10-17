@@ -352,6 +352,70 @@ let () =
        for length=0 to String.length manifest_bytes-1 do
          no_load (fun () -> restore(String.sub manifest_bytes 0 length)) "truncated manifest reached loader"
        done;
+       if ComponentHash.record_publication_available () then with_capture_directory(fun folder directory ->
+         let with_stage name action=
+           let stage=Unix.openfile(Filename.concat folder name) [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+           Fun.protect ~finally:(fun () -> Unix.close stage) (fun () -> action stage) in
+         let read stage loader=SemanticFile.with_borrowed_fd stage(fun file ->
+           DngComponents.read_owner_index ~expected_manifest_sha256:(SemanticHash.string manifest_bytes)
+             ~binding:manifest_binding ~max_entries:2 ~max_bytes:8388608 ~load_entry:loader file) in
+         with_stage "manifest.tmp" (fun stage ->
+           ignore(Unix.lseek stage 7 Unix.SEEK_SET);
+           check(DngComponents.write_owner_index ~binding:manifest_binding both stage=SemanticHash.string manifest_bytes &&
+             Unix.lseek stage 0 Unix.SEEK_CUR=7) "manifest stage bytes/position differ";
+           check(try ignore(DngComponents.write_owner_index ~binding:manifest_binding both stage);false
+             with ComponentHash.Invalid _ -> true) "manifest writer reused nonempty stage";
+           check(manifest(read stage load_entry)=manifest_bytes && Unix.lseek stage 0 Unix.SEEK_CUR=7)
+             "borrowed manifest reader changed metadata or shared position";
+           check(try ignore(SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding:(String.make 32 'X') both
+               ~directory ~stage ~temporary:"manifest.tmp" file));false
+             with ComponentHash.Invalid _ -> true) "manifest publisher accepted wrong owner binding";
+           let publication=SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding:manifest_binding both
+               ~directory ~stage ~temporary:"manifest.tmp" file) in
+           check(not(DngComponents.owner_index_published publication)) "manifest published during preparation";
+           DngComponents.publish_owner_index publication directory stage;
+           let target=Filename.concat folder (SemanticHash.hex(SemanticHash.string manifest_bytes)) in
+           check(DngComponents.owner_index_published publication && not(Sys.file_exists(Filename.concat folder "manifest.tmp")) &&
+             (Unix.lstat target).Unix.st_ino=(Unix.fstat stage).Unix.st_ino)
+             "manifest publication lost actual rename identity";
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with ComponentHash.Invalid _ -> true) "manifest publication replayed";
+           check(manifest(read stage load_entry)=manifest_bytes &&
+             (Unix.fstat stage).Unix.st_size=String.length manifest_bytes)
+             "published manifest not restorable or caller descriptor closed");
+         with_stage "collision.tmp" (fun stage ->
+           let binding=SemanticHash.string "other-index-owner-state" in
+           let bytes=DngComponents.owner_index_bytes ~binding both in
+           ignore(DngComponents.write_owner_index ~binding both stage);
+           let publication=SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding both ~directory ~stage
+               ~temporary:"collision.tmp" file) in
+           let target=Filename.concat folder (SemanticHash.hex(SemanticHash.string bytes)) in
+           let foreign=Unix.openfile target [Unix.O_CREAT;Unix.O_EXCL;Unix.O_WRONLY] 0o600 in
+           let foreign_identity=Fun.protect ~finally:(fun () -> Unix.close foreign) (fun () ->
+             check(Unix.write_substring foreign "foreign" 0 7=7) "manifest collision fixture write";
+             (Unix.fstat foreign).Unix.st_ino) in
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with Unix.Unix_error(Unix.EEXIST,_,_) -> true) "manifest overwrote foreign target";
+           check(not(DngComponents.owner_index_published publication) &&
+             (Unix.lstat target).Unix.st_ino=foreign_identity && (Unix.stat target).Unix.st_size=7 &&
+             Sys.file_exists(Filename.concat folder "collision.tmp")) "manifest collision lost preserved effects";
+           Unix.unlink target; (* Only this fixture's deliberate collision. *)
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with ComponentHash.Invalid _ -> true) "failed manifest publication ticket replayed after collision removal");
+         with_stage "moving.tmp" (fun stage ->
+           ignore(DngComponents.write_owner_index ~binding:manifest_binding both stage);
+           let changed=ref false and delivered=ref false in
+           check(try SemanticFile.with_borrowed_fd stage(fun file ->
+             ignore(DngComponents.read_owner_index ~expected_manifest_sha256:(SemanticHash.string manifest_bytes)
+               ~binding:manifest_binding ~max_entries:2 ~max_bytes:8388608 ~load_entry:(fun sha ->
+                 if not !changed then (Unix.ftruncate stage 1;changed:=true);load_entry sha) file);
+             delivered:=true);false
+             with SemanticFile.Invalid _ -> !changed && not !delivered)
+             "changed manifest escaped helper before reader retirement";
+           check((Unix.fstat stage).Unix.st_size=1) "manifest reader closed mutated caller FD"));
        let tiny=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:(String.length encoded) in
        let full=unwrap(DngComponents.replace_owner_entry tiny ~expected_entry_sha256:None loaded) in
        check(match DngComponents.replace_owner_entry full ~expected_entry_sha256:None other with

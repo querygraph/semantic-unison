@@ -201,3 +201,29 @@ val restore_owner_index : ?check_cancel:(unit -> unit) ->
     Limits are per value, not aggregate RSS; owner serializes durable adoption.
     No opens/closes, disk publication, archive trust, peer authority or source IO.
     Selected entries still require authenticated metadata and full-input restore. *)
+
+val write_owner_index : binding:string -> owner_index -> Unix.file_descr -> string
+val read_owner_index : ?check_cancel:(unit -> unit) -> expected_manifest_sha256:string ->
+  binding:string -> max_entries:int -> max_bytes:int -> load_entry:(string -> string) ->
+  SemanticFile.t -> owner_index
+(** Bounded UIX/0 descriptor-only storage. Write borrows a fresh private0600 singly
+    linked output, syncs/checks it and returns the captured manifest digest. Read
+    checks bounded size and reader stability both before and after entry loading;
+    loader failure/cancellation propagates. All FD/readers remain caller-owned.
+    No opens/duplicates/closes, native quota reservation, namespace installation,
+    trusted-state update or automatic cache activation. *)
+
+type owner_index_publication
+val prepare_owner_index_publication : binding:string -> owner_index ->
+  directory:Unix.file_descr -> stage:Unix.file_descr -> temporary:string ->
+  SemanticFile.t -> owner_index_publication @@ nonportable
+val publish_owner_index : owner_index_publication -> Unix.file_descr -> Unix.file_descr -> unit @@ nonportable
+val owner_index_published : owner_index_publication -> bool @@ nonportable
+(** Owner-only macOS immutable manifest publication. Independently hash/read back
+    the stage against the captured ledger/binding, then borrow the private native
+    directory/stage/name ticket. Exactly one publication attempt, including a
+    failed pre-rename call; no replay/reset. Actual rename state survives errors.
+    Caller preserves failed stages/orphans and owns resource/quota admission,
+    FD settlement, referenced-entry closure and separately trusted owner-state
+    commit. A published file alone is not durable index adoption or crash-recovery
+    authority. No output overwrites, cleanup, source-photo access or FD closes. *)

@@ -1,0 +1,272 @@
+{
+  "state": "BORROWED_MANIFEST_STORAGE_AND_ONE_SHOT_PUBLICATION_PASS_CLOSED",
+  "scope": "UIX/0 bounded private staging/readback, helper pre/post-loader stability, macOS immutable exclusive publication, one-shot failure/replay refusal and collision effects; all descriptors borrowed. No quota reservation/namespace installation/entry presence/trusted-state commit/crash-safe adoption/automatic routing/photos/SDK/transport",
+  "actual_terminals": {
+    "initial_fixture": {
+      "session": 94862,
+      "chunk": "954705",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "initial native fixture proof, combined negative compile file only"
+    },
+    "focused": {
+      "session": 56956,
+      "chunk": "e8cf00",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "separate cache and manifest context negative compile files"
+    },
+    "full": {
+      "session": 85962,
+      "chunk": "0cfdd3",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "checks_per_compiler": {
+    "component": 56,
+    "checkpoint": 1005,
+    "publication_fault": 27,
+    "reader_fault": 13,
+    "dng": 1248,
+    "worker": 110
+  },
+  "current_build_source_checks": 1272,
+  "native_publisher_source_unchanged": true,
+  "postrename_fault_scope": "Existing core27 fault controls on the same underlying publisher; no separate UIX postrename syscall-fault switch",
+  "runs": [
+    {
+      "case": "dng",
+      "closure": {
+        "child": {
+          "pid": 10772,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 10772,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "core",
+      "closure": {
+        "child": {
+          "pid": 11450,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 11450,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-make",
+      "closure": {
+        "child": {
+          "pid": 11726,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 11726,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-make",
+      "closure": {
+        "child": {
+          "pid": 12902,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 12902,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "stock-dune",
+      "closure": {
+        "child": {
+          "pid": 14112,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 14112,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "ox-dune",
+      "closure": {
+        "child": {
+          "pid": 15103,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 15103,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "case": "workers",
+      "closure": {
+        "child": {
+          "pid": 16232,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 16232,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-manifest-publication-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "84e372c99c7cd552a45c9f196d49c1927cc934298367eb006ae5611adcd8f743"
+    },
+    {
+      "path": "/private/tmp/unison-dng-component-controls-1_9mxct9/RESULT.json",
+      "bytes": 469696,
+      "sha256": "6d8fa3ab5fe77a2095e9aa650a9f0329a7ec1f1e798f46f6269582af36641f29"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-core-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "5722157667d91debb1c42a2c6d576732bfd2b4d26a263b8ed737ccb53a1f28bd"
+    },
+    {
+      "path": "/private/tmp/unison-component-controls-vo0dh0ng/RESULT.json",
+      "bytes": 155942,
+      "sha256": "8fbd7f0b3a6f0d7d80c07b6a94528d87bf3aa13e3eb389bf34608f532c3ed866"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f783fdc2c3af10bf9d9efee519f1757213340b48fa4aa17e3fb4c2c9269079f2"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-stock-make-20261017-001/RESULT.json",
+      "bytes": 49826,
+      "sha256": "e7043eca16fc88be2a9537cfa4e0c98a6bbbf0dcede9ed72091c7780d867f8dc"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "f8b63dfe8d61f53139185aaab3efbf522dc669389a4edf43c3019c4d74168ea3"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-ox-make-20261017-001/RESULT.json",
+      "bytes": 49832,
+      "sha256": "651da36a6424d8ad82d4c4fa96b498211b18bfd7daffb9985472465d8dcee831"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-stock-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "abf8617cdb49b96e0805aee19bf5de6cccd90a94ef88737c64e4f74fb5ea1e82"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-stock-dune-20261017-001/RESULT.json",
+      "bytes": 49270,
+      "sha256": "65afc3bd07dc2679b9c9aab03b5beff423e7bbd13cd8e1e53ae15e94f7cdc597"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-ox-dune-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "a61104899b7cae093eb050a23b0f0dea36202c58d0172e4c631df47969fb3dc1"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-ox-dune-20261017-001/RESULT.json",
+      "bytes": 49274,
+      "sha256": "6068f0ecc4a51dc296fb95d0cd575abb09143f0441bb582ffff86dfd80154e0c"
+    },
+    {
+      "path": "/private/tmp/unison-manifest-publication-workers-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "cda9fb832ede26f8ba025c9781159728a576e146cd229f3009240bf44fdf8ec6"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-bc9yn6gv/RESULT.json",
+      "bytes": 125273,
+      "sha256": "5e7d30364e12c0408a6d4d3e3c5d25ae34e369977c789f6d5a504ea5714018a4"
+    }
+  ]
+}

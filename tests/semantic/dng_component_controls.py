@@ -79,10 +79,12 @@ def main():
                 portable=work/'frozen_decoder_capture.ml'
                 portable.write_text('let publish (frozen:DngComponents.decoders) = Domain.Safe.spawn (fun () -> ignore frozen)\nlet publish_entry (entry:DngComponents.owner_entry) = Domain.Safe.spawn (fun () -> ignore(DngComponents.owner_entry_bytes entry))\nlet publish_index (index:DngComponents.owner_index) = Domain.Safe.spawn (fun () -> ignore(DngComponents.owner_index_usage index))\n')
                 call([compiler,'-c',portable.name])
-                leak=work/'capture_owner_only.ml'
-                leak.write_text('let leak (capture:DngComponents.cache_capture) = Domain.Safe.spawn (fun () -> ignore(DngComponents.cache_capture_state capture))\n')
-                refused=call([compiler,'-c',leak.name],expected=2)
-                assert 'nonportable' in refused['stderr'] or 'contended' in refused['stderr']
+                for typ,operation in [('cache_capture','cache_capture_state'),
+                                      ('owner_index_publication','owner_index_published')]:
+                    leak=work/('owner_only_'+typ+'.ml')
+                    leak.write_text('let leak (capture:DngComponents.'+typ+') = Domain.Safe.spawn (fun () -> ignore(DngComponents.'+operation+' capture))\n')
+                    refused=call([compiler,'-c',leak.name],expected=2)
+                    assert 'nonportable' in refused['stderr'] or 'contended' in refused['stderr']
             # Original guard-removal control in an isolated filtered copy only.
             implementation=work/'dngComponents.ml';original=implementation.read_text()
             guard='  (match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);\n'

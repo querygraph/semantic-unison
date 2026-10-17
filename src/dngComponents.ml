@@ -472,3 +472,31 @@ let restore_owner_index ?(check_cancel=fun () -> ()) ~expected_manifest_sha256 ~
       load (Some key) (total+length) ((key,entry)::acc) rest in
   let restored=load None 0 [] references in
   check_cancel ();restored
+
+
+let write_owner_index ~binding ledger output =
+  ComponentHash.stage_metadata_bytes ~max_bytes:max_owner_index_size
+    (owner_index_bytes ~binding ledger) output
+let read_owner_index ?(check_cancel=fun () -> ()) ~expected_manifest_sha256 ~binding
+    ~max_entries ~max_bytes ~load_entry file =
+  check_cancel ();
+  let size=SemanticFile.size file in
+  if size<80L || size>Int64.of_int max_owner_index_size then owner_invalid "index manifest input size";
+  let encoded=SemanticFile.read file 0L (Int64.to_int size) in
+  SemanticFile.check file;
+  let restored=restore_owner_index ~check_cancel ~expected_manifest_sha256 ~binding
+    ~max_entries ~max_bytes ~load_entry encoded in
+  SemanticFile.check file;check_cancel ();restored
+
+type owner_index_publication = { manifest_publication : ComponentHash.record_publication;
+  mutable manifest_attempted : bool }
+let prepare_owner_index_publication ~binding ledger ~directory ~stage ~temporary file =
+  let encoded=owner_index_bytes ~binding ledger in
+  let manifest_publication=ComponentHash.prepare_metadata_publication ~directory ~stage ~temporary
+    ~max_bytes:max_owner_index_size ~expected_sha256:(SemanticHash.string encoded) file in
+  {manifest_publication;manifest_attempted=false}
+let publish_owner_index publication directory stage =
+  if publication.manifest_attempted then owner_invalid "index publication already attempted";
+  publication.manifest_attempted<-true;
+  ComponentHash.publish_checkpoint_record publication.manifest_publication directory stage
+let owner_index_published publication=ComponentHash.record_published publication.manifest_publication
