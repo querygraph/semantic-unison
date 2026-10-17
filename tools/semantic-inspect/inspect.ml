@@ -55,10 +55,10 @@ let report extension path = function
       "preserved_sha256",quote (SemanticHash.hex d.preserved_digest);
       "editable_regions",array (List.map (fun (r:FormatExtension.region) ->
         object_ ["offset",Int64.to_string r.offset; "length",string_of_int r.length]) d.regions)] @ meanings extension proof)
-let inspect extension path =
+let inspect ~span_semantics extension path =
   let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
   Fun.protect ~finally:(fun () -> Unix.close fd) (fun () ->
-    SemanticFile.with_fd fd (SemanticDelta.inspect extension))
+    SemanticFile.with_fd fd (SemanticDelta.inspect ~span_semantics extension))
 let compare base target = match base,target with
   | Error reason,_ -> ["classification",quote "unavailable"; "fallback_reason",quote ("basis: " ^ reason)]
   | _,Error reason -> ["classification",quote "unavailable"; "fallback_reason",quote ("target: " ^ reason)]
@@ -66,6 +66,7 @@ let compare base target = match base,target with
     let classification = match SemanticDelta.classify ~base ~target with
       | FormatExtension.Exact_bytes -> "exact_bytes"
       | FormatExtension.Editable_metadata -> "editable_metadata"
+      | FormatExtension.Uninterpreted_regions -> "uninterpreted_regions"
       | FormatExtension.Other_bytes -> "other_bytes" in
     let fields = ["classification",quote classification] in
     (* This nonce is only for measuring the encoded plan. No envelope is emitted
@@ -78,8 +79,9 @@ let compare base target = match base,target with
         "request_bytes",string_of_int (String.length (SemanticDelta.encode_request
           ~nonce:(String.make 32 '\000') base))]
 let main () =
-  FormatExtension.register ~observer:DngSemantic.observer (module DngSemantic);
-  FormatExtension.register ~observer:DngExtended.observer (module DngExtended);
+  FormatExtension.register ~span_semantics:FormatExtension.Known_metadata ~observer:DngSemantic.observer (module DngSemantic);
+  FormatExtension.register ~span_semantics:FormatExtension.Known_metadata ~observer:DngExtended.observer (module DngExtended);
+  FormatExtension.register (module DngLayout);
   let selected = ref DngSemantic.profile and base = ref None and target = ref None in
   Arg.parse ["--profile",Arg.Set_string selected,"ID Compiled format profile";
              "--base",Arg.String (fun p -> base := Some p),"FILE Compare against a basis"]
@@ -90,10 +92,10 @@ let main () =
   let handle = match FormatExtension.resolve !selected with Some e -> e
     | None -> failwith ("unknown compiled profile: " ^ !selected) in
   let extension = FormatExtension.implementation handle in
-  let target = inspect extension path in
+  let target = inspect ~span_semantics:(FormatExtension.span_semantics handle) extension path in
   let fields = ["schema",quote "unison-semantic-inspect/1"; "target",report handle path target] in
   let fields = match !base with None -> fields | Some path ->
-    let base = inspect extension path in
+    let base = inspect ~span_semantics:(FormatExtension.span_semantics handle) extension path in
     fields @ ["basis",report handle path base] @ compare base target in
   print_endline (object_ (fields @ ["verification",quote
     "Supported inputs were fully read and SHA-256 hashed. This is a read-only observation, not a commit authorization or Adobe validation."]))

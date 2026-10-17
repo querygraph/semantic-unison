@@ -8,6 +8,8 @@ type supported = {
 type observation = Supported of supported | Unsupported of string * string |
                    Unavailable of string * string
 type classification = Exact_bytes | Metadata_only | Other_bytes | Unknown
+(** Metadata_only is a legacy region-byte classification, not proof of private
+    meaning, rendering equivalence or independence from unparsed references. *)
 val from_proof : ?meaning:(FormatExtension.observation, string) result -> SemanticDelta.proof -> observation
 val profile : observation -> string
 val classification : observation -> observation -> classification

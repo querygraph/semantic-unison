@@ -98,7 +98,7 @@ let extended_image_scalar tag typ = match tag with
   | 52554 | 52555 -> Some (typ = 4) (* JXLEffort, JXLDecodeSpeed *)
   | _ -> None
 
-let inspect_with_policy ~extended file =
+let inspect_with_policy ~extended ?(layout_only=false) file =
  try
   let size = SemanticFile.size file in
   let byte_order header = match String.sub header 0 2 with
@@ -191,12 +191,13 @@ let inspect_with_policy ~extended file =
       (match scalar with
        | Some valid when not valid || n <> 1L -> reject "invalid extended DNG scalar type or count"
        | _ -> ());
-      if not (allowed_tag kind tag || profile_pointer || scalar <> None) then
+      if not (layout_only || allowed_tag kind tag || profile_pointer || scalar <> None) then
         reject (Printf.sprintf "unsupported TIFF tag %d (opaque or private graph)" tag);
       let child = child_kind kind tag in
-      if (typ = 13 || (extended && typ = 18)) && child = None then
+      if not layout_only && (typ = 13 || (extended && typ = 18)) && child = None then
         reject "IFD type on non-pointer field";
-      if kind = CameraProfile && not (camera_profile_type tag typ) then
+      if kind = CameraProfile && (not layout_only || allowed_tag kind tag)
+         && not (camera_profile_type tag typ) then
         reject "unsupported camera profile field type";
       let width = match typ with
         | 1 | 2 | 6 | 7 -> 1 | 3 | 8 -> 2 | 4 | 9 | 11 | 13 -> 4
@@ -283,6 +284,10 @@ let inspect_with_policy ~extended file =
 
 let inspect file = inspect_with_policy ~extended:false file
 let inspect_extended file = inspect_with_policy ~extended:true file
+
+(* Geometry-only exact transfer: private contents remain part of complete and
+   complement hashes. This grants no pointer-independence or merge authority. *)
+let inspect_layout file = inspect_with_policy ~extended:true ~layout_only:true file
 
 let observer : FormatExtension.observer = {
   schema = "dng-xmp-property-encoding-v0";

@@ -26,7 +26,7 @@ let with_file path f =
   | result -> finish (); result
   | exception error -> finish (); raise error
 let extension = (module DngExtended : FormatExtension.S)
-let proof name path = with_file path (fun file -> ok name (SemanticDelta.inspect extension file))
+let proof name path = with_file path (fun file -> ok name (SemanticDelta.inspect ~span_semantics:FormatExtension.Known_metadata extension file))
 let manifest name path expected_offset expected_length =
   with_file path (fun file ->
     let direct = ok name (DngSemantic.inspect_extended file) in
@@ -101,7 +101,7 @@ let golden name base_path target_path request_path envelope_path stage =
     (name ^ ": unchanged metadata made data writes");
   (* Parsed classic containers eligible for both versions still cannot cross
      negotiated profile identity, even though their complete byte hashes agree. *)
-  with_file base_path (fun file -> match SemanticDelta.inspect (module DngSemantic) file with
+  with_file base_path (fun file -> match SemanticDelta.inspect ~span_semantics:FormatExtension.Known_metadata (module DngSemantic) file with
     | Error _ -> ()
     | Ok old ->
         check ((SemanticDelta.describe old).SemanticDelta.digest = (SemanticDelta.describe base).SemanticDelta.digest)

@@ -1,5 +1,5 @@
 val register : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
-  ?observer:FormatExtension.observer ->
+  ?observer:FormatExtension.observer -> ?span_semantics:FormatExtension.span_semantics ->
   (module FormatExtension.S) @ portable contended -> unit
 (** Owner-side startup registration for a trusted compiled profile and its
     independently negotiated wire capability. Call before feature negotiation.

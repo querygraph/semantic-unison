@@ -111,10 +111,12 @@ let execute job =
         (match job.operation with Recognize _ -> Recognized {formats;stats}
          | _ -> Identified {formats;fingerprint;stats})
       | Inspect extension ->
-        Inspected {proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
+        Inspected {proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
+          ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
       | Observe extension ->
-        let proof = SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit extension)
+        let proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
+          ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file in
         check_cancel ();
         let meaning = match proof with

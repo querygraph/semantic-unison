@@ -9,6 +9,17 @@ nested plugins and incremental refinement. These new composition/cache/profile
 contracts still require implementation and qualification; partial camera
 knowledge itself must not be relabeled as blocking the whole feature.
 
+The new [layout-only DNG exact profile](dng-layout-exact.md) now implements the
+first operation in that design: opaque private data no longer prevents exact
+donor reconstruction when span/layout/complement checks succeed. It has separate
+capability negotiation, local immutable interpretation annotations, unchanged
+strict merge/cache authority and full staged-target hash verification.
+[Actual source qualification](../tests/qualification/dng-layout-exact-source-actual-20261017.json)
+includes49checks per stock/Ox compiler, strict safety regressions, four full builds
+and the stock legacy kernel/inspector. New remote/mixed-version receiving, the
+pixel/metadata component forest, nested composition and incremental cache remain
+open; neither full-goal acceptance nor production camera qualification follows.
+
 The [opt-in production OpenSSL successor](../tests/qualification/openssl-production-backend-actual-20261017.json)
 now has opaque native contexts, a shared EVP implementation and Make/Dune
 configuration. Four stock/Ox Make/Dune OpenSSL builds plus a platform stock Dune

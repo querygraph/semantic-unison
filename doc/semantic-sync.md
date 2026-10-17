@@ -15,9 +15,13 @@ semanticdng = true
 semanticworkers = 0
 ```
 
-`semanticdng = true` enables both built-in DNG XMP profiles, preferring the
+`semanticdng = true` enables the built-in DNG profiles, preferring the
 extended `/1` profile when negotiated. To select one version only, use
 `semanticprofile = org.firstpair.dng-xmp/1` or `/0` explicitly.
+The separately negotiated [exact-layout fallback](dng-layout-exact.md),
+`org.firstpair.dng-layout/0`, now follows the strict profiles when enabled by
+the shorthand. It preserves opaque private data and verifies complete donor
+bytes without claiming private grammar, semantic merge or pixel equivalence.
 `semanticworkers = 0` selects physical cores on macOS, falling back to available
 logical CPUs on other platforms or if topology is unavailable. A positive
 integer sets a per-process budget shared by semantic workers and validators.

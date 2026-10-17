@@ -7,6 +7,39 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest partial-knowledge transfer implementation: DNG layout profile
+
+`DngLayout` org.firstpair.dng-layout/0 /dng-layout-exact-v0 isimplemented as a
+separatelynegotiatedfallback afterstrict1/0 foroptinsemanticdng. Defaultoff stays.
+The existingboundedDNGwalk nowhasexplicitlayout_only policy: typedunknown/private
+declaredvalueextents acceptedwithoutinterpretinghiddenpointers; all complement
+andfullfilebytes hash-covered. Strictprofiles unchanged, noMakerNoteSafetybypass.
+Exactplan/materializer stillsameprofile/size/layout/complement+basis/stagecheck+
+fullactualdonorSHA. No reloc/ignore/merge/semantic-equivalence authority inferred.
+Existingreconcile/cache paths explicitlyonly0/1; no newlayoutentrythere.
+
+ImmutableFormatExtension.span_semantics defaultsOpaque_spans; strictbuiltins
+explicitKnown_metadata. Workersconsumefrozenhandleannotation; peerdecodedproof
+alwaysOpaque. No wire/archiveencodingchange. CoreclassifyUninterpreted_regions
+separateslayoutconfinementfromKnownmetadata; inspector/ownerreportcoveragewarning
+updated. Existingstandalone strictclassificationfixtures explicitlylabeltheir
+knownmetadata contract. Fullheader/modefilter/Make+Dune integration qualified.
+
+Actualfocusedowner93568/7dddd6/0/no session,43containedmodefilter/compiler/runtime
+calls:49layoutchecks/compiler +oldstrict4scalar/8private safetychecks/compiler.
+Classic+BigTIFF/bothorders, opaqueLONG/IFD-shapedrefsintoXMP, exactdonorstageSHA,
+opaquechangefallback, corrupttargetSHArefusal, noop0writes, nomergeauthority.
+Actualfourfullbuildowner74559/0d2fc9/0/no session; stock/Ox Make+Duneallpassed,
+1864capturedsourcehashchecks/currentbinarypins match, allgroups/CPU8closed.
+Stocklegacykernel+read-onlyinspector actual52614/ebaacf/0 passed; no conformance/
+fuzz campaign/SDK/camera/EXIO. Qualification
+`tests/qualification/dng-layout-exact-source-actual-20261017.json`6984B
+SHAf44cbccabc3dde2357051b71559789f6d6697a0592746416657eae64c05b1e35.
+Usage/scope `doc/dng-layout-exact.md`. ThisdoesNOTyetimplementpixelcomponentforest,
+nestedchildplugins orincrementalcache. Those and newremote/mixed-version/fault/
+separatelyadmittedcamera receivingqualification remainnext, notexhaustiveprivate-
+fieldgating. NoactiveUnisonowner/currentresourcehold/newpayloadgrant.
+
 ## Latest hash production successor: opt-in EVP with Make/Dune qualification
 
 Opaqueproductionnativecontext +shared `src/semanticHash_evp.h` nowimplemented.

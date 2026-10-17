@@ -8,7 +8,7 @@ let with_file path f =
   let fd = Unix.openfile path [Unix.O_RDONLY] 0 in
   match SemanticFile.with_fd fd f with
   | x -> Unix.close fd; x | exception e -> Unix.close fd; raise e
-let proof path = with_file path (fun f -> ok (SemanticDelta.inspect (module DngSemantic) f))
+let proof path = with_file path (fun f -> ok (SemanticDelta.inspect ~span_semantics:FormatExtension.Known_metadata (module DngSemantic) f))
 let put b little off width value =
   for j = 0 to width-1 do
     let i = if little then j else width-1-j in
@@ -90,7 +90,7 @@ let test_sparse_metadata_writes () =
   let bytes = String.make 35000 'A' in
   let target = Bytes.of_string bytes in Bytes.set target 5 'B'; Bytes.set target 25000 'C';
   write "multi-base" bytes; write "multi-stage" bytes; write "multi-target" (Bytes.to_string target);
-  let get path = with_file path (fun f -> ok (SemanticDelta.inspect (module Multi) f)) in
+  let get path = with_file path (fun f -> ok (SemanticDelta.inspect ~span_semantics:FormatExtension.Known_metadata (module Multi) f)) in
   let base = get "multi-base" in
   let plan = ok (SemanticDelta.plan ~nonce:(String.make 32 'w') ~base ~target:(get "multi-target")) in
   let output = Unix.openfile "multi-stage" [Unix.O_RDWR] 0 in
@@ -132,7 +132,7 @@ let () =
   let check_cancel () = incr checks;
     if !checks > 2 then failwith "oversized declaration reached core proof reads" in
   error (SemanticFile.with_fd ~check_cancel file (fun file ->
-    SemanticDelta.inspect ~max_payload:(FormatExtension.payload_limit limited)
+    SemanticDelta.inspect ~span_semantics:FormatExtension.Known_metadata ~max_payload:(FormatExtension.payload_limit limited)
       (FormatExtension.implementation limited) file));
   Unix.close file;
   require (!checks = 2) "payload declaration was not checked before proof reads";

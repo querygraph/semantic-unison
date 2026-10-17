@@ -205,6 +205,10 @@ let render ~left_label ~right_label left right =
     | Metadata_only -> "Classification: editable metadata differs; all bytes outside those regions match."
     | Other_bytes -> "Classification: other bytes or the editable-region layout differ."
     | Unknown -> "Classification: unavailable; the two files cannot be equated by this observation.");
+  (match FormatExtension.resolve (profile left) with
+   | Some handle when FormatExtension.span_semantics handle = FormatExtension.Opaque_spans ->
+       add "Knowledge: layout-only byte regions; private meaning and references may remain unknown."
+   | _ -> ());
   add "This compares the observed current files, without an archived base. Metadata can affect presentation; no rendering equivalence or conflict resolution is inferred.";
   (match left,right with
    | Supported {meaning=Some (Ok a);_},Supported {meaning=Some (Ok b);_} when a.schema=b.schema ->

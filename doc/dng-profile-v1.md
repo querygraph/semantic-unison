@@ -51,7 +51,8 @@ optional receiving-file Adobe validation remains a separate policy.
 ## Negotiation and tools
 
 The compiled `DngExtended` wrapper registers capability `dng-xmp-v1` separately
-from v0. `semanticdng` selects v1 before v0 locally. Explicit `semanticprofile`
+from v0. `semanticdng` selects v1 before v0 locally, then offers the separately
+negotiated [layout-only exact fallback](dng-layout-exact.md). Explicit `semanticprofile`
 selection retains its exact chosen IDs. Before preference propagation, the
 client expands the shorthand into locally known IDs and sends only IDs whose
 capabilities are in the final feature intersection. The outgoing shorthand

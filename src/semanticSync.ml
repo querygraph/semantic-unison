@@ -46,10 +46,10 @@ let try_local ~source ~basis ~directory ~staging =
             let extension = FormatExtension.implementation handle in
             let max_payload = FormatExtension.payload_limit handle in
             let planned = SemanticFile.with_fd basis_fd (fun base_file ->
-              match SemanticDelta.inspect ~max_payload extension base_file with
+              match SemanticDelta.inspect ~max_payload ~span_semantics:(FormatExtension.span_semantics handle) extension base_file with
               | Error reason -> Error reason
               | Ok base -> with_file source (fun source_file ->
-                match SemanticDelta.inspect ~max_payload extension source_file with
+                match SemanticDelta.inspect ~max_payload ~span_semantics:(FormatExtension.span_semantics handle) extension source_file with
                 | Error reason -> Error reason
                 | Ok target -> SemanticDelta.plan ~nonce:(String.make 32 '\000') ~base ~target)) in
             match planned with Error _ -> select rest | Ok _ -> planned in

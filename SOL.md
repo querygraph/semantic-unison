@@ -134,6 +134,20 @@ a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
 
+The first gradual-understanding transfer successor is now implemented:
+[DNG exact-layout profile](doc/dng-layout-exact.md), capability
+`dng-layout-exact-v0`, preserves opaque private bytes while reconstructing the
+actual donor exactly. Opt-in `semanticdng` prefers strict1/0 before this fallback;
+default behavior remains off. Immutable local span-interpretation annotations
+and an uninterpreted-region classification prevent a layout claim from becoming
+semantic merge authority. Existing strict merge/cache whitelists remain intact.
+[Source/build/kernel evidence](tests/qualification/dng-layout-exact-source-actual-20261017.json)
+records stock/Ox49checks each, strict-profile safety regressions, four Make/Dune
+builds and the stock legacy kernel/inspector. It does not yet prove new remote
+receiving, camera/corpus deployment, the separate pixel hash forest, nested
+child-plugin composition or incremental cache; these remain implementation and
+qualification work under the design above.
+
 Latest real-SDK successor **PASSED/CLOSED**:
 [four-call stock/Ox unchanged-file qualification](tests/qualification/all-scanned-sdk-v2-actual-20261017.json).
 Actual parent unified-exec process98564 completed0, worker11084reaped0,

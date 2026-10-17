@@ -12,7 +12,7 @@ import tempfile
 
 ROOT = Path(__file__).resolve().parents[2]
 MODULES = ['semanticHash', 'semanticFile', 'formatExtension', 'xmpObservation', 'xmpMerge',
-           'dngSemantic', 'dngExtended', 'semanticDelta']
+           'dngSemantic', 'dngExtended', 'dngLayout', 'semanticDelta']
 SOURCES = [Path('src') / (name + suffix) for name in MODULES for suffix in ('.ml', '.mli')]
 SOURCES += [Path('src/semanticHash_stubs.c'), Path('src/semanticFile_stubs.c'),
             Path('tools/semantic-inspect/inspect.ml')]

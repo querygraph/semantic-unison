@@ -30,7 +30,7 @@ let transform version path =
   if (not interface && Filename.extension name<>".ml") ||
      not(List.mem component ["semanticHash";"semanticFile";"semanticMailbox";"wholeFileClone";"validationSnapshot";
        "formatRecognition";"dngRecognition";"formatExtension";"xmpObservation";
-       "xmpMerge";"dngSemantic";"dngExtended";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
+       "xmpMerge";"dngSemantic";"dngExtended";"dngLayout";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
   then invalid_arg "unqualified mode-filter module";
   if not(is_ox version) then source
   else if component="semanticFormats" then
@@ -75,7 +75,7 @@ let transform version path =
       let owner_declarations = match component with
         | "formatExtension" -> [
           "val resolve : string -> handle option";
-          "  ?observer:observer -> (module S) @ portable contended -> unit";
+          "  ?observer:observer -> ?span_semantics:span_semantics -> (module S) @ portable contended -> unit";
           "val find : string -> (module S) option @ contended";
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
