@@ -65,6 +65,22 @@ let private_fragment specs =
     | item::rest -> match visit remaining depth item with
       | None -> None | Some remaining -> children remaining depth rest in
   match children 1024 0 specs with Some _ -> true | None -> false
+let private_decoder (original:ComponentHash.plugin) =
+  {original with ComponentHash.decode=(fun reader ->
+    match original.decode reader with
+    | Error reason -> Error reason
+    | Ok children -> if private_fragment children then Ok children
+      else Error "private decoder fragment role/count/depth refused")}
+let replace_private_view session snapshot ~component ~expected_schema decoder =
+  match find component (ComponentHash.root snapshot) with
+  | None -> Error "private replacement target absent"
+  | Some node when node.schema<>expected_schema -> Error "private replacement old contract changed"
+  | Some node when node.role<>ComponentHash.Private_metadata && node.role<>ComponentHash.Opaque ->
+    Error "replacement target is not private or opaque"
+  | Some node ->
+    let pending=if node.children=[] then snapshot else
+      ComponentHash.reset_private_view session snapshot ~component ~schema:"uninterpreted-private/0" in
+    ComponentHash.apply_plugin session pending ~component (private_decoder decoder)
 let with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded callback =
   match describe file with
   | Error reason -> Error reason
@@ -89,12 +105,7 @@ let with_snapshot ~decoders ~max_read_bytes file callback =
         | Some node when node.role<>ComponentHash.Private_metadata && node.role<>ComponentHash.Opaque ->
           retained (Unsupported "target is not private or opaque")
         | Some _ ->
-          let original=binding.decoder in
-          let decoder={original with ComponentHash.decode=(fun reader ->
-            match original.decode reader with
-            | Error reason -> Error reason
-            | Ok children -> if private_fragment children then Ok children
-              else Error "private decoder fragment role/count/depth refused")} in
+          let decoder=private_decoder binding.decoder in
           match ComponentHash.apply_plugin session snapshot ~component:binding.component_id decoder with
           | Error reason -> retained (Unsupported reason)
           | Ok refined -> refined,outcome Refined::outcomes

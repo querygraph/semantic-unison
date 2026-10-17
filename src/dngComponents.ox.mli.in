@@ -37,3 +37,14 @@ val with_checkpoint : expected_checkpoint_sha256:string -> max_read_bytes:int64 
     not an assertion that current decoder implementations approve them. Decoder
     provenance selection/invalidation and persistent storage remain owner duties.
     No peer authority, automatic decoder invocation or IO-free restore. *)
+
+val replace_private_view : ComponentHash.session -> ComponentHash.snapshot ->
+  component:string -> expected_schema:string -> ComponentHash.plugin ->
+  (ComponentHash.snapshot, string) result
+(** Explicit compare-and-replace of one private view. The old schema must match;
+    the replacement is bounded to private/opaque/structural children. On an
+    unsupported decoder result, no replacement snapshot is published and the
+    caller retains its original view. Operational errors propagate. Success
+    rereads only the target span plus decoder reads, preserves unrelated nodes
+    and recomposes ancestors. Descendant views under that target are replaced;
+    owners must reselect their bindings. No automatic persistence or peer trust. *)

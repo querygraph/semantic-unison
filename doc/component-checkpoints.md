@@ -104,3 +104,11 @@ It preserves historical private refinements for explicit owner invalidation; it
 does not silently mark them approved by the current decoder registry. Description
 reads are additional to the core's declared hash/refinement budget. No persistent
 store, automatic worker cache selection or epoch-only reuse is implemented here.
+
+`DngComponents.replace_private_view` performs an explicit immutable replacement:
+match the expected old schema, invalidate the target locally, run the guarded
+decoder and return a new view only on success. Unsupported results leave the
+original view available; operational errors propagate. Descendants of the target
+must be reselected afterward. Unrelated pixel/metadata nodes remain unchanged.
+This supplies localized version replacement, not an automatic decoder registry
+comparison or durable publication transaction.

@@ -7,6 +7,14 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Private decoder replacement now has an explicit DNG API with expected-old-schema
+guard, immutable success-only publication and shared private-fragment validation.
+Stock/Ox94DNGchecks each/58calls passed, including stale/unsupported retention,
+historical-view preservation and localized130B replacement after8192B restore.
+Actual91068/d77ad7/0; worker19920reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-private-replacement-actual-20261017.json`. No media/SDK/EXIO;
+automatic registry comparison/store integration and successor full builds remain.
+
 DNG checkpoint restore is now connected through `DngComponents.with_checkpoint`:
 fresh bounded DNG description, owner-authenticated metadata/full-input verification,
 current base-partition validation, then live callback. Historical private views

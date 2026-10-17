@@ -113,12 +113,29 @@ let () =
        ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint,
        ComponentHash.projection refined ComponentHash.Encoded_pixels,ComponentHash.layout_sha256 refined) with
      | Ok value -> value | Error reason -> failwith reason in
-   (match DngComponents.with_checkpoint ~expected_checkpoint_sha256:digest ~max_read_bytes:8192L
+   (match DngComponents.with_checkpoint ~expected_checkpoint_sha256:digest ~max_read_bytes:8435L
      file encoded (fun session snapshot ->
        check(ComponentHash.projection snapshot ComponentHash.Encoded_pixels=pixels)
          "DNG restored pixels differ";
        check(ComponentHash.layout_sha256 snapshot=layout) "DNG historical private view differs";
        check(ComponentHash.bytes_requested session=8192L) "DNG restore full verification budget";
+       let schema=parent.id^"@"^SemanticHash.hex parent.implementation_sha256 in
+       check(match DngComponents.replace_private_view session snapshot ~component:private_id
+         ~expected_schema:"stale/0" parent with Error _ -> true | _ -> false)
+         "stale private replacement accepted";
+       check(match DngComponents.replace_private_view session snapshot ~component:private_id
+         ~expected_schema:schema unsupported with Error _ -> true | _ -> false)
+         "unsupported replacement published";
+       check(ComponentHash.layout_sha256 snapshot=layout && ComponentHash.bytes_requested session=8192L)
+         "failed replacement mutated old view or read bytes";
+       let replacement={parent with implementation_sha256=SemanticHash.string "replacement/2"} in
+       let updated=match DngComponents.replace_private_view session snapshot ~component:private_id
+         ~expected_schema:schema replacement with Ok value -> value | Error reason -> failwith reason in
+       check(ComponentHash.layout_sha256 updated<>layout && ComponentHash.layout_sha256 snapshot=layout)
+         "successful replacement lost provenance or mutated old view";
+       check(ComponentHash.projection updated ComponentHash.Encoded_pixels=pixels)
+         "private replacement changed pixels";
+       check(ComponentHash.bytes_requested session=8322L) "private replacement read unrelated bytes";
        let pending=ComponentHash.reset_private_view session snapshot ~component:private_id
          ~schema:"uninterpreted-private/0" in
        check(ComponentHash.projection pending ComponentHash.Encoded_pixels=pixels)
