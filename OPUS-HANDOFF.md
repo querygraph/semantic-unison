@@ -30,6 +30,22 @@ Future SDK plan explicitly enables this opt-in diagnostic; parent/worker join it
 No SDK/retainedcamera/EXIO/nativeUI was invoked by this turn. Future SDK executor,
 admission/prefix/FD verification join and real remote run still outstanding.
 
+Outer metadata/failed-prefix checkpoint: `all_scanned_sdk_boundary.py` validates
+the exact finite packet, qualified interpreter/compiler labels, authenticated
+build/tool manifests, copied transport pins and readonly private source metadata.
+`checked_plan` rechecks each captured production source hash; executable hashes
+are deliberately left for after IO acquisition. Its bounded document reader uses
+the qualified close carrier, including original parse failure + uncertain close.
+`all_scanned_sdk_prefix.py` independently audits known failed prefixes without
+inventing helper absence or parent/FD closure; contradictory baseline input
+records and incomplete helper pairs refuse. Neither function grants admission.
+Fifty-nine current inert controls actualb4a9a6/0/no session passed, child/group
+and CPU8 closed; no SDK/CLI/camera/EXIO. Receipt
+`tests/qualification/all-scanned-sdk-boundary-actual-20261017.json`.
+The dispatcher/CLI route, inherited9FD controls and fresh parent verification join
+are still NOT wired. Next implement those before freezing a runtime request;
+no actual all-scanned SDK admission exists and no old grant may be reused.
+
 ## Current checkpoint — all-scanned scope implemented
 
 Opt-in `adobevalidatescope = all-scanned` is wired through the existing find RPC,

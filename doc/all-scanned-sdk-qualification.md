@@ -111,6 +111,29 @@ Remote owner-prefix behavior and actual Adobe validation still require the fresh
 outer executor/admission and runtime audit; generated local records do not replace
 that qualification. The original kernel/data-source reservations remain unchanged.
 
+Outer boundary and failed-prefix audit are now source-qualified components:
+`all_scanned_sdk_boundary.py` reads bounded owned metadata documents with exact
+SHA/epoch fences and qualified close uncertainty. It validates typed fixed limits,
+source readonly0400/eight-field identity, compiler/tool/build bindings and copied
+transport pins. Its checked preflight rehashes the production source inventory;
+binary/SDK/interpreter executable hashes must still be checked after IO acquisition.
+This preflight never opens the source payload or starts a tool. Build receipts
+establish build success; they do not invent application selftest results.
+
+`all_scanned_sdk_prefix.py` joins known failed attempted calls to independent raw
+proxy frames, exact command/order and helper waits/groups. Missing/partial helper
+records and possible intents cannot become known failure closure. Even off-phase
+input evidence contradicts a zero-helper claim. Its result remains expressly
+without aggregate/FD release authority. The dispatcher must authenticate these
+inputs and join actual worker exit, inherited grants and fresh verification.
+
+Fifty-nine controls actualb4a9a6/0/no session passed with contained child/group and
+Unison8 closed. Evidence `tests/qualification/all-scanned-sdk-boundary-actual-20261017.json`.
+All build/tool/source records were inert test metadata; close uncertainty used an
+original injected error with exact pre-close identity/original-cause assertions.
+No CLI, SDK, camera or EXglobal ran. A dispatcher route, owned CLI entry and actual
+inherited-descriptor qualification are still required before a runtime request.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under

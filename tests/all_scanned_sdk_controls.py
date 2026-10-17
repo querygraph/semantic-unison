@@ -13,6 +13,8 @@ if __name__ == '__main__':
         'all_scanned_sdk_verify_test',
         'all_scanned_sdk_worker_verify_test',
         'all_scanned_sdk_paths_test',
+        'all_scanned_sdk_prefix_test',
+        'all_scanned_sdk_boundary_test',
         'invocation_journal_test',
     ])
     result = unittest.TextTestRunner(verbosity=2).run(suite)
