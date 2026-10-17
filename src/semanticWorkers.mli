@@ -13,6 +13,11 @@ type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
 type recognition = { formats : string list; stats : Unix.LargeFile.stats }
+type component_summary = { full_sha256 : string; layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+  refinements : DngComponents.outcome list; hash_bytes_requested : int64 }
+type component_inspection = { components : (component_summary, string) result;
+                              stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
@@ -109,3 +114,16 @@ val reconcile_xmp : t -> HelperSupervisor.cancellation -> extension:FormatExtens
     is borrowed. No output writes or commits occur. Cancellation, descriptor
     settlement and CPU ownership follow [inspect]; conflicting metadata returns
     an explicit Error in [merge_plan], never an automatic fallback merge. *)
+
+val components : t -> HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> component_inspection option Lwt.t
+(** Explicit read-only component hashing and frozen private-decoder refinement.
+    Same descriptor/domain/CPU/filesystem admission, cancellation and settlement
+    rules as [digest]. The owner must retain immutable input access until settled;
+    epoch checks alone are not hostile-writer exclusion. Only compact immutable
+    observations cross the completion mailbox: no session, reader or snapshot
+    capability escapes. The read budget counts component/decoder requests;
+    preceding bounded DNG geometry reads are additional and appear in an enabled
+    read observer. Unsupported format returns [components=Error _]; operational
+    and budget errors fail the job, never become unsupported or no-match. No
+    archive, persistent reuse, transfer, rendering or publication authority. *)
