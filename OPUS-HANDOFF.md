@@ -7,6 +7,50 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Authoritative user steering: gradual nested knowledge, deployable partial coverage
+
+User explicitly directs a hierarchy: standardmetadata/pixels first, MakerNotes
+learned piecemeal, plugins inside DNG and nested/community subplugins. They then
+confirmed separatepixel+metadatahashing is already a deployment win; incomplete
+smallerfields mustNOT globally blockdeployment. SOL.md now contains the normative
+design: componenthashforest+fullfilehash, opaqueatoms exact/preserved/identity-
+participating, per-operation authority, incrementalrefinement/cachedependency
+invalidation/lazyboundedrehash withvalidsnapshotbindings. Cannotderivechildhash
+fromparentSHA or silentlyignoreunknownfield. CompleteMakerNotegrammar isNOT a
+globaldeploymentgate. Strongerignore/merge/relocation capabilities still require
+their scopedcontracts. Existingprofilesunchanged; implementation remainsopen.
+Expanded architecture/currentSDEmapping `doc/gradual-camera-understanding.md`.
+PhotoRoot consultationrequested userexplicitly viaqueues01a14797-40b2 and
+01a14798-408d, updateduserdirection01a1479a-52e7; feedbacknotyetreceivedatwriting.
+Do not inventRootagreement or makethisconsultation anewapprovalgate.
+
+## Latest camera ACTUAL: model candidate X2D 100C, nine-byte grant consumed
+
+FreshRootadmissiondc44e5ec (2900B) wasfound/revalidated againstfrozenrequest16pins,
+plan/prereqs/interpreter/source8fields/deadline/unusedworkspace, dispatchedONCE.
+Actualexec_command a6a4ce/exit0/NOsession, owner15830/worker15831,
+START1792202424.824716. Exactlyone9bytepread absolute11440:
+583244203130304300 => `X2D 100C`. Workerreaped0/othersabsent/CPU8EXclosed,
+source16postpins/epochunchanged. NoSDK/sourcehash/copy/Photooriginal/serialfields.
+Rawmodeltext narrowsfamilyinvestigation; vendorheader/privategrammar/reference
+closure/semanticeligibility remainFALSE. Source/finalhash hierarchy above means
+thisgrammaruncertainty neednotblockindependentlyqualifiedpartialcoverage.
+Actualterminal immediatelyqueued01a14796-f48b toreleasecoordination. Seal
+`tests/qualification/private-maker-model-actual-20261017.json`2831B
+SHA47363cb0893502338e505f253c67ad93d7b7774a8de6dde63f276041f008fded;
+workspaceOWNERRETURN2500B SHA72cec0b75180f05cc2adab2ca0634dfa1673050651cefd8dfa1d76ebf715f2c3.
+No replay; olderprepared/unadmittedsectionbelow is historicalsameconsumedrun.
+
+Parallel source WIP (not partofcamerarequest16pins): productionhashinternalstate
+nowopaque, opt-in UNISON_SEMANTIC_HASH_OPENSSL branch andsharedEVPheader prepared;
+defaultCommonCrypto/reference behaviorretained. ActualselectedOpenSSL controls
+session35420/839063/0 anddefaultplatform controls77359/5103e3/0 closed; each8
+containedcompile/runtimecalls incl2expectedOxnegativecompilations. Theseuse
+actualproductionSemanticHash objects+commonheader, stock/Ox15vectors andprivate
+domainchecks. No shippingMake/Dunebuild/backenddiscovery/nonApplequalification
+yet. Sourcechangescurrentlyuncommitted intentionallyseparatefromuserdesigndoc;
+nextgoalturn mustfinish/review/versionthem, notclaimshippedbackend. Noactiveowner.
+
 ## Latest camera source successor: nine-byte model-field investigation
 
 Prepared, NOT ADMITTED/DISPATCHED: `doc/private-maker-model-request-v1.json`

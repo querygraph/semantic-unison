@@ -2,7 +2,146 @@
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
 
+## Design steering — gradual understanding and incremental semantic hashing
+
+**User direction, 2026-10-17:** separating pixels from standard metadata is
+already a valuable deployable baseline. Exhaustively interpreting every byte
+of every camera format is neither a prerequisite nor a realistic completion
+criterion. Incomplete mapping of smaller private fields must not hold up the
+whole feature. Preserve those fields, hash them conservatively, and progressively
+refine their interpretation as evidence becomes available. This supersedes any
+older wording that treats complete MakerNote understanding as a global
+deployment gate. It does not assert that the implementation below is already
+qualified for deployment.
+
+### Nested, composable format knowledge
+
+The core owns exact byte coverage, bounds, hashes, resource budgets, verified
+materialization and publication. A DNG plugin owns standard TIFF/DNG structure
+and delegates bounded subdomains to children: private-wrapper plugin → vendor/
+family/version plugin → nested structure or field plugin. Community extensions
+and our own piecemeal findings use the same contract. Locally selected immutable
+plugin snapshots are frozen before worker dispatch; no peer-delivered code,
+automatic installation, mutable worker registry or implicit subprocess access.
+
+Knowledge has independent dimensions: region geometry, interpretation, reference
+rules, stability/category policy and validation evidence. Do not collapse these
+into one camera-understood/semantic-eligible Boolean. A child can refine a
+parent's opaque region without having to explain unrelated siblings. Every byte
+remains covered; unrecognized fields, gaps and private structures become opaque
+atoms with exact digests and preservation constraints. Unknown does not mean
+absent, ignorable or unstable. A small field may still affect rendering or
+references; its size is not permission to discard it.
+
+The parent checks child bounds, incompatible claims, aliases, address spaces,
+shared recursive budgets and graph limits. Physical atoms form a canonical byte
+partition; semantic views may explicitly overlay it. Children cannot silently
+remove a preservation obligation or enlarge the reader's authority. Start with
+trusted compiled modules or a constrained declarative schema; this contract is
+not a sandbox for arbitrary native community code.
+
+### Separate hash components, useful before complete private decoding
+
+Retain the exact full-file hash alongside a versioned component-hash forest:
+
+| Component | Initial interpretation and hashing contract |
+|---|---|
+| Pixels | Delineated encoded pixel units, logical ordering/geometry and encoding identity; distinguish raw image, previews and thumbnails |
+| Standard metadata | Known TIFF/DNG/EXIF/XMP fields, with separate descriptive, rendering, identity and workflow views where justified |
+| Private metadata | Recognized child-plugin fields plus exact opaque atoms for everything not yet mapped |
+| Layout / residual bytes | Structural bytes, placement constraints and otherwise unclaimed bytes; retained and hash-covered |
+
+An encoded-pixel digest is not a decoded-pixel/rendering-equivalence claim.
+Calibration, CFA, orientation and other rendering inputs remain separately
+represented dependencies. Unknown atoms participate conservatively in identity
+and change reports. We can report "same encoded pixels; metadata differs;
+private interpretation incomplete" without suppressing the byte difference or
+claiming the images render identically.
+
+Component hashes use explicit domain separation, typed/length-delimited canonical
+encoding and versioned semantics. Physical placement belongs in the layout view;
+content views use declared logical identities rather than accidentally making
+every semantic pixel digest depend on its current file offset. A meaningful
+comparison identifies its hash schema, parser/child contract versions and
+projection policy, not just an untyped digest string.
+
+### Rehashing is incremental refinement, not a new full-file project
+
+Adding a subplugin can split one opaque atom into smaller known/unknown children,
+add named interpretations or revise an explicitly versioned stability policy.
+Invalidate that component and its dependent parent/view roots, not unrelated
+pixel or metadata components. Recompose roots deterministically from cached
+child digests. Keep prior schema roots/provenance for compatibility and audit;
+never silently reinterpret a previously stored semantic identity.
+
+A hash of an opaque parent cannot yield hashes of newly discovered children.
+Read the affected bytes once under the normal IO budget, or use an already
+qualified retained-byte cache. Reuse unaffected pixel hashes only with a valid
+snapshot/epoch and dependency binding, or an independently verified preservation
+proof from our own exact transformation. An unexplained external change to the
+source epoch invalidates reuse; timestamps alone are not universal content proof.
+Incremental composition is a logical-work property, not an unmeasured claim that
+the filesystem performed no physical reads.
+
+Rehash lazily/on demand or in bounded background work, with per-component cache
+keys including input binding, region/logical identity, decoder/schema version,
+policy version and dependency digests. A new MakerNote decoder must not force
+retransfer of unchanged files, rehash of already verified pixels, or an eager
+whole-corpus migration merely to begin using its more precise view. Existing
+archives and ordinary exact transfer continue functioning while refinement is
+pending. Peers negotiate the operation/hash projection they share; missing child
+knowledge falls back to an opaque atom or exact transfer, rather than requiring
+identical complete plugin collections.
+
+### Gate the operation, not deployment on total camera knowledge
+
+The deployable baseline is standard metadata/pixel delineation plus opaque
+preservation and exact integrity. Deploy it when its own correctness, ownership,
+compatibility and failure checks pass; do not wait for complete MakerNote
+coverage. Additional interpretation unlocks additional narrowly scoped behavior.
+
+In particular, same-layout accelerated receiving can reconstruct the **actual
+donor's exact bytes**, retaining opaque private regions in place. Bound the
+source/basis, size and spans; verify the complement and independently verify the
+complete staged-file hash against the donor before publication. Hidden private
+references then cannot make the result differ from an ordinary exact copy.
+They need not all be understood for this operation. Current SDE already has
+these full-target-hash mechanics; a new layout-only profile must explicitly
+separate span confinement from a claim about understood metadata semantics.
+
+Ignoring a difference, assigning a stable semantic projection that excludes a
+field, relocating referenced bytes, or synthesizing a three-way merged target
+requires the corresponding dependency/meaning contract. Lack of that contract
+limits **that operation or view**, not the entire camera/plugin/deployment.
+Optional SDK/decode validation remains a separately reported policy and does not
+turn incomplete field knowledge into a complete semantic proof. Existing
+profiles0/1 and their reconciliation authority remain unchanged until a
+separately qualified successor is implemented.
+
+Implementation sequence: common typed knowledge/region and hash-component
+contracts; bounded nested composition with opaque fallbacks; a layout-only exact
+DNG delta profile; incremental component caches and versioned rehash; then
+progressively qualified vendor/field modules and stronger scoped operations.
+Original synthetic fixtures and representative retained-camera controls should
+prove partial coverage, unknown-byte preservation, localized invalidation,
+cross-version fallback, hidden-reference exact reconstruction and bad-hash
+publication refusal. Full vendor coverage is not a test-suite completion gate.
+
+The expanded design, current-code mapping and Photo consultation are in
+[gradual camera understanding](doc/gradual-camera-understanding.md). The latest
+bounded model observation reads `X2D 100C`; it is a lead for a child plugin, not
+a reason to make all other cameras or fields wait.
+
 ## Current checkpoint — opt-in all-scanned validation
+
+Latest real-SDK successor **PASSED/CLOSED**:
+[four-call stock/Ox unchanged-file qualification](tests/qualification/all-scanned-sdk-v2-actual-20261017.json).
+Actual parent unified-exec process98564 completed0, worker11084reaped0,
+all client/server/supervisor/helper groups and CPU8/EXglobal closed. Four actual
+single-thread SDK calls reported valid raw digests, successful decode, errors0,
+warnings0. This supersedes the historical "not real SDK" status of the narrower
+007/006 checkpoints below; it is still one retained-camera case, not corpus,
+pixel/rendering, private-grammar, performance or production deployment evidence.
 
 Latest007 [private-input qualification](tests/qualification/all-scanned-input-current-actual-20261017.json)
 adds opt-in owner-context path records joined to helper hash/PID and private stage
