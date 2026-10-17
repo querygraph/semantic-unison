@@ -132,6 +132,35 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### UDI/0 owner entry
+
+The immutable owner entry codec is implemented in DngComponents. Make an entry
+from a trusted captured checkpoint and its complete outcome inventory, with exact
+caller-selected root/path and raw32-byte generation digest. Refined target schemas
+and private-only subtrees are checked against the checkpoint. Entry load requires
+the previous trusted whole-entry digest; hashing unknown bytes at load does not
+establish that provenance. `checkpoint_for_owner_entry` authenticates UCR/0 record
+bytes and cross-checks checkpoint/input digests plus the saved decoder inventory.
+The entry and checkpoint are immutable portable metadata, never live input proof.
+
+At most128KiB. Framing: eight-byte `55 44 49 00 00 00 00 00`; length-prefixed root
+and path (nonempty/NUL-free, at most4096 bytes each); generation and input digests
+(raw32 each); outcome count (at most64); ordered outcomes; checkpoint and record
+digests (raw32 each). Each outcome is length-prefixed target ID (at most256),
+decoder ID (at most128), raw32 implementation digest, status byte0 unmatched/
+1 unsupported/2 refined, with a length-prefixed reason (at most1024) only for1.
+Lengths/counts are nonnegative eight-byte big-endian integers. Inventory identities
+are unique and checked; trailing, truncated and noncanonical bytes refuse.
+The UCR/0 binding is SHA256 of `unison-dng-owner-binding/0` plus NUL and this UDI/0
+prefix through the inventory. The separately trusted entry digest covers the
+complete entry including record references. No executable decoder is serialized.
+`ComponentHash.checkpoint_root` supplies bounded historical metadata for these
+consistency checks; it does not verify current input or create a live session.
+
+This implements an index entry, not the managed index namespace, lookup selection,
+quota or archive-generation choice. Those remain owner responsibilities; an entry
+does not grant publication, receiving or reconciliation authority.
+
 `SemanticWorkers.refresh_components` now runs restore and decoder-inventory
 refresh together under the existing coordinated worker lifecycle. Its immutable
 summary includes reused and invalidated component IDs and optional new checkpoint

@@ -60,6 +60,8 @@ val checkpoint_sha256 : checkpoint -> string
     capabilities. Call while the snapshot's original session is live. Retain the
     digest in trusted owner state authenticated to that extraction; computing a
     digest from arbitrary peer/cache bytes is NOT equivalent provenance. *)
+val checkpoint_root : checkpoint -> node
+(** Bounded historical metadata only; no live input or session authority. *)
 val checkpoint_record : binding:string -> checkpoint -> string
 val checkpoint_from_record : expected_binding:string -> expected_record_sha256:string ->
   string -> checkpoint

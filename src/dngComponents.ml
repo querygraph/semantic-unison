@@ -174,3 +174,101 @@ let with_refreshed_checkpoint ~previous ~decoders ~expected_checkpoint_sha256
       ) (pending,[],[]) decoders in
       callback session {snapshot;outcomes=List.rev outcomes;reused=List.rev reused;
         invalidated=List.map(fun (entry:outcome) -> entry.component_id) stale})
+
+type owner_entry = { owner_encoded : string; owner_digest : string;
+  owner_binding : string; record_digest : string; checkpoint_digest : string;
+  input_digest : string; previous : outcome list }
+let owner_entry_bytes entry=entry.owner_encoded
+let owner_entry_sha256 entry=entry.owner_digest
+let owner_entry_binding entry=entry.owner_binding
+let owner_entry_record_sha256 entry=entry.record_digest
+let owner_entry_outcomes entry=entry.previous
+let owner_entry_max_size=131072
+let owner_invalid why=raise(ComponentHash.Invalid("DNG owner entry: "^why))
+let owner_number value =
+  let bytes=Bytes.create 8 in
+  for i=0 to 7 do Bytes.set bytes i (Char.chr(Int64.to_int(Int64.logand 255L
+    (Int64.shift_right_logical value (56-8*i))))) done;Bytes.to_string bytes
+let owner_string value=owner_number(Int64.of_int(String.length value))^value
+let validate_inventory entries =
+  if List.length entries>64 then owner_invalid "inventory limit";
+  let seen=Hashtbl.create 64 in
+  List.iter(fun (entry:outcome) ->
+    if not(bounded_id 256 entry.component_id) || String.length entry.component_id<4 ||
+      String.sub entry.component_id 0 4<>"dng/" || not(bounded_id 128 entry.decoder_id) ||
+      String.length entry.implementation_sha256<>32 || Hashtbl.mem seen entry.component_id then
+      owner_invalid "inventory identity";
+    Hashtbl.add seen entry.component_id ();
+    match entry.status with Unsupported why when String.length why>1024 -> owner_invalid "reason limit"
+      | _ -> ()) entries
+let owner_inventory entries =
+  validate_inventory entries;
+  owner_number(Int64.of_int(List.length entries)) ^ String.concat "" (List.map(fun (entry:outcome) ->
+    owner_string entry.component_id ^ owner_string entry.decoder_id ^ entry.implementation_sha256 ^
+    (match entry.status with Unmatched -> "\000" | Unsupported why -> "\001"^owner_string why | Refined -> "\002")) entries)
+let owner_prefix ~root_identity ~path ~generation_sha256 ~input_digest previous =
+  if not(bounded_id 4096 root_identity) || not(bounded_id 4096 path) ||
+    String.length generation_sha256<>32 || String.length input_digest<>32 then owner_invalid "owner binding";
+  "UDI\000\000\000\000\000" ^ owner_string root_identity ^ owner_string path ^
+    generation_sha256 ^ input_digest ^ owner_inventory previous
+let check_owner_checkpoint checkpoint previous =
+  let root=ComponentHash.checkpoint_root checkpoint in
+  if root.id<>"dng" || root.schema<>"dng-physical-partition/0" || root.role<>ComponentHash.Structural ||
+    root.offset<>0L then owner_invalid "checkpoint format";
+  validate_inventory previous;
+  let rec safe (node:ComponentHash.node)=
+    node.role<>ComponentHash.Encoded_pixels && node.role<>ComponentHash.Standard_metadata &&
+    List.for_all safe node.children in
+  List.iter(fun (entry:outcome) -> match entry.status with
+    | Unmatched | Unsupported _ -> ()
+    | Refined -> match find entry.component_id root with
+      | Some node when node.schema=entry.decoder_id^"@"^SemanticHash.hex entry.implementation_sha256 &&
+          (node.role=ComponentHash.Private_metadata || node.role=ComponentHash.Opaque) && safe node -> ()
+      | _ -> owner_invalid "checkpoint/inventory mismatch") previous;
+  root.content_sha256
+let make_owner_entry ~root_identity ~path ~generation_sha256 ~checkpoint ~outcomes =
+  let input_digest=check_owner_checkpoint checkpoint outcomes in
+  let prefix=owner_prefix ~root_identity ~path ~generation_sha256 ~input_digest outcomes in
+  let owner_binding=SemanticHash.string("unison-dng-owner-binding/0\000"^prefix) in
+  let checkpoint_digest=ComponentHash.checkpoint_sha256 checkpoint in
+  let record_digest=SemanticHash.string(ComponentHash.checkpoint_record ~binding:owner_binding checkpoint) in
+  let owner_encoded=prefix^checkpoint_digest^record_digest in
+  {owner_encoded;owner_digest=SemanticHash.string owner_encoded;owner_binding;record_digest;
+   checkpoint_digest;input_digest;previous=outcomes}
+let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 encoded =
+  if String.length encoded>owner_entry_max_size || String.length expected_entry_sha256<>32 ||
+    SemanticHash.string encoded<>expected_entry_sha256 then owner_invalid "digest/size mismatch";
+  let at=ref 0 in
+  let take n=if n<0 || n>String.length encoded - !at then owner_invalid "truncated entry";
+    let value=String.sub encoded !at n in at:= !at+n;value in
+  let number maximum =
+    let value=ref 0L in
+    String.iter(fun c -> value:=Int64.logor(Int64.shift_left !value 8)(Int64.of_int(Char.code c))) (take 8);
+    if !value<0L || !value>Int64.of_int maximum then owner_invalid "field limit";
+    Int64.to_int !value in
+  let string maximum=take(number maximum) in
+  if take 8<>"UDI\000\000\000\000\000" then owner_invalid "version";
+  let saved_root=string 4096 in let saved_path=string 4096 in
+  let generation=take 32 in let input_digest=take 32 in
+  let count=number 64 in
+  let previous=List.init count(fun _ ->
+    let component_id=string 256 in let decoder_id=string 128 in
+    let implementation_sha256=take 32 in
+    let status=match take 1 with "\000" -> Unmatched | "\001" -> Unsupported(string 1024)
+      | "\002" -> Refined | _ -> owner_invalid "status" in
+    {component_id;decoder_id;implementation_sha256;status}) in
+  let checkpoint_digest=take 32 in let record_digest=take 32 in
+  if !at<>String.length encoded || saved_root<>root_identity || saved_path<>path ||
+    generation<>generation_sha256 then owner_invalid "root/path/generation mismatch";
+  let prefix=owner_prefix ~root_identity ~path ~generation_sha256 ~input_digest previous in
+  if encoded<>prefix^checkpoint_digest^record_digest then owner_invalid "noncanonical entry";
+  {owner_encoded=encoded;owner_digest=expected_entry_sha256;
+   owner_binding=SemanticHash.string("unison-dng-owner-binding/0\000"^prefix);
+   record_digest;checkpoint_digest;input_digest;previous}
+let checkpoint_for_owner_entry entry record =
+  let checkpoint=ComponentHash.checkpoint_from_record ~expected_binding:entry.owner_binding
+    ~expected_record_sha256:entry.record_digest record in
+  if ComponentHash.checkpoint_sha256 checkpoint<>entry.checkpoint_digest ||
+    check_owner_checkpoint checkpoint entry.previous<>entry.input_digest then
+    owner_invalid "record reference mismatch";
+  checkpoint

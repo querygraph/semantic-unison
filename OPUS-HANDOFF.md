@@ -7,6 +7,17 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+UDI/0 owner-index entry codec now implemented in DngComponents: root/path/
+generation+input+orderedoutcomes bound to checkpoint/recorddigests; trusted-entry
+digest required on load, record loading rechecks references and private schemas.
+Metadata-only/portable; ComponentHash.checkpoint_root exposes bounded historical
+tree without currentinputauthority. Focusedstock/Ox controls passed23340/397bf5/0,
+worker45920reaped0/groupsabsent/tokensclosed; entryencode adds0source reads. Receipt
+`tests/qualification/dng-owner-entry-actual-20261017.json` includes truncation/tamper/
+wrongroot-path-generation/record/provenance controls. Managed owner-index namespace,
+atomic entry publication/lookup/quota and full-build successor remain outstanding.
+No media/SDK/EXIO/mainRPCpins changed.
+
 Record publisher now has original postrename/pre-sync fault proof plus all4current
 builds. Test-onlyfsyncshim (no production switch) proves directoryEIO afterrename
 retains published/exactbytes/no replay; stageEIO/EINTR leave unpublished and no

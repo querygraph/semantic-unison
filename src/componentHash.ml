@@ -240,6 +240,8 @@ let decode_checkpoint encoded =
   if !remaining<>0 || !position<>String.length encoded then invalid "component checkpoint count/trailing data";
   tree
 
+let checkpoint_root checkpoint = decode_checkpoint checkpoint.encoded
+
 let checkpoint_record ~binding checkpoint =
   if String.length binding<>32 then invalid "component record binding must be raw SHA256";
   "UCR\000\000\000\000\000" ^ binding ^ checkpoint.digest ^

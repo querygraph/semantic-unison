@@ -223,6 +223,51 @@ let () =
    check(equal a_then_b b_then_a) "independent incremental upgrades do not commute";
    let _,_,_,_,before_pixels=first and _,_,_,_,after_pixels=a_then_b in
    check(before_pixels=after_pixels) "sibling composition changed pixel identity");
+ Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
+   let root_identity="original-local-root" and path="camera/example.dng"
+   and generation_sha256=SemanticHash.string "original-generation/1" in
+   match DngComponents.with_snapshot ~decoders:frozen ~max_read_bytes:8435L file
+     (fun session ~initial:_ ~refined outcomes ->
+       let checkpoint=ComponentHash.checkpoint session refined in
+       let entry=DngComponents.make_owner_entry ~root_identity ~path ~generation_sha256 ~checkpoint ~outcomes in
+       let encoded=DngComponents.owner_entry_bytes entry and digest=DngComponents.owner_entry_sha256 entry in
+       check(String.length encoded<=DngComponents.owner_entry_max_size && SemanticHash.string encoded=digest &&
+         String.sub encoded 0 8="UDI\000\000\000\000\000") "owner index framing/digest differs";
+       let decode bytes sha=DngComponents.decode_owner_entry ~root_identity ~path ~generation_sha256
+         ~expected_entry_sha256:sha bytes in
+       let loaded=decode encoded digest in
+       let record=ComponentHash.checkpoint_record ~binding:(DngComponents.owner_entry_binding entry) checkpoint in
+       check(DngComponents.owner_entry_record_sha256 loaded=SemanticHash.string record &&
+         DngComponents.owner_entry_outcomes loaded=outcomes) "owner entry lost record/inventory binding";
+       let recovered=DngComponents.checkpoint_for_owner_entry loaded record in
+       check(ComponentHash.checkpoint_bytes recovered=ComponentHash.checkpoint_bytes checkpoint)
+         "owner entry did not recover original checkpoint";
+       List.iter(fun (root_identity,path,generation_sha256) ->
+         check(try ignore(DngComponents.decode_owner_entry ~root_identity ~path ~generation_sha256
+           ~expected_entry_sha256:digest encoded);false with ComponentHash.Invalid _ -> true)
+           "owner entry accepted changed root/path/generation")
+         [("other-root",path,generation_sha256);(root_identity,"other.dng",generation_sha256);
+          (root_identity,path,SemanticHash.string "other-generation")];
+       check(try ignore(decode (encoded^"x") (SemanticHash.string(encoded^"x")));false
+         with ComponentHash.Invalid _ -> true) "owner entry accepted trailing bytes";
+       for count=0 to String.length encoded-1 do
+         let bytes=String.sub encoded 0 count in
+         check(try ignore(decode bytes (SemanticHash.string bytes));false
+           with ComponentHash.Invalid _ -> true) "owner entry accepted truncated framing"
+       done;
+       let tampered=Bytes.of_string encoded in Bytes.set tampered (String.length encoded-1) 'X';
+       check(try ignore(decode (Bytes.to_string tampered) digest);false
+         with ComponentHash.Invalid _ -> true) "owner index accepted tampering under trusted digest";
+       check(try ignore(DngComponents.checkpoint_for_owner_entry loaded (record^"x"));false
+         with ComponentHash.Invalid _ -> true) "owner entry accepted wrong record";
+       let wrong=List.map(fun (entry:DngComponents.outcome) ->
+         if entry.status=DngComponents.Refined then {entry with implementation_sha256=String.make 32 'X'}
+         else entry) outcomes in
+       check(try ignore(DngComponents.make_owner_entry ~root_identity ~path ~generation_sha256
+         ~checkpoint ~outcomes:wrong);false with ComponentHash.Invalid _ -> true)
+         "owner capture accepted inconsistent decoder inventory";
+       check(ComponentHash.bytes_requested session=8435L) "owner entry encoding reread input") with
+   | Ok () -> () | Error why -> failwith why);
  let failing=plugin "original.operational-failure/1" (fun _ ->
    raise (ComponentHash.Invalid "original injected decoder failure")) in
  let failed=match DngComponents.freeze_decoders [bind private_id failing] with

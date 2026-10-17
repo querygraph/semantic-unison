@@ -64,3 +64,26 @@ val with_refreshed_checkpoint : previous:outcome list -> decoders:decoders ->
     distinguished by [reused]; [invalidated] identifies obsolete bindings.
     Operational errors propagate without publishing a new checkpoint. No disk
     store, automatic registry discovery or transfer authority. *)
+
+type owner_entry
+val owner_entry_max_size : int
+val make_owner_entry : root_identity:string -> path:string -> generation_sha256:string ->
+  checkpoint:ComponentHash.checkpoint -> outcomes:outcome list -> owner_entry
+val owner_entry_bytes : owner_entry -> string
+val owner_entry_sha256 : owner_entry -> string
+val owner_entry_binding : owner_entry -> string
+val owner_entry_record_sha256 : owner_entry -> string
+val owner_entry_outcomes : owner_entry -> outcome list
+val decode_owner_entry : root_identity:string -> path:string -> generation_sha256:string ->
+  expected_entry_sha256:string -> string -> owner_entry
+val checkpoint_for_owner_entry : owner_entry -> string -> ComponentHash.checkpoint
+(** Bounded UDI/0 immutable owner-index entry: exact root/path identity, owner
+    generation digest, input digest, ordered decoder outcomes and checkpoint/record
+    references. Make from a trusted successful extraction's checkpoint/outcomes;
+    validates historical Refined schemas/private-only roles. Decode requires the
+    prior whole-entry digest from trusted owner state and exact root/path/generation.
+    A self-hash of arbitrary disk bytes is NOT that trust. Record loading checks
+    entry binding, record/checkpoint/input digests and inventory consistency.
+    Metadata only; actual current-input/base validation still requires restore.
+    No generation selection, pathname interpretation, quota, index namespace
+    publication, peer code, archive authority or automatic cache selection. *)

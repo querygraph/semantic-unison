@@ -77,7 +77,7 @@ def main():
             save(root,result)
             if label=='ox':
                 portable=work/'frozen_decoder_capture.ml'
-                portable.write_text('let publish (frozen:DngComponents.decoders) = Domain.Safe.spawn (fun () -> ignore frozen)\n')
+                portable.write_text('let publish (frozen:DngComponents.decoders) = Domain.Safe.spawn (fun () -> ignore frozen)\nlet publish_entry (entry:DngComponents.owner_entry) = Domain.Safe.spawn (fun () -> ignore(DngComponents.owner_entry_bytes entry))\n')
                 call([compiler,'-c',portable.name])
         finally:os.chdir(previous)
     assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in result['source_pins'].items())
