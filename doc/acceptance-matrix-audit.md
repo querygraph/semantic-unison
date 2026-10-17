@@ -20,6 +20,15 @@ controls passed80 checks/compiler and four full builds. These are generated
 fixtures and historical snapshot hashes, not camera pixel/rendering equality,
 persistent reuse or component archive/worker deployment evidence.
 
+The [new-profile production receiving successor](../tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
+now adds18actual rows/54CLI stock/Ox workers1/2/3, six semantic rows/twelve exact
+layout updates with opaque private references into changed XMP. Exact donor,
+old-basis and no-op checks passed; actual parent11517/85a4a8/0, all groups and
+CPU8/EXglobal closed. [Root independently adopted/released](../tests/qualification/layout-receiving-root-adoption-actual-20261017.json).
+This closes that generated current-current receiving step, without promoting it
+to real-camera, old-peer transport, semantic merge, pixel or physical savings
+proof. The old expired grant and separately consumed reschedule remain distinct.
+
 The new [layout-only DNG exact profile](dng-layout-exact.md) now implements the
 first operation in that design: opaque private data no longer prevents exact
 donor reconstruction when span/layout/complement checks succeed. It has separate
@@ -27,7 +36,7 @@ capability negotiation, local immutable interpretation annotations, unchanged
 strict merge/cache authority and full staged-target hash verification.
 [Actual source qualification](../tests/qualification/dng-layout-exact-source-actual-20261017.json)
 includes49checks per stock/Ox compiler, strict safety regressions, four full builds
-and the stock legacy kernel/inspector. New remote/mixed-version receiving, the
+and the stock legacy kernel/inspector. Broader remote/mixed-version receiving,
 component worker/archive integration and incremental cache remain open. The
 component forest and nested dispatch are now implemented as described above;
 neither full-goal acceptance nor production camera qualification follows.
@@ -188,7 +197,7 @@ but this does not establish a hard FD/RSS cap or eight-way concurrent throughput
 
 The [machine-readable map](../tests/qualification/acceptance-scope-audit-20261016.json) pins the selected receipt documents. Older intermediate checkpoints are not silently promoted to their successors. In particular, producer-handoff, native publication and source/GUI checks keep their own limitations.
 
-Next operation-specific receiving qualification: exercise the new layout-only profile through current production receiving and peer capability fallback. Existing camera controls proved safe unsupported fallback/SDK decode under their own profiles; they do not qualify this new profile. Real-camera successors use explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
+The current-current generated layout-only receiving step has now passed above. Next operation-specific coverage is actual mixed-version transport and representative retained-camera exact receiving. Existing camera controls proved safe unsupported fallback/SDK decode under their own profiles; they do not qualify this new profile. Real-camera successors use explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
 
 An optional generated-fixture property-removal successor matrix is source-prepared
 (`SYNC_PROPERTY_REMOVAL_CONTROLS=1` on the exact-admitted shared IO route).

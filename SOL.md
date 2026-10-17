@@ -141,21 +141,18 @@ a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
 
-A [fresh layout-only receiving request](doc/layout-receiving-request-v1.json)
-is source-prepared. Root issued V1 but its start window expired before this
-owner dispatched; [actual preexec refusal](tests/qualification/layout-receiving-v1-expired-actual-20261017.json)
-records exit2/no resources. A separately scheduled successor is required;
-the original admission must not be replayed. It reuses the finite shared18-row/
-54-CLI matrix with generated opaque private references into changed XMP and
-requires the exact layout profile on semantic rows. Source controls passed
-197 current preference-boundary checks per compiler; both current Make builds
-and full selftests passed under standing8. Exact request/plan/38execution pins
-require fresh scheduling after the expired V1. A supplementary pure post-run auditor
-now binds the requested mode/packet/artifact/source claims and reparses captured
-layout-profile logs, with four fake-record methods/thirteen negative mutations
-passed; it does not change the frozen executor or grant runtime authority.
-This is an operational qualification
-step, not a renewed requirement for complete private-field understanding.
+The [layout-only receiving successor](tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
+now actually PASSED/CLOSED: stock/Ox18rows54CLI through production loopback
+ordinary/receiver-clone/semantic paths with workers1/2/3. Six semantic rows/twelve
+updates selected the new exact-layout profile; generated opaque private pointers
+into changed XMP remained exact, old bases and no-op epochs passed. All38source
+pins and strict client/server/supervisor/pump/group/IOCPU audits passed. Actual
+parent11517/85a4a8/0/no session and [Root independent adoption/release](tests/qualification/layout-receiving-root-adoption-actual-20261017.json)
+are retained. Original V1 expired unstarted; separate rescheduleddcc2d5cb was
+consumed once. Postrun metadata schema refusal/projection is preserved without
+repeating runtime. This qualifies generated current-current exact receiving,
+not camera/private grammar, old-peer transport, semantic merge, pixels or
+physical savings. Complete private mapping was not required for this operation.
 
 A [bounded private ASCII-field prototype](tools/dng-fields/README.md) now produces
 child plugins for owner-selected tags, byte order and explicit address-space

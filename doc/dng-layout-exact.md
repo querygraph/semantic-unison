@@ -110,3 +110,20 @@ owner dispatched. The [actual preexec refusal](../tests/qualification/layout-rec
 records tool exit2 with no runtime/CLI/IOCPU entry. The original grant is
 preserved and must not be executed. Fresh scheduling uses a distinct successor;
 request/plan/code pins remain unchanged. No receiving pass is claimed.
+
+## Actual production receiving result
+
+The distinct Root reschedule dcc2d5cb executed once and
+[PASSED/CLOSED](../tests/qualification/layout-receiving-rescheduled-actual-20261017.json):
+18rows/54CLI, stock/Ox workers1/2/3 across ordinary/receiver-clone/semantic.
+Six semantic rows/twelve actual exact-layout updates preserved opaque private
+references while producing the exact donor, with unchanged old bases and no-op
+epochs. All38 postpins, strict lifecycle/prefix proofs, worker/group/IOCPU closure
+and actual parent11517/85a4a8/exit0/no-session passed. Root independently
+[adopted and released](../tests/qualification/layout-receiving-root-adoption-actual-20261017.json).
+The old V1 remains expired; the reschedule is consumed, not replayable.
+
+An initial postrun metadata audit rejected the reschedule wrapper schema. That
+refusal and the explicit verified scheduling-only projection are preserved;
+original Root inputs, native output and execution were unchanged. No SDK/camera,
+actual old-peer transport, semantic merge/pixel or physical savings follows.

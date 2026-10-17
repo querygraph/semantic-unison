@@ -1,0 +1,89 @@
+{
+  "schema": "unison-layout-receiving-qualification/1",
+  "state": "GENERATED_EXACT_DONOR_LAYOUT_RECEIVING_PASS_ACTUAL_CLOSED",
+  "actual_parent_terminal": {
+    "session": 11517,
+    "chunk_id": "85a4a8",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "owner_return": {
+    "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/OWNER-RETURN.json",
+    "bytes": 3668,
+    "sha256": "079cf8825eea2a44d2900e4b3989b951673ec405fc44de4b7dcaae702cb86d58"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-layout-receiving-admission-rescheduled-80c9c19d3f48.json",
+    "bytes": 7394,
+    "sha256": "dcc2d5cb9beccc2dc606b1a8c454340797e6eb035913d8cc917dc817ec207758"
+  },
+  "root_reschedule": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-LAYOUT-RESCHEDULE-80c9c19d3f48-REQUEST.json",
+    "bytes": 11440,
+    "sha256": "33a7308bc019142905698d052276ee9b6bc40b853df1c21cc491d041ace6adcf"
+  },
+  "root_plan": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-LAYOUT-RESCHEDULE-80c9c19d3f48-PLAN.json",
+    "bytes": 8867,
+    "sha256": "013775161e320d5f2bd716a1a84af5c2e3628ad00851f6b70116c06fba3cc7e9"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/RESULT.json",
+      "bytes": 1069327,
+      "sha256": "7c0bd77ec277db85934bedb4948d24b352619b5d3cd1926ec3d81f0dfe65c5d5"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/SHARED-START.json",
+      "bytes": 5829,
+      "sha256": "c5e30c8e0fd4961d6335d0bb370be67c71074933a562eaab2fef7aec3e2be785"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "77e2aade4d6436c3651325c1c40a91aafbd8abf3b30214ef2b95b840fd784ba9"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/SHARED-SERVER-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/SHARED-STDOUT.txt",
+      "bytes": 1269,
+      "sha256": "92e6ea2e1ff2e330a064e97ed3c38ce761dc4d4e1df3d66fc4fd5f9e48ffc765"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/OWNER-TERMINAL.json",
+      "bytes": 502,
+      "sha256": "a48d9c8c3365783aaa51d3644a991dd41ea88baa6323c3c2dbd82d97a38ba0d5"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/INDEPENDENT-RETURN-AUDIT.json",
+      "bytes": 3082,
+      "sha256": "290afa8f922aa2e6ee86af79bff4e34595d41206809953bd06479ceaf589ce46"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/INDEPENDENT-REQUEST-PROJECTION.json",
+      "bytes": 12716,
+      "sha256": "a663fe48f951c455cee6393d98d3187b17149101149f1434e980385b0f041b44"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48/INDEPENDENT-RETURN-AUDIT-001-REFUSED.json",
+      "bytes": 599,
+      "sha256": "12614efbd356173c02cae904cd37f9e238da590eff99683e4bb6ad2a68e4f4d8"
+    }
+  ],
+  "rows": 18,
+  "CLI_calls": 54,
+  "semantic_rows": 6,
+  "semantic_layout_updates": 12,
+  "execution_postpins": 38,
+  "unresolved_markers": [],
+  "scope": "Current stock/Ox loopback ordinary/receiverclone/semantic workers1/2/3, two generated2MiB fixtures per row. Opaque private pointers into changedXMP stay exact; full actual donor output/oldbasis/noop pass. All54 client/server/supervisor/pump closures independently reparsed, worker74331reaped0/groupabsent/CPU8+EXIOclosed. Actual parent11517/85a4a8/0/no session. Postrun schema refusal preserved and explicit scheduling-only audit projection verified, no runtime replay. No SDK/camera/private grammar/semantic ignore/merge/pixels/physical savings/quiet throughput/old-peer transport or production deployment qualification."
+}

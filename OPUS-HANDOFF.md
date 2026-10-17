@@ -7,7 +7,63 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
-## Current receiving scheduling state: V1 issued, then expired unstarted
+## CURRENT: layout reschedule actual PASS/CLOSED and independently adopted
+
+Root's distinct scheduling successor `/private/tmp/unison-layout-receiving-admission-rescheduled-80c9c19d3f48.json`
+7394B SHAdcc2d5cb9beccc2dc606b1a8c454340797e6eb035913d8cc917dc817ec207758
+was dispatched exactly once after fresh request/plan/38sources/sixprereqs/
+interpreter/build/unusedworkspace/deadline checks. Guard1792208390.9865868 and
+START1792208391.2983081 were BEFORE deadline1792208728.243482. Do NOT call
+this consumed run expired-unstarted merely because its deadline is now past.
+Owner74328/worker74331; actual owning session11517/initiala15b7d returned
+terminal85a4a8/exit0/NOsession. Prompt terminal/release evidence sent Root.
+
+All18 rows/54 CLI seed-update-noop calls completed, stock/Ox×ordinary/receiver
+clone/semantic×workers1/2/3. Six semantic rows/twelve updates actually selected
+`org.firstpair.dng-layout/0`; generated opaque private references into changed
+XMP stayed exact, full donor outputs/old bases/no-op epochs passed. Parent
+strict54call audit and independent prefix54/zero-no-creation checks passed;
+all38postsourcepins matched/unresolvedempty. Worker74331reaped0/othersabsent,
+CPU8+EXglobal closed. No SDK/camera/pixels/physical savings/quiet timing claims.
+
+Workspace `/private/tmp/unison-layout-receiving-rescheduled-80c9c19d3f48`:
+OWNER-TERMINAL502B SHAa48d9c8c3365783aaa51d3644a991dd41ea88baa6323c3c2dbd82d97a38ba0d5;
+OWNER-RETURN3668B SHA079cf8825eea2a44d2900e4b3989b951673ec405fc44de4b7dcaae702cb86d58.
+Metadata-only auditbf505c/1 initially refused Root's reschedule schema; preserved
+001REFUSED. Exact unchanged semantic fields and scheduling-only namespace changes
+were verified, and an explicitly recorded projection fed the strict v1 auditor.
+Root originals/raw evidence unchanged; native execution never repeated.
+Independent return audit3082B SHA290afa8f922aa2e6ee86af79bff4e34595d41206809953bd06479ceaf589ce46.
+
+Local qualification `tests/qualification/layout-receiving-rescheduled-actual-20261017.json`
+4183B SHA184db278ca5eef73ce1ec99914752e9110dc1641c9a899655bce6b22480b09f7.
+Root independently ADOPTED actual terminal transcription/raw functional+process
+proofs and freshly acquired/closed EXglobal+Photo8: acceptance1084B
+SHA48e864bf524a4027d787f0180ac94bce6fb1d6c186784c4e278ecfb6f211d45e under
+`/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-LAYOUT-RESCHEDULE-80c9c19d3f48-ACTUAL-ACCEPTANCE.json`.
+Root did NOT personally poll our tool; that distinction is explicit. Adoption
+`tests/qualification/layout-receiving-root-adoption-actual-20261017.json`1575B
+SHAc22be7827e9bde67d5a37141d1b15df3225867f1d020aa7a9ec17592bfb59138.
+No hold, replay or successor. Original209266ba remains expired-unstarted.
+
+## ISOLATED next work: component worker API, unbuilt/unmerged
+
+To preserve the reviewed receiving source while scheduling was pending, created
+owned checkout `/Users/alexy/src/unison-component-workers-20261017`, branch
+`feat/dng-component-workers`, based ond8e13624. Only its
+`src/semanticWorkers.{ml,mli}` are modified so far; no build/runtime ran there.
+The proposed explicit Components operation takes frozen decoders/read budget,
+uses existing FD/CPU/IO/cancellation lifecycle and returns compact immutable
+projections/outcomes/stats, never session/reader/snapshot capabilities. Its
+operational ComponentHash.Invalid errors are intended to fail, not become
+unsupported. This code is UNVERIFIED and not in main/draft PR; do not claim it
+implemented/qualified yet. Next: focused production-linked worker tests (parallel
+parity, read observer, queued/late cancellation, failure/FD/budget settlement)
+and stock/Ox builds, then merge only after verification. Same existing canonical
+Unison00..07 pool; sibling checkout has real sharedPhoto policy paths. No new
+pool, SDK/media/EXIO grant or running process. Main receiving code remained frozen.
+
+## Historical predecessor: V1 issued, then expired unstarted
 
 Root DID issue `/private/tmp/unison-layout-receiving-admission-v1.json`7342B
 SHA209266ba0d44d1e588bd1fd50ef1d8df2995f61ab024732e4bfd7de21af261c9,
