@@ -65,7 +65,8 @@ def prepare(source, expected, historical_sha256, directory, *, clone=native_clon
             if (visible.st_dev, visible.st_ino) != (d.st_dev, d.st_ino):
                 raise ValueError('replica directory replaced')
             fence()
-            rows.append(dict(side=side, identity=before, sha256=digest.hexdigest()))
+            rows.append(dict(side=side, identity=before, sha256=digest.hexdigest(),
+                             directory_identity=stamp(os.fstat(parent))))
         return dict(replicas=rows, source_identity=dict(expected), source_payload_read_bytes=0,
                     clone_read_bytes=2 * s.st_size,
                     backend='native-fclonefileat-only' if clone is native_clone else 'original-disposable-test-double')

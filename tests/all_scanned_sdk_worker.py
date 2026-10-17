@@ -1,7 +1,8 @@
 """Caller-admitted aggregate kernel, not a CLI or runtime admission route.
 
-Preparation, source checks and fresh root verification must be supplied by the
-pinned outer executor under its existing IO/CPU grant. Unknown always escapes as
+Preparation and source checks must be supplied by the pinned outer executor
+under its existing IO/CPU grant. Fresh root verification is mandatory here.
+Unknown always escapes as
 a retained ownership carrier; no cleanup, retry or broad signal occurs here.
 """
 import copy
@@ -16,9 +17,10 @@ from camera_sdk_concurrency.worker import prepare_scripts
 from all_scanned_sdk_transport import Invoker
 from all_scanned_sdk_audit import settled_helpers, successful_helpers
 from all_scanned_sdk_parent import audit_complete
+from all_scanned_sdk_verify import verify_roots
 
 
-def execute(contract, workspace, deadline, *, prepare_sources, verify_roots,
+def execute(contract, workspace, deadline, *, prepare_sources,
             read_proxy, persist, check_sources):
     root = Path(workspace)
     if (str(root) != contract['workspace'] or not root.is_absolute()
@@ -53,7 +55,8 @@ def execute(contract, workspace, deadline, *, prepare_sources, verify_roots,
             preparation = prepare_sources(directory, label)
             row = dict(label=label, preparation=preparation, calls=[])
             result['cases'].append(row); save()
-            verify_roots(directory, preparation)
+            row['initial_root_verification'] = verify_roots(directory, preparation,
+                                                           source=contract['source']); save()
             for phase in ('baseline', 'validate'):
                 check_sources()
                 before = len(result['invocations'])
@@ -107,7 +110,9 @@ def execute(contract, workspace, deadline, *, prepare_sources, verify_roots,
                     allowed.add('Nothing to do: replicas have been changed only in identical ways since last sync.')
                 if sum(line in allowed for line in (outcome['stdout'] + '\n' + outcome['stderr']).splitlines()) != 1:
                     raise ValueError('no-op branch status missing or duplicated')
-                verify_roots(directory, preparation); check_sources(); save()
+                proofs['root_verification'] = verify_roots(directory, preparation,
+                                                          source=contract['source'])
+                check_sources(); save()
         candidate = dict(result, complete=True, phase='FINISHED')
         proof = audit_complete(candidate, contract, raw_proxy_receipts=proxies)
         result.update(complete=True, phase='FINISHED', parent_audit=proof)

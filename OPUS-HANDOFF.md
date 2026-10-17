@@ -117,6 +117,20 @@ Still implement outer CLI/admission, fresh replica verification, private-stage
 path evidence and independently authenticated failed-prefix/FD join; no runtime
 request/grant exists yet. Full goal remains active/incomplete.
 
+Fresh pair verification gap closed in the worker: `all_scanned_sdk_verify.py`
+is mandatory, no caller-supplied Boolean callback. Preparation now captures
+directory epochs; verification joins exact single-file rosters, full file/dir
+epochs, distinct inodes, admitted source SHA/size, both hashes and final cross-pair
+binding checks. It opens only disposable roots and preserves uncertain-close
+carriers; no destructive cleanup. Worker saves initial plus both post-phase proofs.
+Forty-six controls actual18b483/0/no session passed; child95780 reaped0/groupabsent,
+CPU8 closed. Composition uses real tiny files/injected clone/real verifier six
+times with modeled transport/SDK. Receipt
+`tests/qualification/all-scanned-sdk-verify-actual-20261017.json`.
+No CLI/SDK/nativeclone/EXIO/retainedmedia. Outer executor/admission, authenticated
+prefix/verification join, private-stage pathname evidence and fresh exact runtime
+request remain next. Parent audit still withholds fresh-byte/release authority.
+
 
 ## Held-output validation checkpoint
 

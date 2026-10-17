@@ -25,7 +25,7 @@ class Worker(unittest.TestCase):
                 for side in ('left', 'right'):
                     (directory / side / 'image.dng').write_bytes(b'original tiny fixture')
                 return dict(modeled_source_identity_only=True)
-            def verify(directory, _):
+            def verify(directory, _, *, source):
                 for side in ('left', 'right'):
                     self.assertEqual((directory / side / 'image.dng').read_bytes(), b'original tiny fixture')
             class Invoke:
@@ -46,10 +46,11 @@ class Worker(unittest.TestCase):
             def read_proxy(path):
                 if proxy_error is not None: raise proxy_error
                 return raw[str(path)]
-            with patch.object(worker, 'prepare_scripts', return_value={}), patch.object(worker, 'Invoker', Invoke):
+            with patch.object(worker, 'prepare_scripts', return_value={}), \
+                 patch.object(worker, 'Invoker', Invoke), patch.object(worker, 'verify_roots', side_effect=verify):
                 try:
                     result = worker.execute(contract, root, time.monotonic() + 600,
-                        prepare_sources=prepare, verify_roots=verify,
+                        prepare_sources=prepare,
                         read_proxy=read_proxy, persist=persist, check_sources=lambda: None)
                     return result, saved, calls, None
                 except BaseException as error:

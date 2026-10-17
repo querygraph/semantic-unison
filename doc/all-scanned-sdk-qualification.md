@@ -71,9 +71,29 @@ substitute; transport and SDK frames were modeled. No CLI/SDK, retained camera
 payload, EXglobal or native clone syscall was invoked by these controls.
 
 Remaining before a real request: qualified outer executor/admission and failure
-audit join, real replica verification, private-stage pathname evidence, current
+audit join, private-stage pathname evidence, current
 binary/build closure and exact clone/hash/IO budgets. The modeled complete worker
 result does not close those gaps or grant runtime access.
+
+Fresh root verification is now mandatory inside the worker, implemented by
+`all_scanned_sdk_verify.py`; the earlier injected-only verification callback is
+superseded. It uses readonly descriptors relative to held private directories,
+requires exactly image.dng, full eight-field file/directory epochs, independent
+inodes distinct from the borrowed source, mode0600 and both source-bound SHA
+values. It fences BOTH pairs after the final read and preserves unrelated or
+replacement entries on failure. Close uncertainty retains the original carrier.
+These are cooperative namespace fences, not a hostile same-user sandbox.
+
+The worker records initial and post-baseline/post-validation verification outputs.
+Forty-six current controls passed actual18b483/0/no session, child95780 reaped0,
+groupothersabsent and CPU8 closed. One composition uses actual tiny disposable
+files, injected clone preparation and the real verifier at all six checkpoints;
+only CLI/SDK frames are modeled. Mutation during the final pair read, replacement,
+extra/symlink entries, identity/hash mismatches and uncertain close are covered.
+Evidence: `tests/qualification/all-scanned-sdk-verify-actual-20261017.json`.
+No retained camera, native clone syscall, SDK, CLI or EXglobal IO ran. Independent
+parent proof joining/authentication is still required before FD release; its
+current pure return deliberately withholds fresh-source authority.
 
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
