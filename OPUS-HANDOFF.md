@@ -3871,3 +3871,15 @@ from the manual flag. Frozen property request remains a separate older-source
 request; no grant known at last check. Full goal active, not complete.
 
 Inspector refresh finalized: eight argv controls passed (child reaped0/tokensclosed); owning-tool terminal unavailable after truncated output, explicitly not inferred. Current inspector evidence JSON now exists and pins four evidence directories. Release checklist refreshed to separate candidate transport, camera observation and remaining legacy limits. No camera payload opened; no goal completion claim.
+
+
+Inspector IO contract source successor: tests/inspector_io_contract.py binds exact
+components argv, successful receipt/binary digest, exact26kernel source list and
+metadata-only eightfield input identity. shared_dispatch inspect-file IO path
+adds these sources to admission and runtime pins. Existing no-IO tiny fixture
+entrypoints unchanged. Seven metadata-only controls actual0a0f7d/0/no session
+passed under Unison00..07; child reaped/tokensclosed. No camera payload/IO lock.
+Evidence inspector-io-contract-controls-20261017.json. NOT ready for payload:
+post-run identity fence/result contract and immutable executor/plan remain next.
+Frozen property admission still absent at this turn's check; no scheduling hold
+inferred and no expired or previous grant reused.

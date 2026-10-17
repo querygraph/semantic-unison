@@ -59,6 +59,11 @@ def checked_io_request(request, target, argv, output, credits):
     source_paths = {Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_io_pool.py',
                     ROOT / 'tests/shared_cpu_pool.py', ROOT / 'tests/shared_process_owner.py',
                     ROOT / 'bench/sync/ownership.py', Path(argv[1])}
+    if target == 'inspect-file':
+        from inspector_io_contract import check
+        require(credits == 8, 'inspector IO requires exact shared8 ownership')
+        source_paths.add(ROOT / 'tests/inspector_io_contract.py')
+        source_paths.update(check(value, argv, ROOT))
     if target == SDK_SCAN_TARGET:
         from all_scanned_sdk_boundary import checked_plan, current_sources
         from all_scanned_sdk_entry import child_argv
@@ -206,6 +211,11 @@ def run(target, argv, output, credits, *, io_admission=None):
         sources = [Path(__file__), ROOT / 'tests/manual.py', ROOT / 'tests/shared_cpu_pool.py',
                    ROOT / 'tests/shared_process_owner.py', ROOT / 'bench/sync/ownership.py',
                    Path(argv[1])]
+        if target == 'inspect-file' and io_lease is not None:
+            from inspector_io_contract import check
+            from shared_io_pool import read_manifest
+            sources.append(ROOT / 'tests/inspector_io_contract.py')
+            sources.extend(check(read_manifest(io_admission['path'], io_admission['sha256']), argv, ROOT))
         if target == SDK_SCAN_TARGET:
             from all_scanned_sdk_boundary import current_sources
             sources.extend(Path(path) for path in current_sources())

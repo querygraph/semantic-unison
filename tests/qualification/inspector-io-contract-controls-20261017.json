@@ -1,0 +1,34 @@
+{
+  "scope": "Seven original metadata-only contract controls; not a camera execution qualification",
+  "actual_tool": {
+    "chunk": "0a0f7d",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-inspector-io-contract-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e5b0927d9e8e6981cb5ded82f4c32225e4e204b723d9028b4611ee6596b76e4a"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-io-contract-controls-20261017-001/SHARED-START.json",
+      "bytes": 1112,
+      "sha256": "d889a6e549cdc18fe64f77a6fdda97870fe685b81129ecde2ecbbf914e788b8a"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-io-contract-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "11ab96b1a6e045bb14cfaf0f07ebcb6385c49b10531e8d63eab13de4a5c355dd"
+    },
+    {
+      "path": "/private/tmp/unison-inspector-io-contract-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "remaining": [
+    "post-run input fence and result/closure contract",
+    "fresh immutable executor plan and explicit payload admission"
+  ]
+}
