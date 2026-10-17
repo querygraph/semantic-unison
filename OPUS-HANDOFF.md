@@ -7,6 +7,18 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+macOS immutable-record publisher now implemented: independently authenticated
+readback + borrowedprivate0700directory/0600stage/fullnative/no-followbinding,
+stagefsync/exclusiverename/publishedidentitycheck/directoryfsync. No FDopens/dups/
+closes/retention; caller owns settlement. Native ticket records rename success
+before runtime/postrenameerrors, forbidsreplay, owner-onlynonportableAPI. Focused
+stock/Ox41core+988checkpointchecks each PASS58876/7a5f21/0,worker39556reaped0/groups
+absent/tokensclosed; extra negativeSafespawnticket control passes. Receipt
+`tests/qualification/component-record-publication-actual-20261017.json` preserves
+Darwinfeaturemacro and Oxowner-interface failures before finalsuccess. Actualtiny
+fixtures only, no media/SDK/EXIO/mainpinschanged. Fullbuilds/postrenamefailure
+injection/ownerindex integration still open; no hardwaredurability/productionclaim.
+
 Worker decoder refresh connected: `SemanticWorkers.refresh_components` restores
 trusted checkpoint+prioroutcomes, selects currentdecoders offowner, reports reused/
 invalidatedIDs and optionally captures refreshedmetadata. Unchangedinventory runs

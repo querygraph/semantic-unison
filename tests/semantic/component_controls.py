@@ -61,7 +61,8 @@ def main():
                 call([compiler,'-c',path.name])
                 for typ,operation in [('session','ignore(ComponentHash.bytes_requested shared)'),
                                       ('snapshot','ignore(ComponentHash.full_sha256 shared)'),
-                                      ('reader','ignore(ComponentHash.read shared 0L 1)')]:
+                                      ('reader','ignore(ComponentHash.read shared 0L 1)'),
+                                      ('record_publication','ignore(ComponentHash.record_published shared)')]:
                     path=work/('leak_'+typ+'.ml')
                     path.write_text('let leak (shared:ComponentHash.'+typ+') = Domain.Safe.spawn (fun () -> '+operation+')\n')
                     outcome=call([compiler,'-c',path.name],expected=2)

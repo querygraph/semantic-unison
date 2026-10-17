@@ -292,6 +292,23 @@ let read_checkpoint_record ~expected_binding ~expected_record_sha256 file =
   SemanticFile.check file;
   checkpoint_from_record ~expected_binding ~expected_record_sha256 (Buffer.contents output)
 
+type record_publication
+external record_publication_available : unit -> bool = "unison_component_record_publication_available"
+external prepare_record_publication_raw : Unix.file_descr -> Unix.file_descr -> string -> string ->
+  record_publication = "unison_component_record_publication_prepare"
+external publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit
+  = "unison_component_record_publication_publish"
+external record_published : record_publication -> bool = "unison_component_record_publication_published"
+let prepare_record_publication ~directory ~stage ~temporary ~expected_binding
+    ~expected_record_sha256 file =
+  if not(record_publication_available ()) then
+    raise(Unix.Unix_error(Unix.ENOSYS,"component record publication",""));
+  if not(SemanticFile.same_inode file stage) then invalid "component record readback/stage mismatch";
+  ignore(read_checkpoint_record ~expected_binding ~expected_record_sha256 file);
+  let ticket=prepare_record_publication_raw directory stage temporary
+    (SemanticHash.hex expected_record_sha256) in
+  SemanticFile.check file;ticket
+
 let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
   if max_read_bytes<0L then invalid "negative component read budget";
   require_id expected_root_schema;

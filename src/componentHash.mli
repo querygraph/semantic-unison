@@ -80,6 +80,27 @@ val read_checkpoint_record : expected_binding:string -> expected_record_sha256:s
     Caller retains exclusive access/ownership, independently reads back before
     publication, and handles all errors/partial stages without automatic retry.
     A successful write is not a durable index or directory publication proof. *)
+type record_publication
+val record_publication_available : unit -> bool
+val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->
+  temporary:string -> expected_binding:string -> expected_record_sha256:string ->
+  SemanticFile.t -> record_publication
+val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit
+val record_published : record_publication -> bool
+(** macOS immutable-record publication; directory and stage FDs are BORROWED,
+    never opened/duplicated/closed or retained here. Keep them live, unreassigned
+    and exclusively owned through settlement; do not share a ticket concurrently.
+    Prepare verifies bounded record readback against separately trusted binding/
+    digest, requires private0700 owner directory and private0600 singly linked
+    regular stage, binds its no-follow temporary leaf, and requires absent target.
+    Target is the record digest's64hex basename. Publish rechecks identities and
+    full stage facts, syncs the stage, performs exclusive same-directory rename,
+    checks the published object and requests directory sync. [record_published]
+    records native rename success even if a later check/sync raises. Never retry
+    a published ticket or remove its target after an error. Caller retains stage/
+    directory ownership and closes them under its uncertainty protocol. No owner
+    index advancement, hostile-writer exclusion, mount-incarnation or hardware
+    power-loss durability claim. Unavailable platforms refuse, without fallback. *)
 val with_checkpoint : expected_checkpoint_sha256:string -> expected_root_schema:string ->
   max_read_bytes:int64 -> SemanticFile.t -> string -> (session -> snapshot -> 'a) -> 'a
 (** Authenticate metadata against the owner's prior trusted checkpoint digest,

@@ -84,6 +84,11 @@ let transform version path =
           "val find : string -> (module S) option @ contended";
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
+        | "componentHash" -> [
+          "val record_publication_available : unit -> bool";
+          "val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> expected_binding:string -> expected_record_sha256:string ->\n  SemanticFile.t -> record_publication";
+          "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
+          "val record_published : record_publication -> bool"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]

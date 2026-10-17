@@ -1,0 +1,120 @@
+{
+  "state": "FOCUSED_MACOS_PUBLICATION_PASS_CLOSED",
+  "scope": "Original tiny record exclusive publication and owner-only mode controls; no owner index/full-build/postrename failure injection qualification",
+  "actual_terminal": {
+    "session": 58876,
+    "chunk": "7a5f21",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "preserved_runs": [
+    {
+      "session": 45325,
+      "chunk": "5ae834",
+      "outer_exit": 0,
+      "worker_exit": 1,
+      "reason": "Darwin declarations hidden by feature macros"
+    },
+    {
+      "session": 57802,
+      "chunk": "81178a",
+      "outer_exit": 0,
+      "worker_exit": 1,
+      "reason": "owner-only FFI interface inherited portable module contract"
+    },
+    {
+      "session": 57220,
+      "chunk": "061319",
+      "outer_exit": 0,
+      "worker_exit": 0,
+      "scope": "narrow native success before additional negative mode control"
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-controls-kh_leez9/RESULT.json",
+      "bytes": 121997,
+      "sha256": "6028abe32199f12cb3f7dbfdbb3977457301f8fe72d539c32944609177c7a3d7"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "37fd0af3715a4086ff65cef0cc1e548493a33205459e9ac446fc815ed0cbae24"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d1e3915f0fac75da24fd125b0ab4df62d0ebfc3b773ec6a0723ec81532ea4815"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 3187,
+      "sha256": "428c5902471fab6626c83fce8143f356d01d893caeacfdad3c29ba4e799ad1ed"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-002/SHARED-START.json",
+      "bytes": 1119,
+      "sha256": "73d525cce34035cc2bd37766c6f735ca3640704a706f293b97baaa358fe79d66"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fbce85e00587da02d6efacd685b9d9d88bd2633ccd5e28578e1fe42971b0b49f"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 1390,
+      "sha256": "9119645a881bcd4c3ed10b76d692b74e7d261ac648ed0d59c96b42d538627ed9"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-003/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "2379476f02e135f188b31c5f887be992ac798df6e9549c1aada13375924cdd97"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-003/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3b8be25efeabf23673c6c275dd84493c8947ae9f146fec12ba17ebc2ce6e1251"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-003/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-003/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "743e82b90bbb9ef974e871ef85a3975b4bba859538ec5ea1ee53b0037cfb3ccb"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-004/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "6f1ec9afa783af5ebcc9e016f58853d602a286ecc0d5ce9307d22655dd143d42"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-004/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e782bcb48ab3c556b4a3704c5ec93d0d074b30780e862980a697077f9824db9b"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-004/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-controls-20261017-004/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "3ce9a43dd90fe1237e1b9484214a90c586d3b27510a05e0d73c14b085a5843df"
+    }
+  ]
+}

@@ -176,6 +176,28 @@ all descriptors, independent readback and later publication. These functions ope
 no paths and close no descriptors. A failed partial stage remains caller-owned;
 no automatic retry, unlink, rename, index or directory durability is supplied.
 
+### Borrowed-descriptor immutable record publisher
+
+The separate macOS publisher now provides exclusive namespace publication for
+these records. It is owner-only/nonportable, with no opened, duplicated, closed
+or retained descriptors. The caller keeps an owned private0700 directory and
+private0600 singly linked stage FD alive and exclusively controlled through the
+operation. Preparation independently reads and authenticates the record, binds
+the no-follow temporary leaf to the stage's full native stat, and requires the
+digest-named target to be absent. Publication rechecks directory/stage/name,
+syncs the stage, uses same-directory `renameatx_np(RENAME_EXCL)`, verifies the
+published identity and requests directory sync.
+
+The native ticket records rename success before runtime reacquisition and before
+post-rename verification/sync errors. Consult `record_published` after any error;
+a published target must not be removed or replayed. The ticket owns no FD, so
+caller closure and any uncertain-close evidence remain explicit owner duties.
+This is cooperative namespace fencing, not hostile same-UID compare-and-swap,
+mount-incarnation proof, hardware power-loss durability or owner-index publication.
+Other platforms refuse without a pathname fallback. Post-rename syscall-failure
+injection and full-build successor qualification remain outstanding; original
+controls cover success/readback, collision, symlink, mutation and replay refusal.
+
 Reuse the trust boundary of local Unison state, not peer reports or file-side
 metadata. This explicitly trusts the local state owner; checksums are corruption
 detection, not authentication against another process with that owner's access.

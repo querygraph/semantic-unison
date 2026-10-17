@@ -26,6 +26,13 @@ let frames bytes =
     let offset= !at in ignore(number ());let length= !at in ignore(number ());
     let hash= !at in at:= !at+32;let children= !at in let count=number () in
     (id,role,offset,length,hash,children)::List.concat(List.init count(fun _ -> node ())) in node ()
+let with_record_directory action =
+  let path=Filename.temp_file "component-record-directory-" "" in
+  Sys.remove path;Unix.mkdir path 0o700;
+  let directory=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+  Fun.protect ~finally:(fun () -> Unix.close directory;
+    Array.iter(fun name -> Sys.remove(Filename.concat path name)) (Sys.readdir path);
+    Unix.rmdir path) (fun () -> action path directory)
 let () =
   check(String.length seal=32 && seal=SemanticHash.string encoded &&
     String.length encoded<=C.max_checkpoint_size) "checkpoint envelope digest/bound differs";
@@ -42,6 +49,57 @@ let () =
         let binding=SemanticHash.string "original-root/path/generation/decoder-contract" in
         let record=C.checkpoint_record ~binding checkpoint in
         let record_digest=SemanticHash.string record in
+        if C.record_publication_available () then with_record_directory(fun path directory ->
+          let stage=Unix.openfile (Filename.concat path "stage")
+            [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+          Fun.protect ~finally:(fun () -> Unix.close stage) (fun () ->
+            ignore(C.write_checkpoint_record ~binding checkpoint stage);
+            let ticket=SemanticFile.with_fd stage (fun file -> C.prepare_record_publication
+              ~directory ~stage ~temporary:"stage" ~expected_binding:binding
+              ~expected_record_sha256:record_digest file) in
+            check(not(C.record_published ticket)) "record published during preparation";
+            C.publish_checkpoint_record ticket directory stage;
+            check(C.record_published ticket && not(Sys.file_exists(Filename.concat path "stage")) &&
+              (Unix.stat(Filename.concat path (SemanticHash.hex record_digest))).Unix.st_ino=
+                (Unix.fstat stage).Unix.st_ino) "exclusive record publication identity/state differs";
+            check(try C.publish_checkpoint_record ticket directory stage;false with Invalid_argument _ -> true)
+              "published record ticket replayed";
+            let loaded=SemanticFile.with_fd stage (fun file -> C.read_checkpoint_record
+              ~expected_binding:binding ~expected_record_sha256:record_digest file) in
+            check(C.checkpoint_bytes loaded=encoded) "published record failed independent readback";
+            Unix.symlink (SemanticHash.hex record_digest) (Filename.concat path "alias");
+            check(try ignore(SemanticFile.with_fd stage (fun file -> C.prepare_record_publication
+              ~directory ~stage ~temporary:"alias" ~expected_binding:binding
+              ~expected_record_sha256:record_digest file));false with Unix.Unix_error _ -> true)
+              "record stage symlink accepted"));
+        if C.record_publication_available () then with_record_directory(fun path directory ->
+          let stage=Unix.openfile (Filename.concat path "stage")
+            [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+          Fun.protect ~finally:(fun () -> Unix.close stage) (fun () ->
+            ignore(C.write_checkpoint_record ~binding checkpoint stage);
+            let ticket=SemanticFile.with_fd stage (fun file -> C.prepare_record_publication
+              ~directory ~stage ~temporary:"stage" ~expected_binding:binding
+              ~expected_record_sha256:record_digest file) in
+            let collision=Filename.concat path (SemanticHash.hex record_digest) in
+            let output=open_out_bin collision in output_string output "foreign";close_out output;
+            check(try C.publish_checkpoint_record ticket directory stage;false
+              with Unix.Unix_error(Unix.EEXIST,_,_) -> true) "record collision overwritten";
+            check(not(C.record_published ticket) && Sys.file_exists(Filename.concat path "stage") &&
+              (Unix.stat collision).Unix.st_size=7) "collision lost ownership or foreign target"));
+        if C.record_publication_available () then with_record_directory(fun path directory ->
+          let stage=Unix.openfile (Filename.concat path "stage")
+            [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+          Fun.protect ~finally:(fun () -> Unix.close stage) (fun () ->
+            ignore(C.write_checkpoint_record ~binding checkpoint stage);
+            let ticket=SemanticFile.with_fd stage (fun file -> C.prepare_record_publication
+              ~directory ~stage ~temporary:"stage" ~expected_binding:binding
+              ~expected_record_sha256:record_digest file) in
+            Unix.ftruncate stage 0;
+            check(try C.publish_checkpoint_record ticket directory stage;false
+              with Unix.Unix_error(Unix.EBUSY,_,_) -> true) "mutated record stage published";
+            check(not(C.record_published ticket) &&
+              not(Sys.file_exists(Filename.concat path (SemanticHash.hex record_digest))))
+              "mutation failure claimed publication"));
         let unpack bytes digest=C.checkpoint_from_record ~expected_binding:binding
           ~expected_record_sha256:digest bytes in
         let restored=unpack record record_digest in
