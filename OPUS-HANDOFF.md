@@ -7,7 +7,37 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
-## CURRENT: production-linked remote probe built; coordinator still pending
+## CURRENT: component RPC coordinator frozen for SOURCE REVIEW ONLY
+
+`tests/component_remote/` now contains bounded qualified-close IO, exact plan
+contract, inactive generated case, retained call kernel, independent prefix/
+functional auditor and one-use parent/worker coordinator. Existing EXglobal then
+Unison00..07 only; worker inherits9 descriptions and checks exact canonical IDs
+plus policy.300s owner observation/260s new-call horizon/30s call observation;
+unknown retains objects/FDs, no broad aggregate kill. Shared direct-child capture
+retains close uncertainty and separate proxy owner; old benchmark wrapper is not
+used. Intents/raw outcomes precede verification, failed cases stop successors,
+pure audit cannot substitute for actual parent terminal or release locks.
+
+Final original disposable/fabricated18controls ACTUAL initialexec3503c7/exit0/
+NOsession; direct child4856 actuallyreaped0, groupothersabsent beforeleaderreap.
+All direct groups reaped0/othersabsent/Unison8closed; no EXglobal/RPC/SDK/media.
+343 source pins matched before/after; runtime closure342 files. Receipt
+`tests/qualification/component-remote-coordinator-controls-actual-20261017.json`
+43053B SHA16d52c2cad736a21f000effb0797cdb380f27b31d3aec2e0181f761446a1da5b.
+Raw result `/private/tmp/unison-component-remote-controls-gdrylkza/RESULT.json`.
+
+Frozen plan `doc/component-remote-plan-v1.json`44341B
+SHAd7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad.
+Request `doc/component-remote-request-v1.json`2531B
+SHAd0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49.
+Workspace `/private/tmp/u-cr-cf119542138e` is planned/UNSTARTED, no admission yet.
+The request is explicitly SOURCE REVIEW ONLY, not runtime-ready grant or Photo
+hold; do not dispatch from these files. Ask Root for source review, preserve pins,
+then announce readiness before requesting a fresh exact finite IO admission.
+No old consumed grant applies. Contract: `doc/component-remote-probe.md`.
+
+## Prior checkpoint: production-linked remote probe built; coordinator pending
 
 `tests/report/remote_probe.ml` now installs real generated roots, negotiates and
 propagates preferences, calls the production local/remote component API and
@@ -37,7 +67,7 @@ fresh Root EXIO admission. No runtime mode was exercised, no new-RPC/mixed-versi
 claim, no consumed-grant reuse; all resources closed. Persistent binding remains
 open independently of this reporting qualification.
 
-## CURRENT: bounded remote component protocol implemented; transport trial next
+## Prior checkpoint: bounded remote component protocol implemented
 
 `semantic-components-v0` / `semanticComponentsV0` now provides a separate SIC/0
 path for the fixed empty-decoder DNG component contract. Explicit details remain

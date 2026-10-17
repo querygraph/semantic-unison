@@ -58,7 +58,37 @@ each client, launcher/supervisor, native server, joined pump, worker and group
 closure. Failed prefixes must remain failures; missing evidence retains ownership.
 No extra SDK/Adobe/native-UI, camera, receiving or successor scope is implied.
 
-Still required before runtime: implement/review that exact owned coordinator and
-combined auditor, freeze its command/workspace/deadlines and source closure, run
-disposable failure-accounting controls, then obtain a fresh finite Root IO grant.
-Do not execute probe runtime modes merely because the build-only controls passed.
+## Prepared coordinator and source review
+
+`tests/component_remote/coordinator.py` now owns the one-use workspace, existing
+EXglobal/Unison00..07 bundle and worker with nine inherited descriptions. The
+worker independently checks those identities against both canonical manifests
+and the standing policy. Artifact hashes are checked after acquisition and before
+each case; the exact plan bytes bind the admission. It observes the worker for300s,
+stops starting calls40s earlier, and retains ownership on unresolved expiry rather
+than killing an aggregate with separate-session owners.
+
+The new call kernel uses the qualified direct-child capture helper and retains
+the separate proxy object with any uncertain descriptor/capture outcome. It does
+not route close uncertainty through the older benchmark wrapper. Intent precedes
+the call; raw outcomes precede functional checks. Known failed calls stop successor
+cases. Explicit pre-call failure records differ from pending intents. The parent
+reparses every raw proxy/client/supervisor/server/group/pump proof before worker
+reap and bundle close. Functional pass additionally requires eight exact cases,
+actual generated-file identities/hashes and the expected probe output. The audit
+alone cannot authenticate parent terminal or release descriptors.
+
+[Disposable controls](../tests/qualification/component-remote-coordinator-controls-actual-20261017.json)
+passed18 methods, with343 source pins before/after. They use fabricated owners and
+tiny original files: no canonical locks, RPC, SDK or media. They cover failed-prefix
+versus success, no-creation evidence, pending/raw-substituted receipts, original
+read/write plus close uncertainty without numeric retries, exact carrier/proxy
+retention, noncanonical identities, known pre-child rollback and observation
+expiry without aggregate kill. They are not a live transport qualification.
+
+Frozen [plan](component-remote-plan-v1.json) and
+[source-review request](component-remote-request-v1.json) contain342 runtime source
+pins, six prerequisites and exact proposed argv. The request explicitly asks for
+source review only, not an expiring admission or Photo scheduling hold. Review
+and fresh readiness/finite Root IO admission remain required before runtime.
+Do not execute probe runtime modes merely because these controls passed.

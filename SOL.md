@@ -133,6 +133,17 @@ prepares an eight-case new/old-peer/unsupported/disabled matrix; its owned
 coordinator, independent raw lifecycle audit and fresh IO admission remain
 required before actual transport. No connection/media/SDK was invoked here.
 
+The finite coordinator and independent raw prefix/functional audit are now
+implemented under `tests/component_remote/`.18 original disposable/fabricated
+controls passed,343 source pins before/after, all test groups/Unison8 closed.
+The exact eight-case plan/request are frozen for source review only in
+`doc/component-remote-plan-v1.json` / `doc/component-remote-request-v1.json`.
+They bind342 runtime sources, six prerequisites and canonical EXglobal+8CPU;
+uncertainty retains owners/descriptors and known failures stop successors.
+No canonical lock or RPC was exercised in these controls. Source review and a
+fresh finite IO admission remain required for actual transport, never inferred
+from source acceptance or release of previous slots.
+
 **Acceptance boundary for progressive rehashing:** release readiness is measured
 against the declared supported operations, not a percentage of fields decoded.
 A partially mapped camera may use the qualified pixel/metadata separation and
