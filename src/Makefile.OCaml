@@ -203,6 +203,8 @@ CAMLCFLAGS_X = $(CAMLCFLAGS) $(CAMLCFLAGS_FSM_X)
 semantic_mode_filter$(EXEC_EXT): semantic_mode_filter.ml
 	$(OCAMLC) -o $@ semantic_mode_filter.ml
 
+semanticHash_stubs$(OBJ_EXT): semanticHash_evp.h
+
 semanticHash.cmi: semanticHash.mli semanticHash.ox.mli.in semantic_mode_filter$(EXEC_EXT)
 	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.mli
 semanticHash.cmo: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)

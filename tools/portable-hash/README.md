@@ -1,8 +1,11 @@
-# Isolated OpenSSL3 SHA-256 adapter candidate
+# OpenSSL3 SHA-256 component and production adapter
 
-This component is **not selected by Unison's production Make or Dune builds**.
-It exercises a maintained EVP implementation as a candidate for the open
-non-Apple hashing requirement. macOS production continues using CommonCrypto.
+The initial isolated candidate has now been integrated behind an explicit
+production Make/Dune selection. See [backend configuration and current evidence](../../doc/hash-backends.md).
+Default platform behavior remains unchanged. The adapter and opt-in production
+path share `src/semanticHash_evp.h`; separate symbol namespaces allow both to
+be checked in one control executable. The historical component receipt below
+describes its earlier source, including this README's previous candidate status.
 
 Each abstract OCaml context owns an EVP_MD_CTX and a fetched SHA256 EVP_MD.
 The custom block stores no OCaml pointers. Finish and native API failure free
@@ -30,9 +33,8 @@ Eight contained compile/runtime calls completed with their expected statuses.
 preserves the successful final run and earlier import/compiler test failures.
 No SDK, media payload or new dependency installation was involved.
 
-Before production selection: integrate maintained backend discovery/linkage
-with Make and Dune; reconcile the production context representation, descriptor
-and memory accounting; preserve identical digest behavior and worker ownership;
-and execute actual supported non-Apple platform builds/tests. A macOS linked
-component does not qualify Linux or Windows. No production portability claim
-or backend default change follows from these controls.
+The explicit installed-directory linkage and opaque native context are now
+implemented and qualified on macOS. Actual supported non-Apple builds/tests,
+broader resource accounting and platform deployment remain outstanding. A macOS
+linked component does not qualify Linux or Windows. No backend default change
+follows from these controls.

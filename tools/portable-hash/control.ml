@@ -25,7 +25,7 @@ let () =
   let vectors=List.map (fun n ->
     let data=read(string_of_int n^".bin") and expected=String.trim(read(string_of_int n^".sha256")) in
     check (SemanticHash.hex(hash data)=expected) "EVP vector";
-    check (SemanticHash.hex(SemanticHash.string data)=expected) "CommonCrypto vector";
+    check (SemanticHash.hex(SemanticHash.string data)=expected) "selected production backend vector";
     check (SemanticHash.hex(SemanticHash.reference_string data)=expected) "reference vector";
     data,expected) [0;1;55;56;63;64;65;119;120;127;128;65535;65536;65537;1048576] in
   let domains=List.init 4 (fun _ -> Domain.Safe.spawn (fun () ->
@@ -38,7 +38,8 @@ let () =
           let n=min 12347 (Bytes.length input-offset) in
           Evp.feed context input offset n; feed(offset+n)
         end in
-      feed 0; check (SemanticHash.hex(Evp.finish context)=expected) "domain stream vector") vectors)) in
+      feed 0; check (SemanticHash.hex(Evp.finish context)=expected) "domain stream vector";
+      check (SemanticHash.hex(SemanticHash.string data)=expected) "production domain stream vector") vectors)) in
   List.iter Domain.join domains;
   Gc.full_major (); Gc.full_major ();
   check (live ()=0 && methods ()=0) "finished contexts or methods leaked";

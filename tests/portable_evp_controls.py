@@ -1,5 +1,6 @@
 """Finite isolated stock/Ox EVP adapter controls. No SDK/media or production edit."""
 import hashlib
+import argparse
 import json
 import os
 from pathlib import Path
@@ -22,18 +23,23 @@ def pin(path):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--production-openssl', action='store_true')
+    args = parser.parse_args()
     root = Path(tempfile.mkdtemp(prefix='u-evp-controls-', dir='/private/tmp'))
     crypto = Path('/usr/local/opt/openssl@3').resolve()
     result = dict(complete=False, calls=[], compilers=[], library=pin(crypto / 'lib/libcrypto.dylib'),
                   source_pins=[pin(p) for p in sorted((ROOT / 'tools/portable-hash').glob('*')) if p.is_file()]
-                  + [pin(Path(__file__))], SDK_invoked=False, media_payload_opened=False,
-                  production_selected=False)
+                  + [pin(Path(__file__)), pin(ROOT / 'src/semanticHash_evp.h'),
+                     pin(ROOT / 'src/semanticHash.ml'), pin(ROOT / 'src/semanticHash_stubs.c')], SDK_invoked=False, media_payload_opened=False,
+                  production_selected=args.production_openssl,
+                  selection_scope='explicit test binary only; shipping default unchanged')
     for label, switch in [('stock', 'default'), ('ox', '5.2.0+ox')]:
         directory = root / label; directory.mkdir(mode=0o700)
         compiler = Path('/Users/alexy/.opam') / switch / 'bin/ocamlopt'
         for name in ('evp.ml', 'evp.mli', 'evp_stubs.c', 'control.ml'):
             shutil.copyfile(ROOT / 'tools/portable-hash' / name, directory / name)
-        for name in ('semanticHash.ml', 'semanticHash.mli', 'semanticHash_stubs.c'):
+        for name in ('semanticHash.ml', 'semanticHash.mli', 'semanticHash_stubs.c', 'semanticHash_evp.h'):
             shutil.copyfile(ROOT / 'src' / name, directory / name)
         if label == 'ox':
             for name in ('evp.ml', 'semanticHash.ml', 'control.ml'):
@@ -62,7 +68,10 @@ def main():
             call([str(compiler), '-ccopt', '-std=c11', '-ccopt', '-DEVPHASH_TEST_COUNTERS',
                   '-ccopt', '-I' + str(crypto / 'include'), '-ccopt', '-Wall', '-ccopt', '-Wextra',
                   '-ccopt', '-Werror', '-c', 'evp_stubs.c'])
-            call([str(compiler), 'semanticHash_stubs.c', 'semanticHash.mli', 'semanticHash.ml',
+            selected = (['-ccopt', '-DUNISON_SEMANTIC_HASH_OPENSSL',
+                         '-ccopt', '-I' + str(crypto / 'include')]
+                        if args.production_openssl else [])
+            call([str(compiler), *selected, 'semanticHash_stubs.c', 'semanticHash.mli', 'semanticHash.ml',
                   'evp.mli', 'evp.ml', 'control.ml', 'evp_stubs.o',
                   '-cclib', '-L' + str(crypto / 'lib'), '-cclib', '-lcrypto',
                   '-cclib', '-Wl,-rpath,' + str(crypto / 'lib'), '-o', 'control'])

@@ -7,6 +7,28 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest hash production successor: opt-in EVP with Make/Dune qualification
+
+Opaqueproductionnativecontext +shared `src/semanticHash_evp.h` nowimplemented.
+Defaultplatform unchanged; explicit SEMANTIC_HASH_BACKEND=openssl, optional
+absoluteSEMANTIC_OPENSSL_INCLUDE/LIB selectinstalledOpenSSL3 viaMake/Dune.
+Noinstallation/download/providerfallback. `doc/hash-backends.md` documentsusage.
+Makeheaderdependency +Dunegeneratedflagsexecutable/rules qualified. Fourstock/Ox
+Make/Dune OpenSSLbuilds +defaultplatformstockDunebuild PASS. Actualmatrixsession
+18121/262249/0/no session; worker17617reaped0/groupclosed/CPU8closed. Eleven
+configuration/buildchildren (threeexpectedinvalidconfigexits2), allsettled.
+Object/configreadback actual97c5f9/0: fivecontainednmchildren verifiedprivateEVP
+symbols+EVP_MD_fetch inselectedobjects, CommonCrypto onlyinplatformobject;
+2310capturedsourcehashchecks pass. BothproductionOpenSSLcomponent35420/839063/0
+anddefaultplatform77359/5103e3/0 passed8calls each (2expectedOxnegativecompiles).
+NoSDK/media/EXIO. Receipt
+`tests/qualification/openssl-production-backend-actual-20261017.json`.
+Initialharnesswrongsavehelper FileExistsError actuale5f933/1 closed; rawfailure
+preserved, correctedfreshmatrix succeeded. This closes the previouslyuncommitted
+WIP checkpoint below as opt-in macOS qualification, notLinux/Windows/FIPS/RSS/
+scaling/defaultbackendreplacement. Next priority: actualhierarchicalpartial-
+knowledge/componenthashbaseline, not more exhaustiveprivatefieldgating.
+
 ## Authoritative user steering: gradual nested knowledge, deployable partial coverage
 
 User explicitly directs a hierarchy: standardmetadata/pixels first, MakerNotes

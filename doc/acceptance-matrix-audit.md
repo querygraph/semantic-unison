@@ -2,6 +2,29 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+Latest user steering in SOL.md changes the coverage criterion: exhaustive private
+camera understanding is not a global deployment gate. The baseline is separate
+pixel/standard metadata components plus conservative opaque hash coverage, with
+nested plugins and incremental refinement. These new composition/cache/profile
+contracts still require implementation and qualification; partial camera
+knowledge itself must not be relabeled as blocking the whole feature.
+
+The [opt-in production OpenSSL successor](../tests/qualification/openssl-production-backend-actual-20261017.json)
+now has opaque native contexts, a shared EVP implementation and Make/Dune
+configuration. Four stock/Ox Make/Dune OpenSSL builds plus a platform stock Dune
+build passed; five actual object-symbol/configuration audits and2310input-source
+hash checks bind those artifacts. Both platform/default and selected-production
+component runs passed. Actual source/runtime scope is macOS/OpenSSL3.6.4;
+Linux/Windows, provider policy, resource peaks and performance remain open.
+The older source-rebind paragraphs below describe their historical source, not
+a claim that all those pins still match this production successor.
+
+The corrected [all-scanned SDK V2](../tests/qualification/all-scanned-sdk-v2-actual-20261017.json)
+also actually passed/closed: four real SDK calls on unchanged stock/Ox endpoint
+replicas, all raw-digestvalid/decodeSUCCESS/errors0/warnings0. V1 remains withdrawn.
+This supersedes the prior fresh-grant wait below; it is one retained-camera case,
+not corpus, pixel or full-goal acceptance.
+
 Current all-scanned compatibility now includes actual stock/Ox clients against
 older feature-incapable peers: required scope explicitly refused before scanning,
 off completed on empty roots. Four additional current transport empty-root calls
