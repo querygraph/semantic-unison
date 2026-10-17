@@ -1,4 +1,8 @@
 exception Invalid of string
+external prepare_reader_raw : Unix.file_descr -> bool (* ox-portable-ffi *)
+  = "unison_semantic_prepare_reader"
+external pread_raw : Unix.file_descr -> int -> int64 -> string (* ox-portable-ffi *)
+  = "unison_semantic_pread"
 type writer = { output : Unix.file_descr; positional : bool }
 external prepare_writer_raw : Unix.file_descr -> bool (* ox-portable-ffi *) = "unison_semantic_prepare_writer"
 external pwrite_raw : Unix.file_descr -> string -> int -> int -> int64 -> int (* ox-portable-ffi *)
@@ -31,7 +35,8 @@ let write_at writer data start length position =
 type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
 type read_counter = { mutable bytes : int64; mutable chunks_read : int64;
                       mutable overflow : bool }
-type t = { channel : in_channel; initial : Unix.LargeFile.stats;
+type input = Buffered of in_channel | Positional of Unix.file_descr
+type t = { input : input; mutable active : bool; initial : Unix.LargeFile.stats;
            check_cancel : unit -> unit; reads : read_counter option }
 let account_read t length = match t.reads with
   | None -> ()
@@ -43,14 +48,18 @@ let account_read t length = match t.reads with
       if counter.chunks_read = Int64.max_int then counter.overflow <- true
       else counter.chunks_read <- Int64.succ counter.chunks_read
   | Some _ -> ()
-let size t = t.initial.Unix.LargeFile.st_size
+let require_active t = if not t.active then raise (Invalid "reader callback expired")
+let descriptor t = require_active t; match t.input with
+  | Buffered channel -> Unix.descr_of_in_channel channel | Positional fd -> fd
+let size t = require_active t; t.initial.Unix.LargeFile.st_size
 let same_inode t fd =
+  require_active t;
   let b = Unix.LargeFile.fstat fd in
   t.initial.Unix.LargeFile.st_dev = b.Unix.LargeFile.st_dev &&
   t.initial.Unix.LargeFile.st_ino = b.Unix.LargeFile.st_ino
 let check t =
-  t.check_cancel ();
-  let a = t.initial and b = Unix.LargeFile.fstat (Unix.descr_of_in_channel t.channel) in
+  require_active t; t.check_cancel ();
+  let a = t.initial and b = Unix.LargeFile.fstat (descriptor t) in
   if a.Unix.LargeFile.st_dev <> b.Unix.LargeFile.st_dev || a.Unix.LargeFile.st_ino <> b.Unix.LargeFile.st_ino ||
      a.Unix.LargeFile.st_size <> b.Unix.LargeFile.st_size || a.Unix.LargeFile.st_mtime <> b.Unix.LargeFile.st_mtime ||
      a.Unix.LargeFile.st_ctime <> b.Unix.LargeFile.st_ctime then
@@ -83,11 +92,12 @@ let with_fd_internal ~measure_reads ~check_cancel fd f =
     (try owned_channel := Some channel
      with error -> (try close_in_noerr channel with _ -> ()); raise error);
     let reads = if measure_reads then Some {bytes=0L;chunks_read=0L;overflow=false} else None in
-    let t = {channel;initial;check_cancel;reads} in
-    let result = f t in
-    check t;
-    close ();
-    result
+    let t = {input=Buffered channel;active=true;initial;check_cancel;reads} in
+    Fun.protect ~finally:(fun () -> t.active <- false) (fun () ->
+      let result = f t in
+      check t;
+      close ();
+      result)
   with error -> close_noerr (); raise error
 let with_fd ?(check_cancel = fun () -> ()) fd f =
   with_fd_internal ~measure_reads:false ~check_cancel fd f
@@ -98,6 +108,32 @@ let with_read_stats ?(check_cancel = fun () -> ()) fd f =
       | Some counter -> {logical_bytes=counter.bytes;chunks=counter.chunks_read;saturated=counter.overflow}
       | None -> assert false in
     result,stats)
+let with_borrowed_fd ?(check_cancel = fun () -> ()) fd f =
+  let rec prepare () =
+    check_cancel ();
+    try if not(prepare_reader_raw fd) then raise(Invalid "borrowed positional reader unavailable")
+    with Unix.Unix_error(Unix.EINTR,_,_) -> prepare () in
+  prepare ();
+  let initial=Unix.LargeFile.fstat fd in
+  if initial.Unix.LargeFile.st_kind<>Unix.S_REG || initial.Unix.LargeFile.st_size<0L then
+    raise(Invalid "not a regular borrowed file");
+  let t={input=Positional fd;active=true;initial;check_cancel;reads=None} in
+  Fun.protect ~finally:(fun () -> t.active <- false) (fun () ->
+    let result=f t in check t;result)
+let positional_read t fd offset length =
+  let output=Bytes.create length in
+  let rec loop position = if position<length then begin
+    t.check_cancel ();
+    let remaining=min 65536 (length-position) in
+    let rec attempt () =
+      t.check_cancel ();
+      try pread_raw fd remaining (Int64.add offset (Int64.of_int position))
+      with Unix.Unix_error(Unix.EINTR,_,_) -> attempt () in
+    let chunk=attempt () in
+    if chunk="" then raise(Invalid "truncated borrowed file");
+    Bytes.blit_string chunk 0 output position (String.length chunk);
+    loop (position+String.length chunk)
+  end in loop 0;Bytes.unsafe_to_string output
 let bounds t offset length =
   if offset < 0L || length < 0L || offset > size t || length > Int64.sub (size t) offset then
     raise (Invalid "extent outside file")
@@ -105,21 +141,27 @@ let read t offset length =
   t.check_cancel ();
   if length < 0 || length > 1048576 then raise (Invalid "read limit");
   bounds t offset (Int64.of_int length);
-  LargeFile.seek_in t.channel offset;
   try
-    let result = really_input_string t.channel length in
+    let result = match t.input with
+      | Buffered channel -> LargeFile.seek_in channel offset; really_input_string channel length
+      | Positional fd -> positional_read t fd offset length in
     account_read t length;
     result
   with End_of_file -> raise (Invalid "truncated file")
 let iter t offset length f =
   t.check_cancel ();
   bounds t offset length;
-  LargeFile.seek_in t.channel offset;
+  (match t.input with Buffered channel -> LargeFile.seek_in channel offset | Positional _ -> ());
   let b = Bytes.create 65536 in
   let rec loop remaining = if remaining > 0L then begin
     t.check_cancel ();
     let n = Int64.to_int (min remaining 65536L) in
-    (try really_input t.channel b 0 n with End_of_file -> raise (Invalid "truncated file"));
+    (try match t.input with
+      | Buffered channel -> really_input channel b 0 n
+      | Positional fd ->
+        let position=Int64.add offset (Int64.sub length remaining) in
+        Bytes.blit_string (positional_read t fd position n) 0 b 0 n
+     with End_of_file -> raise (Invalid "truncated file"));
     account_read t n;
     f b n; loop (Int64.sub remaining (Int64.of_int n))
   end in loop length

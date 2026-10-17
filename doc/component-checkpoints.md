@@ -132,6 +132,33 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Borrowed positional readers
+
+`SemanticFile.with_borrowed_fd` supplies a POSIX reader for owner-held source or
+metadata descriptors without opening, duplicating or closing any FD. Reads use
+bounded native `pread` attempts and preserve shared file position. The caller
+owns stable readable regular-descriptor lifetime and immutable input throughout
+the callback. Every reader operation refuses after callback retirement. Windows
+refuses explicitly rather than selecting the descriptor-owning channel path.
+
+This separates cache content validation from descriptor acquisition/settlement;
+known-capture controls now use this path for both record and index readers. It
+does not implement managed namespace opening or repair the separate legacy
+channel reader's cleanup protocol. Reader stability remains the existing stat
+contract, not hostile-writer exclusion or physical-volume identity. Native C
+uses stack storage while released and copies into a managed string only after
+runtime reacquisition. Short reads loop; EINTR retries check cancellation; EOF
+and operational errors do not select a fallback or close the borrow.
+
+Original tiny controls compare content/digests across64KiB boundaries, verify
+shared-position and FD preservation after success/failure/cancellation and
+reject escaped readers. A separately compiled original `pread` shim exercises
+short reads, EINTR, cancellation, EOF and EIO on stock/Ox. Production has no
+fault switch. Current stock/Ox Make/fullselftests and Dune compile checks passed with1272
+current source checks;110workerchecks/compiler also passed. All actual owners,
+workers/groups/tokens closed. See `tests/qualification/borrowed-reader-actual-20261017.json`.
+This runtime qualification is macOS only, not Linux/Windows execution evidence.
+
 ### Known-entry recovery lookup
 
 `inspect_cache_capture` now authenticates the two expected immutable leaves for

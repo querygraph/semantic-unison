@@ -116,6 +116,61 @@ CAMLprim value unison_semantic_pwrite(value descriptor, value data,
 #endif
 }
 
+/* Borrowed positional input: no descriptor acquisition or close anywhere. */
+CAMLprim value unison_semantic_prepare_reader(value descriptor)
+{
+  CAMLparam1(descriptor);
+#ifndef _WIN32
+  caml_process_pending_actions();
+  int fd = unison_semantic_fd(descriptor, "semantic reader descriptor");
+  int error = 0;
+  struct stat stat;
+  caml_enter_blocking_section_no_pending();
+  int flags = fcntl(fd, F_GETFL);
+  if (flags < 0) error = errno ? errno : EIO;
+  else if ((flags & O_ACCMODE) != O_RDONLY &&
+           (flags & O_ACCMODE) != O_RDWR) error = EBADF;
+  if (!error && fstat(fd, &stat)) error = errno ? errno : EIO;
+  if (!error && (!S_ISREG(stat.st_mode) || stat.st_size < 0)) error = EINVAL;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "semantic reader admission", Nothing);
+  CAMLreturn(Val_true);
+#else
+  CAMLreturn(Val_false);
+#endif
+}
+
+CAMLprim value unison_semantic_pread(value descriptor, value length, value position)
+{
+  CAMLparam3(descriptor, length, position);
+  CAMLlocal1(result);
+#ifndef _WIN32
+  caml_process_pending_actions();
+  intnat count = Long_val(length);
+  int64_t offset = Int64_val(position);
+  if (count < 0 || count > UNISON_SEMANTIC_WRITE_MAX || offset < 0 ||
+      offset > INT64_MAX - (int64_t)count)
+    caml_invalid_argument("SemanticFile.borrowed_read bounds");
+  off_t native_offset = (off_t)offset;
+  off_t native_end = (off_t)(offset + (int64_t)count);
+  if ((int64_t)native_offset != offset ||
+      (int64_t)native_end != offset + (int64_t)count)
+    caml_invalid_argument("SemanticFile.borrowed_read offset");
+  int fd = unison_semantic_fd(descriptor, "semantic pread descriptor");
+  unsigned char buffer[UNISON_SEMANTIC_WRITE_MAX];
+  caml_enter_blocking_section_no_pending();
+  ssize_t received = pread(fd, buffer, (size_t)count, native_offset);
+  int error = received == -1 ? errno : 0;
+  if (received < -1 || received > count || (received == -1 && !error)) error = EIO;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "semantic pread", Nothing);
+  result = caml_alloc_initialized_string((mlsize_t)received, (const char *)buffer);
+  CAMLreturn(result);
+#else
+  caml_unix_error(ENOSYS, "semantic pread", Nothing);
+#endif
+}
+
 /* Immutable checkpoint record publication. No descriptor is opened, duplicated,
  * closed or retained: the caller borrows both FDs through settlement. */
 #ifdef __APPLE__

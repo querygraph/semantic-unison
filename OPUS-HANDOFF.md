@@ -7,6 +7,19 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Borrowed positional reader is now qualified: POSIX `with_borrowed_fd` borrows
+callerFD without opens/dup/closes or position changes, expires after callback,
+bounded64KiB pread with short/EINTR/cancel/EOF/EIO handling. Known-entry tests
+borrow record/index readers. Actualfocused4732/5c6873/0, fault32180/55eba7/0,
+full60005/7f8b98/0 closed; all7workers/groups/tokensclosed. Percompiler52component+
+1005checkpoint+27publicationfault+13readerfault+1051DNG+110workerchecks PASS,
+freshstock/Ox Make/fullselftests/Dunecompile1272current sourcepins match. First
+modefilter count refusal82216/96d6fa outer0/twoworkers1 preserved closed; exact
+native count2->4 corrected, no productionfaultswitch. Evidence
+`tests/qualification/borrowed-reader-actual-20261017.json`. Qualified macOS only;
+Windows explicitrefusal source/Linux runtime unqualified. Legacy channelcleanup
+unchanged. Still no managed namespace/automaticselection/SDK/media/transport.
+
 Partial-knowledge upgrade is now tested through actual authenticated cache reuse:
 unsupported replacement invalidates old private descendants while preserving
 pixel/full-byte identity and retaining the previous usable checkpoint. Focused

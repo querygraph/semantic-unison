@@ -356,8 +356,8 @@ let () =
                  ~expected_record_sha256:(DngComponents.owner_entry_record_sha256 entry) file) in
                check(ComponentHash.checkpoint_bytes recovered=ComponentHash.checkpoint_bytes checkpoint)
                  "capture record bytes changed";
-               let with_record action=SemanticFile.with_fd record_stage (fun file -> action(record_stage,file)) in
-               let with_index action=SemanticFile.with_fd entry_stage (fun file -> action(entry_stage,file)) in
+               let with_record action=SemanticFile.with_borrowed_fd record_stage (fun file -> action(record_stage,file)) in
+               let with_index action=SemanticFile.with_borrowed_fd entry_stage (fun file -> action(entry_stage,file)) in
                if collision then begin
                  check(try with_record(fun record -> ignore(DngComponents.inspect_cache_capture entry ~directory
                    ~record:(Some record) ~index:None));false with ComponentHash.Invalid _ -> true)
