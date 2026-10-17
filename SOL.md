@@ -113,6 +113,17 @@ checks; no Photo media or SDK. See
 `tests/qualification/component-report-focused-actual-20261017.json` and
 `tests/qualification/component-owner-local-actual-20261017.json`.
 
+The separately negotiated remote successor is now implemented in source:
+`semantic-components-v0`/`semanticComponentsV0`, bounded SIC/0 with exact nonce/
+contract binding and fixed five-role slots. Current stock/Ox Make+selftests and
+Dune compile checks pass;25 report controls/compiler and local/refusal owner
+controls pass. Source scope retains model admission through reply encoding with
+no nested transaction. See `doc/component-report-v0.md` and
+`tests/qualification/component-remote-source-actual-20261017.json`. Actual new-RPC
+loopback/mixed-version/failure transport trials remain unqualified and need a
+fresh finite IO coordination; peer hashes remain advisory, not preservation or
+archive authority. Earlier local/receiving receipts keep their historical pins.
+
 **Acceptance boundary for progressive rehashing:** release readiness is measured
 against the declared supported operations, not a percentage of fields decoded.
 A partially mapped camera may use the qualified pixel/metadata separation and

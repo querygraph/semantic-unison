@@ -7,7 +7,38 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
-## CURRENT: explicit local component details wired and qualified
+## CURRENT: bounded remote component protocol implemented; transport trial next
+
+`semantic-components-v0` / `semanticComponentsV0` now provides a separate SIC/0
+path for the fixed empty-decoder DNG component contract. Explicit details remain
+off by default. Remote calls require both the new feature and an enabled built-in
+DNG profile; replies bind exact contract+fresh32-byte nonce, max2048B, five fixed
+role slots. Unsupported views are innerError, malformed wire is outerError.
+SIR0/SIR1/SDE bytes and transfer/archive decisions unchanged. Peer hashes never
+become local source/preservation capabilities. Source admission spans encoding/
+queued output, with no nested core admission; the declared model envelope is
+8*1MiB+256KiB estimate, not RSS cap. Spec `doc/component-report-v0.md`.
+
+Current Make+selftests stock17636/f77624/0 and Ox99727/bc9286/0 PASS. Dune compile
+checks stock27170/d7d233/0 and Ox84596/1efd9e/0 PASS;1272 production-source checks.
+Final report suites stock7161/8e36a6/0 and Ox9480/d24ba2/0 passed25 named controls
+each, including independent byte vector/every truncation/substitution/malformed
+fields. Linked local/refusal/cache owner controls stock33153/a0c271/0 and
+Ox47843/6bea84/0 passed. All groups/Unison8 grants closed; no EXglobal, SDK/media.
+Initial Ox codec+Make failures are preserved: partial Buffer.add_string closure
+was local when List.iter required global. Explicit function fixed inference;
+no portability/ownership annotation weakened.
+
+Receipt `tests/qualification/component-remote-source-actual-20261017.json`47872B
+SHAc1d9491f6525c203c3eed4ea1dfd577ef4c5bdf1df60863b02f15b165832f074.
+Actual new-command RPC, mixed-version and failure transport trials NOT yet run.
+Next prepare a production-linked finite remote probe with existing supervised
+loopback server/client journal proofs, freeze current binaries/source/command,
+then seek a separate Root EXIO admission. No existing consumed admission applies.
+Persistent component-cache identity/dependency binding also remains open; no
+complete MakerNote requirement should block otherwise qualified baseline use.
+
+## Prior checkpoint: explicit local component details wired and qualified
 
 The off-default local `semanticcomponents` preference now appends component
 comparisons to explicit semantic details with enabled profiles. Existing owner

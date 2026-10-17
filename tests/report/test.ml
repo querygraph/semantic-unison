@@ -22,6 +22,38 @@ let () =
   let p = {ComponentHash.sha256=String.make 32 'p';components=1;bytes=1024L} in
   let c = {Report.schema="dng-components/0";full_sha256=String.make 32 'f';
     layout_sha256=String.make 32 'l';projections=[ComponentHash.Encoded_pixels,Some p]} in
+  let encode value=Report.encode_components ~nonce ~schema:c.schema value in
+  let decode value=Report.decode_components ~nonce ~schema:c.schema value in
+  test "SIC0 matches independent fixed-role byte vector" (fun () ->
+    let expected="SIC\000\000\000\000\000" ^ nonce ^ String.make 7 '\000' ^ "\016" ^
+      "dng-components/0" ^ "\000" ^ String.make 32 'f' ^ String.make 32 'l' ^
+      "\001" ^ String.make 32 'p' ^ String.make 7 '\000' ^ "\001" ^
+      String.make 6 '\000' ^ "\004\000" ^ String.make 4 '\000' in
+    require (encode (Ok c)=expected) "SIC0 wire vector drift");
+  test "SIC0 canonical fixed slots preserve missing versus present lanes" (fun () ->
+    List.iter (fun value -> let bytes=encode value in
+      let decoded=ok (decode bytes) in require (encode decoded=bytes) "noncanonical component report")
+      [Ok c;Ok {c with projections=[]};Error "unsupported"]);
+  test "SIC0 rejects every truncation and substituted request" (fun () ->
+    let bytes=encode (Ok c) in
+    for length=0 to String.length bytes-1 do error (decode (String.sub bytes 0 length)) done;
+    error (Report.decode_components ~nonce:(String.make 32 'x') ~schema:c.schema bytes);
+    error (Report.decode_components ~nonce ~schema:"other-contract" bytes);
+    error (decode (bytes ^ "x"));error (decode (String.make 2049 'x')));
+  test "SIC0 rejects bad version status presence counts and integer overflow" (fun () ->
+    let bytes=encode (Ok c) in
+    let status=8+32+8+String.length c.schema in
+    let flag=status+1+64 in
+    let mutate at value=let b=Bytes.of_string bytes in Bytes.set b at value;Bytes.to_string b in
+    error (decode (mutate 0 'X'));error (decode (mutate status '\002'));
+    error (decode (mutate flag '\002'));error (decode (mutate (flag+33) '\255'));
+    let b=Bytes.of_string bytes in Bytes.fill b (flag+33) 8 '\000';error (decode (Bytes.to_string b));
+    let b=Bytes.of_string bytes in Bytes.fill b (flag+41) 8 '\000';error (decode (Bytes.to_string b)));
+  test "SIC0 enforces encoder binding and diagnostic limits" (fun () ->
+    let refuses f= require (try ignore(f());false with Invalid_argument _ -> true) "invalid encoding accepted" in
+    refuses (fun () -> encode (Error (String.make 1025 'x')));
+    refuses (fun () -> encode (Ok {c with schema="different"}));
+    refuses (fun () -> Report.encode_components ~nonce:"short" ~schema:c.schema (Ok c)));
   test "component equality preserves unknown lanes and advisory scope" (fun () ->
     let text=ok (Report.render_components ~left:c ~right:c) in
     require (contains text "Encoded pixels: equal" && contains text "Private metadata: unknown" &&

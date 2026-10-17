@@ -40,7 +40,7 @@ let () =
   let root1,root2=Globals.roots () in
   let remote=Lwt_unix.run (SemanticRemote.observe_components
     ~root:(Common.Remote "no-component-connection",snd root1) ~path) in
-  require (remote.component_observation=Error "Remote component inspection is not negotiated" &&
+  require (remote.component_observation=Error "Component DNG profile is not enabled or negotiated" &&
     remote.component_snapshot=None) "unnegotiated component request attempted a remote observation";
   let inspect root = SemanticRemote.observe_components ~root
     ~path:(Fspath.concat (snd root) (Path.fromString "components.dng")) in

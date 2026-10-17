@@ -5,6 +5,16 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
+Latest component checkpoint (2026-10-17): the off-default explicit details path
+now has a separately negotiated [SIC/0 remote protocol](component-report-v0.md).
+[Source/codec qualification](../tests/qualification/component-remote-source-actual-20261017.json)
+records current stock/Ox Make+selftests+Dune compile builds,1272 source checks,
+25 report controls per compiler and linked local/refusal/cache controls. Initial
+Ox closure-mode failures were preserved and fixed without weakening annotations.
+All groups/CPU grants closed; no EXglobal/media/SDK used. Actual new-RPC transport,
+mixed-version/failure trials and persistent input/dependency binding remain open.
+This is not production camera or cached cross-session reuse qualification.
+
 Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inherited locks](../tests/qualification/shared-entrypoints-actual-20261016.json) passed, followed by [actual shared sync](../tests/qualification/shared-functional-actual-20261016.json): stock/Ox workers1/2/3,18rows54CLI with independent strict client/supervisor/server/pump proofs, exact results and all tokens released. Physical IO lanes, aggregate memory and shared throughput remain unqualified. No Photo tokens or Adobe work used.
 
 | Requirement | Implementation and evidence | Remaining qualification |

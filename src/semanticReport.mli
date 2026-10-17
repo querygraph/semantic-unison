@@ -46,3 +46,12 @@ val render_components : left:component_observation -> right:component_observatio
     Missing lanes are unknown, never equal empty content. Incompatible schemas
     suppress component comparisons. Exact full hashes remain independently
     comparable. No persistent binding, rendering, transfer or merge authority. *)
+val max_component_size : int
+val encode_components : nonce:string -> schema:string ->
+  (component_observation, string) result -> string
+val decode_components : nonce:string -> schema:string -> string ->
+  ((component_observation, string) result, string) result
+(** Separately negotiated SIC/0, at most2048 bytes, fixed five role slots.
+    Outer Error is an invalid wire reply; inner Error is an unavailable view.
+    Exact schema and fresh32-byte request nonce are mandatory. Peer statements
+    do not become verified local hashes or transfer/persistent-reuse authority. *)

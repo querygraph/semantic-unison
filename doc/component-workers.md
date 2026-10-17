@@ -56,7 +56,7 @@ Unison8 tokens closed; no EXglobal, camera, Photo payload or Adobe was used.
 With an enabled semantic profile (for example `-semanticdng true`), the additional
 off-by-default `-semanticcomponents true` preference appends component comparisons
 to explicit details requests. Ordinary scanning, transfer and reconciliation do
-not start this extra pass. It reads the complete local file, plus bounded DNG
+not start this extra pass. Each endpoint reads its complete file, plus bounded DNG
 geometry, using an empty frozen decoder set and the existing owner transaction,
 filesystem gate and domain pool. The component read budget is the opened file's
 size; no extra private refinement is selected implicitly.
@@ -72,10 +72,12 @@ text is escaped. No SIR/0 or SIR/1 bytes change.
 The owner retains local source stats and checks path replacement/change before
 accepting the result. Both the earlier report snapshot and component snapshot
 join the existing one-shot details-cache invalidation. This is cooperative epoch
-binding, not exclusion of a hostile concurrent writer. Remote roots explicitly
-return unavailable: no component RPC or peer capability is inferred from the
-older report negotiation. Local-only support is an implementation stage, not a
-substitute for future bounded, separately negotiated remote reporting.
+binding, not exclusion of a hostile concurrent writer. Remote roots now require
+the separate `semantic-components-v0` capability and an enabled DNG profile.
+The new [SIC/0 protocol](component-report-v0.md) returns only bounded nonce/contract-
+bound observations. Older report negotiation grants no component capability.
+The earlier qualification below proves the local stage; actual new-command
+transport qualification remains separate.
 
 [Owner qualification](../tests/qualification/component-owner-local-actual-20261017.json)
 records current stock/Ox Make+Dune builds, full Make selftests,1272 source checks
@@ -84,6 +86,10 @@ zero-payload admission refusal is preserved; the positive summary-envelope
 minimum passed final controls. All groups and CPU grants closed, no real media,
 SDK or canonical IO barrier used. The details-cache tests exercise the linked
 owner functions; they are not an interactive GUI or remote-transport trial.
+
+The [remote-source successor qualification](../tests/qualification/component-remote-source-actual-20261017.json)
+adds SIC/0 codec controls and current Make/Dune/local-owner builds. Its new RPC
+implementation is not yet an actual loopback or mixed-version transport result.
 
 Archive identity, persistent-cache binding and real-camera qualification remain
 separate work. Summaries are historical observations, not reuse/publication
