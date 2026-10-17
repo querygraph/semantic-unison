@@ -38,11 +38,26 @@ def audit_attempted(result):
     Missing evidence remains unknown. A pinned proxy's explicit pre-creation
     state is the sole supported server-not-started proof, not null PID alone.
     """
+    return _audit_attempted(result, modes=('ordinary', 'receiver-clone', 'semantic'),
+                            stages=('seed', 'update', 'noop'), maximum=54)
+
+
+def audit_validation_attempted(result):
+    """Same lifecycle checks, exact all-scanned baseline/validate journal shape.
+
+    This deliberately does not reinterpret validation phases as transfers or
+    relax the original sync journal's accepted modes and stage ordering.
+    """
+    return _audit_attempted(result, modes=('validation',),
+                            stages=('baseline', 'validate'), maximum=4)
+
+
+def _audit_attempted(result, *, modes, stages, maximum):
     def require(value, message):
         if not value:
             raise ValueError(message)
     entries = result.get('invocations')
-    require(type(entries) is list and 0 < len(entries) <= 54, 'bounded nonempty journal required')
+    require(type(entries) is list and 0 < len(entries) <= maximum, 'bounded nonempty journal required')
     seen = {}
     never_created = 0
     for index, entry in enumerate(entries):
@@ -50,14 +65,14 @@ def audit_attempted(result):
                 and entry['state'] == 'OUTCOME', 'unknown or reordered invocation')
         identity = entry['identity']
         require(identity['label'] in ('stock', 'ox')
-                and identity['mode'] in ('ordinary', 'receiver-clone', 'semantic')
+                and identity['mode'] in modes
                 and type(identity['workers']) is int and identity['workers'] in (1, 2, 3),
                 'unexpected invocation configuration')
         key = identity['directory']
         require(type(key) is str and key, 'invocation directory missing')
         previous = seen.setdefault(key, [])
-        require(len(previous) < 3, 'duplicate invocation after noop')
-        require(identity['stage'] == ('seed', 'update', 'noop')[len(previous)],
+        require(len(previous) < len(stages), 'duplicate invocation after final phase')
+        require(identity['stage'] == stages[len(previous)],
                 'duplicate or unordered stage')
         configuration = (identity['label'], identity['mode'], identity['workers'])
         require(not previous or previous[0] == configuration, 'directory configuration changed')

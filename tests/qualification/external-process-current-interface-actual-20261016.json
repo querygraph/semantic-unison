@@ -1,0 +1,1959 @@
+{
+  "scope": "Current explicit production interface and unchanged source graph,16 external helper cases per compiler incl actual readonly ExifTool; zero SDK/Photo/EXIO",
+  "rows": [
+    {
+      "label": "stock",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/supervised_external/run.py",
+          "--ocamlopt",
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv",
+          "--current-bridge",
+          "--exiftool",
+          "/usr/local/bin/exiftool",
+          "--receipt",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-external-observed-final-5ejtg2as/stock.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "PASS argv checks=12\nPASS shell checks=6\nPASS empty-argv checks=5\nPASS nul-argv0 checks=5\nPASS nul-argument checks=5\nPASS missing checks=5\nPASS weight checks=5\nPASS timeout checks=5\nPASS stdout-limit checks=5\nPASS stderr-limit checks=5\nPASS signal checks=5\nPASS active-cancel checks=5\nPASS queued-cancel checks=6\nPASS mixed checks=10\n[external-process] External result v0 pid=93440 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\nPASS observed checks=6\n[external-process] External result v0 pid=93442 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\nEXIFTOOL_REPORT [{\n  \"SourceFile\": \"/private/tmp/unison-supervised-external-4qzr8h2y/exiftool-readonly/private.xmp\",\n  \"Rating\": 3,\n  \"Label\": \"Blue\",\n  \"ExifToolVersion\": 13.10\n}]\nPASS exiftool-readonly checks=24\nreceipt /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-external-observed-final-5ejtg2as/stock.json work /private/tmp/unison-supervised-external-4qzr8h2y\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 93360,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "schema": 1,
+        "success": true,
+        "work": "/private/tmp/unison-supervised-external-4qzr8h2y",
+        "snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src",
+        "compiler": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+        "compiler_sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf",
+        "commands": [
+          {
+            "argv": [
+              "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+              "-version"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/compiler.log",
+            "log_sha256": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+              "-I",
+              "+unix",
+              "unix.cmxa",
+              "helper.ml",
+              "-o",
+              "helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/helper-build.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/generic",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system/generic",
+              "-I",
+              "+unix",
+              "-I",
+              "+str",
+              "-c",
+              "supervisedExternal.ml"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/current-bridge-build.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/generic",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system/generic",
+              "-I",
+              "+unix",
+              "-I",
+              "+str",
+              "unix.cmxa",
+              "str.cmxa",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/umarshal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/rx.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/unicode_tables.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/unicode.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/bytearray.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system/system_generic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system/generic/system_impl.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/system.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/projectInfo.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/myMap.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/safelist.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/util.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/uarg.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/prefs.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/trace.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ubase/proplist.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/pqueue.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/lwt.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/lwt_util.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/generic/lwt_unix_impl.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lwt/lwt_unix.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/features.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/uutil.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/case.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/pred.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/terminal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fileutil.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/name.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/path.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fspath.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fileObservation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/stagePublication.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/wholeFileClone.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fs.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fingerprint.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/abort.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/osx.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fswatch.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/propsdata.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/props.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fileinfo.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/os.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/lock.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/clroot.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/common.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/tree.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/checksum.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/transfer.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/xferhint.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/borrowedWork.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/remote.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/external.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/negotiate.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/globals.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fswatchold.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticHash.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticFile.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/formatExtension.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/formatRecognition.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/xmpObservation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/xmpMerge.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/dngSemantic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/dngExtended.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/jpegSemantic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/dngRecognition.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticDelta.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticReport.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/helperSupervisor.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticAdmission.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticMailbox.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/ioAdmission.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticWorkers.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticFormats.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/backendResources.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/helperLimiter.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/candidateValidator.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/dngValidation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/dngCandidateValidation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/candidateValidators.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/validationTreeBudget.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/validationTreePolicy.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticRuntime.cmx",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/supervisedExternal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/osxsupport.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/pty.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/bytearray_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/hash_compat.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/props_xattr.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/props_acl.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/copy_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/nativeCopyRange_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/wholeFileClone_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/fileObservation_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/stagePublication_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/finalPublication_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/helperSupervisor_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticHash_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9pt47wjv/src/semanticFile_stubs.o",
+              "test.ml",
+              "-o",
+              "test"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/test-build.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "argv",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/argv",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/argv/run.log",
+            "log_sha256": "5de88786d622c502c8ebcd031a78168dc6f74eb3f23135783284b048e15b0e8e",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/argv/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "shell",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/shell",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/shell/run.log",
+            "log_sha256": "5a98aaf7807171d5bcfaf4ea2063b65e2e5ea72854fe82a5d6ee8bf213cb1bc1",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/shell/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "empty-argv",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/empty-argv",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/empty-argv/run.log",
+            "log_sha256": "b425eebf084addaccc878819bf44eb5a177540f4a21217f93cbc75ad40fc29eb",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/empty-argv/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "nul-argv0",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argv0",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argv0/run.log",
+            "log_sha256": "df44c7aa5cb05014d5d7da0653415b7ec8a225942d20a3236ae9ee4acf5d1311",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argv0/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "nul-argument",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argument",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argument/run.log",
+            "log_sha256": "eb828e21e7f0871b4ea23a2b8674532d7112e454a2a722d599745671c1851bd0",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/nul-argument/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "missing",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/missing",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/missing/run.log",
+            "log_sha256": "f9ae51a2ff390c772d60269073b0bc122c5c9c723579d3986d40a1628460c11b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/missing/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "weight",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/weight",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/weight/run.log",
+            "log_sha256": "c0275241ba93919c1816305a5de6c9c6e44bbc36280d589fe88bb18ad11170e7",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/weight/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "timeout",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/timeout",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/timeout/run.log",
+            "log_sha256": "4a77226e3cc1391517e41d4e61ce49c118576e8df2f42cd65c5c1a08f45c484f",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/timeout/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "stdout-limit",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/stdout-limit",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/stdout-limit/run.log",
+            "log_sha256": "8786a6840af660b6f61c1597fb9beda7db76c37dae9fdd63c5645bec3aa4d02b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/stdout-limit/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "stderr-limit",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/stderr-limit",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/stderr-limit/run.log",
+            "log_sha256": "c678fdb841a8fd3b9dfec0f3bf79d0f1ab87b1254b44474a5ae5aa0d72f454d9",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/stderr-limit/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "signal",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/signal",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/signal/run.log",
+            "log_sha256": "6b2d8727642446d17f78d1e761726caa0480765f39ef6d939ca85bb8a27cb84b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/signal/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "active-cancel",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/active-cancel",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/active-cancel/run.log",
+            "log_sha256": "15d33406a611f7847ed39ecfbd7f06aa3ebea999dc0b937007b565d835a0b508",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/active-cancel/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "queued-cancel",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/queued-cancel",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/queued-cancel/run.log",
+            "log_sha256": "edfa6d0acd8eb32b2806eaff4fbbc5812ec23a4e7e08a20b07d76162099d9e10",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/queued-cancel/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "mixed",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/mixed",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/mixed/run.log",
+            "log_sha256": "bf2aec0f8d42a0d4462bb76ed7894144c80e210d437fd99d822b356d683b1134",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/mixed/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "observed",
+              "/private/tmp/unison-supervised-external-4qzr8h2y/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/observed",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/observed/run.log",
+            "log_sha256": "dfcbb2a4f930e09d4b1ee67a543ea1bd9c3a62891a322dd9eddbca7908b7db6f",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/observed/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-4qzr8h2y/test",
+              "exiftool-readonly",
+              "/usr/local/Cellar/exiftool/13.10/bin/exiftool"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-4qzr8h2y/exiftool-readonly",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-4qzr8h2y/exiftool-readonly/run.log",
+            "log_sha256": "7c19ebbfcd37201cdf12b4f69bd7ab4fe11419f8aca1b59fd75388d36e1bbeea",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-4qzr8h2y/exiftool-readonly/state"
+            }
+          }
+        ],
+        "cases": [
+          "argv",
+          "shell",
+          "empty-argv",
+          "nul-argv0",
+          "nul-argument",
+          "missing",
+          "weight",
+          "timeout",
+          "stdout-limit",
+          "stderr-limit",
+          "signal",
+          "active-cancel",
+          "queued-cancel",
+          "mixed",
+          "observed",
+          "exiftool-readonly"
+        ],
+        "test_pins": {
+          "tests/supervised_external/helper.ml": "1d9c4cf2236b59f8e32448c20117fe3679404c8e94b64d1714ebd3da2244a7bd",
+          "tests/supervised_external/test.ml": "a78a6b999b5a4332ef3d41ec6f5b0a6450e261d97486f30ad85cf64b5e388b2e",
+          "tests/supervised_external/run.py": "389add9940b83f38d44b458e090c7b3b5d9a0594e846f0d9b59062cbe0a21c63"
+        },
+        "linked_object_pins": {
+          "ubase/umarshal.cmx": "4bb3b22c7e0776560503f3b43d9339951ec42adc569a383c7302266ba6e0eb89",
+          "ubase/rx.cmx": "5de285bd50fde5d236e074a4093769ef7ba9fd9cb8be1c068f0a13bcdc0bfc3e",
+          "unicode_tables.cmx": "2ef4e3269fdcc3cff1fcdf6d8d996aa6dedc3bb15486d380098a4baad5db8196",
+          "unicode.cmx": "3c92dcc5c4868689290be3c206b8f14b1defc6564911af098a3be77e62020ce7",
+          "bytearray.cmx": "91573fafb39500a72a6df5561dd649851c11af78afda0c53212998fc07e781ff",
+          "system/system_generic.cmx": "004fbbcb09f1ed3b2990d2fce62e16d6e987851bffc97b20aabc5d6db9d83ee2",
+          "system/generic/system_impl.cmx": "7006c02d9489be022de30ec70da3fe51850507459418ec542cbe12c12f19d99e",
+          "system.cmx": "78c8ae70c03ea38d5dad1d207953b2cf8f4308a94ac9bbb8bb2260481e053df4",
+          "ubase/projectInfo.cmx": "c143106823166d85ce5d552151aeeef4792ecb46eed0e84efa799abd7d6bc63a",
+          "ubase/myMap.cmx": "a43ae10065aaa97de4917db84b7174cc2caa45c6b35db4197749b15a32f4402b",
+          "ubase/safelist.cmx": "8d24ec8820ffa6776c7498b07886a9ba8443d7765df562d29254cb1efe7a4db4",
+          "ubase/util.cmx": "72d3aa40d43da8a89e481e251fd491ae2674501e19e4f62b73cc7031cc024e8c",
+          "ubase/uarg.cmx": "3debe13b2beb91192028fed82ea9fb6c92d6188cbf4a7318a9e01efbc86d157a",
+          "ubase/prefs.cmx": "76f8ce2324c74933b981ca1c956caead230262066b0cd1cc04548b1ee398fb33",
+          "ubase/trace.cmx": "c11388823cd8246d0ca30d1bcafc1ef72b7addb791107a63511f326a5626a65b",
+          "ubase/proplist.cmx": "16b4ca9551d42dd0d5da39d8813ac1804bf18c2e23bb829b44d082038e648244",
+          "lwt/pqueue.cmx": "c1c67e49ea98bfc6e8dfcf8f30d819ed233f9b2c6f745f60fb2d6d7be6ef414a",
+          "lwt/lwt.cmx": "84d88c202355eddf1ff38c30475e641a31aeeea5955456b4fe8d90d79eaa8032",
+          "lwt/lwt_util.cmx": "9341a3fe38c8dbf9b00b0a55049765739d9c9de7718bdabc2cb33cb7a275abfb",
+          "lwt/generic/lwt_unix_impl.cmx": "de23dd41e2b612f59e5a73e921064d1e83e7a4b3deca622c32f354b7da0df7b1",
+          "lwt/lwt_unix.cmx": "85e7c68b6704a47e77e2992e6dc6c090161462b9e302caf1873e459707d5a339",
+          "features.cmx": "2ec5b0e3f57af6247224b14302a1a9d868eca2548b282054dd1cd86b6798f392",
+          "uutil.cmx": "32a9806863542005699aaa4224ec2c5b1f9ebeedb4994353d2315dc3f46855f3",
+          "case.cmx": "8e2f0f68616fb1205e5967f2b43e1f841750e9edaa6365f5e41ca61a89060892",
+          "pred.cmx": "2122e0f04adcb497f673af3911daf41560540a7d9d7dab1d585f36f05238fd8e",
+          "terminal.cmx": "8d2d792e1d0d424e996ef0635b47b4c2c2038d22fc38590a20d5cf430761bb54",
+          "fileutil.cmx": "b331c3481088e25bf5a1f1bad9eb06030de01f1cfff26040a961eff1bb3458ac",
+          "name.cmx": "81a71c85747d201940a8e5b2111db13ae460594e9f78725ccbce2df3e2feaee4",
+          "path.cmx": "afc50f5857f8ae26b9a6f8cd302998d5a02d58f40972252c38f6c69aae70c4cd",
+          "fspath.cmx": "cfe68272efa9d43b545c53c3a11cc58400d2959503c96012019dce7382241a71",
+          "fileObservation.cmx": "adf68cd08c0fcd06f89944b5f986e31de39186816137ea878fcfd0d19c2b6fa9",
+          "stagePublication.cmx": "feb8ba4da74bd92a16fcc10ea6884d03efab3def4104a1439e2230853e4a61b5",
+          "wholeFileClone.cmx": "3b0b3cdb5f96a27df0eba9de54183734d8055f45b8764e30d9b4dc996e68b969",
+          "fs.cmx": "65bda505d6cb5f489d914bbb25e0d5981a6f680105dc39893502fc110645006f",
+          "fingerprint.cmx": "c1c1f9961348b1be30d15e27613ccd8e665bd2c2f2852023d2a3a8b85ce42933",
+          "abort.cmx": "12ffb044719d3f777ff89f2c98ee33f994d9cca41984ead4e7f891199688f6b4",
+          "osx.cmx": "1bd0e91450010dc8071c5201c89fa1b132462ea0ccce6617e6d9ecfd2f450c24",
+          "fswatch.cmx": "bbb76750fe8971ee7c13d89afaa10988d614857238a59a447ae9c24f76b56aec",
+          "propsdata.cmx": "e751c596030d1ad2b800f1813bb3db4f9b081896740b537f5ed7c44a7cdcfff0",
+          "props.cmx": "69afc11e5eceafbad5e330b42afd44f656767f64897b8e493c21aa13023109a4",
+          "fileinfo.cmx": "f0f4c687cc77f064453fed52803ae2ec3e600481bc68e51f108630f882586038",
+          "os.cmx": "0845c9dddf293c41b7a2926001d5a686ca681115594e2102511537ddcf53f6c0",
+          "lock.cmx": "de62f06e1f6f6de5c9d5a405206f36ebc815efd4b3062d8cb337c49189a3a06f",
+          "clroot.cmx": "a270fe369cad98963c2fd683591da66da3e0e70ee4083210535eef511a8e5afa",
+          "common.cmx": "85a6f94817fc5fb5f4c0c8fcbf6f23dba7aac929da4c040b35d19b9ace3d5515",
+          "tree.cmx": "bdbd02b14abc4ee935a7bdf70886b9e1f394ac4cc3686b5f3b4caefb3e60cb45",
+          "checksum.cmx": "719aaad6e8ff3a2dd2d98453f378c59434b02b6e9ead838065678e2153330488",
+          "transfer.cmx": "a2a445b7637cc0baa452943d3087535b369abdaa9559eb4139160be1e2808039",
+          "xferhint.cmx": "09fa8715977c90f893477a04238627ad917575c72214838ac1b72e2f1db80335",
+          "borrowedWork.cmx": "88686c208c22500f3992d98b9e1db3eb614f64a289f44242a994986c77dceef5",
+          "remote.cmx": "62c58a62cacf3267ad7efe83372961fc08dd3d4cb55c93cd3e5adb989187a77b",
+          "external.cmx": "3c11249d07729e0766f4a2828fd38e9fecc4302018c851f474e0bf333667d34c",
+          "negotiate.cmx": "1fbe406fa25dd12a2fd2a4d3a193f0ab7e79786dcca9d6a4fdfd6095a1ee3091",
+          "globals.cmx": "ed27dbc0ce8b7ce53f4e163aaaff11b18ff02557bcb0a7aac869fa45808e0cc8",
+          "fswatchold.cmx": "8a617f63430a10c204c49a9e9983bc23ca3d77cc1bb947eefd2c12a520abc64a",
+          "semanticHash.cmx": "5bc4fcf0aa569cec3bb9c4a932f5c6a61b7ce885bb159378c7629cd0291694d7",
+          "semanticFile.cmx": "a5363188a86c59cbd36e278fa4c20917a9e253690323255931cb50bbf08517dd",
+          "formatExtension.cmx": "6f7ced19a061f1abc5106d310dadc8068eb85bfe205a3ec051de0ef99508bbab",
+          "formatRecognition.cmx": "760eafaa4e0696d25818ef5090ecba57b95632f34b663b13478c86266d24df66",
+          "xmpObservation.cmx": "90105ba8821526a63f6c98b090dcf0926ac5b383d0d61f00c3c3944d26357ac3",
+          "xmpMerge.cmx": "eae691e1834503a976de20dddd0bbbdee1ae5f076ada6437a26b13fa96009173",
+          "dngSemantic.cmx": "560a12b906e8dc5e0333555d8dff5901ab1e626e9a96c7eb322705acf3d2012c",
+          "dngExtended.cmx": "9ec3c38aebb83bdc4793e64f8add95f54a9815f48166e0d17e23ba0ca5f5c207",
+          "jpegSemantic.cmx": "081237aeea1fdc4b1ad21393b71a92be1b09a99e65404ea997bdda640b685307",
+          "dngRecognition.cmx": "fc6f78e8fd79901cd2b4bcf0e3709f8a216e3075cb5b2c7284c0cdd876d2dd39",
+          "semanticDelta.cmx": "ddd062aa0ef2df2d59dd64ed65944254430d99c6694efd3296535644e0d6b7b9",
+          "semanticReport.cmx": "4a83a79869c897754082e7422929ea543d4a4e5339f9f3816e7cda0cce01567c",
+          "helperSupervisor.cmx": "5eb9a2cb66f06c617e3c2a3fa0180f2f5bff6dd37c3409513e06e6b9edcb5e20",
+          "semanticAdmission.cmx": "d8922bee97aa355b8971fc98dd90ae08398373378058e69e68510102e997210f",
+          "semanticMailbox.cmx": "e5371b857d24d476ab993df7adb7c8389fe64f084e79c5eff8cc9cd062f9895a",
+          "ioAdmission.cmx": "a3fd589e21a2bbb63c9f02f8c350fab0a84c40a151fc56209ffee352ea43df0b",
+          "semanticWorkers.cmx": "5d96bbfb06fb3805df842359556691795e08c6a130e81cd66765a9d1ba5efd6e",
+          "semanticFormats.cmx": "3701b9ae5ecf978e701e238a8feffbe7bd2247b0d50d08874626166ac56ff8ec",
+          "backendResources.cmx": "9285397a86feeb67b1742cae5c3362efd6981a782ffe37a71c9828765b4a0466",
+          "helperLimiter.cmx": "250bac79227cdfe0902bb535b1e905143bac1a9028d18c68b97e9b3abfeceed7",
+          "candidateValidator.cmx": "f846c064531354fd3a60a849b895ff21ace9da72ea6dd08aaf932f03e53432b7",
+          "dngValidation.cmx": "e43a281394050ed26e2b2b44dd14862060aeb4661d0b1d4f425d6d7913bdb833",
+          "dngCandidateValidation.cmx": "7b973aacad3e4ee4205d06b26b0b464a48de88430b4a0641b6b0904a40d01c89",
+          "candidateValidators.cmx": "6f170887663b685bd952c6d642fe39bea3316b584a0e910278886e716682e05a",
+          "validationTreeBudget.cmx": "ab654507341fd5e11ff85f14df20f2498ac3fd81d57f8a9e69f4efe085ce3efa",
+          "validationTreePolicy.cmx": "fcd4dc9ad33887930eb3cea9aa1e47210f4c8a52c0d4c9ae3411a222ca8931f0",
+          "semanticRuntime.cmx": "73aacd609f3d80fb87c8cd67bb5f7fe5eaa6645738d701de015cc71f65a172a1",
+          "supervisedExternal.cmx": "b14580703830175b5a89015eb0404767a14d66f5c6df04968981b3630bc8115c",
+          "osxsupport.o": "ca8e26d4a76e73e802c14520064f40a69d4149d1f69c36c9482c13d0102f6635",
+          "pty.o": "aa1884da4b5aab9816dd4d1ff1fab5e6b120526ff1d6435fb4abb9fdb945a838",
+          "bytearray_stubs.o": "a71865895074d615273b01661093fa2942504c9d0d01296ab2cb8016e25db4be",
+          "hash_compat.o": "820b517bc27fa84286db34698ae6745308de0689e04e35a4f4ab0838fa599f33",
+          "props_xattr.o": "c10b51652c5fa272268105af47e6cbc9201ffb83b5f72550adb7e3d48dd3b65c",
+          "props_acl.o": "1f2588095eb2c9c8c33710fcc04bb0fe1cc870b346da71c83dce430cc0d441c3",
+          "copy_stubs.o": "24efecabad0b3d14cd94604ef5a9a599420c3cc10cc258c7707a90add0a35fdf",
+          "nativeCopyRange_stubs.o": "68d49bf00b19c5d77bda901f29f4931cbe342a389646c0fa828737fe7451a442",
+          "wholeFileClone_stubs.o": "dc226e461b778971fcb5d9af58412cb91d1279a4709ddf3b5b5393f546e9dfc9",
+          "fileObservation_stubs.o": "f55a38e6ef8b05e5e531a20c9ba8ab488b90f3902347efd7e8565777fdd4f8b5",
+          "stagePublication_stubs.o": "56470a73ca7147e9c674bd3b0ec99dcb0d7d58a77b45cef02b91497049cdc595",
+          "finalPublication_stubs.o": "4e94ba1fcc1823d9827bb7f600e0eabcdf7baa70a9c024cae15c0b6e1cac95ec",
+          "helperSupervisor_stubs.o": "da21b7de75f7ff140cda25039f940937017f281140bc5b18d4673335716119e8",
+          "semanticHash_stubs.o": "e15486f3e9e299b65374adc4315eef823501fc490dee034e84a09cb820c78302",
+          "semanticFile_stubs.o": "bb42094a767b0176267ae148418e8798638efee99386ac8dcfe3c59434608133"
+        },
+        "source_pins": {
+          "ubase/umarshal.ml": "19748d6a362019c9d79d62696b5881e971bdc0e6144ac2620eff514b90ea44ea",
+          "ubase/umarshal.mli": "70b92631b7a4dfa48df225ec8587e228cba8329e73025fe60659959a0c5868cb",
+          "ubase/rx.ml": "af1e75d309dc3dfb60bec0e9764881fbbe4fc186ff940b064ac64f7230d620b2",
+          "ubase/rx.mli": "df64e326a7ed71cc87a2847aa9eac46a1cc80ca90cec04131b4d31e2ecc4da8b",
+          "unicode_tables.ml": "050ac9dffbfa55109fed644d50da92c180a35fab55ebde2d5941ec83d40482aa",
+          "unicode.ml": "a2e95dd9a9c0f069c4134c0be24e99ca6401398f32d6a23b6cdc7c2618928282",
+          "unicode.mli": "fe834013cf48939862c4b0fbbb17d22e001591add31113cfa13686d414a10846",
+          "bytearray.ml": "cadfcd8c213bc1e27c58a737f51a0aa6a8adf588da3e9ee57192e2a66f81dd25",
+          "bytearray.mli": "ab07163781f0a7cb5241adcbaab95c8edb913e224ab43c51e833cc533069d0c8",
+          "system/system_generic.ml": "7cc582e54931abce12117a41a6526d3d632c97eb81d3e604be8c78e69735d24d",
+          "system/generic/system_impl.ml": "974a46082a4630f55e1c44ff030861e2074f4cec126de6bc7ddd66f742b5724f",
+          "system.ml": "d36b090d6fdc03d892426328b4d4a307f82cb6ffe6d746f6e9d1c77049904060",
+          "system.mli": "fe4848d17cd8832dfdb2598e056865b956f7e33b7a0008c7c13d04db22b741bc",
+          "ubase/projectInfo.ml": "3ead9396198c34b8808a3bd33bc7c5307d1a4512a142c8413fbb1804f952b359",
+          "ubase/myMap.ml": "0fdefc721d5a633c132dcca53530449c90a2f0305c6bcdae77c2505ec5b3719f",
+          "ubase/myMap.mli": "864f45c227d2b2096543cc1308fddf9b1ab99ba6f32e92cb843b3b254941e110",
+          "ubase/safelist.ml": "c5af8ef80aa9e69706c0c8ce98ade942268793840a17324bb769270526698576",
+          "ubase/safelist.mli": "a9dc0393b5a8c00e56dc2083fb0ae33b37769a89646b56de5075ed8b21dd3800",
+          "ubase/util.ml": "f906fed02263d5f42c0eca00b147394895a814f4c3a9309ee1b0d21f5874538f",
+          "ubase/util.mli": "db5eb64176c1124934e86e44cbbb3c52e8506786c5f6f36b2944c08831a01475",
+          "ubase/uarg.ml": "b886f7690448fda3aba58abd4257091f973c664166eb24b6975c436c144b16de",
+          "ubase/uarg.mli": "b0d5be4679e7d5b57de49fe8bc81c3fd9b5cbbd197528b2ea0ae83b8507e8a2d",
+          "ubase/prefs.ml": "b8b6bf2dabd5e794a8ed9a0ddb428da45ff3e57207fdb67689ae02de334168ae",
+          "ubase/prefs.mli": "22b5480ab6220a1e31952b374de7814ee605d5db9deb65f095506d7757dc4bcf",
+          "ubase/trace.ml": "a57967d94fd52e1f54b385b687e012a381e8a2f38ca1f6e241211e59605f4c7b",
+          "ubase/trace.mli": "0f99d9588848b68d96f8c87c843e60f4b99ceb19543d6efd725c2d825d74f83a",
+          "ubase/proplist.ml": "5978d174ae0a1fc4876615b49154e0d6a8978c12ffcec4d17960c7716247f93f",
+          "ubase/proplist.mli": "f23ccce1b4c3573adca4f991ba8643c2cb2f21ea9ea2c5258bba1f8bfd666429",
+          "lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "lwt/lwt_util.ml": "1288d77c59b65ee8b576592e7348b8a0293ff89424055b4c2b3bd61e6e73c48f",
+          "lwt/lwt_util.mli": "f96c07549e8acf5badc190b2919552587f3390974c783c15148231e4e790be6b",
+          "lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "features.ml": "a535e1da48f4ac940cd02cd031da9793d3f8a72b9e08a0ed22e9767485f496b7",
+          "features.mli": "1769cdf2ae26492cafaaa586e7ba279038228052a4351b13b63e32c4494e94a4",
+          "uutil.ml": "dd919c86d4cf21f3ba80342dec4afbddffc4ce572905eff5a5f6893c6d21fe7a",
+          "uutil.mli": "3b9e8006e556e21d1f15c1f64fb6d2aabb1268d143f3f6ddda46f600954be16d",
+          "case.ml": "54f1421601eb02c8eae20dca220a8ba6e0eaeacbf064da681d91bb7572a18c0e",
+          "case.mli": "1304813a5f2ea7d1e95306143c26e02e05d33a77b49754270366468881e43860",
+          "pred.ml": "44a6679f43a86fc82ff35b793b6a9584ba79256f2e867a81dc378d4f1ba2e95e",
+          "pred.mli": "13764e35337cd44546394c50b739c45d3e23f7844dd4ca9b00a77b15ce4b500b",
+          "terminal.ml": "2a4c21b34f661dc8f994ae92f566e859acaa4dcf5ab412dd04c37f04694966b5",
+          "terminal.mli": "6f5077f217cd883e3f1246693db0ae8937335b4482486ff4476ac34710b17a1d",
+          "fileutil.ml": "fa18b9394a06527831e174140c09d74f83618614407e53480d99f5b3fd5b6525",
+          "fileutil.mli": "1e1a1748e8b960b1b6b2915c1ca0565043741dbf4ce8bf910e5c0858ffa21f90",
+          "name.ml": "8b079efb91e81e1a80e9c9ed8992018d85785087318dde29264001b71488cd44",
+          "name.mli": "cfe8585566c650d7cb9f61da227694fee590011be9975b771f9c84f1f1d530c6",
+          "path.ml": "afa2e468afe9f9de59784e2bf0064dbc54373a31e88f30b59fa7efdba34e3751",
+          "path.mli": "9a98250add11cd1e5de6e06874e244ce08493ef976348a866025489c2e0567e5",
+          "fspath.ml": "fd8a9a1532516282d00c0c078fa892ebf65016c5ffee8bf234869c2e8dd85b15",
+          "fspath.mli": "34c9c822d54c3666b7b32434aa83ec93d02378987d593c7995290a09cec40cdb",
+          "fileObservation.ml": "d0d13d872654304d543a367ffa57dc01a31f87dad50e631c0e2f4f302e752a8d",
+          "fileObservation.mli": "37fb46e4a6462e640f03f2cc4be1396a8c491081869593ae3a798cfe36e6ff13",
+          "stagePublication.ml": "29136e71712e16b149ccae43798a71cc406b1ce9d20f2c2a272ba7203eb0f53e",
+          "stagePublication.mli": "22fd045a7398b1c00b4cfadad1e56b2d18eacfeaa614a033f18f1fe8b678c86c",
+          "wholeFileClone.ml": "57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca",
+          "wholeFileClone.mli": "21baffedf72b244bb0a867d3eb9b8748b8358ea09f4f06bbeec7b5fe2b9b838a",
+          "fs.ml": "0b9852f103c8441745c83733de4a88d394d138dc93ffc0e04285a4e1eae652d7",
+          "fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "fingerprint.ml": "1b9cc61aa8751024550b970b1fcf6082b18cbc09226feee4bf3c7b47cf9af8bf",
+          "fingerprint.mli": "ebaefdb4ca9b67f4220413281d26e663e482bbb4c5495ea08b020a295e8cf06c",
+          "abort.ml": "c27ac1cc27606389c4ee218c861dba2dd40637d6bffcd5c2dbfa796b3d569c50",
+          "abort.mli": "dbb51402851e2f26cd475ed8efc10e7a840f0caa6454d91d5094b629bb491ecf",
+          "osx.ml": "8705194b4b29a882ed3e2e30e587f722da63dba92bd1b00ac9cd21977864f888",
+          "osx.mli": "33342a53f4c8eea634dc906782d9199dbe7a576a688154d7bff0f94ca9cb4d7d",
+          "fswatch.ml": "3d3cb9239ad2a9c10a508c43ede23057d119abeb793f01a1ea5903a1ba7e6764",
+          "fswatch.mli": "e963d4cb0cb3254eeb924a51be0c4528dc5617d523c68d625c466299dd3e9645",
+          "propsdata.ml": "50aa6a5ffd0c2a4a7042f661266b216e40b15fccb732828176ed403811a13301",
+          "propsdata.mli": "e2b5ac93b3392939d5ca87db3918246cfce395654a0e72214fba6c43dae56dca",
+          "props.ml": "2fcf37bcfd2f812c41d890c1302369142588c6e0ecde1c1d9db84e18dcfc7a41",
+          "props.mli": "bdbb03d9a5dc77378034dc7eefe79ebcc5fb7dfb48312b32c173a3f1e40e51a3",
+          "fileinfo.ml": "6cc872dae0331ac22d8717f463821d5ed71f06806d82903ef00d56e6bbe51cf0",
+          "fileinfo.mli": "ca7aed8fff580fe703bd5dbaa4bfad5e42732d223c95767c1a640290989c822e",
+          "os.ml": "293d509d92b204846bc11598b819da42fb1beed57a1c897d416a5da14c5a2707",
+          "os.mli": "1e5df0e173c7645d82e884f7d10c33ae7c10b9c4acb29d878ebe7a0ec84e91d5",
+          "lock.ml": "32d19dda16e7e3ff26a2708a06fdebe3b1b0f22e90838c09c9dff2599b2e1c3d",
+          "lock.mli": "4ae6770bb279f1ab7fdedb091b9aa627e66ee2e5e99f1872f72eccbd9577432b",
+          "clroot.ml": "cdcf390f4f8f1ab7f0bd3286d515293583d2c73ab90dea7bf1b652672f1a9699",
+          "clroot.mli": "75c8b784e86b8fdea9a869adf0f88245ff4c168a0bf6929d4d96c1a7673da672",
+          "common.ml": "6aa4e6d36ba6db9413233846a170c2e5b4f2fbb9725e3721ab7742ed04841082",
+          "common.mli": "8550f51a11adca8e91eb1bc6a687396e551e25e5b2d467e59c18f4f610c632ec",
+          "tree.ml": "50d58bca6808c3ad54f7e2494dfa4ef3382fd179ab555a958d4638da04fdde5f",
+          "tree.mli": "fac52cf5c9572fa5aaf3e6f49281fa5dc490dee58e6703773d545a209ca40239",
+          "checksum.ml": "f18f93fbd9cf6dfd3d0d7f9afd5031ddb1a9320f8566420da07d053e92b6b57b",
+          "checksum.mli": "b9b8107a52116b6191687b9a47ed1b6b42b518a58039fd98be80b0f8aff942da",
+          "transfer.ml": "b8ca9e9aa9ba18c785aaa502509ed6b17e3b6e23fdd697066d30c7036777a56d",
+          "transfer.mli": "06baab649a4073c79ec820c6e112b5d13c0d00498df365fa8b2840d2425c3711",
+          "xferhint.ml": "b90728780012b9c183e09383620673231ed4643a2236ca05695bc907892c77c5",
+          "xferhint.mli": "18c94d96aa6a3b167ca6c348807834a4b4b64820c77753174a19a52b9334b22a",
+          "borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "remote.ml": "9b0cf82d2158662f2001aa6abfceb7845531cd663cfd39d5b2ed73b982e6b286",
+          "remote.mli": "b29e32927fd10452b7dceefff9fd09764021d64628bf1fd2ea1c9ce95c48aa94",
+          "external.ml": "18748fd6d4db2c3a715afff343af4c2054fb8c8404eb740d3752564a7daf5d34",
+          "external.mli": "02d26bc0d71f9785633d30bb6c170b22d81cdb4c5f360ac20eefd2abfe66c349",
+          "negotiate.ml": "75826e42dd85741ab576c23feb3febc3af20ad40438ccfd9531f61385c9d5014",
+          "negotiate.mli": "47eaa4a23976114912c3b3f88b6be0aea4c871babffe892207b302416b14188d",
+          "globals.ml": "04655e8abca85279c0ce3a07e4fb40d21050dbb701329aec130f40655f4851dd",
+          "globals.mli": "2c4b82f6dd17d26fe9fd5f07aaf38d4778363f2bd7c81b6ba81c8b8d8bcbfa66",
+          "fswatchold.ml": "978c56491c08a6d4c7448326f8b9ec94f2c215dc09d65c3488dff80c1005fdf0",
+          "fswatchold.mli": "2ba0e9a36ca9449406b1e519b9196108b4afb84218030a7af9179265adb16a11",
+          "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "formatExtension.ml": "4e0225aa32e3ec345f3cc88c2bc88a92a4867c1fc7fee39574afe6b9a756e2c5",
+          "formatExtension.mli": "8d6a40e593b80d299b954ef2aea0160184f881e9e3a49e622b43470606a286d9",
+          "formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+          "formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+          "xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+          "jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+          "dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "semanticDelta.ml": "df169d15dff25b16bbc9c07cdf6cc4b3aea49e1f0b9b23cc9fad2cdcff174bc3",
+          "semanticDelta.mli": "b087bf1d0e31148bb17e7c07367f8f0e73500d825a4b5f9ae537d216c2b36a41",
+          "semanticReport.ml": "4e49f6e9cdca9aa94254956c61d2285f012637e40d70087439087c91cff2fdfc",
+          "semanticReport.mli": "2620556d1fd54777531b4d55562d49aa89459d3831182fde2e7c6bb4f1d0ae2a",
+          "helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+          "helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+          "semanticAdmission.ml": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e",
+          "semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+          "semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+          "ioAdmission.ml": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4",
+          "ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "semanticWorkers.ml": "ef0b1760204e82db3a8a1e579fc2a19df459ac8d3c9f0e575d69d7788631f673",
+          "semanticWorkers.mli": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d",
+          "semanticFormats.ml": "6bf5be266f0223e083f1b57f1b0e284cf78212f8deeb66fb769e30fff9934358",
+          "semanticFormats.mli": "5e9cb27dfba950403339ef3cecfa34de4b4079e341f9978d95542339ed0b6f4f",
+          "backendResources.ml": "bf5a39fb6ac88ee7401eedd0c30b95b0ba8110b04a01e8f4cefa126da44d2e63",
+          "backendResources.mli": "442e808a6c0efb611eab9b749c9027d93bf3e335ae1b272509c123f042405224",
+          "helperLimiter.ml": "10f55cf2b538d06beb0d69c8de07b22651978a07b65d29b43a4635f15017014d",
+          "helperLimiter.mli": "d4a994ade87db6293e3512289597f23f18f5d821ecd94b4c8fa417ced236fab8",
+          "candidateValidator.ml": "eff045657c4f404e8cfdc27f766be615998c73ed6003a4f9b4c7011776708b76",
+          "candidateValidator.mli": "e3a7e906233ceb013f0cc590cd0bebc688270faa93f6ebe57d48866eede9002e",
+          "dngValidation.ml": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b",
+          "dngValidation.mli": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68",
+          "dngCandidateValidation.ml": "25a6d95c996562259f556b86354dff7eaad0ab46363e011d03b31829becfb3b5",
+          "dngCandidateValidation.mli": "0140fd90a273da43862f8aba8bcfa59275efb3098dd0bff27ad48be03c2fcab9",
+          "candidateValidators.ml": "cc7a19837a89f3deb1363ff79020c26c288ce674389fd0ba93820961fcf7dea0",
+          "candidateValidators.mli": "72305d84c8928c20dba44913575a974f1905eadfb987f51365f1b9dc644a6c0a",
+          "validationTreeBudget.ml": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970",
+          "validationTreeBudget.mli": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773",
+          "validationTreePolicy.ml": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092",
+          "validationTreePolicy.mli": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f",
+          "semanticRuntime.ml": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773",
+          "semanticRuntime.mli": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531",
+          "supervisedExternal.ml": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811",
+          "supervisedExternal.mli": "46e7a5317d859f6f89464a70ef7633be46d218e54f28da52c23478c96e9eb06c"
+        },
+        "scope": "Actual SupervisedExternal and installed ExifTool readonly metadata plus worker hashes on original private XMP; zero SDK/Photo; tool script pin only, not full Perl dependency qualification",
+        "Adobe_or_Photo_or_UI_access": false,
+        "performance_claim": false,
+        "compiler_version": "5.2.0",
+        "current_bridge_source_sha256": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811",
+        "current_bridge_object_pins": {
+          "supervisedExternal.cmi": "4a4f24d68b29a0accf6ab49fd2cc59cc930f78ec12dabc75b04125a336e99ed1",
+          "supervisedExternal.cmx": "b14580703830175b5a89015eb0404767a14d66f5c6df04968981b3630bc8115c",
+          "supervisedExternal.o": "2618ad8bbfb0ecafcbec4400bcdf7e95c8deeef14f3d144b53b0513efbf38b56"
+        },
+        "observed_helpers": [
+          {
+            "case": "observed",
+            "pid": 93440,
+            "status": [
+              "exit",
+              0
+            ],
+            "other_members": 0,
+            "record": "[external-process] External result v0 pid=93440 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false"
+          },
+          {
+            "case": "exiftool-readonly",
+            "pid": 93442,
+            "status": [
+              "exit",
+              0
+            ],
+            "other_members": 0,
+            "record": "[external-process] External result v0 pid=93442 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false"
+          }
+        ],
+        "artifacts": {
+          "active-cancel/helper.pid": {
+            "bytes": 5,
+            "sha256": "5d67940787cbc944adf59508c5be397460c816502a195d8499e8a2eeea6f0e85"
+          },
+          "active-cancel/run.log": {
+            "bytes": 28,
+            "sha256": "15d33406a611f7847ed39ecfbd7f06aa3ebea999dc0b937007b565d835a0b508"
+          },
+          "argv/helper.pid": {
+            "bytes": 5,
+            "sha256": "d9202af8135cccf3dafe4cfba840d8956a3182242576ca4c646319c0d484ff45"
+          },
+          "argv/run.log": {
+            "bytes": 20,
+            "sha256": "5de88786d622c502c8ebcd031a78168dc6f74eb3f23135783284b048e15b0e8e"
+          },
+          "compiler.log": {
+            "bytes": 6,
+            "sha256": "e791457c25b99d69f3d5ca028f6a7f6d88f7e2d85af5162a92a8c5f3aecf59b0"
+          },
+          "current-bridge-build.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "empty-argv/run.log": {
+            "bytes": 25,
+            "sha256": "b425eebf084addaccc878819bf44eb5a177540f4a21217f93cbc75ad40fc29eb"
+          },
+          "exiftool-readonly/private.xmp": {
+            "bytes": 179,
+            "sha256": "c8259da5f6ca930bf61f7013b400908eaba7fd0eb85da94086b33fedeee71966"
+          },
+          "exiftool-readonly/run.log": {
+            "bytes": 347,
+            "sha256": "7c19ebbfcd37201cdf12b4f69bd7ab4fe11419f8aca1b59fd75388d36e1bbeea"
+          },
+          "helper": {
+            "bytes": 1406824,
+            "sha256": "034c9c9a1f0e4438e73c0daae2343494a21b1d986dc8c2d8db22647b7a32ab09"
+          },
+          "helper-build.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "helper.cmi": {
+            "bytes": 681,
+            "sha256": "df0e429e44ff918ec4864f8495050348ec629b4f866ba6d8d7626559d8b27286"
+          },
+          "helper.cmx": {
+            "bytes": 727,
+            "sha256": "7d8ebb98b671117d07464260aa90c3d2d960ec081f6c4bfb8128101a27f7ff03"
+          },
+          "helper.ml": {
+            "bytes": 922,
+            "sha256": "1d9c4cf2236b59f8e32448c20117fe3679404c8e94b64d1714ebd3da2244a7bd"
+          },
+          "helper.o": {
+            "bytes": 6136,
+            "sha256": "626cf52dfa9a99a92f2e6949469cc9aa4fd4ad519c3c9300175c308c5a094438"
+          },
+          "missing/run.log": {
+            "bytes": 22,
+            "sha256": "f9ae51a2ff390c772d60269073b0bc122c5c9c723579d3986d40a1628460c11b"
+          },
+          "mixed/helper.pid": {
+            "bytes": 5,
+            "sha256": "54ab79734877cf5b515150d3b47b35601bfb3fd9cab0625685bda537a8a758b8"
+          },
+          "mixed/release": {
+            "bytes": 7,
+            "sha256": "a4d451ec23463726f72c43d64c710968f6b602cd653b4de8adee1b556240a829"
+          },
+          "mixed/run.log": {
+            "bytes": 21,
+            "sha256": "bf2aec0f8d42a0d4462bb76ed7894144c80e210d437fd99d822b356d683b1134"
+          },
+          "mixed/source": {
+            "bytes": 28,
+            "sha256": "34fccce637e247ddc60f3f9b29717deb4a7ad57a3baf140a9a19ea6d69417a84"
+          },
+          "nul-argument/run.log": {
+            "bytes": 27,
+            "sha256": "eb828e21e7f0871b4ea23a2b8674532d7112e454a2a722d599745671c1851bd0"
+          },
+          "nul-argv0/run.log": {
+            "bytes": 24,
+            "sha256": "df44c7aa5cb05014d5d7da0653415b7ec8a225942d20a3236ae9ee4acf5d1311"
+          },
+          "observed/helper.pid": {
+            "bytes": 5,
+            "sha256": "7905f41ed9741e25de3483694ab809f2a30c7a12a033fec6fb76fd3e1ce5976d"
+          },
+          "observed/run.log": {
+            "bytes": 156,
+            "sha256": "dfcbb2a4f930e09d4b1ee67a543ea1bd9c3a62891a322dd9eddbca7908b7db6f"
+          },
+          "queued-cancel/run.log": {
+            "bytes": 28,
+            "sha256": "edfa6d0acd8eb32b2806eaff4fbbc5812ec23a4e7e08a20b07d76162099d9e10"
+          },
+          "run.py": {
+            "bytes": 7342,
+            "sha256": "389add9940b83f38d44b458e090c7b3b5d9a0594e846f0d9b59062cbe0a21c63"
+          },
+          "shell/run.log": {
+            "bytes": 20,
+            "sha256": "5a98aaf7807171d5bcfaf4ea2063b65e2e5ea72854fe82a5d6ee8bf213cb1bc1"
+          },
+          "signal/helper.pid": {
+            "bytes": 5,
+            "sha256": "7b707aaeb6bbaa9ad61d4f2a94227bbe7da78ca416368af8cda791fcea9bf2e3"
+          },
+          "signal/run.log": {
+            "bytes": 21,
+            "sha256": "6b2d8727642446d17f78d1e761726caa0480765f39ef6d939ca85bb8a27cb84b"
+          },
+          "stderr-limit/helper.pid": {
+            "bytes": 5,
+            "sha256": "c29923625891367f441f283e88d2d4f3b30a9a67224abb389f467e514af6f5a8"
+          },
+          "stderr-limit/run.log": {
+            "bytes": 27,
+            "sha256": "c678fdb841a8fd3b9dfec0f3bf79d0f1ab87b1254b44474a5ae5aa0d72f454d9"
+          },
+          "stdout-limit/helper.pid": {
+            "bytes": 5,
+            "sha256": "7016018fa532ccd0bcf7ceb5c1e3ffa558bc0cc493c3bcd5aec485515622487c"
+          },
+          "stdout-limit/run.log": {
+            "bytes": 27,
+            "sha256": "8786a6840af660b6f61c1597fb9beda7db76c37dae9fdd63c5645bec3aa4d02b"
+          },
+          "supervisedExternal.cmi": {
+            "bytes": 833,
+            "sha256": "4a4f24d68b29a0accf6ab49fd2cc59cc930f78ec12dabc75b04125a336e99ed1"
+          },
+          "supervisedExternal.cmx": {
+            "bytes": 2324,
+            "sha256": "b14580703830175b5a89015eb0404767a14d66f5c6df04968981b3630bc8115c"
+          },
+          "supervisedExternal.ml": {
+            "bytes": 6930,
+            "sha256": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811"
+          },
+          "supervisedExternal.mli": {
+            "bytes": 938,
+            "sha256": "46e7a5317d859f6f89464a70ef7633be46d218e54f28da52c23478c96e9eb06c"
+          },
+          "supervisedExternal.o": {
+            "bytes": 24480,
+            "sha256": "2618ad8bbfb0ecafcbec4400bcdf7e95c8deeef14f3d144b53b0513efbf38b56"
+          },
+          "test": {
+            "bytes": 3932504,
+            "sha256": "3c88c1151035623fffc66791591d0d0393149debcec69382071ce4de0135fbea"
+          },
+          "test-build.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "test.cmi": {
+            "bytes": 2899,
+            "sha256": "d773746ba244a36b5be6860f3dada36f2cab1f6f17c1a51d9adba621d3b49822"
+          },
+          "test.cmx": {
+            "bytes": 2346,
+            "sha256": "44e33968b93de1e1fd074cf64168fdfe9b0ea36ee945825fbe9a9e3ebc3e6517"
+          },
+          "test.ml": {
+            "bytes": 8084,
+            "sha256": "a78a6b999b5a4332ef3d41ec6f5b0a6450e261d97486f30ad85cf64b5e388b2e"
+          },
+          "test.o": {
+            "bytes": 35240,
+            "sha256": "d31ce463642c88701ea69fb4b8e7bee2d45b0a5343f5cba8a661a097c0a217de"
+          },
+          "timeout/helper.pid": {
+            "bytes": 5,
+            "sha256": "3674728c3c363ad8e48324a66d91e097b0e2da9a00769f72342caebcad1bd0c8"
+          },
+          "timeout/run.log": {
+            "bytes": 22,
+            "sha256": "4a77226e3cc1391517e41d4e61ce49c118576e8df2f42cd65c5c1a08f45c484f"
+          },
+          "weight/run.log": {
+            "bytes": 21,
+            "sha256": "c0275241ba93919c1816305a5de6c9c6e44bbc36280d589fe88bb18ad11170e7"
+          }
+        },
+        "actual_exiftool": {
+          "path": "/usr/local/Cellar/exiftool/13.10/bin/exiftool",
+          "sha256": "62e624a95042805a9e334a8c8a771a349ab57c7b723662d52db4b876870a5de9",
+          "post_sha256_unchanged": true,
+          "full_dependency_inventory_qualified": false,
+          "configuration_disabled": true
+        }
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-external-observation-stock-check-20261016/RESULT.json",
+        "sha256": "30f71809ffe1c9a1e43dcb522bcbf3bcddc13b14bb575ac0ad90ffda1ed8ccf1"
+      }
+    },
+    {
+      "label": "ox",
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/supervised_external/run.py",
+          "--ocamlopt",
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff",
+          "--current-bridge",
+          "--exiftool",
+          "/usr/local/bin/exiftool",
+          "--receipt",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-external-observed-final-5ejtg2as/ox.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "PASS argv checks=12\nPASS shell checks=6\nPASS empty-argv checks=5\nPASS nul-argv0 checks=5\nPASS nul-argument checks=5\nPASS missing checks=5\nPASS weight checks=5\nPASS timeout checks=5\nPASS stdout-limit checks=5\nPASS stderr-limit checks=5\nPASS signal checks=5\nPASS active-cancel checks=5\nPASS queued-cancel checks=6\nPASS mixed checks=10\n[external-process] External result v0 pid=93516 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\nPASS observed checks=6\n[external-process] External result v0 pid=93518 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\nEXIFTOOL_REPORT [{\n  \"SourceFile\": \"/private/tmp/unison-supervised-external-59k0p126/exiftool-readonly/private.xmp\",\n  \"Rating\": 3,\n  \"Label\": \"Blue\",\n  \"ExifToolVersion\": 13.10\n}]\nPASS exiftool-readonly checks=24\nreceipt /var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-external-observed-final-5ejtg2as/ox.json work /private/tmp/unison-supervised-external-59k0p126\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 93444,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "schema": 1,
+        "success": true,
+        "work": "/private/tmp/unison-supervised-external-59k0p126",
+        "snapshot": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src",
+        "compiler": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "compiler_sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166",
+        "commands": [
+          {
+            "argv": [
+              "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+              "-version"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/compiler.log",
+            "log_sha256": "fb355d5f164b1b43cce4bbe63a4ea894cc416c77748e0893b56bbd7eb8ba487a",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+              "-I",
+              "+unix",
+              "unix.cmxa",
+              "helper.ml",
+              "-o",
+              "helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/helper-build.log",
+            "log_sha256": "55ee9d1efd2670b75e93cc21a8476a4579314289ae0309d143c49aea5b428a59",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/generic",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system/generic",
+              "-I",
+              "+unix",
+              "-I",
+              "+str",
+              "-c",
+              "supervisedExternal.ml"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/current-bridge-build.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/generic",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system",
+              "-I",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system/generic",
+              "-I",
+              "+unix",
+              "-I",
+              "+str",
+              "unix.cmxa",
+              "str.cmxa",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/umarshal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/rx.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/unicode_tables.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/unicode.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/bytearray.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system/system_generic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system/generic/system_impl.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/system.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/projectInfo.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/myMap.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/safelist.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/util.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/uarg.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/prefs.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/trace.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ubase/proplist.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/pqueue.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/lwt.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/lwt_util.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/generic/lwt_unix_impl.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lwt/lwt_unix.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/features.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/uutil.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/case.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/pred.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/terminal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fileutil.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/name.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/path.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fspath.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fileObservation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/stagePublication.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/wholeFileClone.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fs.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fingerprint.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/abort.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/osx.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fswatch.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/propsdata.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/props.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fileinfo.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/os.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/lock.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/clroot.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/common.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/tree.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/checksum.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/transfer.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/xferhint.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/borrowedWork.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/remote.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/external.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/negotiate.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/globals.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fswatchold.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticHash.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticFile.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/formatExtension.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/formatRecognition.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/xmpObservation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/xmpMerge.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/dngSemantic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/dngExtended.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/jpegSemantic.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/dngRecognition.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticDelta.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticReport.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/helperSupervisor.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticAdmission.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticMailbox.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/ioAdmission.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticWorkers.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticFormats.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/backendResources.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/helperLimiter.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/candidateValidator.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/dngValidation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/dngCandidateValidation.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/candidateValidators.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/validationTreeBudget.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/validationTreePolicy.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticRuntime.cmx",
+              "/private/tmp/unison-supervised-external-59k0p126/supervisedExternal.cmx",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/osxsupport.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/pty.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/bytearray_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/hash_compat.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/props_xattr.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/props_acl.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/copy_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/nativeCopyRange_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/wholeFileClone_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/fileObservation_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/stagePublication_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/finalPublication_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/helperSupervisor_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticHash_stubs.o",
+              "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-bbvu72ff/src/semanticFile_stubs.o",
+              "test.ml",
+              "-o",
+              "test"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/test-build.log",
+            "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "task_env": {}
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "argv",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/argv",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/argv/run.log",
+            "log_sha256": "5de88786d622c502c8ebcd031a78168dc6f74eb3f23135783284b048e15b0e8e",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/argv/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "shell",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/shell",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/shell/run.log",
+            "log_sha256": "5a98aaf7807171d5bcfaf4ea2063b65e2e5ea72854fe82a5d6ee8bf213cb1bc1",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/shell/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "empty-argv",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/empty-argv",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/empty-argv/run.log",
+            "log_sha256": "b425eebf084addaccc878819bf44eb5a177540f4a21217f93cbc75ad40fc29eb",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/empty-argv/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "nul-argv0",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/nul-argv0",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/nul-argv0/run.log",
+            "log_sha256": "df44c7aa5cb05014d5d7da0653415b7ec8a225942d20a3236ae9ee4acf5d1311",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/nul-argv0/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "nul-argument",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/nul-argument",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/nul-argument/run.log",
+            "log_sha256": "eb828e21e7f0871b4ea23a2b8674532d7112e454a2a722d599745671c1851bd0",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/nul-argument/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "missing",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/missing",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/missing/run.log",
+            "log_sha256": "f9ae51a2ff390c772d60269073b0bc122c5c9c723579d3986d40a1628460c11b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/missing/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "weight",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/weight",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/weight/run.log",
+            "log_sha256": "c0275241ba93919c1816305a5de6c9c6e44bbc36280d589fe88bb18ad11170e7",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/weight/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "timeout",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/timeout",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/timeout/run.log",
+            "log_sha256": "4a77226e3cc1391517e41d4e61ce49c118576e8df2f42cd65c5c1a08f45c484f",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/timeout/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "stdout-limit",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/stdout-limit",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/stdout-limit/run.log",
+            "log_sha256": "8786a6840af660b6f61c1597fb9beda7db76c37dae9fdd63c5645bec3aa4d02b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/stdout-limit/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "stderr-limit",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/stderr-limit",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/stderr-limit/run.log",
+            "log_sha256": "c678fdb841a8fd3b9dfec0f3bf79d0f1ab87b1254b44474a5ae5aa0d72f454d9",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/stderr-limit/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "signal",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/signal",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/signal/run.log",
+            "log_sha256": "6b2d8727642446d17f78d1e761726caa0480765f39ef6d939ca85bb8a27cb84b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/signal/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "active-cancel",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/active-cancel",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/active-cancel/run.log",
+            "log_sha256": "15d33406a611f7847ed39ecfbd7f06aa3ebea999dc0b937007b565d835a0b508",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/active-cancel/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "queued-cancel",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/queued-cancel",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/queued-cancel/run.log",
+            "log_sha256": "edfa6d0acd8eb32b2806eaff4fbbc5812ec23a4e7e08a20b07d76162099d9e10",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/queued-cancel/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "mixed",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/mixed",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/mixed/run.log",
+            "log_sha256": "bf2aec0f8d42a0d4462bb76ed7894144c80e210d437fd99d822b356d683b1134",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/mixed/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "observed",
+              "/private/tmp/unison-supervised-external-59k0p126/helper"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/observed",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/observed/run.log",
+            "log_sha256": "4a83dff5bbca809a37819c313c97e70a30ca6ee97f453778867c1f8eecf2670b",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/observed/state"
+            }
+          },
+          {
+            "argv": [
+              "/private/tmp/unison-supervised-external-59k0p126/test",
+              "exiftool-readonly",
+              "/usr/local/Cellar/exiftool/13.10/bin/exiftool"
+            ],
+            "cwd": "/private/tmp/unison-supervised-external-59k0p126/exiftool-readonly",
+            "exit": 0,
+            "log": "/private/tmp/unison-supervised-external-59k0p126/exiftool-readonly/run.log",
+            "log_sha256": "469bbad22c918df1faa7d8b06e7945fc68bd7ea48cdb69f5a105fd1f5397c297",
+            "task_env": {
+              "UNISON": "/private/tmp/unison-supervised-external-59k0p126/exiftool-readonly/state"
+            }
+          }
+        ],
+        "cases": [
+          "argv",
+          "shell",
+          "empty-argv",
+          "nul-argv0",
+          "nul-argument",
+          "missing",
+          "weight",
+          "timeout",
+          "stdout-limit",
+          "stderr-limit",
+          "signal",
+          "active-cancel",
+          "queued-cancel",
+          "mixed",
+          "observed",
+          "exiftool-readonly"
+        ],
+        "test_pins": {
+          "tests/supervised_external/helper.ml": "1d9c4cf2236b59f8e32448c20117fe3679404c8e94b64d1714ebd3da2244a7bd",
+          "tests/supervised_external/test.ml": "a78a6b999b5a4332ef3d41ec6f5b0a6450e261d97486f30ad85cf64b5e388b2e",
+          "tests/supervised_external/run.py": "389add9940b83f38d44b458e090c7b3b5d9a0594e846f0d9b59062cbe0a21c63"
+        },
+        "linked_object_pins": {
+          "ubase/umarshal.cmx": "3c0976e3636f3a0ea343bff0aa729fafbd18468dd62955503126c76cba55fd19",
+          "ubase/rx.cmx": "1a595ba372f425ce2f49addb117028f24734b8a82e3b289f734117a6f84a7002",
+          "unicode_tables.cmx": "369207f40af29b5cc0216d37ed7301dfbb553bd032fe5b96b90e5787410a5276",
+          "unicode.cmx": "2e3f34b390d16d4667cef64329c0772be8683be749f4184e387da2f139985bd1",
+          "bytearray.cmx": "1db85e5f5b4afa64f276f1a65f70454e95deb32190a9fbf332c68ad29dcba232",
+          "system/system_generic.cmx": "62de54de04aa4ca6a23b28d18deadca4171c64866a769ed07cc23373fff52662",
+          "system/generic/system_impl.cmx": "9a20c1849ff0befb833265bf72e0d83925a2c867541c8de0b49380ed83386197",
+          "system.cmx": "109f41380dd9294e1110f5c17babb6333420b2872f4eda1d2603d5a53ab1a98c",
+          "ubase/projectInfo.cmx": "432127be5f2f0142e515c863b667cb894a2f165ec04e348b0e94b54232dc89c3",
+          "ubase/myMap.cmx": "5180f1fff362f1ef3a4be032184ca1638a2025f2d0a75a80075809c2d33fb137",
+          "ubase/safelist.cmx": "b9a2ba52a04f6b7966a05b0e0b33a56f661071e5f22f57058177f56aa5013dca",
+          "ubase/util.cmx": "2edaced869188bec5e957cc5da6c1a8936cf5736894bf93867f0d140630ac141",
+          "ubase/uarg.cmx": "69934027b3ca0b5daa0c67d302dc29067c8f620cecb213d1f0594cbf9853dc3e",
+          "ubase/prefs.cmx": "6661659ab852f527ad17c4d75e35358686d30a3bf9ddf51779e491a0a2fb89e0",
+          "ubase/trace.cmx": "1712b992fb1e07890b19b8e19ed9db3cd414dead16d82ae3f6f2dc30bdde5707",
+          "ubase/proplist.cmx": "dfe632b9d3de4be7e7f3f6b2a81dbe23f48fbce93feee0ae1f4163a935590265",
+          "lwt/pqueue.cmx": "555157fb63054a88d051cc083bc7524624e8e83e91e6ce53e2f14059ba90f75d",
+          "lwt/lwt.cmx": "b0cd4aef15aa55ad31f0077fee5c0353981ec51e8a5cb33baf1b354f060ef72d",
+          "lwt/lwt_util.cmx": "f4fe04538380b213cb57170ec1e81b749d398ce1ca504703dafefa04ee08e888",
+          "lwt/generic/lwt_unix_impl.cmx": "fdc2dd133e6d4545b9b1f59abd87a93427082b3a24a1b4aaef8f0575fb2f2b71",
+          "lwt/lwt_unix.cmx": "c2d52fe22b97bcd6e683c4049eba707f7c9333f0d903b8fb4e195cf5bec3e748",
+          "features.cmx": "e8518198d2a7561f85a61b7876e2fec2cd5a98da653d3d98e136c8f70c480586",
+          "uutil.cmx": "5074d423f1b1afb291b7def130de512618248213f23d54aee87763e4cbadb05c",
+          "case.cmx": "1633663dc3749af77ebcbb67bdcc651196707364abe95c9cfbcb3d8c57122f4b",
+          "pred.cmx": "80c608342d9c1cb7d6912c91a668d66b90afc3c78a13f65ccfcb861eecd8f88e",
+          "terminal.cmx": "7ac58d3291cccaba1a2da8ddcdc1161fe280973b537ff1e20d928f7e2aeba894",
+          "fileutil.cmx": "83573cf84c5e0c1423bd26c980326316f6610d234f83f3821f03d9ed0a531b7c",
+          "name.cmx": "a1e04f9f6339047c36d492040315c0fc2540fa281dc580c6d593c89d0c8bd936",
+          "path.cmx": "e27c7add39a062d1e2318a1d254b3f7a9df6842c9f2b1c7065623f566d215dfc",
+          "fspath.cmx": "3ae92a76c4d64748ae73444c047ddb747a46d0a18ad44d8d0aab0b0aa3424248",
+          "fileObservation.cmx": "0deb03f5de1fc9ae74a1d0c6ed4447a8978e87c4282110b9b34d88962f0f00f0",
+          "stagePublication.cmx": "e028771413c4444c67c903269538edc4e8e6d77bf59113c9873ffac26d33b100",
+          "wholeFileClone.cmx": "3077921705caa0ea78c5eb36284ef18b38ea8cfcf84098fbe2d9ff8558c9d4c6",
+          "fs.cmx": "8d12ee26beee3c0998513566d1c6bf5676471286ad016846f1550da5b52f3161",
+          "fingerprint.cmx": "d044d4b6b7fc4fdf936b32d8160cebb1b9b51efeaabae4eb881644a4e7e753a0",
+          "abort.cmx": "9b4b33964fddddfc955e521381f83fb0625027156c7dd17fc3e1e8fb1b0f12a4",
+          "osx.cmx": "3edce5313f2c33eb06cde84ddd98792353ab1c9e4b70950bbc4137ebedf09f06",
+          "fswatch.cmx": "b49a93f86dfc97178c311e6c929e28492edcc4cebf04cd0515a5b2201ea7bb79",
+          "propsdata.cmx": "8f815ef61493a5a513a9bc1251316d82447065169c31795038940a0392501e53",
+          "props.cmx": "04eb9e6cd05d42895defb38960731613f1b7b1fbfb88fe2a9a747f6fd35f635c",
+          "fileinfo.cmx": "13bcc95c223b57ffebfd8d8c111a2a79c426fc653310011dfed6ff91baaca618",
+          "os.cmx": "ff96eab6cee49b79549ae2c1ee8931099d0b3065cfb4767ee73c937f1cb9cde3",
+          "lock.cmx": "00c0e3012581073a803e4f2917c3b3beab1175d1f1953963bbc32d4cd71e4afd",
+          "clroot.cmx": "d301dd44218782224430f0dfdc6e84f08a91a48c1770b3ce2dfd3d843f8ddd06",
+          "common.cmx": "40a83494573533f58af5711a2af7acc41d3a1957140611cd3e07fdf273f132d5",
+          "tree.cmx": "3d3d7baf89f8e2486db8ec66d172988a43c38ae0ff4bf15ddc44e89366ef5ee0",
+          "checksum.cmx": "d20a763c434a69551e3706080279088b20cae7b800585f16995e8f9658a910cd",
+          "transfer.cmx": "7bd0c2b0064bfb6d10f354d28caff6b64145fb063ce8b4378031e05a568ff528",
+          "xferhint.cmx": "289598bdbffc25490f0d15ec9ffd4e27b2c36fe49e886313e4987e51cd7f766f",
+          "borrowedWork.cmx": "a856b1768287709c035a149161c2e9ac7cf219aea519791cf55ab340249218ce",
+          "remote.cmx": "5488c8c7b20c27a166c0b2aab180d16307e13ef13ab9b3be4bbf93a7e2d7cf8d",
+          "external.cmx": "4dfe93020d5b8c87f0b879825ff70eeddbb8cdf1a99365a6694503cc46369bd0",
+          "negotiate.cmx": "cc76824fb3971c189c83ffadc6ccb41b019fb939155d0d06a36e927829988d6b",
+          "globals.cmx": "67abc50f3cb3d511c290b340f43187fa4a40e9ed618741a913a8e695cb06f65b",
+          "fswatchold.cmx": "02dfc23c0e1bd926524174f493f23a010a6c8e142746f480857ad6eca33941cb",
+          "semanticHash.cmx": "c019380ba831be5bd24928f8251ec8b03ceb4830967f0ba28bff176e9d312e03",
+          "semanticFile.cmx": "ddf41687246284426e1a482b669b98935df9c7650adbcaf2fe9f9ae4695676ef",
+          "formatExtension.cmx": "53571f4da39f6bd5bdd12893485bf91134daa71e768581f29a4008755018cce9",
+          "formatRecognition.cmx": "5c379671ff44e8e43438d414aa6a651f5564ad18d3d1e8f4345f9c17bdf42c24",
+          "xmpObservation.cmx": "e61fa4a547f5dff59a516317208fe65c5e9a28972f6b3f0a88a64f6574515b59",
+          "xmpMerge.cmx": "5548de9cb567d3c2f99167189b71ff076066c934c9c05f30fe4bbef450f57a27",
+          "dngSemantic.cmx": "47a023aa8c4d6bda66786f70119882a4b4063ba8156b884cdcb289cabb934b08",
+          "dngExtended.cmx": "1a69deda484a6874efdd677a8337ed702278d26c6ba45a87c8236c1b5214f669",
+          "jpegSemantic.cmx": "2b09534ef64bf4754b4a09842470b795217ae1fe4e48a491b18b7d374f5b1542",
+          "dngRecognition.cmx": "85142fde3f01c9a2bdc732957fdaac97e09f4df1e26e2a96a085284f4e104cc9",
+          "semanticDelta.cmx": "a81f6ef28280ab09a459dba25ceef1a257a0b6b1c8db87663576ac9dfed39af2",
+          "semanticReport.cmx": "923c0adfee001e4760278a044a9380c20cec4b16f278874dfae297cf9f51e784",
+          "helperSupervisor.cmx": "35d221974d19f6583dd091a56a1a5f488e828c2456fa5a14b3db145901942017",
+          "semanticAdmission.cmx": "721430b63e1f696b4522c96ca43f9879371709697dc1dd64684ad16ccf1f55f7",
+          "semanticMailbox.cmx": "c56aaeedd5b753805581478808e492d5658f73085ac3bcb63ed3da45c9c7dfe1",
+          "ioAdmission.cmx": "bbf0287648608386d7d45d7e67ec064708b33297e4befbd9d61940e73fc4ef81",
+          "semanticWorkers.cmx": "f3c948623511b0cca00303c7c6fff921bce4387250b91616a94a44add03df615",
+          "semanticFormats.cmx": "990d73993bd9470b75ccc5856e92e039b0c46219fa9b092e91ef026ef2800c61",
+          "backendResources.cmx": "36e3b934b3e41eb6c7c9917489d92b34ead5b087206650805efc420d08043607",
+          "helperLimiter.cmx": "bfad07acdff6e081df89c5468cf28e6b672ec66d62fe613bfb41eb64f43ddba7",
+          "candidateValidator.cmx": "d02d7722b3a4d1cf9215419f324320e90aa2a12bdaff22f5d493ea8964d893db",
+          "dngValidation.cmx": "29c8bc4e6c38f81451c0fcc8f4afe378795cae3504cddba478480a83d6d08ae8",
+          "dngCandidateValidation.cmx": "0339d930156fe4c79ebba35bb1638f975434613662738f960e8ae3210c37ba58",
+          "candidateValidators.cmx": "ea5444ea79ef3a1c65d8378ce1daf51a81fc952f9d9f059a23595a4f6577eaeb",
+          "validationTreeBudget.cmx": "fa4bd67cad15e5d250eb1adc620552c2017dc55b1f068be173463100c0672140",
+          "validationTreePolicy.cmx": "6f2d76ad93372a72988c172cb195cc5a2995611f2ea09a776ab6f88dc8fc56d0",
+          "semanticRuntime.cmx": "8088f753187355a0cf6ad4d62c2ae5e0044161c83c316133edf86cc0512b2130",
+          "supervisedExternal.cmx": "a47810fedecebdad162ab7ec6e698f61b1e78e93ffb6844d956cd456422f9591",
+          "osxsupport.o": "13feb1d47b208f6f3f40e9e4123bb7a5f7ff8b0eb70d13c996e829a56c9e15fd",
+          "pty.o": "db4e8aa3291314a44013ef2e9211fbcf7ca8d8a5c9be75db169c28e8cc9e3a22",
+          "bytearray_stubs.o": "850fdc317172f1cceac66556ca98ff6a77ea7c8307e38818f709ac8580e83bcf",
+          "hash_compat.o": "fea2676f0e5c4fb3aa8ded65bb41eb39922bc79a707f58dfa940b2c2ed953a47",
+          "props_xattr.o": "446cad437b0ae223f9e1c84076ca0beb58004e60bbc0d0188708be8e00144078",
+          "props_acl.o": "aad639b57e84b20b0a533799bc86adfb6534240b40282752bb6c9c8283051e34",
+          "copy_stubs.o": "a6a6268d8e9205665078ef8d7c569a94c1be74b851bfa85ca711f43b6266876e",
+          "nativeCopyRange_stubs.o": "f99228369936dffd55af0415e16ffcc7c9248506ecf0f15b5dcdf30a9f0085c7",
+          "wholeFileClone_stubs.o": "5c57a047b67ead28c6956b28dbe41a68c6c83d3608fc4b639f8592bcb65239b1",
+          "fileObservation_stubs.o": "3d23fc236c3697bdcb1e82771925440c3af3f8336ef9bc6571997efff337322b",
+          "stagePublication_stubs.o": "21a45bae7d4d2046703e6e941b5a6550847bc6c4e3da218b1f7c8e430ef7ee3d",
+          "finalPublication_stubs.o": "33413998ceadb25cfe6e0fa9b006086ff00a72d23f68c8276d3a6fe26bbe96c8",
+          "helperSupervisor_stubs.o": "510aec6534cb68c9cb26f376e96be293a4feebad0339efcd97ce4cd69ae4b384",
+          "semanticHash_stubs.o": "2e53ad944505016462bb2e1431653223023081df3089d0a611f585386634f371",
+          "semanticFile_stubs.o": "c03b0cdb20a214aa42bc30c88bec8322aa13991a60339d3e53d21c50f1c976e8"
+        },
+        "source_pins": {
+          "ubase/umarshal.ml": "19748d6a362019c9d79d62696b5881e971bdc0e6144ac2620eff514b90ea44ea",
+          "ubase/umarshal.mli": "70b92631b7a4dfa48df225ec8587e228cba8329e73025fe60659959a0c5868cb",
+          "ubase/rx.ml": "af1e75d309dc3dfb60bec0e9764881fbbe4fc186ff940b064ac64f7230d620b2",
+          "ubase/rx.mli": "df64e326a7ed71cc87a2847aa9eac46a1cc80ca90cec04131b4d31e2ecc4da8b",
+          "unicode_tables.ml": "050ac9dffbfa55109fed644d50da92c180a35fab55ebde2d5941ec83d40482aa",
+          "unicode.ml": "a2e95dd9a9c0f069c4134c0be24e99ca6401398f32d6a23b6cdc7c2618928282",
+          "unicode.mli": "fe834013cf48939862c4b0fbbb17d22e001591add31113cfa13686d414a10846",
+          "bytearray.ml": "cadfcd8c213bc1e27c58a737f51a0aa6a8adf588da3e9ee57192e2a66f81dd25",
+          "bytearray.mli": "ab07163781f0a7cb5241adcbaab95c8edb913e224ab43c51e833cc533069d0c8",
+          "system/system_generic.ml": "7cc582e54931abce12117a41a6526d3d632c97eb81d3e604be8c78e69735d24d",
+          "system/generic/system_impl.ml": "974a46082a4630f55e1c44ff030861e2074f4cec126de6bc7ddd66f742b5724f",
+          "system.ml": "d36b090d6fdc03d892426328b4d4a307f82cb6ffe6d746f6e9d1c77049904060",
+          "system.mli": "fe4848d17cd8832dfdb2598e056865b956f7e33b7a0008c7c13d04db22b741bc",
+          "ubase/projectInfo.ml": "3ead9396198c34b8808a3bd33bc7c5307d1a4512a142c8413fbb1804f952b359",
+          "ubase/myMap.ml": "0fdefc721d5a633c132dcca53530449c90a2f0305c6bcdae77c2505ec5b3719f",
+          "ubase/myMap.mli": "864f45c227d2b2096543cc1308fddf9b1ab99ba6f32e92cb843b3b254941e110",
+          "ubase/safelist.ml": "c5af8ef80aa9e69706c0c8ce98ade942268793840a17324bb769270526698576",
+          "ubase/safelist.mli": "a9dc0393b5a8c00e56dc2083fb0ae33b37769a89646b56de5075ed8b21dd3800",
+          "ubase/util.ml": "f906fed02263d5f42c0eca00b147394895a814f4c3a9309ee1b0d21f5874538f",
+          "ubase/util.mli": "db5eb64176c1124934e86e44cbbb3c52e8506786c5f6f36b2944c08831a01475",
+          "ubase/uarg.ml": "b886f7690448fda3aba58abd4257091f973c664166eb24b6975c436c144b16de",
+          "ubase/uarg.mli": "b0d5be4679e7d5b57de49fe8bc81c3fd9b5cbbd197528b2ea0ae83b8507e8a2d",
+          "ubase/prefs.ml": "b8b6bf2dabd5e794a8ed9a0ddb428da45ff3e57207fdb67689ae02de334168ae",
+          "ubase/prefs.mli": "22b5480ab6220a1e31952b374de7814ee605d5db9deb65f095506d7757dc4bcf",
+          "ubase/trace.ml": "a57967d94fd52e1f54b385b687e012a381e8a2f38ca1f6e241211e59605f4c7b",
+          "ubase/trace.mli": "0f99d9588848b68d96f8c87c843e60f4b99ceb19543d6efd725c2d825d74f83a",
+          "ubase/proplist.ml": "5978d174ae0a1fc4876615b49154e0d6a8978c12ffcec4d17960c7716247f93f",
+          "ubase/proplist.mli": "f23ccce1b4c3573adca4f991ba8643c2cb2f21ea9ea2c5258bba1f8bfd666429",
+          "lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+          "lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+          "lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+          "lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+          "lwt/lwt_util.ml": "1288d77c59b65ee8b576592e7348b8a0293ff89424055b4c2b3bd61e6e73c48f",
+          "lwt/lwt_util.mli": "f96c07549e8acf5badc190b2919552587f3390974c783c15148231e4e790be6b",
+          "lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+          "lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+          "lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+          "features.ml": "a535e1da48f4ac940cd02cd031da9793d3f8a72b9e08a0ed22e9767485f496b7",
+          "features.mli": "1769cdf2ae26492cafaaa586e7ba279038228052a4351b13b63e32c4494e94a4",
+          "uutil.ml": "dd919c86d4cf21f3ba80342dec4afbddffc4ce572905eff5a5f6893c6d21fe7a",
+          "uutil.mli": "3b9e8006e556e21d1f15c1f64fb6d2aabb1268d143f3f6ddda46f600954be16d",
+          "case.ml": "54f1421601eb02c8eae20dca220a8ba6e0eaeacbf064da681d91bb7572a18c0e",
+          "case.mli": "1304813a5f2ea7d1e95306143c26e02e05d33a77b49754270366468881e43860",
+          "pred.ml": "44a6679f43a86fc82ff35b793b6a9584ba79256f2e867a81dc378d4f1ba2e95e",
+          "pred.mli": "13764e35337cd44546394c50b739c45d3e23f7844dd4ca9b00a77b15ce4b500b",
+          "terminal.ml": "2a4c21b34f661dc8f994ae92f566e859acaa4dcf5ab412dd04c37f04694966b5",
+          "terminal.mli": "6f5077f217cd883e3f1246693db0ae8937335b4482486ff4476ac34710b17a1d",
+          "fileutil.ml": "fa18b9394a06527831e174140c09d74f83618614407e53480d99f5b3fd5b6525",
+          "fileutil.mli": "1e1a1748e8b960b1b6b2915c1ca0565043741dbf4ce8bf910e5c0858ffa21f90",
+          "name.ml": "8b079efb91e81e1a80e9c9ed8992018d85785087318dde29264001b71488cd44",
+          "name.mli": "cfe8585566c650d7cb9f61da227694fee590011be9975b771f9c84f1f1d530c6",
+          "path.ml": "afa2e468afe9f9de59784e2bf0064dbc54373a31e88f30b59fa7efdba34e3751",
+          "path.mli": "9a98250add11cd1e5de6e06874e244ce08493ef976348a866025489c2e0567e5",
+          "fspath.ml": "fd8a9a1532516282d00c0c078fa892ebf65016c5ffee8bf234869c2e8dd85b15",
+          "fspath.mli": "34c9c822d54c3666b7b32434aa83ec93d02378987d593c7995290a09cec40cdb",
+          "fileObservation.ml": "d0d13d872654304d543a367ffa57dc01a31f87dad50e631c0e2f4f302e752a8d",
+          "fileObservation.mli": "37fb46e4a6462e640f03f2cc4be1396a8c491081869593ae3a798cfe36e6ff13",
+          "stagePublication.ml": "29136e71712e16b149ccae43798a71cc406b1ce9d20f2c2a272ba7203eb0f53e",
+          "stagePublication.mli": "22fd045a7398b1c00b4cfadad1e56b2d18eacfeaa614a033f18f1fe8b678c86c",
+          "wholeFileClone.ml": "57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca",
+          "wholeFileClone.mli": "21baffedf72b244bb0a867d3eb9b8748b8358ea09f4f06bbeec7b5fe2b9b838a",
+          "fs.ml": "0b9852f103c8441745c83733de4a88d394d138dc93ffc0e04285a4e1eae652d7",
+          "fs.mli": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45",
+          "fingerprint.ml": "1b9cc61aa8751024550b970b1fcf6082b18cbc09226feee4bf3c7b47cf9af8bf",
+          "fingerprint.mli": "ebaefdb4ca9b67f4220413281d26e663e482bbb4c5495ea08b020a295e8cf06c",
+          "abort.ml": "c27ac1cc27606389c4ee218c861dba2dd40637d6bffcd5c2dbfa796b3d569c50",
+          "abort.mli": "dbb51402851e2f26cd475ed8efc10e7a840f0caa6454d91d5094b629bb491ecf",
+          "osx.ml": "8705194b4b29a882ed3e2e30e587f722da63dba92bd1b00ac9cd21977864f888",
+          "osx.mli": "33342a53f4c8eea634dc906782d9199dbe7a576a688154d7bff0f94ca9cb4d7d",
+          "fswatch.ml": "3d3cb9239ad2a9c10a508c43ede23057d119abeb793f01a1ea5903a1ba7e6764",
+          "fswatch.mli": "e963d4cb0cb3254eeb924a51be0c4528dc5617d523c68d625c466299dd3e9645",
+          "propsdata.ml": "50aa6a5ffd0c2a4a7042f661266b216e40b15fccb732828176ed403811a13301",
+          "propsdata.mli": "e2b5ac93b3392939d5ca87db3918246cfce395654a0e72214fba6c43dae56dca",
+          "props.ml": "2fcf37bcfd2f812c41d890c1302369142588c6e0ecde1c1d9db84e18dcfc7a41",
+          "props.mli": "bdbb03d9a5dc77378034dc7eefe79ebcc5fb7dfb48312b32c173a3f1e40e51a3",
+          "fileinfo.ml": "6cc872dae0331ac22d8717f463821d5ed71f06806d82903ef00d56e6bbe51cf0",
+          "fileinfo.mli": "ca7aed8fff580fe703bd5dbaa4bfad5e42732d223c95767c1a640290989c822e",
+          "os.ml": "293d509d92b204846bc11598b819da42fb1beed57a1c897d416a5da14c5a2707",
+          "os.mli": "1e5df0e173c7645d82e884f7d10c33ae7c10b9c4acb29d878ebe7a0ec84e91d5",
+          "lock.ml": "32d19dda16e7e3ff26a2708a06fdebe3b1b0f22e90838c09c9dff2599b2e1c3d",
+          "lock.mli": "4ae6770bb279f1ab7fdedb091b9aa627e66ee2e5e99f1872f72eccbd9577432b",
+          "clroot.ml": "cdcf390f4f8f1ab7f0bd3286d515293583d2c73ab90dea7bf1b652672f1a9699",
+          "clroot.mli": "75c8b784e86b8fdea9a869adf0f88245ff4c168a0bf6929d4d96c1a7673da672",
+          "common.ml": "6aa4e6d36ba6db9413233846a170c2e5b4f2fbb9725e3721ab7742ed04841082",
+          "common.mli": "8550f51a11adca8e91eb1bc6a687396e551e25e5b2d467e59c18f4f610c632ec",
+          "tree.ml": "50d58bca6808c3ad54f7e2494dfa4ef3382fd179ab555a958d4638da04fdde5f",
+          "tree.mli": "fac52cf5c9572fa5aaf3e6f49281fa5dc490dee58e6703773d545a209ca40239",
+          "checksum.ml": "f18f93fbd9cf6dfd3d0d7f9afd5031ddb1a9320f8566420da07d053e92b6b57b",
+          "checksum.mli": "b9b8107a52116b6191687b9a47ed1b6b42b518a58039fd98be80b0f8aff942da",
+          "transfer.ml": "b8ca9e9aa9ba18c785aaa502509ed6b17e3b6e23fdd697066d30c7036777a56d",
+          "transfer.mli": "06baab649a4073c79ec820c6e112b5d13c0d00498df365fa8b2840d2425c3711",
+          "xferhint.ml": "b90728780012b9c183e09383620673231ed4643a2236ca05695bc907892c77c5",
+          "xferhint.mli": "18c94d96aa6a3b167ca6c348807834a4b4b64820c77753174a19a52b9334b22a",
+          "borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+          "borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+          "remote.ml": "9b0cf82d2158662f2001aa6abfceb7845531cd663cfd39d5b2ed73b982e6b286",
+          "remote.mli": "b29e32927fd10452b7dceefff9fd09764021d64628bf1fd2ea1c9ce95c48aa94",
+          "external.ml": "18748fd6d4db2c3a715afff343af4c2054fb8c8404eb740d3752564a7daf5d34",
+          "external.mli": "02d26bc0d71f9785633d30bb6c170b22d81cdb4c5f360ac20eefd2abfe66c349",
+          "negotiate.ml": "75826e42dd85741ab576c23feb3febc3af20ad40438ccfd9531f61385c9d5014",
+          "negotiate.mli": "47eaa4a23976114912c3b3f88b6be0aea4c871babffe892207b302416b14188d",
+          "globals.ml": "04655e8abca85279c0ce3a07e4fb40d21050dbb701329aec130f40655f4851dd",
+          "globals.mli": "2c4b82f6dd17d26fe9fd5f07aaf38d4778363f2bd7c81b6ba81c8b8d8bcbfa66",
+          "fswatchold.ml": "978c56491c08a6d4c7448326f8b9ec94f2c215dc09d65c3488dff80c1005fdf0",
+          "fswatchold.mli": "2ba0e9a36ca9449406b1e519b9196108b4afb84218030a7af9179265adb16a11",
+          "semanticHash.ml": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "semanticFile.ml": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f",
+          "semanticFile.mli": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444",
+          "formatExtension.ml": "4e0225aa32e3ec345f3cc88c2bc88a92a4867c1fc7fee39574afe6b9a756e2c5",
+          "formatExtension.mli": "8d6a40e593b80d299b954ef2aea0160184f881e9e3a49e622b43470606a286d9",
+          "formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+          "formatRecognition.mli": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef",
+          "xmpObservation.ml": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb",
+          "xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+          "xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+          "xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+          "dngSemantic.ml": "41a563448e5f78a1820930dcd89533c47801ddf07c9f9587432c33a11e6e00ad",
+          "dngSemantic.mli": "8a944b67629fa8e338de786f169d9f2c8000e4c1d1790c57c37e95feee6b8a6d",
+          "dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+          "dngExtended.mli": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a",
+          "jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+          "jpegSemantic.mli": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e",
+          "dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+          "dngRecognition.mli": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b",
+          "semanticDelta.ml": "df169d15dff25b16bbc9c07cdf6cc4b3aea49e1f0b9b23cc9fad2cdcff174bc3",
+          "semanticDelta.mli": "b087bf1d0e31148bb17e7c07367f8f0e73500d825a4b5f9ae537d216c2b36a41",
+          "semanticReport.ml": "4e49f6e9cdca9aa94254956c61d2285f012637e40d70087439087c91cff2fdfc",
+          "semanticReport.mli": "2620556d1fd54777531b4d55562d49aa89459d3831182fde2e7c6bb4f1d0ae2a",
+          "helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+          "helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+          "semanticAdmission.ml": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e",
+          "semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+          "semanticMailbox.ml": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e",
+          "semanticMailbox.mli": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d",
+          "ioAdmission.ml": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4",
+          "ioAdmission.mli": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+          "semanticWorkers.ml": "ef0b1760204e82db3a8a1e579fc2a19df459ac8d3c9f0e575d69d7788631f673",
+          "semanticWorkers.mli": "135340beb49d208cb716e88f9593ded46e74ec51e92faa6ec11b445c4f74487d",
+          "semanticFormats.ml": "6bf5be266f0223e083f1b57f1b0e284cf78212f8deeb66fb769e30fff9934358",
+          "semanticFormats.mli": "5e9cb27dfba950403339ef3cecfa34de4b4079e341f9978d95542339ed0b6f4f",
+          "backendResources.ml": "bf5a39fb6ac88ee7401eedd0c30b95b0ba8110b04a01e8f4cefa126da44d2e63",
+          "backendResources.mli": "442e808a6c0efb611eab9b749c9027d93bf3e335ae1b272509c123f042405224",
+          "helperLimiter.ml": "10f55cf2b538d06beb0d69c8de07b22651978a07b65d29b43a4635f15017014d",
+          "helperLimiter.mli": "d4a994ade87db6293e3512289597f23f18f5d821ecd94b4c8fa417ced236fab8",
+          "candidateValidator.ml": "eff045657c4f404e8cfdc27f766be615998c73ed6003a4f9b4c7011776708b76",
+          "candidateValidator.mli": "e3a7e906233ceb013f0cc590cd0bebc688270faa93f6ebe57d48866eede9002e",
+          "dngValidation.ml": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b",
+          "dngValidation.mli": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68",
+          "dngCandidateValidation.ml": "25a6d95c996562259f556b86354dff7eaad0ab46363e011d03b31829becfb3b5",
+          "dngCandidateValidation.mli": "0140fd90a273da43862f8aba8bcfa59275efb3098dd0bff27ad48be03c2fcab9",
+          "candidateValidators.ml": "cc7a19837a89f3deb1363ff79020c26c288ce674389fd0ba93820961fcf7dea0",
+          "candidateValidators.mli": "72305d84c8928c20dba44913575a974f1905eadfb987f51365f1b9dc644a6c0a",
+          "validationTreeBudget.ml": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970",
+          "validationTreeBudget.mli": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773",
+          "validationTreePolicy.ml": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092",
+          "validationTreePolicy.mli": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f",
+          "semanticRuntime.ml": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773",
+          "semanticRuntime.mli": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531",
+          "supervisedExternal.ml": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811",
+          "supervisedExternal.mli": "46e7a5317d859f6f89464a70ef7633be46d218e54f28da52c23478c96e9eb06c"
+        },
+        "scope": "Actual SupervisedExternal and installed ExifTool readonly metadata plus worker hashes on original private XMP; zero SDK/Photo; tool script pin only, not full Perl dependency qualification",
+        "Adobe_or_Photo_or_UI_access": false,
+        "performance_claim": false,
+        "compiler_version": "5.2.0+ox",
+        "current_bridge_source_sha256": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811",
+        "current_bridge_object_pins": {
+          "supervisedExternal.cmi": "8cef59407cfacacc44d4bc9ef74807ba842abfc680df2ff0e3adacec7a1cf5bc",
+          "supervisedExternal.cmx": "aa6cd0cfd5546c6d8cfb9d65bb57dfb9f5ca1f76a3705c0c92959427a9fb32d7",
+          "supervisedExternal.o": "b56fd9fd73ca8b6ceed90ad802fa3b56654ccae9075e89d2242a119b7e2dd378"
+        },
+        "observed_helpers": [
+          {
+            "case": "observed",
+            "pid": 93516,
+            "status": [
+              "exit",
+              0
+            ],
+            "other_members": 0,
+            "record": "[external-process] External result v0 pid=93516 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false"
+          },
+          {
+            "case": "exiftool-readonly",
+            "pid": 93518,
+            "status": [
+              "exit",
+              0
+            ],
+            "other_members": 0,
+            "record": "[external-process] External result v0 pid=93518 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false"
+          }
+        ],
+        "artifacts": {
+          "active-cancel/helper.pid": {
+            "bytes": 5,
+            "sha256": "c1bfcabfe39a10ab6e854f023f342beab17daa413ceaf9062388ea244ad0662a"
+          },
+          "active-cancel/run.log": {
+            "bytes": 28,
+            "sha256": "15d33406a611f7847ed39ecfbd7f06aa3ebea999dc0b937007b565d835a0b508"
+          },
+          "argv/helper.pid": {
+            "bytes": 5,
+            "sha256": "36d97c9bb0d4521cb851e61f5b16e237a9648e14dc233d791b06aa965e22d3a2"
+          },
+          "argv/run.log": {
+            "bytes": 20,
+            "sha256": "5de88786d622c502c8ebcd031a78168dc6f74eb3f23135783284b048e15b0e8e"
+          },
+          "compiler.log": {
+            "bytes": 9,
+            "sha256": "fb355d5f164b1b43cce4bbe63a4ea894cc416c77748e0893b56bbd7eb8ba487a"
+          },
+          "current-bridge-build.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "empty-argv/run.log": {
+            "bytes": 25,
+            "sha256": "b425eebf084addaccc878819bf44eb5a177540f4a21217f93cbc75ad40fc29eb"
+          },
+          "exiftool-readonly/private.xmp": {
+            "bytes": 179,
+            "sha256": "c8259da5f6ca930bf61f7013b400908eaba7fd0eb85da94086b33fedeee71966"
+          },
+          "exiftool-readonly/run.log": {
+            "bytes": 347,
+            "sha256": "469bbad22c918df1faa7d8b06e7945fc68bd7ea48cdb69f5a105fd1f5397c297"
+          },
+          "helper": {
+            "bytes": 2083400,
+            "sha256": "ea5efa260727398fac9b3cb6597ea13e7a3c54fe8ce4c3ffcf403202a8a88b5c"
+          },
+          "helper-build.log": {
+            "bytes": 202,
+            "sha256": "55ee9d1efd2670b75e93cc21a8476a4579314289ae0309d143c49aea5b428a59"
+          },
+          "helper.cmi": {
+            "bytes": 900,
+            "sha256": "11d76cb3a01f9b0580e7d376a61a11b3d6304771543880044ff0e515e81959fb"
+          },
+          "helper.cmx": {
+            "bytes": 1646,
+            "sha256": "b828671707ede4dc0ed3fb46d1e07051797c577a14dcdd39fe145f3ad9e512bd"
+          },
+          "helper.ml": {
+            "bytes": 922,
+            "sha256": "1d9c4cf2236b59f8e32448c20117fe3679404c8e94b64d1714ebd3da2244a7bd"
+          },
+          "helper.o": {
+            "bytes": 8088,
+            "sha256": "79061276d3c6c170dec02315e8f0c0111ccdebf6814418624f14305047691ce2"
+          },
+          "missing/run.log": {
+            "bytes": 22,
+            "sha256": "f9ae51a2ff390c772d60269073b0bc122c5c9c723579d3986d40a1628460c11b"
+          },
+          "mixed/helper.pid": {
+            "bytes": 5,
+            "sha256": "28a150f1a5f57aa575cb9dd470e2d8b3ef1dcd3532494f76b43a7cbc2d9faa9e"
+          },
+          "mixed/release": {
+            "bytes": 7,
+            "sha256": "a4d451ec23463726f72c43d64c710968f6b602cd653b4de8adee1b556240a829"
+          },
+          "mixed/run.log": {
+            "bytes": 21,
+            "sha256": "bf2aec0f8d42a0d4462bb76ed7894144c80e210d437fd99d822b356d683b1134"
+          },
+          "mixed/source": {
+            "bytes": 28,
+            "sha256": "34fccce637e247ddc60f3f9b29717deb4a7ad57a3baf140a9a19ea6d69417a84"
+          },
+          "nul-argument/run.log": {
+            "bytes": 27,
+            "sha256": "eb828e21e7f0871b4ea23a2b8674532d7112e454a2a722d599745671c1851bd0"
+          },
+          "nul-argv0/run.log": {
+            "bytes": 24,
+            "sha256": "df44c7aa5cb05014d5d7da0653415b7ec8a225942d20a3236ae9ee4acf5d1311"
+          },
+          "observed/helper.pid": {
+            "bytes": 5,
+            "sha256": "e59a3ebc1ee8b68175c709e586562f80682ef64a406a975f94a10bb11e757003"
+          },
+          "observed/run.log": {
+            "bytes": 156,
+            "sha256": "4a83dff5bbca809a37819c313c97e70a30ca6ee97f453778867c1f8eecf2670b"
+          },
+          "queued-cancel/run.log": {
+            "bytes": 28,
+            "sha256": "edfa6d0acd8eb32b2806eaff4fbbc5812ec23a4e7e08a20b07d76162099d9e10"
+          },
+          "run.py": {
+            "bytes": 7342,
+            "sha256": "389add9940b83f38d44b458e090c7b3b5d9a0594e846f0d9b59062cbe0a21c63"
+          },
+          "shell/run.log": {
+            "bytes": 20,
+            "sha256": "5a98aaf7807171d5bcfaf4ea2063b65e2e5ea72854fe82a5d6ee8bf213cb1bc1"
+          },
+          "signal/helper.pid": {
+            "bytes": 5,
+            "sha256": "a5c10acb78f6e8f32cf8681d3a9a9b7ca5dde622152f6c19dfa8d27b56a58e19"
+          },
+          "signal/run.log": {
+            "bytes": 21,
+            "sha256": "6b2d8727642446d17f78d1e761726caa0480765f39ef6d939ca85bb8a27cb84b"
+          },
+          "stderr-limit/helper.pid": {
+            "bytes": 5,
+            "sha256": "bd76de69b611590021b37df18e0a7f293ebd9ca96cb13cc91663d4eda9826837"
+          },
+          "stderr-limit/run.log": {
+            "bytes": 27,
+            "sha256": "c678fdb841a8fd3b9dfec0f3bf79d0f1ab87b1254b44474a5ae5aa0d72f454d9"
+          },
+          "stdout-limit/helper.pid": {
+            "bytes": 5,
+            "sha256": "5cef15c4f635e713b40ea625a091f2d5139de4481a747c6062b9e54c9d6230e1"
+          },
+          "stdout-limit/run.log": {
+            "bytes": 27,
+            "sha256": "8786a6840af660b6f61c1597fb9beda7db76c37dae9fdd63c5645bec3aa4d02b"
+          },
+          "supervisedExternal.cmi": {
+            "bytes": 1191,
+            "sha256": "8cef59407cfacacc44d4bc9ef74807ba842abfc680df2ff0e3adacec7a1cf5bc"
+          },
+          "supervisedExternal.cmx": {
+            "bytes": 6350,
+            "sha256": "aa6cd0cfd5546c6d8cfb9d65bb57dfb9f5ca1f76a3705c0c92959427a9fb32d7"
+          },
+          "supervisedExternal.ml": {
+            "bytes": 6930,
+            "sha256": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811"
+          },
+          "supervisedExternal.mli": {
+            "bytes": 938,
+            "sha256": "46e7a5317d859f6f89464a70ef7633be46d218e54f28da52c23478c96e9eb06c"
+          },
+          "supervisedExternal.o": {
+            "bytes": 26872,
+            "sha256": "b56fd9fd73ca8b6ceed90ad802fa3b56654ccae9075e89d2242a119b7e2dd378"
+          },
+          "test": {
+            "bytes": 5457584,
+            "sha256": "849d4438dbec53e7478b686db1ef282c68083883e9295c7e96977b603dc3a06e"
+          },
+          "test-build.log": {
+            "bytes": 0,
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          "test.cmi": {
+            "bytes": 4557,
+            "sha256": "49747b921f3904261dff55b89f575388ec54b885b7a409f1bf8ce9e8f4677914"
+          },
+          "test.cmx": {
+            "bytes": 12789,
+            "sha256": "e6b5a42640d27bf80bd5f0aca0ebbfce24309264b30f38ebecd6c600e8e9b141"
+          },
+          "test.ml": {
+            "bytes": 8084,
+            "sha256": "a78a6b999b5a4332ef3d41ec6f5b0a6450e261d97486f30ad85cf64b5e388b2e"
+          },
+          "test.o": {
+            "bytes": 37840,
+            "sha256": "b9ea0e48736b5e770e9144e40b7b8b83da1d93274be15833e5d29334857ecce1"
+          },
+          "timeout/helper.pid": {
+            "bytes": 5,
+            "sha256": "733d46a38a79c26529becafb586209e2fb05ff103e62798610acdf1ad9d32dea"
+          },
+          "timeout/run.log": {
+            "bytes": 22,
+            "sha256": "4a77226e3cc1391517e41d4e61ce49c118576e8df2f42cd65c5c1a08f45c484f"
+          },
+          "weight/run.log": {
+            "bytes": 21,
+            "sha256": "c0275241ba93919c1816305a5de6c9c6e44bbc36280d589fe88bb18ad11170e7"
+          }
+        },
+        "actual_exiftool": {
+          "path": "/usr/local/Cellar/exiftool/13.10/bin/exiftool",
+          "sha256": "62e624a95042805a9e334a8c8a771a349ab57c7b723662d52db4b876870a5de9",
+          "post_sha256_unchanged": true,
+          "full_dependency_inventory_qualified": false,
+          "configuration_disabled": true
+        }
+      },
+      "build_receipt": {
+        "path": "/private/tmp/unison-external-observation-ox-check-20261016/RESULT.json",
+        "sha256": "a12936afd012a74af2ac9df78caa3ed6c201a586b5cc38380e6f86b7aaf45383"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "owning_tool_terminal": {
+    "session_id": 47300,
+    "initial_chunk": "0f79f8",
+    "terminal_chunk": "e110a5",
+    "exit_code": 0,
+    "running_session_returned": false
+  },
+  "limits": [
+    "16component cases per compiler; current explicit production CMI equality verified, immutable dependency objects pinned.",
+    "Trace is diagnostic not release authority; actual ExifTool PID/status observed from retained supervisor result, no camera/SDK/EXIO."
+  ]
+}

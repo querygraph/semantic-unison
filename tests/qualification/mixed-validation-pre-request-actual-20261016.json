@@ -1,0 +1,130 @@
+{
+  "scope": "Final source success/unknown disposable composition plus real build rehash and saved metadata mutation controls; no actual SDK/ExifTool/media/canonicalIO",
+  "rows": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/lifecycle.py",
+        "--success-controls"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-1icf8nmx\", \"cases\": [{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-1icf8nmx/case-8\", \"descriptors\": 9, \"boundary_reached\": true, \"child\": {\"pid\": 5610, \"returncode\": 0, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 5610, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true, \"parent_audit\": {\"functional_status\": \"PASSED\", \"attempted_probes\": 2, \"sdk_helpers_settled\": 2, \"metadata_helpers_settled\": 2, \"case_audits\": [{\"functional_status\": \"PASSED\", \"sdk_accepted\": true, \"metadata_accepted\": true, \"metadata_fields_verified\": true, \"sdk_helper_pid\": 5613, \"metadata_helper_pid\": 5612, \"sdk_report\": {\"candidate-sha256\": \"10206036a0275fc30dc48538e896c866929282dd98a1c518c5f26dc7a4bc3f6a\", \"candidate-size\": \"20\", \"driver-build\": \"unison-sdk171-2724-v1-single\", \"structure\": \"valid\", \"decode\": \"success\", \"raw-digest\": \"valid\", \"errors\": \"0\", \"warnings\": \"0\"}, \"sdk_protocol_finding\": null, \"metadata_protocol_finding\": null, \"sdk_stdout_hex\": \"554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620313032303630333661303237356663333064633438353338653839366338363639323932383264643938613163353138633566323664633761346263336636610a63616e6469646174652d73697a652032300a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a\", \"sdk_stderr_hex\": \"\", \"worker_hashes_reported\": 16, \"known_helper_settlements\": 2, \"independent_helper_ledger_bound\": false, \"backend_envelope_accounted\": true, \"backend_payload_bytes\": 2298478592, \"backend_descriptor_credits\": 64, \"owning_tool_terminal_proved\": false, \"worker_bytes_rehashed\": false, \"resource_release_authorized\": false, \"producer_authenticated\": false, \"scope\": \"Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations.\"}, {\"functional_status\": \"PASSED\", \"sdk_accepted\": true, \"metadata_accepted\": true, \"metadata_fields_verified\": true, \"sdk_helper_pid\": 5619, \"metadata_helper_pid\": 5618, \"sdk_report\": {\"candidate-sha256\": \"10206036a0275fc30dc48538e896c866929282dd98a1c518c5f26dc7a4bc3f6a\", \"candidate-size\": \"20\", \"driver-build\": \"unison-sdk171-2724-v1-single\", \"structure\": \"valid\", \"decode\": \"success\", \"raw-digest\": \"valid\", \"errors\": \"0\", \"warnings\": \"0\"}, \"sdk_protocol_finding\": null, \"metadata_protocol_finding\": null, \"sdk_stdout_hex\": \"554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620313032303630333661303237356663333064633438353338653839366338363639323932383264643938613163353138633566323664633761346263336636610a63616e6469646174652d73697a652032300a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a\", \"sdk_stderr_hex\": \"\", \"worker_hashes_reported\": 16, \"known_helper_settlements\": 2, \"independent_helper_ledger_bound\": false, \"backend_envelope_accounted\": true, \"backend_payload_bytes\": 2298478592, \"backend_descriptor_credits\": 64, \"owning_tool_terminal_proved\": false, \"worker_bytes_rehashed\": false, \"resource_release_authorized\": false, \"producer_authenticated\": false, \"scope\": \"Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations.\"}], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": false}, \"exit_audit\": {\"functional_status\": \"PASSED\", \"attempted_probes\": 2, \"sdk_helpers_settled\": 2, \"metadata_helpers_settled\": 2, \"case_audits\": [{\"functional_status\": \"PASSED\", \"sdk_accepted\": true, \"metadata_accepted\": true, \"metadata_fields_verified\": true, \"sdk_helper_pid\": 5613, \"metadata_helper_pid\": 5612, \"sdk_report\": {\"candidate-sha256\": \"10206036a0275fc30dc48538e896c866929282dd98a1c518c5f26dc7a4bc3f6a\", \"candidate-size\": \"20\", \"driver-build\": \"unison-sdk171-2724-v1-single\", \"structure\": \"valid\", \"decode\": \"success\", \"raw-digest\": \"valid\", \"errors\": \"0\", \"warnings\": \"0\"}, \"sdk_protocol_finding\": null, \"metadata_protocol_finding\": null, \"sdk_stdout_hex\": \"554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620313032303630333661303237356663333064633438353338653839366338363639323932383264643938613163353138633566323664633761346263336636610a63616e6469646174652d73697a652032300a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a\", \"sdk_stderr_hex\": \"\", \"worker_hashes_reported\": 16, \"known_helper_settlements\": 2, \"independent_helper_ledger_bound\": false, \"backend_envelope_accounted\": true, \"backend_payload_bytes\": 2298478592, \"backend_descriptor_credits\": 64, \"owning_tool_terminal_proved\": false, \"worker_bytes_rehashed\": false, \"resource_release_authorized\": false, \"producer_authenticated\": false, \"scope\": \"Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations.\"}, {\"functional_status\": \"PASSED\", \"sdk_accepted\": true, \"metadata_accepted\": true, \"metadata_fields_verified\": true, \"sdk_helper_pid\": 5619, \"metadata_helper_pid\": 5618, \"sdk_report\": {\"candidate-sha256\": \"10206036a0275fc30dc48538e896c866929282dd98a1c518c5f26dc7a4bc3f6a\", \"candidate-size\": \"20\", \"driver-build\": \"unison-sdk171-2724-v1-single\", \"structure\": \"valid\", \"decode\": \"success\", \"raw-digest\": \"valid\", \"errors\": \"0\", \"warnings\": \"0\"}, \"sdk_protocol_finding\": null, \"metadata_protocol_finding\": null, \"sdk_stdout_hex\": \"554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620313032303630333661303237356663333064633438353338653839366338363639323932383264643938613163353138633566323664633761346263336636610a63616e6469646174652d73697a652032300a6472697665722d6275696c6420756e69736f6e2d73646b3137312d323732342d76312d73696e676c650a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a\", \"sdk_stderr_hex\": \"\", \"worker_hashes_reported\": 16, \"known_helper_settlements\": 2, \"independent_helper_ledger_bound\": false, \"backend_envelope_accounted\": true, \"backend_payload_bytes\": 2298478592, \"backend_descriptor_credits\": 64, \"owning_tool_terminal_proved\": false, \"worker_bytes_rehashed\": false, \"resource_release_authorized\": false, \"producer_authenticated\": false, \"scope\": \"Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations.\"}], \"resource_release_authorized\": false, \"aggregate_parent_fd_closure_proved\": false, \"parent_input_bytes_reverified\": true, \"execution_source_bytes_reverified\": true, \"worker_exit_bound\": true}}], \"scope\": \"One actual worker/two compiled stock+Ox probes/four authored fake helpers/32hash tasks/native tiny clones; disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/SDK/Photo\"}\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 5609,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/lifecycle.py",
+        "--unknown-controls"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-hddie0yn\", \"cases\": [{\"workspace\": \"/private/tmp/unison-mixed-lifecycle-hddie0yn/case-8\", \"descriptors\": 9, \"boundary_reached\": true, \"child\": {\"pid\": 5625, \"returncode\": 7, \"reaped\": true, \"other_group_members_absent_before_reap\": true, \"members_before_reap\": [{\"pid\": 5625, \"state\": \"Z\"}], \"timed_out\": false, \"scope\": \"owned group only; separate sessions require independently audited proofs\"}, \"inner_locks_closed\": true, \"fresh_inner_locks_reacquired\": true, \"control_specific_recovery\": {\"functional_status\": \"FAILED\", \"attempted_probes\": 0, \"retention_selected\": true, \"all_inner_locks_busy_before_recovery\": true}}], \"scope\": \"One injected missing-outcome refusal worker with control-specific recovery; disposable inherited flock descriptions/real parent prefix audit; admission, command entry script and inventory are explicit doubles; no canonicalIO/SDK/Photo\"}\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 5623,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/build_receipts_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.327s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 5634,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/metadata_dependencies_test.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "..\n----------------------------------------------------------------------\nRan 2 tests in 0.010s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 5636,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "cpu_closed": true,
+  "sources": {
+    "tests/mixed_validation/build.py": "f07e5cd146e18a3739e327084e4a26ba98e4ea7e93271e5fb43fcc97f0f8f17c",
+    "tests/mixed_validation/worker.py": "dc7a3c084aa924d89288eb6d29f143840e6ddc33796cd200c43530807ce66c56",
+    "tests/mixed_validation/audit_test.py": "534b6673a4ab787ffcaab43b56e59724da5df23ca3ab1cc724c3098af3b82d6c",
+    "tests/mixed_validation/parent_test.py": "87065bf6e508b0909b21718c062b9818eff2100593032f9d173d28071ae6144a",
+    "tests/mixed_validation/build_receipts.py": "2302d3ecbe16b8d63ecd64c128c4b6cda6d675b164365cf6239c955f34ef7a90",
+    "tests/mixed_validation/plan.py": "b33c1862b8cf3af6b628227709abc38ff9aa716f50048f43eb24fb64baaf9a22",
+    "tests/mixed_validation/boundary.py": "b6b60968889ea4b2cf7f05bc078405346fed93f65338ed5f1ec8ae619c3471f3",
+    "tests/mixed_validation/run_controls.py": "b66b5c4636d6f9dd34d86db0ff8ea0edd480004535a3443617da8e4dc66b3382",
+    "tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+    "tests/mixed_validation/metadata_dependencies_test.py": "a54617a9a29aeece3dee0af7bb36cf0a8ac24c803a0af3af0149088b98eb7c96",
+    "tests/mixed_validation/inventory_test.py": "d8a9396f88e4859a3e8ffac4ccd205e9a2c4f280b22a52a28d66d5f2f92238ee",
+    "tests/mixed_validation/dispatch_test.py": "a121c069c7ac3c81e0ab4414591a4a7da9c239e63a7f7df8696a4f150357c4bd",
+    "tests/mixed_validation/boundary_test.py": "0b46bf3b20914eb4fd5f52f8e9ac30089839400b5212c894ca6f8c7965dd9afd",
+    "tests/mixed_validation/execute.py": "339b7982fbf041b5ecde4117c44fd6c4bd5c0a7b01da7d1c95debff6933134fa",
+    "tests/mixed_validation/build_receipts_test.py": "e2a62e6976f8ae825cee18f7fb1a27db82b59d6eb46948871570cb33604c1399",
+    "tests/mixed_validation/parent.py": "08f86cbe785b2539aa7c3648afccb811857267070038e37cbef259a63222ebfe",
+    "tests/mixed_validation/artifacts_test.py": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980",
+    "tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+    "tests/mixed_validation/worker_test.py": "f08b5a3324647e1bb181e7fcfb31ca6faf73d60d26e0ee8b5ca2bfd06e858bcb",
+    "tests/mixed_validation/plan_test.py": "58bca3b9a0239b00d71d1cdeb2601f6042964ab1c50366534dda1039f5317ced",
+    "tests/mixed_validation/lifecycle.py": "b7f51f5e78a5ce0fb8c75b26ffb1cafda8d5556a742e988241a98219392455a7",
+    "tests/mixed_validation/artifacts.py": "1c069e138565eb668a46ccddbd7c6343285b1ddaeec5c8be376e510542a742a5",
+    "tests/mixed_validation/metadata_dependencies.py": "4125b83dd400e389afb5c70c8ccedc04d0348c067018b897ff859c7031e32c1e",
+    "tests/mixed_validation/execute_test.py": "d63fb923b1a6bebf82c667eca9b41a2a99785f773a1fae4dadf6cbf7c6c144d7",
+    "tests/mixed_validation/inventory.py": "1eb8e22917653fcc4fe7ea36e9c64d45fc5b11128857b6291b64eb71c99e6cdc",
+    "tests/shared_dispatch.py": "d4fc209c1861aab52805acedbf597618930f37ab63f5016b1f9ba63e6f6e439e"
+  },
+  "owning_tool_terminal": {
+    "session_id": 27349,
+    "chunk_id": "9b7c25",
+    "exit_code": 0,
+    "no_running_session": true
+  }
+}

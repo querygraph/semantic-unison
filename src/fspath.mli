@@ -11,6 +11,9 @@ val child : t -> Name.t -> t
 val concat : t -> Path.local -> t
 
 val canonize : string option -> t
+val resolve_existing : string -> t
+(** Resolve an existing path with realpath, without changing process CWD.
+    Unlike [canonize], nonexistent components fail; no weaker fallback. *)
 val toString : t -> string
 val toPrintString : t -> string
 val toDebugString : t -> string

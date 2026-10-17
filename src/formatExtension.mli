@@ -1,6 +1,7 @@
 type region = { offset : int64; length : int }
 type manifest = { regions : region list }
-type change = Exact_bytes | Editable_metadata | Other_bytes
+type change = Exact_bytes | Editable_metadata | Uninterpreted_regions | Other_bytes
+type span_semantics = Known_metadata | Opaque_spans
 type category = Descriptive | Rendering | Identity | Workflow | Opaque
 type property = { name : string; category : category; digest : string }
 type observation = { schema : string; properties : property list }
@@ -11,7 +12,7 @@ module type S = sig (* ox-portable-signature *)
 end
 type handle
 val trusted : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
-  ?observer:observer -> (module S) -> handle
+  ?observer:observer -> ?span_semantics:span_semantics -> (module S) -> handle
 (** Construct an immutable handle for locally trusted compiled code. Call on
     the owner thread. The extension must use only worker-local state, bounded
     reads, and the supplied SemanticFile; no registries, legacy globals,
@@ -23,6 +24,9 @@ val capability : handle -> string
 (** Feature-negotiation identifier; defaults to semantic-profile:<profile>.
     Pure metadata only: feature registration/testing belongs to the owner. *)
 val implementation : handle -> (module S)
+val span_semantics : handle -> span_semantics
+(** Local immutable interpretation claim. Defaults to Opaque_spans. It is not
+    peer-supplied authority, reference closure, or permission to reconcile. *)
 val payload_limit : handle -> int
 (** Enforced total editable-payload limit. Defaults to 16 MiB, restricted to the
     core ceiling. Admission uses this immutable declaration before allocating. *)
@@ -35,7 +39,7 @@ val matches_filename : handle -> string -> bool
 val resolve : string -> handle option
 (** Owner-only registry lookup. Resolve before dispatching to a worker. *)
 val register : ?capability:string -> ?max_payload:int -> ?suffixes:string list ->
-  ?observer:observer -> (module S) -> unit
+  ?observer:observer -> ?span_semantics:span_semantics -> (module S) -> unit
 val find : string -> (module S) option
 val profiles : unit -> string list
 val registered : unit -> handle list

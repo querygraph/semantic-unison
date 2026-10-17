@@ -3,6 +3,41 @@
 This is an active work queue against SOL.md, not a completion claim or a new
 permission policy. Historical receipts retain their exact source snapshots.
 
+The opt-in all-scanned implementation now passes local scan-RPC/private-stage
+and original fake-driver controls on current stock/Ox Make+Dune builds.
+[Current qualification](../tests/qualification/all-scanned-current-v4-actual-20261017.json)
+records14compile/test calls and4fake helpers; real SDK all-scanned and actual
+remote-process/old-peer/live-watcher qualification remain pending.
+[Usage/contracts](all-scanned-validation.md). No native admission follows.
+
+The mixed SDK/ExifTool/hash V1 has [actually passed and closed](../tests/qualification/mixed-validation-v1-actual-20261017.json):
+owner59209/cedf13/0/no session, two stock/Ox probes, two SDK calls, two readonly
+ExifTool requests and32 hash tasks. All326 source pins and group/CPU8/EXglobal
+closures were checked and Root independently adopted the result. Four SDK
+warnings each remain visible. The admission is consumed; no pending mixed hold
+or unexecuted probe remains. Broader resource/scaling/corpus requirements stay
+open.
+
+The [bounded private MakN candidate slice](../tests/qualification/private-maker-slice-v1-actual-20261017.json)
+subsequently ran once and PASSED/CLOSED: actuald8fe2f/0/no session, parent17547/
+worker17548 reaped0/othersabsent, CPU8+EXglobal closed. Exactly402B/two preads
+yield33candidate entries/nextIFDzero/all declared out-of-line extents in payload.
+No pointed-value read, vendor recognition, private-reference closure or semantic
+eligibility is established. Source epoch and13runtime pins unchanged; admission
+7d914319 consumed, no retry/successor. The frozen request's prepared state is
+historical. Final38 source controls and four disposable workers remain separate
+lifecycle evidence. No pending slice IO hold or grant is needed for source work.
+The [pinned MakN source review](private-makn-source-review.md) identifies the
+vendor grammar/reference rules still needed beyond candidate table geometry.
+
+[Hash backend source reconciliation](acceptance-matrix-audit.md#hash-backend-source-reconciliation)
+confirms macOS already uses CommonCrypto and historical native/reference checked
+source pins still match. No macOS hash rewrite is called for by this finding.
+Non-Apple maintained-library/runtime scope remains open. The optional
+[exiftool-rs candidate review](exiftool-rs-review.md) found a CLI delimiter/version
+contract difference; evaluating it is a separate successor, not a prerequisite
+or silent change to the frozen mixed request.
+
 | Milestone | Current implementation/evidence | Next required work |
 | --- | --- | --- |
 | M0 baseline/toolchains | Upstream clone reuse, pinned stock/Ox, current Make and Dune application selftests | Keep current production changes covered; platform/GUI scopes stay explicit. |
@@ -280,3 +315,34 @@ Proposed24 CLI/48SDK calls, Unison8+EXglobal, fixed one warmup/five measured
 repetitions/configuration; shared-machine disclosures remain mandatory.
 Fresh Root source review and separate finite scheduling are pending. Prior
 multi-file V1 admission7b320b51 remains consumed/accepted, never reusable.
+
+## Actual receiving comparison checkpoint
+
+The [exact V1 receiving comparison](../tests/qualification/sdk-receiving-comparison-v1-actual-20261016.json)
+now PASSED/CLOSED: owning tool36282/0f8d61/0/no session,24receiving calls and
+48qualified single-thread SDK helpers. Raw proxies and all client/server/pump/
+supervisor/helper/worker groups audited; CPU8/EXglobal closed,172 source pins
+and borrowed-input epochs match. All SDK reports preserve four warnings with
+errors0/rawdigestvalid/decodeSUCCESS. Four warmups and20measured rows remain
+in the [report](../bench/sync/results/sdk-receiving-comparison-v1-20261016/sdk-receiving-comparison.md).
+
+Median worker1/3 receiving ratios1.3518stock/1.3586Ox are descriptive for two
+warm generated inputs. They include hashing, transport, staging and helper
+startup; they do not isolate SDK CPU scaling or prove quiet timing, physical IO,
+hard RSS/FD/thread caps, corpus/semantic/pixel eligibility or production safety.
+The remaining M4-V/M6 work includes mixed helper/hash resource accounting,
+selected cancellation/fault scopes and representative supported corpus strata.
+This consumed admission is not an authorization for another native run.
+
+## Unchanged-file validation implementation
+
+At the initial audit the optional all-scanned scope remained unimplemented. A fresh source trace
+identifies why a preference plus post-filter would be incomplete: synchronous
+scan recursion, directory/watcher pruning and omitted unchanged children.
+The [concrete integration plan](all-scanned-validation-implementation.md)
+starts with an admitted isolated snapshot worker job reusing the existing
+clone adapter, then exact selected-path collection and asynchronous validation.
+The [source audit](../tests/qualification/all-scanned-source-audit-20261017.json)
+pins current sources; it is not execution or unchanged-file coverage evidence.
+Default receiving/off behavior stays unchanged. This independent work does not
+need another private-camera read or SDK allocation to begin.

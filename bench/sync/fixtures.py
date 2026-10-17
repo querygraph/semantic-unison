@@ -27,8 +27,10 @@ def packet(size, generation):
     return value + b" " * (size - len(value))
 
 
-def create(path, size, packet_size, index):
+def create(path, size, packet_size, index, *, layout_only=False):
     """Write one reproducible incompressible payload, without a large Python copy."""
+    if type(layout_only) is not bool:
+        raise ValueError("typed layout-only fixture flag required")
     rng = random.Random(0x51DE0000 + index)
     with Path(path).open("wb") as stream:
         remaining = size
@@ -41,19 +43,30 @@ def create(path, size, packet_size, index):
     if image_offset >= size:
         raise ValueError("packet leaves no protected image payload")
     # This is a transfer/parser fixture, not a claim of Adobe-valid image pixels.
-    header = bytearray(8 + 2 + 4 * 12 + 4)
-    struct.pack_into("<2sHIH", header, 0, b"II", 42, 8, 4)
+    count = 6 if layout_only else 4
+    header = bytearray(8 + 2 + count * 12 + 4)
+    struct.pack_into("<2sHIH", header, 0, b"II", 42, 8, count)
     entries = [(273, 4, 1, image_offset), (279, 4, 1, size - image_offset),
                (700, 1, packet_size, xmp_offset), (50706, 1, 4, 1025)]
+    if layout_only:
+        # Both private forms deliberately contain offsets into changed XMP.
+        # They are preserved exactly, not interpreted as safe metadata pointers.
+        entries += [(50740, 1, 128, 256), (65000, 13, 1, xmp_offset)]
     for number, entry in enumerate(entries):
         struct.pack_into("<HHII", header, 10 + number * 12, *entry)
     with Path(path).open("r+b") as stream:
         stream.write(header)
+        if layout_only:
+            stream.seek(256)
+            stream.write(struct.pack('<I', xmp_offset))
         stream.seek(xmp_offset)
         stream.write(packet(packet_size, 1))
     return {"name": Path(path).name, "size_bytes": size, "packet_offset": xmp_offset,
             "packet_bytes": packet_size, "protected_image_offset": image_offset,
-            "before_sha256": sha256(path), "seed": 0x51DE0000 + index}
+            "before_sha256": sha256(path), "seed": 0x51DE0000 + index,
+            "layout_only": layout_only,
+            "opaque_private_extent": [256, 128] if layout_only else None,
+            "opaque_xmp_references": [256, 10+5*12+8] if layout_only else []}
 
 
 def edit(path, metadata):

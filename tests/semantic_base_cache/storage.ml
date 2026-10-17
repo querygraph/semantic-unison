@@ -80,6 +80,15 @@ let () =
   let overflow_payload="SBQ1 99999999999999999999 00000000000000000000\n" in
   write ledger (overflow_payload ^ SemanticHash.string overflow_payload);
   quota_refuses "overflow quota";
+  (* Every possible interrupted prefix of the fixed ledger is ambiguous.
+     Existing records must prohibit initialization even for a zero-byte prefix. *)
+  for length=0 to 78 do
+    let prefix=String.sub saved_ledger 0 length in
+    write ledger prefix;
+    quota_refuses (Printf.sprintf "torn quota prefix %d" length);
+    check(read ledger=prefix) "refused torn ledger was repaired or charged"
+  done;
+  print_endline "PASS79 interrupted ledger prefixes refuse capture without rewriting recovery state";
   write ledger saved_ledger;Unix.chmod ledger 0o644;
   quota_refuses "permissive quota";Unix.chmod ledger 0o600;
   let ledger_alias="quota-hardlink" in
@@ -142,3 +151,43 @@ let () =
   check(read record=saved) "full shard changed existing base";
   check(fd_count()=baseline) "storage failures leaked descriptors";
   print_endline "PASS private storage trust/capacity/idempotence and repeated descriptor settlement"
+;
+  (* Two independent owners compete for the single remaining quota entry.
+     Gate both on the same pipe so neither relies on a startup sleep. *)
+  for i=1 to 4095 do Unix.unlink(Filename.concat shard (Printf.sprintf "filler-%04d" i)) done;
+  Unix.unlink(Filename.concat shard "filler-last");
+  Prefs.loadStrings ["semanticmergecachemaxentries = 2"];
+  let start_r,start_w=Unix.pipe () in
+  let children=List.init 2 (fun index ->
+    let pid=Unix.fork () in
+    if pid=0 then begin
+      Unix.close start_w;
+      let ready,_,_=Unix.select [start_r] [] [] 5. in
+      let byte=Bytes.create 1 in
+      if ready=[] || Unix.read start_r byte 0 1<>1 then Unix._exit 90;
+      Unix.close start_r;
+      let selected=Path.fromString(Printf.sprintf "concurrent-%d.dng" index) in
+      let code=try SemanticMergeCache.store ~root ~path:selected ~fingerprint proof; 0
+        with Util.Transient _ -> 75
+           | Unix.Unix_error ((Unix.EACCES|Unix.EAGAIN),_,_) -> 75 in
+      Unix._exit code
+    end;
+    pid) in
+  Unix.close start_r;
+  check(Unix.write_substring start_w "XX" 0 2=2) "concurrent start framing";
+  Unix.close start_w;
+  let statuses=List.map(fun pid -> let waited,status=Unix.waitpid [] pid in
+    check(waited=pid) "concurrent child wait identity"; status) children in
+  check(List.length(List.filter((=)(Unix.WEXITED 0)) statuses)=1 &&
+        List.length(List.filter((=)(Unix.WEXITED 75)) statuses)=1)
+    "concurrent quota either overcommitted or admitted no owner";
+  let final_ledger=read ledger in
+  check(final_ledger=ledger_value 2L (Int64.of_int(2*String.length saved)))
+    "concurrent ledger charge is not exactly two records";
+  let selected_records=List.filter_map(fun index ->
+    let selected=Path.fromString(Printf.sprintf "concurrent-%d.dng" index) in
+    SemanticMergeCache.load ~root ~path:selected ~fingerprint) [0;1] in
+  check(List.length selected_records=1) "concurrent durable capture count differs from quota";
+  check(load()<>None && read record=saved) "concurrent capture lost original recovery base";
+  check(fd_count()=baseline) "concurrent quota leaked parent descriptors";
+  print_endline "PASS concurrent process quota reservation preserves exactly one remaining entry"

@@ -12,6 +12,12 @@ type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
                         stats : Unix.LargeFile.stats }
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
+type recognition = { formats : string list; stats : Unix.LargeFile.stats }
+type component_summary = { full_sha256 : string; layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+  refinements : DngComponents.outcome list; hash_bytes_requested : int64 }
+type component_inspection = { components : (component_summary, string) result;
+                              stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 val recommended_workers : unit -> int
@@ -39,6 +45,16 @@ val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprin
     seek, read, write, or close it meanwhile. The duplicate is always closed.
     None means cancelled; failures are [Failed]. Cancellation is checked at
     64 KiB boundaries and permits remain reserved until the worker finishes. *)
+val snapshot : t -> HelperSupervisor.cancellation -> max_bytes:int64 ->
+  source:Unix.file_descr -> output:Unix.file_descr -> ValidationSnapshot.report option Lwt.t
+(** Borrow a readable source and caller-owned exclusive empty private read/write
+    output on a distinct inode. Both descriptors are duplicated before queueing,
+    retained until actual worker settlement and admitted together through one
+    source/destination I/O lease before CPU admission. Cancellation suppresses
+    delivery but does not undo partial private staging. Caller must discard a
+    failed/cancelled stage only after the returned work settles. Namespace,
+    private-output provenance and outer memory/descriptor admission remain the
+    caller's responsibility. No unchanged-file scan or helper is invoked. *)
 val shutdown : t -> unit Lwt.t
 (** Reject new jobs, cancel pending jobs, await completions, then join domains
     and close the notification pipe. Idempotent. Does not cancel unrelated
@@ -56,6 +72,13 @@ val identify : t -> HelperSupervisor.cancellation ->
     an unmatched file is not hashed. Both outcomes require stable reads.
     Operational failure/cancellation never means no match. Same ownership,
     filesystem/domain/CPU admission and settlement rules as [digest]. *)
+val recognize : t -> HelperSupervisor.cancellation ->
+  recognizers:(FormatRecognition.handle * bool) list ->
+  Unix.file_descr -> recognition option Lwt.t
+(** Same bounded recognition/claim/error rules as [identify], but never add a
+    full-file fingerprint pass. Use to select unchanged candidates before size-
+    bounded private snapshotting. A trusted recognizer owns its own read bounds;
+    this is not an instrumented physical-I/O ceiling. *)
 val observe : t -> HelperSupervisor.cancellation -> extension:FormatExtension.handle ->
   Unix.file_descr -> observation option Lwt.t
 (** Read-only inspection plus optional extension interpretation of the complete
@@ -91,3 +114,16 @@ val reconcile_xmp : t -> HelperSupervisor.cancellation -> extension:FormatExtens
     is borrowed. No output writes or commits occur. Cancellation, descriptor
     settlement and CPU ownership follow [inspect]; conflicting metadata returns
     an explicit Error in [merge_plan], never an automatic fallback merge. *)
+
+val components : t -> HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> component_inspection option Lwt.t
+(** Explicit read-only component hashing and frozen private-decoder refinement.
+    Same descriptor/domain/CPU/filesystem admission, cancellation and settlement
+    rules as [digest]. The owner must retain immutable input access until settled;
+    epoch checks alone are not hostile-writer exclusion. Only compact immutable
+    observations cross the completion mailbox: no session, reader or snapshot
+    capability escapes. The read budget counts component/decoder requests;
+    preceding bounded DNG geometry reads are additional and appear in an enabled
+    read observer. Unsupported format returns [components=Error _]; operational
+    and budget errors fail the job, never become unsupported or no-match. No
+    archive, persistent reuse, transfer, rendering or publication authority. *)

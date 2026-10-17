@@ -1,0 +1,101 @@
+{
+  "schema": "unison-private-maker-slice-qualification/1",
+  "state": "CONSUMED_ACTUAL_CLOSED",
+  "owner_terminal": {
+    "schema": "unison-owning-tool-terminal/1",
+    "tool": "exec_command",
+    "chunk_id": "d8fe2f",
+    "exit_code": 0,
+    "session_id": null,
+    "owner_pid": 17547,
+    "worker_pid": 17548,
+    "observed_output": "fresh_guard PASS then Shared owner report directory: /private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa",
+    "evidence": "Faithful later transcription of actual initial exec_command completion, not process absence or contained closure."
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/private-maker-slice-request-v1.json",
+    "bytes": 7040,
+    "sha256": "45c2b7079d2c6b0b232f053fb728ffed0d23d57c7f1e82491b5cbf728456a380"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-maker-slice-plan-v1.json",
+    "bytes": 942,
+    "sha256": "cd734403a6b1efc247bf85395f842364bb4ba688249a9f798bbfb57222f50d87"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-private-maker-slice-admission-v1.json",
+    "bytes": 3442,
+    "sha256": "7d914319312673419ef09714921baf06cff7051fbb2517eab23d0c2e78f0b8a4"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-START.json",
+      "bytes": 2991,
+      "sha256": "9315015fda3334773ef0e80416fb512f44c63f09481c188bafaa9f20cba73c85"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "963cb76370c2fe9e5570c7d127494daca2ce2cee04c7982a5dfd8df67df1826e"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-IO-ATTEMPT.json",
+      "bytes": 698,
+      "sha256": "da3431cbad248aa8c80a78e10dc5c35521fd9c3f794dfc43b6e90a5d4359b357"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/RESULT.json",
+      "bytes": 11163,
+      "sha256": "ba6e1fa2a6a950f35b0478332c0a848a6e34d245d9600852b42bf92d3e0dd602"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/SHARED-SERVER-AUDIT.json",
+      "bytes": 195,
+      "sha256": "93d033d50191a8665e9b52c7f7843b36eefef2f950236c33be5408ab334242fd"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/INDEPENDENT-POST-AUDIT.json",
+      "bytes": 892,
+      "sha256": "f3481d47f2ed289ff51526f4da85675863a1f2b9a6284121642b12a6513d6054"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/OWNER-TERMINAL.json",
+      "bytes": 464,
+      "sha256": "35a852164608c1456dca5680f766a8648db5ce110a8fbed24caacc2d706ac475"
+    }
+  ],
+  "scope": {
+    "requested_media_bytes": 402,
+    "pread_calls": 2,
+    "candidate_entries": 33,
+    "next_ifd_zero": true,
+    "all_declared_out_of_line_extents_within_payload": true,
+    "pointed_values_read": false,
+    "inline_values_disclosed": false,
+    "semantic_eligibility": false,
+    "private_reference_closure_proved": false,
+    "vendor_recognized": false
+  },
+  "resource_hold": false,
+  "no_replay_or_successor": true,
+  "return_artifact": {
+    "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/OWNER-RETURN.json",
+    "bytes": 3673,
+    "sha256": "f8257b684d0bc30e46795eda7f99a40a18574c264a0c7059387908768253557f"
+  },
+  "sealing_metadata_correction": {
+    "actual_tool_chunk": "19bf7b",
+    "exit_code": 1,
+    "error": "Duplicate schema keyword in local seal construction after OWNER-RETURN was already saved. Corrected seal construction only; no runtime, audit, source read or resource acquisition repeated."
+  }
+}

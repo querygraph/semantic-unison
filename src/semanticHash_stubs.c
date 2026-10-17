@@ -1,10 +1,32 @@
 /* Each context belongs to one worker. No global state or OCaml callbacks.
  * CommonCrypto supplies the platform SHA-256 implementation on macOS; other
- * systems retain the separately tested portable reference implementation. */
+ * systems retain the separately tested portable reference implementation.
+ * UNISON_SEMANTIC_HASH_OPENSSL explicitly selects the owned OpenSSL3 adapter. */
 #include <caml/mlvalues.h>
 #include <caml/memory.h>
 #include <caml/alloc.h>
 #include <caml/fail.h>
+#if defined(UNISON_SEMANTIC_HASH_OPENSSL)
+#include "semanticHash_evp.h"
+
+CAMLprim value unison_semantic_sha256_init(value unit)
+{
+  CAMLparam1(unit); CAMLlocal2(context, result);
+  context = UNISON_EVP_API(create)(unit);
+  result = caml_alloc(1, 0);
+  Store_field(result, 0, context);
+  CAMLreturn(result);
+}
+CAMLprim value unison_semantic_sha256_feed(value context, value input,
+                                         value offset, value length)
+{
+  return UNISON_EVP_API(feed)(context, input, offset, length);
+}
+CAMLprim value unison_semantic_sha256_finish(value context)
+{
+  return UNISON_EVP_API(finish)(context);
+}
+#else
 #ifdef __APPLE__
 #include <CommonCrypto/CommonDigest.h>
 #include <string.h>
@@ -68,3 +90,5 @@ CAMLprim value unison_semantic_sha256_finish(value context)
   caml_failwith("native SHA-256 unavailable");
 #endif
 }
+
+#endif /* explicit OpenSSL selection vs unchanged platform backend */

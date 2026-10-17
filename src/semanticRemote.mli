@@ -18,6 +18,18 @@ type inspection = {
   observation : SemanticReport.observation;
   local_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
 }
+type component_inspection = {
+  component_observation : (SemanticReport.component_observation, string) result;
+  component_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
+}
+val component_details_enabled : unit -> bool
+val observe_components : root:Common.root -> path:Fspath.t -> component_inspection Lwt.t
+(** Explicit full-file DNG component inspection with an empty frozen
+    decoder set, using existing owner admission/worker/descriptor settlement.
+    The owner retains local snapshot facts for stale-display checks. Remote
+    roots require separately negotiated semantic-components-v0 and an enabled
+    DNG profile, with bounded nonce/schema-bound SIC/0. Peer results are advisory
+    current observations, not local snapshot/preservation capabilities. *)
 val observe : root:Common.root -> path:Fspath.t -> extension:FormatExtension.handle -> inspection Lwt.t
 (** Read-only observation of one absolute, already translated current path.
     The owner selects an enabled trusted handle. Local inspection uses workers;

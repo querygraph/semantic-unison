@@ -74,3 +74,43 @@ Missing/unknown/nonzero observations fail this host-specific test; no historical
 PID is signaled. This is a diagnostic census plus separate supervisor wait, not
 a durable descendant absence proof or support for deliberately escaped groups.
 Hash parity, permit/queue settlement and descriptor baseline checks still pass.
+
+## CPU-working helpers mixed with worker hashes
+
+`--shared-mixed-hash-only --build SNAPSHOT/src` runs four permit budgets1/2/4/6,
+with16parent file-hash jobs and two supervised original CPU-hash helpers per
+budget. Helpers compute SHA-256 over an owned64KiB string32times per declared
+domain (width1 or2), join the domains, and compare with the portable reference;
+parent checks the exact transcript. No SDK, ExifTool, Photo payload or EXglobal
+IO is used. Existing `--shared-mixed-only` retains its sleeping-helper scenario.
+
+[Stock/Ox actual qualification](../qualification/shared-mixed-cpu-hash-actual-20261016.json)
+records64parentjobs/eighthelpers percompiler, actual group-before-reap
+observations, settled shared budget/pool and restored parent descriptor baseline.
+The test-only spawn marker becomes `Domain.Safe.spawn` on OxCaml; compiled test
+source hashes are retained. Production sources are unchanged. Budget6 plus two
+owner credits fits standingUnison8. This is functional mixed-work accounting,
+not sampled CPU overlap, hard OSthread/RSS ceilings, SDK/ExifTool qualification or
+throughput evidence. The compiler's scheduler warning remains visible.
+# Completed reply before owner delivery
+
+`late_cancel.ml` is an additional deterministic component, linked to the actual
+qualified production objects. A trusted tiny-file recognizer waits on an Atomic
+barrier. The owner releases it and stops pumping Lwt until `W.usage` observes
+running0 under the mutex that also publishes the completion. The reply promise
+must still sleep while CPU/IO/pending-job accounting remains charged. Normal
+delivery returns its result; cancellation or shutdown before owner delivery
+must return None. Shutdown must not change the caller's cancellation token.
+Each case checks empty ledgers, caller-source identity and restored FD baseline.
+
+[Current stock/Ox evidence](../qualification/worker-late-owner-completion-actual-20261017.json)
+contains exact compiler argv, linked-object pins, executable hashes and actual
+compile/run/group settlements for all three cases/compiler. To reproduce, copy
+the participant into a new private work directory before invoking the recorded
+compiler with the matching production object snapshot; use that directory as
+the executable cwd. The first run emitted compiler companions beside the source;
+its three newly generated companions were retained in the Ox workspace afterward.
+No production source/build objects were changed. This is a worker delivery race
+control, not a publication commit, arbitrary async-fault or hard-resource proof.
+Actual owning session11412/66fb24/0/no running session; Unison8 closed. No SDK,
+camera/Photo/media or canonical IO access. The frozen mixed326 source pins match.

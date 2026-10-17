@@ -128,3 +128,18 @@ editable-metadata versus protected-byte classifications, unsupported input, and
 unchanged input identities/bytes. It does not establish real-camera eligibility.
 Run `integration_test.py --build-receipt /stock/build.json --build-receipt
 /ox/build.json --report /fresh/report.json` after building the current inspector.
+
+## Separate component observations
+
+Use `--components TARGET` (optionally `--base FILE`) for the DNG component
+partition rather than a transfer profile. This prints schema
+`unison-dng-components/0`, full-file SHA256, a versioned layout-view hash and
+encoded-pixel/standard/private/structural/opaque projections with claimed byte
+and component counts. Missing lanes are null. Inline and outlined values are
+separate from descriptors/padding; unknown bytes remain covered. XMP is optional
+in this observation mode, and physical aliases return unsupported.
+
+These are encoded byte-unit observations, not complete raw-image classification,
+decoded-pixel equality, render equivalence or persistent-cache authority. The
+hash-byte count excludes the parser's preceding bounded geometry reads. No sync
+archive or patch/merge policy changes. See [component hashing](../../doc/component-hashes.md).

@@ -140,3 +140,118 @@ support requires a separate exact preservation/reference-closure policy and
 independent conformance plus receiving qualification; recognition alone must not
 remove the unknown-private-data refusal. Earlier statements of no camera data
 read describe their original source/control runs, not this later admitted run.
+# Candidate MakerNote directory geometry — source-only successor
+
+The saved separately admitted framing V2 result identifies one Adobe/MakN
+section with6556 payload bytes and original offset1404 inside a6576-byte private
+block. That is framing evidence only; it does not identify the camera-specific
+pointer grammar or establish XMP independence. This review reread saved JSON,
+not camera or retained-clone payload bytes.
+
+`tests/private_maker_shape.py` now provides a pure candidate classic-IFD shape
+probe with an explicit payload-relative reader, byte order, original offset and
+candidate directory offset. It checks a nonempty count<=256, known TIFF type
+widths, duplicate tags and bounded directory reads (at most3078bytes). It reports
+declared out-of-line extents relative to the proposed original base, including
+extents outside the payload. It reads no pointed values and emits no inline
+values; a LONG or IFD-typed inline value may still be a private pointer. A
+nonzero next-directory field remains unresolved and is not traversed.
+
+[Five original controls](../tests/qualification/private-maker-shape-source-actual-20261017.json)
+pass both byte orders, in/out-of-payload extents, inline-pointer ambiguity,
+unknown types, duplicate/oversized/truncated tables and exact typed metadata.
+Actual10346 reaped0/group absent/Unison8 closed, owning85eed6/0/no session. No
+SDK, filesystem media, camera/Photo data or canonicalIO access. All outputs keep
+maker recognition, private-reference closure and semantic eligibility false.
+
+This is a candidate-shape diagnostic, not a new format/profile contract. Before
+using retained bytes, prepare a fresh exact payload-slice/epoch/read-budget/
+sanitized-output executor and coordinated IO admission. Then use actual shape
+evidence plus a vendor-specific reference grammar to decide whether a bounded
+private profile can be justified. No current source-tag allowlist, receiving
+behavior or consumed admission is changed by this source-only work.
+
+The callable slice layer `tests/private_maker_slice.py` now binds this diagnostic
+to an exact read-only owned regular inode and path epoch (eight native fields),
+with NOFOLLOW, payload-relative `pread`, a 3078-byte requested-read ceiling and
+qualified descriptor cleanup. Source changes and observation expiry propagate
+as failures rather than unsupported-format results; uncertain close overrides
+a successful result and retains descriptor identity without retry. Five tiny
+generated-fixture controls passed with actual child/group settlement and CPU8
+release; see `tests/qualification/private-maker-slice-source-actual-20261017.json`
+(actual owning terminal2a33db/0). No retained payload was opened. This callable
+is not a dispatcher or admission: the frozen executor and fresh IO coordination
+remain to be implemented before any retained-input inspection.
+
+`tests/private_maker_plan.py` now specifies the exact proposed one-source
+contract: retained clone identity, payload offset10990/length6556/original
+base1404, little-endian candidate directory offset0, requested-read ceiling3078,
+worker10s, Unison8 and EXglobal. It rejects alternate source paths, changed
+epoch/geometry, scope expansion and boolean numeric aliases. Four plan controls
+and the five slice controls passed together (actual59b0b6/0; child12267 reaped0,
+group absent, CPU8 closed). The specified executor path is a future implementation
+contract, not an existing command, admission or payload-access grant. Dispatcher
+binding, independent result audit and actual retained-input coordination remain
+open before execution.
+
+The independent result auditor `tests/private_maker_audit.py` validates exact
+report schemas, count/table-only read ranges and totals, sanitized decline
+reasons, TIFF type/extent arithmetic and false eligibility claims. It accepts
+the exact 256-entry/3078-byte boundary and rejects tampered reports. Five audit
+controls plus nine plan/reader controls passed (actuald927fb/0, child12640
+reaped0/group absent, CPU8 closed); evidence is in
+`tests/qualification/private-maker-audit-source-actual-20261017.json`. This is
+metadata consistency only: no raw payload authentication, process-settlement
+proof or descriptor-release authority is inferred. No retained payload read.
+
+The executor `tests/private_maker_execute.py` and shared dispatcher/manual
+`private-maker-slice` target are implemented. This route requires a fresh exact
+shared8+EXglobal admission and actual parent START/inherited nine-FD metadata
+binding. Worker starts no external children. Uncertain metadata/source/result
+close retains the worker; ordinary known failures preserve an error result. The
+parent observes terminal state without an observation-deadline kill, validates
+result/actual worker IDs and source epoch, settles the group, checks exit/result
+consistency, then releases descriptions. Output ceiling256KiB is separate from
+the64KiB plan/START metadata limit.
+
+Final36 controls passed with real outer CPU8 ownership and disposable/injected
+inner boundaries: actual12cea2/0, child14610 reaped0/group absent/CPU8 closed.
+Evidence: `tests/qualification/private-maker-entry-final-source-actual-20261017.json`.
+No canonicalIO or retained payload was accessed. Real disposable worker-route
+qualification remains before freezing a retained-input request; no runtime grant
+is implied by this implementation.
+
+Real disposable lifecycle controls now passed candidate/decline/stale-source/
+uncertain-close paths with four actual worker processes and nine inherited
+private lock descriptions. The injected close occurs before any OS close; the
+worker and all locks stayed live until a control-specific exit acknowledgement.
+No descriptor retry or forged SHARED-CLOSED was used. All worker groups were
+reaped, inner locks reacquired, and outer canonical CPU8 released. Final38
+controls plus four workers actualsession42242/ff73f1/0 are pinned in
+`tests/qualification/private-maker-integrated-ready-actual-20261017.json`.
+
+The preflight now retains parent ownership if qualified metadata close becomes
+uncertain before token acquisition. Manual command construction does not open
+the plan. `doc/private-maker-slice-{plan,request}-v1.json` freezes the exact
+retained-clone candidate slice,13runtime sources and9prerequisites. Fresh lstat
+still matches; workspace/admission absent. No retained payload was read and no
+new IO grant exists. This request is ready for separate Root review/scheduling.
+
+## Actual bounded candidate result
+
+The separate Root admission7d914319 was executed ONCE after fresh13source/
+9prerequisite/interpreter/plan/epoch/deadline/unusedworkspace checks. Actual
+owning tool d8fe2f/exit0/no session; worker17548 reaped0/group absent and
+CPU8+EXglobal closed. The [sealed result](../tests/qualification/private-maker-slice-v1-actual-20261017.json)
+records exactly402bytes from two preads: offset10990 length2 and10992 length400.
+A33-entry classic candidate table and zero next-IFD field were observed. Every
+declared out-of-line TIFF value fits the6556-byte payload under the explicitly
+proposed originalbase1404. No values were followed or inline scalars disclosed.
+
+This supports the table-geometry hypothesis for this one payload. It does not
+identify a vendor, interpret inline pointers, prove complete private-reference
+closure, XMP independence or semantic eligibility. Those flags remain false.
+Actual terminal was sent before sealing; no resources remain held. An initial
+metadata-only seal-construction TypeError was corrected without repeating the
+run or saved-result audit, and is preserved in the seal. Old prepared/admitted
+request records are historical; no replay or new payload scope is authorized.

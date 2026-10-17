@@ -1,0 +1,339 @@
+{
+  "schema": "unison-openssl-production-backend-qualification/1",
+  "state": "OPT_IN_MACOS_BUILD_COMPONENT_PASS_CLOSED",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash.ml",
+      "bytes": 6463,
+      "sha256": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash_stubs.c",
+      "bytes": 3194,
+      "sha256": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticHash_evp.h",
+      "bytes": 5475,
+      "sha256": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semantic_hash_config.ml",
+      "bytes": 1471,
+      "sha256": "4fafa953875af04198444eab5ddf306e039b0763a2f65ec097ef30bac8ece1ea"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/make_tools.ml",
+      "bytes": 25549,
+      "sha256": "093911fa592c821582f103ef9d118c8486699af0cefbac628741cf3c71972f34"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/Makefile.OCaml",
+      "bytes": 22064,
+      "sha256": "4c8f39d97ecf23b45813d6b3d0f6aaf228519061f54e0f1597193ff62c2e060a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/dune",
+      "bytes": 2887,
+      "sha256": "fe1a0fb479251d318a22aa508c709404cf944e419b806888e1b8640a5dbef85e"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/hash_backend_builds.py",
+      "bytes": 4429,
+      "sha256": "5c951e301355c1b280f4edf90e1578a7f5a82bd0d51aeb5c452aa5e2bdaa6daa"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/hash_backend_audit.py",
+      "bytes": 3004,
+      "sha256": "4c1dde759bba4b108f336c758d9d0a3c8a20c40dcbb4aac26d795533b4ae2f38"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/portable_evp_controls.py",
+      "bytes": 5651,
+      "sha256": "89c47cb867431a1dab5d51b7d7b0c95c80cb0f889293accabf5e8d897ef98023"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/portable-hash/evp_stubs.c",
+      "bytes": 231,
+      "sha256": "86d329eb2ca246ae9fbffef8aa07e26918f96318743d8beb2299a5030d8847c5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tools/portable-hash/control.ml",
+      "bytes": 3845,
+      "sha256": "c5e78611c5367d230a0a222458fb5e402136e04882575074bd6608d9bbd1211a"
+    }
+  ],
+  "components": [
+    {
+      "path": "/private/tmp/u-evp-controls-7mblnr6w/RESULT.json",
+      "bytes": 12763,
+      "sha256": "dd8491c13ffa292856a2e0500c58d2a8c5c145ee938c571edea7982e7562ed14"
+    },
+    {
+      "path": "/private/tmp/u-evp-controls-q35dzcxc/RESULT.json",
+      "bytes": 12482,
+      "sha256": "62000b111bea2655089327780aa3cd3d8882715d63f5cea8e658621d77c826ad"
+    }
+  ],
+  "component_owners": [
+    {
+      "actual_terminal": {
+        "chunk_id": "839063",
+        "exit_code": 0,
+        "session_id": null,
+        "previous_session": 35420
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-production-evp-controls-20261017-001/SHARED-START.json",
+          "bytes": 1109,
+          "sha256": "f313f149e5804aafc592ae15fd9fb8a7c2b66bf7f7733fa56262a6f25302ae13"
+        },
+        {
+          "path": "/private/tmp/unison-production-evp-controls-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "4575ebe20d45befb04478207641a8c8e74eaa77ae52dde785cc68faa93851669"
+        },
+        {
+          "path": "/private/tmp/unison-production-evp-controls-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 84,
+          "sha256": "7a82af65dea20e09592f351ddbaab3d1006731b321c08c947de89f2c70dd881b"
+        },
+        {
+          "path": "/private/tmp/unison-production-evp-controls-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "5103e3",
+        "exit_code": 0,
+        "session_id": null,
+        "previous_session": 77359
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-production-platform-hash-controls-20261017-001/SHARED-START.json",
+          "bytes": 1081,
+          "sha256": "5c217e4e1f01963d691d81e4343e47bd4ea3a16b5e4a8c1a28187f5e27f41553"
+        },
+        {
+          "path": "/private/tmp/unison-production-platform-hash-controls-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "5f0df7bb021f257b6e83119d6b46e19803d8761d556367720d2718c5ff42a49f"
+        },
+        {
+          "path": "/private/tmp/unison-production-platform-hash-controls-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 84,
+          "sha256": "3613e930956b355f64957484f3e27f8cb480af0c451a46ed440d3ecedb50dda5"
+        },
+        {
+          "path": "/private/tmp/unison-production-platform-hash-controls-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "build_matrix": {
+    "path": "/private/tmp/unison-hash-builds-lwb49v9u/RESULT.json",
+    "bytes": 14666,
+    "sha256": "b9ca11a34afd0fe19cf038ef88121f95d232dfd370e47546dec36c58d4fb8628"
+  },
+  "build_owner": {
+    "actual_terminal": {
+      "chunk_id": "262249",
+      "exit_code": 0,
+      "session_id": null,
+      "previous_session": 18121
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-002/SHARED-START.json",
+        "bytes": 1078,
+        "sha256": "83b1a159a13d75b115956a3b27846dfb963ce6ca6895855346560a0c758250db"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "344153b2d155009c7f51d9046dfa76a0c9592b3299c7111dc56b034efd48249a"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 41,
+        "sha256": "5a3f6f2f22c47162c170618e9cfac9e6831700f514956418c18a483dc83a0c59"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "object_audit": {
+    "path": "/private/tmp/unison-hash-audit-zb0ugedq/RESULT.json",
+    "bytes": 12385,
+    "sha256": "5c4f8bb365cfde51efcee8388fa391a776d91d467281567bef194b14b2e2a2af"
+  },
+  "audit_owner": {
+    "actual_terminal": {
+      "chunk_id": "97c5f9",
+      "exit_code": 0,
+      "session_id": null,
+      "previous_session": null
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-hash-backend-object-audit-20261017-001/SHARED-START.json",
+        "bytes": 1135,
+        "sha256": "2591258c2d7c8b27b19069b638357a4f60b8805ea1689140e3ed381072e73dca"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-object-audit-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "913a981259fb8a146120ef9cafa2e84c30c612b86650cda3228c6b6d4e5eac3b"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-object-audit-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 40,
+        "sha256": "fc0863f13d586c2dd2816590b92b2f74af806a6094d803b3659e25c01e085678"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-object-audit-20261017-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "builds": [
+    {
+      "backend": "openssl",
+      "binary": {
+        "bytes": 5763656,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-9m7wsabk/src/unison",
+        "sha256": "008cbe3af85a6fc941d2678bcf901e30fbafbf3e087d34b5fb72c47cc749a370"
+      },
+      "configured_hash_environment": {
+        "SEMANTIC_HASH_BACKEND": "openssl",
+        "SEMANTIC_OPENSSL_INCLUDE": "/usr/local/Cellar/openssl@3/3.6.4/include",
+        "SEMANTIC_OPENSSL_LIB": "/usr/local/Cellar/openssl@3/3.6.4/lib"
+      },
+      "label": "stock",
+      "report": {
+        "bytes": 47060,
+        "path": "/private/tmp/unison-hash-builds-lwb49v9u/stock-make-openssl.json",
+        "sha256": "94d79b6e6981a319c56af03842f027d4b9c4905751e3ac87a2c3288365273724"
+      },
+      "system": "make"
+    },
+    {
+      "backend": "openssl",
+      "binary": {
+        "bytes": 7717120,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-hlae9kzw/src/unison",
+        "sha256": "755135df0be3ae66a60b743a04fc46541a173355842ac7615aeddd246c5d3d87"
+      },
+      "configured_hash_environment": {
+        "SEMANTIC_HASH_BACKEND": "openssl",
+        "SEMANTIC_OPENSSL_INCLUDE": "/usr/local/Cellar/openssl@3/3.6.4/include",
+        "SEMANTIC_OPENSSL_LIB": "/usr/local/Cellar/openssl@3/3.6.4/lib"
+      },
+      "label": "ox",
+      "report": {
+        "bytes": 47066,
+        "path": "/private/tmp/unison-hash-builds-lwb49v9u/ox-make-openssl.json",
+        "sha256": "a1b7c0680f5d3001d678723f8713dd7cc19ad122427f52d40fab9710e4e3bc0c"
+      },
+      "system": "make"
+    },
+    {
+      "backend": "openssl",
+      "binary": {
+        "bytes": 5807792,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-04aqa6xs/_build/default/src/linktext.exe",
+        "sha256": "969df8aa8a83f14d5f3ed6096d0bb50cc526306bae08158bd3e7501b098c440d"
+      },
+      "configured_hash_environment": {
+        "SEMANTIC_HASH_BACKEND": "openssl",
+        "SEMANTIC_OPENSSL_INCLUDE": "/usr/local/Cellar/openssl@3/3.6.4/include",
+        "SEMANTIC_OPENSSL_LIB": "/usr/local/Cellar/openssl@3/3.6.4/lib"
+      },
+      "label": "stock",
+      "report": {
+        "bytes": 46866,
+        "path": "/private/tmp/unison-hash-builds-lwb49v9u/stock-dune-openssl.json",
+        "sha256": "15dd98ea261fea8a20025a6a60721ae625f6bbfd249dc98f63d67c569a7f944a"
+      },
+      "system": "dune"
+    },
+    {
+      "backend": "openssl",
+      "binary": {
+        "bytes": 7411272,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-z6ncgdl0/_build/default/src/linktext.exe",
+        "sha256": "dbfa6d9295688e558324377f4d8ec43bc5fe363c8d470df5375e13a35354856c"
+      },
+      "configured_hash_environment": {
+        "SEMANTIC_HASH_BACKEND": "openssl",
+        "SEMANTIC_OPENSSL_INCLUDE": "/usr/local/Cellar/openssl@3/3.6.4/include",
+        "SEMANTIC_OPENSSL_LIB": "/usr/local/Cellar/openssl@3/3.6.4/lib"
+      },
+      "label": "ox",
+      "report": {
+        "bytes": 46870,
+        "path": "/private/tmp/unison-hash-builds-lwb49v9u/ox-dune-openssl.json",
+        "sha256": "451035d2431f6db2aeac90ced4214fb286025382963056d03ccacf13cf8b33b0"
+      },
+      "system": "dune"
+    },
+    {
+      "backend": "platform",
+      "binary": {
+        "bytes": 5802592,
+        "path": "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-mm2t94w3/_build/default/src/linktext.exe",
+        "sha256": "8afcc93efc9a12aa6c809385f9fab827490bf16e9418aa920421bd1104284884"
+      },
+      "configured_hash_environment": {
+        "SEMANTIC_HASH_BACKEND": "platform",
+        "SEMANTIC_OPENSSL_INCLUDE": "/usr/local/Cellar/openssl@3/3.6.4/include",
+        "SEMANTIC_OPENSSL_LIB": "/usr/local/Cellar/openssl@3/3.6.4/lib"
+      },
+      "label": "stock",
+      "report": {
+        "bytes": 46866,
+        "path": "/private/tmp/unison-hash-builds-lwb49v9u/stock-dune-platform.json",
+        "sha256": "14e740967b191dc263693156ef8ce7518bf102c862c3b30d5a47d88fbbf0bdb2"
+      },
+      "system": "dune"
+    }
+  ],
+  "source_hash_checks": 2310,
+  "preserved_harness_failure": {
+    "actual_terminal": {
+      "chunk_id": "e5f933",
+      "exit_code": 1,
+      "session_id": null
+    },
+    "reason": "wrong save helper accepted directory as file; after first compile child returned; no SDK/media",
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-001/SHARED-START.json",
+        "bytes": 1078,
+        "sha256": "4178d9c0035e6c11b73bd099b638b7b06898aa222cd3491c616a586a80e2bf80"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "ae43bdf5296cc1eb1537bbd15d80a599c59bb4a95a0c9e53f044a56467ccfbff"
+      },
+      {
+        "path": "/private/tmp/unison-hash-backend-build-controls-20261017-001/SHARED-STDERR.txt",
+        "bytes": 816,
+        "sha256": "bdf909d3fed0ae05ea8a70e556116012342ba114bc98dd465f3bb574b51a856d"
+      }
+    ]
+  },
+  "scope": "Current production hash API: opaque owned contexts and explicit OpenSSL3 selection; 4 stock/Ox Make+Dune OpenSSL builds +1 platform stock Dune build; 2x8 component calls (including expected negative Ox compile refusals),11 configuration/build children,5 object inspectors all settled. macOS installed OpenSSL3.6.4 only. Defaults unchanged. No Linux/Windows/FIPS/hardRSS/throughput/SDK/media or broader full-goal claim."
+}

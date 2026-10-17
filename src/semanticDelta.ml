@@ -1,7 +1,7 @@
 open FormatExtension
 type item = { region : region; digest : string; contents : string }
 type proof = { name : string; size : int64; full : string;
-               preserved : string; items : item list }
+               preserved : string; items : item list; span_semantics : span_semantics }
 type description = { profile : string; size : int64; digest : string;
                      preserved_digest : string; regions : region list }
 type application = { logical_bytes_written : int; write_calls : int;
@@ -42,7 +42,7 @@ let u64 n =
     (Int64.logand 255L (Int64.shift_right_logical n (56-8*i))))) done;
   Bytes.to_string b
 let feed_string h s = SemanticHash.feed h (Bytes.of_string s) 0 (String.length s)
-let inspect ?max_payload ((module E : S) as extension) file =
+let inspect ?max_payload ?(span_semantics=Opaque_spans) ((module E : S) as extension) file =
   match FormatExtension.inspect ?max_payload extension file with
   | Error _ as e -> e
   | Ok manifest ->
@@ -67,13 +67,15 @@ let inspect ?max_payload ((module E : S) as extension) file =
     complement !position (SemanticFile.size file);
     SemanticFile.check file;
     Ok {name = E.profile; size = SemanticFile.size file;
-        full = SemanticHash.finish full; preserved = SemanticHash.finish preserved; items}
+        full = SemanticHash.finish full; preserved = SemanticHash.finish preserved; items; span_semantics}
 let same_layout a b =
   a.name = b.name && a.size = b.size &&
   List.map (fun (i:item) -> i.region) a.items = List.map (fun (i:item) -> i.region) b.items
 let classify ~base ~target =
   if base.full = target.full then Exact_bytes
-  else if same_layout base target && base.preserved = target.preserved then Editable_metadata
+  else if same_layout base target && base.preserved = target.preserved then
+    if base.span_semantics = Known_metadata && target.span_semantics = Known_metadata
+    then Editable_metadata else Uninterpreted_regions
   else Other_bytes
 let plan ~nonce ~(base:proof) ~(target:proof) =
   if String.length nonce <> 32 then Error "nonce must be 32 bytes"
@@ -225,7 +227,7 @@ let decode_request s =
     let digest = take 32 in
     {region={offset;length}; digest; contents=""}) in
   if !position <> String.length s then raise (Bad "trailing request bytes");
-  Ok (nonce, {name;size;full;preserved;items})
+  Ok (nonce, {name;size;full;preserved;items;span_semantics=Opaque_spans})
  with Bad message -> Error message
 
 (* Lossless local base cache. This is not a network proof or archive authority.

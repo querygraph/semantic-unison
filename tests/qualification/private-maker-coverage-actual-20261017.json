@@ -1,0 +1,146 @@
+{
+  "schema": "unison-private-maker-coverage/1",
+  "payload_length": 6556,
+  "candidate_directory": {
+    "offset": 0,
+    "bytes": 402
+  },
+  "inline_tags": [
+    5,
+    7,
+    8,
+    17,
+    18,
+    20,
+    22,
+    30,
+    48,
+    49,
+    69,
+    74,
+    91,
+    92,
+    93,
+    94,
+    95
+  ],
+  "opaque_outlined_values": [
+    {
+      "tag": 23,
+      "offset": 460,
+      "bytes": 17
+    },
+    {
+      "tag": 24,
+      "offset": 478,
+      "bytes": 17
+    },
+    {
+      "tag": 25,
+      "offset": 496,
+      "bytes": 512
+    },
+    {
+      "tag": 51,
+      "offset": 1008,
+      "bytes": 17
+    },
+    {
+      "tag": 66,
+      "offset": 1122,
+      "bytes": 1024
+    },
+    {
+      "tag": 75,
+      "offset": 2168,
+      "bytes": 256
+    },
+    {
+      "tag": 90,
+      "offset": 2434,
+      "bytes": 4096
+    }
+  ],
+  "outside_payload_tags": [],
+  "overlaps": [],
+  "unclassified_gaps": [
+    {
+      "offset": 459,
+      "bytes": 1
+    },
+    {
+      "offset": 477,
+      "bytes": 1
+    },
+    {
+      "offset": 495,
+      "bytes": 1
+    },
+    {
+      "offset": 1025,
+      "bytes": 1
+    },
+    {
+      "offset": 6545,
+      "bytes": 1
+    }
+  ],
+  "represented_union_bytes": 6551,
+  "maker_format_recognized": false,
+  "private_reference_closure_proved": false,
+  "semantic_eligibility": false,
+  "payload_bytes_read": 0,
+  "scope": "Saved declared extents only; gaps are not verified padding, inline values may be pointers, opaque values may contain nested or external references.",
+  "saved_input": {
+    "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/RESULT.json",
+    "bytes": 11163,
+    "sha256": "ba6e1fa2a6a950f35b0478332c0a848a6e34d245d9600852b42bf92d3e0dd602"
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_coverage.py",
+      "bytes": 4511,
+      "sha256": "1160b135c7b8a9677c344b1d776b9fbe5e5288448811456debe962a381948083"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_coverage_test.py",
+      "bytes": 3324,
+      "sha256": "cee15aa5e60681960f3aa003b356828a6e3be38d1482e69e2b03aeba858c84d6"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_shape.py",
+      "bytes": 2939,
+      "sha256": "77de9b7e28b9b3c49b045cb93fa2e3a36964b2306e0d3358e91d1d2eeb86dd5c"
+    }
+  ],
+  "controls": {
+    "actual_owning_tool_terminal": {
+      "chunk_id": "3ca2ea",
+      "exit_code": 0,
+      "session_id": null
+    },
+    "methods": 7,
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-maker-coverage-controls-20261017-002/SHARED-START.json",
+        "bytes": 1093,
+        "sha256": "23d83974da42f4a2851d81c842da0f5c57beb49c0073621c92563cfc9f18b111"
+      },
+      {
+        "path": "/private/tmp/unison-maker-coverage-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "4334f89d2aa92b3d98df25ef190f3a8854207f7076f8ec07174aa22ff1e4b636"
+      },
+      {
+        "path": "/private/tmp/unison-maker-coverage-controls-20261017-002/SHARED-STDERR.txt",
+        "bytes": 105,
+        "sha256": "83166b089fbcb82fac63f22522fa6ae99bb5e46368cd35d756277fd463dd6346"
+      }
+    ],
+    "earlier_preexec_refusal": {
+      "chunk_id": "0a7cc2",
+      "exit_code": 1,
+      "reason": "dispatcher requires script as argv1; -B was misplaced; no child or token acquisition"
+    }
+  }
+}

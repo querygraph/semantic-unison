@@ -100,7 +100,7 @@ let main () =
     if case = "warn-delivery-abort" then Abort.all ();
     if case = "warn-printer-error" then failwith "private warning printer failure");
   let context = {CandidateValidator.supervisor = runtime.supervisor; cancellation;
-    cpu_budget = runtime.cpu_budget; candidate; expected; resources=BackendResources.none; inspect = context_inspect;
+    cpu_budget = runtime.cpu_budget; candidate; destination=candidate; expected; resources=BackendResources.none; inspect = context_inspect;
     execute = R.with_io_file cancellation candidate} in
   let rec cancel_active left =
     if Sys.file_exists (candidate ^ ".calls") then (H.cancel cancellation; return ())

@@ -1,0 +1,31 @@
+{
+  "commit": "54a885f85692674f362e6256ba8609808d746d5d",
+  "workspace": "/private/tmp/unison-exiftool-rs-source-9abzmqws",
+  "files": [
+    {
+      "url": "https://raw.githubusercontent.com/Le-Syl21/exiftool-rs/54a885f85692674f362e6256ba8609808d746d5d/Cargo.toml",
+      "path": "/private/tmp/unison-exiftool-rs-source-9abzmqws/Cargo.toml",
+      "bytes": 3508,
+      "sha256": "312771360facf871b00fe9d1897a0af10f3a95623946869b0037cc569b89edd3"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Le-Syl21/exiftool-rs/54a885f85692674f362e6256ba8609808d746d5d/LICENSE",
+      "path": "/private/tmp/unison-exiftool-rs-source-9abzmqws/LICENSE",
+      "bytes": 898,
+      "sha256": "190528a93da3d81918d36c4b5b9a479b9ac6ba5c282e448a5fee3e0c693ca999"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Le-Syl21/exiftool-rs/54a885f85692674f362e6256ba8609808d746d5d/src/main.rs",
+      "path": "/private/tmp/unison-exiftool-rs-source-9abzmqws/src/main.rs",
+      "bytes": 89233,
+      "sha256": "e28db348a10b446e0d951fd8b73f47afe653c53187009c7b25514fc67d8f4308"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/Le-Syl21/exiftool-rs/54a885f85692674f362e6256ba8609808d746d5d/src/lib.rs",
+      "path": "/private/tmp/unison-exiftool-rs-source-9abzmqws/src/lib.rs",
+      "bytes": 3651,
+      "sha256": "728848762ed9a2278b7e7c16924b479ee8a4729a1309cbd658cca947a167d356"
+    }
+  ],
+  "scope": "Source download/read only; no checkout execution/dependency installation/build/test/media access"
+}

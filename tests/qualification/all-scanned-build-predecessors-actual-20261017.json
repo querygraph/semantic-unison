@@ -1,0 +1,374 @@
+{
+  "schema": "unison-all-scanned-build-predecessors/1",
+  "rows": [
+    {
+      "namespace": "/private/tmp/unison-validation-endpoint-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "3a7f56630c04359134925c17a30206d8ce4c81c40b82528869ca55de517f819f"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "33e5353dd04e16437dfa2a10f201efed79ccbb126191d41511a5f7a798171b13"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "93ecf7",
+        "session_id": 10332,
+        "terminal_chunk": "2f0d34",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-endpoint-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "8c806b679c964b1db1b6c5c5c3d4fa38af8527079f7b219b76d6e166aa63bd95"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "2cc66d8143329a4628685dc8587e9d27fb683b202dfb049ac4ceed89602d8ab0"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "ce1b79",
+        "session_id": 69945,
+        "terminal_chunk": "4132e2",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-endpoint-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/RESULT.json",
+          "bytes": 46139,
+          "sha256": "9b01717986cdeffda7700ada152c74c4b8dc129174811b09a6501b3ba0814d43"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "94cc118a3d142631eae00da97ee34c774254abef434a53f22685d330e01a0cbd"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "2c3746",
+        "session_id": 87935,
+        "terminal_chunk": "a622a3",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "c29d0e4187ac036923f368658eddfaef7a4f03af85b528f8c7eaeb01e621beb8"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "413819f80d093cd13167aa8a0c0e32c9aba6818a5e9fd7695c279232783efe02"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "4cd0e1",
+        "session_id": 41123,
+        "terminal_chunk": "d50f21",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/RESULT.json",
+          "bytes": 46340,
+          "sha256": "c0315091e76eb8b0ca0a6cb93a66b7ae690906bc95cd7cba20045ab57cf44771"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "fad4d2cc2878ac110150ed6e9744608c04a4a344d7b5a246654937b71590e66c"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "f280a8",
+        "session_id": 59946,
+        "terminal_chunk": "7ac3db",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "20c1c2379516d0ccebf24aad64a98a492f0766066bdc26d0f10c558536444440"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "00696f874f38abb4421c348b038def0a095011ca19bc64ad777a5a6b538312ad"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "c97dd0",
+        "session_id": 54491,
+        "terminal_chunk": "c9d98a",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-dune-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-002-20261017/RESULT.json",
+          "bytes": 46247,
+          "sha256": "3bb71ffe08038769ef40cf1edacb37282e8682ca8dc2db9a69fe72c928a81752"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "43ce466c899243ba8358c5d03cfe2a3bfd86dec1dd8e552634940651f7686dcc"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "0a3303",
+        "session_id": 62567,
+        "terminal_chunk": "c13b08",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-dune-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-002-20261017/RESULT.json",
+          "bytes": 46251,
+          "sha256": "2ba767c1e2180332be537133850734c80f64573cf80781a323692bad3ab9ae27"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "de37193407526f240706b7ec0b7073be608c0f6414bfd920629d90ff8f381401"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "64b9ca",
+        "session_id": 26247,
+        "terminal_chunk": "614232",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-stock-003-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-003-20261017/RESULT.json",
+          "bytes": 46441,
+          "sha256": "2c5bd9d02a86f8ebda3483f4925c5ebab3bc1da2778b65ec4d3f2d83320b8210"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-003-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "816065505c124c6eeaafd68d96ba311f2623d15723ab9b88664aed2dc4347fcb"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "96af28",
+        "session_id": 59855,
+        "terminal_chunk": "ca9756",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-ox-003-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-003-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "27dafcd8905bab79d4a6bb348bf2502b9bd80e7cf2cc07f5e4b504575612cb51"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-003-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "fc650c26ba058f9af83a87f185530aa12bb5d8309f118b4ab21b225bac8fa2cc"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "3a2094",
+        "session_id": 94528,
+        "terminal_chunk": "8831a8",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-stock-004-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-004-20261017/RESULT.json",
+          "bytes": 46441,
+          "sha256": "7de75372c8ea5c4012c1f50446fac6d98dbe36cf68f2cf324cfdbe0b594851fb"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-004-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "eee9a3d093ef222acda6c33bd755be9e31ac5c97483b36f4ae3b85f6bb3ce380"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "38e626",
+        "session_id": 48241,
+        "terminal_chunk": "12969c",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-ox-004-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-004-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "88b892c5bb857aaa58d9085064caba79dc4a9347a7a36d635a837808783ca407"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-004-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "38b13918bf9a1410259fb52dedfd46f3c4f40c146049d02fa9adf12c6ed3e29e"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "26a8b7",
+        "session_id": 84639,
+        "terminal_chunk": "a0e105",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-dune-stock-004-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-004-20261017/RESULT.json",
+          "bytes": 46247,
+          "sha256": "6eb33df66f160bd7280d6a355a968917208ab30ff1e31e72697f57f149d7f347"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-004-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "081c6a6b7d07124459ee0c8f1543bca4e06f7134b082d9ba89ffa40746cbcf9a"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "77ef5a",
+        "session_id": 34425,
+        "terminal_chunk": "779350",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-dune-ox-004-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-004-20261017/RESULT.json",
+          "bytes": 46251,
+          "sha256": "f1b7a54059fe7ad9a45fb428851fff9561776543585c609d1db23067a821aafe"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-004-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "711297e2548e0465f87d4e11bbf6dde5b6d3ad129b137cf7bba3a4cc0c0fd1a3"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "77ef5a",
+        "session_id": 34425,
+        "terminal_chunk": "779350",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-stock-005-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-005-20261017/RESULT.json",
+          "bytes": 46441,
+          "sha256": "83d485d439ec17b916025d1c82c1ec733a0d6d612eabc8aaf18cc7dac0f31fac"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-005-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "0c4efb888da9974a9e31f52ca129d37cfc89f0d336536df38d45ead7c5072bfe"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "0e1c74",
+        "session_id": 59615,
+        "terminal_chunk": "9a9cf0",
+        "exit_code": 2,
+        "session_present": false
+      },
+      "contained_build_exit": 0
+    },
+    {
+      "namespace": "/private/tmp/unison-validation-scope-ox-005-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-005-20261017/RESULT.json",
+          "bytes": 46174,
+          "sha256": "41fa7f097efae07d43f499238eb68a55aeed3307ebbc63f7a4af19d1bf872183"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-005-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "faf59fc146c6bc62661ee83c45abe9a9677efa9e26ece456aba06f06225e4d61"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "0e1c74",
+        "session_id": 59615,
+        "terminal_chunk": "9a9cf0",
+        "exit_code": 2,
+        "session_present": false
+      },
+      "contained_build_exit": 2
+    }
+  ],
+  "scope": "Historical source/build attempts. Shared parent terminal may cover multiple sequential groups; e.g stock005 child0 precedes Ox005 child2 under parent2. No current-source/native/SDK/runtime claims; final006 qualification is separate."
+}

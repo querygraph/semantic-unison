@@ -99,6 +99,16 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
     prop_argv = manual.command('sync-functional',out,dict(env,STOCK_RECEIPT='unread',OX_RECEIPT='unread',SYNC_PROPERTY_REMOVAL_CONTROLS='1',SHARED_IO_ADMISSION='/fixed',SHARED_IO_ADMISSION_SHA256='0'*64))
     assert '--property-removal-controls' in prop_argv
     assert '--property-removal-controls' not in argv
+    layout_env=dict(env,STOCK_RECEIPT='unread',OX_RECEIPT='unread',
+                    SYNC_LAYOUT_ONLY_CONTROLS='1',SHARED_IO_ADMISSION='/fixed',SHARED_IO_ADMISSION_SHA256='0'*64)
+    assert '--layout-only-controls' in manual.command('sync-functional',out,layout_env)
+    assert '--layout-only-controls' not in argv
+    for bad in (dict(layout_env,SYNC_LAYOUT_ONLY_CONTROLS='true'),
+                dict(layout_env,SYNC_PROPERTY_REMOVAL_CONTROLS='1'),
+                dict(layout_env,SHARED_IO_ADMISSION='')):
+        try:manual.command('sync-functional',out,bad)
+        except ValueError:pass
+        else:raise AssertionError('unqualified layout-only command')
     assert manual.shared_resource_plan('sync-functional', dict(env,SYNC_PROPERTY_REMOVAL_CONTROLS='1'))['retained_property_reader_limit'] == 36
     assert argv.count('--expected-binary-sha256') == 2
     assert argv.count('--expected-compiler-sha256') == 2

@@ -409,7 +409,19 @@ let shared_worker_parity () =
       "configured-worker descriptor leak";
     Printf.printf "PASS shared parity workers=%d admitted_cpu=%d jobs=16 cancelled=4 completed=12\n%!"
       workers cpu) [1;2;4;8]
-let shared_mixed_tests () =
+let cpu_hash_helper width =
+  check (width>=1 && width<=2) "bounded helper width required";
+  let payload=String.make 65536 'h' in
+  let domains=List.init width(fun _ -> Domain.spawn (* TEST_HASH_SPAWN *) (fun () ->
+    let result=ref "" in
+    for _=1 to 32 do result:=SemanticHash.string payload done;
+    !result)) in
+  let values=List.map Domain.join domains in
+  check(List.for_all((=)(SemanticHash.reference_string payload)) values)
+    "child native hash differs from portable SHA reference";
+  print_endline(SemanticHash.hex(List.hd values))
+
+let shared_mixed_tests ?(cpu_helpers=false) () =
   let before = Array.length (Sys.readdir "/dev/fd") in
   let channel = open_out_bin "sample" in
   output_string channel (String.make 64 'm'); close_out channel;
@@ -423,8 +435,14 @@ let shared_mixed_tests () =
       let group = ref None in
       H.run ~observe_group:(fun value -> group:=Some value) b ~weight (H.cancellation ())
         ~limits:{H.timeout=5.;terminate_grace=0.1;stdout_bytes=128;stderr_bytes=128}
-        ~executable:"/bin/sleep" ~arguments:[|"0.05"|] ~environment:[||]
-      >>= fun result -> return (result,!group) in
+        ~executable:(if cpu_helpers then Sys.executable_name else "/bin/sleep")
+        ~arguments:(if cpu_helpers then [|"--cpu-hash-helper";string_of_int weight|] else [|"0.05"|])
+        ~environment:[||]
+      >>= fun result ->
+        if cpu_helpers then check(result.H.stdout=
+          SemanticHash.hex(SemanticHash.reference_string(String.make 65536 'h'))^"\n")
+          "weighted child hash transcript differs";
+        return (result,!group) in
     let first = helper 1 in
     let second = helper (min 2 permits) in
     let jobs = List.init 16 (fun _ -> hash pool (H.cancellation ()) "sample") in
@@ -446,6 +464,10 @@ let shared_mixed_tests () =
   ) [1;2;4;6]
 
 let () =
+  if Array.length Sys.argv=3 && Sys.argv.(1)="--cpu-hash-helper" then
+    (cpu_hash_helper(int_of_string Sys.argv.(2));exit 0);
+  if Array.exists ((=) "--shared-mixed-hash-only") Sys.argv then
+    (shared_mixed_tests ~cpu_helpers:true ();exit 0);
   if Array.exists ((=) "--shared-mixed-only") Sys.argv then (shared_mixed_tests ();exit 0);
   if Array.exists ((=) "--shared-parity-only") Sys.argv then (shared_worker_parity ();exit 0);
   if Array.exists ((=) "--read-stats-only") Sys.argv then (read_stats_tests ();exit 0);

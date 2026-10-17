@@ -260,6 +260,8 @@ def main():
                         help="fixed finite smoke: two 2 MiB files, workers 1/2, no warmup, one sample")
     parser.add_argument("--shared-qualification", action="store_true",
                         help="finite shared smoke: two 2 MiB files, workers1/2, six to eight credits including two owner credits")
+    parser.add_argument("--layout-only-controls", action="store_true",
+                        help="finite generated opaque-private exact-layout receiving matrix")
     parser.add_argument("--property-removal-controls", action="store_true",
                         help="Darwin shared functional fixtures: old fork/xattr removal and retained readers")
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
@@ -289,6 +291,8 @@ def main():
     if finite_qualification:
         args.file_mib, args.files, args.warmups, args.repetitions = 2, 2, 0, 1
         workers = [1, 2, 3] if args.shared_qualification else [1, 2]
+    if args.layout_only_controls and (not args.shared_qualification or args.property_removal_controls):
+        parser.error("layout-only controls require a separate finite shared qualification matrix")
     if args.property_removal_controls and (not args.shared_qualification or platform.system() != "Darwin"):
         parser.error("property-removal controls require the Darwin shared qualification matrix")
     if args.shared_qualification and (args.loopback_cpu_credits != 8 or args.orchestration_cpu_credits != 2):
@@ -362,6 +366,7 @@ def main():
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
                     "property_removal_controls": args.property_removal_controls,
+                    "layout_only_controls": args.layout_only_controls,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
                     "maximum_configured_endpoint_credit_sum":endpoint_count*max(workers),
                     "orchestration_cpu_credits":args.orchestration_cpu_credits,
@@ -469,7 +474,7 @@ def main():
                             (directory / name).mkdir(parents=True)
                         start = time.monotonic()
                         fixtures = [create(directory / "left" / f"image-{index:04d}.dng", size,
-                                           args.packet_bytes, index) for index in range(args.files)]
+                                           args.packet_bytes, index, layout_only=args.layout_only_controls) for index in range(args.files)]
                         if args.property_removal_controls:
                             for item in fixtures:
                                 property_controls.initialise(directory / "left" / item["name"])
@@ -500,6 +505,9 @@ def main():
                         log = measured["stdout"] + measured["stderr"] + measured["supervisor_output"]
                         sample["counters"] = internal_counters(log, mode, args.files, size,
                             primary_reads=args.measure_primary_reads and mode != "reference")
+                        if args.layout_only_controls and mode=="semantic":
+                            assert sample['counters']['semantic_profiles']==['org.firstpair.dng-layout/0'], \
+                                "opaque private fixture did not select exact layout-only profile"
                         verification_start = time.monotonic()
                         inodes = {}
                         selected_property_epochs = {}

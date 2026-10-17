@@ -15,9 +15,13 @@ semanticdng = true
 semanticworkers = 0
 ```
 
-`semanticdng = true` enables both built-in DNG XMP profiles, preferring the
+`semanticdng = true` enables the built-in DNG profiles, preferring the
 extended `/1` profile when negotiated. To select one version only, use
 `semanticprofile = org.firstpair.dng-xmp/1` or `/0` explicitly.
+The separately negotiated [exact-layout fallback](dng-layout-exact.md),
+`org.firstpair.dng-layout/0`, now follows the strict profiles when enabled by
+the shorthand. It preserves opaque private data and verifies complete donor
+bytes without claiming private grammar, semantic merge or pixel equivalence.
 `semanticworkers = 0` selects physical cores on macOS, falling back to available
 logical CPUs on other platforms or if topology is unavailable. A positive
 integer sets a per-process budget shared by semantic workers and validators.
@@ -197,3 +201,13 @@ ordinary exact transfer continues. Old peers retain the SIR/0 byte report.
 Property encodings and namespace contexts are compared without RDF/value
 canonicalization, rendered-pixel equality or automatic conflict resolution.
 See [SIR/1](semantic-observation-v1.md) for bounds and versioning.
+
+`-debug external-process` separately records generic copy/merge/diff helper
+lifecycle diagnostics after supervised execution settles: historical child PID,
+wait status/outcome, declared CPU weight, capture truncation and retained-group
+observation. It logs no command arguments or captured output. Default execution
+adds no group query. `unobserved` and `unknown` do not mean zero; a numeric
+other-member count is one census before leader reap, not durable process-tree
+closure. These records are diagnostics, not publication/validator acceptance or
+permission to signal a historical PID. Existing command exit/cancellation policy
+is unchanged.

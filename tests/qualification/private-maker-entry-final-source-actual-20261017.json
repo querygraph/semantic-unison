@@ -1,0 +1,121 @@
+{
+  "schema": "unison-private-maker-entry-controls/3",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-m",
+      "unittest",
+      "private_maker_dispatch_test",
+      "private_maker_execute_test",
+      "private_maker_audit_test",
+      "private_maker_plan_test",
+      "private_maker_slice_test",
+      "shared_io_dispatch_test",
+      "shared_binding_test",
+      "manual_shared_test"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "PASS shared/legacy command selections and budget refusals; no output, build or child\nPASS three inspector build-only refusals before workspace/compiler/payload access\nPASS unsupported interpreter refusal before pool read/acquisition\n",
+    "stderr": "....................................\n----------------------------------------------------------------------\nRan 36 tests in 0.065s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 14610,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "retained_camera_payload_accessed": false,
+  "canonical_io_acquired": false,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/close.py",
+      "sha256": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_audit.py",
+      "sha256": "de615092123d86f94fbd117ed2e844e05fbe4d8536ea7e14eb58bd83a5c695b0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_execute.py",
+      "sha256": "e22e307cfdeb396b9e335bc7322027d8818c5224ebc37b66e86c2037ebc2a20a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_plan.py",
+      "sha256": "f53a315261da8c92c2aa8a5cd18e2e9672dfaf6fefee6c00568c5a927ba42978"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_shape.py",
+      "sha256": "77de9b7e28b9b3c49b045cb93fa2e3a36964b2306e0d3358e91d1d2eeb86dd5c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_slice.py",
+      "sha256": "02fca8080e64e50f6a6884cfaf17732b5bfcb85d24cf7c377dcf4e6cdcddd3ef"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py",
+      "sha256": "5db6c7d423a258741573297532081594ea79cbd4a8d654496e3fe231c1b72046"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "sha256": "915edb256975f90cb4e897d71513dd5d808d644659c96512e6d82d6aadd282f4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "tests/manual.py",
+      "sha256": "518f25a91f12a36e366c95e7e5d726769893051802b33f865817844a8577bf10"
+    },
+    {
+      "path": "tests/manual_shared_test.py",
+      "sha256": "f999059fbe09ed25f4a1ecea473367dd2392fc020b947f654aaf6ee4f450f508"
+    },
+    {
+      "path": "tests/private_maker_audit_test.py",
+      "sha256": "de095e7eabad834170044ec2db02c0d16f377a77bc0b689b5a1f4a29afb38720"
+    },
+    {
+      "path": "tests/private_maker_dispatch_test.py",
+      "sha256": "1c094e1b36065eb8276870272ba6eafcf192c72011be3f69046aae4e803b6f48"
+    },
+    {
+      "path": "tests/private_maker_execute_test.py",
+      "sha256": "a0c87693f73cafd78bb68c98b819df9e074665640e315d9a0ec9fab49dd8e1a7"
+    },
+    {
+      "path": "tests/private_maker_plan_test.py",
+      "sha256": "d02f9bb720895c0193b59eaa1480a83a7b8e3f680e76655c6b1c619ee17076d0"
+    },
+    {
+      "path": "tests/private_maker_slice_test.py",
+      "sha256": "53741ac767a2ad20d214a5c5c88d50281adb64c0e82479efc1b1405dad89921e"
+    },
+    {
+      "path": "tests/shared_dispatch.py",
+      "sha256": "a4f142554ccebafc78f94a07975b5f4faffeb96a92d775ec384a09e8b547c373"
+    },
+    {
+      "path": "tests/shared_io_dispatch_test.py",
+      "sha256": "d74bae0056f312f48757ef59acc11cfd72b7e28e09dfaa745ebc7a2d6b0997f3"
+    }
+  ],
+  "owning_tool_terminal": {
+    "chunk_id": "12cea2",
+    "exit_code": 0,
+    "session_id": null,
+    "evidence": "Observed exec_command completion; faithful subsequent transcription."
+  }
+}

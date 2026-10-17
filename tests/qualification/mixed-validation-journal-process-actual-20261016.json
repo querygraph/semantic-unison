@@ -1,0 +1,299 @@
+{
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/journal_controls.py",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-owner-j3zsqw_c/report.json"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "PASS durable fresh fake-process success and failed-first prefix\n",
+    "stderr": "",
+    "client_cleanup": {
+      "pid": 99655,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "report": {
+    "scope": "Three fresh private fake probes/six fake helpers/48hash tasks; no SDK/ExifTool/Photo/EXIO",
+    "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn",
+    "prerequisite": {
+      "path": "/Users/alexy/src/unison/tests/qualification/mixed-validation-memory-admission-actual-20261016.json",
+      "sha256": "37e7108d946dad825365fbdf025f3043258eaff65b79652dd657aa4380e234c0"
+    },
+    "sources": {
+      "/Users/alexy/src/unison/tests/mixed_validation/probe.ml": "e869fd5f879fa62657be79767ae7688ad76ad8004e36792e385b1b23b66c0d3c",
+      "/Users/alexy/src/unison/tests/mixed_validation/audit.py": "d7beb6b3408601074cfb8116ffd8a83e9f08af84c876824fd83ade0279fdf9bf",
+      "/Users/alexy/src/unison/tests/mixed_validation/worker.py": "b313d6cf6395148a0477992a856c3428d536a4d45b1634cc22246aca85137dbf",
+      "/Users/alexy/src/unison/tests/mixed_validation/journal_controls.py": "236e3ce4d28e340215a11d6e481b4e7b29351ebe4b19fd39860cfc537bd59b1d",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/probe": "b9842e5f8470e34b534826e73289dfbe7793e8c33446fb6bd281a258a33e1627",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/validator.py": "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/metadata.py": "464ffc45f037bc17d0a60628d7d5fd44367e304e9b74eb32a0b0982afbcfb5d7",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/private.dng": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/probe": "aa132e6fd34ee2f5615d4fd219a7f544e80580dc5e3f0e560d382a7ca71536ea",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/validator.py": "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/metadata.py": "464ffc45f037bc17d0a60628d7d5fd44367e304e9b74eb32a0b0982afbcfb5d7",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/private.dng": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/probe": "b9842e5f8470e34b534826e73289dfbe7793e8c33446fb6bd281a258a33e1627",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/validator.py": "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/metadata.py": "464ffc45f037bc17d0a60628d7d5fd44367e304e9b74eb32a0b0982afbcfb5d7",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/private.dng": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/ox/pass/probe": "aa132e6fd34ee2f5615d4fd219a7f544e80580dc5e3f0e560d382a7ca71536ea",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/ox/pass/validator.py": "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/ox/pass/metadata.py": "464ffc45f037bc17d0a60628d7d5fd44367e304e9b74eb32a0b0982afbcfb5d7",
+      "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/ox/pass/private.dng": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9"
+    },
+    "scenarios": [
+      {
+        "mode": "pass",
+        "result": {
+          "complete": true,
+          "invocations": [
+            {
+              "index": 0,
+              "outcome": {
+                "aggregate_or_parent_terminal_proved": false,
+                "capture_truncated": false,
+                "client_cleanup": {
+                  "group_cleanup_before_leader_reap": true,
+                  "hard_kill_required": false,
+                  "other_group_members_absent_before_reap": true,
+                  "pid": 99660,
+                  "reaped": true,
+                  "returncode": 0
+                },
+                "command": [
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/probe",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/validator.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/metadata.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/stock/pass/private.dng",
+                  "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+                  "synthetic-mixed-v1",
+                  "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                  "4096"
+                ],
+                "io_cpu_release_authorized": false,
+                "returncode": 0,
+                "stderr": "[external-process] External result v0 pid=99666 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\n",
+                "stdout": "MIXED_ADMISSION owner=99660 payload=2298478592 descriptors=64 transactions=1 active=true\nSDK_RESULT pid=99667 status=exit:0 outcome=completed other-members=0 truncated=false stdout-hex=554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a stderr-hex=\nMETADATA_RESULT stdout-hex=5b7b22536f7572636546696c65223a20222f7661722f666f6c646572732f39682f746477356d686b7331763538367976306a38326e3131677230303030676e2f542f756e69736f6e2d6d697865642d6a6f75726e616c2d70726f636573732d7965696f766d7a6e2f706173732f73746f636b2f706173732f707269766174652e646e67222c2022526174696e67223a20332c20224c6162656c223a2022426c7565222c202245786966546f6f6c56657273696f6e223a202273796e7468657469632d6f6e6c79227d5d\nMIXED_ADMISSION_CLOSED owner=99660 transactions=0 pending=0 payload=0 descriptors=0\nMIXED_CLOSED owner=99660 sdk-ok=true metadata-ok=true hashes-ok=true hashes=16 cpu=0 children=0 pending=0 running=0 fd-baseline=true\n",
+                "timed_out": false
+              },
+              "state": "OUTCOME"
+            },
+            {
+              "index": 1,
+              "outcome": {
+                "aggregate_or_parent_terminal_proved": false,
+                "capture_truncated": false,
+                "client_cleanup": {
+                  "group_cleanup_before_leader_reap": true,
+                  "hard_kill_required": false,
+                  "other_group_members_absent_before_reap": true,
+                  "pid": 99673,
+                  "reaped": true,
+                  "returncode": 0
+                },
+                "command": [
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/probe",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/validator.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/metadata.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/pass/ox/pass/private.dng",
+                  "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+                  "synthetic-mixed-v1",
+                  "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                  "4096"
+                ],
+                "io_cpu_release_authorized": false,
+                "returncode": 0,
+                "stderr": "[external-process] External result v0 pid=99674 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\n",
+                "stdout": "MIXED_ADMISSION owner=99673 payload=2298478592 descriptors=64 transactions=1 active=true\nSDK_RESULT pid=99675 status=exit:0 outcome=completed other-members=0 truncated=false stdout-hex=554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a stderr-hex=\nMETADATA_RESULT stdout-hex=5b7b22536f7572636546696c65223a20222f7661722f666f6c646572732f39682f746477356d686b7331763538367976306a38326e3131677230303030676e2f542f756e69736f6e2d6d697865642d6a6f75726e616c2d70726f636573732d7965696f766d7a6e2f706173732f6f782f706173732f707269766174652e646e67222c2022526174696e67223a20332c20224c6162656c223a2022426c7565222c202245786966546f6f6c56657273696f6e223a202273796e7468657469632d6f6e6c79227d5d\nMIXED_ADMISSION_CLOSED owner=99673 transactions=0 pending=0 payload=0 descriptors=0\nMIXED_CLOSED owner=99673 sdk-ok=true metadata-ok=true hashes-ok=true hashes=16 cpu=0 children=0 pending=0 running=0 fd-baseline=true\n",
+                "timed_out": false
+              },
+              "state": "OUTCOME"
+            }
+          ],
+          "phase": "FINISHED",
+          "schema": "unison-mixed-validation-worker/1"
+        },
+        "audit": {
+          "functional_status": "PASSED",
+          "attempted_probes": 2,
+          "sdk_helpers_settled": 2,
+          "metadata_helpers_settled": 2,
+          "case_audits": [
+            {
+              "functional_status": "PASSED",
+              "sdk_accepted": true,
+              "metadata_accepted": true,
+              "metadata_fields_verified": true,
+              "sdk_helper_pid": 99667,
+              "metadata_helper_pid": 99666,
+              "sdk_report": {
+                "candidate-sha256": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                "candidate-size": "4096",
+                "driver-build": "synthetic-mixed-v1",
+                "structure": "valid",
+                "decode": "success",
+                "raw-digest": "valid",
+                "errors": "0",
+                "warnings": "0"
+              },
+              "sdk_protocol_finding": null,
+              "metadata_protocol_finding": null,
+              "sdk_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a",
+              "sdk_stderr_hex": "",
+              "worker_hashes_reported": 16,
+              "known_helper_settlements": 2,
+              "independent_helper_ledger_bound": false,
+              "backend_envelope_accounted": true,
+              "backend_payload_bytes": 2298478592,
+              "backend_descriptor_credits": 64,
+              "owning_tool_terminal_proved": false,
+              "worker_bytes_rehashed": false,
+              "resource_release_authorized": false,
+              "producer_authenticated": false,
+              "scope": "Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations."
+            },
+            {
+              "functional_status": "PASSED",
+              "sdk_accepted": true,
+              "metadata_accepted": true,
+              "metadata_fields_verified": true,
+              "sdk_helper_pid": 99675,
+              "metadata_helper_pid": 99674,
+              "sdk_report": {
+                "candidate-sha256": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                "candidate-size": "4096",
+                "driver-build": "synthetic-mixed-v1",
+                "structure": "valid",
+                "decode": "success",
+                "raw-digest": "valid",
+                "errors": "0",
+                "warnings": "0"
+              },
+              "sdk_protocol_finding": null,
+              "metadata_protocol_finding": null,
+              "sdk_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320300a7761726e696e677320300a454e440a",
+              "sdk_stderr_hex": "",
+              "worker_hashes_reported": 16,
+              "known_helper_settlements": 2,
+              "independent_helper_ledger_bound": false,
+              "backend_envelope_accounted": true,
+              "backend_payload_bytes": 2298478592,
+              "backend_descriptor_credits": 64,
+              "owning_tool_terminal_proved": false,
+              "worker_bytes_rehashed": false,
+              "resource_release_authorized": false,
+              "producer_authenticated": false,
+              "scope": "Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations."
+            }
+          ],
+          "resource_release_authorized": false,
+          "aggregate_parent_fd_closure_proved": false
+        },
+        "failure": null
+      },
+      {
+        "mode": "sdk-error",
+        "result": {
+          "complete": false,
+          "failure": "ValueError('mixed probe functional failure; successor not started')",
+          "invocations": [
+            {
+              "index": 0,
+              "outcome": {
+                "aggregate_or_parent_terminal_proved": false,
+                "capture_truncated": false,
+                "client_cleanup": {
+                  "group_cleanup_before_leader_reap": true,
+                  "hard_kill_required": false,
+                  "other_group_members_absent_before_reap": true,
+                  "pid": 99678,
+                  "reaped": true,
+                  "returncode": 0
+                },
+                "command": [
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/probe",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/validator.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/metadata.py",
+                  "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-mixed-journal-process-yeiovmzn/sdk-error/stock/sdk-error/private.dng",
+                  "55c3281de7c93ccc93db4560ca0117b075351cef173108498928c3794457db1a",
+                  "synthetic-mixed-v1",
+                  "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                  "4096"
+                ],
+                "io_cpu_release_authorized": false,
+                "returncode": 0,
+                "stderr": "[external-process] External result v0 pid=99679 status=exit:0 outcome=completed cpu-weight=1 other-members=0 capture-truncated=false\n",
+                "stdout": "MIXED_ADMISSION owner=99678 payload=2298478592 descriptors=64 transactions=1 active=true\nSDK_RESULT pid=99680 status=exit:0 outcome=completed other-members=0 truncated=false stdout-hex=554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320310a7761726e696e677320300a454e440a stderr-hex=\nMETADATA_RESULT stdout-hex=5b7b22536f7572636546696c65223a20222f7661722f666f6c646572732f39682f746477356d686b7331763538367976306a38326e3131677230303030676e2f542f756e69736f6e2d6d697865642d6a6f75726e616c2d70726f636573732d7965696f766d7a6e2f73646b2d6572726f722f73746f636b2f73646b2d6572726f722f707269766174652e646e67222c2022526174696e67223a20332c20224c6162656c223a2022426c7565222c202245786966546f6f6c56657273696f6e223a202273796e7468657469632d6f6e6c79227d5d\nMIXED_ADMISSION_CLOSED owner=99678 transactions=0 pending=0 payload=0 descriptors=0\nMIXED_CLOSED owner=99678 sdk-ok=false metadata-ok=true hashes-ok=true hashes=16 cpu=0 children=0 pending=0 running=0 fd-baseline=true\n",
+                "timed_out": false
+              },
+              "state": "OUTCOME"
+            }
+          ],
+          "phase": "CALL_MAY_HAVE_STARTED",
+          "schema": "unison-mixed-validation-worker/1"
+        },
+        "audit": {
+          "functional_status": "FAILED",
+          "attempted_probes": 1,
+          "sdk_helpers_settled": 1,
+          "metadata_helpers_settled": 1,
+          "case_audits": [
+            {
+              "functional_status": "FAILED",
+              "sdk_accepted": false,
+              "metadata_accepted": true,
+              "metadata_fields_verified": true,
+              "sdk_helper_pid": 99680,
+              "metadata_helper_pid": 99679,
+              "sdk_report": {
+                "candidate-sha256": "df43203f15bc78c2a195ea4b8b10b9f499544bd0bcec9dabcac4a4ce138061e9",
+                "candidate-size": "4096",
+                "driver-build": "synthetic-mixed-v1",
+                "structure": "valid",
+                "decode": "success",
+                "raw-digest": "valid",
+                "errors": "1",
+                "warnings": "0"
+              },
+              "sdk_protocol_finding": null,
+              "metadata_protocol_finding": null,
+              "sdk_stdout_hex": "554e49534f4e2d444e472d56414c49444154494f4e20310a63616e6469646174652d73686132353620646634333230336631356263373863326131393565613462386231306239663439393534346264306263656339646162636163346134636531333830363165390a63616e6469646174652d73697a6520343039360a6472697665722d6275696c642073796e7468657469632d6d697865642d76310a7374727563747572652076616c69640a6465636f646520737563636573730a7261772d6469676573742076616c69640a6572726f727320310a7761726e696e677320300a454e440a",
+              "sdk_stderr_hex": "",
+              "worker_hashes_reported": 16,
+              "known_helper_settlements": 2,
+              "independent_helper_ledger_bound": false,
+              "backend_envelope_accounted": true,
+              "backend_payload_bytes": 2298478592,
+              "backend_descriptor_credits": 64,
+              "owning_tool_terminal_proved": false,
+              "worker_bytes_rehashed": false,
+              "resource_release_authorized": false,
+              "producer_authenticated": false,
+              "scope": "Saved task/counter audit only; actual parent terminal, input/tool pins, FD ownership and byte fences remain caller obligations."
+            }
+          ],
+          "resource_release_authorized": false,
+          "aggregate_parent_fd_closure_proved": false
+        },
+        "failure": "ValueError('mixed probe functional failure; successor not started')"
+      }
+    ]
+  },
+  "cpu_closed": true,
+  "owning_tool_terminal": {
+    "session_id": 55301,
+    "chunk_id": "4d83d1",
+    "exit_code": 0,
+    "no_running_session": true
+  }
+}

@@ -6,7 +6,7 @@
 (library
  (name unison_lib)
  (wrapped false)
- (modules :standard \ linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools semantic_mode_filter compat_digest)
+ (modules :standard \ linktext linkgtk3 uigtk3 pixmaps uimacbridge test make_tools semantic_mode_filter semantic_hash_config compat_digest)
  (modules_without_implementation ui)
  (flags :standard
         -open Compat_digest
@@ -16,17 +16,31 @@
  (preprocess
   (per_module
    ((action (run %{exe:semantic_mode_filter.exe} %{ocaml_version} %{input-file}))
-    SemanticHash SemanticFile SemanticMailbox
-    FormatRecognition DngRecognition FormatExtension XmpObservation XmpMerge DngSemantic DngExtended JpegSemantic SemanticDelta SemanticWorkers SemanticFormats)))
- (preprocessor_deps semanticHash.ox.mli.in semanticFile.ox.mli.in semanticMailbox.ox.mli.in
-  formatRecognition.ox.mli.in dngRecognition.ox.mli.in formatExtension.ox.mli.in xmpObservation.ox.mli.in xmpMerge.ox.mli.in dngSemantic.ox.mli.in dngExtended.ox.mli.in jpegSemantic.ox.mli.in semanticDelta.ox.mli.in semanticFormats.ox.mli.in)
+    SemanticHash SemanticFile ComponentHash SemanticMailbox WholeFileClone ValidationSnapshot
+    FormatRecognition DngRecognition FormatExtension XmpObservation XmpMerge DngSemantic DngExtended DngLayout DngComponents JpegSemantic SemanticDelta SemanticWorkers SemanticFormats)))
+ (preprocessor_deps wholeFileClone.ox.mli.in validationSnapshot.ox.mli.in componentHash.ox.mli.in semanticHash.ox.mli.in semanticFile.ox.mli.in semanticMailbox.ox.mli.in
+  formatRecognition.ox.mli.in dngRecognition.ox.mli.in formatExtension.ox.mli.in xmpObservation.ox.mli.in xmpMerge.ox.mli.in dngSemantic.ox.mli.in dngExtended.ox.mli.in dngLayout.ox.mli.in dngComponents.ox.mli.in jpegSemantic.ox.mli.in semanticDelta.ox.mli.in semanticFormats.ox.mli.in)
  (foreign_stubs
   (language c)
+  (flags :standard (:include semantic_hash_cflags.sexp))
   (names bytearray_stubs osxsupport pty hash_compat props_xattr props_acl copy_stubs nativeCopyRange_stubs wholeFileClone_stubs fileObservation_stubs stagePublication_stubs finalPublication_stubs helperSupervisor_stubs semanticHash_stubs semanticFile_stubs))
- (c_library_flags -lutil)
+ (c_library_flags -lutil (:include semantic_hash_libs.sexp))
  (libraries compat str unix lwt_lib bigarray))
 
 (include_subdirs unqualified)
+
+(executable
+ (name semantic_hash_config)
+ (modules semantic_hash_config))
+
+(rule
+ (targets semantic_hash_cflags.sexp semantic_hash_libs.sexp)
+ (action
+  (run %{exe:semantic_hash_config.exe}
+       %{env:SEMANTIC_HASH_BACKEND=platform}
+       %{env:SEMANTIC_OPENSSL_INCLUDE=}
+       %{env:SEMANTIC_OPENSSL_LIB=}
+       semantic_hash_cflags.sexp semantic_hash_libs.sexp)))
 
 ; Test registers Uicommon.testFunction during initialization. Force only this
 ; archive into the CLI; global -linkall would also link Windows-only modules.

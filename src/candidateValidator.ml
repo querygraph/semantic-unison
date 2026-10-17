@@ -4,6 +4,7 @@ type context = {
   cancellation : HelperSupervisor.cancellation;
   cpu_budget : int;
   candidate : string;
+  destination : string;
   expected : snapshot;
   resources : BackendResources.t;
   inspect : string -> snapshot Lwt.t;

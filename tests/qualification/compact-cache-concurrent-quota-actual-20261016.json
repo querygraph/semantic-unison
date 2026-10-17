@@ -1,0 +1,119 @@
+{
+  "scope": "Disposable original merge-base storage fixtures and two real quota contenders; zero SDK/Photo/retained payload/canonicalEXIO; CPU8 serial compilation",
+  "rows": [
+    {
+      "label": "stock",
+      "build_receipt": {
+        "path": "/private/tmp/unison-validation-live-full-stock-20261016a/RESULT.json",
+        "sha256": "e046e0854ade0adad2fb88cb4350f2d7c610aac0a77166f136f5f7e83c4c8807"
+      },
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/semantic_base_cache/storage.py",
+          "--compiler",
+          "/Users/alexy/.opam/default/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rm7wj0u5",
+          "--report",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-cache-concurrent-controls-c7t3lrt6/stock.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "Workspace: /private/tmp/unison-cache-storage-jxreyb3w\nPASS checksum\nPASS truncated\nPASS oversized\nPASS permissive\nPASS hardlink\nPASS symlink\nPASS global quota/idempotence/corruption/range/trust/missing-ledger/real process lock/legacy fallback\nPASS private storage trust/capacity/idempotence and repeated descriptor settlement\nPASS concurrent process quota reservation preserves exactly one remaining entry\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 86261,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "workspace": "/private/tmp/unison-cache-storage-jxreyb3w",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-rm7wj0u5",
+        "cases": 29,
+        "baseline_cases": 16,
+        "quota_cases": 13,
+        "compiler_version": "5.2.0",
+        "probe_source_sha256": "62c3c629e1e3db03469e38f40205437c0feb05ce402457fad647a73ff1c06462",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+        "binary_sha256": "dd1233abcdd28de5bc704ac4f86e16a70eb055ecb05b193c93d8debee9dd6309"
+      }
+    },
+    {
+      "label": "ox",
+      "build_receipt": {
+        "path": "/private/tmp/unison-validation-live-full-ox-20261016a/RESULT.json",
+        "sha256": "8379ebcad4bb18c10e330ada820ad17924f45148c4517380313180ce810668aa"
+      },
+      "outcome": {
+        "command": [
+          "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+          "-B",
+          "tests/semantic_base_cache/storage.py",
+          "--compiler",
+          "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+          "--build",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ma367lji",
+          "--report",
+          "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-cache-concurrent-controls-c7t3lrt6/ox.json"
+        ],
+        "returncode": 0,
+        "timed_out": false,
+        "capture_truncated": false,
+        "stdout": "Workspace: /private/tmp/unison-cache-storage-ldk5ckuo\nPASS checksum\nPASS truncated\nPASS oversized\nPASS permissive\nPASS hardlink\nPASS symlink\nPASS global quota/idempotence/corruption/range/trust/missing-ledger/real process lock/legacy fallback\nPASS private storage trust/capacity/idempotence and repeated descriptor settlement\nPASS concurrent process quota reservation preserves exactly one remaining entry\n",
+        "stderr": "",
+        "client_cleanup": {
+          "pid": 86284,
+          "returncode": 0,
+          "reaped": true,
+          "hard_kill_required": false,
+          "other_group_members_absent_before_reap": true,
+          "group_cleanup_before_leader_reap": true
+        },
+        "aggregate_or_parent_terminal_proved": false,
+        "io_cpu_release_authorized": false
+      },
+      "report": {
+        "workspace": "/private/tmp/unison-cache-storage-ldk5ckuo",
+        "build": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-ma367lji",
+        "cases": 29,
+        "baseline_cases": 16,
+        "quota_cases": 13,
+        "compiler_version": "5.2.0+ox",
+        "probe_source_sha256": "62c3c629e1e3db03469e38f40205437c0feb05ce402457fad647a73ff1c06462",
+        "scope": "actual native cache objects; finite private storage trust/capacity/FD controls; no SDK",
+        "source_sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+        "binary_sha256": "bb7667552617b6534061bbec703ac95694e1dc6d0825c12dc85365cff2382bb7"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "sources": {
+    "tests/semantic_base_cache/storage.ml": "62c3c629e1e3db03469e38f40205437c0feb05ce402457fad647a73ff1c06462",
+    "tests/semantic_base_cache/storage.py": "dc0bbedf47efc0bfee54abe8945f5415d2a2dde44cf748a4d6c7fe05253249ee",
+    "src/semanticMergeCache.ml": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+    "src/semanticMergeCache.mli": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+  },
+  "owning_tool_terminal": {
+    "session_id": 5065,
+    "initial_chunk": "3f9a65",
+    "terminal_chunk": "365df7",
+    "exit_code": 0,
+    "running_session_returned": false,
+    "provenance": "Faithful actual write_stdin terminal transcription; child/group proofs are separate"
+  },
+  "limitations": [
+    "Two cooperative forked owners released by one pipe; OS execution order is not forced or a race-detector result.",
+    "Refused contender may observe busy lock, changed quota epoch or exhausted quota; no exact rejection-path distribution claimed.",
+    "Existing original recovery base and exactly one newly loadable base/charge checked; not power-loss, hostile same-UID writer or physical capacity proof."
+  ]
+}

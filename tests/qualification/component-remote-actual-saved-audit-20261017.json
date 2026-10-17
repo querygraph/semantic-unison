@@ -1,0 +1,128 @@
+{
+  "state": "ACTUAL_RPC_FAILED_FINAL_AUDITOR_RESOURCES_CLOSED_SAVED_RECEIPTS_FUNCTIONALLY_VERIFIED",
+  "original_actual_parent_terminal": {
+    "session": 91491,
+    "initial_chunk": "ae2602",
+    "terminal_chunk": "7ec39a",
+    "exit_code": 1,
+    "no_session": true
+  },
+  "original_owner_return": {
+    "path": "/private/tmp/u-cr-cf119542138e/OWNER-RETURN.json",
+    "bytes": 8264,
+    "sha256": "088ef9fbc7a02d52f4f1ce2f9163c6373757d5f1f4c5b7ec2733f4f07ea9aefd"
+  },
+  "original_terminal": {
+    "path": "/private/tmp/u-cr-cf119542138e/OWNER-TERMINAL.json",
+    "bytes": 328,
+    "sha256": "77c5f4c468b27aa46df2a3f58137204d2211eee03d4c5c6f9871c0af3595fe3f"
+  },
+  "original_result": {
+    "path": "/private/tmp/u-cr-cf119542138e/WORKER-RESULT.json",
+    "bytes": 44363,
+    "sha256": "2e0004ab16bcf7fab64c995011656ef43c26c5e5eee1fa460e54727a0dd4df8e"
+  },
+  "aggregate": {
+    "path": "/private/tmp/u-cr-cf119542138e/AGGREGATE-CLOSED.json",
+    "bytes": 1907,
+    "sha256": "c25a6064cfaeb1aebe9599da63d491040243e5b960c98e22493d727919a32a7f"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-component-remote-admission-v1.json",
+    "bytes": 1432,
+    "sha256": "53a522544f59b3e57ae250526200774f4ab752f8b032137b7018b6a250921c41"
+  },
+  "request": {
+    "path": "doc/component-remote-request-v1.json",
+    "bytes": 2531,
+    "sha256": "d0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49"
+  },
+  "plan": {
+    "path": "doc/component-remote-plan-v1.json",
+    "bytes": 44341,
+    "sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad"
+  },
+  "saved_audit": {
+    "path": "/private/tmp/u-cr-cf119542138e/SAVED-AUDIT-V2.json",
+    "bytes": 3472,
+    "sha256": "d6d94f4cc0c98970ced63d17063086873101811527efd7568fa1e7cb4c0198b8"
+  },
+  "saved_audit_actual_terminal": {
+    "chunk": "e27a2d",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "original_controls_terminal": {
+    "session": 90276,
+    "chunk": "474f52",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "original_control_methods": 6,
+  "original_negative_producer_schema_variants": 13,
+  "original_failed_reason": "KeyError('cancel_reason')",
+  "attempted_RPC_calls": 8,
+  "all_actual_probe_commands_returned_zero": true,
+  "strict_raw_call_and_group_settlement_count": 8,
+  "actual_worker_exit": 1,
+  "worker_reaped_and_other_group_members_absent": true,
+  "canonical_CPU8_and_EXIO_closed": true,
+  "unresolved": [],
+  "frozen_execution_sources_verified": 342,
+  "auxiliary_sources": [
+    {
+      "path": "/Users/alexy/src/unison/tests/component_remote/saved_functional.py",
+      "bytes": 5663,
+      "sha256": "37265c9a62a6021be88736ac5ee5dfdc64b5670d7575b25823863dc5b84a0e2a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/component_remote/saved_functional_controls.py",
+      "bytes": 6601,
+      "sha256": "2f2fa24f39ea2f36ef4bd4ae6427a77af7bc1b930ba3eb0c01a523d17aa6c4fe"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/component_remote/saved_actual.py",
+      "bytes": 3889,
+      "sha256": "73ff3667b29e941ff0ad552b0443070c4b2849a5f3dea827eebb24cb093dd637"
+    }
+  ],
+  "auxiliary_steps": [
+    {
+      "label": "controls",
+      "closure": {
+        "path": "/private/tmp/unison-component-saved-audit-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "72cba174641380aaad62595283ec286d8053443b20b165a0c840e229c6fc8a7f"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-component-saved-audit-controls-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-component-saved-audit-controls-20261017-001/SHARED-STDERR.txt",
+        "bytes": 104,
+        "sha256": "ceb1e92f6d57efcb897c8a3c2fc81fd145304212479ef444c6e6d1dce482f242"
+      }
+    },
+    {
+      "label": "actual",
+      "closure": {
+        "path": "/private/tmp/unison-component-saved-actual-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "9173c5a47bc71f7833a2fd5eff897c204bb246189da2d0435530439b4f55e230"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-component-saved-actual-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 51,
+        "sha256": "7a0fdec576dd126aeb94190f160947967b1941a0aca01ee785d55218b44e029f"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-component-saved-actual-20261017-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    }
+  ],
+  "scope": "Four new stock/Ox supported pairs, two retained old-peer refusals, unsupported parser and disabled preference generated cases. Exact producer-shape saved audit, source-bound in-run before/after hashes plus expected fixture hashes recomputed in memory and current sixteen lstat fences. No new generated-payload hash/read, retry, transport/SDK/media/receiving, rendering/persistence or resource-release authority. Original complete=false/exit1 bytes remain unchanged; independent Root adoption pending at write."
+}

@@ -122,3 +122,17 @@ SDB record and SHA-256 of all preceding bytes. The key hashes unambiguous
 decimal-length-prefixed fields: SBC/0, local root, logical path, legacy full
 fingerprint string, scalar policy and parser=1. Owner provenance checks and the
 current previous-common archive are required in addition to either checksum.
+
+The [current concurrent quota qualification](../tests/qualification/compact-cache-concurrent-quota-actual-20261016.json)
+adds two cooperative processes attempting distinct keys with one reservation
+remaining. Stock and Ox both preserve exactly one new readable base, an exact
+two-record ledger charge, and the original recovery base. Both children are
+waited, and containing process groups/CPU8 close. Schedule order is uncontrolled;
+this strengthens cooperative quota accounting evidence without establishing
+crash durability, hostile-writer safety or physical space bounds.
+
+Every incomplete ledger prefix0..78 is now covered by
+[stock/Ox recovery controls](../tests/qualification/compact-cache-torn-ledger-actual-20261016.json).
+Over surviving records, even the empty prefix refuses new capture without
+repairing/resetting the ledger or losing the readable base. This tests recovery
+refusal on supplied interrupted states, not actual crash/fsync durability.

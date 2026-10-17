@@ -31,6 +31,34 @@ let main () =
   check (first==runtime.R.supervisor) "worker runtime created a second helper CPU budget";
   Fun.protect ~finally:(fun () -> Abort.reset (); ignore (Lwt_unix.run (W.shutdown runtime.R.pool))) (fun () ->
     begin match case with
+    | "observed" ->
+        Prefs.loadStrings ["debug=external-process"];
+        let status,_=Lwt_unix.run(call "echo" ["private argument not logged"]) in
+        check(status=Unix.WEXITED 0) "observed helper changed exit policy"
+    | "exiftool-readonly" ->
+        Prefs.loadStrings ["debug=external-process"];
+        let path=Filename.concat(Sys.getcwd()) "private.xmp" in
+        let packet="<rdf:RDF xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:xmp=\"http://ns.adobe.com/xap/1.0/\"><rdf:Description rdf:about=\"\" xmp:Rating=\"3\" xmp:Label=\"Blue\"/></rdf:RDF>" in
+        write path packet;
+        let stamp ()=let s=Unix.LargeFile.lstat path in
+          s.Unix.LargeFile.st_dev,s.st_ino,s.st_kind,s.st_size,s.st_mtime,s.st_ctime,s.st_perm,s.st_nlink in
+        let before=stamp() in
+        let args=[|helper;"-config";"";"-j";"-s";"-XMP:Rating";"-XMP:Label";"-ExifToolVersion";"--";path|] in
+        let running=S.runExternalProgramArgs helper args in
+        let file=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+        Fun.protect ~finally:(fun () -> Unix.close file) (fun () ->
+          let jobs=List.init 16(fun _ -> W.digest runtime.pool (H.cancellation()) file) in
+          let expected=SemanticHash.string packet in
+          List.iter(fun job -> match Lwt_unix.run job with
+            | Some value -> check(value.W.digest=expected) "ExifTool mixed hash differs"
+            | None -> failwith "ExifTool mixed hash cancelled") jobs;
+          let status,log=Lwt_unix.run running in
+          check(status=Unix.WEXITED 0) "ExifTool readonly request failed";
+          check(has log "\"Rating\": 3" && has log "\"Label\": \"Blue\"" && has log "\"ExifToolVersion\":")
+            "ExifTool returned unexpected metadata";
+          check(stamp()=before && read path=packet) "ExifTool changed private source";
+          check((W.usage runtime.pool).peak_running<=2) "ExifTool mixed worker budget exceeded";
+          Printf.printf "EXIFTOOL_REPORT %s\n%!" log)
     | "argv" ->
         let status,log=Lwt_unix.run (call "echo" ["a b";"quote'\"$(`literal`)";"雪";"-option"]) in
         check (status=Unix.WEXITED 0) "argv helper status";

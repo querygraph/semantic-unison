@@ -1,0 +1,120 @@
+{
+  "schema": "unison-hash-backend-source-audit/1",
+  "scope": "Source and historical receipt rebind only; no new hash runtime/compiler/media/SDK execution",
+  "historical_receipt": {
+    "path": "/Users/alexy/src/unison/tests/checked_hash/qualification.json",
+    "bytes": 28724,
+    "sha256": "d602bd46ef54108354d09778af1288c77d2f252c3cdf71fa2c62672bda8a2d69"
+  },
+  "participants": [
+    {
+      "label": "stock",
+      "compiler": {
+        "path": "/usr/local/bin/ocamlopt",
+        "version": "5.5.1",
+        "sha256": "865c444e6dc7e69e6da49e9bb46f13fc3aba73206c1d3c0d9d1602c5b0a981c1"
+      },
+      "historical_status": "passed",
+      "all_recorded_sources_match": true,
+      "source_bindings": [
+        {
+          "path": "src/semanticHash.ml",
+          "recorded": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "current": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash.mli",
+          "recorded": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "current": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash.ox.mli.in",
+          "recorded": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "current": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash_stubs.c",
+          "recorded": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "current": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "matches": true
+        },
+        {
+          "path": "tests/checked_hash/test.ml",
+          "recorded": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+          "current": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+          "matches": true
+        },
+        {
+          "path": "tests/checked_hash/run.py",
+          "recorded": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64",
+          "current": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64",
+          "matches": true
+        }
+      ],
+      "modes": [
+        "native",
+        "forced-reference"
+      ]
+    },
+    {
+      "label": "ox",
+      "compiler": {
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+        "version": "5.2.0+ox",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "historical_status": "passed",
+      "all_recorded_sources_match": true,
+      "source_bindings": [
+        {
+          "path": "src/semanticHash.ml",
+          "recorded": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "current": "919dd8e37a5813b222814f3bc07cf15f5de9aff2b6a208df809714775b3b4b33",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash.mli",
+          "recorded": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "current": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash.ox.mli.in",
+          "recorded": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "current": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+          "matches": true
+        },
+        {
+          "path": "src/semanticHash_stubs.c",
+          "recorded": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "current": "8a9472a3084b5bfbc7a52190c4ee79d00547bca9e534030ba355ebd0194a1cc0",
+          "matches": true
+        },
+        {
+          "path": "tests/checked_hash/test.ml",
+          "recorded": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+          "current": "bb48ebdd66f3d918e087e80a55b78f4c1a4718137ad860589211e5dc84774977",
+          "matches": true
+        },
+        {
+          "path": "tests/checked_hash/run.py",
+          "recorded": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64",
+          "current": "2df0139fe73092d6f2fb79df683ca1961c7169e82cae11151074e1218dc78a64",
+          "matches": true
+        }
+      ],
+      "modes": [
+        "native",
+        "forced-reference"
+      ]
+    }
+  ],
+  "current_backend": "CommonCrypto on __APPLE__; portable reference fallback elsewhere",
+  "maintained_platform_backend_source_present": true,
+  "portable_fallback_is_external_maintained_library": false,
+  "nist_validation_or_independent_crypto_audit_claimed": false,
+  "all_platforms_qualified": false
+}

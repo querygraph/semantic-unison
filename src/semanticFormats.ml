@@ -1,8 +1,8 @@
 (* Policy, registry mutation and feature negotiation belong to the owner.
    Workers receive only the selected immutable extension handle. *)
 let known = ref []
-let register ?capability ?max_payload ?suffixes ?observer extension =
-  FormatExtension.register ?capability ?max_payload ?suffixes ?observer extension;
+let register ?capability ?max_payload ?suffixes ?observer ?span_semantics extension =
+  FormatExtension.register ?capability ?max_payload ?suffixes ?observer ?span_semantics extension;
   let module E = (val extension : FormatExtension.S) in
   let handle = match FormatExtension.resolve E.profile with Some h -> h | None -> assert false in
   let capability = FormatExtension.capability handle in
@@ -12,12 +12,14 @@ let register ?capability ?max_payload ?suffixes ?observer extension =
   known := !known @ [handle,feature]
 
 let () =
-  register ~capability:"dng-xmp-v1" ~max_payload:FormatExtension.max_region
+  register ~span_semantics:FormatExtension.Known_metadata ~capability:"dng-xmp-v1" ~max_payload:FormatExtension.max_region
     ~suffixes:[".dng"] ~observer:DngExtended.observer (module DngExtended);
-  register ~capability:"dng-xmp-v0" ~max_payload:FormatExtension.max_region
+  register ~span_semantics:FormatExtension.Known_metadata ~capability:"dng-xmp-v0" ~max_payload:FormatExtension.max_region
     ~suffixes:[".dng"] ~observer:DngSemantic.observer (module DngSemantic);
-  register ~capability:"jpeg-xmp-v0" ~max_payload:65504
-    ~suffixes:[".jpg";".jpeg"] (module JpegSemantic)
+  register ~span_semantics:FormatExtension.Known_metadata ~capability:"jpeg-xmp-v0" ~max_payload:65504
+    ~suffixes:[".jpg";".jpeg"] (module JpegSemantic);
+  register ~span_semantics:FormatExtension.Opaque_spans ~capability:"dng-layout-exact-v0"
+    ~max_payload:FormatExtension.max_region ~suffixes:[".dng"] (module DngLayout)
 
 let validate_selected profiles =
   List.iter (fun profile ->
@@ -28,8 +30,8 @@ let dng_enabled = Prefs.createBool "semanticdng" false ~local:true
   ~send_value:(fun _ -> false)
   ~category:(`Advanced `General)
   "use experimental exact DNG metadata transfer"
-  "Enable both built-in DNG XMP profile versions, preferring the extended \
-   profile when negotiated. All transfers preserve exact bytes and full verification."
+  "Enable the built-in DNG profiles, preferring strict XMP interpretation \
+   before the layout-only exact-byte fallback when negotiated. All transfers preserve exact bytes and full verification."
 
 let outgoing_selected profiles =
   validate_selected profiles;
@@ -40,7 +42,7 @@ let outgoing_selected profiles =
   let profiles = if Prefs.read dng_enabled then
       List.fold_right (fun profile profiles ->
         if List.mem profile profiles then profiles else profile :: profiles)
-        [DngExtended.profile; DngSemantic.profile] profiles
+        [DngExtended.profile; DngSemantic.profile; DngLayout.profile] profiles
     else profiles in
   List.filter (fun profile -> List.exists (fun (h,feature) ->
     FormatExtension.profile h = profile && Features.enabled feature) !known)
@@ -62,7 +64,7 @@ let local_enabled () =
   List.filter_map (fun (handle,_) ->
     let profile = FormatExtension.profile handle in
     if List.mem profile profiles ||
-       ((profile = DngExtended.profile || profile = DngSemantic.profile) &&
+       ((profile = DngExtended.profile || profile = DngSemantic.profile || profile = DngLayout.profile) &&
         Prefs.read dng_enabled)
     then Some handle else None) !known
 let peer_enabled () =

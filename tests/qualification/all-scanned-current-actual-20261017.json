@@ -1,0 +1,184 @@
+{
+  "schema": "unison-all-scanned-current-qualification/1",
+  "current_phases": [
+    {
+      "path": "tests/qualification/validation-scope-v2-case-1-actual-20261017.json",
+      "bytes": 215584,
+      "sha256": "a3d1bc4da4a69697490c3bd7a76c91d0fb6cb9a10ca59b837dbc2a632b4b5a41"
+    },
+    {
+      "path": "tests/qualification/validation-scope-case-2-actual-20261017.json",
+      "bytes": 181265,
+      "sha256": "45ed251ad120645e9a312c838587140baf995adbb18a0243b4b1871a29adde95"
+    },
+    {
+      "path": "tests/qualification/validation-scope-case-3-actual-20261017.json",
+      "bytes": 215220,
+      "sha256": "91cf2d399f8663ae789cad0a97ae580ee0c8f09c2513c045e671fbbcb2d91ebf"
+    }
+  ],
+  "owners": [
+    {
+      "path": "tests/qualification/validation-endpoint-actual-20261017.json",
+      "bytes": 213862,
+      "sha256": "66292ae16efaeb7a483028f7962291178c5aa184a7aaab603cae7fe51907fa18"
+    },
+    {
+      "path": "tests/qualification/validation-scope-actual-20261017.json",
+      "bytes": 2239,
+      "sha256": "6c22afec50ee0db43e5fb80f9e00d67917a603b49af9284fdea770bcc7d03f76"
+    },
+    {
+      "path": "tests/qualification/validation-scope-v2-actual-20261017.json",
+      "bytes": 1080,
+      "sha256": "03f9b748c09a18c60d6100e30e0633814be8a1ec529a836654c528625ead4c52"
+    }
+  ],
+  "builds": [
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "3a7f56630c04359134925c17a30206d8ce4c81c40b82528869ca55de517f819f"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "33e5353dd04e16437dfa2a10f201efed79ccbb126191d41511a5f7a798171b13"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "93ecf7",
+        "session_id": 10332,
+        "terminal_chunk": "2f0d34",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "8c806b679c964b1db1b6c5c5c3d4fa38af8527079f7b219b76d6e166aa63bd95"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "2cc66d8143329a4628685dc8587e9d27fb683b202dfb049ac4ceed89602d8ab0"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "ce1b79",
+        "session_id": 69945,
+        "terminal_chunk": "4132e2",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/RESULT.json",
+          "bytes": 46139,
+          "sha256": "9b01717986cdeffda7700ada152c74c4b8dc129174811b09a6501b3ba0814d43"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "94cc118a3d142631eae00da97ee34c774254abef434a53f22685d330e01a0cbd"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "2c3746",
+        "session_id": 87935,
+        "terminal_chunk": "a622a3",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "c29d0e4187ac036923f368658eddfaef7a4f03af85b528f8c7eaeb01e621beb8"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "413819f80d093cd13167aa8a0c0e32c9aba6818a5e9fd7695c279232783efe02"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "4cd0e1",
+        "session_id": 41123,
+        "terminal_chunk": "d50f21",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/RESULT.json",
+          "bytes": 46340,
+          "sha256": "c0315091e76eb8b0ca0a6cb93a66b7ae690906bc95cd7cba20045ab57cf44771"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "fad4d2cc2878ac110150ed6e9744608c04a4a344d7b5a246654937b71590e66c"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "f280a8",
+        "session_id": 59946,
+        "terminal_chunk": "7ac3db",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": true
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "20c1c2379516d0ccebf24aad64a98a492f0766066bdc26d0f10c558536444440"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "00696f874f38abb4421c348b038def0a095011ca19bc64ad777a5a6b538312ad"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "c97dd0",
+        "session_id": 54491,
+        "terminal_chunk": "c9d98a",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": true
+    }
+  ],
+  "current_production_prefix_source_checks": 1206,
+  "compiled_artifact_checks": 1944,
+  "current_compile_test_calls": 12,
+  "SDK_invoked": false,
+  "helper_subprocess_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Current Make stock/Ox local scan RPC and generated private fixtures. Endpoint v2 supersedes only endpoint v1 test phase; unchanged/scope phases retain their actual current source pins. Actual remote-process negotiation/SDK driver runtime not qualified here. Injected close faults retain two admitted loans until each disposable test process exits; not claimed as ordinary in-process retirement."
+}

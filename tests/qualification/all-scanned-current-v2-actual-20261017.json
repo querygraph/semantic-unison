@@ -1,0 +1,268 @@
+{
+  "schema": "unison-all-scanned-current-qualification/2",
+  "current_phases": [
+    {
+      "path": "tests/qualification/validation-scope-v2-case-1-actual-20261017.json",
+      "bytes": 215584,
+      "sha256": "a3d1bc4da4a69697490c3bd7a76c91d0fb6cb9a10ca59b837dbc2a632b4b5a41"
+    },
+    {
+      "path": "tests/qualification/validation-scope-case-2-actual-20261017.json",
+      "bytes": 181265,
+      "sha256": "45ed251ad120645e9a312c838587140baf995adbb18a0243b4b1871a29adde95"
+    },
+    {
+      "path": "tests/qualification/validation-scope-v3-case-1-actual-20261017.json",
+      "bytes": 221616,
+      "sha256": "3ed541fe5d091af12c87e9f8efc4e35e903f6c598fe0c55832fe4bc7bcbcb36e"
+    }
+  ],
+  "owners": [
+    {
+      "path": "tests/qualification/validation-scope-v2-actual-20261017.json",
+      "bytes": 1080,
+      "sha256": "03f9b748c09a18c60d6100e30e0633814be8a1ec529a836654c528625ead4c52"
+    },
+    {
+      "path": "tests/qualification/validation-scope-actual-20261017.json",
+      "bytes": 2239,
+      "sha256": "6c22afec50ee0db43e5fb80f9e00d67917a603b49af9284fdea770bcc7d03f76"
+    },
+    {
+      "path": "tests/qualification/validation-scope-v3-actual-20261017.json",
+      "bytes": 1106,
+      "sha256": "6c60520938be2d133fc3c33af84d92e92d66d54b921a1c0fc7749be7771cc66e"
+    }
+  ],
+  "predecessor": {
+    "path": "tests/qualification/all-scanned-current-actual-20261017.json",
+    "bytes": 6771,
+    "sha256": "19f801195b9424e192f2f60e7b11f3c01f18c033fbe4a84035a476c9180b4949"
+  },
+  "builds": [
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "3a7f56630c04359134925c17a30206d8ce4c81c40b82528869ca55de517f819f"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "33e5353dd04e16437dfa2a10f201efed79ccbb126191d41511a5f7a798171b13"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "93ecf7",
+        "session_id": 10332,
+        "terminal_chunk": "2f0d34",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "8c806b679c964b1db1b6c5c5c3d4fa38af8527079f7b219b76d6e166aa63bd95"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "2cc66d8143329a4628685dc8587e9d27fb683b202dfb049ac4ceed89602d8ab0"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "ce1b79",
+        "session_id": 69945,
+        "terminal_chunk": "4132e2",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-endpoint-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/RESULT.json",
+          "bytes": 46139,
+          "sha256": "9b01717986cdeffda7700ada152c74c4b8dc129174811b09a6501b3ba0814d43"
+        },
+        {
+          "path": "/private/tmp/unison-validation-endpoint-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "94cc118a3d142631eae00da97ee34c774254abef434a53f22685d330e01a0cbd"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "2c3746",
+        "session_id": 87935,
+        "terminal_chunk": "a622a3",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-stock-001-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/RESULT.json",
+          "bytes": 46133,
+          "sha256": "c29d0e4187ac036923f368658eddfaef7a4f03af85b528f8c7eaeb01e621beb8"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-001-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "413819f80d093cd13167aa8a0c0e32c9aba6818a5e9fd7695c279232783efe02"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "4cd0e1",
+        "session_id": 41123,
+        "terminal_chunk": "d50f21",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": false
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/RESULT.json",
+          "bytes": 46340,
+          "sha256": "c0315091e76eb8b0ca0a6cb93a66b7ae690906bc95cd7cba20045ab57cf44771"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "fad4d2cc2878ac110150ed6e9744608c04a4a344d7b5a246654937b71590e66c"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "f280a8",
+        "session_id": 59946,
+        "terminal_chunk": "7ac3db",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": true
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "20c1c2379516d0ccebf24aad64a98a492f0766066bdc26d0f10c558536444440"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "00696f874f38abb4421c348b038def0a095011ca19bc64ad777a5a6b538312ad"
+        }
+      ],
+      "actual_owner_terminal": {
+        "initial_chunk": "c97dd0",
+        "session_id": 54491,
+        "terminal_chunk": "c9d98a",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "current_production": true
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-dune-stock-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-002-20261017/RESULT.json",
+          "bytes": 46247,
+          "sha256": "3bb71ffe08038769ef40cf1edacb37282e8682ca8dc2db9a69fe72c928a81752"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "43ce466c899243ba8358c5d03cfe2a3bfd86dec1dd8e552634940651f7686dcc"
+        }
+      ],
+      "current_production": true,
+      "actual_owner_terminal": {
+        "initial_chunk": "0a3303",
+        "session_id": 62567,
+        "terminal_chunk": "c13b08",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "scope": "Dune build-only, no selftest or resulting Unison executable invocation."
+    },
+    {
+      "directory": "/private/tmp/unison-validation-scope-dune-ox-002-20261017",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-002-20261017/RESULT.json",
+          "bytes": 46251,
+          "sha256": "2ba767c1e2180332be537133850734c80f64573cf80781a323692bad3ab9ae27"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-002-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "de37193407526f240706b7ec0b7073be608c0f6414bfd920629d90ff8f381401"
+        }
+      ],
+      "current_production": true,
+      "actual_owner_terminal": {
+        "initial_chunk": "64b9ca",
+        "session_id": 26247,
+        "terminal_chunk": "614232",
+        "exit_code": 0,
+        "session_present": false
+      },
+      "scope": "Dune build-only, no selftest or resulting Unison executable invocation."
+    }
+  ],
+  "current_production_prefix_source_checks": 1208,
+  "compiled_artifact_checks": 1946,
+  "current_compile_test_calls": 14,
+  "fake_helper_readback": [
+    {
+      "label": "stock",
+      "capture": {
+        "path": "/private/tmp/unison-validation-scope-3l0a3r_8/stock/helper.calls",
+        "bytes": 434,
+        "sha256": "192dede91c15d8514b5962c9190ca7f90603a6e18142846f27a6ca586075e664"
+      },
+      "rows": [
+        "71388\tpass\td7fcd6df183a785873987004086ede07c319afd6e23f6e8414aba5f82332ad77\t16\t/private/tmp/unison-validation-scope-3l0a3r_8/stock/state/validation-scan-71380-1c9abf4c-02b1d3c1/.validation-71380-02e8c250-19086355.dng",
+        "71389\tpass\td7fcd6df183a785873987004086ede07c319afd6e23f6e8414aba5f82332ad77\t16\t/private/tmp/unison-validation-scope-3l0a3r_8/stock/state/validation-scan-71380-07563e51-0c78e52b/.validation-71380-35490577-27fffd7f.dng"
+      ],
+      "processes": 2,
+      "known_group_settlements": 2,
+      "SDK_invoked": false
+    },
+    {
+      "label": "ox",
+      "capture": {
+        "path": "/private/tmp/unison-validation-scope-3l0a3r_8/ox/helper.calls",
+        "bytes": 428,
+        "sha256": "3f9cf0fd0e0708c6ab3d92e538e18419385916c1d32a72fb01b39dd0ac96604a"
+      },
+      "rows": [
+        "71416\tpass\td7fcd6df183a785873987004086ede07c319afd6e23f6e8414aba5f82332ad77\t16\t/private/tmp/unison-validation-scope-3l0a3r_8/ox/state/validation-scan-71415-1c9abf4c-02b1d3c1/.validation-71415-02e8c250-19086355.dng",
+        "71417\tpass\td7fcd6df183a785873987004086ede07c319afd6e23f6e8414aba5f82332ad77\t16\t/private/tmp/unison-validation-scope-3l0a3r_8/ox/state/validation-scan-71415-07563e51-0c78e52b/.validation-71415-35490577-27fffd7f.dng"
+      ],
+      "processes": 2,
+      "known_group_settlements": 2,
+      "SDK_invoked": false
+    }
+  ],
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Current stock/Ox Make and Dune builds; actual local scan RPCs and four original fake protocol-driver subprocesses total, with independent tiny candidate SHA checks/group bindings. Driver raw-digest missing is synthetic, not Adobe raw verification. No actual remote-process old-peer/SDK/camera/pixel/corpus qualification. Two injected uncertain descriptor carriers/loans per endpoint control retained until disposable process exit; not ordinary in-process retirement."
+}

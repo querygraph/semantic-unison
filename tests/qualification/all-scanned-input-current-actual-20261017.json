@@ -1,0 +1,370 @@
+{
+  "schema": "unison-all-scanned-input-current/1",
+  "build_owner_actual_terminal": {
+    "session": 21013,
+    "chunk_id": "826fd9",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "control_owner_actual_terminal": {
+    "session": 29114,
+    "chunk_id": "f94d20",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "closure": {
+        "child": {
+          "pid": 96369,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 96369,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-007-20261017/RESULT.json",
+          "bytes": 46441,
+          "sha256": "5531a1ff5f96b3806e9bdac51e537ff05596bb61b1ac5c440938d2ba4fbd2c6a"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-007-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "a7c68324d4feddde246f4ca61b6b34e5ae4c0e44fe4660e3ec8b3ceb0268d65f"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-stock-007-20261017/SHARED-START.json",
+          "bytes": 1278,
+          "sha256": "77253165b0b0faa37a0739e73cb24aab565efa58d596924477735744d33c8b2c"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "closure": {
+        "child": {
+          "pid": 97358,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 97358,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-007-20261017/RESULT.json",
+          "bytes": 46447,
+          "sha256": "a944e94a1ab6d610bc40fbe299af8e2dfd1cc07d03ae09205a94e83c65280e0f"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-007-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "c3d1736c90aeac65f9cf1175bfc05153132f16bc05b7213793bd3e4ba5091eeb"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-ox-007-20261017/SHARED-START.json",
+          "bytes": 1273,
+          "sha256": "24e2f83f03ee1654081f73503e0c11cc5d35d4831357661770c1cd578f262f57"
+        }
+      ]
+    },
+    {
+      "label": "dune-stock",
+      "closure": {
+        "child": {
+          "pid": 98420,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 98420,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-007-20261017/RESULT.json",
+          "bytes": 46247,
+          "sha256": "2f1bd959571051a39848912a9ed1bf1fbe5b9ff36d86019e11459019e9e2f562"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-007-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "dcd803ea615263af9f1895fe47b79f6f3d27a9b46284380b2327528e9629c7ba"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-stock-007-20261017/SHARED-START.json",
+          "bytes": 1283,
+          "sha256": "035eb6eff03de0ef2e611ff646cbbd87a270e9798f48a18bad36f1f69d0fc19c"
+        }
+      ]
+    },
+    {
+      "label": "dune-ox",
+      "closure": {
+        "child": {
+          "pid": 99366,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 99366,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-007-20261017/RESULT.json",
+          "bytes": 46251,
+          "sha256": "a32b92b3646c2fa0035fdc235bf6aaaf248580bfe7e3513cee18150330809413"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-007-20261017/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "2aeb096532426b825a1102b9ba15a29d0b262a3826e04143b674107cab5bbf0b"
+        },
+        {
+          "path": "/private/tmp/unison-validation-scope-dune-ox-007-20261017/SHARED-START.json",
+          "bytes": 1278,
+          "sha256": "19558a15e07dc93fc873668d6f54ba97d78d076b97991ed40a2f47d5ba030fb5"
+        }
+      ]
+    }
+  ],
+  "phases": [
+    {
+      "index": 1,
+      "closure": {
+        "child": {
+          "pid": 960,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 960,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-1/SHARED-START.json",
+          "bytes": 1092,
+          "sha256": "dedb2e8b5fcd0c4407811259805f3f6f183c57bc7db90341ce76f381398fb056"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-1/SHARED-CLOSED.json",
+          "bytes": 496,
+          "sha256": "a7dcb594ace2e938085e551af7a53c2e2d71e6850e861128c6d454eb294a32ca"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-1/SHARED-STDOUT.txt",
+          "bytes": 209539,
+          "sha256": "21bf572a2b5d05be297c7e4ee8a8e7d21b2b48add0a50403d843ace983f9940b"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-1/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "index": 2,
+      "closure": {
+        "child": {
+          "pid": 1014,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 1014,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-2/SHARED-START.json",
+          "bytes": 1094,
+          "sha256": "2ab2d9f3ba0f7c7d0b79c8da086dc942a8a7a16f7ee0bf0dd61c387ea8487461"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-2/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "f9403aba3ae51e8925933e9e1b0391ba4e8b31b4010589e14dc20568a9742d03"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-2/SHARED-STDOUT.txt",
+          "bytes": 176049,
+          "sha256": "8891cfc36ba64afc14aa2523c91619e3df9a3e419defd14e27b2da8f292eb7f1"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-2/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "index": 3,
+      "closure": {
+        "child": {
+          "pid": 1082,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 1082,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-3/SHARED-START.json",
+          "bytes": 1085,
+          "sha256": "508fda031f15e2984fc6427a80da3c0ca346922ed12bc785b78b7a8959f010c6"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-3/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "f3dcf6cb8e80b79ff4ed9c0d26eacde105abae39c03196a8a86a10bf3440c731"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-3/SHARED-STDOUT.txt",
+          "bytes": 217297,
+          "sha256": "cdcdbc2300d169c43c877043e83b5183d87e4a7fab97b76577efac8625d0648e"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-3/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "index": 4,
+      "closure": {
+        "child": {
+          "pid": 1166,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 1166,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-4/SHARED-START.json",
+          "bytes": 1084,
+          "sha256": "79afeb4928b57896018ca76bf4c4210b0f02615e65518de0ec6f488145e4454a"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-4/SHARED-CLOSED.json",
+          "bytes": 498,
+          "sha256": "92ed1d8a99a8a8432d9e82a8cd8637725dc2ac8758206e8195993478e43525a3"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-4/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-validation-input-controls-20261017-4/SHARED-STDERR.txt",
+          "bytes": 7618,
+          "sha256": "080c8478df1426ea4c8689395f070889797d05d30107bcc0293f7b657cf0efc1"
+        }
+      ]
+    }
+  ],
+  "source_hash_checks_including_repeats": 2451,
+  "compiled_artifact_hash_checks_including_repeats": 1946,
+  "nested_compile_or_test_calls": 14,
+  "actual_original_fake_helpers": 4,
+  "actual_owner_input_records": 4,
+  "inert_sdk_control_tests": 49,
+  "SDK_invoked": false,
+  "retained_camera_payload_opened": false,
+  "EXglobal_acquired": false,
+  "OS_argv_traced": false,
+  "scope": "Current stock/Ox Make+Dune builds and actual generated local scan RPC/fake-helper private owner-context records; separate pure modeled SDK controls. No real SDK, remote-process, camera, semantic or pixel qualification."
+}

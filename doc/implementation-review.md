@@ -20,6 +20,20 @@ acceptance is implied. Photo owns preview generation/publishing qualification.
 
 ## Current evidence to read first
 
+The follow-up originally changed only `src/supervisedExternal.ml` in production
+for opt-in helper settlement diagnostics. It now also adds the isolated
+`validationSnapshot` kernel, a typed `SemanticWorkers.snapshot` operation and
+checked WholeFileClone/snapshot Make/Dune interfaces, plus private stage
+ownership and asynchronous validation composition. These are groundwork for
+unchanged-file validation. That internal checkpoint has now been followed by
+the opt-in scan RPC/policy integration documented below. Read [the integration plan and current evidence](all-scanned-validation-implementation.md).
+Most other follow-up files are qualification/source-owner harnesses and sealed
+evidence. The [actual mixed workload](../tests/qualification/mixed-validation-v1-actual-20261017.json)
+and [Root independent adoption](../tests/qualification/mixed-validation-v1-root-adoption-20261017.json)
+now pass/close two SDK calls, two readonly ExifTool requests and32 shared hash
+tasks under Unison8/EXglobal. Four SDK warnings each remain visible. No quiet
+scaling, hard whole-process limits, representative corpus or full-goal claim.
+
 - [Current helper-diagnostic Make pair](../tests/qualification/validation-live-collector-build-actual-20261016.json)
   and [Dune pair](../tests/qualification/validation-live-current-dune-actual-20261016.json).
 - [Camera SDK receiving V2](../tests/qualification/camera-sdk-receiving-v2-actual-20261016.json):
@@ -67,3 +81,157 @@ lifetimes are observed, not SDK compute overlap or throughput qualification.
 The preparation request remains immutable; admission7b320b51 is consumed once.
 The full goal remains incomplete, including representative semantic eligibility,
 required failure/platform scope and the remaining benchmark/resource evidence.
+
+## Current source checkpoint — internal unchanged-file validation
+
+The new `CandidateValidation.unchanged_file` entry is implemented and qualified
+against current stock/Ox Make objects. It remains INTERNAL: no all-scanned
+preference, negotiated capability, scan traversal, or production activation yet.
+`SemanticWorkers.recognize` performs bounded recognition without the existing
+Identify operation's whole-file fingerprint. Off opens nothing; a generated
+nonmatch larger than the snapshot budget reads only four recognition bytes and
+skips hashing/copying/validation. A matched file obeys the snapshot byte budget;
+validators receive only its private snapshot. Success, rejection, private
+mutation, cancellation, and retained-uncertainty controls passed for both
+compilers. The canonical staging Fspath is passed in; this entry never changes
+process CWD. The worker Identify fingerprint behavior remains covered.
+
+Actual control owner ec7bac/session38387 -> terminal4df709/exit0/no session;
+three controllers/twelve compile-or-test child calls reaped0, groups settled,
+Unison00..07 released. Evidence:
+`tests/qualification/unchanged-validation-entry-actual-20261017.json`.
+Current Make build005 stock and Ox succeeded; stock's original parent handle
+85221 was missing on continuation, so its parent terminal is NOT reconstructed
+from SHARED-CLOSED. Ox actual47362/ce238f/0/no session. Build004 preceded the
+CWD correction and is historical. The stage-work harness now pins itself;
+older harness receipts are not retroactively described as self-pinned.
+All fixtures generated/private; no SDK, Photo payload, new native sharing,
+all-scanned activation, or general legacy FD-fault qualification follows.
+
+Next: exact scan-selected work coverage, private endpoint staging initialization,
+followed-link/path policy, scope/capability negotiation and default/no-op tests.
+Do not expose all-scanned based only on this internal entry.
+
+User steering: exiftool-rs is being extended separately for dng-compare. Revisit
+reuse here after that work is ready; do not install, switch validators, or add
+an exiftool-rs dependency now. Existing source review remains historical.
+
+## Current scanner coverage checkpoint
+
+`ValidationPaths` now bounds retained unique endpoint-local file count and total
+pathname bytes. Overflow poisons the collector: no partial prefix can be read
+or resumed. This does not claim a whole-process RSS or traversal-time hard cap.
+`Update.findLocalWithValidation` collects regular files directly during the real
+selected scanner traversal, including NoUpdates children, and disables watcher
+subpath/directory fast-check coverage omissions. Existing immutable subtrees use
+the scanner's same filename/ignore/follow metadata rules to collect coverage
+without changing immutable update detection/archive results. A failing bounded
+scan unwinds watcher bookkeeping and fingerprint cache state. No user-facing
+preference/RPC/feature activates the entry yet.
+
+Current stock/Ox Make002 builds passed and four current-object compiler/test
+calls passed over generated private replicas. Actual owner62296/0ed6c7/exit0/no
+session, all contained groups reaped0 and CPU8 closed. Unchanged nested files,
+modified immutable files, ignored paths, followed file links, overlapping selected
+paths, new/changed files, both resource refusals and a subsequent clean scan are
+covered. Evidence `tests/qualification/validation-scan-actual-20261017.json`.
+Stock001 preceded the watcher cleanup correction and is historical; stock002
+15629/6c0d6b/0 and Ox00224575/0abd92/0 match current production code.
+Watcher hints were supplied with watch=false; no live watcher helper/protocol
+qualification is claimed. Source/fixture only, no Adobe/SDK/Photo payload.
+
+Next endpoint activation must create a private staging directory outside roots,
+resolve/fence followed paths without process-CWD mutation, report existing nested
+scan errors rather than claim complete coverage, and await admitted private-file
+validation before the endpoint scan returns. Add strict received/all-scanned
+scope parsing and negotiated capability only with end-to-end default/off/no-op,
+old-peer, ignore/follow and failure/cancellation tests. All-scanned remains
+unavailable until that integration is qualified; private MakN grammar and broader
+native/resource/corpus requirements remain separately open.
+
+## Held-output validation checkpoint
+
+Unchanged-file CandidateValidation now borrows the private stage owner's held
+output FD for recognition, reinspection and filesystem admission around execution.
+It does not reopen that path through the legacy temporary-descriptor wrappers.
+Inspection refuses every other pathname, including the original. StageWork lends
+ONLY the disposable output FD, never the original FD; trusted callbacks must read
+it without closing/retaining it beyond their actual returned promise. The stage
+owner/admission stays live throughout callback settlement and final integrity
+checks. Pathname helpers still receive only the private pathname. This is not an
+OS-enforced read-only handle or sandbox. Existing received-file wrapper and worker
+close-fault limitations are not relabeled as fixed by this change.
+
+Current stock/Ox Make builds passed; actual37127/3ba42a/0 and14865/b9ed28/0.
+Two controllers/eight compiler-or-test calls passed under canonical Unison8;
+actual60080/a2dead/exit0/no session, all attempted groups reaped0 and tokens closed.
+Evidence `tests/qualification/validation-borrowed-output-actual-20261017.json`.
+Original fixtures check stage-FD/inode isolation, original-path refusal, held-FD
+inspection while the disposable pathname is temporarily moved then restored,
+filesystem admission around an original fake execution callback, mutation
+rejection, sleeping cancellation and retained uncertainty. The fake execution
+callback launches NO subprocess and provides no SDK/helper protocol acceptance.
+No Photo payload/source mutation/new native admission.
+
+All-scanned endpoint integration remains pending. The lifetime correction was
+needed before enabling it; next implement private endpoint directory ownership,
+non-CWD-changing followed-path resolution/fences, strict scope/capability handling,
+scan-error propagation and awaited endpoint completion. Do not expose the option
+based on the component tests alone. Full SOL.md goal remains active/incomplete.
+
+## Current checkpoint — all-scanned scope implemented
+
+Opt-in `adobevalidatescope = all-scanned` is wired through the existing find RPC,
+with new negotiated `dng-validation-all-scanned-v1` capability. Default
+`adobevalidate = off` / scope received retains no-op behavior. Selected unchanged,
+new, immutable and followed files use the real bounded scanner; ignore rules
+remain in force, and errors/overflow reject coverage. Each endpoint captures validator/tool policy ONCE
+before enumeration. Reentrant policy changes cannot silently skip later files.
+Both started endpoint promises drain on failure. No wire/archive format changed.
+
+`ValidationScanWork` creates a fresh0700 private directory outside supplied local
+roots, resolves existing/followed paths without process CWD changes and checks
+logical bindings before/after each file. Serial snapshot validation retains the
+existing per-file resource envelope. Failed cleanup preserves original errors,
+unrelated entries/replacements and pending borrower ownership. Warnings/rejections
+name the logical file; helpers still get only the isolated pathname.
+
+`ValidationDescriptor` replaces CandidateValidation's temporary descriptor closer:
+one close after actual borrowed work, retained identity/original cause and pending
+admission on uncertainty, no numeric retry. Candidate inspection borrows the held
+stage FD; separate artifact inspection permits driver/limiter hashes but refuses
+original inode aliases. The earlier candidate-only guard was too restrictive for
+driver hashing; it is superseded, not actual SDK evidence. Existing other worker /
+receiving helper-IO close-fault limitations remain open.
+
+FINAL evidence: `tests/qualification/all-scanned-current-v4-actual-20261017.json`.
+Stock/Ox Make AND Dune006 build-only PASS/CLOSED under one sequential controller,
+actual20352/3c91d5/0/no session. Four groups/token sets independently closed.
+Three current-object controllers/14 compiler-or-test calls and FOUR original fake
+protocol-driver subprocesses passed; actual26283/38672b/0/no session. Independent
+readback performed1228production-input,1208prefix-source and1946artifact hash
+checks (including repeated checks) plus current child/group proofs. Our CPU8
+reservations are closed; no EXIO/SDK/Photo-native reservation was taken.
+Tests cover require/warn/unavailable driver, active/off/received/repeated no-ops,
+missing peer capability/late preference checks, source follow-retarget refusal,
+private mutation, captured policy, logical warnings, cleanup residue, cancellation
+and actual fake driver/tool inspection. Two injected close-uncertainty carriers
+and two admitted loans per endpoint control deliberately remain pending until
+that disposable process exits; they are NOT ordinary in-process retirement.
+
+Preserved build005 failure: actual59615/9a9cf0/exit2/no session; Ox guard rejected
+an updated interface comment whose checked template had not yet been refreshed.
+Failed child/group/tokens closed.006 synchronizes the template and passes both
+compilers/build systems. Earlier prototypes/receipts retain their exact sources;
+latest qualification supersedes only their current-source claims, no runtime
+admission/replay is inferred. All fixtures generated; synthetic helper protocol
+raw-digest missing is NOT Adobe raw-digest/decode/pixel evidence.
+
+Next: prepare a fresh source-pinned real SDK all-scanned IO request and qualify
+actual remote-process/old-peer combinations/live watcher scopes. No such SDK or
+private-camera grant currently exists; do NOT reuse consumed grants. Source-only
+MakN vendor/reference grammar work and broader M4-V/M6/corpus/portable-hash work
+continue independently. Full SOL.md goal remains ACTIVE/INCOMPLETE.
+Usage/contracts: `doc/all-scanned-validation.md`. exiftool-rs reuse remains deferred
+until the separate extensions/dng-compare integration is ready; Perl13.59 baseline
+and all historical timing/failedpart3/consumed-admission caveats remain preserved.

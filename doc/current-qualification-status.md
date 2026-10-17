@@ -1,9 +1,98 @@
-# Implementation status, 2026-10-15
+# Implementation status, updated 2026-10-17
 
 The full SOL.md goal is active. This is a current evidence index and remaining-work
 list, not a completion certificate. Historical qualifications retain their pinned
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
+
+Current isolated integration is reviewed in [draft PR4](https://github.com/querygraph/unison/pull/4),
+code08b4be45, metadata merge10ace908. `with_cache_capture` now authenticates a
+complete trusted capture and derives its previous inventory/digests from the
+owner entry before full-current-input/current-parser verification and scoped
+refresh. Orphans and changed inputs cannot invoke the callback. Current focused
+1047DNGchecks/compiler, fresh stock/Ox Make/fullselftests/Dune compilation and
+110production-linked workerchecks/compiler pass;1272current source pins match.
+All six observed workers/groups/tokens closed under focused44609/428946/0 and
+full93249/2fc314/0. Exact isolated evidence:
+`tests/qualification/dng-cache-reuse-actual-20261017.json`. These changes remain
+separate from main; automatic namespace discovery/selection is still open.
+
+Latest [transport readiness](component-remote-ready-after-cache-reuse-20261017.json)
+rechecked all342frozen main source pins and absent workspace/admission, after all
+owned builds/tests closed. Requestd0f80794/pland7a9f46d remain unchanged. Root
+scheduling request01a148b7-6db0 sent; it is not a grant, current Photo liveness
+proof or actual transport qualification. Runtime artifact checks remain inside
+the admitted guard. Do not replay or dispatch from readiness/resource release.
+
+Historical cache milestones below retain their original source/count scopes.
+PR3 was automatically marked merged by a temporary mistaken base-ref push;
+the base was restored using an exact lease and PR4 replaces that review.
+No cache implementation was intentionally merged into the main feature branch.
+
+Known trusted-entry recovery lookup is now qualified in isolated PR3,5513b04b:
+complete/record-only/entry-only/missing classifications after actual no-follow
+presence, privateFD/name binding and exact metadata authentication. Foreign
+index, wrongreader and equalbyte symlinkredirect refuse, without cleanup. This
+is not a producerterminal/resourceclosure or current-input eligibility proof.
+Currentstock/Ox all4builds/fullselftests plus1041DNG/1005checkpoint/27fault/110worker
+checks/compiler passed; allgroups/tokensclosed. Isolated evidence:
+`tests/qualification/dng-cache-recovery-actual-20261017.json`. Namespace opening,
+automatic selection and recovery scanning remain open; main342RPCpins unchanged.
+
+Latest isolated capture write path is qualified in draft PR3, codee64ffc4b:
+quota-bound distinct empty stage admission, bounded producer sealing, independent
+readback and one-use record-before-entry publication. A forced entry collision
+preserves the record-only orphan, foreign target, entry stage and consumed quota;
+it does not advance an index or silently retry/refund. Current stock/Ox all4builds,
+full Make selftests,1031DNG/1005checkpoint/27nativefault/110workerchecks/compiler
+passed; all groups/tokens closed. Exact isolated evidence:
+`tests/qualification/dng-cache-capture-actual-20261017.json`. Managed lookup,
+recovery scanning and automatic activation remain open; main RPC pins unchanged.
+
+Historical isolated cache follow-up was recorded in [PR3](https://github.com/querygraph/unison/pull/3),
+stacked against `feat/semantic-dng-oxcaml`; quota code6e7c82bd is now qualified.
+Current stock/Ox Make/fullselftests and Dune compile passed with1272production
+source checks; focused41component+1005checkpoint/quota+26nativefault controls and
+110workerchecks/compiler passed. Two actual processes raced one final slot:
+exactlyone grant, both waited0; postmkdir sync failure preserved consumed capacity.
+All actual owners/groups/tokens closed. This is bounded cache-payload admission,
+not physicaldisk/RSS enforcement. Managedlookup/recovery/automaticrouting remains
+absent; the main342RPC sources and separately scheduled transport remain unchanged.
+Exact evidence is on the isolated branch in
+`tests/qualification/component-metadata-quota-actual-20261017.json`.
+
+Root has accepted the342-source component RPC plan with no findings, then explicitly
+deferred its runtime for operator-authorized Photo Smart Preview EXglobal work.
+[Adoption](../tests/qualification/component-remote-source-review-adoption-20261017.json)
+does not establish present Photo liveness, an admission or RPC success. Independent
+cache work on separate `feat/component-cache-input-binding`569395d9 now passes
+stock/Ox checkpoint/refinement controls and four builds. It requires prior trusted
+metadata+full current-input SHA; no automatic store/epoch-only shortcut or merge
+into main. Main's342 reviewed runtime pins are preserved; see OPUS-HANDOFF.md.
+
+Latest component checkpoint (2026-10-17): the off-default explicit details path
+now has a separately negotiated [SIC/0 remote protocol](component-report-v0.md).
+[Source/codec qualification](../tests/qualification/component-remote-source-actual-20261017.json)
+records current stock/Ox Make+selftests+Dune compile builds,1272 source checks,
+25 report controls per compiler and linked local/refusal/cache controls. Initial
+Ox closure-mode failures were preserved and fixed without weakening annotations.
+All groups/CPU grants closed; no EXglobal/media/SDK used. Actual new-RPC transport,
+mixed-version/failure trials and persistent input/dependency binding remain open.
+This is not production camera or cached cross-session reuse qualification.
+
+The [production-linked remote probe](component-remote-probe.md) is now built on
+both compilers; [build/control evidence](../tests/qualification/component-remote-probe-build-actual-20261017.json)
+records ten contained calls,320 source pins and474 linked artifacts. Only compile,
+preentry refusal and offline preference branches ran. The proposed eight-case
+transport matrix now has its review-frozen coordinator/auditor and still needs
+source acceptance plus a fresh IO grant;
+no runtime component RPC or old-peer proof follows from these build controls.
+
+[Coordinator controls](../tests/qualification/component-remote-coordinator-controls-actual-20261017.json)
+passed18 original disposable/fabricated methods and343 before/after source pins.
+The [frozen plan](component-remote-plan-v1.json)/[request](component-remote-request-v1.json)
+are SOURCE REVIEW ONLY:342 runtime sources, eight fixed cases, Unison8+EXglobal,
+observation/unknown retention, no current admission or Photo scheduling hold.
 
 Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inherited locks](../tests/qualification/shared-entrypoints-actual-20261016.json) passed, followed by [actual shared sync](../tests/qualification/shared-functional-actual-20261016.json): stock/Ox workers1/2/3,18rows54CLI with independent strict client/supervisor/server/pump proofs, exact results and all tokens released. Physical IO lanes, aggregate memory and shared throughput remain unqualified. No Photo tokens or Adobe work used.
 

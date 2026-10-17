@@ -441,3 +441,17 @@ Historical 216-CLI receipts can be read by the pure auditor without relabeling
 those historical measurements as current. The receipt-preservation correction
 carries the actual settled outcome on the original exception; it does not
 retroactively reconstruct a missing client receipt from the stopped attempt.
+
+### Opaque-private exact-layout receiving controls
+
+`SYNC_LAYOUT_ONLY_CONTROLS=1` selects a separate, explicitly admitted shared8
+`sync-functional` run. It cannot be combined with property-removal controls or
+used through the CPU-only dispatcher. The18-row/54-call matrix generates two
+2MiB nonphotographic DNGs per row, including opaque private references into the
+changed XMP packet. Semantic rows must actually report
+`org.firstpair.dng-layout/0`; the audit rejects a strict-profile substitution.
+Output exactness, old-basis preservation and no-op epochs remain required.
+The declared8GiB logical IO budget is conservative planning, not instrumentation
+or a physical hard cap. No SDK/camera read, quiet timing or throughput claim.
+See `doc/layout-receiving-request-v1.json` for the exact one-use request; source
+readiness is not an admission or a command to dispatch.

@@ -1,0 +1,55 @@
+{
+  "schema": "unison-component-remote-source-review-request/1",
+  "state": "PREPARED_SOURCE_REVIEW_ONLY_NO_RUNTIME_ADMISSION",
+  "request_runtime_admission": false,
+  "plan_path": "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+  "plan_sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad",
+  "workspace": "/private/tmp/u-cr-cf119542138e",
+  "proposed_admission_path": "/private/tmp/unison-component-remote-admission-v1.json",
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/component_remote/coordinator.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+    "--admission",
+    "/private/tmp/unison-component-remote-admission-v1.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "parameters": {
+    "cases": 8,
+    "file_bytes": 8192,
+    "client_workers": 2,
+    "server_workers": 2,
+    "owner_credits": 2,
+    "total_grant": 8,
+    "call_seconds": 30,
+    "owner_seconds": 300,
+    "logical_IO_budget_bytes": 1073741824,
+    "logical_IO_budget_enforced": false
+  },
+  "execution_source_count": 342,
+  "prerequisite_count": 6,
+  "actual_transport_qualified": false,
+  "SDK_Adobe_camera_or_Photo_payload": false,
+  "no_receiving_or_production_writes": true,
+  "observation_not_global_kill_deadline": true,
+  "resource_order": "EXglobal existing barrier -> canonical Unison00..07, inherited9FDs through worker settlement",
+  "coordination": "Please review sources only; Unison will send readiness before requesting any expiring IO admission. No Photo hold requested.",
+  "logical_budget_claim": "1GiB conservative declared planning budget, not instrumented or physical hardcap",
+  "fixture_scope": "eight fresh generated private 8192B input pairs; no existing media, no receiving or SDK",
+  "qualifications": [
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/component-remote-source-actual-20261017.json",
+      "sha256": "c1d9491f6525c203c3eed4ea1dfd577ef4c5bdf1df60863b02f15b165832f074"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/component-remote-probe-build-actual-20261017.json",
+      "sha256": "8ca7b040e2ac969e6ba9f9fda744463d71657f610b9c7c6d877e8583f1f3d1f9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/component-remote-coordinator-controls-actual-20261017.json",
+      "sha256": "16d52c2cad736a21f000effb0797cdb380f27b31d3aec2e0181f761446a1da5b"
+    }
+  ]
+}

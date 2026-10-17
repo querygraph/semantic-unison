@@ -1,0 +1,146 @@
+{
+  "schema": "unison-snapshot-worker-builds/1",
+  "rows": [
+    {
+      "label": "stock-001",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-20261017/RESULT.json",
+        "bytes": 44719,
+        "sha256": "6b8a8a67a570c29b84b8f31936726e2e75138b367f1da97f741186570c9933d1"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "93513a14dcb89e800bd1932edbcfc9b542db9cb55a75906b8beecdc9d64775c4"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "3500dc",
+        "session_id": 2510,
+        "terminal_chunk_id": "244e05",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": false,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    },
+    {
+      "label": "ox-001",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-20261017/RESULT.json",
+        "bytes": 44725,
+        "sha256": "baed6d8f3ae7c161c560e2de8d23d1cdfbe7e19c0bf9e97c151191262a275065"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c5aa805bf8f0df8061e8b10d398798cd0ba92900ed1527b1e19dd48dd2075d9f"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "4baf08",
+        "session_id": 80608,
+        "terminal_chunk_id": "4d41bf",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": false,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    },
+    {
+      "label": "dune-stock-001",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-dune-stock-20261017/RESULT.json",
+        "bytes": 44626,
+        "sha256": "3511c283786d8a403a659acb2c39cadaf073c0fb900446ec36848abbadfe4940"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-dune-stock-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "39c1f73d901f3242f6c6503435fa3b5b84450cbe2854d7c854edd025ed814480"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "5538ec",
+        "session_id": 96905,
+        "terminal_chunk_id": "15d6d4",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": false,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    },
+    {
+      "label": "dune-ox-001",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-dune-ox-20261017/RESULT.json",
+        "bytes": 44630,
+        "sha256": "dba45baf3ce9a491a5dbf3f7aa757487a2651aa3216fb30728ad24bd2401a5bd"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-dune-ox-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "2da3e96382bcd5ad237515640f1d12fab58a6d3fe6fed5b521563e5ec8a1baac"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "2e2915",
+        "session_id": 5978,
+        "terminal_chunk_id": "56032a",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": false,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    },
+    {
+      "label": "stock-002-current",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-002-20261017/RESULT.json",
+        "bytes": 44820,
+        "sha256": "f327d021490e4e41dfae4eabd6e5f6044a4db3dc63f6815fcfb67f32d9298be6"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-stock-002-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c7913c3b6d74ecba49592e5dcd0ab4baa9fef308862ddec0900358259220fce9"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "1410f7",
+        "session_id": 86075,
+        "terminal_chunk_id": "701971",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": true,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    },
+    {
+      "label": "ox-002-current",
+      "build": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-002-20261017/RESULT.json",
+        "bytes": 44826,
+        "sha256": "ff4032c532a5c5626bb93e8d0e80025c7df4ba2cdef84eac0be6abae5585f5eb"
+      },
+      "closed": {
+        "path": "/private/tmp/unison-snapshot-worker-ox-002-20261017/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "d53e3b74fce6c3c41bfa3119b6d3ed5dc785cc0411f4d31b133bd037fbc56303"
+      },
+      "actual_tool_terminal": {
+        "initial_chunk_id": "598cb9",
+        "session_id": 30932,
+        "terminal_chunk_id": "1da355",
+        "exit_code": 0,
+        "running_session_id": null
+      },
+      "production_sources_match_current": true,
+      "scope": "Build-only. Dune/001 rows precede final snapshot read-observer correction; current002 Make rows cover final production sources."
+    }
+  ],
+  "CPU8_closed": true,
+  "SDK_invoked": false,
+  "source_metadata_preexec_refusal": {
+    "actual_chunk_id": "e9bda0",
+    "exit_code": 2,
+    "no_session": true,
+    "reason": "Compiler bin prefix required; first supplied opam root. Refused before workspace/token acquisition; corrected bin prefix used for actual stock001 build."
+  },
+  "evidence": "Actual owning-tool completions faithfully transcribed after observation; no process-absence inference."
+}

@@ -1,0 +1,82 @@
+{
+  "scope": "Tiny generated private artifact/native-clone and injected-close controls; no camera/SDK/ExifTool/EXglobal",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/mixed_validation/artifacts_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 1003,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "prior_failed_import": {
+    "scope": "Tiny generated private artifact/native-clone and injected-close controls; no camera/SDK/ExifTool/EXglobal",
+    "outcome": {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/artifacts_test.py"
+      ],
+      "returncode": 1,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"/Users/alexy/src/unison/tests/mixed_validation/artifacts_test.py\", line 9, in <module>\n    from artifacts import verified_hash,prepare_input,verify_input,verify_sources\n  File \"/Users/alexy/src/unison/tests/mixed_validation/artifacts.py\", line 8, in <module>\n    from sdk_multifile.clone import prepare as prepare_clone,stamp,native_clone\nModuleNotFoundError: No module named 'sdk_multifile'\n",
+      "client_cleanup": {
+        "pid": 932,
+        "returncode": 1,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    "cpu_closed": true,
+    "sources": [
+      {
+        "path": "tests/mixed_validation/artifacts.py",
+        "sha256": "3b746db7e9cad2fb85a035ce49e549540d9e6d2845059cc35d669cde80a5319d"
+      },
+      {
+        "path": "tests/mixed_validation/artifacts_test.py",
+        "sha256": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980"
+      }
+    ],
+    "owning_tool_terminal": {
+      "chunk_id": "60cbd8",
+      "exit_code": 1,
+      "no_session": true
+    }
+  },
+  "sources": [
+    {
+      "path": "tests/mixed_validation/artifacts.py",
+      "sha256": "3b3a7e0996f471f07a061fe2227f62539434f2ca3834881d4ae5efc052d3c992"
+    },
+    {
+      "path": "tests/mixed_validation/artifacts_test.py",
+      "sha256": "f22a778af763b558593160249206b18fb063c925e66a4867a7dcdae14233c980"
+    }
+  ],
+  "owning_tool_terminal": {
+    "chunk_id": "bf3840",
+    "exit_code": 0,
+    "no_session": true
+  }
+}

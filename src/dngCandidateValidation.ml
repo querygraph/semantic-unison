@@ -24,6 +24,23 @@ let policy_pref = Prefs.createString "adobevalidate" "off" ~local:true ~category
    committing it, selected by filename claim or bounded TIFF content recognition. \
    Require blocks failed or unavailable validation; warn explicitly permits it \
    with a warning. Independent of semantic transfer eligibility and selection."
+let scope_pref = Prefs.createString "adobevalidatescope" "received" ~local:true ~category
+  "Adobe validation scope (received, all-scanned)"
+  "Received validates private incoming candidates only. All-scanned additionally \
+   validates selected regular DNG files, including unchanged files, through \
+   isolated private snapshots before scan completion. Off opens no snapshots. \
+   All-scanned requires support on both replicas and private staging outside \
+   the local replica roots; structural/integrity errors never become warnings."
+let scan_files = Prefs.createInt "adobevalidatescanfiles" 65536 ~local:true ~category
+  "maximum files retained for all-scanned validation"
+  "Positive selected regular-file count bound. Overflow aborts coverage, never truncates it."
+let scan_paths = Prefs.createInt "adobevalidatescanpathbytes" 16777216 ~local:true ~category
+  "maximum retained pathname bytes for all-scanned validation"
+  "Positive cumulative endpoint-local pathname byte bound, not whole-process RSS."
+let scan_mib = Prefs.createInt "adobevalidatescanmaxmib" 4096 ~local:true ~category
+  "maximum private snapshot size in MiB for all-scanned validation"
+  "Positive per-selected-file size bound, checked before materialization. Nonmatching \
+   files receive bounded recognition only. This is not a total physical IO cap."
 let validator = Prefs.makeEndpointLocal (Prefs.createString "adobevalidator" "" ~local:true ~category
   "absolute Adobe SDK validation driver path"
   "Absolute path to the qualified structured Adobe SDK validation driver. \
@@ -52,6 +69,11 @@ let policy () = match Prefs.read policy_pref with
   | "off" -> DngValidation.Off | "warn" -> DngValidation.Warn
   | "require" -> DngValidation.Require
   | _ -> raise (Util.Fatal "adobevalidate must be off, warn, or require")
+let requested_all_scanned () =
+  let all=match Prefs.read scope_pref with
+    | "received" -> false | "all-scanned" -> true
+    | _ -> raise (Util.Fatal "adobevalidatescope must be received or all-scanned") in
+  policy ()<>DngValidation.Off && all
 let resources () =
   if policy () = DngValidation.Off then BackendResources.none else
   let lanes = Prefs.read tool_threads and mib = Prefs.read workspace in
@@ -68,10 +90,26 @@ let feature = Features.register "dng-validation-v1" ~arcFormatChange:false
     if policy () <> DngValidation.Off && not enabled then
       Some "Requested Adobe validation requires dng-validation-v1 support on both replicas"
     else None))
+let scan_feature = Features.register "dng-validation-all-scanned-v1" ~arcFormatChange:false
+  (Some (fun _ enabled ->
+    if requested_all_scanned () && not enabled then
+      Some "Requested all-scanned Adobe validation requires dng-validation-all-scanned-v1 on both replicas"
+    else None))
+let all_scanned () =
+  let requested=requested_all_scanned () in
+  if requested && not (Features.enabled scan_feature) then
+    raise (Util.Fatal "Requested all-scanned Adobe validation requires dng-validation-all-scanned-v1 on both replicas");
+  requested
+let scan_limits () =
+  let files=Prefs.read scan_files and paths=Prefs.read scan_paths and mib=Prefs.read scan_mib in
+  if files<1 || paths<1 || mib<1 || mib>max_int/1048576 then
+    raise (Util.Fatal "All-scanned validation limits must be positive and fit accounting");
+  files,paths,Int64.mul (Int64.of_int mib) 1048576L
 let recognition = FormatRecognition.trusted ~suffixes:[".dng"] (module DngRecognition)
 let convert (snapshot:CandidateValidator.snapshot) : DngValidation.snapshot =
   {sha256=snapshot.sha256;size=snapshot.size;identity=snapshot.identity}
 let select () =
+  ignore (all_scanned ());
   let selected = policy () in
   if selected = DngValidation.Off then None else begin
     (* Receiver preference installation does not repeat feature validation.
@@ -144,11 +182,11 @@ let select () =
               if HelperSupervisor.is_cancelled context.cancellation then
                 raise (Util.Transient "DNG validation cancelled") in
             check_cancel ();
-            Util.warn (Printf.sprintf "Adobe DNG validation warning for %s: %s"
-              context.candidate reason);
+            Util.warn (Printf.sprintf "Adobe DNG validation warning for %S: %s"
+              context.destination reason);
             check_cancel ();
             return ())
       | DngValidation.Rejected (reason,_) ->
-          fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %s: %s"
-            context.candidate reason))))
+          fail (Util.Transient (Printf.sprintf "Adobe DNG validation rejected %S: %s"
+            context.destination reason))))
   end

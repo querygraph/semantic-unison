@@ -14,6 +14,42 @@ let settled t =
     "resource credits leaked"
 let test name f = f (); Printf.printf "PASS %s\n%!" name
 let () =
+  test "machine-integer budget edges never wrap or debit rejected owners" (fun () ->
+    let t = gate max_int max_int max_int in
+    let full = A.make_reservation t ~role:A.Consumer ~cost:(cost max_int max_int) in
+    check (Lwt_unix.run (A.acquire full (H.cancellation ()))) "maximal legal envelope refused";
+    let waiting = A.make_reservation t ~role:A.Consumer ~cost:(cost 1 1) in
+    let cancel = H.cancellation () in
+    let reply = A.acquire waiting cancel in
+    let u = A.usage t in
+    check (u.transactions=1 && u.pending=1 && u.payload_bytes=max_int &&
+           u.descriptors=max_int && Lwt.poll reply=None)
+      "addition overflow admitted a sibling beyond the maximal budget";
+    List.iter (fun invalid ->
+      let failed = try ignore (A.make_reservation t ~role:A.Consumer ~cost:invalid); false
+        with A.Failed _ -> true in
+      check failed "negative machine-integer edge accepted")
+      [cost min_int 0; cost 0 min_int];
+    H.cancel cancel; check (Lwt_unix.run reply=false) "cancelled edge waiter granted";
+    A.retire waiting; A.retire full; settled t;
+    let u = A.usage t in
+    check (u.peak_payload_bytes=max_int && u.peak_descriptors=max_int && u.peak_transactions=1)
+      "machine-edge peak accounting changed");
+  test "maximal source headroom retains exact consumer/source partition" (fun () ->
+    let half = max_int / 2 in
+    let t = gate ~headroom:(Some (cost half half)) 2 max_int max_int in
+    let consumer_cost = cost (max_int-half) (max_int-half) in
+    let consumer = A.make_reservation t ~role:A.Consumer ~cost:consumer_cost in
+    check (Lwt_unix.run (A.acquire consumer (H.cancellation ()))) "edge consumer refused";
+    let source = A.make_reservation t ~role:A.Source ~cost:(cost half half) in
+    check (Lwt_unix.run (A.acquire source (H.cancellation ()))) "reserved edge source refused";
+    let u = A.usage t in
+    check (u.transactions=2 && u.payload_bytes=max_int && u.descriptors=max_int)
+      "source headroom partition wrapped or leaked capacity";
+    A.retire consumer; A.retire source; settled t;
+    let rejected = try ignore (gate ~headroom:(Some (cost (half+1) half)) 2 max_int max_int); false
+      with Invalid_argument _ -> true in
+    check rejected "unrepresentable two-envelope headroom accepted");
   test "transaction, payload and descriptor limits independently block" (fun () ->
     List.iter (fun (count,bytes,fds,c) ->
       let t = gate count bytes fds in

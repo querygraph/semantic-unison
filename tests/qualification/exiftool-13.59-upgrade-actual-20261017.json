@@ -1,0 +1,62 @@
+{
+  "calls": [
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "-m",
+        "unittest",
+        "metadata_dependencies_test",
+        "plan_test",
+        "audit_test"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "",
+      "stderr": "................\n----------------------------------------------------------------------\nRan 16 tests in 0.030s\n\nOK\n",
+      "client_cleanup": {
+        "pid": 45367,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    },
+    {
+      "command": [
+        "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+        "-B",
+        "tests/mixed_validation/exiftool_controls.py"
+      ],
+      "returncode": 0,
+      "timed_out": false,
+      "capture_truncated": false,
+      "stdout": "{\"calls\": [{\"command\": [\"/Users/alexy/.local/share/unison/tools/exiftool/13.59/exiftool-2200871d9cef988051d2a99d67df3bda6cbb30a8/exiftool\", \"-config\", \"\", \"-ver\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"13.59\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 45370, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}, {\"command\": [\"/Users/alexy/.local/share/unison/tools/exiftool/13.59/exiftool-2200871d9cef988051d2a99d67df3bda6cbb30a8/exiftool\", \"-config\", \"\", \"-j\", \"-s\", \"-XMP:Rating\", \"-XMP:Label\", \"-ExifToolVersion\", \"--\", \"/private/tmp/unison-exiftool-1359-udvnj_1r/-generated Unicode \\u00e9.xmp\"], \"returncode\": 0, \"timed_out\": false, \"capture_truncated\": false, \"stdout\": \"[{\\n  \\\"SourceFile\\\": \\\"/private/tmp/unison-exiftool-1359-udvnj_1r/-generated Unicode \\u00e9.xmp\\\",\\n  \\\"Rating\\\": 3,\\n  \\\"Label\\\": \\\"Unison \\u00e9\\\",\\n  \\\"ExifToolVersion\\\": 13.59\\n}]\\n\", \"stderr\": \"\", \"client_cleanup\": {\"pid\": 45374, \"returncode\": 0, \"reaped\": true, \"hard_kill_required\": false, \"other_group_members_absent_before_reap\": true, \"group_cleanup_before_leader_reap\": true}, \"aggregate_or_parent_terminal_proved\": false, \"io_cpu_release_authorized\": false}], \"package\": {\"version\": \"13.59\", \"executable\": {\"path\": \"/Users/alexy/.local/share/unison/tools/exiftool/13.59/exiftool-2200871d9cef988051d2a99d67df3bda6cbb30a8/exiftool\", \"bytes\": 352399, \"sha256\": \"8186a3597f609a6197659e0083cd542841b33889d6e6beb956fd5cd2d04931cb\"}, \"inventory\": {\"path\": \"/Users/alexy/src/unison/doc/mixed-exiftool-package-inventory-v2.json\", \"bytes\": 67097, \"sha256\": \"b6cacc31f18f4ef0a3897a08616051c5d00447db556ab022b56d3062a417ef83\"}}, \"package_proof\": {\"package_modules_verified\": 246, \"system_interpreter_verified\": true, \"full_runtime_dependency_inventory_complete\": false, \"execution_authorized\": false}, \"generated_input\": {\"path\": \"/private/tmp/unison-exiftool-1359-udvnj_1r/-generated Unicode \\u00e9.xmp\", \"bytes\": 273, \"sha256\": \"887a628ed1286f70cc54d057d978301e9db2b321bf3dc0a78496ba0d56357c8a\"}, \"source_pins\": {\"/Users/alexy/src/unison/tests/mixed_validation/exiftool_controls.py\": {\"path\": \"/Users/alexy/src/unison/tests/mixed_validation/exiftool_controls.py\", \"bytes\": 3103, \"sha256\": \"665a8bdb04a6fccdae8bad50ded9c7b5f43e36d7c35540dad76f8b3f06c29ed9\"}, \"/Users/alexy/src/unison/tests/mixed_validation/metadata_dependencies.py\": {\"path\": \"/Users/alexy/src/unison/tests/mixed_validation/metadata_dependencies.py\", \"bytes\": 4125, \"sha256\": \"4b3db932d13af8aa104723ba3b1fcfd3cefab739e4e05a5e7a2c804ae5eec8bc\"}}, \"SDK_invoked\": false, \"photo_payload_opened\": false, \"shared_system_installation_changed\": false, \"scope\": \"Pinned Perl13.59 direct version and readonly generated Unicode XMP, exact mixed-probe argv. No SDK/mixed native run or new camera/semantic/pixel qualification.\"}\n",
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 45369,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "aggregate_or_parent_terminal_proved": false,
+      "io_cpu_release_authorized": false
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "actual_owner_terminal": {
+    "initial_chunk": "d172f0",
+    "session_id": 21925,
+    "terminal_chunk": "95afc8",
+    "exit_code": 0,
+    "session_present": false
+  }
+}

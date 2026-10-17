@@ -10,7 +10,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--ocamlopt", default="ocamlopt")
 args = parser.parse_args()
 root = Path(__file__).resolve().parents[2]
-modules = ["semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge", "dngSemantic",
+modules = ["semanticHash", "semanticFile", "componentHash", "formatExtension", "xmpObservation", "xmpMerge", "dngSemantic",
            "semanticDelta", "semanticReport"]
 with tempfile.TemporaryDirectory(prefix="unison-report-") as tmp:
     build = Path(tmp)

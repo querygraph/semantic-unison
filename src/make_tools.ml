@@ -133,6 +133,32 @@ let () =
     if not_empty inputs.$(envname) then
       varname <-+= arg ^ " \"" ^ inputs.$(envname) ^ "\"")
 
+(* Opt-in maintained SHA256 backend. Default platform selection is unchanged.
+   Keep this explicit flag contract aligned with semantic_hash_config.ml. *)
+let () =
+  let backend = "SEMANTIC_HASH_BACKEND" <--? "platform" in
+  match backend with
+  | "platform" -> ()
+  | "openssl" ->
+      let directory name =
+        let value = inputs.$(name) in
+        if value <> "" && Filename.is_relative value then
+          error (name ^ " must be an absolute directory");
+        String.iter (function
+          | '\000' | '\n' | '\r' | '$' | '#' | '\\' ->
+              error (name ^ " contains an unsupported build-path character")
+          | _ -> ()) value;
+        value in
+      let include_dir = directory "SEMANTIC_OPENSSL_INCLUDE"
+      and library_dir = directory "SEMANTIC_OPENSSL_LIB" in
+      "CAMLCFLAGS" <-+= "-ccopt -DUNISON_SEMANTIC_HASH_OPENSSL";
+      if include_dir <> "" then
+        "CAMLCFLAGS" <-+= "-ccopt " ^ Filename.quote ("-I" ^ include_dir);
+      if library_dir <> "" then
+        "CLIBS" <-+= "-cclib " ^ Filename.quote ("-L" ^ library_dir);
+      "CLIBS" <-+= "-cclib -lcrypto"
+  | _ -> error "SEMANTIC_HASH_BACKEND must be platform or openssl"
+
 (* The messy situation requiring the use of OUTPUT_SEL was fixed in OCaml 4.13.
    All usages of OUTPUT_SEL should be removed when 4.13 becomes a requirement. *)
 let () =

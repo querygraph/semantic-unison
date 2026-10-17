@@ -8,6 +8,8 @@ type supported = {
 type observation = Supported of supported | Unsupported of string * string |
                    Unavailable of string * string
 type classification = Exact_bytes | Metadata_only | Other_bytes | Unknown
+(** Metadata_only is a legacy region-byte classification, not proof of private
+    meaning, rendering equivalence or independence from unparsed references. *)
 val from_proof : ?meaning:(FormatExtension.observation, string) result -> SemanticDelta.proof -> observation
 val profile : observation -> string
 val classification : observation -> observation -> classification
@@ -30,3 +32,26 @@ val display_reason : string -> string
 val render : left_label:string -> right_label:string -> observation -> observation -> string
 (** Bounded terminal-safe text and byte previews, with explicit current-replica
     scope. No XML interpretation, rendering identity or archive-base claim. *)
+
+type component_observation = {
+  schema : string;
+  full_sha256 : string;
+  layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+}
+val render_components : left:component_observation -> right:component_observation ->
+  (string, string) result
+(** Local advisory comparison only; no SIR/0 or SIR/1 wire change. The owner
+    supplies the explicit common projection contract, not a camera model label.
+    Missing lanes are unknown, never equal empty content. Incompatible schemas
+    suppress component comparisons. Exact full hashes remain independently
+    comparable. No persistent binding, rendering, transfer or merge authority. *)
+val max_component_size : int
+val encode_components : nonce:string -> schema:string ->
+  (component_observation, string) result -> string
+val decode_components : nonce:string -> schema:string -> string ->
+  ((component_observation, string) result, string) result
+(** Separately negotiated SIC/0, at most2048 bytes, fixed five role slots.
+    Outer Error is an invalid wire reply; inner Error is an unavailable view.
+    Exact schema and fresh32-byte request nonce are mandatory. Peer statements
+    do not become verified local hashes or transfer/persistent-reuse authority. *)

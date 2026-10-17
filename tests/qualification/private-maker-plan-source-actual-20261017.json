@@ -1,0 +1,55 @@
+{
+  "schema": "unison-private-maker-plan-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-m",
+      "unittest",
+      "private_maker_plan_test",
+      "private_maker_slice_test"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".........\n----------------------------------------------------------------------\nRan 9 tests in 0.009s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 12267,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "retained_camera_payload_accessed": false,
+  "executor_implemented": false,
+  "sources": [
+    {
+      "path": "tests/private_maker_plan.py",
+      "sha256": "f53a315261da8c92c2aa8a5cd18e2e9672dfaf6fefee6c00568c5a927ba42978"
+    },
+    {
+      "path": "tests/private_maker_plan_test.py",
+      "sha256": "d02f9bb720895c0193b59eaa1480a83a7b8e3f680e76655c6b1c619ee17076d0"
+    },
+    {
+      "path": "tests/private_maker_slice.py",
+      "sha256": "02fca8080e64e50f6a6884cfaf17732b5bfcb85d24cf7c377dcf4e6cdcddd3ef"
+    },
+    {
+      "path": "tests/private_maker_slice_test.py",
+      "sha256": "53741ac767a2ad20d214a5c5c88d50281adb64c0e82479efc1b1405dad89921e"
+    }
+  ],
+  "owning_tool_terminal": {
+    "chunk_id": "59b0b6",
+    "exit_code": 0,
+    "session_id": null,
+    "evidence": "Observed exec_command completion; faithful subsequent transcription."
+  }
+}

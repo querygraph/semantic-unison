@@ -36,3 +36,55 @@ Current evidence is root-owned, not a new independent-agent review. Declared
 CPU weights do not constrain unknown internal parallelism; Windows, child
 memory/global FD limits, actual SDK/corpus and broader M4-V/M5/M6 work remain
 open. No benchmark or machine-wide quota is inferred.
+
+## Installed ExifTool read-only control
+
+Pass `--exiftool /absolute/installed/exiftool --exiftool-only` to run the
+separate real-tool case (the default fourteen synthetic cases are unchanged).
+It disables ExifTool user configuration with `-config ""`, requests only JSON
+Rating/Label/ExifToolVersion from a newly authored private XMP, and submits16
+hash jobs to the same production runtime/budget. Status, metadata values, exact
+source bytes/eight-field native stat fence and settled helper/worker ledgers are
+checked. No editing flag, photo input, SDK or catalog is involved.
+
+[Actual stock/Ox evidence](../qualification/shared-exiftool-hash-actual-20261016.json)
+passes24 assertions/compiler and records installed version13.10, script SHA
+before/after, compiler-matched object/source pins and actual containing group/
+CPU8 closure. Perl/module inventory, standalone child-PID observation, sampled
+CPU overlap, hard limits, simultaneous ExifTool/Adobe and throughput remain
+outside this case. Tool configuration is explicitly opt-in; no installation or
+change to production preferences occurs.
+
+## Opt-in external helper lifecycle diagnostics
+
+`-debug external-process` enables an owner-side result record after helper
+execution settles. It reports the historical PID, wait status/outcome, declared
+CPU weight, capture truncation and a retained-group observation. Command
+arguments and captured stdout/stderr are omitted. Default execution does not
+query the process table or emit this record. Ordinary nonzero exit policy,
+cancellation, signals, output and timeout limits keep their existing behavior.
+
+`other-members=unobserved` means no callback ran; `unknown` is an unsupported or
+failed observation. Numeric counts describe one census before leader reap,
+not durable process-tree closure or authorization to signal a historical PID.
+The observed fixture case binds the record to its actual PID file and independent
+ECHILD check. ExifTool's PID comes from the supervised trace, not process absence.
+The initial [component receipt](../qualification/external-process-observation-actual-20261016.json)
+retains16cases/compiler; its private overlay inferred the CMI. The [successor current-interface16-case runs](../qualification/external-process-current-interface-actual-20261016.json)
+pass on both compilers with exact CMI equality, and
+[full Make builds/CLI selftests](../qualification/external-process-full-cli-actual-20261016.json)
+pass/close on both. Current Dune/GUI qualification is not inferred.
+`--current-bridge` compiles only the current bridge against the snapshot's
+unchanged dependency objects and matching explicit production interface; other
+production source mismatches still refuse.
+
+`external_records.py` is the bounded strict consumer for these diagnostics.
+It preserves client/server endpoints, canonical historical PID/status/CPU fields,
+truncation and observed/unknown/unobserved group distinctions. It does not dedupe
+PIDs into a lifetime claim. All parsed records explicitly lack producer
+authentication and resource-release authority: merged output could contain
+helper-authored lookalikes, so an independent call/owner/source binding remains
+required. Unknown versions/extra fields, contradictory identities, overflow and
+line/count/UTF-8 byte limits refuse. [Six controls](../qualification/external-process-parser-actual-20261016.json)
+include independent reparse/hash checks on four saved real stock/Ox records;
+no external helper is rerun by the parser test.

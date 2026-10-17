@@ -1,0 +1,276 @@
+{
+  "schema": "unison-all-scanned-sdk-worker-controls/1",
+  "current_control_groups": 40,
+  "cases": [
+    {
+      "actual_terminal": {
+        "chunk_id": "f909a4",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 94979,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 94979,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-001/SHARED-START.json",
+          "bytes": 1088,
+          "sha256": "1107501d3a3251bffa7ae8bc8dc4f711efee4ae6c857465da76bbf87955e0853"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "35b4610f3f06a659c1a93ee6e6ee9ca55d28b115d385038dcb2a8a5787a4c22d"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-001/SHARED-STDERR.txt",
+          "bytes": 6517,
+          "sha256": "b2c370804a1fadd7ecaad79df4105f00741f683b9f1f784d7ec3fec0b67b5184"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "110b1b",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 95060,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 95060,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-002/SHARED-START.json",
+          "bytes": 1087,
+          "sha256": "e9eac735fb896c50681fecfec90fe84bde99562e45924a197812f2dd091dee05"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-002/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "c129ff366f68091a01c89187662ae5dc93a4a2ead5355c1caac4df17a61f53b4"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-002/SHARED-STDERR.txt",
+          "bytes": 6867,
+          "sha256": "e9965036683e75a333a88d9f9cf96198e4dc356b2ce01ceaf8a790a0270e6ecd"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "e0c4de",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 95091,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 95091,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-003/SHARED-START.json",
+          "bytes": 1087,
+          "sha256": "b7b63be1e314cb20b514ab4fa0562924954294947d010980f68406d77db4de90"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-003/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "25968a0b07d6803c50aa17f3afff3dfc5a38c81c5616d25dcc1f11ac85860c7b"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-003/SHARED-STDERR.txt",
+          "bytes": 6035,
+          "sha256": "3249142803a2c161ccee1d980be72ea4c211e4247b673c41fa6959ab0a10d953"
+        }
+      ]
+    },
+    {
+      "actual_terminal": {
+        "chunk_id": "a55d9e",
+        "exit_code": 0,
+        "session_id": null
+      },
+      "closure": {
+        "child": {
+          "pid": 95154,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 95154,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-004/SHARED-START.json",
+          "bytes": 1088,
+          "sha256": "8c939129ace5e42d633efc10adb8c3c8ac259c2715dd55ab25769fafab583dc5"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-004/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "b0922b1c22603b9138a60a9bd7f2abc7533ce3b2432fe9cd17e40e8ba7fc7914"
+        },
+        {
+          "path": "/private/tmp/unison-all-scanned-sdk-worker-controls-20261017-004/SHARED-STDERR.txt",
+          "bytes": 6199,
+          "sha256": "4e7e0772708cd1d431c1b61cd719fb79cd3b5a0f2da333644c9e4cb879824670"
+        }
+      ]
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "tests/all_scanned_sdk_audit.py",
+      "bytes": 3879,
+      "sha256": "013f4773641764f5b06bd35d0e33ca5c19db93d833d4e6fb829ccc2c8901bfb5"
+    },
+    {
+      "path": "tests/all_scanned_sdk_audit_test.py",
+      "bytes": 3624,
+      "sha256": "36a9a1be9c35737a02314cd6d955e38b325ef7cf261f8a9935aeb94bc615dae1"
+    },
+    {
+      "path": "tests/all_scanned_sdk_controls.py",
+      "bytes": 582,
+      "sha256": "e3a27a0da256abb433e8c1d0121e01b9761046ce2441cb4577bcaccb71a2a3da"
+    },
+    {
+      "path": "tests/all_scanned_sdk_parent.py",
+      "bytes": 4788,
+      "sha256": "968600a4d212df7126da0cefa5db0173aedb9c02a9823ad680aaaa783e609cd1"
+    },
+    {
+      "path": "tests/all_scanned_sdk_parent_test.py",
+      "bytes": 5853,
+      "sha256": "e24ba52653bbbe23aa54ca5451b4f2564c9ce5fc397d40505eb723c2a9f453d7"
+    },
+    {
+      "path": "tests/all_scanned_sdk_plan.py",
+      "bytes": 3833,
+      "sha256": "e4851bedeb86cb88200d3f2692f5c0667969368f893154909ced594edf2b56ae"
+    },
+    {
+      "path": "tests/all_scanned_sdk_plan_test.py",
+      "bytes": 2034,
+      "sha256": "6a564fbed89c539e1f9f7e6f7c5880f71e0f6c2cf853ca7dfa08dfde1025e4b8"
+    },
+    {
+      "path": "tests/all_scanned_sdk_prepare.py",
+      "bytes": 4155,
+      "sha256": "76f79be682dbfa2de6ddd499c14c894a20e8f43dd13b063680480e1129871ba3"
+    },
+    {
+      "path": "tests/all_scanned_sdk_prepare_test.py",
+      "bytes": 3777,
+      "sha256": "1c44c8902df32f7f92a7f78edf9667c4850924ce4a3d2c91c081a99de72978c2"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport.py",
+      "bytes": 3388,
+      "sha256": "3da2b67628f5ae8f0d7869b44e8d0751ec21b3f8143940940e10a31345822037"
+    },
+    {
+      "path": "tests/all_scanned_sdk_transport_test.py",
+      "bytes": 4071,
+      "sha256": "e35a5c844aa488278dff1b918a3f5cac4a216b1726513be3ed3ebc3a74f7b446"
+    },
+    {
+      "path": "tests/all_scanned_sdk_worker.py",
+      "bytes": 6801,
+      "sha256": "ff564a398424570a9a2daa847e9838f04996ffa97a0300efff74fe451e7ceeaa"
+    },
+    {
+      "path": "tests/all_scanned_sdk_worker_test.py",
+      "bytes": 5862,
+      "sha256": "8564ba7411de6fe2cf43cb6e3fecf079105d7d0a71aa7c7016b4b02ea0abb91c"
+    },
+    {
+      "path": "bench/sync/invocation_journal.py",
+      "bytes": 7283,
+      "sha256": "1e99ff956720471480c201a6fafb6bd96679c20832c7089bcee3b44269931eb1"
+    },
+    {
+      "path": "tests/sdk_multifile/clone.py",
+      "bytes": 5546,
+      "sha256": "b21ab8124fbb3abb6f84f76e6ae8dc49fd1efd0cd8f205e4603f8cf243d48c8b"
+    },
+    {
+      "path": "tests/private_camera_receiving/close.py",
+      "bytes": 1628,
+      "sha256": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+    },
+    {
+      "path": "tests/shared_io_pool.py",
+      "bytes": 10994,
+      "sha256": "a9dbf029dee975c31402c45f1fc29c94caee79afbce05834fa67d48ff49e8ec7"
+    }
+  ],
+  "CLI_invoked": false,
+  "SDK_invoked": false,
+  "EXglobal_acquired": false,
+  "native_clone_invoked": false,
+  "retained_camera_payload_opened": false,
+  "outer_executor_qualified": false,
+  "scope": "Original tiny generated fixture copies via injected clone substitute; modeled four-call SDK/proxy worker; lifecycle ownership invariants tested. Current004 strengthened server-group proof, 001/002 include five repeated imported parent tests removed in003."
+}

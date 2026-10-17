@@ -1,0 +1,36 @@
+{
+  "scope": "Synthetic report fixtures and disposable receipt reads only; zero CLI/SDK/Photo payload/EXIO",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "bench/report_sdk_receiving_comparison_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": ".....\n----------------------------------------------------------------------\nRan 5 tests in 0.041s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 85163,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_tokens_closed": true,
+  "sources": {
+    "bench/report_sdk_receiving_comparison.py": "47142b2d40d8314448ae3e1715448e50899cedb01bea7ba275bb7521395f7077",
+    "bench/report_sdk_receiving_comparison_test.py": "9518b73b0bd709e58cc55051f60c36e122fb755ed7d791b0a8cc2160d1129861"
+  },
+  "owning_tool_terminal": {
+    "chunk_id": "d7cc17",
+    "exit_code": 0,
+    "session_id": null,
+    "provenance": "Faithful transcription of actual exec_command terminal; not inferred from child/group proof"
+  }
+}

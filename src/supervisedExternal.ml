@@ -39,6 +39,24 @@ let inspect_limiter cancellation path =
     (fun error -> close_noerr fd; fail error)
   with error -> close_noerr fd; raise error
 
+(* Owner diagnostics only, emitted after helper settlement. No command arguments
+   or captured output are logged, and a historical PID is never an owned handle. *)
+let trace_process ~weight ~group (process:HelperSupervisor.result) =
+  Trace.debug "external-process" (fun () ->
+    let pid=match process.child_pid with None->"none" | Some n->string_of_int n in
+    let status=match process.status with None->"none"
+      | Some(Unix.WEXITED n)->"exit:"^string_of_int n
+      | Some(Unix.WSIGNALED n)->"signal:"^string_of_int n
+      | Some(Unix.WSTOPPED n)->"stopped:"^string_of_int n in
+    let outcome=match process.outcome with
+      | HelperSupervisor.Completed->"completed" | HelperSupervisor.Cancelled->"cancelled"
+      | HelperSupervisor.Timed_out->"timed-out" | HelperSupervisor.Output_limit->"output-limit"
+      | HelperSupervisor.Failed _->"failed" in
+    let members=match group with None->"unobserved" | Some None->"unknown"
+      | Some(Some n)->string_of_int n in
+    Util.msg "External result v0 pid=%s status=%s outcome=%s cpu-weight=%d other-members=%s capture-truncated=%b\n"
+      pid status outcome weight members process.output_truncated)
+
 let execute ~executable ~argv0 ~arguments =
   let process_limits = HelperLimiter.selected () in
   let supervisor, cpu_budget = SemanticRuntime.helper_supervisor () in
@@ -50,6 +68,9 @@ let execute ~executable ~argv0 ~arguments =
     raise (Util.Fatal "externalhelperoutput must be a positive representable MiB limit");
   let limits = {HelperSupervisor.timeout=float_of_int seconds;terminate_grace=2.;
     stdout_bytes=mib*1048576;stderr_bytes=mib*1048576} in
+  let observation=ref None in
+  let observe_group=if Trace.enabled "external-process" then
+    Some(fun count -> observation:=Some count) else None in
   let environment = Unix.environment () in
   SemanticRuntime.with_cancellation (fun cancellation ->
     BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () ->
@@ -60,8 +81,9 @@ let execute ~executable ~argv0 ~arguments =
         raise (Util.Transient "External helper limiter cancelled") in
     BorrowedWork.bind (fun () -> HelperLimiter.with_verified process_limits
       ~inspect:(inspect_limiter cancellation) ~check_cancel (fun process_limits ->
-        HelperSupervisor.run ~argv0 ?process_limits supervisor
+        HelperSupervisor.run ~argv0 ?process_limits ?observe_group supervisor
           ~weight cancellation ~limits ~executable ~arguments ~environment)) (fun result ->
+    trace_process ~weight ~group:!observation result;
     Abort.checkAll ();
     if HelperSupervisor.is_cancelled cancellation then
       fail (Util.Transient "External helper cancelled")

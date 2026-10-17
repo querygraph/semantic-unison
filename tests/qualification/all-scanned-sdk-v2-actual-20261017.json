@@ -1,0 +1,61 @@
+{
+  "schema": "unison-all-scanned-sdk-actual/1",
+  "state": "CONSUMED_ACTUAL_PASS_CLOSED",
+  "owner_process_id": "98564",
+  "owner_exit_code": 0,
+  "owner_session_remaining": false,
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/OWNER-TERMINAL.json",
+      "bytes": 4565,
+      "sha256": "ba7dc9e6a4b91f7d2f6aa56b10cc545ea9a2ecd4f32dc11d22509b0263078f73"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/INDEPENDENT-PURE-AUDIT.json",
+      "bytes": 10170,
+      "sha256": "2bf73670bd9dc73ce9464d0b333aa936c0e395caecb1978121211fe168a695e4"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/SHARED-START.json",
+      "bytes": 22054,
+      "sha256": "400c512b235d48203c5d00a1cd647afd2185827c560bd48f5ba96f4da547d821"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/SHARED-CLOSED.json",
+      "bytes": 499,
+      "sha256": "28432c75079de1f0bba8136738db70bcdc37efdaf9bc5fee436c6f41645a1e89"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/RESULT.json",
+      "bytes": 77981,
+      "sha256": "542b284d17e34175118265ee31b18d65417498ecc9816bc1e939d25a6497a848"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/SHARED-SERVER-AUDIT.json",
+      "bytes": 12449,
+      "sha256": "5af7912f314d14ea1d0d244848ac2b8120135be82c7983c6f0567b078f625402"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/stock/baseline-proxy.json",
+      "bytes": 1846,
+      "sha256": "d45de9226b875b4407577db7a4f505cf035d4a5bf6d342d025792904d23f9a64"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/stock/validate-proxy.json",
+      "bytes": 1844,
+      "sha256": "a991874a9de3c6b1b43c8b2b8e5ef3d03733e17003599c3fcd9c2938705bb75c"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/ox/baseline-proxy.json",
+      "bytes": 1846,
+      "sha256": "11ad2ca5a78abc5c57a55a7e5836abdad9ed712ae9ad7800b7f1f9779cf145da"
+    },
+    {
+      "path": "/private/tmp/u-asv-ca5ec3ffcbff/ox/validate-proxy.json",
+      "bytes": 1844,
+      "sha256": "3557daec83504c09b08ed8e157ccad26147f6e02067cc047abdfd40a973a8882"
+    }
+  ],
+  "execution_source_pins_match": true,
+  "scope": "4 CLI / 4 SDK calls on unchanged stock/Ox disposable replicas; decode/raw-digest valid/errors0/warnings0. No semantic eligibility, pixel, corpus, throughput or production claim."
+}

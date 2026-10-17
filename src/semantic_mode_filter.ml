@@ -28,9 +28,9 @@ let transform version path =
   let component=Filename.remove_extension name in
   let interface=Filename.extension name=".mli" in
   if (not interface && Filename.extension name<>".ml") ||
-     not(List.mem component ["semanticHash";"semanticFile";"semanticMailbox";
+     not(List.mem component ["semanticHash";"semanticFile";"componentHash";"semanticMailbox";"wholeFileClone";"validationSnapshot";
        "formatRecognition";"dngRecognition";"formatExtension";"xmpObservation";
-       "xmpMerge";"dngSemantic";"dngExtended";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
+       "xmpMerge";"dngSemantic";"dngExtended";"dngLayout";"dngComponents";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
   then invalid_arg "unqualified mode-filter module";
   if not(is_ox version) then source
   else if component="semanticFormats" then
@@ -46,6 +46,7 @@ let transform version path =
       "Domain.Safe.spawn"
   else begin
     let signature_count,field_count = match component,interface with
+      | "componentHash",_ -> 0,1
       | "formatRecognition",true -> 1,0
       | "formatRecognition",false -> 1,1
       | "formatExtension",true -> 1,1
@@ -58,6 +59,8 @@ let transform version path =
     if interface then begin
       let body = if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
+      else if component="dngComponents" then
+        exact body "type decoders\n" "type decoders : value mod portable contended\n"
       else if component="formatRecognition" || component="formatExtension" then
         exact body "type handle\n" "type handle : value mod portable contended\n"
       else if component="semanticDelta" then
@@ -75,7 +78,7 @@ let transform version path =
       let owner_declarations = match component with
         | "formatExtension" -> [
           "val resolve : string -> handle option";
-          "  ?observer:observer -> (module S) @ portable contended -> unit";
+          "  ?observer:observer -> ?span_semantics:span_semantics -> (module S) @ portable contended -> unit";
           "val find : string -> (module S) option @ contended";
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
@@ -90,7 +93,7 @@ let transform version path =
       if template<>expected then invalid_arg "checked mode template differs from qualified interface";
       template
     end else begin
-      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 2 | _ -> 0 in
+      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 2 | "validationSnapshot" -> 1 | _ -> 0 in
       let result,count=replace body "(* ox-portable-ffi *)" "@@ portable" in
       if count<>expected then invalid_arg "qualified native mode declarations changed";
       result
