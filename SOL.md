@@ -388,8 +388,13 @@ decoders and returns compact immutable observations without exporting reader/
 session/snapshot capabilities. Read reporting includes bounded parser reads;
 operational failures, queued/late cancellation and shutdown preserve settlement.
 [Current main source rebind](tests/qualification/component-workers-main-rebind-20261017.json)
-confirms320 qualified files. RPC/UI consumers, persistent/archive binding and
-real-camera component coverage remain open; no default transfer/archive change.
+confirms320 qualified files at that historical checkpoint. Subsequent owner/cache
+integration is implemented: [managed store](doc/component-managed-store.md),
+[archive hints](doc/component-archive-hints.md), [identity-bound namespace](doc/component-cache-namespace.md)
+and [configured worker routing](doc/component-worker-cache-routing.md). These
+remain opt-in and endpoint-local. Their tiny-fixture/current-source evidence and
+limitations must be read separately from that older worker receipt. Real-camera
+component coverage is pending; no default transfer/archive change.
 
 The [layout-only receiving successor](tests/qualification/layout-receiving-rescheduled-actual-20261017.json)
 now actually PASSED/CLOSED: stock/Ox18rows54CLI through production loopback
@@ -434,8 +439,9 @@ Read-only inspector `--components` exposes full SHA and five counted hash lanes.
 records stock/Ox68checks each plus existing layout/strict regressions,57 contained
 calls, four full Make/Dune builds and both inspector launcher builds. All owners
 and CPU8 closed; no real camera/SDK was read. These are encoded byte projections,
-not complete image/rendering identity; persistent caching and vendor children
-remain open. The preceding generic-core receipt retains its original scope.
+not complete image/rendering identity. Subsequent managed persistent-cache and
+archive integration is implemented separately; actual vendor child modules remain
+open. The preceding adapter/core receipts retain their original scopes.
 
 The worker-local [component hashing core](doc/component-hashes.md) now implements
 opaque gap coverage, separate typed hash lanes, bounded nested-decoder readers
@@ -444,8 +450,10 @@ projections are unavailable rather than a constant empty pixel identity.
 [Current evidence](tests/qualification/component-hash-core-actual-20261017.json)
 records stock/Ox41checks each, scope-escape compile refusals, delivered-read
 accounting and four full builds. The adapter above now connects DNG fragments
-and inspector output; worker/archive integration, persistent cache, real-camera
-coverage and cross-session reuse remain open.
+and inspector output. Subsequent worker/archive integration and authenticated
+persistent-cache capture/restore are implemented with separate evidence below.
+Restore still verifies the complete current input; it is not a physical IO-saving
+claim. Actual camera coverage and installed vendor children remain open.
 
 The first gradual-understanding transfer successor is now implemented:
 [DNG exact-layout profile](doc/dng-layout-exact.md), capability
@@ -458,8 +466,9 @@ semantic merge authority. Existing strict merge/cache whitelists remain intact.
 records stock/Ox49checks each, strict-profile safety regressions, four Make/Dune
 builds and the stock legacy kernel/inspector. It does not yet prove new remote
 receiving or camera/corpus deployment. The component core and adapter above
-now provide the separate hash forest; actual vendor child modules, incremental
-cache and their runtime integration remain implementation/qualification work.
+now provide the separate hash forest. Incremental refinement, authenticated
+cache storage and optional owner/archive routing are implemented separately;
+actual vendor child modules and broader deployment qualification remain work.
 
 Latest real-SDK successor **PASSED/CLOSED**:
 [four-call stock/Ox unchanged-file qualification](tests/qualification/all-scanned-sdk-v2-actual-20261017.json).
@@ -4840,3 +4849,29 @@ serial commands/proposed1credit/<60s coordination request
 bench/sync/results/lifecycle-successor-request-20261015.json. Timing DEFER
 remains; these small regressions also await explicit allocation to avoid another
 crossed dispatch. Future refreshed timing plan follows runtime qualification.
+
+
+## Release evidence refresh — 2026-10-17
+
+The consolidated review candidate is draft PR13 against the fork master. Current
+acceptance map: [release readiness](doc/sol-release-readiness-20261017.md). Native
+publication uncertainty has an explicit owned backend used by modern bound local
+and remote semantic producers and ordinary local/rsync clone staging; composed
+controls preserve producer ownership through unknown close outcomes. Legacy named/
+unbound/older-peer paths retain separately stated limitations. In-process codec
+controls are not a substitute for current-candidate transport qualification.
+
+Gradual camera support remains operation-specific: known encoded image units,
+standard/private/structural regions and opaque complements have separate exact
+projections. Unknown MakerNote meanings do not disable exact reconstruction or
+require delaying deployment until exhaustive interpretation. Nested trusted
+plugins and versioned checkpoints can refine private views without discarding
+unaffected pixel hashes or relabeling old evidence. An authenticated cache hit
+currently revalidates complete source bytes before reusing the interpretation.
+
+The refreshed stock/Ox standalone inspectors passed sixteen original tiny TIFF
+calls; manual advisory component selection and metadata-only IO admission/input
+fences have directed controls. The [one retained-clone request](doc/camera-components-request-v1.json)
+is prepared for separate review/admission; preparation did not open camera bytes.
+A resulting report is advisory byte-role/hash evidence, not decoded-pixel identity,
+SDK eligibility, semantic merge authority or automatic receiving permission.

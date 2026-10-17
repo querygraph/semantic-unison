@@ -3901,3 +3901,10 @@ retained Unison clone307228717. Eightfield lstat unchanged; no source payload
 opened/hashed. Current stock inspector+26kernel pins, interpreter, dispatcher
 closure and four prerequisites pinned; Unison8+EXglobal,300s,declared2GiBread/
 16MiBlogs notinstrumented. NO admission/dispatch. Root review/scheduling next.
+
+SOL status consistency review: older checkpoint paragraphs incorrectly still
+called worker/archive/persistent-cache integration unimplemented. Corrected to
+link separately qualified managed store/namespace/archive/worker routing while
+preserving historical receipt scopes and complete-input revalidation limitation.
+Added current release-evidence map and operation-specific gradual camera scope.
+No pinned camera-request source changed; no payload/CPU/IO job launched.
