@@ -95,6 +95,31 @@ let () =
    "worker failed to retain unchanged decoder view";
  check(Atomic.get called=before && retained.checkpoint<>None)
    "unchanged worker refresh ran decoder or omitted requested capture";
+ let entry=DngComponents.make_owner_entry ~root_identity:"original-worker-root"
+   ~path:"fixture.dng" ~generation_sha256:(SemanticHash.string "original-worker-generation")
+   ~checkpoint ~outcomes:captured.refinements in
+ let record=ComponentHash.checkpoint_record ~binding:(DngComponents.owner_entry_binding entry) checkpoint in
+ let owned record decoders=summary(Lwt_unix.run(W.refresh_owned_components pool (H.cancellation())
+   ~entry ~record ~decoders ~capture_checkpoint:true ~max_read_bytes:8321L fd)) in
+ let owned_retained=owned record frozen in
+ check(owned_retained.layout_sha256=captured.layout_sha256 &&
+   owned_retained.reused_components=retained.reused_components && owned_retained.checkpoint<>None)
+   "owner-bound refresh lost authenticated capture";
+ check(Atomic.get called=before && owned_retained.hash_bytes_requested=8192L)
+   "owner-bound unchanged refresh ran decoder or skipped full input hash";
+ let corrupt=Bytes.of_string record in
+ Bytes.set corrupt (Bytes.length corrupt-1) (Char.chr(Char.code(Bytes.get corrupt (Bytes.length corrupt-1)) lxor 1));
+ check(try ignore(owned (Bytes.to_string corrupt) frozen);false with W.Failed _ -> true)
+   "owner-bound refresh accepted corrupt record";
+ let foreign=ComponentHash.checkpoint_record ~binding:(SemanticHash.string "foreign-worker-owner") checkpoint in
+ check(try ignore(owned foreign frozen);false with W.Failed _ -> true)
+   "owner-bound refresh accepted foreign record binding";
+ check(Atomic.get called=before && H.usage b=(0,0) && (W.usage pool).running=0)
+   "owner-bound authentication invoked decoder or leaked admission";
+ check(try ignore(W.refresh_owned_components pool (H.cancellation()) ~entry
+   ~record:(String.make (ComponentHash.max_checkpoint_size+81) 'x') ~decoders:frozen
+   ~max_read_bytes:8321L fd);false with Invalid_argument _ -> true)
+   "owner-bound oversized record queued";
  let upgraded=match DngComponents.freeze_decoders
    [{component_id="dng/ifd/0/tag/50740/value";
      decoder={decoder with implementation_sha256=SemanticHash.string "worker-upgrade/2"}}] with

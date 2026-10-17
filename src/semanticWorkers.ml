@@ -33,6 +33,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
   | Components of DngComponents.decoders * int64 * bool
+  | Refresh_owned_components of DngComponents.owner_entry * string * DngComponents.decoders * int64 * bool
   | Restore_components of string * string * int64
   | Refresh_components of DngComponents.outcome list * DngComponents.decoders * string * string * int64 * bool
   | Identify of (FormatRecognition.handle * bool) list
@@ -125,7 +126,7 @@ let execute job =
         Inspected {proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
           ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
-      | (Components _ | Restore_components _ | Refresh_components _) as operation ->
+      | (Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _) as operation ->
         let summarize session refined outcomes capture reused invalidated =
             check_cancel ();
             let projections=List.map (fun role -> role,ComponentHash.projection refined role)
@@ -140,6 +141,15 @@ let execute job =
           | Components (decoders,max_read_bytes,capture) ->
             DngComponents.with_snapshot ~decoders ~max_read_bytes file
               (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture [] [])
+          | Refresh_owned_components (entry,record,decoders,max_read_bytes,capture) ->
+            let checkpoint=DngComponents.checkpoint_for_owner_entry entry record in
+            check_cancel ();
+            DngComponents.with_refreshed_checkpoint
+              ~previous:(DngComponents.owner_entry_outcomes entry) ~decoders
+              ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
+              ~max_read_bytes file (ComponentHash.checkpoint_bytes checkpoint)
+              (fun session result -> summarize session result.snapshot result.outcomes
+                capture result.reused result.invalidated)
           | Restore_components (expected_checkpoint_sha256,encoded,max_read_bytes) ->
             DngComponents.with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded
               (fun session snapshot -> summarize session snapshot [] false [] [])
@@ -403,7 +413,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Refresh_components _ | Reconcile _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Refresh_components _ | Refresh_owned_components _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -555,3 +565,15 @@ let shutdown t = match t.shutdown_result with
       (fun () -> Lwt.wakeup result (); return ())
       (fun exn -> Lwt.wakeup_exn result exn; return ()));
     result
+
+let refresh_owned_components t cancellation ~entry ~record ~decoders
+    ?(capture_checkpoint=false) ~max_read_bytes fd =
+  if max_read_bytes<0L || String.length record>ComponentHash.max_checkpoint_size+80 then
+    invalid_arg "SemanticWorkers.refresh_owned_components bounds";
+  BorrowedWork.try_bind
+    (fun () -> submit t cancellation fd
+      (Refresh_owned_components(entry,record,decoders,max_read_bytes,capture_checkpoint)))
+    (function
+      | None -> return None
+      | Some (Component_inspected result) -> return (Some result)
+      | Some _ -> fail (Failed "unexpected owner-bound refreshed component response")) fail

@@ -2675,3 +2675,21 @@ User explicitly requested merging PR #1 during the handoff turn. Completed:
 Future implementation commits must not be described as updates to an open PR1:
 that PR is now merged. Continue on a suitable branch and use a distinct review
 when appropriate. No upstream submission or full-goal qualification follows.
+
+## Owner-bound worker refresh successor — 2026-10-17
+
+Separate `feat/component-owned-worker-refresh` adds
+`SemanticWorkers.refresh_owned_components`: the worker authenticates a bounded
+UCR record against its trusted UDI entry and derives checkpoint digest and full
+historical decoder inventory there, then runs existing full-input/current-parser
+verification and localized decoder refresh. No independently chosen inventory
+can be substituted through this API. It uses existing CPU/IO/cancellation and
+FD settlement; it does not open/select cache objects or adopt archive state.
+
+Actual owner67532/754d9e/0/no session: stock/Ox Make/fullselftests plus116 original
+worker checks/compiler PASS, all three contained workers/groups/tokens closed.
+Corrupt/foreign record rejection, oversized prequeue refusal and unchanged-view
+reuse pass. Receipt: tests/qualification/component-owned-worker-refresh-actual-20261017.json.
+Dune was not rerun for this successor; no media/SDK/transport. Managed namespace
+opening and automatic capture/selection remain next integration work. Main's
+frozen RPC sources and separate admission requirements remain unchanged.
