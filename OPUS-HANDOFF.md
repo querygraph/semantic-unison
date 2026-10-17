@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Checkpoint adapter groundwork: `ComponentHash.validate_base` now checks restored
+views against the current normalized parser partition without payload reads.
+Private/opaque refinements are allowed; altered base geometry/schema/roles and
+embedded pixel/standard claims refuse. Focused stock/Ox:41component+461checkpoint
+checks each,23calls; actual94856/6f91b4/0, worker18727reaped0/groupsabsent/tokensclosed.
+Receipt `tests/qualification/component-checkpoint-base-actual-20261017.json`.
+Full builds and DNG provenance/restore/store integration remain outstanding for
+this successor; earlier full-build receipts cover their exact historical sources.
+
 Isolated follow-up: frozen DNG decoder bindings now refuse child-before-parent
 order before file inspection, including nonadjacent ancestor relations while
 allowing textual-prefix siblings. Focused stock/Ox controls pass83checks each,

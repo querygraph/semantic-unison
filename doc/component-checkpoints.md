@@ -90,3 +90,10 @@ verification +2 decoder reads +3072 parent rehash). The three-decoder upgrade
 sequence charges17414 bytes; private invalidation itself charges no reads and
 reuses the original pixel node within the restored session. These are logical
 input/read-budget observations, not physical IO, speedup or rendering evidence.
+
+Before a format adapter reuses a restored view, `validate_base` compares it with
+the current parser's freshly described canonical partition. Exact IDs, roles and
+extents are required. Unrefined schemas and child structure must match; a private
+or opaque base leaf may contain cached private refinements, but no pixel or
+standard-metadata claims. This check reads no payload and does not authenticate
+metadata itself. Decoder provenance and replacement remain adapter responsibilities.

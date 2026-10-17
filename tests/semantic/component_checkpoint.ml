@@ -40,10 +40,22 @@ let () =
         check(C.checkpoint_bytes checkpoint=encoded && C.checkpoint_sha256 checkpoint=seal)
           "checkpoint roundtrip not canonical";
         let pixel=T.find snapshot "file/pixels" in
+        C.validate_base session snapshot T.layout;
+        check(C.bytes_requested session=8192L) "base validation read payload";
+        check(invalid(fun () -> C.validate_base session snapshot
+          {T.layout with schema="changed-base/1"})) "changed base schema accepted";
+        check(invalid(fun () -> C.validate_base session snapshot
+          {T.layout with length=8191L})) "changed base extent accepted";
+        check(invalid(fun () -> C.validate_base session snapshot
+          {T.layout with children=List.map(fun (s:C.spec) ->
+            if s.id="file/pixels" then {s with role=C.Opaque} else s) T.layout.children}))
+          "changed pixel role accepted";
         let refined=match C.apply_plugin session snapshot ~component:"file/private" T.model_plugin with
           Ok value -> value | Error why -> failwith why in
         check(T.find refined "file/pixels"==pixel && C.projection refined C.Encoded_pixels=pixels)
           "restored refinement did not reuse unaffected pixel node/hash";
+        C.validate_base session refined T.layout;
+        check(C.bytes_requested session=11266L) "refined base validation read payload";
         check(C.bytes_requested session=11266L && C.full_sha256 refined=C.full_sha256 snapshot)
           "localized refinement read budget/full identity differs";
         session,snapshot)) in
@@ -111,6 +123,8 @@ let () =
     restore ~budget:11264L encoded seal file (fun session initial ->
       let unsafe=C.refine session initial ~component:"file/private" ~schema:"mixed/0"
         [T.spec "file/private/claimed" "claimed/0" role 0 3072] in
+      check(invalid(fun () -> C.validate_base session unsafe T.layout))
+        "base validation accepted private pixel/standard escalation";
       check(invalid(fun () -> C.reset_private_view session unsafe ~component:"file/private" ~schema:"opaque-private/0"))
         "private reset discarded an embedded pixel/standard claim")))) [C.Encoded_pixels;C.Standard_metadata];
   Printf.printf "PASS %d checkpoint controls; authenticated metadata, full input verification, localized refinement, malformed/tampered/stale refusals\n%!" !checks

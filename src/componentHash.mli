@@ -69,6 +69,12 @@ val with_checkpoint : expected_checkpoint_sha256:string -> expected_root_schema:
     component digest, NOT the full input read. No epoch-only shortcut, immutable
     blob authority, archive trust source, disk writer, peer authority or automatic
     persistence is supplied. Wrong content/schema/digest refuses before callback. *)
+val validate_base : session -> snapshot -> spec -> unit
+(** Check a cached view against a freshly described base partition without payload
+    reads. IDs, roles, extents and nonrefined schemas/children must match exactly.
+    Only a base private/opaque leaf may retain a refined subtree, and that subtree
+    cannot claim pixels or standard metadata. Requires the live bound session;
+    this supplements authenticated restore, never establishes cache trust itself. *)
 val reset_private_view : session -> snapshot -> component:string -> schema:string -> snapshot
 (** Explicitly invalidate one refined private/opaque subtree before applying a
     different decoder/version. Preserves raw digest/extent/role, unrelated nodes

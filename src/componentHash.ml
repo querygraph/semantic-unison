@@ -263,6 +263,21 @@ let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_
     if SemanticFile.digest file<>tree.content_sha256 then invalid "component checkpoint input bytes changed";
     live session;let result=callback session {token=session.token;tree} in live session;result)
 
+let validate_base session snapshot (base:spec) =
+  bound session snapshot;
+  if base.offset<>0L || base.length<>snapshot.tree.length then
+    invalid "component base root extent mismatch";
+  let base=normalize ~origin:0L ~length:snapshot.tree.length ~existing:0 ~depth:0 base in
+  let private_role = function Private_metadata | Opaque -> true | _ -> false in
+  let safe_private tree = fold (fun safe (node:node) -> safe &&
+    node.role<>Encoded_pixels && node.role<>Standard_metadata) true tree in
+  let rec compatible (node:node) (spec:spec) =
+    node.id=spec.id && node.role=spec.role && node.offset=spec.offset && node.length=spec.length &&
+    (if spec.children=[] && private_role spec.role && node.children<>[] then safe_private node
+     else node.schema=spec.schema && List.length node.children=List.length spec.children &&
+       List.for_all2 compatible node.children spec.children) in
+  if not(compatible snapshot.tree base) then invalid "component checkpoint differs from current base partition"
+
 let reset_private_view session snapshot ~component ~schema =
   bound session snapshot;require_id schema;
   let old=find snapshot component in
