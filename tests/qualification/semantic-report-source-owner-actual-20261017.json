@@ -1,0 +1,168 @@
+{
+  "complete": true,
+  "scope": "Ordinary local semantic report source close-once and retained admission on disposable injected close uncertainty; stock/Ox production-linked normal and failure controls",
+  "actual_tool_terminal": {
+    "session": 58002,
+    "chunk": "c6f825",
+    "exit": 0,
+    "running_session": false
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-semantic-source-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1322,
+      "sha256": "8f827621cbdcd95ee5586453698b5330742d38db7cf6dcdbd0b0e58b0005e3c1"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "cb043fb83e7da8cbe209e728efd7e19d90bed52ac6397c3fd7f90a11c07ec4b8"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-stock-make-20261017-001/RESULT.json",
+      "bytes": 51539,
+      "sha256": "af20e25c82a689b956eab8181436223c4a81db582997a152d151d47270e4d985"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "94e98111d29d655b8b1efa3c822b9371f54605be457c528de6b96b146e5ec6d2"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "4816a9ca95ed4e17e7dc37ac427f20d473fa85710c22b2e8d1013499fc206737"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "da20714eedadda45b1d4ec8cc1471872712ba718e1517aad32cba4c0a181bf9d"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-ox-make-20261017-001/RESULT.json",
+      "bytes": 51545,
+      "sha256": "accb67f899acc1f641b377a402bee23d2c9d1dd0431d22266a2b7b47ec568572"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "442dc1942ffabcf42764408cf4e2bac16dae5b7f2b562a91f81b3e8f32bae87d"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-source-20261017-001/SHARED-START.json",
+      "bytes": 1337,
+      "sha256": "84dc1fceddb27d679a4c3c4396b72240b9120deee7e7a1f5e8f3eba169521555"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-source-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "6584283c1f5ede021ad51c0b9982072ed514e587fb432c33b572ae7bccd21ca0"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-source-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "08e332a63dfc3bd0e1c3dde885d7dbedb2eb993dfaaf766a988cd085ac474be7"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-source-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-siq2ekdm/RESULT.json",
+      "bytes": 153641,
+      "sha256": "eecab9f2951d7df94bed822cd8d1900b977fcd76acfd21c464b0b76b125e2c75"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-report-20261017-001/SHARED-START.json",
+      "bytes": 1319,
+      "sha256": "57c840ce0dffa0b6ac030f758e274b4f60c1aa1a8fe10fa2f35e73fef8616c9b"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-report-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "a78a38d9edb1fcf79a97db22c073a011e973e0f61bb67171d4fce8e83b983a69"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-report-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "41e15aae290cb1da3feeb7e64dbbcfc63e9161fca3727bc24a57b883a5d381e6"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-report-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-7y7j6ual/RESULT.json",
+      "bytes": 148254,
+      "sha256": "77272196b9f1a1d03b1da830ab0ee386458ec125e55e681353d73faadb715d55"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-retention-20261017-001/SHARED-START.json",
+      "bytes": 1325,
+      "sha256": "adee96ff064233d8cab620ca6de567b08ca2b487ed4f19e13a0481da9f9e0b28"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-retention-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "d49debf7d3014b30677120277c4e1b818d3a8e0c0bd8c9a8f6ee24a871392b37"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-retention-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "c2aa6045051e5d78354cd1cb53b7ff7ab111ea11781144b478c0da76f3192d54"
+    },
+    {
+      "path": "/private/tmp/unison-semantic-source-both-retention-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-0fe43mep/RESULT.json",
+      "bytes": 147457,
+      "sha256": "31d6425a47026760c7bebc3487e8022e6a4a210a3eeb298e6dc287fc9c590a15"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.ml",
+      "bytes": 32676,
+      "sha256": "e2e46a9c4a7b4e92e8b8152f54057bb8cbb58756c8b53b0b755628296878f65c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRemote.mli",
+      "bytes": 3732,
+      "sha256": "45a309e5d70dde80cafb06be421ff0f3e0c65238c0c3797e6a3f55a677ff47db"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/semantic_source_probe.ml",
+      "bytes": 4375,
+      "sha256": "1dfd1cb2fdb61436739d0330238c08d61e656e96184eda30a323372ed8a72d30"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/semantic_source_controls.py",
+      "bytes": 4615,
+      "sha256": "aec0c26622a275c423c6cbd28a818e79c6440422d175f09ab8027da615f05e3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic/cache_loader_fault_stubs.c",
+      "bytes": 2434,
+      "sha256": "7c5a80223964dd431a0569c914b6bde64afc30eafbb27b4556ed528e40d8616c"
+    }
+  ],
+  "limitations": [
+    "No actual remote transport execution",
+    "No transfer-stage cleanup qualification",
+    "Fault controls intentionally retain application admission until disposable process exit; external child/group closure is distinct",
+    "No SDK/camera or physical IO grant"
+  ]
+}

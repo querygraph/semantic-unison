@@ -4,13 +4,18 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
-**Integration checkpoint:** this local candidate combines the qualified local
-managed-cache/report stack with the producer-schema RPC auditor correction.
-Neither PR has been merged on GitHub; combined-source validation remains pending.
-The checkpoint paragraphs below preserve earlier isolated histories and are not
-new execution/admission authority. Local opt-in cache/report routing is now
-implemented; remote endpoint cache routing is not. Unknown private camera fields
-remain exact opaque components and do not block baseline deployment.
+**Integration checkpoint, 2026-10-17:** consolidated draft PR13 against fork
+master contains the local managed-cache/report stack and producer-schema auditor
+correction. Current committed source79336ce7 has stock/Ox Make+selftest evidence
+for cold namespace creation, portable component-source cleanup and index-capacity
+report preservation. User-facing cache setup is documented in the manual.
+Ordinary semantic-report source cleanup now has stock/Ox production-linked
+normal and injected-close uncertainty controls;
+current transfer/mixed-peer and camera-profile evidence remain separately scoped.
+Historical isolated checkpoints below are retained as history, not statements
+that integration is still absent or new execution authority. Local opt-in cache
+routing is implemented; remote endpoint cache routing is not. Unknown private
+fields remain exact opaque components and do not block baseline deployment.
 
 
 Current isolated local report successor now wires UI component details through

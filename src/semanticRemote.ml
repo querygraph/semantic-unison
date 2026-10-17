@@ -383,6 +383,30 @@ let capture_component f = BorrowedWork.catch f (function
   | Unix.Unix_error (error,operation,_) ->
       return (component_failure (operation ^ ": " ^ Unix.error_message error))
   | error -> fail error)
+type retained_component_owner = {
+  mutable retained_error : exn;
+  mutable retained_next : retained_component_owner option;
+}
+let retained_component_owners = ref None
+let component_retained_ownership () =
+  let rec collect result = function
+    | None -> List.rev result
+    | Some node ->
+      let result=match node.retained_error with
+        | DngComponents.Cache_ownership_uncertain state -> state::result | _ -> result in
+      collect result node.retained_next in
+  collect [] !retained_component_owners
+let hold_component_uncertainty work =
+  let pending=Lwt.wait () in
+  let node={retained_error=Out_of_memory;retained_next=None} in
+  let link=Some node in
+  BorrowedWork.catch work (function
+    | DngComponents.Cache_ownership_uncertain _ as error ->
+      node.retained_error<-error;node.retained_next<- !retained_component_owners;
+      retained_component_owners:=link;
+      (try Trace.log "Semantic report ownership uncertain; report admission remains held.\n" with _ -> ());
+      pending
+    | error -> Lwt.fail error)
 let inspect_components ?worker cancellation path =
   capture_component (fun () ->
     let settled=ref false in
@@ -417,16 +441,21 @@ let inspect_components ?worker cancellation path =
         match finish (Some error) with Some error -> fail error | None -> assert false))
 let inspect_file ?(meaning=false) cancellation extension path =
   let profile = FormatExtension.profile extension in
-  capture_report profile (fun () ->
-    let fd = Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-    let files = register_held_fd fd in
-    BorrowedWork.try_bind (fun () -> borrowed files (fun () ->
+  capture_report profile (fun () -> hold_component_uncertainty (fun () ->
+    let settled=ref false in
+    let source=DngComponents.open_component_source(fun () ->
+      Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0) in
+    let fd=DngComponents.component_source_descriptor source in
+    let finish cause =
+      settled:=true;
+      try DngComponents.settle_component_source source cause;None with error -> Some error in
+    BorrowedWork.try_bind (fun () ->
       let pool = (SemanticRuntime.get ()).pool in
       if meaning then SemanticWorkers.observe pool cancellation ~extension fd else begin
       BorrowedWork.bind (fun () -> SemanticWorkers.inspect pool cancellation ~extension fd)
-        (fun result -> return (Option.map (fun inspection -> {SemanticWorkers.inspection;meaning=None}) result)) end))
+        (fun result -> return (Option.map (fun inspection -> {SemanticWorkers.inspection;meaning=None}) result)) end)
       (fun result ->
-        let observed = try match result with
+        let observed = match result with
         | None -> report_failure profile "Semantic inspection cancelled"
         | Some result when not (same_report_stats result.SemanticWorkers.inspection.stats (Fs.stat path)) ->
             report_failure profile "File changed or was replaced during semantic inspection"
@@ -434,10 +463,10 @@ let inspect_file ?(meaning=false) cancellation extension path =
           let observation = match result.SemanticWorkers.inspection.proof with
             | Ok proof -> SemanticReport.from_proof ?meaning:result.SemanticWorkers.meaning proof
             | Error why -> SemanticReport.Unsupported (profile,SemanticReport.reason why) in
-          {observation;local_snapshot=Some (path,result.SemanticWorkers.inspection.stats)}
-        with error -> held_files.release_noerr files; raise error in
-        held_files.release files; return observed)
-      (fun error -> held_files.release_noerr files; fail error))
+          {observation;local_snapshot=Some (path,result.SemanticWorkers.inspection.stats)} in
+        match finish None with None -> return observed | Some error -> fail error)
+      (fun error -> if !settled then fail error else
+        match finish (Some error) with Some error -> fail error | None -> assert false)))
 let inspection_args = Umarshal.(prod3 (bounded_string max_path)
   (bounded_string 128) (bounded_string 32) id id)
 let inspection_result = Umarshal.bounded_string SemanticReport.max_size
@@ -452,30 +481,6 @@ let valid_component_request (path,schema,nonce) =
 (* Retain inside the resource lease: propagating an exception out of it would
    retire credits despite unresolved native descriptor ownership. Allocate the
    held promise/node/link before inspection can acquire a cache descriptor. *)
-type retained_component_owner = {
-  mutable retained_error : exn;
-  mutable retained_next : retained_component_owner option;
-}
-let retained_component_owners = ref None
-let component_retained_ownership () =
-  let rec collect result = function
-    | None -> List.rev result
-    | Some node ->
-      let result=match node.retained_error with
-        | DngComponents.Cache_ownership_uncertain state -> state::result | _ -> result in
-      collect result node.retained_next in
-  collect [] !retained_component_owners
-let hold_component_uncertainty work =
-  let pending=Lwt.wait () in
-  let node={retained_error=Out_of_memory;retained_next=None} in
-  let link=Some node in
-  BorrowedWork.catch work (function
-    | DngComponents.Cache_ownership_uncertain _ as error ->
-      node.retained_error<-error;node.retained_next<- !retained_component_owners;
-      retained_component_owners:=link;
-      (try Trace.log "Component cache ownership uncertain; report admission remains held.\n" with _ -> ());
-      pending
-    | error -> Lwt.fail error)
 let component_scope connection request f =
   if valid_component_request request && components_supported connection && component_profile_enabled () then
     (* Fixed bounded model/summary, not editable payloads; keep the source envelope

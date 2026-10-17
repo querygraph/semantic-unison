@@ -50,6 +50,6 @@ val try_transfer_reserved : reservation:SemanticAdmission.reservation ->
     source admission and headroom; None producer covers explicit legacy handoff. *)
 
 val component_retained_ownership : unit -> DngComponents.cache_ownership list
-(** Owner-loop diagnostics only. Uncertain local cache inspection retains its
+(** Owner-loop diagnostics only. Uncertain component-cache or ordinary semantic source inspection retains its
     carrier and a non-cancellable pending promise INSIDE report admission.
     No cleanup, numeric-FD retry, implicit settlement or release authority. *)

@@ -3638,3 +3638,25 @@ tests/qualification/component-index-capacity-actual-20261017.json. Manual now
 documents opt-in cache setup, exact opaque coverage, capacity/quota and recovery
 limits. No SDK/camera/transport execution or new admission; frozen property
 request remains separate and unadmitted at last check. Full goal remains active.
+
+
+## Ordinary semantic-report source ownership — 2026-10-17
+
+Source review found inspect_file still using legacy held_files cleanup, where
+an uncertain close could become ordinary Unavailable and retire admission. It
+now uses the portable close-once source owner and the retained report carrier
+inside its existing transaction/RPC scope. The existing component diagnostic API
+also lists these ordinary semantic-report carriers. No wire format change.
+
+Actual58002/c6f825/0/no session: fresh stock/Ox Make+selftests, ordinary semantic
+source normal+injected-close controls, cached report write/read and component
+uncertainty retention controls allPASS. Disposable copied C source alone uses
+close interposition; production has no fault switch. Normal report closes once;
+uncertainty stays pending with outer transaction/FD/payload charges and original
+uncertain identity, no numeric retry. External child/group closure verified;
+retained application reservations intentionally last until disposable exit.
+Exact evidence tests/qualification/semantic-report-source-owner-actual-20261017.json.
+All owned processes/CPU leases closed, no SDK/camera/transport execution. Legacy
+transfer held_files/stage cleanup remains separately to review; do not generalize
+this report-only proof. Property admission still absent at1792238193.2699368;
+separate frozen request unchanged, no replay or replacement. Fullgoalactive.
