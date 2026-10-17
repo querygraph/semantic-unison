@@ -5,6 +5,16 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
+Known trusted-entry recovery lookup is now qualified in isolated PR3,5513b04b:
+complete/record-only/entry-only/missing classifications after actual no-follow
+presence, privateFD/name binding and exact metadata authentication. Foreign
+index, wrongreader and equalbyte symlinkredirect refuse, without cleanup. This
+is not a producerterminal/resourceclosure or current-input eligibility proof.
+Currentstock/Ox all4builds/fullselftests plus1041DNG/1005checkpoint/27fault/110worker
+checks/compiler passed; allgroups/tokensclosed. Isolated evidence:
+`tests/qualification/dng-cache-recovery-actual-20261017.json`. Namespace opening,
+automatic selection and recovery scanning remain open; main342RPCpins unchanged.
+
 Latest isolated capture write path is qualified in draft PR3, codee64ffc4b:
 quota-bound distinct empty stage admission, bounded producer sealing, independent
 readback and one-use record-before-entry publication. A forced entry collision
