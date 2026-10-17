@@ -39,6 +39,7 @@ let () =
    observations:=reads::!observations));
  let baseline=summary(Lwt_unix.run(borrow pool (H.cancellation()) empty 8192L "fixture.dng")) in
  check (baseline.full_sha256=expected && baseline.hash_bytes_requested=8192L) "baseline component hash differs";
+ check(baseline.checkpoint=None) "ordinary observation exported persistent metadata";
  let jobs=List.init 12 (fun _ -> borrow pool (H.cancellation()) frozen 8321L "fixture.dng") in
  let rec join = function [] -> return [] | job::rest -> job >>= fun value -> join rest >>= fun values -> return(value::values) in
  let results=Lwt_unix.run(join jobs) in
@@ -73,6 +74,16 @@ let () =
    restored.projections=baseline.projections) "worker restore changed cached identities";
  check(restored.refinements=[] && restored.hash_bytes_requested=8192L)
    "worker restore fabricated decoder approval or skipped input verification";
+ check(restored.checkpoint=None) "restore silently recaptured historical metadata";
+ let captured=summary(Lwt_unix.run(W.components pool (H.cancellation()) ~capture_checkpoint:true
+   ~decoders:frozen ~max_read_bytes:8321L fd)) in
+ let checkpoint=match captured.checkpoint with Some value -> value | None -> failwith "worker capture absent" in
+ check(captured.hash_bytes_requested=8321L) "checkpoint export reread input";
+ let from_capture=summary(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
+   ~encoded:(ComponentHash.checkpoint_bytes checkpoint) ~max_read_bytes:8192L fd)) in
+ check(from_capture.layout_sha256=captured.layout_sha256 && from_capture.projections=captured.projections)
+   "live worker capture did not restore its private view";
  check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
    ~expected_checkpoint_sha256:(String.make 32 'X') ~encoded ~max_read_bytes:8192L fd));false
    with W.Failed _ -> true) "worker accepted untrusted checkpoint";

@@ -121,6 +121,15 @@ reports no new decoder outcomes: historical interpretations are not fresh decode
 approvals. Automatic cache selection and trusted persistent record storage remain
 separate owner work.
 
+Worker extraction can now explicitly request `capture_checkpoint=true` on
+`SemanticWorkers.components`. The checkpoint is exported inside the successful
+live callback and delivered as immutable metadata alongside its summary, giving
+the owner a direct capture-to-trusted-digest path. Ordinary jobs default to no
+checkpoint; restore does not silently recapture historical views. Capture adds
+at most1MiB per pending completion, which the owner must include in its admission
+budget. Cancellation/failure publishes no checkpoint. It still supplies no owner
+index, archive-generation binding or automatic disk publication.
+
 ## Persistent owner-store contract (next implementation)
 
 The pure record codec is now implemented as `checkpoint_record` and

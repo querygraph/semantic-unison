@@ -13,7 +13,8 @@ type identification = { formats : string list; fingerprint : fingerprint option;
 type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
-  refinements : DngComponents.outcome list; hash_bytes_requested : int64 }
+  refinements : DngComponents.outcome list; hash_bytes_requested : int64;
+  checkpoint : ComponentHash.checkpoint option }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -30,7 +31,7 @@ type response = Hashed of fingerprint | Inspected of inspection
 type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
-  | Components of DngComponents.decoders * int64
+  | Components of DngComponents.decoders * int64 * bool
   | Restore_components of string * string * int64
   | Identify of (FormatRecognition.handle * bool) list
   | Recognize of (FormatRecognition.handle * bool) list
@@ -123,21 +124,22 @@ let execute job =
           ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
       | (Components _ | Restore_components _) as operation ->
-        let summarize session refined outcomes =
+        let summarize session refined outcomes capture =
             check_cancel ();
             let projections=List.map (fun role -> role,ComponentHash.projection refined role)
               [ComponentHash.Encoded_pixels;ComponentHash.Standard_metadata;
                ComponentHash.Private_metadata;ComponentHash.Structural;ComponentHash.Opaque] in
             {full_sha256=ComponentHash.full_sha256 refined;
              layout_sha256=ComponentHash.layout_sha256 refined;projections;
-             refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session} in
+             refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session;
+             checkpoint=(if capture then Some(ComponentHash.checkpoint session refined) else None)} in
         let components=match operation with
-          | Components (decoders,max_read_bytes) ->
+          | Components (decoders,max_read_bytes,capture) ->
             DngComponents.with_snapshot ~decoders ~max_read_bytes file
-              (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes)
+              (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture)
           | Restore_components (expected_checkpoint_sha256,encoded,max_read_bytes) ->
             DngComponents.with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded
-              (fun session snapshot -> summarize session snapshot [])
+              (fun session snapshot -> summarize session snapshot [] false)
           | _ -> assert false in
         check_cancel ();SemanticFile.check file;
         Component_inspected {components;stats}
@@ -445,9 +447,9 @@ let inspect t cancellation ~extension fd =
   | Some (Inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected inspection response")) fail
 
-let components t cancellation ~decoders ~max_read_bytes fd =
+let components t cancellation ?(capture_checkpoint=false) ~decoders ~max_read_bytes fd =
   if max_read_bytes<0L then invalid_arg "SemanticWorkers.components read limit";
-  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Components(decoders,max_read_bytes))) (function
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Components(decoders,max_read_bytes,capture_checkpoint))) (function
   | None -> return None
   | Some (Component_inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected component inspection response")) fail

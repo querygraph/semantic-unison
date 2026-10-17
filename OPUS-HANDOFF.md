@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Worker extraction now supports explicit optional capture_checkpoint (defaultfalse).
+Only successful live extraction exports bounded immutable checkpoint metadata;
+ordinary observations/restore returnNone, export adds no inputreads. Owner can
+retain its digest directly from extraction rather than trusting loaded bytes.
+Currentstock/Ox Make+selftests PASS actual76341/586683/0+80217/dea3a3/0; worker
+capture→restore controls106checks/compiler PASS53028/f3513e/0, allgroups/tokensclosed.
+Receipt `tests/qualification/component-worker-capture-actual-20261017.json`.
+Both318production sourcepins rechecked. No media/SDK/EXIO; automatic owner-index/
+namespace publication and current Dune successor checks remain outstanding.
+
 Borrowed-descriptor record staging/readback now implemented in ComponentHash.
 Fresh empty private0600 singlylinked regular outputs only; bounded writes+fsync+
 identity/sizecheck, explicit intendeddigest; bounded reader requires trusteddigest
