@@ -464,11 +464,39 @@ let inspect_components_peer = Remote.registerBoundedServerCmd "semanticComponent
   ~withScope:component_scope ~maxArgs:(max_path+128+32+1024)
   ~maxResult:(SemanticReport.max_component_size+1024) inspection_args
   (Umarshal.bounded_string SemanticReport.max_component_size) inspect_components_source
+(* Retain inside the resource lease: propagating an exception out of it would
+   retire credits despite unresolved native descriptor ownership. Allocate the
+   held promise/node/link before inspection can acquire a cache descriptor. *)
+type retained_component_owner = {
+  mutable retained_error : exn;
+  mutable retained_next : retained_component_owner option;
+}
+let retained_component_owners = ref None
+let component_retained_ownership () =
+  let rec collect result = function
+    | None -> List.rev result
+    | Some node ->
+      let result=match node.retained_error with
+        | DngComponents.Cache_ownership_uncertain state -> state::result | _ -> result in
+      collect result node.retained_next in
+  collect [] !retained_component_owners
+let hold_component_uncertainty work =
+  let pending=Lwt.wait () in
+  let node={retained_error=Out_of_memory;retained_next=None} in
+  let link=Some node in
+  BorrowedWork.catch work (function
+    | DngComponents.Cache_ownership_uncertain _ as error ->
+      node.retained_error<-error;node.retained_next<- !retained_component_owners;
+      retained_component_owners:=link;
+      (try Trace.log "Component cache ownership uncertain; report admission remains held.\n" with _ -> ());
+      pending
+    | error -> Lwt.fail error)
 let observe_components_using local_worker ~root ~path =
   match fst root with
   | Common.Local -> capture_component (fun () ->
       SemanticRuntime.with_transaction ~role:SemanticAdmission.Source ~max_payload:component_envelope_payload
-        (fun cancellation -> inspect_components ?worker:local_worker cancellation path))
+        (fun cancellation -> hold_component_uncertainty (fun () ->
+          inspect_components ?worker:local_worker cancellation path)))
   | Common.Remote _ ->
       if not (component_profile_enabled ()) then
         return (component_failure "Component DNG profile is not enabled or negotiated")

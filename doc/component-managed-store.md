@@ -172,3 +172,26 @@ exclusive-parent obligation. Replacing the configured directory or making it
 nonprivate during the await refuses the result and leaves the archive head
 unchanged. Legacy no-identity hints bypass parent opening entirely. Concurrent
 hostile same-UID mutation is not an OS-enforced isolation guarantee.
+
+
+## Report admission on cache uncertainty
+
+Local component observation now catches `Cache_ownership_uncertain` INSIDE the
+semantic transaction callback. The retained node, linked-list wrapper and pending
+promise are allocated before inspection can open cache descriptors. On uncertainty
+it keeps the original carrier, links it into owner-loop diagnostics, emits a held
+message and returns that unresolved promise. The outer resource lease consequently
+never sees an ordinary failure to retire. Helper cancellation cannot convert
+unknown native ownership into a release. No broad generic-admission policy changes
+or numeric-FD retries are introduced.
+
+`SemanticRemote.component_retained_ownership` is diagnostic, not a cleanup API.
+There is no automatic recovery/release assertion. The original disposable control
+invalidates an owned parent descriptor and calls its real production settle path
+to produce a carrier, then invokes the real local report entry with that error.
+It verifies a pending report, retained carrier, charged transaction/payload/FD
+credits, unchanged credits after actual helper cancellation, and no archive-head
+change. The probe intentionally retains application admission until process exit;
+external child/group wait proves OS closure, not successful native close or normal
+admission retirement. This narrow cache-carrier contract does not qualify every
+legacy source-FD cleanup path elsewhere in Unison.

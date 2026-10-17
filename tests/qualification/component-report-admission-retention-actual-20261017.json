@@ -1,0 +1,117 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 68144,
+      "chunk": "6e0d4a",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 86411,
+      "chunk": "1de5ba",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "stock-make",
+      "result": {
+        "path": "/private/tmp/unison-report-retention-stock-make-20261017-002/RESULT.json",
+        "bytes": 51179,
+        "sha256": "833a8264709147a3a49d5b859d94dcfbbed021549e12233c03b6f954a3d6ebc3"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-stock-make-20261017-002/SHARED-CLOSED.json",
+        "bytes": 498,
+        "sha256": "1954fea2af6d6e77b388b260f95ccc23d577767bcdca85789249205fedcd6103"
+      }
+    },
+    {
+      "name": "stock-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-jn0cye0i/RESULT.json",
+        "bytes": 97934,
+        "sha256": "1d7bde6406ffba53ec1b9ab1610e48f83bc37576ea5db83df0390560a1c5d40c"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-stock-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "42799c8409687fb578ec77c34e3bcf22f0b5aa4e4014565dd8451afe52640a97"
+      }
+    },
+    {
+      "name": "ox-make",
+      "result": {
+        "path": "/private/tmp/unison-report-retention-ox-make-20261017-001/RESULT.json",
+        "bytes": 51185,
+        "sha256": "4a90e9bbe15ff2643012bbba50ff8f747de332d823ff7de7474319ee6baa73fe"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "aef815c4b86f443a54a5ba3c7380607ee620b9ec4fef9d650613f47711e78543"
+      }
+    },
+    {
+      "name": "both-retention",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-d3s8zerx/RESULT.json",
+        "bytes": 149057,
+        "sha256": "9f8815cd61fb0faa2cce165a9f11e918918a2b19ac1e24e090ab3e3c9a5bb17b"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-both-retention-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "39421a1ca456a3578c80fa57c44df7a111b0d4262c75417c91b8d03847df8707"
+      }
+    },
+    {
+      "name": "both-report",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-5d65rbo1/RESULT.json",
+        "bytes": 149854,
+        "sha256": "1fe08226c279b97f3914b9c36b53e2972004aaefe081a6098c71ef04d6085472"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-both-report-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "dc8232083c00aedf57527f38eff7ccaa5e09c8f2e8b8c82e1f5b474cb221041e"
+      }
+    },
+    {
+      "name": "stock-dune",
+      "result": {
+        "path": "/private/tmp/unison-report-retention-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50623,
+        "sha256": "d9effec77d7ec0c5c2b3d2d551b8aa9ac825f610260eeb40b0eb134b27ffb3bc"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c58e731eb247424b6aeae0d327b5e4ea32b5938f3dda93dca183987ea9a0e604"
+      }
+    },
+    {
+      "name": "ox-dune",
+      "result": {
+        "path": "/private/tmp/unison-report-retention-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50627,
+        "sha256": "87b474bdc155dbbfd5d89674f6e85b0c0d422d5814561bf8821c39bd5e5cda9d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-report-retention-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c73391adaf6370be6e534b34388fa756c7a5007c1859ce0551c3bc40bbc51317"
+      }
+    }
+  ],
+  "scope": "Actual production cache-close uncertainty retains local report semantic admission and diagnostic carrier after cancellation; stock/Ox Make+selftests/Dune and normal local report regression controls",
+  "limitations": [
+    "Disposable probes intentionally keep application reservation until process exit; OS child/group wait is not native close settlement",
+    "No automatic uncertain-owner recovery or numeric FD retry",
+    "Does not qualify every legacy source-FD cleanup path",
+    "No SDK/media/transport/physical IO or deployment"
+  ]
+}

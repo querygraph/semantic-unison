@@ -2991,3 +2991,25 @@ Ox+bothcontrols+bothDune7405/d32134/0 allPASS, allworkers/groups/tokensclosed.
 Exactreceipt component-local-parent-replacement-actual-20261017.json. This proves
 those refusals/builds, NOT the separately open outer-admission uncertainty issue.
 Next fix that held-boundary before broader activation/remote work.
+
+
+## Outer report admission finding FIXED/QUALIFIED — 2026-10-17
+
+This supersedes the OPEN finding above for the local cache-carrier route. Local
+SemanticRemote now retains Cache_ownership_uncertain INSIDE with_transaction via
+preallocated held promise/node/link and owner diagnostics. The outer lease cannot
+mistake it for an ordinary failed callback and retire credits. Generic admission
+policy unchanged; no automatic recovery/numericFDretry/normal-close assertion.
+
+Original production-linked probe produces actual uncertain close after deliberate
+private owner-FD invalidation, then tests real local report entry: pending promise,
+retained carrier, charged transaction/payload/FD credits unchanged after helper
+cancellation, no archive-head mutation. Application admission remains intentionally
+held until disposable process exit; external direct child/group wait proves OS
+closure, NOT native close or normal application retirement. Both stock/Ox retention
+and normal-report controls PASS; stock/Ox Make+selftests/Dune allPASS. Actual68144/
+6e0d4a/0 and86411/1de5ba/0/no sessions; allcontainedworkers/groups/tokensclosed.
+Receipt component-report-admission-retention-actual-20261017.json. First23717/
+e57c75/1 sourcebuildfailure preserved (bundled Lwt.wait returns promise, notpair).
+No active uncertain descriptor/resource now. Remote cache route and broaderlegacy
+source-FD close audit remain separate; no SDK/media/transport or deployment.
