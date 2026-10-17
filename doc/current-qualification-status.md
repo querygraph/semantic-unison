@@ -15,6 +15,13 @@ All groups/CPU grants closed; no EXglobal/media/SDK used. Actual new-RPC transpo
 mixed-version/failure trials and persistent input/dependency binding remain open.
 This is not production camera or cached cross-session reuse qualification.
 
+The [production-linked remote probe](component-remote-probe.md) is now built on
+both compilers; [build/control evidence](../tests/qualification/component-remote-probe-build-actual-20261017.json)
+records ten contained calls,320 source pins and474 linked artifacts. Only compile,
+preentry refusal and offline preference branches ran. The proposed eight-case
+transport matrix still needs its owned coordinator/auditor and fresh IO grant;
+no runtime component RPC or old-peer proof follows from these build controls.
+
 Shared-machine transition: equal8/8/2 policyv3 adopted. [Build/parser and inherited locks](../tests/qualification/shared-entrypoints-actual-20261016.json) passed, followed by [actual shared sync](../tests/qualification/shared-functional-actual-20261016.json): stock/Ox workers1/2/3,18rows54CLI with independent strict client/supervisor/server/pump proofs, exact results and all tokens released. Physical IO lanes, aggregate memory and shared throughput remain unqualified. No Photo tokens or Adobe work used.
 
 | Requirement | Implementation and evidence | Remaining qualification |

@@ -124,6 +124,15 @@ loopback/mixed-version/failure transport trials remain unqualified and need a
 fresh finite IO coordination; peer hashes remain advisory, not preservation or
 archive authority. Earlier local/receiving receipts keep their historical pins.
 
+The production-linked remote probe now compiles under stock/Ox, with exact
+preentry refusal and offline preference controls:10 contained calls,320 source
+pins and474 linked artifacts verified, all groups/CPU grants closed. See
+`doc/component-remote-probe.md` and
+`tests/qualification/component-remote-probe-build-actual-20261017.json`. This
+prepares an eight-case new/old-peer/unsupported/disabled matrix; its owned
+coordinator, independent raw lifecycle audit and fresh IO admission remain
+required before actual transport. No connection/media/SDK was invoked here.
+
 **Acceptance boundary for progressive rehashing:** release readiness is measured
 against the declared supported operations, not a percentage of fields decoded.
 A partially mapped camera may use the qualified pixel/metadata separation and

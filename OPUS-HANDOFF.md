@@ -7,6 +7,36 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## CURRENT: production-linked remote probe built; coordinator still pending
+
+`tests/report/remote_probe.ml` now installs real generated roots, negotiates and
+propagates preferences, calls the production local/remote component API and
+checks supported/unsupported/no-capability/disabled outcomes. Unsupported must
+be exact `not TIFF`, not a transport/admission failure. Cleanup attempts every
+known root and pool shutdown, retaining original+all cleanup failures. The final
+local marker explicitly does not substitute for external client/server waits.
+
+Build-only driver `tests/report/build_remote_probe.py` passed actual41349/c92921/0
+NOsession, outerchild1211reaped0/othersabsent/CPUgrantclosed. Ten contained calls:
+two stock/Ox production-linked compiles, six exact argc/path/mode refusals and
+two offline preference parses. No roots installed/connection/media/SDK/EXIO in
+these controls.320 source pins+474 linked artifacts reverified; production src
+unchanged from293ee8be. Final raw result directory:
+`/private/tmp/unison-component-remote-probes-n_sc3ooj`.
+Stock probe SHAae6c322ef69733d67c2c5e7fa2312e93a161813fb81a6df93e60f611020f9ff1;
+Ox SHA cf53558789a16c7b0a9240efdc9b44ea1ef45a64e6d53146a928b4b3287d6bd3.
+Receipt `tests/qualification/component-remote-probe-build-actual-20261017.json`
+40941B SHA8ca7b040e2ac969e6ba9f9fda744463d71657f610b9c7c6d877e8583f1f3d1f9.
+
+`doc/component-remote-probe.md` defines the proposed eight-case matrix and required
+external contract. It is NOT a runnable admitted coordinator or scheduling grant.
+Next implement owned strict-loopback intent/outcome recording, combined raw
+client/supervisor/server/pump/worker/group/FD audit and unknown retention, qualify
+disposable failure accounting, then freeze exact command/workspace/pins and seek
+fresh Root EXIO admission. No runtime mode was exercised, no new-RPC/mixed-version
+claim, no consumed-grant reuse; all resources closed. Persistent binding remains
+open independently of this reporting qualification.
+
 ## CURRENT: bounded remote component protocol implemented; transport trial next
 
 `semantic-components-v0` / `semanticComponentsV0` now provides a separate SIC/0
