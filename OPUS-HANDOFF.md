@@ -47,6 +47,10 @@ Same finite4CLI/4singleSDK/8CPU+EXglobal, no18borrow. This request is NOT a gran
 fresh Root admission/deadline and all source/workspace guards remain mandatory.
 No actual all-scanned SDK run has occurred. Old-peer loopback negotiation does
 not prove arbitrary SSH/network/platform interoperability or close the full goal.
+V2 source/scheduling request queued to Photo Root as
+`01a14780-0c96-7061-9d1d-d68746774a9c` after pushing91e9658.181pins,
+checked_plan/borrowed metadata and absent workspace/admission revalidated first.
+This queue grants nothing; wait a fresh exact Root admission and deadline.
 
 ## Latest checkpoint — private helper input observations
 
