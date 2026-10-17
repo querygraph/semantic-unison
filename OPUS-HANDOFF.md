@@ -7,6 +7,38 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest camera source successor: nine-byte model-field investigation
+
+Prepared, NOT ADMITTED/DISPATCHED: `doc/private-maker-model-request-v1.json`
+5848B SHAc95723a648a0dc87a47dd4c6c61b37afb4a6fc83f15a6f62a1b6c6969ebdd803,
+plan951B SHA1fcacc02e95cf4e97f029392b9b5b62c796b9998c53383bf31527a8fb9e36411.
+Workspace `/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f`
+and `/private/tmp/unison-private-maker-model-admission-v1.json` absent atfreeze.
+Exact16executionpins/4prerequisites/qualifiedPython frozen; source8fieldlstat
+unchanged withoutpayloadread. One9bytepread absolute11440 (candidateASCII tag21),
+not the earlier34byte prospective set; tags96/97 remain unread. Raw9bytes/hex
+retained, invalidtext notdecoded; string alone neither identifiesvendor nor
+provesprivategrammar. NoSDK/sourcehash/copy/Photooriginal/serial-field reads.
+Newtarget private-maker-model has no CPU-only route. IO→Unison00..07, explicit
+inherited9FD metadata, worker10s/parent60s observation, unknownretainsno broadkill.
+Qualifiedfinallyclose preservesreadfailure+alluncertainidentities/no numericretry;
+parent exactresult/actualPID/readbound audit+freshsourceepoch beforeclose.
+
+Actual41syntheticcontrols686520/0/no session and freshdisposable9FD lifecycle
+1fffe8/0/no session passed/normalworkerreaped0/groupclosed/disposablewhole-set
+reacquired. Exactsource/argv checked_io_request also passed an explicit inert
+metadata doublee0a407/0, NOT a realadmission/lock. Source readiness receipt
+`tests/qualification/private-maker-model-ready-20261017.json`.
+Initialdisposablelifecycle child14181 failedbeforefieldread because shared_binding
+targetallowlist omittednewtarget; retainedidle14180 independently source-bound
+stopped afterSIGTERMignoredbyretain_forever, scopedSIGKILL14180only. Actualouter
+session92188/51d72a/247, direct14180wait-9/groupclosed/CPU8closed. Originalinner
+workerwait4 NOTclaimed; rawerror/originalsources/recoverypreconditions preserved.
+Correctedallowlist qualifiedbyfreshlifecycle, not replay. First7readercontrols
+8aa6e3/0 and intermediate41controls871175/0 alsoclosed; no retainedresources.
+The shared_dispatch/shared_binding source successors postdate consumedSDKV2;
+its181postpins describe its actualrun, not a new current-source match.
+
 ## Latest actual: unchanged-file SDK validation and private camera coverage
 
 All-scanned SDK V2 is CONSUMED_ACTUAL_PASS_CLOSED, not pending. Admission

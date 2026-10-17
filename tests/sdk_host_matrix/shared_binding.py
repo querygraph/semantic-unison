@@ -26,7 +26,7 @@ def verify(start,command,*,parent_pid,worker_pid,observe=os.fstat,target=TARGET)
     def require(v,s):
         if not v:raise ValueError(s)
     require(type(parent_pid) is int and parent_pid>0 and type(worker_pid) is int and worker_pid>0,'actual parent/worker IDs required')
-    require(target in (TARGET,'sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','all-scanned-sdk-validate'),'known exact shared IO target required')
+    require(target in (TARGET,'sdk-multifile-receive','sdk-receiving-comparison','mixed-sdk-metadata-hash','private-maker-slice','private-maker-model','all-scanned-sdk-validate'),'known exact shared IO target required')
     require(type(start) is dict and type(start.get('owner_pid')) is int and type(start.get('child_pid')) is int
         and start['owner_pid']==parent_pid and start['child_pid']==worker_pid
         and start.get('target')==target and start.get('command')==command

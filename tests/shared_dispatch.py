@@ -28,8 +28,9 @@ SDK_COMPARE_TARGET = 'sdk-receiving-comparison'
 SDK_SCAN_TARGET = 'all-scanned-sdk-validate'
 MIXED_TARGET = 'mixed-sdk-metadata-hash'
 SLICE_TARGET = 'private-maker-slice'
+MODEL_TARGET = 'private-maker-model'
 RECEIVING_TARGETS = ('camera-receive','camera-sdk-receive','synthetic-concurrent-receive')
-TARGETS = {SLICE_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
+TARGETS = {SLICE_TARGET,MODEL_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
            'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
            'sde-conformance', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'}
@@ -44,7 +45,7 @@ def write(path, value):
 def checked_io_request(request, target, argv, output, credits):
     """Read admission metadata only; this does not acquire IO/CPU locks."""
     from shared_io_pool import GlobalPool, read_manifest, CANONICAL_MANIFEST, CANONICAL_SHA256
-    require(target in (SLICE_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+    require(target in (SLICE_TARGET,MODEL_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
             'IO mode requires a complete job with qualified external-owner audit')
     require(isinstance(request, dict) and set(request) == {'path', 'sha256'},
             'explicit pinned IO admission required')
@@ -66,6 +67,13 @@ def checked_io_request(request, target, argv, output, credits):
         require(argv == child_argv(argv[4], argv[6], output)
                 and packet['workspace'] == str(output), 'all-scanned command/namespace differs')
         source_paths.update(Path(path) for path in current_sources())
+    if target == MODEL_TARGET:
+        from private_maker_identity_entry import checked_plan, sources, child_argv
+        require(credits == 8 and len(argv) == 9, 'exact model shared8 worker required')
+        packet = checked_plan(argv[4], argv[6])
+        require(argv == child_argv(argv[4], argv[6], output)
+                and packet['workspace'] == str(output), 'model exact worker namespace differs')
+        source_paths.update(sources())
     if target == SLICE_TARGET:
         from private_maker_execute import checked_plan,sources
         from private_maker_plan import worker_argv
@@ -150,9 +158,9 @@ def run(target, argv, output, credits, *, io_admission=None):
     script = Path(argv[1])
     require(script.is_absolute() and script.is_relative_to(ROOT) and script.is_file()
             and script.resolve() == script, 'shared target requires canonical repository script path')
-    require(target not in ('private-dng-framing-input',SLICE_TARGET) or io_admission is not None,
+    require(target not in ('private-dng-framing-input',SLICE_TARGET,MODEL_TARGET) or io_admission is not None,
             'framing input has no CPU-only runtime route')
-    require(target not in (*RECEIVING_TARGETS,SLICE_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) or (io_admission is not None and credits==8),
+    require(target not in (*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) or (io_admission is not None and credits==8),
             'camera receiving requires exact shared8 IO admission')
     require('--property-removal-controls' not in argv or io_admission is not None,
             'property-removal matrix has no CPU-only runtime route')
@@ -210,6 +218,9 @@ def run(target, argv, output, credits, *, io_admission=None):
             sys.path.insert(0,str(ROOT/'tests/sdk_host_matrix'))
             import shared_execute
             sources.extend(Path(name) for name in shared_execute.sources())
+        if target == MODEL_TARGET:
+            from private_maker_identity_entry import sources as model_sources
+            sources.extend(model_sources())
         if target == SLICE_TARGET:
             from private_maker_execute import sources as slice_sources
             sources.extend(slice_sources())
@@ -269,10 +280,10 @@ def run(target, argv, output, credits, *, io_admission=None):
                   'io_admission': io_admission,
                   'cpu_credits': credits, 'unix': time.time(),
                   'inherited_resource_fds': [dict(fd=fd,device=os.fstat(fd).st_dev,inode=os.fstat(fd).st_ino)
-                      for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (*RECEIVING_TARGETS,SLICE_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else [],
+                      for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else [],
                   'sources': pins})
             seconds = 300 if target == 'sync-functional' or target.startswith('inspect-') else 600 if target.endswith(('-build', '-check')) else 60
-            if target in ('sync-functional',*RECEIVING_TARGETS,SLICE_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
+            if target in ('sync-functional',*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
                 # Separate server sessions retain their own coordinator. Do
                 # not kill it on an outer deadline and discard live handles.
                 if not child.await_terminal((60 if target==SLICE_TARGET else 300 if target==MIXED_TARGET else 600 if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else seconds) - 2):
@@ -289,6 +300,10 @@ def run(target, argv, output, credits, *, io_admission=None):
                     from camera_sdk_concurrency.invocation import artifact_sha
                     result = read_document(report_path, artifact_sha(report_path), limit=1048576)
                     raw = None
+                elif target == MODEL_TARGET:
+                    from private_maker_execute import document
+                    result = document(report_path)
+                    raw = None
                 else:
                     raw = report_path.read_bytes()
                 after = report_path.lstat()
@@ -298,7 +313,14 @@ def run(target, argv, output, credits, *, io_admission=None):
                 if raw is not None:
                     result = json.loads(raw)
                 require(type(result.get('complete')) is bool, 'typed completion state required')
-                if target == SLICE_TARGET:
+                if target == MODEL_TARGET:
+                    from private_maker_identity_entry import checked_plan, audit_worker
+                    from private_maker_slice import stamp
+                    plan = checked_plan(argv[4], argv[6])
+                    external = audit_worker(result, plan, parent_pid=os.getpid(), worker_pid=child.pid)
+                    require(stamp(os.lstat(plan['source']['path'])) == plan['source']['identity'],
+                            'model source epoch changed before resource release')
+                elif target == SLICE_TARGET:
                     from private_maker_execute import checked_plan
                     from private_maker_audit import audit_worker
                     plan=checked_plan(argv[4],argv[6])
@@ -385,7 +407,7 @@ def run(target, argv, output, credits, *, io_admission=None):
                     from mixed_validation.parent import bind_exit
                     exit_proof=bind_exit(external,closure['returncode'])
                     write(output / 'SHARED-WORKER-EXIT-AUDIT.json',exit_proof)
-                if target in (SLICE_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
+                if target in (SLICE_TARGET,MODEL_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
                     require(not result['complete'] or closure['returncode']==0,'complete SDK matrix contradicts failed worker exit')
                 require(result['complete'] or closure['returncode'] != 0,
                         'failed result contradicts successful coordinator exit')

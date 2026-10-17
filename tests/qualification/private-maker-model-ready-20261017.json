@@ -1,0 +1,209 @@
+{
+  "schema": "unison-private-maker-model-source-qualification/1",
+  "state": "SOURCE_AND_DISPOSABLE_CONTROLS_PASS_NOT_CAMERA_ADMISSION",
+  "controls": {
+    "methods": 41,
+    "actual_owner_terminal": {
+      "chunk_id": "686520",
+      "exit_code": 0,
+      "session_id": null
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-maker-model-controls-20261017-003/SHARED-START.json",
+        "bytes": 1102,
+        "sha256": "1112ce8afdea011536071e381ad190113b088c94bf3ca67cd7463d5a8c8aaace"
+      },
+      {
+        "path": "/private/tmp/unison-maker-model-controls-20261017-003/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "05f4016ee5bcc1e4f2242e7cc72d61b87a560a5f9bed7e15864c84dca48ee4e6"
+      },
+      {
+        "path": "/private/tmp/unison-maker-model-controls-20261017-003/SHARED-STDERR.txt",
+        "bytes": 5701,
+        "sha256": "d7fb8c80534df4c443344aa64b3297917db7a3e9b1012c4ab3d2a0ba20c4c9cb"
+      }
+    ]
+  },
+  "disposable_lifecycle": {
+    "actual_owner_terminal": {
+      "chunk_id": "1fffe8",
+      "exit_code": 0,
+      "session_id": null
+    },
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-maker-model-lifecycle-20261017-002/SHARED-START.json",
+        "bytes": 1103,
+        "sha256": "8975b164e4eff6db5e135d3ffe273362e7395e3cf352217cd3cb1300472cdb66"
+      },
+      {
+        "path": "/private/tmp/unison-maker-model-lifecycle-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "7b989ff8e0709321c111aa766e20b1606dd29458b3ea1e889863891b5e23eec7"
+      },
+      {
+        "path": "/private/tmp/unison-maker-model-lifecycle-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 46,
+        "sha256": "4d746c40eaa560b465e8bb06dda86b8ddcaa565a01749d82567baa6e172e5911"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-nlqfwqeh/CONTROL-RESULT.json",
+        "bytes": 345,
+        "sha256": "55c44558f17f6940261c0936954fbac897e08a1d17a741bfb040ae74000f8aab"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-nlqfwqeh/worker/SHARED-START.json",
+        "bytes": 3401,
+        "sha256": "8ab5a0986cfc9466ec3f9cc3945e1e7119ae884d3287006706391d97ee1c0645"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-nlqfwqeh/worker/RESULT.json",
+        "bytes": 844,
+        "sha256": "c1ae8fa88559e7e0c5584af76d985eea9b253833d093b9641eedded0e1a8516c"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-nlqfwqeh/worker/SHARED-CLOSED.json",
+        "bytes": 499,
+        "sha256": "bd3710551aa6562831d4b1af8c5073d0e6ea49e2629fd9001493fa19aad3627a"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-nlqfwqeh/worker/SHARED-SERVER-AUDIT.json",
+        "bytes": 177,
+        "sha256": "ab719b452becc51636d2bbcd71f3714439d0f1457d83d9c43c240c6e347fa3e2"
+      }
+    ],
+    "scope": "Nine disposable lock FDs/inventory substitution, actual child/parent audit/fresh disposable reacquisition; no canonical IO or camera payload"
+  },
+  "preserved_initial_failure": {
+    "actual_owner_terminal": {
+      "session": 92188,
+      "chunk_id": "51d72a",
+      "exit_code": 247,
+      "remaining_session": null
+    },
+    "original_inner_worker_wait4_claimed": false,
+    "reason": "new target omitted from shared_binding allowlist; child failed before read; only idle test controller independently stopped after full source-bound evidence; outer direct child wait-9/groupclosed/CPU8closed",
+    "artifacts": [
+      {
+        "path": "/private/tmp/unison-maker-model-lifecycle-20261017-001/SHARED-CLOSED.json",
+        "bytes": 501,
+        "sha256": "0cc034e1028f3faf59b070aefc2c7cdf9a1e2b349b882cd4c61d202e9c71bfa5"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-n3y87cf4/INDEPENDENT-RECOVERY-FINAL-SIGNAL.json",
+        "bytes": 2085,
+        "sha256": "4d04b0a9a0eb2b3d2d32bcccd82b6473473ed0bf3d9aa20da6b24ff49ccf4d78"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-n3y87cf4/worker/SHARED-STDERR.txt",
+        "bytes": 1377,
+        "sha256": "6f4599e157b353b7f439105cf2cc5734c2182c6fdd3db5a21c1dafe46419a22f"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-n3y87cf4/private_maker_identity_lifecycle.py.before-recovery",
+        "bytes": 4666,
+        "sha256": "b710b3d7acc9694bbed3f70092bf0f655315d025140834f7fe488b98c87b5eed"
+      },
+      {
+        "path": "/private/tmp/unison-model-disposable-n3y87cf4/shared_binding.py.before-recovery",
+        "bytes": 3435,
+        "sha256": "684dd4798db607207224bc08de62fb58996202c30f760b68fe57927a1fb7b70c"
+      }
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity_entry.py",
+      "bytes": 8491,
+      "sha256": "fc33c91a0c75170e63392c09111cade1f8395c06749db075e92597befaef706c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity.py",
+      "bytes": 4257,
+      "sha256": "7a083f1ec9f0623cbc8a9df9403d0da654089e76b28ab2e0022112146856d2f8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_coverage.py",
+      "bytes": 4511,
+      "sha256": "1160b135c7b8a9677c344b1d776b9fbe5e5288448811456debe962a381948083"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_shape.py",
+      "bytes": 2939,
+      "sha256": "77de9b7e28b9b3c49b045cb93fa2e3a36964b2306e0d3358e91d1d2eeb86dd5c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_slice.py",
+      "bytes": 4502,
+      "sha256": "02fca8080e64e50f6a6884cfaf17732b5bfcb85d24cf7c377dcf4e6cdcddd3ef"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_plan.py",
+      "bytes": 3215,
+      "sha256": "f53a315261da8c92c2aa8a5cd18e2e9672dfaf6fefee6c00568c5a927ba42978"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_execute.py",
+      "bytes": 4841,
+      "sha256": "e22e307cfdeb396b9e335bc7322027d8818c5224ebc37b66e86c2037ebc2a20a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_audit.py",
+      "bytes": 7992,
+      "sha256": "de615092123d86f94fbd117ed2e844e05fbe4d8536ea7e14eb58bd83a5c695b0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_camera_receiving/close.py",
+      "bytes": 1628,
+      "sha256": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py",
+      "bytes": 3457,
+      "sha256": "cfd722f8d446a66d3fe4ac1874dff93786dd6790ac2b0f4e25ac4158151da8a4"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 11486,
+      "sha256": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 9999,
+      "sha256": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 29957,
+      "sha256": "64d9b4513d4f4fcfd61023de0470d63c1a73d2190a3384f77a9d2e9395a818d9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity_test.py",
+      "bytes": 5875,
+      "sha256": "6d7eefe1507c82135b72b6de38be6cba92f427a48859dd3beefc9b0b247fc522"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity_entry_test.py",
+      "bytes": 5412,
+      "sha256": "0c683b66a75caf7f28cfed15229fc47436d7cb685bd7fb89e500fddd345720c9"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity_lifecycle.py",
+      "bytes": 4666,
+      "sha256": "b710b3d7acc9694bbed3f70092bf0f655315d025140834f7fe488b98c87b5eed"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/private_maker_identity_controls.py",
+      "bytes": 537,
+      "sha256": "1df224a0aeed4f7fd365368aa889046fbfdda85455948a6c4c269183b30fdb98"
+    }
+  ],
+  "scope": "Prospective model-like field observation only, max9bytes/onepread; rawhex retained; no vendor grammar/semantic eligibility. No camera IO admission or payload read from this qualification."
+}

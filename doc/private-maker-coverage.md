@@ -39,6 +39,25 @@ saved geometry/source epoch, bound each read and total, treat the values as
 untrusted bytes, and avoid assuming that strings establish vendor identity.
 No command or payload grant exists for this prospective step yet.
 
+The subsequent prepared request narrows this further to **tag21 only: nine
+bytes at absolute11440**. Tags96/97 remain excluded because they could contain
+identifiers and are unnecessary for the first model-field investigation.
+`private-maker-model-plan-v1.json` and `private-maker-model-request-v1.json`
+freeze that one-use scope. The new dispatcher target requires a fresh exact
+Root admission, IO then CPU8, actual inherited9FD binding, and a qualified close.
+The parent independently reconstructs the diagnostic from its bounded raw hex;
+malformed text stays uninterpreted. Source/hash/epoch checks and a passed
+synthetic diagnostic do not authorize the retained-camera read.
+
+Forty-one original controls and a real disposable9FD worker lifecycle passed.
+The first disposable child refused the initially omitted shared-verifier target
+before any field read. Its retained idle controller was independently recovered;
+the outer controller's actualwait-9/CPU8closure is recorded, without claiming
+the original inner worker's wait4. Exact original sources/error evidence are
+preserved. The corrected fresh lifecycle reaped its worker normally and proved
+disposable whole-set reacquisition. No canonicalIO or camera payload was used.
+See [source readiness evidence](../tests/qualification/private-maker-model-ready-20261017.json).
+
 Even an identified vendor would still require an exact layout/version contract,
 every private reference's base and width, nested and inline-pointer handling,
 and independent fixtures/counterexamples before a production profile change.

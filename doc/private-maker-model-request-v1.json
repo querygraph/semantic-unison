@@ -1,0 +1,106 @@
+{
+  "schema": "unison-private-maker-model-request/1",
+  "state": "SOURCE_PREPARED_NOT_ADMITTED_NOT_DISPATCHED",
+  "target": "private-maker-model",
+  "workspace": "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f",
+  "admission_path": "/private/tmp/unison-private-maker-model-admission-v1.json",
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/private-maker-model-plan-v1.json",
+    "bytes": 951,
+    "sha256": "1fcacc02e95cf4e97f029392b9b5b62c796b9998c53383bf31527a8fb9e36411"
+  },
+  "interpreter": {
+    "path": "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "bytes": 18749552,
+    "sha256": "56f92de75b49e94ceb314dba0a2ed6175156f6c61739e4827c28beca32948d29"
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/private_maker_identity_entry.py",
+    "--plan",
+    "/Users/alexy/src/unison/doc/private-maker-model-plan-v1.json",
+    "--plan-sha256",
+    "1fcacc02e95cf4e97f029392b9b5b62c796b9998c53383bf31527a8fb9e36411",
+    "--admission",
+    "/private/tmp/unison-private-maker-model-admission-v1.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "command": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison/tests/private_maker_identity_entry.py",
+    "--worker",
+    "--plan",
+    "/Users/alexy/src/unison/doc/private-maker-model-plan-v1.json",
+    "--plan-sha256",
+    "1fcacc02e95cf4e97f029392b9b5b62c796b9998c53383bf31527a8fb9e36411",
+    "--workspace",
+    "/private/tmp/unison-private-maker-model-f0c6585afc364ce984c66bba92f1330f"
+  ],
+  "cpu_credits": 8,
+  "io_manifest_sha256": "f7b553987b484ee706ced90f828fb143a3a87ce445653a2d2e5a6030cc590636",
+  "execution_source_sha256": {
+    "/Users/alexy/src/unison/bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "/Users/alexy/src/unison/tests/manual.py": "028e62726dbcba201d850833801ae8f42b367369ebf0336904da6b113e353e91",
+    "/Users/alexy/src/unison/tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72",
+    "/Users/alexy/src/unison/tests/private_maker_audit.py": "de615092123d86f94fbd117ed2e844e05fbe4d8536ea7e14eb58bd83a5c695b0",
+    "/Users/alexy/src/unison/tests/private_maker_coverage.py": "1160b135c7b8a9677c344b1d776b9fbe5e5288448811456debe962a381948083",
+    "/Users/alexy/src/unison/tests/private_maker_execute.py": "e22e307cfdeb396b9e335bc7322027d8818c5224ebc37b66e86c2037ebc2a20a",
+    "/Users/alexy/src/unison/tests/private_maker_identity.py": "7a083f1ec9f0623cbc8a9df9403d0da654089e76b28ab2e0022112146856d2f8",
+    "/Users/alexy/src/unison/tests/private_maker_identity_entry.py": "fc33c91a0c75170e63392c09111cade1f8395c06749db075e92597befaef706c",
+    "/Users/alexy/src/unison/tests/private_maker_plan.py": "f53a315261da8c92c2aa8a5cd18e2e9672dfaf6fefee6c00568c5a927ba42978",
+    "/Users/alexy/src/unison/tests/private_maker_shape.py": "77de9b7e28b9b3c49b045cb93fa2e3a36964b2306e0d3358e91d1d2eeb86dd5c",
+    "/Users/alexy/src/unison/tests/private_maker_slice.py": "02fca8080e64e50f6a6884cfaf17732b5bfcb85d24cf7c377dcf4e6cdcddd3ef",
+    "/Users/alexy/src/unison/tests/sdk_host_matrix/shared_binding.py": "cfd722f8d446a66d3fe4ac1874dff93786dd6790ac2b0f4e25ac4158151da8a4",
+    "/Users/alexy/src/unison/tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "/Users/alexy/src/unison/tests/shared_dispatch.py": "64d9b4513d4f4fcfd61023de0470d63c1a73d2190a3384f77a9d2e9395a818d9",
+    "/Users/alexy/src/unison/tests/shared_io_pool.py": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488",
+    "/Users/alexy/src/unison/tests/shared_process_owner.py": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+  },
+  "prerequisites": [
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-maker-model-ready-20261017.json",
+      "bytes": 8282,
+      "sha256": "fafd491d19a23eea232290ab624540de704acb996101acb9c214d6c9b7c6afb0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-maker-slice-v1-actual-20261017.json",
+      "bytes": 4213,
+      "sha256": "7b0122515e4d1e66b2080dc542c3a38a084e9607d2d676072a60bbe603077891"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/qualification/private-maker-coverage-actual-20261017.json",
+      "bytes": 3348,
+      "sha256": "4e6e9d41d312b24c214cbc256990436b3358034b9c91ae949be5c5da17021419"
+    },
+    {
+      "path": "/private/tmp/unison-private-maker-slice-13f46b93c0ed4271af7cc389113808aa/RESULT.json",
+      "bytes": 11163,
+      "sha256": "ba6e1fa2a6a950f35b0478332c0a848a6e34d245d9600852b42bf92d3e0dd602"
+    }
+  ],
+  "source_native_identity": {
+    "st_dev": 16777223,
+    "st_ino": 307228717,
+    "st_mode": 33024,
+    "st_size": 193851848,
+    "st_mtime_ns": 1792099229810540469,
+    "st_ctime_ns": 1792113844382073309,
+    "st_nlink": 1,
+    "st_uid": 501
+  },
+  "source_metadata_checked_unix": 1792202190.395787,
+  "limits": {
+    "max_media_requested_read_bytes": 9,
+    "max_media_pread_calls": 1,
+    "exact_media_range": {
+      "offset": 11440,
+      "bytes": 9
+    },
+    "worker_observation_seconds": 10,
+    "parent_observation_seconds": 60,
+    "observation_is_hard_process_deadline": false
+  },
+  "scope": "One candidate model-like ASCII field tag21 only. Raw9bytes/hex preserved even if invalid text; no vendor recognition, semantic eligibility/private pointer closure, SDK/Adobe, original/Photo access, sourcehash/copy/write, serial-field reads or automatic successor.",
+  "runtime_trust_boundary": "Pinned qualified Python/interpreter/stdlib trusted; not hostile same-UID namespace or complete dynamic-library attestation."
+}
