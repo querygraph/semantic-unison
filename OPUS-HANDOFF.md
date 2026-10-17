@@ -64,6 +64,19 @@ Usage/contracts: `doc/all-scanned-validation.md`. exiftool-rs reuse remains defe
 until the separate extensions/dng-compare integration is ready; Perl13.59 baseline
 and all historical timing/failedpart3/consumed-admission caveats remain preserved.
 
+Next-step source proposal now exists: `tests/all_scanned_sdk_plan.py` and
+`doc/all-scanned-sdk-qualification.md`. Two calls/compiler establish an off
+baseline then require/all-scanned unchanged validation across the proxy's real
+remote-process boundary; four SDK calls total are proposed, NOT executed.
+Three pure planner controls passed under Unison8; actual680b9e/exit0/no session,
+child93067 reaped0/groupothersabsent and CPU8 closed. No EXIO or SDK was taken.
+Receipt: `tests/qualification/all-scanned-sdk-plan-actual-20261017.json`.
+The first control launcher omitted its output directory and retained idle CPU
+ownership before child construction; source-order/no-child audit preceded exact
+owner92929 recovery, actual89e146/137/no session. No worker wait4 is claimed for
+that pre-child failure. Fresh002 controls passed; failure evidence is preserved.
+Executor/admission/prefix auditor and fresh Root scheduling remain outstanding.
+
 
 ## Held-output validation checkpoint
 
