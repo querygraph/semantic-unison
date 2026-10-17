@@ -1,0 +1,95 @@
+{
+  "schema": "component-report-focused-qualification/1",
+  "scope": "local advisory renderer; no RPC/UI dispatch or transfer/archive authority",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison/src/semanticReport.ml",
+      "bytes": 17757,
+      "sha256": "7bcc9640da5e600be166f0ff01ad10765c7ffaafc0e87a40f4951343997bec2b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/src/semanticReport.mli",
+      "bytes": 2750,
+      "sha256": "f886abd1c4a676c3035fa0cee1fdd2a86030a0f2d694a1529a5d64e9a36c5f18"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/report/run.py",
+      "bytes": 1411,
+      "sha256": "264af7b525959c17a81388413cb194f572e9f7cf781af7a58a2fde71e73bc774"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/report/test.ml",
+      "bytes": 15540,
+      "sha256": "0c2b1ec3251fb6f51a4e07126df5e69cafe9c0bc5dc8af9d9c1fa154d60dc90b"
+    }
+  ],
+  "runs": [
+    {
+      "compiler": "stock",
+      "actual_owner_terminal": {
+        "session": 95503,
+        "chunk": "9475c8",
+        "exit_code": 0,
+        "session_remaining": false
+      },
+      "passed_named_controls": 20,
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-component-report-stock-20261017-001/SHARED-START.json",
+          "bytes": 1124,
+          "sha256": "716e812825f2cf0dcc784b0c05a495540c8375398f678e0c8ce45fb4af72184f"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "d4113fefa99143836f4579b3faeb5cedab39394edf095191cdc5cf0d329dc25a"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-stock-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 1441,
+          "sha256": "b265f58497ea6629731f441a041c01e00b1d2e67083d28ba2f8f6af9832a6aa4"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-stock-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "actual_owner_terminal": {
+        "session": 3630,
+        "chunk": "77408e",
+        "exit_code": 0,
+        "session_remaining": false
+      },
+      "passed_named_controls": 20,
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-component-report-ox-20261017-001/SHARED-START.json",
+          "bytes": 1125,
+          "sha256": "7666574620f3a3ae9a070eb9b9de870857fa5fcca161040bf10acf44bdcc93d1"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "7f94579500507bbb7315ebaa4e641fe7ea0c58d8c6a3b5dcc03df62d9025f142"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-ox-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 1441,
+          "sha256": "b265f58497ea6629731f441a041c01e00b1d2e67083d28ba2f8f6af9832a6aa4"
+        },
+        {
+          "path": "/private/tmp/unison-component-report-ox-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "full_builds_current": false,
+  "SDK_invoked": false,
+  "real_media_opened": false
+}

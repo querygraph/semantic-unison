@@ -102,6 +102,36 @@ identical complete plugin collections.
 
 ### Gate the operation, not deployment on total camera knowledge
 
+Local owner-report groundwork now exists in `SemanticReport.render_components`:
+explicit versioned projection contracts, independent full-byte comparison, five
+role lanes with missing values reported unknown, and conservative schema mismatch.
+Stock/Ox focused report controls pass. The off-default `semanticcomponents`
+preference now wires explicit local details through the owner/worker lifecycle;
+remote component RPC and persistent reuse remain open. Current Make+Dune both
+compilers, Make full selftests and owner/cache controls passed with1272 source
+checks; no Photo media or SDK. See
+`tests/qualification/component-report-focused-actual-20261017.json` and
+`tests/qualification/component-owner-local-actual-20261017.json`.
+
+**Acceptance boundary for progressive rehashing:** release readiness is measured
+against the declared supported operations, not a percentage of fields decoded.
+A partially mapped camera may use the qualified pixel/metadata separation and
+exact-byte receiving path while its remaining fields stay opaque. Learning one
+field's meaning does not establish its stability: record those as independent,
+versioned claims, and retain exact hashing until an explicit projection policy
+justifies a different treatment.
+
+Each refinement must expose its affected component IDs, old/new schema and
+decoder identities, dependencies and new roots. It must compose with independent
+sibling refinements deterministically; overlapping or incompatible claims refuse
+that refinement while preserving the prior usable view. A decoder or policy
+upgrade schedules only affected leaves and dependent ancestors. Retain old roots
+so peers with different knowledge can compare a common version or fall back to
+exact bytes. Pending refinement is a reported precision limit, not a reason to
+disable an otherwise qualified deployment. Persistent cross-session reuse still
+requires the input-binding proof described above; this design does not claim
+that cache is already implemented.
+
 The deployable baseline is standard metadata/pixel delineation plus opaque
 preservation and exact integrity. Deploy it when its own correctness, ownership,
 compatibility and failure checks pass; do not wait for complete MakerNote

@@ -19,6 +19,29 @@ let roundtrip observation =
   require (Report.encode ~nonce decoded=encoded) "report is not canonical";
   decoded
 let () =
+  let p = {ComponentHash.sha256=String.make 32 'p';components=1;bytes=1024L} in
+  let c = {Report.schema="dng-components/0";full_sha256=String.make 32 'f';
+    layout_sha256=String.make 32 'l';projections=[ComponentHash.Encoded_pixels,Some p]} in
+  test "component equality preserves unknown lanes and advisory scope" (fun () ->
+    let text=ok (Report.render_components ~left:c ~right:c) in
+    require (contains text "Encoded pixels: equal" && contains text "Private metadata: unknown" &&
+      contains text "do not prove equal rendering") "missing lane equated or authority broadened");
+  test "different full bytes can preserve pixel identity" (fun () ->
+    let text=ok (Report.render_components ~left:c ~right:{c with full_sha256=String.make 32 'x'}) in
+    require (contains text "full-file bytes: different" && contains text "Encoded pixels: equal")
+      "full bytes and pixel identity conflated");
+  test "schema mismatch suppresses component equality" (fun () ->
+    let text=ok (Report.render_components ~left:c ~right:{c with schema="dng-components/1"}) in
+    require (contains text "incomparable" && not (contains text "Encoded pixels: equal")) "schema mismatch compared");
+  test "component report rejects malformed and duplicate claims" (fun () ->
+    List.iter (fun bad -> require (match Report.render_components ~left:bad ~right:c with
+      Error _ -> true | _ -> false) "invalid component claim accepted")
+      [{c with full_sha256="short"};{c with projections=c.projections@c.projections};
+       {c with projections=[ComponentHash.Encoded_pixels,Some {p with bytes=0L}]}]);
+  test "component schema cannot inject terminal controls" (fun () ->
+    let value={c with schema="schema\027[2J"} in
+    require (not (String.contains (ok (Report.render_components ~left:value ~right:value)) '\027'))
+      "schema leaked escape");
   write "base" (fixture ());
   write "metadata" (fixture ~xmp:"<x>two</x>      " ());
   write "opaque" (fixture ~opaque:'Z' ());

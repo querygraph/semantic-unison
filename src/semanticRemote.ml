@@ -343,6 +343,13 @@ let try_transfer_with_producer ~producer ~connection ~source ~basis ~directory ~
    carry no transfer/commit authority, and never download the complete file. *)
 let inspection_transport = Features.register "semantic-inspect-v0" ~arcFormatChange:false None
 let meaning_transport = Features.register "semantic-inspect-v1" ~arcFormatChange:false None
+let component_details = Prefs.createBool "semanticcomponents" false ~local:true
+  ~send_value:(fun _ -> false) ~category:(`Advanced `General)
+  "show experimental local DNG component hashes in details"
+  "On explicit semantic details requests, additionally hash local DNG components. \
+   This reads the complete local file and changes no transfer or conflict decision. \
+   Remote component inspection is currently unavailable."
+let component_details_enabled () = Prefs.read component_details
 type inspection = {
   observation : SemanticReport.observation;
   local_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
@@ -360,6 +367,49 @@ let capture_report profile f = BorrowedWork.catch f (function
   | Unix.Unix_error (error,operation,_) ->
       return (report_failure profile (operation ^ ": " ^ Unix.error_message error))
   | error -> fail error)
+type component_inspection = {
+  component_observation : (SemanticReport.component_observation, string) result;
+  component_snapshot : (Fspath.t * Unix.LargeFile.stats) option;
+}
+let observe_components ~root ~path =
+  let unavailable why = {component_observation=Error (SemanticReport.reason why);
+                         component_snapshot=None} in
+  match fst root with
+  | Common.Remote _ -> return (unavailable "Remote component inspection is not negotiated")
+  | Common.Local ->
+    BorrowedWork.catch (fun () ->
+      (* No editable payload is retained; the positive minimum selects the
+         transaction's fixed descriptor and summary-buffer envelope. *)
+      SemanticRuntime.with_transaction ~role:SemanticAdmission.Source ~max_payload:1
+        (fun cancellation ->
+          let fd=Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+          let files=register_held_fd fd in
+          BorrowedWork.try_bind (fun () -> borrowed files (fun () ->
+            let stats=Unix.LargeFile.fstat fd in
+            let decoders=match DngComponents.freeze_decoders [] with
+              | Ok value -> value | Error why -> raise (Util.Transient why) in
+            SemanticWorkers.components (SemanticRuntime.get ()).pool cancellation
+              ~decoders ~max_read_bytes:stats.st_size fd))
+            (fun result ->
+              let observed = try match result with
+                | None -> unavailable "Component inspection cancelled"
+                | Some value when not (same_report_stats value.SemanticWorkers.stats (Fs.stat path)) ->
+                    unavailable "File changed or was replaced during component inspection"
+                | Some value ->
+                    let component_observation=match value.SemanticWorkers.components with
+                      | Error why -> Error (SemanticReport.reason why)
+                      | Ok summary -> Ok {SemanticReport.schema="dng-physical-partition/0;component-projection/0;no-decoders";
+                          full_sha256=summary.full_sha256;layout_sha256=summary.layout_sha256;
+                          projections=summary.projections} in
+                    {component_observation;component_snapshot=Some (path,value.stats)}
+                with error -> held_files.release_noerr files; raise error in
+              held_files.release files; return observed)
+            (fun error -> held_files.release_noerr files; fail error)))
+      (function
+        | SemanticWorkers.Failed why | Util.Transient why -> return (unavailable why)
+        | Unix.Unix_error (error,operation,_) ->
+            return (unavailable (operation ^ ": " ^ Unix.error_message error))
+        | error -> fail error)
 let inspect_file ?(meaning=false) cancellation extension path =
   let profile = FormatExtension.profile extension in
   capture_report profile (fun () ->

@@ -7,6 +7,57 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## CURRENT: explicit local component details wired and qualified
+
+The off-default local `semanticcomponents` preference now appends component
+comparisons to explicit semantic details with enabled profiles. Existing owner
+admission/worker/FD settlement carries a frozen empty decoder set, full-file read
+budget equal to opened size, and compact observation plus source stats. Both
+base-report and component snapshots enter one-shot stale-display invalidation.
+Remote roots refuse explicitly without RPC; ordinary scan/transfer decisions
+and SIR0/1 encodings are unchanged. Persistent identity reuse and negotiated
+remote component reporting remain open.
+
+Current stock Make+selftests actual18607/872a61/0 and Ox Make+selftests
+86930/71c590/0 passed. Dune stock95297/0b5754/0 and Ox54906/66e0ab/0 passed
+(Dune compile checks; full selftests ran through Make). All1272 production-source
+checks bind current bytes. Final owner controls stock48678/275d19/0 and
+Ox16614/d30cd2/0 passed default-off/explicit preference, local hash comparisons,
+remote refusal, opaque/pixel separation, source snapshots, unsupported/missing
+paths, settled permits and prior one-shot UI-cache controls. All contained groups
+reaped and canonical Unison8 grants closed; no EXglobal/Photo media/SDK.
+
+An initial owner control failed because max_payload0 violates existing admission;
+its failed child1/group closure is preserved. Positive minimum1 fixed the bounded
+summary envelope before the final builds; no broad runtime admission change.
+Receipt `tests/qualification/component-owner-local-actual-20261017.json`42356B
+SHAe3fe24387cf26d9f6e4cdcb77e0d7795896f73b0e686bfbc51e8e22574ab32a5.
+Contract and usage: `doc/component-workers.md`. Next: bounded negotiated remote
+component reporting and qualified persistent input/dependency binding, without
+turning summaries into transfer/merge authority.
+
+Latest implementation continuation: `SemanticReport.render_components` now
+provides a local advisory comparison of explicit versioned component observations.
+Exact full bytes are reported independently; unequal schema contracts suppress
+component comparisons; omitted/None lanes stay unknown. Five role comparisons
+include encoded pixels, standard/private metadata, structural and opaque bytes.
+Malformed digests/counts/duplicate lanes refuse, schema text is terminal-escaped.
+No wire bytes, RPC/UI dispatch, archive or transfer authority changed. New five
+controls plus the existing report suite passed stock actual95503/9475c8/0 and
+Ox actual3630/77408e/0, both child groups reaped and canonical CPU grants closed.
+Receipt: `tests/qualification/component-report-focused-actual-20261017.json`.
+That focused checkpoint preceded the full builds/local wiring recorded above.
+
+Latest user design clarification: separate pixel/metadata hashing is already a
+valuable baseline; incomplete mapping of smaller fields must not block otherwise
+qualified deployment. SOL.md now explicitly defines progressive-rehash acceptance:
+meaning and stability are separate versioned claims; refinements declare affected
+IDs/dependencies/old and new roots, compose deterministically across siblings,
+retain the prior view on incompatible claims, and invalidate only affected leaves
+and ancestors. Unknown bytes remain exact/hash-covered. Old schema roots support
+common-version comparison or exact fallback. This is a design update, not a claim
+that persistent cross-session reuse or deployment is already qualified.
+
 ## CURRENT: typed component worker API qualified and integrated
 
 `SemanticWorkers.components` is now implemented on main via7b900ada, cherry-picked

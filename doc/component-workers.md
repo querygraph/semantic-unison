@@ -51,8 +51,41 @@ suppression, permit/queue/localIO settlement and descriptor baseline recovery.
 Actual simultaneous CPU computation was not measured. All groups and canonical
 Unison8 tokens closed; no EXglobal, camera, Photo payload or Adobe was used.
 
-This makes the component API available to owner consumers. User-facing RPC/UI,
-archive identity, persistent-cache binding and real-camera qualification remain
+## Explicit local details
+
+With an enabled semantic profile (for example `-semanticdng true`), the additional
+off-by-default `-semanticcomponents true` preference appends component comparisons
+to explicit details requests. Ordinary scanning, transfer and reconciliation do
+not start this extra pass. It reads the complete local file, plus bounded DNG
+geometry, using an empty frozen decoder set and the existing owner transaction,
+filesystem gate and domain pool. The component read budget is the opened file's
+size; no extra private refinement is selected implicitly.
+
+`SemanticReport.render_components` compares exact full bytes independently of
+the versioned projection contract. It reports five role lanes and treats missing
+lanes as unknown. Different projection-contract versions suppress component
+comparison, while exact full SHA256 values can still be compared. Layout views
+also encode knowledge refinement and are not physical-layout change proofs.
+Malformed digests, duplicate roles and invalid counts refuse; displayed schema
+text is escaped. No SIR/0 or SIR/1 bytes change.
+
+The owner retains local source stats and checks path replacement/change before
+accepting the result. Both the earlier report snapshot and component snapshot
+join the existing one-shot details-cache invalidation. This is cooperative epoch
+binding, not exclusion of a hostile concurrent writer. Remote roots explicitly
+return unavailable: no component RPC or peer capability is inferred from the
+older report negotiation. Local-only support is an implementation stage, not a
+substitute for future bounded, separately negotiated remote reporting.
+
+[Owner qualification](../tests/qualification/component-owner-local-actual-20261017.json)
+records current stock/Ox Make+Dune builds, full Make selftests,1272 source checks
+and production-linked owner/cache controls on both compilers. The initial
+zero-payload admission refusal is preserved; the positive summary-envelope
+minimum passed final controls. All groups and CPU grants closed, no real media,
+SDK or canonical IO barrier used. The details-cache tests exercise the linked
+owner functions; they are not an interactive GUI or remote-transport trial.
+
+Archive identity, persistent-cache binding and real-camera qualification remain
 separate work. Summaries are historical observations, not reuse/publication
 capabilities. Complete private-field understanding is not required for the
 already qualified exact-layout receiving operation.

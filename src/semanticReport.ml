@@ -255,3 +255,53 @@ let render ~left_label ~right_label left right =
   describe left_label left; describe right_label right;
   let result=String.concat "\n" (List.rev !lines) ^ "\n" in
   if String.length result<=65536 then result else String.sub result 0 65480 ^ "\n[display truncated]\n"
+
+type component_observation = {
+  schema : string;
+  full_sha256 : string;
+  layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+}
+
+let render_components ~left ~right =
+  let roles = ComponentHash.[Encoded_pixels; Standard_metadata; Private_metadata;
+                            Structural; Opaque] in
+  let valid value =
+    String.length value.schema > 0 && String.length value.schema <= 256 &&
+    not (String.contains value.schema '\000') &&
+    String.length value.full_sha256 = 32 && String.length value.layout_sha256 = 32 &&
+    List.length value.projections <= 5 &&
+    List.for_all (fun role ->
+      List.length (List.filter (fun (r,_) -> r=role) value.projections) <= 1) roles &&
+    List.for_all (function _,None -> true | _,Some (p:ComponentHash.projection) ->
+      String.length p.sha256=32 && p.components>0 && p.components<=1024 && p.bytes>0L)
+      value.projections in
+  if not (valid left && valid right) then Error "Invalid component observation"
+  else begin
+    let state equal = if equal then "equal" else "different" in
+    let lines = ref ["Component observation (advisory; no rendering or transfer authority).";
+      "Exact full-file bytes: " ^ state (left.full_sha256=right.full_sha256) ^ "."] in
+    let add line = lines := !lines @ [line] in
+    if left.schema<>right.schema then
+      add "Component views incomparable: projection contract versions differ."
+    else begin
+      add ("Projection contract: " ^ display_reason left.schema);
+      add ("Layout view: " ^ state (left.layout_sha256=right.layout_sha256) ^
+        " (includes knowledge refinement; not a physical-layout change proof).");
+      List.iter (fun role ->
+        let name = match role with
+          | ComponentHash.Encoded_pixels -> "Encoded pixels"
+          | ComponentHash.Standard_metadata -> "Standard metadata"
+          | ComponentHash.Private_metadata -> "Private metadata"
+          | ComponentHash.Structural -> "Structural bytes"
+          | ComponentHash.Opaque -> "Opaque bytes" in
+        let lane value = match List.assoc_opt role value.projections with
+          | Some (Some p) -> Some p | _ -> None in
+        let comparison = match lane left,lane right with
+          | Some a,Some b -> state (a=b)
+          | _ -> "unknown (one or both views unavailable)" in
+        add (name ^ ": " ^ comparison ^ ".")) roles
+    end;
+    add "Unmapped bytes remain hash-covered; equal encoded pixels do not prove equal rendering.";
+    Ok (String.concat "\n" !lines ^ "\n")
+  end

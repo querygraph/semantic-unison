@@ -32,3 +32,17 @@ val display_reason : string -> string
 val render : left_label:string -> right_label:string -> observation -> observation -> string
 (** Bounded terminal-safe text and byte previews, with explicit current-replica
     scope. No XML interpretation, rendering identity or archive-base claim. *)
+
+type component_observation = {
+  schema : string;
+  full_sha256 : string;
+  layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+}
+val render_components : left:component_observation -> right:component_observation ->
+  (string, string) result
+(** Local advisory comparison only; no SIR/0 or SIR/1 wire change. The owner
+    supplies the explicit common projection contract, not a camera model label.
+    Missing lanes are unknown, never equal empty content. Incompatible schemas
+    suppress component comparisons. Exact full hashes remain independently
+    comparable. No persistent binding, rendering, transfer or merge authority. *)

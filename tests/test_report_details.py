@@ -4,6 +4,7 @@ from pathlib import Path
 import os
 import re
 import subprocess
+import struct
 import sys
 import tempfile
 
@@ -41,6 +42,15 @@ def main():
         subprocess.run(command + ["-o", "detail-test"], cwd=work, check=True)
         for name in ("left", "right", "state"):
             (work / name).mkdir()
+        data=bytearray(8192)
+        struct.pack_into('<2sHIH',data,0,b'II',42,8,4)
+        for i,entry in enumerate([(273,4,1,4096),(279,4,1,1024),(700,1,16,1024),(50706,1,4,1025)]):
+            struct.pack_into('<HHII',data,10+12*i,*entry)
+        data[1024:1040]=b'<x>one</x>      '
+        data[4096:5120]=b'P'*1024
+        (work/'left/components.dng').write_bytes(data)
+        data[-1]=1
+        (work/'right/components.dng').write_bytes(data)
         subprocess.run([str(work / "detail-test")], cwd=work,
                        env=dict(os.environ, UNISON=str(work / "state"), UNISON_DETAIL_TEST_ROOT=str(work)),
                        check=True, timeout=20)
