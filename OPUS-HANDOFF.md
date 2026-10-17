@@ -46,6 +46,43 @@ The dispatcher/CLI route, inherited9FD controls and fresh parent verification jo
 are still NOT wired. Next implement those before freezing a runtime request;
 no actual all-scanned SDK admission exists and no old grant may be reused.
 
+One-use entry/dispatcher is NOW wired as `all-scanned-sdk-validate` through
+`all_scanned_sdk_entry.py`. No CPU-only route. Exact packet/admission/argv,
+existing EXglobal→CPU00..07, inherited9FD guard, post-IO executable hashes,
+worker/helper/proxy audits and fresh complete-root verification precede grant
+closure. Observation expiry retains the live SDK coordinator; no broad kill.
+Source checks and bounded result/proxy reads use qualified close uncertainty.
+The shared CPU closer/readers now preserve combined rollback+directory close
+identities, original cause and known still-held successful sets; IO preserves
+both precise outer roles and upstream pre-close observations.
+
+Latest88 controls actuald787b5/0/no session passed; actual disposable inherited
+boundary dc9f5c/0/no session passed with2real Python children, both reaped7 and
+groups closed;9FD accepted to deliberate pre-SDK refusal,8FD refused earlier.
+All canonical Unison8 outer groups/tokens closed; canonical EXglobal NOT taken.
+Receipt `tests/qualification/all-scanned-sdk-entry-actual-20261017.json`.
+Preserved failures: first actual launcher used wrong sys.argv offsets, failed
+before document/guard/SDK, and retained idle controller3810. Source/census bound
+recovery stopped ONLY that controller; actualouter0a6f94/247/no session, its
+child3810 wait-9/groupclosed/CPU8closed. Originalinner3811 wait4 NOT claimed.
+Exact old launcher reconstructed and SHA-verified against START before archiving.
+Named argparse correction passed fresh002/003. One common-pool role-label
+regression actual98adf0/1 closed; corrected carrier preserves upstream identity
+plus precise outer IO role and current88 tests pass. No SDK/media/clone executed.
+
+Fresh immutable runtime request prepared: `doc/all-scanned-sdk-request-v1.json`
+SHAf06a74ea8f0ba22f5b1217507906a44bcb5eecf4fce175332e835943baecc26f;
+plan `doc/all-scanned-sdk-plan-v1.json`
+SHA983fe658d65601fcdd02acbc947945d8671124f4c47178a8d824b5717ab3e50d.
+179source pins/6prerequisites; metadata checked_plan passed and borrowed8fields
+unchanged without source payload read. Workspace `/private/tmp/u-asv-30d16e0d4925`
+and admission `/private/tmp/unison-all-scanned-sdk-admission-30d16e0d4925.json`
+were absent at preparation. Request is NOT admission: wait exact fresh Root
+grant/deadline then recheck allpins/workspace and dispatchONCE, no oldslotreuse.
+Scope4CLI/4singleSDK, two clone-only equal-root pairs, off baseline then unchanged
+all-scanned require;16GiB declaredlogicalnotcap,600s observation/unknownretain,
+Unison8+EXglobal/no18borrow. No semantic/pixel/physical sharing/throughput claim.
+
 ## Current checkpoint — all-scanned scope implemented
 
 Opt-in `adobevalidatescope = all-scanned` is wired through the existing find RPC,

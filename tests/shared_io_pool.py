@@ -52,7 +52,12 @@ def descriptor_observation(fd, role):
 
 def uncertainty_records(error, observations):
     if isinstance(error, UnresolvedIOOwnership):
-        return error.uncertain_closes
+        # A generic qualified closer may already carry the same pre-close FD.
+        # Keep that observation as well as the outer owner's more precise role;
+        # never inspect the numeric descriptor again after close uncertainty.
+        return tuple(dict(observations[item['fd']], upstream_observation=item)
+                     if item['fd'] in observations else item
+                     for item in error.uncertain_closes)
     if isinstance(error, UnresolvedOwnership) and error.uncertain_fd is not None:
         fd = error.uncertain_fd
         return (observations.get(fd, {'fd': fd, 'role': 'upstream_descriptor',
@@ -82,7 +87,8 @@ def read_manifest(path, digest):
         require(hashlib.sha256(raw).hexdigest() == digest, 'IO manifest SHA differs')
         return json.loads(raw, object_pairs_hook=unique_object)
     finally:
-        os.close(fd)
+        from private_camera_receiving.close import close_descriptors as qualified_close
+        qualified_close([fd])
 
 
 @dataclass(frozen=True)

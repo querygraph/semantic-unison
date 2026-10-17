@@ -134,6 +134,31 @@ original injected error with exact pre-close identity/original-cause assertions.
 No CLI, SDK, camera or EXglobal ran. A dispatcher route, owned CLI entry and actual
 inherited-descriptor qualification are still required before a runtime request.
 
+Those entry/dispatcher components are now implemented and qualified for the
+finite source scope. `all_scanned_sdk_entry.py` exposes the exact parent/worker
+argv, checks inherited nine descriptions before executable hashes or clone/SDK
+work, and independently audits attempted proxies/helpers and fresh complete roots
+after worker terminal observation. `shared_dispatch.py` requires exact shared8 IO
+admission for this target, retains unknown coordinators and performs actual worker
+group/reap before closing grants. The qualified reader is used for its result.
+Shared CPU and IO metadata close paths now preserve nested uncertainty; CPU
+directory-close failures also preserve successful tokens or rollback uncertainties.
+
+Current88 controls plus2actual disposable inherited-boundary children passed,
+all outer groups/CPU8 closed; evidence `tests/qualification/all-scanned-sdk-entry-actual-20261017.json`.
+The first actual test launcher failed at wrong argv indexing before any plan read;
+independent source/census proof preceded stopping its idle controller. Original
+inner-worker wait4 is not claimed. Exact old source/hash and failure are archived.
+The argparse successor passed. A later role-label regression was corrected by
+preserving upstream observation alongside the precise outer role; all pool
+regressions pass. No SDK/retainedmedia/nativeclone/canonicalEXglobal was invoked.
+
+[Fresh request](all-scanned-sdk-request-v1.json) pins the exact
+[plan](all-scanned-sdk-plan-v1.json),179execution sources and6prerequisites.
+Only metadata/source preflight was performed. It is not runtime permission;
+Root must publish its exact fresh admission/deadline. No existing admission is
+reused and no dispatch occurs from resource availability or this document.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under

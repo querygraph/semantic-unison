@@ -108,6 +108,49 @@ class PoolControls(unittest.TestCase):
         with self.assertRaises(ValueError):
             self.pool.try_acquire((0,))
 
+    def test_combined_refusal_and_directory_close_remains_unresolved(self):
+        real_close = os.close
+        attempts = []
+        directory = []
+        real_open = os.open
+        def opened(path, flags, *args, **kwargs):
+            fd = real_open(path, flags, *args, **kwargs)
+            if str(path) == str(self.path): directory.append(fd)
+            return fd
+        def closed(fd):
+            attempts.append(fd)
+            if fd in directory: raise OSError('original directory close uncertainty')
+            real_close(fd)
+        with patch('shared_cpu_pool.os.open', side_effect=opened), \
+             patch('shared_cpu_pool.os.close', side_effect=closed), \
+             patch.object(Pool, '_token_bound', side_effect=ValueError('original token refusal')):
+            with self.assertRaises(UnresolvedOwnership) as caught: self.pool.try_acquire((0,))
+        try:
+            self.assertIsInstance(caught.exception.original_failure, ValueError)
+            self.assertEqual(caught.exception.uncertain_closes[0]['fd'], directory[0])
+            self.assertIsNotNone(caught.exception.uncertain_closes[0]['observed_before_close'])
+            self.assertEqual(attempts.count(directory[0]), 1)
+        finally: real_close(directory[0])  # Injected refusal explicitly left it open.
+
+    def test_rollback_and_directory_close_preserve_both_uncertain_identities(self):
+        real_close, real_open = os.close, os.open
+        opened_fds, attempts = [], []
+        def opened(path, flags, *args, **kwargs):
+            fd = real_open(path, flags, *args, **kwargs); opened_fds.append(fd); return fd
+        def closed(fd):
+            attempts.append(fd); raise OSError('original modeled close uncertainty')
+        with patch('shared_cpu_pool.os.open', side_effect=opened), \
+             patch('shared_cpu_pool.os.close', side_effect=closed), \
+             patch.object(Pool, '_token_bound', side_effect=ValueError('original token refusal')):
+            with self.assertRaises(UnresolvedOwnership) as caught: self.pool.try_acquire((0,))
+        try:
+            identities = caught.exception.uncertain_closes
+            self.assertEqual({r['fd'] for r in identities}, set(opened_fds))
+            self.assertTrue(all(r['observed_before_close'] is not None for r in identities))
+            self.assertEqual(len(attempts), len(set(attempts)))
+        finally:
+            for fd in opened_fds: real_close(fd)  # Test double closed none.
+
     def test_invalid_indexes_refused(self):
         for indexes in [(), (True,), (1, 0), (0, 0), (18,)]:
             with self.subTest(indexes=indexes), self.assertRaises(ValueError):

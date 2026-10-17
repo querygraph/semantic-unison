@@ -47,16 +47,10 @@ def same_inode(a, b):
 
 
 def close_descriptors(fds):
-    # On a failed close, do not retry that numeric fd or start another attempt.
-    # Preserve all not-yet-closed descriptions for the retaining coordinator.
-    pending = list(fds)
-    while pending:
-        fd = pending.pop()
-        try:
-            os.close(fd)
-        except BaseException as error:
-            raise UnresolvedOwnership('token close outcome unknown; retain owner',
-                                      retained_fds=pending, uncertain_fd=fd) from error
+    # Lazy import avoids the shared-IO/carrier definition cycle. Preserve every
+    # nested pre-close identity and original failure, not just one FD number.
+    from private_camera_receiving.close import close_descriptors as qualified_close
+    qualified_close(fds)
 
 
 def unique_object(pairs):
@@ -99,7 +93,7 @@ class Pool:
                     'manifest changed while reading')
             require(hashlib.sha256(raw).hexdigest() == expected_sha256, 'manifest pin differs')
         finally:
-            os.close(fd)
+            close_descriptors([fd])
         value = json.loads(raw, object_pairs_hook=unique_object)
         require(value['state'] == 'ROOT_SHARED_NATIVE_AND_STAGE_CPU_POOL_V1', 'pool schema differs')
         path = value['path']
@@ -196,17 +190,11 @@ class Pool:
             raise
         finally:
             try:
-                os.close(directory)
-            except BaseException as error:
-                if failure is not None:
-                    # Keep the first failure and its exact still-owned token
-                    # set; do not substitute already-closed descriptor IDs.
-                    failure.add_note('pool directory close outcome unknown; do not retry fd%d: %r'
-                                     % (directory, error))
-                else:
-                    raise UnresolvedOwnership('pool directory close outcome unknown; retain owner',
-                                              retained_fds=lease.fds if lease else (),
-                                              uncertain_fd=directory) from error
+                close_descriptors([directory])
+            except UnresolvedOwnership as error:
+                if lease is not None:
+                    error.retained_fds = tuple(dict.fromkeys((*error.retained_fds, *lease.fds)))
+                raise
 
 
 @dataclass

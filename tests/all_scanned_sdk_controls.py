@@ -15,7 +15,10 @@ if __name__ == '__main__':
         'all_scanned_sdk_paths_test',
         'all_scanned_sdk_prefix_test',
         'all_scanned_sdk_boundary_test',
+        'all_scanned_sdk_entry_test',
         'invocation_journal_test',
+        'shared_cpu_pool_test',
+        'shared_io_pool_test',
     ])
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     raise SystemExit(0 if result.wasSuccessful() else 1)
