@@ -1,0 +1,51 @@
+{
+  "state": "OWNER_BOUND_COMPONENT_WORKER_REFRESH_PASS_CLOSED",
+  "actual_parent_terminal": {
+    "session": 67532,
+    "chunk": "754d9e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-owned-refresh-stock-make-20261017-001/RESULT.json",
+        "bytes": 50166,
+        "sha256": "69debe455aed25424493114f7bf8a788ef3b606eee8be52c90d86cf95a94f000"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-owned-refresh-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "dd88f796b3ecf252936b691494338259dde81f7b07eaa147693e3f86a9520f33"
+      },
+      "source_checks": 318
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-owned-refresh-ox-make-20261017-001/RESULT.json",
+        "bytes": 50172,
+        "sha256": "60a0bfd87d3382bd1ec9e205fd5b7867b526e8256fd2b723e8e67fe55479ee3e"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-owned-refresh-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "67afda59b7bfa3692cc8399fb4eab4617a11882b5997e5ef2c30ebe1d0a04209"
+      },
+      "source_checks": 318
+    }
+  ],
+  "worker_checks_per_compiler": 116,
+  "worker_raw": {
+    "path": "/private/tmp/unison-component-worker-controls-iq8ebxtx/RESULT.json",
+    "bytes": 127513,
+    "sha256": "10a8a1b712b4093691144def23b047eeb94aa9d7b2eb887703820995ac50c92d"
+  },
+  "worker_closure": {
+    "path": "/private/tmp/unison-owned-refresh-worker-controls-20261017-001/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "88ce7a9e656e730e2c47f8cbb62a987466cc2647385f8eeac322580e14f03a56"
+  },
+  "scope": "Trusted owner entry authenticates bounded record and historical inventory on worker before input hashing/decoder execution; full current input and parser checks remain. Corrupt/foreign/oversized record rejection and unchanged reuse. No namespace selection, archive adoption, media/SDK/transport or Dune rerun."
+}

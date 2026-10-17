@@ -2675,3 +2675,40 @@ User explicitly requested merging PR #1 during the handoff turn. Completed:
 Future implementation commits must not be described as updates to an open PR1:
 that PR is now merged. Continue on a suitable branch and use a distinct review
 when appropriate. No upstream submission or full-goal qualification follows.
+
+## Owner-bound worker refresh successor — 2026-10-17
+
+Separate `feat/component-owned-worker-refresh` adds
+`SemanticWorkers.refresh_owned_components`: the worker authenticates a bounded
+UCR record against its trusted UDI entry and derives checkpoint digest and full
+historical decoder inventory there, then runs existing full-input/current-parser
+verification and localized decoder refresh. No independently chosen inventory
+can be substituted through this API. It uses existing CPU/IO/cancellation and
+FD settlement; it does not open/select cache objects or adopt archive state.
+
+Actual owner67532/754d9e/0/no session: stock/Ox Make/fullselftests plus116 original
+worker checks/compiler PASS, all three contained workers/groups/tokens closed.
+Corrupt/foreign record rejection, oversized prequeue refusal and unchanged-view
+reuse pass. Receipt: tests/qualification/component-owned-worker-refresh-actual-20261017.json.
+Dune was not rerun for this successor; no media/SDK/transport. Managed namespace
+opening and automatic capture/selection remain next integration work. Main's
+frozen RPC sources and separate admission requirements remain unchanged.
+
+## Indexed worker routing — 2026-10-17
+
+The same owned-worker successor now adds `components_indexed`: exact immutable
+owner/root/path/generation selection runs inside the worker. Missing/stale entry
+freshly extracts; matching entry authenticates its record and refreshes. A missing
+selected record reports incomplete metadata, corrupt/foreign evidence fails,
+and neither silently triggers extraction. Optional checkpoint capture supports
+both routes without publishing or advancing the index/archive. No managed cache
+loader or normal report-path installation is claimed.
+
+Actual owner19704/4509e5/0/no session: current stock/Ox Make/fullselftests/Dune,
+all five contained workers/groups/tokens closed; current production-source pins
+and linked fixture/control artifacts independently rebound. Exact count and pins
+are in component-indexed-worker-refresh-actual-20261017.json. Contract:
+doc/component-worker-cache-routing.md. Main's reviewed frozen RPC still has no
+fresh admission; observed Photo defer is scheduling evidence, not proof of a
+currently live owner. No RPC retry/dispatch, media/SDK/transport or physical-read
+savings claim follows from these worker controls.

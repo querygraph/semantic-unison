@@ -95,6 +95,31 @@ let () =
    "worker failed to retain unchanged decoder view";
  check(Atomic.get called=before && retained.checkpoint<>None)
    "unchanged worker refresh ran decoder or omitted requested capture";
+ let entry=DngComponents.make_owner_entry ~root_identity:"original-worker-root"
+   ~path:"fixture.dng" ~generation_sha256:(SemanticHash.string "original-worker-generation")
+   ~checkpoint ~outcomes:captured.refinements in
+ let record=ComponentHash.checkpoint_record ~binding:(DngComponents.owner_entry_binding entry) checkpoint in
+ let owned record decoders=summary(Lwt_unix.run(W.refresh_owned_components pool (H.cancellation())
+   ~entry ~record ~decoders ~capture_checkpoint:true ~max_read_bytes:8321L fd)) in
+ let owned_retained=owned record frozen in
+ check(owned_retained.layout_sha256=captured.layout_sha256 &&
+   owned_retained.reused_components=retained.reused_components && owned_retained.checkpoint<>None)
+   "owner-bound refresh lost authenticated capture";
+ check(Atomic.get called=before && owned_retained.hash_bytes_requested=8192L)
+   "owner-bound unchanged refresh ran decoder or skipped full input hash";
+ let corrupt=Bytes.of_string record in
+ Bytes.set corrupt (Bytes.length corrupt-1) (Char.chr(Char.code(Bytes.get corrupt (Bytes.length corrupt-1)) lxor 1));
+ check(try ignore(owned (Bytes.to_string corrupt) frozen);false with W.Failed _ -> true)
+   "owner-bound refresh accepted corrupt record";
+ let foreign=ComponentHash.checkpoint_record ~binding:(SemanticHash.string "foreign-worker-owner") checkpoint in
+ check(try ignore(owned foreign frozen);false with W.Failed _ -> true)
+   "owner-bound refresh accepted foreign record binding";
+ check(Atomic.get called=before && H.usage b=(0,0) && (W.usage pool).running=0)
+   "owner-bound authentication invoked decoder or leaked admission";
+ check(try ignore(W.refresh_owned_components pool (H.cancellation()) ~entry
+   ~record:(String.make (ComponentHash.max_checkpoint_size+81) 'x') ~decoders:frozen
+   ~max_read_bytes:8321L fd);false with Invalid_argument _ -> true)
+   "owner-bound oversized record queued";
  let upgraded=match DngComponents.freeze_decoders
    [{component_id="dng/ifd/0/tag/50740/value";
      decoder={decoder with implementation_sha256=SemanticHash.string "worker-upgrade/2"}}] with
@@ -105,6 +130,43 @@ let () =
    "worker upgrade failed localized invalidation";
  check(Atomic.get called=before+1 && upgraded.hash_bytes_requested=8321L && upgraded.checkpoint<>None)
    "worker upgrade decoder count/budget/capture mismatch";
+ let ledger=DngComponents.empty_owner_index ~max_entries:4 ~max_bytes:524288 in
+ let ledger=match DngComponents.replace_owner_entry ledger ~expected_entry_sha256:None entry with
+   | Ok value -> value | Error why -> failwith why in
+ let generation=SemanticHash.string "original-worker-generation" in
+ let indexed index path generation record limit= Lwt_unix.run(W.components_indexed pool (H.cancellation())
+   ~index ~root_identity:"original-worker-root" ~path ~generation_sha256:generation
+   ~record ~decoders:frozen ~capture_checkpoint:true ~max_read_bytes:limit fd) in
+ let before_indexed=Atomic.get called in
+ let selected=summary(indexed ledger "fixture.dng" generation (Some record) 8192L) in
+ check(selected.layout_sha256=captured.layout_sha256 && selected.reused_components=retained.reused_components &&
+   selected.hash_bytes_requested=8192L && selected.checkpoint<>None && Atomic.get called=before_indexed)
+   "exact indexed selection failed authenticated reuse";
+ check(match indexed ledger "fixture.dng" generation None 0L with
+   | Some {W.components=Error _;_} -> true | _ -> false)
+   "missing selected record silently extracted source";
+ check(try ignore(indexed ledger "fixture.dng" generation (Some foreign) 8321L);false
+   with W.Failed _ -> true) "indexed foreign record silently fell back";
+ check(Atomic.get called=before_indexed && H.usage b=(0,0))
+   "indexed invalid capture ran decoder or retained CPU";
+ let stale=summary(indexed ledger "fixture.dng" (SemanticHash.string "next-generation") (Some foreign) 8321L) in
+ check(stale.layout_sha256=captured.layout_sha256 && stale.reused_components=[] &&
+   stale.hash_bytes_requested=8321L && stale.checkpoint<>None && Atomic.get called=before_indexed+1)
+   "stale generation reused old entry or inspected unselected foreign record";
+ let miss=summary(indexed ledger "other.dng" generation None 8321L) in
+ check(miss.layout_sha256=captured.layout_sha256 && miss.reused_components=[] &&
+   Atomic.get called=before_indexed+2) "missing exact path did not freshly extract";
+ let empty_index=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:524288 in
+ let miss=summary(indexed empty_index "fixture.dng" generation None 8321L) in
+ check(miss.checkpoint<>None && Atomic.get called=before_indexed+3)
+   "empty index failed fresh capture route";
+ let cancelled=H.cancellation () in H.cancel cancelled;
+ check(Lwt_unix.run(W.components_indexed pool cancelled ~index:ledger
+   ~root_identity:"original-worker-root" ~path:"fixture.dng" ~generation_sha256:generation
+   ~record:(Some foreign) ~decoders:frozen ~max_read_bytes:8321L fd)=None)
+   "cancelled indexed job authenticated or delivered data";
+ check(Atomic.get called=before_indexed+3 && H.usage b=(0,0))
+   "cancelled indexed job invoked decoder or retained CPU";
  check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
    ~expected_checkpoint_sha256:(String.make 32 'X') ~encoded ~max_read_bytes:8192L fd));false
    with W.Failed _ -> true) "worker accepted untrusted checkpoint";
@@ -117,6 +179,10 @@ let () =
  check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
    ~expected_checkpoint_sha256:digest ~encoded ~max_read_bytes:8192L changed));false
    with W.Failed _ -> true) "changed input reused cached worker hashes";
+ check(try ignore(Lwt_unix.run(W.components_indexed pool (H.cancellation()) ~index:ledger
+   ~root_identity:"original-worker-root" ~path:"fixture.dng" ~generation_sha256:generation
+   ~record:(Some record) ~decoders:frozen ~max_read_bytes:8321L changed));false
+   with W.Failed _ -> true) "indexed entry bypassed complete current input verification";
  Unix.close changed;
  Unix.close fd;finish pool b;
  let b=budget 1 in let io=IoAdmission.create ~per_device:1 ~max_pending:4 in

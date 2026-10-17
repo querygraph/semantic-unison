@@ -1,0 +1,83 @@
+{
+  "state": "INDEXED_COMPONENT_WORKER_SELECTION_REFRESH_AND_FRESH_CAPTURE_PASS_CLOSED",
+  "actual_parent_terminal": {
+    "session": 19704,
+    "chunk": "4509e5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-indexed-refresh-stock-make-20261017-001/RESULT.json",
+        "bytes": 50166,
+        "sha256": "604ca40a56314444878eb60df8d258a2fca0d118af8392c8d2c9c0b5f44c1e7f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-indexed-refresh-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "022c3867e6b9fbc8fe02949f5cac96182a7daddc36bfec97adef89fb0b8c2c49"
+      },
+      "source_checks": 318
+    },
+    {
+      "label": "stock",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-indexed-refresh-stock-dune-20261017-001/RESULT.json",
+        "bytes": 49610,
+        "sha256": "c173c8640ae19edf184fd7932ed106568c374a9181b26feddd821f9f240aac7a"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-indexed-refresh-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "8b52ec6c5e5f6db78c93beee43c222199c37a6ac168427035243e804c7bbaa5d"
+      },
+      "source_checks": 318
+    },
+    {
+      "label": "ox",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-indexed-refresh-ox-make-20261017-001/RESULT.json",
+        "bytes": 50172,
+        "sha256": "d81fe30dd021e971e35c5a7cdb9c39994714ddaac8e9d0ccf823d0097a59c7a1"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-indexed-refresh-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "1d0a98caaae3a639ea6f3eaada169a29d38f8882307548c20bdd3421aa861586"
+      },
+      "source_checks": 318
+    },
+    {
+      "label": "ox",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-indexed-refresh-ox-dune-20261017-001/RESULT.json",
+        "bytes": 49614,
+        "sha256": "6c9726ad8d8d53198ec29982e43ff249dba4878ee0e5d97e798998c3fe1d68fb"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-indexed-refresh-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c2c66f29bf89ccae3f739dc31da82e8fd198d27225028e4dc94cda39af805cd9"
+      },
+      "source_checks": 318
+    }
+  ],
+  "worker_checks_per_compiler": 126,
+  "worker_raw": {
+    "path": "/private/tmp/unison-component-worker-controls-vmonf8_3/RESULT.json",
+    "bytes": 127513,
+    "sha256": "2cc165752fd4dc447166239fc883fd70d9dc6e552bbc68915456f4073deb239b"
+  },
+  "worker_closure": {
+    "path": "/private/tmp/unison-indexed-refresh-worker-controls-20261017-001/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "1dd70f95ac9db2c70493972a712a429725c0eb333798da3db77f9b139678f2be"
+  },
+  "scope": "Exact owner/root/path/generation selection on coordinated worker; hit authenticates retained record, missing/stale key freshly extracts, missing selected record errors, foreign/corrupt record cannot silently fall back, changed input rejects, cancellation settles. No namespace open, normal scan installation, peer/camera/SDK/transport, archive adoption or physical-read savings claim."
+}

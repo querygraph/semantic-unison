@@ -159,3 +159,38 @@ val refresh_components : t -> HelperSupervisor.cancellation ->
     live checkpoint; default false. Same cancellation/IO/CPU/FD settlement as
     [components]. Account for bounded input checkpoint plus optional output per
     pending job. No automatic owner index, peer code, archive or publication. *)
+
+val refresh_owned_components : t -> HelperSupervisor.cancellation ->
+  entry:DngComponents.owner_entry -> record:string -> decoders:DngComponents.decoders ->
+  ?capture_checkpoint:bool -> max_read_bytes:int64 -> Unix.file_descr ->
+  component_inspection option Lwt.t
+(** Refresh an owner-selected retained capture on the coordinated worker. Derive
+    checkpoint digest and complete historical decoder inventory only from the
+    trusted entry after authenticating its bounded record; callers cannot mix
+    an independently selected inventory with that record. Authentication runs on
+    the worker before current-input hashing or any decoder invocation. Complete
+    input/current-parser verification still precedes reuse. Same cancellation,
+    IO/CPU/FD settlement and optional output capture as [refresh_components].
+    The owner must select the entry from trusted state and independently settle
+    its cache-read FDs before submission. This API consumes immutable metadata,
+    not namespace presence/producer settlement proof; no opens, cache selection,
+    fallback extraction, archive mutation or publication. Account for at most
+    one bounded record plus entry and optional checkpoint per pending job. *)
+
+val components_indexed : t -> HelperSupervisor.cancellation ->
+  index:DngComponents.owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> record:string option -> decoders:DngComponents.decoders ->
+  ?capture_checkpoint:bool -> max_read_bytes:int64 -> Unix.file_descr ->
+  component_inspection option Lwt.t
+(** Worker-side exact trusted owner/path/generation selection. A missing or stale
+    entry uses fresh extraction with current frozen decoders. A selected entry
+    requires its authenticated retained record and uses owner-bound refresh;
+    missing record is explicit [components=Error _], corrupt/foreign records fail
+    the job. Neither is silently downgraded to fresh extraction. Unselected record
+    bytes are ignored, never promoted into authority. Optional capture applies to
+    both routes; it does not publish or insert a new entry. Same CPU/IO/FD and
+    cancellation rules as [components]. Caller owns index provenance, current
+    generation selection, cache-read settlement and metadata memory admission.
+    Immutable index snapshots may be shared across queued jobs within owner
+    budgets. No opens, disk discovery, cleanup, archive mutation or automatic
+    installation in the normal scan path. *)
