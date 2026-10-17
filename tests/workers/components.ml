@@ -84,6 +84,27 @@ let () =
    ~encoded:(ComponentHash.checkpoint_bytes checkpoint) ~max_read_bytes:8192L fd)) in
  check(from_capture.layout_sha256=captured.layout_sha256 && from_capture.projections=captured.projections)
    "live worker capture did not restore its private view";
+ let refresh decoders limit=summary(Lwt_unix.run(W.refresh_components pool (H.cancellation())
+   ~previous:captured.refinements ~decoders ~capture_checkpoint:true
+   ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
+   ~encoded:(ComponentHash.checkpoint_bytes checkpoint) ~max_read_bytes:limit fd)) in
+ let before=Atomic.get called in
+ let retained=refresh frozen 8192L in
+ check(retained.layout_sha256=captured.layout_sha256 && retained.hash_bytes_requested=8192L &&
+   retained.reused_components=["dng/ifd/0/tag/50740/value"] && retained.invalidated_components=[])
+   "worker failed to retain unchanged decoder view";
+ check(Atomic.get called=before && retained.checkpoint<>None)
+   "unchanged worker refresh ran decoder or omitted requested capture";
+ let upgraded=match DngComponents.freeze_decoders
+   [{component_id="dng/ifd/0/tag/50740/value";
+     decoder={decoder with implementation_sha256=SemanticHash.string "worker-upgrade/2"}}] with
+   | Ok value -> value | Error why -> failwith why in
+ let upgraded=refresh upgraded 8321L in
+ check(upgraded.layout_sha256<>captured.layout_sha256 && pixels upgraded=pixels captured &&
+   upgraded.reused_components=[] && upgraded.invalidated_components=["dng/ifd/0/tag/50740/value"])
+   "worker upgrade failed localized invalidation";
+ check(Atomic.get called=before+1 && upgraded.hash_bytes_requested=8321L && upgraded.checkpoint<>None)
+   "worker upgrade decoder count/budget/capture mismatch";
  check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
    ~expected_checkpoint_sha256:(String.make 32 'X') ~encoded ~max_read_bytes:8192L fd));false
    with W.Failed _ -> true) "worker accepted untrusted checkpoint";

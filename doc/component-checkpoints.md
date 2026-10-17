@@ -132,6 +132,14 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+`SemanticWorkers.refresh_components` now runs restore and decoder-inventory
+refresh together under the existing coordinated worker lifecycle. Its immutable
+summary includes reused and invalidated component IDs and optional new checkpoint
+capture. Unchanged decoders need no execution; changed decoders run on the worker
+with the shared read budget. The owner must bind prior outcomes to its trusted
+checkpoint and budget input metadata plus optional output per pending job.
+Automatic disk selection/index publication remains unimplemented.
+
 The pure record codec is now implemented as `checkpoint_record` and
 `checkpoint_from_record`. UCR/0 is eight-byte magic `55 43 52 00 00 00 00 00`,
 raw32-byte owner binding, raw32-byte checkpoint digest, eight-byte big-endian

@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Worker decoder refresh connected: `SemanticWorkers.refresh_components` restores
+trusted checkpoint+prioroutcomes, selects currentdecoders offowner, reports reused/
+invalidatedIDs and optionally captures refreshedmetadata. Unchangedinventory runs
+zero decoders; upgrade runs once within localizedbudget and preservespixels.
+Currentstock/Ox fullMake+selftests passed21922/e903fb/0+48701/08525e/0; worker110checks
+each passed6404/e45bad/0. Allworkers/groups/CPUtokensclosed;318sourcepins/build checked.
+Receipt `tests/qualification/component-worker-refresh-actual-20261017.json`.
+No media/SDK/EXIO/mainRPCsourcechanges. Namespace/ownerindex publication and current
+Dune successor remain outstanding; no automatic diskcache selection yet.
+
 Sibling composition qualified with actual sequential checkpoint upgrades: A→B and
 B→A produce identical checkpointbytes/layoutroots/pixelprojections; initial decoder
 order also commutes. Eachstep retains its independent sibling and charges only

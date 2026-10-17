@@ -16,7 +16,8 @@ type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
   refinements : DngComponents.outcome list; hash_bytes_requested : int64;
-  checkpoint : ComponentHash.checkpoint option }
+  checkpoint : ComponentHash.checkpoint option;
+  reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -146,3 +147,15 @@ val restore_components : t -> HelperSupervisor.cancellation ->
     Returned refinements are empty: no current decoder was invoked or approved.
     Only immutable summaries cross back; no session or reader escapes. No
     automatic cache selection, archive trust or persistence is supplied. *)
+
+val refresh_components : t -> HelperSupervisor.cancellation ->
+  previous:DngComponents.outcome list -> decoders:DngComponents.decoders ->
+  ?capture_checkpoint:bool -> expected_checkpoint_sha256:string -> encoded:string ->
+  max_read_bytes:int64 -> Unix.file_descr -> component_inspection option Lwt.t
+(** Authenticated restore and decoder-inventory refresh on the coordinated worker.
+    Prior outcomes must come from trusted owner capture, complete and bound to the
+    supplied checkpoint. Reused/invalidated IDs distinguish historical retained
+    interpretations from freshly run decoders. Optional capture exports the new
+    live checkpoint; default false. Same cancellation/IO/CPU/FD settlement as
+    [components]. Account for bounded input checkpoint plus optional output per
+    pending job. No automatic owner index, peer code, archive or publication. *)

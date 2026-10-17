@@ -14,7 +14,8 @@ type recognition = { formats : string list; stats : Unix.LargeFile.stats }
 type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
   refinements : DngComponents.outcome list; hash_bytes_requested : int64;
-  checkpoint : ComponentHash.checkpoint option }
+  checkpoint : ComponentHash.checkpoint option;
+  reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
@@ -33,6 +34,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Observe of FormatExtension.handle
   | Components of DngComponents.decoders * int64 * bool
   | Restore_components of string * string * int64
+  | Refresh_components of DngComponents.outcome list * DngComponents.decoders * string * string * int64 * bool
   | Identify of (FormatRecognition.handle * bool) list
   | Recognize of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
@@ -123,8 +125,8 @@ let execute job =
         Inspected {proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
           ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
-      | (Components _ | Restore_components _) as operation ->
-        let summarize session refined outcomes capture =
+      | (Components _ | Restore_components _ | Refresh_components _) as operation ->
+        let summarize session refined outcomes capture reused invalidated =
             check_cancel ();
             let projections=List.map (fun role -> role,ComponentHash.projection refined role)
               [ComponentHash.Encoded_pixels;ComponentHash.Standard_metadata;
@@ -132,14 +134,19 @@ let execute job =
             {full_sha256=ComponentHash.full_sha256 refined;
              layout_sha256=ComponentHash.layout_sha256 refined;projections;
              refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session;
-             checkpoint=(if capture then Some(ComponentHash.checkpoint session refined) else None)} in
+             checkpoint=(if capture then Some(ComponentHash.checkpoint session refined) else None);
+             reused_components=reused;invalidated_components=invalidated} in
         let components=match operation with
           | Components (decoders,max_read_bytes,capture) ->
             DngComponents.with_snapshot ~decoders ~max_read_bytes file
-              (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture)
+              (fun session ~initial:_ ~refined outcomes -> summarize session refined outcomes capture [] [])
           | Restore_components (expected_checkpoint_sha256,encoded,max_read_bytes) ->
             DngComponents.with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded
-              (fun session snapshot -> summarize session snapshot [] false)
+              (fun session snapshot -> summarize session snapshot [] false [] [])
+          | Refresh_components (previous,decoders,expected_checkpoint_sha256,encoded,max_read_bytes,capture) ->
+            DngComponents.with_refreshed_checkpoint ~previous ~decoders ~expected_checkpoint_sha256
+              ~max_read_bytes file encoded (fun session result ->
+                summarize session result.snapshot result.outcomes capture result.reused result.invalidated)
           | _ -> assert false in
         check_cancel ();SemanticFile.check file;
         Component_inspected {components;stats}
@@ -396,7 +403,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Reconcile _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Restore_components _ | Refresh_components _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -464,6 +471,19 @@ let restore_components t cancellation ~expected_checkpoint_sha256 ~encoded ~max_
       | None -> return None
       | Some (Component_inspected result) -> return (Some result)
       | Some _ -> fail (Failed "unexpected restored component response")) fail
+
+let refresh_components t cancellation ~previous ~decoders ?(capture_checkpoint=false)
+    ~expected_checkpoint_sha256 ~encoded ~max_read_bytes fd =
+  if max_read_bytes<0L || List.length previous>64 || String.length expected_checkpoint_sha256<>32 ||
+    String.length encoded>ComponentHash.max_checkpoint_size then
+    invalid_arg "SemanticWorkers.refresh_components bounds";
+  BorrowedWork.try_bind
+    (fun () -> submit t cancellation fd
+      (Refresh_components(previous,decoders,expected_checkpoint_sha256,encoded,max_read_bytes,capture_checkpoint)))
+    (function
+      | None -> return None
+      | Some (Component_inspected result) -> return (Some result)
+      | Some _ -> fail (Failed "unexpected refreshed component response")) fail
 
 let reconcile_xmp t cancellation ~extension ~nonce ~base ~left ~right fd =
   BorrowedWork.try_bind
