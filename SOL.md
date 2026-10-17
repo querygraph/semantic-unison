@@ -14,6 +14,13 @@ older wording that treats complete MakerNote understanding as a global
 deployment gate. It does not assert that the implementation below is already
 qualified for deployment.
 
+**Deployment rule:** incomplete mapping of a few smaller fields is not a release
+blocker. Ship the qualified separation of pixels and metadata with those fields
+preserved as exact opaque components. As their meaning and stability become
+known, introduce versioned child decoders and refine only the affected component
+and dependent roots. This improves precision without requiring a fresh pixel
+hash, an eager archive migration or complete camera-format understanding.
+
 ### Nested, composable format knowledge
 
 The core owns exact byte coverage, bounds, hashes, resource budgets, verified
@@ -133,6 +140,15 @@ bounded model observation reads `X2D 100C`; it is a lead for a child plugin, not
 a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
+
+The worker-local [component hashing core](doc/component-hashes.md) now implements
+opaque gap coverage, separate typed hash lanes, bounded nested-decoder readers
+and incremental leaf refinement with unaffected pixel-node/hash reuse. Missing
+projections are unavailable rather than a constant empty pixel identity.
+[Current evidence](tests/qualification/component-hash-core-actual-20261017.json)
+records stock/Ox41checks each, scope-escape compile refusals, delivered-read
+accounting and four full builds. It is not yet DNG-fragment/worker/UI integrated
+or a persistent cache; real-camera coverage and cross-session reuse remain open.
 
 The first gradual-understanding transfer successor is now implemented:
 [DNG exact-layout profile](doc/dng-layout-exact.md), capability

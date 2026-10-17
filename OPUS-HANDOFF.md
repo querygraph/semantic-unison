@@ -7,6 +7,37 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest incremental component core: implemented and qualified, not DNG-bound yet
+
+New `ComponentHash` MLmodule supplies typedphysicalpartitions/roles, fullSHA plus
+schema-boundview/layout hashes andlogicalroleprojections. UnclaimedgapsOpaque;
+allbytescovered. Pixel/standardmetadata/privatemetadata/structural/opaque lanes
+separate; missingprojectionNone/counts preventconstant-empty-pixelidentity.
+Initialonepassfeedsleaf+ancestorcontexts. Refinementrereadsonlyparentspan,
+verifiesitsrawSHA, retainsunaffectednodes/pixelhashes andcomposesancestorviews.
+Nestedtrustedcompiledplugins receiveparent-boundedreaders/subreaders, shareone
+chargedrequestbudget andcarryownerpinnedimplementationSHA provenance. Explicit
+unsupported preservesoldopaqueview. No writes/registries/processloading/FDowner
+ortransformationauthority. Session/readerexpiry andcross-sessionrefinement refuse.
+Callerownsimmutablesnapshot; fstatnotclaimedhostilewriterproof/persistentcache.
+
+Actualfinalstock/Oxfocused77520/8c9155/0/no session:41checks each,22containedcalls,
+3expectedOxcompile refusals forescapingsession/snapshot/reader. 8192initial bytes
++onlyparent/nested/decoderreads matchindependentdeliveredstats; pixelnodephysical
+reuse, modelversionbranchchangesviewnotpixels, budget/partition/count/depth/
+sourcechange/emptyprojection/refusal checksPASS. Twoinitialcompilerfailures
+(recordlabelambiguity859460/1, fixtureparenthesesf7d98f/1) preserved/closed;
+intermediate003..005passedwithnarrowerAPIs, final006iscurrent.
+Fourfullstock/OxMake+Dunebuildowner55663/5c886a/0/no session passed;1880sourcehash
+checks/currentbinarypinsmatch, allgroups/CPU8closed. Receipt
+`tests/qualification/component-hash-core-actual-20261017.json`9920B
+SHAabdf37ef85a6d896e2e44d5ea8927e2299b01c579968619b2b044919f8fe706b.
+Contracts/framing `doc/component-hashes.md`. NoSDK/media/EXIO/activeUnisonowner.
+StillNOTintegratedDNGfragments/frozennesteddecoderdispatch, publicinspector,
+cross-session/persistentcache orsyncidentity. Thosearenext; donotclaimrealcamera
+pixel/componenthashingdeployed ormarkfullgoalcomplete. ExistingexactlayoutSDE
+source9359215 remainsseparatequalifiedstep, no consumedgrantreuse.
+
 ## Latest partial-knowledge transfer implementation: DNG layout profile
 
 `DngLayout` org.firstpair.dng-layout/0 /dng-layout-exact-v0 isimplemented as a

@@ -28,7 +28,7 @@ let transform version path =
   let component=Filename.remove_extension name in
   let interface=Filename.extension name=".mli" in
   if (not interface && Filename.extension name<>".ml") ||
-     not(List.mem component ["semanticHash";"semanticFile";"semanticMailbox";"wholeFileClone";"validationSnapshot";
+     not(List.mem component ["semanticHash";"semanticFile";"componentHash";"semanticMailbox";"wholeFileClone";"validationSnapshot";
        "formatRecognition";"dngRecognition";"formatExtension";"xmpObservation";
        "xmpMerge";"dngSemantic";"dngExtended";"dngLayout";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
   then invalid_arg "unqualified mode-filter module";
@@ -46,6 +46,7 @@ let transform version path =
       "Domain.Safe.spawn"
   else begin
     let signature_count,field_count = match component,interface with
+      | "componentHash",_ -> 0,1
       | "formatRecognition",true -> 1,0
       | "formatRecognition",false -> 1,1
       | "formatExtension",true -> 1,1
