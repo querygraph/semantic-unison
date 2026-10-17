@@ -1,13 +1,22 @@
 # Unison implementation handoff
 
-Latest implementation successor: `7815c895`, branch
+Latest implementation successor: `5537ec16`, draft PR7
+https://github.com/querygraph/unison/pull/7, branch
 `feat/component-owned-worker-refresh`, worktree
 `/Users/alexy/src/unison-component-owned-worker-20261017` (stacked on PR6).
 Worker refresh now authenticates the retained record against the trusted owner
 entry and derives its decoder inventory there. Stock/Ox Make/fullselftests and
 116 worker checks/compiler passed, actual67532/754d9e/0/no session; all contained
 groups/tokens closed. See that worktree's qualification receipt and handoff.
-No Dune rerun, media/SDK/transport or automatic namespace selection claimed.
+Subsequent indexed routing also passed current stock/Ox Make/fullselftests/Dune
+and126workerchecks/compiler,1272current source checks, actual19704/4509e5/0/no
+session; all five contained workers/groups/tokens closed. Exact owner/path/
+generation miss or stale entry freshly extracts; a hit authenticates and
+refreshes; missing selected record errors and foreign/corrupt records fail
+without silent fallback. Changed-input/cancellation controls pass. See
+component-indexed-worker-refresh-actual-20261017.json and
+doc/component-worker-cache-routing.md in that successor. No media/SDK/transport
+or automatic managed namespace selection/normal scan installation claimed.
 This remains separate from main's frozen RPC source/admission closure.
 
 User design clarification, 2026-10-17: SOL.md now explicitly separates release
