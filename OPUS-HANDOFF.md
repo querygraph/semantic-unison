@@ -2921,3 +2921,14 @@ preserved: buildpassed, test wrongly injected through diagnostics AFTER reply;
 no production failure relabeled. Receipt component-owner-report-cancellation-
 actual-20261017.json. Allresourcesclosed. Explicit owner API remains separate
 from unwired SemanticRemote/UI; no payload/SDK/newgrant.
+
+
+## Draft review checkpoint — 2026-10-17
+
+Qualified source8e84a6a8 is pushed as draft PR11:
+https://github.com/querygraph/unison/pull/11, base feat/component-cache-namespace
+(PR9). No PR merge/production activation is authorized or claimed. This successor
+contains managed store, archive-owned namespace identity, explicit owner report
+capture/reuse, and cancellation/head-change fences. UI/SemanticRemote route and
+its private-parent asynchronous ownership remain unimplemented; latest Dune does
+not cover later identity/report changes. All actual jobs/resources closed.
