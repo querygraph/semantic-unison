@@ -4,6 +4,21 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Current actual RPC note: admission53a52254 was exercised ONCE, all8probe commands
+returned0, but original final auditor KeyError(cancel_reason) leaves actual parent
+91491/7ec39a/exit1. Root independently accepted resource closure/released; original
+failure bytes remain. Outside-frozen saved-only producer-schema audit verifies
+all8receipts and in-run hashes/current metadata without payload rehash or replay;
+see `doc/component-remote-actual-saved-audit.md`. This is separate evidence, not an
+original successful controller exit or independent new payload readback.
+
+Latest cache namespace source ed67f0eb, draft PR9 on PR8, provides one-use private
+fixed-child creation/exact trusted identity reopen with retained creation effects
+and nested descriptor uncertainty. Current stock/Ox fullselftests/Dune and original
+namespace/loader/archive/worker controls pass. No production namespace is installed;
+owner identity persistence and automatic capture/report wiring remain follow-ons.
+See sibling `unison-component-namespace-20261017/doc/component-cache-namespace.md`.
+
 Latest isolated cache loader is source `3d35cf81`, draft PR8, stacked on PR7:
 bounded macOS UIX/UDI/UCR reads now bind to an actual loaded local archive hint,
 with no-follow digest-leaf opens and retained close uncertainty. Current stock/Ox

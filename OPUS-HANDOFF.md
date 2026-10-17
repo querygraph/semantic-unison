@@ -1,6 +1,46 @@
 # Unison implementation handoff
 
-Latest loader successor: `3d35cf81`, draft PR8
+## Current actual RPC and namespace state — 2026-10-17
+
+RPC V1 admission53a52254 is CONSUMED, not awaiting dispatch. Actual owner tool
+91491/7ec39a/exit1/NOsession, coordinator62256/worker62257: all8probe commands0,
+raw8client/supervisor/server/pump settlements pass, workerreaped1/othersabsent,
+CPU8+EXIOclosed. Final auditor failed KeyError(cancel_reason): original fabricated
+controls added that field but actual client/supervisor producers omit it. Original
+WORKER-RESULT completeFALSE/exit1 and OWNER-RETURN088ef9fb remain unchanged.
+Independent Root adoption f01c0b94 reparsed8prefixes, freshly reacquired EXIO/Photo8
+and explicitly RELEASED scheduling hold. No replay/new grant is authorized.
+
+Saved-only auditor outside frozen342 closure (tests/component_remote/saved_*)
+now checks exact producer schemas,8rawledgers/reports/in-run beforeafter hashes,
+expected fixture hashes computed IN MEMORY and current16lstat fences. It does NOT
+open/re-hash generated payload or turn original ownerexit1 into0. Actual metadata
+outputaudit e27a2d/0; six original control groups/13negative-schema variants actual
+90276/474f52/0, bothcontainedgroups/CPUclosed. Savedresult d6d94f4c is separate
+source-bound functional evidence; independent Root functional adoption is not
+claimed. See doc/component-remote-actual-saved-audit.md and qualifications
+component-remote-actual-saved-audit-20261017.json plus root-closure-adoption.
+Main frozen342runtime sources/request/plan remain byte-identical; old slot never
+runs again. Next audit tooling fix must be versioned, preserve the original run
+and qualify REAL producer schemas, not require a new native run merely for a
+reporting correction.
+
+Latest namespace source ed67f0eb is draft PR9
+https://github.com/querygraph/unison/pull/9, branch feat/component-cache-namespace,
+worktree /Users/alexy/src/unison-component-namespace-20261017, based on PR8.
+One-use fixed-child mkdir or trusted dev/inode reopen; retained mkdir effects,
+scoped close and nested known/uncertain/all-borrowed directory evidence. Current
+stock/Ox Make/fullselftests/Dune/1272SRCchecks,67namespace+9unmodified-native/
+80loader+7unmodified-native checks/compiler plus existing suites PASS. Controller
+61854/d0ad68/1 stopped safely before next job on fresh RPC admission after5passed
+steps; after actualRPCclosed,18854/f0c867/0 completed only4unstartedsteps. All9
+workers/groups/token setsclosed. See that branch's component-cache-namespace-
+actual-20261017.json and doc/component-cache-namespace.md. No production namespace,
+photos/SDK/transport or automatic cache activation. Durable namespace identity
+binding and capture/adoption/report routing remain optional cache follow-ons,
+not private-field-completeness deployment gates. No merges authorized.
+
+Previous loader successor: `3d35cf81`, draft PR8
 https://github.com/querygraph/unison/pull/8, branch `feat/component-cache-loader`,
 worktree `/Users/alexy/src/unison-component-loader-20261017`, stacked on PR7.
 Strict macOS UIX/UDI/UCR digest-leaf reads now use the actual loaded archive hint
@@ -16,7 +56,8 @@ preserved; current proof uses final002 builds/controls. See that worktree's
 component-cache-loader-actual-20261017.json and doc/component-cache-loader.md.
 No namespace bootstrap, automatic capture/adoption/normal report routing or
 media/SDK/transport/production/power-loss qualification. Main runtime342RPC pins
-remain unchanged; no fresh admission/workspace observed, no RPC dispatch.
+remain unchanged; that pending RPC slot has since been consumed and closed as
+recorded above. Do not reuse its admission or act on historical readiness.
 
 Previous worker successor: `5537ec16`, draft PR7
 https://github.com/querygraph/unison/pull/7, branch
@@ -46,12 +87,15 @@ and recompute dependent roots while retaining old views. Interpretation alone
 does not prove stability or authorize hash exclusions. Automatic routing remains
 an implementation follow-on; this documentation change authorizes no deployment.
 
-Latest checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
+Historical checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
 Older checkpoints below retain their original scopes and pending-state history.
 Implementation HEAD before the initial handoff:
 `50da86f34fef8b407689d63c4fd021d2bb9e1438`.
 
 ## Read this first
+
+The chronology below retains historical pending states. Current scheduling and
+actual consumed-run status above supersede old readiness/absence notices.
 
 Latest isolated integration08b4be45 (metadata merge10ace908) is qualified and
 pushed to draftPR4: complete trusted cache capture -> full-current-input/base
