@@ -2,7 +2,7 @@
 import argparse,pathlib,tempfile,subprocess,hashlib,json,shutil
 p=argparse.ArgumentParser();p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
 r=pathlib.Path(__file__).resolve().parents[2];w=pathlib.Path(tempfile.mkdtemp(prefix='unison-xmp-merge-',dir='/private/tmp'));version=subprocess.check_output([a.compiler,'-version'],text=True).strip();ox='+ox' in version
-sources=['src/'+n+e for n in ['semanticHash','xmpObservation','xmpMerge'] for e in ['.ml','.mli','.ox.mli.in']]+['src/semanticHash_stubs.c','src/semantic_mode_filter.ml','tests/xmp_merge/test.ml','tests/xmp_merge/run.py']
+sources=['src/'+n+e for n in ['semanticHash','xmpObservation','xmpMerge'] for e in ['.ml','.mli','.ox.mli.in']]+['src/semanticHash_stubs.c','src/semanticHash_evp.h','src/semantic_mode_filter.ml','tests/xmp_merge/test.ml','tests/xmp_merge/run.py']
 for s in sources:shutil.copyfile(r/s,w/pathlib.Path(s).name)
 if ox:
  t=w/'test.ml';s=t.read_text();assert s.count('let () =')==1;t.write_text(s.replace('let () =','let controls () =')+'\nlet () = let ds=List.init 4(fun _ -> Domain.Safe.spawn(fun () -> controls())) in List.iter Domain.join ds\n')

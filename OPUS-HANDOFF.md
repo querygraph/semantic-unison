@@ -3290,3 +3290,31 @@ request publication. Root review/grant is not assumed from queue/resource releas
 Runtime must use fresh published SHA/deadline once and exact request command; no
 oldgrant/retry. No owned jobs/tokens/IO held. Keep this candidate's execution pins
 frozen pending review; independent source work should use a sibling successor.
+
+
+Independent source-FD cleanup successor now QUALIFIED ecad82f3 in
+/Users/alexy/src/unison-component-source-owner-20261017, branch
+fix/component-source-fd-owner. Component reports record regular source ownership
+before validation and retain close uncertainty/nested source ownership; RPC source
+scope holds admission on the carrier. Current stock/Ox Make+selftests/Dune and
+normal/retained report +36auditorcontrols pass; allactualjobs/resourcesclosed.
+Exact receipt component-source-fd-owner-actual-20261017.json is in that sibling.
+This code has NOT been merged here: property requeste60975f3/all38execution+
+318productionpins reverified unchanged. Runtime request remains separately
+pending, no payload/admission/hold inferred. Other legacy cleanup families still
+require their own scoped review; no blanket source-FD release claim.
+
+
+## Review publication and current XMP kernel — 2026-10-17
+
+Source-FD fix ecad82f3 now OPEN/DRAFT PR12
+https://github.com/querygraph/unison/pull/12, base integration/sol-release-candidate.
+Base branch is published at72a19d9d; no GitHub merge. Submitted propertyrequest
+pins unchanged; latestmetadata atUnix1792236111 had no admission.
+
+Current integration XMP kernel actual65346/7f6982/0/no session PASS stock5.2.0/Ox:
+25scalar+343rating/symmetry+4RDFconflicts; Ox4checked domains+checkedspawn. Both
+workers23127/23166reaped0/groupsabsent/tokensclosed. Driver now copies/pins mandatory
+EVPheader; no production changes. Receipt integration-xmp-kernel-actual-20261017.json.
+This closes current kernel-source reexecution, NOT live merge receiving/SDK.
+No active owned resources, no payload/IO admission or replay.

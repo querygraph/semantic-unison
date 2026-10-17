@@ -1,0 +1,54 @@
+{
+  "complete": true,
+  "owner": {
+    "session": 65346,
+    "terminal_chunk": "7f6982",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-kernel-stock-20261017-001/RESULT.json",
+        "bytes": 2069,
+        "sha256": "0c878aa096d62f921fcbac764f57ba8c868c69df2cfa829ec949dc8612f55cf3"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-xmp-kernel-stock-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "dce55be72cf00037a967e5595aa3dc0b93c6be1187776085388caec4d557e546"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-xmp-kernel-stock-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 80,
+        "sha256": "b607233971de0a38a49b5f397f0635c06c9518b491281a731b4d51b0e74db803"
+      },
+      "checked_domains": 1
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-current-xmp-kernel-ox-20261017-001/RESULT.json",
+        "bytes": 2072,
+        "sha256": "9b993b3144a8f25acdbda808cfa63405786fdb6e35772a1b82e80047d0d0c1a0"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-xmp-kernel-ox-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "5ed576599b33cc819bcf183f5fec4fd92077905dccd19ee71eedc5ac67d4c9b4"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-xmp-kernel-ox-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 320,
+        "sha256": "aec17314087982790ebdfd007c43459dbfdfb550545f3820c9189db73cfb73fb"
+      },
+      "checked_domains": 4
+    }
+  ],
+  "scope": "Current production scalar merge kernel:25original controls+343rating decisions/symmetry+4explicit RDF conflicts; Ox four checked domains and checked-spawn link",
+  "limitations": [
+    "No archive/receiving/SDK/pixel/throughput or all-RDF merge claim",
+    "Harness now copies mandatory production EVP header; production source unchanged"
+  ]
+}

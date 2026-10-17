@@ -17,3 +17,11 @@ retains exact inputs, binaries/logs and broader parser/build regression evidence
 retains actual stock/Ox owner terminals and closed groups/tokens. Bag/Seq/Alt and
 qualified Label forms remain unsupported conflicts; this does not add RDF merge
 semantics or enable reconciliation by default.
+
+
+Current consolidated candidate source refresh:
+`../qualification/integration-xmp-kernel-actual-20261017.json` records actual
+stock5.2.0 andOx5.2.0+ox success/closed groups under Unison8. The runner now copies
+and pins the production EVP header required by semanticHash_stubs.c; selected
+backend remains the normal default. Kernel controls do not claim receiving or
+SDK validation, general RDF merging, speedup or a production deployment.
