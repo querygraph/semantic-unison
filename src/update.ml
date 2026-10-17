@@ -618,6 +618,17 @@ let set_component_owner_reference fspath publication =
   let properties=try getArchiveProps root with Not_found ->
     raise(Util.Transient "Component owner archive is not loaded") in
   setArchivePropsLocal root (Proplist.add componentOwnerKey reference properties)
+let adopt_component_cache_store fspath ~expected_reference store =
+  if not(Prefs.read componentOwnerCache) then
+    raise(Util.Transient "Component owner cache is disabled");
+  let root=thisRootsGlobalName fspath in
+  let properties=try getArchiveProps root with Not_found ->
+    raise(Util.Transient "Component owner archive is not loaded") in
+  let current=try Some(Proplist.find componentOwnerKey properties) with Not_found -> None in
+  if current<>expected_reference then
+    raise(Util.Transient "Component owner archive reference changed during capture");
+  let reference=DngComponents.managed_cache_store_reference store in
+  setArchivePropsLocal root (Proplist.add componentOwnerKey reference properties)
 let clear_component_owner_reference fspath =
   let root=thisRootsGlobalName fspath in
   try setArchivePropsLocal root (Proplist.remove componentOwnerKey (getArchiveProps root))

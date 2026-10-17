@@ -305,3 +305,19 @@ val with_cache_namespace : cache_namespace -> parent:Unix.file_descr ->
 val cache_borrowed_directories : cache_ownership -> cache_descriptor list
 (** All borrowed directory identities retained through nested scopes. The singular
     accessor returns the originating directory for backward compatibility. *)
+
+type managed_cache_store
+val prepare_managed_cache_store : entry:owner_entry -> checkpoint:ComponentHash.checkpoint ->
+  index:owner_index -> expected_entry_sha256:string option -> binding:string ->
+  max_bytes:int64 -> max_entries:int -> managed_cache_store @@ nonportable
+val execute_managed_cache_store : managed_cache_store -> namespace:cache_namespace ->
+  parent:Unix.file_descr -> bool @@ nonportable
+val managed_cache_store_reference : managed_cache_store -> string * string @@ nonportable
+val managed_cache_store_index : managed_cache_store -> owner_index @@ nonportable
+val managed_cache_store_effects : managed_cache_store -> bool * bool * bool * bool * bool @@ nonportable
+(** Synchronous one-use bounded capture, entry and next-manifest publication.
+    False means quota exhaustion; errors preserve all stages/orphans/reservations.
+    Reference/index access requires normal publication AND all owned FD closes.
+    Effects report reserved/record/entry/manifest/completed, not rollback. Parent
+    stays borrowed. Uncertain closes retain ownership through the existing carrier.
+    No archive commit, automatic report routing, deletion or eviction. *)

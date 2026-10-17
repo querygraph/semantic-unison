@@ -635,3 +635,82 @@ let with_cache_namespace ticket ~parent callback =
     ~open_descriptor:(fun () -> open_cache_namespace ticket parent)
     ~validate:(check_cache_namespace ticket parent) callback with
   | Some result -> result | None -> assert false
+
+
+(* A store ticket freezes the next manifest before any namespace mutation. The
+   completed bit is set only outside every owned descriptor scope. *)
+type managed_cache_store = {
+  store_entry : owner_entry; store_checkpoint : ComponentHash.checkpoint;
+  store_index : owner_index; store_binding : string;
+  store_max_bytes : int64; store_max_entries : int;
+  mutable store_attempted : bool; mutable store_quota : ComponentHash.metadata_quota option;
+  mutable store_capture : cache_capture option;
+  mutable store_manifest : owner_index_publication option;
+  mutable store_completed : bool;
+}
+let prepare_managed_cache_store ~entry ~checkpoint ~index ~expected_entry_sha256
+    ~binding ~max_bytes ~max_entries =
+  if String.length binding<>32 || max_bytes<2097152L || max_bytes>8589934592L ||
+     max_entries<1 || max_entries>4096 then owner_invalid "managed store bounds/binding";
+  ignore(checkpoint_for_owner_entry entry
+    (ComponentHash.checkpoint_record ~binding:entry.owner_binding checkpoint));
+  let next=match replace_owner_entry index ~expected_entry_sha256 entry with
+    | Ok next -> next | Error reason -> owner_invalid reason in
+  ignore(owner_index_bytes ~binding next);
+  {store_entry=entry;store_checkpoint=checkpoint;store_index=next;store_binding=binding;
+   store_max_bytes=max_bytes;store_max_entries=max_entries;store_attempted=false;
+   store_quota=None;store_capture=None;store_manifest=None;store_completed=false}
+let execute_managed_cache_store store ~namespace ~parent =
+  if store.store_attempted then owner_invalid "managed store already attempted";
+  store.store_attempted<-true;
+  let committed=with_cache_namespace namespace ~parent (fun directory ->
+    let quota=ComponentHash.prepare_metadata_quota ~directory
+      ~max_bytes:store.store_max_bytes ~max_entries:store.store_max_entries in
+    store.store_quota<-Some quota;
+    if not(ComponentHash.reserve_metadata_slot quota directory) then false else
+    let stage role callback =
+      (* Stage content/name is authenticated by publication preparation. Initial
+         generic checks reject altered permissions/type before any writer runs. *)
+      match with_cache_descriptor ~directory ~allow_missing:false
+        ~open_descriptor:(fun () -> ComponentHash.open_metadata_stage quota directory role)
+        ~validate:(fun fd ->
+          let stat=Unix.LargeFile.fstat fd in
+          if stat.Unix.LargeFile.st_kind<>Unix.S_REG || stat.st_perm<>0o600 ||
+             stat.st_uid<>Unix.getuid () || stat.st_nlink<>1 then
+            owner_invalid "managed stage identity/permissions") callback with
+      | Some result -> result | None -> assert false in
+    stage ComponentHash.Record_stage (fun record_stage ->
+      stage ComponentHash.Entry_stage (fun entry_stage ->
+        stage_cache_capture store.store_entry ~checkpoint:store.store_checkpoint
+          ~quota ~directory ~record_stage ~entry_stage;
+        let capture=SemanticFile.with_borrowed_fd record_stage (fun record_file ->
+          SemanticFile.with_borrowed_fd entry_stage (fun entry_file ->
+            prepare_cache_capture store.store_entry ~quota ~directory
+              ~record_stage ~entry_stage ~record_file ~entry_file)) in
+        store.store_capture<-Some capture;
+        publish_cache_capture capture directory record_stage entry_stage));
+    stage ComponentHash.Manifest_stage (fun manifest_stage ->
+      ignore(write_owner_index ~binding:store.store_binding store.store_index manifest_stage);
+      let publication=SemanticFile.with_borrowed_fd manifest_stage (fun file ->
+        let temporary=ComponentHash.metadata_slot_name quota^"-manifest.tmp" in
+        prepare_owner_index_publication ~binding:store.store_binding
+          store.store_index ~directory ~stage:manifest_stage ~temporary file) in
+      store.store_manifest<-Some publication;
+      publish_owner_index publication directory manifest_stage);
+    true) in
+  store.store_completed<-committed;
+  committed
+let managed_cache_store_reference store =
+  if not store.store_completed then owner_invalid "managed store has not settled normally";
+  match store.store_manifest with Some publication -> owner_index_reference publication
+    | None -> assert false
+let managed_cache_store_index store =
+  ignore(managed_cache_store_reference store);store.store_index
+let managed_cache_store_effects store =
+  let reserved=match store.store_quota with None -> false
+    | Some quota -> ComponentHash.metadata_slot_reserved quota in
+  let record,entry=match store.store_capture with None -> false,false
+    | Some capture -> cache_capture_state capture in
+  let manifest=match store.store_manifest with None -> false
+    | Some publication -> owner_index_published publication in
+  reserved,record,entry,manifest,store.store_completed

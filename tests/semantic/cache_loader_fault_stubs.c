@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <stdatomic.h>
 #include <errno.h>
+#include <stdarg.h>
 static _Atomic int failed_ordinal, closes, opens, reads, sync_calls;
 CAMLprim value unison_cache_control_mode(value ordinal)
 {
@@ -17,14 +18,19 @@ CAMLprim value unison_cache_control_opens(value unit)
 { (void)unit; return Val_int(atomic_load(&opens)); }
 int unison_cache_control_openat(int parent, const char *leaf, int flags, ...)
 {
-  atomic_fetch_add(&opens, 1);
+  int ordinal=atomic_fetch_add(&opens, 1)+1;
+  if (atomic_load(&failed_ordinal)==200+ordinal) { errno=EIO; return -1; }
+  if (flags & O_CREAT) {
+    va_list args; va_start(args, flags); int mode=va_arg(args, int); va_end(args);
+    return openat(parent, leaf, flags, mode);
+  }
   return openat(parent, leaf, flags);
 }
 int unison_cache_control_close(int fd)
 {
   int ordinal=atomic_fetch_add(&closes, 1)+1;
   int access=fcntl(fd, F_GETFL), ownership=fcntl(fd, F_GETFD);
-  int valid=access!=-1 && (access & O_ACCMODE)==O_RDONLY &&
+  int valid=access!=-1 && ((access & O_ACCMODE)==O_RDONLY || (access & O_ACCMODE)==O_RDWR) &&
     (access & O_NONBLOCK) && ownership!=-1 && (ownership & FD_CLOEXEC);
   int result=close(fd), saved=errno;
   if (!valid && access!=-1) { errno=EINVAL; return -1; }
@@ -47,6 +53,6 @@ CAMLprim value unison_cache_control_syncs(value unit)
 int unison_cache_control_fsync(int fd)
 {
   int ordinal=atomic_fetch_add(&sync_calls, 1);
-  if (atomic_load(&failed_ordinal)==100 && ordinal==0) { errno=EIO; return -1; }
+  if (atomic_load(&failed_ordinal)==100+ordinal) { errno=EIO; return -1; }
   return fsync(fd);
 }

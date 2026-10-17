@@ -49,6 +49,28 @@ let ()=
     "production record checkpoint differs") ["one";"two"] entries;
  check(D.load_owner_index ~directory ~expected_manifest_sha256:(SemanticHash.string "missing-native-manifest")
    ~binding ~max_entries:4 ~max_bytes:524288 ()=None) "normal missing index fabricated";
+ let namespace=D.prepare_cache_namespace ~parent:directory () in
+ D.provision_cache_namespace namespace ~parent:directory;
+ let entry=List.hd entries in
+ let store=D.prepare_managed_cache_store ~entry ~checkpoint
+   ~index:(D.empty_owner_index ~max_entries:4 ~max_bytes:524288)
+   ~expected_entry_sha256:None ~binding ~max_bytes:4194304L ~max_entries:2 in
+ check((try ignore(D.managed_cache_store_reference store);false with ComponentHash.Invalid _ -> true))
+  "store exposed reference before completion";
+ check(D.execute_managed_cache_store store ~namespace ~parent:directory) "store quota refused";
+ check(D.managed_cache_store_effects store=(true,true,true,true,true)) "store effects incomplete";
+ let stored_binding,stored_digest=D.managed_cache_store_reference store in
+ check(stored_binding=binding) "store binding changed";
+ let reopened=D.prepare_cache_namespace ~expected:(D.cache_namespace_identity namespace) ~parent:directory () in
+ D.provision_cache_namespace reopened ~parent:directory;
+ D.with_cache_namespace reopened ~parent:directory (fun directory ->
+  let index=match D.load_owner_index ~directory ~expected_manifest_sha256:stored_digest
+   ~binding ~max_entries:4 ~max_bytes:524288 () with
+   | Some index -> index | None -> failwith "stored manifest absent" in
+  check(D.owner_index_usage index=D.owner_index_usage(D.managed_cache_store_index store))
+   "stored index differs");
+ check((try ignore(D.execute_managed_cache_store store ~namespace ~parent:directory);false
+  with ComponentHash.Invalid _ -> true)) "store replay accepted";
  Unix.close directory;
  check(Array.length(Sys.readdir "/dev/fd")=baseline) "normal native loader leaked FD";
  Printf.printf "PASS %d production native cache loader checks; two trusted entries/records and complete FD retirement\n%!" !checks

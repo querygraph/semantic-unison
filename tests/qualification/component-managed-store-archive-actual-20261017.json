@@ -1,0 +1,68 @@
+{
+  "scope": "Managed store and production archive adoption/commit/cold reload, original tiny fixture only",
+  "steps": [
+    {
+      "name": "stock-make",
+      "owner": {
+        "session": 83029,
+        "terminal_chunk": "a14d82",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "shared_closed": {
+        "path": "/private/tmp/unison-managed-store-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "59fc8d4e72a761168c4bf19fc90326d735da01cb833f30a3c37804e045fbdf72"
+      },
+      "result": {
+        "path": "/private/tmp/unison-managed-store-stock-make-20261017-001/RESULT.json",
+        "bytes": 50946,
+        "sha256": "db054306dcb14008d1f6117f2c541574852c4869471ade419961380b5184f195"
+      }
+    },
+    {
+      "name": "ox-make",
+      "owner": {
+        "session": 95059,
+        "terminal_chunk": "acef23",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "shared_closed": {
+        "path": "/private/tmp/unison-managed-store-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "b6759ed46348f5667f259a5892867032aa279d8b5e812a319b80fcc3d8720ba5"
+      },
+      "result": {
+        "path": "/private/tmp/unison-managed-store-ox-make-20261017-001/RESULT.json",
+        "bytes": 50952,
+        "sha256": "32ab0cc655c811bb11a32a7c4cdbfd61db42426f2567d4a2e14ffe98919c129f"
+      }
+    },
+    {
+      "name": "archive-controls",
+      "owner": {
+        "session": 88636,
+        "terminal_chunk": "1ca3ca",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "shared_closed": {
+        "path": "/private/tmp/unison-managed-store-archive-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "cdf34a83001d25cdb4ea46ed0b944d65e887167f1b766e7e0910c458ea3183fd"
+      },
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-fr_cyxif/RESULT.json",
+        "bytes": 149844,
+        "sha256": "885af047277e0ea77110d4d114fb405c20cf8438986ba5e7209e72ac77f1cd55"
+      }
+    }
+  ],
+  "complete": true,
+  "limitations": [
+    "Automatic normal report capture/reuse routing remains incomplete",
+    "Dune not rerun for this successor",
+    "No media/SDK/transport or power-loss claim"
+  ]
+}

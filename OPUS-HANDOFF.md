@@ -2778,3 +2778,71 @@ doc/component-worker-cache-routing.md. Main's reviewed frozen RPC still has no
 fresh admission; observed Photo defer is scheduling evidence, not proof of a
 currently live owner. No RPC retry/dispatch, media/SDK/transport or physical-read
 savings claim follows from these worker controls.
+
+
+## Managed store successor started — 2026-10-17
+
+Active checkout `/Users/alexy/src/unison-component-store-20261017`, branch
+`feat/component-cache-store`, based on PR9 d074fb8b. Source now adds quota-bound
+exclusive stage creation for record/entry/manifest, one attempt per role with
+actual creation state retained. Returned descriptors are caller-owned immediately;
+no post-open allocation/validation/close in the native opener. Added production
+namespace controls for private empty files, creation flags and replay refusal.
+These changes are UNBUILT/UNTESTED; diff whitespace check alone passed. Next qualify
+native/fault paths, then compose owned staging/publication and archive-head CAS.
+No payload/SDK/RPC invocation or new resource grant; no active owned job.
+
+
+Managed-store composition now exists in source: frozen entry/checkpoint/index CAS
+preparation, one-use quota-bound stage ownership, pair publication followed by
+manifest publication, reference/index access only after all owned scopes return.
+Readers retire BEFORE rename; an actual production-linked test caught the initial
+reader-live rename error, fixed without weakening file-change checks. A subsequent
+control corrected its own reuse of a consumed one-shot namespace ticket by making
+an explicit identity-bound fresh read ticket. Failed runs 001/002/003 all closed
+workers/groups/tokens; no payload/SDK/transport was involved. Initial stage-only
+qualification002 passed both compilers (actual1806/89678c/0). Combined run004 is
+being collected; do not infer its result from this preparation note. Fault-injected
+store paths, full builds, guarded archive adoption and automatic routing remain
+unqualified/incomplete. No production activation or new admission.
+
+
+Combined managed-store run004 subsequently PASSED: actual92385/ef8c02/exit0/no
+session; containedworker79464reaped0/othersabsent/tokensclosed/sourceunchanged.
+Both compilers' normal native store publication/cold-load controls pass alongside
+existing loader/namespace suites. Exact evidence and raw pins are in
+`tests/qualification/component-managed-store-normal-actual-20261017.json`.
+No active owned jobs/resources; store fault injection and archive adoption next.
+
+
+## Store failure qualification and archive guard — 2026-10-17
+
+Composed store close uncertainty at entry/record/manifest/namespace passed both
+compilers, then all four open failure positions and every observed sync position
+passed. Actual fault-run002 owner35661/d0009b/0/no session; worker80600reaped0/
+othersabsent/sourceunchanged/tokensclosed. Native fault wrapper now forwards the
+O_CREAT mode argument and accepts managed O_RDWR stages; production has no fault
+switch. Exact evidence: component-managed-store-fault-actual-20261017.json.
+No retry, failed reference adoption or numeric-FD retry; uncertain descriptors and
+known outer scopes remain represented. Tests explicitly close only known retained
+FDs after the disposable wrapper has consumed the uncertain FD.
+
+Update.adopt_component_cache_store source now performs loaded-head expected-value
+comparison and requires a normally settled store before memory adoption. This
+Update integration is NOT compiled/linked/qualified yet; normal archive commit and
+automatic report routing remain outstanding. Contract doc/component-managed-store.md.
+All test owners/groups/tokens currently closed; no new payload or SDK grant.
+
+
+## Managed store production build/archive qualification — 2026-10-17
+
+Current stock Make/fullselftests actual83029/a14d82/0 and Ox Make/fullselftests
+95059/acef23/0 passed; workers81233/82368 genuinelyreaped0/groupsabsent/tokensclosed.
+Production-linked archive controls actual88636/1ca3ca/0, worker83613reaped0/groupsabsent
+passed BOTH compilers: unsettled-store refusal, changed-head CAS refusal preserving
+old hint, normally settled store adoption, normal archive commit, fresh-process
+identity-bound namespace reopening, trusted manifest/entry/record cold reload.
+Exact pins: component-managed-store-archive-actual-20261017.json. No SDK/media/
+transport or source photos; no live owned jobs/resources. Dune and integrated
+normal report automatic capture/reuse remain next work. This supersedes the
+previous note that Update adoption was uncompiled, without changing old evidence.

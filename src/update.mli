@@ -115,6 +115,12 @@ val load_component_owner_index : ?check_cancel:(unit -> unit) -> Fspath.t ->
     caller supplies stable private namespace/IO/memory/lifetime admission. This
     neither opens a namespace root nor adopts/rewrites archive or file state. *)
 val set_component_owner_reference : Fspath.t -> DngComponents.owner_index_publication -> unit
+val adopt_component_cache_store : Fspath.t -> expected_reference:(string * string) option ->
+  DngComponents.managed_cache_store -> unit
+(** Owner-loop compare-and-replace of the loaded archive hint. Requires a fully
+    normally settled managed store and an unchanged expected reference. Memory
+    only: the ordinary archive transaction must still commit. Caller serializes
+    root ownership; refusal preserves published orphans and the old hint. *)
 val clear_component_owner_reference : Fspath.t -> unit
 (** Owner-loop opt-in local component-manifest hints. Getter returns
     (manifest binding,digest) from this loaded root's trusted archive context.

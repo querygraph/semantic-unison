@@ -13,6 +13,18 @@ let ()=
   let s=Unix.fstat directory in check((s.Unix.st_dev,s.st_ino)=expected) "normal namespace identity differs";
   let q=ComponentHash.prepare_metadata_quota ~directory ~max_bytes:4194304L ~max_entries:2 in
   check(ComponentHash.reserve_metadata_slot q directory) "normal initial quota refused";
+  List.iter (fun role ->
+   check(not(ComponentHash.metadata_stage_created q role)) "stage created before open";
+   let fd=ComponentHash.open_metadata_stage q directory role in
+   check(ComponentHash.metadata_stage_created q role) "stage creation not retained";
+   let st=Unix.fstat fd in
+   check(st.Unix.st_kind=Unix.S_REG && st.st_perm=0o600 && st.st_nlink=1 && st.st_size=0)
+    "stage not private empty regular file";
+   Unix.close fd;
+   let refused=try let fd=ComponentHash.open_metadata_stage q directory role in
+    Unix.close fd;false with Invalid_argument _ -> true in
+   check refused "stage open replay accepted")
+   [ComponentHash.Record_stage;ComponentHash.Entry_stage;ComponentHash.Manifest_stage];
   ComponentHash.metadata_slot_name q) in
  let reopen ()=let t=D.prepare_cache_namespace ~expected ~parent () in
   D.provision_cache_namespace t ~parent;check(not(D.cache_namespace_created t)) "normal reopen recreated directory";t in

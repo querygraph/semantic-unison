@@ -332,6 +332,7 @@ struct component_metadata_quota {
   struct stat directory, slot_identity, record_stage, entry_stage;
   char config[160], slot[64];
   int limit, attempted, reserved, ready_payload, stage_phase;
+  unsigned stage_open_attempts, stage_created;
 };
 #define METADATA_QUOTA(v) (*(struct component_metadata_quota **)Data_custom_val(v))
 static void metadata_quota_finalize(value v) { free(METADATA_QUOTA(v)); METADATA_QUOTA(v) = NULL; }
@@ -464,6 +465,60 @@ CAMLprim value unison_component_metadata_quota_slot(value ticket)
   CAMLreturn(caml_copy_string(context->slot));
 #else
   caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}
+
+/* Return a newly owned descriptor immediately after open: no allocating OCaml
+ * operation or post-open validation may lose it. The managed owner must record
+ * it before checking its identity and must retain uncertain close ownership. */
+CAMLprim value unison_component_metadata_stage_open(value ticket, value directory, value role)
+{
+  CAMLparam3(ticket, directory, role);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  intnat kind = Long_val(role);
+  if (!context || !context->ready_payload || kind < 0 || kind > 2)
+    caml_invalid_argument("component quota stage role/state");
+  unsigned bit = 1U << kind;
+  if (context->stage_open_attempts & bit)
+    caml_invalid_argument("component quota stage open already attempted");
+  int parent = unison_semantic_fd(directory, "component quota directory FD");
+  const char *suffix[] = { "record", "entry", "manifest" };
+  char name[128];
+  snprintf(name, sizeof(name), "%s-%s.tmp", context->slot, suffix[kind]);
+  struct stat observed;
+  int error = 0, opened = -1;
+  context->stage_open_attempts |= bit;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->directory, &observed)) error = EBUSY;
+  if (!error) error = metadata_config(context, parent, 0);
+  if (!error && fstatat(parent, context->slot, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_directory_same(&context->slot_identity, &observed)) error = EBUSY;
+  if (!error) {
+    opened = openat(parent, name, O_RDWR | O_CREAT | O_EXCL | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC, 0600);
+    if (opened == -1) error = errno;
+    else context->stage_created |= bit;
+  }
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component quota stage open", Nothing);
+  CAMLreturn(Val_int(opened));
+#else
+  caml_unix_error(ENOSYS, "component metadata stage open", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_stage_created(value ticket, value role)
+{
+  CAMLparam2(ticket, role);
+#ifdef __APPLE__
+  intnat kind = Long_val(role);
+  if (kind < 0 || kind > 2) caml_invalid_argument("component quota stage role");
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  CAMLreturn(Val_bool(context && (context->stage_created & (1U << kind))));
+#else
+  caml_unix_error(ENOSYS, "component metadata stage state", Nothing);
 #endif
 }
 
