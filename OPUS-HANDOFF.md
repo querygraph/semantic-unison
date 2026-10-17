@@ -2,6 +2,10 @@
 
 ## Latest future RPC auditor source — 2026-10-17
 
+Source a3725eb5 is pushed as draft PR10:
+https://github.com/querygraph/unison/pull/10, base feat/semantic-dng-oxcaml.
+No merge or future transport execution authorized.
+
 Branch feat/component-rpc-producer-audit, worktree
 /Users/alexy/src/unison-component-rpc-audit-20261017, based on main a2ddb287,
 fixes the actual final-auditor field mismatch for future runs. New independently
