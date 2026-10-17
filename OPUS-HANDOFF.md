@@ -3749,3 +3749,35 @@ Bound SemanticSync producer family now actually migrated and qualified for nativ
 publication uncertainty, including guard/descriptor retention through connection
 cleanup. Copy/remote/unbound/raw/channel cleanup remain distinct; no universal
 resource-close proof or fresh transport/camera/SDK admission. Fullgoalactive.
+
+
+## Bound remote receiver migration in progress — 2026-10-17
+
+SemanticRemote bound receiving now mirrors qualified local native ownership:
+owned publication, preallocated scope/pending promise inside receiver admission,
+loose descriptor retention before adoption, candidate publication-pending/retained
+flags, original cause and connection cleanup retention. Copy/unbound/raw/channel
+handling remains separate. Current build+fourcomposedcontrols actualowner99104
+stilllive; do not infer final outcome from intermediate logs. New remote control
+uses two explicit in-process substitutions only (supported predicate and planner
+delivery), no actual transport/SDK/Photo payload. Existing producer-handoff
+internal create_bound_candidate calls now receive an explicit scope.
+Exact new lifecycle and limits: doc/remote-publication-owned-v1.md.
+
+Remote migration ACTUAL99104/933cae/0/no session: stock/Ox Make+selftests and
+fourcomposed receiver cases/compiler allPASS. Private copied source replaces only
+supported predicate and planner delivery; actual native/SDE/worker paths exercised,
+not network transport. Adoption/disarm/callback-close uncertainty stays pending
+with outer transaction charges and remaining known descriptors through connection
+cleanup. Generatedsource/basis unchanged, original callback cause retained. All
+workers/groups/CPU leases for this batch closed. Current handoff32case and both
+Dune verification owned by actual50665; finalterminal follows. No fresh IOgrant.
+
+Remote migration full verification ACTUAL50665/ae2ab3/0/no session:32handoff
+cases/compiler and stock/Ox Dune pass, all workers/groups/CPU leases closed.
+Exact evidence tests/qualification/remote-publication-owned-actual-20261017.json
+binds current native/worker/source/controlled-copy artifacts and actual terminal.
+Remote bound producer is now migrated for native publication uncertainty, not
+actual transport-qualified by these in-process units. Ordinary Copy plus unbound/
+raw/channel ownership remains next; actual transport requires separate admission.
+No replay/SDK/camera/Photo payload or new bulk IO grant. Fullgoalactive.

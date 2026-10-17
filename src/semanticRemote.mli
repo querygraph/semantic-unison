@@ -53,3 +53,13 @@ val component_retained_ownership : unit -> DngComponents.cache_ownership list
 (** Owner-loop diagnostics only. Uncertain component-cache, semantic-report or transfer-planning source cleanup retains its
     carrier and a non-cancellable pending promise INSIDE its transaction admission.
     No cleanup, numeric-FD retry, implicit settlement or release authority. *)
+
+
+type retained_publication
+val retained_publications : unit -> retained_publication list
+val retained_publication_cause : retained_publication -> exn
+val retained_publication_native : retained_publication -> StagePublication.owned option
+val retained_publication_descriptors : retained_publication -> Unix.file_descr list
+(** Owner-loop observations for bound remote receiver native publication
+    uncertainty. Remaining known descriptors and transaction admission remain
+    held. No numeric retry, cleanup or implicit settlement authority. *)

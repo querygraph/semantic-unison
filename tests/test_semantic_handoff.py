@@ -216,7 +216,7 @@ let ()=
   test "remote cleanup waits for a borrowed stage before closing or unlinking" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let candidate,publication=match R.create_bound_candidate ~basis:(path "basis") ~directory
+      let candidate,publication=match R.create_bound_candidate (R.create_publication_scope()) ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=R.borrowed_with_publication(Some publication)candidate(fun()->pending) in
@@ -240,7 +240,7 @@ let ()=
   test "remote unregister OOM defers borrowed FD and name cleanup and later reuse is safe" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let candidate,publication=match R.create_bound_candidate ~basis:(path "basis") ~directory
+      let candidate,publication=match R.create_bound_candidate (R.create_publication_scope()) ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=R.borrowed_with_publication(Some publication)candidate(fun()->pending) in

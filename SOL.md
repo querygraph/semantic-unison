@@ -14,7 +14,9 @@ normal and injected-close uncertainty controls;
 current transfer/mixed-peer and camera-profile evidence remain separately scoped.
 The explicit native publication-owner backend and bound local SemanticSync
 transaction migration now have current stock/Ox Make/selftests/Dune and composed
-uncertainty/handoff controls; Copy and remote publication callers remain separate.
+uncertainty/handoff controls. Bound remote receiving also has those controls with
+in-process planner delivery, not new transport evidence; ordinary Copy and
+unbound/raw/channel cleanup remain separate.
 Historical isolated checkpoints below are retained as history, not statements
 that integration is still absent or new execution authority. Local opt-in cache
 routing is implemented; remote endpoint cache routing is not. Unknown private
