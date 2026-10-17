@@ -69,3 +69,20 @@ Six fake-owner/OS controls establish order and uncertainty behavior. No actual
 native wait/census/transport is qualified by these controls. The future owner
 must still implement exact launch, inherited resource validation, admission and
 immutable result persistence before requesting runtime review.
+
+`entry.py` now provides source launch/lock wiring behind mandatory exact plan and
+fresh Root admission `ROOT_ADMITTED_ONE_MIXED_PEER_JOB`. It opens existing pools
+only, acquires IO then Unison8, validates exact source/interpreter pins, creates
+one-use packet/snapshot files, and passes nine inherited descriptors. The worker
+checks canonical inode identities before hashing pinned binaries. Current stock/
+Ox artifacts must bind successful build/selftest receipts and current production
+source inventory; old stock remains the explicitly pinned historical artifact.
+Prelaunch known refusal rolls back; uncertain close/launch/group proof retains
+objects and grants. Parent copies of output descriptors are consumed once.
+
+Eight fake-resource/child/artifact controls pass; nine composed fake-native parent
+controls include explicit source-bound no-call failure frames and contradictory
+frame refusal. These do not qualify a real entry invocation or transport. Exact
+plan generation, full dependency/persistence/preflight refusal review and bounded
+entry lifecycle qualification remain before a fresh runtime scheduling request.
+Do not create an admission locally or reuse any earlier grant.

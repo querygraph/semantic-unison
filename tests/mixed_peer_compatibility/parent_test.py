@@ -53,4 +53,10 @@ class Readback(unittest.TestCase):
     def test_timeout_not_functional_success(self):
         self.result['invocations'][0]['outcome']['timed_out']=True
         with self.assertRaises(ValueError):self.check()
+    def test_explicit_no_calls_frame(self):
+        self.result={'complete':False,'invocations':[],'no_calls_started':True}
+        out=self.check();self.assertEqual(out['attempted_calls'],0);self.assertFalse(out['bytes_verified'])
+    def test_no_calls_contradiction(self):
+        self.result['no_calls_started']=True
+        with self.assertRaises(ValueError):self.check()
 if __name__=='__main__':unittest.main()

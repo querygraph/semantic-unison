@@ -3988,3 +3988,14 @@ result/exit contradictionfunctionalfalse. SixfakeOS/ownercontrols c2c5e1/0
 passed; no actualnativewait/census/transport/EXIO. Launch/packet/inheritedFD/
 admission/immutablepersistence integration remainsnext, no runtimegrant. Existing
 camera request sources remainfrozen unchanged.
+
+Mixed-peerentry sourcewired: freshRootplan/admissiononly, existingEXIOthenCPU8,
+oneuseworkspace/packet/snapshots, inherited9canonicalFDverification, artifactSHA
+afterIO and currentstock/Oxbuild/selftest/productioninventorybinding. Prelaunch
+knownrefusal rollsback; unknowncarrier retainsowner/grants; no numericsclose
+retry. WorkerNOcallsframe sourcebound; parentrejectscontradiction. Fakeentry
+4initialccf47d/0 then8expanded4deb84/0 andparent9controls21555/e7f1c9/0 passed.
+Evidence mixed-peer-entry-controls-20261017.json. NO mixed-peer admission/plan
+ortransportexecution yet. Need exactplan/dependency+preflight/persistence/lifecycle
+review beforefreshRootrequest; don't executeentry fromthissourcework. Existing
+camera request pins unchanged.

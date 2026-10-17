@@ -9,6 +9,12 @@ from mixed_peer_compatibility.worker import fixture
 
 def audit_saved(result, artifacts, workspace):
     workspace=Path(workspace)
+    if result.get('no_calls_started') is True:
+        require(result['complete'] is False and result['invocations']==[],
+                'no-call worker frame contradicts attempted calls')
+        return dict(functional='FAILED_OR_INCOMPLETE',bytes_verified=False,
+                    attempted_calls=0,all_attempted_groups_settled=True,
+                    scope='pinned worker no-call frame, not process absence')
     raw=[]
     for index,entry in enumerate(result['invocations']):
         case,phase=divmod(index,3)
