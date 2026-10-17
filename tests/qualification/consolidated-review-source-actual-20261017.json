@@ -1,0 +1,97 @@
+{
+  "scope": "Consolidated local review branch with production identical to qualified source-owner branch; no GitHub merge/runtime IO grant",
+  "source": "0b17ff36",
+  "source_owner_production": "ecad82f3",
+  "builds_rebound": [
+    {
+      "label": "stock-make",
+      "receipt": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-make-20261017-001/RESULT.json",
+        "bytes": 51179,
+        "sha256": "eb107aba1fc7dd40774e2d6ef9dc90db4ce5d5f7fcc82dfc54c0e3b377cb29fa"
+      },
+      "production_pins_rebound": 318
+    },
+    {
+      "label": "ox-make",
+      "receipt": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-make-20261017-001/RESULT.json",
+        "bytes": 51185,
+        "sha256": "8da4e66e3dd83376fd859a72a1bea97dbbbf31dae39de8c1d711047a94b2ef8b"
+      },
+      "production_pins_rebound": 318
+    },
+    {
+      "label": "stock-dune",
+      "receipt": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50623,
+        "sha256": "c8925f46b253b1666648c22da06a69f545e977c07be517774d5c7a3238c2ed63"
+      },
+      "production_pins_rebound": 318
+    },
+    {
+      "label": "ox-dune",
+      "receipt": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50627,
+        "sha256": "ab75734e1023472e90bc56665f82eec23cb2910be5f9ffe2441f903d95f8e6ce"
+      },
+      "production_pins_rebound": 318
+    }
+  ],
+  "inspector_owner": {
+    "session": 46063,
+    "terminal_chunk": "73e87f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "inspector_steps": [
+    {
+      "label": "stock-build",
+      "receipt": {
+        "path": "/private/tmp/unison-consolidated-inspector-stock-build-20261017-001/RESULT.json",
+        "bytes": 4044,
+        "sha256": "95ad606ee9f4e2ecc0afc31ed40980aacff1f1fa61a7b3276e777638c366b5dd"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-consolidated-inspector-stock-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "250c6f81c06fa86d541a4ca1d241bbcfa724442e0ee60ea70392816f16a12ba8"
+      }
+    },
+    {
+      "label": "ox-build",
+      "receipt": {
+        "path": "/private/tmp/unison-consolidated-inspector-ox-build-20261017-001/RESULT.json",
+        "bytes": 4046,
+        "sha256": "b6e306c7dd3c0876c0052d8611876e7f22fbcba36682654c47513375452f1f6a"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-consolidated-inspector-ox-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "cfc07d5f1f8d59f9fcfbd79c72476364fbb1ef5caa0f9039efc9ece5685bad41"
+      }
+    },
+    {
+      "label": "integration",
+      "receipt": {
+        "path": "/private/tmp/unison-consolidated-inspector-integration-20261017-001/RESULT.json",
+        "bytes": 8231,
+        "sha256": "13e5b9de26567b98a10efcf5750fff1b20a5a6da899496548ffa92727b92edf8"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-consolidated-inspector-integration-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "3d83082e89fc8a667c0cadf10f1919ddf9a2d2ffa53f07890a12b68c4205d2a0"
+      }
+    }
+  ],
+  "complete_for_scope": true,
+  "limitations": [
+    "Historical production build runs are exact-source rebound, not rerun",
+    "Inspector calls use original tiny fixtures only",
+    "Pending property request remains on frozen older integration checkout",
+    "No real camera/SDK/transport/full goal/deployment claim"
+  ]
+}
