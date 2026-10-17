@@ -2,13 +2,12 @@
 
 Candidate: draft [PR13](https://github.com/querygraph/unison/pull/13),
 `integration/sol-consolidated-review`, against `querygraph/unison:master`.
-Committed source79336ce7 includes qualified cold first-report provisioning,
-portable component-source close and optional index-capacity handling. Ordinary
-semantic-report source cleanup also has current stock/Ox builds+selftests and
-production-linked normal/close-uncertainty controls; see semantic-report-source-
-owner-actual-20261017.json. This is an evidence map,
-not a completion declaration or runtime permission. All twelve acceptance areas
-remain in scope; exhaustive private-field interpretation is not a release gate.
+Current production baseline: commit183844c3, including owned native publication
+in modern bound semantic/local/rsync producers and borrower-aware cleanup. The
+inspector refresh below changes only its manual command and documentation.
+This is an evidence map, not a completion declaration or runtime permission.
+All twelve acceptance areas remain in scope. Unknown MakerNotes stay exact;
+exhaustive private-field interpretation is not a deployment gate.
 
 | SOL area | Implemented and evidenced | Remaining verification or limitation |
 | --- | --- | --- |
@@ -17,7 +16,7 @@ remain in scope; exhaustive private-field interpretation is not a release gate.
 | 3 Malformed input | Bounded graph/count/extent rules, malformed wire/container and JPEG controls | Current directed regressions, not an autonomous fuzz/sanitizer campaign (user excluded that work). No whole-process hard RSS claim. |
 | 4 Integrity | Full target SHA checks, raw-digest-invalid rejection, generated actual SDK receiving/merge and one real-camera SDK decode | Broader corpus and decoded-pixel identity remain separate claims. Do not rerun SDK without fresh coordination. |
 | 5 Concurrent modification | Source/target witnesses, queued completion cancellation; new report source/head/parent/permission fences | Current-object384-job apply/cancellation controls passed per compiler; precise source bindings remain in the receipts. No hostile-writer atomic namespace CAS claim. |
-| 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Explicit owned publication backend now qualified; legacy production callers still require coordinated migration. Hardware power-loss and every fault cross-product are unproved. |
+| 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Owned backend plus modern bound local/remote semantic and ordinary local/rsync callers have composed controls. Legacy named/unbound/older-peer and raw/channel close paths remain separately scoped. Hardware power-loss and every fault cross-product are unproved. |
 | 7 Filesystems | APFS ordinary clone/range path, cross-volume APFS/HFS+ historical exact controls, named property controls | No ZFS/ReFS implementation/runtime, physical sharing/write amplification or exhaustive sparse/ACL/compression claim. Fresh IO controls require a new exact window. |
 | 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Fresh candidate mixed-version transport evidence needed; UI tested through its production entry callback, not a manual GUI session. |
 | 9 Parallelism/resources | Checked worker closures, pool1/2/4/8 parity, source/accounted CPU/queue/FD controls, shared SDK tests | Current-object pool1/2/4/8 parity and384-job scheduling controls passed; see integration-worker-parity/apply receipts. Credits and bounded samples are not hard OS-thread/RSS caps or calibrated speedup. |
@@ -39,35 +38,28 @@ fault, transfer or scheduling controls.
 
 ## Next actions in order
 
-1. Ordinary semantic-report source-close qualification passed on stock/Ox,
-   including an original injected-close failure control. Transfer source planning
-   now shares that helper with fresh builds/controls; actual remote execution
-   remains unverified. See transfer-source-ownership-review-20261017.md. Review receiver-stage
-   cleanup next: the explicit StagePublication.owned backend passed43new and58legacy
-   controls/compiler plus stock/Ox Make+selftests/Dune. Bound local SemanticSync now passes four composed ownership controls and
-   32producer-handoff cases per compiler, plus current Make/selftests/Dune; see
-   local-publication-owned-v1.md and its actual qualification. Bound remote receiving now has the same four composed cases and32handoff
-   cases/compiler plus Make/selftests/Dune; its planner delivery is in-process,
-   not actual transport. See remote-publication-owned-v1.md. Ordinary bound local Copy now has current Make/selftests/Dune and6cases/compiler
-   under actual admitted TargetBinding tickets, including copyByPath/copyLocalCloned
-   and native uncertainty retention; see copy-bound-owned-v1.md. Guarded network rsync
-   receiver staging now has current Make/selftests/Dune,8actual-codec cases per
-   compiler and rerun6local cases; progress-triggered cleanup defers native/FD
-   closure and invalidates the lease, with known-vs-unknown cancellation separated.
-   See rsync-publication-owned-v1.md. Delivery is in-process, not actual transport.
-   Legacy named/unbound/older-peer and raw/channel cleanup remain. Report ownership tests must
-   not be presented as transfer fault coverage.
-2. Frozen property requeste60975f3 is already queued from the separate integration
-   checkout, with exact source/build pins. Its fresh Photo Root admission remains
-   absent at the last check. Never substitute current PR13 binaries or replay an
-   old grant. That run qualifies its own frozen baseline; current-source transport
-   and mixed-version evidence must be assessed separately afterward.
-3. Prepare bounded retained-private-camera component-profile evidence if needed
-   for the supported-operation claim. Inspector artifacts must be rebuilt against
-   current DngComponents/C sources before a fresh camera request. No Photo
-   original, retained copy, SDK or bulk IO access is implied by this plan.
-4. Keep PR13, user documentation and OPUS-HANDOFF.md aligned with actual evidence.
-   No GitHub merge authorization or production deployment is implied.
+1. Obtain candidate-bound transfer/property and mixed-version transport evidence.
+   Frozen property requeste60975f3 is queued from the separate integration checkout;
+   its admission was absent at last check. It qualifies that frozen baseline only.
+   Never substitute PR13 binaries, reuse a grant, or equate in-process codec tests
+   with transport/server/pump settlement. Current candidate follow-up requires
+   its own exact source/build plan and admission.
+2. Prepare a bounded retained-private-camera component observation with exact
+   input identity, current inspector build, executor, budgets and closure plan.
+   Current stock/Ox inspectors passed sixteen complete calls on tiny independent
+   TIFFs; eight manual command controls passed. See
+   tests/qualification/current-inspector-components-actual-20261017.json.
+   INSPECT_COMPONENTS=1 selects an advisory report, not a transfer profile or
+   camera payload permission. No camera bytes were opened by this refresh.
+3. Keep the remaining legacy cleanup limitations explicit. Owned publication
+   backend, bound SemanticSync/SemanticRemote, bound local Copy and guarded rsync
+   staging have current composed failure controls and stock/Ox builds. Their
+   generated in-process evidence does not establish every legacy FD error path,
+   power-loss behavior or actual transport fault cross-product. Do not replace
+   end-to-end release verification with an endless universal cleanup migration.
+4. Keep PR13, user documentation and OPUS-HANDOFF.md aligned. Current inspector
+   evidence is pinned separately from historical camera/SDK/RPC receipts. No
+   merge, production deployment or broader camera support follows from builds.
 
 Qualification jobs may own Unison CPU00..07 while their actual handles are live;
 no IO barrier or native/SDK reservation is created by this document. Remote

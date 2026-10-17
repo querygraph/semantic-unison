@@ -3840,3 +3840,34 @@ with actual in-process codec+receiver callback; NOT actual transport/server/pump
 verification. Legacy named/unbound/old-peer and raw/channel close errors remain
 next. No new SDK/Photo/camera/bulkIO grant; frozenproperty request still separate
 and unadmitted atlastread. Fullgoalactive.
+
+
+## Current inspector refresh and pending source changes — 2026-10-17
+
+Active worktree: /Users/alexy/src/unison-sol-review-20261017, branch
+integration/sol-consolidated-review, draft PR13, last committed183844c3.
+Current uncommitted work adds INSPECT_COMPONENTS=1 to the manual inspect-file
+command, eight argv-only controls, and updates semantic-inspect documentation.
+The strict-profile default remains unchanged; component reports are advisory.
+
+Fresh stock/Ox standalone inspector builds and integration ACTUAL49827/a6d1a4/0
+(no session): sixteen complete calls on independent256B original TIFF fixtures
+passed component/role/hash and unchanged-source checks. No camera payload opened.
+Evidence directories: /private/tmp/unison-current-components-stock-inspector-20261017-001,
+/private/tmp/unison-current-components-ox-inspector-20261017-001, and
+/private/tmp/unison-current-components-inspector-integration-20261017-001.
+
+The eight new command controls have SHARED-CLOSED evidence in
+/private/tmp/unison-inspector-component-command-controls-20261017-001; owning-tool
+terminal was truncated from model context and must not be invented from that marker.
+Inspect its recorded child result before marking controls passed. Final qualification
+JSON, release-readiness refresh and commit remain pending. Documentation currently
+references the planned qualification JSON; create it before committing.
+
+Next: finish these source/tiny-fixture controls, refresh the release gap summary,
+then prepare a concrete bounded camera component-observation executor/plan for
+separate admission. No retained camera payload, SDK or transport permission follows
+from the manual flag. Frozen property request remains a separate older-source
+request; no grant known at last check. Full goal active, not complete.
+
+Inspector refresh finalized: eight argv controls passed (child reaped0/tokensclosed); owning-tool terminal unavailable after truncated output, explicitly not inferred. Current inspector evidence JSON now exists and pins four evidence directories. Release checklist refreshed to separate candidate transport, camera observation and remaining legacy limits. No camera payload opened; no goal completion claim.

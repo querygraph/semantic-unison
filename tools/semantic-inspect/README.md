@@ -72,7 +72,7 @@ using Photo-owned fixtures; never substitute this tool for a rendering fingerpri
 ## Reuse the pinned build
 
 `--use-build /absolute/build-receipt.json -- ...` checks a successful retained
-build-only receipt, the exact current19-file kernel source set, the private
+build-only receipt, the exact current pinned kernel source set, the private
 workspace/binary binding and binary SHA256, then forwards arguments without a
 compiler lookup or rebuild. Receipt reads are bounded regular no-follow reads;
 duplicate keys, changed files and stale/missing pins fail before input access.
@@ -158,3 +158,17 @@ refusal controls pass. See
 `../../tests/qualification/integration-inspector-ready-actual-20261017.json`.
 This is not a real-camera/Adobe/decoded-pixel or receiving qualification. Fresh
 coordinated IO permission remains required before opening retained camera data.
+
+
+For the same shared entry point, `INSPECT_COMPONENTS=1` selects advisory
+component observations instead of a transfer profile. Leave `INSPECT_PROFILE`
+unset; `INSPECT_BASE` may still name a separately authorized comparison input.
+The default remains strict profile1 when this flag is absent or0. Selecting
+component mode is not semantic transfer eligibility, image decoding, or permission
+to read a retained camera copy. Such a run still requires its own exact IO grant.
+
+Current source qualification is refreshed in
+`tests/qualification/current-inspector-components-actual-20261017.json`:
+stock/Ox build-only artifacts and16 complete calls on original256B fixtures.
+Earlier receipts remain historical; their changed source pins must not be
+relabelled as a fresh real-camera observation.

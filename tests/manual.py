@@ -194,10 +194,17 @@ def command(target, output, environment):
         for key in ('INSPECTOR_RECEIPT', 'INSPECT_INPUT'):
             require(bool(environment.get(key)) and Path(environment[key]).is_absolute(),
                     key + ' must be an explicit absolute path')
-        profile = environment.get('INSPECT_PROFILE', 'org.firstpair.dng-xmp/1')
-        require(profile in ('org.firstpair.dng-xmp/0', 'org.firstpair.dng-xmp/1'), 'unknown inspector profile')
+        components = environment.get('INSPECT_COMPONENTS', '0')
+        require(components in ('0', '1'), 'INSPECT_COMPONENTS must be 0 or 1')
         argv = [sys.executable, str(ROOT / 'tools/semantic-inspect/run.py'),
-                '--use-build', environment['INSPECTOR_RECEIPT'], '--', '--profile', profile]
+                '--use-build', environment['INSPECTOR_RECEIPT'], '--']
+        if components == '1':
+            require(not environment.get('INSPECT_PROFILE'), 'component observation does not select a transfer profile')
+            argv += ['--components']
+        else:
+            profile = environment.get('INSPECT_PROFILE', 'org.firstpair.dng-xmp/1')
+            require(profile in ('org.firstpair.dng-xmp/0', 'org.firstpair.dng-xmp/1'), 'unknown inspector profile')
+            argv += ['--profile', profile]
         if environment.get('INSPECT_BASE'):
             require(Path(environment['INSPECT_BASE']).is_absolute(), 'INSPECT_BASE must be absolute')
             argv += ['--base', environment['INSPECT_BASE']]
