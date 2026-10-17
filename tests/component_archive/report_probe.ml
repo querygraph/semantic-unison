@@ -86,6 +86,19 @@ let ()=
  let pending=request late in HelperSupervisor.cancel late;
  require(Lwt_unix.run pending=None) "cancelled submitted report reported success";
  require(Update.component_owner_reference left=head) "cancelled report advanced head";
+ let pending=request(HelperSupervisor.cancellation()) in
+ let displaced=storage^"-displaced" in
+ Unix.rename storage displaced;Unix.mkdir storage 0o700;
+ let refused=try ignore(Lwt_unix.run pending);false with ComponentHash.Invalid _ -> true in
+ require refused "replaced configured parent accepted";
+ require(Update.component_owner_reference left=head) "replaced parent advanced head";
+ require(Array.length(Sys.readdir storage)=0) "replaced parent received cache writes";
+ Unix.rmdir storage;Unix.rename displaced storage;
+ let pending=request(HelperSupervisor.cancellation()) in Unix.chmod storage 0o755;
+ let refused=try ignore(Lwt_unix.run pending);false with ComponentHash.Invalid _ -> true in
+ require refused "nonprivate configured parent accepted after await";
+ Unix.chmod storage 0o700;
+ require(Update.component_owner_reference left=head) "permission change advanced head";
  if phase="read" then begin
   let pending=request(HelperSupervisor.cancellation()) in
   Update.clear_component_owner_reference left;

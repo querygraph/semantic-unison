@@ -655,7 +655,7 @@ let adopt_component_cache_store fspath ~expected_reference store =
   setArchivePropsLocal root (Proplist.add componentNamespaceKey identity
     (Proplist.add componentOwnerKey reference properties))
 (* Endpoint-owner orchestration: no borrowed namespace scope spans worker await. *)
-let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~cancellation
+let inspect_cached_components ?(check_parent=fun () -> ()) fspath ~parent ~path ~generation_sha256 ~pool ~cancellation
     ~decoders ~max_read_bytes source =
   if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
   if not(Prefs.read componentOwnerCache) then
@@ -671,6 +671,7 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
     match reference,identity with
     | Some _,None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
     | _ ->
+    check_parent ();
     let key=Fspath.toString path in
     let namespace=DngComponents.prepare_cache_namespace ?expected:identity ~parent () in
     DngComponents.provision_cache_namespace namespace ~parent;
@@ -694,6 +695,7 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
       if HelperSupervisor.is_cancelled cancellation then Lwt.return None else begin
       (match result with
        | Some inspection ->
+         check_parent ();
          (match inspection.SemanticWorkers.components with
           | Error _ -> ()
           | Ok summary ->
@@ -713,15 +715,18 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
                    ~expected_entry_sha256:previous ~binding ~max_bytes:8589934592L ~max_entries:4096 in
                  let namespace=DngComponents.prepare_cache_namespace ~expected:identity ~parent () in
                  DngComponents.provision_cache_namespace namespace ~parent;
-                 if DngComponents.execute_managed_cache_store store ~namespace ~parent then
+                 if DngComponents.execute_managed_cache_store store ~namespace ~parent then begin
+                   check_parent ();
                    adopt_component_cache_store fspath ~expected_reference:reference store
+                 end
                end))
        | None -> ());
       Lwt.return result end)
   end
 let inspect_configured_components fspath path ~pool ~cancellation ~decoders ~max_read_bytes source =
   let configured=Prefs.read componentCacheParent in
-  if not(Prefs.read componentOwnerCache) || configured="" || HelperSupervisor.is_cancelled cancellation then
+  if not(Prefs.read componentOwnerCache) || configured="" || HelperSupervisor.is_cancelled cancellation ||
+     (component_owner_reference fspath<>None && component_owner_namespace fspath=None) then
     (if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
      SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source)
   else begin
@@ -739,7 +744,7 @@ let inspect_configured_components fspath path ~pool ~cancellation ~decoders ~max
       let generation_sha256=SemanticHash.string(Printf.sprintf
         "unison-component-source-epoch/0:%d:%d:%Ld:%.17g:%.17g"
         stats.st_dev stats.st_ino stats.st_size stats.st_mtime stats.st_ctime) in
-      inspect_cached_components fspath ~parent:fd ~path ~generation_sha256
+      inspect_cached_components ~check_parent:(fun () -> DngComponents.check_cache_parent parent) fspath ~parent:fd ~path ~generation_sha256
         ~pool ~cancellation ~decoders ~max_read_bytes source)
       (fun result -> match finish None with None -> Lwt.return result | Some error -> Lwt.fail error)
       (fun error ->

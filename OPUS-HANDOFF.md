@@ -2968,3 +2968,26 @@ fixed send:false and separated observer entry to preserve old caller shape.
 Preserved, no tests/source payloads ran there. Dune for this successor pending.
 Remote routing and parent path replacement/concurrent-owner stress remain open;
 no active owned resources or SDK/media/transport grant.
+
+
+## Review finding: outer report reservation retention — OPEN
+
+While parent-replacement qualification ran, source review found that generic
+SemanticAdmission.with_lease retires on exceptions. A propagated cache ownership
+carrier retains its FDs, but that alone does NOT prove the outer report resource
+reservation stays held. Before claiming UI uncertainty qualification, add a
+component-report-specific held/pending boundary INSIDE with_transaction, retaining
+the carrier and reservation until explicit independent settlement. Test actual
+cache uncertainty from a disposable invalidated owner descriptor; pending promise,
+unchanged admission usage after cancellation, and diagnostic retained carrier.
+Do not describe descriptor-only controls as proving outer admission retention.
+No actual uncertain FD or retained job currently exists; this is a source finding.
+
+
+Parent replacement/permissions source now checks before metadata load, after
+worker await and between completed store and archive adoption. Configured legacy
+no-identity hint bypasses parent opening. Actualstock45168/dc7a41/0; combined
+Ox+bothcontrols+bothDune7405/d32134/0 allPASS, allworkers/groups/tokensclosed.
+Exactreceipt component-local-parent-replacement-actual-20261017.json. This proves
+those refusals/builds, NOT the separately open outer-admission uncertainty issue.
+Next fix that held-boundary before broader activation/remote work.

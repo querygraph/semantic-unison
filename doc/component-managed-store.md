@@ -162,3 +162,13 @@ recursive directories nor arbitrary discovered caches are adopted. Empty/off use
 the old uncached worker. The parent owner spans only this inspection and retains
 its FD on nested uncertainty. The ordinary loaded-archive transaction still owns
 durable hint commit; details viewing does not invent a separate commit protocol.
+
+
+Configured parent path/descriptor binding is rechecked after the worker await
+before interpreting a successful result, and again between completed store
+publication and archive-head adoption. A caller-supplied parent checker is passed
+through the explicit owner API; default borrowed-parent callers retain their
+exclusive-parent obligation. Replacing the configured directory or making it
+nonprivate during the await refuses the result and leaves the archive head
+unchanged. Legacy no-identity hints bypass parent opening entirely. Concurrent
+hostile same-UID mutation is not an OS-enforced isolation guarantee.

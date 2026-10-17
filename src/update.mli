@@ -131,7 +131,7 @@ val clear_component_owner_reference : Fspath.t -> unit
     neither removes cache files nor refunds native quota. Default off; no automatic
     capture/reuse. Optional hints follow the paths tail, not legacy properties. *)
 
-val inspect_cached_components : Fspath.t -> parent:Unix.file_descr -> path:Fspath.t ->
+val inspect_cached_components : ?check_parent:(unit -> unit) -> Fspath.t -> parent:Unix.file_descr -> path:Fspath.t ->
   generation_sha256:string -> pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation ->
   decoders:DngComponents.decoders -> max_read_bytes:int64 -> Unix.file_descr ->
   SemanticWorkers.component_inspection option Lwt.t
