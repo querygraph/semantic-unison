@@ -3,8 +3,9 @@
 Source preparation only. `contract.py` fixes four directions: current stock or
 OxCaml client against retained old stock server, and old stock client against
 each current server. Each case has seed/update/no-op, twelve CLI calls total.
-New semantic/clone/validation flags go only to the current endpoint. Old peers
-receive their supported maxthreads option. Endpoint configuration2+2 plus
+Extension selection and clone flags go only to the current endpoint. The
+specific retained older fork supports semanticworkers, maxthreads and
+adobevalidate: set its worker/maxthread counts to2 and validation off as well. Endpoint configuration2+2 plus
 owner/orchestration2 fits Unison8; no hard OS-thread cap is asserted.
 
 The future executor must reuse the retained supervisor/proxy/launcher and call
@@ -96,3 +97,17 @@ capabilities; it lacks component reports. A run against that binary qualifies
 that exact historical fork interoperation, not arbitrary upstream-version
 fallback or absence of producer-binding capability. Preserve that distinction
 when selecting artifacts and writing the final plan.
+
+Plan review corrected the older endpoint's budget: its semanticworkers default
+is automatic, so maxthreads alone was insufficient accounting. OLD_FLAGS now
+explicitly selects semanticworkers2/maxthreads2/adobevalidateoff, all confirmed
+in that retained build's source. This is specific to that fork artifact; it is
+not a command contract for an upstream binary lacking those preferences.
+
+The prepared immutable plan/request are `doc/mixed-peer-plan-v1.json` and
+`doc/mixed-peer-request-v1.json`. Metadata-only validation passed with383source
+pins and14prerequisites; endpoint executables were not launched. Declared8GiB
+logical IO and1GiB metadata/log budgets are conservative, uninstrumented and not
+physical hard caps. Runtime admission and an unused namespace remain mandatory.
+Keep the request's source pins frozen through review; source changes require a
+new reviewed successor rather than silently repinning an issued admission.

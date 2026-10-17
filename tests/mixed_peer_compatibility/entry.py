@@ -51,6 +51,8 @@ def checked_plan(path,expected):
             'exact current mixed-peer source closure differs')
     require(plan['interpreter']=={'path':sys.executable,'sha256':digest(sys.executable)},
             'qualified interpreter pin differs')
+    for name,sha in plan['prerequisites'].items():
+        require(Path(name).is_absolute() and digest(name)==sha,'mixed-peer prerequisite changed')
     return plan
 
 

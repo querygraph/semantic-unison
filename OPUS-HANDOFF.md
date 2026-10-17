@@ -4008,3 +4008,15 @@ target-binding-producer-v0 PRESENT, semantic-components-v0 absent. Anyselected
 runmustclaim EXACTolderfork interop, NOT arbitraryupstream or capability-absent
 producerfallback. Stillneed exactplan/sourcecurrentbuildbindingreview before
 runtimegrant. No binary executed/payload/EXIO. Camera request unchanged.
+
+Prepared mixed-peer exactplan/requestv1 (notadmitted):383execution/sourcepins,
+14prereqs,currentstock/OxsuccessfulMake/selftest/currentproductionsourcebinding,
+retainedoldstock6ecf25c6,workspace/private/tmp/u-mp-721ec40a absent. PlanSHA
+f3d4f6b471393127bfa890ff05e66b8f440db9033ffd454506e4f827fbf4df37; requestSHA
+3fce1144b998673b7fc8ab175510b1e05a1b21027cbf224449b4689359f941b2.
+Metadataonlychecked_plan passed446d67/0. Source reviewcaughtoldsemanticworkers
+autodefault; OLD_FLAGS nowexplicit2/maxthreads2/validationoff (knownsupported
+bythatretainedfork). Fivecommand+nineparentfake-nativecontrols68341/049cb5/0
+PASS. Plan sourcepins frozen now; no mixedpeeradmission/runtime. Declared8GiB
+IO+1GiBmetadata/logs uninstrumented,4cases12calls/300sobs,8CPU+EXglobal.
+No generalupstreamfallback/semantic/pixel/physicalIO/throughputclaim.
