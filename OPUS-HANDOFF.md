@@ -3551,3 +3551,15 @@ original tiny strict/layout/component integration calls pass. Allworkers25192/
 actual-20261017.json binds exact reports and rebuilt inspector artifacts; no
 newproductionCLI/SDK/transport/camera execution. Rootpropertyrequest remains
 frozen in separate checkout; no substitution or automatic successor.
+
+
+## One consolidated review now open — 2026-10-17
+
+Draft PR13 https://github.com/querygraph/unison/pull/13 is the single consolidated
+candidate against querygraph/unison:master. Initialsourceheadf188a6a6 includes
+qualified sourceowner ecad82f3 and all current integration controls/navigation.
+All prior PRs remain separate; no merge/close/replay or production use occurred.
+Current source build rebind and freshinspector proof are in consolidated-review-
+source-actual-20261017.json. Pending property request remains at its separate
+frozen checkout/requeste60975f3; admission required before actualdispatch. No
+activeownedresources. Review limitations remain explicit; fullgoalnotcomplete.
