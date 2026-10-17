@@ -88,8 +88,11 @@ let transform version path =
         | "componentHash" -> [
           "val record_publication_available : unit -> bool";
           "val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> expected_binding:string -> expected_record_sha256:string ->\n  SemanticFile.t -> record_publication";
+          "val prepare_metadata_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> max_bytes:int -> expected_sha256:string -> SemanticFile.t -> record_publication";
           "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val record_published : record_publication -> bool"]
+        | "dngComponents" -> [
+          "val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->\n  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]

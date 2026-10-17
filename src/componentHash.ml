@@ -263,11 +263,12 @@ let checkpoint_from_record ~expected_binding ~expected_record_sha256 encoded =
   ignore(decode_checkpoint payload);
   {encoded=payload;digest}
 
-let write_checkpoint_record ~binding checkpoint output =
-  let encoded=checkpoint_record ~binding checkpoint in
+let stage_metadata_bytes ~max_bytes encoded output =
+  if max_bytes<80 || max_bytes>max_checkpoint_size+80 || String.length encoded<80 ||
+    String.length encoded>max_bytes then invalid "component metadata size limit";
   let before=Unix.LargeFile.fstat output in
   if before.Unix.LargeFile.st_kind<>Unix.S_REG || before.st_size<>0L ||
-    before.st_nlink<>1 || before.st_uid<>Unix.getuid () || before.st_perm land 0o777<>0o600 then
+    before.st_nlink<>1 || before.st_uid<>Unix.getuid () || before.st_perm land 0o7777<>0o600 then
     invalid "component record output must be fresh private owned regular file";
   let writer=SemanticFile.prepare_writer output in
   let rec write at = if at<String.length encoded then begin
@@ -281,9 +282,11 @@ let write_checkpoint_record ~binding checkpoint output =
   let after=Unix.LargeFile.fstat output in
   if after.st_dev<>before.st_dev || after.st_ino<>before.st_ino ||
     after.st_size<>Int64.of_int(String.length encoded) || after.st_nlink<>1 ||
-    after.st_uid<>before.st_uid || after.st_perm land 0o777<>0o600 then
+    after.st_uid<>before.st_uid || after.st_perm land 0o7777<>0o600 then
     invalid "component record output changed";
   SemanticHash.string encoded
+let write_checkpoint_record ~binding checkpoint output =
+  stage_metadata_bytes ~max_bytes:(max_checkpoint_size+80) (checkpoint_record ~binding checkpoint) output
 
 let read_checkpoint_record ~expected_binding ~expected_record_sha256 file =
   let size=SemanticFile.size file in
@@ -301,6 +304,16 @@ external prepare_record_publication_raw : Unix.file_descr -> Unix.file_descr -> 
 external publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit
   = "unison_component_record_publication_publish"
 external record_published : record_publication -> bool = "unison_component_record_publication_published"
+let prepare_metadata_publication ~directory ~stage ~temporary ~max_bytes ~expected_sha256 file =
+  if not(record_publication_available ()) then
+    raise(Unix.Unix_error(Unix.ENOSYS,"component metadata publication",""));
+  if max_bytes<80 || max_bytes>max_checkpoint_size+80 || String.length expected_sha256<>32 ||
+    SemanticFile.size file<80L || SemanticFile.size file>Int64.of_int max_bytes then
+    invalid "component metadata publication bounds";
+  if not(SemanticFile.same_inode file stage) then invalid "component metadata readback/stage mismatch";
+  if SemanticFile.digest file<>expected_sha256 then invalid "component metadata readback digest mismatch";
+  let ticket=prepare_record_publication_raw directory stage temporary (SemanticHash.hex expected_sha256) in
+  SemanticFile.check file;ticket
 let prepare_record_publication ~directory ~stage ~temporary ~expected_binding
     ~expected_record_sha256 file =
   if not(record_publication_available ()) then

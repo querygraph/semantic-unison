@@ -88,3 +88,15 @@ val checkpoint_for_owner_entry : owner_entry -> string -> ComponentHash.checkpoi
     Metadata only; actual current-input/base validation still requires restore.
     No generation selection, pathname interpretation, quota, index namespace
     publication, peer code, archive authority or automatic cache selection. *)
+
+val write_owner_entry : owner_entry -> Unix.file_descr -> string
+val read_owner_entry : root_identity:string -> path:string -> generation_sha256:string ->
+  expected_entry_sha256:string -> SemanticFile.t -> owner_entry
+val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->
+  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication @@ nonportable
+(** Borrowed-descriptor bounded UDI/0 staging/readback and owner-only macOS immutable
+    entry publication. Digest-named leaf, exact entry readback, same native private
+    directory/stage binding, exclusive rename and publication-state rules as records.
+    Keep caller FDs live/exclusive until settled; no descriptor closes or paths
+    opened here. No overwrite, mutable latest pointer, lookup, quota, managed
+    namespace installation, archive advancement or automatic cache selection. *)

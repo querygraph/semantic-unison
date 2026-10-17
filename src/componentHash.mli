@@ -71,6 +71,10 @@ val checkpoint_from_record : expected_binding:string -> expected_record_sha256:s
     Unpack checks exact binding, framing, digest and bounded checkpoint syntax;
     actual input/base-partition validation still requires restore. No filesystem,
     owner index, archive authority or automatic persistence is supplied. *)
+val stage_metadata_bytes : max_bytes:int -> string -> Unix.file_descr -> string
+(** Bounded80..max_checkpoint_size+80 metadata staging, fresh private0600 singly
+    linked owned output only. Syncs/checks identity/size and returns intended SHA.
+    Borrowed FD; no open/close/name publication or format/owner authority. *)
 val write_checkpoint_record : binding:string -> checkpoint -> Unix.file_descr -> string
 val read_checkpoint_record : expected_binding:string -> expected_record_sha256:string ->
   SemanticFile.t -> checkpoint
@@ -87,6 +91,10 @@ val record_publication_available : unit -> bool
 val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->
   temporary:string -> expected_binding:string -> expected_record_sha256:string ->
   SemanticFile.t -> record_publication
+val prepare_metadata_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->
+  temporary:string -> max_bytes:int -> expected_sha256:string -> SemanticFile.t -> record_publication
+(** Same borrowed-FD immutable publisher, after bounded whole-stage SHA readback.
+    Format and separately trusted owner/index binding remain caller duties. *)
 val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit
 val record_published : record_publication -> bool
 (** macOS immutable-record publication; directory and stage FDs are BORROWED,

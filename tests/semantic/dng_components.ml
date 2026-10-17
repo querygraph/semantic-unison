@@ -266,6 +266,40 @@ let () =
        check(try ignore(DngComponents.make_owner_entry ~root_identity ~path ~generation_sha256
          ~checkpoint ~outcomes:wrong);false with ComponentHash.Invalid _ -> true)
          "owner capture accepted inconsistent decoder inventory";
+       if ComponentHash.record_publication_available () then begin
+         let directory_path=Filename.temp_file "dng-owner-entry-" "" in
+         Sys.remove directory_path;Unix.mkdir directory_path 0o700;
+         let directory=Unix.openfile directory_path [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+         Fun.protect ~finally:(fun () -> Unix.close directory;
+           Array.iter(fun name -> Sys.remove(Filename.concat directory_path name)) (Sys.readdir directory_path);
+           Unix.rmdir directory_path) (fun () ->
+           let stage=Unix.openfile (Filename.concat directory_path "stage")
+             [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+           Fun.protect ~finally:(fun () -> Unix.close stage) (fun () ->
+             check(DngComponents.write_owner_entry entry stage=digest) "staged owner entry digest differs";
+             let read ()=SemanticFile.with_fd stage (fun file -> DngComponents.read_owner_entry
+               ~root_identity ~path ~generation_sha256 ~expected_entry_sha256:digest file) in
+             check(DngComponents.owner_entry_bytes(read())=encoded) "staged owner entry readback differs";
+             let ticket=SemanticFile.with_fd stage (fun file -> DngComponents.prepare_owner_entry_publication
+               entry ~directory ~stage ~temporary:"stage" file) in
+             check(not(ComponentHash.record_published ticket)) "owner entry published before explicit call";
+             ComponentHash.publish_checkpoint_record ticket directory stage;
+             check(ComponentHash.record_published ticket &&
+               not(Sys.file_exists(Filename.concat directory_path "stage")) &&
+               (Unix.stat(Filename.concat directory_path (SemanticHash.hex digest))).Unix.st_ino=
+                 (Unix.fstat stage).Unix.st_ino) "owner entry publication identity differs";
+             check(DngComponents.owner_entry_bytes(read())=encoded) "published owner entry readback differs";
+             check(try ignore(DngComponents.write_owner_entry entry stage);false
+               with ComponentHash.Invalid _ -> true) "published owner entry overwritten");
+           let stage=Unix.openfile (Filename.concat directory_path "wrong")
+             [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+           Fun.protect ~finally:(fun () -> Unix.close stage) (fun () ->
+             ignore(ComponentHash.stage_metadata_bytes ~max_bytes:DngComponents.owner_entry_max_size
+               (String.make(String.length encoded) 'X') stage);
+             check(try ignore(SemanticFile.with_fd stage (fun file -> DngComponents.prepare_owner_entry_publication
+               entry ~directory ~stage ~temporary:"wrong" file));false with ComponentHash.Invalid _ -> true)
+               "owner entry publisher accepted unrelated stage bytes"))
+       end;
        check(ComponentHash.bytes_requested session=8435L) "owner entry encoding reread input") with
    | Ok () -> () | Error why -> failwith why);
  let failing=plugin "original.operational-failure/1" (fun _ ->

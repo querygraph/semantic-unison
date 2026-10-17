@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+UDI/0 entry now has borrowed-FD staging/readback and macOS immutable publication.
+CapturedentrySHA verified againstentirestage before nativeexclusive rename; exact
+postpublishreadback passes, unrelatedstagebytes/overwrite refuse. Shared bounded
+metadatawriter factored; privatepermissions now reject specialmodebits too. Both
+DNG/core focused suites passed commoncontroller98587/e40f51/0, allworkers/groups/
+tokensclosed; receipt `tests/qualification/dng-owner-entry-publication-actual-20261017.json`.
+Preserved preexecPython syntaxrefusal bb6df9/1 acquired0resources. Managednamespace/
+lookup/quotas and currentfull-build successor remain open; no media/SDK/EXIO/mainpins.
+
 UDI/0 owner-index entry codec now implemented in DngComponents: root/path/
 generation+input+orderedoutcomes bound to checkpoint/recorddigests; trusted-entry
 digest required on load, record loading rechecks references and private schemas.

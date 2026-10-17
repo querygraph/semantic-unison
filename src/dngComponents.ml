@@ -272,3 +272,15 @@ let checkpoint_for_owner_entry entry record =
     check_owner_checkpoint checkpoint entry.previous<>entry.input_digest then
     owner_invalid "record reference mismatch";
   checkpoint
+let write_owner_entry entry output =
+  ComponentHash.stage_metadata_bytes ~max_bytes:owner_entry_max_size entry.owner_encoded output
+let read_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 file =
+  let size=SemanticFile.size file in
+  if size<80L || size>Int64.of_int owner_entry_max_size then owner_invalid "input size";
+  let bytes=Buffer.create(Int64.to_int size) in
+  SemanticFile.iter file 0L size (fun data count -> Buffer.add_subbytes bytes data 0 count);
+  SemanticFile.check file;
+  decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 (Buffer.contents bytes)
+let prepare_owner_entry_publication entry ~directory ~stage ~temporary file =
+  ComponentHash.prepare_metadata_publication ~directory ~stage ~temporary
+    ~max_bytes:owner_entry_max_size ~expected_sha256:entry.owner_digest file

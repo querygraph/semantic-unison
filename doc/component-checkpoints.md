@@ -161,6 +161,17 @@ This implements an index entry, not the managed index namespace, lookup selectio
 quota or archive-generation choice. Those remain owner responsibilities; an entry
 does not grant publication, receiving or reconciliation authority.
 
+`write_owner_entry`, `read_owner_entry` and `prepare_owner_entry_publication` now
+connect UDI/0 entries to borrowed-descriptor storage and macOS immutable publication.
+The preparation checks the whole stage against the captured entry digest before
+native binding/exclusive rename. Digest-named entry leaves cannot overwrite prior
+versions; the owner still must settle all descriptors before advancing any managed
+index reference. `ComponentHash.stage_metadata_bytes` factors the bounded fresh
+private-output writer, and `prepare_metadata_publication` factors bounded complete
+SHA readback before the same owner-only native ticket. Neither opens/closes FDs.
+This enables actual immutable entry publication, not automatic lookup, a mutable
+latest pointer, managed namespace creation or quota accounting.
+
 `SemanticWorkers.refresh_components` now runs restore and decoder-inventory
 refresh together under the existing coordinated worker lifecycle. Its immutable
 summary includes reused and invalidated component IDs and optional new checkpoint
