@@ -2932,3 +2932,14 @@ contains managed store, archive-owned namespace identity, explicit owner report
 capture/reuse, and cancellation/head-change fences. UI/SemanticRemote route and
 its private-parent asynchronous ownership remain unimplemented; latest Dune does
 not cover later identity/report changes. All actual jobs/resources closed.
+
+
+## Current owner-report Dune gap closed — 2026-10-17
+
+Current-source stock/Ox Dune compile checks PASS actual69606/f7728c/0/no session.
+Workers95833/96873 reaped0/groupsabsent/sourceunchanged/tokensclosed. Evidence
+component-owner-report-dune-actual-20261017.json supersedes pending-Dune notes
+for source8e84a6a8 (later commits metadata only). No report UI activation, media,
+SDK or transport run. Next code: explicit async parent-descriptor owner and
+local report entry-point integration; outer parent must remain retained on
+nested uncertainty. Allactualjobs/resourcesclosed.
