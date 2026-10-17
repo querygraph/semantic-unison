@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+DNG checkpoint restore is now connected through `DngComponents.with_checkpoint`:
+fresh bounded DNG description, owner-authenticated metadata/full-input verification,
+current base-partition validation, then live callback. Historical private views
+remain explicit; owner decoder-provenance invalidation/store selection are still
+outstanding. Focused stock/Ox88DNGchecks each/58calls passed; actual12756/7b2a9c/0,
+worker19181reaped0/groupsabsent/tokensclosed. See
+`tests/qualification/dng-checkpoint-restore-actual-20261017.json`. No media/SDK/EXIO
+or automatic persistence; full builds for this successor still required.
+
 Checkpoint adapter groundwork: `ComponentHash.validate_base` now checks restored
 views against the current normalized parser partition without payload reads.
 Private/opaque refinements are allowed; altered base geometry/schema/roles and

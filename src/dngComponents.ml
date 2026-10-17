@@ -65,6 +65,15 @@ let private_fragment specs =
     | item::rest -> match visit remaining depth item with
       | None -> None | Some remaining -> children remaining depth rest in
   match children 1024 0 specs with Some _ -> true | None -> false
+let with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded callback =
+  match describe file with
+  | Error reason -> Error reason
+  | Ok base ->
+    Ok(ComponentHash.with_checkpoint ~expected_checkpoint_sha256
+      ~expected_root_schema:"dng-physical-partition/0" ~max_read_bytes file encoded
+      (fun session snapshot ->
+        ComponentHash.validate_base session snapshot base;
+        callback session snapshot))
 let with_snapshot ~decoders ~max_read_bytes file callback =
   match describe file with
   | Error reason -> Error reason

@@ -106,6 +106,27 @@ let () =
        check (ComponentHash.layout_sha256 initial<>ComponentHash.layout_sha256 refined)
          "DNG decoder provenance/view root unchanged") with
    | Ok () -> () | Error reason -> failwith reason);
+ Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
+   let encoded,digest,pixels,layout=match DngComponents.with_snapshot ~decoders:frozen
+     ~max_read_bytes:8435L file (fun session ~initial:_ ~refined _ ->
+       let checkpoint=ComponentHash.checkpoint session refined in
+       ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint,
+       ComponentHash.projection refined ComponentHash.Encoded_pixels,ComponentHash.layout_sha256 refined) with
+     | Ok value -> value | Error reason -> failwith reason in
+   (match DngComponents.with_checkpoint ~expected_checkpoint_sha256:digest ~max_read_bytes:8192L
+     file encoded (fun session snapshot ->
+       check(ComponentHash.projection snapshot ComponentHash.Encoded_pixels=pixels)
+         "DNG restored pixels differ";
+       check(ComponentHash.layout_sha256 snapshot=layout) "DNG historical private view differs";
+       check(ComponentHash.bytes_requested session=8192L) "DNG restore full verification budget";
+       let pending=ComponentHash.reset_private_view session snapshot ~component:private_id
+         ~schema:"uninterpreted-private/0" in
+       check(ComponentHash.projection pending ComponentHash.Encoded_pixels=pixels)
+         "DNG decoder invalidation changed pixels") with
+     | Ok () -> () | Error reason -> failwith reason);
+   check(try ignore(DngComponents.with_checkpoint ~expected_checkpoint_sha256:(String.make 32 'X')
+     ~max_read_bytes:8192L file encoded (fun _ _ -> failwith "untrusted checkpoint callback"));false
+     with ComponentHash.Invalid _ -> true) "DNG untrusted checkpoint accepted");
  let failing=plugin "original.operational-failure/1" (fun _ ->
    raise (ComponentHash.Invalid "original injected decoder failure")) in
  let failed=match DngComponents.freeze_decoders [bind private_id failing] with

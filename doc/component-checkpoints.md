@@ -97,3 +97,10 @@ extents are required. Unrefined schemas and child structure must match; a privat
 or opaque base leaf may contain cached private refinements, but no pixel or
 standard-metadata claims. This check reads no payload and does not authenticate
 metadata itself. Decoder provenance and replacement remain adapter responsibilities.
+
+`DngComponents.with_checkpoint` now combines fresh DNG description, authenticated
+core restore and this base-partition check before exposing a live restored view.
+It preserves historical private refinements for explicit owner invalidation; it
+does not silently mark them approved by the current decoder registry. Description
+reads are additional to the core's declared hash/refinement budget. No persistent
+store, automatic worker cache selection or epoch-only reuse is implemented here.

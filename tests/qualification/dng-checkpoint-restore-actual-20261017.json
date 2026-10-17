@@ -1,0 +1,38 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "DNG authenticated checkpoint restoration and current base validation; no persistent store/automatic worker cache/full builds",
+  "calls": 58,
+  "actual_terminal": {
+    "session": 12756,
+    "chunk": "7b2a9c",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-vanrx6op/RESULT.json",
+      "bytes": 345653,
+      "sha256": "4d0b4dc3d941d48c3ee1761cc281f7da6095d5929562e5a27fe57be8a60ff142"
+    },
+    {
+      "path": "/private/tmp/unison-dng-checkpoint-controls-20261017-001/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "6feb319da9799c749dd4fc34223a6ff649b508e78e61048887e309b44168ed32"
+    },
+    {
+      "path": "/private/tmp/unison-dng-checkpoint-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e96224963603c03501d3b2897df788e61998fd867168e1c435eec12a665e6f03"
+    },
+    {
+      "path": "/private/tmp/unison-dng-checkpoint-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-dng-checkpoint-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "33cbf2bb0708f5c28f163752673fc85fb7285a835fbcdc81a13d3dfbbe4e1452"
+    }
+  ]
+}
