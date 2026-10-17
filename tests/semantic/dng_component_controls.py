@@ -24,7 +24,7 @@ def main():
     sources=[ROOT/'src'/(m+ext) for m in modules for ext in ('.ml','.mli','.ox.mli.in') if (ROOT/'src'/(m+ext)).exists()]
     sources += [ROOT/'src'/name for name in ('semantic_mode_filter.ml','semanticHash_stubs.c',
                                            'semanticHash_evp.h','semanticFile_stubs.c')]
-    sources += [ROOT/'tests/semantic'/name for name in ('layout_only.ml','private_safety.ml','dng_components.ml')]
+    sources += [ROOT/'tests/semantic'/name for name in ('layout_only.ml','private_safety.ml','dng_components.ml','archive_reference_fault.ml','record_fault_stubs.c')]
     sources += [ROOT/'tools/semantic-inspect/inspect.ml',ROOT/'tools/semantic-inspect/run.py',Path(__file__)]
     result=dict(complete=False,calls=[],source_pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sources},work=str(root),SDK_invoked=False,media_payload_opened=False)
@@ -50,7 +50,7 @@ def main():
                 (work/(module+ext)).write_text(out['stdout'])
         for name in ('semanticHash_stubs.c','semanticHash_evp.h','semanticFile_stubs.c'):
             shutil.copyfile(ROOT/'src'/name,work/name)
-        for name in ('layout_only.ml','private_safety.ml','dng_components.ml'):
+        for name in ('layout_only.ml','private_safety.ml','dng_components.ml','archive_reference_fault.ml','record_fault_stubs.c'):
             shutil.copyfile(ROOT/'tests/semantic'/name,work/name)
         command=[compiler,'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
         for module in modules:command += [module+'.mli',module+'.ml']
@@ -85,6 +85,18 @@ def main():
                     leak.write_text('let leak (capture:DngComponents.'+typ+') = Domain.Safe.spawn (fun () -> ignore(DngComponents.'+operation+' capture))\n')
                     refused=call([compiler,'-c',leak.name],expected=2)
                     assert 'nonportable' in refused['stderr'] or 'contended' in refused['stderr']
+            # A renamed manifest with directory-fsync failure cannot become an
+            # authoritative archive hint. Test-only native shim, never production.
+            call([compiler,'-c','record_fault_stubs.c'])
+            call([compiler,'-ccopt','-Dfsync=unison_record_control_fsync','-c','semanticFile_stubs.c'])
+            fault=[compiler,'-I','+unix','unix.cmxa']+[m+'.cmx' for m in modules]
+            fault += ['archive_reference_fault.ml','semanticHash_stubs.o','semanticFile_stubs.o',
+                      'record_fault_stubs.o','-o','archive-reference-fault']
+            call(fault);call([str(work/'archive-reference-fault')])
+            result.setdefault('archive_reference_fault_builds',{})[label]={
+                'production_fault_switch':False,'macro':'fsync=unison_record_control_fsync',
+                'executable_sha256':hashlib.sha256((work/'archive-reference-fault').read_bytes()).hexdigest()}
+            save(root,result)
             # Original guard-removal control in an isolated filtered copy only.
             implementation=work/'dngComponents.ml';original=implementation.read_text()
             guard='  (match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);\n'

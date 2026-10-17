@@ -320,6 +320,33 @@ let mpaths = PathMap.m Proplist.m
 let propPathKey : Proplist.t PathMap.t Proplist.key =
   Proplist.register "paths" mpaths
 
+(* Optional endpoint-local cache hints, never shared reconciliation authority.
+   Keep their key out of the legacy property payload: unknown keys are fatal to
+   older readers. The optional tail follows the already optional paths map. *)
+let componentOwnerCache = Prefs.createBool "componentownercache" false ~local:true
+  ~send_value:(fun _ -> false) ~category:(`Advanced `Syncprocess)
+  "retain explicitly adopted local component-manifest references"
+  "Opt-in archive hints for already published and settled component manifests. \
+   Does not capture automatically or replace full-input verification."
+let componentOwnerKey : (string * string) Proplist.key =
+  Proplist.register "component owner manifest local"
+    Umarshal.(prod2 (bounded_string 32) (bounded_string 32) id id)
+let componentArchiveBinding thisRoot magic =
+  let values=["unison-component-archive-context/0";thisRoot;Prefs.read rootsName;
+    string_of_int archiveFormat;magic] in
+  SemanticHash.string(String.concat "" (List.map(fun value ->
+    Printf.sprintf "%d:" (String.length value)^value) values))
+let loadComponentOwnerReference channel thisRoot magic properties =
+  if not(Prefs.read componentOwnerCache) then properties else
+  let encoded=try Some(really_input_string channel DngComponents.owner_archive_reference_size)
+    with End_of_file -> None in
+  match encoded with
+  | None -> properties
+  | Some encoded -> match DngComponents.decode_owner_archive_reference
+      ~archive_binding:(componentArchiveBinding thisRoot magic) encoded with
+    | None -> properties
+    | Some value -> Proplist.add componentOwnerKey value properties
+
 let mpayload = Umarshal.prod4
                  marchive Umarshal.int Umarshal.string Proplist.m
                  Umarshal.id Umarshal.id
@@ -394,6 +421,7 @@ let loadArchiveLocal fspath (thisRoot: string) :
               Proplist.add propPathKey paths properties
             with End_of_file -> properties
           in
+          let properties=loadComponentOwnerReference c thisRoot magic properties in
           close_in c;
           (* Restore to the negotiated features *)
           let () = Features.setEnabled negotiatedFts in
@@ -440,9 +468,16 @@ let storeArchiveLocal fspath thisRoot archive hash magic properties =
       with a fatal error "Property lists: paths not yet registered!" *)
    let paths =
      try Proplist.find propPathKey properties with Not_found -> PathMap.empty in
-   let properties = Proplist.remove propPathKey properties in
+   let reference=if Prefs.read componentOwnerCache then
+     (try Some(Proplist.find componentOwnerKey properties) with Not_found -> None) else None in
+   let properties = Proplist.remove componentOwnerKey (Proplist.remove propPathKey properties) in
    Umarshal.to_channel mpayload c (archive, hash, magic, properties);
-   if not (PathMap.is_empty paths) then Umarshal.to_channel mpaths c paths;
+   (* Older readers consume at most the paths map and ignore the following hint.
+      They may discard it when rewriting; absence remains an ordinary cache miss. *)
+   if not (PathMap.is_empty paths) || reference<>None then Umarshal.to_channel mpaths c paths;
+   (match reference with None -> () | Some(binding,manifest_sha256) ->
+     output_string c (DngComponents.encode_owner_archive_reference
+       ~archive_binding:(componentArchiveBinding thisRoot magic) ~binding ~manifest_sha256));
    close_out c))
 
 (* Remove the archive under the root path [fspath] with archiveVersion [v] *)
@@ -563,6 +598,23 @@ let getArchiveProps (thisRoot: string): Proplist.t =
 (* Update the property list cache. *)
 let setArchivePropsLocal (thisRoot: string) (props: Proplist.t) =
   Hashtbl.replace archivePropCache thisRoot props
+
+let component_owner_reference fspath =
+  if not(Prefs.read componentOwnerCache) then None else
+  let root=thisRootsGlobalName fspath in
+  try Some(Proplist.find componentOwnerKey (getArchiveProps root)) with Not_found -> None
+let set_component_owner_reference fspath publication =
+  if not(Prefs.read componentOwnerCache) then
+    raise(Util.Transient "Component owner cache is disabled");
+  let reference=DngComponents.owner_index_reference publication in
+  let root=thisRootsGlobalName fspath in
+  let properties=try getArchiveProps root with Not_found ->
+    raise(Util.Transient "Component owner archive is not loaded") in
+  setArchivePropsLocal root (Proplist.add componentOwnerKey reference properties)
+let clear_component_owner_reference fspath =
+  let root=thisRootsGlobalName fspath in
+  try setArchivePropsLocal root (Proplist.remove componentOwnerKey (getArchiveProps root))
+  with Not_found -> ()
 
 let fileUnchanged oldInfo newInfo =
   match oldInfo, newInfo with

@@ -104,6 +104,7 @@ let transform version path =
           "val prepare_owner_index_publication : binding:string -> owner_index ->\n  directory:Unix.file_descr -> stage:Unix.file_descr -> temporary:string ->\n  SemanticFile.t -> owner_index_publication";
           "val publish_owner_index : owner_index_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val owner_index_published : owner_index_publication -> bool";
+          "val owner_index_reference : owner_index_publication -> string * string";
           "val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->\n  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication";
           "val stage_cache_capture : owner_entry -> checkpoint:ComponentHash.checkpoint ->\n  quota:ComponentHash.metadata_quota -> directory:Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
           "val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->\n  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->\n  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture";
