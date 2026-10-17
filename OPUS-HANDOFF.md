@@ -3908,3 +3908,15 @@ link separately qualified managed store/namespace/archive/worker routing while
 preserving historical receipt scopes and complete-input revalidation limitation.
 Added current release-evidence map and operation-specific gradual camera scope.
 No pinned camera-request source changed; no payload/CPU/IO job launched.
+
+
+Current gradual-refinement suite rebound to CURRENT sources: historical43pins
+had14changed, so fresh stock/Ox tests run. Combinedattempt64542/f30359/exit1
+hit60s wrapper after70recordedcalls; workerTERM/reaped/groupabsent/tokensclosed,
+partialresult preserved. Added --compiler-scope stock|ox|both (defaultboth
+unchanged) to test driver only, then separatebounded compiler runs PASSED
+actual18008/1dfcee/0/no session. Both complete rawRESULTs/current sourcepins
+rehashed. Evidence current-gradual-refinement-actual-20261017.json includes
+commuting independent private upgrades/preservedpixels/unsupported downgrade/
+authenticated restore/archivefault/guard-ablation checks. Generatedtiny only,
+no EXIO/SDK/camera. Camera request executionpins unchanged by test-driver edit.

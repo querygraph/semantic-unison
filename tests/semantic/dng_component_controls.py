@@ -1,4 +1,5 @@
 """Production-linked stock/Ox exact-layout fixtures and strict-profile regressions."""
+import argparse
 import hashlib
 import json
 import os
@@ -18,6 +19,9 @@ from shared_process_owner import retain_after_record
 
 
 def main():
+    parser=argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--compiler-scope',choices=('stock','ox','both'),default='both')
+    args=parser.parse_args()
     modules=['semanticHash','semanticFile','componentHash','formatExtension','xmpObservation','xmpMerge',
              'dngSemantic','dngExtended','dngLayout','dngComponents','semanticDelta']
     root=Path(tempfile.mkdtemp(prefix='unison-dng-component-controls-',dir='/private/tmp'))
@@ -41,6 +45,8 @@ def main():
     shutil.copyfile(ROOT/'src/semantic_mode_filter.ml',root/'semantic_mode_filter.ml')
     call(['/Users/alexy/.opam/default/bin/ocamlopt',str(root/'semantic_mode_filter.ml'),'-o',str(mode)])
     for label,switch in [('stock','default'),('ox','5.2.0+ox')]:
+        if args.compiler_scope not in ('both',label):
+            continue
         compiler='/Users/alexy/.opam/'+switch+'/bin/ocamlopt'
         version=call([compiler,'-version'])['stdout'].strip()
         work=root/label;work.mkdir(mode=0o700)
