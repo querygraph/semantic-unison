@@ -183,3 +183,21 @@ val with_indexed_capture : owner_index -> root_identity:string -> path:string ->
     never chooses a different generation or a digest discovered on disk. All
     descriptor lifetimes/settlement and durable ledger publication are external.
     No opens/closes, automatic fallback, archive advancement or disk scan. *)
+
+val max_owner_index_size : int
+val owner_index_bytes : binding:string -> owner_index -> string
+val restore_owner_index : ?check_cancel:(unit -> unit) ->
+  expected_manifest_sha256:string -> binding:string -> max_entries:int -> max_bytes:int ->
+  load_entry:(string -> string) -> string -> owner_index
+(** Canonical UIX/0 reference-only manifest, at most32848 bytes. Persist its whole
+    digest and raw32 owner-state binding in separately trusted owner state at
+    capture; hashing an arbitrary disk manifest is not that trust. Restore checks
+    digest/binding/exact limits/framing/unique references before invoking the
+    owner-controlled loader with each prior-trusted entry digest. Loader must
+    bound its own IO/allocation to owner_entry_max_size; it receives no pathname.
+    Every entry digest/canonical UDI/key order and exact aggregate payload charge
+    is independently checked. Wrong/missing entries and operational/cancellation
+    errors propagate without mutating the prior ledger or returning partial state.
+    Limits are per value, not aggregate RSS; owner serializes durable adoption.
+    No opens/closes, disk publication, archive trust, peer authority or source IO.
+    Selected entries still require authenticated metadata and full-input restore. *)

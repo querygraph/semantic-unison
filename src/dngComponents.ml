@@ -237,7 +237,7 @@ let make_owner_entry ~root_identity ~path ~generation_sha256 ~checkpoint ~outcom
   {owner_encoded;owner_digest=SemanticHash.string owner_encoded;owner_binding;record_digest;
    checkpoint_digest;input_digest;previous=outcomes;
    owner_root=root_identity;owner_path=path;owner_generation=generation_sha256}
-let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 encoded =
+let decode_authenticated_owner_entry ~expected_entry_sha256 encoded =
   if String.length encoded>owner_entry_max_size || String.length expected_entry_sha256<>32 ||
     SemanticHash.string encoded<>expected_entry_sha256 then owner_invalid "digest/size mismatch";
   let at=ref 0 in
@@ -260,14 +260,19 @@ let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_s
       | "\002" -> Refined | _ -> owner_invalid "status" in
     {component_id;decoder_id;implementation_sha256;status}) in
   let checkpoint_digest=take 32 in let record_digest=take 32 in
-  if !at<>String.length encoded || saved_root<>root_identity || saved_path<>path ||
-    generation<>generation_sha256 then owner_invalid "root/path/generation mismatch";
+  if !at<>String.length encoded then owner_invalid "trailing entry bytes";
+  let root_identity=saved_root and path=saved_path and generation_sha256=generation in
   let prefix=owner_prefix ~root_identity ~path ~generation_sha256 ~input_digest previous in
   if encoded<>prefix^checkpoint_digest^record_digest then owner_invalid "noncanonical entry";
   {owner_encoded=encoded;owner_digest=expected_entry_sha256;
    owner_binding=SemanticHash.string("unison-dng-owner-binding/0\000"^prefix);
    record_digest;checkpoint_digest;input_digest;previous;
    owner_root=root_identity;owner_path=path;owner_generation=generation_sha256}
+let decode_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha256 encoded =
+  let entry=decode_authenticated_owner_entry ~expected_entry_sha256 encoded in
+  if entry.owner_root<>root_identity || entry.owner_path<>path ||
+     entry.owner_generation<>generation_sha256 then owner_invalid "root/path/generation mismatch";
+  entry
 let checkpoint_for_owner_entry entry record =
   let checkpoint=ComponentHash.checkpoint_from_record ~expected_binding:entry.owner_binding
     ~expected_record_sha256:entry.record_digest record in
@@ -413,3 +418,57 @@ let with_indexed_capture ledger ~root_identity ~path ~generation_sha256
   match select_owner_entry ledger ~root_identity ~path ~generation_sha256 with
   | None -> Error "component owner index has no current entry"
   | Some entry -> with_cache_capture entry ~directory ~record ~index ~decoders ~max_read_bytes file callback
+
+
+let max_owner_index_size=80+32*1024
+let owner_index_bytes ~binding index =
+  if String.length binding<>32 then owner_invalid "index manifest binding";
+  "UIX\000\000\000\000\000" ^ binding ^ owner_number(Int64.of_int index.entry_limit) ^
+  owner_number(Int64.of_int index.byte_limit) ^ owner_number(Int64.of_int(List.length index.indexed)) ^
+  owner_number(Int64.of_int index.indexed_bytes) ^ owner_number 0L ^
+  String.concat "" (List.map(fun (_,entry) -> entry.owner_digest) index.indexed)
+let restore_owner_index ?(check_cancel=fun () -> ()) ~expected_manifest_sha256 ~binding
+    ~max_entries ~max_bytes ~load_entry encoded =
+  ignore(empty_owner_index ~max_entries ~max_bytes);
+  check_cancel ();
+  if String.length encoded<80 || String.length encoded>max_owner_index_size ||
+     String.length expected_manifest_sha256<>32 || String.length binding<>32 ||
+     SemanticHash.string encoded<>expected_manifest_sha256 then owner_invalid "index manifest digest/size";
+  let at=ref 0 in
+  let take length =
+    if length<0 || length>String.length encoded - !at then owner_invalid "truncated index manifest";
+    let value=String.sub encoded !at length in at:= !at+length;value in
+  let number maximum =
+    let value=ref 0L in
+    String.iter(fun c -> value:=Int64.logor(Int64.shift_left !value 8)(Int64.of_int(Char.code c))) (take 8);
+    if !value<0L || !value>Int64.of_int maximum then owner_invalid "index manifest integer";
+    Int64.to_int !value in
+  if take 8<>"UIX\000\000\000\000\000" || take 32<>binding then owner_invalid "index manifest binding/version";
+  let entries=number 1024 in let bytes=number 8388608 in
+  let count=number max_entries in let payload=number max_bytes in
+  let reserved=number 0 in
+  if entries<>max_entries || bytes<>max_bytes || reserved<>0 ||
+     String.length encoded<>80+32*count then owner_invalid "index manifest policy/framing";
+  if payload<count*80 || (count=0 && payload<>0) then owner_invalid "index manifest payload minimum";
+  let seen=Hashtbl.create count in
+  let references=List.init count(fun _ ->
+    let digest=take 32 in
+    if Hashtbl.mem seen digest then owner_invalid "duplicate index reference";
+    Hashtbl.add seen digest ();digest) in
+  let rec load previous total acc = function
+    | [] ->
+      if total<>payload then owner_invalid "index manifest payload accounting";
+      {indexed=List.rev acc;indexed_bytes=total;entry_limit=max_entries;byte_limit=max_bytes}
+    | expected_entry_sha256::rest ->
+      check_cancel ();
+      let entry_bytes=load_entry expected_entry_sha256 in
+      let length=String.length entry_bytes in
+      if length>owner_entry_max_size || length>payload-total then owner_invalid "index entry payload budget";
+      let entry=decode_authenticated_owner_entry ~expected_entry_sha256 entry_bytes in
+      let key=entry.owner_root,entry.owner_path in
+      (match previous with Some old when compare old key>=0 -> owner_invalid "index entry key order/duplicate"
+        | None | Some _ -> ());
+      check_cancel ();
+      load (Some key) (total+length) ((key,entry)::acc) rest in
+  let restored=load None 0 [] references in
+  check_cancel ();restored

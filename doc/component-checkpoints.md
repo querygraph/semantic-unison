@@ -174,6 +174,52 @@ worker refusal are preserved; only the corrected OxMake002/worker002 are adopted
 This remains separate from PR4's prior scope and does not qualify automatically
 selected persistent disk caching.
 
+### UIX/0 owner-index manifest
+
+The index now exports a canonical reference-only manifest. It contains80header
+bytes plus32bytes per entry (maximum32848B), not duplicate UDI payloads. Hash this
+captured manifest and retain its digest and raw32 owner-state binding outside the
+untrusted blob in owner-controlled state. A newly computed disk checksum, peer
+report or the binding field alone cannot establish that provenance.
+
+| Offset | Field |
+| --- | --- |
+| 0 | Eight-byte magic `UIX` plus five NUL bytes (version0) |
+| 8 | Raw32-byte owner-state binding |
+| 40 | Big-endian u64 configured entry ceiling (1..1024) |
+| 48 | Big-endian u64 configured encoded-entry payload ceiling (80..8388608) |
+| 56 | Big-endian u64 entry count, bounded by the configured ceiling |
+| 64 | Big-endian u64 exact total encoded UDI payload bytes |
+| 72 | Big-endian u64 reserved zero |
+| 80 | Raw32-byte entry digests, in strict `(root_identity,path)` key order |
+
+Restore requires the prior trusted whole-manifest SHA, expected owner-state
+binding and exact configured limits. It rejects bad size, hash, binding, integer,
+framing and duplicate-reference evidence before the loader runs. Each loader
+call receives only a prior-trusted raw entry digest, never a pathname or plugin.
+The owner-controlled loader must bound its own IO/allocation to128KiB. Restore
+then authenticates that entry's exact bytes, parses its canonical UDI/0 fields,
+checks strict key order and enforces the exact aggregate byte charge. It checks
+cancellation between entries and before delivering the restored immutable value.
+Errors propagate with no partial ledger returned and no mutation of a prior view.
+
+This is metadata import/export, not filesystem durability, authenticated remote
+state, namespace installation or archive advancement. Entry payloads still need
+separate immutable storage and settled ownership. A selected entry still needs
+complete metadata authentication and current-input verification before reuse.
+Per-value limits do not cap aggregate retained snapshots/RSS. No data/source file
+is opened, duplicated or closed by this codec; a loader failure is not swallowed
+as a resource-settlement proof. Current qualification is separate from the previous pure-index receipt:
+`tests/qualification/owner-index-manifest-actual-20261017.json` records1234DNGchecks
+percompiler, fresh stock/Ox Make/fullselftests/Dune compilation,110workerchecks per
+compiler and1272current source hashes. All actual groups/CPU grants closed.
+
+Original controls cover stable roundtrip/commuting insertion encodings, empty
+manifests, binding/digest/policy failure, duplicate and reversed references,
+truncated/overflow/reserved/trailing data, damaged/missing/oversized entry loads,
+cancellation and unchanged prior views. Framing-vector truncations are counted
+as controls, not additional camera fixtures. No photos or SDK are involved.
+
 ### Borrowed positional readers
 
 `SemanticFile.with_borrowed_fd` supplies a POSIX reader for owner-held source or

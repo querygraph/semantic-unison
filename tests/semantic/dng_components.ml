@@ -285,6 +285,73 @@ let () =
          selected both root_identity (path^"-second") generation_sha256=
            selected reversed root_identity (path^"-second") generation_sha256)
          "independent trusted index inserts do not commute";
+       let manifest_binding=SemanticHash.string "original-index-owner-state/1" in
+       let manifest index=DngComponents.owner_index_bytes ~binding:manifest_binding index in
+       let manifest_bytes=manifest both in
+       let loader_calls=ref 0 in
+       let load_entry sha=
+         incr loader_calls;
+         if sha=digest then encoded
+         else if sha=DngComponents.owner_entry_sha256 other then DngComponents.owner_entry_bytes other
+         else failwith "unexpected manifest entry reference" in
+       let restore ?(loader=load_entry) ?(binding=manifest_binding) ?(entries=2)
+           ?(bytes=8388608) ?expected data =
+         DngComponents.restore_owner_index ~expected_manifest_sha256:
+           (match expected with None -> SemanticHash.string data | Some sha -> sha)
+           ~binding ~max_entries:entries ~max_bytes:bytes ~load_entry:loader data in
+       let restored=restore manifest_bytes in
+       check(!loader_calls=2 && manifest restored=manifest_bytes && manifest reversed=manifest_bytes &&
+         DngComponents.owner_index_usage restored=DngComponents.owner_index_usage both)
+         "manifest roundtrip/order changed trusted references or accounting";
+       check(selected restored root_identity path generation_sha256=Some digest &&
+         selected restored root_identity (path^"-second") generation_sha256=
+           Some(DngComponents.owner_entry_sha256 other)) "manifest restored wrong keys";
+       let empty_manifest=manifest ledger in
+       check(String.length empty_manifest=80 &&
+         DngComponents.owner_index_usage(restore ~loader:(fun _ -> failwith "empty manifest invoked loader") empty_manifest)=(0,0))
+         "empty manifest framing differs";
+       let no_load action reason=
+         loader_calls:=0;
+         check((try ignore(action ());false with ComponentHash.Invalid _ -> true) && !loader_calls=0) reason in
+       no_load (fun () -> restore ~expected:(String.make 32 'X') manifest_bytes)
+         "wrong manifest digest invoked loader";
+       no_load (fun () -> restore ~binding:(String.make 32 'Y') manifest_bytes)
+         "wrong owner-state binding invoked loader";
+       no_load (fun () -> restore ~entries:3 manifest_bytes) "manifest changed owner entry policy";
+       no_load (fun () -> restore ~bytes:8388607 manifest_bytes) "manifest changed owner byte policy";
+       no_load (fun () -> restore (manifest_bytes^"x")) "manifest accepted trailing bytes";
+       let altered at value=let bytes=Bytes.of_string manifest_bytes in Bytes.set bytes at value;Bytes.to_string bytes in
+       no_load (fun () -> restore (altered 0 'X')) "manifest accepted unknown version";
+       no_load (fun () -> restore (altered 56 '\128')) "manifest count overflow reached loader";
+       no_load (fun () -> restore (altered 79 '\001')) "manifest reserved bytes reached loader";
+       let duplicate=Bytes.of_string manifest_bytes in
+       Bytes.blit_string manifest_bytes 80 duplicate 112 32;
+       no_load (fun () -> restore (Bytes.to_string duplicate)) "duplicate manifest refs reached loader";
+       let reversed_bytes=Bytes.of_string manifest_bytes in
+       Bytes.blit_string manifest_bytes 112 reversed_bytes 80 32;
+       Bytes.blit_string manifest_bytes 80 reversed_bytes 112 32;
+       check(try ignore(restore(Bytes.to_string reversed_bytes));false with ComponentHash.Invalid _ -> true)
+         "manifest accepted noncanonical key order";
+       let damaged=Bytes.of_string encoded in Bytes.set damaged (Bytes.length damaged-1) 'Z';
+       check(try ignore(restore ~loader:(fun _ -> Bytes.to_string damaged) manifest_bytes);false
+         with ComponentHash.Invalid _ -> true) "manifest trusted damaged entry bytes";
+       check(try ignore(restore ~loader:(fun _ -> raise Not_found) manifest_bytes);false
+         with Not_found -> true) "manifest swallowed loader failure";
+       check(try ignore(restore ~loader:(fun _ -> String.make(DngComponents.owner_entry_max_size+1) 'x') manifest_bytes);false
+         with ComponentHash.Invalid _ -> true) "manifest ignored entry read bound";
+       let insufficient=Bytes.of_string manifest_bytes in Bytes.fill insufficient 64 8 '\000';
+       no_load(fun () -> restore(Bytes.to_string insufficient)) "manifest zero payload reached loader";
+       let cancel=ref false and loaded_count=ref 0 in
+       check(try ignore(DngComponents.restore_owner_index ~check_cancel:(fun () -> if !cancel then raise Exit)
+         ~expected_manifest_sha256:(SemanticHash.string manifest_bytes) ~binding:manifest_binding
+         ~max_entries:2 ~max_bytes:8388608 ~load_entry:(fun sha ->
+           incr loaded_count;let value=load_entry sha in cancel:=true;value) manifest_bytes);false
+         with Exit -> !loaded_count=1) "manifest restore ignored cancellation before next entry";
+       check(manifest both=manifest_bytes && selected both root_identity path generation_sha256=Some digest)
+         "failed manifest restore changed prior ledger";
+       for length=0 to String.length manifest_bytes-1 do
+         no_load (fun () -> restore(String.sub manifest_bytes 0 length)) "truncated manifest reached loader"
+       done;
        let tiny=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:(String.length encoded) in
        let full=unwrap(DngComponents.replace_owner_entry tiny ~expected_entry_sha256:None loaded) in
        check(match DngComponents.replace_owner_entry full ~expected_entry_sha256:None other with

@@ -7,6 +7,18 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+UIX/0 reference-manifest successor on PR5 is qualified. Header80B+32/reference,
+max32848B; prior trusted manifestSHA+ownerbinding+exactlimits required before
+entry resolution. Each referencedUDI independently digest/canonical/keyorder/
+aggregatebudget checked; cancellation and loadererrors propagate without partial
+ledger. Existing UDI decoder factored, unchanged UDI wire bytes. Actualfocused
+41977/9e212a/0 and full46659/898c87/0 PASS/CLOSED, all7workers/groups/tokensclosed.
+Current56component+1005checkpoint+27publicationfault+13readerfault+1234DNG+
+110workerchecks/compiler, freshstock/Ox Make/fullselftests/Dunecompile and1272
+sourcepins match. DNGcount includes framingvector truncations, not extra cameras.
+`tests/qualification/owner-index-manifest-actual-20261017.json`. No filesystem
+publication/durability/automaticrouting/archiveauthority, photos, SDK or transport.
+
 Draft PR5 https://github.com/querygraph/unison/pull/5 is stacked on PR4,
 `feat/component-owner-index` against `feat/component-cache-input-binding`.
 Qualified source/evidence0bfb4c9f; exact current scope and corrected source-rebind
