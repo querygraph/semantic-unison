@@ -75,6 +75,10 @@ def main():
             assert legacy['target']['status']=='supported'
             result.setdefault('inspector_reports',{})[label]=report
             save(root,result)
+            if label=='ox':
+                portable=work/'frozen_decoder_capture.ml'
+                portable.write_text('let publish (frozen:DngComponents.decoders) = Domain.Safe.spawn (fun () -> ignore frozen)\n')
+                call([compiler,'-c',portable.name])
         finally:os.chdir(previous)
     assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in result['source_pins'].items())
     result['complete']=True;save(root,result);print(root,flush=True)

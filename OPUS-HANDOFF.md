@@ -7,6 +7,35 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest: owner-frozen nested DNG dispatch is implemented
+
+`DngComponents.freeze_decoders` now validates up to64 immutable ordered bindings
+before file inspection. `with_snapshot` hashes the DNG once and applies private/
+opaque parent then child decoders within the same shared-budget session. Every
+outcome records target, decoder and implementation SHA. Missing/unsupported
+knowledge retains the prior view. Private plugins cannot introduce pixel or
+standard roles or target those leaves; operational errors propagate. No registry
+mutation, peer code, subprocess capability or persistent skip is added.
+
+Final generated stock/Ox controls actual46167/114660/0/no session passed80 checks
+each and58 contained calls. The8192B fixture plus only parent/nested/decoder
+reads charged8435B; pixel/standard/full hashes stayed unchanged and the refined
+view changed. Duplicate/invalid/provenance/count refusals, distinct outcomes,
+operational error propagation and Ox safe-domain capture of the frozen abstract
+handle passed. The earlier001/002 controls passed with narrower scopes and are
+retained. Four full Make/Dune builds actual78758/ced55a/0/no session passed;
+1896 captured source hashes and current binary pins were rechecked. All groups
+and Unison8 tokens closed. No real media, SDK or EXglobal IO was used.
+
+Evidence: `tests/qualification/frozen-dng-decoders-actual-20261017.json`,16665B,
+SHA392edbe4ecb8dff563c116a0943d1befe8c8a160efd559ff4fd282f4a70d09aa.
+The frozen dispatch mechanism is ready; actual vendor modules, component worker/
+archive integration and qualified persistent reuse remain open. Complete private
+field interpretation is not a baseline deployment gate. The next receiving
+qualification should exercise the new exact-layout profile in production paths;
+retained-camera/SDK/bulk IO still needs a separately coordinated exact admission.
+Older “freeze decoders next” notes below are historical. No active owner/resources.
+
 ## Latest DNG component adapter and inspector: generated controls PASS/CLOSED
 
 Current `DngComponents.describe` consumes bounded claims from the existing

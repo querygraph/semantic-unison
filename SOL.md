@@ -141,6 +141,17 @@ a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
 
+Owner-frozen nested DNG decoder dispatch is now implemented and
+[qualified on generated fixtures](tests/qualification/frozen-dng-decoders-actual-20261017.json).
+An immutable sequence of at most64 checked bindings refines private/opaque
+parents and their children inside one snapshot session. Unmatched/unsupported
+bindings retain the prior view, with decoder provenance in every outcome;
+private decoders cannot create pixel/standard claims. Operational errors
+propagate. Stock/Ox80checks each,58 contained calls and four full builds passed;
+all groups/CPU8 closed. Actual vendor decoders, persistent cache and broader
+runtime integration remain open; lack of complete vendor coverage is not a
+release gate for the qualified baseline.
+
 The [DNG component adapter](doc/component-hashes.md#dng-adapter-and-inspector)
 now supplies bounded physical partitions from the same TIFF graph reader:
 inline/outlined standard and private values, encoded image-unit ranges,

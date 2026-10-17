@@ -5,9 +5,20 @@ This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is 
 Latest user steering in SOL.md changes the coverage criterion: exhaustive private
 camera understanding is not a global deployment gate. The baseline is separate
 pixel/standard metadata components plus conservative opaque hash coverage, with
-nested plugins and incremental refinement. These new composition/cache/profile
-contracts still require implementation and qualification; partial camera
-knowledge itself must not be relabeled as blocking the whole feature.
+nested plugins and incremental refinement. The component core, DNG adapter and frozen nested dispatch now have generated
+stock/Ox qualification; persistent reuse and broader integration remain open.
+Partial camera knowledge itself must not be relabeled as blocking the whole
+feature. Open rows delimit unproven claims, rather than requiring exhaustive
+camera/vendor knowledge before deploying a separately qualified baseline.
+
+[Component core](../tests/qualification/component-hash-core-actual-20261017.json),
+[DNG adapter](../tests/qualification/dng-components-actual-20261017.json) and
+[frozen dispatch](../tests/qualification/frozen-dng-decoders-actual-20261017.json)
+now establish separately counted encoded-pixel/metadata/opaque lanes, localized
+private refinement and nested owner-selected bindings. Current frozen-dispatch
+controls passed80 checks/compiler and four full builds. These are generated
+fixtures and historical snapshot hashes, not camera pixel/rendering equality,
+persistent reuse or component archive/worker deployment evidence.
 
 The new [layout-only DNG exact profile](dng-layout-exact.md) now implements the
 first operation in that design: opaque private data no longer prevents exact
@@ -17,8 +28,9 @@ strict merge/cache authority and full staged-target hash verification.
 [Actual source qualification](../tests/qualification/dng-layout-exact-source-actual-20261017.json)
 includes49checks per stock/Ox compiler, strict safety regressions, four full builds
 and the stock legacy kernel/inspector. New remote/mixed-version receiving, the
-pixel/metadata component forest, nested composition and incremental cache remain
-open; neither full-goal acceptance nor production camera qualification follows.
+component worker/archive integration and incremental cache remain open. The
+component forest and nested dispatch are now implemented as described above;
+neither full-goal acceptance nor production camera qualification follows.
 
 The [opt-in production OpenSSL successor](../tests/qualification/openssl-production-backend-actual-20261017.json)
 now has opaque native contexts, a shared EVP implementation and Make/Dune
@@ -166,7 +178,7 @@ pre-helper budget failure and independent recovery remain preserved separately.
 | 9. Parallelism and resource accounting | Checked worker closures, seeded apply/cancellation parity, endpoint-local filesystem job gates and actual standing8 shared ownership/functional controls. [checked_worker](../tests/checked_worker/qualification.json), [workers](../tests/workers/seeded-apply-stress-qualification.json), [io_admission](../tests/io_admission/runtime-qualification-20261013.json), [qualification](../tests/qualification/shared-entrypoints-actual-20261016.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | No hard whole-tree RSS/FD/CPU cap, physical-device shared IO lanes, arbitrary native thread fanout or race-sanitizer qualification. st_dev is not a physical disk identity. |
 | 10. Semantic merge | Conservative opt-in fixed-region scalar reconciliation, compact common-base cache controls, archive downgrade/refusal and generated SDK receiving/merge. [dng_reconcile](../tests/dng_reconcile/qualification.json), [dng_merge](../tests/dng_merge/qualification.json), [sdk_container_receive](../tests/sdk_container_receive/quota-merge-qualification.json), [archive_downgrade](../tests/archive_downgrade/qualification.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json) | No general RDF/Bag/Seq/Alt/qualifier/rendering merge, packet growth or distributed atomic two-replica commit. Unsupported shape/unknown edits must preserve conflict, not imply safe semantic equivalence. |
 | 11. Generic cloned transfer | Upstream reuse, strict whole-file clone, receiver-basis ordinary-file path, scoped range adapter and exact/no-op generated comparisons. [whole_file_clone](../tests/whole_file_clone/qualification.json), [whole-file-clone-integration-20261014](../tests/qualification/whole-file-clone-integration-20261014.json), [cross_volume](../tests/cross_volume/qualification.json), [shared-functional-actual-20261016](../tests/qualification/shared-functional-actual-20261016.json), [native-copy-range-integration-20261013](../tests/qualification/native-copy-range-integration-20261013.json), [native_copy_range](../tests/native_copy_range/typed-context-qualification.json) | Not filesystem-wide capability caching/mount incarnation, universal alignment/partial-effect/native-backend qualification or physical sharing proof. Failed timed part3 remains incomplete. |
-| 12. Adobe invocation and CPU accounting | Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting. [validation_paths](../tests/validation_paths/qualification-20261013.json), [qualification](../tests/qualification/validation-companion-integration-20261013.json), [validation_settlement](../tests/validation_settlement/qualification-20261013.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Opt-in all-scanned now has generated local scan-RPC/private-snapshot/fake-driver qualification; real SDK all-scanned and remote-process scope qualification, representative camera corpus and complete experimental SDK OS-thread/scaling/RSS/cancellation qualification remain open. The actual mixed functional workload above does not establish those broader resource/throughput properties. Each new SDK slot remains separately coordinated. |
+| 12. Adobe invocation and CPU accounting | Synthetic receive-path/gate/companion lifecycle coverage, generated real SDK live merge receiving and scoped shared CPU accounting. [validation_paths](../tests/validation_paths/qualification-20261013.json), [qualification](../tests/qualification/validation-companion-integration-20261013.json), [validation_settlement](../tests/validation_settlement/qualification-20261013.json), [qualification](../tests/qualification/sdk-live-merge-v1-actual-return-20261015.json), [qualification](../tests/qualification/shared-functional-actual-20261016.json) | Opt-in all-scanned now has generated local scan-RPC/private-snapshot/fake-driver qualification; real SDK all-scanned has the four-call scope above; broader remote-process qualification, representative camera corpus and complete experimental SDK OS-thread/scaling/RSS/cancellation qualification remain open. The actual mixed functional workload above does not establish those broader resource/throughput properties. Each new SDK slot remains separately coordinated. |
 
 Current [configured-worker parity](../tests/qualification/shared-worker-parity-actual-20261016.json)
 adds actual stock/Ox production-object controls for pool sizes1/2/4/8,64 jobs
@@ -176,7 +188,7 @@ but this does not establish a hard FD/RSS cap or eight-way concurrent throughput
 
 The [machine-readable map](../tests/qualification/acceptance-scope-audit-20261016.json) pins the selected receipt documents. Older intermediate checkpoints are not silently promoted to their successors. In particular, producer-handoff, native publication and source/GUI checks keep their own limitations.
 
-Next practical gate: bounded copy-only real-camera DNG eligibility and exact receiving, using explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
+Next operation-specific receiving qualification: exercise the new layout-only profile through current production receiving and peer capability fallback. Existing camera controls proved safe unsupported fallback/SDK decode under their own profiles; they do not qualify this new profile. Real-camera successors use explicitly coordinated verified private copies. Do not read Photo-owned payloads or invoke Adobe merely because a prior native window ended. SDK validation, exact encoded-byte identity, decoded samples, rendered appearance and preview reuse remain separate identities.
 
 An optional generated-fixture property-removal successor matrix is source-prepared
 (`SYNC_PROPERTY_REMOVAL_CONTROLS=1` on the exact-admitted shared IO route).

@@ -59,6 +59,8 @@ let transform version path =
     if interface then begin
       let body = if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
+      else if component="dngComponents" then
+        exact body "type decoders\n" "type decoders : value mod portable contended\n"
       else if component="formatRecognition" || component="formatExtension" then
         exact body "type handle\n" "type handle : value mod portable contended\n"
       else if component="semanticDelta" then

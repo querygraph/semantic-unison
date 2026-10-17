@@ -51,4 +51,62 @@ let () =
   check ((projection gap_change ComponentHash.Opaque).sha256<>
     (projection snapshot ComponentHash.Opaque).sha256) "gap disappeared"
  ) [false;true]) [false;true];
+ let private_id="dng/ifd/0/tag/50740/value" in
+ let fragment id role offset length : ComponentHash.spec =
+   {id;schema="original-test-field/1";role;offset;length;children=[]} in
+ let plugin name decode : ComponentHash.plugin =
+   {id=name;implementation_sha256=SemanticHash.string name;decode} in
+ let parent=plugin "original.parent/1" (fun reader ->
+   ignore(ComponentHash.read reader 0L 2);
+   Ok [fragment (private_id^"/known") ComponentHash.Private_metadata 0L 16L;
+       fragment (private_id^"/nested") ComponentHash.Opaque 16L 112L]) in
+ let child=plugin "original.child/1" (fun reader ->
+   ignore(ComponentHash.read reader 0L 1);
+   Ok [fragment (private_id^"/nested/code") ComponentHash.Private_metadata 0L 1L]) in
+ let unsupported=plugin "original.unsupported/1" (fun _ -> Error "not learned yet") in
+ let forbidden=plugin "original.invalid-role/1" (fun _ ->
+   Ok [fragment (private_id^"/known/pixels") ComponentHash.Encoded_pixels 0L 1L]) in
+ let never=plugin "original.never/1" (fun _ -> failwith "standard target invoked private decoder") in
+ let bind component_id decoder : DngComponents.binding = {component_id;decoder} in
+ let bindings=[bind private_id parent;bind (private_id^"/nested") child;
+   bind "dng/absent" unsupported;bind "dng/ifd/0/tag/50706/value" never;
+   bind "dng/ifd/0/tag/65000/value" unsupported;bind (private_id^"/known") forbidden] in
+ let frozen=match DngComponents.freeze_decoders bindings with
+   | Ok value -> value | Error reason -> failwith reason in
+ check (match DngComponents.freeze_decoders [bind private_id parent;bind private_id child] with
+   Error _ -> true | _ -> false) "duplicate decoder target";
+ check (match DngComponents.freeze_decoders [bind "outside/target" parent] with
+   Error _ -> true | _ -> false) "decoder target namespace";
+ check (match DngComponents.freeze_decoders [bind private_id {parent with implementation_sha256="bad"}] with
+   Error _ -> true | _ -> false) "decoder provenance binding";
+ check (match DngComponents.freeze_decoders (List.init 65 (fun n -> bind ("dng/"^string_of_int n) parent)) with
+   Error _ -> true | _ -> false) "decoder binding bound";
+ Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
+   match DngComponents.with_snapshot ~decoders:frozen ~max_read_bytes:8435L file
+     (fun session ~initial ~refined outcomes ->
+       check (List.map (fun (o:DngComponents.outcome) -> o.status) outcomes=
+         [DngComponents.Refined;Refined;Unmatched;Unsupported "target is not private or opaque";
+          Unsupported "not learned yet";Unsupported "private decoder fragment role/count/depth refused"])
+         "nested decoder outcomes/order";
+       check (List.map (fun (o:DngComponents.outcome) -> o.decoder_id,o.implementation_sha256) outcomes=
+         List.map (fun (b:DngComponents.binding) -> b.decoder.id,b.decoder.implementation_sha256) bindings)
+         "decoder outcome provenance missing";
+       check (ComponentHash.bytes_requested session=8435L) "DNG nested refinement locality";
+       check (ComponentHash.full_sha256 initial=ComponentHash.full_sha256 refined) "DNG refinement full SHA";
+       check (ComponentHash.projection initial ComponentHash.Encoded_pixels=
+         ComponentHash.projection refined ComponentHash.Encoded_pixels) "DNG decoder changed pixel identity";
+       check (ComponentHash.projection initial ComponentHash.Standard_metadata=
+         ComponentHash.projection refined ComponentHash.Standard_metadata) "DNG decoder changed standard lane";
+       check (ComponentHash.layout_sha256 initial<>ComponentHash.layout_sha256 refined)
+         "DNG decoder provenance/view root unchanged") with
+   | Ok () -> () | Error reason -> failwith reason);
+ let failing=plugin "original.operational-failure/1" (fun _ ->
+   raise (ComponentHash.Invalid "original injected decoder failure")) in
+ let failed=match DngComponents.freeze_decoders [bind private_id failing] with
+   | Ok value -> value | Error reason -> failwith reason in
+ Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
+   check (try ignore(DngComponents.with_snapshot ~decoders:failed ~max_read_bytes:8192L file
+     (fun _ ~initial:_ ~refined:_ _ -> ()));false with
+     ComponentHash.Invalid "original injected decoder failure" -> true)
+     "operational decoder failure downgraded to unsupported");
  Printf.printf "DNG component controls: %d checks PASS\n%!" !checks
