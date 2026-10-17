@@ -98,3 +98,22 @@ Report routing must treat absent namespace identity as cold metadata, not discov
 or trust whichever directory currently occupies the expected name. The parent
 path remains selected by the endpoint owner, never the peer. A valid archived
 identity still requires fresh private-parent/name/descriptor checks on each open.
+
+
+## Endpoint-owner orchestration source
+
+`Update.inspect_cached_components` now implements the scoped-load / immutable
+worker / guarded-capture flow. The caller supplies the already owned private
+parent, current source descriptor/path, root and generation. Legacy hints without
+identity take the ordinary fresh-worker path without touching that parent. A
+selected manifest missing on disk is incomplete metadata, not a silently empty
+index. An unchanged owner entry skips exclusive publication. Replacement uses the
+prior exact key's digest even when generation selection was stale; the new worker
+result still requires current-input parsing and hashing.
+
+This is an explicit owner API, not yet the default `SemanticRemote`/UI route.
+The caller must provide outer memory/IO admission and descriptor lifetimes, plus
+a later normal archive commit. Generation selects a candidate; it does not prove
+bytes unchanged. Current worker refresh performs full-input verification. Source
+FD/path observations and loaded-head comparison are repeated before publishing.
+Report observations and cache-hint mutation never change common-file authority.

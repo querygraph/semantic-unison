@@ -389,6 +389,9 @@ let select_owner_entry index ~root_identity ~path ~generation_sha256 =
   match List.assoc_opt key index.indexed with
   | Some entry when entry.owner_generation=generation_sha256 -> Some entry
   | None | Some _ -> None
+let owner_entry_reference index ~root_identity ~path =
+  let key=owner_key ~root_identity ~path in
+  Option.map (fun entry -> entry.owner_digest) (List.assoc_opt key index.indexed)
 let replace_owner_entry index ~expected_entry_sha256 entry =
   let key=entry.owner_root,entry.owner_path in
   let old=List.assoc_opt key index.indexed in

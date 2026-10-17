@@ -649,6 +649,69 @@ let adopt_component_cache_store fspath ~expected_reference store =
   let identity=DngComponents.managed_cache_store_namespace store in
   setArchivePropsLocal root (Proplist.add componentNamespaceKey identity
     (Proplist.add componentOwnerKey reference properties))
+(* Endpoint-owner orchestration: no borrowed namespace scope spans worker await. *)
+let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~cancellation
+    ~decoders ~max_read_bytes source =
+  if not(Prefs.read componentOwnerCache) then
+    SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
+  else begin
+    let root_identity=thisRootsGlobalName fspath in
+    ignore(try getArchiveProps root_identity with Not_found ->
+      raise(Util.Transient "Component owner archive is not loaded"));
+    let reference=component_owner_reference fspath in
+    let identity=component_owner_namespace fspath in
+    (* Legacy hints lacking namespace provenance remain cold, without touching
+       the supplied parent or trusting a directory discovered there. *)
+    match reference,identity with
+    | Some _,None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source
+    | _ ->
+    let key=Fspath.toString path in
+    let namespace=DngComponents.prepare_cache_namespace ?expected:identity ~parent () in
+    DngComponents.provision_cache_namespace namespace ~parent;
+    let identity=DngComponents.cache_namespace_identity namespace in
+    let index,record=DngComponents.with_cache_namespace namespace ~parent(fun directory ->
+      let index=match reference with
+        | None -> DngComponents.empty_owner_index ~max_entries:1024 ~max_bytes:8388608
+        | Some(binding,expected_manifest_sha256) ->
+          match DngComponents.load_owner_index ~directory ~expected_manifest_sha256 ~binding
+            ~max_entries:1024 ~max_bytes:8388608 () with
+          | Some index -> index
+          | None -> raise(Util.Transient "Selected component manifest is missing") in
+      let record=match DngComponents.select_owner_entry index ~root_identity ~path:key ~generation_sha256 with
+        | None -> None | Some entry -> DngComponents.load_owner_record ~directory ~entry () in
+      index,record) in
+    let binding=match reference with Some(binding,_) -> binding
+      | None -> SemanticHash.string("unison-component-report-owner/0:"^root_identity) in
+    BorrowedWork.bind (fun () -> SemanticWorkers.components_indexed pool cancellation ~index
+      ~root_identity ~path:key ~generation_sha256 ~record ~decoders ~capture_checkpoint:true
+      ~max_read_bytes source) (fun result ->
+      (match result with
+       | Some inspection ->
+         (match inspection.SemanticWorkers.components with
+          | Error _ -> ()
+          | Ok summary ->
+            let same a b=a.Unix.LargeFile.st_dev=b.Unix.LargeFile.st_dev && a.st_ino=b.st_ino &&
+              a.st_kind=b.st_kind && a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime in
+            if not(same inspection.stats (Unix.LargeFile.fstat source) && same inspection.stats (Fs.stat path)) then
+              raise(Util.Transient "Component source changed before cache publication");
+            if component_owner_reference fspath<>reference || component_owner_namespace fspath<>Some identity && reference<>None then
+              raise(Util.Transient "Component archive head changed during inspection");
+            (match summary.checkpoint with None -> raise(Util.Transient "Component capture checkpoint missing")
+             | Some checkpoint ->
+               let entry=DngComponents.make_owner_entry ~root_identity ~path:key ~generation_sha256
+                 ~checkpoint ~outcomes:summary.refinements in
+               let previous=DngComponents.owner_entry_reference index ~root_identity ~path:key in
+               if previous<>Some(DngComponents.owner_entry_sha256 entry) then begin
+                 let store=DngComponents.prepare_managed_cache_store ~entry ~checkpoint ~index
+                   ~expected_entry_sha256:previous ~binding ~max_bytes:8589934592L ~max_entries:4096 in
+                 let namespace=DngComponents.prepare_cache_namespace ~expected:identity ~parent () in
+                 DngComponents.provision_cache_namespace namespace ~parent;
+                 if DngComponents.execute_managed_cache_store store ~namespace ~parent then
+                   adopt_component_cache_store fspath ~expected_reference:reference store
+               end))
+       | None -> ());
+      Lwt.return result)
+  end
 let clear_component_owner_reference fspath =
   let root=thisRootsGlobalName fspath in
   try setArchivePropsLocal root (Proplist.remove componentNamespaceKey (Proplist.remove componentOwnerKey (getArchiveProps root)))

@@ -329,3 +329,6 @@ val decode_owner_namespace_reference : archive_binding:string -> binding:string 
 (** Optional archive-context and exact-manifest-bound namespace device/inode tail.
     Missing, malformed, foreign or out-of-range values return None. *)
 val managed_cache_store_namespace : managed_cache_store -> int * int
+val owner_entry_reference : owner_index -> root_identity:string -> path:string -> string option
+(** Exact key's prior entry digest for compare-and-replace, independent of generation
+    selection. This is not permission to restore a stale generation. *)

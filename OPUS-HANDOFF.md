@@ -2889,3 +2889,21 @@ versions/network/platform/media claim. No live owned jobs/resources. Next actual
 implementation: endpoint-owner report orchestration with scoped metadata load,
 immutable worker await, source/head recheck and optional capture; no synchronous
 namespace scope may span that await. Automatic routing is still NOT implemented.
+
+
+## Endpoint-owner report orchestration — 2026-10-17
+
+Update.inspect_cached_components now loads scoped authenticated index/record,
+closes all metadata descriptors before the worker await, runs indexed full-input
+inspection with checkpoint capture, rechecks source FD/path and archive head,
+skips unchanged-entry publication, or performs owned store and guarded adoption.
+Legacy no-identity hints stay cold. Exact-key prior-entry reference supports CAS
+across generation changes without granting stale-generation restore authority.
+
+Current stock98891/0a922c/0 andOx40800/3c2be3/0 full Make/selftests PASS; explicit
+owner-path controls39802/dd809c/0 and bothcompiler40800/3c2be3/0 PASS: original
+8192B DNG automatic capture, repeat unchanged-head reuse, normal archive commit,
+fresh-process restore+repeat reuse. All contained workers/groups/tokens closed.
+Receipt component-owner-report-actual-20261017.json. This is NOT yet wired into
+SemanticRemote/UI; private-parent selection/provisioning, failure/cancellation
+race controls and Dune remain. No payload/SDK/transport grant or live resources.
