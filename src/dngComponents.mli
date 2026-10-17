@@ -332,3 +332,16 @@ val managed_cache_store_namespace : managed_cache_store -> int * int
 val owner_entry_reference : owner_index -> root_identity:string -> path:string -> string option
 (** Exact key's prior entry digest for compare-and-replace, independent of generation
     selection. This is not permission to restore a stale generation. *)
+
+type cache_parent
+val open_cache_parent : string -> cache_parent
+val check_cache_parent : cache_parent -> unit
+val cache_parent_descriptor : cache_parent -> Unix.file_descr
+val settle_cache_parent : cache_parent -> exn option -> unit
+(** Existing absolute private0700 parent only, macOS no-follow/nonblocking/CLOEXEC.
+    Explicit owner survives async awaits; no finalizer or implicit close. Settle
+    once after all work: None closes, Some error closes and rethrows ordinary
+    errors, but nested ownership uncertainty retains this known FD in its carrier.
+    Close failure retains last observed identity and never retries a number.
+    Descriptor access remains borrowed, requiring caller-exclusive lifetime.
+    No mkdir, namespace discovery, canonical IO or source access permission. *)

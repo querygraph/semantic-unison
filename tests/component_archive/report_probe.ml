@@ -35,7 +35,7 @@ let ()=
  let folder=Sys.argv.(1) and phase=Sys.argv.(2) in
  let state=Filename.concat folder "state" in
  require(Util.unisonDir=state) "private state required";
- Prefs.loadStrings ["componentownercache = true";"adobevalidate = off";
+ Prefs.loadStrings ["componentcacheparent = "^Filename.concat state "managed";"componentownercache = true";"adobevalidate = off";
   "semanticdng = false";"semanticworkers = 2";"log = false"];
  Case.init true Osx.isMacOSX;Props.init false;Osx.init Osx.isMacOSX;Fileinfo.init false;
  Globals.setRawRoots [Filename.concat folder "left";Filename.concat folder "right"];
@@ -54,8 +54,7 @@ let ()=
  let budget=HelperSupervisor.create ~cpu_permits:2 ~max_children:2 ~max_pending:16 in
  let pool=SemanticWorkers.create ~workers:2 ~max_pending:16 ~budget in
  let decoders=match DngComponents.freeze_decoders [] with Ok x->x|Error e->failwith e in
- let inspect ()=match Lwt_unix.run(Update.inspect_cached_components left ~parent
-  ~path:(Fspath.resolve_existing source) ~generation_sha256:(SemanticHash.string "fixture-generation")
+ let inspect ()=match Lwt_unix.run(Update.inspect_configured_components left (Fspath.resolve_existing source)
   ~pool ~cancellation:(HelperSupervisor.cancellation()) ~decoders ~max_read_bytes:8192L fd) with
  | Some {SemanticWorkers.components=Ok summary;_}->summary
  | _->failwith "cached report failed" in
@@ -72,8 +71,16 @@ let ()=
  let second=inspect () in
  require(second.full_sha256=first.full_sha256) "repeat report changed hash";
  require(Update.component_owner_reference left=head) "unchanged report republished manifest";
- let request cancellation=Update.inspect_cached_components left ~parent
-  ~path:(Fspath.resolve_existing source) ~generation_sha256:(SemanticHash.string "fixture-generation")
+ let absolute=Fspath.resolve_existing source in
+ let observed=Lwt_unix.run(SemanticRemote.observe_components_with_worker
+  ~local_worker:(Update.inspect_configured_components left absolute)
+  ~root:(Common.Local,left) ~path:absolute) in
+ require((match observed.SemanticRemote.component_observation with
+  | Ok value -> value.SemanticReport.full_sha256=first.full_sha256 | Error _ -> false))
+  "local component report entry failed";
+ Lwt_unix.run(SemanticWorkers.shutdown (SemanticRuntime.get()).pool);
+ require(Update.component_owner_reference left=head) "UI entry republished unchanged capture";
+ let request cancellation=Update.inspect_configured_components left (Fspath.resolve_existing source)
   ~pool ~cancellation ~decoders ~max_read_bytes:8192L fd in
  let late=HelperSupervisor.cancellation() in
  let pending=request late in HelperSupervisor.cancel late;

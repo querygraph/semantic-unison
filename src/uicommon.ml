@@ -473,8 +473,8 @@ let observe_semantic_pair ri =
         | Some detail when not (SemanticRemote.component_details_enabled ()) -> return (Some detail)
         | Some detail ->
           BorrowedWork.bind (fun () -> BorrowedWork.all
-            [(fun () -> SemanticRemote.observe_components ~root:root1 ~path:absolute1);
-             (fun () -> SemanticRemote.observe_components ~root:root2 ~path:absolute2)]) (function
+            [(fun () -> SemanticRemote.observe_components_with_worker ~local_worker:(Update.inspect_configured_components (snd root1) absolute1) ~root:root1 ~path:absolute1);
+             (fun () -> SemanticRemote.observe_components_with_worker ~local_worker:(Update.inspect_configured_components (snd root2) absolute2) ~root:root2 ~path:absolute2)]) (function
             | [left;right] ->
               let text=match left.SemanticRemote.component_observation,right.SemanticRemote.component_observation with
                 | Ok left,Ok right -> (match SemanticReport.render_components ~left ~right with

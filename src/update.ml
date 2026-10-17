@@ -331,6 +331,11 @@ let componentOwnerCache = Prefs.createBool "componentownercache" false ~local:tr
 let componentOwnerKey : (string * string) Proplist.key =
   Proplist.register "component owner manifest local"
     Umarshal.(prod2 (bounded_string 32) (bounded_string 32) id id)
+let componentCacheParent = Prefs.createString "componentcacheparent" "" ~local:true
+  ~send:(fun () -> false) ~category:(`Advanced `Syncprocess)
+  "explicit existing private parent for local component report cache"
+  "Endpoint-local absolute private0700 directory. %ROOT% expands to the root identity SHA256. \
+   Provision one existing parent per root; this option never creates it. Empty disables report caching."
 let componentNamespaceKey : (int * int) Proplist.key =
   Proplist.register "component owner namespace local" Umarshal.(prod2 int int id id)
 let componentArchiveBinding thisRoot magic =
@@ -713,6 +718,33 @@ let inspect_cached_components fspath ~parent ~path ~generation_sha256 ~pool ~can
                end))
        | None -> ());
       Lwt.return result end)
+  end
+let inspect_configured_components fspath path ~pool ~cancellation ~decoders ~max_read_bytes source =
+  let configured=Prefs.read componentCacheParent in
+  if not(Prefs.read componentOwnerCache) || configured="" || HelperSupervisor.is_cancelled cancellation then
+    (if HelperSupervisor.is_cancelled cancellation then Lwt.return None else
+     SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes source)
+  else begin
+    let root=thisRootsGlobalName fspath in
+    let parent_path=Str.global_replace (Str.regexp_string "%ROOT%")
+      (SemanticHash.hex(SemanticHash.string root)) configured in
+    let parent=DngComponents.open_cache_parent parent_path in
+    let settled=ref false in
+    let finish cause =
+      settled:=true;
+      try DngComponents.settle_cache_parent parent cause;None with error -> Some error in
+    BorrowedWork.try_bind (fun () ->
+      let fd=DngComponents.cache_parent_descriptor parent in
+      let stats=Unix.LargeFile.fstat source in
+      let generation_sha256=SemanticHash.string(Printf.sprintf
+        "unison-component-source-epoch/0:%d:%d:%Ld:%.17g:%.17g"
+        stats.st_dev stats.st_ino stats.st_size stats.st_mtime stats.st_ctime) in
+      inspect_cached_components fspath ~parent:fd ~path ~generation_sha256
+        ~pool ~cancellation ~decoders ~max_read_bytes source)
+      (fun result -> match finish None with None -> Lwt.return result | Some error -> Lwt.fail error)
+      (fun error ->
+        if !settled then Lwt.fail error else
+        match finish (Some error) with Some error -> Lwt.fail error | None -> assert false)
   end
 let clear_component_owner_reference fspath =
   let root=thisRootsGlobalName fspath in

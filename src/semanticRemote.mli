@@ -24,6 +24,10 @@ type component_inspection = {
 }
 val component_details_enabled : unit -> bool
 val observe_components : root:Common.root -> path:Fspath.t -> component_inspection Lwt.t
+val observe_components_with_worker : local_worker:(pool:SemanticWorkers.t ->
+  cancellation:HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> SemanticWorkers.component_inspection option Lwt.t) ->
+  root:Common.root -> path:Fspath.t -> component_inspection Lwt.t
 (** Explicit full-file DNG component inspection with an empty frozen
     decoder set, using existing owner admission/worker/descriptor settlement.
     The owner retains local snapshot facts for stale-display checks. Remote

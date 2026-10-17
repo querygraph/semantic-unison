@@ -383,7 +383,7 @@ let capture_component f = BorrowedWork.catch f (function
   | Unix.Unix_error (error,operation,_) ->
       return (component_failure (operation ^ ": " ^ Unix.error_message error))
   | error -> fail error)
-let inspect_components cancellation path =
+let inspect_components ?worker cancellation path =
     capture_component (fun () ->
           let fd=Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
           let files=register_held_fd fd in
@@ -391,8 +391,10 @@ let inspect_components cancellation path =
             let stats=Unix.LargeFile.fstat fd in
             let decoders=match DngComponents.freeze_decoders [] with
               | Ok value -> value | Error why -> raise (Util.Transient why) in
-            SemanticWorkers.components (SemanticRuntime.get ()).pool cancellation
-              ~decoders ~max_read_bytes:stats.st_size fd))
+            let pool=(SemanticRuntime.get ()).pool in
+            match worker with
+            | None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes:stats.st_size fd
+            | Some inspect -> inspect ~pool ~cancellation ~decoders ~max_read_bytes:stats.st_size fd))
             (fun result ->
               let observed = try match result with
                 | None -> component_failure "Component inspection cancelled"
@@ -462,11 +464,11 @@ let inspect_components_peer = Remote.registerBoundedServerCmd "semanticComponent
   ~withScope:component_scope ~maxArgs:(max_path+128+32+1024)
   ~maxResult:(SemanticReport.max_component_size+1024) inspection_args
   (Umarshal.bounded_string SemanticReport.max_component_size) inspect_components_source
-let observe_components ~root ~path =
+let observe_components_using local_worker ~root ~path =
   match fst root with
   | Common.Local -> capture_component (fun () ->
       SemanticRuntime.with_transaction ~role:SemanticAdmission.Source ~max_payload:component_envelope_payload
-        (fun cancellation -> inspect_components cancellation path))
+        (fun cancellation -> inspect_components ?worker:local_worker cancellation path))
   | Common.Remote _ ->
       if not (component_profile_enabled ()) then
         return (component_failure "Component DNG profile is not enabled or negotiated")
@@ -481,6 +483,9 @@ let observe_components ~root ~path =
             match SemanticReport.decode_components ~nonce ~schema:component_schema encoded with
             | Error why -> fail (Util.Transient ("Invalid component inspection reply: " ^ why))
             | Ok component_observation -> return {component_observation;component_snapshot=None}))
+let observe_components ~root ~path = observe_components_using None ~root ~path
+let observe_components_with_worker ~local_worker ~root ~path =
+  observe_components_using (Some local_worker) ~root ~path
 let inspect_source ~meaning connection (path,profile,nonce) =
   if String.length nonce<>32 || profile="" || String.contains profile '\000' ||
      Filename.is_relative path || String.contains path '\000' then

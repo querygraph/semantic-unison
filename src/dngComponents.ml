@@ -745,3 +745,48 @@ let managed_cache_store_effects store =
 let managed_cache_store_namespace store =
   ignore(managed_cache_store_reference store);
   match store.store_namespace with Some identity -> identity | None -> assert false
+
+
+(* Explicit asynchronous owner: caller must settle once, including error paths. *)
+external cache_parent_open : string -> Unix.file_descr = "unison_component_parent_open"
+type cache_parent = { parent_resource : cache_resource; parent_path : string }
+let parent_evidence parent =
+  let r=parent.parent_resource in r.cache_fd,r.cache_identity
+let check_cache_parent parent =
+  let r=parent.parent_resource in
+  if r.cache_fd_state<>Cache_held then owner_invalid "cache parent is not held";
+  let observed=Unix.LargeFile.fstat r.cache_fd in
+  r.cache_identity<-Some observed;
+  let named=Unix.LargeFile.lstat parent.parent_path in
+  if observed.Unix.LargeFile.st_kind<>Unix.S_DIR || observed.st_uid<>Unix.getuid() ||
+     observed.st_perm<>0o700 || named.st_kind<>Unix.S_DIR || named.st_dev<>observed.st_dev ||
+     named.st_ino<>observed.st_ino || named.st_perm<>observed.st_perm || named.st_uid<>observed.st_uid then
+    owner_invalid "cache parent path/descriptor binding"
+let settle_cache_parent parent cause =
+  let r=parent.parent_resource in
+  if r.cache_fd_state<>Cache_held then owner_invalid "cache parent settlement already consumed";
+  match cause with
+  | Some(Cache_ownership_uncertain state) ->
+    (* This known descriptor stays open; the carrier is now its sole owner. *)
+    r.cache_fd_state<-Cache_uncertain;
+    let evidence=parent_evidence parent in
+    let retained=if List.exists(fun (fd,_) -> fd=r.cache_fd) state.cache_retained
+      then state.cache_retained else evidence::state.cache_retained in
+    raise(Cache_ownership_uncertain {state with cache_retained=retained})
+  | _ ->
+    (match cache_identity r.cache_fd with None -> () | Some _ as identity -> r.cache_identity<-identity);
+    r.cache_fd_state<-Cache_uncertain;
+    (try metadata_close r.cache_fd;r.cache_fd_state<-Cache_closed
+     with error -> raise(Cache_ownership_uncertain {cache_cause=cause;
+       cache_uncertain=[parent_evidence parent,error];cache_retained=[];
+       cache_directory=parent_evidence parent;cache_parents=[]}));
+    (match cause with None -> () | Some error -> raise error)
+let open_cache_parent path =
+  let parent={parent_path=path;parent_resource={cache_fd=Unix.stdin;
+    cache_fd_state=Cache_unopened;cache_identity=None}} in
+  parent.parent_resource.cache_fd<-cache_parent_open path;
+  parent.parent_resource.cache_fd_state<-Cache_held;
+  (try check_cache_parent parent with error -> settle_cache_parent parent (Some error));
+  parent
+let cache_parent_descriptor parent =
+  check_cache_parent parent;parent.parent_resource.cache_fd

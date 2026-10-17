@@ -7,6 +7,35 @@ let check yes why=incr checks;if not yes then failwith why
 let invalid f=try ignore(f());false with ComponentHash.Invalid _ -> true
 let ()=
  let baseline=Array.length(Sys.readdir "/dev/fd") in
+ let parent_path=Filename.temp_file "cache-parent-owner-" "" in
+ Sys.remove parent_path;Unix.mkdir parent_path 0o700;
+ mode 0;let parent=D.open_cache_parent parent_path in
+ ignore(D.cache_parent_descriptor parent);D.settle_cache_parent parent None;
+ check(closes()=1) "normal async parent not closed once";
+ check(invalid(fun () -> D.settle_cache_parent parent None)) "normal parent double close accepted";
+ mode 0;let parent=D.open_cache_parent parent_path in
+ let original=Failure "original-parent-operation" in mode 1;
+ let failure=try D.settle_cache_parent parent (Some original);failwith "close EIO expected"
+  with D.Cache_ownership_uncertain state -> state in
+ check(D.cache_ownership_cause failure=Some original) "parent close lost original cause";
+ check(List.length(D.cache_uncertain_descriptors failure)=1 && closes()=1)
+  "parent close identity/retry differs";
+ check(invalid(fun () -> D.settle_cache_parent parent None)) "uncertain parent close retried";
+ mode 0;let parent=D.open_cache_parent parent_path in
+ let descriptor=D.cache_parent_descriptor parent in
+ let namespace=D.prepare_cache_namespace ~parent:descriptor () in
+ D.provision_cache_namespace namespace ~parent:descriptor;
+ mode 1;
+ let nested=try D.with_cache_namespace namespace ~parent:descriptor ignore;
+  failwith "namespace close EIO expected" with D.Cache_ownership_uncertain _ as error -> error in
+ let retained=try D.settle_cache_parent parent (Some nested);failwith "nested carrier expected"
+  with D.Cache_ownership_uncertain state -> state in
+ check(closes()=1) "nested uncertainty closed known parent";
+ check(List.length(D.cache_retained_descriptors retained)=1) "known async parent missing";
+ List.iter(fun (fd,_) -> Unix.close fd)(D.cache_retained_descriptors retained);
+ check(Array.length(Sys.readdir "/dev/fd")=baseline) "async parent owner leaked known descriptor";
+ let link=parent_path^"-link" in Unix.symlink parent_path link;
+ check((try ignore(D.open_cache_parent link);false with Unix.Unix_error _ -> true)) "parent symlink followed";
  let source=Filename.temp_file "cache-store-input-" "" in
  let out=open_out_bin source in output_string out (String.make 128 's');close_out out;
  let fd=Unix.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in

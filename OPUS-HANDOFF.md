@@ -2943,3 +2943,28 @@ for source8e84a6a8 (later commits metadata only). No report UI activation, media
 SDK or transport run. Next code: explicit async parent-descriptor owner and
 local report entry-point integration; outer parent must remain retained on
 nested uncertainty. Allactualjobs/resourcesclosed.
+
+
+## Opt-in local report entry wired — 2026-10-17
+
+UI component details now calls SemanticRemote.observe_components_with_worker
+using Update.inspect_configured_components. Existing observe_components API and
+remote wire route remain unchanged. Both componentownercache=true and explicit
+existing absolute private0700 componentcacheparent are required; optional %ROOT%
+root-SHA expansion supports distinct pre-provisioned parents. No recursive mkdir,
+discovery, remote cache, production activation or source permission is implied.
+
+New explicit parent owner records before validation, normal closes once, refuses
+settlement replay, preserves original cause on close uncertainty and retains known
+outer FD on nested uncertainty. No finalizer/numericFDretry. Actual fault/native
+controls75816/bd9a22/0; configured stock64824/d9b260/0; Oxbuild+bothdirect-local-
+entry controls99167/236a7c/0 PASS; all worker/group/tokens closed. Current stock/Ox
+full Make+selftests passed. Direct production SemanticRemote entry (same UIcallback)
+proved exact generatedDNG report/capture/repeat/restart/head/cancellation; no manual
+GUI session claimed. Receipt component-local-report-route-actual-20261017.json.
+
+Initial stock13845/cb14a4/1 failed source build: invalid string preference API;
+fixed send:false and separated observer entry to preserve old caller shape.
+Preserved, no tests/source payloads ran there. Dune for this successor pending.
+Remote routing and parent path replacement/concurrent-owner stress remain open;
+no active owned resources or SDK/media/transport grant.

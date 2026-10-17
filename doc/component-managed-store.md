@@ -126,3 +126,39 @@ its existing lifecycle. A concurrent owner-head change is refused even when the
 returned capture would otherwise be unchanged. Controls schedule those changes
 between submission and owner-loop completion. Worker read observers run after
 reply delivery and are unsuitable as a before-reply race injection point.
+
+
+## Explicit asynchronous parent owner source
+
+`open_cache_parent` opens only an existing explicitly selected absolute directory
+with native no-follow/nonblocking/CLOEXEC flags, records ownership before identity
+validation, and checks final-path/descriptor private0700 ownership and identity.
+`cache_parent_descriptor` borrows it and repeats the path check. There is no
+finalizer, recursive discovery, mkdir, IO admission or implicit source access.
+
+The caller must invoke `settle_cache_parent` once after all async work stops.
+Normal settlement closes once. An ordinary original error is rethrown after a
+normal close; a close error instead carries its uncertain descriptor and original
+cause. Nested cache uncertainty transfers this still-known parent into the same
+retained descriptor carrier without closing it. Subsequent settlement attempts
+are refused in both cases. This explicitly separates lifetime ownership from
+synchronous namespace reader callbacks.
+
+
+## Opt-in local report entry source
+
+The UI component-details branch now calls
+`SemanticRemote.observe_components_with_worker` with
+`Update.inspect_configured_components` as its local worker. The original
+`observe_components` API remains intact; remote roots ignore the local callback
+and retain their existing bounded protocol. Remote endpoint cache routing is not
+claimed by this local integration.
+
+Both `componentownercache = true` and a nonempty endpoint-local
+`componentcacheparent` are required. The latter selects an explicitly existing
+absolute private0700 parent, with optional `%ROOT%` expansion to the canonical
+root identity's SHA256. Supply a distinct pre-provisioned parent per root; neither
+recursive directories nor arbitrary discovered caches are adopted. Empty/off uses
+the old uncached worker. The parent owner spans only this inspection and retains
+its FD on nested uncertainty. The ordinary loaded-archive transaction still owns
+durable hint commit; details viewing does not invent a separate commit protocol.

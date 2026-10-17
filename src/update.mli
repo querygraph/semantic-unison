@@ -142,3 +142,10 @@ val inspect_cached_components : Fspath.t -> parent:Unix.file_descr -> path:Fspat
     exhaustion preserves the report; corruption/uncertain ownership propagates.
     Caller supplies stable generation and later normal archive commit; no discovery,
     source opening, decoder loading or synchronization decision is authorized. *)
+
+val inspect_configured_components : Fspath.t -> Fspath.t -> pool:SemanticWorkers.t ->
+  cancellation:HelperSupervisor.cancellation -> decoders:DngComponents.decoders ->
+  max_read_bytes:int64 -> Unix.file_descr -> SemanticWorkers.component_inspection option Lwt.t
+(** Opt-in local report worker with explicit componentcacheparent. Parent survives
+    worker await and transfers into nested uncertainty. Empty/off remains uncached.
+    Epoch selects a candidate only; worker still authenticates complete input. *)

@@ -848,3 +848,20 @@ CAMLprim value unison_component_namespace_check(value ticket, value parent_value
   caml_unix_error(ENOSYS, "component namespace check", Nothing);
 #endif
 }
+
+/* Open an explicitly selected existing parent; ownership returns immediately. */
+CAMLprim value unison_component_parent_open(value path)
+{
+  CAMLparam1(path);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  mlsize_t length=caml_string_length(path);
+  if (!length || length>4096 || String_val(path)[0]!='/' ||
+      memchr(String_val(path), 0, length)) caml_invalid_argument("component parent path");
+  int fd=open(String_val(path), O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
+  if (fd==-1) caml_unix_error(errno, "component parent open", Nothing);
+  CAMLreturn(Val_int(fd));
+#else
+  caml_unix_error(ENOSYS, "component parent open", Nothing);
+#endif
+}
