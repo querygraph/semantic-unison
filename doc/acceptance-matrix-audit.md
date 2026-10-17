@@ -1,5 +1,13 @@
 # Required acceptance matrix: scope audit
 
+Current consolidated review: [2026-10-17 release readiness](sol-release-readiness-20261017.md).
+The twelve rows remain in scope. Local report capture/reuse/namespace archive
+persistence and outer uncertainty retention are now implemented and scoped-
+qualified; older paragraphs calling all persistent integration absent are historical.
+The current receipt pin review records actual source differences rather than
+promoting old fault/transport executions to this candidate. No new run or grant.
+
+
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
 Latest user steering in SOL.md changes the coverage criterion: exhaustive private

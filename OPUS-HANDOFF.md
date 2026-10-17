@@ -3242,3 +3242,19 @@ scheduling paragraphs. No GitHub merge, media/SDK/RPC/payload/native/benchmark
 run or new admission. Next concrete work: twelve-row SOL acceptance evidence
 review and material current candidate gaps; do not restart consumed runs or gate
 baseline deployment on exhaustive MakerNote meanings. Zero owned resources now.
+
+
+## Twelve-area acceptance review — 2026-10-17
+
+Created doc/sol-release-readiness-20261017.md and machine-readable selected receipt
+source-pin review. Existing implementations and exact historical/current scopes
+are mapped to all12requirements; no full-goal completion claim. Old merge receipts
+have62changed explicit production bindings, worker scheduling22; no automatic
+current execution inference. Zero extracted pins means not rebound, not pass.
+Concrete nextsafeaction: current-object original worker apply/cancel regression,
+with bounded fixture setup (old driver unconditionally creates unused1GiBsparse
+files). Then fresh pinned current transfer/mixed-peer and retained-camera requests
+as needed, with newRootIO admission before dispatch. Legacy source-FD cleanup
+uncertainty remains a source review item. No camera/SDK/payload opened; no jobs/
+resources held. User excludes autonomous fuzz/sanitizer work and exhaustive
+MakerNotes are not a deployment gate. Allprioradmissionsremainconsumed.
