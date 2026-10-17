@@ -26,7 +26,9 @@ class Parent(unittest.TestCase):
                             group_cleanup_before_leader_reap=True,
                             other_group_members_absent_before_reap=True)
             raw = dict(schema='unison-loopback-protocol-count/1', server_pid=100 + index,
-                       server_returncode=0, server_cleanup=owner(100 + index),
+                       server_returncode=0, server_cleanup=dict(pid=100 + index, returncode=0, reaped=True),
+                       server_group_binding=dict(native_pid=100 + index, native_process_group=20 + index,
+                           supervisor_pid=20 + index, supervisor_process_group=20 + index, observed_before_native_reap=True),
                        server_command=[argv[0], '-server', *command['server_flags']],
                        input_pump_joined=True, pump_errors=[], fault=None)
             log = '' if phase == 'baseline' else frame('client', 200 + index * 2) + frame('server', 201 + index * 2)
@@ -60,7 +62,7 @@ class Parent(unittest.TestCase):
             lambda r, p: r['invocations'][0]['command'].append('-force'),
             lambda r, p: p[0].update(server_pid=999),
             lambda r, p: r['invocations'][0]['outcome']['client_cleanup'].update(reaped=False),
-            lambda r, p: r['invocations'][0]['outcome']['proxy']['server_cleanup'].update(other_group_members_absent_before_reap=False),
+            lambda r, p: r['invocations'][0]['outcome']['supervisor_cleanup'].update(other_group_members_absent_before_reap=False),
             lambda r, p: r['invocations'][0]['outcome'].update(supervisor_capture_truncated=True),
         ]
         for mutate in mutations:

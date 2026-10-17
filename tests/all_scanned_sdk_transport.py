@@ -55,7 +55,7 @@ class Invoker:
                    UNISON_SYNC_BENCH_BINARY=self.binary['path'],
                    UNISON_SYNC_BENCH_SERVER_FLAGS=json.dumps(call['server_flags']),
                    UNISON_SYNC_BENCH_PROXY_RECEIPT=str(self.directory / (self.phase + '-proxy.json')),
-                   UNISON_SYNC_BENCH_SOCKET=str(self.directory / 'scan.sock'),
+                   UNISON_SYNC_BENCH_SOCKET=str(self.directory / (self.phase + '-scan.sock')),
                    UNISON_SYNC_BENCH_DEADLINE_SECONDS='245')
         self.journal.begin(dict(label=self.binary['label'], mode='validation', workers=3,
                                 directory=str(self.directory), stage=self.phase), call['argv'])

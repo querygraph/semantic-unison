@@ -102,9 +102,9 @@ class Worker(unittest.TestCase):
         self.assertEqual(error.uncertain_fd, 987651)
         self.assertEqual(len(calls), 1)
 
-    def test_server_leader_reap_without_group_fence_remains_unknown(self):
+    def test_native_server_without_supervisor_group_binding_remains_unknown(self):
         def missing(index, out):
-            out['proxy']['server_cleanup'].pop('other_group_members_absent_before_reap')
+            out['proxy'].pop('server_group_binding')
         _, saved, calls, error = self.run_case(mutation=missing)
         self.assertIsInstance(error, worker.UnresolvedOwnership)
         self.assertEqual(len(calls), 1)

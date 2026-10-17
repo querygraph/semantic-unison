@@ -159,6 +159,28 @@ Only metadata/source preflight was performed. It is not runtime permission;
 Root must publish its exact fresh admission/deadline. No existing admission is
 reused and no dispatch occurs from resource availability or this document.
 
+**V1 is withdrawn unstarted; use no V1 admission.** Actual empty-root testing
+found that the proxy's native server inherits the supervisor group, whereas the
+modeled fixtures had supplied nonexistent native-own-group fields. It also found
+the retained socket path must be unique for each phase. Both source gaps were
+corrected before any SDK/media run. The proxy now records native/supervisor PGID
+binding before native reap, joined to the supervisor's retained group-leader
+census; no earlier leader-reap fiction is used. Historical receipts remain scoped
+as originally recorded, not retroactively rewritten with new group fields.
+
+The [actual transport qualification](../tests/qualification/native-proxy-group-actual-20261017.json)
+passes90 inert controls,4mixed-version empty-root handshakes and4actual current
+Invoker empty-root calls with an inert/non-executable SDK sentinel. Stock/Ox old
+peers explicitly refuse require/all-scanned and complete with validation off.
+Client/server/supervisor groups and outer Unison8 closed; no SDK/camera/EXglobal.
+First retained probe recovery and subsequent socket fixture failure are preserved.
+
+[Successor V2](all-scanned-sdk-request-v2.json) / [plan](all-scanned-sdk-plan-v2.json)
+now pin181sources and the actual transport evidence. Original V1 bytes and its
+[withdrawal](all-scanned-sdk-request-v1-withdrawn.json) remain unchanged. V2 still
+requires fresh explicit Root IO admission; these empty-root calls cannot establish
+actual SDK behavior or any semantic/pixel/throughput/corpus qualification.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under

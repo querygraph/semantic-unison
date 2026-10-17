@@ -19,6 +19,7 @@ from all_scanned_sdk_audit import settled_helpers, successful_helpers
 from all_scanned_sdk_parent import audit_complete
 from all_scanned_sdk_verify import verify_roots
 from all_scanned_sdk_paths import audit as audit_paths
+from all_scanned_sdk_groups import audit as audit_server_group
 
 
 def execute(contract, workspace, deadline, *, prepare_sources,
@@ -81,17 +82,13 @@ def execute(contract, workspace, deadline, *, prepare_sources,
                     raw = read_proxy(directory / (phase + '-proxy.json'))
                     if raw != outcome['proxy']:
                         raise ValueError('raw proxy binding differs')
-                    server = raw['server_cleanup']
-                    if server is not None and (
-                            server.get('group_cleanup_before_leader_reap') is not True
-                            or server.get('other_group_members_absent_before_reap') is not True):
-                        raise ValueError('server retained group settlement missing')
+                    server_group = audit_server_group(outcome)
                     log = '\n'.join(outcome[k] for k in ('stdout', 'stderr', 'supervisor_output'))
                     helpers = settled_helpers(log, candidate_sha256=contract['source']['sha256'],
                                               candidate_bytes=contract['source']['bytes'], phase=phase)
                 except BaseException as audit_error:
                     unknown('attempted CLI/helper prefix settlement unresolved', audit_error)
-                proofs = dict(phase=phase, lifecycle=lifecycle, helpers_settled=helpers)
+                proofs = dict(phase=phase, lifecycle=lifecycle, helpers_settled=helpers, server_group=server_group)
                 row['calls'].append(proofs); proxies.append(raw)
                 try: save()
                 except BaseException as record_error:

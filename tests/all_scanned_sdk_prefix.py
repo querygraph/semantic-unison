@@ -11,6 +11,7 @@ from invocation_journal import audit_validation_attempted
 from all_scanned_sdk_plan import plan as command_plan
 from all_scanned_sdk_audit import settled_helpers
 from all_scanned_sdk_paths import parse as parse_inputs
+from all_scanned_sdk_groups import audit as audit_server_group
 
 
 def require(value, message):
@@ -40,10 +41,8 @@ def audit_failed(result, contract, *, raw_proxy_receipts):
             'exact prefix command/order differs')
         outcome = entry['outcome']
         require(outcome['proxy'] == raw, 'raw proxy receipt binding differs')
+        audit_server_group(outcome)
         if raw['server_cleanup'] is not None:
-            require(raw['server_cleanup'].get('group_cleanup_before_leader_reap') is True
-                    and raw['server_cleanup'].get('other_group_members_absent_before_reap') is True,
-                    'server retained group proof missing')
             flags = proposed['server_flags']; command = raw['server_command']
             require(type(command) is list and command[:2] == [proposed['argv'][0], '-server']
                     and command[-len(flags):] == flags, 'actual endpoint policy differs')

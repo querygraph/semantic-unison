@@ -2,6 +2,16 @@
 
 This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
+Current all-scanned compatibility now includes actual stock/Ox clients against
+older feature-incapable peers: required scope explicitly refused before scanning,
+off completed on empty roots. Four additional current transport empty-root calls
+qualified per-phase sockets and native-to-retained-supervisor group binding;
+90inert controls passed. [Evidence](../tests/qualification/native-proxy-group-actual-20261017.json)
+retains the source-model/group and socket failures. This advances mixed-version
+capability/ordinary-off evidence only, not arbitrary networking, watcher, SDK or
+corpus acceptance. The real-SDK V1 request was withdrawn unstarted before any
+media access; its corrected V2 successor requires a fresh separate IO grant.
+
 The [actual mixed SDK/ExifTool/hash V1](../tests/qualification/mixed-validation-v1-actual-20261017.json)
 now advances rows9/12: two stock/Ox probes, two single-thread SDK helpers, two
 readonly ExifTool requests and32 shared hash tasks. Actual59209/cedf13/0/no

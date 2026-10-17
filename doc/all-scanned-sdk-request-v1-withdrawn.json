@@ -1,0 +1,24 @@
+{
+  "schema": "unison-all-scanned-sdk-request-disposition/1",
+  "state": "WITHDRAWN_UNSTARTED_SOURCE_SUCCESSOR_REQUIRED",
+  "request": {
+    "path": "doc/all-scanned-sdk-request-v1.json",
+    "bytes": 53907,
+    "sha256": "f06a74ea8f0ba22f5b1217507906a44bcb5eecf4fce175332e835943baecc26f"
+  },
+  "plan": {
+    "path": "doc/all-scanned-sdk-plan-v1.json",
+    "bytes": 27341,
+    "sha256": "983fe658d65601fcdd02acbc947945d8671124f4c47178a8d824b5717ab3e50d"
+  },
+  "own_runtime_dispatch_occurred": false,
+  "observed_unix": 1792200816.51191,
+  "admission_exists": false,
+  "workspace_exists": false,
+  "reason": "Actual empty-root control found native server shares retained supervisor group; earlier models supplied nonexistent server-group fields. Sequential phases also reused retained socket path. Successor must use explicit runtime native-to-supervisor group binding and unique per-phase sockets.",
+  "root_notice_queues": [
+    "01a14778-4910-7343-aea9-7e68ab0c430f",
+    "01a14779-90d9-7472-835a-1c1301a20ad6"
+  ],
+  "crossed_root_admission_must_not_be_dispatched": true
+}

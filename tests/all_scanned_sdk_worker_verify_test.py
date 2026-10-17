@@ -49,7 +49,9 @@ class ComposedVerification(unittest.TestCase):
                                     group_cleanup_before_leader_reap=True,
                                     other_group_members_absent_before_reap=True)
                     proxy = dict(schema='unison-loopback-protocol-count/1', server_pid=100 + index,
-                        server_returncode=0, server_cleanup=owner(100 + index),
+                        server_returncode=0, server_cleanup=dict(pid=100 + index, returncode=0, reaped=True),
+                        server_group_binding=dict(native_pid=100 + index, native_process_group=20 + index,
+                            supervisor_pid=20 + index, supervisor_process_group=20 + index, observed_before_native_reap=True),
                         server_command=[argv[0], '-server', *proposal['server_flags']],
                         input_pump_joined=True, pump_errors=[], fault=None)
                     log = '' if self.phase == 'baseline' else frame('client', 200 + 2 * index) + frame('server', 201 + 2 * index)

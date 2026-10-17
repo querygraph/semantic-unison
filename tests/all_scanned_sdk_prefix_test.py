@@ -37,7 +37,7 @@ class Prefix(unittest.TestCase):
             elif kind == 'phase': result['phase'] = 'PREPARING_NO_CALL'
             elif kind == 'raw': proxies[0]['server_pid'] += 1
             else:
-                result['invocations'][0]['outcome']['proxy']['server_cleanup']['other_group_members_absent_before_reap'] = False
+                result['invocations'][0]['outcome']['supervisor_cleanup']['other_group_members_absent_before_reap'] = False
                 proxies = [copy.deepcopy(result['invocations'][0]['outcome']['proxy'])]
             with self.assertRaises(ValueError): audit_failed(result, contract, raw_proxy_receipts=proxies)
 

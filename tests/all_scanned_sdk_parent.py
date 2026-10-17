@@ -12,6 +12,7 @@ from invocation_journal import audit_validation_attempted
 from all_scanned_sdk_plan import plan as command_plan
 from all_scanned_sdk_audit import successful_helpers
 from all_scanned_sdk_paths import audit as audit_paths
+from all_scanned_sdk_groups import audit as audit_server_group
 
 
 def require(value, message):
@@ -46,9 +47,8 @@ def audit_complete(result, contract, *, raw_proxy_receipts):
                 and outcome.get('fault') is None and raw['pump_errors'] == []
                 and outcome.get('timed_out') is False, 'complete result contradicts failed transport')
         server = raw['server_cleanup']
-        require(server is not None and server.get('group_cleanup_before_leader_reap') is True
-                and server.get('other_group_members_absent_before_reap') is True,
-                'server retained group proof required')
+        require(server is not None, 'successful server must have actually started')
+        server_group = audit_server_group(outcome)
         # Do not accept any other server executable or a remote policy different
         # from the client. The proxy's launcher command begins with -server;
         # startup flags before the exact explicit policy are separately retained.
@@ -74,7 +74,7 @@ def audit_complete(result, contract, *, raw_proxy_receipts):
         lines = (outcome['stdout'] + '\n' + outcome['stderr']).splitlines()
         require(sum(line in allowed for line in lines) == 1,
                 'exact no-transfer UI branch status missing or duplicated')
-        helper_proofs.append(dict(label=label, phase=phase, helpers=helpers, inputs=inputs,
+        helper_proofs.append(dict(label=label, phase=phase, helpers=helpers, inputs=inputs, server_group=server_group,
                                   no_transfer_status_observed=True))
     return dict(lifecycle, functional_status='PASSED', helper_calls=4, calls=helper_proofs,
                 candidate_path_isolation_proved=False, source_bytes_reverified=False,

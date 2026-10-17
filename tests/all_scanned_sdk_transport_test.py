@@ -34,6 +34,7 @@ class Transport(unittest.TestCase):
                 flags = json.loads(env['UNISON_SYNC_BENCH_SERVER_FLAGS'])
                 self.assertEqual(argv[-len(flags):], flags)
                 self.assertTrue(env['UNISON_SYNC_BENCH_PROXY_RECEIPT'].endswith(phase + '-proxy.json'))
+                self.assertTrue(env['UNISON_SYNC_BENCH_SOCKET'].endswith(phase + '-scan.sock'))
                 self.assertNotIn('UNISON_CONCURRENT_SYNTHETIC_ROOT', env)
                 self.assertTrue(kwargs['strict_group_settlement'])
                 return out

@@ -38,6 +38,7 @@ def main():
     fault = None
     endpoint = connection = native = thread = None
     command = None
+    server_group_binding = None
     length = None
     counts = {"client_to_server_bytes": 0, "server_to_client_bytes": 0}
     cleanup = usage = None
@@ -81,6 +82,15 @@ def main():
         command = arguments + json.loads(os.environ["UNISON_SYNC_BENCH_SERVER_FLAGS"])
         native = NativeChild(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE,
                              stderr=None, bufsize=0)
+        # NativeChild inherits this retained supervisor's group. Observe that
+        # binding while the child PID is still reserved, before any wait4.
+        server_group_binding = {"native_pid": native.pid,
+            "native_process_group": os.getpgid(native.pid),
+            "supervisor_pid": os.getpid(), "supervisor_process_group": os.getpgrp(),
+            "observed_before_native_reap": native.status is None}
+        if (server_group_binding["native_process_group"] != os.getpid()
+                or server_group_binding["supervisor_process_group"] != os.getpid()):
+            raise RuntimeError("native server not in retained supervisor group")
         # These hooks are only used by the synthetic failure controls. A fault
         # always rejects a measurement and is retained in its receipt.
         injection = os.environ.get("UNISON_SYNC_BENCH_FAULT")
@@ -174,6 +184,7 @@ def main():
               "server_pid": native.pid if native else None,
               "server_returncode": cleanup["returncode"] if cleanup else None,
               "server_cleanup": cleanup, "fault": fault,
+              "server_group_binding": server_group_binding,
               "forwarded_protocol_bytes": counts,
               "server_wall_seconds": time.monotonic() - before,
               "server_resources": receipt(usage) if usage else None,

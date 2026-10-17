@@ -7,6 +7,47 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest transport correction and real peer compatibility
+
+SDK requestv1 f06a74ea is WITHDRAWN UNSTARTED (own attestation; no SDK target
+dispatch). Disposition `doc/all-scanned-sdk-request-v1-withdrawn.json` preserves
+original request/plan bytes. Root notices queues01a14778-4910 and01a14779-90d9.
+No crossed old grant may be dispatched. Actual empty-root testing found two
+gaps missed by modeled fixtures: native server receipts do not contain their
+own group-leader fence (server inherits proxy group), and sequential phases
+reused a retained socket pathname. Both are corrected WITHOUT SDK/media reads.
+
+Proxy now observes native PID/PGID and supervisor PID/PGID before native wait4.
+`all_scanned_sdk_groups.py` joins that binding to strict supervisor-group census
+before the GROUP LEADER is reaped. Native server is explicitly not group leader;
+no fictional native-own-group fields. Baseline/validate use separate socket names.
+Current90 inert controls PASS/CLOSED. Four actual current/older-peer empty-root
+calls proved exact capability refusal when required and ordinary off success
+on stock/Ox; actualbatch48099/663fe5/1 retained the first socket fixture failure,
+freshbatch97858/236d74/0 passed. Four ACTUAL current Invoker empty-root calls
+also passed using an inert non-executable SDK sentinel, actual29390/973a1f/0.
+All client/supervisor/native groups/canonicalCPU8 closed; no canonicalEXIO or SDK.
+Receipt `tests/qualification/native-proxy-group-actual-20261017.json`.
+
+First probe wrongly expected native-own-group keys and retained idle6233 despite
+actual client6249reaped3/supervisor6248reaped0/native6256reaped0 and strict proxy
+group closure. Source-bound empty/no-SDK recovery stopped only idle6233; actual
+18796/4fd8fb/247, outerchild6233wait-9/groupclosed/CPU8closed. Runtime nativePGID
+was NOT claimed for that first probe. Recovery and exact old script archived;
+second socket-reuse failure was ordinary known closed, no retained resource.
+
+FRESH successor request `doc/all-scanned-sdk-request-v2.json`
+SHA75d3b9bd03a06a06caf41c5c216ee5dad1ccdc95d5b9138d245fc5316617b03e;
+plan `doc/all-scanned-sdk-plan-v2.json`
+SHAa89b6c1f9a530a282ac749358aef79016b22fb9397400671e8d29380a705de81.
+181sources/6prereqs, metadata checked_plan PASS; borrowed8fields unchanged with
+zero payload opened. Workspace `/private/tmp/u-asv-ca5ec3ffcbff`, admission
+`/private/tmp/unison-all-scanned-sdk-admission-v2-ca5ec3ffcbff.json` absent atprep.
+Same finite4CLI/4singleSDK/8CPU+EXglobal, no18borrow. This request is NOT a grant;
+fresh Root admission/deadline and all source/workspace guards remain mandatory.
+No actual all-scanned SDK run has occurred. Old-peer loopback negotiation does
+not prove arbitrary SSH/network/platform interoperability or close the full goal.
+
 ## Latest checkpoint — private helper input observations
 
 Current007 stock/Ox Make AND Dune build-only PASS/CLOSED, actual21013/826fd9/0/no

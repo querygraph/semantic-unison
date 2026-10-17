@@ -21,7 +21,7 @@ def plan(binary, tool, workspace):
         raise ValueError('qualified compiler and single-thread SDK identity required')
     w = Path(workspace)
     if (not w.is_absolute() or '..' in w.parts
-            or len(str(w / 'scan.sock').encode()) >= 100):
+            or len(str(w / 'baseline-scan.sock').encode()) >= 100):
         raise ValueError('bounded absolute private namespace required')
     # CandidateValidation.unchanged_file_with_validators reserves SDK+2MiB
     # in its outer loan. Its one-child partition lends SDK+1MiB, independently
