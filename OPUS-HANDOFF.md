@@ -3225,3 +3225,20 @@ the manifest payload stays unchanged. Source/artifact pins were independently
 rechecked. See that branch's component-archive-legacy-actual-20261017.json.
 This does not execute the untouched old CLI or qualify all old releases/network
 transfers. Production source and main's frozen RPC closure remain unchanged.
+
+
+## Integration source checks complete — 2026-10-17
+
+Local mergef5b496f5 combines PR11+PR10 without production source conflicts. All390
+tracked production paths equal6b4d5204 and every SRC pin in the final four
+stock/Ox Make+selftest/Dune reports rebinds to this candidate. Auditor22+8+6groups
+passed actual76033/d65499/0/no session; all3worker/groups/tokensclosed. 46sealed
+metadata references and original exactseal2ce13be0 unchanged. Receipt sol-
+integration-source-actual-20261017.json. First relative-script launch refused
+before worker dispatch; unused output001 preserved, fresh002 ran once.
+
+Updated doc/current-qualification-status.md is current over its historical
+scheduling paragraphs. No GitHub merge, media/SDK/RPC/payload/native/benchmark
+run or new admission. Next concrete work: twelve-row SOL acceptance evidence
+review and material current candidate gaps; do not restart consumed runs or gate
+baseline deployment on exhaustive MakerNote meanings. Zero owned resources now.

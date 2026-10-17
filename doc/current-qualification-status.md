@@ -1,5 +1,40 @@
 # Implementation status, updated 2026-10-17
 
+## Current local integration candidate — 2026-10-17
+
+`integration/sol-release-candidate`, merge f5b496f5, combines local cache/report
+source6b4d5204 (draft PR11) and the independent producer-schema RPC auditor
+sourcea3725eb5/current5f350db6 (draft PR10). No GitHub PR was merged. All390 tracked
+production paths remain byte-identical to PR11; four stock/Ox Make+selftest/Dune
+reports were rebound to every current production source pin. Auditor22+8+6groups
+passed in this tree, actual76033/d65499/0/no session; allworkers/groups/tokensclosed.
+Exact evidence: ../tests/qualification/sol-integration-source-actual-20261017.json.
+
+Local UI component details now supports explicit opt-in private-parent cache
+capture/reuse/restart, archive-owned namespace identity, expected-head adoption,
+parent replacement/permission/cancellation fences and retained cache-carrier
+outer report admission. See component-managed-store.md. Parent provisioning is
+explicit; remote endpoint cache routing is absent. Generated fixture reuse does
+not establish physical IO savings or complete camera understanding.
+
+The single frozen RPC admission53a52254 is CONSUMED/CLOSED: all8commands0, original
+parent91491/7ec39a/1 because the old auditor looked up an absent field. Saved-only
+corrected audit and independent Root narrow adoption are separate later evidence;
+original exit1 and all sealed bytes remain. All46 direct/embedded sealed metadata
+references rechecked. No waiting admission, live hold, retry or new RPC run exists.
+
+Remaining full-goal work: review the twelve SOL acceptance rows against their
+actual scoped evidence, execute only the necessary fresh current-source checks,
+resolve material gaps rather than treating every hypothetical platform/corpus
+claim as supported, and present a consolidated reviewable release candidate.
+Unknown MakerNotes remain exact opaque coverage and are not a deployment gate.
+No exhaustive fuzz/sanitizer campaign is authorized. Performance caveats and
+failed part3 are retained; no quiet/full-matrix/physical-savings claim follows.
+
+Everything below preserves earlier checkpoint scopes. “Pending” scheduling and
+missing integration statements there are historical where superseded above.
+
+
 The full SOL.md goal is active. This is a current evidence index and remaining-work
 list, not a completion certificate. Historical qualifications retain their pinned
 source/platform scopes; a passing current build does not rerun every historical

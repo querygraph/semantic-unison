@@ -1,0 +1,117 @@
+{
+  "scope": "Local integration of PR11 source and PR10 independent producer-schema auditor; no GitHub merge or replay",
+  "integration_source": "f5b496f5",
+  "complete_for_scope": true,
+  "production_same_as": "6b4d5204",
+  "tracked_production_paths_rebound": 390,
+  "build_reports_rebound": [
+    {
+      "report": {
+        "path": "/private/tmp/unison-report-retention-stock-make-20261017-002/RESULT.json",
+        "bytes": 51179,
+        "sha256": "833a8264709147a3a49d5b859d94dcfbbed021549e12233c03b6f954a3d6ebc3"
+      },
+      "current_production_source_pins": 318
+    },
+    {
+      "report": {
+        "path": "/private/tmp/unison-report-retention-ox-make-20261017-001/RESULT.json",
+        "bytes": 51185,
+        "sha256": "4a90e9bbe15ff2643012bbba50ff8f747de332d823ff7de7474319ee6baa73fe"
+      },
+      "current_production_source_pins": 318
+    },
+    {
+      "report": {
+        "path": "/private/tmp/unison-report-retention-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50623,
+        "sha256": "d9effec77d7ec0c5c2b3d2d551b8aa9ac825f610260eeb40b0eb134b27ffb3bc"
+      },
+      "current_production_source_pins": 318
+    },
+    {
+      "report": {
+        "path": "/private/tmp/unison-report-retention-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50627,
+        "sha256": "87b474bdc155dbbfd5d89674f6e85b0c0d422d5814561bf8821c39bd5e5cda9d"
+      },
+      "current_production_source_pins": 318
+    }
+  ],
+  "auditor_owner": {
+    "session": 76033,
+    "terminal_chunk": "d65499",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "auditor_controls": [
+    {
+      "label": "producer",
+      "groups": 22,
+      "closure": {
+        "path": "/private/tmp/unison-integration-rpc-producer-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "6983f12df286be7c0a559f8f181755860ef3cc5653d984c9591fd769856b2d5d"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-integration-rpc-producer-controls-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 55,
+        "sha256": "0e39fc8d868b20d46857ba482d19eaecf9b9e49fb6d3e8800fe59307842d63b9"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-integration-rpc-producer-controls-20261017-002/SHARED-STDERR.txt",
+        "bytes": 121,
+        "sha256": "753984d231ff4c6814246ac2dd1beb3ad13cc91fcaf5f75e45453660582b65b0"
+      }
+    },
+    {
+      "label": "readback",
+      "groups": 8,
+      "closure": {
+        "path": "/private/tmp/unison-integration-rpc-readback-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "5aff89116bbfb6e8095105c33fed412d1a16361390ac9f13b90260a3e6c89d25"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-integration-rpc-readback-controls-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-integration-rpc-readback-controls-20261017-002/SHARED-STDERR.txt",
+        "bytes": 106,
+        "sha256": "9d605036133295df320c55d25207790bd7275ad8707742a36b99346d2ef5bfd9"
+      }
+    },
+    {
+      "label": "saved",
+      "groups": 6,
+      "closure": {
+        "path": "/private/tmp/unison-integration-rpc-saved-controls-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "0e3a3621f9e2b8056f9b1f57223322e75d16784ca760f999980965e4cce1da30"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-integration-rpc-saved-controls-20261017-002/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-integration-rpc-saved-controls-20261017-002/SHARED-STDERR.txt",
+        "bytes": 104,
+        "sha256": "106f60cc2b4de28bb278e0580e8ecf78d79e6d828f0b0e2de89c2ce86d3e34a1"
+      }
+    }
+  ],
+  "sealed_return": {
+    "path": "/Users/alexy/src/unison-sol-integration-20261017/doc/component-remote-return-20261017.json",
+    "bytes": 9590,
+    "sha256": "2ce13be049b9ede3fab46015d1f1d865145e10d8806c40d34cffc457879f7098"
+  },
+  "sealed_metadata_reference_count_verified": 46,
+  "limitations": [
+    "Historical build executions are rebound by exact current production source, not rerun",
+    "All historical acceptance scopes remain limited; this is not full-goal completion",
+    "No live RPC/SDK/media/payload/benchmark admission or invocation"
+  ]
+}
