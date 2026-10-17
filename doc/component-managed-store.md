@@ -39,3 +39,38 @@ power-loss recovery and non-macOS native publication are not qualified here.
 Qualification uses original tiny fixtures, copied fault objects and real native
 publication objects. See the versioned actual receipts and OPUS-HANDOFF.md;
 normal-path success does not establish failure-path or full integrated coverage.
+
+
+## Remaining report-owner integration
+
+Current `SemanticRemote.inspect_components` still calls `SemanticWorkers.components`
+without checkpoint capture or cache selection. It precedes Update in the module
+dependency graph; importing Update there would create a cycle. The next route
+must pass an explicit endpoint-owner context from the loaded archive owner (or
+register a narrow owner-loop hook), never infer authority from a self-hashed
+manifest or a directory found on disk.
+
+Persist namespace identity as an optional archive-owned extension bound to the
+same archive context and manifest reference. An old archive without that identity
+must remain a cold miss. Missing/corrupt optional metadata must not reset the
+ordinary archive or mutate synchronization state. Provision a namespace only
+under a private owner-state parent after the owner has explicitly selected this
+feature; normal reading must use an existing identity-bound namespace ticket.
+Retain compatibility with old code dropping optional hints on rewrite.
+
+Do not hold synchronous namespace callbacks over an asynchronous worker await.
+Load bounded index/record bytes under scoped owned descriptors, close normally,
+run the worker with immutable authenticated inputs, then independently reopen
+with the exact namespace identity to stage any new capture. Check the source
+snapshot and expected archive head again before adoption. A corrupt selected
+record is a reported failure, not a silently fresh extraction. Unchanged captures
+must reuse the existing immutable objects rather than collide on exclusive
+publication; missing/stale selections may capture new metadata within quota.
+Unknown descriptor ownership must propagate past report error formatting, retain
+the resource owner, and never become an ordinary unavailable-report release.
+
+The report may expose reused/invalidated component counts and refinement versions,
+with exact opaque coverage preserved. It must not call logical reuse physical IO
+savings: current restore still verifies the full input. Remote endpoints need the
+same owner-local lifecycle; cache authority is never transferred over the existing
+small component-summary wire response.

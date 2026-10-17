@@ -2846,3 +2846,12 @@ Exact pins: component-managed-store-archive-actual-20261017.json. No SDK/media/
 transport or source photos; no live owned jobs/resources. Dune and integrated
 normal report automatic capture/reuse remain next work. This supersedes the
 previous note that Update adoption was uncompiled, without changing old evidence.
+
+
+Current stock/Ox Dune compile checks now PASS: actual controller26178/7c4947/0/
+no session, stockworker84057 andOxworker85101reaped0/groupsabsent/tokensclosed.
+Receipt component-managed-store-dune-actual-20261017.json pins both reports.
+Current SemanticRemote inspection still uses fresh uncached components; durable
+namespace identity and owner-loop/asynchronous report routing remain explicit
+implementation work, detailed in doc/component-managed-store.md. SOL status
+updated accordingly. No active owned jobs/resources or payload grant.

@@ -1,0 +1,38 @@
+{
+  "complete": true,
+  "owner": {
+    "session": 26178,
+    "terminal_chunk": "7c4947",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-managed-store-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50390,
+        "sha256": "bd148cc99675803de1c0e2562c35255bf6db8b2932fa68946d9f4bc13d56d7b2"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-managed-store-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "7c183f92b45c13b8091d83e46c659eb62d9f7601fd5f96b656e2df1ca8a6315f"
+      }
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-managed-store-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50394,
+        "sha256": "a326eec3ebba22dd9e5b74125e67b26800fad32255d94486956b8c59546da77f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-managed-store-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c59b823a8118144a29f2661c181ea738a7e202d63d5e4a546f7ae805ffe8bfa7"
+      }
+    }
+  ],
+  "scope": "Current stock and OxCaml Dune production compile checks; no runtime/media/SDK"
+}
