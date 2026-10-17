@@ -20,3 +20,14 @@ plan, fresh namespace, deadline and explicit shared IO admission. Current comman
 controls use inert paths only and prove no compatibility or transport behavior.
 This source preparation does not supersede the separately frozen property request
 or grant camera, Adobe, bulk IO or receiving access.
+
+`audit.py` now checks an exact attempted prefix against fixed case/stage commands
+and independently supplied raw proxy frames. It verifies client/supervisor reap
+and pre-reap group proofs, server command/flags, inherited group binding and joined
+pump. Both explicit upstream server startup dialects are accepted. A complete
+pinned-proxy no-creation frame can prove a pre-server failure; null PID alone
+cannot. A known failed prefix proves lifecycle only, never functional success or
+aggregate/owning-tool terminal. Eleven independent fake-frame controls pass.
+The executor must authenticate raw frame inputs and retain all native owners when
+any proof is missing; this pure function neither authenticates files nor releases
+resources. Actual transfer and functional-byte checks remain unqualified.

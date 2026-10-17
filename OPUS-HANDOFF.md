@@ -3954,3 +3954,12 @@ command-only controls actualcd7fa7/0/no session passed, inertpaths/no transport.
 README lists executor/journal/proxy/rawbinding/knownfailedprefix/fixture/current
 build/oldbinary/admission work stillrequired. NO runtimegrant or readyclaim.
 Existing camera request pins preserved; no canonicalEXIO/camera/SDK accessed.
+
+Mixed-peer pure auditor implemented: fixed12call prefix/identity/argv/rawproxy/
+client-supervisorreaps/servercommand+group/pump proofs; upstreamold/newRPC
+startupdialects explicit, exactprecreationframe only (notnullPID). Knownfailed
+prefix returnslifecycleonly; nofunctional/parentterminal/FDreleaseauthority.
+Nineinitialcontrols5641e7/0 then11expandedcontrols89353e/0 passed, own8closed,
+no payload/CLI/EXIO. Evidence mixed-peer-audit-controls-20261017.json. Executor/
+rawfileauthentication/functionalchecks/buildpins/admission stillnext. Existing
+camera request pinned sources remain unchanged.
