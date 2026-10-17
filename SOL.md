@@ -4,6 +4,17 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Checkpoint-core successor is now tested on separate branch
+`feat/component-cache-input-binding` (569395d9), preserving main's reviewed342
+RPC pins. It exports/restores bounded metadata using the owner's prior trusted
+digest and complete current-input SHA verification, then supports private-view
+invalidation/replacement with pixel-hash reuse.41existing+454checkpoint checks per
+stock/Ox compiler, full Make+selftests/Dune compile builds and1272 source checks
+pass. It is NOT yet main/worker/store/archive integration or an IO-free shortcut.
+See that branch's `doc/component-checkpoints.md` and qualification. Main RPC source
+review is accepted; actual transport is separately deferred for Photo's active
+Smart Preview IO scheduling, not incomplete private-field interpretation.
+
 **User direction, 2026-10-17:** separating pixels from standard metadata is
 already a valuable deployable baseline. Exhaustively interpreting every byte
 of every camera format is neither a prerequisite nor a realistic completion

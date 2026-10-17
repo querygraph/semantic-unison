@@ -5,6 +5,15 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
+Root has accepted the342-source component RPC plan with no findings, then explicitly
+deferred its runtime for operator-authorized Photo Smart Preview EXglobal work.
+[Adoption](../tests/qualification/component-remote-source-review-adoption-20261017.json)
+does not establish present Photo liveness, an admission or RPC success. Independent
+cache work on separate `feat/component-cache-input-binding`569395d9 now passes
+stock/Ox checkpoint/refinement controls and four builds. It requires prior trusted
+metadata+full current-input SHA; no automatic store/epoch-only shortcut or merge
+into main. Main's342 reviewed runtime pins are preserved; see OPUS-HANDOFF.md.
+
 Latest component checkpoint (2026-10-17): the off-default explicit details path
 now has a separately negotiated [SIC/0 remote protocol](component-report-v0.md).
 [Source/codec qualification](../tests/qualification/component-remote-source-actual-20261017.json)
