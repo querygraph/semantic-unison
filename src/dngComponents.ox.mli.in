@@ -134,3 +134,16 @@ val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->
     eligibility: restore still verifies full current input/base. Entry-only is a
     broken reference; record-only is an orphan, not index advancement. No opens,
     closes, writes, cleanup, directory scan, automatic selection or peer trust. *)
+
+val with_cache_capture : owner_entry -> directory:Unix.file_descr ->
+  record:(Unix.file_descr * SemanticFile.t) option ->
+  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->
+  max_read_bytes:int64 -> SemanticFile.t ->
+  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result @@ nonportable
+(** Authenticate a complete known capture, then verify the whole current input
+    and current parser partition before refreshing frozen decoder bindings. The
+    historical inventory/digests come only from the trusted entry, not separate
+    caller-selected arguments. Incomplete captures return explicit Error without
+    invoking the callback; corrupt/foreign evidence and operational errors raise.
+    No fallback extraction, opens/closes, selection, cleanup or publication. All
+    source/cache readers and their borrowed descriptors remain caller-owned. *)

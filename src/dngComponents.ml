@@ -352,3 +352,13 @@ let inspect_cache_capture entry ~directory ~record ~index =
   | None,false -> Capture_missing | None,true -> Capture_entry_only
   | Some checkpoint,false -> Capture_record_only checkpoint
   | Some checkpoint,true -> Capture_complete checkpoint
+
+let with_cache_capture entry ~directory ~record ~index ~decoders ~max_read_bytes file callback =
+  match inspect_cache_capture entry ~directory ~record ~index with
+  | Capture_missing -> Error "component cache capture missing"
+  | Capture_entry_only -> Error "component cache capture record missing"
+  | Capture_record_only _ -> Error "component cache capture index missing"
+  | Capture_complete checkpoint ->
+    with_refreshed_checkpoint ~previous:entry.previous ~decoders
+      ~expected_checkpoint_sha256:entry.checkpoint_digest ~max_read_bytes file
+      (ComponentHash.checkpoint_bytes checkpoint) callback

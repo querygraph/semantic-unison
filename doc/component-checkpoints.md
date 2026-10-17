@@ -162,6 +162,24 @@ pass; counts include metadata-vector truncations. Production source is unchanged
 and its four existing full-build source pin sets were rebound, not rerun. See
 `tests/qualification/dng-cache-lookup-race-actual-20261017.json`.
 
+### Authenticated capture-to-refresh integration
+
+`with_cache_capture` connects known-entry recovery to current-input decoder
+refresh. It requires both immutable leaves, derives the historical digest and
+inventory only from the trusted owner entry, verifies the complete current input
+and current parser partition, then invokes the existing scoped refresh callback.
+Unchanged decoders reuse verified components; the existing refresh rules govern
+changed/removed decoders. Missing, entry-only and record-only captures return
+explicit errors without invoking the callback. Foreign or corrupt evidence and
+operational failures propagate rather than becoming ordinary cache misses.
+
+This helper borrows all descriptors/readers and introduces no filesystem opens,
+closes, automatic fallback, namespace discovery or archive selection. It closes
+one integration gap without claiming an installed automatic persistent cache.
+Original controls cover successful same-input reuse with no decoder-span rereads,
+changed source rejection before callback, and orphan refusal. Qualification for
+this source successor is recorded in `tests/qualification/dng-cache-reuse-actual-20261017.json`:1047DNGchecks/compiler, fresh stock/Ox Make/fullselftests/Dune compile and110workerchecks/compiler PASS;1272current source pins match, all workers/groups/tokens closed.
+
 ### Quota-bound paired capture
 
 The explicit capture helper now routes record+owner-entry staging through one

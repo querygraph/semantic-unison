@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Authenticated capture-to-refresh integration is qualified: `with_cache_capture`
+requires complete trusted metadata, full-current-input/current-parser verification
+and derives decoder provenance only from the owner entry. Focused1047checks per
+compiler44609/428946/0 and fullcontroller93249/2fc314/0 closed: stock/Ox Make+
+fullselftests/Dunecompile/productionlinked110workerchecks percompiler,1272current
+sourcepins match. All6workers/groups/tokensclosed. Receipt
+`tests/qualification/dng-cache-reuse-actual-20261017.json`. Orphan/changedinput
+refuse beforecallback. No media/SDK/transport/automatic namespace or selection.
+
 Known-entry lookup final record recheck now has targeted race+ablation proof.
 Existing readercallback redirects equal-byte record afterrecordauth/duringindex
 check; normalcode refusesbeforeresultdelivery. Copied filtered variant removing

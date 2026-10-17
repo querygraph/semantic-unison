@@ -367,12 +367,34 @@ let () =
                    with Unix.Unix_error _ -> true) "unpublished stage mistaken for published index";
                  (* Remove only this original fixture's deliberately created collision. *)
                  Unix.unlink entry_target;
-                 with_record(fun record -> check(match DngComponents.inspect_cache_capture entry ~directory
+                 with_record(fun record ->
+                   check(match DngComponents.with_cache_capture entry ~directory ~record:(Some record)
+                     ~index:None ~decoders:frozen ~max_read_bytes:8192L file
+                     (fun _ _ -> failwith "orphan delivered reusable view") with
+                     | Error "component cache capture index missing" -> true | _ -> false)
+                     "orphan capture authorized cached reuse";
+                   check(match DngComponents.inspect_cache_capture entry ~directory
                    ~record:(Some record) ~index:None with
                    | DngComponents.Capture_record_only value -> ComponentHash.checkpoint_bytes value=ComponentHash.checkpoint_bytes checkpoint
                    | _ -> false) "record-only orphan misclassified")
                end else begin
                  with_record(fun record -> with_index(fun index ->
+                   let reuse source action=DngComponents.with_cache_capture entry ~directory
+                     ~record:(Some record) ~index:(Some index) ~decoders:frozen
+                     ~max_read_bytes:8192L source action in
+                   check(match reuse file (fun current refreshed ->
+                     check(ComponentHash.bytes_requested current=8192L)
+                       "cache reuse reread unchanged decoder spans";
+                     ComponentHash.checkpoint_sha256(ComponentHash.checkpoint current refreshed.snapshot)=
+                       ComponentHash.checkpoint_sha256 checkpoint) with
+                     | Ok same -> same | Error _ -> false) "authenticated capture did not restore current view";
+                   let changed=Bytes.of_string(Layout_only.fixture true false (String.make 64 'A')) in
+                   Bytes.set changed 2050 'Z';
+                   let delivered=ref false in
+                   check(try Layout_only.with_input(Bytes.to_string changed)(fun changed_file ->
+                     ignore(reuse changed_file(fun _ _ -> delivered:=true)));false
+                     with ComponentHash.Invalid _ -> not !delivered)
+                     "cache reuse delivered stale current-input view";
                    check(match DngComponents.inspect_cache_capture entry ~directory ~record:(Some record) ~index:(Some index) with
                      | DngComponents.Capture_complete value -> ComponentHash.checkpoint_bytes value=ComponentHash.checkpoint_bytes checkpoint
                      | _ -> false) "complete cache capture not authenticated";

@@ -105,7 +105,8 @@ let transform version path =
           "val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->\n  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->\n  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture";
           "val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit";
           "val cache_capture_state : cache_capture -> bool * bool";
-          "val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery"]
+          "val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery";
+          "val with_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->\n  max_read_bytes:int64 -> SemanticFile.t ->\n  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]
