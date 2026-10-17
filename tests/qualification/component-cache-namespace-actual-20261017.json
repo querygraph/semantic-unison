@@ -1,0 +1,242 @@
+{
+  "state": "PRIVATE_COMPONENT_CACHE_NAMESPACE_CREATE_REOPEN_AND_RETAINED_OWNERSHIP_PASS_CLOSED",
+  "first_controller_actual_terminal": {
+    "session": 61854,
+    "chunk": "d0ad68",
+    "exit_code": 1,
+    "no_session": true,
+    "reason": "Fresh Root RPC admission appeared; guard refused before next owned step. Five completed steps all returned zero; no test failure/replay."
+  },
+  "continuation_actual_terminal": {
+    "session": 18854,
+    "chunk": "f0c867",
+    "exit_code": 0,
+    "no_session": true,
+    "reason": "After actual consumed RPC parent/resource closure, ran only four previously unstarted steps."
+  },
+  "focused_actual_terminal": {
+    "session": 78605,
+    "chunk": "33792f",
+    "exit_code": 0,
+    "no_session": true,
+    "scope": "Initial focused version before stronger empty-wrong-parent test and retained fault-object copy; current evidence uses final controls below."
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-cache-namespace-stock-make-20261017-001/RESULT.json",
+        "bytes": 50727,
+        "sha256": "3781eeaa3505724dd477b57180aad17af1671c33652dc3cb461bd167c572f7d1"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "14a8872081898810dfe8144f8e79032873a95da1499450d66b1e92fb95959360"
+      },
+      "current_SRC_checks": 318
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-cache-namespace-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50171,
+        "sha256": "e1d2f17a485f5ca197ee22e192b6c0efc454f573a6108f881316096a6e5dc3d4"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "fe2f4dbf71f26596c978ad8c2ce9c4246e96b01e2661e5b64f2e2396003190f2"
+      },
+      "current_SRC_checks": 318
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-cache-namespace-ox-make-20261017-001/RESULT.json",
+        "bytes": 50733,
+        "sha256": "c8be0b50cb24d28defde481f50d6fffaa74cae81c0a74c74db2478021127a758"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "b82f9081b7bb75919591d48f76af80da4d43fb33c7d8b77d6943dad246bd9afc"
+      },
+      "current_SRC_checks": 318
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-cache-namespace-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50175,
+        "sha256": "5dda70cce2171a23b7d5d9d5959467aea16f65748cb2950682de70e4f23c420f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f33293248c31656e15ae10ccf223f72f5c381bc6af1aaa7993cc60f207850bdb"
+      },
+      "current_SRC_checks": 318
+    }
+  ],
+  "controls": [
+    {
+      "label": "loader",
+      "raw": {
+        "path": "/private/tmp/unison-cache-loader-controls-zf6r0gx_/RESULT.json",
+        "bytes": 430339,
+        "sha256": "3772113199334878e5c46d0dafc787f3ec5ad095ab279199a657879253f2bc66"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-loader-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f8d4e03073d541ddaf2055d3c603b778b9f4ece18404bd5c40bc21231c45f0aa"
+      },
+      "direct_calls": 67,
+      "reports": [
+        "PASS 80 managed cache loader checks; exact metadata, no-follow, cancellation, retained close uncertainty",
+        "PASS 67 namespace controls; exact create/reopen, retained effects, quota continuity, nested close uncertainty",
+        "PASS 7 production native cache loader checks; two trusted entries/records and complete FD retirement",
+        "PASS 9 production namespace checks; real create/sync/open/close and quota reopen",
+        "PASS 80 managed cache loader checks; exact metadata, no-follow, cancellation, retained close uncertainty",
+        "PASS 67 namespace controls; exact create/reopen, retained effects, quota continuity, nested close uncertainty",
+        "PASS 7 production native cache loader checks; two trusted entries/records and complete FD retirement",
+        "PASS 9 production namespace checks; real create/sync/open/close and quota reopen"
+      ]
+    },
+    {
+      "label": "core",
+      "raw": {
+        "path": "/private/tmp/unison-component-controls-ob77_u91/RESULT.json",
+        "bytes": 156070,
+        "sha256": "0e847c2aad2736a80c78fdc126a9d8f52bf29ea8168f5d0079281f157fa1ca68"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-core-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "98cc030626951e1ead86fced3128e1b20095be8cf6602ee8a68c5c8200d0f1e7"
+      },
+      "direct_calls": 41,
+      "reports": [
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 1005 checkpoint controls; authenticated metadata, full input verification, localized refinement, malformed/tampered/stale refusals",
+        "PASS 13 borrowed positional reader fault checks",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 27 record publication fault checks; postrename effect retained, stage EIO/EINTR not retried",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 1005 checkpoint controls; authenticated metadata, full input verification, localized refinement, malformed/tampered/stale refusals",
+        "PASS 13 borrowed positional reader fault checks",
+        "PASS 56 component checks: full coverage, nested refinement, exact read budgets, pixel reuse, scope refusal",
+        "PASS 27 record publication fault checks; postrename effect retained, stage EIO/EINTR not retried"
+      ]
+    },
+    {
+      "label": "dng",
+      "raw": {
+        "path": "/private/tmp/unison-dng-component-controls-l_ci9_78/RESULT.json",
+        "bytes": 504541,
+        "sha256": "8185562721c64339ce225cd155fcd73948119741919ff9e6b844a49f9ff085e1"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-dng-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "65974c330e56e5be5a59b367a4961ac863f6c4dd24640c2b5109dca46b6ecc5d"
+      },
+      "direct_calls": 72,
+      "reports": [
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "DNG component controls: 1391 checks PASS",
+        "PASS 29 owner archive-reference publication fault checks",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge",
+        "DNG component controls: 1391 checks PASS",
+        "PASS 29 owner archive-reference publication fault checks",
+        "PASS four scalar baselines/eight private safety refusals",
+        "PASS layout-only big classic",
+        "PASS layout-only big BigTIFF",
+        "PASS layout-only little classic",
+        "PASS layout-only little BigTIFF",
+        "PASS 49 layout checks; exact private preservation, no semantic merge"
+      ]
+    },
+    {
+      "label": "worker",
+      "raw": {
+        "path": "/private/tmp/unison-component-worker-controls-9g3ai5f_/RESULT.json",
+        "bytes": 126553,
+        "sha256": "546a8f01cfc206d39bdbd0f3a8f3b2e3b66581367c35f3ad611d734fb1cb3d38"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-worker-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "628dd553f18ec5064e37904bc237c6df7aeacc8621763b187504605b9e37b4e2"
+      },
+      "direct_calls": 4,
+      "reports": [
+        "PASS 126 component worker checks; parallel parity, off-owner refinement, read reporting, failure and queued/late cancellation",
+        "PASS 126 component worker checks; parallel parity, off-owner refinement, read reporting, failure and queued/late cancellation"
+      ]
+    },
+    {
+      "label": "archive",
+      "raw": {
+        "path": "/private/tmp/unison-archive-hints-tsoac22x/RESULT.json",
+        "bytes": 157948,
+        "sha256": "94aea6f3e56001163222bf750be5a95e296aae53965de2184d98c51f34ec3bee"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cache-namespace-archive-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "f146db342757fc643031b1bd09994f94a7ee4e24cb9711de290acd78380acc2a"
+      },
+      "direct_calls": 14,
+      "reports": []
+    }
+  ],
+  "completed_owned_steps": 9,
+  "all_owned_groups_and_CPU_tokens_closed": true,
+  "per_compiler": {
+    "namespace_controls": 67,
+    "unmodified_native_namespace_controls": 9,
+    "loader_controls": 80,
+    "unmodified_native_loader_controls": 7,
+    "component": 56,
+    "checkpoint": 1005,
+    "publication_fault": 27,
+    "reader_fault": 13,
+    "DNG": 1391,
+    "archive_publication_fault": 29,
+    "worker": 126
+  },
+  "archive_calls": {
+    "total": 14,
+    "compiles": 2,
+    "runtime_phases": 12
+  },
+  "scope": "One-use macOS fixed component-cache-v0 child under a caller-held private parent. Fresh refuses EEXIST; existing requires trusted device/inode; actual mkdir retained through sync failure; scoped open/close and all nested borrowed/known/uncertain directories preserved. Generated private fixtures only, no installed user namespace, photos/SDK/transport/automatic capture/report routing or power-loss proof.",
+  "RPC_interruption_reference": {
+    "admission_sha256": "53a522544f59b3e57ae250526200774f4ab752f8b032137b7018b6a250921c41",
+    "actual_parent_terminal": "91491/7ec39a/exit1/no session",
+    "owner_return_sha256": "088ef9fbc7a02d52f4f1ce2f9163c6373757d5f1f4c5b7ec2733f4f07ea9aefd",
+    "scope": "Separate consumed RPC failed-final-auditor run, resource closed; not a namespace test and not replayed."
+  }
+}

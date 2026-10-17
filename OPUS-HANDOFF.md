@@ -1,5 +1,36 @@
 # Unison implementation handoff
 
+## Latest namespace successor — 2026-10-17
+
+Branch `feat/component-cache-namespace`, sibling worktree
+`/Users/alexy/src/unison-component-namespace-20261017`, based on PR8, adds one-use
+macOS component-cache-v0 directory provision/open. Fresh refuses EEXIST; reopen
+requires trusted device/inode. Actual mkdir survives later sync failure with no
+rollback/retry. Scoped synchronous callback rechecks parent/name/FD, closes once
+and propagates the same uncertainty carrier; nested failures retain known manifest
+and namespace FDs plus all borrowed directories. No production namespace installed.
+
+Current stock/Ox Make/fullselftests/Dune/1272SRCchecks PASS,67namespace+9real-native/
+80loader+7real-native checks/compiler plus existing component/DNG/126worker/archive
+suites; exact receipt component-cache-namespace-actual-20261017.json and contract
+doc/component-cache-namespace.md. All nine workers/groups/token sets closed.
+First actual61854/d0ad68/1 intentionally stopped after five passed steps because a
+fresh Root RPC grant appeared; after actual RPC closure,18854/f0c867/0 finished
+only four unstarted steps. No test replay or competing build during that RPC.
+
+IMPORTANT main RPC admission53a52254 was consumed ONCE meanwhile: actual owner
+91491/7ec39a/exit1/no session; all8probe commands0, final auditor KeyError(cancel_reason).
+Main frozen342sources remain unchanged; independent Root resource-failure closure
+adoption f01c0b94 explicitly released Photo scheduling hold. Main's outside-frozen
+saved-only auditor verifies exact producer schemas/8ledgers/expected fixture hashes
+in memory/current lstat without payload rehash, original exit1/result preserved;
+its separate functional adoption is not inferred. See main OPUS and
+doc/component-remote-actual-saved-audit.md there. No replay or old-grant reuse.
+
+Next cache work: durable namespace identity binding, quota-admitted stage creation
+and capture/adoption/report routing. This optional cache integration does not make
+incomplete MakerNotes a deployment gate. No new media/SDK/transport authorization.
+
 ## Latest managed-loader successor — 2026-10-17
 
 Source commit `3d35cf81` is pushed as draft PR8:

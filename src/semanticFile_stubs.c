@@ -628,3 +628,168 @@ CAMLprim value unison_component_metadata_close(value descriptor)
   caml_unix_error(ENOSYS, "component metadata close", Nothing);
 #endif
 }
+
+#ifdef __APPLE__
+#define COMPONENT_NAMESPACE_NAME "component-cache-v0"
+struct component_cache_namespace {
+  struct stat parent, child;
+  dev_t expected_device;
+  ino_t expected_inode;
+  int existing, attempted, created, identified, ready, open_attempted;
+};
+#define CACHE_NAMESPACE(v) (*(struct component_cache_namespace **)Data_custom_val(v))
+static void cache_namespace_finalize(value ticket)
+{ free(CACHE_NAMESPACE(ticket)); CACHE_NAMESPACE(ticket) = NULL; }
+static struct custom_operations cache_namespace_ops = {
+  .identifier = "unison.component-cache-namespace/0",
+  .finalize = cache_namespace_finalize,
+  .compare = custom_compare_default, .hash = custom_hash_default,
+  .serialize = custom_serialize_default, .deserialize = custom_deserialize_default,
+  .compare_ext = custom_compare_ext_default, .fixed_length = custom_fixed_length_default
+};
+#endif
+
+CAMLprim value unison_component_namespace_prepare(value parent_value, value expected)
+{
+  CAMLparam2(parent_value, expected); CAMLlocal1(ticket);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  ticket = caml_alloc_custom(&cache_namespace_ops, sizeof(void *), 0, 1);
+  CACHE_NAMESPACE(ticket) = NULL;
+  struct component_cache_namespace *context = calloc(1, sizeof(*context));
+  if (!context) caml_raise_out_of_memory();
+  CACHE_NAMESPACE(ticket) = context;
+  int parent = unison_semantic_fd(parent_value, "component namespace parent FD");
+  if (fstat(parent, &context->parent) == -1)
+    caml_unix_error(errno, "component namespace parent", Nothing);
+  if (!record_directory_same(&context->parent, &context->parent))
+    caml_unix_error(EINVAL, "component namespace private parent", Nothing);
+  if (Is_block(expected)) {
+    value identity = Field(expected, 0);
+    intnat device = Long_val(Field(identity, 0)), inode = Long_val(Field(identity, 1));
+    context->expected_device = (dev_t)device;
+    context->expected_inode = (ino_t)inode;
+    if ((intnat)context->expected_device != device || inode < 0 ||
+        (uint64_t)context->expected_inode != (uint64_t)inode)
+      caml_invalid_argument("component namespace identity bounds");
+    context->existing = 1;
+  }
+  CAMLreturn(ticket);
+#else
+  caml_unix_error(ENOSYS, "component namespace prepare", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_namespace_provision(value ticket, value parent_value)
+{
+  CAMLparam2(ticket, parent_value);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_cache_namespace *context = CACHE_NAMESPACE(ticket);
+  if (!context || context->attempted) caml_invalid_argument("component namespace attempt consumed");
+  context->attempted = 1;
+  int parent = unison_semantic_fd(parent_value, "component namespace parent FD");
+  struct stat observed; int error = 0;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->parent, &observed)) error = EBUSY;
+  if (!error && !context->existing) {
+    if (mkdirat(parent, COMPONENT_NAMESPACE_NAME, 0700) == -1) error = errno;
+    else context->created = 1; /* actual effect, before any later failure */
+  }
+  if (!error && fstatat(parent, COMPONENT_NAMESPACE_NAME, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_directory_same(&observed, &observed)) error = EINVAL;
+  if (!error && context->existing &&
+      (observed.st_dev != context->expected_device || observed.st_ino != context->expected_inode)) error = EBUSY;
+  if (!error) { context->child = observed; context->identified = 1; }
+  if (!error && context->created && fsync(parent) == -1) error = errno;
+  if (!error) context->ready = 1;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component namespace provision", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component namespace provision", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_namespace_created(value ticket)
+{
+  CAMLparam1(ticket);
+#ifdef __APPLE__
+  struct component_cache_namespace *context = CACHE_NAMESPACE(ticket);
+  CAMLreturn(Val_bool(context && context->created));
+#else
+  caml_unix_error(ENOSYS, "component namespace created", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_namespace_identity(value ticket)
+{
+  CAMLparam1(ticket); CAMLlocal1(identity);
+#ifdef __APPLE__
+  struct component_cache_namespace *context = CACHE_NAMESPACE(ticket);
+  if (!context || !context->identified) caml_invalid_argument("component namespace not identified");
+  if ((uint64_t)context->child.st_ino > (uint64_t)Max_long)
+    caml_unix_error(EOVERFLOW, "component namespace inode", Nothing);
+  identity = caml_alloc_small(2, 0);
+  Field(identity, 0) = Val_long(context->child.st_dev);
+  Field(identity, 1) = Val_long(context->child.st_ino);
+  CAMLreturn(identity);
+#else
+  caml_unix_error(ENOSYS, "component namespace identity", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_namespace_open(value ticket, value parent_value)
+{
+  CAMLparam2(ticket, parent_value);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_cache_namespace *context = CACHE_NAMESPACE(ticket);
+  if (!context || !context->ready || context->open_attempted)
+    caml_invalid_argument("component namespace open unavailable or consumed");
+  context->open_attempted = 1;
+  int parent = unison_semantic_fd(parent_value, "component namespace parent FD");
+  struct stat observed; int error = 0, fd = -1;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->parent, &observed)) error = EBUSY;
+  if (!error && fstatat(parent, COMPONENT_NAMESPACE_NAME, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_directory_same(&context->child, &observed)) error = EBUSY;
+  if (!error) {
+    fd = openat(parent, COMPONENT_NAMESPACE_NAME, O_RDONLY | O_DIRECTORY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
+    if (fd == -1) error = errno;
+  }
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component namespace open", Nothing);
+  CAMLreturn(Val_int(fd));
+#else
+  caml_unix_error(ENOSYS, "component namespace open", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_namespace_check(value ticket, value parent_value, value directory)
+{
+  CAMLparam3(ticket, parent_value, directory);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_cache_namespace *context = CACHE_NAMESPACE(ticket);
+  if (!context || !context->ready || !context->open_attempted)
+    caml_invalid_argument("component namespace not open");
+  int parent = unison_semantic_fd(parent_value, "component namespace parent FD");
+  int fd = unison_semantic_fd(directory, "component namespace owned directory FD");
+  struct stat observed, named; int error = 0;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->parent, &observed)) error = EBUSY;
+  if (!error && fstat(fd, &observed) == -1) error = errno;
+  if (!error && !record_directory_same(&context->child, &observed)) error = EBUSY;
+  if (!error && fstatat(parent, COMPONENT_NAMESPACE_NAME, &named, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_directory_same(&observed, &named)) error = EBUSY;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component namespace binding", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component namespace check", Nothing);
+#endif
+}

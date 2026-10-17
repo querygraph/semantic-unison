@@ -4,6 +4,17 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Latest isolated namespace successor (`feat/component-cache-namespace`, based on
+PR8) now provides one-use fixed-child creation or trusted device/inode reopen,
+retained mkdir effects on sync failure, scoped directory settlement and nested
+known/uncertain/borrowed FD preservation. Current stock/Ox full Make selftests/
+Dune and original namespace/loader/worker/archive controls passed. It installs
+no production namespace or automatic capture/report path; durable owner identity
+binding and store orchestration remain explicit follow-ons. See
+`doc/component-cache-namespace.md`. Main's separate RPC was exercised once with
+all8commands0 but original final auditor exit1; its saved-only schema correction
+is separate evidence, not an original successful exit or permission to replay.
+
 Latest isolated managed-loader successor (`feat/component-cache-loader`, based
 on PR7) now authenticates digest-named UIX/UDI/UCR metadata through a borrowed
 private directory and an actual loaded-archive-owned reference. It closes each
