@@ -7,6 +7,20 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Record publisher now has original postrename/pre-sync fault proof plus all4current
+builds. Test-onlyfsyncshim (no production switch) proves directoryEIO afterrename
+retains published/exactbytes/no replay; stageEIO/EINTR leave unpublished and no
+retry. Focused20280/4c5cc4/0:41component+988checkpoint+21nativefaultchecks/compiler;
+repeated41setup is not extraindependentcoverage. Currentstock/Ox Make+selftests+
+Dune compile allPASS under commonactualcontroller66861/b6ab3a/0,1272productionSRC
+checks. Production-linked110workerchecks/compiler alsoPASS89713/f7593d/0. Allgroups/
+tokensclosed, no media/SDK/EXIO. Three exact receipts:
+`component-record-publication-fault-actual-20261017.json`,
+`component-record-publication-builds-actual-20261017.json`,
+`component-record-publication-worker-actual-20261017.json` in tests/qualification.
+Native record publication is qualified for these originals; persistent owner-index
+and automatic diskcache selection remain unimplemented. MainRPCpinsunchanged.
+
 macOS immutable-record publisher now implemented: independently authenticated
 readback + borrowedprivate0700directory/0600stage/fullnative/no-followbinding,
 stagefsync/exclusiverename/publishedidentitycheck/directoryfsync. No FDopens/dups/

@@ -1,0 +1,50 @@
+{
+  "state": "FOCUSED_AND_NATIVE_FAULT_CONTROLS_PASS_CLOSED",
+  "scope": "Test-only C fsync shim proves post-rename EIO publication retained and stage EIO/EINTR unretried; production source unchanged, no production fault switch",
+  "actual_terminal": {
+    "session": 20280,
+    "chunk": "4c5cc4",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "test_only_fault_builds": {
+    "ox": {
+      "executable_sha256": "ef56066ce399b1c606abd8497fd81a0f396bd51022ccecb8a3b52003d5ebd79f",
+      "macro": "fsync=unison_record_control_fsync",
+      "production_fault_switch": false
+    },
+    "stock": {
+      "executable_sha256": "640d374ce5476294f683974ecdd52c59411813a07e7f8bf1613c447b30536807",
+      "macro": "fsync=unison_record_control_fsync",
+      "production_fault_switch": false
+    }
+  },
+  "calls": 32,
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-controls-4pdjc_0d/RESULT.json",
+      "bytes": 128880,
+      "sha256": "614210bd366e0d92e896dffb5899d3ae6d4486ee5cd2e4cc2052d7516c9c78fe"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-fault-controls-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "c5853484096256a87bd0749c3939ae1d3c6976be6b026d11f707212b76c2fd7d"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-fault-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "99e3a59696804b294ff04892f7fb541a4c883f5a987bc45e7f68dadaf4aabd20"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-fault-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-fault-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 48,
+      "sha256": "6cb5e42b08ae299efeb84959bec33042ed7de2e766a1cfb536d71a7ba2e1df90"
+    }
+  ]
+}

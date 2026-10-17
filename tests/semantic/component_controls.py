@@ -22,7 +22,9 @@ def main():
     sources=[ROOT/'src'/(m+ext) for m in modules for ext in ('.ml','.mli','.ox.mli.in')]
     sources += [ROOT/'src'/name for name in ('semantic_mode_filter.ml','semanticHash_stubs.c',
                                            'semanticHash_evp.h','semanticFile_stubs.c')]
-    sources += [ROOT/'tests/semantic'/name for name in ('component_hash.ml','component_checkpoint.ml')]
+    sources += [ROOT/'tests/semantic'/name for name in ('component_hash.ml','component_checkpoint.ml',
+                                                       'record_publication_fault.ml','record_fault_stubs.c')]
+    sources += [Path(__file__)]
     result=dict(complete=False,calls=[],source_pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sources},work=str(root),SDK_invoked=False,media_payload_opened=False)
     env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1')
@@ -47,7 +49,7 @@ def main():
                 (work/(module+ext)).write_text(out['stdout'])
         for name in ('semanticHash_stubs.c','semanticHash_evp.h','semanticFile_stubs.c'):
             shutil.copyfile(ROOT/'src'/name,work/name)
-        for name in ('component_hash.ml','component_checkpoint.ml'):
+        for name in ('component_hash.ml','component_checkpoint.ml','record_publication_fault.ml','record_fault_stubs.c'):
             shutil.copyfile(ROOT/'tests/semantic'/name,work/name)
         command=[compiler,'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
         for module in modules:command += [module+'.mli',module+'.ml']
@@ -67,6 +69,20 @@ def main():
                     path.write_text('let leak (shared:ComponentHash.'+typ+') = Domain.Safe.spawn (fun () -> '+operation+')\n')
                     outcome=call([compiler,'-c',path.name],expected=2)
                     assert 'nonportable' in outcome['stderr'] or 'contended' in outcome['stderr']
+
+            # Explicit original fault build, never the production executable:
+            # compile the shim without the macro, then compile only the native
+            # record implementation with fsync redirected to that shim.
+            call([compiler,'-c','record_fault_stubs.c'])
+            call([compiler,'-ccopt','-Dfsync=unison_record_control_fsync','-c','semanticFile_stubs.c'])
+            fault=[compiler,'-I','+unix','unix.cmxa']+[m+'.cmx' for m in modules]
+            fault += ['component_hash.cmx','record_publication_fault.ml','semanticHash_stubs.o',
+                      'semanticFile_stubs.o','record_fault_stubs.o','-o','record-publication-fault']
+            call(fault);call([str(work/'record-publication-fault')])
+            result.setdefault('test_only_fault_builds',{})[label]={
+                'macro':'fsync=unison_record_control_fsync','production_fault_switch':False,
+                'executable_sha256':hashlib.sha256((work/'record-publication-fault').read_bytes()).hexdigest()}
+            save(root,result)
 
         finally:os.chdir(previous)
     assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in result['source_pins'].items())

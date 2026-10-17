@@ -194,9 +194,16 @@ a published target must not be removed or replayed. The ticket owns no FD, so
 caller closure and any uncertain-close evidence remain explicit owner duties.
 This is cooperative namespace fencing, not hostile same-UID compare-and-swap,
 mount-incarnation proof, hardware power-loss durability or owner-index publication.
-Other platforms refuse without a pathname fallback. Post-rename syscall-failure
-injection and full-build successor qualification remain outstanding; original
-controls cover success/readback, collision, symlink, mutation and replay refusal.
+Other platforms refuse without a pathname fallback. Original controls cover
+success/readback, collision, symlink, mutation and replay refusal. A separately
+compiled test-only fsync shim now proves post-rename directory EIO retains the
+published effect/exact bytes/replay refusal, while pre-rename stage EIO and EINTR
+preserve the stage and are not retried. No production fault switch is installed.
+Stock/Ox each pass21 fault checks,41 component and988 checkpoint checks (including
+every framing-vector truncation); the repeated41-check setup in the fault binary
+is not additional independent coverage. Current Make+selftests and Dune compile
+checks pass on both compilers with1272 production-source checks. These results do
+not implement the persistent owner index or establish hardware durability.
 
 Reuse the trust boundary of local Unison state, not peer reports or file-side
 metadata. This explicitly trusts the local state owner; checksums are corruption

@@ -1,0 +1,37 @@
+{
+  "state": "CURRENT_WORKER_CONTROLS_PASS_CLOSED",
+  "scope": "Production-linked stock/Ox component worker controls against current record-publication Make artifacts",
+  "actual_terminal": {
+    "session": 89713,
+    "chunk": "f7593d",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-component-worker-controls-fzjau1k2/RESULT.json",
+      "bytes": 125273,
+      "sha256": "1b72606b3972a715df534811da09621f32379bda8a946bccf326f77fba648064"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-worker-controls-20261017-001/SHARED-START.json",
+      "bytes": 1316,
+      "sha256": "00cb3deec9347ade2ca6a798252a1fe477f86651695aa498dd3aff578166abac"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-worker-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "703da72bbab5d33af3c24e824c324da53bdd50df52c9f239a6cd2a8b59cd5594"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-worker-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-record-publication-worker-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "eaaaae20905e005634deb41e879fbf256420f12cfb83627fcf5d4fb0ff79c32e"
+    }
+  ]
+}
