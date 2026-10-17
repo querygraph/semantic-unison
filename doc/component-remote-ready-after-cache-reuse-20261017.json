@@ -1,0 +1,16 @@
+{
+  "state": "SOURCE_READY_REQUEST_FRESH_ROOT_SCHEDULING_NO_DISPATCH",
+  "observed_unix": 1792221343.069411,
+  "request_sha256": "d0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49",
+  "plan_sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad",
+  "execution_sources_checked": 342,
+  "workspace": "/private/tmp/u-cr-cf119542138e",
+  "workspace_exists": false,
+  "admission_exists": false,
+  "owned_build_test_handles": "all terminal: focused44609/428946/0 and full93249/2fc314/0; six workers/groups/tokens closed",
+  "runtime_artifacts_rehashed": false,
+  "runtime_dispatched": false,
+  "cache_draft_pr": "https://github.com/querygraph/unison/pull/4",
+  "isolated_cache_head": "10ace908",
+  "requires": "Fresh exact Root IO scheduling/admission, then full admitted guard; no present Photo liveness or grant inferred"
+}
