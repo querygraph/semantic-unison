@@ -1,6 +1,24 @@
 # Unison implementation handoff
 
-Latest implementation successor: `5537ec16`, draft PR7
+Latest loader successor: `3d35cf81`, draft PR8
+https://github.com/querygraph/unison/pull/8, branch `feat/component-cache-loader`,
+worktree `/Users/alexy/src/unison-component-loader-20261017`, stacked on PR7.
+Strict macOS UIX/UDI/UCR digest-leaf reads now use the actual loaded archive hint
+through Update.load_component_owner_index. Borrowed directory, no discovery or
+creation; owned leaf FDs close once, with original failure/last-known identity/
+known ancestor retention on close uncertainty and no numeric retry/finalizer.
+Current stock/Ox Make/fullselftests/Dune and1272SRCchecks passed; percompiler
+80loader+7unmodified-native checks and existing component/DNG/126worker suites;
+14archive-probe calls (2compiles+12runtime phases). Actual35813/42bf8f/0/no session,
+all nine contained workers/groups/tokens closed. Earlier failed fixture exception
+expectation and missing Ox owner-only annotation and pre-identity-fix pass are
+preserved; current proof uses final002 builds/controls. See that worktree's
+component-cache-loader-actual-20261017.json and doc/component-cache-loader.md.
+No namespace bootstrap, automatic capture/adoption/normal report routing or
+media/SDK/transport/production/power-loss qualification. Main runtime342RPC pins
+remain unchanged; no fresh admission/workspace observed, no RPC dispatch.
+
+Previous worker successor: `5537ec16`, draft PR7
 https://github.com/querygraph/unison/pull/7, branch
 `feat/component-owned-worker-refresh`, worktree
 `/Users/alexy/src/unison-component-owned-worker-20261017` (stacked on PR6).

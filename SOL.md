@@ -4,6 +4,14 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Latest isolated cache loader is source `3d35cf81`, draft PR8, stacked on PR7:
+bounded macOS UIX/UDI/UCR reads now bind to an actual loaded local archive hint,
+with no-follow digest-leaf opens and retained close uncertainty. Current stock/Ox
+full Make selftests/Dune and original loader/archive/worker controls passed.
+This does not provision a namespace, automatically capture/adopt/report caches,
+merge into main or qualify new RPC/media/SDK/production work. See the sibling
+`unison-component-loader-20261017` handoff and `doc/component-cache-loader.md`.
+
 Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
 commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
 record publication now have current stock/Ox Make+selftests/Dune and original
