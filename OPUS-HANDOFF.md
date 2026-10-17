@@ -2873,3 +2873,19 @@ archive, not a separate identity file. Exact pins component-namespace-archive-
 actual-20261017.json. Retained old-code new-tail compatibility and Dune still
 pending for this successor. Automatic report routing remains incomplete; no
 media/SDK/transport or active owned resources.
+
+
+## Namespace-tail old-code compatibility — 2026-10-17
+
+Actual retained pre-component production Update/Proplist/native objects now read
+current stock/Ox archives containing BOTH UAX/UAN tails byte-exact, rewrite them
+without either optional hint, leave all three published cache payloads unchanged,
+and current code restores the ordinary archive with no manifest/namespace authority.
+Actual30670/a9bf3e/0/no session; worker89496 reaped0/groupsabsent/tokensclosed,
+13 direct calls settled. Original retained CLI was rehashed, not invoked. Exact
+receipt component-store-namespace-legacy-actual-20261017.json. Source/build pins
+unchanged; only fixed probe gained an explicit legacy-missing phase. No all-old-
+versions/network/platform/media claim. No live owned jobs/resources. Next actual
+implementation: endpoint-owner report orchestration with scoped metadata load,
+immutable worker await, source/head recheck and optional capture; no synchronous
+namespace scope may span that await. Automatic routing is still NOT implemented.

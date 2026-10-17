@@ -1,0 +1,24 @@
+{
+  "complete": true,
+  "actual_owner": {
+    "session": 30670,
+    "terminal_chunk": "a9bf3e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "result": {
+    "path": "/private/tmp/unison-archive-legacy-9vejn_1m/RESULT.json",
+    "bytes": 259029,
+    "sha256": "2213df702feee8ce136d995edf9c65435126cd4ad0a8d217847c06d9557a9aaa"
+  },
+  "closure": {
+    "path": "/private/tmp/unison-store-namespace-legacy-controls-20261017-001/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "75ac9f6344f008d3251e7c59e5fcbe69f4a5c34838b8ea791b4d95652a7d2b33"
+  },
+  "scope": "Actual retained pre-component production reader/writer with current stock/Ox UAX+UAN archives; exact read preservation, rewrite drops hints, three payloads preserved and current cold miss",
+  "limitations": [
+    "Original old CLI not invoked; production objects linked into fixed probe",
+    "Not all historical versions/platforms/network/camera corpus"
+  ]
+}

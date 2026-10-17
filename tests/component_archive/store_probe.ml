@@ -50,6 +50,10 @@ let ()=
   require(Update.component_owner_namespace left=Some(DngComponents.cache_namespace_identity namespace))
    "store namespace identity not adopted";
   Update.commitUpdates ()
+ end else if phase="missing" then begin
+  require(Update.component_owner_reference left=None && Update.component_owner_namespace left=None)
+   "legacy rewrite retained optional owner authority";
+  require !Update.foundArchives "legacy rewrite reset ordinary archive"
  end else begin
   require !Update.foundArchives "archive not restored";
   let expected=match Update.component_owner_namespace left with
