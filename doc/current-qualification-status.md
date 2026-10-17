@@ -5,6 +5,16 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
+Latest isolated capture write path is qualified in draft PR3, codee64ffc4b:
+quota-bound distinct empty stage admission, bounded producer sealing, independent
+readback and one-use record-before-entry publication. A forced entry collision
+preserves the record-only orphan, foreign target, entry stage and consumed quota;
+it does not advance an index or silently retry/refund. Current stock/Ox all4builds,
+full Make selftests,1031DNG/1005checkpoint/27nativefault/110workerchecks/compiler
+passed; all groups/tokens closed. Exact isolated evidence:
+`tests/qualification/dng-cache-capture-actual-20261017.json`. Managed lookup,
+recovery scanning and automatic activation remain open; main RPC pins unchanged.
+
 Isolated cache follow-up is reviewed in [draft PR3](https://github.com/querygraph/unison/pull/3),
 stacked against `feat/semantic-dng-oxcaml`; quota code6e7c82bd is now qualified.
 Current stock/Ox Make/fullselftests and Dune compile passed with1272production
