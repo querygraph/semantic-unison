@@ -120,3 +120,46 @@ shutdown machinery and returns only immutable component summaries. Restoration
 reports no new decoder outcomes: historical interpretations are not fresh decoder
 approvals. Automatic cache selection and trusted persistent record storage remain
 separate owner work.
+
+## Persistent owner-store contract (next implementation)
+
+Reuse the trust boundary of local Unison state, not peer reports or file-side
+metadata. This explicitly trusts the local state owner; checksums are corruption
+detection, not authentication against another process with that owner's access.
+Do not make an arbitrary existing blob trusted by computing its digest at load.
+
+The owner index must bind the root/path identity, successful extraction generation,
+complete input SHA256, checkpoint SHA256, base parser contract, and the exact
+ordered decoder target/ID/implementation declarations. The initial capture must
+come from the live successful extraction, not from deserializing an unknown blob.
+Treat the source epoch as a freshness hint; restoration still performs complete
+input verification. A different decoder inventory triggers explicit per-target
+invalidation/replacement, not an unqualified claim that historical views are
+current. Parent replacement invalidates its descendants; independent siblings
+retain their own provenance and hashes.
+
+Keep immutable checkpoint blobs addressed by their digest and publish the owner
+index only after bounded record validation, complete writes, sync, and successful
+descriptor closure. Use an owned private directory and non-following opens with
+opened-descriptor/name identity checks. Never overwrite a conflicting record or
+follow a symlink. Charge bounded bytes and entries before creation; an interrupted
+reservation may waste capacity rather than double-grant it. Do not evict an entry
+whose owner operation has not settled. A crash before index publication leaves an
+unreferenced blob, which supplies no reuse authority; after publication, malformed
+or absent data causes a cache miss and normal extraction. Corruption must not
+convert a cache miss into transfer or reconciliation authority.
+
+Store operations belong to the coordinated owner/worker lifecycle. An uncertain
+close preserves every preclose identity and propagates unresolved ownership; it
+must not be swallowed as a best-effort cache miss, retried by numeric descriptor,
+or followed by resource-release claims. Ordinary unsupported format, absent cache
+or stale schema may decline without disabling otherwise qualified exact sync.
+No store path may open or alter source photos for publication.
+
+Required original controls: capture/load roundtrip, forged/self-hashed blob
+rejection without an owner binding, root/path/generation mismatch, changed input,
+decoder upgrade/removal, independent sibling composition, torn write/index crash
+boundaries, quota exhaustion, symlink/name replacement, and injected combined
+read/write/close failures with retained uncertainty. Qualify both build systems
+and compilers before enabling automatic selection. These requirements describe
+the planned store; no persistent namespace is provisioned by this document.

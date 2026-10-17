@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Current accumulated cache/worker source now also passes Dune compilation under
+stock and Ox:actual36274/4d657c/0 and73981/8cc961/0, both worker groups/tokens
+closed,318currentproductionpins rechecked perbuild. Receipt
+`tests/qualification/component-cache-dune-actual-20261017.json`. Together with
+prior current Make+selftests and102workerchecks/compiler, both build systems are
+covered. Persistent store remains unimplemented; its concrete owner trust/index,
+atomic publication/quota/crash and uncertain-close contract is now in
+`doc/component-checkpoints.md`. Existing merge-base checksums are not same-UID
+authentication and must not silently promote arbitrary checkpoint bytes to trust.
+
 Restore-specific lifecycle successor now passes102workerchecks/compiler against
 the unchanged qualified stock/Ox production artifacts. New controls cover queued
 restore cancellation with zero read reports, changed input, insufficient budget,

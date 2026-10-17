@@ -1,0 +1,119 @@
+{
+  "state": "DUNE_COMPILE_PASS_CLOSED",
+  "scope": "Current stock/Ox Dune compile; full Make/selftests and worker controls covered by separate exact receipts; persistent store remains design only",
+  "source_head": "c55a90de",
+  "runs": [
+    {
+      "compiler": "stock",
+      "src_pins_checked": 318,
+      "actual_terminal": {
+        "session": 36274,
+        "chunk": "4d657c",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "child": {
+          "pid": 26757,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 26757,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "compiler": "ox",
+      "src_pins_checked": 318,
+      "actual_terminal": {
+        "session": 73981,
+        "chunk": "8cc961",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "closure": {
+        "child": {
+          "pid": 27830,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 27830,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "pins": [
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-stock-20261017-001/RESULT.json",
+      "bytes": 48824,
+      "sha256": "6cc2bc60e38b87c6102cbbce0cb7b96cb509fbb5a9647b6a55d71c64362ba005"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-stock-20261017-001/SHARED-START.json",
+      "bytes": 1307,
+      "sha256": "faf606fba071c52f7d768e0ad93133f9b2df619426d90ec56541e64540c23fe6"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-stock-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "adaf9e83eb24bc6e0798a75c865bcb181db9c499a027eddee044eae90404e133"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-stock-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "15ffe679d4391f59fe242a0d274e372d3a119c46284290854a5621e8da54496c"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-stock-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-ox-20261017-001/RESULT.json",
+      "bytes": 48828,
+      "sha256": "4db12edb2070a2f085fc07e2f0ddc9ed2e1b466bb45ee22cdeb379198bd6094b"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-ox-20261017-001/SHARED-START.json",
+      "bytes": 1302,
+      "sha256": "5bb7473857c49ae8b1f3192357bc53492d10f6e742fa177f4ee9b0030fdb37c2"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-ox-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "45b1b75d19b6f9ee2af4946eb6c84d19ac29a98d96a9f6c6948f6ac57b4857d8"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-ox-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 197,
+      "sha256": "9b8d16a7fe5d5026f806e59811e9bfac19403aec3254d263a7506b8f77cbe835"
+    },
+    {
+      "path": "/private/tmp/unison-checkpoint-dune-ox-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
