@@ -215,3 +215,19 @@ directory or borrowed namespace. Uncertain/retained descriptor identities remain
 the settlement evidence. The component RPC source scope also catches this carrier
 inside its transaction, preserving source admission through unresolved ownership.
 No wire format or peer capability changes are made.
+
+
+## Cold cache cancellation/unsupported behavior
+
+A cold owner with no manifest and no namespace identity now builds an empty
+in-memory index and runs inspection before creating any cache directory. Cancelled
+and unsupported results leave the configured parent empty and do not adopt a
+hint. Only a valid captured checkpoint, unchanged source/head and successful
+parent recheck can provision the first namespace and publish its store. Existing
+trusted references still require scoped authenticated reads before the worker.
+
+This avoids poisoning the first-use cache with an unadopted directory after a
+normal cancelled/unsupported report. It does not silently recover or adopt an
+orphan produced by a real publication failure; those actual effects remain
+preserved and require explicit owner recovery. Original controls reproduce the
+old first-cancellation failure before the source correction.

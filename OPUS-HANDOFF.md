@@ -6,7 +6,8 @@
 Checkout /Users/alexy/src/unison-sol-review-20261017, branch
 integration/sol-consolidated-review, combines all current feature/cache/report,
 producer auditor, integration regressions and qualified component-source owner
-fix. No GitHub PR merged. Production source is identical to sourceecad82f3;
+fix. No GitHub PR merged. Production source initially matched sourceecad82f3; the qualified cold-start
+follow-up below subsequently changes Update only.
 new merges reconcile navigation and original regression harnesses only. This
 section supersedes earlier scattered branch-current statements below; historical
 raw/sealed receipts remain unchanged.
@@ -3563,3 +3564,20 @@ Current source build rebind and freshinspector proof are in consolidated-review-
 source-actual-20261017.json. Pending property request remains at its separate
 frozen checkout/requeste60975f3; admission required before actualdispatch. No
 activeownedresources. Review limitations remain explicit; fullgoalnotcomplete.
+
+
+## Cold first-report namespace fix — latest 2026-10-17
+
+Actual before-fix control reproduced cancelled first report creating an unadopted
+namespace (testworker1, expected-counterexample controller81260/106d7b/0). Cold
+NoRef/NoIdentity now inspects with an empty in-memory index first. Cancelled or
+unsupported outcomes leave parentempty/hintNone; only fenced successful capture
+creates/publishes namespace. Existing trustedcache still loads before await.
+Publication-failure orphans remain preserved; no unsafe automatic adoption.
+
+Current stock39713/d7a95e/0 andOx+bothcontrols+bothDune7204/2fd03f/0 PASS, all
+workers/groups/tokensclosed. Receipt component-cold-cache-first-failure-actual-
+20261017.json pins the preserved failure and fresh successes. This supersedes
+source-identical-to-ecad notes for Update; other production files unchanged.
+No IO/camera/SDK/transport dispatch. Frozen property request on integration
+checkout remains untouched and requires its own exact fresh admission.

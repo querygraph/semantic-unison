@@ -1,5 +1,14 @@
 # Implementation status, updated 2026-10-17
 
+Latest consolidated PR13 source additionally fixes cold report cancellation and
+unsupported input creating an unadopted namespace. The reproduced pre-fix failure
+and fresh stock/Ox Make+selftests/Dune successes are recorded in
+../tests/qualification/component-cold-cache-first-failure-actual-20261017.json.
+Only a successful fenced capture creates the first namespace; no automatic
+publication-orphan recovery is inferred. Prior source-rebind checkpoints below
+remain historical. Pending IO request stays in its separate frozen checkout.
+
+
 ## Current local integration candidate — 2026-10-17
 
 `integration/sol-release-candidate`, merge f5b496f5, combines local cache/report

@@ -63,6 +63,25 @@ let ()=
   ~path:(Fspath.resolve_existing source) ~generation_sha256:(SemanticHash.string "fixture-generation")
   ~pool ~cancellation:cancelled ~decoders ~max_read_bytes:8192L fd)=None)
   "pre-cancelled report touched invalid cache parent";
+ if phase="write" then begin
+  let cancel=HelperSupervisor.cancellation() in
+  let pending=Update.inspect_configured_components left (Fspath.resolve_existing source)
+   ~pool ~cancellation:cancel ~decoders ~max_read_bytes:8192L fd in
+  HelperSupervisor.cancel cancel;
+  require(Lwt_unix.run pending=None) "cold submitted cancellation reported success";
+  require(Array.length(Sys.readdir storage)=0 && Update.component_owner_reference left=None)
+   "cold cancelled inspection created an unadopted namespace";
+  let unsupported=Filename.concat state "unsupported-original.bin" in
+  let out=open_out_bin unsupported in output_string out "original unsupported tiny input";close_out out;
+  let input=Unix.openfile unsupported [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+  let observed=Lwt_unix.run(Update.inspect_configured_components left (Fspath.resolve_existing unsupported)
+   ~pool ~cancellation:(HelperSupervisor.cancellation()) ~decoders ~max_read_bytes:8192L input) in
+  Unix.close input;
+  require((match observed with Some {SemanticWorkers.components=Error _;_}->true|_->false))
+   "unsupported cold input did not return explicit unsupported result";
+  require(Array.length(Sys.readdir storage)=0 && Update.component_owner_reference left=None)
+   "unsupported cold inspection created an unadopted namespace"
+ end;
  let first=inspect () in
  require(first.full_sha256=SemanticHash.string(fixture true false (String.make 64 'X')))
   "report full hash differs";

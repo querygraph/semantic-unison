@@ -1,0 +1,121 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 81260,
+      "chunk": "106d7b",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Expected counterexample controller; test worker failed1"
+    },
+    {
+      "session": 39713,
+      "chunk": "d7a95e",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 7204,
+      "chunk": "2fd03f",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "stock-make",
+      "result": {
+        "path": "/private/tmp/unison-cold-cache-stock-make-20261017-001/RESULT.json",
+        "bytes": 51179,
+        "sha256": "20bb437cc1949159ed9aaf3880fd2524d0d3d785d53d577d6d925fa7dd7e9cab"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "8bc799eeb42b290bb3a1d997a9f66eceaa59dfc4bf9694b3b57cba9d29a3760e"
+      }
+    },
+    {
+      "name": "stock-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-of1e8i6t/RESULT.json",
+        "bytes": 96731,
+        "sha256": "e895a18653c36ca02157dcefce9867e78d3b9fd245b8009da061c8fb364ed83d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-stock-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "db2a3d6cd161fe30a3a9deecaa167ff93c38c69da1dd0c0fe2c46daca99aca7c"
+      }
+    },
+    {
+      "name": "ox-make",
+      "result": {
+        "path": "/private/tmp/unison-cold-cache-ox-make-20261017-001/RESULT.json",
+        "bytes": 51185,
+        "sha256": "bc84210c36ef330014ebb1410039229e83bf73c7c55df6f5f61e97d716631cb5"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "0656237da451564c3e7945587dacb1767d52c9af945db1553c5a2d37f2e1b7d8"
+      }
+    },
+    {
+      "name": "both-controls",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-16jkb0lk/RESULT.json",
+        "bytes": 148254,
+        "sha256": "4bc18dcf7cf10fa0ff8ef4993b3738dd4fa2e43603189ea7fc30310ed5b3860c"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-both-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "134063f0502a7478f1dad0d1d68102be8a9cb25941e2c113b4a6bb0ccbaf2bc7"
+      }
+    },
+    {
+      "name": "stock-dune",
+      "result": {
+        "path": "/private/tmp/unison-cold-cache-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50623,
+        "sha256": "7bf2f5a6e73a7b89f497338a0cdd2baa048ee34ec64a69f62283f54195dd7602"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "ab1d1e3451292dd1a44411ff0cb54e4759dd9cc0e7bf23a3191acc6071471b9b"
+      }
+    },
+    {
+      "name": "ox-dune",
+      "result": {
+        "path": "/private/tmp/unison-cold-cache-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50627,
+        "sha256": "2d4b0998e41b75531cc951d6d860980e9126cd05ed2297b14d370e58396316bf"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-cold-cache-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "004b6ac2ada0ba397e9cdcf797268e71b8ec93d4224d4189f472d73c406d4918"
+      }
+    }
+  ],
+  "preserved_before_fix": {
+    "closure": {
+      "path": "/private/tmp/unison-cold-cache-before-fix-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3d9fe590aed87c0fede9f28b995b9e1d775456a53bbaf68d8fc3105888e38c96"
+    },
+    "error": {
+      "path": "/private/tmp/unison-cold-cache-before-fix-20261017-001/SHARED-STDERR.txt",
+      "bytes": 1927,
+      "sha256": "abdd2cd66083c4791bfc36bbf21fc4db13509d55d7e8ed83c8ea19cc19216c92"
+    }
+  },
+  "scope": "Cold cancelled/unsupported component report creates no namespace/hint; later valid capture/reuse/restart still works; stock/Ox Make+selftests/Dune",
+  "limitations": [
+    "Does not automatically recover publication-failure orphans",
+    "No media/SDK/transport/runtime IO grant or deployment"
+  ]
+}

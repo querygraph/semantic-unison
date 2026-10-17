@@ -673,20 +673,20 @@ let inspect_cached_components ?(check_parent=fun () -> ()) fspath ~parent ~path 
     | _ ->
     check_parent ();
     let key=Fspath.toString path in
-    let namespace=DngComponents.prepare_cache_namespace ?expected:identity ~parent () in
-    DngComponents.provision_cache_namespace namespace ~parent;
-    let identity=DngComponents.cache_namespace_identity namespace in
-    let index,record=DngComponents.with_cache_namespace namespace ~parent(fun directory ->
-      let index=match reference with
-        | None -> DngComponents.empty_owner_index ~max_entries:1024 ~max_bytes:8388608
-        | Some(binding,expected_manifest_sha256) ->
-          match DngComponents.load_owner_index ~directory ~expected_manifest_sha256 ~binding
+    let index,record=match reference,identity with
+      | None,None -> DngComponents.empty_owner_index ~max_entries:1024 ~max_bytes:8388608,None
+      | Some(binding,expected_manifest_sha256),Some expected ->
+        let namespace=DngComponents.prepare_cache_namespace ~expected ~parent () in
+        DngComponents.provision_cache_namespace namespace ~parent;
+        DngComponents.with_cache_namespace namespace ~parent(fun directory ->
+          let index=match DngComponents.load_owner_index ~directory ~expected_manifest_sha256 ~binding
             ~max_entries:1024 ~max_bytes:8388608 () with
-          | Some index -> index
-          | None -> raise(Util.Transient "Selected component manifest is missing") in
-      let record=match DngComponents.select_owner_entry index ~root_identity ~path:key ~generation_sha256 with
-        | None -> None | Some entry -> DngComponents.load_owner_record ~directory ~entry () in
-      index,record) in
+            | Some index -> index
+            | None -> raise(Util.Transient "Selected component manifest is missing") in
+          let record=match DngComponents.select_owner_entry index ~root_identity ~path:key ~generation_sha256 with
+            | None -> None | Some entry -> DngComponents.load_owner_record ~directory ~entry () in
+          index,record)
+      | _ -> raise(Util.Transient "Component manifest/namespace authority is incomplete") in
     let binding=match reference with Some(binding,_) -> binding
       | None -> SemanticHash.string("unison-component-report-owner/0:"^root_identity) in
     BorrowedWork.bind (fun () -> SemanticWorkers.components_indexed pool cancellation ~index
@@ -703,7 +703,7 @@ let inspect_cached_components ?(check_parent=fun () -> ()) fspath ~parent ~path 
               a.st_kind=b.st_kind && a.st_size=b.st_size && a.st_mtime=b.st_mtime && a.st_ctime=b.st_ctime in
             if not(same inspection.stats (Unix.LargeFile.fstat source) && same inspection.stats (Fs.stat path)) then
               raise(Util.Transient "Component source changed before cache publication");
-            if component_owner_reference fspath<>reference || component_owner_namespace fspath<>Some identity && reference<>None then
+            if component_owner_reference fspath<>reference || component_owner_namespace fspath<>identity then
               raise(Util.Transient "Component archive head changed during inspection");
             (match summary.checkpoint with None -> raise(Util.Transient "Component capture checkpoint missing")
              | Some checkpoint ->
@@ -713,7 +713,7 @@ let inspect_cached_components ?(check_parent=fun () -> ()) fspath ~parent ~path 
                if previous<>Some(DngComponents.owner_entry_sha256 entry) then begin
                  let store=DngComponents.prepare_managed_cache_store ~entry ~checkpoint ~index
                    ~expected_entry_sha256:previous ~binding ~max_bytes:8589934592L ~max_entries:4096 in
-                 let namespace=DngComponents.prepare_cache_namespace ~expected:identity ~parent () in
+                 let namespace=DngComponents.prepare_cache_namespace ?expected:identity ~parent () in
                  DngComponents.provision_cache_namespace namespace ~parent;
                  if DngComponents.execute_managed_cache_store store ~namespace ~parent then begin
                    check_parent ();
