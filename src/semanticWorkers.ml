@@ -11,6 +11,11 @@ type reconciliation = { merge_plan : (SemanticDelta.t, string) result;
 type identification = { formats : string list; fingerprint : fingerprint option;
                         stats : Unix.LargeFile.stats }
 type recognition = { formats : string list; stats : Unix.LargeFile.stats }
+type component_summary = { full_sha256 : string; layout_sha256 : string;
+  projections : (ComponentHash.role * ComponentHash.projection option) list;
+  refinements : DngComponents.outcome list; hash_bytes_requested : int64 }
+type component_inspection = { components : (component_summary, string) result;
+                              stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int }
 exception Failed of string
 exception Cancelled_job
@@ -18,12 +23,14 @@ type response = Hashed of fingerprint | Inspected of inspection
   | Observed of observation
   | Identified of identification
   | Recognized of recognition
+  | Component_inspected of component_inspection
   | Reconciled of reconciliation
   | Applied of SemanticDelta.application
   | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
 type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
+  | Components of DngComponents.decoders * int64
   | Identify of (FormatRecognition.handle * bool) list
   | Recognize of (FormatRecognition.handle * bool) list
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
@@ -114,6 +121,18 @@ let execute job =
         Inspected {proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
           ~max_payload:(FormatExtension.payload_limit extension)
           (FormatExtension.implementation extension) file; stats}
+      | Components (decoders,max_read_bytes) ->
+        let components=DngComponents.with_snapshot ~decoders ~max_read_bytes file
+          (fun session ~initial:_ ~refined outcomes ->
+            check_cancel ();
+            let projections=List.map (fun role -> role,ComponentHash.projection refined role)
+              [ComponentHash.Encoded_pixels;ComponentHash.Standard_metadata;
+               ComponentHash.Private_metadata;ComponentHash.Structural;ComponentHash.Opaque] in
+            {full_sha256=ComponentHash.full_sha256 refined;
+             layout_sha256=ComponentHash.layout_sha256 refined;projections;
+             refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session}) in
+        check_cancel ();SemanticFile.check file;
+        Component_inspected {components;stats}
       | Observe extension ->
         let proof = SemanticDelta.inspect ~span_semantics:(FormatExtension.span_semantics extension)
           ~max_payload:(FormatExtension.payload_limit extension)
@@ -149,7 +168,7 @@ let execute job =
     else result,reads
   with
   | Cancelled_job -> Cancelled,None
-  | SemanticFile.Invalid reason | Invalid_argument reason -> Error reason,None
+  | SemanticFile.Invalid reason | ComponentHash.Invalid reason | Invalid_argument reason -> Error reason,None
   | Unix.Unix_error (err, operation, _) -> Error (operation ^ ": " ^ Unix.error_message err),None
   | _ -> Error "unexpected digest worker failure",None
 let rec worker shared () =
@@ -359,7 +378,7 @@ let submit t cancellation fd requested_operation =
           end)) (function
         | None | Some Cancelled -> return None
         | Some (Error reason) -> fail (Failed reason)
-        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
+        | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Component_inspected _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
           else return (Some result)) fail in
     let admitted_execution () = match t.io with
@@ -367,7 +386,7 @@ let submit t cancellation fd requested_operation =
       | Some io ->
           let descriptors = match !operation with
             | Apply (_, _, output) | Snapshot (_,output) -> [!owned;output]
-            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Reconcile _ -> [!owned] in
+            | Digest | Inspect _ | Observe _ | Identify _ | Recognize _ | Components _ | Reconcile _ -> [!owned] in
           let devices = IoAdmission.devices_of_fds descriptors in
           BorrowedWork.try_bind
             (fun () -> IoAdmission.with_devices io admission_cancel ~devices execute)
@@ -417,6 +436,13 @@ let inspect t cancellation ~extension fd =
   | None -> return None
   | Some (Inspected result) -> return (Some result)
   | Some _ -> fail (Failed "unexpected inspection response")) fail
+
+let components t cancellation ~decoders ~max_read_bytes fd =
+  if max_read_bytes<0L then invalid_arg "SemanticWorkers.components read limit";
+  BorrowedWork.try_bind (fun () -> submit t cancellation fd (Components(decoders,max_read_bytes))) (function
+  | None -> return None
+  | Some (Component_inspected result) -> return (Some result)
+  | Some _ -> fail (Failed "unexpected component inspection response")) fail
 
 let reconcile_xmp t cancellation ~extension ~nonce ~base ~left ~right fd =
   BorrowedWork.try_bind

@@ -1,0 +1,1822 @@
+{
+  "schema": "unison-component-domain-workers-qualification/1",
+  "state": "STOCK_OX_TYPED_COMPONENT_WORKERS_PASS_CLOSED",
+  "focused_actual_terminal": {
+    "session": 86825,
+    "chunk_id": "c76ad0",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "focused_result": {
+    "path": "/private/tmp/unison-component-worker-controls-jh3g4ylv/RESULT.json",
+    "bytes": 125905,
+    "sha256": "d1a642d090304095f69c8e86a2ed25c4f622a2e505f28c5b796291ba2f2335e2"
+  },
+  "focused_closure": [
+    {
+      "path": "/private/tmp/unison-component-worker-controls-20261017-003/SHARED-START.json",
+      "bytes": 1317,
+      "sha256": "ebc97a4100a9fa61d443a29be2fce2f7a72aff2694b0eb31cdaa66c9c5834072"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-20261017-003/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "fe264a1a81e46b01e195076b9c8400e9802072db0cdf1784e294700119c7d2ee"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-20261017-003/SHARED-STDOUT.txt",
+      "bytes": 55,
+      "sha256": "649cf5b89c7223462e6e452aacec9d50af4ab6baf81d99a099c122c2fb580bb1"
+    },
+    {
+      "path": "/private/tmp/unison-component-worker-controls-20261017-003/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "checks_per_compiler": 87,
+  "focused_contained_calls": 4,
+  "linked_artifacts": 334,
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/Makefile",
+      "bytes": 2409,
+      "sha256": "7b55ba10e100cb8b65bb7c76f9534872b1ab1437a7c24851464a8c79feff7233"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/Makefile.OCaml",
+      "bytes": 23956,
+      "sha256": "fcf7dd8ec4b4f60d0cb134ab11125c19ddbed431cd255b045f7f14266d1b5468"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/abort.ml",
+      "bytes": 2363,
+      "sha256": "c27ac1cc27606389c4ee218c861dba2dd40637d6bffcd5c2dbfa796b3d569c50"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/abort.mli",
+      "bytes": 623,
+      "sha256": "dbb51402851e2f26cd475ed8efc10e7a840f0caa6454d91d5094b629bb491ecf"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/backendResources.ml",
+      "bytes": 2307,
+      "sha256": "bf5a39fb6ac88ee7401eedd0c30b95b0ba8110b04a01e8f4cefa126da44d2e63"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/backendResources.mli",
+      "bytes": 1167,
+      "sha256": "442e808a6c0efb611eab9b749c9027d93bf3e335ae1b272509c123f042405224"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/borrowedWork.ml",
+      "bytes": 4004,
+      "sha256": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/borrowedWork.mli",
+      "bytes": 1586,
+      "sha256": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/bytearray.ml",
+      "bytes": 2911,
+      "sha256": "cadfcd8c213bc1e27c58a737f51a0aa6a8adf588da3e9ee57192e2a66f81dd25"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/bytearray.mli",
+      "bytes": 594,
+      "sha256": "ab07163781f0a7cb5241adcbaab95c8edb913e224ab43c51e833cc533069d0c8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/bytearray_stubs.c",
+      "bytes": 923,
+      "sha256": "d3531f56d8d8a3770bf93725538aa008ea997c71e5f21c358134cdb1c8479165"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidation.ml",
+      "bytes": 20043,
+      "sha256": "25455e2e23d9029ca9fd10df4660602c35e9d801bc8b80ac0ba93c64a57735da"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidation.mli",
+      "bytes": 3014,
+      "sha256": "a92bc9fc40578bd7a91f77b8c0670ece5ec5df51012d5ae74af6c30912816407"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidator.ml",
+      "bytes": 2053,
+      "sha256": "e1acc9680df028ebd9da17f4abe13edfc4e28452a93832e95b6c7419b9a4edc4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidator.mli",
+      "bytes": 2480,
+      "sha256": "e1295de3393ee48bf4b2050c64ad4736681a40649e2f3bb312e47f0a4ae7d315"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidators.ml",
+      "bytes": 1051,
+      "sha256": "cc7a19837a89f3deb1363ff79020c26c288ce674389fd0ba93820961fcf7dea0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/candidateValidators.mli",
+      "bytes": 613,
+      "sha256": "72305d84c8928c20dba44913575a974f1905eadfb987f51365f1b9dc644a6c0a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/case.ml",
+      "bytes": 6316,
+      "sha256": "54f1421601eb02c8eae20dca220a8ba6e0eaeacbf064da681d91bb7572a18c0e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/case.mli",
+      "bytes": 1465,
+      "sha256": "1304813a5f2ea7d1e95306143c26e02e05d33a77b49754270366468881e43860"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/checksum.ml",
+      "bytes": 2990,
+      "sha256": "f18f93fbd9cf6dfd3d0d7f9afd5031ddb1a9320f8566420da07d053e92b6b57b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/checksum.mli",
+      "bytes": 738,
+      "sha256": "b9b8107a52116b6191687b9a47ed1b6b42b518a58039fd98be80b0f8aff942da"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/cloneLease.ml",
+      "bytes": 6410,
+      "sha256": "f048070a394c7faeb5684739ba57d6b3bba772eddd2d205ccaea7eef0d820a9d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/cloneLease.mli",
+      "bytes": 3186,
+      "sha256": "f7a902cf71825897402958b10d41bd75d78fec5699cc00a7927536bdba635c6a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/cloneRange.ml",
+      "bytes": 7962,
+      "sha256": "34a3d8e3e0cc7d43828d4b8fce80c580e586d1041c69866d72bfd2f8bd069093"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/cloneRange.mli",
+      "bytes": 4950,
+      "sha256": "68ff9599ced32a3e4c8f7818cc70361c3aafded30981d4f568625412fbbccaf2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/clroot.ml",
+      "bytes": 9445,
+      "sha256": "cdcf390f4f8f1ab7f0bd3286d515293583d2c73ab90dea7bf1b652672f1a9699"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/clroot.mli",
+      "bytes": 863,
+      "sha256": "75c8b784e86b8fdea9a869adf0f88245ff4c168a0bf6929d4d96c1a7673da672"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/common.ml",
+      "bytes": 12556,
+      "sha256": "6aa4e6d36ba6db9413233846a170c2e5b4f2fbb9725e3721ab7742ed04841082"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/common.mli",
+      "bytes": 9666,
+      "sha256": "8550f51a11adca8e91eb1bc6a687396e551e25e5b2d467e59c18f4f610c632ec"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/compat_digest.ml",
+      "bytes": 118,
+      "sha256": "c63f5e243a573116353b2e1fd82ad4da2423b0c94f4a1d084e39a3d6aba80a5f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/componentHash.ml",
+      "bytes": 11544,
+      "sha256": "3b138b1ac1b13131ec06a6dfa09623a8e93d1ffcfb32b4b46fba5ddc5d1bc5fa"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/componentHash.mli",
+      "bytes": 3495,
+      "sha256": "dadd9f77ce3721ba7e13b65990f2f67723170df1dc65fae4a3638ed3523eb1f1"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/componentHash.ox.mli.in",
+      "bytes": 3505,
+      "sha256": "0dbeb6754762d9e0c2d89c05cacb061eeece477704c2f92c532e38cc35fa1a4c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/copy.ml",
+      "bytes": 101517,
+      "sha256": "efaa18eab835b5b798217f018116951a04b775c19d353cac5e6f345188af1814"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/copy.mli",
+      "bytes": 2790,
+      "sha256": "41ec7ba3eaa3b0e168ad31f071d863b02be1b45a4fc09423cfe01c944738bf4e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/copyRange.ml",
+      "bytes": 10539,
+      "sha256": "98711b49e1cc11e5cae0aecd0210d40b1ec691551f10c9a0d53a1bcbb7dd93d7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/copyRange.mli",
+      "bytes": 4515,
+      "sha256": "9ecfdf9d84d004fa06ae099a47cf95f2e5815068ab851d494788720045e94cd4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/copy_stubs.c",
+      "bytes": 32192,
+      "sha256": "20268f5623bc054b1b4b84703056c80fcf5dba60bdf1c50ab32391e3aad9e094"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngCandidateValidation.ml",
+      "bytes": 11927,
+      "sha256": "fbc93011b7538ba5571d7f8d96646e04a6873b026af8b064cc3db663e92b7b87"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngCandidateValidation.mli",
+      "bytes": 452,
+      "sha256": "f6684f998c830fffb4327eb389019bca18b356e73db6f8c6c1a4ca8da278bf2d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngComponents.ml",
+      "bytes": 4978,
+      "sha256": "27481419a4e45959722314c67541c6ef0751b253ce5ae5ff0b95c65e35430368"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngComponents.mli",
+      "bytes": 1713,
+      "sha256": "c444b49eb29d5700f858717a40d9b80be5f42d29228d24f8f45ca107307c5114"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngComponents.ox.mli.in",
+      "bytes": 1756,
+      "sha256": "18eeba99e0fcb4dcd7c60b850323a14a7c0032c2c0bd14cf0b122d4c37efacc5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngExtended.ml",
+      "bytes": 277,
+      "sha256": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngExtended.mli",
+      "bytes": 138,
+      "sha256": "6d4440a2fc7b3e8d6422deda8975dce6dd85ab9434fb03e2f60f60e2ef1dc71a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngExtended.ox.mli.in",
+      "bytes": 150,
+      "sha256": "435f1161e5c6d6e34c4b87272fe258232cb53b3de9805ccaf562359f79395504"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngLayout.ml",
+      "bytes": 315,
+      "sha256": "b937b560f9f8a6200e886cf29bb7823a630755a68136331aeb6502c01a103aed"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngLayout.mli",
+      "bytes": 182,
+      "sha256": "b2b849f4f0c58a277de7202b6f038a6b6e43f6dff6cfedf2b0d416a879829226"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngLayout.ox.mli.in",
+      "bytes": 194,
+      "sha256": "632a8dd3e66167be390dfbb9332d322cd751941d708e6403fe97cb43ca2526c3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngPrivateData.ml",
+      "bytes": 6468,
+      "sha256": "fd04291be0ad62806a985c2d93893bb8c813a6c0d7201310bbed79773d4c7575"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngPrivateData.mli",
+      "bytes": 1956,
+      "sha256": "fd2f8ce433ff3d110d614c9f994a3e090b987d4ca97c66e3b710a413062dae89"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngRecognition.ml",
+      "bytes": 3036,
+      "sha256": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngRecognition.mli",
+      "bytes": 340,
+      "sha256": "323a7b743d758a1fb363ea1aaa1877c42837a2679376f4991c880283335f2b1b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngRecognition.ox.mli.in",
+      "bytes": 352,
+      "sha256": "de53a6b6fbd77f6ed364e0ced65286b6f8fb22adc290f20bfa526f1b77a5a024"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngSemantic.ml",
+      "bytes": 18285,
+      "sha256": "13b89e566ed973140b5d7779176da7b80ff49c52dfc59066d35bafa3d648e4af"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngSemantic.mli",
+      "bytes": 1727,
+      "sha256": "5761ac03853af939f91aab66ea34941d79893fbea8acd1c0abb39c1762884b3e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngSemantic.ox.mli.in",
+      "bytes": 1739,
+      "sha256": "385ce5e6c0c263210bf3828642412d2b6d692f73d0efd2f3c8dc3ef36dfd3b77"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngValidation.ml",
+      "bytes": 9668,
+      "sha256": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dngValidation.mli",
+      "bytes": 4360,
+      "sha256": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/dune",
+      "bytes": 2993,
+      "sha256": "eca5f43bc07b7be255d87479fc890cbf4e4957bed314c6214f1b898c145cf210"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/external.ml",
+      "bytes": 5800,
+      "sha256": "18748fd6d4db2c3a715afff343af4c2054fb8c8404eb740d3752564a7daf5d34"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/external.mli",
+      "bytes": 638,
+      "sha256": "02d26bc0d71f9785633d30bb6c170b22d81cdb4c5f360ac20eefd2abfe66c349"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/features.ml",
+      "bytes": 2658,
+      "sha256": "a535e1da48f4ac940cd02cd031da9793d3f8a72b9e08a0ed22e9767485f496b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/features.mli",
+      "bytes": 3482,
+      "sha256": "1769cdf2ae26492cafaaa586e7ba279038228052a4351b13b63e32c4494e94a4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileObservation.ml",
+      "bytes": 393,
+      "sha256": "d0d13d872654304d543a367ffa57dc01a31f87dad50e631c0e2f4f302e752a8d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileObservation.mli",
+      "bytes": 1745,
+      "sha256": "37fb46e4a6462e640f03f2cc4be1396a8c491081869593ae3a798cfe36e6ff13"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileObservation_stubs.c",
+      "bytes": 7329,
+      "sha256": "a0abe080d4607a73a629c19b49b1389014a6453a168149806050575c1a687dc6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileinfo.ml",
+      "bytes": 9817,
+      "sha256": "6cc872dae0331ac22d8717f463821d5ed71f06806d82903ef00d56e6bbe51cf0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileinfo.mli",
+      "bytes": 1702,
+      "sha256": "ca7aed8fff580fe703bd5dbaa4bfad5e42732d223c95767c1a640290989c822e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/files.ml",
+      "bytes": 81153,
+      "sha256": "41758307e36d6245a951f44c83021c61441b785ba5bb87933edc01592da947e1"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/files.mli",
+      "bytes": 5612,
+      "sha256": "babe3d9b4178cc6c881990b0b9d394cf154b3db7fd6e749fe5fa79e9007c03dc"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileutil.ml",
+      "bytes": 1353,
+      "sha256": "fa18b9394a06527831e174140c09d74f83618614407e53480d99f5b3fd5b6525"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fileutil.mli",
+      "bytes": 296,
+      "sha256": "1e1a1748e8b960b1b6b2915c1ca0565043741dbf4ce8bf910e5c0858ffa21f90"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/finalPublication.ml",
+      "bytes": 4069,
+      "sha256": "a1e7e34e08c421348a759d200c2a8f7b2deb1a56891090573aca08edbbf0a579"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/finalPublication.mli",
+      "bytes": 11280,
+      "sha256": "1133576a069990ee6ff04e76befeed9464e2dd3d0990876d56dfb3ca82a70a7b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/finalPublication_stubs.c",
+      "bytes": 52476,
+      "sha256": "b2510f3099a2d316d346eb820f27979f448e52732d4e0df4eaece2199ff59127"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fingerprint.ml",
+      "bytes": 4087,
+      "sha256": "1b9cc61aa8751024550b970b1fcf6082b18cbc09226feee4bf3c7b47cf9af8bf"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fingerprint.mli",
+      "bytes": 973,
+      "sha256": "ebaefdb4ca9b67f4220413281d26e663e482bbb4c5495ea08b020a295e8cf06c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatExtension.ml",
+      "bytes": 6053,
+      "sha256": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatExtension.mli",
+      "bytes": 4203,
+      "sha256": "bc310bda7aec527c82c55ca7aa1768882ba5398b2b359faba14cf8bdec436a56"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatExtension.ox.mli.in",
+      "bytes": 4409,
+      "sha256": "6f023de54ff0386a594bb6f4a9bb00390ac4445270cb2f11f1ca8a5202e85199"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatRecognition.ml",
+      "bytes": 1358,
+      "sha256": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatRecognition.mli",
+      "bytes": 1209,
+      "sha256": "c58deed2dc9c1e1cef9c2e89371efd0af0f128d6e6c2b72d78620832d386aaef"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/formatRecognition.ox.mli.in",
+      "bytes": 1267,
+      "sha256": "498feedc895a4d01a7de6ecc1b518d39aa2c2f4dff42922ddec27358806d1c3c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fpcache.ml",
+      "bytes": 11945,
+      "sha256": "d35c95004c71be57d5ac5037333e2a630f47998dd825176d7af1a8d52e78de9d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fpcache.mli",
+      "bytes": 932,
+      "sha256": "f711c48dcad2d9c51c0d2944f8dbd6e3401b5af4b074e2873221348fb3353f70"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fs.ml",
+      "bytes": 12822,
+      "sha256": "0b9852f103c8441745c83733de4a88d394d138dc93ffc0e04285a4e1eae652d7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fs.mli",
+      "bytes": 6215,
+      "sha256": "0065c5ef051aa96ad43875b1c0a4b31ece083660f0de7855c72603a7b29e4f45"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/dune",
+      "bytes": 21,
+      "sha256": "3dc9eb905f08e29206df71cf89b5b98ef70da001c4d5598a0398a1f52b402f5d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/Makefile",
+      "bytes": 265,
+      "sha256": "696da05314cad8882a36926c0e3ed3e69e0e2108730859265f2fb76cfab76589"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/dune",
+      "bytes": 736,
+      "sha256": "09646879bd1c49d3c888f281175fa3377dea6fc679123c1235265d90b224e154"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/inotify.ml",
+      "bytes": 3378,
+      "sha256": "dbe5cfb97edf5f08f85ceba0b90074cc7573e132f63e0a60d898f969dc6f25fb"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/inotify.mli",
+      "bytes": 1419,
+      "sha256": "5b6e15821de4e2435e6492a5677318a5d8030d15af2ace475024cb9ee411566e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/inotify_stubs.c",
+      "bytes": 3869,
+      "sha256": "6100479d2833c6d23bc9c76b2da07437d3e75cd14884053b694ad22a83d81105"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/lwt_inotify.ml",
+      "bytes": 1570,
+      "sha256": "fd687c2186c867d308c9fb654909a3be6e7e6479ffed19a8feba8f6535fb0645"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/lwt_inotify.mli",
+      "bytes": 344,
+      "sha256": "467e9f935644fe35c83fa3b70c8761194f3c4b57b51210343c35e6cd573d31c0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/inotify/watcher.ml",
+      "bytes": 7378,
+      "sha256": "1bb4f1ce9d84e19f498e41d2eba67fb2f70c9a21c51f538b3af4951140347e26"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/solaris/Makefile",
+      "bytes": 224,
+      "sha256": "a95ba3c783d72fa1c7c2cce4873250f32c9c4a2d0d0151e88af796d6fea7578f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/solaris/dune",
+      "bytes": 496,
+      "sha256": "ae6674e27b41a773fccf73d9ba6f32298768e2d9b687b398f33e2a7f865614d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/solaris/fen_stubs.c",
+      "bytes": 8292,
+      "sha256": "42ecc9b4e2f6c3629753907b5f5ba01c55196e93efffa6c978f8513b3363b40d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/solaris/watcher.ml",
+      "bytes": 13843,
+      "sha256": "5002d3876bd8dcc7ed7fa8d4505b1e25d07d70d865476fb6249a0f49d27b77ff"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/watchercommon.ml",
+      "bytes": 18408,
+      "sha256": "a83e67e1d80a25549213bc112295af874e80265d1e08b94d9e48b1ee015e39fd"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/watchercommon.mli",
+      "bytes": 793,
+      "sha256": "fe9e27d6bf2ea6a24b83f7a6f3a7c57f5553c8dc32fcbf8a6ed2eb3354acd697"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/windows/Makefile",
+      "bytes": 641,
+      "sha256": "aedc8286add2ed6fc68907be8229a2f25f3bcdfad0bdcf9ef7c067b61b5972d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fsmonitor/windows/watcher.ml",
+      "bytes": 5881,
+      "sha256": "d68117c5e5b5d22b70b8474c31dbad5385ad33b9b4c69b610f30d5e40a539aa5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fspath.ml",
+      "bytes": 17123,
+      "sha256": "d6bdaacbdcdf125562166bc7de6d871b5c631aa6b4f78bd02f56c04a0f56417c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fspath.mli",
+      "bytes": 1452,
+      "sha256": "1bf8a7a27dab4c82d72b4ba11916b098bc175a8f132f0faa4ec234844c28b6b9"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fswatch.ml",
+      "bytes": 13982,
+      "sha256": "3d3cb9239ad2a9c10a508c43ede23057d119abeb793f01a1ea5903a1ba7e6764"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fswatch.mli",
+      "bytes": 509,
+      "sha256": "e963d4cb0cb3254eeb924a51be0c4528dc5617d523c68d625c466299dd3e9645"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fswatchold.ml",
+      "bytes": 7163,
+      "sha256": "978c56491c08a6d4c7448326f8b9ec94f2c215dc09d65c3488dff80c1005fdf0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/fswatchold.mli",
+      "bytes": 140,
+      "sha256": "2ba0e9a36ca9449406b1e519b9196108b4afb84218030a7af9179265adb16a11"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/globals.ml",
+      "bytes": 13542,
+      "sha256": "04655e8abca85279c0ce3a07e4fb40d21050dbb701329aec130f40655f4851dd"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/globals.mli",
+      "bytes": 3964,
+      "sha256": "2c4b82f6dd17d26fe9fd5f07aaf38d4778363f2bd7c81b6ba81c8b8d8bcbfa66"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/hash_compat.c",
+      "bytes": 5365,
+      "sha256": "fb26aa314641b9d8d4933b99a275a74b92a8748bc104748fd71b2033eaf9fd96"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/helperLimiter.ml",
+      "bytes": 3679,
+      "sha256": "10f55cf2b538d06beb0d69c8de07b22651978a07b65d29b43a4635f15017014d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/helperLimiter.mli",
+      "bytes": 781,
+      "sha256": "d4a994ade87db6293e3512289597f23f18f5d821ecd94b4c8fa417ced236fab8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/helperSupervisor.ml",
+      "bytes": 23247,
+      "sha256": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/helperSupervisor.mli",
+      "bytes": 6581,
+      "sha256": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/helperSupervisor_stubs.c",
+      "bytes": 11700,
+      "sha256": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ioAdmission.ml",
+      "bytes": 6881,
+      "sha256": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ioAdmission.mli",
+      "bytes": 2504,
+      "sha256": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/jpegSemantic.ml",
+      "bytes": 4005,
+      "sha256": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/jpegSemantic.mli",
+      "bytes": 560,
+      "sha256": "878ca5a5338e9f54101733034b74d0e85d90b47d3708325490b19eb79ad2f79e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/jpegSemantic.ox.mli.in",
+      "bytes": 572,
+      "sha256": "988a18c66de929c7e370efc449be90dc961d935f72474151ad4aeb4b2fabf44e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/linkgtk3.ml",
+      "bytes": 790,
+      "sha256": "bdd9aff187244d9df4e530252cf42400c951b7532413c56fe213be13670b64ff"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/linktext.ml",
+      "bytes": 790,
+      "sha256": "b5188ecd1c5a193717848ed0954b3635d7c0d49680a7c9a5613839004fa10ae5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lock.ml",
+      "bytes": 1811,
+      "sha256": "32d19dda16e7e3ff26a2708a06fdebe3b1b0f22e90838c09c9dff2599b2e1c3d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lock.mli",
+      "bytes": 320,
+      "sha256": "4ae6770bb279f1ab7fdedb091b9aa627e66ee2e5e99f1872f72eccbd9577432b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/dune",
+      "bytes": 216,
+      "sha256": "3f74121fa66f731c502677bfc60c6ceccee52fd96bc877468b4a4d0e46f44e56"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/generic/lwt_unix_impl.ml",
+      "bytes": 10319,
+      "sha256": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt.ml",
+      "bytes": 4513,
+      "sha256": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt.mli",
+      "bytes": 4593,
+      "sha256": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt_unix.ml",
+      "bytes": 22,
+      "sha256": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt_unix.mli",
+      "bytes": 2292,
+      "sha256": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt_unix_stubs.c",
+      "bytes": 19655,
+      "sha256": "e56d484ac169ed468f7bf812ca06a35d195f60eedf21cc49ae1be250e1244a92"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt_util.ml",
+      "bytes": 2085,
+      "sha256": "1288d77c59b65ee8b576592e7348b8a0293ff89424055b4c2b3bd61e6e73c48f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/lwt_util.mli",
+      "bytes": 2291,
+      "sha256": "f96c07549e8acf5badc190b2919552587f3390974c783c15148231e4e790be6b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/pqueue.ml",
+      "bytes": 2671,
+      "sha256": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/pqueue.mli",
+      "bytes": 467,
+      "sha256": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/win/dune",
+      "bytes": 21,
+      "sha256": "3dc9eb905f08e29206df71cf89b5b98ef70da001c4d5598a0398a1f52b402f5d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/win/lwt_unix_impl.ml",
+      "bytes": 12784,
+      "sha256": "4aff6983004954f2c3e3c1a39f9fd47e95f130f61d040f45d2c9615f0122c0f8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/win/lwt_win.ml",
+      "bytes": 22,
+      "sha256": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/lwt/win/lwt_win.mli",
+      "bytes": 761,
+      "sha256": "893ab359d7a05f7ae6c3b74bc00466e9d176f17733a3518fb37b67830e095ad0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/main.ml",
+      "bytes": 10857,
+      "sha256": "b6cce260dd984ca17f660f556af47dea5fcb88b560b480416ebb5014af07e30e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/make_tools.ml",
+      "bytes": 25549,
+      "sha256": "093911fa592c821582f103ef9d118c8486699af0cefbac628741cf3c71972f34"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/moves.ml",
+      "bytes": 17851,
+      "sha256": "3ac44f274c8c60daf916db2c814f3dc37745234bd451debe38c0594651f7e5da"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/moves.mli",
+      "bytes": 1777,
+      "sha256": "30d53f77012ed8bdf6101898135ba0552dfaaf7bb8b42b1216947d7adf5b2ad7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/name.ml",
+      "bytes": 2061,
+      "sha256": "8b079efb91e81e1a80e9c9ed8992018d85785087318dde29264001b71488cd44"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/name.mli",
+      "bytes": 354,
+      "sha256": "cfe8585566c650d7cb9f61da227694fee590011be9975b771f9c84f1f1d530c6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/nativeCopyRange_stubs.c",
+      "bytes": 30950,
+      "sha256": "cc45b69d6adf52237d2a7e0f83f89099a115acc6b2ad0682ff3e0f8297a4f902"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/negotiate.ml",
+      "bytes": 2867,
+      "sha256": "75826e42dd85741ab576c23feb3febc3af20ad40438ccfd9531f61385c9d5014"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/negotiate.mli",
+      "bytes": 790,
+      "sha256": "47eaa4a23976114912c3b3f88b6be0aea4c871babffe892207b302416b14188d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/os.ml",
+      "bytes": 14527,
+      "sha256": "293d509d92b204846bc11598b819da42fb1beed57a1c897d416a5da14c5a2707"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/os.mli",
+      "bytes": 2679,
+      "sha256": "1e5df0e173c7645d82e884f7d10c33ae7c10b9c4acb29d878ebe7a0ec84e91d5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/osx.ml",
+      "bytes": 20379,
+      "sha256": "8705194b4b29a882ed3e2e30e587f722da63dba92bd1b00ac9cd21977864f888"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/osx.mli",
+      "bytes": 1024,
+      "sha256": "33342a53f4c8eea634dc906782d9199dbe7a576a688154d7bff0f94ca9cb4d7d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/osxsupport.c",
+      "bytes": 3892,
+      "sha256": "2a34abce5f2cc607c3f04818073ed42685b13a6823122fcf45eab2542694deb4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/path.ml",
+      "bytes": 7569,
+      "sha256": "afa2e468afe9f9de59784e2bf0064dbc54373a31e88f30b59fa7efdba34e3751"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/path.mli",
+      "bytes": 1261,
+      "sha256": "9a98250add11cd1e5de6e06874e244ce08493ef976348a866025489c2e0567e5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/pixmaps.ml",
+      "bytes": 39366,
+      "sha256": "51a341788c10a805010c8a534c99d14163485a4d55707545d5a148b65f6a7a98"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/pred.ml",
+      "bytes": 6716,
+      "sha256": "44a6679f43a86fc82ff35b793b6a9584ba79256f2e867a81dc378d4f1ba2e95e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/pred.mli",
+      "bytes": 3081,
+      "sha256": "13764e35337cd44546394c50b739c45d3e23f7844dd4ca9b00a77b15ce4b500b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/props.ml",
+      "bytes": 52484,
+      "sha256": "2fcf37bcfd2f812c41d890c1302369142588c6e0ecde1c1d9db84e18dcfc7a41"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/props.mli",
+      "bytes": 2462,
+      "sha256": "bdbb03d9a5dc77378034dc7eefe79ebcc5fb7dfb48312b32c173a3f1e40e51a3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/props_acl.c",
+      "bytes": 23017,
+      "sha256": "f1034cf9b7cb91b33a6fc05732c5dd8002223570ce0eaf4d32265b595bbf7215"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/props_xattr.c",
+      "bytes": 21175,
+      "sha256": "09543a60c99a02ecf11f3dc898460cd7bc8de12ce16f3e4b29b8d626bda651f2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/propsdata.ml",
+      "bytes": 3661,
+      "sha256": "50aa6a5ffd0c2a4a7042f661266b216e40b15fccb732828176ed403811a13301"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/propsdata.mli",
+      "bytes": 592,
+      "sha256": "e2b5ac93b3392939d5ca87db3918246cfce395654a0e72214fba6c43dae56dca"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/pty.c",
+      "bytes": 10663,
+      "sha256": "e669d44e11cb9cd87355604b6ead114b549531144040535a903f78a5797afde7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/recon.ml",
+      "bytes": 36969,
+      "sha256": "e57191aafa3f9dcdd912afa7d4cc67ffd6d220765eca1264844bb99cc44cf03c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/recon.mli",
+      "bytes": 1665,
+      "sha256": "68c6238a5cf0786bfe87f446c4485a792e316f0a2eedd62c70d00b28e8b45547"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/remote.ml",
+      "bytes": 95317,
+      "sha256": "9b0cf82d2158662f2001aa6abfceb7845531cd663cfd39d5b2ed73b982e6b286"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/remote.mli",
+      "bytes": 8366,
+      "sha256": "b29e32927fd10452b7dceefff9fd09764021d64628bf1fd2ea1c9ce95c48aa94"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticAdmission.ml",
+      "bytes": 10765,
+      "sha256": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticAdmission.mli",
+      "bytes": 2803,
+      "sha256": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticDelta.ml",
+      "bytes": 21433,
+      "sha256": "616af4155579d3ad6b91893eaccdcab22d54f6dc05054e07ce7410cfa3eabcf3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticDelta.mli",
+      "bytes": 6069,
+      "sha256": "9f89206b46090199a4b98c2d0c43650af0dbc9127438e72788f9c225532a0f34"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticDelta.ox.mli.in",
+      "bytes": 6257,
+      "sha256": "a511d7625957b64348860bc1fe58a659946c5047c0e29503485e06cac53ad9a4"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFile.ml",
+      "bytes": 6095,
+      "sha256": "d58b14503261d4e363f283f1ef43b6b63c129d8e1bb197778d6731dad34fec6f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFile.mli",
+      "bytes": 2672,
+      "sha256": "967aa573784b760c28fcbb3f29cab85c4898f7de4a35dc0bfa82c4c10ae6d444"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFile.ox.mli.in",
+      "bytes": 2684,
+      "sha256": "73d8cd0e3b4b827025affaf7a866bca27faa0260cac33cc77204cbd942537c0e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFile_stubs.c",
+      "bytes": 4065,
+      "sha256": "5fff39ab030472a39f8ed0e9e99b93308a8dc67154f0d2a68b85dbbd3b161e70"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFormats.ml",
+      "bytes": 4262,
+      "sha256": "7681e8302a8599160bf031f6fc7850c6f3850c4ceff841b4ea511c6919588d4e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFormats.mli",
+      "bytes": 687,
+      "sha256": "39efec97e815c9f7ca346f5afed2eed8fbcda4adda61437d4d7667b748c7b613"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticFormats.ox.mli.in",
+      "bytes": 708,
+      "sha256": "ba6fbe1b87ddbc5f26431e3d61c1319aa314839be6a818fda5e79be80f6d290e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticHash.ml",
+      "bytes": 6463,
+      "sha256": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticHash.mli",
+      "bytes": 395,
+      "sha256": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticHash.ox.mli.in",
+      "bytes": 407,
+      "sha256": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticHash_evp.h",
+      "bytes": 5475,
+      "sha256": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticHash_stubs.c",
+      "bytes": 3194,
+      "sha256": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticMailbox.ml",
+      "bytes": 1707,
+      "sha256": "48f96f3f5219c41e8907e4963459aaec27641d108d5904cd25759cf94191530e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticMailbox.mli",
+      "bytes": 922,
+      "sha256": "55a93526d9c7f74c940f5bbdfd3bfbdb2b876bec8220567d15fa61bf1ee1d99d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticMailbox.ox.mli.in",
+      "bytes": 973,
+      "sha256": "0bd16d5d0469983f27f3e4dc019dd12123c1306b4ce6e494f9a2e0e660cf7924"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticMergeCache.ml",
+      "bytes": 13805,
+      "sha256": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticMergeCache.mli",
+      "bytes": 544,
+      "sha256": "e03df147fdab3bee35aae795988c85035f4c7f23e1a6273d2235577b481f384b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticRemote.ml",
+      "bytes": 24260,
+      "sha256": "38880854482e14fc1a5e3772b961d3457705f5bc03d1b53017323d754c8fd256"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticRemote.mli",
+      "bytes": 2294,
+      "sha256": "5f25d7369d8c274bac6cc35e5ca09bbc36e8d1a4665f8669f055fec51691b64c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticReport.ml",
+      "bytes": 15215,
+      "sha256": "91db153f7c9380e4b9ddead7d7ccb2c007e9290dc2bf059c2c31e467b02d7e42"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticReport.mli",
+      "bytes": 2066,
+      "sha256": "939c8fdc7688bc611ad4fa690744a4f05a61cd8a02b3e5523ab925951e123c00"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticRuntime.ml",
+      "bytes": 12100,
+      "sha256": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticRuntime.mli",
+      "bytes": 3148,
+      "sha256": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticSync.ml",
+      "bytes": 28178,
+      "sha256": "e2de44dce5a121b025a76d0f0d0327d5e00a5aeed15e61d58490f2f5425d5c1d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticSync.mli",
+      "bytes": 3352,
+      "sha256": "bf2b46c01eff34790cb2779db540c1b25deea01b0277f95cb7b1269ef237e80d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticWorkers.ml",
+      "bytes": 25758,
+      "sha256": "875e153a3c6132e8eacf44915fd321fc6e2ab2310599229887280af93b606a6b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semanticWorkers.mli",
+      "bytes": 9194,
+      "sha256": "0ca1cca0deeb7d6e87437e2bb4de6934531ae2b9d149cf784dd917ee3d439375"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semantic_hash_config.ml",
+      "bytes": 1471,
+      "sha256": "4fafa953875af04198444eab5ddf306e039b0763a2f65ec097ef30bac8ece1ea"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/semantic_mode_filter.ml",
+      "bytes": 5728,
+      "sha256": "3fe2132a1fc7cbabdd7725208f2869135bf316027c73089b623a4adbe4633a46"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/sortri.ml",
+      "bytes": 5143,
+      "sha256": "f76a3202ffc694eae0a562e65785bf949b7c6d7ed9e20b20649ab9b823f8a4a2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/sortri.mli",
+      "bytes": 833,
+      "sha256": "cd22ae99abad648b27f8240d1ccd54bfb0b85eba4eab2a7ea95bd4a5d98bed65"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/stagePublication.ml",
+      "bytes": 1627,
+      "sha256": "29136e71712e16b149ccae43798a71cc406b1ce9d20f2c2a272ba7203eb0f53e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/stagePublication.mli",
+      "bytes": 3842,
+      "sha256": "22fd045a7398b1c00b4cfadad1e56b2d18eacfeaa614a033f18f1fe8b678c86c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/stagePublication_stubs.c",
+      "bytes": 21203,
+      "sha256": "f292e14692347583ae42a5ca4ee3bf0181f9f00446feccabbdbe927b31610474"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/stasher.ml",
+      "bytes": 24100,
+      "sha256": "d03c4eb01073a14b94a2df286d751c8e29c0399caed496ecc66e671fc2f4b110"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/stasher.mli",
+      "bytes": 1342,
+      "sha256": "78b4fca3b5078411fbd1747a80bbb9f4f12020f4c6f80d536b0f51f0a8e08d11"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/strings.ml",
+      "bytes": 194126,
+      "sha256": "cb7633d14b7262089ed543dcd780bbf17082199d397c5f0eb9c16830bb4e191b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/strings.mli",
+      "bytes": 166,
+      "sha256": "6414293d73b1c2315ce056ba28051908142907693132d7f992762dc4b0136a1e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/supervisedExternal.ml",
+      "bytes": 6930,
+      "sha256": "7ac6b9c236ea314e466a10a198962d0f67ed6404d27f6070c6438238842e2811"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/supervisedExternal.mli",
+      "bytes": 938,
+      "sha256": "46e7a5317d859f6f89464a70ef7633be46d218e54f28da52c23478c96e9eb06c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system.ml",
+      "bytes": 766,
+      "sha256": "d36b090d6fdc03d892426328b4d4a307f82cb6ffe6d746f6e9d1c77049904060"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system.mli",
+      "bytes": 182,
+      "sha256": "fe4848d17cd8832dfdb2598e056865b956f7e33b7a0008c7c13d04db22b741bc"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/generic/system_impl.ml",
+      "bytes": 789,
+      "sha256": "974a46082a4630f55e1c44ff030861e2074f4cec126de6bc7ddd66f742b5724f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/system_generic.ml",
+      "bytes": 7025,
+      "sha256": "7cc582e54931abce12117a41a6526d3d632c97eb81d3e604be8c78e69735d24d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/system_intf.ml",
+      "bytes": 6334,
+      "sha256": "3e2280fb3fb7cb50bf0497b5361c501365cab8b4e28e362a622827e3724c8061"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/system_win.ml",
+      "bytes": 10192,
+      "sha256": "28f4fb840feebe70e945d4faafce523e1ebe276e76ed26e814e7b46e8a376d29"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/system_win_stubs.c",
+      "bytes": 21180,
+      "sha256": "99ac04ec45c6e629a2230e5cb4363626e9ffcf06f508dce560f52a5c00b08e37"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/win/dune",
+      "bytes": 21,
+      "sha256": "3dc9eb905f08e29206df71cf89b5b98ef70da001c4d5598a0398a1f52b402f5d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/system/win/system_impl.ml",
+      "bytes": 781,
+      "sha256": "655e4f3e35a01e764e6bc85a574dc32ec2fcd33d14f288101b443e6c1f426d27"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/targetBinding.ml",
+      "bytes": 20304,
+      "sha256": "4e236201ee4482834e8b68eec41234f8c5cb9abe3b54eccbb36651ce60a9625d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/targetBinding.mli",
+      "bytes": 6592,
+      "sha256": "09154ecb425a1e351a78afc9d049fe1247cd01de726cf665844c123bbd60cb66"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/terminal.ml",
+      "bytes": 20082,
+      "sha256": "2a4c21b34f661dc8f994ae92f566e859acaa4dcf5ab412dd04c37f04694966b5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/terminal.mli",
+      "bytes": 1401,
+      "sha256": "6f5077f217cd883e3f1246693db0ae8937335b4482486ff4476ac34710b17a1d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/test.ml",
+      "bytes": 37333,
+      "sha256": "e88c7572f4142c181e7ca8d63f552a0b1492f706d28c1cda77a349adeeac17b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/test.mli",
+      "bytes": 168,
+      "sha256": "4922da049afecb5bb65b35ee81f350893b8d90ebb95928bd6c39e9fface87d23"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/transfer.ml",
+      "bytes": 31988,
+      "sha256": "b8ca9e9aa9ba18c785aaa502509ed6b17e3b6e23fdd697066d30c7036777a56d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/transfer.mli",
+      "bytes": 5204,
+      "sha256": "06baab649a4073c79ec820c6e112b5d13c0d00498df365fa8b2840d2425c3711"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/transport.ml",
+      "bytes": 16705,
+      "sha256": "0668e6696fedf5ffb99e927a02a5cbe7beb2c566206958315b93f157a8a82078"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/transport.mli",
+      "bytes": 1018,
+      "sha256": "acb9758a8177784c84703572a212b333309153a0460500537286797f3f5ec219"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/tree.ml",
+      "bytes": 3485,
+      "sha256": "50d58bca6808c3ad54f7e2494dfa4ef3382fd179ab555a958d4638da04fdde5f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/tree.mli",
+      "bytes": 3060,
+      "sha256": "fac52cf5c9572fa5aaf3e6f49281fa5dc490dee58e6703773d545a209ca40239"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/dune",
+      "bytes": 572,
+      "sha256": "a5362f56bbf064e180be6b1a854d82b77cdfd7b932d551b1d121477a0a6e28d2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/myMap.ml",
+      "bytes": 8634,
+      "sha256": "0fdefc721d5a633c132dcca53530449c90a2f0305c6bcdae77c2505ec5b3719f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/myMap.mli",
+      "bytes": 5495,
+      "sha256": "864f45c227d2b2096543cc1308fddf9b1ab99ba6f32e92cb843b3b254941e110"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/prefs.ml",
+      "bytes": 30654,
+      "sha256": "b8b6bf2dabd5e794a8ed9a0ddb428da45ff3e57207fdb67689ae02de334168ae"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/prefs.mli",
+      "bytes": 10994,
+      "sha256": "22b5480ab6220a1e31952b374de7814ee605d5db9deb65f095506d7757dc4bcf"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/proplist.ml",
+      "bytes": 1761,
+      "sha256": "5978d174ae0a1fc4876615b49154e0d6a8978c12ffcec4d17960c7716247f93f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/proplist.mli",
+      "bytes": 356,
+      "sha256": "f23ccce1b4c3573adca4f991ba8643c2cb2f21ea9ea2c5258bba1f8bfd666429"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/rx.ml",
+      "bytes": 23635,
+      "sha256": "af1e75d309dc3dfb60bec0e9764881fbbe4fc186ff940b064ac64f7230d620b2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/rx.mli",
+      "bytes": 2262,
+      "sha256": "df64e326a7ed71cc87a2847aa9eac46a1cc80ca90cec04131b4d31e2ecc4da8b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/safelist.ml",
+      "bytes": 4570,
+      "sha256": "c5af8ef80aa9e69706c0c8ce98ade942268793840a17324bb769270526698576"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/safelist.mli",
+      "bytes": 2135,
+      "sha256": "a9dc0393b5a8c00e56dc2083fb0ae33b37769a89646b56de5075ed8b21dd3800"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/trace.ml",
+      "bytes": 10417,
+      "sha256": "a57967d94fd52e1f54b385b687e012a381e8a2f38ca1f6e241211e59605f4c7b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/trace.mli",
+      "bytes": 4554,
+      "sha256": "0f99d9588848b68d96f8c87c843e60f4b99ceb19543d6efd725c2d825d74f83a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/uarg.ml",
+      "bytes": 3899,
+      "sha256": "b886f7690448fda3aba58abd4257091f973c664166eb24b6975c436c144b16de"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/uarg.mli",
+      "bytes": 4694,
+      "sha256": "b0d5be4679e7d5b57de49fe8bc81c3fd9b5cbbd197528b2ea0ae83b8507e8a2d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/umarshal.ml",
+      "bytes": 17233,
+      "sha256": "19748d6a362019c9d79d62696b5881e971bdc0e6144ac2620eff514b90ea44ea"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/umarshal.mli",
+      "bytes": 4808,
+      "sha256": "70b92631b7a4dfa48df225ec8587e228cba8329e73025fe60659959a0c5868cb"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/util.ml",
+      "bytes": 18931,
+      "sha256": "f906fed02263d5f42c0eca00b147394895a814f4c3a9309ee1b0d21f5874538f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ubase/util.mli",
+      "bytes": 5219,
+      "sha256": "db5eb64176c1124934e86e44cbbb3c52e8506786c5f6f36b2944c08831a01475"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/ui.mli",
+      "bytes": 285,
+      "sha256": "f00046ac40d364e6d1cc025feafa2b85a71c1afaf3294f5fcab0ea6217a18090"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uicommon.ml",
+      "bytes": 52401,
+      "sha256": "59c159f80356532dcc337ef6abf5724fa147a2715bd61531ccc951c8535d2d57"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uicommon.mli",
+      "bytes": 5351,
+      "sha256": "6913d24b5826e465532a1f8b330bebd2173553c13b2ac1e89aad9b680bd711b5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uigtk3.ml",
+      "bytes": 176654,
+      "sha256": "089f069373403f461d198112be991e6686413be0266124b8a188516a3be83a8f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uigtk3.mli",
+      "bytes": 146,
+      "sha256": "e2b258e9c0ce0e32b4c85be60e3e87bad4e3c72ee21699e2a14e38e15a9bb6e2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/Bridge.h",
+      "bytes": 1766,
+      "sha256": "785b239d495482571f4604a92ee90fa254a72d04736969af2c5563edc56df6b6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ColorGradientView.h",
+      "bytes": 456,
+      "sha256": "487fcd00abedb20f134933e64cd8efaa425dd15e739f51ca3944b9a6670c37b2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ImageAndTextCell.h",
+      "bytes": 349,
+      "sha256": "8152461ef119cb2c8e7a5825ac397601dcfd1b75562072861256e4397e25f2da"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/Makefile",
+      "bytes": 1312,
+      "sha256": "2cbb521768b7019c6c61b8860a7a043a1f6f2ca56ce5df335ccc640bc0767eb2"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/MyController.h",
+      "bytes": 3941,
+      "sha256": "27b5ecbd3dd0504f66380bb2da1a289ce60306d6f256460da6d6b93992562cd7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/NotificationController.h",
+      "bytes": 394,
+      "sha256": "268b2193bf3512d76f6aa578a3463c8de46a6d205bf8170b10fe6e972c52f191"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/PreferencesController.h",
+      "bytes": 548,
+      "sha256": "9d70b8a4c35881a281b646d52a62f9c27d12513cbf0bb08b37832fa9c6a99e58"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ProfileController.h",
+      "bytes": 658,
+      "sha256": "d435c51ad1c7b9a1780944c51a76cf0a9a5a0d8c3b6b0b07002b57909486d3fd"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ProfileTableView.h",
+      "bytes": 163,
+      "sha256": "9f99e0686d50d9bcf5b18884f1a747549343225de07e61488c32924546112f6a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ProgressCell.h",
+      "bytes": 411,
+      "sha256": "cab15ab31bba726de14d3ab661bc2580cf571059ae4bb0b159414b470036786a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ReconItem.h",
+      "bytes": 1934,
+      "sha256": "91694cf98bce0176123b59ac60ce59ae9f440308fa668386a27e470d43719a6e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ReconTableView.h",
+      "bytes": 1180,
+      "sha256": "6f701753a49001fdb3ed10ce40ad185a4c52ff7bd610af376d2a68743aa7b4c7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/UnisonToolbar.h",
+      "bytes": 1045,
+      "sha256": "c8d73bf5120708f01950003a60d46b501ad9f36d1edc1672cc22654232213432"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/cltool.c",
+      "bytes": 2115,
+      "sha256": "eec058c365f05e43047b0703fb6b0612b03159e6f1a788312c89b14cd2ab2386"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ssselectabletoolbar/SSSelectableToolbar.h",
+      "bytes": 886,
+      "sha256": "639fce8865cee3dcaeae45aad6ddeef5e5cc81290539b7fea8860e5208eeb861"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimac/ssselectabletoolbar/SSSelectableToolbarItem.h",
+      "bytes": 345,
+      "sha256": "7b642afa5b4152958350179d938b7db17f42f860cdac731792f4353a0975655f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uimacbridge.ml",
+      "bytes": 28551,
+      "sha256": "06d72fffa2b9e4d2c06dd4b626783f8f8d90c0dfcbe47adfa568489671d69d9c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uitext.ml",
+      "bytes": 67926,
+      "sha256": "d415f7d09f17e55c8b1fe405287f006d20d73a0ab65d67b8173a36c5ffbe2e4a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uitext.mli",
+      "bytes": 146,
+      "sha256": "591b9a016700cc19b79c86df3b58b3c3fe234907ef2facc61dd850c8d16d73ad"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/unicode.ml",
+      "bytes": 71191,
+      "sha256": "a2e95dd9a9c0f069c4134c0be24e99ca6401398f32d6a23b6cdc7c2618928282"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/unicode.mli",
+      "bytes": 1730,
+      "sha256": "fe834013cf48939862c4b0fbbb17d22e001591add31113cfa13686d414a10846"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/unicode_tables.ml",
+      "bytes": 76430,
+      "sha256": "050ac9dffbfa55109fed644d50da92c180a35fab55ebde2d5941ec83d40482aa"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/update.ml",
+      "bytes": 126645,
+      "sha256": "8a66e63bf55bb2ea9f9dc7f48fa9bd420040d213a85dcd35d09eff2568b323ca"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/update.mli",
+      "bytes": 4565,
+      "sha256": "9176979573f73fb50a7c5f2a201f845193d47711e5019beb3e5269290f9ae1ec"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uutil.ml",
+      "bytes": 5729,
+      "sha256": "dd919c86d4cf21f3ba80342dec4afbddffc4ce572905eff5a5f6893c6d21fe7a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/uutil.mli",
+      "bytes": 2125,
+      "sha256": "3b9e8006e556e21d1f15c1f64fb6d2aabb1268d143f3f6ddda46f600954be16d"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationDescriptor.ml",
+      "bytes": 2612,
+      "sha256": "73652a160d99b3837669ea04be120d9337fdd86c37c78cc54714acc982e8520b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationDescriptor.mli",
+      "bytes": 741,
+      "sha256": "971d4730fee5993f7fc230c7783b1eac63105b21ec96adbf2cfd200d140646d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationPaths.ml",
+      "bytes": 1059,
+      "sha256": "2840faceab2c448409cb7cd85065d5c5c6102fc6e9d3d77ea2bc50cc19d40da8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationPaths.mli",
+      "bytes": 473,
+      "sha256": "6d291220ef3579b290693551fd80ffef554a81b1f7a43f36e9d6dfbe3acc7895"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationScanWork.ml",
+      "bytes": 4248,
+      "sha256": "9772e35a00b6aee9809e02e0a1663e81619fbdb36dfdcd31c28d5c9eedf775c7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationScanWork.mli",
+      "bytes": 1368,
+      "sha256": "34b7d9bfa4a63d80ea8e72db7ba8a433ee115af51ad9cd7f8b2910dc16b5ac64"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationSnapshot.ml",
+      "bytes": 4694,
+      "sha256": "c876943e429ed9efe75db4f3b41256736c5373b456a5adbce3642d6ca193e3ff"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationSnapshot.mli",
+      "bytes": 1919,
+      "sha256": "a039a9dfaede9e1332533ef59260a45bbc3f7232423f3e8c2104f18a9f1b00ca"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationSnapshot.ox.mli.in",
+      "bytes": 1931,
+      "sha256": "140578677b9f740c2caf6725c9ce981bf93228b53801e93fdaa71f8533b8767b"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationStage.ml",
+      "bytes": 6806,
+      "sha256": "327a544244bf0744aab5984016c66b032981a209675f3c52899ebdd64b42fc2c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationStage.mli",
+      "bytes": 2550,
+      "sha256": "eb605bb7a88292cfe579f4a97aae600d41bd687d55671a7f6ef31629f97bc2b6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationStageWork.ml",
+      "bytes": 2551,
+      "sha256": "53768f84eb3e632f6dcc8c28ac0655373304ddd667d443f553e393540d73c236"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationStageWork.mli",
+      "bytes": 2387,
+      "sha256": "a6cf7cb2ce48af96bdf9d189328d6cf84f011572421001754867589eb894e3f8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationTreeBudget.ml",
+      "bytes": 2158,
+      "sha256": "ce8373b3e025c25969710800f7a4cac91c0e37571063f0343df0c8b0c038d970"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationTreeBudget.mli",
+      "bytes": 995,
+      "sha256": "51795bb010c7a18d3054e8fa5bf3591abee988cd93642786afbeca98f1a28773"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationTreePolicy.ml",
+      "bytes": 2038,
+      "sha256": "370a81d04491afe4dc63f041c0998340c2446e73cc667337e712b2069f591092"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/validationTreePolicy.mli",
+      "bytes": 299,
+      "sha256": "cf852abda0f5551414d7013484f773e0754a78e72461798cdfb0f2b22a74478f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/wholeFileClone.ml",
+      "bytes": 8676,
+      "sha256": "57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/wholeFileClone.mli",
+      "bytes": 2516,
+      "sha256": "21baffedf72b244bb0a867d3eb9b8748b8358ea09f4f06bbeec7b5fe2b9b838a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/wholeFileClone.ox.mli.in",
+      "bytes": 2528,
+      "sha256": "25d3b5f241ceeb586ed3935d9d549d57640ad8225284c5e64cf3e273fe2afa0f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/wholeFileClone_stubs.c",
+      "bytes": 39857,
+      "sha256": "e99d7e9fbc71937d44919c498b2ef9392e73cb7944598821bf58d06a2afdcb75"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xferhint.ml",
+      "bytes": 2311,
+      "sha256": "b90728780012b9c183e09383620673231ed4643a2236ca05695bc907892c77c5"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xferhint.mli",
+      "bytes": 797,
+      "sha256": "18c94d96aa6a3b167ca6c348807834a4b4b64820c77753174a19a52b9334b22a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpMerge.ml",
+      "bytes": 1570,
+      "sha256": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpMerge.mli",
+      "bytes": 792,
+      "sha256": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpMerge.ox.mli.in",
+      "bytes": 804,
+      "sha256": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpObservation.ml",
+      "bytes": 25841,
+      "sha256": "8bae196e579610a52b674bafc369e28e96601a72faf2c60fc9f94e9e8b78b7eb"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpObservation.mli",
+      "bytes": 4281,
+      "sha256": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/src/xmpObservation.ox.mli.in",
+      "bytes": 4293,
+      "sha256": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/tests/workers/component_controls.py",
+      "bytes": 4167,
+      "sha256": "89028a1c4c050f7834a7fae9a9fa701e61d47aa2694f9b4c495baea83d0f2a80"
+    },
+    {
+      "path": "/Users/alexy/src/unison-component-workers-20261017/tests/workers/components.ml",
+      "bytes": 7004,
+      "sha256": "f4bc15c1c73f59a253d2506c14f65f01b3442ed3a8af2340fe72435eed0c851c"
+    }
+  ],
+  "make_actual_terminal": {
+    "session": 38881,
+    "chunk_id": "087acc",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "dune_and_selftests_actual_terminal": {
+    "session": 13072,
+    "chunk_id": "c40426",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-component-workers-stock-make-20261017-001/RESULT.json",
+        "bytes": 48697,
+        "sha256": "9366f6b75fe1fdaaeb07749328907f162432c79c3d45bbdd3350f703d017708b"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-b78aaomk/src/unison",
+        "bytes": 5817408,
+        "sha256": "c3b9cbfa3dcd7661958db33f25f2d546f8126e2865666b83317fe7d7a8cffe30"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-component-workers-stock-make-20261017-001/SHARED-START.json",
+          "bytes": 1278,
+          "sha256": "7a2e5d01281fd163f8342faa488e7fe7a80280877f917cd6f481e3ea5ca89bb4"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "3fac67e8cb3dfaf373c65e5ae753a86274cf2a440a283c303dc0a1e0f6eee39a"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 176,
+          "sha256": "b564a549fb02949815f10fb0dee9dbad73fb472d34eb6a0522608c014328cca7"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-component-workers-stock-dune-check-20261017-001/RESULT.json",
+        "bytes": 48989,
+        "sha256": "599a1b74fccd6033045939545d606ef06c87da8caff684c091a8e103651fa7db"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-kd752v55/_build/default/src/linktext.exe",
+        "bytes": 5865544,
+        "sha256": "259e8ad4a29aa1f6dd25aa158ab1a4c829924fd780fd3f716140c14e328b17bb"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-component-workers-stock-dune-check-20261017-001/SHARED-START.json",
+          "bytes": 1376,
+          "sha256": "1d1326ab28ccf7f036d5190c8c767561e05649f0e0477100235b86f4dcb67698"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-dune-check-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "ddfb9464ebd20a1c0b198a69e648c9feb76cf7a83a2eb3269daa754982c2bcb4"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-dune-check-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 303,
+          "sha256": "d699b06f85d98c5c341e6309e659c575e8bb0f86c65d4a1940acc1564b9ba571"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-stock-dune-check-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "result": {
+        "path": "/private/tmp/unison-component-workers-ox-make-20261017-001/RESULT.json",
+        "bytes": 48703,
+        "sha256": "f86ab11251e7dd84cd2fee7088999755e9d5fa6bd5bac101bd5ab54d80e735fb"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-tlv9qiit/src/unison",
+        "bytes": 7789048,
+        "sha256": "784ed6434cacdfb9b62cd53448293afbe722a3e940a2ee45ae8fcd7ed88676eb"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-component-workers-ox-make-20261017-001/SHARED-START.json",
+          "bytes": 1273,
+          "sha256": "61462d0aaccea789e5c82c5a2eba4b154b8deaf71453175d06a0ec9ce80ea2d4"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "14d978ff6428d2aee7fef05a7e6c32c3ba04e4d0dc27539adb8792bc02921db7"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 176,
+          "sha256": "91edecda7176704a831db6302b88d3c68f14f8f8c96564a482d6ad42898b5213"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "result": {
+        "path": "/private/tmp/unison-component-workers-ox-dune-check-20261017-001/RESULT.json",
+        "bytes": 48993,
+        "sha256": "cf006c7f627d69d572bcfdf68b3a51ed886a7076ae151b2227c459cbe8ecaefe"
+      },
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-95t4oto_/_build/default/src/linktext.exe",
+        "bytes": 7478344,
+        "sha256": "582bf4be7a195350cfe1af9580661e6ea294a6cd7906ca61b12f6d70dd1111e3"
+      },
+      "closure": [
+        {
+          "path": "/private/tmp/unison-component-workers-ox-dune-check-20261017-001/SHARED-START.json",
+          "bytes": 1370,
+          "sha256": "fb9d5dab50f732048526fa278d9c990fdc592b69853e8611e7f61c77a02510b1"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-dune-check-20261017-001/SHARED-CLOSED.json",
+          "bytes": 500,
+          "sha256": "2e7373b1a79213e1ad0c8efc36c42c0ea2adcef89de063df3f3c615316747ec4"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-dune-check-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 303,
+          "sha256": "93f74fc84d383b61e27fd2cab78500693be2bb983fdb4da9c2716b7a7fb305d4"
+        },
+        {
+          "path": "/private/tmp/unison-component-workers-ox-dune-check-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "current_production_source_hash_checks": 1272,
+  "earlier_controls": [
+    {
+      "workspace": "/private/tmp/unison-component-worker-controls-20261017-001",
+      "terminal": {
+        "session": 48133,
+        "chunk_id": "680812",
+        "exit_code": 0
+      },
+      "checks_per_compiler": 80
+    },
+    {
+      "workspace": "/private/tmp/unison-component-worker-controls-20261017-002",
+      "terminal": {
+        "session": 77953,
+        "chunk_id": "47b667",
+        "exit_code": 0
+      },
+      "checks_per_compiler": 84
+    }
+  ],
+  "scope": "Explicit worker operation returns compact immutable hashes/projections/decoder outcomes/stats, no session/reader/snapshot capability. Twelve separately opened FD jobs on configured2-worker pool preserve full/pixel parity, refine off owner and report reads on owner; configured parallel functional parity, not measured simultaneous compute. Baseline/refined requested8192/8321B and delivered8280/8409B including geometry. Unsupported versus operational-budget failure, negative pre-admission, successful filesystem gate, queued/late cancellation, completed-before-shutdown suppression, caller FD/CPU/localIO/queue/descriptor baseline settlement. Four stock/Ox Make/Dune builds, Dune fullselftestsworkers3 passed. Existing canonicalUnison00..07 only; no EXglobal/Adobe/media/realcamera, persistent cache/archive/wire/publication or physical resource hardcap qualification."
+}
