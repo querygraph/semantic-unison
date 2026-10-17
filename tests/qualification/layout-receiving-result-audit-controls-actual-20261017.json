@@ -1,0 +1,264 @@
+{
+  "schema": "unison-layout-receiving-result-audit-controls/1",
+  "state": "FAKE_RECORD_AUDITOR_PASS_CLOSED_NOT_ACTUAL_RECEIVING",
+  "actual_parent_terminal": {
+    "kind": "exec_command",
+    "chunk_id": "185857",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "closure": [
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-004/SHARED-START.json",
+      "bytes": 1107,
+      "sha256": "5511948009a99cf828d42896cf051b7890cce17dd7d37945992af407944e79d0"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-004/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "c26b1491b51a0d197065d55c982af9c67bee35a0454a3803077596c749e146e9"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-004/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-004/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "03e2ce7efb78ca7222db4c9a68781f9953dd3bd674b491cc52a8a4986d74e6f4"
+    }
+  ],
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison/tests/layout_receiving_result_audit.py",
+      "bytes": 6081,
+      "sha256": "c36c8cd48d2b2ca33fb88c40b29bca38804ca83750ec884b760e27dea5556a9f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/layout_receiving_result_audit_test.py",
+      "bytes": 6565,
+      "sha256": "3389df088fb7f572d7873dfb619055db207ef312e895e971acaa39877d3b9577"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/aggregate_successor_lifecycle_test.py",
+      "bytes": 720,
+      "sha256": "fac56ca371715f3640fcdc68afe3c5f34c155f082c9846ce62bc7d5b1712aa58"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/artifact_pins.py",
+      "bytes": 2192,
+      "sha256": "df67afb4bbc37983fe07adcafac5cec10e1b4cd35aed7a490348c7c940791fbd"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/artifact_pins_test.py",
+      "bytes": 3622,
+      "sha256": "a2239c0f000522fbdb5bb9575b63df377c83c60855359b89f81dbb83349d2304"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/batch_audit.py",
+      "bytes": 3866,
+      "sha256": "3d290f1366abf5544791a0773ea9057ef9b3bf4f8b4ba770ee9b6aa7a349d2f0"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/bounded_source_test.py",
+      "bytes": 2471,
+      "sha256": "7360073a4ccc0257d295d5768b8a71a920e4ecafae2e0cdd0b5e8dcadbd5cc2b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/check.py",
+      "bytes": 11780,
+      "sha256": "5f64df8d2a54e35d60ecff04fb68737522773334f0cca9661c844e80c92c5a50"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/fixtures.py",
+      "bytes": 4072,
+      "sha256": "cd81f38c03d2e556726c3bb7752d0e72ae78ae36e71d362aea635b35dcb50335"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/interrupted_receipt_lifecycle_test.py",
+      "bytes": 3011,
+      "sha256": "6eb2f4a04c3049ff5571f2021112991db049cad84166f245fc8e9e471b7cd479"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/interrupted_receipt_test.py",
+      "bytes": 1960,
+      "sha256": "abfb87ac6f5262e2daab8e58fc9ecba0fb1c3aa8cb361966e72f763f10f79557"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal.py",
+      "bytes": 7283,
+      "sha256": "1e99ff956720471480c201a6fafb6bd96679c20832c7089bcee3b44269931eb1"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/invocation_journal_test.py",
+      "bytes": 7196,
+      "sha256": "dad2b764eba3401edce959368957af0c3770e15b0e3252ab961b2726a690fae7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/journal_lifecycle_test.py",
+      "bytes": 3437,
+      "sha256": "53e007d6f3b32db8fcbeaaaeb94838f93a5360c9a4b7e8d7315528ab8d399b46"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/launcher.py",
+      "bytes": 1486,
+      "sha256": "5b2c565fcf709f3ef23129f54af390b02c0e7a064a331fcd6741f69d7f9625ed"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/layout_fixture_test.py",
+      "bytes": 1702,
+      "sha256": "13a3e5931626ee6edb25fd50b5539de8432dae6d41911359634391ff459b6c5d"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/measure.py",
+      "bytes": 3856,
+      "sha256": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/merge_partitions.py",
+      "bytes": 2790,
+      "sha256": "5824deac54ab0a55f7709a7b3665de2a2a3df38c1f9b9ae0f4cd8dd5e92b241a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/merge_partitions_test.py",
+      "bytes": 3057,
+      "sha256": "689874ee37ef9e7d8d9d05245e5c96fe33ecf0c751bce05650a8bee90b39eac7"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/native_settlement_lifecycle_test.py",
+      "bytes": 5997,
+      "sha256": "d710aa65d8e56de9da31eff5a1e6fbd787a96c95254811b660f040b7845ff79a"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/native_settlement_policy_test.py",
+      "bytes": 2282,
+      "sha256": "482dcd52c451b4caf4746bfd23c2bd32202dd9ec24d84ee52b9dd47adcc2aa44"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/ownership.py",
+      "bytes": 8762,
+      "sha256": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partition_dispatch_test.py",
+      "bytes": 4291,
+      "sha256": "fedafa5f138df38ed1ff43fa2f08c3acdb2355cd9a90156dbe274282bd80ff45"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions.py",
+      "bytes": 4609,
+      "sha256": "a512fb26960bf520c89cb205456d45f2a1980098aa9cf181835a4f886e6c67b8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/partitions_test.py",
+      "bytes": 3900,
+      "sha256": "f61b2bb7c6c3781932de75430fc57b139893e19339b5311781ac868a14c75925"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/prepare_plan.py",
+      "bytes": 7954,
+      "sha256": "e0d5b1e7be49a89af71d2549ab6ee63b3d33eab297b9bfa191833a93b9e53864"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/prepare_plan_test.py",
+      "bytes": 2442,
+      "sha256": "dc61c903a25c133ef2a3746b3dc67f2187aa0a400947207895b7efadb7d93bd2"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/properties.py",
+      "bytes": 4839,
+      "sha256": "f5cf6616877f2e862e6d8f1397576d3cf8a9a3138b0dfc97f0cee8fe02762889"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/properties_test.py",
+      "bytes": 3699,
+      "sha256": "9f4ee7ce9e8d12ac7cae7a9d4eb03374b52d7ac765f5c8af5986ea6975868ac8"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/proxy.py",
+      "bytes": 8517,
+      "sha256": "996760a6dee2641247d07c1cc5eecc742fb0e57c89ba16c7529bc37857135546"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/read_stats.py",
+      "bytes": 2395,
+      "sha256": "a8606cc8c53102863b078d082339f92b5641392dc45274ca5f85fe61d19f590f"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run.py",
+      "bytes": 36780,
+      "sha256": "959b7f83d992bbee7f0a884c8527c08e4f6fc254009d58322500e5728c49d001"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/run_bounded.py",
+      "bytes": 7385,
+      "sha256": "eb38ca27ccfdcb72458c2fe78f1e658bfc0dd4461536182dfa1bacf50843b508"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/shared_audit.py",
+      "bytes": 6314,
+      "sha256": "cf3f56bff9e40cf9b9cf2158c7c96c9f1fdda630b30c910a26c954640d1b0148"
+    },
+    {
+      "path": "/Users/alexy/src/unison/bench/sync/shared_budget_test.py",
+      "bytes": 2506,
+      "sha256": "1611f23f923a11627a6e191cc5464f4c77ce7e7dfbec9ed1d97f70a6bcf115bf"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/manual.py",
+      "bytes": 23816,
+      "sha256": "a698886b21d39ef24ed9639a219ee8f4206b5fabfbad086680abb306dc4e3b2b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_cpu_pool.py",
+      "bytes": 9999,
+      "sha256": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_dispatch.py",
+      "bytes": 30006,
+      "sha256": "6a3021d83dcbb75c0b6f9532f124bfcd1c85bdbcafcb2d3a03a2872414f2e38b"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_io_pool.py",
+      "bytes": 11486,
+      "sha256": "38d99976a987426019d3b91256d908bf78c5356c90b3e0ad065571f5a8810488"
+    },
+    {
+      "path": "/Users/alexy/src/unison/tests/shared_process_owner.py",
+      "bytes": 3146,
+      "sha256": "2b33ef17dfa7698082fab12169564e88505366c69194bf80b4ab2a78474f348c"
+    }
+  ],
+  "frozen_request": {
+    "path": "/Users/alexy/src/unison/doc/layout-receiving-request-v1.json",
+    "bytes": 10738,
+    "sha256": "a1b0dc643605c7fcecbfe4952d25cf14df839fae45fbcc82086a9d8e33d1491b"
+  },
+  "frozen_plan": {
+    "path": "/Users/alexy/src/unison/doc/layout-receiving-plan-v1.json",
+    "bytes": 8889,
+    "sha256": "77f87fab838911aa98aa3543cd9b9506c6360d4f73177ebdc959cc61e67d57a1"
+  },
+  "unit_methods": 4,
+  "original_negative_mutations": 13,
+  "earlier_narrower_controls": [
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-001",
+      "actual_chunk": "e8e3e5",
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-002",
+      "actual_chunk": "473e22",
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/unison-layout-receiving-result-controls-20261017-003",
+      "actual_chunk": "c45252",
+      "exit_code": 0
+    }
+  ],
+  "scope": "Pure supplemental request-bound audit, outside unchanged38-source worker closure. Fake54-call records exercise true layout flag, requested/default8192B packet budgets, admitted artifact SHA identities, observed resolved path names, runner pin set, client command binding and two raw-profile/counter updates per semantic row. Caller authenticates raw receipts and separately collects actual parent terminal; function cannot acquire/release resources or prove physical path aliases. No actual sync/SDK/media/EXIO or runtime admission. All controls/groups/CPU8 closed."
+}

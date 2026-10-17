@@ -7,6 +7,39 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest supplement: independent request/raw-log receiving auditor
+
+`tests/layout_receiving_result_audit.py` is a pure post-run consumer outside the
+frozen38-source receiving worker closure. It requires the requested layout mode,
+packet size (including frozen8192 default), admitted binary/compiler SHA maps,
+runner source map and per-call client path consistency; it reruns the existing
+strict54-call audit and reparses captured SDE logs for all six semantic rows.
+Each must prove two `org.firstpair.dng-layout/0` updates with matching reported
+write/payload/window counters. This prevents an optional-mode flag or cached
+counter from substituting generic receiving evidence for layout qualification.
+
+Requested and resolved executable paths are retained as observations, with byte
+identity bound by admitted SHA. The runner resolves macOS /var and compiler
+symlinks; the pure auditor neither re-resolves filesystem names nor claims to
+prove physical aliases. The caller still authenticates request/result/raw
+process receipts and collects the actual owner terminal separately. The helper
+cannot acquire or release resources or grant execution authority.
+
+Final controls actual exec_command185857/exit0/no session:4 unittest methods,
+13 original negative mutations; explicit/default packet cases and canonical-name
+observations passed. Fake54-call records only, no actual sync/media/SDK/EXIO.
+All child/group/CPU8 closed. Evidence
+`tests/qualification/layout-receiving-result-audit-controls-actual-20261017.json`
+10258B SHAdf82335ffdf07c07af915e617146c26741a449b0a5549d039678fddd0d229012;
+helper6081B SHAc36c8cd48d2b2ca33fb88c40b29bca38804ca83750ec884b760e27dea5556a9f.
+Earlier001..003 smaller fake controls passed/closed and are retained.
+
+Existing requesta1b0dc64/plan77f87fab and all38 execution pins are unchanged.
+Fresh metadata1792206860.263437 observed admission/workspace still absent;
+this is scheduling metadata, not a fabricated owner terminal or an admission.
+No actual receiving START/resources. Root source-review request remains the
+same queued01a147d5-8cd6; supplement does not replace, renew or dispatch it.
+
 ## Latest: exact-layout production receiving request prepared, NOT dispatched
 
 New optional `SYNC_LAYOUT_ONLY_CONTROLS=1` routes only through the separately

@@ -93,3 +93,14 @@ unnegotiated layout capability and preserves local policy; they do not prove
 old-peer transport. [Both current Make/selftests](../tests/qualification/layout-receiving-build-selftests-actual-20261017.json)
 passed with workers3 per endpoint. Actual matrix execution requires a fresh
 Root IO admission; no historical admission may be reused.
+
+The supplemental pure [result auditor](../tests/layout_receiving_result_audit.py)
+binds that request's mode/artifact/source/packet claims and independently
+reparses captured SDE logs for every semantic row. It compares reported counters
+with raw captured output and consumes the strict54-call lifecycle audit. Its
+[fake-record controls](../tests/qualification/layout-receiving-result-audit-controls-actual-20261017.json)
+passed four methods and13 negative mutations. Requested/resolved path strings
+are observations, not physical alias proof; artifact SHA pins bind identity.
+Caller authentication and actual owning-tool terminal evidence remain separate.
+This helper is outside the unchanged pending worker closure; it grants no run
+or resource release and is not actual receiving qualification.

@@ -147,7 +147,11 @@ is source-prepared, not yet admitted or run. It reuses the finite shared18-row/
 requires the exact layout profile on semantic rows. Source controls passed
 197 current preference-boundary checks per compiler; both current Make builds
 and full selftests passed under standing8. Exact request/plan/38execution pins
-await separately coordinated IO admission. This is an operational qualification
+await separately coordinated IO admission. A supplementary pure post-run auditor
+now binds the requested mode/packet/artifact/source claims and reparses captured
+layout-profile logs, with four fake-record methods/thirteen negative mutations
+passed; it does not change the frozen executor or grant runtime authority.
+This is an operational qualification
 step, not a renewed requirement for complete private-field understanding.
 
 Owner-frozen nested DNG decoder dispatch is now implemented and
