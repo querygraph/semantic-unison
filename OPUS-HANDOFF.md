@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Accumulated checkpoint/DNG restoration/replacement source4d42753b now passes
+current full Make builds+selftests on stock5.2.0 and OxCaml, each3semanticworkers.
+Actualstock90151/b8a560/0 andOx28025/35ef1b/0; both workers genuinelyreaped0,
+othergroupmembersabsent and allUnison8tokensclosed. Rechecked318currentproduction
+sourcepins perbuild. Receipt
+`tests/qualification/component-cache-integration-make-actual-20261017.json`.
+Dune successor checks, automatic decoder provenance selection, persistent owner
+store/worker integration and merge into main remain outstanding. No media/SDK/EXIO.
+
 Private decoder replacement now has an explicit DNG API with expected-old-schema
 guard, immutable success-only publication and shared private-fragment validation.
 Stock/Ox94DNGchecks each/58calls passed, including stale/unsupported retention,
