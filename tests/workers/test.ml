@@ -74,7 +74,7 @@ let identify_tests () =
       (fun result -> ignore(Unix.LargeFile.fstat file);Unix.close file;return result)
       (fun error -> Unix.close file;fail error) in
   let selected formats = function
-    | Some result ->
+    | Some (result:W.identification) ->
       check (result.W.formats=formats) "wrong selected formats";
       (match result.W.fingerprint with
        | Some fingerprint ->

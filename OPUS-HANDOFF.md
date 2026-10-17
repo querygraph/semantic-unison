@@ -3258,3 +3258,18 @@ as needed, with newRootIO admission before dispatch. Legacy source-FD cleanup
 uncertainty remains a source review item. No camera/SDK/payload opened; no jobs/
 resources held. User excludes autonomous fuzz/sanitizer work and exhaustive
 MakerNotes are not a deployment gate. Allprioradmissionsremainconsumed.
+
+
+## Current worker apply regression closed — 2026-10-17
+
+Actual86836/67c190/0/no session links current compiler-matched production objects
+and passes seeded apply/cancel on stock andOx; workers16370/16398reaped0/groups
+absent/tokensclosed. Sixseeds×4batches×16jobs/compiler; exact completed targets,
+cancelled-stage nonpublication, basis/target preservation, permits/queues/descriptor
+baselines pass. Unused1GiB sparse files are not created. Receipt integration-
+worker-apply-actual-20261017.json has exact observed counts/source/object pins.
+Initialstock001/002/003 compile/link failures preserved/closed before applyjobs:
+record type ambiguity, missing snapshot dependency, then clone dependency. Test
+harness inventory/type/setup changed only; production candidate is unchanged.
+No camera/SDK/transport/bulkIO/native grant. Next prepare finite current transfer/
+mixed-peer request with exact pins, coordinate freshRootIO; no oldadmissionreuse.

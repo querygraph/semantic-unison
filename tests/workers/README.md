@@ -114,3 +114,17 @@ No production source/build objects were changed. This is a worker delivery race
 control, not a publication commit, arbitrary async-fault or hard-resource proof.
 Actual owning session11412/66fb24/0/no running session; Unison8 closed. No SDK,
 camera/Photo/media or canonical IO access. The frozen mixed326 source pins match.
+
+
+## Current consolidated candidate apply regression (2026-10-17)
+
+The focused `--apply-stress-only` setup now omits its unused1GiB sparse fixtures.
+Its link inventory includes the production snapshot/clone and component modules
+required by the current worker. An identification record annotation resolves the
+new shared-label ambiguity without changing production code. Initial compile/link
+failures are preserved; no apply jobs ran in them. Current actual-object stock/Ox
+qualification is `../qualification/integration-worker-apply-actual-20261017.json`.
+All worker groups/CPU tokens closed; exact completed outputs, cancelled-stage
+nonpublication, descriptor baselines and CPU/pending ledgers were checked. This
+is bounded seeded scheduling, not exhaustive race detection or a native-write
+cancellation-location claim. No SDK, camera, transport or EXglobal invocation.

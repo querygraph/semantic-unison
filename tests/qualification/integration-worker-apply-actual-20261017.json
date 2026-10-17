@@ -1,0 +1,94 @@
+{
+  "complete": true,
+  "owner": {
+    "session": 86836,
+    "terminal_chunk": "67c190",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "steps": [
+    {
+      "label": "stock",
+      "result": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-004/RESULT.json",
+        "bytes": 19532,
+        "sha256": "309a1471040698ecb39fa8c57082e858a942ddf0871cadff6616c37dac1ed47e"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-004/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "da2dd6eed4b1d248ef78b12afb13ffb8ed61204d4d21760b68030f3cfb72d9ad"
+      },
+      "summary": [
+        "PASS seeded apply stress seeds=6 jobs=384 completed=192 cancelled=192 late_cancel=0 checks=1255"
+      ],
+      "unused_large_fixtures_absent": true
+    },
+    {
+      "label": "ox",
+      "result": {
+        "path": "/private/tmp/unison-current-worker-apply-ox-20261017-004/RESULT.json",
+        "bytes": 19536,
+        "sha256": "86bf904ebde9b5eed8f48f3f3c5825fd781f398337fc66d1073f968ddc384cc4"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-apply-ox-20261017-004/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "23cb416905a3856ef49e308194a0ff0d3ab87e848eefa4339ef1c0fe37dd3402"
+      },
+      "summary": [
+        "PASS seeded apply stress seeds=6 jobs=384 completed=192 cancelled=192 late_cancel=0 checks=1255"
+      ],
+      "unused_large_fixtures_absent": true
+    }
+  ],
+  "preserved_initial_failures": [
+    {
+      "stage": "001",
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "765db40d215daf63d1caed0f64fab3b2168460d82e6abeb2cb0b225b20580a42"
+      },
+      "error": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-001/SHARED-STDERR.txt",
+        "bytes": 1753,
+        "sha256": "8a3b15ce08278056cd1dd48b4bbc3cd96f88ddf64b2427c033fa45edff0453b6"
+      },
+      "scope": "Test compile/link failure before apply jobs"
+    },
+    {
+      "stage": "002",
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-002/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "d6c2edf61e2381d1e9b5696a381bbc654e04feeb5bfff7fa529c214cb254a488"
+      },
+      "error": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-002/SHARED-STDERR.txt",
+        "bytes": 1540,
+        "sha256": "b47f83996ca1dacdc93afcfc4eb83a76a54f0e16c2b75ec4792dafb81e8471c4"
+      },
+      "scope": "Test compile/link failure before apply jobs"
+    },
+    {
+      "stage": "003",
+      "closure": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-003/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "5ea3fa696a07cd299ebdaccb6afe4fda45da90b156429c249d7fb4d64c5ff36d"
+      },
+      "error": {
+        "path": "/private/tmp/unison-current-worker-apply-stock-20261017-003/SHARED-STDERR.txt",
+        "bytes": 1565,
+        "sha256": "5f5b896083cc8db05d8e16eb744ea60f33229478fa36cf404f1a4886121e8637"
+      },
+      "scope": "Test compile/link failure before apply jobs"
+    }
+  ],
+  "scope": "Current actual stock/Ox production objects, six seeded four-batch sixteen-job apply/cancellation races; original generated fixtures only",
+  "limitations": [
+    "Scheduling observations do not prove cancellation inside a particular native write",
+    "No SDK/media/transport/IO barrier/physical IO savings or peak resource claim"
+  ]
+}

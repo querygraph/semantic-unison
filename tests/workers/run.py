@@ -34,12 +34,17 @@ sources = [
     "src/ioAdmission.mli", "src/ioAdmission.ml",
     "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
     "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
+    "src/wholeFileClone_stubs.c", "src/wholeFileClone.mli", "src/wholeFileClone.ml",
+    "src/validationSnapshot.mli", "src/validationSnapshot.ml",
+    "src/componentHash.mli", "src/componentHash.ml",
     "src/formatRecognition.mli", "src/formatRecognition.ml",
     "src/dngRecognition.mli", "src/dngRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
     "src/dngExtended.mli", "src/dngExtended.ml",
+    "src/dngLayout.mli", "src/dngLayout.ml",
+    "src/dngComponents.mli", "src/dngComponents.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
     "src/semanticMailbox.mli", "src/semanticMailbox.ml", "src/semanticWorkers.mli", "src/semanticWorkers.ml",
     "tests/workers/test.ml",
@@ -124,12 +129,13 @@ with workspace as tmp:
     probe=b"SYN1"+bytes((i*71+19)%256 for i in range(262144-4))
     (build/"identify-probe.bin").write_bytes(probe)
     (build/"identify-probe.sha256").write_text(hashlib.sha256(probe).hexdigest()+"\n")
-    with (build / "large.dng").open("wb") as out:
-        out.write(dng)
-        out.truncate(1073741824)
-    with (build / "large-stage.dng").open("wb") as out:
-        out.write(dng)
-        out.truncate(1073741824)
+    if not args.apply_stress_only:
+        with (build / "large.dng").open("wb") as out:
+            out.write(dng)
+            out.truncate(1073741824)
+        with (build / "large-stage.dng").open("wb") as out:
+            out.write(dng)
+            out.truncate(1073741824)
     command=[str(build / "worker-test")]
     if args.identify_only: command.append("--identify-only")
     if args.shared_parity_only: command.append("--shared-parity-only")
