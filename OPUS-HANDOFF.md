@@ -7,6 +7,12 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Draft PR6 https://github.com/querygraph/unison/pull/6 is stacked on PR5,
+`feat/component-archive-hints` against `feat/component-owner-index`.
+Qualified source/evidencef171539b; all owned handles/grants are closed. PR4 and
+PR5 remain separate review levels; main frozen342RPC source is unchanged. No
+actual old-binary compatibility or automatic cache capture/reuse is claimed.
+
 Archive-hint successor `feat/component-archive-hints` in
 `/Users/alexy/src/unison-component-archive-20261017`, based on PR5c372213a, is
 qualified. Endpoint-local default-off componentownercache UAX/0 tail afterlegacy
