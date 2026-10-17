@@ -2310,3 +2310,30 @@ tokensclosed. Percompiler56component+1005checkpoint+27publicationfault+13readerf
 1272sourcechecks. Framing vectors count as controls, not additional camera fixtures.
 No media/SDK/transport, production writes or new resource grant. The main prepared
 RPC still requires its fresh exact admission; no dispatch follows from this note.
+
+
+## Current archive-reference successor — 2026-10-17
+
+Draft PR6 https://github.com/querygraph/unison/pull/6, sourcef171539b/metadata
+d8cf5566, lives on `feat/component-archive-hints` in sibling
+`/Users/alexy/src/unison-component-archive-20261017`, stacked on PR5. PR4/PR5 are
+ready review levels; none of this successor is merged into main. See that
+branch's current OPUS-HANDOFF.md and `doc/component-archive-hints.md`.
+
+The default-off endpoint-local componentownercache option persists explicit
+normally-published manifest references through the normal archive transaction.
+Its private property key is removed before legacy payload serialization; UAX/0
+is an optional tail after the existing paths map. Archive format23/default-off
+serialization/negotiated features are unchanged. Rename+directoryEIO cannot grant
+an owner reference. Missing/malformed/off hints never promote self-hashed blobs.
+No automatic capture/reuse or managed namespace installation yet; actual old-
+binary compatibility/hardware power-loss/legacy close-fault qualification remain
+open. This is local cache ownership, never common-file reconciliation authority.
+
+Exact isolated evidence `tests/qualification/component-archive-hints-actual-20261017.json`:
+focused63243/2ab595/0, full96641/27b99d/0 terminal/no sessions. Current stock/Ox
+Make/fullselftests/Dune1272SRCchecks,1391DNG+29archive-publication-fault+110worker
+checks/compiler and14linked private archive calls/6phases percompiler pass. All8
+adoptedworkers/groups/tokensclosed. Test-only import/symbol/preference setup
+failures preserved. No source-file payload, SDK/Adobe, remote process or transfer.
+Main frozen342RPC source remains unchanged; exact admission still required.
