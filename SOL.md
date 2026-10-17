@@ -6,12 +6,15 @@
 
 **Integration checkpoint, 2026-10-17:** consolidated draft PR13 against fork
 master contains the local managed-cache/report stack and producer-schema auditor
-correction. Current committed source79336ce7 has stock/Ox Make+selftest evidence
+correction. The consolidated candidate has stock/Ox Make+selftest evidence
 for cold namespace creation, portable component-source cleanup and index-capacity
 report preservation. User-facing cache setup is documented in the manual.
 Ordinary semantic-report source cleanup now has stock/Ox production-linked
 normal and injected-close uncertainty controls;
 current transfer/mixed-peer and camera-profile evidence remain separately scoped.
+The explicit native publication-owner backend and bound local SemanticSync
+transaction migration now have current stock/Ox Make/selftests/Dune and composed
+uncertainty/handoff controls; Copy and remote publication callers remain separate.
 Historical isolated checkpoints below are retained as history, not statements
 that integration is still absent or new execution authority. Local opt-in cache
 routing is implemented; remote endpoint cache routing is not. Unknown private

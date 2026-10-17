@@ -48,3 +48,13 @@ val merge_local_async_with_cache : cache:(Fspath.t * Path.local) ->
   right:Fspath.t -> output:Fspath.t -> SemanticDelta.application Lwt.t
 (** Resolve a private compact base under the agreeing previous archive binding;
     a miss retains verified saved-file fallback. No current replica is a base. *)
+
+
+type retained_publication
+val retained_publications : unit -> retained_publication list
+val retained_publication_cause : retained_publication -> exn
+val retained_publication_native : retained_publication -> StagePublication.owned option
+val retained_publication_descriptors : retained_publication -> Unix.file_descr list
+(** Owner-loop diagnostics for bound local native publication uncertainty.
+    Transaction admission and remaining known descriptors stay held inside the
+    pending operation. These observations grant no cleanup/retry authority. *)

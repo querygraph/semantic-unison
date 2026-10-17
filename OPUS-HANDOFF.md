@@ -3711,3 +3711,41 @@ pass. Exact receipt stage-publication-owned-backend-actual-20261017.json retains
 caller switched and no outer publication-admission qualification yet. Next migrate
 caller transaction owners and non-suppressing cleanup together, with composed
 fault controls; no transport/camera/SDK grant. Full goal remains active.
+
+
+## Bound local publication owner migration in progress — 2026-10-17
+
+SemanticSync's bound producer path now uses StagePublication.owned with a
+preallocated guard inside its actual transaction reservation. Native uncertainty
+retains the original higher-level cause, native carrier and remaining transaction
+or loose descriptors; error/connection cleanup cannot release the guard. Legacy
+Copy/remote/unbound/raw-pair/channel cleanup is not claimed migrated.
+
+Initial11183/10b447/0 passed new normal/adopt/disarm/callback-close controls on
+stock/Ox, but source review then corrected adoption-before-registration ordering
+to preserve name cleanup on record allocation failure. That initial source is
+superseded without changing its receipts. Current002 builds/controls owned by
+actual69137; existing semantic producer handoff harness updated for owned API
+and scope parameter, with actual regression run pending. No new transport/Photo
+IO/camera/SDK grant; generated8192B fixtures only. Source/prior frozen property
+request checkout remains separate, admission still absent at last observation.
+
+Revised local migration002 ACTUAL69137/6e7f13/0: stock/Ox Make+selftests and
+normal/adopt-close/disarm-close/callback-close composed controls allPASS. Native
+uncertainty retains outer admission plus remaining known descriptors even after
+connection cleanup; callback-failure original cause and published output preserved
+where appropriate. Scope diagnostics are observations, no cleanup capabilities.
+Actual5612/96b9cb/0 existing handoff suite32cases/compiler alsoPASS, including
+record/register/adopt-after faults, callback preservation, borrowed cleanup deferral
+and FD reuse. Corrected owned adopt instrumentation and internal scope parameter
+are in test_semantic_handoff.py. No actual remote transport: its remote unit uses
+existing in-process planner delivery. Both tools/groups/CPU leases closed.
+Dune stock/Ox current verification is now actualtool2544, pendingterminal.
+
+Local migration full verification ACTUAL CLOSED2544/c41a6f/0: both Dune builds
+pass. All previous/current test process groups and CPU leases closed; exact pins
+and scope in tests/qualification/local-publication-owned-actual-20261017.json.
+Bound SemanticSync producer family now actually migrated and qualified for native
+publication uncertainty, including guard/descriptor retention through connection
+cleanup. Copy/remote/unbound/raw/channel cleanup remain distinct; no universal
+resource-close proof or fresh transport/camera/SDK admission. Fullgoalactive.

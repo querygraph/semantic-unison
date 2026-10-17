@@ -77,19 +77,22 @@ let try_local ~source ~basis ~directory ~staging =
 (* Resource admission is global and independent of CPU permits. Each local
    transaction may inspect source and basis concurrently. *)
 type transaction = { path : Fspath.t; mutable fds : Unix.file_descr list;
-  mutable busy : bool; mutable abandoned : bool; mutable owned : bool }
+  mutable busy : bool; mutable abandoned : bool; mutable owned : bool;
+  mutable publication_pending : bool; mutable retained : bool }
 let close_transaction transaction =
+  if not(transaction.retained || transaction.publication_pending) then begin
   let fds = transaction.fds in
   transaction.fds <- [];
   let first = ref None in
   List.iter (fun fd -> try Unix.close fd with Unix.Unix_error _ as e ->
     if !first = None then first := Some e) fds;
   match !first with None -> () | Some e -> raise e
+  end
 let cleanup_transaction transaction =
   transaction.abandoned <- true;
   if not transaction.busy then
     (try close_transaction transaction with Unix.Unix_error _ -> ());
-  if transaction.owned then begin
+  if transaction.owned && not(transaction.retained || transaction.publication_pending) then begin
     transaction.owned <- false;
     try Fs.unlink transaction.path with Unix.Unix_error (Unix.ENOENT,_,_) -> ()
   end
@@ -99,7 +102,7 @@ let transaction_resources = Remote.resourceWithConnCleanup
   cleanup_transaction cleanup_transaction_noerr
 let register_transaction path basis_fd output_fd =
   let transaction =
-    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=true}
+    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=true;publication_pending=false;retained=false}
     with error -> discard_unregistered_stage path basis_fd output_fd; raise error in
   try transaction_resources.register transaction with error ->
     (* Registration may have installed the record before raising. Empty its
@@ -108,7 +111,7 @@ let register_transaction path basis_fd output_fd =
     transaction.fds <- [];
     transaction.abandoned <- true;
     List.iter close_fd_noerr fds;
-    if transaction.owned then begin
+    if transaction.owned && not(transaction.retained || transaction.publication_pending) then begin
       transaction.owned <- false; unlink_stage_noerr path
     end;
     (try transaction_resources.release_noerr transaction with _ -> ());
@@ -135,9 +138,53 @@ let with_borrowed transaction f =
 (* Bound producers retain a separate descriptor-relative name owner. The
    legacy transaction's pathname cleanup is disabled for these stages. A
    connection close must await borrowed workers before removing their stage. *)
-type publication = { context : StagePublication.t;
+type publication = { context : StagePublication.owned; scope : retained_publication;
   mutable transaction : transaction option; mutable closing : bool;
-  mutable closed : bool }
+  mutable closed : bool; mutable close_failed : bool; mutable close_error : exn;
+  mutable loose_basis : Unix.file_descr; mutable loose_output : Unix.file_descr;
+  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool; mutable loose_parent_held : bool }
+and retained_publication = {
+  mutable publication : publication option;
+  mutable native : StagePublication.owned option;
+  mutable cause : exn; mutable cause_recorded : bool;
+  mutable uncertain : bool; mutable linked : bool;
+  pending : bool Lwt.t;
+  link : retained_publication option;
+  mutable next : retained_publication option;
+}
+let retained_publication_owners = ref None
+let retained_publications () =
+  let rec collect acc = function None -> List.rev acc
+    | Some scope -> collect (scope::acc) scope.next in
+  collect [] !retained_publication_owners
+let retained_publication_cause scope = scope.cause
+let retained_publication_native scope = scope.native
+let retained_publication_descriptors scope = match scope.publication with
+  | Some {transaction=Some transaction;_} -> transaction.fds
+  | Some publication ->
+    (if publication.loose_parent_held then [publication.loose_parent] else []) @
+    (if publication.loose_fds then [publication.loose_basis;publication.loose_output] else [])
+  | None -> []
+let create_publication_scope () =
+  let pending=Lwt.wait () in
+  let rec scope={publication=None;native=None;cause=Out_of_memory;cause_recorded=false;
+    uncertain=false;linked=false;pending;link=Some scope;next=None} in scope
+let record_publication_cause scope error =
+  if not scope.cause_recorded then begin scope.cause<-error;scope.cause_recorded<-true end
+let owned_call scope work =
+  try work () with StagePublication.Ownership_uncertain native as error ->
+    record_publication_cause scope error;
+    scope.native<-native;scope.uncertain<-true;
+    (match scope.publication with Some {transaction=Some transaction;_}->transaction.retained<-true | _->());
+    if not scope.linked then begin
+      scope.next<- !retained_publication_owners;retained_publication_owners:=scope.link;scope.linked<-true
+    end;
+    raise error
+let protect_publication_scope scope work =
+  BorrowedWork.try_bind work
+    (fun value -> if scope.uncertain then scope.pending else Lwt.return value)
+    (fun error -> record_publication_cause scope error;
+      if scope.uncertain then scope.pending else Lwt.fail error)
 let close_publication publication =
   publication.closing <- true;
   (match publication.transaction with
@@ -147,7 +194,23 @@ let close_publication publication =
     | Some transaction -> transaction.busy | None -> false in
   if not busy && not publication.closed then begin
     publication.closed <- true;
-    StagePublication.abort_and_close publication.context
+    (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
+     with error -> publication.close_failed<-true;publication.close_error<-error;
+       record_publication_cause publication.scope error);
+    if not publication.scope.uncertain then begin
+      if publication.loose_fds then begin
+        publication.loose_fds<-false;
+        close_fd_noerr publication.loose_basis;close_fd_noerr publication.loose_output
+      end;
+      if publication.loose_parent_held then begin
+        publication.loose_parent_held<-false;close_fd_noerr publication.loose_parent
+      end;
+      (match publication.transaction with Some transaction ->
+        transaction.publication_pending<-false;
+        if transaction.abandoned then cleanup_transaction transaction
+       | None -> ())
+    end;
+    if publication.close_failed then raise publication.close_error
   end
 let close_publication_noerr publication =
   try close_publication publication with _ -> ()
@@ -158,15 +221,21 @@ let release_publication_noerr publication =
 let release_transaction_noerr transaction =
   try transaction_resources.release_noerr transaction with _ ->
     (try cleanup_transaction_noerr transaction with _ -> ())
-let register_publication context =
+let register_publication scope context =
   let publication =
-    try {context;transaction=None;closing=false;closed=false}
-    with error -> StagePublication.close_noerr context; raise error in
+    try {context;scope;transaction=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
+      loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;
+      loose_fds=false;loose_parent_held=false}
+    with error -> record_publication_cause scope error;
+      owned_call scope (fun () -> StagePublication.abort_owned context);raise error in
+  (try scope.publication<-Some publication with error ->
+    record_publication_cause scope error;
+    owned_call scope (fun () -> StagePublication.abort_owned context);raise error);
   try publications.register publication with error ->
-    release_publication_noerr publication; raise error
+    record_publication_cause scope error;release_publication_noerr publication;raise error
 let register_bound_transaction path basis_fd output_fd =
   let transaction =
-    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false}
+    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false}
     with error -> close_fd_noerr basis_fd; close_fd_noerr output_fd; raise error in
   try transaction_resources.register transaction with error ->
     let fds = transaction.fds in
@@ -175,18 +244,19 @@ let register_bound_transaction path basis_fd output_fd =
     List.iter close_fd_noerr fds;
     release_transaction_noerr transaction;
     raise error
-let create_bound_transaction ~basis ~directory ~staging candidate path =
+let create_bound_transaction scope ~basis ~directory ~staging candidate path =
   if not (StagePublication.available ()) then None else
   let context =
     try
-      let context = StagePublication.prepare ~working_dir:(Fspath.toString directory)
-        ~stage:(Path.toString candidate) ~temporary:(Path.toString staging) in
-      (try Some context with error -> StagePublication.close_noerr context; raise error)
+      let context = owned_call scope (fun () -> StagePublication.prepare_owned ~working_dir:(Fspath.toString directory)
+        ~stage:(Path.toString candidate) ~temporary:(Path.toString staging)) in
+      (try Some context with error -> record_publication_cause scope error;
+        owned_call scope (fun () -> StagePublication.abort_owned context);raise error)
     with error when StagePublication.preparation_unavailable error -> None in
   match context with
   | None -> None
   | Some context ->
-      let publication = register_publication context in
+      let publication = register_publication scope context in
       try
         if publication.closing then
           raise (Util.Transient "Local semantic publication interrupted");
@@ -196,16 +266,28 @@ let create_bound_transaction ~basis ~directory ~staging candidate path =
         | Fs.Declined_stage_handles _ ->
             publications.release publication; None
         | Fs.Shared_stage_handles (basis_fd, output_fd, parent) ->
-            (* The native owner consumes the actual creation parent and keeps
-               its own output witness before any transaction handoff can fail. *)
-            (try StagePublication.adopt context ~parent ~stage:output_fd
-             with error -> close_fd_noerr basis_fd; close_fd_noerr output_fd; raise error);
+            publication.loose_basis<-basis_fd;publication.loose_output<-output_fd;
+            publication.loose_parent<-parent;publication.loose_fds<-true;publication.loose_parent_held<-true;
+            let adopt ()=StagePublication.adopt_owned context ~parent ~stage:output_fd in
+            publication.loose_parent_held<-false;
+            owned_call scope adopt;
+            (* Adoption owns the name before fallible record/registry allocation.
+               The existing constructor settles the raw pair on its own failure. *)
+            publication.loose_fds<-false;
             let transaction = register_bound_transaction path basis_fd output_fd in
             (try
                publication.transaction <- Some transaction;
+               transaction.publication_pending<-true;
                Some (transaction, publication, basis_fd, output_fd)
-             with error -> release_transaction_noerr transaction; raise error)
-      with error -> release_publication_noerr publication; raise error
+             with error ->
+               record_publication_cause scope error;
+               release_publication_noerr publication;
+               if scope.uncertain then begin
+                 transaction.retained<-true;
+                 publication.loose_fds<-true
+               end;
+               release_transaction_noerr transaction;raise error)
+      with error -> record_publication_cause scope error;release_publication_noerr publication;raise error
 let with_publication_borrowed publication transaction f =
   BorrowedWork.try_bind (fun () -> with_borrowed transaction f)
     (fun result ->
@@ -223,18 +305,20 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
     0 extensions in
   let callback_started = ref false in
   SemanticRuntime.with_transaction ?reservation ~max_payload (fun cancellation ->
+    let scope=create_publication_scope () in
+    protect_publication_scope scope (fun () ->
     Util.convertUnixErrorsToTransient "creating local semantic staging" (fun () ->
       let candidate = Os.tempPath ~fresh:true directory
         (Path.addSuffixToFinalName staging "-semantic-clone") in
       let path = Fspath.concat directory candidate in
       let created = match producer with
         | Some _ ->
-            (match create_bound_transaction ~basis ~directory ~staging candidate path with
+            (match create_bound_transaction scope ~basis ~directory ~staging candidate path with
              | None -> None
              | Some (transaction, publication, basis_fd, output_fd) ->
                  (try Some (transaction, Some publication, basis_fd, output_fd)
-                  with error -> release_publication_noerr publication;
-                    release_transaction_noerr transaction; raise error))
+                  with error -> record_publication_cause scope error;release_publication_noerr publication;
+                    release_transaction_noerr transaction;raise error))
         | None ->
             match Fs.clone_stage_status basis path with
             | Fs.Declined_stage Fs.Non_regular_source ->
@@ -285,12 +369,12 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
               raise (Util.Transient "Local semantic materialization cancelled") in
             (match publication,producer with
              | Some owner,Some producer ->
-                 StagePublication.publish owner.context;
+                 owned_call scope (fun () -> StagePublication.publish_owned owner.context);
                  callback_started := true;
                  producer output_fd;
                  if transaction.abandoned || owner.closing then
                    raise (Util.Transient "Local semantic publication interrupted");
-                 StagePublication.disarm owner.context
+                 owned_call scope (fun () -> StagePublication.disarm_owned owner.context)
              | None,None ->
                  close_transaction transaction;
                  Fs.rename path (Fspath.concat directory staging);
@@ -302,16 +386,17 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
               report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
               (SemanticDelta.payload_size plan) (SemanticDelta.profile plan));
             return true)))
-          (fun e -> release_noerr ();
+          (fun e -> record_publication_cause scope e;release_noerr ();
             if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Local semantic worker: " ^ reason))
             | Unix.Unix_error _ ->
               Util.convertUnixErrorsToTransient "local semantic transfer" (fun () -> raise e)
             | _ -> fail e)
         with error ->
+          record_publication_cause scope error;
           (match publication with Some owner -> release_publication_noerr owner | None -> ());
           release_transaction_noerr transaction;
-          raise error))
+          raise error)))
 
 let try_local_async ~source ~basis ~directory ~staging =
   try_local_async_internal ~source ~basis ~directory ~staging ()

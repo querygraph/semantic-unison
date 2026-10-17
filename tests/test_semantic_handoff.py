@@ -46,6 +46,9 @@ module StagePublication = struct
   let adopt context ~parent ~stage=
     StagePublication.adopt context ~parent ~stage;
     HandoffFault.hit "adopt-after"
+  let adopt_owned context ~parent ~stage=
+    StagePublication.adopt_owned context ~parent ~stage;
+    HandoffFault.hit "adopt-after"
 end
 '''
 
@@ -202,7 +205,7 @@ let ()=
   test "local cleanup waits for a borrowed stage before closing or unlinking" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let transaction,publication,_,output=match S.create_bound_transaction ~basis:(path "basis") ~directory
+      let transaction,publication,_,output=match S.create_bound_transaction (S.create_publication_scope()) ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=S.with_publication_borrowed(Some publication)transaction(fun()->pending) in
@@ -224,7 +227,7 @@ let ()=
   test "local unregister OOM defers borrowed FD and name cleanup and later reuse is safe" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let transaction,publication,_,output=match S.create_bound_transaction ~basis:(path "basis") ~directory
+      let transaction,publication,_,output=match S.create_bound_transaction (S.create_publication_scope()) ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=S.with_publication_borrowed(Some publication)transaction(fun()->pending) in
@@ -265,8 +268,8 @@ def instrument(source,local):
     if local:
         source=replace_once(source,'let transaction_resources = Remote.resourceWithConnCleanup\n  cleanup_transaction cleanup_transaction_noerr',
             'let transaction_resources = HandoffFault.resource "register" (Remote.resourceWithConnCleanup cleanup_transaction cleanup_transaction_noerr)')
-        source=replace_once(source,'{path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false}',
-            'HandoffFault.wrap "record" (fun () -> {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false})')
+        source=replace_once(source,'{path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false}',
+            'HandoffFault.wrap "record" (fun () -> {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false})')
     else:
         source=replace_once(source,'let candidates = Remote.resourceWithConnCleanup cleanup cleanup_noerr',
             'let candidates = HandoffFault.resource "register" (Remote.resourceWithConnCleanup cleanup cleanup_noerr)')

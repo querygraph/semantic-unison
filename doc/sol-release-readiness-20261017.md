@@ -44,10 +44,11 @@ fault, transfer or scheduling controls.
    now shares that helper with fresh builds/controls; actual remote execution
    remains unverified. See transfer-source-ownership-review-20261017.md. Review receiver-stage
    cleanup next: the explicit StagePublication.owned backend passed43new and58legacy
-   controls/compiler plus stock/Ox Make+selftests/Dune. Copy/SemanticSync/Remote
-   transaction-owner migration and composed failure controls remain; see
-   stage-publication-owned-v1.md.
-   report ownership tests must not be presented as transfer fault coverage.
+   controls/compiler plus stock/Ox Make+selftests/Dune. Bound local SemanticSync now passes four composed ownership controls and
+   32producer-handoff cases per compiler, plus current Make/selftests/Dune; see
+   local-publication-owned-v1.md and its actual qualification. Copy/remote native
+   caller migration and raw/channel cleanup remain. Report ownership tests must
+   not be presented as transfer fault coverage.
 2. Frozen property requeste60975f3 is already queued from the separate integration
    checkout, with exact source/build pins. Its fresh Photo Root admission remains
    absent at the last check. Never substitute current PR13 binaries or replay an
