@@ -1,5 +1,36 @@
 # Implementation status, updated 2026-10-17
 
+## Current review entry point
+
+Active review is [draft PR13](https://github.com/querygraph/unison/pull/13), branch
+`integration/sol-consolidated-review`, against `querygraph/unison:master`.
+The separate `integration/sol-release-candidate` checkpoint below is historical;
+its frozen property request remains separate. See
+[the twelve-area acceptance map](sol-release-readiness-20261017.md) for current
+remaining requirements and [OPUS-HANDOFF.md](../OPUS-HANDOFF.md) for continuation.
+
+Current-source directed evidence now includes explicit native owned publication,
+modern bound local/remote semantic producers, ordinary local Copy and guarded
+rsync borrower/cancellation cleanup. Stock/Ox Make/selftests/Dune and composed
+fault controls have scoped receipts. In-process receiver delivery does not prove
+current-candidate transport/server settlement. Legacy named/unbound/older-peer
+and raw/channel cleanup remain separately limited.
+
+Current inspector stock/Ox builds and16tiny TIFF calls pass. Latest gradual
+refinement rerun passed1391component checks/compiler plus layout/private/archive
+fault controls,35stock+38Ox contained calls. See
+[current refinement evidence](../tests/qualification/current-gradual-refinement-actual-20261017.json).
+The combined60s wrapper attempt timed out and is preserved as incomplete; split
+compiler runs completed normally. No camera payload was used in these tests.
+
+The exact one-input [camera observation request](camera-components-request-v1.json)
+is prepared and queued for separate source review/admission. It is advisory
+component role/hash coverage only. Its sources remain frozen; neither the request
+nor this evidence index authorizes payload IO. Missing MakerNote meanings do not
+block exact opaque preservation or the qualified deployment scope. No full-goal
+completion or merge is claimed.
+
+
 Latest consolidated PR13 source additionally fixes cold report cancellation and
 unsupported input creating an unadopted namespace. The reproduced pre-fix failure
 and fresh stock/Ox Make+selftests/Dune successes are recorded in

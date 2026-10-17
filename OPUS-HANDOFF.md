@@ -3920,3 +3920,9 @@ rehashed. Evidence current-gradual-refinement-actual-20261017.json includes
 commuting independent private upgrades/preservedpixels/unsupported downgrade/
 authenticated restore/archivefault/guard-ablation checks. Generatedtiny only,
 no EXIO/SDK/camera. Camera request executionpins unchanged by test-driver edit.
+
+PR review refresh: current-qualification-status now leads with PR13/current
+source and scoped evidence instead of historical PR4/integration snapshot. PR13
+description refreshed around final behavior/nativeownedcallers/gradualrefinement/
+remainingtransport+camera evidence. Forkmasterbase/draft preserved; no merge.
+No production or camera-request pinned source changed.
