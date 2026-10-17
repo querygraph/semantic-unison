@@ -2283,3 +2283,30 @@ User explicitly requested merging PR #1 during the handoff turn. Completed:
 Future implementation commits must not be described as updates to an open PR1:
 that PR is now merged. Continue on a suitable branch and use a distinct review
 when appropriate. No upstream submission or full-goal qualification follows.
+
+
+## Isolated implementation pointers — 2026-10-17 storage successor
+
+PR4 https://github.com/querygraph/unison/pull/4 is ready for review on
+`feat/component-cache-input-binding`, qualified source835df2fc. PR5
+https://github.com/querygraph/unison/pull/5 is a draft stacked on PR4, branch
+`feat/component-owner-index`, latest sourcec372213a in sibling
+`/Users/alexy/src/unison-component-index-20261017`. Its own OPUS-HANDOFF.md is
+current for that successor; these implementations are not merged into this tree.
+
+PR5 now provides bounded trusted root/path/generation selection, UIX/0 reference
+manifest import/export and borrowed-FD staging/readback/one-shot macOS immutable
+publication. It does not establish managed namespace installation, referenced
+entry presence, quota admission/FD settlement, a separately trusted durable
+owner-state commit, automatic routing or production activation. Unknown camera
+fields remain exact opaque components; incomplete interpretation is not itself
+a deployment gate. Existing UDI/0 bytes and main's frozen342RPC pins are unchanged.
+
+Latest exact qualification is the isolated
+`tests/qualification/owner-manifest-publication-actual-20261017.json`: focused
+56956/e8cf00/0 and full85962/0cfdd3/0 terminal/no sessions, all7adoptedworkers/groups/
+tokensclosed. Percompiler56component+1005checkpoint+27publicationfault+13readerfault+
+1248DNG+110workerchecks, four current stock/Ox Make/fullselftest/Dune compile builds,
+1272sourcechecks. Framing vectors count as controls, not additional camera fixtures.
+No media/SDK/transport, production writes or new resource grant. The main prepared
+RPC still requires its fresh exact admission; no dispatch follows from this note.
