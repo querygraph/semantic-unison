@@ -216,6 +216,70 @@ Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
 record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
 then integration after the frozen RPC window is resolved. Full-input verification
 can be avoided only with a separately qualified immutable/preservation witness.
+Latest isolated cache successor is pushed through `e3c60795` on
+`feat/component-cache-input-binding`. It now includes worker capture/restore/
+decoder refresh, owner-bound record staging/readback and macOS borrowed-FD
+exclusive immutable-record publication. Sibling upgrades commute across restored
+checkpoints. Current stock/Ox Make+selftests and Dune compile pass; focused
+41component+988checkpoint+21originalnativefault checks/compiler and110workerchecks
+pass, allgroups/tokensclosed. Postrename directoryEIO retains published state;
+stageEIO/EINTR not retried; test shim is absent from production. See isolated
+`doc/component-checkpoints.md` and `component-record-publication-*` receipts.
+Still not merged into main:342reviewed RPC source pins unchanged. Persistent
+trusted owner-index/automatic diskcache selection and actual RPC transport remain
+open; no resources held, no media/SDK/transport run or new admission inferred.
+
+Isolated component-cache successor is now pushed through `c55a90de` on
+`feat/component-cache-input-binding`. It adds current-parser partition validation,
+DNG authenticated restore, explicit guarded private-view replacement and worker
+restore through existing resource ownership. Current stock/Ox Make builds and
+full selftests pass; focused DNG94checks/compiler, worker102checks/compiler pass.
+All actual workers/groups/CPU grants closed. See that branch's qualification
+receipts and handoff for exact source scopes. Not merged into main; main's342RPC
+source pins remain unchanged. Durable store/automatic decoder selection/Dune
+successor checks remain outstanding; no new media/SDK/transport admission inferred.
+
+User design requirement: incomplete mapping of smaller fields does not block a
+qualified pixel/metadata-separation release. SOL.md specifies refinements as
+versioned component change sets, deterministic sibling composition, localized
+invalidation, verified unaffected-hash reuse and atomic new-view publication.
+Unknown fields remain exact opaque hashes; this is a design contract, not a claim
+that persistent cache/worker integration is finished.
+
+## CURRENT: RPC sources accepted; IO deferred; checkpoint core on isolated branch
+
+Root receipts now independently rehashed/adopted in
+`tests/qualification/component-remote-source-review-adoption-20261017.json`1685B
+SHA604e49e5da278fcbc0b8a166c331489de4f6c25b84089076dda6844c26d2534b.
+Source review64fa9095 accepts342 pins/six prerequisites with no findings. Scheduling
+defer681324f5 explicitly prioritizes the operator's Capitola Smart Preview build
+owning EXglobal; no runtime admission/Unison hold was created. Do not infer present
+process liveness from that historical receipt; only Root's explicit IO release and
+fresh exact admission can schedule this run. Standing CPU8/source work allowed.
+Main342 pins/plan/argv still unchanged, workspace/admission absent at last check.
+
+Independent cache work is committed/pushed on `feat/component-cache-input-binding`
+at569395d9, retained worktree `/Users/alexy/src/unison-component-cache-20261017`
+(git-worktree lock is evidence retention only, NOT a resource hold). NOT merged
+into main, preserving RPC pins. Generic `ComponentHash` now has bounded checkpoint
+metadata export/restore with prior trusted owner digest, recognized root schema
+and complete current-file SHA verification; no epoch-only/IO-free shortcut or
+automatic store. Private-subtree reset lets replacement decoders rehash their
+parent while keeping unrelated pixels and previous snapshots.
+
+Isolated qualification:41existing+454checkpointchecks/compiler (includes every
+metadata-vector truncation),23contained calls, portable metadata checkpoint capture
+and3negative live-capability captures. Make+selftests actual87017/2f0ab0/0,
+8061/883242/0; Dune compilechecks81918/bfd974/0,12462/24ae26/0; focused62449/361452/0.
+All groups/Unison8 closed;1272 src checks, no EXglobal/SDK/media. An initial added
+test incorrectly equated implementation provenance with leaf meaning; preserved,
+then split into provenance/stable-contract/changed-schema assertions. Receipt in
+that worktree `tests/qualification/component-checkpoint-core-actual-20261017.json`
+43272B SHAb5e08611d797ad50a8cde78a8adfba0aba32755d5f92080e3ca692b25c256f00.
+Contract `doc/component-checkpoints.md` there. Next independent work: trusted owner
+record/store/recovery, DNG frozen-decoder invalidation and owner/worker cache wiring.
+Integrate only after resolving or explicitly superseding the reviewed RPC request;
+do not silently invalidate main's342 pins. No own jobs or resource leases active.
 
 ## CURRENT: runtime readiness sent; no admission observed yet
 

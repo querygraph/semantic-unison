@@ -12,6 +12,31 @@ and full Make+selftests/Dune compile checks passed; see
 `tests/qualification/component-checkpoint-core-actual-20261017.json`. This is not
 yet main/worker/archive/store integration, nor an epoch-only/IO-free cache. Main's
 reviewed342 RPC pins are deliberately unchanged while its actual run is pending.
+Latest isolated successor is `e3c60795`: worker capture/restore/decoder refresh,
+commuting sibling upgrades, bounded owner records and borrowed-FD macOS immutable
+record publication now have current stock/Ox Make+selftests/Dune and original
+native error-path evidence. This does not implement the trusted persistent owner
+index/automatic cache selection, merge the branch, or qualify actual new RPC.
+Main's reviewed342 source pins remain unchanged; see OPUS-HANDOFF.md for receipts.
+
+Isolated successor `feat/component-cache-input-binding` now reaches `c55a90de`:
+current-parser partition checks, DNG authenticated checkpoint restore, guarded
+private-view replacement and coordinated worker restore are implemented there.
+Both current Make builds/full selftests and focused stock/Ox controls pass;
+worker lifecycle controls include102checks/compiler. Durable owner storage and
+automatic decoder/cache selection remain open. This branch is not merged into
+main and does not change main's reviewed RPC pins or imply runtime admission.
+
+Checkpoint-core successor is now tested on separate branch
+`feat/component-cache-input-binding` (569395d9), preserving main's reviewed342
+RPC pins. It exports/restores bounded metadata using the owner's prior trusted
+digest and complete current-input SHA verification, then supports private-view
+invalidation/replacement with pixel-hash reuse.41existing+454checkpoint checks per
+stock/Ox compiler, full Make+selftests/Dune compile builds and1272 source checks
+pass. It is NOT yet main/worker/store/archive integration or an IO-free shortcut.
+See that branch's `doc/component-checkpoints.md` and qualification. Main RPC source
+review is accepted; actual transport is separately deferred for Photo's active
+Smart Preview IO scheduling, not incomplete private-field interpretation.
 
 **User direction, 2026-10-17:** separating pixels from standard metadata is
 already a valuable deployable baseline. Exhaustively interpreting every byte
@@ -82,6 +107,19 @@ comparison identifies its hash schema, parser/child contract versions and
 projection policy, not just an untyped digest string.
 
 ### Rehashing is incremental refinement, not a new full-file project
+
+Treat each refinement as a composable change set: `(input binding, component ID,
+old contract, new contract, dependency digests) → replacement subtree + new roots`.
+Validate the input binding and old contract before applying it. Independent sibling
+change sets must produce the same roots in either order; a stale or conflicting
+change set is refused without discarding the last verified view. Publish the new
+view atomically only after its coverage, dependencies and hashes validate.
+
+For example, learning one MakerNote field replaces that field's opaque component,
+rehashes its affected bytes and recomposes its private-metadata ancestors. It
+reuses verified pixel and unrelated standard-metadata hashes when their input and
+dependency bindings remain valid. Until that refinement is available, exact opaque
+hashing remains a supported deployed behavior, not a pending deployment blocker.
 
 Adding a subplugin can split one opaque atom into smaller known/unknown children,
 add named interpretations or revise an explicitly versioned stability policy.

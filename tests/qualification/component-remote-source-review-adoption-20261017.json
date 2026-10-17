@@ -1,0 +1,31 @@
+{
+  "schema": "component-remote-source-review-adoption/1",
+  "state": "SOURCE_ACCEPTED_RUNTIME_DEFERRED_NO_ADMISSION",
+  "root_source_review": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-COMPONENT-RPC-V1-SOURCE-REVIEW-20261017.json",
+    "bytes": 5150,
+    "sha256": "64fa9095f7ab09477a3e1989240e542c6ca299acdf5b10c6f04dc738a0c1b216"
+  },
+  "root_scheduling_defer": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-COMPONENT-RPC-V1-SCHEDULING-DEFER-20261017.json",
+    "bytes": 1781,
+    "sha256": "681324f5e7e8c45ff6cd5e3ee6f984b882dd7a9186ecde84cd5485f070d56f27"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison/doc/component-remote-request-v1.json",
+    "bytes": 2531,
+    "sha256": "d0f80794b5fe2eae1f03efcff5a3594a4cb1da5b838d2f8e7ad5b8f6d4af7a49"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison/doc/component-remote-plan-v1.json",
+    "bytes": 44341,
+    "sha256": "d7a9f46d7a5e6da4476ff54409a98ffbe4fa7ea5e64a3727c59dd7bbca77b0ad"
+  },
+  "scope": "Source review only, not RPC transport/parent terminal/IO release proof",
+  "reason": "Operator-authorized Capitola Smart Preview build is active and retains canonical EXglobal IO; no batch-boundary release or actual whole-job closure exists.",
+  "next_scheduling_condition": "Explicit coordinated Photo IO release, followed by fresh exact-source/path/readiness checks and a distinct finite admission. No automatic grant or deadline implied.",
+  "photo_live_now_inferred_from_historical_receipt": false,
+  "unison_runtime_dispatched": false,
+  "unison_resources_held": false,
+  "standing_policy": "8/8 unchanged; independent CPU/source builds permitted"
+}
