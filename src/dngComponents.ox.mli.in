@@ -240,3 +240,37 @@ val decode_owner_archive_reference : archive_binding:string -> string -> (string
     generation binding, not peer metadata or a cache file's self-hash. Decoder
     declines malformed/mismatched optional hints; this codec alone establishes no
     authority. Use only inside already trusted local owner-state load/commit. *)
+
+
+type cache_descriptor = Unix.file_descr * Unix.LargeFile.stats option
+type cache_ownership
+exception Cache_ownership_uncertain of cache_ownership
+val cache_ownership_cause : cache_ownership -> exn option
+val cache_uncertain_descriptors : cache_ownership -> (cache_descriptor * exn) list
+val cache_retained_descriptors : cache_ownership -> cache_descriptor list
+val cache_borrowed_directory : cache_ownership -> cache_descriptor
+(** Owner-only retained-ownership carrier. Each uncertain descriptor has one
+    attempted close and last observable identity before close; never retry its numeric
+    FD, which may already be recycled. Retained descriptors were not closed and
+    remain owned. Borrowed directory stays caller-owned throughout; retain outer
+    ownership/resources on this exception. Original read/validation failure and
+    all nested uncertain/known descriptors remain available for recovery evidence.
+    No finalizer, automatic cleanup/retry, or settlement proof is supplied. *)
+val load_owner_index : ?check_cancel:(unit -> unit) ->
+  directory:Unix.file_descr -> expected_manifest_sha256:string ->
+  binding:string -> max_entries:int -> max_bytes:int -> unit -> owner_index option @@ nonportable
+val load_owner_record : ?check_cancel:(unit -> unit) -> directory:Unix.file_descr ->
+  entry:owner_entry -> unit -> string option @@ nonportable
+(** macOS managed metadata reads through an existing borrowed private0700 directory.
+    Open only the separately trusted digest's64hex leaf, read-only/nonblocking/
+    no-follow/cloexec, verify private0600 singly-linked regular name/FD binding and
+    bounded stable content before/after borrowed positional reads, then close once.
+    Index restore authenticates UIX and every UDI entry; record restore authenticates
+    its UCR binding/inventory. Successful return means all loader-owned FDs closed.
+    Missing selected manifest/record returns None; a missing referenced entry,
+    foreign object, corrupt metadata or operational error propagates. Close errors
+    always raise Cache_ownership_uncertain, retaining original cause and all known
+    enclosing descriptors without retry. Caller must hold the directory FD stable
+    and retain exclusive snapshot access/IO, metadata-memory and lifetime admission.
+    No source payload, directory enumeration/creation, cache discovery, publication,
+    eviction, archive mutation, peer trust or non-macOS fallback. *)

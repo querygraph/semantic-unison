@@ -585,3 +585,46 @@ CAMLprim value unison_component_metadata_leaf_check(value directory, value name,
   caml_unix_error(ENOSYS, "component metadata lookup", Nothing);
 #endif
 }
+
+/* Return the fresh descriptor as an immediate value: no post-open allocation,
+ * validation, callback or cleanup can obscure which side owns it. The owner
+ * immediately records it, then performs the existing strict leaf checks. */
+CAMLprim value unison_component_metadata_open(value directory, value name)
+{
+  CAMLparam2(directory, name);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  char leaf[256]; metadata_digest_leaf(name, leaf);
+  int parent = unison_semantic_fd(directory, "component metadata directory FD");
+  struct stat observed, named; int error = 0, fd = -1;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&observed, &observed)) error = EINVAL;
+  if (!error && fstatat(parent, leaf, &named, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && (!record_stage_same(&named, &named, 1) || named.st_size < 80 || named.st_size > 1048656))
+    error = EINVAL;
+  if (!error) {
+    fd = openat(parent, leaf, O_RDONLY | O_NOFOLLOW | O_NONBLOCK | O_CLOEXEC);
+    if (fd == -1) error = errno;
+  }
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component metadata open", Nothing);
+  CAMLreturn(Val_int(fd));
+#else
+  caml_unix_error(ENOSYS, "component metadata open", Nothing);
+#endif
+}
+
+/* Exactly one close attempt, never EINTR retry. The OCaml owner records the
+ * descriptor as uncertain before entering this primitive and preserves errors. */
+CAMLprim value unison_component_metadata_close(value descriptor)
+{
+  CAMLparam1(descriptor);
+#ifdef __APPLE__
+  int fd = unison_semantic_fd(descriptor, "component metadata close FD");
+  if (close(fd) == -1) caml_unix_error(errno, "component metadata close", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component metadata close", Nothing);
+#endif
+}

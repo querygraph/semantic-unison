@@ -4,6 +4,16 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Latest isolated managed-loader successor (`feat/component-cache-loader`, based
+on PR7) now authenticates digest-named UIX/UDI/UCR metadata through a borrowed
+private directory and an actual loaded-archive-owned reference. It closes each
+leaf once; uncertainty preserves original failure, known/uncertain descriptors
+and last observable identity without numeric retry. Current stock/Ox full Make
+selftests/Dune and original loader/archive/worker controls passed; exact scope
+is in `doc/component-cache-loader.md`. Namespace provisioning, automatic capture/
+archive adoption and normal report routing remain explicit follow-ons. This is
+not a main merge, production deployment or new RPC/media/SDK admission.
+
 Isolated checkpoint successor in `feat/component-cache-input-binding` now provides
 bounded owner-authenticated metadata export/restore with complete current-input
 SHA verification and private-subtree reset/replacement. Stock/Ox focused controls

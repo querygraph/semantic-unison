@@ -1,5 +1,34 @@
 # Unison implementation handoff
 
+## Latest managed-loader successor — 2026-10-17
+
+Branch `feat/component-cache-loader`, worktree
+`/Users/alexy/src/unison-component-loader-20261017`, stacked on PR7, adds strict
+macOS digest-leaf metadata opening/authentication/normal-close and retained
+uncertainty in DngComponents. `Update.load_component_owner_index` takes trust
+from the loaded archive hint; off/missing hints touch no directory. Matching
+UIX/UDI and UCR metadata is fully authenticated and loader-owned FDs retire
+before successful return. Nested close errors retain known manifest FDs;
+original failure and all uncertain identities survive, without numeric retry.
+Last-known identity survives a failed final stat. Directory remains borrowed.
+
+Actual parent35813/42bf8f/0/no session: current stock/Ox Make/fullselftests/Dune,
+1272SRCchecks,80loader+7unmodified-native checks/compiler, existing56component/
+1005checkpoint/27publicationfault/13readerfault/1391DNG/29archivefault/126worker
+controls and14archive-probe calls (2compiles+12runtime phases) PASS; all nine workers/groups/
+tokens closed. Earlier failed fixture exception expectation and missing owner-only
+Ox API annotation preserved, corrected before current evidence. An earlier full
+pass predates the final identity-retention fix and is not the current source proof.
+See tests/qualification/component-cache-loader-actual-20261017.json and
+doc/component-cache-loader.md.
+
+No source-photo/SDK/Adobe/transport or production namespace/write was invoked.
+No bootstrap directory, automatic capture/adoption or normal report-path routing
+is implemented yet. This is an isolated successor, not a main merge or new IO
+admission. Main's342RPC closure remains frozen; latest Root defer was independently
+read, no admission/workspace exists at last check, and no current Photo liveness
+is inferred from that historical defer receipt.
+
 Latest checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
 Older checkpoints below retain their original scopes and pending-state history.
 Implementation HEAD before the initial handoff:

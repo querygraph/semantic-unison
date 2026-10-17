@@ -603,6 +603,13 @@ let component_owner_reference fspath =
   if not(Prefs.read componentOwnerCache) then None else
   let root=thisRootsGlobalName fspath in
   try Some(Proplist.find componentOwnerKey (getArchiveProps root)) with Not_found -> None
+let load_component_owner_index ?(check_cancel=fun () -> ()) fspath
+    ~directory ~max_entries ~max_bytes () =
+  match component_owner_reference fspath with
+  | None -> None
+  | Some (binding,expected_manifest_sha256) ->
+      DngComponents.load_owner_index ~check_cancel ~directory ~expected_manifest_sha256
+        ~binding ~max_entries ~max_bytes ()
 let set_component_owner_reference fspath publication =
   if not(Prefs.read componentOwnerCache) then
     raise(Util.Transient "Component owner cache is disabled");
