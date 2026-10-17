@@ -17,8 +17,10 @@ transaction migration now have current stock/Ox Make/selftests/Dune and composed
 uncertainty/handoff controls. Bound remote receiving also has those controls with
 in-process planner delivery, not new transport evidence. Ordinary bound local
 Copy's source/receiver clone helper now has actual admitted-ticket/channel
-retention controls and current stock/Ox Make/selftests/Dune. Network rsync staging,
-legacy named/unbound and raw/channel cleanup remain separate.
+retention controls and current stock/Ox Make/selftests/Dune. Guarded rsync receiver
+staging also has actual-codec borrower/lease/EOF/cancellation controls via in-process
+delivery; actual transport remains unverified by those units. Legacy named/unbound/
+older-peer and raw/channel cleanup remain separate.
 Historical isolated checkpoints below are retained as history, not statements
 that integration is still absent or new execution authority. Local opt-in cache
 routing is implemented; remote endpoint cache routing is not. Unknown private

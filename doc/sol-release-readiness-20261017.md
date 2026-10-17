@@ -50,8 +50,12 @@ fault, transfer or scheduling controls.
    cases/compiler plus Make/selftests/Dune; its planner delivery is in-process,
    not actual transport. See remote-publication-owned-v1.md. Ordinary bound local Copy now has current Make/selftests/Dune and6cases/compiler
    under actual admitted TargetBinding tickets, including copyByPath/copyLocalCloned
-   and native uncertainty retention; see copy-bound-owned-v1.md. Network rsync
-   clone staging, legacy named/unbound and raw/channel cleanup remain. Report ownership tests must
+   and native uncertainty retention; see copy-bound-owned-v1.md. Guarded network rsync
+   receiver staging now has current Make/selftests/Dune,8actual-codec cases per
+   compiler and rerun6local cases; progress-triggered cleanup defers native/FD
+   closure and invalidates the lease, with known-vs-unknown cancellation separated.
+   See rsync-publication-owned-v1.md. Delivery is in-process, not actual transport.
+   Legacy named/unbound/older-peer and raw/channel cleanup remain. Report ownership tests must
    not be presented as transfer fault coverage.
 2. Frozen property requeste60975f3 is already queued from the separate integration
    checkout, with exact source/build pins. Its fresh Photo Root admission remains

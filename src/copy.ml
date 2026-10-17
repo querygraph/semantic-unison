@@ -224,12 +224,16 @@ type retained_clone = {
 and owned_clone_publication = {
   scope : retained_clone; mutable context : StagePublication.owned option;
   mutable preparing : bool; mutable closing : bool; mutable closed : bool;
+  mutable interrupted : bool; mutable borrowers : int; mutable range_lease : CloneLease.t option;
+  mutable active : bool; active_link : owned_clone_publication option;
+  mutable active_previous : owned_clone_publication option; mutable active_next : owned_clone_publication option;
   mutable raw_basis : Unix.file_descr; mutable raw_output : Unix.file_descr;
   mutable raw_parent : Unix.file_descr; mutable raw_pair : bool; mutable parent_held : bool;
   mutable input : in_channel; mutable output : out_channel;
   mutable input_held : bool; mutable output_held : bool;
   previous : owned_clone_publication option;
 }
+let active_owned_clones = ref None
 let retained_clone_owners = ref None
 let retained_clones () =
   let rec collect acc = function None -> List.rev acc
@@ -252,12 +256,21 @@ let owned_clone_call publication work =
       scope.next<- !retained_clone_owners;retained_clone_owners:=scope.link;scope.linked<-true
     end;
     raise error
+let link_active_clone publication =
+  publication.active_next<- !active_owned_clones;
+  (match !active_owned_clones with None->()|Some next->next.active_previous<-publication.active_link);
+  active_owned_clones:=publication.active_link;publication.active<-true
+let unlink_active_clone publication =
+  if publication.active then begin
+    (match publication.active_previous with None->active_owned_clones:=publication.active_next
+     |Some previous->previous.active_next<-publication.active_next);
+    (match publication.active_next with None->()|Some next->next.active_previous<-publication.active_previous);
+    publication.active_previous<-None;publication.active_next<-None;publication.active<-false
+  end
 let clone_channel_retained predicate =
-  let rec publications = function None -> false
-    | Some publication -> predicate publication || publications publication.previous in
-  let rec scopes = function None -> false
-    | Some scope -> publications scope.publications || scopes scope.next in
-  scopes !retained_clone_owners
+  let rec owners = function None->false |Some publication ->
+    ((publication.borrowers>0 || publication.scope.uncertain) && predicate publication) || owners publication.active_next in
+  owners !active_owned_clones
 let clone_input_retained channel = clone_channel_retained(fun owner -> owner.input_held && owner.input==channel)
 let clone_output_retained channel = clone_channel_retained(fun owner -> owner.output_held && owner.output==channel)
 let retained_clone_descriptors scope =
@@ -558,7 +571,8 @@ let cloneChannels basisFd outputFd =
 
 let closeOwnedClone publication =
   publication.closing<-true;
-  if not publication.preparing && not publication.closed && not publication.scope.uncertain then begin
+  (match publication.range_lease with None->()|Some lease->CloneLease.invalidate lease);
+  if not publication.preparing && publication.borrowers=0 && not publication.closed && not publication.scope.uncertain then begin
     (match publication.context with None -> () | Some context ->
       owned_clone_call publication (fun () -> StagePublication.abort_owned context));
     publication.closed<-true;
@@ -568,18 +582,25 @@ let closeOwnedClone publication =
     end;
     if publication.parent_held then begin publication.parent_held<-false;closeCloneFdNoErr publication.raw_parent end;
     if publication.input_held then begin publication.input_held<-false;closeCloneInputNoErr publication.input end;
-    if publication.output_held then begin publication.output_held<-false;closeCloneOutputNoErr publication.output end
+    if publication.output_held then begin publication.output_held<-false;closeCloneOutputNoErr publication.output end;
+    unlink_active_clone publication
   end
 let closeOwnedCloneNoErr publication = try closeOwnedClone publication with _ -> ()
-let ownedClonePublicationResource = Remote.resourceWithConnCleanup closeOwnedClone closeOwnedCloneNoErr
+let abandonOwnedClone publication = publication.interrupted<-true;closeOwnedCloneNoErr publication
+let ownedClonePublicationResource = Remote.resourceWithConnCleanup closeOwnedClone abandonOwnedClone
 let releaseOwnedCloneNoErr publication =
   try ownedClonePublicationResource.release_noerr publication with _ -> closeOwnedCloneNoErr publication
 let prepareOwnedClone scope directory stage temporary =
-  let publication={scope;context=None;preparing=true;closing=false;closed=false;
+  let previous=scope.publications in
+  let rec publication={scope;context=None;preparing=true;closing=false;closed=false;
+    interrupted=false;borrowers=0;range_lease=None;active=false;active_link=Some publication;
+    active_previous=None;active_next=None;
     raw_basis=Unix.stdin;raw_output=Unix.stdin;raw_parent=Unix.stdin;raw_pair=false;parent_held=false;
-    input=Stdlib.stdin;output=Stdlib.stdout;input_held=false;output_held=false;previous=scope.publications} in
-  scope.publications<-Some publication;
-  ignore(ownedClonePublicationResource.register publication);
+    input=Stdlib.stdin;output=Stdlib.stdout;input_held=false;output_held=false;previous} in
+  scope.publications<-publication.active_link;
+  link_active_clone publication;
+  (try ignore(ownedClonePublicationResource.register publication) with error ->
+    publication.preparing<-false;closeOwnedCloneNoErr publication;raise error);
   try
     let context=owned_clone_call publication(fun()->StagePublication.prepare_owned
       ~working_dir:(Fspath.toString directory) ~stage:(Path.toString stage) ~temporary:(Path.toString temporary)) in
@@ -597,6 +618,26 @@ let prepareOwnedClone scope directory stage temporary =
       if Prefs.read clonePolicy="require" then raise(Util.Transient "Clone publication identity is unavailable");
       None
     end else raise error
+
+let withOwnedCloneBorrow publication work =
+  if publication.closing || publication.closed then raise(Util.Transient "Clone publication interrupted");
+  if publication.scope.uncertain then raise publication.scope.native_error;
+  let settled=ref false in
+  publication.borrowers<-publication.borrowers+1;
+  try
+    let value=work () in
+    publication.borrowers<-publication.borrowers-1;settled:=true;
+    if publication.closing then begin
+      if publication.interrupted then record_clone_cause publication.scope (Util.Transient "Clone publication interrupted");
+      closeOwnedClone publication;
+      if publication.interrupted then raise(Util.Transient "Clone publication interrupted")
+    end;
+    value
+  with error ->
+    record_clone_cause publication.scope error;
+    if not !settled then publication.borrowers<-publication.borrowers-1;
+    if publication.closing then closeOwnedCloneNoErr publication;
+    raise error
 
 let cloneOwnerIdentity () =
   (* A controller identity cannot be inherited from a prior process or mount.
@@ -662,6 +703,46 @@ let prepareClonePublication directory stage temporary =
     if Prefs.read clonePolicy = "require" then
       raise (Util.Transient "Clone publication identity is unavailable");
     None
+
+type receiver_publication = Receiver_legacy of StagePublication.t |
+  Receiver_owned of owned_clone_publication * StagePublication.owned
+let recordProducerCause producer error = match producer with None->()|Some producer->record_clone_cause producer.clone_scope error
+let protectClone producer work cleanup =
+  protect(fun()->try work()with error->recordProducerCause producer error;raise error)cleanup
+let prepareReceiverPublication producer directory stage temporary = match producer with
+  | Some state when not state.legacy ->
+    (match prepareOwnedClone state.clone_scope directory stage temporary with None->None |Some(publication,context)->
+      (try Some(Receiver_owned(publication,context)) with error->record_clone_cause state.clone_scope error;releaseOwnedCloneNoErr publication;raise error))
+  | _ -> match prepareClonePublication directory stage temporary with None->None|Some context->
+    let publication=registerClonePublication context in
+    (try Some(Receiver_legacy publication)with error->closeClonePublicationNoErr publication;raise error)
+let releaseReceiverPublication = function
+  | Receiver_legacy context -> closeClonePublicationNoErr context
+  | Receiver_owned(publication,_) ->
+    (try ownedClonePublicationResource.release publication with _->closeOwnedCloneNoErr publication)
+let receiverAdopt publication basis output parent = match publication with
+  | Receiver_legacy context ->
+    (try StagePublication.adopt context ~parent ~stage:output with error->
+      closeCloneFdNoErr basis;closeCloneFdNoErr output;raise error)
+  | Receiver_owned(owner,context) ->
+    owner.raw_basis<-basis;owner.raw_output<-output;owner.raw_parent<-parent;
+    owner.raw_pair<-true;owner.parent_held<-true;
+    let adopt ()=StagePublication.adopt_owned context ~parent ~stage:output in
+    owner.parent_held<-false;owned_clone_call owner adopt
+let receiverChannels publication basis output =
+  (match publication with Receiver_owned(owner,_)->owner.raw_pair<-false|_->());
+  let input,output=cloneChannels basis output in
+  (match publication with Receiver_owned(owner,_)->
+    owner.input<-input;owner.output<-output;owner.input_held<-true;owner.output_held<-true |_->());
+  input,output
+let receiverLease publication lease = match publication with
+  | Receiver_owned(owner,_)->owner.range_lease<-Some lease |_->()
+let receiverPublish = function Receiver_legacy context->StagePublication.publish context
+  | Receiver_owned(owner,context)->owned_clone_call owner(fun()->StagePublication.publish_owned context)
+let receiverDisarm = function Receiver_legacy context->StagePublication.disarm context
+  | Receiver_owned(owner,context)->owned_clone_call owner(fun()->StagePublication.disarm_owned context)
+let withReceiverBorrow publication work = match publication with
+  | Some(Receiver_owned(owner,_))->withOwnedCloneBorrow owner work |_->work()
 
 let checkCloneLease lease =
   match CloneLease.observe lease with
@@ -897,7 +978,7 @@ let copyBoundClone ?expected_length producer basisPath directory candidate suffi
           if (Unix.LargeFile.fstat(Unix.descr_of_in_channel basis)).Unix.LargeFile.st_size<>expected ||
              (Unix.LargeFile.fstat(Unix.descr_of_out_channel output)).Unix.LargeFile.st_size<>expected then
             raise(Util.Transient "Source clone length changed before publication") in
-        check_source_length();write basis output;flush output;check_source_length();
+        withOwnedCloneBorrow publication(fun()->check_source_length();write basis output;flush output;check_source_length());
         owned_clone_call publication(fun()->StagePublication.publish_owned context);
         adoptProducer producer outputFd;
         owned_clone_call publication(fun()->StagePublication.disarm_owned context);
@@ -1513,7 +1594,7 @@ let transferFileContents ?producer
     | None -> ()
     | Some publication ->
         clonedPublication := None;
-        closeClonePublicationNoErr publication in
+        releaseReceiverPublication publication in
   let discardClone () =
     releaseLease ();
     releasePublication ();
@@ -1546,7 +1627,7 @@ let transferFileContents ?producer
           "preprocessing file"
           (fun () ->
              let (bi, blockSize) =
-               protect
+               protectClone producer
                  (fun () ->
                     if fileKind = `DATA && receiverCloneEnabled () &&
                        not (Prefs.read Props.dontChmod) then begin
@@ -1557,10 +1638,9 @@ let transferFileContents ?producer
                         let p = Os.tempPath ~fresh:false fspathTo
                           (Path.addSuffixToFinalName realPathTo "-clone") in
                         removeOldTempFile ?producer fspathTo p;
-                        match prepareClonePublication fspathTo p pathTo with
+                        match prepareReceiverPublication producer fspathTo p pathTo with
                         | None -> ()
-                        | Some prepared ->
-                          let publication = registerClonePublication prepared in
+                        | Some publication ->
                           begin try
                             clonedPublication := Some publication;
                             match Fs.clone_stage_handles (Fspath.concat fspathTo realPathTo)
@@ -1577,13 +1657,12 @@ let transferFileContents ?producer
                                 (* Adoption consumes the actual creation parent and
                                    retains its own stage witness before channels can
                                    fail or close the original output descriptor. *)
-                                begin try StagePublication.adopt publication ~parent ~stage:output
-                                with error ->
+                                begin try receiverAdopt publication basis output parent
+                                with error -> recordProducerCause producer error;
                                   releasePublication ();
-                                  closeCloneFdNoErr basis; closeCloneFdNoErr output;
                                   raise error end;
                                 let basisChannel, outputChannel =
-                                  try cloneChannels basis output with error ->
+                                  try receiverChannels publication basis output with error -> recordProducerCause producer error;
                                     releasePublication (); raise error in
                                 let previousInput = !infd and previousOutput = !outfd
                                 and previousClone = !clonedPath and previousLease = !clonedLease in
@@ -1597,14 +1676,15 @@ let transferFileContents ?producer
                                   | Some lease ->
                                       let lease = registerCloneLease lease in
                                       begin try
+                                        receiverLease publication lease;
                                         clonedLease := Some lease;
                                         clonedPath := Some p;
                                         infd := Some basisChannel;
                                         outfd := Some outputChannel;
                                         inheritedLength := (CloneLease.expected lease).source.size;
                                         debug (fun () -> Util.msg "Using immutable receiver clone basis\n")
-                                      with error -> releaseCloneLease lease; raise error end
-                                with error ->
+                                      with error -> recordProducerCause producer error; releaseCloneLease lease; raise error end
+                                with error -> recordProducerCause producer error;
                                   releaseLease (); releasePublication ();
                                   infd := previousInput; outfd := previousOutput;
                                   clonedPath := previousClone; clonedLease := previousLease;
@@ -1612,21 +1692,22 @@ let transferFileContents ?producer
                                   closeCloneOutputNoErr outputChannel;
                                   raise error
                                 end
-                          with error ->
+                          with error -> recordProducerCause producer error;
                             releasePublication ();
-                            closeClonePublicationNoErr publication;
+                            releaseReceiverPublication publication;
                             raise error
                           end
                       end
                     end;
-                    let ifd = referenceFd fspathTo realPathTo fileKind infd in
-                    Transfer.Rsync.rsyncPreprocess ifd srcFileSize destFileSize)
+                    withReceiverBorrow !clonedPublication(fun()->
+                      let ifd = referenceFd fspathTo realPathTo fileKind infd in
+                      Transfer.Rsync.rsyncPreprocess ifd srcFileSize destFileSize))
                  (fun () -> discardClone (); close_all_no_error infd outfd)
              in
              if !clonedPath = None then close_all infd outfd;
              (Some bi,
               (* Rsync decompressor *)
-              fun ti ->
+              fun ti -> withReceiverBorrow !clonedPublication(fun()->
               let ifd = referenceFd fspathTo realPathTo fileKind infd in
               let fd =
                 destinationFd ?producer
@@ -1669,9 +1750,9 @@ let transferFileContents ?producer
                     let publication = match !clonedPublication with
                       | Some publication -> publication
                       | None -> raise (Util.Transient "Clone publication ownership is unavailable") in
-                    StagePublication.publish publication;
+                    receiverPublish publication;
                     adoptProducer producer (Unix.descr_of_out_channel fd);
-                    StagePublication.disarm publication;
+                    receiverDisarm publication;
                     releaseLease ();
                     releasePublication ();
                     close_all infd outfd;
@@ -1679,7 +1760,7 @@ let transferFileContents ?producer
                     debug (fun () -> Util.msg "Receiver clone preserved %Ld logical bytes\n" !skippedBytes)
                 end;
                 close_all infd outfd
-              end))
+              end)))
       else
         (None,
          (* Simple generic decompressor *)
@@ -1705,6 +1786,7 @@ let transferFileContents ?producer
            (* JV: FIX: the file descriptors are already closed... *)
          Lwt.return ())
       (fun e ->
+         recordProducerCause producer e;
          decompressor :=
            Remote.MsgIdMap.remove file_id !decompressor; (* For GC *)
          discardClone ();

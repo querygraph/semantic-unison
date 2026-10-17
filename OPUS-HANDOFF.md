@@ -3811,3 +3811,32 @@ Exact evidence tests/qualification/copy-bound-owned-actual-20261017.json.
 Network rsync clone staging, legacy named-source/unbound and raw/channel close
 errors still separate. Future actualCLI instrumentation source-only matched, no
 CLI/transport/SDK/Photo payload executed or new IOadmission. Fullgoalactive.
+
+
+## Guarded rsync receiver ownership — implemented/qualified 2026-10-17
+
+Copy network-rsync staging selects owned publication for modern guarded producer
+tickets; legacy/older peers retain original API. Adapter owns raw clone handles
+then channels, attaches range lease, preserves EOF flush/truncate/check/publish/
+adopt/disarm ordering. New synchronous borrower brackets preprocessing/decoding
+and local clone writes. Connection cleanup invalidates lease immediately, defers
+native/channel closure until borrowers finish; normal EOF close differs from
+interruption. Intrusive active-owner list protects held channel objects and
+unlinks known normal owners without allocation; unknown retains producer scope.
+
+Actual24872/ba2f1b/0 stock/Ox Make+selftests+initial5stream+6localcases/compiler;
+actual96532/7b6734/0 expanded7stream andbothDune; actual98668/b6bdf1/0 final8stream/
+compiler. Source unchanged between control expansions. Normal changed/growth/
+shrink/fullyinherited bytes exact; progress hook proves no native close under
+decoder borrower and range authority already invalidated. Injected native close
+uncertainty retains ticket/channel/resources; nonfaulted cancellation retires
+known reservation normally. Source/live bytes+metadata unchanged, all external
+workers/groups/CPU leases closed. Unknown application/native objects intentionally
+last until disposable process exit, not claimed normally natively closed.
+
+Evidence tests/qualification/rsync-publication-owned-actual-20261017.json and
+doc/rsync-publication-owned-v1.md. Tests replace ONLY compressRemotely delivery
+with actual in-process codec+receiver callback; NOT actual transport/server/pump
+verification. Legacy named/unbound/old-peer and raw/channel close errors remain
+next. No new SDK/Photo/camera/bulkIO grant; frozenproperty request still separate
+and unadmitted atlastread. Fullgoalactive.
