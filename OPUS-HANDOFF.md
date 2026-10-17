@@ -101,6 +101,22 @@ Receipt `tests/qualification/all-scanned-sdk-parent-actual-20261017.json`.
 Next remains aggregate/root-preparation/path evidence and failed-prefix ownership,
 then fresh exact runtime request. No actual SDK admission exists for this feature.
 
+Caller-admitted aggregate kernel and clone-only pair preparation now implemented
+in `all_scanned_sdk_worker.py` / `all_scanned_sdk_prepare.py`. Source metadata
+fenced/no source hash; distinct clones only/no overwrite/copy fallback; clone
+hashes checked before transport. Worker records helper/CLI settlement before
+verdicts and preserves known failed prefixes separately from retained uncertainty.
+Missing helper/group/outcome and nested uncertain-close cases retain ownership;
+no later call starts. Native-clone runtime is NOT qualified for this new path.
+Forty current inert controls actuala55d9e/0/no session passed, child/group/CPU8
+closed. Receipt `tests/qualification/all-scanned-sdk-worker-actual-20261017.json`.
+Only original tiny files/injected clone and modeled SDK/proxy frames were used;
+no CLI/SDK/EXIO/retained camera access. Earlier001/002 counted imported parent
+tests twice;003 removed duplication;004 adds strict server-group uncertainty.
+Still implement outer CLI/admission, fresh replica verification, private-stage
+path evidence and independently authenticated failed-prefix/FD join; no runtime
+request/grant exists yet. Full goal remains active/incomplete.
+
 
 ## Held-output validation checkpoint
 

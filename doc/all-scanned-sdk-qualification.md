@@ -44,6 +44,37 @@ reaped0/groupothersabsent/CPU8 closed. Evidence:
 or media payload was used. Still implement bounded root preparation, aggregate
 executor, path observations and independent failed-prefix ownership before runtime.
 
+The caller-admitted kernel now exists in `all_scanned_sdk_worker.py`, with
+clone-only preparation in `all_scanned_sdk_prepare.py`. Preparation opens only an
+explicit readonly private source, fences its eight native fields, creates two
+distinct disposable inodes, hashes only those clones and never overwrites or
+falls back to copying. Every owned descriptor goes through the qualified close
+carrier. Native fclonefileat remains UNTESTED for this new preparation path.
+No receiving-side mutation or original/source hash is part of the kernel.
+
+The worker preserves intent/outcome and separate settlement records before SDK
+verdicts, verifies both roots after each phase and stops before later calls on
+failure. Missing helper/group/outcome evidence retains ownership; a proven
+terminal helper pair with an invalid SDK verdict can instead preserve a known
+failed prefix. Nested close-uncertainty carriers retain their exact FD identities.
+The caller must supply fresh source/build checks, authenticated proxy reads,
+fresh replica verification, persistence and exact existing IO/CPU ownership.
+There is still no command-line executor or admission route for this test.
+
+Forty current inert controls actuala55d9e/0/no session passed under Unison8;
+contained child/group and tokens closed. Three earlier successful development
+batches retain their original counts; imported parent tests were inadvertently
+counted twice in001/002, removed in003. Current004 adds a strict server-group
+failure control. Evidence: `tests/qualification/all-scanned-sdk-worker-actual-20261017.json`.
+All preparation payloads were original tiny fixtures and the injected clone
+substitute; transport and SDK frames were modeled. No CLI/SDK, retained camera
+payload, EXglobal or native clone syscall was invoked by these controls.
+
+Remaining before a real request: qualified outer executor/admission and failure
+audit join, real replica verification, private-stage pathname evidence, current
+binary/build closure and exact clone/hash/IO budgets. The modeled complete worker
+result does not close those gaps or grant runtime access.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under
