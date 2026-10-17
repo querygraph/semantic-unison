@@ -283,7 +283,8 @@ This is a design requirement, not a new deployment or runtime qualification.
 
 PR3 was automatically marked merged by a mistaken temporary base-ref push on
 2026-10-17. The base was restored with an exact lease to03f4ef6c; cache code
-remains separate. A replacement stacked draft is being prepared. Historical PR3:
+remains separate. Replacement draft PR4 is open: https://github.com/querygraph/unison/pull/4.
+Historical PR3:
 https://github.com/querygraph/unison/pull/3,
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
 Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
