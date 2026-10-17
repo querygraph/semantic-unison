@@ -3328,3 +3328,11 @@ rehashed unchanged AFTER source work; its admission still not inferred. This fix
 remains separate, notmergedintofrozencandidate. Other legacy semantic/transfer
 cleanup families remain outside this scoped fix; no blanket settlement claim.
 Zero owned jobs/resources; no SDK/camera/Photo payload/native/IO dispatch.
+
+
+Review now OPEN/DRAFT PR12 https://github.com/querygraph/unison/pull/12, exact
+qualified sourceecad82f3/base integration/sol-release-candidate. No merge or new
+runtime grant. Frozen propertyrequest remains in integration checkout; current
+XMP kernel controls there separately passed without production changes. All
+owned jobs/resources closed. Continue source work here without modifying the
+submitted candidate's execution pins until that scheduling request is settled.
