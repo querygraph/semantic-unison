@@ -2855,3 +2855,21 @@ Current SemanticRemote inspection still uses fresh uncached components; durable
 namespace identity and owner-loop/asynchronous report routing remain explicit
 implementation work, detailed in doc/component-managed-store.md. SOL status
 updated accordingly. No active owned jobs/resources or payload grant.
+
+
+## Durable namespace identity implemented — 2026-10-17
+
+Optional UAN/0 fixed152B archive tail now binds namespace device/inode to exact
+archive context, owner binding and manifest digest. Normal settled-store adoption
+copies identity+reference together; raw legacy setter clears stale identity;
+clear removes both; neither private key enters legacy serialized properties.
+Missing/malformed/foreign/oversized identity becomes None, not archive reset.
+
+Actual framing/native controls65040/e91a13/0 and full stock/Ox Make+selftests+
+production archive persistence controller67113/1fa76a/0 PASSED. All workers86966,
+88074,89253 and controls86539 reaped0/groupsabsent/tokensclosed. Fresh-process
+store probe now reopens using Update.component_owner_namespace restored FROM
+archive, not a separate identity file. Exact pins component-namespace-archive-
+actual-20261017.json. Retained old-code new-tail compatibility and Dune still
+pending for this successor. Automatic report routing remains incomplete; no
+media/SDK/transport or active owned resources.

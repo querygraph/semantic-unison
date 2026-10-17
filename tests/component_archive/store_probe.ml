@@ -39,9 +39,6 @@ let ()=
   let namespace=DngComponents.prepare_cache_namespace ~parent () in
   DngComponents.provision_cache_namespace namespace ~parent;
   require(DngComponents.execute_managed_cache_store store ~namespace ~parent) "store exhausted";
-  let id=DngComponents.cache_namespace_identity namespace in
-  let identity=open_out_bin(Filename.concat state "namespace.identity") in
-  Printf.fprintf identity "%d %d\n" (fst id)(snd id);close_out identity;
   let refused=try Update.adopt_component_cache_store left
    ~expected_reference:(Some(binding,SemanticHash.string "wrong-head")) store;false
    with Util.Transient _ -> true in
@@ -50,12 +47,13 @@ let ()=
   Update.adopt_component_cache_store left ~expected_reference:None store;
   require(Update.component_owner_reference left=Some(DngComponents.managed_cache_store_reference store))
    "settled store not adopted";
+  require(Update.component_owner_namespace left=Some(DngComponents.cache_namespace_identity namespace))
+   "store namespace identity not adopted";
   Update.commitUpdates ()
  end else begin
   require !Update.foundArchives "archive not restored";
-  let channel=open_in(Filename.concat state "namespace.identity") in
-  let line=input_line channel in close_in channel;
-  let expected=Scanf.sscanf line "%d %d" (fun dev ino -> dev,ino) in
+  let expected=match Update.component_owner_namespace left with
+   | Some identity -> identity | None -> failwith "archive namespace identity not restored" in
   let namespace=DngComponents.prepare_cache_namespace ~expected ~parent () in
   DngComponents.provision_cache_namespace namespace ~parent;
   DngComponents.with_cache_namespace namespace ~parent(fun directory ->

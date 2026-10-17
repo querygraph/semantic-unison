@@ -74,3 +74,27 @@ with exact opaque coverage preserved. It must not call logical reuse physical IO
 savings: current restore still verifies the full input. Remote endpoints need the
 same owner-local lifecycle; cache authority is never transferred over the existing
 small component-summary wire response.
+
+
+## Archive-owned namespace identity successor
+
+The optional UAN/0 tail follows UAX/0 without changing archive format23 or
+legacy serialized properties. Its fixed152 bytes are magic8, archive-context32,
+owner-binding32, manifest-digest32, unsigned device8, unsigned inode8 and body
+SHA25632. Values outside the host integer range, wrong head/context, malformed
+framing or checksum return no namespace identity. This checksum authenticates
+framing against a trusted loaded archive, not an untrusted standalone file.
+
+Successful managed-store execution retains the namespace identity it actually
+used. Archive adoption copies that identity and manifest reference together only
+after normal descriptor settlement and expected-head comparison. The older raw
+manifest setter clears any previous namespace identity; clearing a hint clears
+both. Old optional-hint archives still load with no identity. The namespace key
+is stripped from the legacy property payload, so older code need not recognize
+it; old writers may drop optional tails on rewrite. Actual retained-old-code
+compatibility for this new tail is still a separate validation item.
+
+Report routing must treat absent namespace identity as cold metadata, not discover
+or trust whichever directory currently occupies the expected name. The parent
+path remains selected by the endpoint owner, never the peer. A valid archived
+identity still requires fresh private-parent/name/descriptor checks on each open.

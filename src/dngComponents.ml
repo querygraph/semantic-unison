@@ -523,6 +523,29 @@ let decode_owner_archive_reference ~archive_binding encoded =
      SemanticHash.string(String.sub encoded 0 104)<>String.sub encoded 104 32 then None
   else Some(String.sub encoded 40 32,String.sub encoded 72 32)
 
+(* Optional identity tail binds the namespace to this exact archive/head. *)
+let owner_namespace_reference_size=152
+let encode_owner_namespace_reference ~archive_binding ~binding ~manifest_sha256 (dev,ino) =
+  if String.length archive_binding<>32 || String.length binding<>32 ||
+     String.length manifest_sha256<>32 || dev<0 || ino<0 then owner_invalid "namespace reference binding";
+  let number n=String.init 8 (fun i -> Char.chr(Int64.to_int(Int64.logand 255L
+    (Int64.shift_right_logical (Int64.of_int n) ((7-i)*8))))) in
+  let body="UAN\000\000\000\000\000"^archive_binding^binding^manifest_sha256^number dev^number ino in
+  body^SemanticHash.string body
+let decode_owner_namespace_reference ~archive_binding ~binding ~manifest_sha256 encoded =
+  if String.length archive_binding<>32 || String.length binding<>32 || String.length manifest_sha256<>32 then
+    owner_invalid "namespace reference context";
+  if String.length encoded<>owner_namespace_reference_size ||
+     String.sub encoded 0 8<>"UAN\000\000\000\000\000" ||
+     String.sub encoded 8 32<>archive_binding || String.sub encoded 40 32<>binding ||
+     String.sub encoded 72 32<>manifest_sha256 ||
+     SemanticHash.string(String.sub encoded 0 120)<>String.sub encoded 120 32 then None else
+  let number at=let n=ref 0L in
+    for i=0 to 7 do n:=Int64.logor (Int64.shift_left !n 8)
+      (Int64.of_int(Char.code encoded.[at+i])) done;
+    if !n<0L || !n>Int64.of_int max_int then None else Some(Int64.to_int !n) in
+  match number 104,number 112 with Some dev,Some ino -> Some(dev,ino) | _ -> None
+
 (* Owner-only managed reads. Resource bookkeeping exists before native open;
    borrowed readers never duplicate/close it. Uncertainty never retries a number
    that the OS may already have recycled. *)
@@ -646,7 +669,7 @@ type managed_cache_store = {
   mutable store_attempted : bool; mutable store_quota : ComponentHash.metadata_quota option;
   mutable store_capture : cache_capture option;
   mutable store_manifest : owner_index_publication option;
-  mutable store_completed : bool;
+  mutable store_completed : bool; mutable store_namespace : (int * int) option;
 }
 let prepare_managed_cache_store ~entry ~checkpoint ~index ~expected_entry_sha256
     ~binding ~max_bytes ~max_entries =
@@ -659,10 +682,11 @@ let prepare_managed_cache_store ~entry ~checkpoint ~index ~expected_entry_sha256
   ignore(owner_index_bytes ~binding next);
   {store_entry=entry;store_checkpoint=checkpoint;store_index=next;store_binding=binding;
    store_max_bytes=max_bytes;store_max_entries=max_entries;store_attempted=false;
-   store_quota=None;store_capture=None;store_manifest=None;store_completed=false}
+   store_quota=None;store_capture=None;store_manifest=None;store_completed=false;store_namespace=None}
 let execute_managed_cache_store store ~namespace ~parent =
   if store.store_attempted then owner_invalid "managed store already attempted";
   store.store_attempted<-true;
+  store.store_namespace<-Some(cache_namespace_identity namespace);
   let committed=with_cache_namespace namespace ~parent (fun directory ->
     let quota=ComponentHash.prepare_metadata_quota ~directory
       ~max_bytes:store.store_max_bytes ~max_entries:store.store_max_entries in
@@ -714,3 +738,7 @@ let managed_cache_store_effects store =
   let manifest=match store.store_manifest with None -> false
     | Some publication -> owner_index_published publication in
   reserved,record,entry,manifest,store.store_completed
+
+let managed_cache_store_namespace store =
+  ignore(managed_cache_store_reference store);
+  match store.store_namespace with Some identity -> identity | None -> assert false

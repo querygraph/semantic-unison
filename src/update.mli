@@ -104,6 +104,7 @@ val setStasherFun : (Fspath.t -> Path.local -> unit) -> unit
    all the roots and the current archive format *)
 val archiveHash : Fspath.t -> string
 
+val component_owner_namespace : Fspath.t -> (int * int) option
 val component_owner_reference : Fspath.t -> (string * string) option
 val load_component_owner_index : ?check_cancel:(unit -> unit) -> Fspath.t ->
   directory:Unix.file_descr -> max_entries:int -> max_bytes:int -> unit ->

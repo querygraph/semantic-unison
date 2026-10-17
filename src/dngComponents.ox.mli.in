@@ -321,3 +321,12 @@ val managed_cache_store_effects : managed_cache_store -> bool * bool * bool * bo
     Effects report reserved/record/entry/manifest/completed, not rollback. Parent
     stays borrowed. Uncertain closes retain ownership through the existing carrier.
     No archive commit, automatic report routing, deletion or eviction. *)
+
+val owner_namespace_reference_size : int
+val encode_owner_namespace_reference : archive_binding:string -> binding:string ->
+  manifest_sha256:string -> int * int -> string
+val decode_owner_namespace_reference : archive_binding:string -> binding:string ->
+  manifest_sha256:string -> string -> (int * int) option
+(** Optional archive-context and exact-manifest-bound namespace device/inode tail.
+    Missing, malformed, foreign or out-of-range values return None. *)
+val managed_cache_store_namespace : managed_cache_store -> int * int @@ nonportable
