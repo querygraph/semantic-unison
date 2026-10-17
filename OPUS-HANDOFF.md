@@ -1,5 +1,14 @@
 # Unison implementation handoff
 
+User design clarification, 2026-10-17: SOL.md now explicitly separates release
+qualification from later field refinement. Qualified pixel/metadata separation
+may ship with exact opaque preservation; incomplete small-field mapping is not
+a global deployment gate. Immutable decoder/policy revisions compose across
+independent components, read only affected regions when input bindings permit,
+and recompute dependent roots while retaining old views. Interpretation alone
+does not prove stability or authorize hash exclusions. Automatic routing remains
+an implementation follow-on; this documentation change authorizes no deployment.
+
 Latest checkpoint: opt-in all-scanned validation implemented; current stock/Ox Make+Dune and local scan-RPC/fake-driver controls PASS/CLOSED.
 Older checkpoints below retain their original scopes and pending-state history.
 Implementation HEAD before the initial handoff:
@@ -2327,8 +2336,9 @@ is an optional tail after the existing paths map. Archive format23/default-off
 serialization/negotiated features are unchanged. Rename+directoryEIO cannot grant
 an owner reference. Missing/malformed/off hints never promote self-hashed blobs.
 No automatic capture/reuse or managed namespace installation yet; actual old-
-binary compatibility/hardware power-loss/legacy close-fault qualification remain
-open. This is local cache ownership, never common-file reconciliation authority.
+CLI compatibility/hardware power-loss/legacy close-fault qualification remain
+open. Retained old production-object compatibility is now qualified below.
+This is local cache ownership, never common-file reconciliation authority.
 
 Exact isolated evidence `tests/qualification/component-archive-hints-actual-20261017.json`:
 focused63243/2ab595/0, full96641/27b99d/0 terminal/no sessions. Current stock/Ox
@@ -2337,3 +2347,12 @@ checks/compiler and14linked private archive calls/6phases percompiler pass. All8
 adoptedworkers/groups/tokensclosed. Test-only import/symbol/preference setup
 failures preserved. No source-file payload, SDK/Adobe, remote process or transfer.
 Main frozen342RPC source remains unchanged; exact admission still required.
+
+Archive successor 4d1dcc6f adds actual retained pre-change production-object
+reader/writer compatibility evidence, pushed to PR6. Owner12014/2441f7/0 and all13
+direct calls settled: old reads preserve exact current stock/Ox archive bytes,
+old rewrites drop only the optional hint, the current reader safely misses, and
+the manifest payload stays unchanged. Source/artifact pins were independently
+rechecked. See that branch's component-archive-legacy-actual-20261017.json.
+This does not execute the untouched old CLI or qualify all old releases/network
+transfers. Production source and main's frozen RPC closure remain unchanged.

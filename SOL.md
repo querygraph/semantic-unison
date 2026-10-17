@@ -228,6 +228,26 @@ preservation and exact integrity. Deploy it when its own correctness, ownership,
 compatibility and failure checks pass; do not wait for complete MakerNote
 coverage. Additional interpretation unlocks additional narrowly scoped behavior.
 
+**Release and refinement are independent tracks.** A release checklist must not
+require zero opaque bytes or complete private-field mapping. Report the supported
+pixel/metadata projections and remaining opaque coverage explicitly; qualify the
+operations being shipped. An unresolved small field blocks only an operation
+whose safety depends on interpreting that field. Field size alone establishes
+neither harmlessness nor a deployment blocker.
+
+Represent later knowledge as immutable refinement revisions, not an in-place
+rewrite of the old identity. A revision records the prior component contract,
+new decoder and policy versions, affected byte ranges, dependency closure and
+validation evidence. Interpretation and stability revisions are separate: merely
+naming a field does not authorize excluding it from a semantic hash. Apply
+independent revisions in either order with identical resulting roots; reject
+conflicting revisions while retaining the prior usable view. Schedule affected
+reads and ancestor recomposition lazily within the existing resource budget.
+The exact file digest and opaque preservation remain available throughout;
+refinement is neither an eager archive migration nor a prerequisite for continuing
+the qualified deployment. These are design requirements, not a new deployment
+authorization or a claim that automatic refinement routing is complete.
+
 In particular, same-layout accelerated receiving can reconstruct the **actual
 donor's exact bytes**, retaining opaque private regions in place. Bound the
 source/basis, size and spans; verify the complement and independently verify the
