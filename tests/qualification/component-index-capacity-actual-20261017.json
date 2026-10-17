@@ -1,0 +1,175 @@
+{
+  "scope": "Optional owner-index capacity preserves valid component report; original tiny fixtures only; no SDK/transport/camera execution",
+  "complete": true,
+  "actual_tool_terminals": [
+    {
+      "session": 88578,
+      "chunk": "23fdf5",
+      "exit": 0,
+      "running_session": false
+    },
+    {
+      "session": 17325,
+      "chunk": "1c568f",
+      "exit": 0,
+      "running_session": false
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-capacity-stock-make-20261017-001/SHARED-START.json",
+      "bytes": 1314,
+      "sha256": "d9272edff978dabe423d19b048d3751a1bc32e2e6a781dfd26ac2e8448c6690c"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-stock-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "912c8529945f63965bd739821483616a9f2e607d81c048e6bd6dfac17c96cf01"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-stock-make-20261017-001/RESULT.json",
+      "bytes": 51415,
+      "sha256": "76500d33c0e66356da1f06f4dda36876ef55cfb98dc23c1314a88c29c63c1afa"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-stock-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "63be86639ff6a99699276652a75c63488d93181b66e79cfef7fcfd4bf4f1749a"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-stock-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-ox-make-20261017-001/SHARED-START.json",
+      "bytes": 1309,
+      "sha256": "cac3059bae1cb648c86d4bd11bc156477afd7650cbd30177aa4d959556ee735f"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-ox-make-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "bc2f8d9695fd9889a285eadff8d03f893b033bece0d83a65f7151ff640ca4452"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-ox-make-20261017-001/RESULT.json",
+      "bytes": 51421,
+      "sha256": "55f5ca4353df9153b74e1099f420033f45f5facf792ca6475039f3c9d7148a20"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-ox-make-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 282,
+      "sha256": "b5315124500a43186b39b09d68c4c522acd7b337447b25a0b71b5e9d604dcf58"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-ox-make-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-controls-20261017-001/SHARED-START.json",
+      "bytes": 1308,
+      "sha256": "31d5458babbc40e8a9431e87ea176b90d234d1fe1eb4abf67eab6fa8adda6c6d"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "468a6da3af0897ca606b9b6b9eb95c09978aca9264472e5dffaec8a410e6ae1e"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "e78146b399d9a9839342497f83bc5ec199bd82be275419bc93fda0bc006ae906"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-report-20261017-001/SHARED-START.json",
+      "bytes": 1304,
+      "sha256": "c9bbd3ad9f0a77b47b08b1e60b85fb412d5d286686f70c7523a759e491dd00cf"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-report-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "3451c785ae1f77c85840cf30c360aaea73bb8c1726d19090cbdf1b7d55fa004d"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-report-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "b203e203bdc3a3f5f871f969c20897a52a3c2957cc61a8b5d9d4a7a656c869c9"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-report-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-retention-20261017-001/SHARED-START.json",
+      "bytes": 1312,
+      "sha256": "c56087cef8413857d283edc9648d2b89af21ec508aaf6cefecadaeb546a9318e"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-retention-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "1954c99e6d77bc1d8e78cbab6aba8fafe6683c5deecbdaee158fe96e2d256466"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-retention-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 43,
+      "sha256": "b56c0a6e30c08e85860131b4b2b18a85647d5e87eb7661daee4474bc1fd37c64"
+    },
+    {
+      "path": "/private/tmp/unison-capacity-both-retention-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-archive-hints-yxu2u86j/RESULT.json",
+      "bytes": 147235,
+      "sha256": "b6e767876f81c201a77ae4514ce815694bbaf86c016436c3cfd81caf7a28f6fe"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ml",
+      "bytes": 50425,
+      "sha256": "1f5617278716135f9f3bdb2fe3f3cde84a4e1972499d221bea0a6ab9b77cfeb8"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.mli",
+      "bytes": 25059,
+      "sha256": "807aba1477b1bfbb2ca12a56de821b37ab37330b2fee556f8c933657e6d6e109"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ox.mli.in",
+      "bytes": 25659,
+      "sha256": "a93c2e7783dc4f30bedebabc92dfb094128acde871299c1dec7588b0ca7543a0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/update.ml",
+      "bytes": 139396,
+      "sha256": "21b4b6955ca13498fcc9980e7ae0ff647a21da5cc9899d7e5e1eb0edb8904fd0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/update.mli",
+      "bytes": 8058,
+      "sha256": "f758aace07d6845e931b7704cda87d3f7166132a5494a9aee28005c17444c1bc"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/capacity_probe.ml",
+      "bytes": 4981,
+      "sha256": "ccb0aca84ca1a8b12c811195dc5dadd739015950cbcceb27a0f59ea3a8e0db12"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/component_archive/capacity_controls.py",
+      "bytes": 3975,
+      "sha256": "9b24d61964fc36f8391f7b2bbf2b1c767061604170f22392dc08c88ddcac9148"
+    }
+  ],
+  "limitations": [
+    "Stock/Ox macOS qualification only",
+    "No fresh transport/property admission",
+    "Cache quota charges are not physical IO/RSS limits"
+  ]
+}

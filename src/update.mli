@@ -131,7 +131,8 @@ val clear_component_owner_reference : Fspath.t -> unit
     neither removes cache files nor refunds native quota. Default off; no automatic
     capture/reuse. Optional hints follow the paths tail, not legacy properties. *)
 
-val inspect_cached_components : ?check_parent:(unit -> unit) -> Fspath.t -> parent:Unix.file_descr -> path:Fspath.t ->
+val inspect_cached_components : ?check_parent:(unit -> unit) ->
+  ?index_max_entries:int -> ?index_max_bytes:int -> Fspath.t -> parent:Unix.file_descr -> path:Fspath.t ->
   generation_sha256:string -> pool:SemanticWorkers.t -> cancellation:HelperSupervisor.cancellation ->
   decoders:DngComponents.decoders -> max_read_bytes:int64 -> Unix.file_descr ->
   SemanticWorkers.component_inspection option Lwt.t
@@ -139,7 +140,7 @@ val inspect_cached_components : ?check_parent:(unit -> unit) -> Fspath.t -> pare
     through the await; namespace/leaf FDs close before it. Loaded archive owns hints;
     legacy no-identity hints stay cold. Full-input worker verification still applies.
     Source/head fences precede one-use store and guarded memory adoption. Quota
-    exhaustion preserves the report; corruption/uncertain ownership propagates.
+    or index-capacity exhaustion preserves the report; corruption/uncertain ownership propagates.
     Caller supplies stable generation and later normal archive commit; no discovery,
     source opening, decoder loading or synchronization decision is authorized. *)
 

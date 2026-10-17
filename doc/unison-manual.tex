@@ -1605,6 +1605,43 @@ For backward compatibility, the \verb|backups| preference is also supported.
 It simply means \verb|backup = Name *| and \verb|backuplocation = local|.
 
 
+\SUBSECTION{DNG Component Details and Optional Cache}{semanticcomponents}
+
+For explicit DNG details, enable \verb|semanticdng = true| and
+\verb|semanticcomponents = true|. Component details distinguish encoded pixel
+bytes, standard metadata, private metadata, structure, and opaque bytes. Encoded
+pixel equality is not a claim about decoded or rendered pixels. Fields whose
+meaning is not yet understood remain covered by exact opaque hashes; later,
+versioned refinements can describe them more precisely without discarding the
+older interpretation. Missing role information remains unknown.
+
+Component caching is optional and disabled by default. On a supported local
+endpoint, set \verb|componentownercache = true| and set
+\verb|componentcacheparent| to an existing absolute directory owned by the user
+with mode 0700. Provision a separate parent for each local root, outside the
+synchronized trees. The implementation creates its managed namespace inside
+that parent; do not create or edit the managed files yourself. A
+\verb|%ROOT%| placeholder expands to the SHA-256 root-identity token, not the
+root pathname; each resulting parent must already exist. Automatic parent
+provisioning is not provided. Remote component reports do not use this local
+cache route.
+
+The cache is advisory: reuse still verifies the complete current input. Its
+index admits at most 1024 paths and 8 MiB of encoded entries. When index capacity
+or publication quota is exhausted, inspection can still return a valid report
+without caching it. Publication reservations are bounded by 4096 slots and
+8 GiB of declared charges; these are not physical disk or memory hard limits.
+There is no automatic eviction or quota refund. Disabling caching does not
+remove existing metadata. Failed publication files are preserved rather than
+automatically adopted or deleted.
+
+A corrupt selected cache entry is an error, not a trusted hit. Uncertain
+resource closure retains ownership rather than reporting successful cleanup.
+Cache hints are committed with the normal archive transaction; older writers
+may drop these optional hints. Component caching does not authorize changes to
+source photos or synchronization targets.
+
+
 \SUBSECTION{Merging Conflicting Versions}{merge}
 
 Unison can invoke external programs to merge conflicting versions of a file.

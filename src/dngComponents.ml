@@ -392,6 +392,12 @@ let select_owner_entry index ~root_identity ~path ~generation_sha256 =
 let owner_entry_reference index ~root_identity ~path =
   let key=owner_key ~root_identity ~path in
   Option.map (fun entry -> entry.owner_digest) (List.assoc_opt key index.indexed)
+let owner_index_has_capacity_for index entry =
+  let old=List.assoc_opt (entry.owner_root,entry.owner_path) index.indexed in
+  let count=List.length index.indexed + (match old with None -> 1 | Some _ -> 0) in
+  let bytes=index.indexed_bytes + String.length entry.owner_encoded -
+    (match old with None -> 0 | Some old -> String.length old.owner_encoded) in
+  count<=index.entry_limit && bytes<=index.byte_limit
 let replace_owner_entry index ~expected_entry_sha256 entry =
   let key=entry.owner_root,entry.owner_path in
   let old=List.assoc_opt key index.indexed in

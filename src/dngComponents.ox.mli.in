@@ -153,6 +153,8 @@ val empty_owner_index : max_entries:int -> max_bytes:int -> owner_index
 val owner_index_usage : owner_index -> int * int
 val select_owner_entry : owner_index -> root_identity:string -> path:string ->
   generation_sha256:string -> owner_entry option
+(** Admission only; replacement still requires the expected prior entry digest. *)
+val owner_index_has_capacity_for : owner_index -> owner_entry -> bool
 val replace_owner_entry : owner_index -> expected_entry_sha256:string option ->
   owner_entry -> (owner_index, string) result
 val remove_owner_entry : owner_index -> root_identity:string -> path:string ->

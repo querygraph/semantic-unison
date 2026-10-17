@@ -3598,3 +3598,43 @@ store controls pass. Full stock/Ox Make+selftests/Dune and normal/retained repor
 actual21381/479836/0 PASS; allworkers/groups/tokensclosed. Receipt component-source-
 portable-close-actual-20261017.json. NOTLinux/Windowsruntimequalification; noSDK/
 camera/transport/IOgrant or activeownedresources. Frozenpropertyrequest unchanged.
+
+
+## Current review and next work — 2026-10-17
+
+Active consolidated checkout: /Users/alexy/src/unison-sol-review-20261017,
+branch integration/sol-consolidated-review, qualified source head5362e000,
+draft PR13 against querygraph/unison:master. The portable cleanup and cold-cache
+fix above are implemented and qualified; no current merge authorization.
+
+Latest source review found a pending optional-cache capacity issue: a new key at
+the owner-index entry/byte limit can raise after successful source inspection.
+Next change should preserve the valid report and skip optional capture when the
+index cannot admit it, while retaining CAS/authentication for admitted stores.
+This fix and focused capacity controls are NOT implemented or qualified yet.
+User-facing cache setup/failure documentation also remains to finish.
+
+Frozen property IO request e60975f3 remains in the separate integration checkout;
+no fresh admission was present at the last check. Do not dispatch without its
+exact fresh grant, or substitute this newer source/binaries. All owned jobs and
+resource leases from completed qualification are closed. Standing CPU split8/8/2
+remains authoritative. Handoff entries distinguish plans from actual results.
+
+
+## Optional index capacity — implemented and verified 2026-10-17
+
+This supersedes the pending capacity item above. A pure capacity admission check
+now lets a valid inspection return without optional publication when the index
+is full. Existing same-key replacements remain admissible if byte bounds fit;
+actual stores still require the prior-entry CAS/authentication. Owner API allows
+stricter bounded index limits; configured production defaults remain1024/8MiB.
+
+Stock/Ox Make+selftests and focused production-linked capacity controls actual
+88578/23fdf5/0 pass. One-entry real owner flow captures first file, returns the
+second valid report without changing head/files/reservations. Same-key and byte
+capacity checks pass. Both normal-report and retained-ownership controls actual
+17325/1c568f/0 pass. All workers/groups/leases closed. Exact evidence recorded in
+tests/qualification/component-index-capacity-actual-20261017.json. Manual now
+documents opt-in cache setup, exact opaque coverage, capacity/quota and recovery
+limits. No SDK/camera/transport execution or new admission; frozen property
+request remains separate and unadmitted at last check. Full goal remains active.
