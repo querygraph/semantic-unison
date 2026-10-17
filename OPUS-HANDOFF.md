@@ -24,6 +24,9 @@ Main frozen342runtime sources/request/plan remain byte-identical; old slot never
 runs again. Next audit tooling fix must be versioned, preserve the original run
 and qualify REAL producer schemas, not require a new native run merely for a
 reporting correction.
+Sealed return: doc/component-remote-return-20261017.json,9590B
+SHA2ce13be049b9ede3fab46015d1f1d865145e10d8806c40d34cffc457879f7098.
+PR2's description now distinguishes original exit1 from saved-only evidence.
 
 Latest namespace source ed67f0eb is draft PR9
 https://github.com/querygraph/unison/pull/9, branch feat/component-cache-namespace,
