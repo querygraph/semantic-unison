@@ -7,6 +7,19 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Stacked draft PR3 is open: https://github.com/querygraph/unison/pull/3,
+`feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
+Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
+and110workerchecks/compiler PASS; all5workers/groups/grants closed underactual
+controller41172/e6f14a/0. Isolated receipt
+`tests/qualification/dng-owner-entry-current-builds-actual-20261017.json`, code/
+evidence f06f005a, handoff a6aed151. Managedlookup/quota/automaticselection remain
+open. Main342frozen RPC sourcepins freshly pass checked_plan; requestd0f80794/
+pland7a9f46d unchanged, workspace/admission absent. Freshsource readiness
+`doc/component-remote-ready-after-cache-builds-20261017.json` requests separate
+Root scheduling after explicitIOrelease; does NOT rehashruntimeartifacts, grant
+runtime or infer Photo processliveness. No currentlyowned Unison resources.
+
 Latest isolated cache successor is pushed through `e3c60795` on
 `feat/component-cache-input-binding`. It now includes worker capture/restore/
 decoder refresh, owner-bound record staging/readback and macOS borrowed-FD
