@@ -151,6 +151,14 @@ The callback reports reused and invalidated IDs separately, with current outcome
 inventory for subsequent refresh. The prior inventory is owner provenance, not
 peer-discovered executable authority. Disk/index publication remains separate.
 
+Original sibling-composition controls now execute both sequential upgrade orders
+with a checkpoint restore between steps. Final canonical checkpoint bytes, layout
+roots and pixel projections agree exactly for A→B and B→A; initial sibling decoder
+order also gives identical checkpoints. Each stage retains the independent sibling
+and charges only full8192-byte verification plus its own130-byte or5-byte decode/
+parent-rehash work. This proves the original tiny case, not arbitrary plugin
+purity, camera coverage, physical IO savings or a persistent-store transaction.
+
 Borrowed-descriptor storage now exists: `write_checkpoint_record` writes only to
 a fresh empty owner-private0600 singly linked regular output using bounded writes,
 syncs, verifies final identity/size, and returns the intended record digest.

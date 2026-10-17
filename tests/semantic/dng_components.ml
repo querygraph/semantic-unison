@@ -189,6 +189,40 @@ let () =
    check(try ignore(DngComponents.with_checkpoint ~expected_checkpoint_sha256:(String.make 32 'X')
      ~max_read_bytes:8192L file encoded (fun _ _ -> failwith "untrusted checkpoint callback"));false
      with ComponentHash.Invalid _ -> true) "DNG untrusted checkpoint accepted");
+ Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
+   let sibling_id="dng/ifd/0/tag/65000/value" in
+   let sibling=plugin "original.sibling/1" (fun reader ->
+     ignore(ComponentHash.read reader 0L 1);
+     Ok [fragment (sibling_id^"/field") ComponentHash.Private_metadata 0L 1L]) in
+   let a=bind private_id parent and b=bind sibling_id sibling in
+   let a2=bind private_id {parent with implementation_sha256=SemanticHash.string "sibling-A-upgrade"}
+   and b2=bind sibling_id {sibling with implementation_sha256=SemanticHash.string "sibling-B-upgrade"} in
+   let freeze bindings=match DngComponents.freeze_decoders bindings with
+     | Ok value -> value | Error why -> failwith why in
+   let capture session snapshot outcomes=
+     let checkpoint=ComponentHash.checkpoint session snapshot in
+     ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint,outcomes,
+     ComponentHash.layout_sha256 snapshot,ComponentHash.projection snapshot ComponentHash.Encoded_pixels in
+   let initial bindings=match DngComponents.with_snapshot ~decoders:(freeze bindings)
+     ~max_read_bytes:8327L file (fun session ~initial:_ ~refined outcomes -> capture session refined outcomes) with
+     | Ok value -> value | Error why -> failwith why in
+   let first=initial [a;b] and reversed=initial [b;a] in
+   let equal (bytes,_,_,layout,pixels) (other,_,_,other_layout,other_pixels)=
+     bytes=other && layout=other_layout && pixels=other_pixels in
+   check(equal first reversed) "sibling extraction order changed canonical checkpoint roots";
+   let step (encoded,digest,previous,_,_) bindings budget=
+     match DngComponents.with_refreshed_checkpoint ~previous ~decoders:(freeze bindings)
+       ~expected_checkpoint_sha256:digest ~max_read_bytes:budget file encoded (fun session result ->
+         check(ComponentHash.bytes_requested session=budget) "sibling upgrade read outside its target";
+         check(List.length result.reused=1 && List.length result.invalidated=1)
+           "sibling upgrade invalidated an independent binding";
+         capture session result.snapshot result.outcomes) with
+     | Ok value -> value | Error why -> failwith why in
+   let a_then_b=step (step first [a2;b] 8322L) [a2;b2] 8197L in
+   let b_then_a=step (step first [a;b2] 8197L) [a2;b2] 8322L in
+   check(equal a_then_b b_then_a) "independent incremental upgrades do not commute";
+   let _,_,_,_,before_pixels=first and _,_,_,_,after_pixels=a_then_b in
+   check(before_pixels=after_pixels) "sibling composition changed pixel identity");
  let failing=plugin "original.operational-failure/1" (fun _ ->
    raise (ComponentHash.Invalid "original injected decoder failure")) in
  let failed=match DngComponents.freeze_decoders [bind private_id failing] with

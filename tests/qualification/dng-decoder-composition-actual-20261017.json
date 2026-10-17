@@ -1,0 +1,37 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "Independent DNG sibling extraction ordering and sequential checkpoint upgrade commutation; source unchanged from 4a387823",
+  "actual_terminal": {
+    "session": 15700,
+    "chunk": "95452e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-ygc1bkc3/RESULT.json",
+      "bytes": 369527,
+      "sha256": "4d2ec987dbddb3a34d0e9896631b75a01a557b2db0bcdc6b9795ae351051cdbf"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-composition-controls-20261017-001/SHARED-START.json",
+      "bytes": 1125,
+      "sha256": "d7b0494597a59b18e909184d096a942425745f88924b2d2591697ddb3b17e9ae"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-composition-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "e2503b6705af96dfa8b7653268945bb86823e1eb2c79137c1dd4922d7b2bc778"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-composition-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-composition-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "b4e8e197660e6941daae7b563c67b753fc71644b86ab7c06bdddbbc525b21e23"
+    }
+  ]
+}

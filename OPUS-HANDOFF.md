@@ -7,6 +7,14 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Sibling composition qualified with actual sequential checkpoint upgrades: A→B and
+B→A produce identical checkpointbytes/layoutroots/pixelprojections; initial decoder
+order also commutes. Eachstep retains its independent sibling and charges only
+8192Bfullverification+130B or5Baffectedwork. Stock/Ox114DNGchecks each passed
+15700/95452e/0,worker34661reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-decoder-composition-actual-20261017.json`. Production
+source unchanged from4a387823; fullbuild successor/index publication still open.
+
 Owner-inventory decoder refresh now implemented: trusted prior outcomes checked
 against restored schemas; unchanged targets reused, changed/removed reset;
 invalidatedparentpreventsdescendantreuse; currentbindingsapplyparentfirst. Base
