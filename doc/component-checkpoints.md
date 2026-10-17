@@ -132,6 +132,42 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Monotonic payload reservations
+
+The macOS quota API now admits one bounded capture using an atomic empty private
+directory slot. Each slot charges2MiB conservatively for its bounded checkpoint,
+owner entry and index reference. Limits are1..4096 entries and2MiB..8GiB; actual
+slot capacity is the smaller entry/byte limit. All cooperating owners of the same
+managed directory must agree on both settings, pinned in `.component-quota-v0`.
+That configuration is a symlink used strictly as metadata: readlink/no-follow
+identity checks, never followed as a path. Slots are `.component-reservation-NNNN`.
+Native functions borrow the directory FD and open/close no descriptors.
+
+Reserve before any cache payload creation, once per ticket. Existing slots count
+as consumed even after interruption; production functions never reclaim slots or
+configuration. Lost configuration with retained slots refuses initialization.
+Atomic mkdir prevents two cooperating processes from granting the same final
+slot. Creation state is recorded before post-creation checks/sync, so an error
+cannot be treated as a refund; inspect reserved/name, retain that slot and never
+replay the ticket. A new managed namespace must start without unaccounted payloads;
+legacy/imported data needs separate accounting. Deleting slots/config or hostile
+same-UID modification violates the trusted-owner store contract.
+
+This is conservative cache-payload admission, not filesystem/RSS/physical-IO
+enforcement: excludes filesystem overhead and data outside the managed cache.
+Automatic lookup, namespace installation, writer routing through reservations,
+recovery scanning and entry eviction remain unimplemented. Original controls
+exercise limits/settings/config loss and a two-process race for the final slot;
+they do not provision a shared CPU or physical-IO pool.
+
+Current stock/Ox controls pass41 component+1005 checkpoint checks each (including
+vector truncations), plus26 original syscall-fault checks and110 worker checks.
+The quota fault case injects directory-sync EIO after mkdir: the slot remains
+consumed, the ticket cannot replay, and another prepared owner sees no capacity.
+Both final-slot contenders were actually waited0. Current Make/fullselftests and
+Dune compilation pass on both compilers with1272 production-source hash checks.
+See `tests/qualification/component-metadata-quota-actual-20261017.json`.
+
 ### UDI/0 owner entry
 
 The immutable owner entry codec is implemented in DngComponents. Make an entry

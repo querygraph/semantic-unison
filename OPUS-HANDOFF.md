@@ -7,6 +7,18 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+macOS monotonic cache quota API now implemented: borrowed0700directory, identical
+immutable no-follow configuration, atomic emptydirectory slots charged2MiB each,
+max4096/8GiB; one attempt/ticket, no slot reclamation. Lostconfig over slots and
+settings mismatch refuse. Two real processes race finalslot: exactlyone granted,
+bothwaited0; injectedpostmkdir directoryEIO retains consumedslot/no replay/refund.
+Currentstock/Ox41component+1005checkpoint+26fault+110worker checks/compiler PASS;
+all4current Make+selftests/Dune builds PASS,1272SRCchecks. Actualfocused51354/88ab45/0,
+fullcontroller86525/7cd749/0, allgroups/tokensclosed. Receipt
+`tests/qualification/component-metadata-quota-actual-20261017.json`. Original tiny
+fixtures only; no media/SDK/EXIO/mainpins. Managed lookup/routing/recovery remains
+unimplemented; quota is conservative payload admission, not physicaldisk/RSS cap.
+
 Separate stacked draft PR now open: https://github.com/querygraph/unison/pull/3,
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml`; qualified
 code/evidence throughf06f005a. No merge/mainRPC sourcechange. PR explicitly leaves

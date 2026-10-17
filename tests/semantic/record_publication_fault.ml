@@ -47,5 +47,26 @@ let () =
             with Invalid_argument _ -> true) "post-rename error allowed ticket replay";
           check(C.record_published ticket && counts()=(1,1)) "replay lost native effect or issued another sync"
         end))) [1;2;3];
+  let path=Filename.temp_file "quota-fault-directory-" "" in
+  Sys.remove path;Unix.mkdir path 0o700;
+  let directory=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+  Fun.protect ~finally:(fun () -> configure 0;Unix.close directory;
+    Array.iter(fun name -> let leaf=Filename.concat path name in
+      if (Unix.lstat leaf).Unix.st_kind=Unix.S_DIR then Unix.rmdir leaf else Sys.remove leaf) (Sys.readdir path);
+    Unix.rmdir path) (fun () ->
+    let prepare ()=C.prepare_metadata_quota ~directory ~max_bytes:2097152L ~max_entries:1 in
+    configure 0;let quota=prepare () in configure 1;
+    check(try ignore(C.reserve_metadata_slot quota directory);false
+      with Unix.Unix_error(Unix.EIO,"component quota reservation",_) -> true)
+      "quota directory-sync failure not reported";
+    check(C.metadata_slot_reserved quota &&
+      (Unix.lstat(Filename.concat path (C.metadata_slot_name quota))).Unix.st_kind=Unix.S_DIR)
+      "quota slot creation lost across sync failure";
+    check(counts()=(0,1)) "quota sync retried or synced unexpected FD";
+    check(try ignore(C.reserve_metadata_slot quota directory);false
+      with Invalid_argument _ -> true) "uncertain quota ticket replayed";
+    configure 0;
+    check(not(C.reserve_metadata_slot (prepare()) directory))
+      "failed reservation was silently refunded");
   check(Array.length(Sys.readdir "/dev/fd")=before) "native fault controls leaked descriptors";
   Printf.printf "PASS %d record publication fault checks; postrename effect retained, stage EIO/EINTR not retried\n%!" !checks

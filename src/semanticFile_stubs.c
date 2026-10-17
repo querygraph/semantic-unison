@@ -268,3 +268,144 @@ CAMLprim value unison_component_record_publication_published(value ticket)
   caml_unix_error(ENOSYS, "component record publication", Nothing);
 #endif
 }
+
+/* Monotonic cache-payload reservations. Empty private directory slots survive
+ * failures; no FD is opened or closed and no slot/config is ever removed here. */
+#ifdef __APPLE__
+enum { COMPONENT_QUOTA_SLOTS = 4096, COMPONENT_QUOTA_CHARGE = 2097152 };
+struct component_metadata_quota {
+  struct stat directory;
+  char config[160], slot[64];
+  int limit, attempted, reserved;
+};
+#define METADATA_QUOTA(v) (*(struct component_metadata_quota **)Data_custom_val(v))
+static void metadata_quota_finalize(value v) { free(METADATA_QUOTA(v)); METADATA_QUOTA(v) = NULL; }
+static struct custom_operations metadata_quota_ops = {
+  .identifier = "unison.component-metadata-quota/0", .finalize = metadata_quota_finalize,
+  .compare = custom_compare_default, .hash = custom_hash_default,
+  .serialize = custom_serialize_default, .deserialize = custom_deserialize_default,
+  .compare_ext = custom_compare_ext_default, .fixed_length = custom_fixed_length_default
+};
+static void metadata_slot_name(int index, char output[64])
+{
+  snprintf(output, 64, ".component-reservation-%04d", index);
+}
+static int metadata_config(struct component_metadata_quota *context, int directory, int create)
+{
+  const char *name = ".component-quota-v0";
+  struct stat before, after;
+  if (fstatat(directory, name, &before, AT_SYMLINK_NOFOLLOW) == -1) {
+    if (errno != ENOENT || !create) return errno;
+    /* A missing configuration never resets capacity over retained slots.
+     * Cooperating managed owners never delete those slots. */
+    for (int i = 0; i < COMPONENT_QUOTA_SLOTS; ++i) {
+      char slot[64]; metadata_slot_name(i, slot);
+      if (fstatat(directory, slot, &after, AT_SYMLINK_NOFOLLOW) == 0) return EBUSY;
+      if (errno != ENOENT) return errno;
+    }
+    if (symlinkat(context->config, directory, name) == -1 && errno != EEXIST) return errno;
+    if (fstatat(directory, name, &before, AT_SYMLINK_NOFOLLOW) == -1) return errno;
+    if (fsync(directory) == -1) return errno;
+  }
+  if (!S_ISLNK(before.st_mode) || before.st_uid != getuid() || before.st_nlink != 1) return EINVAL;
+  char contents[160];
+  ssize_t count = readlinkat(directory, name, contents, sizeof(contents));
+  if (count == -1) return errno;
+  if ((size_t)count != strlen(context->config) || memcmp(contents, context->config, (size_t)count)) return EINVAL;
+  if (fstatat(directory, name, &after, AT_SYMLINK_NOFOLLOW) == -1) return errno;
+  if (before.st_dev != after.st_dev || before.st_ino != after.st_ino || before.st_mode != after.st_mode ||
+      before.st_uid != after.st_uid || before.st_nlink != after.st_nlink ||
+      before.st_ctimespec.tv_sec != after.st_ctimespec.tv_sec ||
+      before.st_ctimespec.tv_nsec != after.st_ctimespec.tv_nsec) return EBUSY;
+  return 0;
+}
+#endif
+
+CAMLprim value unison_component_metadata_quota_prepare(value directory, value byte_limit, value entry_limit)
+{
+  CAMLparam3(directory, byte_limit, entry_limit); CAMLlocal1(ticket);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  int64_t bytes = Int64_val(byte_limit); intnat entries = Long_val(entry_limit);
+  if (bytes < COMPONENT_QUOTA_CHARGE || bytes > INT64_C(8589934592) ||
+      entries < 1 || entries > COMPONENT_QUOTA_SLOTS) caml_invalid_argument("component metadata quota bounds");
+  ticket = caml_alloc_custom(&metadata_quota_ops, sizeof(void *), 0, 1); METADATA_QUOTA(ticket) = NULL;
+  struct component_metadata_quota *context = calloc(1, sizeof(*context));
+  if (!context) caml_raise_out_of_memory(); METADATA_QUOTA(ticket) = context;
+  context->limit = (int)(bytes / COMPONENT_QUOTA_CHARGE);
+  if (context->limit > entries) context->limit = (int)entries;
+  snprintf(context->config, sizeof(context->config), "unison-component-quota/0:bytes=%lld:entries=%ld:charge=2097152",
+           (long long)bytes, (long)entries);
+  int parent = unison_semantic_fd(directory, "component quota directory FD");
+  if (fstat(parent, &context->directory) == -1) caml_unix_error(errno, "component quota directory", Nothing);
+  if (!record_directory_same(&context->directory, &context->directory))
+    caml_unix_error(EINVAL, "component quota private directory", Nothing);
+  caml_enter_blocking_section_no_pending();
+  int error = metadata_config(context, parent, 1);
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component quota configuration", Nothing);
+  CAMLreturn(ticket);
+#else
+  caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_quota_reserve(value ticket, value directory)
+{
+  CAMLparam2(ticket, directory);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  if (!context || context->attempted) caml_invalid_argument("component quota attempt already consumed");
+  int parent = unison_semantic_fd(directory, "component quota directory FD");
+  context->attempted = 1;
+  int error = 0; struct stat observed;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->directory, &observed)) error = EBUSY;
+  if (!error) error = metadata_config(context, parent, 0);
+  for (int i = 0; !error && i < context->limit; ++i) {
+    char name[64]; metadata_slot_name(i, name);
+    if (mkdirat(parent, name, 0700) == 0) {
+      strcpy(context->slot, name); context->reserved = 1;
+      if (fstatat(parent, name, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+      else if (!S_ISDIR(observed.st_mode) || observed.st_uid != getuid() ||
+               (observed.st_mode & 07777) != 0700) error = EBUSY;
+      if (!error && fsync(parent) == -1) error = errno;
+      break;
+    }
+    if (errno != EEXIST) { error = errno; break; }
+    if (fstatat(parent, name, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+    else if (!S_ISDIR(observed.st_mode) || observed.st_uid != getuid() ||
+             (observed.st_mode & 07777) != 0700) error = EINVAL;
+  }
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component quota reservation", Nothing);
+  CAMLreturn(Val_bool(context->reserved));
+#else
+  caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_quota_reserved(value ticket)
+{
+  CAMLparam1(ticket);
+#ifdef __APPLE__
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  CAMLreturn(Val_bool(context && context->reserved));
+#else
+  caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_quota_slot(value ticket)
+{
+  CAMLparam1(ticket);
+#ifdef __APPLE__
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  if (!context || !context->reserved) caml_invalid_argument("component quota has no reserved slot");
+  CAMLreturn(caml_copy_string(context->slot));
+#else
+  caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}

@@ -298,6 +298,14 @@ let read_checkpoint_record ~expected_binding ~expected_record_sha256 file =
   checkpoint_from_record ~expected_binding ~expected_record_sha256 (Buffer.contents output)
 
 type record_publication
+type metadata_quota
+let metadata_reservation_bytes=2097152L
+external prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int ->
+  metadata_quota = "unison_component_metadata_quota_prepare"
+external reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool
+  = "unison_component_metadata_quota_reserve"
+external metadata_slot_reserved : metadata_quota -> bool = "unison_component_metadata_quota_reserved"
+external metadata_slot_name : metadata_quota -> string = "unison_component_metadata_quota_slot"
 external record_publication_available : unit -> bool = "unison_component_record_publication_available"
 external prepare_record_publication_raw : Unix.file_descr -> Unix.file_descr -> string -> string ->
   record_publication = "unison_component_record_publication_prepare"

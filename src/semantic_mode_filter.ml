@@ -86,6 +86,10 @@ let transform version path =
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
         | "componentHash" -> [
+          "val prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int -> metadata_quota";
+          "val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool";
+          "val metadata_slot_reserved : metadata_quota -> bool";
+          "val metadata_slot_name : metadata_quota -> string";
           "val record_publication_available : unit -> bool";
           "val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> expected_binding:string -> expected_record_sha256:string ->\n  SemanticFile.t -> record_publication";
           "val prepare_metadata_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> max_bytes:int -> expected_sha256:string -> SemanticFile.t -> record_publication";

@@ -31,7 +31,8 @@ let with_record_directory action =
   Sys.remove path;Unix.mkdir path 0o700;
   let directory=Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
   Fun.protect ~finally:(fun () -> Unix.close directory;
-    Array.iter(fun name -> Sys.remove(Filename.concat path name)) (Sys.readdir path);
+    Array.iter(fun name -> let leaf=Filename.concat path name in
+      if (Unix.lstat leaf).Unix.st_kind=Unix.S_DIR then Unix.rmdir leaf else Sys.remove leaf) (Sys.readdir path);
     Unix.rmdir path) (fun () -> action path directory)
 let () =
   check(String.length seal=32 && seal=SemanticHash.string encoded &&
@@ -49,6 +50,66 @@ let () =
         let binding=SemanticHash.string "original-root/path/generation/decoder-contract" in
         let record=C.checkpoint_record ~binding checkpoint in
         let record_digest=SemanticHash.string record in
+        if C.record_publication_available () then begin
+          with_record_directory(fun path directory ->
+            List.iter(fun (max_bytes,max_entries) ->
+              check(try ignore(C.prepare_metadata_quota ~directory ~max_bytes ~max_entries);false
+                with Invalid_argument _ -> true) "invalid metadata quota admitted")
+              [(1L,1);(2097152L,0);(2097152L,4097)];
+            check(Array.length(Sys.readdir path)=0) "invalid quota provisioned configuration");
+          with_record_directory(fun path directory ->
+            let prepare ()=C.prepare_metadata_quota ~directory ~max_bytes:4194304L ~max_entries:9 in
+            let first=prepare () in
+            check(C.reserve_metadata_slot first directory && C.metadata_slot_reserved first)
+              "first quota slot not consumed";
+            let name=C.metadata_slot_name first in
+            check((Unix.lstat(Filename.concat path name)).Unix.st_kind=Unix.S_DIR)
+              "quota reservation not retained on disk";
+            check(try ignore(C.reserve_metadata_slot first directory);false with Invalid_argument _ -> true)
+              "quota ticket replay granted another slot";
+            let second=prepare () in
+            check(C.reserve_metadata_slot second directory && C.metadata_slot_name second<>name)
+              "second quota slot aliased first";
+            let full=prepare () in
+            check(not(C.reserve_metadata_slot full directory) && not(C.metadata_slot_reserved full))
+              "byte quota capacity exceeded";
+            check(try ignore(C.metadata_slot_name full);false with Invalid_argument _ -> true)
+              "exhausted quota invented reservation identity";
+            check(try ignore(C.prepare_metadata_quota ~directory ~max_bytes:4194304L ~max_entries:8);false
+              with Unix.Unix_error(Unix.EINVAL,_,_) -> true) "inconsistent quota settings accepted";
+            Unix.unlink(Filename.concat path ".component-quota-v0");
+            check(try ignore(prepare());false with Unix.Unix_error(Unix.EBUSY,_,_) -> true)
+              "lost configuration reset quota over surviving reservations";
+            check((Unix.fstat directory).Unix.st_kind=Unix.S_DIR) "quota closed borrowed directory");
+          with_record_directory(fun path directory ->
+            let prepare ()=C.prepare_metadata_quota ~directory ~max_bytes:8388608L ~max_entries:1 in
+            ignore(prepare());
+            let input,output=Unix.pipe ~cloexec:true () in
+            let start ()=match Unix.fork () with
+              | 0 ->
+                (try Unix.close input;
+                  let quota=prepare () in
+                  let won=C.reserve_metadata_slot quota directory in
+                  let count=Unix.write_substring output (if won then "1" else "0") 0 1 in
+                  Unix.close output;Unix.close directory;Unix._exit(if count=1 then 0 else 3)
+                 with _ -> Unix._exit 2)
+              | pid -> pid in
+            let children=[start();start()] in Unix.close output;
+            let bytes=Bytes.create 2 in
+            let rec read at=if at=2 then at else
+              let count=try Unix.read input bytes at (2-at) with Unix.Unix_error(Unix.EINTR,_,_) -> -1 in
+              if count=0 then at else read(if count<0 then at else at+count) in
+            let count=read 0 in Unix.close input;
+            let settled=List.map(fun pid -> let actual,status=Unix.waitpid [] pid in actual=pid && status=Unix.WEXITED 0) children in
+            check(List.for_all(fun value -> value) settled) "quota contender child not reaped0";
+            check(count=2 && (Bytes.to_string bytes="10" || Bytes.to_string bytes="01"))
+              "two owners double-granted final quota slot";
+            let full=prepare () in check(not(C.reserve_metadata_slot full directory))
+              "child reservation did not survive process exit";
+            check(Array.length(Sys.readdir path)=2) "quota race created extra slots";
+            Printf.printf "quota contenders %s genuinelywaited0; finalslot singly granted\n%!"
+              (String.concat "," (List.map string_of_int children)))
+        end;
         if C.record_publication_available () then with_record_directory(fun path directory ->
           let stage=Unix.openfile (Filename.concat path "stage")
             [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in

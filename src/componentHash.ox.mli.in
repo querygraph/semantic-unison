@@ -87,6 +87,25 @@ val read_checkpoint_record : expected_binding:string -> expected_record_sha256:s
     Caller retains exclusive access/ownership, independently reads back before
     publication, and handles all errors/partial stages without automatic retry.
     A successful write is not a durable index or directory publication proof. *)
+type metadata_quota
+val metadata_reservation_bytes : int64
+val prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int -> metadata_quota @@ nonportable
+val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool @@ nonportable
+val metadata_slot_reserved : metadata_quota -> bool @@ nonportable
+val metadata_slot_name : metadata_quota -> string @@ nonportable
+(** macOS monotonic managed-cache admission, borrowed private0700 directory FD.
+    Fixed2MiB payload reservation per capture; max_entries1..4096/max_bytes2MiB..8GiB.
+    One immutable no-follow-read configuration symlink pins identical settings
+    across cooperating owners; it is data, never followed. Atomic mkdir slots
+    are never deleted/reused here, including failed/interrupted captures. Missing
+    configuration over surviving slots refuses instead of resetting capacity.
+    Reserve once per ticket: false means capacity exhausted; success consumes a
+    slot. Native state records creation before later errors. Inspect reserved/name
+    after error, retain any consumed slot, never infer rollback or retry a ticket.
+    No FD opens/closes, payload creation, eviction or automatic cache activation.
+    Caller must reserve before creating bounded cache payloads and never delete
+    slots/config. Charge excludes filesystem overhead, source/staging outside this
+    cache and RSS; this is admission accounting, not a physical filesystem quota. *)
 type record_publication
 val record_publication_available : unit -> bool @@ nonportable
 val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->
