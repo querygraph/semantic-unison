@@ -305,6 +305,17 @@ Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
 record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
 then integration after the frozen RPC window is resolved. Full-input verification
 can be avoided only with a separately qualified immutable/preservation witness.
+Latest isolated integration08b4be45 (metadata merge10ace908) is qualified and
+pushed to draftPR4: complete trusted cache capture -> full-current-input/base
+verification -> scoped decoderrefresh.1047DNGchecks and110workerchecks percompiler,
+freshfourbuilds/fullMakeselftests,1272sourcepins, all sixworkers/tokensclosed.
+Main frozen342RPC pins still pass. Fresh readiness
+`doc/component-remote-ready-after-cache-reuse-20261017.json`53c00072 sent to Root
+queue01a148b7-6db0 requesting exact already-reviewed eightcase transport scheduling.
+Workspace/admission absent at that observation; no current grant, dispatch or
+Photo liveness inferred. Do not wait on complete MakerNote mapping to deploy a
+qualified exact-preserving partial view; automatic cache selection remains open.
+
 Latest user design clarification is recorded in SOL.md under "Rehashing is
 incremental refinement": deploy qualified pixel/metadata separation with exact
 opaque coverage; version each field refinement, invalidate only its dependency

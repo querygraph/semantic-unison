@@ -1,9 +1,33 @@
-# Implementation status, 2026-10-15
+# Implementation status, updated 2026-10-17
 
 The full SOL.md goal is active. This is a current evidence index and remaining-work
 list, not a completion certificate. Historical qualifications retain their pinned
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
+
+Current isolated integration is reviewed in [draft PR4](https://github.com/querygraph/unison/pull/4),
+code08b4be45, metadata merge10ace908. `with_cache_capture` now authenticates a
+complete trusted capture and derives its previous inventory/digests from the
+owner entry before full-current-input/current-parser verification and scoped
+refresh. Orphans and changed inputs cannot invoke the callback. Current focused
+1047DNGchecks/compiler, fresh stock/Ox Make/fullselftests/Dune compilation and
+110production-linked workerchecks/compiler pass;1272current source pins match.
+All six observed workers/groups/tokens closed under focused44609/428946/0 and
+full93249/2fc314/0. Exact isolated evidence:
+`tests/qualification/dng-cache-reuse-actual-20261017.json`. These changes remain
+separate from main; automatic namespace discovery/selection is still open.
+
+Latest [transport readiness](component-remote-ready-after-cache-reuse-20261017.json)
+rechecked all342frozen main source pins and absent workspace/admission, after all
+owned builds/tests closed. Requestd0f80794/pland7a9f46d remain unchanged. Root
+scheduling request01a148b7-6db0 sent; it is not a grant, current Photo liveness
+proof or actual transport qualification. Runtime artifact checks remain inside
+the admitted guard. Do not replay or dispatch from readiness/resource release.
+
+Historical cache milestones below retain their original source/count scopes.
+PR3 was automatically marked merged by a temporary mistaken base-ref push;
+the base was restored using an exact lease and PR4 replaces that review.
+No cache implementation was intentionally merged into the main feature branch.
 
 Known trusted-entry recovery lookup is now qualified in isolated PR3,5513b04b:
 complete/record-only/entry-only/missing classifications after actual no-follow
@@ -25,7 +49,7 @@ passed; all groups/tokens closed. Exact isolated evidence:
 `tests/qualification/dng-cache-capture-actual-20261017.json`. Managed lookup,
 recovery scanning and automatic activation remain open; main RPC pins unchanged.
 
-Isolated cache follow-up is reviewed in [draft PR3](https://github.com/querygraph/unison/pull/3),
+Historical isolated cache follow-up was recorded in [PR3](https://github.com/querygraph/unison/pull/3),
 stacked against `feat/semantic-dng-oxcaml`; quota code6e7c82bd is now qualified.
 Current stock/Ox Make/fullselftests and Dune compile passed with1272production
 source checks; focused41component+1005checkpoint/quota+26nativefault controls and
