@@ -253,6 +253,8 @@ let localString2fspath s =
     (* Prevent Fspath "" *)
     raise(Invalid_argument "Os.localString2fspath")
 
+let resolve_existing path = localString2fspath (Unix.realpath path)
+
 (* Return the canonical fspath of a filename (string), relative to the       *)
 (* current host, current directory.                                          *)
 

@@ -24,16 +24,7 @@ let trace_process (expected:CandidateValidator.snapshot) (process:HelperSupervis
       (String.length process.stdout > 4096) (String.length process.stderr > 4096)
       (SemanticHash.hex (prefix process.stdout)) (SemanticHash.hex (prefix process.stderr)))
 let enabled () = match CandidateValidators.selected () with [] -> false | _ -> true
-let with_descriptor path operation =
-  let owned = ref true in
-  let close fd = if !owned then begin owned := false;
-    try Unix.close fd with Unix.Unix_error _ -> () end in
-  let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  try BorrowedWork.try_bind (fun () -> operation fd)
-    (fun result -> close fd;
-      return result)
-    (fun e -> close fd; fail e)
-  with e -> close fd; raise e
+let with_descriptor = ValidationDescriptor.with_file
 let snapshot_of_fingerprint (result:SemanticWorkers.fingerprint) =
   let sha256 = SemanticHash.hex result.SemanticWorkers.digest in
   let st = result.SemanticWorkers.stats in
@@ -143,7 +134,7 @@ let validate_file ?partition ?borrowed_output ~reservation ~validators ~destinat
       BorrowedWork.bind
         (fun () -> match borrowed_output with
           | None -> with_descriptor candidate (SemanticWorkers.identify pool cancellation ~recognizers)
-          | Some fd -> SemanticWorkers.identify pool cancellation ~recognizers fd) (function
+          | Some (fd,_) -> SemanticWorkers.identify pool cancellation ~recognizers fd) (function
       | None -> fail (Util.Transient "Validation recognition cancelled")
       | Some {SemanticWorkers.formats=[];fingerprint=None;_} -> return ()
       | Some {SemanticWorkers.formats;fingerprint=Some fingerprint;_} when formats <> [] ->
@@ -155,22 +146,27 @@ let validate_file ?partition ?borrowed_output ~reservation ~validators ~destinat
           let expected = snapshot_of_fingerprint fingerprint in
           let inspect name = match borrowed_output with
             | None -> snapshot pool cancellation name
-            | Some fd ->
-                if name<>candidate then fail (Util.Transient "Borrowed validation inspection path differs") else
-                BorrowedWork.bind (fun () -> SemanticWorkers.digest pool cancellation fd) (function
+            | Some (output,original) ->
+                let digest fd =
+                  let info=Unix.LargeFile.fstat fd in
+                  if info.st_dev=original.Unix.LargeFile.st_dev && info.st_ino=original.st_ino then
+                    fail (Util.Transient "Validation inspection of original inode refused")
+                  else SemanticWorkers.digest pool cancellation fd in
+                BorrowedWork.bind (fun () ->
+                  if name=candidate then digest output else with_descriptor name digest) (function
                   | None -> fail (Util.Transient "Borrowed validation hashing cancelled")
                   | Some fingerprint -> return (snapshot_of_fingerprint fingerprint)) in
           let execute run = BorrowedWork.bind
             (fun () -> match borrowed_output with
               | None -> SemanticRuntime.with_io_file cancellation candidate run
-              | Some fd -> BorrowedWork.bind
+              | Some (fd,_) -> BorrowedWork.bind
                   (fun () -> IoAdmission.with_devices runtime.io cancellation
                     ~devices:(IoAdmission.devices_of_fds [fd]) run)
                   (function Some result -> return result
                    | None -> fail (Util.Transient "Borrowed validation I/O admission cancelled")))
             (fun process -> trace_process expected process; return process) in
           let context = {
-            CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;
+            CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;destination;
             expected;resources=requirements;
             inspect;
             execute;
@@ -258,9 +254,8 @@ let before_commit_with_reservation ~reservation ~directory ~candidate ~destinati
 let before_commit ~directory ~candidate ~destination =
   before_commit_with_reservation ~reservation:None ~directory ~candidate ~destination
 
-let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
+let unchanged_file_with_validators ~validators ~staging_directory ~source ~destination ~max_bytes =
   if max_bytes<0L then invalid_arg "CandidateValidation unchanged byte limit";
-  let validators=CandidateValidators.selected () in
   if validators=[] then return () else
   let runtime=SemanticRuntime.get () in
   let requirements=CandidateValidators.maximum_resources validators in
@@ -289,8 +284,9 @@ let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
             if List.length !selected<>List.length recognition.formats then
               fail (Util.Transient "Unexpected unchanged validation recognition selection")
             else return (!selected<>[])) in
-      let validate ~candidate ~snapshot:_ ~output =
-        validate_file ~partition ~borrowed_output:output ~reservation:None ~validators:!selected
+      let validate ~candidate ~snapshot ~output =
+        validate_file ~partition ~borrowed_output:(output,snapshot.ValidationSnapshot.source_stats)
+          ~reservation:None ~validators:!selected
           ~destination:(Path.toString destination)
           (Fspath.child staging_directory (Name.fromString (Filename.basename candidate))) in
       BorrowedWork.catch
@@ -315,3 +311,8 @@ let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
             "; cleanup: "^Printexc.to_string cleanup))
         | Unix.Unix_error _ as error -> fail (Util.Transient ("Unchanged validation: "^Printexc.to_string error))
         | error -> fail error)))
+
+let unchanged_file ~staging_directory ~source ~destination ~max_bytes =
+  if max_bytes<0L then invalid_arg "CandidateValidation unchanged byte limit";
+  unchanged_file_with_validators ~validators:(CandidateValidators.selected ())
+    ~staging_directory ~source ~destination ~max_bytes

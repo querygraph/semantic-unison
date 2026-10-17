@@ -1,0 +1,33 @@
+{
+  "calls": [
+    {
+      "script": "tests/validation_scope_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 71358,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-v3-case-1-actual-20261017.json",
+        "bytes": 221616,
+        "sha256": "3ed541fe5d091af12c87e9f8efc4e35e903f6c598fe0c55832fe4bc7bcbcb36e"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Generated private roots/current Make scanner objects; all-scanned scope exercised through actual local scan RPCs plus private endpoint/artifact ownership controls; four original fake-driver helper subprocesses, no SDK/Photo payload.",
+  "actual_owner_terminal": {
+    "initial_chunk": "fde37a",
+    "session_id": 45106,
+    "terminal_chunk": "849fb9",
+    "exit_code": 0,
+    "session_present": false
+  }
+}

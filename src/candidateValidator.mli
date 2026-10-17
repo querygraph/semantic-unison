@@ -6,6 +6,7 @@ type context = {
   cancellation : HelperSupervisor.cancellation;
   cpu_budget : int;
   candidate : string;
+  destination : string;
   expected : snapshot;
   resources : BackendResources.t;
   inspect : string -> snapshot Lwt.t;
@@ -14,7 +15,9 @@ type context = {
 (** Core owns the resource loan and private candidate. [inspect] schedules
     stable full hashing; [execute] wraps only supervised helper execution in
     the filesystem gate. A validator must settle all borrowed work/children
-    before returning and must not nest admission or filesystem leases. *)
+    before returning and must not nest admission or filesystem leases.
+    [destination] is the caller's name claim for diagnostics/recognition, never an
+    executable/helper input path. Only [candidate] may be given to a helper. *)
 module type S = sig
   val recognition : FormatRecognition.handle
   val select : unit -> (context -> unit Lwt.t) option

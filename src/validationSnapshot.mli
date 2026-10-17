@@ -1,6 +1,6 @@
 (** Isolated full-file snapshot kernel, not scan selection or helper execution.
     The caller owns admission, cancellation, namespace and descriptor lifetime.
-    Worker dispatch is available; unchanged-file scan integration is pending. *)
+    Worker dispatch is available; callers select scan paths and scope. *)
 type report = {
   bytes : int64;
   sha256 : string;

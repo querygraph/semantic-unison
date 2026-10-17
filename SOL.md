@@ -2,6 +2,17 @@
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
 
+## Current checkpoint — opt-in all-scanned validation
+
+The optional received/all-scanned scope now runs through the actual local scan
+RPC, including unchanged files, private snapshot ownership and frozen per-phase
+policies. Default off/received behavior remains unchanged. Current stock/Ox Make
+and Dune builds plus14compile/test calls and4original fake protocol helpers pass:
+[qualification](tests/qualification/all-scanned-current-v4-actual-20261017.json),
+[usage/contracts](doc/all-scanned-validation.md). This is NOT real SDK all-scanned,
+remote-process/corpus or full-goal qualification. Those and private-MakN reference
+grammar/resource/platform work remain open; no consumed admission may be replayed.
+
 ## Current checkpoint — 2026-10-16
 
 One camera-derived **generic fallback receiving control PASSED/CLOSED**:

@@ -15,6 +15,11 @@ module Validator = struct
     match !mode with
     | "reject" -> fail (Util.Transient "original fake validator finding")
     | "wrong-path" -> context.inspect !original >>= fun _ -> failwith "borrowed inspection opened original"
+    | "wrong-alias" -> context.inspect (!original^".alias") >>= fun _ -> failwith "artifact inspection opened original alias"
+    | "artifact" ->
+        context.inspect (Filename.concat (Sys.getcwd ()) "driver-artifact") >>= fun actual ->
+        if actual.sha256<>SemanticHash.hex (SemanticHash.string "GENERATED ARTIFACT") then failwith "artifact hash differs";
+        return ()
     | "borrowed-inspect" ->
         let moved=context.candidate^".held-fixture" in
         Unix.rename context.candidate moved;
@@ -73,13 +78,16 @@ let () =
   let data="TOY0 ORIGINAL GENERATED CONTENT" in write source data;
   let limited=try Lwt_unix.run (run 1L);false with Util.Transient _ -> true in
   check (limited && !calls=0 && read source=data) "matched size refusal";quiet ();
+  write (Filename.concat root "driver-artifact") "GENERATED ARTIFACT";
   List.iter (fun selected ->
     mode:=selected;
     let before= !calls in
+    if selected="wrong-alias" then Unix.link source (source^".alias");
     let passed=try Lwt_unix.run (run 1024L);true with Util.Transient _ -> false in
-    check (passed=List.mem selected ["pass";"execute";"borrowed-inspect"] && !calls=before+1 && read source=data) "selected private validation result";
+    if selected="wrong-alias" then Unix.unlink (source^".alias");
+    check (passed=List.mem selected ["pass";"execute";"borrowed-inspect";"artifact"] && !calls=before+1 && read source=data) "selected private validation result";
     quiet ();
     Printf.printf "PASS unchanged %s original-exact/global-local-admission-settled\n%!" selected)
-    ["pass";"reject";"wrong-path";"borrowed-inspect";"execute";"mutate";"pass"];
+    ["pass";"reject";"wrong-path";"wrong-alias";"artifact";"borrowed-inspect";"execute";"mutate";"pass"];
   Lwt_unix.run (SemanticWorkers.shutdown runtime.pool);
   print_endline "PASS unchanged off/no-open and bounded nonmatch/size/private-companion controls; zero SDK"

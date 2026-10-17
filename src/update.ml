@@ -2536,7 +2536,33 @@ let findOnRoot =
     Umarshal.(prod3 bool (list Path.m) (option (prod2 (list Path.m) (list Path.m) id id)) id id)
     Umarshal.(list (prod3 Path.mlocal Common.mupdateItem (list Props.m) id id))
     (fun (fspath, (wantWatcher, pathList, subpaths)) ->
-       Lwt.return (findLocal wantWatcher fspath pathList subpaths))
+       if not (DngCandidateValidation.all_scanned ()) then
+         Lwt.return (findLocal wantWatcher fspath pathList subpaths)
+       else BorrowedWork.catch (fun () ->
+         let max_files,max_path_bytes,max_bytes=DngCandidateValidation.scan_limits () in
+         let validators=CandidateValidators.selected () in
+         let updates,paths=findLocalWithValidation ~max_files ~max_path_bytes
+           wantWatcher fspath pathList subpaths in
+         let rec errors = function
+           | Error _ -> true
+           | Updates (Dir (_,children,_,_),_) -> List.exists (fun (_,ui) -> errors ui) children
+           | _ -> false in
+         if List.exists (fun (_,ui,_) -> errors ui) updates then
+           raise (Util.Transient "All-scanned validation cannot complete because update detection reported errors");
+         let roots=List.filter_map (function Local,path -> Some path | _ -> None)
+           (Globals.rootsList ()) in
+         BorrowedWork.bind (fun () -> ValidationScanWork.run_with_validators ~validators
+           ~staging_base:(Fspath.resolve_existing Util.unisonDir) ~roots ~root:fspath ~paths ~max_bytes)
+           (fun () -> Lwt.return updates))
+         (function
+          | ValidationPaths.Limit_exceeded reason -> Lwt.fail (Util.Transient reason)
+          | ValidationScanWork.Cleanup_failed (original,cleanup) ->
+              Lwt.fail (Util.Transient ("All-scanned validation cleanup failed: "^
+                (match original with None -> "" | Some error -> Printexc.to_string error^"; ")^
+                Printexc.to_string cleanup))
+          | Unix.Unix_error _ as error ->
+              Lwt.fail (Util.Transient ("All-scanned validation: "^Printexc.to_string error))
+          | error -> Lwt.fail error))
 
 let mergePropsdataOnRoot =
   Remote.registerRootCmd "propsdata" Props.Data.m Props.Data.m
@@ -2565,7 +2591,12 @@ let findUpdatesOnPaths ?(wantWatcher=false) pathList subpaths =
        Lwt.return ()
      end >>= fun () ->
      let t = Trace.startTimer "Collecting changes" in
-     Globals.allRootsMapWithWaitingAction (fun r ->
+     (if DngCandidateValidation.all_scanned () then
+        (* One failed endpoint must not let another endpoint's private staging
+           borrowers escape their owner. Preserve the user's root order. *)
+        BorrowedWork.all (List.map (fun root () ->
+          findOnRoot root (wantWatcher,pathList,subpaths)) (Globals.rootsList ()))
+      else Globals.allRootsMapWithWaitingAction (fun r ->
        debug (fun() -> Util.msg "findOnRoot %s\n" (root2string r));
        findOnRoot r (wantWatcher, pathList, subpaths))
        (fun (host, _) ->
@@ -2573,7 +2604,7 @@ let findUpdatesOnPaths ?(wantWatcher=false) pathList subpaths =
            Remote _ -> Uutil.showUpdateStatus "";
                        Trace.statusDetail "Waiting for changes from server"
          | _        -> ()
-         end)
+         end))
        >>= (fun updates ->
      begin Globals.allRootsIter (fun r ->
        match r with

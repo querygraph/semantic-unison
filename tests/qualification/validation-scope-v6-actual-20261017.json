@@ -1,0 +1,69 @@
+{
+  "calls": [
+    {
+      "script": "tests/validation_endpoint_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 88851,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-v6-case-1-actual-20261017.json",
+        "bytes": 215584,
+        "sha256": "2db473a04486ad224a09cf9002039e0576c99af76aa79b72225d1faef3085458"
+      }
+    },
+    {
+      "script": "tests/validation_unchanged_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 88884,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-v6-case-2-actual-20261017.json",
+        "bytes": 181265,
+        "sha256": "23840470ec484097849511938ce51bd1216b923edec441e1d4ca62d90c1c9dde"
+      }
+    },
+    {
+      "script": "tests/validation_scope_controls.py",
+      "returncode": 0,
+      "stderr": "",
+      "client_cleanup": {
+        "pid": 88917,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      },
+      "receipt": {
+        "path": "tests/qualification/validation-scope-v6-case-3-actual-20261017.json",
+        "bytes": 221616,
+        "sha256": "504ced4c1a60ad6fba517e9999dd71e86e3315f5f0e411ee4851fc8bde5d87bc"
+      }
+    }
+  ],
+  "cpu_tokens_closed": true,
+  "SDK_invoked": false,
+  "photo_payload_opened": false,
+  "scope": "Generated private roots/current Make scanner objects; all-scanned scope exercised through actual local scan RPCs plus private endpoint/artifact ownership controls; four actual original fake-driver helpers, no SDK/Photo payload.",
+  "actual_owner_terminal": {
+    "initial_chunk": "4f224f",
+    "session_id": 26283,
+    "terminal_chunk": "38672b",
+    "exit_code": 0,
+    "session_present": false
+  }
+}

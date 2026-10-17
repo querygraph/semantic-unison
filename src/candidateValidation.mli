@@ -1,4 +1,9 @@
 val enabled : unit -> bool
+val unchanged_file_with_validators : validators:CandidateValidator.selected list ->
+  staging_directory:Fspath.t -> source:Fspath.t -> destination:Path.local ->
+  max_bytes:int64 -> unit Lwt.t
+(** Same lifetime as [unchanged_file], with owner-captured callbacks/settings
+    retained for a complete scan instead of reselecting policy per file. *)
 val unchanged_file : staging_directory:Fspath.t -> source:Fspath.t ->
   destination:Path.local -> max_bytes:int64 -> unit Lwt.t
 (** Internal unchanged-file entry, not scan selection or an enabled scope.
@@ -11,7 +16,8 @@ val unchanged_file : staging_directory:Fspath.t -> source:Fspath.t ->
     snapshot hash and actual callback settlement precede cleanup.
     Inspection/recognition borrow the stage's held output descriptor, not a
     separately reopened pathname. Execute groups filesystem admission from that
-    descriptor. Inspection rejects any other pathname, including the original.
+    descriptor. Separate readonly artifact inspection supports driver/limiter
+    hashing; original-inode inspection is refused, including pathname aliases.
     The descriptor owner remains live across the entire callback promise.
     Unknown stage cleanup retains its owner/admission; existing worker/reader close-fault
     limitations remain separate. Resource, staging and integrity errors do not

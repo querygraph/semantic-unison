@@ -38,8 +38,9 @@ val findLocalWithValidation :
 (** Internal endpoint scan entry; archives/root setup must already be loaded.
     Collects regular files during real selected traversal, including unchanged
     and immutable files; bypasses watcher/directory coverage shortcuts. Existing
-    immutable update results remain unchanged. No helper invocation or preference
-    activates this entry yet. Limits abort rather than return partial coverage. *)
+    immutable update results remain unchanged. This collection entry invokes no
+    helpers; the opted-in find RPC awaits a separate private validation phase.
+    Limits abort rather than return partial coverage. *)
 
 (* Take a tree of equal update contents and update the archive accordingly. *)
 val markEqual :

@@ -25,8 +25,8 @@ for opt-in helper settlement diagnostics. It now also adds the isolated
 `validationSnapshot` kernel, a typed `SemanticWorkers.snapshot` operation and
 checked WholeFileClone/snapshot Make/Dune interfaces, plus private stage
 ownership and asynchronous validation composition. These are groundwork for
-unchanged-file validation; no enabled all-scanned preference or scan hook exists
-yet. Read [the integration plan and current evidence](all-scanned-validation-implementation.md).
+unchanged-file validation. That internal checkpoint has now been followed by
+the opt-in scan RPC/policy integration documented below. Read [the integration plan and current evidence](all-scanned-validation-implementation.md).
 Most other follow-up files are qualification/source-owner harnesses and sealed
 evidence. The [actual mixed workload](../tests/qualification/mixed-validation-v1-actual-20261017.json)
 and [Root independent adoption](../tests/qualification/mixed-validation-v1-root-adoption-20261017.json)
@@ -178,3 +178,60 @@ needed before enabling it; next implement private endpoint directory ownership,
 non-CWD-changing followed-path resolution/fences, strict scope/capability handling,
 scan-error propagation and awaited endpoint completion. Do not expose the option
 based on the component tests alone. Full SOL.md goal remains active/incomplete.
+
+## Current checkpoint — all-scanned scope implemented
+
+Opt-in `adobevalidatescope = all-scanned` is wired through the existing find RPC,
+with new negotiated `dng-validation-all-scanned-v1` capability. Default
+`adobevalidate = off` / scope received retains no-op behavior. Selected unchanged,
+new, immutable and followed files use the real bounded scanner; ignore rules
+remain in force, and errors/overflow reject coverage. Each endpoint captures validator/tool policy ONCE
+before enumeration. Reentrant policy changes cannot silently skip later files.
+Both started endpoint promises drain on failure. No wire/archive format changed.
+
+`ValidationScanWork` creates a fresh0700 private directory outside supplied local
+roots, resolves existing/followed paths without process CWD changes and checks
+logical bindings before/after each file. Serial snapshot validation retains the
+existing per-file resource envelope. Failed cleanup preserves original errors,
+unrelated entries/replacements and pending borrower ownership. Warnings/rejections
+name the logical file; helpers still get only the isolated pathname.
+
+`ValidationDescriptor` replaces CandidateValidation's temporary descriptor closer:
+one close after actual borrowed work, retained identity/original cause and pending
+admission on uncertainty, no numeric retry. Candidate inspection borrows the held
+stage FD; separate artifact inspection permits driver/limiter hashes but refuses
+original inode aliases. The earlier candidate-only guard was too restrictive for
+driver hashing; it is superseded, not actual SDK evidence. Existing other worker /
+receiving helper-IO close-fault limitations remain open.
+
+FINAL evidence: `tests/qualification/all-scanned-current-v4-actual-20261017.json`.
+Stock/Ox Make AND Dune006 build-only PASS/CLOSED under one sequential controller,
+actual20352/3c91d5/0/no session. Four groups/token sets independently closed.
+Three current-object controllers/14 compiler-or-test calls and FOUR original fake
+protocol-driver subprocesses passed; actual26283/38672b/0/no session. Independent
+readback performed1228production-input,1208prefix-source and1946artifact hash
+checks (including repeated checks) plus current child/group proofs. Our CPU8
+reservations are closed; no EXIO/SDK/Photo-native reservation was taken.
+Tests cover require/warn/unavailable driver, active/off/received/repeated no-ops,
+missing peer capability/late preference checks, source follow-retarget refusal,
+private mutation, captured policy, logical warnings, cleanup residue, cancellation
+and actual fake driver/tool inspection. Two injected close-uncertainty carriers
+and two admitted loans per endpoint control deliberately remain pending until
+that disposable process exits; they are NOT ordinary in-process retirement.
+
+Preserved build005 failure: actual59615/9a9cf0/exit2/no session; Ox guard rejected
+an updated interface comment whose checked template had not yet been refreshed.
+Failed child/group/tokens closed.006 synchronizes the template and passes both
+compilers/build systems. Earlier prototypes/receipts retain their exact sources;
+latest qualification supersedes only their current-source claims, no runtime
+admission/replay is inferred. All fixtures generated; synthetic helper protocol
+raw-digest missing is NOT Adobe raw-digest/decode/pixel evidence.
+
+Next: prepare a fresh source-pinned real SDK all-scanned IO request and qualify
+actual remote-process/old-peer combinations/live watcher scopes. No such SDK or
+private-camera grant currently exists; do NOT reuse consumed grants. Source-only
+MakN vendor/reference grammar work and broader M4-V/M6/corpus/portable-hash work
+continue independently. Full SOL.md goal remains ACTIVE/INCOMPLETE.
+Usage/contracts: `doc/all-scanned-validation.md`. exiftool-rs reuse remains deferred
+until the separate extensions/dng-compare integration is ready; Perl13.59 baseline
+and all historical timing/failedpart3/consumed-admission caveats remain preserved.

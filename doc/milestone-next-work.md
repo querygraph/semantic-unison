@@ -3,6 +3,13 @@
 This is an active work queue against SOL.md, not a completion claim or a new
 permission policy. Historical receipts retain their exact source snapshots.
 
+The opt-in all-scanned implementation now passes local scan-RPC/private-stage
+and original fake-driver controls on current stock/Ox Make+Dune builds.
+[Current qualification](../tests/qualification/all-scanned-current-v4-actual-20261017.json)
+records14compile/test calls and4fake helpers; real SDK all-scanned and actual
+remote-process/old-peer/live-watcher qualification remain pending.
+[Usage/contracts](all-scanned-validation.md). No native admission follows.
+
 The mixed SDK/ExifTool/hash V1 has [actually passed and closed](../tests/qualification/mixed-validation-v1-actual-20261017.json):
 owner59209/cedf13/0/no session, two stock/Ox probes, two SDK calls, two readonly
 ExifTool requests and32 hash tasks. All326 source pins and group/CPU8/EXglobal
@@ -329,7 +336,7 @@ This consumed admission is not an authorization for another native run.
 
 ## Unchanged-file validation implementation
 
-The optional all-scanned scope remains unimplemented. A fresh source trace
+At the initial audit the optional all-scanned scope remained unimplemented. A fresh source trace
 identifies why a preference plus post-filter would be incomplete: synchronous
 scan recursion, directory/watcher pruning and omitted unchanged children.
 The [concrete integration plan](all-scanned-validation-implementation.md)
