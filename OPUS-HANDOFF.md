@@ -7,6 +7,17 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Retained old-production-code archive compatibility now PASS/CLOSED on PR6:
+actual12014/2441f7/0,13directcalls with currentstock/Ox producers and pre-component-
+RPC stock5.2.0 Update/Proplist/nativeobjects from pinnedreceiptf24467a3. Old code
+has no newhintregistration/API. Old read preserves exactarchivebytes, rewrite
+removes hint; currentcoldreload givescachemiss with immutableUIXpayloadunchanged.
+Allgroups/tokensclosed; oldsource/objects/originalCLI hash unchanged. The original
+CLI was NOT invoked; no network/fullsync/data-bearingroots/SDK/photos. Test-only
+successor; current productionSRC1272pins rebound to priorfourbuilds, not rebuilt.
+`tests/qualification/component-archive-legacy-actual-20261017.json`. No automatic
+capture/reuse, managednamespace or broad old-version compatibility is implied.
+
 Draft PR6 https://github.com/querygraph/unison/pull/6 is stacked on PR5,
 `feat/component-archive-hints` against `feat/component-owner-index`.
 Qualified source/evidencef171539b; all owned handles/grants are closed. PR4 and

@@ -14,8 +14,13 @@ paths map (including an empty map when necessary), then one fixed optional hint.
 With no reference or the preference off, the previous serialization path remains
 unchanged. Old readers that understand the base archive consume at most the paths
 map; old writers may drop the hint. That loss is a cache miss, not authority to
-scan or promote surviving blobs. Actual old-binary qualification remains separate
-from this source compatibility analysis and current private-root controls.
+scan or promote surviving blobs. A separately linked probe now runs the actual retained pre-component-RPC fork's
+old Update/Proplist/native production objects against current stock/Ox private
+archives. That old registry lacks the new key: its reader preserves exact archive
+bytes, its rewrite drops the hint, and current cold reload declines cache reuse
+while the UIX payload stays unchanged. This is old-code archive qualification;
+the untouched old CLI, network peers, arbitrary older versions and data-bearing
+corpora remain separately unqualified.
 
 ## Adoption and loading
 
@@ -78,3 +83,9 @@ controls1391/compiler include fixed framing vectors;29test-only native publicati
 fault checks/compiler prove rename+directoryEIO cannot grant a normal-completion
 reference. Exact evidence: `tests/qualification/component-archive-hints-actual-20261017.json`. This is not a whole-cache/old-peer/corpus/production certificate,
 nor a new hardware power-loss or legacy close-uncertainty guarantee.
+
+The retained old-code compatibility run passed13direct calls under actual owner
+12014/2441f7/0, allgroups/tokensclosed. Old source/object/original-CLI bytes were
+rehashed unchanged; the original CLI was not executed. Current production source
+is unchanged and was rebound against its four existing builds, not rebuilt.
+Exact evidence: `tests/qualification/component-archive-legacy-actual-20261017.json`.
