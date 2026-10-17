@@ -231,3 +231,18 @@ normal cancelled/unsupported report. It does not silently recover or adopt an
 orphan produced by a real publication failure; those actual effects remain
 preserved and require explicit owner recovery. Original controls reproduce the
 old first-cancellation failure before the source correction.
+
+
+## Portable source cleanup versus macOS cache publication
+
+Component source files use a dedicated POSIX close primitive on Unix; Windows
+selects the standard ML Unix.close path because its descriptor is not a POSIX
+integer. Both use the existing close-once/retained-error owner bookkeeping. The
+metadata/cache close and publication primitives remain explicitly macOS-only.
+This avoids making an uncached component report depend on macOS cache support.
+
+Directed source controls also compile semanticFile_stubs.c with __APPLE__ undefined
+and exercise actual regular-source close, original-error preservation, consumed
+settlement and validation cleanup. This is a conditional-source build on Darwin,
+not Linux/Windows ABI or runtime qualification. Normal macOS close-fault controls
+remain enabled separately; production has no injected-failure switch.

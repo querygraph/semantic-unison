@@ -19,7 +19,7 @@ def main():
  work=Path(tempfile.mkdtemp(prefix='unison-cache-loader-controls-',dir='/private/tmp'));work.chmod(0o700)
  sources=[ROOT/'src'/(m+ext) for m in modules for ext in ('.ml','.mli','.ox.mli.in') if (ROOT/'src'/(m+ext)).exists()]
  sources += [ROOT/'src'/n for n in ('semantic_mode_filter.ml','semanticHash_stubs.c','semanticHash_evp.h','semanticFile_stubs.c')]
- sources += [Path(__file__),ROOT/'tests/semantic/cache_loader.ml',ROOT/'tests/semantic/cache_loader_fault_stubs.c',ROOT/'tests/semantic/cache_loader_native.ml',ROOT/'tests/semantic/cache_namespace.ml',ROOT/'tests/semantic/cache_namespace_native.ml',ROOT/'tests/semantic/cache_store.ml']
+ sources += [Path(__file__),ROOT/'tests/semantic/cache_loader.ml',ROOT/'tests/semantic/cache_loader_fault_stubs.c',ROOT/'tests/semantic/cache_loader_native.ml',ROOT/'tests/semantic/cache_namespace.ml',ROOT/'tests/semantic/cache_namespace_native.ml',ROOT/'tests/semantic/cache_store.ml',ROOT/'tests/semantic/component_source_portable.ml']
  result=dict(complete=False,calls=[],source_pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in sources},work=str(work),SDK_invoked=False,media_payload_opened=False,production_fault_switch=False)
  def call(argv,expected=0):
   out=invoke(argv,dict(os.environ,PYTHONDONTWRITEBYTECODE='1'),time.monotonic()+90);result['calls'].append(out);save(work,result)
@@ -35,7 +35,7 @@ def main():
   for module in modules:
    for ext in ('.mli','.ml'):(target/(module+ext)).write_text(call([str(mode),version,str(ROOT/'src'/(module+ext))])['stdout'])
   for name in ('semanticHash_stubs.c','semanticHash_evp.h','semanticFile_stubs.c'):shutil.copyfile(ROOT/'src'/name,target/name)
-  for name in ('cache_loader.ml','cache_loader_fault_stubs.c','cache_loader_native.ml','cache_namespace.ml','cache_namespace_native.ml','cache_store.ml'):shutil.copyfile(ROOT/'tests/semantic'/name,target/name)
+  for name in ('cache_loader.ml','cache_loader_fault_stubs.c','cache_loader_native.ml','cache_namespace.ml','cache_namespace_native.ml','cache_store.ml','component_source_portable.ml'):shutil.copyfile(ROOT/'tests/semantic'/name,target/name)
   before=Path.cwd()
   try:
    os.chdir(target)
@@ -68,8 +68,15 @@ def main():
    namespace=[compiler,'-I','+unix','unix.cmxa']+[m+'.cmx' for m in modules]
    namespace += ['cache_namespace_native.ml','semanticHash_stubs.o','semanticFile_stubs.o','-o','cache-namespace-native']
    call(namespace);call([str(target/'cache-namespace-native')])
+   shutil.copyfile(target/'semanticFile_stubs.o',target/'semanticFile_native_stubs.o')
+   call([compiler,'-ccopt','-U__APPLE__','-c','semanticFile_stubs.c'])
+   shutil.copyfile(target/'semanticFile_stubs.o',target/'semanticFile_posix_stubs.o')
+   portable=[compiler,'-I','+unix','unix.cmxa']+[m+'.cmx' for m in modules]
+   portable += ['component_source_portable.ml','semanticHash_stubs.o','semanticFile_posix_stubs.o','-o','component-source-posix']
+   call(portable);call([str(target/'component-source-posix')])
+   shutil.copyfile(target/'semanticFile_native_stubs.o',target/'semanticFile_stubs.o')
    result.setdefault('fault_native_sha256',{})[label]=fault_pin
-   result.setdefault('control_artifacts',{})[label]={n:hashlib.sha256((target/n).read_bytes()).hexdigest() for n in ('cache-loader-controls','cache-loader-native','cache-namespace-controls','cache-namespace-native','cache-store-controls','semanticFile_stubs.o','semanticFile_fault_stubs.o','cache_loader_fault_stubs.o')};save(work,result)
+   result.setdefault('control_artifacts',{})[label]={n:hashlib.sha256((target/n).read_bytes()).hexdigest() for n in ('cache-loader-controls','cache-loader-native','cache-namespace-controls','cache-namespace-native','cache-store-controls','component-source-posix','semanticFile_posix_stubs.o','semanticFile_stubs.o','semanticFile_fault_stubs.o','cache_loader_fault_stubs.o')};save(work,result)
   finally:os.chdir(before)
  assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==h for p,h in result['source_pins'].items())
  result['complete']=True;save(work,result);print(work,flush=True)

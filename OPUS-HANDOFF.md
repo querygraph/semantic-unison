@@ -3581,3 +3581,20 @@ workers/groups/tokensclosed. Receipt component-cold-cache-first-failure-actual-
 source-identical-to-ecad notes for Update; other production files unchanged.
 No IO/camera/SDK/transport dispatch. Frozen property request on integration
 checkout remains untouched and requires its own exact fresh admission.
+
+
+## Portable component source cleanup — latest 2026-10-17
+
+Review found regular source owner accidentally reused macOS-only metadata_close.
+Now source uses a dedicated POSIX close primitive on Unix, MLUnix.close onWin32;
+shared close-once/uncertainty bookkeeping remains, cache publication staysMac-only.
+Validation-failure cleanup also uses the portable source backend. No source-open
+path/permission or wire contract change.
+
+Directed stock/Ox controls actual78381/a36294/0 include C compiled-U__APPLE__ on
+Darwin and6API checks/compiler: normal close, consumed settlement, original cause,
+nonregular validation anddescriptorbaseline. Existing native fault/namespace/
+store controls pass. Full stock/Ox Make+selftests/Dune and normal/retained report
+actual21381/479836/0 PASS; allworkers/groups/tokensclosed. Receipt component-source-
+portable-close-actual-20261017.json. NOTLinux/Windowsruntimequalification; noSDK/
+camera/transport/IOgrant or activeownedresources. Frozenpropertyrequest unchanged.

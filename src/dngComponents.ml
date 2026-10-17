@@ -762,7 +762,7 @@ let check_cache_parent parent =
      observed.st_perm<>0o700 || named.st_kind<>Unix.S_DIR || named.st_dev<>observed.st_dev ||
      named.st_ino<>observed.st_ino || named.st_perm<>observed.st_perm || named.st_uid<>observed.st_uid then
     owner_invalid "cache parent path/descriptor binding"
-let settle_cache_parent parent cause =
+let settle_owned_component close_descriptor parent cause =
   let r=parent.parent_resource in
   if r.cache_fd_state<>Cache_held then owner_invalid "cache parent settlement already consumed";
   match cause with
@@ -776,11 +776,12 @@ let settle_cache_parent parent cause =
   | _ ->
     (match cache_identity r.cache_fd with None -> () | Some _ as identity -> r.cache_identity<-identity);
     r.cache_fd_state<-Cache_uncertain;
-    (try metadata_close r.cache_fd;r.cache_fd_state<-Cache_closed
+    (try close_descriptor r.cache_fd;r.cache_fd_state<-Cache_closed
      with error -> raise(Cache_ownership_uncertain {cache_cause=cause;
        cache_uncertain=[parent_evidence parent,error];cache_retained=[];
        cache_directory=parent_evidence parent;cache_parents=[]}));
     (match cause with None -> () | Some error -> raise error)
+let settle_cache_parent parent cause=settle_owned_component metadata_close parent cause
 let open_cache_parent path =
   let parent={parent_path=path;parent_resource={cache_fd=Unix.stdin;
     cache_fd_state=Cache_unopened;cache_identity=None}} in
@@ -795,6 +796,10 @@ let cache_parent_descriptor parent =
 (* Component source ownership uses the same close-once carrier. Its origin is
    a regular input descriptor, not a borrowed metadata directory. *)
 type component_source = cache_parent
+external component_source_close : Unix.file_descr -> unit = "unison_component_source_close"
+let settle_component_source owner cause =
+  let close=if Sys.os_type="Win32" then Unix.close else component_source_close in
+  settle_owned_component close owner cause
 let open_component_source open_descriptor =
   let owner={parent_path="";parent_resource={cache_fd=Unix.stdin;
     cache_fd_state=Cache_unopened;cache_identity=None}} in
@@ -803,10 +808,9 @@ let open_component_source open_descriptor =
   (try
     let stat=Unix.LargeFile.fstat r.cache_fd in r.cache_identity<-Some stat;
     if stat.Unix.LargeFile.st_kind<>Unix.S_REG then owner_invalid "component source is not regular"
-   with error -> settle_cache_parent owner (Some error));
+   with error -> settle_component_source owner (Some error));
   owner
 let component_source_descriptor owner =
   if owner.parent_resource.cache_fd_state<>Cache_held then owner_invalid "component source is not held";
   owner.parent_resource.cache_fd
-let settle_component_source=settle_cache_parent
 let cache_origin_descriptor state=state.cache_directory

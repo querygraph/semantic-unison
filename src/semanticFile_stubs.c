@@ -865,3 +865,17 @@ CAMLprim value unison_component_parent_open(value path)
   caml_unix_error(ENOSYS, "component parent open", Nothing);
 #endif
 }
+
+/* Source reports are portable even though cache publication is macOS-only.
+ * Windows uses Unix.close in ML, since file_descr is not a POSIX integer there. */
+CAMLprim value unison_component_source_close(value descriptor)
+{
+  CAMLparam1(descriptor);
+#ifndef _WIN32
+  int fd=unison_semantic_fd(descriptor, "component source close FD");
+  if (close(fd)==-1) caml_unix_error(errno, "component source close", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component POSIX source close", Nothing);
+#endif
+}
