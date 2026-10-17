@@ -13,6 +13,7 @@ type reader = { session : session; origin : int64; length : int64; mutable activ
 type plugin = { id : string; implementation_sha256 : string;
                 decode : reader -> (spec list, string) result (* ox-portable-field *) }
 type projection = { sha256 : string; components : int; bytes : int64 }
+type checkpoint = { encoded : string; digest : string }
 exception Invalid of string
 let invalid reason = raise (Invalid reason)
 let valid_id value = value<>"" && String.length value<=256 && not(String.contains value '\000')
@@ -184,3 +185,98 @@ let apply_plugin session snapshot ~component plugin =
   | Error reason -> if String.length reason>1024 then Error(String.sub reason 0 1024) else Error reason
   | Ok children -> Ok(refine session snapshot ~component
       ~schema:(plugin.id^"@"^SemanticHash.hex plugin.implementation_sha256) children)
+
+let max_checkpoint_size=1048576
+let checkpoint_magic="UCH\000\000\000\000\000"
+let checkpoint_bytes value=value.encoded
+let checkpoint_sha256 value=value.digest
+let role_code = function Encoded_pixels -> '\000' | Standard_metadata -> '\001'
+  | Private_metadata -> '\002' | Structural -> '\003' | Opaque -> '\004'
+let checkpoint session snapshot =
+  bound session snapshot;
+  let output=Buffer.create 1024 in
+  let put value=Buffer.add_string output value in
+  let number value=put(integer value) in
+  let string value=number(Int64.of_int(String.length value));put value in
+  put checkpoint_magic;number(Int64.of_int(fold(fun n _ -> n+1) 0 snapshot.tree));
+  let rec write (node:node) =
+    string node.id;string node.schema;Buffer.add_char output (role_code node.role);
+    number node.offset;number node.length;put node.content_sha256;
+    number(Int64.of_int(List.length node.children));List.iter write node.children in
+  write snapshot.tree;
+  let encoded=Buffer.contents output in
+  if String.length encoded>max_checkpoint_size then invalid "component checkpoint size limit";
+  bound session snapshot;{encoded;digest=SemanticHash.string encoded}
+
+let decode_checkpoint encoded =
+  if String.length encoded>max_checkpoint_size then invalid "component checkpoint size limit";
+  let position=ref 0 and remaining=ref 0 in
+  let take n=if n<0 || n>String.length encoded - !position then invalid "truncated component checkpoint";
+    let value=String.sub encoded !position n in position:= !position+n;value in
+  let number () =
+    let value=ref 0L in
+    String.iter(fun c -> value:=Int64.logor(Int64.shift_left !value 8)
+      (Int64.of_int(Char.code c))) (take 8);
+    if !value<0L then invalid "component checkpoint integer overflow";!value in
+  let small limit=let value=number () in
+    if value>Int64.of_int limit then invalid "component checkpoint field limit";Int64.to_int value in
+  let string ()=let value=take(small 256) in require_id value;value in
+  if take 8<>checkpoint_magic then invalid "unknown component checkpoint version";
+  remaining:=small 1024;
+  let rec node depth =
+    if depth>16 || !remaining<=0 then invalid "component checkpoint node/depth limit";
+    decr remaining;
+    let id=string () in let schema=string () in
+    let role=match take 1 with "\000" -> Encoded_pixels | "\001" -> Standard_metadata
+      | "\002" -> Private_metadata | "\003" -> Structural | "\004" -> Opaque
+      | _ -> invalid "component checkpoint role" in
+    let offset=number () in let length=number () in let content_sha256=take 32 in
+    let count=small 1024 in
+    if count> !remaining then invalid "component checkpoint child count";
+    let children=List.init count (fun _ -> node(depth+1)) in
+    {id;schema;role;offset;length;content_sha256;children;
+     view_sha256=view id schema role length content_sha256 children} in
+  let tree=node 0 in
+  if !remaining<>0 || !position<>String.length encoded then invalid "component checkpoint count/trailing data";
+  tree
+
+let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
+  if max_read_bytes<0L then invalid "negative component read budget";
+  require_id expected_root_schema;
+  if String.length expected_checkpoint_sha256<>32 || String.length encoded>max_checkpoint_size ||
+     SemanticHash.string encoded<>expected_checkpoint_sha256 then invalid "component checkpoint digest mismatch";
+  let tree=decode_checkpoint encoded in
+  if tree.offset<>0L || tree.length<>SemanticFile.size file || tree.schema<>expected_root_schema then
+    invalid "component checkpoint root binding mismatch";
+  let rec spec origin (node:node) : spec =
+    {id=node.id;schema=node.schema;role=node.role;offset=Int64.sub node.offset origin;
+     length=node.length;children=List.map(spec node.offset) node.children} in
+  let normalized=normalize ~origin:0L ~length:tree.length ~existing:0 ~depth:0 (spec 0L tree) in
+  let rec same (node:node) (spec:spec) =
+    node.id=spec.id && node.schema=spec.schema && node.role=spec.role &&
+    node.offset=spec.offset && node.length=spec.length && List.length node.children=List.length spec.children &&
+    List.for_all2 same node.children spec.children in
+  if not(same tree normalized) then invalid "component checkpoint partition is not canonical";
+  let session={token=ref ();file;active=true;remaining=max_read_bytes;requested=0L} in
+  Fun.protect ~finally:(fun () -> session.active<-false) (fun () ->
+    live session;charge session tree.length;
+    if SemanticFile.digest file<>tree.content_sha256 then invalid "component checkpoint input bytes changed";
+    live session;let result=callback session {token=session.token;tree} in live session;result)
+
+let reset_private_view session snapshot ~component ~schema =
+  bound session snapshot;require_id schema;
+  let old=find snapshot component in
+  if old.children=[] || (old.role<>Private_metadata && old.role<>Opaque) then
+    invalid "private view reset requires a refined private/opaque component";
+  ignore(fold(fun () (node:node) ->
+    if node.role=Encoded_pixels || node.role=Standard_metadata then
+      invalid "private view reset cannot discard pixel/standard claims") () old);
+  let replacement={old with schema;children=[];
+    view_sha256=view old.id schema old.role old.length old.content_sha256 []} in
+  let rec replace (node:node) =
+    if node.id=component then replacement,true else
+    let changed=List.map replace node.children in
+    if not(List.exists snd changed) then node,false else
+    let children=List.map fst changed in
+    {node with children;view_sha256=view node.id node.schema node.role node.length node.content_sha256 children},true in
+  {snapshot with tree=fst(replace snapshot.tree)}

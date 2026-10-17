@@ -7,6 +7,38 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## CURRENT IN THIS WORKTREE: checkpoint core isolated from reviewed RPC main
+
+Branch `feat/component-cache-input-binding`, worktree
+`/Users/alexy/src/unison-component-cache-20261017`, based on mainee9015fc. Main
+`/Users/alexy/src/unison` and its342 frozen RPC execution pins remain unchanged.
+No RPC admission/review receipt observed during this work; do not dispatch without
+the exact Root file/fresh guard. This checkpoint core is NOT integrated into main.
+
+`ComponentHash.checkpoint` exports bounded UCH0 metadata; `with_checkpoint` requires
+the owner's prior trusted metadata digest and recognized root schema, validates
+canonical geometry and hashes the COMPLETE current input before cached subrange
+hashes can reach a fresh session callback. No epoch-only or IO-free reuse; a hash
+computed from an untrusted blob is not authenticated provenance. No automatic
+store/archive/writer/RPC/worker-cache integration supplied. `reset_private_view`
+invalidates one refined private/opaque subtree without reads or loss of raw-byte
+coverage, refusing any pixel/standard claim. Old snapshots/unaffected nodes stay
+immutable; replacement decoder reads/rechecks only that parent.
+
+Actual focused62449/361452/0/no session:41existing+454checkpointchecks/compiler,
+23containedcalls, positive portable immutable checkpoint capture/3negative live
+capability captures. Make+selftests stock87017/2f0ab0/0 and Ox8061/883242/0;
+Dune compilechecks stock81918/bfd974/0 and Ox12462/24ae26/0. All groups/tokens
+closed,1272 current src checks. No EXglobal/SDK/media. Preserved added-control
+failure13554/daa76b/outer0/child1 conflated provenance with identical leaf semantics;
+final controls distinguish implementation provenance and changed meaning schema.
+Receipt `tests/qualification/component-checkpoint-core-actual-20261017.json`43272B
+SHAb5e08611d797ad50a8cde78a8adfba0aba32755d5f92080e3ca692b25c256f00.
+Contract `doc/component-checkpoints.md`. Still needed: trusted persistent owner
+record and publication/recovery, DNG decoder invalidation and worker/cache wiring,
+then integration after the frozen RPC window is resolved. Full-input verification
+can be avoided only with a separately qualified immutable/preservation witness.
+
 ## CURRENT: runtime readiness sent; no admission observed yet
 
 Frozen342 runtime pins / pland7a9f46d / requestd0f80794 remain UNCHANGED.

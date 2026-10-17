@@ -57,7 +57,9 @@ let transform version path =
     if ns<>signature_count || nf<>field_count then
       invalid_arg "qualified extension mode declarations changed";
     if interface then begin
-      let body = if component="semanticMailbox" then
+      let body = if component="componentHash" then
+        exact body "type checkpoint\n" "type checkpoint : value mod portable contended\n"
+      else if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"
       else if component="dngComponents" then
         exact body "type decoders\n" "type decoders : value mod portable contended\n"

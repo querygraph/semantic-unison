@@ -1,6 +1,6 @@
 (** Bounded worker-local component hashing over an owner-controlled snapshot.
     All bytes stay covered. Roles are parser claims, never transformation or
-    rendering-equivalence authority. No persistent/cross-session cache yet. *)
+    rendering-equivalence authority. Authenticated checkpoint restore revalidates complete input; no automatic store. *)
 type role = Encoded_pixels | Standard_metadata | Private_metadata | Structural | Opaque
 type spec = { id : string; schema : string; role : role;
               offset : int64; length : int64; children : spec list }
@@ -13,6 +13,7 @@ type reader
 type plugin = { id : string; implementation_sha256 : string;
                 decode : reader -> (spec list, string) result (* ox-portable-field *) }
 type projection = { sha256 : string; components : int; bytes : int64 }
+type checkpoint
 exception Invalid of string
 val with_snapshot : max_read_bytes:int64 -> SemanticFile.t -> spec ->
   (session -> snapshot -> 'a) -> 'a
@@ -50,3 +51,28 @@ val read : reader -> int64 -> int -> string
 val with_subreader : reader -> offset:int64 -> length:int64 -> (reader -> 'a) -> 'a
 (** Nested child decoder capability, parent-relative, sharing the same budget.
     Child and ancestor callback lifetimes are checked; at most16 reader levels. *)
+val max_checkpoint_size : int
+val checkpoint : session -> snapshot -> checkpoint
+val checkpoint_bytes : checkpoint -> string
+val checkpoint_sha256 : checkpoint -> string
+(** Export at most1MiB of versioned canonical metadata, never payload or reader
+    capabilities. Call while the snapshot's original session is live. Retain the
+    digest in trusted owner state authenticated to that extraction; computing a
+    digest from arbitrary peer/cache bytes is NOT equivalent provenance. *)
+val with_checkpoint : expected_checkpoint_sha256:string -> expected_root_schema:string ->
+  max_read_bytes:int64 -> SemanticFile.t -> string -> (session -> snapshot -> 'a) -> 'a
+(** Authenticate metadata against the owner's prior trusted checkpoint digest,
+    validate its bounded exact partition/schema, then rehash the complete current
+    file before permitting cached component hashes in a fresh live session.
+    Full-file verification is charged; subsequent refinement rereads only affected
+    parents and preserves unrelated pixel hashes. This avoids recomputing each
+    component digest, NOT the full input read. No epoch-only shortcut, immutable
+    blob authority, archive trust source, disk writer, peer authority or automatic
+    persistence is supplied. Wrong content/schema/digest refuses before callback. *)
+val reset_private_view : session -> snapshot -> component:string -> schema:string -> snapshot
+(** Explicitly invalidate one refined private/opaque subtree before applying a
+    different decoder/version. Preserves raw digest/extent/role, unrelated nodes
+    and the previous immutable snapshot. Recomputes only view ancestors, with no
+    payload read. Refuses leaves, other roles and subtrees containing any pixel
+    or standard-metadata claim. No bytes or preservation obligations are removed;
+    interpretation can become unknown while a replacement decoder is pending. *)

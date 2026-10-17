@@ -22,7 +22,7 @@ def main():
     sources=[ROOT/'src'/(m+ext) for m in modules for ext in ('.ml','.mli','.ox.mli.in')]
     sources += [ROOT/'src'/name for name in ('semantic_mode_filter.ml','semanticHash_stubs.c',
                                            'semanticHash_evp.h','semanticFile_stubs.c')]
-    sources += [ROOT/'tests/semantic'/name for name in ('component_hash.ml',)]
+    sources += [ROOT/'tests/semantic'/name for name in ('component_hash.ml','component_checkpoint.ml')]
     result=dict(complete=False,calls=[],source_pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest()
                 for p in sources},work=str(root),SDK_invoked=False,media_payload_opened=False)
     env=dict(os.environ,PYTHONDONTWRITEBYTECODE='1')
@@ -47,15 +47,18 @@ def main():
                 (work/(module+ext)).write_text(out['stdout'])
         for name in ('semanticHash_stubs.c','semanticHash_evp.h','semanticFile_stubs.c'):
             shutil.copyfile(ROOT/'src'/name,work/name)
-        for name in ('component_hash.ml',):
+        for name in ('component_hash.ml','component_checkpoint.ml'):
             shutil.copyfile(ROOT/'tests/semantic'/name,work/name)
         command=[compiler,'-I','+unix','unix.cmxa','semanticHash_stubs.c','semanticFile_stubs.c']
         for module in modules:command += [module+'.mli',module+'.ml']
-        command += ['component_hash.ml','-o','component-controls']
+        command += ['component_hash.ml','component_checkpoint.ml','-o','component-controls']
         previous=Path.cwd()
         try:
             os.chdir(work);call(command);call([str(work/'component-controls')])
             if label=='ox':
+                path=work/'checkpoint_portable.ml'
+                path.write_text('let share (value:ComponentHash.checkpoint) = Domain.Safe.spawn (fun () -> ignore(ComponentHash.checkpoint_bytes value))\n')
+                call([compiler,'-c',path.name])
                 for typ,operation in [('session','ignore(ComponentHash.bytes_requested shared)'),
                                       ('snapshot','ignore(ComponentHash.full_sha256 shared)'),
                                       ('reader','ignore(ComponentHash.read shared 0L 1)')]:
