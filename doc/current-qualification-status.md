@@ -5,6 +5,18 @@ list, not a completion certificate. Historical qualifications retain their pinne
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.
 
+Isolated cache follow-up is reviewed in [draft PR3](https://github.com/querygraph/unison/pull/3),
+stacked against `feat/semantic-dng-oxcaml`; quota code6e7c82bd is now qualified.
+Current stock/Ox Make/fullselftests and Dune compile passed with1272production
+source checks; focused41component+1005checkpoint/quota+26nativefault controls and
+110workerchecks/compiler passed. Two actual processes raced one final slot:
+exactlyone grant, both waited0; postmkdir sync failure preserved consumed capacity.
+All actual owners/groups/tokens closed. This is bounded cache-payload admission,
+not physicaldisk/RSS enforcement. Managedlookup/recovery/automaticrouting remains
+absent; the main342RPC sources and separately scheduled transport remain unchanged.
+Exact evidence is on the isolated branch in
+`tests/qualification/component-metadata-quota-actual-20261017.json`.
+
 Root has accepted the342-source component RPC plan with no findings, then explicitly
 deferred its runtime for operator-authorized Photo Smart Preview EXglobal work.
 [Adoption](../tests/qualification/component-remote-source-review-adoption-20261017.json)
