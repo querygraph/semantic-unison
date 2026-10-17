@@ -3273,3 +3273,20 @@ record type ambiguity, missing snapshot dependency, then clone dependency. Test
 harness inventory/type/setup changed only; production candidate is unchanged.
 No camera/SDK/transport/bulkIO/native grant. Next prepare finite current transfer/
 mixed-peer request with exact pins, coordinate freshRootIO; no oldadmissionreuse.
+
+
+## Fresh integration property IO request published — 2026-10-17
+
+Immutable doc/sol-properties-request-v1.json 57681B SHAe60975f3dff2fc9f95da6aa254d9726550ffbc30bc258591eb5f2a7679f3a787
+is queued to PhotoRoot as01a14991-ce52-7ef0-9ff0-ef72b31c058c. Existing qualified
+sync-functional property-removal route:18rows/54CLI/generated2MiB inputs/retained
+readers<=36, Unison00..07+EXglobal,300sobservation/30sCLI/unknownretains, declared
+uninstrumented8GiB. No compiler/SDK/camera/Photo payload/mixed-peer/timing claim.
+38execution+318production pins,7prereqs and interpreter/binary/compiler hashes;
+manual.command and checked_build metadata checks passed (no target executed).
+Workspace /private/tmp/u-sol-properties-86df187d7c95 and proposedadmission
+/private/tmp/unison-sol-properties-admission-86df187d7c95.json were absent at
+request publication. Root review/grant is not assumed from queue/resource release.
+Runtime must use fresh published SHA/deadline once and exact request command; no
+oldgrant/retry. No owned jobs/tokens/IO held. Keep this candidate's execution pins
+frozen pending review; independent source work should use a sibling successor.
