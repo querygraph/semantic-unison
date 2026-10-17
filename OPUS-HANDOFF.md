@@ -7,6 +7,12 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Separate stacked draft PR now open: https://github.com/querygraph/unison/pull/3,
+`feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml`; qualified
+code/evidence throughf06f005a. No merge/mainRPC sourcechange. PR explicitly leaves
+managed lookup/quota/automatic selection unimplemented and does not grant runtime
+transport. All currentbuild/test owners closed; no resources held.
+
 Current owner-entry/source integration qualified:stock/Ox Make+fullselftests and
 Dune compile allPASS,1272SRC checks;110production-linked workerchecks/compiler
 alsoPASS. Commonactualcontroller41172/e6f14a/0/no session, all5workers/groups/CPU
