@@ -1,5 +1,31 @@
 # Unison implementation handoff
 
+## Latest future RPC auditor source — 2026-10-17
+
+Branch feat/component-rpc-producer-audit, worktree
+/Users/alexy/src/unison-component-rpc-audit-20261017, based on main a2ddb287,
+fixes the actual final-auditor field mismatch for future runs. New independently
+pinned producer_schema.py validates REAL separate client/supervisor shapes and
+server wait/cancel/pump proof; audit.functional retains raw binding and fresh
+synthetic-file SHA readback. Runtime inventory343 here; originalmain342 remains
+unchanged, and historicalplan/admission are not repinned/reused.
+
+22coordinator+8readback+6saved control groups PASS, actual batch93347/15fd98/0 and
+finalcoordinator9b669b/0/no sessions/allgroupsCPUclosed. Full simulated worker passes
+real-shaped receipts; restoring the original lookup reproduces exit1/KeyError.
+Current producer AST field extraction, eight historical metadata projections,
+mandatory-helper source pin and existing failedprefix/unknown controls qualify
+this source fix. All318C/OCaml production files unchanged; no rebuild/liveRPC/
+SDK/media/EXIO/new runtime plan or admission. Exact evidence:
+tests/qualification/component-rpc-producer-audit-source-actual-20261017.json and
+doc/component-rpc-producer-audit-successor.md.
+
+Main consumedV1 and its originalfailedbytes/sealedreferences remain untouched.
+Root already separately adopted all8saved functional cases, originalexit1 and
+zero new payload reads/replay; f3bc1d0f adoption is reconciled in main. Any current
+pending/awaiting message below is historical. No new runtime is required merely
+to correct that old report and no successor dispatch is inferred.
+
 ## Current actual RPC and namespace state — 2026-10-17
 
 RPC V1 admission53a52254 is CONSUMED, not awaiting dispatch. Actual owner tool

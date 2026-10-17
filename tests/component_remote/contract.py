@@ -17,7 +17,7 @@ PARAMETERS={'cases':8,'file_bytes':8192,'client_workers':2,'server_workers':2,
             'owner_credits':2,'total_grant':8,'call_seconds':30,'owner_seconds':300,
             'logical_IO_budget_bytes':1073741824,'logical_IO_budget_enforced':False}
 FLAGS=['-semanticworkers','2','-maxthreads','2','-adobevalidate','off']
-MODULES=('io.py','contract.py','audit.py','case.py','call.py','coordinator.py')
+MODULES=('io.py','contract.py','audit.py','case.py','call.py','coordinator.py','producer_schema.py')
 HELPERS=('tests/shared_cpu_pool.py','tests/shared_io_pool.py','tests/shared_dispatch.py',
  'tests/manual.py','tests/shared_process_owner.py','tests/private_camera_receiving/close.py',
  'tests/report/remote_probe.ml','tests/sdk_host_matrix/shared_child.py','bench/sync/measure.py',

@@ -5,6 +5,7 @@ from component_remote.contract import CASES, FLAGS, command
 from component_remote.io import load, identity, sha
 from shared_cpu_pool import require
 from invocation_journal import audit_no_server_creation
+from component_remote.producer_schema import successful_call
 
 def settlement(run,argv,server):
     require(run['command']==argv and type(run['returncode']) is int and
@@ -70,11 +71,8 @@ def functional(plan,result,workspace):
               identity(path)['st_size']==8192 and stat.S_IMODE(identity(path)['st_mode'])==0o600 and
               identity(path)['st_nlink']==1 and sha(path)==case['before'][side]['sha256'],
               'independent generated-file readback differs')
-        require(run['returncode']==0 and run['timed_out'] is False and not run.get('fault') and
-          all(run[k]['returncode']==0 and run[k]['cancel_reason'] is None
-              for k in ('client_cleanup','supervisor_cleanup')),'functional call failed')
-        proxy=run['proxy'];require(proxy['server_returncode']==0 and proxy['fault'] is None and
-          proxy['pump_errors']==[] and proxy['server_cleanup']['cancel_reason'] is None,'functional server failed')
+        require(not run.get('fault'),'functional call fault')
+        successful_call(run)
         log=run['stdout'];require(log.count('PROBE_FUNCTIONAL '+mode+'\n')==1 and
           log.count('PROBE_LOCAL_RESOURCES_CLOSED (external client/server wait proofs still required)')==1,'probe markers missing')
         if mode=='supported':
