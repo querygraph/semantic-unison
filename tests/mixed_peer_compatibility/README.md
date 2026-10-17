@@ -31,3 +31,19 @@ aggregate/owning-tool terminal. Eleven independent fake-frame controls pass.
 The executor must authenticate raw frame inputs and retain all native owners when
 any proof is missing; this pure function neither authenticates files nor releases
 resources. Actual transfer and functional-byte checks remain unqualified.
+
+`worker.py` is now an inactive kernel using the existing retained call supervisor.
+It creates original8KiB TIFFs in an owner-supplied workspace, preserves source
+metadata across each call, checks complete received bytes, and rejects a no-op
+that replaces or modifies the receiver inode. Journal intent precedes the call;
+outcome precedes any audit or functional check. The actual uncertainty carrier
+propagates. A failed attempted call stops all successors. Five fake-boundary flow
+controls pass, including corrupt output and same-byte no-op replacement refusal.
+The flow tests mock call and prefix-audit boundaries; independent fake-frame
+auditor tests cover the latter separately. Neither is actual transport evidence.
+
+Still no coordinator/standalone worker CLI, shared-dispatch target or runtime
+admission. The parent must authenticate the complete build/source inventory,
+retain native owners, persist aggregate snapshots safely, re-read every raw proxy
+frame independently, verify generated files, and audit known failures before
+closing the IO/CPU bundle. No existing grant authorizes this new matrix.

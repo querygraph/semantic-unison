@@ -3963,3 +3963,12 @@ Nineinitialcontrols5641e7/0 then11expandedcontrols89353e/0 passed, own8closed,
 no payload/CLI/EXIO. Evidence mixed-peer-audit-controls-20261017.json. Executor/
 rawfileauthentication/functionalchecks/buildpins/admission stillnext. Existing
 camera request pinned sources remain unchanged.
+
+Mixed-peer inactiveworker kernel nowusesretained component_remote.call supervisor,
+4cases12calls/original8KiBTIFFs/sourcefence/exactreceivedbytes/noopidentity.
+JournalINTENTbeforecall/OUTCOMEbeforeaudit, stopsfailedcall, propagatesoriginal
+UnresolvedOwnershipcarrier. Fivefake-call/audit flowcontrols d0932e/0 closed
+(initial3controls36714a/0 preserved); no actualtransport. Includescorruptoutput
+and samebytenoopreplacementnegativechecks. Coordinator/sourcebuildartifactpins/
+rawparentreadaudit/sharedtarget/admissionremainnext. Existing camera request
+pins unchanged; no camera/SDK/EXIO.
