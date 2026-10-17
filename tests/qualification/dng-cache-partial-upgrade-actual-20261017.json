@@ -1,0 +1,68 @@
+{
+  "state": "PARTIAL_KNOWLEDGE_CACHE_UPGRADE_PASS_CLOSED",
+  "actual_parent_terminal": {
+    "session": 8636,
+    "chunk": "1547ac",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "scope": "Unsupported decoder replacement invalidates old private descendants, preserves whole-file/pixel hashes, returns explicit unsupported observation and leaves original trusted checkpoint usable; original tiny fixture only",
+  "closure": {
+    "child": {
+      "pid": 81363,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 81363,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": false,
+    "source_pins_unchanged": true,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "raw": {
+    "path": "/private/tmp/unison-dng-component-controls-wflbv5r8/RESULT.json",
+    "bytes": 433210,
+    "sha256": "58890806749e2b728275d5c9099799da59d2d79dcbec8046a059d49c22181b2c"
+  },
+  "closure_pin": {
+    "path": "/private/tmp/unison-cache-partial-upgrade-controls-20261017-001/SHARED-CLOSED.json",
+    "bytes": 500,
+    "sha256": "4b42bf8d13c5bd5336ea8fc2fd8c74681c48dd75bd1fca35e92fb271b6edafd4"
+  },
+  "current_build_source_rebinding": [
+    {
+      "path": "/private/tmp/unison-cache-reuse-stock-make-20261017-001/RESULT.json",
+      "sha256": "8919a50c42893d42949d65f2780ca18a27ea7cae42e8461a76328c9684b78f99",
+      "current_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-cache-reuse-ox-make-20261017-001/RESULT.json",
+      "sha256": "2d6e474f468be06b0cf28de8d71073ca18da357c39b22f049db76d95c9bb1998",
+      "current_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-cache-reuse-stock-dune-20261017-001/RESULT.json",
+      "sha256": "753b8ee48c50cb87058023718c7b48e58a634c4103217a13a7d52ee22482884c",
+      "current_source_checks": 318,
+      "rerun": false
+    },
+    {
+      "path": "/private/tmp/unison-cache-reuse-ox-dune-20261017-001/RESULT.json",
+      "sha256": "0f97eb0acc53e44f609e429af2e25de2c3018ec9a0519e88398cf854f21ec404",
+      "current_source_checks": 318,
+      "rerun": false
+    }
+  ],
+  "production_source_changed": false,
+  "SDK_media_or_transport": false
+}

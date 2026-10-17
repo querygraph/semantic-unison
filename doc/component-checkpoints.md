@@ -180,6 +180,16 @@ Original controls cover successful same-input reuse with no decoder-span rereads
 changed source rejection before callback, and orphan refusal. Qualification for
 this source successor is recorded in `tests/qualification/dng-cache-reuse-actual-20261017.json`:1047DNGchecks/compiler, fresh stock/Ox Make/fullselftests/Dune compile and110workerchecks/compiler PASS;1272current source pins match, all workers/groups/tokens closed.
 
+The end-to-end capture path also qualifies incomplete-knowledge upgrades: a
+replacement decoder returning explicit unsupported invalidates only historical
+private interpretations, retains exact whole-file and pixel identities, reports
+unsupported normally, and leaves the prior authenticated checkpoint usable. This
+is the supported partial-coverage behavior, not a whole-feature failure or an
+implicit permission to ignore unknown bytes. Original stock/Ox controls now pass
+1051DNGchecks/compiler. This test-only successor rebinds the318current source pins
+of each prior four builds; it does not claim those builds were rerun. Receipt:
+`tests/qualification/dng-cache-partial-upgrade-actual-20261017.json`.
+
 ### Quota-bound paired capture
 
 The explicit capture helper now routes record+owner-entry staging through one

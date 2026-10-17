@@ -388,6 +388,28 @@ let () =
                      ComponentHash.checkpoint_sha256(ComponentHash.checkpoint current refreshed.snapshot)=
                        ComponentHash.checkpoint_sha256 checkpoint) with
                      | Ok same -> same | Error _ -> false) "authenticated capture did not restore current view";
+                   let fallback=match DngComponents.freeze_decoders [bind private_id unsupported] with
+                     | Ok value -> value | Error why -> failwith why in
+                   check(match DngComponents.with_cache_capture entry ~directory
+                     ~record:(Some record) ~index:(Some index) ~decoders:fallback
+                     ~max_read_bytes:8192L file (fun current result ->
+                       check(ComponentHash.bytes_requested current=8192L && result.reused=[] &&
+                         List.sort compare result.invalidated=List.sort compare [private_id;private_id^"/nested"])
+                         "unsupported upgrade did not invalidate only historical private views";
+                       check(ComponentHash.full_sha256 result.snapshot=ComponentHash.full_sha256 refined &&
+                         ComponentHash.projection result.snapshot ComponentHash.Encoded_pixels=
+                           ComponentHash.projection refined ComponentHash.Encoded_pixels)
+                         "unsupported upgrade changed exact bytes or pixel identity";
+                       match result.outcomes with
+                       | [{DngComponents.status=DngComponents.Unsupported "not learned yet";_}] -> true
+                       | _ -> false) with
+                     | Ok accepted -> accepted | Error _ -> false)
+                     "incomplete decoder knowledge blocked exact-covered cached refresh";
+                   check(match reuse file (fun current result ->
+                     ComponentHash.checkpoint_sha256(ComponentHash.checkpoint current result.snapshot)=
+                       ComponentHash.checkpoint_sha256 checkpoint) with
+                     | Ok unchanged -> unchanged | Error _ -> false)
+                     "unsupported upgrade destroyed the prior usable checkpoint";
                    let changed=Bytes.of_string(Layout_only.fixture true false (String.make 64 'A')) in
                    Bytes.set changed 2050 'Z';
                    let delivered=ref false in

@@ -7,6 +7,14 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Partial-knowledge upgrade is now tested through actual authenticated cache reuse:
+unsupported replacement invalidates old private descendants while preserving
+pixel/full-byte identity and retaining the previous usable checkpoint. Focused
+1051DNGchecks/compiler actual8636/1547ac/0 closed; allchildgroups/tokensclosed.
+Test-only change, production unchanged;318sourcepins perprior4builds rebound
+(no build rerun). Receipt `tests/qualification/dng-cache-partial-upgrade-actual-20261017.json`.
+Root RPC readiness request01a148b7-6db0 remains separate; no runtime grant inferred.
+
 Authenticated capture-to-refresh integration is qualified: `with_cache_capture`
 requires complete trusted metadata, full-current-input/current-parser verification
 and derives decoder provenance only from the owner entry. Focused1047checks per
