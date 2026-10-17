@@ -3935,3 +3935,14 @@ Documented actual semanticcomponents/componentownercache/componentcacheparent
 names against productiondefinitions; endpoint-localprivateparent/full-source
 restore/advisoryencodedpixels limits explicit. Documentationonly, no sourcepins
 changed/no camera IO.
+
+Mixed-peer readiness review found test false-positive: --only old-peer without
+--old-peer silentlyskipped, unknown--only couldpasszero. Runner now rejects
+missingpeer/unknownselector/combinednegative-selection BEFOREcompile/workspace;
+main successful result also requires nonempty suite.passed. Seven arg-only
+controls actual3ba54a/0/no session PASS under own8. No CLI/compile/IO/transport.
+Evidence final-publication-selection-controls-20261017.json. Existing oldpeer
+runner subprocess.run(timeout90) lacks current complete client/server/pump/group
+proofs, so do NOTdispatch it as a qualified new mixed-peerwindow yet. Need finite
+owned transport wrapper/rawledgers before exactcurrentcandidate request. Camera
+request sourcepins unchanged; both queuedadmissions absent at turnread.

@@ -1,0 +1,30 @@
+{
+  "scope": "Seven argument-only controls, no compiler/CLI/transport execution",
+  "actual_terminal": {
+    "chunk": "3ba54a",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-final-selection-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "262144ef165e517c7117167e5f435df81e1cb39d7220c22bf6630859eb3a1e6a"
+    },
+    {
+      "path": "/private/tmp/unison-final-selection-controls-20261017-001/SHARED-START.json",
+      "bytes": 1123,
+      "sha256": "c0fbc5b54e01204e054e4adad1fc5af6e9297e57a0ee20eb0e2961458d73a39b"
+    },
+    {
+      "path": "/private/tmp/unison-final-selection-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 105,
+      "sha256": "0d6653413f55f7cf64dbfab59b6b29c640ade8e63585414ab2a44a0892a5ed0a"
+    },
+    {
+      "path": "/private/tmp/unison-final-selection-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
