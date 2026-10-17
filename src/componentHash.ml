@@ -261,6 +261,37 @@ let checkpoint_from_record ~expected_binding ~expected_record_sha256 encoded =
   ignore(decode_checkpoint payload);
   {encoded=payload;digest}
 
+let write_checkpoint_record ~binding checkpoint output =
+  let encoded=checkpoint_record ~binding checkpoint in
+  let before=Unix.LargeFile.fstat output in
+  if before.Unix.LargeFile.st_kind<>Unix.S_REG || before.st_size<>0L ||
+    before.st_nlink<>1 || before.st_uid<>Unix.getuid () || before.st_perm land 0o777<>0o600 then
+    invalid "component record output must be fresh private owned regular file";
+  let writer=SemanticFile.prepare_writer output in
+  let rec write at = if at<String.length encoded then begin
+    let count=try SemanticFile.write_at writer encoded at
+      (min 65536 (String.length encoded-at)) (Int64.of_int at)
+      with Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
+    if count=0 then invalid "zero-length component record write";
+    write (if count<0 then at else at+count)
+  end in
+  write 0;Unix.fsync output;
+  let after=Unix.LargeFile.fstat output in
+  if after.st_dev<>before.st_dev || after.st_ino<>before.st_ino ||
+    after.st_size<>Int64.of_int(String.length encoded) || after.st_nlink<>1 ||
+    after.st_uid<>before.st_uid || after.st_perm land 0o777<>0o600 then
+    invalid "component record output changed";
+  SemanticHash.string encoded
+
+let read_checkpoint_record ~expected_binding ~expected_record_sha256 file =
+  let size=SemanticFile.size file in
+  if size<80L || size>Int64.of_int(max_checkpoint_size+80) then
+    invalid "component record input size limit";
+  let output=Buffer.create(Int64.to_int size) in
+  SemanticFile.iter file 0L size (fun bytes count -> Buffer.add_subbytes output bytes 0 count);
+  SemanticFile.check file;
+  checkpoint_from_record ~expected_binding ~expected_record_sha256 (Buffer.contents output)
+
 let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
   if max_read_bytes<0L then invalid "negative component read budget";
   require_id expected_root_schema;

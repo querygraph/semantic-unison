@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Borrowed-descriptor record staging/readback now implemented in ComponentHash.
+Fresh empty private0600 singlylinked regular outputs only; bounded writes+fsync+
+identity/sizecheck, explicit intendeddigest; bounded reader requires trusteddigest
+and ownerbinding. No pathnameopen/FDclose/namespace/indexpublication. Stock/Ox
+focused controls passed actual18467/4ae3fb/0, worker29828reaped0/groupsabsent/
+tokensclosed; original tiny disposable outputs only. Receipt
+`tests/qualification/component-record-storage-actual-20261017.json`. Independent
+readback before publication remains caller duty; failedstage staysowned, no retry.
+Atomic namespace/owner-index implementation and current full-build successor open.
+
 Persistent-record codec UCR/0 now implemented in ComponentHash: bounded record
 contains owner binding/raw checkpoint digest/exactlength/checkpoint, and unpack
 requires a separately trusted whole-record digest plus expected owner binding.

@@ -47,6 +47,33 @@ let () =
         let restored=unpack record record_digest in
         check(C.checkpoint_bytes restored=encoded && C.checkpoint_sha256 restored=seal)
           "owner record changed checkpoint";
+        T.with_input "" (fun path _ ->
+          let output=Unix.openfile path [Unix.O_RDWR] 0 in
+          Fun.protect ~finally:(fun () -> Unix.close output) (fun () ->
+            let actual=C.write_checkpoint_record ~binding checkpoint output in
+            check(actual=record_digest) "disk record digest differs";
+            check((Unix.fstat output).Unix.st_size=String.length record)
+              "record output size differs";
+            let loaded=SemanticFile.with_fd output (fun file ->
+              C.read_checkpoint_record ~expected_binding:binding
+                ~expected_record_sha256:record_digest file) in
+            check(C.checkpoint_bytes loaded=encoded && C.checkpoint_sha256 loaded=seal)
+              "disk record roundtrip differs";
+            check(invalid(fun () -> C.write_checkpoint_record ~binding checkpoint output))
+              "nonempty record stage overwritten";
+            check((Unix.fstat output).Unix.st_kind=Unix.S_REG)
+              "borrowed record descriptor closed"));
+        T.with_input "" (fun path _ ->
+          let output=Unix.openfile path [Unix.O_RDWR] 0 in
+          Fun.protect ~finally:(fun () -> Unix.close output) (fun () ->
+            Unix.fchmod output 0o644;
+            check(invalid(fun () -> C.write_checkpoint_record ~binding checkpoint output))
+              "nonprivate record stage accepted";
+            check((Unix.fstat output).Unix.st_size=0) "refused record stage was written"));
+        T.with_input record (fun _ input -> SemanticFile.with_fd input (fun file ->
+          check(invalid(fun () -> C.read_checkpoint_record ~expected_binding:binding
+            ~expected_record_sha256:(String.make 32 'X') file))
+            "disk record bypassed trusted digest"));
         check(String.sub record 0 8="UCR\000\000\000\000\000" &&
           String.sub record 8 32=binding && String.sub record 40 32=seal &&
           String.sub record 72 8=put_number 0 (Int64.of_int(String.length encoded)) (String.make 8 '\000') &&

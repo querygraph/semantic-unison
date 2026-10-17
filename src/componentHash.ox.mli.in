@@ -70,6 +70,17 @@ val checkpoint_from_record : expected_binding:string -> expected_record_sha256:s
     Unpack checks exact binding, framing, digest and bounded checkpoint syntax;
     actual input/base-partition validation still requires restore. No filesystem,
     owner index, archive authority or automatic persistence is supplied. *)
+val write_checkpoint_record : binding:string -> checkpoint -> Unix.file_descr -> string
+val read_checkpoint_record : expected_binding:string -> expected_record_sha256:string ->
+  SemanticFile.t -> checkpoint
+(** Borrowed-descriptor record storage. Write requires a fresh empty singly linked
+    owner-private0600 regular output, uses bounded positional writes, syncs and
+    checks its identity/size; returns the intended whole-record digest. Read bounds
+    size, verifies the separately trusted digest and owner binding. Neither opens
+    paths, closes FDs, publishes a name/index, nor supplies immutable access.
+    Caller retains exclusive access/ownership, independently reads back before
+    publication, and handles all errors/partial stages without automatic retry.
+    A successful write is not a durable index or directory publication proof. *)
 val with_checkpoint : expected_checkpoint_sha256:string -> expected_root_schema:string ->
   max_read_bytes:int64 -> SemanticFile.t -> string -> (session -> snapshot -> 'a) -> 'a
 (** Authenticate metadata against the owner's prior trusted checkpoint digest,

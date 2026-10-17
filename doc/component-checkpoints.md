@@ -131,6 +131,15 @@ plus80 bytes. Loading requires the expected binding and separately trusted
 whole-record digest; it verifies framing, checkpoint digest and bounded syntax.
 This codec alone provides no disk publication, index or current-input authority.
 
+Borrowed-descriptor storage now exists: `write_checkpoint_record` writes only to
+a fresh empty owner-private0600 singly linked regular output using bounded writes,
+syncs, verifies final identity/size, and returns the intended record digest.
+`read_checkpoint_record` reads at most the bounded record size and checks the
+separately supplied digest/binding. The caller owns immutable/exclusive access,
+all descriptors, independent readback and later publication. These functions open
+no paths and close no descriptors. A failed partial stage remains caller-owned;
+no automatic retry, unlink, rename, index or directory durability is supplied.
+
 Reuse the trust boundary of local Unison state, not peer reports or file-side
 metadata. This explicitly trusts the local state owner; checksums are corruption
 detection, not authentication against another process with that owner's access.
