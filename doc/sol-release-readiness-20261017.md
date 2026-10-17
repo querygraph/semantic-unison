@@ -24,6 +24,24 @@ exhaustive private-field interpretation is not a deployment gate.
 | 11 Generic cloned transfer | Reused upstream engine, same/shifted ranges, clone-off/fallback, EOF/no-op controls, ordinary camera fallback | Current candidate transport/property regression and precise capability/mount limits; no physical-savings claim. |
 | 12 Optional Adobe/CPU | off/warn/require, receiving/all-scanned paths, real SDK receipts, helper lifecycle and declared inner-thread budget | Candidate mixed receiving/SDK follow-up needs fresh exact admission. No corpus-wide, peak-resource or quiet-scaling inference. |
 
+## Current final verification state
+
+[Metadata-only final preflight](sol-final-verification-state-20261017.json) checked
+318 recorded production-source pins for each current stock/Ox build: no changed
+pins, both recorded build/selftest exits0. This rebinds those historical builds;
+it does not rerun transport or establish every filesystem/property behavior.
+Both queued camera/mixed-peer request source and prerequisite sets also matched,
+with admissions and workspaces absent at the recorded observation. Neither request
+has been dispatched by this owner. Exact Root admission remains required.
+
+The next evidence is current-candidate transfer/property behavior, exact retained-
+version interoperation, and the separately scoped real-camera component report.
+The older peer already supports semantic-delta/producer binding, so its matrix
+cannot prove arbitrary upstream or capability-absent fallback. Deployment is not
+waiting for exhaustive MakerNote interpretation or decoded-pixel equivalence of
+exact-byte transfers. There is no live Unison resource reservation from this
+source/metadata preflight.
+
 ## Evidence binding review
 
 `tests/qualification/sol-acceptance-pin-review-20261017.json` reads selected receipt

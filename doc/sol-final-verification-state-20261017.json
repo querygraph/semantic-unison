@@ -1,0 +1,64 @@
+{
+  "schema": "unison-sol-final-verification-state/1",
+  "observed_unix": 1792245411.314545,
+  "goal_complete": false,
+  "production_builds": [
+    {
+      "label": "stock",
+      "receipt": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/RESULT.json",
+      "receipt_sha256": "079664dfc0f7b334e8a77418fb924332b4271a6351b98e5a70a26f06de6ec1ea",
+      "production_pins_checked": 318,
+      "changed": [],
+      "recorded_build_exit": 0,
+      "recorded_selftest_exit": 0,
+      "scope": "Historical actual build/selftests rebound to current production bytes; no binary executed or current transfer inferred"
+    },
+    {
+      "label": "ox",
+      "receipt": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/RESULT.json",
+      "receipt_sha256": "95310f43f233e390ee3939aa9b53164beb943ed7d6af07a2f27ee90bb71737d8",
+      "production_pins_checked": 318,
+      "changed": [],
+      "recorded_build_exit": 0,
+      "recorded_selftest_exit": 0,
+      "scope": "Historical actual build/selftests rebound to current production bytes; no binary executed or current transfer inferred"
+    }
+  ],
+  "pending_requests": [
+    {
+      "request": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-components-request-v1.json",
+      "request_sha256": "4b63287acd09ed1ff814cc4663fc3370e2aff432404b3ed9f420f53dc759da93",
+      "execution_pins_checked": 34,
+      "changed": [],
+      "changed_prerequisites": [],
+      "admission": "/private/tmp/unison-camera-components-admission-20261017-a31d9f70.json",
+      "admission_exists": false,
+      "workspace_exists": false,
+      "runtime_started": false,
+      "scope": "Metadata/source checks only; no dispatch or resource acquisition"
+    },
+    {
+      "request": "/Users/alexy/src/unison-sol-review-20261017/doc/mixed-peer-request-v1.json",
+      "request_sha256": "3fce1144b998673b7fc8ab175510b1e05a1b21027cbf224449b4689359f941b2",
+      "execution_pins_checked": 383,
+      "changed": [],
+      "changed_prerequisites": [],
+      "admission": "/private/tmp/unison-mixed-peer-admission-721ec40a.json",
+      "admission_exists": false,
+      "workspace_exists": false,
+      "runtime_started": false,
+      "scope": "Metadata/source checks only; no dispatch or resource acquisition"
+    }
+  ],
+  "remaining_required_evidence": [
+    "Current-candidate actual transfer/property coverage with full call settlement",
+    "Exact retained-version mixed-peer transport evidence; broader upstream versions remain unqualified",
+    "Admitted retained-clone advisory component observation for real-camera coverage claim"
+  ],
+  "not_release_blocked_by": [
+    "Exhaustive MakerNote meaning",
+    "Decoded pixel equivalence for exact-byte transfer",
+    "Universal hard OS-thread/RSS caps or physical IO savings",
+    "Every optional future filesystem backend"
+  ]
+}
