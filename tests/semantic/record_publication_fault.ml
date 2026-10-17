@@ -63,6 +63,8 @@ let () =
       (Unix.lstat(Filename.concat path (C.metadata_slot_name quota))).Unix.st_kind=Unix.S_DIR)
       "quota slot creation lost across sync failure";
     check(counts()=(0,1)) "quota sync retried or synced unexpected FD";
+    check(try C.admit_metadata_stages quota directory ~record_stage:directory ~entry_stage:directory;false
+      with Invalid_argument _ -> true) "failed reservation admitted payload staging";
     check(try ignore(C.reserve_metadata_slot quota directory);false
       with Invalid_argument _ -> true) "uncertain quota ticket replayed";
     configure 0;

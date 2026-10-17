@@ -105,6 +105,15 @@ val metadata_slot_name : metadata_quota -> string
     Caller must reserve before creating bounded cache payloads and never delete
     slots/config. Charge excludes filesystem overhead, source/staging outside this
     cache and RSS; this is admission accounting, not a physical filesystem quota. *)
+val admit_metadata_stages : metadata_quota -> Unix.file_descr ->
+  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit
+val seal_metadata_stages : metadata_quota -> Unix.file_descr ->
+  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit
+(** One-use quota-bound paired stages in the reserved namespace: names are slot
+    basename plus -record.tmp/-entry.tmp. Admit both fresh private empty distinct
+    FDs before writes; seal the same identities after bounded writes, once only.
+    Requires successful synced reservation, actual slot/directory identity and
+    no-follow stage bindings. Borrows all FDs; no payload writes or closes. *)
 type record_publication
 val record_publication_available : unit -> bool
 val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->

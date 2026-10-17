@@ -7,6 +7,17 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Explicit quota-bound paired capture now implemented. Native admission binds two
+fresh distinct empty stages in actual reservednamespace before writes; seal pins
+same produceridentities with aggregatebounds. Failed/unsynced reservation cannot
+admitpayload. Record/index stage+readback then one-use record-first entry-second
+publication; entrycollision preserves record-only orphan/foreigntarget/entrystage/
+consumedquota, no replay/refund. No FDopens/closes; caller retains settlement.
+Focused52173/4a12f1/0 and all4builds+workers84836/be254d/0 PASS, allgroups/tokensclosed,
+1272SRCchecks. Receipt `tests/qualification/dng-cache-capture-actual-20261017.json`.
+Managedlookup/recoveryscanning/automaticactivation stillopen; no mainpins/media/SDK/
+EXIO. PR3 remains stacked/unmerged; this is metadata capture, not a photo render.
+
 macOS monotonic cache quota API now implemented: borrowed0700directory, identical
 immutable no-follow configuration, atomic emptydirectory slots charged2MiB each,
 max4096/8GiB; one attempt/ticket, no slot reclamation. Lostconfig over slots and

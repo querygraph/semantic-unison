@@ -274,9 +274,9 @@ CAMLprim value unison_component_record_publication_published(value ticket)
 #ifdef __APPLE__
 enum { COMPONENT_QUOTA_SLOTS = 4096, COMPONENT_QUOTA_CHARGE = 2097152 };
 struct component_metadata_quota {
-  struct stat directory;
+  struct stat directory, slot_identity, record_stage, entry_stage;
   char config[160], slot[64];
-  int limit, attempted, reserved;
+  int limit, attempted, reserved, ready_payload, stage_phase;
 };
 #define METADATA_QUOTA(v) (*(struct component_metadata_quota **)Data_custom_val(v))
 static void metadata_quota_finalize(value v) { free(METADATA_QUOTA(v)); METADATA_QUOTA(v) = NULL; }
@@ -371,7 +371,9 @@ CAMLprim value unison_component_metadata_quota_reserve(value ticket, value direc
       if (fstatat(parent, name, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
       else if (!S_ISDIR(observed.st_mode) || observed.st_uid != getuid() ||
                (observed.st_mode & 07777) != 0700) error = EBUSY;
+      else context->slot_identity = observed;
       if (!error && fsync(parent) == -1) error = errno;
+      if (!error) context->ready_payload = 1;
       break;
     }
     if (errno != EEXIST) { error = errno; break; }
@@ -407,5 +409,59 @@ CAMLprim value unison_component_metadata_quota_slot(value ticket)
   CAMLreturn(caml_copy_string(context->slot));
 #else
   caml_unix_error(ENOSYS, "component metadata quota", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_stages(value ticket, value directory, value stages, value seal)
+{
+  CAMLparam4(ticket, directory, stages, seal);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  struct component_metadata_quota *context = METADATA_QUOTA(ticket);
+  int sealing = Bool_val(seal);
+  if (!context || !context->ready_payload || context->stage_phase != (sealing ? 1 : 0))
+    caml_invalid_argument("component quota staging state");
+  int parent = unison_semantic_fd(directory, "component quota directory FD");
+  int record_fd = unison_semantic_fd(Field(stages, 0), "component record stage FD");
+  int entry_fd = unison_semantic_fd(Field(stages, 1), "component entry stage FD");
+  char record_name[128], entry_name[128];
+  snprintf(record_name, sizeof(record_name), "%s-record.tmp", context->slot);
+  snprintf(entry_name, sizeof(entry_name), "%s-entry.tmp", context->slot);
+  struct stat observed, record, entry, named;
+  int error = 0;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &observed) == -1) error = errno;
+  else if (!record_directory_same(&context->directory, &observed)) error = EBUSY;
+  if (!error) error = metadata_config(context, parent, 0);
+  if (!error && fstatat(parent, context->slot, &observed, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_directory_same(&context->slot_identity, &observed)) error = EBUSY;
+  if (!error && (fstat(record_fd, &record) == -1 || fstat(entry_fd, &entry) == -1)) error = errno;
+  if (!error && (!record_stage_same(&record, &record, 1) || !record_stage_same(&entry, &entry, 1) ||
+      (record.st_dev == entry.st_dev && record.st_ino == entry.st_ino))) error = EINVAL;
+  if (!error && !sealing && (record.st_size != 0 || entry.st_size != 0)) error = EINVAL;
+  if (!error && sealing) {
+    const struct stat *old_record = &context->record_stage, *old_entry = &context->entry_stage;
+    if (record.st_dev != old_record->st_dev || record.st_ino != old_record->st_ino ||
+        entry.st_dev != old_entry->st_dev || entry.st_ino != old_entry->st_ino ||
+        record.st_mode != old_record->st_mode || entry.st_mode != old_entry->st_mode ||
+        record.st_gid != old_record->st_gid || entry.st_gid != old_entry->st_gid ||
+        record.st_flags != old_record->st_flags || entry.st_flags != old_entry->st_flags ||
+        record.st_size < 80 || entry.st_size < 80 ||
+        record.st_size > 1048656 || entry.st_size > 131072 ||
+        record.st_size + entry.st_size > COMPONENT_QUOTA_CHARGE) error = EBUSY;
+  }
+  if (!error && fstatat(parent, record_name, &named, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_stage_same(&record, &named, 1)) error = EBUSY;
+  if (!error && fstatat(parent, entry_name, &named, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && !record_stage_same(&entry, &named, 1)) error = EBUSY;
+  if (!error) {
+    if (!sealing) { context->record_stage = record; context->entry_stage = entry; }
+    context->stage_phase = sealing ? 2 : 1;
+  }
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component quota stage binding", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component metadata stages", Nothing);
 #endif
 }

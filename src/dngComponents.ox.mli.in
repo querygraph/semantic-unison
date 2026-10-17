@@ -100,3 +100,23 @@ val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr -
     Keep caller FDs live/exclusive until settled; no descriptor closes or paths
     opened here. No overwrite, mutable latest pointer, lookup, quota, managed
     namespace installation, archive advancement or automatic cache selection. *)
+
+type cache_capture
+val stage_cache_capture : owner_entry -> checkpoint:ComponentHash.checkpoint ->
+  quota:ComponentHash.metadata_quota -> directory:Unix.file_descr ->
+  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit @@ nonportable
+val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->
+  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->
+  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture @@ nonportable
+val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit @@ nonportable
+val cache_capture_state : cache_capture -> bool * bool @@ nonportable
+(** Explicit one-use paired capture. Reserve first, then caller creates empty
+    stages named slot-record.tmp/slot-entry.tmp in that same private directory.
+    Stage validates both borrowed identities before either write. Prepare seals
+    those identities and independently authenticates both staged files. Publish
+    record first, entry only after normal record publication returns; once only.
+    State reports actual native record/entry rename effects even after error.
+    Preserve partial stages/published orphans and consumed quota; never replay or
+    infer rollback. Borrow all FDs/readers with caller-owned exclusive lifetimes;
+    no opens/closes, automatic lookup, recovery, global index advancement or
+    source-photo reads/writes. Caller settles descriptors before index adoption. *)

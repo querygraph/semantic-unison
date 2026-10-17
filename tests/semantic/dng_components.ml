@@ -9,6 +9,14 @@ let digest bytes = Layout_only.with_input bytes (fun file ->
       snapshot))
 let projection snapshot role = match ComponentHash.projection snapshot role with
   | Some value -> value | None -> failwith "missing expected DNG projection"
+let with_capture_directory action =
+ let folder=Filename.temp_file "dng-cache-capture-" "" in
+ Sys.remove folder;Unix.mkdir folder 0o700;
+ let directory=Unix.openfile folder [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
+ Fun.protect ~finally:(fun () -> Unix.close directory;
+   Array.iter(fun name -> let leaf=Filename.concat folder name in
+     if (Unix.lstat leaf).Unix.st_kind=Unix.S_DIR then Unix.rmdir leaf else Sys.remove leaf) (Sys.readdir folder);
+   Unix.rmdir folder) (fun () -> action folder directory)
 let () =
  List.iter (fun little -> List.iter (fun big ->
   let bytes=Layout_only.fixture little big (String.make 64 'A') in
@@ -300,6 +308,61 @@ let () =
                entry ~directory ~stage ~temporary:"wrong" file));false with ComponentHash.Invalid _ -> true)
                "owner entry publisher accepted unrelated stage bytes"))
        end;
+       if ComponentHash.record_publication_available () then with_capture_directory(fun folder directory ->
+         let quota ()=ComponentHash.prepare_metadata_quota ~directory ~max_bytes:4194304L ~max_entries:2 in
+         let run entry collision =
+           let quota=quota () in check(ComponentHash.reserve_metadata_slot quota directory) "capture quota unavailable";
+           let slot=ComponentHash.metadata_slot_name quota in
+           let record_name=slot^"-record.tmp" and entry_name=slot^"-entry.tmp" in
+           let record_stage=Unix.openfile (Filename.concat folder record_name)
+             [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+           Fun.protect ~finally:(fun () -> Unix.close record_stage) (fun () ->
+             let entry_stage=Unix.openfile (Filename.concat folder entry_name)
+               [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+             Fun.protect ~finally:(fun () -> Unix.close entry_stage) (fun () ->
+               check(try DngComponents.stage_cache_capture entry ~checkpoint ~quota ~directory
+                 ~record_stage ~entry_stage:record_stage;false with Unix.Unix_error(Unix.EINVAL,_,_) -> true)
+                 "aliased capture stages admitted";
+               check((Unix.fstat record_stage).Unix.st_size=0 && (Unix.fstat entry_stage).Unix.st_size=0)
+                 "failed paired admission wrote a partial stage";
+               DngComponents.stage_cache_capture entry ~checkpoint ~quota ~directory ~record_stage ~entry_stage;
+               check(try DngComponents.stage_cache_capture entry ~checkpoint ~quota ~directory
+                 ~record_stage ~entry_stage;false with Invalid_argument _ -> true) "capture staging replayed";
+               let capture=SemanticFile.with_fd record_stage (fun record_file -> SemanticFile.with_fd entry_stage
+                 (fun entry_file -> DngComponents.prepare_cache_capture entry ~quota ~directory
+                   ~record_stage ~entry_stage ~record_file ~entry_file)) in
+               check(DngComponents.cache_capture_state capture=(false,false)) "capture published during preparation";
+               let entry_target=Filename.concat folder (SemanticHash.hex(DngComponents.owner_entry_sha256 entry)) in
+               if collision then begin
+                 let foreign=Unix.openfile entry_target [Unix.O_CREAT;Unix.O_EXCL;Unix.O_WRONLY] 0o600 in
+                 Fun.protect ~finally:(fun () -> Unix.close foreign) (fun () ->
+                   check(Unix.write_substring foreign "foreign" 0 7=7) "collision fixture write failed")
+               end;
+               if collision then check(try DngComponents.publish_cache_capture capture directory record_stage entry_stage;
+                 false with Unix.Unix_error(Unix.EEXIST,_,_) -> true) "capture collision overwritten"
+               else DngComponents.publish_cache_capture capture directory record_stage entry_stage;
+               check(DngComponents.cache_capture_state capture=(true,not collision))
+                 "capture lost actual partial publication effects";
+               check(not(Sys.file_exists(Filename.concat folder record_name)) &&
+                 Sys.file_exists(Filename.concat folder entry_name)=collision) "capture stage ownership changed incorrectly";
+               let record_target=Filename.concat folder (SemanticHash.hex(DngComponents.owner_entry_record_sha256 entry)) in
+               check((Unix.stat record_target).Unix.st_ino=(Unix.fstat record_stage).Unix.st_ino)
+                 "published capture record identity differs";
+               if collision then check((Unix.stat entry_target).Unix.st_size=7) "foreign entry target changed"
+               else check((Unix.stat entry_target).Unix.st_ino=(Unix.fstat entry_stage).Unix.st_ino)
+                 "published capture entry identity differs";
+               let recovered=SemanticFile.with_fd record_stage (fun file -> ComponentHash.read_checkpoint_record
+                 ~expected_binding:(DngComponents.owner_entry_binding entry)
+                 ~expected_record_sha256:(DngComponents.owner_entry_record_sha256 entry) file) in
+               check(ComponentHash.checkpoint_bytes recovered=ComponentHash.checkpoint_bytes checkpoint)
+                 "capture record bytes changed";
+               check(try DngComponents.publish_cache_capture capture directory record_stage entry_stage;false
+                 with ComponentHash.Invalid _ -> true) "capture publication replayed")) in
+         run entry false;
+         let entry2=DngComponents.make_owner_entry ~root_identity ~path
+           ~generation_sha256:(SemanticHash.string "original-generation/2") ~checkpoint ~outcomes in
+         run entry2 true;
+         check(not(ComponentHash.reserve_metadata_slot (quota()) directory)) "partial capture silently refunded quota");
        check(ComponentHash.bytes_requested session=8435L) "owner entry encoding reread input") with
    | Ok () -> () | Error why -> failwith why);
  let failing=plugin "original.operational-failure/1" (fun _ ->

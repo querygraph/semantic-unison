@@ -79,6 +79,10 @@ def main():
                 portable=work/'frozen_decoder_capture.ml'
                 portable.write_text('let publish (frozen:DngComponents.decoders) = Domain.Safe.spawn (fun () -> ignore frozen)\nlet publish_entry (entry:DngComponents.owner_entry) = Domain.Safe.spawn (fun () -> ignore(DngComponents.owner_entry_bytes entry))\n')
                 call([compiler,'-c',portable.name])
+                leak=work/'capture_owner_only.ml'
+                leak.write_text('let leak (capture:DngComponents.cache_capture) = Domain.Safe.spawn (fun () -> ignore(DngComponents.cache_capture_state capture))\n')
+                refused=call([compiler,'-c',leak.name],expected=2)
+                assert 'nonportable' in refused['stderr'] or 'contended' in refused['stderr']
         finally:os.chdir(previous)
     assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in result['source_pins'].items())
     result['complete']=True;save(root,result);print(root,flush=True)

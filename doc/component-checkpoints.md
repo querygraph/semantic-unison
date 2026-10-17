@@ -132,6 +132,26 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Quota-bound paired capture
+
+The explicit capture helper now routes record+owner-entry staging through one
+successful quota reservation. Caller creates fresh private empty stages named
+slot basename plus `-record.tmp` and `-entry.tmp`. Native admission checks both
+distinct identities and no-follow names in the actual reserved directory before
+either write. A failed/unsynced reservation cannot admit payload stages. Once
+admitted, staging cannot replay, including after a partial write failure.
+
+Preparation seals those same mutable producer identities, enforces individual and
+aggregate payload bounds, and independently authenticates record and entry bytes.
+Publication is one-use: record first, entry only after record publication returns
+normally. `cache_capture_state` reports both native rename effects after errors.
+An entry collision can leave a valid record-only orphan plus unpublished entry
+stage; neither is automatically removed, retried or refunded. Caller retains all
+borrowed descriptors/readers and settles them before any external index adoption.
+The helper opens/closes no FDs and performs no source-photo reads/writes. This is
+the managed capture write path, not automatic lookup, recovery scanning, eviction,
+global index advancement or default cache activation.
+
 ### Monotonic payload reservations
 
 The macOS quota API now admits one bounded capture using an atomic empty private

@@ -284,3 +284,33 @@ let read_owner_entry ~root_identity ~path ~generation_sha256 ~expected_entry_sha
 let prepare_owner_entry_publication entry ~directory ~stage ~temporary file =
   ComponentHash.prepare_metadata_publication ~directory ~stage ~temporary
     ~max_bytes:owner_entry_max_size ~expected_sha256:entry.owner_digest file
+
+type cache_capture = { record_publication : ComponentHash.record_publication;
+  entry_publication : ComponentHash.record_publication; mutable publish_attempted : bool }
+let capture_names quota =
+  let slot=ComponentHash.metadata_slot_name quota in slot^"-record.tmp",slot^"-entry.tmp"
+let stage_cache_capture entry ~checkpoint ~quota ~directory ~record_stage ~entry_stage =
+  let record=ComponentHash.checkpoint_record ~binding:entry.owner_binding checkpoint in
+  ignore(checkpoint_for_owner_entry entry record);
+  if entry.record_digest=entry.owner_digest then owner_invalid "record/index target alias";
+  ComponentHash.admit_metadata_stages quota directory ~record_stage ~entry_stage;
+  if ComponentHash.write_checkpoint_record ~binding:entry.owner_binding checkpoint record_stage<>entry.record_digest then
+    owner_invalid "record staging digest";
+  if write_owner_entry entry entry_stage<>entry.owner_digest then owner_invalid "entry staging digest"
+let prepare_cache_capture entry ~quota ~directory ~record_stage ~entry_stage ~record_file ~entry_file =
+  ComponentHash.seal_metadata_stages quota directory ~record_stage ~entry_stage;
+  let record_temporary,entry_temporary=capture_names quota in
+  let record_publication=ComponentHash.prepare_record_publication ~directory ~stage:record_stage
+    ~temporary:record_temporary ~expected_binding:entry.owner_binding
+    ~expected_record_sha256:entry.record_digest record_file in
+  let entry_publication=prepare_owner_entry_publication entry ~directory ~stage:entry_stage
+    ~temporary:entry_temporary entry_file in
+  {record_publication;entry_publication;publish_attempted=false}
+let publish_cache_capture capture directory record_stage entry_stage =
+  if capture.publish_attempted then owner_invalid "capture publication already attempted";
+  capture.publish_attempted<-true;
+  ComponentHash.publish_checkpoint_record capture.record_publication directory record_stage;
+  ComponentHash.publish_checkpoint_record capture.entry_publication directory entry_stage
+let cache_capture_state capture =
+  ComponentHash.record_published capture.record_publication,
+  ComponentHash.record_published capture.entry_publication

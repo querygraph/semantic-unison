@@ -90,13 +90,19 @@ let transform version path =
           "val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool";
           "val metadata_slot_reserved : metadata_quota -> bool";
           "val metadata_slot_name : metadata_quota -> string";
+          "val admit_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
+          "val seal_metadata_stages : metadata_quota -> Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
           "val record_publication_available : unit -> bool";
           "val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> expected_binding:string -> expected_record_sha256:string ->\n  SemanticFile.t -> record_publication";
           "val prepare_metadata_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->\n  temporary:string -> max_bytes:int -> expected_sha256:string -> SemanticFile.t -> record_publication";
           "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val record_published : record_publication -> bool"]
         | "dngComponents" -> [
-          "val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->\n  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication"]
+          "val prepare_owner_entry_publication : owner_entry -> directory:Unix.file_descr ->\n  stage:Unix.file_descr -> temporary:string -> SemanticFile.t -> ComponentHash.record_publication";
+          "val stage_cache_capture : owner_entry -> checkpoint:ComponentHash.checkpoint ->\n  quota:ComponentHash.metadata_quota -> directory:Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
+          "val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->\n  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->\n  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture";
+          "val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit";
+          "val cache_capture_state : cache_capture -> bool * bool"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]
