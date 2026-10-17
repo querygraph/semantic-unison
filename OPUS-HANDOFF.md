@@ -7,6 +7,23 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Isolated component-cache successor is now pushed through `c55a90de` on
+`feat/component-cache-input-binding`. It adds current-parser partition validation,
+DNG authenticated restore, explicit guarded private-view replacement and worker
+restore through existing resource ownership. Current stock/Ox Make builds and
+full selftests pass; focused DNG94checks/compiler, worker102checks/compiler pass.
+All actual workers/groups/CPU grants closed. See that branch's qualification
+receipts and handoff for exact source scopes. Not merged into main; main's342RPC
+source pins remain unchanged. Durable store/automatic decoder selection/Dune
+successor checks remain outstanding; no new media/SDK/transport admission inferred.
+
+User design requirement: incomplete mapping of smaller fields does not block a
+qualified pixel/metadata-separation release. SOL.md specifies refinements as
+versioned component change sets, deterministic sibling composition, localized
+invalidation, verified unaffected-hash reuse and atomic new-view publication.
+Unknown fields remain exact opaque hashes; this is a design contract, not a claim
+that persistent cache/worker integration is finished.
+
 ## CURRENT: RPC sources accepted; IO deferred; checkpoint core on isolated branch
 
 Root receipts now independently rehashed/adopted in

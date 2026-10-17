@@ -4,6 +4,14 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+Isolated successor `feat/component-cache-input-binding` now reaches `c55a90de`:
+current-parser partition checks, DNG authenticated checkpoint restore, guarded
+private-view replacement and coordinated worker restore are implemented there.
+Both current Make builds/full selftests and focused stock/Ox controls pass;
+worker lifecycle controls include102checks/compiler. Durable owner storage and
+automatic decoder/cache selection remain open. This branch is not merged into
+main and does not change main's reviewed RPC pins or imply runtime admission.
+
 Checkpoint-core successor is now tested on separate branch
 `feat/component-cache-input-binding` (569395d9), preserving main's reviewed342
 RPC pins. It exports/restores bounded metadata using the owner's prior trusted
@@ -84,6 +92,19 @@ comparison identifies its hash schema, parser/child contract versions and
 projection policy, not just an untyped digest string.
 
 ### Rehashing is incremental refinement, not a new full-file project
+
+Treat each refinement as a composable change set: `(input binding, component ID,
+old contract, new contract, dependency digests) → replacement subtree + new roots`.
+Validate the input binding and old contract before applying it. Independent sibling
+change sets must produce the same roots in either order; a stale or conflicting
+change set is refused without discarding the last verified view. Publish the new
+view atomically only after its coverage, dependencies and hashes validate.
+
+For example, learning one MakerNote field replaces that field's opaque component,
+rehashes its affected bytes and recomposes its private-metadata ancestors. It
+reuses verified pixel and unrelated standard-metadata hashes when their input and
+dependency bindings remain valid. Until that refinement is available, exact opaque
+hashing remains a supported deployed behavior, not a pending deployment blocker.
 
 Adding a subplugin can split one opaque atom into smaller known/unknown children,
 add named interpretations or revise an explicitly versioned stability policy.
