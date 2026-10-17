@@ -7,6 +7,44 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest actual: unchanged-file SDK validation and private camera coverage
+
+All-scanned SDK V2 is CONSUMED_ACTUAL_PASS_CLOSED, not pending. Admission
+8dabb077 / workspace `/private/tmp/u-asv-ca5ec3ffcbff` executed once after fresh
+guards. Exact own runtime item_completed event at2026-10-17T01:45:04.471Z,
+CommandExecution exec-dd42cac5-40a9-47f6-b703-0d1bbd41eae3/process98564,
+statuscompleted/exit0 supplies actual parent terminal (not ps or markers).
+Owner11083/worker11084, workerreaped0/groupothersabsent/CPU8+EXglobalclosed.
+Four CLI/four SDK calls: stock/Ox baseline then all-scanned unchanged validation
+on each endpoint; all raw-digestvalid/decodeSUCCESS/errors0/warnings0.
+Independent pure parent audit reparsed four raw proxy receipts, exact commands,
+helper/path/group joins;181postpins unchanged. Seal
+`tests/qualification/all-scanned-sdk-v2-actual-20261017.json` binds10artifacts,
+including recovered exact runtime-event source offset/lineSHA. Root notified
+queue01a1478b-5406 promptly after terminal recovery. No replay or semantic/pixel/
+corpus/timing claim; do not reopen the consumed grant. RequestV1 stays withdrawn.
+
+Camera grammar remains the central open semantic gap. New pure saved-record
+analysis (`doc/private-maker-coverage.md`) proves only declared spatial coverage:
+33entries/17inline/16outlined, no range overlap,6551/6556bytes represented,
+five unclassified one-byte gaps. Seven UNDEFINED values occupy5939bytes;
+their contents and inline pointer semantics remain unknown. Seven original
+synthetic controls actual3ca2ea/0/no session, worker/group/CPU8closed. An earlier
+misplaced -B dispatcher argument refused before child/token entry0a7cc2/1.
+No DNG reread. Three candidate ASCII fields total34prospectivebytes for a future
+identity investigation, **not** a new read grant or vendor recognition. No
+production private allowlist/profile change. Coverage receipt
+`tests/qualification/private-maker-coverage-actual-20261017.json`.
+
+Independent maintained-hash component progress: isolated OpenSSL3 EVP candidate
+in `tools/portable-hash/` passed stock/Ox generated vectors, four private domain
+contexts, GC/state/failure cleanup and expected Ox portability refusals. Final
+actualsession29240/734d79/0/no session; all8containedcalls/outerCPU8closed.
+InstalledOpenSSL3.6.4/macOS only, zeroSDK/media; not production selected and not
+Linux/Windows qualification. Earlier import/Ctestcompiler failures preserved.
+Receipt `tests/qualification/portable-evp-component-actual-20261017.json` and
+component README state remaining production Make/Dune/backend/platform work.
+
 ## Latest transport correction and real peer compatibility
 
 SDK requestv1 f06a74ea is WITHDRAWN UNSTARTED (own attestation; no SDK target

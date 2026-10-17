@@ -1,0 +1,117 @@
+{
+  "schema": "unison-isolated-evp-qualification/1",
+  "state": "COMPONENT_PASS_CLOSED_NOT_PRODUCTION_SELECTED",
+  "actual_owner_terminal": {
+    "session": 29240,
+    "chunk_id": "734d79",
+    "exit_code": 0,
+    "remaining_session": null
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-evp-controls-swhqofzi/RESULT.json",
+      "bytes": 11675,
+      "sha256": "04fbb26aafe1b1712abab20b64494c6aedd6db0543f995af17ad099733465f28"
+    },
+    {
+      "path": "/private/tmp/unison-portable-evp-controls-20261017-004/SHARED-START.json",
+      "bytes": 1081,
+      "sha256": "f454cc8f0ca83ab97dcb9395e55bf8c50aed47bd4153b2d1a7cb7de56172d76c"
+    },
+    {
+      "path": "/private/tmp/unison-portable-evp-controls-20261017-004/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "078b06eeafd71aff1e12ff049209cdd6db94e4aeeb19ef21ea740bccf98f7c4a"
+    },
+    {
+      "path": "/private/tmp/unison-portable-evp-controls-20261017-004/SHARED-STDOUT.txt",
+      "bytes": 84,
+      "sha256": "1c7c7c2502695dad93af8e582eb0968533a22218bfbd6fab232b6db9df95e58b"
+    },
+    {
+      "path": "/private/tmp/unison-portable-evp-controls-20261017-004/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_pins": [
+    {
+      "bytes": 3729,
+      "path": "/Users/alexy/src/unison/tools/portable-hash/control.ml",
+      "sha256": "7316e8d9eae5a766f47cb6afd7eaaf42f16a5948c3375eabb4fd7d51c360ff6b"
+    },
+    {
+      "bytes": 1165,
+      "path": "/Users/alexy/src/unison/tools/portable-hash/evp.ml",
+      "sha256": "6a351d00a2b213bbd08da0fd34e9c58c927749ce28af4de4fea0f69765dd1e97"
+    },
+    {
+      "bytes": 290,
+      "path": "/Users/alexy/src/unison/tools/portable-hash/evp.mli",
+      "sha256": "928a85ce5f9af63092166166e5ca9243f8b1789e6f81caee0687e846ab284fb8"
+    },
+    {
+      "bytes": 5062,
+      "path": "/Users/alexy/src/unison/tools/portable-hash/evp_stubs.c",
+      "sha256": "8c5ecae6c2f1b979241a3956774edb04e7d39388f4f1e4cca745ba9b9bb13726"
+    },
+    {
+      "bytes": 5005,
+      "path": "/Users/alexy/src/unison/tests/portable_evp_controls.py",
+      "sha256": "19d73c376bf4e67c92886c8956700262de9382afa7c4b89d3cbe01621defe667"
+    }
+  ],
+  "library": {
+    "bytes": 5209632,
+    "path": "/usr/local/Cellar/openssl@3/3.6.4/lib/libcrypto.3.dylib",
+    "sha256": "4f02d3d39d022e1deebca1f397d1662030fdb99c376e7a7e44e834e81c789d90"
+  },
+  "calls": 8,
+  "expected_ox_negative_compilations": 2,
+  "compilers": [
+    {
+      "compiler": {
+        "bytes": 12749464,
+        "path": "/Users/alexy/.opam/default/bin/ocamlopt.opt",
+        "sha256": "f183dd4bd5c655b56fb87da2d39e01b843a730b6252e8b92fc6989e6f07cfacf"
+      },
+      "executable": {
+        "bytes": 1133576,
+        "path": "/private/tmp/u-evp-controls-swhqofzi/stock/control",
+        "sha256": "073ba070b60fa21f1383e786e4d16506914bfcad48b71b7ceefed4535eaf6735"
+      },
+      "label": "stock"
+    },
+    {
+      "compiler": {
+        "bytes": 49930888,
+        "path": "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt.opt",
+        "sha256": "e02b8590aa2c05948203befbfef22253282b1799d92f9a32c3878681f1b3e166"
+      },
+      "executable": {
+        "bytes": 1707536,
+        "path": "/private/tmp/u-evp-controls-swhqofzi/ox/control",
+        "sha256": "530594b39ed08cbcb1144ef9c79c53770cdcdb2a562fdac19191c39447e12753"
+      },
+      "label": "ox"
+    }
+  ],
+  "earlier_attempts": [
+    {
+      "workspace": "/private/tmp/unison-portable-evp-controls-20261017-001",
+      "terminal": "83965b/1/no session",
+      "reason": "test import path missing; before compilation"
+    },
+    {
+      "workspace": "/private/tmp/unison-portable-evp-controls-20261017-002",
+      "terminal": "410b65/0/no session",
+      "reason": "initial component pass before three fault controls"
+    },
+    {
+      "workspace": "/private/tmp/unison-portable-evp-controls-20261017-003",
+      "terminal": "a72676/1/no session",
+      "reason": "test-only C identifier shadowed OCaml value typedef; compiler rejected"
+    }
+  ],
+  "scope": "macOS installed OpenSSL3.6.4 component only; stock/Ox vectors, CommonCrypto/hashlib agreement, four private domain contexts, GC/failure cleanup, two expected Ox portability refusals. No production selection, Linux/Windows, hard memory, FIPS, throughput or SDK claim."
+}
