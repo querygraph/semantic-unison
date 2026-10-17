@@ -3972,3 +3972,11 @@ UnresolvedOwnershipcarrier. Fivefake-call/audit flowcontrols d0932e/0 closed
 and samebytenoopreplacementnegativechecks. Coordinator/sourcebuildartifactpins/
 rawparentreadaudit/sharedtarget/admissionremainnext. Existing camera request
 pins unchanged; no camera/SDK/EXIO.
+
+Mixed-peer independentparentreadback implemented: reopensrawproxyframes, real
+prefixaudit, complete12call/4case typedstatus/endpointsuccess/exactstagehashes/
+finalleftrightbytes+metadata/noopidentity. Failedprefix lifecycleonly. Seven
+composedworker+REALauditor/readbacktests withONLYnativecallmock passed actual
+37829/9aa4ca/0/no session; own8closed/generated8KiBonly. Evidence mixed-peer-
+parent-controls-20261017.json. No transport/EXIO/camera/SDK. Coordinator/build
+inventory/freshplan/admission remain; camera request sourcepins unchanged.

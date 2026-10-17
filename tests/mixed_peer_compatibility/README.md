@@ -47,3 +47,14 @@ admission. The parent must authenticate the complete build/source inventory,
 retain native owners, persist aggregate snapshots safely, re-read every raw proxy
 frame independently, verify generated files, and audit known failures before
 closing the IO/CPU bundle. No existing grant authorizes this new matrix.
+
+`parent.audit_saved` independently reloads every attempted raw proxy receipt,
+reruns the fixed lifecycle auditor, and distinguishes a known failed prefix from
+a complete functional result. Complete results require12calls/4cases, successful
+non-timeout endpoints, exact generated stage hashes, no-op receiver identity and
+independent final left/right bytes/identities. Seven composed worker/real-auditor/
+readback controls pass with only the native call boundary mocked. Tampered raw
+receipts/files, missing calls, changed no-op identity and timeout-success claims
+refuse. Known failure reports lifecycle only. This audit still supplies neither
+aggregate/parent termination nor FD-release authority; coordinator integration
+and exact current build/source plan remain next.
