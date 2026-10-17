@@ -128,3 +128,10 @@ All worker groups/CPU tokens closed; exact completed outputs, cancelled-stage
 nonpublication, descriptor baselines and CPU/pending ledgers were checked. This
 is bounded seeded scheduling, not exhaustive race detection or a native-write
 cancellation-location claim. No SDK, camera, transport or EXglobal invocation.
+
+
+The current consolidated parity refresh is
+`../qualification/integration-worker-parity-actual-20261017.json`: actual stock/Ox
+production objects, configured1/2/4/8 and64jobs each, all parent/group/CPU closure.
+Focused parity now also omits unused1GiB sparse fixtures. Six execution permits
+plus two owner credits fit standing8; no eight-way throughput or hard-limit claim.

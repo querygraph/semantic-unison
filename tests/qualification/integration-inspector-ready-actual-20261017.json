@@ -1,0 +1,116 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 84256,
+      "chunk": "0cfdfb",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "8c9c05",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "chunk": "29cc1b",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "stock-build",
+      "closure": {
+        "path": "/private/tmp/unison-current-inspector-stock-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "8ccf35f81b49d428741fd3abcd1ab8486b8878f287ddc5306a3cde019f13d915"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-inspector-stock-build-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 201,
+        "sha256": "3ec5cd57241206690efe8c828c172622a50fce32d494e4dbca0f2f1e8b753eb0"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-current-inspector-stock-build-20261017-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "result": {
+        "path": "/private/tmp/unison-current-inspector-stock-build-20261017-001/RESULT.json",
+        "bytes": 4044,
+        "sha256": "f77957f9003c63c6c7533c906a7836fba894e1f7e861043380071919e46cfd08"
+      }
+    },
+    {
+      "name": "ox-build",
+      "closure": {
+        "path": "/private/tmp/unison-current-inspector-ox-build-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "2779ffd02e438fe0e4687d3c816fe1b9fa3a4cac5d635825e71361295f98528c"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-inspector-ox-build-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 198,
+        "sha256": "e623283d9f79517fbc423ee2b72e51d53c0841bd1df0e948f7082b9a01987de7"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-current-inspector-ox-build-20261017-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "result": {
+        "path": "/private/tmp/unison-current-inspector-ox-build-20261017-001/RESULT.json",
+        "bytes": 4046,
+        "sha256": "cd16e0b6940bd76d9f799481f00c58c078a424b68f3ea1f38bc9d5eba0a5a96f"
+      }
+    },
+    {
+      "name": "integration",
+      "closure": {
+        "path": "/private/tmp/unison-current-inspector-integration-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c67793e6648517d1cf0b62a0dfc7291d0776e7201e39fcdfb2928c731d558eff"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-inspector-integration-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 62,
+        "sha256": "ca596e474001e6d959ac4ff04679b5940e547885bb5a014291b67d4ee6450a92"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-current-inspector-integration-20261017-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "result": {
+        "path": "/private/tmp/unison-current-inspector-integration-20261017-001/RESULT.json",
+        "bytes": 8231,
+        "sha256": "29f4134dba72e68467912e91c2e89a6c37926db7049c334727c4844d8bb6ba42"
+      }
+    },
+    {
+      "name": "reuse",
+      "closure": {
+        "path": "/private/tmp/unison-current-inspector-reuse-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "e90dcb33671fbbc654e6b7da03e127927c3dbcffc01eebd68d5a9f682cd25c00"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-current-inspector-reuse-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-current-inspector-reuse-20261017-001/SHARED-STDERR.txt",
+        "bytes": 106,
+        "sha256": "042964724e97c829972afe2ead45cd91039a6d62735a46ea8a80ae4523d61be4"
+      }
+    }
+  ],
+  "scope": "Current stock/Ox standalone builds,16original tiny inspector calls; strict/layout/component roles and unchanged file epochs, artifact reuse/refusals",
+  "limitations": [
+    "No camera/SDK/Photo input or pixel equivalence",
+    "Builds do not claim checked-domain inspector portability",
+    "No live IO grant or future receiving/corpus/physical savings claim"
+  ]
+}

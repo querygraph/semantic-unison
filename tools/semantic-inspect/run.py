@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 MODULES = ['semanticHash', 'semanticFile', 'componentHash', 'formatExtension', 'xmpObservation', 'xmpMerge',
            'dngSemantic', 'dngExtended', 'dngLayout', 'dngComponents', 'semanticDelta']
 SOURCES = [Path('src') / (name + suffix) for name in MODULES for suffix in ('.ml', '.mli')]
-SOURCES += [Path('src/semanticHash_stubs.c'), Path('src/semanticFile_stubs.c'),
+SOURCES += [Path('src/semanticHash_stubs.c'), Path('src/semanticHash_evp.h'), Path('src/semanticFile_stubs.c'),
             Path('tools/semantic-inspect/inspect.ml')]
 
 

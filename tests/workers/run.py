@@ -129,7 +129,7 @@ with workspace as tmp:
     probe=b"SYN1"+bytes((i*71+19)%256 for i in range(262144-4))
     (build/"identify-probe.bin").write_bytes(probe)
     (build/"identify-probe.sha256").write_text(hashlib.sha256(probe).hexdigest()+"\n")
-    if not args.apply_stress_only:
+    if not (args.apply_stress_only or args.shared_parity_only):
         with (build / "large.dng").open("wb") as out:
             out.write(dng)
             out.truncate(1073741824)

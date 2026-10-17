@@ -3336,3 +3336,58 @@ runtime grant. Frozen propertyrequest remains in integration checkout; current
 XMP kernel controls there separately passed without production changes. All
 owned jobs/resources closed. Continue source work here without modifying the
 submitted candidate's execution pins until that scheduling request is settled.
+
+<!-- Parallel integration history retained. -->
+Independent source-FD cleanup successor now QUALIFIED ecad82f3 in
+/Users/alexy/src/unison-component-source-owner-20261017, branch
+fix/component-source-fd-owner. Component reports record regular source ownership
+before validation and retain close uncertainty/nested source ownership; RPC source
+scope holds admission on the carrier. Current stock/Ox Make+selftests/Dune and
+normal/retained report +36auditorcontrols pass; allactualjobs/resourcesclosed.
+Exact receipt component-source-fd-owner-actual-20261017.json is in that sibling.
+This code has NOT been merged here: property requeste60975f3/all38execution+
+318productionpins reverified unchanged. Runtime request remains separately
+pending, no payload/admission/hold inferred. Other legacy cleanup families still
+require their own scoped review; no blanket source-FD release claim.
+
+
+## Review publication and current XMP kernel — 2026-10-17
+
+Source-FD fix ecad82f3 now OPEN/DRAFT PR12
+https://github.com/querygraph/unison/pull/12, base integration/sol-release-candidate.
+Base branch is published at72a19d9d; no GitHub merge. Submitted propertyrequest
+pins unchanged; latestmetadata atUnix1792236111 had no admission.
+
+Current integration XMP kernel actual65346/7f6982/0/no session PASS stock5.2.0/Ox:
+25scalar+343rating/symmetry+4RDFconflicts; Ox4checked domains+checkedspawn. Both
+workers23127/23166reaped0/groupsabsent/tokensclosed. Driver now copies/pins mandatory
+EVPheader; no production changes. Receipt integration-xmp-kernel-actual-20261017.json.
+This closes current kernel-source reexecution, NOT live merge receiving/SDK.
+No active owned resources, no payload/IO admission or replay.
+
+
+## Current worker pool parity — 2026-10-17
+
+Actual75221/88a8e1/0/no session passes stock/Ox current-production-object64jobs
+atconfigured1/2/4/8, queued cancellation, exact hash/proof parity, descriptor/CPU/
+queue recovery. Executingcredits cap6+owner2 within standing8. Workers23693/23707
+reaped0/groupabsent/tokensclosed. Focusedparity omitsunused1GiBsparsefixtures.
+Receipt integration-worker-parity-actual-20261017.json. No newproduction/source
+pin changes to pendingpropertyrequest. No IO/SDK/camera/transport invoked; no
+speedup/hardthread/RSS/8executing inference. No actualownedjobs/resources now.
+
+
+## Current standalone inspector readiness — 2026-10-17
+
+Build-only actual84256/0cfdfb/0/no session stock/Ox PASS,0inputopens/0inspectorexec
+withinbuild. Mandatory productionEVPheader nowcopied/pinned. Subsequentoriginal
+tiny integration actual8c9c05/0 (16calls) andreuse/refusal29cc1b/0 PASS; allcontained
+workers/groups/tokensclosed. Strict/layout classifications and separate metadata,
+encodedpixels andopaque changes proven by actualJSON/fullhash plusunchangedsource
+epochs/bytes. Receipt integration-inspector-ready-actual-20261017.json pinsbuilds,
+logs/source/artifacts; no realcamera/SDK/pixel/receiving/runtimeIO grant inferred.
+
+This tooling can support a later separatelyadmitted privatecamera exact plan;
+do not use oldconsumedclone/SDK grants or assume profileeligibility. Currentproperty
+requeste60975f3 remainsseparatepending, its38execution/318productionpinsunchanged;
+tool/harness-only edits are outside that closure. Zeroactualownedresources now.
