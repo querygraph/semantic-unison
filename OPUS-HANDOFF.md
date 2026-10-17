@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Reader retirement follow-up qualified: read/iter/digest refuse expired readers
+BEFORE caller cancellation/iteration code can execute. Focused99430/44f833/0 and
+full44086/b80c8b/0 closed. Current56component+1005checkpoint+27publicationfault+
+13readerfault+1051DNG+110workerchecks percompiler PASS. Fresh stock/Ox Make+
+fullselftests/Dunecompile and1272current sourcepins matched. All7observedworkers,
+groups/tokensclosed. Receipt `tests/qualification/reader-retirement-actual-20261017.json`.
+PR4 handoff conflict resolved; main reviewed342RPC unchanged/no runtime grant.
+No automatic namespace/selection/activation, photos/SDK/transport or merge.
+
 Borrowed positional reader is now qualified: POSIX `with_borrowed_fd` borrows
 callerFD without opens/dup/closes or position changes, expires after callback,
 bounded64KiB pread with short/EINTR/cancel/EOF/EIO handling. Known-entry tests

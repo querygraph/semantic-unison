@@ -44,6 +44,19 @@ let () =
       "borrowed cancellation swallowed";
     check(Unix.LargeFile.lseek fd 0L Unix.SEEK_CUR=37L) "borrowed failure changed position";
     check((Unix.fstat fd).Unix.st_size=String.length data) "borrowed failure closed caller FD");
+  with_input data (fun _ fd ->
+    let retired=ref false and calls=ref 0 in
+    let escaped=SemanticFile.with_borrowed_fd ~check_cancel:(fun () ->
+      incr calls;if !retired then failwith "expired reader invoked caller code") fd (fun file -> file) in
+    retired:=true;
+    let before= !calls in
+    List.iter(fun action ->
+      check(try action ();false with SemanticFile.Invalid _ -> true)
+        "expired borrowed reader reached cancellation callback")
+      [(fun () -> ignore(SemanticFile.read escaped 0L 1));
+       (fun () -> SemanticFile.iter escaped 0L 1L (fun _ _ -> failwith "expired iteration callback"));
+       (fun () -> ignore(SemanticFile.digest escaped))];
+    check(!calls=before) "retired reader invoked caller cancellation code");
   let large=String.init 131079 (fun i -> Char.chr(i land 255)) in
   with_input large (fun _ fd -> SemanticFile.with_borrowed_fd fd (fun file ->
     check(SemanticFile.read file 3L 131073=String.sub large 3 131073)

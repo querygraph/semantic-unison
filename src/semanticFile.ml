@@ -138,7 +138,7 @@ let bounds t offset length =
   if offset < 0L || length < 0L || offset > size t || length > Int64.sub (size t) offset then
     raise (Invalid "extent outside file")
 let read t offset length =
-  t.check_cancel ();
+  require_active t; t.check_cancel ();
   if length < 0 || length > 1048576 then raise (Invalid "read limit");
   bounds t offset (Int64.of_int length);
   try
@@ -149,7 +149,7 @@ let read t offset length =
     result
   with End_of_file -> raise (Invalid "truncated file")
 let iter t offset length f =
-  t.check_cancel ();
+  require_active t; t.check_cancel ();
   bounds t offset length;
   (match t.input with Buffered channel -> LargeFile.seek_in channel offset | Positional _ -> ());
   let b = Bytes.create 65536 in

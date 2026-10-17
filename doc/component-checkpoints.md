@@ -141,6 +141,13 @@ owns stable readable regular-descriptor lifetime and immutable input throughout
 the callback. Every reader operation refuses after callback retirement. Windows
 refuses explicitly rather than selecting the descriptor-owning channel path.
 
+Retired readers reject operations before invoking caller cancellation or
+iteration callbacks; stale capabilities cannot reactivate caller code. The
+retirement controls exercise read, iteration and digest through an escaped
+borrowed reader, alongside normal completion/failure/cancellation cases. Current
+56componentchecks/compiler plus the DNG/fault/worker suites and all four fresh
+builds passed/closed; see `tests/qualification/reader-retirement-actual-20261017.json`.
+
 This separates cache content validation from descriptor acquisition/settlement;
 known-capture controls now use this path for both record and index readers. It
 does not implement managed namespace opening or repair the separate legacy
