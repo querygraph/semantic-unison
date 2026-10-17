@@ -3660,3 +3660,25 @@ All owned processes/CPU leases closed, no SDK/camera/transport execution. Legacy
 transfer held_files/stage cleanup remains separately to review; do not generalize
 this report-only proof. Property admission still absent at1792238193.2699368;
 separate frozen request unchanged, no replay or replacement. Fullgoalactive.
+
+
+## Transfer-source cleanup in progress — 2026-10-17
+
+Current uncommitted successor factors a shared with_owned_source helper and
+uses it in make_plan as well as ordinary semantic reports. Source planning now
+retains uncertain portable close ownership inside its existing Source RPC scope.
+No new wire/API, transport dispatch or IO admission. Exact current stock/Ox
+build+selftest and shared-helper report controls are running under actual owning
+tool10491; do not infer terminal from logs. Qualification results follow below.
+Receiver held_files and StagePublication cleanup remain a separate concrete gap;
+doc/transfer-source-ownership-review-20261017.md records the precise current flow
+and required combined native/ML evidence. Frozen property request remains separate.
+
+Transfer-source successor qualification now ACTUAL CLOSED10491/286e38/0/no
+session. Fresh stock/Ox Make+selftests, exact shared-helper ordinary report
+normal+uncertain-close controls, cache write/read and component retained-owner
+controls allPASS; every worker/group/CPUlease closed. Receipt semantic-planning-
+source-owner-actual-20261017.json pins exact artifacts. make_plan uses that helper
+and is compiled/source-reviewed, NOT newly remotely executed. Legacy standalone
+source held_files registry removed; receiver candidate registry unchanged.
+Receiver native/ML cleanup gap remains, no full-goal completion or IOgrant.

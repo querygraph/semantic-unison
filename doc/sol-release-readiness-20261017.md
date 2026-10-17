@@ -40,7 +40,9 @@ fault, transfer or scheduling controls.
 ## Next actions in order
 
 1. Ordinary semantic-report source-close qualification passed on stock/Ox,
-   including an original injected-close failure control. Review transfer-stage
+   including an original injected-close failure control. Transfer source planning
+   now shares that helper with fresh builds/controls; actual remote execution
+   remains unverified. See transfer-source-ownership-review-20261017.md. Review receiver-stage
    legacy cleanup separately;
    report ownership tests must not be presented as transfer fault coverage.
 2. Frozen property requeste60975f3 is already queued from the separate integration
