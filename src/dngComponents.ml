@@ -790,3 +790,23 @@ let open_cache_parent path =
   parent
 let cache_parent_descriptor parent =
   check_cache_parent parent;parent.parent_resource.cache_fd
+
+
+(* Component source ownership uses the same close-once carrier. Its origin is
+   a regular input descriptor, not a borrowed metadata directory. *)
+type component_source = cache_parent
+let open_component_source open_descriptor =
+  let owner={parent_path="";parent_resource={cache_fd=Unix.stdin;
+    cache_fd_state=Cache_unopened;cache_identity=None}} in
+  let r=owner.parent_resource in
+  r.cache_fd<-open_descriptor ();r.cache_fd_state<-Cache_held;
+  (try
+    let stat=Unix.LargeFile.fstat r.cache_fd in r.cache_identity<-Some stat;
+    if stat.Unix.LargeFile.st_kind<>Unix.S_REG then owner_invalid "component source is not regular"
+   with error -> settle_cache_parent owner (Some error));
+  owner
+let component_source_descriptor owner =
+  if owner.parent_resource.cache_fd_state<>Cache_held then owner_invalid "component source is not held";
+  owner.parent_resource.cache_fd
+let settle_component_source=settle_cache_parent
+let cache_origin_descriptor state=state.cache_directory

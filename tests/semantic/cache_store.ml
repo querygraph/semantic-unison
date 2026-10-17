@@ -45,6 +45,16 @@ let ()=
     offset=0L;length=128L;children=[]}
    (fun session snapshot -> ComponentHash.checkpoint session snapshot)) in
  Unix.close fd;
+ mode 0;let owner=D.open_component_source(fun () -> Unix.openfile source
+  [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0) in
+ ignore(D.component_source_descriptor owner);mode 1;
+ let state=try D.settle_component_source owner None;failwith "source close EIO expected"
+  with D.Cache_ownership_uncertain state -> state in
+ check(closes()=1) "source close retried";
+ check((match D.cache_origin_descriptor state with _,Some stat -> stat.Unix.LargeFile.st_kind=Unix.S_REG
+  | _ -> false)) "source uncertainty lost regular-file identity";
+ check(invalid(fun () -> D.settle_component_source owner None)) "uncertain source close replayed";
+ check(Array.length(Sys.readdir "/dev/fd")=baseline) "disposable source fault leaked descriptor";
  let entry=D.make_owner_entry ~root_identity:"store-root" ~path:"one"
   ~generation_sha256:(SemanticHash.string "store-generation") ~checkpoint ~outcomes:[] in
  List.iter(fun ordinal ->

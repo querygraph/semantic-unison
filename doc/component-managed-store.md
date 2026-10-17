@@ -195,3 +195,23 @@ change. The probe intentionally retains application admission until process exit
 external child/group wait proves OS closure, not successful native close or normal
 admission retirement. This narrow cache-carrier contract does not qualify every
 legacy source-FD cleanup path elsewhere in Unison.
+
+
+## Component source-descriptor successor
+
+The component inspector now prepares an explicit source owner before its opener
+runs, records the returned FD before regular-file validation, and settles once
+only after the worker has stopped. Ordinary errors are rethrown after known
+cleanup; source-close uncertainty remains a qualified ownership carrier, and a
+nested cache carrier retains the still-known source FD rather than silently
+closing it through legacy cleanup. The original source open flags/path semantics
+are unchanged. This is specific to component reports, not every older transfer
+or semantic inspection cleanup family.
+
+Carrier origins can now be regular input files. `cache_origin_descriptor` states
+that explicitly; historically directory-named accessors are compatibility views
+and must not be interpreted as proof that a new source carrier's origin is a
+directory or borrowed namespace. Uncertain/retained descriptor identities remain
+the settlement evidence. The component RPC source scope also catches this carrier
+inside its transaction, preserving source admission through unresolved ownership.
+No wire format or peer capability changes are made.

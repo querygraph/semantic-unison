@@ -1,0 +1,222 @@
+{
+  "complete": true,
+  "owners": [
+    {
+      "session": 64616,
+      "chunk": "a62110",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 68157,
+      "chunk": "f7fcc6",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 86131,
+      "chunk": "980c64",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 55793,
+      "chunk": "0e866e",
+      "exit_code": 0,
+      "no_session": true
+    },
+    {
+      "session": 57596,
+      "chunk": "22ac80",
+      "exit_code": 0,
+      "no_session": true
+    }
+  ],
+  "steps": [
+    {
+      "name": "unison-component-source-owner-controls-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-cache-loader-controls-6vz86ksp/RESULT.json",
+        "bytes": 464946,
+        "sha256": "497f87aca73bf83c17f6080fcd4dea5b55d3e5721053626cf6abff3b30ff0b3d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-component-source-owner-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "e3f327c619cf34be60e4a12cd56ea0f1b435e2d843f495d02f41c5b325b48771"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-stock-make-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-make-20261017-001/RESULT.json",
+        "bytes": 51179,
+        "sha256": "eb107aba1fc7dd40774e2d6ef9dc90db4ce5d5f7fcc82dfc54c0e3b377cb29fa"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "006b53cbdd780c9f6e2539d432cadd9f004bb04482c064a49a2bc96de75f50d2"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-stock-retention-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-48pui8wl/RESULT.json",
+        "bytes": 100174,
+        "sha256": "7c067d590a24cf8b7bcc7642d0d1d269cccfce62e9fdad8ec59c28becdda9d0f"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-retention-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "6be84d4198d5db01f3a534eaefa4197456b6d5fc4a93e71359c26acccf42b1eb"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-stock-report-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-7sdnaldr/RESULT.json",
+        "bytes": 100571,
+        "sha256": "3ee04eeaff38aac298d2737261c6374f2f4654dd554a37965e3ea4b90e7ba76d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-report-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "27990ce8c756208fd9323a935182294012cbe2b330d1af20b015baaa7d758f44"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-ox-make-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-make-20261017-001/RESULT.json",
+        "bytes": 51185,
+        "sha256": "8da4e66e3dd83376fd859a72a1bea97dbbbf31dae39de8c1d711047a94b2ef8b"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-make-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "df30ebe9758010e8df42871d2cb9bbf9643e8ee0d24d948c00f1cb3023ba27d8"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-both-retention-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-9cc_phk1/RESULT.json",
+        "bytes": 151297,
+        "sha256": "b99c07332f94f6e7455d6ed4f5b1acfd3c14f818387fa7a895f40958621b307d"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-both-retention-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "c46a715bb86a16911af1e49d14089e6df89fdeebc75ad1bbcd25268c19f93170"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-both-report-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-archive-hints-i9hbsb55/RESULT.json",
+        "bytes": 152094,
+        "sha256": "c223b6adb75da86c43732ce6c593693da49db3cf258ad1b4d4512b4721e8f099"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-both-report-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "9a6c03b9b8955d25c8dd0cf521100b33015342824b0c250a427e5e46088e5d2b"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-stock-dune-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-dune-20261017-001/RESULT.json",
+        "bytes": 50623,
+        "sha256": "c8925f46b253b1666648c22da06a69f545e977c07be517774d5c7a3238c2ed63"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-stock-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "03fa7a6f3ccbe81e84a359c9f09942e04ad29948867e9878418803047fade2c3"
+      }
+    },
+    {
+      "name": "unison-source-fd-owner-ox-dune-20261017-001",
+      "result": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-dune-20261017-001/RESULT.json",
+        "bytes": 50627,
+        "sha256": "ab75734e1023472e90bc56665f82eec23cb2910be5f9ffe2441f903d95f8e6ce"
+      },
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-owner-ox-dune-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "023b91ffad622ccd102effc47e3353040a6a1dc47b628c78cb8538f615af30f6"
+      }
+    }
+  ],
+  "auditor_controls": [
+    {
+      "label": "producer",
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-rpc-producer-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "1caf2ea523d34e64dd029e548d2373bcb714646351e9bf832f12c6390a6298ed"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-source-fd-rpc-producer-controls-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 55,
+        "sha256": "b70b10cdb5af0575454d521144bdbb2b3a9f353cdf55acae309f80a1f73b97bc"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-source-fd-rpc-producer-controls-20261017-001/SHARED-STDERR.txt",
+        "bytes": 121,
+        "sha256": "e045efd055b1ce7ad043af38db6e7f7bdae0eaa42fa3c2cf15c9bfcb4e2e9a7e"
+      }
+    },
+    {
+      "label": "readback",
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-rpc-readback-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "b8d7d0b34b70bbd1a215b381537e112f2bdfb9afdc552a51ba6ca232ceaa365c"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-source-fd-rpc-readback-controls-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-source-fd-rpc-readback-controls-20261017-001/SHARED-STDERR.txt",
+        "bytes": 106,
+        "sha256": "d2c6a9bc981a90f83741abca5675fff24e991855bfffa05d538f02e5aa9ee5cc"
+      }
+    },
+    {
+      "label": "saved",
+      "closure": {
+        "path": "/private/tmp/unison-source-fd-rpc-saved-controls-20261017-001/SHARED-CLOSED.json",
+        "bytes": 500,
+        "sha256": "d226f58fe841603451503bd6cfcfb948fbf0d186db736533df6669358a8fb289"
+      },
+      "stdout": {
+        "path": "/private/tmp/unison-source-fd-rpc-saved-controls-20261017-001/SHARED-STDOUT.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "stderr": {
+        "path": "/private/tmp/unison-source-fd-rpc-saved-controls-20261017-001/SHARED-STDERR.txt",
+        "bytes": 104,
+        "sha256": "7696e9559c74dc7f6fa4bff160d9b9ec1864ac3d727b39ed2f35cd067451c8e2"
+      }
+    }
+  ],
+  "pending_frozen_request": {
+    "path": "/Users/alexy/src/unison-sol-integration-20261017/doc/sol-properties-request-v1.json",
+    "bytes": 57681,
+    "sha256": "e60975f3dff2fc9f95da6aa254d9726550ffbc30bc258591eb5f2a7679f3a787"
+  },
+  "pending_request_execution_and_production_pins_unchanged": true,
+  "scope": "Component report regular source owner records before validation, settles once, retains uncertainty/original cause and nested source ownership; local and RPC-source report scope holds admission on carrier; no wire change",
+  "limitations": [
+    "No actual transport run; RPC pure/disposable controls only",
+    "Other legacy transfer/semantic inspection cleanup families unchanged",
+    "No SDK/camera/payload/physical IO or deployment grant"
+  ]
+}
