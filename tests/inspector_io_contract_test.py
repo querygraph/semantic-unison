@@ -1,5 +1,4 @@
 """Original metadata-only contract controls; no input is opened."""
-import copy
 from pathlib import Path
 import sys
 import unittest
@@ -43,4 +42,15 @@ class Contract(unittest.TestCase):
     def test_missing_contract(self):
         self.binding['extra']=True
         with self.assertRaises(ValueError):self.check()
+class Postcheck(unittest.TestCase):
+    def test_same(self):
+        with patch.object(contract, 'identity', return_value={'x': 1}):
+            self.assertTrue(contract.postcheck({'input':'inert','input_identity':{'x':1}})['unchanged'])
+    def test_changed(self):
+        with patch.object(contract, 'identity', return_value={'x': 2}):
+            self.assertFalse(contract.postcheck({'input':'inert','input_identity':{'x':1}})['unchanged'])
+    def test_missing(self):
+        with patch.object(contract, 'identity', side_effect=FileNotFoundError('gone')):
+            result=contract.postcheck({'input':'inert','input_identity':{}})
+            self.assertFalse(result['unchanged']);self.assertIn('gone',result['error'])
 if __name__=='__main__':unittest.main()

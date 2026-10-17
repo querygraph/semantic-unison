@@ -3883,3 +3883,11 @@ Evidence inspector-io-contract-controls-20261017.json. NOT ready for payload:
 post-run identity fence/result contract and immutable executor/plan remain next.
 Frozen property admission still absent at this turn's check; no scheduling hold
 inferred and no expired or previous grant reused.
+
+Inspector postcheck now records exact input metadata after worker/group settlement,
+before CPU/IO closure. Changed/missing input => known functional exit3 rather than
+invented process uncertainty; actual close uncertainty retains existing carrier.
+Ten contract/postcheck controls passed actual1e9df2/0/no session under own8, no
+EXIO/camera payload. Source plan doc/component-camera-observation-contract-v1.md
+records remaining composed dispatcher tests before fresh one-input request.
+No camera request/admission issued by this change.

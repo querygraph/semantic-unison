@@ -48,3 +48,13 @@ def check(value, argv, root):
     if set(receipt['source_sha256']) != {str(name) for name in module.SOURCES}:
         raise ValueError('exact inspector kernel source set required')
     return {root / name for name in module.SOURCES}
+
+
+def postcheck(binding):
+    """No opened FD: metadata refusal is functional failure, not FD uncertainty."""
+    try:
+        observed = identity(binding['input'])
+    except (OSError, ValueError) as error:
+        return {'unchanged': False, 'observed': None, 'error': repr(error)}
+    return {'unchanged': observed == binding['input_identity'],
+            'observed': observed, 'error': None}

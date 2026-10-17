@@ -281,6 +281,10 @@ def run(target, argv, output, credits, *, io_admission=None):
                 write(output / 'SHARED-NOT-STARTED.json', {'state': 'PRELAUNCH_REFUSAL_KNOWN_CLOSED',
                                                         'error': str(refusal)})
                 return 2
+        inspector_binding = None
+        if target == 'inspect-file' and io_lease is not None:
+            from shared_io_pool import read_manifest
+            inspector_binding = read_manifest(io_admission['path'], io_admission['sha256'])['inspector_contract']
         with (output / 'SHARED-STDOUT.txt').open('x') as stdout, (output / 'SHARED-STDERR.txt').open('x') as stderr:
             child = OwnedGroup(argv, cwd=ROOT, stdin=subprocess.DEVNULL, stdout=stdout,
                                stderr=stderr, pass_fds=lease.fds + (io_lease.fds if io_lease else ()))
@@ -423,6 +427,10 @@ def run(target, argv, output, credits, *, io_admission=None):
                         'failed result contradicts successful coordinator exit')
             else:
                 closure = settle(child, time.monotonic() + seconds)
+        inspector_post = None
+        if inspector_binding is not None:
+            from inspector_io_contract import postcheck
+            inspector_post = postcheck(inspector_binding)
         source_unchanged = all(hashlib.sha256((ROOT / name).read_bytes()).hexdigest() == digest
                                for name, digest in pins.items())
         lease.close_after_verified_settlement(owner_reaped=closure['reaped'],
@@ -436,8 +444,9 @@ def run(target, argv, output, credits, *, io_admission=None):
         write(output / 'SHARED-CLOSED.json', {'child': closure, 'tokens_closed': True,
                                             'io_barrier_acquired_and_closed': io_lease is not None,
                                             'source_pins_unchanged': source_unchanged,
+                                            'inspector_input_postcheck': inspector_post,
                                             'parent_terminal': 'collect separately from owning tool'})
-        return 124 if closure['timed_out'] else 3 if not source_unchanged else closure['returncode']
+        return 124 if closure['timed_out'] else 3 if (not source_unchanged or inspector_post is not None and not inspector_post['unchanged']) else closure['returncode']
     except BaseException as error:
         if resources_closed:
             # A reporting failure after known close is not live FD/process
