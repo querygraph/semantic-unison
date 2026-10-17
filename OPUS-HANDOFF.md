@@ -77,6 +77,18 @@ owner92929 recovery, actual89e146/137/no session. No worker wait4 is claimed for
 that pre-child failure. Fresh002 controls passed; failure evidence is preserved.
 Executor/admission/prefix auditor and fresh Root scheduling remain outstanding.
 
+Transport/helper audit checkpoint: `all_scanned_sdk_transport.py` now fences
+artifacts and one-use phase intent/outcome ordering; unknown unreturned calls
+cannot forge finish. `all_scanned_sdk_audit.py` independently joins the exact
+client+server helper pairs and SDK framing while withholding no-transfer,
+private-path and resource-release authority. Twelve inert controls actual
+8cea50/0/no session passed; child/group/CPU8 closed, no SDK/CLI/EXIO/media.
+Receipt `tests/qualification/all-scanned-sdk-transport-actual-20261017.json`.
+First batch import-path failure is preserved as actualc03fdf/1/no session with
+known child/group/tokens closed; fresh002 fixed imports and003 added returned
+failure ordering. Still implement aggregate executor, cloned-root preparation,
+no-op/path-isolation and attempted-prefix joins before fresh runtime request.
+
 
 ## Held-output validation checkpoint
 

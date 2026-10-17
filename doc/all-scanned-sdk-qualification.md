@@ -7,6 +7,24 @@ unqualified SDK identity/namespace. Current generated scan/fake-helper evidence
 remains the runtime evidence until the following owned integration is implemented,
 reviewed and separately admitted.
 
+The one-use transport is now `tests/all_scanned_sdk_transport.py`. It fences
+binary/tool/proxy hashes, leaves headroom before the call, journals intent before
+dispatch and a returned outcome before propagating failure. An unreturned call
+leaves intent without an invented finish; a used/refused invoker never retries.
+Baseline and validation retain separate proxy receipts and identical state.
+`tests/all_scanned_sdk_audit.py` joins exactly one client and one server helper
+to candidate hash/size, full SDK receipts and observed empty retained groups.
+It preserves warnings and distinguishes a missing raw digest from a verified one.
+All return values explicitly withhold resource-release authority, no-transfer
+and private-path claims. A baseline with no helper diagnostics is only an absence
+observation until joined with pinned command/source and actual process proofs.
+
+Twelve inert controls passed under the canonical Unison8 grant, actual
+`8cea50/exit0/no session`; contained child/group and tokens closed. No CLI, SDK,
+EXglobal or media payload ran. The first batch's import-path failure and its
+known failed child/group closure are preserved; corrected002 and strengthened003
+passed. Evidence: `tests/qualification/all-scanned-sdk-transport-actual-20261017.json`.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under
@@ -37,7 +55,7 @@ This derives from `CandidateValidation.unchanged_file_with_validators`, not the
 receiving publication reservation formula. Declared gates are not RSS limits.
 The proposed per-file snapshot cap is256MiB, one selected regular file per root.
 
-Before runtime: implement the one-use executor, admission/source/build checks,
+Before runtime: implement the aggregate executor, admission/source/build checks,
 exact transport journal, independent attempted-prefix audit and aggregate owner.
 Pin all generated commands, interpreter, current binaries and SDK artifact.
 Acquire existing EXglobal IO before Unison CPU00..07, then hash artifacts under
