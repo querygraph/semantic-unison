@@ -3781,3 +3781,33 @@ Remote bound producer is now migrated for native publication uncertainty, not
 actual transport-qualified by these in-process units. Ordinary Copy plus unbound/
 raw/channel ownership remains next; actual transport requires separate admission.
 No replay/SDK/camera/Photo payload or new bulk IO grant. Fullgoalactive.
+
+
+## Ordinary bound local clone migration in progress — 2026-10-17
+
+Copy bound local clone helper (source-clone + local receiver-basis APIs) now uses
+owned native publication. A preallocated producer guard stays INSIDE actual
+TargetBinding.with_producer reservation. Unknown native ownership retains native
+carrier, original cause, loose FDs or channel objects. Physical-identity channel
+registry guards prevent connection cleanup or close-noerr fallback from closing
+those retained objects. Network rsync/native-v0 named/unbound/raw/channel errors
+remain separate; not a universal Copy migration.
+
+Actual28281/a1f9c7/0 stock/Ox Make+selftests+first4composed controls/compilerPASS.
+Actual89368/0da3c2/0 both DunePASS; also source-only final-caller instrumentation
+seam updated so completion log occurs only after known producer success (not
+before uncertain pending guard); no actualCLI dispatch. Current expanded6cases
+adds actual copyByPath/copyLocalCloned APIs under real admittedTargetBinding tickets,
+all8192B original fixtures/source+live metadata fences. Expanded owner terminal
+follows; no new SDK/camera/bulkIO grant.
+
+Ordinary bound local expanded verification ACTUAL15866/017f78/0/no session:
+6cases/compiler allPASS, including actual copyByPath and copyLocalCloned, normal
+guarded producer completion, source/live inode/mode/uid/gid/nlink/size/mtime/ctime
+fences, native uncertainty reservation/channel retention through ticket release
+and connection cleanup. Initial4case source/build batch preserved; production
+source unchanged while expanding controls. All external groups/CPU leases closed.
+Exact evidence tests/qualification/copy-bound-owned-actual-20261017.json.
+Network rsync clone staging, legacy named-source/unbound and raw/channel close
+errors still separate. Future actualCLI instrumentation source-only matched, no
+CLI/transport/SDK/Photo payload executed or new IOadmission. Fullgoalactive.

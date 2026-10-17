@@ -48,8 +48,10 @@ fault, transfer or scheduling controls.
    32producer-handoff cases per compiler, plus current Make/selftests/Dune; see
    local-publication-owned-v1.md and its actual qualification. Bound remote receiving now has the same four composed cases and32handoff
    cases/compiler plus Make/selftests/Dune; its planner delivery is in-process,
-   not actual transport. See remote-publication-owned-v1.md. Ordinary Copy and
-   unbound/raw/channel cleanup remain. Report ownership tests must
+   not actual transport. See remote-publication-owned-v1.md. Ordinary bound local Copy now has current Make/selftests/Dune and6cases/compiler
+   under actual admitted TargetBinding tickets, including copyByPath/copyLocalCloned
+   and native uncertainty retention; see copy-bound-owned-v1.md. Network rsync
+   clone staging, legacy named/unbound and raw/channel cleanup remain. Report ownership tests must
    not be presented as transfer fault coverage.
 2. Frozen property requeste60975f3 is already queued from the separate integration
    checkout, with exact source/build pins. Its fresh Photo Root admission remains

@@ -214,8 +214,63 @@ let mtransferStatus = Umarshal.(sum3
    that we can check in checkForChangesToSource when we've
    calculated the current source fingerprint.
  *)
+type retained_clone = {
+  mutable publications : owned_clone_publication option;
+  mutable native : StagePublication.owned option;
+  mutable native_error : exn; mutable cause : exn; mutable cause_recorded : bool;
+  mutable uncertain : bool; mutable linked : bool;
+  link : retained_clone option; mutable next : retained_clone option;
+}
+and owned_clone_publication = {
+  scope : retained_clone; mutable context : StagePublication.owned option;
+  mutable preparing : bool; mutable closing : bool; mutable closed : bool;
+  mutable raw_basis : Unix.file_descr; mutable raw_output : Unix.file_descr;
+  mutable raw_parent : Unix.file_descr; mutable raw_pair : bool; mutable parent_held : bool;
+  mutable input : in_channel; mutable output : out_channel;
+  mutable input_held : bool; mutable output_held : bool;
+  previous : owned_clone_publication option;
+}
+let retained_clone_owners = ref None
+let retained_clones () =
+  let rec collect acc = function None -> List.rev acc
+    | Some scope -> collect(scope::acc) scope.next in collect [] !retained_clone_owners
+let retained_clone_cause scope = scope.cause
+let retained_clone_native scope = scope.native
+let create_clone_scope () =
+  let rec scope={publications=None;native=None;native_error=Out_of_memory;
+    cause=Out_of_memory;cause_recorded=false;uncertain=false;linked=false;
+    link=Some scope;next=None} in scope
+let record_clone_cause scope error =
+  if not scope.cause_recorded then begin scope.cause<-error;scope.cause_recorded<-true end
+let owned_clone_call publication work =
+  let scope=publication.scope in
+  if scope.uncertain then raise scope.native_error;
+  try work () with StagePublication.Ownership_uncertain native as error ->
+    record_clone_cause scope error;
+    publication.context<-native;scope.native<-native;scope.native_error<-error;scope.uncertain<-true;
+    if not scope.linked then begin
+      scope.next<- !retained_clone_owners;retained_clone_owners:=scope.link;scope.linked<-true
+    end;
+    raise error
+let clone_channel_retained predicate =
+  let rec publications = function None -> false
+    | Some publication -> predicate publication || publications publication.previous in
+  let rec scopes = function None -> false
+    | Some scope -> publications scope.publications || scopes scope.next in
+  scopes !retained_clone_owners
+let clone_input_retained channel = clone_channel_retained(fun owner -> owner.input_held && owner.input==channel)
+let clone_output_retained channel = clone_channel_retained(fun owner -> owner.output_held && owner.output==channel)
+let retained_clone_descriptors scope =
+  let rec collect acc = function None -> List.rev acc | Some owner ->
+    let acc=if owner.raw_pair then owner.raw_basis::owner.raw_output::acc else acc in
+    let acc=if owner.parent_held then owner.raw_parent::acc else acc in
+    let acc=if owner.input_held then Unix.descr_of_in_channel owner.input::acc else acc in
+    let acc=if owner.output_held then Unix.descr_of_out_channel owner.output::acc else acc in
+    collect acc owner.previous in collect [] scope.publications
+
 type producer = {
   binding : TargetBinding.t;
+  clone_scope : retained_clone;
   mutable adopted : bool;
   mutable frozen : bool;
   mutable legacy : bool;
@@ -223,6 +278,7 @@ type producer = {
 
 let checkProducer = function
   | None -> ()
+  | Some producer when producer.clone_scope.uncertain -> raise producer.clone_scope.native_error
   | Some producer when producer.legacy -> ()
   | Some producer ->
       TargetBinding.recheck_resolution producer.binding;
@@ -345,8 +401,12 @@ let removeOldTempFile ?producer fspathTo pathTo =
    (as eventually the connection cleanup kicks in and all threads are stopped).
    As a hacky(?) solution, keep track of all open fds and close them when the
    connection breaks. *)
-let inFdResource = Remote.resourceWithConnCleanup close_in close_in_noerr
-let outFdResource = Remote.resourceWithConnCleanup close_out close_out_noerr
+let inFdResource = Remote.resourceWithConnCleanup
+  (fun channel -> if not(clone_input_retained channel) then close_in channel)
+  (fun channel -> if not(clone_input_retained channel) then close_in_noerr channel)
+let outFdResource = Remote.resourceWithConnCleanup
+  (fun channel -> if not(clone_output_retained channel) then close_out channel)
+  (fun channel -> if not(clone_output_retained channel) then close_out_noerr channel)
 (* Publication owns its directory handles and a separate stage witness. Clean
    its owned name before channels close; invalidate range leases first. *)
 let clonePublicationResource = Remote.resourceWithConnCleanup
@@ -475,10 +535,10 @@ let openProducerOutput ?clone_owned producer fspath path kind len =
    retained registry entry. Never close its original integer again. *)
 let closeCloneFdNoErr fd = try Unix.close fd with _ -> ()
 let closeCloneInputNoErr channel =
-  try closeFileInNoErr channel with _ ->
+  if not(clone_input_retained channel) then try closeFileInNoErr channel with _ ->
     (try close_in_noerr channel with _ -> ())
 let closeCloneOutputNoErr channel =
-  try closeFileOutNoErr channel with _ ->
+  if not(clone_output_retained channel) then try closeFileOutNoErr channel with _ ->
     (try close_out_noerr channel with _ -> ())
 let unlinkCloneNoErr path = try Fs.unlink path with _ -> ()
 let cloneChannels basisFd outputFd =
@@ -495,6 +555,48 @@ let cloneChannels basisFd outputFd =
     (basis, output)
   with error ->
     closeCloneInputNoErr basis; closeCloneOutputNoErr output; raise error
+
+let closeOwnedClone publication =
+  publication.closing<-true;
+  if not publication.preparing && not publication.closed && not publication.scope.uncertain then begin
+    (match publication.context with None -> () | Some context ->
+      owned_clone_call publication (fun () -> StagePublication.abort_owned context));
+    publication.closed<-true;
+    if publication.raw_pair then begin
+      publication.raw_pair<-false;
+      closeCloneFdNoErr publication.raw_basis;closeCloneFdNoErr publication.raw_output
+    end;
+    if publication.parent_held then begin publication.parent_held<-false;closeCloneFdNoErr publication.raw_parent end;
+    if publication.input_held then begin publication.input_held<-false;closeCloneInputNoErr publication.input end;
+    if publication.output_held then begin publication.output_held<-false;closeCloneOutputNoErr publication.output end
+  end
+let closeOwnedCloneNoErr publication = try closeOwnedClone publication with _ -> ()
+let ownedClonePublicationResource = Remote.resourceWithConnCleanup closeOwnedClone closeOwnedCloneNoErr
+let releaseOwnedCloneNoErr publication =
+  try ownedClonePublicationResource.release_noerr publication with _ -> closeOwnedCloneNoErr publication
+let prepareOwnedClone scope directory stage temporary =
+  let publication={scope;context=None;preparing=true;closing=false;closed=false;
+    raw_basis=Unix.stdin;raw_output=Unix.stdin;raw_parent=Unix.stdin;raw_pair=false;parent_held=false;
+    input=Stdlib.stdin;output=Stdlib.stdout;input_held=false;output_held=false;previous=scope.publications} in
+  scope.publications<-Some publication;
+  ignore(ownedClonePublicationResource.register publication);
+  try
+    let context=owned_clone_call publication(fun()->StagePublication.prepare_owned
+      ~working_dir:(Fspath.toString directory) ~stage:(Path.toString stage) ~temporary:(Path.toString temporary)) in
+    (try publication.context<-Some context with error -> record_clone_cause scope error;
+      owned_clone_call publication(fun()->StagePublication.abort_owned context);raise error);
+    publication.preparing<-false;
+    if publication.closing then begin closeOwnedClone publication;raise(Util.Transient "Clone publication interrupted") end;
+    Some(publication,context)
+  with error ->
+    publication.preparing<-false;
+    let unavailable=StagePublication.preparation_unavailable error in
+    if not unavailable then record_clone_cause scope error;
+    releaseOwnedCloneNoErr publication;
+    if unavailable && not scope.uncertain then begin
+      if Prefs.read clonePolicy="require" then raise(Util.Transient "Clone publication identity is unavailable");
+      None
+    end else raise error
 
 let cloneOwnerIdentity () =
   (* A controller identity cannot be inherited from a prior process or mount.
@@ -768,55 +870,40 @@ let copyFile ?(clone_owned=false) inCh outCh kind len fallback notify =
 
 let copyBoundClone ?expected_length producer basisPath directory candidate suffix write =
   checkProducer producer;
-  let stage = Os.tempPath ~fresh:true directory
-    (Path.addSuffixToFinalName candidate suffix) in
-  match prepareClonePublication directory stage candidate with
+  let scope=match producer with Some state when not state.legacy -> state.clone_scope
+    | _ -> invalid_arg "Copy.copyBoundClone requires bound producer" in
+  let stage=Os.tempPath ~fresh:true directory (Path.addSuffixToFinalName candidate suffix) in
+  match prepareOwnedClone scope directory stage candidate with
   | None -> false
-  | Some prepared ->
-      let publication = registerClonePublication prepared in
-      try
-        let cloned = match expected_length with
-          | None -> Fs.clone_stage_handles basisPath (Fspath.concat directory stage)
-          | Some expected_length -> Fs.clone_stage_handles_sized ~expected_length
-              basisPath (Fspath.concat directory stage) in
-        match cloned with
-        | Fs.Declined_stage_handles Fs.Non_regular_source ->
-            raise (Util.Transient "Clone producer basis is no longer a regular file")
-        | Fs.Declined_stage_handles _ ->
-            closeClonePublicationNoErr publication; false
-        | Fs.Shared_stage_handles (basisFd, outputFd, parent) ->
-            (try StagePublication.adopt publication ~parent ~stage:outputFd
-             with error ->
-               closeCloneFdNoErr basisFd; closeCloneFdNoErr outputFd; raise error);
-            (* cloneChannels consumes both descriptors even on a failed
-               handoff. From here cleanup uses channel objects, never their
-               recycled original descriptor integers. *)
-            let basis, output = cloneChannels basisFd outputFd in
-            (try
-               let check_source_length () = match expected_length with
-                 | None -> ()
-                 | Some expected_length ->
-                     let basis_size =
-                       (Unix.LargeFile.fstat (Unix.descr_of_in_channel basis)).Unix.LargeFile.st_size
-                     and output_size =
-                       (Unix.LargeFile.fstat (Unix.descr_of_out_channel output)).Unix.LargeFile.st_size in
-                     if basis_size <> expected_length || output_size <> expected_length then
-                       raise (Util.Transient "Source clone length changed before publication") in
-               check_source_length ();
-               write basis output;
-               flush output;
-               check_source_length ();
-               StagePublication.publish publication;
-               adoptProducer producer outputFd;
-               StagePublication.disarm publication;
-               closeFileIn basis; closeFileOut output;
-               closeClonePublicationNoErr publication;
-               true
-             with error ->
-               closeClonePublicationNoErr publication;
-               closeCloneInputNoErr basis; closeCloneOutputNoErr output;
-               raise error)
-      with error -> closeClonePublicationNoErr publication; raise error
+  | Some(publication,context) ->
+    try
+      let cloned=match expected_length with
+        | None -> Fs.clone_stage_handles basisPath (Fspath.concat directory stage)
+        | Some expected_length -> Fs.clone_stage_handles_sized ~expected_length basisPath (Fspath.concat directory stage) in
+      match cloned with
+      | Fs.Declined_stage_handles Fs.Non_regular_source -> raise(Util.Transient "Clone producer basis is no longer a regular file")
+      | Fs.Declined_stage_handles _ -> releaseOwnedCloneNoErr publication;false
+      | Fs.Shared_stage_handles(basisFd,outputFd,parent) ->
+        publication.raw_basis<-basisFd;publication.raw_output<-outputFd;publication.raw_parent<-parent;
+        publication.raw_pair<-true;publication.parent_held<-true;
+        let adopt ()=StagePublication.adopt_owned context ~parent ~stage:outputFd in
+        publication.parent_held<-false;
+        owned_clone_call publication adopt;
+        publication.raw_pair<-false;
+        let basis,output=cloneChannels basisFd outputFd in
+        publication.input<-basis;publication.output<-output;
+        publication.input_held<-true;publication.output_held<-true;
+        let check_source_length ()=match expected_length with None->() | Some expected ->
+          if (Unix.LargeFile.fstat(Unix.descr_of_in_channel basis)).Unix.LargeFile.st_size<>expected ||
+             (Unix.LargeFile.fstat(Unix.descr_of_out_channel output)).Unix.LargeFile.st_size<>expected then
+            raise(Util.Transient "Source clone length changed before publication") in
+        check_source_length();write basis output;flush output;check_source_length();
+        owned_clone_call publication(fun()->StagePublication.publish_owned context);
+        adoptProducer producer outputFd;
+        owned_clone_call publication(fun()->StagePublication.disarm_owned context);
+        ownedClonePublicationResource.release publication;
+        true
+    with error -> record_clone_cause scope error;releaseOwnedCloneNoErr publication;raise error
 
 let copyNamedSource ~expected_length producer source directory candidate =
   if not (StagePublication.available ()) then false else
@@ -2012,12 +2099,17 @@ let withProducer connection root localPath workingDir candidate target token f =
     (fun () -> TargetBinding.with_producer ?connection ~token ~logical_root:root
       ~local_path:localPath ~working_dir:workingDir ~candidate ~target
       (fun binding ->
-        let producer = { binding; adopted = false; frozen = false; legacy = false } in
+        let clone_scope=create_clone_scope () in
+        let pending=Lwt.wait () in
+        let producer = { binding; clone_scope; adopted = false; frozen = false; legacy = false } in
         checkProducer (Some producer);
         if not (FinalPublication.auxiliary_absent (TargetBinding.native binding)) ||
            Fileinfo.getType false workingDir target = `DIRECTORY then
           handoffProducer (Some producer);
-        f producer))
+        BorrowedWork.try_bind (fun () -> f producer)
+          (fun value -> if clone_scope.uncertain then pending else Lwt.return value)
+          (fun error -> record_clone_cause clone_scope error;
+            if clone_scope.uncertain then pending else Lwt.fail error)))
     (function
       | Unix.Unix_error (error, phase, path) ->
           Lwt.fail (Util.Transient (Printf.sprintf

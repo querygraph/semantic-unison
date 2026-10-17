@@ -363,10 +363,10 @@ def instrument_copy(source):
     source=replace_once(source,declaration,declaration+
         '  ProducerCallerFault.log ["producer-owner";Fspath.toString root;'+
         '(match connection with None->"local"|Some _->"connection")];\n')
-    source=replace_once(source,'        f producer))',
-        '        Lwt.bind (f producer) (fun result ->\n'+
-        '          ProducerCallerFault.log ["producer-finished";Fspath.toString root;'+
-        'string_of_bool producer.frozen;string_of_bool producer.legacy]; Lwt.return result)))')
+    source=replace_once(source,'          (fun value -> if clone_scope.uncertain then pending else Lwt.return value)',
+        '          (fun value -> if clone_scope.uncertain then pending else begin\n'+
+        '            ProducerCallerFault.log ["producer-finished";Fspath.toString root;'+
+        'string_of_bool producer.frozen;string_of_bool producer.legacy]; Lwt.return value end)')
     return PRODUCER_PREFIX+source
 
 
