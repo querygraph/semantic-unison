@@ -7,6 +7,12 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Latest user design clarification is recorded in SOL.md under "Rehashing is
+incremental refinement": deploy qualified pixel/metadata separation with exact
+opaque coverage; version each field refinement, invalidate only its dependency
+closure, preserve prior usable views and avoid mandatory archive-wide upgrades.
+This is a design requirement, not a new deployment or runtime qualification.
+
 Stacked draft PR3 is open: https://github.com/querygraph/unison/pull/3,
 `feat/component-cache-input-binding` against `feat/semantic-dng-oxcaml` (not master).
 Current owner entries/staging/publication now have stock/Ox Make+selftests+Dune
