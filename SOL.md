@@ -4875,3 +4875,25 @@ fences have directed controls. The [one retained-clone request](doc/camera-compo
 is prepared for separate review/admission; preparation did not open camera bytes.
 A resulting report is advisory byte-role/hash evidence, not decoded-pixel identity,
 SDK eligibility, semantic merge authority or automatic receiving permission.
+
+
+## Pinned exiftool-rs MakerNote integration — 2026-10-17
+
+The [read-only Rust bridge](tools/exiftool-bridge/README.md) now integrates the
+actual local exiftool-rs library into the DNG inspector through optional
+`--exiftool-build`. This replaces the earlier deferral of reuse until the
+exiftool-rs work completed for this explicitly requested integration. It pins
+revision3cd699a2 and records the build/executable/engine domain; the other checkout
+is not modified. MakerNote interpretation is nested under DNG by vendor and
+field, preserving typed values and duplicates. Per-field hashes compose without
+reclassifying or discarding opaque source bytes. Original Canon fixture tests
+show private values changing while encoded-image projection stays unchanged.
+
+The current Rust Tag API lacks source byte spans. Its decoded values are therefore
+a separate knowledge view, not an invented physical partition or authority to
+ignore, relocate or merge source fields. Exact full/component hashes remain
+authoritative; previous profiles and default inspector behavior remain unchanged.
+A future span/provenance export can support stronger narrowly qualified vendor
+children. Full original ExifTool parity is not asserted: corpus and rich-flag
+coverage remain scoped. Existing camera request bytes are preserved but their
+runner pin is stale; a fresh successor is required before any camera IO.

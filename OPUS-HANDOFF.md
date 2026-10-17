@@ -4030,3 +4030,50 @@ CPU/IO/nativegrant. Remainingactualtransport/property, exactretainedforkinterop,
 cameraadvisorycoverage need freshRootreview/admissions. Do not inventnewsource
 work or repeatpassingtests justtostaybusy whilepinsarefrozen; noMakerNotecomplete
 interpretation/decodepixels/universalOSRSSclaim isareleaseblocker.
+
+
+## External blocker after three consecutive checks — 2026-10-17
+
+Current goal remains incomplete. Camera component request queued
+01a14a0d-0805-7890-a33f-b489eac5404c and mixed-peer request queued
+01a14a25-3f46-7753-8d58-33e13b774312 still have absent admissions/workspaces.
+No owned process or Unison resource reservation. Three consecutive goal turns
+found the same external scheduling dependency and no remaining independent
+implementation action needed before these pinned checks. Goal status blocked,
+not user-paused or complete. Resume when Photo Root supplies explicit exact
+admission(s); revalidate all pins/deadline/unused workspace, execute once only,
+collect actual owning-tool terminal and all group/FD proofs. Never dispatch from
+this status note, reuse a consumed grant, or silently repin a reviewed request.
+PR13 remains draft, last pushed da839a1e; current sources/pending requests frozen.
+
+
+## USER-requested exiftool-rs integration implemented — 2026-10-17
+
+User firstrequestedreadonly review, then explicitly said integrateNOW. Actual
+localcrate reuse is now tools/exiftool-bridge: pinnedgit3cd699a2 snapshot only
+Cargo/src/locales/buildscript(no corpusimages), privateofflineRustbuild jobs2,
+actualExifTool::extract_info_from_bytes using inheritedreadonlyFD/no writers.
+ExistingDNGinspector run.py optional --exiftool-build combines exact component
+summary with nestedMakerNotevendor/fieldtyped observations (duplicates/rationals/
+floatbits/binary/struct retained). Output unison-dng-knowledge-observation/1;
+engine-bound perfield/vendor hashes compose; exactopaque/full/pixel sourceviews
+remainauthoritative. No byte spans inTagAPI => no fabricated bytepartition,
+semanticmerge/transfer/cache authority or universalExifToolparity.
+
+ActualRustbuild12692/e7506a/0; API16aaf1/0; CLI47639/491ce5/0; finalAPI+CLI
+75387/eea42b/0 PASS: CanonSerialNumber123456vs654321 changesprivatehash/knowledge
+whileencodedpixels unchanged, original1KiBDNGs/FIVEunchanged. FivefakeFD/call
+faultcontrols7f5341/0 +finalab0ced/0 passed, unknownretention/no numericretry/
+knownfailureevidence. Allactualgroups/own8closed; no sourcephotos/retainedcamera/
+Adobe/SDK/transport. Externalexiftool-rs checkout UNMODIFIED. Evidence
+tests/qualification/exiftool-rs-integration-actual-20261017.json; commands/schema/
+limits tools/exiftool-bridge/README.md. Existing componentinspector compiled26
+kernel sourcesunchanged; frontendoptionalnewbranchdefaulttested.
+
+Camera requestV1 originalbytespreserved but run.py pin nowSTALE,UNSTARTED; no
+admission existed atchange. Root notified queue01a14c24-c7f5-7f51-af23-185fd05db148
+DO NOTdispatchunchanged; freshsuccessorneedsbridge/executor/pins/budgetreview.
+Mixedpeerrequestsourceclosure excludesrun.py andremainsseparateunchanged. Earlier
+goalblockednote is historical externalverification state, not a claim thisnew
+explicituserintegration was blocked. Original fullgoal still needs actual scoped
+endtoend evidence; no fullgoalcompletion/productiondeployment claim.

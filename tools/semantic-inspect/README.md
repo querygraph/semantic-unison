@@ -172,3 +172,14 @@ Current source qualification is refreshed in
 stock/Ox build-only artifacts and16 complete calls on original256B fixtures.
 Earlier receipts remain historical; their changed source pins must not be
 relabelled as a fresh real-camera observation.
+
+## Optional exiftool-rs MakerNote child interpretation
+
+Add `--exiftool-build /absolute/pinned-bridge/BUILD.json` to a retained-build
+`--components FILE` invocation to obtain the exact component report plus actual
+exiftool-rs MakerNote observations, nested by vendor and field. See
+[build/use, typed schemas and qualification](../exiftool-bridge/README.md).
+This reuses the pinned Rust library and does not shell out to Perl. Default
+inspection is unchanged; no metadata writer or semantic transfer authority is
+introduced. The library's field values currently lack byte spans, so their
+versioned hashes are advisory interpretation views alongside the exact partition.
