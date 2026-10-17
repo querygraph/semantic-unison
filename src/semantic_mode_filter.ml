@@ -101,6 +101,11 @@ let transform version path =
           "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val record_published : record_publication -> bool"]
         | "dngComponents" -> [
+          "val prepare_cache_namespace : ?expected:(int * int) -> parent:Unix.file_descr -> unit -> cache_namespace";
+          "val provision_cache_namespace : cache_namespace -> parent:Unix.file_descr -> unit";
+          "val cache_namespace_created : cache_namespace -> bool";
+          "val cache_namespace_identity : cache_namespace -> int * int";
+          "val with_cache_namespace : cache_namespace -> parent:Unix.file_descr ->\n  (Unix.file_descr -> 'a) -> 'a";
           "val load_owner_index : ?check_cancel:(unit -> unit) ->\n  directory:Unix.file_descr -> expected_manifest_sha256:string ->\n  binding:string -> max_entries:int -> max_bytes:int -> unit -> owner_index option";
           "val load_owner_record : ?check_cancel:(unit -> unit) -> directory:Unix.file_descr ->\n  entry:owner_entry -> unit -> string option";
           "val prepare_owner_index_publication : binding:string -> owner_index ->\n  directory:Unix.file_descr -> stage:Unix.file_descr -> temporary:string ->\n  SemanticFile.t -> owner_index_publication";

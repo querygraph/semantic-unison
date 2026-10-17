@@ -5,11 +5,11 @@
 #include <fcntl.h>
 #include <stdatomic.h>
 #include <errno.h>
-static _Atomic int failed_ordinal, closes, opens, reads;
+static _Atomic int failed_ordinal, closes, opens, reads, sync_calls;
 CAMLprim value unison_cache_control_mode(value ordinal)
 {
   atomic_store(&failed_ordinal, Int_val(ordinal));
-  atomic_store(&closes, 0); atomic_store(&opens, 0); atomic_store(&reads, 0); return Val_unit;
+  atomic_store(&closes, 0); atomic_store(&opens, 0); atomic_store(&reads, 0); atomic_store(&sync_calls, 0); return Val_unit;
 }
 CAMLprim value unison_cache_control_closes(value unit)
 { (void)unit; return Val_int(atomic_load(&closes)); }
@@ -40,4 +40,13 @@ ssize_t unison_cache_control_pread(int fd, void *bytes, size_t length, off_t off
      so the final stat and first owner close fail. Never retry that stale number. */
   if (atomic_load(&failed_ordinal)==-1 && ordinal==0 && result>0) close(fd);
   errno=saved;return result;
+}
+
+CAMLprim value unison_cache_control_syncs(value unit)
+{ (void)unit; return Val_int(atomic_load(&sync_calls)); }
+int unison_cache_control_fsync(int fd)
+{
+  int ordinal=atomic_fetch_add(&sync_calls, 1);
+  if (atomic_load(&failed_ordinal)==100 && ordinal==0) { errno=EIO; return -1; }
+  return fsync(fd);
 }

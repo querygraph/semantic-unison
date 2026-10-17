@@ -533,20 +533,18 @@ type cache_descriptor = Unix.file_descr * Unix.LargeFile.stats option
 type cache_ownership = { cache_cause : exn option;
   cache_uncertain : (cache_descriptor * exn) list;
   cache_retained : cache_descriptor list;
-  cache_directory : cache_descriptor }
+  cache_directory : cache_descriptor; cache_parents : cache_descriptor list }
 exception Cache_ownership_uncertain of cache_ownership
 let cache_ownership_cause state=state.cache_cause
 let cache_uncertain_descriptors state=state.cache_uncertain
 let cache_retained_descriptors state=state.cache_retained
 let cache_borrowed_directory state=state.cache_directory
+let cache_borrowed_directories state=state.cache_directory::state.cache_parents
 type cache_fd_state = Cache_unopened | Cache_held | Cache_uncertain | Cache_closed
 type cache_resource = { mutable cache_fd : Unix.file_descr;
   mutable cache_fd_state : cache_fd_state; mutable cache_identity : Unix.LargeFile.stats option }
 let cache_identity fd=try Some(Unix.LargeFile.fstat fd) with _ -> None
-let with_cache_leaf ~check_cancel ~directory ~digest ~max_bytes callback =
-  check_cancel ();
-  if String.length digest<>32 then owner_invalid "cache leaf digest";
-  let name=SemanticHash.hex digest in
+let with_cache_descriptor ~directory ~allow_missing ~open_descriptor ~validate callback =
   let borrowed=directory,cache_identity directory in
   let resource={cache_fd=Unix.stdin;cache_fd_state=Cache_unopened;cache_identity=None} in
   let evidence ()=resource.cache_fd,resource.cache_identity in
@@ -557,20 +555,18 @@ let with_cache_leaf ~check_cancel ~directory ~digest ~max_bytes callback =
     resource.cache_fd_state <- Cache_uncertain;
     try metadata_close resource.cache_fd;resource.cache_fd_state <- Cache_closed
     with error -> raise(Cache_ownership_uncertain {cache_cause=cause;
-      cache_uncertain=[evidence (),error];cache_retained=[];cache_directory=borrowed}) in
+      cache_uncertain=[evidence (),error];cache_retained=[];cache_directory=borrowed;cache_parents=[]}) in
   try
     let present=try
-      resource.cache_fd <- metadata_open directory name;
+      resource.cache_fd <- open_descriptor ();
       resource.cache_fd_state <- Cache_held;
       true
-    with Unix.Unix_error(Unix.ENOENT,_,_) -> false in
+    with Unix.Unix_error(Unix.ENOENT,_,_) when allow_missing -> false in
     if not present then None else begin
       resource.cache_identity <- Some(Unix.LargeFile.fstat resource.cache_fd);
-      ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes resource.cache_fd;
-      let result=SemanticFile.with_borrowed_fd ~check_cancel resource.cache_fd (fun file ->
-        let result=callback file in
-        ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes resource.cache_fd;
-        result) in
+      validate resource.cache_fd;
+      let result=callback resource.cache_fd in
+      validate resource.cache_fd;
       close None;
       Some result
     end
@@ -578,12 +574,27 @@ let with_cache_leaf ~check_cancel ~directory ~digest ~max_bytes callback =
   | Cache_ownership_uncertain state ->
       (* A nested leaf could fail close while this manifest is still held.
          Preserve that known descriptor instead of attempting more cleanup. *)
-      if resource.cache_fd_state=Cache_held then
-        raise(Cache_ownership_uncertain {state with cache_retained=evidence ()::state.cache_retained})
-      else raise(Cache_ownership_uncertain state)
+      let same (a,identity_a) (b,identity_b)=a=b &&
+        (match identity_a,identity_b with
+         | Some a,Some b -> a.Unix.LargeFile.st_dev=b.Unix.LargeFile.st_dev && a.st_ino=b.st_ino
+         | None,None -> true | _ -> false) in
+      let parents=if List.exists (same borrowed) (cache_borrowed_directories state)
+        then state.cache_parents else borrowed::state.cache_parents in
+      let retained=if resource.cache_fd_state=Cache_held &&
+        not(List.exists (same(evidence ())) state.cache_retained)
+        then evidence ()::state.cache_retained else state.cache_retained in
+      raise(Cache_ownership_uncertain {state with cache_retained=retained;cache_parents=parents})
   | error ->
       if resource.cache_fd_state=Cache_held then close (Some error);
       raise error
+let with_cache_leaf ~check_cancel ~directory ~digest ~max_bytes callback =
+  check_cancel ();
+  if String.length digest<>32 then owner_invalid "cache leaf digest";
+  let name=SemanticHash.hex digest in
+  with_cache_descriptor ~directory ~allow_missing:true
+    ~open_descriptor:(fun () -> metadata_open directory name)
+    ~validate:(fun fd -> ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes fd)
+    (fun fd -> SemanticFile.with_borrowed_fd ~check_cancel fd callback)
 let cache_leaf_bytes file =
   let size=SemanticFile.size file in
   let bytes=Buffer.create (Int64.to_int size) in
@@ -605,3 +616,22 @@ let load_owner_record ?(check_cancel=fun () -> ()) ~directory ~entry () =
       let bytes=cache_leaf_bytes file in
       ignore(checkpoint_for_owner_entry entry bytes);
       bytes)
+
+type cache_namespace
+let cache_namespace_name="component-cache-v0"
+external prepare_cache_namespace_raw : Unix.file_descr -> (int * int) option -> cache_namespace
+  = "unison_component_namespace_prepare"
+external provision_cache_namespace : cache_namespace -> parent:Unix.file_descr -> unit
+  = "unison_component_namespace_provision"
+external cache_namespace_created : cache_namespace -> bool = "unison_component_namespace_created"
+external cache_namespace_identity : cache_namespace -> int * int = "unison_component_namespace_identity"
+external open_cache_namespace : cache_namespace -> Unix.file_descr -> Unix.file_descr
+  = "unison_component_namespace_open"
+external check_cache_namespace : cache_namespace -> Unix.file_descr -> Unix.file_descr -> unit
+  = "unison_component_namespace_check"
+let prepare_cache_namespace ?expected ~parent ()=prepare_cache_namespace_raw parent expected
+let with_cache_namespace ticket ~parent callback =
+  match with_cache_descriptor ~directory:parent ~allow_missing:false
+    ~open_descriptor:(fun () -> open_cache_namespace ticket parent)
+    ~validate:(check_cache_namespace ticket parent) callback with
+  | Some result -> result | None -> assert false

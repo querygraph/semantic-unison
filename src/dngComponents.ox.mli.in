@@ -274,3 +274,34 @@ val load_owner_record : ?check_cancel:(unit -> unit) -> directory:Unix.file_desc
     and retain exclusive snapshot access/IO, metadata-memory and lifetime admission.
     No source payload, directory enumeration/creation, cache discovery, publication,
     eviction, archive mutation, peer trust or non-macOS fallback. *)
+
+
+type cache_namespace
+val cache_namespace_name : string
+val prepare_cache_namespace : ?expected:(int * int) -> parent:Unix.file_descr -> unit -> cache_namespace @@ nonportable
+val provision_cache_namespace : cache_namespace -> parent:Unix.file_descr -> unit @@ nonportable
+val cache_namespace_created : cache_namespace -> bool @@ nonportable
+val cache_namespace_identity : cache_namespace -> int * int @@ nonportable
+val with_cache_namespace : cache_namespace -> parent:Unix.file_descr ->
+  (Unix.file_descr -> 'a) -> 'a @@ nonportable
+(** macOS one-use private directory ticket under an existing borrowed private0700
+    parent. Caller exclusively controls parent/child names and holds the parent
+    FD stable across preparation/provision/open; this is not hostile same-UID
+    exclusion. Fixed component-cache-v0 child only. No [expected] means fresh mkdir;
+    EEXIST refuses rather than adopting an unknown directory. [expected] reopens
+    only the separately trusted device/inode, never creates or scans. Provision
+    attempts once, records actual mkdir before later validation/parent-sync error,
+    and retains the created directory on every failure. Inspect created/identity
+    after error; identity exists only if observed, not proof of sync or settlement.
+    No automatic rollback/retry or chmod. A failed provision cannot open its ticket.
+    Scoped open attempts once with no-follow/directory/cloexec flags and rechecks
+    parent/name/FD identity before/after a synchronous callback. Callback borrows
+    the directory exclusively; finish all work before return, no FD/async escape.
+    Close uses Cache_ownership_uncertain, preserving known enclosing handles and
+    every borrowed directory. Caller owns admission, retained effects/recovery and
+    trusted expected identity across restart; identity alone is not manifest trust.
+    No recursive path creation, namespace discovery, source access, publication,
+    archive adoption, quota refund, eviction or automatic cache activation. *)
+val cache_borrowed_directories : cache_ownership -> cache_descriptor list
+(** All borrowed directory identities retained through nested scopes. The singular
+    accessor returns the originating directory for backward compatibility. *)
