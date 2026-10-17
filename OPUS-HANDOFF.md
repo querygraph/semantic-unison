@@ -7,6 +7,16 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Known trusted-entry recovery lookup implemented: actual no-follow presence must
+match provided borrowedreaders; nativeFD/name/private/size/epoch checks around
+bounded record/index authentication. Complete/record-only/entry-only/missing
+classifications; foreignindex, wrongreader and equalbyte symlinkredirect refuse.
+No opens/closes/cleanup/scan; resultisnot producerterminal/resourceclosure/current
+source eligibility. Focused48730/287b5e/0 and all4builds+workers53905/09f4fb/0 PASS,
+allgroups/tokensclosed,1272SRCchecks. Receipt
+`tests/qualification/dng-cache-recovery-actual-20261017.json`. Managednamespace
+opening/automaticselection/recoveryscan/eviction stillopen; no media/SDK/EXIO/mainpins.
+
 Explicit quota-bound paired capture now implemented. Native admission binds two
 fresh distinct empty stages in actual reservednamespace before writes; seal pins
 same produceridentities with aggregatebounds. Failed/unsynced reservation cannot

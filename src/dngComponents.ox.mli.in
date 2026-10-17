@@ -120,3 +120,17 @@ val cache_capture_state : cache_capture -> bool * bool @@ nonportable
     infer rollback. Borrow all FDs/readers with caller-owned exclusive lifetimes;
     no opens/closes, automatic lookup, recovery, global index advancement or
     source-photo reads/writes. Caller settles descriptors before index adoption. *)
+
+type capture_recovery = Capture_missing | Capture_entry_only
+  | Capture_record_only of ComponentHash.checkpoint | Capture_complete of ComponentHash.checkpoint
+val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->
+  record:(Unix.file_descr * SemanticFile.t) option ->
+  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery @@ nonportable
+(** Known trusted-entry recovery lookup, macOS, borrowed readers/FDs only. Optional
+    readers must match actual no-follow presence, not an asserted absence. Recheck
+    private native name/FD identity around bounded content authentication. Reject
+    foreign/symlink/mismatched objects; never downgrade those errors to missing.
+    Complete means both exact published metadata objects observed, not live-source
+    eligibility: restore still verifies full current input/base. Entry-only is a
+    broken reference; record-only is an orphan, not index advancement. No opens,
+    closes, writes, cleanup, directory scan, automatic selection or peer trust. *)

@@ -132,6 +132,25 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Known-entry recovery lookup
+
+`inspect_cache_capture` now authenticates the two expected immutable leaves for
+an already trusted owner entry. Caller supplies optional borrowed readers/FDs;
+those options must match actual no-follow presence. Native checks bind each
+private regular descriptor to its64hex leaf, with bounded size and stable native
+metadata before/after content validation. Record bytes/checkpoint/input/inventory
+references and exact entry bytes must match. Foreign leaves, symlinks (including
+equal-byte redirects), wrong readers and namespace changes raise errors rather
+than being downgraded to an absent cache record.
+
+Results distinguish complete, record-only orphan, entry-only broken reference
+and missing expected leaves. They describe only those two names, not a directory
+census, producer terminal or resource closure. No files are opened/closed, moved,
+removed or repaired. Even a complete result still requires normal full-current-
+input/base verification before cached component reuse. A digest computed from
+discovered unknown cache bytes is not a trusted owner entry. Managed namespace
+opening, automatic selection and recovery scanning remain separate work.
+
 ### Quota-bound paired capture
 
 The explicit capture helper now routes record+owner-entry staging through one

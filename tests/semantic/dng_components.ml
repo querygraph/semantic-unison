@@ -356,6 +356,47 @@ let () =
                  ~expected_record_sha256:(DngComponents.owner_entry_record_sha256 entry) file) in
                check(ComponentHash.checkpoint_bytes recovered=ComponentHash.checkpoint_bytes checkpoint)
                  "capture record bytes changed";
+               let with_record action=SemanticFile.with_fd record_stage (fun file -> action(record_stage,file)) in
+               let with_index action=SemanticFile.with_fd entry_stage (fun file -> action(entry_stage,file)) in
+               if collision then begin
+                 check(try with_record(fun record -> ignore(DngComponents.inspect_cache_capture entry ~directory
+                   ~record:(Some record) ~index:None));false with ComponentHash.Invalid _ -> true)
+                   "foreign index presence downgraded to absent";
+                 check(try with_record(fun record -> with_index(fun index ->
+                   ignore(DngComponents.inspect_cache_capture entry ~directory ~record:(Some record) ~index:(Some index))));false
+                   with Unix.Unix_error _ -> true) "unpublished stage mistaken for published index";
+                 (* Remove only this original fixture's deliberately created collision. *)
+                 Unix.unlink entry_target;
+                 with_record(fun record -> check(match DngComponents.inspect_cache_capture entry ~directory
+                   ~record:(Some record) ~index:None with
+                   | DngComponents.Capture_record_only value -> ComponentHash.checkpoint_bytes value=ComponentHash.checkpoint_bytes checkpoint
+                   | _ -> false) "record-only orphan misclassified")
+               end else begin
+                 with_record(fun record -> with_index(fun index ->
+                   check(match DngComponents.inspect_cache_capture entry ~directory ~record:(Some record) ~index:(Some index) with
+                     | DngComponents.Capture_complete value -> ComponentHash.checkpoint_bytes value=ComponentHash.checkpoint_bytes checkpoint
+                     | _ -> false) "complete cache capture not authenticated";
+                   check(try ignore(DngComponents.inspect_cache_capture entry ~directory
+                     ~record:(Some(entry_stage,snd record)) ~index:(Some index));false
+                     with ComponentHash.Invalid _ -> true) "lookup reader/FD mismatch accepted"));
+                 (* Redirect a real digest leaf to an equal-byte original fixture backup.
+                    Following symlinks would wrongly accept this exact-content alias. *)
+                 let backup=Filename.concat folder "original-record-backup" in
+                 Unix.rename record_target backup;Unix.symlink "original-record-backup" record_target;
+                 check(try with_record(fun record -> with_index(fun index ->
+                   ignore(DngComponents.inspect_cache_capture entry ~directory ~record:(Some record) ~index:(Some index))));false
+                   with Unix.Unix_error _ -> true) "lookup followed equal-byte metadata symlink";
+                 check((Unix.lstat record_target).Unix.st_kind=Unix.S_LNK) "lookup mutated refused symlink";
+                 Unix.unlink record_target;
+                 with_index(fun index -> check(DngComponents.inspect_cache_capture entry ~directory
+                   ~record:None ~index:(Some index)=DngComponents.Capture_entry_only)
+                   "dangling index reference misclassified";
+                   check(try ignore(DngComponents.inspect_cache_capture entry ~directory ~record:None ~index:None);false
+                     with ComponentHash.Invalid _ -> true) "present index hidden by missing reader");
+                 Unix.unlink entry_target;
+                 check(DngComponents.inspect_cache_capture entry ~directory ~record:None ~index:None=DngComponents.Capture_missing)
+                   "missing expected leaves misclassified"
+               end;
                check(try DngComponents.publish_cache_capture capture directory record_stage entry_stage;false
                  with ComponentHash.Invalid _ -> true) "capture publication replayed")) in
          run entry false;

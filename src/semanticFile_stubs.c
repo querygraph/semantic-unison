@@ -465,3 +465,68 @@ CAMLprim value unison_component_metadata_stages(value ticket, value directory, v
   caml_unix_error(ENOSYS, "component metadata stages", Nothing);
 #endif
 }
+
+#ifdef __APPLE__
+static void metadata_digest_leaf(value name, char output[256])
+{
+  record_leaf(name, output);
+  if (strlen(output) != 64) caml_invalid_argument("component metadata digest leaf");
+  for (int i = 0; i < 64; ++i)
+    if (!((output[i] >= '0' && output[i] <= '9') || (output[i] >= 'a' && output[i] <= 'f')))
+      caml_invalid_argument("component metadata digest leaf");
+}
+#endif
+
+CAMLprim value unison_component_metadata_leaf_present(value directory, value name)
+{
+  CAMLparam2(directory, name);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  char leaf[256]; metadata_digest_leaf(name, leaf);
+  int parent = unison_semantic_fd(directory, "component metadata directory FD");
+  struct stat before, after, named; int error = 0, present = 0;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &before) == -1) error = errno;
+  else if (!record_directory_same(&before, &before)) error = EINVAL;
+  if (!error) {
+    if (fstatat(parent, leaf, &named, AT_SYMLINK_NOFOLLOW) == 0) present = 1;
+    else if (errno != ENOENT) error = errno;
+  }
+  if (!error && fstat(parent, &after) == -1) error = errno;
+  if (!error && !record_directory_same(&before, &after)) error = EBUSY;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component metadata leaf presence", Nothing);
+  CAMLreturn(Val_bool(present));
+#else
+  caml_unix_error(ENOSYS, "component metadata lookup", Nothing);
+#endif
+}
+
+CAMLprim value unison_component_metadata_leaf_check(value directory, value name, value limit, value descriptor)
+{
+  CAMLparam4(directory, name, limit, descriptor);
+#ifdef __APPLE__
+  caml_process_pending_actions();
+  char leaf[256]; metadata_digest_leaf(name, leaf);
+  intnat maximum = Long_val(limit);
+  if (maximum < 80 || maximum > 1048656) caml_invalid_argument("component metadata leaf limit");
+  int parent = unison_semantic_fd(directory, "component metadata directory FD");
+  int fd = unison_semantic_fd(descriptor, "component metadata leaf FD");
+  struct stat before, after, first, last, named; int error = 0;
+  caml_enter_blocking_section_no_pending();
+  if (fstat(parent, &before) == -1) error = errno;
+  else if (!record_directory_same(&before, &before)) error = EINVAL;
+  if (!error && fstat(fd, &first) == -1) error = errno;
+  if (!error && (!record_stage_same(&first, &first, 1) || first.st_size < 80 || first.st_size > maximum)) error = EINVAL;
+  if (!error && fstatat(parent, leaf, &named, AT_SYMLINK_NOFOLLOW) == -1) error = errno;
+  if (!error && fstat(fd, &last) == -1) error = errno;
+  if (!error && (!record_stage_same(&first, &last, 1) || !record_stage_same(&last, &named, 1))) error = EBUSY;
+  if (!error && fstat(parent, &after) == -1) error = errno;
+  if (!error && !record_directory_same(&before, &after)) error = EBUSY;
+  caml_acquire_runtime_system();
+  if (error) caml_unix_error(error, "component metadata leaf binding", Nothing);
+  CAMLreturn(Val_unit);
+#else
+  caml_unix_error(ENOSYS, "component metadata lookup", Nothing);
+#endif
+}

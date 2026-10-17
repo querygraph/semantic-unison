@@ -298,6 +298,10 @@ let read_checkpoint_record ~expected_binding ~expected_record_sha256 file =
   checkpoint_from_record ~expected_binding ~expected_record_sha256 (Buffer.contents output)
 
 type record_publication
+external metadata_leaf_present : directory:Unix.file_descr -> name:string -> bool
+  = "unison_component_metadata_leaf_present"
+external check_metadata_leaf : directory:Unix.file_descr -> name:string -> max_bytes:int ->
+  Unix.file_descr -> unit = "unison_component_metadata_leaf_check"
 type metadata_quota
 let metadata_reservation_bytes=2097152L
 external prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int ->

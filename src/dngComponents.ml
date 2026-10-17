@@ -314,3 +314,41 @@ let publish_cache_capture capture directory record_stage entry_stage =
 let cache_capture_state capture =
   ComponentHash.record_published capture.record_publication,
   ComponentHash.record_published capture.entry_publication
+
+type capture_recovery = Capture_missing | Capture_entry_only
+  | Capture_record_only of ComponentHash.checkpoint | Capture_complete of ComponentHash.checkpoint
+let inspect_cache_capture entry ~directory ~record ~index =
+  let record_name=SemanticHash.hex entry.record_digest and index_name=SemanticHash.hex entry.owner_digest in
+  let exists name=ComponentHash.metadata_leaf_present ~directory ~name in
+  let supplied = function None -> false | Some _ -> true in
+  let record_present=exists record_name and index_present=exists index_name in
+  if record_present<>supplied record || index_present<>supplied index then
+    owner_invalid "lookup evidence does not match namespace";
+  let check name maximum (fd,file) =
+    if not(SemanticFile.same_inode file fd) then owner_invalid "lookup reader/descriptor mismatch";
+    SemanticFile.check file;
+    ComponentHash.check_metadata_leaf ~directory ~name ~max_bytes:maximum fd in
+  let checkpoint=match record with
+    | None -> None
+    | Some pair ->
+      check record_name (ComponentHash.max_checkpoint_size+80) pair;
+      let checkpoint=ComponentHash.read_checkpoint_record ~expected_binding:entry.owner_binding
+        ~expected_record_sha256:entry.record_digest (snd pair) in
+      if ComponentHash.checkpoint_sha256 checkpoint<>entry.checkpoint_digest ||
+        check_owner_checkpoint checkpoint entry.previous<>entry.input_digest then owner_invalid "lookup record reference";
+      Some checkpoint in
+  (match index with
+    | None -> ()
+    | Some pair ->
+      check index_name owner_entry_max_size pair;
+      let file=snd pair in
+      if SemanticFile.size file<>Int64.of_int(String.length entry.owner_encoded) ||
+        SemanticFile.read file 0L (String.length entry.owner_encoded)<>entry.owner_encoded then
+        owner_invalid "lookup index bytes differ");
+  (match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);
+  (match index with None -> () | Some pair -> check index_name owner_entry_max_size pair);
+  if exists record_name<>record_present || exists index_name<>index_present then owner_invalid "lookup namespace changed";
+  match checkpoint,index_present with
+  | None,false -> Capture_missing | None,true -> Capture_entry_only
+  | Some checkpoint,false -> Capture_record_only checkpoint
+  | Some checkpoint,true -> Capture_complete checkpoint

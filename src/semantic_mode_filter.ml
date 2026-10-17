@@ -86,6 +86,8 @@ let transform version path =
           "val profiles : unit -> string list";
           "val registered : unit -> handle list"]
         | "componentHash" -> [
+          "val metadata_leaf_present : directory:Unix.file_descr -> name:string -> bool";
+          "val check_metadata_leaf : directory:Unix.file_descr -> name:string -> max_bytes:int ->\n  Unix.file_descr -> unit";
           "val prepare_metadata_quota : directory:Unix.file_descr -> max_bytes:int64 -> max_entries:int -> metadata_quota";
           "val reserve_metadata_slot : metadata_quota -> Unix.file_descr -> bool";
           "val metadata_slot_reserved : metadata_quota -> bool";
@@ -102,7 +104,8 @@ let transform version path =
           "val stage_cache_capture : owner_entry -> checkpoint:ComponentHash.checkpoint ->\n  quota:ComponentHash.metadata_quota -> directory:Unix.file_descr ->\n  record_stage:Unix.file_descr -> entry_stage:Unix.file_descr -> unit";
           "val prepare_cache_capture : owner_entry -> quota:ComponentHash.metadata_quota ->\n  directory:Unix.file_descr -> record_stage:Unix.file_descr -> entry_stage:Unix.file_descr ->\n  record_file:SemanticFile.t -> entry_file:SemanticFile.t -> cache_capture";
           "val publish_cache_capture : cache_capture -> Unix.file_descr -> Unix.file_descr -> Unix.file_descr -> unit";
-          "val cache_capture_state : cache_capture -> bool * bool"]
+          "val cache_capture_state : cache_capture -> bool * bool";
+          "val inspect_cache_capture : owner_entry -> directory:Unix.file_descr ->\n  record:(Unix.file_descr * SemanticFile.t) option ->\n  index:(Unix.file_descr * SemanticFile.t) option -> capture_recovery"]
         | "semanticDelta" -> [
           "val apply : t -> basis:SemanticFile.t -> output:Unix.file_descr -> unit";
           "val apply_report : t -> basis:SemanticFile.t -> output:Unix.file_descr -> application"]

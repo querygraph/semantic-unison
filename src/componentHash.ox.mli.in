@@ -116,6 +116,13 @@ val seal_metadata_stages : metadata_quota -> Unix.file_descr ->
     Requires successful synced reservation, actual slot/directory identity and
     no-follow stage bindings. Borrows all FDs; no payload writes or closes. *)
 type record_publication
+val metadata_leaf_present : directory:Unix.file_descr -> name:string -> bool @@ nonportable
+val check_metadata_leaf : directory:Unix.file_descr -> name:string -> max_bytes:int ->
+  Unix.file_descr -> unit @@ nonportable
+(** macOS known64hex-leaf no-follow lookup through borrowed private0700 directory.
+    Presence reports any object, not valid content. Check binds a private0600
+    singly linked regular FD to that leaf with bounded size and stable native
+    metadata. No open/close/content read/write or hostile-writer exclusion. *)
 val record_publication_available : unit -> bool @@ nonportable
 val prepare_record_publication : directory:Unix.file_descr -> stage:Unix.file_descr ->
   temporary:string -> expected_binding:string -> expected_record_sha256:string ->
