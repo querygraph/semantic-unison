@@ -2,6 +2,9 @@
 
 ## Latest managed-loader successor — 2026-10-17
 
+Source commit `3d35cf81` is pushed as draft PR8:
+https://github.com/querygraph/unison/pull/8 (base PR7). No merge authorized.
+
 Branch `feat/component-cache-loader`, worktree
 `/Users/alexy/src/unison-component-loader-20261017`, stacked on PR7, adds strict
 macOS digest-leaf metadata opening/authentication/normal-close and retained
