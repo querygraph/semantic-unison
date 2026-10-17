@@ -1,0 +1,63 @@
+{
+  "state": "FOCUSED_PASS_CLOSED",
+  "scope": "DNG owner-inventory refresh, unchanged reuse/child and parent upgrade/removal/provenance refusal; no index publication/current full builds",
+  "actual_terminal": {
+    "session": 80431,
+    "chunk": "99049c",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "prior_narrow_pass_terminal": {
+    "session": 89048,
+    "chunk": "666c89",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "pins": [
+    {
+      "path": "/private/tmp/unison-dng-component-controls-fni8gp_5/RESULT.json",
+      "bytes": 369527,
+      "sha256": "06ba91f5e0af12a7a52d263f80f647aa1518a23392caf646a6ae072bd5062811"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-001/SHARED-START.json",
+      "bytes": 1127,
+      "sha256": "cbd4941a7b9354bf076bb61dbe0b287afd88c5b7c45d37151a428ad00155f422"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "cd92f5fe75309cd7265937ade84aecd4e6c86f5d725fd453f87e039e70f626be"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "41090ffb3f6bac2861d3144147aa9b4ba2d40c4a430db34a9eac74c056dbab88"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-002/SHARED-START.json",
+      "bytes": 1126,
+      "sha256": "b6506ea9ee1ddcbaa02e41ebc7281bffd4b95e644df8b33cedc7477a3b270d09"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 500,
+      "sha256": "434aa20f0b789f230f9cb6d239504a3e19a1a392a537cbc701e311d07f057cdc"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-decoder-refresh-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 52,
+      "sha256": "26c1cfce64a9193ad5d4f07cde5c2c886b8f98496322562e7d35437ae85bc7d3"
+    }
+  ]
+}

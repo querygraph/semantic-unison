@@ -333,8 +333,8 @@ let validate_base session snapshot (base:spec) =
 let reset_private_view session snapshot ~component ~schema =
   bound session snapshot;require_id schema;
   let old=find snapshot component in
-  if old.children=[] || (old.role<>Private_metadata && old.role<>Opaque) then
-    invalid "private view reset requires a refined private/opaque component";
+  if old.role<>Private_metadata && old.role<>Opaque then
+    invalid "private view reset requires a private/opaque component";
   ignore(fold(fun () (node:node) ->
     if node.role=Encoded_pixels || node.role=Standard_metadata then
       invalid "private view reset cannot discard pixel/standard claims") () old);

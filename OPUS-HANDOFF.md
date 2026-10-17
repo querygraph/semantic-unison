@@ -7,6 +7,18 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Owner-inventory decoder refresh now implemented: trusted prior outcomes checked
+against restored schemas; unchanged targets reused, changed/removed reset;
+invalidatedparentpreventsdescendantreuse; currentbindingsapplyparentfirst. Base
+fallback schemas preserved so removalcheckpoint restores. Private/opaque leaf
+reset nowallowed (needed for decoders returning no children). Stock/Ox103DNGchecks
+each PASS80431/99049c/0,worker33969reaped0/groupsabsent/tokensclosed. Receipt
+`tests/qualification/dng-decoder-refresh-actual-20261017.json` preserves earlier
+narrowpass. Child-onlyupgrade charges8192+113B, parentupgrade8192+243B; no pixel
+reread beyond full inputverification. No disk/index publication or currentfullbuild
+successor yet. Existing publicationhelpers suppresscloseerrors, so not silently
+repurposed for the new retained-ownership store contract. No media/SDK/EXIO.
+
 Worker extraction now supports explicit optional capture_checkpoint (defaultfalse).
 Only successful live extraction exports bounded immutable checkpoint metadata;
 ordinary observations/restore returnNone, export adds no inputreads. Owner can

@@ -47,3 +47,20 @@ val replace_private_view : ComponentHash.session -> ComponentHash.snapshot ->
     rereads only the target span plus decoder reads, preserves unrelated nodes
     and recomposes ancestors. Descendant views under that target are replaced;
     owners must reselect their bindings. No automatic persistence or peer trust. *)
+
+type refresh = { snapshot : ComponentHash.snapshot; outcomes : outcome list;
+                 reused : string list; invalidated : string list }
+val with_refreshed_checkpoint : previous:outcome list -> decoders:decoders ->
+  expected_checkpoint_sha256:string -> max_read_bytes:int64 -> SemanticFile.t -> string ->
+  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result
+(** Restore then reconcile owner-retained successful decoder provenance against
+    the current frozen bindings. [previous] must be the complete authenticated
+    outcome inventory from that extraction, not supplied by a peer. Validate each
+    prior Refined target/schema. Unchanged views are listed in [reused] and do
+    not invoke a decoder; changed/removed views reset before applying current
+    bindings parent-first. Descendants of invalidated parents cannot be reused.
+    Unrelated hashes remain; unsupported replacements preserve exact unknown
+    atoms. [outcomes] includes historical Refined entries for reused targets,
+    distinguished by [reused]; [invalidated] identifies obsolete bindings.
+    Operational errors propagate without publishing a new checkpoint. No disk
+    store, automatic registry discovery or transfer authority. *)

@@ -31,8 +31,8 @@ must never be inferred from an advisory RPC observation.
 `reset_private_view` explicitly drops one refined private/opaque subtree back to
 its exact raw atom under an owner-selected fallback schema. It changes no bytes,
 raw hash, range or role. Only that view and ancestors are recomposed; unrelated
-nodes/pixel hashes and prior immutable snapshots remain. Leaves, nonprivate roots
-and any subtree containing pixel/standard-metadata claims refuse. A new decoder
+nodes/pixel hashes and prior immutable snapshots remain. Private/opaque leaves
+can also reset; nonprivate roots and any subtree containing pixel/standard-metadata claims refuse. A new decoder
 can then refine that atom under the existing bounded reader, charging its reads
 and the affected parent rehash. Unsupported decoding leaves the opaque fallback.
 
@@ -70,7 +70,7 @@ Sessions, readers and snapshots retain their existing nonportable/lifetime limit
 restoration creates a fresh session token and expires it on every callback exit.
 
 Integration still required: trusted persistent owner record/publication/recovery,
-DNG frozen-decoder invalidation selection and owner-worker/cache wiring. Complete
+automatic owner-worker/cache selection. Complete
 private-field mapping is not a prerequisite for the already qualified baseline.
 
 ## Qualification
@@ -139,6 +139,17 @@ payload length, then exact UCH/0 bytes. Total size is at most checkpoint limit
 plus80 bytes. Loading requires the expected binding and separately trusted
 whole-record digest; it verifies framing, checkpoint digest and bounded syntax.
 This codec alone provides no disk publication, index or current-input authority.
+
+`DngComponents.with_refreshed_checkpoint` now reconciles a complete trusted prior
+outcome inventory with current frozen bindings. It verifies historical target
+schemas, keeps unchanged views without decoder reads, resets obsolete bindings
+and applies current decoders parent-first. An invalidated ancestor prevents reuse
+of all descendant views. Removed base-level bindings return to the current parser
+schema, so their exact opaque fallback can itself be checkpointed and restored.
+Unsupported replacements stay unknown; operational errors return no new view.
+The callback reports reused and invalidated IDs separately, with current outcome
+inventory for subsequent refresh. The prior inventory is owner provenance, not
+peer-discovered executable authority. Disk/index publication remains separate.
 
 Borrowed-descriptor storage now exists: `write_checkpoint_record` writes only to
 a fresh empty owner-private0600 singly linked regular output using bounded writes,

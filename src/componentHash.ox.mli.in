@@ -101,6 +101,6 @@ val reset_private_view : session -> snapshot -> component:string -> schema:strin
 (** Explicitly invalidate one refined private/opaque subtree before applying a
     different decoder/version. Preserves raw digest/extent/role, unrelated nodes
     and the previous immutable snapshot. Recomputes only view ancestors, with no
-    payload read. Refuses leaves, other roles and subtrees containing any pixel
+    payload read. Accepts private/opaque leaves too; refuses other roles and subtrees containing any pixel
     or standard-metadata claim. No bytes or preservation obligations are removed;
     interpretation can become unknown while a replacement decoder is pending. *)

@@ -107,12 +107,57 @@ let () =
          "DNG decoder provenance/view root unchanged") with
    | Ok () -> () | Error reason -> failwith reason);
  Layout_only.with_input (Layout_only.fixture true false (String.make 64 'A')) (fun file ->
-   let encoded,digest,pixels,layout=match DngComponents.with_snapshot ~decoders:frozen
-     ~max_read_bytes:8435L file (fun session ~initial:_ ~refined _ ->
+   let encoded,digest,pixels,layout,previous=match DngComponents.with_snapshot ~decoders:frozen
+     ~max_read_bytes:8435L file (fun session ~initial:_ ~refined outcomes ->
        let checkpoint=ComponentHash.checkpoint session refined in
        ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint,
-       ComponentHash.projection refined ComponentHash.Encoded_pixels,ComponentHash.layout_sha256 refined) with
+       ComponentHash.projection refined ComponentHash.Encoded_pixels,ComponentHash.layout_sha256 refined,outcomes) with
      | Ok value -> value | Error reason -> failwith reason in
+   let refresh decoders limit action=match DngComponents.with_refreshed_checkpoint ~previous ~decoders
+     ~expected_checkpoint_sha256:digest ~max_read_bytes:limit file encoded action with
+     | Ok value -> value | Error reason -> failwith reason in
+   refresh frozen 8192L (fun session result ->
+     check(result.reused=[private_id;private_id^"/nested"] && result.invalidated=[])
+       "unchanged decoder inventory not reused";
+     check(ComponentHash.layout_sha256 result.snapshot=layout && ComponentHash.bytes_requested session=8192L)
+       "unchanged inventory rehashed private components");
+   let upgraded=match DngComponents.freeze_decoders
+     [bind private_id parent;bind (private_id^"/nested") {child with implementation_sha256=SemanticHash.string "child-upgrade"}] with
+     | Ok value -> value | Error reason -> failwith reason in
+   refresh upgraded 8305L (fun session result ->
+     check(result.reused=[private_id] && result.invalidated=[private_id^"/nested"])
+       "child upgrade invalidated unrelated parent binding";
+     check(ComponentHash.bytes_requested session=8305L &&
+       ComponentHash.projection result.snapshot ComponentHash.Encoded_pixels=pixels)
+       "child upgrade reread unrelated pixels");
+   let upgraded_parent=match DngComponents.freeze_decoders
+     [bind private_id {parent with implementation_sha256=SemanticHash.string "parent-upgrade"};
+      bind (private_id^"/nested") child] with
+     | Ok value -> value | Error reason -> failwith reason in
+   refresh upgraded_parent 8435L (fun session result ->
+     check(result.reused=[] && result.invalidated=[private_id])
+       "parent upgrade reused an invalidated descendant";
+     check(ComponentHash.bytes_requested session=8435L &&
+       ComponentHash.projection result.snapshot ComponentHash.Encoded_pixels=pixels)
+       "parent upgrade charged unrelated pixel reads");
+   let forged=List.map(fun (entry:DngComponents.outcome) ->
+     if entry.component_id=private_id then {entry with implementation_sha256=String.make 32 'X'}
+     else entry) previous in
+   check(try ignore(DngComponents.with_refreshed_checkpoint ~previous:forged ~decoders:frozen
+     ~expected_checkpoint_sha256:digest ~max_read_bytes:8192L file encoded
+     (fun _ _ -> failwith "forged provenance callback"));false
+     with ComponentHash.Invalid _ -> true) "historical provenance mismatch accepted";
+   let none=match DngComponents.freeze_decoders [] with Ok value -> value | Error reason -> failwith reason in
+   let removed=refresh none 8192L (fun session result ->
+     check(result.reused=[] && List.length result.invalidated=2 && ComponentHash.bytes_requested session=8192L)
+       "removed decoders retained private interpretations or read input";
+     let checkpoint=ComponentHash.checkpoint session result.snapshot in
+     ComponentHash.checkpoint_bytes checkpoint,ComponentHash.checkpoint_sha256 checkpoint) in
+   (match DngComponents.with_checkpoint ~expected_checkpoint_sha256:(snd removed) ~max_read_bytes:8192L
+     file (fst removed) (fun _ snapshot ->
+       check(ComponentHash.projection snapshot ComponentHash.Encoded_pixels=pixels)
+         "decoder removal checkpoint could not restore base") with
+     | Ok () -> () | Error reason -> failwith reason);
    (match DngComponents.with_checkpoint ~expected_checkpoint_sha256:digest ~max_read_bytes:8435L
      file encoded (fun session snapshot ->
        check(ComponentHash.projection snapshot ComponentHash.Encoded_pixels=pixels)

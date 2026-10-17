@@ -81,7 +81,7 @@ let replace_private_view session snapshot ~component ~expected_schema decoder =
     let pending=if node.children=[] then snapshot else
       ComponentHash.reset_private_view session snapshot ~component ~schema:"uninterpreted-private/0" in
     ComponentHash.apply_plugin session pending ~component (private_decoder decoder)
-let with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded callback =
+let with_checkpoint_base ~expected_checkpoint_sha256 ~max_read_bytes file encoded callback =
   match describe file with
   | Error reason -> Error reason
   | Ok base ->
@@ -89,7 +89,10 @@ let with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded cal
       ~expected_root_schema:"dng-physical-partition/0" ~max_read_bytes file encoded
       (fun session snapshot ->
         ComponentHash.validate_base session snapshot base;
-        callback session snapshot))
+        callback session snapshot base))
+let with_checkpoint ~expected_checkpoint_sha256 ~max_read_bytes file encoded callback =
+  with_checkpoint_base ~expected_checkpoint_sha256 ~max_read_bytes file encoded
+    (fun session snapshot _ -> callback session snapshot)
 let with_snapshot ~decoders ~max_read_bytes file callback =
   match describe file with
   | Error reason -> Error reason
@@ -111,3 +114,63 @@ let with_snapshot ~decoders ~max_read_bytes file callback =
           | Ok refined -> refined,outcome Refined::outcomes
       ) (initial,[]) decoders in
       callback session ~initial ~refined (List.rev outcomes)))
+
+type refresh = { snapshot : ComponentHash.snapshot; outcomes : outcome list;
+                 reused : string list; invalidated : string list }
+let with_refreshed_checkpoint ~previous ~decoders ~expected_checkpoint_sha256
+    ~max_read_bytes file encoded callback =
+  with_checkpoint_base ~expected_checkpoint_sha256 ~max_read_bytes file encoded
+    (fun session original base ->
+      if List.length previous>64 then raise(ComponentHash.Invalid "DNG previous decoder limit");
+      let schema (entry:outcome)=entry.decoder_id^"@"^SemanticHash.hex entry.implementation_sha256 in
+      let seen=Hashtbl.create 64 in
+      let applied=List.filter(fun (entry:outcome) ->
+        if not(bounded_id 256 entry.component_id) || not(bounded_id 128 entry.decoder_id) ||
+          String.length entry.implementation_sha256<>32 || Hashtbl.mem seen entry.component_id then
+          raise(ComponentHash.Invalid "DNG previous decoder provenance");
+        Hashtbl.add seen entry.component_id ();
+        match entry.status with
+        | Unmatched | Unsupported _ -> false
+        | Refined ->
+          (match find entry.component_id (ComponentHash.root original) with
+          | Some node when node.schema=schema entry &&
+              (node.role=ComponentHash.Private_metadata || node.role=ComponentHash.Opaque) -> true
+          | _ -> raise(ComponentHash.Invalid "DNG historical decoder view mismatch"))) previous in
+      let same (entry:outcome) (binding:binding)=entry.component_id=binding.component_id &&
+        entry.decoder_id=binding.decoder.id && entry.implementation_sha256=binding.decoder.implementation_sha256 in
+      let stale=List.filter(fun entry -> not(List.exists(same entry) decoders)) applied in
+      let affected id=List.exists(fun (entry:outcome) ->
+        let prefix=entry.component_id^"/" in
+        id=entry.component_id || (String.length id>String.length prefix &&
+          String.sub id 0 (String.length prefix)=prefix)) stale in
+      let reusable=List.filter(fun (entry:outcome) -> not(affected entry.component_id)) applied in
+      let stale=List.sort(fun (a:outcome) b -> compare(String.length a.component_id)(String.length b.component_id)) stale in
+      let rec base_schema id (spec:ComponentHash.spec)=
+        if spec.id=id then Some spec.schema else
+        List.fold_left(fun found child -> match found with Some _ -> found | None -> base_schema id child)
+          None spec.children in
+      let pending=List.fold_left(fun snapshot (entry:outcome) ->
+        match find entry.component_id (ComponentHash.root snapshot) with
+        | None -> snapshot
+        | Some _ -> ComponentHash.reset_private_view session snapshot ~component:entry.component_id
+            ~schema:(match base_schema entry.component_id base with Some schema -> schema
+              | None -> "uninterpreted-private/0")) original stale in
+      let snapshot,outcomes,reused=List.fold_left(fun (snapshot,outcomes,reused) (binding:binding) ->
+        let outcome status={component_id=binding.component_id;decoder_id=binding.decoder.id;
+          implementation_sha256=binding.decoder.implementation_sha256;status} in
+        let retain status=snapshot,outcome status::outcomes,reused in
+        match find binding.component_id (ComponentHash.root snapshot) with
+        | Some node when List.exists(fun entry -> same entry binding && node.schema=schema entry) reusable ->
+          snapshot,outcome Refined::outcomes,binding.component_id::reused
+        | None -> retain Unmatched
+        | Some node when node.children<>[] -> retain(Unsupported "target is already partitioned")
+        | Some node when node.role<>ComponentHash.Private_metadata && node.role<>ComponentHash.Opaque ->
+          retain(Unsupported "target is not private or opaque")
+        | Some _ ->
+          match ComponentHash.apply_plugin session snapshot ~component:binding.component_id
+            (private_decoder binding.decoder) with
+          | Error reason -> retain(Unsupported reason)
+          | Ok next -> next,outcome Refined::outcomes,reused
+      ) (pending,[],[]) decoders in
+      callback session {snapshot;outcomes=List.rev outcomes;reused=List.rev reused;
+        invalidated=List.map(fun (entry:outcome) -> entry.component_id) stale})
