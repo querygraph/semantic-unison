@@ -7,6 +7,15 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Restore-specific lifecycle successor now passes102workerchecks/compiler against
+the unchanged qualified stock/Ox production artifacts. New controls cover queued
+restore cancellation with zero read reports, changed input, insufficient budget,
+invalid digest/negative budget/oversized envelope preentry refusals, borrowed-FD
+preservation and successful recovery through filesystem admission. Actual
+37203/771174/0; worker26351reaped0/groupsabsent/allCPUtokensclosed. Receipt
+`tests/qualification/component-worker-restore-lifecycle-actual-20261017.json`.
+No media/SDK/EXIO, production source unchanged from the prior full builds.
+
 Worker restoration is connected: `SemanticWorkers.restore_components` takes bounded
 checkpoint bytes and separately trusted owner digest, verifies current input/base
 on a worker, returns immutable summaries/no fresh decoder approvals, and follows

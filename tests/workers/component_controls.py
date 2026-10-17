@@ -50,6 +50,7 @@ def main():
   for i,entry in enumerate([(273,4,1,4096),(279,4,1,1024),(700,1,16,1024),(50706,1,4,1025),(50740,1,128,3072)]):struct.pack_into('<HHII',data,10+12*i,*entry)
   data[1024:1040]=b'<x>one</x>      ';data[4096:5120]=b'P'*1024
   (target/'fixture.dng').write_bytes(data);(target/'unsupported.bin').write_bytes(b'original unsupported fixture')
+  changed=bytearray(data);changed[-1]=1;(target/'changed.dng').write_bytes(changed)
   includes=[build,build/'ubase',build/'system',build/'system/generic',build/'lwt',build/'lwt/generic']
   argv=[receipt['compiler']]+[v for p in includes for v in ('-I',str(p))]+['-I','+unix','-I','+str','unix.cmxa','str.cmxa']
   argv += [str(build/name) for name in modules]+[str(source)]+[str(build/name) for name in cobjects]+['-o',str(target/'components')]

@@ -78,16 +78,40 @@ let () =
    with W.Failed _ -> true) "worker accepted untrusted checkpoint";
  check(H.usage b=(0,0) && (W.usage pool).running=0 &&
    (Unix.fstat fd).Unix.st_kind=Unix.S_REG) "restore failure leaked budget or closed borrowed FD";
+ check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:digest ~encoded ~max_read_bytes:8191L fd));false
+   with W.Failed _ -> true) "under-budget restore accepted";
+ let changed=Unix.openfile "changed.dng" [Unix.O_RDONLY] 0 in
+ check(try ignore(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:digest ~encoded ~max_read_bytes:8192L changed));false
+   with W.Failed _ -> true) "changed input reused cached worker hashes";
+ Unix.close changed;
  Unix.close fd;finish pool b;
  let b=budget 1 in let io=IoAdmission.create ~per_device:1 ~max_pending:4 in
  let pool=W.create_with_io ~io ~workers:1 ~max_pending:4 ~budget:b in
+ let restore_reads=ref 0 in
+ W.set_read_observer pool (Some(fun _ _ -> incr restore_reads));
+ let restore_fd=Unix.openfile "fixture.dng" [Unix.O_RDONLY] 0 in
  let release=Lwt.wait () in
  let held=H.with_cpu_permits b ~weight:1 (H.cancellation()) (fun () -> release) in
  let cancel=H.cancellation() in let waiting=borrow pool cancel empty 8192L "fixture.dng" in
  H.cancel cancel;
  check(Lwt_unix.run waiting=None) "queued cancellation delivered component data";
+ let cancel=H.cancellation() in
+ let waiting=W.restore_components pool cancel ~expected_checkpoint_sha256:digest ~encoded
+   ~max_read_bytes:8192L restore_fd in
+ H.cancel cancel;
+ check(Lwt_unix.run waiting=None && !restore_reads=0)
+   "queued restore cancellation read input or delivered stale data";
  Lwt.wakeup release ();Lwt_unix.run held;
  check((IoAdmission.usage io).active_jobs=0) "cancelled component job retained IO gate";
+ let restored=summary(Lwt_unix.run(W.restore_components pool (H.cancellation())
+   ~expected_checkpoint_sha256:digest ~encoded ~max_read_bytes:8192L restore_fd)) in
+ check(restored.full_sha256=expected && !restore_reads=1)
+   "restore failed to recover through filesystem gate";
+ check(H.usage b=(0,0) && (IoAdmission.usage io).active_jobs=0)
+   "restore retained filesystem/CPU admission";
+ Unix.close restore_fd;W.set_read_observer pool None;
  check((summary(Lwt_unix.run(borrow pool (H.cancellation()) empty 8192L "fixture.dng"))).full_sha256=expected)
    "component job failed through filesystem gate";
  check(H.usage b=(0,0) && (IoAdmission.usage io).active_jobs=0 && (IoAdmission.usage io).pending=0)
@@ -97,6 +121,14 @@ let () =
    with Invalid_argument _ -> true) "negative public read budget admitted";
  check((W.usage pool).pending=0 && (Unix.fstat original).Unix.st_kind=Unix.S_REG)
    "negative admission borrowed caller descriptor";
+ List.iter(fun (sha,bytes,limit) ->
+   check(try ignore(W.restore_components pool (H.cancellation())
+     ~expected_checkpoint_sha256:sha ~encoded:bytes ~max_read_bytes:limit original);false
+     with Invalid_argument _ -> true) "invalid restore envelope admitted";
+   check((W.usage pool).pending=0 && (Unix.fstat original).Unix.st_kind=Unix.S_REG)
+     "restore preentry refusal borrowed caller descriptor")
+   [("bad",encoded,8192L);(digest,encoded,-1L);
+    (digest,String.make(ComponentHash.max_checkpoint_size+1) 'x',8192L)];
  Unix.close original;
  finish pool b;
  let b=budget 1 in let pool=W.create ~workers:1 ~max_pending:4 ~budget:b in
