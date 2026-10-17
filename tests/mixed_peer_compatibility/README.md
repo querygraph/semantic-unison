@@ -42,7 +42,7 @@ controls pass, including corrupt output and same-byte no-op replacement refusal.
 The flow tests mock call and prefix-audit boundaries; independent fake-frame
 auditor tests cover the latter separately. Neither is actual transport evidence.
 
-Still no coordinator/standalone worker CLI, shared-dispatch target or runtime
+Still no standalone worker CLI, shared-dispatch target or runtime
 admission. The parent must authenticate the complete build/source inventory,
 retain native owners, persist aggregate snapshots safely, re-read every raw proxy
 frame independently, verify generated files, and audit known failures before
@@ -56,5 +56,16 @@ independent final left/right bytes/identities. Seven composed worker/real-audito
 readback controls pass with only the native call boundary mocked. Tampered raw
 receipts/files, missing calls, changed no-op identity and timeout-success claims
 refuse. Known failure reports lifecycle only. This audit still supplies neither
-aggregate/parent termination nor FD-release authority; coordinator integration
+aggregate/parent termination nor FD-release authority; launch/lock integration
 and exact current build/source plan remain next.
+
+`coordinator.observe_and_reap` now supplies the retained settlement kernel. It
+awaits terminal state without signaling, independently audits separate-call raw
+proofs, observes only the owned group and calls wait4 only after other members
+are absent. Timeout, malformed/missing proof or live descendants retain the
+actual worker object; nested ownership carriers preserve identity. A successful
+result/nonzero exit contradiction becomes a functional failure after known reap.
+Six fake-owner/OS controls establish order and uncertainty behavior. No actual
+native wait/census/transport is qualified by these controls. The future owner
+must still implement exact launch, inherited resource validation, admission and
+immutable result persistence before requesting runtime review.

@@ -3980,3 +3980,11 @@ composedworker+REALauditor/readbacktests withONLYnativecallmock passed actual
 37829/9aa4ca/0/no session; own8closed/generated8KiBonly. Evidence mixed-peer-
 parent-controls-20261017.json. No transport/EXIO/camera/SDK. Coordinator/build
 inventory/freshplan/admission remain; camera request sourcepins unchanged.
+
+Mixed-peer retainedsettlement kernel implemented: observewithoutsignals, read
+result+independentrawaudit BEFOREgroupcensus/directwait4; preserveactualnested
+uncertaintycarrier+workerreference; livegroup/timeout refusesreap. Knownclosed
+result/exit contradictionfunctionalfalse. SixfakeOS/ownercontrols c2c5e1/0
+passed; no actualnativewait/census/transport/EXIO. Launch/packet/inheritedFD/
+admission/immutablepersistence integration remainsnext, no runtimegrant. Existing
+camera request sources remainfrozen unchanged.
