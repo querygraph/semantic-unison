@@ -132,6 +132,134 @@ index, archive-generation binding or automatic disk publication.
 
 ## Persistent owner-store contract (next implementation)
 
+### Owner-trusted selection ledger (source successor)
+
+`owner_index` is an immutable bounded value containing only previously trusted
+UDI/0 entries. Keys are the exact caller-owned root/path identities; selection
+also requires an explicit32-byte current generation. A different generation is
+a miss, never a reason to choose the newest-looking blob or trust disk contents.
+Insert requires absence, replacement/removal compare the old entry digest, and
+failed updates preserve the supplied prior value. Independent key updates
+commute. Generation digests have no inferred time or ordering semantics.
+
+`owner_index_usage` returns `(entry_count, encoded_entry_payload_bytes)`.
+
+The owner must serialize adoption against its current ledger. Two independently
+forked snapshots are still independent: these pure operations are not global
+atomic CAS or a cross-process writer lock. Limits are per-value encoded-entry
+payload (1..1024 entries,80B..8MiB); retained snapshots need separate aggregate
+memory accounting. Removal releases only this value's metadata charge, never a
+native cache reservation or on-disk object. The value may be shared immutably
+with qualified OxCaml workers; it owns no descriptors or source readers.
+
+`with_indexed_capture` selects that exact trusted owner/generation, then performs
+the complete metadata authentication and full-current-input/current-parser
+verification of `with_cache_capture` before decoder refresh. A selection miss
+returns before inspecting even supplied metadata/source readers or invoking the
+callback. Foreign/corrupt present evidence still raises after a selected entry;
+it cannot become an ordinary absence. This joins selection to actual reuse,
+without enabling managed namespace opening, disk-index persistence, archives,
+automatic fallback extraction or ordinary sync activation. Durable adoption still
+requires independent capture/FD settlement and owner-state publication.
+
+Original controls cover root/path/generation mismatch, stale insert/update/
+remove, immutable snapshots, independent insert order, separate count/byte
+exhaustion and malformed limits/identities. Actual capture reuse and changed-input
+refusal now go through indexed selection, with a zero-read-budget generation-miss
+control. Current qualification is in `tests/qualification/owner-index-actual-20261017.json`:
+1071DNGchecks/compiler, positive immutable-index Ox mode check, current stock/Ox
+Make/fullselftests/Dune compile,110workerchecks/compiler and1272current source
+checks pass/closed. An initial temporary interface-comment/source mismatch and
+worker refusal are preserved; only the corrected OxMake002/worker002 are adopted.
+This remains separate from PR4's prior scope and does not qualify automatically
+selected persistent disk caching.
+
+### UIX/0 owner-index manifest
+
+The index now exports a canonical reference-only manifest. It contains80header
+bytes plus32bytes per entry (maximum32848B), not duplicate UDI payloads. Hash this
+captured manifest and retain its digest and raw32 owner-state binding outside the
+untrusted blob in owner-controlled state. A newly computed disk checksum, peer
+report or the binding field alone cannot establish that provenance.
+
+| Offset | Field |
+| --- | --- |
+| 0 | Eight-byte magic `UIX` plus five NUL bytes (version0) |
+| 8 | Raw32-byte owner-state binding |
+| 40 | Big-endian u64 configured entry ceiling (1..1024) |
+| 48 | Big-endian u64 configured encoded-entry payload ceiling (80..8388608) |
+| 56 | Big-endian u64 entry count, bounded by the configured ceiling |
+| 64 | Big-endian u64 exact total encoded UDI payload bytes |
+| 72 | Big-endian u64 reserved zero |
+| 80 | Raw32-byte entry digests, in strict `(root_identity,path)` key order |
+
+Restore requires the prior trusted whole-manifest SHA, expected owner-state
+binding and exact configured limits. It rejects bad size, hash, binding, integer,
+framing and duplicate-reference evidence before the loader runs. Each loader
+call receives only a prior-trusted raw entry digest, never a pathname or plugin.
+The owner-controlled loader must bound its own IO/allocation to128KiB. Restore
+then authenticates that entry's exact bytes, parses its canonical UDI/0 fields,
+checks strict key order and enforces the exact aggregate byte charge. It checks
+cancellation between entries and before delivering the restored immutable value.
+Errors propagate with no partial ledger returned and no mutation of a prior view.
+
+This is metadata import/export, not filesystem durability, authenticated remote
+state, namespace installation or archive advancement. Entry payloads still need
+separate immutable storage and settled ownership. A selected entry still needs
+complete metadata authentication and current-input verification before reuse.
+Per-value limits do not cap aggregate retained snapshots/RSS. No data/source file
+is opened, duplicated or closed by this codec; a loader failure is not swallowed
+as a resource-settlement proof. Current qualification is separate from the previous pure-index receipt:
+`tests/qualification/owner-index-manifest-actual-20261017.json` records1234DNGchecks
+percompiler, fresh stock/Ox Make/fullselftests/Dune compilation,110workerchecks per
+compiler and1272current source hashes. All actual groups/CPU grants closed.
+
+Original controls cover stable roundtrip/commuting insertion encodings, empty
+manifests, binding/digest/policy failure, duplicate and reversed references,
+truncated/overflow/reserved/trailing data, damaged/missing/oversized entry loads,
+cancellation and unchanged prior views. Framing-vector truncations are counted
+as controls, not additional camera fixtures. No photos or SDK are involved.
+
+### Borrowed-FD manifest storage and immutable publication
+
+`write_owner_index` writes/syncs the captured UIX/0 bytes through the bounded
+private-stage writer and returns their whole digest. `read_owner_index` bounds
+size, verifies the manifest and referenced entries, and checks the manifest
+reader both before and after the loader runs. A loader-side mutation is refused
+before the helper delivers its result, rather than relying on later outer-reader
+retirement. Both functions borrow caller-owned descriptors/readers; they open,
+duplicate and close none. Actual entry loading remains owner-controlled.
+
+`prepare_owner_index_publication` independently hashes the stage against the
+captured ledger/binding, then pins the existing macOS private directory/stage/
+name ticket. The owner-only wrapper permits exactly one publication attempt,
+including failure before rename. `owner_index_published` preserves the actual
+native rename effect even if later checks fail. Collisions preserve the foreign
+object and unpublished stage; no overwrite, retry, reset or cleanup occurs.
+This uses the already-qualified exclusive-rename/fsync backend, not a second
+publisher or platform fallback. Publication does not close caller descriptors.
+
+This proves publication of manifest bytes only. It does not prove referenced
+entry/record presence, global writer exclusion, native quota reservation, FD
+settlement, hardware durability or the separately trusted owner-state commit.
+The owner must admit its IO/CPU/metadata space before stage creation, preserve
+failed stages/orphans and settle all borrowed resources before adopting a
+persistent pointer. No managed namespace or automatic cache activation is added.
+
+Original tiny controls exercise actual stage/write/read/publish/restore,
+position and FD preservation, wrong-binding and nonempty-stage refusal, actual
+rename identity, collision preservation and one-shot failure after removal of
+only the fixture's foreign object. A deterministic loader truncation must be
+rejected before result delivery. Separate Ox negative compile files cover both
+cache and manifest publication contexts; one earlier successful fixture run used
+one combined file and is not claimed as separate proof of both type boundaries.
+Current qualification is in `tests/qualification/owner-manifest-publication-actual-20261017.json`:
+1248DNGchecks/compiler, current stock/Ox Make/fullselftests/Dune compile,
+110workerchecks/compiler and1272current source checks pass/closed. Existing core
+fault controls cover the unchanged native publisher; no separate UIX postrename
+injection is claimed. No source photos, SDK, real cache or production publication
+is involved.
+
 ### Borrowed positional readers
 
 `SemanticFile.with_borrowed_fd` supplies a POSIX reader for owner-held source or

@@ -146,3 +146,83 @@ val with_cache_capture : owner_entry -> directory:Unix.file_descr ->
     invoking the callback; corrupt/foreign evidence and operational errors raise.
     No fallback extraction, opens/closes, selection, cleanup or publication. All
     source/cache readers and their borrowed descriptors remain caller-owned. *)
+
+type owner_index
+val empty_owner_index : max_entries:int -> max_bytes:int -> owner_index
+val owner_index_usage : owner_index -> int * int
+val select_owner_entry : owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> owner_entry option
+val replace_owner_entry : owner_index -> expected_entry_sha256:string option ->
+  owner_entry -> (owner_index, string) result
+val remove_owner_entry : owner_index -> root_identity:string -> path:string ->
+  expected_entry_sha256:string -> (owner_index, string) result
+(** Immutable owner-trusted selection ledger, at most1024 entries and8MiB encoded
+    entry payload. Caller chooses stricter positive limits. Keys are exact owner
+    root/path identities, not normalized/interpreted filesystem paths. Selection
+    requires the explicit current generation; no digest/time ordering or newest
+    disk-file inference. Insert requires absence; replace/remove compare the
+    previous trusted entry digest. Failed updates preserve the old value. Bounds
+    charge encoded metadata, not RSS, filesystem usage or native cache quota.
+    Only already trusted owner_entry values enter this ledger. Register durable
+    captures only after their separate descriptor/publication settlement; this
+    pure value proves neither settlement nor on-disk presence. Selected entries
+    still require authenticated metadata lookup and full-current-input restore.
+    No persistence, disk scan/open/close/eviction, quota refund, archive mutation,
+    peer authority or automatic source reading; snapshots can share immutably. *)
+
+val with_indexed_capture : owner_index -> root_identity:string -> path:string ->
+  generation_sha256:string -> directory:Unix.file_descr ->
+  record:(Unix.file_descr * SemanticFile.t) option ->
+  index:(Unix.file_descr * SemanticFile.t) option -> decoders:decoders ->
+  max_read_bytes:int64 -> SemanticFile.t ->
+  (ComponentHash.session -> refresh -> 'a) -> ('a, string) result
+(** Exact owner/generation selection followed by authenticated complete metadata
+    and full-current-input/parser verification, then scoped decoder refresh.
+    Selection miss returns Error before metadata/source inspection or callback;
+    never chooses a different generation or a digest discovered on disk. All
+    descriptor lifetimes/settlement and durable ledger publication are external.
+    No opens/closes, automatic fallback, archive advancement or disk scan. *)
+
+val max_owner_index_size : int
+val owner_index_bytes : binding:string -> owner_index -> string
+val restore_owner_index : ?check_cancel:(unit -> unit) ->
+  expected_manifest_sha256:string -> binding:string -> max_entries:int -> max_bytes:int ->
+  load_entry:(string -> string) -> string -> owner_index
+(** Canonical UIX/0 reference-only manifest, at most32848 bytes. Persist its whole
+    digest and raw32 owner-state binding in separately trusted owner state at
+    capture; hashing an arbitrary disk manifest is not that trust. Restore checks
+    digest/binding/exact limits/framing/unique references before invoking the
+    owner-controlled loader with each prior-trusted entry digest. Loader must
+    bound its own IO/allocation to owner_entry_max_size; it receives no pathname.
+    Every entry digest/canonical UDI/key order and exact aggregate payload charge
+    is independently checked. Wrong/missing entries and operational/cancellation
+    errors propagate without mutating the prior ledger or returning partial state.
+    Limits are per value, not aggregate RSS; owner serializes durable adoption.
+    No opens/closes, disk publication, archive trust, peer authority or source IO.
+    Selected entries still require authenticated metadata and full-input restore. *)
+
+val write_owner_index : binding:string -> owner_index -> Unix.file_descr -> string
+val read_owner_index : ?check_cancel:(unit -> unit) -> expected_manifest_sha256:string ->
+  binding:string -> max_entries:int -> max_bytes:int -> load_entry:(string -> string) ->
+  SemanticFile.t -> owner_index
+(** Bounded UIX/0 descriptor-only storage. Write borrows a fresh private0600 singly
+    linked output, syncs/checks it and returns the captured manifest digest. Read
+    checks bounded size and reader stability both before and after entry loading;
+    loader failure/cancellation propagates. All FD/readers remain caller-owned.
+    No opens/duplicates/closes, native quota reservation, namespace installation,
+    trusted-state update or automatic cache activation. *)
+
+type owner_index_publication
+val prepare_owner_index_publication : binding:string -> owner_index ->
+  directory:Unix.file_descr -> stage:Unix.file_descr -> temporary:string ->
+  SemanticFile.t -> owner_index_publication
+val publish_owner_index : owner_index_publication -> Unix.file_descr -> Unix.file_descr -> unit
+val owner_index_published : owner_index_publication -> bool
+(** Owner-only macOS immutable manifest publication. Independently hash/read back
+    the stage against the captured ledger/binding, then borrow the private native
+    directory/stage/name ticket. Exactly one publication attempt, including a
+    failed pre-rename call; no replay/reset. Actual rename state survives errors.
+    Caller preserves failed stages/orphans and owns resource/quota admission,
+    FD settlement, referenced-entry closure and separately trusted owner-state
+    commit. A published file alone is not durable index adoption or crash-recovery
+    authority. No output overwrites, cleanup, source-photo access or FD closes. *)

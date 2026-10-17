@@ -244,6 +244,210 @@ let () =
        let decode bytes sha=DngComponents.decode_owner_entry ~root_identity ~path ~generation_sha256
          ~expected_entry_sha256:sha bytes in
        let loaded=decode encoded digest in
+       let unwrap=function Ok value -> value | Error why -> failwith why in
+       let ledger=DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:8388608 in
+       let select index root name generation=DngComponents.select_owner_entry index
+         ~root_identity:root ~path:name ~generation_sha256:generation in
+       let selected index root name generation=Option.map DngComponents.owner_entry_sha256
+         (select index root name generation) in
+       check(DngComponents.owner_index_usage ledger=(0,0) && select ledger root_identity path generation_sha256=None)
+         "empty index granted an owner entry";
+       let first=unwrap(DngComponents.replace_owner_entry ledger ~expected_entry_sha256:None loaded) in
+       check(selected first root_identity path generation_sha256=Some digest)
+         "trusted index selection lost exact current entry";
+       check(select first (root_identity^"-other") path generation_sha256=None &&
+         select first root_identity (path^"-other") generation_sha256=None &&
+         select first root_identity path (SemanticHash.string "other-generation")=None)
+         "owner index crossed root/path/generation binding";
+       check(DngComponents.owner_index_usage ledger=(0,0)) "index insert mutated old snapshot";
+       check(match DngComponents.replace_owner_entry first ~expected_entry_sha256:None loaded with
+         Error _ -> true | _ -> false) "index overwrote without old-entry comparison";
+       check(match DngComponents.replace_owner_entry first ~expected_entry_sha256:(Some(String.make 32 'X')) loaded with
+         Error _ -> true | _ -> false) "index accepted stale digest comparison";
+       let newer_generation=SemanticHash.string "explicit-generation/2" in
+       let newer=DngComponents.make_owner_entry ~root_identity ~path ~generation_sha256:newer_generation
+         ~checkpoint ~outcomes in
+       let updated=unwrap(DngComponents.replace_owner_entry first ~expected_entry_sha256:(Some digest) newer) in
+       check(selected updated root_identity path newer_generation=Some(DngComponents.owner_entry_sha256 newer) &&
+         select updated root_identity path generation_sha256=None &&
+         selected first root_identity path generation_sha256=Some digest)
+         "generation replacement lost isolation or selected historical generation";
+       check(DngComponents.owner_index_usage updated=(1,String.length(DngComponents.owner_entry_bytes newer)))
+         "replacement double charged owner metadata";
+       let other=DngComponents.make_owner_entry ~root_identity ~path:(path^"-second") ~generation_sha256
+         ~checkpoint ~outcomes in
+       let both=unwrap(DngComponents.replace_owner_entry first ~expected_entry_sha256:None other) in
+       let reversed=unwrap(DngComponents.replace_owner_entry
+         (unwrap(DngComponents.replace_owner_entry ledger ~expected_entry_sha256:None other))
+         ~expected_entry_sha256:None loaded) in
+       check(DngComponents.owner_index_usage both=DngComponents.owner_index_usage reversed &&
+         selected both root_identity path generation_sha256=selected reversed root_identity path generation_sha256 &&
+         selected both root_identity (path^"-second") generation_sha256=
+           selected reversed root_identity (path^"-second") generation_sha256)
+         "independent trusted index inserts do not commute";
+       let manifest_binding=SemanticHash.string "original-index-owner-state/1" in
+       let manifest index=DngComponents.owner_index_bytes ~binding:manifest_binding index in
+       let manifest_bytes=manifest both in
+       let loader_calls=ref 0 in
+       let load_entry sha=
+         incr loader_calls;
+         if sha=digest then encoded
+         else if sha=DngComponents.owner_entry_sha256 other then DngComponents.owner_entry_bytes other
+         else failwith "unexpected manifest entry reference" in
+       let restore ?(loader=load_entry) ?(binding=manifest_binding) ?(entries=2)
+           ?(bytes=8388608) ?expected data =
+         DngComponents.restore_owner_index ~expected_manifest_sha256:
+           (match expected with None -> SemanticHash.string data | Some sha -> sha)
+           ~binding ~max_entries:entries ~max_bytes:bytes ~load_entry:loader data in
+       let restored=restore manifest_bytes in
+       check(!loader_calls=2 && manifest restored=manifest_bytes && manifest reversed=manifest_bytes &&
+         DngComponents.owner_index_usage restored=DngComponents.owner_index_usage both)
+         "manifest roundtrip/order changed trusted references or accounting";
+       check(selected restored root_identity path generation_sha256=Some digest &&
+         selected restored root_identity (path^"-second") generation_sha256=
+           Some(DngComponents.owner_entry_sha256 other)) "manifest restored wrong keys";
+       let empty_manifest=manifest ledger in
+       check(String.length empty_manifest=80 &&
+         DngComponents.owner_index_usage(restore ~loader:(fun _ -> failwith "empty manifest invoked loader") empty_manifest)=(0,0))
+         "empty manifest framing differs";
+       let no_load action reason=
+         loader_calls:=0;
+         check((try ignore(action ());false with ComponentHash.Invalid _ -> true) && !loader_calls=0) reason in
+       no_load (fun () -> restore ~expected:(String.make 32 'X') manifest_bytes)
+         "wrong manifest digest invoked loader";
+       no_load (fun () -> restore ~binding:(String.make 32 'Y') manifest_bytes)
+         "wrong owner-state binding invoked loader";
+       no_load (fun () -> restore ~entries:3 manifest_bytes) "manifest changed owner entry policy";
+       no_load (fun () -> restore ~bytes:8388607 manifest_bytes) "manifest changed owner byte policy";
+       no_load (fun () -> restore (manifest_bytes^"x")) "manifest accepted trailing bytes";
+       let altered at value=let bytes=Bytes.of_string manifest_bytes in Bytes.set bytes at value;Bytes.to_string bytes in
+       no_load (fun () -> restore (altered 0 'X')) "manifest accepted unknown version";
+       no_load (fun () -> restore (altered 56 '\128')) "manifest count overflow reached loader";
+       no_load (fun () -> restore (altered 79 '\001')) "manifest reserved bytes reached loader";
+       let duplicate=Bytes.of_string manifest_bytes in
+       Bytes.blit_string manifest_bytes 80 duplicate 112 32;
+       no_load (fun () -> restore (Bytes.to_string duplicate)) "duplicate manifest refs reached loader";
+       let reversed_bytes=Bytes.of_string manifest_bytes in
+       Bytes.blit_string manifest_bytes 112 reversed_bytes 80 32;
+       Bytes.blit_string manifest_bytes 80 reversed_bytes 112 32;
+       check(try ignore(restore(Bytes.to_string reversed_bytes));false with ComponentHash.Invalid _ -> true)
+         "manifest accepted noncanonical key order";
+       let damaged=Bytes.of_string encoded in Bytes.set damaged (Bytes.length damaged-1) 'Z';
+       check(try ignore(restore ~loader:(fun _ -> Bytes.to_string damaged) manifest_bytes);false
+         with ComponentHash.Invalid _ -> true) "manifest trusted damaged entry bytes";
+       check(try ignore(restore ~loader:(fun _ -> raise Not_found) manifest_bytes);false
+         with Not_found -> true) "manifest swallowed loader failure";
+       check(try ignore(restore ~loader:(fun _ -> String.make(DngComponents.owner_entry_max_size+1) 'x') manifest_bytes);false
+         with ComponentHash.Invalid _ -> true) "manifest ignored entry read bound";
+       let insufficient=Bytes.of_string manifest_bytes in Bytes.fill insufficient 64 8 '\000';
+       no_load(fun () -> restore(Bytes.to_string insufficient)) "manifest zero payload reached loader";
+       let cancel=ref false and loaded_count=ref 0 in
+       check(try ignore(DngComponents.restore_owner_index ~check_cancel:(fun () -> if !cancel then raise Exit)
+         ~expected_manifest_sha256:(SemanticHash.string manifest_bytes) ~binding:manifest_binding
+         ~max_entries:2 ~max_bytes:8388608 ~load_entry:(fun sha ->
+           incr loaded_count;let value=load_entry sha in cancel:=true;value) manifest_bytes);false
+         with Exit -> !loaded_count=1) "manifest restore ignored cancellation before next entry";
+       check(manifest both=manifest_bytes && selected both root_identity path generation_sha256=Some digest)
+         "failed manifest restore changed prior ledger";
+       for length=0 to String.length manifest_bytes-1 do
+         no_load (fun () -> restore(String.sub manifest_bytes 0 length)) "truncated manifest reached loader"
+       done;
+       if ComponentHash.record_publication_available () then with_capture_directory(fun folder directory ->
+         let with_stage name action=
+           let stage=Unix.openfile(Filename.concat folder name) [Unix.O_CREAT;Unix.O_EXCL;Unix.O_RDWR;Unix.O_CLOEXEC] 0o600 in
+           Fun.protect ~finally:(fun () -> Unix.close stage) (fun () -> action stage) in
+         let read stage loader=SemanticFile.with_borrowed_fd stage(fun file ->
+           DngComponents.read_owner_index ~expected_manifest_sha256:(SemanticHash.string manifest_bytes)
+             ~binding:manifest_binding ~max_entries:2 ~max_bytes:8388608 ~load_entry:loader file) in
+         with_stage "manifest.tmp" (fun stage ->
+           ignore(Unix.lseek stage 7 Unix.SEEK_SET);
+           check(DngComponents.write_owner_index ~binding:manifest_binding both stage=SemanticHash.string manifest_bytes &&
+             Unix.lseek stage 0 Unix.SEEK_CUR=7) "manifest stage bytes/position differ";
+           check(try ignore(DngComponents.write_owner_index ~binding:manifest_binding both stage);false
+             with ComponentHash.Invalid _ -> true) "manifest writer reused nonempty stage";
+           check(manifest(read stage load_entry)=manifest_bytes && Unix.lseek stage 0 Unix.SEEK_CUR=7)
+             "borrowed manifest reader changed metadata or shared position";
+           check(try ignore(SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding:(String.make 32 'X') both
+               ~directory ~stage ~temporary:"manifest.tmp" file));false
+             with ComponentHash.Invalid _ -> true) "manifest publisher accepted wrong owner binding";
+           let publication=SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding:manifest_binding both
+               ~directory ~stage ~temporary:"manifest.tmp" file) in
+           check(not(DngComponents.owner_index_published publication)) "manifest published during preparation";
+           DngComponents.publish_owner_index publication directory stage;
+           let target=Filename.concat folder (SemanticHash.hex(SemanticHash.string manifest_bytes)) in
+           check(DngComponents.owner_index_published publication && not(Sys.file_exists(Filename.concat folder "manifest.tmp")) &&
+             (Unix.lstat target).Unix.st_ino=(Unix.fstat stage).Unix.st_ino)
+             "manifest publication lost actual rename identity";
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with ComponentHash.Invalid _ -> true) "manifest publication replayed";
+           check(manifest(read stage load_entry)=manifest_bytes &&
+             (Unix.fstat stage).Unix.st_size=String.length manifest_bytes)
+             "published manifest not restorable or caller descriptor closed");
+         with_stage "collision.tmp" (fun stage ->
+           let binding=SemanticHash.string "other-index-owner-state" in
+           let bytes=DngComponents.owner_index_bytes ~binding both in
+           ignore(DngComponents.write_owner_index ~binding both stage);
+           let publication=SemanticFile.with_borrowed_fd stage(fun file ->
+             DngComponents.prepare_owner_index_publication ~binding both ~directory ~stage
+               ~temporary:"collision.tmp" file) in
+           let target=Filename.concat folder (SemanticHash.hex(SemanticHash.string bytes)) in
+           let foreign=Unix.openfile target [Unix.O_CREAT;Unix.O_EXCL;Unix.O_WRONLY] 0o600 in
+           let foreign_identity=Fun.protect ~finally:(fun () -> Unix.close foreign) (fun () ->
+             check(Unix.write_substring foreign "foreign" 0 7=7) "manifest collision fixture write";
+             (Unix.fstat foreign).Unix.st_ino) in
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with Unix.Unix_error(Unix.EEXIST,_,_) -> true) "manifest overwrote foreign target";
+           check(not(DngComponents.owner_index_published publication) &&
+             (Unix.lstat target).Unix.st_ino=foreign_identity && (Unix.stat target).Unix.st_size=7 &&
+             Sys.file_exists(Filename.concat folder "collision.tmp")) "manifest collision lost preserved effects";
+           Unix.unlink target; (* Only this fixture's deliberate collision. *)
+           check(try DngComponents.publish_owner_index publication directory stage;false
+             with ComponentHash.Invalid _ -> true) "failed manifest publication ticket replayed after collision removal");
+         with_stage "moving.tmp" (fun stage ->
+           ignore(DngComponents.write_owner_index ~binding:manifest_binding both stage);
+           let changed=ref false and delivered=ref false in
+           check(try SemanticFile.with_borrowed_fd stage(fun file ->
+             ignore(DngComponents.read_owner_index ~expected_manifest_sha256:(SemanticHash.string manifest_bytes)
+               ~binding:manifest_binding ~max_entries:2 ~max_bytes:8388608 ~load_entry:(fun sha ->
+                 if not !changed then (Unix.ftruncate stage 1;changed:=true);load_entry sha) file);
+             delivered:=true);false
+             with SemanticFile.Invalid _ -> !changed && not !delivered)
+             "changed manifest escaped helper before reader retirement";
+           check((Unix.fstat stage).Unix.st_size=1) "manifest reader closed mutated caller FD"));
+       let tiny=DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:(String.length encoded) in
+       let full=unwrap(DngComponents.replace_owner_entry tiny ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry full ~expected_entry_sha256:None other with
+         Error _ -> DngComponents.owner_index_usage full=(1,String.length encoded) | _ -> false)
+         "index capacity failure mutated old ledger";
+       let count_full=unwrap(DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:8388608)
+         ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry count_full ~expected_entry_sha256:None other with
+         Error _ -> true | _ -> false) "index ignored entry count with spare byte budget";
+       let byte_full=unwrap(DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:(String.length encoded))
+         ~expected_entry_sha256:None loaded) in
+       check(match DngComponents.replace_owner_entry byte_full ~expected_entry_sha256:None other with
+         Error _ -> true | _ -> false) "index ignored bytes with spare entry count";
+       check(match DngComponents.replace_owner_entry
+         (DngComponents.empty_owner_index ~max_entries:2 ~max_bytes:80) ~expected_entry_sha256:None loaded with
+         Error _ -> true | _ -> false) "index ignored encoded-byte bound";
+       check(match DngComponents.remove_owner_entry first ~root_identity ~path
+         ~expected_entry_sha256:(String.make 32 'X') with Error _ -> true | _ -> false)
+         "index removed stale entry";
+       let removed=unwrap(DngComponents.remove_owner_entry first ~root_identity ~path ~expected_entry_sha256:digest) in
+       check(DngComponents.owner_index_usage removed=(0,0) && selected first root_identity path generation_sha256=Some digest)
+         "index removal changed prior snapshot or retained metadata charge";
+       check(try ignore(select first root_identity path "bad");false with ComponentHash.Invalid _ -> true)
+         "index selected malformed generation";
+       check(try ignore(select first root_identity "bad\000path" generation_sha256);false with ComponentHash.Invalid _ -> true)
+         "index admitted malformed path identity";
+       check(try ignore(DngComponents.empty_owner_index ~max_entries:1025 ~max_bytes:8388608);false
+         with Invalid_argument _ -> true) "index count ceiling not enforced";
+       check(try ignore(DngComponents.empty_owner_index ~max_entries:1 ~max_bytes:8388609);false
+         with Invalid_argument _ -> true) "index byte ceiling not enforced";
        let record=ComponentHash.checkpoint_record ~binding:(DngComponents.owner_entry_binding entry) checkpoint in
        check(DngComponents.owner_entry_record_sha256 loaded=SemanticHash.string record &&
          DngComponents.owner_entry_outcomes loaded=outcomes) "owner entry lost record/inventory binding";
@@ -379,9 +583,16 @@ let () =
                    | _ -> false) "record-only orphan misclassified")
                end else begin
                  with_record(fun record -> with_index(fun index ->
-                   let reuse source action=DngComponents.with_cache_capture entry ~directory
+                   let reuse source action=DngComponents.with_indexed_capture first
+                     ~root_identity ~path ~generation_sha256 ~directory
                      ~record:(Some record) ~index:(Some index) ~decoders:frozen
                      ~max_read_bytes:8192L source action in
+                   check(match DngComponents.with_indexed_capture first ~root_identity ~path
+                     ~generation_sha256:newer_generation ~directory ~record:None ~index:None
+                     ~decoders:frozen ~max_read_bytes:0L file
+                     (fun _ _ -> failwith "generation miss delivered callback") with
+                     | Error "component owner index has no current entry" -> true | _ -> false)
+                     "generation miss attempted metadata or source reuse";
                    check(match reuse file (fun current refreshed ->
                      check(ComponentHash.bytes_requested current=8192L)
                        "cache reuse reread unchanged decoder spans";

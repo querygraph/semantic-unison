@@ -7,6 +7,54 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Manifest storage/publication successor on PR5 qualified. Borrowed-FD UIX write/
+read with pre/post-loader stability; owner-only native immutable publication,
+one attempt even afterfailedrename, actual-effectgetter. Sourcehelpers open/dup/
+close noFDs. Actualfocused56956/e8cf00/0 and full85962/0cfdd3/0 PASS/CLOSED;
+initialnativefixture94862/954705/0 preserved, separatefinal negativecompilefiles
+qualify cache+manifest contexts. Current56component+1005checkpoint+27publication
+fault+13readerfault+1248DNG+110workerchecks/compiler, freshstock/Ox Make/fullselftests/
+Dunecompile and1272current sourcepins match. All7observedworkers/groups/tokens
+closed. Receipt `tests/qualification/owner-manifest-publication-actual-20261017.json`.
+No quota reservation/namespace installation/trusted-state commit/crash-safe pointer/
+automaticrouting or actualPhoto/media/SDK/transport. Entry presence and FDsettlement
+still owner duties; new native fault scope is underlying unchanged core, not a
+separate UIXpostrename injector. Main frozen342RPC unchanged/no runtime grant.
+
+UIX/0 reference-manifest successor on PR5 is qualified. Header80B+32/reference,
+max32848B; prior trusted manifestSHA+ownerbinding+exactlimits required before
+entry resolution. Each referencedUDI independently digest/canonical/keyorder/
+aggregatebudget checked; cancellation and loadererrors propagate without partial
+ledger. Existing UDI decoder factored, unchanged UDI wire bytes. Actualfocused
+41977/9e212a/0 and full46659/898c87/0 PASS/CLOSED, all7workers/groups/tokensclosed.
+Current56component+1005checkpoint+27publicationfault+13readerfault+1234DNG+
+110workerchecks/compiler, freshstock/Ox Make/fullselftests/Dunecompile and1272
+sourcepins match. DNGcount includes framingvector truncations, not extra cameras.
+`tests/qualification/owner-index-manifest-actual-20261017.json`. No filesystem
+publication/durability/automaticrouting/archiveauthority, photos, SDK or transport.
+
+Draft PR5 https://github.com/querygraph/unison/pull/5 is stacked on PR4,
+`feat/component-owner-index` against `feat/component-cache-input-binding`.
+Qualified source/evidence0bfb4c9f; exact current scope and corrected source-rebind
+history below. PR4 remains separate/ready, main frozen342RPC untouched. No
+owned build/test handles or CPU/IO resources remain; no new runtime admission.
+
+Owner-index successor `feat/component-owner-index` in sibling
+`/Users/alexy/src/unison-component-index-20261017` is qualified on PR4 base835df2fc,
+leaving PR4 stable/ready. Bounded immutable trusted ledger (1024entries/8MiBencoded
+payload pervalue), exactroot/path/currentgeneration selection, pure olddigest
+replacement/removal and selected authenticated metadata/fullinput refresh.
+No inferred newestgeneration, globalCAS, namespace/persistence/automaticrouting,
+archiveadvancement/nativequota refund. Owner serializes adoption/retainedmemory.
+Focused14748/ba6934/0 and initialselector48015/b12b44/0 closed. Firstcontroller
+23119/d88402/0 had worker001reaped1 on OxMake001 temporarycomment/sourcepin
+mismatch; firstseal refused beforewrite/commit. Correctedactual70919/48638c/0,
+OxMake002+worker002 PASS/CLOSED. Selectedcurrent stockMake001/OxMake002/bothDune001
+1272sourcechecks match. Percompiler56component+1005checkpoint+27publicationfault+
+13readerfault+1071DNG+110workerchecks PASS. All7selectedworkers/groups/tokensclosed,
+originalfailurepreserved. `tests/qualification/owner-index-actual-20261017.json`.
+No SDK/photos/EXIO or RPC; main frozen342 unchanged/no transport grant inferred.
+
 Reader retirement follow-up qualified: read/iter/digest refuse expired readers
 BEFORE caller cancellation/iteration code can execute. Focused99430/44f833/0 and
 full44086/b80c8b/0 closed. Current56component+1005checkpoint+27publicationfault+
