@@ -7,6 +7,12 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Draft PR5 https://github.com/querygraph/unison/pull/5 is stacked on PR4,
+`feat/component-owner-index` against `feat/component-cache-input-binding`.
+Qualified source/evidence0bfb4c9f; exact current scope and corrected source-rebind
+history below. PR4 remains separate/ready, main frozen342RPC untouched. No
+owned build/test handles or CPU/IO resources remain; no new runtime admission.
+
 Owner-index successor `feat/component-owner-index` in sibling
 `/Users/alexy/src/unison-component-index-20261017` is qualified on PR4 base835df2fc,
 leaving PR4 stable/ready. Bounded immutable trusted ledger (1024entries/8MiBencoded
