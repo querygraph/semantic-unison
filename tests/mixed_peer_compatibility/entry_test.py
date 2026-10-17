@@ -85,4 +85,21 @@ class ArtifactBinding(unittest.TestCase):
     def test_parent_source_escape(self):
         self.mutate=lambda build:build.update(source_sha256={'src/../escape':'b'*64})
         with self.assertRaises(ValueError):self.check()
+class WorkerPreflight(unittest.TestCase):
+    def test_ordinary_refusal_emits_no_calls(self):
+        with tempfile.TemporaryDirectory(prefix='unison-mixed-refusal-') as temp:
+            packet=Path(temp)/'WORKER-PACKET.json'
+            with patch.object(e,'load',side_effect=ValueError('bad packet')),patch.object(e,'execute') as execute:
+                self.assertEqual(e.worker(packet),1)
+                execute.assert_not_called()
+            import json
+            result=json.loads((Path(temp)/'WORKER-RESULT.json').read_text())
+            self.assertTrue(result['no_calls_started']);self.assertEqual(result['invocations'],[])
+    def test_uncertain_packet_close_is_not_no_calls_release(self):
+        with tempfile.TemporaryDirectory(prefix='unison-mixed-refusal-') as temp:
+            original=UnresolvedOwnership('packet close uncertain',uncertain_fd=999)
+            with patch.object(e,'load',side_effect=original),patch.object(e,'retain',side_effect=Held) as held:
+                with self.assertRaises(Held):e.worker(Path(temp)/'WORKER-PACKET.json')
+            self.assertIs(held.call_args.args[1],original)
+            self.assertFalse((Path(temp)/'WORKER-RESULT.json').exists())
 if __name__=='__main__':unittest.main()

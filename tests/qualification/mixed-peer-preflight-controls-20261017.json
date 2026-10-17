@@ -1,0 +1,30 @@
+{
+  "scope": "Ten fake entry/artifact/preflight controls, no transport or actual canonicalIO",
+  "actual_terminal": {
+    "chunk": "02ca03",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-preflight-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "df029917c1a720bac296e2812881263c2e4082354f697c93238df6aee382b128"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-preflight-controls-20261017-001/SHARED-START.json",
+      "bytes": 1130,
+      "sha256": "64bc9931d7f0a7db02787a41f8f1de4ce17406f11425639de97655ebde0bde19"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-preflight-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 109,
+      "sha256": "1173b97f3b4a9b80377ede8e18f44a77ef68eeaa7f7ab530e66e86335111ef8a"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-preflight-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

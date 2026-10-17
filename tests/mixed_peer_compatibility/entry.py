@@ -82,23 +82,27 @@ def retain(path,error,owner=None):
 
 
 def worker(packet_path):
-    packet=load(packet_path);root=Path(packet_path).parent
-    plan=checked_plan(packet['plan_path'],packet['plan_sha256'])
-    require(root==Path(plan['workspace']) and Path(packet_path)==root/'WORKER-PACKET.json'
-            and packet['parent_pid']==os.getppid(),'worker packet/parent mismatch')
-    rows=packet['inherited_fds']
-    require(len(rows)==9 and len({r['fd'] for r in rows})==9
-            and [(r['device'],r['inode']) for r in rows]==inherited_identities(), 'exact inherited IO+CPU grant required')
-    for row in rows:
-        observed=os.fstat(row['fd'])
-        require((observed.st_dev,observed.st_ino)==(row['device'],row['inode']),'inherited FD identity differs')
-    verify_artifacts(plan)
+    root=Path(packet_path).parent
     saved={'complete':False,'cases':[],'invocations':[]};counter=0
     def persist(result):
         nonlocal saved,counter
         saved=copy.deepcopy(result)
         save(root/('WORKER-SNAPSHOT-%03d.json'%counter),saved);counter+=1
     try:
+        packet=load(packet_path)
+        plan=checked_plan(packet['plan_path'],packet['plan_sha256'])
+        require(root==Path(plan['workspace']) and Path(packet_path)==root/'WORKER-PACKET.json'
+                and type(packet['parent_pid']) is int and packet['parent_pid']==os.getppid(),
+                'worker packet/parent mismatch')
+        rows=packet['inherited_fds']
+        require(len(rows)==9 and len({r['fd'] for r in rows})==9
+                and [(r['device'],r['inode']) for r in rows]==inherited_identities(),
+                'exact inherited IO+CPU grant required')
+        for row in rows:
+            observed=os.fstat(row['fd'])
+            require((observed.st_dev,observed.st_ino)==(row['device'],row['inode']),
+                    'inherited FD identity differs')
+        verify_artifacts(plan)
         result=execute({k:v['path'] for k,v in plan['artifacts'].items()},root,
                        time.monotonic()+LIMITS['owner_observation_seconds']-10,persist)
     except UnresolvedOwnership as error:retain(root/'WORKER-UNKNOWN.json',error)

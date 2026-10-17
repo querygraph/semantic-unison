@@ -3999,3 +3999,12 @@ Evidence mixed-peer-entry-controls-20261017.json. NO mixed-peer admission/plan
 ortransportexecution yet. Need exactplan/dependency+preflight/persistence/lifecycle
 review beforefreshRootrequest; don't executeentry fromthissourcework. Existing
 camera request pins unchanged.
+
+Mixed-peer worker preflight corrected: ordinarypacket/FDidentity/artifact/source
+refusal before firstJournal now emitsfailedno-call result; closeuncertainty
+retainsactualcarrier/no falseknownclosure. Tenentrycontrols02ca03/0 PASSclosed.
+Oldpeer candidate75fcllxc/6ecf25c6 SOURCEinspection shows semantic-delta-v0 and
+target-binding-producer-v0 PRESENT, semantic-components-v0 absent. Anyselected
+runmustclaim EXACTolderfork interop, NOT arbitraryupstream or capability-absent
+producerfallback. Stillneed exactplan/sourcecurrentbuildbindingreview before
+runtimegrant. No binary executed/payload/EXIO. Camera request unchanged.

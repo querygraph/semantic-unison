@@ -86,3 +86,13 @@ frame refusal. These do not qualify a real entry invocation or transport. Exact
 plan generation, full dependency/persistence/preflight refusal review and bounded
 entry lifecycle qualification remain before a fresh runtime scheduling request.
 Do not create an admission locally or reuse any earlier grant.
+
+Worker preflight now emits an explicit failed no-call result on ordinary packet/
+source/artifact refusal before the first journal intent. A packet read/close
+uncertainty retains the original carrier and emits no false no-call closure. Ten
+entry controls pass after this correction. The proposed retained old binary from
+the earlier component probe already has semantic-delta and target-binding producer
+capabilities; it lacks component reports. A run against that binary qualifies
+that exact historical fork interoperation, not arbitrary upstream-version
+fallback or absence of producer-binding capability. Preserve that distinction
+when selecting artifacts and writing the final plan.
