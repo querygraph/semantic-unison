@@ -1,0 +1,30 @@
+{
+  "scope": "Five command-only controls, twelve inert configurations; no actual CLI or compatibility claim",
+  "actual_terminal": {
+    "chunk": "cd7fa7",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-peer-command-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "afd272bdaac9b2803889d830de6feb73c3292b557b055793578c9235e57e4864"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-command-controls-20261017-001/SHARED-START.json",
+      "bytes": 1135,
+      "sha256": "1621a11c3dcb9df36da481414c782bcb1d8aaa4ffca920ff27458f16039b70d7"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-command-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 103,
+      "sha256": "d03ce458f2a6cd2b4f27522f3aacad03ce1872c028853507c3ad02ca621bdcad"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-peer-command-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

@@ -3946,3 +3946,11 @@ runner subprocess.run(timeout90) lacks current complete client/server/pump/group
 proofs, so do NOTdispatch it as a qualified new mixed-peerwindow yet. Need finite
 owned transport wrapper/rawledgers before exactcurrentcandidate request. Camera
 request sourcepins unchanged; both queuedadmissions absent at turnread.
+
+Mixed-peer source successor begins tests/mixed_peer_compatibility: fixed4directions
+(currentstock/Oxclient orserver versusretainedoldstock),3phasesseed/update/noop,
+12CLI maximum. Current-only flags nevergo tooldpeer;2+2+2 withinUnison8. Five
+command-only controls actualcd7fa7/0/no session passed, inertpaths/no transport.
+README lists executor/journal/proxy/rawbinding/knownfailedprefix/fixture/current
+build/oldbinary/admission work stillrequired. NO runtimegrant or readyclaim.
+Existing camera request pins preserved; no canonicalEXIO/camera/SDK accessed.
