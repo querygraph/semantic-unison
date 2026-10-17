@@ -82,6 +82,11 @@ grant/deadline then recheck allpins/workspace and dispatchONCE, no oldslotreuse.
 Scope4CLI/4singleSDK, two clone-only equal-root pairs, off baseline then unchanged
 all-scanned require;16GiB declaredlogicalnotcap,600s observation/unknownretain,
 Unison8+EXglobal/no18borrow. No semantic/pixel/physical sharing/throughput claim.
+Exact readiness/source-review request sent to Photo Root queue
+`01a14774-94d7-78c2-b6ac-8cf4cd00ab25` after pushingc633902; prequeue179source
+pins/checked_plan/source metadata and absent workspace/admission revalidated.
+This queue is a REQUEST, not a grant or resource hold. Continue independent source
+work while awaiting fresh exact scheduling; do not reuse any historical slot.
 
 ## Current checkpoint — all-scanned scope implemented
 
