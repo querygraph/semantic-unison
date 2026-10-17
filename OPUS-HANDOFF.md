@@ -1,5 +1,20 @@
 # Unison implementation handoff
 
+Latest future auditor fix: source a3725eb5, draft PR10
+https://github.com/querygraph/unison/pull/10, branch feat/component-rpc-producer-audit,
+worktree /Users/alexy/src/unison-component-rpc-audit-20261017, based directly on
+this feature branch. Runtime inventory343 there pins producer_schema.py. Exact
+client/supervisor shapes replace the invented cancel_reason requirement while
+raw binding, independent synthetic-file SHA and genuine server cancellation/
+pump proof remain.36control groups (22coordinator/8readback/6saved) passed; the
+full simulated worker succeeds with real-shaped data and restoring the old
+lookup reproduces the original failure. Actual93347/15fd98/0 and9b669b/0, all
+containedgroups/CPUclosed. All318production source bytes unchanged/no rebuild;
+no RPC/SDK/media/IOadmission or new plan/workspace. See that branch's
+component-rpc-producer-audit-source-actual-20261017.json and
+doc/component-rpc-producer-audit-successor.md. Main's consumed342-source slot and
+all sealed references remain byte-identical, no replay/merge authorized.
+
 ## Current actual RPC and namespace state — 2026-10-17
 
 RPC V1 admission53a52254 is CONSUMED, not awaiting dispatch. Actual owner tool
