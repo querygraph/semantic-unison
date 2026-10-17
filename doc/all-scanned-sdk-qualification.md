@@ -25,6 +25,25 @@ EXglobal or media payload ran. The first batch's import-path failure and its
 known failed child/group closure are preserved; corrected002 and strengthened003
 passed. Evidence: `tests/qualification/all-scanned-sdk-transport-actual-20261017.json`.
 
+The complete-call join now exists in `tests/all_scanned_sdk_parent.py`. It checks
+exact stock baseline/validate then Ox baseline/validate commands, raw proxy frames,
+client/server/supervisor/pump lifetimes, server policy and four helper receipts.
+The validation phase must report the exact unchanged-replicas UI status; a generic
+zero-byte transfer summary or an identical-changes status cannot substitute.
+This observation depends on the pinned production UI branch; the audit alone does
+not authenticate its input or freshly inspect roots. It explicitly withholds
+private-path, fresh-source and aggregate/FD closure claims. Partial results are
+refused rather than interpreted as safe failed prefixes.
+
+The common journal has a separate `audit_validation_attempted` profile for these
+two phases. Its original sync profile still refuses validation identities; no
+rewriting baseline/validate into seed/update is used. Thirty inert controls,
+including existing journal regressions, passed actual120cc2/0/no session; child94218
+reaped0/groupothersabsent/CPU8 closed. Evidence:
+`tests/qualification/all-scanned-sdk-parent-actual-20261017.json`. No CLI/SDK/EXIO
+or media payload was used. Still implement bounded root preparation, aggregate
+executor, path observations and independent failed-prefix ownership before runtime.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under

@@ -89,6 +89,18 @@ known child/group/tokens closed; fresh002 fixed imports and003 added returned
 failure ordering. Still implement aggregate executor, cloned-root preparation,
 no-op/path-isolation and attempted-prefix joins before fresh runtime request.
 
+Complete-call parent join is now implemented in `all_scanned_sdk_parent.py`:
+strict four-call compiler/phase order, exact argv/server flags/raw proxy binding,
+transport lifetimes, both-endpoint SDK receipts and exact unchanged UI status.
+It does not authenticate records, freshly inspect roots, prove helper path
+isolation or authorize FD release. Partial results remain refused. The common
+journal adds a separate validation profile without relaxing sync profile rules.
+Thirty inert controls including journal regressions actual120cc2/0/no session
+passed; child94218 reaped0/groupothersabsent/CPU8 closed, no CLI/SDK/EXIO/media.
+Receipt `tests/qualification/all-scanned-sdk-parent-actual-20261017.json`.
+Next remains aggregate/root-preparation/path evidence and failed-prefix ownership,
+then fresh exact runtime request. No actual SDK admission exists for this feature.
+
 
 ## Held-output validation checkpoint
 
