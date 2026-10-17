@@ -24,7 +24,7 @@ import records
 def main():
     root=Path(tempfile.mkdtemp(prefix='unison-validation-scope-',dir='/private/tmp'));calls=[];artifacts={};source_pins={}
     for label in ('stock','ox'):
-        report=document('/private/tmp/unison-validation-scope-'+label+'-006-20261017/RESULT.json')
+        report=document('/private/tmp/unison-validation-scope-'+label+'-007-20261017/RESULT.json')
         assert report['complete'] and report['build_exit']==0
         src=Path(report['workspace'])/'src';compiler=report['compiler']
         assert hashlib.sha256(Path(compiler).read_bytes()).hexdigest()==report['compiler_sha256']
@@ -63,10 +63,19 @@ def main():
                 assert outcome['returncode']==0 and not outcome['capture_truncated']
             log=outcome['stdout']+'\n'+outcome['stderr']
             processes=records.parse(log);groups=records.parse_groups(log)
+            from all_scanned_sdk_paths import parse as parse_inputs, STAGE, FILE
+            inputs=parse_inputs(log)
             helper_rows=(work/'helper.calls').read_text().splitlines()
             pids={int(row.split('\t')[0]) for row in helper_rows}
             expected=hashlib.sha256(b'TOY0 claimed DNG').hexdigest()
             assert len(helper_rows)==len(pids)==len(processes)==len(groups)==2
+            assert len(inputs)==2
+            for row in inputs:
+                path=Path(row['path']);stage=STAGE.fullmatch(path.parent.name);file=FILE.fullmatch(path.name)
+                assert row['pid'] in pids and row['endpoint']=='client' and row['borrowed']
+                assert row['sha256']==expected and row['bytes']==len(b'TOY0 claimed DNG')
+                assert path.parent.parent==(work/'state').resolve() and stage and file
+                assert int(stage.group(1))==int(file.group(1))==outcome['client_cleanup']['pid']
             for process in processes:
                 assert process.pid in pids and process.status==('exit',0) and process.outcome=='completed' and process.complete_capture
                 assert process.candidate_sha256==expected and process.candidate_bytes==len(b'TOY0 claimed DNG')
@@ -74,7 +83,7 @@ def main():
                 assert any(g.pid==process.pid and g.candidate_sha256==expected and g.other_members==0 for g in groups)
             artifacts[str(work/'helper')]=hashlib.sha256((work/'helper').read_bytes()).hexdigest()
         finally:os.chdir(previous)
-    for p in (ROOT/'tests/validation_scope.ml',ROOT/'tests/validation_warning/helper.ml',ROOT/'tests/validation_process/records.py',Path(__file__).resolve()):source_pins[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
+    for p in (ROOT/'tests/validation_scope.ml',ROOT/'tests/validation_warning/helper.ml',ROOT/'tests/validation_process/records.py',ROOT/'tests/all_scanned_sdk_paths.py',Path(__file__).resolve()):source_pins[str(p)]=hashlib.sha256(p.read_bytes()).hexdigest()
     result=dict(calls=calls,source_pins=source_pins,linked_artifact_sha256=artifacts,workspace=str(root),
                 SDK_invoked=False,photo_payload_opened=False,scan_scope_enabled=True,
                 scope='Current production scanner objects/generated private roots. Actual scan RPC scope enabled; generated data/in-process original fake validators and unavailable-driver policy only. Four actual original fake-driver helpers total, with independent candidate SHA checks and raw process/group receipt binding. No SDK/Photo payload or real Adobe acceptance.')

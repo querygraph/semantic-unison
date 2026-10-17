@@ -18,6 +18,7 @@ from all_scanned_sdk_transport import Invoker
 from all_scanned_sdk_audit import settled_helpers, successful_helpers
 from all_scanned_sdk_parent import audit_complete
 from all_scanned_sdk_verify import verify_roots
+from all_scanned_sdk_paths import audit as audit_paths
 
 
 def execute(contract, workspace, deadline, *, prepare_sources,
@@ -104,6 +105,9 @@ def execute(contract, workspace, deadline, *, prepare_sources,
                 proofs['helper_verdict'] = successful_helpers(log,
                     candidate_sha256=contract['source']['sha256'],
                     candidate_bytes=contract['source']['bytes'], phase=phase)
+                proofs['private_owner_inputs'] = audit_paths(log, directory=directory,
+                    helpers=proofs['helper_verdict'], phase=phase,
+                    endpoint_pids=dict(client=outcome['client_cleanup']['pid'], server=raw['server_pid']))
                 expected_status = 'Nothing to do: replicas have not changed since last sync.'
                 allowed = {expected_status}
                 if phase == 'baseline':

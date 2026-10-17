@@ -66,3 +66,17 @@ bindings exercise the real driver invocation path, including driver inspection;
 they are not Adobe decode/raw-digest or pixel evidence. Real SDK all-scanned,
 actual remote-process peer combinations, live watcher and broader platform/corpus
 qualification remain open. The full SOL.md goal is incomplete.
+
+For explicit qualification, `-debug validation-input` records the owner context's
+candidate pathname as bounded raw-byte hex, candidate hash/size, helper PID and
+whether it borrowed an unchanged-file stage output. The record is emitted only
+after supervised execution returns. Paths longer than4096bytes are explicitly
+unavailable; they are not silently truncated into apparently complete evidence.
+Normal debug-off operation emits none of these paths. This is an owner observation,
+not an OS argv trace or hostile same-user sandbox guarantee.
+
+Current007 stock/Ox Make+Dune builds and actual generated scan/fake-helper
+records pass [current qualification](../tests/qualification/all-scanned-input-current-actual-20261017.json).
+The prospective SDK auditor joins helper identity to the endpoint-owned stage
+path and refuses paths inside replicas, mismatched owner PIDs and unborrowed
+inputs. No actual SDK or remote-process all-scanned run is inferred.

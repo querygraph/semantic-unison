@@ -7,6 +7,7 @@ from unittest.mock import patch
 import all_scanned_sdk_worker as worker
 import all_scanned_sdk_parent_test as parent_controls
 from all_scanned_sdk_plan import plan
+from all_scanned_sdk_audit_test import input_frame
 
 
 class Worker(unittest.TestCase):
@@ -37,6 +38,10 @@ class Worker(unittest.TestCase):
                     proposal = plan(self.binary, contract['tool'], self.directory)[self.phase]
                     argv = proposal['argv']; out['command'] = argv
                     out['proxy']['server_command'] = [argv[0], '-server', *proposal['server_flags']]
+                    out['stdout'] = '\n'.join(line for line in out['stdout'].splitlines() if 'validation-input]' not in line) + '\n'
+                    if self.phase == 'validate':
+                        out['stdout'] += input_frame('client', 200 + index * 2, 10 + index, self.directory)
+                        out['stdout'] += input_frame('server', 201 + index * 2, 100 + index, self.directory)
                     if mutation is not None: mutation(index, out)
                     self.journal.begin(dict(label=self.binary['label'], mode='validation', workers=3,
                                             directory=str(self.directory), stage=self.phase), argv)

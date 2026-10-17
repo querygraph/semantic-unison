@@ -38,7 +38,8 @@ def plan(binary, tool, workspace):
               '-adobevalidatetimeout', '90',
               '-adobevalidatescanfiles', '1', '-adobevalidatescanpathbytes', '4096',
               '-adobevalidatescanmaxmib', '256',
-              '-debug', 'validation-process', '-debug', 'validation-group']
+              '-debug', 'validation-process', '-debug', 'validation-group',
+              '-debug', 'validation-input']
 
     def invocation(policy, scope):
         flags = [*common, '-adobevalidate', policy, '-adobevalidatescope', scope]

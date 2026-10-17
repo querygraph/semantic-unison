@@ -96,7 +96,7 @@ let () =
   Prefs.loadStrings ["adobevalidate = require";"adobevalidator = "^driver;
     "adobevalidatorhash = "^SemanticHash.hex (SemanticHash.string (read driver));
     "adobevalidatorbuild = validation-warning-synthetic-1";
-    "debug = validation-process";"debug = validation-group"];
+    "debug = validation-process";"debug = validation-group";"debug = validation-input"];
   ignore (scan ());quiet ();
   let helper_lines=String.split_on_char '\n' (String.trim (read (driver^".calls"))) in
   check (List.length helper_lines=2) "configured fake driver did not run once on each endpoint";

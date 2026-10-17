@@ -11,6 +11,7 @@ sys.path.insert(0, str(ROOT / 'bench/sync'))
 from invocation_journal import audit_validation_attempted
 from all_scanned_sdk_plan import plan as command_plan
 from all_scanned_sdk_audit import successful_helpers
+from all_scanned_sdk_paths import audit as audit_paths
 
 
 def require(value, message):
@@ -58,6 +59,9 @@ def audit_complete(result, contract, *, raw_proxy_receipts):
         log = '\n'.join(outcome[name] for name in ('stdout', 'stderr', 'supervisor_output'))
         helpers = successful_helpers(log, candidate_sha256=contract['source']['sha256'],
                                      candidate_bytes=contract['source']['bytes'], phase=phase)
+        inputs = audit_paths(log, directory=directory, helpers=helpers, phase=phase,
+                             endpoint_pids=dict(client=outcome['client_cleanup']['pid'],
+                                                server=raw['server_pid']))
         if phase == 'validate':
             for helper in helpers['endpoints']:
                 require(helper['pid'] not in pids, 'duplicate helper identity in complete matrix')
@@ -70,9 +74,10 @@ def audit_complete(result, contract, *, raw_proxy_receipts):
         lines = (outcome['stdout'] + '\n' + outcome['stderr']).splitlines()
         require(sum(line in allowed for line in lines) == 1,
                 'exact no-transfer UI branch status missing or duplicated')
-        helper_proofs.append(dict(label=label, phase=phase, helpers=helpers,
+        helper_proofs.append(dict(label=label, phase=phase, helpers=helpers, inputs=inputs,
                                   no_transfer_status_observed=True))
     return dict(lifecycle, functional_status='PASSED', helper_calls=4, calls=helper_proofs,
                 candidate_path_isolation_proved=False, source_bytes_reverified=False,
+                private_owner_contexts_observed=True, OS_argv_traced=False,
                 aggregate_parent_fd_closure_proved=False, resource_release_authorized=False,
                 scope='command-bound complete no-op/helper observations; caller must authenticate source/build, paths, bytes and owner closure')

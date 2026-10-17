@@ -95,6 +95,22 @@ No retained camera, native clone syscall, SDK, CLI or EXglobal IO ran. Independe
 parent proof joining/authentication is still required before FD release; its
 current pure return deliberately withholds fresh-source authority.
 
+Private input owner-context evidence is now implemented. `validation-input`
+records the supervised helper PID, candidate SHA/size, bounded hex path and
+borrowed-output status. `all_scanned_sdk_paths.py` joins it to both endpoint
+helpers and requires `state/validation-scan-OWNER-.../.validation-OWNER-....dng`,
+with OWNER equal to the actual client or server PID. Both the worker and complete
+parent audit require these records for validation and no such records for the off
+baseline. Their output explicitly says OS_argv_traced=false; the trusted pinned
+driver must still be shown to use its supplied context pathname.
+
+Current007 Make+Dune stock/Ox compile and production-object local scan controls
+passed with4 actual original fake helpers/input records;49 inert SDK controls also
+passed. Evidence `tests/qualification/all-scanned-input-current-actual-20261017.json`.
+Remote owner-prefix behavior and actual Adobe validation still require the fresh
+outer executor/admission and runtime audit; generated local records do not replace
+that qualification. The original kernel/data-source reservations remain unchanged.
+
 For EACH compiler, prepare two distinct disposable clone-only replicas from the
 already retained Unison private DNG clone. Native clone refusal must stop, with no
 copy fallback, hardlink or Photo/original access. Hash only disposable inputs under

@@ -4,6 +4,13 @@
 
 ## Current checkpoint — opt-in all-scanned validation
 
+Latest007 [private-input qualification](tests/qualification/all-scanned-input-current-actual-20261017.json)
+adds opt-in owner-context path records joined to helper hash/PID and private stage
+provenance. Current stock/Ox Make+Dune builds,14nested compiler/test calls,
+4actual original fake helper/input records and49inert SDK controls passed/closed.
+No OS argv tracing/real SDK/remote all-scanned qualification is inferred; the
+previous006 evidence below remains historical. Full scope remains incomplete.
+
 The optional received/all-scanned scope now runs through the actual local scan
 RPC, including unchanged files, private snapshot ownership and frozen per-phase
 policies. Default off/received behavior remains unchanged. Current stock/Ox Make

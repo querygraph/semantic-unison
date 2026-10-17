@@ -10,6 +10,7 @@ import all_scanned_sdk_worker as worker
 import all_scanned_sdk_prepare as prep
 import all_scanned_sdk_prepare_test as preparation_controls
 from all_scanned_sdk_plan import plan, BUILD
+from all_scanned_sdk_audit_test import input_frame
 
 
 class ComposedVerification(unittest.TestCase):
@@ -52,6 +53,9 @@ class ComposedVerification(unittest.TestCase):
                         server_command=[argv[0], '-server', *proposal['server_flags']],
                         input_pump_joined=True, pump_errors=[], fault=None)
                     log = '' if self.phase == 'baseline' else frame('client', 200 + 2 * index) + frame('server', 201 + 2 * index)
+                    if self.phase == 'validate':
+                        log += input_frame('client', 200 + 2 * index, 10 + index, self.d, sha=digest, size=len(data))
+                        log += input_frame('server', 201 + 2 * index, 100 + index, self.d, sha=digest, size=len(data))
                     out = dict(command=argv, returncode=0, timed_out=False, fault=None,
                         client_cleanup=owner(10 + index), supervisor_cleanup=owner(20 + index),
                         capture_truncated=False, supervisor_capture_truncated=False,

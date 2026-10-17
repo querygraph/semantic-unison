@@ -5,6 +5,14 @@ SHA = 'a' * 64
 SIZE = 1234
 
 
+def input_frame(endpoint, helper_pid, owner_pid, directory, *, sha=SHA, size=SIZE):
+    path = (str(directory) + '/state/validation-scan-' + str(owner_pid) +
+            '-00000001-00000002/.validation-' + str(owner_pid) + '-00000003-00000004.dng')
+    prefix = '[server: validation-input] ' if endpoint == 'server' else '[validation-input] '
+    return (prefix + 'Helper input v0 pid=' + str(helper_pid) + ' candidate-sha256=' + sha +
+            ' candidate-bytes=' + str(size) + ' path-hex=' + path.encode().hex() + ' borrowed-output=true\n')
+
+
 def frame(endpoint, pid, *, count='0', errors='0', digest='valid', status='exit:0'):
     raw = ('UNISON-DNG-VALIDATION 1\ncandidate-sha256 ' + SHA +
            '\ncandidate-size 1234\ndriver-build ' + BUILD +

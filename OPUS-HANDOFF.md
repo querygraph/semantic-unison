@@ -7,6 +7,29 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest checkpoint — private helper input observations
+
+Current007 stock/Ox Make AND Dune build-only PASS/CLOSED, actual21013/826fd9/0/no
+session. Current-object endpoint/unchanged/scan controls plus inert SDK controls
+PASS/CLOSED, actual29114/f94d20/0/no session. Four contained controller groups
+and CPU8 sets closed;14nested compiler/test calls and4actual original fake
+helpers reaped/groupclosed. All4 owner-input records bind candidate SHA/size,
+actual helper PID, private stage path and endpoint owner PID. Separate49 inert
+SDK controls passed. Independently checked2451source hashes and1946compiled
+artifact hashes INCLUDING repeated checks. Receipt:
+`tests/qualification/all-scanned-input-current-actual-20261017.json`.
+Prior006 build/current-source qualification below is retained historical evidence.
+
+Production `validation-input` debug adds a separate bounded hex pathname record
+after supervised execution returns; normal behavior, wire format and existing
+process/group framing unchanged. It records the owner context's candidate and
+borrowed-output provenance, not kernel argv tracing or hostile sandbox authority.
+`all_scanned_sdk_paths.py` rejects absent/duplicate paths, wrong helper/owner/hash,
+original-root paths, unavailable/odd/NUL/dot components and unborrowed inputs.
+Future SDK plan explicitly enables this opt-in diagnostic; parent/worker join it.
+No SDK/retainedcamera/EXIO/nativeUI was invoked by this turn. Future SDK executor,
+admission/prefix/FD verification join and real remote run still outstanding.
+
 ## Current checkpoint — all-scanned scope implemented
 
 Opt-in `adobevalidatescope = all-scanned` is wired through the existing find RPC,

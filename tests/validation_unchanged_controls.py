@@ -21,7 +21,7 @@ from mixed_validation.execute import document
 def main():
     root=Path(tempfile.mkdtemp(prefix='unison-unchanged-entry-',dir='/private/tmp'));calls=[];artifacts={};source_pins={}
     for label in ('stock','ox'):
-        report=document('/private/tmp/unison-validation-scope-'+label+'-006-20261017/RESULT.json')
+        report=document('/private/tmp/unison-validation-scope-'+label+'-007-20261017/RESULT.json')
         assert report['complete'] and report['build_exit']==0
         src=Path(report['workspace'])/'src';compiler=report['compiler']
         assert hashlib.sha256(Path(compiler).read_bytes()).hexdigest()==report['compiler_sha256']

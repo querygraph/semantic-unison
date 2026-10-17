@@ -164,7 +164,15 @@ let validate_file ?partition ?borrowed_output ~reservation ~validators ~destinat
                     ~devices:(IoAdmission.devices_of_fds [fd]) run)
                   (function Some result -> return result
                    | None -> fail (Util.Transient "Borrowed validation I/O admission cancelled")))
-            (fun process -> trace_process expected process; return process) in
+            (fun process ->
+              Trace.debug "validation-input" (fun () ->
+                let pid=match process.HelperSupervisor.child_pid with
+                  | None -> "none" | Some pid -> string_of_int pid in
+                let encoded=if String.length candidate<=4096
+                  then SemanticHash.hex candidate else "unavailable" in
+                Util.msg "Helper input v0 pid=%s candidate-sha256=%s candidate-bytes=%Ld path-hex=%s borrowed-output=%b\n"
+                  pid expected.sha256 expected.size encoded (borrowed_output<>None));
+              trace_process expected process; return process) in
           let context = {
             CandidateValidator.supervisor;cancellation;cpu_budget=budget;candidate;destination;
             expected;resources=requirements;

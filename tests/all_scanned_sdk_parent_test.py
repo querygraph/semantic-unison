@@ -2,7 +2,7 @@ import copy
 import unittest
 from all_scanned_sdk_parent import audit_complete
 from all_scanned_sdk_plan import plan, BUILD
-from all_scanned_sdk_audit_test import frame, SHA, SIZE
+from all_scanned_sdk_audit_test import frame, input_frame, SHA, SIZE
 from invocation_journal import audit_attempted, audit_validation_attempted
 
 
@@ -30,6 +30,9 @@ class Parent(unittest.TestCase):
                        server_command=[argv[0], '-server', *command['server_flags']],
                        input_pump_joined=True, pump_errors=[], fault=None)
             log = '' if phase == 'baseline' else frame('client', 200 + index * 2) + frame('server', 201 + index * 2)
+            if phase == 'validate':
+                log += input_frame('client', 200 + index * 2, 10 + index, directory)
+                log += input_frame('server', 201 + index * 2, 100 + index, directory)
             out = dict(command=argv, returncode=0, timed_out=False, fault=None,
                        capture_truncated=False, supervisor_capture_truncated=False,
                        client_cleanup=owner(10 + index), supervisor_cleanup=owner(20 + index),
