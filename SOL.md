@@ -141,14 +141,28 @@ a reason to make all other cameras or fields wait.
 
 ## Current checkpoint — opt-in all-scanned validation
 
+The [DNG component adapter](doc/component-hashes.md#dng-adapter-and-inspector)
+now supplies bounded physical partitions from the same TIFF graph reader:
+inline/outlined standard and private values, encoded image-unit ranges,
+structural descriptors/padding and opaque gaps. Physical aliases refuse rather
+than double-count; XMP is optional for observation, unchanged for transfer.
+Read-only inspector `--components` exposes full SHA and five counted hash lanes.
+[Adapter evidence](tests/qualification/dng-components-actual-20261017.json)
+records stock/Ox68checks each plus existing layout/strict regressions,57 contained
+calls, four full Make/Dune builds and both inspector launcher builds. All owners
+and CPU8 closed; no real camera/SDK was read. These are encoded byte projections,
+not complete image/rendering identity; persistent caching and vendor children
+remain open. The preceding generic-core receipt retains its original scope.
+
 The worker-local [component hashing core](doc/component-hashes.md) now implements
 opaque gap coverage, separate typed hash lanes, bounded nested-decoder readers
 and incremental leaf refinement with unaffected pixel-node/hash reuse. Missing
 projections are unavailable rather than a constant empty pixel identity.
 [Current evidence](tests/qualification/component-hash-core-actual-20261017.json)
 records stock/Ox41checks each, scope-escape compile refusals, delivered-read
-accounting and four full builds. It is not yet DNG-fragment/worker/UI integrated
-or a persistent cache; real-camera coverage and cross-session reuse remain open.
+accounting and four full builds. The adapter above now connects DNG fragments
+and inspector output; worker/archive integration, persistent cache, real-camera
+coverage and cross-session reuse remain open.
 
 The first gradual-understanding transfer successor is now implemented:
 [DNG exact-layout profile](doc/dng-layout-exact.md), capability
@@ -160,9 +174,9 @@ semantic merge authority. Existing strict merge/cache whitelists remain intact.
 [Source/build/kernel evidence](tests/qualification/dng-layout-exact-source-actual-20261017.json)
 records stock/Ox49checks each, strict-profile safety regressions, four Make/Dune
 builds and the stock legacy kernel/inspector. It does not yet prove new remote
-receiving, camera/corpus deployment, the separate pixel hash forest, nested
-child-plugin composition or incremental cache; these remain implementation and
-qualification work under the design above.
+receiving or camera/corpus deployment. The component core and adapter above
+now provide the separate hash forest; actual vendor child modules, incremental
+cache and their runtime integration remain implementation/qualification work.
 
 Latest real-SDK successor **PASSED/CLOSED**:
 [four-call stock/Ox unchanged-file qualification](tests/qualification/all-scanned-sdk-v2-actual-20261017.json).

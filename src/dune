@@ -17,9 +17,9 @@
   (per_module
    ((action (run %{exe:semantic_mode_filter.exe} %{ocaml_version} %{input-file}))
     SemanticHash SemanticFile ComponentHash SemanticMailbox WholeFileClone ValidationSnapshot
-    FormatRecognition DngRecognition FormatExtension XmpObservation XmpMerge DngSemantic DngExtended DngLayout JpegSemantic SemanticDelta SemanticWorkers SemanticFormats)))
+    FormatRecognition DngRecognition FormatExtension XmpObservation XmpMerge DngSemantic DngExtended DngLayout DngComponents JpegSemantic SemanticDelta SemanticWorkers SemanticFormats)))
  (preprocessor_deps wholeFileClone.ox.mli.in validationSnapshot.ox.mli.in componentHash.ox.mli.in semanticHash.ox.mli.in semanticFile.ox.mli.in semanticMailbox.ox.mli.in
-  formatRecognition.ox.mli.in dngRecognition.ox.mli.in formatExtension.ox.mli.in xmpObservation.ox.mli.in xmpMerge.ox.mli.in dngSemantic.ox.mli.in dngExtended.ox.mli.in dngLayout.ox.mli.in jpegSemantic.ox.mli.in semanticDelta.ox.mli.in semanticFormats.ox.mli.in)
+  formatRecognition.ox.mli.in dngRecognition.ox.mli.in formatExtension.ox.mli.in xmpObservation.ox.mli.in xmpMerge.ox.mli.in dngSemantic.ox.mli.in dngExtended.ox.mli.in dngLayout.ox.mli.in dngComponents.ox.mli.in jpegSemantic.ox.mli.in semanticDelta.ox.mli.in semanticFormats.ox.mli.in)
  (foreign_stubs
   (language c)
   (flags :standard (:include semantic_hash_cflags.sexp))

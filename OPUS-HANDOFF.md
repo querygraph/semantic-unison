@@ -7,6 +7,37 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+## Latest DNG component adapter and inspector: generated controls PASS/CLOSED
+
+Current `DngComponents.describe` consumes bounded claims from the existing
+DngSemantic graph parser: classic/BigTIFF, both byte orders; inline/outlined
+standard/private values; encoded image-unit ranges; structural descriptors and
+padding. Unrecognized values conservatively private, unclaimed gaps opaque;
+no vendor meaning/stability claim. Physical aliases refuse independently claimed
+components; at most480 regions keeps core node/gap accounting bounded. XMP is
+optional for observations, existing transfer profile requirements unchanged.
+`semantic-inspect --components` now reports full SHA/layout view and five counted
+optional role projections. No components means null, never empty-pixel identity.
+Value schemas bind type/count/byte order; image lanes cover encoded unit bytes,
+not complete raw/preview classification or rendering dependencies/equivalence.
+
+Actual focused80459/a5ba17/0/no session:57 contained calls,68 new DNG checks per
+stock/Ox plus49 layout and4scalar/8private strict-profile regressions each;
+new JSON and legacy inspector calls passed. Four full Make/Dune builds actual
+34054/c92ae0/0/no session,1896 source hashes rechecked. Retained-inspector
+launcher builds stock/Ox actual7600/8f2137/0,zero input executions in those build
+receipts. All owned groups/CPU8 closed; no real media/SDK/EXglobal acquired.
+Receipt `tests/qualification/dng-components-actual-20261017.json`19712B
+SHAee43db2e1b7688b49d3da6ce914cd8d563c31d36f597463e53f1babd51e5f06a.
+Earlier001 outlined-only and002 inline controls passed/retained as historical;
+003 is current integration evidence. No active process/resources/new grant.
+
+Next: owner-frozen actual vendor child decoders and persistent versioned cache
+with qualified input/preservation bindings; worker/archive integration and
+actual remote/camera qualification remain open. No exhaustive private mapping
+release gate; unknown bytes stay exact. Older core-only status below is historic,
+not a claim the DNG adapter is still missing. No consumed admission replay.
+
 ## Latest incremental component core: implemented and qualified, not DNG-bound yet
 
 New `ComponentHash` MLmodule supplies typedphysicalpartitions/roles, fullSHA plus

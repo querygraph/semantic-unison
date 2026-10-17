@@ -76,7 +76,7 @@ OCAMLOBJS = \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
           borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
           semanticHash.cmo semanticFile.cmo componentHash.cmo validationSnapshot.cmo formatExtension.cmo formatRecognition.cmo \
-          xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo dngLayout.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
+          xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo dngLayout.cmo dngComponents.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
           validationTreeBudget.cmo validationTreePolicy.cmo semanticRuntime.cmo supervisedExternal.cmo semanticMergeCache.cmo semanticSync.cmo semanticRemote.cmo \
           validationStage.cmo validationStageWork.cmo validationDescriptor.cmo candidateValidation.cmo validationScanWork.cmo finalPublication.cmo targetBinding.cmo \
@@ -300,6 +300,15 @@ componentHash.cmo: componentHash.ml componentHash.cmi semantic_mode_filter$(EXEC
 
 componentHash.cmx: componentHash.ml componentHash.cmi semantic_mode_filter$(EXEC_EXT)
 	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/componentHash.ml
+
+dngComponents.cmi: dngComponents.mli dngComponents.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngComponents.mli
+
+dngComponents.cmo: dngComponents.ml dngComponents.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngComponents.ml
+
+dngComponents.cmx: dngComponents.ml dngComponents.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngComponents.ml
 
 dngLayout.cmi: dngLayout.mli dngLayout.ox.mli.in semantic_mode_filter$(EXEC_EXT)
 	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/dngLayout.mli
