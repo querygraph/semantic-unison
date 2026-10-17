@@ -12,7 +12,7 @@ root = /absolute/first/root
 root = /absolute/second/root
 clone = auto
 semanticdng = true
-semanticworkers = 0
+semanticworkers = 3
 ```
 
 `semanticdng = true` enables the built-in DNG profiles, preferring the
@@ -22,6 +22,8 @@ The separately negotiated [exact-layout fallback](dng-layout-exact.md),
 `org.firstpair.dng-layout/0`, now follows the strict profiles when enabled by
 the shorthand. It preserves opaque private data and verifies complete donor
 bytes without claiming private grammar, semantic merge or pixel equivalence.
+The example uses three workers per endpoint so two loopback endpoints plus two
+owner/orchestration credits fit the standing Unison8 allocation.
 `semanticworkers = 0` selects physical cores on macOS, falling back to available
 logical CPUs on other platforms or if topology is unavailable. A positive
 integer sets a per-process budget shared by semantic workers and validators.
@@ -34,11 +36,17 @@ photographic-corpus or full-sync speedup. Production validation uses one thread
 per file; concurrent files consume the shared budget.
 The budget is local to each Unison process, not machine-wide across peers or
 other applications. Two loopback endpoints using automatic mode can each select
-18 on this host. For a coordinated two-endpoint evaluation, explicitly setting
-`semanticworkers = 8` on both endpoints budgets16 worker/helper credits in total
-and leaves room for the owners and bridge. This is scheduling guidance, not an
-OS-enforced CPU limit or a measured optimal worker count. A genuinely remote
-endpoint has its own machine budget.
+18 on this host. For the standing equal split on this shared18-core host, Unison owns CPU00..07,
+Photo08..15, and two credits remain idle for the system. Set
+`semanticworkers = 3` on both loopback endpoints:3+3+2owner/orchestration credits
+fit Unison8. Build jobs remain at most2 within that allocation. Automatic18 or
+36-worker experiments require a separately coordinated exception; the historical
+comparisons above do not authorize borrowing Photo credits. A positive preference
+alone does not acquire canonical tokens. Use the owned dispatcher for coordinated
+jobs; [build entrypoints](oxcaml.md#current-build-evidence-and-shared-machine-entry-point)
+and [the test runner](../tests/README.md) describe the source-qualified routes.
+Credits are cooperative accounting, not an OS CPU/thread limit. A genuinely
+remote endpoint has its own machine budget and coordination requirements.
 Profiles are trusted, compiled extensions, selected by exact versioned ID.
 Neither extension code nor helper commands are accepted from a peer.
 
@@ -112,6 +120,34 @@ eligible DNG can still be inspected. Unsupported `.dng` files and older peers
 show an honest unsupported/unavailable report; ordinary unsupported text uses
 the configured external diff. Remote reports use the negotiated, bounded
 [SIR/0 protocol](semantic-report-v0.md), without fetching the whole file.
+
+For advisory byte-role details, additionally set `semanticcomponents = true`.
+An explicit details request reports separate encoded image, standard/private
+metadata, structural and opaque projections; missing roles are unavailable.
+Unknown MakerNotes remain exactly covered. Equal encoded-byte projections do
+not establish equal rendered pixels and do not change conflict decisions.
+
+Local report caching is separately opt-in:
+
+```text
+componentownercache = true
+componentcacheparent = /absolute/private/cache-parent-for-this-root
+```
+
+The parent must already exist, be owned/private0700, and be distinct for each
+root and outside synchronized content. Provision it explicitly; the option does
+not recursively create or adopt an arbitrary directory. Keep these endpoint-local
+settings on the corresponding owner. Cache metadata is authenticated and bounded;
+restoring an interpretation still verifies the complete current input. Capacity
+exhaustion skips optional storage while preserving a successful report. Remote
+endpoint cache routing remains absent. See [managed store](component-managed-store.md)
+for ownership, archive adoption and recovery limits.
+
+The standalone inspector also supports `--components`; the shared manual target
+selects it with `INSPECT_COMPONENTS=1` and an explicit retained build receipt.
+These commands do not supply permission to read retained camera/Photo data or
+acquire a shared payload IO window. [Inspector documentation](../tools/semantic-inspect/README.md)
+keeps advisory observation separate from transfer-profile selection.
 
 `-debug semantic` explains successful semantic transfers and fallback during
 synchronization. Successful application reports the complete metadata payload

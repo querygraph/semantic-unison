@@ -3926,3 +3926,12 @@ source and scoped evidence instead of historical PR4/integration snapshot. PR13
 description refreshed around final behavior/nativeownedcallers/gradualrefinement/
 remainingtransport+camera evidence. Forkmasterbase/draft preserved; no merge.
 No production or camera-request pinned source changed.
+
+Userguide correction: doc/semantic-sync.md previously suggested8workers at EACH
+loopback endpoint (16plusowners), inconsistent with standingUnison8. Example now
+3+3+2, buildjobs<=2, canonicaltokens separate from semanticworkers preference.
+Historical18/36measurements retained with explicit freshborrow coordination.
+Documented actual semanticcomponents/componentownercache/componentcacheparent
+names against productiondefinitions; endpoint-localprivateparent/full-source
+restore/advisoryencodedpixels limits explicit. Documentationonly, no sourcepins
+changed/no camera IO.
