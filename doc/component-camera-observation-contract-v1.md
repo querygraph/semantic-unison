@@ -32,9 +32,8 @@ and declared read/log budgets. It must pin the executable runner, interpreter,
 all sources and prior fixture evidence. It needs separate explicit Photo IO
 coordination before payload launch. Older consumed camera/SDK grants do not apply.
 
-Current qualification covers ten metadata-only contract controls. It does not
-qualify the composed dispatcher path, actual camera classification, semantic
-eligibility, decoded pixels, IO savings or receiving authority. Next: disposable
-composed dispatcher success/changed-input controls, then freeze the one-input
-request. Preserve all unknown/private bytes exactly and report role hashes as
+Current qualification covers ten metadata-only contract controls and25 fake-owner/
+fake-lease dispatcher lifecycle controls (four inspector-specific). It does not
+qualify a new real canonical IO dispatch, actual camera classification, semantic
+eligibility, decoded pixels, IO savings or receiving authority. Prepared request: doc/camera-components-request-v1.json. It is not an admission. Preserve all unknown/private bytes exactly and report role hashes as
 advisory; incomplete MakerNote meaning is not a deployment blocker.

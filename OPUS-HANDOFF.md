@@ -3891,3 +3891,13 @@ Ten contract/postcheck controls passed actual1e9df2/0/no session under own8, no
 EXIO/camera payload. Source plan doc/component-camera-observation-contract-v1.md
 records remaining composed dispatcher tests before fresh one-input request.
 No camera request/admission issued by this change.
+
+
+Composed dispatcher lifecycle suite25PASS actual61538/fba2a2/0/no session,
+including four inspector cases: unchanged, changed, missing, closeuncertainty.
+Fake owners/leases only; no canonical IO qualification implied. Prepared exact
+doc/camera-components-request-v1.json for one advisory component observation on
+retained Unison clone307228717. Eightfield lstat unchanged; no source payload
+opened/hashed. Current stock inspector+26kernel pins, interpreter, dispatcher
+closure and four prerequisites pinned; Unison8+EXglobal,300s,declared2GiBread/
+16MiBlogs notinstrumented. NO admission/dispatch. Root review/scheduling next.

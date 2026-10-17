@@ -111,6 +111,10 @@ class Lifecycle(unittest.TestCase):
             if self.audit_error: raise self.audit_error
             return {'rows':18,'cli_invocations':54}
         with ExitStack() as stack:
+            if target == 'inspect-file':
+                stack.enter_context(patch('shared_io_pool.read_manifest', return_value={
+                    'inspector_contract': {'input': '/never-opened', 'input_identity': {'epoch': 1}}}))
+                stack.enter_context(patch('inspector_io_contract.check', return_value=set()))
             stack.enter_context(patch('shared_audit.audit_shared',side_effect=audit))
             stack.enter_context(patch('invocation_journal.audit_attempted',side_effect=audit))
             stack.enter_context(patch.object(d.Pool,'read',return_value=cpu_pool))
@@ -120,6 +124,38 @@ class Lifecycle(unittest.TestCase):
             stack.enter_context(patch.object(d,'retain_after_record',side_effect=self.retain))
             return d.run(target,[sys.executable,str(Path(__file__).resolve())],
                          self.output,8,io_admission={'path':'/never-read','sha256':'0'*64})
+
+    def test_inspector_unchanged_postcheck_precedes_close(self):
+        def observed(path):
+            self.assertIn('settle', self.events)
+            self.assertFalse(self.cpu.closed or self.io.closed)
+            return {'epoch': 1}
+        with patch('inspector_io_contract.identity', side_effect=observed):
+            self.assertEqual(self.run_case('inspect-file'), 0)
+        receipt=json.loads((self.output/'SHARED-CLOSED.json').read_text())
+        self.assertTrue(receipt['inspector_input_postcheck']['unchanged'])
+        self.assertEqual(self.events,['acquire:io','acquire:cpu','spawn','settle','close:cpu','close:io'])
+
+    def test_inspector_changed_input_known_closed_failure(self):
+        with patch('inspector_io_contract.identity', return_value={'epoch': 2}):
+            self.assertEqual(self.run_case('inspect-file'), 3)
+        self.assertTrue(self.cpu.closed and self.io.closed)
+        self.assertIsNone(self.held_record)
+        receipt=json.loads((self.output/'SHARED-CLOSED.json').read_text())
+        self.assertFalse(receipt['inspector_input_postcheck']['unchanged'])
+
+    def test_inspector_missing_input_known_closed_failure(self):
+        with patch('inspector_io_contract.identity', side_effect=FileNotFoundError('removed')):
+            self.assertEqual(self.run_case('inspect-file'), 3)
+        self.assertTrue(self.cpu.closed and self.io.closed)
+        self.assertIsNone(self.held_record)
+
+    def test_inspector_postcheck_does_not_override_close_uncertainty(self):
+        self.io.failure=UnresolvedOwnership('io close unknown',uncertain_fd=101)
+        with patch('inspector_io_contract.identity', return_value={'epoch': 2}):
+            with self.assertRaises(Retained): self.run_case('inspect-file')
+        self.assertEqual(self.held_record['uncertain_fd'],101)
+        self.assertFalse((self.output/'SHARED-CLOSED.json').exists())
 
     def test_sync_external_proofs_precede_group_reap_and_io_close(self):
         self.assertEqual(self.run_case('sync-functional'),0)
