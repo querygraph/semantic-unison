@@ -1,0 +1,28 @@
+{
+  "state": "INDEPENDENT_ROOT_NARROW_SAVED_RPC_FUNCTIONAL_ADOPTION_RECONCILED",
+  "root_receipt": {
+    "path": "/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-COMPONENT-RPC-V1-SAVED-RECEIPT-FUNCTIONAL-ADOPTION-20261017.json",
+    "bytes": 1028,
+    "sha256": "f3bc1d0f5effb47ff44e08a7b31d4263f1e81932b5e9f7b4209540bd986a4d62"
+  },
+  "saved_audit": {
+    "path": "/private/tmp/u-cr-cf119542138e/SAVED-AUDIT-V2.json",
+    "bytes": 3472,
+    "sha256": "d6d94f4cc0c98970ced63d17063086873101811527efd7568fa1e7cb4c0198b8"
+  },
+  "original_exit_code": 1,
+  "original_bytes_preserved": true,
+  "cases_verified": 8,
+  "roles": {
+    "supported": 4,
+    "noCapability": 2,
+    "unsupported": 1,
+    "disabled": 1
+  },
+  "frozen_source_pins_verified": 342,
+  "generated_payload_reads": 0,
+  "transport_replay": false,
+  "new_runtime_admission": false,
+  "resource_release_authority": false,
+  "scope": "Separately adopts saved eight-case functional report evidence; no original runtime PASS rewrite, persistence/rendering authority, new generated payload hash or successor grant"
+}

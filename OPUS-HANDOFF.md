@@ -17,8 +17,11 @@ expected fixture hashes computed IN MEMORY and current16lstat fences. It does NO
 open/re-hash generated payload or turn original ownerexit1 into0. Actual metadata
 outputaudit e27a2d/0; six original control groups/13negative-schema variants actual
 90276/474f52/0, bothcontainedgroups/CPUclosed. Savedresult d6d94f4c is separate
-source-bound functional evidence; independent Root functional adoption is not
-claimed. See doc/component-remote-actual-saved-audit.md and qualifications
+source-bound functional evidence. Root has now separately adopted all8saved
+cases in UNISON-COMPONENT-RPC-V1-SAVED-RECEIPT-FUNCTIONAL-ADOPTION-20261017.json,
+with342pins and0payload reads/replay/newadmission. Exact local reconciliation:
+tests/qualification/component-remote-root-saved-functional-adoption-20261017.json.
+This preserves original exit1 and does not claim a new independent payload hash. See doc/component-remote-actual-saved-audit.md and qualifications
 component-remote-actual-saved-audit-20261017.json plus root-closure-adoption.
 Main frozen342runtime sources/request/plan remain byte-identical; old slot never
 runs again. Next audit tooling fix must be versioned, preserve the original run

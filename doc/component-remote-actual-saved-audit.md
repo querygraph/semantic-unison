@@ -40,3 +40,9 @@ plan,342execution sources and consumed admission remain intact. Any future
 runtime coordinator fix requires a versioned source/plan/workspace, never reuse
 of this consumed grant. No Photo/camera/SDK/receiving, rendering, corpus or timing
 qualification follows from this eight-case advisory component inspection.
+
+Independent Root adoption subsequently verified all eight saved cases,342frozen
+source pins and32metadata reads with zero payload reads or replay. It explicitly
+preserves original exit1 and original bytes and grants no new runtime/release
+authority. See `tests/qualification/component-remote-root-saved-functional-adoption-20261017.json`.
+The earlier sealed return remains unchanged; this is a later adoption addendum.
