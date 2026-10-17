@@ -7,6 +7,17 @@ Implementation HEAD before the initial handoff:
 
 ## Read this first
 
+Known-entry lookup final record recheck now has targeted race+ablation proof.
+Existing readercallback redirects equal-byte record afterrecordauth/duringindex
+check; normalcode refusesbeforeresultdelivery. Copied filtered variant removing
+onlyfinalrecordcheck reaches exactescaped-resultassertion onstock/Ox. Normal1043
+DNGchecks/compiler PASS42365/6e723a/0, worker73695reaped0/groupsabsent/tokensclosed.
+Initialdriver expecteduncaughtexit1 instead ofactual2 preserved; corrected only
+expectedcode, guardassertionunchanged. Receipt
+`tests/qualification/dng-cache-lookup-race-actual-20261017.json`. Production source
+unchanged;1272currentSRCpins rebound againstprior4builds, no fullrebuild claim.
+Managednamespace opening/automaticselection/recoveryscan remainopen; no SDK/media/EXIO.
+
 Known trusted-entry recovery lookup implemented: actual no-follow presence must
 match provided borrowedreaders; nativeFD/name/private/size/epoch checks around
 bounded record/index authentication. Complete/record-only/entry-only/missing

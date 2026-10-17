@@ -83,6 +83,23 @@ def main():
                 leak.write_text('let leak (capture:DngComponents.cache_capture) = Domain.Safe.spawn (fun () -> ignore(DngComponents.cache_capture_state capture))\n')
                 refused=call([compiler,'-c',leak.name],expected=2)
                 assert 'nonportable' in refused['stderr'] or 'contended' in refused['stderr']
+            # Original guard-removal control in an isolated filtered copy only.
+            implementation=work/'dngComponents.ml';original=implementation.read_text()
+            guard='  (match record with None -> () | Some pair -> check record_name (ComponentHash.max_checkpoint_size+80) pair);\n'
+            assert original.count(guard)==1
+            ablated=original.replace(guard,'')
+            try:
+                implementation.write_text(ablated)
+                call(command[:-1]+['dng-component-ablation'])
+                negative=call([str(work/'dng-component-ablation')],expected=2)
+                assert 'changed named record escaped lookup before reader retirement' in negative['stderr']
+                result.setdefault('lookup_guard_ablations',{})[label]={
+                    'production_source_modified':False,'removed_guard':guard.strip(),
+                    'filtered_original_sha256':hashlib.sha256(original.encode()).hexdigest(),
+                    'ablated_sha256':hashlib.sha256(ablated.encode()).hexdigest(),
+                    'expected_failure':'changed named record escaped lookup before reader retirement'}
+                save(root,result)
+            finally:implementation.write_text(original)
         finally:os.chdir(previous)
     assert all(hashlib.sha256(Path(p).read_bytes()).hexdigest()==sha for p,sha in result['source_pins'].items())
     result['complete']=True;save(root,result);print(root,flush=True)

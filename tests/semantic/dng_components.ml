@@ -379,6 +379,23 @@ let () =
                    check(try ignore(DngComponents.inspect_cache_capture entry ~directory
                      ~record:(Some(entry_stage,snd record)) ~index:(Some index));false
                      with ComponentHash.Invalid _ -> true) "lookup reader/FD mismatch accepted"));
+                 let armed=ref false and changed=ref false and delivered=ref false in
+                 let moving_backup=Filename.concat folder "midlookup-record-backup" in
+                 let during_index_check ()=if !armed && not !changed then begin
+                   Unix.rename record_target moving_backup;
+                   Unix.symlink "midlookup-record-backup" record_target;changed:=true
+                 end in
+                 let refused=Fun.protect ~finally:(fun () ->
+                   if !changed then (Unix.unlink record_target;Unix.rename moving_backup record_target)) (fun () ->
+                   try SemanticFile.with_fd record_stage (fun record_file ->
+                     SemanticFile.with_fd ~check_cancel:during_index_check entry_stage (fun entry_file ->
+                       armed:=true;
+                       ignore(DngComponents.inspect_cache_capture entry ~directory
+                         ~record:(Some(record_stage,record_file)) ~index:(Some(entry_stage,entry_file)));
+                       delivered:=true));false
+                   with ComponentHash.Invalid _ | SemanticFile.Invalid _ | Unix.Unix_error _ -> true) in
+                 check !changed "midlookup namespace mutation was not exercised";
+                 check(refused && not !delivered) "changed named record escaped lookup before reader retirement";
                  (* Redirect a real digest leaf to an equal-byte original fixture backup.
                     Following symlinks would wrongly accept this exact-content alias. *)
                  let backup=Filename.concat folder "original-record-backup" in

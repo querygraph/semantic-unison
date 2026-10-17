@@ -151,6 +151,17 @@ input/base verification before cached component reuse. A digest computed from
 discovered unknown cache bytes is not a trusted owner entry. Managed namespace
 opening, automatic selection and recovery scanning remain separate work.
 
+The lookup now has a deterministic mid-read namespace-race control using the
+existing reader cancellation callback, with no production injection hook. After
+record authentication but during index checking, it redirects the record name
+to an equal-byte fixture backup. The function must refuse before delivering a
+result, even if outer reader retirement would independently detect the change.
+An isolated filtered copy with only the final record check removed fails that
+exact delivery-boundary assertion on stock and Ox. Normal1043DNGchecks/compiler
+pass; counts include metadata-vector truncations. Production source is unchanged
+and its four existing full-build source pin sets were rebound, not rerun. See
+`tests/qualification/dng-cache-lookup-race-actual-20261017.json`.
+
 ### Quota-bound paired capture
 
 The explicit capture helper now routes record+owner-entry staging through one
