@@ -3290,3 +3290,41 @@ request publication. Root review/grant is not assumed from queue/resource releas
 Runtime must use fresh published SHA/deadline once and exact request command; no
 oldgrant/retry. No owned jobs/tokens/IO held. Keep this candidate's execution pins
 frozen pending review; independent source work should use a sibling successor.
+
+
+## Independent component source-FD successor — IN PROGRESS 2026-10-17
+
+Checkout /Users/alexy/src/unison-component-source-owner-20261017, branch
+fix/component-source-fd-owner, based on frozen integration72a19d9d. Submitted
+property request in integration checkout remains unchanged. Latest read at
+Unix1792235853 found no admission; no payload/IO run is started or assumed.
+
+Source inspection found legacy held_files cleanup could downgrade source-close
+uncertainty. The component inspector now records explicit regular source ownership
+before validation, waits for worker completion, closes once, and merges nested
+cache uncertainty into retained source ownership. Existing other transfer/inspection
+families are unchanged. The component RPC source scope now also holds its outer
+admission on the same carrier (wire schema unchanged). Carrier origin can be a
+regular file; new cache_origin_descriptor accessor makes that explicit.
+
+Directed stock/Ox native/fault controls actual64616/a62110/0 passed; worker17616
+reaped0/groupabsent/tokensclosed. Source-owner EIO retains regular identity and
+rejects second close. Full stock build/selftests ACTUALtool68157 now started in
+/private/tmp/unison-source-fd-owner-stock-make-20261017-001; collect terminal before
+any competing own8 dispatch. Not yet full-build/route qualified, no new SDK/IOgrant.
+
+
+## Component source owner QUALIFIED — 2026-10-17
+
+Current source successor stock/Ox Make+selftests/Dune, directed regular-source
+close uncertainty and normal/retained report controls PASS. Actual68157/f7fcc6/0,
+86131/980c64/0,55793/0e866e/0 andauditors57596/22ac80/0/no sessions; allcontained
+workers/groups/tokensclosed. All36auditorgroups pass with unchanged wire schema;
+no actual new transport. RPC source scope now holds admission on carrier too.
+Receipt component-source-fd-owner-actual-20261017.json pins exact objects/sources.
+
+Frozen integration property requeste60975f3 andall38execution+318productionpins
+rehashed unchanged AFTER source work; its admission still not inferred. This fix
+remains separate, notmergedintofrozencandidate. Other legacy semantic/transfer
+cleanup families remain outside this scoped fix; no blanket settlement claim.
+Zero owned jobs/resources; no SDK/camera/Photo payload/native/IO dispatch.

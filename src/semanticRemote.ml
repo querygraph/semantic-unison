@@ -384,32 +384,37 @@ let capture_component f = BorrowedWork.catch f (function
       return (component_failure (operation ^ ": " ^ Unix.error_message error))
   | error -> fail error)
 let inspect_components ?worker cancellation path =
-    capture_component (fun () ->
-          let fd=Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-          let files=register_held_fd fd in
-          BorrowedWork.try_bind (fun () -> borrowed files (fun () ->
-            let stats=Unix.LargeFile.fstat fd in
-            let decoders=match DngComponents.freeze_decoders [] with
-              | Ok value -> value | Error why -> raise (Util.Transient why) in
-            let pool=(SemanticRuntime.get ()).pool in
-            match worker with
-            | None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes:stats.st_size fd
-            | Some inspect -> inspect ~pool ~cancellation ~decoders ~max_read_bytes:stats.st_size fd))
-            (fun result ->
-              let observed = try match result with
-                | None -> component_failure "Component inspection cancelled"
-                | Some value when not (same_report_stats value.SemanticWorkers.stats (Fs.stat path)) ->
-                    component_failure "File changed or was replaced during component inspection"
-                | Some value ->
-                    let component_observation=match value.SemanticWorkers.components with
-                      | Error why -> Error (SemanticReport.reason why)
-                      | Ok summary -> Ok {SemanticReport.schema=component_schema;
-                          full_sha256=summary.full_sha256;layout_sha256=summary.layout_sha256;
-                          projections=summary.projections} in
-                    {component_observation;component_snapshot=Some (path,value.stats)}
-                with error -> held_files.release_noerr files; raise error in
-              held_files.release files; return observed)
-            (fun error -> held_files.release_noerr files; fail error))
+  capture_component (fun () ->
+    let settled=ref false in
+    let source=DngComponents.open_component_source(fun () ->
+      Fs.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0) in
+    let fd=DngComponents.component_source_descriptor source in
+    let finish cause =
+      settled:=true;
+      try DngComponents.settle_component_source source cause;None with error -> Some error in
+    BorrowedWork.try_bind (fun () ->
+      let stats=Unix.LargeFile.fstat fd in
+      let decoders=match DngComponents.freeze_decoders [] with
+        | Ok value -> value | Error why -> raise(Util.Transient why) in
+      let pool=(SemanticRuntime.get()).pool in
+      match worker with
+      | None -> SemanticWorkers.components pool cancellation ~decoders ~max_read_bytes:stats.st_size fd
+      | Some inspect -> inspect ~pool ~cancellation ~decoders ~max_read_bytes:stats.st_size fd)
+      (fun result ->
+        let observed=match result with
+          | None -> component_failure "Component inspection cancelled"
+          | Some value when not(same_report_stats value.SemanticWorkers.stats (Fs.stat path)) ->
+            component_failure "File changed or was replaced during component inspection"
+          | Some value ->
+            let component_observation=match value.SemanticWorkers.components with
+              | Error why -> Error(SemanticReport.reason why)
+              | Ok summary -> Ok {SemanticReport.schema=component_schema;
+                full_sha256=summary.full_sha256;layout_sha256=summary.layout_sha256;
+                projections=summary.projections} in
+            {component_observation;component_snapshot=Some(path,value.stats)} in
+        match finish None with None -> return observed | Some error -> fail error)
+      (fun error -> if !settled then fail error else
+        match finish (Some error) with Some error -> fail error | None -> assert false))
 let inspect_file ?(meaning=false) cancellation extension path =
   let profile = FormatExtension.profile extension in
   capture_report profile (fun () ->
@@ -444,26 +449,6 @@ let components_supported connection = Remote.connectionVersion connection >= 1 &
 let valid_component_request (path,schema,nonce) =
   schema=component_schema && String.length nonce=32 &&
   not (Filename.is_relative path) && not (String.contains path '\000')
-let component_scope connection request f =
-  if valid_component_request request && components_supported connection && component_profile_enabled () then
-    (* Fixed bounded model/summary, not editable payloads; keep the source envelope
-       through encoding and queued RPC output without nested admission. *)
-    SemanticRuntime.with_transaction ~role:SemanticAdmission.Source
-      ~max_payload:component_envelope_payload (fun _ -> f ())
-  else f ()
-let inspect_components_source connection ((path,schema,nonce) as request) =
-  if not (valid_component_request request) then fail (Util.Transient "Invalid component inspection request")
-  else
-    let finish observation=return (SemanticReport.encode_components ~nonce ~schema observation) in
-    if not (components_supported connection && component_profile_enabled ()) then
-      finish (Error "Component inspection is not enabled or negotiated")
-    else BorrowedWork.bind (fun () -> SemanticRuntime.with_cancellation (fun cancellation ->
-      inspect_components cancellation (Fspath.canonize (Some path))))
-      (fun result -> finish result.component_observation)
-let inspect_components_peer = Remote.registerBoundedServerCmd "semanticComponentsV0"
-  ~withScope:component_scope ~maxArgs:(max_path+128+32+1024)
-  ~maxResult:(SemanticReport.max_component_size+1024) inspection_args
-  (Umarshal.bounded_string SemanticReport.max_component_size) inspect_components_source
 (* Retain inside the resource lease: propagating an exception out of it would
    retire credits despite unresolved native descriptor ownership. Allocate the
    held promise/node/link before inspection can acquire a cache descriptor. *)
@@ -491,6 +476,26 @@ let hold_component_uncertainty work =
       (try Trace.log "Component cache ownership uncertain; report admission remains held.\n" with _ -> ());
       pending
     | error -> Lwt.fail error)
+let component_scope connection request f =
+  if valid_component_request request && components_supported connection && component_profile_enabled () then
+    (* Fixed bounded model/summary, not editable payloads; keep the source envelope
+       through encoding and queued RPC output without nested admission. *)
+    SemanticRuntime.with_transaction ~role:SemanticAdmission.Source
+      ~max_payload:component_envelope_payload (fun _ -> hold_component_uncertainty f)
+  else f ()
+let inspect_components_source connection ((path,schema,nonce) as request) =
+  if not (valid_component_request request) then fail (Util.Transient "Invalid component inspection request")
+  else
+    let finish observation=return (SemanticReport.encode_components ~nonce ~schema observation) in
+    if not (components_supported connection && component_profile_enabled ()) then
+      finish (Error "Component inspection is not enabled or negotiated")
+    else BorrowedWork.bind (fun () -> SemanticRuntime.with_cancellation (fun cancellation ->
+      inspect_components cancellation (Fspath.canonize (Some path))))
+      (fun result -> finish result.component_observation)
+let inspect_components_peer = Remote.registerBoundedServerCmd "semanticComponentsV0"
+  ~withScope:component_scope ~maxArgs:(max_path+128+32+1024)
+  ~maxResult:(SemanticReport.max_component_size+1024) inspection_args
+  (Umarshal.bounded_string SemanticReport.max_component_size) inspect_components_source
 let observe_components_using local_worker ~root ~path =
   match fst root with
   | Common.Local -> capture_component (fun () ->

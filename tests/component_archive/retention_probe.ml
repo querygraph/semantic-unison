@@ -43,14 +43,14 @@ let ()=
  Lwt_unix.run(Globals.propagatePrefs ());
  let left=snd(fst(Globals.roots ())) in
  ignore(Update.findUpdates ~wantWatcher:false None);
- let storage=Filename.concat state "uncertain-parent" in Unix.mkdir storage 0o700;
- let owner=DngComponents.open_cache_parent storage in
- let descriptor=DngComponents.cache_parent_descriptor owner in
- Unix.close descriptor;
- let uncertain=try DngComponents.settle_cache_parent owner None;failwith "expected uncertain close"
-  with DngComponents.Cache_ownership_uncertain _ as error -> error in
  let path=Filename.concat state "tiny-input" in
  let out=open_out_bin path in output_string out "original";close_out out;
+ let owner=DngComponents.open_component_source(fun () -> Unix.openfile path
+  [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0) in
+ let descriptor=DngComponents.component_source_descriptor owner in
+ Unix.close descriptor;
+ let uncertain=try DngComponents.settle_component_source owner None;failwith "expected uncertain close"
+  with DngComponents.Cache_ownership_uncertain _ as error -> error in
  let before=SemanticRuntime.admission_usage () in
  let cancellation=ref None in
  let pending=SemanticRemote.observe_components_with_worker

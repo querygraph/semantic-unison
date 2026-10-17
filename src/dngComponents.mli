@@ -345,3 +345,16 @@ val settle_cache_parent : cache_parent -> exn option -> unit
     Close failure retains last observed identity and never retries a number.
     Descriptor access remains borrowed, requiring caller-exclusive lifetime.
     No mkdir, namespace discovery, canonical IO or source access permission. *)
+
+type component_source
+val open_component_source : (unit -> Unix.file_descr) -> component_source
+val component_source_descriptor : component_source -> Unix.file_descr
+val settle_component_source : component_source -> exn option -> unit
+val cache_origin_descriptor : cache_ownership -> cache_descriptor
+(** Prepared ownership exists before the opener runs. The opener must return its
+    new owned FD immediately without post-open actions; regular-file validation
+    runs after recording ownership. Source remains borrowed to workers, settled
+    exactly once after their completion. Close uncertainty retains identity and
+    nested cache uncertainty retains this source. No finalizer or numeric retry.
+    The carrier origin accessor may describe a regular source; historical
+    directory-named accessors remain unchanged for existing metadata callers. *)

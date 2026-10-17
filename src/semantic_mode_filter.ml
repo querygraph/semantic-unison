@@ -103,6 +103,10 @@ let transform version path =
           "val publish_checkpoint_record : record_publication -> Unix.file_descr -> Unix.file_descr -> unit";
           "val record_published : record_publication -> bool"]
         | "dngComponents" -> [
+          "val open_component_source : (unit -> Unix.file_descr) -> component_source";
+          "val component_source_descriptor : component_source -> Unix.file_descr";
+          "val settle_component_source : component_source -> exn option -> unit";
+          "val cache_origin_descriptor : cache_ownership -> cache_descriptor";
           "val open_cache_parent : string -> cache_parent";
           "val check_cache_parent : cache_parent -> unit";
           "val cache_parent_descriptor : cache_parent -> Unix.file_descr";
