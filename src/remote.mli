@@ -214,7 +214,18 @@ val registerStreamCmd :
     custom exceptions with unknown payload cost propagate unchanged instead of
     entering the error table. Charges survive actual queued ping output and
     recognized ownership uncertainty; disconnect only releases unborrowed entries.
-    This does not bound exception construction, arbitrary payloads or heap/RSS. *)
+    This does not bound exception construction, arbitrary payloads or heap/RSS.
+    Normal/idle dumps independently admit selected logical bytes, slice elements
+    and owners via rpcoutputbudget/parts/slots (default512MiB/65536/256).
+    Urgent dumps have separate rpcurgentoutputbytes/parts/slots (65536/2048/256).
+    Admission refuses without waiting and rechecks after preparation. The exact
+    payload list remains owned through its actual action, including queued
+    cancellation and recognized uncertainty. Later unrelated queue draining
+    cannot extend that owner's payload root. Fixed connection buffers, caller
+    aliases/backing stores, pre-queue serialization allocations and generic
+    nonpayload scheduler/flow-control actions are separate; no heap/RSS cap.
+    Producers must await the returned send operation before modifying/reusing
+    borrowed buffers. Admission does not make a private copy of each slice. *)
 
 (* Register a function to be run when the connection between client and server
    is closed (willingly or unexpectedly). The function should not raise

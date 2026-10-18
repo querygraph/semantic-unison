@@ -61,3 +61,14 @@ All582 recorded inputs/compiler/binary hashes and tested-source hashes match.
 See rpc-output-slice-validation.md and tests/qualification/rpc-output-slices-actual-20261018.json.
 The queue/allocation ownership proposal remains unimplemented; this acceptance
 does not replace it or final actual transport/SOL/platform/performance acceptance.
+
+## Queue boundary now qualified
+
+The successor now admits normal/idle and separate urgent selected bytes, parts
+and owners, and keeps explicit payload roots through actual consumers. Known
+queued cancellation, own-action versus later draining, a nested admission race,
+and recognized uncertainty are covered. Four stock/Ox builds+selftests and48
+negative participants/compiler passed (inventoryv21). Producer-side allocation
+BEFORE serialization remains open: the current sizing pass itself creates
+primitive/string/bytearray temporary buffers, so a callback only after measuring
+cannot establish that boundary. See rpc-output-queue-ownership.md.

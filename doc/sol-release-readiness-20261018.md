@@ -162,3 +162,16 @@ hashes match (inventoryv20). Queued V3 source proposals were deferred unchanged
 pending fresh fixed-source IO qualification. Outbound allocation/retention,
 legacy/conversion lifetimes, whole-tree limits and complete SOL acceptance remain
 open; no SDK/Photo/pixel/performance/production claim is added.
+
+## Selected outbound queue ownership
+
+[Output queue ownership](rpc-output-queue-ownership.md) now separately limits
+normal/idle and urgent logical bytes, slice elements and owners. Final admission
+rechecks after preparation; known cancellation and actual consumer settlement
+release once; recognized uncertainty retains exact payload roots. An unrelated
+later queue drain cannot retain that owner's original list through queue closure.
+Four current stock/Ox Make/Dune+selftests and48 negatives/compiler passed, all583
+recorded inputs/compiler/binary hashes verified (inventoryv21). Producer
+pre-serialization allocation, caller/backing/connection baselines, other legacy
+lifetimes and complete SOL/platform/resource/performance acceptance remain open.
+Frozen V4 transport requests remain separate; no runtime grant is inferred.

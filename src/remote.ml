@@ -287,7 +287,85 @@ let rec flushBuffer conn =
 
 (* Output scheduling *)
 
+let body_ownership_classifiers : (exn -> bool) list ref=ref []
+let register_body_ownership_classifier classify =
+  body_ownership_classifiers:=classify:: !body_ownership_classifiers
+let body_unresolved error = match error with
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _
+  | DomainOwner.Join_uncertain _ | StagePublication.Ownership_uncertain _ -> true
+  | _ -> List.exists (fun classify->classify error) !body_ownership_classifiers
+let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f
+
 type kind = Normal | Idle | Last | Urgent
+
+(* Selected queued slices, not pre-serialization allocation or backing/RSS. *)
+let outputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputbudget" 512 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle selected output MiB"
+  "Nonwaiting aggregate logical slice bytes through actual output consumption, not backing/heap/RSS.")
+let outputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle output owners"
+  "Positive aggregate queued/active output count, maximum65536.")
+let outputParts=Prefs.makeEndpointLocal(Prefs.createInt "rpcoutputparts" 65536 ~local:true
+  ~category:(`Advanced `Remote) "normal/idle output slice count"
+  "Positive aggregate slice-element allowance; includes empty slices.")
+let urgentOutputBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputbytes" 65536 ~local:true
+  ~category:(`Advanced `Remote) "urgent selected output bytes"
+  "Independent nonwaiting control-message allowance; does not guarantee socket progress.")
+let urgentOutputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "urgent output owners"
+  "Positive independent queued/active control-message count, maximum65536.")
+let urgentOutputParts=Prefs.makeEndpointLocal(Prefs.createInt "rpcurgentoutputparts" 2048 ~local:true
+  ~category:(`Advanced `Remote) "urgent output slice count"
+  "Positive independent control-message slice-element allowance.")
+type output_lane={out_budget:int Prefs.t;out_scale:int;out_slots:int Prefs.t;
+                  out_part_limit:int Prefs.t;out_bytes:int ref;out_count:int ref;out_parts:int ref}
+let normalOutputLane={out_budget=outputMiB;out_scale=1048576;out_slots=outputSlots;
+  out_part_limit=outputParts;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let urgentOutputLane={out_budget=urgentOutputBytes;out_scale=1;out_slots=urgentOutputSlots;
+  out_part_limit=urgentOutputParts;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let output_limits lane =
+  let amount=Prefs.read lane.out_budget and slots=Prefs.read lane.out_slots
+  and parts=Prefs.read lane.out_part_limit in
+  if amount<=0 || amount>max_int/lane.out_scale || slots<=0 || slots>65536 || parts<=0 then
+    raise(Util.Fatal "Invalid RPC output budget");
+  amount*lane.out_scale,slots,parts
+let measure_output lane parts =
+  let budget,slots,part_limit=output_limits lane in
+  if !(lane.out_count)>=slots || !(lane.out_bytes)>budget || !(lane.out_parts)>part_limit then
+    raise(Util.Transient "RPC output budget exhausted");
+  let remaining_bytes=budget- !(lane.out_bytes)and remaining_parts=part_limit- !(lane.out_parts)in
+  let rec scan bytes count =function
+    | []->bytes,count
+    | (buffer,pos,len)::rest->
+        ignore(output_slice_end buffer pos len);
+        if count>=remaining_parts || len>remaining_bytes-bytes then
+          raise(Util.Transient "RPC output budget exhausted");
+        scan(bytes+len)(count+1)rest in
+  scan 0 0 parts
+
+type output_owner={out_lane:output_lane;out_size:int;out_elements:int;
+  mutable out_active:bool;mutable out_payload:(Bytearray.t*int*int)list;
+  mutable out_linked:bool;mutable out_previous:output_owner option}
+let retained_output_owners=ref None
+let reserve_output_owner owner =
+  if owner.out_active then invalid_arg "RPC output owner already active";
+  let lane=owner.out_lane in
+  let budget,slots,part_limit=output_limits lane in
+  if !(lane.out_count)>=slots ||
+     !(lane.out_bytes)>budget || owner.out_size>budget- !(lane.out_bytes) ||
+     !(lane.out_parts)>part_limit || owner.out_elements>part_limit- !(lane.out_parts) then
+    raise(Util.Transient "RPC output budget exhausted");
+  owner.out_active<-true;lane.out_bytes:= !(lane.out_bytes)+owner.out_size;
+  lane.out_parts:= !(lane.out_parts)+owner.out_elements;incr lane.out_count
+let release_output_owner owner =
+  let active=owner.out_active in
+  owner.out_active<-false;owner.out_payload<-[];
+  if active then begin
+    let lane=owner.out_lane in
+    lane.out_bytes:= !(lane.out_bytes)-owner.out_size;
+    lane.out_parts:= !(lane.out_parts)-owner.out_elements;
+    decr lane.out_count
+  end
 
 type outputQueue =
   { mutable available : bool;
@@ -361,6 +439,44 @@ let performOutput q kind action =
        | Last   -> assert false);
     res
   end
+
+let perform_owned_output q kind parts consume =
+  let lane=match kind with Normal|Idle->normalOutputLane|Urgent->urgentOutputLane
+    | Last->invalid_arg "RPC owned output kind" in
+  let bytes,elements=measure_output lane parts in
+  (* This owner is the only payload root in queued action closures. Clear its
+     field after its own actual action, even if performOutput then drains an
+     unrelated later action. Caller aliases/backing allocation are separate. *)
+  let owner={out_lane=lane;out_size=bytes;out_elements=elements;out_active=false;
+    out_payload=parts;out_linked=false;out_previous=None} in
+  let cell=Some owner and started=ref false and scheduled=ref false in
+  let retain_output _=
+    if not owner.out_linked then begin
+      owner.out_linked<-true;owner.out_previous<- !retained_output_owners;
+      retained_output_owners:=cell
+    end in
+  let finish ()=release_output_owner owner in
+  let write ()=
+    BorrowedWork.try_bind
+      (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_output
+        (fun()->started:=true;consume owner.out_payload))
+      (fun ()->finish();Lwt.return())
+      (fun error->finish();Lwt.fail error)in
+  let enqueue ()=
+    (* Recheck after all preparation allocations; no allocation/yield occurs
+       between this authoritative successful check and its counter stores. *)
+    reserve_output_owner owner;
+    scheduled:=true;
+    performOutput q kind write in
+  BorrowedWork.try_bind enqueue
+    (fun ()->finish();Lwt.return())
+    (fun error->
+      if not !started then begin
+        (* A scheduler/setup refusal must not leave available=false with no
+           running action. Cancel only queued work; active work settles itself. *)
+        if !scheduled then failOutputQueue q error;finish()
+      end;
+      Lwt.fail error)
 
 let allowWrites q =
   if q.failure = None then begin
@@ -493,28 +609,17 @@ let connEq conn conn' =
 
 let connNeq conn conn' = not (connEq conn conn')
 
-(* Send message [l] *)
+(* The consume closures capture only the connection, not the raw slice list. *)
 let dump conn l =
-  ignore(output_slices_length l);
-  performOutput
-    conn.outputQueue Normal (fun () -> fillBuffer conn.outputBuffer l)
-
-(* Send message [l] when idle *)
+  perform_owned_output conn.outputQueue Normal l
+    (fun parts->fillBuffer conn.outputBuffer parts)
 let dumpIdle conn l =
-  ignore(output_slices_length l);
-  performOutput
-    conn.outputQueue Idle (fun () -> fillBuffer conn.outputBuffer l)
-
-(* Send message [l], even if write are disabled.  This is used for
-   aborting rapidly a stream.  This works as long as only one small
-   message is written at a time (the write will succeed as the pipe
-   will not be full) *)
+  perform_owned_output conn.outputQueue Idle l
+    (fun parts->fillBuffer conn.outputBuffer parts)
 let dumpUrgent conn l =
-  ignore(output_slices_length l);
-  performOutput conn.outputQueue Urgent
-    (fun () ->
-       BorrowedWork.bind (fun () -> fillBuffer conn.outputBuffer l) (fun () ->
-         flushBuffer conn.outputBuffer))
+  perform_owned_output conn.outputQueue Urgent l
+    (fun parts->BorrowedWork.bind(fun()->fillBuffer conn.outputBuffer parts)
+      (fun()->flushBuffer conn.outputBuffer))
 
 let enableFlowControl conn isServer =
   let rec waitDrain () =
@@ -1038,14 +1143,7 @@ let release_body_input ticket =
     decr ticket.body_lane.body_count
   end
 let release_body_packet (_,ticket) = release_body_input ticket
-let body_ownership_classifiers : (exn -> bool) list ref=ref []
-let register_body_ownership_classifier classify =
-  body_ownership_classifiers:=classify:: !body_ownership_classifiers
-let body_unresolved error = match error with
-  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _
-  | DomainOwner.Join_uncertain _ | StagePublication.Ownership_uncertain _ -> true
-  | _ -> List.exists (fun classify->classify error) !body_ownership_classifiers
-let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f
+
 let with_body_packet (buffer,ticket) f =
   try BorrowedWork.try_bind (fun()->guard_body_borrower(fun()->f buffer))
     (fun result->release_body_input ticket;Lwt.return result)

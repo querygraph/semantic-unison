@@ -5395,3 +5395,83 @@ with an original controlled example before claiming coverage. Current scoped
 result/argument guards directly classify inside RetainedOwnership; don't assume
 that proves every stream/filter path. Preserve supported pure-classifier contract.
 Goal remainsfullSOL active; no fullpipeline/production/performance claim.
+
+## 2026-10-18 selected output queue ownership implemented — final validation LIVE
+
+ACTIVE /Users/alexy/src/unison-output-queue-20261018 branchimplementation/output-queue-ownership.
+Uncommitted normal/idle selectedbytes512MiB/parts65536/slots256 and independent
+urgent65536B/parts2048/slots256 (maxslots65536); endpointlocal. Actual consumer
+settlement clearsowner payload and releasescredit; unrelated later draining
+cannotkeep originalchunklist through queueclosure. Known queuedcancel releases,
+activeconsumer remainscharged untilactualsettlement; typed/classifieruncertainty
+roots value+charges. Finalreserve rechecks afterpreparation; lostadmissionrace
+keeps priorqueuedwork intact; unstarted schedulerfailure failsqueue ratherthan
+stalling unavailablequeue. Known unadmittedcleanup clears payload withoutdebit.
+
+Not pre-serialization allocation/backing/calleralias/baseline/allheap/RSS bounds.
+Producer mustawait actualreturnedoperationbeforereuse. See rpc-output-queue-ownership.md.
+Moved existing bodyclassifier definitions earlier (sameadditiveAPI) for dumpguard.
+Generic scheduler/flow-control fixedactions remain separate baseline.
+
+Controls history (all CPU4groupsclosed, noEXIO/SDK/Photo payload):
+66824/3f8312/0 positive stock child73748passed. Direct620827/1 child74385failed
+fixture syntax(witnesswith); fixed testonly.58923/79ff42/1 stock74557passed, Ox74728
+weak-root assertionfailed because caller-local liveness differed. Non-inlined
+returning factory keeps sameweakassertion;25528/cce855/0 children75351/75518passed
+8mutants each, productionunchanged. Recheckadded:11451/fdfbc1/0 children76235/76419
+passed9, then testhelper changed toaccept sync OR alreadyfailedpromise refusal;
+whole-policy mutants now omit BOTH checks (actualovercommit), not just stricterror
+channel. Finalfocused45971/c5c7db/0 children76853/77040passed9 each.
+
+ACTUAL finalfullbuild+regression controller NOWLIVE session2868 initial83714a.
+Fourstock/Ox Make+Dune+selftests underUnison8/max2compilerjobs, then9groups/compiler
+underUnison4 expected48negativeparticipants. Buildnamespaces
+/private/tmp/unison-output-owners-{stock,ox}-{check,dune-check}-20261018-001;
+controls/private/tmp/unison-output-owners-{stock,ox}-{framing,body,decoded,stream,pending,result,errors,outbound,queue}-20261018-007.
+Do not duplicate2868; collectactualterminal viahandle, never inferfromfiles/ps.
+Finalsource inactiveknowncleanup changedafterfocused006, so finalfullsuite is
+requiredbeforeevidence/commit. Controller checks frozenV4admissionpaths before
+each sourcejob; ifanyarrives itstops afterpreviousactualjobclosure forreconcile.
+
+Frozen V4candidate remains /Users/alexy/src/unison-outbound-accounting-20261018
+source72560ca4 metadata18c9b822; never altered. Rootqueue01a15045-55f3 pending.
+All3V4admission/workspacepaths absent atprebuildcheckb97bd7. No payload dispatch,
+SDKgrant, IOhold, 18borrow or finalSOLclaim. Further sourcework here only.
+
+Final output-owner controller2868 stillACTUALLY LIVE (latest57d971). Allfour
+stock/Ox Make+Dune+selftests reported0/tokensclosed; finalregression began and
+stockframing/body groups reported0. Fullparentterminal and all48negative/compiler
+union remainpending. No sourcechanges afterlaunch. Poll2868, doNOTduplicate.
+
+## 2026-10-18 selected output queue ownership QUALIFIED
+
+ACTUAL combined controller2868/d911f0/exit0/no session collected. Fourstock/Ox
+Make+Dune+selftests and18finalgroups passed;48 designated negatives/compiler.
+All583 recorded inputs/compiler/binary hashes and finaltested-source hashes
+match. Each build/control child reaped0/groupsabsent/CPU8or4closed. No current
+owner/CPU/EXIO/SDK/Photo payload/nativeUI resource.
+
+Evidence tests/qualification/rpc-output-queue-owners-actual-20261018.json182551B
+SHAe1ac4f0ea937fb4e5a6407ecfe4652d6a14e647af40065c6d7f9863cdbe783f1.
+Normal/idle512MiB/65536parts/256owners; urgent65536B/2048parts/256owners; maxslots
+65536. Measuresbeforequeue andauthoritativelyrechecks afterpreparation. Known
+unstartedreservationrefusal doesn'tpoisonpriorqueue; schedulerfailurefails
+queueinstead ofstalling unavailable. Actualconsume clearslist/credits before
+unrelateddrain; droppedqueuedworksettlesknownfailure, activeworknotrevokedby
+queuefailure. Typed/classifieruncertainty roots exactpayload+credits.
+
+Preserved001positive66824/3f8312/0;002syntax620827/1;00358923/79ff42/1 (stockpassed,
+Oxcaller-localweaklivenessfailed);00425528/cce855/0 with returningnoninlinefactory
+andunchangedweakassertion;00511451/fdfbc1/0 afterrecheck;00645971/c5c7db/0 accepts
+syncORfailedpromise and whole-policy mutants removebothchecks.007finalcurrent
+source includes inactiveknowncleanupclearpayload; no earlierhash falselyreused.
+
+Inventoryv21/readiness/queueownershipdoc updated. Not encoded allocation BEFORE
+serialization, backing/calleraliases/baseline/allheap/RSS or actualtransport/full
+SOL acceptance. Existing Umarshal sizing pass itself allocates payload copies;
+nextproducer scope must addressthat, notjust reserveaftermeasurement.
+
+FrozenV4 /Users/alexy/src/unison-outbound-accounting-20261018 source72560ca4+
+metadata18c9b822 unchanged; Rootqueue01a15045-55f3 and exact3paths in index remain
+separate. Checkactualfreshgrants beforeoptionalnewwork; no V3/V2replay. Next
+sourcework cancontinue butmustnotmutatefrozenRootclosure. Goalactivefullscope.
