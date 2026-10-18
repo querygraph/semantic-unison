@@ -6036,3 +6036,17 @@ tests/qualification/shared-build-documentation-dry-run-20261018.json SHA 4e7b3a9
 No production/frozenV6 edits or newruntimegrant. Ordinary/clone success-write
 counters remain unavailable; existing skip totals and output model are not
 syscall counters. Do not relabel them. Goalactive/incomplete/noownedlivejobs.
+
+
+## 2026-10-18 selected current worker FFI source audit
+
+Reviewed current SHA/CommonCrypto+explicitEVP, positionalborrow read/write and
+monotonic clock primitives with exactML/C/header/mode sourcepins. Updated
+foreign-boundary-audit.md to mark oldtableshistorical and recordEVPownedcleanup.
+No found heapaccess while released in selected positional primitives; hashing
+holds runtime. Context/FD callerexclusive lifetime remainsmanualprecondition.
+Evidence doc/worker-ffi-source-review-20261018.json SHA eb9b639c0cc2215cb213afca91b00ee2c343f2172d29968a067b048cdcbc2adf.
+Other functions in sameCfile are explicitlyNOTreviewed by pinning file; remaining
+namespace/quota/clone/publication/inherited/provider audits stayseparate.
+No runtimes/tests/tokens/SDK/Photo operation, no production/frozenV6change.
+Goalactive/incomplete; V6transport/property grants stillneeded.

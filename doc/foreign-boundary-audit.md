@@ -1,5 +1,33 @@
 # Manual audit of new foreign boundaries
 
+## Selected current worker FFI review — 2026-10-18
+
+The detailed tables below are historical source review, not a blanket current
+FFI qualification. The [current selected review](worker-ffi-source-review-20261018.json)
+pins the inspected ML/C/header/mode-selector bytes and covers the SHA primitives,
+both default CommonCrypto and explicit OpenSSL3 paths, borrowed positional IO
+and the monotonic diagnostic. No new runtime or sanitizer campaign was invoked.
+
+The opt-in `UNISON_SEMANTIC_HASH_OPENSSL` path delegates to the shared owned EVP
+implementation. Its context owns both fetched method and digest context; failure
+and finalization release/null them, and finish releases before result allocation.
+It does not release the runtime while reading OCaml buffers. The 4096-byte custom
+allocation pressure hint is not a memory cap. Provider internals are a separate
+third-party boundary. Default non-Apple builds without this explicit option
+still select the portable reference.
+
+Borrowed pread/pwrite use bounded stack buffers and no-pending release after
+copying arguments; no OCaml heap pointer is used while released. Callers retain
+the FD and exclusive status through completion. The optional monotonic clock
+allocates after a stack-only query and preserves unavailability as NaN.
+
+This review does **not** cover every function in semanticFile_stubs.c merely
+because the file is pinned. Component namespace/quota/publication operations,
+clone/publication backends, inherited Unix code and external provider internals
+need their separate audits/evidence. Whole-worker/native thread safety, unsupported
+platform execution and full M6 are not established by this selected review.
+
+
 Current owner-loop addition: durable reservations start before native target
 preparation and survive producer return. Explicit semantic/validation loans
 retain that envelope through settlement; native close precedes retirement.

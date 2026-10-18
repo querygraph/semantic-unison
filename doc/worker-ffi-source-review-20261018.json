@@ -1,0 +1,70 @@
+{
+  "schema": "unison-selected-worker-ffi-source-review/1",
+  "state": "MANUAL_SOURCE_REVIEW_ONLY_PARTIAL",
+  "source_sha256": {
+    "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+    "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+    "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+    "src/semanticFile.mli": "7861d7b2b2752bcbb17fef3c1e868dfcf8b52ff18df95953ddd45cf69a722df5",
+    "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+    "src/semanticWorkers.ml": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721",
+    "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf"
+  },
+  "checks": [
+    {
+      "symbols": [
+        "unison_semantic_sha256_init",
+        "unison_semantic_sha256_feed",
+        "unison_semantic_sha256_finish"
+      ],
+      "source": "src/semanticHash_stubs.c",
+      "review": "CommonCrypto arguments/results rooted; bounded feed uses copied stack context with runtime held. Explicit EVP branch delegates to rooted header functions. No native call releases runtime or retains an OCaml buffer pointer.",
+      "ownership": "Exclusive context per job; no arbitrary caller cross-domain shared-context guarantee."
+    },
+    {
+      "symbols": [
+        "UNISON_EVP_API(create)",
+        "UNISON_EVP_API(feed)",
+        "UNISON_EVP_API(finish)",
+        "UNISON_EVP_API(version)"
+      ],
+      "source": "src/semanticHash_evp.h",
+      "review": "Custom block initialized before native acquisition; EVP_MD_CTX/EVP_MD owned per context and released/nullified on failure/finalization. Finish releases before allocating result. Runtime held for all heap accesses. Mutable test counters/failure injection compile only under EVPHASH_TEST_COUNTERS; custom-operations table initialized once and not modified by these routines.",
+      "ownership": "OpenSSL provider internals are outside this manual source audit; 4096-byte GC pressure hint is not allocator coverage or hard limit."
+    },
+    {
+      "symbols": [
+        "unison_semantic_prepare_reader",
+        "unison_semantic_prepare_writer",
+        "unison_semantic_pread",
+        "unison_semantic_pwrite"
+      ],
+      "source": "src/semanticFile_stubs.c",
+      "review": "Pending handlers dispatched before borrow interpretation; FD/scalars and bounded 64KiB buffer copied before no-pending runtime release. Released sections use native stack data only; save errno before reacquire. Pread result allocated after reacquire, pwrite reports one syscall attempt. No acquisition/close of borrowed FD.",
+      "ownership": "Caller must retain exclusive status/lifetime; no hostile flag mutation or in-call IO deadline guarantee."
+    },
+    {
+      "symbols": [
+        "unison_semantic_monotonic_now"
+      ],
+      "source": "src/semanticFile_stubs.c",
+      "review": "Stack timespec; no runtime release/callback/descriptor acquisition/global mutable state. Allocates float with rooted argument. Unavailable/failing clock yields NaN, not a fabricated interval.",
+      "ownership": "Diagnostic availability only; not CPU time or native deadline."
+    }
+  ],
+  "unreviewed_by_this_receipt": [
+    "Remaining component metadata/namespace/quota/publication functions in semanticFile_stubs.c",
+    "wholeFileClone/stage/final publication native implementations",
+    "Inherited Unix/runtime/native standard-library code",
+    "Third-party provider internal locking/allocators and unsupported platform ABI execution"
+  ],
+  "limitations": [
+    "Not a static-analysis/compiler/race-sanitizer proof",
+    "No new execution, token acquisition, SDK, Photo or payload access",
+    "Does not complete the every-reachable-C-function M6 audit",
+    "Current worker caller context ownership is a precondition; portable function modes do not prove C thread safety"
+  ]
+}
