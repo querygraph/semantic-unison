@@ -1436,7 +1436,7 @@ let marshalTransferInstruction =
      (file_id, (buf, start, Bytearray.length buf-start)))
 
 let streamTransferInstruction =
-  Remote.registerStreamCmd
+  Remote.registerStreamCmd ~maxPayload:(Transfer.maxInstructionBytes+Remote.intSize)
     "processTransferInstruction" marshalTransferInstruction
     processTransferInstruction
 

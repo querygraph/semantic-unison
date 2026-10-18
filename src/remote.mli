@@ -172,12 +172,18 @@ val registerRootCmdWithConnection :
 val streamingActivated : bool Prefs.t
 
 val registerStreamCmd :
-  string ->
+  ?maxPayload:int -> string ->
   (connection -> 'a ->
    (Bytearray.t * int * int) list -> (Bytearray.t * int * int) list * int) *
   (connection -> Bytearray.t -> int -> 'a) ->
   (connection -> 'a -> unit) ->
   connection -> (('a -> unit Lwt.t) -> 'b Lwt.t) -> 'b Lwt.t
+(** Optional nonnegative maximum custom encoded payload, excluding the RPC tag.
+    Includes all custom codec fields. Endpoint derives separate -str/-args body
+    caps, rejecting overflow at registration. Both stream and ordinary fallback
+    caps apply before raw body allocation, independently of the outer endpoint
+    limit and existing raw input lanes. Absent limit preserves the existing
+    custom registration behavior. This does not account custom heap/workspace. *)
 
 (* Register a function to be run when the connection between client and server
    is closed (willingly or unexpectedly). The function should not raise

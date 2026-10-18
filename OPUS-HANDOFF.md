@@ -5000,3 +5000,49 @@ from checkpoint. Next client-result consumption leases; custom stream tighter
 frame/workspace/baseline and full FD/RSS/current fullSOL acceptance still OPEN.
 Frozen9d9dccc0 exactthreeIOrequests remain unchanged/unadmitted at last read; no
 replay/newgrant/hold from source work. Full goal ACTIVE/INCOMPLETE, standing8/8.
+
+
+## 2026-10-18 declared custom stream frame cap IN PROGRESS
+
+Active 2f07b21c successor adds registerStreamCmd ?maxPayload with separate str/
+args body caps and registration overflow checks; both receive routes enforce
+before body allocation. Copy declares producer65500+fileID5 bytes; current tags
+=>65535stream/65536fallback. Optional None custom behavior unchanged. Aliased
+Transfer.maxInstructionBytes derives from actual queue; no variable custom heap/
+workspace or hardRSS claim. Initial20219/1e7491/1 failed/closed because test guard
+was below precedingheader, production unchanged. Corrected payload fixture and
+fallback negative mutation retains registry but bypasses routing, so each old
+hazard reaches its intended allocation guard.
+
+Final controls83415/633315/0/no session: stockRPC24464/tokens24767 andOxRPC25061/
+tokens25490 reaped0/groupsabsent/CPU4closed.16RPCnegatives+167tokenchecks9negatives
+percompiler allPASS. Current full4buildcontroller20985 LIVE, stock26165/27282 and
+OxMake28364 closed0; OxDune pending. Do not claimfinalparentclosedyet. NoEXIO,
+SDK/Photo/original/nativecloning or transport. Frozen9d9dccc0 IOrequests unchanged,
+3admissionpathsabsent atlastcheck. Future source: explicit client-result lifetime,
+custom workspace/baseline; concrete Remote metadata registries (receivers and
+streamError retained error values) need finite ownership/quotas before full M6.
+Goalactive/incomplete, standing8/8, no automatic newIOgrant/replay.
+
+
+## 2026-10-18 production stream/fallback body cap qualified
+
+Current source declares maxPayload on custom registerStreamCmd and derives
+separate role-specific caps. Copy uses producer65500+fileID5 =>65535stream/
+65536fallback bytes, both checked before raw body allocation. Optional no-limit
+custom registration unchanged. Constructoroverflow refused before registry
+mutation; custom workspace/heap/unknown command metadata are NOT covered.
+
+Actual fullbuilds20985/b37653/0/no session PASS/CLOSED; children26165/27282/28364/
+29545 reaped0/groups absent/CPU8closed. All recorded current source/binary hashes
+match. Final controls83415/633315/0 closed: stockRPC24464/tokens24767, OxRPC25061/
+tokens25490 reaped0/groupsabsent/CPU4closed;16RPCnegativeparticipants +167transfer
+checks9mutations/compiler. Initial guard-below-header fixture20219/1e7491/1 kept
+failedclosed; corrected fixture only, no production weakening/rerun of any grant.
+Evidence tests/qualification/stream-command-input-cap-actual-20261018.json SHA
+361ac49f3333b8913d8487728da9ef72efe4e32c44a47986ac4453146225427d. Inventoryv16/framing/readiness updated. No current Unison resources/EXIO.
+Next source work: client-result consumption ownership and bounded persistent
+RPC metadata (receivers/streamError values), custom workspace/baseline and hard
+FD/RSS/platform/completeSOL acceptance stillopen. No current full-goal claim.
+Frozen9d9dccc0 exactthreeIOrequests unchanged;3admissionpaths absent atlastcheck,
+no dispatch/replay or fabricated Photo hold. Standing8/8/system2 unchanged.

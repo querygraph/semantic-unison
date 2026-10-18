@@ -47,7 +47,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -58,6 +58,7 @@ def main():
                                       'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/remote_startup_bounds.ml': sha(repository/'tests/remote_startup_bounds.ml'),
                                       'tests/remote_packet_bounds.ml': sha(repository/'tests/remote_packet_bounds.ml'),
+                                      'tests/remote_stream_limits.ml': sha(repository/'tests/remote_stream_limits.ml'),
                                       'tests/remote_body_input.ml': sha(repository/'tests/remote_body_input.ml'),
                                       'tests/remote_body_retained.ml': sha(repository/'tests/remote_body_retained.ml'),
                                       'tests/remote_decoded_input.ml': sha(repository/'tests/remote_decoded_input.ml'),
@@ -213,6 +214,21 @@ def main():
                 c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
                 assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
                 record['decoded_owner_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
+            record['stream_limit_negatives']={}
+            for label,needle,replacement in [
+                ('stream-cap-negative','?maxBytes:(Util.StringMap.find_opt cmdName !serverStreamLimits)','?maxBytes:None'),
+                ('fallback-cap-negative','| Some limit -> start_bounded_request conn limit dispatch','| Some limit -> if Util.StringMap.mem cmdName !serverStreamLimits then start_body_request conn dispatch else start_bounded_request conn limit dispatch')]:
+                private=work/label;private.mkdir(mode=0o700)
+                assert source.count(needle)==1
+                (private/'remoteForTest.ml').write_text(controlled(source.replace(needle,replacement,1)))
+                (private/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+                sf=['-I',str(private),*flags]
+                for argv in [[compiler,*sf,'-c','remoteForTest.ml'],[compiler,*sf,'unix.cmxa','str.cmxa',*[str(build/o)for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o)for o in objects('COBJS')],'-o','negative']]:
+                    c=subprocess.run(argv,cwd=private,capture_output=True,text=True,timeout=30)
+                    record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+                c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
+                assert c.returncode==2 and 'DESIGNATED header payload allocation reached' in c.stderr,c.stdout+c.stderr
+                record['stream_limit_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
             record['status']='passed'
         finally:
             if args.report:

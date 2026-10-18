@@ -1196,6 +1196,7 @@ let start_bounded_request conn limit launch =
 type serverstream =
   connection -> Bytearray.t -> unit
 let serverStreams = ref (Util.StringMap.empty : serverstream Util.StringMap.t)
+let serverStreamLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
 
 type header =
     NormalResult
@@ -1458,7 +1459,9 @@ let rec receive conn =
           Lwt.wakeup_exn (find_receiver num_id) (Util.Fatal ("Server: " ^ s));
           receive conn
       | Stream cmdName ->
-          BorrowedWork.bind (fun()->receive_body_packet requestInputLane conn)
+          BorrowedWork.bind (fun()->receive_body_packet
+              ?maxBytes:(Util.StringMap.find_opt cmdName !serverStreamLimits)
+              requestInputLane conn)
             (fun packet->with_body_packet packet (fun buf->processStream conn id cmdName buf)) >>= fun () ->
           receive conn
       | StreamAbort ->
@@ -1636,17 +1639,29 @@ let streamingActivated =
      streaming protocol for transferring file contents more efficiently. \
      The default value is \\texttt{true}."
 
-let registerStreamCmd
+let registerStreamCmd ?maxPayload
     (cmdName : string)
     marshalingFunctionsArgs
     (serverSide : connection -> 'a -> unit)
     =
+  (* The custom payload includes any codec-specific fields, but excludes the
+     role-specific RPC tag. Bound both stream and nonstream fallback bodies. *)
+  let request_limit,stream_limit=match maxPayload with
+    | None -> None,None
+    | Some payload ->
+        let name_length=String.length cmdName in
+        if payload<0 || name_length>max_int-5 || payload>max_int-name_length-5 then
+          invalid_arg "registerStreamCmd payload limit";
+        Some(payload+name_length+5),Some(payload+name_length+4) in
   let cmd =
     registerSpecialServerCmd
       cmdName marshalingFunctionsArgs
       (defaultMarshalingFunctions Umarshal.unit)
       (fun conn v -> serverSide conn v; Lwt.return ())
   in
+  (match request_limit with
+   | None -> ()
+   | Some limit -> serverArgLimits:=Util.StringMap.add cmdName limit !serverArgLimits);
   let ping =
     registerServerCmd (cmdName ^ "Ping") Umarshal.int Umarshal.unit
       (fun conn (id : int) ->
@@ -1670,6 +1685,9 @@ let registerStreamCmd
     serverSide conn args
   in
   serverStreams := Util.StringMap.add cmdName server !serverStreams;
+  (match stream_limit with
+   | None -> ()
+   | Some limit -> serverStreamLimits:=Util.StringMap.add cmdName limit !serverStreamLimits);
   (* Create a client function and return it *)
   let client conn id serverArgs =
     debugE (fun () -> Util.msg "Sending stream chunk (id: %d)\n" id);

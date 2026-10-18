@@ -97,3 +97,36 @@ binds 163 checks and nine negative participants per compiler, plus all four
 current stock/Ox Make/Dune builds/selftests. Actual encoder checks span multiple
 packets; Copy's helper and both call-site/pre-open bindings are source checked
 and compiled. Native clone/publication/transport qualification remains separate.
+
+
+## Known transfer stream packet ceiling
+
+`Remote.registerStreamCmd ?maxPayload` optionally declares the encoded custom
+payload maximum, including codec fields and excluding the RPC tag/outer framing.
+The endpoint derives distinct `-str` and `-args` body caps with checked addition.
+Both actual streaming and ordinary fallback reject larger frames before body
+allocation, underneath the existing endpoint cap and raw input ownership lanes.
+Invalid limits fail before command registration. Absent declaration preserves
+the generic custom registration's existing behavior.
+
+Copy declares `Transfer.maxInstructionBytes + Remote.intSize`: the producer's
+65,500-byte queue plus the five-byte file identifier. Current role tags make the
+stream body ceiling 65,535 bytes and fallback body ceiling 65,536 bytes. Outer
+message ID/header/length framing is separate. The producer constant is shared
+with queue construction, and original multi-frame encoder controls check every
+emitted slice against it. This is not a claim about every historical/future
+third-party peer's queue policy; actual mixed-peer qualification is separate.
+
+Small exact-cap stream/fallback bodies pass; a one-byte-over header-only body
+must refuse before the private allocation/read guard. Independent mutations
+remove each routing cap and must reach that designated guard. These controls
+are original pipes/data, not actual transport processes or user payloads. An
+initial fixture used a guard below the preceding RPC header size; it is preserved
+as failed/closed and corrected with a payload large enough to distinguish header
+from body allocation. No production change was needed for that fixture issue.
+
+[Known stream cap evidence](../tests/qualification/stream-command-input-cap-actual-20261018.json)
+binds current four builds/selftests, 16 RPC negative participants/compiler and
+167 transfer checks with nine negative participants/compiler. All current source
+inputs and retained binary hashes match. No actual transport/native clone or
+physical-memory qualification is substituted by these original controls.

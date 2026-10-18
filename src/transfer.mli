@@ -40,6 +40,9 @@
 type transfer_instruction = Bytearray.t * int * int
 
 type transmitter = transfer_instruction -> unit Lwt.t
+val maxInstructionBytes : int
+(** Maximum encoded token bytes emitted by the producer queue, excluding RPC
+    tag/file identifier. No claim about represented logical output length. *)
 
 
 (*************************************************************************)

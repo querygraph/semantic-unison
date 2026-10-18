@@ -76,7 +76,7 @@ queued output, with explicit value roots on typed/classifier uncertainty. These
 mechanisms do not bound arbitrary decoded lifetimes: client results, custom
 stream inputs, conversion/global escapes, metadata/outbound buffers and other baseline
 families still require accounting. See the [regular request owner evidence](../tests/qualification/rpc-legacy-decoded-owner-actual-20261018.json)
-for exact current controlled/build scope. [Inventoryv15](owned-resource-remaining-inventory-20261018-v15.json)
+for exact current controlled/build scope. [Inventoryv16](owned-resource-remaining-inventory-20261018-v16.json)
 retains the precise earlier ownership/platform findings.
 
 The saved warm32MiB repeated matrix is historical and not a current performance
@@ -98,6 +98,13 @@ now reserves logical materialization against expected payload size across frames
 including block skips, with exact EOF and pre-open late-packet refusal. It does
 not bound physical IO or arbitrary callback effects. Client-result lifetimes,
 custom stream workspace/baseline and resource/platform work above remain open.
+
+[Known stream caps](../tests/qualification/stream-command-input-cap-actual-20261018.json)
+now restrict production Copy bodies to65,535stream/65,536fallback bytes before
+allocation, derived from the shared65,500-byte producer queue and file-ID/tag
+fields. Exact-cap/oversize controls and current full builds pass. Generic custom
+streams without declarations, workspace, client-result and persistent error/
+receiver metadata ownership remain separate; no full heap/RSS bound is inferred.
 
 ## Next actions
 

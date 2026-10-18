@@ -102,6 +102,7 @@ let minBlockSize = 700
 (* This should at most 65535+3 bytes, as we are using this size to
    ensure that string token lengths will fit in 2 bytes. *)
 let queueSize = 65500
+let maxInstructionBytes=queueSize
 let queueSizeFS = Uutil.Filesize.ofInt queueSize
 type tokenQueue =
   { mutable data : Bytearray.t;  (* the queued tokens *)

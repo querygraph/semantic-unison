@@ -211,6 +211,8 @@ let ()=
    let info,block_size=T.Rsync.rsyncPreprocess basis(Uutil.Filesize.ofInt 73728)(Uutil.Filesize.ofInt 73728)in
    let transmit instruction=
     incr packets;check(not !ended)"encoder emitted after EOF";
+    let _,_,encoded_bytes=instruction in
+    check(encoded_bytes<=T.maxInstructionBytes)"producer exceeded declared instruction bytes";
     ended:=(if rsync then T.Rsync.rsyncDecompress ~output_limit:limit block_size basis output ignore instruction
             else T.receive ~output_limit:limit output ignore instruction);
     Lwt.return()in

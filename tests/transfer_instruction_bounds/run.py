@@ -15,6 +15,7 @@ copy=(root/'src/copy.ml').read_text();start=copy.index('let marshalTransferInstr
 start=copy.index('let transferOutputLimit ')
 limit_source='module Transfer=TransferForTest\n'+copy[start:copy.index('let transferFileContents',start)]
 assert copy.count('let output_limit=transferOutputLimit fileKind srcFileSize in')==1
+assert copy.count('Remote.registerStreamCmd ~maxPayload:(Transfer.maxInstructionBytes+Remote.intSize)')==1
 assert copy.count('Transfer.receive ~output_limit fd showProgress ti')==1
 assert copy.count('Transfer.Rsync.rsyncDecompress ~output_limit blockSize ifd fd showProgress ti')==1
 assert copy.index('let output_limit=transferOutputLimit fileKind srcFileSize in')<copy.index('let outfd = ref None',copy.index('let transferFileContents'))
