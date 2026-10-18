@@ -6094,3 +6094,21 @@ Actual draftrefresh completed: push b9d7bd/0, gh edit/readback d02fc5/0;
 PR13 OPEN/DRAFT/masterbase/headad042761, bodyexactfilematchverified. Publication
 receipt doc/pr13-current-review-publication-20261018.json. No merge/deploy or
 newruntime/IO/CPU ownership. Active source contains followingmetadata only.
+
+
+## 2026-10-18 blocked audit: exact V6 runtime admission absent
+
+Three consecutive goal turns rechecked the same external scheduling blocker
+(actual7109d6,ea96d0,154b5d); all3admissions/workspaces remainedabsent. Existing
+requesthashes unchanged; no activeprocess or verified-livewait claimed. Photo
+status request queued01a150dd-1dd3-79f2-b912-999506bc709d. No dispatchedV6run,
+retry, implicitpermission, newresourcehold or secondrequest. Next meaningful
+end-to-end action requires exactfreshPhoto admission or concrete reviewfinding.
+Do not add repeated unrelatedcontrols merelytokeepactivityrunning.
+
+Fullgoal remainsincomplete; current code/sourcecontrols anddraftPR13 preserved.
+PR13draftmaster/headad042761 (latestsourcefollowupmetadata on implementation
+branch5ee9f194), production513c121a, frozenV6candidate5cc96102. ExistingM6
+resource/platform/performance limitations remainopen; blocked is notcomplete or
+userpaused. No ownedlivejobs/CPU/IO/native resources. This note precedes the
+goal-status blocked transition; resume reconciles actualnewstate beforedispatch.
