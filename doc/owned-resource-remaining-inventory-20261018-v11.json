@@ -1,0 +1,105 @@
+{
+  "scope": "Successor after aggregate raw body lanes and consumer/uncertainty lifetimes. Decoded-object/outbound retention and other full-goal resource/integration work remain open.",
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-owned-close-integration-20261018/doc/owned-resource-remaining-inventory-20261018-v10.json",
+    "bytes": 6387,
+    "sha256": "4b468042e8cb1a00a57c8dba71f9271479f26789227fcb6f5a9e7411cc968640"
+  },
+  "source_sha256": {
+    "src/semanticSync.ml": "cebe8c8420baf8a43a0d6cf61fe9e98619e454f3ec889a2f01ee34376d654d63",
+    "src/semanticRemote.ml": "9e0ea03b144e27801c945daf74c7b762940e2ad508d335c6b11ed3a7c0e333fb",
+    "src/semanticMergeCache.ml": "b5097d30304be737f3d9fdc8f80232ae3d2dc0017fa6e16064b812785986a931",
+    "src/fsmonitor/solaris/watcher.ml": "5002d3876bd8dcc7ed7fa8d4505b1e25d07d70d865476fb6249a0f49d27b77ff",
+    "src/fsmonitor/solaris/Makefile": "a95ba3c783d72fa1c7c2cce4873250f32c9c4a2d0d0151e88af796d6fea7578f",
+    "src/semanticMergeCache.mli": "973c2133bd70758ebcb8865623b8700ad8d038693fe2b70ca14947f7a234e573",
+    "src/semanticAdmission.ml": "a3dfcf94b3053d42a75c6e9e2b5513b47121198c236f1395898b375936d86c08",
+    "src/semanticAdmission.mli": "2ad7aa5c824fb703d2ecbd0625c684fdd34f05ee8b5fc48ef4f38df6d02feddb",
+    "src/semanticRuntime.ml": "ed6f24db99d46848f0ebac745103ceb0034c5b3269e9e1f7ad480a7854e08b15",
+    "src/semanticRuntime.mli": "5dc6a194ef00a6a60049c82ff4011abfef864085839c2cd2118cde27399f8c0e",
+    "src/semanticWorkers.ml": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721",
+    "src/semanticWorkers.mli": "928940c64745da115e43c88a7172e2968ee9ddd58492d19eececafb3a58364f0",
+    "src/ubase/umarshal.ml": "7224f0368d74c5e227f10454dea0f1224337c521548b2fb954a811f84a0c9d06",
+    "src/ubase/umarshal.mli": "a490ee26e193c03b7516386fab73f5ed38556cd0db039424be25d62e6438fe4d",
+    "src/remote.ml": "c3b6c606b9cb232492f901a6c8465fd4a3e7fe7e40d07b21bf01ce90066dc3b0",
+    "src/remote.mli": "3d39fb8e808c2c86d016dbefa7b7074fa91c69179563c53484279b452e5e911c"
+  },
+  "qualified_local_async": [
+    "prepared pair/source before clone/open",
+    "tracked native parent acknowledgement",
+    "raw known close before native abort",
+    "complete worker/producer borrowed lifetime"
+  ],
+  "remaining": [
+    {
+      "file": "src/semanticSync.ml",
+      "functions": [
+        "with_file",
+        "try_local"
+      ],
+      "finding": "Synchronous reference/test-only raw descriptors remain separate; production capture/scalar merge now use prepared1/4slot owners. Full internal cache uncertainty remains below."
+    },
+    {
+      "file": "src/fsmonitor/solaris/watcher.ml",
+      "functions": [
+        "add_watch_children"
+      ],
+      "finding": "Separate legacy/platform raw directory/FEN callback finding, not an observed failure or automatically added runtime requirement."
+    }
+  ],
+  "separate_goal_work": [
+    "Aggregate decoded-object/conversion/outbound retention, including values/version lists/exceptions outliving raw consumers; remaining metadata/receiver-map/acquisition/baseline families",
+    "Complete metadata/conversion/depth/remaining acquisition and baseline families",
+    "Aggregate descendant FD/RSS containment and platform capability policy",
+    "Broader benchmark matrix and final consolidated integration/platform/review status"
+  ],
+  "qualified_remote_async": [
+    "complete synchronous producer borrowed lifetime",
+    "DirectoryOwner uncertainty recognized before pair/name cleanup",
+    "active cleanup and nested file/directory carrier controls plus exact old and missing-classifier rejections"
+  ],
+  "qualified_capture_merge_inputs": [
+    "one/four prepared slots before acquisition",
+    "independent once-only close; original and multiple uncertainty retention",
+    "80positive controls/2designated rejects stock+Ox; actual capture/saved-base/cache-hit exact merge; no aggregate FD/RSS or cache internal close qualification"
+  ],
+  "qualified_cache_joint": [
+    "rooted scope and per-resource nodes linked before acquisition",
+    "opaque directory owners and once-only read ledgers",
+    "ordinary work failure attempts independent closes; preserves original and combined causes",
+    "nested scan uncertainty keeps known quota/outer directory; future enabled cache calls refuse before acquisition",
+    "prepared temporary opening phase, identity-aware unlink journal, no namespace or numeric retry after uncertainty",
+    "monotonic quota and private recovery-base semantics preserved",
+    "20directed scenarios/compiler plus existing quota/storage/acquisition/full capture/scalar merge regressions; no SDK/Photo/actualtransport"
+  ],
+  "qualified_fixed_infrastructure": {
+    "notification_descriptors": 2,
+    "completion_buffer_payload_bytes": 4096,
+    "compatibility": "workspace preferences/usage unchanged; generic create remains zero-baseline",
+    "evidence": "tests/qualification/fixed-infrastructure-accounting-actual-20261018.json",
+    "limits": "Only explicit pipe/buffer planning; not all domain/transport/helper/native/legacy acquisition or process-tree limits"
+  },
+  "qualified_framed_decoder": {
+    "evidence": "tests/qualification/framed-decoder-bounds-actual-20261018.json",
+    "scope": "233checks/compiler plus actual in-process registration/reply/ticket/negative controls; same valid bytes, builtin preflight and selected per-decode charges only"
+  },
+  "qualified_rpc_headers": {
+    "evidence": "tests/qualification/rpc-header-input-actual-20261018.json",
+    "scope": "Independent endpoint-local max frame/raw-byte/incomplete-prefix-slot budgets; both compilers/Make+Dune/current329sources; synthetic positive and designated-negative controls.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_startup": {
+    "evidence": "tests/qualification/rpc-startup-input-actual-20261018.json",
+    "scope": "Finite field bytes include ignoredCR, fixed buffers reserved before reading, valid wire compatibility, empty-read fix; original synthetic controls,329current production inputs in stock/Ox Make+Dune.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_outer_frames": {
+    "evidence": "tests/qualification/rpc-outer-frame-actual-20261018.json",
+    "default_payload_bytes": 268435456,
+    "scope": "All shared packet reads use positive endpoint cap and minimum explicit cap. Actual tiny legacy request/reply/stream routes accepted and refused. No aggregate retained-object cap inferred.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_body_inputs": {
+    "evidence": "tests/qualification/rpc-body-input-actual-20261018.json",
+    "scope": "Separate request/stream and reply lanes; raw tickets through actual consumer/output lifetime and recognized core/registered uncertainty. Current329sources in four builds; nine designated negative RPC participants/compiler; current Runtime retention and fixed census regressions. Not aggregate decoded heap/native FD/RSS."
+  }
+}

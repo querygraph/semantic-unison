@@ -107,13 +107,16 @@ let test_decoded_budget () =
       require(!(R.bounded_input_count)=0 && !(R.bounded_input_bytes)=0) "decode refusal input ticket leaked")) [false;true];
   let result_client=R.registerBoundedServerCmd "decoded-result" ~maxArgs:64 ~maxResult:64
     Umarshal.unit (Umarshal.list Umarshal.unit) (fun _ ()->Lwt.return []) in
-  with_connection(fun conn _->
+  with_connection(fun conn fd->
     let reply=result_client conn () in
     let id= !(R.ids) in
     let body=Bytearray.of_string("decoded-result-res"^Umarshal.to_string(Umarshal.list Umarshal.unit)(List.init 2000(fun _->()))) in
-    Lwt.wakeup(R.find_receiver id)body;
+    send fd(R.encodeInt id::R.marshalHeader conn R.NormalResult
+      [R.encodeInt(Bytearray.length body);body,0,Bytearray.length body]);
+    let receiving=R.receive conn in
     (try ignore(Lwt_unix.run reply);failwith "bounded result decoded without limits"
-     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong result budget refusal"));
+     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong result budget refusal");
+    R.closeConnection conn;disconnected receiving);
   with_connection(fun conn _->
     let malformed=Umarshal.(to_string(sum6 unit string string int string unit id id)(I64(1048576))) in
     (try ignore(R.unmarshalHeader conn(Bytearray.of_string("rsp"^malformed)));failwith "header inner allocation unbounded"

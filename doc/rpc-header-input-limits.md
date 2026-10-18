@@ -41,7 +41,8 @@ automatically modified by this source change.
 This is raw header reservation accounting, not a bound on decoded exceptions
 retained by callers, transport buffers/FDs, all heap allocations, process-tree
 memory or RSS. Legacy body/result/stream packets do not use this aggregate reservation;
-their outer size now follows [the common frame policy](rpc-outer-frame-limits.md). Protocol startup/handshake reads use their own field policy and share this raw-input
+their outer size follows [the common frame policy](rpc-outer-frame-limits.md),
+and [separate body lanes](rpc-body-input-lifetimes.md) cover their raw lifetimes. Protocol startup/handshake reads use their own field policy and share this raw-input
 ledger; see [startup limits](rpc-startup-input-limits.md). Overall decoded-object admission and remaining
 acquisition/baseline/resource enforcement remain open.
 

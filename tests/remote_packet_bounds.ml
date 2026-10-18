@@ -20,7 +20,8 @@ let () =
   send w(R.encodeInt 12100::R.marshalHeader c R.NormalResult
    [R.encodeInt 3;Bytearray.of_string "abc",0,3]);
   let receiving=R.receive c in
-  require(Bytearray.to_string(Lwt_unix.run response)="abc") "legacy reply payload changed";
+  let packet=Lwt_unix.run response in
+  require(Lwt_unix.run(R.with_body_packet packet(fun buf->Lwt.return(Bytearray.to_string buf)))="abc") "legacy reply payload changed";
   R.closeConnection c;disconnected receiving);
  let accepted=Lwt.wait () in
  let _client=R.registerServerCmd "packet-valid-request" Umarshal.unit Umarshal.unit

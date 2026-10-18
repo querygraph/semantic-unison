@@ -47,7 +47,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -58,6 +58,8 @@ def main():
                                       'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/remote_startup_bounds.ml': sha(repository/'tests/remote_startup_bounds.ml'),
                                       'tests/remote_packet_bounds.ml': sha(repository/'tests/remote_packet_bounds.ml'),
+                                      'tests/remote_body_input.ml': sha(repository/'tests/remote_body_input.ml'),
+                                      'tests/remote_body_retained.ml': sha(repository/'tests/remote_body_retained.ml'),
                                       'tests/test_remote_bounds.py': sha(Path(__file__))},
                       linked_objects={name: sha(build/name) for name in modules+objects('COBJS')},
                       commands=[])
@@ -139,6 +141,40 @@ def main():
             (packet/'test.log').write_text(c.stdout+c.stderr)
             assert c.returncode==2 and 'DESIGNATED header payload allocation reached' in c.stderr,c.stdout+c.stderr
             record['packet_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(packet/'remoteForTest.ml'),binary_sha256=sha(packet/'packet-negative'),scope='Only global outer cap omitted; private guard prevents nine-byte allocation/body wait')
+            body_negatives=[
+                ('body-decoder-negative',
+                 'with_body_packet packet (fun buf->Lwt.return (unmarshalResult conn buf))',
+                 'let (buf,_)=packet in Lwt.return (unmarshalResult conn buf)',
+                 'DESIGNATED raw body input retained'),
+                ('body-handoff-negative',
+                 'if not !handed_off then begin',
+                 'if (ignore !handed_off;true) then begin',
+                 'DESIGNATED handed-off reply released'),
+                ('body-uncertainty-negative',
+                 'let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f',
+                 'let guard_body_borrower f = f ()',
+                 'DESIGNATED body uncertainty escaped'),
+                ('body-stream-uncertainty-negative',
+                 '| e when body_unresolved e -> raise e',
+                 '| e when false && body_unresolved e -> raise e',
+                 'DESIGNATED stream uncertainty converted to abort'),
+                ('body-registered-uncertainty-negative',
+                 '| _ -> List.exists (fun classify->classify error) !body_ownership_classifiers',
+                 '| _ -> false',
+                 'DESIGNATED registered body uncertainty escaped')]
+            for label,old,replacement,witness in body_negatives:
+                assert source.count(old)==1
+                private=work/label;private.mkdir(mode=0o700)
+                (private/'remoteForTest.ml').write_text(controlled(source.replace(old,replacement)))
+                (private/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+                bf=['-I',str(private),*flags]
+                for argv in [[compiler,*bf,'-c','remoteForTest.ml'],[compiler,*bf,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o',label]]:
+                    c=subprocess.run(argv,cwd=private,capture_output=True,text=True,timeout=30)
+                    record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+                c=subprocess.run([str(private/label)],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
+                (private/'test.log').write_text(c.stdout+c.stderr)
+                assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
+                record[label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/label),scope='Single ownership mutation; original tiny pipe inputs; expected assertion failure')
             record['controlled_remote_sha256']=sha(work/'remoteForTest.ml')
             record['controlled_probe_sha256']=sha(work/'remoteTest.ml')
             record['status']='passed'

@@ -966,6 +966,85 @@ let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
              Util.msg "receive '%s' %d bytes\n" start length);
    Lwt.return buf)))
 
+(* Separate service lanes: retained requests cannot spend reply/header credits.
+   These cover raw body payloads, not decoded values or heap/transport overhead. *)
+let requestInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcrequestinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw request/stream MiB"
+  "Nonwaiting process-wide raw body allowance across legacy and bounded \
+   requests and streams; retained through actual processing/reply settlement.")
+let replyInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcreplyinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw reply MiB"
+  "Separate nonwaiting raw reply allowance; includes arrived but unconsumed \
+   reply promises and synchronous decoding. Not decoded-object or RSS limits.")
+let bodyInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcbodyinputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "raw body slots in each request/reply lane"
+  "Positive per-lane count, including incomplete prefixes and empty bodies; \
+   maximum65536. Exhaustion refuses before input, without waiting for credits.")
+type body_lane={body_budget:int Prefs.t;body_bytes:int ref;body_count:int ref}
+let requestInputLane={body_budget=requestInputMiB;body_bytes=ref 0;body_count=ref 0}
+let replyInputLane={body_budget=replyInputMiB;body_bytes=ref 0;body_count=ref 0}
+let empty_body_payload=Bytearray.create 0
+type body_input={body_lane:body_lane;mutable body_reserved:int;
+                mutable body_active:bool;mutable body_sized:bool;
+                mutable body_payload:Bytearray.t}
+let body_limits lane =
+  let mib=Prefs.read lane.body_budget and slots=Prefs.read bodyInputSlots in
+  if mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC body input budget");
+  mib*1048576,slots
+let reserve_body_slot ticket =
+  if ticket.body_active then invalid_arg "RPC body slot reservation";
+  let _,slots=body_limits ticket.body_lane in
+  if !(ticket.body_lane.body_count)>=slots then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_active<-true;incr ticket.body_lane.body_count
+let reserve_body_bytes ticket length =
+  if not ticket.body_active || ticket.body_sized || length<0 then
+    invalid_arg "RPC body byte reservation";
+  let budget,_=body_limits ticket.body_lane in
+  let used= !(ticket.body_lane.body_bytes) in
+  if used>budget || length>budget-used then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_reserved<-length;ticket.body_sized<-true;
+  ticket.body_lane.body_bytes:=used+length
+let release_body_input ticket =
+  if ticket.body_active then begin
+    ticket.body_active<-false;ticket.body_payload<-empty_body_payload;
+    ticket.body_lane.body_bytes:= !(ticket.body_lane.body_bytes)-ticket.body_reserved;
+    decr ticket.body_lane.body_count
+  end
+let release_body_packet (_,ticket) = release_body_input ticket
+let body_ownership_classifiers : (exn -> bool) list ref=ref []
+let register_body_ownership_classifier classify =
+  body_ownership_classifiers:=classify:: !body_ownership_classifiers
+let body_unresolved error = match error with
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _
+  | DomainOwner.Join_uncertain _ | StagePublication.Ownership_uncertain _ -> true
+  | _ -> List.exists (fun classify->classify error) !body_ownership_classifiers
+let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f
+let with_body_packet (buffer,ticket) f =
+  try BorrowedWork.try_bind (fun()->guard_body_borrower(fun()->f buffer))
+    (fun result->release_body_input ticket;Lwt.return result)
+    (fun error->release_body_input ticket;Lwt.fail error)
+  with error->release_body_input ticket;raise error
+let receive_body_packet ?maxBytes ?(reserve=(fun _->())) lane conn =
+  let ticket={body_lane=lane;body_reserved=0;body_active=false;body_sized=false;
+              body_payload=empty_body_payload} in
+  let failed error=release_body_input ticket;Lwt.fail error in
+  try
+    reserve_body_slot ticket;
+    BorrowedWork.try_bind
+      (fun()->receivePacket ?maxBytes
+        ~reserve:(fun length->reserve_body_bytes ticket length;reserve length) conn)
+      (fun buffer->ticket.body_payload<-buffer;Lwt.return(buffer,ticket)) failed
+  with error->release_body_input ticket;raise error
+let start_body_request ?maxBytes ?reserve conn launch =
+  BorrowedWork.bind
+    (fun()->receive_body_packet ?maxBytes ?reserve requestInputLane conn)
+    (fun packet->
+      let work=with_body_packet packet launch in
+      Lwt.ignore_result work;Lwt.return ())
+
 type servercmd =
   connection -> Bytearray.t ->
   ((Bytearray.t * int * int) list -> (Bytearray.t * int * int) list) Lwt.t
@@ -1004,7 +1083,7 @@ let release_bounded_input ticket =
     decr bounded_input_count
   end
 let with_bounded_request ticket f =
-  try BorrowedWork.try_bind f
+  try BorrowedWork.try_bind (fun()->guard_body_borrower f)
     (fun value -> release_bounded_input ticket;Lwt.return value)
     (fun error -> release_bounded_input ticket;Lwt.fail error)
   with error -> release_bounded_input ticket;raise error
@@ -1013,13 +1092,11 @@ let start_bounded_request conn limit launch =
   let failed error =
     if not !transferred then release_bounded_input ticket;
     Lwt.fail error in
-  try BorrowedWork.try_bind
-    (fun () -> receivePacket ~maxBytes:limit ~reserve:(reserve_bounded_input ticket) conn)
-    (fun buf ->
-       let work=with_bounded_request ticket (fun () -> launch buf) in
-       transferred:=true;
-       Lwt.ignore_result work;
-       Lwt.return ()) failed
+  try BorrowedWork.catch
+    (fun()->start_body_request ~maxBytes:limit
+      ~reserve:(reserve_bounded_input ticket) conn (fun buffer->
+        transferred:=true;
+        with_bounded_request ticket (fun()->launch buffer))) failed
   with error -> if not !transferred then release_bounded_input ticket;raise error
 type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
 let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
@@ -1201,7 +1278,9 @@ let processStream conn id cmdName buf =
       in
       cmd conn buf;
       Lwt.return ()
-    with e ->
+    with
+    | e when body_unresolved e -> raise e
+    | e ->
       Hashtbl.add streamError id e;
       abortStream conn id
     end
@@ -1259,14 +1338,28 @@ let rec receive conn =
           let dispatch buf=Lwt_unix.yield () >>= (fun () ->
             processDetachedRequest conn id cmdName buf) in
           let started=match Util.StringMap.find_opt cmdName !serverArgLimits with
-            | None -> receivePacket conn >>= (fun buf ->
-                Lwt.ignore_result (dispatch buf);Lwt.return ())
+            | None -> start_body_request conn dispatch
             | Some limit -> start_bounded_request conn limit dispatch in
           started >>= (fun () -> receive conn)
       | NormalResult ->
-          receivePacket ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits) conn >>= (fun buf ->
-          Lwt.wakeup (find_receiver num_id) buf;
-          receive conn)
+          let pending=MsgIdMap.find num_id !receivers in
+          let handed_off=ref false in
+          receive_body_packet ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits)
+            replyInputLane conn >>= (fun packet ->
+          let delivered =
+            try
+              let ready=Lwt.return packet in
+              ignore(find_receiver num_id);
+              (* The prepared Return is installed before observers run. An
+                 exception at/after this transfer cannot release a borrower. *)
+              handed_off:=true;
+              Lwt.wakeup_from pending ready;Lwt.return ()
+            with error->
+              if not !handed_off then begin
+                release_body_packet packet;failPending pending error
+              end;
+              Lwt.fail error
+          in delivered >>= fun ()->receive conn)
       | TransientExn s ->
           debugV (fun() -> Util.msg "receive: Transient remote error '%s']" s);
           Lwt.wakeup_exn (find_receiver num_id) (Util.Transient s);
@@ -1276,8 +1369,8 @@ let rec receive conn =
           Lwt.wakeup_exn (find_receiver num_id) (Util.Fatal ("Server: " ^ s));
           receive conn
       | Stream cmdName ->
-          receivePacket conn >>= fun buf ->
-          processStream conn id cmdName buf >>= fun () ->
+          BorrowedWork.bind (fun()->receive_body_packet requestInputLane conn)
+            (fun packet->with_body_packet packet (fun buf->processStream conn id cmdName buf)) >>= fun () ->
           receive conn
       | StreamAbort ->
           streamAbortedSrc := num_id;
@@ -1297,9 +1390,16 @@ let wait_for_reply ?maxBytes id =
      receiving thread. *)
   BorrowedWork.catch
     (fun () ->
-       BorrowedWork.bind (fun () -> res) (fun v ->
-         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return v)))
-    (fun e -> BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
+       BorrowedWork.bind (fun () -> res) (fun packet ->
+         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return packet)))
+    (fun e ->
+       (* A post-arrival yield/setup failure has not published this result to
+          its decoder. Do not strand its raw allowance in the failed promise. *)
+       (match Lwt.poll res with
+        | Some packet->release_body_packet packet
+        | None->()
+        | exception _->());
+       BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
   with error ->
     (match MsgIdMap.find_opt id !receivers with
      | None -> ()
@@ -1356,12 +1456,17 @@ let registerSpecialServerCmd
     let reply = wait_for_reply ?maxBytes id in
     debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
     BorrowedWork.try_bind (fun () -> dump conn request)
-      (fun () -> BorrowedWork.bind (fun () -> reply) (fun buf -> Lwt.return (unmarshalResult conn buf)))
+      (fun () -> BorrowedWork.bind (fun () -> reply) (fun packet ->
+         with_body_packet packet (fun buf->Lwt.return (unmarshalResult conn buf))))
       (fun e ->
          (match MsgIdMap.find_opt id !receivers with
           | None -> ()
           | Some pending -> ignore (find_receiver id); failPending pending e);
-         Lwt.fail e)
+         (* A reply may already have arrived while output was pending. Await
+            the actual waiter/yield, then abandon that unconsumed packet. *)
+         BorrowedWork.try_bind (fun()->reply)
+           (fun packet->release_body_packet packet;Lwt.fail e)
+           (fun _->Lwt.fail e))
   in
   client
 

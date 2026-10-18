@@ -22,14 +22,12 @@ single archive/metadata RPC result may need a larger configured limit. No user
 profile, installed binary or remote setting is edited automatically. Incoming
 peer preference values cannot override it; it is omitted from outgoing values.
 
-This is an outer allocation check, **not aggregate body admission**. Legacy
-requests may retain several packets while working; replies can remain in
-consumer promises; stream callbacks can retain decoded values. Existing bounded
-request and shared header/startup reservations keep their own lifetimes and
-independent policies. Decoded collection expansion of legacy codecs, global
-live decoded-object accounting, outbound marshalling, fixed connection buffers,
-heap overhead and aggregate descendant FD/RSS remain separate requirements.
-The policy is captured per read; lowering it does not revoke an in-flight read.
+This outer allocation check is separate from [raw body lifetime admission](rpc-body-input-lifetimes.md),
+which now covers requests/streams and arrived normal-result buffers through
+processing or consumption. Header/startup reservations remain independent.
+Decoded collection expansion of legacy codecs, live decoded-object retention,
+outbound marshaling, connection/heap overhead and aggregate descendant FD/RSS
+remain separate requirements. The policy is captured per read; lowering it does not revoke an in-flight read.
 There is no new wait or cancellation/timeout behavior.
 
 `tests/remote_packet_bounds.ml` checks exact/zero sizes, the minimum with explicit

@@ -173,6 +173,9 @@ let unresolved_ownership = function
   | SemanticFile.Close_uncertain _ | DngComponents.Cache_ownership_uncertain _
   | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _ -> true
   | _ -> false
+(* Remote precedes the semantic carrier definitions in the link graph. Add the
+   same pure owner-loop classifier used by semantic admission after loading. *)
+let () = Remote.register_body_ownership_classifier unresolved_ownership
 let report_retained_ownership _ =
   Util.warn "Resource closure is unresolved; this process is retaining its reservations.\n"
 let resource_accounting () = SemanticAdmission.accounting(resource_gate ())

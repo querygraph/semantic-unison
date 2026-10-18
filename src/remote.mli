@@ -101,6 +101,13 @@ type connection
 val connectionVersion : connection -> int
 val connectionOfRoot : Common.root -> connection
 
+val register_body_ownership_classifier : (exn -> bool) -> unit
+(** Owner-loop initialization hook for ownership carriers defined after Remote.
+    Predicates must be pure/owner-only. Registration is additive; no unregister
+    or release authority. True or a classifier exception retains body allowance
+    through RetainedOwnership rather than translating uncertainty into cleanup.
+    This does not discover OS closure or recognize arbitrary unknown exceptions. *)
+
 (* Every incoming packet also obeys the endpoint-local rpcpacketmaxbytes
    outer frame policy. Legacy registrations retain their existing codecs;
    this frame bound is not aggregate or decoded-object accounting. *)
@@ -129,7 +136,9 @@ val registerBoundedServerCmd :
     not decoded heap/RSS or aggregate request bounds. Scope arguments may be
     decoded twice, each with its own bound. Valid wire encodings are unchanged.
     Shared RPC headers use independent endpoint-local frame/byte/slot limits.
-    Legacy unbounded body registrations are not capped by those header limits. *)
+    All body registrations also use separate aggregate request/reply raw-input
+    lanes. These follow actual processing/queued output or result decoding and
+    preserve recognized ownership uncertainty; not decoded-object/RSS limits. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

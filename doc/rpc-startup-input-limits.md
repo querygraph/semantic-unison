@@ -39,7 +39,7 @@ copy at most the existing16384-byte connection input buffer; they are not
 charged to this field reservation. Returned values and version-list/error
 conversions can outlive the raw reservation and need separate decoded-object
 accounting. The common outer packet cap additionally limits the magic packet. Legacy
-body/result/stream aggregate admission, total connection
+[body/result/stream raw admission](rpc-body-input-lifetimes.md), total connection
 baseline, process-tree FD/RSS and protocol timeouts are separate requirements.
 
 `tests/remote_startup_bounds.ml` uses original tiny pipe data. It checks exact

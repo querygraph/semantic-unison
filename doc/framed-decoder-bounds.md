@@ -44,8 +44,9 @@ queue consumption, including decoded-input refusal before the server or scope
 runs. The shared RPC header benefits from Umarshal's inner-length preflight.
 Its outer header frame now uses the separately qualified
 [header byte/slot policy](rpc-header-input-limits.md). Legacy body and stream frames now obey the
-[common outer frame policy](rpc-outer-frame-limits.md); their aggregate retained
-raw/decoded lifetimes remain separate. Per-decode limits do
+[common outer frame policy](rpc-outer-frame-limits.md); their retained raw lifetimes now follow
+[body input admission](rpc-body-input-lifetimes.md). Aggregate decoded lifetimes
+remain separate. Per-decode limits do
 not form a global decoded-object reservation; connection/global aggregation,
 recursive conversion/depth policies and complete FD/RSS limits remain open.
 
