@@ -50,9 +50,13 @@ listing behavior while post-entry read ENOENT propagates. Actual Runtime device/
 transaction borrowers retain on close uncertainty and do not retry handles.
 
 The bounded broader search is pinned in owned-resource-remaining-inventory-20261018.json.
-Next source work is SemanticSync local raw-pair/source/parent/transaction ownership,
-where remote handoff qualification cannot be reused as proof of the local caller.
-Merge-cache directory/quota/record descriptors and temporary-name cleanup require
+Production SemanticSync local async pair/source/parent and complete producer
+borrowed lifetime are now separately qualified in local-transaction-owner-actual-20261018.json;
+see local-transaction-ownership.md. The immutable v2 remaining inventory records
+the exact next findings: remote producer invocation still outside its borrowed
+wrapper, separate capture/scalar merge owners and cache metadata owners. Old remote
+handoffs are not proof of the active-producer window. Synchronous reference remains
+test-only and separate. Merge-cache directory/quota/record descriptors and temporary-name cleanup require
 joint retention so a nested directory carrier cannot trigger ordinary outer close
 or unlink. Solaris FEN enumeration is a separate legacy/platform finding, not an
 inferred executed failure or an automatic new platform runtime requirement.

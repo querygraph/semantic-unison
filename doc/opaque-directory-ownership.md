@@ -110,3 +110,8 @@ Fspath's apparent raw opendir definition is commented historical documentation,
 not an executed consumer. Fs/System wrappers and test-only direct handles must be
 distinguished from these live production paths. No Solaris/Windows runtime or
 cache ownership qualification follows from the present Os/Files change.
+
+Local async transaction ownership and its complete producer lifetime subsequently
+qualified separately; see local-transaction-ownership.md and the v2 remaining
+inventory. Do not treat this as qualification of remote active-producer lifetime
+or the independent compact-base capture/scalar-merge owners.

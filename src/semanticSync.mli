@@ -55,6 +55,13 @@ val retained_publications : unit -> retained_publication list
 val retained_publication_cause : retained_publication -> exn
 val retained_publication_native : retained_publication -> StagePublication.owned option
 val retained_publication_descriptors : retained_publication -> Unix.file_descr list
-(** Owner-loop diagnostics for bound local native publication uncertainty.
+(** Owner-loop diagnostics for local async descriptor/native publication uncertainty.
     Transaction admission and remaining known descriptors stay held inside the
     pending operation. These observations grant no cleanup/retry authority. *)
+
+val retained_publication_pair_ownership : retained_publication -> NotificationPipe.t option
+val retained_publication_source_ownership : retained_publication -> NotificationPipe.t option
+val retained_publication_parent_ownership : retained_publication -> NotificationPipe.t option
+(** Owner-loop forensic ledgers, including legacy async transactions. Known FD
+    inventory excludes uncertain/closed/transferred numbers. No cleanup/retry
+    authority or native known-close assertion is granted by these observations. *)

@@ -74,111 +74,152 @@ let try_local ~source ~basis ~directory ~staging =
         | SemanticFile.Invalid reason -> raise (Util.Transient ("DNG semantic verification: " ^ reason))
         | _ -> raise e)
 
-(* Resource admission is global and independent of CPU permits. Each local
-   transaction may inspect source and basis concurrently. *)
-type transaction = { path : Fspath.t; mutable fds : Unix.file_descr list;
-  mutable busy : bool; mutable abandoned : bool; mutable owned : bool;
-  mutable publication_pending : bool; mutable retained : bool }
+(* Resource admission is global and independent of CPU permits. Prepare every
+   descriptor slot before clone/source acquisition; no post-open list handoff. *)
+type transaction = {
+  path:Fspath.t; pair:NotificationPipe.t; source_owner:NotificationPipe.t;
+  on_uncertain:exn -> unit; interrupted_error:exn;
+  mutable busy:bool; mutable abandoned:bool; mutable owned:bool;
+  mutable publication_pending:bool; mutable retained:bool; mutable closed:bool;
+  mutable retention_error:exn; mutable original_error:exn; mutable original_failed:bool;
+}
+let prepare_transaction path on_uncertain =
+  let pair=NotificationPipe.prepare () and source_owner=NotificationPipe.prepare () in
+  let transaction={path;pair;source_owner;on_uncertain;
+    interrupted_error=Util.Transient "Local semantic transaction interrupted";
+    busy=false;abandoned=false;owned=false;publication_pending=false;
+    retained=false;closed=false;retention_error=Out_of_memory;original_error=Exit;original_failed=false} in
+  NotificationPipe.keep_owner pair (fun () -> ignore(Sys.opaque_identity transaction));
+  NotificationPipe.keep_owner source_owner (fun () -> ignore(Sys.opaque_identity transaction));
+  transaction
+let remember_transaction transaction error =
+  if not transaction.original_failed then begin
+    transaction.original_error<-error;transaction.original_failed<-true
+  end;
+  NotificationPipe.remember_failure transaction.pair error;
+  NotificationPipe.remember_failure transaction.source_owner error
+let retain_transaction transaction error =
+  if not transaction.retained then transaction.retention_error<-error;
+  transaction.retained<-true;transaction.abandoned<-true;
+  (try transaction.on_uncertain (if transaction.original_failed then transaction.original_error else error) with _ -> ());
+  try NotificationPipe.retain_unsettled transaction.pair error
+  with NotificationPipe.Uncertain _ -> ()
+let adopt_transaction transaction basis output ~name_owned =
+  NotificationPipe.adopt transaction.pair basis output;
+  transaction.owned<-name_owned
+let check_transaction transaction =
+  if transaction.abandoned || transaction.closed then begin
+    retain_transaction transaction transaction.interrupted_error;
+    raise transaction.interrupted_error
+  end
+let transaction_descriptors transaction =
+  let basis,output=NotificationPipe.descriptors transaction.pair in
+  let source,_=NotificationPipe.descriptors transaction.source_owner in
+  (if NotificationPipe.read_held transaction.pair then [basis] else []) @
+  (if NotificationPipe.write_held transaction.pair then [output] else []) @
+  (if NotificationPipe.read_held transaction.source_owner then [source] else [])
 let close_transaction transaction =
-  if not(transaction.retained || transaction.publication_pending) then begin
-  let fds = transaction.fds in
-  transaction.fds <- [];
-  let first = ref None in
-  List.iter (fun fd -> try Unix.close fd with Unix.Unix_error _ as e ->
-    if !first = None then first := Some e) fds;
-  match !first with None -> () | Some e -> raise e
+  if transaction.retained then
+    NotificationPipe.retain_unsettled transaction.pair transaction.retention_error;
+  if not transaction.busy && not transaction.closed && not transaction.publication_pending then begin
+    (* Attempt every independently owned slot even if one close is uncertain. *)
+    (try NotificationPipe.close_all transaction.pair
+     with NotificationPipe.Uncertain _ as error -> retain_transaction transaction error);
+    (try NotificationPipe.close_all transaction.source_owner
+     with NotificationPipe.Uncertain _ as error -> retain_transaction transaction error);
+    if transaction.retained then raise transaction.retention_error;
+    transaction.closed<-true
   end
 let cleanup_transaction transaction =
-  transaction.abandoned <- true;
-  if not transaction.busy then
-    (try close_transaction transaction with Unix.Unix_error _ -> ());
-  if transaction.owned && not(transaction.retained || transaction.publication_pending) then begin
-    transaction.owned <- false;
+  transaction.abandoned<-true;
+  if not transaction.busy then close_transaction transaction;
+  if transaction.owned && transaction.closed &&
+     not(transaction.retained || transaction.publication_pending) then begin
+    transaction.owned<-false;
     try Fs.unlink transaction.path with Unix.Unix_error (Unix.ENOENT,_,_) -> ()
   end
 let cleanup_transaction_noerr transaction =
-  try cleanup_transaction transaction with Unix.Unix_error _ -> ()
+  try cleanup_transaction transaction with _ -> ()
 let transaction_resources = Remote.resourceWithConnCleanup
   cleanup_transaction cleanup_transaction_noerr
-let register_transaction path basis_fd output_fd =
-  let transaction =
-    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=true;publication_pending=false;retained=false}
-    with error -> discard_unregistered_stage path basis_fd output_fd; raise error in
+let register_transaction transaction =
   try transaction_resources.register transaction with error ->
-    (* Registration may have installed the record before raising. Empty its
-       ownership first so a retained cleanup entry cannot close recycled fds. *)
-    let fds = transaction.fds in
-    transaction.fds <- [];
-    transaction.abandoned <- true;
-    List.iter close_fd_noerr fds;
-    if transaction.owned && not(transaction.retained || transaction.publication_pending) then begin
-      transaction.owned <- false; unlink_stage_noerr path
-    end;
+    remember_transaction transaction error;
+    cleanup_transaction transaction;
     (try transaction_resources.release_noerr transaction with _ -> ());
     raise error
-let retain_source_fd transaction fd =
-  let previous = transaction.fds in
-  try transaction.fds <- fd :: previous with error ->
-    if transaction.fds == previous then close_fd_noerr fd;
-    raise error
+let open_source transaction source =
+  let fd=Fs.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+  NotificationPipe.adopt_read transaction.source_owner fd;
+  check_transaction transaction;fd
 let with_borrowed transaction f =
-  if transaction.abandoned then Lwt.fail (Util.Transient "Local semantic transfer interrupted")
-  else begin
-    let finish () =
-      transaction.busy <- false;
-      if transaction.abandoned then
-        (try close_transaction transaction with Unix.Unix_error _ -> ()) in
-    BorrowedWork.try_bind (fun () -> transaction.busy <- true; f ())
-      (fun result -> finish ();
-        if transaction.abandoned then Lwt.fail (Util.Transient "Local semantic transfer interrupted")
-        else Lwt.return result)
-      (fun e -> finish (); Lwt.fail e)
+  if transaction.abandoned then Lwt.fail transaction.interrupted_error else begin
+    let uncertain = function
+      | NotificationPipe.Uncertain _ | SemanticFile.Close_uncertain _
+      | DngComponents.Cache_ownership_uncertain _ | DirectoryOwner.Uncertain _
+      | StagePublication.Ownership_uncertain _ -> true
+      | _ -> false in
+    let retain entry=retain_transaction transaction (RetainedOwnership.cause entry) in
+    let guard work=RetainedOwnership.guard ~is_uncertain:uncertain ~on_retained:retain work in
+    let finish ()=transaction.busy<-false;
+      if transaction.abandoned then close_transaction transaction in
+    guard (fun () ->
+      BorrowedWork.try_bind (fun () -> transaction.busy<-true;guard f)
+        (fun result -> finish ();
+          if transaction.abandoned then Lwt.fail transaction.interrupted_error else Lwt.return result)
+        (fun error -> remember_transaction transaction error;finish ();Lwt.fail error))
   end
 
-(* Bound producers retain a separate descriptor-relative name owner. The
-   legacy transaction's pathname cleanup is disabled for these stages. A
-   connection close must await borrowed workers before removing their stage. *)
-type publication = { context : StagePublication.owned; scope : retained_publication;
-  mutable transaction : transaction option; mutable closing : bool;
-  mutable closed : bool; mutable close_failed : bool; mutable close_error : exn;
-  mutable loose_basis : Unix.file_descr; mutable loose_output : Unix.file_descr;
-  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool; mutable loose_parent_held : bool }
+(* Descriptor and native name owners remain distinct. Close the raw slots before
+   aborting a name; native uncertainty never authorizes local parent cleanup. *)
+type publication = { context:StagePublication.owned; scope:retained_publication;
+  staging_transaction:transaction;
+  parent_handoff:StagePublication.parent_handoff; parent_owner:NotificationPipe.t;
+  mutable closing:bool; mutable closed:bool;
+  mutable close_failed:bool; mutable close_error:exn }
 and retained_publication = {
-  mutable publication : publication option;
-  mutable native : StagePublication.owned option;
-  mutable cause : exn; mutable cause_recorded : bool;
-  mutable uncertain : bool; mutable linked : bool;
-  pending : bool Lwt.t;
-  link : retained_publication option;
-  mutable next : retained_publication option;
+  mutable held:transaction option;
+  mutable publication:publication option;
+  mutable native:StagePublication.owned option;
+  mutable cause:exn; mutable cause_recorded:bool;
+  mutable uncertain:bool; mutable linked:bool;
+  pending:bool Lwt.t;
+  link:retained_publication option;
+  mutable next:retained_publication option;
 }
-let retained_publication_owners = ref None
+let retained_publication_owners=ref None
 let retained_publications () =
-  let rec collect acc = function None -> List.rev acc
-    | Some scope -> collect (scope::acc) scope.next in
+  let rec collect acc=function None->List.rev acc | Some scope->collect(scope::acc)scope.next in
   collect [] !retained_publication_owners
-let retained_publication_cause scope = scope.cause
-let retained_publication_native scope = scope.native
-let retained_publication_descriptors scope = match scope.publication with
-  | Some {transaction=Some transaction;_} -> transaction.fds
-  | Some publication ->
-    (if publication.loose_parent_held then [publication.loose_parent] else []) @
-    (if publication.loose_fds then [publication.loose_basis;publication.loose_output] else [])
-  | None -> []
+let retained_publication_cause scope=scope.cause
+let retained_publication_native scope=scope.native
+let retained_publication_pair_ownership scope =
+  match scope.held with None->None | Some transaction->Some transaction.pair
+let retained_publication_source_ownership scope =
+  match scope.held with None->None | Some transaction->Some transaction.source_owner
+let retained_publication_parent_ownership scope =
+  match scope.publication with None->None | Some publication->Some publication.parent_owner
+let retained_publication_descriptors scope =
+  let known=match scope.held with None->[] | Some transaction->transaction_descriptors transaction in
+  match scope.publication with
+  | Some publication when NotificationPipe.read_held publication.parent_owner ->
+      let parent,_=NotificationPipe.descriptors publication.parent_owner in parent::known
+  | _ -> known
 let create_publication_scope () =
   let pending=Lwt.wait () in
-  let rec scope={publication=None;native=None;cause=Out_of_memory;cause_recorded=false;
+  let rec scope={held=None;publication=None;native=None;cause=Out_of_memory;cause_recorded=false;
     uncertain=false;linked=false;pending;link=Some scope;next=None} in scope
 let record_publication_cause scope error =
   if not scope.cause_recorded then begin scope.cause<-error;scope.cause_recorded<-true end
+let mark_scope_uncertain scope error =
+  record_publication_cause scope error;scope.uncertain<-true;
+  if not scope.linked then begin
+    scope.next<- !retained_publication_owners;retained_publication_owners:=scope.link;scope.linked<-true
+  end
 let owned_call scope work =
   try work () with StagePublication.Ownership_uncertain native as error ->
-    record_publication_cause scope error;
-    scope.native<-native;scope.uncertain<-true;
-    (match scope.publication with Some {transaction=Some transaction;_}->transaction.retained<-true | _->());
-    if not scope.linked then begin
-      scope.next<- !retained_publication_owners;retained_publication_owners:=scope.link;scope.linked<-true
-    end;
+    scope.native<-native;mark_scope_uncertain scope error;
+    (match scope.held with Some transaction->retain_transaction transaction error | None->());
     raise error
 let protect_publication_scope scope work =
   BorrowedWork.try_bind work
@@ -186,115 +227,89 @@ let protect_publication_scope scope work =
     (fun error -> record_publication_cause scope error;
       if scope.uncertain then scope.pending else Lwt.fail error)
 let close_publication publication =
-  publication.closing <- true;
-  (match publication.transaction with
-   | Some transaction -> transaction.abandoned <- true
-   | None -> ());
-  let busy = match publication.transaction with
-    | Some transaction -> transaction.busy | None -> false in
-  if not busy && not publication.closed then begin
-    publication.closed <- true;
-    (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
-     with error -> publication.close_failed<-true;publication.close_error<-error;
-       record_publication_cause publication.scope error);
-    if not publication.scope.uncertain then begin
-      if publication.loose_fds then begin
-        publication.loose_fds<-false;
-        close_fd_noerr publication.loose_basis;close_fd_noerr publication.loose_output
-      end;
-      if publication.loose_parent_held then begin
-        publication.loose_parent_held<-false;close_fd_noerr publication.loose_parent
-      end;
-      (match publication.transaction with Some transaction ->
-        transaction.publication_pending<-false;
-        if transaction.abandoned then cleanup_transaction transaction
-       | None -> ())
-    end;
+  publication.closing<-true;
+  let transaction=publication.staging_transaction in
+  transaction.abandoned<-true;
+  if not transaction.busy && not publication.closed && not publication.scope.uncertain then begin
+    publication.closed<-true;transaction.publication_pending<-false;
+    (try close_transaction transaction with error ->
+      publication.close_failed<-true;publication.close_error<-error;
+      record_publication_cause publication.scope error);
+    (try
+       if publication.scope.cause_recorded then
+         NotificationPipe.remember_failure publication.parent_owner publication.scope.cause;
+       NotificationPipe.close_all publication.parent_owner
+     with NotificationPipe.Uncertain _ as error ->
+       retain_transaction transaction error;
+       publication.close_failed<-true;publication.close_error<-error);
+    if not publication.scope.uncertain then
+      (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
+       with error -> publication.close_failed<-true;publication.close_error<-error;
+         record_publication_cause publication.scope error);
     if publication.close_failed then raise publication.close_error
   end
 let close_publication_noerr publication =
   try close_publication publication with _ -> ()
-let publications = Remote.resourceWithConnCleanup
-  close_publication close_publication_noerr
+let publications = Remote.resourceWithConnCleanup close_publication close_publication_noerr
 let release_publication_noerr publication =
   try publications.release_noerr publication with _ -> close_publication_noerr publication
 let release_transaction_noerr transaction =
-  try transaction_resources.release_noerr transaction with _ ->
-    (try cleanup_transaction_noerr transaction with _ -> ())
-let register_publication scope context =
+  try transaction_resources.release_noerr transaction with _ -> cleanup_transaction_noerr transaction
+let register_publication scope context transaction =
   let publication =
-    try {context;scope;transaction=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
-      loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;
-      loose_fds=false;loose_parent_held=false}
+    try
+      let parent_handoff=StagePublication.prepare_parent_handoff () in
+      let parent_owner=NotificationPipe.prepare_read_handoff parent_handoff in
+      let publication={context;scope;staging_transaction=transaction;parent_handoff;parent_owner;
+        closing=false;closed=false;close_failed=false;close_error=Out_of_memory} in
+      NotificationPipe.keep_owner parent_owner (fun () -> ignore(Sys.opaque_identity publication));
+      publication
     with error -> record_publication_cause scope error;
       owned_call scope (fun () -> StagePublication.abort_owned context);raise error in
   (try scope.publication<-Some publication with error ->
     record_publication_cause scope error;
     owned_call scope (fun () -> StagePublication.abort_owned context);raise error);
+  transaction.publication_pending<-true;
   try publications.register publication with error ->
     record_publication_cause scope error;release_publication_noerr publication;raise error
-let register_bound_transaction path basis_fd output_fd =
-  let transaction =
-    try {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false}
-    with error -> close_fd_noerr basis_fd; close_fd_noerr output_fd; raise error in
-  try transaction_resources.register transaction with error ->
-    let fds = transaction.fds in
-    transaction.fds <- [];
-    transaction.abandoned <- true;
-    List.iter close_fd_noerr fds;
-    release_transaction_noerr transaction;
-    raise error
-let create_bound_transaction scope ~basis ~directory ~staging candidate path =
-  if not (StagePublication.available ()) then None else
+let create_bound_transaction scope transaction ~basis ~directory ~staging candidate path =
+  if not(StagePublication.available ()) then None else
   let context =
     try
-      let context = owned_call scope (fun () -> StagePublication.prepare_owned ~working_dir:(Fspath.toString directory)
-        ~stage:(Path.toString candidate) ~temporary:(Path.toString staging)) in
+      let context=owned_call scope (fun () -> StagePublication.prepare_owned
+        ~working_dir:(Fspath.toString directory) ~stage:(Path.toString candidate) ~temporary:(Path.toString staging)) in
       (try Some context with error -> record_publication_cause scope error;
         owned_call scope (fun () -> StagePublication.abort_owned context);raise error)
     with error when StagePublication.preparation_unavailable error -> None in
   match context with
   | None -> None
   | Some context ->
-      let publication = register_publication scope context in
-      try
-        if publication.closing then
-          raise (Util.Transient "Local semantic publication interrupted");
-        match Fs.clone_stage_handles basis path with
-        | Fs.Declined_stage_handles Fs.Non_regular_source ->
-            raise (Util.Transient "Semantic clone basis is no longer a regular file")
-        | Fs.Declined_stage_handles _ ->
-            publications.release publication; None
-        | Fs.Shared_stage_handles (basis_fd, output_fd, parent) ->
-            publication.loose_basis<-basis_fd;publication.loose_output<-output_fd;
-            publication.loose_parent<-parent;publication.loose_fds<-true;publication.loose_parent_held<-true;
-            let adopt ()=StagePublication.adopt_owned context ~parent ~stage:output_fd in
-            publication.loose_parent_held<-false;
-            owned_call scope adopt;
-            (* Adoption owns the name before fallible record/registry allocation.
-               The existing constructor settles the raw pair on its own failure. *)
-            publication.loose_fds<-false;
-            let transaction = register_bound_transaction path basis_fd output_fd in
-            (try
-               publication.transaction <- Some transaction;
-               transaction.publication_pending<-true;
-               Some (transaction, publication, basis_fd, output_fd)
-             with error ->
-               record_publication_cause scope error;
-               release_publication_noerr publication;
-               if scope.uncertain then begin
-                 transaction.retained<-true;
-                 publication.loose_fds<-true
-               end;
-               release_transaction_noerr transaction;raise error)
-      with error -> record_publication_cause scope error;release_publication_noerr publication;raise error
+    let publication=register_publication scope context transaction in
+    try
+      if publication.closing then raise transaction.interrupted_error;
+      match Fs.clone_stage_handles basis path with
+      | Fs.Declined_stage_handles Fs.Non_regular_source ->
+          raise(Util.Transient "Semantic clone basis is no longer a regular file")
+      | Fs.Declined_stage_handles _ -> publications.release publication;None
+      | Fs.Shared_stage_handles(basis_fd,output_fd,parent) ->
+          adopt_transaction transaction basis_fd output_fd ~name_owned:false;
+          NotificationPipe.adopt_read publication.parent_owner parent;
+          check_transaction transaction;
+          let adopt ()=StagePublication.adopt_owned_tracked context publication.parent_handoff ~parent ~stage:output_fd in
+          owned_call scope adopt;
+          let transaction=register_transaction transaction in
+          (try Some(transaction,publication,basis_fd,output_fd) with error ->
+            remember_transaction transaction error;record_publication_cause scope error;
+            release_publication_noerr publication;release_transaction_noerr transaction;raise error)
+    with error -> remember_transaction transaction error;record_publication_cause scope error;
+      release_publication_noerr publication;release_transaction_noerr transaction;raise error
 let with_publication_borrowed publication transaction f =
   BorrowedWork.try_bind (fun () -> with_borrowed transaction f)
     (fun result ->
-      (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
+      (match publication with Some owner when owner.closing->close_publication_noerr owner | _->());
       Lwt.return result)
     (fun error ->
-      (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
+      (match publication with Some owner when owner.closing->close_publication_noerr owner | _->());
       Lwt.fail error)
 
 let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~staging () =
@@ -311,9 +326,11 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
       let candidate = Os.tempPath ~fresh:true directory
         (Path.addSuffixToFinalName staging "-semantic-clone") in
       let path = Fspath.concat directory candidate in
+      let transaction=prepare_transaction path (mark_scope_uncertain scope) in
+      scope.held<-Some transaction;
       let created = match producer with
         | Some _ ->
-            (match create_bound_transaction scope ~basis ~directory ~staging candidate path with
+            (match create_bound_transaction scope transaction ~basis ~directory ~staging candidate path with
              | None -> None
              | Some (transaction, publication, basis_fd, output_fd) ->
                  (try Some (transaction, Some publication, basis_fd, output_fd)
@@ -325,9 +342,12 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
                 raise (Util.Transient "Semantic clone basis is no longer a regular file")
             | Fs.Declined_stage _ -> None
             | Fs.Shared_stage (basis_fd, output_fd) ->
-                let transaction = register_transaction path basis_fd output_fd in
+                adopt_transaction transaction basis_fd output_fd ~name_owned:true;
+                check_transaction transaction;
+                let transaction=register_transaction transaction in
                 (try Some (transaction, None, basis_fd, output_fd)
-                 with error -> release_transaction_noerr transaction; raise error) in
+                 with error -> remember_transaction transaction error;
+                   release_transaction_noerr transaction;raise error) in
       match created with
       | None -> return false
       | Some (transaction, publication, basis_fd, output_fd) ->
@@ -339,8 +359,7 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
           (match publication with Some owner -> release_publication_noerr owner | None -> ());
           release_transaction_noerr transaction in
         BorrowedWork.catch (fun () ->
-          let source_fd = Fs.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-          retain_source_fd transaction source_fd;
+          let source_fd=open_source transaction source in
           let pool = (SemanticRuntime.get ()).pool in
           let rec select = function
             | [] -> return None
@@ -367,33 +386,35 @@ let try_local_async_internal ?reservation ?producer ~source ~basis ~directory ~s
                 ~basis:basis_fd ~output:output_fd)) (fun applied ->
             let report = match applied with Some report -> report | None ->
               raise (Util.Transient "Local semantic materialization cancelled") in
-            (match publication,producer with
+            let publish () = match publication,producer with
              | Some owner,Some producer ->
-                 owned_call scope (fun () -> StagePublication.publish_owned owner.context);
-                 callback_started := true;
-                 producer output_fd;
-                 if transaction.abandoned || owner.closing then
-                   raise (Util.Transient "Local semantic publication interrupted");
-                 owned_call scope (fun () -> StagePublication.disarm_owned owner.context)
+                 with_publication_borrowed publication transaction (fun () ->
+                   owned_call scope (fun () -> StagePublication.publish_owned owner.context);
+                   callback_started := true;
+                   producer output_fd;
+                   if transaction.abandoned || owner.closing then raise transaction.interrupted_error;
+                   owned_call scope (fun () -> StagePublication.disarm_owned owner.context);
+                   return ())
              | None,None ->
                  close_transaction transaction;
                  Fs.rename path (Fspath.concat directory staging);
-                 transaction.owned <- false
-             | _ -> assert false);
-            release ();
-            debug (fun () -> Util.msg
-              "Local semantic workers wrote %d metadata bytes in %d writes from %d payload bytes (%s)\n"
-              report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
-              (SemanticDelta.payload_size plan) (SemanticDelta.profile plan));
-            return true)))
-          (fun e -> record_publication_cause scope e;release_noerr ();
+                 transaction.owned <- false;return ()
+             | _ -> assert false in
+            BorrowedWork.bind publish (fun () ->
+              release ();
+              debug (fun () -> Util.msg
+                "Local semantic workers wrote %d metadata bytes in %d writes from %d payload bytes (%s)\n"
+                report.SemanticDelta.logical_bytes_written report.SemanticDelta.write_calls
+                (SemanticDelta.payload_size plan) (SemanticDelta.profile plan));
+              return true))))
+          (fun e -> remember_transaction transaction e;record_publication_cause scope e;release_noerr ();
             if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Local semantic worker: " ^ reason))
             | Unix.Unix_error _ ->
               Util.convertUnixErrorsToTransient "local semantic transfer" (fun () -> raise e)
             | _ -> fail e)
         with error ->
-          record_publication_cause scope error;
+          remember_transaction transaction error;record_publication_cause scope error;
           (match publication with Some owner -> release_publication_noerr owner | None -> ());
           release_transaction_noerr transaction;
           raise error)))
