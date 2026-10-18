@@ -1,0 +1,130 @@
+{
+  "schema": "unison-built-in-worker-native-call-map/1",
+  "state": "MANUAL_FIRST_PARTY_BINDING_INVENTORY_NOT_COMPLETE_M6",
+  "production_baseline": "513c121a",
+  "source_sha256": {
+    "src/semanticWorkers.ml": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721",
+    "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+    "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+    "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+    "src/semanticFile.ml": "b499ed74e335dc236ad3a6a4c1d5ec17dacaf796544128eeef6246e805ec38d6",
+    "src/semanticFile_stubs.c": "b9e32050ad5047c0c5b5013e5dec8e8ad8d7dbc12b05dba21cd6cff52d710064",
+    "src/validationSnapshot.ml": "c876943e429ed9efe75db4f3b41256736c5373b456a5adbce3642d6ca193e3ff",
+    "src/wholeFileClone_stubs.c": "e99d7e9fbc71937d44919c498b2ef9392e73cb7944598821bf58d06a2afdcb75",
+    "src/wholeFileClone.ml": "57c762ce70debfb76ddffb85019ffec0ad35da6fc809d94d06f7a658f7538bca",
+    "src/formatExtension.ml": "c0944aedbd879d4bfc7b6f9cb7891bdbbd2780a587a1ac4bc5b55f7ae8a0eb15",
+    "src/formatRecognition.ml": "8ab09f4e4d8d4ee4c4b7c269929a10853807a874455eba0711a21aeb7dde502f",
+    "src/dngRecognition.ml": "16e254b2eaecb09531a06a44255abe769d1b0336e95d04a743c9cd088088263e",
+    "src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+    "src/dngExtended.ml": "0303299ef3520d0aabfda4f11ae6647e6519d6c1bc24afc3b8ba3d78894b410a",
+    "src/dngLayout.ml": "b937b560f9f8a6200e886cf29bb7823a630755a68136331aeb6502c01a103aed",
+    "src/jpegSemantic.ml": "4375f36b6a1622d59a77c74afced70d99044127bd516aedbddfdb23ee54009e4",
+    "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+    "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+    "src/semanticDelta.ml": "e23eef4fc5f59bdcad2d9bdf40908d4965f1b81f50e19ac6ad3cbe5203426032",
+    "src/componentHash.ml": "daa33311d6223df20010d0de2cb43dacc9e854fa5c1b6322727160bcf70c2592",
+    "src/dngComponents.ml": "4df5e44999552c29ce5cfd4fb77d0289e9f58bcce418fd62d7bc1046479f1bcf",
+    "src/ownedClose.ml": "476cb74a943668f79dce0a7b391f1a4cf8dee4dbf5f257730bba0e008ab85340",
+    "src/componentHash.ox.mli.in": "ceb87bf7b470786abfc770dc0d017fa4dba06f385111c6d95f9927e9a6d6db41",
+    "src/dngComponents.ox.mli.in": "c436f57d49f52c761300910f53b1dbeefdde62a989c1846641c6019fb1f04f5d",
+    "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf"
+  },
+  "native_bindings": [
+    {
+      "module": "src/semanticHash.ml",
+      "ml_binding": "native_init",
+      "native_symbol": "unison_semantic_sha256_init",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticHash.ml",
+      "ml_binding": "native_feed",
+      "native_symbol": "unison_semantic_sha256_feed",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticHash.ml",
+      "ml_binding": "native_finish",
+      "native_symbol": "unison_semantic_sha256_finish",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticFile.ml",
+      "ml_binding": "prepare_reader_raw",
+      "native_symbol": "unison_semantic_prepare_reader",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticFile.ml",
+      "ml_binding": "pread_raw",
+      "native_symbol": "unison_semantic_pread",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticFile.ml",
+      "ml_binding": "prepare_writer_raw",
+      "native_symbol": "unison_semantic_prepare_writer",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticFile.ml",
+      "ml_binding": "pwrite_raw",
+      "native_symbol": "unison_semantic_pwrite",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/semanticFile.ml",
+      "ml_binding": "monotonic_now",
+      "native_symbol": "unison_semantic_monotonic_now",
+      "review": "doc/worker-ffi-source-review-20261018.json"
+    },
+    {
+      "module": "src/validationSnapshot.ml",
+      "ml_binding": "existing_clone_raw",
+      "native_symbol": "unison_clone_file_status",
+      "review": "doc/worker-snapshot-ffi-source-review-20261018.json"
+    }
+  ],
+  "reviews": [
+    {
+      "path": "doc/worker-ffi-source-review-20261018.json",
+      "bytes": 4272,
+      "sha256": "eb9b639c0cc2215cb213afca91b00ee2c343f2172d29968a067b048cdcbc2adf"
+    },
+    {
+      "path": "doc/worker-snapshot-ffi-source-review-20261018.json",
+      "bytes": 2388,
+      "sha256": "3b9e3e0c396f5f5f28b313d3f5899347153046516bf1b4eed1fa3ee28bcc1747"
+    },
+    {
+      "path": "tests/qualification/worker-ffi-owner-boundary-actual-20261018.json",
+      "bytes": 42125,
+      "sha256": "ce0c75ce5177d524c28eec0f912652536346c72f50dd3afa40b6c5511cbb9f89"
+    },
+    {
+      "path": "tests/qualification/current-worker-parity-apply-actual-20261018.json",
+      "bytes": 103197,
+      "sha256": "2fe83118dca46ef70195971e00f9f9933cf4fb77ab2ad8bb8be89c131b3e30d8"
+    }
+  ],
+  "operation_paths": {
+    "Digest/Identify/Recognize/Inspect/Observe": "Built-in format recognition/parsing and SemanticFile/SemanticHash",
+    "Components/Restore_components/Refresh_components/Refresh_owned_components/Indexed_components": "Pure bounded forest/checkpoint/refinement and ComponentHash digest/borrowed reads; no worker managed-cache store or namespace creation",
+    "Reconcile": "SemanticDelta.reconcile_xmp -> XmpMerge -> SemanticFile/SemanticHash",
+    "Apply": "SemanticDelta.apply_report_with_extension -> borrowed SemanticFile writer + verification",
+    "Snapshot": "ValidationSnapshot.materialize -> existing_clone -> FD-only native clone boundary + bounded read/write/hash fallback"
+  },
+  "runtime_dependencies": [
+    "OCaml GC/custom finalization and Atomic/Mutex/Condition/Domain implementations",
+    "Unix fstat, descriptor duplication/close, channels and notification write; trusted installed runtime ABI, not newly reimplemented or fully audited here",
+    "CommonCrypto or explicitly selected OpenSSL3 provider internals"
+  ],
+  "excluded_from_worker_binding_claim": [
+    "Owner cache quota/namespace/publication APIs (nonportable in checked interfaces; two representative exact compiler rejections)",
+    "Owner-loop process helper/SDK supervisor; SDK is separately qualified child execution",
+    "Named APFS clone and final/stage publication on owner path",
+    "Arbitrary future or external plugin callbacks/FFI",
+    "Unsupported platform runtime behavior, physical storage savings, race sanitizer or whole-process RSS/FD enforcement"
+  ],
+  "inventory_note": "Regex enumerates declarations in the three manually selected leaf modules; it is not an automatic transitive call-graph proof. Manual paths above cover shipped built-in operations only; new callbacks/operations/native bindings require review."
+}

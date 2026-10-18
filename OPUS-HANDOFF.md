@@ -6064,3 +6064,16 @@ tests/qualification/worker-ffi-owner-boundary-actual-20261018.json SHA ce0c75ce5
 Source doc/worker-snapshot-ffi-source-review-20261018.json pinsselectedreview,
 notallreachableC/thirdparty/platform audit. No production/frozenV6changes,
 SDK/Photo/EXglobal use or currentresources. Goalactive/incomplete.
+
+
+## 2026-10-18 first-party built-in worker native reachability mapped
+
+Currentmanualpaths map all implemented workeroperationfamilies to3leafmodules/
+9nativebindings; declarationinventory checkedexact, source25filespinned. Reviews
+cover firstparty SHA/file/timing/FDclone contracts. Ownernamespace/quota/
+publication isexcludedfromworkerclaim, notblindlyauditedviawholefilehash.
+Explicittrustedruntime/Unix/provider/customplugin boundariesremain, noautomatic
+callgraph/racesanitizer/fullM6claim. Map doc/worker-native-call-map-20261018.json
+SHA 435639179bc087f48e09d2096c447a477caca87d7d19f5ab686e68c49dbb3153. No tests/children/tokens/IO used, no production/frozenV6change.
+All3V6requesthashesfreshmatch/admissions+workspacesabsent(actuala0958e); no
+transportdispatchinferred. Goalactive/incomplete; nextmainaction V6freshgrants.
