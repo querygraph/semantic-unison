@@ -48,3 +48,7 @@ val with_transaction : ?reservation:SemanticAdmission.reservation -> ?role:Seman
     256 KiB, with a 1 MiB consumer minimum for serialized validation. These are estimates,
     not process RSS, external child memory or per-volume I/O limits. Consumers
     preserve source headroom for peer-dependent bidirectional progress. *)
+
+val guard_ownership : (unit -> 'a Lwt.t) -> 'a Lwt.t
+(** Preserve a complete borrowed lifetime on recognized close uncertainty. Does
+    not acquire admission itself; surrounding owners must await the reply. *)

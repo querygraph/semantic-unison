@@ -161,16 +161,17 @@ let with_cancellation f =
     raise error
 let unresolved_ownership = function
   | SemanticFile.Close_uncertain _ | DngComponents.Cache_ownership_uncertain _
-  | NotificationPipe.Uncertain _ -> true
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _ -> true
   | _ -> false
 let report_retained_ownership _ =
   Util.warn "Resource closure is unresolved; this process is retaining its reservations.\n"
 let retained_ownership_count = RetainedOwnership.count
+let guard_ownership f = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
+  ~on_retained:report_retained_ownership f
 let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation ~payload_bytes ~descriptors f =
   (* Trap ownership carriers inside the borrowed body, before either admission
      wrapper's ordinary failure callback can retire its reservation. *)
-  let guarded () = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
-    ~on_retained:report_retained_ownership f in
+  let guarded () = guard_ownership f in
   BorrowedWork.catch (fun () ->
     let cost = {SemanticAdmission.payload_bytes;descriptors} in
     match reservation with

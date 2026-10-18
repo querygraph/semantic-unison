@@ -35,20 +35,23 @@ in remote-parent-caller-actual-20261018.json. These fixes replace the raw close
 paths described in the historical inventory below; they do not establish opaque
 directory ownership or aggregate process budgets.
 
-The next concrete directory gap remains CandidateValidation.all_children: its
-exception branch discards a closedir failure, while System_generic.opendir builds
-the callback record after Unix.opendir returns. Prepare the owner, retention link,
-carrier and callback record before acquiring the opaque directory handle. Adopt
-the actual returned handle without allocating an optional wrapper, and never
-reinterpret an unopened placeholder. A close attempt must be single-use, preserve
-the original scan/budget/cancellation error plus close uncertainty, and remain
-rooted and recognizable to the surrounding admission guard. Do not infer a
-numeric FD identity for Unix.dir_handle or retry its close after an exception.
-Qualification must exercise actual validation tree enumeration and its surrounding
-borrower, not just a standalone directory ledger; include failure while installing
-or returning the wrapper and before/after real closedir, repeat cleanup, and the
-stock/Ox generic and Windows interface build boundaries. No runtime or Windows
-qualification is claimed by this source plan.
+CandidateValidation enumeration now uses Fs.with_directory with prepared opaque
+DirectoryOwner metadata/callbacks before Unix.opendir. Close is single-attempt;
+original scan/cancel and uncertain close failures remain together. Runtime's
+carrier classifier and complete tree guard retain the borrowed lifetime, including
+legacy unadmitted manifests. Both stock/Ox Make/Dune and actual fixed directory/
+tree/Runtime regressions are qualified in directory-owner-actual-20261018.json.
+See opaque-directory-ownership.md for exact scope and preserved failed controls.
+
+This does not complete every directory consumer. Next audit Os.childrenOf and
+Files.get_files_in_directory exception paths: the former legacy wrapper can lose
+the original read error on uncertain close, while the latter only closes on EOF.
+Their borrowed scopes must not retire on an ordinary prefix while a known-open or
+uncertain directory remains. Prepared System wrappers alone do not prove those
+callers' complete lifetimes. Do not guess numeric FD identities for directory
+objects, retry uncertain closes, or infer native Windows runtime from a Darwin
+signature compile. Aggregate descendant FD/RSS and full baseline accounting remain
+separate.
 
 ## Original native/remote ownership inventory (historical)
 

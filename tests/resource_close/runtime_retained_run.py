@@ -39,7 +39,7 @@ for receipt in a.receipt:
  baseline=work/'baseline';baseline.mkdir()
  old=subprocess.run(['git','show','b19c845a:src/semanticRuntime.ml'],cwd=ROOT,capture_output=True,text=True,check=True).stdout
  # Compatibility observation only; old admission/exception control flow stays intact.
- (baseline/'semanticRuntime.ml').write_text(old+'\nlet retained_ownership_count () = 0\n')
+ (baseline/'semanticRuntime.ml').write_text(old+'\nlet retained_ownership_count () = 0\nlet guard_ownership f = f () (* uncalled compatibility binding *)\n')
  for ext in ['.mli','.cmi']:shutil.copyfile(build/('semanticRuntime'+ext),baseline/('semanticRuntime'+ext))
  oldflags=['-I',str(baseline),*flags]
  call([compiler,*oldflags,'-c','semanticRuntime.ml'],cwd=baseline)

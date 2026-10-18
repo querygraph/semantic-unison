@@ -46,7 +46,7 @@ type tree_entry = {
 }
 let stable_stats stats = {stats with Unix.LargeFile.st_atime = 0.}
 let all_children budget ~prefix_bytes path =
-  let directory = Fs.opendir path in
+  Fs.with_directory path (fun directory ->
   let rec read acc =
     Abort.checkAll ();
     match directory.Fs.readdir () with
@@ -55,9 +55,7 @@ let all_children budget ~prefix_bytes path =
         reserve_entry budget ~prefix_bytes ~name_bytes:(String.length name);
         read (name :: acc)
     | exception End_of_file -> List.sort String.compare acc in
-  match read [] with
-  | names -> directory.Fs.closedir (); names
-  | exception e -> (try directory.Fs.closedir () with _ -> ()); raise e
+  read [])
 let tree_snapshot directory candidate =
   let budget = ValidationTreePolicy.budget () in
   reserve_entry budget ~prefix_bytes:0 ~name_bytes:(String.length (Path.toString candidate));
@@ -186,7 +184,7 @@ let validate_file ?partition ?borrowed_output ~reservation ~validators ~destinat
                 BorrowedWork.bind (fun () -> validator.validate {context with resources=validator.resources}) (fun () -> invoke rest) in
           invoke selected
       | Some _ -> fail (Util.Transient "Inconsistent validation recognition fingerprint"))))
-let validate_tree ?partition ~count ~reservation ~validators ~directory ~candidate ~destination () =
+let validate_tree_work ?partition ~count ~reservation ~validators ~directory ~candidate ~destination () =
   let before = Util.convertUnixErrorsToTransient "recording validation candidate tree"
     (fun () -> tree_snapshot directory candidate) in
   (* A staged directory is committed as a unit. A fixed number of owner-loop
@@ -219,6 +217,10 @@ let validate_tree ?partition ~count ~reservation ~validators ~directory ~candida
       | Unix.Unix_error _ | SemanticFile.Invalid _ | SemanticWorkers.Failed _ ->
         fail (Util.Transient ("Inspecting validation candidate: " ^ Printexc.to_string e))
       | _ -> fail e)
+
+let validate_tree ?partition ~count ~reservation ~validators ~directory ~candidate ~destination () =
+  SemanticRuntime.guard_ownership (fun () ->
+    validate_tree_work ?partition ~count ~reservation ~validators ~directory ~candidate ~destination ())
 
 let before_commit_with_reservation ~reservation ~directory ~candidate ~destination =
   let validators = CandidateValidators.selected () in

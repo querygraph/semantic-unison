@@ -60,7 +60,7 @@ for receipt in a.receipt:
   if variant=='old-runtime':
    old=subprocess.run(['git','show','501085bd:src/semanticRuntime.ml'],cwd=ROOT,capture_output=True,text=True,check=True).stdout
    marker='    SemanticWorkers.set_read_observer';assert old.count(marker)==1
-   altered=old.replace(marker,'    PoolLifecycleFault.before_publish ();\n'+marker)
+   altered=old.replace(marker,'    PoolLifecycleFault.before_publish ();\n'+marker)+'\nlet guard_ownership f = f () (* uncalled compatibility binding *)\n'
    designated='DESIGNATED runtime lost unpublished pool owner'
   else:
    altered=(work/'semanticRuntime.ml').read_text()

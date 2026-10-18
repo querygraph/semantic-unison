@@ -43,7 +43,8 @@ for receipt in a.receipt:
  old=old.replace(marker,'IoScopeFault.open_candidate path')
  marker='try Unix.close fd with Unix.Unix_error _ -> ()';assert old.count(marker)==2
  old=old.replace(marker,'try IoScopeFault.close fd with Unix.Unix_error _ -> ()')
- (baseline/'semanticRuntime.ml').write_text(old)
+ # Uncalled compatibility export; the historical I/O/admission body is unchanged.
+ (baseline/'semanticRuntime.ml').write_text(old+'\nlet guard_ownership f = f ()\n')
  for ext in ['.mli','.cmi']:shutil.copyfile(build/('semanticRuntime'+ext),baseline/('semanticRuntime'+ext))
  privateflags=['-I',str(baseline),*flags]
  call([compiler,*privateflags,'-c','semanticRuntime.ml'],cwd=baseline)

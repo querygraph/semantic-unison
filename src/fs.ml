@@ -49,6 +49,7 @@ let lstat f = System.lstat (path f)
 let openfile f flags perms = System.openfile (path f) flags perms
 
 let opendir f = System.opendir (path f)
+let with_directory f operation = System.with_directory (path f) operation
 
 let open_in_gen flags mode f =
   System.open_in_gen flags mode (path f)
