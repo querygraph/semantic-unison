@@ -34,6 +34,10 @@ val create_with_io : io:IoAdmission.t -> workers:int -> max_pending:int ->
     and output devices atomically before a domain slot and CPU permit. The
     lease lasts through active worker completion and worker duplicate closure;
     waiting I/O jobs consume neither domain slots nor CPU credits. *)
+val retain_unsettled : t -> exn -> 'a
+(** Revoke new submissions and root the pool after an unresolved owner handoff.
+    Raises NotificationPipe.Uncertain with the original failure. This is not
+    settlement, a numeric close retry, or permission to start another pool. *)
 val set_read_observer : ?measure_stages:bool -> t -> (int -> SemanticFile.read_stats -> unit) option -> unit
 (** Optional [measure_stages] includes reader-local inclusive SDE/hash phases;
     disabled by default. Snapshot readers remain excluded. See SemanticFile.

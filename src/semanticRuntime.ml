@@ -89,7 +89,16 @@ let resource_gate () =
       let gate = SemanticAdmission.create ~source_headroom ~max_transactions:inflight
         ~max_payload_bytes:(mib * 1048576) ~max_descriptors:descriptors ~max_pending:4096 in
       resource_runtime := Some (gate,config); gate
+(* A failed publication must not silently start another pool. These cells
+   exist before initialization and can retain a returned carrier without allocation. *)
+let runtime_unresolved = ref false
+let runtime_failure = ref Exit
+let keep_runtime_failure error =
+  runtime_failure := error;
+  runtime_unresolved := true;
+  raise error
 let get () =
+  if !runtime_unresolved then raise !runtime_failure;
   let n,count,inflight,mib,descriptors,max_payload,io_jobs,_ = settings () in
   let config = n,inflight,mib,descriptors,max_payload,io_jobs in
   let admission = resource_gate () in
@@ -117,13 +126,21 @@ let get () =
               Util.msg "Semantic worker job %d stage=%s calls=%d inclusive-seconds=%.9f.\n"
                 id stage sample.calls sample.inclusive_seconds)) samples)
       else None in
-    let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
+    let pool =
+      try SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor
+      with NotificationPipe.Uncertain _ as error -> keep_runtime_failure error in
+    try
     SemanticWorkers.set_read_observer ~measure_stages pool read_observer;
     debug (fun () -> Util.msg
       "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits, %d jobs per filesystem\n"
       (HelperSupervisor.available_physical_cpus ()) (HelperSupervisor.available_cpus ())
       n count inflight mib descriptors io_jobs);
     let t = {supervisor;pool;cpu_budget=n;admission;io} in runtime := Some (t,config); t
+    with error ->
+      (* Pool construction succeeded, but publication/configuration did not.
+         Preserve its domain/pipe owner rather than leaving an untracked pool. *)
+      (try SemanticWorkers.retain_unsettled pool error
+       with NotificationPipe.Uncertain _ as retained -> keep_runtime_failure retained)
 let cancellations = Remote.resourceWithConnCleanup
   HelperSupervisor.cancel HelperSupervisor.cancel_and_cleanup
 let with_cancellation f =

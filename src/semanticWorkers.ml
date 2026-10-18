@@ -366,6 +366,10 @@ let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
   create_internal ~io:(Some io) ~workers ~max_pending ~budget
+let retain_unsettled t error =
+  t.closing <- true;
+  NotificationPipe.remember_failure t.notification error;
+  NotificationPipe.retain_unsettled t.notification error
 let set_read_observer ?(measure_stages=false) t observer =
   if t.closing || t.pending <> 0 then
     invalid_arg "SemanticWorkers.set_read_observer requires an idle open pool";

@@ -1,3 +1,19 @@
+# Runtime handoff and lifecycle fault qualification (2026-10-18)
+
+Runtime now retains a successfully constructed pool when observer setup, tracing
+or singleton publication raises. A prepared failure latch also refuses a new
+pool after an unresolved constructor/publication, preserving the same carrier.
+Fourteen actual stock/Ox fixed controls cover creation and shutdown stop/join
+errors (before and after real join) and singleton publication. Four designated
+old-runtime/no-latch regression failures prove both safeguards. Evidence:
+`tests/qualification/pool-lifecycle-handoff-actual-20261018.json`. Current Make
+builds/selftests pass both compilers. Prior analysis below is historical.
+
+Still open: partial domain-handle publication under allocation failure, current
+Dune builds, queued borrowers/cancellation regression, and aggregate FD/RSS
+enforcement. Domain.spawn internals have a separate unrecoverable allocation
+boundary; these tests do not claim arbitrary-OOM recovery.
+
 # Current pool lifecycle checkpoint (2026-10-18)
 
 NotificationPipe is now in the production object order and integrated into
