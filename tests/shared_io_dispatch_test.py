@@ -72,10 +72,13 @@ class Controls(unittest.TestCase):
                 with self.assertRaises(ValueError):d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8)
                 read.assert_not_called();argv[at+1]=saved
             self.assertEqual(argv,valid)
-            del value['execution_source_sha256'][str(d.ROOT/'bench/sync/artifact_pins.py')]
-            read.reset_mock()
-            with self.assertRaises(ValueError):d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8)
-            read.assert_not_called()
+            for name in ('artifact_pins.py','phase_stats.py'):
+                key=str(d.ROOT/'bench/sync'/name)
+                saved=value['execution_source_sha256'].pop(key)
+                read.reset_mock()
+                with self.assertRaises(ValueError):d.checked_io_request({'path':'/mock','sha256':'0'*64},'sync-functional',argv,Path('/none'),8)
+                read.assert_not_called()
+                value['execution_source_sha256'][key]=saved
 
     def test_no_io_admission_on_default_existing_path(self):
         # Default API stays CPU-only, never silently enables IO.

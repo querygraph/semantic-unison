@@ -26,6 +26,7 @@ from invocation_journal import Journal
 from measure import CapturedStream, run
 from ownership import OwnedGroup
 from read_stats import parse as primary_reader_counters
+from phase_stats import parse as semantic_phase_counters
 
 ROOT = Path(__file__).resolve().parents[2]
 HERE = Path(__file__).resolve().parent
@@ -125,7 +126,13 @@ def save(path, value):
         os.close(directory)
 
 
-def internal_counters(log, mode, files, size, *, primary_reads=False):
+def diagnostic_text(outcome):
+    # Streams are separate observations: never fuse an unterminated stdout tail
+    # with a stderr/server record, or manufacture a record across two streams.
+    return "\n".join(outcome[name] for name in ('stdout','stderr','supervisor_output'))
+
+
+def internal_counters(log, mode, files, size, *, primary_reads=False, phase_timings=False):
     semantic = [tuple(int(value) for value in match[:4]) + (match[4],)
                 for match in SDE.findall(log)]
     preserved = [int(value) for value in PRESERVED.findall(log)]
@@ -171,6 +178,8 @@ def internal_counters(log, mode, files, size, *, primary_reads=False):
             "semantic_fallback_events": log.count("Remote semantic fallback:"),
             "primary_reader_reads": primary_reader_counters(log, required=mode == "semantic")
               if primary_reads else None,
+            "semantic_phase_observations": semantic_phase_counters(log, required_workers=mode == "semantic")
+              if phase_timings else None,
             "application_read_bytes": None, "hash_parse_verify_commit_seconds": None,
             "physical_storage_write_bytes": None, "queue_descriptor_peaks": None}
 
@@ -267,6 +276,8 @@ def main():
     parser.add_argument("--prepare-only", action="store_true", help="metadata/arguments only; no sync")
     parser.add_argument("--measure-primary-reads", action="store_true",
                         help="opt-in worker primary-reader counters; not total application/disk reads")
+    parser.add_argument("--measure-semantic-phases", action="store_true",
+                        help="opt-in inclusive worker/native-publication observations, not total commit time")
     parser.add_argument("--background-note", default="ordinary host activity uncontrolled")
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--expected-binary-sha256", action="append", default=[],
@@ -365,6 +376,7 @@ def main():
                     "warmups": args.warmups, "repetitions": args.repetitions,
                     "timeout_seconds": args.timeout, "background_note": args.background_note,
                     "measure_primary_reads": args.measure_primary_reads,
+                    "measure_semantic_phases": args.measure_semantic_phases,
                     "property_removal_controls": args.property_removal_controls,
                     "layout_only_controls": args.layout_only_controls,
                     "loopback_cpu_credit_bound":args.loopback_cpu_credits,
@@ -375,7 +387,7 @@ def main():
               "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
               "rss_units": "bytes on Darwin; KiB on Linux; native OS units elsewhere",
               "resource_scope": "per-process wait4 receipts; CPU may include reaped descendants; never sum overlapping main/server reports; maxrss is not aggregate tree RSS",
-              "unmeasured": ["application read bytes", "internal hash/parse/verify/commit times",
+              "unmeasured": ["application read bytes", "complete hash/parse/verify/commit accounting (optional inclusive traces are partial)",
                     "aggregate process-tree peak RSS", "descriptor/queue peaks", "physical storage writes",
                     "range/extent sharing", "cross-volume or non-APFS behavior", "cold cache",
                     "real SSH/network behavior", "Adobe validation or photographic rendering"],
@@ -427,6 +439,8 @@ def main():
             flags = ["-debug", "copy", "-debug", "semantic"] if mode != "reference" else []
             if args.measure_primary_reads and mode != "reference":
                 flags += ["-debug", "semantic-reads"]
+            if args.measure_semantic_phases and mode != "reference":
+                flags += ["-debug", "semantic-timings"]
             if worker is not None:
                 flags += ["-clone", "off" if mode == "ordinary" else "auto",
                           "-semanticworkers", str(worker), "-maxthreads", str(max(2, worker))]
@@ -502,9 +516,10 @@ def main():
                         save(args.output, result)
                         measured = invoke(label, binary, mode, worker, directory, "update")
                         sample["update_sync"] = measured
-                        log = measured["stdout"] + measured["stderr"] + measured["supervisor_output"]
+                        log = diagnostic_text(measured)
                         sample["counters"] = internal_counters(log, mode, args.files, size,
-                            primary_reads=args.measure_primary_reads and mode != "reference")
+                            primary_reads=args.measure_primary_reads and mode != "reference",
+                            phase_timings=args.measure_semantic_phases and mode != "reference")
                         if args.layout_only_controls and mode=="semantic":
                             assert sample['counters']['semantic_profiles']==['org.firstpair.dng-layout/0'], \
                                 "opaque private fixture did not select exact layout-only profile"

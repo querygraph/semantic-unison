@@ -10,6 +10,7 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tests'))
 from cached_benchmark.contract import read_bytes
 from cached_benchmark.entry import write
+from phase_stats import validate as phase_observations
 
 
 def number(value, name):
@@ -53,6 +54,8 @@ def build_report(result):
             continue
         proxy=update.get('proxy')
         counters=sample.get('counters') or {}
+        if counters.get('hash_parse_verify_commit_seconds') is not None:
+            raise ValueError('whole-path phase/commit accounting is not qualified by partial diagnostics')
         reads=counters.get('primary_reader_reads')
         primary=None
         if reads is not None:
@@ -84,6 +87,7 @@ def build_report(result):
             non_inherited_output_extent_model_bytes=integer(counters.get('materialization_non_inherited_logical_bytes_model'),'output model'),
             output_extent_model_basis=counters.get('materialization_model_basis'),
             application_read_bytes=integer(counters.get('application_read_bytes'),'application reads'),
+            semantic_phase_observations=phase_observations(counters.get('semantic_phase_observations')),
             hash_parse_verify_commit_seconds=counters.get('hash_parse_verify_commit_seconds'),
             physical_storage_write_bytes=integer(counters.get('physical_storage_write_bytes'),'physical writes'),
             descriptor_queue_peaks=counters.get('queue_descriptor_peaks')))
@@ -100,7 +104,8 @@ def build_report(result):
             'Primary-reader bytes exclude nested verification, legacy/helper reads and prefetch; absent counters are unknown, not zero.',
             'Semantic write counts are successful returned logical writes; other output extents are labeled models, not write syscalls or APFS block savings.',
             'Block operations are native operations, never converted into physical bytes.',
-            'Functional single samples are not repeated throughput benchmarks; missing stage/physical/peak measurements remain null.'])
+            'Inclusive phase records overlap and are not summed; native namespace events do not prove later archive/full transfer success.',
+            'Functional single samples are not repeated throughput benchmarks; missing total-commit/physical/peak measurements remain null.'])
 
 
 def main():

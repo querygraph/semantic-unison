@@ -96,6 +96,13 @@ with patch.object(manual, 'checked_build', return_value={'binary': '/NEVER-execu
     argv = manual.command('sync-functional', out,
                           dict(env, STOCK_RECEIPT='unread', OX_RECEIPT='unread'))
     assert '--shared-qualification' in argv and '--qualification' not in argv
+    assert '--measure-semantic-phases' not in argv
+    measured = manual.command('sync-functional', out, dict(env, STOCK_RECEIPT='unread',
+                              OX_RECEIPT='unread', MEASURE_SEMANTIC_PHASES='1'))
+    assert measured.count('--measure-semantic-phases') == 1
+    try:manual.command('sync-functional', out, dict(env, STOCK_RECEIPT='unread', OX_RECEIPT='unread', MEASURE_SEMANTIC_PHASES='true'))
+    except ValueError:pass
+    else:raise AssertionError('invalid timing opt-in accepted')
     prop_argv = manual.command('sync-functional',out,dict(env,STOCK_RECEIPT='unread',OX_RECEIPT='unread',SYNC_PROPERTY_REMOVAL_CONTROLS='1',SHARED_IO_ADMISSION='/fixed',SHARED_IO_ADMISSION_SHA256='0'*64))
     assert '--property-removal-controls' in prop_argv
     assert '--property-removal-controls' not in argv

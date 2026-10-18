@@ -24,7 +24,7 @@ class SourceClosureControls(unittest.TestCase):
                  if (source.parent/(name+'.py')).is_file()}
         self.assertTrue(local)
         self.assertLessEqual(local, set(c.SOURCES))
-        for omitted in ('artifact_pins', 'properties', 'invocation_journal'):
+        for omitted in ('artifact_pins', 'properties', 'invocation_journal', 'phase_stats'):
             self.assertNotIn('bench/sync/'+omitted+'.py',
                              set(c.SOURCES)-{'bench/sync/'+omitted+'.py'})
             self.assertFalse(local <= set(c.SOURCES)-{'bench/sync/'+omitted+'.py'})

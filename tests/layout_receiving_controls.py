@@ -22,7 +22,7 @@ def main():
     parser.add_argument('--ox-build',type=Path,required=True)
     args=parser.parse_args()
     work=Path(tempfile.mkdtemp(prefix='unison-layout-receiving-controls-',dir='/private/tmp'))
-    sources=[ROOT/p for p in ['bench/sync/fixtures.py','bench/sync/run.py','bench/sync/shared_audit.py',
+    sources=[ROOT/p for p in ['bench/sync/fixtures.py','bench/sync/run.py','bench/sync/phase_stats.py','bench/sync/shared_audit.py',
         'bench/sync/layout_fixture_test.py','tests/manual.py','tests/shared_dispatch.py',
         'tests/shared_sync_controls.py','tests/manual_shared_test.py','tests/shared_io_dispatch_test.py',
         'tests/layout_receiving_controls.py','tests/dng_layout_preferences.ml']]

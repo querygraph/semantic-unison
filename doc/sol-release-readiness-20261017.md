@@ -202,3 +202,12 @@ controls passed; see [the actual qualification](../tests/qualification/bound-pub
 This is namespace publication only: later archive success, total commit latency,
 legacy paths and an actual repeated synchronization timing matrix remain open.
 All test owners and standing Unison8 credits are closed; no Photo resources used.
+
+## Sync report phase collection source
+
+The benchmark now has explicit opt-in worker/native-namespace trace collection,
+strict raw/type rebinding and stream-boundary handling. [Nine pure suites](../tests/qualification/sync-phase-report-source-actual-20261018.json)
+passed, including source-inventory omission refusal before IO entry. Partial
+inclusive observations remain separate from total commit time. Actual sync
+collection is not yet qualified; a fresh exact generated-fixture IO admission
+precedes that check. No prior cohort or runtime permission is reused.

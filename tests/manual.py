@@ -268,6 +268,10 @@ def command(target, output, environment):
                          '--compiler', label + '=' + receipt['compiler'],
                          '--expected-binary-sha256', label + '=' + receipt['binary_sha256'],
                          '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
+        phases = environment.get('MEASURE_SEMANTIC_PHASES', '0')
+        require(phases in ('0', '1'), 'MEASURE_SEMANTIC_PHASES must be0 or1')
+        if phases == '1':
+            argv += ['--measure-semantic-phases']
         if property_controls == '1':
             argv += ['--property-removal-controls']
         if layout_controls == '1':

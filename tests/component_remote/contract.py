@@ -23,7 +23,7 @@ HELPERS=('tests/shared_cpu_pool.py','tests/shared_io_pool.py','tests/shared_disp
  'tests/report/remote_probe.ml','tests/sdk_host_matrix/shared_child.py','bench/sync/measure.py',
  'bench/sync/ownership.py','bench/sync/proxy.py','bench/sync/launcher.py',
  'bench/sync/invocation_journal.py','bench/sync/fixtures.py','bench/sync/partitions.py',
- 'bench/sync/artifact_pins.py','bench/sync/properties.py','bench/sync/read_stats.py')
+ 'bench/sync/artifact_pins.py','bench/sync/properties.py','bench/sync/read_stats.py', 'bench/sync/phase_stats.py')
 def sources():
     files=[ROOT/'tests/component_remote'/name for name in MODULES]+[ROOT/name for name in HELPERS]
     files += [p for p in (ROOT/'src').rglob('*') if p.is_file() and

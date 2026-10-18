@@ -70,7 +70,7 @@ else:
     raise AssertionError('measured semantic mode accepted missing diagnostics')
 results.append('benchmark default stays off and primary metrics never become total application reads')
 work = Path(tempfile.mkdtemp(prefix='unison-read-parser-')).resolve()
-sources = [Path(__file__).resolve(), ROOT / 'bench/sync/read_stats.py', ROOT / 'bench/sync/run.py']
+sources = [Path(__file__).resolve(), ROOT / 'bench/sync/read_stats.py', ROOT / 'bench/sync/phase_stats.py', ROOT / 'bench/sync/run.py']
 report = {'schema': 'unison-primary-read-parser-controls/1', 'groups': results,
           'source_pins': {str(p.relative_to(ROOT)): hashlib.sha256(p.read_bytes()).hexdigest()
                           for p in sources},

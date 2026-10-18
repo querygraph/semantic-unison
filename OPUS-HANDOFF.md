@@ -4335,3 +4335,10 @@ Qualification tests/qualification/bound-publication-timing-actual-20261018.json 
 
 
 Publication complete: implementation91fc64e5 COMMITTED/PUSHED (actual78780/2c41e0/0/no session), PR13 refreshed48665/c2c9ee/0. Photo source-only notice01a14dd4-f5d9 explicitly no ACK/resourcegate. All earlierlive/pendingcommit notesabove arehistorical; allowners/resourcesclosed, standing8/8unchanged. Nextwork fullsyncphasecollection/repeatedmatrix andhardaggregatebounds; existingpayload/SDK admissionsremainconsumed/no replay. No Photo approval blocker for routine sourcework.
+
+
+## Sync benchmark phase collector source qualified
+
+bench/sync/phase_stats.py bounds4MiB/65536records, strictfixedtraceformats/ASCIIcanonicalnumbers, separateendpoint/job IDs, refusesduplicates/conflictingunavailable/fieldtype/rawlinessavedcontradictions. Typedrecordsretainrawlines; no sums ofoverlappinginclusivephases/nativepublication. New --measure-semantic-phases +manualMEASURE_SEMANTIC_PHASES=1 optin(defaultoff/referenceoff). RawstreamdiagnosticsjoinedwithNEWLINEboundaries, neverfusepartialstdout/stderr. resource_report validatesrawphasefields andrefusesoldcombined hash_parse_verify_commit_seconds NONnull (partialcoverageisnottotalcommit). Unknown/unavailableNOTzero.
+
+Actualfinalsourcecontrolowner91029/2366d4/0/no session, all9pure/mock suitesclosed/reaped0/groupsabsent/CPU8closed; noEXIO/CLI/compiler/SDK/Photo/camera/payload. Evidence tests/qualification/sync-phase-report-source-actual-20261018.json 20345B SHAb1a178cb7edd0ec67de097494f6167166cde1bcb9c056772c960c945c1c99df4. Sourceinventoriesbounded/componentremote/privatefallback includephaseparser; sharedIOmockcheckexplicitlyrefusesmissingphasepinBEFOREcanonicalpoolread. Historical rawresultsnotedited. RuntimecollectionqualifiedFALSE untilfreshactualcohort. CurrentC/OCamlproductionunchangedfrom91fc64e5; no fullbuildrepeatneededforPython-onlyintegration. Nextpreparefreshpinnedexact18row54CLIgeneratedfixtureIOrequest underUnison8+EXglobal (NOToldgrant/retry), thenbroaderperformance study stillrequired. No livejobs/resources/Photoapprovalwaiting now; code/docs/evidencependingcommit.

@@ -2,6 +2,7 @@
 import copy
 import unittest
 from resource_report import build_report
+from phase_stats import parse as phases
 
 
 def fixture(system='Darwin'):
@@ -52,6 +53,22 @@ class Report(unittest.TestCase):
         resources.update(wait4_user_seconds=1e308,wait4_system_seconds=1e308)
         with self.assertRaises(ValueError):build_report(v)
         v=fixture('Linux');v['samples'][0]['update_sync']['resources']['wait4_maxrss_native_units']=1e308
+        with self.assertRaises(ValueError):build_report(v)
+    def test_phase_records_preserved_but_not_combined_into_commit(self):
+        v=fixture();phase=phases('[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.000000000.')
+        v['samples'][0]['counters']['semantic_phase_observations']=phase
+        row=build_report(v)['rows'][0]
+        self.assertEqual(row['semantic_phase_observations'],phase)
+        self.assertIsNone(row['hash_parse_verify_commit_seconds'])
+        self.assertIsNone(build_report(fixture())['rows'][0]['semantic_phase_observations'])
+    def test_partial_diagnostics_cannot_supply_unqualified_total_commit_time(self):
+        for unsupported in (0,0.,True,{'commit':0.}):
+            v=fixture();v['samples'][0]['counters']['hash_parse_verify_commit_seconds']=unsupported
+            with self.assertRaises(ValueError):build_report(v)
+    def test_phase_fields_cannot_contradict_raw_records(self):
+        v=fixture();phase=phases('[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.125000000.')
+        phase['records'][0]['inclusive_seconds']=1.
+        v['samples'][0]['counters']['semantic_phase_observations']=phase
         with self.assertRaises(ValueError):build_report(v)
     def test_missing_update_and_missing_server_remain_explicit(self):
         v=fixture();v['samples'][0]['update_sync']['proxy']=None

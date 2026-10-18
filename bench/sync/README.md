@@ -471,3 +471,41 @@ internal stage times and physical IO/peak measurements as null. The input is
 a historical one-sample functional cohort, not a repeated current performance
 study. Do not sum client/server wait4 CPU or process high-water RSS, convert
 block operations to bytes, or interpret a write model as physical APFS savings.
+
+## Optional local phase observations
+
+`--measure-semantic-phases` enables `-debug semantic-timings` on current
+endpoints. The shared `sync-functional` entrypoint accepts the explicit
+`MEASURE_SEMANTIC_PHASES=1` environment setting; its default is off. This changes
+diagnostic work and wire/log overhead and must be recorded with every comparison.
+Reference binaries remain uninstrumented. It does not grant an IO window.
+
+`semantic_phase_observations` retains the original trace lines and typed records
+for hash/parse/verify/write and native bound namespace publication. Client/server
+job namespaces are separate; duplicate/conflicting worker records refuse the
+measurement. Independent stdout, stderr and supervisor streams are separated
+before parsing, so partial lines cannot be fused into an invented observation.
+The parser bounds text/record counts and rejects malformed, nonfinite,
+noncanonical or contradictory saved fields. Source inventories include the
+parser before an admitted job may enter the shared IO pool.
+
+Worker intervals are inclusive and overlap: basis verification includes parsing
+and hashing; staging verification includes independent readers. They include
+I/O/scheduling, not isolated CPU. Native namespace publication excludes later
+readback/archive advancement and does not prove full transfer success. No
+intervals are summed as total commit time. The old
+`hash_parse_verify_commit_seconds` field remains null until whole-path accounting
+is qualified; the saved-resource reporter refuses unsupported non-null totals.
+Explicit unavailable reports remain unknown. No records means unobserved or
+uninstrumented work, never measured zero. Historical raw results are unchanged.
+
+Pure controls (no Unison, compiler, SDK, Photo payload or canonical IO lock):
+
+```sh
+python3 bench/sync/phase_stats_test.py
+python3 bench/sync/resource_report_test.py
+```
+
+Collection in an actual synchronization cohort needs a fresh exact source/argv/
+binary admission under the shared IO policy. The parser qualification alone is
+not an end-to-end timing/scaling, physical-IO, resource-closure or hard-limit proof.
