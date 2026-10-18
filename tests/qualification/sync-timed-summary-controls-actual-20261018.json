@@ -1,0 +1,45 @@
+{
+  "state": "ORIGINAL_SAVED_ONLY_CONTROLS_PASS",
+  "actual_owner": {
+    "terminal_chunk": "1aaf33",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "child": 70674,
+  "child_reaped": true,
+  "group_absent": true,
+  "cpu3_closed": true,
+  "io_acquired": false,
+  "actual_sync_or_payload": false,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_timed_summary.py",
+      "bytes": 4025,
+      "sha256": "926c87ae210a82fe3709189c45b716c6fe1deed64f8829e564ca10c110db68f0"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/sync_timed_summary_test.py",
+      "bytes": 2310,
+      "sha256": "d642355955aa1cd4a66e31e98d9dd4c3393718a7521986e6631a185c67661eb5"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-timed-summary-controls-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "46f1834b19fbd73be9bef1a03f61d363f73da33310502478cebd8aef2e2e41a5"
+    },
+    {
+      "path": "/private/tmp/unison-timed-summary-controls-20261018-002/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-timed-summary-controls-20261018-002/SHARED-STDERR.txt",
+      "bytes": 101,
+      "sha256": "be9f0e75ef1b2f0ede00efb587053c23088a1b63a79b3451836db90d7f6aeb43"
+    }
+  ],
+  "earlier_controls_preserved": "/private/tmp/unison-timed-summary-controls-20261018-001",
+  "limitation": "Fabricated108row324call receipts, not actual repeated performance or parent runtime proof"
+}
