@@ -17,7 +17,7 @@ let () =
   (* Already aborted chunks for the same ID don't acquire another slot. *)
   Lwt_unix.run(R.processStream c(request_id 12600)name body);
   require(!calls=1)"aborted stream reran handler";
-  (try ignore(R.processStream c(request_id 12601)name body);failwith"DESIGNATED full stream table ignored"
+  (try ignore(Lwt.poll(R.processStream c(request_id 12601)name body));failwith"DESIGNATED full stream table ignored"
    with Util.Fatal why->require(why="RPC stream error budget exhausted")"wrong stream capacity error");
   require(!calls=1)"DESIGNATED full error registry ran another handler";
   pause_output c;

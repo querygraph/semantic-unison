@@ -1738,19 +1738,19 @@ let processStream conn id cmdName buf =
    abortStream conn id
   else begin
     check_stream_error_capacity ();
-    begin try
+    let invoke_stream () =
       let cmd =
         try Util.StringMap.find cmdName !serverStreams
         with Not_found -> raise (Util.Fatal (cmdName ^ " not registered!"))
       in
       cmd conn buf;
-      Lwt.return ()
-    with
-    | e when body_unresolved e -> raise e
-    | e ->
-      record_stream_error id e;
-      abortStream conn id
-    end
+      Lwt.return () in
+    (* Classify inside the prepared carrier, before ordinary error caching.
+       An exception filter can replace the original with a classifier failure,
+       allowing the outer raw owner to mistake uncertainty for known failure. *)
+    BorrowedWork.catch
+      (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved invoke_stream)
+      (fun e->record_stream_error id e;abortStream conn id)
   end
 
 (* Message ids *)

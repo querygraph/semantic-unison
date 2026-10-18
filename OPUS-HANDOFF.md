@@ -5671,3 +5671,96 @@ commit and push FORK (querygraph, notorigin), send qualifiedsource notice toPhot
 Do not mergePR13 or alter frozenV4/source72560+metadata18c9b822. Three exactV4
 grantpaths absent7ce4d0. No EXIO/SDK/Photo/nativeUI hold; actual CPU build4/8
 held only through current sourcejob settlement. Fullgoalactive/incomplete.
+
+
+## 2026-10-18 stream classifier original-cause correction IN PROGRESS
+
+Previous V5 metadata preparation was progress; original3V5admissionpaths all
+absent cc8b6b/a975b7, frozen producer-qualified worktree2e24a0fc remainsunchanged.
+Separate /Users/alexy/src/unison-stream-classifier-20261018 branch
+implementation/stream-classifier-ownership createdfromb8c67465 (c46373/0).
+
+Concrete original counterexample11298/2f5449/0 wrapper, expectedsourcechild1:
+/private/tmp/unison-stream-classifier-original-20261018-001. Rawdiagnostic
+stream-classifier id15110 pendingfalse/raw3/3/retaineddelta0/cachedfalse shows
+processStream exception-filter classifier replaced original and rawticketreleased.
+No actual Directory/nativeFD acquired; allpurecontrol CPU4/groupclosed.
+
+Fix changes processStream classification from exceptionfilter to prepared
+RetainedOwnership.guard BEFORE ordinary error caching/abort. Invokes sync stream
+handler once, leaves existing preflight outsideguard. Newtests distinguish custom
+and knownstandard classified errors, original+classifier cause, exactweakrawbody
+root acrossconnectionclose, and ordinaryunregisteredcustom unchanged release.
+No decodedcustomarg/workspace/heap/RSS claim. Body-stream oldnegative nowmutates
+newguard backtoabort; two newparticipants reintroduce throwingfilter or omit
+classification (knownstandard marker would enterordinarycache).
+
+Actualfocused90137/873342/0/no session: stock/Ox body+stream-classifier002 PASS,
+5oldbody+2newnegatives/compiler plusallpositive controls. No EXIO/SDK/Photo/UI.
+Disclosure ACTUALLY queued01a150a5-3afd-7ef3-978f-4ea0545fb189/e8dc520; does not
+silently rewrite V5 or grant anypayload. OrdinarygeneratedV5 wire/propertyscope
+is distinct from unqualifiedclassifierfault boundary; Root mustreconcile review.
+
+CURRENT fullfinal controller99377 initialc97b58 ACTUALLY LIVE (9d493a); allfour
+stock/Ox Make+Dune+selftests passed/closed. Builds
+/private/tmp/unison-stream-classifier-{stock,ox}-{check,dune-check}-20261018-001.
+Next11families/compiler (old10+stream-classifier), controls
+/private/tmp/unison-stream-classifier-{stock,ox}-{family}-20261018-003.
+Expected55negative/compiler (53old+2new); verifyactualcounts. Controllerchecks3V5
+admissionpaths beforeeachjob and finalallsource/compiler/binary hashes; doNOT
+restart. Source frozen afterlaunch. Poll99377 actualterminal; notpsinference.
+Watch old stream-error-preflight fixture: sync-only catch mayneed poll for a
+failedpromise from intentionallybrokenpreflight. Ifactualfailureconfirms, fix
+fixtureonly anddeclareuncompiledtestdifference ifreusingunchangedproduction
+builds; don'tfalselyclaimallinputssame or redoCPUworkwithoutcause.
+
+Afterpass writeactualevidence/inventoryv24/readiness/SOL/handoff; no commit/push
+ofunqualifiedsourceyet. Then refreshcurrent-sourceIOrequests separately instead
+ofmutatingfrozenV5. Remaininggeneric/customstreamarg decodedworkspace/legacy
+baseline/platform/resource/transport/performance/fullgoal acceptance open.
+Goalactive; ownlive sourcequalification CPU4/8only, no PhotoIOhold.
+
+
+Stream classifier fullcontroller99377 ACTUAL61baed/exit1/no session: allfour
+builds/selftests andstockfirst6families passed, then errors preflight mutant hit
+sync-only testcatch (DESIGNATED full stream table ignored). Predictedfixture
+channel issue confirmed actuald34924; corrected remote_stream_errors.ml to poll
+returnedpromise aswell. PRODUCTION unchanged; preserveallfailedrawlogs.
+
+CURRENT resume72746 initialb2bfb8 ACTUALLY LIVE (de67a9). Stockremaining5families
+allpassed; Oxthroughqueue passed, encoder+stream-classifier pending. Uses same
+fourqualifiedproduction snapshots, finalcontrols004 (stockfirst6reuse003).
+Allfour buildinput tables haveONEdeclared NONPRODUCTION fixture difference
+ tests/remote_stream_errors.ml; current probescompileit separately. No false
+all585inputsmatch claim; unchangedproduction/compiler/binary can be reused
+without gratuitous rebuild. Resume verifies exactlythatdifference atitsend.
+Poll72746 ACTUALterminal, no retryofsamejob. No EXIO/SDK/Photo/nativeUI resources.
+V5 frozen2e24a0fc source stillunchanged; grants absent7edea3. Finalsource docs
+rpc-stream-classifier-ownership.md added; fullqualification stillpending.
+
+
+## 2026-10-18 stream-classifier current production QUALIFIED
+
+Actualresume72746/c5db4c/exit0/no session collected. FourMake/Dune+selftests all
+passed (originalfull99377/61baed/1 stopped atfixture mutation only), finalunion
+55negative/compiler across22groups: stockfirst6from003, remainingstock5+allOx11
+from004. Allproduction/compiler/binary hashes match; exactly ONE uncompiled
+nonproduction tests/remote_stream_errors.ml fixture changed afterbuilds (sync vs
+failedpromisecatch), explicitlydeclared andcompiled separately in finalcontrols.
+No false all585currentinput claim. Original11298/2f5449/0 counterexample preserved.
+
+Evidence tests/qualification/rpc-stream-classifier-actual-20261018.json527340B
+SHA57c11c9133b2b761b8dccc351730cc868e4e2f13830f16eb66be0d01a6adf1b7.
+Inventoryv24/readiness/SOL/newstreamdoc current. Allcontainedgroups/reaps/CPU4or8
+closed; synthetic memoryretention untilprocessexit, no actualDirectory/nativeFD
+uncertainty, no EXIO/SDK/Photo/UI operation/resource. Fullgoalactive/incomplete.
+
+Frozen V5candidate2e24a0fc remainsUNMODIFIED but its sourceproposals nowDEFERRED
+forconfirmedpublic classifiercontractgap predatingfix. New durabledeferral here:
+doc/sol-producer-v5-source-deferral-stream-classifier-20261018.json. All6V5paths
+admission/workspace freshlyabsent, authorneverdispatched. No fabricatedhistorical
+parentterminal; crossedgrant/START mustreconcile. Do NOTblindlyrun V5/oldV4/V3/V2.
+Next: commit/push qualifiedsuccessor, prepare fresh exactcurrent-source V6plans
+usingcurrentbinaries/productionpins andrequestRootfiniteIO; no automaticgrant or
+newsourcepolicy/resource gate. Then prioritize actualcompatibility/properties and
+acceptance consolidation instead of treating positiveoldwire as fullfaultproof.

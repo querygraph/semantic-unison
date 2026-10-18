@@ -4984,3 +4984,17 @@ Actual evidence: `tests/qualification/rpc-producer-ownership-actual-20261018.jso
 (four stock/Ox Make+Dune+selftests,53 negatives/compiler,584 input hashes matched).
 This is an implementation milestone; actual compatibility/transfer, remaining
 platform/resource/performance requirements and full goal acceptance remain open.
+
+
+### Stream classifier failure retains original raw ownership
+
+The synchronous stream callback now runs under a prepared RetainedOwnership
+guard before ordinary diagnostic caching. A throwing registered predicate
+preserves both its failure and the original exception; raw input stays retained
+through uncertainty and connection closure. Original tiny counterexamples and
+55 negative participants/compiler qualify this boundary with four stock/Ox
+Make+Dune+selftests. One corrected, separately compiled nonproduction test fixture
+differs from the build snapshots; production/compiler/binary hashes match.
+See `tests/qualification/rpc-stream-classifier-actual-20261018.json`. Known error
+cache/abort and unregistered propagation remain; decoded custom arguments,
+workspace, heap/RSS and broader acceptance stay separately scoped.

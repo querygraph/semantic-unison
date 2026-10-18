@@ -226,3 +226,29 @@ acceptance map; further resource findings must retain their concrete scope.
 Frozen V4 requests are unchanged and unadmitted at last read, not silently
 repinned to this source. Unknown MakerNotes remain exact opaque data rather
 than a requirement for exhaustive interpretation before usable delivery.
+
+
+## Stream classifier failure correction
+
+[Stream classification](rpc-stream-classifier-ownership.md) now runs inside the
+prepared retention guard before ordinary stream error caching. An original
+counterexample proved that an exception-filter predicate failure replaced its
+original cause and released raw input. The fix preserves original and classifier
+causes and exact raw payload roots across connection closure; ordinary known
+cache/abort and unregistered error propagation remain intact.
+
+Four stock/Ox Make+Dune+selftests passed, followed by55 negatives/compiler across
+22 groups. Actual resume72746/c5db4c/0/no session; all groups/CPU closed. One
+nonproduction preflight fixture was corrected after the builds to accept an
+immediately failed promise as well as synchronous refusal. All585 recorded input
+entries were checked: all production, compiler/binary and584 other input hashes
+match; that fixture difference is explicitly recorded and the corrected fixture
+was independently compiled in current controls. No all-input-byte-identity or
+new-whole-tree-build claim hides the difference. Evidence is
+`tests/qualification/rpc-stream-classifier-actual-20261018.json`; inventoryv24.
+
+This closes the recorded classifier-failure finding, not custom decoded stream
+arguments/workspace, other legacy/baseline/conversion lifetimes, allheap/RSS,
+external transport or complete SOL acceptance. The frozen V5 producer candidate
+is unchanged and predates this fix. Its proposals require source reconciliation
+before new final qualification; no existing admission or run is relabeled.
