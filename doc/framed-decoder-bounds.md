@@ -42,8 +42,9 @@ policy too. Legacy unbounded registrations retain ordinary decoding.
 Existing raw bounded-request credits still last through request/reply output
 queue consumption, including decoded-input refusal before the server or scope
 runs. The shared RPC header benefits from Umarshal's inner-length preflight.
-Its outer transport frame still has no general allocation cap, and ordinary
-legacy request/stream frames remain separately unbounded. Per-decode limits do
+Its outer header frame now uses the separately qualified
+[header byte/slot policy](rpc-header-input-limits.md). Ordinary legacy body and
+stream frames remain separately unbounded. Per-decode limits do
 not form a global decoded-object reservation; connection/global aggregation,
 recursive conversion/depth policies and complete FD/RSS limits remain open.
 

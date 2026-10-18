@@ -125,7 +125,8 @@ val registerBoundedServerCmd :
     [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
     not decoded heap/RSS or aggregate request bounds. Scope arguments may be
     decoded twice, each with its own bound. Valid wire encodings are unchanged.
-    Does not impose an outer cap on the shared legacy RPC message header. *)
+    Shared RPC headers use independent endpoint-local frame/byte/slot limits.
+    Legacy unbounded body registrations are not capped by those header limits. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

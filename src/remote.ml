@@ -1038,6 +1038,62 @@ let mheader = Umarshal.(sum6 unit string string string string unit
 let ((marshalHeader, unmarshalHeader) : header marshalingFunctions) =
   makeMarshalingFunctions (defaultMarshalingFunctions mheader) "rsp"
 
+(* Headers precede command selection, so their allowance is separate from
+   bounded request bodies and cannot be consumed by work awaiting a reply. *)
+let headerMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcheadermaxbytes" 8388608 ~local:true
+  ~category:(`Advanced `General) "maximum incoming RPC header frame bytes"
+  "Positive endpoint-local limit checked before allocation. Large diagnostic \
+   headers may require raising this and rpcheaderinputbudget together. Does not limit body frames.")
+let headerInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputbudget" 16 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight raw RPC header MiB"
+  "Separate nonwaiting raw header allowance across this process's connections. \
+   Held through body receipt and header decode; not a decoded-object or RSS cap.")
+let headerInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputslots" 256 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight RPC header slots"
+  "Positive bounded header count, including empty frames; maximum65536. \
+   Exhaustion fails the connection instead of blocking replies behind body admission.")
+type header_input={mutable header_bytes:int;mutable header_active:bool;mutable header_sized:bool}
+type header_limits={header_max:int;header_budget:int;header_slots:int}
+let header_input_bytes=ref 0 and header_input_count=ref 0
+let header_limits () =
+  let maximum=Prefs.read headerMaxBytes and mib=Prefs.read headerInputMiB and slots=Prefs.read headerInputSlots in
+  if maximum<=0 || mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC header input budgets");
+  let bytes=mib*1048576 in
+  if maximum>bytes then raise(Util.Fatal "Invalid RPC header input budgets");
+  {header_max=maximum;header_budget=bytes;header_slots=slots}
+let reserve_header_slot limits ticket =
+  if ticket.header_active then invalid_arg "RPC header slot reservation";
+  if !header_input_count>=limits.header_slots then raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_active<-true;incr header_input_count
+let reserve_header_input limits ticket length =
+  if not ticket.header_active || ticket.header_sized || length<0 then invalid_arg "RPC header reservation";
+  if length>limits.header_max then raise(Util.Fatal "RPC packet length exceeds command limit");
+  if !header_input_bytes>limits.header_budget || length>limits.header_budget- !header_input_bytes then
+    raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_bytes<-length;ticket.header_sized<-true;
+  header_input_bytes:= !header_input_bytes+length
+let release_header_input ticket =
+  if ticket.header_active then begin
+    ticket.header_active<-false;
+    header_input_bytes:= !header_input_bytes-ticket.header_bytes;decr header_input_count
+  end
+let receiveHeader conn =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    BorrowedWork.try_bind
+    (fun()->receivePacket ~maxBytes:limits.header_max
+      ~reserve:(fun length->reserve_header_input (header_limits ()) ticket length) conn)
+    (fun buffer->
+      try let header=unmarshalHeader conn buffer in
+        release_header_input ticket;Lwt.return header
+      with error->failed error)
+    failed
+  with error->release_header_input ticket;raise error
+
 let processRequest conn id cmdName buf =
   if not conn.outputBuffer.opened then
     Lwt.fail (Util.Fatal "Lost connection with the server") else
@@ -1177,8 +1233,7 @@ let rec receive conn =
       debugE
         (fun () -> Util.msg "Message received (id: %d)\n" num_id);
       (* Read the header *)
-      receivePacket conn >>= (fun buf ->
-      let req = unmarshalHeader conn buf in
+      receiveHeader conn >>= (fun req ->
       begin match req with
         Request cmdName ->
           (* We yield before starting processing the request.

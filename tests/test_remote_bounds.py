@@ -36,15 +36,23 @@ def main():
     workspace = nullcontext(tempfile.mkdtemp(prefix="unison-rpc-bounds-", dir="/private/tmp")) if args.report else tempfile.TemporaryDirectory(prefix="unison-rpc-bounds-", dir="/private/tmp")
     with workspace as tmp:
         work = Path(tmp)
-        (work / "remoteForTest.ml").write_text((repository / "src/remote.ml").read_text())
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text())
+        def controlled(source):
+            anchor='let receivePacket ?maxBytes'
+            assert source.count(anchor)==1
+            source=source.replace(anchor,'let header_test_guard : int option ref=ref None\n'+anchor,1)
+            anchor='  let buf = Bytearray.create length in'
+            assert source.count(anchor)==1
+            return source.replace(anchor,'  (match !header_test_guard with Some cap when length>cap->failwith "DESIGNATED header payload allocation reached" | _->());\n'+anchor,1)
+        (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
         record = dict(schema='unison-rpc-input-bounds/1', status='failed',
                       compiler=compiler, build_snapshot=str(build.parent),
-                      tested_sources={'src/remote.ml': sha(work/'remoteForTest.ml'),
-                                      'tests/remote_bounds.ml': sha(work/'remoteTest.ml'),
+                      tested_sources={'src/remote.ml': sha(repository/'src/remote.ml'),
+                                      'tests/remote_bounds.ml': sha(repository/'tests/remote_bounds.ml'),
+                                      'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/test_remote_bounds.py': sha(Path(__file__))},
                       linked_objects={name: sha(build/name) for name in modules+objects('COBJS')},
                       commands=[])
@@ -71,7 +79,7 @@ def main():
             old='(boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in'
             assert source.count(old)==1
             bad=source.replace(old,'(defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in')
-            (negative/'remoteForTest.ml').write_text(bad)
+            (negative/'remoteForTest.ml').write_text(controlled(bad))
             (negative/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
             private_flags=['-I',str(negative),*flags]
             for argv in [[compiler,*private_flags,'-c','remoteForTest.ml'],
@@ -82,6 +90,24 @@ def main():
             (negative/'test.log').write_text(c.stdout+c.stderr)
             assert c.returncode==2 and 'DESIGNATED decoded collection reached server' in c.stderr,c.stdout+c.stderr
             record['negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(negative/'remoteForTest.ml'),binary_sha256=sha(negative/'remote-negative'),scope='Only bounded registrations use legacy decoder;2000zero-payload elements, no huge allocation')
+            # Restore only unbounded header routing. The test-only allocation
+            # guard fails before a body allocation/read; no large allocation.
+            header=work/'header-negative';header.mkdir(mode=0o700)
+            old='receiveHeader conn >>= (fun req ->'
+            assert source.count(old)==1
+            bad_header=source.replace(old,'receivePacket conn >>= (fun buffer -> let req=unmarshalHeader conn buffer in')
+            (header/'remoteForTest.ml').write_text(controlled(bad_header))
+            (header/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+            hf=['-I',str(header),*flags]
+            for argv in [[compiler,*hf,'-c','remoteForTest.ml'],[compiler,*hf,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','header-negative']]:
+                c=subprocess.run(argv,cwd=header,capture_output=True,text=True,timeout=30)
+                record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+            c=subprocess.run([str(header/'header-negative')],cwd=header,env=dict(os.environ,UNISON=str(header/'state')),capture_output=True,text=True,timeout=15)
+            (header/'test.log').write_text(c.stdout+c.stderr)
+            assert c.returncode==2 and 'DESIGNATED header payload allocation reached' in c.stderr,c.stdout+c.stderr
+            record['header_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(header/'remoteForTest.ml'),binary_sha256=sha(header/'header-negative'))
+            record['controlled_remote_sha256']=sha(work/'remoteForTest.ml')
+            record['controlled_probe_sha256']=sha(work/'remoteTest.ml')
             record['status']='passed'
         finally:
             if args.report:
