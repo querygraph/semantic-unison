@@ -19,6 +19,9 @@ val with_io_file : HelperSupervisor.cancellation -> string ->
     Keep its nonblocking read descriptor until the callback settles. Never
     nest this with worker inspection or another lease from the same I/O gate.
     It is cooperative scheduling, not a pathname or physical-disk guarantee. *)
+val retained_ownership_count : unit -> int
+(** Owner-scope unresolved carrier count, not OS FD counts or a hard limit.
+    Reader/cache carriers remain rooted with unsettled borrowed reservations. *)
 val with_admission : ?reservation:SemanticAdmission.reservation -> ?role:SemanticAdmission.role -> HelperSupervisor.cancellation -> payload_bytes:int ->
   descriptors:int -> (unit -> 'a Lwt.t) -> 'a Lwt.t
 (** Reserve estimated retained resources before opening/allocating. Cancellation

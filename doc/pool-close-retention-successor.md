@@ -18,6 +18,11 @@ removes registrations, attempts `Unix.close`, then wakes detached operations and
 raises either the close error or a callback error. Its caller cannot infer OS
 settlement merely from the exception. Never retry its historic numeric FD.
 
+Owner-scope guard source and fourteen fixed stock/Ox controls are now present.
+Full production build qualification is in progress. The fixed controls use real
+Lwt/BorrowedWork and extracted borrowed-admission bodies with a fake gate; they
+do not by themselves qualify Runtime initialization or pool ownership.
+
 Implementation order:
 
 1. Add an owner-only retained-scope guard **inside** borrowed admission. Prepare
@@ -53,3 +58,11 @@ recognize source-defined carrier classes, and retain classifier failures.
 Hard FD acquisition admission, pool/transport baseline accounting and supported
 OS RSS containment remain separate work after ownership cannot be accidentally
 released. More logging or sampled counters alone will not complete those gates.
+
+Additional runtime boundary identified during integration review: `get` starts
+the pool before storing the runtime singleton. Even after a successful pool
+constructor, observer configuration, tracing and runtime record/publication can
+raise. The future creation carrier must cover this handoff as well, or prepare
+all fallible owner metadata before worker startup. A guard inside transaction
+admission cannot alone prove singleton ownership when creation happens outside
+that borrowed body. Preserve this distinction in tests and completion claims.
