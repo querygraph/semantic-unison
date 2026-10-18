@@ -186,3 +186,13 @@ not measured device IO. It is not admitted or execution-ready: a versioned share
 owner/IO contract and fresh finite IO coordination must precede measurement.
 Do not infer whole-machine quiet, hard memory bounds or end-to-end sync scaling
 from this cached digest microbenchmark.
+
+## Current admitted matrix completed
+
+The separate one-use shared benchmark subsequently passed all48batches/288digests
+with actual primary-reader9GiB accounting and all CPU/IO resources closed.
+[Current results and limitations](results/shared-current-20261017.md) distinguish
+the cached workload, six-job scheduling geometry, sampled RSS/FD observations
+and shared-machine timing from end-to-end sync or physical IO. The earlier
+preparation above remains historical; its lack of admission is no longer the
+current state. Admission4c9d02f3 is consumed and must never be replayed.

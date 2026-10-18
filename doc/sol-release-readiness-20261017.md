@@ -128,3 +128,15 @@ are therefore **not proved complete** by successful worker parity or SDK tests.
 The existing partial warm512 observations retain failed part3 and timing
 contamination disclosures; they cannot establish current quiet scaling.
 No universal hard-cap or speedup claim is made, and the full goal remains active.
+
+## Current cached-worker performance evidence
+
+[Shared cached SHA report](../bench/semantic/results/shared-current-20261017.md)
+now records48current stock/Ox batches and288correct digests under Unison8+EXglobal.
+Production primary-reader counters measured9GiB delivered logical bytes; native
+CPU/wall, process-lifetime RSS and sampled FDs are reported with scope limits.
+Actual69788/8ecd8e/0 and worker6983/group/FD settlement passed, all resources
+released. Six jobs produce an uneven4+2 wave at four workers, explicitly retained
+in the report. This closes the current cached-digest measurement gap, not full
+end-to-end sync/physical IO/hard memory or process-tree FD qualification.
+The goal remains active. No further Photo hold or benchmark replay is implied.

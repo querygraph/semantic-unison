@@ -52,7 +52,18 @@ def main():
     parser.add_argument("--warmups", type=int, default=1)
     parser.add_argument("--build-only", action="store_true")
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--inherited-resource-fds", default="",
+                        help="internal admitted owner binding; exactly nine inherited descriptors")
+    parser.add_argument("--work-parent", type=Path)
+    parser.add_argument("--sample-timeout", type=int, default=600)
     args = parser.parse_args()
+    if not 1<=args.sample_timeout<=600:
+        parser.error("sample timeout must be between1 and600 seconds")
+    inherited = tuple(int(n) for n in args.inherited_resource_fds.split(',') if n)
+    if inherited and (len(inherited)!=9 or len(set(inherited))!=9 or min(inherited)<3):
+        parser.error("exact nine unique inherited resource descriptors required")
+    inherited_identity = [dict(fd=fd, device=os.fstat(fd).st_dev, inode=os.fstat(fd).st_ino)
+                          for fd in inherited]
     workers = [int(n) for n in args.workers.split(",")]
     if not workers or min(workers) < 1 or min(args.jobs, args.repetitions, args.warmups) < 1:
         parser.error("all counts must be positive")
@@ -79,6 +90,7 @@ def main():
         "complete": False,
         "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "requested_build_only": args.build_only,
+        "inherited_resource_fds": inherited_identity,
         "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "host": {"system": platform.system(), "release": platform.release(),
                  "machine": platform.machine(), "logical_cpus": os.cpu_count()},
@@ -93,11 +105,12 @@ def main():
     }
     if platform.system() == "Darwin":
         for key in ("hw.physicalcpu", "hw.memsize"):
-            query = subprocess.run(["sysctl", "-n", key], text=True, capture_output=True)
+            query = subprocess.run(["sysctl", "-n", key], text=True, capture_output=True,
+                                   pass_fds=inherited)
             result["host"][key] = int(query.stdout) if query.returncode == 0 else None
-    temporary_workspace = (tempfile.mkdtemp(prefix="unison-sha-bench-") if args.keep_work else None)
+    temporary_workspace = (tempfile.mkdtemp(prefix="unison-sha-bench-",dir=args.work_parent) if args.keep_work else None)
     import contextlib
-    with (contextlib.nullcontext(temporary_workspace) if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-sha-bench-")) as temporary:
+    with (contextlib.nullcontext(temporary_workspace) if args.keep_work else tempfile.TemporaryDirectory(prefix="unison-sha-bench-",dir=args.work_parent)) as temporary:
         tmp = Path(temporary)
         result["retained_workspace"]=str(tmp) if args.keep_work else None
         binaries = {}
@@ -107,7 +120,8 @@ def main():
             for name, data in source_bytes.items():
                 (build / Path(name).name).write_bytes(data)
             result["compilers"][label] = {
-                "version": subprocess.check_output([compiler, "-version"], env=env, text=True).strip(),
+                "version": subprocess.check_output([compiler, "-version"], env=env, text=True,
+                                                   pass_fds=inherited).strip(),
                 "executable_sha256": hashlib.sha256(Path(compiler).read_bytes()).hexdigest(),
             }
             with (build / "build.log").open("w+") as log:
@@ -133,7 +147,8 @@ def main():
                                  "hash_bench.ml", "-o", "hash-bench"])
                 try:
                     for command in commands:
-                        subprocess.run(command, cwd=build, env=env, stdout=log, stderr=log, check=True)
+                        subprocess.run(command, cwd=build, env=env, stdout=log, stderr=log,
+                                       pass_fds=inherited, check=True)
                 except subprocess.CalledProcessError:
                     log.seek(0)
                     print(log.read())
@@ -168,8 +183,9 @@ def main():
                     output = subprocess.check_output([
                         str(binaries[label]), str(fixture), digest.hexdigest(),
                         str(args.file_mib * 1048576), str(n), str(args.jobs)],
-                        cwd=tmp, env=env, text=True, timeout=600)
+                        cwd=tmp, env=env, text=True, timeout=args.sample_timeout, pass_fds=inherited)
                     sample = json.loads(output)
+                    sample['raw_stdout'] = output
                     sample.update(compiler=label, workers=n, phase=phase, repetition=repetition + 1)
                     sample["throughput_mib_per_second"] = args.file_mib * args.jobs / sample["wall_seconds"]
                     sample["effective_cpu_cores"] = sample["process_cpu_seconds"] / sample["wall_seconds"]

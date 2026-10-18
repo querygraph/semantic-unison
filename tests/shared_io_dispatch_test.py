@@ -106,7 +106,7 @@ class Controls(unittest.TestCase):
         argv = ['/python', str(Path(d.__file__))]
         paths = {Path(d.__file__), d.ROOT/'tests/manual.py', d.ROOT/'tests/shared_io_pool.py',
                  d.ROOT/'tests/shared_cpu_pool.py', d.ROOT/'tests/shared_process_owner.py',
-                 d.ROOT/'bench/sync/ownership.py', Path(argv[1])}
+                 d.ROOT/'bench/sync/ownership.py', d.ROOT/'tests/inspector_io_contract.py', Path(argv[1])}
         value = {'state':'ROOT_ADMITTED_ONE_SHARED_DISPATCH_IO_JOB', 'target':'inspect-file',
                  'command':argv, 'workspace':'/none', 'cpu_credits':8,
                  'io_manifest_sha256':pool.CANONICAL_SHA256, 'start_deadline_unix':200,
@@ -114,8 +114,12 @@ class Controls(unittest.TestCase):
                                             for p in paths}}
         request = {'path':'/never-opened','sha256':'0'*64}
         with patch.object(pool, 'read_manifest', return_value=value), \
+             patch('inspector_io_contract.check', return_value=set()), \
              patch.object(pool.GlobalPool, 'read', return_value='metadata-only') as read, \
              patch.object(d.time, 'time', return_value=100):
+            # This is the common envelope boundary, not a fabricated real
+            # inspector/build/input qualification. Its stricter contract has
+            # separate original controls and is deliberately stubbed here.
             self.assertEqual(d.checked_io_request(request, 'inspect-file', argv, Path('/none'), 8),
                              ('metadata-only',200))
             for key, bad in [('state','wrong'),('command',[]),('workspace','/wrong'),

@@ -19,6 +19,15 @@ let () =
   let observed_peak_fds=ref baseline_fds in
   let budget = H.create ~cpu_permits:workers ~max_children:workers ~max_pending:count in
   let pool = W.create ~workers ~max_pending:count ~budget in
+  let logical_bytes=ref 0L and read_chunks=ref 0L and observations=ref 0
+  and saturated=ref false in
+  let add total n =
+    if n<0L || n>Int64.sub Int64.max_int !total then saturated:=true
+    else total:=Int64.add !total n in
+  W.set_read_observer pool (Some (fun _ reads ->
+    incr observations;
+    saturated:= !saturated || reads.SemanticFile.saturated;
+    add logical_bytes reads.logical_bytes;add read_chunks reads.chunks));
   let hash () =
     (* Each open creates a separate file offset; dup alone would not suffice. *)
     let fd = Unix.openfile path [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
@@ -40,6 +49,10 @@ let () =
   let final_fds=fd_count () in
   if correct <> count || permits <> 0 || children <> 0 || usage.pending <> 0 ||
      usage.running <> 0 || usage.peak_running > workers || final_fds<>baseline_fds then failwith "benchmark invariant failed";
+  if !saturated || !observations<>count ||
+     size>Int64.div Int64.max_int (Int64.of_int count) ||
+     !logical_bytes<>Int64.mul size (Int64.of_int count) then
+    failwith "benchmark primary-reader accounting failed";
   Printf.printf
-    "{\"wall_seconds\":%.9f,\"process_cpu_seconds\":%.9f,\"correct_digests\":%d,\"peak_active_workers\":%d,\"final_cpu_permits\":%d,\"process_lifetime_peak_rss_bytes\":%.0f,\"observed_fd_count_peak\":%d,\"baseline_fd_count\":%d,\"final_fd_count\":%d}\n%!"
-    elapsed_wall elapsed_cpu correct usage.peak_running permits (peak_rss ()) !observed_peak_fds baseline_fds final_fds
+    "{\"wall_seconds\":%.9f,\"process_cpu_seconds\":%.9f,\"correct_digests\":%d,\"peak_active_workers\":%d,\"final_cpu_permits\":%d,\"process_lifetime_peak_rss_bytes\":%.0f,\"observed_fd_count_peak\":%d,\"baseline_fd_count\":%d,\"final_fd_count\":%d,\"primary_logical_read_bytes\":%Ld,\"primary_read_chunks\":%Ld,\"primary_read_observations\":%d}\n%!"
+    elapsed_wall elapsed_cpu correct usage.peak_running permits (peak_rss ()) !observed_peak_fds baseline_fds final_fds !logical_bytes !read_chunks !observations
