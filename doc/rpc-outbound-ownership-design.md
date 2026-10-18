@@ -1,9 +1,11 @@
 # Next source work: outbound RPC ownership
 
-The current qualified candidate is frozen at execution source456776d8, with
-metadata/request history throughf6472dc2 in `unison-decoded-input-20261018`.
-This successor worktree isolates source development from those exact IO requests.
-No current outbound implementation or runtime qualification is claimed here.
+Queue ownership is qualified at4c4f305d in this source successor. The separate
+frozen IO candidate remains execution source72560ca4, request metadata18c9b822
+in `unison-outbound-accounting-20261018`; do not repin it from this worktree.
+The initial audit and milestones below retain their historical scope.
+Producer allocation hooks are now under qualification, not yet wired to RPC
+producer owners or admitted transport.
 
 The existing three dump paths accept a list of `(Bytearray, offset, length)`
 slices and enqueue a closure over that list. Queue count and selected logical
@@ -72,3 +74,39 @@ negative participants/compiler passed (inventoryv21). Producer-side allocation
 BEFORE serialization remains open: the current sizing pass itself creates
 primitive/string/bytearray temporary buffers, so a callback only after measuring
 cannot establish that boundary. See rpc-output-queue-ownership.md.
+
+
+## Producer allocation hook under qualification
+
+An internal output sink now distinguishes measuring wire length from writing
+bytes. Builtin char/int32/int64/string/bytearray sizing avoids payload buffers;
+callbacks/conversions, boxing, closures and traversal remain outside that claim.
+Both byte sink passes validate source slices; cumulative payload plus header
+uses checked addition, and second-pass destination bounds use subtraction.
+
+`Umarshal.marshal_to_bytearray_accounted` reserves cumulative selected bytes
+before framed-result/header/builtin scratch allocations. Bytearray scratch is
+conservatively charged at full payload length even if a platform chunks it.
+Local rejection precedes aggregate callback admission. Callback errors propagate
+unchanged, no retry or refund. The partial result is published immediately after
+allocation, before header copy or second-pass conversion; its caller must root
+it and charges until independently established settlement. This is not all-heap,
+RSS, depth, collection-count or arbitrary conversion-allocation containment.
+
+Directed controls currently pass stock and Ox against the real mli, including
+wire parity, malformed slices/size drift, no builtin sizing buffers, reservation
+ordering, local/aggregate refusal and partial-root failures. Designated omission
+participants must fail before unreserved allocation. Full builds are running;
+RPC producer integration still has to supply the owner and actual lifetime.
+
+That integration must reserve an owner slot before serialization, retain each
+published result including partial failure, and carry the same owner into queued
+consumption. The existing stateless marshaling function type cannot silently
+return a debit without an owner. A synchronous context may be scoped only over
+actual serialization and restored on every exception; it must never be installed
+across asynchronous server work. An explicit owned-message envelope is preferable
+where it avoids global context. Retained uncertainty must preserve all partial
+roots and cumulative charges; normal output settlement releases once, separately
+from the queue's selected logical bytes and part count. Legacy/custom producers
+cannot be silently claimed covered. Existing result consumer scopes, server
+reply continuations, cancellation and urgent output must retain their semantics.

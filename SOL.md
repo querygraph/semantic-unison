@@ -4949,3 +4949,20 @@ A future span/provenance export can support stronger narrowly qualified vendor
 children. Full original ExifTool parity is not asserted: corpus and rich-flag
 coverage remain scoped. Existing camera request bytes are preserved but their
 runner pin is stale; a fresh successor is required before any camera IO.
+
+
+### Encoder producer boundary: qualified hook, pending RPC ownership
+
+The serializer now measures builtin wire size without payload buffers and offers
+`marshal_to_bytearray_accounted`: selected cumulative framed-result/header and
+builtin scratch bytes are admitted before allocation, with immediate partial
+result publication. Successful reservations are never refunded by the codec;
+its caller must retain the published buffer and charges through actual use or
+uncertain failure. Exact public codec format is unchanged. Conversion callbacks,
+closures, boxing, traversal, depth and all-heap/RSS are not covered by this byte
+bound. Stock/Ox Make+Dune+selftests and directed refusal/partial-error/output
+regressions passed; evidence is
+`tests/qualification/umarshal-encoder-accounted-actual-20261018.json`.
+Next is explicit RPC producer ownership through actual queued consumption:
+queue logical-byte admission cannot retroactively own pre-serialization work.
+Do not count the additive hook alone as that integration or full SOL completion.

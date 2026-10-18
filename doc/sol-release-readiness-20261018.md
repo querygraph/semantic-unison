@@ -175,3 +175,20 @@ recorded inputs/compiler/binary hashes verified (inventoryv21). Producer
 pre-serialization allocation, caller/backing/connection baselines, other legacy
 lifetimes and complete SOL/platform/resource/performance acceptance remain open.
 Frozen V4 transport requests remain separate; no runtime grant is inferred.
+
+
+## Builtin encoder preallocation hook
+
+`Umarshal.marshal_to_bytearray_accounted` now reserves selected cumulative
+framed-result/header/builtin scratch bytes before allocation and publishes the
+partial result before copying/second-pass conversion. Builtin sizing no longer
+materializes payload buffers; checked slice/header arithmetic preserves valid
+wire bytes. Original controls cover refusal ordering and partial-result errors,
+with designated measurement/reservation omissions. Four current stock/Ox
+Make/Dune+selftests and focused decode/output regressions passed; all583 build
+source hashes and compiler/binary hashes match. See inventoryv22 and
+[actual evidence](../tests/qualification/umarshal-encoder-accounted-actual-20261018.json).
+RPC producers do not yet use this hook. Their explicit ownership integration,
+custom/conversion allocations, other lifetimes, whole-tree/resource/platform/
+transport/performance and complete SOL acceptance remain open. No RSS/SDK/Photo
+or broader production claim; frozen V4 transport candidate remains unchanged.

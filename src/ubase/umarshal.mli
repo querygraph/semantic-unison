@@ -91,6 +91,23 @@ type bytearray =
 val bytearray : bytearray t
 
 val marshal_to_bytearray : 'a t -> 'a -> bytearray
+
+(** Reserve before selected encoder buffer allocations: the framed result,
+    eight-byte header scratch, and builtin scalar/string/bytearray scratch.
+    Bytearray scratch is conservatively charged at its full payload length.
+    The local limit bounds cumulative selected bytes, not peak memory or RSS.
+    Sizing creates no builtin payload buffers, but conversions execute twice;
+    caller/conversion allocations, boxing, closures and collection traversal
+    are outside this bound. [reserve] runs after local checks and before each
+    selected allocation. Its exceptions propagate unchanged, without retry or
+    refund. [publish] receives the partial result immediately after allocation,
+    before copying or the second codec pass. The caller must retain that root
+    and all successful claims through actual use or uncertain failure, and
+    release only after independently established settlement. Neither callback
+    may mutate encoder inputs or start unowned asynchronous use. *)
+val marshal_to_bytearray_accounted :
+  max_alloc_bytes:int -> reserve:(bytes:int -> unit) ->
+  publish:(bytearray -> unit) -> 'a t -> 'a -> bytearray
 val unmarshal_from_bytearray_bounded : max_alloc_bytes:int -> max_elements:int ->
   'a t -> bytearray -> int -> 'a
 (** Same encoding as the ordinary decoder, with the above per-decode limits.

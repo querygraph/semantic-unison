@@ -24,9 +24,24 @@ type input = {
   elements_bounded:bool; mutable elements_left:int;
   reserve:(bytes:int -> elements:int -> unit) option;
 }
+(* The measuring sink counts wire bytes without materializing builtin payloads.
+   Conversion callbacks still execute on both passes and own their allocations. *)
+type output = {
+  send : bytes -> int -> int -> unit;
+  measure : (int -> unit) option;
+  reserve_output : (int -> unit) option;
+}
+let writing ?reserve_output send = {send;measure=None;reserve_output}
+let emit output length produce =
+  match output.measure with
+  | Some count -> count length
+  | None ->
+      (match output.reserve_output with None -> () | Some reserve -> reserve length);
+      produce output.send
+
 type 'a t = {
     read : input -> 'a;
-    write : (bytes -> int -> int -> unit) -> 'a -> unit;
+    write : output -> 'a -> unit;
 }
 
 let preflight input length =
@@ -82,7 +97,7 @@ let data_size header offset =
 
 let to_string m x =
   let buffer = Buffer.create 1024 in
-  m.write (Buffer.add_subbytes buffer) x;
+  m.write (writing (Buffer.add_subbytes buffer)) x;
   let header = Bytes.create header_size in
   Bytes.set_int64_be header 0 (Int64.of_int (Buffer.length buffer));
   Bytes.to_string header ^ Buffer.contents buffer
@@ -116,7 +131,7 @@ let to_channel m oc x =
   let header = Bytes.create header_size in
   let header_pos = pos_out oc in
   output oc header 0 header_size;
-  m.write (output oc) x;
+  m.write (writing (output oc)) x;
   let end_pos = pos_out oc in
   let data_size = end_pos - header_pos - header_size in
   Bytes.set_int64_be header 0 (Int64.of_int data_size);
@@ -164,9 +179,10 @@ let char =
       );
     write =
       (fun send x ->
-        let res = Bytes.create 1 in
-        Bytes.unsafe_set res 0 x;
-        send res 0 1
+        emit send 1 (fun send ->
+          let res = Bytes.create 1 in
+          Bytes.unsafe_set res 0 x;
+          send res 0 1)
       );
   }
 
@@ -196,9 +212,10 @@ let int32 =
       );
     write =
       (fun send x ->
-        let res = Bytes.create 4 in
-        Bytes.set_int32_be res 0 x;
-        send res 0 4
+        emit send 4 (fun send ->
+          let res = Bytes.create 4 in
+          Bytes.set_int32_be res 0 x;
+          send res 0 4)
       );
   }
 
@@ -223,10 +240,11 @@ let int64 =
     write =
       (fun send x ->
         let realize n set to_int =
-          let buffer = Bytes.create (1 + n) in
-          Bytes.unsafe_set buffer 0 (char_of_int n);
-          set buffer 1 (to_int x);
-          send buffer 0 (1 + n)
+          emit send (1 + n) (fun send ->
+            let buffer = Bytes.create (1 + n) in
+            Bytes.unsafe_set buffer 0 (char_of_int n);
+            set buffer 1 (to_int x);
+            send buffer 0 (1 + n))
         in
         if x = 0L then
           char.write send '\000'
@@ -276,7 +294,7 @@ let bounded_string max_length =
         if length > max_length then
           raise (Error "bounded_string: length exceeds limit");
         int.write send length;
-        send (Bytes.of_string x) 0 length
+        emit send length (fun send -> send (Bytes.of_string x) 0 length)
       );
   }
 
@@ -314,6 +332,7 @@ let bytearray =
       (fun send x ->
         let length = Bigarray.Array1.dim x in
         int.write send length;
+        emit send length (fun send ->
         let buffer = Bytes.create (min length Sys.max_string_length) in
         let rec loop offset length =
           if length > 0 then (
@@ -323,31 +342,62 @@ let bytearray =
             loop (offset + sub_length) (length - sub_length)
           )
         in
-        loop 0 length
+        loop 0 length)
       );
   }
 
-let marshal_to_bytearray m x =
+let marshal_to_bytearray_internal ?allocation ?reserve ?publish m x =
+  (match allocation with Some n when n < 0 ->
+     invalid_arg "Umarshal encode allocation budget" | _ -> ());
+  let allocation_left = ref (Option.value ~default:0 allocation) in
+  let claim_output bytes =
+    if bytes < 0 then raise (Error "encode: negative allocation");
+    (match allocation with Some _ when bytes > !allocation_left ->
+       raise (Error "encode: allocation budget exceeded") | _ -> ());
+    (match reserve with None -> () | Some reserve -> reserve ~bytes);
+    if Option.is_some allocation then allocation_left := !allocation_left - bytes
+  in
+  let validate_slice buffer offset length =
+    if offset < 0 || length < 0 || offset > Bytes.length buffer ||
+       length > Bytes.length buffer - offset then
+      raise (Error "marshal_to_bytearray: invalid source slice")
+  in
   let data_size = ref 0 in
-  m.write (fun _ _ length -> data_size := !data_size + length) x;
+  let count length =
+    if length < 0 || length > max_int - header_size - !data_size then
+      raise (Error "marshal_to_bytearray: size overflow");
+    data_size := !data_size + length
+  in
+  m.write {measure=Some count;reserve_output=None;send=(fun buffer offset length ->
+      validate_slice buffer offset length; count length)} x;
+  let total_size = header_size + !data_size in
+  (* No buffer allocation precedes owner admission. Claims remain owned on
+     every failure; only the caller knows when partial work can be released. *)
+  claim_output total_size;
+  claim_output header_size;
   let header = Bytes.create header_size in
   Bytes.set_int64_be header 0 (Int64.of_int !data_size);
-  let total_size = header_size + !data_size in
   let result = Bigarray.(Array1.create char c_layout total_size) in
+  (match publish with None -> () | Some publish -> publish result);
   unsafe_blit_from_bytes header 0 result 0 header_size;
   let offset = ref header_size in
-  m.write (fun buffer offset' length ->
+  m.write (writing ~reserve_output:claim_output (fun buffer offset' length ->
+      validate_slice buffer offset' length;
       let i = !offset in
-      if i + length <= total_size then (
+      if length <= total_size - i then (
         unsafe_blit_from_bytes buffer offset' result i length;
         offset := i + length
       ) else (
         raise (Error "marshal_to_bytearray: length inconsistency")
       )
-    ) x;
+    )) x;
   if !offset <> total_size then
     raise (Error "marshal_to_bytearray: universe inconsistency");
   result
+
+let marshal_to_bytearray m x = marshal_to_bytearray_internal m x
+let marshal_to_bytearray_accounted ~max_alloc_bytes ~reserve ~publish m x =
+  marshal_to_bytearray_internal ~allocation:max_alloc_bytes ~reserve ~publish m x
 
 let unmarshal_from_bytearray_internal ?allocation ?elements ?reserve m x offset =
   validate_limits allocation elements;

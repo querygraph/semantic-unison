@@ -5475,3 +5475,92 @@ FrozenV4 /Users/alexy/src/unison-outbound-accounting-20261018 source72560ca4+
 metadata18c9b822 unchanged; Rootqueue01a15045-55f3 and exact3paths in index remain
 separate. Checkactualfreshgrants beforeoptionalnewwork; no V3/V2replay. Next
 sourcework cancontinue butmustnotmutatefrozenRootclosure. Goalactivefullscope.
+
+Qualified source4c4f305d forkpush issued; Photo progress notice ACTUALLY queued01a1506a-ed6d-7b32-933b-783fec05790e (tool50ae53/0). FrozenV4 not repinned; no newgrant requested. Last3V4admission/workspace read allabsent.
+
+## 2026-10-18 encoder slice prerequisite (source successor, not frozen V4)
+
+Previous status turn was no progress; resumed source work. marshal_to_bytearray
+now validates source slices on BOTH passes and checks payload+header overflow
+before result allocation; second-pass destination check uses subtraction rather
+than overflow-prone addition. Original tiny private-codec controls cover six
+invalid slice forms, second-pass size drift, and valid nonzero slice bytes.
+Actual controller98620/50f495/exit0/no session; stock and Ox controls under
+Unison4 each closed child0/groupabsence/CPUclosed. Receipts:
+/private/tmp/unison-encoder-slice-{stock,ox}-20261018-001/SHARED-CLOSED.json.
+No EXIO/Photo/SDK/transport. New tests/umarshal_accounting/encoder_slices.py.
+This is a narrow unsafe-copy prerequisite; sizing still allocates payload copies,
+producer reservation/output-context design remains NEXT, no allocation/RSS claim.
+Full builds/regressions and guarded omission participants for this new change
+remain pending; do not promote into frozen V4. V4 admissions were absent at this
+turn's fresh metadata check. Existing source4c4f qualification remains historical
+and does NOT qualify these new edits. Goal active, no resource held.
+
+
+## 2026-10-18 builtin encoder measuring sink implemented (not fully qualified)
+
+Previous turn made source/test progress. Internal output context now separates
+measure-only count from actual byte sink. char/int32/int64/string/bytearray
+builtin sizing avoids Bytes.create/of_string payload buffers; compound codecs
+propagate context unchanged. This is NOT allocation-free whole execution:
+closures/boxing/traversal/conversion callbacks remain, and actual serialization
+still allocates scratch/payload copies pending producer reservation integration.
+Public abstract codec API and valid wire representation unchanged by design.
+Bounds prerequisite from previous turn retained on both measurement fallback
+and actual copy paths, cumulative header overflow checked before result allocate.
+
+Original tests/umarshal_accounting/encoder_slices.py wraps Bytes to reject
+builtin sizing allocations, checks composite wire parity +8 malformed/valid
+slice/size cases, compiles against actual mli, and requires omission participant
+to fail with sizing-allocated-bytes witness. Actual004 controller72412/3685ad/0
+(no session), stock/Ox closures under /private/tmp/unison-encoder-sizing-{stock,ox}-20261018-004.
+Preserved002 controllerb8ee6e/1: fixture omitted prod3 conversion args, no prod
+change needed;00347105/15d96c/0 passed before interface/mutant additions.
+Existing decoder accounting78controls+2 omission/order participants also passed
+both compilers controller62353/d08ecc/0, namespaces
+/private/tmp/unison-encoder-sizing-decode-{stock,ox}-20261018-001.
+All contained children reaped0/groups absent/Unison4closed; no EXIO acquired.
+Evidence tests/qualification/umarshal-encoder-sizing-directed-20261018.json pins
+current source/test/mli+four SHARED-CLOSED receipts. Full Make/Dune/selftest and
+RPC private-source controls pending BEFORE promotion/commit. Next: reservation
+BEFORE result/scratch allocation, partial buffer publish/root lifetime, then
+producer integration. Frozen V4 unchanged; no payload admission/dispatch.
+
+
+## 2026-10-18 builtin encoder allocation hook qualified; RPC integration next
+
+Current source adds internal measure/write output context and additive
+Umarshal.marshal_to_bytearray_accounted. Measures builtin wire lengths without
+payload scratch, validates slices on both passes/checked header sum, reserves
+selected cumulative result/header/builtin scratch BEFORE allocation, publishes
+partial result BEFORE header copy/secondpass. Caller retains claims/root on all
+failure and releases after actual settlement; no library refund/retry. Local
+budget then external admission; original callback exceptions preserved. This
+is NOT conversion/closure/boxing/traversal/depth/allheap/RSS accounting, nor RPC
+producer integration. Bytearray scratch conservatively fullpayload charged.
+
+Actual final directed controller53369/e7e1b3/0/no session: stock/Ox positives,
+measurement-omitted and scratch-reservation-omitted participants correctly fail;
+9 slice/overflow/drift/valid checks plus sizing/wireparity/local+aggregate refusal/
+partialresult/callbackfailure ordering. Prior17042/3ecdf0/0 also passed before
+explicit max_int headeroverflow check added in final002. Preserve earlier
+sizing002 fixture failure,003/004 and accounted001 scope; no raw overwrite.
+
+Actual full controller74532/b602f2/0/no session, four stock/Ox Make+Dune+selftests
+PASS; all583 recorded source inputs plus compiler/binary hashes match current.
+Focused regressions99178/c969b8/0/no session: decoder78+2 omission/order controls,
+outbound8 and queue9 negatives/compiler plus positives PASS. All contained
+children0/groupsabsent/CPU4or8closed. No EXIO/SDK/Photo/nativeUI or live job.
+Evidence tests/qualification/umarshal-encoder-accounted-actual-20261018.json
+278514B SHA0eca648159038ad66898b98b8f53cec46611d320ebf94bf696c13b2868b55b81;
+remaining inventoryv22. Earlier sizing-directed receipt is historical prehook,
+not falsely repinned. Goal remains full SOL active/incomplete.
+
+NEXT: explicit producer message owner/slot before serialization, retain published
+partial arrays+charges through actual dump consumer and recognized uncertainty.
+Stateless marshalFunction/curried server replies must not lose that debit. Scope
+synchronous encoder context ONLY over builder (never asynchronous serverwork),
+or prefer explicit envelope; preserve request/reply/stream/urgent cancellation
+and queued actual-consumer lifetime. Add directed lifetime tests, then qualify.
+Frozen V4 candidate source72560ca4/metadata18c9b822 unchanged; all3 admissionpaths
+freshly absent842688. No IO dispatch/Rootgrant inferred; old V3/V2 deferred.
