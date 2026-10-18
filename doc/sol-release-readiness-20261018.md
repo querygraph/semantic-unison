@@ -309,3 +309,26 @@ SHA2fe83118dca46ef70195971e00f9f9933cf4fb77ab2ad8bb8be89c131b3e30d8.
 This renews the stated worker acceptance scope; full8 simultaneous execution,
 OSthread/RSS limits, throughput and broader SDK/media/platform/transport remain
 separate. Only the actual-object `--build` runner mode is qualified here.
+
+
+## Current cache/runtime composition renewed
+
+The cache audit's changed semanticRuntime source was traced to exact ancestor
+4b9e7e67, matching the old receipt's SHA. The delta adds fixed completion-buffer/
+pipe baseline accounting, the resource-accounting accessor and late pure Remote
+ownership classification; it does not change the cache record format. Rather
+than adopt the old whole closure from five matching source files, six current-
+object jobs renewed joint cache fault scopes, full async capture/saved-base/
+cached scalar merge, and merge-error propagation on stock and Ox.
+
+Each compiler passed20 joint ownership scenarios and the designated swallowing
+rejection; capture and both merge paths preserve source bytes and exact output;
+error/exception paths settle their stated ledgers. Actual78905/c3aeda/0/no session,
+all six groups/CPU4 scopes closed. Tests use private generated64KiB DNG/state,
+no Photo/SDK/transport/EXglobal. Real private close-uncertainty fixtures persist
+until actual probe process exit; normal in-process settlement is not claimed.
+Evidence `tests/qualification/current-cache-runtime-composition-actual-20261018.json`
+248951B SHA8f26bcfbcf1dc54de90a4a84e3a4c9809027f3e6484f96b337b8cf40381b0782.
+Frozen V6 execution sources unchanged; no new runtime admission/gate. Current
+compatibility/property qualification still requires the already prepared fresh
+Root grants, followed by reconciliation of the remaining12area acceptance map.

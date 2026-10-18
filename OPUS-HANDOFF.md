@@ -5889,3 +5889,30 @@ Next: actualV6upstream/fork/property grants; inspect semanticRuntime dependency
 for jointcache composition; remainingcurrentmerge/fault/platform/acceptance map.
 No ownlivejobs/resources. V6 stillnotadmitted atlastread665242; dofreshcheckpaths
 beforeoptionalwork. Keep frozenV6candidate fixed. Goal fullscopeactive/incomplete.
+
+
+## 2026-10-18 current cache/runtime composition gap renewed
+
+Fresh3V6admissions absent155023; frozenstream-qualified5cc96102 unchanged.
+Exact runtime oldreceipt SHA6ed5055e matchedgit ancestor4b9e7e67 (not guessed
+26fd parent: firstcomparisonfalse, then exacthistorylookupf24c75). Currentdelta
+fixedpipeline baselineaccounting+resourceaccessor+latepureRemote classifier
+registration, no cacheformat change. Old5matchingcachefiles didNOTautomatically
+adopt oldruntime closure; renewedactualcurrent-object compositioninstead.
+
+Actualcontroller78905/c3aeda/0/no session. Sixjobs stock/Ox joint,pipeline,
+merge-errors underCPU4 each: allpassed/reaped0/groupsabsent/tokensclosed.
+Namespaces /private/tmp/unison-current-cache-{joint,pipeline,merge-errors}-
+{stock,ox}-20261018-001. Joint20scenarios+1designatedreject/compiler; asynccapture/
+savedbase/cachedscalarmerge exact/sourceunchanged; merge-error propagation.
+Private64KiBgeneratedDNG/state only, no SDK/Photo/transport/EXglobal/nativeUI.
+REAL privatefile/opaqueDirectory close uncertainty deliberately persists until
+actualprobeprocessexit, NOT normalinprocesscloseproof andno numericFDretry.
+
+Evidence tests/qualification/current-cache-runtime-composition-actual-20261018.json
+248951B SHA8f26bcfbcf1dc54de90a4a84e3a4c9809027f3e6484f96b337b8cf40381b0782.
+Allcurrent329production/compiler/binary matcheschecked, controlledcache binaries
+pinned. Only metadata/evidence/docs added; no newprod or V6runtimeclosurechange.
+Audit oldgapremainsimmutablehistorical; this qualifiesstatedcompositioncurrent.
+Nextpriorities actualV6upstream/fork/property grants +remainingacceptancemap,
+notuniversalcleanupmigration. Goalactive/incomplete, no ownedlivejobs/resources.
