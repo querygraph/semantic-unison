@@ -1,0 +1,38 @@
+{
+  "state": "BORROWED_CLOSE_CANDIDATE_CONTROLS_PASS_NOT_WORKER_INTEGRATED",
+  "actual_owner": {
+    "session_id": 9253,
+    "terminal_chunk": "f02a66",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controller": 71190,
+  "controller_reaped": true,
+  "group_absent": true,
+  "cpu3_closed": true,
+  "io_acquired": false,
+  "execution_pins_unchanged": 43,
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-borrowed-close-controls-20261018-001/RESULT.json",
+      "bytes": 8443,
+      "sha256": "767309a0483c22f9690f2604d42a2bd17edbe8fc98d9de196c316f3c3861e57f"
+    },
+    {
+      "path": "/private/tmp/unison-borrowed-close-controls-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "fda5ef99d1492e09ed5811206078ecd92660e30cb5c608d768ef540edae186f1"
+    },
+    {
+      "path": "/private/tmp/unison-borrowed-close-controls-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 57,
+      "sha256": "159ffd0751224b0115b25aa21307d3c6d899b669b38646e73a23f68f426e634a"
+    },
+    {
+      "path": "/private/tmp/unison-borrowed-close-controls-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Exact production admission function body + actual Lwt/BorrowedWork, fake gate/descriptors; timer stub; not real worker shutdown, OS close or hard FD/RSS qualification"
+}
