@@ -49,6 +49,9 @@ module StagePublication = struct
   let adopt_owned context ~parent ~stage=
     StagePublication.adopt_owned context ~parent ~stage;
     HandoffFault.hit "adopt-after"
+  let adopt_owned_tracked context handoff ~parent ~stage=
+    StagePublication.adopt_owned_tracked context handoff ~parent ~stage;
+    HandoffFault.hit "adopt-after"
 end
 '''
 
@@ -205,7 +208,10 @@ let ()=
   test "local cleanup waits for a borrowed stage before closing or unlinking" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let transaction,publication,_,output=match S.create_bound_transaction (S.create_publication_scope()) ~basis:(path "basis") ~directory
+      let scope=S.create_publication_scope() in
+      let transaction=S.prepare_transaction(path "pending-stage")(S.mark_scope_uncertain scope) in
+      scope.held<-Some transaction;
+      let transaction,publication,_,output=match S.create_bound_transaction scope transaction ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=S.with_publication_borrowed(Some publication)transaction(fun()->pending) in
@@ -216,7 +222,10 @@ let ()=
   test "remote cleanup waits for a borrowed stage before closing or unlinking" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let candidate,publication=match R.create_bound_candidate (R.create_publication_scope()) ~basis:(path "basis") ~directory
+      let scope=R.create_publication_scope() in
+      let files=R.hold(path "pending-stage")(R.mark_scope_uncertain scope) in
+      scope.files<-Some files;
+      let candidate,publication=match R.create_bound_candidate scope files ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=R.borrowed_with_publication(Some publication)candidate(fun()->pending) in
@@ -227,7 +236,10 @@ let ()=
   test "local unregister OOM defers borrowed FD and name cleanup and later reuse is safe" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let transaction,publication,_,output=match S.create_bound_transaction (S.create_publication_scope()) ~basis:(path "basis") ~directory
+      let scope=S.create_publication_scope() in
+      let transaction=S.prepare_transaction(path "pending-stage")(S.mark_scope_uncertain scope) in
+      scope.held<-Some transaction;
+      let transaction,publication,_,output=match S.create_bound_transaction scope transaction ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=S.with_publication_borrowed(Some publication)transaction(fun()->pending) in
@@ -240,7 +252,10 @@ let ()=
   test "remote unregister OOM defers borrowed FD and name cleanup and later reuse is safe" (fun()->
     case_fixture top(fun directory path native _ _ _ _ _ _ ->
       let stage=Path.fromString "pending-stage" in
-      let candidate,publication=match R.create_bound_candidate (R.create_publication_scope()) ~basis:(path "basis") ~directory
+      let scope=R.create_publication_scope() in
+      let files=R.hold(path "pending-stage")(R.mark_scope_uncertain scope) in
+      scope.files<-Some files;
+      let candidate,publication=match R.create_bound_candidate scope files ~basis:(path "basis") ~directory
         ~staging:(Path.fromString "normal") stage(path "pending-stage") with Some x->x|None->failwith "stage declined" in
       let pending=Lwt.wait() in
       let work=R.borrowed_with_publication(Some publication)candidate(fun()->pending) in
@@ -263,18 +278,22 @@ def replace_once(source,old,new):
     return source.replace(old,new,1)
 
 def instrument(source,local):
-    source=replace_once(source,'let publications = Remote.resourceWithConnCleanup\n  close_publication close_publication_noerr',
+    declaration=('let publications = Remote.resourceWithConnCleanup close_publication close_publication_noerr'
+                 if local else 'let publications = Remote.resourceWithConnCleanup\n  close_publication close_publication_noerr')
+    source=replace_once(source,declaration,
         'let publications = HandoffFault.resource "publication" (Remote.resourceWithConnCleanup close_publication close_publication_noerr)')
     if local:
         source=replace_once(source,'let transaction_resources = Remote.resourceWithConnCleanup\n  cleanup_transaction cleanup_transaction_noerr',
             'let transaction_resources = HandoffFault.resource "register" (Remote.resourceWithConnCleanup cleanup_transaction cleanup_transaction_noerr)')
-        source=replace_once(source,'{path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false}',
-            'HandoffFault.wrap "record" (fun () -> {path;fds=[basis_fd;output_fd];busy=false;abandoned=false;owned=false;publication_pending=false;retained=false})')
+        source=replace_once(source,'let transaction={path;pair;source_owner;on_uncertain;',
+            'let transaction=HandoffFault.wrap "record" (fun () -> {path;pair;source_owner;on_uncertain;')
+        source=replace_once(source,'original_error=Exit;original_failed=false} in',
+            'original_error=Exit;original_failed=false}) in')
     else:
         source=replace_once(source,'let candidates = Remote.resourceWithConnCleanup cleanup cleanup_noerr',
             'let candidates = HandoffFault.resource "register" (Remote.resourceWithConnCleanup cleanup cleanup_noerr)')
-        source=replace_once(source,'{basis;output;files=hold [basis;output];path;owned=false}',
-            'HandoffFault.wrap "record" (fun () -> {basis;output;files=hold [basis;output];path;owned=false})')
+        source=replace_once(source,'try {basis;output;files;path;owned=false}',
+            'try HandoffFault.wrap "record" (fun () -> {basis;output;files;path;owned=false})')
         source=replace_once(source,'let supported connection =\n  SemanticFormats.peer_enabled () <> [] && Remote.connectionVersion connection >= 1 &&\n  Features.enabled transport',
             'let supported _ = SemanticFormats.peer_enabled () <> [] && Features.enabled transport')
         source=replace_once(source,'~maxArgs:request_limit ~maxResult:response_limit args result make_plan',

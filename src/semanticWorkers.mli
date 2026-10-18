@@ -21,8 +21,12 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
-type usage = { workers : int; pending : int; running : int; peak_running : int }
+type usage = { workers : int; pending : int; running : int; peak_running : int; retained : int }
 exception Failed of string
+val fixed_resources : SemanticAdmission.cost
+(** One notification pipe (two descriptors) and its fixed completion-pump
+    buffer, reserved before construction by SemanticRuntime. Excludes domain,
+    mailbox/OCaml metadata, stacks, job duplicates and external helpers. *)
 val recommended_workers : unit -> int
 val create : workers:int -> max_pending:int -> budget:HelperSupervisor.t -> t
 (** Positive workers; max_pending must be1..65536. Runtime uses4096. Both job
@@ -34,6 +38,10 @@ val create_with_io : io:IoAdmission.t -> workers:int -> max_pending:int ->
     and output devices atomically before a domain slot and CPU permit. The
     lease lasts through active worker completion and worker duplicate closure;
     waiting I/O jobs consume neither domain slots nor CPU credits. *)
+val retain_unsettled : t -> exn -> 'a
+(** Revoke new submissions and root the pool after an unresolved owner handoff.
+    Raises NotificationPipe.Uncertain with the original failure. This is not
+    settlement, a numeric close retry, or permission to start another pool. *)
 val set_read_observer : ?measure_stages:bool -> t -> (int -> SemanticFile.read_stats -> unit) option -> unit
 (** Optional [measure_stages] includes reader-local inclusive SDE/hash phases;
     disabled by default. Snapshot readers remain excluded. See SemanticFile.
@@ -44,10 +52,15 @@ val set_read_observer : ?measure_stages:bool -> t -> (int -> SemanticFile.read_s
     returned, stable reader jobs only, not partial/cancelled reads or other I/O.
     Disable with [None]; no counter state is allocated for disabled jobs. *)
 val usage : t -> usage
+(** [retained] counts owner-observed unresolved duplicate-close jobs, not OS FD
+    counts. Nested readers, native adapters and notification pipes need separate
+    ownership qualification; this field is not a whole-process resource bound. *)
 val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprint option Lwt.t
 (** Borrows the caller's regular descriptor until the promise settles. Its
     position is shared with the worker-owned duplicate: the caller must not
-    seek, read, write, or close it meanwhile. The duplicate is always closed.
+    seek, read, write, or close it meanwhile. Duplicates get one close attempt.
+    An uncertain worker-owned duplicate keeps the reply and reservations
+    unsettled, rejects new work and prevents shutdown from claiming completion.
     None means cancelled; failures are [Failed]. Cancellation is checked at
     64 KiB boundaries and permits remain reserved until the worker finishes. *)
 val snapshot : t -> HelperSupervisor.cancellation -> max_bytes:int64 ->

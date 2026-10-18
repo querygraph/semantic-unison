@@ -68,7 +68,12 @@ let ()=
   let native=match S.retained_publication_native owner with Some x->x|_->failwith "native carrier lost" in
   let evidence=StagePublication.owned_evidence native and count=closes() in
   let known=S.retained_publication_descriptors owner in
-  require(List.length known>=2) "remaining transaction descriptors not retained";
+  if phase="callback-close" then begin
+    require(known=[]) "raw descriptors should be known closed before native abort";
+    let pair=match S.retained_publication_pair_ownership owner with Some p->p|_->failwith "pair owner missing" in
+    let source=match S.retained_publication_source_ownership owner with Some p->p|_->failwith "source owner missing" in
+    require(NotificationPipe.settled pair && NotificationPipe.settled source) "known raw close evidence missing"
+  end else require(List.length known>=2) "remaining transaction descriptors not retained";
   List.iter(fun fd->ignore(Unix.fstat fd))known;
   if phase="callback-close" then require(S.retained_publication_cause owner==marker) "original callback cause lost";
   require(!callbacks=(if phase="adopt-close" then 0 else 1)) "callback omitted/repeated after uncertainty";

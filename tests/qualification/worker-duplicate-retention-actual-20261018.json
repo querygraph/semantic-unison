@@ -1,0 +1,153 @@
+{
+  "state": "ISOLATED_WORKER_DUPLICATE_RETENTION_QUALIFIED",
+  "build_owner": {
+    "session_id": 73565,
+    "terminal_chunk": "6bda06",
+    "exit_code": 0,
+    "no_session": true,
+    "stock_child": 85041,
+    "ox_child": 86194,
+    "both_reaped_and_groups_absent": true,
+    "cpu8_closed_after_each": true,
+    "io_acquired": false
+  },
+  "builds": [
+    {
+      "label": "stock",
+      "source_count": 321,
+      "receipts": [
+        {
+          "path": "/private/tmp/unison-worker-retention-check-stock-20261018-001/RESULT.json",
+          "bytes": 53662,
+          "sha256": "2720e2961340fb7f6a0440743cba822bc54c9109be93094f26393b5e293b921d"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a77e55f486279ba65c8c91938f497fce800299e349a58763cf8437f620322eaa"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "1464777802aeb851a3dcd9cb949dab2a5f25ddab5d3453f73f55f54a90bb3b47"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "source_count": 321,
+      "receipts": [
+        {
+          "path": "/private/tmp/unison-worker-retention-check-ox-20261018-001/RESULT.json",
+          "bytes": 53668,
+          "sha256": "6a13549a9ebdf3817b2309dd9da8bcf3f736d0180b374df89ef57095b415fe13"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "65f4630b501b94841a72cfb31707bbbcc50ba5950e4b4ad93cc12e985c6a9c7d"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "36daacbf1579bf74ce90164c3c6ecf425fdb77653ba29596fab2784a766c782e"
+        },
+        {
+          "path": "/private/tmp/unison-worker-retention-check-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "fault_owner": {
+    "session_id": 10326,
+    "terminal_chunk": "0c52a0",
+    "exit_code": 0,
+    "no_session": true,
+    "controller": 88611,
+    "reaped": true,
+    "group_absent": true,
+    "cpu3_closed": true,
+    "io_acquired": false
+  },
+  "fault_receipts": [
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-005/RESULT.json",
+      "bytes": 130797,
+      "sha256": "faeba9f2afdbce81259638d1e960676846c5354450ccb763525c44d77e9d8d8f"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-005/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "cc9d22755bae02b35cacde7760af70b3ef49d2cb47640bb7eec1f081e893cf51"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-005/SHARED-STDOUT.txt",
+      "bytes": 47,
+      "sha256": "50f34d2a7002cb861a4c586b344359d8bd14a5695d0a7d56352bb6ba13c3e6de"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-005/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "preserved_attempts": [
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-001",
+      "state": "FAILED_PRIVATE_OX_HELPER_PORTABILITY",
+      "tool": 88513,
+      "terminal": "709810",
+      "exit_code": 1
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-002",
+      "state": "CURRENT_EIGHT_CASES_PASS_BEFORE_OLD_REGRESSION_ADDED",
+      "tool": 93249,
+      "terminal": "da3910",
+      "exit_code": 0
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-003",
+      "state": "FAILED_BASELINE_INTERFACE_LINK",
+      "tool": 97600,
+      "terminal": "bf5691",
+      "exit_code": 1
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-004",
+      "state": "FAILED_BASELINE_IMPLEMENTATION_LINK",
+      "tool": 74245,
+      "terminal": "bdaa71",
+      "exit_code": 1
+    }
+  ],
+  "current_cases": 8,
+  "old_behavior_regressions": 2,
+  "scope": "Real SemanticWorkers/OwnedClose with one private close callback substitution. Known digest/shutdown and uncertain single/dual/failed-operation paths. Retains through cancellation/shutdown and preserves replacement FD. Faulted pools deliberately end at actual process exit, not normal shutdown. Tiny original64B fixtures only.",
+  "nested_reader_and_native_closure_qualified": false,
+  "hard_process_FD_or_RSS_bounds": false,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/worker_fault.ml",
+      "bytes": 802,
+      "sha256": "64eb35846be7518abc900443689b945a2176edf71458db02cea628b1251e20e6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/worker_fault_test.ml",
+      "bytes": 3077,
+      "sha256": "84bee705fe0f08a1b83031084d1d580dbac35bd6770f6858c5084335321ae896"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/resource_close/worker_fault_run.py",
+      "bytes": 6503,
+      "sha256": "36860bf5ed16b330542c682e48ddc8a50881bea1aa3db7095b53f81724c22d7b"
+    }
+  ]
+}

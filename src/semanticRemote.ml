@@ -2,10 +2,7 @@ open Lwt
 
 let transport = Features.register "semantic-delta-v0" ~arcFormatChange:false None
 let debug = Trace.debug "semantic"
-let close_fd_noerr fd = try Unix.close fd with _ -> ()
 let unlink_stage_noerr path = try Fs.unlink path with _ -> ()
-let discard_unregistered_stage path basis output =
-  close_fd_noerr basis; close_fd_noerr output; unlink_stage_noerr path
 let supported connection =
   SemanticFormats.peer_enabled () <> [] && Remote.connectionVersion connection >= 1 &&
   Features.enabled transport
@@ -60,34 +57,58 @@ let with_owned_source path work =
       (fun error -> if !settled then fail error else
         match finish (Some error) with Some error -> fail error | None -> assert false))
 
-type held_files = { descriptors : Unix.file_descr list; mutable busy : bool;
+type held_files = { ownership : NotificationPipe.t; path : Fspath.t;
+                    on_uncertain : exn -> unit; mutable busy : bool;
                     mutable closing : bool; mutable closed : bool;
-                    mutable publication_pending : bool; mutable retained : bool }
+                    mutable publication_pending : bool; mutable retained : bool;
+                    mutable retention_error : exn }
+let hold path on_uncertain =
+  let ownership=NotificationPipe.prepare () in
+  let files={ownership;path;on_uncertain;busy=false;closing=false;closed=false;
+    publication_pending=false;retained=false;retention_error=Out_of_memory} in
+  NotificationPipe.keep_owner ownership (fun () -> ignore(Sys.opaque_identity files));
+  files
+let adopt_files files basis output = NotificationPipe.adopt files.ownership basis output
+let file_descriptors files =
+  let basis,output=NotificationPipe.descriptors files.ownership in
+  (if NotificationPipe.read_held files.ownership then [basis] else []) @
+  (if NotificationPipe.write_held files.ownership then [output] else [])
+let retain_files files error =
+  if not files.retained then files.retention_error<-error;
+  files.retained<-true;files.closing<-true;
+  (try files.on_uncertain error with _ -> ());
+  (* Root the complete stage/name/callback metadata as well as both slots. *)
+  try NotificationPipe.retain_unsettled files.ownership error
+  with NotificationPipe.Uncertain _ -> ()
 let close_files files =
   files.closing <- true;
-  if not files.busy && not files.closed && not(files.retained || files.publication_pending) then begin
-    files.closed <- true;
-    let first = ref None in
-    List.iter (fun fd -> try Unix.close fd with Unix.Unix_error _ as e ->
-      if !first = None then first := Some e) files.descriptors;
-    match !first with None -> () | Some e -> raise e
+  if files.retained then NotificationPipe.retain_unsettled files.ownership files.retention_error;
+  if not files.busy && not files.closed && not files.publication_pending then begin
+    try NotificationPipe.close_all files.ownership;files.closed<-true
+    with NotificationPipe.Uncertain _ as error -> retain_files files error;raise error
   end
-let close_files_noerr files = try close_files files with Unix.Unix_error _ -> ()
-let hold descriptors = {descriptors;busy=false;closing=false;closed=false;publication_pending=false;retained=false}
-let close_unborrowed_files files =
-  files.closing <- true;
-  if not files.closed && not(files.retained || files.publication_pending) then begin
-    files.closed <- true;
-    List.iter close_fd_noerr files.descriptors
-  end
+let close_files_noerr files =
+  try close_files files with NotificationPipe.Uncertain _ -> ()
+let close_unborrowed_files = close_files
+let discard_unregistered_stage files path error =
+  NotificationPipe.remember_failure files.ownership error;
+  close_files files;
+  if not files.retained then unlink_stage_noerr path
 let borrowed files f =
   if files.closing then fail (Util.Transient "Semantic transfer interrupted") else begin
-    let finish () = files.busy <- false; if files.closing then close_files_noerr files in
-    BorrowedWork.try_bind (fun () -> files.busy <- true; f ())
-      (fun result -> finish ();
-        if files.closing then fail (Util.Transient "Semantic transfer interrupted")
-        else return result)
-      (fun e -> finish (); fail e)
+    let uncertain = function
+      | NotificationPipe.Uncertain _ | SemanticFile.Close_uncertain _
+      | DngComponents.Cache_ownership_uncertain _ | DirectoryOwner.Uncertain _
+      | StagePublication.Ownership_uncertain _ -> true
+      | _ -> false in
+    let retain entry = retain_files files (RetainedOwnership.cause entry) in
+    let guard work=RetainedOwnership.guard ~is_uncertain:uncertain ~on_retained:retain work in
+    let finish ()=files.busy<-false;if files.closing then close_files files in
+    guard (fun () ->
+      BorrowedWork.try_bind (fun () -> files.busy<-true;guard f)
+        (fun result -> finish ();
+          if files.closing then fail(Util.Transient "Semantic transfer interrupted") else return result)
+        (fun error -> NotificationPipe.remember_failure files.ownership error;finish ();fail error))
   end
 let inspected = function
   | Some result -> result.SemanticWorkers.proof
@@ -151,13 +172,15 @@ let cleanup candidate =
     candidate.owned <- false;
     try Fs.unlink candidate.path with Unix.Unix_error (Unix.ENOENT,_,_) -> ()
   end
-let cleanup_noerr candidate = try cleanup candidate with Unix.Unix_error _ -> ()
+let cleanup_noerr candidate =
+  try cleanup candidate with Unix.Unix_error _ | NotificationPipe.Uncertain _ -> ()
 let candidates = Remote.resourceWithConnCleanup cleanup cleanup_noerr
-let register_candidate path basis output =
+let register_candidate files path basis output =
   let candidate =
-    try {basis;output;files=hold [basis;output];path;owned=true}
-    with error -> discard_unregistered_stage path basis output; raise error in
+    try {basis;output;files;path;owned=true}
+    with error -> discard_unregistered_stage files path error; raise error in
   try candidates.register candidate with error ->
+    NotificationPipe.remember_failure files.ownership error;
     (* The registry may retain this object after a failed handoff. Mark and
        close its unborrowed descriptors before trying to unregister it. *)
     close_unborrowed_files candidate.files;
@@ -170,11 +193,14 @@ let register_candidate path basis output =
 (* The name owner is independent of the worker descriptor lease. Connection
    cleanup defers its identity-bound unlink until borrowed work has settled. *)
 type publication = { context : StagePublication.owned; scope : retained_publication;
-  mutable candidate : candidate option; mutable closing : bool;
+  staging_files : held_files; mutable candidate : candidate option; mutable closing : bool;
   mutable closed : bool; mutable close_failed : bool; mutable close_error : exn;
   mutable loose_basis : Unix.file_descr; mutable loose_output : Unix.file_descr;
-  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool; mutable loose_parent_held : bool }
+  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool;
+  parent_handoff : StagePublication.parent_handoff; parent_owner : NotificationPipe.t;
+  interrupted_error : exn }
 and retained_publication = {
+  mutable files : held_files option;
   mutable publication : publication option;
   mutable native : StagePublication.owned option;
   mutable cause : exn; mutable cause_recorded : bool;
@@ -190,23 +216,31 @@ let retained_publications () =
   collect [] !retained_publication_owners
 let retained_publication_cause scope = scope.cause
 let retained_publication_native scope = scope.native
-let retained_publication_descriptors scope = match scope.publication with
-  | Some {candidate=Some candidate;_} -> candidate.files.descriptors
-  | Some publication ->
-    (if publication.loose_parent_held then [publication.loose_parent] else []) @
-    (if publication.loose_fds then [publication.loose_basis;publication.loose_output] else [])
-  | None -> []
+let retained_publication_pair_ownership (scope:retained_publication) =
+  match scope.files with None -> None | Some files -> Some files.ownership
+let retained_publication_parent_ownership (scope:retained_publication) =
+  match scope.publication with None -> None | Some publication -> Some publication.parent_owner
+let retained_publication_descriptors (scope:retained_publication) =
+  let pair=match scope.files with None -> [] | Some files -> file_descriptors files in
+  match scope.publication with
+  | Some publication when NotificationPipe.read_held publication.parent_owner -> publication.loose_parent::pair
+  | _ -> pair
 let create_publication_scope () =
   let pending=Lwt.wait () in
-  let rec scope={publication=None;native=None;cause=Out_of_memory;cause_recorded=false;
+  let rec scope={files=None;publication=None;native=None;cause=Out_of_memory;cause_recorded=false;
     uncertain=false;linked=false;pending;link=Some scope;next=None} in scope
 let record_publication_cause scope error =
   if not scope.cause_recorded then begin scope.cause<-error;scope.cause_recorded<-true end
+let mark_scope_uncertain scope error =
+  record_publication_cause scope error;scope.uncertain<-true;
+  if not scope.linked then begin
+    scope.next<- !retained_publication_owners;retained_publication_owners:=scope.link;scope.linked<-true
+  end
 let owned_call scope work =
   try work () with StagePublication.Ownership_uncertain native as error ->
     record_publication_cause scope error;
     scope.native<-native;scope.uncertain<-true;
-    (match scope.publication with Some {candidate=Some candidate;_}->candidate.files.retained<-true | _->());
+    (match scope.publication with Some {candidate=Some candidate;_}->retain_files candidate.files error | _->());
     if not scope.linked then begin
       scope.next<- !retained_publication_owners;retained_publication_owners:=scope.link;scope.linked<-true
     end;
@@ -217,29 +251,32 @@ let protect_publication_scope scope work =
     (fun error -> record_publication_cause scope error;
       if scope.uncertain then scope.pending else Lwt.fail error)
 let close_publication publication =
-  publication.closing <- true;
-  (match publication.candidate with
-   | Some candidate -> candidate.files.closing <- true
-   | None -> ());
-  let busy = match publication.candidate with
-    | Some candidate -> candidate.files.busy | None -> false in
-  if not busy && not publication.closed then begin
-    publication.closed <- true;
-    (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
+  publication.closing<-true;
+  (match publication.candidate with Some candidate -> candidate.files.closing<-true | None -> ());
+  if not publication.staging_files.busy && not publication.closed && not publication.scope.uncertain then begin
+    publication.closed<-true;
+    publication.staging_files.publication_pending<-false;
+    (* Close the raw borrowed pair before a native abort can remove its stage
+       name. The native context retains its independent witness/parent handles. *)
+    (try close_files publication.staging_files
      with error -> publication.close_failed<-true;publication.close_error<-error;
        record_publication_cause publication.scope error);
+    (* A false native acknowledgement leaves the incoming directory locally
+       owned. Close it once; a true acknowledgement must never close it here. *)
+    (try
+       if publication.scope.cause_recorded then NotificationPipe.remember_failure publication.parent_owner publication.scope.cause;
+       NotificationPipe.close_all publication.parent_owner
+     with NotificationPipe.Uncertain _ as error ->
+       mark_scope_uncertain publication.scope error;
+       publication.close_failed<-true;publication.close_error<-error);
+    if not publication.scope.uncertain then
+      (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
+       with error -> publication.close_failed<-true;publication.close_error<-error;
+         record_publication_cause publication.scope error);
     if not publication.scope.uncertain then begin
-      if publication.loose_fds then begin
-        publication.loose_fds<-false;
-        close_fd_noerr publication.loose_basis;close_fd_noerr publication.loose_output
-      end;
-      if publication.loose_parent_held then begin
-        publication.loose_parent_held<-false;close_fd_noerr publication.loose_parent
-      end;
+      publication.loose_fds<-false;
       (match publication.candidate with Some candidate ->
-        candidate.files.publication_pending<-false;
-        if candidate.files.closing then cleanup candidate
-       | None -> ())
+        if candidate.files.closing then cleanup candidate | None -> ())
     end;
     if publication.close_failed then raise publication.close_error
   end
@@ -252,11 +289,17 @@ let release_publication_noerr publication =
 let release_candidate_noerr candidate =
   try candidates.release_noerr candidate with _ ->
     (try cleanup_noerr candidate with _ -> ())
-let register_publication scope context =
+let register_publication scope context files =
   let publication =
-    try {context;scope;candidate=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
-      loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;
-      loose_fds=false;loose_parent_held=false}
+    try
+      let parent_handoff=StagePublication.prepare_parent_handoff () in
+      let parent_owner=NotificationPipe.prepare_read_handoff parent_handoff in
+      let publication={context;scope;staging_files=files;parent_handoff;parent_owner;
+        interrupted_error=Util.Transient "Remote semantic parent handoff interrupted";
+        candidate=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
+        loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;loose_fds=false} in
+      NotificationPipe.keep_owner parent_owner (fun () -> ignore(Sys.opaque_identity publication));
+      publication
     with error -> record_publication_cause scope error;
       owned_call scope (fun () -> StagePublication.abort_owned context);raise error in
   (try scope.publication<-Some publication with error ->
@@ -264,15 +307,16 @@ let register_publication scope context =
     owned_call scope (fun () -> StagePublication.abort_owned context);raise error);
   try publications.register publication with error ->
     record_publication_cause scope error;release_publication_noerr publication;raise error
-let register_bound_candidate path basis output =
+let register_bound_candidate files path basis output =
   let candidate =
-    try {basis;output;files=hold [basis;output];path;owned=false}
-    with error -> close_fd_noerr basis; close_fd_noerr output; raise error in
+    try {basis;output;files;path;owned=false}
+    with error -> NotificationPipe.remember_failure files.ownership error;close_files files;raise error in
   try candidates.register candidate with error ->
+    NotificationPipe.remember_failure files.ownership error;
     close_unborrowed_files candidate.files;
     release_candidate_noerr candidate;
     raise error
-let create_bound_candidate scope ~basis ~directory ~staging stage path =
+let create_bound_candidate scope files ~basis ~directory ~staging stage path =
   if not (StagePublication.available ()) then None else
   let context =
     try
@@ -284,7 +328,7 @@ let create_bound_candidate scope ~basis ~directory ~staging stage path =
   match context with
   | None -> None
   | Some context ->
-      let publication = register_publication scope context in
+      let publication = register_publication scope context files in
       try
         if publication.closing then
           raise (Util.Transient "Remote semantic publication interrupted");
@@ -294,15 +338,20 @@ let create_bound_candidate scope ~basis ~directory ~staging stage path =
         | Fs.Declined_stage_handles _ ->
             publications.release publication; None
         | Fs.Shared_stage_handles (basis_fd, output_fd, parent) ->
+            adopt_files files basis_fd output_fd;
+            NotificationPipe.adopt_read publication.parent_owner parent;
             publication.loose_basis<-basis_fd;publication.loose_output<-output_fd;
-            publication.loose_parent<-parent;publication.loose_fds<-true;publication.loose_parent_held<-true;
-            let adopt ()=StagePublication.adopt_owned context ~parent ~stage:output_fd in
-            publication.loose_parent_held<-false;
+            publication.loose_parent<-parent;publication.loose_fds<-true;
+            if publication.closing || publication.closed then begin
+              retain_files files publication.interrupted_error;
+              raise publication.interrupted_error
+            end;
+            let adopt ()=StagePublication.adopt_owned_tracked context publication.parent_handoff ~parent ~stage:output_fd in
             owned_call scope adopt;
             (* Adoption owns the name before fallible record/registry allocation.
                The existing constructor settles the raw pair on its own failure. *)
             publication.loose_fds<-false;
-            let candidate = register_bound_candidate path basis_fd output_fd in
+            let candidate = register_bound_candidate files path basis_fd output_fd in
             (try
                publication.candidate <- Some candidate;
                candidate.files.publication_pending<-true;
@@ -311,12 +360,12 @@ let create_bound_candidate scope ~basis ~directory ~staging stage path =
                record_publication_cause scope error;
                release_publication_noerr publication;
                if scope.uncertain then begin
-                 candidate.files.retained<-true;
+                 retain_files candidate.files scope.cause;
                  publication.loose_fds<-true
                end;
                release_candidate_noerr candidate;raise error)
       with error -> record_publication_cause scope error;release_publication_noerr publication;raise error
-let borrowed_with_publication publication candidate f =
+let borrowed_with_publication publication (candidate:candidate) f =
   BorrowedWork.try_bind (fun () -> borrowed candidate.files f)
     (fun result ->
       (match publication with Some owner when owner.closing -> close_publication_noerr owner | _ -> ());
@@ -329,18 +378,21 @@ let nonce () =
   (* The only current clone-stage backend is macOS. Use OS randomness for
      transaction correlation; this nonce is not peer authentication. *)
   let b = Bytes.create 32 in
-  let owned = ref true in
-  let close fd = if !owned then begin owned := false; Unix.close fd end in
+  let ownership=NotificationPipe.prepare () in
+  let close ()=NotificationPipe.close_all ownership in
   let rec read fd off = if off < 32 then
     let n = try Unix.read fd b off (32-off) with
       Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
     if n = 0 then raise (Util.Transient "Cannot obtain semantic transaction nonce")
     else read fd (if n < 0 then off else off+n) in
-  (* Buffers, ownership state and callbacks precede the native open. Clear the
-     slot before close, so a failed close cannot close a reused number later. *)
+  (* Buffer, owner/carrier and callbacks precede acquisition. A close carrier
+     must cross ordinary error mappings and keep the transaction unsettled. *)
   let fd = Unix.openfile "/dev/urandom" [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
-  try read fd 0; close fd; Bytes.to_string b
-  with error -> (try close fd with _ -> ()); raise error
+  NotificationPipe.adopt_read ownership fd;
+  try read fd 0;close ();Bytes.to_string b
+  with error ->
+    NotificationPipe.remember_failure ownership error;
+    close ();raise error
 
 let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~directory ~staging ~expected_size () =
   if not (supported connection) then return false else
@@ -354,9 +406,11 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
     Util.convertUnixErrorsToTransient "creating semantic staging" (fun () ->
       let stage = Os.tempPath ~fresh:true directory (Path.addSuffixToFinalName staging "-sde") in
       let candidate_path = Fspath.concat directory stage in
+      let files=hold candidate_path (mark_scope_uncertain scope) in
+      scope.files<-Some files;
       let created = match producer with
         | Some _ ->
-            (match create_bound_candidate scope ~basis ~directory ~staging stage candidate_path with
+            (match create_bound_candidate scope files ~basis ~directory ~staging stage candidate_path with
              | None -> None
              | Some (candidate,publication) ->
                  (try Some (candidate,Some publication)
@@ -368,7 +422,8 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
                 raise (Util.Transient "Semantic clone basis is no longer a regular file")
             | Fs.Declined_stage _ -> None
             | Fs.Shared_stage (basis,output) ->
-                let candidate = register_candidate candidate_path basis output in
+                adopt_files files basis output;
+                let candidate = register_candidate files candidate_path basis output in
                 (try Some (candidate,None)
                  with error -> release_candidate_noerr candidate; raise error) in
       match created with
@@ -416,25 +471,29 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
                   (SemanticRuntime.get ()).pool cancellation ~extension plan ~basis ~output)) (fun applied ->
               let applied = match applied with Some report -> report | None ->
                 raise (Util.Transient "Semantic materialization cancelled") in
-              (match publication,producer with
+              let publish () = match publication,producer with
                | Some owner,Some producer ->
-                   owned_call scope (fun () -> StagePublication.publish_owned owner.context);
-                   callback_started := true;
-                   producer output;
-                   if candidate.files.closing || owner.closing then
-                     raise (Util.Transient "Semantic publication interrupted");
-                   owned_call scope (fun () -> StagePublication.disarm_owned owner.context)
+                   borrowed_with_publication publication candidate (fun () ->
+                     owned_call scope (fun () -> StagePublication.publish_owned owner.context);
+                     callback_started := true;
+                     producer output;
+                     if candidate.files.closing || owner.closing then
+                       raise (Util.Transient "Semantic publication interrupted");
+                     owned_call scope (fun () -> StagePublication.disarm_owned owner.context);
+                     return ())
                | None,None ->
                    close candidate;
                    Fs.rename candidate.path (Fspath.concat directory staging);
-                   candidate.owned <- false
-               | _ -> assert false);
-              release ();
-              debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
-                applied.SemanticDelta.logical_bytes_written applied.write_calls
-                (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
-              return true))))
-          (fun e -> record_publication_cause scope e;release_noerr ();
+                   candidate.owned <- false;return ()
+               | _ -> assert false in
+              BorrowedWork.bind publish (fun () ->
+                release ();
+                debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
+                  applied.SemanticDelta.logical_bytes_written applied.write_calls
+                  (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
+                return true)))))
+          (fun e -> NotificationPipe.remember_failure files.ownership e;
+            record_publication_cause scope e;release_noerr ();
             if !callback_started then fail e else match e with
             | SemanticWorkers.Failed reason -> fail (Util.Transient ("Semantic worker: " ^ reason))
             | SemanticFile.Invalid reason -> fail (Util.Transient ("Semantic verification: " ^ reason))

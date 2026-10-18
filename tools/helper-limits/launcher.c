@@ -1,5 +1,7 @@
-/* Separate posix_spawn'ed process: never modify the multithreaded parent's
- * limits and never fork an OCaml runtime. Exec retains PID/process group. */
+/* Separate fresh process: never modify a multithreaded parent's limits or
+ * fork an OCaml runtime. Helper mode is posix_spawn'ed; endpoint mode is an
+ * explicitly selected launcher for the whole Unison endpoint. Exec retains
+ * PID/process group. No process-tree or hard RSS implementation is implied. */
 #include <sys/resource.h>
 #include <unistd.h>
 #include <errno.h>
@@ -79,12 +81,18 @@ static int close_inherited(void) {
 }
 int main(int argc,char **argv) {
   rlim_t descriptors,address;
-  if(argc<7 || strcmp(argv[1],"--unison-helper-limits-v1") ||
+  int endpoint=argc>=2 && !strcmp(argv[1],"--unison-endpoint-limits-v1");
+  if(argc<7 || (!endpoint && strcmp(argv[1],"--unison-helper-limits-v1")) ||
      !decimal(argv[2],&descriptors) || !decimal(argv[3],&address) ||
      (descriptors && descriptors<3) || (!descriptors && !address) ||
      strcmp(argv[4],"--") || argv[5][0]!='/') {
     errno=EINVAL;return error("invalid invocation");
   }
+  /* The endpoint's second budget denotes requested hard RSS, not virtual
+   * address space. There is no qualified cross-platform containment backend
+   * here. Refuse before target entry and never silently substitute estimates
+   * or helper RLIMIT_AS. Zero explicitly leaves RSS unenforced. */
+  if(endpoint && address) {errno=ENOTSUP;return error("hard endpoint RSS containment unavailable");}
   if(close_inherited())return error("close inherited descriptors");
   if(lower(RLIMIT_NOFILE,descriptors))return error("descriptor limit");
 #ifdef RLIMIT_AS

@@ -86,10 +86,26 @@ let resource_gate () =
   | Some (gate,existing) when existing = config -> gate
   | Some _ -> raise (Util.Fatal "Restart Unison to change its semantic resource budgets")
   | None ->
-      let gate = SemanticAdmission.create ~source_headroom ~max_transactions:inflight
-        ~max_payload_bytes:(mib * 1048576) ~max_descriptors:descriptors ~max_pending:4096 in
+      let baseline=SemanticWorkers.fixed_resources in
+      let total value extra =
+        if value>max_int-extra then raise(Util.Fatal "Semantic fixed infrastructure budget overflow");
+        value+extra in
+      (* Existing preferences remain workspace budgets. Declare the separate
+         infrastructure allowance explicitly, before the first pipe open. *)
+      let gate = SemanticAdmission.create_with_baseline ~baseline ~source_headroom ~max_transactions:inflight
+        ~max_payload_bytes:(total (mib * 1048576) baseline.payload_bytes)
+        ~max_descriptors:(total descriptors baseline.descriptors) ~max_pending:4096 in
       resource_runtime := Some (gate,config); gate
+(* A failed publication must not silently start another pool. These cells
+   exist before initialization and can retain a returned carrier without allocation. *)
+let runtime_unresolved = ref false
+let runtime_failure = ref Exit
+let keep_runtime_failure error =
+  runtime_failure := error;
+  runtime_unresolved := true;
+  raise error
 let get () =
+  if !runtime_unresolved then raise !runtime_failure;
   let n,count,inflight,mib,descriptors,max_payload,io_jobs,_ = settings () in
   let config = n,inflight,mib,descriptors,max_payload,io_jobs in
   let admission = resource_gate () in
@@ -117,13 +133,24 @@ let get () =
               Util.msg "Semantic worker job %d stage=%s calls=%d inclusive-seconds=%.9f.\n"
                 id stage sample.calls sample.inclusive_seconds)) samples)
       else None in
-    let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
+    let pool =
+      try SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor
+      with NotificationPipe.Uncertain _ as error -> keep_runtime_failure error in
+    try
     SemanticWorkers.set_read_observer ~measure_stages pool read_observer;
     debug (fun () -> Util.msg
       "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits, %d jobs per filesystem\n"
       (HelperSupervisor.available_physical_cpus ()) (HelperSupervisor.available_cpus ())
       n count inflight mib descriptors io_jobs);
+    debug (fun () -> Util.msg
+      "Semantic fixed infrastructure allowance: %d descriptors and %d completion-buffer bytes (not whole-process limits)\n"
+      SemanticWorkers.fixed_resources.descriptors SemanticWorkers.fixed_resources.payload_bytes);
     let t = {supervisor;pool;cpu_budget=n;admission;io} in runtime := Some (t,config); t
+    with error ->
+      (* Pool construction succeeded, but publication/configuration did not.
+         Preserve its domain/pipe owner rather than leaving an untracked pool. *)
+      (try SemanticWorkers.retain_unsettled pool error
+       with NotificationPipe.Uncertain _ as retained -> keep_runtime_failure retained)
 let cancellations = Remote.resourceWithConnCleanup
   HelperSupervisor.cancel HelperSupervisor.cancel_and_cleanup
 let with_cancellation f =
@@ -142,7 +169,23 @@ let with_cancellation f =
     finished := true;
     cancellations.release_noerr cancellation;
     raise error
+let unresolved_ownership = function
+  | SemanticFile.Close_uncertain _ | DngComponents.Cache_ownership_uncertain _
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _ -> true
+  | _ -> false
+(* Remote precedes the semantic carrier definitions in the link graph. Add the
+   same pure owner-loop classifier used by semantic admission after loading. *)
+let () = Remote.register_body_ownership_classifier unresolved_ownership
+let report_retained_ownership _ =
+  Util.warn "Resource closure is unresolved; this process is retaining its reservations.\n"
+let resource_accounting () = SemanticAdmission.accounting(resource_gate ())
+let retained_ownership_count = RetainedOwnership.count
+let guard_ownership f = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
+  ~on_retained:report_retained_ownership f
 let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation ~payload_bytes ~descriptors f =
+  (* Trap ownership carriers inside the borrowed body, before either admission
+     wrapper's ordinary failure callback can retire its reservation. *)
+  let guarded () = guard_ownership f in
   BorrowedWork.catch (fun () ->
     let cost = {SemanticAdmission.payload_bytes;descriptors} in
     match reservation with
@@ -152,42 +195,54 @@ let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation 
           invalid_arg "SemanticRuntime.with_admission: source cannot borrow a receiver reservation";
         if HelperSupervisor.is_cancelled cancellation then
           fail (Util.Transient "Semantic resource admission cancelled")
-        else SemanticAdmission.with_borrow reservation ~cost f
+        else SemanticAdmission.with_borrow reservation ~cost guarded
     | None -> BorrowedWork.bind
-      (fun () -> SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost f) (function
+      (fun () -> SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost guarded) (function
       | Some result -> return result
       | None -> fail (Util.Transient "Semantic resource admission cancelled")))
     (function
       | SemanticAdmission.Failed reason -> fail (Util.Transient reason)
       | e -> fail e)
 let with_io_file cancellation path f =
-  (* This descriptor groups cooperative endpoint-private candidates for
-     scheduling. It does not pin the pathname subsequently opened by a helper
-     or replace candidate-content/publication fences. *)
-  let owned = ref true in
-  let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  try
-    let close () = if !owned then begin
-      owned := false;
-      try Unix.close fd with Unix.Unix_error _ -> () end in
-    BorrowedWork.try_bind (fun () ->
+  (* This descriptor groups cooperative endpoint-private candidates; it does
+     not pin the pathname opened by a helper or replace publication fences. *)
+  let ownership = NotificationPipe.prepare () in
+  let retained entry =
+    (* Also root this outer descriptor if a nested resource carrier is the
+       failure. A failed promise alone need not retain its callback closure. *)
+    try NotificationPipe.retain_unsettled ownership (RetainedOwnership.cause entry)
+    with NotificationPipe.Uncertain _ -> () in
+  let guard work = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
+    ~on_retained:retained work in
+  let close () = NotificationPipe.close_all ownership in
+  let failed error =
+    NotificationPipe.remember_failure ownership error;
+    close ();
+    match error with
+    | IoAdmission.Failed reason -> fail (Util.Transient reason)
+    | _ -> fail error in
+  let admitted () = guard (fun () ->
+    (* Close before returning from the I/O borrower. Recognized nested
+       uncertainty cannot reach the ordinary cleanup callback. *)
+    BorrowedWork.try_bind (fun () -> guard f)
+      (fun result -> close (); return result) failed) in
+  let execute () =
+    let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+    NotificationPipe.adopt_read ownership fd;
+    try BorrowedWork.try_bind (fun () ->
       if (Unix.LargeFile.fstat fd).Unix.LargeFile.st_kind <> Unix.S_REG then
         raise (Unix.Unix_error (Unix.EINVAL,"filesystem I/O candidate",path));
       let devices = IoAdmission.devices_of_fds [fd] in
       BorrowedWork.bind
-        (fun () -> IoAdmission.with_devices (get ()).io cancellation ~devices f) (function
-      | Some result -> return result
-      | None -> fail (Util.Transient "Filesystem I/O admission cancelled")))
-      (fun result -> close (); return result)
-      (fun e -> close (); match e with
-        | IoAdmission.Failed reason -> fail (Util.Transient reason)
-        | _ -> fail e)
-  with e ->
-    (* Guard the first closure/continuation allocations after opening too.
-       Clear ownership before close so an outer failure cannot close a reused FD. *)
-    if !owned then begin owned := false;
-      try Unix.close fd with Unix.Unix_error _ -> () end;
-    raise e
+        (fun () -> IoAdmission.with_devices (get ()).io cancellation ~devices admitted) (function
+        | Some result -> return result
+        | None -> failed (Util.Transient "Filesystem I/O admission cancelled")))
+      return failed
+    with error ->
+      NotificationPipe.remember_failure ownership error;
+      if unresolved_ownership error then NotificationPipe.retain_unsettled ownership error;
+      close ();raise error in
+  guard execute
 let publication_cost max_payload =
   let plan = CandidateValidators.maximum_resources (CandidateValidators.selected ()) in
   let _,budget = helper_supervisor () in

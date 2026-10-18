@@ -185,3 +185,13 @@ obtain that reduction. This does not turn transaction estimates into RSS caps;
 namespace tables, decoded objects and native allocation peaks remain separately
 scoped. The initial fixed-only wiring error and corrected directed-only runs
 are retained in explicit receipts.
+
+## Fixed infrastructure allowance
+
+The Runtime gate now accounts separately for its single notification pipe and
+4096-byte completion-buffer payload before pool creation. Existing preferences
+and `usage` stay workspace-only; combined planning capacity adds the immutable
+allowance. Direct zero-baseline gates and child partitions retain their original
+semantics. See [contract and exact scope](fixed-semantic-infrastructure-accounting.md).
+This leaves transport/native/legacy/helper baselines and aggregate FD/RSS limits
+as separate work.

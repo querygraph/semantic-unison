@@ -824,6 +824,16 @@ let defaultMarshalingFunctions m =
   (fun conn -> if conn.version = 1 then marshalV1 m else errRPCVersion conn),
   (fun conn -> if conn.version = 1 then unmarshalV1 m else errRPCVersion conn)
 
+let boundedMarshalingFunctions bound m =
+  if bound<0 || bound>(max_int-65536)/8 then invalid_arg "bounded RPC decoded budget overflow";
+  let max_alloc_bytes=65536+8*bound and max_elements=1024+4*bound in
+  (fun conn -> if conn.version=1 then marshalV1 m else errRPCVersion conn),
+  (fun conn -> if conn.version<>1 then errRPCVersion conn else
+    fun buf pos ->
+      try Umarshal.unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m buf pos
+      with Failure s | Umarshal.Error s -> raise(Util.Fatal(Printf.sprintf
+        "Fatal error during unmarshaling (%s)" s)))
+
 let makeMarshalingFunctions payloadMarshalingFunctions string =
   let (marshalPayload, unmarshalPayload) = payloadMarshalingFunctions in
   let tag = registerTag string in
@@ -920,12 +930,29 @@ packet to invoke a function remotely on the client.  In this case, the
 two switch roles.)
 *)
 
+(* This outer policy applies even when a legacy command has no registration
+   bound. Endpoint settings never change the wire framing. *)
+let packetMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcpacketmaxbytes" 268435456 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC packet payload bytes"
+  "Positive endpoint-local outer frame limit, including legacy request, reply \
+   and stream packets. Stricter command/header/startup limits still apply. \
+   Raise locally for deliberately larger archive frames. Not aggregate heap/RSS.")
+let packet_limit () =
+  let maximum=Prefs.read packetMaxBytes in
+  (* The payload is a bigarray, not a single OCaml string. Do not impose
+     Sys.max_string_length here: that would invalidate the default on32bit. *)
+  if maximum<=0 then
+    raise(Util.Fatal "Invalid RPC packet input limit");
+  maximum
+
 let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
+  let maximum=packet_limit () in
+  let maximum=match maxBytes with None->maximum | Some n->min maximum n in
   (* Get the length of the packet *)
   let int_buf = Bytearray.create intSize in
   grab conn.inputBuffer int_buf intSize >>= (fun () ->
   let length = decodeInt int_buf 0 in
-  if length < 0 || (match maxBytes with Some n -> length > n | None -> false) then
+  if length < 0 || length>maximum then
     raise (Util.Fatal "RPC packet length exceeds command limit");
   reserve length;
   (* Get packet *)
@@ -938,6 +965,85 @@ let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
              let start = String.escaped start in
              Util.msg "receive '%s' %d bytes\n" start length);
    Lwt.return buf)))
+
+(* Separate service lanes: retained requests cannot spend reply/header credits.
+   These cover raw body payloads, not decoded values or heap/transport overhead. *)
+let requestInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcrequestinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw request/stream MiB"
+  "Nonwaiting process-wide raw body allowance across legacy and bounded \
+   requests and streams; retained through actual processing/reply settlement.")
+let replyInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcreplyinputbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained raw reply MiB"
+  "Separate nonwaiting raw reply allowance; includes arrived but unconsumed \
+   reply promises and synchronous decoding. Not decoded-object or RSS limits.")
+let bodyInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcbodyinputslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "raw body slots in each request/reply lane"
+  "Positive per-lane count, including incomplete prefixes and empty bodies; \
+   maximum65536. Exhaustion refuses before input, without waiting for credits.")
+type body_lane={body_budget:int Prefs.t;body_bytes:int ref;body_count:int ref}
+let requestInputLane={body_budget=requestInputMiB;body_bytes=ref 0;body_count=ref 0}
+let replyInputLane={body_budget=replyInputMiB;body_bytes=ref 0;body_count=ref 0}
+let empty_body_payload=Bytearray.create 0
+type body_input={body_lane:body_lane;mutable body_reserved:int;
+                mutable body_active:bool;mutable body_sized:bool;
+                mutable body_payload:Bytearray.t}
+let body_limits lane =
+  let mib=Prefs.read lane.body_budget and slots=Prefs.read bodyInputSlots in
+  if mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC body input budget");
+  mib*1048576,slots
+let reserve_body_slot ticket =
+  if ticket.body_active then invalid_arg "RPC body slot reservation";
+  let _,slots=body_limits ticket.body_lane in
+  if !(ticket.body_lane.body_count)>=slots then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_active<-true;incr ticket.body_lane.body_count
+let reserve_body_bytes ticket length =
+  if not ticket.body_active || ticket.body_sized || length<0 then
+    invalid_arg "RPC body byte reservation";
+  let budget,_=body_limits ticket.body_lane in
+  let used= !(ticket.body_lane.body_bytes) in
+  if used>budget || length>budget-used then
+    raise(Util.Fatal "RPC body input budget exhausted");
+  ticket.body_reserved<-length;ticket.body_sized<-true;
+  ticket.body_lane.body_bytes:=used+length
+let release_body_input ticket =
+  if ticket.body_active then begin
+    ticket.body_active<-false;ticket.body_payload<-empty_body_payload;
+    ticket.body_lane.body_bytes:= !(ticket.body_lane.body_bytes)-ticket.body_reserved;
+    decr ticket.body_lane.body_count
+  end
+let release_body_packet (_,ticket) = release_body_input ticket
+let body_ownership_classifiers : (exn -> bool) list ref=ref []
+let register_body_ownership_classifier classify =
+  body_ownership_classifiers:=classify:: !body_ownership_classifiers
+let body_unresolved error = match error with
+  | NotificationPipe.Uncertain _ | DirectoryOwner.Uncertain _
+  | DomainOwner.Join_uncertain _ | StagePublication.Ownership_uncertain _ -> true
+  | _ -> List.exists (fun classify->classify error) !body_ownership_classifiers
+let guard_body_borrower f = RetainedOwnership.guard ~is_uncertain:body_unresolved f
+let with_body_packet (buffer,ticket) f =
+  try BorrowedWork.try_bind (fun()->guard_body_borrower(fun()->f buffer))
+    (fun result->release_body_input ticket;Lwt.return result)
+    (fun error->release_body_input ticket;Lwt.fail error)
+  with error->release_body_input ticket;raise error
+let receive_body_packet ?maxBytes ?(reserve=(fun _->())) lane conn =
+  let ticket={body_lane=lane;body_reserved=0;body_active=false;body_sized=false;
+              body_payload=empty_body_payload} in
+  let failed error=release_body_input ticket;Lwt.fail error in
+  try
+    reserve_body_slot ticket;
+    BorrowedWork.try_bind
+      (fun()->receivePacket ?maxBytes
+        ~reserve:(fun length->reserve_body_bytes ticket length;reserve length) conn)
+      (fun buffer->ticket.body_payload<-buffer;Lwt.return(buffer,ticket)) failed
+  with error->release_body_input ticket;raise error
+let start_body_request ?maxBytes ?reserve conn launch =
+  BorrowedWork.bind
+    (fun()->receive_body_packet ?maxBytes ?reserve requestInputLane conn)
+    (fun packet->
+      let work=with_body_packet packet launch in
+      Lwt.ignore_result work;Lwt.return ())
 
 type servercmd =
   connection -> Bytearray.t ->
@@ -977,7 +1083,7 @@ let release_bounded_input ticket =
     decr bounded_input_count
   end
 let with_bounded_request ticket f =
-  try BorrowedWork.try_bind f
+  try BorrowedWork.try_bind (fun()->guard_body_borrower f)
     (fun value -> release_bounded_input ticket;Lwt.return value)
     (fun error -> release_bounded_input ticket;Lwt.fail error)
   with error -> release_bounded_input ticket;raise error
@@ -986,13 +1092,11 @@ let start_bounded_request conn limit launch =
   let failed error =
     if not !transferred then release_bounded_input ticket;
     Lwt.fail error in
-  try BorrowedWork.try_bind
-    (fun () -> receivePacket ~maxBytes:limit ~reserve:(reserve_bounded_input ticket) conn)
-    (fun buf ->
-       let work=with_bounded_request ticket (fun () -> launch buf) in
-       transferred:=true;
-       Lwt.ignore_result work;
-       Lwt.return ()) failed
+  try BorrowedWork.catch
+    (fun()->start_body_request ~maxBytes:limit
+      ~reserve:(reserve_bounded_input ticket) conn (fun buffer->
+        transferred:=true;
+        with_bounded_request ticket (fun()->launch buffer))) failed
   with error -> if not !transferred then release_bounded_input ticket;raise error
 type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
 let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
@@ -1027,6 +1131,62 @@ let mheader = Umarshal.(sum6 unit string string string string unit
 
 let ((marshalHeader, unmarshalHeader) : header marshalingFunctions) =
   makeMarshalingFunctions (defaultMarshalingFunctions mheader) "rsp"
+
+(* Headers precede command selection, so their allowance is separate from
+   bounded request bodies and cannot be consumed by work awaiting a reply. *)
+let headerMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcheadermaxbytes" 8388608 ~local:true
+  ~category:(`Advanced `General) "maximum incoming RPC header frame bytes"
+  "Positive endpoint-local limit checked before allocation. Large diagnostic \
+   headers may require raising this and rpcheaderinputbudget together. Does not limit body frames.")
+let headerInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputbudget" 16 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight raw RPC header/startup MiB"
+  "Separate nonwaiting raw header/startup allowance across this process's connections. \
+   Held through body receipt and header decode; not a decoded-object or RSS cap.")
+let headerInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputslots" 256 ~local:true
+  ~category:(`Advanced `General) "process-wide in-flight RPC header/startup slots"
+  "Positive bounded header/startup count, including empty frames; maximum65536. \
+   Exhaustion fails the connection instead of blocking replies behind body admission.")
+type header_input={mutable header_bytes:int;mutable header_active:bool;mutable header_sized:bool}
+type header_limits={header_max:int;header_budget:int;header_slots:int}
+let header_input_bytes=ref 0 and header_input_count=ref 0
+let header_limits () =
+  let maximum=Prefs.read headerMaxBytes and mib=Prefs.read headerInputMiB and slots=Prefs.read headerInputSlots in
+  if maximum<=0 || mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC header input budgets");
+  let bytes=mib*1048576 in
+  if maximum>bytes then raise(Util.Fatal "Invalid RPC header input budgets");
+  {header_max=maximum;header_budget=bytes;header_slots=slots}
+let reserve_header_slot limits ticket =
+  if ticket.header_active then invalid_arg "RPC header slot reservation";
+  if !header_input_count>=limits.header_slots then raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_active<-true;incr header_input_count
+let reserve_header_input limits ticket length =
+  if not ticket.header_active || ticket.header_sized || length<0 then invalid_arg "RPC header reservation";
+  if length>limits.header_max then raise(Util.Fatal "RPC packet length exceeds command limit");
+  if !header_input_bytes>limits.header_budget || length>limits.header_budget- !header_input_bytes then
+    raise(Util.Fatal "RPC header input budget exhausted");
+  ticket.header_bytes<-length;ticket.header_sized<-true;
+  header_input_bytes:= !header_input_bytes+length
+let release_header_input ticket =
+  if ticket.header_active then begin
+    ticket.header_active<-false;
+    header_input_bytes:= !header_input_bytes-ticket.header_bytes;decr header_input_count
+  end
+let receiveHeader conn =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    BorrowedWork.try_bind
+    (fun()->receivePacket ~maxBytes:limits.header_max
+      ~reserve:(fun length->reserve_header_input (header_limits ()) ticket length) conn)
+    (fun buffer->
+      try let header=unmarshalHeader conn buffer in
+        release_header_input ticket;Lwt.return header
+      with error->failed error)
+    failed
+  with error->release_header_input ticket;raise error
 
 let processRequest conn id cmdName buf =
   if not conn.outputBuffer.opened then
@@ -1118,7 +1278,9 @@ let processStream conn id cmdName buf =
       in
       cmd conn buf;
       Lwt.return ()
-    with e ->
+    with
+    | e when body_unresolved e -> raise e
+    | e ->
       Hashtbl.add streamError id e;
       abortStream conn id
     end
@@ -1167,8 +1329,7 @@ let rec receive conn =
       debugE
         (fun () -> Util.msg "Message received (id: %d)\n" num_id);
       (* Read the header *)
-      receivePacket conn >>= (fun buf ->
-      let req = unmarshalHeader conn buf in
+      receiveHeader conn >>= (fun req ->
       begin match req with
         Request cmdName ->
           (* We yield before starting processing the request.
@@ -1177,14 +1338,28 @@ let rec receive conn =
           let dispatch buf=Lwt_unix.yield () >>= (fun () ->
             processDetachedRequest conn id cmdName buf) in
           let started=match Util.StringMap.find_opt cmdName !serverArgLimits with
-            | None -> receivePacket conn >>= (fun buf ->
-                Lwt.ignore_result (dispatch buf);Lwt.return ())
+            | None -> start_body_request conn dispatch
             | Some limit -> start_bounded_request conn limit dispatch in
           started >>= (fun () -> receive conn)
       | NormalResult ->
-          receivePacket ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits) conn >>= (fun buf ->
-          Lwt.wakeup (find_receiver num_id) buf;
-          receive conn)
+          let pending=MsgIdMap.find num_id !receivers in
+          let handed_off=ref false in
+          receive_body_packet ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits)
+            replyInputLane conn >>= (fun packet ->
+          let delivered =
+            try
+              let ready=Lwt.return packet in
+              ignore(find_receiver num_id);
+              (* The prepared Return is installed before observers run. An
+                 exception at/after this transfer cannot release a borrower. *)
+              handed_off:=true;
+              Lwt.wakeup_from pending ready;Lwt.return ()
+            with error->
+              if not !handed_off then begin
+                release_body_packet packet;failPending pending error
+              end;
+              Lwt.fail error
+          in delivered >>= fun ()->receive conn)
       | TransientExn s ->
           debugV (fun() -> Util.msg "receive: Transient remote error '%s']" s);
           Lwt.wakeup_exn (find_receiver num_id) (Util.Transient s);
@@ -1194,8 +1369,8 @@ let rec receive conn =
           Lwt.wakeup_exn (find_receiver num_id) (Util.Fatal ("Server: " ^ s));
           receive conn
       | Stream cmdName ->
-          receivePacket conn >>= fun buf ->
-          processStream conn id cmdName buf >>= fun () ->
+          BorrowedWork.bind (fun()->receive_body_packet requestInputLane conn)
+            (fun packet->with_body_packet packet (fun buf->processStream conn id cmdName buf)) >>= fun () ->
           receive conn
       | StreamAbort ->
           streamAbortedSrc := num_id;
@@ -1215,9 +1390,16 @@ let wait_for_reply ?maxBytes id =
      receiving thread. *)
   BorrowedWork.catch
     (fun () ->
-       BorrowedWork.bind (fun () -> res) (fun v ->
-         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return v)))
-    (fun e -> BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
+       BorrowedWork.bind (fun () -> res) (fun packet ->
+         BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.return packet)))
+    (fun e ->
+       (* A post-arrival yield/setup failure has not published this result to
+          its decoder. Do not strand its raw allowance in the failed promise. *)
+       (match Lwt.poll res with
+        | Some packet->release_body_packet packet
+        | None->()
+        | exception _->());
+       BorrowedWork.bind (fun () -> Lwt_unix.yield ()) (fun () -> Lwt.fail e))
   with error ->
     (match MsgIdMap.find_opt id !receivers with
      | None -> ()
@@ -1274,12 +1456,17 @@ let registerSpecialServerCmd
     let reply = wait_for_reply ?maxBytes id in
     debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
     BorrowedWork.try_bind (fun () -> dump conn request)
-      (fun () -> BorrowedWork.bind (fun () -> reply) (fun buf -> Lwt.return (unmarshalResult conn buf)))
+      (fun () -> BorrowedWork.bind (fun () -> reply) (fun packet ->
+         with_body_packet packet (fun buf->Lwt.return (unmarshalResult conn buf))))
       (fun e ->
          (match MsgIdMap.find_opt id !receivers with
           | None -> ()
           | Some pending -> ignore (find_receiver id); failPending pending e);
-         Lwt.fail e)
+         (* A reply may already have arrived while output was pending. Await
+            the actual waiter/yield, then abandon that unconsumed packet. *)
+         BorrowedWork.try_bind (fun()->reply)
+           (fun packet->release_body_packet packet;Lwt.fail e)
+           (fun _->Lwt.fail e))
   in
   client
 
@@ -1292,7 +1479,7 @@ let registerBoundedServerCmd ?withScope ?maxResultForArgs
     name ~maxArgs ~maxResult mArg mRet f =
   if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
   let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult name
-    (defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in
+    (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command
 
@@ -1423,23 +1610,49 @@ let commandAvailable =
                      BUILDING CONNECTIONS TO THE SERVER
  ****************************************************************************)
 
+(* Startup is read before command selection. Reserve its maximum buffer and
+   returned-string payload in the shared input lane, independently of bodies. *)
+let startupMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcstartupmaxbytes" 65536 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC startup field bytes"
+  "Positive endpoint-local limit for each startup field, including separators \
+   and ignored carriage returns. Shared header input credits cover twice this \
+   allowance during delimiter reads. Not a wall-clock or whole-heap limit.")
+let startup_limit () =
+  let maximum=Prefs.read startupMaxBytes in
+  if maximum<=0 || maximum>Sys.max_string_length || maximum>max_int/2 then
+    raise(Util.Fatal "Invalid RPC startup input limit");
+  maximum
+let startup_exceeds () = raise(Util.Fatal "RPC startup input limit exceeded")
+let with_startup_input length f =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    (* A startup field has its own size policy, not the message-header cap. *)
+    reserve_header_input {limits with header_max=max_int} ticket (2*length);
+    BorrowedWork.try_bind f
+      (fun value->release_header_input ticket;Lwt.return value) failed
+  with error->release_header_input ticket;raise error
+
 let receiveUntilSep ?(space=false) ?(nl=true) ?(includesep=false) conn =
   assert (space || nl);
-  let inp = Buffer.create 32
-  and buf = Bytearray.create 1 in
-  let add () = Buffer.add_char inp buf.{0} in
-  let rec aux () =
-    grab conn.inputBuffer buf 1 >>= fun () ->
-    match buf.{0} with
-    | ' ' | '\t' when space ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\n' when nl ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\r' ->
-        aux () (* ignore *)
-    | _ ->
-        add (); aux ()
-  in aux ()
+  let maximum=startup_limit () in
+  with_startup_input maximum (fun ()->
+    let inp=Bytearray.create maximum and buf=Bytearray.create 1 in
+    let used=ref 0 and consumed=ref 0 in
+    let add ()=inp.{!used}<-buf.{0};incr used in
+    let finish ()=Lwt.return(Bytearray.sub inp 0 !used) in
+    let rec aux () =
+      if !consumed=maximum then startup_exceeds ();
+      grab conn.inputBuffer buf 1 >>= fun () ->
+      incr consumed;
+      match buf.{0} with
+      | ' ' | '\t' when space -> if includesep then add ();finish ()
+      | '\n' when nl -> if includesep then add ();finish ()
+      | '\r' -> aux () (* ignored, but charged to the wire-byte limit *)
+      | _ -> add ();aux ()
+    in aux ())
 
 (* Get input until newline (excluded), blocking *)
 let receiveUntilNewline conn =
@@ -1451,9 +1664,12 @@ let receiveUntilSpaceOrNl ?(includesep=true) conn =
 
 (* Get input of fixed length, blocking *)
 let receiveString conn len =
-  let buf = Bytearray.create len in
-  grab conn.inputBuffer buf len >>= fun () ->
-  Lwt.return (Bytearray.to_string buf)
+  let maximum=startup_limit () in
+  if len<0 || len>maximum then startup_exceeds ();
+  with_startup_input len (fun ()->
+    let buf = Bytearray.create len in
+    (if len=0 then Lwt.return () else grab conn.inputBuffer buf len) >>= fun () ->
+    Lwt.return (Bytearray.to_string buf))
 
 (* Get input until newline (excluded), non-blocking *)
 let receiveUntilNewlineNb conn =
@@ -1727,7 +1943,9 @@ let checkForMagicString conn =
       (* Consume magic id from buffer *)
       grab conn.inputBuffer id intSize >>= fun () ->
       (* Consume magic packet from buffer *)
-      receivePacket conn >>= fun _ -> Lwt.return true
+      let maximum=startup_limit () in
+      with_startup_input maximum (fun ()->
+        receivePacket ~maxBytes:maximum conn >>= fun _ -> Lwt.return true)
       (* We rely solely on the magic id and don't check the contents of the
          packet. Should it become necessary for some reason then it is
          possible to verify the magic packet byte by byte here. *)

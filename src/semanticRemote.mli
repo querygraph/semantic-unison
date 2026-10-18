@@ -63,3 +63,13 @@ val retained_publication_descriptors : retained_publication -> Unix.file_descr l
 (** Owner-loop observations for bound remote receiver native publication
     uncertainty. Remaining known descriptors and transaction admission remain
     held. No numeric retry, cleanup or implicit settlement authority. *)
+
+val retained_publication_pair_ownership : retained_publication -> NotificationPipe.t option
+(** Read-only pair ledger evidence, including separate uncertain/known slots,
+    original failure and pre-close identities. Descriptor numbers are historical;
+    no numeric retry, cleanup, transfer or settlement authority is supplied. *)
+
+val retained_publication_parent_ownership : retained_publication -> NotificationPipe.t option
+(** Owner-loop diagnostics for the independently acquired parent. Native
+    consumption transfers authority, not OS-close settlement. Never retry or
+    close these historical descriptor numbers from an observation. *)

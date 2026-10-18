@@ -28,11 +28,22 @@ let transform version path =
   let component=Filename.remove_extension name in
   let interface=Filename.extension name=".mli" in
   if (not interface && Filename.extension name<>".ml") ||
-     not(List.mem component ["semanticHash";"semanticFile";"componentHash";"semanticMailbox";"wholeFileClone";"validationSnapshot";
+     not(List.mem component ["ownedClose";"semanticHash";"semanticFile";"componentHash";"semanticMailbox";"wholeFileClone";"validationSnapshot";
        "formatRecognition";"dngRecognition";"formatExtension";"xmpObservation";
        "xmpMerge";"dngSemantic";"dngExtended";"dngLayout";"dngComponents";"jpegSemantic";"semanticDelta";"semanticWorkers";"semanticFormats"])
   then invalid_arg "unqualified mode-filter module";
   if not(is_ox version) then source
+  else if component="ownedClose" then
+    let body=exact source "(* ox-portable-operations *)" "@@ portable" in
+    let body=exact body "type descriptor\n" "type descriptor : value mod portable contended\n" in
+    if not interface then body else
+    let body=exact body "(* ox-portable-owner *)" "@@ portable" in
+    let body=exact body "  type slot\n" "  type slot : value mod portable contended\n" in
+    let body=exact body "  type group\n" "  type group : value mod portable contended\n" in
+    let expected="@@ portable\n"^body in
+    let template=read(Filename.concat(Filename.dirname path)(component^".ox.mli.in")) in
+    if template<>expected then invalid_arg "owned close mode template differs";
+    template
   else if component="semanticFormats" then
     if not interface then source else
     let expected=exact source "(module FormatExtension.S) -> unit"
@@ -57,7 +68,9 @@ let transform version path =
     if ns<>signature_count || nf<>field_count then
       invalid_arg "qualified extension mode declarations changed";
     if interface then begin
-      let body = if component="componentHash" then
+      let body = if component="semanticFile" then
+        exact body "type close_issue\n" "type close_issue : value mod portable contended\n"
+      else if component="componentHash" then
         exact body "type checkpoint\n" "type checkpoint : value mod portable contended\n"
       else if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"

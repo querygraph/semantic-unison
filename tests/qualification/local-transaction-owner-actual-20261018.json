@@ -1,0 +1,311 @@
+{
+  "scope": "Production local async semantic transaction prepared pair/source/native-parent and complete producer borrowed lifetime.74directed current cases+2close-swallowing rejections,8native cases,64actual final-publication handoff regressions. Real workers/APFS/SDE/native name ownership on generated8192B DNGs; remote planner in-process only, no actual transport/SDK/Photo/camera/EXIO.",
+  "make_parent": {
+    "session": 67553,
+    "chunk": "1a2981",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "dune_parent": {
+    "session": 90618,
+    "chunk": "3b9053",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "final_controls_parent": {
+    "session": 55130,
+    "chunk": "5c7902",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "prior_controls_parent": {
+    "session": 3320,
+    "chunk": "6d97b6",
+    "exit_code": 0,
+    "no_session": true,
+    "scope": "Prior72cases+2rejections before extra nested uncertainty test, same production source; retained as ancestry."
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "ox-check": 329,
+    "stock-dune-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock/fault": {
+      "pid": 29338,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 29338,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/fault": {
+      "pid": 29667,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 29667,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "native": {
+      "pid": 30001,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 30001,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "handoff": {
+      "pid": 30058,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 30058,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    }
+  },
+  "sources": {
+    "src/semanticSync.ml": "56c849948e9b024f06e4897898a19ee47fb820ea2945b6c9060af8a998ea72e1",
+    "src/semanticSync.mli": "1e687a6c11e2496c5d9a452be3aa11403c4c837aee290a2bf2adc9b84fd49c5c",
+    "src/notificationPipe.ml": "1567344b9ea1a8945725807b91f448835e1b65c5be6e2bc32ea451304df2b938",
+    "src/notificationPipe.mli": "0abb7012db00eb4fae38a631fce653bcf3b53b868132b530e2245aad2d51ae8f",
+    "src/stagePublication.ml": "40e028f6cb322ae1be22be472c21b995118de0dc69f898c1de58086db5adb2e5",
+    "src/stagePublication.mli": "980750ce86f45b49da2ec121825659358c742e70980b865e468a4ac4c69055e6",
+    "src/stagePublication_stubs.c": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896",
+    "tests/resource_close/local_owner_run.py": "6d6874113527fee597e98efc18307f05e971a11708c564c394af59743706fad8",
+    "tests/resource_close/local_owner_test.ml": "84444fb34d1e5dd738bd8a5ecc95b6e6d854e42d06586b8ef9be650aa75b95ba",
+    "tests/resource_close/local_owner_fault.ml": "29b7a2a5a0f9a0172b5d185fc3197b0a299690d2b5d01a44bf38b487cab82ffe",
+    "tests/local_publication_owned/probe.ml": "db90959721159ca48b9aafc21221c48cea9ecf4471828c3ae91ef48fa7e85996",
+    "tests/local_publication_owned/controls.py": "fe8169a9708177484347e877d6732da009ba9c2c68952070cba9098d4b52158c",
+    "tests/local_publication_owned/handoff_controls.py": "15ed378265a192ff0c88c47e9837ec4c573173b60db017016329f7c4353f82b9",
+    "tests/test_semantic_handoff.py": "4c928a07235e2b0d519773ea01c058e552e5802a21baa84622fb0b0b10cb6b49",
+    "doc/owned-resource-remaining-inventory-20261018-v2.json": "454e7e17426118b8aecb3361c1e5f29bd30f978c332ea473ce286c4d4f87411c"
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-stock-check-20261018-001/RESULT.json",
+      "bytes": 57919,
+      "sha256": "08771a03f2ca75cad06d91defc0fef2176a1ac947a3a32292386654be1313a5a"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "4882a236b7a593c7d059e95b5219b4dbcc08aa0aeb071541e16f1df260099d90"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-ox-check-20261018-001/RESULT.json",
+      "bytes": 57925,
+      "sha256": "7cef8f921ab6b6a15df21fb127b2e7f3a325aeeb556d1442f48eef35febe6963"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "0a5f18998a4b170c8a4697c898386d7f2d3f7b93a6d30ac6520f25cae810918f"
+    },
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-stock-dune-check-20261018-001/RESULT.json",
+      "bytes": 57979,
+      "sha256": "f91387bef1dd7ad3b8c865715299ca6f919272f44b16c14002cba678c3e99260"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "bc9c444dbb7b3b0a89e2dd84ec0d2c060a6ce6764d15eec66c2a8f43f20214a6"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-ox-dune-check-20261018-001/RESULT.json",
+      "bytes": 57983,
+      "sha256": "82970d5f8d38be624d9e5e82539456e0800bafe05b0c0d87e97cd51cd8f08c18"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6d6173109e4518e8563ef4174164cec7bcd7916dab904efc01a0e7dae464343a"
+    },
+    "stock/fault/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-fault-stock-20261018-002/CONTROL-RESULT.json",
+      "bytes": 96516,
+      "sha256": "2020d1bc8720f9ff6621ee03ca674fb3e33e01f1225e0cf0cba122527433863a"
+    },
+    "stock/fault/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-fault-stock-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "53bf534a538baf6987a181d59fdbe4c4f9560f18b1f4a7ac3a603dea01897fff"
+    },
+    "stock/private-bad-variant/fixture.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-6je2hspb/fixture.c",
+      "bytes": 1230,
+      "sha256": "54eb7388054a6a33717406d0c0117f327a409b390895cb25e201def113db9d78"
+    },
+    "stock/private-bad-variant/stagePublication_stubs.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-6je2hspb/stagePublication_stubs.c",
+      "bytes": 28864,
+      "sha256": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896"
+    },
+    "stock/private-bad-variant/semanticSyncForOwner.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-6je2hspb/semanticSyncForOwner.ml",
+      "bytes": 35943,
+      "sha256": "7c0f8561e64dd555b5b1b1b5a4a48269909064e9b8e907611d2b923108e60783"
+    },
+    "stock/prior-without-nested/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-fault-stock-20261018-001/CONTROL-RESULT.json",
+      "bytes": 96070,
+      "sha256": "5a5756e812ca0009e873b4aa6b22d3ee0ffc4a80863f48aa58dc3580dfd9b273"
+    },
+    "stock/prior-without-nested/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-fault-stock-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "1075f23f636104f452759dffb133a79990f4905265cbd66131adeac0404ab3c7"
+    },
+    "ox/fault/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-fault-ox-20261018-002/CONTROL-RESULT.json",
+      "bytes": 97397,
+      "sha256": "8da150b86d49b3f569e4fa02c17838be07228bfa3ae42be522730903a37174a6"
+    },
+    "ox/fault/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-fault-ox-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "15602a6ce2a9ad34ec601b83ee48f29a2a6383326bca949bcdd412ad62410897"
+    },
+    "ox/private-bad-variant/fixture.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-263ivd4z/fixture.c",
+      "bytes": 1230,
+      "sha256": "54eb7388054a6a33717406d0c0117f327a409b390895cb25e201def113db9d78"
+    },
+    "ox/private-bad-variant/stagePublication_stubs.c": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-263ivd4z/stagePublication_stubs.c",
+      "bytes": 28864,
+      "sha256": "17d4e3eabcc926433e39f31ad337637975c133c49493310015009f45ae158896"
+    },
+    "ox/private-bad-variant/semanticSyncForOwner.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-local-owner-263ivd4z/semanticSyncForOwner.ml",
+      "bytes": 35943,
+      "sha256": "7c0f8561e64dd555b5b1b1b5a4a48269909064e9b8e907611d2b923108e60783"
+    },
+    "ox/prior-without-nested/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-local-owner-fault-ox-20261018-001/CONTROL-RESULT.json",
+      "bytes": 96951,
+      "sha256": "ae3200918db6ffe1db222d394324d1576d88bb1b57968cbd1008aea33427aceb"
+    },
+    "ox/prior-without-nested/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-fault-ox-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "9dd357e95e44c1a509fc2c19a4bba311c682d91f91b0a1ee1b94e19c9384226e"
+    },
+    "native/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-3jml1ex3/RESULT.json",
+      "bytes": 151209,
+      "sha256": "be3282273eebeca39adc57984f449247598d370d165b913467f6070907e7ceb8"
+    },
+    "native/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-native-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "3bab258694d81e52e75b70565bd87a0d0dbc6cbb02bcfe7e6fada99132a5d946"
+    },
+    "handoff/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-7xyknzsn/RESULT.json",
+      "bytes": 58291,
+      "sha256": "828c3f4a6ffd75e05b865be71ec0a15691605d6ae455a4a239e0fd2a388f83ab"
+    },
+    "handoff/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-local-owner-handoff-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6f4602b34a286aaf7e0265fc275deac280e53d29551b676578077293193bf733"
+    },
+    "handoff/0/semanticSyncForHandoff.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-fyhmem7u/semanticSyncForHandoff.ml",
+      "bytes": 37204,
+      "sha256": "dbee60bfe489c500ca76d0a730f810ff78a808b16a2d8b316eb396e5d34e538e"
+    },
+    "handoff/0/semanticRemoteForHandoff.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-fyhmem7u/semanticRemoteForHandoff.ml",
+      "bytes": 43074,
+      "sha256": "61838d54b0197168cc872548d01730e115b898ef1160899b208c734798798c41"
+    },
+    "handoff/0/handoffTest.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-fyhmem7u/handoffTest.ml",
+      "bytes": 22620,
+      "sha256": "9547398babc19436b50a2827351a95327c00f00ac2867091f8da2bebea874e87"
+    },
+    "handoff/0/build.log": {
+      "path": "/private/tmp/unison-semantic-handoff-fyhmem7u/build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "handoff/0/test.log": {
+      "path": "/private/tmp/unison-semantic-handoff-fyhmem7u/test.log",
+      "bytes": 2307,
+      "sha256": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+    },
+    "handoff/1/semanticSyncForHandoff.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-e4ns9agj/semanticSyncForHandoff.ml",
+      "bytes": 37204,
+      "sha256": "dbee60bfe489c500ca76d0a730f810ff78a808b16a2d8b316eb396e5d34e538e"
+    },
+    "handoff/1/semanticRemoteForHandoff.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-e4ns9agj/semanticRemoteForHandoff.ml",
+      "bytes": 43074,
+      "sha256": "61838d54b0197168cc872548d01730e115b898ef1160899b208c734798798c41"
+    },
+    "handoff/1/handoffTest.ml": {
+      "path": "/private/tmp/unison-semantic-handoff-e4ns9agj/handoffTest.ml",
+      "bytes": 22620,
+      "sha256": "9547398babc19436b50a2827351a95327c00f00ac2867091f8da2bebea874e87"
+    },
+    "handoff/1/build.log": {
+      "path": "/private/tmp/unison-semantic-handoff-e4ns9agj/build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "handoff/1/test.log": {
+      "path": "/private/tmp/unison-semantic-handoff-e4ns9agj/test.log",
+      "bytes": 2307,
+      "sha256": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+    }
+  },
+  "evidence_details": [
+    "Known paths restore FD census; uncertainty keeps transaction/stage/descriptor owners without repeated numeric close under connection cleanup/GC.",
+    "Callback connection cleanup cannot close producer descriptors before synchronous producer return, including inner event-loop opportunity.",
+    "Nested actual typed close uncertainty keeps borrowed pair/source/native name pending.",
+    "Tracked acknowledgement checked by local cleanup; false preentry ack leaves incoming parent held, true ack prevents local close.",
+    "Callback ordinary failure closes raw pair/source before independent native-abort uncertainty; remaining raw/native uncertainty observations are separate.",
+    "Handoff constructor seams updated to prepared local/remote owners; local record-failure injection now occurs pre-acquisition, remote bound record failure still after native adoption. No actual transport qualification inferred."
+  ],
+  "remaining": [
+    "Remote producer lifetime still outside borrowed wrapper; add same protection and directed active callback/nested lifetime proof next.",
+    "Synchronous test reference, separate compact-base capture/scalar-merge raw descriptor owners; merge-cache nested quota/name/FD handling.",
+    "Aggregate descendant FD/RSS and complete baseline accounting, broader benchmark/final integration/platform status."
+  ],
+  "limits": [
+    "Native consumption is transfer, not OS known closure.",
+    "Unknown injected resources settle only at actual process exit; no ordinary native teardown claim for them.",
+    "Known pre-call native-adoption failure can preserve an unadopted recoverable private stage; not a blanket name-cleanup proof.",
+    "No universal allocation-failure/toolchain-pre-return or hard aggregate resource claim."
+  ],
+  "resources": "All build/test controller children/groups reaped0/absent and CPU8build/CPU4test scopes closed, compilerjobs<=2; no current owner/EXIO/Photo hold."
+}

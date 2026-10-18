@@ -392,13 +392,19 @@ CAMLprim value unison_stage_publication_prepare(value root, value stage, value t
 CAMLprim value unison_stage_publication_prepare_owned(value root, value stage, value temporary)
 { return prepare_publication(root, stage, temporary, 1); }
 
-CAMLprim value unison_stage_publication_adopt(value handle, value parent, value stage)
+static value adopt_publication(value handle, value parent, value stage,
+                               value acknowledged, int tracked)
 {
-  CAMLparam3(handle, parent, stage);
+  CAMLparam4(handle, parent, stage, acknowledged);
   struct publication_context *context = *(struct publication_context **)Data_custom_val(handle);
   struct publication_error error = { 0, NULL };
   int incoming_parent = Int_val(parent), borrowed_stage = Int_val(stage), number;
   if (context->strict_owner && context->uncertain_count != 0) caml_raise(context->ownership_exception);
+  /* Native ownership starts here, including every subsequent failure path.
+   * Both old and new values are immediate booleans: this store needs no GC
+   * barrier, allocation, or pending-action dispatch. A rejected context above
+   * leaves the prepared acknowledgement false and the caller still owns parent. */
+  if (tracked) Field(acknowledged, 0) = Val_true;
   /* No pending-action dispatch while the consumed parent is a local integer.
      Lock only with the runtime released; unlock before reacquisition. */
   caml_enter_blocking_section_no_pending();
@@ -445,6 +451,13 @@ adopted_unlocked:
   finish_owned_call(context, error);
   CAMLreturn(Val_unit);
 }
+
+/* Keep the existing ABI and pre-entry rejection semantics unchanged. */
+CAMLprim value unison_stage_publication_adopt(value handle, value parent, value stage)
+{ return adopt_publication(handle, parent, stage, Val_unit, 0); }
+CAMLprim value unison_stage_publication_adopt_tracked_v1(value handle, value parent,
+                                                      value stage, value acknowledged)
+{ return adopt_publication(handle, parent, stage, acknowledged, 1); }
 
 CAMLprim value unison_stage_publication_publish(value handle)
 {
@@ -584,6 +597,8 @@ UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_owned_evidence,
   (value handle), CAMLparam1(handle))
 UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_adopt,
   (value handle, value parent, value stage), CAMLparam3(handle, parent, stage))
+UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_adopt_tracked_v1,
+  (value handle, value parent, value stage, value acknowledged), CAMLparam4(handle, parent, stage, acknowledged))
 UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_publish, (value handle), CAMLparam1(handle))
 UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_disarm, (value handle), CAMLparam1(handle))
 UNISON_PUBLICATION_UNAVAILABLE(unison_stage_publication_abort, (value handle), CAMLparam1(handle))

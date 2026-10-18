@@ -1,0 +1,39 @@
+{
+  "state": "ISOLATED_WORKER_SOURCE_TYPECHECK_PASS_NOT_RUNTIME_QUALIFIED",
+  "actual_owner": {
+    "session_id": 55719,
+    "terminal_chunk": "fab6b5",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controller": 76072,
+  "controller_reaped": true,
+  "group_absent": true,
+  "cpu3_closed": true,
+  "io_acquired": false,
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-worker-close-typecheck-20261018-006/RESULT.json",
+      "bytes": 11745,
+      "sha256": "0ad7c22db680e05a495bc9c5ed55e16c759822827bb2156342c7dc220dae1928"
+    },
+    {
+      "path": "/private/tmp/unison-worker-close-typecheck-20261018-006/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6485095bf0610cc9cbc66260313492f0836aca80b729de1c6844d429863927ed"
+    },
+    {
+      "path": "/private/tmp/unison-worker-close-typecheck-20261018-006/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "prior_attempts_preserved": [
+    "/private/tmp/unison-worker-close-typecheck-20261018-001",
+    "/private/tmp/unison-worker-close-typecheck-20261018-002",
+    "/private/tmp/unison-worker-close-typecheck-20261018-003",
+    "/private/tmp/unison-worker-close-typecheck-20261018-004",
+    "/private/tmp/unison-worker-close-typecheck-20261018-005"
+  ],
+  "qualification_scope": "Source typecheck both compilers; interface documentation clarified afterwards; not whole build, actual workers, native close faults, hard limits or nested-reader retention"
+}

@@ -58,7 +58,7 @@ OCAMLOBJS = \
           ubase/rx.cmo \
           \
           unicode_tables.cmo unicode.cmo bytearray.cmo \
-          system/system_generic.cmo $(WINOBJS) \
+          directoryOwner.cmo system/system_generic.cmo $(WINOBJS) \
           system/$(SYSTEM)/system_impl.cmo \
           system.cmo \
           \
@@ -74,7 +74,7 @@ OCAMLOBJS = \
           abort.cmo osx.cmo fswatch.cmo propsdata.cmo \
           props.cmo fileinfo.cmo os.cmo lock.cmo clroot.cmo common.cmo \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
-          borrowedWork.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
+          ownedClose.cmo borrowedWork.cmo retainedOwnership.cmo notificationPipe.cmo domainOwner.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
           semanticHash.cmo semanticFile.cmo componentHash.cmo validationSnapshot.cmo formatExtension.cmo formatRecognition.cmo \
           xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo dngLayout.cmo dngComponents.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \
@@ -211,6 +211,13 @@ semanticHash.cmo: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EX
 	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
 semanticHash.cmx: semanticHash.ml semanticHash.cmi semantic_mode_filter$(EXEC_EXT)
 	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticHash.ml
+ownedClose.cmi: ownedClose.mli ownedClose.ox.mli.in semantic_mode_filter$(EXEC_EXT)
+	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/ownedClose.mli
+ownedClose.cmo: ownedClose.ml ownedClose.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/ownedClose.ml
+ownedClose.cmx: ownedClose.ml ownedClose.cmi semantic_mode_filter$(EXEC_EXT)
+	$(OCAMLOPT) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/ownedClose.ml
+
 semanticFile.cmi: semanticFile.mli semanticFile.ox.mli.in semantic_mode_filter$(EXEC_EXT)
 	$(CAMLC) $(CAMLFLAGS_X) -pp "$(CWD)/semantic_mode_filter$(EXEC_EXT) $(OCAML_MODE_VERSION)" -c $(CWD)/semanticFile.mli
 semanticFile.cmo: semanticFile.ml semanticFile.cmi semantic_mode_filter$(EXEC_EXT)

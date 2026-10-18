@@ -177,14 +177,16 @@ let getcwd () =
 let badFileRx = Rx.rx ".*[?*].*"
 let winFileNsPathRx = Rx.rx "[/\\][/\\][?][/\\].+"
 
-let opendir d =
+let check_directory_pattern d =
   (* Windows uses wildcards to retrieve the list of files in a directory.
      It is not possible to list files in a directory when the path name
      itself contains the wildcards "*" or "?". *)
   let d' = if Rx.match_string winFileNsPathRx d then String.sub d 4 (String.length d - 4) else d in
   if Rx.match_string badFileRx d' then
-    raise (Unix.Unix_error (Unix.ENOENT, "opendir", d));
-  System_generic.opendir d
+    raise (Unix.Unix_error (Unix.ENOENT, "opendir", d))
+let opendir d = check_directory_pattern d;System_generic.opendir d
+let with_directory d operation =
+  check_directory_pattern d;System_generic.with_directory d operation
 
 (****)
 

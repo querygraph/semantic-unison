@@ -48,10 +48,22 @@ let chown path uid gid = Unix.chown path uid gid
 let utimes path atime mtime = Unix.utimes path atime mtime
 let link s d = Unix.link s d
 let openfile = Unix.openfile
+let prepare_directory () =
+  let owner=DirectoryOwner.prepare () in
+  let directory={readdir=(fun () -> DirectoryOwner.read owner);
+    closedir=(fun () -> DirectoryOwner.close owner)} in
+  owner,directory
 let opendir f =
-  let h = Unix.opendir f in
-  { readdir =  (fun () -> Unix.readdir h);
-    closedir = (fun () -> Unix.closedir h) }
+  let owner,directory=prepare_directory () in
+  DirectoryOwner.open_with owner f (fun () -> directory)
+let with_directory f operation =
+  let owner,directory=prepare_directory () in
+  DirectoryOwner.open_with owner f (fun () ->
+    match operation directory with
+    | value -> DirectoryOwner.close owner;value
+    | exception error ->
+      DirectoryOwner.remember_failure owner error;
+      DirectoryOwner.close owner;raise error)
 
 let readdir = Unix.readdir
 let closedir = Unix.closedir

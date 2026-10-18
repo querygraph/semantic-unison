@@ -1,0 +1,79 @@
+{
+  "state": "ISOLATED_SUCCESSOR_BUILD_PASS_NOT_WORKER_INTEGRATED",
+  "branch": "implementation/owned-close-retention",
+  "source_commit": "5826052a",
+  "actual_owner": {
+    "session_id": 75940,
+    "terminal_chunk": "815af7",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "stock_child": 71982,
+  "ox_child": 73100,
+  "both_reaped_and_groups_absent": true,
+  "cpu3_closed_after_each": true,
+  "compiler_jobs_max": 1,
+  "io_acquired": false,
+  "source_photos_or_SDK_access": false,
+  "selftests_run": false,
+  "worker_retention_or_hard_limits_qualified": false,
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/ownedClose.ml",
+      "bytes": 2139,
+      "sha256": "ccef82e09968945a5f955ada63040d73ef585a66d02a8da3cba156fbb87bca80"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/ownedClose.mli",
+      "bytes": 1473,
+      "sha256": "09228fcfafe99b4a393a980ffdb44aee06433735969dc48f3f98cb03b1ed81b7"
+    },
+    {
+      "path": "/Users/alexy/src/unison-owned-close-integration-20261018/src/Makefile.OCaml",
+      "bytes": 23971,
+      "sha256": "3e83656b82fbc8b0fc1f58a215037184eab9e5121ee46be065d66c0719222c11"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-close-successor-build-stock-20261018-001/RESULT.json",
+      "bytes": 53200,
+      "sha256": "90fd42f5bb5e2fa7cfa1b313f24a02f4377a77ba7c8198ddae2797f349af3e3a"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-stock-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "8d240229dbe7756ede27a2e4ae95ec50447b2bed637917dc7b434376969641c4"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-stock-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 176,
+      "sha256": "b8773548d4df7e4877ac2b810b09167b034f78019aaea2d0404060b02db7bdf3"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-stock-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-ox-20261018-001/RESULT.json",
+      "bytes": 53206,
+      "sha256": "3da732d87fa74033de40d57100bfa87f9e6e4ee672f771a75529daa5be297f57"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-ox-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "42be7700b1f2b483a49407a702f8d4a6759f7c833484a6f49a14ef43b54897ff"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-ox-20261018-001/SHARED-STDOUT.txt",
+      "bytes": 176,
+      "sha256": "56ef9fc7cea7f96bf5c6ae4bacca03e46f6263fe38848a9130b4947785f118b7"
+    },
+    {
+      "path": "/private/tmp/unison-close-successor-build-ox-20261018-001/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}

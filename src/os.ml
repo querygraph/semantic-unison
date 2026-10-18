@@ -95,30 +95,15 @@ let allChildrenOf fspath path =
         loop newChildren directory
       in
       let absolutePath = Fspath.concat fspath path in
-      let directory =
-        try
-          Some (Fs.opendir absolutePath)
-        with Unix.Unix_error (Unix.ENOENT, _, _) ->
-          (* FIX (in Ocaml): under Windows, when a directory is empty
-             (not even "." and ".."), FindFirstFile fails with
-             ERROR_FILE_NOT_FOUND while ocaml expects the error
-             ERROR_NO_MORE_FILES *)
-          None
-      in
-      match directory with
-        Some directory ->
-          begin try
-            let result = loop [] directory in
-            directory.Fs.closedir ();
-            result
-          with Unix.Unix_error _ as e ->
-            begin try
-              directory.Fs.closedir ()
-            with Unix.Unix_error _ -> () end;
-            raise e
-          end
-      | None ->
-          [])
+      (* Only acquisition ENOENT denotes the Windows empty-directory case.
+         A later read failure must propagate, after known close or retention. *)
+      let entered = ref false in
+      try Fs.with_directory absolutePath (fun directory ->
+        entered := true;
+        loop [] directory)
+      with Unix.Unix_error (Unix.ENOENT, _, _) when not !entered ->
+        (* Windows FindFirstFile can report FILE_NOT_FOUND for an empty tree. *)
+        [])
 
 (* Assumes that (fspath, path) is a directory, and returns the list of       *)
 (* children, except for temporary files and AppleDouble files.               *)

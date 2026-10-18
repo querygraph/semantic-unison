@@ -1,4 +1,22 @@
 exception Invalid of string
+type close_issue = {
+  identity:Unix.LargeFile.stats;
+  descriptor:Unix.file_descr Atomic.t;
+  descriptor_ready:bool Atomic.t;
+  channel:in_channel Atomic.t;
+  channel_ready:bool Atomic.t;
+  attempted:bool Atomic.t;
+  settled:bool Atomic.t;
+  close_error:exn Atomic.t;
+  operation_error:exn Atomic.t;
+  operation_failed:bool Atomic.t;
+}
+exception Close_uncertain of close_issue
+let close_issue_descriptor issue = Atomic.get issue.descriptor
+let close_issue_identity issue = issue.identity
+let close_issue_cause issue = Atomic.get issue.close_error
+let close_issue_operation_error issue =
+  if Atomic.get issue.operation_failed then Some (Atomic.get issue.operation_error) else None
 external prepare_reader_raw : Unix.file_descr -> bool (* ox-portable-ffi *)
   = "unison_semantic_prepare_reader"
 external pread_raw : Unix.file_descr -> int -> int64 -> string (* ox-portable-ffi *)
@@ -103,28 +121,34 @@ let with_fd_internal ~measure_reads ~measure_stages ~check_cancel fd f =
   let initial = Unix.LargeFile.fstat fd in
   if initial.Unix.LargeFile.st_kind <> Unix.S_REG || initial.Unix.LargeFile.st_size < 0L then
     raise (Invalid "not a regular file");
-  (* Prepare ownership bookkeeping before acquiring the duplicate. A channel
-     or record allocation failure must not leave its descriptor untracked. *)
-  let descriptor = ref fd and owns_descriptor = ref false
-  and owned_channel = ref None in
-  let close () = match !owned_channel with
-    | Some channel ->
-        owned_channel := None;
-        close_in channel
-    | None when !owns_descriptor ->
-        owns_descriptor := false;
-        Unix.close !descriptor
-    | None -> () in
-  let close_noerr () = try close () with _ -> () in
-  descriptor := Unix.dup ~cloexec:true fd;
-  owns_descriptor := true;
+  (* All carrier storage and the exception exist before acquiring the reader
+     duplicate. Channel installation after return is allocation-free. *)
+  let issue = {identity=initial;descriptor=Atomic.make fd;
+    descriptor_ready=Atomic.make false;channel=Atomic.make stdin;
+    channel_ready=Atomic.make false;attempted=Atomic.make false;
+    settled=Atomic.make false;close_error=Atomic.make Exit;
+    operation_error=Atomic.make Exit;operation_failed=Atomic.make false} in
+  let uncertain = Close_uncertain issue in
+  let close () =
+    if Atomic.get issue.descriptor_ready then
+      if Atomic.get issue.attempted then begin
+        if not (Atomic.get issue.settled) then raise uncertain
+      end else begin
+        (* A close failure may already have retired/reused the OS number. *)
+        Atomic.set issue.attempted true;
+        try
+          if Atomic.get issue.channel_ready then close_in (Atomic.get issue.channel)
+          else Unix.close (Atomic.get issue.descriptor);
+          Atomic.set issue.settled true
+        with error -> Atomic.set issue.close_error error; raise uncertain
+      end in
+  let descriptor = Unix.dup ~cloexec:true fd in
+  Atomic.set issue.descriptor descriptor;
+  Atomic.set issue.descriptor_ready true;
   try
-    let channel = Unix.in_channel_of_descr !descriptor in
-    owns_descriptor := false;
-    (* Installing [Some channel] can itself allocate. Until that succeeds,
-       close the new channel locally rather than retrying its raw FD. *)
-    (try owned_channel := Some channel
-     with error -> (try close_in_noerr channel with _ -> ()); raise error);
+    let channel = Unix.in_channel_of_descr descriptor in
+    Atomic.set issue.channel channel;
+    Atomic.set issue.channel_ready true;
     let reads = if measure_reads then Some {bytes=0L;chunks_read=0L;overflow=false} else None in
     let stages = if measure_stages then
       Some {durations=Array.make 4 0.;calls=Array.make 4 0;valid=true} else None in
@@ -134,7 +158,16 @@ let with_fd_internal ~measure_reads ~measure_stages ~check_cancel fd f =
       check t;
       close ();
       result)
-  with error -> close_noerr (); raise error
+  with error ->
+    if error != uncertain then begin
+      Atomic.set issue.operation_error error;
+      Atomic.set issue.operation_failed true
+    end;
+    (* If cleanup is uncertain, its carrier retains the original operation
+       exception (including a nested carrier), rather than converting it to
+       an ordinary failed operation. No close authority is retried. *)
+    close ();
+    raise error
 let with_fd ?(check_cancel = fun () -> ()) fd f =
   with_fd_internal ~measure_reads:false ~measure_stages:false ~check_cancel fd f
 let with_read_stats ?(measure_stages=false) ?(check_cancel = fun () -> ()) fd f =

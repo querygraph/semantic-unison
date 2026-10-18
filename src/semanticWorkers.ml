@@ -1,6 +1,13 @@
 open Lwt
 module H = HelperSupervisor
 module Mailbox = SemanticMailbox
+let completion_buffer_bytes=4096
+let fixed_resources : SemanticAdmission.cost = {payload_bytes=completion_buffer_bytes;descriptors=2}
+module Close = OwnedClose.Make(struct
+  type descriptor = Unix.file_descr
+  let empty = Unix.stdin
+  let close = Unix.close
+end)
 type fingerprint = { digest : string; stats : Unix.LargeFile.stats }
 type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
@@ -19,7 +26,7 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
-type usage = { workers : int; pending : int; running : int; peak_running : int }
+type usage = { workers : int; pending : int; running : int; peak_running : int; retained : int }
 exception Failed of string
 exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
@@ -30,6 +37,10 @@ type response = Hashed of fingerprint | Inspected of inspection
   | Reconciled of reconciliation
   | Applied of SemanticDelta.application
   | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
+  | Ownership_retained
+  | Reader_ownership_retained of SemanticFile.close_issue
+type ownership_entry = {group:Close.group; outcome:response Atomic.t;
+                        mutable failed:bool; mutable failure:exn}
 type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
@@ -43,7 +54,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
   | Snapshot of int64 * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
-             operation : operation; measure_reads : bool; measure_stages : bool }
+             operation : operation; ownership : Close.group; outcome : response Atomic.t; measure_reads : bool; measure_stages : bool }
 type shared = {
   mutex : Mutex.t; ready : Condition.t;
   jobs : job Mailbox.t; completions : (int * response * SemanticFile.read_stats option) Mailbox.t;
@@ -51,10 +62,12 @@ type shared = {
   stopping : bool Atomic.t; running : int Atomic.t; peak : int Atomic.t;
 }
 type t = {
-  shared : shared; domains : unit Domain.t list; budget : H.t;
+  shared : shared; domains : DomainOwner.slot array; budget : H.t;
   io : IoAdmission.t option;
-  max_pending : int; reader : Lwt_unix.file_descr;
+  max_pending : int; reader : Lwt_unix.file_descr; notification : NotificationPipe.t;
   replies : (int, response Lwt.t) Hashtbl.t;
+  owned_groups : (int, ownership_entry) Hashtbl.t;
+  mutable retained : int;
   mutable next_id : int; mutable pending : int; mutable slots : int;
   mutable admission : int list; mutable closing : bool;
   mutable joined : bool;
@@ -63,16 +76,15 @@ type t = {
   mutable read_observer : (int -> SemanticFile.read_stats -> unit) option;
   mutable measure_stages : bool;
 }
-let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
-let close_operation = function Apply (_, _, fd) | Snapshot (_,fd) -> close_noerr fd | _ -> ()
-let duplicate_operation = function
+let duplicate_operation output_slot = function
   | Apply (extension, plan, fd) ->
       let owned = Unix.dup ~cloexec:true fd in
-      (try Apply (extension, plan, owned)
-       with error -> close_noerr owned; raise error)
+      Close.adopt output_slot owned;
+      Apply (extension, plan, owned)
   | Snapshot (limit,fd) ->
-      let owned=Unix.dup ~cloexec:true fd in
-      (try Snapshot (limit,owned) with error -> close_noerr owned;raise error)
+      let owned = Unix.dup ~cloexec:true fd in
+      Close.adopt output_slot owned;
+      Snapshot (limit,owned)
   | operation -> operation
 let locked shared f =
   Mutex.lock shared.mutex;
@@ -208,6 +220,7 @@ let execute job =
       Error "file changed while hashing",None
     else result,reads
   with
+  | SemanticFile.Close_uncertain issue -> Reader_ownership_retained issue,None
   | Cancelled_job -> Cancelled,None
   | SemanticFile.Invalid reason | ComponentHash.Invalid reason | Invalid_argument reason -> Error reason,None
   | Unix.Unix_error (err, operation, _) -> Error (operation ^ ": " ^ Unix.error_message err),None
@@ -230,8 +243,13 @@ let rec worker shared () =
   | None -> ()
   | Some job ->
     let result,reads = execute job in
-    close_noerr job.fd;
-    close_operation job.operation;
+    Atomic.set job.outcome result;
+    (* All duplicate slots were rooted by the owner before acquisition.
+       Consume each close authority once; an ambiguous close cannot publish
+       an ordinary completion and release the enclosing CPU/IO/admission. *)
+    (try Close.close_all job.ownership with _ -> ());
+    let result,reads = if Close.settled job.ownership then result,reads
+      else Ownership_retained,None in
     locked shared (fun () ->
       Atomic.set shared.running (Atomic.get shared.running - 1);
       match Mailbox.push shared.completions (job.id, result, reads) with
@@ -252,6 +270,11 @@ let dispatch t =
   List.iter (fun (id, result, reads) ->
     match Hashtbl.find_opt t.replies id with
     | None -> ()
+    | Some _ when (match result with Ownership_retained | Reader_ownership_retained _ -> true | _ -> false) ->
+      (* Keep both reply and owned_groups entry reachable. No wakeup means
+         all borrowed outer reservations remain unsettled. *)
+      t.retained <- t.retained + 1;
+      t.closing <- true
     | Some reply ->
       let read_observer = t.read_observer in
       Hashtbl.remove t.replies id;
@@ -269,8 +292,12 @@ let rec pump t scratch =
   Lwt_unix.read t.reader scratch 0 (Bytes.length scratch) >>= fun _ ->
   let observer_error = dispatch t in
   let next = if t.joined then begin
-    Lwt_unix.close t.reader;
-    Lwt.wakeup t.pump_done ();
+    (* Domains have joined: no notifier can use either endpoint now. A close
+       carrier keeps pump_done and therefore shutdown unsettled. *)
+    (try
+       NotificationPipe.close_all t.notification;
+       Lwt.wakeup t.pump_done ()
+     with NotificationPipe.Uncertain _ -> t.closing <- true);
     return ()
   end else pump t scratch in
   (* An owner's unhandled observer exception must remain visible, but cannot
@@ -283,29 +310,25 @@ let rec pump t scratch =
 let create_internal ~io ~workers ~max_pending ~budget =
   if workers <= 0 || max_pending <= 0 || max_pending > 65536 then
     invalid_arg "SemanticWorkers.create: positive workers and1..65536 pending jobs required";
-  let owned_read = ref Unix.stdin and owned_write = ref Unix.stdout
-  and has_read = ref false and has_write = ref false
-  and reader_owner = ref None and shared_owner = ref None
-  and domains = ref [] in
+  let notification = NotificationPipe.prepare () in
+  let shared_owner = ref None in
+  let domains = Array.init workers (fun _ -> DomainOwner.prepare ()) in
+  (* This closure is installed before pipe/domain acquisition. It roots all
+     published creation handles even if the constructor never returns a pool. *)
+  NotificationPipe.keep_owner notification (fun () ->
+    ignore (Sys.opaque_identity domains);ignore (Sys.opaque_identity shared_owner));
   let stop shared =
     locked shared (fun () -> Atomic.set shared.stopping true; Mailbox.close shared.jobs; Condition.broadcast shared.ready) in
   let cleanup () =
-    (match !shared_owner with Some shared -> (try stop shared with _ -> ()) | None -> ());
-    List.iter (fun domain -> try Domain.join domain with _ -> ()) !domains;
-    domains := [];
-    if !has_read then begin
-      has_read := false;
-      (try match !reader_owner with
-       | Some reader -> Lwt_unix.close reader
-       | None -> Unix.close !owned_read
-       with _ -> ())
-    end;
-    if !has_write then begin
-      has_write := false; (try Unix.close !owned_write with _ -> ())
-    end in
+    (* Stop/join uncertainty forbids closing a notifier still possibly used by
+       a domain. Keep the complete published handle list rather than clearing it. *)
+    (try
+       (match !shared_owner with Some shared -> stop shared | None -> ());
+       DomainOwner.join_all domains
+     with error -> NotificationPipe.retain_unsettled notification error);
+    NotificationPipe.close_all notification in
   let read_fd, write_fd = Unix.pipe ~cloexec:true () in
-  owned_read := read_fd; has_read := true;
-  owned_write := write_fd; has_write := true;
+  NotificationPipe.adopt notification read_fd write_fd;
   try
     Unix.set_nonblock read_fd;
     Unix.set_nonblock write_fd;
@@ -314,28 +337,34 @@ let create_internal ~io ~workers ~max_pending ~budget =
       completions = Mailbox.create ~capacity:max_pending; notify = write_fd;
       stopping = Atomic.make false; running = Atomic.make 0; peak = Atomic.make 0 } in
     shared_owner := Some shared;
-    for _ = 1 to workers do
+    for index = 0 to workers - 1 do
       let domain = Domain.spawn (* ox-safe-worker-spawn *) (fun () -> worker shared ()) in
-      (* Linking the returned domain can allocate too. Stop and join this
-         still-local handle before the outer guard joins earlier domains. *)
-      (try domains := domain :: !domains
-       with error -> (try stop shared with _ -> ());
-         (try Domain.join domain with _ -> ()); raise error)
+      (* The slot and its carrier already exist. Publish the returned handle
+         before any further allocation, without a list/option constructor. *)
+      DomainOwner.adopt domains.(index) domain
     done;
     let reader = Lwt_unix.of_unix_file_descr read_fd in
-    reader_owner := Some reader;
-    let t = { shared; domains = !domains; budget; io; max_pending; reader;
-      replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
+    NotificationPipe.install_reader notification reader;
+    let t = { shared; domains; budget; io; max_pending; reader; notification;
+      replies = Hashtbl.create workers; owned_groups = Hashtbl.create workers; retained = 0; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
       shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
-    Lwt.ignore_result (pump t (Bytes.create 4096));
-    has_read := false; has_write := false;
+    NotificationPipe.keep_owner notification (fun () -> ignore (Sys.opaque_identity t));
+    Lwt.ignore_result (pump t (Bytes.create completion_buffer_bytes));
     t
-  with error -> cleanup (); raise error
+  with
+  | NotificationPipe.Uncertain _ as error -> raise error
+  | error ->
+    NotificationPipe.remember_failure notification error;
+    cleanup (); raise error
 let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
   create_internal ~io:(Some io) ~workers ~max_pending ~budget
+let retain_unsettled t error =
+  t.closing <- true;
+  NotificationPipe.remember_failure t.notification error;
+  NotificationPipe.retain_unsettled t.notification error
 let set_read_observer ?(measure_stages=false) t observer =
   if t.closing || t.pending <> 0 then
     invalid_arg "SemanticWorkers.set_read_observer requires an idle open pool";
@@ -343,7 +372,7 @@ let set_read_observer ?(measure_stages=false) t observer =
   t.measure_stages <- measure_stages && Option.is_some observer
 let usage t =
   let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
-  {workers = List.length t.domains; pending = t.pending; running; peak_running}
+  {workers = Array.length t.domains; pending = t.pending; running; peak_running; retained = t.retained}
 
 let submit t cancellation fd requested_operation =
   if t.closing then fail (Failed "digest pool is closed")
@@ -351,8 +380,12 @@ let submit t cancellation fd requested_operation =
   else
     (* Allocate the guard and controller bookkeeping before acquiring either
        duplicate. Continuation/listener setup is part of this ownership phase. *)
+    let input_slot = Close.prepare ~label:"worker input"
+    and output_slot = Close.prepare ~label:"worker output" in
+    let ownership = Close.group [|input_slot;output_slot|] in
+    let entry = {group=ownership;outcome=Atomic.make Cancelled;failed=false;failure=Exit} in
+    let retained_reply = Lwt.wait () in
     let owned = ref fd and operation = ref requested_operation
-    and owns_input = ref false and owns_operation = ref false
     and pending_registered = ref false in
     let id = t.next_id in
     t.next_id <- t.next_id + 1;
@@ -362,14 +395,14 @@ let submit t cancellation fd requested_operation =
     let finished = ref false and transferred = ref false and has_slot = ref false in
     let cleanup_error = ref None in
     let cleanup_owned () =
-      if not !transferred then begin
-        if !owns_input then begin
-          owns_input := false; (try close_noerr !owned with _ -> ())
-        end;
-        if !owns_operation then begin
-          owns_operation := false; (try close_operation !operation with _ -> ())
-        end
-      end in
+      if not !transferred then (try Close.close_all ownership with _ -> ()) in
+    let retain () =
+      if not !finished then begin
+        finished := true;
+        t.retained <- t.retained + 1;
+        t.closing <- true
+      end;
+      retained_reply in
     let rec monitor () =
       if !finished then return ()
       else if t.closing || H.is_cancelled cancellation then begin
@@ -378,11 +411,14 @@ let submit t cancellation fd requested_operation =
     let remove_admission () = t.admission <- List.filter ((<>) id) t.admission in
     let rec wait_slot () =
       if Atomic.get cancelled || t.closing then return false
-      else if t.slots < List.length t.domains &&
+      else if t.slots < Array.length t.domains &&
         (match t.admission with x :: _ -> x = id | [] -> false) then begin
         remove_admission (); t.slots <- t.slots + 1; has_slot := true; return true
       end else Lwt_unix.sleep 0.01 >>= wait_slot in
     let finish () =
+      cleanup_owned ();
+      if not (Close.settled ownership) then false
+      else begin
       if not !finished then begin
         finished := true;
         let attempt f = try f () with error ->
@@ -391,13 +427,14 @@ let submit t cancellation fd requested_operation =
         attempt remove_admission;
         if !has_slot then begin has_slot := false; t.slots <- t.slots - 1 end;
         if not !transferred then Hashtbl.remove t.replies id;
-        attempt cleanup_owned;
+        Hashtbl.remove t.owned_groups id;
         if !pending_registered then begin
           pending_registered := false; t.pending <- t.pending - 1
         end;
         if t.closing && t.pending = 0 then attempt (fun () -> notify t.shared);
         match !cleanup_error with None -> () | Some error -> raise error
-      end in
+      end;
+      true end in
     let execute () =
         (* A blocked filesystem must not occupy a domain slot or the slot FIFO.
            Register here, only after the atomic I/O reservation is admitted. *)
@@ -412,13 +449,14 @@ let submit t cancellation fd requested_operation =
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
               (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation;
-                 measure_reads = Option.is_some t.read_observer; measure_stages = t.measure_stages} with
+                 ownership; outcome=entry.outcome; measure_reads = Option.is_some t.read_observer; measure_stages = t.measure_stages} with
                | Mailbox.Added -> transferred := true
                | Mailbox.Full | Mailbox.Closed -> raise (Failed "worker job mailbox invariant"));
               Condition.signal t.shared.ready);
             reply
           end)) (function
         | None | Some Cancelled -> return None
+        | Some (Ownership_retained | Reader_ownership_retained _) -> retain ()
         | Some (Error reason) -> fail (Failed reason)
         | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Component_inspected _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
@@ -435,27 +473,32 @@ let submit t cancellation fd requested_operation =
             (function
           | None -> return None
           | Some result -> return result) fail in
+    (* Register the entire group before acquiring either duplicate. *)
+    Hashtbl.add t.owned_groups id entry;
     try
-      owned := Unix.dup ~cloexec:true fd; owns_input := true;
-      operation := duplicate_operation requested_operation; owns_operation := true;
+      owned := Unix.dup ~cloexec:true fd;
+      Close.adopt input_slot !owned;
+      operation := duplicate_operation output_slot requested_operation;
       t.pending <- t.pending + 1; pending_registered := true;
       unregister_cancel := H.on_cancel cancellation stop;
       Lwt.ignore_result (monitor ());
       BorrowedWork.try_bind admitted_execution
-        (fun result -> finish (); return result)
+        (fun result -> if finish () then return result else retain ())
         (fun exn ->
-          (try finish () with _ -> ());
-          match exn with
+          entry.failure <- exn; entry.failed <- true;
+          if not (finish ()) then retain ()
+          else match exn with
           | IoAdmission.Failed reason -> fail (Failed reason)
           | _ -> fail exn)
     with error ->
+      entry.failure <- error; entry.failed <- true;
       (* Before queue transfer the controller owns both descriptors. Afterwards
          only the worker closes them. Returned sleeping work is guarded at each
          mapping/ownership layer; persistent allocation failures and callbacks
          which dispatch independently before throwing remain outside that
          finite observer-installation guarantee. *)
-      (try finish () with _ -> ());
-      match error with
+      if not (finish ()) then retain ()
+      else match error with
       | Unix.Unix_error (err, operation, _) ->
           fail (Failed (operation ^ ": " ^ Unix.error_message err))
       | _ -> raise error
@@ -567,18 +610,23 @@ let shutdown t = match t.shutdown_result with
     let result = Lwt.wait () in
     t.shutdown_result <- Some result;
     let rec finish () =
-      if t.pending <> 0 then Lwt_unix.sleep 0.01 >>= finish
+      if t.pending <> 0 || t.retained <> 0 then Lwt_unix.sleep 0.01 >>= finish
       else begin
         locked t.shared (fun () -> Atomic.set t.shared.stopping true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
-        List.iter Domain.join t.domains;
+        DomainOwner.join_all t.domains;
         t.joined <- true;
         Mailbox.close t.shared.completions;
         notify t.shared;
-        t.pump_done >>= fun () -> close_noerr t.shared.notify; return ()
+        t.pump_done
       end in
     Lwt.ignore_result (try_bind finish
       (fun () -> Lwt.wakeup result (); return ())
-      (fun exn -> Lwt.wakeup_exn result exn; return ()));
+      (fun exn ->
+        (* A generic stop/join/pump lifecycle error is not a proof of pool
+           closure. Root the pool and leave the public shutdown reply sleeping. *)
+        (try NotificationPipe.retain_unsettled t.notification exn
+         with NotificationPipe.Uncertain _ -> ());
+        return ()));
     result
 
 let refresh_owned_components t cancellation ~entry ~record ~decoders

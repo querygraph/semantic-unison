@@ -50,9 +50,9 @@ print(result.stdout,end='')
 # executable. The same conservation probe must observe its one leaked FD.
 negative=work/'negative';negative.mkdir()
 source=(root/'src/semanticMergeCache.ml').read_text()
-anchor='  let fd = Unix.openfile filename [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in'
+anchor='  let fd=Unix.openfile filename flags mode in'
 assert source.count(anchor)==1
-source=source.replace(anchor,anchor+'\n  if Sys.getenv_opt "UNISON_PRIVATE_CACHE_FAULT" = Some "read" then raise Out_of_memory;')
+source=source.replace(anchor,anchor+'\n  if mode=0 && Sys.getenv_opt "UNISON_PRIVATE_CACHE_FAULT" = Some "read" then raise Out_of_memory;')
 (negative/'semanticMergeCache.ml').write_text(source)
 for name in ['semanticMergeCache.cmi']:
  shutil.copyfile(a.build/'src'/name,negative/name)

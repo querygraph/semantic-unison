@@ -5,11 +5,15 @@ type usage = {
   transactions : int; pending : int; payload_bytes : int; descriptors : int;
   peak_transactions : int; peak_payload_bytes : int; peak_descriptors : int;
 }
+type accounting = {
+  baseline:cost; workspace:cost; workspace_peak:cost;
+  total_reserved:cost; peak_reserved:cost; capacity:cost;
+}
 type state = Fresh | Pending | Held | Retiring | Retired
 type t = {
   max_transactions : int; max_payload_bytes : int;
   max_descriptors : int; max_pending : int;
-  source_headroom : cost option;
+  source_headroom : cost option; baseline:cost;
   mutable transactions : int; mutable payload_bytes : int;
   mutable descriptors : int; mutable peak_transactions : int;
   mutable peak_payload_bytes : int; mutable peak_descriptors : int;
@@ -24,18 +28,34 @@ and reservation = {
   mutable borrowing : bool;
 }
 exception Failed of string
-let create ~(source_headroom:cost option) ~max_transactions ~max_payload_bytes ~max_descriptors ~max_pending =
+let create_with_baseline ~(baseline:cost) ~(source_headroom:cost option) ~max_transactions ~max_payload_bytes ~max_descriptors ~max_pending =
   if max_transactions <= 0 || max_payload_bytes <= 0 || max_descriptors <= 0 || max_pending <= 0 then
     invalid_arg "SemanticAdmission.create: positive limits required";
+  if baseline.payload_bytes<0 || baseline.descriptors<0 ||
+     baseline.payload_bytes>max_payload_bytes || baseline.descriptors>max_descriptors then
+    invalid_arg "SemanticAdmission.create: invalid fixed baseline";
+  let max_payload_bytes=max_payload_bytes-baseline.payload_bytes
+  and max_descriptors=max_descriptors-baseline.descriptors in
   begin match source_headroom with
   | Some cost when cost.payload_bytes < 0 || cost.descriptors < 0 ||
       max_transactions < 2 || cost.payload_bytes > max_payload_bytes / 2 ||
       cost.descriptors > max_descriptors / 2 ->
       invalid_arg "SemanticAdmission.create: budgets must fit a consumer and reserved source"
   | _ -> () end;
-  {max_transactions;max_payload_bytes;max_descriptors;max_pending;source_headroom;
+  {max_transactions;max_payload_bytes;max_descriptors;max_pending;source_headroom;baseline;
    transactions=0;payload_bytes=0;descriptors=0;peak_transactions=0;
    peak_payload_bytes=0;peak_descriptors=0;pending=0;sources=[];consumers=[];pumping=false;scheduled=false}
+let create ~source_headroom ~max_transactions ~max_payload_bytes ~max_descriptors ~max_pending =
+  create_with_baseline ~baseline:{payload_bytes=0;descriptors=0} ~source_headroom
+    ~max_transactions ~max_payload_bytes ~max_descriptors ~max_pending
+let accounting t =
+  let add (cost:cost) = {payload_bytes=t.baseline.payload_bytes+cost.payload_bytes;
+                        descriptors=t.baseline.descriptors+cost.descriptors} in
+  let workspace={payload_bytes=t.payload_bytes;descriptors=t.descriptors}
+  and workspace_peak={payload_bytes=t.peak_payload_bytes;descriptors=t.peak_descriptors}
+  and available={payload_bytes=t.max_payload_bytes;descriptors=t.max_descriptors} in
+  {baseline=t.baseline;workspace;workspace_peak;total_reserved=add workspace;
+   peak_reserved=add workspace_peak;capacity=add available}
 let usage t =
   {transactions=t.transactions;pending=t.pending;
    payload_bytes=t.payload_bytes;descriptors=t.descriptors;

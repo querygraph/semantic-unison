@@ -1,7 +1,7 @@
 FSMOCAMLOBJS = \
    ubase/umarshal.cmo \
    ubase/rx.cmo unicode_tables.cmo unicode.cmo \
-   system/system_generic.cmo system/system_win.cmo \
+   directoryOwner.cmo system/system_generic.cmo system/system_win.cmo \
    system/win/system_impl.cmo \
    lwt/lwt.cmo lwt/pqueue.cmo lwt/win/lwt_unix_impl.cmo lwt/lwt_unix.cmo \
    lwt/win/lwt_win.cmo \

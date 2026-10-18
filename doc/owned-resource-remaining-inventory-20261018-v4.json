@@ -1,0 +1,63 @@
+{
+  "scope": "Successor after prepared capture/scalar-merge input scopes; full actual capture/cache-hit and saved-base merge plus helper fault qualification. Cache internals and aggregate accounting not relabelled complete.",
+  "predecessor": {
+    "path": "doc/owned-resource-remaining-inventory-20261018-v3.json",
+    "bytes": 2660,
+    "sha256": "1c0c5d7d3685fe2903d6e1f9c584ab0c1cc80a525507db25edd28e8fddab1734"
+  },
+  "source_sha256": {
+    "src/semanticSync.ml": "cebe8c8420baf8a43a0d6cf61fe9e98619e454f3ec889a2f01ee34376d654d63",
+    "src/semanticRemote.ml": "9e0ea03b144e27801c945daf74c7b762940e2ad508d335c6b11ed3a7c0e333fb",
+    "src/semanticMergeCache.ml": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+    "src/fsmonitor/solaris/watcher.ml": "5002d3876bd8dcc7ed7fa8d4505b1e25d07d70d865476fb6249a0f49d27b77ff",
+    "src/fsmonitor/solaris/Makefile": "a95ba3c783d72fa1c7c2cce4873250f32c9c4a2d0d0151e88af796d6fea7578f"
+  },
+  "qualified_local_async": [
+    "prepared pair/source before clone/open",
+    "tracked native parent acknowledgement",
+    "raw known close before native abort",
+    "complete worker/producer borrowed lifetime"
+  ],
+  "remaining": [
+    {
+      "file": "src/semanticSync.ml",
+      "functions": [
+        "with_file",
+        "try_local"
+      ],
+      "finding": "Synchronous reference/test-only raw descriptors remain separate; production capture/scalar merge now use prepared1/4slot owners. Full internal cache uncertainty remains below."
+    },
+    {
+      "file": "src/semanticMergeCache.ml",
+      "functions": [
+        "empty_directory",
+        "reserve",
+        "read",
+        "store",
+        "load"
+      ],
+      "finding": "Raw directory and quota/record FD closes plus temporary-name cleanup need joint retention, preserving monotonic quota and best-effort semantics without hiding uncertainty."
+    },
+    {
+      "file": "src/fsmonitor/solaris/watcher.ml",
+      "functions": [
+        "add_watch_children"
+      ],
+      "finding": "Separate legacy/platform raw directory/FEN callback finding, not an observed failure or automatically added runtime requirement."
+    }
+  ],
+  "separate_goal_work": [
+    "Aggregate descendant FD/RSS and complete baseline acquisition accounting",
+    "Broader benchmarks and final integration/platform status"
+  ],
+  "qualified_remote_async": [
+    "complete synchronous producer borrowed lifetime",
+    "DirectoryOwner uncertainty recognized before pair/name cleanup",
+    "active cleanup and nested file/directory carrier controls plus exact old and missing-classifier rejections"
+  ],
+  "qualified_capture_merge_inputs": [
+    "one/four prepared slots before acquisition",
+    "independent once-only close; original and multiple uncertainty retention",
+    "80positive controls/2designated rejects stock+Ox; actual capture/saved-base/cache-hit exact merge; no aggregate FD/RSS or cache internal close qualification"
+  ]
+}

@@ -48,6 +48,15 @@ let prepare_owned ~working_dir ~stage ~temporary =
   if not (valid_relative stage) || not (valid_relative temporary) || stage = temporary then
     invalid_arg "StagePublication.prepare_owned: invalid or identical relative names";
   prepare_owned_raw working_dir stage temporary
+type parent_handoff = { acknowledged:bool ref; mutable attempted:bool }
+let prepare_parent_handoff () = {acknowledged=ref false;attempted=false}
+let parent_consumed handoff = !(handoff.acknowledged)
+external adopt_tracked_raw : owned -> Unix.file_descr -> Unix.file_descr -> bool ref -> unit
+  = "unison_stage_publication_adopt_tracked_v1"
+let adopt_owned_tracked owner handoff ~parent ~stage =
+  if handoff.attempted then invalid_arg "StagePublication parent handoff already attempted";
+  handoff.attempted<-true;
+  adopt_tracked_raw owner parent stage handoff.acknowledged
 let adopt_owned owner ~parent ~stage = adopt_raw owner parent stage
 let publish_owned = publish
 let disarm_owned = disarm

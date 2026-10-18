@@ -101,6 +101,16 @@ type connection
 val connectionVersion : connection -> int
 val connectionOfRoot : Common.root -> connection
 
+val register_body_ownership_classifier : (exn -> bool) -> unit
+(** Owner-loop initialization hook for ownership carriers defined after Remote.
+    Predicates must be pure/owner-only. Registration is additive; no unregister
+    or release authority. True or a classifier exception retains body allowance
+    through RetainedOwnership rather than translating uncertainty into cleanup.
+    This does not discover OS closure or recognize arbitrary unknown exceptions. *)
+
+(* Every incoming packet also obeys the endpoint-local rpcpacketmaxbytes
+   outer frame policy. Legacy registrations retain their existing codecs;
+   this frame bound is not aggregate or decoded-object accounting. *)
 val registerServerCmd :
   string
  -> 'a Umarshal.t -> 'b Umarshal.t
@@ -120,7 +130,15 @@ val registerBoundedServerCmd :
     queue, allowing retained-resource leases to cover the entire reply lifetime.
     A scope failure before the callback can produce an exception reply; failures
     after dispatch starts never produce an additional reply.
-    Does not change or bound the shared legacy RPC message-header schema. *)
+    Selected builtin decode allocations are limited per decode to
+    [65536 + 8 * frame_limit] charged bytes and collection counts to
+    [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
+    not decoded heap/RSS or aggregate request bounds. Scope arguments may be
+    decoded twice, each with its own bound. Valid wire encodings are unchanged.
+    Shared RPC headers use independent endpoint-local frame/byte/slot limits.
+    All body registrations also use separate aggregate request/reply raw-input
+    lanes. These follow actual processing/queued output or result decoding and
+    preserve recognized ownership uncertainty; not decoded-object/RSS limits. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

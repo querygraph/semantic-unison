@@ -14,7 +14,9 @@ CAMLprim value owned_fixture_known_open(value descriptor)
 { return Val_bool(fcntl(Int_val(descriptor), F_GETFD) != -1); }
 static int owned_fixture_close(int fd)
 {
-  int ordinal = ++calls, result = close(fd), saved = errno;
+  int ordinal = ++calls;
+  if (failed == -2) { errno = EIO; return -1; }
+  int result = close(fd), saved = errno;
   if (failed == -1 || failed == ordinal) { errno = EIO; return -1; }
   errno = saved; return result;
 }

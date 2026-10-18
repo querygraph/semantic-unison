@@ -1,0 +1,489 @@
+{
+  "scope": "Prepared capture/scalar-merge input owners, 40positive helper fault cases+2designated swallowing rejections;34actual merge error/exception regressions;6full capture/saved-base/cached-base operations. Generated private inputs only/no transport/SDK/Photo/camera/EXIO. Cache internals and aggregate descendant FD/RSS remain separate.",
+  "positive_cases": 80,
+  "designated_rejections": 2,
+  "parents": {
+    "make": {
+      "session": 14599,
+      "chunk": "7c6b1a",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "dune": {
+      "session": 91989,
+      "chunk": "413edd",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "fault": {
+      "session": 56838,
+      "chunk": "0e852c",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "merge_errors": {
+      "session": 92760,
+      "chunk": "5c3a9c",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "pipeline": {
+      "session": 85204,
+      "chunk": "ff8921",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "stock-dune-check": 329,
+    "ox-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock-check": {
+      "child": {
+        "pid": 44128,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 44128,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock-dune-check": {
+      "child": {
+        "pid": 48576,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 48576,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/fault": {
+      "child": {
+        "pid": 47352,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47352,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/merge-errors": {
+      "child": {
+        "pid": 48105,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 48105,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/pipeline": {
+      "child": {
+        "pid": 50947,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 50947,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-check": {
+      "child": {
+        "pid": 45240,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 45240,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-dune-check": {
+      "child": {
+        "pid": 49701,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 49701,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/fault": {
+      "child": {
+        "pid": 47626,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 47626,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/merge-errors": {
+      "child": {
+        "pid": 48138,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 48138,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/pipeline": {
+      "child": {
+        "pid": 50959,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 50959,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  },
+  "artifacts": {
+    "stock-check": [
+      {
+        "path": "/private/tmp/unison-input-owners-stock-check-20261018-002/RESULT.json",
+        "bytes": 58393,
+        "sha256": "c2f2cf7be7aaf9199b82904c692c3959f0af2be5eedfa9adb0e15871e51a6d9d"
+      },
+      {
+        "path": "/private/tmp/unison-input-owners-stock-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "71ad211977e669c02df740be00e5f6eff33e3d57b5cc05c4f436032e637f3947"
+      }
+    ],
+    "stock-dune-check": [
+      {
+        "path": "/private/tmp/unison-input-owners-stock-dune-check-20261018-001/RESULT.json",
+        "bytes": 58572,
+        "sha256": "b967fadfe8886b25fa689666598f97e08839c1ea23092e434d008fcf30336446"
+      },
+      {
+        "path": "/private/tmp/unison-input-owners-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "00831b68041008128d35b340a67a60e985e49d6f9d306072a297d15510671e44"
+      }
+    ],
+    "stock/fault": [
+      {
+        "path": "/private/tmp/unison-input-owner-controls-stock-20261018-002/CONTROL.json",
+        "bytes": 75830,
+        "sha256": "1448c363c92ec5c793328491e9d39e456b3de8581f8ea841046a63ff967673db"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-stock-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "577c6c558e3b944937c32f955b86071de7dff61a58eaff7ae18fcc037f501880"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-stock-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 202,
+        "sha256": "c0fbc3828576cf1692b32b23050a17e80162e8e083a82e80b12a1a0cc0623e99"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-stock-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/merge-errors": [
+      {
+        "path": "/private/tmp/unison-input-merge-regress-stock-20261018-001/CONTROL.json",
+        "bytes": 15838,
+        "sha256": "b4a09f3057f39231d14b23e4ec98e9ee15f96377f975dc8784b19cd02a81b039"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "1439299b6611f4365d1af6f87c0b76f68333ddecb41f1ad945ba4f575a140cce"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-stock-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2628,
+        "sha256": "dc910d67c2db52b261ee2943bac2b7143fccd4b4e7bc115491878cd8e3daf9ff"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-stock-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/pipeline": [
+      {
+        "path": "/private/tmp/unison-input-pipeline-stock-20261018-004/CONTROL.json",
+        "bytes": 12243,
+        "sha256": "ad85cb12ab6d62443d60510c419706774727ca3434d17163a32c04663427c30e"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-stock-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "1609a8065ea4e3a3960cf3bab7586c0f38c802748da44ab2b44906ab76dd56ec"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-stock-20261018-004/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "d6f49e02c8d017da1db63bbbedc512f8c86acefec8d3db9cd6cd465258cfc5d4"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-stock-20261018-004/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox-check": [
+      {
+        "path": "/private/tmp/unison-input-owners-ox-check-20261018-002/RESULT.json",
+        "bytes": 58399,
+        "sha256": "0f77fcdd2c5a0b06c34c0306fbb049b1b831d226c2b093ea7406ae40e1a10943"
+      },
+      {
+        "path": "/private/tmp/unison-input-owners-ox-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "ea0319268b23afcd86966008f0f375981f28d4d3c2b22059ac03a71c632aa30e"
+      }
+    ],
+    "ox-dune-check": [
+      {
+        "path": "/private/tmp/unison-input-owners-ox-dune-check-20261018-001/RESULT.json",
+        "bytes": 58576,
+        "sha256": "670d0f1173ffd3ddf9e2a84f07db2f945e6b82a85c753b661c3d61b3103a8dd2"
+      },
+      {
+        "path": "/private/tmp/unison-input-owners-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "75a4af59bf1ab37c1837fc89c3cc2bc22a5fdd8a46d42e70d504d46363947132"
+      }
+    ],
+    "ox/fault": [
+      {
+        "path": "/private/tmp/unison-input-owner-controls-ox-20261018-002/CONTROL.json",
+        "bytes": 76710,
+        "sha256": "648ef01dfa772496b4055a834be45157026e7f50e4b2abf290aeecd7e4ef44dc"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-ox-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "af37b7add042ee53aab2ecddf050afb31c26cc9bb14588f8b712dd620ec0d751"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-ox-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 205,
+        "sha256": "2bc5b065e58d82e0e747272c548bbf53259ca6111457ef3660265910085224ce"
+      },
+      {
+        "path": "/private/tmp/unison-input-owner-controls-ox-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/merge-errors": [
+      {
+        "path": "/private/tmp/unison-input-merge-regress-ox-20261018-001/CONTROL.json",
+        "bytes": 15837,
+        "sha256": "6640d47b41273696c2306b78e0ecb137a71ba4e49698051f01e323f130a1af08"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "a7a314d6c423764e59a387a7bb67b5fc1e1ac777cf03ae4ee806c637bd8efae1"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-ox-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2625,
+        "sha256": "9e75bab1c10c1609e7d148ec0ed00fe6c563dffa91fd7431ef8c57def4aa4c39"
+      },
+      {
+        "path": "/private/tmp/unison-input-merge-regress-ox-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/pipeline": [
+      {
+        "path": "/private/tmp/unison-input-pipeline-ox-20261018-004/CONTROL.json",
+        "bytes": 12242,
+        "sha256": "06746a5bc8ecb1cdb646001959faa73fe8c2f296e00c45fff0f751ad48a6237c"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-ox-20261018-004/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "065e1a4555929c830a0d9f69038ecd8b5e3c1b1526a53dd29c612021b5e08232"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-ox-20261018-004/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "d6f49e02c8d017da1db63bbbedc512f8c86acefec8d3db9cd6cd465258cfc5d4"
+      },
+      {
+        "path": "/private/tmp/unison-input-pipeline-ox-20261018-004/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "src/semanticSync.ml",
+      "bytes": 38771,
+      "sha256": "cebe8c8420baf8a43a0d6cf61fe9e98619e454f3ec889a2f01ee34376d654d63"
+    },
+    {
+      "path": "src/semanticSync.mli",
+      "bytes": 5048,
+      "sha256": "01a9c0ea7ca2a2a4597b1c0efd8cd79dcb6684d08330fc30f8e846e67649e6b6"
+    },
+    {
+      "path": "tests/resource_close/input_owner_run.py",
+      "bytes": 4470,
+      "sha256": "75bb4ff002b8d59da54368a715650e5457f814367ccb325f8a4f59318e19f140"
+    },
+    {
+      "path": "tests/resource_close/input_owner_test.ml",
+      "bytes": 2663,
+      "sha256": "86c0656a456d1552e6d61e130f31ef45068daf406f5a2bb392e700672ae771e4"
+    },
+    {
+      "path": "tests/resource_close/input_owner_fault.ml",
+      "bytes": 785,
+      "sha256": "8a96b1b7a3bbc62f25adc1d7e9fc9a08a8e9a691a5a8e230c37884f22ae94832"
+    },
+    {
+      "path": "tests/resource_close/input_pipeline_run.py",
+      "bytes": 3826,
+      "sha256": "79cae3f5b426385befbd409177784934bff38945d3bb1dd6adc3b8210e9a9ded"
+    },
+    {
+      "path": "tests/resource_close/input_pipeline_test.ml",
+      "bytes": 2431,
+      "sha256": "23aac894b0b08e38b9c11ed0ac4ecad7d78b235df0a1761ac7928f44820052e8"
+    },
+    {
+      "path": "tests/merge_io_errors/run.py",
+      "bytes": 6770,
+      "sha256": "6a0eb9d12ee696acba7c873cd3574a1ec49fac11f4517f91a3bdb11cc27e1bed"
+    },
+    {
+      "path": "tests/merge_io_errors/probe.ml",
+      "bytes": 3665,
+      "sha256": "df3e53c317d9bf0dbc5cfd94f1f80e6708ee254608f3c94cb341da523322453e"
+    }
+  ],
+  "preserved_failures": {
+    "make001": "stock initial parser failure, parent29989/429fac/1; child43671reaped2; corrected in fresh002, noOx001",
+    "fault001": "harness bad binary/path collision after positive cases, parent86431/404ded/0 controller child46948 exit1; corrected fresh002",
+    "pipeline003": "no test dispatch: canonical CPU contention while own Dune8 live; parent1606e2/1 due missing CLOSED assumption; SHARED-NOT-STARTED preserved. Fresh004 follows actualDune terminal. No resource overlap or physical IO."
+  }
+}
