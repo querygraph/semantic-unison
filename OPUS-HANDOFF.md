@@ -5241,3 +5241,21 @@ anything or acquiredpool. Do not call these runtime failures or Rootrefusals.
 Goalactive, legacy result/conversion/outbound/baseline/containment remain work.
 
 Fresh V3 requests actually queued to Photo Root:01a15029-3b55-73b1-83ec-4eaa48f358cc, tool e9c57e/0. Durable doc/sol-current-requalification-v3-QUEUED.json. No runtimegrant or hold. Metadata commit02259bdd forkpushed; execution source456776d8 unchanged.
+
+## 2026-10-18 outbound successor source work isolated
+
+CURRENT SOURCE DEVELOPMENT worktree /Users/alexy/src/unison-outbound-accounting-20261018,
+branch implementation/outbound-accounting, starts fromf6472dc2. No source edits
+in frozen /Users/alexy/src/unison-decoded-input-20261018 execution closure while
+V3requests under review. Its execution456776d8/builds and metadataf647 stayvalid.
+No current ownedprocess/CPU/EXIO lease. Source audit/design only in
+doc/rpc-outbound-ownership-design.md: queue retention needs independent finite
+credits; producer serialization must reserve BEFORE allocating, separately;
+logical slice bytes != backing/heap/RSS. Immediate performOutput can drain other
+queued actions, so its returned promise is not earliest own-action settlement.
+Need distinct active/queued/drop/uncertain lifetimes and urgent control lane.
+
+V3 Root grants remain separate required runtime scheduling. Check exact three
+paths from frozen doc/sol-current-requalification-requests-v3.json; run any valid
+one-use command from FROZEN cwd/argv, never this mutable successor. Rootqueue
+01a15029-3b55-73b1-83ec-4eaa48f358cc; no automatic payload or SDK grant.
