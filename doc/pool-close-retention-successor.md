@@ -66,3 +66,14 @@ raise. The future creation carrier must cover this handoff as well, or prepare
 all fallible owner metadata before worker startup. A guard inside transaction
 admission cannot alone prove singleton ownership when creation happens outside
 that borrowed body. Preserve this distinction in tests and completion claims.
+
+Domain publication needs its own fixed fault coverage. The present constructor
+uses `domains := domain :: !domains` after `Domain.spawn`; this allocation can
+fail while the local returned handle is the only owner. Its fallback currently
+suppresses stop/join failures. A replacement must preserve both the local handle
+and previously installed handles, and must not clear either on ambiguous join.
+The qualified stock Domain.spawn implementation itself allocates its wrapper
+after Raw.spawn. Therefore do not claim arbitrary allocation-failure recovery
+inside the toolchain API from a caller-side ledger; distinguish API-returned
+handle qualification from unrecoverable runtime allocation failure. A sentinel
+FD or unchecked Obj cast is not an acceptable fabricated domain handle.
