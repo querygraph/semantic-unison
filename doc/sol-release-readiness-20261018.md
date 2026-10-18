@@ -150,3 +150,15 @@ retains explicit roots and charges. Four stock/Ox Make/Dune+selftests and31
 designated negatives/compiler passed, current581inputs verified (inventoryv19).
 Legacy result/conversion/outbound/baseline/whole-tree limits and final SOL
 transport/platform/performance acceptance remain separate.
+
+## Exact outbound slice correction
+
+[Output slice semantics](rpc-output-slice-validation.md) correct an inherited
+count/end mismatch observed by an original7B golden. Full-list/prequeue bounds,
+checked end/count arithmetic and empty noflush behavior pass actual four-route
+49,161-byte pipe controls. Four current stock/Ox Make+Dune+selftests and39 negative
+participants/compiler passed; all582 recorded inputs and actual binary/compiler
+hashes match (inventoryv20). Queued V3 source proposals were deferred unchanged
+pending fresh fixed-source IO qualification. Outbound allocation/retention,
+legacy/conversion lifetimes, whole-tree limits and complete SOL acceptance remain
+open; no SDK/Photo/pixel/performance/production claim is added.

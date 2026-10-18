@@ -37,3 +37,27 @@ installation failure, duplicate/independent owners, byte/count overflow,
 invalid slices, exact capacity, urgent progress and retained uncertainty. Use
 original tiny fixtures and designated safe mutants, then current stock/Ox builds
 and real admitted transport; no fuzz/sanitizer campaign or Photo payload grant.
+
+## Concrete first correction in progress
+
+The audit found an inherited count/end mismatch: fillBuffer passed a slice count
+to fillBuffer2, whose last argument is an absolute end. An actual original-source
+7B golden fails (offset2,count3 should send abc). The successor now validates the
+entire list before copying and each dump before queuing, derives checked ends,
+checks cumulative integer counts, and skips empty slices without flushing.
+Actual pipe controls cover direct, normal, idle and urgent writes across multiple
+buffers with production maybeFlush promises observed through settlement. Eight
+mutants pass stock/Ox focused controls; full builds/regression are active.
+This corrects byte semantics and validation only; it does not yet implement the
+queue/allocation/urgent credit ownership proposal above. Queued V3 source requests
+were explicitly deferred, originals preserved, pending a qualified fixed successor.
+
+## First correction qualified
+
+The count/end and whole-list/prequeue correction now passes four current stock/
+Ox Make/Dune+selftests and the39-negative/compiler union. Actual controller
+24512/2a3485/0/no session; each build/control child reaped0/groups absent/CPUclosed.
+All582 recorded inputs/compiler/binary hashes and tested-source hashes match.
+See rpc-output-slice-validation.md and tests/qualification/rpc-output-slices-actual-20261018.json.
+The queue/allocation ownership proposal remains unimplemented; this acceptance
+does not replace it or final actual transport/SOL/platform/performance acceptance.

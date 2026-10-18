@@ -5259,3 +5259,80 @@ V3 Root grants remain separate required runtime scheduling. Check exact three
 paths from frozen doc/sol-current-requalification-requests-v3.json; run any valid
 one-use command from FROZEN cwd/argv, never this mutable successor. Rootqueue
 01a15029-3b55-73b1-83ec-4eaa48f358cc; no automatic payload or SDK grant.
+
+## 2026-10-18 concrete outbound slice bug found and fixed — controls active
+
+ACTIVEworktree /Users/alexy/src/unison-outbound-accounting-20261018, branch
+implementation/outbound-accounting, uncommitted production fix. Source original
+fillBuffer2 takes absolute end but fillBuffer passes count. Original7B golden
+(__abc__,2,3) ACTUALLY rejected at designated witness: controller63737/1cf438/0
+(expected-rejection), child59647reaped1/groupabsent/CPU4closed, workspace
+/private/tmp/unison-output-slice-old-stock-20261018-001 preserved. Same code is
+in genuine upstream8772; no upstream patch/submission prepared (fork only).
+
+V3 source proposals DEFERRED/doNOTdispatch viaRootqueue01a1502e-bad1-7f60-932a-e5850af12d94,
+queue tool36f0f7/0; durable doc/sol-current-v3-source-deferral-output-slices-20261018.json
+pins frozenindex/observations without rewriting its bytes. No RootIOhold asked.
+Any crossed V3grant must be refused unstarted; no known-bug run. Fresh fixed
+source/request/workspaces needed after qualification.
+
+Fix converts count to checked end, validates complete slice list before first
+copy AND each dump before queuing, checked cumulative counts, zero-length noflush.
+No outbound resource budget yet implemented/claimed; serialization preallocation,
+queued ownership/urgent allowance/backing retention remain next.
+
+First fixed controller80271/997cce/exit1 closed child60214reaped1/tokensclosed: main
+positive program passed incl actual privatepipe across3bufferboundaries, but
+whole-list mutant surfaced failedLwt promise rather than sync exception. Fixture
+now actually awaits that failedwork before checking earlierprefix unchanged;
+production unchanged. Fresh focused controller41645/initial8e6979 ACTUALLY LIVE,
+stock thenOx, namespaceunison-output-slices-{stock,ox}-20261018-002,8mutants/compiler.
+Do not repeat active41645. Full4builds+39negativeunion stillpending, no runtime
+transport/SDK/Photo payload/EXIO or fullgoalclaim. Existing main/frozenhandoffs
+remain historical; this successor carries authoritative active source state.
+
+Output-slice focused controller41645/18e0dd/exit0/no session ACTUALLY CLOSED:
+stock60531/Ox60701 reaped0/groupsabsent/CPU4closed,8mutants/compiler. Stronger
+actual production queue+maybeFlush coverage then added, with ledger of returned
+flush promises (no state inference or duplicate flushing). Current controller
+89352/d9dbb6/exit0/no session ACTUALLY CLOSED: stock61256/Ox61418 reaped0/groups
+absent/CPU4closed,8mutants each plus exact49161B pipe output for directfill/normal/
+idle/urgent, each across3bufferboundaries. Before cleanup, actual writer/reader
+and every returned production maybeFlush promise are awaited. No copied/mocked
+write primitive. Pure range/overflow/full-empty/invalid-list prequeue controls pass.
+
+ACTUAL fullbuild+regression controller STARTED session24512, initial5b0b5b, nowlive.
+Four stock/Ox Make+Dune+selftests sequentialUnison8/max2compiler jobs, then8groups
+percompiler sequentialUnison4 (39designated negatives expected). Buildnamespace
+/private/tmp/unison-output-slices-{stock,ox}-{check,dune-check}-20261018-001;
+finalcontrols/private/tmp/unison-output-slices-{stock,ox}-{framing,body,decoded,stream,pending,result,errors,outbound}-20261018-004.
+Do not duplicate24512 or inferterminal from resultfiles/ps. Fullhash verification,
+finalevidence/commit and fixed-sourcefresh IO requests stillpending. No SDK/Adobe/
+Photo payload/EXIO used; ownCPUonly. V3 requests remain SOURCEDEFERRED (queue
+01a1502e-bad1) regardless of anycrossedgrant; no knownbugsource dispatch/replay.
+
+## 2026-10-18 exact outbound slice fix QUALIFIED — resources closed
+
+ACTUAL combined controller24512/2a3485/exit0/no session. All four stock/Ox
+Make+Dune+selftests and16current controlgroups passed;39 designated negatives/
+compiler. Each build/control child reaped0/othersabsent/CPU8or4closed. All582
+recorded inputs/compiler/binary hashes plus final tested-source hashes match.
+No current owner/EXIO/SDK/Photo payload or nativeUI use.
+
+Evidence tests/qualification/rpc-output-slices-actual-20261018.json133778B
+SHAbf2cc59f8d820776444d33b248c8476e63545c25d07dfb2059fa72fd62e82f71.
+Original failing7B golden63737/1cf438/0(expected rejection) with child59647/1
++old exact source+generated program hashes preserved; NOT original functionalpass.
+Fixed001 observer-fixture failure80271/997cce/1 preserved;002focused41645/18e0dd/0
+and strengthened00389352/d9dbb6/0 passed before final004union.
+Actual4route privatepipe49,161B comparedexact, 3bufferboundaries, production
+maybeFlush returnedpromises captured/awaitedbeforeonce-only independentcleanup.
+
+Count is converted to checked end; whole-list validation happens before anycopy
+and dump prequeue; checked cumulative arithmetic; empty slice doesnotforceflush.
+This is byte correctness/validation only. Queued-owner/bytes, pre-serialization
+allocation, backingstore/heap/RSS accounting remain substantive open work.
+Inventoryv20/readiness/outputslice doc updated. V3source requests explicitly
+deferred viaqueue01a1502e-bad1; preserve oldfiles and refuse anycrossedgrant
+unstarted. Next fixed-source V4 requests need newpins/workspaces/RootIOreview,
+never dispatch oldknownbugsource. Goalactive/fullscopeunchanged.

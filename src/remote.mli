@@ -198,7 +198,11 @@ val registerStreamCmd :
   (connection -> Bytearray.t -> int -> 'a) ->
   (connection -> 'a -> unit) ->
   connection -> (('a -> unit Lwt.t) -> 'b Lwt.t) -> 'b Lwt.t
-(** Optional nonnegative maximum custom encoded payload, excluding the RPC tag.
+(** Custom output triples are (buffer, offset, length), with a count rather
+    than an absolute end. Complete lists are validated before queuing/copying;
+    nonzero offsets and empty slices preserve their declared bytes. This does
+    not provide output allocation, queued-byte/owner or backing/RSS admission.
+    Optional nonnegative maximum custom encoded payload, excluding the RPC tag.
     Includes all custom codec fields. Endpoint derives separate -str/-args body
     caps, rejecting overflow at registration. Both stream and ordinary fallback
     caps apply before raw body allocation, independently of the outer endpoint

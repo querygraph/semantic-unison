@@ -1,0 +1,206 @@
+{
+  "scope": "Inherited nonzero output count/end bug corrected and complete-list/prequeue validation qualified. Outbound producer allocation/queued ownership/backing/baseline/containment and complete SOL acceptance remain open.",
+  "predecessor": {
+    "path": "/Users/alexy/src/unison-outbound-accounting-20261018/doc/owned-resource-remaining-inventory-20261018-v19.json",
+    "bytes": 12126,
+    "sha256": "ba5e2ee227d2e5f1f5015d8b511f56738c9a1012e60e724782e4fc43f26a56f0"
+  },
+  "source_sha256": {
+    "src/remote.ml": "7bb6e21facd3aebee62968e191c3c64424cd32a998cced4f3e8e989a828e68c6",
+    "src/remote.mli": "204c99c416090cc3febef270c4f2d38ba0520cbe96757e8835df287dffaf8352",
+    "src/ubase/umarshal.ml": "440160b481e90571f35383047b5fb1c78d59eef950774375234983309e42542e",
+    "src/ubase/umarshal.mli": "0ff24924e01d4fc2a430e4fc54d77ae3d5194959bc1122eb78cdf664bf987eba",
+    "src/copy.ml": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e",
+    "src/transfer.ml": "a128b305cd0b874c8bfc5a0873bd36fa495764ec162b2f4ca3c7dab21c696448",
+    "src/transfer.mli": "e4b8ac496e0aba764adb6971b9ee7b4ace7dfae0a2c8d16bff68006a1b0f1c6d",
+    "src/semanticRemote.ml": "1293a54a13df98e1a6712f7224322e512801c79d5dc279a77c57cf60bbb6fc16"
+  },
+  "qualified_local_async": [
+    "prepared pair/source before clone/open",
+    "tracked native parent acknowledgement",
+    "raw known close before native abort",
+    "complete worker/producer borrowed lifetime"
+  ],
+  "remaining": [
+    {
+      "file": "src/semanticSync.ml",
+      "functions": [
+        "with_file",
+        "try_local"
+      ],
+      "finding": "Synchronous reference/test-only raw descriptors remain separate; production capture/scalar merge now use prepared1/4slot owners. Full internal cache uncertainty remains below."
+    },
+    {
+      "file": "src/fsmonitor/solaris/watcher.ml",
+      "functions": [
+        "add_watch_children"
+      ],
+      "finding": "Separate legacy/platform raw directory/FEN callback finding, not an observed failure or automatically added runtime requirement."
+    },
+    {
+      "file": "src/copy.ml and src/transfer.ml",
+      "functions": [
+        "destinationFd",
+        "decompressor closures",
+        "receive",
+        "Rsync.rsyncDecompress"
+      ],
+      "finding": "Caller expected-size logical output allowance now qualified below. Fresh transport/publication workflow, per-command stream cap/workspace/baseline and physical IO accounting remain separate; logical exact EOF is not native settlement."
+    },
+    {
+      "file": "src/remote.ml",
+      "functions": [
+        "wait_for_reply",
+        "processStream",
+        "streamError",
+        "receivers",
+        "receiverLimits"
+      ],
+      "finding": "Pending waiters, scoped semantic results and stream-error table/ping borrowers now have explicit finite policies. Legacy returned values, converted reports/plans/global escapes, outbound buffers and arbitrary custom workspace/baseline still need separate lifetime/accounting; not complete heap/RSS containment."
+    }
+  ],
+  "separate_goal_work": [
+    "Aggregate decoded-object/conversion/outbound retention, including values/version lists/exceptions outliving raw consumers; remaining metadata/receiver-map/acquisition/baseline families",
+    "Complete metadata/conversion/depth/remaining acquisition and baseline families",
+    "Aggregate descendant FD/RSS containment and platform capability policy",
+    "Broader benchmark matrix and final consolidated integration/platform/review status"
+  ],
+  "qualified_remote_async": [
+    "complete synchronous producer borrowed lifetime",
+    "DirectoryOwner uncertainty recognized before pair/name cleanup",
+    "active cleanup and nested file/directory carrier controls plus exact old and missing-classifier rejections"
+  ],
+  "qualified_capture_merge_inputs": [
+    "one/four prepared slots before acquisition",
+    "independent once-only close; original and multiple uncertainty retention",
+    "80positive controls/2designated rejects stock+Ox; actual capture/saved-base/cache-hit exact merge; no aggregate FD/RSS or cache internal close qualification"
+  ],
+  "qualified_cache_joint": [
+    "rooted scope and per-resource nodes linked before acquisition",
+    "opaque directory owners and once-only read ledgers",
+    "ordinary work failure attempts independent closes; preserves original and combined causes",
+    "nested scan uncertainty keeps known quota/outer directory; future enabled cache calls refuse before acquisition",
+    "prepared temporary opening phase, identity-aware unlink journal, no namespace or numeric retry after uncertainty",
+    "monotonic quota and private recovery-base semantics preserved",
+    "20directed scenarios/compiler plus existing quota/storage/acquisition/full capture/scalar merge regressions; no SDK/Photo/actualtransport"
+  ],
+  "qualified_fixed_infrastructure": {
+    "notification_descriptors": 2,
+    "completion_buffer_payload_bytes": 4096,
+    "compatibility": "workspace preferences/usage unchanged; generic create remains zero-baseline",
+    "evidence": "tests/qualification/fixed-infrastructure-accounting-actual-20261018.json",
+    "limits": "Only explicit pipe/buffer planning; not all domain/transport/helper/native/legacy acquisition or process-tree limits"
+  },
+  "qualified_framed_decoder": {
+    "evidence": "tests/qualification/framed-decoder-bounds-actual-20261018.json",
+    "scope": "233checks/compiler plus actual in-process registration/reply/ticket/negative controls; same valid bytes, builtin preflight and selected per-decode charges only"
+  },
+  "qualified_rpc_headers": {
+    "evidence": "tests/qualification/rpc-header-input-actual-20261018.json",
+    "scope": "Independent endpoint-local max frame/raw-byte/incomplete-prefix-slot budgets; both compilers/Make+Dune/current329sources; synthetic positive and designated-negative controls.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_startup": {
+    "evidence": "tests/qualification/rpc-startup-input-actual-20261018.json",
+    "scope": "Finite field bytes include ignoredCR, fixed buffers reserved before reading, valid wire compatibility, empty-read fix; original synthetic controls,329current production inputs in stock/Ox Make+Dune.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_outer_frames": {
+    "evidence": "tests/qualification/rpc-outer-frame-actual-20261018.json",
+    "default_payload_bytes": 268435456,
+    "scope": "All shared packet reads use positive endpoint cap and minimum explicit cap. Actual tiny legacy request/reply/stream routes accepted and refused. No aggregate retained-object cap inferred.",
+    "current_regression_evidence": "tests/qualification/rpc-body-input-actual-20261018.json"
+  },
+  "qualified_rpc_body_inputs": {
+    "evidence": "tests/qualification/rpc-body-input-actual-20261018.json",
+    "scope": "Separate request/stream and reply lanes; raw tickets through actual consumer/output lifetime and recognized core/registered uncertainty. Current329sources in four builds; nine designated negative RPC participants/compiler; current Runtime retention and fixed census regressions. Not aggregate decoded heap/native FD/RSS."
+  },
+  "qualified_bounded_decoded_arguments": {
+    "evidence": {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/qualification/rpc-decoded-request-owner-actual-20261018.json",
+      "bytes": 21688,
+      "sha256": "1124df8cd2d98430828bf34c9312d2709d537a185812fd79f076ed8c9d933c45"
+    },
+    "scope": "Independent nonwaiting slot/selected byte/element reservations, explicit value root through actual scope/handler/queued output and typed/classifier uncertainty. Four stock/Ox Make+Dune builds; thirteen designated negative participants/compiler; seven fixed RPC waiter/timer/socket controls/compiler. Not whole heap/RSS or arbitrary global escapes."
+  },
+  "qualified_regular_legacy_decoded_arguments": {
+    "evidence": {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/qualification/rpc-legacy-decoded-owner-actual-20261018.json",
+      "bytes": 12505,
+      "sha256": "8df0166c9661fce2b71faa07a472791170128576fc4e57c5774302b9393a60c1"
+    },
+    "scope": "Ordinary registerServerCmd/Host/Root argument path shares bounded-command lane. Four builds/current sources,14direct negative controls/compiler and current seven bounded shared-owner waiter faults/compiler. Compact2000-unit legacy input passes; malformed/element refusals do not dispatch. Not client-result lifetime/RSS."
+  },
+  "qualified_transfer_instruction_framing": {
+    "evidence": {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/qualification/transfer-token-framing-actual-20261018.json",
+      "bytes": 14794,
+      "sha256": "a972850d24b4487a52bce631a7a3a63eeacc6d7dabdfedb60eff2906c95594a1"
+    },
+    "scope": "Explicit five-byte field/Copy view bounds, generic/rsync complete slice syntax preflight, checked basis/fallback/range/read counts.118checks+7negative participants/compiler; four current builds/selftests and RPC14regressions/compiler. No actual transport/APFS/SDK/Photo or output-amplification cap."
+  },
+  "qualified_transfer_output_allowance": {
+    "evidence": {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/qualification/transfer-output-allowance-actual-20261018.json",
+      "bytes": 14031,
+      "sha256": "087e84b33992e0e7f5c4ed02d33098075795faf257d100280c7d82a93602d2ff"
+    },
+    "scope": "One opaque owner-loop allowance per Copy payload from expected size minus append prefix; resource physical headers excluded. Complete-frame precharge, exact EOF, no refund after IO failure, logical-end check before lazy reopen.163checks+9negative controls/compiler; current four builds/selftests. No physicalIO/RSS/publication/transport/native clone claim."
+  },
+  "qualified_known_stream_input_caps": {
+    "evidence": {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/qualification/stream-command-input-cap-actual-20261018.json",
+      "bytes": 14981,
+      "sha256": "361ac49f3333b8913d8487728da9ef72efe4e32c44a47986ac4453146225427d"
+    },
+    "scope": "Production Copy producer65500+fileID5 with role-tag body caps65535/65536 before allocation. Optional declaration checked for both routes.16RPC negatives+167transfer checks9negatives/compiler and four current builds. Not all-custom heap/workspace, unknown commands, transport/native/OS memory proof."
+  },
+  "qualified_pending_reply_slots": {
+    "evidence": "tests/qualification/rpc-pending-reply-slots-actual-20261018.json",
+    "default": 256,
+    "maximum": 65536,
+    "scope": "Pending registry entries only, not returned decoded values/outbound buffers/error retention/full heap/RSS/actual transport or full SOL acceptance."
+  },
+  "qualified_scoped_client_results": {
+    "evidence": "tests/qualification/rpc-scoped-client-results-actual-20261018.json",
+    "policy": {
+      "default_mib": 256,
+      "default_elements": 1048576,
+      "default_slots": 256,
+      "maximum_slots": 65536,
+      "independent_request_lane": true,
+      "wire_unchanged": true
+    },
+    "scope": "Scoped API selected builtin decode charges and explicit roots through actual consumer settlement. Four semantic bounded callers migrated; legacy returned values/conversion copies/global escapes/outbound/error/wholeheap/RSS/finaltransport/SOL acceptance remain separate."
+  },
+  "qualified_stream_errors": {
+    "evidence": "tests/qualification/rpc-stream-error-ownership-actual-20261018.json",
+    "policy": {
+      "default_mib": 8,
+      "default_slots": 256,
+      "maximum_slots": 65536,
+      "borrowed_ping_counted": true,
+      "known_settlement_releases_once": true,
+      "uncertainty_retains_explicit_root": true
+    },
+    "scope": "Stored errors and actual ping borrowers bounded by count and selected known string fields; standard causes preserved, arbitrary custom exceptions propagate unchanged early. Not exception construction/fullheap/RSS/outbound/legacy-result/actualtransport/fullSOL acceptance."
+  },
+  "qualified_output_slices": {
+    "evidence": "tests/qualification/rpc-output-slices-actual-20261018.json",
+    "scope": "Exact nonzero-offset output count/end semantics, complete-list/prequeue range checks, cumulative integer checks and empty noflush behavior only. No queued-memory/serialization-preallocation/backing/RSS/actualnetwork/SDK/Photo/fullSOL claim.",
+    "pipe_golden": {
+      "bytes_per_mode": 49161,
+      "modes": [
+        "direct fill",
+        "normal",
+        "idle",
+        "urgent"
+      ],
+      "source_offset": 5,
+      "crosses_output_buffers": 3,
+      "actual_copy_write_primitives": true,
+      "production_maybeFlush_promises_awaited": true,
+      "no_close_retry": true
+    }
+  }
+}

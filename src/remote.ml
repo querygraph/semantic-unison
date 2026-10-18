@@ -235,30 +235,46 @@ let rec sendOutput conn =
            conn.buffer len conn.buffer 0 conn.length;
        Lwt.return ()))
 
-let rec fillBuffer2 conn s pos len =
+let output_slice_end s pos len =
+  let available=Bytearray.length s in
+  if pos<0 || len<0 || pos>available || len>available-pos then
+    invalid_arg "RPC output slice";
+  pos+len
+let output_length_add total len =
+  if total<0 || len<0 || len>max_int-total then
+    invalid_arg "RPC output byte count";
+  total+len
+let output_slices_length parts =
+  List.fold_left(fun total(s,pos,len)->
+    ignore(output_slice_end s pos len);output_length_add total len)0 parts
+
+(* This helper receives an absolute end, while public slices carry a count. *)
+let rec fillBuffer2 conn s pos endpos =
+  if pos=endpos then Lwt.return () else
   if conn.length = bufferSize then
     BorrowedWork.bind (fun () -> sendOutput conn) (fun () ->
-      fillBuffer2 conn s pos len)
+      fillBuffer2 conn s pos endpos)
   else begin
-    let l = min (len - pos) (bufferSize - conn.length) in
+    let l = min (endpos - pos) (bufferSize - conn.length) in
     Bytearray.blit_to_bytes s pos conn.buffer conn.length l;
     conn.length <- conn.length + l;
-    if pos + l < len then
-      fillBuffer2 conn s (pos + l) len
+    if pos + l < endpos then
+      fillBuffer2 conn s (pos + l) endpos
     else
       Lwt.return ()
   end
 
-let rec fillBuffer conn l =
-  match l with
-    (s, pos, len) :: rem ->
-      assert (pos >= 0);
-      assert (len >= 0);
-      assert (pos <= Bytearray.length s - len);
-      BorrowedWork.bind (fun () -> fillBuffer2 conn s pos len) (fun () ->
-        fillBuffer conn rem)
-  | [] ->
-      Lwt.return ()
+let rec fillBufferRec conn parts =
+  match parts with
+    (s,pos,len)::rest ->
+      BorrowedWork.bind(fun()->fillBuffer2 conn s pos (pos+len))(fun()->
+        fillBufferRec conn rest)
+  | [] -> Lwt.return ()
+let fillBuffer conn parts =
+  (* Check the entire list before copying even its first byte. Subtraction
+     checks make the subsequent end conversion safe without integer wrap. *)
+  ignore(output_slices_length parts);
+  fillBufferRec conn parts
 
 let rec flushBuffer conn =
   if conn.length > 0 then
@@ -479,11 +495,13 @@ let connNeq conn conn' = not (connEq conn conn')
 
 (* Send message [l] *)
 let dump conn l =
+  ignore(output_slices_length l);
   performOutput
     conn.outputQueue Normal (fun () -> fillBuffer conn.outputBuffer l)
 
 (* Send message [l] when idle *)
 let dumpIdle conn l =
+  ignore(output_slices_length l);
   performOutput
     conn.outputQueue Idle (fun () -> fillBuffer conn.outputBuffer l)
 
@@ -492,6 +510,7 @@ let dumpIdle conn l =
    message is written at a time (the write will succeed as the pipe
    will not be full) *)
 let dumpUrgent conn l =
+  ignore(output_slices_length l);
   performOutput conn.outputQueue Urgent
     (fun () ->
        BorrowedWork.bind (fun () -> fillBuffer conn.outputBuffer l) (fun () ->

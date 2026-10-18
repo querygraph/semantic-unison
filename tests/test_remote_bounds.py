@@ -19,7 +19,7 @@ def main():
     parser.add_argument('build', type=Path)
     parser.add_argument('--report', type=Path)
     parser.add_argument('--compiler', default=os.environ.get('OCAMLOPT', 'ocamlopt'))
-    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result','errors'), default='all')
+    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result','errors','outbound'), default='all')
     args = parser.parse_args()
     repository = Path(__file__).resolve().parent.parent
     build = args.build.resolve() / "src"
@@ -48,7 +48,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_stream_errors.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_output_slices.ml').read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_stream_errors.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -57,6 +57,7 @@ def main():
                       compiler=compiler, build_snapshot=str(build.parent),
                       tested_sources={'src/remote.ml': sha(repository/'src/remote.ml'),
                                       'tests/remote_bounds.ml': sha(repository/'tests/remote_bounds.ml'),
+                                      'tests/remote_output_slices.ml': sha(repository/'tests/remote_output_slices.ml'),
                                       'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/remote_startup_bounds.ml': sha(repository/'tests/remote_startup_bounds.ml'),
                                       'tests/remote_packet_bounds.ml': sha(repository/'tests/remote_packet_bounds.ml'),
@@ -295,6 +296,28 @@ def main():
                     c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
                     assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
                     record['stream_error_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
+            if args.negative_family in ('all','outbound'):
+                record['output_slice_negatives']={}
+                for label,needle,replacement,witness in [
+                    ('output-count-end','fillBuffer2 conn s pos (pos+len)','fillBuffer2 conn s pos len','DESIGNATED output slice length changed'),
+                    ('output-whole-list','  ignore(output_slices_length parts);','  (* designated whole-list preflight omitted *)','DESIGNATED invalid list copied earlier prefix'),
+                    ('output-normal-prequeue','let dump conn l =\n  ignore(output_slices_length l);','let dump conn l =','DESIGNATED invalid output was queued'),
+                    ('output-idle-prequeue','let dumpIdle conn l =\n  ignore(output_slices_length l);','let dumpIdle conn l =','DESIGNATED invalid output was queued'),
+                    ('output-urgent-prequeue','let dumpUrgent conn l =\n  ignore(output_slices_length l);','let dumpUrgent conn l =','DESIGNATED invalid output was queued'),
+                    ('output-empty-flush','  if pos=endpos then Lwt.return () else','  (* designated empty slice check omitted *)','DESIGNATED empty slice flushed buffer'),
+                    ('output-total-overflow','if total<0 || len<0 || len>max_int-total then','if false then','DESIGNATED output length arithmetic wrapped'),
+                    ('output-range','if pos<0 || len<0 || pos>available || len>available-pos then','if false then','DESIGNATED invalid output slice accepted')]:
+                    private=work/label;private.mkdir(mode=0o700)
+                    assert source.count(needle)==1,(label,source.count(needle))
+                    (private/'remoteForTest.ml').write_text(controlled(source.replace(needle,replacement,1)))
+                    (private/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+                    of=['-I',str(private),*flags]
+                    for argv in [[compiler,*of,'-c','remoteForTest.ml'],[compiler,*of,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','negative']]:
+                        c=subprocess.run(argv,cwd=private,capture_output=True,text=True,timeout=30)
+                        record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+                    c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
+                    assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
+                    record['output_slice_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
             record['status']='passed'
         finally:
             if args.report:
