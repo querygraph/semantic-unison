@@ -23,12 +23,18 @@ fault controls,35stock+38Ox contained calls. See
 The combined60s wrapper attempt timed out and is preserved as incomplete; split
 compiler runs completed normally. No camera payload was used in these tests.
 
-The exact one-input [camera observation request](camera-components-request-v1.json)
-is prepared and queued for separate source review/admission. It is advisory
-component role/hash coverage only. Its sources remain frozen; neither the request
-nor this evidence index authorizes payload IO. Missing MakerNote meanings do not
-block exact opaque preservation or the qualified deployment scope. No full-goal
-completion or merge is claimed.
+Current-candidate mixed-peer transport now PASSED/CLOSED: four stock/Ox versus
+exact retained older-fork directions, seed/update/noop,12CLI and all separate
+client/server/supervisor/pump settlements. Actual owner38627/33bfbc/0/no session;
+[sealed evidence](../tests/qualification/mixed-peer-actual-20261017.json). This
+older fork already has producer binding, so arbitrary upstream/capability-absent
+compatibility is not inferred. Three earlier failed attempts remain preserved.
+
+The refreshed [camera knowledge request](camera-knowledge-request-v2.json) binds
+component hashes plus exiftool-rs typed MakerNote observations. V1 is stale and
+unstarted, preserved unchanged. V2 is prepared for separate Root review/admission;
+no camera payload opened or grant inferred. Missing MakerNote meanings do not
+block exact opaque preservation. Full goal completion and merge are not claimed.
 
 
 Latest consolidated PR13 source additionally fixes cold report cancellation and

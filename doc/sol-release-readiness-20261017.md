@@ -18,7 +18,7 @@ exhaustive private-field interpretation is not a deployment gate.
 | 5 Concurrent modification | Source/target witnesses, queued completion cancellation; new report source/head/parent/permission fences | Current-object384-job apply/cancellation controls passed per compiler; precise source bindings remain in the receipts. No hostile-writer atomic namespace CAS claim. |
 | 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Owned backend plus modern bound local/remote semantic and ordinary local/rsync callers have composed controls. Legacy named/unbound/older-peer and raw/channel close paths remain separately scoped. Hardware power-loss and every fault cross-product are unproved. |
 | 7 Filesystems | APFS ordinary clone/range path, cross-volume APFS/HFS+ historical exact controls, named property controls | No ZFS/ReFS implementation/runtime, physical sharing/write amplification or exhaustive sparse/ACL/compression claim. Fresh IO controls require a new exact window. |
-| 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Fresh candidate mixed-version transport evidence needed; UI tested through its production entry callback, not a manual GUI session. |
+| 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Current exact-retained-fork mixed matrix passed4cases/12CLI; arbitrary upstream/capability-absent interop remains unproved; UI tested through its production entry callback, not a manual GUI session. |
 | 9 Parallelism/resources | Checked worker closures, pool1/2/4/8 parity, source/accounted CPU/queue/FD controls, shared SDK tests | Current-object pool1/2/4/8 parity and384-job scheduling controls passed; see integration-worker-parity/apply receipts. Credits and bounded samples are not hard OS-thread/RSS caps or calibrated speedup. |
 | 10 Semantic merge | Conservative scalar XMP policy and built-in two-replica materialization, stale/missing-base and conflict refusal | Current scalar XMP25+343+4 controls passed per compiler; full receiving remains separately admitted. General RDF/growing/rendering merges remain unsupported. |
 | 11 Generic cloned transfer | Reused upstream engine, same/shifted ranges, clone-off/fallback, EOF/no-op controls, ordinary camera fallback | Current candidate transport/property regression and precise capability/mount limits; no physical-savings claim. |
@@ -30,12 +30,14 @@ exhaustive private-field interpretation is not a deployment gate.
 318 recorded production-source pins for each current stock/Ox build: no changed
 pins, both recorded build/selftest exits0. This rebinds those historical builds;
 it does not rerun transport or establish every filesystem/property behavior.
-Both queued camera/mixed-peer request source and prerequisite sets also matched,
-with admissions and workspaces absent at the recorded observation. Neither request
-has been dispatched by this owner. Exact Root admission remains required.
+That metadata snapshot is historical. Mixed-peer V4 subsequently passed four
+cases/12CLI under a fresh admission; [actual sealed evidence](../tests/qualification/mixed-peer-actual-20261017.json)
+binds all groups/FD closure and actual owner38627/33bfbc/0. Camera V1 became stale
+after exiftool integration; V2 knowledge successor is prepared but not admitted.
 
 The next evidence is current-candidate transfer/property behavior, exact retained-
-version interoperation, and the separately scoped real-camera component report.
+version interoperation, and the separately scoped real-camera component+MakerNote report. Exact retained-
+fork mixed interoperation is now evidenced, with the limits below.
 The older peer already supports semantic-delta/producer binding, so its matrix
 cannot prove arbitrary upstream or capability-absent fallback. Deployment is not
 waiting for exhaustive MakerNote interpretation or decoded-pixel equivalence of
