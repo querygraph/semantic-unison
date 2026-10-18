@@ -1,0 +1,56 @@
+{
+  "scope": "Bounded source inventory after prepared-directory and Os/Files successors, not a claim of whole resource audit or observed leak. No new runtime/SDK/Photo/payload operation.",
+  "source_sha256": {
+    "src/semanticSync.ml": "5f520ef521c9360ce80908f11807fc966d1d986f388885742eadb25a883d14a5",
+    "src/semanticMergeCache.ml": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+    "src/fsmonitor/solaris/watcher.ml": "5002d3876bd8dcc7ed7fa8d4505b1e25d07d70d865476fb6249a0f49d27b77ff",
+    "src/fsmonitor/solaris/Makefile": "a95ba3c783d72fa1c7c2cce4873250f32c9c4a2d0d0151e88af796d6fea7578f",
+    "src/fspath.ml": "d6bdaacbdcdf125562166bc7de6d871b5c631aa6b4f78bd02f56c04a0f56417c",
+    "src/system/system_generic.ml": "f1179d3802103f159f0b57dd60b68f8eb40ecb08c3375e2066d0027d5fe94c9a"
+  },
+  "remaining": [
+    {
+      "file": "src/semanticSync.ml",
+      "functions": [
+        "with_file",
+        "try_local",
+        "close_transaction",
+        "register_transaction",
+        "retain_source_fd",
+        "with_borrowed",
+        "close_publication",
+        "create_bound_transaction",
+        "capture_common_base_async",
+        "merge_local_async_with_cache"
+      ],
+      "finding": "Raw/list descriptor ownership and close_fd_noerr remain; some metadata allocation follows acquisition; transaction cleanup/native abort/unlink and pre-call loose_parent flag require joint prepared ownership/native acknowledgement/borrower retention qualification. Remote successor is not proof for this local source."
+    },
+    {
+      "file": "src/semanticMergeCache.ml",
+      "functions": [
+        "empty_directory",
+        "reserve",
+        "read",
+        "store",
+        "load"
+      ],
+      "finding": "Three raw directory scans; quota/read/temp-file closes may be ordinary or swallowed, and store cleanup can unlink a temporary name after close uncertainty. Must preserve nested quota locks/descriptors plus directory carriers and best-effort behavior without converting unknown ownership to a cache miss."
+    },
+    {
+      "file": "src/fsmonitor/solaris/watcher.ml",
+      "functions": [
+        "add_watch_children"
+      ],
+      "finding": "Raw directory acquisition/closedir with callback/FEN association lifetime and standalone link dependency; separate platform-native qualification needed."
+    }
+  ],
+  "not_live_findings": [
+    "Fspath.opendir text is inside a historical comment, not active code.",
+    "Test-only directory handles are separate from production consumers.",
+    "Prepared System_generic wrappers do not qualify every complete caller lifetime."
+  ],
+  "separate_goal_work": [
+    "Aggregate descendant FD/RSS and complete acquisition/baseline accounting",
+    "Broader benchmark matrix and final consolidated integration/platform status"
+  ]
+}

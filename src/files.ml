@@ -1294,14 +1294,13 @@ let rec diff root1 path1 ui1 root2 path2 ui2 showDiff id =
 
 (* Taken from ocamltk/jpf/fileselect.ml *)
 let get_files_in_directory dir =
-  let dirh = System.opendir dir in
-  let files = ref [] in
-  begin try
-    while true do files := dirh.System.readdir () :: !files done
-  with End_of_file ->
-    dirh.System.closedir ()
-  end;
-  List.sort String.compare !files
+  let files = System.with_directory dir (fun dirh ->
+    let files = ref [] in
+    try
+      while true do files := dirh.System.readdir () :: !files done;
+      !files
+    with End_of_file -> !files) in
+  List.sort String.compare files
 
 let ls dir pattern =
   Util.convertUnixErrorsToTransient

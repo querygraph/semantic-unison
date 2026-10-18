@@ -73,3 +73,40 @@ and refuses before that context is used.
 All owned groups and CPU scopes closed; no EXglobal/Photo/SDK input. Next review
 legacy Os.childrenOf and Files.get_files_in_directory complete borrowers, rather
 than inferring their exception cleanup from the prepared underlying wrapper.
+
+## Actual legacy consumer checkpoint — 2026-10-18
+
+Os.allChildrenOf now scopes enumeration through Fs.with_directory. A prepared
+entered-callback flag distinguishes acquisition ENOENT (legacy Windows empty
+listing) from a later readdir ENOENT, which must remain an error. Files listing
+uses System.with_directory so non-EOF exceptions also attempt known close or
+propagate retained uncertainty. Sorting/filtering and the directory record
+interface remain unchanged. Actual qualification: tests/qualification/directory-consumers-actual-20261018.json.
+Both compilers pass24 current cases and reject exact historical whole Os/Files
+modules at the designated borrower-retention assertion. Current stock/Ox Make
+and Dune selftests pass on329 production hashes. Known names/filtering, missing
+directory versus read ENOENT and FD census remain correct; uncertain closes keep
+the actual Runtime device/admission borrower pending without retry.
+
+The initial test label failure and the Ox combined60s timeout are preserved.
+Splitting compiler participants did not extend any deadline. All groups and CPU
+scopes closed, no EXIO/SDK/Photo input. Unknown fault resources settle only at
+process exit; this is not global caller/platform or aggregate FD/RSS proof.
+
+A broader source search found additional unconverted directory/FD owners:
+SemanticMergeCache.empty_directory, initial quota scan and shard-capacity scan
+use raw Unix directory handles. Its quota/read/temporary-record FD cleanup also
+has ordinary/suppressed close failures; temporary-name unlink and best-effort
+cache behavior need a joint ownership review. SemanticSync local transactions/publication, capture_common_base_async
+and merge_local_async_with_cache still have separate raw descriptors/list adoption
+and close_fd_noerr paths; the local native parent uses the old pre-call transfer
+flag and must adopt the qualified tracked acknowledgement without changing legacy ABI. Those are source-control-flow findings, not observed
+successful-run leaks. Do not fix directory close in isolation and then allow an
+outer quota/borrower to retire or unlink a name on the resulting carrier.
+
+The Solaris watcher add_watch_children is another standalone raw opendir/closedir
+consumer with its own FEN callback/association lifetime and link dependencies.
+Fspath's apparent raw opendir definition is commented historical documentation,
+not an executed consumer. Fs/System wrappers and test-only direct handles must be
+distinguished from these live production paths. No Solaris/Windows runtime or
+cache ownership qualification follows from the present Os/Files change.

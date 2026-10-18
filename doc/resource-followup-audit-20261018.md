@@ -43,15 +43,22 @@ legacy unadmitted manifests. Both stock/Ox Make/Dune and actual fixed directory/
 tree/Runtime regressions are qualified in directory-owner-actual-20261018.json.
 See opaque-directory-ownership.md for exact scope and preserved failed controls.
 
-This does not complete every directory consumer. Next audit Os.childrenOf and
-Files.get_files_in_directory exception paths: the former legacy wrapper can lose
-the original read error on uncertain close, while the latter only closes on EOF.
-Their borrowed scopes must not retire on an ordinary prefix while a known-open or
-uncertain directory remains. Prepared System wrappers alone do not prove those
-callers' complete lifetimes. Do not guess numeric FD identities for directory
-objects, retry uncertain closes, or infer native Windows runtime from a Darwin
-signature compile. Aggregate descendant FD/RSS and full baseline accounting remain
-separate.
+Os.childrenOf and Files.ls now use the scoped directory wrapper; source329
+stock/Ox Make/Dune/selftests and48 current/4historical directed controls pass in
+directory-consumers-actual-20261018.json. Acquisition ENOENT keeps legacy empty
+listing behavior while post-entry read ENOENT propagates. Actual Runtime device/
+transaction borrowers retain on close uncertainty and do not retry handles.
+
+The bounded broader search is pinned in owned-resource-remaining-inventory-20261018.json.
+Next source work is SemanticSync local raw-pair/source/parent/transaction ownership,
+where remote handoff qualification cannot be reused as proof of the local caller.
+Merge-cache directory/quota/record descriptors and temporary-name cleanup require
+joint retention so a nested directory carrier cannot trigger ordinary outer close
+or unlink. Solaris FEN enumeration is a separate legacy/platform finding, not an
+inferred executed failure or an automatic new platform runtime requirement.
+Fspath's apparent raw opendir is historical commented text, not active code.
+Aggregate descendant FD/RSS, full baseline accounting and broader/final integration
+remain open. No prior successful-run leak is inferred from these source findings.
 
 ## Original native/remote ownership inventory (historical)
 
