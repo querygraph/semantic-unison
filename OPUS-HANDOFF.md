@@ -5367,3 +5367,5 @@ unchanged12/12/54CLI, Unison00..07+existingEXglobal only, noSDK/Adobe/camera/Pho
 UI/compiler/performance/retry/automatic successor/18borrow. V3 sourceproposals
 remain deferredqueue01a1502e-bad1, originalbytesunchanged; doNOTdispatch crossed
 V3grant or oldV2. Only fresh fixedV4 can be scheduled. EntireSOLgoal stillactive.
+
+Fixed V4 requests ACTUALLY queued:01a15045-55f3-7762-9e16-57271a54d029, queue tool9f063d/0; durable doc/sol-fixed-requalification-v4-QUEUED.json. Source72560ca4, metadata4d480dc3. No grant/dispatch/hold; source frozen while under review. Next source development must use a successor worktree.
