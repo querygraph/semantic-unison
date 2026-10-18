@@ -1,0 +1,273 @@
+{
+  "scope": "Remote complete synchronous producer lifetime and nested DirectoryOwner classification before candidate/native-name cleanup.8current+4designated rejections;24pair+8native+64final handoff regressions. Generated8192B DNGs/in-process planner only, no actual transport/SDK/Photo/camera/EXIO.",
+  "build_parent": {
+    "session": 15712,
+    "chunk": "76dc3e",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "directed_parent": {
+    "session": 42952,
+    "chunk": "ee7b4f",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "regression_parent": {
+    "session": 76941,
+    "chunk": "7cd338",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "ox-check": 329,
+    "stock-dune-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock/directed": {
+      "pid": 39252,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 39252,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "ox/directed": {
+      "pid": 39771,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 39771,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "pair": {
+      "pid": 40721,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 40721,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "native": {
+      "pid": 41277,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 41277,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "handoff": {
+      "pid": 41346,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 41346,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    }
+  },
+  "sources": {
+    "src/semanticRemote.ml": "9e0ea03b144e27801c945daf74c7b762940e2ad508d335c6b11ed3a7c0e333fb",
+    "src/semanticRemote.mli": "16c845d3f8fc45e0c183ac0aa2f380583bc6dc497e9da48ceb5ba2a5d40f38b8",
+    "src/directoryOwner.ml": "e0051a6e0349221a2318a899f4890b4cf1521968248dfbccd2a7d1c0b5fcbd43",
+    "src/directoryOwner.mli": "55d12e4bf55240d7b69ad69017e20889a1e7d9b40fe549128ff151084a246174",
+    "src/notificationPipe.ml": "1567344b9ea1a8945725807b91f448835e1b65c5be6e2bc32ea451304df2b938",
+    "src/notificationPipe.mli": "0abb7012db00eb4fae38a631fce653bcf3b53b868132b530e2245aad2d51ae8f",
+    "tests/resource_close/remote_producer_run.py": "c7b0e05e63266734b77bfde7bb29aa24ba833b00c85614a1569ac89a6b066429",
+    "tests/resource_close/remote_producer_test.ml": "6e1c97487ff4323652144e1ce1919ff9b8cd2e98034311a73b7a5b83f8a78369",
+    "tests/resource_close/remote_producer_fault.ml": "23bcdf37eb0f81c605769964ca421ffba5070b355cf2aa436c3bbd079da2be36",
+    "tests/resource_close/remote_pair_run.py": "ab07f87690e9b6452092fbb9aa578875ed82d1f7838453258df770ec95e2ae09",
+    "tests/resource_close/remote_pair_test.ml": "e67cd9173f62e828cdebb0270f2860af6fae053facf5d48ce1b682be1a358528",
+    "tests/remote_publication_owned/probe.ml": "6526dffc47cdff4f6693c4adfa6cb610728241f8f423c35c8e845afb7ea123cd",
+    "tests/local_publication_owned/handoff_controls.py": "15ed378265a192ff0c88c47e9837ec4c573173b60db017016329f7c4353f82b9",
+    "tests/test_semantic_handoff.py": "4c928a07235e2b0d519773ea01c058e552e5802a21baa84622fb0b0b10cb6b49",
+    "doc/owned-resource-remaining-inventory-20261018-v3.json": "1c0c5d7d3685fe2903d6e1f9c584ab0c1cc80a525507db25edd28e8fddab1734"
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-stock-check-20261018-001/RESULT.json",
+      "bytes": 58152,
+      "sha256": "c92f6dd40798d547a2508e7e35d27d5a6dec0d4e797305a4d0efc38f759ffb67"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c4cd4768c4a93bb1ce0aa698ae7bb29172a42367c91aa7e1c19d6bd8b513650e"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-ox-check-20261018-001/RESULT.json",
+      "bytes": 58158,
+      "sha256": "c0b73918b0831446443956c86f8202fce5c8cc463783881af0dd5c6316794cc9"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "9fb2311c9a3d9c1a36ca39dbcde4f5acffd4a5d5cb3ce00eb8734e777c4f82e4"
+    },
+    "stock-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-stock-dune-check-20261018-001/RESULT.json",
+      "bytes": 58220,
+      "sha256": "5f368b90d5da7b5a7703b7b9c589a62d0cdb933beecc358e4af5e489508f2fe6"
+    },
+    "stock-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "35cea9716323d2aeeaf0c1b007b2cade3ae22da6db338d13f75b84f35518630d"
+    },
+    "ox-dune-check/RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-ox-dune-check-20261018-001/RESULT.json",
+      "bytes": 58224,
+      "sha256": "26a63dee29faa3f5469a30adcbe02b4c18dca9182b12a4384381c97847785fc5"
+    },
+    "ox-dune-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "2084f92c71129df75b00f73f0e87e6ec62d37f3c53c1f81eb19c69acdfebf45a"
+    },
+    "stock/directed/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-fault-stock-20261018-001/CONTROL-RESULT.json",
+      "bytes": 198985,
+      "sha256": "2d4b68574da805d6ffcdd6026769547c89b3c0540c772b97e2f2819dccde47ec"
+    },
+    "stock/directed/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-fault-stock-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "f13d659249a31998410406c99f87fc8075acd9a3a2eb3bec91f89f8e6322ec45"
+    },
+    "stock/private/current_remote.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-b1hmpv4g/current_remote.ml",
+      "bytes": 41715,
+      "sha256": "1ed4fcd5ec2b296fa0e193b93fe8a2a5bd7e386a14f2681226fa2207b226efac"
+    },
+    "stock/private/historical_remote.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-b1hmpv4g/historical_remote.ml",
+      "bytes": 41464,
+      "sha256": "d088cbf072364e71fe70a0d650bef491683a901d4bc5fe95427dbde9a682527b"
+    },
+    "stock/private/missing-directory-classifier.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-b1hmpv4g/missing-directory-classifier.ml",
+      "bytes": 41686,
+      "sha256": "bd2e216fdc8f707d0e243ee6d554fa584a2cb095aad1ca464edba9d0435ad0a4"
+    },
+    "stock/private/directoryOwner.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-b1hmpv4g/directoryOwner.ml",
+      "bytes": 2940,
+      "sha256": "e29efa7072468e45aebbd24595d95574ddcb6d03c176ea5d8a9156ee123b1a8f"
+    },
+    "ox/directed/CONTROL-RESULT.json": {
+      "path": "/private/tmp/unison-remote-producer-fault-ox-20261018-001/CONTROL-RESULT.json",
+      "bytes": 200996,
+      "sha256": "03a4b76607520a5197056c1b1a1b03c0738adc6a0a94b0447ebffbbec84ff2c4"
+    },
+    "ox/directed/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-fault-ox-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "64fdeb3478797a4a8eac991f686afcd5b522954657a0a843765901e2b1798349"
+    },
+    "ox/private/current_remote.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-hiw1ydmo/current_remote.ml",
+      "bytes": 41715,
+      "sha256": "1ed4fcd5ec2b296fa0e193b93fe8a2a5bd7e386a14f2681226fa2207b226efac"
+    },
+    "ox/private/historical_remote.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-hiw1ydmo/historical_remote.ml",
+      "bytes": 41464,
+      "sha256": "d088cbf072364e71fe70a0d650bef491683a901d4bc5fe95427dbde9a682527b"
+    },
+    "ox/private/missing-directory-classifier.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-hiw1ydmo/missing-directory-classifier.ml",
+      "bytes": 41686,
+      "sha256": "bd2e216fdc8f707d0e243ee6d554fa584a2cb095aad1ca464edba9d0435ad0a4"
+    },
+    "ox/private/directoryOwner.ml": {
+      "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-remote-producer-hiw1ydmo/directoryOwner.ml",
+      "bytes": 2940,
+      "sha256": "e29efa7072468e45aebbd24595d95574ddcb6d03c176ea5d8a9156ee123b1a8f"
+    },
+    "pair/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-pair-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "96f0f18be8796a025bb54bd856f8e8c428f7480e9d2a385aa6d44127c971997e"
+    },
+    "pair/RESULT": {
+      "path": "/private/tmp/unison-remote-producer-pair-20261018-001/CONTROL-RESULT.json",
+      "bytes": 158403,
+      "sha256": "75b0e45a56ae665aa77fbf2f5381f152e99b0c4a452bf56a6ec6fffa34eb2ba6"
+    },
+    "native/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-native-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "f03850a689a988af992d751c3d51add8cca17bc5353603fdd3e7cc59eab78d94"
+    },
+    "native/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-4q5yppfr/RESULT.json",
+      "bytes": 152081,
+      "sha256": "5a7b630aa881436a51d4e68adf30bdc0f67dd20c6a999a8bb032ef9e439356c2"
+    },
+    "handoff/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-remote-producer-handoff-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c29e140419c47aea40be8d646a6c8bd237d255ed5f5df099b901d2167f4a3878"
+    },
+    "handoff/RESULT": {
+      "path": "/private/tmp/unison-archive-hints-3cf1gdej/RESULT.json",
+      "bytes": 58291,
+      "sha256": "62ea6d90be2ed49bb60d97bf2492f242d217a33fe55719dc3ff730305bda9a76"
+    },
+    "handoff/0/test.log": {
+      "path": "/private/tmp/unison-semantic-handoff-i4wzml5s/test.log",
+      "bytes": 2307,
+      "sha256": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+    },
+    "handoff/1/test.log": {
+      "path": "/private/tmp/unison-semantic-handoff-4hamfd7g/test.log",
+      "bytes": 2307,
+      "sha256": "773466ca86089e812096238b330dc6a03cb43977728621d23deaab2792117b82"
+    }
+  },
+  "directed_carriers": [
+    "NotificationPipe actual EBADF after deliberate external closure; no manufactured carrier/settlement inference.",
+    "DirectoryOwner actual closedir then injected EIO; repeated cleanup makes exactly one underlying close attempt."
+  ],
+  "designated_negatives": [
+    "Exact historical whole Remote65de6192 closes active callback descriptor.",
+    "Current source with only DirectoryOwner classifier removed loses stage borrower while global admission still observes uncertainty."
+  ],
+  "limits": [
+    "Unknown fixture ownership settles at actual process exit, not asserted normal native teardown.",
+    "Actual borrowed callback paths, not universal arbitrary allocation/pending-action/platform proof.",
+    "Separate compact-base capture/scalar merge and nested cache ownership remain unfinished.",
+    "Not aggregate descendant FD/RSS, hard resource containment, quiet timing, wider benchmark or full SOL integration."
+  ],
+  "resources": "All actual build/test groups reaped0/absent, CPU8build/compilerjobs2 and CPU4test scopes closed; no current hold/native grant."
+}

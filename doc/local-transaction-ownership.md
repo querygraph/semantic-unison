@@ -53,10 +53,10 @@ transport. All inputs are original8192B synthetic DNGs; no SDK/Photo/camera or E
 
 This checkpoint covers production local async transfer, not the synchronous test
 reference, compact-base capture or scalar merge's independent raw descriptors.
-The remote producer remains outside its existing borrowed pair wrapper and needs
-the same event-loop/callback lifetime treatment; its current borrowed classifier
-also predates DirectoryOwner. Existing successful handoff tests do not cover that
-active remote producer window. Next fix/qualify that caller explicitly.
+The remote producer subsequently received separate event-loop/callback lifetime
+qualification; see remote-producer-lifetime.md. That later directed proof is not
+retroactively inferred from this checkpoint's successful remote handoffs. Current
+remaining ownership inventory is the immutable v3 successor.
 
 Merge-cache directory/quota/record/temp-name ownership needs a joint successor;
 do not independently root a directory while dropping its outer quota/borrower.

@@ -98,7 +98,8 @@ let borrowed files f =
   if files.closing then fail (Util.Transient "Semantic transfer interrupted") else begin
     let uncertain = function
       | NotificationPipe.Uncertain _ | SemanticFile.Close_uncertain _
-      | DngComponents.Cache_ownership_uncertain _ | StagePublication.Ownership_uncertain _ -> true
+      | DngComponents.Cache_ownership_uncertain _ | DirectoryOwner.Uncertain _
+      | StagePublication.Ownership_uncertain _ -> true
       | _ -> false in
     let retain entry = retain_files files (RetainedOwnership.cause entry) in
     let guard work=RetainedOwnership.guard ~is_uncertain:uncertain ~on_retained:retain work in
@@ -470,24 +471,27 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
                   (SemanticRuntime.get ()).pool cancellation ~extension plan ~basis ~output)) (fun applied ->
               let applied = match applied with Some report -> report | None ->
                 raise (Util.Transient "Semantic materialization cancelled") in
-              (match publication,producer with
+              let publish () = match publication,producer with
                | Some owner,Some producer ->
-                   owned_call scope (fun () -> StagePublication.publish_owned owner.context);
-                   callback_started := true;
-                   producer output;
-                   if candidate.files.closing || owner.closing then
-                     raise (Util.Transient "Semantic publication interrupted");
-                   owned_call scope (fun () -> StagePublication.disarm_owned owner.context)
+                   borrowed_with_publication publication candidate (fun () ->
+                     owned_call scope (fun () -> StagePublication.publish_owned owner.context);
+                     callback_started := true;
+                     producer output;
+                     if candidate.files.closing || owner.closing then
+                       raise (Util.Transient "Semantic publication interrupted");
+                     owned_call scope (fun () -> StagePublication.disarm_owned owner.context);
+                     return ())
                | None,None ->
                    close candidate;
                    Fs.rename candidate.path (Fspath.concat directory staging);
-                   candidate.owned <- false
-               | _ -> assert false);
-              release ();
-              debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
-                applied.SemanticDelta.logical_bytes_written applied.write_calls
-                (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
-              return true))))
+                   candidate.owned <- false;return ()
+               | _ -> assert false in
+              BorrowedWork.bind publish (fun () ->
+                release ();
+                debug (fun () -> Util.msg "Remote semantic clone wrote %d logical metadata bytes in %d write calls (%d payload bytes; %d-byte comparison windows; %s)\n"
+                  applied.SemanticDelta.logical_bytes_written applied.write_calls
+                  (SemanticDelta.payload_size plan) applied.comparison_window (SemanticDelta.profile plan));
+                return true)))))
           (fun e -> NotificationPipe.remember_failure files.ownership e;
             record_publication_cause scope e;release_noerr ();
             if !callback_started then fail e else match e with

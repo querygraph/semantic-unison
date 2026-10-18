@@ -1,0 +1,59 @@
+{
+  "scope": "Source successor after qualified remote complete producer borrowing; earlier local async qualification preserved. No new IO/SDK/runtime grant or whole resource audit inferred.",
+  "predecessor": {
+    "path": "doc/owned-resource-remaining-inventory-20261018-v2.json",
+    "sha256": "454e7e17426118b8aecb3361c1e5f29bd30f978c332ea473ce286c4d4f87411c"
+  },
+  "source_sha256": {
+    "src/semanticSync.ml": "56c849948e9b024f06e4897898a19ee47fb820ea2945b6c9060af8a998ea72e1",
+    "src/semanticRemote.ml": "9e0ea03b144e27801c945daf74c7b762940e2ad508d335c6b11ed3a7c0e333fb",
+    "src/semanticMergeCache.ml": "e10d9300d43f7b956c33c55f05a7e46b8a54385b6cadcb6c76ce9f8eb12e03a7",
+    "src/fsmonitor/solaris/watcher.ml": "5002d3876bd8dcc7ed7fa8d4505b1e25d07d70d865476fb6249a0f49d27b77ff",
+    "src/fsmonitor/solaris/Makefile": "a95ba3c783d72fa1c7c2cce4873250f32c9c4a2d0d0151e88af796d6fea7578f"
+  },
+  "qualified_local_async": [
+    "prepared pair/source before clone/open",
+    "tracked native parent acknowledgement",
+    "raw known close before native abort",
+    "complete worker/producer borrowed lifetime"
+  ],
+  "remaining": [
+    {
+      "file": "src/semanticSync.ml",
+      "functions": [
+        "with_file",
+        "try_local",
+        "capture_common_base_async",
+        "merge_local_async_internal"
+      ],
+      "finding": "Synchronous reference and separate capture/scalar-merge raw descriptors/list adoption/close_fd_noerr remain; main async transaction qualification does not cover them. Reference is test-only, not a new production path."
+    },
+    {
+      "file": "src/semanticMergeCache.ml",
+      "functions": [
+        "empty_directory",
+        "reserve",
+        "read",
+        "store",
+        "load"
+      ],
+      "finding": "Raw directory and quota/record FD closes plus temporary-name cleanup need joint retention, preserving monotonic quota and best-effort semantics without hiding uncertainty."
+    },
+    {
+      "file": "src/fsmonitor/solaris/watcher.ml",
+      "functions": [
+        "add_watch_children"
+      ],
+      "finding": "Separate legacy/platform raw directory/FEN callback finding, not an observed failure or automatically added runtime requirement."
+    }
+  ],
+  "separate_goal_work": [
+    "Aggregate descendant FD/RSS and complete baseline acquisition accounting",
+    "Broader benchmarks and final integration/platform status"
+  ],
+  "qualified_remote_async": [
+    "complete synchronous producer borrowed lifetime",
+    "DirectoryOwner uncertainty recognized before pair/name cleanup",
+    "active cleanup and nested file/directory carrier controls plus exact old and missing-classifier rejections"
+  ]
+}
