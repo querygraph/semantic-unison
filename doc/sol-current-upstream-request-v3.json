@@ -1,0 +1,43 @@
+{
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-decoded-input-20261018/tests/mixed_peer_compatibility/entry.py",
+    "--plan",
+    "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-upstream-plan-v3.json",
+    "--plan-sha256",
+    "092af1c892f9b43cfe0486ad6f912e3e588d61e276c75f4f5028b7c53917c9e5",
+    "--admission",
+    "/private/tmp/unison-current-upstream-admission-595b8390.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "limits": {
+    "call_observation_seconds": 30,
+    "calls": 12,
+    "cases": 4,
+    "endpoint_workers": 2,
+    "owner_credits": 2,
+    "owner_observation_seconds": 300,
+    "sdk_calls": 0,
+    "total_credits": 8
+  },
+  "metadata_preflight": "Exact current checked_plan passed within explicit256KiB limit; worker verify_artifacts stays after actual IO/CPU acquisition. No admission, lock or native invocation created.",
+  "plan": {
+    "bytes": 62351,
+    "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-upstream-plan-v3.json",
+    "sha256": "092af1c892f9b43cfe0486ad6f912e3e588d61e276c75f4f5028b7c53917c9e5"
+  },
+  "prepared_from_commit": "456776d8",
+  "proposed_admission": "/private/tmp/unison-current-upstream-admission-595b8390.json",
+  "required_admission_fields": {
+    "plan_sha256": "092af1c892f9b43cfe0486ad6f912e3e588d61e276c75f4f5028b7c53917c9e5",
+    "start_deadline_unix": "ROOT_FRESH_DEADLINE_REQUIRED",
+    "state": "ROOT_ADMITTED_ONE_MIXED_PEER_JOB",
+    "workspace": "/private/tmp/u-mp-595b8390"
+  },
+  "scope": "Fresh combined candidate upstream, four generated8KiB cases/12CLI/both directions; no SDK/Adobe/camera/Photo/nativeUI/compiler/performance/automatic successor. Unison00..07+existingEXglobal only.",
+  "state": "PREPARED_NOT_ADMITTED_NOT_DISPATCHED",
+  "supersession": "Fresh current456776d8 successor. Older unadmitted v2 source proposals superseded; original bytes/workspaces preserved, no old grant reused.",
+  "unknown_policy": "Retain actual owners/grants on unknown child/server/pump/group/FD; no broad kill, retry or numeric-FD reuse. Return actual owning-tool terminal independently of CLOSED.",
+  "workspace": "/private/tmp/u-mp-595b8390"
+}

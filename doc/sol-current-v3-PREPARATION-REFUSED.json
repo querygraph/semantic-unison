@@ -1,0 +1,9 @@
+{
+  "actual_terminal": {
+    "chunk_id": "7947ad",
+    "exit_code": 1,
+    "no_session": true
+  },
+  "reason": "manual.command correctly refuses ROOT_PUBLISHED_SHA_REQUIRED during pure construction: a valid inert SHA is required for metadata construction only. Mixed plans/requests already prepared and preserved; properties/index not yet written. No admission, workspace, child, CPU/IO acquisition or payload.",
+  "state": "METADATA_PREPARATION_REFUSED_NO_RUNTIME"
+}

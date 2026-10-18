@@ -1,0 +1,76 @@
+{
+  "candidate_commit": "456776d8",
+  "limits": "Each requires separate fresh exact Root admission. Serial Unison00..07+existingEXglobal only; no SDK/Adobe/camera/Photo/UI/compiler/performance/retry/automatic successors. Root supplies fresh deadline; no payload dispatched.",
+  "predecessor_index": {
+    "bytes": 2686,
+    "path": "/Users/alexy/src/unison-sol-resource-review-20261018/doc/sol-resource-requalification-requests-v2.json",
+    "sha256": "3b49e39e392ad2287ca22dc8ed8b517696566b21efb9db814e10eef2198718f3"
+  },
+  "preserved_metadata_refusals": [
+    {
+      "bytes": 468,
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-v3-PREPARATION-REFUSED.json",
+      "sha256": "eea4caecebd3fc41ceb48d64d9b4ab11cab4d010c89e4ebb7d680e97e60cc3fe"
+    },
+    {
+      "bytes": 467,
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-v3-PREPARATION-REFUSED-002.json",
+      "sha256": "f90bb78392035cbb03bd27996c2edb25235e3a5a022f0530a261cb117b349ec7"
+    }
+  ],
+  "recommended_order": [
+    "upstream",
+    "retained-fork",
+    "properties"
+  ],
+  "requests": [
+    {
+      "admission_path": "/private/tmp/unison-current-upstream-admission-595b8390.json",
+      "execution_pins": 400,
+      "label": "upstream",
+      "metadata_preflight": true,
+      "plan": {
+        "bytes": 62351,
+        "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-upstream-plan-v3.json",
+        "sha256": "092af1c892f9b43cfe0486ad6f912e3e588d61e276c75f4f5028b7c53917c9e5"
+      },
+      "request": {
+        "bytes": 2262,
+        "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-upstream-request-v3.json",
+        "sha256": "63e3a22a3cceb3cb72f4801d14e0b773f7393978ebdf988e8025467edc63e783"
+      },
+      "workspace": "/private/tmp/u-mp-595b8390"
+    },
+    {
+      "admission_path": "/private/tmp/unison-current-retained-fork-admission-585e3781.json",
+      "execution_pins": 400,
+      "label": "retained-fork",
+      "metadata_preflight": true,
+      "plan": {
+        "bytes": 66068,
+        "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-retained-fork-plan-v3.json",
+        "sha256": "3a734566f9addb4f7d890bb9066d366e90f52aa16e594453d32df359175f698d"
+      },
+      "request": {
+        "bytes": 2287,
+        "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-retained-fork-request-v3.json",
+        "sha256": "88004d1a9dc5e8a1b13c92b27c66eeefb576eed8fdb7a25a85229bb5383aa1b0"
+      },
+      "workspace": "/private/tmp/u-mp-585e3781"
+    },
+    {
+      "admission_path": "/private/tmp/unison-current-properties-admission-6d3b576a.json",
+      "execution_pins": 43,
+      "label": "properties",
+      "metadata_preflight": true,
+      "production_pins": 329,
+      "request": {
+        "bytes": 44806,
+        "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-properties-request-v3.json",
+        "sha256": "57d0d7d150d537d4afc216f42daff169fccf1d2f4833135f2443962d946d6e85"
+      },
+      "workspace": "/private/tmp/u-current-properties-6d3b576a"
+    }
+  ],
+  "state": "PREPARED_SOURCE_ONLY_NO_RUNTIME_ADMISSION"
+}

@@ -5201,3 +5201,41 @@ unchanged historicalproposals, not current source qualification. Fresh request/
 workspace/pins/Root scheduling required before payload; no automaticSDK/native
 backend grant. Other legacy result/conversion/outbound/baseline/containment and
 complete SOL acceptance remain open; goal active/not blocked. Standing8/8.
+
+## 2026-10-18 CURRENT456776d8 fresh IO requests V3 prepared, NOT admitted
+
+Frozen execution candidate now implementation/decoded-input-accounting source
+456776d8 (fork pushed); no execution-source edits while V3 under review.
+Index doc/sol-current-requalification-requests-v3.json3170B
+SHA2e9adb6ba0a9a71a65312641443f3eef46ecc95404002a9cb3ce36f47bf801b0.
+Metadata preflight c619a0/0: both exact checked_plan400pins; property exact
+manual.command/checked_build+43execution329production+in-memory IO admission check
+passed. Canonical manifest metadata read real; sentinel admission read only was
+mocked, no locks/liveadmission/worker/transport/SDK/Photo payload created.
+
+Upstream request doc/sol-current-upstream-request-v3.json2262B
+SHA63e3a22a3cceb3cb72f4801d14e0b773f7393978ebdf988e8025467edc63e783,
+plan092af1c8/62351B; workspace/private/tmp/u-mp-595b8390, admission
+/private/tmp/unison-current-upstream-admission-595b8390.json.
+Retainedfork request doc/sol-current-retained-fork-request-v3.json2287B
+SHA88004d1a9dc5e8a1b13c92b27c66eeefb576eed8fdb7a25a85229bb5383aa1b0,
+plan3a734566/66068B; workspace/private/tmp/u-mp-585e3781, admission
+/private/tmp/unison-current-retained-fork-admission-585e3781.json.
+Properties request doc/sol-current-properties-request-v3.json44806B
+SHA57d0d7d150d537d4afc216f42daff169fccf1d2f4833135f2443962d946d6e85;
+workspace/private/tmp/u-current-properties-6d3b576a, admission
+/private/tmp/unison-current-properties-admission-6d3b576a.json.
+Recommended serial upstream thenretainedfork thenproperties, each separatefresh
+RootexactSHA/deadline. Existing12CLI/12CLI/54CLI limits preserved; Unison00..07
++EXglobal only, noSDK/Adobe/camera/Photo/nativeUI/compiler/quietperformance/18grant.
+
+All3oldV2admission+workspace paths absent at fresh metadata observation. Old
+unadmitted SOURCE PROPOSALS now superseded/donotschedule via
+doc/sol-resource-v2-source-proposals-superseded-20261018.json2306B
+SHAd41f5314b5a5f2e334c959c6b33a28341ee28f4058b31a4d0c205624570b7920.
+Originalbytespreserved, no admissioncancel/rewrite or inventedownerterminal.
+Two metadata-only prep refusals preserved:7947ad/1 (SHAplaceholder invalid for
+command construction),89c629/1 (mock wrong importmodule); corrected preflight
+uses valid inertSHA and only mocks sentinel at definingmodule. Neither dispatched
+anything or acquiredpool. Do not call these runtime failures or Rootrefusals.
+Goalactive, legacy result/conversion/outbound/baseline/containment remain work.
