@@ -59,6 +59,9 @@ val receive :
  -> (int -> unit)          (* progress report *)
  -> transfer_instruction   (* transfer instruction received *)
  -> bool                   (* Whether we have reach the end of the file *)
+(** Checks the complete selected token slice before token payload writes.
+    Invalid framing raises Util.Transient. The caller already owns the output
+    channel; this does not establish publication or source identity. *)
 
 
 (*************************************************************************)
@@ -104,6 +107,11 @@ module Rsync :
         -> (int -> unit)         (* progress report *)
         -> transfer_instruction  (* transfer instruction received *)
         -> bool
+    (** Preflights token framing, then checks block ranges and actual fallback
+        read counts before writing each block chunk. Partial-copy fallback must
+        report a count within the requested range. Util.Transient on refusal;
+        earlier valid tokens may already have written staging data on a dynamic
+        basis failure. No hostile-writer atomicity/publication claim. *)
 
     (*** SOURCE HOST ***)
 

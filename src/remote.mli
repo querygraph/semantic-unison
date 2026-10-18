@@ -158,6 +158,8 @@ val registerBoundedServerCmd :
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int
+(** Requires a complete five-byte field at a nonnegative offset. Truncation or
+    invalid offset raises Util.Fatal before any array access; checksum unchanged. *)
 val registerRootCmdWithConnection :
     string                          (* command name *)
  -> 'a Umarshal.t -> 'b Umarshal.t

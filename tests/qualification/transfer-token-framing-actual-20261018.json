@@ -1,0 +1,343 @@
+{
+  "state": "CHECKED_TRANSFER_FRAMING_FINAL_FOUR_BUILDS_CONTROLS_PASS",
+  "scope": "Explicit five-byte integer/Copy payload view bounds, whole token-slice syntactic preflight, checked rsync basis geometry/fallback counts/actual reads. No actual transport/APFS clone/SDK/Photo/physicalIO/output-amplification/fullgoal claim.",
+  "source_pins": [
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.ml",
+      "bytes": 116835,
+      "sha256": "5679781944da5238c7e2cfd20a9c4a3ff78b86d4e3786267e243a03489f66343"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/remote.mli",
+      "bytes": 11074,
+      "sha256": "060479dd4be8f8e2d6e1fc7ef2e45b80ddd5889d1ce358c2e595b394e414efc6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/copy.ml",
+      "bytes": 113366,
+      "sha256": "0e021167799c75630099022931f209032ea7ff3cfebb61caa83db3019614b83a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/transfer.ml",
+      "bytes": 34076,
+      "sha256": "dc7a60eb77ca11183f54f78012072b8da6db0b205152a8c4b2b4fb1422bbb441"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/src/transfer.mli",
+      "bytes": 5818,
+      "sha256": "2470fbbd96e7a3444dc66d05ca4be350254bacef519bee272b887be8587c6517"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/transfer_instruction_bounds/run.py",
+      "bytes": 6613,
+      "sha256": "dcae3a323213725f80503fc1625f0b7c1c6aaefdde56545e19b8b01ea4e906f6"
+    },
+    {
+      "path": "/Users/alexy/src/unison-decoded-input-20261018/tests/transfer_instruction_bounds/probe.ml",
+      "bytes": 9636,
+      "sha256": "79c7a02d7e70dc0d796899dd5da3e036e7cd8930539b734be89d69ae24e5319b"
+    }
+  ],
+  "control_parent": {
+    "process_id": 42252,
+    "chunk_id": "c847ce",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": [
+    {
+      "compiler": "stock",
+      "checks": 118,
+      "negative_participants": {
+        "integer-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED integer read reached invalid range",
+          "source_sha256": "15c7183b9b452c308f07fab3e91d992de01c53960864c5f52770d9e64b95c47a",
+          "binary_sha256": "e01adc4bed92cfa05d825f5dbb77c5ffc7316433d974f1793297daf90a80e41a"
+        },
+        "generic-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "d6e0b337538a8d7a6eac0b598bc0ab05df8f0357b3ff5bdc3284d662939b469a",
+          "binary_sha256": "3eaa4eb97f5a3ad6e2b1a2df8631d19b7f33955a3bbb389c76dd6f0638819ede"
+        },
+        "rsync-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "e82672e363daff015ec18293c322fef8288cd5bf5edff2ee76fc0fadcfe4be9f",
+          "binary_sha256": "1cc2a74238404af616d56467f648ea38dd9c73b9d996658e951dc7c4068f1637"
+        },
+        "short-read-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "cfc457a549f32fa5137e4cd031c5a0277ed66fdefdd991a9076f06e6011df341",
+          "binary_sha256": "c0a2e36674be19d97668327394f3674856b4f3716b579543ae44d60b43f32593"
+        },
+        "buffer-short-read-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "1aac40d6efb119ccb0eb11bcc150df01619b3bb16af57938e99ac2ddf9cf119a",
+          "binary_sha256": "08af57a6c7416d1a71e5d513671094a787fb13fda5271929175f7c6ce7096d59"
+        },
+        "else-group-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED invalid copy buffer write",
+          "source_sha256": "0374999c1f77dec5dfe54991d7257210c3ebd32d5c5c2009543acd3efc5d5e15",
+          "binary_sha256": "49db265bbac51163e5b473cc039e9503b46cba3b1e32ca2ff34cbf01ec5f837b"
+        },
+        "basis-range-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED invalid basis range reached copy callback",
+          "source_sha256": "367e11102c4ea05d5555f9c26b879b9ef63a1eea6625953f989bba3ed8400cd1",
+          "binary_sha256": "364f64fcc368a01f3b54f13b7421794e00cccd8ee284320bd8afd88f0ce5e385"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-stock-20261018-005/CONTROL.json",
+          "bytes": 113903,
+          "sha256": "71879e6719f522fdd9ee33a7f381024b4ac0f0b6460f93603d535ba885a6a5bb"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-stock-20261018-005/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "394cd3c28bed0c1ece02b6bcc3c5e265fd88e6cc43153185a26723cd7702f6e6"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-stock-20261018-005/SHARED-STDOUT.txt",
+          "bytes": 106,
+          "sha256": "c804d86a31772db8362f8bfd3e80e937d4a6d55d1c2a7caace06cc94399bfb60"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-stock-20261018-005/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "checks": 118,
+      "negative_participants": {
+        "integer-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED integer read reached invalid range",
+          "source_sha256": "15c7183b9b452c308f07fab3e91d992de01c53960864c5f52770d9e64b95c47a",
+          "binary_sha256": "493d9dc1484a3bcb48b22faf124ce15150103c6f5fc3976505daf6a6c119ada4"
+        },
+        "generic-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "d6e0b337538a8d7a6eac0b598bc0ab05df8f0357b3ff5bdc3284d662939b469a",
+          "binary_sha256": "be276ab00d8107a9128027d3b4175c2cef0834f1a3766d2a780a8b08508e8bab"
+        },
+        "rsync-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "e82672e363daff015ec18293c322fef8288cd5bf5edff2ee76fc0fadcfe4be9f",
+          "binary_sha256": "6c0e96cc3d20279171283aa89aa4901cfaaca9161f5024f2b1c4b3dd9380e970"
+        },
+        "short-read-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "cfc457a549f32fa5137e4cd031c5a0277ed66fdefdd991a9076f06e6011df341",
+          "binary_sha256": "22a07118181184c4a847b496f5dac99adb9361ce81e6bdb74c44dda85beec685"
+        },
+        "buffer-short-read-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED transfer IO before validation",
+          "source_sha256": "1aac40d6efb119ccb0eb11bcc150df01619b3bb16af57938e99ac2ddf9cf119a",
+          "binary_sha256": "3fdf1b96481a700d600ef78a267f05cf01c49d43046f99d6732ae565e1c9d30c"
+        },
+        "else-group-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED invalid copy buffer write",
+          "source_sha256": "0374999c1f77dec5dfe54991d7257210c3ebd32d5c5c2009543acd3efc5d5e15",
+          "binary_sha256": "cc9e61c80f6273dc033b489d761e318386ee6538c32d751b9a3498f68f63e268"
+        },
+        "basis-range-negative": {
+          "exit_code": 2,
+          "witness": "DESIGNATED invalid basis range reached copy callback",
+          "source_sha256": "367e11102c4ea05d5555f9c26b879b9ef63a1eea6625953f989bba3ed8400cd1",
+          "binary_sha256": "33077a2d7672eb840c65d57b0d876c75ad17675deb580c45f57ca00be0434af2"
+        }
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-ox-20261018-005/CONTROL.json",
+          "bytes": 113936,
+          "sha256": "2e41f20a0bc7e50f770133942fbf05d5ff780ffd965f94ac386c083cf84bcdb2"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-ox-20261018-005/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "fdba950f09e6e2b3f1e10b39bc8afafa447f7482f8c09708802a5107f4ca1e0c"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-ox-20261018-005/SHARED-STDOUT.txt",
+          "bytes": 106,
+          "sha256": "c804d86a31772db8362f8bfd3e80e937d4a6d55d1c2a7caace06cc94399bfb60"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-bounds-ox-20261018-005/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "rpc_regression_parent": {
+    "process_id": 98471,
+    "chunk_id": "b9e05a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "rpc_regressions": [
+    {
+      "compiler": "stock",
+      "negative_participants": 14,
+      "scope": "Current Remote input/ownership implementation. Transfer-only else/arithmetic corrections occurred later and are covered by final118direct controls; no final full receiver transport inferred.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-rpc-regression-stock-20261018-001/CONTROL.json",
+          "bytes": 168385,
+          "sha256": "fe31793354823f4c20a42587f48b8d51335c5dbbf47cebef5fe195ed91239165"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-rpc-regression-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "35202bdcb8e191db361496d6d26d3a2d451b1009bbb1dc9548c9e8943ccf9de7"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "negative_participants": 14,
+      "scope": "Current Remote input/ownership implementation. Transfer-only else/arithmetic corrections occurred later and are covered by final118direct controls; no final full receiver transport inferred.",
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-rpc-regression-ox-20261018-001/CONTROL.json",
+          "bytes": 171598,
+          "sha256": "39ebf51ed11f7a558586cf42946c1bc52298694813d64c9bc9823a22ec23a25f"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-rpc-regression-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "d0c27e2ffb99f998c0daa49682cab015529b3d9f944443deba9d7486de320d1b"
+        }
+      ]
+    }
+  ],
+  "superseded_intermediate": {
+    "build_parent": "19823/64e1a2/exit0/no session",
+    "workspaces": "/private/tmp/unison-transfer-token-{stock,ox}-{check,dune-check}-20261018-001",
+    "status": "All builds passed but subsequent source review found new else-branch grouping and unnecessarily broad blockSize guard. Superseded before publication; final source fixed both and added directed guarded mutation controls. Earlier112checks did not cover the >8192-byte group.",
+    "no_final_qualification_reuse": true
+  },
+  "remaining": [
+    "Per-file cumulative output bound from caller expected size (repeated valid blocks)",
+    "Tighter per-command custom stream cap and workspace/baseline accounting",
+    "Client result leases and conversion/global escapes/outbound/full FD/RSS",
+    "Current final-candidate transport/filesystem compatibility and acceptance matrix"
+  ],
+  "build_parent": {
+    "process_id": 2609,
+    "chunk_id": "f506ba",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "builds": [
+    {
+      "compiler": "stock",
+      "system": "make",
+      "recorded_source_inputs": 577,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-8i8cv0rh/src/unison",
+        "bytes": 6291704,
+        "sha256": "efee14cad97e51ef20c2962b521f162bf37ec6040c7d368d0b0e9e5df76ba843"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-stock-check-20261018-002/RESULT.json",
+          "bytes": 60285,
+          "sha256": "218c2af8140744b99d5262a4398b6d3ab66843cf6bfa06322c188364d32ba8d7"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-stock-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "f1afb9537e9886c2e81b11ce3a595017dc00376e01dbe9e8bb40ae0c4b990875"
+        }
+      ]
+    },
+    {
+      "compiler": "stock",
+      "system": "dune",
+      "recorded_source_inputs": 577,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-8n2ao4ul/_build/default/src/linktext.exe",
+        "bytes": 6343608,
+        "sha256": "03b9f190333f48ffe4853e43ec78954d1bc71b5d84e2a5ccbbbf9293034f4918"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-stock-dune-check-20261018-002/RESULT.json",
+          "bytes": 60112,
+          "sha256": "c475fb94415327cbac8bf59d06428823db5c1493ca991f691786f145ae29b570"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-stock-dune-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "588bdc4ecbb3019111688622d8cd3678b002cf99c9b800e50e4f091fedcb6acb"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "make",
+      "recorded_source_inputs": 577,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-eng1o4wx/src/unison",
+        "bytes": 8375696,
+        "sha256": "07c96d9c82cc09a3575a8b0eaf7feba5555868f2a654d96ecfe34327adddea60"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-ox-check-20261018-002/RESULT.json",
+          "bytes": 60291,
+          "sha256": "f3c2ef8d78d8108620bd43b3dee2111c194451f99d94fad2570ffbdaa708343d"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-ox-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "cfbe7b217854688d9e474db8de0fee7aa3d196012c7573ab5137dcc492e80d4c"
+        }
+      ]
+    },
+    {
+      "compiler": "ox",
+      "system": "dune",
+      "recorded_source_inputs": 577,
+      "all_recorded_source_hashes_match": true,
+      "binary": {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-build-wja45_re/_build/default/src/linktext.exe",
+        "bytes": 8016712,
+        "sha256": "6221db789f998d78fbaffd72cbcd2cf9d80e1e3e3f55e18354ed7e412b34a361"
+      },
+      "pins": [
+        {
+          "path": "/private/tmp/unison-transfer-token-ox-dune-check-20261018-002/RESULT.json",
+          "bytes": 60116,
+          "sha256": "e274209714bc16cbfacfd3bfa6d4bd5b466465a13aa62e8dfe172d44610d3730"
+        },
+        {
+          "path": "/private/tmp/unison-transfer-token-ox-dune-check-20261018-002/SHARED-CLOSED.json",
+          "bytes": 535,
+          "sha256": "52485bac7a808a7fb4d156fa7f8d52b0b2080f034d5d48720d49c62f28d133d8"
+        }
+      ]
+    }
+  ]
+}

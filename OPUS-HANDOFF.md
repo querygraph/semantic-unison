@@ -4880,3 +4880,74 @@ semantic call-site lifetimes; audit custom streaming's raw-buffer views/fixed
 metadata; continue outbound/baseline and supported whole-tree FD/RSS work. Do not
 pretend arguments close result lifetimes or arbitrary conversion/global escapes.
 Full SOL goal remains active/incomplete. Standing8/8/system2 unchanged.
+
+
+## 2026-10-18 streaming token preflight work IN PROGRESS (not committed)
+
+Active decoded-input branch40354237 has uncommitted Remote.decodeInt five-byte
+range guard, Copy raw-view codec ordering and Transfer complete token-slice
+syntax preflight, checked basis ranges/fallback counts/short reads. New original
+tests/transfer_instruction_bounds compile exact integer/Copy fragments plus full
+Transfer, private guards before old mutations' invalid accesses/writes. Actual
+112checks/compiler+5mutation participants in27903/f6bebd/0; RPC regressions14each
+98471/b9e05a/0 passed. No actual transport/native clone/SDK/Photo/EXIO used.
+
+IMPORTANT review finding BEFORE SEAL: the new rsync copy ELSE branch lacks
+explicit begin/end after inserted read-count guard; multi-buffer copies can
+reach an extra outer write. Must FIX, add >8192-byte block test, and requalify.
+Also replace blanket blockSize>max_int/255 refusal with per-block count check
+(k>max_int/blockSize) to preserve valid large single-block/EOF behavior. These
+are not yet fixed because full build controller19823 is live; finish its owned
+jobs normally before changing production source. Do NOT seal those intermediate
+builds as final. Current stock Make/Dune passed but behavioral gap remains.
+Next tests: valid24576-byte block group, short read after first8192 valid bytes,
+nonzero view tests alreadypass. Current token tests may miss else grouping bug.
+
+All three frozen9d9dccc0 IO request admission files remain absent at last read;
+no newIO grant/hold. Fullgoalactive; standing8/8. Keep handoff explicit untilfixed.
+
+
+### Streaming follow-up: review findings FIXED, final builds running
+
+Intermediate controller19823/64e1a2/0 genuinelyclosed all4builds, no runtime
+dispatch. Those source artifacts are superseded, NOT final behavioral proof.
+After closure, fixed rsync else grouping with begin/end; replaced blanket large
+blockSize cap with per-token k>max_int/blockSize overflow guard. Added24576B
+block copy and actual later-chunk truncation test plus guarded negative for the
+wrong grouping and missed full-buffer read check. Final direct controls118checks
+and7negativeparticipants/compiler ACTUAL42252/c847ce/0/no session, stock3674/Ox3878
+reaped0/groupsabsent/CPU4closed. Current finalbuildcontroller2609 LIVE usesfresh
+002workspaces, max8credits/2compilerjobs, noEXIO. Do not claim all finalbuilds until
+actualterminal. EarlierRPC14negative controls/compiler98471/b9e05a/0 covered same
+Remote/Copy guards; Transfer-only grouping/arithmetic changed afterward and is
+covered by final118tests. Full finalproduction source differsfrom intermediate.
+
+Next source finding to handle after this checkpoint: Copy passes srcFileSize to
+output creation/EOF clone length check but current Transfer generic/rsync token
+steps do not receive a per-file remaining-output bound. Audit/implement that
+before claiming write-amplification control; actual output publication guards
+stillapply, no observed payload exploit or newcurrentadmission. Then client
+result leases/customstream fixedmetadata and otherbaseline/FD/RSS remain open.
+
+
+## 2026-10-18 stream integer/token/basis checks final qualified checkpoint
+
+Source findings fixed before sealing: multi-buffer else grouping now explicit,
+actual block-count overflow checked without blanket refusal of large valid
+single-block/EOF sizes. Final production inputs match all four stock/Ox Make+
+Dune/selftest snapshots002; ACTUAL2609/f506ba/0/no session, children4298/5442/6535/
+7774 reaped0/groups absent/CPU8closed. Intermediate19823 builds remain superseded,
+not used as final proof. Final118direct checks+7guarded mutations/compiler actual
+42252/c847ce/0 closed; currentRemote RPC14negative regressions98471/b9e05a/0closed.
+Multi-buffer24576B, partial/full fallback, receiver-basis skip callback, nonzero
+views, malformed syntax and actual later short-read covered on disposable data.
+No native clone/transport/SDK/Photo/original payload/EXIO operation inferred.
+
+Evidence tests/qualification/transfer-token-framing-actual-20261018.json SHA
+a972850d24b4487a52bce631a7a3a63eeacc6d7dabdfedb60eff2906c95594a1. Source doc stream-instruction-framing.md and inventoryv14 retain exact scope
+and intermediate review failures. No current owner/resource hold from checkpoint.
+Next implement cumulative per-file output bound using Copy srcFileSize/actual
+append position (no repeated valid-block amplification); then client-result
+lifetimes and remaining streaming workspace/baseline/whole-tree FD/RSS. Full
+SOL goal ACTIVE/INCOMPLETE. Frozen9d9dccc0 threeIOrequests remain unchanged and
+no admission observed; no new dispatch/automatic retry/quiet exception. 8/8 stays.

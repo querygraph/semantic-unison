@@ -65,6 +65,8 @@ let encodeInt m =
   (int_buf, 0, intSize)
 
 let decodeInt int_buf i =
+  if i<0 || i>Bytearray.length int_buf-intSize then
+    raise(Util.Fatal "Protocol error: incomplete integer field");
   let b0 = Char.code (int_buf.{i + 0}) in
   let b1 = Char.code (int_buf.{i + 1}) in
   let b2 = Char.code (int_buf.{i + 2}) in
