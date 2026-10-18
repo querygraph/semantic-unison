@@ -5942,3 +5942,16 @@ and property statements are explicitly historical, not latest-source behavior.
 Three V6 admissions freshly absent; no dispatch/hold inferred. Immediate runtime
 work remains three separate V6 grants; M6 limits remain explicit. No prod edits,
 new test executions or resource acquisitions in this documentation update.
+
+
+## 2026-10-18 current fixed SDE conformance renewed
+
+Actual controller3582/9768d4/exit0/no session, initial596b01. Stock and Ox
+compiled current source and passed existing independent fixed wire goldens,
+malformed/binding cases, local synthetic exact apply/source preservation.
+Each child reaped0/groups absent/CPU4 closed; source snapshots rehashed exact.
+No fuzz/sanitizer/SDK/Photo/transport/EXglobal/performance controls. Evidence
+tests/qualification/current-sde-conformance-actual-20261018.json SHA 00a274ab3554ecd2013799e791b894a3b30d182738126384349c63cf9006bf78.
+FrozenV6 production/runtime untouched; actual three transport/property grants
+still needed, plus remaining M6 resource/platform/performance verification.
+Goal active/incomplete; no owned live jobs/resources.

@@ -245,3 +245,13 @@ original bytes are unchanged. The [per-line correction](../tests/qualification/p
 passes old-format regression controls and current stock/Ox Make/Dune+selftests.
 No sync rerun or permission reuse occurred. This is collection qualification,
 not repeated performance, complete commit timing or hard-limit qualification.
+
+## Current fixed SDE conformance — 2026-10-18
+
+[Current stock/Ox evidence](../tests/qualification/current-sde-conformance-actual-20261018.json)
+qualifies the existing independent wire goldens, fixed malformed/proof-binding
+cases and synthetic local exact materialization/source preservation on current
+sources. Actual controller3582/9768d4/0 and both CPU4/group closures passed.
+This is not actual RPC receiving, SDK validation, fuzzing, physical clone
+behavior or representative performance. Frozen V6 transport/property work
+remains separate and unexecuted under its pending grants.
