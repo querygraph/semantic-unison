@@ -1,0 +1,53 @@
+{
+  "schema": "unison-cached-worker-measurement-preparation/1",
+  "state": "PREPARATION_ONLY_NOT_ADMITTED",
+  "qualification": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/cached-worker-build-actual-20261017.json",
+    "bytes": 37941,
+    "sha256": "464ebe080c8f0a0124ecdf0fae4e574f5fd562c1bcff91afcc3175ac1dc23f04"
+  },
+  "candidate_parameters": {
+    "file_mib": 32,
+    "jobs": 6,
+    "workers": [
+      1,
+      2,
+      4,
+      6
+    ],
+    "warmups_per_configuration": 1,
+    "measured_repetitions": 5
+  },
+  "maximum_worker_credits": 6,
+  "owner_credits": 2,
+  "token_indexes": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7
+  ],
+  "measurement_invocations": 48,
+  "digest_jobs": 288,
+  "requested_digest_read_bytes": 9663676416,
+  "fixture_write_bytes": 33554432,
+  "declared_io_budget_bytes": 17179869184,
+  "declared_budget_is_physical_cap": false,
+  "execution_ready": false,
+  "next_required_work": [
+    "Versioned dispatcher contract with actual CPU+EXglobal FD ownership and group/partial-result audit",
+    "Finite source/disposable controls for exact executor and admission binding",
+    "Fresh explicit Photo physical IO scheduling grant before any fixture generation or measurement"
+  ],
+  "claims": {
+    "quiet_window": false,
+    "benchmark_executed": false,
+    "production_sync": false,
+    "physical_storage_savings": false,
+    "hard_rss_fd_or_thread_caps": false
+  },
+  "scope": "Current cached digest path only; full end-to-end read/write/network/CPU benchmark synthesis remains a separate requirement."
+}

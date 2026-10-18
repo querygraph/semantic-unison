@@ -18,13 +18,21 @@ SOURCES = [
     "src/lwt/generic/lwt_unix_impl.ml", "src/lwt/lwt_unix.mli", "src/lwt/lwt_unix.ml",
     "src/borrowedWork.mli", "src/borrowedWork.ml",
     "src/helperSupervisor_stubs.c", "src/helperSupervisor.mli", "src/helperSupervisor.ml",
+    "src/semanticAdmission.mli", "src/semanticAdmission.ml",
     "src/ioAdmission.mli", "src/ioAdmission.ml",
-    "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
+    "src/semanticHash_evp.h", "src/semanticHash_stubs.c", "src/semanticHash.mli", "src/semanticHash.ml",
     "src/semanticFile_stubs.c", "src/semanticFile.mli", "src/semanticFile.ml",
+    "src/wholeFileClone_stubs.c", "src/wholeFileClone.mli", "src/wholeFileClone.ml",
+    "src/validationSnapshot.mli", "src/validationSnapshot.ml",
+    "src/componentHash.mli", "src/componentHash.ml",
     "src/formatRecognition.mli", "src/formatRecognition.ml",
+    "src/dngRecognition.mli", "src/dngRecognition.ml",
     "src/formatExtension.mli", "src/formatExtension.ml",
     "src/xmpObservation.mli", "src/xmpObservation.ml", "src/xmpMerge.mli", "src/xmpMerge.ml",
     "src/dngSemantic.mli", "src/dngSemantic.ml",
+    "src/dngExtended.mli", "src/dngExtended.ml",
+    "src/dngLayout.mli", "src/dngLayout.ml",
+    "src/dngComponents.mli", "src/dngComponents.ml",
     "src/semanticDelta.mli", "src/semanticDelta.ml",
     "src/semanticMailbox.mli", "src/semanticMailbox.ml",
     "src/semanticWorkers.mli", "src/semanticWorkers.ml",
@@ -35,7 +43,7 @@ SOURCES = [
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--compiler", action="append", required=True, metavar="LABEL=OCAMLOPT")
-    parser.add_argument("--workers", default="1,6,18")
+    parser.add_argument("--workers", default="1,2,4,6")
     parser.add_argument("--build",action="append",default=[],metavar="LABEL=SNAPSHOT_SRC",help="Link actual compiler-matched production objects")
     parser.add_argument("--keep-work",action="store_true")
     parser.add_argument("--file-mib", type=int, choices=(32, 64), default=64)
@@ -69,6 +77,8 @@ def main():
     result = {
         "schema": "unison-cached-sha-workers-v1",
         "complete": False,
+        "runner_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "requested_build_only": args.build_only,
         "created_utc": datetime.datetime.now(datetime.timezone.utc).isoformat(),
         "host": {"system": platform.system(), "release": platform.release(),
                  "machine": platform.machine(), "logical_cpus": os.cpu_count()},
@@ -107,13 +117,15 @@ def main():
                     for name in SOURCES[:-2]:
                         actual=builds[label]/name.removeprefix("src/")
                         if actual.read_bytes()!=source_bytes[name]:raise RuntimeError("production source mismatch: "+name)
+                        if name.endswith('.h'):continue
                         extensions=(".cmi",".cmx",".o") if name.endswith(".ml") else ((".cmi",) if name.endswith(".mli") else (".o",))
                         for ext in extensions:
                             artifact=actual.with_suffix(ext);shutil.copyfile(artifact,build/artifact.name)
                             linked[str(artifact)]=hashlib.sha256(artifact.read_bytes()).hexdigest()
                     commands=[[compiler,"-I","+unix","-c","clock_stubs.c"]]
                 else:
-                    commands = [[compiler, "-I", "+unix", "-c", Path(name).name] for name in SOURCES[:-1]]
+                    commands = [[compiler, "-I", "+unix", "-c", Path(name).name]
+                                for name in SOURCES[:-1] if not name.endswith('.h')]
                 result["compilers"][label]["linked_object_sha256"]=linked
                 objects = [Path(name).stem + (".o" if name.endswith(".c") else ".cmx")
                            for name in SOURCES[:-1] if name.endswith((".ml", ".c"))]
@@ -127,10 +139,14 @@ def main():
                     print(log.read())
                     raise
             binaries[label] = build / "hash-bench"
+            result["compilers"][label]["benchmark_binary_path"]=str(binaries[label])
             result["compilers"][label]["benchmark_binary_sha256"]=hashlib.sha256(binaries[label].read_bytes()).hexdigest()
             result["compilers"][label]["build_log_sha256"]=hashlib.sha256((build/"build.log").read_bytes()).hexdigest()
             print(f"Built {label} ({result['compilers'][label]['version']})", flush=True)
         if args.build_only:
+            result.update(build_complete=True, measurement_complete=False)
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(json.dumps(result, indent=2)+"\n")
             print("Build-only check passed; no benchmark measurements taken.")
             return
         # One small file, independently checked by hashlib, reused for every job.
