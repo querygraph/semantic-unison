@@ -1,0 +1,68 @@
+{
+  "schema": "unison-saved-resource-report-qualification/1",
+  "state": "METADATA_REPORT_CONTROLS_PASS",
+  "actual_owner": {
+    "tool": "exec_command",
+    "terminal_chunk": "dc9cd9",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "test_methods": 8,
+  "references": [
+    {
+      "path": "/private/tmp/unison-sync-resource-report-controls-20261017-002/SHARED-START.json",
+      "bytes": 1109,
+      "sha256": "7fd5815f9950e274f49631e10392935e953917a04534b5dbf5495a4e46412370"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-controls-20261017-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "f2fee95e793d52563bd66419f6e161fdf0f8c828eb0d96a2f74ad0e4dc2df43e"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-controls-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-controls-20261017-002/SHARED-STDERR.txt",
+      "bytes": 106,
+      "sha256": "698d16d7b93c4bd9707d3cfacda6fb1e0fea99ed0cda6e69bedc42772940540a"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-saved-20261017-002/SHARED-START.json",
+      "bytes": 1347,
+      "sha256": "5c4ddbe15de33af187ceac8d687167faec86dc4f6b6c4d5fb8dad3d7c74a8222"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-saved-20261017-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "aa9f4f61b2ef0e6efcca671b969f9c6b6dc1954a4cab1f7feeae48b2ff9daaf6"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-saved-20261017-002/SHARED-STDOUT.txt",
+      "bytes": 71,
+      "sha256": "8a7d61ff3d174ad41f17a5c96d3798cc46c79fbedbc51b838377fa1bd0bc4b2c"
+    },
+    {
+      "path": "/private/tmp/unison-sync-resource-report-saved-20261017-002/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "input_acceptance": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/pr13-properties-actual-20261017.json",
+    "bytes": 3606,
+    "sha256": "e8f759213fb0201ed9473446eda530cc0e02072fb2810bc787b08aaced60444e"
+  },
+  "report": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/bench/sync/results/property-resource-observations-20261017.json",
+    "bytes": 34513,
+    "sha256": "e78cc7c79c09ba4a6d5f7a1eff8c0362bdbeeff7ecceed64ed1bd6ba4d485820"
+  },
+  "source_sha256": {
+    "bench/sync/resource_report.py": "66e02f29dd2ba9959b16fa07b30d574e0f0b44e7e8fb3c8ffa2bf718b0a263c4",
+    "bench/sync/resource_report_test.py": "bb89da0f070d620278563fce80b60e30c10e7284fae4ce61036c23496a911681"
+  },
+  "scope": "Reinterprets exactly pinned saved generated-fixture metadata only. No CLI/SDK/server/native/Photo/media rerun, no IO barrier acquired. Original18rows54CLI and actual owner41218/6e1b75/0 remain separate historical evidence. This reporter grants no resource closure, current-source binding or performance confidence."
+}

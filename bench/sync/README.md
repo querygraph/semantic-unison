@@ -455,3 +455,19 @@ The declared8GiB logical IO budget is conservative planning, not instrumentation
 or a physical hard cap. No SDK/camera read, quiet timing or throughput claim.
 See `doc/layout-receiving-request-v1.json` for the exact one-use request; source
 readiness is not an admission or a command to dispatch.
+
+## Interpreting saved resource receipts
+
+`resource_report.py INPUT.json --input-sha256 EXACT_SHA --output NEW.json` reads
+only bounded saved metadata and refuses an existing output. It never invokes
+Unison, follows payload references, rebinds source snapshots or infers an owning
+parent terminal/resource release. Eight original controls cover unknown versus
+zero, raw reader totals, per-platform RSS units and invalid/overflowing numbers.
+
+[Property-cohort observations](results/property-resource-observations-20261017.md)
+show independent endpoint CPU, forwarded protocol bytes, semantic returned writes
+and explicitly labeled output-extent models. They retain unknown total reads,
+internal stage times and physical IO/peak measurements as null. The input is
+a historical one-sample functional cohort, not a repeated current performance
+study. Do not sum client/server wait4 CPU or process high-water RSS, convert
+block operations to bytes, or interpret a write model as physical APFS savings.

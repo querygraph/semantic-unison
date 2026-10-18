@@ -155,3 +155,24 @@ preserves the initial flag error; corrected runs skip both random campaigns.
 No IO/native/Photo resource hold remains. Previously sealed benchmark source
 proofs refer to their retained execution snapshots, not unchanged later checkout
 bytes. No benchmark replay is implied by this parser change.
+
+## Saved end-to-end resource interpretation
+
+The [saved property-cohort report](../bench/sync/results/property-resource-observations-20261017.md)
+now separates endpoint CPU/RSS, forwarded protocol counts, successful semantic
+logical writes, materialization models and unknown totals. Eight controls and
+metadata-only execution passed; no synchronization was repeated. Its single
+per-row observations are historical, not fresh throughput or latency rankings.
+Total application reads, internal hash/parse/verify/commit timing, descriptor/queue
+peaks, physical storage traffic and aggregate tree RSS remain explicitly unproved.
+This makes the remaining measurement scope concrete without substituting a model
+for a counter or creating a Photo scheduling gate.
+
+## Current build-system parity
+
+[Current Dune CLI qualification](../tests/qualification/current-dune-cli-actual-20261017.json)
+adds stock/Ox Dune builds and selftests after compact XMP changes. Actual owner
+47840/e38f6e/0 and both direct child/group settlements passed; production source
+pins match. Together with the current Make results this proves both build paths
+for this snapshot, without substituting compilation for unmeasured resources,
+transfer faults or throughput. No process or Photo resource hold remains.

@@ -1,0 +1,888 @@
+{
+  "schema": "unison-saved-sync-resource-report/1",
+  "state": "SAVED_OBSERVATIONS_ONLY",
+  "input_complete": true,
+  "repository_head": "a032e57039d89010610774863ff6cd9bfba6401d",
+  "host": {
+    "system": "Darwin",
+    "release": "24.6.0",
+    "machine": "x86_64",
+    "logical_cpus": 36,
+    "hw.physicalcpu": 18,
+    "hw.memsize": 137438953472
+  },
+  "parameters": {
+    "modes": [
+      "ordinary",
+      "receiver-clone",
+      "semantic"
+    ],
+    "workers": [
+      1,
+      2,
+      3
+    ],
+    "file_mib": 2,
+    "files": 2,
+    "packet_bytes": 8192,
+    "warmups": 0,
+    "repetitions": 1,
+    "timeout_seconds": 30.0,
+    "background_note": "user-run finite functional checks; not a throughput comparison",
+    "measure_primary_reads": true,
+    "property_removal_controls": true,
+    "layout_only_controls": false,
+    "loopback_cpu_credit_bound": 8,
+    "maximum_configured_endpoint_credit_sum": 6,
+    "orchestration_cpu_credits": 2,
+    "maximum_declared_cpu_credit_sum": 8
+  },
+  "cache_state": "warm/uncontrolled: fixture generation, seed sync and independent hashing precede every update; no cache flush",
+  "transport": "same-host Python loopback SSH replacement through private Unix socket and raw pipes; no encryption or physical network",
+  "rows": [
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3460690740030259,
+      "client_wait4": {
+        "user_seconds": 0.07417399999999999,
+        "system_seconds": 0.02429,
+        "cpu_seconds": 0.098464,
+        "maxrss_bytes": 11829248,
+        "maxrss_native_units": 11829248,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.058733,
+        "system_seconds": 0.022310999999999998,
+        "cpu_seconds": 0.081044,
+        "maxrss_bytes": 8904704,
+        "maxrss_native_units": 8904704,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15527,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3562049820320681,
+      "client_wait4": {
+        "user_seconds": 0.072627,
+        "system_seconds": 0.024988999999999997,
+        "cpu_seconds": 0.097616,
+        "maxrss_bytes": 11804672,
+        "maxrss_native_units": 11804672,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.060034,
+        "system_seconds": 0.02308,
+        "cpu_seconds": 0.083114,
+        "maxrss_bytes": 9080832,
+        "maxrss_native_units": 9080832,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15527,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3632919199881144,
+      "client_wait4": {
+        "user_seconds": 0.073613,
+        "system_seconds": 0.025190999999999998,
+        "cpu_seconds": 0.098804,
+        "maxrss_bytes": 11759616,
+        "maxrss_native_units": 11759616,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.059815,
+        "system_seconds": 0.022661,
+        "cpu_seconds": 0.082476,
+        "maxrss_bytes": 8785920,
+        "maxrss_native_units": 8785920,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15527,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.36762755998643115,
+      "client_wait4": {
+        "user_seconds": 0.073669,
+        "system_seconds": 0.025951,
+        "cpu_seconds": 0.09962,
+        "maxrss_bytes": 12193792,
+        "maxrss_native_units": 12193792,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.060079999999999995,
+        "system_seconds": 0.025949,
+        "cpu_seconds": 0.086029,
+        "maxrss_bytes": 9080832,
+        "maxrss_native_units": 9080832,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15528,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.38099449197761714,
+      "client_wait4": {
+        "user_seconds": 0.078398,
+        "system_seconds": 0.0272,
+        "cpu_seconds": 0.105598,
+        "maxrss_bytes": 12169216,
+        "maxrss_native_units": 12169216,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.063564,
+        "system_seconds": 0.026556,
+        "cpu_seconds": 0.09011999999999999,
+        "maxrss_bytes": 9293824,
+        "maxrss_native_units": 9293824,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15528,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.37710677104769275,
+      "client_wait4": {
+        "user_seconds": 0.074598,
+        "system_seconds": 0.025283,
+        "cpu_seconds": 0.099881,
+        "maxrss_bytes": 12189696,
+        "maxrss_native_units": 12189696,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.062193,
+        "system_seconds": 0.025325,
+        "cpu_seconds": 0.087518,
+        "maxrss_bytes": 9048064,
+        "maxrss_native_units": 9048064,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15528,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.44910540501587093,
+      "client_wait4": {
+        "user_seconds": 0.081064,
+        "system_seconds": 0.026414,
+        "cpu_seconds": 0.10747799999999999,
+        "maxrss_bytes": 11800576,
+        "maxrss_native_units": 11800576,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.118822,
+        "system_seconds": 0.026740999999999997,
+        "cpu_seconds": 0.145563,
+        "maxrss_bytes": 10579968,
+        "maxrss_native_units": 10579968,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 27969,
+        "server_to_client_bytes": 3077
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.39080387604190037,
+      "client_wait4": {
+        "user_seconds": 0.081485,
+        "system_seconds": 0.02711,
+        "cpu_seconds": 0.108595,
+        "maxrss_bytes": 12066816,
+        "maxrss_native_units": 12066816,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.11834,
+        "system_seconds": 0.026528,
+        "cpu_seconds": 0.144868,
+        "maxrss_bytes": 10207232,
+        "maxrss_native_units": 10207232,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 27969,
+        "server_to_client_bytes": 3077
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.39032016904093325,
+      "client_wait4": {
+        "user_seconds": 0.07879699999999999,
+        "system_seconds": 0.024829999999999998,
+        "cpu_seconds": 0.103627,
+        "maxrss_bytes": 12185600,
+        "maxrss_native_units": 12185600,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.118004,
+        "system_seconds": 0.027923,
+        "cpu_seconds": 0.145927,
+        "maxrss_bytes": 10309632,
+        "maxrss_native_units": 10309632,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 27969,
+        "server_to_client_bytes": 3077
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.36726188799366355,
+      "client_wait4": {
+        "user_seconds": 0.070779,
+        "system_seconds": 0.025467,
+        "cpu_seconds": 0.096246,
+        "maxrss_bytes": 11902976,
+        "maxrss_native_units": 11902976,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.058036,
+        "system_seconds": 0.022073,
+        "cpu_seconds": 0.080109,
+        "maxrss_bytes": 8486912,
+        "maxrss_native_units": 8486912,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15527,
+        "server_to_client_bytes": 19222
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3649328440078534,
+      "client_wait4": {
+        "user_seconds": 0.071854,
+        "system_seconds": 0.024096,
+        "cpu_seconds": 0.09595000000000001,
+        "maxrss_bytes": 11747328,
+        "maxrss_native_units": 11747328,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.057852,
+        "system_seconds": 0.021285,
+        "cpu_seconds": 0.079137,
+        "maxrss_bytes": 8110080,
+        "maxrss_native_units": 8110080,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15561,
+        "server_to_client_bytes": 19227
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3671727819601074,
+      "client_wait4": {
+        "user_seconds": 0.072388,
+        "system_seconds": 0.026257,
+        "cpu_seconds": 0.098645,
+        "maxrss_bytes": 12185600,
+        "maxrss_native_units": 12185600,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.057602,
+        "system_seconds": 0.022153,
+        "cpu_seconds": 0.07975499999999999,
+        "maxrss_bytes": 8499200,
+        "maxrss_native_units": 8499200,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15561,
+        "server_to_client_bytes": 19227
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 4194304,
+      "output_extent_model_basis": "full output extent; syscall/physical-write accounting unavailable",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3727642039884813,
+      "client_wait4": {
+        "user_seconds": 0.070455,
+        "system_seconds": 0.024003999999999998,
+        "cpu_seconds": 0.094459,
+        "maxrss_bytes": 12025856,
+        "maxrss_native_units": 12025856,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.057708999999999996,
+        "system_seconds": 0.024148,
+        "cpu_seconds": 0.081857,
+        "maxrss_bytes": 8282112,
+        "maxrss_native_units": 8282112,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15562,
+        "server_to_client_bytes": 19227
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.37714194000000134,
+      "client_wait4": {
+        "user_seconds": 0.071641,
+        "system_seconds": 0.025501,
+        "cpu_seconds": 0.09714199999999999,
+        "maxrss_bytes": 12001280,
+        "maxrss_native_units": 12001280,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.05799,
+        "system_seconds": 0.024317,
+        "cpu_seconds": 0.08230699999999999,
+        "maxrss_bytes": 8552448,
+        "maxrss_native_units": 8552448,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15562,
+        "server_to_client_bytes": 19227
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.3973528739879839,
+      "client_wait4": {
+        "user_seconds": 0.07180299999999999,
+        "system_seconds": 0.024513999999999998,
+        "cpu_seconds": 0.09631699999999999,
+        "maxrss_bytes": 11853824,
+        "maxrss_native_units": 11853824,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.057841,
+        "system_seconds": 0.024277999999999997,
+        "cpu_seconds": 0.082119,
+        "maxrss_bytes": 8515584,
+        "maxrss_native_units": 8515584,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 15562,
+        "server_to_client_bytes": 19227
+      },
+      "primary_reader": {
+        "reported_jobs": 0,
+        "logical_bytes": null,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": "unavailable or no primary-reader jobs; not measured zero"
+      },
+      "returned_semantic_logical_write_bytes": null,
+      "semantic_payload_bytes": null,
+      "inherited_same_offset_bytes": 4177920,
+      "non_inherited_output_extent_model_bytes": 16384,
+      "output_extent_model_basis": "complete fixed-length output minus same-offset inherited clone bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 1,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.4484933050116524,
+      "client_wait4": {
+        "user_seconds": 0.077856,
+        "system_seconds": 0.024279,
+        "cpu_seconds": 0.10213499999999999,
+        "maxrss_bytes": 12075008,
+        "maxrss_native_units": 12075008,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.117573,
+        "system_seconds": 0.026782,
+        "cpu_seconds": 0.144355,
+        "maxrss_bytes": 9502720,
+        "maxrss_native_units": 9502720,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 28003,
+        "server_to_client_bytes": 3082
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 2,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.38986671599559486,
+      "client_wait4": {
+        "user_seconds": 0.079624,
+        "system_seconds": 0.024317,
+        "cpu_seconds": 0.103941,
+        "maxrss_bytes": 12099584,
+        "maxrss_native_units": 12099584,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.118007,
+        "system_seconds": 0.027628,
+        "cpu_seconds": 0.14563500000000001,
+        "maxrss_bytes": 9535488,
+        "maxrss_native_units": 9535488,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 28003,
+        "server_to_client_bytes": 3082
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 3,
+      "phase": "measured",
+      "repetition": 1,
+      "availability": "SAVED_UPDATE_OBSERVATIONS",
+      "wall_seconds": 0.39121682895347476,
+      "client_wait4": {
+        "user_seconds": 0.077696,
+        "system_seconds": 0.023795,
+        "cpu_seconds": 0.101491,
+        "maxrss_bytes": 12005376,
+        "maxrss_native_units": 12005376,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "server_wait4": {
+        "user_seconds": 0.115274,
+        "system_seconds": 0.025713,
+        "cpu_seconds": 0.140987,
+        "maxrss_bytes": 9584640,
+        "maxrss_native_units": 9584640,
+        "block_input_operations": 0,
+        "block_output_operations": 0
+      },
+      "forwarded_protocol_bytes": {
+        "client_to_server_bytes": 28003,
+        "server_to_client_bytes": 3082
+      },
+      "primary_reader": {
+        "reported_jobs": 6,
+        "logical_bytes": 12583368,
+        "scope": "Delivered stable worker primary readers only; excludes nested readers (including output verification), legacy/validator reads, partial or cancelled readers, channel prefetch, syscalls and physical disk I/O.",
+        "absence": null
+      },
+      "returned_semantic_logical_write_bytes": 6144,
+      "semantic_payload_bytes": 16384,
+      "inherited_same_offset_bytes": 0,
+      "non_inherited_output_extent_model_bytes": 6144,
+      "output_extent_model_basis": "production SemanticDelta successful returned logical write bytes",
+      "application_read_bytes": null,
+      "hash_parse_verify_commit_seconds": null,
+      "physical_storage_write_bytes": null,
+      "descriptor_queue_peaks": null
+    }
+  ],
+  "source_currentness": "Not rebound to later checkout; retain exact input/build manifests.",
+  "actual_parent_terminal_or_resource_release_inferred": false,
+  "interpretation": [
+    "Client/server wait4 CPU may overlap through reaped descendants; never sum these receipts as whole-tree CPU.",
+    "maxrss is per-process lifetime high water, not simultaneous tree RSS or a configured hard memory cap.",
+    "Forwarded protocol bytes include metadata/RPC overhead and exclude launcher framing; not encrypted or physical network bytes.",
+    "Primary-reader bytes exclude nested verification, legacy/helper reads and prefetch; absent counters are unknown, not zero.",
+    "Semantic write counts are successful returned logical writes; other output extents are labeled models, not write syscalls or APFS block savings.",
+    "Block operations are native operations, never converted into physical bytes.",
+    "Functional single samples are not repeated throughput benchmarks; missing stage/physical/peak measurements remain null."
+  ],
+  "input": {
+    "path": "/private/tmp/u-pr13-properties-29c8a6e1/RESULT.json",
+    "bytes": 1118924,
+    "sha256": "e62691e3e467416227a30a5c5c9ac84afa13b4e9730907672776471987f43a17"
+  }
+}
