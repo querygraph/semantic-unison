@@ -2,7 +2,6 @@ open Lwt
 
 let transport = Features.register "semantic-delta-v0" ~arcFormatChange:false None
 let debug = Trace.debug "semantic"
-let close_fd_noerr fd = try Unix.close fd with _ -> ()
 let unlink_stage_noerr path = try Fs.unlink path with _ -> ()
 let supported connection =
   SemanticFormats.peer_enabled () <> [] && Remote.connectionVersion connection >= 1 &&
@@ -193,10 +192,12 @@ let register_candidate files path basis output =
 (* The name owner is independent of the worker descriptor lease. Connection
    cleanup defers its identity-bound unlink until borrowed work has settled. *)
 type publication = { context : StagePublication.owned; scope : retained_publication;
-  files : held_files; mutable candidate : candidate option; mutable closing : bool;
+  staging_files : held_files; mutable candidate : candidate option; mutable closing : bool;
   mutable closed : bool; mutable close_failed : bool; mutable close_error : exn;
   mutable loose_basis : Unix.file_descr; mutable loose_output : Unix.file_descr;
-  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool; mutable loose_parent_held : bool }
+  mutable loose_parent : Unix.file_descr; mutable loose_fds : bool;
+  parent_handoff : StagePublication.parent_handoff; parent_owner : NotificationPipe.t;
+  interrupted_error : exn }
 and retained_publication = {
   mutable files : held_files option;
   mutable publication : publication option;
@@ -216,10 +217,12 @@ let retained_publication_cause scope = scope.cause
 let retained_publication_native scope = scope.native
 let retained_publication_pair_ownership (scope:retained_publication) =
   match scope.files with None -> None | Some files -> Some files.ownership
+let retained_publication_parent_ownership (scope:retained_publication) =
+  match scope.publication with None -> None | Some publication -> Some publication.parent_owner
 let retained_publication_descriptors (scope:retained_publication) =
   let pair=match scope.files with None -> [] | Some files -> file_descriptors files in
   match scope.publication with
-  | Some publication when publication.loose_parent_held -> publication.loose_parent::pair
+  | Some publication when NotificationPipe.read_held publication.parent_owner -> publication.loose_parent::pair
   | _ -> pair
 let create_publication_scope () =
   let pending=Lwt.wait () in
@@ -249,23 +252,28 @@ let protect_publication_scope scope work =
 let close_publication publication =
   publication.closing<-true;
   (match publication.candidate with Some candidate -> candidate.files.closing<-true | None -> ());
-  if not publication.files.busy && not publication.closed && not publication.scope.uncertain then begin
+  if not publication.staging_files.busy && not publication.closed && not publication.scope.uncertain then begin
     publication.closed<-true;
-    publication.files.publication_pending<-false;
+    publication.staging_files.publication_pending<-false;
     (* Close the raw borrowed pair before a native abort can remove its stage
        name. The native context retains its independent witness/parent handles. *)
-    (try close_files publication.files
+    (try close_files publication.staging_files
      with error -> publication.close_failed<-true;publication.close_error<-error;
        record_publication_cause publication.scope error);
+    (* A false native acknowledgement leaves the incoming directory locally
+       owned. Close it once; a true acknowledgement must never close it here. *)
+    (try
+       if publication.scope.cause_recorded then NotificationPipe.remember_failure publication.parent_owner publication.scope.cause;
+       NotificationPipe.close_all publication.parent_owner
+     with NotificationPipe.Uncertain _ as error ->
+       mark_scope_uncertain publication.scope error;
+       publication.close_failed<-true;publication.close_error<-error);
     if not publication.scope.uncertain then
       (try owned_call publication.scope (fun () -> StagePublication.abort_owned publication.context)
        with error -> publication.close_failed<-true;publication.close_error<-error;
          record_publication_cause publication.scope error);
     if not publication.scope.uncertain then begin
       publication.loose_fds<-false;
-      if publication.loose_parent_held then begin
-        publication.loose_parent_held<-false;close_fd_noerr publication.loose_parent
-      end;
       (match publication.candidate with Some candidate ->
         if candidate.files.closing then cleanup candidate | None -> ())
     end;
@@ -282,9 +290,15 @@ let release_candidate_noerr candidate =
     (try cleanup_noerr candidate with _ -> ())
 let register_publication scope context files =
   let publication =
-    try {context;scope;files;candidate=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
-      loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;
-      loose_fds=false;loose_parent_held=false}
+    try
+      let parent_handoff=StagePublication.prepare_parent_handoff () in
+      let parent_owner=NotificationPipe.prepare_read_handoff parent_handoff in
+      let publication={context;scope;staging_files=files;parent_handoff;parent_owner;
+        interrupted_error=Util.Transient "Remote semantic parent handoff interrupted";
+        candidate=None;closing=false;closed=false;close_failed=false;close_error=Out_of_memory;
+        loose_basis=Unix.stdin;loose_output=Unix.stdin;loose_parent=Unix.stdin;loose_fds=false} in
+      NotificationPipe.keep_owner parent_owner (fun () -> ignore(Sys.opaque_identity publication));
+      publication
     with error -> record_publication_cause scope error;
       owned_call scope (fun () -> StagePublication.abort_owned context);raise error in
   (try scope.publication<-Some publication with error ->
@@ -324,10 +338,14 @@ let create_bound_candidate scope files ~basis ~directory ~staging stage path =
             publications.release publication; None
         | Fs.Shared_stage_handles (basis_fd, output_fd, parent) ->
             adopt_files files basis_fd output_fd;
+            NotificationPipe.adopt_read publication.parent_owner parent;
             publication.loose_basis<-basis_fd;publication.loose_output<-output_fd;
-            publication.loose_parent<-parent;publication.loose_fds<-true;publication.loose_parent_held<-true;
-            let adopt ()=StagePublication.adopt_owned context ~parent ~stage:output_fd in
-            publication.loose_parent_held<-false;
+            publication.loose_parent<-parent;publication.loose_fds<-true;
+            if publication.closing || publication.closed then begin
+              retain_files files publication.interrupted_error;
+              raise publication.interrupted_error
+            end;
+            let adopt ()=StagePublication.adopt_owned_tracked context publication.parent_handoff ~parent ~stage:output_fd in
             owned_call scope adopt;
             (* Adoption owns the name before fallible record/registry allocation.
                The existing constructor settles the raw pair on its own failure. *)

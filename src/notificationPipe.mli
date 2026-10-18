@@ -4,6 +4,11 @@
 type t
 exception Uncertain of t
 val prepare : unit -> t
+val prepare_read_handoff : StagePublication.parent_handoff -> t
+(** Prepared single-read owner tied to the qualified native acknowledgement.
+    Cleanup consults it directly; native consumption transfers close authority
+    and must not be confused with known OS closure. No caller-settable latch. *)
+val read_transferred : t -> bool
 (** Allocate the ledger, carrier and retention link before acquiring the pipe. *)
 val adopt_read : t -> Unix.file_descr -> unit
 (** Transfer one read descriptor; the absent writer is never closed. *)
@@ -24,6 +29,8 @@ val close_all : t -> unit
     Subsequent calls never retry historic numeric descriptors. close_all attempts
     both endpoints and preserves both failures. Unknown ledgers remain rooted. *)
 val settled : t -> bool
+(** No local close obligation remains: absent, known closed or acknowledged
+    transferred. A true result is not proof of native owner/OS settlement. *)
 val read_cause : t -> exn option
 val write_cause : t -> exn option
 val operation_cause : t -> exn option

@@ -68,3 +68,8 @@ val retained_publication_pair_ownership : retained_publication -> NotificationPi
 (** Read-only pair ledger evidence, including separate uncertain/known slots,
     original failure and pre-close identities. Descriptor numbers are historical;
     no numeric retry, cleanup, transfer or settlement authority is supplied. *)
+
+val retained_publication_parent_ownership : retained_publication -> NotificationPipe.t option
+(** Owner-loop diagnostics for the independently acquired parent. Native
+    consumption transfers authority, not OS-close settlement. Never retry or
+    close these historical descriptor numbers from an observation. *)

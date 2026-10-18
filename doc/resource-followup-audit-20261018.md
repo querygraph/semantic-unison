@@ -25,7 +25,32 @@ Its recognition/hash callbacks use qualified worker replies, which remain
 unsettled on worker-reader/duplicate uncertainty. Other callback types and
 pre-return/native wrapper failures need their own scope-specific review.
 
-## Next native/remote ownership work
+## Progress since the original inventory
+
+Prepared raw-pair ownership, nonce single-close ownership and the tracked native
+parent API now have separate qualification receipts under tests/qualification.
+The current SemanticRemote successor also uses that native acknowledgement in its
+prepared parent ledger; caller qualification and current builds are sealed
+in remote-parent-caller-actual-20261018.json. These fixes replace the raw close
+paths described in the historical inventory below; they do not establish opaque
+directory ownership or aggregate process budgets.
+
+The next concrete directory gap remains CandidateValidation.all_children: its
+exception branch discards a closedir failure, while System_generic.opendir builds
+the callback record after Unix.opendir returns. Prepare the owner, retention link,
+carrier and callback record before acquiring the opaque directory handle. Adopt
+the actual returned handle without allocating an optional wrapper, and never
+reinterpret an unopened placeholder. A close attempt must be single-use, preserve
+the original scan/budget/cancellation error plus close uncertainty, and remain
+rooted and recognizable to the surrounding admission guard. Do not infer a
+numeric FD identity for Unix.dir_handle or retry its close after an exception.
+Qualification must exercise actual validation tree enumeration and its surrounding
+borrower, not just a standalone directory ledger; include failure while installing
+or returning the wrapper and before/after real closedir, repeat cleanup, and the
+stock/Ox generic and Windows interface build boundaries. No runtime or Windows
+qualification is claimed by this source plan.
+
+## Original native/remote ownership inventory (historical)
 
 SemanticRemote.held_files currently sets closed before iterating raw closes,
 records only the first ordinary Unix error, and has no per-descriptor retained

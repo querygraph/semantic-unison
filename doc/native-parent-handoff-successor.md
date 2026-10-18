@@ -13,10 +13,31 @@ participants fail designated assertions, and2private generic-branch build/link
 controls refuse unsupported preparation. Original owned/legacy controls pass.
 Evidence: `tests/qualification/tracked-parent-api-actual-20261018.json`.
 
-NOT YET DONE: SemanticRemote still uses untracked adoption and must integrate
-its prepared parent ledger with the acknowledgement, including failure between
-C return and ML bookkeeping. No full caller handoff/observer/RSS/aggregate FD
-qualification is inferred. The original design below is preserved as ancestry.
+## Caller integration (2026-10-18)
+
+SemanticRemote now prepares a parent ledger and abstract handoff before acquiring
+clone-stage descriptors, adopts the returned parent immediately, and invokes the
+tracked native entry. Cleanup reads the acknowledgement itself: no fallible ML
+post-call flag determines whether the parent remains locally closeable. A consumed
+parent is transferred, not declared OS-closed. An unconsumed close error preserves
+its cause and pre-close identity and prevents native abort/name removal. Interruption
+observed after acquisition roots all returned handles instead of continuing adoption.
+
+Both current Make builds/selftests pass. Sixteen caller controls pass stock/Ox:
+known transfer, pre-call and post-call failure, pre-entry uncertainty, parent close
+failure before and after kernel settlement, combined pair/parent errors, and
+post-acquisition interruption. Two deliberately wrong always-transferred consumers
+fail the designated pre-entry assertion. These use generated8192B DNGs and an
+in-process planner, not network transport or SDK. Unknown cases preserve stage
+bytes/admission and do not retry numeric FDs during connection cleanup; their
+remaining resources end at process exit, not claimed normal native teardown.
+
+Current stock/Ox Make and Dune builds/selftests match all327 production hashes.
+All24 staging-pair and8 native-publication regressions pass on that exact source.
+Evidence: tests/qualification/remote-parent-caller-actual-20261018.json.
+Opaque directory ownership, aggregate FD/RSS and wider benchmark/final integration
+remain open. The original design below is historical
+ancestry describing the old caller, not the current source.
 
 # Native parent handoff: next source successor
 
