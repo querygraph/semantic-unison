@@ -6022,3 +6022,17 @@ tests/qualification/current-validation-warning-actual-20261018.json SHA c4fb967f
 CLIexplicitlySKIPPED/noAdobe/SDK/Photo/EXglobal/nativeUI; oldnegativecontrols
 notrerun here. FrozenV6 untouched/currentreceiving remainsseparate. Goalactive
 and incomplete; noownedlivejobs/resources.
+
+
+## 2026-10-18 build instructions corrected to standing8
+
+Found outdated local-build-and-tests.md recommending rawfourjob build and
+18credits asshareddefault. Replacedwithqualifiedmanual shared8/atmost2compiler
+jobs and3+3selftestworkers+2owner; freshoutputs/actualterminal distinction,
+SDK/EXIOcoordination andhistoricalfuzz tooling scopeexplicit. FourMake/Dune
+stock/Ox dry-run commandderivations actual6e9f3e/0 checked jobs2/selftest3 and
+buildsystemselection; nochildren/tokens/workspaces acquiredcreated. Evidence
+tests/qualification/shared-build-documentation-dry-run-20261018.json SHA 4e7b3a98a8b32710f36fb51b5591b38ba297875f39d7b7128caccd388fb5678b.
+No production/frozenV6 edits or newruntimegrant. Ordinary/clone success-write
+counters remain unavailable; existing skip totals and output model are not
+syscall counters. Do not relabel them. Goalactive/incomplete/noownedlivejobs.
