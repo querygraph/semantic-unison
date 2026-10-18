@@ -66,6 +66,7 @@ class ArtifactBinding(unittest.TestCase):
     def setUp(self):
         self.plan={'current_builds':{label:{'path':'/inert/'+label+'.json','sha256':'a'*64} for label in ('stock','ox')},
                    'artifacts':{label:{'path':'/inert/'+label,'sha256':'b'*64} for label in ('stock','ox','old-stock')}}
+        self.plan['compiler_artifacts']={label:{'path':'/inert/compiler.opt','sha256':'b'*64} for label in ('stock','ox')}
         self.mutate=lambda build:None
     def check(self):
         def receipt(path,sha):
@@ -73,9 +74,32 @@ class ArtifactBinding(unittest.TestCase):
             build=dict(complete=True,build_exit=0,selftest_exit=0,binary='/inert/'+label,binary_sha256='b'*64,
                        compiler='/inert/compiler',compiler_sha256='b'*64,source_sha256={'src/copy.ml':'b'*64})
             self.mutate(build);return build
-        with patch.object(e,'read_manifest',side_effect=receipt),patch.object(e,'digest',return_value='b'*64):
+        with patch.object(e,'read_manifest',side_effect=receipt),patch.object(e,'digest',return_value='b'*64),patch.object(Path,'resolve',return_value=Path('/inert/compiler.opt')):
             e.verify_artifacts(self.plan)
     def test_build_binding(self):self.check()
+    def test_wrong_resolved_compiler(self):
+        self.plan['compiler_artifacts']['stock']['path']='/inert/wrong'
+        with self.assertRaises(ValueError):self.check()
+    def test_compiler_symlink_reads_only_pinned_regular_target(self):
+        import hashlib
+        with tempfile.TemporaryDirectory(prefix='mixed-compiler-link-') as temp:
+            target=Path(temp)/'compiler.opt';target.write_bytes(b'original compiler fixture')
+            alias=Path(temp)/'compiler';alias.symlink_to(target.name)
+            target=target.resolve()
+            digest=hashlib.sha256(target.read_bytes()).hexdigest()
+            for label in ('stock','ox'):
+                self.plan['compiler_artifacts'][label]={'path':str(target),'sha256':digest}
+            def receipt(path,sha):
+                label=Path(path).stem
+                return dict(complete=True,build_exit=0,selftest_exit=0,binary='/inert/'+label,
+                    binary_sha256='b'*64,compiler=str(alias),compiler_sha256=digest,
+                    source_sha256={'src/copy.ml':'b'*64})
+            actual=e.digest
+            def checked(path):
+                self.assertNotEqual(Path(path),alias)
+                return actual(path) if Path(path)==target else 'b'*64
+            with patch.object(e,'read_manifest',side_effect=receipt),patch.object(e,'digest',side_effect=checked):
+                e.verify_artifacts(self.plan)
     def test_failed_selftest(self):
         self.mutate=lambda build:build.update(selftest_exit=1)
         with self.assertRaises(ValueError):self.check()

@@ -1,0 +1,29 @@
+{
+  "state": "PREPARED_NOT_ADMITTED",
+  "plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/mixed-peer-plan-v2.json",
+    "sha256": "f4292ab55091d351e8487de77ea1b12b9414887bb5ea2ec0396f1d14b9f52aa2"
+  },
+  "launch_argv": [
+    "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/mixed_peer_compatibility/entry.py",
+    "--plan",
+    "/Users/alexy/src/unison-sol-review-20261017/doc/mixed-peer-plan-v2.json",
+    "--plan-sha256",
+    "f4292ab55091d351e8487de77ea1b12b9414887bb5ea2ec0396f1d14b9f52aa2",
+    "--admission",
+    "/private/tmp/unison-mixed-peer-admission-3d8529a6.json",
+    "--admission-sha256",
+    "ROOT_PUBLISHED_SHA_REQUIRED"
+  ],
+  "proposed_admission": "/private/tmp/unison-mixed-peer-admission-3d8529a6.json",
+  "workspace": "/private/tmp/u-mp-3d8529a6",
+  "required_admission_fields": {
+    "state": "ROOT_ADMITTED_ONE_MIXED_PEER_JOB",
+    "plan_sha256": "f4292ab55091d351e8487de77ea1b12b9414887bb5ea2ec0396f1d14b9f52aa2",
+    "workspace": "/private/tmp/u-mp-3d8529a6",
+    "start_deadline_unix": "ROOT_FRESH_DEADLINE_REQUIRED"
+  },
+  "controls": "12 compiler/entry controls PASS; resolved compiler executable explicitly pinned, nofollow retained on final file; old failed run preserved, user explicitly requested fix and retry.",
+  "unknown_policy": "Retain actual owners and known grants; no broad signals/replay/numeric descriptor retry. Collect actual owning-tool terminal separately from CLOSED.json."
+}

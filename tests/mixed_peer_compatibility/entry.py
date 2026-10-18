@@ -59,6 +59,7 @@ def checked_plan(path,expected):
 def verify_artifacts(plan):
     """Called only after the worker verifies inherited IO/CPU ownership."""
     require(set(plan['current_builds'])=={'stock','ox'},'two current qualified build receipts required')
+    require(set(plan['compiler_artifacts'])=={'stock','ox'},'two resolved compiler bindings required')
     for label,pin in plan['current_builds'].items():
         build=read_manifest(pin['path'],pin['sha256'])
         require(build['complete'] is True and type(build['build_exit']) is int
@@ -66,7 +67,13 @@ def verify_artifacts(plan):
                 and build['selftest_exit']==0 and build['binary']==plan['artifacts'][label]['path']
                 and build['binary_sha256']==plan['artifacts'][label]['sha256'],
                 'successful current build/selftest/binary binding differs')
-        require(digest(build['compiler'])==build['compiler_sha256'],'compiler pin differs')
+        compiler = plan['compiler_artifacts'][label]
+        resolved = Path(build['compiler']).resolve(strict=True)
+        require(compiler == {'path':str(resolved), 'sha256':build['compiler_sha256']},
+                'resolved compiler binding differs')
+        require(digest(resolved)==compiler['sha256'],'compiler pin differs')
+        require(Path(build['compiler']).resolve(strict=True)==resolved,
+                'compiler link changed during verification')
         production={name:sha for name,sha in build['source_sha256'].items() if name.startswith('src/')}
         require(bool(production),'build production inventory missing')
         for name,sha in production.items():

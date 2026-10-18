@@ -1,0 +1,47 @@
+{
+  "scope": "12 fake resource and compiler binding controls, including real original disposable compiler symlink/readonly target hash; no transport",
+  "actual_tool": {
+    "chunk": "a0ee5c",
+    "exit": 0,
+    "no_session": true
+  },
+  "prior_fixture_failure": {
+    "chunk": "ee8e32",
+    "exit": 1,
+    "reason": "fixture /var alias vs resolved /private/var path; corrected fixture only"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-001/SHARED-CLOSED.json",
+      "sha256": "150ae4a7a24620e2f03e9e99e929c4e9f2a17842f7ede19d2228eca4c119dd50"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-001/SHARED-START.json",
+      "sha256": "6e2cf41bc0928ecdd278b3986e2759fb5b65a3a4a06514fb526fa16e8dd409e4"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-001/SHARED-STDERR.txt",
+      "sha256": "ac990b1c08ea132ea39bb53cb287266c38c0206e0ee68464d4401965573a5f1a"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-001/SHARED-STDOUT.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-002/SHARED-CLOSED.json",
+      "sha256": "1db8a395969abb9a4c202f277c27648bdc49b5f69914bc2dd2741f7e132fffe3"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-002/SHARED-START.json",
+      "sha256": "d261fb0a828530566c12cdff8ab4d32a311f6de8aa3d754ff8b812040621b59d"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-002/SHARED-STDERR.txt",
+      "sha256": "801524188e3685c494b3302dea7d76f2ce5465f79ea7636b33023966f00965f1"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-compiler-controls-20261017-002/SHARED-STDOUT.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ]
+}
