@@ -1,0 +1,218 @@
+{
+  "schema": "unison-current-xmp-qualification/1",
+  "observed_at": "2026-10-18T20:51:00.851505+00:00",
+  "status": "PASS_CLOSED",
+  "actual_controller": {
+    "session": 65831,
+    "initial_chunk": "7dcb8a",
+    "terminal_chunk": "c277e0",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "jobs": [
+    {
+      "flavor": "stock",
+      "family": "kernel",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/RESULT.json",
+          "bytes": 2069,
+          "sha256": "1c5e6804c1fb91eb80b97967006c02e7dfc78f8cff6f7799cd4b6262167b9ea2"
+        },
+        {
+          "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "3feb6b04260e5a87d22720c377428fa8aedeec24f65108f5d889f21abf986882"
+        }
+      ],
+      "source_pins": {
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf",
+        "tests/xmp_merge/test.ml": "dfc35dac66fa9f8e20ee90769b2671233d7e66a7c17c7f0b27c1c46769bcef40",
+        "tests/xmp_merge/run.py": "10402201d31f851050dba259402a9b431a5838487c46d0b062603faa95c3e494"
+      },
+      "closed": {
+        "child": {
+          "pid": 34787,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 34787,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "flavor": "stock",
+      "family": "observation",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/RESULT.json",
+          "bytes": 2402,
+          "sha256": "9da74b968f35f3c11c5261f47761809152d892e7012cc9eb1bbc785bd5186ff2"
+        },
+        {
+          "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "09cf9aa497d1bfdfeb4b68072a05120fb8a95721262b8358fb1d68833f93c08f"
+        }
+      ],
+      "source_pins": {
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "tests/xmp_observation/test.ml": "ab35fdc7f6a18fd0415c7d1ec2af69c8af2894f607e66c1e7087b732321590e6",
+        "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+        "tests/xmp_observation/run.py": "ff4bbcaf9d0320937f7ad5db0abb5ae6b28b20a8f76658387fc6c2626c21942c"
+      },
+      "closed": {
+        "child": {
+          "pid": 34835,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 34835,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "flavor": "ox",
+      "family": "kernel",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/RESULT.json",
+          "bytes": 2072,
+          "sha256": "6c8313eeea4a2e4d3a58e878366a5a01d14347f9fb0557a1290f2b246262b8cd"
+        },
+        {
+          "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e096a8c6efddf14da27161040b0848e8443135f74ff96201800cab85e68c1969"
+        }
+      ],
+      "source_pins": {
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash.ox.mli.in": "2f0b838f707a213ef36e62563c8dc0da9c9154325ada124926537851e437c994",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "src/xmpObservation.ox.mli.in": "b7852c2c62d31e87d5f8f8a1e717e2671245bd3e6d35fee5a181194c35f52fea",
+        "src/xmpMerge.ml": "9b843024d3954f162837906a2811c2aa370a19c9897ca765cdfabc67519d38f6",
+        "src/xmpMerge.mli": "36c09d8530b2d2190683411c4becd2acbeb1d1fd3415407acb475e50f3cf2ba9",
+        "src/xmpMerge.ox.mli.in": "b5b14c9e1e274096cf2bc88dbcc0ceacfffcc2eff4f9d9871b4c1755a1f7954e",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/semantic_mode_filter.ml": "ab26a01d52a85ef7ea733d05beb681476766806ca24a17421a12ad4fcb3abbaf",
+        "tests/xmp_merge/test.ml": "dfc35dac66fa9f8e20ee90769b2671233d7e66a7c17c7f0b27c1c46769bcef40",
+        "tests/xmp_merge/run.py": "10402201d31f851050dba259402a9b431a5838487c46d0b062603faa95c3e494"
+      },
+      "closed": {
+        "child": {
+          "pid": 34859,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 34859,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    },
+    {
+      "flavor": "ox",
+      "family": "observation",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/RESULT.json",
+          "bytes": 2407,
+          "sha256": "7b326769c9e227ecced48d5d33f37d81923f0588a889eedc2833f70140a54ba5"
+        },
+        {
+          "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "af962cd8c5e2e6f8e35248175c073313e3da1b90f52c9d89555050317696c5d0"
+        }
+      ],
+      "source_pins": {
+        "src/semanticHash.ml": "cfe5d53b8665ca889bbef0fc5f46316165688fcbc6dd384a479776cd33f4bae6",
+        "src/semanticHash.mli": "77a5922b89cbe0805b59294dc3a0a43f7e77f03265832e15ae65aabbf207e3c0",
+        "src/semanticHash_stubs.c": "6fc4c1a1a60ba34a3a569223505eb52a41627b79be388697f5a711c854357290",
+        "src/semanticHash_evp.h": "59e570dc483e25481033669ad9339ac83427c299180d803906fa9d893b94da75",
+        "src/xmpObservation.ml": "863ec3694ab3a494a940c011fa49fc1858cf8fd82a603769c1f4745af5a20874",
+        "src/xmpObservation.mli": "25c1100c70c095e20a4901a350891faab274c8ae46684c627c982310ed1fdc18",
+        "tests/xmp_observation/test.ml": "ab35fdc7f6a18fd0415c7d1ec2af69c8af2894f607e66c1e7087b732321590e6",
+        "tests/xmp_observation/probe.ml": "ddd2aacf08c3c67e88ad5ef5d72d4c397657afeaa8ffcdf46d2d316a3025a888",
+        "tests/xmp_observation/run.py": "ff4bbcaf9d0320937f7ad5db0abb5ae6b28b20a8f76658387fc6c2626c21942c"
+      },
+      "closed": {
+        "child": {
+          "pid": 34917,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 34917,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      }
+    }
+  ],
+  "scope": "Original synthetic in-memory XMP kernel and fixed observation controls; stock and OxCaml; Ox kernel four domains. No randomized campaign, SDK, Photo, transport, EXglobal or performance qualification.",
+  "frozen_v6_unchanged": true
+}

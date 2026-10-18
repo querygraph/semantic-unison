@@ -5916,3 +5916,19 @@ pinned. Only metadata/evidence/docs added; no newprod or V6runtimeclosurechange.
 Audit oldgapremainsimmutablehistorical; this qualifiesstatedcompositioncurrent.
 Nextpriorities actualV6upstream/fork/property grants +remainingacceptancemap,
 notuniversalcleanupmigration. Goalactive/incomplete, no ownedlivejobs/resources.
+
+
+## 2026-10-18 current XMP kernel and fixed observation renewed
+
+Actual controller65831 initial7dcb8a terminalc277e0/exit0/no session. Four
+original source controls stock/Ox kernel+fixed observation passed; all children
+reaped0/groups absent/CPU8 closed per SHARED-CLOSED. Ox kernel four concurrent
+domains; fixed observation random byte cases0/XML mutation campaign disabled.
+Current source pins independently compared. This renews evidence after changed
+xmpObservation/semantic_mode_filter dependencies; no production edit, SDK,
+Photo, transport, EXglobal, pixel or performance qualification. Evidence:
+tests/qualification/current-xmp-kernel-observation-actual-20261018.json
+SHA f5b505b1df817cd5a82b8b445f1f22a71f399809cb0f0b784587c7d19364e126 . Frozen V6 candidate unchanged; its three admissions absent
+at preceding fresh check. Next actual V6 compatibility/property grants and
+remaining requirement-by-requirement acceptance consolidation. Goal active and
+incomplete; no owned live jobs/resources.
