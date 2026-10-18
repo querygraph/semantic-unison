@@ -23,7 +23,7 @@ exhaustive private-field interpretation is not a deployment gate.
 | 9 Parallelism/resources | Checked worker closures, pool1/2/4/8 parity, source/accounted CPU/queue/FD controls, shared SDK tests | Current-object pool1/2/4/8 parity and384-job scheduling controls passed; see integration-worker-parity/apply receipts. Credits and bounded samples are not hard OS-thread/RSS caps or calibrated speedup. |
 | 10 Semantic merge | Conservative scalar XMP policy and built-in two-replica materialization, stale/missing-base and conflict refusal | Current scalar XMP25+343+4 controls passed per compiler; full receiving remains separately admitted. General RDF/growing/rendering merges remain unsupported. |
 | 11 Generic cloned transfer | Reused upstream engine, same/shifted ranges, clone-off/fallback, EOF/no-op controls, ordinary camera fallback | Current candidate property/clone matrix passed18rows54CLI; precise capability/mount limits and no physical-savings claim remain. |
-| 12 Optional Adobe/CPU | off/warn/require, receiving/all-scanned paths, real SDK receipts, helper lifecycle and declared inner-thread budget | Candidate mixed receiving/SDK follow-up needs fresh exact admission. No corpus-wide, peak-resource or quiet-scaling inference. |
+| 12 Optional Adobe/CPU | off/warn/require, receiving/all-scanned paths, real SDK receipts, helper lifecycle and declared inner-thread budget | Current stock/Ox mixed SDK + ExifTool13.59 follow-up passed under its consumed V2 admission; see the sealed result below. No corpus-wide, peak-resource or quiet-scaling inference. |
 
 ## Current final verification state
 
@@ -96,3 +96,35 @@ no IO barrier or native/SDK reservation is created by this document. Remote
 endpoint cache reuse and automatic parent provisioning are absent; the existing
 uncached remote report and exact transfer fallback remain usable. Their absence
 must not be confused with incomplete MakerNote meanings or a Photo scheduling hold.
+
+## Current mixed validation and directed regressions
+
+[Mixed validation V2](../tests/qualification/mixed-validation-v2-actual-20261017.json)
+binds actual owner65518/7248bd/0/no session, two generated-input stock/Ox
+probes, two qualified single-thread SDK helpers, two ExifTool13.59 helpers and
+32 reported hashing tasks. Worker92257 was reaped0 with its group absent;
+CPU8 and EXglobal closed. The parent verified disposable input bytes while
+holding IO; later sealing only reparsed metadata. Admission49b11c28 is consumed.
+This closes the installed13.59 combined-workload evidence gap, not hard resource
+caps, camera rendering, compute overlap or throughput.
+
+Current directed checks additionally passed worker parity on both compilers,
+SDE wire conformance, fixed-only DNG profile cases and JPEG bounds. The three
+standalone test runners now copy the required semanticHash_evp.h header.
+[Binding audit V2](sol-fresh-acceptance-bindings-20261017-v2.json) records explicit
+source bindings; a binding alone never proves a behavioral acceptance item.
+The preserved V1 binding audit incorrectly considered some absolute test paths
+as production paths; V2 excludes them and generated projectInfo.ml.
+
+## Remaining M6 work is substantive
+
+SOL M6 explicitly requires descriptor/RSS limits and a benchmark report separating
+read/write/network/CPU effects. The current admission implementation enforces
+declared resource credits, queue bounds and ownership settlement. It does not
+enforce a whole-process or process-tree RSS/FD ceiling. The resource inventory
+in resource-admission.md also leaves incoming RPC allocation, native transient
+peaks and unrelated legacy baselines outside its envelope. Those requirements
+are therefore **not proved complete** by successful worker parity or SDK tests.
+The existing partial warm512 observations retain failed part3 and timing
+contamination disclosures; they cannot establish current quiet scaling.
+No universal hard-cap or speedup claim is made, and the full goal remains active.

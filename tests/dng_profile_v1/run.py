@@ -25,7 +25,7 @@ from fixtures import (Layout, PROFILE, PRIMARY, XMP, XMP_LENGTH, SIZE,
 MODULES = ("semanticHash", "semanticFile", "formatExtension", "xmpObservation", "xmpMerge",
            "dngSemantic", "dngExtended", "semanticDelta")
 INPUTS = tuple("src/" + name + suffix for name in MODULES for suffix in (".mli", ".ml")) + (
-    "src/semanticHash_stubs.c", "src/semanticFile_stubs.c",
+    "src/semanticHash_stubs.c", "src/semanticHash_evp.h", "src/semanticFile_stubs.c",
     "tests/semantic/conformance/reference.py", "doc/semantic-delta-v0.md",
     "tests/dng_profile_v1/fixtures.py", "tests/dng_profile_v1/test.ml",
     "tests/dng_profile_v1/fs.c", "tests/dng_profile_v1/run.py",
