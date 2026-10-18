@@ -5955,3 +5955,15 @@ tests/qualification/current-sde-conformance-actual-20261018.json SHA 00a274ab355
 FrozenV6 production/runtime untouched; actual three transport/property grants
 still needed, plus remaining M6 resource/platform/performance verification.
 Goal active/incomplete; no owned live jobs/resources.
+
+
+## 2026-10-18 saved benchmark read/write/transport distributions
+
+Added separate directional protocol/read/write/model/unknown distributions to
+existing timed summary. Four directed tests add86c/0 and saved-only actual
+2adb9d/0 passed; both child/group/CPU4 closed. All108 historical rows retained,
+no synchronization or payload repeated; raw66422ef7 unchanged. Evidence
+tests/qualification/timed-resource-distributions-actual-20261018.json SHA 07cedbf7bef8ea0c805b25d81cc421b3161205b5127c4a2f725d50513c6a6737.
+Report bench/sync/results/shared-timed-resource-distributions-20261018.md;
+physical/application totals remainunknown, modeledextents notwrites. No general
+speedup/currentcandidate/quietclaim. FrozenV6 unchanged, goal stillactive.

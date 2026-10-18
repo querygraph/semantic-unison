@@ -44,7 +44,14 @@ def summarize(result):
             update_wall_seconds=distribution([r['wall_seconds'] for r in measured]),
             client_cpu_seconds=endpoint('client_wait4'),server_cpu_seconds=endpoint('server_wait4'),
             semantic_returned_write_bytes=distribution([r['returned_semantic_logical_write_bytes'] for r in measured]),
-            primary_reader_bytes=distribution([None if r['primary_reader'] is None else r['primary_reader']['logical_bytes'] for r in measured])))
+            primary_reader_bytes=distribution([None if r['primary_reader'] is None else r['primary_reader']['logical_bytes'] for r in measured]),
+            forwarded_client_to_server_bytes=distribution([None if r['forwarded_protocol_bytes'] is None else r['forwarded_protocol_bytes']['client_to_server_bytes'] for r in measured]),
+            forwarded_server_to_client_bytes=distribution([None if r['forwarded_protocol_bytes'] is None else r['forwarded_protocol_bytes']['server_to_client_bytes'] for r in measured]),
+            semantic_payload_bytes=distribution([r['semantic_payload_bytes'] for r in measured]),
+            inherited_same_offset_bytes=distribution([r['inherited_same_offset_bytes'] for r in measured]),
+            non_inherited_output_extent_model_bytes=distribution([r['non_inherited_output_extent_model_bytes'] for r in measured]),
+            application_read_bytes=distribution([r['application_read_bytes'] for r in measured]),
+            physical_storage_write_bytes=distribution([r['physical_storage_write_bytes'] for r in measured])))
     return dict(schema='unison-shared-timed-summary/1',state='SAVED_REPEATED_MATRIX_ONLY',
         lifecycle=proof,observations=observations,groups=summaries,
         raw_rows_retained=len(observations['rows']),warmup_rows_excluded_from_distributions=18,
@@ -54,6 +61,8 @@ def summarize(result):
             'With five samples nearest-rank p90 is the maximum, not a stable population-tail estimate.',
             'Client and server CPU remain separate; wait4 descendant attribution may overlap.',
             'Absent observations stay unknown, not measured zero; no inclusive phase sums.',
+            'Forwarded protocol bytes are directional transport observations, not physical network traffic.',
+            'Non-inherited output extents remain models, not write syscalls or physical APFS storage writes.',
             'One shared-host warm generated dataset; not quiet timing, physical IO, hard limits or full SOL matrix.'])
 
 

@@ -29,7 +29,28 @@ class Summary(unittest.TestCase):
             self.assertEqual(group['update_wall_seconds']['p90_nearest_rank'],5)
             self.assertFalse(group['client_cpu_seconds']['available'])
             self.assertEqual(group['semantic_returned_write_bytes']['median'],0)
+            self.assertEqual(group['forwarded_client_to_server_bytes']['samples'],[0]*5)
+            self.assertEqual(group['forwarded_server_to_client_bytes']['samples'],[10]*5)
+            self.assertFalse(group['application_read_bytes']['available'])
+            self.assertFalse(group['physical_storage_write_bytes']['available'])
         self.assertEqual(value,before)
+
+    def test_directional_transfer_and_modeled_write_samples_remain_separate(self):
+        value=saved()
+        for row in value['samples']:
+            n=row['repetition']
+            row['update_sync']['proxy']['forwarded_protocol_bytes']={
+                'client_to_server_bytes':n*2,'server_to_client_bytes':n*7}
+            row['counters']['materialization_non_inherited_logical_bytes_model']=n*11
+            row['counters']['same_offset_inherited_bytes']=n*13
+        for index,row in enumerate(value['samples']):
+            value['invocations'][index*3+1]['outcome']=copy.deepcopy(row['update_sync'])
+        for group in report.summarize(value)['groups']:
+            self.assertEqual(group['forwarded_client_to_server_bytes']['median'],6)
+            self.assertEqual(group['forwarded_server_to_client_bytes']['median'],21)
+            self.assertEqual(group['non_inherited_output_extent_model_bytes']['median'],33)
+            self.assertEqual(group['inherited_same_offset_bytes']['median'],39)
+            self.assertIsNone(group['physical_storage_write_bytes']['median'])
 
     def test_unknown_is_not_zero_and_bad_numbers_refuse(self):
         self.assertIsNone(report.distribution([0,None,1])['median'])
