@@ -182,3 +182,12 @@ see `../tests/qualification/benchmark-job-latency-actual-20261017.json`. New per
 monotonic observations include queue/admission/delivery and overlap. They do not
 close the internal hash/parse/verify/commit timing requirement or qualify scaling.
 Production worker interfaces and historical bulk results are unchanged.
+
+## Opt-in production phase observations
+
+[Reader-local phase collection](semantic-phase-observations-v1.md) adds explicit
+inclusive hash/parse/verify/write intervals without owner callbacks on workers
+or SDE wire changes. Stock/Ox production-object controls and full builds/selftests
+qualify collection; stages overlap and do not represent CPU time. Atomic commit,
+complete application coverage and an actual end-to-end measurement matrix remain
+open. Existing primary-read logs and disabled defaults are preserved.

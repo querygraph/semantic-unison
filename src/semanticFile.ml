@@ -32,12 +32,18 @@ let write_at writer data start length position =
     ignore (Unix.LargeFile.lseek writer.output position Unix.SEEK_SET);
     Unix.write_substring writer.output data start length
   end
-type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
+type stage = Hash | Parse | Verify | Write
+type stage_sample = { stage : stage; calls : int; inclusive_seconds : float }
+type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool;
+                    stages : stage_sample list option }
+type stage_counter = { durations : float array; calls : int array; mutable valid : bool }
+external monotonic_now : unit -> float (* ox-portable-ffi *)
+  = "unison_semantic_monotonic_now"
 type read_counter = { mutable bytes : int64; mutable chunks_read : int64;
                       mutable overflow : bool }
 type input = Buffered of in_channel | Positional of Unix.file_descr
 type t = { input : input; mutable active : bool; initial : Unix.LargeFile.stats;
-           check_cancel : unit -> unit; reads : read_counter option }
+           check_cancel : unit -> unit; reads : read_counter option; stages : stage_counter option }
 let account_read t length = match t.reads with
   | None -> ()
   | Some counter when length > 0 ->
@@ -49,6 +55,34 @@ let account_read t length = match t.reads with
       else counter.chunks_read <- Int64.succ counter.chunks_read
   | Some _ -> ()
 let require_active t = if not t.active then raise (Invalid "reader callback expired")
+let stage_index = function Hash -> 0 | Parse -> 1 | Verify -> 2 | Write -> 3
+let measure t stage f =
+  require_active t;
+  match t.stages with
+  | None -> f ()
+  | Some counter ->
+      let started = monotonic_now () in
+      let result = f () in
+      let stopped = monotonic_now () in
+      let index = stage_index stage in
+      let elapsed = stopped -. started in
+      let total = counter.durations.(index) +. elapsed in
+      if not (Float.is_finite started && Float.is_finite stopped &&
+              elapsed >= 0. && Float.is_finite total) || counter.calls.(index) = max_int
+      then counter.valid <- false
+      else begin
+        counter.durations.(index) <- total;
+        counter.calls.(index) <- counter.calls.(index) + 1
+      end;
+      result
+let stage_samples = function
+  | None -> None
+  | Some counter when not counter.valid -> None
+  | Some counter -> Some (List.filter_map (fun stage ->
+      let index = stage_index stage in
+      if counter.calls.(index) = 0 then None else
+      Some {stage;calls=counter.calls.(index);inclusive_seconds=counter.durations.(index)})
+      [Hash;Parse;Verify;Write])
 let descriptor t = require_active t; match t.input with
   | Buffered channel -> Unix.descr_of_in_channel channel | Positional fd -> fd
 let size t = require_active t; t.initial.Unix.LargeFile.st_size
@@ -64,7 +98,7 @@ let check t =
      a.Unix.LargeFile.st_size <> b.Unix.LargeFile.st_size || a.Unix.LargeFile.st_mtime <> b.Unix.LargeFile.st_mtime ||
      a.Unix.LargeFile.st_ctime <> b.Unix.LargeFile.st_ctime then
     raise (Invalid "file changed while inspecting")
-let with_fd_internal ~measure_reads ~check_cancel fd f =
+let with_fd_internal ~measure_reads ~measure_stages ~check_cancel fd f =
   check_cancel ();
   let initial = Unix.LargeFile.fstat fd in
   if initial.Unix.LargeFile.st_kind <> Unix.S_REG || initial.Unix.LargeFile.st_size < 0L then
@@ -92,7 +126,9 @@ let with_fd_internal ~measure_reads ~check_cancel fd f =
     (try owned_channel := Some channel
      with error -> (try close_in_noerr channel with _ -> ()); raise error);
     let reads = if measure_reads then Some {bytes=0L;chunks_read=0L;overflow=false} else None in
-    let t = {input=Buffered channel;active=true;initial;check_cancel;reads} in
+    let stages = if measure_stages then
+      Some {durations=Array.make 4 0.;calls=Array.make 4 0;valid=true} else None in
+    let t = {input=Buffered channel;active=true;initial;check_cancel;reads;stages} in
     Fun.protect ~finally:(fun () -> t.active <- false) (fun () ->
       let result = f t in
       check t;
@@ -100,12 +136,12 @@ let with_fd_internal ~measure_reads ~check_cancel fd f =
       result)
   with error -> close_noerr (); raise error
 let with_fd ?(check_cancel = fun () -> ()) fd f =
-  with_fd_internal ~measure_reads:false ~check_cancel fd f
-let with_read_stats ?(check_cancel = fun () -> ()) fd f =
-  with_fd_internal ~measure_reads:true ~check_cancel fd (fun file ->
+  with_fd_internal ~measure_reads:false ~measure_stages:false ~check_cancel fd f
+let with_read_stats ?(measure_stages=false) ?(check_cancel = fun () -> ()) fd f =
+  with_fd_internal ~measure_reads:true ~measure_stages ~check_cancel fd (fun file ->
     let result = f file in
     let stats = match file.reads with
-      | Some counter -> {logical_bytes=counter.bytes;chunks=counter.chunks_read;saturated=counter.overflow}
+      | Some counter -> {logical_bytes=counter.bytes;chunks=counter.chunks_read;saturated=counter.overflow;stages=stage_samples file.stages}
       | None -> assert false in
     result,stats)
 let with_borrowed_fd ?(check_cancel = fun () -> ()) fd f =
@@ -117,7 +153,7 @@ let with_borrowed_fd ?(check_cancel = fun () -> ()) fd f =
   let initial=Unix.LargeFile.fstat fd in
   if initial.Unix.LargeFile.st_kind<>Unix.S_REG || initial.Unix.LargeFile.st_size<0L then
     raise(Invalid "not a regular borrowed file");
-  let t={input=Positional fd;active=true;initial;check_cancel;reads=None} in
+  let t={input=Positional fd;active=true;initial;check_cancel;reads=None;stages=None} in
   Fun.protect ~finally:(fun () -> t.active <- false) (fun () ->
     let result=f t in check t;result)
 let positional_read t fd offset length =
@@ -165,7 +201,7 @@ let iter t offset length f =
     account_read t n;
     f b n; loop (Int64.sub remaining (Int64.of_int n))
   end in loop length
-let digest t =
+let digest t = measure t Hash (fun () ->
   let h = SemanticHash.create () in
   iter t 0L (size t) (fun b n -> SemanticHash.feed h b 0 n);
-  check t; SemanticHash.finish h
+  check t; SemanticHash.finish h)

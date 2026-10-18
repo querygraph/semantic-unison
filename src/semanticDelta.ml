@@ -43,9 +43,10 @@ let u64 n =
   Bytes.to_string b
 let feed_string h s = SemanticHash.feed h (Bytes.of_string s) 0 (String.length s)
 let inspect ?max_payload ?(span_semantics=Opaque_spans) ((module E : S) as extension) file =
-  match FormatExtension.inspect ?max_payload extension file with
+  match SemanticFile.measure file SemanticFile.Parse (fun () ->
+    FormatExtension.inspect ?max_payload extension file) with
   | Error _ as e -> e
-  | Ok manifest ->
+  | Ok manifest -> SemanticFile.measure file SemanticFile.Hash (fun () ->
     let full = SemanticHash.create () and preserved = SemanticHash.create () in
     feed_string preserved "SDE/0-preserved\000";
     feed_string preserved (u64 (SemanticFile.size file));
@@ -67,7 +68,7 @@ let inspect ?max_payload ?(span_semantics=Opaque_spans) ((module E : S) as exten
     complement !position (SemanticFile.size file);
     SemanticFile.check file;
     Ok {name = E.profile; size = SemanticFile.size file;
-        full = SemanticHash.finish full; preserved = SemanticHash.finish preserved; items; span_semantics}
+        full = SemanticHash.finish full; preserved = SemanticHash.finish preserved; items; span_semantics})
 let same_layout a b =
   a.name = b.name && a.size = b.size &&
   List.map (fun (i:item) -> i.region) a.items = List.map (fun (i:item) -> i.region) b.items
@@ -323,14 +324,15 @@ let apply_report_with_extension ?(check_cancel = fun () -> ()) ?max_payload
         invalid "basis proof mismatch";
       p in
   if SemanticFile.same_inode basis output then invalid "basis and staging are the same inode";
-  let verified_basis = checked basis in
+  let verified_basis = SemanticFile.measure basis SemanticFile.Verify (fun () -> checked basis) in
   let basis_stat = Unix.LargeFile.fstat output in
   if basis_stat.Unix.LargeFile.st_nlink <> 1 then invalid "staging file has multiple links";
   let writer = SemanticFile.prepare_writer ~check_cancel output in
-  ignore (SemanticFile.with_fd ~check_cancel output checked);
+  SemanticFile.measure basis SemanticFile.Verify (fun () ->
+    ignore (SemanticFile.with_fd ~check_cancel output checked));
   let comparison_window = 4096 in
   let logical_bytes_written = ref 0 and write_calls = ref 0 in
-  List.iter2 (fun p (old:item) ->
+  SemanticFile.measure basis SemanticFile.Write (fun () -> List.iter2 (fun p (old:item) ->
     check_cancel ();
     let length = String.length p.data in
     let write start stop =
@@ -372,12 +374,13 @@ let apply_report_with_extension ?(check_cancel = fun () -> ()) ?max_payload
           start := None
         end;
         scan stop
-      end in scan 0) t.patches verified_basis.items;
+      end in scan 0) t.patches verified_basis.items);
   check_cancel ();
   (* Verified staging already has the exact length, and all writes are inside
      the verified regions. Avoid touching EOF for an unchanged packet. *)
-  SemanticFile.with_fd ~check_cancel output (fun f ->
-    if SemanticFile.digest f <> t.target_digest then invalid "target SHA-256 mismatch");
+  SemanticFile.measure basis SemanticFile.Verify (fun () ->
+    SemanticFile.with_fd ~check_cancel output (fun f ->
+      if SemanticFile.digest f <> t.target_digest then invalid "target SHA-256 mismatch"));
   SemanticFile.check basis;
   {logical_bytes_written = !logical_bytes_written; write_calls = !write_calls;
    comparison_window}

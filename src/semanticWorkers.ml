@@ -43,7 +43,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
   | Snapshot of int64 * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
-             operation : operation; measure_reads : bool }
+             operation : operation; measure_reads : bool; measure_stages : bool }
 type shared = {
   mutex : Mutex.t; ready : Condition.t;
   jobs : job Mailbox.t; completions : (int * response * SemanticFile.read_stats option) Mailbox.t;
@@ -61,6 +61,7 @@ type t = {
   mutable shutdown_result : unit Lwt.t option;
   pump_done : unit Lwt.t;
   mutable read_observer : (int -> SemanticFile.read_stats -> unit) option;
+  mutable measure_stages : bool;
 }
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
 let close_operation = function Apply (_, _, fd) | Snapshot (_,fd) -> close_noerr fd | _ -> ()
@@ -200,7 +201,7 @@ let execute job =
        zero counter would not measure that job; do not emit a false sample. *)
     let measured = job.measure_reads && (match job.operation with Snapshot _ -> false | _ -> true) in
     let result,reads = if measured then
-        let result,reads = SemanticFile.with_read_stats ~check_cancel job.fd operation in
+        let result,reads = SemanticFile.with_read_stats ~measure_stages:job.measure_stages ~check_cancel job.fd operation in
         result,Some reads
       else SemanticFile.with_fd ~check_cancel job.fd operation,None in
     if not (unchanged stats (Unix.LargeFile.fstat job.fd)) then
@@ -326,7 +327,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
     let t = { shared; domains = !domains; budget; io; max_pending; reader;
       replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
-      shutdown_result = None; pump_done = Lwt.wait (); read_observer = None } in
+      shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
     Lwt.ignore_result (pump t (Bytes.create 4096));
     has_read := false; has_write := false;
     t
@@ -335,10 +336,11 @@ let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
   create_internal ~io:(Some io) ~workers ~max_pending ~budget
-let set_read_observer t observer =
+let set_read_observer ?(measure_stages=false) t observer =
   if t.closing || t.pending <> 0 then
     invalid_arg "SemanticWorkers.set_read_observer requires an idle open pool";
-  t.read_observer <- observer
+  t.read_observer <- observer;
+  t.measure_stages <- measure_stages && Option.is_some observer
 let usage t =
   let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
   {workers = List.length t.domains; pending = t.pending; running; peak_running}
@@ -410,7 +412,7 @@ let submit t cancellation fd requested_operation =
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
               (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation;
-                 measure_reads = Option.is_some t.read_observer} with
+                 measure_reads = Option.is_some t.read_observer; measure_stages = t.measure_stages} with
                | Mailbox.Added -> transferred := true
                | Mailbox.Full | Mailbox.Closed -> raise (Failed "worker job mailbox invariant"));
               Condition.signal t.shared.ready);

@@ -147,7 +147,7 @@ let transform version path =
       if template<>expected then invalid_arg "checked mode template differs from qualified interface";
       template
     end else begin
-      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 4 | "validationSnapshot" -> 1 | _ -> 0 in
+      let expected=match component with "semanticHash" -> 3 | "semanticFile" -> 5 | "validationSnapshot" -> 1 | _ -> 0 in
       let result,count=replace body "(* ox-portable-ffi *)" "@@ portable" in
       if count<>expected then invalid_arg "qualified native mode declarations changed";
       result

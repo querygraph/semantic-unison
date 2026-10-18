@@ -28,6 +28,24 @@
 #include <limits.h>
 #include <stdint.h>
 #include <string.h>
+#include <math.h>
+#ifndef _WIN32
+#include <time.h>
+#endif
+
+/* Optional diagnostics never substitute a wall clock or fail file work when
+ * the monotonic backend is unavailable. NaN invalidates the timing report. */
+CAMLprim value unison_semantic_monotonic_now(value unit)
+{
+  CAMLparam1(unit);
+  double seconds = NAN;
+#ifndef _WIN32
+  struct timespec ts;
+  if (clock_gettime(CLOCK_MONOTONIC, &ts) == 0)
+    seconds = (double)ts.tv_sec + (double)ts.tv_nsec / 1e9;
+#endif
+  CAMLreturn(caml_copy_double(seconds));
+}
 
 #ifndef _WIN32
 #include <sys/stat.h>

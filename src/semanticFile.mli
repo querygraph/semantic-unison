@@ -30,8 +30,16 @@ val with_borrowed_fd : ?check_cancel:(unit -> unit) -> Unix.file_descr -> (t -> 
     at most64KiB per attempt with checked offsets, short-read/EINTR cancellation
     loops and final stability checks. Windows explicitly refuses, no hidden
     descriptor-owning fallback. Not hostile-writer exclusion or mount proof. *)
-type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool }
-val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
+type stage = Hash | Parse | Verify | Write
+type stage_sample = { stage : stage; calls : int; inclusive_seconds : float }
+type read_stats = { logical_bytes : int64; chunks : int64; saturated : bool;
+                    stages : stage_sample list option }
+val measure : t -> stage -> (unit -> 'a) -> 'a
+(** Worker-local inclusive interval when stage measurement is enabled on this
+    reader. Nested intervals overlap; never sum phases as operation wall time.
+    A failed callback propagates unchanged and records no successful interval.
+    Disabled readers call the callback without clock reads or counter updates. *)
+val with_read_stats : ?measure_stages:bool -> ?check_cancel:(unit -> unit) -> Unix.file_descr ->
   (t -> 'a) -> 'a * read_stats
 (** Opt-in accounting for a successfully completed, stability-checked reader.
     Counts bytes delivered by nonempty [read] and 64 KiB [iter] chunks, including
@@ -39,7 +47,12 @@ val with_read_stats : ?check_cancel:(unit -> unit) -> Unix.file_descr ->
     seeks/stats, writes, other readers and physical I/O. Callback/read/stability
     failure returns no report. Counters saturate rather than fail the operation;
     [saturated] makes an exact-total claim unavailable. Ordinary [with_fd] does
-    not allocate/update counters. Worker-local state, no shared/global metrics. *)
+    not allocate/update counters. Worker-local state, no shared/global metrics.
+    Optional [measure_stages] defaults false. [stages=None] means disabled or
+    unavailable/invalid clock/counter; [Some []] means enabled, no measured
+    phases. CLOCK_MONOTONIC on POSIX, unavailable on Windows. Only successful
+    intervals are retained; reader/callback/stability failure returns no report.
+    Includes scheduling and I/O, not isolated CPU or a hard resource bound. *)
 val size : t -> int64
 val check : t -> unit
 val same_inode : t -> Unix.file_descr -> bool

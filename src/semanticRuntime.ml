@@ -99,13 +99,23 @@ let get () =
   | None ->
     let supervisor,_ = helper_supervisor () in
     let io = IoAdmission.create ~per_device:io_jobs ~max_pending:4096 in
-    let read_observer = if Trace.enabled "semantic-reads" then Some (fun id reads ->
+    let measure_stages = Trace.enabled "semantic-timings" in
+    let read_observer = if Trace.enabled "semantic-reads" || measure_stages then Some (fun id reads ->
       Trace.debug "semantic-reads" (fun () ->
         Util.msg "Completed semantic worker job %d primary reader delivered %Ld logical bytes in %Ld chunks (saturated=%b).\n"
-          id reads.SemanticFile.logical_bytes reads.chunks reads.saturated))
+          id reads.SemanticFile.logical_bytes reads.chunks reads.saturated);
+      if measure_stages then Trace.debug "semantic-timings" (fun () ->
+        match reads.SemanticFile.stages with
+        | None -> Util.msg "Semantic worker job %d stage timing unavailable.\n" id
+        | Some samples -> List.iter (fun sample ->
+            let stage = match sample.SemanticFile.stage with
+              | SemanticFile.Hash -> "hash" | SemanticFile.Parse -> "parse"
+              | SemanticFile.Verify -> "verify" | SemanticFile.Write -> "write" in
+            Util.msg "Semantic worker job %d stage=%s calls=%d inclusive-seconds=%.9f.\n"
+              id stage sample.calls sample.inclusive_seconds) samples))
       else None in
     let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
-    SemanticWorkers.set_read_observer pool read_observer;
+    SemanticWorkers.set_read_observer ~measure_stages pool read_observer;
     debug (fun () -> Util.msg
       "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits, %d jobs per filesystem\n"
       (HelperSupervisor.available_physical_cpus ()) (HelperSupervisor.available_cpus ())

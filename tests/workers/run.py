@@ -19,6 +19,7 @@ parser.add_argument("--shared-parity-only",action="store_true")
 parser.add_argument("--shared-mixed-only",action="store_true")
 parser.add_argument("--shared-mixed-hash-only",action="store_true")
 parser.add_argument("--read-stats-only",action="store_true")
+parser.add_argument("--stage-stats-only",action="store_true")
 parser.add_argument("--stress-only",action="store_true")
 parser.add_argument("--apply-stress-only",action="store_true")
 parser.add_argument("--keep-work",action="store_true")
@@ -129,7 +130,7 @@ with workspace as tmp:
     probe=b"SYN1"+bytes((i*71+19)%256 for i in range(262144-4))
     (build/"identify-probe.bin").write_bytes(probe)
     (build/"identify-probe.sha256").write_text(hashlib.sha256(probe).hexdigest()+"\n")
-    if not (args.apply_stress_only or args.shared_parity_only):
+    if not (args.stage_stats_only or args.apply_stress_only or args.shared_parity_only):
         with (build / "large.dng").open("wb") as out:
             out.write(dng)
             out.truncate(1073741824)
@@ -142,6 +143,7 @@ with workspace as tmp:
     if args.shared_mixed_only: command.append("--shared-mixed-only")
     if args.shared_mixed_hash_only: command.append("--shared-mixed-hash-only")
     if args.read_stats_only: command.append("--read-stats-only")
+    if args.stage_stats_only: command.append("--stage-stats-only")
     if args.stress_only: command.append("--stress-only")
     if args.apply_stress_only: command.append("--apply-stress-only")
     result=subprocess.run(command,cwd=build,text=True,capture_output=True,timeout=120)
@@ -155,6 +157,7 @@ with workspace as tmp:
                  binary_sha256=hashlib.sha256((build/"worker-test").read_bytes()).hexdigest(),
                  log_sha256=hashlib.sha256((build/"test.log").read_bytes()).hexdigest(),
                  summary=[line for line in result.stdout.splitlines() if line.startswith("PASS seeded")])
+    receipt['stage_stats_only']=args.stage_stats_only
     receipt['shared_mixed_only']=args.shared_mixed_only
     receipt['shared_mixed_hash_only']=args.shared_mixed_hash_only
     (build/"receipt.json").write_text(json.dumps(receipt,indent=2)+"\n")
