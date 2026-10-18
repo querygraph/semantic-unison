@@ -5794,3 +5794,46 @@ source513c121a, proof57c11c91. PreserveV5/V4files and consumedolderRootgrants.
 Exactseparateupstream/retainedfork/properties Rootgrants beforeanyIO. Prioritize
 these actualcompatibility/transfer checks +fullacceptancemap; no further optional
 microextensions on a frozen runtimecandidate. No livequalificationjobs remain.
+
+
+## 2026-10-18 frozen V6 CURRENT classifier-corrected IO candidate
+
+Isolated /Users/alexy/src/unison-stream-qualified-20261018 branch
+integration/sol-stream-qualified-20261018 from63e4b947, production513c121a.
+Source has the classifier contract correction, producer hooks/owners and all
+prior source improvements. Do NOT edit execution sources during Rootreview.
+Original actual buildorigin was workingtree, not fabricated build-from-future-
+commit. Current329production pins equal currentstock/Ox Make receipts under
+/private/tmp/unison-stream-classifier-{stock,ox}-check-20261018-001/RESULT.json.
+Oneuncompiledtestfixture difference is explicit in proof57c11c91, not hidden.
+
+Exactindex doc/sol-stream-requalification-requests-v6.json2710B
+SHA3fa0df6e7be8ffefe66939a1d55d19b9857edf29d496b8b2d8013d6a09e35085.
+1 upstream requestc991cc24/plan7260365a; workspace/private/tmp/u-mp-0c5fe64a,
+admission/private/tmp/unison-stream-upstream-admission-0c5fe64a.json.
+2 retainedfork request36a77b87/planb5f430ad; workspace/private/tmp/u-mp-86195f02,
+admission/private/tmp/unison-stream-retained-fork-admission-86195f02.json.
+Each400executionpins/4generated8KiBcases12CLI/bothdirections/2+2endpoints+owner2
+<=8/300sobs30CLI. Genuineupstream8772d26a extension-absent vs semantic-capable
+olderretainedfork remain explicit different peer contracts. No first-native or
+unqualifiedoldpeer label inferred. Requires separateRootgrant foreachjob.
+3 properties request4ef4c673; workspace/private/tmp/u-props-362476bc,
+admission/private/tmp/unison-stream-properties-admission-362476bc.json:
+43execution329productionpins/18rows54CLI/two2MiBgeneratedfiles/3+3+owner2=8,
+300obs30CLI/8GiBdeclarednotinstrumented/36readersmax. Exactargv/env inrequest.
+
+Actualpreparation ad5352/0: current checked_plan passed both, current properties
+manual.command/checked_build+checked_io_request passed with INMEMORY simulated
+admission read only. Canonicalmetadata real, zero actualadmission/workspace/
+lock/child/transport created. Artifactverification remains afteractualIO+CPU
+acquisition. Proof57c11c91+priorqueue/API/producer evidence pinnedprerequisites.
+No SDK/Adobe/camera/Photo/nativeUI/compiler/performance/quiet/18borrow scope.
+Recommended serialupstream first, but no automatic successor or oldgrantreuse.
+V5proposals remainDEFERRED per confirmedclassifiercontractgap; originalfrozen
+2e24a0fc bytes untouched. V4superseded; oldconsumedgrants neverreplay. Anycrossed
+oldgrant/START mustreconcileactualstate, notinferterminalfromabsentpaths.
+
+No SourceIOschedulinghold or liveownedjob. Next: sendexact V6indexforRootreview
+andfreshfiniteadmission, then executeonlyactualfreshgrants. Keep this candidate
+fixed; focus actualcompatibility/properties+remainingacceptancemap. No broad
+fullgoal/platform/resource/performance completion claim; goal remainsactive.
