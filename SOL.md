@@ -175,6 +175,18 @@ are explicit. A fresh camera request is prepared; generated success does not
 establish that camera's new coverage or authorize rereading it. The earlier
 30-MakerNote/region-refusal observation remains unchanged.
 
+**Measured large-forest limit, 2026-10-17:** the metadata-encoding and exact-node
+budget successor passed1540controls per compiler,37/40contained calls and all
+stock/Ox Make+selftests, Dune build checks and inspector builds. Actual camera
+V5 closed normally but reported2178raw claims,894field-encoding leaves and1747
+normalized nodes, above the unchanged1024-node core cap. Its full SHA and input
+metadata stayed unchanged; no complete forest was claimed. See
+[camera V5](tests/qualification/camera-field-encoding-v5-actual-20261017.json).
+Next source work is an explicit bounded larger-forest and versioned checkpoint
+contract preserving existing1024-node callers, rather than an implicit cap
+increase, stream-only substitute or another blind camera reread. Photo has no
+Unison resource hold from these completed observations.
+
 ### Nested, composable format knowledge
 
 The core owns exact byte coverage, bounds, hashes, resource budgets, verified
