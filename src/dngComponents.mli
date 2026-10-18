@@ -4,9 +4,15 @@ val describe : SemanticFile.t -> (ComponentHash.spec, string) result
 (** Existing partitions of at most480 claims keep schema /0 unchanged. Larger
     raw geometries (bounded at65536) reject aliases, then coalesce only touching
     same-role claims with ordered membership provenance into schema /1 leaves.
-    At most480 leaves plus opaque gaps still fit the unchanged1024-node core.
+    The exact sum of leaves, nonempty opaque gaps and root must fit the
+    unchanged1024-node core.
     Private field decoder IDs inside a coalesced run are not claimed available;
-    unknown/missing decoders remain exact. No gaps or roles are bridged. *)
+    unknown/missing decoders remain exact. No physical gaps are bridged.
+    If schema /1 still exceeds that node budget, schema /2 may classify each TIFF
+    field's descriptor and padding/offset slot as that parser-classified field's
+    metadata encoding, then group same-role adjacent encodings. Unknown fields
+    remain private, image claims never change role, and shared headers stay
+    structural. This is a coarser versioned view, not value-only equivalence. *)
 type binding = { component_id : string; decoder : ComponentHash.plugin }
 type decoders
 type status = Unmatched | Unsupported of string | Refined

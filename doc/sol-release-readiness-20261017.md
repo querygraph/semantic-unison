@@ -59,14 +59,12 @@ fault, transfer or scheduling controls.
 
 ## Next actions in order
 
-1. Qualify the new bounded strip/tile-rich DNG component successor on the camera.
-   Generated1500checks percompiler, CLI schema and full builds passed;
-   [camera request V4](camera-role-runs-request-v4.json) awaits fresh IO admission.
-   The retained-camera
-   [observation completed](../tests/qualification/camera-knowledge-actual-20261017.json):
-   full SHA matched historical input,30 typed MakerNote observations/no warnings,
-   but component forest refused480-region limit. Preserve that exact unsupported
-   result; improve with generated fixtures first, then request a new camera window.
+1. Implement and qualify an explicit larger-forest contract. Generated1540checks
+   percompiler and full builds passed the field-encoding/exact-budget successor,
+   but actual camera V5 needs1747nodes, above the unchanged1024-node cap.
+   [Actual diagnostic](../tests/qualification/camera-field-encoding-v5-actual-20261017.json)
+   proves that limit. Keep existing contracts intact; version larger checkpoint
+   metadata and its bounds before a new readonly camera window. No resources held.
 2. Reconcile final acceptance against current evidence. Both
    [current property regression](../tests/qualification/pr13-properties-actual-20261017.json)
    (18rows54CLI) and exact-retained-fork mixed transport (4cases12CLI) passed,

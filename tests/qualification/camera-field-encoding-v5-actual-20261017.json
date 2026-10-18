@@ -1,0 +1,127 @@
+{
+  "schema": "unison-camera-field-encoding-actual/1",
+  "state": "OBSERVATION_CLOSED_SAFE_NODE_BUDGET_REFUSAL",
+  "actual_tool": {
+    "owner_pid": 95463,
+    "session": 69896,
+    "chunk": "f488f9",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-field-encoding-request-v5.json",
+    "sha256": "e4f2d5a02570fd6f60569265820b5736cc512732abfa55557f8d6e360f523804"
+  },
+  "admission": {
+    "path": "/private/tmp/unison-camera-field-encoding-admission-20261017-7f4b0d29.json",
+    "sha256": "d9aae0b56493e0992ba3c86da2b6bcf730722c437874df2aed273438d88c55b3"
+  },
+  "closure": {
+    "child": {
+      "pid": 95480,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 95480,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": {
+      "unchanged": true,
+      "observed": {
+        "st_dev": 16777223,
+        "st_ino": 307228717,
+        "st_mode": 33024,
+        "st_nlink": 1,
+        "st_uid": 501,
+        "st_size": 193851848,
+        "st_mtime_ns": 1792099229810540469,
+        "st_ctime_ns": 1792113844382073309
+      },
+      "error": null
+    },
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "component_status": {
+    "path": "/dev/fd/3",
+    "path_bytes_hex": "2f6465762f66642f33",
+    "status": "unsupported",
+    "reason": "DNG component node budget (raw=2178; runs=1081; fields=894; nodes=1747)"
+  },
+  "measured_geometry": {
+    "raw_claims": 2178,
+    "physical_runs": 1081,
+    "field_encoding_runs": 894,
+    "normalized_nodes": 1747,
+    "core_node_limit": 1024
+  },
+  "makernote_tag_count": 30,
+  "source_full_sha256_matches_historical": true,
+  "helpers": [
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 95483,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    },
+    {
+      "returncode": 0,
+      "capture_truncated": false,
+      "client_cleanup": {
+        "pid": 95494,
+        "returncode": 0,
+        "reaped": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "group_cleanup_before_leader_reap": true
+      }
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/OWNER-TERMINAL.json",
+      "bytes": 161,
+      "sha256": "8e87cc2c89e9d8fae5addb338c27fb608916b8c77d398fb39c4e34790eb4b5f1"
+    },
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/SHARED-CLOSED.json",
+      "bytes": 833,
+      "sha256": "66ab08f6c3d2c5dc66c6534b3a5dd63dbe8b0498187b01b932ff35d8cad01329"
+    },
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/SHARED-IO-ATTEMPT.json",
+      "bytes": 752,
+      "sha256": "daa0828c822ff1687cd9cb8543a9192d2783de72907c1e64937ece2e2a104b38"
+    },
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/SHARED-START.json",
+      "bytes": 4932,
+      "sha256": "8189ca94a973e298d19dede70163a5b9d315dbcab15089c07818e8c2fe4386e6"
+    },
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "/private/tmp/unison-camera-field-encoding-20261017-7f4b0d29/SHARED-STDOUT.txt",
+      "bytes": 50071,
+      "sha256": "8205f896b9f77a8aecfb43da73ed6e120050e484edb6277a23efbe0458b3fa9b"
+    }
+  ],
+  "scope": "One readonly retained Unison clone;30 MakerNote tags and exact historical full SHA match, input8fields unchanged. Node counts are actual diagnostics; no complete forest/semantic/SDK/pixel/corpus/production claim. Both helpers and outer worker reaped0, CPU8+EXglobal closed. Private raw values outside repository. No replay inferred."
+}

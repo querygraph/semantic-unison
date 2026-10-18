@@ -16,15 +16,15 @@ fault controls have scoped receipts. In-process receiver delivery does not prove
 current-candidate transport/server settlement. Legacy named/unbound/older-peer
 and raw/channel cleanup remain separately limited.
 
-The bounded many-unit advisory successor now passes stock/Ox1500component
-checks each,36/39contained CLI/compiler calls, both full Make+selftests and
-Dune build-only checks. New stock/Ox inspectors are rebuilt. It preserves small
-partitions and groups only adjacent same-role claims under a new schema while
-retaining the1024-node core bound. [Qualification](../tests/qualification/dng-role-runs-actual-20261017.json)
-preserves the reproduced region refusal and corrected mode-template failure.
-The [fresh camera request](camera-role-runs-request-v4.json) is not admitted yet.
-Prior actual transfer/property receipts retain their earlier advisory-kernel
-source bindings; no new transport or camera execution is inferred from builds.
+The metadata-field encoding and exact node-budget successor now passes stock/Ox
+1540controls each plus37/40contained calls, all Make/selftests, Dune build-only
+checks and rebuilt inspectors. [Current qualification](../tests/qualification/dng-field-node-budget-actual-20261017.json)
+preserves previous accepted views and the1024-node core limit. The actual camera
+V5 observation closed normally but still refused:2178raw/1081runs/894field-runs,
+1747normalized nodes. [Actual evidence](../tests/qualification/camera-field-encoding-v5-actual-20261017.json)
+proves the specific larger-forest requirement, not successful camera coverage.
+No CPU/IO/SDK owner remains. Next is an explicitly budgeted/versioned large
+forest and checkpoint path, with old1024-node contracts preserved.
 
 Current inspector stock/Ox builds and16tiny TIFF calls pass. Latest gradual
 refinement rerun passed1391component checks/compiler plus layout/private/archive

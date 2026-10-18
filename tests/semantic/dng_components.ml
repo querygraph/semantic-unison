@@ -38,6 +38,21 @@ let many_units little big tag units fragmented =
   Bytes.fill bytes (pixels+stride*i) 16 (Char.chr (i mod 251))
  done;
  Bytes.to_string bytes,pixels
+let many_inline_fields little big =
+ let primary,cw,ew,iw,va=if big then 16,8,20,8,12 else 8,2,12,4,8 in
+ let bytes=Bytes.make 33024 '\000' in
+ let n at width value=Layout_only.put bytes little at width value in
+ Bytes.blit_string (if little then "II" else "MM") 0 bytes 0 2;
+ if big then (n 2 2 43;n 4 2 8;n 8 8 primary) else (n 2 2 42;n 4 4 primary);
+ n primary cw 603;
+ let entry i tag typ count value width =
+  let at=primary+cw+ew*i in
+  n at 2 tag;n (at+2) 2 typ;n (at+4) iw count;n (at+va) width value in
+ entry 0 50706 1 4 0 4;Bytes.set bytes (primary+cw+va) '\001';
+ entry 1 273 4 1 32768 4;entry 2 279 4 1 16 4;
+ for i=0 to 599 do entry (i+3) (60000+i) 1 1 (i mod 251) 1 done;
+ Bytes.fill bytes 32768 16 'P';
+ Bytes.to_string bytes,(primary+cw+3*ew+va),ew
 let many_snapshot bytes = Layout_only.with_input bytes (fun file ->
  ComponentHash.with_snapshot ~max_read_bytes:(Int64.of_int(String.length bytes)) file (describe file)
  (fun session snapshot ->
@@ -769,6 +784,31 @@ let () =
      check(DngComponents.describe file=Error "DNG component physical aliases unsupported")
        "compaction concealed pixel alias")
  ) [273;324]) [false;true]) [false;true];
+ List.iter(fun little -> List.iter(fun big ->
+   let bytes,private_at,entry_width=many_inline_fields little big in
+   let snapshot=many_snapshot bytes in
+   check((ComponentHash.root snapshot).schema="dng-physical-partition/2") "metadata encoding schema missing";
+   check((projection snapshot ComponentHash.Private_metadata).bytes=Int64.of_int(600*entry_width))
+     "private field encoding not preserved";
+   check((projection snapshot ComponentHash.Standard_metadata).bytes=Int64.of_int(3*entry_width))
+     "known field encodings not delineated";
+   check((projection snapshot ComponentHash.Encoded_pixels).bytes=16L) "metadata density lost pixels";
+   let changed=Bytes.of_string bytes in Bytes.set changed private_at 'Z';
+   let other=many_snapshot(Bytes.to_string changed) in
+   check((projection snapshot ComponentHash.Encoded_pixels).sha256=
+     (projection other ComponentHash.Encoded_pixels).sha256) "inline private edit invalidated pixels";
+   check((projection snapshot ComponentHash.Private_metadata).sha256<>
+     (projection other ComponentHash.Private_metadata).sha256) "private field edit disappeared";
+   check(ComponentHash.full_sha256 snapshot=SemanticHash.string bytes) "dense metadata full hash"
+ ) [false;true]) [false;true];
+ let fragmented,_=many_units true false 324 480 true in
+ let fragmented_snapshot=many_snapshot fragmented in
+ check((ComponentHash.root fragmented_snapshot).schema="dng-physical-partition/1")
+   "exact node budget rejected a fitting fragmented image";
+ check((projection fragmented_snapshot ComponentHash.Encoded_pixels).bytes=7680L)
+   "fragmented unit bytes lost";
+ check(ComponentHash.full_sha256 fragmented_snapshot=SemanticHash.string fragmented)
+   "fragmented full hash mismatch";
  let exhausted,_=many_units true false 324 65536 false in
  Layout_only.with_input exhausted(fun file ->
    check(DngComponents.describe file=Error "DNG raw component region limit")

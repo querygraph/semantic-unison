@@ -30,6 +30,40 @@ let compact_regions regions =
         loop (run::result) rest in
   loop [] regions
 
+(* A second explicitly versioned view treats a TIFF field's descriptor and
+   inline padding/offset slot as part of that field's metadata encoding. Its
+   role comes only from the parser's existing value claim, never from a plugin.
+   This keeps dense inline metadata useful without raising the node ceiling. *)
+let field_encodings regions =
+  let suffix name ending =
+    let at=String.length name-String.length ending in
+    if at>=0 && String.sub name at (String.length ending)=ending
+    then Some(String.sub name 0 at) else None in
+  let values=Hashtbl.create 32 in
+  List.iter(fun (item:DngSemantic.component_region) ->
+    match suffix item.logical_id "/value",item.role with
+    | Some field,(DngSemantic.Standard_value | DngSemantic.Private_value) ->
+        Hashtbl.replace values field item.role
+    | _ -> ()) regions;
+  List.map(fun (item:DngSemantic.component_region) ->
+    if item.role<>DngSemantic.Structure then item else
+    let role=List.find_map(fun ending ->
+      match suffix item.logical_id ending with
+      | Some field -> Hashtbl.find_opt values field | None -> None)
+      ["/descriptor";"/offset";"/padding"] in
+    match role with
+    | None -> item
+    | Some role -> {item with role;schema="tiff-field-encoding/2:"^item.schema}) regions
+
+(* Flat partitions add exactly one node per nonempty gap, plus their root.
+   Count that exact cost instead of rejecting useful fragmented leaves with a
+   conservative half-budget estimate. Geometry has already been checked. *)
+let partition_nodes size regions =
+  let count,stop=List.fold_left(fun (count,stop) (item:DngSemantic.component_region) ->
+    count+1+(if item.offset>stop then 1 else 0),Int64.add item.offset item.length)
+    (1,0L) regions in
+  count+(if stop<size then 1 else 0)
+
 let describe file =
   match DngSemantic.component_regions file with
   | Error reason -> Error reason
@@ -42,9 +76,18 @@ let describe file =
         region.offset>=stop && disjoint (Int64.add region.offset region.length) rest in
     if not(disjoint 0L regions) then Error "DNG component physical aliases unsupported"
     else
-    let compacted=List.length regions>480 in
-    let regions=if compacted then compact_regions regions else regions in
-    if List.length regions>480 then Error "DNG component coalesced region limit"
+    let raw_count=List.length regions in
+    let schema,regions,physical_runs=if raw_count<=480 then
+      "dng-physical-partition/0",regions,raw_count
+    else let compacted=compact_regions regions in
+      let count=List.length compacted in
+      if partition_nodes (SemanticFile.size file) compacted<=1024
+      then "dng-physical-partition/1",compacted,count
+      else "dng-physical-partition/2",compact_regions(field_encodings regions),count in
+    let nodes=partition_nodes (SemanticFile.size file) regions in
+    if nodes>1024 then Error(Printf.sprintf
+      "DNG component node budget (raw=%d; runs=%d; fields=%d; nodes=%d)"
+      raw_count physical_runs (List.length regions) nodes)
     else
     let children=List.map (fun (region:DngSemantic.component_region) ->
       let role=match region.role with
@@ -54,8 +97,7 @@ let describe file =
         | DngSemantic.Structure -> ComponentHash.Structural in
       {ComponentHash.id="dng/"^region.logical_id;schema=region.schema;
        role;offset=region.offset;length=region.length;children=[]}) regions in
-    Ok {ComponentHash.id="dng";schema=(if compacted then "dng-physical-partition/1"
-        else "dng-physical-partition/0");
+    Ok {ComponentHash.id="dng";schema;
         role=ComponentHash.Structural;offset=0L;length=SemanticFile.size file;children}
 
 type binding = { component_id : string; decoder : ComponentHash.plugin }

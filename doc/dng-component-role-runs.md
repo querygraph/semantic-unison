@@ -10,8 +10,8 @@ entry, directory, extent and read rules. It rejects physical overlap before
 compaction. Graphs with at most480 claims keep `dng-physical-partition/0` and their
 existing field IDs unchanged. Larger graphs may use `dng-physical-partition/1`:
 only touching claims of the same role form a `tiff-physical-role-run/1` leaf.
-Neither holes nor role boundaries may be bridged. The final480-leaf limit and
-core1024-node/depth16 limit remain unchanged; excess fragmentation is refused.
+No hole is bridged; role runs combine only the roles declared by their selected view. The core1024-node/depth16 limit remains unchanged. The adapter counts
+leaves, nonempty opaque gaps and root exactly; excess total nodes are refused.
 
 A run ID includes its first logical member and a domain-separated SHA of the
 ordered original IDs, schemas and lengths. Physical placement is not part of
@@ -34,3 +34,39 @@ artifact and separately admitted readonly observation are required for that clai
 No transfer profile, writer, SDK, receiving publication or default preference is
 changed by this advisory geometry path. Logical bounds are not an OS RSS or
 physical-IO guarantee.
+
+## Dense inline metadata encoding fallback
+
+The first role-run camera retry also safely refused480 grouped regions. That
+actual result is retained in `camera-role-runs-v4-actual-20261017.json`. Generated
+600-inline-field directories reproduce a further limit: every inline value
+alternates with its descriptor and padding, despite being one metadata field.
+This models another bounded refusal mechanism; it does not retrospectively prove
+which regions dominated the camera's count.
+
+If the original /1 grouping still exceeds the1024-node budget, a separate
+`dng-physical-partition/2` view may include each field's descriptor and offset or
+padding slot in that field's metadata encoding. The trusted TIFF parser's value
+claim determines the role. Unknown fields stay private, known fields stay
+standard metadata, encoded-image claims are untouched, and shared header/count/
+next-IFD scaffolding remains structural. Only then are touching same-role claims
+grouped. Every byte stays exact; physical gaps are never bridged. No descriptor
+is promoted to an image or given semantic-merge authority.
+
+Existing accepted /0 and /1 partitions are selected first and remain unchanged.
+The /2 metadata hashes deliberately describe encodings, including descriptor and
+placement fields, rather than value-only semantic equality. Their new schema
+and ordered-member provenance prevent silent reinterpretation of old digests.
+A fixed failure now reports raw, physical-run and field-encoding-run counts for
+future diagnosis. The raw65536/core1024 bounds remain unchanged. A fitting fragmented graph is
+accepted even with more than480 leaves; still-excessive fragmentation refuses
+rather than dropping claims. Actual camera support remains
+unproved until the separately admitted successor observes it.
+
+
+The actual V5 readback still refused, with measured counts2178 raw claims,1081
+physical runs,894 field-encoding runs and1747 normalized nodes. The unchanged
+1024-node cap is now the concrete limit; further field-meaning work is not the
+cause. Its actual owner69896/f488f9/0 and all helper/IO/CPU closures are sealed
+separately. A future explicitly budgeted larger-forest/checkpoint version needs
+source design and qualification; no implicit cap increase or reread follows.

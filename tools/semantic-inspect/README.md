@@ -183,3 +183,15 @@ This reuses the pinned Rust library and does not shell out to Perl. Default
 inspection is unchanged; no metadata writer or semantic transfer authority is
 introduced. The library's field values currently lack byte spans, so their
 versioned hashes are advisory interpretation views alongside the exact partition.
+
+
+Large DNG component graphs may use the versioned [bounded role/field-encoding
+views](../../doc/dng-component-role-runs.md). Existing small partitions keep
+`dng-physical-partition/0`; adjacent role runs use `/1`, and dense metadata field
+encodings may use `/2`. The actual snapshot schema is printed. These are exact
+byte-preserving but coarser advisory views; field encodings include descriptor
+and padding/offset bytes, not value-only equality. Raw claims are bounded65536
+and the exact leaf+opaque-gap+root count must fit the unchanged1024-node budget.
+Unknown fields stay private and image claims are never promoted from metadata.
+Still-excessive geometries refuse; no camera/corpus/pixel/transfer authority is
+implied by support for generated fixtures.

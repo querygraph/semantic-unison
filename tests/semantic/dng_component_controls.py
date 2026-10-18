@@ -95,6 +95,20 @@ def main():
             assert coalesced['sha256']==hashlib.sha256(large).hexdigest()
             assert coalesced['projections']['encoded_pixels']['bytes']==9600
             result.setdefault('coalesced_inspector_reports',{})[label]=coalesced
+            dense=bytearray(33024)
+            struct.pack_into('<2sHIH',dense,0,b'II',42,8,603)
+            for i,entry in enumerate(((50706,1,4,257),(273,4,1,32768),(279,4,1,16))):
+                struct.pack_into('<HHII',dense,10+12*i,*entry)
+            for i in range(600):
+                struct.pack_into('<HHII',dense,10+12*(i+3),60000+i,1,1,i%251)
+            dense[32768:32784]=b'P'*16
+            dense_file=work/'original-600-inline-fields.dng';dense_file.write_bytes(dense)
+            dense_report=json.loads(call([str(work/'component-inspector'),'--components',str(dense_file)])['stdout'])['target']
+            assert dense_report['status']=='observed' and dense_report['partition_schema']=='dng-physical-partition/2'
+            assert dense_report['sha256']==hashlib.sha256(dense).hexdigest()
+            assert dense_report['projections']['encoded_pixels']['bytes']==16
+            assert dense_report['projections']['private_metadata']['bytes']==7200
+            result.setdefault('dense_inspector_reports',{})[label]=dense_report
             result.setdefault('inspector_reports',{})[label]=report
             save(root,result)
             if label=='ox':
