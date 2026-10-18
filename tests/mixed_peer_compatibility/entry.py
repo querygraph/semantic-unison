@@ -37,8 +37,10 @@ def source_paths():
     return paths
 
 
+PLAN_MAX_BYTES=262144
+
 def checked_plan(path,expected):
-    plan=read_manifest(path,expected)
+    plan=read_manifest(path,expected,maximum_bytes=PLAN_MAX_BYTES)
     require(plan['limits']==LIMITS,'fixed mixed-peer limits required')
     require((plan['schema']=='unison-mixed-peer/1' and 'peer_contract' not in plan) or
             (plan['schema']=='unison-mixed-peer/2' and plan.get('peer_contract')==UPSTREAM),

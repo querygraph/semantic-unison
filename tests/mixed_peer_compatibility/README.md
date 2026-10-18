@@ -1,3 +1,12 @@
+# Bounded larger source plans (2026-10-18)
+
+Current full production/source closure can exceed64KiB. Compatibility plans now
+explicitly use a256KiB maximum; canonical IO pool and admission manifests retain
+the64KiB default. Ownership, link-count, identity, digest and qualified-close
+checks are unchanged. No pins are dropped to make a plan fit. This is source
+preparation only, not a canonical pool probe or transport admission. Older
+unstarted partial plans remain preserved and require distinct successors.
+
 # Actual genuine upstream matrix passed
 
 Fresh admission0abefb81 was consumed once: actual owner55677/7728f5/0/no session,

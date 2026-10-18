@@ -66,17 +66,21 @@ def uncertainty_records(error, observations):
     return ()
 
 
-def read_manifest(path, digest):
+def read_manifest(path, digest, *, maximum_bytes=65536):
+    # Canonical pool/admission callers retain the64KiB default. Only explicitly
+    # versioned source-plan readers request the larger finite metadata bound.
+    require(type(maximum_bytes) is int and 0 < maximum_bytes <= 262144,
+            'bounded owned JSON reader limit required')
     fd = os.open(path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK | os.O_CLOEXEC)
     try:
         first = os.fstat(fd)
         stamp = lambda s: (s.st_dev, s.st_ino, s.st_size, s.st_mtime_ns, s.st_ctime_ns)
         require(stat.S_ISREG(first.st_mode) and first.st_nlink == 1
-                and first.st_uid == os.getuid() and 0 < first.st_size <= 65536,
+                and first.st_uid == os.getuid() and 0 < first.st_size <= maximum_bytes,
                 'bounded owned IO manifest required')
         raw = bytearray()
-        while len(raw) <= 65536:
-            block = os.read(fd, min(8192, 65537 - len(raw)))
+        while len(raw) <= maximum_bytes:
+            block = os.read(fd, min(8192, maximum_bytes + 1 - len(raw)))
             if not block:
                 break
             raw.extend(block)
