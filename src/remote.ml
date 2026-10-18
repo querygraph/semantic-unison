@@ -824,6 +824,16 @@ let defaultMarshalingFunctions m =
   (fun conn -> if conn.version = 1 then marshalV1 m else errRPCVersion conn),
   (fun conn -> if conn.version = 1 then unmarshalV1 m else errRPCVersion conn)
 
+let boundedMarshalingFunctions bound m =
+  if bound<0 || bound>(max_int-65536)/8 then invalid_arg "bounded RPC decoded budget overflow";
+  let max_alloc_bytes=65536+8*bound and max_elements=1024+4*bound in
+  (fun conn -> if conn.version=1 then marshalV1 m else errRPCVersion conn),
+  (fun conn -> if conn.version<>1 then errRPCVersion conn else
+    fun buf pos ->
+      try Umarshal.unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m buf pos
+      with Failure s | Umarshal.Error s -> raise(Util.Fatal(Printf.sprintf
+        "Fatal error during unmarshaling (%s)" s)))
+
 let makeMarshalingFunctions payloadMarshalingFunctions string =
   let (marshalPayload, unmarshalPayload) = payloadMarshalingFunctions in
   let tag = registerTag string in
@@ -1292,7 +1302,7 @@ let registerBoundedServerCmd ?withScope ?maxResultForArgs
     name ~maxArgs ~maxResult mArg mRet f =
   if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
   let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult name
-    (defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in
+    (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command
 

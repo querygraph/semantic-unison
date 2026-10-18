@@ -1,0 +1,647 @@
+{
+  "scope": "Pre-allocation framed-string/bigarray bounds, offset/header validation, selected builtin decoded-allocation and collection-count limits for bounded RPC arguments/results. Valid writer bytes and sequential channel boundaries checked. No whole-heap/RSS/aggregate/global-header/frame limits, realtransport/SDK/Photo/camera/EXglobal/benchmark/full-goal claim.",
+  "sealed_at": "2026-10-18T13:12:39.498394+00:00",
+  "parents": {
+    "make_and_directed": {
+      "session": 68928,
+      "chunk": "db17aa",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "dune": {
+      "session": 91402,
+      "chunk": "5dc305",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "endpoint_preferences": {
+      "session": 35589,
+      "chunk": "6f9b78",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "coverage": {
+    "unit_checks_per_compiler": 233,
+    "historical_guarded_allocation_witness_per_compiler": 1,
+    "rpc_current": "scoped/unscoped decoded arguments, normal result, header inner-length, raw ticket through error reply; existing frame/input/output/reply/cleanup regressions",
+    "rpc_designated_rejection_per_compiler": 1,
+    "endpoint_preferences": "existing outgoing omission/incoming alias protection/local profileCLI precedence controls; compiler explicit"
+  },
+  "decoder_policy": {
+    "bounded_registration_selected_allocation_charge": "65536 + 8 * maxArgs/maxResult per decode",
+    "collection_elements": "1024 + 4 * maxArgs/maxResult per decode",
+    "scoped_arguments": "may decode twice, separate limits; no aggregate reservation inferred",
+    "legacy": "same encoded bytes; ordinary decoder collection expansion remains unbounded; malformed framing/negative counts reject"
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "stock-dune-check": 329,
+    "ox-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock-check": {
+      "child": {
+        "pid": 88747,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 88747,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock-dune-check": {
+      "child": {
+        "pid": 91415,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 91415,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/unit": {
+      "child": {
+        "pid": 89860,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 89860,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/rpc": {
+      "child": {
+        "pid": 89892,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 89892,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/prefs": {
+      "child": {
+        "pid": 93968,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 93968,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-check": {
+      "child": {
+        "pid": 89931,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 89931,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-dune-check": {
+      "child": {
+        "pid": 92535,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 92535,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/unit": {
+      "child": {
+        "pid": 91107,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 91107,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/rpc": {
+      "child": {
+        "pid": 91139,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 91139,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/prefs": {
+      "child": {
+        "pid": 93980,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 93980,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  },
+  "artifacts": {
+    "stock-check": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-check-20261018-002/RESULT.json",
+        "bytes": 59195,
+        "sha256": "564e6357207eb38cdf198b33fc143b36aa4b26ca41ed1027cf8ff32bfb3dff72"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-check-20261018-002/SHARED-START.json",
+        "bytes": 1368,
+        "sha256": "9706c41aab844d917ee6419ffc049c4db39ca696f2e3bb1c1ca19429ee53de13"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "d8d50c6df8a587a39a69342102f28de0546fa19e8647733520f8cd542434d983"
+      }
+    ],
+    "stock-dune-check": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-dune-check-20261018-001/RESULT.json",
+        "bytes": 59022,
+        "sha256": "f73bf052560a17bd15f38c0b72bd051a4e2025bda69a5e4f4a55b990d12f66be"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-dune-check-20261018-001/SHARED-START.json",
+        "bytes": 1378,
+        "sha256": "75c07cc98303187815e7e3ab854033b4ef1bea9e7ab47f6e80c6b389d9381293"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "d00c0efdc2370cc84a6ac71f2d29308be62f586eb8121ad5d6771b640af4ee04"
+      }
+    ],
+    "stock/unit": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-unit-20261018-001/SHARED-START.json",
+        "bytes": 1249,
+        "sha256": "2f27c77d63f378778f74cfa7f6c001515d0f3d490473ff0788171e5a7036e6d5"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-unit-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "013b56797b5360cf98d112ad44981b44296861833a2d0b24507b96d409d848a9"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-unit-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "13905e390bc0e0cb05b29307cf5df9df8d6801dd7c13984638f9a78963d35a3f"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-unit-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-unit-20261018-001/CONTROL.json",
+        "bytes": 2158,
+        "sha256": "8abf7f8413ce7b7669a3aac929a23c89aaf6ba0c6ecd54babadbf817964bbf30"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-6r9y2aw_/umarshal.ml",
+        "bytes": 20970,
+        "sha256": "4d80ea56161c67598d4b7d016c70e4ced07e8497f3c5a2150ca3b0c205ebc3c7"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-6r9y2aw_/umarshalReference.ml",
+        "bytes": 17314,
+        "sha256": "08d060114ab35af7b813285b2cff67fa2ceedb12f42e0e06d517a437cb6f20e9"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-6r9y2aw_/probe.ml",
+        "bytes": 6162,
+        "sha256": "d0902559c0174e8e43309c2c3751969f3716ebb156aa3d2a3df960c9ffc3113f"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-6r9y2aw_/probe",
+        "bytes": 1193560,
+        "sha256": "cc1b5af39efbbcfc22f4938dcf801d6e1a9ae4e78f07bf6eb7676bb5480fe5fa"
+      }
+    ],
+    "stock/rpc": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-rpc-20261018-001/SHARED-START.json",
+        "bytes": 1324,
+        "sha256": "63da89b4f01d3114b584b0e8b1a99070cdb374fb3a51d72bf354cff22c848575"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-rpc-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "8a2e753081d0d928b20ffbd898d3a1169e737c2de7ba4c6ab23da52f81e8c79f"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-rpc-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 106,
+        "sha256": "fd473431ecffe937e6f8a63b44f22548c7572aaf1fda0f8a569ec62deb78fa4b"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-rpc-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-rpc-20261018-001/CONTROL.json",
+        "bytes": 27017,
+        "sha256": "e253ed204239bd69be0c25a7f7fc8ef97e36e218d463aed66dd7b5e7ff735854"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/remoteForTest.ml",
+        "bytes": 98918,
+        "sha256": "1b0d591b641a7542e031bf752538dc1d5b64479f2f535844199ac9db8f8b0eae"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/remoteTest.ml",
+        "bytes": 15426,
+        "sha256": "86cb907481eadf8a0ba364c54af8f0de27769228250911b31b71bc6c4e2d3a7e"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/remote-test",
+        "bytes": 3385464,
+        "sha256": "efc794cd788c8d279aa66f11ebbdd92eac18c42ffe6e448285ef15b3b471d56b"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/negative/remoteForTest.ml",
+        "bytes": 98900,
+        "sha256": "1ced22655e4fe3bf475a1456c22cb816b7f02b55ab388453f42ce1ef952aa727"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/negative/remote-negative",
+        "bytes": 3385464,
+        "sha256": "c284428a33ea61d04573854e9b341b941508493f631c3a4fbdea925753266226"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-4_3h9xqk/negative/test.log",
+        "bytes": 79,
+        "sha256": "3da8b351d8c3f1b9a16225241480fef5069524c9f3df452f16496b185ff0f14c"
+      }
+    ],
+    "stock/prefs": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-prefs-20261018-001/SHARED-START.json",
+        "bytes": 1225,
+        "sha256": "8d8569c51df9f52e1c0c5297d80bc5a40dd1a61a9dbf77bc5a36cba5f550a2fa"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-prefs-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "a8a1644260063c0503930d1aad07987be60a1c1a0acd37f5c258eea4b10d2b34"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-prefs-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 145,
+        "sha256": "3e8ad20a752950222ce751e7a87601520d74baa2d631c86a59ff2052ab023a2a"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-stock-prefs-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox-check": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-check-20261018-002/RESULT.json",
+        "bytes": 59201,
+        "sha256": "bb42d11e62c3409051d82ba750811716ea504e9e58024ce05989cd4ec442c5c9"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-check-20261018-002/SHARED-START.json",
+        "bytes": 1363,
+        "sha256": "8fb2c9c31c14b9679a11a137934ee18abc401ab24ad088abf852519bda673f2f"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "c331746d4115b01787bae0ef855459ab1f592050c8f492281ed0dbe0b2f70c88"
+      }
+    ],
+    "ox-dune-check": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-dune-check-20261018-001/RESULT.json",
+        "bytes": 59026,
+        "sha256": "4c961c0fdde60cf8317d9f6a649f679da1f6d3c8a54b4985cd2147c5d2cf7ab5"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-dune-check-20261018-001/SHARED-START.json",
+        "bytes": 1373,
+        "sha256": "a8bece5e654983edfb842b25b49146180abb3e4f3820128bfda5a7506e823b24"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "87fa69479e9c97d162a0e02f065f9766855daf30e034fdd64c98c005bd52d9c8"
+      }
+    ],
+    "ox/unit": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-unit-20261018-001/SHARED-START.json",
+        "bytes": 1246,
+        "sha256": "447f97939676acabceebbb5fa7a9f6e4475b4589b3733a0dc6f13d20acbb7e9b"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-unit-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "aa22a8ee685306dac19b056144a45eae7322f5399c0220f3905a92790659f1f8"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-unit-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "13905e390bc0e0cb05b29307cf5df9df8d6801dd7c13984638f9a78963d35a3f"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-unit-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-unit-20261018-001/CONTROL.json",
+        "bytes": 2164,
+        "sha256": "52cdbe5e70d4faa2948e4a7cb439488bc47a2ec19c2ed15f2e867ed1c6ae9766"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-hb6z31ff/umarshal.ml",
+        "bytes": 20970,
+        "sha256": "4d80ea56161c67598d4b7d016c70e4ced07e8497f3c5a2150ca3b0c205ebc3c7"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-hb6z31ff/umarshalReference.ml",
+        "bytes": 17314,
+        "sha256": "08d060114ab35af7b813285b2cff67fa2ceedb12f42e0e06d517a437cb6f20e9"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-hb6z31ff/probe.ml",
+        "bytes": 6162,
+        "sha256": "d0902559c0174e8e43309c2c3751969f3716ebb156aa3d2a3df960c9ffc3113f"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-umarshal-bounds-hb6z31ff/probe",
+        "bytes": 1612808,
+        "sha256": "422b1b74785f137c53a67fe575b546b1a08335e213bdd0277305706f797d75d5"
+      }
+    ],
+    "ox/rpc": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-rpc-20261018-001/SHARED-START.json",
+        "bytes": 1321,
+        "sha256": "5935cbdbcab84f8b33db9a9a80c5b164cef844cb1ce27f034f0c8b6eba70e1ae"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-rpc-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "61c4cdbabc0e38c47ef22233a68a78e42442d5b1d6812a1b25c48ada145f5415"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-rpc-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 106,
+        "sha256": "fd473431ecffe937e6f8a63b44f22548c7572aaf1fda0f8a569ec62deb78fa4b"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-rpc-20261018-001/SHARED-STDERR.txt",
+        "bytes": 220,
+        "sha256": "77f52fd0a49e75bbb23c3e9cf8060b143510f114afcfcd32c1bf922732ad14b4"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-rpc-20261018-001/CONTROL.json",
+        "bytes": 27249,
+        "sha256": "4f733fa9a14b06a85d90729081167f21b39361fb965d537c0f7210ef623b1243"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/remoteForTest.ml",
+        "bytes": 98918,
+        "sha256": "1b0d591b641a7542e031bf752538dc1d5b64479f2f535844199ac9db8f8b0eae"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/remoteTest.ml",
+        "bytes": 15426,
+        "sha256": "86cb907481eadf8a0ba364c54af8f0de27769228250911b31b71bc6c4e2d3a7e"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/remote-test",
+        "bytes": 4736496,
+        "sha256": "8ae3166ebdc717a601dab7370634328dbf3ef6e0f2b1da7d7b5bd45693bf64c3"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/negative/remoteForTest.ml",
+        "bytes": 98900,
+        "sha256": "1ced22655e4fe3bf475a1456c22cb816b7f02b55ab388453f42ce1ef952aa727"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/negative/remote-negative",
+        "bytes": 4736496,
+        "sha256": "5e1a3cd69fcb3d62b2e9338d6f77483fe9f22605ede6a5ea3fef645f21653674"
+      },
+      {
+        "path": "/private/tmp/unison-rpc-bounds-vlh36d7o/negative/test.log",
+        "bytes": 79,
+        "sha256": "3da8b351d8c3f1b9a16225241480fef5069524c9f3df452f16496b185ff0f14c"
+      }
+    ],
+    "ox/prefs": [
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-prefs-20261018-001/SHARED-START.json",
+        "bytes": 1226,
+        "sha256": "e4dbe5cc100f9883f539811b8daa3bdfba948dab921250266daf0fac8c20a2da"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-prefs-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "6767c631bf79d8b91e755ed76c47121c3c275361df3e949a0ede2b8fbb66f819"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-prefs-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 145,
+        "sha256": "3e8ad20a752950222ce751e7a87601520d74baa2d631c86a59ff2052ab023a2a"
+      },
+      {
+        "path": "/private/tmp/unison-framed-decoder-final-ox-prefs-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "src/ubase/umarshal.ml",
+      "bytes": 20703,
+      "sha256": "7224f0368d74c5e227f10454dea0f1224337c521548b2fb954a811f84a0c9d06"
+    },
+    {
+      "path": "src/ubase/umarshal.mli",
+      "bytes": 5828,
+      "sha256": "a490ee26e193c03b7516386fab73f5ed38556cd0db039424be25d62e6438fe4d"
+    },
+    {
+      "path": "src/remote.ml",
+      "bytes": 98918,
+      "sha256": "1b0d591b641a7542e031bf752538dc1d5b64479f2f535844199ac9db8f8b0eae"
+    },
+    {
+      "path": "src/remote.mli",
+      "bytes": 8737,
+      "sha256": "249535fd5620ac8a6c1622dc3ce012928b81258b85b5bc7ae47b0a742412cbd5"
+    },
+    {
+      "path": "tests/umarshal_bounds/run.py",
+      "bytes": 2671,
+      "sha256": "fd6835608a09f588a271152ca5980847dcdb9e4959178d60e06f1f0b4b4f59ec"
+    },
+    {
+      "path": "tests/umarshal_bounds/probe.ml",
+      "bytes": 6162,
+      "sha256": "d0902559c0174e8e43309c2c3751969f3716ebb156aa3d2a3df960c9ffc3113f"
+    },
+    {
+      "path": "tests/test_remote_bounds.py",
+      "bytes": 5511,
+      "sha256": "1954767d7b863f08ef10124e64eacf8b4edbb66b07e21fc2598c68203fe352bb"
+    },
+    {
+      "path": "tests/remote_bounds.ml",
+      "bytes": 15426,
+      "sha256": "86cb907481eadf8a0ba364c54af8f0de27769228250911b31b71bc6c4e2d3a7e"
+    },
+    {
+      "path": "tests/test_endpoint_prefs.py",
+      "bytes": 2043,
+      "sha256": "9a21de4b610827a23ff568d835ad3db3e16da29a343db2042ecd48ca01c05227"
+    },
+    {
+      "path": "tests/endpoint_prefs.ml",
+      "bytes": 3441,
+      "sha256": "eec91e97300a0be145625d3077aa603eb55251baa159a50729abe4bc2d622921"
+    }
+  ],
+  "safety": {
+    "current_and_reference_allocator_guards": "private tests refuse payload allocations above65536 before reaching allocator; current malformed rejection must be typed Error before guard, old string decoder reaches its guarded site",
+    "rpc_negative": "finite2000zero-payload-unit collection, never a huge allocation",
+    "rpc_header_claim_bytes": 1048576,
+    "reference_offsets": "no unsafe malformed offset cases executed against old implementation"
+  },
+  "remaining": [
+    "legacy/shared RPC outer frame allocation caps",
+    "global decoded-object reservation through queued scope/reply lifetimes",
+    "conversion/property-map/recursive factory/depth and full metadata accounting",
+    "remaining baseline/acquisition families and aggregate descendant FD/RSS",
+    "broader benchmark matrix and consolidated integration/review"
+  ],
+  "preserved_predecessors": {
+    "unit_initial": "7226/f32b20/0 before guarded current sites/stronger roundtrips; later57163/6f6ca3/0 narrower88checks, all preserved",
+    "early_make": "26235/c66b5e/0 before nonallocating integer budget counters; final68928 current",
+    "early_inprocess": "30914/0665b4/0 before additional stream/value roundtrips and private current allocation guards; final source/report pins authoritative"
+  }
+}

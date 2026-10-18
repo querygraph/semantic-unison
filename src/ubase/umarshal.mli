@@ -48,6 +48,13 @@ val from_bytes : 'a t -> bytes -> int -> 'a
 val from_string : 'a t -> string -> int -> 'a
 
 val from_channel : 'a t -> in_channel -> 'a
+val from_channel_bounded : max_alloc_bytes:int -> max_elements:int -> 'a t -> in_channel -> 'a
+(** Bounds selected builtin allocation charges and collection element counts.
+    Framing/header/context overhead, user conversion/map callbacks and complete
+    heap/RSS are excluded. Nonnegative budgets; zero permits values with no selected charges.
+    All decoders check declared strings/arrays against remaining framed bytes
+    before allocating. Stream input also needs a separately bounded outer frame. *)
+
 val to_channel : 'a t -> out_channel -> 'a -> unit
 
 val rec1 : ('a t -> 'a t) -> 'a t
@@ -70,6 +77,13 @@ type bytearray =
 val bytearray : bytearray t
 
 val marshal_to_bytearray : 'a t -> 'a -> bytearray
+val unmarshal_from_bytearray_bounded : max_alloc_bytes:int -> max_elements:int ->
+  'a t -> bytearray -> int -> 'a
+(** Same encoding as the ordinary decoder, with the above per-decode limits.
+    String charges cover the bytes buffer and resulting string, bytearrays their
+    payload and temporary buffers, int32 arrays their payload, lists both spines;
+    primitive scratch buffers are charged too. Counts aggregate over nested
+    lists/arrays/property lists within this decode. This is not an RSS cap. *)
 val unmarshal_from_bytearray : 'a t -> bytearray -> int -> 'a
 
 type int32bigarray =

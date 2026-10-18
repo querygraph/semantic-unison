@@ -120,7 +120,12 @@ val registerBoundedServerCmd :
     queue, allowing retained-resource leases to cover the entire reply lifetime.
     A scope failure before the callback can produce an exception reply; failures
     after dispatch starts never produce an additional reply.
-    Does not change or bound the shared legacy RPC message-header schema. *)
+    Selected builtin decode allocations are limited per decode to
+    [65536 + 8 * frame_limit] charged bytes and collection counts to
+    [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
+    not decoded heap/RSS or aggregate request bounds. Scope arguments may be
+    decoded twice, each with its own bound. Valid wire encodings are unchanged.
+    Does not impose an outer cap on the shared legacy RPC message header. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

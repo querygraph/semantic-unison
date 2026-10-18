@@ -86,6 +86,41 @@ let test_input_budget () =
   R.release_bounded_input ticket;R.release_bounded_input ticket;usage 0 0;
   Prefs.set R.boundedInputMiB old_mib;Prefs.set R.boundedInputSlots old_slots
 
+let test_decoded_budget () =
+  let called=ref 0 in
+  List.iter(fun scoped->
+    let name=if scoped then "decoded-scope" else "decoded-plain" in
+    let withScope=if scoped then Some(fun _ _ f->f()) else None in
+    let _client=R.registerBoundedServerCmd ?withScope name ~maxArgs:64 ~maxResult:64
+      (Umarshal.list Umarshal.unit) Umarshal.unit (fun _ _->incr called;Lwt.return ()) in
+    with_connection(fun conn fd->
+      pause_output conn;
+      let body=request_body name (Umarshal.list Umarshal.unit)(List.init 2000(fun _->())) in
+      require(Bytearray.length body<=64) "decode fixture exceeds raw cap";
+      send fd [R.encodeInt(Bytearray.length body);body,0,Bytearray.length body];
+      Lwt_unix.run(R.start_bounded_request conn 64(fun buf->R.processRequest conn(request_id 901)name buf));
+      require(!called=0) "DESIGNATED decoded collection reached server";
+      require(!(R.bounded_input_count)=1 && Queue.length conn.R.outputQueue.R.writes=1)
+        "decode refusal dropped ticket before exception output";
+      R.allowWrites conn.R.outputQueue;
+      Lwt_unix.run(Lwt_unix.yield());
+      require(!(R.bounded_input_count)=0 && !(R.bounded_input_bytes)=0) "decode refusal input ticket leaked")) [false;true];
+  let result_client=R.registerBoundedServerCmd "decoded-result" ~maxArgs:64 ~maxResult:64
+    Umarshal.unit (Umarshal.list Umarshal.unit) (fun _ ()->Lwt.return []) in
+  with_connection(fun conn _->
+    let reply=result_client conn () in
+    let id= !(R.ids) in
+    let body=Bytearray.of_string("decoded-result-res"^Umarshal.to_string(Umarshal.list Umarshal.unit)(List.init 2000(fun _->()))) in
+    Lwt.wakeup(R.find_receiver id)body;
+    (try ignore(Lwt_unix.run reply);failwith "bounded result decoded without limits"
+     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong result budget refusal"));
+  with_connection(fun conn _->
+    let malformed=Umarshal.(to_string(sum6 unit string string int string unit id id)(I64(1048576))) in
+    (try ignore(R.unmarshalHeader conn(Bytearray.of_string("rsp"^malformed)));failwith "header inner allocation unbounded"
+     with Util.Fatal text->require(String.starts_with ~prefix:"Fatal error during unmarshaling" text) "wrong header allocation refusal"));
+  require((try ignore(R.boundedMarshalingFunctions max_int Umarshal.unit);false with Invalid_argument _->true))
+    "decoded budget overflow accepted"
+
 let test_reply_scopes () =
   let active = ref 0 and calls = ref 0 and mode = ref `Success in
   let delayed = ref (Lwt.wait ()) in
@@ -245,6 +280,7 @@ let () =
     send fd (R.encodeInt 888 :: R.marshalHeader conn R.NormalResult [R.encodeInt (1 lsl 30)]);
     exceeds (fun () -> Lwt_unix.run (R.receive conn)));
   R.resetReceivers ();
+  test_decoded_budget ();
   test_reply_scopes ();
   test_input_budget ();
   test_dynamic_reply_bounds ();
