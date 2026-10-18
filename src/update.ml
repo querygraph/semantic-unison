@@ -708,7 +708,9 @@ let inspect_cached_components ?(check_parent=fun () -> ())
               raise(Util.Transient "Component source changed before cache publication");
             if component_owner_reference fspath<>reference || component_owner_namespace fspath<>identity then
               raise(Util.Transient "Component archive head changed during inspection");
-            (match summary.checkpoint with None -> raise(Util.Transient "Component capture checkpoint missing")
+            (match summary.checkpoint with
+             | None when summary.checkpoint_capacity_exhausted -> ()
+             | None -> raise(Util.Transient "Component capture checkpoint missing")
              | Some checkpoint ->
                let entry=DngComponents.make_owner_entry ~root_identity ~path:key ~generation_sha256
                  ~checkpoint ~outcomes:summary.refinements in

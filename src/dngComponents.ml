@@ -64,6 +64,7 @@ let partition_nodes size regions =
     (1,0L) regions in
   count+(if stop<size then 1 else 0)
 
+let node_budget=2048
 let describe file =
   match DngSemantic.component_regions file with
   | Error reason -> Error reason
@@ -85,9 +86,9 @@ let describe file =
       then "dng-physical-partition/1",compacted,count
       else "dng-physical-partition/2",compact_regions(field_encodings regions),count in
     let nodes=partition_nodes (SemanticFile.size file) regions in
-    if nodes>1024 then Error(Printf.sprintf
-      "DNG component node budget (raw=%d; runs=%d; fields=%d; nodes=%d)"
-      raw_count physical_runs (List.length regions) nodes)
+    if nodes>node_budget then Error(Printf.sprintf
+      "DNG component node budget (raw=%d; runs=%d; fields=%d; nodes=%d; limit=%d)"
+      raw_count physical_runs (List.length regions) nodes node_budget)
     else
     let children=List.map (fun (region:DngSemantic.component_region) ->
       let role=match region.role with
@@ -97,7 +98,7 @@ let describe file =
         | DngSemantic.Structure -> ComponentHash.Structural in
       {ComponentHash.id="dng/"^region.logical_id;schema=region.schema;
        role;offset=region.offset;length=region.length;children=[]}) regions in
-    Ok {ComponentHash.id="dng";schema;
+    Ok {ComponentHash.id="dng";schema=(if nodes>1024 then "dng-physical-partition/3" else schema);
         role=ComponentHash.Structural;offset=0L;length=SemanticFile.size file;children}
 
 type binding = { component_id : string; decoder : ComponentHash.plugin }
@@ -164,8 +165,8 @@ let with_checkpoint_base ~expected_checkpoint_sha256 ~max_read_bytes file encode
   match describe file with
   | Error reason -> Error reason
   | Ok base ->
-    Ok(ComponentHash.with_checkpoint ~expected_checkpoint_sha256
-      ~expected_root_schema:"dng-physical-partition/0" ~max_read_bytes file encoded
+    Ok(ComponentHash.with_checkpoint_budgeted ~max_nodes:node_budget ~expected_checkpoint_sha256
+      ~expected_root_schema:base.ComponentHash.schema ~max_read_bytes file encoded
       (fun session snapshot ->
         ComponentHash.validate_base session snapshot base;
         callback session snapshot base))
@@ -176,7 +177,7 @@ let with_snapshot ~decoders ~max_read_bytes file callback =
   match describe file with
   | Error reason -> Error reason
   | Ok spec ->
-    Ok(ComponentHash.with_snapshot ~max_read_bytes file spec (fun session initial ->
+    Ok(ComponentHash.with_snapshot_budgeted ~max_nodes:node_budget ~max_read_bytes file spec (fun session initial ->
       let refined,outcomes=List.fold_left (fun (snapshot,outcomes) (binding:binding) ->
         let outcome status = {component_id=binding.component_id;decoder_id=binding.decoder.id;
           implementation_sha256=binding.decoder.implementation_sha256;status} in

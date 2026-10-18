@@ -84,7 +84,7 @@ let component_report path =
     SemanticFile.with_fd fd (fun file ->
       match DngComponents.describe file with
       | Error reason -> object_ (path_fields path @ ["status",quote "unsupported";"reason",quote reason])
-      | Ok spec -> ComponentHash.with_snapshot ~max_read_bytes:(SemanticFile.size file) file spec
+      | Ok spec -> ComponentHash.with_snapshot_budgeted ~max_nodes:DngComponents.node_budget ~max_read_bytes:(SemanticFile.size file) file spec
           (fun session snapshot ->
             let lanes=List.map (fun (name,role) ->
               let observation=match ComponentHash.projection snapshot role with

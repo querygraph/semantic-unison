@@ -1,12 +1,15 @@
 @@ portable
 (** Advisory DNG physical partition for component hashing. Unknown gaps remain
     opaque; table descriptors/padding remain structural. No merge/transfer authority. *)
+val node_budget : int
+(** Local DNG report policy: at most2048 nodes, independent of peer input. *)
 val describe : SemanticFile.t -> (ComponentHash.spec, string) result
 (** Existing partitions of at most480 claims keep schema /0 unchanged. Larger
     raw geometries (bounded at65536) reject aliases, then coalesce only touching
     same-role claims with ordered membership provenance into schema /1 leaves.
     The exact sum of leaves, nonempty opaque gaps and root must fit the
-    unchanged1024-node core.
+    default1024-node core. Previously unsupported1025..2048-node results use
+    explicit schema /3 and the local [node_budget]; no generic default changes.
     Private field decoder IDs inside a coalesced run are not claimed available;
     unknown/missing decoders remain exact. No physical gaps are bridged.
     If schema /1 still exceeds that node budget, schema /2 may classify each TIFF

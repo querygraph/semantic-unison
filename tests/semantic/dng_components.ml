@@ -54,7 +54,7 @@ let many_inline_fields little big =
  Bytes.fill bytes 32768 16 'P';
  Bytes.to_string bytes,(primary+cw+3*ew+va),ew
 let many_snapshot bytes = Layout_only.with_input bytes (fun file ->
- ComponentHash.with_snapshot ~max_read_bytes:(Int64.of_int(String.length bytes)) file (describe file)
+ ComponentHash.with_snapshot_budgeted ~max_nodes:DngComponents.node_budget ~max_read_bytes:(Int64.of_int(String.length bytes)) file (describe file)
  (fun session snapshot ->
    check(ComponentHash.bytes_requested session=Int64.of_int(String.length bytes))
       "coalesced snapshot reread bytes";snapshot))
@@ -775,9 +775,14 @@ let () =
    check((projection other ComponentHash.Private_metadata).sha256=
      (projection snapshot ComponentHash.Private_metadata).sha256) "pixel edit changed private lane";
    let fragmented,_=many_units little big tag 600 true in
-   Layout_only.with_input fragmented(fun file ->
+   let large=many_snapshot fragmented in
+   check((ComponentHash.root large).schema="dng-physical-partition/3") "large forest schema missing";
+   check((projection large ComponentHash.Encoded_pixels).bytes=9600L) "large forest lost image bytes";
+   check((projection large ComponentHash.Opaque).bytes>=600L) "large forest bridged opaque gaps";
+   let excessive,_=many_units little big tag 1200 true in
+   Layout_only.with_input excessive(fun file ->
      check(match DngComponents.describe file with Error _ -> true | _ -> false)
-        "fragmented budget silently bridged opaque gaps");
+       "large forest exceeded fixed2048 budget");
    let alias=Bytes.of_string bytes in
    Layout_only.put alias little (4096+4) 4 pixels;
    Layout_only.with_input(Bytes.to_string alias)(fun file ->
@@ -813,4 +818,65 @@ let () =
  Layout_only.with_input exhausted(fun file ->
    check(DngComponents.describe file=Error "DNG raw component region limit")
      "raw region collection escaped declared65536 bound");
+ (* Exercise the DNG adapter restore path, including its actual root schema. *)
+ List.iter(fun count ->
+  let bytes,_=many_units true false 324 count true in
+  Layout_only.with_input bytes(fun file ->
+   let decoders=match DngComponents.freeze_decoders [] with Ok x->x|Error e->failwith e in
+   match DngComponents.with_snapshot ~decoders ~max_read_bytes:(Int64.of_int(String.length bytes)) file
+     (fun session ~initial:_ ~refined _ ->
+      let checkpoint=ComponentHash.checkpoint session refined in
+      let encoded=ComponentHash.checkpoint_bytes checkpoint in
+      check(String.sub encoded 0 8=(if count=600 then "UCH\001\000\000\000\000" else "UCH\000\000\000\000\000"))
+        "DNG checkpoint small/large version mismatch";
+      match DngComponents.with_checkpoint ~expected_checkpoint_sha256:(ComponentHash.checkpoint_sha256 checkpoint)
+        ~max_read_bytes:(Int64.of_int(String.length bytes)) file encoded(fun _ restored ->
+          check(ComponentHash.layout_sha256 restored=ComponentHash.layout_sha256 refined)
+            "DNG adapter restore changed larger partition") with
+      | Ok () -> () | Error e -> failwith e) with
+   | Ok () -> () | Error e -> failwith e)) [480;600];
+ (* Explicit larger sessions retain the default limit and version their metadata. *)
+ let bytes=String.make 2400 'L' in
+ let graph : ComponentHash.spec =
+   {id="large";schema="original-large/1";role=ComponentHash.Structural;offset=0L;length=2400L;
+    children=List.init 1100(fun i -> {ComponentHash.id="large/"^string_of_int i;
+      schema="original-byte/1";role=ComponentHash.Private_metadata;
+      offset=Int64.of_int i;length=1L;children=[]})} in
+ let refuses f = try f();false with ComponentHash.Invalid _ -> true in
+ Layout_only.with_input bytes(fun file ->
+   check(refuses(fun () -> ComponentHash.with_snapshot ~max_read_bytes:2400L file graph(fun _ _ -> ())))
+     "default snapshot silently enlarged";
+   List.iter(fun max_nodes -> check(refuses(fun () ->
+     ComponentHash.with_snapshot_budgeted ~max_nodes ~max_read_bytes:2400L file graph(fun _ _ -> ())))
+     "invalid local budget accepted") [0;2049];
+   ComponentHash.with_snapshot_budgeted ~max_nodes:2048 ~max_read_bytes:2401L file graph(fun session snapshot ->
+     check(ComponentHash.full_sha256 snapshot=SemanticHash.string bytes) "large full hash";
+     let child : ComponentHash.spec = {id="large/0/child";schema="original-refined-byte/1";
+       role=ComponentHash.Private_metadata;offset=0L;length=1L;children=[]} in
+     let refined=ComponentHash.refine session snapshot ~component:"large/0"
+       ~schema:"original-refined/1" [child] in
+     check(ComponentHash.full_sha256 refined=ComponentHash.full_sha256 snapshot)
+       "large refinement changed exact whole-file hash";
+     check(ComponentHash.bytes_requested session=2401L) "large refinement reread outside its parent";
+     let cp=ComponentHash.checkpoint session snapshot in
+     let encoded=ComponentHash.checkpoint_bytes cp in
+     check(String.sub encoded 0 8="UCH\001\000\000\000\000") "large checkpoint not versioned";
+     let restore budget encoded = ComponentHash.with_checkpoint_budgeted ~max_nodes:budget
+       ~expected_checkpoint_sha256:(SemanticHash.string encoded) ~expected_root_schema:"original-large/1"
+       ~max_read_bytes:2400L file encoded(fun _ restored ->
+         check(ComponentHash.layout_sha256 restored=ComponentHash.layout_sha256 snapshot) "large restore changed layout") in
+     check(refuses(fun () -> restore 1024 encoded)) "default checkpoint bound enlarged";
+     restore 2048 encoded;
+     let downgraded=Bytes.of_string encoded in Bytes.set downgraded 3 '\000';
+     check(refuses(fun () -> restore 2048 (Bytes.to_string downgraded))) "downgraded oversized checkpoint accepted";
+     let unknown=Bytes.of_string encoded in Bytes.set unknown 3 '\002';
+     check(refuses(fun () -> restore 2048 (Bytes.to_string unknown))) "unknown checkpoint version accepted"));
+ let huge : ComponentHash.spec = {graph with children=List.init 2000(fun i ->
+   {ComponentHash.id="large/"^string_of_int i^String.make 240 'i'; schema=String.make 256 's';
+    role=ComponentHash.Private_metadata;offset=Int64.of_int i;length=1L;children=[]})} in
+ Layout_only.with_input bytes(fun file ->
+   ComponentHash.with_snapshot_budgeted ~max_nodes:2048 ~max_read_bytes:2400L file huge(fun session snapshot ->
+     check(not(ComponentHash.checkpoint_fits snapshot)) "metadata byte cap not detected";
+     check(ComponentHash.full_sha256 snapshot=SemanticHash.string bytes) "oversize metadata lost valid observation";
+     check(refuses(fun () -> ignore(ComponentHash.checkpoint session snapshot))) "metadata byte cap escaped"));
  Printf.printf "DNG component controls: %d checks PASS\n%!" !checks

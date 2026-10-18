@@ -70,3 +70,22 @@ physical runs,894 field-encoding runs and1747 normalized nodes. The unchanged
 cause. Its actual owner69896/f488f9/0 and all helper/IO/CPU closures are sealed
 separately. A future explicitly budgeted larger-forest/checkpoint version needs
 source design and qualification; no implicit cap increase or reread follows.
+
+## Explicit larger-forest successor (generated qualification passed)
+
+The measured V5 input needs 1747 normalized nodes. The successor preserves the
+generic default1024 API and adds an explicit local ceiling of2048, inherited by
+refinement and restore. DNG adapters opt in; peers cannot select the ceiling.
+Existing accepted /0, /1 and /2 partitions remain selected first. Newly accepted
+1025..2048-node partitions use `dng-physical-partition/3`; gaps remain opaque.
+
+Small checkpoint bytes retain UCH/0. Larger checkpoints use UCH/1 with strict
+1025..2048 count; old-version oversized and unknown-version records refuse.
+Both versions retain the1MiB serialized limit, depth16, exact identifiers,
+canonical partitions, authenticated metadata and full-input restore validation.
+A known checkpoint byte-capacity exhaustion leaves the valid observation intact
+and skips optional cache publication; operational/ownership exceptions propagate.
+This source change does not establish real-camera support until separately
+admitted execution, or any hard RSS/physical IO savings claim.
+
+Generated qualification: `tests/qualification/dng-large-forest-actual-20261017.json` records1590 checks/compiler, six builds and actual Update capacity controls. Retained-camera V6 remains a separately admitted observation.

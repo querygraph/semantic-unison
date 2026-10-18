@@ -22,9 +22,9 @@ let fixture little big packet =
   entry 1 700 1 64 1024;
   entry 2 273 4 1 2048;
   entry 3 279 4 1 512;
-  entry 4 50740 1 128 3072;
-  (* Scalar-shaped unknown IFD pointer: do not infer pointer independence. *)
-  entry 5 65000 13 1 1024;
+  entry 4 50740 1 1024 3072;
+  (* Second opaque private field for bounded checkpoint-capacity refinements. *)
+  entry 5 65000 1 1024 4096;
   n (primary+cw+ew*6) iw 0;
   Bytes.blit_string packet 0 bytes 1024 64;
   n 3072 4 1024;
@@ -50,14 +50,14 @@ let ()=
  let pool=SemanticWorkers.create ~workers:2 ~max_pending:16 ~budget in
  let decoders=match DngComponents.freeze_decoders [] with Ok x->x|Error e->failwith e in
  let bytes=fixture true false (String.make 64 'X') in
- let inspect name =
+ let inspect ?(decoders=decoders) name =
   let source=Filename.concat state name in
   let out=open_out_bin source in output_string out bytes;close_out out;
   let fd=Unix.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC] 0 in
   let result=Lwt_unix.run(Update.inspect_cached_components ~index_max_entries:1 left
    ~parent ~path:(Fspath.resolve_existing source)
    ~generation_sha256:(SemanticHash.string "capacity-generation") ~pool
-   ~cancellation:(HelperSupervisor.cancellation()) ~decoders ~max_read_bytes:8192L fd) in
+   ~cancellation:(HelperSupervisor.cancellation()) ~decoders ~max_read_bytes:10240L fd) in
   Unix.close fd;
   match result with
   | Some {SemanticWorkers.components=Ok summary;_} ->
@@ -86,6 +86,25 @@ let ()=
  ignore(inspect "second.dng");
  require(Update.component_owner_reference left=head) "capacity advanced head";
  require(snapshot()=before) "capacity created cache files or reservation";
+ (* Two bounded private refinements fit2048 nodes but exceed1MiB checkpoint
+    metadata. The actual Update path must preserve the report and archive head. *)
+ let bindings=List.map(fun tag ->
+   let component_id="dng/ifd/0/tag/"^string_of_int tag^"/value" in
+   let decoder : ComponentHash.plugin =
+    {id="original.capacity/"^string_of_int tag;implementation_sha256=SemanticHash.string(string_of_int tag);
+     decode=(fun _ -> Ok(List.init 1000(fun i ->
+       let prefix=component_id^"/"^string_of_int i^"-" in
+       {ComponentHash.id=prefix^String.make(256-String.length prefix) 'c';schema=String.make 256 's';
+        role=ComponentHash.Private_metadata;offset=Int64.of_int i;length=1L;children=[]})))} in
+   {DngComponents.component_id;decoder}) [50740;65000] in
+ let expanded=match DngComponents.freeze_decoders bindings with Ok x->x|Error e->failwith e in
+ let oversized=inspect ~decoders:expanded "checkpoint-capacity.dng" in
+ require(oversized.checkpoint=None && oversized.checkpoint_capacity_exhausted)
+   "checkpoint capacity became missing-capture failure or oversized metadata";
+ require(List.for_all(fun (o:DngComponents.outcome)->o.status=DngComponents.Refined) oversized.refinements
+   && List.length oversized.refinements=2) "capacity test did not refine both parents";
+ require(Update.component_owner_reference left=head) "checkpoint capacity advanced archive head";
+ require(snapshot()=before) "checkpoint capacity created cache files or reservation";
  Lwt_unix.run(SemanticWorkers.shutdown pool);
  require(HelperSupervisor.usage budget=(0,0)) "capacity worker budget retained";
  Unix.close parent;

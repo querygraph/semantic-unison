@@ -7,7 +7,7 @@ type node = { id : string; schema : string; role : role;
 type token = unit ref
 type snapshot = { token : token; tree : node }
 type session = { token : token; file : SemanticFile.t; mutable active : bool;
-                 mutable remaining : int64; mutable requested : int64 }
+                 mutable remaining : int64; mutable requested : int64; max_nodes : int }
 type reader = { session : session; origin : int64; length : int64; mutable active : bool;
                 parent : reader option; level : int }
 type plugin = { id : string; implementation_sha256 : string;
@@ -67,11 +67,13 @@ let charge session bytes =
 let bytes_requested session = session.requested
 (* Specs are relative to their parent; normalization makes absolute physical
    extents, opaque gaps, bounded canonical order and globally unique IDs. *)
-let normalize ~origin ~length ~existing ~depth (spec:spec) =
+let checked_node_budget n =
+  if n<1 || n>2048 then invalid "component node budget outside1..2048";n
+let normalize ~max_nodes ~origin ~length ~existing ~depth (spec:spec) =
   let ids=Hashtbl.create 32 and count=ref existing in
   let add id =
     require_id id;incr count;
-    if !count>1024 then invalid "component node limit";
+    if !count>max_nodes then invalid "component node limit";
     if Hashtbl.mem ids id then invalid "duplicate component identifier";
     Hashtbl.add ids id () in
   let rec node level origin limit (item:spec) =
@@ -82,7 +84,7 @@ let normalize ~origin ~length ~existing ~depth (spec:spec) =
     let start=Int64.add origin item.offset in
     let rec bounded_list count = function
       | [] -> ()
-      | _::rest -> if count>=1024 then invalid "component child limit" else bounded_list (count+1) rest in
+      | _::rest -> if count>=max_nodes then invalid "component child limit" else bounded_list (count+1) rest in
     bounded_list 0 item.children;
     let children=List.sort(fun (a:spec) b -> Int64.compare a.offset b.offset) item.children in
     let position=ref 0L in
@@ -112,15 +114,18 @@ let rec hash_node session ancestors (spec:spec) =
   let content=SemanticHash.finish own in
   {id=spec.id;schema=spec.schema;role=spec.role;offset=spec.offset;length=spec.length;
    content_sha256=content;view_sha256=view spec.id spec.schema spec.role spec.length content children;children}
-let with_snapshot ~max_read_bytes file (spec:spec) callback =
+let with_snapshot_budgeted ~max_nodes ~max_read_bytes file (spec:spec) callback =
+  let max_nodes=checked_node_budget max_nodes in
   if max_read_bytes<0L then invalid "negative component read budget";
   if spec.offset<>0L || spec.length<>SemanticFile.size file then invalid "component root must cover entire file";
-  let spec=normalize ~origin:0L ~length:spec.length ~existing:0 ~depth:0 spec in
-  let session={token=ref ();file;active=true;remaining=max_read_bytes;requested=0L} in
+  let spec=normalize ~max_nodes ~origin:0L ~length:spec.length ~existing:0 ~depth:0 spec in
+  let session={token=ref ();file;active=true;remaining=max_read_bytes;requested=0L;max_nodes} in
   Fun.protect ~finally:(fun () -> session.active<-false) (fun () ->
     live session;charge session spec.length;
     let tree=hash_node session [] spec in live session;
     let value=callback session {token=session.token;tree} in live session;value)
+let with_snapshot ~max_read_bytes file spec callback =
+  with_snapshot_budgeted ~max_nodes:1024 ~max_read_bytes file spec callback
 let find snapshot id =
   match fold(fun found (node:node) -> if node.id=id then Some node else found) None snapshot.tree with
   | Some node -> node | None -> invalid "component identifier not found"
@@ -135,7 +140,7 @@ let refine session snapshot ~component ~schema children =
     List.fold_left(fun found child -> match found with Some _ -> found | None -> depth (level+1) child)
       None node.children in
   let level=match depth 0 snapshot.tree with Some n -> n | None -> assert false in
-  let spec=normalize ~origin:old.offset ~length:old.length ~existing:(count-1) ~depth:level
+  let spec=normalize ~max_nodes:session.max_nodes ~origin:old.offset ~length:old.length ~existing:(count-1) ~depth:level
     {id=old.id;schema;role=old.role;offset=0L;length=old.length;children} in
   let siblings=fold(fun ids node -> if node.id=component then ids else node.id::ids) [] snapshot.tree in
   let rec check_ids (spec:spec) =
@@ -188,17 +193,24 @@ let apply_plugin session snapshot ~component plugin =
 
 let max_checkpoint_size=1048576
 let checkpoint_magic="UCH\000\000\000\000\000"
+let large_checkpoint_magic="UCH\001\000\000\000\000"
 let checkpoint_bytes value=value.encoded
 let checkpoint_sha256 value=value.digest
 let role_code = function Encoded_pixels -> '\000' | Standard_metadata -> '\001'
   | Private_metadata -> '\002' | Structural -> '\003' | Opaque -> '\004'
+let checkpoint_fits snapshot =
+  fold(fun bytes (node:node) -> bytes+73+String.length node.id+String.length node.schema)
+    16 snapshot.tree<=max_checkpoint_size
 let checkpoint session snapshot =
   bound session snapshot;
+  if not(checkpoint_fits snapshot) then invalid "component checkpoint size limit";
   let output=Buffer.create 1024 in
   let put value=Buffer.add_string output value in
   let number value=put(integer value) in
   let string value=number(Int64.of_int(String.length value));put value in
-  put checkpoint_magic;number(Int64.of_int(fold(fun n _ -> n+1) 0 snapshot.tree));
+  let count=fold(fun n _ -> n+1) 0 snapshot.tree in
+  put(if count<=1024 then checkpoint_magic else large_checkpoint_magic);
+  number(Int64.of_int count);
   let rec write (node:node) =
     string node.id;string node.schema;Buffer.add_char output (role_code node.role);
     number node.offset;number node.length;put node.content_sha256;
@@ -208,7 +220,8 @@ let checkpoint session snapshot =
   if String.length encoded>max_checkpoint_size then invalid "component checkpoint size limit";
   bound session snapshot;{encoded;digest=SemanticHash.string encoded}
 
-let decode_checkpoint encoded =
+let decode_checkpoint ?(max_nodes=2048) encoded =
+  let max_nodes=checked_node_budget max_nodes in
   if String.length encoded>max_checkpoint_size then invalid "component checkpoint size limit";
   let position=ref 0 and remaining=ref 0 in
   let take n=if n<0 || n>String.length encoded - !position then invalid "truncated component checkpoint";
@@ -221,8 +234,14 @@ let decode_checkpoint encoded =
   let small limit=let value=number () in
     if value>Int64.of_int limit then invalid "component checkpoint field limit";Int64.to_int value in
   let string ()=let value=take(small 256) in require_id value;value in
-  if take 8<>checkpoint_magic then invalid "unknown component checkpoint version";
-  remaining:=small 1024;
+  let magic=take 8 in
+  let version_limit=if magic=checkpoint_magic then 1024
+    else if magic=large_checkpoint_magic then 2048
+    else invalid "unknown component checkpoint version" in
+  let limit=min version_limit max_nodes in
+  remaining:=small limit;
+  if magic=large_checkpoint_magic && !remaining<=1024 then
+    invalid "noncanonical large component checkpoint";
   let rec node depth =
     if depth>16 || !remaining<=0 then invalid "component checkpoint node/depth limit";
     decr remaining;
@@ -231,7 +250,7 @@ let decode_checkpoint encoded =
       | "\002" -> Private_metadata | "\003" -> Structural | "\004" -> Opaque
       | _ -> invalid "component checkpoint role" in
     let offset=number () in let length=number () in let content_sha256=take 32 in
-    let count=small 1024 in
+    let count=small limit in
     if count> !remaining then invalid "component checkpoint child count";
     let children=List.init count (fun _ -> node(depth+1)) in
     {id;schema;role;offset;length;content_sha256;children;
@@ -347,34 +366,39 @@ let prepare_record_publication ~directory ~stage ~temporary ~expected_binding
     (SemanticHash.hex expected_record_sha256) in
   SemanticFile.check file;ticket
 
-let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
+let with_checkpoint_budgeted ~max_nodes ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
+  let max_nodes=checked_node_budget max_nodes in
   if max_read_bytes<0L then invalid "negative component read budget";
   require_id expected_root_schema;
   if String.length expected_checkpoint_sha256<>32 || String.length encoded>max_checkpoint_size ||
      SemanticHash.string encoded<>expected_checkpoint_sha256 then invalid "component checkpoint digest mismatch";
-  let tree=decode_checkpoint encoded in
+  let tree=decode_checkpoint ~max_nodes encoded in
   if tree.offset<>0L || tree.length<>SemanticFile.size file || tree.schema<>expected_root_schema then
     invalid "component checkpoint root binding mismatch";
   let rec spec origin (node:node) : spec =
     {id=node.id;schema=node.schema;role=node.role;offset=Int64.sub node.offset origin;
      length=node.length;children=List.map(spec node.offset) node.children} in
-  let normalized=normalize ~origin:0L ~length:tree.length ~existing:0 ~depth:0 (spec 0L tree) in
+  let normalized=normalize ~max_nodes ~origin:0L ~length:tree.length ~existing:0 ~depth:0 (spec 0L tree) in
   let rec same (node:node) (spec:spec) =
     node.id=spec.id && node.schema=spec.schema && node.role=spec.role &&
     node.offset=spec.offset && node.length=spec.length && List.length node.children=List.length spec.children &&
     List.for_all2 same node.children spec.children in
   if not(same tree normalized) then invalid "component checkpoint partition is not canonical";
-  let session={token=ref ();file;active=true;remaining=max_read_bytes;requested=0L} in
+  let session={token=ref ();file;active=true;remaining=max_read_bytes;requested=0L;max_nodes} in
   Fun.protect ~finally:(fun () -> session.active<-false) (fun () ->
     live session;charge session tree.length;
     if SemanticFile.digest file<>tree.content_sha256 then invalid "component checkpoint input bytes changed";
     live session;let result=callback session {token=session.token;tree} in live session;result)
 
+let with_checkpoint ~expected_checkpoint_sha256 ~expected_root_schema ~max_read_bytes file encoded callback =
+  with_checkpoint_budgeted ~max_nodes:1024 ~expected_checkpoint_sha256
+    ~expected_root_schema ~max_read_bytes file encoded callback
+
 let validate_base session snapshot (base:spec) =
   bound session snapshot;
   if base.offset<>0L || base.length<>snapshot.tree.length then
     invalid "component base root extent mismatch";
-  let base=normalize ~origin:0L ~length:snapshot.tree.length ~existing:0 ~depth:0 base in
+  let base=normalize ~max_nodes:session.max_nodes ~origin:0L ~length:snapshot.tree.length ~existing:0 ~depth:0 base in
   let private_role = function Private_metadata | Opaque -> true | _ -> false in
   let safe_private tree = fold (fun safe (node:node) -> safe &&
     node.role<>Encoded_pixels && node.role<>Standard_metadata) true tree in

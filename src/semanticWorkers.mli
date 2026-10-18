@@ -17,6 +17,7 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
   refinements : DngComponents.outcome list; hash_bytes_requested : int64;
   checkpoint : ComponentHash.checkpoint option;
+  checkpoint_capacity_exhausted : bool;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }

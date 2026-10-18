@@ -15,6 +15,7 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   projections : (ComponentHash.role * ComponentHash.projection option) list;
   refinements : DngComponents.outcome list; hash_bytes_requested : int64;
   checkpoint : ComponentHash.checkpoint option;
+  checkpoint_capacity_exhausted : bool;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
@@ -136,7 +137,9 @@ let execute job =
             {full_sha256=ComponentHash.full_sha256 refined;
              layout_sha256=ComponentHash.layout_sha256 refined;projections;
              refinements=outcomes;hash_bytes_requested=ComponentHash.bytes_requested session;
-             checkpoint=(if capture then Some(ComponentHash.checkpoint session refined) else None);
+             checkpoint=(if capture && ComponentHash.checkpoint_fits refined
+               then Some(ComponentHash.checkpoint session refined) else None);
+             checkpoint_capacity_exhausted=(capture && not(ComponentHash.checkpoint_fits refined));
              reused_components=reused;invalidated_components=invalidated} in
         let refresh_owned entry record decoders max_read_bytes capture =
           let checkpoint=DngComponents.checkpoint_for_owner_entry entry record in

@@ -1,3 +1,4 @@
+<!-- Current larger-forest update, 2026-10-17: explicit2048 DNG opt-in with default1024 retained, UCH1 large metadata/1MiB cap;1590checks/compiler+sixbuilds+actual Update capacity controls PASS. CameraV6 exactrequest1663093e sent to PhotoRoot; no camera success/read/admission inferred. Qualification tests/qualification/dng-large-forest-actual-20261017.json. Older checkpoint notes below remain historical evidence. -->
 # Consolidated SOL acceptance review
 
 Candidate: draft [PR13](https://github.com/querygraph/unison/pull/13),

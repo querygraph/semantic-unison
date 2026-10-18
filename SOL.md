@@ -1,3 +1,4 @@
+<!-- Current larger-forest update, 2026-10-17: explicit2048 DNG opt-in with default1024 retained, UCH1 large metadata/1MiB cap;1590checks/compiler+sixbuilds+actual Update capacity controls PASS. CameraV6 exactrequest1663093e sent to PhotoRoot; no camera success/read/admission inferred. Qualification tests/qualification/dng-large-forest-actual-20261017.json. Older checkpoint notes below remain historical evidence. -->
 # Sol implementation handoff: clone-aware Unison, DNG semantics, and OxCaml
 
 **Status:** Implementation started with Astra, 2026-10-12. The user switched to Sol xhigh on 2026-10-13; the handoff has been reviewed and continuation is active. Keep this file current as code and evidence change. The architecture below is a contract, not a claim that every milestone is implemented. No production photos have been changed or deployment performed.
