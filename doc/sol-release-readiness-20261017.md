@@ -255,3 +255,12 @@ sources. Actual controller3582/9768d4/0 and both CPU4/group closures passed.
 This is not actual RPC receiving, SDK validation, fuzzing, physical clone
 behavior or representative performance. Frozen V6 transport/property work
 remains separate and unexecuted under its pending grants.
+
+## Current range components — 2026-10-18
+
+[Stock/Ox component evidence](../tests/qualification/current-range-components-actual-20261018.json)
+renews strict typed outcomes/two negative controls, 13 macOS preflight/no-effect
+ABI groups and the constrained planner’s 48 named cases including its 960-case
+matrix on current source. All four jobs and CPU4 grants closed. This does not
+qualify other native platforms, physical sharing, whole transfer/publication
+or fresh V6 compatibility/property behavior.

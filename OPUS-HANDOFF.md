@@ -5967,3 +5967,16 @@ tests/qualification/timed-resource-distributions-actual-20261018.json SHA 07cedb
 Report bench/sync/results/shared-timed-resource-distributions-20261018.md;
 physical/application totals remainunknown, modeledextents notwrites. No general
 speedup/currentcandidate/quietclaim. FrozenV6 unchanged, goal stillactive.
+
+
+## 2026-10-18 current range components renewed
+
+Historical range evidence had changed current copyRange/copy/C dependencies.
+Actualcontroller6994/96a5a8/exit0/no session(initial404879) passed fourjobs:
+stock/Ox native typed+two private negatives+13macOS ABI groups and constrained
+48cases including960-combination matrix/compiler. Allchildwait0/groupsabsent/
+CPU4closed, exactsourcepinsbeforeafter. Evidence
+tests/qualification/current-range-components-actual-20261018.json SHA fcfc6d25cd5d843cb3d311d3454e824a3ddab3b64e3322a48c2ad71eda0715d2.
+NoPhoto/SDK/Adobe/EXglobal/fulltransport/physicalsharing/otherplatformruntime
+claim. FrozenV6 stillunchanged; fullcurrenttransferworkflow remainspending
+its separate compatibility/property admissions. No ownedlivejobs/resources.
