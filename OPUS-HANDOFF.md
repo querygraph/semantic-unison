@@ -5336,3 +5336,34 @@ Inventoryv20/readiness/outputslice doc updated. V3source requests explicitly
 deferred viaqueue01a1502e-bad1; preserve oldfiles and refuse anycrossedgrant
 unstarted. Next fixed-source V4 requests need newpins/workspaces/RootIOreview,
 never dispatch oldknownbugsource. Goalactive/fullscopeunchanged.
+
+## 2026-10-18 FIXED72560ca4 fresh V4 IO requests prepared NOT admitted
+
+Freeze /Users/alexy/src/unison-outbound-accounting-20261018 execution closure at
+72560ca4 while V4underreview; newsourcework must use a successorworktree. Actual
+metadata preflight8eafb1/0: both checked_plan400pins and property checked_build/
+manual.command+43execution329production+in-memory checked_io_request passed.
+No admission/locks/child/payload/SDK/Photo call created. Finalqualified source
+72560ca4 forkpushed; no current owner/CPU/IO resources held.
+
+Index doc/sol-fixed-requalification-requests-v4.json2983B
+SHAbf54dd3e064d0a27bbc0a31df50d2c5b18223cec9f17e43a76571c79f230171c.
+Upstream request doc/sol-fixed-upstream-request-v4.json2303B
+SHA2da25af93ad8b3b88cade5fdce9e3b9eb47b6653792262417f0154d25cfa1c06;
+plan4d1cec93/64973B, workspace/private/tmp/u-mp-8948b228, admission
+/private/tmp/unison-fixed-upstream-admission-8948b228.json.
+Retainedfork request doc/sol-fixed-retained-fork-request-v4.json2328B
+SHAb5372c5a4432771708902d6065c4b49399a65c353fc871fd0ebd7eb851399160;
+planf02840ef/68762B, workspace/private/tmp/u-mp-4bc2f1b7, admission
+/private/tmp/unison-fixed-retained-fork-admission-4bc2f1b7.json.
+Properties request doc/sol-fixed-properties-request-v4.json45274B
+SHA6c0a27727376d162d500e80b0fb7d62af265bab4392d5a355e5d35d008e8c942;
+workspace/private/tmp/u-fixed-properties-a446dbf4, admission
+/private/tmp/unison-fixed-properties-admission-a446dbf4.json.
+
+All3V4admission/workspace absent atfreshcheck; recommendedserial upstream then
+retainedfork thenproperties, each separateexactfreshRootgrant/deadline. Limits
+unchanged12/12/54CLI, Unison00..07+existingEXglobal only, noSDK/Adobe/camera/Photo/
+UI/compiler/performance/retry/automatic successor/18borrow. V3 sourceproposals
+remain deferredqueue01a1502e-bad1, originalbytesunchanged; doNOTdispatch crossed
+V3grant or oldV2. Only fresh fixedV4 can be scheduled. EntireSOLgoal stillactive.
