@@ -16,6 +16,16 @@ fault controls have scoped receipts. In-process receiver delivery does not prove
 current-candidate transport/server settlement. Legacy named/unbound/older-peer
 and raw/channel cleanup remain separately limited.
 
+The bounded many-unit advisory successor now passes stock/Ox1500component
+checks each,36/39contained CLI/compiler calls, both full Make+selftests and
+Dune build-only checks. New stock/Ox inspectors are rebuilt. It preserves small
+partitions and groups only adjacent same-role claims under a new schema while
+retaining the1024-node core bound. [Qualification](../tests/qualification/dng-role-runs-actual-20261017.json)
+preserves the reproduced region refusal and corrected mode-template failure.
+The [fresh camera request](camera-role-runs-request-v4.json) is not admitted yet.
+Prior actual transfer/property receipts retain their earlier advisory-kernel
+source bindings; no new transport or camera execution is inferred from builds.
+
 Current inspector stock/Ox builds and16tiny TIFF calls pass. Latest gradual
 refinement rerun passed1391component checks/compiler plus layout/private/archive
 fault controls,35stock+38Ox contained calls. See

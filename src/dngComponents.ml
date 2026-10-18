@@ -1,3 +1,35 @@
+(* Large strip/tile tables need not create one hash node per contiguous unit.
+   Physical aliases are rejected before this runs. Same-role adjacent claims may
+   form a conservative leaf; their ordered logical identities, schemas and
+   lengths remain domain-bound in its ID. Gaps and role boundaries never merge. *)
+let compact_regions regions =
+  let finish (first:DngSemantic.component_region) stop members =
+    match members with
+    | [_] -> first
+    | _ ->
+      let hash=SemanticHash.create () in
+      let feed text = let bytes=Bytes.of_string text in
+        SemanticHash.feed hash bytes 0 (Bytes.length bytes) in
+      feed "dng-physical-role-run/1;";
+      List.iter(fun (item:DngSemantic.component_region) ->
+        feed(string_of_int(String.length item.logical_id)^":"^item.logical_id);
+        feed(string_of_int(String.length item.schema)^":"^item.schema);
+        feed(Int64.to_string item.length^";")) (List.rev members);
+      {first with logical_id="role-run/"^first.logical_id^"/"^
+          SemanticHash.hex(SemanticHash.finish hash);
+        schema="tiff-physical-role-run/1";length=Int64.sub stop first.offset} in
+  let rec take first stop members rest = match rest with
+    | (next:DngSemantic.component_region)::tail
+        when next.offset=stop && next.role=first.DngSemantic.role ->
+        take first (Int64.add next.offset next.length) (next::members) tail
+    | _ -> finish first stop members,rest in
+  let rec loop result = function
+    | [] -> List.rev result
+    | (first:DngSemantic.component_region)::rest ->
+        let run,rest=take first (Int64.add first.offset first.length) [first] rest in
+        loop (run::result) rest in
+  loop [] regions
+
 let describe file =
   match DngSemantic.component_regions file with
   | Error reason -> Error reason
@@ -10,6 +42,10 @@ let describe file =
         region.offset>=stop && disjoint (Int64.add region.offset region.length) rest in
     if not(disjoint 0L regions) then Error "DNG component physical aliases unsupported"
     else
+    let compacted=List.length regions>480 in
+    let regions=if compacted then compact_regions regions else regions in
+    if List.length regions>480 then Error "DNG component coalesced region limit"
+    else
     let children=List.map (fun (region:DngSemantic.component_region) ->
       let role=match region.role with
         | DngSemantic.Image_bytes -> ComponentHash.Encoded_pixels
@@ -18,7 +54,8 @@ let describe file =
         | DngSemantic.Structure -> ComponentHash.Structural in
       {ComponentHash.id="dng/"^region.logical_id;schema=region.schema;
        role;offset=region.offset;length=region.length;children=[]}) regions in
-    Ok {ComponentHash.id="dng";schema="dng-physical-partition/0";
+    Ok {ComponentHash.id="dng";schema=(if compacted then "dng-physical-partition/1"
+        else "dng-physical-partition/0");
         role=ComponentHash.Structural;offset=0L;length=SemanticFile.size file;children}
 
 type binding = { component_id : string; decoder : ComponentHash.plugin }

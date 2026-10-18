@@ -1,6 +1,12 @@
 (** Advisory DNG physical partition for component hashing. Unknown gaps remain
     opaque; table descriptors/padding remain structural. No merge/transfer authority. *)
 val describe : SemanticFile.t -> (ComponentHash.spec, string) result
+(** Existing partitions of at most480 claims keep schema /0 unchanged. Larger
+    raw geometries (bounded at65536) reject aliases, then coalesce only touching
+    same-role claims with ordered membership provenance into schema /1 leaves.
+    At most480 leaves plus opaque gaps still fit the unchanged1024-node core.
+    Private field decoder IDs inside a coalesced run are not claimed available;
+    unknown/missing decoders remain exact. No gaps or roles are bridged. *)
 type binding = { component_id : string; decoder : ComponentHash.plugin }
 type decoders
 type status = Unmatched | Unsupported of string | Refined

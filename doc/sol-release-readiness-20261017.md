@@ -59,7 +59,10 @@ fault, transfer or scheduling controls.
 
 ## Next actions in order
 
-1. Resolve bounded strip/tile-rich DNG component coverage. The retained-camera
+1. Qualify the new bounded strip/tile-rich DNG component successor on the camera.
+   Generated1500checks percompiler, CLI schema and full builds passed;
+   [camera request V4](camera-role-runs-request-v4.json) awaits fresh IO admission.
+   The retained-camera
    [observation completed](../tests/qualification/camera-knowledge-actual-20261017.json):
    full SHA matched historical input,30 typed MakerNote observations/no warnings,
    but component forest refused480-region limit. Preserve that exact unsupported

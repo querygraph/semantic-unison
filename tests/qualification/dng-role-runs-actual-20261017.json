@@ -1,0 +1,481 @@
+{
+  "schema": "unison-dng-role-runs-actual/1",
+  "complete": true,
+  "scope": "Generated inputs only; no camera/media/SDK/Adobe or transport. Same-role touching claims coalesced only for >480 raw claims, bounded65536raw/480leaves/unchanged1024core nodes. All source geometry aliases/gaps and old schema controls passed. Actual retained camera coverage not established.",
+  "actual_tools": {
+    "final_controls": {
+      "session": 35852,
+      "chunk": "cdb031",
+      "exit": 0,
+      "no_session": true
+    },
+    "make_selftests": {
+      "session": 22332,
+      "chunk": "ce36b7",
+      "exit": 0,
+      "no_session": true
+    },
+    "dune_builds": {
+      "session": 35609,
+      "chunk": "86c608",
+      "exit": 0,
+      "no_session": true
+    },
+    "final_inspector_builds": {
+      "session": 24240,
+      "chunk": "afd076",
+      "exit": 0,
+      "no_session": true
+    }
+  },
+  "controls": [
+    {
+      "label": "stock",
+      "checks": 1500,
+      "calls": 36,
+      "source_pins_checked": 45,
+      "coalesced_cli": {
+        "hash_bytes_requested": 24576,
+        "layout_view_sha256": "c1131a52733a7c642da78cb7badf31a6cd7886cbcdb25bbcccefa90d706cbfe0",
+        "partition_schema": "dng-physical-partition/1",
+        "path": "/private/tmp/unison-dng-component-controls-m3xk18bx/stock/original-600-strip.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d6d33786b313862782f73746f636b2f6f726967696e616c2d3630302d73747269702e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 9600,
+            "components": 1,
+            "sha256": "a24867d2f20418449581a2e14304a431aacc7897e379edd8f987d985850654b5"
+          },
+          "opaque": {
+            "bytes": 10126,
+            "components": 3,
+            "sha256": "d9b306ff591d151889b816d8fa973c5b8d92b31cc4e6601e89ed817220eb1694"
+          },
+          "private_metadata": null,
+          "standard_metadata": {
+            "bytes": 4804,
+            "components": 2,
+            "sha256": "5745108851df22c6e9a80d917d405ab2e7385689874730d5afb33a82216b3c80"
+          },
+          "structural": {
+            "bytes": 46,
+            "components": 2,
+            "sha256": "809ddedaa7e5d6f52cc8eb1a15e15abad671297d0f8a7a8aecb549a1945a0704"
+          }
+        },
+        "sha256": "15514ecfcb3450d16ed2df361f8bbc26278362f614a8d9b61fde25a860ff01d4",
+        "size": 24576,
+        "status": "observed"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-cli-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "cc2dad055d0ea25b80f4f64ae98bc1d034d8af25f5ee3e537f4370add7f84638"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-stock-20261017-001/SHARED-START.json",
+          "bytes": 1159,
+          "sha256": "bc37cea428188ff45e8652803194c0a951e0c142277f82f8fa0c314312a8835f"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-stock-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-stock-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 52,
+          "sha256": "13fa67592a2a29cf29dcce6d4a636a50fcd0537e9d87f0be44c0a5fec58c1f58"
+        },
+        {
+          "path": "/private/tmp/unison-dng-component-controls-m3xk18bx/RESULT.json",
+          "bytes": 274037,
+          "sha256": "8bce15242b74a7ba5475cbb3b7c6327246878108eb5bde9a3cb45ddf4102526b"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "checks": 1500,
+      "calls": 39,
+      "source_pins_checked": 45,
+      "coalesced_cli": {
+        "hash_bytes_requested": 24576,
+        "layout_view_sha256": "c1131a52733a7c642da78cb7badf31a6cd7886cbcdb25bbcccefa90d706cbfe0",
+        "partition_schema": "dng-physical-partition/1",
+        "path": "/private/tmp/unison-dng-component-controls-s1ulyipd/ox/original-600-strip.dng",
+        "path_bytes_hex": "2f707269766174652f746d702f756e69736f6e2d646e672d636f6d706f6e656e742d636f6e74726f6c732d7331756c796970642f6f782f6f726967696e616c2d3630302d73747269702e646e67",
+        "projections": {
+          "encoded_pixels": {
+            "bytes": 9600,
+            "components": 1,
+            "sha256": "a24867d2f20418449581a2e14304a431aacc7897e379edd8f987d985850654b5"
+          },
+          "opaque": {
+            "bytes": 10126,
+            "components": 3,
+            "sha256": "d9b306ff591d151889b816d8fa973c5b8d92b31cc4e6601e89ed817220eb1694"
+          },
+          "private_metadata": null,
+          "standard_metadata": {
+            "bytes": 4804,
+            "components": 2,
+            "sha256": "5745108851df22c6e9a80d917d405ab2e7385689874730d5afb33a82216b3c80"
+          },
+          "structural": {
+            "bytes": 46,
+            "components": 2,
+            "sha256": "809ddedaa7e5d6f52cc8eb1a15e15abad671297d0f8a7a8aecb549a1945a0704"
+          }
+        },
+        "sha256": "15514ecfcb3450d16ed2df361f8bbc26278362f614a8d9b61fde25a860ff01d4",
+        "size": 24576,
+        "status": "observed"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-cli-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b3294f80c59c5651d47fdac6c590802f4d1a08ddc9260179f4d478c9cc21eef1"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-ox-20261017-001/SHARED-START.json",
+          "bytes": 1155,
+          "sha256": "110e0c89a2c0b18020800c1120a33a59bf1003ae79f4352326eae5cac40ccff7"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-ox-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-cli-ox-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 52,
+          "sha256": "0d5afbc84226c8a18583cf321f969b39fd445f7cb294c3dcf90fa2d5cc44327c"
+        },
+        {
+          "path": "/private/tmp/unison-dng-component-controls-s1ulyipd/RESULT.json",
+          "bytes": 281674,
+          "sha256": "efa266b109495771272587833b43bbf82b8f7a48cdef87ee9d14d484e7cac70f"
+        }
+      ]
+    }
+  ],
+  "builds": [
+    {
+      "label": "stock",
+      "system": "make",
+      "build_exit": 0,
+      "selftest_exit": 0,
+      "binary_sha256": "38fd25bf06e6d98d94a0f1a4937984b07fdcca2b6b49acdc074bf1f82e91e011",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-stock-make-20261017-001/RESULT.json",
+          "bytes": 52217,
+          "sha256": "bdeff4bf7dd5b570aac43b84d692ba1fbfe51b34b08282626d2b2b235347ce53"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "3d4da53c2c4761dcabfa4cde163e5a185d0aab4f5de313408fec6a62e4885977"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-make-20261017-001/SHARED-START.json",
+          "bytes": 1349,
+          "sha256": "1e9e4d82dc5a1acce75ad077885b927a8ed12ddcf7f102df4a3c3388576cd8d2"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "cfbdf89eb827e603a99c2fa85a1b85f1d05e1f0769b4af2b4561e7d7cbad2703"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "make",
+      "build_exit": 0,
+      "selftest_exit": 0,
+      "binary_sha256": "5651f396b770e4d2509adae6a9d6ebbbb0870a853b5f7aa556aa0773fb54c49d",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-ox-make-20261017-001/RESULT.json",
+          "bytes": 52223,
+          "sha256": "8aa49a3291df04e19d5df88e885357dec1e719da864672e3b66dca8ee8a69da2"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-make-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "2dc340c42c74602d02b09caf6267e124255d9c938fb3367d31e313520d720137"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-make-20261017-001/SHARED-START.json",
+          "bytes": 1345,
+          "sha256": "54a293a4377681f60f094c7ce38ee96734729999e95e071cf21316f4f780248a"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-make-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-make-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 282,
+          "sha256": "8daf7115434aea619d8570097d26afca00aded3633c8f6eca7ef33e944576acf"
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "system": "dune",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "binary_sha256": "1a1d8703b7087f905899abf51f9e42fb3fbc29cafa06e7add1db73dbbe155b65",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-stock-dune-20261017-001/RESULT.json",
+          "bytes": 51661,
+          "sha256": "e500f551f3dafd1838b350bdb70062180385f3e3f28ebc812f35eabb9c3442c4"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-dune-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "0dee92e8ab88aa61d4977f9e12ab99fba35799c06f6381c2a4985ea8a876b797"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-dune-20261017-001/SHARED-START.json",
+          "bytes": 1296,
+          "sha256": "7b1dad8fbb287d5a4c53f791354cc9700b18f267b34f4574490108fb41886ab1"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-dune-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-dune-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "3ee68dd9056c202bc83f60d63c4bc5605d28da3ddfff703c22ea8c4e7ece7490"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "dune",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "binary_sha256": "7031ac648ea358d61398ef5b7e8baf8eee196ab51bfbb1dfd5b5afdb3e431924",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-ox-dune-20261017-001/RESULT.json",
+          "bytes": 51665,
+          "sha256": "4e7d4a0b22c3c847c94bfd44e4251f05fd2516f48fc6647868eeb8952cc1c37a"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-dune-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "579906783c16821e5eb724de6360afaa6ec05c32af5f274db6ae14f2c5b05c16"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-dune-20261017-001/SHARED-START.json",
+          "bytes": 1291,
+          "sha256": "016b40ae8ae62b70779b3c0670e312bdda8e24e50ab4d9d6edd735d968f6d4a0"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-dune-20261017-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-dune-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "9865a4971aa26e22909c176208db756ef78e2c37516faadb7d7d64f5e50211d9"
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "system": "inspector",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "binary_sha256": "ba0c9a5b9928d390ad4efa2f8e8de09864e4edeb20d2f2634aca383d285e7b76",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/RESULT.json",
+          "bytes": 4044,
+          "sha256": "eefe6b9eb70a4c7c5edb09fd09319dc24c9803c742a026eb6012064c3f5fafa8"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "b394cc043c9869345042b1f9d490fb1bcf621f4b6340a448085ed07528480982"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/SHARED-START.json",
+          "bytes": 1280,
+          "sha256": "c26ddf0e50b230a4723cfec2b1bb77df81757e3c209b9513235a41f267d6d037"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-stock-inspector-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 197,
+          "sha256": "76bf0d9aac5b2e5500ec1a35eb377de1eb1288dcb1f06f7761d98e76c12016a7"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "system": "inspector",
+      "build_exit": 0,
+      "selftest_exit": null,
+      "binary_sha256": "1202fd5fe4f91c3c258aa3740e9f43541f058a553f23140b76c0ab943f91b596",
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-ox-inspector-20261017-002/RESULT.json",
+          "bytes": 4046,
+          "sha256": "08ac51909d6050b0b1ee2dc13e70ae59b72bae1eae8f2ec5d0c6a359f97ddff8"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-inspector-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5d569f58c38bffe1ca36c465b52f429c9310a864b4e98766dffca6d1da5c892c"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-inspector-20261017-002/SHARED-START.json",
+          "bytes": 1274,
+          "sha256": "e8733fb94d4f2be5d150eea8662f4839da44a431e0dd30be85109e42b7364548"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-inspector-20261017-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-ox-inspector-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 194,
+          "sha256": "4a3e626ecd1a80cd9646848d5fd349e9d8368689321d34683ce94b68489f01b0"
+        }
+      ]
+    }
+  ],
+  "preserved_failures": [
+    {
+      "workspace": "/private/tmp/unison-many-unit-before-stock-20261017-001",
+      "closure": {
+        "child": {
+          "pid": 35603,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 35603,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-before-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "19bf3855829ad55b0d697d19bd37be0303ffc2f70171bd74b3a9bda9ed897dc7"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-before-stock-20261017-001/SHARED-START.json",
+          "bytes": 1159,
+          "sha256": "874dee003c087865abe55b343defcc87735e8251462226225e72769776d2b086"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-before-stock-20261017-001/SHARED-STDERR.txt",
+          "bytes": 794,
+          "sha256": "9b45ca6cdb2630835bfdbedf9873fc2b094c8dfb0a13c90bb526e7609d33b954"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-before-stock-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "workspace": "/private/tmp/unison-many-unit-final-ox-20261017-001",
+      "closure": {
+        "child": {
+          "pid": 36802,
+          "returncode": 1,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 36802,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-many-unit-final-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "aa8db1fdbba29e184f0ccef23435ce3d45d69750de5eb18a1a24d2b51275f7cb"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-final-ox-20261017-001/SHARED-START.json",
+          "bytes": 1155,
+          "sha256": "984adcae2e57550c69e15a8698d29d2a4c8469cf1e5a83c011ed5161b319c8f4"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-final-ox-20261017-001/SHARED-STDERR.txt",
+          "bytes": 742,
+          "sha256": "0abec82d164a5c2a8a2688b044bfeb1d3a836bf5f7aebeeb4cd391081040c23f"
+        },
+        {
+          "path": "/private/tmp/unison-many-unit-final-ox-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.ml": "1553078eeed5a6cc22eec17ac4f5c5e3ca06e7766cf6b377d771472f4f4d12a3",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.mli": "7591d471a2f5070d0248432852eea1a76f7507a7736199d1f96fab40b6ba8b4c",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngSemantic.ox.mli.in": "dffd6ff516bf760f0325e669b7a4ba97509b056df7eab5b0f0c6fbe9a22c3f7c",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ml": "299636a66ea96af30fec187949defb2053bd235fb405ed67edde91bbb25ef77c",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.mli": "381548b104650c1b04b84a7635ccfd07a2550168c19ae9e868dadae63461ae1a",
+    "/Users/alexy/src/unison-sol-review-20261017/src/dngComponents.ox.mli.in": "8e4d9e6e586712fba2a7604f3e141ea10d0b0a862f03411ae503b0cb2fbb9398",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/semantic/dng_components.ml": "215dc8f358290f49dd75c74948bc29169241b0a099afe1654226568295a9626d",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/semantic/dng_component_controls.py": "9c78052c9e6ca0947d53bc7099443c4c04d7f643ab8f3ea064614d21f5677956",
+    "/Users/alexy/src/unison-sol-review-20261017/tools/semantic-inspect/inspect.ml": "1efe74e90228347ea2d3564c7375dc48b33ff2965273b8635bd574b5a15793eb"
+  },
+  "remaining": [
+    "Fresh camera observation requires separate exact IO admission",
+    "Coalesced views are coarser and versioned; no physical-layout invariant pixel-equivalence claim",
+    "No SDK/pixel/corpus/production/full-goal completion claim"
+  ]
+}

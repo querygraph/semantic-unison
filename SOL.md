@@ -162,6 +162,19 @@ known, introduce versioned child decoders and refine only the affected component
 and dependent roots. This improves precision without requiring a fresh pixel
 hash, an eager archive migration or complete camera-format understanding.
 
+**Bounded many-unit successor, 2026-10-17:** the actual camera component refusal
+was reproduced with an original600-strip fixture. Large advisory geometries now
+have a bounded role-run fallback: collect at most65536 raw claims, reject aliases,
+then coalesce only touching same-role claims to at most480 leaves. Gaps remain
+opaque; the core1024-node bound remains unchanged. Small accepted partitions keep
+schema/0, new grouped partitions use schema/1 with ordered membership provenance.
+Stock/Ox1500controls each plus CLI serialization, full Make/selftests, Dune build
+checks and standalone inspectors passed. [Scope and limits](doc/dng-component-role-runs.md)
+and [actual qualification](tests/qualification/dng-role-runs-actual-20261017.json)
+are explicit. A fresh camera request is prepared; generated success does not
+establish that camera's new coverage or authorize rereading it. The earlier
+30-MakerNote/region-refusal observation remains unchanged.
+
 ### Nested, composable format knowledge
 
 The core owns exact byte coverage, bounds, hashes, resource budgets, verified

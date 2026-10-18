@@ -79,6 +79,22 @@ def main():
             assert report['target']['projections']['encoded_pixels']['bytes']==64
             legacy=json.loads(call([str(work/'component-inspector'),str(fixture)])['stdout'])
             assert legacy['target']['status']=='supported'
+            # Original contiguous600-strip image: qualify serialized schema/1,
+            # not only the in-process snapshot used by the OCaml controls.
+            large=bytearray(24576)
+            struct.pack_into('<2sHIH',large,0,b'II',42,8,3)
+            for i,entry in enumerate(((273,4,600,4096),(279,4,600,6496),(50706,1,4,257))):
+                struct.pack_into('<HHII',large,10+12*i,*entry)
+            for i in range(600):
+                struct.pack_into('<I',large,4096+4*i,12288+16*i)
+                struct.pack_into('<I',large,6496+4*i,16)
+            large[12288:21888]=b'P'*9600
+            large_file=work/'original-600-strip.dng';large_file.write_bytes(large)
+            coalesced=json.loads(call([str(work/'component-inspector'),'--components',str(large_file)])['stdout'])['target']
+            assert coalesced['status']=='observed' and coalesced['partition_schema']=='dng-physical-partition/1'
+            assert coalesced['sha256']==hashlib.sha256(large).hexdigest()
+            assert coalesced['projections']['encoded_pixels']['bytes']==9600
+            result.setdefault('coalesced_inspector_reports',{})[label]=coalesced
             result.setdefault('inspector_reports',{})[label]=report
             save(root,result)
             if label=='ox':

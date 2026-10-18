@@ -97,7 +97,7 @@ let component_report path =
                "private_metadata",ComponentHash.Private_metadata;
                "structural",ComponentHash.Structural;"opaque",ComponentHash.Opaque] in
             object_ (path_fields path @ ["status",quote "observed";
-              "partition_schema",quote "dng-physical-partition/0";
+              "partition_schema",quote (ComponentHash.root snapshot).schema;
               "size",Int64.to_string (SemanticFile.size file);
               "sha256",quote (SemanticHash.hex (ComponentHash.full_sha256 snapshot));
               "layout_view_sha256",quote (SemanticHash.hex (ComponentHash.layout_sha256 snapshot));

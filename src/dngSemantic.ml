@@ -336,7 +336,7 @@ let component_regions file =
   let regions=ref [] and count=ref 0 in
   let record region =
     incr count;
-    if !count>480 then reject "DNG component region limit";
+    if !count>65536 then reject "DNG raw component region limit";
     regions:=region::!regions in
   match inspect_with_policy ~extended:true ~layout_only:true ~require_xmp:false ~record file with
   | Error reason -> Error reason

@@ -17,10 +17,37 @@ let with_capture_directory action =
    Array.iter(fun name -> let leaf=Filename.concat folder name in
      if (Unix.lstat leaf).Unix.st_kind=Unix.S_DIR then Unix.rmdir leaf else Sys.remove leaf) (Sys.readdir folder);
    Unix.rmdir folder) (fun () -> action folder directory)
+(* Original many-unit TIFFs; no photographic payload or vendor data. *)
+let many_units little big tag units fragmented =
+ let primary,cw,ew,iw,va=if big then 16,8,20,8,12 else 8,2,12,4,8 in
+ let offsets=4096 and lengths=4096+4*units and pixels=8192+8*units in
+ let stride=if fragmented then 17 else 16 in
+ let bytes=Bytes.make (pixels+stride*units+64) '\000' in
+ let n at width value=Layout_only.put bytes little at width value in
+ Bytes.blit_string (if little then "II" else "MM") 0 bytes 0 2;
+ if big then (n 2 2 43;n 4 2 8;n 8 8 primary) else (n 2 2 42;n 4 4 primary);
+ n primary cw 4;
+ let entry i id typ count off width =
+  let at=primary+cw+ew*i in
+  n at 2 id;n (at+2) 2 typ;n (at+4) iw count;n (at+va) width off in
+ entry 0 tag 4 units offsets iw;entry 1 (if tag=273 then 279 else 325) 4 units lengths iw;
+ entry 2 50706 1 4 0 4;Bytes.set bytes (primary+cw+2*ew+va) '\001';
+ entry 3 65000 1 1 90 1;
+ for i=0 to units-1 do
+  n (offsets+4*i) 4 (pixels+stride*i);n (lengths+4*i) 4 16;
+  Bytes.fill bytes (pixels+stride*i) 16 (Char.chr (i mod 251))
+ done;
+ Bytes.to_string bytes,pixels
+let many_snapshot bytes = Layout_only.with_input bytes (fun file ->
+ ComponentHash.with_snapshot ~max_read_bytes:(Int64.of_int(String.length bytes)) file (describe file)
+ (fun session snapshot ->
+   check(ComponentHash.bytes_requested session=Int64.of_int(String.length bytes))
+      "coalesced snapshot reread bytes";snapshot))
 let () =
  List.iter (fun little -> List.iter (fun big ->
   let bytes=Layout_only.fixture little big (String.make 64 'A') in
   let snapshot=digest bytes in
+  check ((ComponentHash.root snapshot).schema="dng-physical-partition/0") "small graph schema changed";
   check (ComponentHash.full_sha256 snapshot=SemanticHash.string bytes) "full DNG SHA";
   let pixel=projection snapshot ComponentHash.Encoded_pixels in
   check (pixel.bytes=512L && pixel.components=1) "encoded strip coverage";
@@ -711,4 +738,39 @@ let () =
      (fun _ ~initial:_ ~refined:_ _ -> ()));false with
      ComponentHash.Invalid "original injected decoder failure" -> true)
      "operational decoder failure downgraded to unsupported");
+ List.iter(fun little -> List.iter(fun big -> List.iter(fun tag ->
+   let bytes,pixels=many_units little big tag 600 false in
+   let snapshot=many_snapshot bytes in
+   check(ComponentHash.full_sha256 snapshot=SemanticHash.string bytes) "many-unit full hash";
+   check((ComponentHash.root snapshot).schema="dng-physical-partition/1") "coalesced schema missing";
+   let lane=projection snapshot ComponentHash.Encoded_pixels in
+   check(lane.bytes=9600L && lane.components=1) "contiguous image units not compacted";
+   let primary,cw,ew,va=if big then 16,8,20,12 else 8,2,12,8 in
+   let private_change=Bytes.of_string bytes in Bytes.set private_change (primary+cw+3*ew+va) 'Y';
+   check((projection (many_snapshot(Bytes.to_string private_change)) ComponentHash.Encoded_pixels).sha256=
+     lane.sha256) "private edit invalidated coalesced pixels";
+   let reordered=Bytes.of_string bytes in
+   Layout_only.put reordered little 4096 4 (pixels+16);
+   Layout_only.put reordered little 4100 4 pixels;
+   check((projection (many_snapshot(Bytes.to_string reordered)) ComponentHash.Encoded_pixels).sha256<>
+     lane.sha256) "unit order provenance disappeared during compaction";
+   let changed=Bytes.of_string bytes in Bytes.set changed (pixels+9599) 'X';
+   let other=many_snapshot(Bytes.to_string changed) in
+   check((projection other ComponentHash.Encoded_pixels).sha256<>lane.sha256) "last unit pixel change lost";
+   check((projection other ComponentHash.Private_metadata).sha256=
+     (projection snapshot ComponentHash.Private_metadata).sha256) "pixel edit changed private lane";
+   let fragmented,_=many_units little big tag 600 true in
+   Layout_only.with_input fragmented(fun file ->
+     check(match DngComponents.describe file with Error _ -> true | _ -> false)
+        "fragmented budget silently bridged opaque gaps");
+   let alias=Bytes.of_string bytes in
+   Layout_only.put alias little (4096+4) 4 pixels;
+   Layout_only.with_input(Bytes.to_string alias)(fun file ->
+     check(DngComponents.describe file=Error "DNG component physical aliases unsupported")
+       "compaction concealed pixel alias")
+ ) [273;324]) [false;true]) [false;true];
+ let exhausted,_=many_units true false 324 65536 false in
+ Layout_only.with_input exhausted(fun file ->
+   check(DngComponents.describe file=Error "DNG raw component region limit")
+     "raw region collection escaped declared65536 bound");
  Printf.printf "DNG component controls: %d checks PASS\n%!" !checks
