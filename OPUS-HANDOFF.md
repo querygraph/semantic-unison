@@ -5369,3 +5369,29 @@ remain deferredqueue01a1502e-bad1, originalbytesunchanged; doNOTdispatch crossed
 V3grant or oldV2. Only fresh fixedV4 can be scheduled. EntireSOLgoal stillactive.
 
 Fixed V4 requests ACTUALLY queued:01a15045-55f3-7762-9e16-57271a54d029, queue tool9f063d/0; durable doc/sol-fixed-requalification-v4-QUEUED.json. Source72560ca4, metadata4d480dc3. No grant/dispatch/hold; source frozen while under review. Next source development must use a successor worktree.
+
+## 2026-10-18 output-queue ownership successor isolated
+
+ACTIVE SOURCE DEVELOPMENT worktree /Users/alexy/src/unison-output-queue-20261018,
+branch implementation/output-queue-ownership, starts18c9b822. Frozen V4 runtime
+candidate /Users/alexy/src/unison-outbound-accounting-20261018 remains source
+72560ca4, metadata18c9b822, executionpins unchanged. No current ownedjob/tokens/
+EXIO/SDK/Photo operation. Git push of frozenmetadata collected39221/515206/0.
+
+Next source work follows doc/rpc-outbound-ownership-design.md: independent queued
+logical-byte/owner admission (urgent lane separate), actual active vs queued/drop
+settlement, explicit roots on uncertainty; then producer pre-serialization
+allocation ownership. Logical slice bytes alone are NOT backing storage or RSS.
+Do not mutate frozen source while V4 under Rootreview; exact source/grants live in
+frozen doc/sol-fixed-requalification-requests-v4.json. Any admitted one-use command
+must run from frozen argv/cwd afterfreshpins/deadline/unused checks, never this
+mutable successor. V3deferred/V2superseded remain unstarted byus; no replay.
+
+Source audit follow-up to verify (not yet a tested finding): processStream's
+exception-filter body_unresolved invokes registered predicates before outer
+RetainedOwnership.guard. A throwing predicate might replace original failure
+before outer classification; check original+classifier cause/identity retention
+with an original controlled example before claiming coverage. Current scoped
+result/argument guards directly classify inside RetainedOwnership; don't assume
+that proves every stream/filter path. Preserve supported pure-classifier contract.
+Goal remainsfullSOL active; no fullpipeline/production/performance claim.
