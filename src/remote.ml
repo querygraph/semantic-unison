@@ -920,16 +920,17 @@ packet to invoke a function remotely on the client.  In this case, the
 two switch roles.)
 *)
 
-let receivePacket ?maxBytes conn =
+let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
   (* Get the length of the packet *)
   let int_buf = Bytearray.create intSize in
   grab conn.inputBuffer int_buf intSize >>= (fun () ->
   let length = decodeInt int_buf 0 in
   if length < 0 || (match maxBytes with Some n -> length > n | None -> false) then
     raise (Util.Fatal "RPC packet length exceeds command limit");
+  reserve length;
   (* Get packet *)
   let buf = Bytearray.create length in
-  grab conn.inputBuffer buf length >>= (fun () ->
+  (if length=0 then Lwt.return () else grab conn.inputBuffer buf length) >>= (fun () ->
   (debugE (fun () ->
              let start =
                if length > 10 then (Bytearray.sub buf 0 10) ^ "..."
@@ -943,6 +944,56 @@ type servercmd =
   ((Bytearray.t * int * int) list -> (Bytearray.t * int * int) list) Lwt.t
 let serverCmds = ref (Util.StringMap.empty : servercmd Util.StringMap.t)
 let serverArgLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
+(* Only explicitly bounded commands participate. Never wait for credits in the
+ * receiving loop: that would stop replies needed by already admitted work. *)
+let boundedInputMiB = Prefs.makeEndpointLocal (Prefs.createInt "rpcboundedinputbudget" 64 ~local:true
+  ~category:(`Advanced `General) "retained bounded RPC request bytes in MiB"
+  "Process-wide raw request-buffer budget for explicitly bounded RPC commands. \
+   Reserved before allocation and retained through request/reply settlement. \
+   Excess input fails the connection; this is not an RSS or decoded-object cap.")
+let boundedInputSlots = Prefs.makeEndpointLocal (Prefs.createInt "rpcboundedinputslots" 4096 ~local:true
+  ~category:(`Advanced `General) "retained bounded RPC request slots"
+  "Process-wide bounded request count, including empty requests. Excess input \
+   fails before buffer allocation without waiting for transaction or CPU credits.")
+type bounded_input = {mutable input_bytes:int;mutable input_active:bool}
+let bounded_input_bytes = ref 0
+let bounded_input_count = ref 0
+let reserve_bounded_input ticket length =
+  if ticket.input_active || length < 0 then invalid_arg "bounded RPC input reservation";
+  let mib=Prefs.read boundedInputMiB and slots=Prefs.read boundedInputSlots in
+  if mib<=0 || mib>max_int/1048576 || slots<=0 || slots>65536 then
+    raise (Util.Fatal "Invalid bounded RPC input budget");
+  let bytes=mib*1048576 in
+  if !bounded_input_count>=slots || !bounded_input_bytes>bytes ||
+     length>bytes- !bounded_input_bytes then
+    raise (Util.Fatal "RPC bounded input budget exhausted");
+  ticket.input_bytes<-length;ticket.input_active<-true;
+  bounded_input_bytes:= !bounded_input_bytes+length;
+  incr bounded_input_count
+let release_bounded_input ticket =
+  if ticket.input_active then begin
+    ticket.input_active<-false;
+    bounded_input_bytes:= !bounded_input_bytes-ticket.input_bytes;
+    decr bounded_input_count
+  end
+let with_bounded_request ticket f =
+  try BorrowedWork.try_bind f
+    (fun value -> release_bounded_input ticket;Lwt.return value)
+    (fun error -> release_bounded_input ticket;Lwt.fail error)
+  with error -> release_bounded_input ticket;raise error
+let start_bounded_request conn limit launch =
+  let ticket={input_bytes=0;input_active=false} and transferred=ref false in
+  let failed error =
+    if not !transferred then release_bounded_input ticket;
+    Lwt.fail error in
+  try BorrowedWork.try_bind
+    (fun () -> receivePacket ~maxBytes:limit ~reserve:(reserve_bounded_input ticket) conn)
+    (fun buf ->
+       let work=with_bounded_request ticket (fun () -> launch buf) in
+       transferred:=true;
+       Lwt.ignore_result work;
+       Lwt.return ()) failed
+  with error -> if not !transferred then release_bounded_input ticket;raise error
 type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
 let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
 
@@ -1120,15 +1171,16 @@ let rec receive conn =
       let req = unmarshalHeader conn buf in
       begin match req with
         Request cmdName ->
-          receivePacket ?maxBytes:(try Some (Util.StringMap.find cmdName !serverArgLimits)
-            with Not_found -> None) conn >>= (fun buf ->
           (* We yield before starting processing the request.
              This way, the request may call [Lwt_unix.run] and this will
              not block the receiving thread. *)
-          Lwt.ignore_result
-            (Lwt_unix.yield () >>= (fun () ->
-             processDetachedRequest conn id cmdName buf));
-          receive conn)
+          let dispatch buf=Lwt_unix.yield () >>= (fun () ->
+            processDetachedRequest conn id cmdName buf) in
+          let started=match Util.StringMap.find_opt cmdName !serverArgLimits with
+            | None -> receivePacket conn >>= (fun buf ->
+                Lwt.ignore_result (dispatch buf);Lwt.return ())
+            | Some limit -> start_bounded_request conn limit dispatch in
+          started >>= (fun () -> receive conn)
       | NormalResult ->
           receivePacket ?maxBytes:(MsgIdMap.find_opt num_id !receiverLimits) conn >>= (fun buf ->
           Lwt.wakeup (find_receiver num_id) buf;

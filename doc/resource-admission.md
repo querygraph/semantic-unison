@@ -149,3 +149,25 @@ regression rejections. Actual wrapper54247/400762/0 and both child groups settle
 The observed Ready7/Finalized8 descriptor counts include the process baseline;
 the publication reservation remains charged24 descriptor credits. These phase
 observations do not establish transient peaks or a whole-process ceiling.
+
+## Bounded semantic RPC input buffers
+
+`rpcboundedinputbudget` (default64MiB) and `rpcboundedinputslots` (default4096)
+are endpoint-local process-wide limits on raw argument buffers for explicitly
+bounded RPC commands. Currently these are semantic plan/component/inspection
+requests. Incoming command limits are checked first; the actual declared frame
+length and one slot are then reserved before `Bytearray.create` or body reads.
+Empty frames consume a slot. A malformed length, exhausted quota or invalid
+configuration fails the connection instead of waiting in the receiving loop.
+Waiting there could deadlock replies needed by already admitted work.
+
+The reservation transfers to the detached request and remains charged through
+its scope, processing and queued reply consumption. A connection-close hook
+does not clear this ledger: old-session work may still borrow the buffer. Actual
+settlement retires its charge once; truncated reads and dispatch failures retire
+it as well. The limits are local policy, never accepted from peer preferences.
+Lowering a limit below current usage refuses new work until existing work settles.
+
+This bounds retained raw request buffers, not decoded objects, headers, reply
+buffers, streams, legacy unbounded commands or process RSS. Their accounting
+remains separate work. No wire format or legacy command registration changes.

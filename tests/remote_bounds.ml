@@ -30,6 +30,62 @@ let request_body name codec value =
 let request_id n = let b,_,_ = R.encodeInt n in b
 let pause_output conn = conn.R.outputQueue.R.canWrite <- false
 
+let test_input_budget () =
+  let old_mib=Prefs.read R.boundedInputMiB and old_slots=Prefs.read R.boundedInputSlots in
+  Prefs.set R.boundedInputMiB 1;Prefs.set R.boundedInputSlots 2;
+  let usage bytes count =
+    require (!(R.bounded_input_bytes)=bytes && !(R.bounded_input_count)=count)
+      "bounded input ledger mismatch" in
+  let exhausted f =
+    try f ();failwith "bounded input quota ignored"
+    with Util.Fatal message -> require (message="RPC bounded input budget exhausted")
+      "wrong input quota refusal" in
+  usage 0 0;
+  (* Only the length is sent: quota refusal must precede body allocation/read. *)
+  with_connection (fun conn fd ->
+    send fd [R.encodeInt (1048576+1)];
+    exhausted (fun () -> Lwt_unix.run
+      (R.start_bounded_request conn 2097152 (fun _ -> failwith "oversized dispatched"))));
+  usage 0 0;
+  let held=ref [] in
+  let accept conn fd text =
+    send fd [R.encodeInt (String.length text);Bytearray.of_string text,0,String.length text];
+    let pending=Lwt.wait () in
+    Lwt_unix.run (R.start_bounded_request conn 64 (fun bytes ->
+      require (Bytearray.to_string bytes=text) "bounded input changed";
+      held:=pending :: !held;pending)) in
+  with_connection (fun conn fd ->
+    accept conn fd "abc";accept conn fd "";usage 3 2;
+    send fd [R.encodeInt 1];
+    exhausted (fun () -> Lwt_unix.run
+      (R.start_bounded_request conn 64 (fun _ -> failwith "third request dispatched")));
+    usage 3 2);
+  (* Connection close cannot revoke credits from still-borrowed raw buffers. *)
+  usage 3 2;
+  List.iter (fun pending -> Lwt.wakeup pending ()) !held;usage 0 0;
+  (* An observed worker failure still retires exactly one reservation. *)
+  with_connection (fun conn fd ->
+    send fd [R.encodeInt 0];
+    (try Lwt_unix.run (R.start_bounded_request conn 64
+       (fun _ -> Lwt.fail (Failure "input-dispatch-failed")));
+       failwith "dispatch error swallowed"
+     with Failure s -> require (s="input-dispatch-failed") "wrong dispatch failure"));
+  usage 0 0;
+  (* A short body fails after reserving but must retire its raw-buffer charge. *)
+  let input,writer=Lwt_unix.pipe_in () in
+  let output=Lwt_unix.of_unix_file_descr (Unix.openfile "/dev/null" [Unix.O_WRONLY] 0) in
+  let conn=R.makeConnection false input output in
+  send writer [R.encodeInt 4;Bytearray.of_string "ab",0,2];Unix.close writer;
+  (try Lwt_unix.run (R.start_bounded_request conn 64
+     (fun _ -> failwith "truncated body dispatched"));failwith "truncation accepted"
+   with Util.Fatal _ -> ());
+  R.closeConnection conn;usage 0 0;
+  let ticket={R.input_bytes=0;input_active=false} in
+  R.reserve_bounded_input ticket 1048576;usage 1048576 1;
+  exhausted (fun () -> R.reserve_bounded_input {R.input_bytes=0;input_active=false} 1);
+  R.release_bounded_input ticket;R.release_bounded_input ticket;usage 0 0;
+  Prefs.set R.boundedInputMiB old_mib;Prefs.set R.boundedInputSlots old_slots
+
 let test_reply_scopes () =
   let active = ref 0 and calls = ref 0 and mode = ref `Success in
   let delayed = ref (Lwt.wait ()) in
@@ -190,6 +246,7 @@ let () =
     exceeds (fun () -> Lwt_unix.run (R.receive conn)));
   R.resetReceivers ();
   test_reply_scopes ();
+  test_input_budget ();
   test_dynamic_reply_bounds ();
   test_output_failure ();
   print_endline "RPC bounds/scopes: bounded allocation, per-profile reply limits, queued output lifetime and error cleanup"
