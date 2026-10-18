@@ -1,3 +1,19 @@
+# Current integrated pool regression checkpoint (2026-10-18)
+
+Current stock/Ox Dune builds+selftests PASS with the same327 production source
+pins as Make. Eight additional actual worker controls cover queued CPU/I/O
+admission, queued cancellation, cancellation of a running Atomic-barrier
+recognizer and shutdown while it is active. CPU/I/O/FD ownership remains held
+until the callback exits; known shutdown restores the independent FD census.
+Thirty original duplicate/reader fixed controls (including historical negative
+participants) also pass against the current pool. Evidence:
+`tests/qualification/current-pool-dune-regressions-actual-20261018.json`.
+
+This closes the previously listed current-build and queue/cancellation regression
+items. Aggregate FD/RSS enforcement, broader benchmark and final integration
+remain separate open work; finite census checks are not hard resource bounds.
+Earlier sections below retain the implementation and historical analyses.
+
 # Returned-domain publication slots (2026-10-18)
 
 DomainOwner now prepares every owner slot and join carrier before pipe/spawn.

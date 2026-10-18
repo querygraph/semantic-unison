@@ -43,7 +43,7 @@ for path in a.receipt:
   case=work/mode;case.mkdir(mode=0o700)
   call([str(work/'participant'),mode],cwd=case)
  # Reproduce the old close-swallowing behavior without changing its runtime
- # logic. The added zero-valued observation field only matches today's API.
+ # logic. Added compatibility bindings are not called by these participants.
  old_call=call(['git','show','674bfc57:src/semanticWorkers.ml'],cwd=ROOT)
  old=old_call.stdout
  expected=json.loads((ROOT/'doc/sync-timed-request-v1.json').read_text())['production_source_sha256']['src/semanticWorkers.ml']
@@ -55,6 +55,8 @@ for path in a.receipt:
  hook='let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()'
  assert old.count(hook)==1
  old=old.replace(hook,'let close_noerr fd = try WorkerCloseFault.close fd with Unix.Unix_error _ -> ()')
+ # Current interface compatibility only; participant never invokes this API.
+ old += '\nlet retain_unsettled _ error = raise error\n'
  baseline=work/'baseline';baseline.mkdir(mode=0o700)
  (baseline/'semanticWorkers.ml').write_text(old)
  shutil.copyfile(build/'semanticWorkers.cmi',baseline/'semanticWorkers.cmi')
@@ -70,7 +72,7 @@ for path in a.receipt:
  assert 'expected-retained-reply' in rejected.stderr
  records.append(dict(compiler=compiler,build=str(build),work=str(work),calls=calls,
                      original_worker_sha256=expected,old_behavior_rejected=True,
-                     baseline_compatibility='Zero-valued retained usage field only; close swallowing control flow unchanged'))
+                     baseline_compatibility='Zero-valued retained usage field and uncalled retain_unsettled binding only; close swallowing control flow unchanged'))
 value=dict(state='ORIGINAL_PRIVATE_WORKER_FAULT_CONTROLS_PASS',scope='Actual worker/close owner objects with ONE private close callback substitution; tiny generated64B inputs; fault pools intentionally retain until controlled process exit, not successful pool shutdown; no SDK/Photo/payload/wholeFD/RSS claim',records=records,sources={name:hashlib.sha256((HERE/name).read_bytes()).hexdigest() for name in ('worker_fault.ml','worker_fault_test.ml','worker_fault_run.py')})
 with Path(a.report).open('x') as f:json.dump(value,f,indent=2);f.write('\n')
 print('PASS actual worker close faults both compilers')
