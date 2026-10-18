@@ -30,11 +30,20 @@ client/server/supervisor/pump settlements. Actual owner38627/33bfbc/0/no session
 older fork already has producer binding, so arbitrary upstream/capability-absent
 compatibility is not inferred. Three earlier failed attempts remain preserved.
 
-The refreshed [camera knowledge request](camera-knowledge-request-v3.json) binds
-component hashes plus exiftool-rs typed MakerNote observations. V1 is stale and
-unstarted, preserved unchanged. V3 corrects entry directory creation before any V2 dispatch and is prepared for separate Root admission;
-no camera payload opened or grant inferred. Missing MakerNote meanings do not
-block exact opaque preservation. Full goal completion and merge are not claimed.
+The retained-camera observation completed under a fresh rescheduled admission:
+actual owner26078/09b602/0, two readonly helpers0 and all source metadata unchanged.
+Exiftool-rs observed30 MakerNote tags without warnings; component coverage safely
+refused the480-region limit. [Actual scope](../tests/qualification/camera-knowledge-actual-20261017.json)
+does not claim a complete component forest or semantic eligibility. Private tag
+values remain outside the repository; source bytes were not changed.
+
+The current PR13 transfer/property regression also PASSED/CLOSED:18rows54CLI,
+stock/Ox workers1/2/3, ordinary/clone/semantic, exact donor/basis/noop and source-
+selected property removal/retained-reader witnesses. Actual41218/6e1b75/0;
+[sealed evidence](../tests/qualification/pr13-properties-actual-20261017.json).
+All groups and CPU/IO closed. These admissions are consumed, not pending. Full
+camera coverage, all-platform qualification and full-goal completion remain
+unproved; incomplete private meanings do not block exact opaque preservation.
 
 
 Latest consolidated PR13 source additionally fixes cold report cancellation and
