@@ -1,0 +1,331 @@
+{
+  "schema": "unison-current-resource-lifetime-qualification/1",
+  "actual_owner": {
+    "session_id": 54247,
+    "initial_chunk_id": "175b47",
+    "terminal_chunk_id": "400762",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "participants": [
+    {
+      "compiler": "stock",
+      "status": "PASS_CURRENT_TWO_HANDOFF_FAULTS_THREE_MUTATIONS_FOUR_REJECTIONS",
+      "references": [
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-stock-20261017-001/RESULT.json",
+          "bytes": 36425,
+          "sha256": "8b52c8345ab544cdd897d93418eec8eaf85465f825be8b54d3392c20d77fa19d"
+        },
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-stock-20261017-001/SHARED-START.json",
+          "bytes": 1372,
+          "sha256": "70f4a1b46f904f6211d26cf693786cfe1d22cd28740636c519a852b0be6bb509"
+        },
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "647d45832dd889732e2b235936eb8944af2c3eeb9c653e1dee6f8c3305d95725"
+        }
+      ],
+      "runs": [
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-current",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-current",
+          "binary_sha256": "a1a12bf6745a9b1c94d6ee9a21ef3429a44796c4211d412318f42db2e0a920df",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-current-baseline-case/result.log",
+          "log_sha256": "1635f9b901330eee9989ef71448cfca946d2ba9f7f9baea7e4988e3a193380cd",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Committing-release-requested fd=8 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Legacy-handoff-borrowed fd=3 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-early-release",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-early-release",
+          "binary_sha256": "9c0e1bcdbfc4456d8c928aec8ad8b7a8aa8120dbf091054eea71c8ad6293c6c6",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-early-release-baseline-case/result.log",
+          "log_sha256": "1a4c35c4d5ff3e35e63962b6a6b1a8b292f960f95f158b8f7f0232ca2abc8b0b",
+          "expected_rejection": "owned proof FD outlives lease after producer return",
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=0 pending=0 reserved=0 buffers=0"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-nested-gate",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-nested-gate",
+          "binary_sha256": "d4f5c2c4e07d32de0f178f4b64a8463a3bb6dd78df85757c0b18adddea5584a2",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-nested-gate-baseline-case/result.log",
+          "log_sha256": "13c8027dfc8a3a57c95934e36e3aa502dce6165df69a48d7d67e65cbcf321978",
+          "expected_rejection": "inherited validation deadlocked under source headroom",
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current",
+            "handoff-sync"
+          ],
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current",
+          "binary_sha256": "ca8e6c751309757579bec7b2745afa32190e971b4d441162e481f786364212b6",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current-handoff-sync-case/result.log",
+          "log_sha256": "22b0feb86cb6a9e1d90c570097c44abae8ee62c1e473cb1df6648c6a36bfc776",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS handoff-sync-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current",
+            "handoff-async"
+          ],
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current",
+          "binary_sha256": "ca8e6c751309757579bec7b2745afa32190e971b4d441162e481f786364212b6",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-current-handoff-async-case/result.log",
+          "log_sha256": "a2bbf5609084ebde16c64f6d34fcf95c0681de508cb621738159557e79864477",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS handoff-async-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix",
+            "handoff-sync"
+          ],
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix",
+          "binary_sha256": "55431173b56805ff073af19b3b48a5be143008417550a685a204a3782489859d",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix-handoff-sync-case/result.log",
+          "log_sha256": "98ff9b9cdc9684268037cb77f8e6dd78803b8512b69dfdab5f49581d41679670",
+          "expected_rejection": "DESIGNATED prepared native owner escaped failed token handoff",
+          "phase_census": [
+            "CENSUS handoff-sync-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix",
+            "handoff-async"
+          ],
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix",
+          "binary_sha256": "55431173b56805ff073af19b3b48a5be143008417550a685a204a3782489859d",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-j4c57o0a/resource-handoff-pre-fix-handoff-async-case/result.log",
+          "log_sha256": "0338aed6963f9bdba83d8c6d57e0ff131c51c34ff055878129cae5417aefc024",
+          "expected_rejection": "DESIGNATED prepared native owner escaped failed token handoff",
+          "phase_census": [
+            "CENSUS handoff-async-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        }
+      ],
+      "current_production_pins": {
+        "semanticAdmission.ml": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e",
+        "semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+        "semanticRuntime.ml": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773",
+        "semanticRuntime.mli": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531",
+        "targetBinding.ml": "4e236201ee4482834e8b68eec41234f8c5cb9abe3b54eccbb36651ce60a9625d",
+        "targetBinding.mli": "09154ecb425a1e351a78afc9d049fe1247cd01de726cf665844c123bbd60cb66",
+        "finalPublication.ml": "a1e7e34e08c421348a759d200c2a8f7b2deb1a56891090573aca08edbbf0a579",
+        "finalPublication.mli": "1133576a069990ee6ff04e76befeed9464e2dd3d0990876d56dfb3ca82a70a7b",
+        "finalPublication_stubs.c": "b2510f3099a2d316d346eb820f27979f448e52732d4e0df4eaece2199ff59127",
+        "helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+        "semanticWorkers.ml": "89b39a6fd51ef398c451928a052e61734af8b4bebfd3567266c1bca01a67d5ac",
+        "semanticFile.ml": "90b2e698dd43ce4df82d5669aacda0db348b35dd2b275eefeab89042cef62b55",
+        "semanticRemote.ml": "1778c17b2fec4ef55564328e246d19cefaa080d9622bfc31a5264636993494a4",
+        "semanticRemote.mli": "a77623cd872782c6d08dab32e29c0c66812881f387ad7e42e0135822a4466d84"
+      }
+    },
+    {
+      "compiler": "ox",
+      "status": "PASS_CURRENT_TWO_HANDOFF_FAULTS_THREE_MUTATIONS_FOUR_REJECTIONS",
+      "references": [
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-ox-20261017-001/RESULT.json",
+          "bytes": 36429,
+          "sha256": "809f9b6fd7cd1c284626c89cba720b87992b6ffe319d374dc45bbda61b2fc25f"
+        },
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-ox-20261017-001/SHARED-START.json",
+          "bytes": 1370,
+          "sha256": "852181a86731fa134a74e802397a0dbbf9893a93ee4970c32b85636eda376625"
+        },
+        {
+          "path": "/private/tmp/unison-final-resource-lifetime-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "33b3237cecf60f95beaef9aac9d930131a1ca23204efccc38fac5276fc3d8c7c"
+        }
+      ],
+      "runs": [
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-current",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-current",
+          "binary_sha256": "2e17f3f34a2b018845d132199bd806277b087b017e5361b9a483aa1be9c7e51c",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-current-baseline-case/result.log",
+          "log_sha256": "1635f9b901330eee9989ef71448cfca946d2ba9f7f9baea7e4988e3a193380cd",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Committing-release-requested fd=8 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Legacy-handoff-borrowed fd=3 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-early-release",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-early-release",
+          "binary_sha256": "1eca972cc8deb5a7db170ffc4a5b7528498fabbecefa27ad231263a8c5d7648f",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-early-release-baseline-case/result.log",
+          "log_sha256": "1a4c35c4d5ff3e35e63962b6a6b1a8b292f960f95f158b8f7f0232ca2abc8b0b",
+          "expected_rejection": "owned proof FD outlives lease after producer return",
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=0 pending=0 reserved=0 buffers=0"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-nested-gate",
+            "baseline"
+          ],
+          "selected": "baseline",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-nested-gate",
+          "binary_sha256": "1b4cda4921a369f560afcd403c3fdb86806b0eda4c5a7e6e2aad7563e3204f6b",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-nested-gate-baseline-case/result.log",
+          "log_sha256": "13c8027dfc8a3a57c95934e36e3aa502dce6165df69a48d7d67e65cbcf321978",
+          "expected_rejection": "inherited validation deadlocked under source headroom",
+          "phase_census": [
+            "CENSUS Ready fd=7 tx=1 pending=0 reserved=24 buffers=8650752",
+            "CENSUS Finalized fd=8 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current",
+            "handoff-sync"
+          ],
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current",
+          "binary_sha256": "253e4db74fba41c2ce8cc789f8cbc715b98d178afc9c6eb5b1613ba02da7f220",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current-handoff-sync-case/result.log",
+          "log_sha256": "22b0feb86cb6a9e1d90c570097c44abae8ee62c1e473cb1df6648c6a36bfc776",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS handoff-sync-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current",
+            "handoff-async"
+          ],
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current",
+          "binary_sha256": "253e4db74fba41c2ce8cc789f8cbc715b98d178afc9c6eb5b1613ba02da7f220",
+          "exit_code": 0,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-current-handoff-async-case/result.log",
+          "log_sha256": "a2bbf5609084ebde16c64f6d34fcf95c0681de508cb621738159557e79864477",
+          "expected_rejection": null,
+          "phase_census": [
+            "CENSUS handoff-async-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix",
+            "handoff-sync"
+          ],
+          "selected": "handoff-sync",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix",
+          "binary_sha256": "373c0de8ff7bf002cffacf44beb0843ce3c008b90d39926c6a8e4b168c847e73",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix-handoff-sync-case/result.log",
+          "log_sha256": "98ff9b9cdc9684268037cb77f8e6dd78803b8512b69dfdab5f49581d41679670",
+          "expected_rejection": "DESIGNATED prepared native owner escaped failed token handoff",
+          "phase_census": [
+            "CENSUS handoff-sync-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        },
+        {
+          "argv": [
+            "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix",
+            "handoff-async"
+          ],
+          "selected": "handoff-async",
+          "binary": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix",
+          "binary_sha256": "373c0de8ff7bf002cffacf44beb0843ce3c008b90d39926c6a8e4b168c847e73",
+          "exit_code": 2,
+          "log": "/private/tmp/unison-resource-lifetime-kud_kjrq/resource-handoff-pre-fix-handoff-async-case/result.log",
+          "log_sha256": "0338aed6963f9bdba83d8c6d57e0ff131c51c34ff055878129cae5417aefc024",
+          "expected_rejection": "DESIGNATED prepared native owner escaped failed token handoff",
+          "phase_census": [
+            "CENSUS handoff-async-Ready-before-result fd=7 tx=1 pending=0 reserved=24 buffers=8650752"
+          ]
+        }
+      ],
+      "current_production_pins": {
+        "semanticAdmission.ml": "75faad6d6a20236994de31f58c0ccb41f0d757532e672ccaaed76d305b9cce5e",
+        "semanticAdmission.mli": "04ae18733a07fa51bc80bcca766310fd97e9ea795ffb35d9800aba70908190ae",
+        "semanticRuntime.ml": "7c10c9741f0f54152ca888bc94fea4ff64502ba10c794860e63078a679fa6773",
+        "semanticRuntime.mli": "75a8c4778866b307c405e067c42c3997ee79341884c64ebd54d1f48439b64531",
+        "targetBinding.ml": "4e236201ee4482834e8b68eec41234f8c5cb9abe3b54eccbb36651ce60a9625d",
+        "targetBinding.mli": "09154ecb425a1e351a78afc9d049fe1247cd01de726cf665844c123bbd60cb66",
+        "finalPublication.ml": "a1e7e34e08c421348a759d200c2a8f7b2deb1a56891090573aca08edbbf0a579",
+        "finalPublication.mli": "1133576a069990ee6ff04e76befeed9464e2dd3d0990876d56dfb3ca82a70a7b",
+        "finalPublication_stubs.c": "b2510f3099a2d316d346eb820f27979f448e52732d4e0df4eaece2199ff59127",
+        "helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+        "semanticWorkers.ml": "89b39a6fd51ef398c451928a052e61734af8b4bebfd3567266c1bca01a67d5ac",
+        "semanticFile.ml": "90b2e698dd43ce4df82d5669aacda0db348b35dd2b275eefeab89042cef62b55",
+        "semanticRemote.ml": "1778c17b2fec4ef55564328e246d19cefaa080d9622bfc31a5264636993494a4",
+        "semanticRemote.mli": "a77623cd872782c6d08dab32e29c0c66812881f387ad7e42e0135822a4466d84"
+      }
+    }
+  ],
+  "scope": "Current Make-linked synthetic native FD phase census and targeted owner handoff faults; seven executions per compiler including four designated regression rejections. All child groups and Unison CPU8 settled; no EXglobal/native SDK/media use.",
+  "claims": {
+    "whole_process_rss_cap": false,
+    "whole_process_fd_cap": false,
+    "transient_peak": false,
+    "physical_io": false
+  }
+}

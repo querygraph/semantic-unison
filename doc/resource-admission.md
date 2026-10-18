@@ -138,3 +138,14 @@ exact metadata/byte/stat fences, settled helper/worker ledgers and containing
 owner closure pass on stock/Ox. This adds real external-tool evidence to the
 synthetic/helper CPU controls; it does not qualify simultaneous Adobe/ExifTool,
 full installation dependencies, resource peaks or representative camera input.
+
+## Current production-linked census (2026-10-17)
+
+[Refreshed qualification](../tests/qualification/current-resource-lifetime-actual-20261017.json)
+links the current stock/Ox Make objects and rechecks fourteen relevant production
+source hashes per compiler. Seven executions each include the normal phase
+census, immediate/queued token handoff faults and four designated private
+regression rejections. Actual wrapper54247/400762/0 and both child groups settled.
+The observed Ready7/Finalized8 descriptor counts include the process baseline;
+the publication reservation remains charged24 descriptor credits. These phase
+observations do not establish transient peaks or a whole-process ceiling.
