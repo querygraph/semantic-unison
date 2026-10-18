@@ -5932,3 +5932,13 @@ SHA f5b505b1df817cd5a82b8b445f1f22a71f399809cb0f0b784587c7d19364e126 . Frozen V6
 at preceding fresh check. Next actual V6 compatibility/property grants and
 remaining requirement-by-requirement acceptance consolidation. Goal active and
 incomplete; no owned live jobs/resources.
+
+
+## 2026-10-18 readiness historical/current distinction corrected
+
+Readiness now leads with current production513c121a/frozenV6 candidate5cc96102
+and exact four current qualification hashes. Its older “current” compatibility
+and property statements are explicitly historical, not latest-source behavior.
+Three V6 admissions freshly absent; no dispatch/hold inferred. Immediate runtime
+work remains three separate V6 grants; M6 limits remain explicit. No prod edits,
+new test executions or resource acquisitions in this documentation update.

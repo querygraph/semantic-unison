@@ -1,3 +1,32 @@
+## Current candidate correction — 2026-10-18
+
+The older candidate and “current” results below describe their recorded execution
+snapshots. They do **not** establish transport/property behavior for the latest
+production source `513c121a`. The frozen V6 runtime candidate is
+`integration/sol-stream-qualified-20261018` at `5cc96102`; its request index is
+[sol-stream-requalification-requests-v6.json](../../unison-stream-qualified-20261018/doc/sol-stream-requalification-requests-v6.json).
+At this metadata check all three exact V6 admission files were absent. No runtime
+permission, process ownership, or Photo resource hold is inferred from absence.
+
+New current-source evidence qualifies the stream classifier and producer
+composition, worker parity/apply, cache/runtime composition, and fixed XMP
+kernel/observation checks. Evidence files were parsed and hashed for this update:
+
+- [rpc-stream-classifier-actual-20261018.json](../tests/qualification/rpc-stream-classifier-actual-20261018.json): 527340 bytes, SHA256 `57c11c9133b2b761b8dccc351730cc868e4e2f13830f16eb66be0d01a6adf1b7`.
+- [current-worker-parity-apply-actual-20261018.json](../tests/qualification/current-worker-parity-apply-actual-20261018.json): 103197 bytes, SHA256 `2fe83118dca46ef70195971e00f9f9933cf4fb77ab2ad8bb8be89c131b3e30d8`.
+- [current-cache-runtime-composition-actual-20261018.json](../tests/qualification/current-cache-runtime-composition-actual-20261018.json): 248951 bytes, SHA256 `8f26bcfbcf1dc54de90a4a84e3a4c9809027f3e6484f96b337b8cf40381b0782`.
+- [current-xmp-kernel-observation-actual-20261018.json](../tests/qualification/current-xmp-kernel-observation-actual-20261018.json): 10292 bytes, SHA256 `f5b505b1df817cd5a82b8b445f1f22a71f399809cb0f0b784587c7d19364e126`.
+
+These scopes do not substitute for fresh genuine-upstream compatibility,
+retained-fork compatibility, or 18-row/54-call generated property verification.
+Those three immutable V6 requests remain the immediate runtime verification
+work. Earlier consumed admissions must never be reused. The remaining M6
+resource/platform and end-to-end measurement limits below also remain open;
+source controls do not establish physical storage savings, hard process-tree
+RSS caps, or representative speedup. Unknown MakerNote meanings remain exact
+and are not a deployment gate. PR13 remains draft; no merge or deployment is
+authorized by this evidence update.
+
 <!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
 # Consolidated SOL acceptance review
 
