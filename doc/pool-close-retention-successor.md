@@ -1,3 +1,21 @@
+# Current pool lifecycle checkpoint (2026-10-18)
+
+NotificationPipe is now in the production object order and integrated into
+SemanticWorkers construction cleanup, pump and shutdown. Runtime recognizes
+its typed ownership carrier. Make+selftests pass stock/Ox, and twelve actual
+pool fixed controls cover normal shutdown, read/write/dual close uncertainty,
+and constructor failures before domains or after a domain starts but before
+reader wrapper installation. Source-bound evidence is
+`tests/qualification/pool-pipe-integration-actual-20261018.json`.
+
+Stop/join errors now retain the ledger and published handles instead of being
+suppressed or clearing the handle list; this source path still needs injected
+join/stop qualification. Runtime singleton post-construction handoff and the
+local returned-domain allocation-failure boundary remain open. Dune current
+pipe integration, queued borrowers/cancellation regression, and aggregate FD/RSS
+enforcement remain open. The historical analysis below is retained as design
+ancestry, not a claim that old close_noerr paths remain unchanged.
+
 # Pool ownership integration following reader qualification
 
 Current source checkpoint: isolated branch `implementation/owned-close-retention`,

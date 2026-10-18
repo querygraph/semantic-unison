@@ -16,6 +16,8 @@ type t = {
   mutable operation_error:exn;
   mutable operation_failed:bool;
   mutable retained:bool;
+  mutable lifecycle_error:exn;
+  mutable lifecycle_failed:bool;
   mutable previous:t option;
   link:t option;
   carrier:exn;
@@ -30,7 +32,7 @@ let prepare () =
   let endpoint ()={fd=Unix.stdin;owned=false;attempted=false;settled=false;error=Exit;identity=None;identity_error=Exit;identity_failed=false} in
   let read=endpoint () and write=endpoint () in
   let rec t={read;write;reader=None;owner=(fun () -> ());
-    operation_error=Exit;operation_failed=false;retained=false;
+    operation_error=Exit;operation_failed=false;retained=false;lifecycle_error=Exit;lifecycle_failed=false;
     previous=None;link=Some t;carrier=Uncertain t;
     read_close=(fun () -> match t.reader with
       | Some reader -> Lwt_unix.close reader
@@ -47,7 +49,7 @@ let install_reader t reader =
   t.reader <- Some reader
 let keep_owner t owner = t.owner <- owner
 let remember_failure t error =
-  if not t.operation_failed then begin
+  if error != t.carrier && not t.operation_failed then begin
     t.operation_error <- error;t.operation_failed <- true
   end
 let retain t =
@@ -84,3 +86,11 @@ let write_identity t = t.write.identity
 let identity_error endpoint = if endpoint.identity_failed then Some endpoint.identity_error else None
 let read_identity_error t = identity_error t.read
 let write_identity_error t = identity_error t.write
+
+let retain_unsettled t error =
+  if error != t.carrier && not t.lifecycle_failed then begin
+    t.lifecycle_error <- error;t.lifecycle_failed <- true
+  end;
+  retain t;
+  raise t.carrier
+let lifecycle_cause t = if t.lifecycle_failed then Some t.lifecycle_error else None

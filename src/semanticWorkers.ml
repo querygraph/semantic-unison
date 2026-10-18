@@ -62,7 +62,7 @@ type shared = {
 type t = {
   shared : shared; domains : unit Domain.t list; budget : H.t;
   io : IoAdmission.t option;
-  max_pending : int; reader : Lwt_unix.file_descr;
+  max_pending : int; reader : Lwt_unix.file_descr; notification : NotificationPipe.t;
   replies : (int, response Lwt.t) Hashtbl.t;
   owned_groups : (int, ownership_entry) Hashtbl.t;
   mutable retained : int;
@@ -74,7 +74,6 @@ type t = {
   mutable read_observer : (int -> SemanticFile.read_stats -> unit) option;
   mutable measure_stages : bool;
 }
-let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
 let duplicate_operation output_slot = function
   | Apply (extension, plan, fd) ->
       let owned = Unix.dup ~cloexec:true fd in
@@ -291,8 +290,12 @@ let rec pump t scratch =
   Lwt_unix.read t.reader scratch 0 (Bytes.length scratch) >>= fun _ ->
   let observer_error = dispatch t in
   let next = if t.joined then begin
-    Lwt_unix.close t.reader;
-    Lwt.wakeup t.pump_done ();
+    (* Domains have joined: no notifier can use either endpoint now. A close
+       carrier keeps pump_done and therefore shutdown unsettled. *)
+    (try
+       NotificationPipe.close_all t.notification;
+       Lwt.wakeup t.pump_done ()
+     with NotificationPipe.Uncertain _ -> t.closing <- true);
     return ()
   end else pump t scratch in
   (* An owner's unhandled observer exception must remain visible, but cannot
@@ -305,29 +308,24 @@ let rec pump t scratch =
 let create_internal ~io ~workers ~max_pending ~budget =
   if workers <= 0 || max_pending <= 0 || max_pending > 65536 then
     invalid_arg "SemanticWorkers.create: positive workers and1..65536 pending jobs required";
-  let owned_read = ref Unix.stdin and owned_write = ref Unix.stdout
-  and has_read = ref false and has_write = ref false
-  and reader_owner = ref None and shared_owner = ref None
-  and domains = ref [] in
+  let notification = NotificationPipe.prepare () in
+  let shared_owner = ref None and domains = ref [] in
+  (* This closure is installed before pipe/domain acquisition. It roots all
+     published creation handles even if the constructor never returns a pool. *)
+  NotificationPipe.keep_owner notification (fun () ->
+    ignore (Sys.opaque_identity domains);ignore (Sys.opaque_identity shared_owner));
   let stop shared =
     locked shared (fun () -> Atomic.set shared.stopping true; Mailbox.close shared.jobs; Condition.broadcast shared.ready) in
   let cleanup () =
-    (match !shared_owner with Some shared -> (try stop shared with _ -> ()) | None -> ());
-    List.iter (fun domain -> try Domain.join domain with _ -> ()) !domains;
-    domains := [];
-    if !has_read then begin
-      has_read := false;
-      (try match !reader_owner with
-       | Some reader -> Lwt_unix.close reader
-       | None -> Unix.close !owned_read
-       with _ -> ())
-    end;
-    if !has_write then begin
-      has_write := false; (try Unix.close !owned_write with _ -> ())
-    end in
+    (* Stop/join uncertainty forbids closing a notifier still possibly used by
+       a domain. Keep the complete published handle list rather than clearing it. *)
+    (try
+       (match !shared_owner with Some shared -> stop shared | None -> ());
+       List.iter Domain.join !domains
+     with error -> NotificationPipe.retain_unsettled notification error);
+    NotificationPipe.close_all notification in
   let read_fd, write_fd = Unix.pipe ~cloexec:true () in
-  owned_read := read_fd; has_read := true;
-  owned_write := write_fd; has_write := true;
+  NotificationPipe.adopt notification read_fd write_fd;
   try
     Unix.set_nonblock read_fd;
     Unix.set_nonblock write_fd;
@@ -341,19 +339,29 @@ let create_internal ~io ~workers ~max_pending ~budget =
       (* Linking the returned domain can allocate too. Stop and join this
          still-local handle before the outer guard joins earlier domains. *)
       (try domains := domain :: !domains
-       with error -> (try stop shared with _ -> ());
-         (try Domain.join domain with _ -> ()); raise error)
+       with error ->
+         NotificationPipe.remember_failure notification error;
+         (* The local handle remains on this stack until this cleanup returns.
+            Persistent allocation failure inside Domain.spawn/publication is a
+            toolchain boundary, not an arbitrary-OOM recovery guarantee. *)
+         (try stop shared; Domain.join domain
+          with cleanup_error -> NotificationPipe.retain_unsettled notification cleanup_error);
+         raise error)
     done;
     let reader = Lwt_unix.of_unix_file_descr read_fd in
-    reader_owner := Some reader;
-    let t = { shared; domains = !domains; budget; io; max_pending; reader;
+    NotificationPipe.install_reader notification reader;
+    let t = { shared; domains = !domains; budget; io; max_pending; reader; notification;
       replies = Hashtbl.create workers; owned_groups = Hashtbl.create workers; retained = 0; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
       shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
+    NotificationPipe.keep_owner notification (fun () -> ignore (Sys.opaque_identity t));
     Lwt.ignore_result (pump t (Bytes.create 4096));
-    has_read := false; has_write := false;
     t
-  with error -> cleanup (); raise error
+  with
+  | NotificationPipe.Uncertain _ as error -> raise error
+  | error ->
+    NotificationPipe.remember_failure notification error;
+    cleanup (); raise error
 let create ~workers ~max_pending ~budget =
   create_internal ~io:None ~workers ~max_pending ~budget
 let create_with_io ~io ~workers ~max_pending ~budget =
@@ -610,11 +618,16 @@ let shutdown t = match t.shutdown_result with
         t.joined <- true;
         Mailbox.close t.shared.completions;
         notify t.shared;
-        t.pump_done >>= fun () -> close_noerr t.shared.notify; return ()
+        t.pump_done
       end in
     Lwt.ignore_result (try_bind finish
       (fun () -> Lwt.wakeup result (); return ())
-      (fun exn -> Lwt.wakeup_exn result exn; return ()));
+      (fun exn ->
+        (* A generic stop/join/pump lifecycle error is not a proof of pool
+           closure. Root the pool and leave the public shutdown reply sleeping. *)
+        (try NotificationPipe.retain_unsettled t.notification exn
+         with NotificationPipe.Uncertain _ -> ());
+        return ()));
     result
 
 let refresh_owned_components t cancellation ~entry ~record ~decoders

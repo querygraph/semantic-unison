@@ -143,7 +143,8 @@ let with_cancellation f =
     cancellations.release_noerr cancellation;
     raise error
 let unresolved_ownership = function
-  | SemanticFile.Close_uncertain _ | DngComponents.Cache_ownership_uncertain _ -> true
+  | SemanticFile.Close_uncertain _ | DngComponents.Cache_ownership_uncertain _
+  | NotificationPipe.Uncertain _ -> true
   | _ -> false
 let report_retained_ownership _ =
   Util.warn "Resource closure is unresolved; this process is retaining its reservations.\n"

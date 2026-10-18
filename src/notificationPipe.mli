@@ -33,3 +33,8 @@ val write_identity : t -> Unix.LargeFile.stats option
 val read_identity_error : t -> exn option
 val write_identity_error : t -> exn option
 (** Last pre-close observation or its failure, not a post-close binding proof. *)
+
+val retain_unsettled : t -> exn -> 'a
+(** Root remaining ownership when stop/join or another lifecycle operation is
+    unresolved. Does not close endpoints; preserves the separate original cause. *)
+val lifecycle_cause : t -> exn option
