@@ -75,10 +75,11 @@ fault, transfer or scheduling controls.
    property request qualifies a separate baseline and is no longer needed to
    establish this candidate's tested property scope.
 3. Close the genuine-upstream compatibility evidence gap. The existing mixed
-   matrix uses an older fork that already supports producer binding. Prepare a
-   separately pinned upstream8772d26a baseline and capability-absent fallback
-   matrix in both directions; source/build work uses own8, transport needs its
-   own fresh exact admission. Do not relabel the passing older-fork matrix.
+   matrix uses an older fork that already supports producer binding. An unmodified
+   pinned upstream8772d26a stock build/selftests and70sourcecontrols now pass.
+   The exact schema2 request is [prepared](genuine-upstream-peer-request-v1.json)
+   for both directions. Actual transport needs its own fresh exact admission;
+   source preparation creates no Photo scheduling hold. Do not relabel the passing older-fork matrix.
 4. Keep the remaining legacy cleanup limitations explicit. Owned publication
    backend, bound SemanticSync/SemanticRemote, bound local Copy and guarded rsync
    staging have current composed failure controls and stock/Ox builds. Their

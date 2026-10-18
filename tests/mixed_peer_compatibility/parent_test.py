@@ -11,14 +11,16 @@ ROOT=Path(__file__).resolve().parents[2]
 sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'bench/sync')]
 from component_remote.io import save
 from mixed_peer_compatibility import worker,parent
+from mixed_peer_compatibility.contract import RETAINED_FORK, UPSTREAM
 
 class Readback(unittest.TestCase):
+    peer_contract=RETAINED_FORK
     artifacts={'stock':'/inert/stock','ox':'/inert/ox','old-stock':'/inert/old'}
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory(prefix='unison-mixed-parent-control-')
         self.root=Path(self.temp.name)
         with patch.object(worker,'retained_call',side_effect=self.fake):
-            self.result=worker.execute(self.artifacts,self.root,time.monotonic()+300,lambda value:None)
+            self.result=worker.execute(self.artifacts,self.root,time.monotonic()+300,lambda value:None,self.peer_contract)
     def tearDown(self):self.temp.cleanup()
     def fake(self,argv,env,directory,deadline):
         source=Path(argv[1])/'item.dng';target=source.parent.parent/'right/item.dng'
@@ -32,7 +34,7 @@ class Readback(unittest.TestCase):
         save(directory/'proxy.json',proxy)
         return dict(command=argv,returncode=0,timed_out=False,capture_truncated=False,supervisor_capture_truncated=False,
                     client_cleanup=owner(101),supervisor_cleanup=owner(102),proxy=proxy)
-    def check(self):return parent.audit_saved(self.result,self.artifacts,self.root)
+    def check(self):return parent.audit_saved(self.result,self.artifacts,self.root,self.peer_contract)
     def test_complete(self):
         out=self.check();self.assertEqual(out['functional'],'PASS');self.assertEqual(out['attempted_calls'],12)
     def test_raw_receipt_tampered(self):
@@ -59,4 +61,10 @@ class Readback(unittest.TestCase):
     def test_no_calls_contradiction(self):
         self.result['no_calls_started']=True
         with self.assertRaises(ValueError):self.check()
+class UpstreamReadback(Readback):
+    peer_contract=UPSTREAM
+    def test_contract_cannot_be_reinterpreted_as_old_fork(self):
+        with self.assertRaises(ValueError):
+            parent.audit_saved(self.result,self.artifacts,self.root,RETAINED_FORK)
+
 if __name__=='__main__':unittest.main()

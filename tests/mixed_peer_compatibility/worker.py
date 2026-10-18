@@ -14,7 +14,7 @@ from component_remote.call import execute as retained_call
 from component_remote.io import load, read, write, identity
 from invocation_journal import Journal
 from mixed_peer_compatibility.audit import audit, require
-from mixed_peer_compatibility.contract import CASES, STAGES, command
+from mixed_peer_compatibility.contract import RETAINED_FORK, CASES, STAGES, command
 
 ROOT = Path(__file__).resolve().parents[2]
 
@@ -30,7 +30,7 @@ def fixture(updated=False):
     return bytes(data)
 
 
-def execute(artifacts, workspace, deadline, persist):
+def execute(artifacts, workspace, deadline, persist, peer_contract=RETAINED_FORK):
     """Artifacts already authenticated by future outer owner after IO acquisition.
 
     Unknown call state propagates the actual retained carrier. Ordinary errors
@@ -58,7 +58,7 @@ def execute(artifacts, workspace, deadline, persist):
             for name in ('proxy.py','measure.py','ownership.py','launcher.py'):
                 write(call_dir/name,read(ROOT/'bench/sync'/name))
             os.chmod(call_dir/'launcher.py',0o700)
-            argv,flags=command(artifacts,str(workspace),index,stage)
+            argv,flags=command(artifacts,str(workspace),index,stage,peer_contract)
             server=artifacts[label if orientation=='old-client' else 'old-stock']
             environment=dict(os.environ,UNISON=str(directory/'state'),
                 PATH=str(Path(sys.executable).parent)+':/usr/bin:/bin',
@@ -71,7 +71,7 @@ def execute(artifacts, workspace, deadline, persist):
             outcome=retained_call(argv,environment,call_dir,min(deadline,time.monotonic()+30))
             journal.finish(outcome)
             raw.append(load(call_dir/'proxy.json'))
-            audit(result,artifacts,str(workspace),raw)
+            audit(result,artifacts,str(workspace),raw,peer_contract)
             require(outcome['returncode']==0 and outcome['supervisor_cleanup']['returncode']==0
                     and outcome['proxy']['server_returncode']==0
                     and outcome['proxy']['fault'] is None

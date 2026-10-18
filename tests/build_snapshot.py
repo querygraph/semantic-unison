@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
-"""Build the current source (including uncommitted work) outside the checkout."""
+"""Build current edits or an exact local Git commit outside the checkout."""
 import argparse
 import hashlib
 import json
 import os
 from pathlib import Path
-import shutil
 import subprocess
 import tempfile
+from build_source_snapshot import populate
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--compiler-prefix", required=True, help="absolute directory containing ocaml/ocamlopt")
@@ -17,6 +17,7 @@ parser.add_argument("--selftest-workers", type=int, choices=range(1, 4),
                     help="explicit semantic worker budget for bounded shared selftests")
 parser.add_argument("--build-system", choices=("make", "dune"), default="make")
 parser.add_argument("--report", type=Path, help="save source/compiler/binary pins and actual outcomes")
+parser.add_argument("--source-revision", help="export one exact local40-hex Git commit instead of current edits")
 args = parser.parse_args()
 prefix = Path(args.compiler_prefix).resolve()
 if args.jobs < 1 or not (prefix / "ocamlopt").is_file():
@@ -25,15 +26,7 @@ if args.selftest_workers is not None and not args.selftest:
     parser.error("--selftest-workers requires --selftest")
 root = Path(__file__).resolve().parents[1]
 work = Path(tempfile.mkdtemp(prefix="unison-build-"))
-paths = subprocess.check_output(["git", "ls-files", "-z", "--cached", "--others", "--exclude-standard"], cwd=root)
-for raw in paths.split(b"\0"):
-    if not raw:
-        continue
-    relative = os.fsdecode(raw)
-    source, target = root / relative, work / relative
-    if source.is_file():
-        target.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source, target)
+paths, source_origin = populate(root, work, args.source_revision)
 env = dict(os.environ, PATH=str(prefix) + os.pathsep + os.environ.get("PATH", ""))
 for key in ("OCAMLLIB", "OCAMLPATH", "CAML_LD_LIBRARY_PATH", "OCAMLRUNPARAM"):
     env.pop(key, None)
@@ -42,6 +35,8 @@ def sha(path):
 receipt = {"workspace": str(work), "build_system": args.build_system,
            "complete": False, "selftest_requested": args.selftest,
            "runner_sha256": sha(Path(__file__).resolve()),
+           "snapshot_exporter_sha256": sha(Path(__file__).with_name('build_source_snapshot.py')),
+           "source_origin": source_origin,
            "compiler": str(prefix / "ocamlopt"), "compiler_sha256": sha(prefix / "ocamlopt"),
            "compiler_version": subprocess.check_output([str(prefix / "ocamlopt"), "-version"], env=env, text=True).strip(),
            "source_sha256": {os.fsdecode(raw): sha(work / os.fsdecode(raw))
@@ -50,6 +45,8 @@ receipt = {"workspace": str(work), "build_system": args.build_system,
                     or Path(os.fsdecode(raw)).name in ("Makefile", "Makefile.OCaml", "dune", "dune-project")
                     or os.fsdecode(raw).endswith(".ox.mli.in"))},
            "build_exit": None, "selftest_exit": None}
+if source_origin['kind'] == 'git-commit':
+    receipt['source_archive_sha256'] = sha(Path(source_origin['archive']))
 def save_receipt():
     (work / "build-receipt.json").write_text(json.dumps(receipt, indent=2) + "\n")
     if args.report:

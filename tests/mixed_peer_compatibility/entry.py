@@ -17,7 +17,7 @@ from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,read_m
 from shared_dispatch import POLICY,MANIFEST,MANIFEST_SHA
 from shared_process_owner import require_ownership_support,retain_after_record
 from ownership import OwnedGroup
-from mixed_peer_compatibility.contract import LIMITS
+from mixed_peer_compatibility.contract import LIMITS, RETAINED_FORK, UPSTREAM, UPSTREAM_COMMIT
 from mixed_peer_compatibility.worker import execute
 from mixed_peer_compatibility.coordinator import observe_and_reap
 
@@ -39,7 +39,10 @@ def source_paths():
 
 def checked_plan(path,expected):
     plan=read_manifest(path,expected)
-    require(plan['schema']=='unison-mixed-peer/1' and plan['limits']==LIMITS,'fixed mixed-peer scope required')
+    require(plan['limits']==LIMITS,'fixed mixed-peer limits required')
+    require((plan['schema']=='unison-mixed-peer/1' and 'peer_contract' not in plan) or
+            (plan['schema']=='unison-mixed-peer/2' and plan.get('peer_contract')==UPSTREAM),
+            'fixed versioned peer contract required')
     root=Path(plan['workspace'])
     require(root.parent==Path('/private/tmp') and root.name.startswith('u-mp-') and len(str(root))<40,'short fresh mixed-peer namespace required')
     require(set(plan['artifacts'])=={'stock','ox','old-stock'},'exact artifact set required')
@@ -80,8 +83,42 @@ def verify_artifacts(plan):
             relative=Path(name)
             require('..' not in relative.parts and digest(ROOT/relative)==sha,
                     'build no longer matches current production source')
+    if plan.get('peer_contract') == UPSTREAM:
+        verify_upstream_baseline(plan)
     for item in plan['artifacts'].values():
         require(digest(item['path'])==item['sha256'],'artifact changed after IO acquisition')
+
+
+def verify_upstream_baseline(plan):
+    """Authenticate the Root-pinned baseline record after IO acquisition.
+
+    Its actual exporter/build receipt is a prerequisite, not self-attestation
+    supplied by a remote peer. This check alone cannot prove compilation.
+    """
+    pin=plan['upstream_build']
+    baseline=read_manifest(pin['path'],pin['sha256'])
+    origin=baseline['source_origin'];base=Path(baseline['workspace'])
+    require(baseline['complete'] is True and baseline['build_system']=='make'
+            and type(baseline['build_exit']) is int and baseline['build_exit']==0
+            and type(baseline['selftest_exit']) is int and baseline['selftest_exit']==0
+            and baseline['binary']==plan['artifacts']['old-stock']['path']
+            and baseline['binary_sha256']==plan['artifacts']['old-stock']['sha256']
+            and origin['kind']=='git-commit' and origin['commit']==UPSTREAM_COMMIT
+            and origin['archive']==str(base/'SOURCE.tar'),
+            'genuine pinned upstream build/selftest/commit binding differs')
+    require(digest(base/'SOURCE.tar')==baseline['source_archive_sha256'],
+            'upstream source archive changed')
+    compiler=plan['compiler_artifacts']['stock']
+    require(str(Path(baseline['compiler']).resolve(strict=True))==compiler['path']
+            and baseline['compiler_sha256']==compiler['sha256'],
+            'upstream baseline compiler differs from qualified stock compiler')
+    sources={name:sha for name,sha in baseline['source_sha256'].items() if name.startswith('src/')}
+    require(bool(sources) and 'src/semanticRemote.ml' not in sources
+            and 'src/semanticRuntime.ml' not in sources,
+            'upstream baseline must lack the fork semantic capability implementation')
+    for name,sha in sources.items():
+        require('..' not in Path(name).parts and digest(base/name)==sha,
+                'upstream baseline source changed')
 
 
 def retain(path,error,owner=None):
@@ -113,7 +150,8 @@ def worker(packet_path):
                     'inherited FD identity differs')
         verify_artifacts(plan)
         result=execute({k:v['path'] for k,v in plan['artifacts'].items()},root,
-                       time.monotonic()+LIMITS['owner_observation_seconds']-10,persist)
+                       time.monotonic()+LIMITS['owner_observation_seconds']-10,persist,
+                       plan.get('peer_contract',RETAINED_FORK))
     except UnresolvedOwnership as error:retain(root/'WORKER-UNKNOWN.json',error)
     except BaseException as error:
         result=saved;result['failure']=repr(error)
@@ -159,7 +197,8 @@ def owner(plan_path,plan_sha,admission_path,admission_sha):
         save(root/'START.json',dict(owner_pid=os.getpid(),worker_pid=child.pid,unix=time.time(),inherited_fds=rows))
         result=observe_and_reap(child,lambda:load(root/'WORKER-RESULT.json'),
             {k:v['path'] for k,v in plan['artifacts'].items()},root,
-            time.monotonic()+LIMITS['owner_observation_seconds'])
+            time.monotonic()+LIMITS['owner_observation_seconds'],
+            plan.get('peer_contract',RETAINED_FORK))
         cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
         io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
         closed=True

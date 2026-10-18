@@ -4,6 +4,16 @@ from pathlib import Path
 CASES = (('stock', 'current-client'), ('stock', 'old-client'),
          ('ox', 'current-client'), ('ox', 'old-client'))
 STAGES = ('seed', 'update', 'noop')
+RETAINED_FORK = 'retained-fork-v1'
+UPSTREAM = 'upstream-8772d26a-v1'
+UPSTREAM_COMMIT = '8772d26a2eb77cfd0cb6da81807e81f24f51044c'
+
+def peer_flags(peer_contract):
+    if peer_contract == RETAINED_FORK:
+        return OLD_FLAGS
+    if peer_contract == UPSTREAM:
+        return ('-maxthreads', '2')
+    raise ValueError('unknown fixed peer contract')
 CURRENT_FLAGS = ('-semanticworkers', '2', '-maxthreads', '2',
                  '-semanticdng=true', '-adobevalidate', 'off', '-clone', 'auto')
 OLD_FLAGS = ('-semanticworkers', '2', '-maxthreads', '2', '-adobevalidate', 'off')
@@ -12,7 +22,8 @@ LIMITS = dict(cases=4, calls=12, endpoint_workers=2, owner_credits=2,
               owner_observation_seconds=300, sdk_calls=0)
 
 
-def command(artifacts, workspace, index, stage):
+def command(artifacts, workspace, index, stage, peer_contract=RETAINED_FORK):
+    old_flags = peer_flags(peer_contract)
     if type(index) is not int or not 0 <= index < len(CASES) or stage not in STAGES:
         raise ValueError('exact mixed-peer case and stage required')
     if set(artifacts) != {'stock', 'ox', 'old-stock'}:
@@ -25,8 +36,8 @@ def command(artifacts, workspace, index, stage):
     old_client = orientation == 'old-client'
     client = paths['old-stock' if old_client else current]
     server = paths[current if old_client else 'old-stock']
-    client_flags = OLD_FLAGS if old_client else CURRENT_FLAGS
-    server_flags = CURRENT_FLAGS if old_client else OLD_FLAGS
+    client_flags = old_flags if old_client else CURRENT_FLAGS
+    server_flags = CURRENT_FLAGS if old_client else old_flags
     argv = [str(client), str(directory/'left'), 'ssh://localhost/'+str(directory/'right'),
             '-batch', '-auto', '-fastcheck', 'false', '-sshcmd', str(directory/stage/'launcher.py'),
             '-servercmd', str(server), *client_flags]

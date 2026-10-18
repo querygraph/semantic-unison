@@ -3,11 +3,11 @@ import hashlib
 from pathlib import Path
 from component_remote.io import load, read, identity
 from mixed_peer_compatibility.audit import audit, require
-from mixed_peer_compatibility.contract import CASES, STAGES
+from mixed_peer_compatibility.contract import RETAINED_FORK, CASES, STAGES
 from mixed_peer_compatibility.worker import fixture
 
 
-def audit_saved(result, artifacts, workspace):
+def audit_saved(result, artifacts, workspace, peer_contract=RETAINED_FORK):
     workspace=Path(workspace)
     if result.get('no_calls_started') is True:
         require(result['complete'] is False and result['invocations']==[],
@@ -20,7 +20,7 @@ def audit_saved(result, artifacts, workspace):
         case,phase=divmod(index,3)
         require(case < len(CASES),'too many mixed-peer calls')
         raw.append(load(workspace/str(case)/STAGES[phase]/'proxy.json'))
-    closure=audit(result,artifacts,str(workspace),raw)
+    closure=audit(result,artifacts,str(workspace),raw,peer_contract)
     require(type(result['complete']) is bool,'typed completion required')
     if not result['complete']:
         return dict(closure,functional='FAILED_OR_INCOMPLETE',bytes_verified=False)

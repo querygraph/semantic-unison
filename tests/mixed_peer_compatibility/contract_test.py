@@ -3,7 +3,7 @@ import sys
 from pathlib import Path
 import unittest
 sys.path.insert(0,str(Path(__file__).resolve().parent))
-from contract import command, CASES, CURRENT_FLAGS, OLD_FLAGS
+from contract import command, CASES, CURRENT_FLAGS, OLD_FLAGS, UPSTREAM
 
 class Commands(unittest.TestCase):
     artifacts=dict(stock='/inert/stock',ox='/inert/ox',**{'old-stock':'/inert/old'})
@@ -23,6 +23,15 @@ class Commands(unittest.TestCase):
         self.assertIn('-semanticdng=true',CURRENT_FLAGS)
         self.assertNotIn('true',CURRENT_FLAGS)
         self.assertNotIn('-semanticdng',CURRENT_FLAGS)
+    def test_upstream_never_receives_fork_only_preferences(self):
+        for i,(_,orientation) in enumerate(CASES):
+            argv,server=command(self.artifacts,'/private/tmp/inert',i,'update',UPSTREAM)
+            old=orientation=='old-client'
+            self.assertEqual(server,list(CURRENT_FLAGS if old else ('-maxthreads','2')))
+            self.assertEqual(argv[-2:] if old else argv[-len(CURRENT_FLAGS):],
+                             ['-maxthreads','2'] if old else list(CURRENT_FLAGS))
+    def test_unknown_contract_refuses(self):
+        with self.assertRaises(ValueError):command(self.artifacts,'/private/tmp/inert',0,'seed','arbitrary')
     def test_bad_case(self):
         for index in (-1,4,True):
             with self.assertRaises(ValueError):command(self.artifacts,'/private/tmp/inert',index,'seed')

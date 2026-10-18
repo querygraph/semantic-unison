@@ -1,3 +1,24 @@
+# Current status — genuine upstream successor
+
+The retained-fork schema1 matrix actually passed4cases/12CLI; its sealed receipt
+remains `tests/qualification/mixed-peer-actual-20261017.json`. That peer already
+supports semantic producer binding and is not genuine capability-absent upstream.
+
+Schema2 adds one fixed `upstream-8772d26a-v1` contract, preserving the schema1
+default. The unmodified pinned upstream stock build/selftests pass. Before calls,
+the owner verifies its actual build/commit/archive/source/compiler/binary pins.
+Both command generation and independent raw/parent audits use the authorized
+contract; upstream receives only `-maxthreads 2`, never fork-only preferences.
+The four directions/seed-update-noop/12calls/limits/ownership protocol are unchanged.
+Seventy original generated/source/lifecycle checks pass, including two complete
+fake-call/readback matrices. This is not actual upstream transport.
+
+Fresh exact request: `doc/genuine-upstream-peer-request-v1.json`; runtime needs a
+separate exact Root IO admission. No SDK/Adobe/Photo/camera payload is involved.
+Earlier preparation notes below remain historical and do not grant replay.
+
+---
+
 # Current candidate / retained old-peer qualification
 
 Source preparation only. `contract.py` fixes four directions: current stock or

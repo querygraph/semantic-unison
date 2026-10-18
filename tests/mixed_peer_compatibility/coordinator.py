@@ -4,6 +4,7 @@ import subprocess
 import time
 from shared_cpu_pool import UnresolvedOwnership
 from mixed_peer_compatibility.parent import audit_saved
+from mixed_peer_compatibility.contract import RETAINED_FORK
 
 
 def members(group):
@@ -20,7 +21,7 @@ def members(group):
     return found
 
 
-def observe_and_reap(owner, read_result, artifacts, workspace, deadline):
+def observe_and_reap(owner, read_result, artifacts, workspace, deadline, peer_contract=RETAINED_FORK):
     """Audit separate server owners BEFORE group census and direct wait4.
 
     Never signal a process or infer parent tool terminal. Caller retains IO/CPU
@@ -30,7 +31,7 @@ def observe_and_reap(owner, read_result, artifacts, workspace, deadline):
         if not owner.await_terminal(max(0,deadline-time.monotonic())):
             raise ValueError('mixed-peer observation expired; retain without signals')
         result=read_result()
-        proof=audit_saved(result,artifacts,workspace)
+        proof=audit_saved(result,artifacts,workspace,peer_contract)
         while True:
             rows=members(owner.pid)
             if all(row['pid']==owner.pid for row in rows) and owner.terminal():

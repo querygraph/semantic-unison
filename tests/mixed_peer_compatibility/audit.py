@@ -1,6 +1,6 @@
 """Pure attempted-prefix lifecycle audit; no wait, signal, IO or FD release."""
 import json
-from mixed_peer_compatibility.contract import CASES, STAGES, command
+from mixed_peer_compatibility.contract import RETAINED_FORK, CASES, STAGES, command
 
 
 def require(value, message):
@@ -8,7 +8,7 @@ def require(value, message):
         raise ValueError(message)
 
 
-def audit(result, artifacts, workspace, raw_proxies):
+def audit(result, artifacts, workspace, raw_proxies, peer_contract=RETAINED_FORK):
     entries = result['invocations']
     require(type(entries) is list and 0 < len(entries) <= 12
             and len(raw_proxies) == len(entries), 'nonempty exact attempted prefix required')
@@ -17,7 +17,7 @@ def audit(result, artifacts, workspace, raw_proxies):
         case, phase = divmod(index, 3)
         current, orientation = CASES[case]
         stage = STAGES[phase]
-        argv, flags = command(artifacts, workspace, case, stage)
+        argv, flags = command(artifacts, workspace, case, stage, peer_contract)
         require(type(entry['index']) is int and entry['index'] == index
                 and entry['state'] == 'OUTCOME' and entry['command'] == argv,
                 'pending, reordered or substituted invocation')
