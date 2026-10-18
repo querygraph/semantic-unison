@@ -6089,3 +6089,8 @@ no force/merge/checkout of historicalreviewworktree. Durable body
 doc/pr13-current-review-20261018.md separatescurrent sourcecontrols frompending
 V6transport andhistoricalSDK/camera/benchmarks. FrozenV6bytes unchanged, no new
 runtimeadmission/claim. Fullgoalactive/incomplete; no ownedlivejobs/resources.
+
+Actual draftrefresh completed: push b9d7bd/0, gh edit/readback d02fc5/0;
+PR13 OPEN/DRAFT/masterbase/headad042761, bodyexactfilematchverified. Publication
+receipt doc/pr13-current-review-publication-20261018.json. No merge/deploy or
+newruntime/IO/CPU ownership. Active source contains followingmetadata only.
