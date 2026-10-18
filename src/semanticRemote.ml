@@ -159,7 +159,7 @@ let response_limit_for_args (_,request) =
       | None -> response_limit end
   | Error _ -> response_limit
 
-let request_plan = Remote.registerBoundedServerCmd "semanticPlanV0"
+let request_plan = Remote.registerBoundedServerCmdWithResultScope "semanticPlanV0"
   ~withScope:source_scope ~maxResultForArgs:response_limit_for_args
   ~maxArgs:request_limit ~maxResult:response_limit args result make_plan
 
@@ -456,8 +456,7 @@ let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~dir
           | Some (extension,base) ->
             let nonce = nonce () in
             let request = SemanticDelta.encode_request ~nonce base in
-            BorrowedWork.bind
-              (fun () -> request_plan connection (Fspath.toString source,request)) (function
+            request_plan connection (Fspath.toString source,request) (function
             | None ->
               debug (fun () -> Util.msg "Remote semantic fallback: source proof differs\n");
               release (); return false
@@ -636,7 +635,7 @@ let inspect_components_source connection ((path,schema,nonce) as request) =
     else BorrowedWork.bind (fun () -> SemanticRuntime.with_cancellation (fun cancellation ->
       inspect_components cancellation (Fspath.canonize (Some path))))
       (fun result -> finish result.component_observation)
-let inspect_components_peer = Remote.registerBoundedServerCmd "semanticComponentsV0"
+let inspect_components_peer = Remote.registerBoundedServerCmdWithResultScope "semanticComponentsV0"
   ~withScope:component_scope ~maxArgs:(max_path+128+32+1024)
   ~maxResult:(SemanticReport.max_component_size+1024) inspection_args
   (Umarshal.bounded_string SemanticReport.max_component_size) inspect_components_source
@@ -655,8 +654,8 @@ let observe_components_using local_worker ~root ~path =
           return (component_failure "Remote component inspection is not negotiated")
         else capture_component (fun () ->
           let nonce=nonce () in
-          BorrowedWork.bind (fun () -> inspect_components_peer connection
-            (Fspath.toString path,component_schema,nonce)) (fun encoded ->
+          inspect_components_peer connection
+            (Fspath.toString path,component_schema,nonce) (fun encoded ->
             match SemanticReport.decode_components ~nonce ~schema:component_schema encoded with
             | Error why -> fail (Util.Transient ("Invalid component inspection reply: " ^ why))
             | Ok component_observation -> return {component_observation;component_snapshot=None}))
@@ -683,10 +682,10 @@ let inspection_scope connection (_,profile,_) f =
   | None -> f ()
   | Some extension -> SemanticRuntime.with_transaction ~role:SemanticAdmission.Source
       ~max_payload:(FormatExtension.payload_limit extension) (fun _ -> f ())
-let inspect_peer = Remote.registerBoundedServerCmd "semanticInspectV0"
+let inspect_peer = Remote.registerBoundedServerCmdWithResultScope "semanticInspectV0"
   ~withScope:inspection_scope ~maxArgs:(max_path + 128 + 32 + 1024)
   ~maxResult:(SemanticReport.max_size + 1024) inspection_args inspection_result (inspect_source ~meaning:false)
-let inspect_meaning_peer = Remote.registerBoundedServerCmd "semanticInspectV1"
+let inspect_meaning_peer = Remote.registerBoundedServerCmdWithResultScope "semanticInspectV1"
   ~withScope:inspection_scope ~maxArgs:(max_path + 128 + 32 + 1024)
   ~maxResult:(SemanticReport.max_observation_size + 1024) inspection_args
   (Umarshal.bounded_string SemanticReport.max_observation_size) (inspect_source ~meaning:true)
@@ -705,7 +704,7 @@ let observe ~root ~path ~extension =
         let nonce=nonce () in
         let request,decode = if meaning_supported connection then inspect_meaning_peer,SemanticReport.decode_observation
           else inspect_peer,SemanticReport.decode in
-        BorrowedWork.bind (fun () -> request connection (Fspath.toString path,profile,nonce)) (fun encoded ->
+        request connection (Fspath.toString path,profile,nonce) (fun encoded ->
         match decode ~nonce ~profile ~max_payload:(FormatExtension.payload_limit extension) encoded with
         | Error why -> fail (Util.Transient ("Invalid semantic inspection reply: " ^ why))
         | Ok observation -> return {observation;local_snapshot=None}))

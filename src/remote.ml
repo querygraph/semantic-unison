@@ -1044,7 +1044,7 @@ let decodedRequestElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedre
   "Independent positive aggregate collection count for regular RPC arguments; \
    nonwaiting admission, not user conversion allocation or recursion depth.")
 let decodedRequestSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestslots" 256 ~local:true
-  ~category:(`Advanced `Remote) "decoded regular request owners"
+  ~category:(`Advanced `Remote) "decoded scoped result owners"
   "Positive aggregate owner count reserved before decoding, maximum65536; \
    ownership uncertainty retains the owner and its selected charges.")
 let decoded_request_bytes=ref 0 and decoded_request_elements=ref 0
@@ -1117,6 +1117,93 @@ let with_decoded_args bound codec tag conn buffer use =
     use args in
   BorrowedWork.try_bind
     (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain work)
+    (fun result->finish ();Lwt.return result)
+    (fun error->finish ();Lwt.fail error)
+
+(* Scoped client results have an independent lane. The callback must consume
+   the value without escaping it; user conversion allocations remain excluded. *)
+let decodedResultMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded result charges in MiB"
+  "Aggregate selected builtin result allocation charges for scoped RPC \
+   results, retained through the client consumer; not heap/RSS.")
+let decodedResultElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultelements" 1048576 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded result element allowance"
+  "Independent positive aggregate collection count for scoped RPC results; \
+   nonwaiting admission, not user conversion allocation or recursion depth.")
+let decodedResultSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedresultslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "decoded scoped result owners"
+  "Positive aggregate owner count reserved before decoding, maximum65536; \
+   ownership uncertainty retains the owner and its selected charges.")
+let decoded_result_bytes=ref 0 and decoded_result_elements=ref 0
+and decoded_result_count=ref 0
+let result_limits () =
+  let mib=Prefs.read decodedResultMiB and elements=Prefs.read decodedResultElements
+  and slots=Prefs.read decodedResultSlots in
+  if mib<=0 || mib>max_int/1048576 || elements<=0 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC decoded result budget");
+  mib*1048576,elements,slots
+type result_input={mutable result_bytes:int;mutable result_elements:int;
+                    mutable result_active:bool}
+let reserve_result_slot ticket =
+  if ticket.result_active then invalid_arg "RPC decoded owner already active";
+  let _,_,slots=result_limits () in
+  if !decoded_result_count>=slots then
+    raise(Util.Fatal "RPC decoded result budget exhausted");
+  ticket.result_active<-true;incr decoded_result_count
+let reserve_result_input ticket ~bytes ~elements =
+  if not ticket.result_active || bytes<0 || elements<0 then
+    invalid_arg "RPC decoded reservation";
+  let byte_limit,element_limit,_=result_limits () in
+  if !decoded_result_bytes>byte_limit || bytes>byte_limit- !decoded_result_bytes ||
+     !decoded_result_elements>element_limit || elements>element_limit- !decoded_result_elements then
+    raise(Util.Fatal "RPC decoded result budget exhausted");
+  ticket.result_bytes<-ticket.result_bytes+bytes;
+  ticket.result_elements<-ticket.result_elements+elements;
+  decoded_result_bytes:= !decoded_result_bytes+bytes;
+  decoded_result_elements:= !decoded_result_elements+elements
+let release_result_input ticket =
+  if ticket.result_active then begin
+    ticket.result_active<-false;
+    decoded_result_bytes:= !decoded_result_bytes-ticket.result_bytes;
+    decoded_result_elements:= !decoded_result_elements-ticket.result_elements;
+    decr decoded_result_count
+  end
+type result_retained={mutable result_previous:result_retained option;
+                       result_keepalive:unit -> unit}
+let result_retained_roots=ref None
+let with_decoded_result bound codec tag conn buffer use =
+  (* Allocate the ticket, value root, retention link and guard callbacks before
+     admission/decoding. An uncertain failed promise need not itself keep its
+     result alive, so root the explicit value owner as well as the borrower. *)
+  let ticket={result_bytes=0;result_elements=0;result_active=false}
+  and value=ref None in
+  let keepalive ()=ignore(Sys.opaque_identity !value) in
+  let entry={result_previous=None;result_keepalive=keepalive} in
+  let cell=Some entry in
+  let retain_result _=entry.result_previous<- !result_retained_roots;
+    result_retained_roots:=cell in
+  let finish ()=value:=None;release_result_input ticket in
+  let work ()=
+    reserve_result_slot ticket;
+    let reserve=reserve_result_input ticket in
+    let decode=match bound with
+      | Some bound -> snd(boundedMarshalingFunctions ~reserve bound codec)
+      | None ->
+          (* Legacy codecs do not have a declared frame-expansion ratio. Apply
+             the finite owner policy directly, not a guessed ratio that would
+             reject compact valid collections such as lists of unit values. *)
+          let max_alloc_bytes,max_elements,_=result_limits () in
+          fun conn -> if conn.version<>1 then errRPCVersion conn else
+            fun buf pos ->
+              try Umarshal.unmarshal_from_bytearray_accounted
+                ~max_alloc_bytes ~max_elements ~reserve codec buf pos
+              with Failure text | Umarshal.Error text ->
+                raise(Util.Fatal(Printf.sprintf "Fatal error during unmarshaling (%s)" text)) in
+    let result=safeUnmarshal (decode conn) tag buffer in
+    value:=Some result;
+    use result in
+  BorrowedWork.try_bind
+    (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_result work)
     (fun result->finish ();Lwt.return result)
     (fun error->finish ();Lwt.fail error)
 
@@ -1511,11 +1598,12 @@ let wait_for_reply ?maxBytes id =
      | Some pending -> ignore (find_receiver id); failPending pending error);
     raise error
 
-let registerSpecialServerCmd
+let registerSpecialServerCmdWithConsumer
     ?maxResult
     ?maxResultForArgs
     ?withScope
     ?decodeArgs
+    ?decodeResult
     (cmdName : string)
     marshalingFunctionsArgs
     marshalingFunctionsResult
@@ -1547,7 +1635,7 @@ let registerSpecialServerCmd
   in
   serverCmds := Util.StringMap.add cmdName server !serverCmds;
   (* Create a client function and return it *)
-  let client conn serverArgs =
+  let client conn serverArgs consume =
     match conn.outputQueue.failure with
     | Some e -> Lwt.fail e
     | None ->
@@ -1569,7 +1657,10 @@ let registerSpecialServerCmd
     debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
     BorrowedWork.try_bind (fun () -> dump conn request)
       (fun () -> BorrowedWork.bind (fun () -> reply) (fun packet ->
-         with_body_packet packet (fun buf->Lwt.return (unmarshalResult conn buf))))
+         with_body_packet packet (fun buf ->
+           match decodeResult with
+           | None -> consume (unmarshalResult conn buf)
+           | Some decode -> decode conn buf consume)))
       (fun e ->
          (match MsgIdMap.find_opt id !receivers with
           | None -> ()
@@ -1581,6 +1672,12 @@ let registerSpecialServerCmd
            (fun _->Lwt.fail e))
   in
   client
+
+let registerSpecialServerCmd ?maxResult ?maxResultForArgs ?withScope ?decodeArgs
+    name mArg mRet server =
+  let client = registerSpecialServerCmdWithConsumer ?maxResult ?maxResultForArgs
+    ?withScope ?decodeArgs name mArg mRet server in
+  fun connection args -> client connection args Lwt.return
 
 let registerServerCmd name mArg mRet f =
   let tag=Bytearray.of_string(name ^ "-args") in
@@ -1597,6 +1694,20 @@ let registerBoundedServerCmd ?withScope ?maxResultForArgs
     (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command
+
+let registerBoundedServerCmdWithResultScope ?withScope ?maxResultForArgs
+    name ~maxArgs ~maxResult mArg mRet server =
+  if maxArgs < 0 || maxResult < 0 then
+    invalid_arg "registerBoundedServerCmdWithResultScope";
+  let argument_tag=Bytearray.of_string(name ^ "-args")
+  and result_tag=Bytearray.of_string(name ^ "-res") in
+  let client=registerSpecialServerCmdWithConsumer ?withScope ?maxResultForArgs ~maxResult
+    ~decodeArgs:(with_decoded_args (Some maxArgs) mArg argument_tag)
+    ~decodeResult:(with_decoded_result (Some maxResult) mRet result_tag)
+    name (boundedMarshalingFunctions maxArgs mArg)
+    (boundedMarshalingFunctions maxResult mRet) server in
+  serverArgLimits:=Util.StringMap.add name maxArgs !serverArgLimits;
+  client
 
 (* RegisterHostCmd is a simpler version of registerClientServer [registerServerCmd?].
    It is used to create remote procedure calls: the only communication

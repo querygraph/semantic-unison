@@ -127,3 +127,14 @@ and19 designated negative controls/compiler passed; recorded source/compiler/
 executable hashes match. Inventoryv17 records the scope. Client-returned decoded
 values, retained stream errors, outbound buffers and whole-tree resource limits
 remain open; no final transport/production/full-goal claim is added.
+
+## Scoped client-result successor
+
+[Scoped decoded results](rpc-scoped-client-results.md) add an explicit client
+consumer and independent selected byte/element/slot accounting through actual
+consumer settlement, including explicit value roots on recognized uncertainty.
+All four semantic bounded commands now use it without a wire change. Four current
+stock/Ox Make/Dune builds+selftests and24 designated negative participants/compiler
+passed; inventoryv18 and the actual evidence preserve exact scope. Legacy
+returned values, converted reports/plans/global escapes, retained stream errors,
+outbound/baseline/whole-tree containment and final transport remain separate.

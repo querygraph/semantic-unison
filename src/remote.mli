@@ -160,6 +160,21 @@ val registerBoundedServerCmd :
     All body registrations also use separate aggregate request/reply raw-input
     lanes. These follow actual processing/queued output or result decoding and
     preserve recognized ownership uncertainty; not decoded-object/RSS limits. *)
+val registerBoundedServerCmdWithResultScope :
+  ?withScope:(connection -> 'a -> (unit -> unit Lwt.t) -> unit Lwt.t) ->
+  ?maxResultForArgs:('a -> int) ->
+  string -> maxArgs:int -> maxResult:int -> 'a Umarshal.t -> 'b Umarshal.t ->
+  (connection -> 'a -> 'b Lwt.t) ->
+  connection -> 'a -> ('b -> 'c Lwt.t) -> 'c Lwt.t
+(** Like bounded registration, but the client supplies its actual asynchronous
+    result consumer. Independent endpoint-local rpcdecodedresultbudget/elements/
+    slots admit selected builtin decode costs before allocations and retain the
+    value through consumer settlement. Known failure releases partial charges;
+    recognized ownership uncertainty retains charges and explicit value roots.
+    The consumer must not let the decoded value escape into its return value,
+    a global, or independent work without separately owned lifetime accounting.
+    Copied/converted objects need their own budget; this is not heap/RSS or
+    automatic lifetime tracking. No wire change; legacy result APIs unchanged. *)
 val intSize : int
 val encodeInt : int -> Bytearray.t * int * int
 val decodeInt : Bytearray.t -> int -> int

@@ -5082,3 +5082,64 @@ only, no client result/error/outbound/fullheap/RSS guarantee. All earlier failed
 fixtures and incomplete Ox003 are preserved; no grants replayed.
 Next: explicit decoded client-result lifetime API/caller migration and stream
 error retention. Frozen9d9dccc0 IO requests remain separate; no final SOL claim.
+
+## 2026-10-18 scoped decoded client-result successor — qualification active
+
+Uncommitted source adds registerBoundedServerCmdWithResultScope and independent
+rpcdecodedresultbudget/elements/slots, explicit value roots through actual client
+consumer settlement, known partial-debit cleanup and recognized-uncertainty
+retention. Four semantic bounded callers migrated without wire change. Converted
+reports/plans and legacy result escapes remain separately owned/open; no complete
+heap/RSS or full SOL claim. Design: doc/rpc-scoped-client-results.md.
+
+Actual focused controls6659/bf199a/0 (positive stock) and28657/900e33/0 (stock+Ox,
+five designated negatives/compiler) closed/reaped/groupsabsent/CPU4closed. Small
+preference-help wording clarified afterward, so final source regression union
+still required; no earlier hashes silently treated as unchanged.
+
+Full stock/Ox Make+Dune/selftest controller ACTUALLY STARTED session37362, initial
+chunk11b919, max2compiler jobs inside Unison00..07; do not duplicate it. Final
+build terminal, complete grouped regression, evidence/commit remain pending.
+No EXIO/SDK/Photo payload owner. Three frozen candidate admission files absent
+at pre-build check; exact old execution sources/requests remain untouched.
+
+Scoped-result full builds ACTUALLY CLOSED: controller37362/e35c53/exit0/no
+session, all four stock/Ox Make+Dune+selftests passed, each CPU8closed. Final
+current-source regression controller ACTUALLY STARTED session57811/initialf3d212:
+six finite groups/compiler (framing/body/decoded/stream/pending/result), expected
+24 designated negatives/compiler. Source/executable rehash+evidence stillpending.
+Do not repeat that live controller. No EXIO/SDK/Photo payload owner.
+
+Regression controller57811/384644/exit1/no session CLOSED: stockframing passed,
+stockbody failed at its old registered-classifier mutant because the newly
+inserted result uncertainty fixture ran before that mutant's intended body
+witness. Both containedgroups reaped/tokensclosed; no resourceunknown. Preserved
+003 evidence. Only test composition reordered body-retained before result-input;
+production unchanged. Fresh final controller71721/initial8500b0 ACTUALLY LIVE,
+same six groups/compiler in namespaceunison-result-scope-*-*-20261018-004.
+Do not poll/repeat dead57811. Full four production builds remain valid; their
+recorded test-runner hash differs by this explicit fixture-only reordering, so
+no all-input-unchanged claim. Final source/production/binary checks pending.
+
+## 2026-10-18 scoped client-result API and semantic migrations qualified
+
+Actual final controller71721/b151aa/exit0/no session:12groups reaped0/othersabsent/
+CPU4closed;24 designated negatives/compiler and all positive fixtures passed.
+Fullbuild37362/e35c53/0 actualclosed: four stock/Ox Make+Dune+selftests, all580
+recorded inputs/compiler/binary hashes verified current; eachCPU8closed.
+Correction to earlier test-delta note: Python fixture runner is NOT in those580
+recorded build inputs, so all recorded inputs DO match; final control evidence
+separately pins current runner+MLfixtures. No build repetition needed.
+
+Evidence tests/qualification/rpc-scoped-client-results-actual-20261018.json
+86775B SHAf7d149929bef0b36d4c11cf523c7396009e457751c67fbaa4c49e77fcd6b3cde.
+Additive registerBoundedServerCmdWithResultScope independent resultlane defaults
+256MiB/1048576elements/256owners (max65536); explicit roots through actualconsumer
+settlement/knownpartialcleanup/recognizeduncertaintyretention. Four semantic
+bounded callers migrated withoutwirechange. Legacy APIs unchanged; converted
+reports/plans/globalescapes remain separate, no heap/RSS/SDK/transport/fullgoal
+claim. Inventoryv18 and scoped-result doc current. Earlier focused evidence and
+failed fixture-order003 preserved. No Unison owner/CPU/EXIO resources held.
+Next substantive source gaps: retained streamError values, legacy clientresult/
+converted-object lifetime, outbound/baseline/containment and final SOL acceptance.
+Frozen9d9dccc0 exact IOrequests remain separate; no replay or automatic grant.
