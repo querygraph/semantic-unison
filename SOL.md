@@ -4966,3 +4966,21 @@ regressions passed; evidence is
 Next is explicit RPC producer ownership through actual queued consumption:
 queue logical-byte admission cannot retroactively own pre-serialization work.
 Do not count the additive hook alone as that integration or full SOL completion.
+
+
+### Standard RPC producer ownership qualified
+
+Standard builtin request/reply/exception and stream builders now admit producer
+owners before encoding and retain prepared partial-buffer roots and cumulative
+selected allocation charges through actual output consumption. The synchronous
+encoder context restores before asynchronous waits, including nested and failed
+builders. Producer settlement is independent of later unrelated queue draining;
+known queued cancellation releases once and recognized uncertainty retains.
+No resources are retained for a refused unacquired slot merely because an
+ownership classifier throws. Endpoint-local normal/idle and urgent budgets are
+separate. Custom/raw/string producers and caller/conversion/backing/connection
+baseline allocations remain separately scoped; no allheap/RSS claim is made.
+Actual evidence: `tests/qualification/rpc-producer-ownership-actual-20261018.json`
+(four stock/Ox Make+Dune+selftests,53 negatives/compiler,584 input hashes matched).
+This is an implementation milestone; actual compatibility/transfer, remaining
+platform/resource/performance requirements and full goal acceptance remain open.

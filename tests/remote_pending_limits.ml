@@ -13,7 +13,7 @@ let () =
   let id= !(R.ids)and writes=Queue.length c.R.outputQueue.R.writes in
   require(R.MsgIdMap.cardinal !(R.receivers)=2 && !marshals>0)"pending fixture not full";
   let before_marshals= !marshals in
-  let refused=try ignore(command c());false with
+  let refused=try ignore(Lwt.poll(command c()));false with
    Util.Transient why->require(why="RPC pending reply budget exhausted")"wrong pending refusal";true in
   require refused "DESIGNATED pending reply cap ignored";
   require(!marshals=before_marshals)"DESIGNATED full registry marshaled new request";

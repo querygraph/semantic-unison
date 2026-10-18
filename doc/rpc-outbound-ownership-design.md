@@ -1,11 +1,11 @@
-# Next source work: outbound RPC ownership
+# Outbound RPC ownership and remaining work
 
 Queue ownership is qualified at4c4f305d in this source successor. The separate
 frozen IO candidate remains execution source72560ca4, request metadata18c9b822
 in `unison-outbound-accounting-20261018`; do not repin it from this worktree.
 The initial audit and milestones below retain their historical scope.
-Producer allocation hooks are now under qualification, not yet wired to RPC
-producer owners or admitted transport.
+The additive encoder hook and standard builtin RPC producer owners are now
+qualified separately; admitted external transport remains a distinct gate.
 
 The existing three dump paths accept a list of `(Bytearray, offset, length)`
 slices and enqueue a closure over that list. Queue count and selected logical
@@ -76,7 +76,7 @@ primitive/string/bytearray temporary buffers, so a callback only after measuring
 cannot establish that boundary. See rpc-output-queue-ownership.md.
 
 
-## Producer allocation hook under qualification
+## Producer allocation hook qualified at c48f92eb
 
 An internal output sink now distinguishes measuring wire length from writing
 bytes. Builtin char/int32/int64/string/bytearray sizing avoids payload buffers;
@@ -96,8 +96,8 @@ RSS, depth, collection-count or arbitrary conversion-allocation containment.
 Directed controls currently pass stock and Ox against the real mli, including
 wire parity, malformed slices/size drift, no builtin sizing buffers, reservation
 ordering, local/aggregate refusal and partial-root failures. Designated omission
-participants must fail before unreserved allocation. Full builds are running;
-RPC producer integration still has to supply the owner and actual lifetime.
+participants must fail before unreserved allocation. Four stock/Ox builds and directed regressions passed for that additive hook.
+The producer integration described next now supplies standard owner lifetimes.
 
 That integration must reserve an owner slot before serialization, retain each
 published result including partial failure, and carry the same owner into queued
@@ -110,3 +110,18 @@ roots and cumulative charges; normal output settlement releases once, separately
 from the queue's selected logical bytes and part count. Legacy/custom producers
 cannot be silently claimed covered. Existing result consumer scopes, server
 reply continuations, cancellation and urgent output must retain their semantics.
+
+
+## Standard producer integration qualified
+
+[Producer ownership](rpc-producer-ownership.md) now wraps ordinary builtin
+request/reply/exception and stream builders. Owners are admitted before encoding;
+partial result roots are prepared before codec allocation and published before
+pass two. Contexts restore before asynchronous work. Known queued failure and
+actual own consumption release once, independently of unrelated later draining;
+recognized uncertainty retains exact selected roots and charges. A throwing
+classifier cannot turn unacquired-slot refusal into uncharged retained work.
+Four stock/Ox Make+Dune+selftests and53 negatives/compiler pass; all584 recorded
+inputs/compiler/binary hashes match (inventoryv23). Raw/string/custom producers,
+caller/conversion/backing/baseline families and legacy result lifetimes remain
+separate. No allheap/RSS/SDK/Photo/actualtransport/full SOL claim follows.

@@ -19,7 +19,7 @@ def main():
     parser.add_argument('build', type=Path)
     parser.add_argument('--report', type=Path)
     parser.add_argument('--compiler', default=os.environ.get('OCAMLOPT', 'ocamlopt'))
-    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result','errors','outbound','queue'), default='all')
+    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result','errors','outbound','queue','encoder'), default='all')
     args = parser.parse_args()
     repository = Path(__file__).resolve().parent.parent
     build = args.build.resolve() / "src"
@@ -54,7 +54,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_output_slices.ml').read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_stream_errors.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text()+'\n'+(repository/'tests/remote_output_owners.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_output_slices.ml').read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_stream_errors.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text()+'\n'+(repository/'tests/remote_output_owners.ml').read_text()+'\n'+(repository/'tests/remote_encoder_owners.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -65,6 +65,7 @@ def main():
                                       'tests/remote_bounds.ml': sha(repository/'tests/remote_bounds.ml'),
                                       'tests/remote_output_slices.ml': sha(repository/'tests/remote_output_slices.ml'),
                                       'tests/remote_output_owners.ml': sha(repository/'tests/remote_output_owners.ml'),
+                                      'tests/remote_encoder_owners.ml': sha(repository/'tests/remote_encoder_owners.ml'),
                                       'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/remote_startup_bounds.ml': sha(repository/'tests/remote_startup_bounds.ml'),
                                       'tests/remote_packet_bounds.ml': sha(repository/'tests/remote_packet_bounds.ml'),
@@ -218,7 +219,7 @@ def main():
                     ('legacy-decoded-bypass','registerSpecialServerCmd ~decodeArgs:(with_decoded_args None mArg tag)','registerSpecialServerCmd','DESIGNATED legacy decoded owner missing'),
                     ('decoded-bypass','| Some decode -> decode conn buf use','| Some _ -> use (unmarshalArgs conn buf)','DESIGNATED decoded arguments released before output'),
                     ('decoded-early-release','    use args in','    let borrowed=use args in release_decoded_input ticket;borrowed in','DESIGNATED decoded arguments released before output'),
-                    ('decoded-uncertainty','~is_uncertain:body_unresolved ~on_retained:retain work','~is_uncertain:(fun _->false) ~on_retained:retain work','DESIGNATED decoded uncertainty escaped its owner')]:
+                    ('decoded-uncertainty','  BorrowedWork.try_bind\n    (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain work)','  BorrowedWork.try_bind\n    (fun()->RetainedOwnership.guard ~is_uncertain:(fun _->false) ~on_retained:retain work)','DESIGNATED decoded uncertainty escaped its owner')]:
                     private=work/label;private.mkdir(mode=0o700)
                     assert source.count(needle)==1
                     (private/'remoteForTest.ml').write_text(controlled(source.replace(needle,replacement,1)))
@@ -325,6 +326,28 @@ def main():
                     c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
                     assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
                     record['output_slice_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
+            if args.negative_family in ('all','encoder'):
+                mutations=[
+                    ('unaccounted', '~reserve:(reserve_encoder_bytes owner)', '~reserve:(fun ~bytes:_ -> ())', 'DESIGNATED encoder allocation uncharged'),
+                    ('inactive-classification', 'owner.enc_active && body_unresolved error', 'body_unresolved error', 'DESIGNATED inactive encoder refusal became retained'),
+                    ('context', 'encoder_context:=previous', 'ignore previous', 'RPC inactive encoder buffer'),
+                    ('actual-consumer', 'consume parts settle)', 'consume parts (fun work->work()))', 'DESIGNATED producer retained after own consumer'),
+                    ('publication', '~publish:(fun result->node.enc_buffer<-result)', '~publish:(fun _->())', 'DESIGNATED uncertain encoder lost published root')]
+                record['encoder_owner_negatives']={}
+                for label,needle,replacement,witness in mutations:
+                    assert needle in source
+                    private=work/('encoder-'+label);private.mkdir(mode=0o700)
+                    bad=source.replace(needle,replacement)
+                    (private/'remoteForTest.ml').write_text(controlled(bad))
+                    (private/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+                    private_flags=['-I',str(private),*flags]
+                    for argv in [[compiler,*private_flags,'-c','remoteForTest.ml'],
+                                 [compiler,*private_flags,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','negative']]:
+                        c=subprocess.run(argv,cwd=private,capture_output=True,text=True,timeout=30)
+                        record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+                    c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
+                    assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
+                    record['encoder_owner_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
             if args.negative_family in ('all','queue'):
                 record['output_owner_negatives']={}
                 for label,needle,replacement,witness in [

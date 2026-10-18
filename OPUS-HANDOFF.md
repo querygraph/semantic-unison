@@ -5564,3 +5564,110 @@ or prefer explicit envelope; preserve request/reply/stream/urgent cancellation
 and queued actual-consumer lifetime. Add directed lifetime tests, then qualify.
 Frozen V4 candidate source72560ca4/metadata18c9b822 unchanged; all3 admissionpaths
 freshly absent842688. No IO dispatch/Rootgrant inferred; old V3/V2 deferred.
+
+
+Latest source successor c48f92eb in /Users/alexy/src/unison-output-queue-20261018
+adds qualified measuring/accounted builtin encoder hooks (NOT RPC producer owner
+integration). Four stock/Ox Make+Dune+selftests plus directed/accounting/output
+regressions closed; actual build74532/b602f2/0, regression99178/c969b8/0, final
+encoder53369/e7e1b3/0. Evidence0eca648159038ad66898b98b8f53cec46611d320ebf94bf696c13b2868b55b81.
+Source-only Photo notice queued01a1507c-83e7-76f0-a877-269e2fb3fc1e/c0302f0.
+Frozen V4source72560ca4/metadata18c9b822 unchanged; last3admissions absent.
+Next actual work is explicit RPC producer partial-buffer/charge owner through
+actual queue consumption, then whole-goal remaining acceptance. No live jobs or
+IO/CPU holds. An erroneous push to origin was rejected361691/128 (403), no
+upstream change; actual fork remote is querygraph/unison. Use `git push fork`,
+NEVER origin, for these fork-only branches.
+
+## 2026-10-18 RPC producer integration source + initial controls
+
+Previous turn was progress (c48f92eb qualified additive encoder hook). New source
+in this worktree now wraps standard command request/reply/exception and stream
+builders in with_produced_output. Separate normal/idle512MiB/256slots/65536roots,
+urgent65536bytes/256slots/2048roots; typed original uncertainty/classifier carrier
+prepared before slot admission; current encoder context restored synchronously,
+never left installed over server async work. marshalV1 prepares root/link before
+accounted encoder call; publish is nonallocating store. Charges/root clear at
+actual own consumer, not unrelated later drain; known queued refusal/drop clears
+once, unknown retains. Client pending reply registration after successful build
+retained, known failure audits actual registered waiter only. Other raw/string
+send/custom/caller/tag/ID/connection/backing/heap/RSS remain outside scope.
+See doc/rpc-producer-ownership.md for exact policy and integration boundary.
+
+Initial stock001 controller43412/821d02/1 preserved: positive and unaccounted
+participant passed; omitted-context mutant hit earlier inactive-owner guard
+rather than expected later assertion. Test witness corrected to actual guard,
+production unchanged. Added actual own-consumer/later-drain control + omission.
+Focused002 actual controller62483/5049e9/0/no session; both stock/Ox positives and
+4omissions PASS, children reaped0/groupsabsent/CPU4closed. Synthetic typed unknown
+fixtures acquire no actual Directory FD; selected roots persist to processexit.
+
+CURRENT fullbuild controller9872 initial329149 ACTUALLY LIVE (225924), stock
+Make+selftests passed/closed; remaining stockDune/OxMake/OxDune in sequence under
+Unison8/max2compilerjobs. Do not duplicate, collect actualterminal via handle.
+Source frozen after launch; after fullbuild run all10old/new negative families
+per compiler against current snapshots, each separateCPU4group <=60s. Full source
+qualification NOT yet claimed. Existing frozenV4src72560/metadata18c9b822 unchanged.
+Fresh3grantpaths allabsent1e16ee; status request queued01a15082-f049/34ee980.
+Controller checks admissions before each optionalbuild; no EXIO/SDK/Photo/native
+resource held. Goal fullscope active. Forkpush c48f92eb actual14000/2d806f/0.
+
+
+RPC producer fullbuild controller9872/4e7e5a/0/no session ACTUALLY CLOSED:
+stock/Ox Make+Dune+selftests allPASS, 584input/compiler/binary hashes matched
+013cae before later test-only correction. Production sources unchanged.
+Regression003 controller73404/c9e9f1/1: stockframing/body passed, decoded fixture
+needle matched both newproducer and olddecoded guards. Narrowed decoder-only
+mutation context, no productionedit. Regression004 controller98802/b0a7fb/1:
+stockframing/body/decoded/stream passed; pending-preflight mutant nowreturns
+failedLwt instead ofsync raising, fixture onlycaughtsync so earlier cap assertion
+fired. Fixed tests/remote_pending_limits.ml to poll returnedpromise aswell.
+This one NONPRODUCTION fixture nowdiffers from recorded584 buildinputs; do not
+claimall584current. Allproduction/compiler/binary inputs remainexact; final
+controls compilecurrent fixture separately. No original reports overwritten.
+
+CURRENT regression controller79448 initial5a0489 ACTUALLY LIVE (4e55bb), stock
+remaining6families allpassed; Oxframing/body/decoded/stream/pending/result passed,
+errors/outbound/queue/encoder pending. Namespaces
+/private/tmp/unison-rpc-encoder-{stock,ox}-{family}-20261018-005, exceptstockfirst4
+reused from004 unchangedproduction qualifiedcounterexamples. EachCPU4groupknown
+closed before next; no EXIO or Photo activity. CollectACTUALterminal; no restart.
+After success evidence mustexplicitlypin both testvariants and the single
+nonproduction584input discrepancy, not infer whole-treebyteidentity. All3RootV4
+admissions stillabsent df28cc. No fullproducerqualificationclaim untilterminal.
+
+
+## 2026-10-18 producer inactive-classifier correction; FINAL CONTROLLER LIVE
+
+Initial complete RPC union actual79448/3fa481/0/no session passed all20group
+union (stockfirst4from004, rest005) against pre-correction production. Current
+production was then audited for failed pre-admission ownership. Original tiny
+counterexample actual24221/2e9399/0 wrapper (child1 expected) proves a throwing
+classifier changed no-slot-acquired refusal into uncharged retained pending.
+Namespace /private/tmp/unison-rpc-encoder-inactive-original-20261018-001; allCPU4/
+groupclosed, no real uncertainFD. Preserve this original failure/evidence.
+
+Source corrected producer Retained guard to classify only while enc_active.
+Before admission/after own consumption there is no producer resource to retain.
+New finalfixture +5th inactive-classification omission participant actual focused
+19779/55c6de/0/no session stock+Ox006 PASS; no RootIO/SDK/Photo work. Prior broad
+source qualified results are HISTORICAL pre-this-production-fix, not current.
+
+CURRENT ACTUAL fullfinal controller89158 initial4e2d62 is LIVE. Never duplicate.
+Sequence: four stock/Ox Make+Dune+selftests underUnison8/max2compilerjobs, build
+namespaces /private/tmp/unison-rpc-encoder-{stock,ox}-{check,dune-check}-20261018-002;
+then10families/compiler underCPU4 (framing/body/decoded/stream/pending/result/
+errors/outbound/queue/encoder), namespaces
+/private/tmp/unison-rpc-encoder-{stock,ox}-{family}-20261018-007.
+Expect53negative/compiler (48old+5producer); verify actualunion count/evidence.
+Controller freezes remote.ml+runner+encoder/pendingfixture hashes, checks3V4
+admissionpaths beforeeachjob, verifies all584buildinputs/compiler/binary hashes
+atend. Current pendingfixture is included in NEW snapshots, so earlier single
+nonproductioninput variance should not recur. Allsource frozen after launch.
+Pollactual89158 until terminal; capture exactchunk/exit/no-session. If failure,
+inspect actualrawcause and fix/newnamespace, never replayRootpayload grants.
+Only after finalpass write qualification evidence/inventoryv23/readiness+SOL,
+commit and push FORK (querygraph, notorigin), send qualifiedsource notice toPhoto.
+Do not mergePR13 or alter frozenV4/source72560+metadata18c9b822. Three exactV4
+grantpaths absent7ce4d0. No EXIO/SDK/Photo/nativeUI hold; actual CPU build4/8
+held only through current sourcejob settlement. Fullgoalactive/incomplete.

@@ -1,7 +1,14 @@
 # SOL resource consolidation and remaining work
 
-Current local candidate: `integration/sol-resource-consolidated-20261018`,
-combining consolidated review5a3d4077 and resource implementation26fd666a.
+Working source is now `implementation/output-queue-ownership` in
+`/Users/alexy/src/unison-output-queue-20261018`: qualified commitc48f92eb plus
+qualified producer integration (actual controller89158/150917/0). The separate
+frozen V4 IO candidate remains source72560ca4/metadata18c9b822; its requests are
+not silently repinned from this mutable worktree.
+
+The consolidated baseline below is historical: branch
+`integration/sol-resource-consolidated-20261018`, combining review5a3d4077 and
+resource implementation26fd666a. Later qualified successors are recorded below.
 This is a successor evidence map. Draft fork PR13 and its branch are unchanged;
 no PR merge, deployment, SDK/Photo operation or new runtime admission is implied.
 The full goal remains active. Unknown MakerNote meanings are not a release gate;
@@ -192,3 +199,30 @@ RPC producers do not yet use this hook. Their explicit ownership integration,
 custom/conversion allocations, other lifetimes, whole-tree/resource/platform/
 transport/performance and complete SOL acceptance remain open. No RSS/SDK/Photo
 or broader production claim; frozen V4 transport candidate remains unchanged.
+
+
+## Builtin RPC producer integration
+
+[Standard producer owners](rpc-producer-ownership.md) now retain selected
+encoder charges and partial result buffers from before allocation through the
+actual queued consumer. Normal/idle and urgent lanes have independent slot,
+buffer-root and cumulative-byte budgets. Synchronous contexts restore on return
+and failure; known cancellation releases once, uncertainty retains. The final
+inactive-owner counterexample also proves that pre-admission refusal cannot
+become uncharged retained work through a throwing classifier.
+
+Actual89158/150917/0/no session passed four stock/Ox Make+Dune+selftests and all20
+regression groups (53 designated negatives/compiler). All584 input hashes and
+actual compiler/binary hashes matched. Every child/group/CPU4or8 set closed.
+See inventoryv23 and `tests/qualification/rpc-producer-ownership-actual-20261018.json`.
+The old context-pattern and failed-promise fixture failures and the original
+inactive-owner counterexample are preserved; no failed sample is relabeled.
+
+This closes the stated builtin producer boundary, not arbitrary custom/caller/
+conversion/connection/backing allocations, legacy converted result lifetimes,
+whole-tree FD/RSS, platform, actual transport or performance acceptance. Next
+priority is the source-pinned compatibility/property qualification and current
+acceptance map; further resource findings must retain their concrete scope.
+Frozen V4 requests are unchanged and unadmitted at last read, not silently
+repinned to this source. Unknown MakerNotes remain exact opaque data rather
+than a requirement for exhaustive interpretation before usable delivery.

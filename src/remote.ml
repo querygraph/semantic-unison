@@ -932,8 +932,110 @@ let registerTag string =
     registeredSet := Util.StringSet.add string !registeredSet;
   Bytearray.of_string string
 
+(* Producer allocation ownership is separate from queued logical slices.
+   Only synchronous builtin serialization runs under encoder_context. *)
+let encoder_pref name value summary =
+  Prefs.makeEndpointLocal(Prefs.createInt name value ~local:true
+    ~category:(`Advanced `Remote) summary
+    "Selected builtin encoder bytes/buffers/owners; not all heap or RSS.")
+let encoderMiB=encoder_pref "rpcencodebudget" 512 "encoder allocation budget (MiB)"
+let encoderSlots=encoder_pref "rpcencodeslots" 256 "encoder owner count"
+let encoderBuffers=encoder_pref "rpcencodebuffers" 65536 "encoder result buffer count"
+let urgentEncoderBytes=encoder_pref "rpcurgentencodebytes" 65536 "urgent encoder allocation bytes"
+let urgentEncoderSlots=encoder_pref "rpcurgentencodeslots" 256 "urgent encoder owner count"
+let urgentEncoderBuffers=encoder_pref "rpcurgentencodebuffers" 2048 "urgent encoder result buffer count"
+let encoderLane={out_budget=encoderMiB;out_scale=1048576;out_slots=encoderSlots;
+  out_part_limit=encoderBuffers;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let urgentEncoderLane={out_budget=urgentEncoderBytes;out_scale=1;out_slots=urgentEncoderSlots;
+  out_part_limit=urgentEncoderBuffers;out_bytes=ref 0;out_count=ref 0;out_parts=ref 0}
+let encoder_empty=Bytearray.create 0
+ type encoder_buffer={mutable enc_buffer:Bytearray.t;
+                      mutable enc_next:encoder_buffer option}
+type encoder_owner={enc_lane:output_lane;mutable enc_active:bool;
+  mutable enc_size:int;mutable enc_buffers:int;mutable enc_roots:encoder_buffer option;
+  mutable enc_linked:bool;mutable enc_previous:encoder_owner option}
+let encoder_context : encoder_owner option ref=ref None
+let retained_encoder_owners : encoder_owner option ref=ref None
+let encoder_refuse ()=raise(Util.Transient "RPC encoder budget exhausted")
+let reserve_encoder_owner owner =
+  if owner.enc_active then invalid_arg "RPC encoder owner already active";
+  let _,slots,_=output_limits owner.enc_lane in
+  if !(owner.enc_lane.out_count)>=slots then encoder_refuse();
+  owner.enc_active<-true;incr owner.enc_lane.out_count
+let reserve_encoder_bytes owner ~bytes =
+  if not owner.enc_active || bytes<0 then invalid_arg "RPC inactive encoder reservation";
+  let lane=owner.enc_lane in
+  let budget,_,_=output_limits lane in
+  if !(lane.out_bytes)>budget || bytes>budget- !(lane.out_bytes) then encoder_refuse();
+  lane.out_bytes:= !(lane.out_bytes)+bytes;owner.enc_size<-owner.enc_size+bytes
+let prepare_encoder_buffer owner =
+  (* Prepare the root and its link before admission; publishing the actual
+     result is then a nonallocating store before codec pass two. *)
+  let node={enc_buffer=encoder_empty;enc_next=None}in
+  let cell=Some node in
+  if not owner.enc_active then invalid_arg "RPC inactive encoder buffer";
+  let _,_,buffers=output_limits owner.enc_lane in
+  if !(owner.enc_lane.out_parts)>=buffers then encoder_refuse();
+  incr owner.enc_lane.out_parts;owner.enc_buffers<-owner.enc_buffers+1;
+  node.enc_next<-owner.enc_roots;owner.enc_roots<-cell;
+  node
+let release_encoder_owner owner =
+  let active=owner.enc_active in owner.enc_active<-false;
+  let rec clear=function None->()|Some node->
+    let next=node.enc_next in node.enc_buffer<-encoder_empty;node.enc_next<-None;clear next in
+  clear owner.enc_roots;owner.enc_roots<-None;
+  if active then begin
+    let lane=owner.enc_lane in
+    lane.out_bytes:= !(lane.out_bytes)-owner.enc_size;
+    lane.out_parts:= !(lane.out_parts)-owner.enc_buffers;decr lane.out_count
+  end;
+  owner.enc_size<-0;owner.enc_buffers<-0
+let with_encoder_context cell build =
+  let previous= !encoder_context in encoder_context:=cell;
+  match build()with
+  | value->encoder_context:=previous;value
+  | exception error->encoder_context:=previous;raise error
+let with_produced_output kind build consume =
+  let lane=match kind with Normal|Idle->encoderLane|Urgent->urgentEncoderLane
+    |Last->invalid_arg "RPC encoder output kind" in
+  let owner={enc_lane=lane;enc_active=false;enc_size=0;enc_buffers=0;
+    enc_roots=None;enc_linked=false;enc_previous=None}in
+  let cell=Some owner in
+  let retain _=if owner.enc_active && not owner.enc_linked then begin
+    owner.enc_linked<-true;owner.enc_previous<- !retained_encoder_owners;
+    retained_encoder_owners:=cell
+  end in
+  let finish()=release_encoder_owner owner in
+  let settle work=BorrowedWork.try_bind
+    (* Before admission, or after this actual consumer has settled, there is
+       no producer resource for a classifier failure to retain. *)
+    (fun()->RetainedOwnership.guard
+      ~is_uncertain:(fun error->owner.enc_active && body_unresolved error)
+      ~on_retained:retain work)
+    (fun()->finish();Lwt.return())(fun error->finish();Lwt.fail error)in
+  settle(fun()->
+    reserve_encoder_owner owner;
+    let parts=with_encoder_context cell build in
+    consume parts settle)
+let send_encoded conn kind build =
+  with_produced_output kind build(fun parts settle->
+    perform_owned_output conn.outputQueue kind parts(fun slices->
+      (* Release at this actual consumer, not after an unrelated queue drain.
+         The outer scope handles known queued cancellation before entry. *)
+      settle(fun()->match kind with
+        |Urgent->BorrowedWork.bind(fun()->fillBuffer conn.outputBuffer slices)
+                   (fun()->flushBuffer conn.outputBuffer)
+        |Normal|Idle->fillBuffer conn.outputBuffer slices
+        |Last->assert false)))
+
 let marshalV1 m data rem =
-  let s = Umarshal.marshal_to_bytearray m data in
+  let s = match !encoder_context with
+    |None->Umarshal.marshal_to_bytearray m data
+    |Some owner->
+        let node=prepare_encoder_buffer owner in
+        Umarshal.marshal_to_bytearray_accounted ~max_alloc_bytes:max_int
+          ~reserve:(reserve_encoder_bytes owner)
+          ~publish:(fun result->node.enc_buffer<-result) m data in
   let l = Bytearray.length s in
   ((s, 0, l) :: rem, l)
 
@@ -1496,11 +1598,11 @@ let processRequest conn id cmdName buf =
        Util.Transient s ->
          debugE (fun () ->
            Util.msg "Sending transient exception (id: %d)\n" (decodeInt id 0));
-         dump conn ((id, 0, intSize) :: marshalHeader conn (TransientExn s) [])
+         send_encoded conn Normal(fun()->(id, 0, intSize) :: marshalHeader conn (TransientExn s) [])
      | Util.Fatal s ->
          debugE (fun () ->
            Util.msg "Sending fatal exception (id: %d)\n" (decodeInt id 0));
-         dump conn ((id, 0, intSize) :: marshalHeader conn (FatalExn s) [])
+         send_encoded conn Normal(fun()->(id, 0, intSize) :: marshalHeader conn (FatalExn s) [])
      | e ->
          Lwt.fail e
   in
@@ -1512,9 +1614,9 @@ let processRequest conn id cmdName buf =
     BorrowedWork.try_bind run
       (fun marshal ->
          debugE (fun () -> Util.msg "Sending result (id: %d)\n" (decodeInt id 0));
-         let reply = (id, 0, intSize) :: marshalHeader conn NormalResult (marshal []) in
-         reply_started := true;
-         dump conn reply)
+         send_encoded conn Normal(fun()->
+           let reply=(id,0,intSize)::marshalHeader conn NormalResult(marshal[])in
+           reply_started:=true;reply))
       (fun error -> if !reply_started then Lwt.fail error else sendException error)
   in
   BorrowedWork.catch (fun () -> cmd conn buf dispatch)
@@ -1837,27 +1939,30 @@ let registerSpecialServerCmdWithConsumer
     in
     let id = newMsgId () in (* Message ID *)
     assert (id >= 0); (* tracking down an assert failure in receivePacket... *)
-    let request =
-      encodeInt id ::
-      marshalHeader conn (Request cmdName) (marshalArgs conn serverArgs [])
-    in
-    let reply = wait_for_reply ?maxBytes id in
-    debugE (fun () -> Util.msg "Sending request (id: %d)\n" id);
-    BorrowedWork.try_bind (fun () -> dump conn request)
-      (fun () -> BorrowedWork.bind (fun () -> reply) (fun packet ->
+    let reply=ref(Lwt.wait())and registered=ref false in
+    let sending ()=send_encoded conn Normal(fun()->
+      let request=encodeInt id::
+        marshalHeader conn(Request cmdName)(marshalArgs conn serverArgs[])in
+      let pending=wait_for_reply ?maxBytes id in
+      reply:=pending;registered:=true;
+      debugE(fun()->Util.msg "Sending request (id: %d)\n" id);
+      request)in
+    BorrowedWork.try_bind sending
+      (fun () -> BorrowedWork.bind (fun () -> !reply) (fun packet ->
          with_body_packet packet (fun buf ->
            match decodeResult with
            | None -> consume (unmarshalResult conn buf)
            | Some decode -> decode conn buf consume)))
       (fun e ->
+         if not !registered then Lwt.fail e else begin
          (match MsgIdMap.find_opt id !receivers with
           | None -> ()
           | Some pending -> ignore (find_receiver id); failPending pending e);
          (* A reply may already have arrived while output was pending. Await
             the actual waiter/yield, then abandon that unconsumed packet. *)
-         BorrowedWork.try_bind (fun()->reply)
+         BorrowedWork.try_bind (fun()-> !reply)
            (fun packet->release_body_packet packet;Lwt.fail e)
-           (fun _->Lwt.fail e))
+           (fun _->Lwt.fail e) end)
   in
   client
 
@@ -2009,11 +2114,8 @@ let registerStreamCmd ?maxPayload
   let client conn id serverArgs =
     debugE (fun () -> Util.msg "Sending stream chunk (id: %d)\n" id);
     if !streamAbortedSrc = id then raise (Util.Transient "Streaming aborted");
-    let request =
-      encodeInt id ::
-      marshalHeader conn (Stream cmdName) (marshalArgs conn serverArgs [])
-    in
-    dumpIdle conn request
+    send_encoded conn Idle(fun()->encodeInt id::
+      marshalHeader conn(Stream cmdName)(marshalArgs conn serverArgs[]))
   in
   fun conn sender ->
     if not (Prefs.read streamingActivated) then
