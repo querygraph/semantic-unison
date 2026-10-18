@@ -60,7 +60,7 @@ type shared = {
   stopping : bool Atomic.t; running : int Atomic.t; peak : int Atomic.t;
 }
 type t = {
-  shared : shared; domains : unit Domain.t list; budget : H.t;
+  shared : shared; domains : DomainOwner.slot array; budget : H.t;
   io : IoAdmission.t option;
   max_pending : int; reader : Lwt_unix.file_descr; notification : NotificationPipe.t;
   replies : (int, response Lwt.t) Hashtbl.t;
@@ -309,7 +309,8 @@ let create_internal ~io ~workers ~max_pending ~budget =
   if workers <= 0 || max_pending <= 0 || max_pending > 65536 then
     invalid_arg "SemanticWorkers.create: positive workers and1..65536 pending jobs required";
   let notification = NotificationPipe.prepare () in
-  let shared_owner = ref None and domains = ref [] in
+  let shared_owner = ref None in
+  let domains = Array.init workers (fun _ -> DomainOwner.prepare ()) in
   (* This closure is installed before pipe/domain acquisition. It roots all
      published creation handles even if the constructor never returns a pool. *)
   NotificationPipe.keep_owner notification (fun () ->
@@ -321,7 +322,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
        a domain. Keep the complete published handle list rather than clearing it. *)
     (try
        (match !shared_owner with Some shared -> stop shared | None -> ());
-       List.iter Domain.join !domains
+       DomainOwner.join_all domains
      with error -> NotificationPipe.retain_unsettled notification error);
     NotificationPipe.close_all notification in
   let read_fd, write_fd = Unix.pipe ~cloexec:true () in
@@ -334,23 +335,15 @@ let create_internal ~io ~workers ~max_pending ~budget =
       completions = Mailbox.create ~capacity:max_pending; notify = write_fd;
       stopping = Atomic.make false; running = Atomic.make 0; peak = Atomic.make 0 } in
     shared_owner := Some shared;
-    for _ = 1 to workers do
+    for index = 0 to workers - 1 do
       let domain = Domain.spawn (* ox-safe-worker-spawn *) (fun () -> worker shared ()) in
-      (* Linking the returned domain can allocate too. Stop and join this
-         still-local handle before the outer guard joins earlier domains. *)
-      (try domains := domain :: !domains
-       with error ->
-         NotificationPipe.remember_failure notification error;
-         (* The local handle remains on this stack until this cleanup returns.
-            Persistent allocation failure inside Domain.spawn/publication is a
-            toolchain boundary, not an arbitrary-OOM recovery guarantee. *)
-         (try stop shared; Domain.join domain
-          with cleanup_error -> NotificationPipe.retain_unsettled notification cleanup_error);
-         raise error)
+      (* The slot and its carrier already exist. Publish the returned handle
+         before any further allocation, without a list/option constructor. *)
+      DomainOwner.adopt domains.(index) domain
     done;
     let reader = Lwt_unix.of_unix_file_descr read_fd in
     NotificationPipe.install_reader notification reader;
-    let t = { shared; domains = !domains; budget; io; max_pending; reader; notification;
+    let t = { shared; domains; budget; io; max_pending; reader; notification;
       replies = Hashtbl.create workers; owned_groups = Hashtbl.create workers; retained = 0; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
       shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
@@ -377,7 +370,7 @@ let set_read_observer ?(measure_stages=false) t observer =
   t.measure_stages <- measure_stages && Option.is_some observer
 let usage t =
   let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
-  {workers = List.length t.domains; pending = t.pending; running; peak_running; retained = t.retained}
+  {workers = Array.length t.domains; pending = t.pending; running; peak_running; retained = t.retained}
 
 let submit t cancellation fd requested_operation =
   if t.closing then fail (Failed "digest pool is closed")
@@ -416,7 +409,7 @@ let submit t cancellation fd requested_operation =
     let remove_admission () = t.admission <- List.filter ((<>) id) t.admission in
     let rec wait_slot () =
       if Atomic.get cancelled || t.closing then return false
-      else if t.slots < List.length t.domains &&
+      else if t.slots < Array.length t.domains &&
         (match t.admission with x :: _ -> x = id | [] -> false) then begin
         remove_admission (); t.slots <- t.slots + 1; has_slot := true; return true
       end else Lwt_unix.sleep 0.01 >>= wait_slot in
@@ -618,7 +611,7 @@ let shutdown t = match t.shutdown_result with
       if t.pending <> 0 || t.retained <> 0 then Lwt_unix.sleep 0.01 >>= finish
       else begin
         locked t.shared (fun () -> Atomic.set t.shared.stopping true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
-        List.iter Domain.join t.domains;
+        DomainOwner.join_all t.domains;
         t.joined <- true;
         Mailbox.close t.shared.completions;
         notify t.shared;

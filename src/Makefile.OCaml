@@ -74,7 +74,7 @@ OCAMLOBJS = \
           abort.cmo osx.cmo fswatch.cmo propsdata.cmo \
           props.cmo fileinfo.cmo os.cmo lock.cmo clroot.cmo common.cmo \
           tree.cmo checksum.cmo transfer.cmo xferhint.cmo \
-          ownedClose.cmo borrowedWork.cmo retainedOwnership.cmo notificationPipe.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
+          ownedClose.cmo borrowedWork.cmo retainedOwnership.cmo notificationPipe.cmo domainOwner.cmo remote.cmo external.cmo negotiate.cmo globals.cmo fswatchold.cmo \
           semanticHash.cmo semanticFile.cmo componentHash.cmo validationSnapshot.cmo formatExtension.cmo formatRecognition.cmo \
           xmpObservation.cmo xmpMerge.cmo dngSemantic.cmo dngExtended.cmo dngLayout.cmo dngComponents.cmo jpegSemantic.cmo dngRecognition.cmo semanticDelta.cmo semanticReport.cmo helperSupervisor.cmo \
           semanticAdmission.cmo semanticMailbox.cmo ioAdmission.cmo semanticWorkers.cmo semanticFormats.cmo backendResources.cmo helperLimiter.cmo candidateValidator.cmo dngValidation.cmo dngCandidateValidation.cmo candidateValidators.cmo \

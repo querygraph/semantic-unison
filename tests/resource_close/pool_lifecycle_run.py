@@ -3,11 +3,11 @@ import argparse,hashlib,json,re,shutil,subprocess,tempfile
 from pathlib import Path
 ROOT=Path(__file__).resolve().parents[2];HERE=Path(__file__).resolve().parent
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--receipt',action='append',required=True);p.add_argument('--report',required=True);a=p.parse_args()
-paths=[ROOT/'src'/x for x in ['notificationPipe.ml','notificationPipe.mli','semanticWorkers.ml','semanticWorkers.mli','semanticRuntime.ml','semanticRuntime.mli']]+[HERE/x for x in ['pipe_fault.ml','pool_lifecycle_fault.ml','pool_lifecycle_test.ml','pool_lifecycle_run.py']]
+paths=[ROOT/'src'/x for x in ['notificationPipe.ml','notificationPipe.mli','domainOwner.ml','domainOwner.mli','semanticWorkers.ml','semanticWorkers.mli','semanticRuntime.ml','semanticRuntime.mli']]+[HERE/x for x in ['pipe_fault.ml','pool_lifecycle_fault.ml','pool_lifecycle_test.ml','pool_lifecycle_run.py','domain_slot_test.ml']]
 pins={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths};records=[]
 for receipt in a.receipt:
  r=json.loads(Path(receipt).read_text());build=Path(r['workspace'])/'src';compiler=r['compiler'];version=r['compiler_version']
- for path in paths[:6]:assert path.read_bytes()==(build/path.name).read_bytes(),path.name
+ for path in paths[:8]:assert path.read_bytes()==(build/path.name).read_bytes(),path.name
  text=(build/'Makefile.OCaml').read_text()
  def objects(name):
   body=re.search(r'^'+name+r' = (.*?)(?=\n\n)',text,re.M|re.S).group(1)
@@ -29,12 +29,15 @@ for receipt in a.receipt:
   if name=='semanticWorkers':
    old='Unix.set_nonblock read_fd;';assert source.count(old)==1;source=source.replace(old,'PoolLifecycleFault.after_adopt read_fd write_fd; '+old)
    old='let reader = Lwt_unix.of_unix_file_descr read_fd in';assert source.count(old)==1;source=source.replace(old,'PoolLifecycleFault.before_wrapper (); '+old)
-   assert source.count('Domain.join')==3
-   source=source.replace('Domain.join','PoolLifecycleFault.join')
+   old='DomainOwner.adopt domains.(index) domain';assert source.count(old)==1
+   source=source.replace(old,old+'; PoolLifecycleFault.after_publish index')
    old='let stop shared =\n    locked shared';assert source.count(old)==1
    source=source.replace(old,'let stop shared =\n    PoolLifecycleFault.before_stop ();\n    locked shared')
    old='      else begin\n        locked t.shared (fun () -> Atomic.set t.shared.stopping true;';assert source.count(old)==1
    source=source.replace(old,'      else begin\n        PoolLifecycleFault.before_stop ();\n        locked t.shared (fun () -> Atomic.set t.shared.stopping true;')
+  if name=='domainOwner':
+   old='Domain.join (Obj.obj slot.handle : unit Domain.t)';assert source.count(old)==1
+   source=source.replace(old,'PoolLifecycleFault.join (Obj.obj slot.handle : unit Domain.t)')
   if name=='semanticRuntime':
    old='try\n    SemanticWorkers.set_read_observer';assert source.count(old)==1
    source=source.replace(old,'try\n    PoolLifecycleFault.before_publish ();\n    SemanticWorkers.set_read_observer')
@@ -45,7 +48,13 @@ for receipt in a.receipt:
   call(argv+['-c',name+'.ml'])
  shutil.copyfile(HERE/'pool_lifecycle_test.ml',work/'pool_lifecycle_test.ml')
  call([compiler,*flags,'unix.cmxa','str.cmxa']+[str(build/x) for x in modules[:start]]+['pipeFault.cmx','poolLifecycleFault.cmx']+[str(work/x) for x in modules[start:]]+['pool_lifecycle_test.ml']+[str(build/x) for x in native]+['-o',str(work/'fixed')])
- for mode in ['creation-before','creation-after','creation-stop','shutdown-before','shutdown-after','shutdown-stop','handoff']:call([str(work/'fixed'),mode])
+ for mode in ['creation-before','creation-after','creation-stop','shutdown-before','shutdown-after','shutdown-stop','handoff','publication-first','publication-second']:call([str(work/'fixed'),mode])
+ slot_source=(HERE/'domain_slot_test.ml').read_text()
+ marker='Domain.spawn (* ox-safe-worker-spawn *)';assert slot_source.count(marker)==1
+ slot_source=slot_source.replace(marker,'Domain.Safe.spawn' if '+ox' in compiler else 'Domain.spawn')
+ (work/'domain_slot_test.ml').write_text(slot_source)
+ call([compiler,*flags,'unix.cmxa','str.cmxa']+[str(build/x) for x in modules[:start]]+['pipeFault.cmx','poolLifecycleFault.cmx']+[str(work/x) for x in modules[start:]]+['domain_slot_test.ml']+[str(build/x) for x in native]+['-o',str(work/'slots')])
+ call([str(work/'slots')])
  for variant in ['old-runtime','no-latch']:
   private=work/variant;private.mkdir()
   if variant=='old-runtime':

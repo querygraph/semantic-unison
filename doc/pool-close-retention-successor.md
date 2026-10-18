@@ -1,3 +1,28 @@
+# Returned-domain publication slots (2026-10-18)
+
+DomainOwner now prepares every owner slot and join carrier before pipe/spawn.
+The returned unit-domain handle is adopted by nonallocating stores, eliminating
+the post-spawn list insertion and its local-only fallback. A private monomorphic
+slot uses Obj.repr as a GC root; only the typed adopter stores a handle and only
+a Held state can read it as a unit Domain.t. The empty unit placeholder is never
+cast or joined. No domain-layout inspection or unchecked caller cast is exposed.
+The adoption allocation-counter check equals its measurement-only baseline on
+both compilers. This addresses a different issue from the previously rejected
+idea of an unchecked fabricated domain handle.
+
+Join authority is consumed before each API call; the array preserves all handles
+and causes. join_all attempts every held slot and never retries an uncertain or
+joined slot. Eighteen actual pool lifecycle modes, two direct slot participants
+and four Runtime regression rejections pass stock/Ox, including original failure
+immediately after the first/second handle publication with all returned handles
+joined in cleanup. Make+selftests pass; evidence
+`tests/qualification/domain-owner-publication-actual-20261018.json`.
+
+Still open: current Dune qualification, queued/cancelled borrower regressions,
+aggregate FD/RSS enforcement, broader benchmark and final integration. Failure
+inside toolchain Domain.spawn before a returned handle remains outside arbitrary
+OOM recovery guarantees. Earlier sections below preserve historical analysis.
+
 # Runtime handoff and lifecycle fault qualification (2026-10-18)
 
 Runtime now retains a successfully constructed pool when observer setup, tracing

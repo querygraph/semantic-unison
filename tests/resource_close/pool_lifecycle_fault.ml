@@ -16,3 +16,7 @@ let join domain =
  Domain.join domain;
  if !mode="creation-after" || !mode="shutdown-after" then raise Join_failed
 let before_publish () = if !mode="handoff" then raise Publication_failed
+
+let after_publish index =
+ if (!mode="publication-first" && index=0) || (!mode="publication-second" && index=1) then
+   raise Publication_failed
