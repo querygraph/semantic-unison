@@ -28,56 +28,61 @@ inputs match those build inventories. The test probe alone changed afterward
 to add ordering witnesses; final probe checks passed separately. An initial
 fixture ordering failure is preserved rather than rewritten as success.
 
-## RPC integration remains open
+## Bounded server argument owner
 
-`Remote.boundedMarshalingFunctions` currently supplies per-decode limits;
-ordinary marshaling remains separate. Raw packet tickets bound raw buffers,
-not decoded objects. The new callback is not yet installed into RPC dispatch.
+Bounded RPC registrations now use a caller-owned decoded owner around the scope,
+handler, marshaling and actual queued-output continuation. The endpoint-local
+policies are independent of raw packet reservations:
 
-Scoped server registrations now decode arguments once and pass the same value
-to scope admission and the handler. The internal server continuation includes
-queued reply consumption; the existing once-only dispatch guard and distinction
-between pre-dispatch scope refusal and post-dispatch failure remain. This
-removes duplicate argument expansion; it does not itself charge decoded values.
+| Policy | Default | Admission |
+| --- | --- | --- |
+| `rpcdecodedrequestbudget` | 256 MiB | Aggregate selected builtin charges |
+| `rpcdecodedrequestelements` | 1,048,576 | Aggregate collection element count |
+| `rpcdecodedrequestslots` | 256, maximum 65,536 | Owner slot before decoding |
 
-A correct integration still needs an explicit decoded-value owner:
+All limits are positive; MiB conversion is checked for integer overflow. No
+credit wait is introduced in the receiving loop. Each callback checks both
+byte and element headroom before changing either debit. A reduced policy
+refuses new charges without shrinking existing reservations. Ordinary decode
+refusal settles its partial debit. A recognized uncertain borrower retains the
+owner rather than producing an ordinary failed-prefix release.
 
-1. Reserve a finite owner slot before decoding, and charge its aggregate budget
-   through the callback, retaining all partial charges on failure.
-2. Hold request arguments through actual handler settlement and serialization
-   of results that may share argument storage. Retain uncertainty with the
-   existing ownership carrier rather than turning it into an ordinary error.
-3. Give returned client results an explicit caller scope or lease. Results can
-   outlive parsing and share tails or views; releasing at decoder return or
-   attaching a finalizer only to the root does not prove the storage is dead.
-4. Cover stream callbacks, synchronous decode, queued replies, conversion
-   failures and post-decode handoff failure, with admission before allocation.
-5. Keep selected-cost admission distinct from complete managed/native memory,
-   transport overhead, allocator retention, and platform hard containment.
+Arguments decode once, and the scope and handler receive that same value. A
+preallocated retained-owner link explicitly roots the decoded value: a failed
+promise carrying an exception alone need not retain its old arguments. Live
+requests also keep the value until actual handler/output settlement, including
+across disconnect while a handler remains asleep. Typed uncertainty in the
+original controls opens no directory/FD and retains its logical owner until
+test-process exit; that is not normal in-process teardown.
 
-No endpoint-wide decoded liveness bound is claimed until those ownership
-transfers are implemented and qualified. The full SOL resource requirement
-remains open; this checkpoint supplies its preallocation admission mechanism.
+The original reservation callback tests remain valid. The RPC owner controls
+add byte/element/slot refusal, partial-debit settlement, policy reductions,
+normal/error queued output, disconnected pending handlers and typed uncertainty.
+Mutation participants bypass argument ownership, release at borrower launch, or
+disable uncertainty classification; each must fail its designated witness.
+[Current request-owner evidence](../tests/qualification/rpc-decoded-request-owner-actual-20261018.json)
+binds all four stock/Ox Make/Dune builds/selftests, thirteen negative participants
+per compiler, and seven fixed direct-RPC waiter/timer/socket controls per compiler.
+The latter uses `tests/runtime_settlement/run.py --fixed-only --family rpc` and
+the original `rpc_test.ml`; it does not claim current full report/IO-family
+instrumentation or an SDK/native run. Earlier fixture refusals/assertion and
+successful intermediate controls remain preserved. The separate decoder-hook
+checkpoint retains its own original qualification bytes.
 
-## Concrete next ownership boundary
+## Remaining lifetime and memory work
 
-For bounded server arguments, registration can supply a decoder continuation
-that takes the existing raw body and invokes `use args` once. Its owner must
-span both `withScope` and dispatch; dispatch includes the reply's actual output
-queue settlement. The new single-decode server continuation provides this
-boundary without a dynamic global "current decoder" variable, which would be
-unsafe under nested or interleaved RPC work.
+Client results still return arbitrary values, which can outlive parsing and
+share tails or views. They need an explicit caller scope/lease; releasing on
+decoder return or finalizing just the root does not prove storage is dead.
+Legacy registrations and streaming codecs still have only their existing raw
+packet/frame policies. User conversion/mapping allocation or global escapes,
+recursive depth, accounting metadata, outbound buffers and complete managed/
+native heap/RSS are not included in the selected argument charge. Handler and
+scope code must not retain arguments beyond their actual operation without a
+separately owned lifetime. These exclusions remain SOL completion items.
 
-The aggregate owner needs independent finite slots, selected bytes and element
-counts, with nonwaiting overflow-safe reservation before decoding. It must keep
-partial debits after an ordinary decode failure until that invocation settles;
-recognized borrower uncertainty must retain the owner alongside the existing
-raw-body owner. Slot and accounting metadata are separate baseline costs. A
-result can share argument storage through marshaling, so the reservation cannot
-end at handler return. No production arbitrary-result caller release mechanism
-has been implemented by this checkpoint.
-
-A server request scope alone does not solve client result lifetime, conversions
-that retain global state, legacy streaming registrations, outbound allocation,
-or complete process memory. Those remain explicit completion items rather than
-being silently covered by a request-scope counter.
+Request argument ownership does not impose OS memory containment. Slot and
+retained-link metadata need their own baseline accounting, and the remaining
+client/legacy paths need ownership transfers and fault qualification. Valid
+wire bytes are unchanged; no original photos, SDK or native renderer are used
+by these original synthetic controls.

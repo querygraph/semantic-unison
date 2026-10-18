@@ -134,7 +134,15 @@ val registerBoundedServerCmd :
     [65536 + 8 * frame_limit] charged bytes and collection counts to
     [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
     not decoded heap/RSS or aggregate request bounds. Scope and handler share
-    one decoded argument value. Valid wire encodings are unchanged.
+    one decoded argument value. The endpoint-local rpcdecodedrequestbudget,
+    rpcdecodedrequestelements and rpcdecodedrequestslots independently admit
+    bounded-command arguments before selected builtin allocations. Owners span
+    scope/handler and queued reply consumption, retaining recognized ownership
+    uncertainty and the decoded argument itself. Ordinary decode refusal releases
+    its partial debit after known failure. Conversion/global escapes, legacy
+    registrations, returned client values, metadata, recursion and full heap/RSS
+    are excluded; handlers/scopes must not retain arguments beyond their actual
+    operation without a separately owned lifetime. Valid wire bytes unchanged.
     Shared RPC headers use independent endpoint-local frame/byte/slot limits.
     All body registrations also use separate aggregate request/reply raw-input
     lanes. These follow actual processing/queued output or result decoding and

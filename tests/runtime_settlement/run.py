@@ -75,7 +75,7 @@ let test_rpc_close = closeConnection
 '''
 
 
-def instrument(directory, *, parent):
+def instrument(directory, *, parent, family=None):
     def modify(name, edit):
         path = directory / name
         path.write_text(edit(path.read_text()))
@@ -125,7 +125,8 @@ def instrument(directory, *, parent):
                     '(Fault.watch "runtime-admission-map" (fun () -> SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost f))')
             return block
         return section(text, 'let with_admission ', 'let with_io_file ', admission)
-    modify('semanticRuntime.ml', runtime)
+    if family != 'rpc':
+        modify('semanticRuntime.ml', runtime)
 
     def admission(text):
         if parent:
@@ -136,13 +137,16 @@ def instrument(directory, *, parent):
             'BorrowedWork.try_bind (Fault.watch "resource-acquire" (fun () -> acquire r cancellation))')
         return once(text, 'BorrowedWork.try_bind (fun () -> with_borrow r ~cost f)',
             'BorrowedWork.try_bind (Fault.watch "resource-lease-result" (fun () -> with_borrow r ~cost f))')
-    modify('semanticAdmission.ml', admission)
+    if family != 'rpc':
+        modify('semanticAdmission.ml', admission)
 
     def report(text):
         text = once(text, 'let register_held_fd fd =',
             'let test_held_files = ref []\nlet register_held_fd fd =')
         text = once(text, 'try held_files.register files with error ->',
             'try let registered = held_files.register files in test_held_files := registered :: !test_held_files; registered with error ->')
+        if family == 'rpc':
+            return text + '\nlet test_inspect_file = inspect_file\nlet test_report_state () = match !test_held_files with\n  | [] -> [] | files::_ -> [files.busy;files.closing;files.closed]\nlet test_release_reports () = List.iter held_files.release_noerr !test_held_files\n'
         if parent:
             text = section(text, 'let borrowed files f =', 'let inspected =',
                 lambda block: once(block, 'Lwt.try_bind f', 'Lwt.try_bind (Fault.watch "report-borrowed" f)'))
@@ -172,8 +176,9 @@ let test_report_state () = match !test_held_files with
   | [] -> [] | files::_ -> [files.busy;files.closing;files.closed]
 let test_release_reports () = List.iter held_files.release_noerr !test_held_files
 '''
-    modify('semanticRemote.ml', report)
-    modify('semanticRemote.mli', lambda text: text + '''
+    if family != 'rpc':
+        modify('semanticRemote.ml', report)
+    if family != 'rpc': modify('semanticRemote.mli', lambda text: text + '''
 val test_inspect_file : ?meaning:bool -> HelperSupervisor.cancellation -> FormatExtension.handle -> Fspath.t -> inspection Lwt.t
 val test_report_state : unit -> bool list
 val test_release_reports : unit -> unit
@@ -193,19 +198,39 @@ val test_release_reports : unit -> unit
                 '(fun () -> match q.failure with Some e -> Lwt.fail e | None -> Fault.watch_output (fun promise () -> Lwt.poll promise = None) action ())')
             text = once(text, '(fun () -> serverSide conn args)',
                 '(Fault.watch "rpc-server-map" (fun () -> serverSide conn args))')
-            text = once(text, '(fun () -> cmd conn buf)',
-                '(Fault.watch "rpc-dispatch" (fun () -> cmd conn buf))')
-            text = once(text, 'BorrowedWork.catch (fun () -> scope conn buf dispatch)',
-                'BorrowedWork.catch (Fault.watch "rpc-scope" (fun () -> scope conn buf dispatch))')
-        return text + RPC_EXPORTS
+            text = once(text, 'BorrowedWork.try_bind run',
+                'BorrowedWork.try_bind (Fault.watch "rpc-dispatch" run)')
+            text = once(text, '| Some scope -> scope conn args (fun () -> dispatch run)',
+                '| Some scope -> Fault.watch "rpc-scope" (fun () -> scope conn args (fun () -> dispatch run)) ()')
+        decoded = ('\nlet test_decoded_usage () = None\n' if parent else
+                   '\nlet test_decoded_usage () = Some(!decoded_request_bytes,!decoded_request_elements,!decoded_request_count)\n')
+        exports=RPC_EXPORTS
+        if family == 'rpc':
+            exports=exports.replace('Umarshal.unit (Umarshal.bounded_string 1048576) (fun _ () -> handler ())',
+                                    'Umarshal.string (Umarshal.bounded_string 1048576) (fun _ args -> handler args)')
+            exports=exports.replace('~withScope:(fun _ () dispatch -> with_scope dispatch)',
+                                    '~withScope:(fun _ _ dispatch -> with_scope dispatch)')
+            exports=exports.replace('safeMarshal (marshalV1 Umarshal.unit)',
+                                    'safeMarshal (marshalV1 Umarshal.string)')
+            exports=exports.replace('(test_rpc_name ^ "-args")) () []',
+                                    '(test_rpc_name ^ "-args")) "abc" []')
+        return text + exports + decoded
     modify('remote.ml', remote)
-    modify('remote.mli', lambda text: text + '''
+    modify('remote.mli', lambda text: text + ('''
 val test_client_cleanup : unit -> unit
 val test_rpc_start : Unix.file_descr -> ((unit -> unit Lwt.t) -> unit Lwt.t) -> (unit -> string Lwt.t) -> connection * unit Lwt.t
 val test_rpc_decode : connection -> string -> string
 val test_rpc_expected : connection -> string -> string
 val test_rpc_close : connection -> unit
-''')
+val test_decoded_usage : unit -> (int * int * int) option
+'''.replace('(unit -> string Lwt.t)', '(string -> string Lwt.t)') if family == 'rpc' else '''
+val test_client_cleanup : unit -> unit
+val test_rpc_start : Unix.file_descr -> ((unit -> unit Lwt.t) -> unit Lwt.t) -> (unit -> string Lwt.t) -> connection * unit Lwt.t
+val test_rpc_decode : connection -> string -> string
+val test_rpc_expected : connection -> string -> string
+val test_rpc_close : connection -> unit
+val test_decoded_usage : unit -> (int * int * int) option
+'''))
 
 
 def main():
@@ -217,7 +242,10 @@ def main():
     parser.add_argument('--keep-work', action='store_true')
     parser.add_argument('--negative-only', action='store_true')
     parser.add_argument('--fixed-only', action='store_true')
+    parser.add_argument('--family', choices=('runtime','report','loan','pair','rpc'))
     args = parser.parse_args()
+    if args.family == 'rpc' and not args.fixed_only:
+        parser.error('the isolated current RPC fixture requires --fixed-only')
     if args.negative_only and args.fixed_only:
         parser.error('select one participant mode')
     compiler = str(Path(shutil.which(args.ocamlopt) or args.ocamlopt).resolve())
@@ -245,7 +273,7 @@ def main():
         if sha(ROOT / 'src' / path) != frozen_inputs['src/' + str(path)] or \
            sha(build / path) != frozen_inputs['src/' + str(path)]:
             raise RuntimeError('snapshot and workspace source differ: ' + str(path))
-    test_names = ('run.py', 'test.ml', 'fault.ml', 'README.md')
+    test_names = ('run.py', 'test.ml', 'rpc_test.ml', 'fault.ml', 'README.md')
     work = Path(tempfile.mkdtemp(prefix='unison-runtime-settlement-', dir='/private/tmp'))
     env = os.environ.copy()
     for name in ('OCAMLLIB', 'OCAMLPATH', 'CAML_LD_LIBRARY_PATH', 'OCAMLRUNPARAM'):
@@ -254,6 +282,7 @@ def main():
         'work': str(work), 'retained': args.keep_work, 'parent': PARENT,
         'compiler': {'path': compiler, 'sha256': sha(Path(compiler))},
         'freeze': {'path': str(args.freeze.resolve()), 'sha256': sha(args.freeze)},
+        'selected_family': args.family,
         'build_snapshot': str(build.parent),
         'source_pins': {str(path): sha(build / path) for path in frozen_production},
         'generated_snapshot_source_pins': {str(path): sha(build / path) for path in generated},
@@ -301,7 +330,7 @@ def main():
             directory = work / mode
             shutil.copytree(build, directory)
             shutil.copyfile(frozen/'fault.ml', directory/'fault.ml')
-            shutil.copyfile(frozen/'test.ml', directory/'runtimeSettlementTest.ml')
+            shutil.copyfile(frozen/('rpc_test.ml' if args.family == 'rpc' else 'test.ml'), directory/'runtimeSettlementTest.ml')
             shutil.copyfile(ROOT / 'tests/resource_lifetime/census.c', directory / 'census.c')
             if mode == 'parent':
                 receipt['parent_participant_pins'] = {}
@@ -309,7 +338,7 @@ def main():
                     data = subprocess.check_output(['git', 'show', PARENT + ':src/' + name], cwd=ROOT)
                     (directory / name).write_bytes(data)
                     receipt['parent_participant_pins'][name] = hashlib.sha256(data).hexdigest()
-            instrument(directory, parent=mode == 'parent')
+            instrument(directory, parent=mode == 'parent', family=args.family)
             if mode == 'group-negative':
                 group_source = directory / 'borrowedWork.ml'
                 source = group_source.read_text()
@@ -382,6 +411,10 @@ def main():
                           ('loan', 'resource-borrow', 'retire', 1, False, 0),
                           ('pair', 'pair-first', 'normal', 1, True, 0),
                           ('rpc', 'rpc-output-action', 'normal', 1, True, 0)]
+            if args.family:
+                cases=[case for case in cases if case[0]==args.family]
+                if not cases:
+                    raise RuntimeError('selected family has no cases in this participant mode')
             for index, case in enumerate(cases):
                 family, phase, disposition, faults, meaning, timers = case
                 files = directory / ('case-' + str(index))

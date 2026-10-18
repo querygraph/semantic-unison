@@ -4783,3 +4783,54 @@ RSS remain open; do not label this refactor aggregate memory enforcement.
 No current build/test/EXIO owner from this checkpoint. Three frozen candidate
 requests remain separate, no admission observed at latest check; never alter or
 replay them. Full goal active/incomplete; standing Unison8/Photo8/system2.
+
+
+## 2026-10-18 bounded decoded-argument aggregate owner in progress
+
+Active source branch remains implementation/decoded-input-accounting after
+8c44d239. Current uncommitted Remote adds rpcdecodedrequestbudget256MiB,
+rpcdecodedrequestelements1048576 and rpcdecodedrequestslots256/max65536.
+Bounded registrations decode through an independent nonwaiting slot/selected
+byte/element owner, with overflow-safe debit and explicit decoded-value root
+through scope/handler/queued output. Typed or classifier uncertainty roots a
+preallocated retention link and value; selected counters are not full heap/RSS.
+Legacy args, client result leases, conversions/metadata/outbound still open.
+
+Initial source+typed-owner suites actual24531/fc10ef/0 passed stock/Ox. Expanded
+three mutation controls (bypass, early release, classifier off) actual17063/
+041769/0 passed both compilers. Added compound/policy/overflow and multiple
+classifier-failure roots; stock003 failed its OLD registered-classifier mutation
+because the new classifier fixture ran earlier than its designated witness.
+Production positive passed; original24596/b5f938/1 and receipts preserved. Fixed
+fixture ordering (old raw-body retained tests before new decoded-owner tests).
+Final tests currently live controller55497, stock77685 passed/closed, Ox active.
+No build pass claimed yet for this owner successor; next full Make/Dune builds.
+No Unison EXIO or SDK/Photo payload. Frozen9d9dccc0 requests untouched; latest
+all three admission paths absent. Standing8/8, goal active/incomplete.
+
+
+## 2026-10-18 bounded decoded argument owner actually qualified
+
+Four current stock/Ox Make+Dune builds/selftests PASS, parent95366/5e1525/0/no
+session, children78405/79551/80678/81968 reaped0/groups absent/tokens closed.
+All575recorded source inputs per build and binary hashes match current source.
+Final direct RPC suites55497/0b5c22/0 passed stock/Ox, 13 designated negatives
+per compiler incl bypass/early-release/classifier-off. Explicit weak-value roots
+survive typed/classifier-failure uncertainty; selected charges remain retained.
+Fixed targeted Remote waiter/timer/socket controls84801/fbfbbe/0 passed seven
+cases/compiler (stock84900/Ox85352 reaped0/groups absent/CPU4closed). These test
+current Remote directly, not a new full semantic report/native qualification.
+Initial two stale unrelated fixture preflights and one early post-gate assertion
+are preserved in001/002/003; corrected004 waits actual promise settlement.
+No production change was made to fix these fixture failures. New rpc_test.ml is
+an independent test input added after CLI builds, not a production CLI source.
+
+Evidence tests/qualification/rpc-decoded-request-owner-actual-20261018.json SHA
+1124df8cd2d98430828bf34c9312d2709d537a185812fd79f076ed8c9d933c45. Inventoryv12 and decoder-owner doc updated. No live owner/EXIO/Photo resource
+from this checkpoint. Bounded requests now own aggregate selected byte/element/
+slot charges through queued replies. Legacy args/streams, client result leases,
+conversion/global escapes, baseline/outbound and full FD/RSS/acceptance remain
+OPEN. Full SOL goal active, not complete. Next source work should extend legacy
+request decoding and establish explicit client-result ownership; do not shrink
+completion to the bounded subset. Frozen IO candidate9d9dccc0 requests unchanged,
+no admission observed; no replay. Standing Unison8/Photo8/system2 continues.

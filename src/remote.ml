@@ -824,13 +824,16 @@ let defaultMarshalingFunctions m =
   (fun conn -> if conn.version = 1 then marshalV1 m else errRPCVersion conn),
   (fun conn -> if conn.version = 1 then unmarshalV1 m else errRPCVersion conn)
 
-let boundedMarshalingFunctions bound m =
+let boundedMarshalingFunctions ?reserve bound m =
   if bound<0 || bound>(max_int-65536)/8 then invalid_arg "bounded RPC decoded budget overflow";
   let max_alloc_bytes=65536+8*bound and max_elements=1024+4*bound in
   (fun conn -> if conn.version=1 then marshalV1 m else errRPCVersion conn),
   (fun conn -> if conn.version<>1 then errRPCVersion conn else
     fun buf pos ->
-      try Umarshal.unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m buf pos
+      try (match reserve with
+        | None -> Umarshal.unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m buf pos
+        | Some reserve -> Umarshal.unmarshal_from_bytearray_accounted
+            ~max_alloc_bytes ~max_elements ~reserve m buf pos)
       with Failure s | Umarshal.Error s -> raise(Util.Fatal(Printf.sprintf
         "Fatal error during unmarshaling (%s)" s)))
 
@@ -1027,6 +1030,82 @@ let with_body_packet (buffer,ticket) f =
     (fun result->release_body_input ticket;Lwt.return result)
     (fun error->release_body_input ticket;Lwt.fail error)
   with error->release_body_input ticket;raise error
+(* Selected decoded-argument charges have their own nonwaiting lane. They
+   survive decoding, handler completion and queued reply output; this is not
+   complete heap/RSS or client-result lifetime accounting. *)
+let decodedRequestMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestbudget" 256 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded request charges in MiB"
+  "Aggregate selected builtin argument allocation charges for bounded RPC \
+   requests, retained through scope/handler/reply settlement; not heap/RSS.")
+let decodedRequestElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestelements" 1048576 ~local:true
+  ~category:(`Advanced `Remote) "selected decoded request element allowance"
+  "Independent positive aggregate collection count for bounded RPC arguments; \
+   nonwaiting admission, not user conversion allocation or recursion depth.")
+let decodedRequestSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "decoded bounded request owners"
+  "Positive aggregate owner count reserved before decoding, maximum65536; \
+   ownership uncertainty retains the owner and its selected charges.")
+let decoded_request_bytes=ref 0 and decoded_request_elements=ref 0
+and decoded_request_count=ref 0
+let decoded_limits () =
+  let mib=Prefs.read decodedRequestMiB and elements=Prefs.read decodedRequestElements
+  and slots=Prefs.read decodedRequestSlots in
+  if mib<=0 || mib>max_int/1048576 || elements<=0 || slots<=0 || slots>65536 then
+    raise(Util.Fatal "Invalid RPC decoded request budget");
+  mib*1048576,elements,slots
+type decoded_input={mutable decoded_bytes:int;mutable decoded_elements:int;
+                    mutable decoded_active:bool}
+let reserve_decoded_slot ticket =
+  if ticket.decoded_active then invalid_arg "RPC decoded owner already active";
+  let _,_,slots=decoded_limits () in
+  if !decoded_request_count>=slots then
+    raise(Util.Fatal "RPC decoded request budget exhausted");
+  ticket.decoded_active<-true;incr decoded_request_count
+let reserve_decoded_input ticket ~bytes ~elements =
+  if not ticket.decoded_active || bytes<0 || elements<0 then
+    invalid_arg "RPC decoded reservation";
+  let byte_limit,element_limit,_=decoded_limits () in
+  if !decoded_request_bytes>byte_limit || bytes>byte_limit- !decoded_request_bytes ||
+     !decoded_request_elements>element_limit || elements>element_limit- !decoded_request_elements then
+    raise(Util.Fatal "RPC decoded request budget exhausted");
+  ticket.decoded_bytes<-ticket.decoded_bytes+bytes;
+  ticket.decoded_elements<-ticket.decoded_elements+elements;
+  decoded_request_bytes:= !decoded_request_bytes+bytes;
+  decoded_request_elements:= !decoded_request_elements+elements
+let release_decoded_input ticket =
+  if ticket.decoded_active then begin
+    ticket.decoded_active<-false;
+    decoded_request_bytes:= !decoded_request_bytes-ticket.decoded_bytes;
+    decoded_request_elements:= !decoded_request_elements-ticket.decoded_elements;
+    decr decoded_request_count
+  end
+type decoded_retained={mutable decoded_previous:decoded_retained option;
+                       decoded_keepalive:unit -> unit}
+let decoded_retained_roots=ref None
+let with_decoded_args bound codec tag conn buffer use =
+  (* Allocate the ticket, value root, retention link and guard callbacks before
+     admission/decoding. An uncertain failed promise need not itself keep its
+     argument alive, so root the explicit value owner as well as the borrower. *)
+  let ticket={decoded_bytes=0;decoded_elements=0;decoded_active=false}
+  and value=ref None in
+  let keepalive ()=ignore(Sys.opaque_identity !value) in
+  let entry={decoded_previous=None;decoded_keepalive=keepalive} in
+  let cell=Some entry in
+  let retain _=entry.decoded_previous<- !decoded_retained_roots;
+    decoded_retained_roots:=cell in
+  let finish ()=value:=None;release_decoded_input ticket in
+  let work ()=
+    reserve_decoded_slot ticket;
+    let _,decode=boundedMarshalingFunctions
+      ~reserve:(reserve_decoded_input ticket) bound codec in
+    let args=safeUnmarshal (decode conn) tag buffer in
+    value:=Some args;
+    use args in
+  BorrowedWork.try_bind
+    (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain work)
+    (fun result->finish ();Lwt.return result)
+    (fun error->finish ();Lwt.fail error)
+
 let receive_body_packet ?maxBytes ?(reserve=(fun _->())) lane conn =
   let ticket={body_lane=lane;body_reserved=0;body_active=false;body_sized=false;
               body_payload=empty_body_payload} in
@@ -1406,6 +1485,7 @@ let registerSpecialServerCmd
     ?maxResult
     ?maxResultForArgs
     ?withScope
+    ?decodeArgs
     (cmdName : string)
     marshalingFunctionsArgs
     marshalingFunctionsResult
@@ -1424,13 +1504,16 @@ let registerSpecialServerCmd
     (* Decode once: the scope and actual handler share this same value. The
        dispatch continuation includes marshaling and queued output consumption,
        so a scope can retain ownership through the entire reply lifetime. *)
-    let args = unmarshalArgs conn buf in
-    let run () =
-      BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
-        Lwt.return (marshalResult conn answer)) in
-    match withScope with
-    | None -> dispatch run
-    | Some scope -> scope conn args (fun () -> dispatch run)
+    let use args =
+      let run () =
+        BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
+          Lwt.return (marshalResult conn answer)) in
+      match withScope with
+      | None -> dispatch run
+      | Some scope -> scope conn args (fun () -> dispatch run) in
+    match decodeArgs with
+    | None -> use (unmarshalArgs conn buf)
+    | Some decode -> decode conn buf use
   in
   serverCmds := Util.StringMap.add cmdName server !serverCmds;
   (* Create a client function and return it *)
@@ -1476,7 +1559,9 @@ let registerServerCmd name mArg mRet f =
 let registerBoundedServerCmd ?withScope ?maxResultForArgs
     name ~maxArgs ~maxResult mArg mRet f =
   if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
-  let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult name
+  let tag=Bytearray.of_string(name ^ "-args") in
+  let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult
+    ~decodeArgs:(with_decoded_args maxArgs mArg tag) name
     (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command
