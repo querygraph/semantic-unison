@@ -4096,3 +4096,10 @@ Admission SHA1c40c7558617cc70726abfdc4d36e0bdcf2746ab8dc7f04d5468d69c21fb6d69 co
 ## Mixed-peer compiler preflight fixed, retry V2 prepared
 
 User directed fix and retry, continue autonomously after failures. Cause: build compiler aliases are ocamlopt symlinks, qualified readonly reader intentionally O_NOFOLLOW. V2 binds resolved compiler.opt executable paths in plan, hashes nofollow final targets and rechecks aliases; 12 controls actual a0ee5c/0 closed. Prior fixture failure ee8e32 preserved (test target /var normalization). Fresh request `doc/mixed-peer-request-v2.json` SHA cb84a74a01793c1b0621c5a8965935f64ab8fd5195f431c8d1eb5aa29c4879e2; plan SHA f4292ab55091d351e8487de77ea1b12b9414887bb5ea2ec0396f1d14b9f52aa2,383pins; workspace `/private/tmp/u-mp-3d8529a6`, proposed admission `/private/tmp/unison-mixed-peer-admission-3d8529a6.json`. Fresh Root retry scheduling requested; no old admission replay.
+
+
+## Mixed-peer V2 recovery and V3 retry — 2026-10-17
+
+V2 compiler fix worked; first client settled before connecting, but call wrapper waited only5s while no-connection proxy owns35s deadline. Worker retained. Rawproxy later proves server_commandNULL before NativeChild/0bytes/pumpjoined. Independent source-bound prefix recovery stopped exact idlePython1712+1695 after group/descendant proof; actual tool60014/9c1af4/137/no session, freshwhole EXIO+Unison8 acquiredclosed. Original worker/proxy wait4 NOT claimed. Proofs in `/private/tmp/u-mp-3d8529a6/INDEPENDENT-RECOVERY-{PROOF,CLOSED}.json`.
+
+Fixed call wrapper saves CLIENT-OUTCOME before waiting fullproxy35s+2s; no signals, unknownretains.22controls actual0d7391/0 passed/closed. Fresh V3 request `doc/mixed-peer-request-v3.json` SHA6f7b6af3c80883bef42a927fe1176ab7be45fce117ae8ee465e59dc537c35529; planSHA0330d3c3afaa113961be9a778dc55994b6c100a740273a59d2db6bd0bbef85dd,383pins. Freshworkspace `/private/tmp/u-mp-5b9e63d0`, proposedadmission `/private/tmp/unison-mixed-peer-admission-5b9e63d0.json`. Rootqueued01a14c72-2a33. V1/V2 preserved consumed; user says continuefixretry, no freezing afterfailure.

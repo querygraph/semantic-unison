@@ -398,6 +398,20 @@ class Controls(unittest.TestCase):
             self.assertFalse(io.load(work/'WORKER-RESULT.json')['complete'])
             self.assertIs(io.load(work/'REMOTE-SETTLED.json')['functional_pass'],False)
 
+class EarlyClientClosure(unittest.TestCase):
+    def test_persist_client_before_full_proxy_observation(self):
+        with tempfile.TemporaryDirectory() as temp:
+            work=Path(temp);socket=work/'socket';io.write(socket,b'inert readiness')
+            seen=[]
+            def awaited(seconds):
+                self.assertGreater(seconds,30)
+                self.assertEqual(io.load(work/'CLIENT-OUTCOME.json')['returncode'],3)
+                seen.append(seconds);return True
+            supervisor=SimpleNamespace(pid=9999,await_terminal=awaited)
+            with patch.object(call,'OwnedGroup',return_value=supervisor),patch.object(call,'invoke',return_value={'returncode':3}),patch.object(call,'load',return_value={'input_pump_joined':True,'server_cleanup':None}),patch.object(call,'settle',return_value={'other_group_members_absent_before_reap':True}):
+                result=call.execute(['/inert/client'],{'UNISON_SYNC_BENCH_SOCKET':str(socket),'UNISON_SYNC_BENCH_DEADLINE_SECONDS':'35'},work,time.monotonic()+30)
+            self.assertEqual(result['returncode'],3);self.assertEqual(len(seen),1)
+
 if __name__=='__main__':
     before=sources();before[str(Path(__file__))]=io.sha(__file__);before[str(ROOT/'tests/component_remote/producer-shapes-v1.json')]=io.sha(ROOT/'tests/component_remote/producer-shapes-v1.json');before[str(ROOT/'doc/component-remote-plan-v1.json')]=io.sha(ROOT/'doc/component-remote-plan-v1.json')
     result=unittest.TextTestRunner(verbosity=1).run(unittest.defaultTestLoader.loadTestsFromTestCase(Controls))

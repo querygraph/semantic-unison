@@ -4,14 +4,14 @@ from pathlib import Path
 import subprocess
 import sys
 import time
-from component_remote.io import load, read
+from component_remote.io import load, read, save
 from shared_cpu_pool import UnresolvedOwnership, close_descriptors
 from shared_process_owner import settle
 from ownership import OwnedGroup
 from sdk_host_matrix.shared_child import invoke
 
 def execute(argv,environment,directory,deadline):
-    supervisor=None;streams=[]
+    supervisor=None;streams=[];started=time.monotonic()
     def retain(reason,original=None):
         error=UnresolvedOwnership(reason,retained_fds=getattr(original,'retained_fds',()),
                                   uncertain_fd=getattr(original,'uncertain_fd',None))
@@ -33,7 +33,14 @@ def execute(argv,environment,directory,deadline):
         outcome=invoke(argv,environment,deadline,capture_limit=262144)
         # invoke preserves its own native/capture owners on uncertainty. No
         # conventional benchmark wrapper may replace that exception with text.
-        if not supervisor.await_terminal(max(0,min(5,deadline-time.monotonic()))):
+        save(directory/'CLIENT-OUTCOME.json',outcome)
+        # The proxy owns its separate 35s no-connection deadline. A client
+        # refusal must not turn that known finite wait into permanent retention
+        # merely because the generic post-client wait was only five seconds.
+        proxy_seconds=float(environment.get('UNISON_SYNC_BENCH_DEADLINE_SECONDS','180'))
+        if not 0 < proxy_seconds <= 35:
+            retain('proxy deadline outside qualified component bound')
+        if not supervisor.await_terminal(max(0,started+proxy_seconds+2-time.monotonic())):
             retain('proxy observation elapsed; retain supervisor without signals')
         proxy=load(directory/'proxy.json')
         if not (proxy.get('input_pump_joined') is True and

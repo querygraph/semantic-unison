@@ -1,0 +1,26 @@
+{
+  "scope": "22 original controls; early client outcome persisted before full35s proxy wait; fake proxy/native boundary, no transport",
+  "actual_tool": {
+    "chunk": "0d7391",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-proxy-controls-20261017-001/SHARED-CLOSED.json",
+      "sha256": "8178a4e54f554e67ea74bf2ba7a7811287ccb31b3ef75c1cc55af1e2af159d0f"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-proxy-controls-20261017-001/SHARED-START.json",
+      "sha256": "429d102822c235325778ce775608055eaa0e584734ed6f599305d3556851f57e"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-proxy-controls-20261017-001/SHARED-STDERR.txt",
+      "sha256": "a227fd7fb0a7bed7515f3e334b6f12fbabf8eca0d59cf8720c72da1a60b1cf93"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-proxy-controls-20261017-001/SHARED-STDOUT.txt",
+      "sha256": "10ee0da9bfc4df6e7201c59be6b816c7f9472539444e7092c36981f4e9b634dd"
+    }
+  ]
+}
