@@ -31,9 +31,9 @@ def main():
     args=p.parse_args()
     if re.fullmatch('[0-9a-f]{8}',args.nonce) is None:raise ValueError('eight-hex fresh nonce required')
     workspace=Path('/private/tmp/u-phase-'+args.nonce)
-    admission=Path('/private/tmp/unison-sync-phase-admission-v1-'+args.nonce+'.json')
-    request_path=ROOT/'doc/sync-phase-collection-request-v1.json'
-    plan_path=ROOT/'doc/sync-phase-collection-plan-v1.json'
+    admission=Path('/private/tmp/unison-sync-phase-admission-v2-'+args.nonce+'.json')
+    request_path=ROOT/'doc/sync-phase-collection-request-v2.json'
+    plan_path=ROOT/'doc/sync-phase-collection-plan-v2.json'
     if any(x.exists() for x in (workspace,admission,request_path,plan_path)):
         raise ValueError('new namespace/documents required; no overwrite or replay')
     env=dict(SHARED_CPU_CREDITS='8',OUTPUT_DIR=str(workspace),STOCK_RECEIPT=args.stock,
@@ -60,13 +60,16 @@ def main():
         endpoint_workers_max=[3,3],owner_credits=2,cpu_indexes=list(range(8)),
         retained_property_readers_max=36,per_CLI_seconds=30,owner_observation_seconds=300,
         logical_IO_budget_declared_bytes=8*1024**3,IO_budget_instrumented=False,
-        compilers_SDK_Adobe_camera_Photo_payload_calls=0,
+        compilation_calls=0,SDK_Adobe_camera_Photo_payload_calls=0,
+        compiler_metadata_queries=4,Unison_binary_version_queries=2,
+        Darwin_sysctl_metadata_queries=2,Darwin_diskutil_metadata_queries=1,git_metadata_queries=1,
+        CLI_call_count_scope='54 journaled seed/update/noop clients; two extra binary version queries separately declared',
         unknown='Retain actual owner and IO/CPU descriptions on unknown; no broad aggregate kill/retry.',
         scope='Finite generated property-removal trace collection smoke, not repeated performance or whole-path commit qualification.')
     prerequisites=[pin(args.stock),pin(args.ox),pin(ROOT/'tests/qualification/sync-phase-report-source-actual-20261018.json'),
         pin(ROOT/'tests/qualification/semantic-phase-observations-actual-20261017.json'),
         pin(ROOT/'tests/qualification/bound-publication-timing-actual-20261018.json')]
-    plan=dict(schema='unison-sync-phase-collection-plan/1',state='SOURCE_ONLY_NOT_ADMITTED',
+    plan=dict(schema='unison-sync-phase-collection-plan/2',state='SOURCE_ONLY_NOT_ADMITTED',
         command=command,workspace=str(workspace),limits=limits,
         diagnostics=dict(primary_reads=True,semantic_phases=True,raw_streams_preserved=True,
             phase_intervals_inclusive=True,phase_sum_or_total_commit_claim=False,
@@ -74,14 +77,14 @@ def main():
         next_step='Collection smoke before fresh repeated end-to-end performance planning; no old run replay.')
     save(plan_path,plan)
     env['SHARED_IO_ADMISSION_SHA256']='ROOT_PUBLISHED_SHA_REQUIRED'
-    request=dict(schema='unison-sync-phase-collection-request/1',state='PREPARED_NOT_ADMITTED_NOT_DISPATCHED',
+    request=dict(schema='unison-sync-phase-collection-request/2',state='PREPARED_NOT_ADMITTED_NOT_DISPATCHED',
         integration_head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=ROOT,text=True).strip(),
         plan=pin(plan_path),admission_path=str(admission),admission_fields=fields,
         launch_argv=[sys.executable,str(ROOT/'tests/manual.py'),'sync-functional'],
         launch_environment=env,prerequisites=prerequisites,interpreter=pin(sys.executable),
         production_source_sha256={n:d for n,d in builds[0]['source_sha256'].items() if n.startswith('src/')},
         limits=limits,deadline_policy='Root supplies fresh deadline; exact one use only; refuse expired/stale/started grant.',
-        supersession='New trace smoke namespace. Every older property/sync/native admission stays consumed or retired; no extension/replay.')
+        supersession='Source V2 corrects metadata-query budgeting in unstarted V1. Fresh namespace only; V1 retained/no dispatch or admission reuse. Every older runtime grant remains consumed or retired.')
     assert all(request['production_source_sha256'][n]==d for n,d in builds[1]['source_sha256'].items() if n.startswith('src/'))
     save(request_path,request)
     save(args.report,dict(state='METADATA_PREPARATION_ONLY_NO_RUNTIME_GRANT',request=pin(request_path),plan=pin(plan_path),
