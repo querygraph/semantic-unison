@@ -5831,3 +5831,31 @@ All3newadmissionpaths freshABSENT3f1cda, no runtimeSTART/workspace/SourceIOhold.
 No ownlivejobs/resources. Standing8/8 unchanged; fullgoalactive/incomplete.
 Next prioritizeactualcurrent-source compatibility/property grants and acceptance
 consolidation; keep runtimecandidate fixed instead of unrequestedmicroextensions.
+
+
+## 2026-10-18 acceptance rebind audit: concrete next work
+
+Previous V6prep turn was progress. Fresh3V6admissions absent665242; no actualjob
+or resourcewait claim from absence. Frozenstream-qualified5cc96102 unchanged.
+Actualmetadataaudit8d6c0c/0/no session underUnison4, child/group/tokensclosed,
+no EXIO/SDK/Photo/nativeUI.23 receipts checked plus4 explicitworkerstepresult
+pins rehashed BEFOREuse. Audit doc/sol-acceptance-source-bindings-current-20261018.json,
+actions doc/sol-current-acceptance-audit-summary-20261018.json.
+
+Four oldactualworkerparity/apply results each53pins,38matches15changedcurrent
+production files. Do NOTclaimcurrent1/2/4/8 or384-job apply from those historical
+receipts. Renew with current actual nativeobjects, tests/workers/run.py, original
+64-byte fixtures, configured1/2/4/8 but activeexecutionmax6+owner2=8 asoriginal.
+No sourcefunctionrewrite/microextension required; source/syntheticstandinggrant
+permits these tinyoriginalcontrols, not bulkIO/SDK/media. Inspect exact runner
+argv/API BEFORElaunch and useactualsourceguard/canonicaltokens. RootV6candidate
+code MUST NOT change. Allpriorfailed/consumedruns remain preserved, no replay.
+
+Mergecacheold jointproof5sourcesmatch but semanticRuntime changed; inspect/renew
+current-object composition ifneeded. Summaries withzero directbindings are
+UNBOUND, not automaticallycurrent nor proof thatoldactualbehaviorfailed. Current
+streamclassifierproof matches329directpins but no implicitSDK/camera/transport
+adoption. Keep all12requirements, excludeuser-prohibitednewfuzz campaign, retain
+legacy/platform limitations ratherthan endlesscleanupmigration. Nextpriorities:
+actualV6compat/propertygrants, currentworkerparity/apply, acceptanceconsolidation.
+Goalnotcomplete/notpaused/notblocked; no currentownedjob/resources.

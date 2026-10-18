@@ -252,3 +252,32 @@ arguments/workspace, other legacy/baseline/conversion lifetimes, allheap/RSS,
 external transport or complete SOL acceptance. The frozen V5 producer candidate
 is unchanged and predates this fix. Its proposals require source reconciliation
 before new final qualification; no existing admission or run is relabeled.
+
+
+## Current acceptance source audit (metadata only)
+
+A23-receipt audit now distinguishes actual source matches, changed historical
+bindings and summaries without direct bindings. The four explicitly pinned
+worker parity/apply result files each match38/53 sources and differ in15
+production files, including component/DNG/worker/admission code. Their original
+runs remain valid historical evidence but are not current-candidate scheduling
+qualification. Renew their tiny current-object configured1/2/4/8 and seeded apply
+controls with at most6 active execution credits plus2 owner inside Unison8.
+This is directed original-fixture testing, not a new fuzz campaign or SDK window.
+
+The cache joint-owner receipt matches five directly pinned source files but its
+semanticRuntime dependency changed. Source equality for the cache alone cannot
+adopt the full old runtime closure. Summary receipts for camera, transport and
+SDK often carry no direct pins: zero extracted bindings means unbound, not that
+their behavior failed or that their original closed runs should be replayed.
+The new stream classifier receipt has329 matching direct production bindings;
+that does not establish unrelated historical transport/SDK/corpus acceptance.
+
+[Audit](sol-acceptance-source-bindings-current-20261018.json) and
+[action summary](sol-current-acceptance-audit-summary-20261018.json) preserve these
+findings. Actualmetadataaudit8d6c0c/0/no session; Unison4 child/group/token closed,
+no EXIO/payload/native work. V6 candidate5cc96102 is unchanged, all3 admissionpaths
+absent at665242. Current actual compatibility/property checks remain pending their
+fresh grants. Prioritize those and current-object acceptance; do not replace
+release verification with an endless universal cleanup migration. Full goal
+remains active and incomplete, unknown MakerNote interpretation is not a gate.
