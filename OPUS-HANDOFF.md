@@ -5859,3 +5859,33 @@ adoption. Keep all12requirements, excludeuser-prohibitednewfuzz campaign, retain
 legacy/platform limitations ratherthan endlesscleanupmigration. Nextpriorities:
 actualV6compat/propertygrants, currentworkerparity/apply, acceptanceconsolidation.
 Goalnotcomplete/notpaused/notblocked; no currentownedjob/resources.
+
+
+## 2026-10-18 actualCURRENT worker parity/apply gap renewed
+
+Audit aaf778e5 identified15changed production dependencies in historical worker
+results. Fresh stockparity001 actualceddce/1 failed LINK beforeworker/fixturegen:
+missingOwnedClose/DomainOwner/NotificationPipe currentimplementations. AllCPU8/
+groupclosed, rawstderrpreserved. Fixed ONLY tests/workers/run.py dependencies:
+StagePublication+Cstub, OwnedClose, DomainOwner, NotificationPipe; actualmatched
+CMI/CMX/O objects copied fromcurrentproductionbuild, source/interfacehashchecked.
+FrozenV6root5cc96102/source329+execution400 UNCHANGED (runnernotinV6closure).
+
+Actual freshcontroller10119/8132d5/0/no session. Fourpositive sourcejobs under
+Unison8 closed allgroups/children0/tokens. New namespaces
+/private/tmp/unison-current-worker-{parity,apply}-{stock,ox}-20261018-002.
+Parity64original64-byte jobs/compiler, configured1/2/4/8 activecpu1/2/4/6 +owner2;
+8configured !=8simultaneous. Apply384jobs/compiler over6seeds:192completed/
+192cancelled/0late_cancel/1255checks. Doesnotprovewhere cancellationoccurred.
+Unused1GiBsparsefixtures absent, tinygeneratedDNG/probe prep only, noPhoto/SDK/
+EXglobal/nativeUI/transport/performance. Source/linkobject/binary/logpins verified.
+Only actual--build mode qualified, not standalone no-build portable compilation.
+
+Evidence tests/qualification/current-worker-parity-apply-actual-20261018.json
+103197B SHA2fe83118dca46ef70195971e00f9f9933cf4fb77ab2ad8bb8be89c131b3e30d8.
+Prior audit remainsimmutablehistorical; this closes its worker gap for stated
+currentobjectscope, not allother12area evidence. Mainhand off receives pointer.
+Next: actualV6upstream/fork/property grants; inspect semanticRuntime dependency
+for jointcache composition; remainingcurrentmerge/fault/platform/acceptance map.
+No ownlivejobs/resources. V6 stillnotadmitted atlastread665242; dofreshcheckpaths
+beforeoptionalwork. Keep frozenV6candidate fixed. Goal fullscopeactive/incomplete.

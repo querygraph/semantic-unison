@@ -281,3 +281,31 @@ absent at665242. Current actual compatibility/property checks remain pending the
 fresh grants. Prioritize those and current-object acceptance; do not replace
 release verification with an endless universal cleanup migration. Full goal
 remains active and incomplete, unknown MakerNote interpretation is not a gate.
+
+
+## Current production worker parity and apply renewed
+
+The acceptance audit identified15 changed worker dependencies; those historical
+receipts were not adopted as current. The runner's stale link list then failed
+before execution because it omitted current close/domain/notification owner
+implementations. That failed/closed attempt is retained. The runner now includes
+those modules and the publication dependency/stub, copying and verifying actual
+compiler-matched objects and interfaces rather than reconstructing signatures.
+No production source or frozen V6 execution closure changed.
+
+Fresh stock/Ox current-object controls passed: configured pools1/2/4/8,64 original
+64-byte hash/inspection jobs per compiler with queued cancellation; the8-worker
+configuration admits at most6 active jobs plus2 owner credits inside Unison8.
+Both compilers also passed six seeded384-job apply/cancellation controls:
+192 completed,192 cancelled,0 late cancellations observed,1255 checks. These
+observations do not locate cancellation inside a particular native write.
+Unused1GiB fixtures were not created. The runner prepares only tiny generated
+fixtures/probes for these modes, with no Photo media, SDK or transport.
+
+Actual10119/8132d5/0/no session, all four child/group/CPU8 scopes closed. Source,
+linked object, executable and result/log hashes verified. Evidence:
+`tests/qualification/current-worker-parity-apply-actual-20261018.json`103197B
+SHA2fe83118dca46ef70195971e00f9f9933cf4fb77ab2ad8bb8be89c131b3e30d8.
+This renews the stated worker acceptance scope; full8 simultaneous execution,
+OSthread/RSS limits, throughput and broader SDK/media/platform/transport remain
+separate. Only the actual-object `--build` runner mode is qualified here.
