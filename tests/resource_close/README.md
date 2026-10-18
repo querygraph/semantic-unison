@@ -38,3 +38,32 @@ operation failure and cancellation release the retiring reservation after a
 known close, but all three retain borrowing and leave the outer promise sleeping
 on an uncertain close. Real workers, nested readers, shutdown, connection cleanup,
 OS close faults and whole-process enforcement remain unqualified.
+
+## Isolated real worker qualification
+
+`worker_fault_run.py` links compiler-matched production objects with a private
+`SemanticWorkers` copy that substitutes only the owned-duplicate close callback.
+`worker_fault.ml` really closes each test descriptor, places a fresh `/dev/null`
+reference at that number, then raises an injected error. It does not inject into
+nested readers, native adapters or notification pipes. Each test uses its own
+64-byte file and no external validator or photographic input.
+
+The stock/Ox participants cover known digest plus normal shutdown, uncertain
+single close, uncertain input/output close after Snapshot, and an operation
+failure followed by uncertain close. Fault cases check the borrowed reply stays
+sleeping, pending/retained/CPU accounting stays charged, cancellation does not
+settle it, shutdown stays sleeping/idempotent, new submissions refuse and the
+replacement descriptors remain live. Their external controller waits for actual
+process exit. That exit is the fault case's OS settlement boundary; it is not
+reported as successful pool shutdown.
+
+A source-pinned pre-fix worker is separately linked with the same close callback
+and a zero-valued `retained` observation field for API compatibility. The original
+close-swallowing logic is unchanged. Its premature reply settlement must trigger
+the participant's `expected-retained-reply` failure on both compilers.
+
+Full current stock/Ox Make builds and selftests passed. This qualifies the named
+worker-duplicate scope only. Nested reader/channel close uncertainty, pool
+creation/notification-pipe errors, native contexts, caller descriptors and hard
+whole-process FD/RSS enforcement still need their own integration and evidence.
+The failed helper/link attempts remain in the actual qualification record.
