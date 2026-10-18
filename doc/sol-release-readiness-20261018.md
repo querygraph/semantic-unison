@@ -138,3 +138,15 @@ stock/Ox Make/Dune builds+selftests and24 designated negative participants/compi
 passed; inventoryv18 and the actual evidence preserve exact scope. Legacy
 returned values, converted reports/plans/global escapes, retained stream errors,
 outbound/baseline/whole-tree containment and final transport remain separate.
+
+## Retained stream-error successor
+
+[Stream error ownership](rpc-stream-error-ownership.md) independently bounds stored
+errors and ping borrowers: default256 owners/8MiB selected known string fields.
+Exact standard causes and abort/ping behavior are preserved; custom exceptions
+with unknown payload costs propagate unchanged early. Queued ping ownership
+survives disconnect/reset; known settlement releases once, recognized uncertainty
+retains explicit roots and charges. Four stock/Ox Make/Dune+selftests and31
+designated negatives/compiler passed, current581inputs verified (inventoryv19).
+Legacy result/conversion/outbound/baseline/whole-tree limits and final SOL
+transport/platform/performance acceptance remain separate.

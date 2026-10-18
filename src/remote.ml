@@ -1427,11 +1427,81 @@ let processDetachedRequest conn id cmdName buf =
 let streamAbortedSrc = ref 0
 let streamAbortedDst = ref false
 
+let streamErrorSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcstreamerrorslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "retained stream error owners"
+  "Positive process-wide count of stored stream errors and borrowed ping replies; maximum65536.")
+let streamErrorMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcstreamerrorbudget" 8 ~local:true
+  ~category:(`Advanced `Remote) "retained stream diagnostic message MiB"
+  "Selected known exception string bytes through ping reply settlement, not exception allocation or heap/RSS.")
+type stream_error={stream_cause:exn;stream_bytes:int;mutable stream_active:bool;
+                   mutable stream_borrowed:bool;mutable stream_previous:stream_error option}
 let streamError = Hashtbl.create 7
-
+let stream_error_count=ref 0 and stream_error_bytes=ref 0
+let retained_stream_errors=ref None
+let stream_error_limits () =
+  let slots=Prefs.read streamErrorSlots and mib=Prefs.read streamErrorMiB in
+  if slots<=0 || slots>65536 || mib<=0 || mib>max_int/1048576 then
+    raise(Util.Fatal "Invalid RPC stream error budget");
+  slots,mib*1048576
+let check_stream_error_capacity () =
+  let slots,bytes=stream_error_limits () in
+  if !stream_error_count>=slots || !stream_error_bytes>bytes then
+    raise(Util.Fatal "RPC stream error budget exhausted")
+let release_stream_error entry =
+  if entry.stream_active then begin
+    entry.stream_active<-false;decr stream_error_count;
+    stream_error_bytes:= !stream_error_bytes-entry.stream_bytes
+  end
+let record_stream_error id error =
+  if Hashtbl.mem streamError id then invalid_arg "RPC duplicate stream error";
+  (* Preserve exact standard exception values and their existing abort/ping
+     behavior while accounting known string fields. Custom exception payloads
+     may retain arbitrary objects: propagate the exact original exception
+     instead of silently storing an unaccounted value. *)
+  let bytes=match error with
+    | Util.Transient message | Util.Fatal message | Failure message
+    | Invalid_argument message | Sys_error message -> String.length message
+    | Unix.Unix_error(_,operation,path) ->
+        let a=String.length operation and b=String.length path in
+        if a>max_int-b then raise(Util.Fatal "RPC stream error budget exhausted");
+        a+b
+    | Match_failure(file,_,_) | Assert_failure(file,_,_) -> String.length file
+    | End_of_file | Not_found | Exit | Division_by_zero | Out_of_memory
+    | Stack_overflow | Sys.Break -> 0
+    | _ -> raise error in
+  let slots,limit=stream_error_limits () in
+  if !stream_error_count>=slots || !stream_error_bytes>limit ||
+     bytes>limit- !stream_error_bytes then
+    raise(Util.Fatal "RPC stream error budget exhausted");
+  let entry={stream_cause=error;stream_bytes=bytes;stream_active=false;
+             stream_borrowed=false;stream_previous=None} in
+  Hashtbl.add streamError id entry;
+  entry.stream_active<-true;incr stream_error_count;
+  stream_error_bytes:= !stream_error_bytes+bytes
+let with_stream_error_scope id use =
+  match Hashtbl.find_opt streamError id with
+  | None -> use ()
+  | Some entry ->
+      if entry.stream_borrowed then raise(Util.Fatal "RPC stream error already borrowed");
+      (* Prepare retention before borrowing from the table. Disconnect may clear
+         that table, but cannot revoke a queued ping reply's actual ownership. *)
+      let cell=Some entry in
+      let retain_stream _=entry.stream_previous<- !retained_stream_errors;
+        retained_stream_errors:=cell in
+      let finish ()=
+        (match Hashtbl.find_opt streamError id with
+         | Some current when current==entry -> Hashtbl.remove streamError id
+         | _ -> ());
+        release_stream_error entry in
+      let work ()=entry.stream_borrowed<-true;use () in
+      BorrowedWork.try_bind
+        (fun()->RetainedOwnership.guard ~is_uncertain:body_unresolved ~on_retained:retain_stream work)
+        (fun result->finish ();Lwt.return result)
+        (fun error->finish ();Lwt.fail error)
 let resetStreamErroState () =
   streamAbortedSrc := 0;
   streamAbortedDst := false;
+  Hashtbl.iter(fun _ entry->if not entry.stream_borrowed then release_stream_error entry)streamError;
   Hashtbl.reset streamError
 let () = at_conn_close resetStreamErroState
 
@@ -1448,6 +1518,7 @@ let processStream conn id cmdName buf =
   if Hashtbl.mem streamError id then
    abortStream conn id
   else begin
+    check_stream_error_capacity ();
     begin try
       let cmd =
         try Util.StringMap.find cmdName !serverStreams
@@ -1458,7 +1529,7 @@ let processStream conn id cmdName buf =
     with
     | e when body_unresolved e -> raise e
     | e ->
-      Hashtbl.add streamError id e;
+      record_stream_error id e;
       abortStream conn id
     end
   end
@@ -1788,13 +1859,17 @@ let registerStreamCmd ?maxPayload
    | None -> ()
    | Some limit -> serverArgLimits:=Util.StringMap.add cmdName limit !serverArgLimits);
   let ping =
-    registerServerCmd (cmdName ^ "Ping") Umarshal.int Umarshal.unit
+    let name=cmdName ^ "Ping" in
+    registerSpecialServerCmd
+      ~decodeArgs:(with_decoded_args None Umarshal.int(Bytearray.of_string(name ^ "-args")))
+      ~withScope:(fun _ id use->with_stream_error_scope id use)
+      name (defaultMarshalingFunctions Umarshal.int)(defaultMarshalingFunctions Umarshal.unit)
       (fun conn (id : int) ->
          try
-           let e = Hashtbl.find streamError id in
+           let entry = Hashtbl.find streamError id in
            Hashtbl.remove streamError id;
            streamAbortedDst := false;
-           Lwt.fail e
+           Lwt.fail entry.stream_cause
          with Not_found ->
            Lwt.return ())
   in

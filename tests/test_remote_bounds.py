@@ -19,7 +19,7 @@ def main():
     parser.add_argument('build', type=Path)
     parser.add_argument('--report', type=Path)
     parser.add_argument('--compiler', default=os.environ.get('OCAMLOPT', 'ocamlopt'))
-    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result'), default='all')
+    parser.add_argument('--negative-family', choices=('all','framing','body','decoded','stream','pending','result','errors'), default='all')
     args = parser.parse_args()
     repository = Path(__file__).resolve().parent.parent
     build = args.build.resolve() / "src"
@@ -48,7 +48,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text()+'\n'+(repository/'tests/remote_stream_limits.ml').read_text()+'\n'+(repository/'tests/remote_body_input.ml').read_text()+'\n'+(repository/'tests/remote_pending_limits.ml').read_text()+'\n'+(repository/'tests/remote_stream_errors.ml').read_text()+'\n'+(repository/'tests/remote_body_retained.ml').read_text()+'\n'+(repository/'tests/remote_result_input.ml').read_text()+'\n'+(repository/'tests/remote_decoded_input.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -63,6 +63,7 @@ def main():
                                       'tests/remote_stream_limits.ml': sha(repository/'tests/remote_stream_limits.ml'),
                                       'tests/remote_pending_limits.ml': sha(repository/'tests/remote_pending_limits.ml'),
                                       'tests/remote_result_input.ml': sha(repository/'tests/remote_result_input.ml'),
+                                      'tests/remote_stream_errors.ml': sha(repository/'tests/remote_stream_errors.ml'),
                                       'tests/remote_body_input.ml': sha(repository/'tests/remote_body_input.ml'),
                                       'tests/remote_body_retained.ml': sha(repository/'tests/remote_body_retained.ml'),
                                       'tests/remote_decoded_input.ml': sha(repository/'tests/remote_decoded_input.ml'),
@@ -167,7 +168,7 @@ def main():
                  'DESIGNATED body uncertainty escaped'),
                 ('body-stream-uncertainty-negative',
                  '| e when body_unresolved e -> raise e',
-                 '| e when false && body_unresolved e -> raise e',
+                 '| e when body_unresolved e -> abortStream conn id',
                  'DESIGNATED stream uncertainty converted to abort'),
                 ('body-registered-uncertainty-negative',
                  '| _ -> List.exists (fun classify->classify error) !body_ownership_classifiers',
@@ -273,6 +274,27 @@ def main():
                     c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
                     assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
                     record['result_owner_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
+            if args.negative_family in ('all','errors'):
+                record['stream_error_negatives']={}
+                for label,needle,replacement,witness in [
+                    ('stream-error-preflight','    check_stream_error_capacity ();','    (* designated stream preflight omitted *)','DESIGNATED full error registry ran another handler'),
+                    ('stream-error-bytes','bytes>limit- !stream_error_bytes then','false then','DESIGNATED stream diagnostic byte limit ignored'),
+                    ('stream-error-early-ping','let work ()=entry.stream_borrowed<-true;use () in','let work ()=entry.stream_borrowed<-true;release_stream_error entry;use () in','DESIGNATED ping released stream error before output'),
+                    ('stream-error-reset','if not entry.stream_borrowed then release_stream_error entry','release_stream_error entry','DESIGNATED reset revoked borrowed stream error'),
+                    ('stream-error-unknown','| _ -> raise error in','| _ -> 0 in','DESIGNATED unknown exception stored'),
+                    ('stream-error-uncertainty','~is_uncertain:body_unresolved ~on_retained:retain_stream work','~is_uncertain:(fun _->false) ~on_retained:retain_stream work','DESIGNATED stream error uncertainty escaped'),
+                    ('stream-error-borrow','if entry.stream_borrowed then raise(Util.Fatal "RPC stream error already borrowed");','(* designated duplicate borrower check omitted *)','DESIGNATED duplicate borrower invoked')]:
+                    private=work/label;private.mkdir(mode=0o700)
+                    assert source.count(needle)==1,(label,source.count(needle))
+                    (private/'remoteForTest.ml').write_text(controlled(source.replace(needle,replacement,1)))
+                    (private/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+                    ef=['-I',str(private),*flags]
+                    for argv in [[compiler,*ef,'-c','remoteForTest.ml'],[compiler,*ef,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','negative']]:
+                        c=subprocess.run(argv,cwd=private,capture_output=True,text=True,timeout=30)
+                        record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+                    c=subprocess.run([str(private/'negative')],cwd=private,env=dict(os.environ,UNISON=str(private/'state')),capture_output=True,text=True,timeout=15)
+                    assert c.returncode==2 and witness in c.stderr,c.stdout+c.stderr
+                    record['stream_error_negatives'][label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/'negative'))
             record['status']='passed'
         finally:
             if args.report:

@@ -5143,3 +5143,61 @@ failed fixture-order003 preserved. No Unison owner/CPU/EXIO resources held.
 Next substantive source gaps: retained streamError values, legacy clientresult/
 converted-object lifetime, outbound/baseline/containment and final SOL acceptance.
 Frozen9d9dccc0 exact IOrequests remain separate; no replay or automatic grant.
+
+## 2026-10-18 retained stream error successor — controls active
+
+Uncommitted source adds streamerror count/selected-known-string limits spanning
+stored entries and actual queued ping borrowers; reset skips borrowed entries,
+known settlement releasesonce and recognizeduncertainty retains preparedroot.
+Standardexceptionexactcauses/abortbehavior preserved; customunknownpayloadexn
+propagatesexactearly instead of unboundedpersistent storage. See streamerror doc.
+
+Failedclosed attempts preserved: stock001/d33fe2/1 (test passed Umarshalcodec
+to customstream API instead of marshalingFunctions); controller31925/17d8a2/1
+stock002 caught Failure-string abort compatibility omission; production corrected
+to account standard known exception fields. Controller75616/7ba312/1 stock003
+passed positive+6mutants, final duplicateborrow mutant needed actual Lwt result
+observation rather than syncignore; fixture corrected only. Each child reaped/
+groupabsent/CPU4closed, no unknownnative/EXIO/SDK/Photo payload owner.
+
+Current controller11022/initial5bc20b is ACTUALLY LIVE stock+Ox sevenmutants; stock
+passed. Do not repeat. Full four current builds/finalallfamily regressions and
+evidence/commit remain pending; prior d5f092d2 committed+forkpushed unchanged.
+
+Stream-error focused controller11022/13fef4/exit0/no session ACTUALLY CLOSED:
+stock49804/Ox49949 reaped0/groupsabsent/CPU4closed, seven designated mutants each.
+Final full-build+regression controller ACTUALLY STARTED session70244, initial
+chunk51376f. It sequentially runs four Make/Dune+selftests underUnison8 then
+seven groups/compiler underUnison4, namespacesunison-stream-errors-*-20261018-001
+(builds) andunison-stream-errors-*-*-20261018-005(controls), expected31 negatives/
+compiler. Do NOT duplicate active70244. No EXIO/SDK/Photo payload operations.
+
+The old processStream uncertainty-branch omission mutant became redundant because
+new unknown-payload fallback rethrows the same uncertain exception. Replaced it
+with explicit uncertainty-to-abort mutation; designated raw-body loss witness
+unchanged. Final source/tests pinned only after this change. Full builds/results/
+sourcechecks/evidence/commit stillpending. Three frozen Rootadmission paths absent
+at dispatch; controller checks between finite jobs and stops ifanyappears.
+
+## 2026-10-18 retained stream errors qualified — no resources held
+
+Actual combined controller70244/3c4cb2/exit0/no session collected. All four stock/
+Ox Make+Dune+selftests passed; all581 recorded inputs/compiler/binary hashes match.
+Fourteen final groups passed positive suites+31 designated negatives/compiler;
+each child reaped0/othersabsent and CPU8or4closed. No EXIO/SDK/Photo payload owner.
+
+Evidence tests/qualification/rpc-stream-error-ownership-actual-20261018.json
+110931B SHA6938cb4c1a6eb029b3291173c50a1e465c990f43a2bc11911022ea541c039be7.
+Inventoryv19 and stream-error doc current. Default256owners+8MiB known string
+fields include stored entries and actual ping borrowers; exact standard exception
+causes/abort behavior preserved; custom unknown payloads propagate exactearly.
+Disconnect only releases unborrowedtableentries; typeduncertainty roots charges.
+Earlier001/002/003 failures and004focusedruns preserved, final005coverscurrent
+source+stronger direct uncertainty-to-abort mutation. No fullheap/RSS claim.
+
+Next priority: source-pinned mixed upstream/retainedfork and generated-property
+IO qualification for this CURRENT successor. Old frozen9d9dccc0/v2requests stay
+unchanged historicalproposals, not current source qualification. Fresh request/
+workspace/pins/Root scheduling required before payload; no automaticSDK/native
+backend grant. Other legacy result/conversion/outbound/baseline/containment and
+complete SOL acceptance remain open; goal active/not blocked. Standing8/8.

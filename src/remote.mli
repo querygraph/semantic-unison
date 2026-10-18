@@ -203,7 +203,14 @@ val registerStreamCmd :
     caps, rejecting overflow at registration. Both stream and ordinary fallback
     caps apply before raw body allocation, independently of the outer endpoint
     limit and existing raw input lanes. Absent limit preserves the existing
-    custom registration behavior. This does not account custom heap/workspace. *)
+    custom registration behavior. This does not account custom heap/workspace.
+    rpcstreamerrorslots and rpcstreamerrorbudget independently limit stored
+    errors plus ping borrowers (default256 owners/8MiB known string fields).
+    Standard exceptions preserve exact causes and existing abort/ping behavior;
+    custom exceptions with unknown payload cost propagate unchanged instead of
+    entering the error table. Charges survive actual queued ping output and
+    recognized ownership uncertainty; disconnect only releases unborrowed entries.
+    This does not bound exception construction, arbitrary payloads or heap/RSS. *)
 
 (* Register a function to be run when the connection between client and server
    is closed (willingly or unexpectedly). The function should not raise
