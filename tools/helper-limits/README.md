@@ -74,3 +74,14 @@ apply only when the optional helper limiter is explicitly configured.
 Original injected fixtures exercise the portable branch on the build host and
 Darwin's kernel-close-success/reported-EINTR case, including target non-entry.
 They do not claim native runtime qualification of other operating systems.
+
+## Separate opt-in endpoint mode
+
+The same newly built executable also accepts `--unison-endpoint-limits-v1` to
+install a hard FD ceiling **before the main Unison endpoint executes**. This is
+separate from configuring `helperdescriptors`. The second numeric field is a
+requested hard RSS ceiling in endpoint mode; positive RSS requests refuse before
+exec because no supported RSS backend is implemented. Zero leaves RSS unenforced.
+See [endpoint contract and qualified scope](../../doc/endpoint-resource-enforcement.md).
+Existing helper v1 keeps its address-space semantics. No installed binary or
+configured pin is automatically replaced by this source change.
