@@ -35,9 +35,9 @@ cases/12CLI under a fresh admission; [actual sealed evidence](../tests/qualifica
 binds all groups/FD closure and actual owner38627/33bfbc/0. Camera V1 became stale
 after exiftool integration; V2 knowledge successor is prepared but not admitted.
 
-The next evidence is current-candidate transfer/property behavior, exact retained-
-version interoperation, and the separately scoped real-camera component+MakerNote report. Exact retained-
-fork mixed interoperation is now evidenced, with the limits below.
+The next evidence is current-candidate transfer/property behavior and the
+separately scoped real-camera component+MakerNote report. Exact retained-fork
+mixed interoperation is now evidenced, with the limits below.
 The older peer already supports semantic-delta/producer binding, so its matrix
 cannot prove arbitrary upstream or capability-absent fallback. Deployment is not
 waiting for exhaustive MakerNote interpretation or decoded-pixel equivalence of
@@ -58,19 +58,18 @@ fault, transfer or scheduling controls.
 
 ## Next actions in order
 
-1. Obtain candidate-bound transfer/property and mixed-version transport evidence.
-   Frozen property requeste60975f3 is queued from the separate integration checkout;
-   its admission was absent at last check. It qualifies that frozen baseline only.
-   Never substitute PR13 binaries, reuse a grant, or equate in-process codec tests
-   with transport/server/pump settlement. Current candidate follow-up requires
-   its own exact source/build plan and admission.
-2. Prepare a bounded retained-private-camera component observation with exact
-   input identity, current inspector build, executor, budgets and closure plan.
-   Current stock/Ox inspectors passed sixteen complete calls on tiny independent
-   TIFFs; eight manual command controls passed. See
-   tests/qualification/current-inspector-components-actual-20261017.json.
-   INSPECT_COMPONENTS=1 selects an advisory report, not a transfer profile or
-   camera payload permission. No camera bytes were opened by this refresh.
+1. Run the bounded retained-private-camera component+exiftool-rs observation
+   under a fresh exact Root admission. [Camera knowledge V2](camera-knowledge-request-v2.json)
+   pins the existing inspector and bridge,40sources, one input identity and
+   three declared source passes. Tiny independent fixtures passed; no camera
+   bytes opened by preparation. V1 is stale/unstarted and preserved.
+2. Obtain candidate-bound transfer/property evidence using
+   [PR13 property request V1](pr13-properties-request-v1.json):18rows/54CLI,
+   current stock/Ox binaries with318productionpins,38harnesspins, generated2MiB
+   fixtures only. Source/property budget controls passed, actual24067/ccc775/0.
+   Exact retained-fork mixed transport already passed4cases/12CLI. Older frozen
+   property requeste60975f3 qualifies a separate baseline only; never substitute
+   its admission or binaries. Both new jobs need their own fresh IO admissions.
 3. Keep the remaining legacy cleanup limitations explicit. Owned publication
    backend, bound SemanticSync/SemanticRemote, bound local Copy and guarded rsync
    staging have current composed failure controls and stock/Ox builds. Their
