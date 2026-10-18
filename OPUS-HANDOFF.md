@@ -5764,3 +5764,33 @@ Next: commit/push qualifiedsuccessor, prepare fresh exactcurrent-source V6plans
 usingcurrentbinaries/productionpins andrequestRootfiniteIO; no automaticgrant or
 newsourcepolicy/resource gate. Then prioritize actualcompatibility/properties and
 acceptance consolidation instead of treating positiveoldwire as fullfaultproof.
+
+
+## 2026-10-18 qualified stream classifier source513c121a published
+
+Actualsourcecommitac7fb3/0; qualifiedproduction513c121a on
+implementation/stream-classifier-ownership at /Users/alexy/src/unison-stream-classifier-20261018.
+Fullcurrentproduction+correctedfixture regressionunion parent72746/c5db4c/0/no
+session;55negative/compiler. All4nativebuild/selftests passed; nativeproduction/
+compiler/binary hashes exact, one explicitlydeclared UNCOMPILED tests/remote_stream_errors.ml
+fixture changed afterbuilds, separatelycompiled underbothcompilers. Allgroups/
+CPU4or8closed; no EXIO/SDK/Photo/nativeUI or actualuncertainDirectoryFDs.
+Evidence57c11c9133b2b761b8dccc351730cc868e4e2f13830f16eb66be0d01a6adf1b7,
+527340B tests/qualification/rpc-stream-classifier-actual-20261018.json.
+Inventoryv24/SOL/readiness/newdoccurrent, fullgoalnotcomplete.
+
+Photo notice ACTUALLYqueued01a150b1-5cb8-7190-9386-cde1692ac850/ebbb040:
+V5sourceproposalsdb616795 DEFERRED forconfirmedpublicclassifiercontractgap;
+oldfrozen2e24a0fc untouched. Durabledeferral here
+ doc/sol-producer-v5-source-deferral-stream-classifier-20261018.json.
+All6oldV5admission/workspacepaths freshabsent atreceiptcreation, authornoV5dispatch.
+No source-derived fakeparentterminal; contrarycrossedgrant/START mustreconcile.
+No schedulinghold, no payloadnewgrant/replay inferred. V4already superseded,
+V3/V2deferred. Currentfixnowqualifiesfailureboundary formerlyonlysourcenote.
+
+NEXT: prepare ONEfreshcurrent-sourceV6 frozen requestset usingcurrentstock/Ox
+builds /private/tmp/unison-stream-classifier-{stock,ox}-check-20261018-001/RESULT.json,
+source513c121a, proof57c11c91. PreserveV5/V4files and consumedolderRootgrants.
+Exactseparateupstream/retainedfork/properties Rootgrants beforeanyIO. Prioritize
+these actualcompatibility/transfer checks +fullacceptancemap; no further optional
+microextensions on a frozen runtimecandidate. No livequalificationjobs remain.
