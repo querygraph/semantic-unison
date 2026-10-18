@@ -5,21 +5,30 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
-**Current release verification, 2026-10-17:** PR13 now has actual current-candidate
-mixed-peer transport evidence: four stock/Ox versus exact retained older-fork
-cases, seed/update/noop,12CLI, exact outputs/noop identity and all separate
-client/server/supervisor/pump groups settled. Actual owning tool38627/33bfbc/0
-(no session), CPU/IO closed. The older fork already supports producer binding;
-arbitrary upstream/capability-absent fallback is not inferred. Earlier failures
-and their fixes are preserved in [the sealed receipt](tests/qualification/mixed-peer-actual-20261017.json).
-[Current metadata verification](doc/sol-current-verification-20261017-v2.json)
-rechecks that seal, current production builds and pending request source pins.
-The real-camera component+exiftool-rs request and current-candidate property
-regression are prepared and await separate IO admissions. No camera payload
-was opened during preparation; incomplete MakerNotes are not a deployment gate.
-[Release readiness](doc/sol-release-readiness-20261017.md) is authoritative for
-remaining evidence; historical checkpoint statements below retain their original
-scope. No full-goal completion, production activation or merge is claimed.
+**Current release verification, 2026-10-17:** draft fork PR13 now retains
+separate actual closed results for the older-fork and genuine pinned-upstream
+mixed matrices (four cases/12CLI each), current property transfer (18rows/54CLI),
+real-camera V6 complete byte partition plus30 MakerNote observations, and mixed
+SDK/ExifTool13.59/hash controls. Their admissions are consumed; no Photo hold or
+camera request remains pending. Unknown MakerNote meanings are not a deployment
+gate, and none of these results grants pixels, corpus or production authority.
+
+[Current cached-worker measurements](bench/semantic/results/shared-current-20261017.md)
+add48batches/288correct digests within Unison8, with measured primary logical
+reads and separately scoped CPU/RSS/FD observations. A subsequent XMP internal
+representation change retains namespace/local pairs and expands only public
+names; unchanged458directed digest/parse vectors and scalar merge controls pass
+on both compilers. For the same174KiB stress packet, managed allocation falls
+65–67% against the pinned eager-name implementation. Complete stock/Ox builds
+and selftests passed. These are selected representation/resource improvements,
+not whole-process hard RSS/FD ceilings or complete transfer performance proof.
+
+[Release readiness](doc/sol-release-readiness-20261017.md) maps remaining
+requirements; [current XMP evidence](tests/qualification/xmp-compact-names-actual-20261017.json)
+and [test-scope correction](tests/qualification/xmp-fixed-only-scope-correction-20261017.json)
+preserve exact execution and limitations. Historical checkpoint statements below
+retain their original scope. The full goal remains active; no production
+activation, new runtime permission, replay or merge is inferred.
 
 
 **Integration checkpoint, 2026-10-17:** consolidated draft PR13 against fork

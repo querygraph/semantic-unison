@@ -140,3 +140,18 @@ released. Six jobs produce an uneven4+2 wave at four workers, explicitly retaine
 in the report. This closes the current cached-digest measurement gap, not full
 end-to-end sync/physical IO/hard memory or process-tree FD qualification.
 The goal remains active. No further Photo hold or benchmark replay is implied.
+
+## Current XMP representation qualification
+
+Internal namespace/local pairs replace repeated expanded strings, preserving
+accepted packets and public transcript names/digests. Both current and pinned
+baseline implementations pass458directed checks/compiler and the same maximum-
+attribute long-URI packet. Reported managed allocation falls65–67%; stock/Ox
+full Make+selftests and scalar merge/mode controls pass.
+[Qualification](../tests/qualification/xmp-compact-names-actual-20261017.json)
+separates this selected M6 improvement from hard RSS/native allocation bounds.
+[Scope correction](../tests/qualification/xmp-fixed-only-scope-correction-20261017.json)
+preserves the initial flag error; corrected runs skip both random campaigns.
+No IO/native/Photo resource hold remains. Previously sealed benchmark source
+proofs refer to their retained execution snapshots, not unchanged later checkout
+bytes. No benchmark replay is implied by this parser change.

@@ -1,0 +1,81 @@
+{
+  "schema": "unison-xmp-fixed-only-scope-correction/1",
+  "state": "SCOPE_ERROR_PRESERVED_CORRECTED_SUCCESSOR",
+  "actual_prior_tool": {
+    "session": 25742,
+    "terminal_chunk": "f123f4",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "error": "Initial fixed-only flag skipped Python token mutations but not legacy512-case OCaml random-byte loop. Four runs executed that loop contrary to requested exclusion. Outputs retained; not presented as compliant directed-only runs.",
+  "random_byte_cases_per_prior_run": 512,
+  "prior_runs": 4,
+  "prior_references": [
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-compact-20261017-001/RESULT.json",
+      "bytes": 2274,
+      "sha256": "b35b66359846c06e7f6c80c069da95c37c4c0bd519825737d9e596c50680003f"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-compact-20261017-001/SHARED-START.json",
+      "bytes": 1278,
+      "sha256": "06496573e48dc7b613d3705a17291f6bffaf6d2be2e5398af97c2da35758c86d"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-compact-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "b0d7280011b0f34436be32bcb0d7f3aab5f2728d8b3f355f861c8ec15353dc8d"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-eager-baseline-20261017-001/RESULT.json",
+      "bytes": 2313,
+      "sha256": "e4610638161455aa675f9a9290828cb83bfd68e6255efebde90c2eea2da359e8"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-eager-baseline-20261017-001/SHARED-START.json",
+      "bytes": 1362,
+      "sha256": "20c66d16c295b316a0c22ac90276f06e9385f4747a9f6e4c43f91ae8a53cc00d"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-stock-eager-baseline-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "134491be29c5834c6ef4be805120bcd01bea8a5a01f7fad24e9a5657e352a594"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-compact-20261017-001/RESULT.json",
+      "bytes": 2279,
+      "sha256": "84aebf43443fab106ac4ed63434c25d26676cf2d4fb5cebffea9caf6e32eb499"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-compact-20261017-001/SHARED-START.json",
+      "bytes": 1277,
+      "sha256": "f53d424890e2907c8f9abd84eb789e5a92a1fff0d88b4d7193621bb1831cfe75"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-compact-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "a62826e95731d7632026165a77e42d8ed5200ebae60d3bbf8d19242c07856d8b"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-eager-baseline-20261017-001/RESULT.json",
+      "bytes": 2318,
+      "sha256": "0b94603f0be80c3a02596518c6bfdeecb566f7d097ac1fb0af01bb568665d434"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-eager-baseline-20261017-001/SHARED-START.json",
+      "bytes": 1359,
+      "sha256": "e6d5d221acb25e9999161c89a3caa9568c27b5b48cb4fba06b5503244971e54d"
+    },
+    {
+      "path": "/private/tmp/unison-xmp-name-memory-ox-eager-baseline-20261017-001/SHARED-CLOSED.json",
+      "bytes": 535,
+      "sha256": "fd72bd714d15243b47ab46b8b1b253ed81aa271f7ac56201f560a0a98e2daecf"
+    }
+  ],
+  "corrected_successor": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/xmp-compact-names-actual-20261017.json",
+    "bytes": 76243,
+    "sha256": "80c4f94669a11d73d09b2a0623cfef4f9c230413e82a85f7be67fb59e1775697"
+  },
+  "resolution": "Flag passed to native fixture and guards random loop; corrected002 reports458directed checks, random_byte_cases0, test_argv--fixed-only, Python mutation resultnull. No random campaign repeated after correction."
+}

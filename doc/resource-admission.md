@@ -80,8 +80,8 @@ The following remain required before describing this as complete resource contro
   including uncertain OS close/reap settlement.
 - Pool, transport, archive and ordinary-operation baselines, operating-system
   descriptor limits, mount incarnation and cross-process attribution.
-- Admission for incoming raw/decoded RPC arguments before allocation, parser
-  expansion, directory manifests, native/child allocations and measured RSS.
+- Remaining RPC headers/replies/unbounded legacy traffic and decoded arguments,
+  parser expansion, directory manifests, native/child allocations and measured RSS.
 - Broader post-dispatch allocation/cancellation stress and lifecycle recovery.
 
 Buffer credits estimate retained proof/codec work. They do not bound the OCaml
@@ -171,3 +171,17 @@ Lowering a limit below current usage refuses new work until existing work settle
 This bounds retained raw request buffers, not decoded objects, headers, reply
 buffers, streams, legacy unbounded commands or process RSS. Their accounting
 remains separate work. No wire format or legacy command registration changes.
+
+## XMP namespace representation
+
+[Current compact-name qualification](../tests/qualification/xmp-compact-names-actual-20261017.json)
+removes per-internal-node expanded-name strings. AST nodes retain shared URI and
+local tokens; the same length/duplicate checks remain. Expansion occurs at the
+128-property public projection and bounded scalar view. The same174KiB stress
+packet retains its independent digest while managed allocation falls65–67%
+against the pinned eager-name source on this host. Full stock/Ox builds, directed
+parser cases and scalar merge/mode checks pass. No new input refusal is used to
+obtain that reduction. This does not turn transaction estimates into RSS caps;
+namespace tables, decoded objects and native allocation peaks remain separately
+scoped. The initial fixed-only wiring error and corrected directed-only runs
+are retained in explicit receipts.

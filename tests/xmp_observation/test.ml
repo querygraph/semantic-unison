@@ -1,6 +1,7 @@
 open XmpObservation
 
 let count = ref 0
+let fixed_only = Array.length Sys.argv = 2 && Sys.argv.(1) = "--fixed-only"
 let check name result =
   incr count;
   if not result then (prerr_endline ("FAIL: " ^ name); exit 1)
@@ -324,6 +325,24 @@ let () =
       "<Value " ^ attributes final ^ "/></crs:MaskGroup>" in
   ignore (single "16384 packet attributes accepted" (description "" (total_attributes 253)));
   rejected "16385 packet attributes rejected" (description "" (total_attributes 254));
+  (* Reuse one long namespace in a full, still-supported attribute packet.
+     Public names/digests are unchanged; internal names need no expanded copies. *)
+  let long_uri="urn:" ^ String.make 480 'x' in
+  let names n=String.concat " " (List.init n (fun i -> "p:a" ^ string_of_int i ^ "=\"v\"")) in
+  let long_children="<crs:MaskGroup>" ^
+    String.concat "" (List.init 63 (fun _ -> "<Value " ^ names 256 ^ "/>")) ^
+    "<Value " ^ names 252 ^ "/></crs:MaskGroup>" in
+  let long_packet=description ~extra:("xmlns:p=\"" ^ long_uri ^ "\"") "" long_children in
+  Gc.full_major ();
+  let before=Gc.allocated_bytes () in
+  let observed=observe long_packet in
+  let allocated=Gc.allocated_bytes () -. before in
+  let observed=match observed with Ok value -> value | Error why -> failwith why in
+  check "long namespace full attribute packet remains accepted" (List.length observed.properties=1);
+  check "long namespace digest unchanged against independent transcript"
+    (SemanticHash.hex (List.hd observed.properties).digest = Expected.long_names);
+  Printf.printf "XMP_LONG_NAMES packet_bytes=%d allocated_bytes=%.0f\n%!"
+    (String.length long_packet) allocated;
   (* Every byte prefix of a nontrivial packet must be rejected until the root is
      complete.  This checks all token/attribute/entity/mask truncation positions. *)
   let truncation = description "crs:Exposure2012=\"1&amp;2\""
@@ -333,6 +352,7 @@ let () =
   done;
   (* Synthetic malformed-byte input only; no files or production metadata are
      used.  Accepted output must respect every public output bound. *)
+  if not fixed_only then begin
   let random = Random.State.make [|0x584d50; 17|] in
   for sample = 0 to 511 do
     let data = String.init (Random.State.int random 1024) (fun _ -> Char.chr (Random.State.int random 256)) in
@@ -343,5 +363,6 @@ let () =
         (List.length observation.properties <= 128 &&
          List.for_all (fun p -> String.length p.name <= 512 && String.length p.digest = 32)
            observation.properties)
-  done;
+  done
+  end;
   Printf.printf "PASS: %d bounded XMP observation checks\n%!" !count

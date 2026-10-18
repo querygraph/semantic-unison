@@ -8,8 +8,8 @@ prove rendering equivalence, or change synchronization/conflict decisions.
 Run the synthetic suite in a private compiler-matched directory:
 
 ```sh
-python3 tests/xmp_observation/run.py --ocamlopt /usr/local/bin/ocamlopt
-python3 tests/xmp_observation/run.py --ocamlopt /Users/alexy/.opam/5.2.0+ox/bin/ocamlopt
+python3 tests/xmp_observation/run.py --fixed-only --ocamlopt /usr/local/bin/ocamlopt
+python3 tests/xmp_observation/run.py --fixed-only --ocamlopt /Users/alexy/.opam/5.2.0+ox/bin/ocamlopt
 ```
 
 The runner compiles only the production reader and SHA-256 module plus the focused
@@ -30,9 +30,9 @@ context, loss of child subtree encoding, and acceptance of duplicate expanded
 properties:
 
 ```sh
-python3 tests/xmp_observation/run.py --negative-control namespace
-python3 tests/xmp_observation/run.py --negative-control subtree
-python3 tests/xmp_observation/run.py --negative-control duplicate
+python3 tests/xmp_observation/run.py --fixed-only --negative-control namespace
+python3 tests/xmp_observation/run.py --fixed-only --negative-control subtree
+python3 tests/xmp_observation/run.py --fixed-only --negative-control duplicate
 ```
 
 The final isolated qualification is recorded in `qualification-20261013.json`:
@@ -47,3 +47,32 @@ Only synthetic in-memory packets are inspected. No Adobe invocation, catalog,
 Photo cache, image payload, or source photo is accessed. The precise supported
 subset, resource bounds, excluded structural fields, and digest transcript are
 documented in `src/xmpObservation.mli`.
+
+## Directed-only qualification and compact internal names
+
+Use `--fixed-only` for the current user-directed qualification scope. It passes
+the flag to the OCaml fixture and skips both its512 random-byte cases and
+Python's token mutation batch. Hand-authored malformed inputs and all byte
+prefixes of one structured packet remain directed controls. Historical default
+behavior still includes the campaigns; do not invoke it for this task. Receipts
+record the native argv, zero random cases and null mutation result explicitly.
+The initial incomplete flag wiring is preserved in the separate scope-correction
+receipt; those runs are not relabeled directed-only.
+
+The AST retains immutable namespace URI/local-name pairs, checking the existing
+512-byte expanded-name bound without concatenating every internal name. Duplicate
+attributes compare the same pair; public property/scalar names expand only at
+the bounded output layer. This preserves existing accepted packets, namespace
+resolution, transcript hashes and scalar policy rather than adding refusals.
+
+The same174347-byte/16384-attribute fixture and independent Python transcript
+pass458directed checks per implementation/compiler. Against source baseline
+57ec15479a957cfb8f38f6f98c588c2e50b63343, `Gc.allocated_bytes` deltas fall from
+26273272 to9109544 bytes on stock and24695568 to8056032 on Ox. This measures
+managed allocation during one observation, not live/peak RSS or native heaps.
+`--baseline-revision` accepts one exact local Git40-hex source and records its
+actual tested SHA; it does not claim that old code is current.
+[Evidence](../qualification/xmp-compact-names-actual-20261017.json) also binds
+current scalar merge/mode checks and full Make builds/selftests. No Adobe,
+Photo/original payload, new IO admission, fuzz or sanitizer campaign belongs
+to the corrected qualification.
