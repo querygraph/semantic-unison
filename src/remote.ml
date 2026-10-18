@@ -930,12 +930,29 @@ packet to invoke a function remotely on the client.  In this case, the
 two switch roles.)
 *)
 
+(* This outer policy applies even when a legacy command has no registration
+   bound. Endpoint settings never change the wire framing. *)
+let packetMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcpacketmaxbytes" 268435456 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC packet payload bytes"
+  "Positive endpoint-local outer frame limit, including legacy request, reply \
+   and stream packets. Stricter command/header/startup limits still apply. \
+   Raise locally for deliberately larger archive frames. Not aggregate heap/RSS.")
+let packet_limit () =
+  let maximum=Prefs.read packetMaxBytes in
+  (* The payload is a bigarray, not a single OCaml string. Do not impose
+     Sys.max_string_length here: that would invalidate the default on32bit. *)
+  if maximum<=0 then
+    raise(Util.Fatal "Invalid RPC packet input limit");
+  maximum
+
 let receivePacket ?maxBytes ?(reserve=(fun _ -> ())) conn =
+  let maximum=packet_limit () in
+  let maximum=match maxBytes with None->maximum | Some n->min maximum n in
   (* Get the length of the packet *)
   let int_buf = Bytearray.create intSize in
   grab conn.inputBuffer int_buf intSize >>= (fun () ->
   let length = decodeInt int_buf 0 in
-  if length < 0 || (match maxBytes with Some n -> length > n | None -> false) then
+  if length < 0 || length>maximum then
     raise (Util.Fatal "RPC packet length exceeds command limit");
   reserve length;
   (* Get packet *)

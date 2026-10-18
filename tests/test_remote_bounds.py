@@ -47,7 +47,7 @@ def main():
             assert source.count(anchor)==1
             return source.replace(anchor,'    if !startup_test_fail_allocation then failwith "DESIGNATED startup allocation failure";\n'+anchor,1)
         (work / "remoteForTest.ml").write_text(controlled((repository / "src/remote.ml").read_text()))
-        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text())
+        (work / "remoteTest.ml").write_text((repository / "tests/remote_bounds.ml").read_text()+'\n'+(repository/'tests/remote_header_bounds.ml').read_text()+'\n'+(repository/'tests/remote_startup_bounds.ml').read_text()+'\n'+(repository/'tests/remote_packet_bounds.ml').read_text())
         compiler = args.compiler
         def sha(path):
             return hashlib.sha256(path.read_bytes()).hexdigest()
@@ -57,6 +57,7 @@ def main():
                                       'tests/remote_bounds.ml': sha(repository/'tests/remote_bounds.ml'),
                                       'tests/remote_header_bounds.ml': sha(repository/'tests/remote_header_bounds.ml'),
                                       'tests/remote_startup_bounds.ml': sha(repository/'tests/remote_startup_bounds.ml'),
+                                      'tests/remote_packet_bounds.ml': sha(repository/'tests/remote_packet_bounds.ml'),
                                       'tests/test_remote_bounds.py': sha(Path(__file__))},
                       linked_objects={name: sha(build/name) for name in modules+objects('COBJS')},
                       commands=[])
@@ -124,6 +125,20 @@ def main():
             (startup/'test.log').write_text(c.stdout+c.stderr)
             assert c.returncode==2 and 'startup limit ignored' in c.stderr,c.stdout+c.stderr
             record['startup_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(startup/'remoteForTest.ml'),binary_sha256=sha(startup/'startup-negative'),scope='Only delimiter byte limit omitted; nine original bytes, existing fixed8byte destination, no large allocation')
+            packet=work/'packet-negative';packet.mkdir(mode=0o700)
+            old='let maximum=match maxBytes with None->maximum | Some n->min maximum n in'
+            assert source.count(old)==1
+            bad_packet=source.replace(old,'let maximum=match maxBytes with None->(ignore maximum;max_int) | Some n->(ignore maximum;n) in')
+            (packet/'remoteForTest.ml').write_text(controlled(bad_packet))
+            (packet/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+            pf=['-I',str(packet),*flags]
+            for argv in [[compiler,*pf,'-c','remoteForTest.ml'],[compiler,*pf,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','packet-negative']]:
+                c=subprocess.run(argv,cwd=packet,capture_output=True,text=True,timeout=30)
+                record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+            c=subprocess.run([str(packet/'packet-negative')],cwd=packet,env=dict(os.environ,UNISON=str(packet/'state')),capture_output=True,text=True,timeout=15)
+            (packet/'test.log').write_text(c.stdout+c.stderr)
+            assert c.returncode==2 and 'DESIGNATED header payload allocation reached' in c.stderr,c.stdout+c.stderr
+            record['packet_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(packet/'remoteForTest.ml'),binary_sha256=sha(packet/'packet-negative'),scope='Only global outer cap omitted; private guard prevents nine-byte allocation/body wait')
             record['controlled_remote_sha256']=sha(work/'remoteForTest.ml')
             record['controlled_probe_sha256']=sha(work/'remoteTest.ml')
             record['status']='passed'

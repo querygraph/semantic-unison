@@ -101,6 +101,9 @@ type connection
 val connectionVersion : connection -> int
 val connectionOfRoot : Common.root -> connection
 
+(* Every incoming packet also obeys the endpoint-local rpcpacketmaxbytes
+   outer frame policy. Legacy registrations retain their existing codecs;
+   this frame bound is not aggregate or decoded-object accounting. *)
 val registerServerCmd :
   string
  -> 'a Umarshal.t -> 'b Umarshal.t
