@@ -133,21 +133,113 @@ let ()=
      ignore(data s,0,String.length s))"prepopulated skip EOF missing";
    check(!called=1 && LargeFile.pos_out output=4L)"prepopulated receiver skip not used");
  check(read"output"="abcdefgh")"receiver-basis skip changed inherited bytes";
+ (* One persistent logical allowance spans packets, independent of physical
+    output offsets (append/AppleDouble), and counts optimized block skips. *)
+ let budget n=T.make_output_limit(Uutil.Filesize.ofInt n)in
+ with_channels(fun _ output->let limit=budget 2 in T.test_forbid_io:=true;
+   Fun.protect ~finally:(fun()->T.test_forbid_io:=false)(fun()->
+    let s=string_token"abc"^"E"in
+    transient(fun()->T.receive ~output_limit:limit output ignore(data s,0,String.length s)));
+   check(limit.T.output_remaining=2L && not limit.T.output_ended)"overrun changed budget");
+ with_channels(fun input output->let limit=budget 7 in
+   transient(fun()->T.Rsync.rsyncDecompress ~output_limit:limit 4 input output
+     ~copyFn:(fun _ _ ~fallback:_->failwith "DESIGNATED output overrun reached copy callback")
+     ignore(data(block 0 2^"E"),0,6));
+   check(limit.T.output_remaining=7L)"block overrun debited budget");
+ with_channels(fun _ output->let limit=budget 4 in
+   let first=string_token"ab"in
+   check(not(T.receive ~output_limit:limit output ignore(data first,0,String.length first)))"first payload ended";
+   check(limit.T.output_remaining=2L)"cross-packet debit missing";
+   T.test_forbid_io:=true;
+   Fun.protect ~finally:(fun()->T.test_forbid_io:=false)(fun()->
+    let extra=string_token"cde"in
+    transient(fun()->T.receive ~output_limit:limit output ignore(data extra,0,String.length extra)));
+   let last=string_token"cd"^"E"in
+   check(T.receive ~output_limit:limit output ignore(data last,0,String.length last))"exact EOF refused";
+   check(limit.T.output_remaining=0L && limit.T.output_ended)"EOF reservation missing";
+   transient(fun()->T.receive ~output_limit:limit output ignore(data"E",0,1)));
+ check(read"output"="abcd")"cross-packet limit changed bytes";
+ with_channels(fun _ output->let limit=budget 3 in T.test_forbid_io:=true;
+   Fun.protect ~finally:(fun()->T.test_forbid_io:=false)(fun()->
+    let short=string_token"ab"^"E"in
+    transient(fun()->T.receive ~output_limit:limit output ignore(data short,0,String.length short)));
+   check(limit.T.output_remaining=3L)"short EOF debited payload");
+ with_channels(fun _ output->let limit=budget 0 in
+   T.check_output_limit limit;incr checks;
+   check(T.receive ~output_limit:limit output ignore(data"E",0,1))"zero-size EOF refused";
+   transient(fun()->T.check_output_limit limit));
+ (* A failed write has already consumed its reservation, so reusing that owner
+    cannot authorize a second copy. No rollback is inferred from a callback. *)
+ with_channels(fun _ output->let limit=budget 1 in
+   let s=string_token"x"^"E"in T.test_forbid_io:=true;
+   (try ignore(T.receive ~output_limit:limit output ignore(data s,0,String.length s));
+     failwith "write fault not injected"
+    with Failure why->check(why="DESIGNATED transfer IO before validation")"wrong write fault");
+   T.test_forbid_io:=false;
+   check(limit.T.output_remaining=0L && limit.T.output_ended)"failed IO refunded budget";
+   transient(fun()->T.receive ~output_limit:limit output ignore(data s,0,String.length s)));
+ with_channels(fun input output->let limit=budget 8 in let calls=ref 0 in
+   let token=block 0 1 in
+   let consume ending=T.Rsync.rsyncDecompress ~output_limit:limit 4 input output
+     ~copyFn:(fun _ _ ~fallback:_->incr calls;LargeFile.seek_out output(Int64.add(LargeFile.pos_out output)4L))
+     ignore(data ending,0,String.length ending)in
+   check(not(consume token))"first inherited range ended";
+   check(limit.T.output_remaining=4L)"skip callback bypassed logical debit";
+   check(consume(token^"E") && !calls=2)"exact skipped output refused";
+   check(limit.T.output_remaining=0L)"skipped output not fully charged");
+ List.iter(fun header->with_channels(fun _ output->output_string output header;
+   let limit=budget 3 and token=string_token"abc"^"E"in
+   check(T.receive ~output_limit:limit output ignore(data token,0,String.length token))"payload-relative offset refused");
+   check(read"output"=header^"abc")"physical header/append prefix counted as payload") ["prefix";"AppleDouble-header"];
+ List.iter(fun(kind,total,remaining)->
+   let limit=CopyLimitForTest.transferOutputLimit kind(Uutil.Filesize.ofInt64 total)in
+   check(limit.T.output_remaining=remaining)"Copy output allowance wrong")
+   [`DATA,9L,9L;`RESS,9L,9L;`DATA_APPEND(Uutil.Filesize.ofInt 6),9L,3L;
+    `DATA_APPEND(Uutil.Filesize.ofInt 0),0L,0L;
+    `DATA_APPEND(Uutil.Filesize.ofInt64 Int64.max_int),Int64.max_int,0L];
+ List.iter(fun(kind,total)->transient(fun()->CopyLimitForTest.transferOutputLimit kind(Uutil.Filesize.ofInt total)))
+   [`DATA,-1;`RESS,-1;`DATA_APPEND(Uutil.Filesize.ofInt(-1)),9;`DATA_APPEND(Uutil.Filesize.ofInt 10),9];
+ (try ignore(T.make_output_limit(Uutil.Filesize.ofInt(-1)));failwith "negative allowance accepted"
+  with Invalid_argument _->incr checks);
  (* Actual production encoders exercise token packing/EOF without transport. *)
- let source=String.init 16384(fun i->Char.chr((i*31+7)land 255))in
- write"source"source;write"basis"(String.init 16384(fun i->if i=8000 then 'z'else source.[i]));
+ let source=String.init 73728(fun i->Char.chr((i*31+7)land 255))in
+ write"source"source;write"basis"(String.make 73728 'z');
  List.iter(fun rsync->
   let input=open_in_bin"source"and basis=open_in_bin"basis"and output=open_out_bin"output"in
   Fun.protect ~finally:(fun()->close_in input;close_in basis;close_out output)(fun()->
-   let packets=ref 0 and ended=ref false in
-   let info,block_size=T.Rsync.rsyncPreprocess basis(Uutil.Filesize.ofInt 16384)(Uutil.Filesize.ofInt 16384)in
+   let packets=ref 0 and ended=ref false and limit=budget 73728 in
+   let info,block_size=T.Rsync.rsyncPreprocess basis(Uutil.Filesize.ofInt 73728)(Uutil.Filesize.ofInt 73728)in
    let transmit instruction=
     incr packets;check(not !ended)"encoder emitted after EOF";
-    ended:=(if rsync then T.Rsync.rsyncDecompress block_size basis output ignore instruction
-            else T.receive output ignore instruction);
+    ended:=(if rsync then T.Rsync.rsyncDecompress ~output_limit:limit block_size basis output ignore instruction
+            else T.receive ~output_limit:limit output ignore instruction);
     Lwt.return()in
-   Lwt_unix.run(if rsync then T.Rsync.rsyncCompress info input(Uutil.Filesize.ofInt 16384)ignore transmit
-               else T.send input(Uutil.Filesize.ofInt 16384)ignore transmit);
-   check(!packets>0&& !ended)"encoder roundtrip did not finish");
+   Lwt_unix.run(if rsync then T.Rsync.rsyncCompress info input(Uutil.Filesize.ofInt 73728)ignore transmit
+               else T.send input(Uutil.Filesize.ofInt 73728)ignore transmit);
+   check(!packets>1&& !ended)"encoder multi-frame roundtrip did not finish";
+   check(limit.T.output_remaining=0L && limit.T.output_ended)"encoder output allowance not exhausted");
   check(read"output"=source)"production encoder/decoder roundtrip changed bytes") [false;true];
+ (* The real generic encoder may reach EOF before its full-size argument
+    after a resumed prefix; the caller's remaining-payload allowance is exact. *)
+ write"source"source;write"output"(String.sub source 0 4096);
+ let input=open_in_bin"source"and output=open_out_gen[Open_wronly;Open_binary]0o600"output"in
+ Fun.protect ~finally:(fun()->close_in input;close_out output)(fun()->
+  seek_in input 4096;seek_out output 4096;
+  let limit=CopyLimitForTest.transferOutputLimit(`DATA_APPEND(Uutil.Filesize.ofInt 4096))
+    (Uutil.Filesize.ofInt 73728)in
+  let ended=ref false in
+  Lwt_unix.run(T.send input(Uutil.Filesize.ofInt 73728)ignore(fun instruction->
+    ended:=T.receive ~output_limit:limit output ignore instruction;Lwt.return()));
+  check(!ended && limit.T.output_remaining=0L)"resumed encoder did not exhaust payload");
+ check(read"output"=source)"resumed production encoding changed file";
+ write"resource-source"("input-resource-header"^source);
+ let input=open_in_bin"resource-source"and output=open_out_bin"output"in
+ Fun.protect ~finally:(fun()->close_in input;close_out output)(fun()->
+  seek_in input(String.length"input-resource-header");output_string output"output-resource-header";
+  let limit=CopyLimitForTest.transferOutputLimit `RESS(Uutil.Filesize.ofInt 73728)in
+  let ended=ref false in
+  Lwt_unix.run(T.send input(Uutil.Filesize.ofInt 73728)ignore(fun instruction->
+    ended:=T.receive ~output_limit:limit output ignore instruction;Lwt.return()));
+  check(!ended && limit.T.output_remaining=0L)"resource payload did not finish");
+ check(read"output"="output-resource-header"^source)"resource payload counted physical headers";
  Printf.printf "PASS %d transfer checks; original tiny framing/blocks/truncation and production generic/rsync roundtrips\n%!" !checks

@@ -76,7 +76,7 @@ queued output, with explicit value roots on typed/classifier uncertainty. These
 mechanisms do not bound arbitrary decoded lifetimes: client results, custom
 stream inputs, conversion/global escapes, metadata/outbound buffers and other baseline
 families still require accounting. See the [regular request owner evidence](../tests/qualification/rpc-legacy-decoded-owner-actual-20261018.json)
-for exact current controlled/build scope. [Inventoryv14](owned-resource-remaining-inventory-20261018-v14.json)
+for exact current controlled/build scope. [Inventoryv15](owned-resource-remaining-inventory-20261018-v15.json)
 retains the precise earlier ownership/platform findings.
 
 The saved warm32MiB repeated matrix is historical and not a current performance
@@ -93,9 +93,11 @@ and partial phase intervals are not complete physical IO or total commit time.
 bounds and whole-slice generic/rsync syntax validation before token writes.
 Basis ranges, fallback counts and actual read lengths are checked. Current
 stock/Ox controls pass118checks and7mutations/compiler plus four builds/selftests.
-This is not transport or native clone qualification. Expected per-file cumulative
-output limits still need enforcement before claiming write-amplification control;
-client-result lifetimes and the resource/platform work above also remain open.
+This is not transport or native clone qualification. [Caller-bound output allowance](../tests/qualification/transfer-output-allowance-actual-20261018.json)
+now reserves logical materialization against expected payload size across frames,
+including block skips, with exact EOF and pre-open late-packet refusal. It does
+not bound physical IO or arbitrary callback effects. Client-result lifetimes,
+custom stream workspace/baseline and resource/platform work above remain open.
 
 ## Next actions
 

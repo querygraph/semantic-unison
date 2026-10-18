@@ -290,10 +290,33 @@ let send infd length showProgress transmit =
 
 let malformed_instruction () =
   raise(Util.Transient "Malformed transfer instruction")
-let validate_instruction ~allow_blocks data pos len =
+type output_limit={mutable output_remaining:int64;mutable output_ended:bool}
+let make_output_limit length =
+  let remaining=Uutil.Filesize.toInt64 length in
+  if remaining<0L then invalid_arg "Transfer.make_output_limit";
+  {output_remaining=remaining;output_ended=false}
+let check_output_limit owner =
+  if owner.output_ended then
+    raise(Util.Transient "Transfer output continues after EOF")
+let reserve_output limit bytes eof = match limit with
+  | None -> ()
+  | Some owner ->
+      check_output_limit owner;
+      let bytes=Int64.of_int bytes in
+      if bytes>owner.output_remaining then
+        raise(Util.Transient "Transfer exceeds expected output length");
+      if eof && bytes<>owner.output_remaining then
+        raise(Util.Transient "Transfer ended before expected output length");
+      owner.output_remaining<-Int64.sub owner.output_remaining bytes;
+      owner.output_ended<-eof
+
+let validate_instruction ~block_size data pos len =
   let size=Bytearray.length data in
   if pos<0 || len<0 || pos>size-len then malformed_instruction ();
-  let limit=pos+len in
+  let limit=pos+len and output_bytes=ref 0 and ended=ref false in
+  let add_output length =
+    if length>max_int- !output_bytes then malformed_instruction ();
+    output_bytes:= !output_bytes+length in
   let require cursor count =
     if count>limit-cursor then malformed_instruction () in
   let rec loop cursor =
@@ -301,14 +324,17 @@ let validate_instruction ~allow_blocks data pos len =
     | 'S' ->
         require cursor 3;
         let length=decodeInt2 data (cursor+1) in
-        require cursor (3+length);loop(cursor+3+length)
-    | 'B' when allow_blocks ->
+        require cursor (3+length);add_output length;loop(cursor+3+length)
+    | 'B' when block_size>0 ->
         require cursor 5;
-        if decodeInt1 data (cursor+4)=0 then malformed_instruction ();
-        loop(cursor+5)
-    | 'E' -> if cursor<>limit-1 then malformed_instruction ()
+        let count=decodeInt1 data (cursor+4) in
+        if count=0 || block_size>max_int/count then malformed_instruction ();
+        add_output(count*block_size);loop(cursor+5)
+    | 'E' ->
+        if cursor<>limit-1 then malformed_instruction ();
+        ended:=true
     | _ -> malformed_instruction () in
-  loop pos
+  loop pos;!output_bytes,!ended
 
 let rec receiveRec outfd showProgress data pos maxPos =
   if pos = maxPos then false else
@@ -325,8 +351,9 @@ let rec receiveRec outfd showProgress data pos maxPos =
   | _   ->
       assert false
 
-let receive outfd showProgress (data, pos, len) =
-  validate_instruction ~allow_blocks:false data pos len;
+let receive ?output_limit outfd showProgress (data, pos, len) =
+  let output_bytes,eof=validate_instruction ~block_size:0 data pos len in
+  reserve_output output_limit output_bytes eof;
   receiveRec outfd showProgress data pos (pos + len)
 
 (*************************************************************************)
@@ -491,9 +518,10 @@ struct
 
   (* For each transfer instruction, either output a string or copy one or
      several blocks from the old file. *)
-  let rsyncDecompress blockSize infd outfd ?copyFn showProgress (data, pos, len) =
-    validate_instruction ~allow_blocks:true data pos len;
+  let rsyncDecompress ?output_limit blockSize infd outfd ?copyFn showProgress (data, pos, len) =
     if blockSize<=0 then malformed_instruction ();
+    let output_bytes,eof=validate_instruction ~block_size:blockSize data pos len in
+    reserve_output output_limit output_bytes eof;
     let decomprBuf = Bytes.create decomprBufSize in
     (* Observe the seekable basis length once per instruction, only if a block
        token needs it. Do not turn each inherited range into a metadata syscall.

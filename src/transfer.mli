@@ -54,14 +54,29 @@ val send :
  -> transmitter            (* transfer instruction transmitter *)
  -> unit Lwt.t
 
+type output_limit
+val make_output_limit : Uutil.Filesize.t -> output_limit
+(** Fresh logical payload allowance for one transfer, excluding an existing
+    append prefix or container header. Nonnegative length; no large allocation.
+    Owner-loop only: do not share concurrent mutation across workers/domains.
+    Reservation is not OS closure/publication and is never refunded after IO. *)
+val check_output_limit : output_limit -> unit
+(** Rejects further payload work after logical EOF reservation. Call before
+    opening lazy channels. This does not attest IO settlement or publication. *)
+
 val receive :
+    ?output_limit:output_limit ->
     out_channel            (* destination file descriptor *)
  -> (int -> unit)          (* progress report *)
  -> transfer_instruction   (* transfer instruction received *)
  -> bool                   (* Whether we have reach the end of the file *)
 (** Checks the complete selected token slice before token payload writes.
     Invalid framing raises Util.Transient. The caller already owns the output
-    channel; this does not establish publication or source identity. *)
+    channel; this does not establish publication or source identity.
+    With an output limit, reserves the complete frame's logical bytes before
+    token writes. EOF must exactly exhaust the allowance; subsequent calls
+    refuse. Share one fresh allowance across all chunks of a payload. Failure
+    after reservation aborts the transfer; there is no refund/retry authority. *)
 
 
 (*************************************************************************)
@@ -94,6 +109,7 @@ module Rsync :
 
     (* Interpret a transfer instruction *)
     val rsyncDecompress :
+           ?output_limit:output_limit ->
            int                   (* block size *)
         -> in_channel            (* old file descriptor *)
         -> out_channel           (* output file descriptor *)
@@ -111,7 +127,11 @@ module Rsync :
         read counts before writing each block chunk. Partial-copy fallback must
         report a count within the requested range. Util.Transient on refusal;
         earlier valid tokens may already have written staging data on a dynamic
-        basis failure. No hostile-writer atomicity/publication claim. *)
+        basis failure. An optional shared output limit pre-reserves the full
+        frame, counting inherited/skipped blocks as logical materialization.
+        It has the same exact EOF/no-refund contract as receive, independent of
+        physical offsets or bytes written by an arbitrary copy callback.
+        No hostile-writer atomicity/publication/physical IO claim. *)
 
     (*** SOURCE HOST ***)
 

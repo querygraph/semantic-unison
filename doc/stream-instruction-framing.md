@@ -62,10 +62,38 @@ still need explicit qualification; the endpoint's existing outer frame cap is
 not a claim that every custom codec has its own tighter cap.
 
 
-The current framing checkpoint does not enforce a per-file cumulative output
-allowance. Copy knows the expected source length and checks cloned EOF length,
-but generic/rsync token steps do not yet receive a remaining-output bound.
-Checked individual block geometry is not a bound on repeated valid block
-materialization. This needs a concrete caller-bound enforcement successor;
-publication/epoch checks must remain independent. No write-amplification or
-physical IO hard-budget claim follows from the present framing checks.
+## Caller-bound logical output allowance
+
+Copy now creates one opaque output allowance per payload before opening lazy
+channels. Ordinary data and resource payloads use the expected source length;
+resumed data subtracts the existing prefix after checking nonnegative lengths
+and `prefix <= total`. Resource container headers are not payload bytes, so the
+allowance does not depend on absolute output-channel position.
+
+The preflight pass counts complete frame materialization, including inherited
+block skips. It checks integer arithmetic and reserves that entire logical
+count before token writes or optimized-copy callbacks. All frames share the
+same allowance. EOF must exactly exhaust it, and later payload work refuses.
+A reservation is not refunded after a write/callback failure; the operation must
+abort rather than replay. The owner-loop allowance is not a native settlement,
+actual byte-write observation or publication receipt. Copy checks logical EOF
+before it can reopen lazy basis/output channels, independently of decoder checks.
+
+This bounds protocol-directed materialization relative to the caller's declared
+payload length. It does not bound arbitrary callback side effects, total job/
+physical IO, metadata/container-header writes or actual heap/RSS. Output channel
+creation can precede first-frame refusal; publication and original epoch/hash
+checks remain independent. Existing default Transfer APIs remain additive;
+callers outside Copy must explicitly pass an allowance to use this policy.
+
+Original controls include oversized/short EOF, cross-frame debit, no refund on
+failure, repeated block skips, invalid prefixes, a valid maximum-int64 prefix
+metadata case, and actual multi-frame generic/rsync roundtrips. Resumed and
+resource-header-offset cases exercise the real generic encoder with disposable
+files; they are not an actual AppleDouble/native resource-fork or transport test.
+
+[Output allowance evidence](../tests/qualification/transfer-output-allowance-actual-20261018.json)
+binds 163 checks and nine negative participants per compiler, plus all four
+current stock/Ox Make/Dune builds/selftests. Actual encoder checks span multiple
+packets; Copy's helper and both call-site/pre-open bindings are source checked
+and compiled. Native clone/publication/transport qualification remains separate.

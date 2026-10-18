@@ -1573,9 +1573,19 @@ let rsyncThrottle useRsync srcFileSize destFileSize f =
   let l = Transfer.Rsync.memoryFootprint srcFileSize destFileSize in
   Lwt_util.run_in_region !rsyncReg l f
 
+let transferOutputLimit fileKind srcFileSize =
+  let total=Uutil.Filesize.toInt64 srcFileSize in
+  let prefix=match fileKind with
+    | `DATA_APPEND length -> Uutil.Filesize.toInt64 length
+    | `DATA | `RESS -> 0L in
+  if total<0L || prefix<0L || prefix>total then
+    raise(Util.Transient "Invalid expected transfer output length");
+  Transfer.make_output_limit(Uutil.Filesize.ofInt64(Int64.sub total prefix))
+
 let transferFileContents ?producer
       connFrom fspathFrom pathFrom fspathTo pathTo realPathTo update
       fileKind srcFileSize id =
+  let output_limit=transferOutputLimit fileKind srcFileSize in
   (* We delay the opening of the files so that there are not too many
      temporary files remaining after a crash, and that they are not
      too many files simultaneously opened. *)
@@ -1708,7 +1718,9 @@ let transferFileContents ?producer
              if !clonedPath = None then close_all infd outfd;
              (Some bi,
               (* Rsync decompressor *)
-              fun ti -> withReceiverBorrow !clonedPublication(fun()->
+              fun ti ->
+              Transfer.check_output_limit output_limit;
+              withReceiverBorrow !clonedPublication(fun()->
               let ifd = referenceFd fspathTo realPathTo fileKind infd in
               let fd =
                 destinationFd ?producer
@@ -1716,7 +1728,7 @@ let transferFileContents ?producer
               checkProducer producer;
               (match !clonedLease with Some lease -> checkCloneLease lease | None -> ());
               let eof =
-                Transfer.Rsync.rsyncDecompress blockSize ifd fd showProgress ti
+                Transfer.Rsync.rsyncDecompress ~output_limit blockSize ifd fd showProgress ti
                   ~copyFn:(fun in_offs len ~fallback ->
                     (* Flush the buffered output channel just in case since
                        we manipulate the channel's underlying fd directly. *)
@@ -1766,10 +1778,11 @@ let transferFileContents ?producer
         (None,
          (* Simple generic decompressor *)
          fun ti ->
+         Transfer.check_output_limit output_limit;
          let fd =
            destinationFd ?producer fspathTo pathTo fileKind srcFileSize outfd id in
          checkProducer producer;
-         let eof = Transfer.receive fd showProgress ti in
+         let eof = Transfer.receive ~output_limit fd showProgress ti in
          checkProducer producer;
          if eof then close_all infd outfd)
     in

@@ -4951,3 +4951,52 @@ append position (no repeated valid-block amplification); then client-result
 lifetimes and remaining streaming workspace/baseline/whole-tree FD/RSS. Full
 SOL goal ACTIVE/INCOMPLETE. Frozen9d9dccc0 threeIOrequests remain unchanged and
 no admission observed; no new dispatch/automatic retry/quiet exception. 8/8 stays.
+
+
+## 2026-10-18 cumulative output allowance IN PROGRESS
+
+Active b48e0ca7 successor adds opaque owner-loop Transfer.output_limit. Copy
+creates it once before lazy FDs: expected total minus DATA_APPEND prefix; RESS
+counts payload, not physical header offset. Complete-frame logical counts
+include block skips; overrun/short EOF refused before token writes/callbacks,
+charges never refunded after IO failure. Exact EOF fences further payload.
+Added pure check_output_limit at both Copy decompressor entries BEFORE lazy
+basis/output opening; final unit/source-binding assertions cover this placement.
+No native settlement/publication/physical IO/RSS claim from the counter.
+
+Initial builds33297/4f5211/0 closed with correct basic counter before final
+pre-open EOF check; superseded by current final31433 build controller (LIVE,
+fresh002workspaces). Final direct tests32053/f3bf41/0/no session passed163checks
+and9guardednegativeparticipants/compiler, stock17302/Ox17632 reaped0/CPU4closed.
+Actual multi-packet generic+rsync, resumed generic, resource-header offsets,
+full/partial callbacks, skips and no-refund/late EOF covered. No transport,
+SDK/Photo/original/nativeclone/EXIO invoked. Keep production/test sources fixed
+until finalbuildcontrollercloses. Next client-result lifetimes/custom stream
+workspace/baseline/full FD/RSS and remainingSOLmatrix. Frozen9d9dccc0 requests
+unchanged; last3admissionpathsabsent, no dispatch/replay/resourcehold inferred.
+
+
+## 2026-10-18 caller-bound cumulative output allowance qualified
+
+Final source now includes pure logical-end checks at both Copy decompressor
+entries BEFORE lazy basis/output opening. All four current stock/Ox Make+Dune
+build/selftests actual31433/c41bab/0/no session PASSED/CLOSED; children18255/19374/
+20496/21670 reaped0/groups absent/CPU8closed. All recorded source inputs/binary
+hashes match current source. Earlier33297 initial build group is superseded,
+not substituted for final guards. Direct controls32053/f3bf41/0 passed163checks
+and9guardednegativeparticipants/compiler, stock17302/Ox17632 groups/CPU4closed.
+
+Opaque allowance shared across all frame calls counts logical materialization
+(including block skips), not physical writes. Expected total minus append prefix;
+resource header offsets excluded. Overrun/short EOF refuse before token writes
+or copy callbacks, no refund after IO failure, exact EOF prevents further work.
+Copy helper/call/pre-open placements pinned by source assertions and full builds.
+Actual multi-packet generic/rsync, resumed and resource-offset encoders tested on
+original disposable <=80KiB fixture files. No actual transport, APFS syscall,
+SDK/Photo/original payload, EXIO, physical-budget or publication proof inferred.
+Evidence tests/qualification/transfer-output-allowance-actual-20261018.json SHA
+087e84b33992e0e7f5c4ed02d33098075795faf257d100280c7d82a93602d2ff. Inventoryv15/framing doc/readiness updated. No live Unison owner/resources
+from checkpoint. Next client-result consumption leases; custom stream tighter
+frame/workspace/baseline and full FD/RSS/current fullSOL acceptance still OPEN.
+Frozen9d9dccc0 exactthreeIOrequests remain unchanged/unadmitted at last read; no
+replay/newgrant/hold from source work. Full goal ACTIVE/INCOMPLETE, standing8/8.
