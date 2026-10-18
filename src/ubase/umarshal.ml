@@ -22,6 +22,7 @@ type input = {
   remaining:int ref;
   allocation_bounded:bool; mutable allocation_left:int;
   elements_bounded:bool; mutable elements_left:int;
+  reserve:(bytes:int -> elements:int -> unit) option;
 }
 type 'a t = {
     read : input -> 'a;
@@ -34,6 +35,9 @@ let claim input bytes elements =
   if bytes<0 || elements<0 then raise(Error "decode: negative allocation/count");
   if input.allocation_bounded && bytes>input.allocation_left then raise(Error "decode: allocation budget exceeded");
   if input.elements_bounded && elements>input.elements_left then raise(Error "decode: element budget exceeded");
+  (* Owner-defined aggregate admission happens before the selected allocation,
+     after local validation. Callback failures are neither retried nor wrapped. *)
+  (match input.reserve with None->() | Some reserve->reserve ~bytes ~elements);
   if input.allocation_bounded then input.allocation_left<-input.allocation_left-bytes;
   if input.elements_bounded then input.elements_left<-input.elements_left-elements
 let product count width =
@@ -51,11 +55,11 @@ let receive input buffer offset length =
 let validate_limits allocation elements =
   (match allocation with Some n when n<0->invalid_arg "Umarshal decode allocation budget" | _->());
   (match elements with Some n when n<0->invalid_arg "Umarshal decode element budget" | _->())
-let make_input ?allocation ?elements length receive =
+let make_input ?allocation ?elements ?reserve length receive =
   validate_limits allocation elements;
   {receive;remaining=ref length;allocation_bounded=Option.is_some allocation;
    allocation_left=Option.value ~default:0 allocation;elements_bounded=Option.is_some elements;
-   elements_left=Option.value ~default:0 elements}
+   elements_left=Option.value ~default:0 elements;reserve}
 
 external id : 'a -> 'a = "%identity"
 
@@ -83,25 +87,30 @@ let to_string m x =
   Bytes.set_int64_be header 0 (Int64.of_int (Buffer.length buffer));
   Bytes.to_string header ^ Buffer.contents buffer
 
-let from_bytes_internal ?allocation ?elements m buffer offset =
+let from_bytes_internal ?allocation ?elements ?reserve m buffer offset =
+  validate_limits allocation elements;
   let total=Bytes.length buffer in
   let length=data_size buffer offset in
   let start=offset+header_size in
   if length>total-start then raise(Error "from_bytes: truncated frame");
   let position=ref start in
-  m.read(make_input ?allocation ?elements length (fun target target_offset n->
+  m.read(make_input ?allocation ?elements ?reserve length (fun target target_offset n->
     Bytes.blit buffer !position target target_offset n;position:= !position+n))
 let from_bytes m buffer offset=from_bytes_internal m buffer offset
 let from_string m buffer offset=from_bytes m (Bytes.of_string buffer) offset
-let from_channel_internal ?allocation ?elements m ic =
+let from_bytes_accounted ~max_alloc_bytes ~max_elements ~reserve m buffer offset =
+  from_bytes_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m buffer offset
+let from_channel_internal ?allocation ?elements ?reserve m ic =
   validate_limits allocation elements;
   let header=Bytes.create header_size in
   really_input ic header 0 header_size;
   let length=data_size header 0 in
-  m.read(make_input ?allocation ?elements length (really_input ic))
+  m.read(make_input ?allocation ?elements ?reserve length (really_input ic))
 let from_channel m ic=from_channel_internal m ic
 let from_channel_bounded ~max_alloc_bytes ~max_elements m ic =
   from_channel_internal ~allocation:max_alloc_bytes ~elements:max_elements m ic
+let from_channel_accounted ~max_alloc_bytes ~max_elements ~reserve m ic =
+  from_channel_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m ic
 
 let to_channel m oc x =
   let header = Bytes.create header_size in
@@ -340,7 +349,7 @@ let marshal_to_bytearray m x =
     raise (Error "marshal_to_bytearray: universe inconsistency");
   result
 
-let unmarshal_from_bytearray_internal ?allocation ?elements m x offset =
+let unmarshal_from_bytearray_internal ?allocation ?elements ?reserve m x offset =
   validate_limits allocation elements;
   let total=Bigarray.Array1.dim x in
   if offset<0 || offset>total-header_size then raise(Error "unmarshal_from_bytearray: header too short");
@@ -350,11 +359,13 @@ let unmarshal_from_bytearray_internal ?allocation ?elements m x offset =
   let start=offset+header_size in
   if length>total-start then raise(Error "unmarshal_from_bytearray: truncated frame");
   let position=ref start in
-  m.read(make_input ?allocation ?elements length (fun target target_offset n->
+  m.read(make_input ?allocation ?elements ?reserve length (fun target target_offset n->
     unsafe_blit_to_bytes x !position target target_offset n;position:= !position+n))
 let unmarshal_from_bytearray m x offset=unmarshal_from_bytearray_internal m x offset
 let unmarshal_from_bytearray_bounded ~max_alloc_bytes ~max_elements m x offset =
   unmarshal_from_bytearray_internal ~allocation:max_alloc_bytes ~elements:max_elements m x offset
+let unmarshal_from_bytearray_accounted ~max_alloc_bytes ~max_elements ~reserve m x offset =
+  unmarshal_from_bytearray_internal ~allocation:max_alloc_bytes ~elements:max_elements ~reserve m x offset
 
 type int32bigarray =
   (int32, Bigarray.int32_elt, Bigarray.c_layout) Bigarray.Array1.t

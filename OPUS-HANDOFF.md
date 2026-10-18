@@ -4718,3 +4718,25 @@ Source baseline field b6904f65 is the integration commit; metadata executor cap 
 ## 2026-10-18 — published requalification bundle sent to Photo
 
 Source/request commit203dc1f1 pushed on integration/sol-resource-consolidated-20261018. Sent exact bundle3b49e39e and genuineupstream-first request to PhotoRoot queue01a14f8b-8a04-71c2-a0f0-121ed4565994 (thread01a13369-8b68-7aa1-be91-cba984ba269b). Durable tests/qualification/sol-resource-requalification-queued-20261018.json records the actual successful queue command, not a runtime grant. No current Unison owned jobs/tokens/IO/native reservation; all3proposed namespaces/admissions absent just before notification. Root must separately review/publish fresh exact admission/deadline; no waiting hold or automatic successor inferred. All400mixed execution pins/43property execution pins remain frozen in this worktree; source-only future work can use a separate successor branch while admissions are pending. ReturnactualSTART/terminal promptly if admitted, freshguard/no replay.
+
+
+## 2026-10-18: decoded preallocation admission checkpoint
+
+Source successor `/Users/alexy/src/unison-decoded-input-20261018`, branch
+`implementation/decoded-input-accounting`, adds caller-owned incremental
+reservation to all three bounded Umarshal input forms. Stock/Ox final controls:
+78 checks and two negative mutation participants each; private allocation-site
+witness rejects late reservation. Existing 233 bounds controls/compiler pass.
+Four Make/Dune builds/selftests passed, all production inventory hashes still
+match; only the subsequently strengthened test probe differs. Actual final
+control parent runtime event61031 completed0; build owner17390/db16d4/0.
+Initial fixture failure21992/c7b291/1 preserved. Evidence
+`tests/qualification/umarshal-accounting-hooks-actual-20261018.json`
+SHA b19ea41353210839aea90ab9e64f864f34728e579e4cb130b68a86abffa8884c.
+See `doc/decoded-allocation-accounting-hooks.md` for scope and remaining work.
+This is NOT yet RPC aggregate decoded-lifetime integration or hard RSS/heap
+containment. Next implement explicit decoded owners through handler/result
+lifetimes; never refund merely at decode return or rely on root finalizers.
+Frozen IO candidate9d9dccc0 and its three requests remain separate/unchanged;
+no new admission observed at last check, no dispatch/replay. Full SOL goal
+active/incomplete. Standing8/8 continues, no Photo resource hold inferred.

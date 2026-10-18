@@ -55,6 +55,20 @@ val from_channel_bounded : max_alloc_bytes:int -> max_elements:int -> 'a t -> in
     All decoders check declared strings/arrays against remaining framed bytes
     before allocating. Stream input also needs a separately bounded outer frame. *)
 
+val from_bytes_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> bytes -> int -> 'a
+val from_channel_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> in_channel -> 'a
+(** Same bounded decoding with caller-owned aggregate admission. After local
+    byte/element checks and before each selected allocation, [reserve] receives
+    the incremental charges. Refusal/other exceptions propagate unchanged, with
+    no retry, implicit refund or automatic release at decode completion. The
+    caller must own any partial debit and its lifetime, including decoded values
+    retained beyond parsing. The callback must be appropriate for that caller's
+    thread/domain; this module does not schedule it or enforce owner access.
+    Header/context, user conversions/maps/recursion and whole heap/RSS remain
+    excluded, exactly as for the bounded decoder. Valid wire bytes unchanged. *)
+
 val to_channel : 'a t -> out_channel -> 'a -> unit
 
 val rec1 : ('a t -> 'a t) -> 'a t
@@ -84,6 +98,9 @@ val unmarshal_from_bytearray_bounded : max_alloc_bytes:int -> max_elements:int -
     payload and temporary buffers, int32 arrays their payload, lists both spines;
     primitive scratch buffers are charged too. Counts aggregate over nested
     lists/arrays/property lists within this decode. This is not an RSS cap. *)
+val unmarshal_from_bytearray_accounted : max_alloc_bytes:int -> max_elements:int ->
+  reserve:(bytes:int -> elements:int -> unit) -> 'a t -> bytearray -> int -> 'a
+(** Bigarray-input form of the caller-owned accounting hook above. *)
 val unmarshal_from_bytearray : 'a t -> bytearray -> int -> 'a
 
 type int32bigarray =
