@@ -1,11 +1,11 @@
-<!-- Current larger-forest update, 2026-10-17: explicit2048 DNG opt-in with default1024 retained, UCH1 large metadata/1MiB cap;1590checks/compiler+sixbuilds+actual Update capacity controls PASS. CameraV6 exactrequest1663093e sent to PhotoRoot; no camera success/read/admission inferred. Qualification tests/qualification/dng-large-forest-actual-20261017.json. Older checkpoint notes below remain historical evidence. -->
+<!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
 # Consolidated SOL acceptance review
 
 Candidate: draft [PR13](https://github.com/querygraph/unison/pull/13),
 `integration/sol-consolidated-review`, against `querygraph/unison:master`.
-Current production baseline: commit183844c3, including owned native publication
-in modern bound semantic/local/rsync producers and borrower-aware cleanup. The
-inspector refresh below changes only its manual command and documentation.
+Current production baseline: commit065945de, including the explicit bounded
+large component/checkpoint successor, owned publication in modern bound
+semantic/local/rsync producers and borrower-aware cleanup.
 This is an evidence map, not a completion declaration or runtime permission.
 All twelve acceptance areas remain in scope. Unknown MakerNotes stay exact;
 exhaustive private-field interpretation is not a deployment gate.
@@ -13,7 +13,7 @@ exhaustive private-field interpretation is not a deployment gate.
 | SOL area | Implemented and evidenced | Remaining verification or limitation |
 | --- | --- | --- |
 | 1 Exactness | SDE full/complement hashes, generated exact/no-op receiving, named fork/xattr removal and old-reader controls | Current candidate18rows54CLI property regression passed; do not extrapolate to every property family. |
-| 2 Container coverage | Both TIFF byte orders, classic/BigTIFF, graph/private spans, layout-only exact profile, JPEG; opaque complement coverage | New camera observation observed30 MakerNote tags; component forest safely refused480-region limit, so complete camera component coverage remains unproved. Unknown fields stay exact and do not gate baseline deployment. |
+| 2 Container coverage | Both TIFF byte orders, classic/BigTIFF, graph/private spans, layout-only exact profile, JPEG; opaque complement coverage | CameraV6 reports30 MakerNote tags and complete193851848B physical byte partition across five roles; unknown values remain exact. This one-file coverage is not corpus interpretation or rendering authority. |
 | 3 Malformed input | Bounded graph/count/extent rules, malformed wire/container and JPEG controls | Current directed regressions, not an autonomous fuzz/sanitizer campaign (user excluded that work). No whole-process hard RSS claim. |
 | 4 Integrity | Full target SHA checks, raw-digest-invalid rejection, generated actual SDK receiving/merge and one real-camera SDK decode | Broader corpus and decoded-pixel identity remain separate claims. Do not rerun SDK without fresh coordination. |
 | 5 Concurrent modification | Source/target witnesses, queued completion cancellation; new report source/head/parent/permission fences | Current-object384-job apply/cancellation controls passed per compiler; precise source bindings remain in the receipts. No hostile-writer atomic namespace CAS claim. |
@@ -37,9 +37,10 @@ binds all groups/FD closure and actual owner38627/33bfbc/0. Camera V1 became sta
 under a fresh reschedule. Current property regression also completed. The older
 metadata snapshot is not current scheduling state.
 
-The next evidence is current-candidate transfer/property behavior and the
-separately scoped real-camera component+MakerNote report. Exact retained-fork
-mixed interoperation is now evidenced, with the limits below.
+Current-candidate transfer/property behavior and the separately scoped
+real-camera component+MakerNote report have now passed. Exact retained-fork
+mixed interoperation is evidenced, with the limits below. Genuine upstream
+capability-absent fallback still needs its distinct qualification.
 The older peer already supports semantic-delta/producer binding, so its matrix
 cannot prove arbitrary upstream or capability-absent fallback. Deployment is not
 waiting for exhaustive MakerNote interpretation or decoded-pixel equivalence of
@@ -60,12 +61,12 @@ fault, transfer or scheduling controls.
 
 ## Next actions in order
 
-1. Implement and qualify an explicit larger-forest contract. Generated1540checks
-   percompiler and full builds passed the field-encoding/exact-budget successor,
-   but actual camera V5 needs1747nodes, above the unchanged1024-node cap.
-   [Actual diagnostic](../tests/qualification/camera-field-encoding-v5-actual-20261017.json)
-   proves that limit. Keep existing contracts intact; version larger checkpoint
-   metadata and its bounds before a new readonly camera window. No resources held.
+1. Adopt the completed larger-forest and real-camera observation without replay.
+   [Generated qualification](../tests/qualification/dng-large-forest-actual-20261017.json)
+   proves1590checks/compiler, six builds and Update capacity behavior.
+   [Actual cameraV6](../tests/qualification/camera-large-forest-v6-actual-20261017.json)
+   covers all193851848B under/3 with historical fullSHA unchanged; bothhelpers
+   and owningtool exited0 and CPU/IO closed. No camera admission remains pending.
 2. Reconcile final acceptance against current evidence. Both
    [current property regression](../tests/qualification/pr13-properties-actual-20261017.json)
    (18rows54CLI) and exact-retained-fork mixed transport (4cases12CLI) passed,
@@ -73,13 +74,18 @@ fault, transfer or scheduling controls.
    hold remains. Never reuse their consumed admissions. The older frozen
    property request qualifies a separate baseline and is no longer needed to
    establish this candidate's tested property scope.
-3. Keep the remaining legacy cleanup limitations explicit. Owned publication
+3. Close the genuine-upstream compatibility evidence gap. The existing mixed
+   matrix uses an older fork that already supports producer binding. Prepare a
+   separately pinned upstream8772d26a baseline and capability-absent fallback
+   matrix in both directions; source/build work uses own8, transport needs its
+   own fresh exact admission. Do not relabel the passing older-fork matrix.
+4. Keep the remaining legacy cleanup limitations explicit. Owned publication
    backend, bound SemanticSync/SemanticRemote, bound local Copy and guarded rsync
    staging have current composed failure controls and stock/Ox builds. Their
    generated in-process evidence does not establish every legacy FD error path,
    power-loss behavior or actual transport fault cross-product. Do not replace
    end-to-end release verification with an endless universal cleanup migration.
-4. Keep PR13, user documentation and OPUS-HANDOFF.md aligned. Current inspector
+5. Keep PR13, user documentation and OPUS-HANDOFF.md aligned. Current inspector
    evidence is pinned separately from historical camera/SDK/RPC receipts. No
    merge, production deployment or broader camera support follows from builds.
 

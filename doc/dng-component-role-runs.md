@@ -89,3 +89,12 @@ This source change does not establish real-camera support until separately
 admitted execution, or any hard RSS/physical IO savings claim.
 
 Generated qualification: `tests/qualification/dng-large-forest-actual-20261017.json` records1590 checks/compiler, six builds and actual Update capacity controls. Retained-camera V6 remains a separately admitted observation.
+
+## Actual retained-camera V6
+
+The separately admitted V6 observation passed: DNG/3 covers all193851848B,
+including193682116B encoded-image data,152235B standard metadata,6624B private
+metadata,70B structural and10803B opaque. FullSHA matches the historical copy;
+input8fields unchanged,30typed MakerNote tags/0warnings, parent/helpers0 and
+resources closed. Receipt `tests/qualification/camera-large-forest-v6-actual-20261017.json`.
+This does not assert decoded-pixel equivalence, exhaustive meanings or a corpus.

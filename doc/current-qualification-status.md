@@ -1,4 +1,4 @@
-<!-- Current larger-forest update, 2026-10-17: explicit2048 DNG opt-in with default1024 retained, UCH1 large metadata/1MiB cap;1590checks/compiler+sixbuilds+actual Update capacity controls PASS. CameraV6 exactrequest1663093e sent to PhotoRoot; no camera success/read/admission inferred. Qualification tests/qualification/dng-large-forest-actual-20261017.json. Older checkpoint notes below remain historical evidence. -->
+<!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
 # Implementation status, updated 2026-10-17
 
 ## Current review entry point
@@ -17,15 +17,18 @@ fault controls have scoped receipts. In-process receiver delivery does not prove
 current-candidate transport/server settlement. Legacy named/unbound/older-peer
 and raw/channel cleanup remain separately limited.
 
-The metadata-field encoding and exact node-budget successor now passes stock/Ox
-1540controls each plus37/40contained calls, all Make/selftests, Dune build-only
-checks and rebuilt inspectors. [Current qualification](../tests/qualification/dng-field-node-budget-actual-20261017.json)
-preserves previous accepted views and the1024-node core limit. The actual camera
-V5 observation closed normally but still refused:2178raw/1081runs/894field-runs,
-1747normalized nodes. [Actual evidence](../tests/qualification/camera-field-encoding-v5-actual-20261017.json)
-proves the specific larger-forest requirement, not successful camera coverage.
-No CPU/IO/SDK owner remains. Next is an explicitly budgeted/versioned large
-forest and checkpoint path, with old1024-node contracts preserved.
+The explicit larger-forest successor passes1590checks/compiler, six current
+Make/selftest/Dune/inspector builds, and actual production Update checkpoint
+capacity controls. Default generic1024 remains; the DNG adapter opts into2048,
+large partitions use/3, and large checkpoint metadata uses UCH1 under the same
+1MiB byte cap. [Qualification](../tests/qualification/dng-large-forest-actual-20261017.json).
+The real retained-clone V6 run then PASSED/CLOSED: all193851848B represented
+exactly, fullSHA historicalmatch,30MakerNotes/0warnings, input8fields unchanged.
+Actual94968/138880/0, bothhelpers0/reaped/groupsabsent/CPU8EXclosed.
+[Actual receipt](../tests/qualification/camera-large-forest-v6-actual-20261017.json).
+This is one complete physical component partition plus independent typed-value
+views, not full camera meaning or decoded rendering equivalence. No pending
+camera window or resourcehold. The prior1747-vs1024 refusal remains historical.
 
 Current inspector stock/Ox builds and16tiny TIFF calls pass. Latest gradual
 refinement rerun passed1391component checks/compiler plus layout/private/archive
