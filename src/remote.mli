@@ -118,7 +118,12 @@ val register_body_ownership_classifier : (exn -> bool) -> unit
    results, custom streaming decoders, metadata and full heap/RSS are excluded.
    Recognized ownership uncertainty retains selected charges and value roots.
    Handler code must not let arguments escape its actual operation without a
-   separate owned lifetime. Frame limits alone are not aggregate accounting. *)
+   separate owned lifetime. rpcpendingreplyslots independently bounds pending
+   waiter entries (default256/max65536), refusing without waiting before request
+   marshaling and rechecking before insertion. Entries end on actual response
+   handoff/failure/removal, not decoded client-value lifetime. Duplicate reply
+   IDs cannot replace a pending waiter. Frame limits alone are not aggregate
+   accounting; outgoing buffers and results still need their own ownership. *)
 val registerServerCmd :
   string
  -> 'a Umarshal.t -> 'b Umarshal.t

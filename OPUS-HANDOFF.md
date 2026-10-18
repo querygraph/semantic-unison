@@ -5046,3 +5046,39 @@ RPC metadata (receivers/streamError values), custom workspace/baseline and hard
 FD/RSS/platform/completeSOL acceptance stillopen. No current full-goal claim.
 Frozen9d9dccc0 exactthreeIOrequests unchanged;3admissionpaths absent atlastcheck,
 no dispatch/replay or fabricated Photo hold. Standing8/8/system2 unchanged.
+
+## 2026-10-18 pending RPC waiter admission — controls closed, full builds active
+
+Uncommitted successor in implementation/decoded-input-accounting adds endpoint-local
+rpcpendingreplyslots (default256, maximum65536). It refuses a full registry before
+request marshaling and checks again before insertion; duplicate IDs cannot replace
+an existing waiter. This bounds pending entries only, not decoded client results,
+outbound bytes, full heap or RSS.
+
+Actual grouped stock/Ox control owner72498/7af596/exit0/no session collected.
+All ten family controllers in /private/tmp/unison-pending-reply-{stock,ox}-
+{framing,body,decoded,stream,pending}-20261018-004 report passed, child0, tokensclosed.
+The union covers19 negative participants/compiler plus the positive suite.
+Earlier fixture failures001/002 and incomplete Ox003 at the60s wrapper limit are
+preserved; grouped004 changes test scheduling, not production limits.
+
+Full stock/Ox Make+Dune/selftest controller is ACTUALLY LIVE session12717, initial
+chunk285bcd. Sequential max2compiler jobs under Unison00..07 only; no EXIO/SDK.
+Do not restart it or infer terminal from files/process absence. Poll actual handle.
+Final evidence/commit and inventory successor still pending these checks.
+
+## 2026-10-18 pending RPC waiter limit qualified
+
+Actual full build controller12717/006f9f/exit0/no session collected: stock/Ox
+Make+Dune/selftests all0; all recorded input/compiler/executable hashes match.
+Grouped controls72498/7af596/0/no session: ten childgroups reaped0/othersabsent,
+CPU4closed,19 designated negatives/compiler plus positive fixtures. CPU8closed
+after every build; no Unison EXIO/SDK/Photo payload owner.
+
+Evidence tests/qualification/rpc-pending-reply-slots-actual-20261018.json
+67061B SHA4656b34fbe4292099dfa3c1a4d53758a61bf9ce3d6964ca539341e36be8c1d0f.
+Inventoryv17 and doc/rpc-pending-waiters.md retain exact limits: pending entries
+only, no client result/error/outbound/fullheap/RSS guarantee. All earlier failed
+fixtures and incomplete Ox003 are preserved; no grants replayed.
+Next: explicit decoded client-result lifetime API/caller migration and stream
+error retention. Frozen9d9dccc0 IO requests remain separate; no final SOL claim.

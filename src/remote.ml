@@ -1388,6 +1388,16 @@ let newMsgId () = incr ids; if !ids = hugeint then ids := 2; !ids
 (* Threads waiting for a response from the other side *)
 let receivers = ref MsgIdMap.empty
 let receiverLimits = ref MsgIdMap.empty
+let pendingReplySlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcpendingreplyslots" 256 ~local:true
+  ~category:(`Advanced `Remote) "maximum pending RPC reply entries"
+  "Positive owner-loop process-wide waiter limit, maximum65536. Nonwaiting \
+   refusal before new request marshaling, rechecked before registry insertion; \
+   not returned-value, outgoing payload or full heap/RSS accounting.")
+let check_receiver_capacity () =
+  let slots=Prefs.read pendingReplySlots in
+  if slots<=0 || slots>65536 then raise(Util.Fatal "Invalid RPC pending reply budget");
+  if MsgIdMap.cardinal !receivers>=slots then
+    raise(Util.Transient "RPC pending reply budget exhausted")
 let resetReceivers () =
   let pending = !receivers in
   receivers := MsgIdMap.empty;
@@ -1472,6 +1482,9 @@ let rec receive conn =
   end
 
 let wait_for_reply ?maxBytes id =
+  (match maxBytes with Some n when n<0->invalid_arg "RPC reply frame limit" | _->());
+  if MsgIdMap.mem id !receivers then raise(Util.Fatal "RPC reply id already pending");
+  check_receiver_capacity ();
   let res = Lwt.wait () in
   try
   receivers := MsgIdMap.add id res !receivers;
@@ -1538,6 +1551,7 @@ let registerSpecialServerCmd
     match conn.outputQueue.failure with
     | Some e -> Lwt.fail e
     | None ->
+    check_receiver_capacity ();
     let maxBytes = match maxResultForArgs with
       | None -> maxResult
       | Some limit ->

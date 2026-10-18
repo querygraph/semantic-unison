@@ -117,3 +117,13 @@ receiver metadata ownership remain separate; no full heap/RSS bound is inferred.
 4. Reconcile all evidence to the final candidate before requesting final merge
    or activation. The current evidence supports reviewable opt-in mechanisms,
    not full-goal completion or production-photo mutation.
+
+## Pending reply metadata successor
+
+[Pending waiter admission](rpc-pending-waiters.md) now bounds the receiver registry
+(default256/max65536), rejects before request marshaling when full, and preserves
+original waiters on duplicate IDs. Four current stock/Ox Make/Dune builds/selftests
+and19 designated negative controls/compiler passed; recorded source/compiler/
+executable hashes match. Inventoryv17 records the scope. Client-returned decoded
+values, retained stream errors, outbound buffers and whole-tree resource limits
+remain open; no final transport/production/full-goal claim is added.
