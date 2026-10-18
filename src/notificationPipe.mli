@@ -41,3 +41,8 @@ val retain_unsettled : t -> exn -> 'a
 (** Root remaining ownership when stop/join or another lifecycle operation is
     unresolved. Does not close endpoints; preserves the separate original cause. *)
 val lifecycle_cause : t -> exn option
+
+val read_held : t -> bool
+val write_held : t -> bool
+(** Known local close authority remains unconsumed. False is not an OS close
+    proof: uncertain endpoints must be inspected separately through causes. *)

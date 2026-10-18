@@ -96,3 +96,6 @@ let retain_unsettled t error =
   retain t;
   raise t.carrier
 let lifecycle_cause t = if t.lifecycle_failed then Some t.lifecycle_error else None
+
+let read_held t = t.read.owned && not t.read.attempted
+let write_held t = t.write.owned && not t.write.attempted

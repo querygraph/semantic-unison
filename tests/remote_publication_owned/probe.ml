@@ -69,7 +69,10 @@ let ()=
   let native=match S.retained_publication_native owner with Some x->x|_->failwith "native carrier lost" in
   let evidence=StagePublication.owned_evidence native and count=closes() in
   let known=S.retained_publication_descriptors owner in
-  require(List.length known>=2) "remaining transaction descriptors not retained";
+  let pair=match S.retained_publication_pair_ownership owner with Some x->x|None->failwith "raw pair ledger lost" in
+  if phase="callback-close" then
+   require(known=[] && NotificationPipe.settled pair) "known-closed pair reported as live after native abort uncertainty"
+  else require(List.length known>=2 && not(NotificationPipe.settled pair)) "remaining transaction descriptors not retained";
   List.iter(fun fd->ignore(Unix.fstat fd))known;
   if phase="callback-close" then require(S.retained_publication_cause owner==marker) "original callback cause lost";
   require(!callbacks=(if phase="adopt-close" then 0 else 1)) "callback omitted/repeated after uncertainty";
