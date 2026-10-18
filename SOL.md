@@ -4,6 +4,23 @@
 
 ## Design steering — gradual understanding and incremental semantic hashing
 
+**Current release verification, 2026-10-17:** PR13 now has actual current-candidate
+mixed-peer transport evidence: four stock/Ox versus exact retained older-fork
+cases, seed/update/noop,12CLI, exact outputs/noop identity and all separate
+client/server/supervisor/pump groups settled. Actual owning tool38627/33bfbc/0
+(no session), CPU/IO closed. The older fork already supports producer binding;
+arbitrary upstream/capability-absent fallback is not inferred. Earlier failures
+and their fixes are preserved in [the sealed receipt](tests/qualification/mixed-peer-actual-20261017.json).
+[Current metadata verification](doc/sol-current-verification-20261017-v2.json)
+rechecks that seal, current production builds and pending request source pins.
+The real-camera component+exiftool-rs request and current-candidate property
+regression are prepared and await separate IO admissions. No camera payload
+was opened during preparation; incomplete MakerNotes are not a deployment gate.
+[Release readiness](doc/sol-release-readiness-20261017.md) is authoritative for
+remaining evidence; historical checkpoint statements below retain their original
+scope. No full-goal completion, production activation or merge is claimed.
+
+
 **Integration checkpoint, 2026-10-17:** consolidated draft PR13 against fork
 master contains the local managed-cache/report stack and producer-schema auditor
 correction. The consolidated candidate has stock/Ox Make+selftest evidence

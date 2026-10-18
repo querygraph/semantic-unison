@@ -1,0 +1,75 @@
+{
+  "schema": "unison-sol-current-verification/2",
+  "observed_unix": 1792285110.2559738,
+  "goal_complete": false,
+  "candidate_head": "c06c0a3a5c2b7fd707385720778b36e08ccc4357",
+  "mixed_peer": {
+    "seal": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/mixed-peer-actual-20261017.json",
+    "seal_sha256": "b9dd96d11e6e7bd15ae3532728cadd8806dae2439c8a777c32ad995e9e03ee98",
+    "artifact_pins_checked": 68,
+    "mismatches": [],
+    "actual_owner_tool": {
+      "session": 38627,
+      "chunk": "33bfbc",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "functional": "PASS_4_CASES_12_CALLS",
+    "io_cpu_closed": true
+  },
+  "pending_requests": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/camera-knowledge-request-v2.json",
+      "sha256": "c576c4424f306afb96f6de2411e0aa3fadea3083ff5d1472ec49241957286779",
+      "execution_pins_checked": 40,
+      "mismatches": [],
+      "admission": "/private/tmp/unison-camera-knowledge-admission-20261017-b8f3e205.json",
+      "admission_exists": true,
+      "workspace": "/private/tmp/unison-camera-knowledge-20261017-b8f3e205",
+      "workspace_exists": false
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/pr13-properties-request-v1.json",
+      "sha256": "5216c843388dd02ec9395f6d2ee14d772bc0e31a6aad41ccaebbf4236ea6e0f7",
+      "execution_pins_checked": 38,
+      "mismatches": [],
+      "admission": "/private/tmp/unison-pr13-properties-admission-29c8a6e1.json",
+      "admission_exists": false,
+      "workspace": "/private/tmp/u-pr13-properties-29c8a6e1",
+      "workspace_exists": false
+    }
+  ],
+  "production_builds": [
+    {
+      "label": "stock",
+      "receipt": "/private/tmp/unison-rsync-owned-stock-make-20261017-001/RESULT.json",
+      "receipt_sha256": "079664dfc0f7b334e8a77418fb924332b4271a6351b98e5a70a26f06de6ec1ea",
+      "production_pins_checked": 318,
+      "mismatches": [],
+      "binary_sha256_matches": true,
+      "recorded_build_exit": 0,
+      "recorded_selftest_exit": 0,
+      "scope": "Recorded builds/selftests rebound to current source/artifacts; no binary execution in this audit"
+    },
+    {
+      "label": "ox",
+      "receipt": "/private/tmp/unison-rsync-owned-ox-make-20261017-001/RESULT.json",
+      "receipt_sha256": "95310f43f233e390ee3939aa9b53164beb943ed7d6af07a2f27ee90bb71737d8",
+      "production_pins_checked": 318,
+      "mismatches": [],
+      "binary_sha256_matches": true,
+      "recorded_build_exit": 0,
+      "recorded_selftest_exit": 0,
+      "scope": "Recorded builds/selftests rebound to current source/artifacts; no binary execution in this audit"
+    }
+  ],
+  "pr": {
+    "baseRefName": "master",
+    "headRefName": "integration/sol-consolidated-review",
+    "isDraft": true,
+    "mergeable": "MERGEABLE",
+    "state": "OPEN",
+    "statusCheckRollup": []
+  },
+  "scope": "Metadata/source/control receipt audit only; no camera payload, binary execution, IO/CPU acquisition or runtime grant. Goal incomplete pending bounded camera observation and candidate property regression plus remaining acceptance review."
+}
