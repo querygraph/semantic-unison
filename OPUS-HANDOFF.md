@@ -6077,3 +6077,15 @@ callgraph/racesanitizer/fullM6claim. Map doc/worker-native-call-map-20261018.jso
 SHA 435639179bc087f48e09d2096c447a477caca87d7d19f5ab686e68c49dbb3153. No tests/children/tokens/IO used, no production/frozenV6change.
 All3V6requesthashesfreshmatch/admissions+workspacesabsent(actuala0958e); no
 transportdispatchinferred. Goalactive/incomplete; nextmainaction V6freshgrants.
+
+
+## 2026-10-18 draft PR13 source refresh
+
+FreshGitHubread b9a605 showeddraftPR13head236e7f99 (masterbase) behind current
+RPC/worker/cache fixes. Remoteheadcb7de0 confirmed236e7f99; both it and local
+review5a3d4077 are ancestors of current source. All329productionbindings match
+currentMake and frozenV6 exactly. Refreshingdrafthead by normalfastforwardonly,
+no force/merge/checkout of historicalreviewworktree. Durable body
+doc/pr13-current-review-20261018.md separatescurrent sourcecontrols frompending
+V6transport andhistoricalSDK/camera/benchmarks. FrozenV6bytes unchanged, no new
+runtimeadmission/claim. Fullgoalactive/incomplete; no ownedlivejobs/resources.
