@@ -468,7 +468,9 @@ def main():
             try:
                 outcome = measure_invocation(command, env, args.timeout, work / "proxy.py",
                                           use_proxy=mode != "source-clone",
-                                          strict_group_settlement=args.shared_qualification)
+                                          # Every benchmark call owns its groups, including timed runs
+                                          # which deliberately do not set shared_qualification.
+                                          strict_group_settlement=True)
             except InvocationFailure as error:
                 result["failed_invocation"] = error.outcome
                 journal.finish(error.outcome)
