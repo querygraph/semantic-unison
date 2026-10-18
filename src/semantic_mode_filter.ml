@@ -68,7 +68,9 @@ let transform version path =
     if ns<>signature_count || nf<>field_count then
       invalid_arg "qualified extension mode declarations changed";
     if interface then begin
-      let body = if component="componentHash" then
+      let body = if component="semanticFile" then
+        exact body "type close_issue\n" "type close_issue : value mod portable contended\n"
+      else if component="componentHash" then
         exact body "type checkpoint\n" "type checkpoint : value mod portable contended\n"
       else if component="semanticMailbox" then
         exact body "type 'a t" "type 'a t : value mod portable contended with 'a"

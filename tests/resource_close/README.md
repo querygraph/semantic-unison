@@ -67,3 +67,32 @@ worker-duplicate scope only. Nested reader/channel close uncertainty, pool
 creation/notification-pipe errors, native contexts, caller descriptors and hard
 whole-process FD/RSS enforcement still need their own integration and evidence.
 The failed helper/link attempts remain in the actual qualification record.
+
+## Nested reader close carriers
+
+The isolated successor's `SemanticFile` preallocates its reader carrier before
+`dup`. Raw/channel close authority is consumed once. A failure retains the
+historical descriptor, pre-duplicate file identity, close cause and original
+operation error. If an inner carrier meets an uncertain outer close, the outer
+carrier keeps the inner carrier as its operation error. The historical FD is
+not authority to retry or access a possibly reused descriptor.
+
+Workers preserve the carrier in their rooted outcome ledger and leave the
+borrowed reply sleeping after closing their separately owned duplicates. This
+avoids generic Unix/failure mapping and admission release. Synchronous callers
+outside the worker path still need their own retained-ownership integration.
+Persistent allocation failure and unreturned channel-construction side effects
+remain outside the directed controls.
+
+`reader_fault_run.py` builds a private reader with actual close, descriptor
+replacement and injected error callbacks, recompiles the dependent object suffix
+against that implementation, and links direct-reader and actual-worker controls.
+Per compiler, six direct cases cover known success, known operation failure,
+single uncertainty, operation-plus-close failure, two nested failures on distinct
+files, and raw-FD cleanup after channel-construction refusal. Two worker cases
+check carrier propagation and retained CPU/pending/shutdown across cancellation.
+Both old direct and worker behavior are independently rejected using a pinned
+pre-fix reader with API-only dummy carrier declarations; its close/control flow
+is unchanged. Fault workers settle at the controlled process-exit boundary,
+never a forged successful pool shutdown. Full stock/Ox Make/selftests pass;
+Dune, pool-pipe/native-context faults and hard global FD/RSS limits remain open.

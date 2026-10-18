@@ -1,6 +1,17 @@
 @@ portable
 type t
 exception Invalid of string
+type close_issue : value mod portable contended
+exception Close_uncertain of close_issue
+val close_issue_descriptor : close_issue -> Unix.file_descr
+(** Historical number only: never authority to retry a close or touch a reused FD. *)
+val close_issue_identity : close_issue -> Unix.LargeFile.stats
+(** Borrowed file identity captured before the reader duplicate; not a fresh
+    post-close identity or evidence that the historical number remains owned. *)
+val close_issue_cause : close_issue -> exn
+val close_issue_operation_error : close_issue -> exn option
+(** Original callback/check failure, possibly another retained reader carrier.
+    A close carrier is unresolved ownership, not an ordinary operation failure. *)
 type writer
 val prepare_writer : ?check_cancel:(unit -> unit) -> Unix.file_descr -> writer
 (** Borrow a private, singly linked regular output. Does not duplicate, close

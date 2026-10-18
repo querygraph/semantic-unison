@@ -36,6 +36,7 @@ type response = Hashed of fingerprint | Inspected of inspection
   | Applied of SemanticDelta.application
   | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
   | Ownership_retained
+  | Reader_ownership_retained of SemanticFile.close_issue
 type ownership_entry = {group:Close.group; outcome:response Atomic.t;
                         mutable failed:bool; mutable failure:exn}
 type operation = Digest | Inspect of FormatExtension.handle
@@ -218,6 +219,7 @@ let execute job =
       Error "file changed while hashing",None
     else result,reads
   with
+  | SemanticFile.Close_uncertain issue -> Reader_ownership_retained issue,None
   | Cancelled_job -> Cancelled,None
   | SemanticFile.Invalid reason | ComponentHash.Invalid reason | Invalid_argument reason -> Error reason,None
   | Unix.Unix_error (err, operation, _) -> Error (operation ^ ": " ^ Unix.error_message err),None
@@ -267,7 +269,7 @@ let dispatch t =
   List.iter (fun (id, result, reads) ->
     match Hashtbl.find_opt t.replies id with
     | None -> ()
-    | Some _ when (match result with Ownership_retained -> true | _ -> false) ->
+    | Some _ when (match result with Ownership_retained | Reader_ownership_retained _ -> true | _ -> false) ->
       (* Keep both reply and owned_groups entry reachable. No wakeup means
          all borrowed outer reservations remain unsettled. *)
       t.retained <- t.retained + 1;
@@ -447,7 +449,7 @@ let submit t cancellation fd requested_operation =
             reply
           end)) (function
         | None | Some Cancelled -> return None
-        | Some Ownership_retained -> retain ()
+        | Some (Ownership_retained | Reader_ownership_retained _) -> retain ()
         | Some (Error reason) -> fail (Failed reason)
         | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Component_inspected _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
