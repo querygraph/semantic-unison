@@ -4290,3 +4290,10 @@ Savedworker1semantic returnedwrites6144B for2x2MiB/payload16384B, versusordinary
 ## Current Dune parity also actualclosed
 
 Actual47840/e38f6e/exit0/no session; stock16594+Ox17660 genuinelyreaped0/groupsabsent/CPU8closed. FreshDune CLI builds+selftests pass aftercompactXMP, two compilerjobs/2selftestworkers; noEXIO/SDK/Photo data. Snapshotreceipts /private/tmp/unison-current-dune-{stock,ox}-20261017-002/RESULT.json, sourcepins rehashedcurrent. Qualification tests/qualification/current-dune-cli-actual-20261017.json. CurrentMakewas68048/1d62e4/0; bothbuildsystemsnowqualifythiscoreSource. No livehandles/resources. Savedreport/newDuneproof/docs pendingcommitnext; no newIOadmission/replay or fullgoalcompletion.
+
+
+## Per-job monotonic completion observations qualified
+
+Added benchmark-only job_completion_seconds in submission order: input open/admission/queue/hash/notification/owner delivery/input close. Production worker interfaces/clocks unchanged. Intervals overlap and are NOT internal hash/parse/verify/commit timings or summed batch walltime. Old cached48batch results remain unchanged/consumed, no bulk rerun or new Photo/IO request.
+
+Actual owning session81465/chunkb15e1a/exit0/no session. Child21077 genuinelyreaped0/othersabsent/CPU8closed; noEXIO. Current stock/Ox benchmark builds passed six original64B controls (workers1/jobs1,workers1/jobs6,workers2/jobs6 percompiler); all26digests/exact1664primaryreadbytes, finite perjob intervals within batch walltime, permits0 and originalFDcounts restored. Evidence tests/qualification/benchmark-job-latency-actual-20261017.json and /private/tmp/unison-job-latency-controls-20261017-001. Tiny queue/delivery differences are observations, not performance/scaling/cause proof. Internalstage timings and hardresourcebounds still OPEN. No liveownedjobs/tokens/Photohold; goal remainsactive.

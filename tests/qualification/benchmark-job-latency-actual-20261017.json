@@ -1,0 +1,127 @@
+{
+  "schema": "unison-benchmark-job-latency-qualification-v1",
+  "state": "DIRECTED_CONTROLS_PASS_CLOSED",
+  "owner_terminal": {
+    "session": 81465,
+    "chunk_id": "b15e1a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "scope": "Six original64B fixture controls, stock/Ox jobs1/6 and workers1/2; no bulk matrix, SDK, Photo, EXIO, stage timing or performance qualification.",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/semantic/hash_bench.ml",
+      "bytes": 3796,
+      "sha256": "996c6fb87b17ec4dba0bacc6172046780dce9a2037df78087ae3fff279827c37"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/bench/semantic/README.md",
+      "bytes": 12409,
+      "sha256": "269312fc3aafe00b43d17f08a0af58c4abb5d77dd62c512ac5d2161b6fda479f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/cached_benchmark/build_controls.py",
+      "bytes": 2993,
+      "sha256": "694dee59373fce60a2647c29b2be619a23694c2043a067c43147a948aa1bb8eb"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "/private/tmp/unison-job-latency-controls-20261017-001/RESULT.json",
+      "bytes": 44186,
+      "sha256": "881c5ccaf61d2d3bea8d6e9c23694644ca54cc40c6071d0a0241dd43c63f58f0"
+    },
+    {
+      "path": "/private/tmp/unison-job-latency-controls-20261017-001/BUILD.json",
+      "bytes": 36277,
+      "sha256": "a9ee2bf7a7482ae22678778928303ad78e858b1cf9ca3406d9438eb50a0390ef"
+    },
+    {
+      "path": "/private/tmp/unison-job-latency-controls-20261017-001/SHARED-START.json",
+      "bytes": 1366,
+      "sha256": "4db35afe977623a918ff6cb30b3939b0faf60db9c93f09338d57f774e53ffabf"
+    },
+    {
+      "path": "/private/tmp/unison-job-latency-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "c5a3cf7f0571391bed465a4e4f5491f8c06f52bce2a5b823353ec2e53a61b184"
+    }
+  ],
+  "observations": [
+    {
+      "compiler": "stock",
+      "workers": 1,
+      "jobs": 1,
+      "completion_seconds": [
+        0.000187
+      ]
+    },
+    {
+      "compiler": "stock",
+      "workers": 1,
+      "jobs": 6,
+      "completion_seconds": [
+        0.000347,
+        0.010747,
+        0.021836,
+        0.032552,
+        0.043551,
+        0.054727
+      ]
+    },
+    {
+      "compiler": "stock",
+      "workers": 2,
+      "jobs": 6,
+      "completion_seconds": [
+        0.00039,
+        0.000273,
+        0.010295,
+        0.010254,
+        0.021489,
+        0.021463
+      ]
+    },
+    {
+      "compiler": "ox",
+      "workers": 1,
+      "jobs": 1,
+      "completion_seconds": [
+        0.000207
+      ]
+    },
+    {
+      "compiler": "ox",
+      "workers": 1,
+      "jobs": 6,
+      "completion_seconds": [
+        0.000295,
+        0.012619,
+        0.023239,
+        0.033849,
+        0.044011,
+        0.05397
+      ]
+    },
+    {
+      "compiler": "ox",
+      "workers": 2,
+      "jobs": 6,
+      "completion_seconds": [
+        0.000287,
+        0.000194,
+        0.010213,
+        0.010178,
+        0.020429,
+        0.020462
+      ]
+    }
+  ],
+  "primary_logical_bytes_read": 1664,
+  "limitations": [
+    "Intervals overlap; never sum as batch wall time.",
+    "Includes input open/close, admission, queue, hash, notification and owner delivery.",
+    "Internal parse/verify/commit and isolated hash timing remain unmeasured.",
+    "No bulk run or historical sample was repeated or relabelled."
+  ]
+}

@@ -176,3 +176,9 @@ adds stock/Ox Dune builds and selftests after compact XMP changes. Actual owner
 pins match. Together with the current Make results this proves both build paths
 for this snapshot, without substituting compilation for unmeasured resources,
 transfer faults or throughput. No process or Photo resource hold remains.
+
+Benchmark completion-latency successor: six original64B controls pass on stock/Ox;
+see `../tests/qualification/benchmark-job-latency-actual-20261017.json`. New per-job
+monotonic observations include queue/admission/delivery and overlap. They do not
+close the internal hash/parse/verify/commit timing requirement or qualify scaling.
+Production worker interfaces and historical bulk results are unchanged.

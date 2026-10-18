@@ -196,3 +196,14 @@ the cached workload, six-job scheduling geometry, sampled RSS/FD observations
 and shared-machine timing from end-to-end sync or physical IO. The earlier
 preparation above remains historical; its lack of admission is no longer the
 current state. Admission4c9d02f3 is consumed and must never be replayed.
+
+## Per-job completion observations
+
+New samples retain `job_completion_seconds` in submission order. Each monotonic
+interval starts before that job opens its input and ends after its digest promise
+resolves and the owner closes the input. It includes admission, queueing, hashing,
+notification and owner scheduling; it is not isolated hash CPU time or internal
+parse/verify/commit timing. Concurrent intervals overlap and must not be summed
+as batch wall time. Failed jobs produce no successful benchmark sample. The
+observer runs only in this benchmark; production worker APIs are unchanged.
+Historical saved samples do not gain these measurements retroactively.
