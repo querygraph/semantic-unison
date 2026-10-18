@@ -585,3 +585,15 @@ operation invalidates observation before the caller releases the PID. These
 are owner-loop contracts, not compiler-enforced C/domain or hostile-OS proofs.
 Query/syscall duration is not a hard deadline and unsupported platforms cannot
 infer zero. See [scope/source reference](../tests/helper_group_observation/README.md).
+
+## Current snapshot FD-clone boundary
+
+[Source review](worker-snapshot-ffi-source-review-20261018.json) follows the
+worker Snapshot path through ValidationSnapshot to unison_clone_file_status.
+The current macOS FD backend performs native descriptor/EOF/cursor preflight
+then returns a no-effect decline; named APFS clone is a separate API. Rooted
+arguments are converted to native scalars before runtime release and tuple
+allocation follows reacquisition. The caller retains borrowed descriptors.
+[Compile-only controls](../tests/qualification/worker-ffi-owner-boundary-actual-20261018.json)
+accept private hashing and reject two exact owner cache/publication APIs. No
+generated program ran; this does not prove every call edge or C implementation.

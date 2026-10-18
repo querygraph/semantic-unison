@@ -6050,3 +6050,17 @@ Other functions in sameCfile are explicitlyNOTreviewed by pinning file; remainin
 namespace/quota/clone/publication/inherited/provider audits stayseparate.
 No runtimes/tests/tokens/SDK/Photo operation, no production/frozenV6change.
 Goalactive/incomplete; V6transport/property grants stillneeded.
+
+
+## 2026-10-18 snapshot FFI trace and owner compiler boundary
+
+Reviewed exactSnapshot worker→borrowedFDclone path. MacOS FD adapterpreflights
+thennoeffectdeclines; namedAPFSclone separate, no mistakenFDcloneclaim.
+Added originalcompileonly3probes: privatehash accepted, exactownerrecord/
+cacheparent APIs rejectednonportable. Finalactual9870b7/0, child/group/CPU4
+closed; no generatedprogram linked/run/pathopened. Initial0015f4abe/0 preserved,
+002tightenedexactnameddiagnostic oracle. Evidence
+tests/qualification/worker-ffi-owner-boundary-actual-20261018.json SHA ce0c75ce5177d524c28eec0f912652536346c72f50dd3afa40b6c5511cbb9f89.
+Source doc/worker-snapshot-ffi-source-review-20261018.json pinsselectedreview,
+notallreachableC/thirdparty/platform audit. No production/frozenV6changes,
+SDK/Photo/EXglobal use or currentresources. Goalactive/incomplete.
