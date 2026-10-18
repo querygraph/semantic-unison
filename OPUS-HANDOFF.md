@@ -4077,3 +4077,12 @@ Mixedpeerrequestsourceclosure excludesrun.py andremainsseparateunchanged. Earlie
 goalblockednote is historical externalverification state, not a claim thisnew
 explicituserintegration was blocked. Original fullgoal still needs actual scoped
 endtoend evidence; no fullgoalcompletion/productiondeployment claim.
+
+
+## Camera knowledge successor refreshed — 2026-10-17
+
+Mixed-peer goes first unchanged: request `3fce1144b998673b7fc8ab175510b1e05a1b21027cbf224449b4689359f941b2`, 383 execution pins and 14 prerequisites freshly match; admission/workspace absent. No dispatch from this preparation.
+
+Camera V1 remains stale/unstarted and byte-preserved. Fresh `doc/camera-knowledge-request-v2.json` SHA `c576c4424f306afb96f6de2411e0aa3fadea3083ff5d1472ec49241957286779` binds current component inspector plus actual exiftool-rs bridge receipt/binary/revision and 40 execution sources. Separate `tests/inspector_knowledge_entry.py` avoids editing the mixed-peer-pinned manual dispatcher. Exact shared8 + EXglobal admission required; workspace/admission absent. One camera observation, two owned readonly helper calls, 300s worker, three declared source passes within conservative uninstrumented 2GiB logical read budget. No source payload opened during preparation.
+
+19 metadata-only contract controls passed under owned Unison8: actual tool `6e65d2/exit0/no session`; child reaped0/group absent/tokens closed. Qualification `tests/qualification/knowledge-inspector-contract-controls-20261017.json`. Existing exiftool API/CLI/fault controls remain separate evidence. MakerNote views remain advisory, no offsets/merge/transfer authority. Next: Photo Root review/admission after mixed-peer; never reuse V1 or infer permission from resource release.

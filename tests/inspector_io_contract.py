@@ -20,14 +20,30 @@ def identity(path):
 def check(value, argv, root):
     from shared_io_pool import read_manifest
     contract = value.get('inspector_contract')
-    if not isinstance(contract, dict) or set(contract) != {
-            'build_receipt', 'build_receipt_sha256', 'binary_sha256',
-            'input', 'input_identity', 'mode'}:
+    keys = {'build_receipt', 'build_receipt_sha256', 'binary_sha256',
+            'input', 'input_identity', 'mode'}
+    if not isinstance(contract, dict) or set(contract) not in (keys, keys | {'exiftool_bridge'}):
         raise ValueError('exact inspector contract required')
     if contract['mode'] != 'components' or not Path(contract['input']).is_absolute():
         raise ValueError('one absolute advisory component input required')
     expected = [__import__('sys').executable, str(root / 'tools/semantic-inspect/run.py'),
-                '--use-build', contract['build_receipt'], '--', '--components', contract['input']]
+                '--use-build', contract['build_receipt']]
+    extra_sources = set()
+    if 'exiftool_bridge' in contract:
+        bridge = contract['exiftool_bridge']
+        if not isinstance(bridge, dict) or set(bridge) != {'build_receipt', 'build_receipt_sha256', 'binary_sha256', 'engine_revision', 'wrapper_sha256'}:
+            raise ValueError('exact bridge contract required')
+        build = read_manifest(bridge['build_receipt'], bridge['build_receipt_sha256'])
+        if (build.get('schema') != 'unison-exiftool-rs-build/1' or build.get('complete') is not True
+                or bridge['engine_revision'] != '3cd699a2e6633fcf28e39c260c71709b6a6049a7'
+                or any(build.get(k) != bridge[k] for k in ('binary_sha256', 'engine_revision', 'wrapper_sha256'))):
+            raise ValueError('qualified pinned bridge build required')
+        expected += ['--exiftool-build', bridge['build_receipt']]
+        extra_sources = {root / name for name in (
+            'tools/exiftool-bridge/main.rs', 'tools/exiftool-bridge/observe.py',
+            'tests/inspector_knowledge_entry.py',
+            'tests/component_remote/io.py', 'tests/sdk_host_matrix/shared_child.py', 'bench/sync/measure.py')}
+    expected += ['--', '--components', contract['input']]
     if argv != expected:
         raise ValueError('inspector command differs from contract')
     receipt = read_manifest(contract['build_receipt'], contract['build_receipt_sha256'])
@@ -47,7 +63,7 @@ def check(value, argv, root):
     spec.loader.exec_module(module)
     if set(receipt['source_sha256']) != {str(name) for name in module.SOURCES}:
         raise ValueError('exact inspector kernel source set required')
-    return {root / name for name in module.SOURCES}
+    return {root / name for name in module.SOURCES} | extra_sources
 
 
 def postcheck(binding):

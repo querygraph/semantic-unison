@@ -42,6 +42,28 @@ class Contract(unittest.TestCase):
     def test_missing_contract(self):
         self.binding['extra']=True
         with self.assertRaises(ValueError):self.check()
+class Bridge(Contract):
+    def setUp(self):
+        super().setUp()
+        self.bridge = dict(build_receipt='/private/tmp/inert-bridge.json',
+            build_receipt_sha256='d'*64, binary_sha256='e'*64,
+            engine_revision='3cd699a2e6633fcf28e39c260c71709b6a6049a7', wrapper_sha256='f'*64)
+        self.binding['exiftool_bridge'] = self.bridge
+        self.argv[4:4] = ['--exiftool-build', self.bridge['build_receipt']]
+    def check(self):
+        build=dict(self.bridge, schema='unison-exiftool-rs-build/1', complete=True)
+        def manifest(path, digest):
+            return build if path == '/private/tmp/inert-bridge.json' else self.receipt
+        with patch('shared_io_pool.read_manifest',side_effect=manifest),patch.object(contract,'identity',return_value={'sentinel':1}),patch.object(Path,'read_bytes',side_effect=AssertionError('no payload read')):
+            return contract.check({'inspector_contract':self.binding},self.argv,ROOT)
+    def test_accept(self): self.assertEqual(len(self.check()),32)
+    def test_wrong_engine(self):
+        self.bridge['engine_revision']='wrong'
+        with self.assertRaises(ValueError):self.check()
+    def test_missing_flag(self):
+        del self.argv[4:6]
+        with self.assertRaises(ValueError):self.check()
+
 class Postcheck(unittest.TestCase):
     def test_same(self):
         with patch.object(contract, 'identity', return_value={'x': 1}):
