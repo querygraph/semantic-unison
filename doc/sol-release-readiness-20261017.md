@@ -283,3 +283,12 @@ and exact old-guard rejection on both compilers. All 329 production pins match;
 actual controller1667/c0652d/0 and both CPU4/group closures passed. No helper,
 SDK, payload or transport ran. This qualifies admission/error behavior, not
 actual SDK receiving, whole-process memory containment or deployment.
+
+## Current validation warning/cancellation composition — 2026-10-18
+
+[Eleven fixed cases per compiler](../tests/qualification/current-validation-warning-actual-20261018.json)
+passed on the current selected handler/dependency graph with private worker
+observations and a synthetic protocol helper. Warnings are delivered once outside
+dispatch after pump rearm; require/off, mutation, cancellation and throwing warning
+printer cases pass. Actual controller64856/6cfc28/0 and CPU4/group closure passed.
+CLI receiving was explicitly skipped; no SDK or native UI qualification follows.

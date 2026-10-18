@@ -6008,3 +6008,17 @@ Evidence tests/qualification/current-publication-admission-actual-20261018.json
 SHA 3e4d9fd1aace53ba6505c036b1f18ef541f33f1389764e8627b850217191eb7c. This renews narrowed admission behavior only, not actual
 SDK receiving or globalhardRSS. FrozenV6 untouched; actualcompat/property
 requests stillpending. Goalactive/incomplete; noownedlivejobs/resources.
+
+
+## 2026-10-18 current validation warning/cancellation composition renewed
+
+Actualcontroller64856/6cfc28/exit0/no session(initial016fdc) passed all11
+fixed cases eachstock/Ox, actualselectedhandler/currentlinkedgraph withprivate
+worker observations. warn findingonce/outside dispatch/pumprearmed, pass/require/
+off-nohelper, inspection/mutation/activecancel/deliverycancel/abort/printererror
+controls passed. Synthetichelpers reportedreaped beforecompanionreturn; owning
+group/childwait0/CPU4closed. Sourcegraph/testpins rehashed current. Evidence
+tests/qualification/current-validation-warning-actual-20261018.json SHA c4fb967f8074b56ee37edc1cb4829fd2bf0a7460d9a27dd4b33d76dc79022dae.
+CLIexplicitlySKIPPED/noAdobe/SDK/Photo/EXglobal/nativeUI; oldnegativecontrols
+notrerun here. FrozenV6 untouched/currentreceiving remainsseparate. Goalactive
+and incomplete; noownedlivejobs/resources.
