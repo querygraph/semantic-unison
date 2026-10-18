@@ -1,0 +1,704 @@
+{
+  "scope": "Joint synchronous compact-base cache ownership plus full async capture/merge propagation. Generated private64KiBDNG/state only, no SDK/Photo/camera/realtransport/EXglobal IO. Unknown fixtures end at actual process exit, not normal in-process settlement. No aggregate FD/RSS/physical IO/full-goal claim.",
+  "sealed_at": "2026-10-18T12:18:07.564553+00:00",
+  "parents": {
+    "make_and_regressions": {
+      "session": 73641,
+      "chunk": "19b95f",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "dune": {
+      "session": 2252,
+      "chunk": "06f40f",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "directed_final": {
+      "session": 67914,
+      "chunk": "868295",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "positive_named_scenarios": {
+    "joint": 40,
+    "acquired_exception": 12,
+    "storage_quota": 58,
+    "full_capture_saved_base_cached_merge": 6,
+    "merge_errors_exceptions": 34
+  },
+  "designated_negative_rejections": {
+    "close_swallowing": 2,
+    "pre_adoption_leak": 2
+  },
+  "torn_quota_prefixes_nested_in_storage_scenarios": 158,
+  "source_counts": {
+    "stock-check": 329,
+    "stock-dune-check": 329,
+    "ox-check": 329,
+    "ox-dune-check": 329
+  },
+  "controllers": {
+    "stock-check": {
+      "child": {
+        "pid": 60894,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 60894,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock-dune-check": {
+      "child": {
+        "pid": 64190,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 64190,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/joint": {
+      "child": {
+        "pid": 66876,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 66876,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/ownership": {
+      "child": {
+        "pid": 62304,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 62304,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/storage": {
+      "child": {
+        "pid": 62369,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 62369,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/pipeline": {
+      "child": {
+        "pid": 62386,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 62386,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/merge-errors": {
+      "child": {
+        "pid": 62398,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 62398,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-check": {
+      "child": {
+        "pid": 62433,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 62433,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-dune-check": {
+      "child": {
+        "pid": 65298,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 65298,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/joint": {
+      "child": {
+        "pid": 67192,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 67192,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/ownership": {
+      "child": {
+        "pid": 63947,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 63947,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/storage": {
+      "child": {
+        "pid": 63989,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 63989,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/pipeline": {
+      "child": {
+        "pid": 64012,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 64012,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/merge-errors": {
+      "child": {
+        "pid": 64026,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 64026,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  },
+  "artifacts": {
+    "stock-check": [
+      {
+        "path": "/private/tmp/unison-cache-joint-stock-check-20261018-003/RESULT.json",
+        "bytes": 58978,
+        "sha256": "85cda403423ee619a0b1fe6f2d00def1a5a3378a44487a35ed6790700715a367"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-stock-check-20261018-003/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "f31dfaf91f2f646746bef94a6a852ff36fa0ef8e585cff5d945970e9d858d598"
+      }
+    ],
+    "stock-dune-check": [
+      {
+        "path": "/private/tmp/unison-cache-joint-stock-dune-check-20261018-002/RESULT.json",
+        "bytes": 58805,
+        "sha256": "7febd956cabf4610aeaac81be97771f47a52b309be1274308ea03407c109653b"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-stock-dune-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "accfb0b5ad7cdd3af757d1263fcfb661c226bf49b39c63bcf387eb11c70574d3"
+      }
+    ],
+    "stock/joint": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-joint-20261018-002/CONTROL.json",
+        "bytes": 76155,
+        "sha256": "bfc131c62d8623a6dca4d53766ae1bf7443d1397532ce22ebc11748562454c20"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-joint-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "a4dc5fd47b66ea5accf70852be1542d01c915c9a61b8a977f78f4c57083ffcba"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-joint-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 85,
+        "sha256": "13dde5b64f257743dcbb99eab3e72faefe61eeda6dfa97060bb55a831ba2c1a5"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-joint-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/ownership": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-ownership-20261018-001/CONTROL.json",
+        "bytes": 1024,
+        "sha256": "6ebe8d317fe07c8d61da2a1320c585d67fb93ed24d1a26d43f371f0cd5b62b65"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-ownership-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "5518d8bbb8e0d314807ecd1fb3bc045aa22ec247989fb189d37e0e3ea8689ef4"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-ownership-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 444,
+        "sha256": "a4921a8262b0d5b6e7c9007fce54d4959c5652331c129e3b10335872d1b7ce06"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-ownership-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/storage": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-storage-20261018-001/CONTROL.json",
+        "bytes": 638,
+        "sha256": "2244cb86fa17b3803d7444ed0cf43f289d52554230d7d88b97e5a6f8f91fdeb8"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-storage-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "08208154a6d11148d3cb02a094a59bc570095bed126d2e978a355ee669ea1a77"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-storage-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 489,
+        "sha256": "e4d0ab0839ca879b067f58e392f410935f1db0dcfc7466721677d4d24bf5854b"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-storage-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/pipeline": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-pipeline-20261018-001/CONTROL.json",
+        "bytes": 12242,
+        "sha256": "23ad10cb779f87cc642181feefae9ac08dee8f50cccd37cc7b7bd2cf946aeafd"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-pipeline-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "1bffc95a76352d1801a5f429d7d514d71ffcb2c59f4a6720ee060366e0f10f15"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-pipeline-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "d6f49e02c8d017da1db63bbbedc512f8c86acefec8d3db9cd6cd465258cfc5d4"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-pipeline-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/merge-errors": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-merge-errors-20261018-001/CONTROL.json",
+        "bytes": 15837,
+        "sha256": "5f2214bb4b7c5ddcd71986c428ded812588aeba4e8df738b9a74927682bcf1a1"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-merge-errors-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "e6327d34cec366d79ec0c9e16f92fdf6a821715c57044288189af9970800bfc8"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-merge-errors-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2639,
+        "sha256": "0b060cd3e06e7b10244eafd9627b5f4d5245305b4c3dcc208a7bbb729dd1b97c"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-stock-merge-errors-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox-check": [
+      {
+        "path": "/private/tmp/unison-cache-joint-ox-check-20261018-003/RESULT.json",
+        "bytes": 58984,
+        "sha256": "781c938a8abd378db66fef55f2d9554dc6f712066ecb29308dc84c0420b79106"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-ox-check-20261018-003/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "cb8441a0c33e461983619dbcb73540bed3f15652fd80dca8aef1c1fbe469fbdb"
+      }
+    ],
+    "ox-dune-check": [
+      {
+        "path": "/private/tmp/unison-cache-joint-ox-dune-check-20261018-002/RESULT.json",
+        "bytes": 58809,
+        "sha256": "4a236f00e6a6604a73d0e08887e5202940fecf68aa696868b2f795eaf629a9b7"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-ox-dune-check-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "0f8792122591271d261fe0e79f8484d059af08d0f6faeea5f437a99ee62cc3e4"
+      }
+    ],
+    "ox/joint": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-joint-20261018-002/CONTROL.json",
+        "bytes": 77035,
+        "sha256": "6de7ff8a6560fd36cc37ca18aaae376d7eafaeef158c2eb6e8e6aaf5ca4aaa82"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-joint-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "eaeeab88e49f4cbd2667892119d73f53b96b658c181011221303db2daa2db52f"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-joint-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 86,
+        "sha256": "1f7ccd7c324c8007cdad6e77f2f01810cda9e502979a8a402af2970df77aa554"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-joint-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/ownership": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-ownership-20261018-001/CONTROL.json",
+        "bytes": 1027,
+        "sha256": "f2e5bc15f66f47edada8874f7b360a7ae4b33ceeca62dcd03c1eb0715471a4af"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-ownership-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "3e8786f416882346c93afbef81eb28431d509563529b7b414d87639e9df1fdfe"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-ownership-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 444,
+        "sha256": "50fd2fc78cb6e32901748dbf75bf4478653a14122353c2f7fc37aa88a14785ce"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-ownership-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/storage": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-storage-20261018-001/CONTROL.json",
+        "bytes": 641,
+        "sha256": "9c168475245bb48b78e0dfd6ad84fbc31bcda01b23b02fe73a714e7f46834afd"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-storage-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "4330fdb4eeffada31d047afb8a807ca8cf9cec2e97146676f457f601e2068250"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-storage-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 489,
+        "sha256": "bbb64bf9a2cf799d72e99a080ac6742ca6455a9e5e65b671ad5f8465200157c6"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-storage-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/pipeline": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-pipeline-20261018-001/CONTROL.json",
+        "bytes": 12241,
+        "sha256": "554ec34ec5bc3cb628c00862585b9531357ba2a6590ef5c6f847b936363bd72b"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-pipeline-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "e663f3885a2e74986f1adc66e12a8e9508bdb5f4dd02b67b475d65be7d9b2b93"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-pipeline-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 109,
+        "sha256": "d6f49e02c8d017da1db63bbbedc512f8c86acefec8d3db9cd6cd465258cfc5d4"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-pipeline-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/merge-errors": [
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-merge-errors-20261018-001/CONTROL.json",
+        "bytes": 15836,
+        "sha256": "6b549c5a08a19d6dda5cabe7b1bf361052d9e5bd8c0a2748d879b2e5463da933"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-merge-errors-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "e55e1c2a2b61de590889cc93e03382630c3aa2bc0e6a15b25e40aa79f08b42b8"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-merge-errors-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2636,
+        "sha256": "8f18aa98db433deb74995ab33dfc47ca579a53fd786c473ef272c34eb7414175"
+      },
+      {
+        "path": "/private/tmp/unison-cache-joint-final-ox-merge-errors-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "src/semanticMergeCache.ml",
+      "bytes": 21707,
+      "sha256": "b5097d30304be737f3d9fdc8f80232ae3d2dc0017fa6e16064b812785986a931"
+    },
+    {
+      "path": "src/semanticMergeCache.mli",
+      "bytes": 1368,
+      "sha256": "973c2133bd70758ebcb8865623b8700ad8d038693fe2b70ca14947f7a234e573"
+    },
+    {
+      "path": "src/semanticSync.ml",
+      "bytes": 38771,
+      "sha256": "cebe8c8420baf8a43a0d6cf61fe9e98619e454f3ec889a2f01ee34376d654d63"
+    },
+    {
+      "path": "src/semanticRuntime.ml",
+      "bytes": 15225,
+      "sha256": "6ed5055e1fd50904fe0ffd2ffe83beb1088afa0ec704625e246addf0a1cacf4f"
+    },
+    {
+      "path": "src/notificationPipe.ml",
+      "bytes": 4655,
+      "sha256": "1567344b9ea1a8945725807b91f448835e1b65c5be6e2bc32ea451304df2b938"
+    },
+    {
+      "path": "src/directoryOwner.ml",
+      "bytes": 2928,
+      "sha256": "e0051a6e0349221a2318a899f4890b4cf1521968248dfbccd2a7d1c0b5fcbd43"
+    },
+    {
+      "path": "tests/resource_close/cache_joint_run.py",
+      "bytes": 7154,
+      "sha256": "436121eebfeda0fc99587de35d6f67dabe8e943c7f522b3a1277fea6cd566606"
+    },
+    {
+      "path": "tests/resource_close/cache_joint_test.ml",
+      "bytes": 7355,
+      "sha256": "93bb72bf415a377092f483187c0a403beba97d8803f2baf441f63ddaadafd543"
+    },
+    {
+      "path": "tests/resource_close/cache_joint_fault.ml",
+      "bytes": 2510,
+      "sha256": "31d96e374ae7e234e0263cb848c30c20ee18913c60080cd6ba4705ab8ed45ee0"
+    },
+    {
+      "path": "tests/semantic_base_cache/ownership.py",
+      "bytes": 7172,
+      "sha256": "9af1ff2ad754ca794bfd358e5e89f7ca29045ea4920e2227d32261a3d1ce64fa"
+    },
+    {
+      "path": "tests/semantic_base_cache/ownership.ml",
+      "bytes": 2238,
+      "sha256": "a2fea0107a492177068baacd8755def0866f3283bd69517c74c13960fd4346b8"
+    },
+    {
+      "path": "tests/semantic_base_cache/storage.py",
+      "bytes": 3798,
+      "sha256": "676885077df9ee34508fca37a56c26967ff7a76c8b3244dbadc90151cf83713b"
+    },
+    {
+      "path": "tests/semantic_base_cache/storage.ml",
+      "bytes": 11875,
+      "sha256": "fb9ac8cb7ad61fdc9f56ce9ddf6a8f735ff383b2d4d8ef89be3015abaa6d2d85"
+    },
+    {
+      "path": "tests/resource_close/input_pipeline_run.py",
+      "bytes": 3826,
+      "sha256": "79cae3f5b426385befbd409177784934bff38945d3bb1dd6adc3b8210e9a9ded"
+    },
+    {
+      "path": "tests/resource_close/input_pipeline_test.ml",
+      "bytes": 2431,
+      "sha256": "23aac894b0b08e38b9c11ed0ac4ecad7d78b235df0a1761ac7928f44820052e8"
+    },
+    {
+      "path": "tests/merge_io_errors/run.py",
+      "bytes": 6770,
+      "sha256": "6a0eb9d12ee696acba7c873cd3574a1ec49fac11f4517f91a3bdb11cc27e1bed"
+    },
+    {
+      "path": "tests/merge_io_errors/probe.ml",
+      "bytes": 3665,
+      "sha256": "df3e53c317d9bf0dbc5cfd94f1f80e6708ee254608f3c94cb341da523322453e"
+    }
+  ],
+  "preserved_history": {
+    "first_stock_build": "96987/be07c5/0 passed initial mechanism; later003 is current source",
+    "directed001": "39106/8e570c/1 after14positive cases: one swallowing substitution was insufficient because final cleanup still retained; corrected negative participant must remove both handlers",
+    "directed003": "41473/3ad69e/1: fixture used absent Lwt.map, failed compile; no cases claimed",
+    "directed004": "21523/ca49ad/1: final merge fixture incorrectly realpath-resolved absent fallback before admission; corrected to bound path",
+    "directed005": "82349/ac558d/0:20cases+negative percompiler before final process-retained guard; preserved",
+    "final_joint001": "73641/19b95f/0 includes source-current guard controls; final002 uses same worker behavior with corrected controlled-directory hash label and added binary identities, actual67914/868295/0",
+    "prior_dune": "94248/6180da/0 source predecessor; final2252/06f40f/0 source-current"
+  }
+}
