@@ -109,8 +109,16 @@ val register_body_ownership_classifier : (exn -> bool) -> unit
     This does not discover OS closure or recognize arbitrary unknown exceptions. *)
 
 (* Every incoming packet also obeys the endpoint-local rpcpacketmaxbytes
-   outer frame policy. Legacy registrations retain their existing codecs;
-   this frame bound is not aggregate or decoded-object accounting. *)
+   outer frame policy. Regular server arguments also use the independent
+   rpcdecodedrequestbudget/elements/slots selected-cost owner through actual
+   handler/reply settlement. Ordinary legacy registrations use finite owner
+   policy limits directly, without a frame-expansion heuristic; bounded
+   registrations additionally apply their declared per-decode limits.
+   Wire encodings are unchanged. User conversions/global escapes, client
+   results, custom streaming decoders, metadata and full heap/RSS are excluded.
+   Recognized ownership uncertainty retains selected charges and value roots.
+   Handler code must not let arguments escape its actual operation without a
+   separate owned lifetime. Frame limits alone are not aggregate accounting. *)
 val registerServerCmd :
   string
  -> 'a Umarshal.t -> 'b Umarshal.t
@@ -136,11 +144,11 @@ val registerBoundedServerCmd :
     not decoded heap/RSS or aggregate request bounds. Scope and handler share
     one decoded argument value. The endpoint-local rpcdecodedrequestbudget,
     rpcdecodedrequestelements and rpcdecodedrequestslots independently admit
-    bounded-command arguments before selected builtin allocations. Owners span
+    regular-command arguments before selected builtin allocations. Owners span
     scope/handler and queued reply consumption, retaining recognized ownership
     uncertainty and the decoded argument itself. Ordinary decode refusal releases
-    its partial debit after known failure. Conversion/global escapes, legacy
-    registrations, returned client values, metadata, recursion and full heap/RSS
+    its partial debit after known failure. Conversion/global escapes, custom streaming
+    decoders, returned client values, metadata, recursion and full heap/RSS
     are excluded; handlers/scopes must not retain arguments beyond their actual
     operation without a separately owned lifetime. Valid wire bytes unchanged.
     Shared RPC headers use independent endpoint-local frame/byte/slot limits.

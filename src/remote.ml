@@ -1030,19 +1030,19 @@ let with_body_packet (buffer,ticket) f =
     (fun result->release_body_input ticket;Lwt.return result)
     (fun error->release_body_input ticket;Lwt.fail error)
   with error->release_body_input ticket;raise error
-(* Selected decoded-argument charges have their own nonwaiting lane. They
+(* Regular RPC decoded-argument charges have their own nonwaiting lane. They
    survive decoding, handler completion and queued reply output; this is not
    complete heap/RSS or client-result lifetime accounting. *)
 let decodedRequestMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestbudget" 256 ~local:true
   ~category:(`Advanced `Remote) "selected decoded request charges in MiB"
-  "Aggregate selected builtin argument allocation charges for bounded RPC \
+  "Aggregate selected builtin argument allocation charges for regular RPC \
    requests, retained through scope/handler/reply settlement; not heap/RSS.")
 let decodedRequestElements=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestelements" 1048576 ~local:true
   ~category:(`Advanced `Remote) "selected decoded request element allowance"
-  "Independent positive aggregate collection count for bounded RPC arguments; \
+  "Independent positive aggregate collection count for regular RPC arguments; \
    nonwaiting admission, not user conversion allocation or recursion depth.")
 let decodedRequestSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcdecodedrequestslots" 256 ~local:true
-  ~category:(`Advanced `Remote) "decoded bounded request owners"
+  ~category:(`Advanced `Remote) "decoded regular request owners"
   "Positive aggregate owner count reserved before decoding, maximum65536; \
    ownership uncertainty retains the owner and its selected charges.")
 let decoded_request_bytes=ref 0 and decoded_request_elements=ref 0
@@ -1096,8 +1096,20 @@ let with_decoded_args bound codec tag conn buffer use =
   let finish ()=value:=None;release_decoded_input ticket in
   let work ()=
     reserve_decoded_slot ticket;
-    let _,decode=boundedMarshalingFunctions
-      ~reserve:(reserve_decoded_input ticket) bound codec in
+    let reserve=reserve_decoded_input ticket in
+    let decode=match bound with
+      | Some bound -> snd(boundedMarshalingFunctions ~reserve bound codec)
+      | None ->
+          (* Legacy codecs do not have a declared frame-expansion ratio. Apply
+             the finite owner policy directly, not a guessed ratio that would
+             reject compact valid collections such as lists of unit values. *)
+          let max_alloc_bytes,max_elements,_=decoded_limits () in
+          fun conn -> if conn.version<>1 then errRPCVersion conn else
+            fun buf pos ->
+              try Umarshal.unmarshal_from_bytearray_accounted
+                ~max_alloc_bytes ~max_elements ~reserve codec buf pos
+              with Failure text | Umarshal.Error text ->
+                raise(Util.Fatal(Printf.sprintf "Fatal error during unmarshaling (%s)" text)) in
     let args=safeUnmarshal (decode conn) tag buffer in
     value:=Some args;
     use args in
@@ -1552,7 +1564,8 @@ let registerSpecialServerCmd
   client
 
 let registerServerCmd name mArg mRet f =
-  registerSpecialServerCmd
+  let tag=Bytearray.of_string(name ^ "-args") in
+  registerSpecialServerCmd ~decodeArgs:(with_decoded_args None mArg tag)
     name (defaultMarshalingFunctions mArg)
          (defaultMarshalingFunctions mRet) f
 
@@ -1561,7 +1574,7 @@ let registerBoundedServerCmd ?withScope ?maxResultForArgs
   if maxArgs < 0 || maxResult < 0 then invalid_arg "registerBoundedServerCmd";
   let tag=Bytearray.of_string(name ^ "-args") in
   let command = registerSpecialServerCmd ?withScope ?maxResultForArgs ~maxResult
-    ~decodeArgs:(with_decoded_args maxArgs mArg tag) name
+    ~decodeArgs:(with_decoded_args (Some maxArgs) mArg tag) name
     (boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in
   serverArgLimits := Util.StringMap.add name maxArgs !serverArgLimits;
   command

@@ -64,6 +64,46 @@ let () =
    require(!list_calls=1 && !(R.decoded_request_count)=1)
      "element refusal reached handler or retained a known failed owner";
    R.allowWrites c.R.outputQueue;Lwt_unix.run first;Lwt_unix.run refused;decoded_zero());
+ (* Ordinary legacy registrations share the SAME lane with bounded commands,
+    without changing their codec wire or inventing an encoded-size ratio. *)
+ let legacy_calls=ref 0 in
+ let _legacy=R.registerServerCmd "decoded-legacy-string" Umarshal.string Umarshal.unit
+   (fun _ value->incr legacy_calls;require(value="abc")"legacy argument changed";
+     Lwt.return())in
+ let legacy conn id=R.processRequest conn(request_id id)"decoded-legacy-string"
+   (request_body "decoded-legacy-string" Umarshal.string "abc")in
+ with_connection(fun c _->
+   calls:=0;pause_output c;
+   let first=legacy c 12320 in
+   decoded_usage 8 0 1 "DESIGNATED legacy decoded owner missing";
+   let second=dispatch c 12321 in
+   decoded_usage 16 0 2 "legacy/bounded requests use different budgets";
+   let refused=legacy c 12322 in
+   require(!legacy_calls=1 && !calls=1)"legacy request bypassed shared slot limit";
+   R.allowWrites c.R.outputQueue;Lwt_unix.run first;Lwt_unix.run second;
+   Lwt_unix.run refused;decoded_zero());
+ Prefs.set R.decodedRequestElements 5000;
+ let compact_calls=ref 0 in
+ let _compact=R.registerServerCmd "decoded-legacy-compact" Umarshal.(list unit) Umarshal.unit
+   (fun _ values->incr compact_calls;require(List.length values=2000)"compact legacy collection changed";
+    Lwt.return())in
+ with_connection(fun c _->
+   pause_output c;
+   let pending=R.processRequest c(request_id 12323)"decoded-legacy-compact"
+     (request_body "decoded-legacy-compact" Umarshal.(list unit)(List.init 2000(fun _->())))in
+   require(!compact_calls=1)"legacy valid compact collection refused by frame ratio";
+   decoded_usage (3+2000*6*(Sys.word_size/8)) 2000 1 "compact legacy collection not charged";
+   R.allowWrites c.R.outputQueue;Lwt_unix.run pending;decoded_zero());
+ Prefs.set R.decodedRequestElements 2;
+ with_connection(fun c _->
+   Lwt_unix.run(R.processRequest c(request_id 12324)"decoded-legacy-compact"
+     (request_body "decoded-legacy-compact" Umarshal.(list unit)[();();()]));
+   require(!compact_calls=1)"legacy element overflow reached handler";decoded_zero());
+ with_connection(fun c _->
+   Lwt_unix.run(R.processRequest c(request_id 12325)"decoded-legacy-string"
+     (request_body "decoded-legacy-string" Umarshal.int 1048576));
+   require(!legacy_calls=1)"legacy malformed payload reached handler";decoded_zero());
+ print_endline "RPC legacy arguments: shared aggregate lane, compact valid wire, malformed/element refusal and queued lifetime PASS";
  (* The request's explicit value root must survive even when the handler's
     promise contains no reference to the decoded argument. Disconnect cannot
     release an actually sleeping handler. *)

@@ -70,13 +70,13 @@ subset. These are payload/lifetime policies, not complete process heap budgets.
 [Caller-owned decoder hooks](decoded-allocation-accounting-hooks.md) now admit
 selected allocation charges before allocation, with 78 checks and two mutation
 participants per compiler. Scoped RPC arguments are decoded once and shared
-between scope and handler. Bounded server arguments now have independent
+between scope and handler. Regular server arguments, both ordinary and bounded, now have independent
 aggregate slots/selected bytes/elements, held through actual scope/handler and
 queued output, with explicit value roots on typed/classifier uncertainty. These
-mechanisms do not bound arbitrary decoded lifetimes: client results, legacy
-inputs, conversion/global escapes, metadata/outbound buffers and other baseline
-families still require accounting. See the [request owner evidence](../tests/qualification/rpc-decoded-request-owner-actual-20261018.json)
-for exact current controlled/build scope. [Inventoryv12](owned-resource-remaining-inventory-20261018-v12.json)
+mechanisms do not bound arbitrary decoded lifetimes: client results, custom
+stream inputs, conversion/global escapes, metadata/outbound buffers and other baseline
+families still require accounting. See the [regular request owner evidence](../tests/qualification/rpc-legacy-decoded-owner-actual-20261018.json)
+for exact current controlled/build scope. [Inventoryv13](owned-resource-remaining-inventory-20261018-v13.json)
 retains the precise earlier ownership/platform findings.
 
 The saved warm32MiB repeated matrix is historical and not a current performance

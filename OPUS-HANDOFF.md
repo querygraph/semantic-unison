@@ -4834,3 +4834,49 @@ OPEN. Full SOL goal active, not complete. Next source work should extend legacy
 request decoding and establish explicit client-result ownership; do not shrink
 completion to the bounded subset. Frozen IO candidate9d9dccc0 requests unchanged,
 no admission observed; no replay. Standing Unison8/Photo8/system2 continues.
+
+
+## 2026-10-18 ordinary legacy RPC argument owner extension in progress
+
+Active implementation/decoded-input-accounting after ec232931 now routes ordinary
+registerServerCmd arguments (and Host/Root wrappers) through the SAME selected
+byte/element/slot owner as bounded commands. The legacy decoder uses finite owner
+policy limits directly; it does NOT guess a raw-frame expansion ratio. Existing
+codecs/tags/valid wire encoding remain unchanged. Custom stream decoders, client
+result leases, conversion/global escapes, baseline/outbound/full heap/RSS remain
+open. No final-goal completion claim.
+
+Actual direct suites63763/67aa61/0/no session passed stock/Ox,14designated negative
+participants/compiler (new ordinary-registration owner bypass included). Original
+legacy+bouned mixed queued requests share one budget; valid compact2000-unit
+collection passes while malformed/element-refused legacy input does not dispatch.
+Full four-build controller74223 currently active under Unison8; no EXIO. Keep
+production/test sources fixed while it runs. Frozen9d9dccc0 requests unchanged;
+three admission paths absent at latest read, no IO grant/dispatch/hold inferred.
+
+
+## 2026-10-18 ordinary legacy decoded argument ownership qualified
+
+Regular registerServerCmd (therefore Host/Root wrappers) now uses the same
+selected-cost owner as bounded commands. Local legacy limits come directly from
+finite owner policy, not a guessed encoded expansion ratio. Tags/wire unchanged;
+large valid legacy requests may explicitly refuse under configured admission.
+No unbounded fallback or full heap/RSS/compatibility-matrix claim.
+
+Actual direct suites63763/67aa61/0/no session passed14negative participants per
+compiler; valid compact2000-unit legacy collection and mixed legacy/bounded
+slot contention covered. Four current Make/Dune+selftests74223/5de746/0 closed,
+children87664/88799/89880/91096 reaped0/groups absent/tokens closed. Current
+recorded source inventories/binary hashes match. Fixed shared-owner waiter
+checks16224/ee868b/0 closed (stock92394/Ox92843), seven cases/compiler through
+bounded registration, no separate legacy transport/native test inferred.
+Evidence tests/qualification/rpc-legacy-decoded-owner-actual-20261018.json SHA
+8df0166c9661fce2b71faa07a472791170128576fc4e57c5774302b9393a60c1. Inventoryv13/decoder doc updated. All owned resources from this checkpoint
+closed; no EXIO was acquired. Frozen candidate9d9dccc0 exact IO requests still
+separate/unmodified; latest admission paths absent, no dispatch/replay/hold.
+
+Next actual work: explicit client-result owner/consumer scope and its production
+semantic call-site lifetimes; audit custom streaming's raw-buffer views/fixed
+metadata; continue outbound/baseline and supported whole-tree FD/RSS work. Do not
+pretend arguments close result lifetimes or arbitrary conversion/global escapes.
+Full SOL goal remains active/incomplete. Standing8/8/system2 unchanged.

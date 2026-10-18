@@ -87,7 +87,7 @@ def main():
             old='(boundedMarshalingFunctions maxArgs mArg) (boundedMarshalingFunctions maxResult mRet) f in'
             assert source.count(old)==1
             bad=source.replace(old,'(defaultMarshalingFunctions mArg) (defaultMarshalingFunctions mRet) f in')
-            arg_scope='~decodeArgs:(with_decoded_args maxArgs mArg tag) name'
+            arg_scope='~decodeArgs:(with_decoded_args (Some maxArgs) mArg tag) name'
             assert bad.count(arg_scope)==1
             bad=bad.replace(arg_scope,'name',1)
             (negative/'remoteForTest.ml').write_text(controlled(bad))
@@ -198,6 +198,7 @@ def main():
             record['double_decode_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(twice/'remoteForTest.ml'),binary_sha256=sha(twice/'double-negative'))
             record['decoded_owner_negatives']={}
             for label,needle,replacement,witness in [
+                ('legacy-decoded-bypass','registerSpecialServerCmd ~decodeArgs:(with_decoded_args None mArg tag)','registerSpecialServerCmd','DESIGNATED legacy decoded owner missing'),
                 ('decoded-bypass','| Some decode -> decode conn buf use','| Some _ -> use (unmarshalArgs conn buf)','DESIGNATED decoded arguments released before output'),
                 ('decoded-early-release','    use args in','    let borrowed=use args in release_decoded_input ticket;borrowed in','DESIGNATED decoded arguments released before output'),
                 ('decoded-uncertainty','~is_uncertain:body_unresolved ~on_retained:retain work','~is_uncertain:(fun _->false) ~on_retained:retain work','DESIGNATED decoded uncertainty escaped its owner')]:
