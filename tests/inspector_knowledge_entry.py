@@ -18,7 +18,11 @@ def main():
             '--use-build', os.environ['INSPECTOR_RECEIPT'],
             '--exiftool-build', os.environ['EXIFTOOL_BUILD'],
             '--', '--components', os.environ['INSPECT_INPUT']]
-    return run('inspect-file', argv, Path(os.environ['OUTPUT_DIR']), 8,
+    output = Path(os.environ['OUTPUT_DIR'])
+    # The shared dispatcher owns grants/children, but its caller creates the
+    # one-use private receipt directory (as manual.py does). Never reuse it.
+    output.mkdir(mode=0o700)
+    return run('inspect-file', argv, output, 8,
                io_admission={'path': os.environ['SHARED_IO_ADMISSION'],
                              'sha256': os.environ['SHARED_IO_ADMISSION_SHA256']})
 

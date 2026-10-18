@@ -30,9 +30,9 @@ client/server/supervisor/pump settlements. Actual owner38627/33bfbc/0/no session
 older fork already has producer binding, so arbitrary upstream/capability-absent
 compatibility is not inferred. Three earlier failed attempts remain preserved.
 
-The refreshed [camera knowledge request](camera-knowledge-request-v2.json) binds
+The refreshed [camera knowledge request](camera-knowledge-request-v3.json) binds
 component hashes plus exiftool-rs typed MakerNote observations. V1 is stale and
-unstarted, preserved unchanged. V2 is prepared for separate Root review/admission;
+unstarted, preserved unchanged. V3 corrects entry directory creation before any V2 dispatch and is prepared for separate Root admission;
 no camera payload opened or grant inferred. Missing MakerNote meanings do not
 block exact opaque preservation. Full goal completion and merge are not claimed.
 

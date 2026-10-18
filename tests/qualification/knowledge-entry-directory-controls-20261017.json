@@ -1,0 +1,34 @@
+{
+  "scope": "4 original entry controls: create0700 once, existing path refusal, missing/relative env refusal; fake dispatcher/no media or locks",
+  "actual_tool": {
+    "chunk": "3e8655",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-knowledge-entry-controls-20261017-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "54d186999e9679ad67a5e1cfbe332041caad794d7d84b9db52b0b2e24e593ca9"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-entry-controls-20261017-001/SHARED-START.json",
+      "bytes": 1118,
+      "sha256": "ebc187e3402c575d5649d6988d480da9c1c6d206af21e60941e95ac164d343d6"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-entry-controls-20261017-001/SHARED-STDERR.txt",
+      "bytes": 102,
+      "sha256": "af55efa5c3ceb122f8184c380aa405d3f3b4e7e0c1e892773d0eff31d0645c8a"
+    },
+    {
+      "path": "/private/tmp/unison-knowledge-entry-controls-20261017-001/SHARED-STDOUT.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "source_sha256": {
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_knowledge_entry.py": "4f7fd0db9f71a1c13b170f482bad43b444f242d43bb3d33d3cd3d24b1cf9b2e3",
+    "/Users/alexy/src/unison-sol-review-20261017/tests/inspector_knowledge_entry_test.py": "fc8613107ee3db15d4feefa9ad2f6cccc295252279a2daede942c77cb6c410e3"
+  }
+}

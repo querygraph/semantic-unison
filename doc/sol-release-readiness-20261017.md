@@ -59,7 +59,7 @@ fault, transfer or scheduling controls.
 ## Next actions in order
 
 1. Run the bounded retained-private-camera component+exiftool-rs observation
-   under a fresh exact Root admission. [Camera knowledge V2](camera-knowledge-request-v2.json)
+   under a fresh exact Root admission. [Camera knowledge V3](camera-knowledge-request-v3.json)
    pins the existing inspector and bridge,40sources, one input identity and
    three declared source passes. Tiny independent fixtures passed; no camera
    bytes opened by preparation. V1 is stale/unstarted and preserved.

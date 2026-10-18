@@ -4123,3 +4123,8 @@ Active goal resumed after mixed-peer PASS. Prepared `doc/pr13-properties-request
 ## Current verification audit V2
 
 Previous goal turn classified progress (prepared currentcandidate propertyrequest/sourcecontrols). This turn no admissions yet; refreshed authoritative audit `doc/sol-current-verification-20261017-v2.json` verifies allmixedsealedartifactpins/current318productionpins percompiler/pending40+38sources/PR13OPEN-DRAFT-MERGEABLE with no checks. Nojobs/locks/payload/native in audit. SOL.md leading status nowrecordsactualmixedPASS rather than stale unverified wording; historicalnotes preserved. Camera/property both await exactRootadmission, no dispatch/workspace. Goal remainsACTIVE/incomplete; first resumed scheduling-block observation, not3turnblockedthreshold.
+
+
+## Camera V3 entry correction before dispatch
+
+CameraV2admission f271f129 arrived, but finalsourceinspection caught missing output.mkdir in dedicatedentry before any dispatch/workspace/payload/lock. Fixed entry createsoneprivate0700directory/refusesreuse;4originalfakeentrycontrols actual3e8655/0 passed/closed. PreservedV2request/admission UNSTARTED, requestedRootwithdraw. FreshV3 `doc/camera-knowledge-request-v3.json` SHA68fe3a83a04a7dab679739177375da5c761566072daf5802d9098003497061d4;40currentpins/samecommand+budgets+builds/input/newworkspace `/private/tmp/unison-camera-knowledge-20261017-f62d7c93`/admission `/private/tmp/unison-camera-knowledge-admission-20261017-f62d7c93.json`. Rootqueued01a14c85-7645. No resources held; previous metadataV2snapshot historical, cameraV2sourcepin nowintentionallystale. Propertiesrequest5216c843 unaffected.
