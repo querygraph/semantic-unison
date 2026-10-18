@@ -1,0 +1,1028 @@
+{
+  "schema": "unison-helper-limiter-close-qualification/1",
+  "state": "PASS_CLOSED",
+  "actual_owner": {
+    "session_id": 14293,
+    "initial_chunk_id": "e9df1a",
+    "terminal_chunk_id": "167d00",
+    "exit_code": 0,
+    "no_running_session": true
+  },
+  "participants": [
+    {
+      "compiler": "stock",
+      "references": [
+        {
+          "path": "/private/tmp/unison-limiter-close-stock-20261017-003/RESULT.json",
+          "bytes": 14528,
+          "sha256": "b46539774a875730b2caec4fc5b1aa0fafbefd23beb26cce80b7a843df897142"
+        },
+        {
+          "path": "/private/tmp/unison-limiter-close-stock-20261017-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "61d714beafe13140c9b2a2ef63c5ca6867ab0067744d4714e539bd0ecf95b6b2"
+        },
+        {
+          "path": "/private/tmp/unison-limiter-close-stock-20261017-003/SHARED-START.json",
+          "bytes": 1247,
+          "sha256": "550de557abd4d74f81c54e5b038feadd9a75ecbc04bd112101e8ac0a0187274e"
+        }
+      ],
+      "source_pins": {
+        "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+        "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+        "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+        "src/helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+        "src/helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+        "src/helperSupervisor_stubs.c": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239",
+        "tests/helper_limits/test.ml": "a8334fc522076f244a7e7e8ef2ec9fe0e76eb9b96134dcd9a9de7e5032232322",
+        "tests/helper_limits/probe.c": "18039a516b747233c2b91453b4d6c9a95e41956a4a09f393012851480bc7e120",
+        "tools/helper-limits/launcher.c": "4e2bdf53bc4fc3753f5a80d99e5d1709c9c53e403d64cb8ed888087bc3f43102",
+        "tests/helper_limits/close_fixture.c": "a4b59e99cbaac044742003a8c60055b856f0a9b16d0e4d345b4e781c67b57bd1",
+        "tests/helper_limits/darwin_close_fixture.c": "23740e22090bf23665f5fa74838db674a669eeaaa49d35d24d1ed465beb6c0f5"
+      },
+      "commands": [
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "launcher.c",
+            "-o",
+            "launcher"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "probe.c",
+            "-o",
+            "probe"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "close_fixture.c",
+            "-o",
+            "close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "darwin_close_fixture.c",
+            "-o",
+            "darwin_close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "PASS4 portable bounded scan/no uncertain numeric retry\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/darwin_close_fixture",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/close-error-target"
+          ],
+          "exit": 0,
+          "stdout": "PASS Darwin uncertain close refused/no numeric retry\n",
+          "stderr": "UNISON-HELPER-LIMITS 1: close inherited descriptors: Interrupted system call\n"
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/close_fixture.c",
+            "-o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/darwin_close_fixture.c",
+            "-o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/darwin_close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/close_fixture"
+          ],
+          "exit": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-behavior/darwin_close_fixture",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/old-close-error-target"
+          ],
+          "exit": 2,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "pqueue.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "pqueue.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix_impl.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "borrowedWork.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "borrowedWork.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor_stubs.c"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "lwt.cmx",
+            "pqueue.cmx",
+            "lwt_unix_impl.cmx",
+            "lwt_unix.cmx",
+            "borrowedWork.cmx",
+            "helperSupervisor.cmx",
+            "helperSupervisor_stubs.o",
+            "test.ml",
+            "-o",
+            "test"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/test",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe"
+          ],
+          "exit": 0,
+          "stdout": "PASS13 native limited-helper supervisor controls\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "inherit",
+            "200"
+          ],
+          "exit": 0,
+          "stdout": "LIMIT 12 12\nGROUP 0\nINHERIT -1 ERR 9\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "0",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "2",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "-1",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "012",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "x",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "-1",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "18446744073709551616",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-mb4uztae/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/default/bin/ocamlopt",
+            "-version"
+          ],
+          "exit": 0,
+          "stdout": "5.2.0\n",
+          "stderr": ""
+        }
+      ],
+      "address_space_probe": {
+        "exit": 125,
+        "stdout": "",
+        "stderr": "UNISON-HELPER-LIMITS 1: address-space limit: Invalid argument\n",
+        "targetEntered": false
+      },
+      "old_behavior_sha256": "1aad6154adb8efe20b86420f44b3a164ff24a70ed9a1221052e52f8646ebfac0"
+    },
+    {
+      "compiler": "ox",
+      "references": [
+        {
+          "path": "/private/tmp/unison-limiter-close-ox-20261017-003/RESULT.json",
+          "bytes": 14549,
+          "sha256": "5595213716172c95c277dae183d59a2ae32885c5914adb66e7483d179c5a1aaa"
+        },
+        {
+          "path": "/private/tmp/unison-limiter-close-ox-20261017-003/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "1e30204ded46d708219ae97a6a40338716a1658cf08def2abd093da4b22dd225"
+        },
+        {
+          "path": "/private/tmp/unison-limiter-close-ox-20261017-003/SHARED-START.json",
+          "bytes": 1245,
+          "sha256": "31918968625fa5b657116651023e8fe5c88b861f19e7614dfff69a2d19d8fdd0"
+        }
+      ],
+      "source_pins": {
+        "src/lwt/lwt.mli": "7473dcb248b21447bd40bb59b3761373a6a03d5d2953153a6d72ffaad868842f",
+        "src/lwt/lwt.ml": "e14845c665358e79a2c9c4b19f410104e313b703efe119e66321ad4ed9861ded",
+        "src/lwt/pqueue.mli": "96da98e6482a09010027e8a8b87ef0fea6ebf7251d1b4961768c8eee4150344f",
+        "src/lwt/pqueue.ml": "624363870a2a28b5cf19414f92ac2d05c05b2712d694c134c5005977e688606e",
+        "src/lwt/generic/lwt_unix_impl.ml": "6bbd6ac771f293869afc4d1f1425145f07a13dd8fdfc02fe0b0dc4693baec0a2",
+        "src/lwt/lwt_unix.mli": "d8d42607d6f4b071a55732eb12393a9d5797c5428a2081b7233c9d599136024c",
+        "src/lwt/lwt_unix.ml": "ba56713436dfe3fae6d74b199bedecf51ccf4fd2343f313e02020e8fe8f5b679",
+        "src/borrowedWork.mli": "b0e6393f5f89ccff57d565606ed1c8f734dd5e384ee6130818ecd886353c54b1",
+        "src/borrowedWork.ml": "32531af50bb2b3b285497314cb540db1ce182eaa2f4de22636b179a28555777b",
+        "src/helperSupervisor.mli": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+        "src/helperSupervisor.ml": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+        "src/helperSupervisor_stubs.c": "b3a979dbe19820b60bad21114186e31431bf717ba41897c0422f18a17cc95239",
+        "tests/helper_limits/test.ml": "a8334fc522076f244a7e7e8ef2ec9fe0e76eb9b96134dcd9a9de7e5032232322",
+        "tests/helper_limits/probe.c": "18039a516b747233c2b91453b4d6c9a95e41956a4a09f393012851480bc7e120",
+        "tools/helper-limits/launcher.c": "4e2bdf53bc4fc3753f5a80d99e5d1709c9c53e403d64cb8ed888087bc3f43102",
+        "tests/helper_limits/close_fixture.c": "a4b59e99cbaac044742003a8c60055b856f0a9b16d0e4d345b4e781c67b57bd1",
+        "tests/helper_limits/darwin_close_fixture.c": "23740e22090bf23665f5fa74838db674a669eeaaa49d35d24d1ed465beb6c0f5"
+      },
+      "commands": [
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "launcher.c",
+            "-o",
+            "launcher"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "probe.c",
+            "-o",
+            "probe"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "close_fixture.c",
+            "-o",
+            "close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "darwin_close_fixture.c",
+            "-o",
+            "darwin_close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "PASS4 portable bounded scan/no uncertain numeric retry\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/darwin_close_fixture",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/close-error-target"
+          ],
+          "exit": 0,
+          "stdout": "PASS Darwin uncertain close refused/no numeric retry\n",
+          "stderr": "UNISON-HELPER-LIMITS 1: close inherited descriptors: Interrupted system call\n"
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/close_fixture.c",
+            "-o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "clang",
+            "-std=c11",
+            "-D_DEFAULT_SOURCE",
+            "-D_DARWIN_C_SOURCE",
+            "-Wall",
+            "-Wextra",
+            "-Werror",
+            "-O2",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/darwin_close_fixture.c",
+            "-o",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/darwin_close_fixture"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/close_fixture"
+          ],
+          "exit": 1,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-behavior/darwin_close_fixture",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/old-close-error-target"
+          ],
+          "exit": 2,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "pqueue.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "pqueue.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix_impl.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "lwt_unix.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "borrowedWork.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "borrowedWork.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor.mli"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor.ml"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "-c",
+            "helperSupervisor_stubs.c"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-I",
+            "+unix",
+            "unix.cmxa",
+            "lwt.cmx",
+            "pqueue.cmx",
+            "lwt_unix_impl.cmx",
+            "lwt_unix.cmx",
+            "borrowedWork.cmx",
+            "helperSupervisor.cmx",
+            "helperSupervisor_stubs.o",
+            "test.ml",
+            "-o",
+            "test"
+          ],
+          "exit": 0,
+          "stdout": "",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/test",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe"
+          ],
+          "exit": 0,
+          "stdout": "PASS13 native limited-helper supervisor controls\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "inherit",
+            "200"
+          ],
+          "exit": 0,
+          "stdout": "LIMIT 12 12\nGROUP 0\nINHERIT -1 ERR 9\n",
+          "stderr": ""
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "0",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "2",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "-1",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "012",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "x",
+            "0",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "-1",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/launcher",
+            "--unison-helper-limits-v1",
+            "12",
+            "18446744073709551616",
+            "--",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/probe",
+            "probe",
+            "marker",
+            "/private/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-helper-limits-rvnlvj8v/invalid-target"
+          ],
+          "exit": 125,
+          "stdout": "",
+          "stderr": "UNISON-HELPER-LIMITS 1: invalid invocation: Invalid argument\n"
+        },
+        {
+          "argv": [
+            "/Users/alexy/.opam/5.2.0+ox/bin/ocamlopt",
+            "-version"
+          ],
+          "exit": 0,
+          "stdout": "5.2.0+ox\n",
+          "stderr": ""
+        }
+      ],
+      "address_space_probe": {
+        "exit": 125,
+        "stdout": "",
+        "stderr": "UNISON-HELPER-LIMITS 1: address-space limit: Invalid argument\n",
+        "targetEntered": false
+      },
+      "old_behavior_sha256": "1aad6154adb8efe20b86420f44b3a164ff24a70ed9a1221052e52f8646ebfac0"
+    }
+  ],
+  "scope": "Optional standalone launcher native Darwin NOFILE/supervisor tests plus bounded portable branch and uncertain-close injected controls. Old behavior rejected designated oracles. No SDK/Adobe/Photo payload; no whole-parent RSS/FD or non-Darwin kernel qualification.",
+  "earlier_successful_controls": [
+    "/private/tmp/unison-limiter-close-stock-20261017-001",
+    "/private/tmp/unison-limiter-close-ox-20261017-001",
+    "/private/tmp/unison-limiter-close-stock-20261017-002",
+    "/private/tmp/unison-limiter-close-ox-20261017-002"
+  ]
+}

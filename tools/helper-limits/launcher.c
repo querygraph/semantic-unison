@@ -51,7 +51,11 @@ static int close_inherited(void) {
   if(!fds)return -1;
   int count=proc_pidinfo(getpid(),PROC_PIDLISTFDS,0,fds,capacity);
   if(count<=0 || count>=capacity || count%(int)sizeof(*fds)) {free(fds);errno=EOVERFLOW;return -1;}
-  for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3)close(fds[i].proc_fd);
+  for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3) {
+    /* Never retry a numeric descriptor after an uncertain close. This fresh
+     * launcher exits on failure, so no target can inherit uncertain ownership. */
+    if(close(fds[i].proc_fd)) {int saved=errno;free(fds);errno=saved;return -1;}
+  }
   count=proc_pidinfo(getpid(),PROC_PIDLISTFDS,0,fds,capacity);
   if(count<0 || count>=capacity || count%(int)sizeof(*fds)) {free(fds);errno=EOVERFLOW;return -1;}
   for(int i=0;i<count/(int)sizeof(*fds);i++)if(fds[i].proc_fd>=3) {free(fds);errno=EBUSY;return -1;}
@@ -65,8 +69,11 @@ static int close_inherited(void) {
 #if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(__OpenBSD__) && !defined(__NetBSD__)
   struct rlimit before;
   if(getrlimit(RLIMIT_NOFILE,&before))return -1;
-  if(before.rlim_max==RLIM_INFINITY || before.rlim_max>INT_MAX) {errno=ENOTSUP;return -1;}
-  for(int fd=3;fd<(int)before.rlim_max;fd++)close(fd);
+  /* Without a kernel close-range API, refuse an unbounded/very large scan.
+   * A configured optional launcher must fail closed, never skip high FDs. */
+  if(before.rlim_max==RLIM_INFINITY || before.rlim_max>65536) {errno=ENOTSUP;return -1;}
+  for(int fd=3;fd<(int)before.rlim_max;fd++)
+    if(close(fd) && errno!=EBADF)return -1;
   return 0;
 #endif
 }

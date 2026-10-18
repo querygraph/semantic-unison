@@ -55,3 +55,22 @@ unchanged parent limits, shared supervisor cleanup and actual receiving paths.
 Global RSS, aggregate descendant limits, complete-lifetime parent descriptor
 bounds and actual capped SDK/codec scaling remain open. No Adobe, Lightroom,
 Photo payload or preview publisher is invoked by these tests.
+
+## Inherited-descriptor cleanup failures
+
+Darwin enumeration now treats every reported close error as a pre-exec failure,
+even if the kernel actually closed that descriptor. It never retries the numeric
+FD. The isolated launcher exits125, so remaining inherited ownership is settled
+by process exit before any target executes. This is different from a live
+multithreaded parent retaining uncertain descriptor ownership.
+
+On systems without a working kernel close-range API or closefrom, the fallback
+scans only a finite inherited hard limit of at most65536 descriptors. Larger or
+infinite limits refuse with ENOTSUP before target execution; high descriptors
+are never silently skipped. EBADF from scanning an unused number is expected;
+any other close failure stops the scan without numeric retry. These restrictions
+apply only when the optional helper limiter is explicitly configured.
+
+Original injected fixtures exercise the portable branch on the build host and
+Darwin's kernel-close-success/reported-EINTR case, including target non-entry.
+They do not claim native runtime qualification of other operating systems.
