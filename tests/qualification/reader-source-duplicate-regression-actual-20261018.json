@@ -1,0 +1,44 @@
+{
+  "state": "NEW_READER_SOURCE_DUPLICATE_FAULT_REGRESSION_PASS",
+  "actual_owner": {
+    "session_id": 67623,
+    "terminal_chunk": "95cb02",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controller": 96115,
+  "reaped": true,
+  "group_absent": true,
+  "cpu3_closed": true,
+  "io_acquired": false,
+  "current_cases": 8,
+  "old_behavior_regressions": 2,
+  "reader_qualification": {
+    "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/qualification/nested-reader-retention-actual-20261018.json",
+    "bytes": 6084,
+    "sha256": "3dedaf70b5a99aa519d059ed552445ea8fdd3ff15888ec96b3a81336d18c594d"
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-006/RESULT.json",
+      "bytes": 130797,
+      "sha256": "aa1e248503079d27c21eba7a33b7936432c211cbc77a7e71f610dda5618ba037"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-006/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "1f09666ce35c08311c327cd828447196ef5888edd49fb8c11e657fa80b095378"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-006/SHARED-STDOUT.txt",
+      "bytes": 47,
+      "sha256": "50f34d2a7002cb861a4c586b344359d8bd14a5695d0a7d56352bb6ba13c3e6de"
+    },
+    {
+      "path": "/private/tmp/unison-real-worker-close-faults-20261018-006/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "scope": "Prior duplicate-close controls rerun because SemanticFile/worker carrier sources changed; compiler-matched new-reader builds used. Not simultaneous reader+duplicate failure injection or global FD/RSS qualification."
+}
