@@ -104,15 +104,18 @@ let get () =
       Trace.debug "semantic-reads" (fun () ->
         Util.msg "Completed semantic worker job %d primary reader delivered %Ld logical bytes in %Ld chunks (saturated=%b).\n"
           id reads.SemanticFile.logical_bytes reads.chunks reads.saturated);
-      if measure_stages then Trace.debug "semantic-timings" (fun () ->
-        match reads.SemanticFile.stages with
-        | None -> Util.msg "Semantic worker job %d stage timing unavailable.\n" id
+      if measure_stages then match reads.SemanticFile.stages with
+        | None -> Trace.debug "semantic-timings" (fun () ->
+            Util.msg "Semantic worker job %d stage timing unavailable.\n" id)
         | Some samples -> List.iter (fun sample ->
-            let stage = match sample.SemanticFile.stage with
-              | SemanticFile.Hash -> "hash" | SemanticFile.Parse -> "parse"
-              | SemanticFile.Verify -> "verify" | SemanticFile.Write -> "write" in
-            Util.msg "Semantic worker job %d stage=%s calls=%d inclusive-seconds=%.9f.\n"
-              id stage sample.calls sample.inclusive_seconds) samples))
+            (* Trace prefixes a callback, not each newline it emits. Keep one
+               callback per record; an empty sample list must emit no prefix. *)
+            Trace.debug "semantic-timings" (fun () ->
+              let stage = match sample.SemanticFile.stage with
+                | SemanticFile.Hash -> "hash" | SemanticFile.Parse -> "parse"
+                | SemanticFile.Verify -> "verify" | SemanticFile.Write -> "write" in
+              Util.msg "Semantic worker job %d stage=%s calls=%d inclusive-seconds=%.9f.\n"
+                id stage sample.calls sample.inclusive_seconds)) samples)
       else None in
     let pool = SemanticWorkers.create_with_io ~io ~workers:count ~max_pending:4096 ~budget:supervisor in
     SemanticWorkers.set_read_observer ~measure_stages pool read_observer;

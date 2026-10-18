@@ -1,0 +1,237 @@
+{
+  "schema": "unison-sync-phase-collection-actual-v2",
+  "state": "FUNCTIONAL_PASS_CLOSED_RAW_GROUPS_SUPPLEMENT_AUDITED",
+  "created_utc": "2026-10-18T07:43:41.374611+00:00",
+  "owner_terminal": {
+    "session_id": 11873,
+    "initial_chunk": "8feeb1",
+    "terminal_chunk": "d1710a",
+    "exit_code": 0,
+    "no_session": true,
+    "owner_pid": 53995
+  },
+  "admission": {
+    "path": "/private/tmp/unison-sync-phase-admission-v2-5bca270e.json",
+    "bytes": 9445,
+    "sha256": "77f969a16115d93c36b3a2855f2042cac1b18bb36f81859c8076a0547a887353"
+  },
+  "request": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-request-v2.json",
+    "bytes": 42813,
+    "sha256": "1301e937f8cb2c0f0f4c60d03ae7deeb776cdba9a60907fb4963b7b06ec44329"
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/doc/sync-phase-collection-plan-v2.json",
+    "bytes": 3030,
+    "sha256": "0f9c293ebbeaa47e014314baab488c14f79570c850eeed71f21af8ce1fde28ae"
+  },
+  "artifacts": [
+    {
+      "path": "/private/tmp/u-phase-5bca270e/OWNER-TERMINAL.json",
+      "bytes": 428,
+      "sha256": "d76a08c38b5afc08e7af8138ef5a6dc4581edeec0a9fd09549d1669387d7b094"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/OWNER-RETURN.json",
+      "bytes": 2278,
+      "sha256": "7e971bdc5f8170c2582528ef85aa8026ec121cb4ab3d2a2b9ef82f53dea95907"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/RESULT.json",
+      "bytes": 1200059,
+      "sha256": "b4d437211489257d009b981013df7902e08a2f67e0fee4a8053d4de774f8a2f2"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/SHARED-START.json",
+      "bytes": 6257,
+      "sha256": "b85c904fe46f5f211843595215ee23f62b74330697a2abb88e482711124e8dac"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/SHARED-CLOSED.json",
+      "bytes": 536,
+      "sha256": "b3546c1c2903fe90e166f4a025d0da1c7565f6042555f3e75d972871f0f30d13"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/SHARED-SERVER-AUDIT.json",
+      "bytes": 196,
+      "sha256": "1505a1cd563115a53e220536a4175506d1599c71ca7b8e12aefa5fd3444ec38a"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/SHARED-STDOUT.txt",
+      "bytes": 1269,
+      "sha256": "b81cecd0aa60f508ca66f1bf4d03d89ee39b2cce79e8ab44e3d02dce83b09d81"
+    },
+    {
+      "path": "/private/tmp/u-phase-5bca270e/SHARED-STDERR.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "worker_closure": {
+    "child": {
+      "pid": 54012,
+      "returncode": 0,
+      "reaped": true,
+      "other_group_members_absent_before_reap": true,
+      "members_before_reap": [
+        {
+          "pid": 54012,
+          "state": "Z"
+        }
+      ],
+      "timed_out": false,
+      "scope": "owned group only; separate sessions require independently audited proofs"
+    },
+    "tokens_closed": true,
+    "io_barrier_acquired_and_closed": true,
+    "source_pins_unchanged": true,
+    "inspector_input_postcheck": null,
+    "parent_terminal": "collect separately from owning tool"
+  },
+  "execution42_and_production318_pins_matched_at_closure_and_before_emitter_successor": true,
+  "raw_group_supplement": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/bench/sync/results/sync-phase-grouped-observations-v2-20261018.json",
+    "bytes": 78263,
+    "sha256": "254ef2c2fd326ede440fd726426b7f8dfcc9833fb9df9a6e2dc518eae088b878"
+  },
+  "supplement_controls": [
+    {
+      "kind": "controls",
+      "closure": {
+        "child": {
+          "pid": 59375,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 59375,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-saved-group-controls-20261018-002/SHARED-START.json",
+          "bytes": 1126,
+          "sha256": "055aa5d1f7336566689346b1b011833f40b402dc041af9332bbc70144e97a69f"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-controls-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "9eccd69250e23a7472af0a13df7961e8e6d5dcc5e2ebe41ae623e1abcc16e2b1"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-controls-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-controls-20261018-002/SHARED-STDERR.txt",
+          "bytes": 102,
+          "sha256": "feabb4add9e2ca3374e538560634d1ec97dc4f4ce89aab12f3d726e36ea9b2f6"
+        }
+      ]
+    },
+    {
+      "kind": "saved",
+      "closure": {
+        "child": {
+          "pid": 59377,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 59377,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-saved-group-saved-20261018-002/SHARED-START.json",
+          "bytes": 1497,
+          "sha256": "56793ebf4d272f974b13c0db77a0dac0a10b692e83cab7918baf712507aefab1"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-saved-20261018-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "c6bdbd81e7ef6d8fabc9b27d7581bbe1b2d552c2de3463ac015656a53d88fb56"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-saved-20261018-002/SHARED-STDOUT.txt",
+          "bytes": 158,
+          "sha256": "8b967a4fd347a7aa06c97aa5f5dac702009225efef343c3570ac1f0209f45023"
+        },
+        {
+          "path": "/private/tmp/unison-phase-saved-group-saved-20261018-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "supplement_owning_terminal": {
+    "chunk_id": "878c21",
+    "exit_code": 0,
+    "no_session": true,
+    "scope": "exec_command completed synchronously; two CPU8 metadata/control children settled"
+  },
+  "supplement_sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/grouped_trace.py",
+      "bytes": 2174,
+      "sha256": "41bc0613d3eff2eb9d995bfdd1d223f6eb3511053ee1d5e0c6a67e902f926148"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/grouped_trace_test.py",
+      "bytes": 2235,
+      "sha256": "b596a5abbb58e6b08b86b3fa50c4498313672c80d2a2536bd8447c4a741b481a"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/saved_group_audit.py",
+      "bytes": 4767,
+      "sha256": "5ba693a0d7de3a5b81dd69614e42e1943280c43a4ebfd7456ef4370c05cae405"
+    }
+  ],
+  "observations": {
+    "namespace_publication": 36,
+    "hash": 36,
+    "parse": 36,
+    "verify": 12,
+    "write": 12
+  },
+  "source_group_prefix_inheritances": 60,
+  "source_runtime_sha256": "e9dbf74b8a6609c9678f0e1fa8ba9945f25d8cb2a051aa05f11765c64fab8262",
+  "functional": {
+    "rows": 18,
+    "CLI_calls": 54,
+    "all_exact": true,
+    "property_removal_old_readers_noop": true
+  },
+  "limitations": [
+    "Strict original RESULT retained only first prefixed worker line; unchanged bytes preserved.",
+    "Supplement derives60 prefixes ONLY from source-bound adjacent grouped callbacks in each captured stream; raw lines/anchors retained.",
+    "Inclusive samples overlap and are not summed; 0warmup/1functional repetition is not a performance study.",
+    "Native namespace samples do not measure later readback/archive commit or durability.",
+    "No SDK/Photo/camera, physical storage, hard RSS/FD or complete-goal claim."
+  ],
+  "resource_hold": false
+}

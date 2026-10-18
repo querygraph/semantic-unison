@@ -1,0 +1,303 @@
+{
+  "schema": "unison-phase-format-correction-qualification-v1",
+  "state": "PER_LINE_EMITTER_SOURCE_CONTROLS_AND_CURRENT_BUILDS_PASS_CLOSED",
+  "created_utc": "2026-10-18T07:52:19.283486+00:00",
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/semanticRuntime.ml",
+      "bytes": 13055,
+      "sha256": "6af635ce61cadc9531c50350aa33d1e71a9497648d444850c6a63febbd452e42"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/semantic_phase/format_test.py",
+      "bytes": 4081,
+      "sha256": "b70831b21c4d1483b5a08e8ee7489fec19e1704f7646caf7408d508306126937"
+    }
+  ],
+  "participants": [
+    {
+      "kind": "exact-source-format-controls",
+      "compiler": "stock",
+      "closure": {
+        "child": {
+          "pid": 59952,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 59952,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-stock-20261018-001/RESULT.json",
+          "bytes": 11990,
+          "sha256": "54326f661a87a86c13be2b7e2f527712945d8007bba86f00b35de22a64bd97d3"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-stock-20261018-001/SHARED-START.json",
+          "bytes": 1487,
+          "sha256": "5c187a71951b0eaac675ee074ace71faf27c8b127252ef8ee4e416e797206972"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "0e891b5a69d30ee23689bf74f6a021b869928446c5b8b4b05cdc7d44a4244e37"
+        }
+      ]
+    },
+    {
+      "kind": "make-full-selftests",
+      "compiler": "stock",
+      "source_pairs_current": 318,
+      "binary_sha256": "f1f0b084561c75cc149e1834abc9a14d3191d1d4930035f82b5aa7c96ae47859",
+      "closure": {
+        "child": {
+          "pid": 60186,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 60186,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-make-stock-20261018-001/RESULT.json",
+          "bytes": 52708,
+          "sha256": "0c25858a734113d8400c2e7c4f04c5d4aa7bafa5e2178e5f0159a1e094592234"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-make-stock-20261018-001/SHARED-START.json",
+          "bytes": 1353,
+          "sha256": "4d398de71c72092505b6829e6a06cb069d453064ea90b00db3d1058b8f2cef4a"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-make-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "7833ea79be30382be196bd41e0a26bd9a7867e8b2857f07bf7a7957bca979095"
+        }
+      ]
+    },
+    {
+      "kind": "dune-full-selftests",
+      "compiler": "stock",
+      "source_pairs_current": 318,
+      "binary_sha256": "5872009c81d91aacb0d08e78bfcc49514cef2c406ab918ac9797d2f5089e1113",
+      "closure": {
+        "child": {
+          "pid": 62546,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 62546,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-dune-stock-20261018-001/RESULT.json",
+          "bytes": 52535,
+          "sha256": "cb801e26ac00ceaf36a8fee6c2d18f2a5c3e04dc587a14b7a34cd668a0c020cb"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-dune-stock-20261018-001/SHARED-START.json",
+          "bytes": 1358,
+          "sha256": "1902d0eeb012ed881816acbaafe511821498993cad20bdd68c61766b5537b43b"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-dune-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "6a0c90cc62e939d80f8f30e9e70f54a1c2ad0c17289e28b8f3732226b98be5da"
+        }
+      ]
+    },
+    {
+      "kind": "exact-source-format-controls",
+      "compiler": "ox",
+      "closure": {
+        "child": {
+          "pid": 59976,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 59976,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-ox-20261018-001/RESULT.json",
+          "bytes": 11990,
+          "sha256": "9659e79a90ca66cfe4bcc44b9a0a64883c7832caaf58c5d4e9d0d8c7d66677e4"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-ox-20261018-001/SHARED-START.json",
+          "bytes": 1484,
+          "sha256": "00f17249a4770cc3573eacc314ce103e7318798a073f3e5b1d2160c3af6e3821"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "566569c42ea6a7747e4f3419cb0973e2b1264dd60b29ec4aa7a2f52060575fc5"
+        }
+      ]
+    },
+    {
+      "kind": "make-full-selftests",
+      "compiler": "ox",
+      "source_pairs_current": 318,
+      "binary_sha256": "6acbce3a5e3d9ad1bb3fcc7c8dbad68529fa9f53fcd7775ab753b78db9c81096",
+      "closure": {
+        "child": {
+          "pid": 61291,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 61291,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-make-ox-20261018-001/RESULT.json",
+          "bytes": 52714,
+          "sha256": "664523bfc86f75b23e0f599c19b3507e447fd6b3e558b90606f51b86d6de0e4e"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-make-ox-20261018-001/SHARED-START.json",
+          "bytes": 1347,
+          "sha256": "b10af3105e5267fc92d8e74e101f70aa3ed80c363409905b99b7d1008cc65dac"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-make-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "8742d9688a03656d084b77125c62a0789c9de7d6a4a951c7601ce3c844b8816b"
+        }
+      ]
+    },
+    {
+      "kind": "dune-full-selftests",
+      "compiler": "ox",
+      "source_pairs_current": 318,
+      "binary_sha256": "19f9e944c34437493a59f8ec1e17d66550513220cc98ad0b7fbcecc458f3541b",
+      "closure": {
+        "child": {
+          "pid": 63631,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 63631,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-phase-format-dune-ox-20261018-001/RESULT.json",
+          "bytes": 52539,
+          "sha256": "6de7fbb9ad997958a63935e730bb2105aeb16ef37f881815f475faa424c129cf"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-dune-ox-20261018-001/SHARED-START.json",
+          "bytes": 1352,
+          "sha256": "48aa8473a38782545245c6317ace755343b9812cdac8b474aa0bc0c60f767570"
+        },
+        {
+          "path": "/private/tmp/unison-phase-format-dune-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "6e19383fbf34ac137057a47c453514aee70c6fa413233693a5c68cbf435bd90b"
+        }
+      ]
+    }
+  ],
+  "owner_terminals": [
+    {
+      "session": 29680,
+      "chunk": "3a12b4",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Both source formatter/current+old baseline and empty/nonempty variants"
+    },
+    {
+      "session": 15175,
+      "chunk": "5b1c74",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Four full Make/Dune+selftest builds"
+    }
+  ],
+  "actual_sync_rerun": false,
+  "old_sync_admission_consumed": true,
+  "scope": "Owner-only formatting correction; per-record prefixes and no empty-list prefix. Existing SDE protocol/phase measurements/default-off behavior unchanged. No new SDK/Photo/payload or sync runtime grant.",
+  "prior_actual_cohort": {
+    "path": "/Users/alexy/src/unison-sol-review-20261017/tests/qualification/sync-phase-collection-actual-20261018.json",
+    "bytes": 8626,
+    "sha256": "7489759dfacda3c2b89603b896eea4877b8779384f78e50ffc09145472d19442"
+  }
+}

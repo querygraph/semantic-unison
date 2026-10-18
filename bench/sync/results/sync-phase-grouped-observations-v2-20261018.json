@@ -1,0 +1,2333 @@
+{
+  "schema": "unison-source-bound-grouped-phase-supplement/1",
+  "state": "SAVED_RAW_GROUPS_AUDITED_NOT_RERUN",
+  "input": {
+    "path": "/private/tmp/u-phase-5bca270e/RESULT.json",
+    "bytes": 1200059,
+    "sha256": "b4d437211489257d009b981013df7902e08a2f67e0fee4a8053d4de774f8a2f2"
+  },
+  "runtime_source_sha256": "e9dbf74b8a6609c9678f0e1fa8ba9945f25d8cb2a051aa05f11765c64fab8262",
+  "functional_audit": {
+    "rows": 18,
+    "cli_invocations": 54,
+    "all_client_server_supervisor_settled": true,
+    "scope": "finite functional output/ownership only; no quiet timing, hard CPU/RSS or physical IO proof"
+  },
+  "journal_outcomes_bound": 54,
+  "rows": [
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 12,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000196000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000196
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000213000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000213
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000220000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.00022
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000196000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000196
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000187000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000187
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000204000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000204
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000216000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000216
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000209000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000209
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 20,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000214000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000214
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000203000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000203
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 20,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000201000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000201
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000188000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000188
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.009930000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.00993
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000053000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.3e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.009930000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010398000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010398
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 30,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000033000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.3e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 29,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010398000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 4,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011790000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.01179
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 5,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000669000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000669
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 4,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011790000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010570000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.01057
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 11,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000052000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.2e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010570000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 12,
+          "raw_line": "Semantic worker job 1 stage=verify calls=3 inclusive-seconds=0.026696000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026696
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010570000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 13,
+          "raw_line": "Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000073000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.3e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010570000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 14,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000208000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000208
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010274000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010274
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 19,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000347000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000347
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 18,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010274000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010283000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010283
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000037000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.7e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010283000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.026373000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026373
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010283000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000071000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.1e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010283000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000194000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000194
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010987000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010987
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000051000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.1e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010987000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 28,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011076000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.011076
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000075000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 7.5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 28,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011076000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 6,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011528000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.011528
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 7,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000656000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000656
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 6,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011528000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 9,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010809000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010809
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000278000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000278
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 9,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010809000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 15,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010117000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010117
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 16,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000036000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.6e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010117000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 17,
+          "raw_line": "Semantic worker job 2 stage=verify calls=3 inclusive-seconds=0.027810000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.02781
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010117000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "Semantic worker job 2 stage=write calls=1 inclusive-seconds=0.000085000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 8.5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010117000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 23,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010110000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.01011
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000055000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010110000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.027822000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.027822
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010110000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000078000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.8e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010110000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000251000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000251
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000221000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000221
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010091000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010091
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000062000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 6.2e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010091000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 28,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010002000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010002
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000054000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.4e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 28,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010002000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 6,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011467000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.011467
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 7,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000641000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000641
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 6,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011467000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 9,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.011061000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.011061
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000313000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000313
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 9,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.011061000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 15,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010026000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010026
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 16,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000051000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.1e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010026000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 17,
+          "raw_line": "Semantic worker job 2 stage=verify calls=3 inclusive-seconds=0.026981000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026981
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010026000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "Semantic worker job 2 stage=write calls=1 inclusive-seconds=0.000065000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 6.5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010026000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 23,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010032000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010032
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000034000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.4e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010032000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.026823000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026823
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010032000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000060000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 6e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010032000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000230000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.00023
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000192000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000192
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 12,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000209000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000209
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000184000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000184
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000205000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000205
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000199000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000199
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000200000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.0002
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000200000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.0002
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000206000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000206
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000201000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000201
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 20,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000204000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000204
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000190000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.00019
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "supervisor_output",
+          "line_index": 20,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000213000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000213
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 21,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000204000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000204
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [],
+      "original_prefixed_record_count": 2
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 1,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010471000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010471
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000071000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 7.1e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010471000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010719000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010719
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 30,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000043000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 4.3e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 29,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010719000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 4,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010487000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010487
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 5,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000147000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000147
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 4,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010487000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010079000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010079
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 11,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000055000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010079000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 12,
+          "raw_line": "Semantic worker job 1 stage=verify calls=3 inclusive-seconds=0.025990000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.02599
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010079000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 13,
+          "raw_line": "Semantic worker job 1 stage=write calls=1 inclusive-seconds=0.000071000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.1e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 10,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010079000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 14,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000244000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000244
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010310000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.01031
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 19,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000152000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000152
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 18,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010310000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010142000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010142
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000038000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.8e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010142000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.025575000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.025575
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010142000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000066000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 6.6e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 24,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010142000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000220000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.00022
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 2,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010277000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010277
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000057000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.7e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010277000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 28,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010326000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010326
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000050000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 28,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010326000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 6,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011162000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.011162
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 7,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000182000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000182
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 6,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.011162000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 9,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010901000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010901
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000129000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000129
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 9,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010901000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 15,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010410000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.01041
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 16,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000038000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.8e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010410000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 17,
+          "raw_line": "Semantic worker job 2 stage=verify calls=3 inclusive-seconds=0.026588000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026588
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010410000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "Semantic worker job 2 stage=write calls=1 inclusive-seconds=0.000079000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.9e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010410000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 23,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010496000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010496
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000052000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5.2e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010496000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.026657000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.026657
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010496000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000069000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 6.9e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.010496000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000210000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.00021
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000200000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.0002
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 3,
+      "records": [
+        {
+          "stream": "stderr",
+          "line_index": 25,
+          "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010469000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010469
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000074000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 7.4e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 25,
+            "raw_line": "[semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010469000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "stderr",
+          "line_index": 28,
+          "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010407000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010407
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "stderr",
+          "line_index": 29,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000050000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "client",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 28,
+            "raw_line": "[semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010407000.",
+            "endpoint": "client"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 6,
+          "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010411000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010411
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 7,
+          "raw_line": "Semantic worker job 0 stage=parse calls=1 inclusive-seconds=0.000153000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 0,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000153
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 6,
+            "raw_line": "[server: semantic-timings] Semantic worker job 0 stage=hash calls=1 inclusive-seconds=0.010411000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 9,
+          "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010486000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010486
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 10,
+          "raw_line": "Semantic worker job 1 stage=parse calls=1 inclusive-seconds=0.000126000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 1,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 0.000126
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 9,
+            "raw_line": "[server: semantic-timings] Semantic worker job 1 stage=hash calls=1 inclusive-seconds=0.010486000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 15,
+          "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010059000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.010059
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 16,
+          "raw_line": "Semantic worker job 2 stage=parse calls=1 inclusive-seconds=0.000034000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 3.4e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010059000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 17,
+          "raw_line": "Semantic worker job 2 stage=verify calls=3 inclusive-seconds=0.025983000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.025983
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010059000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 18,
+          "raw_line": "Semantic worker job 2 stage=write calls=1 inclusive-seconds=0.000072000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 2,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 7.2e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 15,
+            "raw_line": "[server: semantic-timings] Semantic worker job 2 stage=hash calls=1 inclusive-seconds=0.010059000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 23,
+          "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.009989000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "hash",
+            "calls": 1,
+            "inclusive_seconds": 0.009989
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 24,
+          "raw_line": "Semantic worker job 3 stage=parse calls=1 inclusive-seconds=0.000050000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "parse",
+            "calls": 1,
+            "inclusive_seconds": 5e-05
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.009989000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 25,
+          "raw_line": "Semantic worker job 3 stage=verify calls=3 inclusive-seconds=0.025775000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "verify",
+            "calls": 3,
+            "inclusive_seconds": 0.025775
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.009989000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 26,
+          "raw_line": "Semantic worker job 3 stage=write calls=1 inclusive-seconds=0.000114000.",
+          "decoded": {
+            "kind": "worker",
+            "endpoint": "server",
+            "job": 3,
+            "stage": "write",
+            "calls": 1,
+            "inclusive_seconds": 0.000114
+          },
+          "inherited_prefix": true,
+          "group_anchor": {
+            "line_index": 23,
+            "raw_line": "[server: semantic-timings] Semantic worker job 3 stage=hash calls=1 inclusive-seconds=0.009989000.",
+            "endpoint": "server"
+          }
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 27,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000254000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000254
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        },
+        {
+          "stream": "supervisor_output",
+          "line_index": 28,
+          "raw_line": "[server: semantic-timings] Semantic bound publication native-inclusive-seconds=0.000226000.",
+          "decoded": {
+            "kind": "namespace_publication",
+            "endpoint": "server",
+            "inclusive_seconds": 0.000226
+          },
+          "inherited_prefix": false,
+          "group_anchor": null
+        }
+      ],
+      "observed_worker_stages": [
+        "hash",
+        "parse",
+        "verify",
+        "write"
+      ],
+      "original_prefixed_record_count": 8
+    }
+  ],
+  "observation_counts": {
+    "namespace_publication": 36,
+    "hash": 36,
+    "parse": 36,
+    "verify": 12,
+    "write": 12
+  },
+  "inherited_prefix_records": 60,
+  "original_RESULT_unchanged": true,
+  "scope": "Legacy source-specific synchronous grouped callbacks, per captured stream with adjacency/job/order anchors. Prefix inheritance is derived evidence, not an originally emitted prefix. Inclusive intervals overlap; no total timing, CPU, wholecommit, physical IO, lifecycle or throughput claim."
+}

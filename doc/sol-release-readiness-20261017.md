@@ -208,6 +208,11 @@ All test owners and standing Unison8 credits are closed; no Photo resources used
 The benchmark now has explicit opt-in worker/native-namespace trace collection,
 strict raw/type rebinding and stream-boundary handling. [Nine pure suites](../tests/qualification/sync-phase-report-source-actual-20261018.json)
 passed, including source-inventory omission refusal before IO entry. Partial
-inclusive observations remain separate from total commit time. Actual sync
-collection is not yet qualified; a fresh exact generated-fixture IO admission
-precedes that check. No prior cohort or runtime permission is reused.
+inclusive observations remain separate from total commit time. A [fresh actual smoke](../tests/qualification/sync-phase-collection-actual-20261018.json)
+now passes18rows/54CLI and closed ownership. The original strict result missed
+unprefixed continuation lines from a grouped Trace callback. A separately
+source-bound saved-raw supplement preserves and audits all four phase types;
+original bytes are unchanged. The [per-line correction](../tests/qualification/phase-format-correction-actual-20261018.json)
+passes old-format regression controls and current stock/Ox Make/Dune+selftests.
+No sync rerun or permission reuse occurred. This is collection qualification,
+not repeated performance, complete commit timing or hard-limit qualification.

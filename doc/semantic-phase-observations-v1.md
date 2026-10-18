@@ -65,3 +65,16 @@ See [the actual qualification](../tests/qualification/semantic-phase-observation
 for retained stock/Ox production-object tests, full builds/selftests, SDE wire
 conformance and actual owning-tool terminals. These controls qualify collection
 and compatibility; they are not a synchronization performance matrix.
+
+## Actual stream-format correction
+
+The first real generated cohort exposed Trace.debug prefixing a whole sample
+list once. Its original strict result omitted unprefixed later phases, although
+all lines were saved. The [actual receipt](../tests/qualification/sync-phase-collection-actual-20261018.json)
+binds an explicit per-stream, same-job/ordered/adjacent grouped-line supplement;
+derived prefix contexts are identified separately from originally printed text.
+No result bytes were changed and no sync was repeated. The emitter now wraps
+each phase in its own Trace.debug callback and emits no prefix for an empty
+sample list. [Current formatter controls and full builds](../tests/qualification/phase-format-correction-actual-20261018.json)
+detect the original grouped-output regression on both compilers. Old sealed
+source/document pins remain historical, not unchanged-current-source claims.
