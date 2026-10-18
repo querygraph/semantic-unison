@@ -17,6 +17,12 @@ class Commands(unittest.TestCase):
                 self.assertEqual(server,list(CURRENT_FLAGS if old else OLD_FLAGS))
                 self.assertEqual(argv[-len(OLD_FLAGS if old else CURRENT_FLAGS):],list(OLD_FLAGS if old else CURRENT_FLAGS))
                 self.assertIn('/'+stage+'/launcher.py',argv[argv.index('-sshcmd')+1])
+    def test_boolean_value_is_not_an_anonymous_profile_argument(self):
+        # Production Uarg.Bool consumes only an inline =value; a separate
+        # true becomes a third anonymous argument and makes left a profile.
+        self.assertIn('-semanticdng=true',CURRENT_FLAGS)
+        self.assertNotIn('true',CURRENT_FLAGS)
+        self.assertNotIn('-semanticdng',CURRENT_FLAGS)
     def test_bad_case(self):
         for index in (-1,4,True):
             with self.assertRaises(ValueError):command(self.artifacts,'/private/tmp/inert',index,'seed')

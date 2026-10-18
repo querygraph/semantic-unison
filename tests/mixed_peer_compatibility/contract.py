@@ -5,7 +5,7 @@ CASES = (('stock', 'current-client'), ('stock', 'old-client'),
          ('ox', 'current-client'), ('ox', 'old-client'))
 STAGES = ('seed', 'update', 'noop')
 CURRENT_FLAGS = ('-semanticworkers', '2', '-maxthreads', '2',
-                 '-semanticdng', 'true', '-adobevalidate', 'off', '-clone', 'auto')
+                 '-semanticdng=true', '-adobevalidate', 'off', '-clone', 'auto')
 OLD_FLAGS = ('-semanticworkers', '2', '-maxthreads', '2', '-adobevalidate', 'off')
 LIMITS = dict(cases=4, calls=12, endpoint_workers=2, owner_credits=2,
               total_credits=8, call_observation_seconds=30,

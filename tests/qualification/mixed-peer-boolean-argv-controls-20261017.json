@@ -1,0 +1,29 @@
+{
+  "scope": "6 command controls, inline bool matches production Uarg.Bool parser; no transport",
+  "actual_tool": {
+    "chunk": "6eae07",
+    "exit": 0,
+    "no_session": true
+  },
+  "evidence": [
+    {
+      "path": "/private/tmp/unison-mixed-boolean-controls-20261017-001/SHARED-CLOSED.json",
+      "sha256": "737ca4f20a2ff80b50b8adbca4d6e8aee03757a5c724ae77056c0839a867876d"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-boolean-controls-20261017-001/SHARED-START.json",
+      "sha256": "52452429fff348fe4f0b95bc5a296c686dc239ea0cd148b1a21905686faca97c"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-boolean-controls-20261017-001/SHARED-STDERR.txt",
+      "sha256": "c6b9b1f09add0403cc07e90bfdf272129b1ddfa2f8f7675ea8218862f2516371"
+    },
+    {
+      "path": "/private/tmp/unison-mixed-boolean-controls-20261017-001/SHARED-STDOUT.txt",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "parser_source": {
+    "src/ubase/uarg.ml": "b886f7690448fda3aba58abd4257091f973c664166eb24b6975c436c144b16de"
+  }
+}
