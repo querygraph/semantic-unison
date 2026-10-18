@@ -1,3 +1,19 @@
+# Scheduling-read ownership follow-up (2026-10-18)
+
+A separate source review found Runtime.with_io_file still swallowed close errors
+and released its device lease before closing its scheduling FD. It now uses the
+prepared ownership ledger's single-read mode, closes inside the admitted body,
+and keeps outer descriptor, device lease and transaction ownership reachable
+through nested or close uncertainty. Known error/cancellation cleanup remains
+normal. Stock/Ox Make+selftests and12 actual I/O-scope controls pass; four prior
+Runtime variants fail designated reply/lease assertions. Evidence:
+`tests/qualification/runtime-io-scope-retention-actual-20261018.json`.
+
+This finding illustrates why pool qualification alone is not a complete
+resource-lifetime audit. Other descriptor/native wrapper paths, current Dune
+qualification of this change, hard RSS and aggregate descendant admission remain
+open. Earlier sections below preserve historical source/evidence epochs.
+
 # Current integrated pool regression checkpoint (2026-10-18)
 
 Current stock/Ox Dune builds+selftests PASS with the same327 production source

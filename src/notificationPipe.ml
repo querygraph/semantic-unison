@@ -39,10 +39,12 @@ let prepare () =
       | None -> Unix.close t.read.fd);
     write_close=(fun () -> Unix.close t.write.fd)} in
   t
+let adopt_read t read =
+  if t.read.owned || t.write.owned then invalid_arg "descriptor owner already adopted";
+  t.read.fd <- read;t.read.owned <- true
 let adopt t read write =
-  if t.read.owned || t.write.owned then invalid_arg "notification pipe already adopted";
-  t.read.fd <- read;t.write.fd <- write;
-  t.read.owned <- true;t.write.owned <- true
+  adopt_read t read;
+  t.write.fd <- write;t.write.owned <- true
 let install_reader t reader =
   if not t.read.owned || t.read.attempted || t.reader<>None then
     invalid_arg "notification reader installation state";

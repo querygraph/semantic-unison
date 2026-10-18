@@ -189,33 +189,45 @@ let with_admission ?reservation ?(role=SemanticAdmission.Consumer) cancellation 
       | SemanticAdmission.Failed reason -> fail (Util.Transient reason)
       | e -> fail e)
 let with_io_file cancellation path f =
-  (* This descriptor groups cooperative endpoint-private candidates for
-     scheduling. It does not pin the pathname subsequently opened by a helper
-     or replace candidate-content/publication fences. *)
-  let owned = ref true in
-  let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-  try
-    let close () = if !owned then begin
-      owned := false;
-      try Unix.close fd with Unix.Unix_error _ -> () end in
-    BorrowedWork.try_bind (fun () ->
+  (* This descriptor groups cooperative endpoint-private candidates; it does
+     not pin the pathname opened by a helper or replace publication fences. *)
+  let ownership = NotificationPipe.prepare () in
+  let retained entry =
+    (* Also root this outer descriptor if a nested resource carrier is the
+       failure. A failed promise alone need not retain its callback closure. *)
+    try NotificationPipe.retain_unsettled ownership (RetainedOwnership.cause entry)
+    with NotificationPipe.Uncertain _ -> () in
+  let guard work = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
+    ~on_retained:retained work in
+  let close () = NotificationPipe.close_all ownership in
+  let failed error =
+    NotificationPipe.remember_failure ownership error;
+    close ();
+    match error with
+    | IoAdmission.Failed reason -> fail (Util.Transient reason)
+    | _ -> fail error in
+  let admitted () = guard (fun () ->
+    (* Close before returning from the I/O borrower. Recognized nested
+       uncertainty cannot reach the ordinary cleanup callback. *)
+    BorrowedWork.try_bind (fun () -> guard f)
+      (fun result -> close (); return result) failed) in
+  let execute () =
+    let fd = Unix.openfile path [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
+    NotificationPipe.adopt_read ownership fd;
+    try BorrowedWork.try_bind (fun () ->
       if (Unix.LargeFile.fstat fd).Unix.LargeFile.st_kind <> Unix.S_REG then
         raise (Unix.Unix_error (Unix.EINVAL,"filesystem I/O candidate",path));
       let devices = IoAdmission.devices_of_fds [fd] in
       BorrowedWork.bind
-        (fun () -> IoAdmission.with_devices (get ()).io cancellation ~devices f) (function
-      | Some result -> return result
-      | None -> fail (Util.Transient "Filesystem I/O admission cancelled")))
-      (fun result -> close (); return result)
-      (fun e -> close (); match e with
-        | IoAdmission.Failed reason -> fail (Util.Transient reason)
-        | _ -> fail e)
-  with e ->
-    (* Guard the first closure/continuation allocations after opening too.
-       Clear ownership before close so an outer failure cannot close a reused FD. *)
-    if !owned then begin owned := false;
-      try Unix.close fd with Unix.Unix_error _ -> () end;
-    raise e
+        (fun () -> IoAdmission.with_devices (get ()).io cancellation ~devices admitted) (function
+        | Some result -> return result
+        | None -> failed (Util.Transient "Filesystem I/O admission cancelled")))
+      return failed
+    with error ->
+      NotificationPipe.remember_failure ownership error;
+      if unresolved_ownership error then NotificationPipe.retain_unsettled ownership error;
+      close ();raise error in
+  guard execute
 let publication_cost max_payload =
   let plan = CandidateValidators.maximum_resources (CandidateValidators.selected ()) in
   let _,budget = helper_supervisor () in

@@ -1,0 +1,57 @@
+{
+  "scope": "Actual Runtime scheduling-read ownership, close inside device/admission lifetime, 12 stock/Ox fixed cases+four old-Runtime designated rejections. No hard RSS/aggregate FD completion claim.",
+  "build_parent": {
+    "session": 21399,
+    "terminal_chunk": "f8e5b0",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "fault_parent": {
+    "session": 93220,
+    "terminal_chunk": "0c6fc4",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "old_runtime_original_sha256": "9e290e42b18e5df4862e6dcf10aa6938a7590ea89ca8eeb773cd8957a87cabf9",
+  "source_counts": {
+    "stock-check": 327,
+    "ox-check": 327
+  },
+  "artifacts": {
+    "stock-check/RESULT.json": {
+      "path": "/private/tmp/unison-io-scope-stock-check-20261018-001/RESULT.json",
+      "bytes": 56092,
+      "sha256": "ba6f28e4c612ad0df6f75910e97d14f26ee1e9bdd8587055128665589920e7f5"
+    },
+    "stock-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-io-scope-stock-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "6a25ed18992898e9227f21d06191c32f190d5a5f8859033fa895869d0a27e69b"
+    },
+    "ox-check/RESULT.json": {
+      "path": "/private/tmp/unison-io-scope-ox-check-20261018-001/RESULT.json",
+      "bytes": 56098,
+      "sha256": "2cf7695552b788e31696ac9c01a4fd1a34470fa8df4bd15f3e39f1bd227bc2bd"
+    },
+    "ox-check/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-io-scope-ox-check-20261018-001/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "15f2ee9509f12d28fb1efb892d8be23fb10ec121cddbd56ac3a1b252260ca4d1"
+    },
+    "faults/RESULT.json": {
+      "path": "/private/tmp/unison-io-scope-faults-20261018-002/RESULT.json",
+      "bytes": 171631,
+      "sha256": "3f22858bea365271c88a51f6a641a5a2243a8493275caef8543466be3c32d371"
+    },
+    "faults/SHARED-CLOSED.json": {
+      "path": "/private/tmp/unison-io-scope-faults-20261018-002/SHARED-CLOSED.json",
+      "bytes": 537,
+      "sha256": "7c399c8406b5431c240e268aebc8bf91fa09ebeb8a9113fc91251473bcb9b824"
+    }
+  },
+  "earlier_current_only_pass": {
+    "workspace": "/private/tmp/unison-io-scope-faults-20261018-001",
+    "actual_parent": "14115/6deae4/exit0/no session",
+    "scope": "same12 current cases before adding four old-runtime regression comparisons"
+  }
+}

@@ -1,9 +1,12 @@
-(** Owner-loop, single-attempt ownership of a worker notification pipe.
+(** Owner-loop, single-attempt ownership of a worker notification pipe or a
+    single scheduling read descriptor.
     This ledger does not prove domain joins or impose aggregate FD limits. *)
 type t
 exception Uncertain of t
 val prepare : unit -> t
 (** Allocate the ledger, carrier and retention link before acquiring the pipe. *)
+val adopt_read : t -> Unix.file_descr -> unit
+(** Transfer one read descriptor; the absent writer is never closed. *)
 val adopt : t -> Unix.file_descr -> Unix.file_descr -> unit
 (** Transfer both endpoints exactly once, immediately after pipe returns. *)
 val install_reader : t -> Lwt_unix.file_descr -> unit
