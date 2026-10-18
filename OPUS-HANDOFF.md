@@ -5709,3 +5709,44 @@ Existing frozen requests remain their own source scope, not silently upgraded.
 Broader required fault/filesystem/platform/resource/performance evidence remains
 open per readiness12area map; unknown MakerNote meaning is not a delivery gate.
 Goal fullscope active/incomplete; no live sourcebuild/control/tool processes.
+
+
+## 2026-10-18 CURRENT IO source candidate V5 queued, no grant
+
+New frozen worktree /Users/alexy/src/unison-producer-qualified-20261018 branch
+integration/sol-producer-qualified-20261018 HEAD2e24a0fc, sourcebase3618fc58 and
+productionb8c67465. Do NOT modify this frozen worktree, including metadata/OPUS,
+while Rootreview is pending; further source/queue notes remain outside it.
+Actualmetadata preparationba55cd/0 and sourcecommit25918f/0; actualforkpush
+32600/6f4916/0/no session. Root request ACTUALLYqueued01a1509e-899a-7a43-a82b-
+1ec189837fe8 (afadbc/0); active receipt doc/sol-producer-requalification-v5-QUEUED.json.
+
+Index frozen/doc/sol-producer-requalification-requests-v5.json2734B
+SHAdb616795aa0c03775745f2ec7457007baa7921133c798ddafd61648b1e743cde:
+1 upstream request1388107e/plan6aa792b7,workspace/private/tmp/u-mp-239498a8,
+admission/private/tmp/unison-producer-upstream-admission-239498a8.json.
+2 retainedfork request4633fee4/plan5e652a9d,workspace/private/tmp/u-mp-1651fe45,
+admission/private/tmp/unison-producer-retained-fork-admission-1651fe45.json.
+Each4originalgenerated8KiBcases/12CLI/bothdirections/400executionpins/300sobs30CLI,
+2+2endpoint+owner2<=8; upstream8772d26a is genuine extension-absent peer, older
+retainedfork is semantic-capable and MUST NOT be relabeled genuineupstream.
+3 properties requestd91344ae,workspace/private/tmp/u-props-59455b3c,
+admission/private/tmp/unison-producer-properties-admission-59455b3c.json:
+18rows54CLI/2x2MiBfixtures/43execution329productionpins/3+3+owner2=8,
+300obs30CLI/8GiBdeclarednotcap/36readersmax. Exactargv/env in request files.
+
+Both checked_plan and propertymanual.command/checked_build passed. In-memory
+checked_io_request simulation only (sentinelread mocked, canonicalmetadata real),
+no actualadmission/workspace/poolacquisition/process. Latest API/queue/producer
+qualification prerequisites included. Requires FRESH exact Rootgrant/SHA/deadline
+for EACH request. Recommended serial upstream thenretainedfork thenproperties;
+no automatic successor, noSDK/Adobe/camera/Photo/nativeUI/compiler/performance/
+quietclaim/18borrow. No resourcehold created by this queue or sourcepreparation.
+
+Old V4 indexbf54dd3e/source72560ca4 sourceproposals nowSUPERSEDED_UNADMITTED;
+oldfilesunchanged, fresh6old workspace/admissionpaths absent. Durablefrozen
+sol-fixed-v4-source-proposals-superseded-20261018.json1841B
+SHAcfba419584de5ba81fa12d47ef3b7cb3e71947ffe2ced0eae23579a2dccfe2d6.
+Absence is metadata observation, NOT actualparentterminal/noexecutionproof.
+Any contrary crossedactualgrant/START mustbe reconciled, not blindly dispatched
+or replayed. OldV2/V3 staysdeferred. Goalfullscopeactive; no live owned jobs.
