@@ -4312,3 +4312,6 @@ Current follow-up: Dune parity builds/selftests started under owning toolsession
 
 
 Dune follow-up ACTUALLY CLOSED40003/1b07b2/0/no session: stock27580+Ox28683 reaped0/othersabsent/CPU8closed; bothDunebuilds+selftests pass current318productionpairs each. Benchmark compatibility ACTUALLY CLOSED76027/9133f5/0/no session: child30261reaped0/othersabsent/CPU8closed; rebuiltagainstnewproductionobjects, sixoriginal64Bcontrols/26digests exact, no bulkmatrix. Finalphasequalification26836B SHAec482a5660c005d2470ed4584dab8a8f7bc25eaa0dc8a6bb83995d8b19e41ce7. Allowninghandlesnowterminal/noresourcesheld. Code/docs/evidence readyforcommit/pushnext; fullgoalincomplete(stagecommit/fullpathmatrix/hardboundsstillopen).
+
+
+Publication update: implementation2e36e92d COMMITTED/PUSHED (actualpush96731/1f4ccc/0/no session); PR13 description updated69593/ce3adc/0. Photo source-only notice queued01a14dc6-ff82 with exactqualificationec482a56; no ACK/admission gate, no resources held. All earlier pendingcommit/liveDune notes above are historical. Standing8/8unchanged; activegoal nextwork atomiccommit/fullpathmeasurements and hardaggregatebounds, not Photoallowance.
