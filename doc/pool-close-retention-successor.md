@@ -1,0 +1,55 @@
+# Pool ownership integration following reader qualification
+
+Current source checkpoint: isolated branch `implementation/owned-close-retention`,
+production source qualified by nested-reader-retention-actual-20261018.json and
+nested-reader-dune-actual-20261018.json. This document does not claim the pool
+changes below are implemented. Existing worker duplicate/reader retention stays
+in force; whole-process FD/RSS enforcement remains open.
+
+Pool creation allocates a pipe and starts domains before returning its `t`.
+Its current failure cleanup suppresses stop/join and both pipe-close exceptions.
+Normal shutdown closes the Lwt reader in `pump`, then closes the notification
+writer with `close_noerr`. A failure can therefore lose a creation-time owner or
+become an ordinary shutdown failure. These are source findings, not observed
+leaks in the completed builds/tests.
+
+The relevant close API is synchronous `Lwt_unix.close`. Its implementation
+removes registrations, attempts `Unix.close`, then wakes detached operations and
+raises either the close error or a callback error. Its caller cannot infer OS
+settlement merely from the exception. Never retry its historic numeric FD.
+
+Implementation order:
+
+1. Add an owner-only retained-scope guard **inside** borrowed admission. Prepare
+   a never-settled reply and a rooted evidence node before invoking work. For a
+   recognized ownership exception, retain the original cause, actual returned
+   promise and any observer-installation error; do not let ordinary failure
+   mapping retire the reservation. An uncertain creation cannot rely on a pool
+   object that was never returned. Do not provide a blind clear/retry API.
+2. The guard must inspect the actual returned promise on failure. BorrowedWork
+   intentionally reports a first observer-installation error after draining the
+   borrower; that ordinary error can otherwise hide a later ownership exception.
+   Preserve both causes. Classifier failure or an unexpectedly sleeping borrower
+   is conservative retained ownership, not permission to release.
+3. Preallocate a pool creation/pipe ledger and retention carrier before `pipe`.
+   Register pipe numbers immediately after acquisition; preserve returned wrapper
+   and domain handles. Do not clear a domain handle after an unqualified stop or
+   join error. Known no-worker cleanup and uncertain live-domain cleanup differ.
+4. Consume pipe close authority once. On uncertainty, preserve exact cause and
+   pre-close evidence, root the ledger and keep shutdown/pump completion sleeping.
+   Stop new work. Known close and repeated known shutdown keep normal behavior.
+5. Qualify original fixed faults for partial pipe/domain/wrapper creation,
+   read/write close-after-kernel-close and number reuse, callback failure,
+   cancellation, repeated shutdown, concurrent queued borrowers and combined
+   primary/cleanup errors. Real returned-process closure is distinct from normal
+   pool shutdown. Keep prior actual source evidence immutable.
+
+The owner-scope guard must also handle synchronous reader/cache ownership
+carriers which legitimately escape the body. Worker reader uncertainty already
+keeps its reply sleeping; it must not be turned into an ordinary failure by this
+new layer. No generic Unix error should automatically mean uncertain ownership:
+recognize source-defined carrier classes, and retain classifier failures.
+
+Hard FD acquisition admission, pool/transport baseline accounting and supported
+OS RSS containment remain separate work after ownership cannot be accidentally
+released. More logging or sampled counters alone will not complete those gates.

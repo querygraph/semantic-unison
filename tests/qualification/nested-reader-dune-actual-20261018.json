@@ -1,0 +1,75 @@
+{
+  "state": "CURRENT_NESTED_READER_DUNE_BUILD_AND_SELFTEST_PASS",
+  "actual_owner": {
+    "session_id": 25911,
+    "terminal_chunk": "d5ea4d",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "stock_child": 97352,
+  "ox_child": 98529,
+  "both_reaped_and_groups_absent": true,
+  "cpu8_closed_after_each": true,
+  "io_acquired": false,
+  "SDK_or_Photo_payload_invoked": false,
+  "builds": [
+    {
+      "label": "stock",
+      "source_count": 321,
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-stock-20261018-001/RESULT.json",
+          "bytes": 54065,
+          "sha256": "aa5148efa0c8c47af8ccaf56f5853c08a5a1d7610d34b76a8754263506343512"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-stock-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "48adcab028940868ebabe93d06e4c6da2f7333b8a8be0c3666277255ce595d1c"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-stock-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 303,
+          "sha256": "a8465247f68223e02f7d1346fc089be544841fee17833f0e1bafa396a0e3e22a"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-stock-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "source_count": 321,
+      "evidence": [
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-ox-20261018-001/RESULT.json",
+          "bytes": 54069,
+          "sha256": "c968aff735e3feda5cd833a3815707bc7a16a77cb27b353f64ce3c1d349d48bf"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-ox-20261018-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "fc81e8263387ceeb6ae46d797dc0f407b5fae9a83e29cb8b7aedb743e4fb5672"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-ox-20261018-001/SHARED-STDOUT.txt",
+          "bytes": 303,
+          "sha256": "8d2fa944d834d56386154f9b669440613e81adfc631fbea0dd0585d5974fdd59"
+        },
+        {
+          "path": "/private/tmp/unison-reader-retention-dune-ox-20261018-001/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      ]
+    }
+  ],
+  "make_qualification": {
+    "path": "/Users/alexy/src/unison-owned-close-integration-20261018/tests/qualification/nested-reader-retention-actual-20261018.json",
+    "bytes": 6084,
+    "sha256": "3dedaf70b5a99aa519d059ed552445ea8fdd3ff15888ec96b3a81336d18c594d"
+  },
+  "scope": "Both Dune toolchains/current source + native CLI selftests. No new fault injection, live payload, hard FD/RSS or new runtime admission."
+}
