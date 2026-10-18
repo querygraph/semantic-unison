@@ -3,18 +3,20 @@
     Prepare all slots and the group before acquiring descriptors. Never discard
     a group with held or uncertain slots; neither an ordinary operation failure
     nor cancellation proves close settlement. *)
-module type Operations = sig
+module type Operations = sig (* ox-portable-operations *)
   type descriptor
   val empty : descriptor
   val close : descriptor -> unit
 end
-module Make (Operations : Operations) : sig
+module Make (Operations : Operations) : sig (* ox-portable-owner *)
   type slot
   type group
   type state = Empty | Held | Uncertain | Settled
   val prepare : label:string -> slot
   val group : slot array -> group
-  (** Copies the array before any ownership acquisition. Duplicate slots refuse. *)
+  (** Copies slot references to an immutable list before acquisition. Duplicate slots
+      refuse. Atomic fields permit the explicit owner-to-worker handoff; callers
+      must still serialize adopt/close authority, not invoke competing closes. *)
   val adopt : slot -> Operations.descriptor -> unit
   (** Exactly one acquisition per prepared slot; no allocation on success.
       Caller must not close or transfer the descriptor after adoption. *)

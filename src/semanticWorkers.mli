@@ -21,7 +21,7 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
-type usage = { workers : int; pending : int; running : int; peak_running : int }
+type usage = { workers : int; pending : int; running : int; peak_running : int; retained : int }
 exception Failed of string
 val recommended_workers : unit -> int
 val create : workers:int -> max_pending:int -> budget:HelperSupervisor.t -> t
@@ -44,10 +44,15 @@ val set_read_observer : ?measure_stages:bool -> t -> (int -> SemanticFile.read_s
     returned, stable reader jobs only, not partial/cancelled reads or other I/O.
     Disable with [None]; no counter state is allocated for disabled jobs. *)
 val usage : t -> usage
+(** [retained] counts owner-observed unresolved duplicate-close jobs, not OS FD
+    counts. Nested readers, native adapters and notification pipes need separate
+    ownership qualification; this field is not a whole-process resource bound. *)
 val digest : t -> HelperSupervisor.cancellation -> Unix.file_descr -> fingerprint option Lwt.t
 (** Borrows the caller's regular descriptor until the promise settles. Its
     position is shared with the worker-owned duplicate: the caller must not
-    seek, read, write, or close it meanwhile. The duplicate is always closed.
+    seek, read, write, or close it meanwhile. Duplicates get one close attempt.
+    An uncertain worker-owned duplicate keeps the reply and reservations
+    unsettled, rejects new work and prevents shutdown from claiming completion.
     None means cancelled; failures are [Failed]. Cancellation is checked at
     64 KiB boundaries and permits remain reserved until the worker finishes. *)
 val snapshot : t -> HelperSupervisor.cancellation -> max_bytes:int64 ->

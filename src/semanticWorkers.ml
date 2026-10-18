@@ -1,6 +1,11 @@
 open Lwt
 module H = HelperSupervisor
 module Mailbox = SemanticMailbox
+module Close = OwnedClose.Make(struct
+  type descriptor = Unix.file_descr
+  let empty = Unix.stdin
+  let close = Unix.close
+end)
 type fingerprint = { digest : string; stats : Unix.LargeFile.stats }
 type inspection = { proof : (SemanticDelta.proof, string) result;
                     stats : Unix.LargeFile.stats }
@@ -19,7 +24,7 @@ type component_summary = { full_sha256 : string; layout_sha256 : string;
   reused_components : string list; invalidated_components : string list }
 type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
-type usage = { workers : int; pending : int; running : int; peak_running : int }
+type usage = { workers : int; pending : int; running : int; peak_running : int; retained : int }
 exception Failed of string
 exception Cancelled_job
 type response = Hashed of fingerprint | Inspected of inspection
@@ -30,6 +35,9 @@ type response = Hashed of fingerprint | Inspected of inspection
   | Reconciled of reconciliation
   | Applied of SemanticDelta.application
   | Snapshotted of ValidationSnapshot.report | Cancelled | Error of string
+  | Ownership_retained
+type ownership_entry = {group:Close.group; outcome:response Atomic.t;
+                        mutable failed:bool; mutable failure:exn}
 type operation = Digest | Inspect of FormatExtension.handle
   | Reconcile of FormatExtension.handle * string * SemanticDelta.proof * SemanticDelta.proof * SemanticDelta.proof
   | Observe of FormatExtension.handle
@@ -43,7 +51,7 @@ type operation = Digest | Inspect of FormatExtension.handle
   | Apply of FormatExtension.handle * SemanticDelta.t * Unix.file_descr
   | Snapshot of int64 * Unix.file_descr
 type job = { id : int; fd : Unix.file_descr; cancelled : bool Atomic.t;
-             operation : operation; measure_reads : bool; measure_stages : bool }
+             operation : operation; ownership : Close.group; outcome : response Atomic.t; measure_reads : bool; measure_stages : bool }
 type shared = {
   mutex : Mutex.t; ready : Condition.t;
   jobs : job Mailbox.t; completions : (int * response * SemanticFile.read_stats option) Mailbox.t;
@@ -55,6 +63,8 @@ type t = {
   io : IoAdmission.t option;
   max_pending : int; reader : Lwt_unix.file_descr;
   replies : (int, response Lwt.t) Hashtbl.t;
+  owned_groups : (int, ownership_entry) Hashtbl.t;
+  mutable retained : int;
   mutable next_id : int; mutable pending : int; mutable slots : int;
   mutable admission : int list; mutable closing : bool;
   mutable joined : bool;
@@ -64,15 +74,15 @@ type t = {
   mutable measure_stages : bool;
 }
 let close_noerr fd = try Unix.close fd with Unix.Unix_error _ -> ()
-let close_operation = function Apply (_, _, fd) | Snapshot (_,fd) -> close_noerr fd | _ -> ()
-let duplicate_operation = function
+let duplicate_operation output_slot = function
   | Apply (extension, plan, fd) ->
       let owned = Unix.dup ~cloexec:true fd in
-      (try Apply (extension, plan, owned)
-       with error -> close_noerr owned; raise error)
+      Close.adopt output_slot owned;
+      Apply (extension, plan, owned)
   | Snapshot (limit,fd) ->
-      let owned=Unix.dup ~cloexec:true fd in
-      (try Snapshot (limit,owned) with error -> close_noerr owned;raise error)
+      let owned = Unix.dup ~cloexec:true fd in
+      Close.adopt output_slot owned;
+      Snapshot (limit,owned)
   | operation -> operation
 let locked shared f =
   Mutex.lock shared.mutex;
@@ -230,8 +240,13 @@ let rec worker shared () =
   | None -> ()
   | Some job ->
     let result,reads = execute job in
-    close_noerr job.fd;
-    close_operation job.operation;
+    Atomic.set job.outcome result;
+    (* All duplicate slots were rooted by the owner before acquisition.
+       Consume each close authority once; an ambiguous close cannot publish
+       an ordinary completion and release the enclosing CPU/IO/admission. *)
+    (try Close.close_all job.ownership with _ -> ());
+    let result,reads = if Close.settled job.ownership then result,reads
+      else Ownership_retained,None in
     locked shared (fun () ->
       Atomic.set shared.running (Atomic.get shared.running - 1);
       match Mailbox.push shared.completions (job.id, result, reads) with
@@ -252,6 +267,11 @@ let dispatch t =
   List.iter (fun (id, result, reads) ->
     match Hashtbl.find_opt t.replies id with
     | None -> ()
+    | Some _ when (match result with Ownership_retained -> true | _ -> false) ->
+      (* Keep both reply and owned_groups entry reachable. No wakeup means
+         all borrowed outer reservations remain unsettled. *)
+      t.retained <- t.retained + 1;
+      t.closing <- true
     | Some reply ->
       let read_observer = t.read_observer in
       Hashtbl.remove t.replies id;
@@ -325,7 +345,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
     let reader = Lwt_unix.of_unix_file_descr read_fd in
     reader_owner := Some reader;
     let t = { shared; domains = !domains; budget; io; max_pending; reader;
-      replies = Hashtbl.create workers; next_id = 0; pending = 0; slots = 0;
+      replies = Hashtbl.create workers; owned_groups = Hashtbl.create workers; retained = 0; next_id = 0; pending = 0; slots = 0;
       admission = []; closing = false; joined = false;
       shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
     Lwt.ignore_result (pump t (Bytes.create 4096));
@@ -343,7 +363,7 @@ let set_read_observer ?(measure_stages=false) t observer =
   t.measure_stages <- measure_stages && Option.is_some observer
 let usage t =
   let running, peak_running = locked t.shared (fun () -> Atomic.get t.shared.running, Atomic.get t.shared.peak) in
-  {workers = List.length t.domains; pending = t.pending; running; peak_running}
+  {workers = List.length t.domains; pending = t.pending; running; peak_running; retained = t.retained}
 
 let submit t cancellation fd requested_operation =
   if t.closing then fail (Failed "digest pool is closed")
@@ -351,8 +371,12 @@ let submit t cancellation fd requested_operation =
   else
     (* Allocate the guard and controller bookkeeping before acquiring either
        duplicate. Continuation/listener setup is part of this ownership phase. *)
+    let input_slot = Close.prepare ~label:"worker input"
+    and output_slot = Close.prepare ~label:"worker output" in
+    let ownership = Close.group [|input_slot;output_slot|] in
+    let entry = {group=ownership;outcome=Atomic.make Cancelled;failed=false;failure=Exit} in
+    let retained_reply = Lwt.wait () in
     let owned = ref fd and operation = ref requested_operation
-    and owns_input = ref false and owns_operation = ref false
     and pending_registered = ref false in
     let id = t.next_id in
     t.next_id <- t.next_id + 1;
@@ -362,14 +386,14 @@ let submit t cancellation fd requested_operation =
     let finished = ref false and transferred = ref false and has_slot = ref false in
     let cleanup_error = ref None in
     let cleanup_owned () =
-      if not !transferred then begin
-        if !owns_input then begin
-          owns_input := false; (try close_noerr !owned with _ -> ())
-        end;
-        if !owns_operation then begin
-          owns_operation := false; (try close_operation !operation with _ -> ())
-        end
-      end in
+      if not !transferred then (try Close.close_all ownership with _ -> ()) in
+    let retain () =
+      if not !finished then begin
+        finished := true;
+        t.retained <- t.retained + 1;
+        t.closing <- true
+      end;
+      retained_reply in
     let rec monitor () =
       if !finished then return ()
       else if t.closing || H.is_cancelled cancellation then begin
@@ -383,6 +407,9 @@ let submit t cancellation fd requested_operation =
         remove_admission (); t.slots <- t.slots + 1; has_slot := true; return true
       end else Lwt_unix.sleep 0.01 >>= wait_slot in
     let finish () =
+      cleanup_owned ();
+      if not (Close.settled ownership) then false
+      else begin
       if not !finished then begin
         finished := true;
         let attempt f = try f () with error ->
@@ -391,13 +418,14 @@ let submit t cancellation fd requested_operation =
         attempt remove_admission;
         if !has_slot then begin has_slot := false; t.slots <- t.slots - 1 end;
         if not !transferred then Hashtbl.remove t.replies id;
-        attempt cleanup_owned;
+        Hashtbl.remove t.owned_groups id;
         if !pending_registered then begin
           pending_registered := false; t.pending <- t.pending - 1
         end;
         if t.closing && t.pending = 0 then attempt (fun () -> notify t.shared);
         match !cleanup_error with None -> () | Some error -> raise error
-      end in
+      end;
+      true end in
     let execute () =
         (* A blocked filesystem must not occupy a domain slot or the slot FIFO.
            Register here, only after the atomic I/O reservation is admitted. *)
@@ -412,13 +440,14 @@ let submit t cancellation fd requested_operation =
             Hashtbl.add t.replies id reply;
             locked t.shared (fun () ->
               (match Mailbox.push t.shared.jobs {id; fd = !owned; cancelled; operation = !operation;
-                 measure_reads = Option.is_some t.read_observer; measure_stages = t.measure_stages} with
+                 ownership; outcome=entry.outcome; measure_reads = Option.is_some t.read_observer; measure_stages = t.measure_stages} with
                | Mailbox.Added -> transferred := true
                | Mailbox.Full | Mailbox.Closed -> raise (Failed "worker job mailbox invariant"));
               Condition.signal t.shared.ready);
             reply
           end)) (function
         | None | Some Cancelled -> return None
+        | Some Ownership_retained -> retain ()
         | Some (Error reason) -> fail (Failed reason)
         | Some ((Hashed _ | Inspected _ | Observed _ | Identified _ | Recognized _ | Component_inspected _ | Reconciled _ | Applied _ | Snapshotted _) as result) ->
           if t.closing || H.is_cancelled cancellation then return None
@@ -435,27 +464,32 @@ let submit t cancellation fd requested_operation =
             (function
           | None -> return None
           | Some result -> return result) fail in
+    (* Register the entire group before acquiring either duplicate. *)
+    Hashtbl.add t.owned_groups id entry;
     try
-      owned := Unix.dup ~cloexec:true fd; owns_input := true;
-      operation := duplicate_operation requested_operation; owns_operation := true;
+      owned := Unix.dup ~cloexec:true fd;
+      Close.adopt input_slot !owned;
+      operation := duplicate_operation output_slot requested_operation;
       t.pending <- t.pending + 1; pending_registered := true;
       unregister_cancel := H.on_cancel cancellation stop;
       Lwt.ignore_result (monitor ());
       BorrowedWork.try_bind admitted_execution
-        (fun result -> finish (); return result)
+        (fun result -> if finish () then return result else retain ())
         (fun exn ->
-          (try finish () with _ -> ());
-          match exn with
+          entry.failure <- exn; entry.failed <- true;
+          if not (finish ()) then retain ()
+          else match exn with
           | IoAdmission.Failed reason -> fail (Failed reason)
           | _ -> fail exn)
     with error ->
+      entry.failure <- error; entry.failed <- true;
       (* Before queue transfer the controller owns both descriptors. Afterwards
          only the worker closes them. Returned sleeping work is guarded at each
          mapping/ownership layer; persistent allocation failures and callbacks
          which dispatch independently before throwing remain outside that
          finite observer-installation guarantee. *)
-      (try finish () with _ -> ());
-      match error with
+      if not (finish ()) then retain ()
+      else match error with
       | Unix.Unix_error (err, operation, _) ->
           fail (Failed (operation ^ ": " ^ Unix.error_message err))
       | _ -> raise error
@@ -567,7 +601,7 @@ let shutdown t = match t.shutdown_result with
     let result = Lwt.wait () in
     t.shutdown_result <- Some result;
     let rec finish () =
-      if t.pending <> 0 then Lwt_unix.sleep 0.01 >>= finish
+      if t.pending <> 0 || t.retained <> 0 then Lwt_unix.sleep 0.01 >>= finish
       else begin
         locked t.shared (fun () -> Atomic.set t.shared.stopping true; Mailbox.close t.shared.jobs; Condition.broadcast t.shared.ready);
         List.iter Domain.join t.domains;
