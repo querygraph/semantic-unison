@@ -1,3 +1,23 @@
+# Tracked API component checkpoint (2026-10-18)
+
+The versioned C entry `unison_stage_publication_adopt_tracked_v1` and abstract
+StagePublication.parent_handoff are now implemented. Prepare before acquiring
+parent; attempted entry is single-use. C stores consumed=true after the strict
+pre-entry uncertainty rejection and before taking ownership into its local
+native path. Immediate false→true field update allocates/polls nothing. Every
+later native error leaves true; generic unavailable entry leaves false. The
+old three-argument ABI retains its behavior through the shared native body.
+
+Stock/Ox Make+selftests pass,14component controls pass,2incorrect-early-mark
+participants fail designated assertions, and2private generic-branch build/link
+controls refuse unsupported preparation. Original owned/legacy controls pass.
+Evidence: `tests/qualification/tracked-parent-api-actual-20261018.json`.
+
+NOT YET DONE: SemanticRemote still uses untracked adoption and must integrate
+its prepared parent ledger with the acknowledgement, including failure between
+C return and ML bookkeeping. No full caller handoff/observer/RSS/aggregate FD
+qualification is inferred. The original design below is preserved as ancestry.
+
 # Native parent handoff: next source successor
 
 This is a design for unimplemented work, not a claim that the existing parent

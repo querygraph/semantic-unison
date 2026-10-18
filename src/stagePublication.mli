@@ -77,6 +77,16 @@ exception Ownership_uncertain of owned option
     handles and are not finalized/retried as settled. *)
 val prepare_owned : working_dir:string -> stage:string -> temporary:string -> owned
 val adopt_owned : owned -> parent:Unix.file_descr -> stage:Unix.file_descr -> unit
+type parent_handoff
+val prepare_parent_handoff : unit -> parent_handoff
+val parent_consumed : parent_handoff -> bool
+val adopt_owned_tracked : owned -> parent_handoff -> parent:Unix.file_descr -> stage:Unix.file_descr -> unit
+(** Versioned single-attempt handoff. Prepare before acquiring parent. Native C
+    acknowledges exactly when it takes ownership; pre-consumption rejection
+    leaves false. Check even when this call raises. True is transferred authority,
+    NOT known OS closure. The caller must never close a consumed parent, and must
+    keep an unconsumed parent owned until qualified cleanup. No reset/forge API.
+    Does not change the legacy adopt entry point's behavior. *)
 val publish_owned : owned -> unit
 val disarm_owned : owned -> unit
 val abort_owned : owned -> unit
