@@ -1,3 +1,4 @@
+<!-- Genuine upstream update: actual55677/7728f5/0 closed4cases12CLI currentstock/Ox↔unmodified8772d26a, exactbytes/noop/allgroups/CPU8EXclosed. tests/qualification/genuine-upstream-peer-actual-20261017.json. CameraV6 also passed; no currentIOreservation. Finalacceptancereconciliation remains. -->
 <!-- Current verification, 2026-10-17: explicit2048 DNG forest/default1024 retained, UCH1 large metadata/1MiB cap qualified1590checks/compiler+sixbuilds+Update capacity controls. Actual cameraV6 tool94968/138880/0/no session covers all193851848B under DNG/3,30MakerNotes0warnings/fullSHA historicalmatch/input8fields unchanged/allresourcesclosed. Receipt tests/qualification/camera-large-forest-v6-actual-20261017.json SHA1d0394b85776c33024f0a3e9fbd97c5858b07cd3a466eceda956f16d4031402c. Earlier refusals below remain historical. No decoded-pixel/rendering/semantic-merge/corpus claim. -->
 # Implementation status, updated 2026-10-17
 

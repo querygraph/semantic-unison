@@ -19,7 +19,7 @@ exhaustive private-field interpretation is not a deployment gate.
 | 5 Concurrent modification | Source/target witnesses, queued completion cancellation; new report source/head/parent/permission fences | Current-object384-job apply/cancellation controls passed per compiler; precise source bindings remain in the receipts. No hostile-writer atomic namespace CAS claim. |
 | 6 Failure/recovery | Publication/validator/merge faults; current cache all-open/all-sync/close uncertainty, parent retention and outer admission hold | Cache source close uncertainty qualified; ordinary semantic-report cleanup also qualified. Owned backend plus modern bound local/remote semantic and ordinary local/rsync callers have composed controls. Legacy named/unbound/older-peer and raw/channel close paths remain separately scoped. Hardware power-loss and every fault cross-product are unproved. |
 | 7 Filesystems | APFS ordinary clone/range path, cross-volume APFS/HFS+ historical exact controls, named property controls | No ZFS/ReFS implementation/runtime, physical sharing/write amplification or exhaustive sparse/ACL/compression claim. Fresh IO controls require a new exact window. |
-| 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Current exact-retained-fork mixed matrix passed4cases/12CLI; arbitrary upstream/capability-absent interop remains unproved; UI tested through its production entry callback, not a manual GUI session. |
+| 8 Compatibility | Stock/Ox Make/selftests/Dune, old archive production objects including UAX/UAN drop-on-rewrite, historical old-peer off/refusal | Current exact-retained-fork mixed matrix passed4cases/12CLI; genuine pinned-upstream fallback now passed4cases/12CLI; arbitrary releases/RPC0 remain separately scoped; UI tested through its production entry callback, not a manual GUI session. |
 | 9 Parallelism/resources | Checked worker closures, pool1/2/4/8 parity, source/accounted CPU/queue/FD controls, shared SDK tests | Current-object pool1/2/4/8 parity and384-job scheduling controls passed; see integration-worker-parity/apply receipts. Credits and bounded samples are not hard OS-thread/RSS caps or calibrated speedup. |
 | 10 Semantic merge | Conservative scalar XMP policy and built-in two-replica materialization, stale/missing-base and conflict refusal | Current scalar XMP25+343+4 controls passed per compiler; full receiving remains separately admitted. General RDF/growing/rendering merges remain unsupported. |
 | 11 Generic cloned transfer | Reused upstream engine, same/shifted ranges, clone-off/fallback, EOF/no-op controls, ordinary camera fallback | Current candidate property/clone matrix passed18rows54CLI; precise capability/mount limits and no physical-savings claim remain. |
@@ -39,8 +39,8 @@ metadata snapshot is not current scheduling state.
 
 Current-candidate transfer/property behavior and the separately scoped
 real-camera component+MakerNote report have now passed. Exact retained-fork
-mixed interoperation is evidenced, with the limits below. Genuine upstream
-capability-absent fallback still needs its distinct qualification.
+mixed interoperation is evidenced, with the limits below. Genuine pinned-upstream
+capability-absent fallback has also passed4cases/12CLI in a separate admission.
 The older peer already supports semantic-delta/producer binding, so its matrix
 cannot prove arbitrary upstream or capability-absent fallback. Deployment is not
 waiting for exhaustive MakerNote interpretation or decoded-pixel equivalence of
@@ -74,12 +74,13 @@ fault, transfer or scheduling controls.
    hold remains. Never reuse their consumed admissions. The older frozen
    property request qualifies a separate baseline and is no longer needed to
    establish this candidate's tested property scope.
-3. Close the genuine-upstream compatibility evidence gap. The existing mixed
-   matrix uses an older fork that already supports producer binding. An unmodified
-   pinned upstream8772d26a stock build/selftests and70sourcecontrols now pass.
-   The exact schema2 request is [prepared](genuine-upstream-peer-request-v1.json)
-   for both directions. Actual transport needs its own fresh exact admission;
-   source preparation creates no Photo scheduling hold. Do not relabel the passing older-fork matrix.
+3. Adopt the separate genuine-upstream compatibility result.
+   [Actual matrix](../tests/qualification/genuine-upstream-peer-actual-20261017.json)
+   passed4cases/12CLI against unmodified upstream8772d26a with current stock/Ox
+   endpoints in both directions. Exact bytes/no-op identities/rawserver-client-
+   supervisor-pump/worker settlements passed; actual55677/7728f5/0, allCPU/IO
+   closed. This closes the exact pinned-upstream capability-absent gap, not all
+   upstream releases or RPC0. No admission remains pending and no replay.
 4. Keep the remaining legacy cleanup limitations explicit. Owned publication
    backend, bound SemanticSync/SemanticRemote, bound local Copy and guarded rsync
    staging have current composed failure controls and stock/Ox builds. Their

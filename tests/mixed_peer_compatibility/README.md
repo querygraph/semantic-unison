@@ -1,3 +1,15 @@
+# Actual genuine upstream matrix passed
+
+Fresh admission0abefb81 was consumed once: actual owner55677/7728f5/0/no session,
+worker82424 reaped0/other members absent, CPU8+EXglobal closed. Four current
+stock/Ox versus genuine unmodified8772d26a cases completed seed/update/noop
+(12CLI), exact bytes/noop identity and independent raw client/supervisor/server/
+pump proofs. All384 postsource pins matched. Receipt:
+`tests/qualification/genuine-upstream-peer-actual-20261017.json`.
+This is not arbitrary upstream versions/RPC0, SDK, camera semantics or performance.
+No pending admission, resource hold or replay follows. Earlier source notes below
+remain historical.
+
 # Current status — genuine upstream successor
 
 The retained-fork schema1 matrix actually passed4cases/12CLI; its sealed receipt
