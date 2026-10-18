@@ -427,6 +427,81 @@ let try_local_async_with_producer ~producer ~source ~basis ~directory ~staging =
 let try_local_async_reserved ~reservation ~producer ~source ~basis ~directory ~staging =
   try_local_async_internal ~reservation ?producer ~source ~basis ~directory ~staging ()
 
+(* Separate capture/merge owners. Every slot/link/guard exists before open; an
+   uncertain borrower keeps all inputs, not just the descriptor that reported. *)
+type retained_inputs = {
+  slots:NotificationPipe.t array; paths:string array; opened:bool array;
+  interrupted_error:exn;
+  mutable closed:bool; mutable retained:bool;
+  mutable failure:exn; mutable failed:bool;
+  mutable unresolved:exn; mutable linked:bool;
+  link:retained_inputs option; mutable next:retained_inputs option;
+}
+let retained_input_owners=ref None
+let retained_inputs () =
+  let rec collect acc=function None->List.rev acc | Some owner->collect(owner::acc)owner.next in
+  collect [] !retained_input_owners
+let retained_input_count owner=Array.length owner.slots
+let retained_input_slot owner index=owner.slots.(index)
+let retained_input_path owner index=owner.paths.(index)
+let retained_input_failure owner=if owner.failed then Some owner.failure else None
+let retained_input_uncertainty owner=owner.unresolved
+let remember_inputs owner error =
+  if not owner.failed then begin owner.failure<-error;owner.failed<-true end;
+  for index=0 to Array.length owner.slots-1 do
+    NotificationPipe.remember_failure owner.slots.(index) error
+  done
+let retain_inputs owner error =
+  if not owner.retained then owner.unresolved<-error;
+  owner.retained<-true;
+  if not owner.linked then begin
+    owner.next<- !retained_input_owners;retained_input_owners:=owner.link;owner.linked<-true
+  end;
+  try NotificationPipe.retain_unsettled owner.slots.(0) error
+  with NotificationPipe.Uncertain _->()
+let prepare_inputs count =
+  if count<1 || count>4 then invalid_arg "semantic input slot count";
+  let slots=Array.init count(fun _->NotificationPipe.prepare ()) in
+  let paths=Array.make count "" and opened=Array.make count false in
+  let rec owner={slots;paths;opened;interrupted_error=Util.Transient "Semantic input acquisition interrupted";
+    closed=false;retained=false;failure=Exit;failed=false;unresolved=Exit;
+    linked=false;link=Some owner;next=None} in
+  Array.iter(fun slot->NotificationPipe.keep_owner slot(fun()->ignore(Sys.opaque_identity owner)))slots;
+  owner
+let input_open owner index path flags =
+  let slot=owner.slots.(index) in
+  if owner.closed || owner.retained || owner.opened.(index) then invalid_arg "semantic input owner state";
+  owner.paths.(index)<-Fspath.toString path;owner.opened.(index)<-true;
+  let fd=Fs.openfile path (Unix.O_CLOEXEC::Unix.O_NONBLOCK::flags) 0 in
+  NotificationPipe.adopt_read slot fd;
+  if owner.closed || owner.retained then begin
+    retain_inputs owner owner.interrupted_error;raise owner.interrupted_error
+  end;
+  fd
+let close_inputs owner =
+  if owner.retained then NotificationPipe.retain_unsettled owner.slots.(0) owner.unresolved;
+  if not owner.closed then begin
+    for index=0 to Array.length owner.slots-1 do
+      try NotificationPipe.close_all owner.slots.(index)
+      with NotificationPipe.Uncertain _ as error->retain_inputs owner error
+    done;
+    if owner.retained then raise owner.unresolved;
+    owner.closed<-true
+  end
+let with_inputs count work =
+  let owner=prepare_inputs count in
+  let uncertain=function
+    | NotificationPipe.Uncertain _ | SemanticFile.Close_uncertain _
+    | DngComponents.Cache_ownership_uncertain _ | DirectoryOwner.Uncertain _
+    | StagePublication.Ownership_uncertain _->true
+    | _->false in
+  let retain entry=retain_inputs owner (RetainedOwnership.cause entry) in
+  let guard work=RetainedOwnership.guard ~is_uncertain:uncertain ~on_retained:retain work in
+  guard(fun()->
+    BorrowedWork.try_bind (fun()->guard(fun()->work owner))
+      (fun result->close_inputs owner;Lwt.return result)
+      (fun error->remember_inputs owner error;close_inputs owner;Lwt.fail error))
+
 (* Capture a compact base before an archive may refer to these exact bytes.
    A later lookup still requires the agreeing previous-common fingerprint. *)
 let capture_common_base_async ~root ~path ~source =
@@ -435,11 +510,8 @@ let capture_common_base_async ~root ~path ~source =
   let usage = SemanticRuntime.admission_usage () in
   if usage.SemanticAdmission.transactions<>0 || usage.SemanticAdmission.pending<>0 then return () else
   SemanticRuntime.with_transaction ~role:SemanticAdmission.Source ~max_payload:FormatExtension.max_region (fun cancellation ->
-    let owned = ref true in
-    let fd = Fs.openfile source [Unix.O_RDONLY;Unix.O_CLOEXEC;Unix.O_NONBLOCK] 0 in
-    try
-    let close () = if !owned then (owned := false; close_fd_noerr fd) in
-    BorrowedWork.try_bind (fun () ->
+    with_inputs 1 (fun owner ->
+    let fd=input_open owner 0 source [Unix.O_RDONLY] in
       let before = Unix.LargeFile.fstat fd in
       let stable () =
         let matches after = before.Unix.LargeFile.st_kind=Unix.S_REG &&
@@ -482,11 +554,7 @@ let capture_common_base_async ~root ~path ~source =
                   | None -> raise (Util.Transient "DNG base capture cancelled")) in
            inspect [DngExtended.profile;DngSemantic.profile]
          | _ -> raise (Util.Transient "DNG base capture admission cancelled")))
-      (fun () -> close ();return ())
-      (fun error -> close ();fail error)
-    with error ->
-      if !owned then (owned := false;close_fd_noerr fd);
-      raise error)
+)
 
 (* This entry point is deliberately separate from transfer optimization. The
    merge owner provides a private saved base and the previous archive's exact
@@ -498,19 +566,12 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
   let extensions = List.filter_map FormatExtension.resolve
     [DngExtended.profile; DngSemantic.profile] in
   SemanticRuntime.with_transaction ~max_payload:FormatExtension.max_region (fun cancellation ->
-    let owned = ref [] in
-    let close () =
-      let fds = !owned in owned := [];
-      List.iter close_fd_noerr fds in
-    let open_fd path flags =
-      let fd = Fs.openfile path (Unix.O_CLOEXEC :: Unix.O_NONBLOCK :: flags) 0 in
-      (try owned := fd :: !owned with error -> close_fd_noerr fd; raise error);
-      fd in
+    BorrowedWork.catch (fun () -> with_inputs 4 (fun owner ->
+    let open_fd index path flags=input_open owner index path flags in
     let same a b =
       a.Unix.LargeFile.st_kind = Unix.S_REG && b.Unix.LargeFile.st_kind = Unix.S_REG &&
       a.st_dev = b.st_dev && a.st_ino = b.st_ino && a.st_size = b.st_size &&
       a.st_mtime = b.st_mtime && a.st_ctime = b.st_ctime in
-    BorrowedWork.try_bind (fun () ->
       let runtime = SemanticRuntime.get () in
       BorrowedWork.bind (fun () -> HelperSupervisor.with_cpu_permits
         runtime.supervisor ~weight:1 cancellation (fun () -> return (match cache with
@@ -520,13 +581,13 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
       let cached = match admitted with Some cached -> cached | None -> fail "cache lookup cancelled" in
       let base_fd = match cached with
         | None ->
-            (try Some (open_fd base [Unix.O_RDONLY]) with
+            (try Some (open_fd 0 base [Unix.O_RDONLY]) with
              | Unix.Unix_error (Unix.ENOENT,_,_) ->
                  fail "no saved common base is available; synchronize a common version with compact capture or backupcurrent enabled before merging")
         | Some _ -> None in
-      let left_fd = open_fd left [Unix.O_RDONLY] in
-      let right_fd = open_fd right [Unix.O_RDONLY] in
-      let output_fd = open_fd output [Unix.O_RDWR] in
+      let left_fd = open_fd 1 left [Unix.O_RDONLY] in
+      let right_fd = open_fd 2 right [Unix.O_RDONLY] in
+      let output_fd = open_fd 3 output [Unix.O_RDWR] in
       let before = Option.map Unix.LargeFile.fstat base_fd in
       let base_stable () = match before,base_fd with
         | Some before,Some fd -> same before (Unix.LargeFile.fstat fd) && same before (Fs.stat base)
@@ -586,8 +647,8 @@ let merge_local_async_internal ~cache ~base_fingerprint ~base ~left ~right ~outp
             HelperSupervisor.with_cpu_permits runtime.supervisor ~weight:1 cancellation verify_base))
         (function Some (Some ()) -> select [] extensions
          | _ -> fail "archive verification admission cancelled")))
-      (fun report -> close (); return report)
-      (fun error -> close (); match error with
+      )
+      (fun error -> match error with
        | SemanticWorkers.Failed reason -> Lwt.fail (Util.Transient ("DNG scalar merge: " ^ reason))
        | (Unix.Unix_error _ | Sys_error _ | Sys_blocked_io) ->
            (* The shared utility also converts Not_found/End_of_file. Invoke it

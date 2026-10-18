@@ -65,3 +65,14 @@ val retained_publication_parent_ownership : retained_publication -> Notification
 (** Owner-loop forensic ledgers, including legacy async transactions. Known FD
     inventory excludes uncertain/closed/transferred numbers. No cleanup/retry
     authority or native known-close assertion is granted by these observations. *)
+
+type retained_inputs
+val retained_inputs : unit -> retained_inputs list
+val retained_input_count : retained_inputs -> int
+val retained_input_slot : retained_inputs -> int -> NotificationPipe.t
+val retained_input_path : retained_inputs -> int -> string
+val retained_input_failure : retained_inputs -> exn option
+val retained_input_uncertainty : retained_inputs -> exn
+(** Owner-loop diagnostics for separate compact-base capture/scalar-merge scopes.
+    Immutable slot selection, no array replacement/reset/close-retry authority.
+    A path is not inode identity; consult per-slot pre-close observations. *)
