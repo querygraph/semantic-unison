@@ -2,7 +2,7 @@
 import argparse,pathlib,tempfile,subprocess,hashlib,json,shutil,struct,ctypes,sys
 p=argparse.ArgumentParser();p.add_argument('--compiler',required=True);p.add_argument('--receipt',type=pathlib.Path,required=True);a=p.parse_args()
 r=pathlib.Path(__file__).resolve().parents[2];w=pathlib.Path(tempfile.mkdtemp(prefix='unison-dng-reconcile-',dir='/private/tmp'));version=subprocess.check_output([a.compiler,'-version'],text=True).strip();ox='+ox' in version
-mods=['semanticHash','semanticFile','formatExtension','xmpObservation','xmpMerge','dngSemantic','semanticDelta'];sources=['src/'+n+e for n in mods for e in ['.mli','.ml','.ox.mli.in']]+['src/semanticHash_stubs.c','src/semanticFile_stubs.c','src/semantic_mode_filter.ml','tests/dng_reconcile/test.ml','tests/dng_reconcile/run.py']
+mods=['semanticHash','semanticFile','formatExtension','xmpObservation','xmpMerge','dngSemantic','semanticDelta'];sources=['src/'+n+e for n in mods for e in ['.mli','.ml','.ox.mli.in']]+['src/semanticHash_stubs.c','src/semanticHash_evp.h','src/semanticFile_stubs.c','src/semantic_mode_filter.ml','tests/dng_reconcile/test.ml','tests/dng_reconcile/run.py']
 for s in sources:shutil.copyfile(r/s,w/pathlib.Path(s).name)
 subprocess.run([a.compiler,'-o','filter','semantic_mode_filter.ml'],cwd=w,check=True)
 for n in mods:

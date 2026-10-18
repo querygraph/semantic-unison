@@ -264,3 +264,13 @@ ABI groups and the constrained planner’s 48 named cases including its 960-case
 matrix on current source. All four jobs and CPU4 grants closed. This does not
 qualify other native platforms, physical sharing, whole transfer/publication
 or fresh V6 compatibility/property behavior.
+
+## Current exact reconciliation materialization — 2026-10-18
+
+[Nine original controls per compiler](../tests/qualification/current-dng-reconciliation-actual-20261018.json)
+passed with generated 2 MiB DNG inputs and a distinct native clonefile stage.
+The stage equals the independent target; 3,072 returned logical bytes/one write,
+source preservation and conservative refusal cases pass. The runner now copies
+the required hash header. Actual controller5070/c3ff40/0 and both CPU4/group
+closures passed. This does not establish two-replica receiving, archive base
+authority, SDK validation or physical storage savings.

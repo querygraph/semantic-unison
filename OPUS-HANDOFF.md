@@ -5980,3 +5980,18 @@ tests/qualification/current-range-components-actual-20261018.json SHA fcfc6d25cd
 NoPhoto/SDK/Adobe/EXglobal/fulltransport/physicalsharing/otherplatformruntime
 claim. FrozenV6 stillunchanged; fullcurrenttransferworkflow remainspending
 its separate compatibility/property admissions. No ownedlivejobs/resources.
+
+
+## 2026-10-18 current exact DNG reconciliation/materialization renewed
+
+Fixed source runner dependency: tests/dng_reconcile/run.py now copies required
+semanticHash_evp.h into isolated compiler snapshot (no production edits).
+Actualcontroller5070/c3ff40/exit0/no session(initiald4fe44) passed stock/Ox
+9originalcontrols each, private2MiB generated fixtures+distinctDarwinclone stage.
+Independenttargetexact/sourceunchanged, returned3072logicalbytes/1write; opaque/
+stalebasis/competing/peer-onlybase/invalidnonce refusals passed. Allchildwait0/
+groupsabsent/CPU4closed. Evidence
+tests/qualification/current-dng-reconciliation-actual-20261018.json SHA d14806d5e8fde9d4d67243d09525990710bc209da2de83cf4e742aad6f7b8186.
+NoRPC/receiving/archive-baseauthority/SDK/Photo/EXglobal/physicalsavingsclaim.
+FrozenV6candidate untouched, threeadmissions absentatfreshread; actualcurrent
+transport/property remainsnext. Goalactive/incomplete/noownedlivejobs.
