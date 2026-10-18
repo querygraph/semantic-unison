@@ -9,8 +9,8 @@ No new wire tag, schema or negotiation feature is emitted.
 | Endpoint-local setting | Default | Meaning |
 | --- | ---: | --- |
 | `rpcheadermaxbytes` | 8388608 | Maximum single header frame payload, including its RPC tag and Umarshal framing; excludes the fixed five-byte transport length prefix. |
-| `rpcheaderinputbudget` | 16 | Aggregate in-flight raw header payload MiB within this process. |
-| `rpcheaderinputslots` | 256 | Aggregate headers waiting for a length prefix, receiving payload or decoding, including empty frames. Maximum 65536. |
+| `rpcheaderinputbudget` | 16 | Aggregate in-flight raw header/startup payload MiB within this process. |
+| `rpcheaderinputslots` | 256 | Aggregate headers/startup fields waiting for input, receiving payload or decoding, including empty frames. Maximum 65536. |
 
 All settings must be positive; the maximum frame must fit the byte budget and
 MiB conversion must be representable. Invalid configuration refuses before
@@ -41,8 +41,8 @@ automatically modified by this source change.
 This is raw header reservation accounting, not a bound on decoded exceptions
 retained by callers, transport buffers/FDs, all heap allocations, process-tree
 memory or RSS. Ordinary unbounded legacy body/result/stream packets are not
-covered. Protocol startup/handshake delimiter reads precede this message-header
-path and need separate bounds. Overall decoded-object admission and remaining
+covered. Protocol startup/handshake reads use their own field policy and share this raw-input
+ledger; see [startup limits](rpc-startup-input-limits.md). Overall decoded-object admission and remaining
 acquisition/baseline/resource enforcement remain open.
 
 The slots include partial prefixes; they do not bound the number of connections

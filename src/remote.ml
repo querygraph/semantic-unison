@@ -1045,12 +1045,12 @@ let headerMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcheadermaxbytes" 8
   "Positive endpoint-local limit checked before allocation. Large diagnostic \
    headers may require raising this and rpcheaderinputbudget together. Does not limit body frames.")
 let headerInputMiB=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputbudget" 16 ~local:true
-  ~category:(`Advanced `General) "process-wide in-flight raw RPC header MiB"
-  "Separate nonwaiting raw header allowance across this process's connections. \
+  ~category:(`Advanced `General) "process-wide in-flight raw RPC header/startup MiB"
+  "Separate nonwaiting raw header/startup allowance across this process's connections. \
    Held through body receipt and header decode; not a decoded-object or RSS cap.")
 let headerInputSlots=Prefs.makeEndpointLocal(Prefs.createInt "rpcheaderinputslots" 256 ~local:true
-  ~category:(`Advanced `General) "process-wide in-flight RPC header slots"
-  "Positive bounded header count, including empty frames; maximum65536. \
+  ~category:(`Advanced `General) "process-wide in-flight RPC header/startup slots"
+  "Positive bounded header/startup count, including empty frames; maximum65536. \
    Exhaustion fails the connection instead of blocking replies behind body admission.")
 type header_input={mutable header_bytes:int;mutable header_active:bool;mutable header_sized:bool}
 type header_limits={header_max:int;header_budget:int;header_slots:int}
@@ -1488,23 +1488,49 @@ let commandAvailable =
                      BUILDING CONNECTIONS TO THE SERVER
  ****************************************************************************)
 
+(* Startup is read before command selection. Reserve its maximum buffer and
+   returned-string payload in the shared input lane, independently of bodies. *)
+let startupMaxBytes=Prefs.makeEndpointLocal(Prefs.createInt "rpcstartupmaxbytes" 65536 ~local:true
+  ~category:(`Advanced `Remote) "maximum incoming RPC startup field bytes"
+  "Positive endpoint-local limit for each startup field, including separators \
+   and ignored carriage returns. Shared header input credits cover twice this \
+   allowance during delimiter reads. Not a wall-clock or whole-heap limit.")
+let startup_limit () =
+  let maximum=Prefs.read startupMaxBytes in
+  if maximum<=0 || maximum>Sys.max_string_length || maximum>max_int/2 then
+    raise(Util.Fatal "Invalid RPC startup input limit");
+  maximum
+let startup_exceeds () = raise(Util.Fatal "RPC startup input limit exceeded")
+let with_startup_input length f =
+  let limits=header_limits () in
+  let ticket={header_bytes=0;header_active=false;header_sized=false} in
+  let failed error=release_header_input ticket;Lwt.fail error in
+  try
+    reserve_header_slot limits ticket;
+    (* A startup field has its own size policy, not the message-header cap. *)
+    reserve_header_input {limits with header_max=max_int} ticket (2*length);
+    BorrowedWork.try_bind f
+      (fun value->release_header_input ticket;Lwt.return value) failed
+  with error->release_header_input ticket;raise error
+
 let receiveUntilSep ?(space=false) ?(nl=true) ?(includesep=false) conn =
   assert (space || nl);
-  let inp = Buffer.create 32
-  and buf = Bytearray.create 1 in
-  let add () = Buffer.add_char inp buf.{0} in
-  let rec aux () =
-    grab conn.inputBuffer buf 1 >>= fun () ->
-    match buf.{0} with
-    | ' ' | '\t' when space ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\n' when nl ->
-        if includesep then add (); Lwt.return (Buffer.contents inp)
-    | '\r' ->
-        aux () (* ignore *)
-    | _ ->
-        add (); aux ()
-  in aux ()
+  let maximum=startup_limit () in
+  with_startup_input maximum (fun ()->
+    let inp=Bytearray.create maximum and buf=Bytearray.create 1 in
+    let used=ref 0 and consumed=ref 0 in
+    let add ()=inp.{!used}<-buf.{0};incr used in
+    let finish ()=Lwt.return(Bytearray.sub inp 0 !used) in
+    let rec aux () =
+      if !consumed=maximum then startup_exceeds ();
+      grab conn.inputBuffer buf 1 >>= fun () ->
+      incr consumed;
+      match buf.{0} with
+      | ' ' | '\t' when space -> if includesep then add ();finish ()
+      | '\n' when nl -> if includesep then add ();finish ()
+      | '\r' -> aux () (* ignored, but charged to the wire-byte limit *)
+      | _ -> add ();aux ()
+    in aux ())
 
 (* Get input until newline (excluded), blocking *)
 let receiveUntilNewline conn =
@@ -1516,9 +1542,12 @@ let receiveUntilSpaceOrNl ?(includesep=true) conn =
 
 (* Get input of fixed length, blocking *)
 let receiveString conn len =
-  let buf = Bytearray.create len in
-  grab conn.inputBuffer buf len >>= fun () ->
-  Lwt.return (Bytearray.to_string buf)
+  let maximum=startup_limit () in
+  if len<0 || len>maximum then startup_exceeds ();
+  with_startup_input len (fun ()->
+    let buf = Bytearray.create len in
+    (if len=0 then Lwt.return () else grab conn.inputBuffer buf len) >>= fun () ->
+    Lwt.return (Bytearray.to_string buf))
 
 (* Get input until newline (excluded), non-blocking *)
 let receiveUntilNewlineNb conn =
@@ -1792,7 +1821,9 @@ let checkForMagicString conn =
       (* Consume magic id from buffer *)
       grab conn.inputBuffer id intSize >>= fun () ->
       (* Consume magic packet from buffer *)
-      receivePacket conn >>= fun _ -> Lwt.return true
+      let maximum=startup_limit () in
+      with_startup_input maximum (fun ()->
+        receivePacket ~maxBytes:maximum conn >>= fun _ -> Lwt.return true)
       (* We rely solely on the magic id and don't check the contents of the
          packet. Should it become necessary for some reason then it is
          possible to verify the magic packet byte by byte here. *)
