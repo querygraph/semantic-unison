@@ -1,0 +1,15 @@
+{
+  "state": "QUEUED_SOURCE_REQUEST_NO_RUNTIME_GRANT",
+  "queue_id": "01a15029-3b55-73b1-83ec-4eaa48f358cc",
+  "receiver_thread": "01a13369-8b68-7aa1-be91-cba984ba269b",
+  "index": {
+    "path": "/Users/alexy/src/unison-decoded-input-20261018/doc/sol-current-requalification-requests-v3.json",
+    "bytes": 3170,
+    "sha256": "2e9adb6ba0a9a71a65312641443f3eef46ecc95404002a9cb3ce36f47bf801b0"
+  },
+  "actual_queue_tool": {
+    "chunk_id": "e9c57e",
+    "exit_code": 0
+  },
+  "scope": "Asked for fresh review and serial upstream first; no admission/dispatch/resource hold/SDK/Photo payload. Old v2 source proposals superseded; original bytes unchanged."
+}

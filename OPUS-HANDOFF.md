@@ -5239,3 +5239,5 @@ command construction),89c629/1 (mock wrong importmodule); corrected preflight
 uses valid inertSHA and only mocks sentinel at definingmodule. Neither dispatched
 anything or acquiredpool. Do not call these runtime failures or Rootrefusals.
 Goalactive, legacy result/conversion/outbound/baseline/containment remain work.
+
+Fresh V3 requests actually queued to Photo Root:01a15029-3b55-73b1-83ec-4eaa48f358cc, tool e9c57e/0. Durable doc/sol-current-requalification-v3-QUEUED.json. No runtimegrant or hold. Metadata commit02259bdd forkpushed; execution source456776d8 unchanged.
