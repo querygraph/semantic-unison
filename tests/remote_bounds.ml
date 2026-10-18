@@ -124,6 +124,37 @@ let test_decoded_budget () =
   require((try ignore(R.boundedMarshalingFunctions max_int Umarshal.unit);false with Invalid_argument _->true))
     "decoded budget overflow accepted"
 
+let test_single_argument_decode () =
+  let decodes=ref 0 and seen=ref None and calls=ref 0 and reject=ref false in
+  let codec=Umarshal.prod2 Umarshal.int Umarshal.unit
+    (fun value->(!value,()))
+    (fun (value,())->incr decodes;ref value) in
+  let scope _ value dispatch =
+    seen:=Some value;
+    require(!decodes=1) "DESIGNATED scoped arguments decoded twice";
+    value:=8;
+    if !reject then Lwt.fail(Util.Transient "single decode refusal")
+    else dispatch () in
+  let _command=R.registerBoundedServerCmd ~withScope:scope "single-decode-test"
+    ~maxArgs:64 ~maxResult:64 codec Umarshal.unit (fun _ value->
+      incr calls;
+      require(!decodes=1 && !value=8 &&
+        (match !seen with Some first->first==value | None->false))
+        "DESIGNATED scope and handler received distinct decoded values";
+      Lwt.return ()) in
+  List.iter(fun refusal->
+    reject:=refusal;decodes:=0;calls:=0;seen:=None;
+    with_connection(fun conn _->
+      pause_output conn;
+      let work=R.processRequest conn(request_id 993)"single-decode-test"
+        (request_body "single-decode-test" codec(ref 7)) in
+      require(!decodes=1)
+        "DESIGNATED scope and handler received distinct decoded values";
+      require(!calls=(if refusal then 0 else 1))
+        "single decode admission did not control dispatch";
+      require(Lwt.poll work=None) "single decode did not await output";
+      R.allowWrites conn.R.outputQueue;Lwt_unix.run work)) [false;true]
+
 let test_reply_scopes () =
   let active = ref 0 and calls = ref 0 and mode = ref `Success in
   let delayed = ref (Lwt.wait ()) in
@@ -284,6 +315,7 @@ let () =
     exceeds (fun () -> Lwt_unix.run (R.receive conn)));
   R.resetReceivers ();
   test_decoded_budget ();
+  test_single_argument_decode ();
   test_reply_scopes ();
   test_input_budget ();
   test_dynamic_reply_bounds ();

@@ -4740,3 +4740,46 @@ lifetimes; never refund merely at decode return or rely on root finalizers.
 Frozen IO candidate9d9dccc0 and its three requests remain separate/unchanged;
 no new admission observed at last check, no dispatch/replay. Full SOL goal
 active/incomplete. Standing8/8 continues, no Photo resource hold inferred.
+
+
+### 2026-10-18 current continuation: one decoded argument per scoped RPC
+
+Active source worktree remains `unison-decoded-input-20261018`. Decoder hook
+checkpoint c2459bf2 is pushed. Current uncommitted Remote successor unifies the
+server scope and handler under one decoded argument, keeping dispatch/marshal/
+queued-output consumption inside the scope continuation. This removes duplicate
+argument expansion and establishes the point for the forthcoming decoded owner;
+no aggregate decoded lifetime cap is claimed yet.
+
+Actual stock/Ox RPC controls parent15118/0fc241/0/no session passed full existing
+bounds/header/startup/packet/body/retention suites plus new mutable-value identity
+and conversion-count checks. Double-decode mutation fails the designated witness.
+Initial stock001 fixture expected the handler exception text but the normal RPC
+exception path serialized it first; corrected post-dispatch count witness in002,
+original001/fc36ff/1 and all closed resources preserved. Full Make/Dune build
+successor is live owner97888, not yet a build pass. The preceding launch aa4ee4/1
+refused wrong compiler prefix before shared_dispatch entry/any compiler/token;
+empty stock-check001 preserved, corrected `/bin` prefix uses002 workspaces.
+No IO admissions observed; frozen candidate9d9dccc0 remains unchanged.
+
+
+### 2026-10-18 single-decode RPC successor actually qualified
+
+All four stock/Ox Make+Dune build/selftests now PASS/CLOSED actual controller
+97888/6fbef2/exit0/no session. Direct children70163,71299,72421,73666 reaped0,
+other group members absent and CPU8 descriptors closed after each. Every recorded
+source input and retained binary hash matches current source. Both actual RPC
+suites pass (15118/0fc241/0); added double-decode participant rejected alongside
+existing framing/header/startup/packet/body/uncertainty controls. Initial test
+witness diagnostic failure and compiler-prefix preentry refusal are preserved.
+Evidence `tests/qualification/rpc-single-argument-decode-actual-20261018.json`
+SHA 24aec771672e449aaa75b701e9cbf3622e377e94194c291c2aba541daaeb7b8a.
+
+Next implement explicit bounded-request decoded owners using the new server
+continuation, with finite aggregate slots/selected bytes/elements and retained
+partial debits through actual handler+queued-output settlement. Caller result
+leases, legacy decoded expansion, arbitrary retained conversions and full heap/
+RSS remain open; do not label this refactor aggregate memory enforcement.
+No current build/test/EXIO owner from this checkpoint. Three frozen candidate
+requests remain separate, no admission observed at latest check; never alter or
+replay them. Full goal active/incomplete; standing Unison8/Photo8/system2.

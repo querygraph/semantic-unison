@@ -1047,7 +1047,8 @@ let start_body_request ?maxBytes ?reserve conn launch =
 
 type servercmd =
   connection -> Bytearray.t ->
-  ((Bytearray.t * int * int) list -> (Bytearray.t * int * int) list) Lwt.t
+  ((unit -> ((Bytearray.t * int * int) list ->
+             (Bytearray.t * int * int) list) Lwt.t) -> unit Lwt.t) -> unit Lwt.t
 let serverCmds = ref (Util.StringMap.empty : servercmd Util.StringMap.t)
 let serverArgLimits = ref (Util.StringMap.empty : int Util.StringMap.t)
 (* Only explicitly bounded commands participate. Never wait for credits in the
@@ -1098,8 +1099,6 @@ let start_bounded_request conn limit launch =
         transferred:=true;
         with_bounded_request ticket (fun()->launch buffer))) failed
   with error -> if not !transferred then release_bounded_input ticket;raise error
-type serverscope = connection -> Bytearray.t -> (unit -> unit Lwt.t) -> unit Lwt.t
-let serverScopes = ref (Util.StringMap.empty : serverscope Util.StringMap.t)
 
 type serverstream =
   connection -> Bytearray.t -> unit
@@ -1209,10 +1208,10 @@ let processRequest conn id cmdName buf =
   in
   let started = ref false in
   let reply_started = ref false in
-  let dispatch () =
+  let dispatch run =
     if !started then invalid_arg "RPC server scope invoked its callback twice";
     started := true;
-    BorrowedWork.try_bind (fun () -> cmd conn buf)
+    BorrowedWork.try_bind run
       (fun marshal ->
          debugE (fun () -> Util.msg "Sending result (id: %d)\n" (decodeInt id 0));
          let reply = (id, 0, intSize) :: marshalHeader conn NormalResult (marshal []) in
@@ -1220,11 +1219,8 @@ let processRequest conn id cmdName buf =
          dump conn reply)
       (fun error -> if !reply_started then Lwt.fail error else sendException error)
   in
-  match Util.StringMap.find_opt cmdName !serverScopes with
-  | None -> dispatch ()
-  | Some scope ->
-      BorrowedWork.catch (fun () -> scope conn buf dispatch)
-        (fun e -> if !started then Lwt.fail e else sendException e)
+  BorrowedWork.catch (fun () -> cmd conn buf dispatch)
+    (fun e -> if !started then Lwt.fail e else sendException e)
   (* With the current RPC protocol it is not possible to recover from situations
      where an RPC packet is not completely transmitted (due to an interrupted
      write syscall). The other side will hang forever, waiting for the complete
@@ -1424,17 +1420,19 @@ let registerSpecialServerCmd
   let ((marshalResult,unmarshalResult) : 'b marshalingFunctions) =
     makeMarshalingFunctions marshalingFunctionsResult (cmdName ^ "-res") in
   (* Create a server function and remember it *)
-  let server conn buf =
+  let server conn buf dispatch =
+    (* Decode once: the scope and actual handler share this same value. The
+       dispatch continuation includes marshaling and queued output consumption,
+       so a scope can retain ownership through the entire reply lifetime. *)
     let args = unmarshalArgs conn buf in
-    BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
-    Lwt.return (marshalResult conn answer))
+    let run () =
+      BorrowedWork.bind (fun () -> serverSide conn args) (fun answer ->
+        Lwt.return (marshalResult conn answer)) in
+    match withScope with
+    | None -> dispatch run
+    | Some scope -> scope conn args (fun () -> dispatch run)
   in
   serverCmds := Util.StringMap.add cmdName server !serverCmds;
-  (match withScope with
-   | None -> ()
-   | Some scope ->
-       serverScopes := Util.StringMap.add cmdName
-         (fun conn buf f -> scope conn (unmarshalArgs conn buf) f) !serverScopes);
   (* Create a client function and return it *)
   let client conn serverArgs =
     match conn.outputQueue.failure with

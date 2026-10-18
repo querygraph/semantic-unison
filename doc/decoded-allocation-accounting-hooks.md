@@ -34,7 +34,13 @@ fixture ordering failure is preserved rather than rewritten as success.
 ordinary marshaling remains separate. Raw packet tickets bound raw buffers,
 not decoded objects. The new callback is not yet installed into RPC dispatch.
 
-A correct integration needs an explicit decoded-value owner:
+Scoped server registrations now decode arguments once and pass the same value
+to scope admission and the handler. The internal server continuation includes
+queued reply consumption; the existing once-only dispatch guard and distinction
+between pre-dispatch scope refusal and post-dispatch failure remain. This
+removes duplicate argument expansion; it does not itself charge decoded values.
+
+A correct integration still needs an explicit decoded-value owner:
 
 1. Reserve a finite owner slot before decoding, and charge its aggregate budget
    through the callback, retaining all partial charges on failure.
@@ -52,3 +58,26 @@ A correct integration needs an explicit decoded-value owner:
 No endpoint-wide decoded liveness bound is claimed until those ownership
 transfers are implemented and qualified. The full SOL resource requirement
 remains open; this checkpoint supplies its preallocation admission mechanism.
+
+## Concrete next ownership boundary
+
+For bounded server arguments, registration can supply a decoder continuation
+that takes the existing raw body and invokes `use args` once. Its owner must
+span both `withScope` and dispatch; dispatch includes the reply's actual output
+queue settlement. The new single-decode server continuation provides this
+boundary without a dynamic global "current decoder" variable, which would be
+unsafe under nested or interleaved RPC work.
+
+The aggregate owner needs independent finite slots, selected bytes and element
+counts, with nonwaiting overflow-safe reservation before decoding. It must keep
+partial debits after an ordinary decode failure until that invocation settles;
+recognized borrower uncertainty must retain the owner alongside the existing
+raw-body owner. Slot and accounting metadata are separate baseline costs. A
+result can share argument storage through marshaling, so the reservation cannot
+end at handler return. No production arbitrary-result caller release mechanism
+has been implemented by this checkpoint.
+
+A server request scope alone does not solve client result lifetime, conversions
+that retain global state, legacy streaming registrations, outbound allocation,
+or complete process memory. Those remain explicit completion items rather than
+being silently covered by a request-scope counter.

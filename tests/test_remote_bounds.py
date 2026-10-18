@@ -177,6 +177,21 @@ def main():
                 record[label]=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(private/'remoteForTest.ml'),binary_sha256=sha(private/label),scope='Single ownership mutation; original tiny pipe inputs; expected assertion failure')
             record['controlled_remote_sha256']=sha(work/'remoteForTest.ml')
             record['controlled_probe_sha256']=sha(work/'remoteTest.ml')
+            # Reintroduce only the second handler decode. Mutable decoded
+            # cell identity and conversion count must reject this participant.
+            twice=work/'double-decode-negative';twice.mkdir(mode=0o700)
+            anchor='    let run () =\n      BorrowedWork.bind (fun () -> serverSide conn args)'
+            assert source.count(anchor)==1
+            bad=source.replace(anchor,'    let run () =\n      let args = unmarshalArgs conn buf in\n      BorrowedWork.bind (fun () -> serverSide conn args)',1)
+            (twice/'remoteForTest.ml').write_text(controlled(bad))
+            (twice/'remoteTest.ml').write_bytes((work/'remoteTest.ml').read_bytes())
+            tf=['-I',str(twice),*flags]
+            for argv in [[compiler,*tf,'-c','remoteForTest.ml'],[compiler,*tf,'unix.cmxa','str.cmxa',*[str(build/o) for o in modules],'remoteForTest.cmx','remoteTest.ml',*[str(build/o) for o in objects('COBJS')],'-o','double-negative']]:
+                c=subprocess.run(argv,cwd=twice,capture_output=True,text=True,timeout=30)
+                record['commands'].append(dict(argv=argv,exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==0,c.stderr
+            c=subprocess.run([str(twice/'double-negative')],cwd=twice,env=dict(os.environ,UNISON=str(twice/'state')),capture_output=True,text=True,timeout=15)
+            assert c.returncode==2 and 'DESIGNATED scope and handler received distinct decoded values' in c.stderr,c.stdout+c.stderr
+            record['double_decode_negative']=dict(exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr,source_sha256=sha(twice/'remoteForTest.ml'),binary_sha256=sha(twice/'double-negative'))
             record['status']='passed'
         finally:
             if args.report:

@@ -133,8 +133,8 @@ val registerBoundedServerCmd :
     Selected builtin decode allocations are limited per decode to
     [65536 + 8 * frame_limit] charged bytes and collection counts to
     [1024 + 4 * frame_limit]; overflow refuses registration. These charges are
-    not decoded heap/RSS or aggregate request bounds. Scope arguments may be
-    decoded twice, each with its own bound. Valid wire encodings are unchanged.
+    not decoded heap/RSS or aggregate request bounds. Scope and handler share
+    one decoded argument value. Valid wire encodings are unchanged.
     Shared RPC headers use independent endpoint-local frame/byte/slot limits.
     All body registrations also use separate aggregate request/reply raw-input
     lanes. These follow actual processing/queued output or result decoding and
