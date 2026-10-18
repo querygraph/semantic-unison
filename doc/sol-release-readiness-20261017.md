@@ -191,3 +191,14 @@ or SDE wire changes. Stock/Ox production-object controls and full builds/selftes
 qualify collection; stages overlap and do not represent CPU time. Atomic commit,
 complete application coverage and an actual end-to-end measurement matrix remain
 open. Existing primary-read logs and disabled defaults are preserved.
+
+## Bound namespace publication observations
+
+[Native timing](bound-publication-timing-v1.md) adds an opt-in interval for the
+existing bound checks/rename/readback boundary, with the result allocated before
+publication. Ordinary calls remain clock-free. Current stock/Ox Make/Dune builds
+and selftests, 177 native cases per compiler/mode and exact-source logging
+controls passed; see [the actual qualification](../tests/qualification/bound-publication-timing-actual-20261018.json).
+This is namespace publication only: later archive success, total commit latency,
+legacy paths and an actual repeated synchronization timing matrix remain open.
+All test owners and standing Unison8 credits are closed; no Photo resources used.

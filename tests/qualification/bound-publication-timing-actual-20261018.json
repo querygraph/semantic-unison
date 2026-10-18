@@ -1,0 +1,764 @@
+{
+  "schema": "unison-bound-publication-timing-qualification-v1",
+  "state": "NATIVE_AND_REPORTER_AND_CURRENT_BUILDS_PASS_CLOSED",
+  "created_utc": "2026-10-18T07:05:03.903659+00:00",
+  "owning_terminals": [
+    {
+      "session": 95819,
+      "chunk": "b44fa3",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Four final native lifecycle participants"
+    },
+    {
+      "session": 2576,
+      "chunk": "6f2238",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Two exact-source reporter/negative-control pairs"
+    },
+    {
+      "session": 42143,
+      "chunk": "082894",
+      "exit_code": 0,
+      "no_session": true,
+      "scope": "Four final Make/Dune builds+selftests"
+    }
+  ],
+  "sources": [
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/files.ml",
+      "bytes": 82038,
+      "sha256": "48fd30478177fabc88823977fb85abaf283fcf974de430c8d63a4eb91ce3a277"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/finalPublication.ml",
+      "bytes": 4148,
+      "sha256": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/finalPublication.mli",
+      "bytes": 11959,
+      "sha256": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/src/finalPublication_stubs.c",
+      "bytes": 53788,
+      "sha256": "e485dc106b81f715a0f3d1928a2c0a7ffbe5d843cfbba89fae14b9b704eb7882"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/final_publication/fixture.c",
+      "bytes": 14316,
+      "sha256": "047bd13d50a061ab925fd257400337a49d73c334f6afbfc07e545bffe812cd3f"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/final_publication/test.ml",
+      "bytes": 33705,
+      "sha256": "bdfe0ad9c738ea2057d9065c1a4553bf290d7f715c24a1717f5a8fb1c6c4160c"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/final_publication/producerTest.ml",
+      "bytes": 34023,
+      "sha256": "4c2181b148f7e73f5c33fffba98a6d9f57d28d8e8af71330798483dbc9b2d560"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/final_publication/run.py",
+      "bytes": 7028,
+      "sha256": "15c9316e928dae54d6ee7ae324bb2aaae24b7166ad9d8c17db1ef37f13f56c53"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/tests/final_publication/reporting_test.py",
+      "bytes": 3662,
+      "sha256": "bd628883d15a1fc0072fe8bcfe2df33f55804eeea6a45442ad85f2808abe1d7e"
+    },
+    {
+      "path": "/Users/alexy/src/unison-sol-review-20261017/doc/bound-publication-timing-v1.md",
+      "bytes": 3771,
+      "sha256": "d6ab7d79b31d52df4ce17926146c0cc1ee9b6c11587caf7a5890038645a5e807"
+    }
+  ],
+  "participants": [
+    {
+      "kind": "native-lifecycle",
+      "compiler": "stock",
+      "mode": "default",
+      "passed_cases": 177,
+      "closure": {
+        "child": {
+          "pid": 32045,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 32045,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "source_pins": {
+        "src/finalPublication.mli": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581",
+        "src/finalPublication.ml": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202",
+        "src/finalPublication_stubs.c": "e485dc106b81f715a0f3d1928a2c0a7ffbe5d843cfbba89fae14b9b704eb7882",
+        "tests/final_publication/fixture.c": "047bd13d50a061ab925fd257400337a49d73c334f6afbfc07e545bffe812cd3f",
+        "tests/final_publication/test.ml": "bdfe0ad9c738ea2057d9065c1a4553bf290d7f715c24a1717f5a8fb1c6c4160c",
+        "tests/final_publication/producerTest.ml": "4c2181b148f7e73f5c33fffba98a6d9f57d28d8e8af71330798483dbc9b2d560"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-default-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 19110,
+          "sha256": "717da680030045f6f9c4929c84d4fbd565d994479c86421c91b7b8ea6f44885a"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-default-20261017-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-default-20261017-002/SHARED-START.json",
+          "bytes": 1186,
+          "sha256": "be00e8e5c2a88aac82b54688f17e5e146b07ca9f413086b37882b131ed0a06da"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-default-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "1461bdef3bdf2e2ad370ac4240749d34eb6b6b14cacc8689f87a31678f3ab064"
+        }
+      ]
+    },
+    {
+      "kind": "native-lifecycle",
+      "compiler": "stock",
+      "mode": "timed",
+      "passed_cases": 177,
+      "closure": {
+        "child": {
+          "pid": 32078,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 32078,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "source_pins": {
+        "src/finalPublication.mli": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581",
+        "src/finalPublication.ml": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202",
+        "src/finalPublication_stubs.c": "e485dc106b81f715a0f3d1928a2c0a7ffbe5d843cfbba89fae14b9b704eb7882",
+        "tests/final_publication/fixture.c": "047bd13d50a061ab925fd257400337a49d73c334f6afbfc07e545bffe812cd3f",
+        "tests/final_publication/test.ml": "bdfe0ad9c738ea2057d9065c1a4553bf290d7f715c24a1717f5a8fb1c6c4160c",
+        "tests/final_publication/producerTest.ml": "4c2181b148f7e73f5c33fffba98a6d9f57d28d8e8af71330798483dbc9b2d560"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-timed-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 19110,
+          "sha256": "75ad82dbaddf5c6f7fc25dc46e6a94478b4c97779ac6c232128477dc1c0999df"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-timed-20261017-002/SHARED-STDERR.txt",
+          "bytes": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-timed-20261017-002/SHARED-START.json",
+          "bytes": 1201,
+          "sha256": "592489069c7831cb356d067e5429e6d8b03e54c1dcafbd2349dbc2717d4493fa"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-stock-timed-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "eb3fd568953258804d5dd2785f644cc74f6b523901fc2cb0c6bb1a6f9b91ea79"
+        }
+      ]
+    },
+    {
+      "kind": "exact-source-reporter",
+      "compiler": "stock",
+      "passed_cases": 28,
+      "negative_control_rejected": true,
+      "closure": {
+        "child": {
+          "pid": 37725,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37725,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-reporting-stock-20261017-001/RESULT.json",
+          "bytes": 1171,
+          "sha256": "93fcf10bb7671c1df5fe7df1325784ccdb9fe9cbaa8fce84f1ace1c9bd11518b"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-stock-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 82,
+          "sha256": "6f1bf5963ae9c1c3a58613edd371b751db2724c6af3d435569bd9b725ec4605b"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-stock-20261017-001/SHARED-START.json",
+          "bytes": 1284,
+          "sha256": "66ebdd6dcd258b616989bbc764b55f9c59bed4d70496b5b0008ea343982a0af2"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-stock-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "e78d223a5ec6f6a4e9f75a3e89bd28088edcb638b5765c8c818369fe189dbdbb"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "stock",
+      "production_source_pairs_current": 318,
+      "binary_sha256": "0ceb9f58c4b781e59225e2d612383a7d39eb6f6ece753b84dcfac6f97ef5af40",
+      "closure": {
+        "child": {
+          "pid": 38044,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 38044,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-make-stock-20261017-002/RESULT.json",
+          "bytes": 52708,
+          "sha256": "a4ac44e8694ca2cbf5d6b27083c3f7f753e4d6e8a6e7a633970b202dca229387"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-make-stock-20261017-002/SHARED-START.json",
+          "bytes": 1358,
+          "sha256": "a89c70f5d1a3008dd0e97ab899f6857213372392bdd1b31894cdf4a84a164f67"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-make-stock-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5b2acf9878cc8ff06b2280b6b0f0e520ddefe83759987e2c719176307ff8b5b3"
+        }
+      ]
+    },
+    {
+      "kind": "full-dune-selftests",
+      "compiler": "stock",
+      "production_source_pairs_current": 318,
+      "binary_sha256": "e41999d7b73f7a965eca3c266569b467333cb15e4cb96fd6421fa3439bf2e68e",
+      "closure": {
+        "child": {
+          "pid": 40399,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 40399,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-stock-20261017-002/RESULT.json",
+          "bytes": 52535,
+          "sha256": "7c017df6bf96a428e813c2f91211f2405452fff7c118c1fcabf038624e00a7dd"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-stock-20261017-002/SHARED-START.json",
+          "bytes": 1363,
+          "sha256": "6ccc64f7a1b15bda980a65c1dcc74d33890d47d887ded82a5f073b4683faa89f"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-stock-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "771631fe5d3a1199aa5f150cf9274fa7d008e659a9e57db4fccc25cc7f74f219"
+        }
+      ]
+    },
+    {
+      "kind": "native-lifecycle",
+      "compiler": "ox",
+      "mode": "default",
+      "passed_cases": 177,
+      "closure": {
+        "child": {
+          "pid": 32113,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 32113,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "source_pins": {
+        "src/finalPublication.mli": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581",
+        "src/finalPublication.ml": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202",
+        "src/finalPublication_stubs.c": "e485dc106b81f715a0f3d1928a2c0a7ffbe5d843cfbba89fae14b9b704eb7882",
+        "tests/final_publication/fixture.c": "047bd13d50a061ab925fd257400337a49d73c334f6afbfc07e545bffe812cd3f",
+        "tests/final_publication/test.ml": "bdfe0ad9c738ea2057d9065c1a4553bf290d7f715c24a1717f5a8fb1c6c4160c",
+        "tests/final_publication/producerTest.ml": "4c2181b148f7e73f5c33fffba98a6d9f57d28d8e8af71330798483dbc9b2d560"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-default-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 19113,
+          "sha256": "8ef879622267dce0236470f66cfeda4f72e39261201f434c6d6f11515ee8a6d2"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-default-20261017-002/SHARED-STDERR.txt",
+          "bytes": 1097,
+          "sha256": "36805da9202d879bcd63830694227648397e0f0ad3272c388c86fc7892ddb0ab"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-default-20261017-002/SHARED-START.json",
+          "bytes": 1187,
+          "sha256": "2a4d4ed9bf9073046eb21f42c5f4db84e297f13c653bc4cf8b54068d2d85ad64"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-default-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "6059a6d30249cfd39e508c6cb39fe3d79f5cb5f73a30363a66ab165cef8ba7d1"
+        }
+      ]
+    },
+    {
+      "kind": "native-lifecycle",
+      "compiler": "ox",
+      "mode": "timed",
+      "passed_cases": 177,
+      "closure": {
+        "child": {
+          "pid": 32148,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 32148,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "source_pins": {
+        "src/finalPublication.mli": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581",
+        "src/finalPublication.ml": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202",
+        "src/finalPublication_stubs.c": "e485dc106b81f715a0f3d1928a2c0a7ffbe5d843cfbba89fae14b9b704eb7882",
+        "tests/final_publication/fixture.c": "047bd13d50a061ab925fd257400337a49d73c334f6afbfc07e545bffe812cd3f",
+        "tests/final_publication/test.ml": "bdfe0ad9c738ea2057d9065c1a4553bf290d7f715c24a1717f5a8fb1c6c4160c",
+        "tests/final_publication/producerTest.ml": "4c2181b148f7e73f5c33fffba98a6d9f57d28d8e8af71330798483dbc9b2d560"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-timed-20261017-002/SHARED-STDOUT.txt",
+          "bytes": 19113,
+          "sha256": "be3166154f1f3b5ea9ab6b477d83ca868a3e93b7930b69d3c9980a65f8556d50"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-timed-20261017-002/SHARED-STDERR.txt",
+          "bytes": 1097,
+          "sha256": "36805da9202d879bcd63830694227648397e0f0ad3272c388c86fc7892ddb0ab"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-timed-20261017-002/SHARED-START.json",
+          "bytes": 1201,
+          "sha256": "02a1ea2a11d27fc4450377086359808198416e5ee7ebd160247314c45378118e"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-ox-timed-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "87f16603eda78e1e6a5a4c5ecd449a8d108072498f4839b34a9e1bd418d04299"
+        }
+      ]
+    },
+    {
+      "kind": "exact-source-reporter",
+      "compiler": "ox",
+      "passed_cases": 28,
+      "negative_control_rejected": true,
+      "closure": {
+        "child": {
+          "pid": 37775,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 37775,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-reporting-ox-20261017-001/RESULT.json",
+          "bytes": 1171,
+          "sha256": "fbab64ceb80839ec415b6f2b4dbfbf1e713cb06ad96da8d58710230b3d290b59"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-ox-20261017-001/SHARED-STDOUT.txt",
+          "bytes": 82,
+          "sha256": "6f1bf5963ae9c1c3a58613edd371b751db2724c6af3d435569bd9b725ec4605b"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-ox-20261017-001/SHARED-START.json",
+          "bytes": 1282,
+          "sha256": "ca6aa95df108998f0e97f1fb3f1009d905cdefe428d5aa6ed0d8af3a32441d7c"
+        },
+        {
+          "path": "/private/tmp/unison-publication-reporting-ox-20261017-001/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "3921189b72be625c82b57cd6f38d66f092af59812dc96c283501024705901f1c"
+        }
+      ]
+    },
+    {
+      "kind": "full-make-selftests",
+      "compiler": "ox",
+      "production_source_pairs_current": 318,
+      "binary_sha256": "9cf04a354a901628ee9bef206d85d35ed5c4ad83b66e68299db4fd26536988a9",
+      "closure": {
+        "child": {
+          "pid": 39159,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 39159,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-make-ox-20261017-002/RESULT.json",
+          "bytes": 52714,
+          "sha256": "f6d2524a3ddf88d73df04509c3024c382d17833f275ac31c0f44dcb850a5cb86"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-make-ox-20261017-002/SHARED-START.json",
+          "bytes": 1353,
+          "sha256": "3f7efd735aef7ab1ce7cb1292ffc95717b246683c8b72ee5defd144522d659aa"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-make-ox-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "5c4e621cde5b1ac6d7ae3241fac5528e209bfc8f8dfb8e61011c1753aa15f280"
+        }
+      ]
+    },
+    {
+      "kind": "full-dune-selftests",
+      "compiler": "ox",
+      "production_source_pairs_current": 318,
+      "binary_sha256": "1755da903690c692c03d1ca077473b66fa42f62c667ba413b9f69ba88c16c1d0",
+      "closure": {
+        "child": {
+          "pid": 41503,
+          "returncode": 0,
+          "reaped": true,
+          "other_group_members_absent_before_reap": true,
+          "members_before_reap": [
+            {
+              "pid": 41503,
+              "state": "Z"
+            }
+          ],
+          "timed_out": false,
+          "scope": "owned group only; separate sessions require independently audited proofs"
+        },
+        "tokens_closed": true,
+        "io_barrier_acquired_and_closed": false,
+        "source_pins_unchanged": true,
+        "inspector_input_postcheck": null,
+        "parent_terminal": "collect separately from owning tool"
+      },
+      "artifacts": [
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-ox-20261017-002/RESULT.json",
+          "bytes": 52539,
+          "sha256": "0f3bc13b8f2bd1b88a99854bbe00b704818f9ea7b6e1f31030a600d55adc7c0b"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-ox-20261017-002/SHARED-START.json",
+          "bytes": 1357,
+          "sha256": "43cee7f63d2e952da84df581d9ff9bdcb69a21e1d01643af2a9ee5b4ea5a4c7f"
+        },
+        {
+          "path": "/private/tmp/unison-publication-timing-dune-ox-20261017-002/SHARED-CLOSED.json",
+          "bytes": 537,
+          "sha256": "a277b0679e4c599b989d4c6b436278c933a8a3e03074f6248d9c0c25ce54df8e"
+        }
+      ]
+    }
+  ],
+  "historical_pre_review_builds": {
+    "owner_terminal": {
+      "session": 59565,
+      "chunk": "f8812a",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "participants": [
+      {
+        "kind": "HISTORICAL_PRE_REVIEW_REPORTER_GUARD_NOT_CURRENT_FILES_SOURCE",
+        "compiler": "stock",
+        "build_system": "make",
+        "closure": {
+          "child": {
+            "pid": 32553,
+            "returncode": 0,
+            "reaped": true,
+            "other_group_members_absent_before_reap": true,
+            "members_before_reap": [
+              {
+                "pid": 32553,
+                "state": "Z"
+              }
+            ],
+            "timed_out": false,
+            "scope": "owned group only; separate sessions require independently audited proofs"
+          },
+          "tokens_closed": true,
+          "io_barrier_acquired_and_closed": false,
+          "source_pins_unchanged": true,
+          "inspector_input_postcheck": null,
+          "parent_terminal": "collect separately from owning tool"
+        },
+        "artifacts": [
+          {
+            "path": "/private/tmp/unison-publication-timing-make-stock-20261017-001/RESULT.json",
+            "bytes": 52708,
+            "sha256": "edbe8042f4b4ed800bdc181659b470f1b48b92287279834b686abdd6dfcc0ff4"
+          },
+          {
+            "path": "/private/tmp/unison-publication-timing-make-stock-20261017-001/SHARED-CLOSED.json",
+            "bytes": 537,
+            "sha256": "2144cf4cdf51e6eb16e5e5442d4d16079cc63cce75060c4364ab4cb1d43dad6d"
+          }
+        ]
+      },
+      {
+        "kind": "HISTORICAL_PRE_REVIEW_REPORTER_GUARD_NOT_CURRENT_FILES_SOURCE",
+        "compiler": "stock",
+        "build_system": "dune",
+        "closure": {
+          "child": {
+            "pid": 34947,
+            "returncode": 0,
+            "reaped": true,
+            "other_group_members_absent_before_reap": true,
+            "members_before_reap": [
+              {
+                "pid": 34947,
+                "state": "Z"
+              }
+            ],
+            "timed_out": false,
+            "scope": "owned group only; separate sessions require independently audited proofs"
+          },
+          "tokens_closed": true,
+          "io_barrier_acquired_and_closed": false,
+          "source_pins_unchanged": true,
+          "inspector_input_postcheck": null,
+          "parent_terminal": "collect separately from owning tool"
+        },
+        "artifacts": [
+          {
+            "path": "/private/tmp/unison-publication-timing-dune-stock-20261017-001/RESULT.json",
+            "bytes": 52535,
+            "sha256": "6aa4cce28fc623bc7505e0d0c2e282bcbbeb98de353c00c32a22beecc3e9195e"
+          },
+          {
+            "path": "/private/tmp/unison-publication-timing-dune-stock-20261017-001/SHARED-CLOSED.json",
+            "bytes": 537,
+            "sha256": "f191249b77cb02aca4f4f9cd96266ea7fffdd1dbcf3a21d228ffefe2c2b7b032"
+          }
+        ]
+      },
+      {
+        "kind": "HISTORICAL_PRE_REVIEW_REPORTER_GUARD_NOT_CURRENT_FILES_SOURCE",
+        "compiler": "ox",
+        "build_system": "make",
+        "closure": {
+          "child": {
+            "pid": 33697,
+            "returncode": 0,
+            "reaped": true,
+            "other_group_members_absent_before_reap": true,
+            "members_before_reap": [
+              {
+                "pid": 33697,
+                "state": "Z"
+              }
+            ],
+            "timed_out": false,
+            "scope": "owned group only; separate sessions require independently audited proofs"
+          },
+          "tokens_closed": true,
+          "io_barrier_acquired_and_closed": false,
+          "source_pins_unchanged": true,
+          "inspector_input_postcheck": null,
+          "parent_terminal": "collect separately from owning tool"
+        },
+        "artifacts": [
+          {
+            "path": "/private/tmp/unison-publication-timing-make-ox-20261017-001/RESULT.json",
+            "bytes": 52714,
+            "sha256": "1909653d98a06da61d1bf15e35f265a4109247fc204ccf9ab987304f32c992e0"
+          },
+          {
+            "path": "/private/tmp/unison-publication-timing-make-ox-20261017-001/SHARED-CLOSED.json",
+            "bytes": 537,
+            "sha256": "103447ec9319e3d0b6f54bf45e1bdb901a50fd21e51b19ea350959ed268cea28"
+          }
+        ]
+      },
+      {
+        "kind": "HISTORICAL_PRE_REVIEW_REPORTER_GUARD_NOT_CURRENT_FILES_SOURCE",
+        "compiler": "ox",
+        "build_system": "dune",
+        "closure": {
+          "child": {
+            "pid": 36289,
+            "returncode": 0,
+            "reaped": true,
+            "other_group_members_absent_before_reap": true,
+            "members_before_reap": [
+              {
+                "pid": 36289,
+                "state": "Z"
+              }
+            ],
+            "timed_out": false,
+            "scope": "owned group only; separate sessions require independently audited proofs"
+          },
+          "tokens_closed": true,
+          "io_barrier_acquired_and_closed": false,
+          "source_pins_unchanged": true,
+          "inspector_input_postcheck": null,
+          "parent_terminal": "collect separately from owning tool"
+        },
+        "artifacts": [
+          {
+            "path": "/private/tmp/unison-publication-timing-dune-ox-20261017-001/RESULT.json",
+            "bytes": 52539,
+            "sha256": "29c04129cd2491831d687055a188536c1e41d685aeb52393c373bbaa261cc643"
+          },
+          {
+            "path": "/private/tmp/unison-publication-timing-dune-ox-20261017-001/SHARED-CLOSED.json",
+            "bytes": 537,
+            "sha256": "4c3a9f04e9209f78c1f4d0e8ca0256354e45f138bdc0d3a8743536d171b807ba"
+          }
+        ]
+      }
+    ]
+  },
+  "earlier_fixture_pass": {
+    "owner_terminal": {
+      "session": 69685,
+      "chunk": "879210",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "scope": "Initial001 fixtures closed; producer timed selection and pre-allocation clock assertion strengthened in final002. Original workspaces retained; not substituted for final proof."
+  },
+  "scope": "Original small isolated publication and logging fixtures; standing Unison00..07 only. No EXglobal, Photo/source-camera, SDK, new sync/transport or bulk benchmark invocation.",
+  "limitations": [
+    "Native namespace interval only, not complete transfer/archive commit or durability.",
+    "Logging record does not prove later readback or archive success.",
+    "No end-to-end latency/scaling/physical storage/peak-hard-resource claim.",
+    "Existing native backend remains macOS-only; no new Windows/Linux publication capability.",
+    "No fuzz/sanitizer campaign.",
+    "Directory names retain preparationdate20261017; actual timestamps and owning terminals are retained."
+  ]
+}

@@ -14,6 +14,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--ocamlopt', default='ocamlopt')
     parser.add_argument('--keep-work', action='store_true')
+    parser.add_argument('--timed', action='store_true', help='repeat the native lifecycle suite through publish_timed')
     parser.add_argument('--negative-control', action='store_true',
                         help='remove candidate baseline check in the private copy')
     parser.add_argument('--producer-negative-control', action='store_true',
@@ -83,7 +84,7 @@ def main():
                        cwd=work, env=environment, check=True)
         print('Compiler', subprocess.check_output([compiler, '-version'], text=True,
                                                   env=environment).strip(), flush=True)
-        result = subprocess.run([str(work / 'publication-test'), str(work)],
+        result = subprocess.run([str(work / 'publication-test'), str(work)] + (['--timed'] if args.timed else []),
                                 cwd=work, env=environment, timeout=60,
                                 capture_output=True, text=True)
         print(result.stdout, end='', flush=True)

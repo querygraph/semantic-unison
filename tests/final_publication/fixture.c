@@ -6,6 +6,7 @@
 #include <caml/unixsupport.h>
 #include <caml/version.h>
 #include <errno.h>
+#include <time.h>
 #include <fcntl.h>
 #include <stdlib.h>
 #include <string.h>
@@ -236,6 +237,37 @@ static int fixture_duplicate(int descriptor, int command, int argument)
 #define fcntl fixture_duplicate
 #define unlinkat fixture_unlink
 #define fstatat fixture_lookup
+/* Original deterministic diagnostic faults; production has no test switch. */
+static int timing_clock_fault, timing_clock_calls, timing_allocation_fault;
+static int fixture_clock_gettime(clockid_t clock, struct timespec *now)
+{
+  timing_clock_calls++;
+  if (timing_clock_fault == 1) { errno = ERANGE; return -1; }
+  if (timing_clock_fault == 2) {
+    now->tv_sec = (timing_clock_calls & 1) ? 2 : 1;
+    now->tv_nsec = 0;
+    return 0;
+  }
+  return clock_gettime(clock, now);
+}
+static value fixture_copy_double(double number)
+{
+  if (timing_allocation_fault) caml_raise_out_of_memory();
+  return caml_copy_double(number);
+}
+CAMLprim value final_publication_fixture_timing_fault(value clock, value allocation)
+{
+  timing_clock_fault = Int_val(clock); timing_clock_calls = 0;
+  timing_allocation_fault = Bool_val(allocation);
+  return Val_unit;
+}
+CAMLprim value final_publication_fixture_timing_calls(value unit)
+{
+  (void)unit;
+  return Val_int(timing_clock_calls);
+}
+#define clock_gettime fixture_clock_gettime
+#define caml_copy_double fixture_copy_double
 #define renameat fixture_replace
 #define fgetattrlist fixture_getattrlist
 #define renameatx_np fixture_rename
@@ -248,6 +280,8 @@ static int fixture_duplicate(int descriptor, int command, int argument)
 #undef fcntl
 #undef unlinkat
 #undef fstatat
+#undef clock_gettime
+#undef caml_copy_double
 #undef renameat
 #undef renameatx_np
 #undef fstat

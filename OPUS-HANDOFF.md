@@ -4315,3 +4315,20 @@ Dune follow-up ACTUALLY CLOSED40003/1b07b2/0/no session: stock27580+Ox28683 reap
 
 
 Publication update: implementation2e36e92d COMMITTED/PUSHED (actualpush96731/1f4ccc/0/no session); PR13 description updated69593/ce3adc/0. Photo source-only notice queued01a14dc6-ff82 with exactqualificationec482a56; no ACK/admission gate, no resources held. All earlier pendingcommit/liveDune notes above are historical. Standing8/8unchanged; activegoal nextwork atomiccommit/fullpathmeasurements and hardaggregatebounds, not Photoallowance.
+
+
+## Bound native publication timing in progress
+
+New optional FinalPublication.publish_timed preallocates diagnosticfloatBEFORE rootedcontextlookup/rename, measures nativechecks/mutex/rename/resultstat/unlock and preservesnativepublishedstate/errorphases. Defaultpublish clocks0. Files -debug semantic-timings selectsit; intervalnotarchivecommit/durability/fulltransferproof. Originalnative+retainedproducer177cases percompiler/mode PASS at /private/tmp/unison-publication-timing-{stock,ox}-{default,timed}-20261017-002, actual95819/b44fa3/0; all4childrenclosed/CPU8closed. Initial001weakerproducer-mode/assertionproof preserved879210/0, notsubstitutedfor002.
+
+InitialfullMake/Dune4builds+selftests ACTUAL59565/f8812a/0 closed againstpre-reviewreportingguard; later source review identified catch-all diagnostic masking too much. Finalsrc/files.ml guardnowonlysuppresses Sys_error/Unix_error/OOM; unrelated/control exceptionspropagate. Exact-source28case/compiler+designatedcatchall regression controls running underactualownertool2576/initial148c2e (mustcollectterminal). Finalfullbuild002script preparedNOTyetstarted. NativeC/APIunchanged byguardcorrection; doNOTclaimold001CLI sourcepins matchfinalFiles. NoEXIO/SDK/Photo/camera slots; standingCPU8sourcecontrols only. New doc/bound-publication-timing-v1.md recordsboundaries/exclusions; qualificationpendingfinalcontrols/builds. Goalactive.
+
+
+Publication reporter ACTUALLY CLOSED2576/6f2238/0/no session: stock37725/Ox37775 both28exact-source sink/controlcasesPASS, designatedcatchallprivatevariant correctlyFAILS exit2. Allgroups/CPU8closed. FinalFilesguardno longerusesAbortonlywhitelist; unknown/control exceptions propagate unchanged. Fresh finalsourcefullMake/Dune batch ACTUALSTART42143/initialef66d7, sequential2compilerjobs+selftests; stillmustcollectsamehandleterminal. Cohortdirectoriesretainpreparationdate20261017; finalqualificationwillbe bound-publication-timing-actual-20261018.json withactualUTC/retainedpaths. Initial59565/f8812a/0 isclosedhistoricalpre-reviewguardproof, notfinalcurrentFileproof. NoEXIO/Photoowner/SDKslot.
+
+
+## Bound publication timing final ACTUAL qualification closed
+
+Final002 native177cases/mode/compiler allPASS (106general+71retainedproducer; 708total); clock0default, validinterval, allocationOOMbeforeclock/rename, NaNmissing/backwards, nativeerrorandpostrenameownership/pendingexception protections. Actual95819/b44fa3/0. Exact-source reporter28cases/compiler +designatedcatchallnegativecontrol PASS actual2576/6f2238/0. Finalfullstock/OxMake+Dune+selftests ACTUAL42143/082894/0/no session; all4current318srcpairs match, allchildrenreaped0/groupsabsent/CPU8closed. Initial59565/f8812a/0 priorguardbuilds preservedHISTORICAL, notcurrentFilesproof. No aliveowners/leases/resources, noEXIO/Photo/SDK/camera/bulk invocation.
+
+Qualification tests/qualification/bound-publication-timing-actual-20261018.json 29452B SHA57e25f975f604c33879ca8965a2abd58fe9701dee6a88f47201558404b3179f4. Source docs doc/bound-publication-timing-v1.md. Finalpublish_timed usespreallocatedfloat (BEFORE contextlookup/rename), preservesoriginalnativeerrorandpublishedstate. Defaultunmeasuredpublish remainsclockfree. -debugsemantic-timings Files branch suppressesONLYknownSink/OOM errors, generic/control exceptionspropagate unchanged; eventisnamespacepublicationNOT archive/fulltransfer/durabilitysuccess. Legacy/unboundpathsuntimed. Currentgoal stillACTIVE: wholepathrepeatedstage/commitmatrix,totalread/physicalIO andhardaggregatebounds remainopen. Code/evidence readycommitnext; no Photo allowance blocker, no admissionreplay.

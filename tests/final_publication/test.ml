@@ -1,6 +1,13 @@
-module P = FinalPublication
+module P = struct
+  include FinalPublication
+  let publish context =
+    if Array.exists ((=) "--timed") Sys.argv then ignore(FinalPublication.publish_timed context)
+    else FinalPublication.publish context
+end
 [@@@alert "-unsafe_multidomain"]
 let with_async_exns f = f ()
+external timing_fault : int -> bool -> unit = "final_publication_fixture_timing_fault"
+external timing_calls : unit -> int = "final_publication_fixture_timing_calls"
 external fd_state : int -> int = "final_publication_fixture_fd_state"
 external fd_number : Unix.file_descr -> int = "final_publication_fixture_fd_number"
 external attribute_fault : int -> int -> unit = "final_publication_fixture_attribute_fault"
@@ -102,6 +109,41 @@ let mutate path =
 let () =
   if not (P.available ()) then exit 77;
   let directory = Sys.argv.(1) in
+  test directory "ordinary publication has no diagnostic clock calls" (fun c ->
+    let h=observed c in timing_fault 0 false;
+    FinalPublication.publish h;
+    check(timing_calls()=0) "ordinary publication read clock";
+    P.check_published h; P.release h);
+  test directory "timed publication returns interval after tracked namespace change" (fun c ->
+    let h=observed c in timing_fault 0 false;
+    let seconds=P.publish_timed h in
+    check(Float.is_finite seconds && seconds>=0. && timing_calls()=2) "invalid native interval";
+    check(P.published h && read_file c.target=payload && not(exists c.candidate)) "timed rename differs";
+    P.check_published h;P.release h);
+  test directory "timing allocation failure occurs before publication or clock reads" (fun c ->
+    write_file c.target sentinel;let h=observed c in timing_fault 0 true;
+    let failed=try ignore(P.publish_timed h);false with Out_of_memory -> true in
+    let calls=timing_calls() in timing_fault 0 false;
+    check(failed && calls=0 && not(P.published h) && exists c.candidate && read_file c.target=sentinel)
+      "timing allocation changed publication";
+    P.abort_and_close h);
+  List.iter(fun fault -> test directory ("clock refusal/backwards preserves publication "^string_of_int fault)
+    (fun c -> let h=observed c in timing_fault fault false;
+      let seconds=P.publish_timed h in
+      check(Float.is_nan seconds && timing_calls()=2) "invalid clock fabricated duration";
+      timing_fault 0 false;P.check_published h;P.abort_and_close h;
+      check(read_file c.target=payload) "clock fault deleted published output")) [1;2];
+  test directory "clock fault preserves native rename error and old target" (fun c ->
+    write_file c.target sentinel;let h=observed c in timing_fault 1 false;rename_fault 1;
+    expect_unix Unix.EIO (fun () -> ignore(P.publish_timed h));
+    timing_fault 0 false;rename_fault 0;
+    check(not(P.published h) && read_file c.target=sentinel) "clock changed failed rename";
+    P.abort_and_close h);
+  test directory "timed postrename error still retains published ownership" (fun c ->
+    let h=observed c in rename_fault 4;
+    expect_unix Unix.EIO(fun () -> ignore(P.publish_timed h));rename_fault 0;
+    check(P.published h) "timed error lost published state";
+    P.abort_and_close h;check(read_file c.target=payload) "timed cleanup removed live file");
   test directory "absent exclusive publication and readback" (fun c ->
     let h = observed c in recheck c h; P.check h; P.publish h;
     check (P.published h) "native publication not tracked";
