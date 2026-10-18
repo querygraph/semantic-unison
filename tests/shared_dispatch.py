@@ -33,7 +33,7 @@ MODEL_TARGET = 'private-maker-model'
 RECEIVING_TARGETS = ('camera-receive','camera-sdk-receive','synthetic-concurrent-receive')
 TARGETS = {CACHED_TARGET,SLICE_TARGET,MODEL_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
            'aggregate-preflight', 'host-interface', 'shared-entrypoints', 'shared-sync-controls',
-           'sync-functional', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
+           'sync-functional', 'sync-timed', 'inspect-stock', 'inspect-ox', 'inspect-file', 'inspector-reuse-controls',
            'sde-conformance', 'shared-io-controls', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-dng-local-clone'}
 
 
@@ -46,7 +46,7 @@ def write(path, value):
 def checked_io_request(request, target, argv, output, credits):
     """Read admission metadata only; this does not acquire IO/CPU locks."""
     from shared_io_pool import GlobalPool, read_manifest, CANONICAL_MANIFEST, CANONICAL_SHA256
-    require(target in (CACHED_TARGET,SLICE_TARGET,MODEL_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional'),
+    require(target in (CACHED_TARGET,SLICE_TARGET,MODEL_TARGET, MIXED_TARGET, SDK_MATRIX_TARGET, SDK_MULTI_TARGET, SDK_COMPARE_TARGET, SDK_SCAN_TARGET, 'synthetic-concurrent-receive', 'camera-sdk-receive', 'camera-receive', 'inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'sync-functional', 'sync-timed'),
             'IO mode requires a complete job with qualified external-owner audit')
     require(isinstance(request, dict) and set(request) == {'path', 'sha256'},
             'explicit pinned IO admission required')
@@ -141,9 +141,12 @@ def checked_io_request(request, target, argv, output, credits):
             source_paths.update((ROOT/'tests/camera_sdk_receiving').glob('*.py'))
             source_paths.add(ROOT/'tests/validation_process/records.py')
         source_paths.update((ROOT/'bench/sync').glob('*.py'))
-    if target == 'sync-functional':
+    if target in ('sync-functional', 'sync-timed'):
+        if target == 'sync-timed':
+            from timed_shared import check_argv
+            check_argv(argv, interpreter=sys.executable, script=str(ROOT/'bench/sync/run.py'), output=output/'RESULT.json')
         from artifact_pins import parse as artifact_pin_set
-        require(credits == 8 and '--shared-qualification' in argv and '--reference' not in argv,
+        require(credits == 8 and (target == 'sync-timed' or '--shared-qualification' in argv) and '--reference' not in argv,
                 'IO sync requires the finite shared8 qualification matrix')
         for option in ('--expected-binary-sha256', '--expected-compiler-sha256'):
             positions = [i for i, word in enumerate(argv) if word == option]
@@ -177,6 +180,8 @@ def run(target, argv, output, credits, *, io_admission=None):
             'camera receiving requires exact shared8 IO admission')
     require(not any(flag in argv for flag in ('--property-removal-controls','--layout-only-controls')) or io_admission is not None,
             'property-removal matrix has no CPU-only runtime route')
+    require(target != 'sync-timed' or (io_admission is not None and credits == 8),
+            'timed matrix has no CPU-only runtime route')
     require_ownership_support()
     authorized = authorized_unison_tokens(POLICY.read_bytes())
     indexes = authorized[:credits]
@@ -230,7 +235,7 @@ def run(target, argv, output, credits, *, io_admission=None):
         if target in ('inspect-stock', 'inspect-ox', 'inspect-file',
                       'inspector-reuse-controls', 'shared-entrypoints'):
             sources.append(ROOT / 'tools/semantic-inspect/run.py')
-        if target in ('sync-functional', 'shared-sync-controls'):
+        if target in ('sync-functional', 'sync-timed', 'shared-sync-controls'):
             sources.extend((ROOT / 'bench/sync').glob('*.py'))
         if target == CACHED_TARGET:
             from cached_benchmark.contract import sources as cached_sources
@@ -307,8 +312,8 @@ def run(target, argv, output, credits, *, io_admission=None):
                   'inherited_resource_fds': [dict(fd=fd,device=os.fstat(fd).st_dev,inode=os.fstat(fd).st_ino)
                       for fd in lease.fds+(io_lease.fds if io_lease else ())] if target in (CACHED_TARGET,*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else [],
                   'sources': pins})
-            seconds = 300 if target in (CACHED_TARGET,'sync-functional') or target.startswith('inspect-') else 600 if target.endswith(('-build', '-check')) else 60
-            if target in (CACHED_TARGET,'sync-functional',*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
+            seconds = 600 if target == 'sync-timed' else 300 if target in (CACHED_TARGET,'sync-functional') or target.startswith('inspect-') else 600 if target.endswith(('-build', '-check')) else 60
+            if target in (CACHED_TARGET,'sync-functional', 'sync-timed',*RECEIVING_TARGETS,SLICE_TARGET,MODEL_TARGET,MIXED_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
                 # Separate server sessions retain their own coordinator. Do
                 # not kill it on an outer deadline and discard live handles.
                 if not child.await_terminal((60 if target==SLICE_TARGET else 300 if target==MIXED_TARGET else 600 if target in (*RECEIVING_TARGETS,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET) else seconds) - 2):
@@ -420,6 +425,11 @@ def run(target, argv, output, credits, *, io_admission=None):
                         expected=plan['source']['identity'];observed=os.lstat(plan['source']['path'])
                         require(all(getattr(observed,k)==v for k,v in expected.items()),
                                 'borrowed input changed before resource release')
+                elif target == 'sync-timed':
+                    from timed_shared import audit, audit_attempted
+                    require(result['complete'] or (type(result.get('failure')) is str and result['failure']),
+                            'failed timed result must preserve failure')
+                    external = audit(result) if result['complete'] else audit_attempted(result)
                 elif result['complete']:
                     from shared_audit import audit_shared
                     external = audit_shared(result)
@@ -435,7 +445,7 @@ def run(target, argv, output, credits, *, io_admission=None):
                     from mixed_validation.parent import bind_exit
                     exit_proof=bind_exit(external,closure['returncode'])
                     write(output / 'SHARED-WORKER-EXIT-AUDIT.json',exit_proof)
-                if target in (CACHED_TARGET,SLICE_TARGET,MODEL_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
+                if target in ('sync-timed',CACHED_TARGET,SLICE_TARGET,MODEL_TARGET,SDK_MATRIX_TARGET,SDK_MULTI_TARGET,SDK_COMPARE_TARGET,SDK_SCAN_TARGET):
                     require(not result['complete'] or closure['returncode']==0,'complete SDK matrix contradicts failed worker exit')
                 require(result['complete'] or closure['returncode'] != 0,
                         'failed result contradicts successful coordinator exit')

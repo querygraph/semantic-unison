@@ -25,6 +25,7 @@ Targets:
   read-workers            reader/worker controls; Make BUILD_RECEIPT required
   read-cli                synthetic telemetry sync; BUILD_RECEIPT required
   read-parser             pure telemetry parser controls
+  sync-timed              fixed shared8 repeated matrix; fresh IO admission required
   sync-functional         finite stock/Ox matrix; STOCK_RECEIPT and OX_RECEIPT required
   helper-stock / helper-ox finite synthetic helper suite; STOCK_PREFIX/OX_PREFIX required
   validation-cli          synthetic receiving diagnostics; BUILD_RECEIPT required
@@ -96,7 +97,7 @@ def shared_resource_plan(target, environment):
     framing = target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic')
     inspector = target in ('inspect-stock', 'inspect-ox')
     inspect_file = target in ('inspect-file', 'private-dng-framing-input', 'private-maker-slice')
-    endpoints = [3, 3] if target == 'sync-functional' else [3] if target == 'private-dng-local-clone' else []
+    endpoints = [3, 3] if target in ('sync-functional', 'sync-timed') else [3] if target == 'private-dng-local-clone' else []
     jobs = int(environment.get('JOBS', str(min(2, credits - 2)))) if build else 1 if inspector or framing else 0
     selftest_endpoints = [3, 3] if target in ('stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check') else []
     overhead = 2 if build or inspector or framing or inspect_file or endpoints else 1
@@ -106,7 +107,7 @@ def shared_resource_plan(target, environment):
             'declared shared work exceeds project grant')
     implemented = target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'read-parser', 'group-parser',
                              'aggregate-preflight', 'host-interface', 'shared-entrypoints',
-                             'shared-sync-controls', 'sync-functional', 'inspect-stock', 'inspect-ox',
+                             'shared-sync-controls', 'sync-functional', 'sync-timed', 'inspect-stock', 'inspect-ox',
                              'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-maker-slice', 'private-dng-local-clone')
     return {'project': 'unison', 'cpu_credits': credits,
             'declared_peak_credits': declared_peak,
@@ -130,8 +131,11 @@ def command(target, output, environment):
         require(bool(io_path) and Path(io_path).is_absolute() and bool(io_sha)
                 and len(io_sha) == 64 and all(c in '0123456789abcdef' for c in io_sha)
                 and environment.get('SHARED_CPU_CREDITS') is not None
-                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'private-maker-slice', 'sync-functional'),
+                and target in ('inspect-file', 'private-dng-local-clone', 'private-dng-framing-input', 'private-maker-slice', 'sync-functional', 'sync-timed'),
                 'IO mode requires pinned admission, shared CPU and complete job with qualified closure audit')
+    if target == 'sync-timed':
+        require(environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha),
+                'timed matrix requires exact shared8 IO admission')
     property_controls = environment.get('SYNC_PROPERTY_REMOVAL_CONTROLS')
     require(property_controls is None or (property_controls == '1' and target == 'sync-functional'
             and environment.get('SHARED_CPU_CREDITS') == '8' and bool(io_path) and bool(io_sha)),
@@ -145,7 +149,7 @@ def command(target, output, environment):
     if shared is not None:
         shared = int(shared)
         require(1 <= shared <= 8, 'shared Unison lane must be 1..8 credits')
-        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'sync-functional',
+        require(target in ('stock-build', 'ox-build', 'stock-check', 'ox-check', 'stock-dune-check', 'ox-dune-check', 'sync-functional', 'sync-timed',
                            'read-parser', 'group-parser', 'aggregate-preflight', 'host-interface',
                            'shared-entrypoints', 'shared-sync-controls', 'inspect-stock', 'inspect-ox',
                            'inspect-file', 'inspector-reuse-controls', 'shared-io-controls', 'sde-conformance', 'dng-private-framing', 'dng-private-diagnostic', 'private-dng-framing-input', 'private-maker-slice', 'private-dng-local-clone'),
@@ -154,7 +158,7 @@ def command(target, output, environment):
             require(shared >= 5, 'local clone controls require three worker plus two owner credits')
         if target in ('sde-conformance', 'dng-private-framing', 'dng-private-diagnostic'):
             require(shared >= 3, 'framing controls require one compiler plus two owner credits')
-        if target == 'sync-functional':
+        if target in ('sync-functional', 'sync-timed'):
             require(shared == 8, 'shared functional loopback requires six endpoint plus two owner credits')
         if target in ('inspect-stock', 'inspect-ox'):
             require(shared >= 3, 'inspector build needs one compiler plus two owner credits')
@@ -259,7 +263,7 @@ def command(target, output, environment):
                 '--compiler-prefix', str(prefix), '--jobs', str(jobs),
                 '--build-system', system] + ([] if build_only else ['--selftest']) + (['--selftest-workers', '3'] if shared_check else []) + [
                 '--report', str(output / 'RESULT.json')]
-    if target == 'sync-functional':
+    if target in ('sync-functional', 'sync-timed'):
         argv = [sys.executable, str(ROOT / 'bench/sync/run.py')]
         for label, key in (('stock', 'STOCK_RECEIPT'), ('ox', 'OX_RECEIPT')):
             require(bool(environment.get(key)), key + ' is required')
@@ -268,6 +272,14 @@ def command(target, output, environment):
                          '--compiler', label + '=' + receipt['compiler'],
                          '--expected-binary-sha256', label + '=' + receipt['binary_sha256'],
                          '--expected-compiler-sha256', label + '=' + receipt['compiler_sha256']])
+        if target == 'sync-timed':
+            require(environment.get('MEASURE_SEMANTIC_PHASES', '1') == '1', 'timed phases must be enabled')
+            return argv + ['--modes', 'ordinary,receiver-clone,semantic', '--workers', '1,2,3',
+                '--file-mib', '32', '--files', '2', '--packet-bytes', '8192', '--warmups', '1',
+                '--repetitions', '5', '--timeout', '30', '--loopback-cpu-credits', '8',
+                '--orchestration-cpu-credits', '2', '--measure-primary-reads', '--measure-semantic-phases',
+                '--background-note', 'shared eight-core repeated generated matrix; host activity disclosed',
+                '--output', str(output / 'RESULT.json')]
         phases = environment.get('MEASURE_SEMANTIC_PHASES', '0')
         require(phases in ('0', '1'), 'MEASURE_SEMANTIC_PHASES must be0 or1')
         if phases == '1':

@@ -87,3 +87,46 @@ def audit(result):
                 scope='Fixed shared-eight repeated lifecycle/output matrix; phase qualification '
                       'is separate. Not aggregate owner closure, quiet timing, physical IO, '
                       'hard RSS/FD bounds, or complete commit/durability accounting.')
+
+
+def check_argv(argv, *, interpreter, script, output):
+    """Exact option grammar, checked before locks; no argparse override aliases."""
+    require = batch_audit.require
+    require(type(argv) is list and argv[:2] == [interpreter, script], 'timed runner differs')
+    pairs = {'--binary': [], '--compiler': [], '--expected-binary-sha256': [],
+             '--expected-compiler-sha256': []}
+    fixed = {'--modes': 'ordinary,receiver-clone,semantic', '--workers': '1,2,3',
+             '--file-mib': '32', '--files': '2', '--packet-bytes': '8192',
+             '--warmups': '1', '--repetitions': '5', '--timeout': '30',
+             '--loopback-cpu-credits': '8', '--orchestration-cpu-credits': '2',
+             '--background-note': 'shared eight-core repeated generated matrix; host activity disclosed',
+             '--output': str(output)}
+    flags = {'--measure-primary-reads', '--measure-semantic-phases'}
+    seen = set(); index = 2
+    while index < len(argv):
+        option = argv[index]; index += 1
+        require(type(option) is str, 'typed timed option required')
+        if option in flags:
+            require(option not in seen, 'duplicate timed flag'); seen.add(option); continue
+        require(option in pairs or option in fixed, 'unknown timed option')
+        require(index < len(argv) and type(argv[index]) is str, 'timed option value missing')
+        value = argv[index]; index += 1
+        if option in pairs:
+            pairs[option].append(value)
+        else:
+            require(option not in seen and value == fixed[option], 'timed option differs')
+            seen.add(option)
+    require(seen == set(fixed) | flags, 'explicit timed options missing')
+    for option, values in pairs.items():
+        require(len(values) == 2, 'two timed artifacts required')
+        labels = []
+        for value in values:
+            label, separator, payload = value.partition('=')
+            require(separator and label in ('stock','ox') and payload, 'timed artifact malformed')
+            if 'sha256' in option:
+                require(len(payload)==64 and all(c in '0123456789abcdef' for c in payload),
+                        'timed artifact digest malformed')
+            else:
+                require(payload.startswith('/'), 'absolute timed artifact required')
+            labels.append(label)
+        require(set(labels)=={'stock','ox'}, 'timed artifact labels differ')

@@ -509,3 +509,28 @@ python3 bench/sync/resource_report_test.py
 Collection in an actual synchronization cohort needs a fresh exact source/argv/
 binary admission under the shared IO policy. The parser qualification alone is
 not an end-to-end timing/scaling, physical-IO, resource-closure or hard-limit proof.
+
+### Fixed shared-eight repeated entry point
+
+`tests/manual.py sync-timed` constructs a separate performance command from
+current `STOCK_RECEIPT` and `OX_RECEIPT` build receipts. It requires
+`SHARED_CPU_CREDITS=8`, `SHARED_IO_ADMISSION` and its exact SHA256. The admission
+must pin the exact command and current execution sources; this is not a standing
+payload or IO grant. It uses generated 32MiB files (two per case), ordinary,
+receiver-clone and semantic modes, workers 1/2/3 per endpoint plus two owner
+credits, one warmup and five measured repetitions: 108 rows and 324 journaled
+seed/update/noop calls. No compilation, SDK or camera inputs are included.
+Version/compiler/host metadata queries remain additional processes and must be
+explicitly disclosed in the eventual request.
+
+The fixed option checker rejects alternate options and duplicate overrides.
+The dispatcher observes its worker for 600 seconds (each CLI has a 30-second
+limit); an unclosed coordinator retains ownership instead of being killed by a
+broad outer timeout. Every attempted call must have client, supervisor, server
+and pump proof before known resource release. A complete result must also bind
+all journal outcomes to the exact rows and show a successful worker exit.
+Missing phase observations refuse measurement qualification separately from
+process closure. These are inclusive phase intervals, not total commit time,
+physical IO, aggregate RSS limits, or quiet-machine/scaling proof. This entry
+point has source/control qualification only until a fresh actual run is admitted
+and audited. It covers one dataset in the larger SOL benchmark matrix.

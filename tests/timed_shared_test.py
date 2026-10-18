@@ -4,6 +4,10 @@ import itertools
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+import manual
+import shared_dispatch
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'bench/sync'))
 import phase_stats
 import timed_shared
@@ -43,6 +47,30 @@ def fixture():
 
 
 class Timed(unittest.TestCase):
+    def command(self):
+        environment = dict(SHARED_CPU_CREDITS='8', SHARED_IO_ADMISSION='/fake/admission',
+                           SHARED_IO_ADMISSION_SHA256='a'*64, STOCK_RECEIPT='stock', OX_RECEIPT='ox')
+        receipt = dict(binary='/fake/unison', compiler='/fake/ocamlopt',
+                       binary_sha256='b'*64, compiler_sha256='c'*64)
+        with patch.object(manual, 'checked_build', return_value=receipt):
+            argv = manual.command('sync-timed', Path('/fake/output'), environment)
+        return argv, environment
+
+    def test_exact_entrypoint_and_refusals_before_pool_access(self):
+        argv, env = self.command()
+        timed_shared.check_argv(argv, interpreter=sys.executable,
+            script=str(manual.ROOT/'bench/sync/run.py'), output=Path('/fake/output/RESULT.json'))
+        for extra in (['--workers','18'], ['--files=100'], ['--qualification'], ['--reference','x=/fake']):
+            with self.subTest(extra=extra), self.assertRaises(ValueError):
+                timed_shared.check_argv(argv+extra, interpreter=sys.executable,
+                    script=str(manual.ROOT/'bench/sync/run.py'), output=Path('/fake/output/RESULT.json'))
+        for key in ('SHARED_IO_ADMISSION', 'SHARED_CPU_CREDITS'):
+            broken=dict(env);del broken[key]
+            with self.assertRaises(ValueError):manual.command('sync-timed',Path('/fake/output'),broken)
+        with patch.object(shared_dispatch.Pool, 'read', side_effect=AssertionError('pool touched')):
+            with self.assertRaises(ValueError):shared_dispatch.run('sync-timed',argv,Path('/fake/output'),8)
+        self.assertEqual(manual.shared_resource_plan('sync-timed',env)['declared_peak_credits'],8)
+
     def test_complete_matrix_and_no_input_mutation(self):
         value=fixture(); before=copy.deepcopy(value)
         proof=timed_shared.audit(value)
