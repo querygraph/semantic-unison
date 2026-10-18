@@ -5995,3 +5995,16 @@ tests/qualification/current-dng-reconciliation-actual-20261018.json SHA d14806d5
 NoRPC/receiving/archive-baseauthority/SDK/Photo/EXglobal/physicalsavingsclaim.
 FrozenV6candidate untouched, threeadmissions absentatfreshread; actualcurrent
 transport/property remainsnext. Goalactive/incomplete/noownedlivejobs.
+
+
+## 2026-10-18 current optional publication admission renewed
+
+Actualcontroller1667/c0652d/exit0/no session(initial93e8b0) passed stock/Ox
+fixed require/warn oversized refusals, fitting/off reservations, negative
+declarations and exact oldguard rejection against currentRuntime+matched
+productionobjects. All329productionpins matchcurrent; object/testpins rehashed.
+Bothchildwait0/groupsabsent/CPU4closed. Nohelper/SDK/payload/CLI/Photo/EXglobal.
+Evidence tests/qualification/current-publication-admission-actual-20261018.json
+SHA 3e4d9fd1aace53ba6505c036b1f18ef541f33f1389764e8627b850217191eb7c. This renews narrowed admission behavior only, not actual
+SDK receiving or globalhardRSS. FrozenV6 untouched; actualcompat/property
+requests stillpending. Goalactive/incomplete; noownedlivejobs/resources.

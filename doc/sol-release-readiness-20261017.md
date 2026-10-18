@@ -274,3 +274,12 @@ source preservation and conservative refusal cases pass. The runner now copies
 the required hash header. Actual controller5070/c3ff40/0 and both CPU4/group
 closures passed. This does not establish two-replica receiving, archive base
 authority, SDK validation or physical storage savings.
+
+## Current optional publication admission — 2026-10-18
+
+[Current-object controls](../tests/qualification/current-publication-admission-actual-20261018.json)
+pass oversized require/warn refusal, fitting/off reservations, invalid declarations
+and exact old-guard rejection on both compilers. All 329 production pins match;
+actual controller1667/c0652d/0 and both CPU4/group closures passed. No helper,
+SDK, payload or transport ran. This qualifies admission/error behavior, not
+actual SDK receiving, whole-process memory containment or deployment.
