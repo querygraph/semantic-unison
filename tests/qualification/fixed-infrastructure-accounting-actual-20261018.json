@@ -1,0 +1,825 @@
+{
+  "scope": "Darwin fixed notification-pipe/completion-buffer reservation before Runtime pool construction, preserving workspace preference/usage semantics. Native phase census1/2/4workers; no whole-process/descendant FD/RSS, hidden peaks, physical IO, camera/SDK/Photo/transport or full-goal claim.",
+  "sealed_at": "2026-10-18T12:38:56.389581+00:00",
+  "parents": {
+    "initial_observation": {
+      "session": 23299,
+      "chunk": "22bc6c",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "component": {
+      "session": 25957,
+      "chunk": "fea800",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "make": {
+      "session": 7183,
+      "chunk": "ea50e2",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "runtime": {
+      "session": 97084,
+      "chunk": "31dcd5",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "regressions": {
+      "session": 67753,
+      "chunk": "e1d484",
+      "exit_code": 0,
+      "no_session": true
+    },
+    "dune": {
+      "session": 37539,
+      "chunk": "6bb9f9",
+      "exit_code": 0,
+      "no_session": true
+    }
+  },
+  "source_counts": {
+    "stock-check": 329,
+    "stock-dune-check": 329,
+    "ox-check": 329,
+    "ox-dune-check": 329
+  },
+  "baseline": {
+    "descriptors": 2,
+    "completion_buffer_payload_bytes": 4096,
+    "lifetime": "immutable planning reservation; persists before pool acquisition/after known shutdown",
+    "legacy_workspace_preferences": "unchanged; total declared capacity adds fixed allowance",
+    "excluded": [
+      "transport/logging/UI",
+      "domain/runtime metadata/stacks",
+      "mailbox/heap headers",
+      "transient native probes",
+      "legacy transfer/helper families",
+      "external child allocations/descendants"
+    ]
+  },
+  "coverage": {
+    "component_tests_per_compiler": 32,
+    "runtime_workers_per_compiler": [
+      1,
+      2,
+      4
+    ],
+    "runtime_overflow_refusals_per_compiler": 1,
+    "runtime_omitted_baseline_designated_rejection_per_compiler": 1,
+    "native_lifecycle_positive_groups_per_compiler": 8,
+    "native_lifecycle_positive_assertions_per_compiler": 58,
+    "native_lifecycle_designated_rejections_per_compiler": 4,
+    "retained_borrower_positive_cases_per_compiler": 12,
+    "retained_borrower_historical_designated_rejections_per_compiler": 2
+  },
+  "controllers": {
+    "stock-check": {
+      "child": {
+        "pid": 73100,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 73100,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock-dune-check": {
+      "child": {
+        "pid": 77653,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 77653,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/component": {
+      "child": {
+        "pid": 72300,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 72300,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/runtime": {
+      "child": {
+        "pid": 75671,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 75671,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/lifetime": {
+      "child": {
+        "pid": 76508,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 76508,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/retained": {
+      "child": {
+        "pid": 76730,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 76730,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "stock/initial-observation": {
+      "child": {
+        "pid": 70187,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 70187,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-check": {
+      "child": {
+        "pid": 74225,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 74225,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox-dune-check": {
+      "child": {
+        "pid": 78763,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 78763,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/component": {
+      "child": {
+        "pid": 72382,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 72382,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/runtime": {
+      "child": {
+        "pid": 75710,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 75710,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/lifetime": {
+      "child": {
+        "pid": 76937,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 76937,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/retained": {
+      "child": {
+        "pid": 77147,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 77147,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    },
+    "ox/initial-observation": {
+      "child": {
+        "pid": 70216,
+        "returncode": 0,
+        "reaped": true,
+        "other_group_members_absent_before_reap": true,
+        "members_before_reap": [
+          {
+            "pid": 70216,
+            "state": "Z"
+          }
+        ],
+        "timed_out": false,
+        "scope": "owned group only; separate sessions require independently audited proofs"
+      },
+      "tokens_closed": true,
+      "io_barrier_acquired_and_closed": false,
+      "source_pins_unchanged": true,
+      "inspector_input_postcheck": null,
+      "parent_terminal": "collect separately from owning tool"
+    }
+  },
+  "artifacts": {
+    "stock-check": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-check-20261018-001/RESULT.json",
+        "bytes": 59089,
+        "sha256": "850e9a3ca277a51faa421b6e7a6b23e4617c61c3121714923575bd39329f68b8"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-check-20261018-001/SHARED-START.json",
+        "bytes": 1367,
+        "sha256": "38b667eea1e87f30df29f3e92b58314c505adb2665ce329830b455b28e40686b"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "42be7700b1f2b483a49407a702f8d4a6759f7c833484a6f49a14ef43b54897ff"
+      }
+    ],
+    "stock-dune-check": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-dune-check-20261018-001/RESULT.json",
+        "bytes": 58916,
+        "sha256": "ace2a66853536c19a974f1f53489636fd7cee58d07a1ab02c657199a71897458"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-dune-check-20261018-001/SHARED-START.json",
+        "bytes": 1378,
+        "sha256": "dcc4ede3c1e8b9a305c53372e6ebfe22a0046a89733e8980e83044af186f2f8f"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-stock-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "74a306b4685aee69c786c5efc0c17f4240274ded5a546cf52fd788e4d5183de6"
+      }
+    ],
+    "stock/component": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-stock-20261018-001/SHARED-START.json",
+        "bytes": 1135,
+        "sha256": "ba72314c7657024bdd5c77a281efa0bd06b3954a3dfe049a634992e64dfeea6f"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "13484b8d4e345aada0cb9fe58240a1303e42c1d0020775ba6e6b52b9e5b8d123"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-stock-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2443,
+        "sha256": "eca6f87ba7e2401fa3e7d1e5415ba4e609b2872eab32534fb54a7f100e48e9bb"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-stock-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/runtime": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-stock-20261018-001/CONTROL.json",
+        "bytes": 27745,
+        "sha256": "f8e443774f55724bff982cf85be74f20d66144ef628dc56ef06ea1d175851c34"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-stock-20261018-001/SHARED-START.json",
+        "bytes": 1324,
+        "sha256": "85bbfd0c8fc69b772e18dc10f44a7af53cc82653683d8df85f2cdd8336059497"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "f23a4da2e8d795e5ba49c61ab4852424f3a2e8dd616059f4c17f33fd662a54bd"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-stock-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 334,
+        "sha256": "f6bd0f535f3e60568acf1a79691152899f7643b3ef7c1f1c73f6b1739c58b315"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-stock-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/lifetime": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-002/CONTROL.json",
+        "bytes": 36893,
+        "sha256": "2d07003527fe15633ab5e5491c4ee16b480eca20a6c53650f7fe7cf56cf994f1"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-002/SHARED-START.json",
+        "bytes": 1366,
+        "sha256": "9bec8986c53e37de208772d65eb03ce03f1983aa65199e1fceebe68ff1fc28f7"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "6ffe67f2b7cd31360816e5e3dd537c61d1334fe8ddd7a82380dbb0ada98a11bb"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 2197,
+        "sha256": "c0b8864a923b02f55fc9710464e20348d1c96751fc1b07e6863f5e0606496085"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/retained": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-retained-20261018-002/CONTROL.json",
+        "bytes": 81302,
+        "sha256": "8b4be647f54cf0fefd5289136821de8825449a6f8b8bf32e431991aa81a7b2f2"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-retained-20261018-002/SHARED-START.json",
+        "bytes": 1318,
+        "sha256": "ee435af071626f525a5106cff35304c36c2ec920f933602b119b37dcb8ded6e0"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-retained-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "e1e989e311744e6a43c65e366453e77fd791f8b1aa7283214c6f1d0c353d5c7d"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-retained-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 49,
+        "sha256": "53f838b640ebd8ed2c6c6fa56945cfc46f49f27b194ef394da175967bee4b284"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-stock-retained-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "stock/initial-observation": [
+      {
+        "path": "/private/tmp/unison-pool-baseline-stock-20261018-001/CONTROL.json",
+        "bytes": 13899,
+        "sha256": "1a0e0b2c98c4706af911ac294381b8797b9f29639597c8c7b618d51e1ea03339"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-stock-20261018-001/SHARED-START.json",
+        "bytes": 1312,
+        "sha256": "1ebf35a83d95c3e3e1afd7923addb21d6a482c1dc7672378bb917df83bc204fd"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-stock-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "9544826b5e37e63823225d582336c6f58041c9de087ff667e7f485f5a6540e66"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-stock-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 207,
+        "sha256": "2d2ef66aa2decf7c46bb5e2a5d410fb47a5ccc456b84f5cbfc31ad2296ac1f14"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-stock-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-kbd2h6xk/baseline.ml",
+        "bytes": 664,
+        "sha256": "12c0dfe8e4f87d5c43e7118d899b3e79e998cc458e4afe7ada802f538600bdb2"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-kbd2h6xk/census.c",
+        "bytes": 750,
+        "sha256": "ed0beb6ae4bd35fcab96220beb07f0e12ec9584d7ef7e28dfad5f67689581283"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-kbd2h6xk/probe",
+        "bytes": 4254544,
+        "sha256": "7630d49e4a21dd980c9cb76a34311bc4273e4178f125cae126cf32b3d4dec70b"
+      }
+    ],
+    "ox-check": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-check-20261018-001/RESULT.json",
+        "bytes": 59095,
+        "sha256": "7dc01b46b0a1875e225c09b5fb716585fea96fbbcfbdc4c29dfe55391fb78bf1"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-check-20261018-001/SHARED-START.json",
+        "bytes": 1364,
+        "sha256": "0cc22008c11c91fb37837bb0114c8882a8eb8932a5d622f88a1482777bc65d0a"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "a474c6042721fdb2c3a7ddf7089c81d125740eabb87ea811943b532061847d65"
+      }
+    ],
+    "ox-dune-check": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-dune-check-20261018-001/RESULT.json",
+        "bytes": 58920,
+        "sha256": "4c0bc59893c84edb29f2463c1b321be567ebc484a4fdda96380807ca7462371a"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-dune-check-20261018-001/SHARED-START.json",
+        "bytes": 1373,
+        "sha256": "1cc9e002a1f1a1eb314f0c2a96307938cba63fbd5107600109e20326da8d9948"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-ox-dune-check-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "2378c37d7deeb51741349e721455d83920bb6b023bc037e90976d4d180d414dd"
+      }
+    ],
+    "ox/component": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-ox-20261018-001/SHARED-START.json",
+        "bytes": 1136,
+        "sha256": "8c19e70ed8d01be95bcfd9c239cf40a03efc54fa03f43254c6e0d78841099334"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "96a8484d811cadb691ec82ac275d723004d44e5168dd9a24bf7a58a1d8f98b92"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-ox-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 2443,
+        "sha256": "eca6f87ba7e2401fa3e7d1e5415ba4e609b2872eab32534fb54a7f100e48e9bb"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-admission-ox-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/runtime": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-ox-20261018-001/CONTROL.json",
+        "bytes": 27750,
+        "sha256": "931778828626ad6b8a145739d08961367b0bdf96587f3ecdefb8da5662abe8cb"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-ox-20261018-001/SHARED-START.json",
+        "bytes": 1318,
+        "sha256": "3893a1687b45fb7a9f499fa95c54719a3518659293ccdf2e98cae5f2b7465b63"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "97bf568970bd437bcf94984193a0cac561e7c79ad2b0f34440268d9ab89c058a"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-ox-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 334,
+        "sha256": "f6bd0f535f3e60568acf1a79691152899f7643b3ef7c1f1c73f6b1739c58b315"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-runtime-ox-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/lifetime": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-lifetime-20261018-002/CONTROL.json",
+        "bytes": 36897,
+        "sha256": "64b3403c3103cceee4f10dfff7868a9fe1a347148df1099f71573b4dfb8eb639"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-lifetime-20261018-002/SHARED-START.json",
+        "bytes": 1364,
+        "sha256": "099c77f72e7f1290b85b9d2638dce3e397b1a80b376584ef41b7f728be770c54"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-lifetime-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "51d1dc18f777acb88714bfb0c29bba89f858cad22201422900b7ecc0f661e002"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-lifetime-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 2197,
+        "sha256": "29186fc6f75003d9cdec7f49fc862a58ff75f44fd74c3f5c65f1a13b3bdceb85"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-lifetime-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/retained": [
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-retained-20261018-002/CONTROL.json",
+        "bytes": 81950,
+        "sha256": "e74976ecc1e6cc53acfea48607d02258cae6d9dbfb7b6350d2de266c1ca6e6d2"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-retained-20261018-002/SHARED-START.json",
+        "bytes": 1311,
+        "sha256": "f2a78f9a910db551b2bc61a05fffad56a8e4e9ece0964667e2844a86c3f7ace6"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-retained-20261018-002/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "ce544755609227e1612c1f0088ae684be49d42e988728f16ceefa3cd59305324"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-retained-20261018-002/SHARED-STDOUT.txt",
+        "bytes": 49,
+        "sha256": "53f838b640ebd8ed2c6c6fa56945cfc46f49f27b194ef394da175967bee4b284"
+      },
+      {
+        "path": "/private/tmp/unison-fixed-baseline-regress-ox-retained-20261018-002/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "ox/initial-observation": [
+      {
+        "path": "/private/tmp/unison-pool-baseline-ox-20261018-001/CONTROL.json",
+        "bytes": 13902,
+        "sha256": "6dbe439af8189d3efd72ff5144af27c7193c7d33e02f50bef617d1255f9254d3"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-ox-20261018-001/SHARED-START.json",
+        "bytes": 1306,
+        "sha256": "6593bc53b41148e5eb336ed3676d8a653439db9096695a6f5c4401e8ec4d679d"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-ox-20261018-001/SHARED-CLOSED.json",
+        "bytes": 537,
+        "sha256": "6d5daf8ada1b3d737356af65902a80d99af800de179d91e121368a90bafa2cce"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-ox-20261018-001/SHARED-STDOUT.txt",
+        "bytes": 207,
+        "sha256": "2d2ef66aa2decf7c46bb5e2a5d410fb47a5ccc456b84f5cbfc31ad2296ac1f14"
+      },
+      {
+        "path": "/private/tmp/unison-pool-baseline-ox-20261018-001/SHARED-STDERR.txt",
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-wbb18ogx/baseline.ml",
+        "bytes": 664,
+        "sha256": "12c0dfe8e4f87d5c43e7118d899b3e79e998cc458e4afe7ada802f538600bdb2"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-wbb18ogx/census.c",
+        "bytes": 750,
+        "sha256": "ed0beb6ae4bd35fcab96220beb07f0e12ec9584d7ef7e28dfad5f67689581283"
+      },
+      {
+        "path": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-pool-baseline-wbb18ogx/probe",
+        "bytes": 5867040,
+        "sha256": "d5d35543aac00d47fba4a788df94cc3f06506fe3974d4b6855b109a0059b8309"
+      }
+    ]
+  },
+  "source_pins": [
+    {
+      "path": "src/semanticAdmission.ml",
+      "bytes": 12118,
+      "sha256": "a3dfcf94b3053d42a75c6e9e2b5513b47121198c236f1395898b375936d86c08"
+    },
+    {
+      "path": "src/semanticAdmission.mli",
+      "bytes": 3550,
+      "sha256": "2ad7aa5c824fb703d2ecbd0625c684fdd34f05ee8b5fc48ef4f38df6d02feddb"
+    },
+    {
+      "path": "src/semanticWorkers.ml",
+      "bytes": 35174,
+      "sha256": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721"
+    },
+    {
+      "path": "src/semanticWorkers.mli",
+      "bytes": 15182,
+      "sha256": "928940c64745da115e43c88a7172e2968ee9ddd58492d19eececafb3a58364f0"
+    },
+    {
+      "path": "src/semanticRuntime.ml",
+      "bytes": 16009,
+      "sha256": "611c75de68c38f01c0dd2f63d49778545e6dd667f99234895c31d559c8813041"
+    },
+    {
+      "path": "src/semanticRuntime.mli",
+      "bytes": 3934,
+      "sha256": "5dc6a194ef00a6a60049c82ff4011abfef864085839c2cd2118cde27399f8c0e"
+    },
+    {
+      "path": "tests/admission/run.py",
+      "bytes": 1467,
+      "sha256": "0947cf73eb55b632a1705d15b896b3850686da215666eb621600f96f2c85c67e"
+    },
+    {
+      "path": "tests/admission/test.ml",
+      "bytes": 29226,
+      "sha256": "47cd456d45d56cc2bb9f75d0bae693f8848608f9314558825beb5c2c1f8f7e03"
+    },
+    {
+      "path": "tests/resource_lifetime/baseline.py",
+      "bytes": 3754,
+      "sha256": "11965182079f8b7291d61421dc4351bf652036318973b1da7a8477465b1574a1"
+    },
+    {
+      "path": "tests/resource_lifetime/baseline.ml",
+      "bytes": 2972,
+      "sha256": "9d9f24176056bf15668b1d376b2501ba05c263dd1aef6680c72eaa391ffb2b00"
+    },
+    {
+      "path": "tests/resource_lifetime/census.c",
+      "bytes": 750,
+      "sha256": "ed0beb6ae4bd35fcab96220beb07f0e12ec9584d7ef7e28dfad5f67689581283"
+    },
+    {
+      "path": "tests/resource_lifetime/run.py",
+      "bytes": 11390,
+      "sha256": "3311972ec829544276ae3b8c2d59b5a3532e3354be1e49837e18971a0c3f133f"
+    },
+    {
+      "path": "tests/resource_lifetime/test.ml",
+      "bytes": 10201,
+      "sha256": "62342d4491f5e65a1150852a9b4f6e0ff060514eceb7ae12d1490f514f2d6268"
+    },
+    {
+      "path": "tests/resource_close/runtime_retained_run.py",
+      "bytes": 5540,
+      "sha256": "1a47072745964b9af5974d2f750383db460a1ec358477aee2610a375b731a2bd"
+    },
+    {
+      "path": "tests/resource_close/runtime_retained_test.ml",
+      "bytes": 3473,
+      "sha256": "357acd73850f10a032c8baefce81043560568c3fe1bc27764c0359ea2a0782d5"
+    }
+  ],
+  "limits": {
+    "unit_binaries": "existing admission runner uses temporary binaries; source/compiler/control stdout retained, no retrospectively fabricated binary seal",
+    "initial_observation": "old actual private probe source/binary pinned separately, not labelled current source",
+    "historical_compatibility": "old Runtime participant gets uncalled resource_accounting refusal binding only; no old infrastructure API claimed"
+  },
+  "preserved_failure": {
+    "parent": {
+      "session": 92039,
+      "chunk": "65e90b",
+      "exit_code": 1,
+      "no_session": true
+    },
+    "controller": "/private/tmp/unison-fixed-baseline-regress-stock-lifetime-20261018-001",
+    "reason": "6actual lifecycle groups/37assertions and early-release negative completed; next private nested-Consumer mutation anchor still named f, while current production uses guarded. Updated only that anchor/replacement to retain current classifier and qualified fresh002. No positive total claimed from incomplete001."
+  }
+}

@@ -121,9 +121,9 @@ end
         # Remove inherited borrowing so validation tries another Consumer slot.
         # The minimum-budget test observes non-entry immediately, without sleep.
         name='semanticRuntime';source=(build/(name+'.ml')).read_text()
-        before='else SemanticAdmission.with_borrow reservation ~cost f'
+        before='else SemanticAdmission.with_borrow reservation ~cost guarded'
         assert source.count(before)==1
-        source=source.replace(before, 'else (SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost f >>= function\n          | Some result -> return result | None -> fail (Util.Transient "cancelled"))')
+        source=source.replace(before, 'else (SemanticAdmission.with_lease (resource_gate ()) cancellation ~role ~cost guarded >>= function\n          | Some result -> return result | None -> fail (Util.Transient "cancelled"))')
         # Recompile all later modules against matching native optimization
         # metadata; changing a runtime implementation changes its cmx digest.
         def compile_runtime(label, source):

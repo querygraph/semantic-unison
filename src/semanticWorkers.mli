@@ -23,6 +23,10 @@ type component_inspection = { components : (component_summary, string) result;
                               stats : Unix.LargeFile.stats }
 type usage = { workers : int; pending : int; running : int; peak_running : int; retained : int }
 exception Failed of string
+val fixed_resources : SemanticAdmission.cost
+(** One notification pipe (two descriptors) and its fixed completion-pump
+    buffer, reserved before construction by SemanticRuntime. Excludes domain,
+    mailbox/OCaml metadata, stacks, job duplicates and external helpers. *)
 val recommended_workers : unit -> int
 val create : workers:int -> max_pending:int -> budget:HelperSupervisor.t -> t
 (** Positive workers; max_pending must be1..65536. Runtime uses4096. Both job

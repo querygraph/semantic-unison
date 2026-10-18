@@ -37,6 +37,11 @@ val make_publication_reservation : unit -> SemanticAdmission.reservation
     if validators are currently off, preventing late policy enablement from
     consuming retained metadata capacity. This is selected-path accounting,
     not whole-process FD/RSS or external-child admission. *)
+val resource_accounting : unit -> SemanticAdmission.accounting
+(** Workspace plus reserved fixed pipe/completion-buffer costs, initialized
+    without starting worker domains or opening the pipe. Preferences remain
+    workspace-only budgets; total capacity includes the declared infrastructure.
+    Not whole-process baseline, RSS, peak census or a descendant hard cap. *)
 val admission_usage : unit -> SemanticAdmission.usage
 (** Owner-loop diagnostics without starting worker domains. *)
 val with_transaction : ?reservation:SemanticAdmission.reservation -> ?role:SemanticAdmission.role -> max_payload:int ->

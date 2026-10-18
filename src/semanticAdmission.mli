@@ -10,6 +10,19 @@ type usage = {
   transactions : int; pending : int; payload_bytes : int; descriptors : int;
   peak_transactions : int; peak_payload_bytes : int; peak_descriptors : int;
 }
+type accounting = {
+  baseline:cost; workspace:cost; workspace_peak:cost;
+  total_reserved:cost; peak_reserved:cost; capacity:cost;
+}
+(** Reserved planning costs, never OS live/peak measurements. A fixed baseline
+    remains reserved for the gate lifetime, even before initialization or after
+    known shutdown of its infrastructure. Existing [usage] remains workspace-only. *)
+val accounting : t -> accounting
+val create_with_baseline : baseline:cost -> source_headroom:cost option ->
+  max_transactions:int -> max_payload_bytes:int -> max_descriptors:int ->
+  max_pending:int -> t
+(** Total capacities include the immutable baseline, which is subtracted before
+    any source/workspace grant. [create] preserves its zero-baseline semantics. *)
 exception Failed of string
 val create : source_headroom:cost option -> max_transactions:int -> max_payload_bytes:int ->
   max_descriptors:int -> max_pending:int -> t

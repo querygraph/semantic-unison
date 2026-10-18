@@ -1,6 +1,8 @@
 open Lwt
 module H = HelperSupervisor
 module Mailbox = SemanticMailbox
+let completion_buffer_bytes=4096
+let fixed_resources : SemanticAdmission.cost = {payload_bytes=completion_buffer_bytes;descriptors=2}
 module Close = OwnedClose.Make(struct
   type descriptor = Unix.file_descr
   let empty = Unix.stdin
@@ -348,7 +350,7 @@ let create_internal ~io ~workers ~max_pending ~budget =
       admission = []; closing = false; joined = false;
       shutdown_result = None; pump_done = Lwt.wait (); read_observer = None; measure_stages = false } in
     NotificationPipe.keep_owner notification (fun () -> ignore (Sys.opaque_identity t));
-    Lwt.ignore_result (pump t (Bytes.create 4096));
+    Lwt.ignore_result (pump t (Bytes.create completion_buffer_bytes));
     t
   with
   | NotificationPipe.Uncertain _ as error -> raise error

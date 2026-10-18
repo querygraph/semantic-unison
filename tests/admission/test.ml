@@ -14,6 +14,50 @@ let settled t =
     "resource credits leaked"
 let test name f = f (); Printf.printf "PASS %s\n%!" name
 let () =
+  test "fixed baseline stays reserved outside workspace lifetime" (fun () ->
+    let baseline=cost 10 2 in
+    let t=A.create_with_baseline ~baseline ~source_headroom:None ~max_transactions:4
+      ~max_payload_bytes:20 ~max_descriptors:6 ~max_pending:4 in
+    let a=A.accounting t in
+    check(a.baseline=baseline && a.workspace=cost 0 0 && a.total_reserved=baseline && a.capacity=cost 20 6)
+      "baseline capacity was not declared before acquisition";
+    let release=Lwt.wait () and started=ref false in
+    let active=submit t (cost 10 4) (fun()->release) in
+    let waiting=submit t (cost 1 1) (fun()->started:=true;return ()) in
+    check(not !started && (A.usage t).pending=1 && (A.accounting t).total_reserved=cost 20 6)
+      "DESIGNATED baseline allowed another resource borrower";
+    Lwt.wakeup release ();ignore(Lwt_unix.run(active >>= fun _->waiting));settled t;
+    let a=A.accounting t in
+    check(a.total_reserved=baseline && a.peak_reserved=cost 20 6 && a.workspace_peak=cost 10 4)
+      "baseline retired or peak double-counted");
+  test "source headroom is partitioned after fixed baseline" (fun () ->
+    let t=A.create_with_baseline ~baseline:(cost 2 2) ~source_headroom:(Some(cost 10 8))
+      ~max_transactions:2 ~max_payload_bytes:22 ~max_descriptors:34 ~max_pending:4 in
+    let consumer=A.make_reservation t ~role:A.Consumer ~cost:(cost 10 24) in
+    check(Lwt_unix.run(A.acquire consumer(H.cancellation()))) "baseline consumer refused";
+    let source=A.make_reservation t ~role:A.Source ~cost:(cost 10 8) in
+    check(Lwt_unix.run(A.acquire source(H.cancellation()))) "baseline source headroom stolen";
+    check((A.accounting t).total_reserved=cost 22 34) "baseline/source capacity not conserved";
+    A.retire consumer;A.retire source;settled t;
+    check((A.accounting t).total_reserved=cost 2 2) "source retirement freed baseline");
+  test "fixed baseline rejects invalid costs and oversized headroom" (fun () ->
+    List.iter(fun baseline->
+      check((try ignore(A.create_with_baseline ~baseline ~source_headroom:None ~max_transactions:2
+        ~max_payload_bytes:8 ~max_descriptors:8 ~max_pending:1);false with Invalid_argument _->true))
+        "invalid baseline accepted") [cost (-1) 0;cost 0 (-1);cost 9 0;cost 0 9];
+    check((try ignore(A.create_with_baseline ~baseline:(cost 3 3) ~source_headroom:(Some(cost 2 2))
+      ~max_transactions:2 ~max_payload_bytes:6 ~max_descriptors:6 ~max_pending:1);false
+      with Invalid_argument _->true)) "headroom consumed fixed infrastructure");
+  test "fixed baseline and maximal budgets cannot wrap" (fun () ->
+    let t=A.create_with_baseline ~baseline:(cost 1 1) ~source_headroom:None ~max_transactions:2
+      ~max_payload_bytes:max_int ~max_descriptors:max_int ~max_pending:2 in
+    let owner=A.make_reservation t ~role:A.Consumer ~cost:(cost (max_int-1) (max_int-1)) in
+    check(Lwt_unix.run(A.acquire owner(H.cancellation()))) "maximal baseline-adjusted grant refused";
+    check((A.accounting t).total_reserved=cost max_int max_int) "baseline total overflow";
+    let cancellation=H.cancellation() in
+    let waiting=submit ~cancel:cancellation t (cost 1 1) (fun()->failwith "overcommitted baseline") in
+    H.cancel cancellation;check(Lwt_unix.run waiting=None) "baseline waiter cancellation failed";
+    A.retire owner;settled t;check((A.accounting t).total_reserved=cost 1 1) "edge baseline released");
   test "machine-integer budget edges never wrap or debit rejected owners" (fun () ->
     let t = gate max_int max_int max_int in
     let full = A.make_reservation t ~role:A.Consumer ~cost:(cost max_int max_int) in

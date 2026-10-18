@@ -86,8 +86,15 @@ let resource_gate () =
   | Some (gate,existing) when existing = config -> gate
   | Some _ -> raise (Util.Fatal "Restart Unison to change its semantic resource budgets")
   | None ->
-      let gate = SemanticAdmission.create ~source_headroom ~max_transactions:inflight
-        ~max_payload_bytes:(mib * 1048576) ~max_descriptors:descriptors ~max_pending:4096 in
+      let baseline=SemanticWorkers.fixed_resources in
+      let total value extra =
+        if value>max_int-extra then raise(Util.Fatal "Semantic fixed infrastructure budget overflow");
+        value+extra in
+      (* Existing preferences remain workspace budgets. Declare the separate
+         infrastructure allowance explicitly, before the first pipe open. *)
+      let gate = SemanticAdmission.create_with_baseline ~baseline ~source_headroom ~max_transactions:inflight
+        ~max_payload_bytes:(total (mib * 1048576) baseline.payload_bytes)
+        ~max_descriptors:(total descriptors baseline.descriptors) ~max_pending:4096 in
       resource_runtime := Some (gate,config); gate
 (* A failed publication must not silently start another pool. These cells
    exist before initialization and can retain a returned carrier without allocation. *)
@@ -135,6 +142,9 @@ let get () =
       "Semantic runtime: %d physical/fallback CPUs, %d logical CPUs, %d CPU permits, %d domains, %d transaction slots, %d MiB estimated payload, %d descriptor credits, %d jobs per filesystem\n"
       (HelperSupervisor.available_physical_cpus ()) (HelperSupervisor.available_cpus ())
       n count inflight mib descriptors io_jobs);
+    debug (fun () -> Util.msg
+      "Semantic fixed infrastructure allowance: %d descriptors and %d completion-buffer bytes (not whole-process limits)\n"
+      SemanticWorkers.fixed_resources.descriptors SemanticWorkers.fixed_resources.payload_bytes);
     let t = {supervisor;pool;cpu_budget=n;admission;io} in runtime := Some (t,config); t
     with error ->
       (* Pool construction succeeded, but publication/configuration did not.
@@ -165,6 +175,7 @@ let unresolved_ownership = function
   | _ -> false
 let report_retained_ownership _ =
   Util.warn "Resource closure is unresolved; this process is retaining its reservations.\n"
+let resource_accounting () = SemanticAdmission.accounting(resource_gate ())
 let retained_ownership_count = RetainedOwnership.count
 let guard_ownership f = RetainedOwnership.guard ~is_uncertain:unresolved_ownership
   ~on_retained:report_retained_ownership f
