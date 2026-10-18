@@ -5794,3 +5794,40 @@ source513c121a, proof57c11c91. PreserveV5/V4files and consumedolderRootgrants.
 Exactseparateupstream/retainedfork/properties Rootgrants beforeanyIO. Prioritize
 these actualcompatibility/transfer checks +fullacceptancemap; no further optional
 microextensions on a frozen runtimecandidate. No livequalificationjobs remain.
+
+
+## 2026-10-18 CURRENT V6 IO requests queued; candidate fixed
+
+Frozen /Users/alexy/src/unison-stream-qualified-20261018 branch
+integration/sol-stream-qualified-20261018 metadataHEAD5cc96102/sourcebase63e4b947/
+production513c121a. Do NOT edit this frozen worktree even for queue notes;
+further handoff notes go outside it. Actualmetadatapreparation ad5352/0;
+source400pins checked_plan bothpass; properties43execution329production pins+
+manual.command/checked_build+INMEMORYadmissionchecker pass. Realcanonicalmetadata,
+zero admissionfile/workspace/locks/process/payload. Current binaries from
+/private/tmp/unison-stream-classifier-{stock,ox}-check-20261018-001/RESULT.json;
+oneuncompiledfixture difference explicitly recorded inproof57c11c91, not hidden.
+
+Exactindex doc/sol-stream-requalification-requests-v6.json2710B
+SHA3fa0df6e7be8ffefe66939a1d55d19b9857edf29d496b8b2d8013d6a09e35085.
+Upstream requestc991cc24/plan7260365a,workspace/private/tmp/u-mp-0c5fe64a,
+admission/private/tmp/unison-stream-upstream-admission-0c5fe64a.json.
+Retainedfork request36a77b87/planb5f430ad,workspace/private/tmp/u-mp-86195f02,
+admission/private/tmp/unison-stream-retained-fork-admission-86195f02.json.
+Each4generated8KiBcases12CLI/400sources/300obs30CLI/2+2endpoints+owner2<=8;
+genuineupstream8772d26a extension-absent and oldersemantic-capablefork DISTINCT.
+Properties request4ef4c673,workspace/private/tmp/u-props-362476bc,
+admission/private/tmp/unison-stream-properties-admission-362476bc.json:
+18rows54CLI/two2MiBfixtures/3+3+owner2=8/300obs30CLI/8GiBdeclarednotcap/
+36readersmax. Exactargv/env inrequests; each needsseparateRootfreshSHA/deadline.
+No SDK/Adobe/camera/Photo/nativeUI/compiler/performance/quiet/18borrow/retry or
+automatic successor. V5source-deferred confirmedclassifiergap, V4superseded,
+originalbytesunchanged. Contrarycrossedgrant/START mustreconcile; neverreplay.
+
+Actualforkpush60462/9b47ac/0/no session. Rootrequest ACTUALLYqueued
+01a150b4-62ea-7ca1-ba19-56376210b6b7 (1c7179/0). Outsidefreeze queue receipt:
+/Users/alexy/src/unison-stream-classifier-20261018/doc/sol-stream-requalification-v6-QUEUED.json.
+All3newadmissionpaths freshABSENT3f1cda, no runtimeSTART/workspace/SourceIOhold.
+No ownlivejobs/resources. Standing8/8 unchanged; fullgoalactive/incomplete.
+Next prioritizeactualcurrent-source compatibility/property grants and acceptance
+consolidation; keep runtimecandidate fixed instead of unrequestedmicroextensions.
