@@ -5709,3 +5709,48 @@ Existing frozen requests remain their own source scope, not silently upgraded.
 Broader required fault/filesystem/platform/resource/performance evidence remains
 open per readiness12area map; unknown MakerNote meaning is not a delivery gate.
 Goal fullscope active/incomplete; no live sourcebuild/control/tool processes.
+
+
+## 2026-10-18 frozen CURRENT producer candidate and fresh V5 IO requests
+
+New isolated /Users/alexy/src/unison-producer-qualified-20261018 branch
+integration/sol-producer-qualified-20261018 based3618fc58 (productionb8c67465),
+no production edits. Final actual builds from /private/tmp/unison-rpc-encoder-
+{stock,ox}-check-20261018-002 source329production match this clone exactly;
+original build origin was workingtree, not a fabricated build-from-future-commit.
+No jobs/resources held. This worktree's execution sources now FROZEN for Root.
+
+Prepared index doc/sol-producer-requalification-requests-v5.json2734B
+SHAdb616795aa0c03775745f2ec7457007baa7921133c798ddafd61648b1e743cde.
+Upstream request1388107e/plan6aa792b7: workspace/private/tmp/u-mp-239498a8,
+admission/private/tmp/unison-producer-upstream-admission-239498a8.json.
+Retainedfork request4633fee4/plan5e652a9d: workspace/private/tmp/u-mp-1651fe45,
+admission/private/tmp/unison-producer-retained-fork-admission-1651fe45.json.
+Each4generated8KiBcases/12CLI/bothdirections,2+2endpointworkers+owner2<=8,
+300sobservation/30sperCLI,400executionpins. Genuineupstream8772d26a and older
+semantic-capable retainedfork contracts stay distinct. Root must grant EACH
+new exact one-use plan/deadline/SHA separately; no automatic serial successor.
+
+Properties requestd91344ae: workspace/private/tmp/u-props-59455b3c,
+admission/private/tmp/unison-producer-properties-admission-59455b3c.json;
+18rows/54CLI/2x2MiBgeneratedfixtures/3+3+owner2=8/300obs/30perCLI/declared8GiB
+notinstrumented/36readersmax,43executionpins+329productionpins.
+No SDK/Adobe/camera/Photo/nativeUI/compiler/performance/quiet/18borrow scope.
+All new workspace/admissionpaths absent at preparation. No payload dispatched.
+
+Actual metadata preparation ba55cd/0: both checked_plan pass; properties actual
+manual.command/checked_build and checked_io_request pass with only IN-MEMORY
+simulated admission read. Canonical manifest metadata real, no pool acquisition,
+no admissionfile/child/transport. Artifact verification remains after realIO
+admission/CPU acquisition at actual run. Three latest encoder/queue/producer
+qualification receipts added to exactprerequisites. Producer source proof is
+f0f0ff5e/503058B; no source hidden in oldprototype labels.
+
+V4 source proposals now SUPERSEDED_UNADMITTED, original bytes untouched; fresh
+all6 old workspace/admissionpaths absent. Durable source-proposal replacement:
+doc/sol-fixed-v4-source-proposals-superseded-20261018.json. Observation is NOT
+fabricated historical parentterminal. If crossed actualgrant/START arrives,
+reconcile actualstate; never blindly dispatch V4 or repeat consumed requests.
+No V5 grant yet; send exact index toPhotoRoot for fresh review/serialscheduling,
+upstream first. Keep this candidate source unchanged while review/admission is
+pending; further source work must use a separate successor worktree.

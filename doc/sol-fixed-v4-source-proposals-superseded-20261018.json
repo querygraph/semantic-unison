@@ -1,0 +1,43 @@
+{
+  "state": "V4_SOURCE_PROPOSALS_SUPERSEDED_UNADMITTED_DO_NOT_DISPATCH",
+  "reason": "V5 targets the newly qualified producer-allocation owner source/binaries. Original V4 artifacts preserved, no actual run repeated. This is source proposal replacement, not a discovered unsafe-payload claim or a runtime cancellation.",
+  "old_index": {
+    "path": "/Users/alexy/src/unison-outbound-accounting-20261018/doc/sol-fixed-requalification-requests-v4.json",
+    "bytes": 2983,
+    "sha256": "bf54dd3e064d0a27bbc0a31df50d2c5b18223cec9f17e43a76571c79f230171c"
+  },
+  "successor_index": {
+    "path": "/Users/alexy/src/unison-producer-qualified-20261018/doc/sol-producer-requalification-requests-v5.json",
+    "bytes": 2734,
+    "sha256": "db616795aa0c03775745f2ec7457007baa7921133c798ddafd61648b1e743cde"
+  },
+  "observed_unix": 1792353850.366039,
+  "metadata_observations": [
+    {
+      "path": "/private/tmp/unison-fixed-upstream-admission-8948b228.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-mp-8948b228",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-fixed-retained-fork-admission-4bc2f1b7.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-mp-4bc2f1b7",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-fixed-properties-admission-a446dbf4.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/u-fixed-properties-a446dbf4",
+      "exists": false
+    }
+  ],
+  "author_dispatch_state": "No V4 dispatch by this agent. Absent paths alone do not establish a historical parent terminal; contrary actual START or grant must be reconciled rather than replayed.",
+  "resources": "No admission created, no canonical locks acquired, no child/native/SDK/Photo payload invoked. No scheduling hold requested until a distinct fresh Root grant."
+}
