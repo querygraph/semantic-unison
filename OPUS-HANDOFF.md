@@ -5671,3 +5671,41 @@ commit and push FORK (querygraph, notorigin), send qualifiedsource notice toPhot
 Do not mergePR13 or alter frozenV4/source72560+metadata18c9b822. Three exactV4
 grantpaths absent7ce4d0. No EXIO/SDK/Photo/nativeUI hold; actual CPU build4/8
 held only through current sourcejob settlement. Fullgoalactive/incomplete.
+
+
+## 2026-10-18 RPC producer qualification COMPLETE; source b8c67465 pushed
+
+ACTUAL finalcontroller89158/150917/exit0/no running session collected. Four
+stock/Ox Make+Dune+selftests and all20 finalgroups PASS,53 designated negatives
+per compiler verified from raw records (framing4/body5/decoded5/stream2/pending3/
+result5/errors7/outbound8/queue9/encoder5). All584 current input hashes plus
+actual compiler/binary hashes verified after suite. No earlier testvariant or
+pre-inactive-fix source was reused as current proof. All children0/groupsabsent/
+CPU4or8closed. Synthetic unknown fixtures hold only logical memory to processexit;
+no real uncertain Directory/nativeFD acquired. No EXIO/SDK/Photo/UI work or hold.
+
+Exact evidence tests/qualification/rpc-producer-ownership-actual-20261018.json
+503058B SHAf0f0ff5eeb9498169412d951c77e23a7b1acad43c3098c4f61e4a7b90532398f.
+Inventoryv23/readiness/SOL/producer+outbound docs updated. Source commitb8c67465;
+forkpush62428/110e6f/0/no session to querygraph/unison. Qualified source notice
+queued01a15099-42e6-7392-b23c-53355edc965a (7e7b24/0). No upstream change/PR13merge.
+Main branch navigation handoff gets this same terminal update.
+
+Known builtin request/reply/exception/stream producer owners now reserve selected
+result/header/scratch bytes and result roots before allocation, restore synchronous
+contexts before async work, release at actual own consumption or known queued
+cancellation, and retain exact roots/charges on typed/classifier uncertainty.
+Inactive admission refuses without classifier-retained uncharged operations.
+Defaults normal/idle512MiB+256slots+65536roots; urgent65536B+256slots+2048roots.
+This is NOT custom/raw/string/caller/tag/ID/conversion/backing/connection baseline,
+allheap/RSS, full transport/platform/performance or complete SOL acceptance.
+
+NEXT priority: current-source compatibility/property qualification + acceptance
+consolidation. Frozen V4source72560ca4/metadata18c9b822/indexbf54dd3e unchanged;
+all3exactadmissionpaths freshabsent1bca0e. No oldV2/V3 grant/replay, no resourcehold
+or immediate payload permission inferred. Future current-source successor plans
+need exact immutable pins/workspace/deadline and explicit finite Root admission.
+Existing frozen requests remain their own source scope, not silently upgraded.
+Broader required fault/filesystem/platform/resource/performance evidence remains
+open per readiness12area map; unknown MakerNote meaning is not a delivery gate.
+Goal fullscope active/incomplete; no live sourcebuild/control/tool processes.
