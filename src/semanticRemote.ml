@@ -359,18 +359,21 @@ let nonce () =
   (* The only current clone-stage backend is macOS. Use OS randomness for
      transaction correlation; this nonce is not peer authentication. *)
   let b = Bytes.create 32 in
-  let owned = ref true in
-  let close fd = if !owned then begin owned := false; Unix.close fd end in
+  let ownership=NotificationPipe.prepare () in
+  let close ()=NotificationPipe.close_all ownership in
   let rec read fd off = if off < 32 then
     let n = try Unix.read fd b off (32-off) with
       Unix.Unix_error (Unix.EINTR,_,_) -> -1 in
     if n = 0 then raise (Util.Transient "Cannot obtain semantic transaction nonce")
     else read fd (if n < 0 then off else off+n) in
-  (* Buffers, ownership state and callbacks precede the native open. Clear the
-     slot before close, so a failed close cannot close a reused number later. *)
+  (* Buffer, owner/carrier and callbacks precede acquisition. A close carrier
+     must cross ordinary error mappings and keep the transaction unsettled. *)
   let fd = Unix.openfile "/dev/urandom" [Unix.O_RDONLY; Unix.O_CLOEXEC] 0 in
-  try read fd 0; close fd; Bytes.to_string b
-  with error -> (try close fd with _ -> ()); raise error
+  NotificationPipe.adopt_read ownership fd;
+  try read fd 0;close ();Bytes.to_string b
+  with error ->
+    NotificationPipe.remember_failure ownership error;
+    close ();raise error
 
 let try_transfer_internal ?reservation ?producer ~connection ~source ~basis ~directory ~staging ~expected_size () =
   if not (supported connection) then return false else
