@@ -7016,3 +7016,27 @@ observed surviving; fixture-writer absent). Preserve allhistorical receipts and
 oldnamespaces; no fabricated fixture substitution. Then real freeze+fresh exact
 IO coordination/admission, native matrix, independent evidence adoption. Other
 SOL benchmark/workload/case-mapping requirements remain; goalactive/incomplete.
+
+
+## 2026-10-19 — Photo IO last; final scalar case mapping
+
+User steering: finish Unison source/tests/acceptance first, direct Unison Adobe
+qualification last; Photo is not an execution intermediary. Standing8/8 stays.
+No new Photo pause/IO grant or native dispatch inferred. Prior response was a
+plan only; this continuation made concrete saved-evidence progress.
+
+New source worktree doc/sol-xmp-final-case-map-20261019.md maps conflicts,
+delete/edit, Bag/Seq/Alt, qualifiers, rendering/unknown refusal, exact opaque
+preservation, scalar symmetry, stale/peer-only base, nonce, and exact DNG
+materialization. Fresh audit d3e301/exit0 checked104 explicit source bindings
+and16 saved artifacts: all match. JSON: doc/sol-xmp-final-case-bindings-20261019.json.
+This is not a test rerun/transitive-runtime proof/receiving pass; archive authority
+and actual final native merge remain open. Entry/freezer source composition
+already implemented at3db68092; checklist wording corrected. Next generic clone
+and parser case mapping; authenticated three-codec fixture recovery remains
+required before final Adobe phase. No owned jobs/resources started. GoalACTIVE.
+
+Scheduling update from Photo Root: newer user steering lets Photo go first.
+Hold NEW EXIO/native/SDK/benchmark starts; standingUnison8 source work may
+continue. No currently owned Unison IO/process, preservation remains unadmitted
+and unstarted. This supersedes local execution ordering while Photo runs.

@@ -1,0 +1,160 @@
+{
+  "schema": "unison-final-case-binding-audit/1",
+  "scope": "Saved receipt and current explicit source/artifact hashes only; no test/native run, no transitive-runtime certification",
+  "reports": [
+    {
+      "receipt": "tests/qualification/current-xmp-kernel-observation-actual-20261018.json",
+      "sha256": "f5b505b1df817cd5a82b8b445f1f22a71f399809cb0f0b784587c7d19364e126",
+      "actual_controller": {
+        "session": 65831,
+        "initial_chunk": "7dcb8a",
+        "terminal_chunk": "c277e0",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "rows": [
+        {
+          "compiler": "stock",
+          "family": "kernel",
+          "source_count": 14,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-xmp-kernel-stock-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "compiler": "stock",
+          "family": "observation",
+          "source_count": 9,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-xmp-observation-stock-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "compiler": "ox",
+          "family": "kernel",
+          "source_count": 14,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-xmp-kernel-ox-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "compiler": "ox",
+          "family": "observation",
+          "source_count": 9,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-xmp-observation-ox-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "receipt": "tests/qualification/current-dng-reconciliation-actual-20261018.json",
+      "sha256": "d14806d5e8fde9d4d67243d09525990710bc209da2de83cf4e742aad6f7b8186",
+      "actual_controller": {
+        "session": 5070,
+        "initial_chunk": "d4fe44",
+        "terminal_chunk": "c3ff40",
+        "exit_code": 0,
+        "no_session": true
+      },
+      "rows": [
+        {
+          "compiler": "stock",
+          "family": "reconciliation",
+          "source_count": 27,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-STDOUT.txt",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-stock-20261018-001/SHARED-STDERR.txt",
+              "present": true,
+              "matches": true
+            }
+          ]
+        },
+        {
+          "compiler": "ox",
+          "family": "reconciliation",
+          "source_count": 27,
+          "source_mismatches": [],
+          "artifacts": [
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/RESULT.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-CLOSED.json",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-STDOUT.txt",
+              "present": true,
+              "matches": true
+            },
+            {
+              "path": "/private/tmp/unison-current-dng-reconcile-ox-20261018-001/SHARED-STDERR.txt",
+              "present": true,
+              "matches": true
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

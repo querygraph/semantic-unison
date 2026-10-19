@@ -210,11 +210,21 @@ owner/worker/proxy/launcher/journal/admission/preflight and now clone-install/ou
 callbacks. Original Python paired-process control passed with actual child FD
 observations; data controls use arbitrary generated64-byte strings and a clone
 double. These are harness/source evidence, not new Adobe receiving proof. Native
-entry/freezer/resource-binding composition and authenticated three-codec fixture
-recovery remain before that run. Existing real SDK scopes above stay intact.
+entry/freezer/resource-binding composition is now implemented and covered by
+original directed controls; authenticated three-codec fixture recovery and
+actual native qualification remain before that run. Existing real SDK scopes above stay intact.
 
 Re-read SOL Required acceptance matrix and Benchmark plan: representative sizes,
 other named workloads/topologies and final-case mapping are explicit requirements.
 The new harness does not replace those, and the proposed large fixed-XMP matrix
 alone would not close them. Do not expand completion into exhaustive MakerNote
 meaning or future-platform certification; do not shrink it to passing pure tests.
+
+### Final scalar case mapping — 2026-10-19
+
+[Explicit case map](sol-xmp-final-case-map-20261019.md) now traces scalar
+conflict/delete/container/qualifier/rendering/opaque/base/convergence cases to
+test bodies and freshly matched saved stock/Ox evidence. All104 explicit source
+pins and16 saved artifacts match. This closes that component mapping only;
+archive authority and final receiving merge remain unqualified. Adobe/Photo IO
+remains last. No new native work or scheduling hold was created.
