@@ -158,6 +158,21 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   physicalENOSPC/SDK/pixels; goal ACTIVE. Next independent fullsync/failure map
   remains before final generated Adobe fixture/runtime qualification.
 
+- **Current end-to-end receiver-clone interruption CLOSED:** actual61494/
+  84393d/0/no session,8calls24primaryroles across stock/Ox. Two controlled
+  observed-stage server-onlySIGKILLs (client3/proxy0/server-9 allactuallysettled),
+  exact old live target/open-reader/hardlink preserved, fresh clone recovery
+  exact8MiB/differentinodefrompartialstage, staginggone/fullidentitynoop.
+  Independentc160ba/0 rehashed542source329production/37748736Bgeneratedbytes,
+  whole8EXreacquiredclosed. Nine originalcontrols581fe3/0. AllresourcesZERO.
+  V1reader-hardlink andV2wrong-client-log observer failures preserved; actual
+  idle-controller-only137recoveries71464/de1bb4 and92422/f83abb, no normalexit
+  or missing originalreap claim. Source-qualified known-settled assertion
+  failures now close readers/leases; live/uncertain ownership stillretained.
+  `doc/final-clone-interruption-result-20261019.md`. Not powerloss/allgeneric
+  positive/flaggedbasis cases/SDK/photos; next namedcase coverage and final
+  generated Adobe fixture/runtime phase remain. Goal ACTIVE.
+
 ## Remaining work — do not mark goal complete
 
 1. Reconcile remaining full-sync/archive/profile/platform cases and

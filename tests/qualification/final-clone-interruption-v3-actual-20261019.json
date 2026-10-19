@@ -1,0 +1,262 @@
+{
+  "schema": "unison-final-clone-interruption-independent-audit/1",
+  "actual_owner_terminal": {
+    "session_id": 61494,
+    "initial_chunk": "46d9d2",
+    "terminal_chunk": "84393d",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 59868
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-clone-interruption-plan-v3-20261019.json",
+    "sha256": "442755afaf6c2a9bee07e44e0bc35665c8a9bdccb5a2932016b83bed9e63fa8c"
+  },
+  "workspace": "/private/tmp/u-clone-interrupt-6a9a4c28b515",
+  "calls": 8,
+  "primary_peer_roles": 24,
+  "normal_pairs": 6,
+  "designated_interrupted_pairs": 2,
+  "interrupted_client_exits": [
+    3,
+    3
+  ],
+  "owned_server_exits": [
+    -9,
+    -9
+  ],
+  "source_pins": 542,
+  "production_pins": 329,
+  "cases": [
+    {
+      "compiler": "stock",
+      "phase": 0,
+      "audit": {
+        "client_pid": 59885,
+        "proxy_pid": 59884,
+        "server_pid": 59887,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c0-0-pair.json",
+        "sha256": "3e8f1487be38ae9a6c9c8dc7fbd7da585e018d073d78418e9e676b6d0180774c"
+      }
+    },
+    {
+      "compiler": "stock",
+      "phase": 1,
+      "audit": {
+        "client_pid": 59898,
+        "proxy_pid": 59897,
+        "server_pid": 59900,
+        "client_exit": 3,
+        "server_exit": -9,
+        "event": {
+          "signal": {
+            "group": 59897,
+            "owned_unreaped_before_signal": true,
+            "pid": 59900,
+            "reason": "observed private clone stage; original generated-file failure control",
+            "signal": 9
+          },
+          "stage": {
+            "device": 16777223,
+            "inode": 313648083,
+            "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/0/right/.unison.ordinary.bin-clone.d93372ee32662bc1f84c0b229b75be3d.unison.tmp",
+            "size": 8388608
+          }
+        },
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 539,
+        "name": "c0-1-INTERRUPTED.json",
+        "sha256": "9b45868edb70a11ac6e5e444d2c6217242ca59d2274857419b93828edba3cbbe"
+      }
+    },
+    {
+      "compiler": "stock",
+      "phase": 2,
+      "audit": {
+        "client_pid": 59904,
+        "proxy_pid": 59903,
+        "server_pid": 59906,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c0-2-pair.json",
+        "sha256": "3b3909b775c12102a7242b66b08334557f53b16c1ed06529877a3fa9a0f2077e"
+      }
+    },
+    {
+      "compiler": "stock",
+      "phase": 3,
+      "audit": {
+        "client_pid": 59910,
+        "proxy_pid": 59909,
+        "server_pid": 59912,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c0-3-pair.json",
+        "sha256": "8b6f449315192408444af9880c2b92457bb399d1ee1c947fffaa144cd36bac3d"
+      }
+    },
+    {
+      "compiler": "ox",
+      "phase": 0,
+      "audit": {
+        "client_pid": 59918,
+        "proxy_pid": 59917,
+        "server_pid": 59929,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c1-0-pair.json",
+        "sha256": "de40070ae659fb48ce577238a22356a6e073117577804a460443c3a1356d6e77"
+      }
+    },
+    {
+      "compiler": "ox",
+      "phase": 1,
+      "audit": {
+        "client_pid": 59934,
+        "proxy_pid": 59933,
+        "server_pid": 59936,
+        "client_exit": 3,
+        "server_exit": -9,
+        "event": {
+          "signal": {
+            "group": 59933,
+            "owned_unreaped_before_signal": true,
+            "pid": 59936,
+            "reason": "observed private clone stage; original generated-file failure control",
+            "signal": 9
+          },
+          "stage": {
+            "device": 16777223,
+            "inode": 313648230,
+            "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/1/right/.unison.ordinary.bin-clone.01474f973e2ae5968558b1405953c448.unison.tmp",
+            "size": 8388608
+          }
+        },
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 539,
+        "name": "c1-1-INTERRUPTED.json",
+        "sha256": "acc3e383b0d7f22f6b70da94c1c43b5b5b8e10942b396e12f1794a48c157150b"
+      }
+    },
+    {
+      "compiler": "ox",
+      "phase": 2,
+      "audit": {
+        "client_pid": 59940,
+        "proxy_pid": 59939,
+        "server_pid": 59942,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c1-2-pair.json",
+        "sha256": "42b21e06d6dc592844df621fcb245a4a5cf228c124fbef5b427b193a81f62017"
+      }
+    },
+    {
+      "compiler": "ox",
+      "phase": 3,
+      "audit": {
+        "client_pid": 59946,
+        "proxy_pid": 59945,
+        "server_pid": 59948,
+        "external_children_source_audit_required": true,
+        "resource_release_authorized": false
+      },
+      "pair": {
+        "bytes": 867,
+        "name": "c1-3-pair.json",
+        "sha256": "08c26e61e2d14c46fbe4945ef6dc9e8654a1c0a705572aab2eae422fea0618ac"
+      }
+    }
+  ],
+  "raw_references": [
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/START.json",
+      "bytes": 624,
+      "sha256": "c90b02abaa8f54edff44a4f0839ef84652a4fd1ea657ad5d28502bd2aa29092d"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/RESULT.json",
+      "bytes": 89657,
+      "sha256": "0b00d8670f52a367b5b71c14170bffa98c98d2f6393e95b78f0649f3f4fe5fb8"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c0-0-INTENT.json",
+      "bytes": 2623,
+      "sha256": "20d2d14c15156ccec4c1840d7d873326d9e5f5127cf7e7fc0ff5c9d3dd7742a7"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c0-1-INTENT.json",
+      "bytes": 2907,
+      "sha256": "ad952658627be2db9bce548a96c5202ab599559bf524b8e110acf10ab3a9f6a2"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c0-2-INTENT.json",
+      "bytes": 3048,
+      "sha256": "5c822eb0ad7894d9668bdd097ad8548f8152bdaa32f34844ae5a1d4bbf1c8d2d"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c0-3-INTENT.json",
+      "bytes": 3253,
+      "sha256": "8a1a3d4c7c96a6bd555c898ce320aeb0c6e6cdc69af63c2cd95098c949b0b2ad"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c1-0-INTENT.json",
+      "bytes": 3865,
+      "sha256": "859a320c5a56a60a8afb7cb982549bb0c31d6374afac9ecdae5d230b893f7a9c"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c1-1-INTENT.json",
+      "bytes": 4149,
+      "sha256": "a9483e7e27da8f9aa1ddecd1f8ca2bfb87ef9effc071605c8bac7e85a0b6eadf"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c1-2-INTENT.json",
+      "bytes": 4290,
+      "sha256": "5079e41d33f6bb71802cf80d03b90f79bdbccd35f3ef60875f7ed7a469a7c5ed"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c1-3-INTENT.json",
+      "bytes": 4495,
+      "sha256": "2fd32aac8751d337578574b0fc273cf36aa2e52259157db2ffedb72cb1fda48e"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c0-1-RAW-PAIR.json",
+      "bytes": 4248,
+      "sha256": "82ee89c6f7d36485b7a1eaf0246b19250f6d7afbb7b14ae33e98fbb2a8d82a24"
+    },
+    {
+      "path": "/private/tmp/u-clone-interrupt-6a9a4c28b515/c1-1-RAW-PAIR.json",
+      "bytes": 4257,
+      "sha256": "91839e035feacbab7ce3ef8a0d1f1a33a687378dd63a9a449522758cc3364fed"
+    }
+  ],
+  "fresh_final_generated_bytes": 37748736,
+  "old_readers_temporal_preservation_recorded": true,
+  "partial_clone_not_reused_as_final_inode": true,
+  "post_recovery_noop_identity_exact": true,
+  "all_staging_absent_after_recovery": true,
+  "canonical9_reacquired_closed": true,
+  "SDK_or_Photo_calls": 0,
+  "scope": "Original generated two-compiler seed/observed-clone-stage server-only SIGKILL/exact live destination+old reader+hardlink/fresh clone recovery/noop; no physical crash durability/all clone-sync cases/photos/SDK."
+}

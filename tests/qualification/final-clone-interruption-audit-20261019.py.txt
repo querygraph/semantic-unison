@@ -1,0 +1,54 @@
+import hashlib,json,os,random,sys
+from pathlib import Path
+R=Path('/Users/alexy/src/unison-final-adobe-20261019');sys.path[:0]=[str(R/'tests'),str(R/'tests/sdk_host_matrix'),str(R/'bench/sync')]
+from cached_benchmark.contract import read_bytes
+from final_profile_owner import sha
+from final_clone_interruption_owner import audit_interruption,generated_bytes,receiver_clone_observed
+from batch_pair import audit
+from batch_transport import restore
+from sdk_merge_receiving.store import Store
+from component_remote.io import identity
+from shared_cpu_pool import Pool
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle
+from shared_process_owner import retain_after_record
+P=R/'doc/final-clone-interruption-plan-v3-20261019.json';assert sha(P)=='442755afaf6c2a9bee07e44e0bc35665c8a9bdccb5a2932016b83bed9e63fa8c';p=json.loads(read_bytes(str(P),2*1048576));root=Path(p['workspace'])
+pool=Pool.read(str(R.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd');bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,tuple(range(8)))
+if bundle is None:raise SystemExit(2)
+io,cpu=bundle
+try:
+ start=json.loads(read_bytes(str(root/'START.json'),65536));result=json.loads(read_bytes(str(root/'RESULT.json'),2*1048576));assert start['owner_pid']==59868 and result['complete'] is True and len(result['cases'])==8 and result['SDK_or_Photo_calls']==0 and result['parent_tool_terminal_proved'] is False
+ assert {(os.fstat(fd).st_dev,os.fstat(fd).st_ino) for fd in (*cpu.fds,*io.fds)}=={(row['device'],row['inode']) for row in start['resource_rows']}
+ for name,digest in p['source_pins'].items():assert sha(R/name)==digest,name
+ for name,digest in result['production_pins'].items():assert sha(R/name)==digest,name
+ for ref in (*p['artifacts'].values(),p['interpreter'],*p['compiler_artifacts'].values()):assert sha(ref['path'],64*1048576)==ref['sha256']
+ for path,pin in result['scripts'].items():assert sha(path,65536)==pin['sha256']
+ s=root.stat();store=Store(str(root),dict(device=s.st_dev,inode=s.st_ino));pids=[];rows=[];refs=[];fresh_bytes=0
+ for index,label in enumerate(('stock','ox')):
+  directory=root/str(index);rng=random.Random(98231);original=rng.randbytes(2*1048576);target=rng.randbytes(8*1048576);events=None;previous=None
+  for phase in range(4):
+   name='c%d-%d'%(index,phase);record=next(x for x in result['cases'] if x['compiler']==label and x['phase']==phase);intent=json.loads(read_bytes(str(root/(name+'-INTENT.json')),65536));assert intent['index']==index and intent['phase']==phase
+   proxy_command=[p['interpreter']['path'],'-B',str(root/(name+'-proxy.py'))]
+   if phase==1:
+    raw_path=root/(name+'-RAW-PAIR.json');value=json.loads(read_bytes(str(raw_path),2*1048576));value['raw_proxy']=value['raw_proxy'].encode();joined=audit_interruption(value,client_command=intent['command'],proxy_command=proxy_command,server_command=intent['server_command'],right=directory/'right');events=joined['event']
+    assert json.loads(read_bytes(str(root/(name+'-PROXY.json')),65536))==json.loads(value['raw_proxy'])
+    assert joined==store.read_json(record['pair']['name'],expected_sha256=record['pair']['sha256'])['audit']
+    assert record['target_identity']['st_ino']==previous['st_ino'] and record['target_identity']['st_dev']==previous['st_dev']
+   else:
+    pair=store.read_json(record['pair']['name'],expected_sha256=record['pair']['sha256']);joined=audit(store,pair['evidence'],client_command=intent['command'],proxy_command=proxy_command,server_command=intent['server_command'])
+    if phase==2:
+     client=restore(store,pair['evidence']['client'],intent['command']);proxy=restore(store,pair['evidence']['proxy'],proxy_command);assert receiver_clone_observed(client,proxy)
+     assert '-ignorelocks' in intent['command'] and (record['target_identity']['st_dev'],record['target_identity']['st_ino'])!=(events['stage']['device'],events['stage']['inode'])
+    if phase==3:assert record['target_identity']==previous
+   expected=original if phase<2 else target;assert record['target_sha256']==hashlib.sha256(expected).hexdigest();assert record['source_identity']==intent['source_before']
+   if phase:assert record['old_reader_preserved'] is True
+   pids.extend(joined[k] for k in ('client_pid','proxy_pid','server_pid'));rows.append(dict(compiler=label,phase=phase,audit=joined,pair=record['pair']));previous=record['target_identity']
+  for path,expected in [(directory/'left/ordinary.bin',target),(directory/'right/ordinary.bin',target),(directory/'old-hardlink',original)]:
+   value=generated_bytes(path,links=1);assert value==expected;fresh_bytes+=len(value)
+  assert {x.name for x in (directory/'right').iterdir()}=={'ordinary.bin'} and identity(directory/'right/ordinary.bin')==previous
+ assert len(pids)==len(set(pids))==24
+ for path in [root/'START.json',root/'RESULT.json',*(root/('c%d-%d-INTENT.json'%(i,j)) for i in range(2) for j in range(4)),*(root/('c%d-1-RAW-PAIR.json'%i) for i in range(2))]:
+  refs.append(dict(path=str(path),bytes=path.stat().st_size,sha256=sha(path,2*1048576)))
+ store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True);io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+ receipt=dict(schema='unison-final-clone-interruption-independent-audit/1',actual_owner_terminal=dict(session_id=61494,initial_chunk='46d9d2',terminal_chunk='84393d',exit_code=0,running_session=None,pid=59868),plan=dict(path=str(P),sha256=sha(P)),workspace=str(root),calls=8,primary_peer_roles=24,normal_pairs=6,designated_interrupted_pairs=2,interrupted_client_exits=[3,3],owned_server_exits=[-9,-9],source_pins=len(p['source_pins']),production_pins=len(result['production_pins']),cases=rows,raw_references=refs,fresh_final_generated_bytes=fresh_bytes,old_readers_temporal_preservation_recorded=True,partial_clone_not_reused_as_final_inode=True,post_recovery_noop_identity_exact=True,all_staging_absent_after_recovery=True,canonical9_reacquired_closed=True,SDK_or_Photo_calls=0,scope='Original generated two-compiler seed/observed-clone-stage server-only SIGKILL/exact live destination+old reader+hardlink/fresh clone recovery/noop; no physical crash durability/all clone-sync cases/photos/SDK.')
+ path=R/'tests/qualification/final-clone-interruption-v3-actual-20261019.json';assert not path.exists();path.write_text(json.dumps(receipt,indent=2)+'\n');print(json.dumps(dict(receipt=str(path),sha256=sha(path),calls=8,primary_roles=24,fresh_bytes=fresh_bytes,CPU8_EX_closed=True)))
+except BaseException as error:retain_after_record(lambda:print('CLONE_AUDIT_RETAIN',repr(error),flush=True))
