@@ -6739,3 +6739,23 @@ Receipt: `tests/qualification/current-sdk-merge-ledger-controls-20261019.json`.
 This completes source failure-accounting controls, not the executor or runtime
 qualification. Missing older generated fixture states remain a separate input
 recovery task; no historical fixture or admission was recreated.
+
+## SDK merge kernel and helper auditor — 2026-10-19
+
+Active source worktree `/Users/alexy/src/unison-final-adobe-20261019` now contains
+`tests/sdk_merge_receiving/worker.py` and `helpers.py`: intent-before-invocation,
+independent transport/output adapter boundaries, strict two-endpoint SDK frame
+and retained-group parsing, unchanged nested uncertainty carriers, and no release
+authority. Failures after dispatch retain original cause/outcome/ledger instead
+of becoming an ordinary failed-prefix release. No real transport adapter or
+native CLI/admission is provided yet; this is not a runtime-ready successor.
+
+Combined18 original inert controls passed actual toold78078/exit0/no session;
+child25376 reaped0/group-empty then canonicalCPU00..03 closed. Earlier helper
+controls cf7510/0 likewise closed. Receipts `tests/qualification/current-sdk-merge-
+worker-controls-20261019.json` and `current-sdk-merge-helper-controls-20261019.json`
+record outputs/source pins. Zero SDK/media/IO-pool/transport/compiler invocation.
+Next: retained real transport/raw evidence binding, then fixture recovery and
+owned freezer/admission. Historical input loss remains unknown; no source photos
+or historical tmp namespaces were changed. No further benchmark/native starts
+from these source controls; goal remains incomplete and active.

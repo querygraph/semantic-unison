@@ -15,8 +15,9 @@ child was reaped0/group-empty before the four canonical CPU tokens closed.
 No IO pool, source DNG, Adobe, compiler or Unison transport was invoked.
 [Control receipt](../qualification/current-sdk-merge-plan-controls-20261019.json).
 
-This is NOT runtime ready: no worker, exact metadata freezer, admission route or
-runtime request is provided yet. A pure schedule does not authorize SDK calls.
+This is NOT runtime ready: the worker kernel now exists, but no real retained
+transport adapter, exact metadata freezer, admission route or runtime request is
+provided yet. Source contracts and fabricated adapters do not authorize SDK calls.
 
 ## Required executor composition
 
@@ -82,3 +83,26 @@ failure, and unknown-intent classification as settled failure. Raw helper hashes
 are references only: all reports explicitly deny release authorization. Ten
 combined inert tests pass; independent raw audits and the retained executor are
 still required. See `../qualification/current-sdk-merge-ledger-controls-20261019.json`.
+
+## Retained worker kernel and raw helper audit
+
+`worker.py` now composes the schedule, durable intent, trusted retained invocation
+adapter, independent transport audit, strict helper audit and output verifier.
+After dispatch, ordinary errors are carried as unresolved ownership with original
+cause, invocation outcome and ledger; existing uncertainty carriers are preserved
+unchanged. It cannot close CPU/IO or claim worker settlement. No native entrypoint
+is exposed. Preparation and invocation adapters retain their own FD/child owners.
+
+`helpers.py` independently parses both endpoint process/group records and exact
+SDK frames, preserving warnings and explicitly missing raw digests. Any failed
+command needs a separate retained-prefix audit; absence of diagnostics is never
+a failed-command no-creation proof. Seed/no-op validation remains off; only the
+merge requires client+server helper records. Raw transport and output fences are
+separate requirements, not inferred from helper receipts.
+
+Actual controls: helper suite toolcf7510/0, child25130 reaped0/group-empty; combined
+18-test suite toold78078/0, child25376 reaped0/group-empty. Both actual parent tools
+returned without sessions, CPU00..03 closed after child settlement, no IO pool,
+SDK, media, compiler or transport. Qualification receipts preserve full output.
+Remaining: retained transport/proxy deadline behavior, actual raw evidence
+binding, authenticated fixture recovery and owned admission/freezer integration.
