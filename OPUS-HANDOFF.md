@@ -6305,3 +6305,13 @@ Photo schedulinghandofffollow-up01a1527f-87c0 sentexactindex: userwantsPhotoIO
 last, directUnisonAdobequalificationafteractualdrain. Noactualhandoffinferred;
 next executeexactfinitecohortsonlyaftercurrentPhotoresourceclosureconfirmed.
 Default8/8unchanged; largercohortrequiresseparatetemporary18authorization.
+
+
+### Scheduling correction after cohort freeze
+Photo reported NEWbulk256 START69656/41f53d controller60081 afterourdrainrequests.
+Treat actualcurrentEXIO+Photo8 ownership as live untilPhotoactualterminal; NOT
+paused/handedoff. Queue01a15280-658f explicitlyreconciles user'sPhotoIO-last
+steering: drainnormalcheckpoint ifsupported, do notcancelunsafepublication or
+liveowner, finishatomicadmitted256ifrequired, HOLDsuccessors thenactualclosure.
+No UnisonIO/Adobe/18borrow dispatched; sourceworkunderown8continues. Frozen10
+cohortrequests stillUNADMITTED/unused, sourcepinsunchanged.
