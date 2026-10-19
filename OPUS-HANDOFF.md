@@ -7392,3 +7392,16 @@ Photo reported new live continuation2878 after startup recovery5890 closed.
 Requested normal completion then HOLD NEW Photo IO/native/SDK dispatches via
 queue01a153a1-ad7c, aligning user end-of-work Adobe handover proposal. No active
 Photo process interrupted; no handover/resource release yet claimed.
+
+
+## 2026-10-19 byte-exact batch capture source successor
+
+Added separate BatchCapture over existing drain loop; common measure.py and
+prepared/frozen plan pins unchanged. Complete rawbytes publish as chunk refs,
+invalidUTF8 preserved, overflow refuses, finish/close at most once. Owning batch
+wrapper must retain capture/preclose identities on exceptions; no release
+authority from capture. Original four in-memory tests passed actualf7bca1/0/no
+session under Unison00/qualified close, no children/EXIO/SDK/Photo. Earlier
+2ce5f7/0 tested the same behavior in a transient common-helper edit, removed
+before commit to keep existing qualifications stable. Batch controller remains
+unfinished, dispatcher_ready=false, no actual new workload sync claimed.

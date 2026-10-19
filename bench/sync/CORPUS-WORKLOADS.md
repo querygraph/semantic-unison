@@ -87,3 +87,12 @@ Four original tiny32768B fixture controls passed, actual terminal900e6d/0/no
 session under Unison00. No sync/corpus benchmark, Photo payload or EXIO used.
 The full corpus phase controller and raw capture/transport integration remain
 unimplemented; this does not change dispatcher_ready=false.
+
+`batch_capture.BatchCapture` is a separate source successor over the existing
+bounded drain loop. It preserves invalidUTF8 bytes, drains but refuses overflow,
+and attempts finish/close only once. `finish_artifact` publishes complete bytes
+through the pinned chunk layer. The owning process wrapper must retain capture
+objects/preclose identities on any uncertainty; this class does not establish
+child/group closure. Existing measure.CapturedStream and frozen plans remain
+unchanged. Four in-memory controls passed actualf7bca1/0/no session, Unison00
+closed, no subprocess/EXIO/Photo. End-to-end owning batch wrapper is still open.
