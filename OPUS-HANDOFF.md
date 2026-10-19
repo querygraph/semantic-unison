@@ -6480,3 +6480,11 @@ Workspace02f27a5d1e7f43d59f7f1fddbc5378ec,admission4ddd20bbconsumedonce.
 OWNER-RETURN 670cbdaf314b82b5789a604cb48a67cd728225bf41a6fc27bf03ccbdd86f3490; evidenceauto-cohort-ox8-actual-20261018.json.
 Eightof10/144rows432CLI closed; stockauto/Oxauto remain freshserial.
 SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
+
+
+### Stockauto temporary18 ACTUAL PASS/CLOSED
+Actual49709/f0118e→336e2d/0/no session,parent84404/worker84420;18rows54CLI exact,workerreaped0/groupsabsent/CPU18EXclosed/source53unchanged.
+Workspace9e8c29a61f17489bb375fa6b4f3e4a13,admission3df77beeconsumedonce.
+OWNER-RETURN f7f9006e4cf638b40e06cca4a0bc7d94207d06952da8a120caed9baf009a18e2; evidenceauto-cohort-stockauto-actual-20261018.json.
+Nineof10/162rows486CLI closed; finalOxauto remains freshserial.
+SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
