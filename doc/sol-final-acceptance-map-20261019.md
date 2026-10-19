@@ -123,3 +123,8 @@ full logical model are retained as negative optimization evidence.
 ### Measured many-small worker1 cohort
 
 [Actual receipt](../tests/qualification/final-many-small-measured-worker1-actual-20261019.json) and [report](final-many-small-worker1-measurements-v2-20261019.md): 36 normal closed owners/108 CLI,6warm+30measured. All targets and no-op fences verified before generated cleanup; retained raw peer evidence re-audited. Ordinary faster in this dataset; clone/SDE reduce modeled logical writes. No physical-write/cold-cache/quiet/scaling claim. Worker3 and other prescribed shapes/topologies remain incomplete.
+
+
+### Current native cross-volume and non-APFS fallback renewed
+
+[Directed twelve-case result](final-private-volume-result-20261019.md) and [actual receipt](../tests/qualification/final-private-volume-v3-actual-20261019.json) bind current stock/Ox binaries to both APFS/HFS+ directions, generic clone auto/off and DNG semantic cloning/fallback. Actual19831/bb1af5/0; all42childgroups closed, image normally detached, independent604d3a/0 audit rehashed36MiB of surviving APFS data and all source/artifact bindings. This closes the actual distinct-logical-volume/non-APFS functional gap, not the prescribed repeated topology benchmark or independent physical-device/sparse/property/network scope. V1/V2 harness failures and recovery137 are explicitly preserved.

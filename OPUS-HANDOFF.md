@@ -6,11 +6,13 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `18e8ac63`. No `src/` differences from frozen review
+  before this checkpoint: `71c61487`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
-- **Resources:** zero owned jobs/IO/CPU/SDK resources. Measuredcohort81175
-  actually completed1385dc/exit0/NOsession,36owners+108CLIclosed. Standing
+- **Resources:** zero owned jobs/IO/CPU/SDK resources. Private-volumeV3
+  completed19831/bb1af5/0 plus42childgroups/normaldetach/audit604d3a/0.
+  Worker3 completed89068/c424bf/0/NOsession,36owners+108CLIclosed. Worker1
+  completed81175/1385dc/0/NOsession,36owners+108CLIclosed. Standing
   Unison00..07 / Photo08..15 / system16..17 remains. Photo actual normal drain
   tool2878/cbaefa→a2c2a1/exit0/NOsession closed owner77136/all phase groups,
   helper audit and Photo8+EXIO. Photo reports zero reservations and holds NEW
@@ -7667,3 +7669,66 @@ Proxywait4CPU mayinclude reapedserver; no whole-tree peaks/hardcaps/quiet
 causalcompilerclaim. AllgeneratedreplicasremovedONLYafter exactbytes/noop
 checks; proofs retained. CurrentzeroUnisonresources; PhotoIOhandovercontinues.
 Next sharedworker3 repeatedcohort to exercise3+3+2inside8; Adobequalificationlast.
+
+
+## LIVE measured worker3 cohort,2026-10-19
+
+Actual owning session89068/initiale4f954/coordinator12713, root
+/private/tmp/u-cohort-m3-53ffdb74530a4f1c, immutable plane0fbe12f39eb8f97223d5702c649c3f67e290a01391e06d84d23ff124f756cb3.
+36fresh cases, sixwarm+30measured; three workers at BOTH endpoints+owner2
+inside standing8, EX first; no18/SDK/Photo/Main/cache/original. Lastobserved
+22closed samples; no failure/replacement. Must collect same tool actualterminal
+and re-audit108peerpairs before marking complete. Photo notified01a153fb-df4f.
+Worker1 report/actualreceipt committed71c61487. New unexecuted private-volume
+owner/tests/design are source-only, not partof frozen162cohort executionpins;
+run controls afterthisowner closes. No HFS image created/mounted yet.
+
+
+## Worker3 measured cohort ACTUAL COMPLETE,2026-10-19
+
+Supersedes LIVE89068 snapshot: actual89068/e4f954→c424bf/exit0/NOsession,
+coordinator12713. All36samples/108CLI/324peerroles normalclosed; sixwarm+30
+measured, no exclusions/replacements. Fresh metadata/raw audit73756/f4c48d/0
+reparsedall108pairs, caseownerargv/realsettlements and metricbindings; IOCPUclosed.
+Nineteen source controls046d33/0 passed, CPU00closed, including two new private
+volume contract methods (NOT a mounted volume test). Currentzeroresources.
+Newreport doc/final-many-small-worker3-measurements-v1-20261019.{json,md},
+comparison doc/final-many-small-worker-comparison-20261019.md; actualreceipt
+tests/qualification/final-many-small-measured-worker3-actual-20261019.json.
+Ordinary remainsfastest; shared/uncontrolled warm cohorts at differenttimes
+only descriptiveworker1/3 comparison. Appreadbytes/FDqueuepeaks/stagetimes
+uninstrumented/unknown; logicalmodelsnotphysicalwrites. NoSDK/Photo.
+PrivateHFSimageowner/source acceptedby19originalcontrols, notruntimequalified.
+Next freeze andexecute12case/36CLI privateAPFS↔HFSimage matrix,currentbinaries,
+no actualphysicaldevice/Photo/original access; retainunknownmount+leases.
+Remaining29largefixedcohorts andplatform/baseline/Adobe acceptance stillopen;
+noactive18grant. PhotoIO/nativehandoverstillactive, sourceCPU8independent.
+
+
+## Private APFS↔HFS+ matrix ACTUAL PASS/CLOSED,2026-10-19
+
+Fresh V3 actual19831/2b38ca→bb1af5/0/NOsession, owner19477,
+/private/tmp/u-volume-v3-19c5b3797c964766; pland2bd7fe7. All12cases/36CLI
++6image/metadata commands actualreaped0/groupsabsent; source+targetexacthashes,
+oldreceiverhardlinkbytes andnoopinode verified, Unicodefilename. HFS→APFS
+genericreceiverclone1966080inheritedlogicalbytes, DNGsemanticclone; APFS→HFS
+ordinaryfallback exact. Cloneoffordinaryexactbothdirections/bothcompilers.
+Normalowned128MiBimage detached/freshcensusabsent beforeStore/CPU8EXclose.
+No physicaldeviceformat/independentdevice/physicalwrite/SDK/Photo/18claim.
+Independentpostclosedaudit604d3a/0 re-readall42childrecords/exactargv,164harness
++329productionsources/currentartifacts; freshAPFS12files+6oldbasis hashes
+(36MiB); all8EXfreshacquired/closed. NoHFSremount/read afterdetach claimed.
+Actualreceipt tests/qualification/final-private-volume-v3-actual-20261019.json;
+human doc/final-private-volume-result-20261019.md. AllcurrentresourcesZERO.
+V1failedunknown-option seedraw notsaved; original64540/7903aa/137 recovered
+after normaldetach. Metadathelpers66785/417217/137,16639/1cce56/137,
+78577/e9f567/137 preserved; finalknownrecoveryb97967/0/freeproofe2237e/0.
+V2seed/updateactual0 butstdout-onlyobservermissedstderrclonecounter; original
+1763/463c95/137, recovery718ce4/0, wholefreeecb11f/0. Bothfailedsources
+preserved *.py.txt/oneuseplans/proofs; NOTmatrixpasses/originalnormalexit.
+V3fixedqualifiedflagbuilder/failedraw-firstrecording/actualhdiutilschema/
+CLIcombinedstreams after23directedcontrols114e99/0. No blinded same-nonce retry.
+Next independent filesystem-property/compatibility/baseline andremaining
+prescribedbenchmarks; authenticSDKfixtures/source recovery andfinalAdobe
+merge/policyreceiving remain last. PhotoIOhandoverstillholdsnewnative/SDK
+whilePhotoCPU8source independent; Main/catalog/cache remainPhotoexclusive.

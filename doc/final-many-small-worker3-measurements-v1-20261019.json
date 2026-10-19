@@ -1,0 +1,3511 @@
+{
+  "rows": 36,
+  "measured_rows": 30,
+  "warmup_rows": 6,
+  "raw_peer_pairs_reaudited": 108,
+  "unmeasured": {
+    "physical_write_bytes": null,
+    "application_read_bytes": null,
+    "peak_live_descriptors": null,
+    "peak_queue_depth": null,
+    "hash_parse_verify_commit_stage_seconds": null,
+    "scope": "not instrumented by this cohort; logical models, protocol counters and per-process samples are not substitutes"
+  },
+  "summary": [
+    {
+      "label": "ox",
+      "mode": "ordinary",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 6.691625828,
+        "minimum": 6.563945571,
+        "maximum": 6.70239011,
+        "raw": [
+          6.691625828,
+          6.701212995,
+          6.563945571,
+          6.662428382,
+          6.70239011
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 6.890878117,
+        "minimum": 6.76153498,
+        "maximum": 6.9015925,
+        "raw": [
+          6.890878117,
+          6.9015925,
+          6.76153498,
+          6.853030546,
+          6.900113997
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 0.8894169999999999,
+        "raw": [
+          0.8940060000000001,
+          0.8858809999999999,
+          0.8894169999999999,
+          0.9063049999999999,
+          0.8880349999999999
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 24600576,
+        "raw": [
+          24600576,
+          24125440,
+          23928832,
+          24440832,
+          23818240
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 5.861214,
+        "raw": [
+          5.89363,
+          5.871682,
+          5.849495,
+          5.856966,
+          5.861214
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 22437888,
+        "raw": [
+          20983808,
+          21245952,
+          20930560,
+          22437888,
+          21495808
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2660007,
+          2660007,
+          2660007,
+          2660007,
+          2660007
+        ],
+        "server_to_client_bytes": [
+          1001595,
+          1001595,
+          1001595,
+          1001595,
+          1001595
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.162125478,
+        "minimum": 8.117970031,
+        "maximum": 8.244572265,
+        "raw": [
+          8.244572265,
+          8.169739177,
+          8.162125478,
+          8.136273516,
+          8.117970031
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.354742438,
+        "minimum": 8.313377587,
+        "maximum": 8.441467559,
+        "raw": [
+          8.441467559,
+          8.404941389,
+          8.354742438,
+          8.330100292,
+          8.313377587
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 0.887078,
+        "raw": [
+          0.89633,
+          0.8950149999999999,
+          0.887078,
+          0.8828469999999999,
+          0.878925
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 24350720,
+        "raw": [
+          24121344,
+          24350720,
+          23736320,
+          23896064,
+          23437312
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.063946,
+        "raw": [
+          7.124013000000001,
+          7.121548000000001,
+          7.0254959999999995,
+          7.062396,
+          7.063946
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 23134208,
+        "raw": [
+          23134208,
+          22319104,
+          21622784,
+          22364160,
+          22740992
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2660008,
+          2660008,
+          2660008,
+          2660008,
+          2660008
+        ],
+        "server_to_client_bytes": [
+          1001595,
+          1001595,
+          1001595,
+          1001595,
+          1001595
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "ox",
+      "mode": "semantic",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 6.773932562,
+        "minimum": 6.742301745,
+        "maximum": 7.094045598,
+        "raw": [
+          6.885692881,
+          7.094045598,
+          6.742301745,
+          6.760343835,
+          6.773932562
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 6.968037548,
+        "minimum": 6.933721442,
+        "maximum": 7.288556137,
+        "raw": [
+          7.078630279,
+          7.288556137,
+          6.933721442,
+          6.95554346,
+          6.968037548
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.382063,
+        "raw": [
+          1.382063,
+          1.392303,
+          1.3742359999999998,
+          1.369187,
+          1.3842349999999999
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 47951872,
+        "raw": [
+          47804416,
+          44818432,
+          46518272,
+          46215168,
+          47951872
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.55445,
+        "raw": [
+          7.644126,
+          7.626607999999999,
+          7.524936,
+          7.534974999999999,
+          7.55445
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 74301440,
+        "raw": [
+          74301440,
+          69525504,
+          73711616,
+          69419008,
+          66723840
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2201354,
+          2201354,
+          2201354,
+          2201354,
+          2201354
+        ],
+        "server_to_client_bytes": [
+          895291,
+          895291,
+          895291,
+          895291,
+          895291
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "ordinary",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 6.533021424,
+        "minimum": 6.470214006,
+        "maximum": 6.597474861,
+        "raw": [
+          6.587750024,
+          6.597474861,
+          6.533021424,
+          6.495135932,
+          6.470214006
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 6.726898975,
+        "minimum": 6.667224785,
+        "maximum": 6.793625991,
+        "raw": [
+          6.791571545,
+          6.793625991,
+          6.726898975,
+          6.6934087,
+          6.667224785
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 0.8851640000000001,
+        "raw": [
+          0.8949499999999999,
+          0.8851640000000001,
+          0.893194,
+          0.87844,
+          0.8738199999999999
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 19415040,
+        "raw": [
+          19415040,
+          19259392,
+          19263488,
+          19312640,
+          19030016
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 5.799049,
+        "raw": [
+          5.886718,
+          5.790724,
+          5.799049,
+          5.803205,
+          5.794793
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 18751488,
+        "raw": [
+          18694144,
+          18538496,
+          18583552,
+          18751488,
+          18505728
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2660007,
+          2660007,
+          2660007,
+          2660007,
+          2660007
+        ],
+        "server_to_client_bytes": [
+          1001595,
+          1001595,
+          1001595,
+          1001595,
+          1001595
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "receiver-clone",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 8.169397566,
+        "minimum": 8.1387714,
+        "maximum": 8.189179712,
+        "raw": [
+          8.14487132,
+          8.169397566,
+          8.179120403,
+          8.1387714,
+          8.189179712
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 8.360472637,
+        "minimum": 8.333897689,
+        "maximum": 8.380299675,
+        "raw": [
+          8.335401272,
+          8.360472637,
+          8.366852138,
+          8.333897689,
+          8.380299675
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 0.8832089999999999,
+        "raw": [
+          0.8899440000000001,
+          0.901561,
+          0.8742269999999999,
+          0.8832089999999999,
+          0.8806080000000001
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 19623936,
+        "raw": [
+          19623936,
+          19550208,
+          18944000,
+          19611648,
+          19103744
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.055028999999999,
+        "raw": [
+          7.06201,
+          7.101575,
+          7.021293999999999,
+          7.054415,
+          7.055028999999999
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 18792448,
+        "raw": [
+          18587648,
+          18685952,
+          18448384,
+          18792448,
+          18538496
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2660008,
+          2660008,
+          2660008,
+          2660008,
+          2660008
+        ],
+        "server_to_client_bytes": [
+          1001595,
+          1001595,
+          1001595,
+          1001595,
+          1001595
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        }
+      ]
+    },
+    {
+      "label": "stock",
+      "mode": "semantic",
+      "workers": 3,
+      "measured_samples": 5,
+      "client_elapsed_seconds": {
+        "median": 7.008729934,
+        "minimum": 6.931555803,
+        "maximum": 7.152123186,
+        "raw": [
+          6.999179651,
+          7.008729934,
+          6.931555803,
+          7.152123186,
+          7.115444646
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "pair_elapsed_seconds": {
+        "median": 7.202055023,
+        "minimum": 7.1246564,
+        "maximum": 7.348387202,
+        "raw": [
+          7.202055023,
+          7.199582598,
+          7.1246564,
+          7.348387202,
+          7.306644406
+        ],
+        "tail_scope": "five observations only; maximum descriptive, not population tail guarantee"
+      },
+      "client_cpu_seconds": {
+        "median": 1.472241,
+        "raw": [
+          1.473481,
+          1.482924,
+          1.4659369999999998,
+          1.4591219999999998,
+          1.472241
+        ]
+      },
+      "client_maxrss_native_units": {
+        "maximum_observed": 30404608,
+        "raw": [
+          28655616,
+          29843456,
+          28798976,
+          28172288,
+          30404608
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "proxy_cpu_seconds": {
+        "median": 7.873578999999999,
+        "raw": [
+          7.907723000000001,
+          7.9019330000000005,
+          7.840626,
+          7.845855,
+          7.873578999999999
+        ]
+      },
+      "proxy_maxrss_native_units": {
+        "maximum_observed": 40947712,
+        "raw": [
+          38162432,
+          39305216,
+          38068224,
+          35545088,
+          40947712
+        ],
+        "scope": "per-process wait4 maxrss; Darwin bytes/Linux KiB; not simultaneous tree peak"
+      },
+      "protocol_bytes": {
+        "client_to_server_bytes": [
+          2201354,
+          2201354,
+          2201354,
+          2201354,
+          2201354
+        ],
+        "server_to_client_bytes": [
+          895291,
+          895291,
+          895291,
+          895291,
+          895291
+        ]
+      },
+      "path_counters_raw": [
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        }
+      ]
+    }
+  ],
+  "sample_pins": [
+    {
+      "bytes": 7718,
+      "name": "SAMPLE-000.json",
+      "sha256": "e5dd96d80098949bd95562c42bbfd9574b0285086cf1a712c843a889252c034e"
+    },
+    {
+      "bytes": 7763,
+      "name": "SAMPLE-001.json",
+      "sha256": "3537d7a32f9b8c37664698d4abcfeeb6773f962872ad8d4ecf5a17cbf7166b68"
+    },
+    {
+      "bytes": 7796,
+      "name": "SAMPLE-002.json",
+      "sha256": "462e0b967fb6d102b86833402e1247a49f53f5dc19fa1636a2edc0a3072de113"
+    },
+    {
+      "bytes": 7765,
+      "name": "SAMPLE-003.json",
+      "sha256": "43959402c66e4417ad8d7fc7fb5537c0dbec90f996861cf7936feea6e4c5ee60"
+    },
+    {
+      "bytes": 7783,
+      "name": "SAMPLE-004.json",
+      "sha256": "51a6facee248aeaeff032ceaab398132575cac153ab59cebdfc281f88490997c"
+    },
+    {
+      "bytes": 7812,
+      "name": "SAMPLE-005.json",
+      "sha256": "705f494ea05cd4c5e0b3bf3daf80e3c5546c1c44d1f3b6dfd53b896897570db6"
+    },
+    {
+      "bytes": 7801,
+      "name": "SAMPLE-006.json",
+      "sha256": "a9d0c3e1c8bf532aef64ced587fc8d3fe739e8e17436d59a7aee8ae7f91ae7a4"
+    },
+    {
+      "bytes": 7778,
+      "name": "SAMPLE-007.json",
+      "sha256": "78e9d75225e7289795af935814d3e46840826a0d3ac4ab8445a8160b575223cf"
+    },
+    {
+      "bytes": 7816,
+      "name": "SAMPLE-008.json",
+      "sha256": "069d2236c5121f32a4430a2ba2f9492b5b00fb998626504f05b9725d4b499b03"
+    },
+    {
+      "bytes": 7725,
+      "name": "SAMPLE-009.json",
+      "sha256": "15ed1032188a39947131e019b4674f89b00a7b8eddacfb27d8859329bcef1058"
+    },
+    {
+      "bytes": 7744,
+      "name": "SAMPLE-010.json",
+      "sha256": "23b7ae50ab48138f8431191085b1ed73074ab74f4a9ea82df2239249617ef0fb"
+    },
+    {
+      "bytes": 7848,
+      "name": "SAMPLE-011.json",
+      "sha256": "5ab6f5381b05d4567c1c44d13507c13af362af07f9668f938a5ee1b60ef080f0"
+    },
+    {
+      "bytes": 7838,
+      "name": "SAMPLE-012.json",
+      "sha256": "476acb3f4ab4d4ebf89194512d2d28400db79591c7871d033db6d9eecac80783"
+    },
+    {
+      "bytes": 7797,
+      "name": "SAMPLE-013.json",
+      "sha256": "2205c5859d48bbbac5041010688b4069a4b63983cc5434dc2bf7867c381885e5"
+    },
+    {
+      "bytes": 7725,
+      "name": "SAMPLE-014.json",
+      "sha256": "8e18b37b0263f696fd752d5c16dbcad312679d0b626e3f09914c73298fedc71b"
+    },
+    {
+      "bytes": 7861,
+      "name": "SAMPLE-015.json",
+      "sha256": "d7f737c9f65109e8196e9cd5d3ff9668a8b048700abdeeb6ab71c8f99edd885b"
+    },
+    {
+      "bytes": 7758,
+      "name": "SAMPLE-016.json",
+      "sha256": "25061e4c399f976b1ef61b3baacb693da70d3594aed140bf1a8274e39adb92d5"
+    },
+    {
+      "bytes": 7713,
+      "name": "SAMPLE-017.json",
+      "sha256": "75d95550f609b6bada5de949ec6e6c6b2d82c23cb1a166083e0780e931c9e43f"
+    },
+    {
+      "bytes": 7727,
+      "name": "SAMPLE-018.json",
+      "sha256": "dc107b5679bbb94314283f2e42bd31db2a47a4d94901b315ee24d82413760bb2"
+    },
+    {
+      "bytes": 7788,
+      "name": "SAMPLE-019.json",
+      "sha256": "b0d6b568ae8c6e9561e6c45d668988a391b698c5a318857a8049a7b6e21fda5a"
+    },
+    {
+      "bytes": 7816,
+      "name": "SAMPLE-020.json",
+      "sha256": "a4cec5c3ace82a8e9d6863b636cefb952437da572fc6aacaf930a7b686d3458e"
+    },
+    {
+      "bytes": 7753,
+      "name": "SAMPLE-021.json",
+      "sha256": "184ca3c43ab0190a43d0d9ed09195aa6f3b12593b032511e23f6e29bfa4f0e49"
+    },
+    {
+      "bytes": 7776,
+      "name": "SAMPLE-022.json",
+      "sha256": "5fc6d5c7fae5c0980c7f598b68b9706b4222a47644e034fbe1e4f5d0838b360c"
+    },
+    {
+      "bytes": 7806,
+      "name": "SAMPLE-023.json",
+      "sha256": "23d9c85498bbd55ebcde304d58cd493394170b6facbf5668fb1852acea28acb8"
+    },
+    {
+      "bytes": 7790,
+      "name": "SAMPLE-024.json",
+      "sha256": "c766a66330926fb9cab49d408630057c59b15b16c7da6135d244c72e27520211"
+    },
+    {
+      "bytes": 7754,
+      "name": "SAMPLE-025.json",
+      "sha256": "5778dd187d76ced1c24b733052b9900b4f308423e3e11b4825cb222c696f1389"
+    },
+    {
+      "bytes": 7788,
+      "name": "SAMPLE-026.json",
+      "sha256": "8c77fc1365ac7b2a7c5aafbb590c4080ff324c342847cba8f6da0863bfc41867"
+    },
+    {
+      "bytes": 7807,
+      "name": "SAMPLE-027.json",
+      "sha256": "91cdc317f31e027c9ea899f4d3256d58cbff3905e2bf65fabf1f29db4feaa7ce"
+    },
+    {
+      "bytes": 7789,
+      "name": "SAMPLE-028.json",
+      "sha256": "218d2c9e17233a0078c1d14ece363967e042eb8c3602f3c3785c93a376e865dd"
+    },
+    {
+      "bytes": 7728,
+      "name": "SAMPLE-029.json",
+      "sha256": "cc4be96d1c32a35aaeba3121fb66d54e56b36abfbd3bfc91bc76138a21a5d7ea"
+    },
+    {
+      "bytes": 7793,
+      "name": "SAMPLE-030.json",
+      "sha256": "001b9ab54820b28672a34168b8a4369de3f16c7f333d9c7f3844b14ce5d47cdf"
+    },
+    {
+      "bytes": 7774,
+      "name": "SAMPLE-031.json",
+      "sha256": "fa9433d8feee8146118302883188269b409a5f15173678751edb315d9b18cda9"
+    },
+    {
+      "bytes": 7808,
+      "name": "SAMPLE-032.json",
+      "sha256": "bd28678ba3884a3a1493dcf163e7097149374217716afa8c462fe3d9276c2294"
+    },
+    {
+      "bytes": 7757,
+      "name": "SAMPLE-033.json",
+      "sha256": "1a13b5fa1ec25ecd596ac4d6fe7b018b658022ca1556d35ec7ac1ed5e1082fc1"
+    },
+    {
+      "bytes": 7785,
+      "name": "SAMPLE-034.json",
+      "sha256": "d8a54154e7a0bce211902cd7731e8f4f35f2946fb72433eb0ac163a7aa22f8e7"
+    },
+    {
+      "bytes": 7793,
+      "name": "SAMPLE-035.json",
+      "sha256": "7c37f85ac7299d294a87a688aa8a2e31e2268e91205ccd09d88c5eddc90e410e"
+    }
+  ],
+  "scope": "retained raw proof re-audit; payloads already verified before deliberate generated cleanup; no new runtime/terminal proof",
+  "schema": "unison-many-small-measured-report/1",
+  "state": "PASS_CLOSED",
+  "cohort_plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-many-small-measured-worker3-plan-v1-20261019.json",
+    "bytes": 33475,
+    "sha256": "e0fbe12f39eb8f97223d5702c649c3f67e290a01391e06d84d23ff124f756cb3"
+  },
+  "actual_owner": {
+    "session": 89068,
+    "initial_chunk": "e4f954",
+    "terminal_chunk": "c424bf",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 12713,
+    "evidence": "faithful transcription of actual owning tool terminal; not inferred by metadata re-audit"
+  },
+  "retained_result": {
+    "path": "/private/tmp/u-cohort-m3-53ffdb74530a4f1c/RESULT.json",
+    "bytes": 77187,
+    "sha256": "4582d6c5da6f7174302eec3e82ea648779f9bdda8f204064605f55e46dae0fe6"
+  },
+  "rows_raw": [
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/000.json",
+        "sha256": "d3abd0e56ade4d4913a150143c624501aab622606660e607e00bb75657dad3b4"
+      },
+      "complete": true,
+      "identity": {
+        "index": 0,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 12733,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-036a4edb458f4466/OWNER-RESULT.json",
+        "sha256": "c71892678713ab2a810ddb1d23bfbbac1298f23ac978c9641348f645eba19427"
+      },
+      "update": {
+        "client_elapsed_ns": 6591687958,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10724,
+          "wait4_maxrss_native_units": 19714048,
+          "wait4_system_seconds": 0.29602,
+          "wait4_user_seconds": 0.600004
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6787318745,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12631,
+          "wait4_maxrss_native_units": 18751488,
+          "wait4_system_seconds": 3.670916,
+          "wait4_user_seconds": 2.2174
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/001.json",
+        "sha256": "acdd42e1923f52f246f7c702770ddca3ab22cf853ba4e0c208c30f1ec018ebfd"
+      },
+      "complete": true,
+      "identity": {
+        "index": 1,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 12890,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-f50761e6b1a04363/OWNER-RESULT.json",
+        "sha256": "e081786220fec82960fdf83bbbf88d552cbe0f6aa529b36f01774798ce25c13f"
+      },
+      "update": {
+        "client_elapsed_ns": 8285472694,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10766,
+          "wait4_maxrss_native_units": 20131840,
+          "wait4_system_seconds": 0.304934,
+          "wait4_user_seconds": 0.619584
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8481111189,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13014,
+          "wait4_maxrss_native_units": 19546112,
+          "wait4_system_seconds": 4.819424,
+          "wait4_user_seconds": 2.373304
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/002.json",
+        "sha256": "54c1bcb657a63297a4ac0bac992e3320acdec7e4a8c39850db3b4c1ab28da40b"
+      },
+      "complete": true,
+      "identity": {
+        "index": 2,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 12987,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-bd802651b1b54b33/OWNER-RESULT.json",
+        "sha256": "843940fc51213e14084dd314c419003d5f9bcfeba9cea051e4612fd6544a76f8"
+      },
+      "update": {
+        "client_elapsed_ns": 7446163415,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13811,
+          "wait4_maxrss_native_units": 32501760,
+          "wait4_system_seconds": 0.536779,
+          "wait4_user_seconds": 0.991014
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7643329332,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 18635,
+          "wait4_maxrss_native_units": 42921984,
+          "wait4_system_seconds": 4.841671,
+          "wait4_user_seconds": 3.336693
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/003.json",
+        "sha256": "5753575338bfdc7f2ea59a1b94d60f182c75e568fdd4f9c91c5e0b51bd7f558b"
+      },
+      "complete": true,
+      "identity": {
+        "index": 3,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13111,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-03cb716e45ba419b/OWNER-RESULT.json",
+        "sha256": "2033ab47975710a17ea2194a98ccb054851cece0f0095996234fcebec0cbd0dd"
+      },
+      "update": {
+        "client_elapsed_ns": 6826483658,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11769,
+          "wait4_maxrss_native_units": 25079808,
+          "wait4_system_seconds": 0.305313,
+          "wait4_user_seconds": 0.6208469999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 7030433143,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13347,
+          "wait4_maxrss_native_units": 22036480,
+          "wait4_system_seconds": 3.747476,
+          "wait4_user_seconds": 2.285179
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/004.json",
+        "sha256": "21a909ecc654bae21a4ffe24af77f2faa3bc7fdc2d3f6a9f396fe92322d20605"
+      },
+      "complete": true,
+      "identity": {
+        "index": 4,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13292,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-6d17130b30ab40c7/OWNER-RESULT.json",
+        "sha256": "43c0e6feaf279bbf283daa6622a523801f6f8d272f2105a8653dc0e38f0038c4"
+      },
+      "update": {
+        "client_elapsed_ns": 8405396492,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11660,
+          "wait4_maxrss_native_units": 24743936,
+          "wait4_system_seconds": 0.294166,
+          "wait4_user_seconds": 0.6310749999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8602004578,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13534,
+          "wait4_maxrss_native_units": 22999040,
+          "wait4_system_seconds": 4.860985,
+          "wait4_user_seconds": 2.405771
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/005.json",
+        "sha256": "7086dfbda520d457a7b14f68cc133593da4dafb3d97a75a5718616fe666be27f"
+      },
+      "complete": true,
+      "identity": {
+        "index": 5,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "warmup",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13402,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-db89e6433d864205/OWNER-RESULT.json",
+        "sha256": "08e4c92d77a2c762573a18342d17c29646c22799eb62faf60e872bba91e2daa4"
+      },
+      "update": {
+        "client_elapsed_ns": 7125433463,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17101,
+          "wait4_maxrss_native_units": 46866432,
+          "wait4_system_seconds": 0.5243519999999999,
+          "wait4_user_seconds": 0.898111
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7317844961,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 26197,
+          "wait4_maxrss_native_units": 74723328,
+          "wait4_system_seconds": 4.747457,
+          "wait4_user_seconds": 3.030086
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/006.json",
+        "sha256": "76606eb47b0e683c096622d949e331980f879d86a83ece914f8c8feaf28aff02"
+      },
+      "complete": true,
+      "identity": {
+        "index": 6,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13497,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-e3b36d2d715e4061/OWNER-RESULT.json",
+        "sha256": "601f053010294906fa79da251354b6c26dd098492eabac5a915f1f12cf8ab116"
+      },
+      "update": {
+        "client_elapsed_ns": 6587750024,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10617,
+          "wait4_maxrss_native_units": 19415040,
+          "wait4_system_seconds": 0.29523699999999997,
+          "wait4_user_seconds": 0.5997129999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6791571545,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12681,
+          "wait4_maxrss_native_units": 18694144,
+          "wait4_system_seconds": 3.66555,
+          "wait4_user_seconds": 2.221168
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/007.json",
+        "sha256": "0d937806d4b59cc5dd72061545753bd2f68e1fd0367480ff140c0c185cd23593"
+      },
+      "complete": true,
+      "identity": {
+        "index": 7,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13632,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-2a041481f5e1496e/OWNER-RESULT.json",
+        "sha256": "8850bfe272fbef41c524f93d35de33d9e59b1b38ef57603b2b1b21e5b800927d"
+      },
+      "update": {
+        "client_elapsed_ns": 8144871320,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10625,
+          "wait4_maxrss_native_units": 19623936,
+          "wait4_system_seconds": 0.283592,
+          "wait4_user_seconds": 0.606352
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8335401272,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12756,
+          "wait4_maxrss_native_units": 18587648,
+          "wait4_system_seconds": 4.734597,
+          "wait4_user_seconds": 2.327413
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/008.json",
+        "sha256": "73ddd2aade0fdd1168ee17ac0d1e3d1f3be3ce80f48e91649e3ef841fa6bc1e8"
+      },
+      "complete": true,
+      "identity": {
+        "index": 8,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13700,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-b4f655b4165940b1/OWNER-RESULT.json",
+        "sha256": "75909254326f45fbe9773f748eb7257659ef411096417c02bd415f8f08f89648"
+      },
+      "update": {
+        "client_elapsed_ns": 6999179651,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12869,
+          "wait4_maxrss_native_units": 28655616,
+          "wait4_system_seconds": 0.5134569999999999,
+          "wait4_user_seconds": 0.960024
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7202055023,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17548,
+          "wait4_maxrss_native_units": 38162432,
+          "wait4_system_seconds": 4.666386,
+          "wait4_user_seconds": 3.241337
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/009.json",
+        "sha256": "4da0d9ba5ec7cfaaffb24b498d0b65a1c687778078f80eb3ea0bc001473d735e"
+      },
+      "complete": true,
+      "identity": {
+        "index": 9,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13778,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-b4dfcca6499f47f0/OWNER-RESULT.json",
+        "sha256": "5ffd72eadf69bd63c080d310916546f9927382799570c31dda6e1a24e3216717"
+      },
+      "update": {
+        "client_elapsed_ns": 6691625828,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11631,
+          "wait4_maxrss_native_units": 24600576,
+          "wait4_system_seconds": 0.294873,
+          "wait4_user_seconds": 0.599133
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6890878117,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13080,
+          "wait4_maxrss_native_units": 20983808,
+          "wait4_system_seconds": 3.665698,
+          "wait4_user_seconds": 2.227932
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/010.json",
+        "sha256": "7a8f994fe1f44c0903214112cab01f4c7d66272285e2a8b18f843493a8a136f7"
+      },
+      "complete": true,
+      "identity": {
+        "index": 10,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13839,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-cdac838115484328/OWNER-RESULT.json",
+        "sha256": "ea7c74b8feea176f2145cf5fbf7754f73e283bd9c331b664a60afcd3c2d5fe1c"
+      },
+      "update": {
+        "client_elapsed_ns": 8244572265,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11480,
+          "wait4_maxrss_native_units": 24121344,
+          "wait4_system_seconds": 0.286589,
+          "wait4_user_seconds": 0.609741
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8441467559,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13605,
+          "wait4_maxrss_native_units": 23134208,
+          "wait4_system_seconds": 4.772192,
+          "wait4_user_seconds": 2.351821
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/011.json",
+        "sha256": "d8824e8d10360a11ebc066168be4b6275b049d235d0874ef5fc1da95965d7ea0"
+      },
+      "complete": true,
+      "identity": {
+        "index": 11,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 1,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 13944,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-394ab60f2eb44a8b/OWNER-RESULT.json",
+        "sha256": "6d4cd07d99c24c228b348e77e6ad38304b05a41683e49d5f2c6c36f604863031"
+      },
+      "update": {
+        "client_elapsed_ns": 6885692881,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17214,
+          "wait4_maxrss_native_units": 47804416,
+          "wait4_system_seconds": 0.511475,
+          "wait4_user_seconds": 0.8705879999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7078630279,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 26116,
+          "wait4_maxrss_native_units": 74301440,
+          "wait4_system_seconds": 4.668306,
+          "wait4_user_seconds": 2.9758199999999997
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/012.json",
+        "sha256": "98c46c69ce484d77d12a08ced8fb2b30b25d73f944f4f45a229d3237c664a9b2"
+      },
+      "complete": true,
+      "identity": {
+        "index": 12,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14003,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-0687e2d909444234/OWNER-RESULT.json",
+        "sha256": "1205f556cbac306dbc007737fa8f398416c381aa646654d61e0f1e5778f0fba7"
+      },
+      "update": {
+        "client_elapsed_ns": 7094045598,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16550,
+          "wait4_maxrss_native_units": 44818432,
+          "wait4_system_seconds": 0.522231,
+          "wait4_user_seconds": 0.870072
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7288556137,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 24924,
+          "wait4_maxrss_native_units": 69525504,
+          "wait4_system_seconds": 4.6514489999999995,
+          "wait4_user_seconds": 2.975159
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/013.json",
+        "sha256": "3b96a65227f06931b813b625d7aa60a66adb7a98d7d6e75832f322b848bf568f"
+      },
+      "complete": true,
+      "identity": {
+        "index": 13,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14097,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-2085661e162d4ea5/OWNER-RESULT.json",
+        "sha256": "4dd5ca1ab58b1bbf53af6003e3a1141b65ab76966b786f8f5b189ab946daab5a"
+      },
+      "update": {
+        "client_elapsed_ns": 8169739177,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11575,
+          "wait4_maxrss_native_units": 24350720,
+          "wait4_system_seconds": 0.284592,
+          "wait4_user_seconds": 0.6104229999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8404941389,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13423,
+          "wait4_maxrss_native_units": 22319104,
+          "wait4_system_seconds": 4.763084,
+          "wait4_user_seconds": 2.358464
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/014.json",
+        "sha256": "38bee6a904406d62a4ce211e491a23de058383bc6b77f221b319998cc5d71345"
+      },
+      "complete": true,
+      "identity": {
+        "index": 14,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14197,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-670b8cea33ab446d/OWNER-RESULT.json",
+        "sha256": "04b35c00413795c95e8068f016881113f9d7202ef9d84bcf94bcebc91d14598b"
+      },
+      "update": {
+        "client_elapsed_ns": 6701212995,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11539,
+          "wait4_maxrss_native_units": 24125440,
+          "wait4_system_seconds": 0.292059,
+          "wait4_user_seconds": 0.593822
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6901592500,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13156,
+          "wait4_maxrss_native_units": 21245952,
+          "wait4_system_seconds": 3.655649,
+          "wait4_user_seconds": 2.216033
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/015.json",
+        "sha256": "bd71bb15b931670a784cbae1ded2003b4dfd827df91042525b852dfeaa8a4730"
+      },
+      "complete": true,
+      "identity": {
+        "index": 15,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14290,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-aa5a4c5f79cb4dde/OWNER-RESULT.json",
+        "sha256": "8382845533bf37045e672aa623110bd87d3f7fa552f2454cfacab249b0caf410"
+      },
+      "update": {
+        "client_elapsed_ns": 7008729934,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13122,
+          "wait4_maxrss_native_units": 29843456,
+          "wait4_system_seconds": 0.5198969999999999,
+          "wait4_user_seconds": 0.963027
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7199582598,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17805,
+          "wait4_maxrss_native_units": 39305216,
+          "wait4_system_seconds": 4.6777750000000005,
+          "wait4_user_seconds": 3.224158
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/016.json",
+        "sha256": "1990495e551c64bfe705103b34dbff1b0038bf0abb4260fe19ceaf2597e08e14"
+      },
+      "complete": true,
+      "identity": {
+        "index": 16,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14362,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-1c68a0ef4d494e51/OWNER-RESULT.json",
+        "sha256": "d63c9284b9a8e17cae0a0a9f8360a51fc3a74612b936e907b25b238fd575d83d"
+      },
+      "update": {
+        "client_elapsed_ns": 8169397566,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10644,
+          "wait4_maxrss_native_units": 19550208,
+          "wait4_system_seconds": 0.296392,
+          "wait4_user_seconds": 0.605169
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8360472637,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12769,
+          "wait4_maxrss_native_units": 18685952,
+          "wait4_system_seconds": 4.760131,
+          "wait4_user_seconds": 2.341444
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/017.json",
+        "sha256": "75e33cb52331400e74c6fb3c4914976a46a5b80d6b552db0307e73c6e1d44574"
+      },
+      "complete": true,
+      "identity": {
+        "index": 17,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 2,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14481,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-673e83e2f8af4e0b/OWNER-RESULT.json",
+        "sha256": "6ba70a4e83836f46c22686f1532d2424fea3dfc884e33522e0e840f552f083af"
+      },
+      "update": {
+        "client_elapsed_ns": 6597474861,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10563,
+          "wait4_maxrss_native_units": 19259392,
+          "wait4_system_seconds": 0.292101,
+          "wait4_user_seconds": 0.593063
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6793625991,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12645,
+          "wait4_maxrss_native_units": 18538496,
+          "wait4_system_seconds": 3.611174,
+          "wait4_user_seconds": 2.17955
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/018.json",
+        "sha256": "9fec4b66facf428baecf82c3149acad7330d6af999ccf38040c052479eda2c48"
+      },
+      "complete": true,
+      "identity": {
+        "index": 18,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14615,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-28d824e8f8834b7d/OWNER-RESULT.json",
+        "sha256": "2bbfae589218e0423cd90187b01f944e35942c618f03015d4bcc8940c4a8d54c"
+      },
+      "update": {
+        "client_elapsed_ns": 6533021424,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10599,
+          "wait4_maxrss_native_units": 19263488,
+          "wait4_system_seconds": 0.303325,
+          "wait4_user_seconds": 0.589869
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6726898975,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12494,
+          "wait4_maxrss_native_units": 18583552,
+          "wait4_system_seconds": 3.621076,
+          "wait4_user_seconds": 2.177973
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/019.json",
+        "sha256": "d9855e4b1f3ac176b52da9ae33f9161d87caaa7768d506785fcff8f3b9bdcd35"
+      },
+      "complete": true,
+      "identity": {
+        "index": 19,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14695,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-86411043b71b4393/OWNER-RESULT.json",
+        "sha256": "e40142f50184204bda32bc420066fdafaca5eecffe0f58dc59d83dba5fac20d0"
+      },
+      "update": {
+        "client_elapsed_ns": 8179120403,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10509,
+          "wait4_maxrss_native_units": 18944000,
+          "wait4_system_seconds": 0.28361,
+          "wait4_user_seconds": 0.590617
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8366852138,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12650,
+          "wait4_maxrss_native_units": 18448384,
+          "wait4_system_seconds": 4.71043,
+          "wait4_user_seconds": 2.310864
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/020.json",
+        "sha256": "14334918bb652f24539d1d944525a4e5e07a30e88884a1f94549c96add9b4840"
+      },
+      "complete": true,
+      "identity": {
+        "index": 20,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14766,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-1d99dde71c974366/OWNER-RESULT.json",
+        "sha256": "15408c40355c0a796c8dcb71afa75a097c6d4df3ff878ac619779162b533eda8"
+      },
+      "update": {
+        "client_elapsed_ns": 6931555803,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12846,
+          "wait4_maxrss_native_units": 28798976,
+          "wait4_system_seconds": 0.514204,
+          "wait4_user_seconds": 0.9517329999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7124656400,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17456,
+          "wait4_maxrss_native_units": 38068224,
+          "wait4_system_seconds": 4.6347570000000005,
+          "wait4_user_seconds": 3.205869
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/021.json",
+        "sha256": "c4e0f011f16c9b611797afc2422bb3e582a503b50f4a4229a19fb963d1923502"
+      },
+      "complete": true,
+      "identity": {
+        "index": 21,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14827,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-3e408e5cabee43c3/OWNER-RESULT.json",
+        "sha256": "40a374ccd5eb6fb9ac7b3f26a38378ef819dbe112a785b4338e8048f8c77b1e9"
+      },
+      "update": {
+        "client_elapsed_ns": 6563945571,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11465,
+          "wait4_maxrss_native_units": 23928832,
+          "wait4_system_seconds": 0.294573,
+          "wait4_user_seconds": 0.5948439999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6761534980,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13024,
+          "wait4_maxrss_native_units": 20930560,
+          "wait4_system_seconds": 3.635383,
+          "wait4_user_seconds": 2.214112
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/022.json",
+        "sha256": "edc4e1b3c5010795d83eadb9d84128b6e72bb10bfd0eff19160a31260b4912c5"
+      },
+      "complete": true,
+      "identity": {
+        "index": 22,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 14904,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-8154068eb2384e51/OWNER-RESULT.json",
+        "sha256": "79361acd14a969344eafb303498738b8afea42fecc3cbdb497280293f8fb32f6"
+      },
+      "update": {
+        "client_elapsed_ns": 8162125478,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11400,
+          "wait4_maxrss_native_units": 23736320,
+          "wait4_system_seconds": 0.289487,
+          "wait4_user_seconds": 0.597591
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8354742438,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13310,
+          "wait4_maxrss_native_units": 21622784,
+          "wait4_system_seconds": 4.700194,
+          "wait4_user_seconds": 2.3253019999999998
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/023.json",
+        "sha256": "427f5a6fd9844edce7b9b4298eb7eb70939ff16c0cb25ebb9c3851cea6518968"
+      },
+      "complete": true,
+      "identity": {
+        "index": 23,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 3,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15010,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-8a2fadbb9b7c4ed0/OWNER-RESULT.json",
+        "sha256": "4be0c39b4e7a7e6d34619e6f710c80df5552c6fd8092c6c41e4accebcc2b3e85"
+      },
+      "update": {
+        "client_elapsed_ns": 6742301745,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16947,
+          "wait4_maxrss_native_units": 46518272,
+          "wait4_system_seconds": 0.515681,
+          "wait4_user_seconds": 0.858555
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 6933721442,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 25943,
+          "wait4_maxrss_native_units": 73711616,
+          "wait4_system_seconds": 4.588787,
+          "wait4_user_seconds": 2.936149
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/024.json",
+        "sha256": "1dc0a7781f380310af8824368d170befe8ff1efbd2f0fafacea136f087bb48a2"
+      },
+      "complete": true,
+      "identity": {
+        "index": 24,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15162,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-2fbf8065b0f44d2b/OWNER-RESULT.json",
+        "sha256": "eba1f0cf429451755d829e4c3c02dea5c4def670565cad349213dc08b4a6bcdc"
+      },
+      "update": {
+        "client_elapsed_ns": 6760343835,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16862,
+          "wait4_maxrss_native_units": 46215168,
+          "wait4_system_seconds": 0.5061,
+          "wait4_user_seconds": 0.8630869999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 6955543460,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 24908,
+          "wait4_maxrss_native_units": 69419008,
+          "wait4_system_seconds": 4.597898,
+          "wait4_user_seconds": 2.937077
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/025.json",
+        "sha256": "251ef36f39281cb8776e35020d6efe08dd03d5231cbd803b08295872fa10bcf8"
+      },
+      "complete": true,
+      "identity": {
+        "index": 25,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15235,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-04c4a9f244814682/OWNER-RESULT.json",
+        "sha256": "6df4b9ae9ffb9d984a4c42b029e7494836b45162a26967c8a09ffdb2bf4fa1b6"
+      },
+      "update": {
+        "client_elapsed_ns": 8136273516,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11480,
+          "wait4_maxrss_native_units": 23896064,
+          "wait4_system_seconds": 0.284101,
+          "wait4_user_seconds": 0.598746
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8330100292,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13404,
+          "wait4_maxrss_native_units": 22364160,
+          "wait4_system_seconds": 4.720893,
+          "wait4_user_seconds": 2.341503
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/026.json",
+        "sha256": "4491540db18f77009603631eb26a159ea3a0ac9dd90c5733ac936780571e5e29"
+      },
+      "complete": true,
+      "identity": {
+        "index": 26,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15313,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-1675b83113374ad0/OWNER-RESULT.json",
+        "sha256": "1dda0045825c439c3d64183ec6c7608b635de3eecf9c5b5aae5a2997bcd446cc"
+      },
+      "update": {
+        "client_elapsed_ns": 6662428382,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11672,
+          "wait4_maxrss_native_units": 24440832,
+          "wait4_system_seconds": 0.300662,
+          "wait4_user_seconds": 0.6056429999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6853030546,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13438,
+          "wait4_maxrss_native_units": 22437888,
+          "wait4_system_seconds": 3.639639,
+          "wait4_user_seconds": 2.217327
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/027.json",
+        "sha256": "3d4ade7a65485db1be54fea909eefea04641716039758b00e9c8577571892b48"
+      },
+      "complete": true,
+      "identity": {
+        "index": 27,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15440,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-71ad0b6d27bd4ee8/OWNER-RESULT.json",
+        "sha256": "0556bd70d28f9fd7a947301712703c5b8773e9c7dd1f16a648b2cd035a21a598"
+      },
+      "update": {
+        "client_elapsed_ns": 7152123186,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12777,
+          "wait4_maxrss_native_units": 28172288,
+          "wait4_system_seconds": 0.509259,
+          "wait4_user_seconds": 0.9498629999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7348387202,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 16934,
+          "wait4_maxrss_native_units": 35545088,
+          "wait4_system_seconds": 4.635744,
+          "wait4_user_seconds": 3.210111
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/028.json",
+        "sha256": "da1f828028a4c8dd875f81e7d4a1e05aff49c553023ba42d13374f9d4355ccf7"
+      },
+      "complete": true,
+      "identity": {
+        "index": 28,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15503,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-c13c50dcb22f43c2/OWNER-RESULT.json",
+        "sha256": "85acacf0ba69f4e4dbb395aac1154a735b9f9fceb6d5a42a87af91e94047df59"
+      },
+      "update": {
+        "client_elapsed_ns": 8138771400,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10622,
+          "wait4_maxrss_native_units": 19611648,
+          "wait4_system_seconds": 0.286253,
+          "wait4_user_seconds": 0.5969559999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8333897689,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12643,
+          "wait4_maxrss_native_units": 18792448,
+          "wait4_system_seconds": 4.735834,
+          "wait4_user_seconds": 2.318581
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/029.json",
+        "sha256": "2c6d7cd3078a9ef3a0ab0602c64c8e776aab6208aa1dca4ea3f8fe2b5fdea970"
+      },
+      "complete": true,
+      "identity": {
+        "index": 29,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 4,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15602,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-36f3e25e6e8d4000/OWNER-RESULT.json",
+        "sha256": "199c250c6fddd5de3497a9e246ada9b346d5afc63ef3b3100065281e288ffc6a"
+      },
+      "update": {
+        "client_elapsed_ns": 6495135932,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10548,
+          "wait4_maxrss_native_units": 19312640,
+          "wait4_system_seconds": 0.289254,
+          "wait4_user_seconds": 0.589186
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6693408700,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12442,
+          "wait4_maxrss_native_units": 18751488,
+          "wait4_system_seconds": 3.609966,
+          "wait4_user_seconds": 2.193239
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/030.json",
+        "sha256": "39a09d172122cdf55d18fe0e5d0288ab853cbc81d7b7808840421ae89a9e2993"
+      },
+      "complete": true,
+      "identity": {
+        "index": 30,
+        "label": "stock",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15711,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-7c77e5b9b9a84426/OWNER-RESULT.json",
+        "sha256": "396c04912cec650f5307af9a66dbff5af64d06250c6ce0c4305d85881587c630"
+      },
+      "update": {
+        "client_elapsed_ns": 6470214006,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10477,
+          "wait4_maxrss_native_units": 19030016,
+          "wait4_system_seconds": 0.28873499999999996,
+          "wait4_user_seconds": 0.585085
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6667224785,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12479,
+          "wait4_maxrss_native_units": 18505728,
+          "wait4_system_seconds": 3.6049569999999997,
+          "wait4_user_seconds": 2.189836
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20545,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/031.json",
+        "sha256": "f0891e89cabf4896f8ce3be8f4c204583e715404c08305f5c7a576fb3e4b423e"
+      },
+      "complete": true,
+      "identity": {
+        "index": 31,
+        "label": "stock",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15785,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-4d33737ffc814aea/OWNER-RESULT.json",
+        "sha256": "bed927edac27a44b4520a0864eaaa4ba64a1ce712b6349738ba5b32cd3f0cd1b"
+      },
+      "update": {
+        "client_elapsed_ns": 8189179712,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 10554,
+          "wait4_maxrss_native_units": 19103744,
+          "wait4_system_seconds": 0.288808,
+          "wait4_user_seconds": 0.5918
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8380299675,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 12651,
+          "wait4_maxrss_native_units": 18538496,
+          "wait4_system_seconds": 4.7211549999999995,
+          "wait4_user_seconds": 2.333874
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20533,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/032.json",
+        "sha256": "2c33d32ae1342f428c2e762472fa13b1e64221f85440c83e055d0505c597778b"
+      },
+      "complete": true,
+      "identity": {
+        "index": 32,
+        "label": "stock",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15855,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-61a448ba4ec7429e/OWNER-RESULT.json",
+        "sha256": "a3aea6ad3e6cda746f613204c2ccbe599dd2c017b1675198021377ad792b6a61"
+      },
+      "update": {
+        "client_elapsed_ns": 7115444646,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13246,
+          "wait4_maxrss_native_units": 30404608,
+          "wait4_system_seconds": 0.524508,
+          "wait4_user_seconds": 0.9477329999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 7306644406,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 18301,
+          "wait4_maxrss_native_units": 40947712,
+          "wait4_system_seconds": 4.655258,
+          "wait4_user_seconds": 3.218321
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/033.json",
+        "sha256": "6bcfb68c9e797f6ff205f85cd39b9ef1e27dc5bea97f1d8ec2645bfceec5b1f9"
+      },
+      "complete": true,
+      "identity": {
+        "index": 33,
+        "label": "ox",
+        "mode": "ordinary",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 15931,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-bb6f0810814148c4/OWNER-RESULT.json",
+        "sha256": "4b90567f4f59b7340954415ee9f2906fe4764679e2d60bb888310162a8ca90a1"
+      },
+      "update": {
+        "client_elapsed_ns": 6702390110,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11493,
+          "wait4_maxrss_native_units": 23818240,
+          "wait4_system_seconds": 0.292306,
+          "wait4_user_seconds": 0.595729
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 33554432,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 6900113997,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660007,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13212,
+          "wait4_maxrss_native_units": 21495808,
+          "wait4_system_seconds": 3.6491059999999997,
+          "wait4_user_seconds": 2.212108
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20536,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/034.json",
+        "sha256": "b63cc0482cb2d2f99458e600984c2c43638af9d0b6cbaf79d997f93909ccf29d"
+      },
+      "complete": true,
+      "identity": {
+        "index": 34,
+        "label": "ox",
+        "mode": "receiver-clone",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 16026,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-74933b4da6444b1f/OWNER-RESULT.json",
+        "sha256": "573130f69170036332793916fdd8d67faa705839071e55930abafebf1a405bad"
+      },
+      "update": {
+        "client_elapsed_ns": 8117970031,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 11314,
+          "wait4_maxrss_native_units": 23437312,
+          "wait4_system_seconds": 0.282392,
+          "wait4_user_seconds": 0.596533
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 1048576,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 1024,
+          "receiver_clone_started": 1024,
+          "same_offset_inherited_bytes": 32505856,
+          "semantic_profiles": [],
+          "semantic_returned_logical_write_bytes": 0,
+          "semantic_updates": 0
+        },
+        "pair_elapsed_ns": 8313377587,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2660008,
+          "server_to_client_bytes": 1001595
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 13597,
+          "wait4_maxrss_native_units": 22740992,
+          "wait4_system_seconds": 4.723108,
+          "wait4_user_seconds": 2.3408379999999998
+        }
+      }
+    },
+    {
+      "case_plan": {
+        "bytes": 20524,
+        "path": "/private/tmp/u-measured-m3-plans-b4643e6c81ee42f4/035.json",
+        "sha256": "340526fe1c03c2d77ab6f3aeccc65310c4a0350562509c9c844eab6f8b85c7e0"
+      },
+      "complete": true,
+      "identity": {
+        "index": 35,
+        "label": "ox",
+        "mode": "semantic",
+        "phase": "measured",
+        "repetition": 5,
+        "workers": 3
+      },
+      "owner_cleanup": {
+        "group_cleanup_before_leader_reap": true,
+        "hard_kill_required": false,
+        "other_group_members_absent_before_reap": true,
+        "pid": 16097,
+        "reaped": true,
+        "returncode": 0
+      },
+      "owner_result": {
+        "path": "/private/tmp/u-batch-m3-38d795b2bf2a4a4d/OWNER-RESULT.json",
+        "sha256": "aa4c00736804739a584ee6005e8ca9873f4d7820bbe357861248a24bcb713d94"
+      },
+      "update": {
+        "client_elapsed_ns": 6773932562,
+        "client_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 17339,
+          "wait4_maxrss_native_units": 47951872,
+          "wait4_system_seconds": 0.521118,
+          "wait4_user_seconds": 0.8631169999999999
+        },
+        "counters": {
+          "mixed_per_file_path_attribution_proved": false,
+          "modeled_non_inherited_logical_bytes": 524288,
+          "physical_write_bytes": null,
+          "receiver_clone_completed": 0,
+          "receiver_clone_started": 0,
+          "same_offset_inherited_bytes": 0,
+          "semantic_profiles": [
+            "org.firstpair.dng-xmp/1"
+          ],
+          "semantic_returned_logical_write_bytes": 524288,
+          "semantic_updates": 1024
+        },
+        "pair_elapsed_ns": 6968037548,
+        "protocol_bytes": {
+          "client_to_server_bytes": 2201354,
+          "server_to_client_bytes": 895291
+        },
+        "proxy_wait4": {
+          "block_input_operations": 0,
+          "block_output_operations": 0,
+          "major_faults": 0,
+          "minor_faults": 24269,
+          "wait4_maxrss_native_units": 66723840,
+          "wait4_system_seconds": 4.611232,
+          "wait4_user_seconds": 2.943218
+        }
+      }
+    }
+  ],
+  "start": {
+    "background": "Photo source/CPU8 and other host activity uncontrolled; not quiet timing",
+    "cache_state": "warm by generation/seed/hash per row; no cacheflush",
+    "cpu_scope": "each case independently reserves Unison00..07; coordinator metadata overhead included in reserved owner budget",
+    "host": {
+      "available_bytes": 566976327680,
+      "device": 16777223,
+      "logical_cpus": 36,
+      "machine": "x86_64",
+      "release": "24.6.0",
+      "system": "Darwin"
+    },
+    "owner_pid": 12713,
+    "plan_sha256": "e0fbe12f39eb8f97223d5702c649c3f67e290a01391e06d84d23ff124f756cb3",
+    "samples": 36
+  },
+  "code_pins": {
+    "bench/sync/batch_series_report.py": "fec60058a93e813ce5f2a51729a26ec4cfca1114b67770c094af06cfdeda15c1",
+    "bench/sync/batch_series.py": "6ebefd20046cb26c83295638936b5592826f6a8435d93d0fe5025094f69d5ddf"
+  },
+  "no_sdk_or_photo_payload": true,
+  "no_new_transfer_or_payload_hash": true,
+  "payload_verification_scope": "exact left/right hashes and no-op eight-field fences were independently verified before deliberate generated cleanup; not repeated here"
+}

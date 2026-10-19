@@ -1,0 +1,498 @@
+{
+  "schema": "unison-final-private-volume-actual/1",
+  "state": "TWELVE_CASE_PASS_CLOSED",
+  "actual_owner": {
+    "session": 19831,
+    "initial_chunk": "2b38ca",
+    "terminal_chunk": "bb1af5",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 19477
+  },
+  "plan": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/doc/final-private-volume-plan-v3-20261019.json",
+    "sha256": "d2bd7fe78fa43aaa21c6ecc350404abe2c1dd374a47882337e2d3206f5201ee6",
+    "bytes": 21894
+  },
+  "result": {
+    "path": "/private/tmp/u-volume-v3-19c5b3797c964766/RESULT.json",
+    "sha256": "03c34e3bf4c34441431b2410d6b901f38bb9ac326c8ad2203cc2696f10e4b8f4",
+    "bytes": 40208
+  },
+  "raw_call_pins": [
+    {
+      "bytes": 588,
+      "name": "image-create.json",
+      "sha256": "07d4fab8ac7fdd122b8d543eb7d89bd41ba00072a302f52f4d4d133a2ca1de5a"
+    },
+    {
+      "bytes": 1568,
+      "name": "image-attach.json",
+      "sha256": "2ee114d1eab5258f1db56a73594322fab180a666dc8375d8f37ac03c9fc57cf3"
+    },
+    {
+      "bytes": 5606,
+      "name": "apfs-metadata.json",
+      "sha256": "80f6b286157fc61607ceebb875493f09c00be675f01b76dc353e19d95e674d42"
+    },
+    {
+      "bytes": 3520,
+      "name": "stock-hfs-to-apfs-generic-auto-seed.json",
+      "sha256": "d997d2db5c11d6b5be67dd44af6abcec2ce6a8e7ec0ce1875bcc552a9ce39132"
+    },
+    {
+      "bytes": 2347,
+      "name": "stock-hfs-to-apfs-generic-auto-update.json",
+      "sha256": "96eb7d31d9b20dcbf4761aee85214ba1f1198b89afae7bd3c2703f223962b531"
+    },
+    {
+      "bytes": 1215,
+      "name": "stock-hfs-to-apfs-generic-auto-noop.json",
+      "sha256": "b29098d739cac158cb084a6925bf6ba7077480b065d66b07956231fc46cbb604"
+    },
+    {
+      "bytes": 3505,
+      "name": "stock-hfs-to-apfs-generic-off-seed.json",
+      "sha256": "2b8d4b7cdd1e4ac0becbcb86ff6923fcdbd0931d42265839cc5208509c696d0e"
+    },
+    {
+      "bytes": 2366,
+      "name": "stock-hfs-to-apfs-generic-off-update.json",
+      "sha256": "b569c1151f9c939d51b90340de73a7c8ee1e4c2a9685a7328565043882e94a23"
+    },
+    {
+      "bytes": 1210,
+      "name": "stock-hfs-to-apfs-generic-off-noop.json",
+      "sha256": "9991fb26e953489c6199f493ef6dc5c9038ff392073b3adaf6f8b657ba371698"
+    },
+    {
+      "bytes": 3479,
+      "name": "stock-hfs-to-apfs-dng-auto-seed.json",
+      "sha256": "22ccf88307514562baf0502a3939f2e67c54deef91decdf22909cb1e8675c6b3"
+    },
+    {
+      "bytes": 2423,
+      "name": "stock-hfs-to-apfs-dng-auto-update.json",
+      "sha256": "828537565f665b6f63e26b89eca8799b4221d192da9c4ac00446e21eeabffff1"
+    },
+    {
+      "bytes": 1214,
+      "name": "stock-hfs-to-apfs-dng-auto-noop.json",
+      "sha256": "07cf56566a119194ba974b06ebdae3a6fe9618cf95e9cc6bc39042949d45b87f"
+    },
+    {
+      "bytes": 3511,
+      "name": "stock-apfs-to-hfs-generic-auto-seed.json",
+      "sha256": "fd097a19c006c2b27627071a9e59780cb95366f7aba2276dd477555a2993b436"
+    },
+    {
+      "bytes": 2376,
+      "name": "stock-apfs-to-hfs-generic-auto-update.json",
+      "sha256": "b34c0307665a46e16954be8bdb43956f8dc10908ebab1312b7dfe6c9f96684b3"
+    },
+    {
+      "bytes": 1215,
+      "name": "stock-apfs-to-hfs-generic-auto-noop.json",
+      "sha256": "15cbf11d3065d183621d15a4bfbc5a8b08ea1367dbbd17e1535cbfebdd4700ad"
+    },
+    {
+      "bytes": 3496,
+      "name": "stock-apfs-to-hfs-generic-off-seed.json",
+      "sha256": "d826cbfbea29269c7979c654576d8ba6cdc28707228895e040d5f38d587f5dca"
+    },
+    {
+      "bytes": 2363,
+      "name": "stock-apfs-to-hfs-generic-off-update.json",
+      "sha256": "c968dc0bfc159ac6454973b7c500899a91781a2f09007d8ba0b0c635a248e2f8"
+    },
+    {
+      "bytes": 1210,
+      "name": "stock-apfs-to-hfs-generic-off-noop.json",
+      "sha256": "90ce74e0ecd562e189883856bbf4d0ff75523bd6b0210f76d43e1c05f1f61a8e"
+    },
+    {
+      "bytes": 3470,
+      "name": "stock-apfs-to-hfs-dng-auto-seed.json",
+      "sha256": "6f34e84748ddac50da89ec061a065ccb716220571989051722f8fab223176917"
+    },
+    {
+      "bytes": 2343,
+      "name": "stock-apfs-to-hfs-dng-auto-update.json",
+      "sha256": "ff758ac7436e28490c6b1260b8c2815b3fd601694e67e4ddb2af141c8ebe238c"
+    },
+    {
+      "bytes": 1214,
+      "name": "stock-apfs-to-hfs-dng-auto-noop.json",
+      "sha256": "8beefed2eec0b326a53e7f15cfd225963f352e889bdb65c43024cba9efa74925"
+    },
+    {
+      "bytes": 3490,
+      "name": "ox-hfs-to-apfs-generic-auto-seed.json",
+      "sha256": "cbd9374f5b9dafb5d1ea163fe3e5184e807a6f0f88afcfb3b24ca97a18a8723e"
+    },
+    {
+      "bytes": 2323,
+      "name": "ox-hfs-to-apfs-generic-auto-update.json",
+      "sha256": "8b6d61e753072210b1c5f7833217dc92ba9b8ee4cb42884f20de770811e5cec9"
+    },
+    {
+      "bytes": 1209,
+      "name": "ox-hfs-to-apfs-generic-auto-noop.json",
+      "sha256": "3ce2a81ea2c9851d71134cc3e4b004b200c3b7a9e6eb5f924d6544099bd984fe"
+    },
+    {
+      "bytes": 3475,
+      "name": "ox-hfs-to-apfs-generic-off-seed.json",
+      "sha256": "6ff8898db6a3a56da5adf86fb8fd1bfa61c9f111e11e381b33dc04d730e4bd79"
+    },
+    {
+      "bytes": 2342,
+      "name": "ox-hfs-to-apfs-generic-off-update.json",
+      "sha256": "4d4ef7ad394644c9c99feeb5928ceb41b15644f2f08acac2b6793b317d3fe172"
+    },
+    {
+      "bytes": 1204,
+      "name": "ox-hfs-to-apfs-generic-off-noop.json",
+      "sha256": "4eac7f936562a2a70f27a3d330abf8714e7a9e73b69a285bb3454cc1f92b9d96"
+    },
+    {
+      "bytes": 3449,
+      "name": "ox-hfs-to-apfs-dng-auto-seed.json",
+      "sha256": "a5e6e48bbaba30713f2fa1394605d9e39002614b3762c365796867599355ff05"
+    },
+    {
+      "bytes": 2405,
+      "name": "ox-hfs-to-apfs-dng-auto-update.json",
+      "sha256": "8de980801b1e8a70f9a2a7c9127a37b3a65a2ec2547a3d8e497140aebd24db47"
+    },
+    {
+      "bytes": 1208,
+      "name": "ox-hfs-to-apfs-dng-auto-noop.json",
+      "sha256": "6c38b704ce5492460ef422d79537c42f73fd135e906939fb937325994c4a6464"
+    },
+    {
+      "bytes": 3481,
+      "name": "ox-apfs-to-hfs-generic-auto-seed.json",
+      "sha256": "2e85657d9972f7427e12b09453b4b39b54f97d64c9014a30b7fb3b6540e07509"
+    },
+    {
+      "bytes": 2352,
+      "name": "ox-apfs-to-hfs-generic-auto-update.json",
+      "sha256": "a8facbf729bfc89c98e94eb376a8d7aa020a29a2106d218d2acd7951e596c256"
+    },
+    {
+      "bytes": 1209,
+      "name": "ox-apfs-to-hfs-generic-auto-noop.json",
+      "sha256": "63de2a2c8b7536ffda98cb1e0341314a82a18e48e7a68a283bc824a3afa31e2d"
+    },
+    {
+      "bytes": 3466,
+      "name": "ox-apfs-to-hfs-generic-off-seed.json",
+      "sha256": "fb3c6d8cd7be2591bda37a3fda0ee12cd4a124358871bb335e7af4a9b520ba8f"
+    },
+    {
+      "bytes": 2339,
+      "name": "ox-apfs-to-hfs-generic-off-update.json",
+      "sha256": "91ea6391703e3d96d6e5f2507af9129fa7bb1334b42f104994f6ca5712ee0e7c"
+    },
+    {
+      "bytes": 1204,
+      "name": "ox-apfs-to-hfs-generic-off-noop.json",
+      "sha256": "9b2234634a2e359ef71711a9746ebbd42d83f4578e169d34577736813dc84568"
+    },
+    {
+      "bytes": 3440,
+      "name": "ox-apfs-to-hfs-dng-auto-seed.json",
+      "sha256": "2b13bbb5c72539d84d76f96657fda07bfeef878f1e9fd5beedc8722557b636bf"
+    },
+    {
+      "bytes": 2319,
+      "name": "ox-apfs-to-hfs-dng-auto-update.json",
+      "sha256": "61cf906107fe0329bea8502a4f6012b59252b2864c831f9dac3867725ac96ab7"
+    },
+    {
+      "bytes": 1208,
+      "name": "ox-apfs-to-hfs-dng-auto-noop.json",
+      "sha256": "a3b5ce484b9c45bab05d6406a8f717d21f632616bf4cf1f4a24fc227e7be22b4"
+    },
+    {
+      "bytes": 2164,
+      "name": "before-detach.json",
+      "sha256": "b2346bdb246caddb82169375e42d96140459e1b0187cec7d2dd6c814231a8a98"
+    },
+    {
+      "bytes": 447,
+      "name": "image-detach.json",
+      "sha256": "9cafe5b7547cad54e59e07e3ccfb76bf08a5c19dd76ca975dce2e698e121c276"
+    },
+    {
+      "bytes": 786,
+      "name": "after-detach.json",
+      "sha256": "be4b348b13d29632dc1e81cb50254e15e394ad31236ef885b3d04479a53f279b"
+    }
+  ],
+  "direct_children": 42,
+  "cli_calls": 36,
+  "groups_reaped0": true,
+  "owned_image_normally_detached": true,
+  "source_pins_matched": 164,
+  "production_pins_matched": 329,
+  "cases": [
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": true,
+      "inherited_logical_bytes": 1966080,
+      "label": "stock",
+      "mode": "generic-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "stock",
+      "mode": "generic-off",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "stock",
+      "mode": "dng-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": true
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "stock",
+      "mode": "generic-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "stock",
+      "mode": "generic-off",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "stock",
+      "mode": "dng-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": true,
+      "inherited_logical_bytes": 1966080,
+      "label": "ox",
+      "mode": "generic-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "ox",
+      "mode": "generic-off",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "hfs-to-apfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "ox",
+      "mode": "dng-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": true
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "ox",
+      "mode": "generic-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cff78f8b9da0daf9fd46a8a6ea6807895d57009cf26d85d0f02024d470f539dd",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "ox",
+      "mode": "generic-off",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    },
+    {
+      "after_sha256": "cb952f0fcd8219e05afd598b95a8e89ae5a78a8de142fce1d4d10729ff5a0086",
+      "before_sha256": "c2e080074cc1d198f89efeb4cfe35c272a8ad2eabc9c60d865133ea29e272050",
+      "direction": "apfs-to-hfs",
+      "exact": true,
+      "generic_clone": false,
+      "inherited_logical_bytes": null,
+      "label": "ox",
+      "mode": "dng-auto",
+      "noop_inode_preserved": true,
+      "old_hardlink_preserved": true,
+      "semantic_clone": false
+    }
+  ],
+  "independent_apfs_postdetach_payload_audit": [
+    {
+      "label": "stock",
+      "direction": "hfs-to-apfs",
+      "mode": "generic-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "stock",
+      "direction": "hfs-to-apfs",
+      "mode": "generic-off",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "stock",
+      "direction": "hfs-to-apfs",
+      "mode": "dng-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "stock",
+      "direction": "apfs-to-hfs",
+      "mode": "generic-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    },
+    {
+      "label": "stock",
+      "direction": "apfs-to-hfs",
+      "mode": "generic-off",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    },
+    {
+      "label": "stock",
+      "direction": "apfs-to-hfs",
+      "mode": "dng-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    },
+    {
+      "label": "ox",
+      "direction": "hfs-to-apfs",
+      "mode": "generic-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "ox",
+      "direction": "hfs-to-apfs",
+      "mode": "generic-off",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "ox",
+      "direction": "hfs-to-apfs",
+      "mode": "dng-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": true
+    },
+    {
+      "label": "ox",
+      "direction": "apfs-to-hfs",
+      "mode": "generic-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    },
+    {
+      "label": "ox",
+      "direction": "apfs-to-hfs",
+      "mode": "generic-off",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    },
+    {
+      "label": "ox",
+      "direction": "apfs-to-hfs",
+      "mode": "dng-auto",
+      "apfs_payload_sha256_verified": true,
+      "apfs_old_basis_verified": false
+    }
+  ],
+  "postdetach_payload_bytes_read": 37748736,
+  "hfs_payloads": "source-bound exact owner verification before normal detach; no independent post-detach remount/read claimed",
+  "original_controls": {
+    "terminal_chunk": "114e99",
+    "exit_code": 0,
+    "checks": 23
+  },
+  "previous_attempts": [
+    "tests/qualification/final-private-volume-v1-failed-recovery-20261019.json",
+    "tests/qualification/final-private-volume-v2-failed-recovery-20261019.json"
+  ],
+  "no_sdk_photo_or_originals": true,
+  "scope": "two logical filesystems on same physical backing; current stock/Ox directed functional clone/off/fallback/old-hardlink/noop/Unicode checks, not physical-device independence, sparse/compression/all-properties/timing/pixels",
+  "parent_tool_terminal_authority": "faithful personally observed actual terminal, not ps or marker inference"
+}

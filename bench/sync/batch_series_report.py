@@ -75,6 +75,9 @@ def audit(root,packet):
         if rows!=result['rows'] or summary!=result['summary']:raise ValueError('reconstructed summary differs')
         report=dict(rows=len(rows),measured_rows=sum(r['identity']['phase']=='measured' for r in rows),
             warmup_rows=sum(r['identity']['phase']=='warmup' for r in rows),raw_peer_pairs_reaudited=pair_count,
+            unmeasured=dict(physical_write_bytes=None,application_read_bytes=None,peak_live_descriptors=None,
+                peak_queue_depth=None,hash_parse_verify_commit_stage_seconds=None,
+                scope='not instrumented by this cohort; logical models, protocol counters and per-process samples are not substitutes'),
             summary=summary,sample_pins=proof_pins,scope='retained raw proof re-audit; payloads already verified before deliberate generated cleanup; no new runtime/terminal proof')
     except UnresolvedOwnership:
         raise
@@ -86,15 +89,24 @@ def audit(root,packet):
 
 def markdown(report):
     text=['# Many-small shared-host measurements','',
-          'Warm generated corpus;1,024×32KiB files,512B XMP packets. One warmup and five measured samples per configuration. Both endpoints use the named current compiler. No cache flush or quiet-host guarantee.','',
-          '| Compiler | Mode | Client median(s) | Observed range(s) | Pair median(s) |','| --- | --- | ---: | ---: | ---: |']
+          'Warm generated corpus: 1,024 × 32 KiB files, 512 B XMP packets. One warmup and five measured samples per configuration. Both endpoints use the named current compiler. No cache flush or quiet-host guarantee.','',
+          '| Compiler | Workers per endpoint | Mode | Client median (s) | Observed range (s) | Pair median (s) |','| --- | ---: | --- | ---: | ---: | ---: |']
     for row in report['summary']:
         m=row['client_elapsed_seconds'];p=row['pair_elapsed_seconds']
-        text.append(f"| {row['label']} | {row['mode']} | {m['median']:.4f} | {m['minimum']:.4f}–{m['maximum']:.4f} | {p['median']:.4f} |")
+        text.append(f"| {row['label']} | {row['workers']} | {row['mode']} | {m['median']:.4f} | {m['minimum']:.4f}–{m['maximum']:.4f} | {p['median']:.4f} |")
+    groups={}
+    for row in report['summary']:
+        groups.setdefault((row['label'],row['workers']),{})[row['mode']]=row['client_elapsed_seconds']['median']
+    ordinary_fastest=bool(groups) and all(set(g)=={'ordinary','receiver-clone','semantic'}
+        and g['ordinary']<min(g['receiver-clone'],g['semantic']) for g in groups.values())
     text+=['',
-      'Ordinary transfer is faster in this dataset. Receiver clones and SDE reduce the logical materialization model, but do not deliver a wall-time win here. Do not infer isolated compiler gains from these small, shared-host samples.',
+      ('Ordinary transfer is faster in this dataset. Receiver clones and SDE reduce the logical materialization model, but do not deliver a wall-time win here.'
+       if ordinary_fastest else 'The table retains mode-specific observations; it does not establish an isolated algorithm or compiler advantage.')
+       +' Do not infer isolated compiler gains from these small, shared-host samples.',
       '',
       'Client time is spawn-to-terminal-observed. Pair time also includes proxy startup and evidence persistence. Per-process wait4 CPU/RSS and protocol-byte observations are retained in JSON. Proxy CPU may include its reaped native server; do not sum overlapping resource observations or call them simultaneous tree peaks/hard caps.',
+      '',
+      'Application read bytes, peak live descriptors, peak queue depth and separate hash/parse/verify/commit timings were not instrumented by this cohort. These remain unknown, rather than inferred from file sizes or process samples.',
       '',
       'All outputs and no-op identities were verified before generated payload cleanup; raw samples and peer proofs remain. Protocol counts exclude launcher control headers and are not physical-network traffic. Logical materialization models are not physical writes. No SDK/photo/pixel/cold-cache/cross-volume/physical-network/scaling claim. Five observations give a descriptive range, not a reliable population-tail guarantee.']
     return '\n'.join(text)+'\n'

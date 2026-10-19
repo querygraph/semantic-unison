@@ -65,3 +65,8 @@ transport claim. Injected unknown native owners/reservations remain retained
 until test process exit; process closure does not relabel normal object teardown.
 Predecessorv3 refused compiler symlinks beforechild and was independently
 recoveryclosed137; preserve that failure separately from this freshv4 pass.
+
+
+### Current native cross-volume and non-APFS fallback renewed
+
+[Directed twelve-case result](final-private-volume-result-20261019.md) and [actual receipt](../tests/qualification/final-private-volume-v3-actual-20261019.json) bind current stock/Ox binaries to both APFS/HFS+ directions, generic clone auto/off and DNG semantic cloning/fallback. Actual19831/bb1af5/0; all42childgroups closed, image normally detached, independent604d3a/0 audit rehashed36MiB of surviving APFS data and all source/artifact bindings. This closes the actual distinct-logical-volume/non-APFS functional gap, not the prescribed repeated topology benchmark or independent physical-device/sparse/property/network scope. V1/V2 harness failures and recovery137 are explicitly preserved.

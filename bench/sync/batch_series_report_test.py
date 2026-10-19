@@ -2,7 +2,7 @@ import unittest
 from unittest.mock import patch
 from pathlib import Path
 from batch_series import schedule
-from batch_series_report import audit
+from batch_series_report import audit,markdown
 from shared_cpu_pool import UnresolvedOwnership
 
 
@@ -32,6 +32,17 @@ class ReportOwnership(unittest.TestCase):
             self.assertEqual(caught.exception.retained_fds,(111,))
             self.assertEqual(caught.exception.uncertain_fd,222)
             store.close.assert_not_called()
+
+    def test_interpretation_follows_samples_instead_of_canned_speedup_claim(self):
+        def row(mode,value):
+            return dict(label='stock',workers=3,mode=mode,
+                client_elapsed_seconds=dict(median=value,minimum=value,maximum=value),
+                pair_elapsed_seconds=dict(median=value+1))
+        report=dict(summary=[row('ordinary',1),row('receiver-clone',2),row('semantic',3)])
+        self.assertIn('Ordinary transfer is faster',markdown(report))
+        report['summary'][2]=row('semantic',.5)
+        self.assertNotIn('Ordinary transfer is faster',markdown(report))
+        self.assertIn('not instrumented',markdown(report))
 
 
 if __name__=='__main__':unittest.main()

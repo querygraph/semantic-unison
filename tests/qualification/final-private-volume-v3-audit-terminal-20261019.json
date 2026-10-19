@@ -1,0 +1,14 @@
+{
+  "schema": "unison-final-private-volume-independent-audit-terminal/1",
+  "actual_tool": {
+    "terminal_chunk": "604d3a",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "cases": 12,
+  "direct_child_records": 42,
+  "cli_calls": 36,
+  "independently_hashed_apfs_bytes": 37748736,
+  "whole8_ex_closed": true,
+  "referenced_actual_receipt": "tests/qualification/final-private-volume-v3-actual-20261019.json"
+}
