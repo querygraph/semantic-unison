@@ -6288,3 +6288,20 @@ auto-cohort-borrow-source-actual-20261018.json. Next metadatafreeze/request and
 finiteactualcohorts afterPhotoactualhandoff. User askedPhotoworklast; no need
 waitforPhoto toexecuteAdobe onourbehalf, but actualcurrentownerclosure still
 required beforeIO. Goalactive/no ownresourcesheld.
+
+
+### 2026-10-18 — ten exact auto cohort requests prepared
+Prepared doc/auto-cohort-qualification-v1-20261018/INDEX.json (12796B,
+SHAd23d4744ee421e47767118a88f4038c6eedf3a36bfcdbd46fb1c558cabf655c5).
+Allstock/Ox×1/2/4/8/auto:10cohorts,planned180rows/540CLI/30warm+150measured.
+53currentexecutionpins perplan; existingqualifiedendpointCPUstock/Ox build
+receipts and prerequisitesauthenticated; executableSHAdeclarationscopiedfrom
+receipts, NOTfreshbinary/compilerpayloadhashbeforeIO. Current329production
+sourceinventory exactmetadata compared earlier, runtimewillhashinsideIOowner.
+Metadata-onlyfreezer actual17cc9c/0 child59880reaped0/groupabsent/CPU4closed,
+all10checked_metadataPASS; e1ef15/0 verifiedall10workspacesABSENT. No admission
+created/no transport/SDK/EXIO/borrow. Evidence auto-cohort-freeze-actual-20261018.json.
+Photo schedulinghandofffollow-up01a1527f-87c0 sentexactindex: userwantsPhotoIO
+last, directUnisonAdobequalificationafteractualdrain. Noactualhandoffinferred;
+next executeexactfinitecohortsonlyaftercurrentPhotoresourceclosureconfirmed.
+Default8/8unchanged; largercohortrequiresseparatetemporary18authorization.
