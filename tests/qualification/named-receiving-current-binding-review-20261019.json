@@ -1,0 +1,162 @@
+{
+  "schema": "unison-named-receiving-current-binding-review/1",
+  "historical_receipt": {
+    "path": "/Users/alexy/src/unison-final-adobe-20261019/tests/validation_paths/qualification-20261013.json",
+    "bytes": 127002,
+    "sha256": "f038621f401a33e8739a01ec6bdce9ea24553b33295563d65e13ca5d0524927f"
+  },
+  "source_bindings": {
+    "production_sha256": [
+      {
+        "path": "src/candidateValidation.ml",
+        "recorded_sha256": "a5cd5a8265387a0733280df3c1030243da1edf69c854c3c06693cc54e4f870d9",
+        "current_sha256": "325cb03f3a40e3e9f9556e93187f4d756cec60ada248d1d5d133fe20f6b39ab4",
+        "state": "changed"
+      },
+      {
+        "path": "src/copy.ml",
+        "recorded_sha256": "825b0fd8b721cdcf24715924746e676807bdf109b1a9dc477dd4d5f7a9cc0082",
+        "current_sha256": "10b9b26d494f8e67118ecc65782adccb466b6f1fe353832a360d0a767555c96e",
+        "state": "changed"
+      },
+      {
+        "path": "src/dngValidation.ml",
+        "recorded_sha256": "657e9e858e897950b026a23b768dd26d1510e48f5893579a08c51c3c5bc4735a",
+        "current_sha256": "2a7a548132d48f8a373678dcfd4c9bf6c1c93f45e3be1e26dd8ce45a427b0c5b",
+        "state": "changed"
+      },
+      {
+        "path": "src/dngValidation.mli",
+        "recorded_sha256": "4a15c2b6575b417f188db2ac617db1c65070673696ef23e44e3eb22891af6bc9",
+        "current_sha256": "b8b4b0ae5a19ce13b196f87da1f843d69fb406d06c485c2110c0d44851885a68",
+        "state": "changed"
+      },
+      {
+        "path": "src/files.ml",
+        "recorded_sha256": "bd0c4b5a89e166e22b4ed56bc71f5d6ee61d2aaab60533d386c31c3eb2bd5ca2",
+        "current_sha256": "0f2c6157c236a871cde0475fa0c73b40127e96c06abd88ddce031437505a59a6",
+        "state": "changed"
+      },
+      {
+        "path": "src/finalPublication.ml",
+        "recorded_sha256": "095c3016f2a03c4f06619411ee033fc56f4e59148d0061497b84dff5ecca508e",
+        "current_sha256": "4d5f2cffd3300cea7b4df07029a394a9c57e2dacf1f53b21df1b014002be1202",
+        "state": "changed"
+      },
+      {
+        "path": "src/finalPublication.mli",
+        "recorded_sha256": "5d8bb823b1d897e1e7ec662f006794b9b7b68afdc21a51b90a7471f9d7cb0ae4",
+        "current_sha256": "54f786e944d102d6fd7b7aa63fdfe4560fe686ef8ec17f33e13137711a615581",
+        "state": "changed"
+      },
+      {
+        "path": "src/helperSupervisor.ml",
+        "recorded_sha256": "d13911bbcd5b12b2c2abe3a34a0b0a450366f2a387701b808452e830ee0ac78a",
+        "current_sha256": "43686f6c5001038aa5c1c333dd2228a2f1ef76d2dcc2755afcd279999cfcedeb",
+        "state": "changed"
+      },
+      {
+        "path": "src/helperSupervisor.mli",
+        "recorded_sha256": "a79d0fefdc3a34445337b73a93ca64cce3cd3c8c589fa23617bbf391f85080be",
+        "current_sha256": "a4e496854a59315ba79084ef6c0a72ef55fd22988ffc39e8c992e15980d13730",
+        "state": "changed"
+      },
+      {
+        "path": "src/ioAdmission.ml",
+        "recorded_sha256": "021ec08b97ed3005034b67bb716913f16431bca724ac2b2a0562237a345081b2",
+        "current_sha256": "e6cf1dff55796ec2f2609395219e84bd9930509968cff3704d2cdd95b31ef2d4",
+        "state": "changed"
+      },
+      {
+        "path": "src/ioAdmission.mli",
+        "recorded_sha256": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "current_sha256": "45b47cb193231823bad32d1a55ddb681a7392072d2cb8448eb8e5f25bb7bba40",
+        "state": "same"
+      },
+      {
+        "path": "src/semanticRuntime.ml",
+        "recorded_sha256": "aa4a89c459e171807e4f7ea38009ab155d5cfe53f1b4155881284dc24dc751cd",
+        "current_sha256": "14bef12ead984955efaf1c31c0a4c6085c19ff2c3df483e5d9e9a8ff54c5d320",
+        "state": "changed"
+      },
+      {
+        "path": "src/semanticRuntime.mli",
+        "recorded_sha256": "028db47a00b1e7274aee9b2523f25998b70aef04891b24ea1ca7532ac2a11a42",
+        "current_sha256": "5dc6a194ef00a6a60049c82ff4011abfef864085839c2cd2118cde27399f8c0e",
+        "state": "changed"
+      },
+      {
+        "path": "src/semanticWorkers.ml",
+        "recorded_sha256": "5cbfe5f34746797f9af57a71b0045549fe6a7387b5c5ec13eea4acd4156c1c73",
+        "current_sha256": "8b8759ecfa2881d42782db1b93107f4e5eb7ab9c32f99b7249d2dd7d4000c721",
+        "state": "changed"
+      },
+      {
+        "path": "src/semanticWorkers.mli",
+        "recorded_sha256": "e036c75526ed77155b4f99e850d777d9e6df3d288d41c32896fd755a4f4a712f",
+        "current_sha256": "928940c64745da115e43c88a7172e2968ee9ddd58492d19eececafb3a58364f0",
+        "state": "changed"
+      },
+      {
+        "path": "src/targetBinding.ml",
+        "recorded_sha256": "3fed72285b9cbf61b2f1013e44812a2dcada84be02815fdd6894f11afa762231",
+        "current_sha256": "4e236201ee4482834e8b68eec41234f8c5cb9abe3b54eccbb36651ce60a9625d",
+        "state": "changed"
+      },
+      {
+        "path": "src/targetBinding.mli",
+        "recorded_sha256": "e60d44c254c88b545bf5f3d95580d1a1e43f1512e384fdc965d797bdcb59c951",
+        "current_sha256": "09154ecb425a1e351a78afc9d049fe1247cd01de726cf665844c123bbd60cb66",
+        "state": "changed"
+      }
+    ],
+    "test_sha256": [
+      {
+        "path": "tests/validation_paths/README.md",
+        "recorded_sha256": "000531c62a62646be6ab5e94489e4318cee6763cd307912747705d0ab8cf4686",
+        "current_sha256": "000531c62a62646be6ab5e94489e4318cee6763cd307912747705d0ab8cf4686",
+        "state": "same"
+      },
+      {
+        "path": "tests/validation_paths/independent-source-review-20261013.json",
+        "recorded_sha256": "b9aa6ee81eb7a74e7187fd1e92774c732a24b0c231a4fe5f9be62e22a73dc7c3",
+        "current_sha256": "b9aa6ee81eb7a74e7187fd1e92774c732a24b0c231a4fe5f9be62e22a73dc7c3",
+        "state": "same"
+      },
+      {
+        "path": "tests/validation_paths/run.py",
+        "recorded_sha256": "e548c3c382569bde9d0bc217cd52200313f2b80cf207c7fe7bf7d7109537a8a0",
+        "current_sha256": "d96f758743d918bea5477b07b042b8bb4eb4ad809fe701d3de4524326b18bcd7",
+        "state": "changed"
+      }
+    ]
+  },
+  "historical_assertions": [
+    "Completed and >1 MiB verified-prefix staging survives producer interruption, reaches the actual named resume branches, retains its inode and receives validation on full bytes.",
+    "Zero-exit error receipts reject resumed/reused/external/merged candidates under require, with nonpublication, removal of rejected stages, fresh validated retries and unchanged-sync no-ops.",
+    "Actual external copy and fingerprint-hint reuse candidates reach the common receiver gate independently of DNG semantic eligibility.",
+    "Both merge receivers use their own local pinned helper; first rejection prevents second invocation; second rejection preserves its old live bytes after first commit; recovery remains a conflict and regenerates/validates both exact candidates.",
+    "Require and warn timeouts reap the child before the CLI returns; actual client-receiver SIGINT rejects under both policies, reaps its child and preserves old live bytes.",
+    "At two CPU permits and one filesystem execution credit, six actual directory validation helpers have observed peak overlap exactly one on each compiler."
+  ],
+  "historical_limits": [
+    "No actual Adobe SDK invocation, photographic input, Lightroom operation, preview build, catalog/cache access or mounted Photo-volume operation occurred.",
+    "This does not prove Adobe parsing/decode/raw-digest behavior, real-corpus validation, SDK parallelism, memory/performance or Lightroom UI Validate parity.",
+    "Hint-copy reuse is deliberately distinct from rename-only moves, which remain outside received validation scope.",
+    "Cancellation qualifies active client-side receiving execution; forwarding client-only SIGINT to a remote receiving server is not established here.",
+    "Existing configured external merges are tested; automatic XMP semantic merge and cross-replica atomic publication remain separate.",
+    "Filesystem keys are cooperative st_dev job groups; physical disk identity, RSS/descriptor caps and crash-durable publication are not established by these tests."
+  ],
+  "historical_run_count": 2,
+  "historical_payload_or_artifact_reopened": false,
+  "new_CLI_or_SDK_calls": 0,
+  "EX_acquired": false,
+  "current_named_path_execution_proved": false,
+  "decision": "Keep historical named resume/reuse/external/merge/timeout/cancel evidence; do not relabel it current. Current named-path regression with retained lifecycle owner remains required independently of successful generated SDK merge.",
+  "CPU00_closed": true,
+  "actual_tool": {
+    "terminal_chunk": "8970b6",
+    "exit_code": 0,
+    "running_session": false
+  }
+}

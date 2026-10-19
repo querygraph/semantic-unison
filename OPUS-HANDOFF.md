@@ -99,6 +99,11 @@ admissions or statements that consumed jobs remain unstarted.
   are in `tests/sdk_negative_receiving/README.md` and the successor design doc.
   Native source integration is now present; only fresh02 review/admission and
   actual execution remain. Earlier missing-entry notes are historical.
+- Named receiving binding audit8970b6/0 (source/metadata only) found16of17
+  oldproduction pins changed and1of3test/doc pins changed. Old21path receipt
+  remains validhistorical, NOTcurrentruntime. Current resume/reuse/external/merge
+  regression with qualifiedretainedowner remains next after boundedSDKnegative;
+  no unreviewed legacy subprocess harness rerun. CPU00closed/noCLI/SDK/EX/payload.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement

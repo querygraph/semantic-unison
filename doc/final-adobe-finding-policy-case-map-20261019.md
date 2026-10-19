@@ -63,3 +63,19 @@ three encodings now passed [nine CLI/six genuine SDK calls](current-sdk-merge-re
 Receiving publication on negative genuine findings and the remaining named
 reuse/resume/merge policy mapping are still open. Passing this
 core matrix is not completion of those broader requirements.
+
+## Named receiving-path current-source binding
+
+A fresh metadata/source-only review8970b6/0 compared the old21-case receiving
+receipt to current files. Of17 explicitly pinned production inputs,16 changed;
+one stayed identical. Of3 test/document pins,one changed andtwo stayed identical.
+All old paths still exist. The original receipt is retained, not rewritten or
+rejected as historical evidence. It cannot be promoted to a current execution
+solely because newer unit controls and genuine generated SDK merge pass.
+[Exact source comparison](../tests/qualification/named-receiving-current-binding-review-20261019.json).
+CPU00 closed; no old payload, binaries or generated artifacts were reopened and
+no CLI/SDK/EX ran. Next qualify the named current resume/reuse/external/merge
+branches with retained process/helper/group ownership. The older harness uses
+legacy subprocess/cancellation paths; it must not be run unreviewed merely by
+substituting current binaries. Current negative SDK request02 is separate and
+does not make this source-binding gap disappear.
