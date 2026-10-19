@@ -177,7 +177,7 @@ All-scanned endpoint integration remains pending. The lifetime correction was
 needed before enabling it; next implement private endpoint directory ownership,
 non-CWD-changing followed-path resolution/fences, strict scope/capability handling,
 scan-error propagation and awaited endpoint completion. Do not expose the option
-based on the component tests alone. Full SOL.md goal remains active/incomplete.
+based on the component tests alone. Full SEMANTIC-UNISON-DESIGN.md goal remains active/incomplete.
 
 ## Current checkpoint — all-scanned scope implemented
 
@@ -231,7 +231,7 @@ Next: prepare a fresh source-pinned real SDK all-scanned IO request and qualify
 actual remote-process/old-peer combinations/live watcher scopes. No such SDK or
 private-camera grant currently exists; do NOT reuse consumed grants. Source-only
 MakN vendor/reference grammar work and broader M4-V/M6/corpus/portable-hash work
-continue independently. Full SOL.md goal remains ACTIVE/INCOMPLETE.
+continue independently. Full SEMANTIC-UNISON-DESIGN.md goal remains ACTIVE/INCOMPLETE.
 Usage/contracts: `doc/all-scanned-validation.md`. exiftool-rs reuse remains deferred
 until the separate extensions/dng-compare integration is ready; Perl13.59 baseline
 and all historical timing/failedpart3/consumed-admission caveats remain preserved.

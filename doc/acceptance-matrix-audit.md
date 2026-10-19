@@ -10,9 +10,9 @@ The current receipt pin review records actual source differences rather than
 promoting old fault/transport executions to this candidate. No new run or grant.
 
 
-This maps the twelve requirements in `SOL.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
+This maps the twelve requirements in `SEMANTIC-UNISON-DESIGN.md` to existing receipt scopes. It is a source/receipt audit, not a new execution or independent implementation review. Every row remains partially qualified. Hashing a receipt below does not revalidate its historical production source or expand its claims.
 
-Latest user steering in SOL.md changes the coverage criterion: exhaustive private
+Latest user steering in SEMANTIC-UNISON-DESIGN.md changes the coverage criterion: exhaustive private
 camera understanding is not a global deployment gate. The baseline is separate
 pixel/standard metadata components plus conservative opaque hash coverage, with
 nested plugins and incremental refinement. The component core, DNG adapter and frozen nested dispatch now have generated

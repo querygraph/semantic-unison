@@ -24,5 +24,5 @@ Our goals:
 We credit Unison’s authors and retain the project’s existing [licensing](LICENSE) and
 attribution. This fork is maintained independently of upstream.
 
-Read the [design](SOL.md) and
-[the manifesto](I-AM-AN-HONEST-WORKING-LLM.md).
+Read the [design](SEMANTIC-UNISON-DESIGN.md) and
+[I am an honest working LLM](I-AM-AN-HONEST-WORKING-LLM.md).

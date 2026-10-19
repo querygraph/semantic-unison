@@ -1,6 +1,6 @@
 # Remaining implementation and qualification work
 
-This is an active work queue against SOL.md, not a completion claim or a new
+This is an active work queue against SEMANTIC-UNISON-DESIGN.md, not a completion claim or a new
 permission policy. Historical receipts retain their exact source snapshots.
 
 The opt-in all-scanned implementation now passes local scan-RPC/private-stage

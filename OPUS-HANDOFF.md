@@ -1,9 +1,15 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:36:00.204259+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:40:43.305814+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
+- **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
+  `SOL.md` in the active worktree, with design contents unchanged. README now
+  names the manifesto explicitly and links the renamed design. Maintained
+  Markdown references updated; immutable JSON receipts/plans and historical
+  source snapshots are unchanged. Older worktrees retain their branch's old
+  design filename until this commit is integrated; use the active worktree above.
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
@@ -2987,7 +2993,7 @@ Protected untracked files: never stage/edit/delete them:
 ## Architecture and design implemented
 
 Read [the production review map](doc/implementation-review.md),
-[SOL.md](SOL.md), [normative SDE draft](doc/semantic-delta-v0.md),
+[SOL.md](SEMANTIC-UNISON-DESIGN.md), [normative SDE draft](doc/semantic-delta-v0.md),
 [semantic sync behavior](doc/semantic-sync.md), and
 [twelve-row acceptance audit](doc/acceptance-matrix-audit.md).
 `doc/milestone-next-work.md` is the detailed evolving queue. Some older docs

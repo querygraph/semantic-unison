@@ -65,7 +65,7 @@ fake protocol helpers. Their independent candidate SHA checks and process/group
 bindings exercise the real driver invocation path, including driver inspection;
 they are not Adobe decode/raw-digest or pixel evidence. Real SDK all-scanned,
 actual remote-process peer combinations, live watcher and broader platform/corpus
-qualification remain open. The full SOL.md goal is incomplete.
+qualification remain open. The full SEMANTIC-UNISON-DESIGN.md goal is incomplete.
 
 For explicit qualification, `-debug validation-input` records the owner context's
 candidate pathname as bounded raw-byte hex, candidate hash/size, helper PID and

@@ -105,7 +105,7 @@ Everything below preserves earlier checkpoint scopes. “Pending” scheduling a
 missing integration statements there are historical where superseded above.
 
 
-The full SOL.md goal is active. This is a current evidence index and remaining-work
+The full SEMANTIC-UNISON-DESIGN.md goal is active. This is a current evidence index and remaining-work
 list, not a completion certificate. Historical qualifications retain their pinned
 source/platform scopes; a passing current build does not rerun every historical
 fault or compatibility test.

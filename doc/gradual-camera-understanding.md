@@ -1,6 +1,6 @@
 # Gradual camera understanding and nested DNG plugins
 
-Status (2026-10-19): the architecture is specified in [SOL.md](../SOL.md),
+Status (2026-10-19): the architecture is specified in [SEMANTIC-UNISON-DESIGN.md](../SEMANTIC-UNISON-DESIGN.md),
 and its component/refinement/checkpoint kernel, frozen DNG child dispatch,
 layout-only exact-transfer profile, and optional exiftool-rs knowledge bridge
 are implemented. They have different qualification scopes; none grants general
@@ -20,7 +20,7 @@ learned, nested plugins refine only affected hash components and dependent
 roots; already verified pixel components are reused with valid input bindings.
 This is not a requirement to reverse-engineer every field before shipping.
 The detailed cache invalidation, versioning and lazy rehash contract is normative
-in SOL.md; this document develops the plugin and operation boundaries.
+in SEMANTIC-UNISON-DESIGN.md; this document develops the plugin and operation boundaries.
 
 ## Aim
 

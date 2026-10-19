@@ -46,7 +46,7 @@ closed; no EXglobal was acquired. Standing Unison8/Photo8/system2 continues.
 
 ## Acceptance scope
 
-The twelve areas in SOL.md remain the completion contract. This table preserves
+The twelve areas in SEMANTIC-UNISON-DESIGN.md remain the completion contract. This table preserves
 their scope; a build or source match is not a replacement for missing behavior.
 Earlier evidence stays available in the [previous map](sol-release-readiness-20261017.md).
 

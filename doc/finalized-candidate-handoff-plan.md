@@ -11,7 +11,7 @@ exclusions. The current receipt is
 An invalid resume prefix now restarts by truncating its validated writer for
 the same admitted inode, rather than discarding and re-admitting a new object.
 Only initial explicit backend/family handoff permits legacy behavior; native
-identity errors remain terminal. Consult SOL.md and qualification receipts for
+identity errors remain terminal. Consult SEMANTIC-UNISON-DESIGN.md and qualification receipts for
 the latest tested source, rather than treating the predecessor pins as current.
 
 The originally audited final-publication slice binds the file reopened by

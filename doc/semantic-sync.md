@@ -220,7 +220,7 @@ resource allocation; coordinate manual runs with other work.
 - [Experimental SDE/0 wire format](semantic-delta-v0.md)
 - [Experimental SIR/0 inspection format](semantic-report-v0.md)
 - [Worker ownership and limits](semantic-workers.md)
-- [Live design and remaining work](../SOL.md)
+- [Live design and remaining work](../SEMANTIC-UNISON-DESIGN.md)
 
 Reduced logical writes and transfer payloads do not establish physical APFS
 write savings or elapsed-time speedups. Verification and optional raw decoding

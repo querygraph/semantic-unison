@@ -35,7 +35,7 @@ retain that envelope through settlement; native close precedes retirement.
 avoiding a result-constructor allocation at the debit/reply handoff. Early reader,
 worker, nonce, helper/CPU acquisition and PID ownership guards have separate finite
 controls. See [resource-admission.md](resource-admission.md) and the component
-receipts linked by [SOL.md](../SOL.md). This adds selected lifetime admission;
+receipts linked by [SEMANTIC-UNISON-DESIGN.md](../SEMANTIC-UNISON-DESIGN.md). This adds selected lifetime admission;
 it does not establish a complete native/heap/process resource cap or universal
 allocation-failure recovery. Existing native positional-write contracts remain.
 

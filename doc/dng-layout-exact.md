@@ -1,7 +1,7 @@
 # Partial-knowledge DNG exact-layout profile
 
 Profile `org.firstpair.dng-layout/0`, capability `dng-layout-exact-v0`, implements
-the first transfer part of the user's gradual-understanding design in SOL.md.
+the first transfer part of the user's gradual-understanding design in SEMANTIC-UNISON-DESIGN.md.
 It does not require private MakerNote field meanings before an otherwise exact
 metadata-region transfer can be attempted.
 
