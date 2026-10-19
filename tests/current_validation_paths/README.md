@@ -118,5 +118,12 @@ terminal or release.
 Eleven parent methods passed with all 135 named-path methods in one in-process
 run under CPU00, then closed. Only fabricated captures were used.
 [Evidence](../qualification/current-named-parent-replay-controls-actual-20261019.json).
-Real bounded parent IO adapters, a complete 21-case replay fixture, and the
-owned entry/plan/admission remain before any runtime request.
+`parent_io.Reader` now supplies the real adapters: one NOFOLLOW workspace
+directory FD bound to its identity, openat descent into declared case names
+only, regular/owned/single-link records with unchanged epochs, exact generated
+script, proxy and endpoint-profile bytes, strict complete JSONL counters, and
+refusal of call stems the worker did not report. Ten controls on actual tiny
+private records passed with all 145 methods under CPU00, then closed.
+[Evidence](../qualification/current-named-parent-io-controls-actual-20261019.json).
+A complete 21-case replay fixture and the owned entry/plan/admission remain
+before any runtime request.

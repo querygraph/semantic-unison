@@ -1,0 +1,34 @@
+{
+  "schema": "unison-current-named-parent-io-controls/1",
+  "actual_tool": {
+    "runner": "in-process unittest under standing CPU00 lease (scratchpad runner, not committed)",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_methods": 145,
+  "new_parent_io_methods": 10,
+  "source_sha256": {
+    "tests/current_validation_paths/parent.py": "a8e740898ab98edbefcc31c41d7a569c3e1cd72a3a0dafce359ce6035f79d4c4",
+    "tests/current_validation_paths/parent_counters.py": "bde812a9d594fad3a30ea9418513944d7428604cf50c1ca8fc5753c665bff772",
+    "tests/current_validation_paths/parent_io.py": "68d9fb59f4808cf0a19c94bdb05112d07e88c9d69f2de99adb8398c36f401f4b",
+    "tests/current_validation_paths/parent_io_test.py": "9bb43327725bdb5eac71d093cc6784f5c4a4d42bd4461e1b4fb0d03caf3a3c99",
+    "tests/current_validation_paths/parent_test.py": "95a4b3f56d0e6ae2b7f65d6c7597ec7ee92c96699d659d70ddd35b35bfad490a"
+  },
+  "CPU00_closed": true,
+  "actual_children": 0,
+  "actual_signals": 0,
+  "SDK_calls": 0,
+  "EX_acquired": false,
+  "payload_opened": false,
+  "scope": "Actual tiny private records in a temporary 0700 workspace read through parent_io.Reader and replayed by parent.replay: one failed-prefix producer-interruption call accepted; symlinked record/case directory, hardlinked record, unreported call stem, changed generated script, changed endpoint profile, duplicate-key and truncated counter lines, undeclared root, wrong workspace identity and closed reader refused. Fabricated native captures only.",
+  "limitations": [
+    "no complete 21-case replay fixture yet",
+    "reader does not prove worker/proxy settlement or parent terminal",
+    "no injected uncertain-close control for the reader itself"
+  ],
+  "remaining": [
+    "complete 21-case fabricated replay control including case_summary joins",
+    "owned worker/owner/metadata plan/freezer/admission entry",
+    "actual complete 21-case stock/Ox runs under fresh coordination"
+  ]
+}

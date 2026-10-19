@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current Semantic Unison checkpoint
 
-Updated UTC 2026-10-19T23:06:47.519769+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
+Updated UTC 2026-10-19T23:09:23.095435+00:00. Goal ACTIVE/incomplete. This block is authoritative. Earlier
 snapshots below and in doc/handoff-snapshots are history, not resource holds,
 admissions or statements that consumed jobs remain unstarted.
 
@@ -29,7 +29,7 @@ admissions or statements that consumed jobs remain unstarted.
 
 ## Actual resources and scheduling — ZERO held
 
-- Independent parent replay source added: pure `recipes.py` now generates worker and parent scripts/flags/phase intents/proxy source identically; `parent.py`+`parent_counters.py` replay every pinned INTENT/CONFIG/PAIR/AUDIT(+CANCELLATION) call, rebind worker PID/9 inherited FDs, rerun normal/cancel/producer raw auditors and slice final fake-helper/copy/merge counters between intents. Complete=69CLI/54fake/9copy/7merge/4producer/2cancel; failed prefix must stop at named case. 135 methods (11 new) passed in-process under CPU00, closed; fabricated captures only, no child/signal/SDK/EX. Receipt current-named-parent-replay-controls-actual-20261019.json. Next: real bounded parent IO adapters (read_case/read_root/case_state), complete21case replay fixture, owned entry/plan/admission. No Photo hold/admission.
+- Independent parent replay source added: pure `recipes.py` now generates worker and parent scripts/flags/phase intents/proxy source identically; `parent.py`+`parent_counters.py` replay every pinned INTENT/CONFIG/PAIR/AUDIT(+CANCELLATION) call, rebind worker PID/9 inherited FDs, rerun normal/cancel/producer raw auditors and slice final fake-helper/copy/merge counters between intents. Complete=69CLI/54fake/9copy/7merge/4producer/2cancel; failed prefix must stop at named case. 135 methods (11 new) passed in-process under CPU00, closed; fabricated captures only, no child/signal/SDK/EX. Receipt current-named-parent-replay-controls-actual-20261019.json. Real parent IO adapters now in `parent_io.py` (workspace-FD openat, single-link/epoch, script/profile/counter bytes, unreported-call refusal); 10 actual tiny-record controls, 145 total passed under CPU00, closed; receipt current-named-parent-io-controls-actual-20261019.json. Next: complete21case replay fixture, owned entry/plan/admission. No Photo hold/admission.
 
 - Producer Actor.interrupt is now integrated: same global/per-case budget and sequence, source-only abort launcher, durable intent/config/pair/audit pins, real post-crash stage/source fence, source-specific raw receiver-crash plus native external-producer audit. Full21case worker source now composes original assertions and distinguishes independently-auditable settled ordinary failures from unresolved ownership; does not release inherited IO/CPU itself. Actualsourcecontrols16625/dea7ce/0 passed120; final source-pin/prefix controlscd9ea9/0 passed10, allCPU00closed/no actualchild/signal/SDK/EX. Earlierd81e95/1 exact-length fixture mistake preserved. Parent replay, owned entry/plan/admission and actualstock/Ox suite still outstanding. No Photo hold/admission currently.
 

@@ -18,8 +18,9 @@ class Replay(unittest.TestCase):
         row=self.packet['rows'][0];self.root=row['directory'];self.records={};self.root_records={}
         self.scripts=recipes.scripts(recipes.literal_templates(SOURCE),self.packet['repository'])
         self.resources=[dict(fd=700+i,device=1,inode=900+i) for i in range(9)]
-        self.phase=recipes.phase(row,1,self.scripts,self.packet['binary']['path']);self.identity=dict(device=1,inode=2)
-        observer=recipes.producer_observer(row,(1,2))
+        device,inode=getattr(self,'case_identity',(1,2))
+        self.phase=recipes.phase(row,1,self.scripts,self.packet['binary']['path']);self.identity=dict(device=device,inode=inode)
+        observer=recipes.producer_observer(row,(device,inode))
         self.intent=dict(sequence=1,case_root=self.root,**self.phase,before_fake_helper_counts=dict(client=0,server=0),
             before_external_counts=dict(copy=0,merge=0),producer_interruption=observer,resource_release_authorized=False)
         self.config=dict(directory=self.root,identity=self.identity,stage='call-001',binary=self.packet['binary']['path'],
