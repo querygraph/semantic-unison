@@ -1,0 +1,25 @@
+{
+  "schema": "unison-auto-cohort-report-input/1",
+  "records": [
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/stock-1-plan.json",
+        "sha256": "0abbd80addfbc371c8d7f2c02aee095d573f36885802e7473e4994b3ff3fe8c5"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-941741d1619946e1b45f876ad800c0c6/RESULT.json",
+        "sha256": "f8f5cdb587fa50030ee0e0995d575913e445e9be037bdbb43d774019340f406a"
+      }
+    },
+    {
+      "plan": {
+        "path": "/Users/alexy/src/unison-cpu-ceiling-20261018/doc/auto-cohort-qualification-v1-20261018/ox-1-plan.json",
+        "sha256": "26ec758b2df729a08c44f4caa992efdd1116cb857f36e57221331014556af1a3"
+      },
+      "result": {
+        "path": "/private/tmp/unison-auto-cohort-bc8512209b3f4f3aa2b164c0af4c2595/RESULT.json",
+        "sha256": "b5953c9427d9ca24b85b6c3195d80f851f5bf2394ae2b98ae174fc5ed8fb8009"
+      }
+    }
+  ]
+}

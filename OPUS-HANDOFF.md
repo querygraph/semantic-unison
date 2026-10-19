@@ -6390,3 +6390,23 @@ Next separateOx1/stock2/Ox2 shared8 cohorts underuserhandoff; NOTautomaticreuse
 ofstock1grant. Larger18cohorts requireexplicitborrowcoordination (requested
 01a1528f-7385, notyetgranted). DirectmixedAdobe requestf9c93745 remainsUNADMITTED
 andnoSDKexecuted. MainstaysPhoto-exclusive. Goalactive.
+
+
+### Ox1 actual PASS/CLOSED; largercohort coordination active, no18borrowyet
+Actualtool29564 initialed00c9 terminal058ffe/0/NOsession, parent69144/worker69160.
+18rows54CLIexact, workerreaped0/groupsabsent/CPU8+EXIOclosed/source53unchanged.
+Admission2404e206 CONSUMED_ONCE. Rootpromptclosurenotice01a15296-ad41 sent
+BEFOREseal. OWNERRETURN15ee828d57c2f08763bad00329608a2521db491aad0f5130a406910998a6cebb
+workspacebc8512209b3f4f3aa2b164c0af4c2595. Evidenceauto-cohort-ox1-actual-20261018.json.
+Saved-onlyactualreport568f1a/0: 36rows6groups/8cohortsmissing, immutableJSON+
+Markdown doc/auto-cohort-one-worker-pair-report-20261018.*; rawhashes/no exclusions.
+Additionalstock1savedreportab08d8/0 alsoINCOMPLETE, nopayloadrerun.
+RootACTIVEcoordinationreceipt nowexists17436B
+/Users/alexy/src/lightroom/.private/photo/coordination/UNISON-TEMPORARY18-SIX-COHORTS-ACTIVE-20261019.json
+SHA84ced3064bf8f1f66025f6a3a6511118272d332306f64be845f49406c91e3f58;
+conditional a6da6a97 NEVERauthority. Active permitsONLYsix stock/Ox4/8/auto with
+freshpercohortadmissions, exact00..17/policy1dbe12eb/restorestandingtrue. Root
+reviewedexact6plans/requests andasksall4shared8closuresforadoptionbeforefirst18.
+No18START/leaseyet. Finishstock2/Ox2 next undernewoneuseshared8admissions;
+thenpublishall4actualproofs. Photo holdsALLnewjobs exceptinertedits/metadata;
+MainremainsPhoto-exclusive. Nootherownjobs/resourcesactive.

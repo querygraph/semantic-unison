@@ -64,6 +64,11 @@ interpretation as completion gates. Exact opaque preservation remains mandatory.
    deployment authorization.
 
 [Prepared cohort index](auto-cohort-qualification-v1-20261018/INDEX.json) is
-metadata-only and unadmitted. None of its workspaces has been used. The current
-Photo bulk256 owner was reported as tool69656/controller60081; a safe drain was
-requested in queue01a15280-658f. No Unison IO/Adobe/temporary18 owner is active.
+partially executed: stock1 and Ox1 have each passed18rows/54CLI and closed;
+the other eight workspaces are unused. Photo actual69656/bc04d0/137 independent
+recovery closed (not bulk success); first8 publications remain/248 incomplete.
+Photo holds new jobs for direct Unison qualification. The six larger cohorts
+have explicit active CPU coordination84ced306, but no dispatch admissions or
+18-core acquisition yet. Finish stock2/Ox2 and send all four shared8 closures
+for Root adoption before starting temporary18. No own IO/Adobe owner is active.
+The Main catalog remains Photo-exclusive.
