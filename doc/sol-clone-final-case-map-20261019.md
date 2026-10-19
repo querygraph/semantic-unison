@@ -70,3 +70,8 @@ recoveryclosed137; preserve that failure separately from this freshv4 pass.
 ### Current native cross-volume and non-APFS fallback renewed
 
 [Directed twelve-case result](final-private-volume-result-20261019.md) and [actual receipt](../tests/qualification/final-private-volume-v3-actual-20261019.json) bind current stock/Ox binaries to both APFS/HFS+ directions, generic clone auto/off and DNG semantic cloning/fallback. Actual19831/bb1af5/0; all42childgroups closed, image normally detached, independent604d3a/0 audit rehashed36MiB of surviving APFS data and all source/artifact bindings. This closes the actual distinct-logical-volume/non-APFS functional gap, not the prescribed repeated topology benchmark or independent physical-device/sparse/property/network scope. V1/V2 harness failures and recovery137 are explicitly preserved.
+
+
+### Current native stage property/ABI/sparse binding renewed
+
+[Result](final-native-stage-result-20261019.md) and [actual receipt](../tests/qualification/final-native-stage-v2-actual-20261019.json): both current production native objects,50actual compiler/native/metadata children,46zero+4expected77; owning5267/cfd95f/0/no session. Read-only/snapshot live-mutation isolation, xattr/fork/ACL stripping, FIFO/flags/refusal/error phases/exclusivity/descriptor counts and real sparse1MiB snapshots passed. Independent2a4ba1/0 rehashed2146342B and all source/object/toolchain/command bindings; whole8EXclosed. Earlier sparse-generator prerequisite failure/recovery137 and negative creation methods preserved. This closes native-stage binding, not every end-to-end sync property/compressed/platform/crash case.

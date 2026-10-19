@@ -1,0 +1,176 @@
+"""Current production-object clone-stage ABI/property qualification.
+
+Executes unchanged original fixture bodies with retained subprocess ownership.
+Only fresh generated inputs. Unknown retains all handles/tokens; no cleanup,
+SDK, Photo, mount, retry, forced group signal, or source-original access.
+"""
+import argparse,fcntl,hashlib,json,os,struct,sys,time,types
+from pathlib import Path
+ROOT=Path(__file__).resolve().parents[1]
+sys.path[:0]=[str(ROOT/'tests'),str(ROOT/'tests/sdk_host_matrix')]
+from cached_benchmark.contract import read_bytes
+from shared_cpu_pool import Pool,authorized_unison_tokens,UnresolvedOwnership
+from shared_io_pool import GlobalPool,CANONICAL_MANIFEST,CANONICAL_SHA256,try_io_cpu_bundle,close_unstarted
+from private_camera_receiving.close import close_descriptors
+from shared_process_owner import retain_after_record
+from sdk_merge_receiving.store import Store
+from shared_child import start
+from final_profile_owner import closed,sha
+from native_stage_driver_adapter import Bridge,RetainedDirectory
+
+
+def write_bytes(path,data):
+    fd=os.open(path,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
+    try:
+        at=0
+        while at<len(data):
+            n=os.write(fd,data[at:])
+            if n<=0:raise OSError('generated fixture write stalled')
+            at+=n
+        os.fsync(fd)
+    finally:close_descriptors([fd])
+
+
+def main():
+    parser=argparse.ArgumentParser();parser.add_argument('--plan',required=True);parser.add_argument('--sha256',required=True);a=parser.parse_args()
+    raw=read_bytes(a.plan,2*1048576)
+    if hashlib.sha256(raw).hexdigest()!=a.sha256:raise ValueError('clone-stage plan SHA differs')
+    packet=json.loads(raw)
+    if (sys.platform!='darwin' or sys.flags.optimize!=0 or packet['schema']!='unison-final-clone-stage-plan/1'
+            or packet['repository']!=str(ROOT) or [j['label'] for j in packet['jobs']]!=['stock','ox']):
+        raise ValueError('exact original-assertion Darwin pair required')
+    def sources():
+        for name,digest in packet['source_pins'].items():
+            if sha(ROOT/name)!=digest:raise ValueError('clone-stage source changed: '+name)
+    sources()
+    indexes=authorized_unison_tokens(read_bytes(str(ROOT.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json'),1048576))
+    if indexes!=tuple(range(8)):raise ValueError('standing8 policy differs')
+    root=Path(packet['workspace'])
+    if root.parent!=Path('/private/tmp') or not root.name.startswith('u-stage-'):raise ValueError('new private generated workspace required')
+    root.mkdir(mode=0o700);st=root.lstat();store=Store(str(root),dict(device=st.st_dev,inode=st.st_ino))
+    io=cpu=None;attempted=False;current=None
+    try:
+        pool=Pool.read(str(ROOT.parent/'photo/preview-generator/engine-v3-native-control/ROOT-CPU-POOL-v1.json'),'4d19610edf6b400f99c00962cf52644ad93c924786b376faba91577808b693fd')
+        bundle=try_io_cpu_bundle(GlobalPool.read(CANONICAL_MANIFEST,CANONICAL_SHA256),pool,indexes)
+        if bundle is None:store.write('CONTENTION.json',dict(child_attempted=False));store.close();return 2
+        io,cpu=bundle
+        production={}
+        for ref in packet['build_receipts']:
+            data=read_bytes(ref['path'],1048576)
+            if len(data)!=ref['bytes'] or hashlib.sha256(data).hexdigest()!=ref['sha256']:raise ValueError('build receipt changed')
+            build=json.loads(data);job=next(j for j in packet['jobs'] if j['label']==ref['compiler'])
+            if not(build['complete'] is True and build['build_exit']==0 and build['selftest_exit']==0
+                    and build['binary']==job['binary']['path'] and build['binary_sha256']==job['binary']['sha256']
+                    and str(Path(build['compiler']).resolve(strict=True))==job['compiler']['path']
+                    and build['compiler_sha256']==job['compiler']['sha256']):raise ValueError('current compiler/build binding differs')
+            for name,digest in build['source_sha256'].items():
+                if name.startswith('src/'):
+                    if name in production and production[name]!=digest:raise ValueError('mixed production input')
+                    production[name]=digest
+        def artifacts():
+            sources()
+            for name,digest in production.items():
+                if sha(ROOT/name)!=digest:raise ValueError('production source changed')
+            for job in packet['jobs']:
+                for ref in (job['binary'],job['compiler'],job['native_object'],*job['library_pins']):
+                    if sha(ref['path'],64*1048576)!=ref['sha256']:raise ValueError('linked clone-stage input changed')
+        artifacts();deadline=time.monotonic()+600;calls=[];rows=[]
+        resource_rows=[]
+        for fd in (*cpu.fds,*io.fds):
+            native=os.fstat(fd);resource_rows.append(dict(fd=fd,device=native.st_dev,inode=native.st_ino))
+        store.write('START.json',dict(owner_pid=os.getpid(),plan_sha256=a.sha256,cpu_indexes=list(indexes),io_mode='EX_GLOBAL',resource_rows=resource_rows,
+            compiler_jobs_max=1,SDK=False,Photo=False,scope='original clone-stage ABI/properties and sparse snapshot bytes; no physical sharing or full sync-property claim'))
+        print('STAGE_START',os.getpid(),str(root),flush=True)
+        def invoke(argv,name,environment,seconds=30,expected=0):
+            nonlocal current,attempted
+            if time.monotonic()>=deadline:raise TimeoutError('stage observation expired before next child')
+            attempted=True
+            try:
+                current=start(list(map(str,argv)),environment,pass_fds=(*cpu.fds,*io.fds))
+                out=current.finish(min(deadline,time.monotonic()+seconds))
+                pin=store.write(name+'.json',out);calls.append(pin)
+                closed(out,out['returncode'] if expected is None else expected)
+                return out
+            except UnresolvedOwnership as error:
+                # Block before the original driver's finally can run modifiers.
+                retain_after_record(lambda:print('STAGE_CHILD_UNRESOLVED',repr(error),str(root),flush=True))
+        for job in packet['jobs']:
+            artifacts();label=job['label'];buildroot=root/(label+'-build');buildroot.mkdir(mode=0o700)
+            environment=dict(os.environ,PYTHONDONTWRITEBYTECODE='1',OCAMLLIB=job['stdlib'])
+            for key in ('OCAMLPARAM','CAML_LD_LIBRARY_PATH','OCAMLFIND_CONF'):environment.pop(key,None)
+            exes={}
+            for stem in ('clone_stage','clone_stage_status'):
+                source=buildroot/(stem+'.ml');write_bytes(source,read_bytes(str(ROOT/'tests'/(stem+'.ml')),1048576))
+                exe=buildroot/stem
+                argv=[job['compiler']['path'],'-I',str(Path(job['stdlib'])/'unix'),'unix.cmxa',job['native_object']['path'],str(source),'-o',str(exe)]
+                invoke(argv,label+'-build-'+stem,environment,seconds=60)
+                exes[stem]=exe
+            driver_raw=read_bytes(str(ROOT/'tests/test_clone_stage.py'),1048576)
+            namespace=dict(__name__='_unison_final_original_stage_driver',__file__=str(ROOT/'tests/test_clone_stage.py'))
+            exec(compile(driver_raw,namespace['__file__'],'exec'),namespace)
+            data=root/(label+'-original-data')
+            bridge=Bridge(str(exes['clone_stage']),lambda argv,seconds:invoke(argv,label+'-driver-%02d'%len(bridge.calls),environment,seconds,expected=None))
+            namespace['subprocess']=bridge
+            namespace['tempfile']=types.SimpleNamespace(TemporaryDirectory=lambda **kw:RetainedDirectory(data,**kw))
+            previous=sys.argv
+            try:sys.argv=[namespace['__file__'],str(exes['clone_stage'])];namespace['main']()
+            finally:sys.argv=previous
+            if [r['returncode'] for r in bridge.calls]!=[77,0,0,0,0,0,0,0,0,0,0,0,77,0]:raise ValueError('original native/property paths skipped or changed')
+            original=bytes(range(256))*32;expected_stage=bytearray(original);expected_stage[5:10]=b'PATCH'
+            acl_stage=bytearray(b'modified live basis');acl_stage[5:10]=b'PATCH'
+            if read_bytes(str(data/'stage'),16384)!=expected_stage or read_bytes(str(data/'acl-stage'),16384)!=acl_stage:
+                raise ValueError('full generated stage bytes differ')
+            if {p.name for p in data.iterdir()}!={'fifo','source','stage','acl-stage'}:raise ValueError('original stage left unexpected names')
+            # The separate strict-status probe checks exact decline/error scope
+            # and /dev/fd balance across repeated native calls.
+            strict=root/(label+'-status-data');strict.mkdir(mode=0o700);source=strict/'source';write_bytes(source,original);source.chmod(0o400)
+            def status(mode,input,output):
+                return invoke([str(exes['clone_stage_status']),mode,str(input),str(output)],label+'-status-'+mode+('-directory' if input.name=='directory' else ''),environment)
+            status('shared',source,strict/'shared-stage')
+            os.mkfifo(strict/'fifo');status('kind',strict/'fifo',strict/'fifo-stage')
+            (strict/'directory').mkdir(mode=0o700);status('kind',strict/'directory',strict/'directory-stage')
+            invoke(['/usr/bin/chflags','nodump',str(source)],label+'-status-set-flags',environment)
+            status('flags',source,strict/'flags-stage')
+            invoke(['/usr/bin/chflags','0',str(source)],label+'-status-clear-flags',environment)
+            status('missing-parent',source,strict/'missing'/'stage')
+            (strict/'source-link').symlink_to(source);status('symlink',strict/'source-link',strict/'symlink-stage')
+            if read_bytes(str(source),16384)!=original or read_bytes(str(strict/'shared-stage'),16384)!=original:raise ValueError('strict source/stage byte preservation differs')
+            # Original legacy probe additionally exercises a real sparse input.
+            size=1048576;sparse=data/'sparse';fd=os.open(sparse,os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW|os.O_CLOEXEC,0o600)
+            try:
+                os.ftruncate(fd,size)
+                if os.pwrite(fd,original[:4096],0)!=4096 or os.pwrite(fd,original[4096:],size-4096)!=4096:raise OSError('sparse fixture short write')
+                # Darwin ftruncate and implicit extensions allocate this range
+                # on the qualified host. Explicitly punch only this fresh
+                # generated zero interior, using the SDK-verified fpunchhole_t.
+                fcntl.fcntl(fd,99,struct.pack('=IIqq',0,0,4096,size-8192))
+                os.fsync(fd)
+            finally:close_descriptors([fd])
+            sparse.chmod(0o400);before=sparse.stat();sparse_expected=bytearray(original[:4096]+b'\0'*(size-8192)+original[4096:]);sparse_expected[5:10]=b'PATCH'
+            if before.st_blocks*512>=size:raise ValueError('generated source was not actually sparse')
+            invoke([str(exes['clone_stage']),str(sparse),str(data/'sparse-stage')],label+'-sparse-snapshot',environment)
+            if read_bytes(str(data/'sparse-stage'),2*1048576)!=sparse_expected:raise ValueError('full sparse snapshot bytes differ after live source mutation')
+            row=dict(label=label,original_driver_calls=14,strict_status_modes=['shared','kind-fifo','kind-directory','flags','missing-parent','symlink'],
+                original_stage_sha256=sha(data/'stage'),acl_stage_sha256=sha(data/'acl-stage'),sparse_stage_sha256=sha(data/'sparse-stage',2*1048576),
+                sparse_logical_bytes=size,sparse_creation='Darwin F_PUNCHHOLE99 on new generated zero interior; 24byte fpunchhole_t',
+                source_preallocated_blocks=before.st_blocks,stage_postallocated_blocks=(data/'sparse-stage').stat().st_blocks,
+                sparse_allocation_scope='filesystem-reported blocks only; no physical write/shared-extent proof',full_stage_bytes_exact=True)
+            rows.append(row);store.write(label+'-RESULT.json',row);artifacts();print('STAGE_COMPILER_CLOSED',label,flush=True)
+        if len(calls)!=50:raise ValueError('exact original native/metadata/compiler call count differs')
+        store.write('RESULT.json',dict(complete=True,rows=rows,calls=calls,production_pins=production,source_pins=packet['source_pins'],
+            SDK=False,real_media=False,transport=False,compiler_jobs_max=1,parent_tool_terminal_proved=False))
+        store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+        io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
+        print('STAGE_CLOSED',len(calls),str(root),flush=True);return 0
+    except BaseException as error:
+        if not attempted and not isinstance(error,UnresolvedOwnership):
+            try:
+                store.write('PREENTRY-REFUSED.json',dict(child_attempted=False,error=repr(error)));store.close()
+                if cpu is not None and not cpu.closed:close_unstarted(cpu)
+                if io is not None and not io.closed:close_unstarted(io)
+            except BaseException as cleanup:retain_after_record(lambda:print('STAGE_PREENTRY_RETAIN',repr(cleanup),repr(error),flush=True))
+            raise
+        retain_after_record(lambda:print('STAGE_RETAIN',repr(error),str(root),flush=True))
+
+
+if __name__=='__main__':raise SystemExit(main())

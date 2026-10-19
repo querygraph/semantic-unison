@@ -1,15 +1,135 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T10:21:45.522674+00:00. Goal ACTIVE and incomplete. This block supersedes historical
+Updated UTC 2026-10-19T12:33:03.604551+00:00. Goal ACTIVE and incomplete. This is the authoritative
+checkpoint; historical snapshots below do not create resource holds or grants.
+
+- **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
+  `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
+  Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
+  Recent successors add test ownership, scoped qualification and reports.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest native
+  stage owner `5267/cfd95f/0/NOsession`, all50children closed; independent audit
+  `2a4ba1/0` acquired/closed the entire Unison8+EX bundle. No sealing hold.
+- **Scheduling:** user directed independent Unison work first, direct Adobe
+  qualification later, Photo workflow verification last. Photo normal drain
+  `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
+  IO/native/SDK for handover.40published/storageverified,40recognitionpending,
+  216pending retained; Main not reopened/final startup required. No permission
+  to open new Photo originals or mutate Main/catalog/cache is implied.
+- **Standing policy:** Unison00..07, Photo08..15, system16..17; no active18
+  borrow. Existing single EX_GLOBAL barrier only, no device independence.
+  IO→CPU whole-set nonblocking acquisition/partial rollback; inherited copies
+  held through actual settlement, unknown retains; close-only/no numeric retry.
+  Max2 compiler jobs, latest native-stage pair serial1. Credits are cooperative,
+  not OS CPU/RSS hard caps. SDK/UI ownership remains separately scoped.
+
+## Actual current evidence
+
+- **Builds:** current stock/Ox Make+Dune build/selftests,586inputs/329production
+  pins per build. Receipts `endpoint-cpu-budget-actual-20261018.json`; later
+  cache/warning composition renewed (`cpu-ceiling-dependent-composition-actual-20261018.json`).
+- **Kernel/components:** SDE127commands/2224assertions per compiler; scalar343
+  three-way truth table; ranges960combinations; current private refinement56,
+  checkpoint1005, readerfault13/publicationfault27 checks per compiler. These
+  are scoped component evidence, not universal camera interpretation.
+- **Final parser:** actual `88003/d7e7af/0`, stock/Ox each1253fixed cases/
+  6288assertions+3designated negatives+4sparse-offset cases;20nestedchildren
+  andtwo runners closed. `final-extended-profile-pair-actual-20261019.json`.
+  Old prepared V1/V2 parser plans are not pending work; V3 consumed once.
+- **Transfer/native publication:** `10579/6aaca5/0`,167transferchecks+9negative
+  participants per compiler/120nestedchildren closed. Rsync publication
+  `42166/f5665c/0`,8phases/compiler/20nestedcalls,466linked+339source pins.
+  Actual codec/in-process delivery, not external transport.
+- **Generated workload receiving:** newfiles1024 normal `83087/fd77c6/0`;
+  mixed1024 normal `35344/2eb6b1/0` (820SDE/153clones/51new). First semantic
+  many-small byte/peer adoption preserves earlier recovery137 separately.
+  Seven nonfixed recipes all normal closed/21CLI, including growing XMP,
+  metadata+preview/raw/opaque, full change and malformed/unsupported fallback.
+- **Repeated many-small:** worker1 `81175/1385dc/0`; worker3
+  `89068/c424bf/0`;72samples/216CLI total,12warm+60measured, no replacements.
+  All raw peer proofs re-audited. Ordinary fastest here; clone/SDE reduce
+  logical models. Shared/uncontrolled warm host, no physical write or isolated
+  compiler/scaling claim. `doc/final-many-small-worker-comparison-20261019.md`.
+  App-read bytes/peak FD/queue/stage timings are uninstrumented, not inferred.
+- **Cross-volume/non-APFS:** `19831/bb1af5/0`,12cases/36CLI+6image/metadata
+  children, stock/Ox both APFS/HFS+ directions, clone auto/off and DNG semantic
+  path/fallback, exact bytes/oldhardlinks/noop/Unicode. Image normally detached;
+  independent `604d3a/0` audited all42records+36MiBAPFSbytes/164harness+
+  329production pins. Same physical backing, no physical-device/timing claim.
+  `doc/final-private-volume-result-20261019.md`; V1/V2 failed harness prefixes
+  and exact recovery137 receipts remain separate from V3 normal pass.
+- **Native stage properties/ABI/sparse:** `5267/cfd95f/0`, both current C objects,
+  original unchanged legacy/status test bodies;50children,46zero+4expected77.
+  Readonly source/snapshot live-mutation isolation, xattr/fork/ACL stripping,
+  write-denying ACL, FIFO/flags/error phases/exclusivity/FD counts and full1MiB
+  real sparse snapshot bytes passed. `2a4ba1/0` independent audit verified all
+  exact commands/pins/canonical9inodes+2146342Bfulloutputs; whole8EXclosed.
+  `doc/final-native-stage-result-20261019.md`. V1 stock24-child prefix held at
+  unsparse fixture setup, recovered24444/83daa3/137; NOT fullpairpass. Five
+  original creation controls465356/0 proved explicitF_PUNCHHOLE works while
+  truncate/implicit extension report fully allocated; no physical-sharing claim.
+- **Existing direct Adobe scopes:** mixed `15556/682f67/0`, full receiving
+  `67541/5343fe/0`, all-scanned `45243/e035b2/0`, all closed;10SDKcalls report
+  structurevalid/decodeSUCCESS/rawdigestvalid/errors0,4edgepaddingwarnings each.
+  These do not close current final merge/negative-policy/corpus coverage.
+
+## Remaining work — do not mark goal complete
+
+1. Reconcile current full-sync properties, archive round-trip/old peers/RPC
+   and remaining named edge cases to source-bound evidence or renew only the
+   missing cases. Native stage qualification is not every sync property or
+   compressed-input/crash/platform proof. See `doc/sol-final-acceptance-map-20261019.md`.
+2. Complete prescribed benchmark/baseline/topology evidence: pinned local
+   original/newer upstream/minimal upstream Ox comparison, remaining sizes,
+   shapes and transport/cache scopes. Ten32MiBcohorts (180rows540CLI) plus first
+   128MiBstock1 actual52223/3c264e/0 are retained;29larger plans UNSTARTED in
+   frozen `/Users/alexy/src/unison-cpu-ceiling-20261018`. Do not modify that
+   frozen harness, blindly dispatch all29, or infer an18 grant. No absolute
+   quiet, HDD/SSD, physical-link or physical-write claim without evidence.
+3. Final Adobe qualification is DIRECT Unison work on qualified generated/
+   retained fixtures after independent work. Current merge source under
+   `tests/sdk_merge_receiving` is implemented:9CLI/6helpers/3codecs/12states,
+   independent parent audit. Native current merge matrix remains unrun.
+4. Recover/preserve authentic SDK fixtures/source before that matrix. Qualified
+   validator2724 survives (SHAca49a32b...), but its SDKtree is a skeleton and
+   fixture writer absent. Only two known generated sources survive metadata:
+   `/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng` and
+   `/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng`; JXL/12states missing.
+   Preservation plan `doc/sdk-generated-fixture-preservation-plan-v1-20261019.json`
+   is unexecuted; no source hash/chmod/recopy or SDK run inferred. Manifest
+   source_sha256 is DRIVER.CPP, not SDKarchive. Official2768 source would need
+   distinct honest ancestry; never relabel it restored2724 or replace validator.
+5. Reconcile final candidate/review and report all requirement scopes. PR13
+   fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
+   last verified OPEN DRAFT atf6bfd653; local final qualification successor not
+   published. No upstream submission/merge/production activation inferred.
+6. Return Photo IO handover explicitly for final workflow verification; its
+   Main/catalog/cache and pending publications remain Photo-owned.
+
+User excludes new fuzz/sanitizer campaigns and exhaustive MakerNote meaning as
+completion gates; exact opaque preservation remains mandatory. Positive hard-RSS
+requests refuse on this host, not an implemented hard-RSS capability. Unknowns
+are not passes. Fix failures with preserved prefixes and fresh source-bound
+successors; never re-run consumed/expired/withdrawn admissions or invent wait4.
+Use pinnedPython3.14.6, not default3.15; review AGENTS/toolchain guidance. Keep
+this checkpoint current rather than adding contradictory pending-run notices.
+<!-- END-CURRENT-UNISON-CHECKPOINT -->
+
+
+<!-- HISTORICAL-CHECKPOINT-SUPERSEDED -->
+# Historical checkpoint — superseded by the authoritative block above
+
+Updated UTC 2026-10-19T12:31:02.305940+00:00. Goal ACTIVE and incomplete. This block supersedes historical
 scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `71c61487`. No `src/` differences from frozen review
+  before this checkpoint: `d3ea5a9c`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
-- **Resources:** zero owned jobs/IO/CPU/SDK resources. Private-volumeV3
+- **Resources:** zero owned jobs/IO/CPU/SDK resources. Native-stage5267/
+  cfd95f/0 and50children plusindependentaudit2a4ba1/0 closed. Private-volumeV3
   completed19831/bb1af5/0 plus42childgroups/normaldetach/audit604d3a/0.
   Worker3 completed89068/c424bf/0/NOsession,36owners+108CLIclosed. Worker1
   completed81175/1385dc/0/NOsession,36owners+108CLIclosed. Standing
@@ -113,7 +233,8 @@ scheduling statements below; preserve original receipts and their scopes.
 Previous turn classification: PROGRESS (source/evidence state changed); this
 checkpoint is source-only work, not a claim that an unobserved job is live or
 that waiting for Photo alone completes/blocks the goal.
-<!-- END-CURRENT-UNISON-CHECKPOINT -->
+
+<!-- END-HISTORICAL-CHECKPOINT -->
 
 # Unison implementation handoff
 
@@ -7732,3 +7853,36 @@ Next independent filesystem-property/compatibility/baseline andremaining
 prescribedbenchmarks; authenticSDKfixtures/source recovery andfinalAdobe
 merge/policyreceiving remain last. PhotoIOhandoverstillholdsnewnative/SDK
 whilePhotoCPU8source independent; Main/catalog/cache remainPhotoexclusive.
+
+
+## Current native stage ABI/property/sparse ACTUAL COMPLETE,2026-10-19
+
+Actual5267/424201→cfd95f/exit0/NOsession, owner25311,
+/private/tmp/u-stage-v2-9d4f1dadf25d4ac5; plan1fcf8e7d. Bothcurrentstock/Ox
+productioncopy_stubs.o linkedtooriginalunchangedclone_stage.ml/status.ml;
+originaltest_clone_stage.py bodyrunswithretainedbridge/nontemporarycleanup.
+All50children:4serial compilerlinks/28originaldrivercalls/12strictstatus/
+2sparseNative+4strictflagmetadatacalls;46zero+4expected77, groupssettled.
+Source329+170harness/toolchain/library/nativeobjectpins checked, inherited
+canonical9FDs. Readonlysource/snapshotafterlivemutation/xattr+fork+ACLstrip/
+write-denyACL/FIFO+flags/symlink/missing-parent/exclusivity/FDcounts passed.
+Fullsparse1MiBsnapshotexactafteroriginalsourceintentionalmutation. Realhole
+fixtureviaDarwinF_PUNCHHOLE99 ononlynewgeneratedzerointerior; source/stage
+16reportedblocks, NOTphysicalwrite/sharingproof.
+Sparsecreationactual465356/0: truncate/pwrite/seekextensionallfullyallocated
+(1MiBand16MiB); punchholeexactbytesandrealreportedholes. SDKpublicheader
+constant+24bytestructverified, noAdobe. InitialV1stock24childprefixpassed,
+thenSparseNativeUnstarted prerequisiteheld; owner24444/83daa3/137 after
+independentexactidlePythonrecovery875fa5/0. Rawprefix/source/proofs retained
+in final-native-stage-v1-failed-recovery-20261019.json, not fullpairpass.
+Fouroriginaladaptercontrols f34c18/0; postsetuprepeatd8d6bb/0.
+Actualfreshindependentaudit2a4ba1/0 re-readall50rawcommands/codes/groups,
+canonical9inodes/currentpins and2146342Bfullstage/sourcehashes; whole8EX
+acquired/closed. CurrentzeroUnisonjobs/IOCPU/SDKresources.
+Actualreceipt tests/qualification/final-native-stage-v2-actual-20261019.json;
+human doc/final-native-stage-result-20261019.md. Allprivatefixturespreserved.
+NOTfullend-to-endsyncproperties/compression/crash/platform/SDK/pixelclaim.
+Next currentarchive/oldpeer/propertypipeline/baseline+remainingbenchmark
+closure; finalAdobe inputpreservation/genuine3codecfixture recovery and
+merge/policyreceiving stilllast. PhotoIO/nativehandovercontinues; source
+Photo8independent/MaincachePhotoexclusive. No18grant/oldadmissionreuse.
