@@ -57,6 +57,7 @@ def invoke(client_command, client_environment, *, proxy_command, proxy_environme
             or any(type(x) is not str for x in server_command)):
         raise ValueError('bounded one-use pair and fresh observation required')
     if os.path.lexists(socket_path): raise ValueError('one-use socket already exists')
+    started_ns=time.monotonic_ns()
     proxy = client = None
     evidence = {}
     try:
@@ -73,8 +74,14 @@ def invoke(client_command, client_environment, *, proxy_command, proxy_environme
         evidence['server_frame'] = publish(store, name+'-server-frame', raw)
         joined = audit(store, evidence, client_command=client_command,
                        proxy_command=proxy_command, server_command=server_command)
-        pin = store.write(name+'-pair.json', dict(schema='unison-batch-pair/1',
-                          evidence=evidence, audit=joined))
+        evidence_ns=time.monotonic_ns()
+        measurements=store.write(name+'-TIMING.json',dict(schema='unison-batch-pair-observation/1',
+            started_ns=started_ns,evidence_ready_ns=evidence_ns,elapsed_ns=evidence_ns-started_ns,
+            client=client.observation,proxy=proxy.observation,
+            scope='pair orchestration through captured evidence persistence; not bare native runtime',
+            resource_release_authorized=False))
+        pin = store.write(name+'-pair.json', dict(schema='unison-batch-pair/2',
+                          evidence=evidence, audit=joined,measurements=measurements))
         return pin
     except BaseException as error:
         retained = error if isinstance(error, UnresolvedOwnership) else UnresolvedOwnership(

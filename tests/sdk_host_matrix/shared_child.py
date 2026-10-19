@@ -64,8 +64,10 @@ def _start(command,environment,*,pass_fds,capture_limit,capture_type,maximum_cap
             or not 1<=capture_limit<=maximum_capture):
         raise ValueError('bounded capture required')
     command=list(command)
+    started_ns=time.monotonic_ns()
     owner=OwnedGroup(command,env=environment,stdin=subprocess.DEVNULL,
                      stdout=subprocess.PIPE,stderr=subprocess.PIPE,pass_fds=pass_fds)
+    owner.started_ns=started_ns
     streams=[owner.process.stdout,owner.process.stderr];captures=[]
     identities=[];observer=None;observations=None
     fd_numbers=[s.fileno() for s in streams]
@@ -97,6 +99,7 @@ def _start(command,environment,*,pass_fds,capture_limit,capture_type,maximum_cap
                     observer.sample()
                     owner.await_terminal(min(observation_interval,max(0,deadline-time.monotonic())))
                 observations=observer.report()
+            owner.terminal_observed_ns=time.monotonic_ns()
             while True:
                 query=subprocess.run(['/bin/ps','-axo','pid=,pgid=,stat='],capture_output=True,text=True,timeout=1)
                 if query.returncode or query.stderr:retain('SDK group census failed')
@@ -111,6 +114,7 @@ def _start(command,environment,*,pass_fds,capture_limit,capture_type,maximum_cap
             pid,status,usage=os.wait4(owner.pid,0)
             if pid!=owner.pid:retain('SDK reap identity differs')
             owner.reaped=True;owner.process.returncode=os.waitstatus_to_exitcode(status)
+            owner.reaped_ns=time.monotonic_ns();owner.last_wait4_usage=usage
         except UnresolvedIOOwnership as error:
             if getattr(error,'child_owner',None) is owner:raise
             retain('SDK nested ownership uncertainty; retain child and every descriptor',error)

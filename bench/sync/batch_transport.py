@@ -10,6 +10,7 @@ sys.path[:0] = [str(Path(__file__).resolve().parents[2] / 'tests'),
                 str(Path(__file__).resolve().parents[2] / 'tests/sdk_host_matrix')]
 from batch_child import start, audit_child as child
 from batch_artifacts import publish, read
+from batch_observations import capture as observe, read as read_observation
 
 
 class Call:
@@ -22,6 +23,7 @@ class Call:
         self.finished = False
         self.outcome = None
         self.record = None
+        self.observation = None
 
     def finish(self, deadline):
         if self.finished: raise ValueError('batch call finish already attempted; no retry')
@@ -39,8 +41,9 @@ class Call:
                 raise ValueError('batch capture byte extent differs')
             refs[stream] = publish(self.store, self.name + '-' + stream, raw)
         metadata = {key: value for key, value in self.outcome.items() if key not in ('stdout', 'stderr')}
+        self.observation = self.store.write(self.name+'-resources.json', observe(self.pending.owner))
         self.record = self.store.write(self.name + '-call.json', dict(
-            schema='unison-batch-child/1', outcome=metadata, streams=refs,
+            schema='unison-batch-child/2', outcome=metadata, streams=refs, observation=self.observation,
             external_server_audit_required=True, resource_release_authorized=False))
         # Preserve failed child evidence first, then refuse functionality.
         child(self.outcome, self.command)
@@ -64,9 +67,10 @@ def restore(store, pin, command):
     raw = store.read(pin['name'], expected_sha256=pin['sha256'])
     if len(raw) != pin['bytes']: raise ValueError('child metadata byte pin differs')
     value = store.read_json(pin['name'], expected_sha256=pin['sha256'])
-    if (type(value) is not dict or set(value) != {'schema', 'outcome', 'streams',
-            'external_server_audit_required', 'resource_release_authorized'}
-            or value['schema'] != 'unison-batch-child/1'
+    fields={'schema','outcome','streams','external_server_audit_required','resource_release_authorized'}
+    if type(value) is dict and value.get('schema')=='unison-batch-child/2': fields.add('observation')
+    if (type(value) is not dict or set(value) != fields
+            or value['schema'] not in ('unison-batch-child/1','unison-batch-child/2')
             or value['external_server_audit_required'] is not True
             or value['resource_release_authorized'] is not False
             or type(value['outcome']) is not dict
@@ -77,4 +81,6 @@ def restore(store, pin, command):
     for stream in ('stdout', 'stderr'):
         outcome[stream] = read(store, value['streams'][stream]).decode('utf8', 'replace')
     child(outcome, command)
+    if value['schema']=='unison-batch-child/2':
+        read_observation(store,value['observation'],outcome['client_cleanup']['pid'])
     return outcome

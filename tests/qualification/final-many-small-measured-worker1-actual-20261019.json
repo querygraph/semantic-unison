@@ -1,0 +1,88 @@
+{
+  "schema": "unison-many-small-measured-actual/1",
+  "state": "PASS_CLOSED",
+  "actual_cohort_owner": {
+    "session": 81175,
+    "initial_chunk": "fa97ab",
+    "terminal_chunk": "1385dc",
+    "exit_code": 0,
+    "running_session": null,
+    "pid": 6561
+  },
+  "independent_metadata_audits": [
+    {
+      "session": 81064,
+      "terminal_chunk": "177a3f",
+      "exit_code": 0,
+      "running_session": null,
+      "rows": 36,
+      "raw_pairs": 108
+    },
+    {
+      "session": 24458,
+      "terminal_chunk": "b4b532",
+      "exit_code": 0,
+      "running_session": null,
+      "rows": 36,
+      "raw_pairs": 108,
+      "additional": "case owner commands/actual settlement, source-selected production argv and row-metric bindings"
+    }
+  ],
+  "original_child_observation_control": {
+    "terminal_chunk": "f85282",
+    "exit_code": 0,
+    "running_session": null,
+    "child_pid": 3482,
+    "child_reaped": true,
+    "group_absent": true,
+    "io_not_acquired": true
+  },
+  "targeted_controls": {
+    "terminal_chunk": "4a3467",
+    "exit_code": 0,
+    "running_session": null,
+    "checks": 16,
+    "cpu00_closed": true
+  },
+  "warmups": 6,
+  "measured_samples": 30,
+  "calls": 108,
+  "client_proxy_server_roles": 324,
+  "all_case_owners_reaped": true,
+  "all_case_groups_absent": true,
+  "all_io_cpu_closed": true,
+  "raw_evidence_root": "/private/tmp/u-cohort-e35e154c0b304e46",
+  "pins": {
+    "doc/final-many-small-measured-worker1-plan-v1-20261019.json": {
+      "bytes": 33515,
+      "sha256": "813a221e52061da3ce27e235149c25457d6028bc9507f9925fb6fd1ec60fb786"
+    },
+    "doc/final-many-small-worker1-measurements-20261019.json": {
+      "bytes": 113475,
+      "sha256": "9d2fe53fd9b17f97c45e7fa674720a830ad245b8d9261b42ecb3857105022528"
+    },
+    "doc/final-many-small-worker1-measurements-20261019.md": {
+      "bytes": 1677,
+      "sha256": "6cd556965c899bd38a0fe07ee1b7da462dba5af6911f94f1f298934275e7f58c"
+    },
+    "doc/final-many-small-worker1-measurements-v2-20261019.json": {
+      "bytes": 113475,
+      "sha256": "5495d7a0cafcd214f56214193ece1c160f9b5b8d48af9adf79f2d27e3105fa53"
+    },
+    "doc/final-many-small-worker1-measurements-v2-20261019.md": {
+      "bytes": 1677,
+      "sha256": "6cd556965c899bd38a0fe07ee1b7da462dba5af6911f94f1f298934275e7f58c"
+    },
+    "bench/sync/batch_series_report.py": {
+      "bytes": 7817,
+      "sha256": "e6e284f9105d57432e33c8206d8c6c8e11127903070d60099944c0fef15fb6f7"
+    },
+    "bench/sync/batch_series_report_test.py": {
+      "bytes": 1689,
+      "sha256": "2679f557c064465ffb2f346af605068894255b91d114e08210f751307d0367e9"
+    }
+  },
+  "scope": "generated1024x32KiB, 512B packet; five measured samples/config, shared/uncontrolled warm host; no SDK/photo/cold-cache/physical-write/throughput/scaling/general compiler advantage claim",
+  "observed_conclusion": "ordinary faster here; clone and SDE reduce logical materialization model; all samples retained",
+  "parent_tool_authority": "faithful transcription of observed actual tool results, not process absence or marker inference"
+}

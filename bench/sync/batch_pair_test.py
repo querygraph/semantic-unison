@@ -14,7 +14,7 @@ def evidence(mutate=lambda x: None):
     pins = {}
     for peer, pid in (('client', 42), ('proxy', 43)):
         handle = pending(); out = handle.finish(1)
-        out['command'] = [peer]; out['client_cleanup']['pid'] = pid
+        out['command'] = [peer]; out['client_cleanup']['pid'] = pid;handle.owner.pid=pid
         pins[peer] = Call(handle, [peer], store, peer).finish(1)
     frame = dict(schema='unison-retained-merge-proxy/1', server_command=['server'],
                  server_pid=44, server_returncode=0, server_reaped=True, server_group=43,

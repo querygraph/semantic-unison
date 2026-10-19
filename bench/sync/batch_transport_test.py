@@ -15,7 +15,9 @@ def pending(code=0):
                aggregate_or_parent_terminal_proved=False, io_cpu_release_authorized=False)
     capture = lambda raw: SimpleNamespace(thread=SimpleNamespace(is_alive=lambda: False),
         error=None, total=len(raw), limit=262144, chunks=[raw])
-    return SimpleNamespace(finish=lambda deadline: out,
+    usage=SimpleNamespace(ru_utime=.1,ru_stime=.01,ru_maxrss=1024,ru_minflt=1,ru_majflt=0,ru_inblock=0,ru_oublock=0)
+    owner=SimpleNamespace(pid=42,reaped=True,started_ns=1000000000,terminal_observed_ns=2000000000,reaped_ns=2100000000,last_wait4_usage=usage)
+    return SimpleNamespace(owner=owner,finish=lambda deadline: out,
                            capture_owners=[capture(raw), capture(b'')])
 
 

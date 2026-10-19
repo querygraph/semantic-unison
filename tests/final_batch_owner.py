@@ -36,6 +36,11 @@ def main():
         runtime_options=dict(sample_runner=recipe_sample)
         audit_options=dict(rows_validator=validate_rows,verify_replica=verify_replica)
     else:raise ValueError('known source-selected sample kind required')
+    roles=packet.get('roles',dict(client='stock',server='ox'))
+    if type(roles) is not dict or set(roles)!={'client','server'} or any(value not in ('stock','ox') for value in roles.values()):
+        raise ValueError('explicit known compiler roles required')
+    cleanup=packet.get('cleanup_generated_payloads',False)
+    if type(cleanup) is not bool:raise ValueError('typed generated cleanup policy required')
     policy=ROOT.parent/'photo/preview-generator/SHARED-DEVELOPMENT-RESOURCE-POLICY-v3.json'
     if sha(policy)!='1dbe12eb97dfe885a0ec94057c476f4b825adc2d37085f0ecd48fbdf7b047352' or tuple(authorized_unison_tokens(read_bytes(str(policy),1048576)))!=tuple(range(8)):
         raise ValueError('standing8 policy differs')
@@ -49,6 +54,7 @@ def main():
         if bundle is None:
             store.write('CONTENTION.json',dict(no_runtime_attempted=True));store.close();return 2
         io,cpu=bundle;sources()
+        production_pins={}
         for ref in packet['build_receipts']:
             data=read_bytes(ref['path'],1048576)
             if len(data)!=ref['bytes'] or hashlib.sha256(data).hexdigest()!=ref['sha256']:raise ValueError('build receipt differs')
@@ -57,9 +63,14 @@ def main():
             if build['binary']!=packet['artifacts'][ref['compiler']]['path'] or build['binary_sha256']!=packet['artifacts'][ref['compiler']]['sha256']:
                 raise ValueError('build/binary binding differs')
             for name,digest in build['source_sha256'].items():
-                if name.startswith('src/') and sha(ROOT/name)!=digest:raise ValueError('production source changed')
+                if name.startswith('src/'):
+                    if name in production_pins and production_pins[name]!=digest:raise ValueError('mixed production builds')
+                    production_pins[name]=digest
+                    if sha(ROOT/name)!=digest:raise ValueError('production source changed')
         def artifacts():
             sources()
+            for name,digest in production_pins.items():
+                if sha(ROOT/name)!=digest:raise ValueError('production source changed during case')
             for item in (*packet['artifacts'].values(),packet['interpreter']):
                 if sha(item['path'],64*1048576)!=item['sha256']:raise ValueError('artifact changed')
         artifacts()
@@ -67,15 +78,28 @@ def main():
         for fd in (*cpu.fds,*io.fds):
             value=os.fstat(fd);rows.append(dict(fd=fd,device=value.st_dev,inode=value.st_ino))
         store.write('START.json',dict(owner_pid=os.getpid(),plan_sha256=a.sha256,resource_rows=rows,
-            cpu_indexes=list(range(8)),io_mode='EX_GLOBAL',purpose='one generated functional sample; no timing claim'))
+            cpu_indexes=list(range(8)),io_mode='EX_GLOBAL',purpose=packet.get('purpose','one generated functional sample; no timing claim')))
         print('START',os.getpid(),str(root),flush=True)
-        binaries=dict(client=packet['artifacts']['stock']['path'],server=packet['artifacts']['ox']['path'])
+        binaries={role:packet['artifacts'][label]['path'] for role,label in roles.items()}
         runtime_attempted=True
         pin=run(corpus,binaries,str(root),repository=str(ROOT),mode=packet['mode'],workers=packet['workers'],
             store=store,resource_rows=rows,deadline=time.monotonic()+600,artifact_check=artifacts,**runtime_options)
         report=audit(store,pin,corpus,binaries,mode=packet['mode'],workers=packet['workers'],**audit_options)
         if report['external_children_settled'] is not True:raise ValueError('peer audit incomplete')
         artifacts();store.write('OWNER-RESULT.json',dict(complete=True,runtime=pin,audit=report,parent_tool_terminal_proved=False))
+        if cleanup:
+            # Only this one-use generated workspace's replicas, after independent
+            # byte/identity/peer audits and closure of retained old readers.
+            import shutil,stat
+            store.fence()
+            for name in ('left','right'):
+                target=root/name;native=target.lstat()
+                if not(stat.S_ISDIR(native.st_mode) and stat.S_IMODE(native.st_mode)==0o700
+                       and native.st_uid==os.getuid()):raise ValueError('private generated cleanup target differs')
+                shutil.rmtree(target)
+            store.write('PAYLOADS-CLEANED.json',dict(generated_left_right_removed=True,
+                exact_bytes_verified_before_removal=True,all_peers_settled=True,
+                evidence_records_retained=True,original_or_photo_paths_touched=False))
         store.close();cpu.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
         io.close_after_verified_settlement(owner_reaped=True,groups_settled=True,external_children_settled=True)
         print('CLOSED',len(corpus.files),str(root),flush=True);return 0

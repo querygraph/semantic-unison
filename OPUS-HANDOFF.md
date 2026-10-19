@@ -6,10 +6,11 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `a684ed8b`. No `src/` differences from frozen review
+  before this checkpoint: `18e8ac63`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
-- **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
+- **Resources:** zero owned jobs/IO/CPU/SDK resources. Measuredcohort81175
+  actually completed1385dc/exit0/NOsession,36owners+108CLIclosed. Standing
   Unison00..07 / Photo08..15 / system16..17 remains. Photo actual normal drain
   tool2878/cbaefa→a2c2a1/exit0/NOsession closed owner77136/all phase groups,
   helper audit and Photo8+EXIO. Photo reports zero reservations and holds NEW
@@ -7628,3 +7629,41 @@ recipe-sample-controls-actual-20261019.json; rawplans/index preserved oneuse.
 Photo21CLIclosurequeue01a153d4-32ce sent promptly. CurrentzeroUnisonresources.
 Next repeatedmeasurement/sourcebaseline-topologyaudit; largerfixedmatrixstill
 29unstarted/noautomatic18borrow. Adobequalificationlast; PhotoIOheldperuser.
+
+
+## LIVE measuredmanysmallworker1 cohort,2026-10-19
+
+Actualowningtoolsession81175 initialfa97ab/coordinator6561,
+/private/tmp/u-cohort-e35e154c0b304e46, plan813a221e.36freshsamples:stock/Ox
+×ordinary/receiverclone/SDE×onewarmup+fivemeasured,108CLI. Per-caseEX→Unison8
+owners, nodefault18borrow/SDK/Photo. Newschema2process/pairobservations preserve
+rawmonotonic/wait4CPU/RSS/protocolcounts; originalchildf85282/0 and13pure
+controls7b6b46/0 passed. ExistingSDKresultdict/defaultcaptureunchanged.
+Source162pins frozenuntilcohortterminal; generatedleft/rightremovedONLYafter
+allpercaseaudits, rawsamples/logs retained. Callercoordinatorpassivemetadata
+overhead chargedtoreservedownerbudget; no competingpool. Host/sourceactivity
+uncontrolled/noquiettimingclaim. Latestobserved29closedrows, includesallwarmups;
+ordinarycurrentlyfasterthanclone/SDE. No sampledropped/replaced. Actualowning
+terminal+all36case/group/FDsettlementstillrequired; doNOTinferfrommarkers.
+PhotoNEWIO/nativeSDKremainsheldforuserhandover; sourceCPU8independent.
+
+
+## Measured many-small worker1 COMPLETE,2026-10-19
+
+Supersedes the earlier LIVE/29-row snapshot. Actual owning session81175
+initialfa97ab/terminal1385dc/exit0/NOsession, coordinator6561. All36sampleowners
+closed;6warm+30measured,108CLI/324client-proxy-server roles. Fresh independent
+retained-proof audits81064/177a3f/0 and24458/b4b532/0 reparseall108rawpairs,
+caseowner argv/settlements, clock/resource bindings and exactsummary. Metadata
+CPU00+EXclosed after each; no transfer/re-hash/replacement repeated.
+Sixteen targeted controls4a3467/0 include incomplete schedule/result refusal
+and uncertain-close retention. Original real child observationf85282/0 retained.
+Actual receipt: tests/qualification/final-many-small-measured-worker1-actual-20261019.json.
+Report: doc/final-many-small-worker1-measurements-v2-20261019.{json,md}; initial
+metadata audit report preserved separately. Ordinary clientmedian6.9057sstock/
+7.0133sOx; clone8.5973/8.4809; semantic8.5739/8.5171. Ordinaryfasterhere;
+logicalmodel32MiBordinary/1MiBclone/512KiBSDE, NOTphysicalwrite measurement.
+Proxywait4CPU mayinclude reapedserver; no whole-tree peaks/hardcaps/quiet
+causalcompilerclaim. AllgeneratedreplicasremovedONLYafter exactbytes/noop
+checks; proofs retained. CurrentzeroUnisonresources; PhotoIOhandovercontinues.
+Next sharedworker3 repeatedcohort to exercise3+3+2inside8; Adobequalificationlast.

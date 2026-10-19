@@ -55,7 +55,7 @@ def audit(store,pin,corpus,binaries,*,mode,workers,rows_validator=validate,verif
     for row in expected['rows']:
         stage=row['stage'];pair=pinned(store,result['pairs'][stage],stage+'-pair.json')
         intent=store.read_json(stage+'-INTENT.json',expected_sha256=None)
-        if intent['row']!=row or pair['schema']!='unison-batch-pair/1':raise ValueError('call intent differs')
+        if intent['row']!=row or pair['schema'] not in ('unison-batch-pair/1','unison-batch-pair/2'):raise ValueError('call intent differs')
         from sdk_merge_receiving.admission import PYTHON
         proxy_command=[PYTHON,'-B',str(Path(store.root)/(stage+'-proxy.py'))]
         joined=audit_pair(store,pair['evidence'],client_command=row['command'],proxy_command=proxy_command,
@@ -64,6 +64,11 @@ def audit(store,pin,corpus,binaries,*,mode,workers,rows_validator=validate,verif
         client=restore(store,pair['evidence']['client'],row['command'])
         proxy=restore(store,pair['evidence']['proxy'],proxy_command)
         logs[stage]=client['stdout']+client['stderr']+proxy['stdout']+proxy['stderr']
+        if pair['schema']=='unison-batch-pair/2':
+            from batch_observations import pair as read_measurements
+            joined=dict(joined,observations=read_measurements(store,pair['measurements'],joined))
+        frame=json.loads(read(store,pair['evidence']['server_frame']))
+        joined=dict(joined,protocol_bytes=frame['forwarded_protocol_bytes'])
         reports.append(joined)
     for path,script in result['scripts'].items():
         if hashlib.sha256(read_bytes(path,65536)).hexdigest()!=script['sha256']:raise ValueError('generated script changed')
