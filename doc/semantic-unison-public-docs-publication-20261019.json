@@ -1,0 +1,39 @@
+{
+  "schema": "semantic-unison-public-documentation-publication/1",
+  "repository": "querygraph/semantic-unison",
+  "default_branch": "master",
+  "previous_master": "4a620ea0160d4ac021c02c8246a3bb41db8acda3",
+  "published_master": "3957717819e3a64e3030eb02f422338ec1f0b751",
+  "master_files": [
+    "README.md",
+    "I-AM-AN-HONEST-WORKING-LLM.md",
+    "SEMANTIC-UNISON-DESIGN.md"
+  ],
+  "old_design_path": "SOL.md",
+  "old_design_absent": true,
+  "master_push": {
+    "session": 59702,
+    "initial_chunk": "21642c",
+    "terminal_chunk": "28bf03",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "review_branch": "implementation/final-adobe-qualification",
+  "review_published_commit": "d031eb056193052fe60948500901afc457043385",
+  "review_push": {
+    "session": 42137,
+    "initial_chunk": "e8024b",
+    "terminal_chunk": "e7053c",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "independent_github_verification": {
+    "chunk": "a14874",
+    "exit_code": 0,
+    "readme_blob": "3fd2dd2b840a273f8c1806155c4baecb0a4a2ee6",
+    "matches_local_blob": true
+  },
+  "production_source_merged_into_master": false,
+  "upstream_modified": false,
+  "manifesto_evidence_links": "Immutable review commit links because acceptance evidence is on the separate review branch"
+}

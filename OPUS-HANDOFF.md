@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T15:40:43.305814+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T15:43:54.667908+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Design filename — USER RENAME:** `SEMANTIC-UNISON-DESIGN.md` replaces
@@ -25,6 +25,16 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   merge or upstream submission. Historical old-name URLs/receipts are preserved.
   `I-AM-AN-HONEST-WORKING-LLM.md` is the user-requested candid AI-written statement;
   README identifies the separate fork and links it. No upstream posting.
+- **Actual public docs push — USER AUTHORIZED:** master39577178 now exposes new
+  LLM-friendly README, manifesto and SEMANTIC-UNISON-DESIGN.md; oldSOL absent.
+  Actual push59702/28bf03/0, fresh GitHuba14874/0 verifies exactly3 documentation
+  paths and READMEblob3fd2dd2b matches local. Unfinished implementation was NOT
+  merged into master. Separate implementation/final-adobe-qualification branch
+  published atd031eb05 via42137/e7053c/0; no upstream submission. Public-master
+  manifesto links immutable review evidence/handoff, not missing master files.
+  Local public-docs worktree/private branch retained under
+  /private/tmp/semantic-unison-public-identity-20261019. Ordinary main checkout
+  stays on its existing feature branch; old local README there is branch history.
 - **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Native
   publication74637/dd4390/0 and exact-restored-mtime53737/fd27be/0 are closed;
   independent748b45/0 andb3f93e/0 reacquired/closed whole8EX. Earlier generic
