@@ -92,6 +92,14 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `doc/final-archive-roundtrip-result-20261019.md`. ForcedRPCv0/actualSSH and
   otherfullsync/archivecases stillopen; this is generatedprivatearchive evidence.
 
+- **RPC boundary/source mismatch:** selected8772 already removedv0 in upstream
+  7b1911e7; no v0converter remains. Currentpair actual17884/a57f83/0 sixcalls
+  acceptRPC1/refuse0and999; independentf10171/0 reaudited536source329production,
+  rawsamePIDexec/64generatedbytes and reacquiredclosedwhole8EX. This doesNOT
+  meet SOLv0ordinaryfallback: requirement remains visibly unresolved, no new
+  unsupported transport silently restored. `doc/final-rpc-version-result-20261019.md`.
+  Threecontrols b2606d/0; allresourcesZERO. Continue otherindependent work.
+
 ## Remaining work — do not mark goal complete
 
 1. Reconcile current full-sync properties, remaining archive cases/forcedRPC0
