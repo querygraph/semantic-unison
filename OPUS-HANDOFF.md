@@ -6788,3 +6788,24 @@ receipts `current-sdk-merge-split-child-{controls,initial-recovery,final-closure
 20261019.json` preserve pass/failure/recovery separately. No payload/native run
 or repeated old admission. Next: retained proxy and actual transport evidence
 bindings, authenticated fixtures, owned freezer/admission, then native qualification.
+
+## Retained merge proxy/transport source kernels — 2026-10-19
+
+Active source worktree `/Users/alexy/src/unison-final-adobe-20261019` now has
+`tests/sdk_merge_receiving/proxy.py` and `transport.py`. The proxy bounds buffers,
+forwards protocol EOF, separately observes normal native terminal/reap, and never
+sends cancellation signals. Errors retain native/socket/FD owners and preserve
+nested descriptor uncertainty. Paired transport starts/drains both peers before
+finishing, retains both handles on either failure, and returns separately read
+raw proxy evidence for independent auditing. No standalone runtime/native entry
+is provided and no resource release authority is claimed.
+
+Ten original controls passed e62099/exit0/no session, child27330 reaped0/group-
+empty and canonicalCPU00..03 closed; earlier five proxy controls4bf241/0 likewise
+closed child27037. Six generated socketpair/pipe bytes only; native Popen and
+paired-process cases are inert doubles. No SDK/DNG/Unison/compiler/canonicalIO.
+Receipts: `tests/qualification/current-sdk-merge-{proxy,transport}-controls-
+20261019.json`. No native paired execution or Adobe functionality is newly
+qualified. Next raw-receipt binding/worker adapter, input recovery and immutable
+owned freezer/admission; missing old generated fixtures are not silently replaced.
+Goal stays active/incomplete; no runtime grant or resource hold from source work.

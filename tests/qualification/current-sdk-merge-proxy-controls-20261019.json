@@ -1,0 +1,31 @@
+{
+  "schema": "unison-retained-merge-proxy-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "-c",
+      "import sys,unittest;sys.path[:0]=['tests','tests/sdk_host_matrix'];r=unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromName('sdk_merge_receiving.proxy_test'));sys.exit(not r.wasSuccessful())"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "test_expiry_keeps_all_known_pipe_owners (sdk_merge_receiving.proxy_test.Pump.test_expiry_keeps_all_known_pipe_owners) ... ok\ntest_original_six_bytes_forward_and_stdin_eof_close_once (sdk_merge_receiving.proxy_test.Pump.test_original_six_bytes_forward_and_stdin_eof_close_once) ... ok\ntest_live_native_after_eof_retains_sockets_and_pipe_no_reap (sdk_merge_receiving.proxy_test.Server.test_live_native_after_eof_retains_sockets_and_pipe_no_reap) ... ok\ntest_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles (sdk_merge_receiving.proxy_test.Server.test_nested_close_uncertainty_keeps_original_carrier_and_remaining_handles) ... ok\ntest_normal_native_reap_and_all_handles_close_without_release_claim (sdk_merge_receiving.proxy_test.Server.test_normal_native_reap_and_all_handles_close_without_release_claim) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.006s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 27037,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "source_pins": {
+    "tests/sdk_merge_receiving/proxy.py": "6c534451486f7cfe698736f76464771dc54b38ec5643a89c784a340b9ba0707b",
+    "tests/sdk_merge_receiving/proxy_test.py": "a2d22aa263ccf542d3fb5c5d7a8cb22ca9f3468f2efad49dc2c803d0b378dcb1"
+  },
+  "scope": "Original six-byte socketpair/pipe forwarding and inert Popen/native wait/close doubles only. No native process, SDK, DNG, Unison, compiler or canonical IO."
+}

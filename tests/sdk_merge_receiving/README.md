@@ -15,8 +15,8 @@ child was reaped0/group-empty before the four canonical CPU tokens closed.
 No IO pool, source DNG, Adobe, compiler or Unison transport was invoked.
 [Control receipt](../qualification/current-sdk-merge-plan-controls-20261019.json).
 
-This is NOT runtime ready: the worker kernel now exists, but no real retained
-transport adapter, exact metadata freezer, admission route or runtime request is
+This is NOT runtime ready: the worker kernel now exists, but no fully wired retained
+transport/receipt binding, exact metadata freezer, admission route or runtime request is
 provided yet. Source contracts and fabricated adapters do not authorize SDK calls.
 
 ## Required executor composition
@@ -116,3 +116,25 @@ assertion failure and idle-controller recovery are preserved separately; see
 `../qualification/current-sdk-merge-split-child-final-closure-20261019.json`.
 No actual proxy/client native adapter exists yet. The benchmark proxy still
 contains cancellation/kill behavior and must not be used as the retained proxy.
+
+## Retained proxy and paired transport kernels
+
+`proxy.py` now supplies bounded bidirectional socket/pipe forwarding and normal
+server wait4 without cancellation signals or broad group kills. EOF is distinct
+from terminal status. Failures carry the native Popen object, socket owners,
+known FDs and nested uncertain-close records. Its caller must retain that carrier
+and all inherited resource descriptors; this is a callable kernel, not a CLI.
+
+`transport.py` starts/drains the proxy, observes its socket without consuming its
+one-use control header, starts/drains the client, then finishes each retained
+handle. Failure preserves both peers and the original nested carrier, including
+a failed-start child carried by the lower layer. It never closes CPU/IO or
+turns returncode0 into helper or output proof. A separately read proxy frame is
+returned for independent binding, not accepted as process proof by this kernel.
+
+Controls4bf241/0 (child27037) and e62099/0 (child27330) actually closed/reaped0,
+group-empty and CPU00..03 closed. Ten combined original controls use six generated
+socket/pipe bytes and inert native/paired-process doubles. No native proxy/server,
+SDK, DNG, Unison, compiler or canonical IO operation ran. Actual paired process
+qualification, independent raw-receipt binding, input recovery and the owned
+freezer/admission remain pending. See qualification receipts for exact scope.
