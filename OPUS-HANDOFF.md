@@ -81,6 +81,12 @@ admissions or statements that consumed jobs remain unstarted.
   helperproof refuses. CPU00closed/nochildren/EX/SDK. Runtime owner and exact
   designated-failure transport audit remain source work before fresh request. `doc/sdk-negative-receiving-successor-design-20261019.md`
   specifies separate expected-exit/finding audits; no runtime request/grant yet.
+- Negative receiving successor source advanced: transport90d292/0 (5methods)
+  distinguishes designatedrequire1/warn0+normalproxy/server+actualnegativehelper;
+  publicationcf79fa/0 (4methods) fences fullhash/eightnativefields; schedule7892a4/0
+  (3methods) fixes12calls/6SDK/6freshdirs/onewayforcedleft/no mergeoptions. Alltiny
+  synthetic CPU00closed/nochildren/EX/SDK/payload. No immutable native request or
+  Photo hold; owner/data/orchestration/whole-run audit integration remains next.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement

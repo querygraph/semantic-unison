@@ -1,0 +1,20 @@
+{
+  "schema": "unison-original-negative-receiving-controls/1",
+  "actual_tool": {
+    "terminal_chunk": "cf79fa",
+    "exit_code": 0,
+    "running_session": false
+  },
+  "original_test_methods": 4,
+  "source_sha256": {
+    "tests/sdk_negative_receiving/publication.py": "7cdf141cbc4a78f543e32f813326361bec8020c296a524748a6fcb9b8d6177ef",
+    "tests/sdk_negative_receiving/publication_test.py": "13345c21cda2b07714b7efd293024b3763364b4dd566d3bda9535b41536acd50",
+    "tests/sdk_merge_receiving/data.py": "0f2f02491a605efb17f93317d413f9030c0619aff71655f11e13c44b83fd98a9"
+  },
+  "CPU00_closed": true,
+  "child_processes": 0,
+  "EX_acquired": false,
+  "SDK_calls": 0,
+  "retained_payload_opened": false,
+  "scope": "Pure fabricated transport/publication observations or command plan; not actual SDK/rejection/publication/FD settlement proof"
+}

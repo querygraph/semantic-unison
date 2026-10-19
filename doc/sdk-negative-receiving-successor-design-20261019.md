@@ -62,3 +62,30 @@ release resources. CPU00 closed, no children/EX/SDK/payload. See
 [control receipt](../tests/qualification/sdk-negative-finding-controls-actual-20261019.json).
 The runtime owner, designated-failure transport audit and immutable request are
 still to be implemented and qualified before scheduling; Photo is not waiting.
+
+## Expected-rejection transport and publication source checks
+
+The separate `transport_audit.py` now distinguishes actual require client1 from
+warn client0 without rewriting either raw record. Both require normal proxy0 and
+server0, complete pumps, exact commands/policies, one fully captured settled
+server SDK helper and the explicit native diagnostic tied to the negative SDK
+receipt. It refuses ordinary failed CLI, missing finding, unexpected exit,
+timeout, truncation, aliased PIDs, unknown groups, false/bool counters and raw
+frame mismatch. Five original synthetic controls passed90d292/0. This is source
+qualification; the actual designated terminal combination is still unobserved.
+
+`publication.py` separately compares complete hash/size/eight-field observations.
+Require must preserve all of them; warn must match the exact different candidate.
+Four original controls passedcf79fa/0, including each native field change and
+wrong/missing/caller-coerced observations. Its pure result still requires fresh
+owned private payload observations and helper/worker settlement.
+
+`plan.py` fixes twelve serial calls/six SDK helpers in six separate directories:
+each encoding require then warn, each off seed followed by one forced-left update.
+It reuses only the positive schedule's qualified peer/tool/resource flags, removes
+both merge-specific options, and fixes a separate u-snr namespace. Three original
+controls passed7892a4/0 for exact policies/call accounting/old namespace and
+unqualified SDK refusals. All three suites closed CPU00 with no children, EX,
+SDK or payload. No native request has been frozen and no scheduling hold exists.
+The actual owner, clone/fault installation, durable evidence orchestration and
+independent whole-run audit still need integration before an immutable request.
