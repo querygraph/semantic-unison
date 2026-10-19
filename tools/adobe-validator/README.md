@@ -38,7 +38,7 @@ On macOS with Command Line Tools, Python 3, and CMake installed:
 ```
 python3 tools/adobe-validator/build.py \
   --sdk-root /absolute/path/dng_sdk_1_7_1 \
-  --build-dir /absolute/path/adobe-validator-build --jobs 12
+  --build-dir /absolute/path/adobe-validator-build --jobs 2
 python3 tools/adobe-validator/qualify.py \
   --build-dir /absolute/path/adobe-validator-build
 ```
@@ -252,7 +252,7 @@ The qualified v1 binary is unchanged.
 A build-only Make handoff (run from the repository root):
 
 ```sh
-SDK_ROOT=/absolute/dng_sdk_1_7_1 BUILD_DIR=/absolute/new-private-build JOBS=4 \
+SDK_ROOT=/absolute/dng_sdk_1_7_1 BUILD_DIR=/absolute/new-private-build JOBS=2 \
   make -f tools/adobe-validator/Makefile experimental-link
 ```
 
@@ -263,3 +263,24 @@ owned directory. No SDK output is invoked. For an already linked unqualified
 artifact, use `python3 tools/adobe-validator/experimental_build.py --build-dir
 /absolute/private-build --inspect-only`. Inspecting does not grant a runtime
 slot. Pure filesystem refusal checks: `python3 tests/adobe_build_only/run.py`.
+
+## Recovery of historical generated fixtures (2026-10-19)
+
+The retained qualified2724 executable remains a separate artifact. Adobe's
+[current official SDK page](https://www.adobe.com/support/downloads/dng/dng_sdk.html)
+now lists1.7.1build2768; a current download is not an exact restoration of2724.
+The current builder deliberately still refuses another SDK build. No guard was
+loosened and no qualified validator was replaced.
+
+The manifest's historical `source_sha256` means `driver.cpp` SHA, as established
+by `build.py`; it is not an SDK directory or archive digest. Recover source
+provenance separately. The small retained manifest cannot stand in for missing
+SDK source or dependency archives. `--fixture-only` also requires matching
+manifest/libraries, not merely the surviving validator executable.
+
+Prefer authentic2724source/library recovery; otherwise build a separately named
+fixture generator from explicitly pinned/reviewed newer source, then qualify
+its generated6000x4000 CFA uncompressed/JPEG/JXL fixtures with the preserved
+validator. Record new fixture bytes/ancestry honestly rather than replacing
+historical manifests. Never reduce codec/dimensions or pad a fake fixture to
+make the recovery pass. Build default is now at most two compiler jobs.

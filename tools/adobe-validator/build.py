@@ -17,7 +17,7 @@ from object_cache import compile_object
 parser = argparse.ArgumentParser()
 parser.add_argument("--sdk-root", type=Path, required=True)
 parser.add_argument("--build-dir", type=Path, required=True)
-parser.add_argument("--jobs", type=int, default=min(12, os.cpu_count() or 1))
+parser.add_argument("--jobs", type=int, default=min(2, os.cpu_count() or 1))
 parser.add_argument("--fixture-only", action="store_true",
                     help="rebuild test fixture writer using existing SDK libraries; preserve validator and manifest")
 parser.add_argument("--experimental-area-task-host", action="store_true",

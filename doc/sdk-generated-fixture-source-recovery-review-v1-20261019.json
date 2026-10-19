@@ -1,0 +1,121 @@
+{
+  "schema": "unison-generated-fixture-source-recovery-review/1",
+  "state": "SOURCE_METADATA_ONLY_NO_DOWNLOAD_BUILD_OR_PAYLOAD",
+  "official_source": {
+    "url": "https://www.adobe.com/support/downloads/dng/dng_sdk.html",
+    "observed_label": "DNG SDK 1.7.1 Build 2768, October 13, 2026",
+    "browser_search_reference": "turn134search0",
+    "browser_page_reference": "turn135view0",
+    "meaning": "Page publication label only; no downloaded archive/header/tree authentication"
+  },
+  "head_probe": {
+    "url": "https://www.adobe.com/go/dng_sdk",
+    "method": "HEAD",
+    "actual_tool_chunk": "38da64",
+    "HTTP_status": 403,
+    "body_read": false,
+    "final_archive_url_known": false
+  },
+  "qualified_validator": "unison-sdk171-2724-v1-single",
+  "historical_manifest_source_sha256_meaning": "driver.cpp bytes; NOT SDK source directory/archive hash",
+  "build_source_confirmation": "git show 513c121a:tools/adobe-validator/build.py maps source_sha256 to SHA256(here/driver.cpp)",
+  "retained_metadata": [
+    {
+      "path": "/private/tmp/unison-adobe-sdk/dng_sdk_1_7_1",
+      "exists": true,
+      "lstat": {
+        "st_dev": 16777223,
+        "st_ino": 303932589,
+        "st_mode": 16877,
+        "st_size": 224,
+        "st_mtime_ns": 1792220406829930307,
+        "st_ctime_ns": 1792220406829930307,
+        "st_nlink": 7,
+        "st_uid": 501
+      }
+    },
+    {
+      "path": "/private/tmp/unison-adobe-driver-build/fixture-writer",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-adobe-driver-build/build-manifest.json",
+      "exists": false
+    },
+    {
+      "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+      "exists": true,
+      "lstat": {
+        "st_dev": 16777223,
+        "st_ino": 303951538,
+        "st_mode": 33261,
+        "st_size": 9017656,
+        "st_mtime_ns": 1791875241270561232,
+        "st_ctime_ns": 1791875241270561232,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "path": "/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng",
+      "exists": true,
+      "lstat": {
+        "st_dev": 16777223,
+        "st_ino": 313015767,
+        "st_mode": 33024,
+        "st_size": 48005534,
+        "st_mtime_ns": 1792009572313897555,
+        "st_ctime_ns": 1792390551413124852,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng",
+      "exists": true,
+      "lstat": {
+        "st_dev": 16777223,
+        "st_ino": 313014722,
+        "st_mode": 33152,
+        "st_size": 39016722,
+        "st_mtime_ns": 1792009572689127300,
+        "st_ctime_ns": 1792390338098514475,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    }
+  ],
+  "payload_opened_or_hashed": false,
+  "SDK_archive_downloaded": false,
+  "options": [
+    {
+      "preferred": "Recover original2724 SDK sources and existing libraries from authenticated provenance; preserve notices and old qualified executable",
+      "currently_available": false
+    },
+    {
+      "fallback": "New independently named fixture-generator build from explicitly pinned/reviewed official source. Same6000x4000 CFA and all3codecs, newbytes+ancestry, validation with retained2724 binary",
+      "currently_admitted_or_qualified": false
+    }
+  ],
+  "builder_change": "default max2 compilerjobs; exact2724 refusal retained; no new SDK version acceptance",
+  "current_scheduling": "Photo bulk49291 has IOpriority; no newEXIO/native/SDK/benchmark dispatch",
+  "sdk_directory_followup": {
+    "actual_tool_chunk": "8c8851",
+    "exit_code": 0,
+    "root_exists": true,
+    "immediate_directories": [
+      "dng_sdk",
+      "libjpeg",
+      "libjxl",
+      "xmp",
+      "sample_files"
+    ],
+    "missing_exact_paths": [
+      "DNG_ReadMe.txt",
+      "LICENSE.txt",
+      "dng_sdk/source/dng_host.h",
+      "libjxl/libjxl/CMakeLists.txt"
+    ],
+    "scope": "Bounded metadata only; surviving skeleton is not recovered SDK source. Earlier missing-root shorthand must not override current observation."
+  }
+}

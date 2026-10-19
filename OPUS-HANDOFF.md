@@ -7123,3 +7123,24 @@ sparsefixture, IO/CPUreservation or admission created. CompanionMD explains
 actualouterterminal/group/FDclosure and retainunknown/no signals. Photo49291
 bulk goesfirst; no newIO/native/SDK/benchmark before actual release. Goalactive;
 other source/case/workload closure can continue.
+
+
+## 2026-10-19 — Generated SDK fixture recovery source research
+
+OfficialAdobeSDKpage nowlabels1.7.1build2768/Oct13, whereas qualifiedbinary is
+2724v1single. Website mutable latest download is notexactoldsource restoration.
+HEADgo/dng_sdk actual38da64 metadataonlyreturned403; no body/archive downloaded.
+IMPORTANTCORRECTION: retainedmanifest source_sha256=15d505... hashes driver.cpp,
+NOT SDKsource tree; confirmed current/predecessorbuild.py. Do notauthenticate
+SDKarchive/tree with it. New JSON doc/sdk-generated-fixture-source-recovery-
+review-v1-20261019.json records freshlstat/absence and exactresearchscope.
+Preferred2724source/library recovery; alternative explicitlypinnedreviewednew
+fixture-onlygenerator/newbytes+ancestry withsame6000x4000/all3codecs, preserved
+validator, freshqualification. Neither source acquired/buildadmitted. Builder
+default12→2compilerjobs, READMEcommands12/4→2; exact2724guard unchanged. AST
+checkd73d1f/0, noSDK/compiler/payload. PhotoIOpriority unchanged; allownjobs/
+resources0. Goalactive; authenticJXL/12states recovery stillopen, notPhoto gate.
+
+Fresh8c8851/0 correction: SDK root DOESexist as survivingfive-subdirectory
+skeleton. ExactReadMe/license/dng_host.h/JXLCMakeLists allABSENT. Missingusable
+source is not missingdirectory; recordcurrentmetadata ratherthanoldshorthand.
