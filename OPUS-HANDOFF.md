@@ -29,6 +29,8 @@ admissions or statements that consumed jobs remain unstarted.
 
 ## Actual resources and scheduling — ZERO held
 
+- Cancellation source successor added: retained two-endpoint transport exposes only one SIGINT to the exact live unreaped client, retaining both handles/inherited descriptors on observer/signal/finish uncertainty. Pre-signal observer binds one new hang-helper counter to candidate inode/bytes, source bytes and preserved old receiver. Actual source controlsfc76a1/0 (7) +0cd6c2/0 (8) passed with CPU00 closed after each; all process/signal observations were inert doubles. No CLI/SDK/EX or actual cancellation qualification. Actor integration/global budget/durable audit and producer interruption remain next; do not treat these modules alone as a runtime grant.
+
 - Latest user scheduling answer: run finite SDK work when shared IO barrier is available; do not wait solely for Capitola clearance. Existing consumed runs remain closed, with no replay.
 - Normal named receiving call actor now persists intent/raw capture, independently re-reads saved evidence, enforces shared call budget and rechecks prepared scripts/profile. Actual source controls5cbe42/0 passed13methods (CPU00 explicitly closed, inert process adapters only, no EX/CLI/SDK). Interruption/cancellation actors and full parent binding remain unfinished; no runtime admission requested for this successor.
 
