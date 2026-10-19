@@ -19,7 +19,7 @@ checks have their narrower scope. Neither proves physical storage savings.
 | Same-file alias/overlap and EOF/overflow | `tests/clone_range/test.ml:521`–568 | Current explicit alias constraint, overlap rejection and checked ranges before effects. |
 | Stale/changed bindings including final callback | `tests/clone_range/test.ml:580`–645 | Current identity/generation/size and per-call/final observation refusal. Does not eliminate uncooperative check-to-rename races. |
 | Cancel / observers / callbacks | `tests/clone_range/test.ml:647`–699 | Current exceptions propagate without another native operation or fallback; no broad process cancellation claim. |
-| Same-offset, prefix insert/delete, duplicate blocks, all-literal, EOF, hardlink isolation, interruption/rebuild | `tests/test_clone_sync.py:60`–140 | Source exists and was inspected; this audit has NOT bound a final current execution receipt for this legacy suite. Keep execution mapping OPEN. Its old kill-group retry is not a recommended new owner protocol. |
+| Same-offset, prefix insert/delete, duplicate blocks, all-literal, EOF, hardlink isolation, interruption/rebuild | `tests/test_clone_sync.py:60`–140 | Renewed through retained owners: current28CLI generic cases plus8CLI interruption/recovery (reports below). The old unmanaged driver itself was not rerun; its kill-group protocol was replaced with owned-server-only interruption. |
 | Readonly snapshot, source mutation/open reader, xattr/resource-fork/ACL/flag isolation, exclusive names | `tests/clone_stage.ml`; `tests/test_clone_stage.py` | Source-level cases exist; final source-bound integration evidence still to trace. No universal sparse-file/metadata preservation claim. |
 | All-matched inherited stream | `tests/rsync_publication_owned/probe.ml` phase inherited | Explicit production-rsync case exists, but original receipt is Oct17 predecessor. Current production copy/transfer changes require scoped dependency mapping or renewed directed execution. Do not label predecessor as final-source pass. |
 | Empty/first/last/multiple token frames, literals+blocks, partial fallback, inherited skip, append prefix/resource headers | `tests/transfer_instruction_bounds/probe.ml` | Current source includes cases and bounds. Old output-allowance receipt has0/5 matching direct pins; later stream-cap receipt has6/9, including current copy/transfer/probe/runner. The later receipt is relevant component evidence, not full transitive proof because remote/tests remote bounds changed. |
@@ -38,9 +38,10 @@ checks have their narrower scope. Neither proves physical storage savings.
 4. Record unavailable physical cross-volume/non-APFS/Linux/Windows facilities
    explicitly; modeled adapter cases are not native platform qualification.
 
-No production change was needed for this map. Standing8/8 continues; Photo
-currently goes first, so new Unison IO/native/SDK/benchmark starts remain held.
-Source and metadata work can continue. Adobe qualification stays separate.
+No production change was needed for this map. Standing8/8 continues; the
+historical Photo scheduling window has closed. User directs independent Unison
+qualification first and Adobe runtime work at the end; no current Photo hold.
+Adobe qualification remains separate from generated clone controls.
 
 ## Superseding final transfer execution
 
@@ -79,3 +80,7 @@ recoveryclosed137; preserve that failure separately from this freshv4 pass.
 ### Current end-to-end clone interruption and recovery renewed
 
 [Actual result](final-clone-interruption-result-20261019.md) and [receipt](../tests/qualification/final-clone-interruption-v3-actual-20261019.json): actual61494/84393d/0/no session;8calls24primaryroles across current stock/Ox, two controlled still-owned serverSIGKILLs only after observed private clone stages. Exact old live destination/open-reader/hardlink preserved, fresh clone recovery gives exact8MiB target on a different inode from partial stage, cleanup and full-identity no-op pass. Independentc160ba/0 reparsed every peer/frame/command,542source329production pins and37748736Bfreshgeneratedbytes; canonical9/full8EX reacquiredclosed. V1hardlink-reader andV2wrong-log-channel harness failures/known-prefix idle-controller137recoveries preserved separately. Not power-loss/all generic clone cases/SDK/photos.
+
+### Current generic clone update and flagged-basis policies renewed
+
+[Actual result](final-clone-sync-result-20261019.md) and [receipt](../tests/qualification/final-clone-sync-actual-20261019.json): owning43369/a6d4ef/0/no session,14cases/compiler/28CLI84primaryroles+4flagmodifier children allsettled. Original sameoffset/prefixinsert-delete/shiftduplicate/literal/shorter-longerEOF each actualreceiverclone/exactbytes; oldhardlink/openreader preserved, cloneoff exact, require-nodump specificnormalrefusal2 witholdtargetpreserved, plannedauto-fallback exact, noops/stagingcleanup pass. Sameoffsetreported2095104logicalbytes preserved, allliteral0, not physicalwrites. Independent2ec05e/0 rehashed545sources329production/13002912Bfreshgeneratedbytes/rawpeer+modifierbindings, exactcanonical9/full8EXclosed. Legacy unmanaged driver not rerun; capability-cache/races/physicalcrash remain separate.

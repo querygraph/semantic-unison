@@ -1,7 +1,7 @@
 <!-- CURRENT-UNISON-CHECKPOINT -->
 # Current checkpoint — independent qualification; Photo IO handed over
 
-Updated UTC 2026-10-19T14:20:15.847526+00:00. Goal ACTIVE and incomplete. This is the authoritative
+Updated UTC 2026-10-19T14:51:29.344294+00:00. Goal ACTIVE and incomplete. This is the authoritative
 checkpoint; historical snapshots below do not create resource holds or grants.
 
 - **Source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
@@ -172,6 +172,19 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `doc/final-clone-interruption-result-20261019.md`. Not powerloss/allgeneric
   positive/flaggedbasis cases/SDK/photos; next namedcase coverage and final
   generated Adobe fixture/runtime phase remain. Goal ACTIVE.
+
+- **Current generic clone sync policies CLOSED:** actual43369/a6d4ef/0/no
+  session,14cases/compiler/28CLI84primaryroles+4flagmodifiers allactuallysettled.
+  Seven original2MiB shapeupdates actualreceiverclone/exactbytes; sameoffset
+  reports2095104logicalinheritedbytes/allliteral0. Oldhardlink/openreader,
+  cloneoff, requirenodumpnormalexit2/liveoldtargetpreserved, plannedautofallback,
+  flagszero/noops/stagingcleanup pass. Independent2ec05e/0 rehashed545sources/
+  329production/13002912Bgeneratedbytes/rawpairs+modifiers+exactcanonical9;
+  whole8EXclosed. Five ownercontrols d3e65f/0. AllresourcesZERO, noSDK/photos.
+  `doc/final-clone-sync-result-20261019.md`. Combined with interruption result,
+  legacyfixturefamilies renewed through retained owners, NOToldunmanageddriver
+  itself/physicalwrites/powerloss/allcache-race/platforms. Next remaining named
+  failure/race/Adobe scopes and final generated fixture/runtime preparation.
 
 ## Remaining work — do not mark goal complete
 
