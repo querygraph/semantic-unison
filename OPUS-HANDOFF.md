@@ -137,6 +137,24 @@ successor without Photo/Capitola holds; don't infer runtime readiness from six
 helper tests. The user-directed fork rename and manifesto interrupted this
 source work; files remain preserved for the next goal turn.
 
+README now replaced per user instruction with a concise LLM-friendly Semantic
+Unison introduction and goals only (semantic components, composable camera
+knowledge, exact deltas/merges, APFS clone updates, optional Adobe checks,
+coordinated OCaml/OxCaml workers). No unfinished-work list in README.
+
+Generation successor further progressed, still UNCOMMITTED/UNSTARTED:
+`generate` callable now qualifies full one-writer/twelve-validator ordering with
+original Python doubles and tiny private files. Ten controls actual1aa036/0,
+child75132 reaped0/groupabsent/CPU00closed; earlierb43609/1 test-temp-path refusal
+preserved (9/10passed); fixed only fixture path to /private/tmp. New main limits
+and after-IO executable hashing added afterward, no real SDK launch. Source-only
+plan `doc/sdk-fixture-generation-plan-v1-20261019.json` SHA27636b4787c28f3ae6b89924039ca575620b830311559d64f1a3464749c80d05
+has571source/sixJSONprerequisite pins, freshworkspace
+`/private/tmp/u-sdk-states-9520eefd4a92`, persistentstate nonce9520eefd4a924329a5a1cb6179977e25.
+No payload/artifact opened in preparation, no runtime allocation/Photo hold.
+Finish final source review/current controls and exact evidence before dispatch;
+older statement that no plan exists is superseded by this source-only freeze.
+
 ## Actual current evidence
 
 - **Builds:** current stock/Ox Make+Dune build/selftests,586inputs/329production
