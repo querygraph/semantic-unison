@@ -251,3 +251,10 @@ publication and final transport scope remain separate.
 artifacts verified; existing33valid/247invalid fixtureinventory enumerated in
 memory. Inventory is not parser qualification; extended/later component-source
 scopes remain open. Photo first/bulkIO hold respected; no newnative operation.
+
+### Optional validator policy case mapping — 2026-10-19
+
+[Case map](sol-validation-policy-final-map-20261019.md) binds current11policy/
+cancellation controls percompiler; all329production/212linked/5testpins and
+22case logs rechecked. This closes handler-policy mapping, not realSDK negative
+findings, receiving reuse/resume/merge paths, corpus or pixels.

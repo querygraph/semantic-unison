@@ -7144,3 +7144,18 @@ resources0. Goalactive; authenticJXL/12states recovery stillopen, notPhoto gate.
 Fresh8c8851/0 correction: SDK root DOESexist as survivingfive-subdirectory
 skeleton. ExactReadMe/license/dng_host.h/JXLCMakeLists allABSENT. Missingusable
 source is not missingdirectory; recordcurrentmetadata ratherthanoldshorthand.
+
+
+## 2026-10-19 — Optional Adobe policy cases source-bound to current evidence
+
+New doc/sol-validation-policy-final-map-20261019.md maps elevenexact warning/
+cancel/inspection/mutation/require/offcases percompiler. Fresh audit5cab47/0
+and saved JSONchecks match329production+212linkedsource+5testpins/compiler,
+8savedartifactpins and22individualcaseloghashes. Originalactual59806/68e562/0
+unchanged; no newhelpers/native/SDK/Photo/IO. Missingrawdigest maypermitstructure/
+decode but remainsMISSING, notdigestvalid. Warn neverrelaxes candidate/tool
+change, cancellation/abort orwarningprinterfailure. RealSDK negative findings/
+reuse-resume-merge pathmapping remainsseparate/open. Receiptindex doc/sol-
+validation-policy-final-bindings-20261019.json. Photo49291bulkprioritycontinues;
+noownedresources, goalactive. Next exactreceivingpath/negative matrix source
+readiness or filesystemcasebindings; no bulk/native dispatch.
