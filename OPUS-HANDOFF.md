@@ -6488,3 +6488,20 @@ Workspace9e8c29a61f17489bb375fa6b4f3e4a13,admission3df77beeconsumedonce.
 OWNER-RETURN f7f9006e4cf638b40e06cca4a0bc7d94207d06952da8a120caed9baf009a18e2; evidenceauto-cohort-stockauto-actual-20261018.json.
 Nineof10/162rows486CLI closed; finalOxauto remains freshserial.
 SeriesholdACTIVE84 continues,noSDK/Main/compiler/finalrestoreyet.
+
+
+### All ten cohorts ACTUAL PASS/CLOSED; temporary18 ended
+FinalOxauto48415/0a7bbd→ca24cc/0/NOsession,parent86053/worker86072.
+All180rows540CLI/30warm+150measured, everyactualparent0 and worker/group/FDclosure.
+Finalreturn30b22a74; all10savedreferences independently rehashed fac32c/0.
+Actualclosureindex doc/auto-cohort-all10-actual-closure-20261018.json SHAb93e1d31.
+FinalnochildEX→whole18 reacquire/close26284d/0, proofe61fc193; no inventedchildsettlement.
+EXPLICIT STANDING8Unison/8Photo/2system RESTORED; policyfileunchanged/no next18grant.
+Photo notifiedpromptly01a152c4-e50b andexactrestoration01a152c5-86e9.
+Saved-onlyreport46da89/0 FULL_GENERATED_MATRIX, all30groups preserved; humanreport
+doc/auto-cohort-all10-report-20261018.md. Descriptive semantic1→8 ratios2.258stock/2.291Ox;
+notcausal/OSquiet/physicalIO/corpus/fullSOLproof. Largerworkloads stillopen.
+DirectAdobe readiness3ec347/0 checked362sources+generatedinputepoch/unusedworkspace,
+noSDK/mediaopened. Exactrequestf9c93745/planb054d77e pathsin doc/mixed-validation-current-cpu-ceiling-{request,plan}-v1.json.
+Next freshUnison8+EX SDK/ExifTool/hash admission; PhotoCPU8source mayresume,
+Photo nativeSDKbulkIO pause continues through separate directqualification, MainstillPhoto-exclusive.
