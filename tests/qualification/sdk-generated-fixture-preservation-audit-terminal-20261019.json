@@ -1,0 +1,10 @@
+{
+  "schema": "unison-fixture-preservation-audit-terminal/1",
+  "actual_terminal": {
+    "chunk_id": "4b1b2f",
+    "exit_code": 0,
+    "running_session": null
+  },
+  "transcription": "Faithful retained actual tool output; metadata-only independent audit, not a new execution.",
+  "scope": "14 source pins, both source and clone epochs, six exact destination records, manifest/row bindings and canonical nine identities; Unison8+EX acquired and closed; zero additional payload bytes."
+}

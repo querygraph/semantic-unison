@@ -8,9 +8,9 @@ checkpoint; historical snapshots below do not create resource holds or grants.
   `implementation/final-adobe-qualification`; inspect `git log -1` for HEAD.
   Production remains `971271a8`, no `src/` diff from frozen review `f6bfd653`.
   Recent successors add test ownership, scoped qualification and reports.
-- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest default-upstream owner
-  `9111/c2e1e7/0/NOsession`,12calls/36primaryrolesclosed; independent audit
-  `07dc8d/0` acquired/closed the entire Unison8+EX bundle. No sealing hold.
+- **Resources:** ZERO owned Unison jobs/CPU/EXIO/SDK resources. Latest fixture
+  preservation owner `961bfc/0/NOsession`; independent metadata audit `4b1b2f/0`
+  freshly acquired/closed Unison8+EX. No SDK calls or sealing hold.
 - **Scheduling:** user directed independent Unison work first, direct Adobe
   qualification later, Photo workflow verification last. Photo normal drain
   `2878/cbaefa→a2c2a1/0` closed; Photo reports zero reservations and holds new
@@ -98,15 +98,18 @@ checkpoint; historical snapshots below do not create resource holds or grants.
    retained fixtures after independent work. Current merge source under
    `tests/sdk_merge_receiving` is implemented:9CLI/6helpers/3codecs/12states,
    independent parent audit. Native current merge matrix remains unrun.
-4. Recover/preserve authentic SDK fixtures/source before that matrix. Qualified
-   validator2724 survives (SHAca49a32b...), but its SDKtree is a skeleton and
-   fixture writer absent. Only two known generated sources survive metadata:
-   `/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng` and
-   `/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng`; JXL/12states missing.
-   Preservation plan `doc/sdk-generated-fixture-preservation-plan-v1-20261019.json`
-   is unexecuted; no source hash/chmod/recopy or SDK run inferred. Manifest
-   source_sha256 is DRIVER.CPP, not SDKarchive. Official2768 source would need
-   distinct honest ancestry; never relabel it restored2724 or replace validator.
+4. Two generated fixtures are NOW preserved as persistent readonly native clones:
+   `sdk-generated-fixture-preservation-actual-20261019.json`, owner961bfc/0,
+   independent metadata audit4b1b2f/0; manifestSHA3f690df1 in Unison-owned
+   `~/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/75f7aeacde374922821cca50fc425c19`.
+   Uncompressed+JPEG clone hashes total87022256B match historicalSHA; source
+   epochs unchanged/no source hash/chmod. V2plan736594b0 consumed; V1unexecuted.
+   JXL/12scalarstates still missing. SharedSDKhostV1/V2 metadata references only
+   deleted originals, no recovered clone. Current inputs.bind only/private/tmp;
+   add versioned trusted persistent-root integration before matrix execution.
+   Validator2724 survives; SDKtree skeleton/writer absent. Manifest sourceSHA
+   is driver.cpp, notSDKarchive. Official2768 needs distinct ancestry, never
+   relabel as restored2724/replace qualifiedvalidator. No SDK call this milestone.
 5. Reconcile final candidate/review and report all requirement scopes. PR13
    fork`querygraph/unison`, base`master`, head`integration/sol-consolidated-review`
    last verified OPEN DRAFT atf6bfd653; local final qualification successor not
