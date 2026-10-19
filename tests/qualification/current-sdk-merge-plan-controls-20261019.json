@@ -1,0 +1,31 @@
+{
+  "schema": "unison-current-sdk-merge-plan-controls/1",
+  "outcome": {
+    "command": [
+      "/Users/alexy/.local/share/uv/python/cpython-3.14.6-macos-x86_64-none/bin/python3.14",
+      "-B",
+      "tests/sdk_merge_receiving/plan_test.py"
+    ],
+    "returncode": 0,
+    "timed_out": false,
+    "capture_truncated": false,
+    "stdout": "",
+    "stderr": "...\n----------------------------------------------------------------------\nRan 3 tests in 0.001s\n\nOK\n",
+    "client_cleanup": {
+      "pid": 13841,
+      "returncode": 0,
+      "reaped": true,
+      "hard_kill_required": false,
+      "other_group_members_absent_before_reap": true,
+      "group_cleanup_before_leader_reap": true
+    },
+    "aggregate_or_parent_terminal_proved": false,
+    "io_cpu_release_authorized": false
+  },
+  "cpu_closed": true,
+  "source_pins": {
+    "tests/sdk_merge_receiving/plan.py": "0f3976ec6a5f7c3b03297c84b47d1223c1ff9377fec0de5ce9c12bf15b1f9322",
+    "tests/sdk_merge_receiving/plan_test.py": "de74fc28c8549ebe95000f79b5e97ebd647b3c0986a9c601b0822f4a6f053038"
+  },
+  "scope": "Three original inert command tests,10negativeinput variants,9declaredcalls only. No IO pool/media/SDK/compiler/CLI runtime, no entry/worker admission yet."
+}

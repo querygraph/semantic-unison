@@ -3,8 +3,10 @@
 
 Updated UTC 2026-10-19T06:30:19.422171+00:00. Goal ACTIVE and incomplete.
 
-- Active worktree `/Users/alexy/src/unison-cpu-ceiling-20261018`, branch
-  `implementation/endpoint-cpu-ceiling`, runtime-harness source commit `63fd4c8a` (later documentation/evidence commits are recorded by Git HEAD).
+- Active source worktree `/Users/alexy/src/unison-final-adobe-20261019`, branch
+  `implementation/final-adobe-qualification` (local SDK-merge source successor).
+  The benchmark worktree `/Users/alexy/src/unison-cpu-ceiling-20261018` stays frozen
+  for remaining plans; runtime-harness source63fd4c8a, draft review headf6bfd653.
   Production remains `971271a8`; subsequent work is Python test tooling/evidence.
 - **No live owned jobs or resource descriptors.** Latest larger128stock1:
   actual52223/3c264e/0/no session, worker97794reaped0/groupempty/CPU8EXclosed.
@@ -6679,3 +6681,25 @@ Evidence tests/qualification/draft-review-source-publish-actual-20261019.json.
 PR text readability corrected separately (spaces/reader-facing final sentence),
 not a runtime change; follow-up docpublish may update sourcehead again.
 All resources/jobs currentlyclosed; payload/native remains at schedulingcheckpoint.
+
+
+### Active source worktree moved; benchmark candidate remains frozen
+NewSDKsourceworktree /Users/alexy/src/unison-final-adobe-20261019,
+branchimplementation/final-adobe-qualification fromf6bfd653. Worktree creation
+actual17096/466616→486ad7/0/no session, Git child/group reaped0/CPU4EXclosed;
+source checkout only, no compiler/SDK/media. OldCPU-ceilingworktree andall29
+remaininglarger execution/requestpins stayunchanged, conditionalfda stillNOTACTIVE.
+CurrentSDKmerge pureplan+original3tests/10refusals PASSEDactual2e015a/0;
+childreaped0/groupempty/CPU4closed. tests/sdk_merge_receiving/{plan.py,plan_test.py,README.md}.
+Exact9calls/3codecs/6SDKdeclared, stockclientOxserver,2+2+2creditsinside8;
+6144MiBpayload/64FDaccounting, nothardRSS/OSthreads. NOworker/entry/freezer/
+admission/request yet; runtimeNOTREADY, no realSDK called or previousgrantreuse.
+Legacymergerunner cannotbe blindlyrepinned: media preflight outsideIO and old
+abortingaggregate/4-credit model require currentretained-ownercomposition.
+Next implement metadata-only manifest/input binding, clone-only preparation,
+exactjournal transport/known-prefix+helper audits/uncertainty controls. Review
+observation-expiry behavior before using a cancelling CLI timeout with nativehelpers.
+UserPhotoIO-at-end/operatorcheckpoint for furtherpayload remains; source work
+continues. DraftPR13 headf6bfd653/OPEN DRAFT remains tested published candidate;
+this newpartialsourcebranch is local and not merged/pushed into review yet.
+Noownlivejobs/resources. FullgoalACTIVE/incomplete; no goalpause orblockedclaim.
