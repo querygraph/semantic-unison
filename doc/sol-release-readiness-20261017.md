@@ -1,3 +1,25 @@
+## V6 completed-run reconciliation — 2026-10-18
+
+All three previously pending V6 requests have now actually run once and passed.
+[Independent saved-receipt adoption](../tests/qualification/sol-stream-v6-actual-adoption-20261018.json)
+reparsed12genuine-upstream calls,12retained-fork calls and18property rows/54calls
+against frozen candidate5cc96102/production513c121a. All45pinned return references
+match. Mixed-peer raw proxy receipts remain retained; property nested journal/
+sample outcomes match, with43execution+329production pins checked. No payload
+was reread and no runtime was repeated for adoption.
+
+Actual parent terminals were personally collected by Photo root and adopted
+from its pinned transcriptions: upstream67161/cf10d6/0, retained90976/15836f/0,
+properties21124/88509b/0; all no-running-session. Worker reaps, group absence and
+CPU/IO closure are independently recorded. Their admissions are consumed; no
+replay or successor is authorized. The earlier admission-absent/blocked notes
+below are historical and do not describe current scheduling state.
+
+This closes the three current-candidate compatibility/property verification
+items. Full SOL is still incomplete: broader resource/platform and end-to-end
+measurement requirements remain scoped separately. No SDK, pixel/corpus, quiet
+timing, physical savings, merge or deployment claim follows from these runs.
+
 ## Current candidate correction — 2026-10-18
 
 The older candidate and “current” results below describe their recorded execution

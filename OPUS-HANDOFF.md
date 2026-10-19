@@ -6112,3 +6112,23 @@ branch5ee9f194), production513c121a, frozenV6candidate5cc96102. ExistingM6
 resource/platform/performance limitations remainopen; blocked is notcomplete or
 userpaused. No ownedlivejobs/CPU/IO/native resources. This note precedes the
 goal-status blocked transition; resume reconciles actualnewstate beforedispatch.
+
+
+## 2026-10-18 resumed: all V6 requests ACTUALLY PASSED/CLOSED
+
+User resumedgoal andidentifiedPhotoRootPID37018. Fresh9cbcef observedall3
+admissions/workspacesEXIST, superseding oldabsence/blockedaudit. Noexpired
+redispatch. Root executedeachonce underseparateexactadmission:
+upstreambe81c79b tool67161/cf10d6/0 owner97061/worker97077;
+retained59c4fc41 tool90976/15836f/0 owner97287/worker97288;
+properties1876867b tool21124/88509b/0 owner97612/worker97613.
+Allterminaltranscriptions arePhotoRootpersonallycollected, notournewtoolpoll.
+
+Independentmetadataaudit actual7db183/0 verifies45returnreferencepins, both
+12callrawproxyaudits,4case/functionals perpeer, generatedfixtureSHA/noopidentity,
+18rows54callpropertyaudit+prefix+outcomebinding,43execution329productionpins;
+allworkerreaped0/groupsabsent/CPU+IOclosed. No payload/rerun/newresources.
+Evidence tests/qualification/sol-stream-v6-actual-adoption-20261018.json SHA 035f9c9da18996e31cb0dd9266a0d07db9d6a1fddde6fad4a1ac242e71f45837.
+Priorblocked/admissionabsence records remainhistorical; no currentwaitinggate.
+FullgoalACTIVE/incomplete, next substantiveM6 resource/performance completion
+planning/implementation ratherthanrepeatV6. Do notwaitforuserorclaimnewSDKgrant.
