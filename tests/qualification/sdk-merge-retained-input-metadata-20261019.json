@@ -1,0 +1,76 @@
+{
+  "schema": "unison-sdk-merge-input-metadata-observation/1",
+  "unix": 1792395075.3424819,
+  "observations": [
+    {
+      "path": "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/PREPARED.json",
+      "present": false
+    },
+    {
+      "path": "/private/tmp/unison-live-sdk-merge-prepared-20261015-v1/uncompressed-base.dng",
+      "present": false
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/uncompressed-original.dng",
+      "present": false
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jpeg-original.dng",
+      "present": false
+    },
+    {
+      "path": "/private/tmp/unison-receive-pilot-native-prepared-20261014-v2/jxl-original.dng",
+      "present": false
+    },
+    {
+      "path": "/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng",
+      "present": true,
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313015767,
+        "st_mode": 33024,
+        "st_size": 48005534,
+        "st_mtime_ns": 1792009572313897555,
+        "st_ctime_ns": 1792390551413124852,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "path": "/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng",
+      "present": true,
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313014722,
+        "st_mode": 33152,
+        "st_size": 39016722,
+        "st_mtime_ns": 1792009572689127300,
+        "st_ctime_ns": 1792390338098514475,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "path": "/private/tmp/unison-adobe-driver-build/unison-adobe-validator",
+      "present": true,
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 303951538,
+        "st_mode": 33261,
+        "st_size": 9017656,
+        "st_mtime_ns": 1791875241270561232,
+        "st_ctime_ns": 1791875241270561232,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    }
+  ],
+  "old_prepared_directory_empty": true,
+  "source_payload_opened": false,
+  "source_payload_hashed": false,
+  "SDK_invoked": false,
+  "resources_held": false,
+  "cause": "UNKNOWN",
+  "prior_observation": "Earlier metadata tool2d36e9 observed old manifest and all12state paths present. Later325e54/1 refused missing manifest before payload/admission; raw historical receipts unchanged.",
+  "scope": "Current lstat/names only. These are Unison-generated temporary fixtures, not Photo originals. Surviving source hashes remain historical declarations until new owned clones are verified."
+}

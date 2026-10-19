@@ -6703,3 +6703,22 @@ UserPhotoIO-at-end/operatorcheckpoint for furtherpayload remains; source work
 continues. DraftPR13 headf6bfd653/OPEN DRAFT remains tested published candidate;
 this newpartialsourcebranch is local and not merged/pushed into review yet.
 Noownlivejobs/resources. FullgoalACTIVE/incomplete; no goalpause orblockedclaim.
+
+
+### SDK merge source-input binding controls and changed temporary state
+Pure inputs.py+inputs_test.py added: exact12readonly states/8field metadata/UID/
+noalias/privatepath/scalargeometry. Combined5tests/24negativevariants actual38b070/0
+passed; childreaped0/groupempty/CPU4closed, noSDK/media/IOpool. Evidence
+current-sdk-merge-input-controls-20261019.json. No runtime entry/worker exists yet.
+Metadata join actual325e54/1 FAILED beforepayload: oldPREPARED.json nowmissing,
+oldprepared directoryempty; originalgenerated sourcefiles alsoabsent. Earlier
+2d36e9 sawmanifest/all12statespresent; causeunknown, notourdeletion and noPhotooriginals.
+Current metadata d51540/692d5a/f8cc1d confirms recent48MBreadonly and39MBJPEG
+copies+qualifiedSDKbinary stillpresent. See sdk-merge-retained-input-metadata-20261019.json.
+Source-onlypreservationproposal doc/sdk-generated-fixture-preservation-plan-v1-20261019.json
+SHAc69109ad:2nativeclonesonly/persistentFirstPairUnisonstore/hashnewclones87022256B,
+256MiBdeclared/60s/CPU4EX/noSDKbenchmark/sourcehash/sourceFIVEchanges. UNADMITTED;
+exactexecutor+controls/schedulingexception beforeexecution. Rootqueue01a1530d-c1e2.
+No competingpool/oldnamespace recreation, no restoredmanifestguessing; JXL/state
+recovery orregeneration remainsneeded. Continue sourceworker/auditsindependently;
+noactiveowner/resources, no goalpause/blockedclaim. Old30benchplansstillfrozen.

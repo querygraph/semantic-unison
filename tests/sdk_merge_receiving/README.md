@@ -54,3 +54,23 @@ The retained manifest and all12state paths were observed present via metadata.
 That observation is not fresh payload verification or permission to hash them.
 Current runtime qualification remains pending the separately coordinated
 checkpoint; Photo Main/catalog/cache/originals are outside this operation.
+
+## Later source-state change
+
+The older temporary preparation directory was subsequently observed empty, and
+old generated originals absent (metadata325e54/1, d51540 and692d5a). Cause is
+unknown; this source work did not delete them. Historical execution receipts
+remain unchanged. Current readonly uncompressed and fresh receiving JPEG clones
+still exist; the qualified validator executable is also present. These are
+Unison-generated fixtures, not user photographs.
+
+The actual metadata join therefore refused before any DNG payload open or SDK
+invocation. Do not manufacture a new historical manifest/path or assume old
+state bytes remain. A proposed bounded preservation exception would clone/hash
+only the two surviving generated files into persistent private application
+support. That proposal is still UNADMITTED and requires its exact owned executor
+and scheduling coordination; no data was moved, rehashed or recreated by it.
+JXL and the twelve scalar states still need authenticated recovery/regeneration.
+The pure binder currently accepts temporary roots only; the future boundary
+must explicitly authenticate any persistent store, rather than letting a packet
+choose arbitrary source roots.

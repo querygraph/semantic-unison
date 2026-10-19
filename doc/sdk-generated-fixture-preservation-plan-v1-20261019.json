@@ -1,0 +1,56 @@
+{
+  "schema": "unison-generated-fixture-preservation-plan/1",
+  "state": "SOURCE_PREPARED_UNADMITTED",
+  "sources": [
+    {
+      "codec": "uncompressed",
+      "path": "/private/tmp/u-asv-fixture-ea3c7dda/uncompressed.dng",
+      "sha256": "ace206af69f6a8413cb7cfc5ad263a279a860f30bfcb8f79e764d6970744075e",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313015767,
+        "st_mode": 33024,
+        "st_size": 48005534,
+        "st_mtime_ns": 1792009572313897555,
+        "st_ctime_ns": 1792390551413124852,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    },
+    {
+      "codec": "jpeg",
+      "path": "/private/tmp/u-smr-current-9e2e489b/stock/left/jpeg.dng",
+      "sha256": "5d710753aeb817118a95a50b829b9d3033afc2a21ac25a6c403bef8f0b93927a",
+      "identity": {
+        "st_dev": 16777223,
+        "st_ino": 313014722,
+        "st_mode": 33152,
+        "st_size": 39016722,
+        "st_mtime_ns": 1792009572689127300,
+        "st_ctime_ns": 1792390338098514475,
+        "st_nlink": 1,
+        "st_uid": 501
+      }
+    }
+  ],
+  "destination": "/Users/alexy/Library/Application Support/FirstPair Unison/retained-sdk-fixtures-v1/69fc3cb1153d46c78a22f4749c170e2e",
+  "native_clone_only": true,
+  "copy_fallback": false,
+  "source_payload_hash_bytes": 0,
+  "clone_hash_bytes": 87022256,
+  "declared_logical_io_bytes": 268435456,
+  "physical_io_enforced": false,
+  "observation_seconds": 60,
+  "cpu_token_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "io_mode": "EX_GLOBAL",
+  "SDK_calls": 0,
+  "benchmark_calls": 0,
+  "original_Photo_sources": 0,
+  "mutation_policy": "Preserve all8sourcefields/mode/nlink; no sourcewrite/chmod/rename/unlink. New distinctinodes in0700persistentnamespace,0400files and0600receipt. No competingIOpool or oldtmpnamespace recreation.",
+  "readiness": "Exactsource-onlyplan; executor/nonce/admission required before any payload. This preservationexception is separate from benchmarkmatrix scheduling. Missingoldertemporaryfixturescauseunknown, no sourcephotosalteredclaim."
+}
