@@ -66,3 +66,12 @@ ed5368/exit0/no session, under canonical Unison token00 then qualified close.
 This proves the encoding/reference mechanism, not actual Store fault injection,
 raw stream capture, corpus dispatch or child settlement. Runner integration and
 bounded inventory serialization remain outstanding; dispatcher_ready stays false.
+
+`batch_inventory.py` now serializes exact per-sample generated-file expectations
+in1024-entry shards (maximum16shards/16384files). It refuses duplicate/traversing
+paths, unchanged target hashes, bool extents and fabricated bases for additions.
+The aggregate pins every shard, and each shard uses the byte-artifact layer.
+A4096-entry roundtrip and two refusal/control groups passed in-memory under
+Unison token00, actual owning terminal6b8bbf/0/no session. These are expectation
+records, not fresh filesystem observations or evidence of actual receiving.
+The batch runner must still collect and compare those observations independently.

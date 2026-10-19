@@ -7366,3 +7366,14 @@ raw-byte capture integration, bounded per-sample inventory and batch dispatcher.
 User proposes postponing Photo IO/Adobe work until the end and then direct
 Unison qualification; active Photo recovery must close normally before handover.
 No active Photo owner was interrupted and no Adobe takeover claimed.
+
+
+## 2026-10-19 bounded per-sample corpus inventory
+
+Added batch_inventory.py: exact before/target SHA, presence, target extent and
+expected dispatch class; 1024-entry pinned shards up to16384files. No fake
+receiver basis for additions; unchanged targets and unsafe/duplicate paths refuse.
+Actual terminal6b8bbf/exit0/no session: three original in-memory test groups
+including4096-entry roundtrip, canonical CPU00 qualified-closed, no child/EXIO.
+This is expectation serialization only: filesystem observation, raw capture and
+actual corpus runner/receiving integration remain open. Goal remains active.
