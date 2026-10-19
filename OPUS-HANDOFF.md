@@ -7336,3 +7336,18 @@ bytespreserved. Actual0dc2fc/0/no session:16tinyrecipe/file controlsPASS, child
 measured update. Receiptgenerated-workload-nonnoop-actual-20261019.json. NoUnison
 benchmark/nativeSDK/Photo/EXIO; allactualnewworkloads stillawaitendtoendIOwindow.
 Photo-firstpriority unchanged; goalACTIVE.
+
+
+## 2026-10-19 — Thousand-file/new/mixed corpus specification implemented
+
+Newpurecorpus_workloads.plan default4096x32768B=128MiB, bounded1024..16384files
+with64filedirgroups. many-small allfixededits; new-files absentbeforeseed/nofake
+basis; mixedfull20groups16eligible+raw/opaque/unsupported/new, exact4000case
+3200predictedSDE/600fallback/200new verified. Allpredictionsnotobservedpaths.
+Fourmetadata-onlycontrols51e43a/0/no session, child74683reaped0/groupempty/CPU4
+closed; no corpusfiles/EXIO/SDK/native/benchmark. Receiptgenerated-corpus-source-
+controls-actual-20261019.json. Criticaldispatcher_readyFALSE: oldrunmax256,seed
+max255+inlineperfilelogs require separatebatchconsumer withboundedpinned
+fixtureinventory/rawartifactrefs/recursiveallfileverification/classcounts.
+CORPUS-WORKLOADS.md specifies remainingintegration; cannotbypassoldlimits.
+No implicit payloadgrant. Photo-firsthold unchanged; goalACTIVE.

@@ -1,0 +1,39 @@
+{
+  "schema": "unison-generated-corpus-source-controls/1",
+  "state": "SOURCE_SPECIFICATION_ONLY_CONTROLS_PASS_DISPATCH_NOT_READY",
+  "actual_tool": {
+    "chunk": "51e43a",
+    "exit_code": 0,
+    "no_session": true
+  },
+  "controls": 4,
+  "child": {
+    "pid": 74683,
+    "returncode": 0,
+    "reaped": true,
+    "hard_kill_required": false,
+    "other_group_members_absent_before_reap": true,
+    "group_cleanup_before_leader_reap": true
+  },
+  "source_pins": {
+    "bench/sync/corpus_workloads.py": "38e88205cefad132d4ae0e99f6dfeb7ab45bf82e622e0bde53e8c0a180d8092e",
+    "bench/sync/corpus_workloads_test.py": "54d0577e4311abbc87a3c881b0f699aea6ce33a23970192929a1ad6f264b15be",
+    "bench/sync/workloads.py": "09f21ca1bbd9953a487a8a53ad6139c5f6ce271fa0d6cc1c870b9bdd64e1a9c0"
+  },
+  "artifact": {
+    "path": "/private/tmp/unison-corpus-source-controls-_v_oof3o/RESULT.json",
+    "bytes": 1365,
+    "sha256": "259df6949ed56e1a72355d909849f0daf927524e819103f6af78791d96b56b8a"
+  },
+  "scope": "Generated path/count/byte-budget metadata only; default4096-file plan enumerated in memory, not4096payloads. Mixed4000-file expected classes, new-file no-basis and refusal bounds checked. No receiver, parser, performance, SDK or Photo proof.",
+  "CPU_indexes": [
+    0,
+    1,
+    2,
+    3
+  ],
+  "CPU_closed": true,
+  "EXglobal_acquired": false,
+  "corpus_payload_files_created": false,
+  "dispatch_ready": false
+}
