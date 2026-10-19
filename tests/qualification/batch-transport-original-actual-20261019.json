@@ -1,0 +1,51 @@
+{
+  "schema": "unison-batch-transport-original-control/1",
+  "owning_tool": {
+    "chunk": "113cdd",
+    "exit_code": 0,
+    "session": null
+  },
+  "workspace": "/var/folders/9h/tdw5mhks1v586yv0j82n11gr0000gn/T/unison-batch-transport-control-o8y3sytn",
+  "child": {
+    "pid": 80456,
+    "reaped": true,
+    "returncode": 0,
+    "group_others_absent_before_reap": true
+  },
+  "cpu_tokens": [
+    0
+  ],
+  "cpu_closed": true,
+  "store_closed": true,
+  "exio_acquired": false,
+  "source_sha256": {
+    "bench/sync/batch_transport.py": "61a1e591ddf40fea92af78b97e55a55820224d0b292abbf46c9ec5597aee109d",
+    "bench/sync/batch_artifacts.py": "c19c37245bef13cf0b92f9dc6cf0303f7354ac53f1ef0af5c83853b8727544e5",
+    "tests/sdk_host_matrix/shared_child.py": "711187fd35dc3229041c021266912b3c861f3b2bb3665c1ce59bebe9433406da",
+    "tests/sdk_merge_receiving/store.py": "a8485867ca72898cdadae4a19c398aa688e9311a5dbd4c24d098c146ee759636",
+    "tests/sdk_merge_receiving/evidence.py": "4e57db5139d4530838e0ec008bf5b6350a865108a232efae46a030d7104bc0ee",
+    "bench/sync/measure.py": "c131c5ab637e26dcffff5f8311c30e1fcd1a9cfd8559f0ac15477df061b1a78c",
+    "bench/sync/ownership.py": "eba29bdcef1f1c1d99422fd56a9df8dab7c60b622d3b0d4070b3bfaf141d47d3",
+    "tests/shared_cpu_pool.py": "807dfe5eb3302b95fa774990bda10b8cabe97ab489baee54fea3b3e0f77972d5",
+    "tests/private_camera_receiving/close.py": "c93951e00d6b48fa07afbdd941889d1555098408d90656b488cb782b96745a72"
+  },
+  "artifacts": [
+    {
+      "name": "original-call.json",
+      "bytes": 1180,
+      "sha256": "6218f32efeb6885a5b8e1ea88b675ab8ae15c282a0d6cf872da8e8b9e41d1fc4"
+    },
+    {
+      "name": "original-stderr.00.json",
+      "bytes": 71,
+      "sha256": "a7d0d5460edbc8158c63d80c1277dbadf41438acc38e6a3f3387409dd9f44f44"
+    },
+    {
+      "name": "original-stdout.00.json",
+      "bytes": 75,
+      "sha256": "154a594915a5a723368196bed7cff7a014ab26a4a5429953f3aa647717a9fcce"
+    }
+  ],
+  "scope": "one original Python child; exact invalid-UTF8 stdout and stderr through real Store; no Unison/server/SDK/Photo",
+  "resource_release_authorized": false
+}

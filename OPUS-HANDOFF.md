@@ -7419,3 +7419,17 @@ Actualcf7625/0/no session: eight tests (four tinyfilesystem +four mockedphase)
 passed within Unison00, qualified-closed. No real corpus/transport/SDK/Photo IO.
 Owning dispatcher/pinned commands/rawcapture/call audit/event persistence/counters
 and repeated actual runs remain; dispatcher_ready=false, goal not complete.
+
+
+## 2026-10-19 retained child transport + exact artifact composition
+
+Added batch_transport.Call using existing shared_child retained owner; raw
+CapturedStream chunks published directly (not decoded-text roundtrip), outcome
+metadata pins streams, independently restored child audit. Failed child outcome
+persisted before functional refusal; uncertainty propagates and no finish retry.
+External server/proxy audit and resource authority remain with enclosing owner.
+Four mocked controls actuala20e92/0. Real originalPython byte-output control
+actual113cdd/0/no session, child80456reaped0/groupothersabsent-before-reap,
+invalidUTF8 stdout+stderr exact through real Store; Store and CPU00 closed.
+Receipt tests/qualification/batch-transport-original-actual-20261019.json.
+No Unison/server/SDK/EXIO/Photo; batch dispatcher and peer audit still open.

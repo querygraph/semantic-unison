@@ -118,3 +118,17 @@ Still required: owning dispatcher with pinned commands/admission/IOCPU acquisiti
 raw byte artifact capture and independent CLI/proxy/server audit, bounded event
 persistence, per-class counter joins, repeated measurements and actual runs.
 The planner's dispatcher_ready remains false until that integration is qualified.
+
+`batch_transport.Call` now composes the existing retained `shared_child` owner
+with raw artifact publication and independent restoration of the child audit.
+It consumes the original captured chunks, not replacement-decoded text. Captures
+remain bounded262144B/stream; overflow refuses. This deliberately retains the
+existing owner's limit instead of weakening it for a larger corpus. The future
+batch command must choose bounded diagnostics or qualify a separate larger
+capture owner. Failed child evidence is saved before success refusal, while
+unknown ownership propagates without retry/release. External peer/server audit
+is mandatory and is not established by this adapter.
+Four mocked controls and one real original Python stdout/stderr child passed;
+realStore roundtrip retained invalidUTF8 exactly, child80456reaped0/group absent,
+Store+CPU00 closed, actual113cdd/0/no session. No EXIO/server/SDK/Photo. Receipt:
+`tests/qualification/batch-transport-original-actual-20261019.json`.
