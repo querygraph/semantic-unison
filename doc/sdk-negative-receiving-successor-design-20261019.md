@@ -89,3 +89,16 @@ unqualified SDK refusals. All three suites closed CPU00 with no children, EX,
 SDK or payload. No native request has been frozen and no scheduling hold exists.
 The actual owner, clone/fault installation, durable evidence orchestration and
 independent whole-run audit still need integration before an immutable request.
+
+## Disposable fault installation
+
+`data.install_fault` now hashes/fences only the already-owned image.dng clone,
+reads bounded immutable bytes, applies the pure one-bit transformer, writes just
+that byte, fsyncs, and hashes/fences the complete result. File/directory identity,
+mode, size and nlink remain checked. It opens no retained source or arbitrary
+candidate path. Qualified close uncertainty propagates; no numeric retry or
+source mutation. Three original controls passedb30d36/0 using private4096B
+synthetic fixtures across all encodings/both orders, with exact-write/readback
+and bad-hash/directory/hardlink/malformed refusals. CPU00 closed/no children/EX/
+SDK/retained payload. Authentic generated DNG construction is still unexecuted;
+future caller must own the admitted IO/CPU bundle and source clone provenance.

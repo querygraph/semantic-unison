@@ -87,6 +87,11 @@ admissions or statements that consumed jobs remain unstarted.
   (3methods) fixes12calls/6SDK/6freshdirs/onewayforcedleft/no mergeoptions. Alltiny
   synthetic CPU00closed/nochildren/EX/SDK/payload. No immutable native request or
   Photo hold; owner/data/orchestration/whole-run audit integration remains next.
+- Disposable fault installation now qualifiedb30d36/0 (3methods): only private
+  4096B originalsyntheticfiles, sixencoding/order variants, exactonebyte+fullhash
+  readback, hash/directory/hardlink/malformed refusals. QualifiedFDcloses/no
+  retainedsourceopen; CPU00closed/nochildren/EX/SDK. AuthenticDNG operation
+  remains unexecuted until owner/whole-run integration and fresh admission.
 - Narrow generated three-codec scalar merge receiving only. No pixels/corpus/
   performance/production or universal semantic-eligibility claim. No replay,
   retry or automatic successor. Next join this evidence into final requirement
