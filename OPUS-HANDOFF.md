@@ -6759,3 +6759,32 @@ Next: retained real transport/raw evidence binding, then fixture recovery and
 owned freezer/admission. Historical input loss remains unknown; no source photos
 or historical tmp namespaces were changed. No further benchmark/native starts
 from these source controls; goal remains incomplete and active.
+
+## Split retained child lifecycle — 2026-10-19
+
+`tests/sdk_host_matrix/shared_child.py` now exposes `start()` returning an owned
+handle whose captures drain immediately, and `finish()` which observes/group-
+audits/reaps without signals. Existing `invoke()` composes both. This enables a
+proxy to run concurrently with a client without leaving its output undrained.
+Invalid observation inputs after launch raise the retained child/capture carrier;
+finish attempts are one-use, with no uncertain FD numeric retry. No real merge
+transport/proxy or native admission has been wired yet.
+
+Actual initial combined controls failed a stale nested-carrier assertion, and
+controller25899 retainedCPU00..03. Its wrapper failed to persist the captured
+outcome before retention; original worker wait4 is not reconstructed or claimed.
+Diagnostic e5908d (child26085 reaped1/group-empty, CPU04..07 closed) isolated the
+stale expectation: shared_io_pool intentionally preserves the original inner
+observation beneath the more precise outer capture identity. Test now verifies
+both, without weakening descriptor retention. Successor6a2907/exit0/no session
+passed30 controls; child26236 reaped0/group-empty and CPU04..07 closed. Tiny Python
+children only, no SDK/media/Unison/canonicalIO/compiler.
+
+Independent source-bound idle-controller recovery observed no descendants or
+other group members before exactPID-onlySIGKILL; original owning tool24504 then
+returned4d2122/exit137/no session (not normal exit). Final5f7059/0 freshly acquired
+and closed allUnison00..07. All resources closed. Three versioned qualification
+receipts `current-sdk-merge-split-child-{controls,initial-recovery,final-closure}-
+20261019.json` preserve pass/failure/recovery separately. No payload/native run
+or repeated old admission. Next: retained proxy and actual transport evidence
+bindings, authenticated fixtures, owned freezer/admission, then native qualification.

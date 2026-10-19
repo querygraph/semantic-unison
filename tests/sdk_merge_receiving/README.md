@@ -106,3 +106,13 @@ returned without sessions, CPU00..03 closed after child settlement, no IO pool,
 SDK, media, compiler or transport. Qualification receipts preserve full output.
 Remaining: retained transport/proxy deadline behavior, actual raw evidence
 binding, authenticated fixture recovery and owned admission/freezer integration.
+
+## Concurrent retained process handles
+
+The shared child adapter now starts draining captures before returning its live
+handle; the caller can start a peer and finish/reap each later. Thirty combined
+controls passed including pipe-backlog and two-handle independence. Initial stale
+assertion failure and idle-controller recovery are preserved separately; see
+`../qualification/current-sdk-merge-split-child-final-closure-20261019.json`.
+No actual proxy/client native adapter exists yet. The benchmark proxy still
+contains cancellation/kill behavior and must not be used as the retained proxy.

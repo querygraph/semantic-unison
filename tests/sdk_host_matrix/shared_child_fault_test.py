@@ -45,7 +45,12 @@ class Faults(unittest.TestCase):
         original=c.UnresolvedIOOwnership('nested',uncertain_closes=[record])
         self.call(captures=[original])
         self.assertEqual(self.wait_calls,0);self.assertIs(self.error.original_failure,original)
-        self.assertEqual(self.error.uncertain_closes,(record,))
+        self.assertEqual(len(self.error.uncertain_closes),1)
+        enriched=self.error.uncertain_closes[0]
+        self.assertEqual(enriched['upstream_observation'],record)
+        self.assertEqual(enriched['role'],'shared_sdk_capture')
+        self.assertEqual(enriched['fd'],record['fd'])
+        self.assertEqual(enriched['observed_before_close'],record['observed_before_close'])
         self.assertNotIn(record['fd'],self.error.retained_fds)
     def test_observer_failure_retains_without_reap_or_signal(self):
         original=RuntimeError('injected query failure');observer=SimpleNamespace()
@@ -60,4 +65,16 @@ class Faults(unittest.TestCase):
         self.assertIs(caught.exception.process_observer,observer)
         self.assertIs(caught.exception.original_failure,original)
         self.assertFalse(self.owner.reaped)
+    def test_invalid_finish_of_launched_child_retains_every_owner(self):
+        with patch.object(c,'OwnedGroup',return_value=self.owner), \
+             patch.object(c,'CapturedStream',side_effect=self.captures), \
+             patch.object(c.os,'wait4') as reap,patch.object(c.os,'killpg') as signal:
+            child=c.start(['/inert'],{})
+            with self.assertRaises(c.UnresolvedIOOwnership) as caught:child.finish(0)
+            reap.assert_not_called();signal.assert_not_called()
+        self.assertIs(caught.exception.child_owner,self.owner)
+        self.assertEqual(caught.exception.capture_owners,self.captures)
+        self.assertEqual(set(caught.exception.retained_fds),{s.fileno() for s in self.streams})
+        self.assertFalse(self.owner.reaped)
+
 if __name__=='__main__':unittest.main()
