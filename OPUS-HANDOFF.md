@@ -7055,3 +7055,21 @@ relabel as full final execution. Inherited-rsync predecessor and legacyclone
 filesystem case integration still need scoped binding/renewal. No test/native
 run, payload read, CPU/IO lease or production edit. Photo-goes-first hold remains
 for new IO/native; own8 source work continues. GoalACTIVE/incomplete.
+
+
+## 2026-10-19 — Actual final transfer controls renewed, both compilers
+
+Committed successor runner replaces subprocess timeout/kill with shared_child
+owned observation, bounded capture, actual direct/group proof and retained
+ownership on uncertainty. No production edit. Actual10579/f819e0→6aaca5/exit0/
+NOsession, controller53811, stockrunner53827/Ox54304 reaped0/groupempty.
+167positive checks/compiler +9designated negative participants/compiler; each
+runner60real compile/probe calls, all120 actualreaped/groupssettled. CPU00..03
+closed; noEXglobal/SDK/Photo/transport/nativeclone, <=80KiB originalfixtures.
+All329currentproductionpins matched both buildreceipts and direct runnerpins
+unchanged. Receipt tests/qualification/final-transfer-controls-actual-20261019.json;
+workspace/private/tmp/unison-final-transfer-controls-ejq52ux8. This renews token
+framing/output allowance with final current remote fragment and transfer/copy
+source, not final inherited-rsync publication/transport/corpus proof. Photo
+goesfirst IOhold unchanged, no liveUnisonjobs/resources. Next inherited-rsync
+source/binding closure; actualnative clones defer until PhotoIOreleased.

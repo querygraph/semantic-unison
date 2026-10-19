@@ -236,3 +236,11 @@ source bindings/18 saved artifacts, all matching current range controls. This
 closes that named component mapping, not filesystem/transport qualification.
 Transfer output/inherited-rsync predecessor dependencies still require scoped
 final binding or renewal; explicit remaining cases are listed in the map.
+
+### Final transfer controls actually renewed — 2026-10-19
+
+[Actual receipt](../tests/qualification/final-transfer-controls-actual-20261019.json):
+stock/Ox167checks each plus9designated negatives each, all120 childgroups settled,
+current329production bindings match, actualownertool10579/6aaca5/0/no session;
+CPU4closed/noEXIO/nativeSDK. Token/output component gap closed; inherited-rsync
+publication and final transport scope remain separate.

@@ -1,8 +1,14 @@
 """Original token/frame controls on production fragments/full Transfer, tiny inputs only."""
-import argparse,hashlib,json,os,re,shutil,subprocess,tempfile
+import argparse,hashlib,json,os,re,shutil,sys,tempfile,time
+from types import SimpleNamespace
 from pathlib import Path
 p=argparse.ArgumentParser(description=__doc__);p.add_argument('--build',type=Path,required=True);p.add_argument('--compiler',required=True);p.add_argument('--report',type=Path,required=True);a=p.parse_args()
-root=Path(__file__).resolve().parents[2];build=a.build.resolve()/'src';work=Path(tempfile.mkdtemp(prefix='unison-transfer-bounds-',dir='/private/tmp'));work.chmod(0o700)
+root=Path(__file__).resolve().parents[2]
+sys.path[:0]=[str(root/'tests'),str(root/'tests/sdk_host_matrix')]
+from shared_child import invoke
+from shared_cpu_pool import UnresolvedOwnership
+from shared_process_owner import retain_after_record
+build=a.build.resolve()/'src';work=Path(tempfile.mkdtemp(prefix='unison-transfer-bounds-',dir='/private/tmp'));work.chmod(0o700)
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 make=(build/'Makefile.OCaml').read_text()
 def objects(name):
@@ -36,8 +42,26 @@ def guarded_transfer(text):
  text=once(text,'  output outfd buffer pos length','  if pos<0 || length<0 || pos>Bytes.length buffer-length then failwith "DESIGNATED invalid copy buffer write";\n  output outfd buffer pos length')
  return text
 def call(argv,cwd,expected=0):
- c=subprocess.run(argv,cwd=cwd,capture_output=True,text=True,timeout=30,env=dict(os.environ,UNISON=str(cwd/'state')))
- record['calls'].append(dict(argv=argv,cwd=str(cwd),exit_code=c.returncode,stdout=c.stdout,stderr=c.stderr));assert c.returncode==expected,(c.returncode,c.stdout,c.stderr)
+ previous=Path.cwd()
+ try:
+  os.chdir(cwd)
+  try:
+   outcome=invoke(argv,dict(os.environ,UNISON=str(cwd/'state')),time.monotonic()+30)
+  except UnresolvedOwnership as error:
+   def preserve():
+    path=work/'OWNERSHIP-RETAINED.json'
+    path.write_text(json.dumps(dict(state='UNRESOLVED_RETAIN_OWNER',argv=argv,cwd=str(cwd),error=repr(error),completed_calls=record['calls']),indent=2)+'\n')
+    print(str(path),flush=True)
+   retain_after_record(preserve)
+   raise
+ finally:os.chdir(previous)
+ record['calls'].append(dict(argv=argv,cwd=str(cwd),exit_code=outcome['returncode'],stdout=outcome['stdout'],stderr=outcome['stderr'],outcome=outcome))
+ cleanup=outcome['client_cleanup']
+ if not(cleanup['reaped'] and cleanup['other_group_members_absent_before_reap']):
+  retain_after_record(lambda:print('unsettled transfer control group; retain owner',flush=True))
+ assert not outcome['capture_truncated'],outcome
+ c=SimpleNamespace(returncode=outcome['returncode'],stdout=outcome['stdout'],stderr=outcome['stderr'])
+ assert c.returncode==expected,(c.returncode,c.stdout,c.stderr)
  return c
 try:
  participants=[('current',fields,transfer,None),

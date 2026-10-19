@@ -41,3 +41,13 @@ checks have their narrower scope. Neither proves physical storage savings.
 No production change was needed for this map. Standing8/8 continues; Photo
 currently goes first, so new Unison IO/native/SDK/benchmark starts remain held.
 Source and metadata work can continue. Adobe qualification stays separate.
+
+## Superseding final transfer execution
+
+The token-framing/output-bound gap above is now renewed by actual stock/Ox
+execution: [final transfer controls](../tests/qualification/final-transfer-controls-actual-20261019.json).
+Each passed167 checks plus9designated negative participants; all120 compiler/
+probe children and both runner groups settled; actual owning tool10579/6aaca5/0
+no session. Both329production inventories match current; direct runner source
+pins match. This supersedes reliance on the partial historical transfer pins
+for this component only. Inherited-rsync/native publication remains open.
