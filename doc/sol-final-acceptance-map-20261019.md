@@ -98,3 +98,13 @@ records3exact CLI/nine normal peer reaps,1024SDEupdates/524288returned logical
 writebytes over32MiBgeneratedtarget and unchangedno-opidentity. Runtimeowner
 recovery137 and successfulsaved-evidence offline audit0 are distinct. Not a
 repeated/timed/corpus/physical-write claim; new/mixed/repeated workloads remain.
+
+### New/mixed many-file normal owners,2026-10-19
+
+[New-files](../tests/qualification/final-generated-new-files-actual-20261019.json)
+and [mixed](../tests/qualification/final-generated-mixed-actual-20261019.json)
+now have actual normal owning terminals0, allthreeCLI/ninepeerroles reaped0,
+exact1024targethashes/noopidentities and Store/CPU8/EXclosure. Mixed logs show
+820SDE+153receiverclones;51additions had no receiverbasis. Singlefunctional
+sample per shape, aggregate path counts only, not repeated scaling/quiet timing
+or physicalwrites. The prior normalouter-entry gap is closed for these shapes.

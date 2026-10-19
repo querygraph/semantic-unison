@@ -17,7 +17,7 @@ def schedule(client, server, directory, *, mode, workers=3):
     flags = ['-clone', 'off' if mode == 'ordinary' else 'auto',
              '-semanticworkers', str(workers), '-semanticcpubudget', str(workers),
              '-maxthreads', str(max(2, workers)), '-semanticvolumejobs', '1',
-             '-adobevalidate', 'off', '-debug', 'semantic']
+             '-adobevalidate', 'off', '-debug', 'semantic', '-debug', 'copy']
     if mode == 'semantic': flags += ['-semanticdng']
     rows = []
     for stage in ('seed', 'update', 'noop'):

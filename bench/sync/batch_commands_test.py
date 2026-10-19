@@ -12,6 +12,8 @@ class Contracts(unittest.TestCase):
             self.assertEqual([r['stage'] for r in out['rows']], ['seed','update','noop'])
             for row in out['rows']:
                 self.assertIn('-semanticdng', row['server_flags'])
+                self.assertIn('copy', row['server_flags'])
+                self.assertEqual(row['server_flags'].count('-debug'),2)
                 self.assertEqual(row['server_flags'][row['server_flags'].index('-adobevalidate')+1], 'off')
             self.assertFalse(out['runtime_admitted'])
         with self.assertRaises(ValueError): schedule('/stock','/ox','/tmp/u',mode='semantic',workers=4)

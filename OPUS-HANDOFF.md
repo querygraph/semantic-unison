@@ -6,7 +6,7 @@ scheduling statements below; preserve original receipts and their scopes.
 
 - **Active source:** `/Users/alexy/src/unison-final-adobe-20261019`, branch
   `implementation/final-adobe-qualification`. Last implementation/evidence commit
-  before this checkpoint: `2314c80e`. No `src/` differences from frozen review
+  before this checkpoint: `2535e2f8`. No `src/` differences from frozen review
   head `f6bfd653`; production remains `971271a8`. Local successor is qualification
   tooling/evidence, not another production implementation or native pass.
 - **Resources:** no live owned Unison process/token/EXIO/SDK owner. Standing
@@ -23,8 +23,10 @@ scheduling statements below; preserve original receipts and their scopes.
   captures. First actual1024-file sample now has threeexactCLI, nineclosedroles,
   1024SDEupdates/524288logicalmetadatawrites, freshhashes+noopidentity proof.
   Runtimeowner recovery137 and successfuloffline3b6193/0 audit remain distinct;
-  no transferreplay. Normalouterentrycompletion onnewfiles/mixed stillneeded.
-  Dispatcher/per-filemixed attribution/repeatedbenchmark remain unqualified.
+  no transferreplay. Newfiles83087/fd77c6/0 andmixed35344/2eb6b1/0 now
+  normaloutercompleted/closed,1024files each; mixedobserved820SDE+153receiver
+  clones+51additions, exacttargets/noop. Per-filemixedattribution and repeated
+  timing remain unqualified; modelbytes are not physicalwrites.
 - **Final parser renewed:** actual88003/d7e7af/0/no session; stock/Ox each
  1253fixedcases/6288assertions+three designated negatives/four sparse cases.
   Twenty nested children+two runners closed; Store/Unison8/EXclosed. Receipt
@@ -7579,3 +7581,23 @@ Adoption final-many-small-functional-adoption-actual-20261019.json bindsrawpins,
 sourcechanges/recoveries and actualofflinepassseparately. No benchmark/quiet/
 throughput/wholecorpus claim. CurrentzeroUnisonowners/resources. Next normal
 entrycompletion newfiles/mixed, repeatedworkloads + remainingacceptance.
+
+
+## 2026-10-19 new-files + mixed normal owning completion PASS/CLOSED
+
+Freshnewfiles planfd0dbc31 actual95315/session83087/49e0a8→fd77c6/0/no session:
+emptyseed then1024new32KiBfiles onlyafterseed,3CLI/ninepeers allnormalreaped0,
+source+receivingfullhash exact/noop8fieldidentityunchanged,0SDE/nofakebase.
+Store+Unison8+EXclosed. Receiptfinal-generated-new-files-actual-20261019.json.
+Beforemixed, enabledcopyalongsemanticdebug for truthfulgenericcloneobservations;
+3commandscontrols3e7fd5/0. Oldmixedv1UNSTARTEDpreserved/superseded. Freshv2
+plan3ab6d9b1 actual95877/session35344/c49165→2eb6b1/0/no session:1024files
+(820predictedeligible/153fallback/51new),3CLI/ninepeersnormalreaped0/groupabsent;
+freshalltargethashes/noopidentityexact. Observed820SDE/419840logicalwritebytes,
+153receiverclones/4700160sameoffsetinheritedbytes; modelednoninherited2404352B,
+physicalwritesUNKNOWN. No per-filepath attribution or timed/quiet/scalingclaim.
+Store+Unison8+EXclosed. Receiptfinal-generated-mixed-actual-20261019.json.
+ImmediatePhotoIOclosure notices01a153c6-ba28 and01a153c7-9527 sent; nosealhold.
+NoSDK/Photo/original/Main/cache. CurrentzeroUnisonresources, standing8/8.
+Next repeatedsamples + otherrecipes/performance/compatibilityacceptance; final
+Adobe fixture/source recovery/matrixlast. PhotoIOhandoverpausecontinues.

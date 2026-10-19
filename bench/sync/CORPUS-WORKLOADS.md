@@ -210,3 +210,20 @@ original diagnosticcontrols passed; three aggregatecountercontrols passed.
 Still required: normal outer-entry completion for new/mixed workloads, repeated
 measured runs/topology coverage, review update and final acceptance. Planner's
 conservative dispatcher_ready=false remains until those owner paths qualify.
+
+## New-files and mixed normal owner completion
+
+Fresh new-files actual83087/fd77c6/0/no session passed allthree calls: emptyseed,
+1024newfiles onlyafterseed, fulltargethashes/noopidentity, zeroSDE/nofabricatedbasis.
+Mixed actual35344/2eb6b1/0/no session passed allthree calls with copy+semantic
+diagnostics:820SDEupdates/419840returnedlogicalwritebytes,153receiverclones,
+4700160same-offsetinheritedbytes and51newfiles. Predicted classes match aggregate
+observations; no per-filepath attribution is asserted. Modelednoninheritedoutput
+2404352B is not a physical-write measurement. Both normal owners audited allnine
+client/proxy/native roles and closed Store/Unison8/EXglobal. Single functional
+samples only: no warmup/repeatedtiming/scaling/quiet claim. Receipts:
+`final-generated-new-files-actual-20261019.json` and
+`final-generated-mixed-actual-20261019.json` under tests/qualification.
+Old mixedv1 was never dispatched; v2 only adds copy diagnostics/current source
+pins/freshnamespace. Earlier many-small failures/recovery+offlinepass remain
+preserved. Broader recipes, repeated samples/topologies/review acceptance remain.
